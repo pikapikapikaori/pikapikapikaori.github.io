@@ -71,6 +71,7 @@
 </div>
 
 -
+  - [国际音标（IPA）速查](/writings/Linguistic-20250603)
   - [再看巴门尼德与笛卡尔：从「是」谈起](/writings/Phila-20241127)
   - [二维语义学 阅读笔记](/writings/Phila-20240719)
   - [赋诗 贰](/writings/Poem-20240701)

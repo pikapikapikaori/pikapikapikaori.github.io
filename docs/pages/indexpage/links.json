@@ -317,6 +317,16 @@
                     "name": "动画巡礼 - anitabi",
                     "url": "https://anitabi.cn",
                     "target": "_blank"
+                  },
+                  {
+                    "name": "アイドルマスター ミリオンライブ！ シアターデイズDB",
+                    "url": "https://imas.gamedbs.jp/mlth/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "アイドル名鑑",
+                    "url": "https://idollist.idolmaster-official.jp",
+                    "target": "_blank"
                   }
                 ]
               },
@@ -576,6 +586,11 @@
                   {
                     "name": "かわいいフリー素材集",
                     "url": "https://www.irasutoya.com",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "unlimited:waifu2x",
+                    "url": "https://unlimited.waifu2x.net",
                     "target": "_blank"
                   }
                 ]

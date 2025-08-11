@@ -12,6 +12,42 @@
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
+            八月二三日的偶像大师 765pro all stars+ NEVER END IDOL，说实话 24 年刚宣布的时候还下定决心这次一定要去看的，结果售票期间正好在搞科研为了毕业忙忘了，这么一说就愈发后悔读研了。明明初星之后难得又有本家全员，结果这次又错过了，不知道又要等到什么时候才能有下一次。线上看了两天的 live，只能感叹能接触、喜欢上这个企划真是太好了。二十年的企划，我第一次接触到现在也有快十年了。10 年的动画本篇以制作人的假装采访开始，本次 live 的 DAY 2 则以第一天小偶像们给制作人录制的第一份影像结束，影像播放结束后她们则戴上了最初的お姫様ティアラ重新登上舞台，「Destiny」一曲响起就已经说尽了所有。
+            </p>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-7.jpeg" alt="765 NEI">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-1.jpg" alt="765 NEI">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-2.png" alt="765 NEI">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-3.png" alt="765 NEI">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-4.jpg" alt="765 NEI">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-5.jpg" alt="765 NEI">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/764nei-6.jpg" alt="765 NEI">
+            </div>
+            不是千早 p，明年一月二十四的单独 live 大概不会去现地的。下一次本家全员的 live 又要等到什么时候呢？25 周年？又或是 30 周年？不过至少下一次，大抵是真的一定会去的了。
+            <hr class="brief-comments-in-blog-comments-divider"/>
+            <p>
+            2025.08.11
+            </p>
+        </div>
+    </div>
+    <div class="brief-comments-in-blog">
+        <div class="brief-comments-in-blog-image-container">
+            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+        </div>
+        <div class="brief-comments-in-blog-comments-container">
+            <p>
             重看「The Magicians」。不得不再次感叹第四季结尾拍的实在是太好了。一片灰白的世界中随着 Q 手指的动作，只有零星的光点爬过镜子上的裂痕。通向狭缝的画面重又出现在恢复如初的镜子上时，爬完裂痕的光点迸发成了一束束的火花，吞噬回眸的 Q。但不仅仅是升格镜头下奏着“Cruel World”的无声的片段，写的更好的恰恰在于随后 Q 在冥界中对从前伙伴的自我剖析。但无论他到底是拯救了朋友，又或者他真只是终于找到了自杀的方式，当伙伴们在夜幕中围绕着火堆，用“Take on Me”唱出无法说出的情愫，一件件地丢出那些记录着苦痛现实生活中的和 Q 共度的零星欢乐时光的物件，原因究竟如何已经无关紧要了。串联起整个四季度的不仅仅是一直未能发现的 Q 的小物修复这种不能更朴素的特长，不仅仅是 Q 从最初就已经有的抑郁症倾向，还是早在最初就已经指出的理论：Magic comes from pain。痛苦之中 J 抛出扑克时做出了和 Q 第一次相同的魔法，于此终于一切全都串联起来了。最后的最后让 Q 走过放下的门，更是再直白不过地直指四季度真正的内核。魔法外衣带来的幻想固然最能吸引人，但本作的最大亮点，也是足以让本作成为极优秀的作品的点恰恰在于从最初的最初就已铺设的，抛离魔法之后从最初的最初就已经一直铺设的对现实的无力感的直接抛出。
             </p>
             <hr class="brief-comments-in-blog-comments-divider"/>

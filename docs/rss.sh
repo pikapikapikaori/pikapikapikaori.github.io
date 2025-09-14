@@ -1,9 +1,10 @@
 #!/bin/bash
 
-feed="pikapikapi-blog-rss.xml"
+feed="pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
 website_link="https://pikapikapikaori.github.io"
 description="Don't worry, be happy."
+author_name="李亦楊"
 
 urlencode() {
     local length="${#1}"
@@ -39,7 +40,7 @@ for file in ${newest_files[@]}; do
   <entry>
     <title><![CDATA[${title:2}]]></title>
     <link href=\"$link\"/>
-    <id>$link</id>
+    <id>\"$link\"</id>
     <content type=\"html\"><![CDATA[$newhtml]]></content>
     <updated>$date</updated>
   </entry>
@@ -52,9 +53,10 @@ feed_updated=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 rss_content="<feed xmlns=\"http://www.w3.org/2005/Atom\">
   <title>$website_title</title>
+  <author><name>$author_name</name></author>
   <link href=\"$website_link\"/>
   <link href=\"$website_link/$feed\" rel=\"self\"/>
-  <id>$website_link</id>
+  <id>\"$website_link\"</id>
   <subtitle>$description</subtitle>
   <updated>$feed_updated</updated>
   $items

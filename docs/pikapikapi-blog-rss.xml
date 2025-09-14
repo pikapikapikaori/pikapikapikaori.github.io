@@ -1,7 +1,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>ピカピカピ</title>
   <link href="https://pikapikapikaori.github.io"/>
-  <link href="https://pikapikapikaori.github.io/pikapikapi-blog-rss.xml" rel="self"/>
+  <link href="https://pikapikapikaori.github.io/pikapikapi-blog-rss.atom" rel="self"/>
   <id>https://pikapikapikaori.github.io</id>
   <subtitle>Don't worry, be happy.</subtitle>
   <updated>2025-09-14T05:40:38Z</updated>

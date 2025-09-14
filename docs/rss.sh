@@ -38,7 +38,7 @@ for file in ${newest_files[@]}; do
     item="
   <entry>
     <title><![CDATA[${title:2}]]></title>
-    <link href="$link"/>
+    <link href=\"$link\"/>
     <id>$link</id>
     <content type=\"html\"><![CDATA[$newhtml]]></content>
     <updated>$date</updated>

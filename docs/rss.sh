@@ -1,9 +1,10 @@
 #!/bin/bash
 
-feed="pikapikapi-blog-rss.xml"
+feed="pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
 website_link="https://pikapikapikaori.github.io"
 description="Don't worry, be happy."
+author_name="李亦楊"
 
 urlencode() {
     local length="${#1}"
@@ -34,27 +35,31 @@ for file in ${newest_files[@]}; do
     prefix="${suffix%/*}"
     html=$(pandoc -f markdown -t html $file | tr -d '\n')
     newhtml="${html//src=\"_media/src=\"$website_link/$prefix/_media}"
-    date=$(git log -1 --format="%aD" -- $file)
+    date=$(git log -1 --format="%aI" -- $file)
     item="
   <entry>
     <title><![CDATA[${title:2}]]></title>
-    <link>$link</link>
-    <guid isPermaLink=\"false\">$link</guid>
+    <link href=\"$link\"/>
+    <id>\"$link\"</id>
     <content type=\"html\"><![CDATA[$newhtml]]></content>
-    <pubDate>$date</pubDate>
+    <updated>$date</updated>
   </entry>
   "
-    items="$items $item"
+    items="$items 
+  $item"
 done
 
-rss_content="<rss xmlns:atom=\"http://www.w3.org/2005/Atom\" version=\"2.0\">
-<channel>
+feed_updated=$(date -u +"%Y-%m-%dT%H:%M:%SZ")  
+
+rss_content="<feed xmlns=\"http://www.w3.org/2005/Atom\">
   <title>$website_title</title>
-  <atom:link href=\"$website_link/$feed\" rel=\"self\" type=\"application/rss+xml\" />
-  <link>$website_link</link>
-  <description>$description</description>
+  <author><name>$author_name</name></author>
+  <link href=\"$website_link\"/>
+  <link href=\"$website_link/$feed\" rel=\"self\"/>
+  <id>\"$website_link\"</id>
+  <subtitle>$description</subtitle>
+  <updated>$feed_updated</updated>
   $items
-</channel>
-</rss>"
+</feed>"
 
 echo "$rss_content" >$feed

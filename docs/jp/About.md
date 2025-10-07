@@ -23,7 +23,7 @@
 <div class="main-page-right-panel-container">
     <img src="./_media/logo.JPG" alt="Logo" class="main-page-about-me-avatar" />
     <h4 class="main-page-about-me-title"><ruby>李亦楊<rt>リエキヨウ</rt></ruby></h4>
-    <p class="main-page-about-me-description">李亦杨 / Jeff Li</p>
+    <p class="main-page-about-me-description">李亦杨 / Yi-Yang Li</p>
     <div class="main-page-about-me-links">
         <a href="https://github.com/pikapikapikaori/" target="_blank" rel="noopener">
             <?xml version="1.0" encoding="UTF-8"?>

@@ -25,7 +25,7 @@ Dream of becoming a person who holds love of wisdom and beauty.
 
 <div class="main-page-right-panel-container">
     <img src="./_media/logo.JPG" alt="Logo" class="main-page-about-me-avatar" />
-    <h4 class="main-page-about-me-title">Jeff Li</h4>
+    <h4 class="main-page-about-me-title">Yi-Yang Li</h4>
     <p class="main-page-about-me-description">李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby></p>
     <div class="main-page-about-me-links">
         <a href="https://github.com/pikapikapikaori/" target="_blank" rel="noopener">

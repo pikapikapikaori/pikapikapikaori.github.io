@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>ピカピカピ</title>
   
-  <subtitle>李亦杨 / 李亦楊 / Jeff Li</subtitle>
+  <subtitle>李亦杨 / 李亦楊 / Yi-Yang Li</subtitle>
   <link href="https://pikapikapikaori.github.io/pages/hexo/public/atom.xml" rel="self"/>
   
   <link href="https://pikapikapikaori.github.io/pages/hexo/public/"/>
@@ -10,7 +10,7 @@
   <id>https://pikapikapikaori.github.io/pages/hexo/public/</id>
   
   <author>
-    <name>李亦杨 / 李亦楊 / Jeff Li</name>
+    <name>李亦杨 / 李亦楊 / Yi-Yang Li</name>
     
   </author>
   

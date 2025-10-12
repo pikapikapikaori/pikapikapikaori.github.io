@@ -1,6 +1,6 @@
 ![logo](../_media/logo.JPG ':size=150px :class=ignore-view-full-image-img')
 
-# Jeff Li <small>李亦楊 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby></small>
+# Yi-Yang Li <small>李亦楊 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby></small>
 
 > Don't worry, be happy.
 <!-- 

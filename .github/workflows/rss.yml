@@ -1,6 +1,9 @@
 name: RSS
 
-on: [ push ]
+on:
+  push:
+    branches-ignore:
+      - master
 
 jobs:
   build:
@@ -25,4 +28,4 @@ jobs:
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Build pikapikapi-blog-rss.xml
+          commit_message: Build pikapikapi-blog-rss.atom

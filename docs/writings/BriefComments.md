@@ -12,6 +12,35 @@
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
+            真的是久违地，参加了一次 live。上一次已经在疫情前了。安可的前两首曲子都是菅野洋子钢琴伴奏，May'n 和中岛爱演唱的无插电版本，可以说是本次 live 最大的惊喜之一了。May'n 几乎可以算半个翻译了，真的是汉语进步了许多。感慨很多但真就像韩愈所说的那样真想说的时候反而却又不知道该说什么好了。说实话感觉好像找回了什么，一定是很珍贵的东西，是在心底的对二次元（如果这个词还真能够指代从前还是小圈子亚文化时它所支撑的那个东西的话）的那份热爱吧。
+            </p>
+            <p>
+            感觉还是该多看、多跑现地了。
+            </p>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/MF-galaxy-final-1.jpg" alt="MF final">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/MF-galaxy-final-2.jpg" alt="MF final">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/MF-galaxy-final-3.jpg" alt="MF final">
+            </div>
+            <div class="brief-comments-in-blog-comments-container-img">
+                <img src="./writings/_media/BriefComments/MF-galaxy-final-4.jpg" alt="MF final">
+            </div>
+            <hr class="brief-comments-in-blog-comments-divider"/>
+            <p>
+            2025.11.16
+            </p>
+        </div>
+    </div>
+    <div class="brief-comments-in-blog">
+        <div class="brief-comments-in-blog-image-container">
+            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+        </div>
+        <div class="brief-comments-in-blog-comments-container">
+            <p>
             八月二三日的偶像大师 765pro all stars+ NEVER END IDOL，说实话 24 年刚宣布的时候还下定决心这次一定要去看的，结果售票期间正好在搞科研为了毕业忙忘了，这么一说就愈发后悔读研了。明明初星之后难得又有本家全员，结果这次又错过了，不知道又要等到什么时候才能有下一次。线上看了两天的 live，只能感叹能接触、喜欢上这个企划真是太好了。二十年的企划，我第一次接触到现在也有快十年了。10 年的动画本篇以制作人的假装采访开始，本次 live 的 DAY 2 则以第一天小偶像们给制作人录制的第一份影像结束，影像播放结束后她们则戴上了最初的お姫様ティアラ重新登上舞台，「Destiny」一曲响起就已经说尽了所有。
             </p>
             <div class="brief-comments-in-blog-comments-container-img">

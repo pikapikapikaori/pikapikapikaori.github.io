@@ -20,6 +20,7 @@
 </div>
 
 -
+  - [季度印象最深刻单集 2025.10](/writings/SeasonBest-202510-20251203)
   - [季度印象最深刻单集 2025.07](/writings/SeasonBest-202507-20250826)
   - [季度印象最深刻单集 2025.04](/writings/SeasonBest-202504-20250430)
   - [动画资料 叁](/writings/Anime-20250511)

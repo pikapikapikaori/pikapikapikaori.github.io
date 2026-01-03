@@ -519,8 +519,23 @@
                     "target": "_blank"
                   },
                   {
+                    "name": "Göttingen Register of Electronic Texts in Indian Languages",
+                    "url": "https://gretil.sub.uni-goettingen.de/gretil.html",
+                    "target": "_blank"
+                  },
+                  {
                     "name": "天主教在线资料库",
                     "url": "https://dl.ziliaozhan.win",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "モンゴル諸語と満洲文語の資料検索システム",
+                    "url": "http://hkuri.cneas.tohoku.ac.jp",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Perseus",
+                    "url": "https://www.perseus.tufts.edu/hopper/",
                     "target": "_blank"
                   }
                 ]
@@ -591,6 +606,16 @@
                   {
                     "name": "unlimited:waifu2x",
                     "url": "https://unlimited.waifu2x.net",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Zimit",
+                    "url": "https://zimit.kiwix.org/#/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Kiwix Library",
+                    "url": "https://library.kiwix.org/#lang=zho",
                     "target": "_blank"
                   }
                 ]

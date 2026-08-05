@@ -1,7 +1,5 @@
 # pikapikapi-blog
 
-![rss build](https://img.shields.io/github/actions/workflow/status/pikapikapikaori/pikapikapikaori.github.io/rss.yml)
-
 [English](./README.md) | 简体中文 | [日本語](./README_jp.md)
 
 ## 分支命名 & 提交信息

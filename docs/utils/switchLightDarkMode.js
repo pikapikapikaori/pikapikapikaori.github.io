@@ -130,7 +130,7 @@ function plugin(hook, vm) {
 
         var colorPickerPopupSpan = document.createElement('span')
         colorPickerPopupSpan.id = 'colorPickerPopupSpan'
-        colorPickerPopupSpan.className = 'colorPickerPopupSpan color-picker-popup-span-disappear'
+        colorPickerPopupSpan.className = 'color-picker-popup-span color-picker-popup-span-disappear'
         colorPickerPopupSpan.style.position = 'fixed'
         colorPickerPopupSpan.style.right = (switchLightDarkModeOptions.right + 35).toString() + 'px'
         colorPickerPopupSpan.style.top = (switchLightDarkModeOptions.top + 100).toString() + 'px'

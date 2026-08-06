@@ -76,34 +76,30 @@ function plugin(hook, vm) {
     }
 
     function renderTocContents() {
-        pages = Array.from(document.getElementsByClassName('sidebar-nav')[0].getElementsByTagName('a'))
-        pages.shift()
+        baseUrl = window.location.href.split('#')[1].split('/').slice(0, -1).join('/')
 
-        pages = pages.filter(page => {
-            var flag = false
+        const getJson = (fileName) => {
+            let xhttp = new XMLHttpRequest()
+            xhttp.open('GET', `${fileName}.json`, false)
+            xhttp.send(null)
+            return JSON.parse(xhttp.response)
+        }
 
-            ignoreTocPageList.forEach(singleton => {
-                if (page.href.indexOf(singleton) > 0) {
-                    flag = true
-                }
-            })
+        pages = getJson('config/tocdata').filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
+            const timeA = a.time
+            const timeB = b.time
+            
+            const isEmptyA = !timeA || timeA.trim?.() === ''
+            const isEmptyB = !timeB || timeB.trim?.() === ''
+            
+            if (isEmptyA && isEmptyB) return 0
+            if (isEmptyA) return 1
+            if (isEmptyB) return -1
 
-            return !flag
-        })
-
-        pages.sort((a, b) => {
-            aDate = a.href.substring(a.href.length - 8)
-            bDate = b.href.substring(b.href.length - 8)
-
-            if (Number.isNaN(aDate - '0')) {
-                aDate = '-1'
-            }
-
-            if (Number.isNaN(bDate - '0')) {
-                bDate = '-1'
-            }
-
-            return bDate - aDate
+            const dateA = new Date(timeA.replace(/\./g, '-'))
+            const dateB = new Date(timeB.replace(/\./g, '-'))
+            
+            return dateB - dateA
         })
 
         sortedPages = pages
@@ -128,24 +124,10 @@ function plugin(hook, vm) {
         let pages = sortedPages.slice((curPageIndex - 1) * recentAmount, curPageIndex * recentAmount)
 
         pages.forEach(page => {
-            pageHref = page.href
-            tmp = pageHref.replace('#/', '')
-            // .replace('index.html#/', '')
-            // for testing
-            pagePictureHref = tmp.substring(0, tmp.lastIndexOf('/')) + '/_media' + tmp.substring(tmp.lastIndexOf('/')) + '/cover-picture'
+            pageHref = '#' + page.href
+            pagePictureHref = window.location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
 
-            // pageImgPrefix = testImgPrefix(pagePictureHref)
-
-            // if (pageImgPrefix === '') {
-            //     pagePictureHref = '_media/defaultImg/picture-2.gif'
-            // }
-            // else {
-            //     pagePictureHref += '.' + pageImgPrefix
-            // }
-
-            pagePictureHref += '.' + 'jpg'
-
-            pageHrefDiv = '<a class=\'toc-page-display-a\' href=' + pageHref + '><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.innerHTML + '</div><div class=\'toc-page-display-date-div\'>' + strToDate(tmp.substr(tmp.length - 8)) + '</div></div></a>'
+            pageHrefDiv = '<a class=\'toc-page-display-a\' href=' + pageHref + '><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
 
             tocPageDiv.innerHTML += pageHrefDiv
         })

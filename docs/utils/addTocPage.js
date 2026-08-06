@@ -4,10 +4,6 @@ function plugin(hook, vm) {
 
     const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>'
 
-    const ignoreTocPageList = ['README', 'PersonalTen', 'PersonalRecords',]
-
-    const prefixes = ['jpg', 'gif', 'png', 'webp', 'jpeg',]
-
     const recentAmount = 8
 
     let hasTocs = false
@@ -18,22 +14,6 @@ function plugin(hook, vm) {
 
     let maxPageIndex = 1
 
-    function getRndInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-
-    function strToDate(dateStr) {
-        if (Number.isNaN(dateStr - '0')) {
-            return '&nbsp'
-        }
-
-        if (dateStr.length !== 8) {
-            return '&nbsp'
-        }
-
-        return dateStr.substring(0, 4) + '-' + dateStr.substring(4, 6) + '-' + dateStr.substring(6, 8)
-    }
-
     function renderSidebar() {
         if (hasTocs) {
             document.body.classList.add('force-close')
@@ -41,30 +21,6 @@ function plugin(hook, vm) {
         else {
             document.body.classList.remove('force-close')
         }
-    }
-
-    function imageExists(image_url) {
-
-        var http = new XMLHttpRequest()
-
-        http.open('HEAD', image_url, false)
-        http.send()
-
-        return http.status != 404
-
-    }
-
-    function testImgPrefix(imgUrl) {
-        var curPrefix = ''
-        prefixes.some(prefix => {
-            var isExist = imageExists(imgUrl + '.' + prefix)
-            if (isExist) {
-                curPrefix = prefix
-            }
-            return isExist
-        })
-
-        return curPrefix
     }
 
     function setDefaultTocs() {
@@ -76,34 +32,34 @@ function plugin(hook, vm) {
     }
 
     function renderTocContents() {
-        pages = Array.from(document.getElementsByClassName('sidebar-nav')[0].getElementsByTagName('a'))
-        pages.shift()
+        baseUrl = window.location.href.split('#')[1].split('/').slice(0, -1).join('/')
 
-        pages = pages.filter(page => {
-            var flag = false
+        if (baseUrl === '') {
+            baseUrl = '/'
+        }
 
-            ignoreTocPageList.forEach(singleton => {
-                if (page.href.indexOf(singleton) > 0) {
-                    flag = true
-                }
-            })
+        const getJson = (fileName) => {
+            let xhttp = new XMLHttpRequest()
+            xhttp.open('GET', `${fileName}.json`, false)
+            xhttp.send(null)
+            return JSON.parse(xhttp.response)
+        }
 
-            return !flag
-        })
+        pages = getJson('config/tocdata').filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
+            const timeA = a.time
+            const timeB = b.time
+            
+            const isEmptyA = !timeA || timeA.trim?.() === ''
+            const isEmptyB = !timeB || timeB.trim?.() === ''
+            
+            if (isEmptyA && isEmptyB) return 0
+            if (isEmptyA) return 1
+            if (isEmptyB) return -1
 
-        pages.sort((a, b) => {
-            aDate = a.href.substring(a.href.length - 8)
-            bDate = b.href.substring(b.href.length - 8)
-
-            if (Number.isNaN(aDate - '0')) {
-                aDate = '-1'
-            }
-
-            if (Number.isNaN(bDate - '0')) {
-                bDate = '-1'
-            }
-
-            return bDate - aDate
+            const dateA = new Date(timeA.replace(/\./g, '-'))
+            const dateB = new Date(timeB.replace(/\./g, '-'))
+            
+            return dateB - dateA
         })
 
         sortedPages = pages
@@ -128,24 +84,10 @@ function plugin(hook, vm) {
         let pages = sortedPages.slice((curPageIndex - 1) * recentAmount, curPageIndex * recentAmount)
 
         pages.forEach(page => {
-            pageHref = page.href
-            tmp = pageHref.replace('#/', '')
-            // .replace('index.html#/', '')
-            // for testing
-            pagePictureHref = tmp.substring(0, tmp.lastIndexOf('/')) + '/_media' + tmp.substring(tmp.lastIndexOf('/')) + '/cover-picture'
+            pageHref = '#' + page.href
+            pagePictureHref = window.location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
 
-            // pageImgPrefix = testImgPrefix(pagePictureHref)
-
-            // if (pageImgPrefix === '') {
-            //     pagePictureHref = '_media/defaultImg/picture-2.gif'
-            // }
-            // else {
-            //     pagePictureHref += '.' + pageImgPrefix
-            // }
-
-            pagePictureHref += '.' + 'jpg'
-
-            pageHrefDiv = '<a class=\'toc-page-display-a\' href=' + pageHref + '><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.innerHTML + '</div><div class=\'toc-page-display-date-div\'>' + strToDate(tmp.substr(tmp.length - 8)) + '</div></div></a>'
+            pageHrefDiv = '<a class=\'toc-page-display-a\' href=' + pageHref + '><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
 
             tocPageDiv.innerHTML += pageHrefDiv
         })

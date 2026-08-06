@@ -231,9 +231,6 @@ function plugin(hook, vm) {
         showWidgetsSpan.onclick = function () {
             let widgetsSpanList = [
                 switchSpan, 
-                // zoomInSpan, 
-                // zoomOutSpan, 
-                // zoomDefaultSpan, 
                 colorPickerSpan, 
                 scrollToCommentSpan, 
                 showSakuraSpan, 

@@ -566,6 +566,95 @@
 
 
     {
+        "title": "使用説明",
+        "time": "",
+        "cover": "",
+        "href": "/jp/Beginning",
+        "baseUrl": "/jp"
+    },
+    {
+        "title": "写真",
+        "time": "",
+        "cover": "",
+        "href": "/jp/Photograph",
+        "baseUrl": "/jp"
+    },
+    {
+        "title": "すべてのサイト",
+        "time": "",
+        "cover": "",
+        "href": "/jp/Sites",
+        "baseUrl": "/jp"
+    },
+    {
+        "title": "情報",
+        "time": "",
+        "cover": "",
+        "href": "/jp/About",
+        "baseUrl": "/jp"
+    },
+
+    {
+        "title": "日本旅行写真　令和 6 年 3 月",
+        "time": "2024.03.28",
+        "cover": "",
+        "href": "/jp/writings/JPTra-20240328",
+        "baseUrl": "/jp/writings"
+    },
+    {
+        "title": "日本旅行写真　令和 6 年 2 月",
+        "time": "2024.02.17",
+        "cover": "",
+        "href": "/jp/writings/JPTra-20240217",
+        "baseUrl": "/jp/writings"
+    },
+    {
+        "title": "ノート：アルバム　令和 5 年 12 月 2 日",
+        "time": "2023.12.02",
+        "cover": "",
+        "href": "/jp/writings/Notes-20231202",
+        "baseUrl": "/jp/writings"
+    },
+    {
+        "title": "ノート：アルバム　令和 5 年 8 月 5 日",
+        "time": "2023.08.05",
+        "cover": "",
+        "href": "/jp/writings/Notes-20230805",
+        "baseUrl": "/jp/writings"
+    },
+    {
+        "title": "ノート：アルバム　令和 5 年 5 月 8 日",
+        "time": "2023.05.08",
+        "cover": "",
+        "href": "/jp/writings/Notes-20230508",
+        "baseUrl": "/jp/writings"
+    },
+    {
+        "title": "ノート：アルバム　令和 2 年 4 月 21 日",
+        "time": "2020.04.21",
+        "cover": "",
+        "href": "/jp/writings/Notes-20200421",
+        "baseUrl": "/jp/writings"
+    },
+
+    {
+        "title": "IT 技術に関する文章",
+        "time": "",
+        "cover": "",
+        "href": "/jp/archive/ITtech",
+        "baseUrl": "/jp/archive"
+    },
+
+    {
+        "title": "序文",
+        "time": "",
+        "cover": "",
+        "href": "/jp/archive/ITtech/Beginning",
+        "baseUrl": "/jp/archive/ITtech"
+    },
+
+
+    {
         "title": "Instructions for use",
         "time": "",
         "cover": "",
@@ -616,5 +705,5 @@
         "cover": "",
         "href": "/en-us/archive/ITtech/Beginning",
         "baseUrl": "/en-us/archive/ITtech"
-    },
+    }
 ]

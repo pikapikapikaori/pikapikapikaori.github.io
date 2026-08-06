@@ -110,6 +110,10 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
+.toc-paginator-input-box {
+    font-family: inherit;
+}
+
 .toc-paginator-button-div {
     margin: 0 0.1em;
     border: 0.1em solid transparent;

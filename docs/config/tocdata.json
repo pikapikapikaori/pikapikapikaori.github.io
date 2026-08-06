@@ -377,5 +377,190 @@
         "cover": "/writings/_media/Phila-20240526/cover-picture.jpg",
         "href": "/writings/Phila-20240526",
         "baseUrl": "/writings"
+    },
+
+    {
+        "title": "一些小工具",
+        "time": "",
+        "cover": "",
+        "href": "/archive/ArchiveTools",
+        "baseUrl": "/archive"
+    },
+    {
+        "title": "知乎旧文存档",
+        "time": "",
+        "cover": "/archive/_media/ZhiArchive/cover-picture.jpg",
+        "href": "/archive/ZhiArchive",
+        "baseUrl": "/archive"
+    },
+    {
+        "title": "技术相关",
+        "time": "",
+        "cover": "",
+        "href": "/archive/ITtech",
+        "baseUrl": "/archive"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "cover": "",
+        "href": "/archive/ZhiArchive/Beginning",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "如何评价日本动画电影《企鹅高速公路》？",
+        "time": "2019.02.05",
+        "cover": "/archive/ZhiArchive/_media/PenguinCriticize-20190205/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/PenguinCriticize-20190205",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "国人画师黄成希负责的《博人传：火影忍者新时代》第 65 话，在制作水平上带来了多大的提升？",
+        "time": "2018.07.21",
+        "cover": "/archive/ZhiArchive/_media/Boruto65-20180721/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/Boruto65-20180721",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "如何评价电影《于离别之朝束起约定之花》？",
+        "time": "2018.06.23",
+        "cover": "/archive/ZhiArchive/_media/MaquiaCriticize-20180623/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/MaquiaCriticize-20180623",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "如何评价动画 《DARLING in the FRANXX》第 X 集？",
+        "time": "2018.04.15",
+        "cover": "/archive/ZhiArchive/_media/DitfEpisodeComment-20180415/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/DitfEpisodeComment-20180415",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "如何理解 TV 动画《Darling in the franxx》中画面比例的切换手法？",
+        "time": "2018.02.12",
+        "cover": "/archive/ZhiArchive/_media/DitfAspectRatio-20180212/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/DitfAspectRatio-20180212",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "如何理解动画中的踩点，轨道，并用这个来分辨原画师？",
+        "time": "2018.01.23",
+        "cover": "/archive/ZhiArchive/_media/AnimeTimingAns-20180123/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/AnimeTimingAns-20180123",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "如何评价 2018 年 1 月新番恶魔人 Crybaby？",
+        "time": "2018.01.14",
+        "cover": "/archive/ZhiArchive/_media/DevilmanCriticize-20180114/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/DevilmanCriticize-20180114",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "「轻羽飞扬」竞赛片段分镜的秘密",
+        "time": "2018.08.17",
+        "cover": "/archive/ZhiArchive/_media/HanebadoSceneCut-20180817/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/HanebadoSceneCut-20180817",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "「Darling in the FranXX」比「紫罗兰永恒花园」观感好的诸多理由",
+        "time": "2018.07.08",
+        "cover": "/archive/ZhiArchive/_media/DitfVioletComment-20180708/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/DitfVioletComment-20180708",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+    {
+        "title": "永井豪 & 汤浅政明谈「恶魔人 Crybaby」",
+        "time": "2018.01.23",
+        "cover": "/archive/ZhiArchive/_media/DevilmanInterview-20180123/cover-picture.jpg",
+        "href": "/archive/ZhiArchive/DevilmanInterview-20180123",
+        "baseUrl": "/archive/ZhiArchive"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "cover": "",
+        "href": "/archive/ITtech/Beginning",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "实用工具整理",
+        "time": "",
+        "cover": "",
+        "href": "/archive/ITtech/UsefulToolsOrApps",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "对 PPPoE 协议的理解——从电信动态公网环境出发",
+        "time": "2023.06.03",
+        "cover": "",
+        "href": "/archive/ITtech/PPPoE-20230603",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "IPSec 技术的理解",
+        "time": "2023.05.27",
+        "cover": "",
+        "href": "/archive/ITtech/IPSecKnowledge-20230527",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "个人博客搭建心得（壹）：以 CSS 3 为代表的一些前端开发感悟",
+        "time": "2023.05.08",
+        "cover": "",
+        "href": "/archive/ITtech/BlogBuildingNotesOne-20230508",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "软件项目实践的一些思索与后期优化方向：设计、开发以及其他",
+        "time": "2023.04.28",
+        "cover": "",
+        "href": "/archive/ITtech/SoftwareInsights-20230428",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "生成 n 位全部二进制数，数组形式：蚂蚁爬杆问题",
+        "time": "2021.09.24",
+        "cover": "",
+        "href": "/archive/ITtech/OOADAntProblem-20210924",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "论文阅读 2023.11",
+        "time": "2023.11.14",
+        "cover": "",
+        "href": "/archive/ITtech/PaperReading-202311-20231114",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "论文阅读 2023.10",
+        "time": "2023.10.16",
+        "cover": "",
+        "href": "/archive/ITtech/PaperReading-202310-20231016",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "论文阅读 2023.09",
+        "time": "2023.09.20",
+        "cover": "",
+        "href": "/archive/ITtech/PaperReading-202309-20230920",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "论文阅读 2023.08",
+        "time": "2023.08.10",
+        "cover": "",
+        "href": "/archive/ITtech/PaperReading-202308-20230810",
+        "baseUrl": "/archive/ITtech"
+    },
+    {
+        "title": "论文阅读 2023.07",
+        "time": "2023.07.01",
+        "cover": "",
+        "href": "/archive/ITtech/PaperReading-202307-20230701",
+        "baseUrl": "/archive/ITtech"
     }
 ]

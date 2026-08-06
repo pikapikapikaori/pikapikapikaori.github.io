@@ -47,7 +47,7 @@
 
 <div class="main-page-right-panel-container">
     <div class="main-page-about-me-image-links">
-        <img src="http://moe-counter.glitch.me/get/@pikapikapi-blog?theme=rule34" alt="访问次数" class="ignore-view-full-image-img" style="padding: 10px 10px 0;">
+        <img src="https://count.getloli.com/@pikapikapi-blog?name=pikapikapi-blog&theme=rule34" alt="访问次数" class="ignore-view-full-image-img" style="padding: 10px 10px 0;">
     </div>
 </div>
 

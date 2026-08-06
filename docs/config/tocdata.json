@@ -562,5 +562,59 @@
         "cover": "",
         "href": "/archive/ITtech/PaperReading-202307-20230701",
         "baseUrl": "/archive/ITtech"
-    }
+    },
+
+
+    {
+        "title": "Instructions for use",
+        "time": "",
+        "cover": "",
+        "href": "/en-us/Beginning",
+        "baseUrl": "/en-us"
+    },
+    {
+        "title": "Photographs",
+        "time": "",
+        "cover": "",
+        "href": "/en-us/Photograph",
+        "baseUrl": "/en-us"
+    },
+    {
+        "title": "Sites",
+        "time": "",
+        "cover": "",
+        "href": "/en-us/Sites",
+        "baseUrl": "/en-us"
+    },
+    {
+        "title": "About",
+        "time": "",
+        "cover": "",
+        "href": "/en-us/About",
+        "baseUrl": "/en-us"
+    },
+
+    {
+        "title": "Birthday E-card for GF",
+        "time": "2022.05.17",
+        "cover": "",
+        "href": "/en-us/writings/PrivateEcard-20220517",
+        "baseUrl": "/en-us/writings"
+    },
+
+    {
+        "title": "IT Tech Related",
+        "time": "",
+        "cover": "",
+        "href": "/en-us/archive/ITtech",
+        "baseUrl": "/en-us/archive"
+    },
+
+    {
+        "title": "Beginning",
+        "time": "",
+        "cover": "",
+        "href": "/en-us/archive/ITtech/Beginning",
+        "baseUrl": "/en-us/archive/ITtech"
+    },
 ]

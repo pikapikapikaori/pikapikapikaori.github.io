@@ -4,10 +4,6 @@ function plugin(hook, vm) {
 
     const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>'
 
-    const ignoreTocPageList = ['README', 'PersonalTen', 'PersonalRecords',]
-
-    const prefixes = ['jpg', 'gif', 'png', 'webp', 'jpeg',]
-
     const recentAmount = 8
 
     let hasTocs = false
@@ -18,22 +14,6 @@ function plugin(hook, vm) {
 
     let maxPageIndex = 1
 
-    function getRndInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-
-    function strToDate(dateStr) {
-        if (Number.isNaN(dateStr - '0')) {
-            return '&nbsp'
-        }
-
-        if (dateStr.length !== 8) {
-            return '&nbsp'
-        }
-
-        return dateStr.substring(0, 4) + '-' + dateStr.substring(4, 6) + '-' + dateStr.substring(6, 8)
-    }
-
     function renderSidebar() {
         if (hasTocs) {
             document.body.classList.add('force-close')
@@ -41,30 +21,6 @@ function plugin(hook, vm) {
         else {
             document.body.classList.remove('force-close')
         }
-    }
-
-    function imageExists(image_url) {
-
-        var http = new XMLHttpRequest()
-
-        http.open('HEAD', image_url, false)
-        http.send()
-
-        return http.status != 404
-
-    }
-
-    function testImgPrefix(imgUrl) {
-        var curPrefix = ''
-        prefixes.some(prefix => {
-            var isExist = imageExists(imgUrl + '.' + prefix)
-            if (isExist) {
-                curPrefix = prefix
-            }
-            return isExist
-        })
-
-        return curPrefix
     }
 
     function setDefaultTocs() {
@@ -77,6 +33,10 @@ function plugin(hook, vm) {
 
     function renderTocContents() {
         baseUrl = window.location.href.split('#')[1].split('/').slice(0, -1).join('/')
+
+        if (baseUrl === '') {
+            baseUrl = '/'
+        }
 
         const getJson = (fileName) => {
             let xhttp = new XMLHttpRequest()

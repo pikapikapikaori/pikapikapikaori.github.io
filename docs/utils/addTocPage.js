@@ -179,7 +179,7 @@ function plugin(hook, vm) {
             }
         }
 
-        tocPaginatorInputDiv.innerHTML = '<input class=\'tocPaginatorInputBox\' type=\'number\' value=\'' + curPageIndex + '\' min=\'1\' max=\'' + maxPageIndex + '\'></input><span>/</span><span>' + maxPageIndex + '</span>'
+        tocPaginatorInputDiv.innerHTML = '<input class=\'toc-paginator-input-box\' type=\'number\' value=\'' + curPageIndex + '\' min=\'1\' max=\'' + maxPageIndex + '\'></input><span>/</span><span>' + maxPageIndex + '</span>'
 
         tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
 

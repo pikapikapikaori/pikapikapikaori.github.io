@@ -122,49 +122,6 @@ function plugin(hook, vm) {
 
         document.body.appendChild(switchSpan)
 
-        // 页面放大缩小
-        // var zoomInSpan = document.createElement('span')
-        // zoomInSpan.id = 'zoomInSpan'
-        // initializeWidgetSpan (zoomInSpan, 0)
-        // zoomInSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M8 11h3m3 0h-3m0 0V8m0 3v3M17 17l4 4M3 11a8 8 0 1016 0 8 8 0 00-16 0z" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-
-        // var zoomOutSpan = document.createElement('span')
-        // zoomOutSpan.id = 'zoomOutSpan'
-        // initializeWidgetSpan (zoomOutSpan, 1)
-        // zoomOutSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M17 17l4 4M3 11a8 8 0 1016 0 8 8 0 00-16 0zM8 11h6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-
-        // var zoomDefaultSpan = document.createElement('span')
-        // zoomDefaultSpan.id = 'zoomDefaultSpan'
-        // initializeWidgetSpan (zoomDefaultSpan, 2)
-        // zoomDefaultSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M12 19a7 7 0 100-14 7 7 0 000 14zM12 19v2M5 12H3M12 5V3M19 12h2" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-
-        // let defaultSize = 1.0
-        // let currentSize = defaultSize
-
-        // function set(targetSize) {
-        //     document.body.style.zoom = targetSize
-        //     document.body.style.cssText += '; -moz-transform: scale(' + targetSize + ');-moz-transform-origin: 0 0; '
-        // }
-
-        // zoomInSpan.onclick = function () {
-        //     currentSize = currentSize + 0.1
-        //     set(currentSize)
-        // }
-
-        // zoomOutSpan.onclick = function () {
-        //     currentSize = currentSize - 0.1
-        //     set(currentSize)
-        // }
-
-        // zoomDefaultSpan.onclick = function () {
-        //     currentSize = defaultSize
-        //     set(currentSize)
-        // }
-
-        // document.body.appendChild(zoomInSpan)
-        // document.body.appendChild(zoomOutSpan)
-        // document.body.appendChild(zoomDefaultSpan)
-
         // 页面主题色
         var colorPickerSpan = document.createElement('span')
         colorPickerSpan.id = 'colorPickerSpan'
@@ -173,7 +130,7 @@ function plugin(hook, vm) {
 
         var colorPickerPopupSpan = document.createElement('span')
         colorPickerPopupSpan.id = 'colorPickerPopupSpan'
-        colorPickerPopupSpan.className = 'colorPickerPopupSpan color-picker-popup-span-disappear'
+        colorPickerPopupSpan.className = 'color-picker-popup-span color-picker-popup-span-disappear'
         colorPickerPopupSpan.style.position = 'fixed'
         colorPickerPopupSpan.style.right = (switchLightDarkModeOptions.right + 35).toString() + 'px'
         colorPickerPopupSpan.style.top = (switchLightDarkModeOptions.top + 100).toString() + 'px'
@@ -274,9 +231,6 @@ function plugin(hook, vm) {
         showWidgetsSpan.onclick = function () {
             let widgetsSpanList = [
                 switchSpan, 
-                // zoomInSpan, 
-                // zoomOutSpan, 
-                // zoomDefaultSpan, 
                 colorPickerSpan, 
                 scrollToCommentSpan, 
                 showSakuraSpan, 

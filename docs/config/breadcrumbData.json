@@ -1,0 +1,58 @@
+[
+    {
+        "path": "/",
+        "name": "首页"
+    },
+    {
+        "path": "/writings/",
+        "name": "一些随笔"
+    },
+    {
+        "path": "/archive/",
+        "name": "存档"
+    },
+    {
+        "path": "/archive/ITtech/",
+        "name": "技术相关"
+    },
+    {
+        "path": "/archive/ZhiArchive/",
+        "name": "知乎旧文存档"
+    },
+    {
+        "path": "/jp/",
+        "name": "ホームページ"
+    },
+    {
+        "path": "/jp/writings/",
+        "name": "随想"
+    },
+    {
+        "path": "/jp/archive/",
+        "name": "アーカイブ"
+    },
+    {
+        "path": "/jp/archive/ITtech/",
+        "name": "IT 技術に関する文章"
+    },
+    {
+        "path": "/en-us/",
+        "name": "Home Page"
+    },
+    {
+        "path": "/en-us/writings/",
+        "name": "Writings"
+    },
+    {
+        "path": "/en-us/archive/",
+        "name": "Archive"
+    },
+    {
+        "path": "/en-us/archive/ITtech/",
+        "name": "IT Technical Articles"
+    },
+    {
+        "path": "/en-us/archive/ITtech/",
+        "name": "IT Tech Related"
+    }
+]

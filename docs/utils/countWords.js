@@ -31,7 +31,7 @@ function plugin(hook, vm) {
             words: '',
             minute: '',
         }
-        // Update countWords.localization strings based on options and location.href
+        // Update countWords.localization strings
         Object.keys(tempLocalization).forEach(key => {
             const textValue = countWordsOptions.localization[key]
 

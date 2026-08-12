@@ -32,7 +32,7 @@ function plugin(hook, vm) {
     }
 
     function renderTocContents() {
-        baseUrl = window.location.href.split('#')[1].split('/').slice(0, -1).join('/')
+        baseUrl = location.href.split('#')[1].split('/').slice(0, -1).join('/')
 
         if (baseUrl === '') {
             baseUrl = '/'
@@ -85,9 +85,9 @@ function plugin(hook, vm) {
 
         pages.forEach(page => {
             pageHref = '#' + page.href
-            pagePictureHref = window.location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
+            pagePictureHref = location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
 
-            pageHrefDiv = '<a class=\'toc-page-display-a\' href=' + pageHref + '><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
+            pageHrefDiv = '<a class=\'toc-page-display-a\' href=\'' + pageHref + '\'><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
 
             tocPageDiv.innerHTML += pageHrefDiv
         })

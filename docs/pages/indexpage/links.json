@@ -299,6 +299,11 @@
                     "target": "_blank"
                   },
                   {
+                    "name": "Anilink | アニメをつくる人の仕事が見える場所",
+                    "url": "https://anilink.jp/ja",
+                    "target": "_blank"
+                  },
+                  {
                     "name": "日本動画協会",
                     "url": "https://aja.gr.jp",
                     "target": "_blank"
@@ -397,6 +402,11 @@
                     "name": "【WIXOSS】入门及规则介绍",
                     "url": "https://bbs.newwise.com/thread-955986-1-1.html",
                     "target": "_blank"
+                  },
+                  {
+                    "name": "トップページ ｜ ポケモン30周年ロゴ公式サイト",
+                    "url": "https://www.pokemon.co.jp/ex/30th_logo/",
+                    "target": "_blank"
                   }
                 ]
               },
@@ -431,6 +441,16 @@
                   {
                     "name": "Kiwix Library",
                     "url": "https://library.kiwix.org/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Zimit",
+                    "url": "https://zimit.kiwix.org/#/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Index of /zim",
+                    "url": "https://lb.download.kiwix.org/zim/",
                     "target": "_blank"
                   },
                   {
@@ -566,6 +586,31 @@
                 ]
               },
               {
+                "category": "賽車 資料",
+                "links": [
+                  {
+                    "name": "86/BRZ - REVSPEED",
+                    "url": "https://revspeed.jp/cat/86-brz/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "FT86CLUB",
+                    "url": "https://www.ft86club.com/forums/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "自動車・カー用品情報ならみんカラ",
+                    "url": "https://minkara.carview.co.jp",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "スポーツカーの中古車販売・買取専門店|HMR",
+                    "url": "https://hm-r.co.jp",
+                    "target": "_blank"
+                  }
+                ]
+              },
+              {
                 "category": "說明書",
                 "links": [
                   {
@@ -606,16 +651,6 @@
                   {
                     "name": "unlimited:waifu2x",
                     "url": "https://unlimited.waifu2x.net",
-                    "target": "_blank"
-                  },
-                  {
-                    "name": "Zimit",
-                    "url": "https://zimit.kiwix.org/#/",
-                    "target": "_blank"
-                  },
-                  {
-                    "name": "Kiwix Library",
-                    "url": "https://library.kiwix.org/#lang=zho",
                     "target": "_blank"
                   }
                 ]

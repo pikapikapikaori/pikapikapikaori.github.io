@@ -336,6 +336,13 @@
         "href": "/writings/Notes-20200421",
         "baseUrl": "/writings"
     },
+    {
+        "title": "字体测试",
+        "time": "2026.08.13",
+        "cover": "/writings/_media/FontTest-20260813/cover-picture.jpg",
+        "href": "/writings/FontTest-20260813",
+        "baseUrl": "/writings"
+    },
         {
         "title": "国际音标（IPA）速查",
         "time": "2025.06.03",

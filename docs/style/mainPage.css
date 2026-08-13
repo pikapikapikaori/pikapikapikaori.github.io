@@ -2,11 +2,6 @@
     font-family: 'GentiumPlus', 'Sahitya', serif;
 }
 
-.minority-language-font-right-ruby {
-    font-family: 'Tinos', serif;
-    text-align: right;
-}
-
 section.cover h1 {
     font-family: 'KakuGyoStd', cursive;
 }
@@ -506,4 +501,10 @@ section.cover p {
 div:has(.poem-div) {
     overflow: hidden;
     height: 300px;
+}
+
+.minority-language-right-div {
+    direction: rtl;
+    font-family: 'Tinos', serif;
+    text-align: right;
 }

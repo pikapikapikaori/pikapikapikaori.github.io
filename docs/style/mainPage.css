@@ -2,6 +2,10 @@
     font-family: 'GentiumPlus', 'Sahitya', serif;
 }
 
+.minority-language-font-ranjana-ruby {
+    font-family: 'NithyaRanjana', serif;
+}
+
 section.cover h1 {
     font-family: 'KakuGyoStd', cursive;
 }

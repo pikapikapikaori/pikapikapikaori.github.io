@@ -195,6 +195,11 @@
     font-weight: bold;
 }
 
+@font-face {
+    font-family: 'NithyaRanjana';
+    src: url('./fonts/NithyaRanjana-Regular/NithyaRanjanaDU-Regular.otf');
+}
+
 /* Serif Unused */
 
 @font-face {

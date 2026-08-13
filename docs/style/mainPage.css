@@ -6,6 +6,22 @@
     font-family: 'NithyaRanjana', serif;
 }
 
+.minority-language-font-jiagu-ruby {
+    font-family: 'ShirakawaKoukotsu', 'ShirakawaKoukotsu-2', serif;
+}
+
+.minority-language-font-zhuanwen-ruby {
+    font-family: 'ShirakawaTenbun', 'ShirakawaTenbun-2', serif;
+}
+
+.minority-language-font-jinwen-ruby {
+    font-family: 'ShirakawaKinbun', 'ShirakawaKinbun-2', serif;
+}
+
+.minority-language-font-cjkext-ruby {
+    font-family: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
+}
+
 section.cover h1 {
     font-family: 'KakuGyoStd', cursive;
 }

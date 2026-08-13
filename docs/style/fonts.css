@@ -200,6 +200,11 @@
     src: url('./fonts/NithyaRanjana-Regular/NithyaRanjanaDU-Regular.otf');
 }
 
+@font-face {
+    font-family: 'NotoSansSiddham';
+    src: url('./fonts/Noto_Sans_Siddham/NotoSansSiddham-Regular.ttf');
+}
+
 /* Serif Unused */
 
 @font-face {

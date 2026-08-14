@@ -7,11 +7,11 @@
 }
 
 .minority-language-font-jiagu-ruby {
-    font-family: 'ShirakawaKoukotsu', 'ShirakawaKoukotsu-2', serif;
+    font-family: 'ShirakawaKoukotsu', 'ShirakawaKoukotsu-2', 'FZJiaGW', serif;
 }
 
 .minority-language-font-zhuanwen-ruby {
-    font-family: 'ShirakawaTenbun', 'ShirakawaTenbun-2', serif;
+    font-family: 'ShirakawaTenbun', 'ShirakawaTenbun-2', 'FZXiaoZhuan', serif;
 }
 
 .minority-language-font-jinwen-ruby {

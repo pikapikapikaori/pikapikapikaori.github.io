@@ -25,7 +25,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--theme-color, #c7a2ec) !important;
+    background: var(--theme-color, #c7a2ec);
 }
 
 body:not(.ready) {
@@ -411,7 +411,7 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section>:first-child {
-    margin-top: 0 !important
+    margin-top: 0
 }
 
 .markdown-section hr {

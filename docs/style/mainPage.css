@@ -13,12 +13,11 @@ section.cover p {
 
 /* Global */
 
-/* Language Support Ruby */
+/* Language Support */
 .minority-language-font {
     font-family: 'GentiumPlus', 'Sahitya', 'ApDevaSiddham', serif;
 }
 
-/* Language Support Div */
 .minority-language-font-ranjana {
     font-family: 'NithyaRanjana', serif;
 }
@@ -39,9 +38,17 @@ section.cover p {
     font-family: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
 }
 
-.minority-language-right-div {
-    direction: rtl;
+.minority-language-font-hebrew {
     font-family: 'Tinos', serif;
+}
+
+.minority-language-font-manchu {
+    font-family: 'FuYongShuKai', serif;
+}
+
+/* Different Writing Direction div */
+.writing-direction-rtl-div {
+    direction: rtl;
     text-align: right;
 
     blockquote {
@@ -52,13 +59,20 @@ section.cover p {
     }
 }
 
-.minority-language-vertical-left-div {
+.writing-direction-vertical-ltr-div {
     writing-mode: vertical-lr;
     float: left;
+}
+
+.writing-direction-vertical-rtl-div {
+    writing-mode: vertical-rl;
+    float: right;
+}
+
+.writing-direction-vertical-div {
     padding: 1rem 0;
     border-top: 1px solid var(--global-border-default-color, #eee);
     border-bottom: 1px solid var(--global-border-default-color, #eee);
-    font-family: 'FuYongShuKai', serif;
 
     h1 {
         margin: 0 0 0 1rem;
@@ -117,7 +131,7 @@ section.cover p {
     }
 }
 
-div:has(.minority-language-vertical-left-div) {
+div:has(.writing-direction-vertical-div) {
     overflow-y: hidden;
     overflow-x: auto;
     height: 300px;
@@ -161,74 +175,7 @@ div:has(.minority-language-vertical-left-div) {
 
 /* Poem */
 .poem-div {
-    writing-mode: vertical-rl;
-    float: right;
-    padding: 1rem 0;
-    border-top: 1px solid var(--global-border-default-color, #eee);
-    border-bottom: 1px solid var(--global-border-default-color, #eee);
     font-family: 'HuiZongGong-tc', 'HuiZongGong-sc', cursive;
-
-    h1 {
-        margin: 0 0 0 1rem;
-    }
-    
-    h2 {
-        margin: 0 45px 0 0.8rem;
-    }
-    
-    h3 {
-        margin: 0 40px 0 0.6rem;
-    }
-
-    figure, p {
-        margin: 0 1.2em;
-    }
-
-    blockquote {
-        margin: 0 2em;
-        border-top: 4px solid var(--theme-color, #c7a2ec);
-        border-left: 0;
-        padding-top: 20px;
-        padding-left: 0;
-    }
-
-    iframe {
-        margin: 0 1em;
-    }
-
-    pre, output {
-        margin: 0 1.2em;
-    }
-
-    code {
-        margin: 2px 0;
-    }
-
-    pre > code {
-        padding: 1.4rem 2.2em;
-    }
-
-    output {
-        padding: 1.4rem 1.7rem;
-    }
-
-    output:last-child {
-        margin-left: 0;
-    }
-
-    output:first-child {
-        margin-right: 0;
-    }
-
-    pre::after, output::after {
-        padding: 10px 5px 10px 0;
-    }
-}
-
-div:has(.poem-div) {
-    overflow-y: hidden;
-    overflow-x: auto;
-    height: 300px;
 }
 
 /* Cover */

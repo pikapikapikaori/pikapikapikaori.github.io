@@ -14,31 +14,31 @@ section.cover p {
 /* Global */
 
 /* Language Support Ruby */
-.minority-language-font-ruby {
+.minority-language-font {
     font-family: 'GentiumPlus', 'Sahitya', 'ApDevaSiddham', serif;
 }
 
-.minority-language-font-ranjana-ruby {
+/* Language Support Div */
+.minority-language-font-ranjana {
     font-family: 'NithyaRanjana', serif;
 }
 
-.minority-language-font-jiagu-ruby {
+.minority-language-font-jiagu {
     font-family: 'ShirakawaKoukotsu', 'ShirakawaKoukotsu-2', 'FZJiaGW', serif;
 }
 
-.minority-language-font-zhuanwen-ruby {
+.minority-language-font-zhuanwen {
     font-family: 'ShirakawaTenbun', 'ShirakawaTenbun-2', 'FZXiaoZhuan', serif;
 }
 
-.minority-language-font-jinwen-ruby {
+.minority-language-font-jinwen {
     font-family: 'ShirakawaKinbun', 'ShirakawaKinbun-2', serif;
 }
 
-.minority-language-font-cjkext-ruby {
+.minority-language-font-cjkext {
     font-family: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
 }
 
-/* Language Support Div */
 .minority-language-right-div {
     direction: rtl;
     font-family: 'Tinos', serif;

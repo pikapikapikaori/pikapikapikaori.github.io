@@ -1,6 +1,18 @@
 @font-face {
-    font-family: 'HYQuanTangShiJF';
-    src: url('./fonts/HYQuanTangShiJF.ttf');
+    font-family: 'MoonStarsKaiT';
+    src: url('./fonts/MoonStarsKaiT-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'MoonStarsKaiT';
+    src: url('./fonts/MoonStarsKaiT-Light.ttf');
+	font-weight: 300;
+}
+
+@font-face {
+    font-family: 'MoonStarsKaiT';
+    src: url('./fonts/MoonStarsKaiT-Bold.ttf');
+	font-weight: bold;
 }
 
 @font-face {
@@ -19,7 +31,7 @@ html,
 body{
 	background-color: var(--color-background);
 	color: var(--color-text-pri);
-	font-family: 'HYQuanTangShiJF', 'KakuGyoStd', -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif;
+	font-family: 'MoonStarsKaiT', 'KakuGyoStd', -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	height: auto;

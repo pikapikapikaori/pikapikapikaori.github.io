@@ -25,7 +25,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--theme-color, #c7a2ec) !important;
+    background: var(--theme-color, #c7a2ec);
 }
 
 body:not(.ready) {
@@ -96,7 +96,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     color: #34495e;
-    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
+    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
     font-size: 16px;
     letter-spacing: 0;
     margin: 0;
@@ -105,7 +105,7 @@ body {
 
 button,
 textarea {
-    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
+    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
 }
 
 img {
@@ -411,7 +411,7 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section>:first-child {
-    margin-top: 0 !important
+    margin-top: 0
 }
 
 .markdown-section hr {
@@ -836,7 +836,6 @@ body {
 }
 
 .markdown-section blockquote {
-    border-left: 4px solid #c7a2ec;
     border-left: 4px solid var(--theme-color, #c7a2ec);
     color: #858585;
     margin: 2em 0;

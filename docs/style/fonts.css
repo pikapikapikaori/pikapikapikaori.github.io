@@ -1,33 +1,14 @@
-/* Serif */
+/* --- Serif --- */
 
+/* Chinese */
 @font-face {
     font-family: 'HYQuanTangShiJF';
     src: url('./fonts/HYQuanTangShi/HYQuanTangShiJF.ttf');
 }
 
 @font-face {
-    font-family: 'HYQuanTangShiJ';
-    src: url('./fonts/HYQuanTangShi/HYQuanTangShiJ.ttf');
-}
-
-@font-face {
-    font-family: 'HYQuanTangShiF';
-    src: url('./fonts/HYQuanTangShi/HYQuanTangShiF.ttf');
-}
-
-@font-face {
     font-family: 'HYKaiTiS';
     src: url('./fonts/HYKaiTi/HYKaiTiS.ttf');
-}
-
-@font-face {
-    font-family: 'HYKaiTiJ';
-    src: url('./fonts/HYKaiTi/HYKaiTiJ.ttf');
-}
-
-@font-face {
-    font-family: 'HYKaiTiF';
-    src: url('./fonts/HYKaiTi/HYKaiTiF.ttf');
 }
 
 @font-face {
@@ -45,6 +26,22 @@
     src: url('./fonts/QuanZiKuKai/TW-Kai-Plus-98_1.ttf');
 }
 
+/* CJK Ext A-I */
+@font-face {
+    font-family: 'Jigmo';
+    src: url('./fonts/Jigmo-20230816/Jigmo.ttf');
+}
+
+@font-face {
+    font-family: 'Jigmo-2';
+    src: url('./fonts/Jigmo-20230816/Jigmo2.ttf');
+}
+
+@font-face {
+    font-family: 'Jigmo-3';
+    src: url('./fonts/Jigmo-20230816/Jigmo3.ttf');
+}
+
 @font-face {
     font-family: 'WeibeiSC-Bold';
     src: url('./fonts/WeibeiSC-Bold.otf');
@@ -55,6 +52,7 @@
     src: url('./fonts/HYLuoHuaShiW.ttf');
 }
 
+/* Old Chinese */
 @font-face {
     font-family: 'FZJiaGW';
     src: url('./fonts/FZJiaGW.ttf');
@@ -110,6 +108,14 @@
     src: url('./fonts/Shirakawa_v1_101/ShirakawaTenbun2.ttf');
 }
 
+/* Japanese */
+
+@font-face {
+    font-family: 'Ninjal-Hentaigana';
+    src: url('./fonts/ninjal_hentaigana/ninjal_hentaigana.ttf');
+}
+
+/* Lati & Greek */
 @font-face {
     font-family: 'SortsMillGoudy';
     src: url('./fonts/Sorts_Mill_Goudy/SortsMillGoudy-Regular.ttf');
@@ -119,22 +125,6 @@
     font-family: 'SortsMillGoudy';
     src: url('./fonts/Sorts_Mill_Goudy/SortsMillGoudy-Italic.ttf');
     font-style: italic;
-}
-
-/* CJK Ext A-I */
-@font-face {
-    font-family: 'Jigmo';
-    src: url('./fonts/Jigmo-20230816/Jigmo.ttf');
-}
-
-@font-face {
-    font-family: 'Jigmo-2';
-    src: url('./fonts/Jigmo-20230816/Jigmo2.ttf');
-}
-
-@font-face {
-    font-family: 'Jigmo-3';
-    src: url('./fonts/Jigmo-20230816/Jigmo3.ttf');
 }
 
 @font-face {
@@ -148,12 +138,6 @@
     src: url('./fonts/Cormorant_Garamond/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype-variations');
     font-weight: 100 900;
     font-style: italic;
-}
-
-/* Blackletter */
-@font-face {
-    font-family: 'UnifrakturMaguntia';
-    src: url('./fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf');
 }
 
 @font-face {
@@ -180,6 +164,9 @@
     font-style: italic;
 }
 
+/* Brahmi */
+
+/* Devanagari */
 @font-face {
     font-family: 'Sahitya';
     src: url('./fonts/Sahitya/Sahitya-Regular.ttf');
@@ -191,6 +178,19 @@
     font-weight: bold;
 }
 
+/* Ranjana */
+@font-face {
+    font-family: 'NithyaRanjana';
+    src: url('./fonts/NithyaRanjana-Regular/NithyaRanjanaDU-Regular.otf');
+}
+
+/* Siddham */
+@font-face {
+    font-family: 'ApDevaSiddham';
+    src: url('./fonts/ApDevaSiddham.ttf');
+}
+
+/* Hebrew */
 @font-face {
     font-family: 'Tinos';
     src: url('./fonts/Tinos/Tinos-Regular.ttf');
@@ -215,8 +215,21 @@
     font-weight: bold;
 }
 
-/* Serif Unused */
+/* Uyghur */
+@font-face {
+    font-family: 'FuYongShuKai';
+    src: url('./fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf');
+}
 
+/* Blackletter */
+@font-face {
+    font-family: 'UnifrakturMaguntia';
+    src: url('./fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf');
+}
+
+/* --- Serif Unused --- */
+
+/* Chinese */
 @font-face {
     font-family: 'LXGWWenKai';
     src: url('./fonts/LXGWWenKai/LXGWWenKai-Regular.ttf');
@@ -234,73 +247,21 @@
     font-weight: bold;
 }
 
-@font-face {
-    font-family: 'LXGWWenKaiMonoTC';
-    src: url('./fonts/LXGWWenKai/LXGWWenKaiMonoTC-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'LXGWWenKaiMonoTC';
-    src: url('./fonts/LXGWWenKai/LXGWWenKaiMonoTC-Light.ttf');
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: 'LXGWWenKaiMonoTC';
-    src: url('./fonts/LXGWWenKai/LXGWWenKaiMonoTC-Bold.ttf');
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: 'HanyiSentyFlorCalligraphy';
-    src: url('./fonts/HanyiSentyFlorCalligraphy.ttf');
-}
-
-@font-face {
-    font-family: 'KleeOne';
-    src: url('./fonts/KleeOne/KleeOne-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'KleeOne';
-    src: url('./fonts/KleeOne/KleeOne-SemiBold.ttf');
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: 'YsabeauOffice';
-    src: url('./fonts/Ysabeau_Office/YsabeauOffice-VariableFont_wght.ttf') format('truetype-variations');
-    font-weight: 100 900;
-}
-
-@font-face {
-    font-family: 'YsabeauOffice';
-    src: url('./fonts/Ysabeau_Office/YsabeauOffice-Italic-VariableFont_wght.ttf') format('truetype-variations');
-    font-weight: 100 900;
-    font-style: italic;
-}
-
+/* Latin */
 @font-face {
     font-family: 'Claire-Palmer-Serif';
     src: url('./fonts/Claire-Palmer-Serif.otf');
 }
 
+/* Uyghur */
 @font-face {
-    font-family: 'NotoSerifDevanagari';
-    src: url('./fonts/Noto_Serif_Devanagari/NotoSerifDevanagari-VariableFont_wdth\,wght.ttf') format('truetype-variations');
-    font-weight: 100 900;
-    font-stretch: 50% 200%; 
+    font-family: 'FuYongXingShu';
+    src: url('./fonts/FuYong/Manchu_FuYong_XingShu_running_script.ttf');
 }
 
-@font-face {
-    font-family: 'NotoSerifHebrew';
-    src: url('./fonts/Noto_Serif_Hebrew/NotoSerifHebrew-VariableFont_wdth\,wght.ttf') format('truetype-variations');
-    font-weight: 100 900;
-    font-stretch: 50% 200%; 
-}
+/* --- Sans --- */
 
-/* Sans */
-
+/* Latin */
 @font-face {
     font-family: 'Menlo';
     font-style: normal;
@@ -314,33 +275,22 @@
     font-weight: 100 900;
 }
 
+/* Emoji */
 @font-face {
     font-family: 'AppleColorEmoji';
     src: url('./fonts/AppleColorEmoji.ttf');
 }
 
-/* Sans Unused */
-
-@font-face {
-    font-family: 'SourceSans3';
-    src: url('./fonts/Source_Sans_3/SourceSans3-VariableFont_wght.ttf') format('truetype-variations');
-    font-weight: 100 900;
-}
-
-@font-face {
-    font-family: 'SourceSans3';
-    src: url('./fonts/Source_Sans_3/SourceSans3-Italic-VariableFont_wght.ttf') format('truetype-variations');
-    font-weight: 100 900;
-    font-style: italic;
-}
+/* --- Sans Unused --- */
 
 @font-face {
     font-family: 'Italiana';
     src: url('./fonts/Italiana-Regular.ttf');
 }
 
-/* Handwriting */
+/* --- Handwriting --- */
 
+/* Chinese */
 @font-face {
     font-family: 'HuiZongGong-sc';
     src: url('./fonts/HuiZongGong/HuiZongGong-sc.ttf');
@@ -352,10 +302,17 @@
 }
 
 @font-face {
+    font-family: 'HanyiSentyFlorCalligraphy';
+    src: url('./fonts/HanyiSentyFlorCalligraphy.ttf');
+}
+
+/* Japanese */
+@font-face {
     font-family: 'KakuGyoStd';
     src: url('./fonts/A-OTF-KakuGyoStd-Light.otf');
 }
 
+/* Latin */
 @font-face {
     font-family: 'Claire-Palmer-Script';
     src: url('./fonts/Claire-Palmer-Script.otf');
@@ -363,29 +320,28 @@
 
 /* Handwriting Unused */
 
+/* Chinese */
 @font-face {
     font-family: 'HYGuoQiangXingShuW';
     src: url('./fonts/HYGuoQiangXingShuW.ttf');
 }
 
+/* Japanese */
 @font-face {
     font-family: 'KouzanBrushFontSousyo';
     src: url('./fonts/KouzanBrushFontSousyo.ttf');
 }
 
-@font-face {
-    font-family: 'Migikataagari';
-    src: url('./fonts/migikataagari.ttf');
-}
-
+/* Latin */
 @font-face {
     font-family: 'Ballet';
     src: url('./fonts/Ballet/Ballet-Regular-VariableFont_opsz.ttf') format('truetype-variations');
     font-weight: 100 900;
 }
 
-/* Fancy */
+/* --- Fancy --- */
 
+/* Japanese */
 @font-face {
     font-family: 'MRT';
     src: url('./fonts/MRT/MRT-beta.ttf');
@@ -401,8 +357,9 @@
     src: url('./fonts/MRT/MRT-kananomi.ttf');
 }
 
-/* Fancy Unused */
+/* --- Fancy Unused --- */
 
+/* Latin */
 @font-face {
     font-family: 'MadokaRunes';
     src: url('./fonts/MadokaRunes-2.0.ttf');

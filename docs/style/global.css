@@ -1,11 +1,14 @@
+/* Gitalk */
 .markdown-body {
-    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif !important;
+    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif !important;
 }
 
+/* Docsify Copy Code */
 .docsify-copy-code-button {
     border-radius: 10px !important;
 }
 
+/* Docsify Tabs */
 .docsify-tabs__tab:not(.docsify-tabs__tab--active) {
     cursor: pointer;
 }

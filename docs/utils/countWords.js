@@ -61,7 +61,7 @@ function plugin(hook, vm) {
             `
         ${countWordsOptions.position === 'bottom' ? html : ''}
         <div id="count-words-block-span-div" style="margin-${countWordsOptions.position ? 'bottom' : 'top'}: ${countWordsOptions.margin
-};">
+        };">
             <span id="count-words-block-span" style="
                   float: ${countWordsOptions.float === 'right' ? 'right' : 'left'};
                   font-size: ${countWordsOptions.fontsize};

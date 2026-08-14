@@ -466,39 +466,43 @@ section.cover p {
     font-family: 'HuiZongGong-tc', 'HuiZongGong-sc', cursive;
 
     h1 {
-        margin: 0 0 0 1rem !important;
+        margin: 0 0 0 1rem;
     }
     
     h2 {
-        margin: 0 45px 0 0.8rem !important;
+        margin: 0 45px 0 0.8rem;
     }
     
     h3 {
-        margin: 0 40px 0 0.6rem !important;
+        margin: 0 40px 0 0.6rem;
     }
 
     figure, p {
-        margin: 0 1.2em !important;
+        margin: 0 1.2em;
     }
 
     blockquote {
-        margin: 0 2em !important;
+        margin: 0 2em;
+        border-top: 4px solid var(--theme-color, #c7a2ec);
+        border-left: 0;
+        padding-top: 20px;
+        padding-left: 0;
     }
 
     iframe {
-        margin: 0 1em !important;
+        margin: 0 1em;
     }
 
     pre, output {
-        margin: 0 1.2em !important;
+        margin: 0 1.2em;
     }
 
     code {
-        margin: 2px 0 !important;
+        margin: 2px 0;
     }
 
     pre > code {
-        padding: 1.4rem 2.2em !important;
+        padding: 1.4rem 2.2em;
     }
 
     output {
@@ -506,20 +510,21 @@ section.cover p {
     }
 
     output:last-child {
-        margin-left: 0 !important;
+        margin-left: 0;
     }
 
     output:first-child {
-        margin-right: 0 !important;
+        margin-right: 0;
     }
 
     pre::after, output::after {
-        padding: 10px 5px 10px 0 !important;
+        padding: 10px 5px 10px 0;
     }
 }
 
 div:has(.poem-div) {
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
     height: 300px;
 }
 
@@ -538,39 +543,43 @@ div:has(.poem-div) {
     font-family: 'FuYongShuKai', serif;
 
     h1 {
-        margin: 0 0 0 1rem !important;
+        margin: 0 0 0 1rem;
     }
     
     h2 {
-        margin: 0 45px 0 0.8rem !important;
+        margin: 0 45px 0 0.8rem;
     }
     
     h3 {
-        margin: 0 40px 0 0.6rem !important;
+        margin: 0 40px 0 0.6rem;
     }
 
     figure, p {
-        margin: 0 1.2em !important;
+        margin: 0 1.2em;
     }
 
     blockquote {
-        margin: 0 2em !important;
+        margin: 0 2em;
+        border-top: 4px solid var(--theme-color, #c7a2ec);
+        border-left: 0;
+        padding-top: 20px;
+        padding-left: 0;
     }
 
     iframe {
-        margin: 0 1em !important;
+        margin: 0 1em;
     }
 
     pre, output {
-        margin: 0 1.2em !important;
+        margin: 0 1.2em;
     }
 
     code {
-        margin: 2px 0 !important;
+        margin: 2px 0;
     }
 
     pre > code {
-        padding: 1.4rem 2.2em !important;
+        padding: 1.4rem 2.2em;
     }
 
     output {
@@ -578,19 +587,20 @@ div:has(.poem-div) {
     }
 
     output:last-child {
-        margin-left: 0 !important;
+        margin-left: 0;
     }
 
     output:first-child {
-        margin-right: 0 !important;
+        margin-right: 0;
     }
 
     pre::after, output::after {
-        padding: 10px 5px 10px 0 !important;
+        padding: 10px 5px 10px 0;
     }
 }
 
 div:has(.minority-language-vertical-left-div) {
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
     height: 300px;
 }

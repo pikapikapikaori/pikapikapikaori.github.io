@@ -234,6 +234,11 @@
     src: url('./fonts/Claire-Palmer-Serif.otf');
 }
 
+@font-face {
+    font-family: 'Ninjal-Hentaigana';
+    src: url('./fonts/ninjal_hentaigana/ninjal_hentaigana.ttf');
+}
+
 /* Sans */
 
 @font-face {

@@ -528,3 +528,69 @@ div:has(.poem-div) {
     font-family: 'Tinos', serif;
     text-align: right;
 }
+
+.minority-language-vertical-left-div {
+    writing-mode: vertical-lr;
+    float: left;
+    padding: 1rem 0;
+    border-top: 1px solid var(--global-border-default-color, #eee);
+    border-bottom: 1px solid var(--global-border-default-color, #eee);
+    font-family: 'FuYongShuKai', serif;
+
+    h1 {
+        margin: 0 0 0 1rem !important;
+    }
+    
+    h2 {
+        margin: 0 45px 0 0.8rem !important;
+    }
+    
+    h3 {
+        margin: 0 40px 0 0.6rem !important;
+    }
+
+    figure, p {
+        margin: 0 1.2em !important;
+    }
+
+    blockquote {
+        margin: 0 2em !important;
+    }
+
+    iframe {
+        margin: 0 1em !important;
+    }
+
+    pre, output {
+        margin: 0 1.2em !important;
+    }
+
+    code {
+        margin: 2px 0 !important;
+    }
+
+    pre > code {
+        padding: 1.4rem 2.2em !important;
+    }
+
+    output {
+        padding: 1.4rem 1.7rem;
+    }
+
+    output:last-child {
+        margin-left: 0 !important;
+    }
+
+    output:first-child {
+        margin-right: 0 !important;
+    }
+
+    pre::after, output::after {
+        padding: 10px 5px 10px 0 !important;
+    }
+}
+
+div:has(.minority-language-vertical-left-div) {
+    overflow: hidden;
+    height: 300px;
+}

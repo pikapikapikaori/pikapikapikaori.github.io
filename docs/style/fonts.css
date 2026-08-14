@@ -215,6 +215,12 @@
     font-weight: bold;
 }
 
+/* Uyghur */
+@font-face {
+    font-family: 'FuYongShuKai';
+    src: url('./fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf');
+}
+
 /* Blackletter */
 @font-face {
     font-family: 'UnifrakturMaguntia';
@@ -245,6 +251,12 @@
 @font-face {
     font-family: 'Claire-Palmer-Serif';
     src: url('./fonts/Claire-Palmer-Serif.otf');
+}
+
+/* Uyghur */
+@font-face {
+    font-family: 'FuYongXingShu';
+    src: url('./fonts/FuYong/Manchu_FuYong_XingShu_running_script.ttf');
 }
 
 /* --- Sans --- */

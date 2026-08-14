@@ -831,7 +831,6 @@ body {
 }
 
 .markdown-section blockquote {
-    border-left: 4px solid #c7a2ec;
     border-left: 4px solid var(--theme-color, #c7a2ec);
     color: #858585;
     margin: 2em 0;

@@ -532,6 +532,13 @@ div:has(.poem-div) {
     direction: rtl;
     font-family: 'Tinos', serif;
     text-align: right;
+
+    blockquote {
+        border-right: 4px solid var(--theme-color, #c7a2ec);
+        border-left: 0;
+        padding-right: 20px;
+        padding-left: 0;
+    }
 }
 
 .minority-language-vertical-left-div {

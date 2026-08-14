@@ -1,11 +1,14 @@
+/* Docsify Pagination */
 .docsify-pagination-container {
     border-top: 1px solid var(--global-border-default-color, #eee) !important;
 }
 
+/* Docsify Search */
 .search .input-wrap>input[type=search] {
     background: #3f3f3f ! important;
 }
 
+/* Gitalk */
 .gt-container .gt-popup {
     background-color: #3f3f3f !important;
 }

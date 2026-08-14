@@ -33,7 +33,7 @@ module.exports = defineConfig([
             "@stylistic/semi": ["warn", "never"],
             "@stylistic/spaced-comment": ["warn", "always"],
             "@stylistic/arrow-spacing": ["warn", { before: true, after: true }],
-            "@stylistic/comma-dangle": ["warn", "always"],
+            // "@stylistic/comma-dangle": ["warn", "always"],
             "@stylistic/comma-spacing": ["warn", { before: false, after: true }],
             "@stylistic/key-spacing": ["warn", { beforeColon: false, afterColon: true }],
             "@stylistic/keyword-spacing": ["warn", { before: true, after: true }],

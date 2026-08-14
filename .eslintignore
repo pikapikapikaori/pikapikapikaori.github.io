@@ -1,3 +1,0 @@
-# Only lint js files in docsify utils
-**/*.*
-!docs/utils/**/*.js

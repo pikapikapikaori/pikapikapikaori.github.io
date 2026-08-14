@@ -19,15 +19,15 @@ function plugin(hook, vm) {
     let changeDynamicImageThemeMode = function (currentTheme) {
         let dynamicImageThemeName = 'buefy'
         switch (currentTheme) {
-        case 'light':
-            dynamicImageThemeName = 'buefy'
-            break
-        case 'dark':
-            dynamicImageThemeName = 'material-palenight'
-            break
-        case 'auto':
-            dynamicImageThemeName = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'material-palenight' : 'buefy'
-            break
+            case 'light':
+                dynamicImageThemeName = 'buefy'
+                break
+            case 'dark':
+                dynamicImageThemeName = 'material-palenight'
+                break
+            case 'auto':
+                dynamicImageThemeName = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'material-palenight' : 'buefy'
+                break
         }
 
         Array.from(document.getElementsByClassName('dynamic-picture-according-to-theme-mode')).forEach(img => {
@@ -68,37 +68,37 @@ function plugin(hook, vm) {
 
         let setThemeMode = function (currentTheme) {
             switch (currentTheme) {
-            case 'light':
-                lightTheme.disabled = false
-                darkTheme.disabled = true
-                darkThemeTableCss.disabled = true
-                switchSpan.innerHTML = lightModeIconHtml
+                case 'light':
+                    lightTheme.disabled = false
+                    darkTheme.disabled = true
+                    darkThemeTableCss.disabled = true
+                    switchSpan.innerHTML = lightModeIconHtml
 
-                if (!switchLightDarkModeOptions.switchDynamicPicture) return
+                    if (!switchLightDarkModeOptions.switchDynamicPicture) return
 
-                changeDynamicImageThemeMode(currentTheme)
-                break
-            case 'dark':
-                lightTheme.disabled = true
-                darkTheme.disabled = false
-                darkThemeTableCss.disabled = false
-                switchSpan.innerHTML = darkModeIconHtml
+                    changeDynamicImageThemeMode(currentTheme)
+                    break
+                case 'dark':
+                    lightTheme.disabled = true
+                    darkTheme.disabled = false
+                    darkThemeTableCss.disabled = false
+                    switchSpan.innerHTML = darkModeIconHtml
 
-                if (!switchLightDarkModeOptions.switchDynamicPicture) return
+                    if (!switchLightDarkModeOptions.switchDynamicPicture) return
 
-                changeDynamicImageThemeMode(currentTheme)
-                break
-            case 'auto':
-                var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-                lightTheme.disabled = isDarkMode
-                darkTheme.disabled = !isDarkMode
-                darkThemeTableCss.disabled = !isDarkMode
-                switchSpan.innerHTML = autoModeIconHtml
+                    changeDynamicImageThemeMode(currentTheme)
+                    break
+                case 'auto':
+                    var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+                    lightTheme.disabled = isDarkMode
+                    darkTheme.disabled = !isDarkMode
+                    darkThemeTableCss.disabled = !isDarkMode
+                    switchSpan.innerHTML = autoModeIconHtml
                 
-                if (!switchLightDarkModeOptions.switchDynamicPicture) return
+                    if (!switchLightDarkModeOptions.switchDynamicPicture) return
 
-                changeDynamicImageThemeMode(isDarkMode ? 'dark' : 'light')
-                break
+                    changeDynamicImageThemeMode(isDarkMode ? 'dark' : 'light')
+                    break
             }
         }
 

@@ -201,8 +201,13 @@
 }
 
 @font-face {
-    font-family: 'NotoSansSiddham';
-    src: url('./fonts/Noto_Sans_Siddham/NotoSansSiddham-Regular.ttf');
+    font-family: 'ApSiddham';
+    src: url('./fonts/ApSiddham.ttf');
+}
+
+@font-face {
+    font-family: 'ApDevaSiddham';
+    src: url('./fonts/ApDevaSiddham.ttf');
 }
 
 /* Serif Unused */

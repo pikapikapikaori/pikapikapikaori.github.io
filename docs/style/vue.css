@@ -342,12 +342,12 @@ main.hidden {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background: transparent;
+    background: var(--theme-color, #c7a2ec);
     border-radius: 4px
 }
 
 .sidebar:hover::-webkit-scrollbar-thumb {
-    background: hsla(0, 0%, 53.3%, .4)
+    background: var(--theme-color, #c7a2ec);
 }
 
 .sidebar:hover::-webkit-scrollbar-track {

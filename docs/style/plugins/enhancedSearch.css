@@ -1,32 +1,27 @@
 .search {
-    padding: 0 !important;
-    border: 0 !important;
+    padding: 0;
+    border: 0;
 }
 
 .search input {
-    border: 0 !important;
-    box-shadow: 0 0 0 !important;
+    border: 0;
+    box-shadow: 0 0 0;
+    font-family: inherit;
 }
 
 .search .input-wrap {
-    border-top: 1px solid var(--global-border-default-color, #eee) !important;
-    border-bottom: 1px solid var(--global-border-default-color, #eee) !important;
+    border-block: 1px solid var(--global-border-default-color, #eee);
 }
 
 .search .input-wrap>input[type=search] {
-    padding: 0.75em 20px !important;
+    padding: 0.75em 20px;
+    border: 0;
 }
 
-.search .input-wrap:has(input[type=search]:focus) {
-    box-shadow: 0 0 10px var(--theme-color, #42b983);
-    border-top: 1px 0 solid var(--theme-color, #42b983);
-    border-bottom: 1px 0 solid var(--theme-color, #42b983);
-}
-
+.search .input-wrap:has(input[type=search]:focus),
 .search .input-wrap:has(input[type=search]:hover) {
-    box-shadow: 0 0 10px var(--theme-color, #42b983);
-    border-top: 1px 0 solid var(--theme-color, #42b983);
-    border-bottom: 1px 0 solid var(--theme-color, #42b983);
+    box-shadow: 0 0 10px var(--theme-color, #c7a2ec);
+    border-block: 1px solid var(--theme-color, #c7a2ec);
 }
 
 .app-name {

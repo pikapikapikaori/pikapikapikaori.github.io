@@ -557,6 +557,16 @@
                     "name": "Perseus",
                     "url": "https://www.perseus.tufts.edu/hopper/",
                     "target": "_blank"
+                  },
+                  {
+                    "name": "满族空间",
+                    "url": "https://www.manchu.work/home",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "栗林均",
+                    "url": "http://hkuri.cneas.tohoku.ac.jp",
+                    "target": "_blank"
                   }
                 ]
               },

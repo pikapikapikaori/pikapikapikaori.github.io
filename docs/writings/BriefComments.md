@@ -8,7 +8,7 @@
     <summary>2025</summary>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -37,7 +37,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -73,7 +73,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -91,7 +91,7 @@
     <summary>2024</summary>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -123,7 +123,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -138,7 +138,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -191,7 +191,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -214,7 +214,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -240,7 +240,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -262,7 +262,7 @@
     <summary>2023</summary>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -276,7 +276,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -291,7 +291,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -311,7 +311,7 @@
     </div>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>
@@ -341,7 +341,7 @@
     <summary>2022</summary>
     <div class="brief-comments-in-blog">
         <div class="brief-comments-in-blog-image-container">
-            <img src="./_media/logo.JPG" alt="Logo" class="ignore-view-full-image-img">
+            <img src="./_media/logo.jpg" alt="Logo" class="ignore-view-full-image-img">
         </div>
         <div class="brief-comments-in-blog-comments-container">
             <p>

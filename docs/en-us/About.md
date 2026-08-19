@@ -19,12 +19,15 @@ Dream of becoming a person who holds love of wisdom and beauty.
 
 ## About This Blog
 
-[This blog](/en-us/) is powered by [Docsify](https://docsify.js.org/#/), and is deployed on GitHub Pages. You can also visit the [standby site](https://pikapikapi-blog.vercel.app/#/en-us/) which is deployed on Vercel.
+This blog is powered by [Docsify@4](https://docsify.js.org/#/), and is deployed on [GitHub Pages](/en-us/). The following standby sites are also accessible:
+
+- [Vercel](https://pikapikapi-blog.vercel.app/#/en-us/)
+- [Netlify](https://pikapikapikaori.netlify.app/#/en-us/)
 
 <!-- div:right-panel -->
 
 <div class="main-page-right-panel-container">
-    <img src="./_media/logo.JPG" alt="Logo" class="main-page-about-me-avatar" />
+    <img src="./_media/logo.jpg" alt="Logo" class="main-page-about-me-avatar" />
     <h4 class="main-page-about-me-title">Yi-Yang Li</h4>
     <p class="main-page-about-me-description">李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby></p>
     <div class="main-page-about-me-links">

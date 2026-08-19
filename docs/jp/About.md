@@ -16,12 +16,15 @@
 
 ## このブログについて
 
-[このブログ](/jp/)は [Docsify](https://docsify.js.org/#/) を利用して、GitHub Pages にデプロイされました。また、Vercel にデプロイされた[スタンバイサイト](https://pikapikapi-blog.vercel.app/#/jp/)にアクセスすることもできます。
+このブログは [Docsify@4](https://docsify.js.org/#/) を利用して、[GitHub Pages](/jp/) にデプロイされました。また、以下のスタンバイサイトにアクセスすることもできます：
+
+- [Vercel](https://pikapikapi-blog.vercel.app/#/jp/)
+- [Netlify](https://pikapikapikaori.netlify.app/#/jp/)
 
 <!-- div:right-panel -->
 
 <div class="main-page-right-panel-container">
-    <img src="./_media/logo.JPG" alt="Logo" class="main-page-about-me-avatar" />
+    <img src="./_media/logo.jpg" alt="Logo" class="main-page-about-me-avatar" />
     <h4 class="main-page-about-me-title"><ruby>李亦楊<rt>リエキヨウ</rt></ruby></h4>
     <p class="main-page-about-me-description">李亦杨 / Yi-Yang Li</p>
     <div class="main-page-about-me-links">

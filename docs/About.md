@@ -13,12 +13,15 @@
 
 ## 关于本博客
 
-[本博客](/)基于 [Docsify](https://docsify.js.org/#/) 搭建，部署在 GitHub Pages 上。您也可以访问部署在 Vercel 上的[备用站](https://pikapikapi-blog.vercel.app)。
+本博客基于 [Docsify@4](https://docsify.js.org/#/) 搭建，部署在 [GitHub Pages](/) 上。另提供以下备用站点以供访问：
+
+- [Vercel](https://pikapikapi-blog.vercel.app)
+- [Netlify](https://pikapikapikaori.netlify.app/)
 
 <!-- div:right-panel -->
 
 <div class="main-page-right-panel-container">
-    <img src="./_media/logo.JPG" alt="Logo" class="main-page-about-me-avatar" />
+    <img src="./_media/logo.jpg" alt="Logo" class="main-page-about-me-avatar" />
     <h4 class="main-page-about-me-title">李亦杨</h4>
     <p class="main-page-about-me-description"><ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li</p>
     <div class="main-page-about-me-links">

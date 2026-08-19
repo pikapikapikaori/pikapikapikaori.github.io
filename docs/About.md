@@ -13,7 +13,10 @@
 
 ## 关于本博客
 
-[本博客](/)基于 [Docsify](https://docsify.js.org/#/) 搭建，部署在 GitHub Pages 上。您也可以访问部署在 Vercel 上的[备用站](https://pikapikapi-blog.vercel.app)。
+[本博客](/)基于 [Docsify](https://docsify.js.org/#/) 搭建，部署在 GitHub Pages 上。您也可以访问下列备用站：
+
+- [Vercel](https://pikapikapi-blog.vercel.app)
+- [Netlify](https://pikapikapikaori.netlify.app/)
 
 <!-- div:right-panel -->
 

@@ -2,7 +2,7 @@
 
 feed="pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
-website_link="https://pikapikapikaori.github.io"
+website_link="https://pikapikapi.com"
 description="Don't worry, be happy."
 author_name="李亦楊"
 
@@ -18,7 +18,7 @@ urlencode() {
 }
 
 newest_files=$(
-    git ls-files -z '**/*.md' ':!:**/_*.md' ':!:**/README.md' ':!:**/About.md' ':!:**/Personal**.md' ':!:**/BriefComments.md' ':!:**/Beginning.md' ':!:**/Sites.md' ':!:pages/**/*.md' ':!:sources/**/*.md' |
+    git ls-files -z '**/*.md' ':!:**/_*.md' ':!:**/README.md' ':!:**/About.md' ':!:**/Personal**.md' ':!:**/BriefComments.md' ':!:**/Beginning.md' ':!:**/Sites.md' ':!:pages/**/*.md' ':!:sources/**/*.md' ':!:style/**/*.md' |
         xargs -0 -n1 -I{} -- git log -1 --format="%at {}" {} |
         sort -r |
         head -n10 |

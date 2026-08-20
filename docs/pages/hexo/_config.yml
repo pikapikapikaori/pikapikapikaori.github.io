@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://pikapikapikaori.github.io/pages/hexo/public/
+url: https://pikapikapi.com/pages/hexo/public/
 root: /pages/hexo/public/
 permalink: :year/:month/:day/:title/
 permalink_defaults:

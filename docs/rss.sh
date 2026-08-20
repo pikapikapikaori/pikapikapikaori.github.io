@@ -2,7 +2,7 @@
 
 feed="pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
-website_link="https://pikapikapikaori.github.io"
+website_link="https://pikapikapi.com"
 description="Don't worry, be happy."
 author_name="李亦楊"
 

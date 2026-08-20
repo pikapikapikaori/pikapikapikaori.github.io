@@ -3,7 +3,7 @@
 # ============================================================
 feed="pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
-website_link="https://pikapikapi.com"
+website_link="{{BLOG_BASE_URL}}"
 description="Don't worry, be happy."
 author_name="李亦楊"
 # Path based on directory: docs/

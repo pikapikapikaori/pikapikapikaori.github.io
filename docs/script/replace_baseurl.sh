@@ -5,12 +5,11 @@ default_base_url="https://pikapikapi.com"
 placeholder="{{BLOG_BASE_URL}}"
 # Path based on directory: docs/
 file_patterns=(
-    "**/*.md"
-    "**/*.html"
-    "./rss.sh"
     "./pages/hexo/_config.yml"
     "./pages/hexo/public/atom.xml"
     "./pages/hexo/public/**/*.html"
+    "./index.html"
+    "./script/rss.sh"
 )
 # ============================================================
 

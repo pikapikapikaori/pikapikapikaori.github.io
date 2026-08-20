@@ -23,9 +23,9 @@ jobs:
       - name: Build RSS
         run: |
           cd docs/
-          ./rss.sh
+          ./script/rss.sh
 
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Build pikapikapi-blog-rss.atom
+          commit_message: "action: build pikapikapi-blog-rss.atom"

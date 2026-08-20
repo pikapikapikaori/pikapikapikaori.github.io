@@ -19,8 +19,9 @@ Dream of becoming a person who holds love of wisdom and beauty.
 
 ## About This Blog
 
-This blog is powered by [Docsify@4](https://docsify.js.org/#/), and is deployed on [GitHub Pages](/en-us/). The following standby sites are also accessible:
+This blog is powered by [Docsify@4](https://docsify.js.org/), and is accessible through the following sites:
 
+- [GitHub Pages](https://pikapikapikaori.github.io/#/en-us/)
 - [Vercel](https://pikapikapi-blog.vercel.app/#/en-us/)
 - [Netlify](https://pikapikapikaori.netlify.app/#/en-us/)
 

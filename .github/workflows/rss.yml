@@ -20,12 +20,13 @@ jobs:
         run:
           sudo apt-get install -y pandoc
 
-      - name: Build RSS
+      - name: Replace Base Url & Build RSS
         run: |
           cd docs/
-          ./rss.sh
+          ./script/replace_baseurl.sh
+          ./script/rss.sh
 
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Build pikapikapi-blog-rss.atom
+          commit_message: "action: build pikapikapi-blog-rss.atom"

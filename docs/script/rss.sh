@@ -1,10 +1,26 @@
 #!/bin/bash
 
+# ============================================================
 feed="pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
 website_link="https://pikapikapi.com"
 description="Don't worry, be happy."
 author_name="李亦楊"
+# Path based on directory: docs/
+git_pathspecs=(
+    '**/*.md'
+    ':!:**/_*.md'
+    ':!:**/README.md'
+    ':!:**/About.md'
+    ':!:**/Personal*.md'
+    ':!:**/BriefComments.md'
+    ':!:**/Beginning.md'
+    ':!:**/Sites.md'
+    ':!:pages/**/*.md'
+    ':!:sources/**/*.md'
+    ':!:style/**/*.md'
+)
+# ============================================================
 
 urlencode() {
     local length="${#1}"
@@ -18,13 +34,15 @@ urlencode() {
 }
 
 newest_files=$(
-    git ls-files -z '**/*.md' ':!:**/_*.md' ':!:**/README.md' ':!:**/About.md' ':!:**/Personal**.md' ':!:**/BriefComments.md' ':!:**/Beginning.md' ':!:**/Sites.md' ':!:pages/**/*.md' ':!:sources/**/*.md' ':!:style/**/*.md' |
+    git ls-files -z ${git_pathspecs[@]} |
         xargs -0 -n1 -I{} -- git log -1 --format="%at {}" {} |
         sort -r |
         head -n10 |
         cut -d " " -f2-
 )
 
+echo "Constructing RSS seed content..."
+echo "Listing articles to be included in the RSS seed:"
 items=""
 for file in ${newest_files[@]}; do
     echo $file
@@ -62,4 +80,5 @@ rss_content="<feed xmlns=\"http://www.w3.org/2005/Atom\">
   $items
 </feed>"
 
+echo "Writing content to RSS seed..."
 echo "$rss_content" >$feed

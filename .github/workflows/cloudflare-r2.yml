@@ -1,0 +1,90 @@
+name: Deploy to Cloudflare R2
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Need complete git history to find merge commit
+
+      - name: Install rclone
+        run: curl https://rclone.org/install.sh | sudo bash
+
+      - name: Find changed files since last merge
+        id: changes
+        run: |
+          MERGE_COMMITS=$(git log --merges --pretty=format:"%H" -2)
+          MERGE_COUNT=$(echo "$MERGE_COMMITS" | grep -c . || true)
+
+          if [ "$MERGE_COUNT" -lt 2 ]; then
+            echo "mode=full" >> $GITHUB_OUTPUT
+            echo "has_changed=true" >> $GITHUB_OUTPUT
+            find docs -type f > changed.txt
+            touch deleted.txt
+            echo "First deploy: syncing all files"
+          else
+            PREV_MERGE=$(echo "$MERGE_COMMITS" | tail -1)
+            CURR_HEAD=${{ github.sha }}
+            
+            echo "mode=incremental" >> $GITHUB_OUTPUT
+            echo "prev_merge=$PREV_MERGE" >> $GITHUB_OUTPUT
+            echo "curr_head=$CURR_HEAD" >> $GITHUB_OUTPUT
+            
+            git diff --name-only --diff-filter=ACMRT "$PREV_MERGE" "$CURR_HEAD" -- docs/ > changed.txt
+            
+            git diff --name-only --diff-filter=D "$PREV_MERGE" "$CURR_HEAD" -- docs/ > deleted.txt
+            
+            if [ -s changed.txt ]; then
+              echo "has_changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_changed=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+          echo ""
+          echo "=== Changed files ==="
+          cat changed.txt || echo "(none)"
+          echo ""
+          echo "=== Deleted files ==="
+          cat deleted.txt || echo "(none)"
+
+      - name: Upload changed files to R2
+        if: steps.changes.outputs.has_changed == 'true'
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
+        run: |
+          while IFS= read -r file; do
+            [ -f "$file" ] || continue
+            r2_path="${file#docs/}"
+            echo "↑ $file"
+            rclone copyto "$file" "r2:pikapikapi-blog/$r2_path"
+          done < changed.txt
+
+      - name: Delete removed files from R2
+        if: hashFiles('deleted.txt') != ''
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
+        run: |
+          if [ ! -s deleted.txt ]; then
+            echo "No files to delete"
+            exit 0
+          fi
+          while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            r2_path="${file#docs/}"
+            echo "↓ $r2_path"
+            rclone deletefile "r2:pikapikapi-blog/$r2_path" || true
+          done < deleted.txt

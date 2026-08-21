@@ -1,19 +1,24 @@
 function plugin(hook, vm) {
     hook.afterEach(async function (html, next) {
-        var updated = ''
-        date_url = 'https://api.github.com/repos/' + vm.config.lastUpdatedTime.url + '/commits?path=' + vm.config.lastUpdatedTime.basePath + vm.route.file
-        await fetch(date_url)
-            .then((response) => {
-                return response.json()
-            })
-            .then((commits) => {
-                try {
-                    updated = tinydate(vm.config.lastUpdatedTime.dateFormat)(new Date(commits[0]['commit']['committer']['date']))
-                }
-                catch (err) {
-                    updated = '---'
-                }
-            })
+        const getJson = (fileName) => {
+            let xhttp = new XMLHttpRequest()
+            xhttp.open('GET', `${fileName}.json`, false)
+            xhttp.send(null)
+            return JSON.parse(xhttp.response)
+        }
+
+        var updated = '---'
+
+        let pathNameData = getJson('config/tocdata')
+
+        let path = vm.route.file.split('.')[0].replace(/(?:^|\/)(README)$/, '/')
+
+        let file = path === '/' ? '/' : '/' + path
+
+        var matched = pathNameData.find(item => item.href === file)
+
+        updated = matched ? matched.editedTime : '---'
+
         next(html.replace(/{docsify-last-updated}/g, updated))
     })
 }

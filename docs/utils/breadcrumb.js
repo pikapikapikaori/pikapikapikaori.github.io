@@ -21,7 +21,7 @@ function plugin(hook, vm) {
         let pathNameData = getJson('config/breadcrumbData')
 
         if (!i18nPathList.includes(parts[0])) {
-            if (parts.length == 0) {
+            if (parts.length == 1 && parts[0] == '') {
                 breadcrumb += '<li class=\'active\'>首页</li>'
             }
             else {

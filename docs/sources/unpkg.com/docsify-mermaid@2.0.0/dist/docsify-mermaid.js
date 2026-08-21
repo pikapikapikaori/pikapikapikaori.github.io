@@ -165,4 +165,4 @@ var props = window.$docsify.mermaidConfig || {
 };
 window.$docsify.plugins = (window.$docsify.plugins || []).concat((0, _plugin.default)(props));
 },{"./plugin":"GOVZ"}]},{},["Focm"], null)
-//# sourceMappingURL=/docsify-mermaid.js.map
+//# sourceMappingURL=./docsify-mermaid.js.map

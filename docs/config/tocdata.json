@@ -115,7 +115,7 @@
     {
         "title": "季度印象最深刻单集 2025.01",
         "time": "2025.01.12",
-        "editedTime": "2028.08.05",
+        "editedTime": "2026.08.05",
         "cover": "/writings/_media/SeasonBest-202501-20250112/cover-picture.jpg",
         "href": "/writings/SeasonBest-202501-20250112",
         "baseUrl": "/writings"
@@ -154,8 +154,8 @@
     },
     {
         "title": "季度印象最深刻单集 2024.01",
-        "time": "2024.08.03",
-        "editedTime": "2024.07.09",
+        "time": "2024.03.01",
+        "editedTime": "2024.08.03",
         "cover": "/writings/_media/SeasonBest-202401-20240301/cover-picture.jpg",
         "href": "/writings/SeasonBest-202401-20240301",
         "baseUrl": "/writings"
@@ -781,7 +781,7 @@
     {
         "title": "About",
         "time": "",
-        "editedTime": "20246.08.20",
+        "editedTime": "2026.08.20",
         "cover": "",
         "href": "/en-us/About",
         "baseUrl": "/en-us"

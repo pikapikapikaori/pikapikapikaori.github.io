@@ -21,7 +21,7 @@ jobs:
           MERGE_COMMITS=$(git log --merges --pretty=format:"%H" -2)
           MERGE_COUNT=$(echo "$MERGE_COMMITS" | grep -c . || true)
 
-          if [ "$MERGE_COUNT" -lt 2 ]; then
+          if [ "$MERGE_COUNT" -lt 3 ]; then
             echo "mode=full" >> $GITHUB_OUTPUT
             echo "has_changed=true" >> $GITHUB_OUTPUT
             find docs -type f > changed.txt

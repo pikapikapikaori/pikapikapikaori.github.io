@@ -201,7 +201,8 @@
             let offset = this.getDaysByDateString(firstDay, newDay)
             this._difDay = offset++
             let temp = 0
-            for (var i = 1900; i <= 2100 && offset > 0; i++) {
+            let i = 1900
+            for (i = 1900; i <= 2100 && offset > 0; i++) {
                 temp = this.getYearDays(i)//计算i年有多少天
                 offset -= temp
                 this._difmonth += 12
@@ -228,7 +229,8 @@
             if (this._leap != 0) {
                 this._leapDays = this.leapDays(this.ylYear)
             }
-            for (var j = 1; j < 13 && curMonthDays < offset; curMonthDays = this.monthDays(this.ylYear, ++j)) {
+            let j = 1
+            for (j = 1; j < 13 && curMonthDays < offset; curMonthDays = this.monthDays(this.ylYear, ++j)) {
                 if (this._leap == j) { //闰月
                     offset -= curMonthDays
                     this._difmonth += 1
@@ -574,10 +576,10 @@
 
         //获取当前周
         Lunar.prototype.getWeek = function (data) {
+            let date = data
+
             if (data === null || data < 0 || data > 6) {
-                var date = new Date().getDay()
-            } else {
-                var date = data
+                date = new Date().getDay()
             }
             switch (date) {
                 case 0:

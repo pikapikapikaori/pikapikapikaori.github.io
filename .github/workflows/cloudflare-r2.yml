@@ -21,7 +21,7 @@ jobs:
           MERGE_COMMITS=$(git log --merges --pretty=format:"%H" -2)
           MERGE_COUNT=$(echo "$MERGE_COMMITS" | grep -c . || true)
 
-          if [ "$MERGE_COUNT" -lt 2 ]; then
+          if [ "$MERGE_COUNT" -lt 3 ]; then
             echo "mode=full" >> $GITHUB_OUTPUT
             echo "has_changed=true" >> $GITHUB_OUTPUT
             find docs -type f > changed.txt
@@ -61,6 +61,7 @@ jobs:
           RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true" 
         run: |
           while IFS= read -r file; do
             [ -f "$file" ] || continue
@@ -77,6 +78,7 @@ jobs:
           RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true" 
         run: |
           if [ ! -s deleted.txt ]; then
             echo "No files to delete"

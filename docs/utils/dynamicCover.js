@@ -17,13 +17,13 @@ function plugin(hook, vm) {
 
         let coverBackgrounds = []
 
-        for (var i = 0; i < numberOfImages; i ++) {
-            tmp = new Image()
+        for (let i = 0; i < numberOfImages; i ++) {
+            let tmp = new Image()
             tmp.src = backgrounds[i]
             coverBackgrounds.push(tmp)
         }
 
-        var curImgId = 1
+        let curImgId = 1
         setInterval(function () {
             cover.style.backgroundImage = 'url(' + coverBackgrounds[curImgId].src + ')'
             curImgId = (curImgId + 1) % numberOfImages

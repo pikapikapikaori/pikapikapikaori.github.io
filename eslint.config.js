@@ -19,6 +19,9 @@ module.exports = defineConfig([
                 ...globals.node,
                 ...globals.browser,
                 ...globals.es2021,
+
+                Gitalk: "readonly",
+                PIXI: "readonly",
             },
             ecmaVersion: "latest",
             sourceType: "module",
@@ -26,6 +29,8 @@ module.exports = defineConfig([
         rules: {
             "no-empty": "warn",
             "no-cond-assign": ["warn", "always"],
+            "no-undef": "error",
+            // "comma-dangle": ["error", "always"],
 
             "@stylistic/indent": ["warn", 4],
             "@stylistic/linebreak-style": ["warn", "unix"],

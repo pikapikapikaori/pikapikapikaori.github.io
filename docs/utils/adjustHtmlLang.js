@@ -1,6 +1,6 @@
 function plugin(hook, vm) {
     hook.doneEach(function () {
-        lang = 'zh-Hans'
+        let lang = 'zh-Hans'
         switch (location.href.split('#')[1].split('/')[1]) {
             case 'jp':
                 lang = 'ja'

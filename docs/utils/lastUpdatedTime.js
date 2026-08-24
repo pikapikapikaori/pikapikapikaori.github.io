@@ -7,7 +7,7 @@ function plugin(hook, vm) {
             return JSON.parse(xhttp.response)
         }
 
-        var updated = '---'
+        let updated = '---'
 
         let pathNameData = getJson('config/tocdata')
 
@@ -15,7 +15,7 @@ function plugin(hook, vm) {
 
         let file = path === '/' ? '/' : '/' + path
 
-        var matched = pathNameData.find(item => item.href === file)
+        let matched = pathNameData.find(item => item.href === file)
 
         updated = matched ? matched.editedTime : '---'
 

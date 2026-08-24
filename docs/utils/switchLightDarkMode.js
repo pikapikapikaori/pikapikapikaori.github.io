@@ -1,5 +1,5 @@
 // default values
-var switchLightDarkModeOptions = {
+let switchLightDarkModeOptions = {
     useSwitchMode: true,
     switchDynamicPicture: false,
     top: 130,
@@ -31,7 +31,7 @@ function plugin(hook, vm) {
         }
 
         Array.from(document.getElementsByClassName('dynamic-picture-according-to-theme-mode')).forEach(img => {
-            var imgSrc = img.src
+            let imgSrc = img.src
 
             if (imgSrc.indexOf('theme=') > -1) {
                 img.src = imgSrc.split('theme=')[0] + 'theme=' + dynamicImageThemeName
@@ -57,7 +57,7 @@ function plugin(hook, vm) {
 
         let darkThemeTableCss = Docsify.dom.findAll('link[href*="darkModeThemeTable.css"]')[0]
 
-        var switchSpan = document.createElement('span')
+        let switchSpan = document.createElement('span')
 
         switchSpan.id = 'switchLightDarkModeDivBeforeArticle'
         initializeWidgetSpan (switchSpan, 3)
@@ -89,7 +89,7 @@ function plugin(hook, vm) {
                     changeDynamicImageThemeMode(currentTheme)
                     break
                 case 'auto':
-                    var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+                    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
                     lightTheme.disabled = isDarkMode
                     darkTheme.disabled = !isDarkMode
                     darkThemeTableCss.disabled = !isDarkMode
@@ -123,18 +123,18 @@ function plugin(hook, vm) {
         document.body.appendChild(switchSpan)
 
         // 页面主题色
-        var colorPickerSpan = document.createElement('span')
+        let colorPickerSpan = document.createElement('span')
         colorPickerSpan.id = 'colorPickerSpan'
         initializeWidgetSpan (colorPickerSpan, 4)
         colorPickerSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M7 13.161L12.4644 7.6966C12.8549 7.30607 13.4881 7.30607 13.8786 7.6966L15.9999 9.81792C16.3904 10.2084 16.3904 10.8416 15.9999 11.2321L14.0711 13.161M7 13.161L4.82764 15.3334C4.73428 15.4267 4.66034 15.5376 4.61007 15.6597L3.58204 18.1563C3.07438 19.3892 4.30728 20.6221 5.54018 20.1145L8.03681 19.0865C8.1589 19.0362 8.26981 18.9622 8.36317 18.8689L14.0711 13.161M7 13.161H14.0711" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13.878 3.45401L15.9993 5.57533M20.242 9.81798L18.1206 7.69666M15.9993 5.57533L17.4135 4.16112C17.8041 3.7706 18.4372 3.7706 18.8277 4.16112L19.5349 4.86823C19.9254 5.25875 19.9254 5.89192 19.5349 6.28244L18.1206 7.69666M15.9993 5.57533L18.1206 7.69666" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
-        var colorPickerPopupSpan = document.createElement('span')
+        let colorPickerPopupSpan = document.createElement('span')
         colorPickerPopupSpan.id = 'colorPickerPopupSpan'
         colorPickerPopupSpan.className = 'color-picker-popup-span color-picker-popup-span-disappear'
         colorPickerPopupSpan.style.position = 'fixed'
         colorPickerPopupSpan.style.right = (switchLightDarkModeOptions.right + 35).toString() + 'px'
         colorPickerPopupSpan.style.top = (switchLightDarkModeOptions.top + 100).toString() + 'px'
-        var colorPickerPopupDiv = document.createElement('div')
+        let colorPickerPopupDiv = document.createElement('div')
         colorPickerPopupDiv.id = 'color-picker-popup-div'
         colorPickerPopupDiv.className = 'color-picker-popup-div'
         colorPickerPopupDiv.innerHTML = '<div class="color-picker-preset-color-list-div"><div class="color-picker-preset-color-btn-div" style="background-color: #eca2a2;" data-hue="0"></div><div class="color-picker-preset-color-btn-div" style="background-color: #ecc7a2;" data-hue="30"></div><div class="color-picker-preset-color-btn-div" style="background-color: #ececa2;" data-hue="60"></div><div class="color-picker-preset-color-btn-div" style="background-color: #c7eca2;" data-hue="90"></div><div class="color-picker-preset-color-btn-div" style="background-color: #a2ecec;" data-hue="180"></div><div class="color-picker-preset-color-btn-div" style="background-color: #aea2ec;" data-hue="250"></div><div class="color-picker-preset-color-btn-div" style="background-color: #c7a2ec;" data-hue="270"></div><div class="color-picker-preset-color-btn-div" style="background-color: #eca2ec;" data-hue="300"></div><div class="color-picker-preset-color-btn-div" style="background-color: #eca2c7;" data-hue="330"></div><div class="color-picker-preset-color-btn-div" style="background-color: #eca2b4;" data-hue="345"></div></div><input type="range" min="0" max="360" value="270" class="color-picker-slider" id="color-picker-slider" step="5">'
@@ -144,7 +144,7 @@ function plugin(hook, vm) {
         document.body.appendChild(colorPickerSpan)
         document.body.appendChild(colorPickerPopupSpan)
 
-        colorPickerSlider = colorPickerPopupDiv.getElementsByClassName('color-picker-slider')[0]
+        let colorPickerSlider = colorPickerPopupDiv.getElementsByClassName('color-picker-slider')[0]
 
         colorPickerSlider.oninput = function () {
             document.documentElement.style.setProperty('--theme-color', hslToHex(this.value, 66, 78))
@@ -186,7 +186,7 @@ function plugin(hook, vm) {
         }
 
         // 滚动到评论区
-        var scrollToCommentSpan = document.createElement('span')
+        let scrollToCommentSpan = document.createElement('span')
         scrollToCommentSpan.id = 'scrollToCommentSpan'
         initializeWidgetSpan (scrollToCommentSpan, 5)
         scrollToCommentSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M17 12.5a.5.5 0 100-1 .5.5 0 000 1zM12 12.5a.5.5 0 100-1 .5.5 0 000 1zM7 12.5a.5.5 0 100-1 .5.5 0 000 1z" fill="var(--theme-color,#ea6f5a)" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0012 22z" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
@@ -200,7 +200,7 @@ function plugin(hook, vm) {
         // 樱花雨特效
         let sakura = new Sakura('body')
 
-        var showSakuraSpan = document.createElement('span')
+        let showSakuraSpan = document.createElement('span')
         showSakuraSpan.id = 'showSakuraSpan'
         initializeWidgetSpan (showSakuraSpan, 6)
         showSakuraSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M12 15a3 3 0 100-6 3 3 0 000 6zM13 9s1-2 1-4-2-4-2-4-2 2-2 4 1 4 1 4" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-miterlimit="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 11s-2-1-4-1-4 2-4 2 2 2 4 2 4-1 4-1M13 15s1 2 1 4-2 4-2 4-2-2-2-4 1-4 1-4M15 11s2-1 4-1 4 2 4 2-2 2-4 2-4-1-4-1M10.586 9.172S9.879 7.05 8.464 5.636C7.05 4.222 4.222 4.222 4.222 4.222s0 2.828 1.414 4.243c1.414 1.414 3.536 2.121 3.536 2.121M9.172 13.414s-2.122.707-3.536 2.122c-1.414 1.414-1.414 4.242-1.414 4.242s2.828 0 4.242-1.414c1.415-1.414 2.122-3.536 2.122-3.536M14.829 13.414s2.12.707 3.535 2.122c1.414 1.414 1.414 4.242 1.414 4.242s-2.828 0-4.242-1.414c-1.415-1.414-2.122-3.536-2.122-3.536M13.414 9.172s.707-2.122 2.122-3.536c1.414-1.414 4.242-1.414 4.242-1.414s0 2.828-1.414 4.243c-1.414 1.414-3.536 2.121-3.536 2.121" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-miterlimit="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
@@ -221,7 +221,7 @@ function plugin(hook, vm) {
         document.body.appendChild(showSakuraSpan)
 
         // 隐藏显示小组件
-        var showWidgetsSpan = document.createElement('span')
+        let showWidgetsSpan = document.createElement('span')
         showWidgetsSpan.id = 'showWidgetsSpan'
         initializeWidgetSpan (showWidgetsSpan, 7)
         showWidgetsSpan.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 12h7M15 12h7" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5"></path></svg>'

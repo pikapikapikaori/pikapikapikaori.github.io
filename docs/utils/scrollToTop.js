@@ -1,4 +1,4 @@
-var CONFIG = {
+let CONFIG = {
     auto: true,
     text: 'Top',
     right: 15,
@@ -6,25 +6,25 @@ var CONFIG = {
     offset: 500,
 }
 
-var install = function (hook, vm) {
-    var opts = vm.config.scrollToTop || CONFIG
+function plugin (hook, vm) {
+    let opts = vm.config.scrollToTop || CONFIG
     CONFIG.auto = opts.auto && typeof opts.auto === 'boolean' ? opts.auto : CONFIG.auto
     CONFIG.text = opts.text && typeof opts.text === 'string' ? opts.text : CONFIG.text
     CONFIG.right = opts.right && typeof opts.right === 'number' ? opts.right : CONFIG.right
     CONFIG.top = opts.top && typeof opts.top === 'number' ? opts.top : CONFIG.top
     CONFIG.offset = opts.offset && typeof opts.offset === 'number' ? opts.offset : CONFIG.offset
 
-    var onScroll = function (e) {
+    let onScroll = function (e) {
         if (!CONFIG.auto) {
             return
         }
-        var offset = window.document.documentElement.scrollTop
-        var $scrollBtn = Docsify.dom.find('span.scroll-to-top')
+        let offset = window.document.documentElement.scrollTop
+        let $scrollBtn = Docsify.dom.find('span.scroll-to-top')
         $scrollBtn.style.display = offset >= CONFIG.offset ? 'block' : 'none'
     }
 
     hook.mounted(function () {
-        var scrollBtn = document.createElement('span')
+        let scrollBtn = document.createElement('span')
         scrollBtn.className = 'scroll-to-top'
         scrollBtn.style.display = CONFIG.auto ? 'none' : 'block'
         scrollBtn.style.overflow = 'hidden'
@@ -41,8 +41,8 @@ var install = function (hook, vm) {
         window.addEventListener('scroll', onScroll)
         scrollBtn.onclick = function (e) {
             e.stopPropagation()
-            var step = window.scrollY / 15
-            var scroll = function () {
+            let step = window.scrollY / 15
+            let scroll = function () {
                 window.scrollTo(0, window.scrollY - step)
                 if (window.scrollY > 0) {
                     setTimeout(scroll, 15)
@@ -53,4 +53,4 @@ var install = function (hook, vm) {
     })
 }
 
-$docsify.plugins = [].concat(install, $docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)

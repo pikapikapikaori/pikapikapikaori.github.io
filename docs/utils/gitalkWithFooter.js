@@ -1,5 +1,5 @@
 // default values
-var gitalkWithFooterOptions = {
+let gitalkWithFooterOptions = {
     footerInnerHtml: '',
     gitalkConfig: {
         clientID: '',
@@ -16,9 +16,9 @@ var gitalkWithFooterOptions = {
 function plugin(hook, vm) {
     hook.doneEach(function () {
         // 若没有gitalk容器，则添加gitalk容器重新
-        var previousGitalk = document.getElementById('gitalk-container')
+        let previousGitalk = document.getElementById('gitalk-container')
         if (!previousGitalk) {
-            var gitalkContainer = document.createElement('div')
+            let gitalkContainer = document.createElement('div')
             gitalkContainer.id = 'gitalk-container'
             gitalkContainer.style.maxWidth = '800px'
             gitalkContainer.style.width = '80%'
@@ -28,10 +28,10 @@ function plugin(hook, vm) {
         }
 
         // 若没有footer，则在gitalk容器下方重新添加footer
-        var previousFooter = document.getElementById('footer-under-gitalk')
+        let previousFooter = document.getElementById('footer-under-gitalk')
         if (!previousFooter) {
-            var footer = document.createElement('footer')
-            var footerDiv = document.createElement('div')
+            let footer = document.createElement('footer')
+            let footerDiv = document.createElement('div')
             footerDiv.id = 'footer-under-gitalk'
             footerDiv.innerHTML = gitalkWithFooterOptions.footerInnerHtml
             footer.appendChild(footerDiv)

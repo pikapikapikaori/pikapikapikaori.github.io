@@ -156,23 +156,23 @@ function plugin(hook, vm) {
     }
 
     hook.mounted(function () {
-        var viewFullImageSpan = document.createElement('span')
+        let viewFullImageSpan = document.createElement('span')
 
         viewFullImageSpan.id = 'view-full-image-span'
 
-        var viewFullImageSpanInnerLeftDiv = document.createElement('div')
-        var viewFullImageSpanInnerRightDiv = document.createElement('div')
+        let viewFullImageSpanInnerLeftDiv = document.createElement('div')
+        let viewFullImageSpanInnerRightDiv = document.createElement('div')
 
         viewFullImageSpanInnerLeftDiv.id = 'view-full-image-span-inner-left-div'
         viewFullImageSpanInnerRightDiv.id = 'view-full-image-span-inner-right-div'
         viewFullImageSpanInnerLeftDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
         viewFullImageSpanInnerRightDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
-        var viewFullImageSpanInnerImgDiv = document.createElement('div')
+        let viewFullImageSpanInnerImgDiv = document.createElement('div')
 
         viewFullImageSpanInnerImgDiv.id = 'view-full-image-span-inner-img-div'
 
-        var viewFullImageSpanInnerTextDiv = document.createElement('div')
+        let viewFullImageSpanInnerTextDiv = document.createElement('div')
 
         viewFullImageSpanInnerTextDiv.id = 'view-full-image-span-inner-text-div'
 
@@ -195,7 +195,7 @@ function plugin(hook, vm) {
             if (imgArray.length !== 1) {
                 imgArray.some((img, index, arr) => {
                     if (viewFullImageSpanInnerImgDiv.style.backgroundImage.indexOf(img.src) > -1) {
-                        newImgIndex = direction ? (index === 0 ? imgArray.length - 1 : index - 1) : (index === imgArray.length - 1 ? 0 : index + 1)
+                        let newImgIndex = direction ? (index === 0 ? imgArray.length - 1 : index - 1) : (index === imgArray.length - 1 ? 0 : index + 1)
                         viewFullImageSpanInnerImgDiv.style.backgroundImage = 'url(' + imgArray[newImgIndex].src + ')'
                         viewFullImageSpanInnerTextDiv.innerHTML = (newImgIndex + 1).toString() + ' / ' + arr.length.toString()
                         curImg = imgArray[newImgIndex]

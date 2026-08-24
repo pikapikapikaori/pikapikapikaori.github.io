@@ -39,13 +39,13 @@ function plugin(hook, vm) {
 
         parts.forEach(function (part, index) {
             curPath += part + '/'
-            var curHrefPath = '#' + curPath
+            let curHrefPath = '#' + curPath
 
-            var matched = pathNameData.find(item => item.path === curPath)
+            let matched = pathNameData.find(item => item.path === curPath)
 
-            var secondaryText = part.replace(/\.md$/, '').replace(/[_-]/g, ' ')
+            let secondaryText = part.replace(/\.md$/, '').replace(/[_-]/g, ' ')
 
-            var displayText = matched ? matched.name : secondaryText.charAt(0).toUpperCase() + secondaryText.slice(1)
+            let displayText = matched ? matched.name : secondaryText.charAt(0).toUpperCase() + secondaryText.slice(1)
 
             if (index < parts.length - 1) {
                 breadcrumb += '<li><a href=\'' + curHrefPath + '\'>' + displayText + '</a></li>'

@@ -1,4 +1,4 @@
-import pagesData from '../config/tocdata.json'
+import pagesData from '../config/tocdata.json.js'
 
 function plugin(hook, vm) {
     const tocMarkup = '<!-- toc -->'

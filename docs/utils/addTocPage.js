@@ -16,12 +16,7 @@ function plugin(hook, vm) {
     let maxPageIndex = 1
 
     function renderSidebar() {
-        if (hasTocs) {
-            document.body.classList.add('force-close')
-        }
-        else {
-            document.body.classList.remove('force-close')
-        }
+        document.body.classList.toggle('force-close', hasTocs)
     }
 
     function setDefaultTocs() {

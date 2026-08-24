@@ -189,7 +189,12 @@ function plugin(hook, vm) {
             let viewFullImageSpanInnerTextDiv = document.getElementById('view-full-image-span-inner-text-div')
 
             let imgArray = Array.from(document.getElementsByTagName('img')).filter(img => {
-                return !(img.className.split(' ').indexOf('ignore-view-full-image-img') > -1 || img.className.indexOf('emoji') > -1 || img.src.indexOf('avatars.githubusercontent') > -1)
+                const shouldIgnore = 
+                    img.classList.contains('ignore-view-full-image-img') ||
+                    img.className.includes('emoji') ||
+                    img.src.includes('avatars.githubusercontent')
+                
+                return !shouldIgnore
             })
 
             if (imgArray.length !== 1) {
@@ -245,7 +250,12 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         Array.from(document.getElementsByTagName('img')).filter(img => {
-            return !(img.className.split(' ').indexOf('ignore-view-full-image-img') > -1 || img.className.indexOf('emoji') > -1 || img.src.indexOf('avatars.githubusercontent') > -1)
+            const shouldIgnore = 
+                img.classList.contains('ignore-view-full-image-img') ||
+                img.className.includes('emoji') ||
+                img.src.includes('avatars.githubusercontent')
+            
+            return !shouldIgnore
         }).forEach((img, index, arr) => {
             let viewFullImageSpan = document.getElementById('view-full-image-span')
             let viewFullImageSpanInnerImgDiv = document.getElementById('view-full-image-span-inner-img-div')

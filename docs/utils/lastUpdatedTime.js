@@ -5,9 +5,7 @@ function plugin(hook, vm) {
 
         let updated = '---'
 
-        let path = vm.route.file.split('.')[0].replace(/(?:^|\/)(README)$/, '/')
-
-        let file = path === '/' ? '/' : '/' + path
+        let file = vm.route.path
 
         let matched = pathNameData.find(item => item.href === file)
 

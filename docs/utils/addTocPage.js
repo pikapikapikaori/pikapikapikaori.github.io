@@ -33,7 +33,7 @@ function plugin(hook, vm) {
     }
 
     function renderTocContents() {
-        let baseUrl = location.href.split('#')[1].split('/').slice(0, -1).join('/')
+        let baseUrl = vm.route.path.split('/').slice(0, -1).join('/')
 
         if (baseUrl === '') {
             baseUrl = '/'
@@ -79,7 +79,7 @@ function plugin(hook, vm) {
 
         pages.forEach(page => {
             let pageHref = '#' + page.href
-            let pagePictureHref = location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
+            let pagePictureHref = location.pathname.replace(/\/$/, '') + page.cover
 
             let pageHrefDiv = '<a class=\'toc-page-display-a\' href=\'' + pageHref + '\'><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
 
@@ -150,7 +150,7 @@ function plugin(hook, vm) {
         document.scrollingElement.scrollTop = 0
 
         // fix autoHeader
-        let path = location.href.split('#')[1]
+        let path = vm.route.path
         // for default title '- ピカピカピ'
         if (path != '/') {
             Array.from(document.getElementsByClassName('sidebar-nav')[0].getElementsByTagName('a')).some(a => {

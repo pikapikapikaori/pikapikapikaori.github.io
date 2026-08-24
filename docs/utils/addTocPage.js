@@ -1,4 +1,5 @@
-// Docsify plugin functions
+import pagesData from '../config/tocdata.json.js'
+
 function plugin(hook, vm) {
     const tocMarkup = '<!-- toc -->'
 
@@ -32,20 +33,13 @@ function plugin(hook, vm) {
     }
 
     function renderTocContents() {
-        baseUrl = location.href.split('#')[1].split('/').slice(0, -1).join('/')
+        let baseUrl = location.href.split('#')[1].split('/').slice(0, -1).join('/')
 
         if (baseUrl === '') {
             baseUrl = '/'
         }
 
-        const getJson = (fileName) => {
-            let xhttp = new XMLHttpRequest()
-            xhttp.open('GET', `${fileName}.json`, false)
-            xhttp.send(null)
-            return JSON.parse(xhttp.response)
-        }
-
-        pages = getJson('config/tocdata').filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
+        let pages = pagesData.filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
             const timeA = a.time
             const timeB = b.time
             
@@ -70,7 +64,7 @@ function plugin(hook, vm) {
     }
 
     function renderTocPageUnderPaginator() {
-        tocPageDiv = document.getElementsByClassName('toc-page-div')[0]
+        let tocPageDiv = document.getElementsByClassName('toc-page-div')[0]
         tocPageDiv.innerHTML = ''
 
         if (curPageIndex < 1) {
@@ -84,15 +78,15 @@ function plugin(hook, vm) {
         let pages = sortedPages.slice((curPageIndex - 1) * recentAmount, curPageIndex * recentAmount)
 
         pages.forEach(page => {
-            pageHref = '#' + page.href
-            pagePictureHref = location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
+            let pageHref = '#' + page.href
+            let pagePictureHref = location.href.split('#')[0].split('/').slice(0, -1).join('/') + page.cover
 
-            pageHrefDiv = '<a class=\'toc-page-display-a\' href=\'' + pageHref + '\'><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
+            let pageHrefDiv = '<a class=\'toc-page-display-a\' href=\'' + pageHref + '\'><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
 
             tocPageDiv.innerHTML += pageHrefDiv
         })
 
-        tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')
+        let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')
         if (tocPaginatorInputDiv.length > 0) {
             tocPaginatorInputDiv = tocPaginatorInputDiv[0]
             if (tocPaginatorInputDiv.hasChildNodes()) {
@@ -103,10 +97,10 @@ function plugin(hook, vm) {
     }
 
     function renderTocPaginator() {
-        tocPaginatorDiv = document.getElementsByClassName('toc-paginator-div')[0]
-        tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')[0]
-        tocPaginatorLeftButtonDiv = document.getElementsByClassName('tocPaginatorLeftButtonDiv')[0]
-        tocPaginatorRightButtonDiv = document.getElementsByClassName('tocPaginatorRightButtonDiv')[0]
+        let tocPaginatorDiv = document.getElementsByClassName('toc-paginator-div')[0]
+        let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')[0]
+        let tocPaginatorLeftButtonDiv = document.getElementsByClassName('tocPaginatorLeftButtonDiv')[0]
+        let tocPaginatorRightButtonDiv = document.getElementsByClassName('tocPaginatorRightButtonDiv')[0]
 
         tocPaginatorLeftButtonDiv.onclick = function (e) {
             if (curPageIndex > 1) {
@@ -123,7 +117,7 @@ function plugin(hook, vm) {
 
         tocPaginatorInputDiv.innerHTML = '<input class=\'toc-paginator-input-box\' type=\'number\' value=\'' + curPageIndex + '\' min=\'1\' max=\'' + maxPageIndex + '\'></input><span>/</span><span>' + maxPageIndex + '</span>'
 
-        tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
+        let tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
 
         tocPaginatorInput.onchange = function () {
             curPageIndex = this.value

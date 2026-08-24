@@ -2,7 +2,7 @@
 // import * as PIXI from "pixi.js";
 // import * as live2d from "pixi-live2d-display";
 
-live2d = PIXI.live2d
+let live2d = PIXI.live2d
 class Live2dLoader {
     constructor(models) {
         let config = models[this.getLive2dIndex(models)]

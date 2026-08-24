@@ -6,8 +6,8 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         Array.from(document.querySelectorAll(query)).forEach(a => {
-            var curLink = a.href.split('?')[0]
-            var documentLink = document.baseURI.split('?')[0]
+            let curLink = a.href.split('?')[0]
+            let documentLink = document.baseURI.split('?')[0]
 
             if (curLink !== documentLink) {
                 a.innerHTML += linkSvg

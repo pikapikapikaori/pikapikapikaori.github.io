@@ -1,5 +1,5 @@
 // default values
-var countWordsOptions = {
+let countWordsOptions = {
     countable: true,
     position: 'top',
     margin: '10px',

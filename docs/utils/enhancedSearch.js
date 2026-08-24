@@ -1,11 +1,11 @@
-var install = function (hook, vm) {
+function plugin (hook, vm) {
     hook.doneEach(function () {
-        sidebar = document.getElementsByClassName('sidebar')[0]
-        appName = sidebar.getElementsByClassName('app-name')[0]
-        search = sidebar.getElementsByClassName('search')[0]
+        let sidebar = document.getElementsByClassName('sidebar')[0]
+        let appName = sidebar.getElementsByClassName('app-name')[0]
+        let search = sidebar.getElementsByClassName('search')[0]
 
         sidebar.insertBefore(appName, search)
     })
 }
 
-$docsify.plugins = [].concat(install, $docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)

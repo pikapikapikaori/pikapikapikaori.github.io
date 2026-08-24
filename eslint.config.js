@@ -20,9 +20,9 @@ module.exports = defineConfig([
                 ...globals.browser,
                 ...globals.es2021,
 
+                Docsify: "readonly",
                 Gitalk: "readonly",
                 PIXI: "readonly",
-                Docsify: "readonly",
                 Sakura: "readonly",
             },
             ecmaVersion: "latest",

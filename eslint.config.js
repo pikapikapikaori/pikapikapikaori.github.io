@@ -22,6 +22,8 @@ module.exports = defineConfig([
 
                 Gitalk: "readonly",
                 PIXI: "readonly",
+                Docsify: "readonly",
+                Sakura: "readonly",
             },
             ecmaVersion: "latest",
             sourceType: "module",
@@ -30,7 +32,6 @@ module.exports = defineConfig([
             "no-empty": "warn",
             "no-cond-assign": ["warn", "always"],
             "no-undef": "error",
-            // "comma-dangle": ["error", "always"],
 
             "@stylistic/indent": ["warn", 4],
             "@stylistic/linebreak-style": ["warn", "unix"],

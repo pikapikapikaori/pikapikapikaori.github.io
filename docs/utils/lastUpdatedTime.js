@@ -1,4 +1,4 @@
-import pathNameData from '../config/tocdata.json'
+import pathNameData from '../config/tocdata.json.js'
 
 function plugin(hook, vm) {
     hook.afterEach(async function (html, next) {

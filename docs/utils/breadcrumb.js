@@ -7,7 +7,7 @@ function plugin(hook, vm) {
 
         const i18nPathList = ['en-us', 'jp',]
 
-        let parts = location.href.split('#')[1].split('/').slice(1)
+        let parts = vm.route.path.split('/').slice(1)
         let breadcrumb = '<ul class=\'breadcrumb\'>'
         let curPath = '/'
 

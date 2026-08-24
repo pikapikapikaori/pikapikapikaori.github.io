@@ -49,6 +49,11 @@ function plugin(hook, vm) {
         el.style.top = (switchLightDarkModeOptions.top + 35 * topOffset).toString() + 'px'
     }
 
+    const toggleAppear = (el, appearCls, disappearCls, show) => {
+        el.classList.toggle(appearCls, show)
+        el.classList.toggle(disappearCls, !show)
+    }
+
     hook.mounted(function () {
 
         // 黑暗模式切换
@@ -67,39 +72,26 @@ function plugin(hook, vm) {
         const autoModeIconHtml = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M3 15c2.483 0 4.345-3 4.345-3s1.862 3 4.345 3c2.482 0 4.965-3 4.965-3s2.483 3 4.345 3M3 20c2.483 0 4.345-3 4.345-3s1.862 3 4.345 3c2.482 0 4.965-3 4.965-3s2.483 3 4.345 3M19 10a7 7 0 10-14 0" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
         let setThemeMode = function (currentTheme) {
-            switch (currentTheme) {
-                case 'light':
-                    lightTheme.disabled = false
-                    darkTheme.disabled = true
-                    darkThemeTableCss.disabled = true
-                    switchSpan.innerHTML = lightModeIconHtml
+            const isAuto = currentTheme === 'auto'
+            const isDark = isAuto
+                ? window.matchMedia('(prefers-color-scheme: dark)').matches
+                : currentTheme === 'dark'
 
-                    if (!switchLightDarkModeOptions.switchDynamicPicture) return
+            lightTheme.disabled = isDark
+            darkTheme.disabled = !isDark
+            darkThemeTableCss.disabled = !isDark
 
-                    changeDynamicImageThemeMode(currentTheme)
-                    break
-                case 'dark':
-                    lightTheme.disabled = true
-                    darkTheme.disabled = false
-                    darkThemeTableCss.disabled = false
-                    switchSpan.innerHTML = darkModeIconHtml
-
-                    if (!switchLightDarkModeOptions.switchDynamicPicture) return
-
-                    changeDynamicImageThemeMode(currentTheme)
-                    break
-                case 'auto':
-                    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-                    lightTheme.disabled = isDarkMode
-                    darkTheme.disabled = !isDarkMode
-                    darkThemeTableCss.disabled = !isDarkMode
-                    switchSpan.innerHTML = autoModeIconHtml
-                
-                    if (!switchLightDarkModeOptions.switchDynamicPicture) return
-
-                    changeDynamicImageThemeMode(isDarkMode ? 'dark' : 'light')
-                    break
+            const iconMap = {
+                light: lightModeIconHtml,
+                dark: darkModeIconHtml,
+                auto: autoModeIconHtml
             }
+
+            switchSpan.innerHTML = iconMap[currentTheme]
+        
+            if (!switchLightDarkModeOptions.switchDynamicPicture) return
+
+            changeDynamicImageThemeMode(isDark ? 'dark' : 'light')
         }
 
         setThemeMode(themeModes[currentThemeModeIndex])
@@ -175,14 +167,7 @@ function plugin(hook, vm) {
         colorPickerSpan.onclick = function () {
             iscolorPickerPopupOpen = !iscolorPickerPopupOpen
 
-            if (iscolorPickerPopupOpen) {
-                colorPickerPopupSpan.classList.remove('color-picker-popup-span-disappear')
-                colorPickerPopupSpan.classList.add('color-picker-popup-span-appear')
-            }
-            else {
-                colorPickerPopupSpan.classList.remove('color-picker-popup-span-appear')
-                colorPickerPopupSpan.classList.add('color-picker-popup-span-disappear')
-            }
+            toggleAppear(colorPickerPopupSpan, 'color-picker-popup-span-appear', 'color-picker-popup-span-disappear', iscolorPickerPopupOpen)
         }
 
         // 滚动到评论区
@@ -238,28 +223,21 @@ function plugin(hook, vm) {
 
             isWidgetsOpen = !isWidgetsOpen
 
-            if (isWidgetsOpen) {
-                widgetsSpanList.forEach(widget => {
-                    widget.classList.remove('page-right-tools-widgets-span-disappear')
-                    widget.classList.add('page-right-tools-widgets-span-appear')
-                })
-            }
-            else {
-                widgetsSpanList.forEach(widget => {
-                    widget.classList.remove('page-right-tools-widgets-span-appear')
-                    widget.classList.add('page-right-tools-widgets-span-disappear')
-                })
+            widgetsSpanList.forEach(widget => toggleAppear(
+                widget,
+                'page-right-tools-widgets-span-appear',
+                'page-right-tools-widgets-span-disappear',
+                isWidgetsOpen
+            ))
 
+            if (!isWidgetsOpen) {
                 iscolorPickerPopupOpen = isWidgetsOpen
-
-                if (iscolorPickerPopupOpen) {
-                    colorPickerPopupSpan.classList.remove('color-picker-popup-span-disappear')
-                    colorPickerPopupSpan.classList.add('color-picker-popup-span-appear')
-                }
-                else {
-                    colorPickerPopupSpan.classList.remove('color-picker-popup-span-appear')
-                    colorPickerPopupSpan.classList.add('color-picker-popup-span-disappear')
-                }
+                toggleAppear(
+                    colorPickerPopupSpan,
+                    'color-picker-popup-span-appear',
+                    'color-picker-popup-span-disappear',
+                    iscolorPickerPopupOpen
+                )
             }
         }
 

@@ -17,7 +17,7 @@
     </style>
     <script src="./brainfuck.js"></script>
     <script>
-        var term = new Terminal({
+        let term = new Terminal({
             rendererType: "canvas",
             cursorBlink: true,
             theme: {
@@ -58,7 +58,7 @@
             term.write("\x1b[2K\r")
             let rowNum = parseInt((oldContent.length + 28) / 80)
             if (rowNum > 0) {
-                for (var i = rowNum; i > 0; i--) {
+                for (let i = rowNum; i > 0; i--) {
                     term.write("\x1b[2K\r")
                     term.write("\x1b[A\r")
                 }
@@ -120,10 +120,10 @@
                 // Backspace
                 case 8:
                     if (currentLine.length > 0 && currentArrowIndex > 0) {
-                        var previousLine = currentLine
+                        let previousLine = currentLine
                         currentLine = currentLine.substring(0, currentArrowIndex - 1) + currentLine.substring(currentArrowIndex, currentLine.length)
                         replaceLineWithContent(currentLine, previousLine)
-                        for (var i = currentLine.length; i >= currentArrowIndex; i--) {
+                        for (let i = currentLine.length; i >= currentArrowIndex; i--) {
                             term.write('\x1b[D')
                         }
                         currentArrowIndex--
@@ -146,7 +146,7 @@
                 // Up
                 case 38:
                     if (currentLineIndex > 0 && currentLineIndex <= historyLines.length) {
-                        var previousLine = currentLine
+                        let previousLine = currentLine
                         currentLine = historyLines[currentLineIndex - 1]
                         currentLineIndex--
                         replaceLineWithContent(currentLine, previousLine)
@@ -156,14 +156,14 @@
                 // Down
                 case 40:
                     if (currentLineIndex >= 0 && currentLineIndex < historyLines.length - 1) {
-                        var previousLine = currentLine
+                        let previousLine = currentLine
                         currentLine = historyLines[currentLineIndex + 1]
                         currentLineIndex++
                         replaceLineWithContent(currentLine, previousLine)
                         currentArrowIndex = currentLine.length
                     }
                     else if (currentLineIndex === historyLines.length - 1) {
-                        var previousLine = currentLine
+                        let previousLine = currentLine
                         currentLine = ''
                         currentLineIndex++
                         replaceLineWithContent(currentLine, previousLine)
@@ -171,7 +171,7 @@
                     }
                     break
                 default:
-                    var previousLine = currentLine
+                    let previousLine = currentLine
                     if (currentArrowIndex < currentLine.length) {
                         currentLine = currentLine.substring(0, currentArrowIndex) + key.key + currentLine.substring(currentArrowIndex, currentLine.length)
                     }
@@ -180,7 +180,7 @@
                     }
                     currentArrowIndex++
                     replaceLineWithContent(currentLine, previousLine)
-                    for (var i = currentLine.length; i > currentArrowIndex; i--) {
+                    for (let i = currentLine.length; i > currentArrowIndex; i--) {
                         term.write('\x1b[D')
                     }
             }

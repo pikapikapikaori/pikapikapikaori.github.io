@@ -1,4 +1,5 @@
-// Docsify plugin functions
+import pagesData from '../config/tocdata.json'
+
 function plugin(hook, vm) {
     const tocMarkup = '<!-- toc -->'
 
@@ -38,14 +39,7 @@ function plugin(hook, vm) {
             baseUrl = '/'
         }
 
-        const getJson = (fileName) => {
-            let xhttp = new XMLHttpRequest()
-            xhttp.open('GET', `${fileName}.json`, false)
-            xhttp.send(null)
-            return JSON.parse(xhttp.response)
-        }
-
-        let pages = getJson('config/tocdata').filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
+        let pages = pagesData.filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
             const timeA = a.time
             const timeB = b.time
             

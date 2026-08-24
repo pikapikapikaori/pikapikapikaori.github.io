@@ -1,24 +1,15 @@
+import pathNameData from '../config/breadcrumbData.json.js'
+
 function plugin(hook, vm) {
     let isReadme = false
     
     hook.afterEach(function (html, next) {
 
-        const curTitleMarkup = '<!-- toc -->'
-
         const i18nPathList = ['en-us', 'jp',]
-
-        const getJson = (fileName) => {
-            let xhttp = new XMLHttpRequest()
-            xhttp.open('GET', `${fileName}.json`, false)
-            xhttp.send(null)
-            return JSON.parse(xhttp.response)
-        }
 
         let parts = location.href.split('#')[1].split('/').slice(1)
         let breadcrumb = '<ul class=\'breadcrumb\'>'
         let curPath = '/'
-
-        let pathNameData = getJson('config/breadcrumbData')
 
         if (!i18nPathList.includes(parts[0])) {
             if (parts.length == 1 && parts[0] == '') {

@@ -1,4 +1,4 @@
-[
+export default [
     {
         "title": "使用说明",
         "time": "",

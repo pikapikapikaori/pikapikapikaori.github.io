@@ -16,3 +16,8 @@
 .docsify-tabs__tab:not(.docsify-tabs__tab--active):hover {
     color: var(--theme-color, #ea6f5a);
 }
+
+/* Docsify Pagination */
+.pagination-item a:hover .pagination-item-title {
+    text-decoration-color: var(--theme-color, #ea6f5a) !important;
+}

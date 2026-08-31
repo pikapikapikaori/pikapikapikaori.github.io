@@ -57,7 +57,7 @@
                 本站，主站
             </div>
         </div>
-    </a><a class="toc-page-display-a" href="./pages/hexo/public/" target="_blank">
+    </a><a class="toc-page-display-a" href="./pages/hexo/public/index.html" target="_blank">
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>

@@ -27,6 +27,11 @@
                     "name": "MagnetDL",
                     "url": "https://www.magnetdl.com",
                     "target": "_blank"
+                  },
+                  {
+                    "name": "Jackett",
+                    "url": "https://github.com/Jackett",
+                    "target": "_blank"
                   }
                 ]
               },
@@ -144,7 +149,7 @@
                     "target": "_blank"
                   },
                   {
-                    "name": "SKIDROWCODEX.NET",
+                    "name": "SKIDROWCODEX",
                     "url": "https://www.skidrowcodex.net",
                     "target": "_blank"
                   },
@@ -299,7 +304,7 @@
                     "target": "_blank"
                   },
                   {
-                    "name": "Anilink | アニメをつくる人の仕事が見える場所",
+                    "name": "Anilink",
                     "url": "https://anilink.jp/ja",
                     "target": "_blank"
                   },
@@ -332,6 +337,11 @@
                     "name": "アイドル名鑑",
                     "url": "https://idollist.idolmaster-official.jp",
                     "target": "_blank"
+                  },
+                  {
+                    "name": "バンダイ ホビーサイト",
+                    "url": "https://bandai-hobby.net/item_all/?brand=rg&title=RG",
+                    "target": "_blank"
                   }
                 ]
               },
@@ -361,6 +371,11 @@
                   {
                     "name": "TV Calendar",
                     "url": "https://www.pogdesign.co.uk/cat/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Dolby Atmos® Home Theater Installation",
+                    "url": "https://www.dolby.com/siteassets/technologies/dolby-atmos/atmos-installation-guidelines-121318_r3.1.pdf",
                     "target": "_blank"
                   }
                 ]
@@ -404,7 +419,7 @@
                     "target": "_blank"
                   },
                   {
-                    "name": "トップページ ｜ ポケモン30周年ロゴ公式サイト",
+                    "name": "ポケモン30周年ロゴ公式サイト",
                     "url": "https://www.pokemon.co.jp/ex/30th_logo/",
                     "target": "_blank"
                   }
@@ -421,16 +436,6 @@
                   {
                     "name": "ACG盒子",
                     "url": "https://www.acgbox.link",
-                    "target": "_blank"
-                  }
-                ]
-              },
-              {
-                "category": "自部署 下載",
-                "links": [
-                  {
-                    "name": "Jackett",
-                    "url": "https://github.com/Jackett",
                     "target": "_blank"
                   }
                 ]
@@ -599,6 +604,11 @@
                 "category": "賽車 資料",
                 "links": [
                   {
+                    "name": "Subaru BRZ 25 說明書",
+                    "url": "https://www.subaru-china.cn/assets/pdf/support/owners/manual/brz/25/25BRZ_UserManuals.pdf?data=20241212",
+                    "target": "_blank"
+                  },
+                  {
                     "name": "86/BRZ - REVSPEED",
                     "url": "https://revspeed.jp/cat/86-brz/",
                     "target": "_blank"
@@ -614,33 +624,53 @@
                     "target": "_blank"
                   },
                   {
-                    "name": "スポーツカーの中古車販売・買取専門店|HMR",
+                    "name": "HMR",
                     "url": "https://hm-r.co.jp",
                     "target": "_blank"
                   }
                 ]
               },
               {
-                "category": "說明書",
+                "category": "相機 資料",
                 "links": [
                   {
-                    "name": "Subaru BRZ 25",
-                    "url": "https://www.subaru-china.cn/assets/pdf/support/owners/manual/brz/25/25BRZ_UserManuals.pdf?data=20241212",
-                    "target": "_blank"
-                  },
-                  {
-                    "name": "Dolby Atmos® Home Theater Installation",
-                    "url": "https://www.dolby.com/siteassets/technologies/dolby-atmos/atmos-installation-guidelines-121318_r3.1.pdf",
-                    "target": "_blank"
-                  },
-                  {
-                    "name": "D850",
+                    "name": "D850 說明書",
                     "url": "https://onlinemanual.nikonimglib.com/d850/zh-cn/",
                     "target": "_blank"
                   },
                   {
-                    "name": "Mamiya C330",
+                    "name": "尼康 F卡口镜头",
+                    "url": "https://www.nikon.com.cn/sc_CN/products/categories/f-mount.page#",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Mamiya C330 說明書",
                     "url": "https://galerie-photo.com/manuels/C330_english-instructions.pdf",
+                    "target": "_blank"
+                  }
+                ]
+              },
+              {
+                "category": "工具",
+                "links": [
+                  {
+                    "name": "かわいいフリー素材集",
+                    "url": "https://www.irasutoya.com",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "unlimited:waifu2x",
+                    "url": "https://unlimited.waifu2x.net",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Torrent downloads and distributions for IP",
+                    "url": "https://iknowwhatyoudownload.com/en/peer/",
+                    "target": "_blank"
+                  },
+                  {
+                    "name": "Free Citation Generator",
+                    "url": "https://quillbot.com/citation-generator?utm_medium=paid_search&utm_source=google&utm_campaign=citation_premium&campaign_type=search&gclid=Cj0KCQjwgLOiBhC7ARIsAIeetVArR_kFK4JMjO8zjim4_W_agv099TwsUux8lHc8AqTPkaEdhJuoy2kaAk36EALw_wcB",
                     "target": "_blank"
                   }
                 ]
@@ -651,16 +681,6 @@
                   {
                     "name": "能不能好好说话？",
                     "url": "https://lab.magiconch.com/nbnhhsh/",
-                    "target": "_blank"
-                  },
-                  {
-                    "name": "かわいいフリー素材集",
-                    "url": "https://www.irasutoya.com",
-                    "target": "_blank"
-                  },
-                  {
-                    "name": "unlimited:waifu2x",
-                    "url": "https://unlimited.waifu2x.net",
                     "target": "_blank"
                   }
                 ]

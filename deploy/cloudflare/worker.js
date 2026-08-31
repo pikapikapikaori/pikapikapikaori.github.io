@@ -2,7 +2,9 @@ export default {
     async fetch(request, env) {
         const url = new URL(request.url)
         const host = url.hostname
-        let filePath = url.pathname.substring(1)
+        let encodedFilePath = url.pathname.substring(1)
+
+        let filePath = decodeURIComponent(encodedFilePath);
 
         // rewrite host to corresponding domain
         switch (host) {

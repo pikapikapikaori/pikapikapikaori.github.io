@@ -1,8 +1,5 @@
 # 前言
 
-<!-- panels:start -->
-<!-- div:left-panel -->
-
 ## 一些小工具或项目
 
 下面是我开发的一些小工具或项目：
@@ -10,17 +7,6 @@
 - [docsify-gitalk-with-footer](https://github.com/pikapikapikaori/docsify-gitalk-with-footer)：用于 docsify 的一款插件，修复了原生添加 gitalk 时的一些问题。
 - [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count)：用于 docsify 的一款插件，为 docsify 添加字数统计，且支持 i18n 国际化。
 - [docsify-simple-dark-mode](https://github.com/pikapikapikaori/docsify-simple-dark-mode)：用于 docsify 的一款插件，为 dcosify 增加黑暗模式。
-
-<!-- div:right-panel -->
-
-<div class="main-page-right-panel-container">
-    <h4 class="main-page-about-me-title">语言使用情况</h4>
-    <div class="main-page-about-me-image-links">
-        <img src="https://github-readme-stats-pikapikapikaori.vercel.app/api/top-langs/?username=pikapikapikaori&langs_count=10&layout=compact&locale=cn&border_color=00000000&bg_color=00000000&theme=buefy" alt="语言使用情况" class="dynamic-picture-according-to-theme-mode ignore-view-full-image-img">
-    </div>
-</div>
-
-<!-- panels:end -->
 
 ## 一个玩具解释器
 

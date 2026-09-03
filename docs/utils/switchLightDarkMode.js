@@ -1,7 +1,6 @@
 // default values
 let switchLightDarkModeOptions = {
     useSwitchMode: true,
-    switchDynamicPicture: false,
     top: 130,
     right: 26,
 }
@@ -15,32 +14,6 @@ function plugin(hook, vm) {
     let themeModes = ['light', 'dark', 'auto',]
 
     let currentThemeModeIndex = 2
-
-    let changeDynamicImageThemeMode = function (currentTheme) {
-        let dynamicImageThemeName = 'buefy'
-        switch (currentTheme) {
-            case 'light':
-                dynamicImageThemeName = 'buefy'
-                break
-            case 'dark':
-                dynamicImageThemeName = 'material-palenight'
-                break
-            case 'auto':
-                dynamicImageThemeName = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'material-palenight' : 'buefy'
-                break
-        }
-
-        Array.from(document.getElementsByClassName('dynamic-picture-according-to-theme-mode')).forEach(img => {
-            let imgSrc = img.src
-
-            if (imgSrc.indexOf('theme=') > -1) {
-                img.src = imgSrc.split('theme=')[0] + 'theme=' + dynamicImageThemeName
-            }
-            else {
-                img.src = imgSrc + '&theme=' + dynamicImageThemeName
-            }
-        })
-    }
 
     let initializeWidgetSpan = function (el, topOffset) {
         el.className = 'page-right-tools-widgets-span'
@@ -88,10 +61,6 @@ function plugin(hook, vm) {
             }
 
             switchSpan.innerHTML = iconMap[currentTheme]
-        
-            if (!switchLightDarkModeOptions.switchDynamicPicture) return
-
-            changeDynamicImageThemeMode(isDark ? 'dark' : 'light')
         }
 
         setThemeMode(themeModes[currentThemeModeIndex])
@@ -242,14 +211,6 @@ function plugin(hook, vm) {
         }
 
         document.body.appendChild(showWidgetsSpan)
-    })
-
-    hook.afterEach(function (html, next) {
-        next(html)
-
-        if (!switchLightDarkModeOptions.switchDynamicPicture) return
-
-        changeDynamicImageThemeMode(themeModes[currentThemeModeIndex])
     })
 }
 

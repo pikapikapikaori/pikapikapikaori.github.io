@@ -1,0 +1,74 @@
+/* ============================================================
+    Minority language font family name: MinorityLang
+
+    For purpose of emergency, the order of fonts should be: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', 'PengliWenKai', serif;
+   ============================================================ */
+
+/* Siddham */
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/ApDevaSiddham.ttf') format('truetype');
+    unicode-range: 
+        /* Siddham: U+11580..U+115FF */
+        U+11580-115B5, U+115B8-115DD;
+}
+
+/* Devanagari */
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/Sahitya/Sahitya-Regular.ttf') format('truetype');
+    unicode-range: 
+        /* Devanagari: U+0900..U+097F */
+        U+0901-0954, U+0956-0970, U+0972-0977, U+0979-097F;
+}
+
+/* Hentaigana */
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/ninjal_hentaigana/ninjal_hentaigana.ttf') format('truetype');
+    unicode-range: 
+        /* Hiragana: U+3040..U+309F */
+        U+3099-309A,
+        /* Kana Supplement: U+1B000..U+1B0FF */
+        U+1B001-1B0FF,
+        /* Kana Extended-A: U+1B000..U+1B0FF */
+        U+1B100-1B11E;
+}
+
+/* Manchu */
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf') format('truetype');
+    unicode-range: 
+        /* Mongolian: U+1800..U+18AF */
+        U+1807-180E, U+1820, U+1823, U+1828-182A, U+182E-1830, U+1834-1838, U+183A, U+185D-1877;
+}
+
+/* Hebrew */
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/Tinos/Tinos-Regular.ttf') format('truetype');
+    unicode-range: 
+        /* Hebrew: U+0590..U+05FF */
+        U+0591-05C7, U+05D0-05EA, U+05F0-05F4,
+        /* Alphabetic Presentation Forms: U+FB00..U+FB4F */
+        U+FB1D-FB36, U+FB38-FB3C, U+FB3E, U+FB40-FB41, U+FB43-FB44, U+FB46-FB4F;
+}
+
+/* Yijing hexagrams & Tai Xuan Jing */
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/PengliWenKai-Regular.ttf') format('truetype');
+    unicode-range: 
+        /* Yijing hexagram symbols: U+4DC0..U+4DFF */
+        U+4DC0-4DFF,
+        /* Tai Xuan Jing symbols: U+1D300..U+1D35F */
+        U+1D300-1D35F,
+        /* Mahjong tile symbols: U+1F000..U+1F02F */
+        U+1F000-1F02F,
+        /* Counting Rod numerals: U+1D360..U+1D37F */
+        U+1D360-1D37F,
+        /* Ideographic symbols and punctuation: U+16FE0..U+16FFF */
+        U+16FE2-16FE3;
+    size-adjust: 85%;
+}

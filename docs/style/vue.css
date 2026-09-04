@@ -16,6 +16,8 @@
     --global-background-blur: rgba(0, 0, 0, .1);
     --global-theme-color-blur: #c7a2ec1a;
     --global-brightness-blur: 0.85;
+    --global-font: 'GlobalSerif', serif;
+    --global-font-serif: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', 'PengliWenKai', serif;
 }
 
 ::-webkit-scrollbar {
@@ -94,7 +96,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     color: #34495e;
-    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
+    font-family: var(--global-font, serif);
     font-size: 16px;
     letter-spacing: 0;
     margin: 0;
@@ -103,7 +105,7 @@ body {
 
 button,
 textarea {
-    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
+    font-family: var(--global-font, serif);
 }
 
 img {

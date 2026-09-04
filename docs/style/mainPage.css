@@ -15,7 +15,7 @@ section.cover p {
 
 /* Language Support */
 .minority-language-font {
-    font-family: 'GentiumPlus', 'Sahitya', 'ApDevaSiddham', serif;
+    font-family: 'GentiumPlus', serif;
 }
 
 .minority-language-font-ranjana {
@@ -36,14 +36,6 @@ section.cover p {
 
 .minority-language-font-cjkext {
     font-family: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
-}
-
-.minority-language-font-hebrew {
-    font-family: 'Tinos', serif;
-}
-
-.minority-language-font-manchu {
-    font-family: 'FuYongShuKai', serif;
 }
 
 /* Different Writing Direction div */

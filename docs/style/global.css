@@ -1,6 +1,6 @@
 /* Gitalk */
 .markdown-body {
-    font-family: 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'Ninjal-Hentaigana', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif !important;
+    font-family: var(--global-font, serif) !important;
 }
 
 /* Docsify Copy Code */

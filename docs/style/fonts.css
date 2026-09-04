@@ -108,6 +108,13 @@
     src: url('./fonts/Shirakawa_v1_101/ShirakawaTenbun2.ttf');
 }
 
+/* Old Chinese Symbols */
+@font-face {
+    font-family: 'PengliWenKai';
+    src: url('./fonts/PengliWenKai-Regular.ttf');
+    size-adjust: 85%; 
+}
+
 /* Japanese */
 
 @font-face {

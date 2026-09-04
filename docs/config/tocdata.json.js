@@ -387,7 +387,7 @@ export default [
     {
         "title": "字体测试",
         "time": "2026.08.13",
-        "editedTime": "2026.08.17",
+        "editedTime": "2026.09.04",
         "cover": "/writings/_media/FontTest-20260813/cover-picture.jpg",
         "href": "/writings/FontTest-20260813",
         "baseUrl": "/writings"

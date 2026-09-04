@@ -10,7 +10,7 @@
 - **备份：** backup/[yymmdd] | bakp:
 - **新特性、功能：** feature/[description] | feat:
 - **修正缺陷：** fix/[description] | fix:
-- **重构：** refactor/[description] | refc:
+- **重构、注释：** refactor/[description] | refc:
 - **性能优化：** performance/[description] | perf:
 - **配置、脚本：** config/[description] | conf:
 - **文档：** document/[description] | docs:

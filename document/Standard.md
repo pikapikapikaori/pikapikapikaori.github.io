@@ -10,7 +10,7 @@ English | [简体中文](./Standard_zh-cn.md)
 - **Backup:** backup/[yymmdd] | bakp:
 - **New feature:** feature/[description] | feat:
 - **Bug fixing:** fix/[description] | fix:
-- **Refactor:** refactor/[description] | refc:
+- **Refactor & Annotations:** refactor/[description] | refc:
 - **Performance:** performance/[description] | perf:
 - **Config & Scripts:** config/[description] | conf:
 - **Document:** document/[description] | docs:

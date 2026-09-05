@@ -52,7 +52,16 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         if (!isReadme) {
-            document.getElementsByClassName('breadcrumb')[0].getElementsByClassName('active')[0].innerHTML = document.getElementById('main').getElementsByTagName('h1')[0].childNodes[0].childNodes[0].innerHTML
+            let pageTitle = document.getElementById('main').getElementsByTagName('h1')[0].childNodes[0].childNodes[0].innerHTML
+
+            let breadcrumb =document.getElementsByClassName('breadcrumb')[0]
+
+            if (pageTitle === '404') {
+                breadcrumb.innerHTML = ''
+            }
+            else {
+                breadcrumb.getElementsByClassName('active')[0].innerHTML = pageTitle
+            }
         }
     })
 }

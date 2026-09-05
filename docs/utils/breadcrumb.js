@@ -57,7 +57,16 @@ function plugin(hook, vm) {
             let breadcrumb =document.getElementsByClassName('breadcrumb')[0]
 
             if (pageTitle === '404') {
+                let homePageLi = breadcrumb.querySelector('li:first-child')
+
                 breadcrumb.innerHTML = ''
+
+                breadcrumb.appendChild(homePageLi.cloneNode(true))
+
+                let notFoundLi = document.createElement('li')
+                notFoundLi.className = 'active'
+                notFoundLi.textContent = pageTitle
+                breadcrumb.appendChild(notFoundLi)
             }
             else {
                 breadcrumb.getElementsByClassName('active')[0].innerHTML = pageTitle

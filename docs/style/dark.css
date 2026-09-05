@@ -16,7 +16,7 @@
     --global-background-blur: rgba(255, 255, 255, .1);
     --global-theme-color-blur: #c7a2ec1a;
     --global-brightness-blur: 0.85;
-    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'QuanZiKuKai-plus', serif;
+    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', serif;
 }
 
 ::-webkit-scrollbar {

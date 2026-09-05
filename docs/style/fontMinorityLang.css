@@ -72,3 +72,81 @@
         U+16FE2-16FE3;
     size-adjust: 85%;
 }
+
+@font-face {
+    font-family: 'MinorityLang';
+    src: url('./fonts/Gentium_Plus/GentiumPlus-Regular.ttf') format('truetype');
+    unicode-range: 
+        /* Latin Extended-A: U+0100..U+017F  */
+        U+0138, U+014A-014B,
+        /* Latin Extended-B: U+0180..U+024F  */
+        U+0180-0191, U+0193-0217, U+021C-0236, U+0238-024F,
+        /* Phonetic Extensions: U+1D00..U+1D7F */
+        U+1D00-1D7F,
+        /* Phonetic Extensions Supplement: U+1D80..U+1DBF */
+        U+1D80-1DBF,
+        /* IPA Extensions U+0250..U+02AF */
+        U+0250-02AF,
+        /* Spacing Modifier Letters: U+02B0..U+02FF */
+        U+02B0-02FF,
+        /* Combining Diacritical Marks: U+0300..U+036F */
+        U+0300-0320, U+0323-033F, U+0342-036F,
+        /* Greek and Coptic: U+0370..U+03FF */
+        U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03E1, U+03F0-03FF, 
+        /* Cyrillic: U+0400..U+04FF */
+        U+0400-045F, U+0462-0463, U+0472-0475, U+048A-04FF,
+        /* Cyrillic Supplement: U+0500..U+052F */
+        U+0500-052F,
+        /* Combining Diacritical Marks Extended: U+1AB0..U+1AFF */
+        U+1AB0-1ABA, 
+        /* Combining Diacritical Marks Supplement: U+1DC0..U+1DFF */
+        U+1DC2, U+1DC4-1DCD, U+1DF5, U+1DFD-1DFF,
+        /* Greek Extended: U+1F00..U+1FFF */
+        U+1F00-1F15, U+1F18-1F1D, U+1F20-1F45, U+1F48-1F4D, U+1F50-1F57, U+1F59, U+1F5B, U+1F5D, U+1F5F-1F7D, U+1F80-1FB4, U+1FB6-1FC4, U+1FC6-1FD3, U+1FD6-1FDB, U+1FDD-1FEF, U+1FF2-1FF4, U+1FF6-1FFE,
+        /* General Punctuation: U+2000..U+206F */
+        U+2016-2017, U+2023-2025, U+2027-202E, U+2032-2038, U+203B-203C, U+203F-2041, U+2053, U+2057, U+2061-2063, U+206A-206F, 
+        /* Superscripts and Subscripts: U+2070..U+209F */
+        U+206A-2071, U+2074-208E, U+2090-209C, 
+        /* Letterlike Symbols: U+2100..U+214F */
+        U+210C, U+2113, U+2116-2117, U+211F, U+2122-2123, U+2126, U+212D, U+2135, U+214F, 
+        /* Number Forms: U+2150..U+218F */
+        U+2153-2189, 
+        /* Currency Symbols: U+20A0..U+20CF */
+        U+20A0-20BF,
+        /* Combining Diacritical Marks for Symbols: U+20D0..U+20FF */
+        U+20E5, U+20EC-20EF, 
+        /* Arrows: U+2190..U+21FF */
+        U+2190-219B, U+21A8, U+21D0-21D5, 
+        /* Mathematical Operators: U+2200..U+22FF */
+        U+2202-2206, U+220F, U+2211-2213, U+2219-221A, U+221E, U+2225-2226, U+222B, U+2234-2235, U+223C, U+2248, U+225F-2262, U+2264-2265, U+2282-2287, 
+        /* Miscellaneous Technical: U+2300..U+23FF */
+        U+2308-230B, U+231C-231F, U+2329-232A, U+239B-23AD, 
+        /* Control Pictures: U+2400..U+243F */
+        U+2423, 
+        /* Geometric Shapes: U+25A0..U+25FF */
+        U+25CA, U+25CC, 
+        /* Miscellaneous Symbols: U+2600..U+26FF */
+        U+2640, U+2642, U+266D, U+266F, 
+        /* Dingbats: U+2700..U+27BF */
+        U+2713, U+274D, U+27E6-27E9, 
+        /* Latin Extended-C: U+2C60..U+2C7F */
+        U+2C60-2C7F, 
+        /* Coptic: U+2C80..U+2CFF */
+        U+2C88, 
+        /* Supplemental Punctuation: U+2E00..U+2E7F */
+        U+2E00-2E0D, U+2E13-2E14, U+2E17, U+2E22-2E25, U+2E3A-2E3B,
+        /* Modifier Tone Letters: U+A700..U+A71F */
+        U+A700-A71F,
+        /* Latin Extended-D: U+A720..U+A7FF */
+        U+A720-A799, U+A7A0-A7B9, U+A7C4-A7C6, U+A7F7-A7FF, 
+        /* Latin Extended-E: U+AB30..U+AB6F */
+        U+AB30, U+AB53, U+AB5C, U+AB5E, U+AB64-AB65, 
+        /* Kayah Li: U+A900..U+A92F */
+        U+A92E, 
+        /* Combining Half Marks: U+FE20..U+FE2F */
+        U+FE20-FE23,
+        /* Latin Extended-F: U+10780..U+107BF */
+        U+10783, U+1078F, U+10791, U+10795, U+107A0, U+107A2-107A3, U+107B2,
+        /* Latin Extended-G: U+1DF00..U+1DFFF */
+        U+1DF00-1DF1E;
+}

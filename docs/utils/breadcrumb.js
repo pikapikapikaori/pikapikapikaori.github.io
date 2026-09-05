@@ -52,7 +52,25 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         if (!isReadme) {
-            document.getElementsByClassName('breadcrumb')[0].getElementsByClassName('active')[0].innerHTML = document.getElementById('main').getElementsByTagName('h1')[0].childNodes[0].childNodes[0].innerHTML
+            let pageTitle = document.getElementById('main').getElementsByTagName('h1')[0].childNodes[0].childNodes[0].innerHTML
+
+            let breadcrumb =document.getElementsByClassName('breadcrumb')[0]
+
+            if (pageTitle === '404') {
+                let homePageLi = breadcrumb.querySelector('li:first-child')
+
+                breadcrumb.innerHTML = ''
+
+                breadcrumb.appendChild(homePageLi.cloneNode(true))
+
+                let notFoundLi = document.createElement('li')
+                notFoundLi.className = 'active'
+                notFoundLi.textContent = pageTitle
+                breadcrumb.appendChild(notFoundLi)
+            }
+            else {
+                breadcrumb.getElementsByClassName('active')[0].innerHTML = pageTitle
+            }
         }
     })
 }

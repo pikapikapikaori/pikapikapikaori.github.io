@@ -1,11 +1,5 @@
+# macos
 **/.DS_Store
-**/node_modules
-**/package-lock.json
-**/yarn.lock
-
-# local env files
-.env.local
-.env.*.local
 
 # Editor directories and files
 .idea
@@ -16,8 +10,20 @@
 *.sln
 *.sw?
 
+# node.js
+**/node_modules
+**/package-lock.json
+**/yarn.lock
+
+# python
+**/.venv
+
 # hexo
 docs/pages/hexo/**/Thumbs.db
 docs/pages/hexo/**/db.json
 docs/pages/hexo/**/*.log
 docs/pages/hexo/**/.deploy*/
+
+# local env files
+.env.local
+.env.*.local

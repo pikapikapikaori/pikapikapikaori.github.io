@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import argparse
 from fontTools.ttLib import TTFont
 
 # ========== 核心功能 ==========
@@ -56,7 +57,6 @@ def process_single_file(font_path, output_dir="out"):
         return
     name, range_str = result
     os.makedirs(output_dir, exist_ok=True)
-    # 修改点：扩展名改为 .md
     md_filename = os.path.splitext(name)[0] + ".md"
     md_path = os.path.join(output_dir, md_filename)
     with open(md_path, "w", encoding="utf-8") as f:
@@ -71,12 +71,9 @@ def process_single_file(font_path, output_dir="out"):
 def process_folder(folder_path, output_file=None):
     """遍历文件夹，汇总所有字体的 unicode-range 到一个 Markdown 文件"""
     if not output_file:
-        # 默认在文件夹内生成 summary.md
         output_file = os.path.join(folder_path, "summary.md")
-    # 确保输出目录存在
     os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
 
-    # 遍历所有字体文件
     font_exts = ('.ttf', '.otf', '.woff', '.woff2')
     font_files = [f for f in os.listdir(folder_path) if f.lower().endswith(font_exts)]
     if not font_files:
@@ -97,36 +94,54 @@ def process_folder(folder_path, output_file=None):
         print("❌ 没有可用的字体范围")
         return
 
-    # 写入汇总 Markdown
     with open(output_file, "w", encoding="utf-8") as f:
         f.write("# 字体 Unicode 范围汇总（自动生成）\n\n")
         f.write(f"**源文件夹**: `{folder_path}`\n\n")
         f.write("可直接复制各 `unicode-range` 到你的 `@font-face` 中。\n\n")
-        f.write("---\n\n")  # 开头分隔线
+        f.write("---\n\n")
         for idx, (name, range_str) in enumerate(results):
             f.write(f"## {idx+1}. 字体: `{name}`\n\n")
             f.write(f"```css\n")
             f.write(f"unicode-range: {range_str};\n")
             f.write(f"```\n\n")
-            if idx != len(results) - 1:  # 最后一个不追加分隔线
+            if idx != len(results) - 1:
                 f.write("---\n\n")
     print(f"✅ 汇总导出: {output_file}")
 
-# ========== 主程序 ==========
+# ========== 主程序（带 argparse） ==========
 def main():
-    if len(sys.argv) < 2:
-        print("用法:")
-        print("  单文件模式: python export_unicode_md.py <字体文件> [输出目录]")
-        print("  文件夹模式: python export_unicode_md.py <字体文件夹> [输出文件路径]")
-        print("\n示例:")
-        print("  python export_unicode_md.py 字体.ttf          # 输出到 out/字体.md")
-        print("  python export_unicode_md.py 字体.ttf ./css    # 输出到 ./css/字体.md")
-        print("  python export_unicode_md.py ./fonts           # 生成 ./fonts/summary.md")
-        print("  python export_unicode_md.py ./fonts ./all.md  # 生成 ./all.md")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description='分析字体文件（TTF/OTF/WOFF/WOFF2）并提取其 Unicode 覆盖范围，生成 CSS unicode-range 的 Markdown 文件。',
+        epilog='示例:\n'
+               '  %(prog)s 字体.ttf                      # 输出到 out/字体.md\n'
+               '  %(prog)s 字体.ttf -o ./css            # 输出到 ./css/字体.md\n'
+               '  %(prog)s ./fonts                      # 生成 ./fonts/summary.md\n'
+               '  %(prog)s ./fonts -o all.md           # 生成 ./all.md\n'
+               '  %(prog)s -h                          # 显示此帮助',
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        'input',
+        help='要处理的字体文件路径或包含字体文件的文件夹路径'
+    )
+    parser.add_argument(
+        '-o', '--output',
+        help='输出位置：单文件模式指定输出目录（默认 "out"），文件夹模式指定输出文件路径（默认 "<文件夹>/summary.md"）',
+        default=None
+    )
+    parser.add_argument(
+        '-v', '--verbose',
+        action='store_true',
+        help='显示详细处理信息（目前仅用于调试）'
+    )
+    args = parser.parse_args()
 
-    input_path = sys.argv[1]
-    output_path = sys.argv[2] if len(sys.argv) >= 3 else None
+    input_path = args.input
+    output_path = args.output
+
+    if not os.path.exists(input_path):
+        print(f"❌ 错误：'{input_path}' 不存在")
+        sys.exit(1)
 
     if os.path.isdir(input_path):
         # 文件夹模式

@@ -148,7 +148,6 @@ done
 # ---------- 清理远程分支 ----------
 echo ""
 echo ">>> 处理远程分支..."
-# 修复2：只去掉开头的 "origin/"，保留完整路径（如 fix/global-font）
 for branch in $(git branch -r --merged "origin/master" | grep -v "HEAD" | sed 's/^[[:space:]]*origin\///'); do
     if is_protected "$branch"; then
         echo "  [跳过] $branch (保护分支)"

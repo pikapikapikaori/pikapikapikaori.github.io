@@ -172,8 +172,8 @@ div:has(.writing-direction-vertical-div) {
 
 /* Cover */
 .page-sidebar-title-class {
-    font-size: 1.65rem;
-    font-family: 'MRT', cursive;
+    font-size: 2rem;
+    font-family: 'KouzanBrushFontSousyo', cursive;
     color: var(--theme-color, #ea6f5a);
 }
 

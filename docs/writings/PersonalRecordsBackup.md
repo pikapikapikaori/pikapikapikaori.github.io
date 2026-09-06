@@ -2,11 +2,11 @@
 
 > 本界面的数据只用作备份，每月更新一次。\
 > 详细可以访问我的[豆瓣](https://www.douban.com/people/160339816)与[Bangumi](https://bgm.tv/user/inuyasha559)。\
-> ACGN 的最新数据备份网页版见[此处](writings/_media/PersonalRecordsBackup/bgm-latest.html ':ignore')。\
-> 最后更新时间：{docsify-last-updated}
+> ACGN 的最新数据备份网页版见[此处](writings/_media/PersonalRecordsBackup/bgm-latest.html ':ignore')。
 
 | 最后更新时间 |                                         书 csv 文件                                          |                                         电影 csv 文件                                          |                                         ACGN json 文件                                         |
 | :----------: | :------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+|  2026.09.06  | [db-book-20260906.csv](writings/_media/PersonalRecordsBackup/db-book-20260906.csv ':ignore') | [db-movie-20260906.csv](writings/_media/PersonalRecordsBackup/db-movie-20260906.csv ':ignore') | [bgm-20260906.json.zip](writings/_media/PersonalRecordsBackup/bgm-20260906.json.zip ':ignore') |
 |  2026.06.04  | [db-book-20260604.csv](writings/_media/PersonalRecordsBackup/db-book-20260604.csv ':ignore') | [db-movie-20260604.csv](writings/_media/PersonalRecordsBackup/db-movie-20260604.csv ':ignore') | [bgm-20260604.json.zip](writings/_media/PersonalRecordsBackup/bgm-20260604.json.zip ':ignore') |
 |  2026.01.05  | [db-book-20260105.csv](writings/_media/PersonalRecordsBackup/db-book-20260105.csv ':ignore') | [db-movie-20260105.csv](writings/_media/PersonalRecordsBackup/db-movie-20260105.csv ':ignore') | [bgm-20260105.json.zip](writings/_media/PersonalRecordsBackup/bgm-20260105.json.zip ':ignore') |
 |  2025.11.10  | [db-book-20251110.csv](writings/_media/PersonalRecordsBackup/db-book-20251110.csv ':ignore') | [db-movie-20251110.csv](writings/_media/PersonalRecordsBackup/db-movie-20251110.csv ':ignore') | [bgm-20251110.json.zip](writings/_media/PersonalRecordsBackup/bgm-20251110.json.zip ':ignore') |

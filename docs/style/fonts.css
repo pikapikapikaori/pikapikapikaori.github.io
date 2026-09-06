@@ -271,9 +271,7 @@
 /* Latin */
 @font-face {
     font-family: 'Menlo';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Menlo'), url('../sources/fonts/Menlo-Regular.woff') format('woff');
+    src: local('Menlo'), url('./fonts/Menlo-Regular.woff2');
 }
 
 @font-face {

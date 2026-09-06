@@ -65,7 +65,6 @@
     position: absolute;
     text-align: center;
     color: var(--theme-color, #ea6f5a);
-    font-family: 'Menlo', monospace;
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji) {

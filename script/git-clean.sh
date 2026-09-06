@@ -30,7 +30,7 @@ show_help() {
 说明:
     - 删除条件：① 分支已完全合并到 origin/master
                 ② 分支名匹配指定的字符串（默认包含，若加 -p 则前缀）
-    - 同时清理本地分支和远程（$REMOTE）分支
+    - 同时清理本地分支和远程（${REMOTE:-origin}）分支
     - 保护分支 (${PROTECTED[@]}) 不会被删除
     - 脚本会自动切换到保护分支，避免删除当前所在分支
     - 本地分支使用 git branch -d（安全删除，仅当已合并时成功）
@@ -148,7 +148,7 @@ done
 # ---------- 清理远程分支 ----------
 echo ""
 echo ">>> 处理远程分支..."
-for branch in $(git branch -r --merged "origin/master" | grep -v "HEAD" | sed 's/.*\///'); do
+for branch in $(git branch -r --merged "origin/master" | grep -v "HEAD" | sed 's/^[[:space:]]*origin\///'); do
     if is_protected "$branch"; then
         echo "  [跳过] $branch (保护分支)"
         continue

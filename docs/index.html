@@ -55,7 +55,7 @@
         '/': '404/_404.md'
       },
 
-      // tab插件设置
+      // tab 插件设置
       tabs: {
         persist: false, // default
         sync: false, // default
@@ -132,14 +132,14 @@
         }
       },
 
-      // 支持mermaid插件设置
+      // 支持 mermaid 插件设置
       mermaidConfig: {
         querySelector: ".mermaid",
       },
 
 
       // 自用插件
-      // 页面添加gitalk，并在最底端添加footer，使得gitalk下方有空间
+      // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
       gitalkWithFooter: {
         footerInnerHtml: "<div style='text-align: center;max-width: 800px;width: 80%;align-self: center;padding: 30px 15px 20px;margin: 0 auto'><div style='border-top: 1px solid var(--global-border-default-color,#eee);'><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p><div/></div>",
         gitalkConfig: {
@@ -203,7 +203,7 @@
   <!-- Docsify v4 -->
   <script src="./sources/npm/docsify@4/docsify@4"></script>
 
-  <!-- Docsify docsify-tabs插件 (latest v1.x.x) -->
+  <!-- Docsify docsify-tabs 插件 (latest v1.x.x) -->
   <script src="./sources/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
 
   <!-- Docsify 脚注 -->
@@ -218,7 +218,7 @@
   <!-- Docsify 图片注释插件 -->
   <script src="./sources/unpkg.com/@h-hg/docsify-image-caption/dist/docsify-image-caption.min.js"></script>
 
-  <!-- Docsify LATEX插件 -->
+  <!-- Docsify LATEX 插件 -->
   <script src="./sources/npm/katex@latest/dist/katex.min.js"></script>
   <link rel="stylesheet" href="./sources/npm/katex@latest/dist/katex.min.css" />
   <script src="./sources/npm/marked@4/marked@4"></script>
@@ -231,7 +231,7 @@
   <!-- Latest v2.x.x -->
   <script src="./sources/unpkg.com/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
 
-  <!-- Docsify 支持mermaid插件 -->
+  <!-- Docsify 支持 mermaid 插件 -->
   <!-- Import D3.js -->
   <script src="./sources/npm/d3@7"></script>
   <!-- Import Mermaid -->
@@ -268,7 +268,7 @@
   <script src="./sources/npm/@sy-records/docsify-loading/lib/index.min.js"></script>
 
 
-  <!-- Live2D模型 Cubism 4 -->
+  <!-- Live2D 模型 Cubism 4 -->
   <script src="./sources/cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
   <script src="./sources/npm/pixi.js@5.2.1/dist/pixi.min.js"></script>
   <script src="./sources/npm/pixi-live2d-display/dist/cubism4.min.js"></script>
@@ -294,8 +294,8 @@
 
 
   <!-- 自用插件 -->
-  <!-- 添加gitalk与footer -->
-  <!-- GitTalk评论 -->
+  <!-- 添加 gitalk 与 footer -->
+  <!-- GitTalk 评论 -->
   <link rel="stylesheet" href="./sources/npm/gitalk/dist/gitalk.css">
   <link rel="stylesheet" href="./style/plugins/gitalkWithFooter.css">
   <script src="./sources/npm/gitalk/dist/gitalk.min.js"></script>
@@ -333,7 +333,7 @@
   <link rel="stylesheet" href="./style/plugins/enhancedSearch.css">
   <script src="./utils/enhancedSearch.js"></script>
 
-  <!-- 添加更改html lang信息 -->
+  <!-- 添加更改 html lang 信息 -->
   <script src="./utils/adjustHtmlLang.js"></script>
 
   <!-- 添加自动添加目录页 -->
@@ -343,9 +343,13 @@
   <!-- 添加链接标记样式 -->
   <script src="./utils/addSvgToLinks.js"></script>
 
-  <!-- 添加breadcrumb头 -->
+  <!-- 添加 breadcrumb 头 -->
   <link rel="stylesheet" href="./style/plugins/breadcrumb.css">
   <script type="module" src="./utils/breadcrumb.js"></script>
+
+  <!-- 添加替换 Markdown 中的 Html 注释 -->
+  <link rel="stylesheet" href="./style/plugins/replaceHtmlAnnotation.css">
+  <script type="module" src="./utils/replaceHtmlAnnotation.js"></script>
 </body>
 
 </html>

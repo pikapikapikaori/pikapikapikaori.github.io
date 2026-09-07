@@ -160,6 +160,11 @@ function plugin(hook, vm) {
         }
         next(html)
     })
+
+    hook.doneEach(function () {
+        // Set first brief comment year to open.
+        document.querySelector('.brief-comments-container details:first-of-type').open = true
+    })
 }
 
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)

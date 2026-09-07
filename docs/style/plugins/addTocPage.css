@@ -1,12 +1,14 @@
 .toc-page-display-a {
     border-radius: var(--global-el-border-radius, 10px);
     display: inline-block;
+    vertical-align: top;
     width: calc(50% - 25px);
     margin-bottom: 10px;
     margin-top: 5px;
     text-align: center;
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
-    min-height: 270px;
+    min-height: 300px;
+    max-height: 300px;
     text-decoration: none;
 }
 

@@ -15,7 +15,7 @@
 > To thy high requiem become a sod.\
 > — John Keats, "Ode to a Nightingale"
 
-Dream of becoming a person who holds love of wisdom and beauty.
+Dream of becoming a person who holds love for wisdom and beauty.
 
 ## About This Blog
 

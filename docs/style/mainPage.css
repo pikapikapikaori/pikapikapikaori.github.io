@@ -416,6 +416,7 @@ div:has(.writing-direction-vertical-div) {
     margin-left: 30px;
     margin-right: 10px;
     padding: 0 20px;
+    min-width: 100%;
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     border: 1px solid var(--theme-color, #ea6f5a);
     border-radius: var(--global-el-border-radius, 10px);

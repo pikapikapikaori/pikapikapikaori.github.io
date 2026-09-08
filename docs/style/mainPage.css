@@ -195,13 +195,8 @@ div:has(.writing-direction-vertical-div) {
 /* Multi-Images Container */
 .multi-images-container-section>p {
     line-height: 0;
-
-    -webkit-column-count: 3 !important;
-    -webkit-column-gap: 5px !important;
-    -moz-column-count: 3 !important;
-    -moz-column-gap: 5px !important;
-    column-count: 3 !important;
-    column-gap: 5px !important;
+    column-count: 3;
+    column-gap: 5px;
 }
 
 .multi-images-container-section>p>img {
@@ -214,17 +209,13 @@ div:has(.writing-direction-vertical-div) {
 
 @media screen and (max-width: 1000px) {
     .multi-images-container-section>p {
-        -moz-column-count: 2 !important;
-        -webkit-column-count: 2 !important;
-        column-count: 2 !important;
+        column-count: 2;
     }
 }
 
 @media screen and (max-width: 400px) {
     .multi-images-container-section>p {
-        -moz-column-count: 1 !important;
-        -webkit-column-count: 1 !important;
-        column-count: 1 !important;
+        column-count: 1;
     }
 }
 
@@ -251,18 +242,18 @@ div:has(.writing-direction-vertical-div) {
     overflow: hidden;
 }
 
-.main-page-about-me-title {
-    margin: 10px 0 5px !important;
-    font-size: 1.8rem !important;
+.main-page-right-panel-container .main-page-about-me-title {
+    margin: 10px 0 5px;
+    font-size: 1.8rem;
 }
 
-.main-page-about-me-description {
-    margin: 0 0 10px !important;
-    font-size: 1.4rem !important;
+.main-page-right-panel-container .main-page-about-me-description {
+    margin: 0 0 10px;
+    font-size: 1.4rem;
 }
 
-.main-page-about-me-links {
-    margin: 0 0 10px !important;
+.main-page-right-panel-container .main-page-about-me-links {
+    margin: 0 0 10px;
 }
 
 .main-page-about-me-links>a {
@@ -276,6 +267,6 @@ div:has(.writing-direction-vertical-div) {
     -webkit-transform: scale(1.3);
 }
 
-.main-page-about-me-image-links {
-    margin: 0 0 10px !important;
+.main-page-right-panel-container .main-page-about-me-image-links {
+    margin: 0 0 10px;
 }

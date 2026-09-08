@@ -71,20 +71,21 @@ img:not(.ignore-view-full-image-img):not(.emoji) {
     cursor: pointer;
 }
 
-.gt-comment-avatar>img {
-    cursor: default !important;
-}
-
-.gt-header-avatar>img {
-    cursor: default !important;
-}
-
 img:not(.ignore-view-full-image-img):not(.emoji):hover {
     filter: brightness(var(--global-brightness-blur, 0.85));
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji) {
     transition: 0.4s;
+}
+
+/* Gitalk */
+.gt-comment-avatar>img {
+    cursor: default !important;
+}
+
+.gt-header-avatar>img {
+    cursor: default !important;
 }
 
 .gt-avatar img:hover, .gt-comment-avatar img:hover {

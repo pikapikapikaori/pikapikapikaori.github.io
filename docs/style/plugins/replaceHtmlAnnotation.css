@@ -172,8 +172,8 @@
     margin-top: 10px;
     display: flex;
     overflow: hidden;
-    height: 170px;
-    padding: 5px;
+    height: 200px;
+    padding: 10px;
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     border-radius: var(--global-el-border-radius, 10px);
     border: 1px solid var(--theme-color, #ea6f5a);

@@ -4,661 +4,1098 @@
 
 #### **Movie**
 
-<div class="personal-ten-best-container">
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-1.jpg" alt="Le mépris">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Le mépris</h5>
-                    <p>Le mépris</p>
-                    <p>1963 &ensp; France / Italy</p>
-                    <p>Jean-Luc Godard</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-2.jpg" alt="Watchmen">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Watchmen</h5>
-                    <p>Watchmen</p>
-                    <p>2009 &ensp; America</p>
-                    <p>Zack Snyder</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-3.jpg" alt="Blade Runner">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Blade Runner</h5>
-                    <p>Blade Runner</p>
-                    <p>1982 &ensp; America</p>
-                    <p>Ridley Scott</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-4.jpg" alt="Once Upon a Time in America">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Once Upon a Time in America</h5>
-                    <p>Once Upon a Time in America</p>
-                    <p>1984 &ensp; America / Italy</p>
-                    <p>Sergio Leone</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-5.jpg" alt="四月物語">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>四月物語</h5>
-                    <p>Shigatsu monogatari</p>
-                    <p>1998 &ensp; Japan</p>
-                    <p>Shunji Iwai</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-6.jpg" alt="The Purple Rose of Cairo">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>The Purple Rose of Cairo</h5>
-                    <p>The Purple Rose of Cairo</p>
-                    <p>1985 &ensp; America</p>
-                    <p>Woody Allen</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-7.jpg" alt="Pulp Fiction">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Pulp Fiction</h5>
-                    <p>Pulp Fiction</p>
-                    <p>1994 &ensp; America</p>
-                    <p>Quentin Tarantino</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-8.jpg" alt="大话西游之月光宝盒">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>大话西游之月光宝盒</h5>
-                    <p>Sai yau gei: Yut gwong bou haap</p>
-                    <p>1995 &ensp; China</p>
-                    <p>Jeffrey Lau</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-8-2.jpg" alt="大话西游之大圣娶亲">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>大话西游之大圣娶亲</h5>
-                    <p>Sai yau gei: Sin leui kei yun</p>
-                    <p>1995 &ensp; China</p>
-                    <p>Jeffrey Lau</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-9.jpg" alt="リンダ リンダ リンダ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>リンダ リンダ リンダ</h5>
-                    <p>Linda Linda Linda</p>
-                    <p>2005 &ensp; Japan</p>
-                    <p>Nobuhiro Yamashita</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-movie-10.jpg" alt="東邪西毒">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>東邪西毒</h5>
-                    <p>Ashes of Time Redux</p>
-                    <p>2008 &ensp; China</p>
-                    <p>Kar Wai Wong</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- personal-ten:start -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Le mépris](_media/PersonalTenBest/personalTenBest-movie-1.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Le mépris
+
+Le mépris
+
+1963 &ensp; France / Italy
+
+Jean-Luc Godard
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Watchmen](_media/PersonalTenBest/personalTenBest-movie-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Watchmen
+
+Watchmen
+
+2009 &ensp; America
+
+Zack Snyder
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Blade Runner](_media/PersonalTenBest/personalTenBest-movie-3.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Blade Runner
+
+Blade Runner
+
+1982 &ensp; America
+
+Ridley Scott
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Once Upon a Time in America](_media/PersonalTenBest/personalTenBest-movie-4.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Once Upon a Time in America
+
+Once Upon a Time in America
+
+1984 &ensp; America / Italy
+
+Sergio Leone
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![四月物語](_media/PersonalTenBest/personalTenBest-movie-5.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 四月物語
+
+Shigatsu monogatari
+
+1998 &ensp; Japan
+
+Shunji Iwai
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![The Purple Rose of Cairo](_media/PersonalTenBest/personalTenBest-movie-6.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### The Purple Rose of Cairo
+
+The Purple Rose of Cairo
+
+1985 &ensp; America
+
+Woody Allen
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Pulp Fiction](_media/PersonalTenBest/personalTenBest-movie-7.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Pulp Fiction
+
+Pulp Fiction
+
+1994 &ensp; America
+
+Quentin Tarantino
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![大话西游之月光宝盒](_media/PersonalTenBest/personalTenBest-movie-8.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 大话西游之月光宝盒
+
+Sai yau gei: Yut gwong bou haap
+
+1995 &ensp; China
+
+Jeffrey Lau
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![大话西游之大圣娶亲](_media/PersonalTenBest/personalTenBest-movie-8-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 大话西游之大圣娶亲
+
+Sai yau gei: Sin leui kei yun
+
+1995 &ensp; China
+
+Jeffrey Lau
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![リンダ リンダ リンダ](_media/PersonalTenBest/personalTenBest-movie-9.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### リンダ リンダ リンダ
+
+Linda Linda Linda
+
+2005 &ensp; Japan
+
+Nobuhiro Yamashita
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![東邪西毒](_media/PersonalTenBest/personalTenBest-movie-10.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 東邪西毒
+
+Ashes of Time Redux
+
+2008 &ensp; China
+
+Kar Wai Wong
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten:end -->
 
 #### **TV Series**
 
-<div class="personal-ten-best-container">
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-1.jpg" alt="ロングバケーション">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ロングバケーション</h5>
-                    <p>Long Vacation</p>
-                    <p>1996 &ensp; Japan</p>
-                    <p>Kozo Nagayama / Masayuki Suzuki / Hirotsugu Usui</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-2.jpg" alt="The Magicians">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>The Magicians</h5>
-                    <p>The Magicians</p>
-                    <p>2016 &ensp; America</p>
-                    <p>Mike Cahill</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-3.jpg" alt="暴太郎戦隊ドンブラザーズ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>暴太郎戦隊ドンブラザーズ</h5>
-                    <p>Avataro Sentai Donbrothers</p>
-                    <p>2022 &ensp; Japan</p>
-                    <p>Ryuta Tazaki</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-4.jpg" alt="Yes Minister">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Yes Minister</h5>
-                    <p>Yes Minister</p>
-                    <p>1980 &ensp; Britain</p>
-                    <p>Peter Whitmore</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-5.jpg" alt="ウルトラマンティガ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ウルトラマンティガ</h5>
-                    <p>Urutoraman Tiga</p>
-                    <p>1996 &ensp; Japan</p>
-                    <p>Shingo Matsubara / Hiromitsu Muraishi / Kyôta Kawasaki</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-6.jpg" alt="火花">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>火花</h5>
-                    <p>Hibana</p>
-                    <p>2016 &ensp; Japan</p>
-                    <p>Ryuichi Hiroki / Kazuya Shiraishi / Shûichi Okita</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-7.jpg" alt="仮面ライダー555">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>仮面ライダー 555</h5>
-                    <p>Kamen Rider 555</p>
-                    <p>2003 &ensp; 日本</p>
-                    <p>Ryuta Tazaki / Takao Nagaishi</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-8.jpg" alt="Friends">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>Friends</h5>
-                    <p>Friends</p>
-                    <p>1994 &ensp; America</p>
-                    <p>David Crane / Marta Kauffman</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-9.jpg" alt="未来戦隊タイムレンジャー">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>未来戦隊タイムレンジャー</h5>
-                    <p>Future Squadron Timeranger</p>
-                    <p>2000 &ensp; Japan</p>
-                    <p>Satoshi Morota</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-series-10.jpg" alt="篤姫">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>篤姫</h5>
-                    <p>Atsuhime</p>
-                    <p>2008 &ensp; Japan</p>
-                    <p>Mineyo Satô</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- personal-ten:start -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ロングバケーション](_media/PersonalTenBest/personalTenBest-series-1.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ロングバケーション
+
+Long Vacation
+
+1996 &ensp; Japan
+
+Kozo Nagayama / Masayuki Suzuki / Hirotsugu Usui
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![The Magicians](_media/PersonalTenBest/personalTenBest-series-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### The Magicians
+
+The Magicians
+
+2016 &ensp; America
+
+Mike Cahill
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![暴太郎戦隊ドンブラザーズ](_media/PersonalTenBest/personalTenBest-series-3.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 暴太郎戦隊ドンブラザーズ
+
+Avataro Sentai Donbrothers
+
+2022 &ensp; Japan
+
+Ryuta Tazaki
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Yes Minister](_media/PersonalTenBest/personalTenBest-series-4.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Yes Minister
+
+Yes Minister
+
+1980 &ensp; Britain
+
+Peter Whitmore
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ウルトラマンティガ](_media/PersonalTenBest/personalTenBest-series-5.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ウルトラマンティガ
+
+Urutoraman Tiga
+
+1996 &ensp; Japan
+
+Shingo Matsubara / Hiromitsu Muraishi / Kyôta Kawasaki
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![火花](_media/PersonalTenBest/personalTenBest-series-6.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 火花
+
+Hibana
+
+2016 &ensp; Japan
+
+Ryuichi Hiroki / Kazuya Shiraishi / Shûichi Okita
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![仮面ライダー 555](_media/PersonalTenBest/personalTenBest-series-7.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 仮面ライダー 555
+
+Kamen Rider 555
+
+2003 &ensp; Japan
+
+Ryuta Tazaki / Takao Nagaishi
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![Friends](_media/PersonalTenBest/personalTenBest-series-8.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### Friends
+
+Friends
+
+1994 &ensp; America
+
+David Crane / Marta Kauffman
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![未来戦隊タイムレンジャー](_media/PersonalTenBest/personalTenBest-series-9.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 未来戦隊タイムレンジャー
+
+Future Squadron Timeranger
+
+2000 &ensp; Japan
+
+Satoshi Morota
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![篤姫](_media/PersonalTenBest/personalTenBest-series-10.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 篤姫
+
+Atsuhime
+
+2008 &ensp; Japan
+
+Mineyo Satô
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten:end -->
 
 #### **Animation**
 
-<div class="personal-ten-best-container">
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-1.jpg" alt="トップをねらえ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>トップをねらえ!</h5>
-                    <p>Top o Nerae!</p>
-                    <p>1988 &ensp; Japan</p>
-                    <p>Anno Hideaki</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-1-2.jpg" alt="トップをねらえ2">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>トップをねらえ 2!</h5>
-                    <p>Top o Nerae 2! Gekijouban</p>
-                    <p>2004 &ensp; Japan</p>
-                    <p>Tsurumaki Kazuya</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-2.jpg" alt="機動戦士Ζガンダム">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>機動戦士 Ζ ガンダム</h5>
-                    <p>Kidou Senshi Z Gundam</p>
-                    <p>1985 &ensp; Japan</p>
-                    <p>Tomino Yoshiyuki</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-3.jpg" alt="機動戦艦ナデシコ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>機動戦艦ナデシコ</h5>
-                    <p>Kidou Senkan Nadesico</p>
-                    <p>1996 &ensp; Japan</p>
-                    <p>Gotou Keiji</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-3-2.jpg" alt="機動戦艦ナデシコ -The prince of darkness-">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>機動戦艦ナデシコ -The prince of darkness-</h5>
-                    <p>Kidou Senkan Nadesico: The Prince of Darkness</p>
-                    <p>1998 &ensp; Japan</p>
-                    <p>Gotou Keiji</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-4.jpg" alt="超時空要塞マクロス 愛・おぼえていますか">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>超時空要塞マクロス 愛・おぼえていますか</h5>
-                    <p>Choujikuu Yousai Macross: Ai Oboete Imasuka</p>
-                    <p>1984 &ensp; Japan</p>
-                    <p>Ishiguro Noboru / Kawamori Shouji</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-5.jpg" alt="カウボーイビバップ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>カウボーイビバップ</h5>
-                    <p>Cowboy Bebop</p>
-                    <p>1998 &ensp; Japan</p>
-                    <p>Watanabe Shin`ichirou</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-6.jpg" alt="るろうに剣心 -明治剣客浪漫譚- 追憶編">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>るろうに剣心 -明治剣客浪漫譚- 追憶編</h5>
-                    <p>Rurouni Kenshin: Meiji Kenkaku Romantan - Tsuioku Hen</p>
-                    <p>1999 &ensp; Japan</p>
-                    <p>Furuhashi Kazuhiro</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-7.jpg" alt="THE IDOLM@STER">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>THE IDOLM@STER</h5>
-                    <p>THE IDOLM@STER</p>
-                    <p>2011 &ensp; Japan</p>
-                    <p>Nishigori Atsushi</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-8.jpg" alt="交響詩篇エウレカセブン">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>交響詩篇エウレカセブン</h5>
-                    <p>Koukyoushihen: Eureka Seven</p>
-                    <p>2005 &ensp; Japan</p>
-                    <p>Kyouda Tomoki</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-9.jpg" alt="魔法つかいプリキュア">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>魔法つかいプリキュア!</h5>
-                    <p>Mahou Tsukai Precure!</p>
-                    <p>2016 &ensp; Japan</p>
-                    <p>Mitsuka Masato</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-anime-10.jpg" alt="少女革命ウテナ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>少女革命ウテナ</h5>
-                    <p>Shoujo Kakumei Utena</p>
-                    <p>1997 &ensp; Japan</p>
-                    <p>Ikuhara Kunihiko</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- personal-ten:start -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![トップをねらえ](_media/PersonalTenBest/personalTenBest-anime-1.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### トップをねらえ!
+
+Top o Nerae!
+
+1988 &ensp; Japan
+
+Anno Hideaki
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![トップをねらえ 2](_media/PersonalTenBest/personalTenBest-anime-1-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### トップをねらえ 2!
+
+Top o Nerae 2! Gekijouban
+
+2004 &ensp; Japan
+
+Tsurumaki Kazuya
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![機動戦士 Ζ ガンダム](_media/PersonalTenBest/personalTenBest-anime-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 機動戦士 Ζ ガンダム
+
+Kidou Senshi Z Gundam
+
+1985 &ensp; Japan
+
+Tomino Yoshiyuki
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![機動戦艦ナデシコ](_media/PersonalTenBest/personalTenBest-anime-3.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 機動戦艦ナデシコ
+
+Kidou Senkan Nadesico
+
+1996 &ensp; Japan
+
+Gotou Keiji
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![機動戦艦ナデシコ -The prince of darkness-](_media/PersonalTenBest/personalTenBest-anime-3-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 機動戦艦ナデシコ -The prince of darkness-
+
+Kidou Senkan Nadesico: The Prince of Darkness
+
+1998 &ensp; Japan
+
+Gotou Keiji
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![超時空要塞マクロス 愛・おぼえていますか](_media/PersonalTenBest/personalTenBest-anime-4.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 超時空要塞マクロス 愛・おぼえていますか
+
+Choujikuu Yousai Macross: Ai Oboete Imasuka
+
+1984 &ensp; Japan
+
+Ishiguro Noboru / Kawamori Shouji
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![カウボーイビバップ](_media/PersonalTenBest/personalTenBest-anime-5.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### カウボーイビバップ
+
+Cowboy Bebop
+
+1998 &ensp; Japan
+
+Watanabe Shin`ichirou
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![るろうに剣心 -明治剣客浪漫譚- 追憶編](_media/PersonalTenBest/personalTenBest-anime-6.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### るろうに剣心 -明治剣客浪漫譚- 追憶編
+
+Rurouni Kenshin: Meiji Kenkaku Romantan - Tsuioku Hen
+
+1999 &ensp; Japan
+
+Furuhashi Kazuhiro
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![THE IDOLM@STER](_media/PersonalTenBest/personalTenBest-anime-7.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### THE IDOLM@STER
+
+THE IDOLM@STER
+
+2011 &ensp; Japan
+
+Nishigori Atsushi
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![交響詩篇エウレカセブン](_media/PersonalTenBest/personalTenBest-anime-8.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 交響詩篇エウレカセブン
+
+Koukyoushihen: Eureka Seven
+
+2005 &ensp; Japan
+
+Kyouda Tomoki
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![魔法つかいプリキュア](_media/PersonalTenBest/personalTenBest-anime-9.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 魔法つかいプリキュア!
+
+Mahou Tsukai Precure!
+
+2016 &ensp; Japan
+
+Mitsuka Masato
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![少女革命ウテナ](_media/PersonalTenBest/personalTenBest-anime-10.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 少女革命ウテナ
+
+Shoujo Kakumei Utena
+
+1997 &ensp; Japan
+
+Ikuhara Kunihiko
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten:end -->
 
 #### **Manga**
 
-<div class="personal-ten-best-container">
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-1.jpg" alt="ミカるんX">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ミカるん X</h5>
-                    <p>Mikarun X</p>
-                    <p>2008 &ensp; Japan</p>
-                    <p>Takatoo Rui</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-2.jpg" alt="銀河鉄道999">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>銀河鉄道 999</h5>
-                    <p>Ginga Tetsudou 999</p>
-                    <p>1985 &ensp; Japan</p>
-                    <p>Matsumoto Leiji</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-3.jpg" alt="それでも町は廻っている">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>それでも町は廻っている</h5>
-                    <p>Soredemo Machi wa Mawatte Iru</p>
-                    <p>1978 &ensp; Japan</p>
-                    <p>Ishiguro Masakazu</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-4.jpg" alt="竹光侍">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>竹光侍</h5>
-                    <p>Takemitsu Zamurai</p>
-                    <p>2006 &ensp; Japan</p>
-                    <p>Matsumoto Taiyou</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-5.jpg" alt="さくらの唄">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>さくらの唄</h5>
-                    <p>Sakura no Uta</p>
-                    <p>1991 &ensp; Japan</p>
-                    <p>Adachi Tetsu</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-6.jpg" alt="タッチ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>タッチ</h5>
-                    <p>Touch</p>
-                    <p>1981 &ensp; Japan</p>
-                    <p>Adachi Mitsuru</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-7.jpg" alt="H2">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>H2</h5>
-                    <p>H2</p>
-                    <p>1992 &ensp; Japan</p>
-                    <p>Adachi Mitsuru</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-8.jpg" alt="AQUA">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>AQUA</h5>
-                    <p>AQUA</p>
-                    <p>2001 &ensp; Japan</p>
-                    <p>Amano Kozue</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./writings/_media/PersonalTenBest/personalTenBest-manga-9.jpg" alt="水は海に向かって流れる">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>水は海に向かって流れる</h5>
-                    <p>Mizu wa Umi ni Mukatte Nagareru</p>
-                    <p>2019 &ensp; Japan</p>
-                    <p>Tajima Rettou</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-manga-10.jpg" alt="機動戦士ガンダム THE ORIGIN">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>機動戦士ガンダム THE ORIGIN</h5>
-                    <p>GUNDAM THE ORIGIN</p>
-                    <p>2001 &ensp; Japan</p>
-                    <p>Yasuhiko Yoshikazu</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- personal-ten:start -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ミカるんX](_media/PersonalTenBest/personalTenBest-manga-1.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ミカるん X
+
+Mikarun X
+
+2008 &ensp; Japan
+
+Takatoo Rui
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![銀河鉄道 999](_media/PersonalTenBest/personalTenBest-manga-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 銀河鉄道 999
+
+Ginga Tetsudou 999
+
+1985 &ensp; Japan
+
+Matsumoto Leiji
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![それでも町は廻っている](_media/PersonalTenBest/personalTenBest-manga-3.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### それでも町は廻っている
+
+Soredemo Machi wa Mawatte Iru
+
+1978 &ensp; Japan
+
+Ishiguro Masakazu
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![竹光侍](_media/PersonalTenBest/personalTenBest-manga-4.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 竹光侍
+
+Takemitsu Zamurai
+
+2006 &ensp; Japan
+
+Matsumoto Taiyou
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![さくらの唄](_media/PersonalTenBest/personalTenBest-manga-5.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### さくらの唄
+
+Sakura no Uta
+
+1991 &ensp; Japan
+
+Adachi Tetsu
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![タッチ](_media/PersonalTenBest/personalTenBest-manga-6.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### タッチ
+
+Touch
+
+1981 &ensp; Japan
+
+Adachi Mitsuru
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![H2](_media/PersonalTenBest/personalTenBest-manga-7.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### H2
+
+H2
+
+1992 &ensp; Japan
+
+Adachi Mitsuru
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![AQUA](_media/PersonalTenBest/personalTenBest-manga-8.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### AQUA
+
+AQUA
+
+2001 &ensp; Japan
+
+Amano Kozue
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![水は海に向かって流れる](_media/PersonalTenBest/personalTenBest-manga-9.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 水は海に向かって流れる
+
+Mizu wa Umi ni Mukatte Nagareru
+
+2019 &ensp; Japan
+
+Tajima Rettou
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![機動戦士ガンダム THE ORIGIN](_media/PersonalTenBest/personalTenBest-manga-10.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 機動戦士ガンダム THE ORIGIN
+
+GUNDAM THE ORIGIN
+
+2001 &ensp; Japan
+
+Yasuhiko Yoshikazu
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten:end -->
 
 #### **Game**
 
-<div class="personal-ten-best-container">
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-1.jpg" alt="KINGDOM HEARTS II">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>KINGDOM HEARTS II</h5>
-                    <p>KINGDOM HEARTS II</p>
-                    <p>2005 &ensp; Japan</p>
-                    <p>SQUARE ENIX</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-2.jpg" alt="narcissu">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>narcissu</h5>
-                    <p>narcissu</p>
-                    <p>2005 &ensp; Japan</p>
-                    <p>Stage☆nana</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-3.jpg" alt="遊☆戯☆王">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>遊☆戯☆王</h5>
-                    <p>YU-GI-OH</p>
-                    <p>1999 &ensp; Japan</p>
-                    <p>KONAMI</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-4.jpg" alt="FINAL FANTASY VII REMAKE">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>FINAL FANTASY VII REMAKE</h5>
-                    <p>FINAL FANTASY VII REMAKE</p>
-                    <p>2020 &ensp; Japan</p>
-                    <p>SQUARE ENIX</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-5.jpg" alt="ドラゴンクエストV 天空の花嫁">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ドラゴンクエスト V 天空の花嫁</h5>
-                    <p>Dragon Quest V: Hand of the Heavenly Bride</p>
-                    <p>1992 &ensp; Japan</p>
-                    <p>ENIX</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-6.jpg" alt="ポケットモンスター ブラック">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ポケットモンスター ブラック</h5>
-                    <p>Pokémon Black</p>
-                    <p>2010 &ensp; Japan</p>
-                    <p>Game Freak</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="personal-ten-best">
-        <div class="personal-ten-best-content-list">
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-6-2.jpg" alt="ポケットモンスター ホワイト">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ポケットモンスター ホワイト</h5>
-                    <p>Pokémon White</p>
-                    <p>2010 &ensp; Japan</p>
-                    <p>Game Freak</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-7.jpg" alt="NEWラブプラス+">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>NEW ラブプラス +</h5>
-                    <p>New Love Plus +</p>
-                    <p>2014 &ensp; Japan</p>
-                    <p>Konami</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./writings/_media/PersonalTenBest/personalTenBest-game-8.jpg" alt="大乱闘スマッシュブラザーズ SPECIAL">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>大乱闘スマッシュブラザーズ SPECIAL</h5>
-                    <p>Super Smash Bros. Ultimate</p>
-                    <p>2018 &ensp; Japan</p>
-                    <p>Sora</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-9.jpg" alt="ゼルダの伝説 時のオカリナ">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>ゼルダの伝説 時のオカリナ</h5>
-                    <p>The Legend of Zelda: Ocarina of Time</p>
-                    <p>1998 &ensp; Japan</p>
-                    <p>Nintendo Co., Ltd.</p>
-                </div>
-            </div>
-            <div class="personal-ten-best-content">
-                <div class="personal-ten-best-content-img">
-                    <img src="./en-us/writings/_media/PersonalTenBest/personalTenBest-game-10.jpg" alt="METAL GEAR SOLID V: THE PHANTOM PAIN">
-                </div>
-                <div class="personal-ten-best-content-info">
-                    <h5>METAL GEAR SOLID V: THE PHANTOM PAIN</h5>
-                    <p>METAL GEAR SOLID V: THE PHANTOM PAIN</p>
-                    <p>2015 &ensp; Japan</p>
-                    <p>Konami</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- personal-ten:start -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![KINGDOM HEARTS II](_media/PersonalTenBest/personalTenBest-game-1.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### KINGDOM HEARTS II
+
+KINGDOM HEARTS II
+
+2005 &ensp; Japan
+
+SQUARE ENIX
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![narcissu](_media/PersonalTenBest/personalTenBest-game-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### narcissu
+
+narcissu
+
+2005 &ensp; Japan
+
+Stage☆nana
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![遊☆戯☆王](_media/PersonalTenBest/personalTenBest-game-3.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 遊☆戯☆王
+
+YU-GI-OH
+
+1999 &ensp; Japan
+
+KONAMI
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![FINAL FANTASY VII REMAKE](_media/PersonalTenBest/personalTenBest-game-4.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### FINAL FANTASY VII REMAKE
+
+FINAL FANTASY VII REMAKE
+
+2020 &ensp; Japan
+
+SQUARE ENIX
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ドラゴンクエストV 天空の花嫁](_media/PersonalTenBest/personalTenBest-game-5.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ドラゴンクエスト V 天空の花嫁
+
+Dragon Quest V: Hand of the Heavenly Bride
+
+1992 &ensp; Japan
+
+ENIX
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ポケットモンスター ブラック](_media/PersonalTenBest/personalTenBest-game-6.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ポケットモンスター ブラック
+
+Pokémon Black
+
+2010 &ensp; Japan
+
+Game Freak
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten-list:start -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ポケットモンスター ホワイト](_media/PersonalTenBest/personalTenBest-game-6-2.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ポケットモンスター ホワイト
+
+Pokémon White
+
+2010 &ensp; Japan
+
+Game Freak
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![NEW ラブプラス+](_media/PersonalTenBest/personalTenBest-game-7.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### NEW ラブプラス +
+
+New Love Plus +
+
+2014 &ensp; Japan
+
+Konami
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![大乱闘スマッシュブラザーズ SPECIAL](_media/PersonalTenBest/personalTenBest-game-8.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### 大乱闘スマッシュブラザーズ SPECIAL
+
+Super Smash Bros. Ultimate
+
+2018 &ensp; Japan
+
+Sora
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![ゼルダの伝説 時のオカリナ](_media/PersonalTenBest/personalTenBest-game-9.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### ゼルダの伝説 時のオカリナ
+
+The Legend of Zelda: Ocarina of Time
+
+1998 &ensp; Japan
+
+Nintendo Co., Ltd.
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-card:start -->
+<!-- personal-ten-img:start -->
+
+![METAL GEAR SOLID V: THE PHANTOM PAIN](_media/PersonalTenBest/personalTenBest-game-10.jpg)
+
+<!-- personal-ten-img:end -->
+<!-- personal-ten-info:start -->
+
+##### METAL GEAR SOLID V: THE PHANTOM PAIN
+
+METAL GEAR SOLID V: THE PHANTOM PAIN
+
+2015 &ensp; Japan
+
+Konami
+
+<!-- personal-ten-info:end -->
+<!-- personal-ten-card:end -->
+
+<!-- personal-ten-list:end -->
+
+<!-- personal-ten:end -->
 
 <!-- tabs:end -->

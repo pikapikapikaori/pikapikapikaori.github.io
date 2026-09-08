@@ -159,3 +159,81 @@
         background-position: 0 0;
     }
 }
+
+/* Personal Ten */
+.personal-ten-best-container {
+    display: flex;
+}
+
+.personal-ten-best {
+    width: 50%;
+    overflow: hidden;
+    padding: 0 5px;
+}
+
+.personal-ten-best-content {
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+    height: 170px;
+    padding: 5px;
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
+    border-radius: var(--global-el-border-radius, 10px);
+    border: 1px solid var(--theme-color, #ea6f5a);
+    align-items: center;
+}
+
+.personal-ten-best-content-img img {
+    width: 100px;
+    height: auto;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.personal-ten-best-content-info {
+    margin-left: 30px;
+}
+
+.personal-ten-best-content-info h5 {
+    margin: 0 0 0;
+    font-size: 1.4rem;
+}
+
+.personal-ten-best-content-info p {
+    margin: 0 0 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .personal-ten-best-container {
+        display: block;
+    }
+
+    .personal-ten-best {
+        width: 100%;
+    }
+
+    .personal-ten-best-content {
+        overflow: hidden;
+        height: 135px;
+    }
+
+    .personal-ten-best-content-info {
+        margin-left: 15px;
+    }
+
+    .personal-ten-best-content-img img {
+        width: 80px;
+        height: auto;
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .personal-ten-best-content-info h5 {
+        font-size: 1.1rem;
+    }
+
+    .personal-ten-best-content-info p {
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+    }
+}

@@ -29,6 +29,43 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="brief-comments-in-blog-comments-container">',
             endHtml: '</div>'
         }
+    ],
+
+    /* Personal Ten */
+    [
+        'personal-ten',
+        {
+            startHtml: '<div class="personal-ten-best-container">',
+            endHtml: '</div>'
+        }
+    ],
+    [
+        'personal-ten-list',
+        {
+            startHtml: '<div class="personal-ten-best"><div class="personal-ten-best-content-list">',
+            endHtml: '</div></div>'
+        }
+    ],
+    [
+        'personal-ten-card',
+        {
+            startHtml: '<div class="personal-ten-best-content">',
+            endHtml: '</div>'
+        }
+    ],
+    [
+        'personal-ten-img',
+        {
+            startHtml: '<div class="personal-ten-best-content-img">',
+            endHtml: '</div>'
+        }
+    ],
+    [
+        'personal-ten-info',
+        {
+            startHtml: '<div class="personal-ten-best-content-info">',
+            endHtml: '</div>'
+        }
     ]
 ])
 
@@ -47,7 +84,6 @@ const inlineTagConfigMap = new Map([
         (payload) => `<hr class="brief-comments-in-blog-comments-divider"/><p>${payload}</p>`
     ]
 ])
-
 
 
 const blockTagKeys = Array.from(blockTagConfigMap.keys())

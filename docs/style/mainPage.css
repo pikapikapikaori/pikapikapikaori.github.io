@@ -9,6 +9,69 @@ section.cover p {
     font-family: 'Claire-Palmer-Script', cursive;
 }
 
+.cover-page-scroll-down-chevron-div {
+    margin: 40px 0 0;
+    position: absolute;
+    left: calc(50% - 10px);
+}
+
+.cover-page-scroll-down-chevron {
+    position: relative;
+    animation: moveChevron 2s infinite;
+    -webkit-animation: moveChevron 2s infinite;
+}
+
+@keyframes moveChevron {
+    0% {
+        top: 0px;
+        opacity: 0.3;
+    }
+
+    50% {
+        top: 15px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0px;
+        opacity: 0.3;
+    }
+}
+
+@-webkit-keyframes moveChevron {
+    0% {
+        top: 0px;
+        opacity: 0.3;
+    }
+
+    50% {
+        top: 15px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0px;
+        opacity: 0.3;
+    }
+}
+
+/* Sidebar */
+.page-sidebar-title-class {
+    font-size: 2rem;
+    font-family: 'KouzanBrushFontSousyo', cursive;
+    color: var(--theme-color, #ea6f5a);
+}
+
+.page-sidebar-level1-title-div {
+    font-family: 'WeibeiSC-Bold', serif;
+    font-size: 1.25rem;
+    max-width: 95%;
+    margin: 10px 0 10px 5% !important;
+    padding-right: 5%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--global-border-default-color, #eee);
+}
+
 /* --- Personal Components --- */
 
 /* Global */
@@ -170,108 +233,6 @@ div:has(.writing-direction-vertical-div) {
     font-family: 'HuiZongGong-tc', 'HuiZongGong-sc', cursive;
 }
 
-/* Cover */
-.page-sidebar-title-class {
-    font-size: 2rem;
-    font-family: 'KouzanBrushFontSousyo', cursive;
-    color: var(--theme-color, #ea6f5a);
-}
-
-.page-sidebar-level1-title-div {
-    font-family: 'WeibeiSC-Bold', serif;
-    font-size: 1.25rem;
-    max-width: 95%;
-    margin: 10px 0 10px 5% !important;
-    padding-right: 5%;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--global-border-default-color, #eee);
-}
-
-.cover-page-scroll-down-chevron-div {
-    margin: 40px 0 0;
-    position: absolute;
-    left: calc(50% - 10px);
-}
-
-.cover-page-scroll-down-chevron {
-    position: relative;
-    animation: moveChevron 2s infinite;
-    -webkit-animation: moveChevron 2s infinite;
-}
-
-@keyframes moveChevron {
-    0% {
-        top: 0px;
-        opacity: 0.3;
-    }
-
-    50% {
-        top: 15px;
-        opacity: 1;
-    }
-
-    100% {
-        top: 0px;
-        opacity: 0.3;
-    }
-}
-
-@-webkit-keyframes moveChevron {
-    0% {
-        top: 0px;
-        opacity: 0.3;
-    }
-
-    50% {
-        top: 15px;
-        opacity: 1;
-    }
-
-    100% {
-        top: 0px;
-        opacity: 0.3;
-    }
-}
-
-.cover-page-description-div {
-    align-self: center;
-    max-width: 400px;
-    margin: 0 auto 0 !important;
-}
-
-.cover-page-description-typewriter {
-    width: 360px;
-    margin: 0 auto 0;
-    position: relative;
-    font-family: "Anonymous Pro", monospace;
-    letter-spacing: 2px;
-    overflow: hidden;
-    border-right: 2px solid;
-    white-space: nowrap;
-    animation: typewriter 5s steps(22) 1s 1 normal both,
-        blinkTextCursor 500ms infinite;
-}
-
-@keyframes typewriter {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 350px;
-    }
-}
-
-@keyframes blinkTextCursor {
-    from {
-        border-right-color: hsl(0, 0%, 80%);
-    }
-
-    to {
-        border-right-color: transparent;
-    }
-}
-
 /* About Page */
 .main-page-right-panel-container {
     font-family: 'HanyiSentyFlorCalligraphy', cursive;
@@ -317,82 +278,4 @@ div:has(.writing-direction-vertical-div) {
 
 .main-page-about-me-image-links {
     margin: 0 0 10px !important;
-}
-
-/* Personal Ten */
-.personal-ten-best-container {
-    display: flex;
-}
-
-.personal-ten-best {
-    width: 50%;
-    overflow: hidden;
-    padding: 0 5px;
-}
-
-.personal-ten-best-content {
-    margin-top: 10px;
-    display: flex;
-    overflow: hidden;
-    height: 170px;
-    padding: 5px;
-    background-color: var(--global-theme-color-blur, #ea6f5a1a);
-    border-radius: var(--global-el-border-radius, 10px);
-    border: 1px solid var(--theme-color, #ea6f5a);
-    align-items: center;
-}
-
-.personal-ten-best-content-img img {
-    width: 100px;
-    height: auto;
-    min-width: 100px;
-    max-width: 100px;
-}
-
-.personal-ten-best-content-info {
-    margin-left: 30px;
-}
-
-.personal-ten-best-content-info h5 {
-    margin: 0 0 0 !important;
-    font-size: 1.4rem;
-}
-
-.personal-ten-best-content-info p {
-    margin: 0 0 0 !important;
-}
-
-@media screen and (max-width: 1000px) {
-    .personal-ten-best-container {
-        display: block;
-    }
-
-    .personal-ten-best {
-        width: 100%;
-    }
-
-    .personal-ten-best-content {
-        overflow: hidden;
-        height: 135px;
-    }
-
-    .personal-ten-best-content-info {
-        margin-left: 15px;
-    }
-
-    .personal-ten-best-content-img img {
-        width: 80px;
-        height: auto;
-        min-width: 80px;
-        max-width: 80px;
-    }
-
-    .personal-ten-best-content-info h5 {
-        font-size: 1.1rem;
-    }
-
-    .personal-ten-best-content-info p {
-        font-size: 0.9rem;
-        line-height: 1.4rem;
-    }
 }

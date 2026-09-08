@@ -6,8 +6,6 @@
 
 <!-- personal-ten:start -->
 
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -122,10 +120,6 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -221,15 +215,11 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **电视剧**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -326,10 +316,6 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -425,15 +411,11 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **动画**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -549,10 +531,6 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -667,15 +645,11 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **漫画**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -772,10 +746,6 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -871,15 +841,11 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **游戏**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -995,10 +961,6 @@ Stage☆nana
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -1093,8 +1055,6 @@ Sora
 
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
-
-<!-- personal-ten-list:end -->
 
 <!-- personal-ten:end -->
 

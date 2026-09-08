@@ -6,8 +6,6 @@
 
 <!-- personal-ten:start -->
 
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -122,10 +120,6 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -221,15 +215,11 @@
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **ドラマ**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -326,10 +316,6 @@ Peter Whitmore
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -425,15 +411,11 @@ David Crane / Marta Kauffman
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **アニメ**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -549,10 +531,6 @@ David Crane / Marta Kauffman
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -667,15 +645,11 @@ THE IDOLM@STER
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **漫画**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -772,10 +746,6 @@ THE IDOLM@STER
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -871,15 +841,11 @@ AQUA
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **ゲーム**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -995,10 +961,6 @@ FINAL FANTASY VII REMAKE
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -1093,8 +1055,6 @@ Konami
 
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
-
-<!-- personal-ten-list:end -->
 
 <!-- personal-ten:end -->
 

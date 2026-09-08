@@ -6,8 +6,6 @@
 
 <!-- personal-ten:start -->
 
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -122,10 +120,6 @@ Woody Allen
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -221,15 +215,11 @@ Kar Wai Wong
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **TV Series**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -326,10 +316,6 @@ Shingo Matsubara / Hiromitsu Muraishi / Kyôta Kawasaki
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -425,15 +411,11 @@ Mineyo Satô
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **Animation**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -549,10 +531,6 @@ Ishiguro Noboru / Kawamori Shouji
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -666,16 +644,11 @@ Ikuhara Kunihiko
 
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
-
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **Manga**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -772,10 +745,6 @@ Adachi Tetsu
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -871,15 +840,11 @@ Yasuhiko Yoshikazu
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
 <!-- personal-ten:end -->
 
 #### **Game**
 
 <!-- personal-ten:start -->
-
-<!-- personal-ten-list:start -->
 
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
@@ -995,10 +960,6 @@ Game Freak
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
 
-<!-- personal-ten-list:end -->
-
-<!-- personal-ten-list:start -->
-
 <!-- personal-ten-card:start -->
 <!-- personal-ten-img:start -->
 
@@ -1093,8 +1054,6 @@ Konami
 
 <!-- personal-ten-info:end -->
 <!-- personal-ten-card:end -->
-
-<!-- personal-ten-list:end -->
 
 <!-- personal-ten:end -->
 

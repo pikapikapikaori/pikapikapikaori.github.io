@@ -130,7 +130,7 @@
     height: 24px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 768px) {
     .brief-comments-in-blog {
         margin: 10px 0 20px;
         flex-wrap: wrap;
@@ -161,14 +161,11 @@
 }
 
 /* Personal Ten */
-.personal-ten-best-container {
-    display: flex;
-}
-
-.personal-ten-best {
-    width: 50%;
-    overflow: hidden;
-    padding: 0 5px;
+.personal-ten-best-card {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(50% - 12px);
+    margin: 5px;
 }
 
 .personal-ten-best-content {
@@ -203,17 +200,15 @@
     margin: 0 0 0;
 }
 
-@media screen and (max-width: 1000px) {
-    .personal-ten-best-container {
-        display: block;
-    }
-
-    .personal-ten-best {
-        width: 100%;
+@media screen and (max-width: 768px) {
+    .personal-ten-best-card {
+        width: calc(100% - 20px);
+        display: inherit;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .personal-ten-best-content {
-        overflow: hidden;
         height: 135px;
     }
 

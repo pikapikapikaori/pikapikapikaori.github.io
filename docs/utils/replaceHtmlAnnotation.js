@@ -40,17 +40,10 @@ const blockTagConfigMap = new Map([
         }
     ],
     [
-        'personal-ten-list',
-        {
-            startHtml: '<div class="personal-ten-best"><div class="personal-ten-best-content-list">',
-            endHtml: '</div></div>'
-        }
-    ],
-    [
         'personal-ten-card',
         {
-            startHtml: '<div class="personal-ten-best-content">',
-            endHtml: '</div>'
+            startHtml: '<div class="personal-ten-best-card"><div class="personal-ten-best-content">',
+            endHtml: '</div></div>'
         }
     ],
     [

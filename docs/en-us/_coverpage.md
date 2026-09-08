@@ -3,10 +3,6 @@
 # Yi-Yang Li <small>李亦楊 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby></small>
 
 > Don't worry, be happy.
-<!-- 
-<div class="cover-page-description-div">
-    <h2 class="cover-page-description-typewriter">Don't worry, be happy.</h2>
-</div> -->
 
 <div class="cover-page-scroll-down-chevron-div">
     <a href="#/en-us/#main" class="cover-page-scroll-down-chevron">

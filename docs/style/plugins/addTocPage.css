@@ -40,14 +40,14 @@
     border-top-right-radius: var(--global-el-border-radius, 10px);
 }
 
-.toc-page-display-a img {
+.toc-page-div .toc-page-display-a img {
     object-fit: cover;
     min-width: 100%;
     min-height: 200px;
     max-height: 200px;
     transition: transform 0.4s;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .toc-page-display-a:hover {

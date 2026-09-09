@@ -18,32 +18,27 @@ jobs:
       - name: Find changed files since last merge
         id: changes
         run: |
-          MERGE_COMMITS=$(git log --merges --pretty=format:"%H" -2)
-          MERGE_COUNT=$(echo "$MERGE_COMMITS" | grep -c . || true)
+          git config --global core.quotepath false
 
-          if [ "$MERGE_COUNT" -lt 2 ]; then
-            echo "mode=full" >> $GITHUB_OUTPUT
-            echo "has_changed=true" >> $GITHUB_OUTPUT
-            find docs -type f > changed.txt
-            touch deleted.txt
-            echo "First deploy: syncing all files"
-          else
-            PREV_MERGE=$(echo "$MERGE_COMMITS" | tail -1)
-            CURR_HEAD=${{ github.sha }}
-            
+          PARENT_COUNT=$(git show -s --format=%P HEAD | wc -w)
+          echo "Parent count: $PARENT_COUNT"
+
+          if [ "$PARENT_COUNT" -eq 2 ]; then
             echo "mode=incremental" >> $GITHUB_OUTPUT
-            echo "prev_merge=$PREV_MERGE" >> $GITHUB_OUTPUT
-            echo "curr_head=$CURR_HEAD" >> $GITHUB_OUTPUT
-            
-            git diff --name-only --diff-filter=ACMRT "$PREV_MERGE" "$CURR_HEAD" -- docs/ > changed.txt
-            
-            git diff --name-only --diff-filter=D "$PREV_MERGE" "$CURR_HEAD" -- docs/ > deleted.txt
-            
-            if [ -s changed.txt ]; then
-              echo "has_changed=true" >> $GITHUB_OUTPUT
-            else
-              echo "has_changed=false" >> $GITHUB_OUTPUT
-            fi
+            echo "Detected merge commit, comparing HEAD^1 and HEAD^2"
+            git diff --name-only --diff-filter=ACMRT HEAD^1 HEAD^2 -- docs/ > changed.txt
+            git diff --name-only --diff-filter=D HEAD^1 HEAD^2 -- docs/ > deleted.txt
+          else
+            echo "mode=skip" >> $GITHUB_OUTPUT
+            echo "Not a standard merge commit. Skipping deployment (full sync disabled)."
+            echo "has_changed=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if [ -s changed.txt ]; then
+            echo "has_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changed=false" >> $GITHUB_OUTPUT
           fi
 
           echo ""

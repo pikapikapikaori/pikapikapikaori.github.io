@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'HYKaiTiS';
+    src: url('../fonts/HYKaiTiS.ttf');
+}
+
+@font-face {
+    font-family: 'SortsMillGoudy';
+    src: url('../fonts/SortsMillGoudy-Regular.ttf');
+}
+
 :root {
     --mondrian-red: #C41E3A;
     --mondrian-blue: #1A3C8B;
@@ -9,7 +19,7 @@
     --gap: var(--line-width);
     --border-radius: 2px;
     --transition-speed: 0.45s;
-    --font-sans: 'Helvetica Neue', 'Arial', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    --font-serif: 'SortsMillGoudy', 'HYKaiTiS', serif;
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.18);
     --shadow-flip: 0 12px 32px rgba(0, 0, 0, 0.22);
@@ -22,7 +32,7 @@
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     background: #FAFAF8;
     min-height: 100vh;
     display: flex;
@@ -477,14 +487,14 @@ body {
     z-index: 10;
 }
 
-a {
+.flip-back-text a {
     text-decoration: underline;
     text-decoration-color: var(--mondrian-yellow);
     text-decoration-thickness: 2px;
     color: black;
 }
 
-a:hover {
+.flip-back-text a:hover {
     color: var(--mondrian-blue);
 }
 

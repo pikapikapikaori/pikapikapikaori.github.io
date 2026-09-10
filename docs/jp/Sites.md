@@ -1,11 +1,15 @@
 # すべてのサイト
 
+<!-- tabs:start -->
+
+#### **サイト**
+
 <div class="toc-page-div">
-    <a class="toc-page-display-a" href="./pages/homepage/i18n/jp.html" target="_blank">
+    <a class="toc-page-display-a" href="./pages/mondrian/i18n/jp.html" target="_blank">
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>
-                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-homepage.png">
+                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-mondrian.png">
                 </center>
             </div>
             <div class="toc-page-display-title-div">
@@ -43,6 +47,26 @@
                 このサイト、メインサイト
             </div>
         </div>
+    </a>
+</div>
+
+#### **アーカイブ**
+
+<div class="toc-page-div">
+    <a class="toc-page-display-a" href="./pages/homepage/i18n/jp.html" target="_blank">
+        <div class="toc-page-display-div">
+            <div class="toc-page-display-title-img">
+                <center>
+                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-homepage.png">
+                </center>
+            </div>
+            <div class="toc-page-display-title-div">
+                ピカピカピ
+            </div>
+            <div class="toc-page-display-date-div">
+                個人サイト、壱
+            </div>
+        </div>
     </a><a class="toc-page-display-a" href="./pages/hexo/public/index.html" target="_blank">
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
@@ -59,3 +83,5 @@
         </div>
     </a>
 </div>
+
+<!-- tabs:end -->

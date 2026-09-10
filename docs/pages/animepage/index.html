@@ -133,7 +133,12 @@
 			</section>
 
 			<!-- Copyright -->
-			<div class="copyright">&copy; 2023 - 2025 李亦楊 - All Rights Reserved.</div>
+			<div class="copyright" id="copyright-script-generated"></div>
+			<script>
+				const year = new Date().getFullYear()
+				document.getElementById('copyright-script-generated').innerHTML =
+					`&copy; 2023 - ${year} 李亦楊 - All Rights Reserved.`
+			</script>
 
 		</div>
 

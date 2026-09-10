@@ -50,7 +50,7 @@
 						thou art pouring forth thy soul abroad.<br>In such an ecstasy!<br>Still wouldst thou sing, and I
 						have ears in vain --<br>To thy high requiem become a sod.<br>— John Keats, "Ode to a
 						Nightingale"</p>
-					<p>Welocome to my photograph homepage.</p>
+					<p>Welocome to my photography page.</p>
 					<p>Dream of becoming a person who holds love for wisdom and beauty.</p>
 				</div>
 				<div class="image filtered tinted" data-position="center">
@@ -136,7 +136,12 @@
 			</section>
 
 			<!-- Copyright -->
-			<div class="copyright">&copy; 2023 - 2025 Yi-Yang Li - All Rights Reserved.</div>
+			<div class="copyright" id="copyright-script-generated"></div>
+			<script>
+				const year = new Date().getFullYear()
+				document.getElementById('copyright-script-generated').innerHTML =
+					`&copy; 2023 - ${year} Yi-Yang Li - All Rights Reserved.`
+			</script>
 
 		</div>
 

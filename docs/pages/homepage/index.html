@@ -120,7 +120,12 @@
                         </svg>
                     </a>
                 </div>
-                <p>© 2023 - 2025 李亦楊 - All Rights Reserved.</p>
+                <p id="copyright-script-generated"></p>
+                <script>
+                    const year = new Date().getFullYear()
+                    document.getElementById('copyright-script-generated').innerHTML =
+                        `&copy; 2023 - ${year} 李亦楊 - All Rights Reserved.`
+                </script>
             </div>
         </div>
     </div>

@@ -36,14 +36,26 @@ body {
     background: #FAFAF8;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 16px;
     padding: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+.copyright {
+    font-size: clamp(0.35rem, 0.6vw, 0.6rem);
+    color: #888;
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.5;
+    user-select: none;
+    opacity: 0.85;
 }
 
 .mondrian-wrapper {
@@ -247,7 +259,7 @@ body {
 
 .area-white-small .cell-subtitle,
 .area-yellow .cell-subtitle {
-    font-size: clamp(0.3rem, 0.6vw, 0.6rem);
+    font-size: clamp(0.35rem, 0.6vw, 0.6rem);
 }
 
 .flip-card {

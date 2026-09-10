@@ -58,8 +58,4 @@
             link.setAttribute('aria-label', `访问${text}`)
         }
     })
-
-    console.log('%c Mondrian 10x10 + 功能规划完成',
-        'background: #C41E3A; color: #fff; padding: 4px 12px; font-size: 14px; font-weight: bold; border-radius: 4px;'
-    )
 })()

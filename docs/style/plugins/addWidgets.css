@@ -97,3 +97,21 @@
     transform: translate(270px, 0);
     transition-duration: 1s;
 }
+
+.scroll-to-top:hover {
+    transform: scale(1.2);
+    transition-duration: 100ms;
+}
+
+.scroll-to-top svg {
+    cursor: pointer;
+    border-radius: var(--global-widget-border-radius, 0.3em);
+}
+
+.scroll-to-top svg:hover {
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
+}
+
+.canvas-hide {
+    display: none;
+}

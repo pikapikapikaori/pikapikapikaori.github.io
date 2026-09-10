@@ -266,9 +266,12 @@ function plugin(hook, vm) {
                 switchSpan,
                 colorPickerSpan,
                 scrollToCommentSpan,
-                showSakuraSpan,
-                showLive2dSpan
+                showSakuraSpan
             ]
+
+            if (!isMobile()) {
+                widgetsSpanList.push(showLive2dSpan)
+            }
 
             isWidgetsOpen = !isWidgetsOpen
 
@@ -294,6 +297,11 @@ function plugin(hook, vm) {
     }
 
     // 回顶部
+    let calScrollDisplay = function () {
+        let offset = window.document.documentElement.scrollTop
+        return offset >= addWidgetsOptions.topOffset ? 'block' : 'none'
+    }
+
     let initScrollToTop = function () {
 
         scrollToTopSpan = document.createElement('span')
@@ -303,7 +311,7 @@ function plugin(hook, vm) {
         initializeWidgetSpan(scrollToTopSpan)
         scrollToTopSpan.innerHTML = icons.topScroller
 
-        scrollToTopSpan.style.display = 'none'
+        scrollToTopSpan.style.display = calScrollDisplay ()
 
         scrollToTopSpan.onclick = function (e) {
             e.stopPropagation()
@@ -321,7 +329,7 @@ function plugin(hook, vm) {
 
         let onScroll = function (e) {
             let offset = window.document.documentElement.scrollTop
-            scrollToTopSpan.style.display = offset >= addWidgetsOptions.topOffset ? 'block' : 'none'
+            scrollToTopSpan.style.display = calScrollDisplay ()
         }
         window.addEventListener('scroll', onScroll)
     }
@@ -332,7 +340,9 @@ function plugin(hook, vm) {
         initColorPicker()
         initCommentScroll()
         initSakuraRain()
-        initLive2d()
+        if (!isMobile()) {
+            initLive2d()
+        }
         initShowWidgets()
         initScrollToTop()
 

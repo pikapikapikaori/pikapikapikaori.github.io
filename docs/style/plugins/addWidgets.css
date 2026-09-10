@@ -113,5 +113,5 @@
 }
 
 .canvas-hide {
-    display: none;
+    transform: translate(1000px, 0);
 }

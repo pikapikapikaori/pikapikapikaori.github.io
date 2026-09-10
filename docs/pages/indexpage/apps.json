@@ -1,6 +1,6 @@
 {
     "apps" : [
-        {"name":"ピカピカピ","url":"../homepage/index.html","icon":"home-circle-outline","description":"個人主頁","target": "_blank"},
+        {"name":"ピカピカピ","url":"../mondrian/index.html","icon":"home-circle-outline","description":"個人主頁","target": "_blank"},
         {"name":"ピカピカピ","url":"../../#/","icon":"account-circle-outline","description":"個人博客","target": "_blank"},
         {"name":"ピカピカピ","url":"../animepage/index.html","icon":"camera-outline","description":"攝影主頁","target": "_blank"}
     ]

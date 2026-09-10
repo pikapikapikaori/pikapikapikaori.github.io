@@ -49,6 +49,44 @@ function plugin(hook, vm) {
         el.classList.toggle(disappearCls, !show)
     }
 
+    function hslToHex(h, s, l) {
+        l /= 100
+        const a = s * Math.min(l, 1 - l) / 100
+        const f = n => {
+            const k = (n + h / 30) % 12
+            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
+            return Math.round(255 * color).toString(16).padStart(2, '0')   // convert to Hex and prefix "0" if needed
+        }
+        return `#${f(0)}${f(8)}${f(4)}`
+    }
+
+    function isMobile() {
+        let WIN = window
+        let LOC = WIN['location']
+        let NA = WIN.navigator
+        let UA = NA.userAgent.toLowerCase()
+
+        function test(needle) {
+            return needle.test(UA)
+        }
+        let IsAndroid = test(/android|htc/) || /linux/i.test(NA.platform + '')
+        let IsIPhone = !IsAndroid && test(/ipod|iphone/)
+        let IsWinPhone = test(/windows phone/)
+
+        let device = {
+            IsAndroid: IsAndroid,
+            IsIPhone: IsIPhone,
+            IsWinPhone: IsWinPhone,
+        }
+        let documentElement = WIN.document.documentElement
+        for (var i in device) {
+            if (device[i]) {
+                documentElement.className += ' ' + i.replace('Is', '').toLowerCase()
+            }
+        }
+        return device.IsAndroid || device.IsIPhone || device.IsWinPhone
+    }
+
     // 黑暗模式切换
     let initSwitchMode = function () {
 
@@ -109,7 +147,6 @@ function plugin(hook, vm) {
     }
 
     // 页面主题色
-
     let initColorPicker = function () {
         colorPickerSpan = document.createElement('span')
         colorPickerSpan.id = 'colorPickerSpan'
@@ -147,17 +184,6 @@ function plugin(hook, vm) {
                 colorPickerSlider.value = event.target.dataset.hue
             }
         })
-
-        function hslToHex(h, s, l) {
-            l /= 100
-            const a = s * Math.min(l, 1 - l) / 100
-            const f = n => {
-                const k = (n + h / 30) % 12
-                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
-                return Math.round(255 * color).toString(16).padStart(2, '0')   // convert to Hex and prefix "0" if needed
-            }
-            return `#${f(0)}${f(8)}${f(4)}`
-        }
 
         colorPickerSpan.onclick = function () {
             iscolorPickerPopupOpen = !iscolorPickerPopupOpen
@@ -277,6 +303,8 @@ function plugin(hook, vm) {
         initializeWidgetSpan(scrollToTopSpan)
         scrollToTopSpan.innerHTML = icons.topScroller
 
+        scrollToTopSpan.style.display = 'none'
+
         scrollToTopSpan.onclick = function (e) {
             e.stopPropagation()
             let step = window.scrollY / 15
@@ -307,6 +335,7 @@ function plugin(hook, vm) {
         initLive2d()
         initShowWidgets()
         initScrollToTop()
+
     })
 }
 

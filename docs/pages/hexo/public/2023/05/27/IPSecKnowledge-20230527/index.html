@@ -554,7 +554,12 @@
             </div>
             
         </div>
-        <span>&copy; 2023 - 2026 李亦杨 / 李亦楊 / Yi-Yang Li - All Rights Reserved. </span>
+        <span id="copyright-script-generated"></span>
+        <script>
+            const year = new Date().getFullYear()
+            document.getElementById('copyright-script-generated').innerHTML =
+                `&copy; 2023 - ${year} 李亦楊 - All Rights Reserved.`
+        </script>
         
         
             <br>

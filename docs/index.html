@@ -176,20 +176,12 @@
         isExpected: true,
       },
 
-      // 添加明暗模式切换
-      switchLightDarkMode: {
+      // 添加小组件
+      addWidgets: {
         useSwitchMode: true,
-        top: 130,
-        right: 26
-      },
-
-      // 回到顶部
-      scrollToTop: {
-        auto: true,
-        text: '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        top: 20,
         right: 26,
-        top: 410,
-        offset: 500
+        topOffset: 500
       },
 
       // 最后编辑时间
@@ -309,17 +301,13 @@
   <link rel="stylesheet" href="./style/plugins/sakuraRain.css">
   <script src="./utils/sakuraRain.js"></script>
 
-  <!-- 添加明暗模式切换 -->
-  <link rel="stylesheet" href="./style/plugins/switchLightDarkMode.css">
-  <script src="./utils/switchLightDarkMode.js"></script>
+  <!-- 添加小组件 -->
+  <link rel="stylesheet" href="./style/plugins/addWidgets.css">
+  <script src="./utils/addWidgets.js"></script>
 
   <!-- 添加查看大图 -->
   <link rel="stylesheet" href="./style/plugins/viewFullImage.css">
   <script src="./utils/viewFullImage.js"></script>
-
-  <!-- 添加回到顶部 -->
-  <link rel="stylesheet" href="./style/plugins/scrollToTop.css">
-  <script src="./utils/scrollToTop.js"></script>
 
   <!-- 添加最后编辑时间 -->
   <script src="./sources/npm/tinydate@1.3.0/dist/tinydate.min.js"></script>

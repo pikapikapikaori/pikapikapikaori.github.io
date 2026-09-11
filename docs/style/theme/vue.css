@@ -1,0 +1,23 @@
+:root {
+    --bg-color: #fff;
+    --text-color: #34495e;
+    --heading-color: #2c3e50;
+    --muted-color: #858585;
+    --em-color: #7f8c8d;
+    --h6-color: #777;
+    --sidebar-text-color: #505d6b;
+    --sidebar-title-color: #364149;
+    --border-color: #eee;
+    --border-color-strong: #ddd;
+    --border-color-mid: #ccc;
+    --code-bg: #f8f8f8;
+    --zebra-bg: #f8f8f8;
+    --tip-code-bg: #efefef;
+    --inline-code-color: #e96900;
+    --code-text-color: #525252;
+    --accent-color: #f66;
+    --accent-text-color: #fff;
+    --blur-color: rgba(66, 185, 131, .1);
+    --sidebar-toggle-bg: hsla(0, 0%, 100%, .8);
+    --sidebar-border-color: rgba(0, 0, 0, .07);
+}

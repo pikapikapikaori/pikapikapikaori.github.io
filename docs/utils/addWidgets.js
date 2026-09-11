@@ -54,7 +54,6 @@ function plugin(hook, vm) {
     let ticking = false
 
     let initializeWidgetSpan = function (el) {
-        let elOffset = isNowMobile ? 3 : 1
         el.className = 'page-right-tools-widgets-span'
         el.style.position = 'fixed'
         el.style.right = addWidgetsOptions.right.toString() + 'px'
@@ -130,10 +129,8 @@ function plugin(hook, vm) {
 
         let currentThemeModeIndex = 2
 
-        let lightTheme = Docsify.dom.findAll('link[href*="vue.css"]')[0]
-        let darkTheme = Docsify.dom.findAll('link[href*="dark.css"]')[0]
-
-        let darkThemeTableCss = Docsify.dom.findAll('link[href*="darkModeThemeTable.css"]')[0]
+        let vueTheme = document.getElementById('theme-vue')
+        let darkTheme = document.getElementById('theme-dark')
 
         switchSpan = document.createElement('span')
 
@@ -148,9 +145,8 @@ function plugin(hook, vm) {
                 ? window.matchMedia('(prefers-color-scheme: dark)').matches
                 : currentTheme === 'dark'
 
-            lightTheme.disabled = isDark
+            vueTheme.disabled = isDark
             darkTheme.disabled = !isDark
-            darkThemeTableCss.disabled = !isDark
 
             const iconMap = {
                 light: icons.lightMode,
@@ -210,13 +206,11 @@ function plugin(hook, vm) {
 
         colorPickerSlider.oninput = function () {
             document.documentElement.style.setProperty('--theme-color', hslToHex(this.value, 66, 78))
-            document.documentElement.style.setProperty('--global-theme-color-blur', hslToHex(this.value, 66, 78) + '1a')
         }
 
         Array.from(colorPickerPopupDiv.getElementsByClassName('color-picker-preset-color-btn-div')).forEach(colorPickerPresetColorBtn => {
             colorPickerPresetColorBtn.onclick = function (event) {
                 document.documentElement.style.setProperty('--theme-color', hslToHex(event.target.dataset.hue, 66, 78))
-                document.documentElement.style.setProperty('--global-theme-color-blur', hslToHex(event.target.dataset.hue, 66, 78) + '1a')
                 colorPickerSlider.value = event.target.dataset.hue
             }
         })

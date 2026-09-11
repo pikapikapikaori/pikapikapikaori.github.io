@@ -73,7 +73,7 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 1rem;
-    color: var(--global-background-blur, rgba(0, 0, 0, .1));
+    color: var(--em-color);
 }
 
 .toc-paginator-div {
@@ -92,7 +92,7 @@
     text-align: center;
     background-color: transparent;
     border-radius: var(--global-widget-border-radius, 0.3em);
-    border: 0.1em solid var(--global-border-default-color, #eee);
+    border: 0.1em solid var(--border-color, #eee);
 }
 
 .toc-paginator-input span {

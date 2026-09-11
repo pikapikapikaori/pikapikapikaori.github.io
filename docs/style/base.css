@@ -8,19 +8,43 @@
 }
 
 :root {
+    /* ===== 主题颜色变量：换主题只改这一段 ===== */
+    --bg-color: #fff;
+    --text-color: #34495e;
+    --heading-color: #2c3e50;
+    --muted-color: #858585;
+    --em-color: #7f8c8d;
+    --h6-color: #777;
+    --sidebar-text-color: #505d6b;
+    --sidebar-title-color: #364149;
+    --border-color: #eee;
+    --border-color-strong: #ddd;
+    --border-color-mid: #ccc;
+    --code-bg: #f8f8f8;
+    --zebra-bg: #f8f8f8;
+    --tip-code-bg: #efefef;
+    --inline-code-color: #e96900;
+    --code-text-color: #525252;
+    --accent-color: #f66;
+    --accent-text-color: #fff;
+    --blur-color: rgba(66, 185, 131, .1);
+    --sidebar-toggle-bg: hsla(0, 0%, 100%, .8);
+    --sidebar-border-color: rgba(0, 0, 0, .07);
+
+    /* ===== 框架变量：保持原样 ===== */
     --docsify-example-panels-document-width: 80%;
     --global-el-border-radius: 10px;
     --global-widget-border-radius: 0.3em;
     --avatar-border-radius: 50%;
-    --global-border-default-color: #eee;
-    --global-background-blur: rgba(0, 0, 0, .1);
-    --global-theme-color-blur: #c7a2ec1a;
     --global-brightness-blur: 0.85;
     --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', serif;
+    --global-theme-color-blur: color-mix(in srgb,
+            var(--theme-color) 10%,
+            transparent);
 }
 
 ::-webkit-scrollbar {
-    background: #eee;
+    background: var(--border-color);
     width: 5px;
     height: 3px;
 }
@@ -94,7 +118,7 @@ html {
 body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    color: #34495e;
+    color: var(--text-color);
     font-family: var(--global-font, serif);
     font-size: 16px;
     letter-spacing: 0;
@@ -117,7 +141,7 @@ a[disabled] {
 }
 
 kbd {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color-mid);
     border-radius: 3px;
     display: inline-block;
     font-size: 12px !important;
@@ -186,9 +210,9 @@ li input[type=checkbox] {
 }
 
 .app-nav li ul {
-    background-color: #fff;
+    background-color: var(--bg-color);
     border: 1px solid;
-    border-color: #ddd #ddd #ccc;
+    border-color: var(--border-color-strong) var(--border-color-strong) var(--border-color-mid);
     border-radius: 4px;
     box-sizing: border-box;
     display: none;
@@ -239,7 +263,7 @@ li input[type=checkbox] {
 }
 
 .github-corner svg {
-    color: #fff;
+    color: var(--bg-color);
     fill: #c7a2ec;
     fill: var(--theme-color, #c7a2ec);
     height: 80px;
@@ -265,7 +289,7 @@ main.hidden {
 }
 
 .anchor span {
-    color: #34495e
+    color: var(--text-color)
 }
 
 .anchor:hover {
@@ -273,7 +297,7 @@ main.hidden {
 }
 
 .sidebar {
-    border-right: 1px solid rgba(0, 0, 0, .07);
+    border-right: 1px solid var(--sidebar-border-color);
     overflow-y: auto;
     padding: 40px 0 0;
     position: absolute;
@@ -354,7 +378,7 @@ main.hidden {
 
 .sidebar-toggle {
     background-color: transparent;
-    background-color: hsla(0, 0%, 100%, .8);
+    background-color: var(--sidebar-toggle-bg);
     border: 0;
     outline: none;
     padding: 10px;
@@ -413,12 +437,12 @@ body.sticky .sidebar-toggle {
 
 .markdown-section hr {
     border: none;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
     margin: 2em 0
 }
 
 .markdown-section iframe {
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     width: 1px;
     min-width: 100%
 }
@@ -438,22 +462,22 @@ body.sticky .sidebar-toggle {
 
 .markdown-section td,
 .markdown-section th {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color-strong);
     padding: 6px 13px
 }
 
 .markdown-section tr {
-    border-top: 1px solid #ccc
+    border-top: 1px solid var(--border-color-mid)
 }
 
 .markdown-section p.tip,
 .markdown-section tr:nth-child(2n) {
-    background-color: #f8f8f8
+    background-color: var(--zebra-bg)
 }
 
 .markdown-section p.tip {
     border-bottom-right-radius: 2px;
-    border-left: 4px solid #f66;
+    border-left: 4px solid var(--accent-color);
     border-top-right-radius: 2px;
     margin: 2em 0;
     padding: 12px 24px 12px 30px;
@@ -461,9 +485,9 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip:before {
-    background-color: #f66;
+    background-color: var(--accent-color);
     border-radius: 100%;
-    color: #fff;
+    color: var(--accent-text-color);
     content: "!";
     font-family: 'Dosis', Arial, sans-serif;
     font-size: 14px;
@@ -478,15 +502,15 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip code {
-    background-color: #efefef
+    background-color: var(--tip-code-bg)
 }
 
 .markdown-section p.tip em {
-    color: #34495e
+    color: var(--text-color)
 }
 
 .markdown-section p.warn {
-    background: rgba(66, 185, 131, .1);
+    background: var(--blur-color);
     border-radius: 2px;
     padding: 1rem
 }
@@ -568,7 +592,7 @@ body.close .content {
     }
 
     body.close .sidebar-toggle {
-        background-color: hsla(0, 0%, 100%, .8);
+        background-color: var(--sidebar-toggle-bg);
         transition: background-color 1s;
         width: 284px;
         padding: 10px
@@ -626,7 +650,7 @@ section.cover.show {
 }
 
 section.cover.has-mask .mask {
-    background-color: #fff;
+    background-color: var(--bg-color);
     opacity: .8;
     position: absolute;
     top: 0;
@@ -728,11 +752,11 @@ section.cover blockquote>p>a:hover {
 
 .sidebar,
 body {
-    background-color: #fff
+    background-color: var(--bg-color)
 }
 
 .sidebar {
-    color: #364149
+    color: var(--sidebar-title-color)
 }
 
 .sidebar li {
@@ -740,7 +764,7 @@ body {
 }
 
 .sidebar ul li a {
-    color: #505d6b;
+    color: var(--sidebar-text-color);
     font-size: 14px;
     font-weight: 400;
     overflow: hidden;
@@ -773,7 +797,7 @@ body {
 .markdown-section h3,
 .markdown-section h4,
 .markdown-section strong {
-    color: #2c3e50;
+    color: var(--heading-color);
     font-weight: 600
 }
 
@@ -806,7 +830,7 @@ body {
 }
 
 .markdown-section h6 {
-    color: #777;
+    color: var(--h6-color);
     font-size: 1rem
 }
 
@@ -829,7 +853,7 @@ body {
 
 .markdown-section blockquote {
     border-left: 4px solid var(--theme-color, #c7a2ec);
-    color: #858585;
+    color: var(--muted-color);
     margin: 2em 0;
     padding-left: 20px
 }
@@ -844,7 +868,7 @@ body {
 }
 
 .markdown-section em {
-    color: #7f8c8d
+    color: var(--em-color)
 }
 
 .markdown-section code,
@@ -855,7 +879,7 @@ body {
 
 .markdown-section code,
 .markdown-section pre {
-    background-color: #f8f8f8
+    background-color: var(--code-bg)
 }
 
 .markdown-section output,
@@ -878,7 +902,7 @@ body {
 
 .markdown-section code {
     border-radius: 2px;
-    color: #e96900;
+    color: var(--inline-code-color);
     margin: 0 2px;
     padding: 3px 5px;
     white-space: pre-wrap
@@ -896,7 +920,7 @@ body {
 }
 
 .markdown-section pre>code {
-    color: #525252;
+    color: var(--code-text-color);
     font-size: .8rem;
     padding: 2.2em 5px;
     line-height: inherit;
@@ -908,7 +932,7 @@ body {
 
 .markdown-section output {
     padding: 1.7rem 1.4rem;
-    border: 1px dotted #ccc
+    border: 1px dotted var(--border-color-mid)
 }
 
 .markdown-section output>:first-child {
@@ -928,7 +952,7 @@ body {
 
 .markdown-section output:after,
 .markdown-section pre:after {
-    color: #ccc;
+    color: var(--border-color-mid);
     font-size: .6rem;
     font-weight: 600;
     height: 15px;

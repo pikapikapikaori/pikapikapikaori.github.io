@@ -28,9 +28,11 @@
   <link rel="stylesheet" href="./style/fonts.css">
   <link rel="stylesheet" href="./style/fontMinorityLang.css">
 
-  <link rel="stylesheet" href="./style/vue.css">
-  <link rel="stylesheet" href="./style/dark.css" disabled>
-  <link rel="stylesheet" href="./style/darkModeThemeTable.css" disabled>
+  <link rel="stylesheet" href="./style/base.css">
+
+  <link id="theme-vue" rel="stylesheet" href="./style/theme/vue.css">
+  <link id="theme-dark-plus" rel="stylesheet" href="./style/plus.css">
+  <link id="theme-dark" rel="stylesheet" href="./style/theme/dark.css" disabled>
 
   <link rel="stylesheet" href="./style/global.css">
   <link rel="stylesheet" href="./style/mainPage.css">
@@ -141,7 +143,7 @@
       // 自用插件
       // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
       gitalkWithFooter: {
-        footerInnerHtml: "<div style='text-align: center;max-width: 800px;width: 80%;align-self: center;padding: 30px 15px 20px;margin: 0 auto'><div style='border-top: 1px solid var(--global-border-default-color,#eee);'><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p><div/></div>",
+        footerInnerHtml: "<div style='text-align: center;max-width: 800px;width: 80%;align-self: center;padding: 30px 15px 20px;margin: 0 auto'><div style='border-top: 1px solid var(--border-color,#eee);'><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p><div/></div>",
         gitalkConfig: {
           clientID: '6a54e5946401951488d1',
           clientSecret: '5ca9de120592a9908348d09480cea6917112a4ec',

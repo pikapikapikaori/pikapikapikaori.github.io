@@ -115,3 +115,61 @@
 .canvas-hide {
     transform: translate(1000px, 0);
 }
+
+.read-progress {
+    --p: 0;
+    --thickness: 3px;
+    --ring-border: var(--theme-color, #ea6f5a);
+    --bw: 1px;
+
+    display: grid;
+    place-items: center;
+    flex: none;
+    cursor: pointer;
+}
+
+.read-progress:hover {
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
+}
+
+.read-progress::before {
+    cursor: pointer;
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        /* 外描边 */
+        radial-gradient(farthest-side,
+            transparent calc(100% - var(--bw)),
+            var(--ring-border) calc(100% - var(--bw)),
+            var(--ring-border) 100%),
+        /* 内描边 */
+        radial-gradient(farthest-side,
+            transparent calc(100% - var(--thickness)),
+            var(--ring-border) calc(100% - var(--thickness)),
+            var(--ring-border) calc(100% - var(--thickness) + var(--bw)),
+            transparent calc(100% - var(--thickness) + var(--bw))),
+        /* 进度 + 轨道 */
+        conic-gradient(var(--theme-color, #ea6f5a) calc(var(--p) * 1%), transparent 0);
+    -webkit-mask: radial-gradient(farthest-side,
+            #0000 calc(100% - var(--thickness)),
+            #000 calc(100% - var(--thickness)));
+    mask: radial-gradient(farthest-side,
+            #0000 calc(100% - var(--thickness)),
+            #000 calc(100% - var(--thickness)));
+}
+
+.read-progress .num {
+    position: relative;
+    font-size: 12px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+    top: -2px;
+    cursor: pointer;
+}
+
+.progress-num-hide {
+    right: -1000px;
+}

@@ -37,7 +37,7 @@
     --global-widget-border-radius: 0.3em;
     --avatar-border-radius: 50%;
     --global-brightness-blur: 0.85;
-    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', serif;
+    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
@@ -84,7 +84,7 @@ span.emoji {
 }
 
 span.emoji {
-    font-family: 'Apple Color Emoji';
+    font-family: 'TwitterColorEmoji';
     font-size: 1.2em
 }
 
@@ -489,7 +489,7 @@ body.sticky .sidebar-toggle {
     border-radius: 100%;
     color: var(--accent-text-color);
     content: "!";
-    font-family: 'Dosis', Arial, sans-serif;
+    font-family: 'Menlo', Arial, sans-serif;
     font-size: 14px;
     font-weight: 700;
     left: -12px;

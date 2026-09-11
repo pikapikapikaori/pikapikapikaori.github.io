@@ -1,7 +1,7 @@
 // default values
 let addWidgetsOptions = {
     useSwitchMode: true,
-    top: 130,
+    top: 0,
     right: 26,
     topOffset: 500
 }
@@ -23,6 +23,10 @@ function plugin(hook, vm) {
         scrollToTopSpan
 
     let widgets = []
+
+    let widgetsCnt = 7
+
+    const widgetTop = 35
 
     const widgetSize = '24px'
 
@@ -54,7 +58,7 @@ function plugin(hook, vm) {
         el.className = 'page-right-tools-widgets-span'
         el.style.position = 'fixed'
         el.style.right = addWidgetsOptions.right.toString() + 'px'
-        el.style.top = (addWidgetsOptions.top + 35 * (widgets.indexOf(el) + elOffset)).toString() + 'px'
+        el.style.top = `calc(${addWidgetsOptions.top}px + (100vh - ${35 * widgetsCnt}px) / 2 + ${35 * widgets.indexOf(el)}px)`
     }
 
     const toggleAppear = (el, appearCls, disappearCls, show) => {
@@ -192,7 +196,7 @@ function plugin(hook, vm) {
         colorPickerPopupSpan.className = 'color-picker-popup-span color-picker-popup-span-disappear'
         colorPickerPopupSpan.style.position = 'fixed'
         colorPickerPopupSpan.style.right = (addWidgetsOptions.right + 35).toString() + 'px'
-        colorPickerPopupSpan.style.top = (addWidgetsOptions.top + 100).toString() + 'px'
+        colorPickerPopupSpan.style.top = `calc(${addWidgetsOptions.top}px + (100vh - ${widgetTop * widgetsCnt}px) / 2 + ${widgetTop * widgets.indexOf(colorPickerSpan)}px)`
         let colorPickerPopupDiv = document.createElement('div')
         colorPickerPopupDiv.id = 'color-picker-popup-div'
         colorPickerPopupDiv.className = 'color-picker-popup-div'
@@ -396,6 +400,10 @@ function plugin(hook, vm) {
     hook.mounted(function () {
 
         isNowMobile = isMobile()
+
+        if (!isNowMobile) {
+            widgetsCnt = 8
+        }
 
         initSwitchMode()
         initColorPicker()

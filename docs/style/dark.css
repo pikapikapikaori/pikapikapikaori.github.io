@@ -1088,10 +1088,3 @@ video,
 pre {
     border-radius: var(--global-el-border-radius, 10px);
 }
-
-
-/* Docsify Search */
-.input-wrap input[type=search] {
-    background: #3f3f3f;
-    color: #c8c8c8
-}

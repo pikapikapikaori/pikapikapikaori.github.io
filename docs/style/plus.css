@@ -4,7 +4,29 @@
     color: var(--sidebar-text-color);
 }
 
+/* Docsify Copy Code */
+pre .docsify-copy-code-button {
+    border-radius: 10px;
+}
+
+pre .docsify-copy-code-button span {
+    border-radius: 10px;
+}
+
+/* Docsify Tabs */
+.docsify-tabs__tab:not(.docsify-tabs__tab--active) {
+    cursor: pointer;
+}
+
+.docsify-tabs__tab:not(.docsify-tabs__tab--active):hover {
+    color: var(--theme-color, #ea6f5a);
+}
+
 /* Docsify Pagination */
+.docsify-pagination-container .pagination-item a:hover .pagination-item-title {
+    text-decoration-color: var(--theme-color, #ea6f5a);
+}
+
 .docsify-pagination-container {
     border-top: 1px solid var(--border-color) !important;
 }
@@ -29,4 +51,8 @@
 
 .gt-container .gt-meta {
     border-bottom: 1px solid var(--border-color) !important;
+}
+
+.gt-comments .markdown-body {
+    font-family: var(--global-font, serif);
 }

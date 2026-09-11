@@ -54,7 +54,6 @@ function plugin(hook, vm) {
     let ticking = false
 
     let initializeWidgetSpan = function (el) {
-        let elOffset = isNowMobile ? 3 : 1
         el.className = 'page-right-tools-widgets-span'
         el.style.position = 'fixed'
         el.style.right = addWidgetsOptions.right.toString() + 'px'

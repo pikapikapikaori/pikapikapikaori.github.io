@@ -10,7 +10,7 @@
 }
 
 .search .input-wrap {
-    border-block: 1px solid var(--global-border-default-color, #eee);
+    border-block: 1px solid var(--border-color, #eee);
 }
 
 .search .input-wrap>input[type=search] {

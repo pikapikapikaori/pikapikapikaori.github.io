@@ -36,10 +36,11 @@
     --global-el-border-radius: 10px;
     --global-widget-border-radius: 0.3em;
     --avatar-border-radius: 50%;
-    --global-background-blur: rgba(0, 0, 0, .1);
-    --global-theme-color-blur: #c7a2ec1a;
     --global-brightness-blur: 0.85;
     --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', serif;
+    --global-theme-color-blur: color-mix(in srgb,
+            var(--theme-color) 10%,
+            transparent);
 }
 
 ::-webkit-scrollbar {

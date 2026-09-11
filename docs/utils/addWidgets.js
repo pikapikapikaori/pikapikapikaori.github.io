@@ -206,13 +206,11 @@ function plugin(hook, vm) {
 
         colorPickerSlider.oninput = function () {
             document.documentElement.style.setProperty('--theme-color', hslToHex(this.value, 66, 78))
-            document.documentElement.style.setProperty('--global-theme-color-blur', hslToHex(this.value, 66, 78) + '1a')
         }
 
         Array.from(colorPickerPopupDiv.getElementsByClassName('color-picker-preset-color-btn-div')).forEach(colorPickerPresetColorBtn => {
             colorPickerPresetColorBtn.onclick = function (event) {
                 document.documentElement.style.setProperty('--theme-color', hslToHex(event.target.dataset.hue, 66, 78))
-                document.documentElement.style.setProperty('--global-theme-color-blur', hslToHex(event.target.dataset.hue, 66, 78) + '1a')
                 colorPickerSlider.value = event.target.dataset.hue
             }
         })

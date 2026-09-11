@@ -73,7 +73,7 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 1rem;
-    color: var(--global-background-blur, rgba(0, 0, 0, .1));
+    color: var(--em-color);
 }
 
 .toc-paginator-div {

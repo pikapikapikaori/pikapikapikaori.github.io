@@ -742,6 +742,7 @@ body {
 .sidebar ul li a {
     color: #c8c8c8;
     font-size: 14px;
+    font-weight: 400;
     overflow: hidden;
     text-decoration: none;
     text-overflow: ellipsis;
@@ -757,8 +758,14 @@ body {
 }
 
 .sidebar ul li.active>a {
+    border-right: 2px solid;
     color: var(--theme-color, #c7a2ec);
     font-weight: 600
+}
+
+.app-sub-sidebar li:before {
+    padding-right: 4px;
+    float: left
 }
 
 .markdown-section h1,
@@ -804,9 +811,7 @@ body {
 }
 
 .markdown-section figure,
-.markdown-section ol,
-.markdown-section p,
-.markdown-section ul {
+.markdown-section p {
     margin: 1.2em 0
 }
 
@@ -842,11 +847,38 @@ body {
     color: #7f8c8d
 }
 
+.markdown-section code,
+.markdown-section output:after,
+.markdown-section pre {
+    font-family: 'Menlo', courier, monospace
+}
+
+.markdown-section code,
+.markdown-section pre {
+    background-color: #282828
+}
+
+.markdown-section output,
+.markdown-section pre {
+    margin: 1.2em 0;
+    position: relative
+}
+
+.markdown-section output,
+.markdown-section pre>code {
+    border-radius: 2px;
+    display: block
+}
+
+.markdown-section output:after,
+.markdown-section pre>code {
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial
+}
+
 .markdown-section code {
-    background-color: #282828;
     border-radius: 2px;
     color: #657b83;
-    font-family: 'Menlo', courier, monospace;
     margin: 0 2px;
     padding: 3px 5px;
     white-space: pre-wrap
@@ -857,16 +889,56 @@ body {
 }
 
 .markdown-section pre {
-    -moz-osx-font-smoothing: initial;
-    -webkit-font-smoothing: initial;
-    background-color: #282828;
-    font-family: 'Menlo', courier, monospace;
-    line-height: 1.5rem;
-    margin: 1.2em 0;
-    overflow: auto;
     padding: 0 1.4rem;
-    position: relative;
+    line-height: 1.5rem;
+    overflow: auto;
     word-wrap: normal
+}
+
+.markdown-section pre>code {
+    color: #657b83;
+    font-size: .8rem;
+    padding: 2.2em 5px;
+    line-height: inherit;
+    margin: 0 2px;
+    max-width: inherit;
+    overflow: inherit;
+    white-space: inherit
+}
+
+.markdown-section output {
+    padding: 1.7rem 1.4rem;
+    border: 1px dotted #ccc
+}
+
+.markdown-section output>:first-child {
+    margin-top: 0
+}
+
+.markdown-section output>:last-child {
+    margin-bottom: 0
+}
+
+.markdown-section code:after,
+.markdown-section code:before,
+.markdown-section output:after,
+.markdown-section output:before {
+    letter-spacing: .05rem
+}
+
+.markdown-section output:after,
+.markdown-section pre:after {
+    color: #ccc;
+    font-size: .6rem;
+    font-weight: 600;
+    height: 15px;
+    line-height: 15px;
+    padding: 5px 10px 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+    content: attr(data-lang)
 }
 
 .markdown-section {
@@ -956,6 +1028,7 @@ body {
     color: var(--theme-color, #c7a2ec)
 }
 
+.token.function,
 .token.keyword {
     color: #e96900
 }
@@ -997,59 +1070,12 @@ body {
     cursor: help
 }
 
-.markdown-section pre>code {
-    -moz-osx-font-smoothing: initial;
-    -webkit-font-smoothing: initial;
-    background-color: #282828;
-    border-radius: 2px;
-    color: #657b83;
-    display: block;
-    font-family: 'Menlo', courier, monospace;
-    font-size: .8rem;
-    line-height: inherit;
-    margin: 0 2px;
-    max-width: inherit;
-    overflow: inherit;
-    padding: 2.2em 5px;
-    white-space: inherit
-}
-
-.markdown-section code:after,
-.markdown-section code:before {
-    letter-spacing: .05rem
-}
-
 code .token {
     -moz-osx-font-smoothing: initial;
     -webkit-font-smoothing: initial;
     min-height: 1.5rem;
     position: relative;
     left: auto
-}
-
-pre:after {
-    color: #ccc;
-    content: attr(data-lang);
-    font-size: .6rem;
-    font-weight: 600;
-    height: 15px;
-    line-height: 15px;
-    padding: 5px 10px 0;
-    position: absolute;
-    right: 0;
-    text-align: right;
-    top: 0
-}
-
-.markdown-section p.tip {
-    background-color: #282828;
-    color: #657b83
-}
-
-input[type=search] {
-    background: #4f4f4f;
-    border-color: #4f4f4f;
-    color: #c8c8c8
 }
 
 nav.app-nav li ul {

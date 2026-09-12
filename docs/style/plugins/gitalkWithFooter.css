@@ -89,3 +89,28 @@
 .gt-container .gt-comment-content .gt-comment-body {
     color: inherit !important;
 }
+
+.gt-container .gt-popup {
+    background-color: var(--bg-color) !important;
+}
+
+.gt-container .gt-btn-preview {
+    background-color: var(--bg-color) !important;
+}
+
+.gt-container {
+
+    .gt-header-textarea,
+    .gt-header-preview {
+        background-color: var(--zebra-bg) !important;
+        border: 1px solid var(--border-color) !important;
+    }
+}
+
+.gt-container .gt-meta {
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.gt-comments .markdown-body {
+    font-family: var(--global-font, serif);
+}

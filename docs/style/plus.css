@@ -22,6 +22,10 @@ pre .docsify-copy-code-button span {
     color: var(--theme-color, #ea6f5a);
 }
 
+.docsify-tabs--material>.docsify-tabs__content {
+    border-color: var(--border-color);
+}
+
 /* Docsify Pagination */
 .docsify-pagination-container .pagination-item a:hover .pagination-item-title {
     text-decoration-color: var(--theme-color, #ea6f5a);

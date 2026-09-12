@@ -92,6 +92,15 @@
 
 .gt-container .gt-popup {
     background-color: var(--bg-color) !important;
+    border-color: var(--border-color);
+}
+
+.gt-container .gt-popup .gt-copyright {
+    border-color: var(--border-color);
+}
+
+.gt-container .gt-popup .gt-copyright .gt-version {
+    color: var(--em-color);
 }
 
 .gt-container .gt-btn-preview {
@@ -111,6 +120,7 @@
     border-bottom: 1px solid var(--border-color) !important;
 }
 
-.gt-comments .markdown-body {
+.gt-comments .markdown-body,
+.gt-header .markdown-body {
     font-family: var(--global-font, serif);
 }

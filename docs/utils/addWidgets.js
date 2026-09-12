@@ -3,7 +3,44 @@ let addWidgetsOptions = {
     useSwitchMode: true,
     top: 0,
     right: 26,
-    topOffset: 500
+    topOffset: 500,
+    themes: [
+        {
+            name: 'default',
+            light: null,
+            dark: null
+        },
+        {
+            name: 'lavender',
+            light: './style/theme/lavender.css',
+            dark: './style/theme/lavandula.css'
+        },
+        {
+            name: 'kraft',
+            light: './style/theme/kraft.css',
+            dark: './style/theme/bronze.css'
+        },
+        {
+            name: 'matcha',
+            light: './style/theme/matcha.css',
+            dark: './style/theme/library.css'
+        },
+        {
+            name: 'kirby',
+            light: './style/theme/kirby.css',
+            dark: './style/theme/metaknight.css'
+        },
+        {
+            name: 'calligraphy',
+            light: './style/theme/calligraphy.css',
+            dark: './style/theme/grid.css'
+        },
+        {
+            name: 'typography',
+            light: './style/theme/typography.css',
+            dark: './style/theme/dot.css'
+        }
+    ]
 }
 
 // Docsify plugin functions
@@ -25,7 +62,7 @@ function plugin(hook, vm) {
 
     let widgets = []
 
-    let widgetsCnt = 7
+    let widgetsCnt = 8
 
     const widgetTop = 35
 
@@ -54,53 +91,7 @@ function plugin(hook, vm) {
         modes: ['auto', 'light', 'dark'],
 
         themeIndex: 0,
-        groups: [
-            {
-                name: 'default',
-                light: null,
-                dark: null
-            },
-            {
-                name: 'lavender',
-                light: './style/theme/lavender.css',
-                dark: './style/theme/lavandula.css'
-            },
-            {
-                name: 'kraft',
-                light: './style/theme/kraft.css',
-                dark: './style/theme/bronze.css'
-            },
-            {
-                name: 'matcha',
-                light: './style/theme/matcha.css',
-                dark: './style/theme/library.css'
-            },
-            {
-                name: 'kirby',
-                light: './style/theme/kirby.css',
-                dark: './style/theme/metaknight.css'
-            },
-            {
-                name: 'catppuccin',
-                light: './style/theme/latte.css',
-                dark: './style/theme/catppuccin.css'
-            },
-            {
-                name: 'gold',
-                light: './style/theme/whitegold.css',
-                dark: './style/theme/darkgold.css'
-            },
-            {
-                name: 'calligraphy',
-                light: './style/theme/calligraphy.css',
-                dark: './style/theme/grid.css'
-            },
-            {
-                name: 'typography',
-                light: './style/theme/typography.css',
-                dark: './style/theme/dot.css'
-            }
-        ]
+        groups: addWidgetsOptions.themes
     }
 
     // 页面主题色
@@ -466,7 +457,7 @@ function plugin(hook, vm) {
         isNowMobile = isMobile()
 
         if (!isNowMobile) {
-            widgetsCnt = 8
+            widgetsCnt = 9
         }
 
         initSwitchMode()

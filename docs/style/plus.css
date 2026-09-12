@@ -22,6 +22,10 @@ pre .docsify-copy-code-button span {
     color: var(--theme-color, #ea6f5a);
 }
 
+.docsify-tabs--material>.docsify-tabs__content {
+    border-color: var(--border-color);
+}
+
 /* Docsify Pagination */
 .docsify-pagination-container .pagination-item a:hover .pagination-item-title {
     text-decoration-color: var(--theme-color, #ea6f5a);
@@ -29,30 +33,4 @@ pre .docsify-copy-code-button span {
 
 .docsify-pagination-container {
     border-top: 1px solid var(--border-color) !important;
-}
-
-/* Gitalk */
-.gt-container .gt-popup {
-    background-color: var(--bg-color) !important;
-}
-
-.gt-container .gt-btn-preview {
-    background-color: var(--bg-color) !important;
-}
-
-.gt-container {
-
-    .gt-header-textarea,
-    .gt-header-preview {
-        background-color: var(--zebra-bg) !important;
-        border: 1px solid var(--border-color) !important;
-    }
-}
-
-.gt-container .gt-meta {
-    border-bottom: 1px solid var(--border-color) !important;
-}
-
-.gt-comments .markdown-body {
-    font-family: var(--global-font, serif);
 }

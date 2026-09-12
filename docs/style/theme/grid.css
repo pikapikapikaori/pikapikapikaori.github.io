@@ -1,0 +1,42 @@
+:root {
+    --bg-color: #1a2028;
+    --text-color: #c8d8e0;
+    --heading-color: #e0e8f0;
+    --muted-color: #8a9aa8;
+    --em-color: #7a8a98;
+    --h6-color: #8a9aa8;
+    --sidebar-text-color: #a8b8c8;
+    --sidebar-title-color: #e0e8f0;
+    --border-color: #2a3440;
+    --border-color-strong: #3a4450;
+    --border-color-mid: #3a4450;
+    --code-bg: #222c368c;
+    --zebra-bg: #222c368c;
+    --tip-code-bg: #2a34408c;
+    --inline-code-color: #e88a6a;
+    --code-text-color: #c8d8e0;
+    --accent-color: #c8b840;
+    --accent-text-color: #1a2028;
+    --blur-color: rgba(200, 184, 64, .1);
+    --sidebar-toggle-bg: rgba(26, 32, 40, .85);
+    --sidebar-border-color: #2a3440;
+
+    --grid-size: 22px;
+    --grid-color: rgba(120, 160, 200, .1);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+}

@@ -26,6 +26,8 @@
     border-radius: var(--global-widget-border-radius, 0.3em);
 }
 
+
+/* 页面主题色 */
 .color-picker-popup-div {
     border: 1px solid var(--theme-color, #ea6f5a);
     height: 170px;
@@ -50,6 +52,7 @@
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     height: 5px;
     border-radius: var(--global-el-border-radius, 10px);
+    border: 1px solid var(--border-color);
 }
 
 .color-picker-slider::-webkit-slider-thumb {
@@ -62,6 +65,7 @@
     border-radius: 3px;
     cursor: pointer;
     transition: transform 0.1s;
+    border: 1px solid var(--border-color);
 }
 
 .color-picker-slider::-webkit-slider-thumb:hover {
@@ -82,6 +86,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.1s;
+    border: 1px solid var(--border-color);
 }
 
 .color-picker-preset-color-btn-div:hover {
@@ -98,24 +103,12 @@
     transition-duration: 1s;
 }
 
-.scroll-to-top:hover {
-    transform: scale(1.2);
-    transition-duration: 100ms;
-}
-
-.scroll-to-top svg {
-    cursor: pointer;
-    border-radius: var(--global-widget-border-radius, 0.3em);
-}
-
-.scroll-to-top svg:hover {
-    background-color: var(--global-theme-color-blur, #ea6f5a1a);
-}
-
+/* Live 2d 小人 */
 .canvas-hide {
     transform: translate(1000px, 0);
 }
 
+/* 进度条 */
 .read-progress {
     --p: 0;
     --thickness: 3px;
@@ -172,4 +165,19 @@
 
 .progress-num-hide {
     right: -1000px;
+}
+
+/* 回顶部 */
+.scroll-to-top:hover {
+    transform: scale(1.2);
+    transition-duration: 100ms;
+}
+
+.scroll-to-top svg {
+    cursor: pointer;
+    border-radius: var(--global-widget-border-radius, 0.3em);
+}
+
+.scroll-to-top svg:hover {
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
 }

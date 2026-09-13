@@ -135,11 +135,6 @@ function plugin(hook, vm) {
         return elSpan
     }
 
-    const toggleAppear = (el, appearCls, disappearCls, show) => {
-        el.classList.toggle(appearCls, show)
-        el.classList.toggle(disappearCls, !show)
-    }
-
     function isMobile() {
         let WIN = window
         let NA = WIN.navigator
@@ -311,8 +306,7 @@ function plugin(hook, vm) {
         themeSpan.onclick = function (e) {
             isthemePickerOpen = !isthemePickerOpen
 
-            toggleAppear(themePickerPopupSpan, 'theme-picker-popup-span-appear', 'theme-picker-popup-span-disappear', isthemePickerOpen
-            )
+            themePickerPopupSpan.classList.toggle('theme-picker-popup-span-disappear')
         }
 
         document.body.appendChild(themeSpan)
@@ -354,7 +348,7 @@ function plugin(hook, vm) {
         colorPickerSpan.onclick = function () {
             iscolorPickerPopupOpen = !iscolorPickerPopupOpen
 
-            toggleAppear(colorPickerPopupSpan, 'color-picker-popup-span-appear', 'color-picker-popup-span-disappear', iscolorPickerPopupOpen)
+            colorPickerPopupSpan.classList.toggle('color-picker-popup-span-disappear')
         }
     }
 
@@ -428,25 +422,14 @@ function plugin(hook, vm) {
 
             isWidgetsOpen = !isWidgetsOpen
 
-            widgetsSpanList.forEach(widget => toggleAppear(
-                widget,
-                'page-right-tools-widgets-span-appear',
-                'page-right-tools-widgets-span-disappear',
-                isWidgetsOpen
-            ))
+            widgetsSpanList.forEach(widget => widget.classList.toggle('page-right-tools-widgets-span-disappear'))
 
             if (!isWidgetsOpen) {
                 iscolorPickerPopupOpen = isWidgetsOpen
-                toggleAppear(
-                    colorPickerPopupSpan,
-                    'color-picker-popup-span-appear',
-                    'color-picker-popup-span-disappear',
-                    iscolorPickerPopupOpen
-                )
+                colorPickerPopupSpan.classList.add('color-picker-popup-span-disappear')
 
                 isthemePickerOpen = isWidgetsOpen
-                toggleAppear(themePickerPopupSpan, 'theme-picker-popup-span-appear', 'theme-picker-popup-span-disappear', isthemePickerOpen
-                )
+                themePickerPopupSpan.classList.add('theme-picker-popup-span-disappear')
             }
         }
 

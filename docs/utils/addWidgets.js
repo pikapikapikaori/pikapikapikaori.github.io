@@ -10,49 +10,63 @@ let addWidgetsOptions = {
             light: null,
             dark: null,
             lightColor: '#ffffff',
-            darkColor: '#3f3f3f'
+            darkColor: '#3f3f3f',
+            lightThemeColor: '#c7a2ec', 
+            darkThemeColor: '#c7a2ec'
         },
         {
             name: 'lavender',
             light: './style/theme/lavender.css',
             dark: './style/theme/lavandula.css',
             lightColor: '#f5f0fa',
-            darkColor: '#1f1830'
+            darkColor: '#1f1830',
+            lightThemeColor: '#cca2ec',
+            darkThemeColor: '#cca2ec'
         },
         {
             name: 'kraft',
             light: './style/theme/kraft.css',
             dark: './style/theme/bronze.css',
             lightColor: '#f4ecd8',
-            darkColor: '#2a1f14'
+            darkColor: '#2a1f14',
+            lightThemeColor: '#ecc7a2',
+            darkThemeColor: '#ecc7a2'
         },
         {
             name: 'matcha',
             light: './style/theme/matcha.css',
             dark: './style/theme/library.css',
             lightColor: '#e3efd1',
-            darkColor: '#1e3328'
+            darkColor: '#1e3328',
+            lightThemeColor: '#c3eca2',
+            darkThemeColor: '#c3eca2'
         },
         {
             name: 'kirby',
             light: './style/theme/kirby.css',
             dark: './style/theme/metaknight.css',
             lightColor: '#ffeef4',
-            darkColor: '#1a2238'
+            darkColor: '#1a2238',
+            lightThemeColor: '#eca2b8',
+            darkThemeColor: '#eca2b8'
         },
         {
             name: 'calligraphy',
             light: './style/theme/calligraphy.css',
             dark: './style/theme/grid.css',
             lightColor: '#fbfbf5',
-            darkColor: '#1a2028'
+            darkColor: '#1a2028',
+            lightThemeColor: '#ecc7a2',
+            darkThemeColor: '#a2c7ec'
         },
         {
             name: 'typography',
             light: './style/theme/typography.css',
             dark: './style/theme/dot.css',
             lightColor: '#fafaf5',
-            darkColor: '#1e2128'
+            darkColor: '#1e2128',
+            lightThemeColor: '#a2c7ec',
+            darkThemeColor: '#a2c7ec'
         }
     ]
 }
@@ -161,6 +175,47 @@ function plugin(hook, vm) {
         return device.IsAndroid || device.IsIPhone || device.IsWinPhone
     }
 
+    function hexToHsl(hex) {
+        hex = hex.replace('#', '')
+
+        if (hex.length === 3) {
+            hex = hex.split('').map(c => c + c).join('')
+        }
+
+        if (hex.length === 8) {
+            hex = hex.substring(0, 6)
+        }
+
+        const r = parseInt(hex.substring(0, 2), 16) / 255
+        const g = parseInt(hex.substring(2, 4), 16) / 255
+        const b = parseInt(hex.substring(4, 6), 16) / 255
+
+        const max = Math.max(r, g, b)
+        const min = Math.min(r, g, b)
+        const delta = max - min
+
+        let h = 0
+        if (delta !== 0) {
+            if (max === r) {
+                h = 60 * (((g - b) / delta) % 6)
+            } else if (max === g) {
+                h = 60 * ((b - r) / delta + 2)
+            } else {
+                h = 60 * ((r - g) / delta + 4)
+            }
+        }
+        if (h < 0) h += 360
+
+        let s = 0
+        if (delta !== 0) {
+            s = delta / (1 - Math.abs(2 * (max + min) / 2 - 1))
+        }
+
+        const l = (max + min) / 2
+
+        return [Math.round(h), Math.round(s * 100), Math.round(l * 100)]
+    }
+
     // 黑暗模式切换、主题切换
     let resolveIsDark = function () {
         const mode = themeState.modes[themeState.modeIndex]
@@ -168,6 +223,13 @@ function plugin(hook, vm) {
             return window.matchMedia('(prefers-color-scheme: dark)').matches
         }
         return mode === 'dark'
+    }
+
+    let updateColorPickerSlider = function (themeColor) {
+        let colorPickerSlider = document.getElementsByClassName('color-picker-slider')[0]
+        if (colorPickerSlider) {
+            colorPickerSlider.value = hexToHsl(themeColor)[0]
+        }
     }
 
     let applyThemeColor = function () {
@@ -178,6 +240,7 @@ function plugin(hook, vm) {
 
         const group = themeState.groups[themeState.themeIndex]
         const file = isDark ? group.dark : group.light
+        const themeColor = isDark ? group.darkThemeColor : group.lightThemeColor
 
         if (!file) {
             vueTheme.disabled = isDark
@@ -193,6 +256,10 @@ function plugin(hook, vm) {
             colorTheme.disabled = false
             colorTheme.href = file
         }
+
+        document.documentElement.style.setProperty('--theme-color', themeColor)
+
+        updateColorPickerSlider(themeColor)
     }
 
     // 页面主题色

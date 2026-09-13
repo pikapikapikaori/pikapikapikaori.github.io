@@ -10,6 +10,7 @@
     min-height: 300px;
     max-height: 300px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -45,14 +46,12 @@
     min-width: 100%;
     min-height: 200px;
     max-height: 200px;
-    transition: transform 0.4s;
+    transition-duration: 500ms;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .toc-page-display-a:hover {
-    cursor: pointer;
-
     img {
         transform: scale(1.03);
         filter: brightness(var(--global-brightness-blur, 0.85));
@@ -117,16 +116,23 @@ input::-webkit-inner-spin-button {
 }
 
 .toc-paginator-button-div {
-    margin: 0 0.1em;
-    border: 0.1em solid transparent;
+    margin: 0 0.2em;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
-.toc-paginator-button-div svg {
+.toc-paginator-button-span {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--global-widget-border-radius, 0.3em);
+    transition-duration: 500ms;
 }
 
-.toc-paginator-button-div svg:hover {
+.toc-paginator-button-span:hover {
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
 }
 

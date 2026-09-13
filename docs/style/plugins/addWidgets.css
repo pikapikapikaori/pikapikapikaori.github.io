@@ -5,20 +5,15 @@
 .page-right-tools-widgets-span {
     z-index: 999;
     transition-duration: 500ms;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--global-widget-border-radius, 0.3em);
+    cursor: pointer;
 }
 
 .page-right-tools-widgets-span:hover {
     transform: scale(1.2);
-    transition-duration: 500ms;
-}
-
-.page-right-tools-widgets-span>svg:hover {
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
-}
-
-.page-right-tools-widgets-span>svg {
-    cursor: pointer;
-    border-radius: var(--global-widget-border-radius, 0.3em);
 }
 
 
@@ -205,19 +200,4 @@
 
 .progress-num-hide {
     right: -1000px;
-}
-
-/* 回顶部 */
-.scroll-to-top:hover {
-    transform: scale(1.2);
-    transition-duration: 500ms;
-}
-
-.scroll-to-top svg {
-    cursor: pointer;
-    border-radius: var(--global-widget-border-radius, 0.3em);
-}
-
-.scroll-to-top svg:hover {
-    background-color: var(--global-theme-color-blur, #ea6f5a1a);
 }

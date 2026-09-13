@@ -38,6 +38,8 @@
     --avatar-border-radius: 50%;
     --global-brightness-blur: 0.85;
     --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
+    --global-emoji-font: 'TwitterColorEmoji';
+    --global-code-font: 'Menlo', courier, monospace;
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
@@ -84,7 +86,7 @@ span.emoji {
 }
 
 span.emoji {
-    font-family: 'TwitterColorEmoji';
+    font-family: var(--global-emoji-font, serif);
     font-size: 1.2em
 }
 
@@ -489,7 +491,7 @@ body.sticky .sidebar-toggle {
     border-radius: 100%;
     color: var(--accent-text-color);
     content: "!";
-    font-family: 'Menlo', Arial, sans-serif;
+    font-family: var(--global-code-font);
     font-size: 14px;
     font-weight: 700;
     left: -12px;
@@ -874,7 +876,7 @@ body {
 .markdown-section code,
 .markdown-section output:after,
 .markdown-section pre {
-    font-family: 'Menlo', courier, monospace
+    font-family: var(--global-code-font)
 }
 
 .markdown-section code,

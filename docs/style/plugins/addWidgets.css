@@ -1,20 +1,15 @@
-.page-right-tools-widgets-span-appear {
-    transform: translate(0, 0);
-    transition-duration: 500ms;
-}
-
 .page-right-tools-widgets-span-disappear {
     transform: translate(52px, 0);
-    transition-duration: 500ms;
 }
 
 .page-right-tools-widgets-span {
     z-index: 999;
+    transition-duration: 500ms;
 }
 
 .page-right-tools-widgets-span:hover {
     transform: scale(1.2);
-    transition-duration: 100ms;
+    transition-duration: 500ms;
 }
 
 .page-right-tools-widgets-span>svg:hover {
@@ -26,9 +21,62 @@
     border-radius: var(--global-widget-border-radius, 0.3em);
 }
 
+
+/* 主题切换 */
+.theme-picker-popup-span {
+    z-index: 998;
+    transition-duration: 1s;
+}
+
+.theme-picker-popup-div {
+    border: 1px solid var(--theme-color, #ea6f5a);
+    border-radius: var(--global-el-border-radius, 10px);
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    padding: 18px;
+    width: 200px;
+}
+
+.theme-picker-popup-span-disappear {
+    transform: translate(270px, 0);
+}
+
+.theme-picker-preset-color-list-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.theme-picker-preset-color-btn-div {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    transition-duration: 500ms;
+}
+
+.theme-picker-preset-color-btn-div:hover {
+    transform: scale(1.1);
+}
+
+.theme-picker-color-half {
+    flex: 1;
+    height: 100%;
+}
+
+/* 页面主题色 */
+.color-picker-popup-span {
+    z-index: 998;
+    transition-duration: 1s;
+}
+
 .color-picker-popup-div {
     border: 1px solid var(--theme-color, #ea6f5a);
-    height: 170px;
+    height: 145px;
     width: 200px;
     border-radius: var(--global-el-border-radius, 10px);
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
@@ -50,6 +98,7 @@
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     height: 5px;
     border-radius: var(--global-el-border-radius, 10px);
+    border: 1px solid var(--border-color);
 }
 
 .color-picker-slider::-webkit-slider-thumb {
@@ -61,7 +110,8 @@
     background-color: var(--theme-color, #ea6f5a);
     border-radius: 3px;
     cursor: pointer;
-    transition: transform 0.1s;
+    transition-duration: 500ms;
+    border: 1px solid var(--border-color);
 }
 
 .color-picker-slider::-webkit-slider-thumb:hover {
@@ -69,53 +119,36 @@
 }
 
 .color-picker-preset-color-list-div {
-    margin: 30px 8px 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    padding-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+    margin: 18px 18px 0;
 }
 
 .color-picker-preset-color-btn-div {
-    width: 25px;
-    height: 30px;
-    margin: 3px 5px 7px 3px;
+    width: 100%;
+    aspect-ratio: 1 / 1.25; 
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.1s;
+    border: 1px solid var(--border-color);
+    transition-duration: 500ms;
 }
 
 .color-picker-preset-color-btn-div:hover {
     transform: scale(1.1);
 }
 
-.color-picker-popup-span-appear {
-    transform: translate(0, 0);
-    transition-duration: 1s;
-}
-
 .color-picker-popup-span-disappear {
     transform: translate(270px, 0);
-    transition-duration: 1s;
 }
 
-.scroll-to-top:hover {
-    transform: scale(1.2);
-    transition-duration: 100ms;
-}
-
-.scroll-to-top svg {
-    cursor: pointer;
-    border-radius: var(--global-widget-border-radius, 0.3em);
-}
-
-.scroll-to-top svg:hover {
-    background-color: var(--global-theme-color-blur, #ea6f5a1a);
-}
-
+/* Live 2d 小人 */
 .canvas-hide {
     transform: translate(1000px, 0);
 }
 
+/* 进度条 */
 .read-progress {
     --p: 0;
     --thickness: 3px;
@@ -172,4 +205,19 @@
 
 .progress-num-hide {
     right: -1000px;
+}
+
+/* 回顶部 */
+.scroll-to-top:hover {
+    transform: scale(1.2);
+    transition-duration: 500ms;
+}
+
+.scroll-to-top svg {
+    cursor: pointer;
+    border-radius: var(--global-widget-border-radius, 0.3em);
+}
+
+.scroll-to-top svg:hover {
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
 }

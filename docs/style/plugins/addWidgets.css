@@ -27,10 +27,56 @@
 }
 
 
+/* 主题切换 */
+.theme-picker-popup-div {
+    border: 1px solid var(--theme-color, #ea6f5a);
+    border-radius: var(--global-el-border-radius, 10px);
+    background-color: var(--global-theme-color-blur, #ea6f5a1a);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    padding: 18px;
+    width: 200px;
+}
+
+.theme-picker-popup-span-appear {
+    transform: translate(0, 0);
+    transition-duration: 1s;
+}
+
+.theme-picker-popup-span-disappear {
+    transform: translate(270px, 0);
+    transition-duration: 1s;
+}
+
+.theme-picker-preset-color-list-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.theme-picker-preset-color-btn-div {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+}
+
+.theme-picker-preset-color-btn-div:hover {
+    transform: scale(1.1);
+}
+
+.theme-picker-color-half {
+    flex: 1;
+    height: 100%;
+}
+
 /* 页面主题色 */
 .color-picker-popup-div {
     border: 1px solid var(--theme-color, #ea6f5a);
-    height: 170px;
+    height: 165px;
     width: 200px;
     border-radius: var(--global-el-border-radius, 10px);
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
@@ -73,7 +119,7 @@
 }
 
 .color-picker-preset-color-list-div {
-    margin: 30px 8px 10px;
+    margin: 25px 8px 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

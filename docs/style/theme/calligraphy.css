@@ -1,0 +1,42 @@
+:root {
+    --bg-color: #fbfbf5;
+    --text-color: #3a4a5a;
+    --heading-color: #2a3a4a;
+    --muted-color: #8a9aaa;
+    --em-color: #7a8a9a;
+    --h6-color: #8a9aaa;
+    --sidebar-text-color: #5a6a7a;
+    --sidebar-title-color: #2a3a4a;
+    --border-color: #d0dae5;
+    --border-color-strong: #b8c5d5;
+    --border-color-mid: #a8b5c5;
+    --code-bg: #eef3f88c;
+    --zebra-bg: #f0f5fa8c;
+    --tip-code-bg: #dce6ef8c;
+    --inline-code-color: #c0392b;
+    --code-text-color: #3a4a5a;
+    --accent-color: #f5d020;
+    --accent-text-color: #2a3a4a;
+    --blur-color: rgba(58, 74, 90, .08);
+    --sidebar-toggle-bg: rgba(251, 251, 245, .85);
+    --sidebar-border-color: #d0dae5;
+
+    --grid-size: 22px;
+    --grid-color: rgba(120, 160, 200, .18);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+}

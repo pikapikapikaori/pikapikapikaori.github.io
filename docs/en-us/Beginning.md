@@ -2,7 +2,8 @@
 
 The floating widgets on the right are, from top to bottom:
 
-- Theme switcher: Auto / Light / Dark mode
+- Mode switcher: Auto / Light / Dark mode
+- Theme picker: Click to choose theme
 - Theme color picker: Click to choose color
 - Comment: Scroll to comment on click
 - Cherry blossom switcher: Turn on / off

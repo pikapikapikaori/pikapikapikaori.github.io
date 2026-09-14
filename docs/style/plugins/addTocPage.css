@@ -46,7 +46,7 @@
     min-width: 100%;
     min-height: 200px;
     max-height: 200px;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -92,6 +92,7 @@
     background-color: transparent;
     border-radius: var(--global-widget-border-radius, 0.3em);
     border: 0.1em solid var(--border-color, #eee);
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .toc-paginator-input span {
@@ -129,7 +130,7 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: center;
     border-radius: var(--global-widget-border-radius, 0.3em);
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .toc-paginator-button-span:hover {

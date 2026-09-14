@@ -11,7 +11,7 @@ let addWidgetsOptions = {
             dark: null,
             lightColor: '#ffffff',
             darkColor: '#3f3f3f',
-            lightThemeColor: '#c7a2ec', 
+            lightThemeColor: '#c7a2ec',
             darkThemeColor: '#c7a2ec'
         },
         {
@@ -349,13 +349,65 @@ function plugin(hook, vm) {
         let presetListDiv = document.createElement('div')
         presetListDiv.className = 'theme-picker-preset-color-list-div'
 
+        let buildPatternStyle = function (color, pattern) {
+            if (!pattern) return ''
+
+            let hex = color.replace('#', '')
+            if (hex.length === 8) hex = hex.substring(0, 6)
+            if (hex.length === 3) hex = hex.split('').map(c => c + c).join('')
+
+            let r = parseInt(hex.substring(0, 2), 16)
+            let g = parseInt(hex.substring(2, 4), 16)
+            let b = parseInt(hex.substring(4, 6), 16)
+            let luminance = (r * 0.299 + g * 0.587 + b * 0.114)
+            let isDark = luminance < 128
+
+            let rgb = isDark ? '255,255,255' : '0,0,0'
+            let lineAlpha = isDark ? '.1' : '.06'
+            let dotAlpha = isDark ? '.14' : '.08'
+
+            if (pattern === 'grid') {
+                return `background-image: linear-gradient(rgba(${rgb},${lineAlpha}) 1px, transparent 1px), linear-gradient(90deg, rgba(${rgb},${lineAlpha}) 1px, transparent 1px); background-size: 6px 6px;`
+            }
+            if (pattern === 'dot') {
+                return `background-image: radial-gradient(circle, rgba(${rgb},${dotAlpha}) .7px, transparent 1.1px); background-size: 6px 6px;`
+            }
+            return ''
+        }
+
         themeState.groups.forEach(function (group, index) {
             let btnDiv = document.createElement('div')
             btnDiv.className = 'theme-picker-preset-color-btn-div'
             btnDiv.dataset.themeIndex = index
-            btnDiv.innerHTML =
-                '<div class="theme-picker-color-half" style="background-color: ' + group.lightColor + ';"></div>' +
-                '<div class="theme-picker-color-half" style="background-color: ' + group.darkColor + ';"></div>'
+            btnDiv.style.background = `linear-gradient(135deg, ${group.lightColor} 0 50%, ${group.darkColor} 50% 100%)`
+
+            let lightPatternStyle = buildPatternStyle(group.lightColor, group.lightPattern)
+            let darkPatternStyle = buildPatternStyle(group.darkColor, group.darkPattern)
+
+            let l = group.lightThemeColor
+            let d = group.darkThemeColor
+            let lSoft = l + '66'
+            let dSoft = d + '66'
+
+            let innerHTML = ''
+
+            if (lightPatternStyle) {
+                innerHTML += `<div class="theme-picker-pattern-layer" style="${lightPatternStyle}"></div>`
+            }
+            if (darkPatternStyle) {
+                innerHTML += `<div class="theme-picker-pattern-layer theme-picker-pattern-layer-dark" style="${darkPatternStyle}"></div>`
+            }
+
+            innerHTML += `
+            <div class="theme-picker-dot" style="--l: ${l}; --l-soft: ${lSoft}; --d: ${d}; --d-soft: ${dSoft};">
+                <div class="theme-picker-dot-layer theme-picker-dot-glow-left"></div>
+                <div class="theme-picker-dot-layer theme-picker-dot-glow-right"></div>
+                <div class="theme-picker-dot-layer theme-picker-dot-core-left"></div>
+                <div class="theme-picker-dot-layer theme-picker-dot-core-right"></div>
+            </div>
+        `
+
+            btnDiv.innerHTML = innerHTML
 
             btnDiv.onclick = function () {
                 themeState.themeIndex = index

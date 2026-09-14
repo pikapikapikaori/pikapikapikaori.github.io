@@ -43,11 +43,12 @@
     list-style: none;
     margin-bottom: 40px;
     position: relative;
-    transition: 0.4s;
+    transition-duration: var(--global-transition-duration, 500ms);
+    cursor: pointer;
 }
 
 .brief-comments-in-blog-title-year>summary:hover {
-    cursor: pointer;
+    filter: brightness(var(--global-brightness-blur, 0.85));
 }
 
 .brief-comments-in-blog-title-year>summary::-webkit-details-marker {
@@ -71,10 +72,6 @@
 .brief-comments-in-blog-title-year[open]>summary::after {
     transform: rotate(225deg);
     transition: 0.2s ease-in-out;
-}
-
-.brief-comments-in-blog-title-year>summary:hover {
-    filter: brightness(var(--global-brightness-blur, 0.85));
 }
 
 .brief-comments-in-blog {

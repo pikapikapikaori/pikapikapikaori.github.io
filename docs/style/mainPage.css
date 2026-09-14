@@ -261,6 +261,10 @@ div:has(.writing-direction-vertical-div) {
     text-decoration: none;
 }
 
+.main-page-about-me-links>a>svg {
+    transition-duration: 500ms;
+}
+
 .main-page-about-me-links>a>svg:hover {
     transform: scale(1.3);
     -ms-transform: scale(1.3);

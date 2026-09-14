@@ -48,6 +48,7 @@
 
 .gt-popup .gt-action {
     color: inherit !important;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .gt-popup .gt-action:hover {

@@ -102,6 +102,10 @@ span.emoji {
     z-index: 999999
 }
 
+.search a {
+    transition-duration: 500ms;
+}
+
 .search .search-keyword,
 .search a:hover {
     color: var(--theme-color, #c7a2ec)
@@ -190,7 +194,7 @@ li input[type=checkbox] {
     color: inherit;
     font-size: 16px;
     text-decoration: none;
-    transition: color .3s
+    transition-duration: 500ms;
 }
 
 .app-nav a.active,
@@ -286,8 +290,9 @@ main.hidden {
 
 .anchor {
     display: inline-block;
-    text-decoration: none;
-    transition: all .3s
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition-duration: 500ms;
 }
 
 .anchor span {
@@ -295,7 +300,7 @@ main.hidden {
 }
 
 .anchor:hover {
-    text-decoration: underline
+    text-decoration-color: var(--theme-color, #c7a2ec);
 }
 
 .sidebar {
@@ -370,11 +375,7 @@ main.hidden {
     border-radius: 4px
 }
 
-.sidebar:hover::-webkit-scrollbar-thumb {
-    background: var(--theme-color, #c7a2ec);
-}
-
-.sidebar:hover::-webkit-scrollbar-track {
+.sidebar::-webkit-scrollbar-track {
     background: hsla(0, 0%, 53.3%, .1)
 }
 
@@ -396,6 +397,10 @@ main.hidden {
 
 .sidebar-toggle:hover .sidebar-toggle-button {
     opacity: .4
+}
+
+.sidebar-toggle-button {
+    transition-duration: 500ms;
 }
 
 .sidebar-toggle span {
@@ -770,13 +775,15 @@ body {
     font-size: 14px;
     font-weight: 400;
     overflow: hidden;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: transparent;
     text-overflow: ellipsis;
-    white-space: nowrap
+    white-space: nowrap;
+    transition-duration: 500ms;
 }
 
 .sidebar ul li a:hover {
-    text-decoration: underline var(--theme-color, #ea6f5a)
+    text-decoration-color: var(--theme-color, #c7a2ec);
 }
 
 .sidebar ul li ul {
@@ -978,6 +985,7 @@ body {
             font-weight: inherit;
             text-decoration-color: var(--theme-color, #ea6f5a);
             text-decoration-thickness: .15em;
+            transition-duration: 500ms;
         }
 
         svg {

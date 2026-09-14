@@ -92,6 +92,7 @@
     background-color: transparent;
     border-radius: var(--global-widget-border-radius, 0.3em);
     border: 0.1em solid var(--border-color, #eee);
+    transition-duration: 500ms;
 }
 
 .toc-paginator-input span {

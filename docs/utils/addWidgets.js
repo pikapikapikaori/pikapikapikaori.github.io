@@ -366,10 +366,10 @@ function plugin(hook, vm) {
             let lineAlpha = isDark ? '.1' : '.06'
             let dotAlpha = isDark ? '.14' : '.08'
 
-            if (pattern === 'grid') {
+            if (pattern === 'calligraphy') {
                 return `background-image: linear-gradient(rgba(${rgb},${lineAlpha}) 1px, transparent 1px), linear-gradient(90deg, rgba(${rgb},${lineAlpha}) 1px, transparent 1px); background-size: 6px 6px;`
             }
-            if (pattern === 'dot') {
+            if (pattern === 'typography') {
                 return `background-image: radial-gradient(circle, rgba(${rgb},${dotAlpha}) .7px, transparent 1.1px); background-size: 6px 6px;`
             }
             return ''
@@ -381,8 +381,8 @@ function plugin(hook, vm) {
             btnDiv.dataset.themeIndex = index
             btnDiv.style.background = `linear-gradient(135deg, ${group.lightColor} 0 50%, ${group.darkColor} 50% 100%)`
 
-            let lightPatternStyle = buildPatternStyle(group.lightColor, group.lightPattern)
-            let darkPatternStyle = buildPatternStyle(group.darkColor, group.darkPattern)
+            let lightPatternStyle = buildPatternStyle(group.lightColor, group.name)
+            let darkPatternStyle = buildPatternStyle(group.darkColor, group.name)
 
             let l = group.lightThemeColor
             let d = group.darkThemeColor

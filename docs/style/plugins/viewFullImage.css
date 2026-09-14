@@ -11,38 +11,28 @@
     -webkit-backdrop-filter: blur(30px);
 }
 
-#view-full-image-span-inner-left-div {
-    top: calc((100% - 20px)/2);
-    left: 3%;
-    width: 3%;
-    height: 4%;
+#view-full-image-span-inner-left-div,
+#view-full-image-span-inner-right-div {
+    top: calc((100% - 24px)/2);
+    aspect-ratio: 1/1;
     position: absolute;
     cursor: pointer;
     border-radius: var(--global-widget-border-radius, 0.3em);
+    display: flex;
+    align-items: center;
+    transition-duration: var(--global-transition-duration, 500ms);
+}
+
+#view-full-image-span-inner-left-div {
+    left: 3%;
 }
 
 #view-full-image-span-inner-right-div {
-    top: calc((100% - 20px)/2);
     right: 3%;
-    width: 3%;
-    height: 4%;
-    position: absolute;
-    cursor: pointer;
 }
 
-#view-full-image-span-inner-left-div svg {
-    border-radius: var(--global-widget-border-radius, 0.3em);
-}
-
-#view-full-image-span-inner-right-div svg {
-    border-radius: var(--global-widget-border-radius, 0.3em);
-}
-
-#view-full-image-span-inner-left-div svg:hover {
-    background-color: var(--global-theme-color-blur, #ea6f5a1a);
-}
-
-#view-full-image-span-inner-right-div svg:hover {
+#view-full-image-span-inner-left-div:hover,
+#view-full-image-span-inner-right-div:hover {
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
 }
 
@@ -76,7 +66,7 @@ img:not(.ignore-view-full-image-img):not(.emoji):hover {
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji) {
-    transition: 0.4s;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 /* Gitalk */

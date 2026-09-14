@@ -4,7 +4,7 @@
 
 .page-right-tools-widgets-span {
     z-index: 999;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
     width: 24px;
     height: 24px;
     border-radius: var(--global-widget-border-radius, 0.3em);
@@ -50,7 +50,7 @@
     overflow: hidden;
     cursor: pointer;
     border: 1px solid var(--border-color);
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
     position: relative;
 }
 
@@ -149,7 +149,7 @@
     background-color: var(--theme-color, #ea6f5a);
     border-radius: 3px;
     cursor: pointer;
-    transition: transform 500ms;
+    transition: transform var(--global-transition-duration, 500ms);
     border: 1px solid var(--border-color);
 }
 
@@ -171,7 +171,7 @@
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid var(--border-color);
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .color-picker-preset-color-btn-div:hover {

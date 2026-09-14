@@ -43,7 +43,7 @@
     list-style: none;
     margin-bottom: 40px;
     position: relative;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
     cursor: pointer;
 }
 

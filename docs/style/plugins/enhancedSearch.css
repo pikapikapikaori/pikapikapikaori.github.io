@@ -11,7 +11,7 @@
 
 .search .input-wrap {
     border-block: 1px solid var(--border-color, #eee);
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .search .input-wrap>input[type=search] {

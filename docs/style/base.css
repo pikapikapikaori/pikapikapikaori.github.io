@@ -43,6 +43,7 @@
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
+    --global-transition-duration: 500ms;
 }
 
 ::-webkit-scrollbar {
@@ -103,7 +104,7 @@ span.emoji {
 }
 
 .search a {
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .search .search-keyword,
@@ -194,7 +195,7 @@ li input[type=checkbox] {
     color: inherit;
     font-size: 16px;
     text-decoration: none;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .app-nav a.active,
@@ -292,7 +293,7 @@ main.hidden {
     display: inline-block;
     text-decoration: underline;
     text-decoration-color: transparent;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .anchor span {
@@ -400,7 +401,7 @@ main.hidden {
 }
 
 .sidebar-toggle-button {
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .sidebar-toggle span {
@@ -779,7 +780,7 @@ body {
     text-decoration-color: transparent;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .sidebar ul li a:hover {
@@ -985,7 +986,7 @@ body {
             font-weight: inherit;
             text-decoration-color: var(--theme-color, #ea6f5a);
             text-decoration-thickness: .15em;
-            transition-duration: 500ms;
+            transition-duration: var(--global-transition-duration, 500ms);
         }
 
         svg {

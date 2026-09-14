@@ -48,7 +48,7 @@ let addWidgetsOptions = {
             lightColor: '#ffeef4',
             darkColor: '#1a2238',
             lightThemeColor: '#eca2b8',
-            darkThemeColor: '#eca2b8'
+            darkThemeColor: '#7a424e'
         },
         {
             name: 'calligraphy',

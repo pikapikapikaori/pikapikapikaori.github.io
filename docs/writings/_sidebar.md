@@ -51,6 +51,7 @@
 </div>
 
 -
+  - [Bangumi Takeout Web 工具](/writings/BangumiBackup-20260915)
   - [记第 27 届上海国际电影节](/writings/Siff27-20250708)
   - [随记：双反 甲辰年七月二十四日](/writings/Notes-20240724)
   - [随记：玩具 甲辰年七月二十三日](/writings/Notes-20240723)

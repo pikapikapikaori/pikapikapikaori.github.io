@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>Bangumi Takeout Web</title>
+    <meta name="description" content="Tool website that can backup Bangumi (bgm.tv) data.">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bangumi Takeout Web</h1>
+        <p class="sub">纯前端备份 · 数据保存在浏览器本地缓存</p>
+
+        <details class="guide" open>
+            <summary> 使用说明</summary>
+            <div class="guide-body">
+                <h3>功能</h3>
+                <ul>
+                    <li><strong>备份</strong>：将 Bangumi 收藏列表导出为 <code>takeout.json</code> 文件。</li>
+                    <li><strong>导入旧数据</strong>：上传之前导出的 <code>takeout.json</code>，其数据会写入本地缓存，用于后续备份时复用，减少 API 调用。</li>
+                    <li><strong>导出备份</strong>：不重新备份，直接把本地缓存的备份数据导出为 <code>takeout.json</code>。</li>
+                    <li><strong>支持断点续传</strong>：遇到网络波动、Bangumi API 调用过多，或手动停止备份的情况，只要缓存未过期，均可从断点继续备份。</li>
+                </ul>
+
+                <h3>缓存与清理</h3>
+                <ul>
+                    <li><strong>备份数据缓存有效期</strong>：<span class="ttl-inline">180 天</span>（缓存生成后的 180 天内再次备份会直接复用，不会重新调用
+                        API）。</li>
+                </ul>
+
+                <h3>耗时说明</h3>
+                <p class="guide-note">
+                    以下估算基于：约 1500 条收藏、请求间隔 700ms、每条平均需要 9 次 API 调用（1 次 subject + 约 7 次 episode type + 1 次
+                    progress），且未命中任何本地缓存。
+                    实际耗时随收藏量、间隔设置、本地缓存命中率而变。
+                </p>
+                <ul>
+                    <li><strong>首次使用</strong>：需要拉取收藏列表并逐条补充详情。按上述前提，约 2–3 小时。如果配合 BGM 数据命中大部分
+                        subject / episode，可缩短到十几分钟到半小时。</li>
+                    <li><strong>首次备份后再次备份</strong>：大部分条目会命中缓存，通常几秒到几分钟即可完成。</li>
+                    <li><strong>点击「刷新 BGM 数据索引」后</strong>：下次备份时会重新按需下载分片，视收藏量通常多花几分钟。</li>
+                </ul>
+            </div>
+        </details>
+
+        <div class="card">
+            <h2>问题反馈</h2>
+            <p class="hint">
+                使用过程中遇到问题，请到<a id="issueLink" href="#" target="_blank" rel="noopener">这个 issue</a>
+                反馈，并附上完整的日志（页面底部的日志区域）和复现步骤。所有问题都在同一个 issue 内提出。
+            </p>
+
+            <h2>其他</h2>
+            <p class="hint">
+                本项目由 <a href="https://github.com/jerrylususu/bangumi-takeout-py" target="_blank" rel="noopener">bangumi-takeout-py</a> 启发，导出的 <code>takeout.json</code> 格式与该项目一致，如需要 <code>html</code> / <code>csv</code> 格式可直接使用该项目的 <code>generate_html.py</code> 或 <code>generate_csv.py</code> 脚本。
+            </p>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div class="card">
+            <h2>账户</h2>
+            <label for="username">
+                Bangumi 用户名
+                <span class="badge badge-required">必填</span>
+            </label>
+            <input type="text" id="username" class="lockable" placeholder="OAuth 登录后自动填入" autocomplete="off">
+            <p class="hint">填写其他用户名只能读取其公开数据；私密收藏需要该账号自身 OAuth 登录。</p>
+        </div>
+
+        <div class="card">
+            <h2>认证</h2>
+            <div class="row-actions">
+                <button class="btn-primary lockable" id="btnAuth">
+                    OAuth 登录 <span class="badge badge-required">必填</span>
+                </button>
+                <button class="btn-secondary lockable" id="btnPaste">粘贴 Token</button>
+                <button class="btn-secondary lockable" id="btnLogout" style="display:none">退出</button>
+            </div>
+            <p class="token-status" id="tokenStatus">未登录</p>
+        </div>
+
+        <div class="card">
+            <h2>请求设置 <span class="badge badge-optional">可选</span></h2>
+            <div class="row">
+                <div class="col">
+                    <label for="intervalSelect">请求间隔</label>
+                    <select id="intervalSelect" class="lockable"></select>
+                </div>
+                <div class="col">
+                    <label for="retrySelect">失败重试次数</label>
+                    <select id="retrySelect" class="lockable"></select>
+                </div>
+            </div>
+            <p class="hint">间隔越小越快，也越容易触发限流。默认 700ms / 5 次。</p>
+        </div>
+
+        <div class="card">
+            <h2>导入旧数据 <span class="badge badge-optional">可选</span></h2>
+            <label class="file-label lockable" for="fileInput">选择文件</label>
+            <input type="file" id="fileInput" class="file-input lockable" accept=".json,application/json">
+            <p class="hint" id="fileInfo">
+                上传之前导出的 <code>takeout.json</code> 可复用其中数据，覆盖同名条目的本地缓存。缓存有效期
+                <span class="ttl-inline">180 天</span>。
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>BGM 数据 <span class="badge badge-optional">可选</span></h2>
+            <div class="row-actions">
+                <button class="btn-secondary lockable" id="btnRefreshBgm">刷新 BGM 数据索引</button>
+            </div>
+            <p class="hint">
+                备份过程中会加载 subject / episode 数据分片，从而可以大幅减少 Bangumi API 调用。首次使用时会按需下载分片，之后长期有效。刷新后清除已加载的数据分片缓存。
+            </p>
+            <p class="hint" id="bgmStatus">未加载</p>
+        </div>
+
+        <div class="card">
+            <h2>备份</h2>
+            <div class="row-actions">
+                <button class="btn-primary lockable" id="btnFetch" disabled>开始备份</button>
+                <button class="btn-danger" id="btnStop" disabled>停止备份</button>
+                <button class="btn-secondary lockable" id="btnExport">导出备份</button>
+                <button class="btn-secondary lockable" id="btnClear">清空缓存</button>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-stage">
+                    <span class="stage-label">阶段</span>
+                    <span class="stage-value" id="progressStage">就绪</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="fill" id="fill"></div>
+                </div>
+                <div class="progress-meta">
+                    <span id="progressPercent">0%</span>
+                    <span class="sep">·</span>
+                    <span id="progressCount">0 / 0</span>
+                    <span class="sep">·</span>
+                    <span id="progressInterval">间隔 --</span>
+                    <span class="sep">·</span>
+                    <span id="progressETA">剩余 --</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>日志</h2>
+            <div class="log" id="log"></div>
+        </div>
+    </div>
+    <script src="assets/app.js"></script>
+</body>
+
+</html>

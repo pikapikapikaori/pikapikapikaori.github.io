@@ -1,15 +1,7 @@
-<div class="page-sidebar-level1-title-div">
-  Latest Posts
-</div>
-
--
+- Latest Posts
   - [Latest Posts](/en-us/README)
 
-<div class="page-sidebar-level1-title-div">
-  Homepage
-</div>
-
--
+- Homepage
   - [Instructions for use](/en-us/Beginning)
   - [Photographs](/en-us/Photograph)
   - [Sites](/en-us/Sites)

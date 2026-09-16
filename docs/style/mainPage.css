@@ -62,16 +62,6 @@ section.cover p {
     color: var(--theme-color, #ea6f5a);
 }
 
-.page-sidebar-level1-title-div {
-    font-family: 'WeibeiSC-Bold', serif;
-    font-size: 1.25rem;
-    max-width: 95%;
-    margin: 10px 0 10px 5% !important;
-    padding-right: 5%;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--border-color, #eee);
-}
-
 /* --- Personal Components --- */
 
 /* Global */

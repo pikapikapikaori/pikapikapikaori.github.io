@@ -1,20 +1,8 @@
-<div class="page-sidebar-level1-title-div">
-  Latest Posts
-</div>
-
--
+- Latest Posts
   - [Latest Posts](/en-us/writings/)
 
-<div class="page-sidebar-level1-title-div">
-  Preface
-</div>
-
--
+- Preface
   - [Personal Ten Best List](/en-us/writings/PersonalTenBest)
 
-<div class="page-sidebar-level1-title-div">
-  Writings
-</div>
-
--
+- Writings
   - [Birthday E-card for GF](/en-us/writings/PrivateEcard-20220517)

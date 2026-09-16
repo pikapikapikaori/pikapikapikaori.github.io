@@ -10,7 +10,7 @@ const CONFIG = {
     PROXY_URL: 'https://bangumi-takeout-web.pikapikapi-kaori.workers.dev/?url=',
 
     // 问题反馈地址
-    ISSUE_URL: 'https://github.com/pikapikapikaori/pikapikapikaori.github.io/issues/5',
+    ISSUE_URL: 'https://github.com/pikapikapikaori/pikapikapikaori.github.io/issues/445',
 
     // BGM 数据分片源（相对于当前页面）
     BGM_DATA_BASE: 'bgm-data',

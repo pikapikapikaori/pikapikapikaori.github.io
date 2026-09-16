@@ -10,6 +10,10 @@ function rewriteHost(host, filePath) {
         case 'photo.pikapikapi.com':
             return filePath ? 'pages/animepage/' + filePath : 'pages/animepage/index.html'
 
+
+        case 'bgmtv.pikapikapi.com':
+            return filePath ? 'writings/_media/BangumiBackup-20260915/web/' + filePath : 'writings/_media/BangumiBackup-20260915/web/index.html'
+
         default:
             // base domain @
             return filePath || 'index.html'

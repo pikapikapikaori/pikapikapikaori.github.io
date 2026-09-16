@@ -24,6 +24,9 @@ docs/pages/hexo/**/db.json
 docs/pages/hexo/**/*.log
 docs/pages/hexo/**/.deploy*/
 
+# bgm-data
+docs/**/bgm-data/*.jsonlines
+
 # local env files
 .env.local
 .env.*.local

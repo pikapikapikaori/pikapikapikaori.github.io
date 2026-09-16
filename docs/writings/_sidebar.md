@@ -1,25 +1,13 @@
-<div class="page-sidebar-level1-title-div">
-  最近发布
-</div>
-
--
+- 最近发布
   - [最近发布](/writings/)
 
-<div class="page-sidebar-level1-title-div">
-  序
-</div>
-
--
+- 序
   - [个人十佳榜单](/writings/PersonalTenBest)
   - [短评集](/writings/BriefComments)
   - [个人观影记录](/writings/PersonalRecordsBackup)
   - [实用网站快速链接](/writings/UsefulWebsites)
 
-<div class="page-sidebar-level1-title-div">
-  文章
-</div>
-
--
+- 文章
   - [季度印象最深刻单集 2025.10](/writings/SeasonBest-202510-20251203)
   - [季度印象最深刻单集 2025.07](/writings/SeasonBest-202507-20250826)
   - [季度印象最深刻单集 2025.04](/writings/SeasonBest-202504-20250430)
@@ -46,11 +34,7 @@
   - [「FLCL」：以青春之名向平庸的反抗](/writings/FLCL-20180922)
   - [四月赏曲——浅谈「四月是你的谎言」音乐选择](/writings/Shigatsunouso-20180401)
 
-<div class="page-sidebar-level1-title-div">
-  随记
-</div>
-
--
+- 随记
   - [Bangumi Takeout Web 工具](/writings/BangumiBackup-20260915)
   - [记第 27 届上海国际电影节](/writings/Siff27-20250708)
   - [随记：双反 甲辰年七月二十四日](/writings/Notes-20240724)
@@ -70,11 +54,7 @@
   - [随记：图集 癸卯年丁巳月丙寅日](/writings/Notes-20230508)
   - [随记：图集 庚子年庚辰月甲午日](/writings/Notes-20200421)
 
-<div class="page-sidebar-level1-title-div">
-  哲学实践
-</div>
-
--
+- 哲学实践
   - [字体测试](/writings/FontTest-20260813)
   - [国际音标（IPA）速查](/writings/Linguistic-20250603)
   - [再看巴门尼德与笛卡尔：从「是」谈起](/writings/Phila-20241127)

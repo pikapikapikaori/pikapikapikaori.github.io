@@ -40,6 +40,7 @@
     --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
     --global-emoji-font: 'TwitterColorEmoji';
     --global-code-font: 'Menlo', courier, monospace;
+    --global-sidebar-title-font: 'WeibeiSC-Bold', serif;
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
@@ -349,8 +350,13 @@ main.hidden {
 }
 
 .sidebar li>p {
-    font-weight: 700;
-    margin: 0
+    font-family: var(--global-sidebar-title-font, 'WeibeiSC-Bold', serif);
+    font-size: 1.25rem;
+    max-width: 95%;
+    margin: 10px 0;
+    padding-right: 5%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color, #eee);
 }
 
 .sidebar ul,

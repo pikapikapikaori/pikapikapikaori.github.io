@@ -1,22 +1,10 @@
-<div class="page-sidebar-level1-title-div">
-  最近のポースト
-</div>
-
--
+- 最近のポースト
   - [最近のポースト](/jp/writings/)
 
-<div class="page-sidebar-level1-title-div">
-  序文
-</div>
-
--
+- 序文
   - [個人ベスト 10 リスト](/jp/writings/PersonalTenBest)
 
-<div class="page-sidebar-level1-title-div">
-  ノート
-</div>
-
--
+- ノート
   - [日本旅行写真　令和 6 年 3 月](/jp/writings/JPTra-20240328)
   - [日本旅行写真　令和 6 年 2 月](/jp/writings/JPTra-20240217)
   - [ノート：アルバム　令和 5 年 12 月 2 日](/jp/writings/Notes-20231202)

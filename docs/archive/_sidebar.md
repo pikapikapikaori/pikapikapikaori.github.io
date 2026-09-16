@@ -17,5 +17,5 @@
 </div>
 
 -
-  - [知乎旧文存档](/archive/ZhiArchive)
-  - [技术相关](/archive/ITtech)
+  - [覆瓿｜知乎旧文](/archive/ZhiArchive)
+  - [汉阴｜技术相关](/archive/ITtech)

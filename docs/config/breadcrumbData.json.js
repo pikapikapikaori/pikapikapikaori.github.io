@@ -5,7 +5,7 @@ export default [
     },
     {
         "path": "/writings/",
-        "name": "一些随笔"
+        "name": "随笔"
     },
     {
         "path": "/archive/",
@@ -13,11 +13,11 @@ export default [
     },
     {
         "path": "/archive/ITtech/",
-        "name": "技术相关"
+        "name": "汉阴｜技术相关"
     },
     {
         "path": "/archive/ZhiArchive/",
-        "name": "知乎旧文存档"
+        "name": "覆瓿｜知乎旧文"
     },
     {
         "path": "/jp/",

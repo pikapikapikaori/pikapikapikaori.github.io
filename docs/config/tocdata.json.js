@@ -458,7 +458,7 @@ export default [
         "baseUrl": "/archive"
     },
     {
-        "title": "知乎旧文存档",
+        "title": "覆瓿｜知乎旧文",
         "time": "",
         "editedTime": "2024.08.03",
         "cover": "/archive/_media/ZhiArchive/cover-picture.jpg",
@@ -466,7 +466,7 @@ export default [
         "baseUrl": "/archive"
     },
     {
-        "title": "技术相关",
+        "title": "汉阴｜技术相关",
         "time": "",
         "editedTime": "2024.07.07",
         "cover": "",

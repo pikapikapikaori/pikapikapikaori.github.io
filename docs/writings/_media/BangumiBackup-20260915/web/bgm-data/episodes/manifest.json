@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "kind": "episode",
+  "chunk_size": 3000,
+  "total": 1693633,
+  "chunks": [
+    {
+      "file": "0000.jsonl",
+      "min_subject_id": 8,
+      "max_subject_id": 7389,
+      "count": 40098,
+      "subject_count": 3000
+    },
+    {
+      "file": "0001.jsonl",
+      "min_subject_id": 7397,
+      "max_subject_id": 14209,
+      "count": 35596,
+      "subject_count": 3000
+    },
+    {
+      "file": "0002.jsonl",
+      "min_subject_id": 14210,
+      "max_subject_id": 21226,
+      "count": 30101,
+      "subject_count": 3000
+    },
+    {
+      "file": "0003.jsonl",
+      "min_subject_id": 21230,
+      "max_subject_id": 34458,
+      "count": 32006,
+      "subject_count": 3000
+    },
+    {
+      "file": "0004.jsonl",
+      "min_subject_id": 30325,
+      "max_subject_id": 44753,
+      "count": 34820,
+      "subject_count": 3000
+    },
+    {
+      "file": "0005.jsonl",
+      "min_subject_id": 44754,
+      "max_subject_id": 56461,
+      "count": 31536,
+      "subject_count": 3000
+    },
+    {
+      "file": "0006.jsonl",
+      "min_subject_id": 56462,
+      "max_subject_id": 67351,
+      "count": 29968,
+      "subject_count": 3000
+    },
+    {
+      "file": "0007.jsonl",
+      "min_subject_id": 67352,
+      "max_subject_id": 76192,
+      "count": 33634,
+      "subject_count": 3000
+    },
+    {
+      "file": "0008.jsonl",
+      "min_subject_id": 76194,
+      "max_subject_id": 59738,
+      "count": 32129,
+      "subject_count": 3000
+    },
+    {
+      "file": "0009.jsonl",
+      "min_subject_id": 81372,
+      "max_subject_id": 92454,
+      "count": 33620,
+      "subject_count": 3000
+    },
+    {
+      "file": "0010.jsonl",
+      "min_subject_id": 92453,
+      "max_subject_id": 100887,
+      "count": 31658,
+      "subject_count": 3000
+    },
+    {
+      "file": "0011.jsonl",
+      "min_subject_id": 83947,
+      "max_subject_id": 109458,
+      "count": 26156,
+      "subject_count": 3000
+    },
+    {
+      "file": "0012.jsonl",
+      "min_subject_id": 109462,
+      "max_subject_id": 118240,
+      "count": 29510,
+      "subject_count": 3000
+    },
+    {
+      "file": "0013.jsonl",
+      "min_subject_id": 118241,
+      "max_subject_id": 126689,
+      "count": 39789,
+      "subject_count": 3000
+    },
+    {
+      "file": "0014.jsonl",
+      "min_subject_id": 126698,
+      "max_subject_id": 134124,
+      "count": 40443,
+      "subject_count": 3000
+    },
+    {
+      "file": "0015.jsonl",
+      "min_subject_id": 134126,
+      "max_subject_id": 145593,
+      "count": 31709,
+      "subject_count": 3000
+    },
+    {
+      "file": "0016.jsonl",
+      "min_subject_id": 145594,
+      "max_subject_id": 163877,
+      "count": 34545,
+      "subject_count": 3000
+    },
+    {
+      "file": "0017.jsonl",
+      "min_subject_id": 163878,
+      "max_subject_id": 183253,
+      "count": 35823,
+      "subject_count": 3000
+    },
+    {
+      "file": "0018.jsonl",
+      "min_subject_id": 183257,
+      "max_subject_id": 121630,
+      "count": 30731,
+      "subject_count": 3000
+    },
+    {
+      "file": "0019.jsonl",
+      "min_subject_id": 194362,
+      "max_subject_id": 58871,
+      "count": 30645,
+      "subject_count": 3000
+    },
+    {
+      "file": "0020.jsonl",
+      "min_subject_id": 209678,
+      "max_subject_id": 219989,
+      "count": 33939,
+      "subject_count": 3000
+    },
+    {
+      "file": "0021.jsonl",
+      "min_subject_id": 219995,
+      "max_subject_id": 90015,
+      "count": 29690,
+      "subject_count": 3000
+    },
+    {
+      "file": "0022.jsonl",
+      "min_subject_id": 233788,
+      "max_subject_id": 247950,
+      "count": 31024,
+      "subject_count": 3000
+    },
+    {
+      "file": "0023.jsonl",
+      "min_subject_id": 236600,
+      "max_subject_id": 263983,
+      "count": 37463,
+      "subject_count": 3000
+    },
+    {
+      "file": "0024.jsonl",
+      "min_subject_id": 263985,
+      "max_subject_id": 265500,
+      "count": 25899,
+      "subject_count": 3000
+    },
+    {
+      "file": "0025.jsonl",
+      "min_subject_id": 273346,
+      "max_subject_id": 286280,
+      "count": 32791,
+      "subject_count": 3000
+    },
+    {
+      "file": "0026.jsonl",
+      "min_subject_id": 286282,
+      "max_subject_id": 172709,
+      "count": 17369,
+      "subject_count": 3000
+    },
+    {
+      "file": "0027.jsonl",
+      "min_subject_id": 137405,
+      "max_subject_id": 302879,
+      "count": 26457,
+      "subject_count": 3000
+    },
+    {
+      "file": "0028.jsonl",
+      "min_subject_id": 290387,
+      "max_subject_id": 298708,
+      "count": 31049,
+      "subject_count": 3000
+    },
+    {
+      "file": "0029.jsonl",
+      "min_subject_id": 239280,
+      "max_subject_id": 320858,
+      "count": 28697,
+      "subject_count": 3000
+    },
+    {
+      "file": "0030.jsonl",
+      "min_subject_id": 325166,
+      "max_subject_id": 336970,
+      "count": 30307,
+      "subject_count": 3000
+    },
+    {
+      "file": "0031.jsonl",
+      "min_subject_id": 336971,
+      "max_subject_id": 355246,
+      "count": 32734,
+      "subject_count": 3000
+    },
+    {
+      "file": "0032.jsonl",
+      "min_subject_id": 355247,
+      "max_subject_id": 268449,
+      "count": 29007,
+      "subject_count": 3000
+    },
+    {
+      "file": "0033.jsonl",
+      "min_subject_id": 320236,
+      "max_subject_id": 395651,
+      "count": 27052,
+      "subject_count": 3000
+    },
+    {
+      "file": "0034.jsonl",
+      "min_subject_id": 326874,
+      "max_subject_id": 410422,
+      "count": 30090,
+      "subject_count": 3000
+    },
+    {
+      "file": "0035.jsonl",
+      "min_subject_id": 410423,
+      "max_subject_id": 425941,
+      "count": 31248,
+      "subject_count": 3000
+    },
+    {
+      "file": "0036.jsonl",
+      "min_subject_id": 421719,
+      "max_subject_id": 439750,
+      "count": 32196,
+      "subject_count": 3000
+    },
+    {
+      "file": "0037.jsonl",
+      "min_subject_id": 439770,
+      "max_subject_id": 451578,
+      "count": 26808,
+      "subject_count": 3000
+    },
+    {
+      "file": "0038.jsonl",
+      "min_subject_id": 420628,
+      "max_subject_id": 142493,
+      "count": 28495,
+      "subject_count": 3000
+    },
+    {
+      "file": "0039.jsonl",
+      "min_subject_id": 31627,
+      "max_subject_id": 481760,
+      "count": 29689,
+      "subject_count": 3000
+    },
+    {
+      "file": "0040.jsonl",
+      "min_subject_id": 481761,
+      "max_subject_id": 491238,
+      "count": 33211,
+      "subject_count": 3000
+    },
+    {
+      "file": "0041.jsonl",
+      "min_subject_id": 492312,
+      "max_subject_id": 411247,
+      "count": 30250,
+      "subject_count": 3000
+    },
+    {
+      "file": "0042.jsonl",
+      "min_subject_id": 503612,
+      "max_subject_id": 514697,
+      "count": 31809,
+      "subject_count": 3000
+    },
+    {
+      "file": "0043.jsonl",
+      "min_subject_id": 514700,
+      "max_subject_id": 526429,
+      "count": 29844,
+      "subject_count": 3000
+    },
+    {
+      "file": "0044.jsonl",
+      "min_subject_id": 77128,
+      "max_subject_id": 538227,
+      "count": 33173,
+      "subject_count": 3000
+    },
+    {
+      "file": "0045.jsonl",
+      "min_subject_id": 538230,
+      "max_subject_id": 554253,
+      "count": 30584,
+      "subject_count": 3000
+    },
+    {
+      "file": "0046.jsonl",
+      "min_subject_id": 554256,
+      "max_subject_id": 565413,
+      "count": 30183,
+      "subject_count": 3000
+    },
+    {
+      "file": "0047.jsonl",
+      "min_subject_id": 565414,
+      "max_subject_id": 579392,
+      "count": 30556,
+      "subject_count": 3000
+    },
+    {
+      "file": "0048.jsonl",
+      "min_subject_id": 579393,
+      "max_subject_id": 599522,
+      "count": 25538,
+      "subject_count": 3000
+    },
+    {
+      "file": "0049.jsonl",
+      "min_subject_id": 599525,
+      "max_subject_id": 617472,
+      "count": 25961,
+      "subject_count": 3000
+    },
+    {
+      "file": "0050.jsonl",
+      "min_subject_id": 540514,
+      "max_subject_id": 630892,
+      "count": 41836,
+      "subject_count": 3000
+    },
+    {
+      "file": "0051.jsonl",
+      "min_subject_id": 630893,
+      "max_subject_id": 644168,
+      "count": 31154,
+      "subject_count": 3000
+    },
+    {
+      "file": "0052.jsonl",
+      "min_subject_id": 644165,
+      "max_subject_id": 664537,
+      "count": 31765,
+      "subject_count": 3000
+    },
+    {
+      "file": "0053.jsonl",
+      "min_subject_id": 664538,
+      "max_subject_id": 697435,
+      "count": 31248,
+      "subject_count": 2961
+    }
+  ]
+}

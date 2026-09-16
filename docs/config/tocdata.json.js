@@ -249,6 +249,14 @@ export default [
         "baseUrl": "/writings"
     },
     {
+        "title": "Bangumi Takeout Web 工具",
+        "time": "2026.09.15",
+        "editedTime": "2026.09.15",
+        "cover": "/writings/_media/BangumiBackup-20260915/cover-picture.jpg",
+        "href": "/writings/BangumiBackup-20260915",
+        "baseUrl": "/writings"
+    },
+    {
         "title": "记第 27 届上海国际电影节",
         "time": "2025.07.08",
         "editedTime": "2026.08.20",

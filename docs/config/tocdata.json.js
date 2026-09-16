@@ -458,6 +458,46 @@ export default [
         "baseUrl": "/archive"
     },
     {
+        "title": "画像｜动画游戏",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/ACGN",
+        "baseUrl": "/archive"
+    },
+    {
+        "title": "影像｜电影笔记",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Film",
+        "baseUrl": "/archive"
+    },
+    {
+        "title": "映像｜摄影照片",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Photo",
+        "baseUrl": "/archive"
+    },
+    {
+        "title": "杂俎｜散文随笔",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Anthology",
+        "baseUrl": "/archive"
+    },
+    {
+        "title": "骢辩｜哲学实践",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Dialectic",
+        "baseUrl": "/archive"
+    },
+    {
         "title": "覆瓿｜知乎旧文",
         "time": "",
         "editedTime": "2024.08.03",
@@ -472,6 +512,51 @@ export default [
         "cover": "",
         "href": "/archive/ITtech",
         "baseUrl": "/archive"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/ACGN/Beginning",
+        "baseUrl": "/archive/ACGN"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Film/Beginning",
+        "baseUrl": "/archive/Film"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Photo/Beginning",
+        "baseUrl": "/archive/Photo"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Anthology/Beginning",
+        "baseUrl": "/archive/Anthology"
+    },
+
+    {
+        "title": "前言",
+        "time": "",
+        "editedTime": "2026.09.16",
+        "cover": "",
+        "href": "/archive/Dialectic/Beginning",
+        "baseUrl": "/archive/Dialectic"
     },
 
     {

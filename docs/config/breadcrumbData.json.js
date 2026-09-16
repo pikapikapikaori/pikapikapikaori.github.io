@@ -12,6 +12,26 @@ export default [
         "name": "存档"
     },
     {
+        "path": "/archive/ACGN/",
+        "name": "画像｜动画游戏"
+    },
+    {
+        "path": "/archive/Film/",
+        "name": "影像｜电影笔记"
+    },
+    {
+        "path": "/archive/Photo/",
+        "name": "映像｜摄影照片"
+    },
+    {
+        "path": "/archive/Anthology/",
+        "name": "杂俎｜散文随笔"
+    },
+    {
+        "path": "/archive/Dialectic/",
+        "name": "骢辩｜哲学实践"
+    },
+    {
         "path": "/archive/ITtech/",
         "name": "汉阴｜技术相关"
     },

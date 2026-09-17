@@ -12,6 +12,7 @@
     outline: none;
     background: none;
     font-family: var(--global-sidebar-title-font);
+    color: inherit;
     font-size: 1.25rem;
     cursor: pointer;
     -webkit-appearance: none;

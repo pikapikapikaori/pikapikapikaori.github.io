@@ -1,9 +1,12 @@
 {
     "name": "ピカピカピ",
+    "short_name": "ピカピカピ",
+    "description": "Don't worry, be happy. | Personal blog of Yiyang Li.",
+    "id": "pikapikapi.com",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#000000",
+    "background_color": "#121212",
+    "theme_color": "#121212",
     "icons": [
         {
             "src": "../_media/logo.jpg",

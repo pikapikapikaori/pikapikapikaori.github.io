@@ -3,6 +3,10 @@
     border: 0;
 }
 
+.sidebar .search {
+    margin-bottom: 10px;
+}
+
 .search input {
     border: 0;
     box-shadow: 0 0 0;

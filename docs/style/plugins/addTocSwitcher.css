@@ -1,0 +1,75 @@
+.switch-toc-wrap-div {
+    margin: 0 0 20px;
+    border-bottom: 1px solid var(--border-color, #eee);
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 5px;
+}
+
+.switch-toc-wrap-div button {
+    border: none;
+    outline: none;
+    background: none;
+    font-family: var(--global-sidebar-title-font);
+    color: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 0.6em;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.switch-toc-wrap-div button.active-btn {
+    border-bottom: 2px solid var(--theme-color, #eee);
+    cursor: default;
+}
+
+.switch-toc-wrap-div button:not(.active-btn) {
+    cursor: pointer;
+    transition-duration: var(--global-transition-duration);
+}
+
+.switch-toc-wrap-div button:not(.active-btn):hover {
+    color: var(--theme-color);
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav li.collapse .app-sub-sidebar {
+    display: inherit
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul {
+    margin: 0;
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li>a {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul {
+    margin-left: 10px;
+    padding-left: 5px;
+    border-left: 1px solid var(--theme-color);
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li:not(:has(li.active)),
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>p,
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li:not(.active):not(:has(li.active)) {
+    display: none;
+}
+
+.sidebar:has(.default-btn.active-btn) .sidebar-nav>ul>li>ul>li ul {
+    display: none;
+}
+
+.sidebar:has(.default-btn.active-btn) .sidebar-nav>ul>li>ul>li:has(li.active)>a {
+    border-right: 2px solid;
+    color: var(--theme-color, #c7a2ec);
+    font-weight: 600;
+}

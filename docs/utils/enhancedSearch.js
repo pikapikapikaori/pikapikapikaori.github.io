@@ -4,7 +4,7 @@ function plugin (hook, vm) {
         let appName = sidebar.getElementsByClassName('app-name')[0]
         let search = sidebar.getElementsByClassName('search')[0]
 
-        sidebar.insertBefore(appName, search)
+        search.before(appName)
     })
 }
 

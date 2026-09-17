@@ -42,6 +42,21 @@
     display: inherit
 }
 
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul {
+    margin: 0;
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li>a {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul {
+    margin-left: 10px;
+    padding-left: 5px;
+    border-left: 1px solid var(--theme-color);
+}
+
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li:not(:has(li.active)),
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>p,
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li:not(.active):not(:has(li.active)) {

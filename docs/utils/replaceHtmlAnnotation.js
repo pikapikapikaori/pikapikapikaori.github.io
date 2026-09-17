@@ -192,7 +192,10 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         // Set first brief comment year to open.
-        document.querySelector('.brief-comments-container details:first-of-type').open = true
+        let firstBriefNote = document.querySelector('.brief-comments-container details:first-of-type')
+        if (firstBriefNote) {
+            firstBriefNote.open = true
+        }
     })
 }
 

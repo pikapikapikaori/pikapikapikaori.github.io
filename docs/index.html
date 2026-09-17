@@ -275,6 +275,22 @@
         basePath: 'docs/',
         dateFormat: '{YYYY}.{MM}.{DD}',
       },
+
+      // 目录、文章列表切换
+      tocSwitcher: {
+        localization: {
+            toc: {
+              '/en-us/': 'Contents',
+              '/jp/': '目次',
+              '/': '目录'
+            },
+            default: {
+              '/en-us/': 'Articles',
+              '/jp/': '文章一覧',
+              '/': '文章列表'
+            },
+        }
+      },
     }
   </script>
   <!-- Docsify v4 -->
@@ -423,6 +439,10 @@
   <!-- 添加替换 Markdown 中的 Html 注释 -->
   <link rel="stylesheet" href="./style/plugins/replaceHtmlAnnotation.css">
   <script type="module" src="./utils/replaceHtmlAnnotation.js"></script>
+
+  <!-- 目录、文章列表切换 -->
+  <link rel="stylesheet" href="./style/plugins/addTocSwitcher.css">
+  <script type="module" src="./utils/addTocSwitcher.js"></script>
 </body>
 
 </html>

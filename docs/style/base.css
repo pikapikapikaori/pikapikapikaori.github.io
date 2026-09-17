@@ -786,7 +786,7 @@ body {
     text-decoration-color: transparent;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition-duration: var(--global-transition-duration, 500ms);
+    transition: text-decoration-color var(--global-transition-duration, 500ms);
 }
 
 .sidebar ul li a:hover {

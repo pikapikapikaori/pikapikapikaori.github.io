@@ -24,7 +24,7 @@ function plugin(hook, vm) {
             gitalkContainer.style.width = '80%'
             gitalkContainer.style.margin = '0px auto 20px'
             gitalkContainer.style.padding = '0 15px 0'
-            document.getElementById('main').parentNode.insertBefore(gitalkContainer, undefined)
+            document.getElementById('main').parentNode.appendChild(gitalkContainer)
         }
 
         // 若没有footer，则在gitalk容器下方重新添加footer
@@ -35,7 +35,7 @@ function plugin(hook, vm) {
             footerDiv.id = 'footer-under-gitalk'
             footerDiv.innerHTML = gitalkWithFooterOptions.footerInnerHtml
             footer.appendChild(footerDiv)
-            document.getElementById('main').parentNode.insertBefore(footer, undefined)
+            document.getElementById('main').parentNode.appendChild(footer)
         }
 
         // render gitalk

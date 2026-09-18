@@ -28,7 +28,7 @@
     --accent-color: #f66;
     --accent-text-color: #fff;
     --blur-color: rgba(66, 185, 131, .1);
-    --sidebar-toggle-bg: hsla(0, 0%, 100%, .8);
+    --sidebar-toggle-bg: transparent;
     --sidebar-border-color: rgba(0, 0, 0, .07);
 
     /* ===== 框架变量：保持原样 ===== */
@@ -387,7 +387,6 @@ main.hidden {
 }
 
 .sidebar-toggle {
-    background-color: transparent;
     background-color: var(--sidebar-toggle-bg);
     border: 0;
     outline: none;

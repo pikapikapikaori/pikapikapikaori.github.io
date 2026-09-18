@@ -18,7 +18,7 @@
     --accent-color: #f5d020;
     --accent-text-color: #2a3a4a;
     --blur-color: rgba(58, 74, 90, .08);
-    --sidebar-toggle-bg: rgba(251, 251, 245, .85);
+    --sidebar-toggle-bg: transparent;
     --sidebar-border-color: #d0dae5;
 
     --grid-size: 22px;

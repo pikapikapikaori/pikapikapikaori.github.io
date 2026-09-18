@@ -18,6 +18,6 @@
     --accent-color: #d20f39;
     --accent-text-color: #eff1f5;
     --blur-color: rgba(136, 57, 239, .1);
-    --sidebar-toggle-bg: rgba(239, 241, 245, .85);
+    --sidebar-toggle-bg: transparent;
     --sidebar-border-color: #ccd0da;
 }

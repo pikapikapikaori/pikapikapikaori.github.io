@@ -18,7 +18,7 @@
     --accent-color: #6ab0d8;
     --accent-text-color: #1e2128;
     --blur-color: rgba(106, 176, 216, .1);
-    --sidebar-toggle-bg: rgba(30, 33, 40, .85);
+    --sidebar-toggle-bg: transparent;
     --sidebar-border-color: #2e323a;
 
     --dot-color: rgba(180, 200, 220, .12);
@@ -37,4 +37,5 @@ body {
     background-image:
         radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
     background-size: var(--dot-size) var(--dot-size);
+    background-attachment: local; 
 }

@@ -18,7 +18,7 @@
     --accent-color: #c8b840;
     --accent-text-color: #1a2028;
     --blur-color: rgba(200, 184, 64, .1);
-    --sidebar-toggle-bg: rgba(26, 32, 40, .85);
+    --sidebar-toggle-bg: transparent;
     --sidebar-border-color: #2a3440;
 
     --grid-size: 22px;
@@ -39,4 +39,5 @@ body {
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: var(--grid-size) var(--grid-size);
+    background-attachment: local; 
 }

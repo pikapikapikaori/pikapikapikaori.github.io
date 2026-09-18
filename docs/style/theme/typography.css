@@ -37,4 +37,5 @@ body {
     background-image:
         radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
     background-size: var(--dot-size) var(--dot-size);
+    background-attachment: local; 
 }

@@ -2,12 +2,14 @@
 
 ## ツールまたはプロジェクト
 
-
 以下は、私が開発したいくつかのツールまたはプロジェクトです：
 
-- [docsify-gitalk-with-footer](https://github.com/pikapikapikaori/docsify-gitalk-with-footer)：docsify の gitalk を強化するプラグイン。
-- [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count)：docsify の単語カウントと i18n ローカリゼーションをサポートするプラグイン。
 - [docsify-simple-dark-mode](https://github.com/pikapikapikaori/docsify-simple-dark-mode)：docsify にダークモードを追加するプラグイン。
+- [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count)：docsify の単語カウントと i18n ローカリゼーションをサポートするプラグイン。
+
+非推奨のプロジェクト：
+
+- docsify-gitalk-with-footer：docsify の gitalk を強化するプラグイン。
 
 ## おもちゃのインタプリタインタプリタ
 

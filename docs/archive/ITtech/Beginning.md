@@ -4,9 +4,12 @@
 
 下面是我开发的一些小工具或项目：
 
-- [docsify-gitalk-with-footer](https://github.com/pikapikapikaori/docsify-gitalk-with-footer)：用于 docsify 的一款插件，修复了原生添加 gitalk 时的一些问题。
-- [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count)：用于 docsify 的一款插件，为 docsify 添加字数统计，且支持 i18n 国际化。
 - [docsify-simple-dark-mode](https://github.com/pikapikapikaori/docsify-simple-dark-mode)：用于 docsify 的一款插件，为 dcosify 增加黑暗模式。
+- [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count)：用于 docsify 的一款插件，为 docsify 添加字数统计，且支持 i18n 国际化。
+
+不再维护的项目：
+
+- docsify-gitalk-with-footer：用于 docsify 的一款插件，修复了原生添加 gitalk 时的一些问题。
 
 ## 一个玩具解释器
 

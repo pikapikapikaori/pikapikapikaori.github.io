@@ -409,7 +409,11 @@ function dbGetCollections(username) {
 // 保存 collections 中间态：incomplete 恒为 true。
 // 语义：incomplete = true 代表"整个备份流程没跑完"。
 // 只有 runBackup 成功导出后调用 dbMarkCollectionsComplete 才会置为 false。
-function dbSaveCollections(username, items, total) {
+//
+// resetFetchedAt：
+//   true  → 表示这次是"从头重拉"，fetched_at 重置为当前时间；
+//   false → 表示续传或同一次拉取的中间落盘，保留原有 fetched_at。
+function dbSaveCollections(username, items, total, resetFetchedAt = false) {
     return new Promise((resolve, reject) => {
         const tx = db.transaction(CONFIG.COLLECTIONS_STORE, 'readwrite');
         const store = tx.objectStore(CONFIG.COLLECTIONS_STORE);
@@ -422,7 +426,9 @@ function dbSaveCollections(username, items, total) {
                 items,
                 total: total || items.length,
                 incomplete: true,
-                fetched_at: (existing && existing.fetched_at) || Date.now(),
+                fetched_at: (existing && existing.fetched_at && !resetFetchedAt)
+                    ? existing.fetched_at
+                    : Date.now(),
                 expiresAt: Date.now() + CONFIG.CACHE_TTL_MS,
             };
             store.put(record);
@@ -885,7 +891,8 @@ async function fetchUserCollections(service, username, limit = 30) {
         progressState.total = total;
         progressState.done = items.length;
         renderProgress();
-        await dbSaveCollections(username, items, total);
+        // 从头重拉，重置 fetched_at
+        await dbSaveCollections(username, items, total, true);
     }
 
     let pageCount = 0;

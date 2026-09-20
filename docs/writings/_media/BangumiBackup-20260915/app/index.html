@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bangumi Takeout Web UI</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="Tool website that can display data of Bangumi (bgm.tv) in json / zip files.">
+
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/setup.css">
+    <link rel="stylesheet" href="./css/overview.css">
+    <script>
+        (function () {
+            try {
+                var m = localStorage.getItem('bgm-viewer:theme') || 'auto';
+                var real = m === 'dark' ? 'dark'
+                    : m === 'light' ? 'light'
+                        : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.dataset.theme = real;
+                document.documentElement.dataset.themeMode = m;
+            } catch (e) { }
+        })();
+    </script>
+</head>
+
+<body>
+    <div id="bootstrap" class="setup" hidden></div>
+    <div id="app" hidden>
+        <header id="site-header" class="site-header"></header>
+        <main id="main" class="site-main"></main>
+        <footer id="site-footer" class="site-footer"></footer>
+    </div>
+    <script type="module" src="./js/pages/overview.js"></script>
+</body>
+
+</html>

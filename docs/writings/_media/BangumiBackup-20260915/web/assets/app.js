@@ -406,7 +406,10 @@ function dbGetCollections(username) {
     });
 }
 
-function dbSaveCollections(username, items, total, complete) {
+// 保存 collections 中间态：incomplete 恒为 true。
+// 语义：incomplete = true 代表"整个备份流程没跑完"。
+// 只有 runBackup 成功导出后调用 dbMarkCollectionsComplete 才会置为 false。
+function dbSaveCollections(username, items, total) {
     return new Promise((resolve, reject) => {
         const tx = db.transaction(CONFIG.COLLECTIONS_STORE, 'readwrite');
         const store = tx.objectStore(CONFIG.COLLECTIONS_STORE);
@@ -418,11 +421,28 @@ function dbSaveCollections(username, items, total, complete) {
                 username,
                 items,
                 total: total || items.length,
-                incomplete: !complete,
-                fetched_at: (complete || !existing) ? Date.now() : (existing.fetched_at || Date.now()),
+                incomplete: true,
+                fetched_at: (existing && existing.fetched_at) || Date.now(),
                 expiresAt: Date.now() + CONFIG.CACHE_TTL_MS,
             };
             store.put(record);
+        };
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+}
+
+// 仅在 runBackup 全流程成功收尾时调用，标记本次备份已完成。
+function dbMarkCollectionsComplete(username) {
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(CONFIG.COLLECTIONS_STORE, 'readwrite');
+        const store = tx.objectStore(CONFIG.COLLECTIONS_STORE);
+        const getReq = store.get(username);
+        getReq.onsuccess = () => {
+            const rec = getReq.result;
+            if (!rec) return;
+            rec.incomplete = false;
+            store.put(rec);
         };
         tx.oncomplete = () => resolve();
         tx.onerror = () => reject(tx.error);
@@ -810,11 +830,24 @@ async function resolveUserMeta(service, username) {
     return { username };
 }
 
+// incomplete 语义：整个备份流程是否尚未完成。
+//   false → 上次已完整跑完并成功导出，本次从头重拉收藏列表
+//   true  → 上次没跑完，列表完整则复用，不完整则续传
 async function fetchUserCollections(service, username, limit = 30) {
     const now = Date.now();
     const cached = await dbGetCollections(username);
 
-    if (cached && cached.expiresAt > now && !cached.incomplete && Array.isArray(cached.items)) {
+    const cacheUsable = cached && cached.expiresAt > now && Array.isArray(cached.items);
+    const lastCompleted = cacheUsable && cached.incomplete === false;
+    const isListFull = cacheUsable && cached.items.length >= cached.total;
+
+    // 上次流程完整跑完 → 本次强制重拉
+    if (lastCompleted) {
+        log('上次备份已完整完成，本次重新拉取收藏列表', 'info');
+        setStage('拉取收藏列表', 0);
+    }
+    // 上次未跑完，列表完整 → 复用
+    else if (isListFull) {
         const when = new Date(cached.fetched_at).toLocaleString();
         log(`从缓存读取收藏列表（${cached.items.length} 条，拉取于 ${when}）`, 'success');
         setStage('读取收藏列表缓存', cached.items.length);
@@ -826,8 +859,10 @@ async function fetchUserCollections(service, username, limit = 30) {
 
     let items = [];
     let total = 0;
-    const canResume = cached && cached.expiresAt > now && cached.incomplete
-        && Array.isArray(cached.items) && cached.items.length > 0;
+
+    // 上次未跑完且列表不完整 → 续传
+    const canResume = cacheUsable && cached.incomplete === true
+        && cached.items.length > 0 && !isListFull;
 
     if (canResume) {
         items = cached.items;
@@ -840,9 +875,7 @@ async function fetchUserCollections(service, username, limit = 30) {
     } else {
         log(`拉取收藏列表: ${username}`);
         setStage('拉取收藏列表', 0);
-    }
 
-    if (items.length === 0) {
         const page = await service.getUserCollectionsPage(username, 0, limit);
         if (!page || page.total == null || !page.data) {
             throw new Error('收藏列表响应异常: ' + JSON.stringify(page).slice(0, 200));
@@ -852,7 +885,7 @@ async function fetchUserCollections(service, username, limit = 30) {
         progressState.total = total;
         progressState.done = items.length;
         renderProgress();
-        await dbSaveCollections(username, items, total, items.length >= total);
+        await dbSaveCollections(username, items, total);
     }
 
     let pageCount = 0;
@@ -867,16 +900,16 @@ async function fetchUserCollections(service, username, limit = 30) {
             renderProgress();
             pageCount++;
             if (pageCount % 10 === 0) {
-                await dbSaveCollections(username, items, total, items.length >= total);
+                await dbSaveCollections(username, items, total);
             }
         }
     } catch (e) {
-        await dbSaveCollections(username, items, total, false);
+        await dbSaveCollections(username, items, total);
         log(`收藏列表拉取中断，已保存进度 ${items.length}/${total}`, 'warn');
         throw e;
     }
 
-    await dbSaveCollections(username, items, total, true);
+    await dbSaveCollections(username, items, total);
     log(`收藏列表完成: ${items.length} 条（已写入缓存）`, 'success');
     return items;
 }
@@ -1384,6 +1417,9 @@ async function runBackup() {
         progressState.done = 1;
         renderProgress();
         log(`已导出（${(blob.size / 1024 / 1024).toFixed(1)} MB）`, 'success');
+
+        // 全流程成功 → 标记 collections 缓存已被完整消费（incomplete=false）
+        await dbMarkCollectionsComplete(username);
 
         setStage('完成', 1);
         progressState.done = 1;

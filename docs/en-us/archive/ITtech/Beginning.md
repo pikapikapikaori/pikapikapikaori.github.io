@@ -4,9 +4,12 @@
 
 Below is some tools or projects I developed:
 
-- [docsify-gitalk-with-footer](https://github.com/pikapikapikaori/docsify-gitalk-with-footer): A plugin to enhance gitalk for docsify.
-- [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count): A plugin that supports word count and i18n localization for docsify.
 - [docsify-simple-dark-mode](https://github.com/pikapikapikaori/docsify-simple-dark-mode): A plugin to add dark mode for docsify.
+- [docsify-enhanced-word-count](https://github.com/pikapikapikaori/docsify-enhanced-word-count): A plugin that supports word count and i18n localization for docsify.
+
+Deprecated projects:
+
+- docsify-gitalk-with-footer: A plugin to enhance gitalk for docsify.
 
 ## A Toy Interpreter
 

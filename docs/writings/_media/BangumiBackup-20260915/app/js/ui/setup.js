@@ -75,7 +75,7 @@ export async function renderSetup(container, onReady) {
 
       <div class="setup-status" id="setup-status"></div>
 
-      <footer class="site-footer" id="site-footer"></footer>
+      <footer class="site-footer" id="setup-site-footer"></footer>
     </div>
 
     <div class="setup-overlay" id="setup-overlay" hidden>
@@ -109,7 +109,7 @@ export async function renderSetup(container, onReady) {
     }
 
     // 4. 渲染底部版权
-    buildFooter();
+    buildFooter('setup-site-footer');
 
     // 5. 其余交互
     const statusEl = container.querySelector('#setup-status');

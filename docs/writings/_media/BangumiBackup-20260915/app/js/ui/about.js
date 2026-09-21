@@ -29,7 +29,7 @@ export function renderAbout() {
       <p>默认按收藏更新时间倒序。另提供更新时间正序、评分正序 / 倒序、作品发布日期正序 / 倒序，以及按评分筛选。</p>
 
       <h2>问题反馈</h2>
-      <p>如遇到问题或有建议，请到 <a href="https://github.com/pikapikapikaori/pikapikapikaori.github.io/issues/445" target="_blank" rel="noopener">项目仓库</a> 提交 issue。</p>
+      <p>如遇到问题或有建议，请到<a href="https://github.com/pikapikapikaori/pikapikapikaori.github.io/issues/445" target="_blank" rel="noopener">这个 issue </a>提交。</p>
     </div>
   `;
 }

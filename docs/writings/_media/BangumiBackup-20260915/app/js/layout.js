@@ -153,10 +153,10 @@ function buildFooter() {
     const year = new Date().getFullYear();
     const range = year <= COPYRIGHT_START_YEAR
         ? `${COPYRIGHT_START_YEAR}`
-        : `${COPYRIGHT_START_YEAR}-${year}`;
+        : `${COPYRIGHT_START_YEAR} - ${year}`;
     document.getElementById('site-footer').innerHTML = `
     <div class="footer-inner">
-      <div class="copyright">© ${range} ${COPYRIGHT_HOLDER} - All rights reserved.</div>
+      <div class="copyright">&copy; ${range} ${COPYRIGHT_HOLDER} - All rights reserved.</div>
     </div>
   `;
 }

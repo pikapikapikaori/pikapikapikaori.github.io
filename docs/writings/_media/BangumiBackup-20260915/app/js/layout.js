@@ -2,7 +2,7 @@ import { state } from './app.js';
 import { cache } from './storage.js';
 import { applyTheme, getTheme } from './theme.js';
 import {
-    THEME_LABELS, THEME_MODES,
+    THEME_LABELS, THEME_MODES, THEME_ICONS,
     COPYRIGHT_START_YEAR, COPYRIGHT_HOLDER,
     CATEGORIES,
 } from './config.js';
@@ -26,7 +26,7 @@ function buildHeader() {
         <div id="global-search-panel" class="search-panel" hidden></div>
       </div>
       <div class="header-actions">
-        <button type="button" id="theme-btn" class="icon-btn" title="主题">🌓</button>
+        <button type="button" id="theme-btn" class="icon-btn" title="主题">${THEME_ICONS.auto}</button>
         <div class="user-menu" id="user-menu">
           <button type="button" class="user-trigger" id="user-trigger" aria-haspopup="true" aria-expanded="false">
             <img id="user-avatar" alt="">
@@ -136,7 +136,7 @@ function bindThemeButton() {
     const update = () => {
         const mode = getTheme();
         btn.title = '主题：' + THEME_LABELS[mode];
-        btn.textContent = mode === 'dark' ? '🌙' : mode === 'light' ? '☀️' : '🌓';
+        btn.innerHTML = mode === 'dark' ? THEME_ICONS.dark : mode === 'light' ? THEME_ICONS.light : THEME_ICONS.auto;
     };
     update();
     btn.addEventListener('click', () => {

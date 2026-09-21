@@ -1,6 +1,7 @@
 import { loadFromFile, loadFromUrl } from '../source.js';
 import { cache } from '../storage.js';
-import { DEFAULT_DATA_URL } from '../config.js';
+import { DEFAULT_DATA_URL, BANGUMI_EXPORT_URL, } from '../config.js';
+import { buildFooter } from '../footer.js';
 
 export async function renderSetup(container, onReady) {
     container.hidden = false;
@@ -62,7 +63,19 @@ export async function renderSetup(container, onReady) {
       </section>
       ` : ''}
 
+      <section class="setup-section setup-guide">
+        <div class="setup-section-title">还没有导出数据？</div>
+        <p class="setup-guide-text">
+          本站需要导出的 Bangumi 收藏数据（<code>json</code> 或 <code>zip</code> 格式）才能正常展示。请先前往<a class="setup-guide-link" href="${BANGUMI_EXPORT_URL}" target="_blank" rel="noopener noreferrer">Bangumi 收藏导出页</a>导出，再回到这里导入数据。
+        </p>
+        <a class="btn btn-ghost setup-guide-btn" href="${BANGUMI_EXPORT_URL}" target="_blank" rel="noopener noreferrer">
+          前往 Bangumi 收藏导出页
+        </a>
+      </section>
+
       <div class="setup-status" id="setup-status"></div>
+
+      <footer class="site-footer" id="site-footer"></footer>
     </div>
 
     <div class="setup-overlay" id="setup-overlay" hidden>
@@ -95,7 +108,10 @@ export async function renderSetup(container, onReady) {
         });
     }
 
-    // 4. 其余交互
+    // 4. 渲染底部版权
+    buildFooter();
+
+    // 5. 其余交互
     const statusEl = container.querySelector('#setup-status');
     const overlay = container.querySelector('#setup-overlay');
     const overlayText = container.querySelector('#setup-overlay-text');

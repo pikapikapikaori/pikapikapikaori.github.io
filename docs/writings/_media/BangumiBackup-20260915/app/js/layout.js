@@ -3,11 +3,11 @@ import { cache } from './storage.js';
 import { applyTheme, getTheme } from './theme.js';
 import {
     THEME_LABELS, THEME_MODES, THEME_ICONS,
-    COPYRIGHT_START_YEAR, COPYRIGHT_HOLDER,
     CATEGORIES,
 } from './config.js';
 import { forceBootstrap, notifyDataChanged } from './bootstrap.js';
 import { initSearch } from './search.js';
+import { buildFooter } from './footer.js';
 
 // ---------- Header ----------
 function buildHeader() {
@@ -146,19 +146,6 @@ function bindThemeButton() {
         applyTheme(next);
         update();
     });
-}
-
-// ---------- Footer ----------
-function buildFooter() {
-    const year = new Date().getFullYear();
-    const range = year <= COPYRIGHT_START_YEAR
-        ? `${COPYRIGHT_START_YEAR}`
-        : `${COPYRIGHT_START_YEAR} - ${year}`;
-    document.getElementById('site-footer').innerHTML = `
-    <div class="footer-inner">
-      <div class="copyright">&copy; ${range} ${COPYRIGHT_HOLDER} - All rights reserved.</div>
-    </div>
-  `;
 }
 
 // ---------- 入口 ----------

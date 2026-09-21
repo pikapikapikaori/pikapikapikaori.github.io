@@ -5,6 +5,7 @@
 // ---------- 数据源 ----------
 export const DEFAULT_DATA_URL = '../../PersonalRecordsBackup/bgm-20260906.json.zip';
 export const CORS_PROXY = '';
+export const BANGUMI_EXPORT_URL = '../web/index.html'
 
 // ---------- 缓存 ----------
 export const DB_NAME = 'bgm-viewer';

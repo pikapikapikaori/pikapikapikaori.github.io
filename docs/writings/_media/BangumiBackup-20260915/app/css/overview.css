@@ -1,0 +1,164 @@
+.overview-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.subtabs {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.subtab {
+    padding: 4px 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: 999px;
+    color: var(--color-text-dim);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+}
+
+.subtab:hover {
+    color: var(--color-text);
+}
+
+.subtab.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+.subtab .subtab-count {
+    margin-left: 6px;
+    font-size: var(--fs-xs);
+    opacity: .75;
+}
+
+.overview-controls {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+    color: var(--color-text-dim);
+}
+
+.control select {
+    height: 30px;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+    outline: none;
+}
+
+.control select:focus {
+    border-color: var(--color-primary);
+}
+
+.overview-stats {
+    display: flex;
+    gap: var(--space-3);
+    font-size: var(--fs-xs);
+    color: var(--color-text-faint);
+}
+
+.overview-stats strong {
+    color: var(--color-text);
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-4);
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: var(--space-3);
+    }
+}
+
+.card-rate {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.card-score {
+    color: var(--color-text-faint);
+}
+
+/* ---------- Pagination ---------- */
+.pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: var(--space-5);
+}
+
+.pager-btn {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text-dim);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+}
+
+.pager-btn:hover:not(:disabled):not(.is-active) {
+    color: var(--color-text);
+    border-color: var(--color-primary);
+}
+
+.pager-btn.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    cursor: default;
+}
+
+.pager-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.pager-ellipsis {
+    color: var(--color-text-faint);
+    padding: 0 4px;
+    user-select: none;
+}
+
+.pager-info {
+    margin-left: var(--space-3);
+    font-size: var(--fs-xs);
+    color: var(--color-text-faint);
+}
+
+@media (max-width: 480px) {
+    .pager-info {
+        flex-basis: 100%;
+        text-align: center;
+        margin: var(--space-2) 0 0;
+    }
+}

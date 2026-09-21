@@ -157,15 +157,36 @@ function renderGrid() {
 
   pager.innerHTML = pagerHtml(currentPage, totalPages, total);
 
+  const goToPage = (p) => {
+    if (!Number.isInteger(p) || p < 1 || p > totalPages || p === currentPage) return;
+    currentPage = p;
+    renderGrid();
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // 原来的页码 / 上一页 / 下一页按钮
   pager.querySelectorAll('[data-page]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const p = Number(btn.dataset.page);
-      if (!Number.isInteger(p) || p < 1 || p > totalPages || p === currentPage) return;
-      currentPage = p;
-      renderGrid();
-      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    btn.addEventListener('click', () => goToPage(Number(btn.dataset.page)));
   });
+
+  // 新增：跳页输入框
+  const jump = pager.querySelector('.pager-input');
+  if (jump) {
+    jump.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        jump.blur();          // 统一交给 blur 处理，避免重复跳转
+      }
+    });
+    jump.addEventListener('blur', () => {
+      const p = Number(jump.value);
+      if (!Number.isInteger(p) || p < 1 || p > totalPages) {
+        jump.value = currentPage;   // 非法值还原成当前页
+        return;
+      }
+      goToPage(p);
+    });
+  }
 }
 
 function pagerHtml(current, totalPages, total) {
@@ -193,6 +214,12 @@ function pagerHtml(current, totalPages, total) {
     : `<button type="button" class="pager-btn ${p === current ? 'is-active' : ''}" data-page="${p}">${p}</button>`
   ).join('')}
       <button type="button" class="pager-btn" data-page="${current + 1}" ${current === totalPages ? 'disabled' : ''}>下一页 ›</button>
+      <span class="pager-jump">
+        跳至
+        <input type="number" class="pager-input" min="1" max="${totalPages}"
+               value="${current}" inputmode="numeric" aria-label="跳转到指定页">
+        页
+      </span>
       <span class="pager-info">第 ${current} / ${totalPages} 页 · 共 ${total} 条</span>
     </nav>
   `;

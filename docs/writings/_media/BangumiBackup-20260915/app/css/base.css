@@ -1,4 +1,4 @@
-[hidden] { 
+[hidden] {
     display: none !important;
 }
 
@@ -188,6 +188,7 @@ button {
     align-items: center;
     gap: var(--space-2);
     flex-shrink: 0;
+    margin-left: auto;
 }
 
 .icon-btn {
@@ -384,4 +385,51 @@ button {
     .user-trigger span:not(.caret) {
         display: none;
     }
+}
+
+.pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: var(--space-5);
+}
+
+.pager-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--fs-xs);
+    color: var(--color-text-dim);
+}
+
+.pager-input {
+    width: 52px;
+    height: 28px;
+    padding: 0 6px;
+    text-align: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+    outline: none;
+}
+
+.pager-input:focus {
+    border-color: var(--color-primary);
+    background: var(--color-surface);
+}
+
+/* 去掉 number 输入框的上下箭头 */
+.pager-input::-webkit-outer-spin-button,
+.pager-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.pager-input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }

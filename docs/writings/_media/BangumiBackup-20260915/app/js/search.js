@@ -30,14 +30,14 @@ export function initSearch() {
         }
         panel.hidden = false;
         panel.innerHTML = hits.map(it => `
-      <a class="search-hit" href="./detail.html?id=${it.id}">
-        <img src="${it.images?.grid || it.images?.small || ''}" alt="">
-        <div class="search-hit-body">
-          <div class="search-hit-name">${escapeHtml(it.nameCn || it.name)}</div>
-          <div class="search-hit-sub">${escapeHtml(it.name)}</div>
-        </div>
-      </a>
-    `).join('');
+            <a class="search-hit" href="./detail.html?id=${it.id}">
+                <img src="${it.images?.grid || it.images?.small || ''}" alt="">
+                <div class="search-hit-body">
+                <div class="search-hit-name">${escapeHtml(it.nameCn || it.name)}</div>
+                <div class="search-hit-sub">${escapeHtml(it.name)}</div>
+                </div>
+            </a>
+        `).join('');
     });
 
     input.addEventListener('keydown', (e) => {

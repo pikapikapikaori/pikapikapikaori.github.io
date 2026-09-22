@@ -1,0 +1,49 @@
+:root {
+    --bg-color: #f7f3ec;
+    --text-color: #4a3f35;
+    --heading-color: #3a2f25;
+    --muted-color: #8a7f70;
+    --em-color: #7a6f60;
+    --h6-color: #8a7f70;
+    --sidebar-text-color: #5a4f42;
+    --sidebar-title-color: #3a2f25;
+    --border-color: #e0d8c8;
+    --border-color-strong: #c8bca8;
+    --border-color-mid: #b8a890;
+    --code-bg: #efe8da8c;
+    --zebra-bg: #f3ece08c;
+    --tip-code-bg: #e8dcc88c;
+    --inline-code-color: #b8443a;
+    --code-text-color: #4a3f35;
+    --accent-color: #d4a24a;
+    --accent-text-color: #3a2f25;
+    --blur-color: rgba(74, 63, 53, .08);
+    --sidebar-toggle-bg: transparent;
+    --sidebar-border-color: rgba(160, 140, 110, .30);
+
+    --hatch-size: 13px;
+    --hatch-color: rgba(160, 140, 110, .12);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size)),
+        repeating-linear-gradient(-45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size));
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size)),
+        repeating-linear-gradient(-45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size));
+    background-attachment: local;
+}

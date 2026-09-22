@@ -20,8 +20,8 @@ let addWidgetsOptions = {
             dark: './style/theme/lavandula.css',
             lightColor: '#f5f0fa',
             darkColor: '#1f1830',
-            lightThemeColor: '#cca2ec',
-            darkThemeColor: '#cca2ec'
+            lightThemeColor: '#cda2ec',
+            darkThemeColor: '#cda2ec'
         },
         {
             name: 'kraft',
@@ -38,8 +38,8 @@ let addWidgetsOptions = {
             dark: './style/theme/library.css',
             lightColor: '#e3efd1',
             darkColor: '#1e3328',
-            lightThemeColor: '#c3eca2',
-            darkThemeColor: '#c3eca2'
+            lightThemeColor: '#c7eca2',
+            darkThemeColor: '#c7eca2'
         },
         {
             name: 'kirby',
@@ -47,8 +47,8 @@ let addWidgetsOptions = {
             dark: './style/theme/metaknight.css',
             lightColor: '#ffeef4',
             darkColor: '#1a2238',
-            lightThemeColor: '#eca2b8',
-            darkThemeColor: '#7a424e'
+            lightThemeColor: '#eca2bb',
+            darkThemeColor: '#a2aeec'
         },
         {
             name: 'calligraphy',
@@ -65,7 +65,7 @@ let addWidgetsOptions = {
             dark: './style/theme/dot.css',
             lightColor: '#fafaf5',
             darkColor: '#1e2128',
-            lightThemeColor: '#a2c7ec',
+            lightThemeColor: '#ecc7a2',
             darkThemeColor: '#a2c7ec'
         }
     ]
@@ -349,30 +349,36 @@ function plugin(hook, vm) {
         let presetListDiv = document.createElement('div')
         presetListDiv.className = 'theme-picker-preset-color-list-div'
 
-        let buildPatternStyle = function (color, pattern) {
+        let buildPatternStyle = function (pattern, isDarkStyle) {
             if (!pattern) return ''
 
-            let hex = color.replace('#', '')
-            if (hex.length === 8) hex = hex.substring(0, 6)
-            if (hex.length === 3) hex = hex.split('').map(c => c + c).join('')
+            let color
 
-            let r = parseInt(hex.substring(0, 2), 16)
-            let g = parseInt(hex.substring(2, 4), 16)
-            let b = parseInt(hex.substring(4, 6), 16)
-            let luminance = (r * 0.299 + g * 0.587 + b * 0.114)
-            let isDark = luminance < 128
-
-            let rgb = isDark ? '255,255,255' : '0,0,0'
-            let lineAlpha = isDark ? '.1' : '.06'
-            let dotAlpha = isDark ? '.14' : '.08'
-
-            if (pattern === 'calligraphy') {
-                return `background-image: linear-gradient(rgba(${rgb},${lineAlpha}) 1px, transparent 1px), linear-gradient(90deg, rgba(${rgb},${lineAlpha}) 1px, transparent 1px); background-size: 6px 6px;`
+            switch (pattern) {
+                case 'calligraphy':
+                    color = isDarkStyle ? 'rgba(120, 160, 200, .1)' : 'rgba(120, 160, 200, .18)'
+                    return `background-image: linear-gradient(${color} 1px, transparent 1px), linear-gradient(90deg, ${color} 1px, transparent 1px); background-size: 6px 6px;`
+                case 'typography':
+                    color = isDarkStyle ? 'rgba(80, 100, 120, .25)' : 'rgba(180, 200, 220, .12)'
+                    return `background-image: radial-gradient(circle, ${color} .7px, transparent 1.1px); background-size: 6px 6px;`
+                case 'misty':
+                    color = isDarkStyle ? 'rgba(120, 160, 200, .10)' : 'rgba(120, 160, 200, .18)'
+                    let colorStrong = isDarkStyle ? 'rgba(120, 160, 200, .20)' : 'rgba(120, 160, 200, .32)'
+                    return `background-image: linear-gradient(${colorStrong} 1px, transparent 1px), linear-gradient(90deg, ${colorStrong} 1px, transparent 1px), linear-gradient(${color} 1px, transparent 1px), linear-gradient(90deg, ${color} 1px, transparent 1px); background-size: 30px 30px, 30px 30px, 6px 6px, 6px 6px;`
+                case 'sunlit':
+                    color = isDarkStyle ? 'rgba(200, 180, 150, .10)' : 'rgba(180, 160, 130, .22)'
+                    return `background-image: repeating-linear-gradient(to bottom, transparent 0 8px, ${color} 8px 9px);`
+                case 'linen':
+                    color = isDarkStyle ? 'rgba(180, 160, 120, .08)' : 'rgba(160, 140, 110, .12)'
+                    return `background-image: repeating-linear-gradient(45deg, ${color} 0 1px, transparent 1px 6px), repeating-linear-gradient(-45deg, ${color} 0 1px, transparent 1px 6px);`
+                case 'cross':
+                    let solid = isDarkStyle ? '#7a9abb' : '#6a8aaa'
+                    let crossAlpha = isDarkStyle ? '0.26' : '0.30'
+                    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><path d="M6 4v4M4 6h4" fill="none" stroke="${solid}" stroke-opacity="${crossAlpha}" stroke-width="1"/></svg>`
+                    return `background-image: url('data:image/svg+xml,${encodeURIComponent(svg)}'); background-size: 12px 12px;`
+                default:
+                    return ''
             }
-            if (pattern === 'typography') {
-                return `background-image: radial-gradient(circle, rgba(${rgb},${dotAlpha}) .7px, transparent 1.1px); background-size: 6px 6px;`
-            }
-            return ''
         }
 
         themeState.groups.forEach(function (group, index) {
@@ -381,8 +387,8 @@ function plugin(hook, vm) {
             btnDiv.dataset.themeIndex = index
             btnDiv.style.background = `linear-gradient(135deg, ${group.lightColor} 0 50%, ${group.darkColor} 50% 100%)`
 
-            let lightPatternStyle = buildPatternStyle(group.lightColor, group.name)
-            let darkPatternStyle = buildPatternStyle(group.darkColor, group.name)
+            let lightPatternStyle = buildPatternStyle(group.name, false)
+            let darkPatternStyle = buildPatternStyle(group.name, true)
 
             let l = group.lightThemeColor
             let d = group.darkThemeColor

@@ -1,0 +1,57 @@
+:root {
+    --bg-color: #14171c;
+    --text-color: #c8d4e0;
+    --heading-color: #e0e8f0;
+    --muted-color: #7a8a9a;
+    --em-color: #8a9aaa;
+    --h6-color: #7a8a9a;
+    --sidebar-text-color: #9aa8b8;
+    --sidebar-title-color: #d0dae5;
+    --border-color: #2a3040;
+    --border-color-strong: #3a4555;
+    --border-color-mid: #4a5565;
+    --code-bg: #1e24308c;
+    --zebra-bg: #1a20288c;
+    --tip-code-bg: #232b388c;
+    --inline-code-color: #e07a6a;
+    --code-text-color: #c8d4e0;
+    --accent-color: #f5d020;
+    --accent-text-color: #1a2028;
+    --blur-color: rgba(200, 212, 224, .08);
+    --sidebar-toggle-bg: transparent;
+    --sidebar-border-color: rgba(120, 160, 200, .18);
+
+    --grid-size: 22px;
+    --grid-color: rgba(120, 160, 200, .10);
+    --grid-size-strong: 110px;
+    --grid-color-strong: rgba(120, 160, 200, .20);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-color-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px),
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size:
+        var(--grid-size-strong) var(--grid-size-strong),
+        var(--grid-size-strong) var(--grid-size-strong),
+        var(--grid-size) var(--grid-size),
+        var(--grid-size) var(--grid-size);
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-color-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px),
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size:
+        var(--grid-size-strong) var(--grid-size-strong),
+        var(--grid-size-strong) var(--grid-size-strong),
+        var(--grid-size) var(--grid-size),
+        var(--grid-size) var(--grid-size);
+    background-attachment: local;
+}

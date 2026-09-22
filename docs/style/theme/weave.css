@@ -1,0 +1,49 @@
+:root {
+    --bg-color: #18150f;
+    --text-color: #d0c8b8;
+    --heading-color: #e8e0d0;
+    --muted-color: #8a8070;
+    --em-color: #9a9080;
+    --h6-color: #8a8070;
+    --sidebar-text-color: #a89e90;
+    --sidebar-title-color: #d8d0c0;
+    --border-color: #2a251c;
+    --border-color-strong: #3a3528;
+    --border-color-mid: #4a4538;
+    --code-bg: #221e158c;
+    --zebra-bg: #1e1a128c;
+    --tip-code-bg: #28231a8c;
+    --inline-code-color: #e07a6a;
+    --code-text-color: #d0c8b8;
+    --accent-color: #d4a24a;
+    --accent-text-color: #18150f;
+    --blur-color: rgba(208, 200, 184, .08);
+    --sidebar-toggle-bg: transparent;
+    --sidebar-border-color: rgba(180, 160, 120, .22);
+
+    --hatch-size: 13px;
+    --hatch-color: rgba(180, 160, 120, .08);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size)),
+        repeating-linear-gradient(-45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size));
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size)),
+        repeating-linear-gradient(-45deg,
+            var(--hatch-color) 0 1px,
+            transparent 1px var(--hatch-size));
+    background-attachment: local;
+}

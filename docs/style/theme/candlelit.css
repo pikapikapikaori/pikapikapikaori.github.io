@@ -1,0 +1,41 @@
+:root {
+    --bg-color: #1a1614;
+    --text-color: #d8d0c8;
+    --heading-color: #f0e8e0;
+    --muted-color: #8a8078;
+    --em-color: #9a9088;
+    --h6-color: #8a8078;
+    --sidebar-text-color: #a89e98;
+    --sidebar-title-color: #e0d8d0;
+    --border-color: #2a2420;
+    --border-color-strong: #3a3430;
+    --border-color-mid: #4a4440;
+    --code-bg: #25201c8c;
+    --zebra-bg: #201c188c;
+    --tip-code-bg: #2a24208c;
+    --inline-code-color: #e07a6a;
+    --code-text-color: #d8d0c8;
+    --accent-color: #d4a24a;
+    --accent-text-color: #1a1614;
+    --blur-color: rgba(216, 208, 200, .08);
+    --sidebar-toggle-bg: transparent;
+    --sidebar-border-color: #e0645a;  
+
+    --rule-size: 48px;
+    --rule-color: rgba(200, 180, 150, .10);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--rule-size) - 1px),
+        var(--rule-color) calc(var(--rule-size) - 1px) var(--rule-size)
+    );
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image: none;
+    border-right: 1px solid var(--sidebar-border-color);
+}

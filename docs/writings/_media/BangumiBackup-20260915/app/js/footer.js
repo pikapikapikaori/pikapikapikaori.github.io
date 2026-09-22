@@ -8,7 +8,7 @@ export function buildFooter(targetId = 'site-footer') {
         ? `${COPYRIGHT_START_YEAR}`
         : `${COPYRIGHT_START_YEAR} - ${year}`;
     el.innerHTML = `
-    <div class="footer-inner">
-      <div class="copyright">&copy; ${range} ${COPYRIGHT_HOLDER} - All rights reserved.</div>
-    </div>`;
+        <div class="footer-inner">
+            <div class="copyright">&copy; ${range} ${COPYRIGHT_HOLDER} - All rights reserved.</div>
+        </div>`;
 }

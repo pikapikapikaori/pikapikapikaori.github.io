@@ -3,7 +3,6 @@
     inset: 0;
     z-index: 100;
     display: flex;
-    align-items: center;
     justify-content: center;
     background: var(--color-bg);
     overflow-y: auto;
@@ -11,6 +10,7 @@
 }
 
 .setup-card {
+    margin: auto;
     width: 100%;
     max-width: 520px;
     background: var(--color-surface);

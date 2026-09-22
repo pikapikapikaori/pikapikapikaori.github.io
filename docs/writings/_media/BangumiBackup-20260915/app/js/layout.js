@@ -13,31 +13,31 @@ import { buildFooter } from './footer.js';
 function buildHeader() {
     const el = document.getElementById('site-header');
     el.innerHTML = `
-    <div class="header-inner">
-      <a class="brand" href="./index.html">收藏</a>
-      <nav class="main-nav">
-        ${CATEGORIES.map(c => `
-          <a href="./index.html#${c.key}" data-cat="${c.key}">${c.label}</a>
-        `).join('')}
-        <a href="./about.html">关于</a>
-      </nav>
-      <div class="header-search">
-        <input type="search" id="global-search" placeholder="搜索标题 / 原名 / 简介…" autocomplete="off">
-        <div id="global-search-panel" class="search-panel" hidden></div>
-      </div>
-      <div class="header-actions">
-        <button type="button" id="theme-btn" class="icon-btn" title="主题">${THEME_ICONS.auto}</button>
-        <div class="user-menu" id="user-menu">
-          <button type="button" class="user-trigger" id="user-trigger" aria-haspopup="true" aria-expanded="false">
-            <img id="user-avatar" alt="">
-            <span id="user-nickname"></span>
-            <span class="caret">▾</span>
-          </button>
-          <div class="user-panel" id="user-panel" hidden></div>
+        <div class="header-inner">
+            <a class="brand" href="./index.html">收藏</a>
+            <nav class="main-nav">
+                ${CATEGORIES.map(c => `
+                <a href="./index.html#${c.key}" data-cat="${c.key}">${c.label}</a>
+                `).join('')}
+                <a href="./about.html">关于</a>
+            </nav>
+            <div class="header-search">
+                <input type="search" id="global-search" placeholder="搜索标题 / 原名 / 简介…" autocomplete="off">
+                <div id="global-search-panel" class="search-panel" hidden></div>
+            </div>
+            <div class="header-actions">
+                <button type="button" id="theme-btn" class="icon-btn" title="主题">${THEME_ICONS.auto}</button>
+                <div class="user-menu" id="user-menu">
+                <button type="button" class="user-trigger" id="user-trigger" aria-haspopup="true" aria-expanded="false">
+                    <img id="user-avatar" alt="">
+                    <span id="user-nickname"></span>
+                    <span class="caret">▾</span>
+                </button>
+                <div class="user-panel" id="user-panel" hidden></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  `;
+    `;
 
     renderUserTrigger();
     bindThemeButton();
@@ -61,20 +61,20 @@ async function renderUserPanel() {
     users.sort((a, b) => (b.id === current) - (a.id === current));
 
     panel.innerHTML = `
-    <div class="user-panel-title">切换账号</div>
-    <ul class="user-list">
-      ${users.map(u => `
-        <li>
-          <button type="button" class="user-item ${u.id === current ? 'is-current' : ''}" data-uid="${u.id}">
-            <img src="${u.avatar?.small || u.avatar?.medium || FALLBACK_AVATAR}" alt="">
-            <span class="user-item-name">${escapeHtml(u.nickname || u.username)}</span>
-            <span class="user-item-id">#${u.id}</span>
-          </button>
-        </li>`).join('') || '<li class="user-empty">暂无其它账号</li>'}
-    </ul>
-    <button type="button" class="user-logout" id="user-logout">登出</button>
-    <button type="button" class="user-danger" id="user-clear-all">清除全部缓存</button>
-  `;
+        <div class="user-panel-title">切换账号</div>
+        <ul class="user-list">
+            ${users.map(u => `
+                <li>
+                <button type="button" class="user-item ${u.id === current ? 'is-current' : ''}" data-uid="${u.id}">
+                    <img src="${u.avatar?.small || u.avatar?.medium || FALLBACK_AVATAR}" alt="">
+                    <span class="user-item-name">${escapeHtml(u.nickname || u.username)}</span>
+                    <span class="user-item-id">#${u.id}</span>
+                </button>
+                </li>`).join('') || '<li class="user-empty">暂无其它账号</li>'}
+        </ul>
+        <button type="button" class="user-logout" id="user-logout">登出</button>
+        <button type="button" class="user-danger" id="user-clear-all">清除全部缓存</button>
+    `;
 
     panel.querySelectorAll('.user-item').forEach(btn => {
         btn.addEventListener('click', async () => {

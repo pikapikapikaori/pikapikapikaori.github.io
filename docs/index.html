@@ -2,447 +2,448 @@
 <html lang="zh-Hans">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/x-icon" href="./_media/favicon.ico">
-  <title>ピカピカピ</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="Don't worry, be happy.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./_media/favicon.ico">
+    <title>ピカピカピ</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Don't worry, be happy.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="ピカピカピ">
-  <meta property="og:title" content="ピカピカピ">
-  <meta property="og:url" content="https://pikapikapi.com/">
-  <meta property="og:image" content="https://pikapikapi.com/_media/og.jpg">
-  <meta property="og:image:alt" content="ピカピカピ">
-  <meta property="og:description" content="Don't worry, be happy.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ピカピカピ">
+    <meta property="og:title" content="ピカピカピ">
+    <meta property="og:url" content="https://pikapikapi.com/">
+    <meta property="og:image" content="https://pikapikapi.com/_media/og.jpg">
+    <meta property="og:image:alt" content="ピカピカピ">
+    <meta property="og:description" content="Don't worry, be happy.">
 
-  <link rel="manifest" href="./config/manifest.json">
+    <link rel="manifest" href="./config/manifest.json">
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="https://pikapikapi.com/_media/logo-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://pikapikapi.com/_media/logo-180.png">
 
-  <link rel="alternative" type="application/atom+xml" title="ピカピカピ" href="https://pikapikapi.com/pikapikapi-blog-rss.atom">
+    <link rel="alternative" type="application/atom+xml" title="ピカピカピ"
+        href="https://pikapikapi.com/pikapikapi-blog-rss.atom">
 
-  <link rel="stylesheet" href="./style/fonts.css">
-  <link rel="stylesheet" href="./style/fontMinorityLang.css">
+    <link rel="stylesheet" href="./style/fonts.css">
+    <link rel="stylesheet" href="./style/fontMinorityLang.css">
 
-  <link rel="stylesheet" href="./style/base.css">
-  <link rel="stylesheet" href="./style/plus.css">
+    <link rel="stylesheet" href="./style/base.css">
+    <link rel="stylesheet" href="./style/plus.css">
 
-  <link id="theme-vue" rel="stylesheet" href="./style/theme/vue.css">
-  <link id="theme-dark" rel="stylesheet" href="./style/theme/dark.css" disabled>
-  <link id="theme-color" rel="stylesheet" href="" disabled>
+    <link id="theme-vue" rel="stylesheet" href="./style/theme/vue.css">
+    <link id="theme-dark" rel="stylesheet" href="./style/theme/dark.css" disabled>
+    <link id="theme-color" rel="stylesheet" href="" disabled>
 
-  <link rel="stylesheet" href="./style/mainPage.css">
+    <link rel="stylesheet" href="./style/mainPage.css">
 </head>
 
 <body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '<h1 class="page-sidebar-title-class">ピカピカピ</h1>',
-      repo: '',
-      coverpage: ['/', '/jp/', '/en-us/'],
-      loadNavbar: true,
-      loadSidebar: true,
-      subMaxLevel: 3,
-      auto2top: true,
-      themeColor: '#c7a2ec',
+    <div id="app"></div>
+    <script>
+        window.$docsify = {
+            name: '<h1 class="page-sidebar-title-class">ピカピカピ</h1>',
+            repo: '',
+            coverpage: ['/', '/jp/', '/en-us/'],
+            loadNavbar: true,
+            loadSidebar: true,
+            subMaxLevel: 3,
+            auto2top: true,
+            themeColor: '#c7a2ec',
 
-      notFoundPage: {
-        '/jp': 'jp/404/_404.md',
-        '/en-us': 'en-us/404/_404.md',
-        '/': '404/_404.md'
-      },
-
-      // tab 插件设置
-      tabs: {
-        persist: false, // default
-        sync: false, // default
-        theme: 'material', // default
-        tabComments: true, // default
-        tabHeadings: true // default
-      },
-
-      // 脚注插件设置
-      loadFooter: true,
-
-      // 全局搜索插件设置
-      search: {
-        paths: 'auto', // or []
-
-        depth: 4,
-
-        // 支持本地化
-        placeholder: {
-          '/en-us/': 'Type to search',
-          '/jp/': '検索',
-          '/': '搜索'
-        },
-
-        // 支持本地化
-        noData: {
-          '/en-us/': 'No Results',
-          '/jp/': '結果がありません',
-          '/': '找不到结果'
-        },
-
-        hideOtherSidebarContent: true,
-
-        // 使用不同的索引作为路径前缀（namespaces）
-        // 注意：仅适用于 paths: 'auto' 模式
-        //
-        // 初始化索引时，我们从侧边栏查找第一个路径
-        // 如果它与列表中的前缀匹配，我们将切换到相应的索引
-        pathNamespaces: ['/jp', '/en-us'],
-      },
-
-      // 翻页插件设置
-      pagination: {
-        previousText: {
-          '/en-us/': 'PREVIOUS',
-          '/jp/': '前',
-          '/': '上一篇'
-        },
-        nextText: {
-          '/en-us/': 'NEXT',
-          '/jp/': '次',
-          '/': '下一篇'
-        },
-        crossChapter: false,
-        crossChapterText: false,
-      },
-
-      // 复制代码插件设置
-      copyCode: {
-        buttonText: {
-          '/en-us/': 'Copy to clipboard',
-          '/jp/': 'クリックしてコピー',
-          '/': '点击复制'
-        },
-        errorText: {
-          '/en-us/': 'Error',
-          '/jp/': 'エラー',
-          '/': '错误'
-        },
-        successText: {
-          '/en-us/': 'Copied',
-          '/jp/': 'コピーしました',
-          '/': '复制成功'
-        }
-      },
-
-      // 支持 mermaid 插件设置
-      mermaidConfig: {
-        querySelector: ".mermaid",
-      },
-
-
-      // 自用插件
-      // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
-      gitalkWithFooter: {
-        footerInnerHtml: "<div style='text-align: center;max-width: 800px;width: 80%;align-self: center;padding: 30px 15px 20px;margin: 0 auto'><div style='border-top: 1px solid var(--border-color,#eee);'><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p><div/></div>",
-        gitalkConfig: {
-          clientID: '6a54e5946401951488d1',
-          clientSecret: '5ca9de120592a9908348d09480cea6917112a4ec',
-          repo: 'pikapikapi-blog',
-          owner: 'pikapikapikaori',
-          admin: ['pikapikapikaori'],
-          // facebook-like distraction free mode
-          distractionFreeMode: false,
-        }
-      },
-
-      // 添加字数统计，并能够 i18n 国际化
-      countWords: {
-        countable: true,
-        position: "top",
-        margin: "10px",
-        float: "right",
-        fontsize: "0.9em",
-        color: "rgb(90,90,90)",
-        localization: {
-          words: {
-            '/en-us/': 'words',
-            '/jp/': '字',
-            '/': '字'
-          },
-          minute: {
-            '/en-us/': 'min',
-            '/jp/': '分',
-            '/': '分钟'
-          },
-        },
-        isExpected: true,
-      },
-
-      // 添加小组件
-      addWidgets: {
-        useSwitchMode: true,
-        top: 20,
-        right: 26,
-        topOffset: 500,
-        themes: [
-          {
-            name: 'default',
-            light: null,
-            dark: null,
-            lightColor: '#ffffff',
-            darkColor: '#3f3f3f',
-            lightThemeColor: '#c7a2ec', 
-            darkThemeColor: '#c7a2ec'
-          },
-          {
-            name: 'lavender',
-            light: './style/theme/lavender.css',
-            dark: './style/theme/lavandula.css',
-            lightColor: '#f5f0fa',
-            darkColor: '#1f1830',
-            lightThemeColor: '#cca2ec',
-            darkThemeColor: '#cca2ec'
-          },
-          {
-            name: 'kraft',
-            light: './style/theme/kraft.css',
-            dark: './style/theme/bronze.css',
-            lightColor: '#f4ecd8',
-            darkColor: '#2a1f14',
-            lightThemeColor: '#ecc7a2',
-            darkThemeColor: '#ecc7a2'
-          },
-          {
-            name: 'matcha',
-            light: './style/theme/matcha.css',
-            dark: './style/theme/library.css',
-            lightColor: '#e3efd1',
-            darkColor: '#1e3328',
-            lightThemeColor: '#c3eca2',
-            darkThemeColor: '#c3eca2'
-          },
-          {
-            name: 'kirby',
-            light: './style/theme/kirby.css',
-            dark: './style/theme/metaknight.css',
-            lightColor: '#ffeef4',
-            darkColor: '#1a2238',
-            lightThemeColor: '#eca2b8',
-            darkThemeColor: '#7a424e'
-          },
-          {
-            name: 'catppuccin',
-            light: './style/theme/latte.css',
-            dark: './style/theme/catppuccin.css',
-            lightColor: '#eff1f5',
-            darkColor: '#1e1e2e',
-            lightThemeColor: '#c3a2ec',
-            darkThemeColor: '#c3a2ec'
-          },
-          {
-            name: 'gold',
-            light: './style/theme/whitegold.css',
-            dark: './style/theme/darkgold.css',
-            lightColor: '#f5f0e8',
-            darkColor: '#0a0a0a',
-            lightThemeColor: '#ecdaa2',
-            darkThemeColor: '#ecdaa2'
-          },
-          {
-            name: 'calligraphy',
-            light: './style/theme/calligraphy.css',
-            dark: './style/theme/grid.css',
-            lightColor: '#fbfbf5',
-            darkColor: '#1a2028',
-            lightThemeColor: '#ecc7a2',
-            darkThemeColor: '#a2c7ec'
-          },
-          {
-            name: 'typography',
-            light: './style/theme/typography.css',
-            dark: './style/theme/dot.css',
-            lightColor: '#fafaf5',
-            darkColor: '#1e2128',
-            lightThemeColor: '#a2c7ec',
-            darkThemeColor: '#a2c7ec'
-          }
-        ]
-      },
-
-      // 最后编辑时间
-      lastUpdatedTime: {
-        url: 'pikapikapikaori/pikapikapikaori.github.io',
-        basePath: 'docs/',
-        dateFormat: '{YYYY}.{MM}.{DD}',
-      },
-
-      // 目录、文章列表切换
-      tocSwitcher: {
-        localization: {
-            toc: {
-              '/en-us/': 'Contents',
-              '/jp/': '目次',
-              '/': '目录'
+            notFoundPage: {
+                '/jp': 'jp/404/_404.md',
+                '/en-us': 'en-us/404/_404.md',
+                '/': '404/_404.md'
             },
-            default: {
-              '/en-us/': 'Articles',
-              '/jp/': '文章一覧',
-              '/': '文章列表'
+
+            // tab 插件设置
+            tabs: {
+                persist: false, // default
+                sync: false, // default
+                theme: 'material', // default
+                tabComments: true, // default
+                tabHeadings: true // default
+            },
+
+            // 脚注插件设置
+            loadFooter: true,
+
+            // 全局搜索插件设置
+            search: {
+                paths: 'auto', // or []
+
+                depth: 4,
+
+                // 支持本地化
+                placeholder: {
+                    '/en-us/': 'Type to search',
+                    '/jp/': '検索',
+                    '/': '搜索'
+                },
+
+                // 支持本地化
+                noData: {
+                    '/en-us/': 'No Results',
+                    '/jp/': '結果がありません',
+                    '/': '找不到结果'
+                },
+
+                hideOtherSidebarContent: true,
+
+                // 使用不同的索引作为路径前缀（namespaces）
+                // 注意：仅适用于 paths: 'auto' 模式
+                //
+                // 初始化索引时，我们从侧边栏查找第一个路径
+                // 如果它与列表中的前缀匹配，我们将切换到相应的索引
+                pathNamespaces: ['/jp', '/en-us'],
+            },
+
+            // 翻页插件设置
+            pagination: {
+                previousText: {
+                    '/en-us/': 'PREVIOUS',
+                    '/jp/': '前',
+                    '/': '上一篇'
+                },
+                nextText: {
+                    '/en-us/': 'NEXT',
+                    '/jp/': '次',
+                    '/': '下一篇'
+                },
+                crossChapter: false,
+                crossChapterText: false,
+            },
+
+            // 复制代码插件设置
+            copyCode: {
+                buttonText: {
+                    '/en-us/': 'Copy to clipboard',
+                    '/jp/': 'クリックしてコピー',
+                    '/': '点击复制'
+                },
+                errorText: {
+                    '/en-us/': 'Error',
+                    '/jp/': 'エラー',
+                    '/': '错误'
+                },
+                successText: {
+                    '/en-us/': 'Copied',
+                    '/jp/': 'コピーしました',
+                    '/': '复制成功'
+                }
+            },
+
+            // 支持 mermaid 插件设置
+            mermaidConfig: {
+                querySelector: ".mermaid",
+            },
+
+
+            // 自用插件
+            // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
+            gitalkWithFooter: {
+                footerInnerHtml: "<div style='text-align: center;max-width: 800px;width: 80%;align-self: center;padding: 30px 15px 20px;margin: 0 auto'><div style='border-top: 1px solid var(--border-color,#eee);'><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p><div/></div>",
+                gitalkConfig: {
+                    clientID: '6a54e5946401951488d1',
+                    clientSecret: '5ca9de120592a9908348d09480cea6917112a4ec',
+                    repo: 'pikapikapi-blog',
+                    owner: 'pikapikapikaori',
+                    admin: ['pikapikapikaori'],
+                    // facebook-like distraction free mode
+                    distractionFreeMode: false,
+                }
+            },
+
+            // 添加字数统计，并能够 i18n 国际化
+            countWords: {
+                countable: true,
+                position: "top",
+                margin: "10px",
+                float: "right",
+                fontsize: "0.9em",
+                color: "rgb(90,90,90)",
+                localization: {
+                    words: {
+                        '/en-us/': 'words',
+                        '/jp/': '字',
+                        '/': '字'
+                    },
+                    minute: {
+                        '/en-us/': 'min',
+                        '/jp/': '分',
+                        '/': '分钟'
+                    },
+                },
+                isExpected: true,
+            },
+
+            // 添加小组件
+            addWidgets: {
+                useSwitchMode: true,
+                top: 20,
+                right: 26,
+                topOffset: 500,
+                themes: [
+                    {
+                        name: 'default',
+                        light: null,
+                        dark: null,
+                        lightColor: '#ffffff',
+                        darkColor: '#3f3f3f',
+                        lightThemeColor: '#c7a2ec',
+                        darkThemeColor: '#c7a2ec'
+                    },
+                    {
+                        name: 'lavender',
+                        light: './style/theme/lavender.css',
+                        dark: './style/theme/lavandula.css',
+                        lightColor: '#f5f0fa',
+                        darkColor: '#1f1830',
+                        lightThemeColor: '#cca2ec',
+                        darkThemeColor: '#cca2ec'
+                    },
+                    {
+                        name: 'kraft',
+                        light: './style/theme/kraft.css',
+                        dark: './style/theme/bronze.css',
+                        lightColor: '#f4ecd8',
+                        darkColor: '#2a1f14',
+                        lightThemeColor: '#ecc7a2',
+                        darkThemeColor: '#ecc7a2'
+                    },
+                    {
+                        name: 'matcha',
+                        light: './style/theme/matcha.css',
+                        dark: './style/theme/library.css',
+                        lightColor: '#e3efd1',
+                        darkColor: '#1e3328',
+                        lightThemeColor: '#c3eca2',
+                        darkThemeColor: '#c3eca2'
+                    },
+                    {
+                        name: 'kirby',
+                        light: './style/theme/kirby.css',
+                        dark: './style/theme/metaknight.css',
+                        lightColor: '#ffeef4',
+                        darkColor: '#1a2238',
+                        lightThemeColor: '#eca2b8',
+                        darkThemeColor: '#7a424e'
+                    },
+                    {
+                        name: 'catppuccin',
+                        light: './style/theme/latte.css',
+                        dark: './style/theme/catppuccin.css',
+                        lightColor: '#eff1f5',
+                        darkColor: '#1e1e2e',
+                        lightThemeColor: '#c3a2ec',
+                        darkThemeColor: '#c3a2ec'
+                    },
+                    {
+                        name: 'gold',
+                        light: './style/theme/whitegold.css',
+                        dark: './style/theme/darkgold.css',
+                        lightColor: '#f5f0e8',
+                        darkColor: '#0a0a0a',
+                        lightThemeColor: '#ecdaa2',
+                        darkThemeColor: '#ecdaa2'
+                    },
+                    {
+                        name: 'calligraphy',
+                        light: './style/theme/calligraphy.css',
+                        dark: './style/theme/grid.css',
+                        lightColor: '#fbfbf5',
+                        darkColor: '#1a2028',
+                        lightThemeColor: '#ecc7a2',
+                        darkThemeColor: '#a2c7ec'
+                    },
+                    {
+                        name: 'typography',
+                        light: './style/theme/typography.css',
+                        dark: './style/theme/dot.css',
+                        lightColor: '#fafaf5',
+                        darkColor: '#1e2128',
+                        lightThemeColor: '#a2c7ec',
+                        darkThemeColor: '#a2c7ec'
+                    }
+                ]
+            },
+
+            // 最后编辑时间
+            lastUpdatedTime: {
+                url: 'pikapikapikaori/pikapikapikaori.github.io',
+                basePath: 'docs/',
+                dateFormat: '{YYYY}.{MM}.{DD}',
+            },
+
+            // 目录、文章列表切换
+            tocSwitcher: {
+                localization: {
+                    toc: {
+                        '/en-us/': 'Contents',
+                        '/jp/': '目次',
+                        '/': '目录'
+                    },
+                    default: {
+                        '/en-us/': 'Articles',
+                        '/jp/': '文章一覧',
+                        '/': '文章列表'
+                    },
+                }
             },
         }
-      },
-    }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="./sources/npm/docsify@4/docsify@4"></script>
+    </script>
+    <!-- Docsify v4 -->
+    <script src="./sources/npm/docsify@4/docsify@4"></script>
 
-  <!-- Docsify docsify-tabs 插件 (latest v1.x.x) -->
-  <script src="./sources/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
+    <!-- Docsify docsify-tabs 插件 (latest v1.x.x) -->
+    <script src="./sources/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
 
-  <!-- Docsify 脚注 -->
-  <script src="./sources/npm/@alertbox/docsify-footer@1.0.0-0/dist/docsify-footer.min.js"></script>
+    <!-- Docsify 脚注 -->
+    <script src="./sources/npm/@alertbox/docsify-footer@1.0.0-0/dist/docsify-footer.min.js"></script>
 
-  <!-- Docsify 全局搜索插件 -->
-  <script src="./sources/npm/docsify/lib/plugins/search.min.js"></script>
+    <!-- Docsify 全局搜索插件 -->
+    <script src="./sources/npm/docsify/lib/plugins/search.min.js"></script>
 
-  <!-- Docsify 翻页插件 -->
-  <script src="./sources/unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <!-- Docsify 翻页插件 -->
+    <script src="./sources/unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 
-  <!-- Docsify 图片注释插件 -->
-  <script src="./sources/unpkg.com/@h-hg/docsify-image-caption/dist/docsify-image-caption.min.js"></script>
+    <!-- Docsify 图片注释插件 -->
+    <script src="./sources/unpkg.com/@h-hg/docsify-image-caption/dist/docsify-image-caption.min.js"></script>
 
-  <!-- Docsify LATEX 插件 -->
-  <script src="./sources/npm/katex@latest/dist/katex.min.js"></script>
-  <link rel="stylesheet" href="./sources/npm/katex@latest/dist/katex.min.css" />
-  <script src="./sources/npm/marked@4/marked@4"></script>
+    <!-- Docsify LATEX 插件 -->
+    <script src="./sources/npm/katex@latest/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="./sources/npm/katex@latest/dist/katex.min.css" />
+    <script src="./sources/npm/marked@4/marked@4"></script>
 
-  <!-- CDN files for docsify-katex -->
-  <script src="./sources/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
-  <!-- or <script src="./sources/gh/upupming/docsify-katex@latest/dist/docsify-katex.js"></script> -->
+    <!-- CDN files for docsify-katex -->
+    <script src="./sources/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+    <!-- or <script src="./sources/gh/upupming/docsify-katex@latest/dist/docsify-katex.js"></script> -->
 
-  <!-- Docsify 复制代码插件 -->
-  <!-- Latest v2.x.x -->
-  <script src="./sources/unpkg.com/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+    <!-- Docsify 复制代码插件 -->
+    <!-- Latest v2.x.x -->
+    <script src="./sources/unpkg.com/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
 
-  <!-- Docsify 支持 mermaid 插件 -->
-  <!-- Import D3.js -->
-  <script src="./sources/npm/d3@7"></script>
-  <!-- Import Mermaid -->
-  <script type="module">
-    import mermaid from "./sources/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({ startOnLoad: true });
-    window.mermaid = mermaid;
-  </script>
-  <!-- Import Docsify-mermaid-zoom -->
-  <script src="./sources/unpkg.com/docsify-mermaid@2.0.0/dist/docsify-mermaid.js"></script>
-  <script src="./sources/unpkg.com/docsify-mermaid-zoom/dist/docsify-mermaid-zoom.js"></script>
+    <!-- Docsify 支持 mermaid 插件 -->
+    <!-- Import D3.js -->
+    <script src="./sources/npm/d3@7"></script>
+    <!-- Import Mermaid -->
+    <script type="module">
+        import mermaid from "./sources/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+        window.mermaid = mermaid;
+    </script>
+    <!-- Import Docsify-mermaid-zoom -->
+    <script src="./sources/unpkg.com/docsify-mermaid@2.0.0/dist/docsify-mermaid.js"></script>
+    <script src="./sources/unpkg.com/docsify-mermaid-zoom/dist/docsify-mermaid-zoom.js"></script>
 
-  <!-- Docsify 代码关键词高亮插件 -->
-  <script src="./sources/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-batch.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-c.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-cmake.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-coq.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-cpp.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-docker.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-ignore.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-java.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-json.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-latex.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-python.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-sql.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-swift.min.js"></script>
-  <script src="./sources/npm/prismjs@1/components/prism-yaml.min.js"></script>
+    <!-- Docsify 代码关键词高亮插件 -->
+    <script src="./sources/npm/prismjs@1/components/prism-bash.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-batch.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-c.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-cmake.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-coq.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-cpp.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-docker.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-ignore.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-java.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-json.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-latex.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-python.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-sql.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-swift.min.js"></script>
+    <script src="./sources/npm/prismjs@1/components/prism-yaml.min.js"></script>
 
-  <!-- Docsify docsify-example-panels 插件 -->
-  <script src="./sources/npm/docsify-example-panels@1/dist/docsify-example-panels.min.js"></script>
+    <!-- Docsify docsify-example-panels 插件 -->
+    <script src="./sources/npm/docsify-example-panels@1/dist/docsify-example-panels.min.js"></script>
 
-  <!-- Docsify docsify-loading 插件 -->
-  <script src="./sources/npm/@sy-records/docsify-loading/lib/index.min.js"></script>
+    <!-- Docsify docsify-loading 插件 -->
+    <script src="./sources/npm/@sy-records/docsify-loading/lib/index.min.js"></script>
 
 
-  <!-- Live2D 模型 Cubism 4 -->
-  <script src="./sources/cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
-  <script src="./sources/npm/pixi.js@5.2.1/dist/pixi.min.js"></script>
-  <script src="./sources/npm/pixi-live2d-display/dist/cubism4.min.js"></script>
-  <script src="./utils/live2dLoader.js"></script>
-  <script>
-    addEventListener("DOMContentLoaded", function () {
-      let models = [
-        {
-          width: 400,
-          height: 300,
-          right: "55px",
-          bottom: "0px",
-          role: "./live2d/rice_pro_en/runtime/rice_pro_t03.model3.json",
-          background: "",
-          opacity: 1,
-          mobile: false,
-          draggable: true,
-        },
-      ];
-      new Live2dLoader(models);
-    });
-  </script>
+    <!-- Live2D 模型 Cubism 4 -->
+    <script src="./sources/cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="./sources/npm/pixi.js@5.2.1/dist/pixi.min.js"></script>
+    <script src="./sources/npm/pixi-live2d-display/dist/cubism4.min.js"></script>
+    <script src="./utils/live2dLoader.js"></script>
+    <script>
+        addEventListener("DOMContentLoaded", function () {
+            let models = [
+                {
+                    width: 400,
+                    height: 300,
+                    right: "55px",
+                    bottom: "0px",
+                    role: "./live2d/rice_pro_en/runtime/rice_pro_t03.model3.json",
+                    background: "",
+                    opacity: 1,
+                    mobile: false,
+                    draggable: true,
+                },
+            ];
+            new Live2dLoader(models);
+        });
+    </script>
 
 
-  <!-- 自用插件 -->
-  <!-- 添加 gitalk 与 footer -->
-  <!-- GitTalk 评论 -->
-  <link rel="stylesheet" href="./sources/npm/gitalk/dist/gitalk.css">
-  <link rel="stylesheet" href="./style/plugins/gitalkWithFooter.css">
-  <script src="./sources/npm/gitalk/dist/gitalk.min.js"></script>
-  <script src="./utils/gitalkWithFooter.js"></script>
+    <!-- 自用插件 -->
+    <!-- 添加 gitalk 与 footer -->
+    <!-- GitTalk 评论 -->
+    <link rel="stylesheet" href="./sources/npm/gitalk/dist/gitalk.css">
+    <link rel="stylesheet" href="./style/plugins/gitalkWithFooter.css">
+    <script src="./sources/npm/gitalk/dist/gitalk.min.js"></script>
+    <script src="./utils/gitalkWithFooter.js"></script>
 
-  <!-- 添加字数统计 -->
-  <link rel="stylesheet" href="./style/plugins/countWords.css">
-  <script src="./utils/countWords.js"></script>
+    <!-- 添加字数统计 -->
+    <link rel="stylesheet" href="./style/plugins/countWords.css">
+    <script src="./utils/countWords.js"></script>
 
-  <!-- 添加樱花特效 -->
-  <link rel="stylesheet" href="./style/plugins/sakuraRain.css">
-  <script src="./utils/sakuraRain.js"></script>
+    <!-- 添加樱花特效 -->
+    <link rel="stylesheet" href="./style/plugins/sakuraRain.css">
+    <script src="./utils/sakuraRain.js"></script>
 
-  <!-- 添加小组件 -->
-  <link rel="stylesheet" href="./style/plugins/addWidgets.css">
-  <script src="./utils/addWidgets.js"></script>
+    <!-- 添加小组件 -->
+    <link rel="stylesheet" href="./style/plugins/addWidgets.css">
+    <script src="./utils/addWidgets.js"></script>
 
-  <!-- 添加查看大图 -->
-  <link rel="stylesheet" href="./style/plugins/viewFullImage.css">
-  <script src="./utils/viewFullImage.js"></script>
+    <!-- 添加查看大图 -->
+    <link rel="stylesheet" href="./style/plugins/viewFullImage.css">
+    <script src="./utils/viewFullImage.js"></script>
 
-  <!-- 添加最后编辑时间 -->
-  <script src="./sources/npm/tinydate@1.3.0/dist/tinydate.min.js"></script>
-  <script type="module" src="./utils/lastUpdatedTime.js"></script>
+    <!-- 添加最后编辑时间 -->
+    <script src="./sources/npm/tinydate@1.3.0/dist/tinydate.min.js"></script>
+    <script type="module" src="./utils/lastUpdatedTime.js"></script>
 
-  <!-- 添加动态封面 -->
-  <link rel="stylesheet" href="./style/plugins/dynamicCover.css">
-  <script src="./utils/dynamicCover.js"></script>
+    <!-- 添加动态封面 -->
+    <link rel="stylesheet" href="./style/plugins/dynamicCover.css">
+    <script src="./utils/dynamicCover.js"></script>
 
-  <!-- 添加增强搜索 -->
-  <link rel="stylesheet" href="./style/plugins/enhancedSearch.css">
-  <script src="./utils/enhancedSearch.js"></script>
+    <!-- 添加增强搜索 -->
+    <link rel="stylesheet" href="./style/plugins/enhancedSearch.css">
+    <script src="./utils/enhancedSearch.js"></script>
 
-  <!-- 添加更改 html lang 信息 -->
-  <script src="./utils/adjustHtmlLang.js"></script>
+    <!-- 添加更改 html lang 信息 -->
+    <script src="./utils/adjustHtmlLang.js"></script>
 
-  <!-- 添加自动添加目录页 -->
-  <link rel="stylesheet" href="./style/plugins/addTocPage.css">
-  <script type="module" src="./utils/addTocPage.js"></script>
+    <!-- 添加自动添加目录页 -->
+    <link rel="stylesheet" href="./style/plugins/addTocPage.css">
+    <script type="module" src="./utils/addTocPage.js"></script>
 
-  <!-- 添加链接标记样式 -->
-  <script src="./utils/addSvgToLinks.js"></script>
+    <!-- 添加链接标记样式 -->
+    <script src="./utils/addSvgToLinks.js"></script>
 
-  <!-- 添加 breadcrumb 头 -->
-  <link rel="stylesheet" href="./style/plugins/breadcrumb.css">
-  <script type="module" src="./utils/breadcrumb.js"></script>
+    <!-- 添加 breadcrumb 头 -->
+    <link rel="stylesheet" href="./style/plugins/breadcrumb.css">
+    <script type="module" src="./utils/breadcrumb.js"></script>
 
-  <!-- 添加替换 Markdown 中的 Html 注释 -->
-  <link rel="stylesheet" href="./style/plugins/replaceHtmlAnnotation.css">
-  <script type="module" src="./utils/replaceHtmlAnnotation.js"></script>
+    <!-- 添加替换 Markdown 中的 Html 注释 -->
+    <link rel="stylesheet" href="./style/plugins/replaceHtmlAnnotation.css">
+    <script type="module" src="./utils/replaceHtmlAnnotation.js"></script>
 
-  <!-- 目录、文章列表切换 -->
-  <link rel="stylesheet" href="./style/plugins/addTocSwitcher.css">
-  <script type="module" src="./utils/addTocSwitcher.js"></script>
+    <!-- 目录、文章列表切换 -->
+    <link rel="stylesheet" href="./style/plugins/addTocSwitcher.css">
+    <script type="module" src="./utils/addTocSwitcher.js"></script>
 </body>
 
 </html>

@@ -39,8 +39,8 @@
 
 .theme-picker-preset-color-list-div {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
 }
 
 .theme-picker-preset-color-btn-div {

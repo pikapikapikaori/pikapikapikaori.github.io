@@ -46,7 +46,7 @@
 .theme-picker-preset-color-btn-div {
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 10px;
+    border-radius: var(--global-icon-border-radius, 5px);
     overflow: hidden;
     cursor: pointer;
     border: 1px solid var(--border-color);
@@ -168,7 +168,7 @@
 .color-picker-preset-color-btn-div {
     width: 100%;
     aspect-ratio: 1 / 1.25;
-    border-radius: 5px;
+    border-radius: var(--global-icon-border-radius, 5px);
     cursor: pointer;
     border: 1px solid var(--border-color);
     transition-duration: var(--global-transition-duration, 500ms);

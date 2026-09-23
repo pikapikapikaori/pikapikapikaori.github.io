@@ -23,7 +23,7 @@ function buildHeader() {
                 <a href="./about.html">关于</a>
             </nav>
             <div class="header-search">
-                <input type="search" id="global-search" placeholder="搜索标题 / 原名 / 简介…" autocomplete="off">
+                <input type="search" id="global-search" placeholder="搜索" autocomplete="off">
                 <div id="global-search-panel" class="search-panel" hidden></div>
             </div>
             <div class="header-actions">

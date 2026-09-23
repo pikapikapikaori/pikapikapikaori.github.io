@@ -1,6 +1,6 @@
 import { loadFromFile, loadFromUrl } from '../source.js';
 import { cache } from '../storage.js';
-import { DEFAULT_DATA_URL, BANGUMI_EXPORT_URL, } from '../config.js';
+import { DEFAULT_DATA_URL, BANGUMI_EXPORT_URL, CURRENT_USER_KEY, } from '../config.js';
 import { buildFooter } from '../footer.js';
 
 export async function renderSetup(container, onReady) {
@@ -103,7 +103,10 @@ export async function renderSetup(container, onReady) {
             btn.addEventListener('click', async () => {
                 const uid = Number(btn.dataset.uid);
                 const hit = await cache.get(uid);
-                if (hit) await onReady(hit, true);
+                if (hit) {
+                    localStorage.setItem(CURRENT_USER_KEY, String(uid));
+                    await onReady(hit, true)
+                };
             });
         });
     }

@@ -99,7 +99,7 @@ button {
 .header-search {
     flex: 1;
     position: relative;
-    max-width: 360px;
+    max-width: 240px;
 }
 
 .header-search input {
@@ -374,8 +374,12 @@ button {
 }
 
 @media (max-width: 720px) {
-    .main-nav {
+    .main-nav a[data-cat] {
         display: none;
+    }
+
+    .main-nav {
+        gap: 0;
     }
 
     .header-inner {

@@ -6,17 +6,17 @@
 
 /* Docsify Copy Code */
 pre .docsify-copy-code-button {
-    border-radius: 10px;
+    border-radius: var(--global-icon-border-radius, 5px);
 }
 
 pre .docsify-copy-code-button span {
-    border-radius: 10px;
+    border-radius: var(--global-icon-border-radius, 5px);
 }
 
 /* Docsify Tabs */
 .docsify-tabs__tab:not(.docsify-tabs__tab--active) {
     cursor: pointer;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .docsify-tabs__tab:not(.docsify-tabs__tab--active):hover {
@@ -31,7 +31,7 @@ pre .docsify-copy-code-button span {
 .docsify-pagination-container .pagination-item a .pagination-item-title {
     text-decoration: underline;
     text-decoration-color: transparent;
-    transition-duration: 500ms;
+    transition-duration: var(--global-transition-duration, 500ms);
 }
 
 .docsify-pagination-container .pagination-item a:hover .pagination-item-title {
@@ -39,7 +39,7 @@ pre .docsify-copy-code-button span {
 }
 
 .pagination-item:not(:last-child) a .pagination-item-label, .pagination-item:not(:last-child) a .pagination-item-subtitle, .pagination-item:not(:last-child) a .pagination-item-title {
-    transition-duration: 500ms !important;
+    transition-duration: var(--global-transition-duration, 500ms) !important;
 }
 
 .docsify-pagination-container {

@@ -160,6 +160,19 @@
     gap: 2px;
 }
 
+@media (max-width: 720px) {
+    .stars-lg {
+        display: inline-grid;
+        grid-template-columns: repeat(5, auto);
+        justify-content: start;
+        column-gap: 1px;
+        row-gap: 0;
+        line-height: 1.1;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+}
+
 /* ---------- Tag ---------- */
 .tag {
     display: inline-block;

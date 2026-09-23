@@ -159,9 +159,9 @@ function renderEpisodes(eps) {
         <section class="detail-section">
             <div class="detail-section-title">分集 · 共 ${eps.length} 集</div>
             <ul class="ep-list">
-                ${eps.map(ep => `
+                ${eps.map((ep, index) => `
                 <li class="ep-item">
-                    <div class="ep-no">${ep.ep}</div>
+                    <div class="ep-no">${ep.ep ?? index + 1}</div>
                     <div class="ep-body">
                     <div class="ep-title">
                         ${esc(ep.name || '（未命名）')}

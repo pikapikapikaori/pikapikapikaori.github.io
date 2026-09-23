@@ -34,6 +34,7 @@
     /* ===== 框架变量：保持原样 ===== */
     --docsify-example-panels-document-width: 80%;
     --global-el-border-radius: 10px;
+    --global-icon-border-radius: 5px;
     --global-widget-border-radius: 0.3em;
     --avatar-border-radius: 50%;
     --global-brightness-blur: 0.85;

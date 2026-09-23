@@ -76,7 +76,7 @@
 }
 
 .gt-popup {
-    border-radius: 5px;
+    border-radius: var(--global-icon-border-radius, 5px);
 }
 
 .gt-container .gt-comment-content {

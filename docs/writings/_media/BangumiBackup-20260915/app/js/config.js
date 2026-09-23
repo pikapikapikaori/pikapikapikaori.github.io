@@ -87,6 +87,10 @@ export const DEFAULT_RATE_FILTER = 'all';
 export const PAGE_SIZE_OPTIONS = [30, 50, 100, 200];
 export const DEFAULT_PAGE_SIZE = 50;
 
+// ---------- 当前用户 ----------
+export const CURRENT_USER_KEY = 'bgm-current-user';
+export const STATE_KEY = 'bgm-overview-state';
+
 // ---------- 主题 ----------
 export const THEME_STORAGE_KEY = 'bgm-viewer:theme';
 export const THEME_MODES = ['auto', 'light', 'dark'];

@@ -4,6 +4,7 @@ import {
     RATE_FILTER_OPTIONS, DEFAULT_RATE_FILTER,
     STATUS_LABELS, COMMON_STATUS_LABELS,
     PAGE_SIZE_OPTIONS, DEFAULT_PAGE_SIZE,
+    STATE_KEY,
 } from '../config.js';
 import { sortItems, filterByRate, countByCategory } from '../model.js';
 
@@ -13,6 +14,7 @@ let currentSort = DEFAULT_SORT;
 let currentRateFilter = DEFAULT_RATE_FILTER;
 let currentPage = 1;
 let pageSize = DEFAULT_PAGE_SIZE;
+let initialized = false;
 
 function readCatFromHash() {
     const h = (location.hash || '').replace(/^#/, '');
@@ -20,10 +22,49 @@ function readCatFromHash() {
 }
 function resetPage() { currentPage = 1; }
 
+function getStateKey() {
+    const uid = state.data?.user?.id;
+    return uid ? `${STATE_KEY}:${uid}` : STATE_KEY;
+}
+
+function initState() {
+    try {
+        const raw = localStorage.getItem(getStateKey());
+        if (raw) {
+            const s = JSON.parse(raw);
+            if (s.cat && CATEGORIES.some(c => c.key === s.cat)) currentCat = s.cat;
+            if (s.status && STATUS_ORDER.includes(s.status)) currentStatus = s.status;
+            if (s.sort) currentSort = s.sort;
+            if (s.rate) currentRateFilter = s.rate;
+            if (s.pageSize && PAGE_SIZE_OPTIONS.includes(Number(s.pageSize))) {
+                pageSize = Number(s.pageSize);
+            }
+            if (s.page) currentPage = Number(s.page);
+        }
+    } catch {}
+    readCatFromHash();
+}
+
+function saveState() {
+    try {
+        localStorage.setItem(getStateKey(), JSON.stringify({
+            cat: currentCat,
+            status: currentStatus,
+            sort: currentSort,
+            rate: currentRateFilter,
+            page: currentPage,
+            pageSize,
+        }));
+    } catch {}
+}
+
 export function renderOverview() {
     const main = document.getElementById('main');
     if (!state.data) return;
-    readCatFromHash();
+    if (!initialized) {
+        initState();
+        initialized = true;
+    }
 
     const items = state.data.items || [];
     const counts = countByCategory(items);
@@ -110,6 +151,7 @@ export function renderOverview() {
     });
 
     renderGrid();
+    saveState();
 }
 
 function renderGrid() {
@@ -160,6 +202,7 @@ function renderGrid() {
     const goToPage = (p) => {
         if (!Number.isInteger(p) || p < 1 || p > totalPages || p === currentPage) return;
         currentPage = p;
+        saveState();
         renderGrid();
         container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };

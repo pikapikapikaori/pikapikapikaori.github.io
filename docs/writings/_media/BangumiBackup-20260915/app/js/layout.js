@@ -4,6 +4,7 @@ import { applyTheme, getTheme } from './theme.js';
 import {
     THEME_LABELS, THEME_MODES, THEME_ICONS,
     CATEGORIES,
+    CURRENT_USER_KEY,
 } from './config.js';
 import { forceBootstrap, notifyDataChanged } from './bootstrap.js';
 import { initSearch } from './search.js';
@@ -66,7 +67,7 @@ async function renderUserPanel() {
             ${users.map(u => `
                 <li>
                 <button type="button" class="user-item ${u.id === current ? 'is-current' : ''}" data-uid="${u.id}">
-                    <img src="${u.avatar?.small || u.avatar?.medium || FALLBACK_AVATAR}" alt="">
+                    <img src="${u.avatar?.small || u.avatar?.medium || ''}" alt="">
                     <span class="user-item-name">${escapeHtml(u.nickname || u.username)}</span>
                     <span class="user-item-id">#${u.id}</span>
                 </button>
@@ -83,6 +84,7 @@ async function renderUserPanel() {
             const hit = await cache.get(uid);
             if (!hit) return;
             state.data = hit;
+            localStorage.setItem(CURRENT_USER_KEY, String(uid));
             closeUserPanel();
             renderUserTrigger();
             notifyDataChanged();
@@ -92,6 +94,7 @@ async function renderUserPanel() {
     // 登出：不清任何缓存，只回引导界面
     panel.querySelector('#user-logout').addEventListener('click', () => {
         state.data = null;
+        localStorage.removeItem(CURRENT_USER_KEY);
         forceBootstrap();
         location.href = './index.html';
     });
@@ -100,6 +103,7 @@ async function renderUserPanel() {
     panel.querySelector('#user-clear-all').addEventListener('click', async () => {
         if (!confirm('确定清除所有用户的全部缓存吗？此操作不可撤销。')) return;
         await cache.clearAll();
+        localStorage.removeItem(CURRENT_USER_KEY);
         state.data = null;
         forceBootstrap();
         location.href = './index.html';

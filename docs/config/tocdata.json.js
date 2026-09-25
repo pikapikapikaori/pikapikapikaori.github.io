@@ -416,7 +416,7 @@ export default [
         "title": "影像｜电影笔记",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/Film/cover-picture.jpg",
         "href": "/archive/Film",
         "baseUrl": "/archive"
     },

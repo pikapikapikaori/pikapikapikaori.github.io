@@ -440,7 +440,7 @@ export default [
         "title": "骢辩｜哲学实践",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/Dialectic/cover-picture.jpg",
         "href": "/archive/Dialectic",
         "baseUrl": "/archive"
     },

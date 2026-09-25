@@ -134,6 +134,34 @@ cmd_font_range() {
     confirm_run "提取字体 unicode-range" python3 "$FONT_RANGE" "$@"
 }
 
+cmd_release() {
+    local ver="${1:-}"
+
+    if [[ -z "$ver" ]]; then
+        echo -e "${RED}错误: 缺少版本号参数${NC}" >&2
+        echo "用法: ./blog.sh release <version|major|minor|patch> [commit-message]" >&2
+        return 1
+    fi
+
+    # 校验：major/minor/patch，或 semver（如 1.2.3 / 1.2.3-rc.1）
+    case "$ver" in
+        major|minor|patch) ;;
+        *)
+            if [[ ! "$ver" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+                echo -e "${RED}错误: 无效的版本号 '$ver'${NC}" >&2
+                echo "      应为 major / minor / patch，或 semver 格式（如 1.2.3）" >&2
+                return 1
+            fi
+            ;;
+    esac
+
+    # 第二个参数为自定义 commit message；
+    # 缺省为 "version: bump to %s"，npm 会把 %s 替换为新版本号
+    local msg="${2:-version: bump to %s}"
+
+    confirm_run "发布新版本（$ver）" npm version "$ver" -m "$msg"
+}
+
 cmd_help() {
     cat <<EOF
 用法: ./blog.sh <command> [args...]
@@ -149,7 +177,7 @@ cmd_help() {
     sync[:real]                 同步 docs/ 到 R2（试运行 --dry-run）
                                 可以使用 :real（实际执行，谨慎！）
 
-    clean-branches[:real] [pattern[:prefix]] 
+    clean-branches[:real] <pattern>[:prefix]
                                 清理已合并的分支（试运行 -d）
                                 可以使用 :real（实际执行，谨慎！）
                                 pattern 后加 :prefix 则为前缀匹配（-p）
@@ -168,6 +196,13 @@ cmd_help() {
                                 例: ./blog.sh font-range ./fonts
                                     ./blog.sh font-range ./fonts -o all.md
 
+    release <version> [msg]     发布新版本（更新 package.json + git commit + tag）
+                                version 为 major / minor / patch，或 semver（如 1.2.3）
+                                msg 缺省为 "version: bump to <新版本号>"
+                                例: ./blog.sh release patch
+                                    ./blog.sh release minor "feat: 新增 xxx"
+                                    ./blog.sh release 1.2.0 "chore: 固定版本"
+
     help                         显示此帮助
 EOF
 }
@@ -183,6 +218,7 @@ case "${1:-help}" in
     build-chunks)       shift; cmd_build_chunks "$@" ;;
     unicode-gap)        shift; cmd_unicode_gap "$@" ;;
     font-range)         shift; cmd_font_range "$@" ;;
+    release)            shift; cmd_release "$@" ;;
     help|-h|--help|"")  cmd_help ;;
     *)
         echo -e "${RED}未知命令: $1${NC}"

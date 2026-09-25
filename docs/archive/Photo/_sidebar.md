@@ -8,6 +8,8 @@
   - [随记：图集 庚子年庚辰月甲午日](/archive/Photo/Notes-20200421)
 
 - 玩具
+  - [随记：近日玩具 癸卯年癸亥月甲午日](/archive/Photo/Notes-20231202)
+  - [随记：近日玩具购入 癸卯年己未月乙未日](/archive/Photo/Notes-20230805)
   - [随记：图集 癸卯年丁巳月丙寅日](/archive/Photo/Notes-20230508)
 
 - 艺术展

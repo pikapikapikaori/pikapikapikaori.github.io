@@ -453,7 +453,7 @@ export default [
         "title": "映像｜摄影照片",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/Photo/cover-picture.jpg",
         "href": "/archive/Photo",
         "baseUrl": "/archive"
     },

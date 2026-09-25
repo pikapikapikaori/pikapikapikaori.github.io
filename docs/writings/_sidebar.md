@@ -48,8 +48,6 @@
   - [随记：近日玩具购入 癸卯年己未月乙未日](/writings/Notes-20230805)
   - [宝可梦晶灿钻石／明亮珍珠与宝可梦 Home 联动相关](/writings/PokemonBDSP-20230624)
   - [记第 25 届上海国际电影节](/writings/Siff25-20230604)
-  - [随记：图集 癸卯年丁巳月丙寅日](/writings/Notes-20230508)
-  - [随记：图集 庚子年庚辰月甲午日](/writings/Notes-20200421)
 
 - 哲学实践
   - [字体测试](/writings/FontTest-20260813)

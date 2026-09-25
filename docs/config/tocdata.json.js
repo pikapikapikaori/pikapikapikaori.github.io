@@ -353,22 +353,6 @@ export default [
         "baseUrl": "/writings"
     },
     {
-        "title": "随记：图集 癸卯年丁巳月丙寅日",
-        "time": "2023.05.08",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/Notes-20230508/cover-picture.jpg",
-        "href": "/writings/Notes-20230508",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "随记：图集 庚子年庚辰月甲午日",
-        "time": "2020.04.21",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/Notes-20200421/cover-picture.jpg",
-        "href": "/writings/Notes-20200421",
-        "baseUrl": "/writings"
-    },
-    {
         "title": "字体测试",
         "time": "2026.08.13",
         "editedTime": "2026.09.04",
@@ -514,6 +498,22 @@ export default [
         "editedTime": "2026.09.16",
         "cover": "",
         "href": "/archive/Photo/Beginning",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "随记：图集 庚子年庚辰月甲午日",
+        "time": "2020.04.21",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/Photo/_media/Notes-20200421/cover-picture.jpg",
+        "href": "/archive/Photo/Notes-20200421",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "随记：图集 癸卯年丁巳月丙寅日",
+        "time": "2023.05.08",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/Notes-20230508/cover-picture.jpg",
+        "href": "/archive/Photo/Notes-20230508",
         "baseUrl": "/archive/Photo"
     },
     {

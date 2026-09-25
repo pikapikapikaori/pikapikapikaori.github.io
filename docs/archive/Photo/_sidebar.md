@@ -4,6 +4,12 @@
 - 序
   - [前言](/archive/Photo/Beginning)
 
+- 旅行
+  - [随记：图集 庚子年庚辰月甲午日](/archive/Photo/Notes-20200421)
+
+- 玩具
+  - [随记：图集 癸卯年丁巳月丙寅日](/archive/Photo/Notes-20230508)
+
 - 艺术展
   - [近期艺术展 甲辰年七月十八日](/archive/Photo/ArtExhibit-20240718)
   - [近期艺术展 甲辰年四月二十五日](/archive/Photo/ArtExhibit-20240425)

@@ -43,7 +43,7 @@ confirm_run() {
     printf ' %q' "$@"
     printf "${NC}\n\n"
 
-    read -r -p "$(echo -e "${BOLD}确认执行? [y/N] ${NC}")" ans
+    read -r -p "$(echo -e "${BOLD}确认执行? [Y/N] ${NC}")" ans
     if [[ "$ans" =~ ^[yY]([eE][sS])?$ ]]; then
         echo -e "${GREEN}--- 开始执行 ---${NC}"
         if "$@"; then
@@ -92,7 +92,31 @@ cmd_sync_real() {
 
 cmd_clean_branches() {
     require_file "$GIT_CLEAN"
-    confirm_run "清理已合并分支" bash "$GIT_CLEAN" "$@"
+
+    # $1 形如 "clean-branches" 或 "clean-branches:real"
+    local cmd="$1"; shift
+
+    local dry_flag="-d"
+    [[ "$cmd" == *":real" ]] && dry_flag=""
+
+    # 解析位置参数 pattern[:prefix]
+    local pattern=""
+    local prefix_flag=""
+    if [[ $# -gt 0 ]]; then
+        pattern="$1"; shift
+        if [[ "$pattern" == *":prefix" ]]; then
+            prefix_flag="-p"
+            pattern="${pattern%:prefix}"
+        fi
+    fi
+
+    # 按原有顺序拼参数：-m <pattern> [-p] [-d]
+    local args=()
+    [[ -n "$pattern"     ]] && args+=(-m "$pattern")
+    [[ -n "$prefix_flag" ]] && args+=("$prefix_flag")
+    [[ -n "$dry_flag"   ]] && args+=("$dry_flag")
+
+    confirm_run "清理已合并分支" bash "$GIT_CLEAN" "${args[@]}"
 }
 
 cmd_build_chunks() {
@@ -114,27 +138,33 @@ cmd_help() {
     cat <<EOF
 用法: ./blog.sh <command> [args...]
 
-所有命令在执行前会先展示完整命令并请求确认 (y/N)。
+所有命令在执行前会先展示完整命令并请求确认 (Y/N)。
 
 命令:
-    serve                        启动 docsify 本地服务 (npm start)
-    lint                         运行 ESLint 检查
-    lint:fix                     运行 ESLint 自动修复
+    serve                       启动 docsify 本地服务 (npm start)
 
-    sync                         同步 docs/ 到 R2（试运行 --dry-run）
-    sync:real                    同步 docs/ 到 R2（实际执行，谨慎！）
+    lint[:fix]                  运行 ESLint 检查
+                                可以使用 :fix 来运行 ESLint 自动修复
 
-    clean-branches [...args]     清理已合并的分支（透传参数给 git_clean.sh）
-                                例: ./blog.sh clean-branches -m feat -d
-                                    ./blog.sh clean-branches -m feat -p
+    sync[:real]                 同步 docs/ 到 R2（试运行 --dry-run）
+                                可以使用 :real（实际执行，谨慎！）
 
-    build-chunks  [...args]      构建 subject/episode 分片
+    clean-branches[:real] [pattern[:prefix]] 
+                                清理已合并的分支（试运行 -d）
+                                可以使用 :real（实际执行，谨慎！）
+                                pattern 后加 :prefix 则为前缀匹配（-p）
+                                例: ./blog.sh clean-branches feat
+                                    ./blog.sh clean-branches feat:prefix
+                                    ./blog.sh clean-branches:real feat
+                                    ./blog.sh clean-branches:real feat:prefix
+
+    build-chunks  [...args]     构建 subject/episode 分片
                                 例: ./blog.sh build-chunks --subject-chunk 1000
 
-    unicode-gap   [...args]      查找 Unicode 码位空缺
+    unicode-gap   [...args]     查找 Unicode 码位空缺
                                 例: ./blog.sh unicode-gap -i ./assets/list.txt -v
 
-    font-range    [...args]      提取字体 unicode-range
+    font-range    [...args]     提取字体 unicode-range
                                 例: ./blog.sh font-range ./fonts
                                     ./blog.sh font-range ./fonts -o all.md
 
@@ -149,7 +179,7 @@ case "${1:-help}" in
     lint:fix)           shift; cmd_lint_fix "$@" ;;
     sync)               shift; cmd_sync "$@" ;;
     sync:real)          shift; cmd_sync_real "$@" ;;
-    clean-branches)     shift; cmd_clean_branches "$@" ;;
+    clean-branches|clean-branches:real) cmd_clean_branches "$@" ;;
     build-chunks)       shift; cmd_build_chunks "$@" ;;
     unicode-gap)        shift; cmd_unicode_gap "$@" ;;
     font-range)         shift; cmd_font_range "$@" ;;

@@ -281,27 +281,11 @@ export default [
         "baseUrl": "/writings"
     },
     {
-        "title": "近期艺术展 甲辰年七月十八日",
-        "time": "2024.07.18",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/ArtExhibit-20240718/cover-picture.jpg",
-        "href": "/writings/ArtExhibit-20240718",
-        "baseUrl": "/writings"
-    },
-    {
         "title": "记第 26 届上海国际电影节",
         "time": "2024.06.11",
         "editedTime": "2024.08.03",
         "cover": "/writings/_media/Siff26-20240611/cover-picture.jpg",
         "href": "/writings/Siff26-20240611",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "近期艺术展 甲辰年四月二十五日",
-        "time": "2024.04.25",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/ArtExhibit-20240425/cover-picture.jpg",
-        "href": "/writings/ArtExhibit-20240425",
         "baseUrl": "/writings"
     },
     {
@@ -318,14 +302,6 @@ export default [
         "editedTime": "2024.08.03",
         "cover": "/writings/_media/Notes-20240418/cover-picture.jpg",
         "href": "/writings/Notes-20240418",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "近期艺术展 甲辰年四月十三日",
-        "time": "2024.04.13",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/ArtExhibit-20240413/cover-picture.jpg",
-        "href": "/writings/ArtExhibit-20240413",
         "baseUrl": "/writings"
     },
     {
@@ -538,6 +514,30 @@ export default [
         "editedTime": "2026.09.16",
         "cover": "",
         "href": "/archive/Photo/Beginning",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "近期艺术展 甲辰年七月十八日",
+        "time": "2024.07.18",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/Photo/_media/ArtExhibit-20240718/cover-picture.jpg",
+        "href": "/archive/Photo/ArtExhibit-20240718",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "近期艺术展 甲辰年四月二十五日",
+        "time": "2024.04.25",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/ArtExhibit-20240425/cover-picture.jpg",
+        "href": "/archive/Photo/ArtExhibit-20240425",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "近期艺术展 甲辰年四月十三日",
+        "time": "2024.04.13",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/ArtExhibit-20240413/cover-picture.jpg",
+        "href": "/archive/Photo/ArtExhibit-20240413",
         "baseUrl": "/archive/Photo"
     },
 

@@ -1,18 +1,18 @@
 {
-  "name": "pikapikapi-blog",
-  "version": "3.0.0",
-  "scripts": {
-    "start": "docsify serve ./docs --port 4000",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
-  },
-  "files": [
-    "docs"
-  ],
-  "devDependencies": {
-    "@stylistic/eslint-plugin": "^5.10.0",
-    "docsify-cli": "^4.4.2",
-    "eslint": "^10.8.1",
-    "globals": "^17.11.0"
-  }
+    "name": "pikapikapi-blog",
+    "version": "3.0.0",
+    "scripts": {
+        "start": "docsify serve ./docs --port 4000",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "files": [
+        "docs"
+    ],
+    "devDependencies": {
+        "@stylistic/eslint-plugin": "^5.10.0",
+        "docsify-cli": "^4.4.2",
+        "eslint": "^10.8.1",
+        "globals": "^17.11.0"
+    }
 }

@@ -408,7 +408,7 @@ export default [
         "title": "画像｜动画游戏",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/ACGN/cover-picture.jpg",
         "href": "/archive/ACGN",
         "baseUrl": "/archive"
     },

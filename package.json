@@ -4,7 +4,8 @@
     "scripts": {
         "start": "docsify serve ./docs --port 4000",
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix",
+        "blog": "bash script/blog.sh"
     },
     "files": [
         "docs"

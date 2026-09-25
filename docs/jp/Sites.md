@@ -9,7 +9,7 @@
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>
-                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-mondrian.png">
+                    <img class="ignore-view-full-image-img" src="./jp/_media/Sites/pikapikapi-mondrian.png">
                 </center>
             </div>
             <div class="toc-page-display-title-div">
@@ -23,7 +23,7 @@
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>
-                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-photopage.png">
+                    <img class="ignore-view-full-image-img" src="./jp/_media/Sites/pikapikapi-photopage.png">
                 </center>
             </div>
             <div class="toc-page-display-title-div">
@@ -37,7 +37,7 @@
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>
-                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-home.png">
+                    <img class="ignore-view-full-image-img" src="./jp/_media/Sites/pikapikapi-home.png">
                 </center>
             </div>
             <div class="toc-page-display-title-div">
@@ -57,7 +57,7 @@
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>
-                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-homepage.png">
+                    <img class="ignore-view-full-image-img" src="./jp/_media/Sites/pikapikapi-homepage.png">
                 </center>
             </div>
             <div class="toc-page-display-title-div">
@@ -71,7 +71,7 @@
         <div class="toc-page-display-div">
             <div class="toc-page-display-title-img">
                 <center>
-                    <img class="ignore-view-full-image-img" src="./_media/Sites/pikapikapi-hexo.png">
+                    <img class="ignore-view-full-image-img" src="./jp/_media/Sites/pikapikapi-hexo.png">
                 </center>
             </div>
             <div class="toc-page-display-title-div">

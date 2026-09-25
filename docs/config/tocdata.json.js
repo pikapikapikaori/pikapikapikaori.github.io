@@ -1,4 +1,7 @@
 export default [
+    /* =========================
+            zh-cn pages
+    ========================= */
     {
         "title": "使用说明",
         "time": "",
@@ -31,7 +34,7 @@ export default [
         "href": "/About",
         "baseUrl": "/"
     },
-
+    // Writings pages
     {
         "title": "短评集",
         "time": "",
@@ -281,27 +284,11 @@ export default [
         "baseUrl": "/writings"
     },
     {
-        "title": "近期艺术展 甲辰年七月十八日",
-        "time": "2024.07.18",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/ArtExhibit-20240718/cover-picture.jpg",
-        "href": "/writings/ArtExhibit-20240718",
-        "baseUrl": "/writings"
-    },
-    {
         "title": "记第 26 届上海国际电影节",
         "time": "2024.06.11",
         "editedTime": "2024.08.03",
         "cover": "/writings/_media/Siff26-20240611/cover-picture.jpg",
         "href": "/writings/Siff26-20240611",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "近期艺术展 甲辰年四月二十五日",
-        "time": "2024.04.25",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/ArtExhibit-20240425/cover-picture.jpg",
-        "href": "/writings/ArtExhibit-20240425",
         "baseUrl": "/writings"
     },
     {
@@ -321,14 +308,6 @@ export default [
         "baseUrl": "/writings"
     },
     {
-        "title": "近期艺术展 甲辰年四月十三日",
-        "time": "2024.04.13",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/ArtExhibit-20240413/cover-picture.jpg",
-        "href": "/writings/ArtExhibit-20240413",
-        "baseUrl": "/writings"
-    },
-    {
         "title": "日本旅行随拍 令和六年三月",
         "time": "2024.03.28",
         "editedTime": "2024.08.03",
@@ -345,22 +324,6 @@ export default [
         "baseUrl": "/writings"
     },
     {
-        "title": "随记：近日玩具 癸卯年癸亥月甲午日",
-        "time": "2023.12.02",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/Notes-20231202/cover-picture.jpg",
-        "href": "/writings/Notes-20231202",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "随记：近日玩具购入 癸卯年己未月乙未日",
-        "time": "2023.08.05",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/Notes-20230805/cover-picture.jpg",
-        "href": "/writings/Notes-20230805",
-        "baseUrl": "/writings"
-    },
-    {
         "title": "宝可梦晶灿钻石／明亮珍珠与宝可梦 Home 联动相关",
         "time": "2023.06.24",
         "editedTime": "2024.08.03",
@@ -374,22 +337,6 @@ export default [
         "editedTime": "2024.08.03",
         "cover": "/writings/_media/Siff25-20230604/cover-picture.jpg",
         "href": "/writings/Siff25-20230604",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "随记：图集 癸卯年丁巳月丙寅日",
-        "time": "2023.05.08",
-        "editedTime": "2024.08.03",
-        "cover": "/writings/_media/Notes-20230508/cover-picture.jpg",
-        "href": "/writings/Notes-20230508",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "随记：图集 庚子年庚辰月甲午日",
-        "time": "2020.04.21",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/Notes-20200421/cover-picture.jpg",
-        "href": "/writings/Notes-20200421",
         "baseUrl": "/writings"
     },
     {
@@ -448,7 +395,7 @@ export default [
         "href": "/writings/Phila-20240526",
         "baseUrl": "/writings"
     },
-
+    // Archive pages
     {
         "title": "一些小工具",
         "time": "",
@@ -461,7 +408,7 @@ export default [
         "title": "画像｜动画游戏",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/ACGN/cover-picture.jpg",
         "href": "/archive/ACGN",
         "baseUrl": "/archive"
     },
@@ -469,7 +416,7 @@ export default [
         "title": "影像｜电影笔记",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/Film/cover-picture.jpg",
         "href": "/archive/Film",
         "baseUrl": "/archive"
     },
@@ -477,7 +424,7 @@ export default [
         "title": "映像｜摄影照片",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/Photo/cover-picture.jpg",
         "href": "/archive/Photo",
         "baseUrl": "/archive"
     },
@@ -493,7 +440,7 @@ export default [
         "title": "骢辩｜哲学实践",
         "time": "",
         "editedTime": "2026.09.16",
-        "cover": "",
+        "cover": "/archive/_media/Dialectic/cover-picture.jpg",
         "href": "/archive/Dialectic",
         "baseUrl": "/archive"
     },
@@ -513,7 +460,7 @@ export default [
         "href": "/archive/ITtech",
         "baseUrl": "/archive"
     },
-
+    // Archive: ACGN pages
     {
         "title": "前言",
         "time": "",
@@ -522,7 +469,7 @@ export default [
         "href": "/archive/ACGN/Beginning",
         "baseUrl": "/archive/ACGN"
     },
-
+    // Archive: Film pages
     {
         "title": "前言",
         "time": "",
@@ -531,7 +478,7 @@ export default [
         "href": "/archive/Film/Beginning",
         "baseUrl": "/archive/Film"
     },
-
+    // Archive: Photography pages
     {
         "title": "前言",
         "time": "",
@@ -540,7 +487,63 @@ export default [
         "href": "/archive/Photo/Beginning",
         "baseUrl": "/archive/Photo"
     },
-
+    {
+        "title": "随记：图集 庚子年庚辰月甲午日",
+        "time": "2020.04.21",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/Photo/_media/Notes-20200421/cover-picture.jpg",
+        "href": "/archive/Photo/Notes-20200421",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "随记：近日玩具 癸卯年癸亥月甲午日",
+        "time": "2023.12.02",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/Notes-20231202/cover-picture.gif",
+        "href": "/archive/Photo/Notes-20231202",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "随记：近日玩具购入 癸卯年己未月乙未日",
+        "time": "2023.08.05",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/Notes-20230805/cover-picture.jpg",
+        "href": "/archive/Photo/Notes-20230805",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "随记：图集 癸卯年丁巳月丙寅日",
+        "time": "2023.05.08",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/Notes-20230508/cover-picture.jpg",
+        "href": "/archive/Photo/Notes-20230508",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "近期艺术展 甲辰年七月十八日",
+        "time": "2024.07.18",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/Photo/_media/ArtExhibit-20240718/cover-picture.jpg",
+        "href": "/archive/Photo/ArtExhibit-20240718",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "近期艺术展 甲辰年四月二十五日",
+        "time": "2024.04.25",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/ArtExhibit-20240425/cover-picture.jpg",
+        "href": "/archive/Photo/ArtExhibit-20240425",
+        "baseUrl": "/archive/Photo"
+    },
+    {
+        "title": "近期艺术展 甲辰年四月十三日",
+        "time": "2024.04.13",
+        "editedTime": "2024.08.03",
+        "cover": "/archive/Photo/_media/ArtExhibit-20240413/cover-picture.jpg",
+        "href": "/archive/Photo/ArtExhibit-20240413",
+        "baseUrl": "/archive/Photo"
+    },
+    // Archive: Writings pages
     {
         "title": "前言",
         "time": "",
@@ -549,7 +552,7 @@ export default [
         "href": "/archive/Anthology/Beginning",
         "baseUrl": "/archive/Anthology"
     },
-
+    // Archive: Philosophy pages
     {
         "title": "前言",
         "time": "",
@@ -558,7 +561,7 @@ export default [
         "href": "/archive/Dialectic/Beginning",
         "baseUrl": "/archive/Dialectic"
     },
-
+    // Archive: Zhihu pages
     {
         "title": "前言",
         "time": "",
@@ -647,7 +650,7 @@ export default [
         "href": "/archive/ZhiArchive/DevilmanInterview-20180123",
         "baseUrl": "/archive/ZhiArchive"
     },
-
+    // Archive: ITTech pages
     {
         "title": "前言",
         "time": "",
@@ -745,7 +748,9 @@ export default [
         "baseUrl": "/archive/ITtech"
     },
 
-
+    /* =========================
+            jp pages
+    ========================= */
     {
         "title": "使用説明",
         "time": "",
@@ -778,7 +783,7 @@ export default [
         "href": "/jp/About",
         "baseUrl": "/jp"
     },
-
+    // Writings pages
     {
         "title": "日本旅行写真　令和 6 年 3 月",
         "time": "2024.03.28",
@@ -827,7 +832,7 @@ export default [
         "href": "/jp/writings/Notes-20200421",
         "baseUrl": "/jp/writings"
     },
-
+    // Archive pages
     {
         "title": "IT 技術に関する文章",
         "time": "",
@@ -836,7 +841,7 @@ export default [
         "href": "/jp/archive/ITtech",
         "baseUrl": "/jp/archive"
     },
-
+    // Archive: ITTech pages
     {
         "title": "序文",
         "time": "",
@@ -846,7 +851,9 @@ export default [
         "baseUrl": "/jp/archive/ITtech"
     },
 
-
+    /* =========================
+            en-us pages
+    ========================= */
     {
         "title": "Instructions for use",
         "time": "",
@@ -879,7 +886,7 @@ export default [
         "href": "/en-us/About",
         "baseUrl": "/en-us"
     },
-
+    // Writings pages
     {
         "title": "Birthday E-card for GF",
         "time": "2022.05.17",
@@ -888,7 +895,7 @@ export default [
         "href": "/en-us/writings/PrivateEcard-20220517",
         "baseUrl": "/en-us/writings"
     },
-
+    // Archive pages
     {
         "title": "IT Tech Related",
         "time": "",
@@ -897,7 +904,7 @@ export default [
         "href": "/en-us/archive/ITtech",
         "baseUrl": "/en-us/archive"
     },
-
+    // Archive: ITTech pages
     {
         "title": "Beginning",
         "time": "",

@@ -1,4 +1,7 @@
 export default [
+    /* =========================
+            zh-cn pages
+    ========================= */
     {
         "path": "/",
         "name": "首页"
@@ -39,6 +42,9 @@ export default [
         "path": "/archive/ZhiArchive/",
         "name": "覆瓿｜知乎旧文"
     },
+    /* =========================
+            jp pages
+    ========================= */
     {
         "path": "/jp/",
         "name": "ホームページ"
@@ -55,6 +61,9 @@ export default [
         "path": "/jp/archive/ITtech/",
         "name": "IT 技術に関する文章"
     },
+    /* =========================
+            en-us pages
+    ========================= */
     {
         "path": "/en-us/",
         "name": "Home Page"

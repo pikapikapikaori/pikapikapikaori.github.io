@@ -76,46 +76,6 @@ export default [
         "baseUrl": "/writings"
     },
     {
-        "title": "动画资料 叁",
-        "time": "2025.05.11",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/Anime-20250511/cover-picture.jpg",
-        "href": "/writings/Anime-20250511",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "动画资料 贰",
-        "time": "2025.05.10",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/Anime-20250510/cover-picture.jpg",
-        "href": "/writings/Anime-20250510",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "动画资料 壹",
-        "time": "2025.05.08",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/Anime-20250508/cover-picture.jpg",
-        "href": "/writings/Anime-20250508",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "动画摄影文献",
-        "time": "2025.05.05",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/Anime-20250505/cover-picture.jpg",
-        "href": "/writings/Anime-20250505",
-        "baseUrl": "/writings"
-    },
-    {
-        "title": "Z 高达资料",
-        "time": "2025.05.05",
-        "editedTime": "2026.08.05",
-        "cover": "/writings/_media/ZGundam-20250505/cover-picture.jpg",
-        "href": "/writings/ZGundam-20250505",
-        "baseUrl": "/writings"
-    },
-    {
         "title": "季度印象最深刻单集 2025.01",
         "time": "2025.01.12",
         "editedTime": "2026.08.05",
@@ -467,6 +427,46 @@ export default [
         "editedTime": "2026.09.16",
         "cover": "",
         "href": "/archive/ACGN/Beginning",
+        "baseUrl": "/archive/ACGN"
+    },
+    {
+        "title": "动画资料 叁",
+        "time": "2025.05.11",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/ACGN/_media/Anime-20250511/cover-picture.jpg",
+        "href": "/archive/ACGN/Anime-20250511",
+        "baseUrl": "/archive/ACGN"
+    },
+    {
+        "title": "动画资料 贰",
+        "time": "2025.05.10",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/ACGN/_media/Anime-20250510/cover-picture.jpg",
+        "href": "/archive/ACGN/Anime-20250510",
+        "baseUrl": "/archive/ACGN"
+    },
+    {
+        "title": "动画资料 壹",
+        "time": "2025.05.08",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/ACGN/_media/Anime-20250508/cover-picture.jpg",
+        "href": "/archive/ACGN/Anime-20250508",
+        "baseUrl": "/archive/ACGN"
+    },
+    {
+        "title": "动画摄影文献",
+        "time": "2025.05.05",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/ACGN/_media/Anime-20250505/cover-picture.jpg",
+        "href": "/archive/ACGN/Anime-20250505",
+        "baseUrl": "/archive/ACGN"
+    },
+    {
+        "title": "Z 高达资料",
+        "time": "2025.05.05",
+        "editedTime": "2026.08.05",
+        "cover": "/archive/ACGN/_media/ZGundam-20250505/cover-picture.jpg",
+        "href": "/archive/ACGN/ZGundam-20250505",
         "baseUrl": "/archive/ACGN"
     },
     // Archive: Film pages

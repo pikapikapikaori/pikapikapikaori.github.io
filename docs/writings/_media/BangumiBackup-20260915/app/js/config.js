@@ -83,6 +83,9 @@ export const RATE_FILTER_OPTIONS = [
 ];
 export const DEFAULT_RATE_FILTER = 'all';
 
+// ---------- 标签筛选（精确匹配） ----------
+export const DEFAULT_TAG_FILTER = '';
+
 // ---------- 分页 ----------
 export const PAGE_SIZE_OPTIONS = [30, 50, 100, 200];
 export const DEFAULT_PAGE_SIZE = 50;

@@ -143,7 +143,7 @@ cmd_release() {
         return 1
     fi
 
-    # 校验：major/minor/patch，或 semver（如 1.2.3 / 1.2.3-rc.1）
+    # 校验：major/minor/patch，或 semver
     case "$ver" in
         major|minor|patch) ;;
         *)
@@ -155,11 +155,22 @@ cmd_release() {
             ;;
     esac
 
-    # 第二个参数为自定义 commit message；
-    # 缺省为 "version: bump to %s"，npm 会把 %s 替换为新版本号
+    # ---- 把 major/minor/patch 解析成实际的新版本号 ----
+    local current new_ver
+    current=$(node -p "require('./package.json').version")
+    case "$ver" in
+        major) new_ver=$(awk -F. '{printf "%d.0.0", $1+1}' <<<"$current") ;;
+        minor) new_ver=$(awk -F. '{printf "%d.%d.0", $1, $2+1}' <<<"$current") ;;
+        patch) new_ver=$(awk -F. '{printf "%d.%d.%d", $1, $2, $3+1}' <<<"$current") ;;
+        *)     new_ver="$ver" ;;
+    esac
+    # ---------------------------------------------------------
+
     local msg="${2:-version: bump to %s}"
 
-    confirm_run "发布新版本（$ver）" npm version "$ver" -m "$msg"
+    # 提示里同时展示 “输入” 和 “实际目标版本”
+    confirm_run "发布新版本（输入: ${ver} → 实际: ${new_ver}, 当前: ${current}）" \
+        npm version "$ver" -m "$msg"
 }
 
 cmd_help() {

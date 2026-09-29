@@ -111,6 +111,17 @@ export function filterByRate(items, key) {
     return items.filter(i => i.rate === n);
 }
 
+// ---------- 筛选（按标签精确匹配） ----------
+export function filterByTag(items, tag) {
+    const keyword = String(tag ?? '').trim();
+    if (!keyword) return items;
+
+    return items.filter(it => {
+        const tags = Array.isArray(it.myTags) ? it.myTags : [];
+        return tags.some(t => String(t).trim() === keyword);
+    });
+}
+
 // ---------- 搜索 ----------
 export function matchQuery(item, q) {
     if (!q) return true;

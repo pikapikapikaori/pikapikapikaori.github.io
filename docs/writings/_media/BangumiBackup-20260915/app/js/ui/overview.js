@@ -1,17 +1,18 @@
 import { state } from '../app.js';
 import {
     CATEGORIES, STATUS_ORDER, SORT_OPTIONS, DEFAULT_SORT,
-    RATE_FILTER_OPTIONS, DEFAULT_RATE_FILTER,
+    RATE_FILTER_OPTIONS, DEFAULT_RATE_FILTER, DEFAULT_TAG_FILTER,
     STATUS_LABELS, COMMON_STATUS_LABELS,
     PAGE_SIZE_OPTIONS, DEFAULT_PAGE_SIZE,
     STATE_KEY,
 } from '../config.js';
-import { sortItems, filterByRate, countByCategory } from '../model.js';
+import { sortItems, filterByRate, filterByTag, countByCategory } from '../model.js';
 
 let currentCat = 'anime';
 let currentStatus = 'doing';
 let currentSort = DEFAULT_SORT;
 let currentRateFilter = DEFAULT_RATE_FILTER;
+let currentTagFilter = DEFAULT_TAG_FILTER;
 let currentPage = 1;
 let pageSize = DEFAULT_PAGE_SIZE;
 let initialized = false;
@@ -36,6 +37,7 @@ function initState() {
             if (s.status && STATUS_ORDER.includes(s.status)) currentStatus = s.status;
             if (s.sort) currentSort = s.sort;
             if (s.rate) currentRateFilter = s.rate;
+            if (typeof s.tag === 'string') currentTagFilter = s.tag;
             if (s.pageSize && PAGE_SIZE_OPTIONS.includes(Number(s.pageSize))) {
                 pageSize = Number(s.pageSize);
             }
@@ -52,6 +54,7 @@ function saveState() {
             status: currentStatus,
             sort: currentSort,
             rate: currentRateFilter,
+            tag: currentTagFilter,
             page: currentPage,
             pageSize,
         }));
@@ -104,6 +107,14 @@ export function renderOverview() {
                     ${RATE_FILTER_OPTIONS.map(o => `<option value="${o.key}" ${o.key === currentRateFilter ? 'selected' : ''}>${o.label}</option>`).join('')}
                 </select>
                 </label>
+                <label class="control">标签
+                <input
+                    id="tag-input"
+                    type="search"
+                    placeholder="输入完整标签"
+                    value="${escapeHtml(currentTagFilter)}"
+                >
+                </label>
                 <label class="control">每页
                 <select id="page-size-select">
                     ${PAGE_SIZE_OPTIONS.map(n => `<option value="${n}" ${n === pageSize ? 'selected' : ''}>${n}</option>`).join('')}
@@ -144,6 +155,12 @@ export function renderOverview() {
         resetPage();
         renderOverview();
     });
+    main.querySelector('#tag-input').addEventListener('input', e => {
+        currentTagFilter = e.target.value;
+        resetPage();
+        saveState();
+        renderGrid();
+    });
     main.querySelector('#page-size-select').addEventListener('change', e => {
         pageSize = Number(e.target.value);
         resetPage();
@@ -163,6 +180,7 @@ function renderGrid() {
         it => it.cat === currentCat && it.status === currentStatus
     );
     list = filterByRate(list, currentRateFilter);
+    list = filterByTag(list, currentTagFilter);
     list = sortItems(list, currentSort);
 
     if (!list.length) {

@@ -2,33 +2,46 @@
 
 /* Chinese */
 @font-face {
+    font-family: 'HYQuanTangShiJF-Kana';
+    src: url('./fonts/HYQuanTangShi/HYQuanTangShiJF.ttf');
+    size-adjust: 100%;
+    unicode-range: U+3040-30FF, U+31F0-31FF, U+FF66-FF9D, U+1B000-1B0FF;
     font-display: swap;
+}
+
+@font-face {
     font-family: 'HYQuanTangShiJF';
     src: url('./fonts/HYQuanTangShi/HYQuanTangShiJF.ttf');
+    size-adjust: 115%;
+    font-display: swap;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'HYKaiTiS';
     src: url('./fonts/HYKaiTi/HYKaiTiS.ttf');
+    size-adjust: 115%;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'QuanZiKuKai';
     src: url('./fonts/QuanZiKuKai/TW-Kai-98_1.ttf');
+    size-adjust: 115%;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'QuanZiKuKai-extb';
     src: url('./fonts/QuanZiKuKai/TW-Kai-Ext-B-98_1.ttf');
+    size-adjust: 115%;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'QuanZiKuKai-plus';
     src: url('./fonts/QuanZiKuKai/TW-Kai-Plus-98_1.ttf');
+    size-adjust: 115%;
 }
 
 /* CJK Ext A-I */
@@ -54,12 +67,14 @@
     font-display: swap;
     font-family: 'WeibeiSC-Bold';
     src: url('./fonts/WeibeiSC-Bold.otf');
+    size-adjust: 110%;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'HYLuoHuaShiW';
     src: url('./fonts/HYLuoHuaShiW.ttf');
+    size-adjust: 120%;
 }
 
 /* Old Chinese */
@@ -133,7 +148,6 @@
     font-display: swap;
     font-family: 'PengliWenKai';
     src: url('./fonts/PengliWenKai-Regular.ttf');
-    size-adjust: 85%; 
 }
 
 /* Japanese */
@@ -341,18 +355,21 @@
     font-display: swap;
     font-family: 'HuiZongGong-sc';
     src: url('./fonts/HuiZongGong/HuiZongGong-sc.ttf');
+    size-adjust: 110%;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'HuiZongGong-tc';
     src: url('./fonts/HuiZongGong/HuiZongGong-tc.ttf');
+    size-adjust: 110%;
 }
 
 @font-face {
     font-display: swap;
     font-family: 'HanyiSentyFlorCalligraphy';
     src: url('./fonts/HanyiSentyFlorCalligraphy.ttf');
+    size-adjust: 140%;
 }
 
 /* Japanese */
@@ -376,6 +393,7 @@
     font-display: swap;
     font-family: 'HYGuoQiangXingShuW';
     src: url('./fonts/HYGuoQiangXingShuW.ttf');
+    size-adjust: 125%;
 }
 
 /* Japanese */

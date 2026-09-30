@@ -52,7 +52,7 @@
     --global-widget-border-radius: 0.3em;
     --global-avatar-border-radius: 50%;
     --global-brightness-blur: 0.85;
-    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
+    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF-Kana',  'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
     --global-emoji-font: 'TwitterColorEmoji';
     --global-code-font: 'Menlo', courier, monospace;
     --global-sidebar-title-font: 'WeibeiSC-Bold', serif;

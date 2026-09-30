@@ -27,25 +27,35 @@
     --code-text-color: #525252;
     --accent-color: #f66;
     --accent-text-color: #fff;
+    --info-color: #0b85d7;
+    --info-text-color: #fff;
     --blur-color: rgba(66, 185, 131, .1);
     --sidebar-toggle-bg: transparent;
     --sidebar-border-color: rgba(0, 0, 0, .07);
 
     /* ===== 框架变量：保持原样 ===== */
-    --docsify-example-panels-document-width: 80%;
     --global-el-border-radius: 10px;
     --global-icon-border-radius: 5px;
     --global-widget-border-radius: 0.3em;
-    --avatar-border-radius: 50%;
+    --global-avatar-border-radius: 50%;
     --global-brightness-blur: 0.85;
     --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
     --global-emoji-font: 'TwitterColorEmoji';
     --global-code-font: 'Menlo', courier, monospace;
     --global-sidebar-title-font: 'WeibeiSC-Bold', serif;
+    --global-transition-duration: 500ms;
+    /* ===== 多档相关主题色，包括透明度，以及从亮、饱和到暗、灰 ===== */
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
-    --global-transition-duration: 500ms;
+    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + 32), 100) clamp(0, calc(l + 18), 100));
+    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + 24), 100) clamp(0, calc(l + 12), 100));
+    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + 14), 100) clamp(0, calc(l + 6), 100));
+    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + 6), 100) clamp(0, calc(l + 3), 100));
+    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s - 8), 100) clamp(0, calc(l - 8), 100));
+    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s - 18), 100) clamp(0, calc(l - 18), 100));
+    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s - 32), 100) clamp(0, calc(l - 30), 100));
+    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s - 48), 100) clamp(0, calc(l - 44), 100));
 }
 
 ::-webkit-scrollbar {
@@ -485,48 +495,63 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip,
+.markdown-section p.warn,
 .markdown-section tr:nth-child(2n) {
     background-color: var(--zebra-bg)
 }
 
-.markdown-section p.tip {
+.markdown-section p.tip,
+.markdown-section p.warn {
     border-bottom-right-radius: 2px;
-    border-left: 4px solid var(--accent-color);
     border-top-right-radius: 2px;
     margin: 2em 0;
-    padding: 12px 24px 12px 30px;
+    padding: 12px 24px 12px 42px;
     position: relative
 }
 
-.markdown-section p.tip:before {
-    background-color: var(--accent-color);
+.markdown-section p.tip:before,
+.markdown-section p.warn:before {
     border-radius: 100%;
-    color: var(--accent-text-color);
-    content: "!";
     font-family: var(--global-code-font);
-    font-size: 14px;
+    font-size: 1em;
     font-weight: 700;
-    left: -12px;
+    left: 12px;
     line-height: 20px;
     position: absolute;
     height: 20px;
     width: 20px;
-    text-align: center;
-    top: 14px
+    top: 0.8em;
+    text-align: center
 }
 
-.markdown-section p.tip code {
+.markdown-section p.tip code,
+.markdown-section p.warn code {
     background-color: var(--tip-code-bg)
 }
 
-.markdown-section p.tip em {
+.markdown-section p.tip em,
+.markdown-section p.warn em {
     color: var(--text-color)
 }
 
+.markdown-section p.tip {
+    border-left: 4px solid var(--accent-color);
+}
+
 .markdown-section p.warn {
-    background: var(--blur-color);
-    border-radius: 2px;
-    padding: 1rem
+    border-left: 4px solid var(--info-color);
+}
+
+.markdown-section p.tip:before {
+    content: "!";
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+}
+
+.markdown-section p.warn:before {
+    content: "i";
+    background-color: var(--info-color);
+    color: var(--info-text-color);
 }
 
 .markdown-section ul.task-list>li {
@@ -879,6 +904,10 @@ body {
     margin-left: 0
 }
 
+.markdown-section blockquote blockquote {
+    margin: -1em 0;
+}
+
 .markdown-section iframe {
     margin: 1em 0
 }
@@ -948,7 +977,8 @@ body {
 
 .markdown-section output {
     padding: 1.7rem 1.4rem;
-    border: 1px dotted var(--border-color-mid)
+    background-color: var(--zebra-bg);
+    border: 1px solid var(--border-color-mid)
 }
 
 .markdown-section output>:first-child {
@@ -979,6 +1009,12 @@ body {
     text-align: right;
     top: 0;
     content: attr(data-lang)
+}
+
+.markdown-section mark {
+    padding: 0 0.2em;
+    background-color: var(--global-theme-color-1);
+    border-radius: 2px;
 }
 
 .markdown-section {

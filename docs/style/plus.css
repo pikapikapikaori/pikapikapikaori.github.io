@@ -45,3 +45,8 @@ pre .docsify-copy-code-button span {
 .docsify-pagination-container {
     border-top: 1px solid var(--border-color) !important;
 }
+
+/* Docsify Example Panels */
+:root {
+    --docsify-example-panels-document-width: 80%;
+}

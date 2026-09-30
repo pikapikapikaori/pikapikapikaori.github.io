@@ -80,7 +80,7 @@
 }
 
 .brief-comments-in-blog-image-container {
-    border-radius: var(--avatar-border-radius, 50%);
+    border-radius: var(--global-avatar-border-radius, 50%);
     overflow: hidden;
     max-width: 50px;
     max-height: 50px;

@@ -122,16 +122,17 @@ section.cover p {
     h1 {
         margin: 0 0 0 1rem;
     }
-    
+
     h2 {
         margin: 0 45px 0 0.8rem;
     }
-    
+
     h3 {
         margin: 0 40px 0 0.6rem;
     }
 
-    figure, p {
+    figure,
+    p {
         margin: 0 1.2em;
     }
 
@@ -147,7 +148,8 @@ section.cover p {
         margin: 0 1em;
     }
 
-    pre, output {
+    pre,
+    output {
         margin: 0 1.2em;
     }
 
@@ -155,7 +157,7 @@ section.cover p {
         margin: 2px 0;
     }
 
-    pre > code {
+    pre>code {
         padding: 1.4rem 2.2em;
     }
 
@@ -171,7 +173,8 @@ section.cover p {
         margin-right: 0;
     }
 
-    pre::after, output::after {
+    pre::after,
+    output::after {
         padding: 10px 5px 10px 0;
     }
 }
@@ -228,7 +231,7 @@ div:has(.writing-direction-vertical-div) {
 .main-page-about-me-avatar {
     max-width: 100px;
     margin-top: 20px;
-    border-radius: var(--avatar-border-radius, 50%);
+    border-radius: var(--global-avatar-border-radius, 50%);
     overflow: hidden;
 }
 

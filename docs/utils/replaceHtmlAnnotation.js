@@ -59,6 +59,15 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="personal-ten-best-content-info">',
             endHtml: '</div>'
         }
+    ],
+
+    /* Footnote */
+    [
+        'footnote',
+        {
+            startHtml: '<div class="footnote-div">',
+            endHtml: '</div>'
+        }
     ]
 ])
 

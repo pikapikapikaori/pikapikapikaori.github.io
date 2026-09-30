@@ -24,10 +24,41 @@ function plugin(hook, vm) {
     }
 
     function renderTocStage1(content, vm) {
-        return content.replace(tocMarkup, tocDiv)
+        const codeMarkup = /(```[\s\S]*?```)/gm
+        const codeBlocks = []
+
+        // 1. 先保护代码块
+        content = content.replace(codeMarkup, (block) => {
+            const marker = `<!-- toc-codeblock-${codeBlocks.length} -->`
+            codeBlocks.push(block)
+            return marker
+        })
+
+        // 2. 在保护代码块之后，再判断是否真的有 <!-- toc -->
+        const hasToc = content.includes(tocMarkup)
+
+        if (hasToc) {
+            content = content.replace(tocMarkup, tocDiv)
+        }
+
+        // 3. 还原代码块
+        codeBlocks.forEach((block, i) => {
+            content = content.replace(`<!-- toc-codeblock-${i} -->`, () => block)
+        })
+
+        return {
+            content,
+            hasToc
+        }
     }
 
     function renderTocContents() {
+        let tocPageDiv = document.getElementsByClassName('toc-page-div')[0]
+
+        if (!tocPageDiv) return
+
+        tocPageDiv.innerHTML = ''
+
         let baseUrl = vm.route.path.split('/').slice(0, -1).join('/')
 
         if (baseUrl === '') {
@@ -37,17 +68,17 @@ function plugin(hook, vm) {
         let pages = pagesData.filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
             const timeA = a.time
             const timeB = b.time
-            
+
             const isEmptyA = !timeA || timeA.trim?.() === ''
             const isEmptyB = !timeB || timeB.trim?.() === ''
-            
+
             if (isEmptyA && isEmptyB) return 0
             if (isEmptyA) return 1
             if (isEmptyB) return -1
 
             const dateA = new Date(timeA.replace(/\./g, '-'))
             const dateB = new Date(timeB.replace(/\./g, '-'))
-            
+
             return dateB - dateA
         })
 
@@ -92,10 +123,13 @@ function plugin(hook, vm) {
     }
 
     function renderTocPaginator() {
-        let tocPaginatorDiv = document.getElementsByClassName('toc-paginator-div')[0]
         let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')[0]
         let tocPaginatorLeftButtonDiv = document.getElementsByClassName('tocPaginatorLeftButtonDiv')[0]
         let tocPaginatorRightButtonDiv = document.getElementsByClassName('tocPaginatorRightButtonDiv')[0]
+
+        if (!tocPaginatorInputDiv || !tocPaginatorLeftButtonDiv || !tocPaginatorRightButtonDiv) {
+            return
+        }
 
         tocPaginatorLeftButtonDiv.onclick = function (e) {
             if (curPageIndex > 1) {
@@ -124,13 +158,11 @@ function plugin(hook, vm) {
     }
 
     hook.beforeEach(function (content) {
-        hasTocs = content.includes(tocMarkup)
+        const result = renderTocStage1(content, vm)
 
-        if (hasTocs) {
-            content = renderTocStage1(content, vm)
-        }
+        hasTocs = result.hasToc
 
-        return content
+        return result.content
     })
 
     hook.doneEach(function () {

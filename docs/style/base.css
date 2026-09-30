@@ -1071,7 +1071,7 @@ body {
     li,
     table {
         a:hover {
-            text-decoration-color: var(--global-theme-color-blur, #c7a2ec1a);
+            text-decoration-color: var(--global-theme-color-7);
         }
     }
 }

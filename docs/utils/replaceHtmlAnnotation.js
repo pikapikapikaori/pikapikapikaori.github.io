@@ -84,6 +84,12 @@ const inlineTagConfigMap = new Map([
     [
         'brief-comments-divider',
         (payload) => `<hr class="brief-comments-in-blog-comments-divider"/><p>${payload}</p>`
+    ],
+
+    /* Footnote */
+    [
+        'footnote-num',
+        (payload) => `<sup class="footnote-num-sup">${payload}</sup>`
     ]
 ])
 

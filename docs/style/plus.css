@@ -50,3 +50,7 @@ pre .docsify-copy-code-button span {
 :root {
     --docsify-example-panels-document-width: 80%;
 }
+
+.docsify-example-panels>* :first-child {
+    margin-top: 0;
+}

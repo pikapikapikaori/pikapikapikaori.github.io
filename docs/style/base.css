@@ -892,6 +892,30 @@ body {
     padding-left: 1.5rem
 }
 
+.markdown-section ol {
+    list-style-type: decimal;
+}
+
+.markdown-section ol ol {
+    list-style-type: devanagari;
+}
+
+.markdown-section ol ol ol {
+    list-style-type: lower-roman;
+}
+
+.markdown-section ul {
+    list-style-type: disc;
+}
+
+.markdown-section ul ul {
+    list-style-type: circle;
+}
+
+.markdown-section ul ul ul {
+    list-style-type: square;
+}
+
 .markdown-section blockquote {
     border-left: 4px solid var(--theme-color, #c7a2ec);
     color: var(--muted-color);

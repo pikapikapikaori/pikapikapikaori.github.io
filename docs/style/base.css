@@ -850,30 +850,33 @@ body {
 
 .markdown-section h1 {
     font-size: 2rem;
-    margin: 0 0 1rem
+    margin: 0 0 1.2rem
 }
 
 .markdown-section h2 {
     font-size: 1.75rem;
-    margin: 45px 0 .8rem
+    margin: 45px 0 1.2rem
 }
 
 .markdown-section h3 {
     font-size: 1.5rem;
-    margin: 40px 0 .6rem
+    margin: 40px 0 1.2rem
 }
 
 .markdown-section h4 {
-    font-size: 1.25rem
+    font-size: 1.25rem;
+    margin: 35px 0 1.2rem
 }
 
 .markdown-section h5 {
-    font-size: 1rem
+    font-size: 1rem;
+    margin: 30px 0 1.2rem
 }
 
 .markdown-section h6 {
     color: var(--h6-color);
-    font-size: 1rem
+    font-size: 1rem;
+    margin: 25px 0 1.2rem
 }
 
 .markdown-section figure,
@@ -890,7 +893,8 @@ body {
 
 .markdown-section ol,
 .markdown-section ul {
-    padding-left: 1.5rem
+    padding-left: 1.5rem;
+    margin: 1.2em 0
 }
 
 .markdown-section ol {
@@ -934,7 +938,7 @@ body {
 }
 
 .markdown-section iframe {
-    margin: 1em 0
+    margin: 1.2em 0
 }
 
 .markdown-section em {

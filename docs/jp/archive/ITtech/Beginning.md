@@ -30,6 +30,4 @@
 
 ### Brainfuck のインタプリタインタプリタ
 
-<div style="max-width: 800px;margin: 0 auto 0;">
-    <iframe height="400px" src="jp/archive/ITtech/_media/README/terminal.html"></iframe>
-</div>
+<iframe height="400px" src="jp/archive/ITtech/_media/README/terminal.html"></iframe>

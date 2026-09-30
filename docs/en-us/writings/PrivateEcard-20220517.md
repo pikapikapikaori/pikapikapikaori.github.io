@@ -6,4 +6,4 @@
 
 You can visit [here](en-us/writings/_media/PrivateEcard-20220517/index.html ':ignore') to view the whole page.
 
-[website](./_media/PrivateEcard-20220517/index.html ':include height=1000px')
+<iframe height="1000px" src="en-us/writings/_media/PrivateEcard-20220517/index.html"></iframe>

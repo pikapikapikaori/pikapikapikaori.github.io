@@ -63,9 +63,8 @@ pre .docsify-copy-code-button span {
     margin-bottom: 0;
 }
 
-.markdown-section>blockquote:has(+.docsify-example-panels),
-.markdown-section>.tip:has(+.docsify-example-panels),
-.markdown-section>.warn:has(+.docsify-example-panels) {
+.markdown-section>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panels),
+.markdown-section>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panels) :last-child:not(.markdown-section>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panels) :not(:last-child) *) {
     margin-bottom: 0.8em;
 }
 
@@ -73,9 +72,8 @@ pre .docsify-copy-code-button span {
     margin-bottom: 0;
 }
 
-.docsify-example-panels blockquote:last-child:not(.docsify-example-panels :not(:last-child) *),
-.docsify-example-panels .tip:last-child:not(.docsify-example-panels :not(:last-child) *),
-.docsify-example-panels .warn:last-child:not(.docsify-example-panels :not(:last-child) *) {
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *),
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *) :last-child:not(.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *) :not(:last-child) *) {
     margin-bottom: 0.8em;
 }
 
@@ -84,11 +82,27 @@ pre .docsify-copy-code-button span {
     margin-bottom: 0;
 }
 
-.docsify-example-panels>blockquote:has(+.docsify-example-panel),
-.docsify-example-panels>.tip:has(+.docsify-example-panel),
-.docsify-example-panels>.warn:has(+.docsify-example-panel),
-.docsify-example-panels>:has(+.docsify-example-panel) blockquote:last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *),
-.docsify-example-panels>:has(+.docsify-example-panel) .tip:last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *),
-.docsify-example-panels>:has(+.docsify-example-panel) .warn:last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *) {
+.docsify-example-panels>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panel),
+.docsify-example-panels>:has(+.docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *),
+.docsify-example-panels>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panel) :last-child:not(.docsify-example-panels>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panel) :not(:last-child) *),
+.docsify-example-panels>:has(+.docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *) :last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *) :not(:last-child) *) {
     margin-bottom: 0.8em;
+}
+
+
+.markdown-section> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)),
+.markdown-section> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :last-child:not(.markdown-section> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :not(:last-child) *) {
+    margin-bottom: 0;
+}
+
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)),
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :last-child:not(.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :not(:last-child) *) {
+    margin-bottom: 0;
+}
+
+.docsify-example-panels> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)),
+.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)),
+.docsify-example-panels> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :last-child:not(.docsify-example-panels> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :not(:last-child) *),
+.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :last-child:not(.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :not(:last-child) *) {
+    margin-bottom: 0;
 }

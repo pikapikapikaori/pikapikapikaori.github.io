@@ -52,8 +52,6 @@
 }
 
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul {
-    margin-left: 10px;
-    padding-left: 5px;
     border-left: 1px solid var(--theme-color);
 }
 
@@ -68,7 +66,8 @@
 }
 
 .sidebar:has(.default-btn.active-btn) .sidebar-nav>ul>li>ul>li:has(li.active)>a {
-    border-right: 2px solid;
+    border-left: 2px solid;
     color: var(--theme-color, #c7a2ec);
     font-weight: 600;
+    margin-left: -2px;
 }

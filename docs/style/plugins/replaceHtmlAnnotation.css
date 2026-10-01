@@ -48,8 +48,14 @@
     padding-left: 0;
 }
 
-.brief-comments-in-blog-title-year>summary:hover {
-    filter: brightness(var(--global-brightness-blur, 0.85));
+.brief-comments-in-blog-title-year>summary:hover,
+.brief-comments-in-blog-title-year[open]>summary:hover {
+    color: var(--global-theme-color-7);
+}
+
+.brief-comments-in-blog-title-year>summary:hover::after,
+.brief-comments-in-blog-title-year[open]>summary:hover::after {
+    border-color: var(--global-theme-color-7);
 }
 
 .brief-comments-in-blog-title-year>summary::-webkit-details-marker {
@@ -72,6 +78,14 @@
     width: 10px;
     transform: rotate(45deg);
     transition: 0.2s ease-in-out;
+}
+
+.brief-comments-in-blog-title-year[open]>summary {
+    color: var(--global-theme-color-6);
+}
+
+.brief-comments-in-blog-title-year[open]>summary::after {
+    border-color: var(--global-theme-color-6);
 }
 
 .brief-comments-in-blog-title-year[open]>summary::after {

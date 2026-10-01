@@ -18,27 +18,9 @@ section.cover p {
 .cover-page-scroll-down-chevron {
     position: relative;
     animation: moveChevron 2s infinite;
-    -webkit-animation: moveChevron 2s infinite;
 }
 
 @keyframes moveChevron {
-    0% {
-        top: 0px;
-        opacity: 0.3;
-    }
-
-    50% {
-        top: 15px;
-        opacity: 1;
-    }
-
-    100% {
-        top: 0px;
-        opacity: 0.3;
-    }
-}
-
-@-webkit-keyframes moveChevron {
     0% {
         top: 0px;
         opacity: 0.3;
@@ -260,8 +242,6 @@ div:has(.writing-direction-vertical-div) {
 
 .main-page-about-me-links>a>svg:hover {
     transform: scale(1.3);
-    -ms-transform: scale(1.3);
-    -webkit-transform: scale(1.3);
 }
 
 .main-page-right-panel-container .main-page-about-me-image-links {

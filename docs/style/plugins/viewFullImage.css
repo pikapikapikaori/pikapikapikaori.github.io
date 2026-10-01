@@ -8,7 +8,6 @@
     height: 100%;
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
     cursor: zoom-out;
 }
 

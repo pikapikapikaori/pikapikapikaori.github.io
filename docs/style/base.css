@@ -56,6 +56,11 @@
     --global-transition-duration: 500ms;
 }
 
+::selection {
+    background-color: var(--global-theme-color-8);
+    color: var(--global-theme-color-1);
+}
+
 html {
     scrollbar-width: thin;
     scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);

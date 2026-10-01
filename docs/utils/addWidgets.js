@@ -232,6 +232,18 @@ function plugin(hook, vm) {
         }
     }
 
+    let syncThemeColorMeta = function (isDark) {
+        const group = themeState.groups[themeState.themeIndex]
+        const bg = isDark ? group.darkColor : group.lightColor
+
+        if (!bg) return
+
+        let meta = document.querySelector('meta[name="theme-color"]')
+        if (!meta) return
+        
+        meta.content = bg
+    }
+
     let applyThemeColor = function () {
         const isDark = resolveIsDark()
         const colorTheme = document.getElementById('theme-color')
@@ -251,6 +263,8 @@ function plugin(hook, vm) {
         document.documentElement.style.setProperty('--theme-color', themeColor)
 
         updateColorPickerSlider(themeColor)
+
+        syncThemeColorMeta(isDark)
     }
 
     // 页面主题色

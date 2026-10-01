@@ -56,9 +56,11 @@
     --global-transition-duration: 500ms;
 }
 
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-width: thin;
+        scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
+    }
 }
 
 body:not(.ready) {
@@ -375,9 +377,11 @@ main.hidden {
     padding-left: 20px
 }
 
-.sidebar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
+@supports not selector(::-webkit-scrollbar) {
+    .sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
+    }
 }
 
 .sidebar-toggle {

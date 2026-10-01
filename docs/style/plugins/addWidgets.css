@@ -134,7 +134,6 @@
 }
 
 .color-picker-slider::-webkit-slider-runnable-track {
-    background-color: var(--global-theme-color-blur, #ea6f5a1a);
     height: 5px;
     border-radius: var(--global-el-border-radius, 10px);
     border: 1px solid var(--border-color);

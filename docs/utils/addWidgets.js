@@ -91,6 +91,8 @@ function plugin(hook, vm) {
 
     let widgets = []
 
+    let widgetsContainer
+
     let widgetsCnt = 8
 
     const widgetTop = 35
@@ -331,7 +333,7 @@ function plugin(hook, vm) {
             renderTheme()
         }
 
-        document.body.appendChild(switchSpan)
+        widgetsContainer.appendChild(switchSpan)
     }
 
     // 主题切换
@@ -430,7 +432,7 @@ function plugin(hook, vm) {
 
         themePickerPopupDiv.appendChild(presetListDiv)
         themePickerPopupSpan.appendChild(themePickerPopupDiv)
-        document.body.appendChild(themePickerPopupSpan)
+        widgetsContainer.appendChild(themePickerPopupSpan)
         themePickerPopupSpan.style.top = `calc(${addWidgetsOptions.top}px + (100vh - ${widgetTop * widgetsCnt}px) / 2 + ${widgetTop * (widgets.indexOf(themeSpan) + 1)}px - ${themePickerPopupSpan.offsetHeight}px - ${widgetTop}px + ${widgetSize})`
 
         themeSpan.onclick = function (e) {
@@ -439,7 +441,7 @@ function plugin(hook, vm) {
             themePickerPopupSpan.classList.toggle('theme-picker-popup-span-disappear')
         }
 
-        document.body.appendChild(themeSpan)
+        widgetsContainer.appendChild(themeSpan)
     }
 
     // 页面主题色
@@ -459,8 +461,8 @@ function plugin(hook, vm) {
         colorPickerPopupDiv.innerHTML = '<div class="color-picker-preset-color-list-div"><div class="color-picker-preset-color-btn-div" style="background-color: #eca2a2;" data-hue="0"></div><div class="color-picker-preset-color-btn-div" style="background-color: #ecc7a2;" data-hue="30"></div><div class="color-picker-preset-color-btn-div" style="background-color: #ececa2;" data-hue="60"></div><div class="color-picker-preset-color-btn-div" style="background-color: #c7eca2;" data-hue="90"></div><div class="color-picker-preset-color-btn-div" style="background-color: #a2ecec;" data-hue="180"></div><div class="color-picker-preset-color-btn-div" style="background-color: #aea2ec;" data-hue="250"></div><div class="color-picker-preset-color-btn-div" style="background-color: #c7a2ec;" data-hue="270"></div><div class="color-picker-preset-color-btn-div" style="background-color: #eca2ec;" data-hue="300"></div><div class="color-picker-preset-color-btn-div" style="background-color: #eca2c7;" data-hue="330"></div><div class="color-picker-preset-color-btn-div" style="background-color: #eca2b4;" data-hue="345"></div></div><input type="range" min="0" max="360" value="270" class="color-picker-slider" id="color-picker-slider" step="5">'
 
         colorPickerPopupSpan.appendChild(colorPickerPopupDiv)
-        document.body.appendChild(colorPickerSpan)
-        document.body.appendChild(colorPickerPopupSpan)
+        widgetsContainer.appendChild(colorPickerSpan)
+        widgetsContainer.appendChild(colorPickerPopupSpan)
 
         let colorPickerSlider = colorPickerPopupDiv.getElementsByClassName('color-picker-slider')[0]
 
@@ -491,7 +493,7 @@ function plugin(hook, vm) {
             document.getElementById('gitalk-container').scrollIntoView({ behavior: 'smooth', })
         }
 
-        document.body.appendChild(scrollToCommentSpan)
+        widgetsContainer.appendChild(scrollToCommentSpan)
     }
 
     // 樱花雨特效
@@ -514,7 +516,7 @@ function plugin(hook, vm) {
             isSakuraDisplayed = !isSakuraDisplayed
         }
 
-        document.body.appendChild(showSakuraSpan)
+        widgetsContainer.appendChild(showSakuraSpan)
     }
 
     // Live2d 小人
@@ -527,7 +529,7 @@ function plugin(hook, vm) {
             live2dCanvas.classList.toggle('canvas-hide')
         }
 
-        document.body.appendChild(showLive2dSpan)
+        widgetsContainer.appendChild(showLive2dSpan)
     }
 
     // 隐藏显示小组件
@@ -563,7 +565,7 @@ function plugin(hook, vm) {
             }
         }
 
-        document.body.appendChild(showWidgetsSpan)
+        widgetsContainer.appendChild(showWidgetsSpan)
     }
 
     // 进度条
@@ -581,7 +583,7 @@ function plugin(hook, vm) {
             }
         }
 
-        document.body.appendChild(progressSpan)
+        widgetsContainer.appendChild(progressSpan)
 
         function schedule() {
             if (ticking) return
@@ -615,7 +617,7 @@ function plugin(hook, vm) {
             scroll()
         }
 
-        document.body.appendChild(scrollToTopSpan)
+        widgetsContainer.appendChild(scrollToTopSpan)
 
         let onScroll = function () {
             scrollToTopSpan.style.display = calScrollDisplay()
@@ -624,6 +626,11 @@ function plugin(hook, vm) {
     }
 
     hook.mounted(function () {
+
+        widgetsContainer = document.createElement('div')
+        widgetsContainer.id = 'page-right-widgets-container'
+        widgetsContainer.className = 'page-right-widgets-container'
+        document.body.appendChild(widgetsContainer)
 
         isNowMobile = isMobile()
 

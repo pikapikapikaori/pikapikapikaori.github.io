@@ -52,7 +52,7 @@
     --global-widget-border-radius: 0.3em;
     --global-avatar-border-radius: 50%;
     --global-brightness-blur: 0.85;
-    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF-Kana',  'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
+    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF-Kana', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
     --global-emoji-font: 'TwitterColorEmoji';
     --global-code-font: 'Menlo', courier, monospace;
     --global-sidebar-title-font: 'WeibeiSC-Bold', serif;
@@ -1045,6 +1045,45 @@ body {
     padding: 0 0.2em;
     background-color: var(--global-theme-color-1);
     border-radius: 2px;
+}
+
+.markdown-section details {
+    margin: 1.2em 0;
+}
+
+.markdown-section summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding-left: 1.5em;
+}
+
+.markdown-section summary::-webkit-details-marker {
+    display: none;
+}
+
+.markdown-section summary::marker {
+    content: "";
+}
+
+.markdown-section summary::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 18px;
+
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 4 L16 10 L5 16 Z' fill='black' stroke='black' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 4 L16 10 L5 16 Z' fill='black' stroke='black' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+
+    transform-origin: center;
+    transition: transform var(--global-transition-duration);
+}
+
+.markdown-section details[open] summary::before {
+    transform: rotate(90deg);
 }
 
 .markdown-section {

@@ -45,6 +45,7 @@
     position: relative;
     transition-duration: var(--global-transition-duration, 500ms);
     cursor: pointer;
+    padding-left: 0;
 }
 
 .brief-comments-in-blog-title-year>summary:hover {
@@ -53,6 +54,10 @@
 
 .brief-comments-in-blog-title-year>summary::-webkit-details-marker {
     display: none;
+}
+
+.brief-comments-in-blog-title-year>summary::marker {
+    content: "";
 }
 
 .brief-comments-in-blog-title-year>summary::after {
@@ -72,6 +77,13 @@
 .brief-comments-in-blog-title-year[open]>summary::after {
     transform: rotate(225deg);
     transition: 0.2s ease-in-out;
+}
+
+.brief-comments-in-blog-title-year>summary::before {
+    mask: none;
+    -webkit-mask: none;
+    width: 0;
+    height: 0;
 }
 
 .brief-comments-in-blog {

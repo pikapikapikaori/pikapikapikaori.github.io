@@ -7,8 +7,8 @@ let addWidgetsOptions = {
     themes: [
         {
             name: 'default',
-            light: null,
-            dark: null,
+            light: './style/theme/vue.css',
+            dark: './style/theme/dark.css',
             lightColor: '#ffffff',
             darkColor: '#3f3f3f',
             lightThemeColor: '#c7a2ec',
@@ -234,27 +234,18 @@ function plugin(hook, vm) {
 
     let applyThemeColor = function () {
         const isDark = resolveIsDark()
-        const vueTheme = document.getElementById('theme-vue')
-        const darkTheme = document.getElementById('theme-dark')
         const colorTheme = document.getElementById('theme-color')
 
         const group = themeState.groups[themeState.themeIndex]
         const file = isDark ? group.dark : group.light
         const themeColor = isDark ? group.darkThemeColor : group.lightThemeColor
 
-        if (!file) {
-            vueTheme.disabled = isDark
-            darkTheme.disabled = !isDark
-
-            colorTheme.href = ''
-            colorTheme.disabled = true
-        }
-        else {
-            vueTheme.disabled = true
-            darkTheme.disabled = true
-
+        if (file) {
             colorTheme.disabled = false
             colorTheme.href = file
+        } else {
+            colorTheme.disabled = true
+            colorTheme.href = 'data:text/css,'
         }
 
         document.documentElement.style.setProperty('--theme-color', themeColor)

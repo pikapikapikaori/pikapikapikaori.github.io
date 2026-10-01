@@ -1,0 +1,188 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * This file contains nonstandard CSS properties that are not part of the official CSS specification.
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+@-webkit-keyframes fall {
+    0% {
+        opacity: 0.9;
+        top: 0;
+    }
+
+    100% {
+        opacity: 0.2;
+        top: 100%;
+    }
+}
+
+@-webkit-keyframes blow-soft-left {
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: -50%;
+    }
+}
+
+@-webkit-keyframes blow-medium-left {
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: -100%;
+    }
+}
+
+@-webkit-keyframes blow-soft-right {
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: 50%;
+    }
+}
+
+@-webkit-keyframes blow-medium-right {
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: 100%;
+    }
+}
+
+@-webkit-keyframes sway-0 {
+    0% {
+        -webkit-transform: rotate(-5deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(28deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(3deg);
+    }
+}
+
+@-webkit-keyframes sway-1 {
+    0% {
+        -webkit-transform: rotate(10deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(43deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(15deg);
+    }
+}
+
+@-webkit-keyframes sway-2 {
+    0% {
+        -webkit-transform: rotate(15deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(56deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(22deg);
+    }
+}
+
+@-webkit-keyframes sway-3 {
+    0% {
+        -webkit-transform: rotate(25deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(74deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(37deg);
+    }
+}
+
+@-webkit-keyframes sway-4 {
+    0% {
+        -webkit-transform: rotate(40deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(68deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(25deg);
+    }
+}
+
+@-webkit-keyframes sway-5 {
+    0% {
+        -webkit-transform: rotate(50deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(78deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(40deg);
+    }
+}
+
+@-webkit-keyframes sway-6 {
+    0% {
+        -webkit-transform: rotate(65deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(92deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(58deg);
+    }
+}
+
+@-webkit-keyframes sway-7 {
+    0% {
+        -webkit-transform: rotate(72deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(118deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(68deg);
+    }
+}
+
+@-webkit-keyframes sway-8 {
+    0% {
+        -webkit-transform: rotate(94deg);
+    }
+
+    40% {
+        -webkit-transform: rotate(136deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(82deg);
+    }
+}

@@ -28,7 +28,6 @@
     border-radius: var(--global-el-border-radius, 10px);
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
     padding: 18px;
     width: 200px;
 }
@@ -121,7 +120,6 @@
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     text-align: center;
     backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
 }
 
 .color-picker-slider {
@@ -131,29 +129,6 @@
     appearance: none;
     height: 5px;
     background-color: var(--theme-color, #ea6f5a);
-}
-
-.color-picker-slider::-webkit-slider-runnable-track {
-    height: 5px;
-    border-radius: var(--global-el-border-radius, 10px);
-    border: 1px solid var(--border-color);
-}
-
-.color-picker-slider::-webkit-slider-thumb {
-    appearance: none;
-    position: relative;
-    height: 20px;
-    width: 10px;
-    margin-top: -7px;
-    background-color: var(--theme-color, #ea6f5a);
-    border-radius: 3px;
-    cursor: pointer;
-    transition: transform var(--global-transition-duration, 500ms);
-    border: 1px solid var(--border-color);
-}
-
-.color-picker-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.1);
 }
 
 .color-picker-preset-color-list-div {
@@ -220,9 +195,6 @@
             transparent calc(100% - var(--thickness) + var(--bw))),
         /* 进度 + 轨道 */
         conic-gradient(var(--theme-color, #ea6f5a) calc(var(--p) * 1%), transparent 0);
-    -webkit-mask: radial-gradient(farthest-side,
-            #0000 calc(100% - var(--thickness)),
-            #000 calc(100% - var(--thickness)));
     mask: radial-gradient(farthest-side,
             #0000 calc(100% - var(--thickness)),
             #000 calc(100% - var(--thickness)));

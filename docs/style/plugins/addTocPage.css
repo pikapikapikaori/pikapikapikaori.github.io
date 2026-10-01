@@ -93,6 +93,7 @@
     border-radius: var(--global-widget-border-radius, 0.3em);
     border: 0.1em solid var(--border-color, #eee);
     transition-duration: var(--global-transition-duration, 500ms);
+    appearance: textfield;
 }
 
 .toc-paginator-input span {
@@ -105,11 +106,6 @@
 
 .toc-paginator-input input:focus {
     border-color: var(--theme-color, #ea6f5a);
-}
-
-.toc-paginator-input input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
 }
 
 .toc-paginator-input-box {

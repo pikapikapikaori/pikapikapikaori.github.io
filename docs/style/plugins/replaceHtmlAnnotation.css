@@ -58,10 +58,6 @@
     border-color: var(--global-theme-color-7);
 }
 
-.brief-comments-in-blog-title-year>summary::-webkit-details-marker {
-    display: none;
-}
-
 .brief-comments-in-blog-title-year>summary::marker {
     content: "";
 }
@@ -95,7 +91,6 @@
 
 .brief-comments-in-blog-title-year>summary::before {
     mask: none;
-    -webkit-mask: none;
     width: 0;
     height: 0;
 }

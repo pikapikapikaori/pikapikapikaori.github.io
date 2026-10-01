@@ -1,0 +1,15 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * This file contains nonstandard CSS properties that are not part of the official CSS specification.
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+.toc-paginator-input input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

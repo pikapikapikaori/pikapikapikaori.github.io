@@ -59,6 +59,15 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="personal-ten-best-content-info">',
             endHtml: '</div>'
         }
+    ],
+
+    /* Footnote */
+    [
+        'footnote',
+        {
+            startHtml: '<div class="footnote-div">',
+            endHtml: '</div>'
+        }
     ]
 ])
 
@@ -75,6 +84,12 @@ const inlineTagConfigMap = new Map([
     [
         'brief-comments-divider',
         (payload) => `<hr class="brief-comments-in-blog-comments-divider"/><p>${payload}</p>`
+    ],
+
+    /* Footnote */
+    [
+        'footnote-num',
+        (payload) => `<sup class="footnote-num-sup">${payload}</sup>`
     ]
 ])
 

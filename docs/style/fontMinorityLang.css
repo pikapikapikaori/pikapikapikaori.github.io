@@ -6,6 +6,7 @@
 
 /* Siddham */
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/ApDevaSiddham.ttf') format('truetype');
     unicode-range: 
@@ -15,6 +16,7 @@
 
 /* Devanagari */
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/Sahitya/Sahitya-Regular.ttf') format('truetype');
     unicode-range: 
@@ -24,6 +26,7 @@
 
 /* Hentaigana */
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/ninjal_hentaigana/ninjal_hentaigana.ttf') format('truetype');
     unicode-range: 
@@ -37,6 +40,7 @@
 
 /* Manchu */
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf') format('truetype');
     unicode-range: 
@@ -46,6 +50,7 @@
 
 /* Hebrew */
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/Tinos/Tinos-Regular.ttf') format('truetype');
     unicode-range: 
@@ -57,6 +62,7 @@
 
 /* Yijing hexagrams & Tai Xuan Jing */
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/PengliWenKai-Regular.ttf') format('truetype');
     unicode-range: 
@@ -74,6 +80,7 @@
 }
 
 @font-face {
+    font-display: swap;
     font-family: 'MinorityLang';
     src: url('./fonts/Gentium_Plus/GentiumPlus-Regular.ttf') format('truetype');
     unicode-range: 

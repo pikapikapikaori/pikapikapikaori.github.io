@@ -9,6 +9,7 @@
     background-color: var(--global-theme-color-blur, #ea6f5a1a);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    cursor: zoom-out;
 }
 
 #view-full-image-span-inner-left-div,
@@ -58,7 +59,7 @@
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji) {
-    cursor: pointer;
+    cursor: zoom-in;
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji):hover {

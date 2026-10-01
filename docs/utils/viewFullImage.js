@@ -12,6 +12,55 @@ function plugin(hook, vm) {
     let tarImageLeftStart = '-90%'
     let tarImageRightStart = '110%'
 
+    let scrollLocked = false
+    let lockWindowY = 0
+    let lockContentY = 0
+
+    function preventWheel(e) {
+        e.preventDefault()
+    }
+
+    function preventTouchMove(e) {
+        e.preventDefault()
+    }
+
+    function preventKeyScroll(e) {
+        const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']
+        if (keys.includes(e.key)) e.preventDefault()
+    }
+
+    function lockScroll() {
+        if (scrollLocked) return
+
+        const content = document.querySelector('.content')
+        lockWindowY = window.scrollY || document.documentElement.scrollTop || 0
+        lockContentY = content ? content.scrollTop : 0
+        scrollLocked = true
+
+        window.addEventListener('wheel', preventWheel, { passive: false })
+        window.addEventListener('touchmove', preventTouchMove, { passive: false })
+        window.addEventListener('keydown', preventKeyScroll)
+
+        // 只加状态类，不动任何布局样式
+        document.body.classList.add('image-viewer-open')
+    }
+
+    function unlockScroll() {
+        if (!scrollLocked) return
+        scrollLocked = false
+
+        window.removeEventListener('wheel', preventWheel)
+        window.removeEventListener('touchmove', preventTouchMove)
+        window.removeEventListener('keydown', preventKeyScroll)
+
+        // 兜底：万一某些主题/插件在遮罩期间改过位置，恢复回去
+        const content = document.querySelector('.content')
+        if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
+        if (content && content.scrollTop !== lockContentY) content.scrollTop = lockContentY
+
+        document.body.classList.remove('image-viewer-open')
+    }
+
     function createImageOpenCloseKeyframe(tarImg, tarEl, isOpen) {
         let fullImageTop = tarImg.getBoundingClientRect().top + 'px'
         let fullImageLeft = tarImg.getBoundingClientRect().left + 'px'
@@ -21,17 +70,17 @@ function plugin(hook, vm) {
         if (isOpen) {
             tarEl.animate(
                 [
-                    { 
-                        top: fullImageTop, 
-                        left: fullImageLeft, 
-                        width: fullImageWidth, 
-                        height: fullImageHeight, 
-                    }, 
-                    { 
-                        top: tarImageTop, 
-                        left: tarImageLeft, 
-                        width: tarImageWidth, 
-                        height: tarImageHeight, 
+                    {
+                        top: fullImageTop,
+                        left: fullImageLeft,
+                        width: fullImageWidth,
+                        height: fullImageHeight,
+                    },
+                    {
+                        top: tarImageTop,
+                        left: tarImageLeft,
+                        width: tarImageWidth,
+                        height: tarImageHeight,
                     },
                 ],
                 keyframeDuration,
@@ -41,16 +90,16 @@ function plugin(hook, vm) {
             tarEl.animate(
                 [
                     {
-                        top: tarImageTop, 
-                        left: tarImageLeft, 
-                        width: tarImageWidth, 
-                        height: tarImageHeight, 
-                    }, 
+                        top: tarImageTop,
+                        left: tarImageLeft,
+                        width: tarImageWidth,
+                        height: tarImageHeight,
+                    },
                     {
-                        top: fullImageTop, 
-                        left: fullImageLeft, 
-                        width: fullImageWidth, 
-                        height: fullImageHeight, 
+                        top: fullImageTop,
+                        left: fullImageLeft,
+                        width: fullImageWidth,
+                        height: fullImageHeight,
                     },
                 ],
                 keyframeDuration,
@@ -63,42 +112,42 @@ function plugin(hook, vm) {
             tarEl.animate(
                 [
                     {
-                        left: tarImageLeft, 
+                        left: tarImageLeft,
                         display: 'inline',
                         backgroundImage: oldBackground,
-                    }, 
+                    },
                     {
-                        left: tarImageRightStart, 
+                        left: tarImageRightStart,
                         display: 'inline',
                         backgroundImage: oldBackground,
                         offset: 0.45,
                     },
                     {
-                        left: tarImageRightStart, 
+                        left: tarImageRightStart,
                         display: 'none',
                         backgroundImage: oldBackground,
                         offset: 0.47,
                     },
                     {
-                        left: tarImageLeftStart, 
+                        left: tarImageLeftStart,
                         display: 'none',
                         backgroundImage: oldBackground,
                         offset: 0.48,
                     },
                     {
-                        left: tarImageLeftStart, 
+                        left: tarImageLeftStart,
                         display: 'none',
                         backgroundImage: newBackground,
                         offset: 0.53,
-                    }, 
+                    },
                     {
-                        left: tarImageLeftStart, 
+                        left: tarImageLeftStart,
                         display: 'inline',
                         backgroundImage: newBackground,
                         offset: 0.55,
                     },
                     {
-                        left: tarImageLeft, 
+                        left: tarImageLeft,
                         display: 'inline',
                         backgroundImage: newBackground,
                     },
@@ -110,42 +159,42 @@ function plugin(hook, vm) {
             tarEl.animate(
                 [
                     {
-                        left: tarImageLeft, 
+                        left: tarImageLeft,
                         display: 'inline',
                         backgroundImage: oldBackground,
-                    }, 
+                    },
                     {
-                        left: tarImageLeftStart, 
+                        left: tarImageLeftStart,
                         display: 'inline',
                         backgroundImage: oldBackground,
                         offset: 0.45,
                     },
                     {
-                        left: tarImageLeftStart, 
+                        left: tarImageLeftStart,
                         display: 'none',
                         backgroundImage: oldBackground,
                         offset: 0.47,
                     },
                     {
-                        left: tarImageRightStart, 
+                        left: tarImageRightStart,
                         display: 'none',
                         backgroundImage: oldBackground,
                         offset: 0.48,
                     },
                     {
-                        left: tarImageRightStart, 
+                        left: tarImageRightStart,
                         display: 'none',
                         backgroundImage: newBackground,
                         offset: 0.53,
-                    }, 
+                    },
                     {
-                        left: tarImageRightStart, 
+                        left: tarImageRightStart,
                         display: 'inline',
                         backgroundImage: newBackground,
                         offset: 0.55,
                     },
                     {
-                        left: tarImageLeft, 
+                        left: tarImageLeft,
                         display: 'inline',
                         backgroundImage: newBackground,
                     },
@@ -189,11 +238,11 @@ function plugin(hook, vm) {
             let viewFullImageSpanInnerTextDiv = document.getElementById('view-full-image-span-inner-text-div')
 
             let imgArray = Array.from(document.getElementsByTagName('img')).filter(img => {
-                const shouldIgnore = 
+                const shouldIgnore =
                     img.classList.contains('ignore-view-full-image-img') ||
                     img.className.includes('emoji') ||
                     img.src.includes('avatars.githubusercontent')
-                
+
                 return !shouldIgnore
             })
 
@@ -204,8 +253,8 @@ function plugin(hook, vm) {
                         viewFullImageSpanInnerImgDiv.style.backgroundImage = 'url(' + imgArray[newImgIndex].src + ')'
                         viewFullImageSpanInnerTextDiv.innerHTML = (newImgIndex + 1).toString() + ' / ' + arr.length.toString()
                         curImg = imgArray[newImgIndex]
-    
-                        createImageSwitchKeyframe (viewFullImageSpanInnerImgDiv, direction, 'url(' + imgArray[index].src + ')', 'url(' + imgArray[newImgIndex].src + ')')
+
+                        createImageSwitchKeyframe(viewFullImageSpanInnerImgDiv, direction, 'url(' + imgArray[index].src + ')', 'url(' + imgArray[newImgIndex].src + ')')
                         return true
                     }
                 })
@@ -218,9 +267,11 @@ function plugin(hook, vm) {
         viewFullImageSpan.onclick = async function (e) {
             if (notPreventParentOnClickEventElementId.indexOf(e.target.id) === -1) return
             if (curImg === undefined) return
-            createImageOpenCloseKeyframe (curImg, viewFullImageSpanInnerImgDiv, false)
+            createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, false)
             await new Promise(r => setTimeout(r, keyframeDuration))
             this.style.display = 'none'
+
+            unlockScroll()
         }
 
         let touchStartX, touchEndX
@@ -250,11 +301,11 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         Array.from(document.getElementsByTagName('img')).filter(img => {
-            const shouldIgnore = 
+            const shouldIgnore =
                 img.classList.contains('ignore-view-full-image-img') ||
                 img.className.includes('emoji') ||
                 img.src.includes('avatars.githubusercontent')
-            
+
             return !shouldIgnore
         }).forEach((img, index, arr) => {
             let viewFullImageSpan = document.getElementById('view-full-image-span')
@@ -267,7 +318,9 @@ function plugin(hook, vm) {
                 viewFullImageSpan.style.display = 'block'
                 viewFullImageSpanInnerTextDiv.innerHTML = (index + 1).toString() + ' / ' + arr.length.toString()
 
-                createImageOpenCloseKeyframe (curImg, viewFullImageSpanInnerImgDiv, true)
+                lockScroll()
+
+                createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, true)
             })
         })
     })

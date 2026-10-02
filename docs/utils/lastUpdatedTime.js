@@ -1,17 +1,29 @@
 import pathNameData from '../config/tocdata.json.js'
 
 function plugin(hook, vm) {
-    hook.afterEach(async function (html, next) {
+    const codeMarkup = /(```[\s\S]*?```)/g
 
-        let updated = '---'
+    hook.beforeEach(function (content) {
+        const matched = pathNameData.find(item => item.href === vm.route.path)
+        const updated = (matched && matched.editedTime) ? matched.editedTime : '---'
 
-        let file = vm.route.path
+        // 1. 保护代码块
+        const codeBlocks = []
+        content = content.replace(codeMarkup, (block) => {
+            const marker = `<!-- last-updated-code-${codeBlocks.length} -->`
+            codeBlocks.push(block)
+            return marker
+        })
 
-        let matched = pathNameData.find(item => item.href === file)
+        // 2. 替换占位符
+        content = content.replace(/{docsify-last-updated}/g, () => updated)
 
-        updated = matched ? matched.editedTime : '---'
+        // 3. 还原代码块
+        codeBlocks.forEach((block, i) => {
+            content = content.replace(`<!-- last-updated-code-${i} -->`, () => block)
+        })
 
-        next(html.replace(/{docsify-last-updated}/g, updated))
+        return content
     })
 }
 

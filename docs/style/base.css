@@ -4,20 +4,9 @@
 }
 
 :root {
-    /* ===== 主题色相关变量：包括透明度，以及从亮、饱和到暗、灰 ===== */
-    --global-theme-color-blur: color-mix(in srgb,
-            var(--theme-color) 10%,
-            transparent);
-    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + 32), 100) clamp(0, calc(l + 18), 100));
-    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + 24), 100) clamp(0, calc(l + 12), 100));
-    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + 14), 100) clamp(0, calc(l + 6), 100));
-    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + 6), 100) clamp(0, calc(l + 3), 100));
-    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s - 8), 100) clamp(0, calc(l - 8), 100));
-    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s - 18), 100) clamp(0, calc(l - 18), 100));
-    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s - 32), 100) clamp(0, calc(l - 30), 100));
-    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s - 48), 100) clamp(0, calc(l - 44), 100));
-
-    /* ===== 主题颜色变量：换主题只改这一段 ===== */
+    /* ============================================================
+     *  主题颜色变量：换主题只改这一段
+     * ============================================================ */
     --bg-color: #fff;
     --text-color: #34495e;
     --heading-color: #2c3e50;
@@ -42,18 +31,99 @@
     --sidebar-toggle-bg: transparent;
     --sidebar-border-color: rgba(0, 0, 0, .07);
     --scrollbar-bg-color: hsla(0, 0%, 53.3%, .1);
+    --cover-link-color: #fff;
 
-    /* ===== 框架变量：保持原样 ===== */
-    --global-el-border-radius: 10px;
-    --global-icon-border-radius: 5px;
-    --global-widget-border-radius: 0.3em;
-    --global-avatar-border-radius: 50%;
-    --global-brightness-blur: 0.85;
+    --token-data-color: #8e908c;
+    --token-number-color: #c76b29;
+    --token-punctuation-color: #525252;
+    --token-property-color: #c08b30;
+    --token-tag-color: #2973b7;
+    --token-selector-color: #6679cc;
+    --token-attr-color: #2973b7;
+    --token-url-color: #22a2c9;
+    --token-keyword-color: #e96900;
+    --token-statement-color: #22a2c9;
+    --token-variable-color: #3d8fd1;
+    --token-inserted-color: #202746;
+    --token-important-color: #c94922;
+
+    /* ============================================================
+     *  主题色相关变量
+     * ============================================================ */
+    --global-theme-color-blur: color-mix(in srgb,
+            var(--theme-color) 10%,
+            transparent);
+    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + 32), 100) clamp(0, calc(l + 18), 100));
+    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + 24), 100) clamp(0, calc(l + 12), 100));
+    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + 14), 100) clamp(0, calc(l + 6), 100));
+    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + 6), 100) clamp(0, calc(l + 3), 100));
+    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s - 8), 100) clamp(0, calc(l - 8), 100));
+    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s - 18), 100) clamp(0, calc(l - 18), 100));
+    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s - 32), 100) clamp(0, calc(l - 30), 100));
+    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s - 48), 100) clamp(0, calc(l - 44), 100));
+
+    /* ============================================================
+     *  框架变量
+     * ============================================================ */
+    --global-font-size: 16px;
+    --global-emoji-size: 1.2em;
+
     --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF-Kana', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
     --global-emoji-font: 'TwitterColorEmoji';
     --global-code-font: 'Menlo', courier, monospace;
     --global-sidebar-title-font: 'WeibeiSC-Bold', serif;
+    --global-cover-font: 'KakuGyoStd', cursive;
+    --global-cover-paragraph-font: 'Claire-Palmer-Script', cursive;
+    --global-sidebar-name-font: 'KouzanBrushFontSousyo', cursive;
+    --global-minority-lang-font: 'GentiumPlus', serif;
+    --global-poem-font: 'HuiZongGong-tc', 'HuiZongGong-sc', cursive;
+    --global-handwriting-font: 'HanyiSentyFlorCalligraphy', cursive;
+
+    --global-font-weight-thin: 100;
+    --global-font-weight-light: 300;
+    --global-font-weight-normal: 400;
+    --global-font-weight-medium: 500;
+    --global-font-weight-semibold: 600;
+    --global-font-weight-bold: 700;
+
+    --global-content-width: 800px;
+    --global-sidebar-width: 300px;
+    --global-sidebar-toggle-width: 284px;
+    --global-cover-ul-width: 500px;
+
+    --global-writing-container-height: 300px;
+    --global-sidenote-width: 400px;
+
+    --global-progress-width: 2px;
+
+    --global-border: 1px solid;
+    --global-border-strong: 2px solid;
+    --global-border-emphasis: 4px solid;
+    --global-border-weak: 1px dotted;
+    --global-border-strong-width: 2px;
+
+    --global-el-border-radius: 0.625rem;
+    --global-icon-border-radius: 0.3125rem;
+    --global-widget-border-radius: 0.3rem;
+    --global-avatar-border-radius: 50%;
+
+    --global-icon-size-large: 100px;
+    --global-icon-size-big: 80px;
+
+    --global-brightness-blur: 0.85;
+    --global-opacity-none: 1;
+    --global-opacity-strong: 0.8;
+    --global-opacity-semistrong: 0.7;
+    --global-opacity-normal: 0.6;
+    --global-opacity-weak: 0.4;
+    --global-opacity-very-weak: 0.3;
+
+    --global-transition-duration-fast: 250ms;
     --global-transition-duration: 500ms;
+    --global-transition-duration-slow: 1s;
+    --global-transition-duration-very-slow: 2s;
+
+    --global-transform-ratio-big: 1.3;
 }
 
 ::selection {
@@ -62,6 +132,7 @@
 }
 
 html {
+    font-size: var(--global-font-size);
     scrollbar-width: thin;
     scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
 }
@@ -77,8 +148,8 @@ body:not(.ready) [data-cloak] {
 }
 
 div#app {
-    font-size: 30px;
-    font-weight: lighter;
+    font-size: 1.875rem;
+    font-weight: var(--global-font-weight-thin);
     margin: 40vh auto;
     text-align: center
 }
@@ -88,7 +159,7 @@ div#app:empty:before {
 }
 
 img.emoji {
-    height: 1.2em
+    height: var(--global-emoji-size)
 }
 
 img.emoji,
@@ -97,34 +168,34 @@ span.emoji {
 }
 
 span.emoji {
-    font-family: var(--global-emoji-font, serif);
-    font-size: 1.2em
+    font-family: var(--global-emoji-font);
+    font-size: var(--global-emoji-size)
 }
 
 .progress {
-    background-color: var(--theme-color, #c7a2ec);
-    height: 2px;
+    background-color: var(--theme-color);
+    height: var(--global-progress-width);
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
-    transition: width .2s, opacity .4s;
+    transition: width var(--global-transition-duration-fast), opacity var(--global-transition-duration);
     width: 0;
     z-index: 999999
 }
 
 .search a {
-    transition-duration: var(--global-transition-duration, 500ms);
+    transition-duration: var(--global-transition-duration);
 }
 
 .search .search-keyword,
 .search a:hover {
-    color: var(--theme-color, #c7a2ec)
+    color: var(--theme-color)
 }
 
 .search .search-keyword {
     font-style: normal;
-    font-weight: 700
+    font-weight: var(--global-font-weight-bold)
 }
 
 body,
@@ -134,8 +205,8 @@ html {
 
 body {
     color: var(--text-color);
-    font-family: var(--global-font, serif);
-    font-size: 16px;
+    font-family: var(--global-font);
+    font-size: 1rem;
     letter-spacing: 0;
     margin: 0;
     overflow-x: hidden
@@ -143,7 +214,7 @@ body {
 
 button,
 textarea {
-    font-family: var(--global-font, serif);
+    font-family: var(--global-font);
 }
 
 img {
@@ -152,17 +223,17 @@ img {
 
 a[disabled] {
     cursor: not-allowed;
-    opacity: .6
+    opacity: var(--global-opacity-normal);
 }
 
 kbd {
-    border: 1px solid var(--border-color-mid);
-    border-radius: 3px;
+    border: var(--global-border) var(--border-color-mid);
+    border-radius: 0.1875rem;
     display: inline-block;
-    font-size: 12px !important;
-    line-height: 12px;
-    margin-bottom: 3px;
-    padding: 3px 5px;
+    font-size: 0.75rem !important;
+    line-height: 0.75rem;
+    margin-bottom: 0.1875rem;
+    padding: 0.1875rem 0.3125rem;
     vertical-align: middle
 }
 
@@ -172,7 +243,7 @@ li input[type=checkbox] {
 }
 
 .app-nav {
-    margin: 25px 60px 0 0;
+    margin: 1.5625rem 3.75rem 0 0;
     position: absolute;
     right: 0;
     text-align: right;
@@ -180,7 +251,7 @@ li input[type=checkbox] {
 }
 
 .app-nav.no-badge {
-    margin-right: 25px
+    margin-right: 1.5625rem
 }
 
 .app-nav p {
@@ -189,7 +260,7 @@ li input[type=checkbox] {
 
 .app-nav>a {
     margin: 0 1rem;
-    padding: 5px 0
+    padding: 0.3125rem 0
 }
 
 .app-nav li,
@@ -201,41 +272,40 @@ li input[type=checkbox] {
 
 .app-nav a {
     color: inherit;
-    font-size: 16px;
+    font-size: 1rem;
     text-decoration: none;
-    transition-duration: var(--global-transition-duration, 500ms);
+    transition-duration: var(--global-transition-duration);
 }
 
 .app-nav a.active,
 .app-nav a:hover {
-    color: var(--theme-color, #c7a2ec)
+    color: var(--theme-color)
 }
 
 .app-nav a.active {
-    border-bottom: 2px solid #c7a2ec;
-    border-bottom: 2px solid var(--theme-color, #c7a2ec)
+    border-bottom: var(--global-border-strong) var(--theme-color)
 }
 
 .app-nav li {
     display: inline-block;
     margin: 0 1rem;
-    padding: 5px 0;
+    padding: 0.3125rem 0;
     position: relative;
     cursor: pointer
 }
 
 .app-nav li ul {
     background-color: var(--bg-color);
-    border: 1px solid;
+    border: var(--global-border);
     border-color: var(--border-color-strong) var(--border-color-strong) var(--border-color-mid);
-    border-radius: 4px;
+    border-radius: 0.25rem;
     box-sizing: border-box;
     display: none;
-    max-height: calc(100vh - 61px);
+    max-height: calc(100vh - 3.8125rem);
     overflow-y: auto;
-    padding: 10px 0;
+    padding: 0.625rem 0;
     position: absolute;
-    right: -15px;
+    right: -0.9375rem;
     text-align: left;
     top: 100%;
     white-space: nowrap
@@ -243,9 +313,9 @@ li input[type=checkbox] {
 
 .app-nav li ul li {
     display: block;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1rem;
-    margin: 8px 14px;
+    margin: 0.5rem 0.875rem;
     white-space: nowrap
 }
 
@@ -274,15 +344,14 @@ li input[type=checkbox] {
 }
 
 .github-corner:hover .octo-arm {
-    animation: octocat-wave .56s ease-in-out
+    animation: octocat-wave var(--global-transition-duration) ease-in-out
 }
 
 .github-corner svg {
     color: var(--bg-color);
-    fill: #c7a2ec;
-    fill: var(--theme-color, #c7a2ec);
-    height: 80px;
-    width: 80px
+    fill: var(--theme-color);
+    height: var(--global-icon-size-big);
+    width: var(--global-icon-size-big)
 }
 
 main {
@@ -301,7 +370,7 @@ main.hidden {
     display: inline-block;
     text-decoration: underline;
     text-decoration-color: transparent;
-    transition-duration: var(--global-transition-duration, 500ms);
+    transition-duration: var(--global-transition-duration);
 }
 
 .anchor span {
@@ -309,26 +378,29 @@ main.hidden {
 }
 
 .anchor:hover {
-    text-decoration-color: var(--theme-color, #c7a2ec);
+    text-decoration-color: var(--theme-color);
 }
 
 .sidebar {
-    border-right: 1px solid var(--sidebar-border-color);
+    color: var(--sidebar-title-color);
+    border-right: var(--global-border) var(--sidebar-border-color);
     overflow-y: auto;
-    padding: 40px 0 0;
+    padding: 2.5rem 0 0;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    transition: transform .25s ease-out;
-    width: 300px;
-    z-index: 20
+    transition: transform var(--global-transition-duration-fast) ease-out;
+    width: var(--global-sidebar-width);
+    z-index: 20;
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
 }
 
 .sidebar>h1 {
     margin: 0 auto 1rem;
     font-size: 1.5rem;
-    font-weight: 300;
+    font-weight: var(--global-font-weight-light);
     text-align: center
 }
 
@@ -343,8 +415,8 @@ main.hidden {
 }
 
 .sidebar .sidebar-nav {
-    line-height: 2em;
-    padding-bottom: 40px
+    line-height: 2rem;
+    padding-bottom: 2.5rem
 }
 
 .sidebar li.collapse .app-sub-sidebar {
@@ -352,21 +424,22 @@ main.hidden {
 }
 
 .sidebar ul {
-    margin: 0 0 0 10px;
+    margin: 0 0 0 0.625rem;
     padding: 0
 }
+
 .sidebar ul li>* {
-    padding-left: 5px
+    padding-left: 0.3125rem
 }
 
 .sidebar li>p {
-    font-family: var(--global-sidebar-title-font, 'WeibeiSC-Bold', serif);
+    font-family: var(--global-sidebar-title-font);
     font-size: 1.25rem;
     max-width: 95%;
-    margin: 10px 0;
+    margin: 0.625rem 0;
     padding-right: 5%;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--border-color, #eee);
+    padding-bottom: 0.3125rem;
+    border-bottom: var(--global-border) var(--border-color);
 }
 
 .sidebar ul,
@@ -379,40 +452,35 @@ main.hidden {
     display: block
 }
 
-.sidebar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
-}
-
 .sidebar-toggle {
     background-color: var(--sidebar-toggle-bg);
     border: 0;
     outline: none;
-    padding: 10px;
+    padding: 0.625rem;
     position: absolute;
     bottom: 0;
     left: 0;
     text-align: center;
-    transition: opacity .3s;
-    width: 284px;
+    transition: opacity var(--global-transition-duration-fast);
+    width: var(--global-sidebar-toggle-width);
     z-index: 30;
     cursor: pointer
 }
 
 .sidebar-toggle:hover .sidebar-toggle-button {
-    opacity: .4
+    opacity: var(--global-opacity-weak);
 }
 
 .sidebar-toggle-button {
-    transition-duration: var(--global-transition-duration, 500ms);
+    transition-duration: var(--global-transition-duration);
 }
 
 .sidebar-toggle span {
-    background-color: var(--theme-color, #c7a2ec);
+    background-color: var(--theme-color);
     display: block;
-    margin-bottom: 4px;
-    width: 16px;
-    height: 2px
+    margin-bottom: 0.25rem;
+    width: 1rem;
+    height: 0.125rem;
 }
 
 body.sticky .sidebar,
@@ -421,19 +489,19 @@ body.sticky .sidebar-toggle {
 }
 
 .content {
-    padding-top: 60px;
+    padding-top: 3.75rem;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 300px;
-    transition: left .25s ease
+    left: var(--global-sidebar-width);
+    transition: left var(--global-transition-duration-fast) ease
 }
 
 .markdown-section {
     margin: 0 auto;
-    max-width: 800px !important;
-    padding: 30px 15px 40px;
+    max-width: var(--global-content-width);
+    padding: 1.875rem 0.9375rem 2.5rem;
     position: relative
 }
 
@@ -448,12 +516,12 @@ body.sticky .sidebar-toggle {
 
 .markdown-section hr {
     border: none;
-    border-bottom: 1px solid var(--border-color);
-    margin: 2em 0
+    border-bottom: var(--global-border) var(--border-color);
+    margin: 2rem 0
 }
 
 .markdown-section iframe {
-    border: 1px solid var(--border-color);
+    border: var(--global-border) var(--border-color);
     width: 1px;
     min-width: 100%
 }
@@ -469,17 +537,17 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section th {
-    font-weight: 700
+    font-weight: var(--global-font-weight-bold);
 }
 
 .markdown-section td,
 .markdown-section th {
-    border: 1px solid var(--border-color-strong);
-    padding: 6px 13px
+    border: var(--global-border) var(--border-color-strong);
+    padding: 0.375rem 0.8125rem
 }
 
 .markdown-section tr {
-    border-top: 1px solid var(--border-color-mid)
+    border-top: var(--global-border) var(--border-color-mid)
 }
 
 .markdown-section p.tip,
@@ -490,10 +558,10 @@ body.sticky .sidebar-toggle {
 
 .markdown-section p.tip,
 .markdown-section p.warn {
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    margin: 2em 0;
-    padding: 12px 24px 12px 42px;
+    border-bottom-right-radius: 0.125rem;
+    border-top-right-radius: 0.125rem;
+    margin: 2rem 0;
+    padding: 0.75rem 1.5rem 0.75rem 2.625rem;
     position: relative
 }
 
@@ -501,14 +569,14 @@ body.sticky .sidebar-toggle {
 .markdown-section p.warn:before {
     border-radius: 100%;
     font-family: var(--global-code-font);
-    font-size: 1em;
-    font-weight: 700;
-    left: 12px;
-    line-height: 20px;
+    font-size: 1rem;
+    font-weight: var(--global-font-weight-bold);
+    left: 0.75rem;
+    line-height: 1.25rem;
     position: absolute;
-    height: 20px;
-    width: 20px;
-    top: 0.8em;
+    height: 1.25rem;
+    width: 1.25rem;
+    top: 0.8rem;
     text-align: center
 }
 
@@ -523,11 +591,11 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip {
-    border-left: 4px solid var(--accent-color);
+    border-left: var(--global-border-emphasis) var(--accent-color);
 }
 
 .markdown-section p.warn {
-    border-left: 4px solid var(--info-color);
+    border-left: var(--global-border-emphasis) var(--info-color);
 }
 
 .markdown-section p.tip:before {
@@ -547,7 +615,7 @@ body.sticky .sidebar-toggle {
 }
 
 body.close .sidebar {
-    transform: translateX(-300px)
+    transform: translateX(calc(-1 * var(--global-sidebar-width)))
 }
 
 body.close .sidebar-toggle {
@@ -577,11 +645,11 @@ body.close .content {
     }
 
     .app-nav {
-        margin-top: 16px
+        margin-top: 1rem
     }
 
     .app-nav li ul {
-        top: 30px
+        top: 1.875rem
     }
 
     main {
@@ -591,42 +659,42 @@ body.close .content {
     }
 
     .sidebar {
-        left: -300px;
-        transition: transform .25s ease-out
+        left: calc(-1 * var(--global-sidebar-width));
+        transition: transform var(--global-transition-duration-fast) ease-out
     }
 
     .content {
         left: 0;
         max-width: 100vw;
         position: static;
-        padding-top: 20px;
-        transition: transform .25s ease
+        padding-top: 1.25rem;
+        transition: transform var(--global-transition-duration-fast) ease
     }
 
     .app-nav,
     .github-corner {
-        transition: transform .25s ease-out
+        transition: transform var(--global-transition-duration-fast) ease-out
     }
 
     .sidebar-toggle {
         background-color: transparent;
         width: auto;
-        padding: 30px 30px 10px 10px
+        padding: 1.875rem 1.875rem 0.625rem 0.625rem
     }
 
     body.close .sidebar {
-        transform: translateX(300px)
+        transform: translateX(var(--global-sidebar-width))
     }
 
     body.close .sidebar-toggle {
         background-color: var(--sidebar-toggle-bg);
-        transition: background-color 1s;
-        width: 284px;
-        padding: 10px
+        transition: background-color var(--global-transition-duration-slow);
+        width: var(--global-sidebar-toggle-width);
+        padding: 0.625rem
     }
 
     body.close .content {
-        transform: translateX(300px)
+        transform: translateX(var(--global-sidebar-width))
     }
 
     body.close .app-nav,
@@ -639,7 +707,7 @@ body.close .content {
     }
 
     .github-corner .octo-arm {
-        animation: octocat-wave .56s ease-in-out
+        animation: octocat-wave var(--global-transition-duration) ease-in-out
     }
 }
 
@@ -678,7 +746,7 @@ section.cover.show {
 
 section.cover.has-mask .mask {
     background-color: var(--bg-color);
-    opacity: .8;
+    opacity: var(--global-opacity-strong);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -687,7 +755,7 @@ section.cover.has-mask .mask {
 
 section.cover .cover-main {
     flex: 1;
-    margin: 0 16px;
+    margin: 0 1rem;
     text-align: center;
     position: relative
 }
@@ -703,13 +771,13 @@ section.cover a:hover {
 
 section.cover p {
     line-height: 1.5rem;
-    margin: 1em 0
+    margin: 1rem 0
 }
 
 section.cover h1 {
     color: inherit;
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: var(--global-font-weight-light);
     margin: .625rem 0 2.5rem;
     position: relative;
     text-align: center
@@ -733,34 +801,33 @@ section.cover blockquote {
 section.cover ul {
     line-height: 1.8;
     list-style-type: none;
-    margin: 1em auto;
-    max-width: 500px;
+    margin: 1rem auto;
+    max-width: var(--global-cover-ul-width);
     padding: 0
 }
 
 section.cover .cover-main>p:last-child a {
     border-radius: 2rem;
-    border: 1px solid #c7a2ec;
-    border-color: var(--theme-color, #c7a2ec);
+    border: var(--global-border) var(--theme-color);
     box-sizing: border-box;
-    color: var(--theme-color, #c7a2ec);
+    color: var(--theme-color);
     display: inline-block;
     font-size: 1.05rem;
     letter-spacing: .1rem;
     margin: .5rem 1rem;
     padding: .75em 2rem;
     text-decoration: none;
-    transition: all .15s ease
+    transition: all var(--global-transition-duration-fast) ease
 }
 
 section.cover .cover-main>p:last-child a:last-child {
-    background-color: var(--theme-color, #c7a2ec);
-    color: #fff
+    background-color: var(--theme-color);
+    color: var(--cover-link-color);
 }
 
 section.cover .cover-main>p:last-child a:last-child:hover {
     color: inherit;
-    opacity: .8
+    opacity: var(--global-opacity-strong);
 }
 
 section.cover .cover-main>p:last-child a:hover {
@@ -768,13 +835,12 @@ section.cover .cover-main>p:last-child a:hover {
 }
 
 section.cover blockquote>p>a {
-    border-bottom: 2px solid #c7a2ec;
-    border-bottom: 2px solid var(--theme-color, #c7a2ec);
-    transition: color .3s
+    border-bottom: var(--global-border-strong) var(--theme-color);
+    transition: color var(--global-transition-duration-fast);
 }
 
 section.cover blockquote>p>a:hover {
-    color: var(--theme-color, #c7a2ec)
+    color: var(--theme-color)
 }
 
 .sidebar,
@@ -782,39 +848,35 @@ body {
     background-color: var(--bg-color)
 }
 
-.sidebar {
-    color: var(--sidebar-title-color)
-}
-
 .sidebar li {
-    margin: 6px 0
+    margin: 0.375rem 0
 }
 
 .sidebar ul li a {
     color: var(--sidebar-text-color);
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 0.875rem;
+    font-weight: var(--global-font-weight-normal);
     overflow: hidden;
     text-decoration: underline;
     text-decoration-color: transparent;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: text-decoration-color var(--global-transition-duration, 500ms);
+    transition: text-decoration-color var(--global-transition-duration);
 }
 
 .sidebar ul li a:hover {
-    text-decoration-color: var(--theme-color, #c7a2ec);
+    text-decoration-color: var(--theme-color);
 }
 
 .sidebar ul li.active>a {
-    color: var(--theme-color, #c7a2ec);
-    font-weight: 600;
-    border-left: 2px solid;
-    margin-left: -2px;
+    color: var(--theme-color);
+    font-weight: var(--global-font-weight-semibold);
+    border-left: var(--global-border-strong);
+    margin-left: calc(-1 * var(--global-border-strong-width));
 }
 
 .app-sub-sidebar li:before {
-    padding-right: 4px;
+    padding-right: 0.25rem;
     float: left
 }
 
@@ -824,12 +886,12 @@ body {
 .markdown-section h4,
 .markdown-section strong {
     color: var(--heading-color);
-    font-weight: 600
+    font-weight: var(--global-font-weight-semibold)
 }
 
 .markdown-section a {
-    color: var(--theme-color, #c7a2ec);
-    font-weight: 600
+    color: var(--theme-color);
+    font-weight: var(--global-font-weight-semibold)
 }
 
 .markdown-section h1 {
@@ -839,22 +901,22 @@ body {
 
 .markdown-section h2 {
     font-size: 1.75rem;
-    margin: 45px 0 1.2rem
+    margin: 2.8125rem 0 1.2rem
 }
 
 .markdown-section h3 {
     font-size: 1.5rem;
-    margin: 40px 0 1.2rem
+    margin: 2.5rem 0 1.2rem
 }
 
 .markdown-section h4 {
     font-size: 1.25rem;
-    margin: 35px 0 1.2rem
+    margin: 2.1875rem 0 1.2rem
 }
 
 .markdown-section h5 {
     font-size: 1rem;
-    margin: 35px 0 1.2rem
+    margin: 2.1875rem 0 1.2rem
 }
 
 .markdown-section h6 {
@@ -865,7 +927,7 @@ body {
 
 .markdown-section figure,
 .markdown-section p {
-    margin: 1.2em 0
+    margin: 1.2rem 0
 }
 
 .markdown-section ol,
@@ -878,7 +940,7 @@ body {
 .markdown-section ol,
 .markdown-section ul {
     padding-left: 1.5rem;
-    margin: 1.2em 0
+    margin: 1.2rem 0
 }
 
 .markdown-section ol {
@@ -906,23 +968,23 @@ body {
 }
 
 .markdown-section blockquote {
-    border-left: 4px solid var(--theme-color, #c7a2ec);
+    border-left: var(--global-border-emphasis) var(--theme-color);
     color: var(--muted-color);
-    margin: 2em 0;
-    padding-left: 20px
+    margin: 2rem 0;
+    padding-left: 1.25rem
 }
 
 .markdown-section blockquote p {
-    font-weight: 600;
+    font-weight: var(--global-font-weight-semibold);
     margin-left: 0
 }
 
 .markdown-section blockquote blockquote {
-    margin: -1em 0;
+    margin: -1rem 0;
 }
 
 .markdown-section iframe {
-    margin: 1.2em 0
+    margin: 1.2rem 0
 }
 
 .markdown-section em {
@@ -942,21 +1004,21 @@ body {
 
 .markdown-section output,
 .markdown-section pre {
-    margin: 1.2em 0;
+    margin: 1.2rem 0;
     position: relative
 }
 
 .markdown-section output,
 .markdown-section pre>code {
-    border-radius: 2px;
+    border-radius: 0.125rem;
     display: block
 }
 
 .markdown-section code {
-    border-radius: 2px;
+    border-radius: 0.125rem;
     color: var(--inline-code-color);
-    margin: 0 2px;
-    padding: 3px 5px;
+    margin: 0 0.125rem;
+    padding: 0.1875rem 0.3125rem;
     white-space: pre-wrap
 }
 
@@ -974,9 +1036,9 @@ body {
 .markdown-section pre>code {
     color: var(--code-text-color);
     font-size: .8rem;
-    padding: 2.2em 5px;
+    padding: 1.76rem 0.3125rem;
     line-height: inherit;
-    margin: 0 2px;
+    margin: 0 0.125rem;
     max-width: inherit;
     overflow: inherit;
     white-space: inherit
@@ -985,7 +1047,7 @@ body {
 .markdown-section output {
     padding: 1.7rem 1.4rem;
     background-color: var(--zebra-bg);
-    border: 1px solid var(--border-color-mid)
+    border: var(--global-border) var(--border-color-mid)
 }
 
 .markdown-section output>:first-child {
@@ -1007,10 +1069,10 @@ body {
 .markdown-section pre:after {
     color: var(--border-color-mid);
     font-size: .6rem;
-    font-weight: 600;
-    height: 15px;
-    line-height: 15px;
-    padding: 5px 10px 0;
+    font-weight: var(--global-font-weight-semibold);
+    height: 0.9375rem;
+    line-height: 0.9375rem;
+    padding: 0.3125rem 0.625rem 0;
     position: absolute;
     right: 0;
     text-align: right;
@@ -1021,11 +1083,11 @@ body {
 .markdown-section mark {
     padding: 0.3em 0.2em 0;
     background-color: var(--global-theme-color-2);
-    border-radius: 2px;
+    border-radius: 0.125rem;
 }
 
 .markdown-section details {
-    margin: 1.2em 0;
+    margin: 1.2rem 0;
 }
 
 .markdown-section summary {
@@ -1044,8 +1106,8 @@ body {
     position: absolute;
     left: 0;
     top: 0;
-    width: 20px;
-    height: 18px;
+    width: 1.25rem;
+    height: 1.125rem;
 
     background: currentColor;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 4 L16 10 L5 16 Z' fill='black' stroke='black' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
@@ -1064,12 +1126,17 @@ body {
     blockquote,
     li,
     table {
+
         a {
             color: inherit;
             font-weight: inherit;
-            text-decoration-color: var(--theme-color, #ea6f5a);
+            text-decoration-color: var(--theme-color);
             text-decoration-thickness: .15em;
-            transition-duration: var(--global-transition-duration, 500ms);
+            transition-duration: var(--global-transition-duration);
+        }
+
+        a:hover {
+            text-decoration-color: var(--global-theme-color-7);
         }
 
         svg {
@@ -1080,86 +1147,74 @@ body {
     }
 }
 
-.markdown-section {
-
-    p,
-    blockquote,
-    li,
-    table {
-        a:hover {
-            text-decoration-color: var(--global-theme-color-7);
-        }
-    }
-}
-
 .token.cdata,
 .token.comment,
 .token.doctype,
 .token.prolog {
-    color: #8e908c
+    color: var(--token-data-color)
 }
 
 .token.namespace {
-    opacity: .7
+    opacity: var(--global-opacity-semistrong)
 }
 
 .token.boolean,
 .token.number {
-    color: #c76b29
+    color: var(--token-number-color);
 }
 
 .token.punctuation {
-    color: #525252
+    color: var(--token-punctuation-color);
 }
 
 .token.property {
-    color: #c08b30
+    color: var(--token-property-color);
 }
 
 .token.tag {
-    color: #2973b7
+    color: var(--token-tag-color);
 }
 
 .token.string {
-    color: var(--theme-color, #c7a2ec)
+    color: var(--theme-color)
 }
 
 .token.selector {
-    color: #6679cc
+    color: var(--token-selector-color);
 }
 
 .token.attr-name {
-    color: #2973b7
+    color: var(--token-attr-color);
 }
 
 .language-css .token.string,
 .style .token.string,
 .token.entity,
 .token.url {
-    color: #22a2c9
+    color: var(--token-url-color);
 }
 
 .token.attr-value,
 .token.control,
 .token.directive,
 .token.unit {
-    color: var(--theme-color, #c7a2ec)
+    color: var(--theme-color)
 }
 
 .token.function,
 .token.keyword {
-    color: #e96900
+    color: var(--token-keyword-color);
 }
 
 .token.atrule,
 .token.regex,
 .token.statement {
-    color: #22a2c9
+    color: var(--token-statement-color);
 }
 
 .token.placeholder,
 .token.variable {
-    color: #3d8fd1
+    color: var(--token-variable-color);
 }
 
 .token.deleted {
@@ -1167,7 +1222,7 @@ body {
 }
 
 .token.inserted {
-    border-bottom: 1px dotted #202746;
+    border-bottom: var(--global-border-weak) var(--token-inserted-color);
     text-decoration: none
 }
 
@@ -1177,11 +1232,11 @@ body {
 
 .token.bold,
 .token.important {
-    font-weight: 700
+    font-weight: var(--global-font-weight-bold)
 }
 
 .token.important {
-    color: #c94922
+    color: var(--token-important-color);
 }
 
 .token.entity {
@@ -1195,12 +1250,12 @@ code .token {
 }
 
 nav.app-nav li ul {
-    min-width: 120px;
+    min-width: 7.5rem;
 }
 
 iframe,
 img,
 video,
 pre {
-    border-radius: var(--global-el-border-radius, 10px);
+    border-radius: var(--global-el-border-radius);
 }

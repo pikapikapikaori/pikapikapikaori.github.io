@@ -53,6 +53,12 @@ pre .docsify-copy-code-button span {
     --docsify-example-panels-document-width: var(--global-content-width);
 }
 
+@media screen and (max-width: 768px) {
+    :root {
+        --docsify-example-panels-document-width: 80%;
+    }
+}
+
 .docsify-example-panels .left-panel,
 .docsify-example-panels .right-panel {
     padding-bottom: 0;

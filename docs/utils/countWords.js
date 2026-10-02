@@ -2,10 +2,8 @@
 let countWordsOptions = {
     countable: true,
     position: 'top',
-    margin: '10px',
     float: 'right',
     fontsize: '0.9em',
-    color: 'rgb(90,90,90)',
     localization: {
         words: 'words',
         minute: 'min',
@@ -21,9 +19,10 @@ function plugin(hook, vm) {
     let wordsCount
     hook.beforeEach(function (content) {
         // Match regex every time you start parsing .md
-        wordsCount = content.match(
+        const matches = content.match(
             /([\u0800-\u4e00]+?|[\u4e00-\u9fa5]+?|[a-zA-Z0-9]+)/g
-        ).length
+        )
+        wordsCount = matches ? matches.length : 0
         return content
     })
     hook.doneEach(function () {
@@ -60,12 +59,10 @@ function plugin(hook, vm) {
         next(
             `
         ${countWordsOptions.position === 'bottom' ? html : ''}
-        <div id="count-words-block-span-div" style="margin-${countWordsOptions.position ? 'bottom' : 'top'}: ${countWordsOptions.margin
-        };">
+        <div id="count-words-block-span-div">
             <span id="count-words-block-span" style="
-                  float: ${countWordsOptions.float === 'right' ? 'right' : 'left'};
-                  font-size: ${countWordsOptions.fontsize};
-                  color:${countWordsOptions.color};">
+                float: ${countWordsOptions.float === 'right' ? 'right' : 'left'};
+                font-size: ${countWordsOptions.fontsize};">
             </span>
             <div style="clear: both"></div>
         </div>

@@ -49,7 +49,7 @@
 }
 
 #gitalk-container .gt-container .gt-comment-username {
-    color: inherit;
+    color: var(--heading-color);
     font-weight: var(--global-font-weight-semibold);
 }
 
@@ -58,7 +58,7 @@
 }
 
 #gitalk-container .gt-container .gt-ico-github .gt-svg svg {
-    fill: var(--gitalk-github-color);
+    fill: var(--theme-color);
 }
 
 #gitalk-container .gt-container .gt-svg svg {

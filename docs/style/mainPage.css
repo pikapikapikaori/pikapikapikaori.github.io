@@ -213,7 +213,7 @@ div:has(.writing-direction-vertical-div) {
     border: var(--global-border) var(--theme-color);
     background-color: var(--global-theme-color-blur);
     border-radius: var(--global-el-border-radius);
-    margin: 0 auto 1.25rem;
+    margin: 1.2rem auto 1.25rem;
     max-width: var(--global-sidenote-width);
     text-align: center;
 }

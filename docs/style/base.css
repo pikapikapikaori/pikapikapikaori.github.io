@@ -75,9 +75,11 @@
     --global-cover-font: 'KakuGyoStd', cursive;
     --global-cover-paragraph-font: 'Claire-Palmer-Script', cursive;
     --global-sidebar-name-font: 'KouzanBrushFontSousyo', cursive;
+    --global-classic-font: 'CormorantGaramond', serif;
     --global-minority-lang-font: 'GentiumPlus', serif;
     --global-poem-font: 'HuiZongGong-tc', 'HuiZongGong-sc', cursive;
     --global-handwriting-font: 'HanyiSentyFlorCalligraphy', cursive;
+    --global-fancy-font: 'HYLuoHuaShiW', cursive;
 
     --global-font-weight-thin: 100;
     --global-font-weight-light: 300;
@@ -136,6 +138,8 @@
     --global-transition-duration: 500ms;
     --global-transition-duration-slow: 1s;
     --global-transition-duration-very-slow: 2s;
+    --global-transition-duration-super-slow: 3s;
+    --global-transition-duration-most-slow: 5s;
 
     --global-transform-ratio-big: 1.3;
     --global-transform-ratio-normal: 1.2;
@@ -143,7 +147,13 @@
     --global-transform-ratio-very-small: 1.03;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1300px) {
+    :root:has(> body:not(.close, .force-close)) {
+        --global-content-width: 80%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
     :root {
         --global-content-width: 80%;
     }

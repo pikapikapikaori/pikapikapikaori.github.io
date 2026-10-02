@@ -127,4 +127,4 @@ window.$docsify['tocSwitcher'] = Object.assign(
     tocSwitcherOptions,
     window.$docsify['tocSwitcher']
 )
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

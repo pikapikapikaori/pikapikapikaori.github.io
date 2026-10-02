@@ -77,4 +77,4 @@ window.$docsify['countWords'] = Object.assign(
     countWordsOptions,
     window.$docsify['countWords']
 )
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

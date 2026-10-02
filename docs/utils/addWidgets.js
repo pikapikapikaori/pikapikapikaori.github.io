@@ -612,4 +612,4 @@ window.$docsify['addWidgets'] = Object.assign(
     addWidgetsOptions,
     window.$docsify['addWidgets']
 )
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

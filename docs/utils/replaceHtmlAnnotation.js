@@ -153,7 +153,7 @@ function renderStage1(content) {
     }
 
     codeBlockMarkers.forEach((marker, i) => {
-        content = content.replace(marker, codeBlockMatch[i])
+        content = content.replace(marker, () => codeBlockMatch[i])
     })
 
     return content
@@ -167,7 +167,7 @@ function renderStage2(html) {
 
         const fullComment = match[0]
         const realHtml = match[1] || ''
-        html = html.replace(fullComment, realHtml)
+        html = html.replace(fullComment, () => realHtml)
     }
     return html
 }
@@ -214,4 +214,4 @@ function plugin(hook, vm) {
     })
 }
 
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

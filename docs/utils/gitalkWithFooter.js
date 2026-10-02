@@ -61,4 +61,4 @@ window.$docsify['gitalkWithFooter'] = Object.assign(
     gitalkWithFooterOptions,
     window.$docsify['gitalkWithFooter']
 )
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

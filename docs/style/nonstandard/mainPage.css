@@ -13,34 +13,34 @@
 
 /* Cover */
 .cover-page-scroll-down-chevron {
-    -webkit-animation: moveChevron 2s infinite;
+    -webkit-animation: moveChevron var(--global-transition-duration-very-slow) infinite;
 }
 
 @-webkit-keyframes moveChevron {
     0% {
-        top: 0px;
-        opacity: 0.3;
+        top: 0;
+        opacity: var(--global-opacity-very-weak);
     }
 
     50% {
-        top: 15px;
-        opacity: 1;
+        top: 0.9375rem;
+        opacity: var(--global-opacity-none);
     }
 
     100% {
-        top: 0px;
-        opacity: 0.3;
+        top: 0;
+        opacity: var(--global-opacity-very-weak);
     }
 }
 
 /* About Page */
 .main-page-about-me-links>a>svg:hover {
-    -webkit-transform: scale(1.3);
+    -webkit-transform: scale(var(--global-transform-ratio-big));
 }
 
 /* Microsoft Edge-specific properties */
 
 /* About Page */
 .main-page-about-me-links>a>svg:hover {
-    -ms-transform: scale(1.3);
+    -ms-transform: scale(var(--global-transform-ratio-big));
 }

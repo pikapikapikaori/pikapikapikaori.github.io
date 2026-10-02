@@ -2,8 +2,10 @@ import pathNameData from '../config/breadcrumbData.json.js'
 
 function plugin(hook, vm) {
     let isReadme = false
-    
+
     hook.afterEach(function (html, next) {
+
+        isReadme = false
 
         const i18nPathList = ['en-us', 'jp',]
 
@@ -52,9 +54,11 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         if (!isReadme) {
-            let pageTitle = document.getElementById('main').getElementsByTagName('h1')[0].childNodes[0].childNodes[0].innerHTML
+            const mainEl = document.getElementById('main')
+            const h1El = mainEl && mainEl.querySelector('h1')
+            let pageTitle = h1El ? h1El.textContent.trim() : ''
 
-            let breadcrumb =document.getElementsByClassName('breadcrumb')[0]
+            let breadcrumb = document.getElementsByClassName('breadcrumb')[0]
 
             if (pageTitle === '404') {
                 let homePageLi = breadcrumb.querySelector('li:first-child')
@@ -75,6 +79,4 @@ function plugin(hook, vm) {
     })
 }
 
-if (window) {
-    window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
-}
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

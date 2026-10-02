@@ -10,5 +10,5 @@
 /* Webkit-specific properties */
 
 #view-full-image-span {
-    -webkit-backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: var(--global-backdrop-filter);
 }

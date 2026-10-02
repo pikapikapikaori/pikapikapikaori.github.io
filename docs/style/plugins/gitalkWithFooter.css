@@ -1,126 +1,154 @@
-.gt-header-controls-tip {
-    color: var(--theme-color, #ea6f5a) !important;
+:root {
+    --gitalk-github-color: #000;
 }
 
-.gt-link {
-    color: var(--theme-color, #ea6f5a) !important;
-    border-bottom: 1px dotted var(--theme-color, #ea6f5a) !important;
+/* Footer */
+#footer-under-gitalk>div {
+    text-align: center;
+    max-width: var(--global-content-width);
+    width: var(--global-content-width);
+    align-self: center;
+    padding: 1.875rem 0.9375rem 1.25rem;
+    margin: 0 auto
 }
 
-.gt-btn-login {
-    background-color: var(--theme-color, #ea6f5a) !important;
-    border: 1px solid var(--theme-color, #ea6f5a) !important;
+#footer-under-gitalk>div>div {
+    border-top: var(--global-border) var(--border-color);
 }
 
-.gt-btn-preview {
-    color: var(--theme-color, #ea6f5a) !important;
-    border: 1px solid var(--theme-color, #ea6f5a) !important;
+/* Gitalk */
+#gitalk-container {
+    max-width: var(--global-content-width);
+    width: var(--global-content-width);
+    margin: 0 auto 1.25rem;
+    padding: 0 0.9375rem;
 }
 
-.gt-btn-public {
-    background-color: var(--theme-color, #ea6f5a) !important;
-    border-color: var(--theme-color, #ea6f5a) !important;
+#gitalk-container .gt-header-controls-tip {
+    color: var(--theme-color);
 }
 
-.gt-container .gt-comment-username {
-    color: var(--theme-color, #ea6f5a) !important;
+#gitalk-container .gt-link {
+    color: var(--theme-color);
+    border-bottom: var(--global-border-weak) var(--theme-color);
 }
 
-.gt-container .gt-ico-github .gt-svg svg {
-    fill: #000 !important;
+#gitalk-container .gt-btn-login {
+    background-color: var(--theme-color);
+    border: var(--global-border) var(--theme-color);
 }
 
-.gt-container .gt-svg svg {
-    fill: var(--theme-color, #ea6f5a) !important;
+#gitalk-container .gt-btn-preview {
+    color: var(--theme-color);
+    border: var(--global-border) var(--theme-color);
 }
 
-.gt-container a.is--active {
-    color: var(--theme-color, #ea6f5a) !important;
+#gitalk-container .gt-btn-public {
+    background-color: var(--theme-color);
+    border-color: var(--theme-color);
 }
 
-.gt-container a.is--active:before {
-    background: var(--theme-color, #ea6f5a) !important;
+#gitalk-container .gt-container .gt-comment-username {
+    color: var(--heading-color);
+    font-weight: var(--global-font-weight-semibold);
 }
 
-.gt-container a {
-    color: var(--theme-color, #ea6f5a) !important;
+#gitalk-container .gt-container .gt-comment-username:hover {
+    text-decoration: none;
 }
 
-.gt-popup .gt-action {
+#gitalk-container .gt-container .gt-ico-github .gt-svg svg {
+    fill: var(--theme-color);
+}
+
+#gitalk-container .gt-container .gt-svg svg {
+    fill: var(--theme-color);
+}
+
+#gitalk-container .gt-container a.is--active {
+    color: var(--theme-color) !important;
+}
+
+#gitalk-container .gt-container a.is--active:before {
+    background: var(--theme-color) !important;
+}
+
+#gitalk-container .gt-container a {
+    color: inherit;
+    transition-duration: var(--global-transition-duration);
+}
+
+#gitalk-container .gt-container a:hover {
+    color: var(--theme-color);
+}
+
+#gitalk-container .gt-popup .gt-action {
+    color: inherit;
+}
+
+#gitalk-container .gt-popup .gt-action:hover {
+    color: var(--theme-color);
+}
+
+#gitalk-container .gt-container .gt-comment-content {
+    border-radius: var(--global-el-border-radius);
+    background: var(--global-theme-color-blur);
+}
+
+#gitalk-container .gt-container .gt-comment-content:hover {
+    box-shadow: none;
+}
+
+#gitalk-container .gt-container .gt-header-preview {
+    border-radius: var(--global-el-border-radius);
+    color: inherit;
+    height: 4.5rem;
+}
+
+#gitalk-container .gt-container .gt-header-textarea {
+    border-radius: var(--global-el-border-radius);
+    color: inherit;
+}
+
+#gitalk-container .gt-popup {
+    border-radius: var(--global-icon-border-radius);
+}
+
+#gitalk-container .gt-container .gt-comment-content .gt-comment-body {
     color: inherit !important;
-    transition-duration: var(--global-transition-duration, 500ms);
 }
 
-.gt-popup .gt-action:hover {
-    color: var(--theme-color, #ea6f5a) !important;
-}
-
-.gt-container .gt-comment-content {
-    border-radius: var(--global-el-border-radius, 10px);
-}
-
-.gt-container .gt-comment-content:hover {
-    box-shadow: none !important;
-}
-
-.gt-container .gt-header-preview {
-    border-radius: var(--global-el-border-radius, 10px) !important;
-    color: inherit !important;
-    height: 72px;
-}
-
-.gt-container .gt-header-textarea  {
-    border-radius: var(--global-el-border-radius, 10px) !important;
-    color: inherit !important;
-}
-
-.gt-popup {
-    border-radius: var(--global-icon-border-radius, 5px);
-}
-
-.gt-container .gt-comment-content {
-    background: var(--global-theme-color-blur, #c7a2ec1a) !important;
-}
-
-.gt-container .gt-comment-admin .gt-comment-username::after {
-    content: ' ☖';
-}
-
-.gt-container .gt-comment-content .gt-comment-body {
-    color: inherit !important;
-}
-
-.gt-container .gt-popup {
-    background-color: var(--bg-color) !important;
+#gitalk-container .gt-container .gt-popup {
+    background-color: var(--bg-color);
     border-color: var(--border-color);
 }
 
-.gt-container .gt-popup .gt-copyright {
+#gitalk-container .gt-container .gt-popup .gt-copyright {
     border-color: var(--border-color);
 }
 
-.gt-container .gt-popup .gt-copyright .gt-version {
+#gitalk-container .gt-container .gt-popup .gt-copyright .gt-version {
     color: var(--em-color);
 }
 
-.gt-container .gt-btn-preview {
-    background-color: var(--bg-color) !important;
+#gitalk-container .gt-container .gt-btn-preview {
+    background-color: var(--bg-color);
 }
 
-.gt-container {
+#gitalk-container .gt-container {
 
     .gt-header-textarea,
     .gt-header-preview {
-        background-color: var(--zebra-bg) !important;
-        border: 1px solid var(--border-color) !important;
+        background-color: var(--zebra-bg);
+        border: var(--global-border) var(--border-color);
     }
 }
 
-.gt-container .gt-meta {
-    border-bottom: 1px solid var(--border-color) !important;
+#gitalk-container .gt-container .gt-meta {
+    border-bottom: var(--global-border) var(--border-color);
 }
 
-.gt-comments .markdown-body,
-.gt-header .markdown-body {
-    font-family: var(--global-font, serif);
+#gitalk-container .gt-comments .markdown-body,
+#gitalk-container .gt-header .markdown-body {
+    font-family: var(--global-font);
 }

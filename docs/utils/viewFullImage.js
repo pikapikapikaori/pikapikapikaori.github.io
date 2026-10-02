@@ -3,21 +3,61 @@ function plugin(hook, vm) {
 
     let curImg = undefined
 
-    let tarImageTop = '10%'
-    let tarImageLeft = '10%'
-    let tarImageWidth = '80%'
-    let tarImageHeight = '80%'
+    const tarImageTop = '10%'
+    const tarImageLeft = '10%'
+    const tarImageWidth = '80%'
+    const tarImageHeight = '80%'
 
-    let keyframeDuration = 150
-    let tarImageLeftStart = '-90%'
-    let tarImageRightStart = '110%'
+    const keyframeDuration = 150
+    const tarImageLeftStart = '-90%'
+    const tarImageRightStart = '110%'
 
     let scrollLocked = false
     let lockWindowY = 0
     let lockContentY = 0
 
+    let switchImageDirection = null
+
+    // 滚轮节流锁
+    let wheelSwitchCooldown = false
+    let wheelSwitchAccumulated = 0
+    const wheelSwitchCooldownMs = 900
+    const wheelSwitchThreshold = 20
+
     function preventWheel(e) {
         e.preventDefault()
+
+        if (!switchImageDirection || wheelSwitchCooldown) return
+
+        const absX = Math.abs(e.deltaX)
+        const absY = Math.abs(e.deltaY)
+        if (absX === 0 && absY === 0) return
+
+        // 累加主导轴的幅度，微小抖动不触发
+        const dominant = absX > absY ? absX : absY
+        wheelSwitchAccumulated += dominant
+
+        if (wheelSwitchAccumulated < wheelSwitchThreshold) return
+
+        // 达到阈值，重置累加并进入冷却
+        wheelSwitchAccumulated = 0
+        wheelSwitchCooldown = true
+
+        let direction
+        if (absX > absY) {
+            // 横向：向左滑 → 上一张，向右滑 → 下一张
+            direction = e.deltaX < 0
+        } else {
+            // 纵向：向上滚 → 上一张，向下滚 → 下一张
+            direction = e.deltaY < 0
+        }
+
+        switchImageDirection(direction)
+
+        setTimeout(() => {
+            wheelSwitchCooldown = false
+            wheelSwitchAccumulated = 0
+        }, wheelSwitchCooldownMs)
     }
 
     function preventTouchMove(e) {
@@ -25,8 +65,22 @@ function plugin(hook, vm) {
     }
 
     function preventKeyScroll(e) {
-        const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']
-        if (keys.includes(e.key)) e.preventDefault()
+        const scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']
+        if (scrollKeys.includes(e.key)) {
+            e.preventDefault()
+            return
+        }
+
+        if (!switchImageDirection) return
+
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault()
+            switchImageDirection(true)
+        }
+        else if (e.key === 'ArrowRight') {
+            e.preventDefault()
+            switchImageDirection(false)
+        }
     }
 
     function lockScroll() {
@@ -53,7 +107,6 @@ function plugin(hook, vm) {
         window.removeEventListener('touchmove', preventTouchMove)
         window.removeEventListener('keydown', preventKeyScroll)
 
-        // 兜底：万一某些主题/插件在遮罩期间改过位置，恢复回去
         const content = document.querySelector('.content')
         if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
         if (content && content.scrollTop !== lockContentY) content.scrollTop = lockContentY
@@ -62,10 +115,10 @@ function plugin(hook, vm) {
     }
 
     function createImageOpenCloseKeyframe(tarImg, tarEl, isOpen) {
-        let fullImageTop = tarImg.getBoundingClientRect().top + 'px'
-        let fullImageLeft = tarImg.getBoundingClientRect().left + 'px'
-        let fullImageWidth = tarImg.offsetWidth + 'px'
-        let fullImageHeight = tarImg.offsetHeight + 'px'
+        const fullImageTop = tarImg.getBoundingClientRect().top + 'px'
+        const fullImageLeft = tarImg.getBoundingClientRect().left + 'px'
+        const fullImageWidth = tarImg.offsetWidth + 'px'
+        const fullImageHeight = tarImg.offsetHeight + 'px'
 
         if (isOpen) {
             tarEl.animate(
@@ -205,23 +258,23 @@ function plugin(hook, vm) {
     }
 
     hook.mounted(function () {
-        let viewFullImageSpan = document.createElement('span')
+        const viewFullImageSpan = document.createElement('span')
 
         viewFullImageSpan.id = 'view-full-image-span'
 
-        let viewFullImageSpanInnerLeftDiv = document.createElement('div')
-        let viewFullImageSpanInnerRightDiv = document.createElement('div')
+        const viewFullImageSpanInnerLeftDiv = document.createElement('div')
+        const viewFullImageSpanInnerRightDiv = document.createElement('div')
 
         viewFullImageSpanInnerLeftDiv.id = 'view-full-image-span-inner-left-div'
         viewFullImageSpanInnerRightDiv.id = 'view-full-image-span-inner-right-div'
-        viewFullImageSpanInnerLeftDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-        viewFullImageSpanInnerRightDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+        viewFullImageSpanInnerLeftDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+        viewFullImageSpanInnerRightDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
-        let viewFullImageSpanInnerImgDiv = document.createElement('div')
+        const viewFullImageSpanInnerImgDiv = document.createElement('div')
 
         viewFullImageSpanInnerImgDiv.id = 'view-full-image-span-inner-img-div'
 
-        let viewFullImageSpanInnerTextDiv = document.createElement('div')
+        const viewFullImageSpanInnerTextDiv = document.createElement('div')
 
         viewFullImageSpanInnerTextDiv.id = 'view-full-image-span-inner-text-div'
 
@@ -234,10 +287,10 @@ function plugin(hook, vm) {
 
         // true for left button
         function buttonLeftRightOnClick(direction) {
-            let viewFullImageSpanInnerImgDiv = document.getElementById('view-full-image-span-inner-img-div')
-            let viewFullImageSpanInnerTextDiv = document.getElementById('view-full-image-span-inner-text-div')
+            const imgEl = document.getElementById('view-full-image-span-inner-img-div')
+            const textEl = document.getElementById('view-full-image-span-inner-text-div')
 
-            let imgArray = Array.from(document.getElementsByTagName('img')).filter(img => {
+            const imgArray = Array.from(document.getElementsByTagName('img')).filter(img => {
                 const shouldIgnore =
                     img.classList.contains('ignore-view-full-image-img') ||
                     img.className.includes('emoji') ||
@@ -248,21 +301,23 @@ function plugin(hook, vm) {
 
             if (imgArray.length !== 1) {
                 imgArray.some((img, index, arr) => {
-                    if (viewFullImageSpanInnerImgDiv.style.backgroundImage.indexOf(img.src) > -1) {
-                        let newImgIndex = direction ? (index === 0 ? imgArray.length - 1 : index - 1) : (index === imgArray.length - 1 ? 0 : index + 1)
-                        viewFullImageSpanInnerImgDiv.style.backgroundImage = 'url(' + imgArray[newImgIndex].src + ')'
-                        viewFullImageSpanInnerTextDiv.innerHTML = (newImgIndex + 1).toString() + ' / ' + arr.length.toString()
+                    if (imgEl.style.backgroundImage.indexOf(img.src) > -1) {
+                        const newImgIndex = direction ? (index === 0 ? imgArray.length - 1 : index - 1) : (index === imgArray.length - 1 ? 0 : index + 1)
+                        imgEl.style.backgroundImage = 'url(' + imgArray[newImgIndex].src + ')'
+                        textEl.innerHTML = (newImgIndex + 1).toString() + ' / ' + arr.length.toString()
                         curImg = imgArray[newImgIndex]
 
-                        createImageSwitchKeyframe(viewFullImageSpanInnerImgDiv, direction, 'url(' + imgArray[index].src + ')', 'url(' + imgArray[newImgIndex].src + ')')
+                        createImageSwitchKeyframe(imgEl, direction, 'url(' + imgArray[index].src + ')', 'url(' + imgArray[newImgIndex].src + ')')
                         return true
                     }
                 })
-
             }
         }
 
-        let notPreventParentOnClickEventElementId = [viewFullImageSpanInnerImgDiv.id, viewFullImageSpan.id, viewFullImageSpanInnerTextDiv.id,]
+        // 暴露给 preventWheel / preventKeyScroll
+        switchImageDirection = buttonLeftRightOnClick
+
+        const notPreventParentOnClickEventElementId = [viewFullImageSpanInnerImgDiv.id, viewFullImageSpan.id, viewFullImageSpanInnerTextDiv.id]
 
         viewFullImageSpan.onclick = async function (e) {
             if (notPreventParentOnClickEventElementId.indexOf(e.target.id) === -1) return
@@ -308,9 +363,13 @@ function plugin(hook, vm) {
 
             return !shouldIgnore
         }).forEach((img, index, arr) => {
-            let viewFullImageSpan = document.getElementById('view-full-image-span')
-            let viewFullImageSpanInnerImgDiv = document.getElementById('view-full-image-span-inner-img-div')
-            let viewFullImageSpanInnerTextDiv = document.getElementById('view-full-image-span-inner-text-div')
+            if (img.dataset.viewFullImageBound === '1') return
+            img.dataset.viewFullImageBound = '1'
+
+            const viewFullImageSpan = document.getElementById('view-full-image-span')
+            const viewFullImageSpanInnerImgDiv = document.getElementById('view-full-image-span-inner-img-div')
+            const viewFullImageSpanInnerTextDiv = document.getElementById('view-full-image-span-inner-text-div')
+
             img.addEventListener('click', function () {
                 curImg = img
 
@@ -326,4 +385,4 @@ function plugin(hook, vm) {
     })
 }
 
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

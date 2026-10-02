@@ -9,6 +9,6 @@
 
 /* Webkit-specific properties */
 
-.gt-container .gt-comment-content:hover {
-    -webkit-box-shadow: none !important;
+#gitalk-container .gt-container .gt-comment-content:hover {
+    -webkit-box-shadow: none;
 }

@@ -6,6 +6,9 @@ let tocSwitcherOptions = {
 }
 
 function plugin(hook, vm) {
+    let tocSwitcherOnScroll = null
+    let ticking = false
+
     hook.doneEach(function () {
         let tempLocalization = {
             toc: '',
@@ -34,10 +37,6 @@ function plugin(hook, vm) {
         let switchWrap = document.querySelector('.switch-toc-wrap-div') ? document.querySelector('.switch-toc-wrap-div') : document.createElement('div')
 
         switchWrap.className = 'switch-toc-wrap-div'
-        switchWrap.innerHTML = `<button class="toc-btn active-btn">${tempLocalization.toc}</button><button class="default-btn">${tempLocalization.default}</button>`
-
-        sidebarNav.before(switchWrap)
-
         switchWrap.innerHTML = `<button class="toc-btn active-btn">${tempLocalization.toc}</button><button class="default-btn">${tempLocalization.default}</button>`
 
         sidebarNav.before(switchWrap)
@@ -82,12 +81,16 @@ function plugin(hook, vm) {
             items.push({ li, heading: match.heading })
         })
 
+        if (tocSwitcherOnScroll) {
+            window.removeEventListener('scroll', tocSwitcherOnScroll)
+            tocSwitcherOnScroll = null
+        }
+
         if (items.length === 0) return
 
         items.sort((a, b) => a.heading.offsetTop - b.heading.offsetTop)
 
         const offset = 100
-        let ticking = false
 
         const updateActive = () => {
             const scrollY = window.scrollY || document.documentElement.scrollTop
@@ -106,7 +109,7 @@ function plugin(hook, vm) {
             if (current) current.li.classList.add('active')
         }
 
-        const onScroll = () => {
+        tocSwitcherOnScroll = () => {
             if (ticking) return
             ticking = true
             requestAnimationFrame(() => {
@@ -115,9 +118,7 @@ function plugin(hook, vm) {
             })
         }
 
-        window.removeEventListener('scroll', onScroll)
-        window.addEventListener('scroll', onScroll)
-
+        window.addEventListener('scroll', tocSwitcherOnScroll)
         updateActive()
     })
 }
@@ -126,4 +127,4 @@ window.$docsify['tocSwitcher'] = Object.assign(
     tocSwitcherOptions,
     window.$docsify['tocSwitcher']
 )
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

@@ -1,13 +1,20 @@
 import pagesData from '../config/tocdata.json.js'
 
 function plugin(hook, vm) {
+
     const tocMarkup = '<!-- toc -->'
 
-    const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color,#ea6f5a)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color,#ea6f5a)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
+    const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
 
     const recentAmount = 8
 
     let hasTocs = false
+
+    let savedCloseState = null
+
+    let pendingCloseToggle = undefined
+
+    const narrowMql = window.matchMedia('(max-width: 768px)')
 
     let sortedPages = []
 
@@ -15,12 +22,22 @@ function plugin(hook, vm) {
 
     let maxPageIndex = 1
 
-    function renderSidebar() {
-        document.body.classList.toggle('force-close', hasTocs)
-    }
+    function handleRouteChange(willBeToc) {
+        const body = document.body
 
-    function setDefaultTocs() {
-        hasTocs = false
+        if (willBeToc && !hasTocs) {
+            savedCloseState = body.classList.contains('close')
+            pendingCloseToggle = !narrowMql.matches
+        } else if (!willBeToc && hasTocs) {
+            if (savedCloseState !== null) {
+                pendingCloseToggle = savedCloseState
+                savedCloseState = null
+            }
+        }
+
+        body.classList.toggle('has-toc', willBeToc)
+
+        hasTocs = willBeToc
     }
 
     function renderTocStage1(content, vm) {
@@ -157,10 +174,22 @@ function plugin(hook, vm) {
         }
     }
 
+    hook.mounted(function () {
+        narrowMql.addEventListener('change', onScreenWidthChange)
+
+        function onScreenWidthChange(e) {
+            if (!hasTocs) return
+            document.body.classList.add('no-transition')
+            document.body.classList.toggle('close', !e.matches)
+            void document.body.offsetHeight
+            document.body.classList.remove('no-transition')
+        }
+    })
+
     hook.beforeEach(function (content) {
         const result = renderTocStage1(content, vm)
 
-        hasTocs = result.hasToc
+        handleRouteChange(result.hasToc)
 
         return result.content
     })
@@ -170,8 +199,16 @@ function plugin(hook, vm) {
             renderTocContents()
             renderTocPaginator()
         }
-        renderSidebar()
-        setDefaultTocs()
+
+        if (pendingCloseToggle !== undefined) {
+            const targetClose = pendingCloseToggle
+            pendingCloseToggle = undefined
+
+            requestAnimationFrame(() => {
+                void document.body.offsetHeight
+                document.body.classList.toggle('close', targetClose)
+            })
+        }
 
         // fix auto2top
         document.scrollingElement.scrollTop = 0
@@ -193,4 +230,4 @@ function plugin(hook, vm) {
     })
 }
 
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

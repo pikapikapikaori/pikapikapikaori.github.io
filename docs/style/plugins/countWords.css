@@ -1,9 +1,18 @@
 #count-words-block-span-div {
-    padding-top: 0 !important;
+    padding-top: 0;
+    margin: 1.2rem 0;
+}
+
+.markdown-section>#count-words-block-span-div:first-child {
+    margin-top: 0;
+}
+
+.markdown-section>#count-words-block-span-div:last-child {
+    margin-bottom: 0;
 }
 
 @media screen and (max-width: 768px) {
     #count-words-block-span-div {
-        padding-top: 40px !important;
+        padding-top: 2.5rem;
     }
 }

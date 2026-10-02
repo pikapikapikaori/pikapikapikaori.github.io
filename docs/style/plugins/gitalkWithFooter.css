@@ -2,6 +2,21 @@
     --gitalk-github-color: #000;
 }
 
+/* Footer */
+#footer-under-gitalk>div {
+    text-align: center;
+    max-width: var(--global-content-width);
+    width: var(--global-content-width);
+    align-self: center;
+    padding: 1.875rem 0.9375rem 1.25rem;
+    margin: 0 auto
+}
+
+#footer-under-gitalk>div>div {
+    border-top: var(--global-border) var(--border-color);
+}
+
+/* Gitalk */
 #gitalk-container {
     max-width: var(--global-content-width);
     width: var(--global-content-width);
@@ -135,5 +150,5 @@
 
 #gitalk-container .gt-comments .markdown-body,
 #gitalk-container .gt-header .markdown-body {
-    font-family: var(--global-font, serif);
+    font-family: var(--global-font);
 }

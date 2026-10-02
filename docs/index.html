@@ -147,7 +147,7 @@
             // 自用插件
             // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
             gitalkWithFooter: {
-                footerInnerHtml: "<div style='text-align: center;max-width: 800px;width: 80%;align-self: center;padding: 30px 15px 20px;margin: 0 auto'><div style='border-top: 1px solid var(--border-color,#eee);'><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p><div/></div>",
+                footerInnerHtml: "<div><div><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p></div></div>",
                 gitalkConfig: {
                     clientID: '6a54e5946401951488d1',
                     clientSecret: '5ca9de120592a9908348d09480cea6917112a4ec',
@@ -307,13 +307,6 @@
                 ]
             },
 
-            // 最后编辑时间
-            lastUpdatedTime: {
-                url: 'pikapikapikaori/pikapikapikaori.github.io',
-                basePath: 'docs/',
-                dateFormat: '{YYYY}.{MM}.{DD}',
-            },
-
             // 目录、文章列表切换
             tocSwitcher: {
                 localization: {
@@ -453,7 +446,6 @@
     <script src="./utils/viewFullImage.js"></script>
 
     <!-- 添加最后编辑时间 -->
-    <script src="./sources/npm/tinydate@1.3.0/dist/tinydate.min.js"></script>
     <script type="module" src="./utils/lastUpdatedTime.js"></script>
 
     <!-- 添加动态封面 -->

@@ -141,7 +141,7 @@ var plugin = function plugin(mermaidConf) {
       });
       next(htmlElement.innerHTML);
     });
-    hook.ready(function () {
+    hook.doneEach(function () {
       return mermaid.run(mermaidConf);
     });
   };

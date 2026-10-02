@@ -1,5 +1,5 @@
 :root {
-    --fade-size: 5rem;
+    --fade-size: 4.5rem;
     --fade-width: 100%;
 }
 
@@ -53,6 +53,11 @@ body.close:not(.has-toc) .content-fade-edge::before {
     height: 0;
     z-index: 99;
     pointer-events: none;
+    --fade-direction: to bottom;
+}
+
+.fade-edge.bottom {
+    --fade-direction: to top;
 }
 
 .sidebar .fade-edge {
@@ -78,12 +83,17 @@ body.close:not(.has-toc) .content-fade-edge::before {
     height: var(--fade-size);
     opacity: 0;
     transition: opacity var(--global-transition-duration-fast);
-    background: linear-gradient(to bottom, var(--fade-bg), transparent);
+    background: linear-gradient(var(--fade-direction),
+            color-mix(in srgb, var(--fade-bg) 90%, transparent) 0%,
+            color-mix(in srgb, var(--fade-bg) 70%, transparent) 35%,
+            color-mix(in srgb, var(--fade-bg) 50%, transparent) 65%,
+            color-mix(in srgb, var(--fade-bg) 30%, transparent) 85%,
+            color-mix(in srgb, var(--fade-bg) 10%, transparent) 95%,
+            transparent 100%);
 }
 
 .fade-edge.bottom::before {
     bottom: 0;
-    background: linear-gradient(to top, var(--fade-bg), transparent);
 }
 
 .fade-edge.show::before {

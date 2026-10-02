@@ -139,5 +139,15 @@
 }
 
 body.has-toc .sidebar-toggle {
-    opacity: 0;
+    transform: translateX(-2rem);
+}
+
+.sidebar-toggle {
+    transition: opacity var(--global-transition-duration-fast),transform var(--global-transition-duration-fast);
+}
+
+body.no-transition .sidebar,
+body.no-transition .sidebar-toggle,
+body.no-transition .content::before {
+    transition: none !important;
 }

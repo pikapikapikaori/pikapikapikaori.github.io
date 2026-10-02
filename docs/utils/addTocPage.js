@@ -12,6 +12,10 @@ function plugin(hook, vm) {
 
     let savedCloseState = null
 
+    let pendingCloseToggle = undefined
+
+    const narrowMql = window.matchMedia('(max-width: 768px)')
+
     let sortedPages = []
 
     let curPageIndex = 1
@@ -23,9 +27,10 @@ function plugin(hook, vm) {
 
         if (willBeToc && !hasTocs) {
             savedCloseState = body.classList.contains('close')
+            pendingCloseToggle = !narrowMql.matches
         } else if (!willBeToc && hasTocs) {
             if (savedCloseState !== null) {
-                body.classList.toggle('close', savedCloseState)
+                pendingCloseToggle = savedCloseState
                 savedCloseState = null
             }
         }
@@ -169,24 +174,19 @@ function plugin(hook, vm) {
         }
     }
 
-    function onScreenWidthChange(e) {
-        if (!hasTocs) return
-        document.body.classList.toggle('close', !e.matches)
-    }
+    hook.mounted(function () {
+        narrowMql.addEventListener('change', onScreenWidthChange)
+
+        function onScreenWidthChange(e) {
+            if (!hasTocs) return
+            document.body.classList.add('no-transition')
+            document.body.classList.toggle('close', !e.matches)
+            void document.body.offsetHeight
+            document.body.classList.remove('no-transition')
+        }
+    })
 
     hook.beforeEach(function (content) {
-
-        window.matchMedia('(max-width: 768px)').addEventListener('change', onScreenWidthChange)
-
-        document.addEventListener('click', function (e) {
-            if (!hasTocs) return
-            if (e.target.closest('.sidebar-toggle')) {
-                e.preventDefault()
-                e.stopPropagation()
-                e.stopImmediatePropagation()
-            }
-        }, true)
-
         const result = renderTocStage1(content, vm)
 
         handleRouteChange(result.hasToc)
@@ -196,9 +196,18 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         if (hasTocs) {
-            document.body.classList.toggle('close', !window.matchMedia('(max-width: 768px)').matches)
             renderTocContents()
             renderTocPaginator()
+        }
+
+        if (pendingCloseToggle !== undefined) {
+            const targetClose = pendingCloseToggle
+            pendingCloseToggle = undefined
+
+            requestAnimationFrame(() => {
+                void document.body.offsetHeight
+                document.body.classList.toggle('close', targetClose)
+            })
         }
 
         // fix auto2top

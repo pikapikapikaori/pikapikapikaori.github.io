@@ -1,0 +1,53 @@
+:root {
+    --fade-size: 4.5rem;
+}
+
+.content {
+    --fade-bg: var(--bg-color);
+}
+
+.sidebar {
+    --fade-bg: var(--bg-color);
+}
+
+.fade-edge {
+    position: sticky;
+    left: 0;
+    right: 0;
+    height: 0;
+    z-index: 99;
+    pointer-events: none;
+}
+
+.fade-edge.top {
+    top: 0;
+}
+
+.fade-edge.bottom {
+    bottom: 0;
+}
+
+.fade-edge::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--fade-size);
+    opacity: 0;
+    transition: opacity 0.25s;
+    background: linear-gradient(to bottom, var(--fade-bg), transparent);
+}
+
+.fade-edge.bottom::before {
+    bottom: 0;
+    background: linear-gradient(to top, var(--fade-bg), transparent);
+}
+
+.fade-edge.show::before {
+    opacity: 1;
+}
+
+body.image-viewer-open .fade-edge::before {
+    opacity: 0 !important;
+    transition: none;
+}

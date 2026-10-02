@@ -1,6 +1,7 @@
 import pagesData from '../config/tocdata.json.js'
 
 function plugin(hook, vm) {
+
     const tocMarkup = '<!-- toc -->'
 
     const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
@@ -9,18 +10,29 @@ function plugin(hook, vm) {
 
     let hasTocs = false
 
+    let savedCloseState = null
+
     let sortedPages = []
 
     let curPageIndex = 1
 
     let maxPageIndex = 1
 
-    function renderSidebar() {
-        document.body.classList.toggle('force-close', hasTocs)
-    }
+    function handleRouteChange(willBeToc) {
+        const body = document.body
 
-    function setDefaultTocs() {
-        hasTocs = false
+        if (willBeToc && !hasTocs) {
+            savedCloseState = body.classList.contains('close')
+        } else if (!willBeToc && hasTocs) {
+            if (savedCloseState !== null) {
+                body.classList.toggle('close', savedCloseState)
+                savedCloseState = null
+            }
+        }
+
+        body.classList.toggle('has-toc', willBeToc)
+
+        hasTocs = willBeToc
     }
 
     function renderTocStage1(content, vm) {
@@ -157,21 +169,37 @@ function plugin(hook, vm) {
         }
     }
 
+    function onScreenWidthChange(e) {
+        if (!hasTocs) return
+        document.body.classList.toggle('close', !e.matches)
+    }
+
     hook.beforeEach(function (content) {
+
+        window.matchMedia('(max-width: 768px)').addEventListener('change', onScreenWidthChange)
+
+        document.addEventListener('click', function (e) {
+            if (!hasTocs) return
+            if (e.target.closest('.sidebar-toggle')) {
+                e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
+            }
+        }, true)
+
         const result = renderTocStage1(content, vm)
 
-        hasTocs = result.hasToc
+        handleRouteChange(result.hasToc)
 
         return result.content
     })
 
     hook.doneEach(function () {
         if (hasTocs) {
+            document.body.classList.toggle('close', !window.matchMedia('(max-width: 768px)').matches)
             renderTocContents()
             renderTocPaginator()
         }
-        renderSidebar()
-        setDefaultTocs()
 
         // fix auto2top
         document.scrollingElement.scrollTop = 0

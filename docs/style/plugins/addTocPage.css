@@ -138,22 +138,6 @@
     background-color: var(--global-theme-color-blur);
 }
 
-body.force-close {
-    .sidebar {
-        visibility: hidden !important;
-        transform: translateX(var(--global-sidebar-width-none)) !important;
-    }
-
-    .sidebar-toggle {
-        visibility: hidden !important;
-    }
-
-    .content {
-        left: 0 !important;
-        transform: translateX(var(--global-sidebar-width-none)) !important;
-    }
-
-    .app-nav {
-        display: inherit !important;
-    }
+body.has-toc .sidebar-toggle {
+    opacity: 0;
 }

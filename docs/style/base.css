@@ -88,7 +88,7 @@
     --global-font-weight-semibold: 600;
     --global-font-weight-bold: 700;
 
-    --global-content-width: 800px;
+    --global-content-width: min(80%, 800px);
     --global-sidebar-width: 300px;
     --global-sidebar-width-none: 0;
     --global-sidebar-toggle-width: 284px;
@@ -130,6 +130,11 @@
 
     --global-backdrop-filter: blur(30px);
 
+    --global-shadow: #000;
+    --global-shadow-blur: color-mix(in srgb,
+            var(--global-shadow) calc(var(--global-opacity-weak) * 100%),
+            transparent);
+
     --global-aspect-ratio-square: 1 / 1;
     --global-aspect-ratio-tall: 1 / 1.25;
     --global-aspect-ratio-tv: 16 / 9;
@@ -145,18 +150,6 @@
     --global-transform-ratio-normal: 1.2;
     --global-transform-ratio-small: 1.1;
     --global-transform-ratio-very-small: 1.03;
-}
-
-@media screen and (max-width: 1300px) {
-    :root:has(> body:not(.close, .force-close)) {
-        --global-content-width: 80%;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    :root {
-        --global-content-width: 80%;
-    }
 }
 
 ::selection {
@@ -692,7 +685,8 @@ body.close .content {
     }
 
     .sidebar {
-        left: calc(-1 * var(--global-sidebar-width));
+        left: 0;
+        transform: translateX(calc(-1 * var(--global-sidebar-width)));
         transition: transform var(--global-transition-duration-fast) ease-out
     }
 
@@ -704,11 +698,6 @@ body.close .content {
         transition: transform var(--global-transition-duration-fast) ease
     }
 
-    .app-nav,
-    .github-corner {
-        transition: transform var(--global-transition-duration-fast) ease-out
-    }
-
     .sidebar-toggle {
         background-color: transparent;
         width: auto;
@@ -716,7 +705,7 @@ body.close .content {
     }
 
     body.close .sidebar {
-        transform: translateX(var(--global-sidebar-width))
+        transform: translateX(0)
     }
 
     body.close .sidebar-toggle {
@@ -726,13 +715,29 @@ body.close .content {
         padding: 0.625rem
     }
 
+    body.close .app-nav,
+    body.close .github-corner,
     body.close .content {
-        transform: translateX(var(--global-sidebar-width))
+        transform: translateX(0)
     }
 
-    body.close .app-nav,
-    body.close .github-corner {
-        display: none
+    body.close .app-nav {
+        z-index: 0;
+    }
+
+    body .content::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-color: var(--global-shadow-blur);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity var(--global-transition-duration-fast) ease;
+    }
+
+    body.close .content::before {
+        z-index: 10;
+        opacity: 1;
     }
 
     .github-corner:hover .octo-arm {

@@ -15,16 +15,16 @@ let gitalkWithFooterOptions = {
 // Docsify plugin functions
 function plugin(hook, vm) {
     hook.doneEach(function () {
+        const main = document.getElementById('main')
+        if (!main) return
+        const parent = main.parentNode
+
         // 若没有gitalk容器，则添加gitalk容器重新
         let previousGitalk = document.getElementById('gitalk-container')
         if (!previousGitalk) {
             let gitalkContainer = document.createElement('div')
             gitalkContainer.id = 'gitalk-container'
-            gitalkContainer.style.maxWidth = '800px'
-            gitalkContainer.style.width = '80%'
-            gitalkContainer.style.margin = '0px auto 20px'
-            gitalkContainer.style.padding = '0 15px 0'
-            document.getElementById('main').parentNode.appendChild(gitalkContainer)
+            parent.appendChild(gitalkContainer)
         }
 
         // 若没有footer，则在gitalk容器下方重新添加footer
@@ -35,8 +35,10 @@ function plugin(hook, vm) {
             footerDiv.id = 'footer-under-gitalk'
             footerDiv.innerHTML = gitalkWithFooterOptions.footerInnerHtml
             footer.appendChild(footerDiv)
-            document.getElementById('main').parentNode.appendChild(footer)
+            parent.appendChild(footer)
         }
+
+        if (typeof Gitalk === 'undefined') return
 
         // render gitalk
         document.getElementById('gitalk-container').innerHTML = ''

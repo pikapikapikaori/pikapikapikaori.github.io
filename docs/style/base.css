@@ -105,6 +105,10 @@
     --global-border-weak: 1px dotted;
     --global-border-strong-width: 2px;
 
+    --global-box-shadow-width: 0.625rem;
+
+    --global-link-decoration-width: 0.15em;
+
     --global-el-border-radius: 0.625rem;
     --global-el-border-radius-none: 0;
     --global-icon-border-radius: 0.3125rem;
@@ -137,6 +141,12 @@
     --global-transform-ratio-normal: 1.2;
     --global-transform-ratio-small: 1.1;
     --global-transform-ratio-very-small: 1.03;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --global-content-width: 80%;
+    }
 }
 
 ::selection {
@@ -1144,7 +1154,7 @@ body {
             color: inherit;
             font-weight: inherit;
             text-decoration-color: var(--theme-color);
-            text-decoration-thickness: .15em;
+            text-decoration-thickness: var(--global-link-decoration-width);
             transition-duration: var(--global-transition-duration);
         }
 

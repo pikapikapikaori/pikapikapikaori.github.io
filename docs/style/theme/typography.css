@@ -21,6 +21,23 @@
     --sidebar-toggle-bg: transparent;
     --sidebar-border-color: #d8dce0;
 
+    --cal-theme-color-s-1: 32;
+    --cal-theme-color-s-2: 24;
+    --cal-theme-color-s-3: 14;
+    --cal-theme-color-s-4: 6;
+    --cal-theme-color-s-5: -8;
+    --cal-theme-color-s-6: -18;
+    --cal-theme-color-s-7: -32;
+    --cal-theme-color-s-8: -48;
+    --cal-theme-color-l-1: 18;
+    --cal-theme-color-l-2: 12;
+    --cal-theme-color-l-3: 6;
+    --cal-theme-color-l-4: 3;
+    --cal-theme-color-l-5: -8;
+    --cal-theme-color-l-6: -18;
+    --cal-theme-color-l-7: -30;
+    --cal-theme-color-l-8: -44;
+
     --dot-color: rgba(80, 100, 120, .25);
     --dot-size: 22px;
 }

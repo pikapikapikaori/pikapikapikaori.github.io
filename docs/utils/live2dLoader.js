@@ -97,8 +97,8 @@ class Live2dLoader {
         this.model = await live2d.Live2DModel.from(config.role)
         this.app.stage.addChild(this.model)
         this.model.position.set(
-            canvas.style.width * 0.5,
-            canvas.style.height * 0.5
+            canvas.style.width * 0.5 + (config.offsetX || 0),
+            canvas.style.height * 0.5 + (config.offsetY || 0)
         )
         this.model.scale.set(config.scale || 0.1)
         if (config.draggable === true) this.draggable(this.model)

@@ -29,6 +29,14 @@
     border-block: var(--global-border) var(--theme-color);
 }
 
+.search h2 {
+    font-size: 1.0625rem;
+}
+
+.search p {
+    font-size: 0.875rem;
+}
+
 .app-name {
     display: inherit;
 }

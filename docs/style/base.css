@@ -47,20 +47,41 @@
     --token-inserted-color: #202746;
     --token-important-color: #c94922;
 
+    --cal-theme-color-s-1: 32;
+    --cal-theme-color-s-2: 24;
+    --cal-theme-color-s-3: 14;
+    --cal-theme-color-s-4: 6;
+    --cal-theme-color-s-5: -8;
+    --cal-theme-color-s-6: -18;
+    --cal-theme-color-s-7: -32;
+    --cal-theme-color-s-8: -48;
+    --cal-theme-color-l-1: 18;
+    --cal-theme-color-l-2: 12;
+    --cal-theme-color-l-3: 6;
+    --cal-theme-color-l-4: 3;
+    --cal-theme-color-l-5: -8;
+    --cal-theme-color-l-6: -18;
+    --cal-theme-color-l-7: -30;
+    --cal-theme-color-l-8: -44;
+
+
     /* ============================================================
      *  主题色相关变量
      * ============================================================ */
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
-    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + 32), 100) clamp(0, calc(l + 18), 100));
-    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + 24), 100) clamp(0, calc(l + 12), 100));
-    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + 14), 100) clamp(0, calc(l + 6), 100));
-    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + 6), 100) clamp(0, calc(l + 3), 100));
-    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s - 8), 100) clamp(0, calc(l - 8), 100));
-    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s - 18), 100) clamp(0, calc(l - 18), 100));
-    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s - 32), 100) clamp(0, calc(l - 30), 100));
-    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s - 48), 100) clamp(0, calc(l - 44), 100));
+    --global-theme-color-blur-weak: color-mix(in srgb,
+            var(--theme-color) 45%,
+            transparent);
+    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-1)), 100) clamp(0, calc(l + var(--cal-theme-color-l-1)), 100));
+    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-2)), 100) clamp(0, calc(l + var(--cal-theme-color-l-2)), 100));
+    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-3)), 100) clamp(0, calc(l + var(--cal-theme-color-l-3)), 100));
+    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-4)), 100) clamp(0, calc(l + var(--cal-theme-color-l-4)), 100));
+    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-5)), 100) clamp(0, calc(l + var(--cal-theme-color-l-5)), 100));
+    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-6)), 100) clamp(0, calc(l + var(--cal-theme-color-l-6)), 100));
+    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
+    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
 
     /* ============================================================
      *  框架变量
@@ -94,7 +115,7 @@
     --global-sidebar-toggle-width: 284px;
     --global-cover-ul-width: 500px;
 
-    --global-writing-container-height: 300px;
+    --global-writing-container-height: 18.75rem;
     --global-sidenote-width: 400px;
 
     --global-progress-width: 2px;
@@ -119,6 +140,8 @@
 
     --global-icon-size-large: 100px;
     --global-icon-size-big: 80px;
+    --global-widget-size-normal: 1.5rem;
+    --global-widget-size-small: 1.3rem;
 
     --global-brightness-blur: 0.85;
     --global-opacity-none: 1;
@@ -150,6 +173,13 @@
     --global-transform-ratio-normal: 1.2;
     --global-transform-ratio-small: 1.1;
     --global-transform-ratio-very-small: 1.03;
+}
+
+@media screen and (max-width:768px) {
+    :root {
+        --global-widget-size-normal: 1.3rem;
+        --global-widget-size-small: 1rem;
+    }
 }
 
 ::selection {
@@ -321,9 +351,8 @@ li input[type=checkbox] {
 }
 
 .app-nav li ul {
-    background-color: var(--bg-color);
-    border: var(--global-border);
-    border-color: var(--border-color-strong) var(--border-color-strong) var(--border-color-mid);
+    background-color: var(--zebra-bg);
+    border: var(--global-border) var(--border-color-strong);
     border-radius: 0.25rem;
     box-sizing: border-box;
     display: none;
@@ -582,6 +611,14 @@ body.sticky .sidebar-toggle {
     background-color: var(--zebra-bg)
 }
 
+.markdown-section thead tr {
+    background-color: var(--zebra-bg)
+}
+
+.markdown-section thead tr:nth-child(2n) {
+    background-color: var(--bg-color)
+}
+
 .markdown-section p.tip,
 .markdown-section p.warn {
     border-bottom-right-radius: 0.125rem;
@@ -659,6 +696,20 @@ body.close .content {
     .sidebar,
     .sidebar-toggle {
         display: none
+    }
+
+    main {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+    
+    .content {
+        left: auto;
+        right: auto;
+        transition: none;
+        position: static;
+        width: auto;
     }
 }
 
@@ -1085,7 +1136,7 @@ body {
 .markdown-section output {
     padding: 1.7rem 1.4rem;
     background-color: var(--zebra-bg);
-    border: var(--global-border) var(--border-color-mid)
+    border: var(--global-border) var(--border-color-strong)
 }
 
 .markdown-section output>:first-child {
@@ -1120,7 +1171,8 @@ body {
 
 .markdown-section mark {
     padding: 0.3em 0.2em 0;
-    background-color: var(--global-theme-color-2);
+    background-color: var(--global-theme-color-1);
+    color: var(--global-theme-color-8);
     border-radius: 0.125rem;
 }
 

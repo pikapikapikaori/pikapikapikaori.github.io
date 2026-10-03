@@ -24,6 +24,10 @@
     padding: 0 0.9375rem;
 }
 
+#gitalk-container .gt-container {
+    font-size: 1rem;
+}
+
 #gitalk-container .gt-header-controls-tip {
     color: var(--theme-color);
 }
@@ -92,6 +96,11 @@
 
 #gitalk-container .gt-container .gt-comment-content {
     border-radius: var(--global-el-border-radius);
+    background: var(--zebra-bg);
+    border: var(--global-border) var(--border-color-strong);
+}
+
+#gitalk-container .gt-container .gt-comment.gt-comment-admin .gt-comment-content {
     background: var(--global-theme-color-blur);
 }
 
@@ -119,8 +128,8 @@
 }
 
 #gitalk-container .gt-container .gt-popup {
-    background-color: var(--bg-color);
-    border-color: var(--border-color);
+    background-color: var(--zebra-bg);
+    border-color: var(--border-color-strong);
 }
 
 #gitalk-container .gt-container .gt-popup .gt-copyright {
@@ -140,7 +149,7 @@
     .gt-header-textarea,
     .gt-header-preview {
         background-color: var(--zebra-bg);
-        border: var(--global-border) var(--border-color);
+        border: var(--global-border) var(--border-color-strong);
     }
 }
 

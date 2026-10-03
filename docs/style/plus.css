@@ -106,3 +106,8 @@ pre .docsify-copy-code-button span {
 .docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :last-child:not(.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :not(:last-child) *) {
     margin-bottom: 0;
 }
+
+/* Docsify Mermaid */
+.mermaid button svg {
+    color: var(--theme-color);
+}

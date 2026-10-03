@@ -54,12 +54,12 @@
 
 .brief-comments-in-blog-title-year>summary:hover,
 .brief-comments-in-blog-title-year[open]>summary:hover {
-    color: var(--global-theme-color-7);
+    color: var(--global-theme-color-8);
 }
 
 .brief-comments-in-blog-title-year>summary:hover::after,
 .brief-comments-in-blog-title-year[open]>summary:hover::after {
-    border-color: var(--global-theme-color-7);
+    border-color: var(--global-theme-color-8);
 }
 
 .brief-comments-in-blog-title-year>summary::marker {
@@ -184,66 +184,79 @@
 }
 
 /* Personal Ten */
+.personal-ten-best-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
 .personal-ten-best-card {
-    display: inline-block;
-    vertical-align: top;
-    width: calc(50% - 0.75rem);
-    margin: 0.3125rem;
+    width: 100%;
 }
 
 .personal-ten-best-content {
-    margin-top: 0.625rem;
     display: flex;
     overflow: hidden;
-    height: 12.5rem;
-    padding: 0.625rem;
-    background-color: var(--global-theme-color-blur);
+    min-height: 11.375rem;
+    padding: 1rem 1.25rem;
+    background-color: var(--zebra-bg);
     border-radius: var(--global-el-border-radius);
-    border: var(--global-border) var(--theme-color);
+    border: var(--global-border) var(--border-color-strong);
     align-items: center;
+    box-sizing: border-box;
+}
+
+.personal-ten-best-content-img {
+    flex-shrink: 0;
 }
 
 .personal-ten-best-content-img img {
     width: 6.25rem;
-    height: auto;
+    height: 9.375rem;
     min-width: 6.25rem;
     max-width: 6.25rem;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .personal-ten-best-content-info {
-    margin-left: 1.875rem;
+    margin-left: 1.5rem;
+    flex: 1;
+    min-width: 0;
 }
 
 .personal-ten-best-content-info h5 {
-    margin: 0 0 0;
+    margin: 0 0 0.2rem 0;
     font-size: 1.4rem;
+    line-height: 1.3;
 }
 
 .personal-ten-best-content-info p {
-    margin: 0 0 0;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
 }
 
 @media screen and (max-width: 768px) {
-    .personal-ten-best-card {
-        width: calc(100% - 1.25rem);
-        display: inherit;
-        margin-left: 0.625rem;
-        margin-right: 0.625rem;
+    .personal-ten-best-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .personal-ten-best-content {
-        height: 8.4375rem;
+        min-height: 9.5rem;
+        padding: 1rem 1.25rem;
     }
 
     .personal-ten-best-content-info {
-        margin-left: 0.9375rem;
+        margin-left: 1rem;
     }
 
     .personal-ten-best-content-img img {
         width: 5rem;
-        height: auto;
-        min-width: 5rem;
-        max-width: 5rem;
+        height: 7.5rem;
     }
 
     .personal-ten-best-content-info h5 {
@@ -252,7 +265,7 @@
 
     .personal-ten-best-content-info p {
         font-size: 0.9rem;
-        line-height: 1.4rem;
+        line-height: 1.4;
     }
 }
 

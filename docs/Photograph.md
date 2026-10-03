@@ -4,7 +4,7 @@
 
 #### **景致静物**
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![景致静物照](_media/Photograph/scenery-1.jpg)
 ![景致静物照](_media/Photograph/scenery-2.jpg)
@@ -13,11 +13,11 @@
 ![景致静物照](_media/Photograph/scenery-5.jpg)
 ![景致静物照](_media/Photograph/scenery-6.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 #### **手办模型**
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![手办模型照](_media/Photograph/figure-4.jpg)
 ![手办模型照](_media/Photograph/figure-2.jpg)
@@ -32,6 +32,6 @@
 ![手办模型照](_media/Photograph/figure-5.jpg)
 ![手办模型照](_media/Photograph/figure-7.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 <!-- tabs:end -->

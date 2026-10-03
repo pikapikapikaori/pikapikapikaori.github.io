@@ -1,5 +1,11 @@
 :root {
     --replaceAnnot-footnote-width: 30%;
+
+    --replaceAnnot-ranjana-font: 'NithyaRanjana', serif;
+    --replaceAnnot-jiagu-font: 'ShirakawaKoukotsu', 'ShirakawaKoukotsu-2', 'FZJiaGW', serif;
+    --replaceAnnot-zhuanwen-font: 'ShirakawaTenbun', 'ShirakawaTenbun-2', 'FZXiaoZhuan', serif;
+    --replaceAnnot-jinwen-font: 'ShirakawaKinbun', 'ShirakawaKinbun-2', serif;
+    --replaceAnnot-cjkext-font: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
 }
 
 /* Brief Comments */
@@ -299,4 +305,221 @@
 .docsify-example-panels:has(.footnote-div) .right-panel {
     width: var(--replaceAnnot-footnote-width);
     max-width: var(--replaceAnnot-footnote-width);
+}
+
+/* About Page */
+.main-page-right-panel-container {
+    font-family: var(--global-handwriting-font);
+    border: var(--global-border) var(--border-color-strong);
+    background-color: var(--zebra-bg);
+    border-radius: var(--global-el-border-radius);
+    margin: 1.2rem auto;
+    max-width: var(--global-sidenote-width);
+    text-align: center;
+}
+
+.main-page-right-panel-container p:has(img.main-page-about-me-avatar) {
+    margin: 0;
+}
+
+.main-page-about-me-avatar {
+    max-width: var(--global-icon-size-large);
+    margin-top: 1.25rem;
+    border-radius: var(--global-avatar-border-radius);
+    overflow: hidden;
+}
+
+.main-page-right-panel-container .main-page-about-me-title {
+    margin: 1.2rem 0;
+    font-size: 1.8rem;
+}
+
+.main-page-right-panel-container .main-page-about-me-description {
+    margin: 1.2rem 0;
+    font-size: 1.4rem;
+}
+
+.main-page-right-panel-container .main-page-about-me-links {
+    margin: 1.2rem 0;
+}
+
+.main-page-about-me-links>a {
+    margin: 0 0.625rem 0;
+    text-decoration: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: inherit;
+    display: inline-block;
+}
+
+.main-page-about-me-links>a>svg {
+    transition-duration: var(--global-transition-duration);
+}
+
+.main-page-about-me-links>a>svg:hover {
+    transform: scale(var(--global-transform-ratio-big));
+}
+
+.main-page-right-panel-container .main-page-about-me-image-links {
+    padding: 0.625rem;
+    margin: 0;
+}
+
+.main-page-about-me-image-links p:first-child {
+    margin-top: 0;
+}
+
+.main-page-about-me-image-links p:last-child {
+    margin-bottom: 0;
+}
+
+/* Multiple Image Container */
+.multi-images-container-section>p {
+    line-height: 0;
+    column-count: 3;
+    column-gap: 0.3125rem;
+}
+
+.multi-images-container-section>p>img {
+    /* Just in case there are inline attributes */
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0.3125rem 0 0 !important;
+}
+
+@media screen and (max-width: 1000px) {
+    .multi-images-container-section>p {
+        column-count: 2;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .multi-images-container-section>p {
+        column-count: 1;
+    }
+}
+
+/* Poem Container */
+.poem-div {
+    font-family: var(--global-poem-font);
+}
+
+/* Writing Direction Vertical Container */
+.writing-direction-rtl-div {
+    direction: rtl;
+    text-align: right;
+
+    blockquote {
+        border-right: var(--global-border-emphasis) var(--theme-color);
+        border-left: 0;
+        padding-right: 1.25rem;
+        padding-left: 0;
+    }
+}
+
+.writing-direction-vertical-ltr-div {
+    writing-mode: vertical-lr;
+    float: left;
+}
+
+.writing-direction-vertical-rtl-div {
+    writing-mode: vertical-rl;
+    float: right;
+}
+
+.writing-direction-vertical-div {
+    padding: 1rem 0;
+    border-top: var(--global-border) var(--border-color);
+    border-bottom: var(--global-border) var(--border-color);
+
+    h1 {
+        margin: 0 0 0 1.2rem;
+    }
+
+    h2 {
+        margin: 0 2.8125rem 0 1.2rem;
+    }
+
+    h3 {
+        margin: 0 2.5rem 0 1.2rem;
+    }
+
+    figure,
+    p {
+        margin: 0 1.2rem;
+    }
+
+    blockquote {
+        margin: 0 2rem;
+        border-top: var(--global-border-emphasis) var(--theme-color);
+        border-left: 0;
+        padding-top: 1.25rem;
+        padding-left: 0;
+    }
+
+    iframe {
+        margin: 0 1.2rem;
+    }
+
+    pre,
+    output {
+        margin: 0 1.2rem;
+    }
+
+    code {
+        margin: 0.125rem 0;
+    }
+
+    pre>code {
+        padding: 0.3125rem 1.76rem;
+    }
+
+    output {
+        padding: 1.4rem 1.7rem;
+    }
+
+    output:last-child {
+        margin-left: 0;
+    }
+
+    output:first-child {
+        margin-right: 0;
+    }
+
+    pre:after,
+    output:after {
+        padding: 0.625rem 0.3125rem 0.625rem 0;
+    }
+}
+
+div:has(.writing-direction-vertical-div) {
+    overflow-y: hidden;
+    overflow-x: auto;
+    height: var(--global-writing-container-height);
+}
+
+/* Minority Language Container */
+.minority-language-font {
+    font-family: var(--global-minority-lang-font);
+}
+
+.minority-language-font-ranjana {
+    font-family: var(--replaceAnnot-ranjana-font);
+}
+
+.minority-language-font-jiagu {
+    font-family: var(--replaceAnnot-jiagu-font);
+}
+
+.minority-language-font-zhuanwen {
+    font-family: var(--replaceAnnot-zhuanwen-font);
+}
+
+.minority-language-font-jinwen {
+    font-family: var(--replaceAnnot-jinwen-font);
+}
+
+.minority-language-font-cjkext {
+    font-family: var(--replaceAnnot-cjkext-font);
 }

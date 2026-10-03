@@ -43,7 +43,7 @@
 
 先看一下可以考虑投入的卡片吧：
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-1.png)
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-2.png)
@@ -85,13 +85,13 @@
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-52.png)
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-53.png)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 由于 EM 字段的强力卡基本都被禁了，因而可以根据需要从魔术师和异色眼字段寻找一些卡片投入。
 
 另一方面，由于即将发售的 1202 中霸王也成为了新字段，因而可以考虑投入霸王字段的卡片：
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-24.png)
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-26.png)
@@ -108,11 +108,11 @@
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-41.png)
 ![卡图](_media/YGOMagicianDeck-202304-20230615/card-51.png)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 1202 新卡参考：
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![卡图](_media/YGOMagicianDeck-202304-20230615/1202-1.jpg)
 ![卡图](_media/YGOMagicianDeck-202304-20230615/1202-2.jpg)
@@ -122,7 +122,7 @@
 ![卡图](_media/YGOMagicianDeck-202304-20230615/1202-6.jpg)
 ![卡图](_media/YGOMagicianDeck-202304-20230615/1202-7.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 另一方面根据每季度的禁限卡表也可以考虑对卡片数量做出调整，如 23 年 1 月表起「虹彩之魔术师」不再为限制卡，可以考虑投入两张。泛用终端以及手坑也可以根据个人的喜好以及其与本卡组的相性进行一定程度的调整。
 

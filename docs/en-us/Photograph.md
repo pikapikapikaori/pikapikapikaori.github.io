@@ -4,7 +4,7 @@
 
 #### **Scenery**
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Scenery Photo](_media/Photograph/scenery-1.jpg)
 ![Scenery Photo](_media/Photograph/scenery-2.jpg)
@@ -13,11 +13,11 @@
 ![Scenery Photo](_media/Photograph/scenery-5.jpg)
 ![Scenery Photo](_media/Photograph/scenery-6.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 #### **Models**
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Figure Photo](_media/Photograph/figure-4.jpg)
 ![Figure Photo](_media/Photograph/figure-2.jpg)
@@ -32,6 +32,6 @@
 ![Figure Photo](_media/Photograph/figure-5.jpg)
 ![Figure Photo](_media/Photograph/figure-7.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 <!-- tabs:end -->

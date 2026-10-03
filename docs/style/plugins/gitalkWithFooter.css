@@ -96,6 +96,11 @@
 
 #gitalk-container .gt-container .gt-comment-content {
     border-radius: var(--global-el-border-radius);
+    background: var(--zebra-bg);
+    border: var(--global-border) var(--border-color-strong);
+}
+
+#gitalk-container .gt-container .gt-comment.gt-comment-admin .gt-comment-content {
     background: var(--global-theme-color-blur);
 }
 

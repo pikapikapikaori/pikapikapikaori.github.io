@@ -2,6 +2,7 @@
     --tocpage-display-height: 300px;
     --tocpage-display-img-height: 200px;
     --tocpage-button-size: var(--global-widget-size-normal);
+    --tocpage-input-size: var(--global-widget-size-small);
 }
 
 .toc-page-display-a {
@@ -86,6 +87,10 @@
     text-align: center;
     justify-content: center;
     display: flex;
+}
+
+.toc-paginator-input {
+    font-size: var(--tocpage-input-size);
 }
 
 .toc-paginator-input input {

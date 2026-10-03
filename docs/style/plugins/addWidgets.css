@@ -1,14 +1,20 @@
 :root {
     --widgets-size: var(--global-widget-size-normal);
-    --widgets-gap: 2.1875rem;
+    --widgets-gap: calc(35 / 24 * var(--global-widget-size-normal));
     --widgets-top: 0;
-    --widgets-right: 1.625rem;
+    --widgets-right: calc(13 / 12 * var(--global-widget-size-normal));
     --widgets-cnt: 9;
-    --widgets-popup-width: 12.5rem;
-    --widgets-popup-height: 9.0625rem;
+    --widgets-popup-width: calc(25 / 3 * var(--global-widget-size-normal));
+    --widgets-popup-height: calc(145 / 24 * var(--global-widget-size-normal));
     --widgets-hide-transform-length: 62.5rem;
     --widgets-hsl-s: 66%;
     --widgets-hsl-l: 78%;
+}
+
+@media screen and (max-width:768px) {
+    :root {
+        --widgets-right: calc(10 / 12 * var(--global-widget-size-normal));
+    }
 }
 
 .page-right-tools-widgets-span-disappear {
@@ -54,7 +60,7 @@
     border-radius: var(--global-el-border-radius);
     background-color: var(--global-theme-color-blur);
     backdrop-filter: var(--global-backdrop-filter);
-    padding: 1.125rem;
+    padding: calc(3 / 4 * var(--global-widget-size-normal));
     width: var(--widgets-popup-width);
 }
 
@@ -156,7 +162,7 @@
 
 .color-picker-slider {
     width: 80%;
-    margin-top: 0.625rem;
+    margin-top: calc(5 / 12 * var(--global-widget-size-normal));
     border-radius: var(--global-el-border-radius);
     appearance: none;
     height: 0.3125rem;
@@ -168,7 +174,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0.4375rem;
-    margin: 1.125rem 1.125rem 0;
+    margin: calc(3 / 4 * var(--global-widget-size-normal)) calc(3 / 4 * var(--global-widget-size-normal)) 0;
 }
 
 .color-picker-preset-color-btn-div {

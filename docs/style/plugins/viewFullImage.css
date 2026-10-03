@@ -60,6 +60,7 @@
     position: absolute;
     text-align: center;
     color: var(--theme-color);
+    font-size: var(--viewImg-button-size);
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji) {

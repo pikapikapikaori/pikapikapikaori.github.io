@@ -2,7 +2,6 @@
 let addWidgetsOptions = {
     useSwitchMode: true,
     top: 0,
-    right: 26,
     topOffset: 500,
     themes: [
         {
@@ -78,7 +77,6 @@ function plugin(hook, vm) {
     }
 
     document.documentElement.style.setProperty('--widgets-top', addWidgetsOptions.top + 'px')
-    document.documentElement.style.setProperty('--widgets-right', addWidgetsOptions.right + 'px')
 
     let switchSpan,
         themeSpan,

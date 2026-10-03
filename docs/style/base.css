@@ -120,6 +120,7 @@
     --global-icon-size-large: 100px;
     --global-icon-size-big: 80px;
     --global-widget-size-normal: 1.5rem;
+    --global-widget-size-small: 1.3rem;
 
     --global-brightness-blur: 0.85;
     --global-opacity-none: 1;
@@ -151,6 +152,13 @@
     --global-transform-ratio-normal: 1.2;
     --global-transform-ratio-small: 1.1;
     --global-transform-ratio-very-small: 1.03;
+}
+
+@media screen and (max-width:768px) {
+    :root {
+        --global-widget-size-normal: 1.3rem;
+        --global-widget-size-small: 1rem;
+    }
 }
 
 ::selection {

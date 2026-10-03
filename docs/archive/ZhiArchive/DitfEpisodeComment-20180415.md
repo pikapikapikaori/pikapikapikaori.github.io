@@ -65,12 +65,12 @@
 
 这一集中，所有回忆部分均使用了 2.35：1 的纵横比以作区分。此外，有趣的一点是，在前半部分中，所有回忆部分颜色都偏蓝，似乎模拟了日光夜景的拍摄效果，同时画面切换的也越来越快。
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.14 截图](_media/DitfEpisodeComment-20180415/picture-12.webp)
 ![Ditf Ep.14 截图](_media/DitfEpisodeComment-20180415/picture-13.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 这样处理的效果，颜色上蓝色很能给人一种压抑感，同时切换速度逐渐增加的多个画面，得以使观众感跟随广对对他所经历的事进行一个回忆，在记起前去剧情的同时，给观众失落的感觉。
 
@@ -84,12 +84,12 @@
 
 ---
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.14 截图](_media/DitfEpisodeComment-20180415/picture-16.webp)
 ![Ditf Ep.14 截图](_media/DitfEpisodeComment-20180415/picture-17.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 这一集构图上任务基本处于画面正中，多处画面都采用正面或背面打光的方式，大量增添了画面中的阴影，来制造压抑、失落的整体情感氛围。
 
@@ -126,13 +126,13 @@
 > 本文首发于[知乎](https://www.zhihu.com/question/274158101/answer/372852569)\
 > 发表日期：2018.04.22
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.15 截图](_media/DitfEpisodeComment-20180415/picture-21.webp)
 ![Ditf Ep.15 截图](_media/DitfEpisodeComment-20180415/picture-22.webp)
 ![Ditf Ep.15 截图](_media/DitfEpisodeComment-20180415/picture-23.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 这两集国家队的问题挺明显了，一语以概之，就是：演出不错，脚本不行。
 
@@ -167,12 +167,12 @@
 
 这一话镜头上还是挺出色的，举两个例子：
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.17 截图](_media/DitfEpisodeComment-20180415/picture-30.webp)
 ![Ditf Ep.17 截图](_media/DitfEpisodeComment-20180415/picture-31.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 首先是上两图的情节部分，均使用了仰角镜头。注意镜头中对角色站位的调度：亲卫队的人位于镜头左侧，13 小队则在右侧，以这一幕主要角色心在中央。有趣的是，很容易看出亲卫队的人由于远近原因比例远大于 13 小队（甚至一个人大过整个小队），基本撑到了屏幕上下边缘，而小队则都在画面三分之一处。这样的镜头和调度直观的展现出了亲卫队成员对 13 小队的压迫以及他的强势，也增强了压抑感。
 
@@ -230,14 +230,14 @@
 
 ---
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.17 截图](_media/DitfEpisodeComment-20180415/picture-51.webp)
 ![Ditf Ep.17 截图](_media/DitfEpisodeComment-20180415/picture-52.webp)
 ![Ditf Ep.17 截图](_media/DitfEpisodeComment-20180415/picture-53.webp)
 ![Ditf Ep.17 截图](_media/DitfEpisodeComment-20180415/picture-29.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 ## 如何评价动画《DARLING in the FRANXX》第十九集？
 
@@ -294,23 +294,23 @@
 
 ---
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-64.webp)
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-65.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 在例如上述的两个画面，很容易感受到其明暗调度：大人居于光下，而博士则一个人位于大人的影子之中，让观众直观的感受到博士受大人控制程度之高。
 
 ---
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-66.webp)
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-67.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 这种比例的遮蔽镜头在后半段出现较多。相较于前一种，画面明显“松”了不少。这里是适应这部分较缓和的气氛。
 
@@ -322,23 +322,23 @@
 
 从这里开始，静止画面运用的更多了，很容易看出博士在这里开始个人情感越来越少，而一味在追求科学研究，也因此妻子的死去也并未让博士过度悲伤。
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-70.webp)
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-71.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 这一段以及之后的回忆部分的情感氛围本身也是没有什么波折的。
 
 相似的构图还有下面这个。
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-72.webp)
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-73.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 ---
 
@@ -362,13 +362,13 @@
 
 补几个EVA梗，挺有意思。
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-77.webp)
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-78.webp)
 ![Ditf Ep.19 截图](_media/DitfEpisodeComment-20180415/picture-54.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 ## 如何评价 DARLING in the FRANXX 第二十四集（大结局）？
 

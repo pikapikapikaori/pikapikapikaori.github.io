@@ -112,6 +112,15 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="main-page-about-me-image-links">',
             endHtml: '</div>'
         }
+    ],
+
+    /* Multiple Image Container */
+    [
+        'multi-img-wrap',
+        {
+            startHtml: '<section class="multi-images-container-section">',
+            endHtml: '</section>'
+        }
     ]
 ])
 

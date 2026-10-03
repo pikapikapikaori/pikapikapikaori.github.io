@@ -366,3 +366,30 @@
 .main-page-about-me-image-links p:last-child {
     margin-bottom: 0;
 }
+
+/* Multiple Image Container */
+.multi-images-container-section>p {
+    line-height: 0;
+    column-count: 3;
+    column-gap: 0.3125rem;
+}
+
+.multi-images-container-section>p>img {
+    /* Just in case there are inline attributes */
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0.3125rem 0 0 !important;
+}
+
+@media screen and (max-width: 1000px) {
+    .multi-images-container-section>p {
+        column-count: 2;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .multi-images-container-section>p {
+        column-count: 1;
+    }
+}

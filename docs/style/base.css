@@ -157,10 +157,6 @@
     --global-shadow-blur: color-mix(in srgb,
             var(--global-shadow) calc(var(--global-opacity-weak) * 100%),
             transparent);
-    --global-shadow-blur-theme: color-mix(in srgb,
-            var(--global-theme-color-6) calc(var(--global-opacity-weak) * 100%),
-            transparent);
-    --global-card-box-shadow-theme: 0 8px 16px -4px var(--global-shadow-blur-theme);
 
     --global-aspect-ratio-square: 1 / 1;
     --global-aspect-ratio-tall: 1 / 1.25;

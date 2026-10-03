@@ -236,13 +236,13 @@ function plugin(hook, vm) {
         isfontPickerOpen = (target === popups.font)
 
         if (themePickerPopupSpan) {
-            themePickerPopupSpan.classList.toggle('theme-picker-popup-span-disappear', !isthemePickerOpen)
+            themePickerPopupSpan.classList.toggle('page-right-popups-disappear', !isthemePickerOpen)
         }
         if (colorPickerPopupSpan) {
-            colorPickerPopupSpan.classList.toggle('color-picker-popup-span-disappear', !iscolorPickerPopupOpen)
+            colorPickerPopupSpan.classList.toggle('page-right-popups-disappear', !iscolorPickerPopupOpen)
         }
         if (fontPickerPopupSpan) {
-            fontPickerPopupSpan.classList.toggle('font-picker-popup-span-disappear', !isfontPickerOpen)
+            fontPickerPopupSpan.classList.toggle('page-right-popups-disappear', !isfontPickerOpen)
         }
     }
 
@@ -395,12 +395,12 @@ function plugin(hook, vm) {
 
         themePickerPopupSpan = document.createElement('span')
         themePickerPopupSpan.id = 'theme-picker-popup-span'
-        themePickerPopupSpan.className = 'theme-picker-popup-span theme-picker-popup-span-disappear'
+        themePickerPopupSpan.className = 'theme-picker-popup-span page-right-popups-disappear page-right-popups'
         themePickerPopupSpan.style.setProperty('--widgets-index', widgets.indexOf(themeSpan))
 
         let themePickerPopupDiv = document.createElement('div')
         themePickerPopupDiv.id = 'theme-picker-popup-div'
-        themePickerPopupDiv.className = 'theme-picker-popup-div'
+        themePickerPopupDiv.className = 'theme-picker-popup-div page-right-popups-div'
 
         let presetListDiv = document.createElement('div')
         presetListDiv.className = 'theme-picker-preset-color-list-div'
@@ -457,12 +457,12 @@ function plugin(hook, vm) {
 
         colorPickerPopupSpan = document.createElement('span')
         colorPickerPopupSpan.id = 'color-picker-popup-span'
-        colorPickerPopupSpan.className = 'color-picker-popup-span color-picker-popup-span-disappear'
+        colorPickerPopupSpan.className = 'color-picker-popup-span page-right-popups-disappear page-right-popups'
         colorPickerPopupSpan.style.setProperty('--widgets-index', widgets.indexOf(colorPickerSpan))
 
         let colorPickerPopupDiv = document.createElement('div')
         colorPickerPopupDiv.id = 'color-picker-popup-div'
-        colorPickerPopupDiv.className = 'color-picker-popup-div'
+        colorPickerPopupDiv.className = 'color-picker-popup-div page-right-popups-div'
         colorPickerPopupDiv.innerHTML = '<div class="color-picker-preset-color-list-div"><div class="color-picker-preset-color-btn-div" data-hue="0"></div><div class="color-picker-preset-color-btn-div" data-hue="30"></div><div class="color-picker-preset-color-btn-div" data-hue="60"></div><div class="color-picker-preset-color-btn-div" data-hue="90"></div><div class="color-picker-preset-color-btn-div" data-hue="180"></div><div class="color-picker-preset-color-btn-div" data-hue="250"></div><div class="color-picker-preset-color-btn-div" data-hue="270"></div><div class="color-picker-preset-color-btn-div" data-hue="300"></div><div class="color-picker-preset-color-btn-div" data-hue="330"></div><div class="color-picker-preset-color-btn-div" data-hue="345"></div></div><input type="range" min="0" max="360" value="270" class="color-picker-slider" id="color-picker-slider" step="5">'
 
         colorPickerPopupSpan.appendChild(colorPickerPopupDiv)
@@ -500,12 +500,12 @@ function plugin(hook, vm) {
 
         fontPickerPopupSpan = document.createElement('span')
         fontPickerPopupSpan.id = 'font-picker-popup-span'
-        fontPickerPopupSpan.className = 'font-picker-popup-span font-picker-popup-span-disappear'
+        fontPickerPopupSpan.className = 'font-picker-popup-span page-right-popups-disappear page-right-popups'
         fontPickerPopupSpan.style.setProperty('--widgets-index', widgets.indexOf(fontPickerSpan))
 
         let fontPickerPopupDiv = document.createElement('div')
         fontPickerPopupDiv.id = 'font-picker-popup-div'
-        fontPickerPopupDiv.className = 'font-picker-popup-div'
+        fontPickerPopupDiv.className = 'font-picker-popup-div page-right-popups-div'
 
         let presetListDiv = document.createElement('div')
         presetListDiv.className = 'font-picker-preset-size-list-div'

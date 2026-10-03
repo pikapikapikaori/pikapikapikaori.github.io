@@ -400,15 +400,17 @@
         addEventListener("DOMContentLoaded", function () {
             let models = [
                 {
-                    width: 400,
+                    width: 300,
                     height: 300,
                     right: "55px",
                     bottom: "0px",
+                    offsetX: -60,
+                    offsetY: 0,
                     role: "./live2d/rice_pro_en/runtime/rice_pro_t03.model3.json",
                     background: "",
                     opacity: 1,
                     mobile: false,
-                    draggable: true,
+                    draggable: false,
                 },
             ];
             new Live2dLoader(models);

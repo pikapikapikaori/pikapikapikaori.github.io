@@ -24,6 +24,10 @@
     padding: 0 0.9375rem;
 }
 
+#gitalk-container .gt-container {
+    font-size: 1rem;
+}
+
 #gitalk-container .gt-header-controls-tip {
     color: var(--theme-color);
 }

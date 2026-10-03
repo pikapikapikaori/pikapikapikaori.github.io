@@ -54,12 +54,12 @@
 
 .brief-comments-in-blog-title-year>summary:hover,
 .brief-comments-in-blog-title-year[open]>summary:hover {
-    color: var(--global-theme-color-7);
+    color: var(--global-theme-color-8);
 }
 
 .brief-comments-in-blog-title-year>summary:hover::after,
 .brief-comments-in-blog-title-year[open]>summary:hover::after {
-    border-color: var(--global-theme-color-7);
+    border-color: var(--global-theme-color-8);
 }
 
 .brief-comments-in-blog-title-year>summary::marker {

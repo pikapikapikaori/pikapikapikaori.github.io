@@ -47,20 +47,41 @@
     --token-inserted-color: #202746;
     --token-important-color: #c94922;
 
+    --cal-theme-color-s-1: 32;
+    --cal-theme-color-s-2: 24;
+    --cal-theme-color-s-3: 14;
+    --cal-theme-color-s-4: 6;
+    --cal-theme-color-s-5: -8;
+    --cal-theme-color-s-6: -18;
+    --cal-theme-color-s-7: -32;
+    --cal-theme-color-s-8: -48;
+    --cal-theme-color-l-1: 18;
+    --cal-theme-color-l-2: 12;
+    --cal-theme-color-l-3: 6;
+    --cal-theme-color-l-4: 3;
+    --cal-theme-color-l-5: -8;
+    --cal-theme-color-l-6: -18;
+    --cal-theme-color-l-7: -30;
+    --cal-theme-color-l-8: -44;
+
+
     /* ============================================================
      *  主题色相关变量
      * ============================================================ */
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
-    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + 32), 100) clamp(0, calc(l + 18), 100));
-    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + 24), 100) clamp(0, calc(l + 12), 100));
-    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + 14), 100) clamp(0, calc(l + 6), 100));
-    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + 6), 100) clamp(0, calc(l + 3), 100));
-    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s - 8), 100) clamp(0, calc(l - 8), 100));
-    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s - 18), 100) clamp(0, calc(l - 18), 100));
-    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s - 32), 100) clamp(0, calc(l - 30), 100));
-    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s - 48), 100) clamp(0, calc(l - 44), 100));
+    --global-theme-color-blur-weak: color-mix(in srgb,
+            var(--theme-color) 45%,
+            transparent);
+    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-1)), 100) clamp(0, calc(l + var(--cal-theme-color-l-1)), 100));
+    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-2)), 100) clamp(0, calc(l + var(--cal-theme-color-l-2)), 100));
+    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-3)), 100) clamp(0, calc(l + var(--cal-theme-color-l-3)), 100));
+    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-4)), 100) clamp(0, calc(l + var(--cal-theme-color-l-4)), 100));
+    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-5)), 100) clamp(0, calc(l + var(--cal-theme-color-l-5)), 100));
+    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-6)), 100) clamp(0, calc(l + var(--cal-theme-color-l-6)), 100));
+    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
+    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
 
     /* ============================================================
      *  框架变量
@@ -136,6 +157,10 @@
     --global-shadow-blur: color-mix(in srgb,
             var(--global-shadow) calc(var(--global-opacity-weak) * 100%),
             transparent);
+    --global-shadow-blur-theme: color-mix(in srgb,
+            var(--global-theme-color-6) calc(var(--global-opacity-weak) * 100%),
+            transparent);
+    --global-card-box-shadow-theme: 0 8px 16px -4px var(--global-shadow-blur-theme);
 
     --global-aspect-ratio-square: 1 / 1;
     --global-aspect-ratio-tall: 1 / 1.25;
@@ -1150,7 +1175,8 @@ body {
 
 .markdown-section mark {
     padding: 0.3em 0.2em 0;
-    background-color: var(--global-theme-color-2);
+    background-color: var(--global-theme-color-1);
+    color: var(--global-theme-color-8);
     border-radius: 0.125rem;
 }
 

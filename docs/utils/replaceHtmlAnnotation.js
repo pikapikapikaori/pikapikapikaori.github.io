@@ -130,6 +130,22 @@ const blockTagConfigMap = new Map([
             startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div poem-div">',
             endHtml: '</div></div>'
         }
+    ],
+
+    /* Writing Direction Vertical Container */
+    [
+        'vertical-ltr-wrap',
+        {
+            startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-ltr-div">',
+            endHtml: '</div></div>'
+        }
+    ],
+    [
+        'vertical-rtl-wrap',
+        {
+            startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div">',
+            endHtml: '</div></div>'
+        }
     ]
 ])
 

@@ -1,6 +1,6 @@
 :root {
-    --tocpage-display-height: 300px;
-    --tocpage-display-img-height: 200px;
+    --tocpage-display-height: 18.75rem;
+    --tocpage-display-img-height: 12.5rem;
     --tocpage-button-size: var(--global-widget-size-normal);
     --tocpage-input-size: var(--global-widget-size-small);
 }

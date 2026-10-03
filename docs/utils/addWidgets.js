@@ -142,7 +142,7 @@ function plugin(hook, vm) {
 
     // 字号切换
     let isfontPickerOpen = false
-    const fontSizeLevels = [14, 16, 18, 21, 24]
+    const fontSizeLevels = [14, 16, 18, 20, 22]
     let fontSizeLevelIndex = 1
 
     // 进度条

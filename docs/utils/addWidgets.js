@@ -83,7 +83,7 @@ function plugin(hook, vm) {
         themePickerPopupSpan,
         colorPickerSpan,
         colorPickerPopupSpan,
-        fontPickerSpan, 
+        fontPickerSpan,
         fontPickerPopupSpan,
         scrollToCommentSpan,
         showSakuraSpan,
@@ -255,13 +255,28 @@ function plugin(hook, vm) {
         return mode === 'dark'
     }
 
+    let syncColorPickerActiveBtn = function (hue) {
+        let btns = Array.from(document.getElementsByClassName('color-picker-preset-color-btn-div'))
+
+        if (!btns.length || hue === undefined || hue === null || isNaN(hue)) {
+            btns.forEach(btn => btn.classList.remove('is-active'))
+            return
+        }
+
+        let snapped = Math.round(Number(hue) / 5) * 5
+        if (snapped >= 360) snapped -= 360
+
+        let matched = btns.find(btn => Number(btn.dataset.hue) === snapped)
+        btns.forEach(btn => btn.classList.toggle('is-active', btn === matched))
+    }
+
     let updateColorPickerSlider = function (themeColor) {
         let colorPickerSlider = document.getElementsByClassName('color-picker-slider')[0]
-        if (colorPickerSlider) {
-            let hue = hexToHsl(themeColor)[0]
-            colorPickerSlider.value = hue
-            syncColorPickerActiveBtn(hue) 
-        }
+        if (!colorPickerSlider || !themeColor) return
+
+        let hue = hexToHsl(themeColor)[0]
+        colorPickerSlider.value = hue
+        syncColorPickerActiveBtn(hue)
     }
 
     let syncThemeColorMeta = function (isDark) {
@@ -274,6 +289,10 @@ function plugin(hook, vm) {
         if (!meta) return
 
         meta.content = bg
+    }
+
+    function applyThemeColorCss(themeColor) {
+        document.documentElement.style.setProperty('--theme-color', themeColor)
     }
 
     let applyThemeColor = function () {
@@ -292,7 +311,7 @@ function plugin(hook, vm) {
             colorTheme.href = 'data:text/css,'
         }
 
-        document.documentElement.style.setProperty('--theme-color', themeColor)
+        applyThemeColorCss(themeColor)
 
         updateColorPickerSlider(themeColor)
         syncThemePickerActiveBtn()
@@ -319,16 +338,17 @@ function plugin(hook, vm) {
         return `#${f(0)}${f(8)}${f(4)}`
     }
 
-    let syncColorPickerActiveBtn = function (hue) {
-        let btns = document.getElementsByClassName('color-picker-preset-color-btn-div')
+    // 字号切换
+    let syncFontPickerActiveBtn = function () {
+        let btns = document.getElementsByClassName('font-picker-preset-size-btn-div')
         Array.from(btns).forEach(btn => {
-            btn.classList.toggle('is-active', Math.abs(Number(btn.dataset.hue) - Number(hue)) <= 1)
+            btn.classList.toggle('is-active', Number(btn.dataset.sizeIndex) === fontSizeLevelIndex)
         })
     }
 
-    // 字号切换
-    function applyFontSize () {
+    function applyFontSize() {
         document.documentElement.style.setProperty('--global-font-size', fontSizeLevels[fontSizeLevelIndex] + 'px')
+        syncFontPickerActiveBtn()
     }
 
     // 进度条
@@ -390,8 +410,6 @@ function plugin(hook, vm) {
     let initSwitchTheme = function () {
         themeSpan = createWidget('switch-theme-span')
         themeSpan.innerHTML = icons.themeSwitcher
-
-        applyThemeColor()
 
         themePickerPopupSpan = document.createElement('span')
         themePickerPopupSpan.id = 'theme-picker-popup-span'
@@ -473,14 +491,14 @@ function plugin(hook, vm) {
 
         colorPickerSlider.oninput = function () {
             let hue = Number(this.value)
-            document.documentElement.style.setProperty('--theme-color', hslToHex(hue, hslFixed.s, hslFixed.l))
+            applyThemeColorCss(hslToHex(hue, hslFixed.s, hslFixed.l))
             syncColorPickerActiveBtn(hue)
         }
 
         Array.from(colorPickerPopupDiv.getElementsByClassName('color-picker-preset-color-btn-div')).forEach(colorPickerPresetColorBtn => {
             colorPickerPresetColorBtn.onclick = function () {
                 let hue = Number(this.dataset.hue)
-                document.documentElement.style.setProperty('--theme-color', hslToHex(hue, hslFixed.s, hslFixed.l))
+                applyThemeColorCss(hslToHex(hue, hslFixed.s, hslFixed.l))
                 colorPickerSlider.value = hue
                 syncColorPickerActiveBtn(hue)
             }
@@ -490,7 +508,9 @@ function plugin(hook, vm) {
             switchPopup(iscolorPickerPopupOpen ? null : popups.color)
         }
 
-        syncColorPickerActiveBtn(Number(colorPickerSlider.value))
+        updateColorPickerSlider(
+            getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim()
+        )
     }
 
     // 字号切换
@@ -515,15 +535,10 @@ function plugin(hook, vm) {
             btnDiv.className = 'font-picker-preset-size-btn-div'
             btnDiv.dataset.sizeIndex = index
             btnDiv.textContent = 'A'
-            btnDiv.classList.toggle('is-active', index === fontSizeLevelIndex)
 
             btnDiv.onclick = function () {
                 fontSizeLevelIndex = index
                 applyFontSize()
-
-                Array.from(presetListDiv.children).forEach(function (el, i) {
-                    el.classList.toggle('is-active', i === index)
-                })
             }
 
             presetListDiv.appendChild(btnDiv)
@@ -534,7 +549,7 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(fontPickerPopupSpan)
 
         fontPickerSpan.onclick = function () {
-            switchPopup(isfontPickerOpen ? null : 'font')
+            switchPopup(isfontPickerOpen ? null : popups.font)
         }
 
         widgetsContainer.appendChild(fontPickerSpan)
@@ -695,7 +710,7 @@ function plugin(hook, vm) {
         initSwitchMode()
         initSwitchTheme()
         initColorPicker()
-        initFontPicker() 
+        initFontPicker()
         initCommentScroll()
         initSakuraRain()
         if (!isNowMobile) {

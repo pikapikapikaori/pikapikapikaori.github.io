@@ -121,6 +121,15 @@ const blockTagConfigMap = new Map([
             startHtml: '<section class="multi-images-container-section">',
             endHtml: '</section>'
         }
+    ],
+
+    /* Poem Container */
+    [
+        'poem-wrap',
+        {
+            startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div poem-div">',
+            endHtml: '</div></div>'
+        }
     ]
 ])
 

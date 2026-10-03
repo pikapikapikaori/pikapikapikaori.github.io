@@ -393,3 +393,8 @@
         column-count: 1;
     }
 }
+
+/* Poem Container */
+.poem-div {
+    font-family: var(--global-poem-font);
+}

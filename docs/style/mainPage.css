@@ -174,8 +174,3 @@ div:has(.writing-direction-vertical-div) {
     overflow-x: auto;
     height: var(--global-writing-container-height);
 }
-
-/* Poem */
-.poem-div {
-    font-family: var(--global-poem-font);
-}

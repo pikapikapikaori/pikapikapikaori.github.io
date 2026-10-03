@@ -146,6 +146,13 @@ const blockTagConfigMap = new Map([
             startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div">',
             endHtml: '</div></div>'
         }
+    ],
+    [
+        'rtl-wrap',
+        {
+            startHtml: '<div class="writing-direction-rtl-div">',
+            endHtml: '</div>'
+        }
     ]
 ])
 

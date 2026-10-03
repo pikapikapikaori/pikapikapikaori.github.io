@@ -1,5 +1,11 @@
 :root {
     --replaceAnnot-footnote-width: 30%;
+
+    --replaceAnnot-ranjana-font: 'NithyaRanjana', serif;
+    --replaceAnnot-jiagu-font: 'ShirakawaKoukotsu', 'ShirakawaKoukotsu-2', 'FZJiaGW', serif;
+    --replaceAnnot-zhuanwen-font: 'ShirakawaTenbun', 'ShirakawaTenbun-2', 'FZXiaoZhuan', serif;
+    --replaceAnnot-jinwen-font: 'ShirakawaKinbun', 'ShirakawaKinbun-2', serif;
+    --replaceAnnot-cjkext-font: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
 }
 
 /* Brief Comments */
@@ -491,4 +497,29 @@ div:has(.writing-direction-vertical-div) {
     overflow-y: hidden;
     overflow-x: auto;
     height: var(--global-writing-container-height);
+}
+
+/* Minority Language Container */
+.minority-language-font {
+    font-family: var(--global-minority-lang-font);
+}
+
+.minority-language-font-ranjana {
+    font-family: var(--replaceAnnot-ranjana-font);
+}
+
+.minority-language-font-jiagu {
+    font-family: var(--replaceAnnot-jiagu-font);
+}
+
+.minority-language-font-zhuanwen {
+    font-family: var(--replaceAnnot-zhuanwen-font);
+}
+
+.minority-language-font-jinwen {
+    font-family: var(--replaceAnnot-jinwen-font);
+}
+
+.minority-language-font-cjkext {
+    font-family: var(--replaceAnnot-cjkext-font);
 }

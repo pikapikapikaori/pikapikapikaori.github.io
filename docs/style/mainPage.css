@@ -6,54 +6,6 @@
     --mainpage-cjkext-font: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
 }
 
-/* --- Docsify --- */
-
-/* Cover */
-section.cover h1 {
-    font-family: var(--global-cover-font);
-}
-
-section.cover p {
-    font-family: var(--global-cover-paragraph-font);
-}
-
-.cover-page-scroll-down-chevron-div {
-    margin: 2.5rem 0 0;
-    position: absolute;
-    left: calc(50% - 0.625rem);
-}
-
-.cover-page-scroll-down-chevron {
-    position: relative;
-    animation: moveChevron var(--global-transition-duration-very-slow) infinite;
-}
-
-@keyframes moveChevron {
-    0% {
-        top: 0;
-        opacity: var(--global-opacity-very-weak);
-    }
-
-    50% {
-        top: 0.9375rem;
-        opacity: var(--global-opacity-none);
-    }
-
-    100% {
-        top: 0;
-        opacity: var(--global-opacity-very-weak);
-    }
-}
-
-/* Sidebar */
-.page-sidebar-title-class {
-    font-size: 2rem;
-    font-family: var(--global-sidebar-name-font);
-    color: var(--theme-color);
-}
-
-/* --- Personal Components --- */
-
 /* Global */
 
 /* Language Support */

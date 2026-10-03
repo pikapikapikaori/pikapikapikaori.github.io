@@ -1,5 +1,5 @@
 :root {
-    --widgets-size: 1.5rem;
+    --widgets-size: var(--global-widget-size-normal);
     --widgets-gap: 2.1875rem;
     --widgets-top: 0;
     --widgets-right: 1.625rem;

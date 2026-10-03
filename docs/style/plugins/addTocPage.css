@@ -1,6 +1,7 @@
 :root {
     --tocpage-display-height: 300px;
     --tocpage-display-img-height: 200px;
+    --tocpage-button-size: var(--global-widget-size-normal);
 }
 
 .toc-page-display-a {
@@ -125,8 +126,8 @@
 }
 
 .toc-paginator-button-span {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--tocpage-button-size);
+    height: var(--tocpage-button-size);
     display: flex;
     align-items: center;
     justify-content: center;

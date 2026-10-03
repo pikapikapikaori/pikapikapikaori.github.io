@@ -1,3 +1,7 @@
+:root {
+    --viewImg-button-size: var(--global-widget-size-normal);
+}
+
 #view-full-image-span {
     display: none;
     position: fixed;
@@ -20,8 +24,8 @@
     display: flex;
     align-items: center;
     transition-duration: var(--global-transition-duration);
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--viewImg-button-size);
+    height: var(--viewImg-button-size);
 }
 
 #view-full-image-span-inner-left-div {

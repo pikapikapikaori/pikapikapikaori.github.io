@@ -109,6 +109,11 @@
     --global-font-weight-semibold: 600;
     --global-font-weight-bold: 700;
 
+    --global-bg-color-light: #fff;
+    --global-bg-color-dark: #3f3f3f;
+    --global-text-color-light: #34495e;
+    --global-text-color-dark: #c8c8c8;
+
     --global-content-width: min(80%, 800px);
     --global-sidebar-width: 300px;
     --global-sidebar-width-none: 0;
@@ -206,8 +211,19 @@ body:not(.ready) [data-cloak] {
 div#app {
     font-size: 1.875rem;
     font-weight: var(--global-font-weight-thin);
-    margin: 40vh auto;
+    padding: 40vh 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--global-bg-color-light);
+    color: var(--global-text-color-light);
     text-align: center
+}
+
+@media (prefers-color-scheme: dark) {
+    div#app {
+        background-color: var(--global-bg-color-dark);
+        color: var(--global-text-color-dark);
+    }
 }
 
 div#app:empty:before {

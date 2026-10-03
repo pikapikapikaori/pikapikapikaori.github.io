@@ -1,0 +1,30 @@
+:root {
+    --theme-color: #c7a2ec;
+}
+
+
+img:not([src]):not([srcset]),
+img[src=""] {
+    display: flex !important;
+    margin: var(--margin-block ) auto !important;
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+}
+
+img:not([src]):not([srcset]):not([alt]),
+img[src=""]:not([alt]),
+video:not([src]):not(:has(source[src])),
+audio:not([src]):not(:has(source[src])),
+iframe:not([src]):not([srcdoc]) {
+    width: 5rem;
+    height: 1.5625rem;
+    background: var(--color-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+
+    display: flex !important;
+    margin: var(--margin-block ) auto !important;
+}

@@ -23,7 +23,7 @@ This blog is powered by [Docsify@4](https://docsify.js.org/), and is accessible 
 
 - [GitHub Pages](https://pikapikapikaori.github.io/#/en-us/)
 - [Vercel](https://pikapikapi-blog.vercel.app/#/en-us/)
-- [Netlify](https://pikapikapikaori.netlify.app/#/en-us/)
+- ~~Netlify~~
 
 <!-- div:right-panel -->
 

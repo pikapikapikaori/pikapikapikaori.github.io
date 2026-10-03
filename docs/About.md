@@ -17,7 +17,7 @@
 
 - [GitHub Pages](https://pikapikapikaori.github.io/)
 - [Vercel](https://pikapikapi-blog.vercel.app/)
-- [Netlify](https://pikapikapikaori.netlify.app/)
+- ~~Netlify~~
 
 <!-- div:right-panel -->
 

@@ -20,7 +20,7 @@
 
 - [GitHub Pages](https://pikapikapikaori.github.io/#/jp/)
 - [Vercel](https://pikapikapi-blog.vercel.app/#/jp/)
-- [Netlify](https://pikapikapikaori.netlify.app/#/jp/)
+- ~~Netlify~~
 
 <!-- div:right-panel -->
 

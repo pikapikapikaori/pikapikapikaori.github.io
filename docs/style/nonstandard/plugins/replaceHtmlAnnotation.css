@@ -17,3 +17,15 @@
 .brief-comments-in-blog-title-year>summary::before {
     -webkit-mask: none;
 }
+
+/* About Page */
+.main-page-about-me-links>a>svg:hover {
+    -webkit-transform: scale(var(--global-transform-ratio-big));
+}
+
+/* Microsoft Edge-specific properties */
+
+/* About Page */
+.main-page-about-me-links>a>svg:hover {
+    -ms-transform: scale(var(--global-transform-ratio-big));
+}

@@ -300,3 +300,69 @@
     width: var(--replaceAnnot-footnote-width);
     max-width: var(--replaceAnnot-footnote-width);
 }
+
+/* About Page */
+.main-page-right-panel-container {
+    font-family: var(--global-handwriting-font);
+    border: var(--global-border) var(--border-color-strong);
+    background-color: var(--zebra-bg);
+    border-radius: var(--global-el-border-radius);
+    margin: 1.2rem auto;
+    max-width: var(--global-sidenote-width);
+    text-align: center;
+}
+
+.main-page-right-panel-container p:has(img.main-page-about-me-avatar) {
+    margin: 0;
+}
+
+.main-page-about-me-avatar {
+    max-width: var(--global-icon-size-large);
+    margin-top: 1.25rem;
+    border-radius: var(--global-avatar-border-radius);
+    overflow: hidden;
+}
+
+.main-page-right-panel-container .main-page-about-me-title {
+    margin: 1.2rem 0;
+    font-size: 1.8rem;
+}
+
+.main-page-right-panel-container .main-page-about-me-description {
+    margin: 1.2rem 0;
+    font-size: 1.4rem;
+}
+
+.main-page-right-panel-container .main-page-about-me-links {
+    margin: 1.2rem 0;
+}
+
+.main-page-about-me-links>a {
+    margin: 0 0.625rem 0;
+    text-decoration: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: inherit;
+    display: inline-block;
+}
+
+.main-page-about-me-links>a>svg {
+    transition-duration: var(--global-transition-duration);
+}
+
+.main-page-about-me-links>a>svg:hover {
+    transform: scale(var(--global-transform-ratio-big));
+}
+
+.main-page-right-panel-container .main-page-about-me-image-links {
+    padding: 0.625rem;
+    margin: 0;
+}
+
+.main-page-about-me-image-links p:first-child {
+    margin-top: 0;
+}
+
+.main-page-about-me-image-links p:last-child {
+    margin-bottom: 0;
+}

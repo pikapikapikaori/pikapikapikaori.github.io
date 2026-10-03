@@ -68,6 +68,22 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="footnote-div">',
             endHtml: '</div>'
         }
+    ],
+
+    /* Toc Style Card */
+    [
+        'toc-card-wrap',
+        {
+            startHtml: '<div class="toc-page-div">',
+            endHtml: '</div>'
+        }
+    ],
+    [
+        'toc-card',
+        {
+            startHtml: '<a class="toc-page-display-a" ',
+            endHtml: '</div></a>'
+        }
     ]
 ])
 
@@ -90,6 +106,20 @@ const inlineTagConfigMap = new Map([
     [
         'footnote-num',
         (payload) => `<sup class="footnote-num-sup">${payload}</sup>`
+    ],
+
+    /* Toc Style Card */
+    [
+        'toc-card-href',
+        (payload) => `href="${payload}" target="_blank"><div class="toc-page-display-div">`
+    ],
+    [
+        'toc-card-img',
+        (payload) => `<div class="toc-page-display-title-img"><img class="ignore-view-full-image-img" src="${payload}"></center></div>`
+    ],
+    [
+        'toc-card-description',
+        (payload) => `<div class="toc-page-display-title-div">ピカピカピ</div><div class="toc-page-display-date-div">${payload}</div>`
     ]
 ])
 

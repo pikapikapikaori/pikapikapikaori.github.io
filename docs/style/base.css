@@ -330,9 +330,8 @@ li input[type=checkbox] {
 }
 
 .app-nav li ul {
-    background-color: var(--bg-color);
-    border: var(--global-border);
-    border-color: var(--border-color-strong) var(--border-color-strong) var(--border-color-mid);
+    background-color: var(--zebra-bg);
+    border: var(--global-border) var(--border-color-strong);
     border-radius: 0.25rem;
     box-sizing: border-box;
     display: none;
@@ -589,6 +588,14 @@ body.sticky .sidebar-toggle {
 .markdown-section p.warn,
 .markdown-section tr:nth-child(2n) {
     background-color: var(--zebra-bg)
+}
+
+.markdown-section thead tr {
+    background-color: var(--zebra-bg)
+}
+
+.markdown-section thead tr:nth-child(2n) {
+    background-color: var(--bg-color)
 }
 
 .markdown-section p.tip,
@@ -1108,7 +1115,7 @@ body {
 .markdown-section output {
     padding: 1.7rem 1.4rem;
     background-color: var(--zebra-bg);
-    border: var(--global-border) var(--border-color-mid)
+    border: var(--global-border) var(--border-color-strong)
 }
 
 .markdown-section output>:first-child {

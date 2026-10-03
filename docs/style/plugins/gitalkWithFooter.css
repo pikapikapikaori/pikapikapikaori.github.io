@@ -123,8 +123,8 @@
 }
 
 #gitalk-container .gt-container .gt-popup {
-    background-color: var(--bg-color);
-    border-color: var(--border-color);
+    background-color: var(--zebra-bg);
+    border-color: var(--border-color-strong);
 }
 
 #gitalk-container .gt-container .gt-popup .gt-copyright {
@@ -144,7 +144,7 @@
     .gt-header-textarea,
     .gt-header-preview {
         background-color: var(--zebra-bg);
-        border: var(--global-border) var(--border-color);
+        border: var(--global-border) var(--border-color-strong);
     }
 }
 

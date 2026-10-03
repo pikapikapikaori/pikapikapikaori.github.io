@@ -669,6 +669,20 @@ body.close .content {
     .sidebar-toggle {
         display: none
     }
+
+    main {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+    
+    .content {
+        left: auto;
+        right: auto;
+        transition: none;
+        position: static;
+        width: auto;
+    }
 }
 
 @media screen and (max-width:768px) {

@@ -11,6 +11,17 @@
     --widgets-hsl-l: 78%;
 }
 
+@media print {
+    .page-right-widgets-container,
+    .sakura {
+        display: none;
+    }
+
+    #canvas {
+        transform: translate(var(--widgets-hide-transform-length), 0);
+    }
+}
+
 @media screen and (max-width:768px) {
     :root {
         --widgets-right: calc(10 / 12 * var(--global-widget-size-normal));

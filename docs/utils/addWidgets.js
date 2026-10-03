@@ -95,6 +95,11 @@ function plugin(hook, vm) {
     let widgetsCnt = 8
     let widgetsDesktopCnt = 1
 
+    let popups = {
+        theme: 'theme',
+        color: 'color'
+    }
+
     const hslFixed = {
         s: 66,
         l: 78
@@ -214,6 +219,18 @@ function plugin(hook, vm) {
         const l = (max + min) / 2
 
         return [Math.round(h), Math.round(s * 100), Math.round(l * 100)]
+    }
+
+    let switchPopup = function (target) {
+        isthemePickerOpen = (target === popups.theme)
+        iscolorPickerPopupOpen = (target === popups.color)
+
+        if (themePickerPopupSpan) {
+            themePickerPopupSpan.classList.toggle('theme-picker-popup-span-disappear', !isthemePickerOpen)
+        }
+        if (colorPickerPopupSpan) {
+            colorPickerPopupSpan.classList.toggle('color-picker-popup-span-disappear', !iscolorPickerPopupOpen)
+        }
     }
 
     // 黑暗模式切换、主题切换
@@ -389,10 +406,8 @@ function plugin(hook, vm) {
         themePickerPopupSpan.appendChild(themePickerPopupDiv)
         widgetsContainer.appendChild(themePickerPopupSpan)
 
-        themeSpan.onclick = function (e) {
-            isthemePickerOpen = !isthemePickerOpen
-
-            themePickerPopupSpan.classList.toggle('theme-picker-popup-span-disappear')
+        themeSpan.onclick = function () {
+            switchPopup(isthemePickerOpen ? null : popups.theme)
         }
 
         widgetsContainer.appendChild(themeSpan)
@@ -431,9 +446,7 @@ function plugin(hook, vm) {
         })
 
         colorPickerSpan.onclick = function () {
-            iscolorPickerPopupOpen = !iscolorPickerPopupOpen
-
-            colorPickerPopupSpan.classList.toggle('color-picker-popup-span-disappear')
+            switchPopup(iscolorPickerPopupOpen ? null : popups.color)
         }
     }
 
@@ -510,11 +523,7 @@ function plugin(hook, vm) {
             widgetsSpanList.forEach(widget => widget.classList.toggle('page-right-tools-widgets-span-disappear'))
 
             if (!isWidgetsOpen) {
-                iscolorPickerPopupOpen = isWidgetsOpen
-                colorPickerPopupSpan.classList.add('color-picker-popup-span-disappear')
-
-                isthemePickerOpen = isWidgetsOpen
-                themePickerPopupSpan.classList.add('theme-picker-popup-span-disappear')
+                switchPopup(null)
             }
         }
 

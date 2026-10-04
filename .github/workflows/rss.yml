@@ -1,32 +1,36 @@
 name: RSS
 
 on:
-    push:
-        branches-ignore:
-            - master
+  push:
+    branches-ignore:
+      - master
+    paths:
+      - 'docs/**/*.md'
+
+permissions:
+  contents: write
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
 
-            - name: Install Pandoc
-              run: |
-                  sudo apt-get update
-                  sudo apt-get install -y pandoc
+      - name: Build RSS
+        run: |
+          cd docs/
+          bash ./script/rss.sh
 
-            - name: Build RSS
-              run: |
-                  cd docs/
-                  ./script/rss.sh
-
-            - name: Commit Updated
-              uses: stefanzweifel/git-auto-commit-action@v5
-              with:
-                  commit_message: "action: build pikapikapi-blog-rss.atom"
-                  file_pattern: "docs/pikapikapi-blog-rss.atom"
+      - name: Commit Updated
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "action: build pikapikapi-blog-rss.atom"
+          file_pattern: "docs/pikapikapi-blog-rss.atom"

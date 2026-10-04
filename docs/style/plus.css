@@ -42,6 +42,11 @@ section.cover p {
     font-size: 2rem;
     font-family: var(--global-sidebar-name-font);
     color: var(--theme-color);
+    transition-duration: var(--global-transition-duration);
+}
+
+.page-sidebar-title-class:hover {
+    color: var(--global-theme-color-7);
 }
 
 /* --- Docsify Search --- */

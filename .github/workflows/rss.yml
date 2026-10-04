@@ -6,6 +6,9 @@ on:
       - master
     paths:
       - 'docs/**/*.md'
+      - '!docs/sources/**'
+      - '!docs/style/**'
+      - '!docs/pages/**'
 
 permissions:
   contents: write

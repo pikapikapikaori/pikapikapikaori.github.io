@@ -1,87 +1,87 @@
 name: Deploy to Cloudflare R2
 
 on:
-  push:
-    branches: [master]
+    push:
+        branches: [master]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Need complete git history to find merge commit
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Install rclone
-        run: curl https://rclone.org/install.sh | sudo bash
+            - name: Install rclone
+              run: curl https://rclone.org/install.sh | sudo bash
 
-      - name: Find changed files since last merge
-        id: changes
-        run: |
-          git config --global core.quotepath false
+            - name: Find changed files since last merge
+              id: changes
+              run: |
+                  git config --global core.quotepath false
 
-          PARENT_COUNT=$(git show -s --format=%P HEAD | wc -w)
-          echo "Parent count: $PARENT_COUNT"
+                  PARENT_COUNT=$(git show -s --format=%P HEAD | wc -w)
+                  echo "Parent count: $PARENT_COUNT"
 
-          if [ "$PARENT_COUNT" -eq 2 ]; then
-            echo "mode=incremental" >> $GITHUB_OUTPUT
-            echo "Detected merge commit, comparing HEAD^1 and HEAD^2"
-            git diff --name-only --diff-filter=ACMRT HEAD^1 HEAD^2 -- docs/ > changed.txt
-            git diff --name-only --diff-filter=D HEAD^1 HEAD^2 -- docs/ > deleted.txt
-          else
-            echo "mode=skip" >> $GITHUB_OUTPUT
-            echo "Not a standard merge commit. Skipping deployment (full sync disabled)."
-            echo "has_changed=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
+                  if [ "$PARENT_COUNT" -eq 2 ]; then
+                    echo "mode=incremental" >> $GITHUB_OUTPUT
+                    echo "Detected merge commit, comparing HEAD^1 and HEAD^2"
+                    git diff --name-only --diff-filter=ACMRT HEAD^1 HEAD^2 -- docs/ > changed.txt
+                    git diff --name-only --diff-filter=D HEAD^1 HEAD^2 -- docs/ > deleted.txt
+                  else
+                    echo "mode=skip" >> $GITHUB_OUTPUT
+                    echo "Not a standard merge commit. Skipping deployment (full sync disabled)."
+                    echo "has_changed=false" >> $GITHUB_OUTPUT
+                    exit 0
+                  fi
 
-          if [ -s changed.txt ]; then
-            echo "has_changed=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_changed=false" >> $GITHUB_OUTPUT
-          fi
+                  if [ -s changed.txt ]; then
+                    echo "has_changed=true" >> $GITHUB_OUTPUT
+                  else
+                    echo "has_changed=false" >> $GITHUB_OUTPUT
+                  fi
 
-          echo ""
-          echo "=== Changed files ==="
-          cat changed.txt || echo "(none)"
-          echo ""
-          echo "=== Deleted files ==="
-          cat deleted.txt || echo "(none)"
+                  echo ""
+                  echo "=== Changed files ==="
+                  cat changed.txt || echo "(none)"
+                  echo ""
+                  echo "=== Deleted files ==="
+                  cat deleted.txt || echo "(none)"
 
-      - name: Upload changed files to R2
-        if: steps.changes.outputs.has_changed == 'true'
-        env:
-          RCLONE_CONFIG_R2_TYPE: s3
-          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
-          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
-          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true" 
-        run: |
-          while IFS= read -r file; do
-            [ -f "$file" ] || continue
-            r2_path="${file#docs/}"
-            echo "↑ $file"
-            rclone copyto "$file" "r2:pikapikapi-blog/$r2_path"
-          done < changed.txt
+            - name: Upload changed files to R2
+              if: steps.changes.outputs.has_changed == 'true'
+              env:
+                  RCLONE_CONFIG_R2_TYPE: s3
+                  RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+                  RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+                  RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+                  RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
+                  RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+              run: |
+                  while IFS= read -r file; do
+                    [ -f "$file" ] || continue
+                    r2_path="${file#docs/}"
+                    echo "↑ $file"
+                    rclone copyto "$file" "r2:pikapikapi-blog/$r2_path"
+                  done < changed.txt
 
-      - name: Delete removed files from R2
-        if: hashFiles('deleted.txt') != ''
-        env:
-          RCLONE_CONFIG_R2_TYPE: s3
-          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
-          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
-          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true" 
-        run: |
-          if [ ! -s deleted.txt ]; then
-            echo "No files to delete"
-            exit 0
-          fi
-          while IFS= read -r file; do
-            [ -n "$file" ] || continue
-            r2_path="${file#docs/}"
-            echo "↓ $r2_path"
-            rclone deletefile "r2:pikapikapi-blog/$r2_path" || true
-          done < deleted.txt
+            - name: Delete removed files from R2
+              if: hashFiles('deleted.txt') != ''
+              env:
+                  RCLONE_CONFIG_R2_TYPE: s3
+                  RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+                  RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+                  RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+                  RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CF_ACCOUNT_ID }}.r2.cloudflarestorage.com
+                  RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+              run: |
+                  if [ ! -s deleted.txt ]; then
+                    echo "No files to delete"
+                    exit 0
+                  fi
+                  while IFS= read -r file; do
+                    [ -n "$file" ] || continue
+                    r2_path="${file#docs/}"
+                    echo "↓ $r2_path"
+                    rclone deletefile "r2:pikapikapi-blog/$r2_path" || true
+                  done < deleted.txt

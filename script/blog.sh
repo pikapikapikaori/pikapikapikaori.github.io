@@ -31,6 +31,10 @@ UNICODE_GAP="$PYTHON_DIR/unicode_gap.py"
 FONT_RANGE="$PYTHON_DIR/font_range.py"
 PY_REQUIREMENTS="$PYTHON_DIR/requirements.txt"
 
+# ---------- RSS 生成脚本（必须在 docs/ 下运行）----------
+DOCS_DIR="$ROOT_DIR/docs"
+RSS_SCRIPT="$DOCS_DIR/script/rss.sh"
+
 # ---------- rclone 配置 ----------
 RCLONE_SRC="docs/"
 RCLONE_DST="r2:pikapikapi-blog/"
@@ -187,6 +191,13 @@ cmd_font_range() {
     confirm_run "提取字体 unicode-range" python3 "$FONT_RANGE" "$@"
 }
 
+cmd_rss() {
+    require_file "$RSS_SCRIPT"
+    local inner
+    printf -v inner 'cd %q && exec bash ./script/rss.sh' "$DOCS_DIR"
+    confirm_run "生成 RSS feed (docs/script/rss.sh)" bash -c "$inner"
+}
+
 # ---------- Python 依赖管理 ----------
 
 cmd_py_freeze() {
@@ -302,6 +313,10 @@ cmd_help() {
 所有命令在执行前会先展示完整命令并请求确认 (Y/N)。
 
 命令:
+    help                         显示此帮助
+
+====================  开发、构建、部署相关  ====================
+
     serve                       启动 docsify 本地服务 (npm start)
 
     lint[:fix]                  运行 ESLint 检查
@@ -319,19 +334,18 @@ cmd_help() {
                                     ./blog.sh clean-branches:real feat
                                     ./blog.sh clean-branches:real feat:prefix
 
-    get-cdn <url> [...args]     从 jsDelivr CDN 下载整个文件夹
-                                例: ./blog.sh get-cdn https://cdn.jsdelivr.net/npm/pkg/
-                                    ./blog.sh get-cdn https://cdn.jsdelivr.net/npm/pkg/ -o ./out -j 8
+    release <version> [msg]     发布新版本（更新 package.json + git commit + tag）
+                                version 为 major / minor / patch，或 semver（如 1.2.3）
+                                msg 缺省为 "version: bump to <新版本号>"
+                                例: ./blog.sh release patch
+                                    ./blog.sh release minor "feat: 新增 xxx"
+                                    ./blog.sh release 1.2.0 "chore: 固定版本"
 
-    build-chunks  [...args]     构建 subject/episode 分片
-                                例: ./blog.sh build-chunks --subject-chunk 1000
+====================  网站内容相关  ====================
 
-    unicode-gap   [...args]     查找 Unicode 码位空缺
-                                例: ./blog.sh unicode-gap -i ./assets/list.txt -v
+    rss                         生成 RSS feed（在 docs/ 下运行 script/rss.sh）
 
-    font-range    [...args]     提取字体 unicode-range
-                                例: ./blog.sh font-range ./fonts
-                                    ./blog.sh font-range ./fonts -o all.md
+====================  Python 脚本辅助  ====================
 
     py-freeze                   从虚拟环境生成 script/python/requirements.txt
                                 venv 查找优先级：script/python/.venv → 根目录 .venv
@@ -341,14 +355,23 @@ cmd_help() {
                                 venv 查找优先级：script/python/.venv → 根目录 .venv
                                 自动识别 uv / pip；找不到 venv 则不安装
 
-    release <version> [msg]     发布新版本（更新 package.json + git commit + tag）
-                                version 为 major / minor / patch，或 semver（如 1.2.3）
-                                msg 缺省为 "version: bump to <新版本号>"
-                                例: ./blog.sh release patch
-                                    ./blog.sh release minor "feat: 新增 xxx"
-                                    ./blog.sh release 1.2.0 "chore: 固定版本"
+====================  工具脚本  ====================
 
-    help                         显示此帮助
+    get-cdn <url> [...args]     从 jsDelivr CDN 下载整个文件夹
+                                例: ./blog.sh get-cdn https://cdn.jsdelivr.net/npm/pkg/
+                                    ./blog.sh get-cdn https://cdn.jsdelivr.net/npm/pkg/ -o ./out -j 8
+
+    unicode-gap   [...args]     查找 Unicode 码位空缺
+                                例: ./blog.sh unicode-gap -i ./assets/list.txt -v
+
+    font-range    [...args]     提取字体 unicode-range
+                                例: ./blog.sh font-range ./fonts
+                                    ./blog.sh font-range ./fonts -o all.md
+
+====================  Bangumi Takeout 子项目工具脚本  ====================
+
+    build-chunks  [...args]     构建 subject/episode 分片
+                                例: ./blog.sh build-chunks --subject-chunk 1000
 EOF
 }
 
@@ -364,6 +387,7 @@ case "${1:-help}" in
     build-chunks)       shift; cmd_build_chunks "$@" ;;
     unicode-gap)        shift; cmd_unicode_gap "$@" ;;
     font-range)         shift; cmd_font_range "$@" ;;
+    rss)                cmd_rss ;;
     py-freeze)          cmd_py_freeze ;;
     py-install)         cmd_py_install ;;
     release)            shift; cmd_release "$@" ;;

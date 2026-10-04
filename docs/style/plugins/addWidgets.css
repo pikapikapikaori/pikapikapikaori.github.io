@@ -9,6 +9,7 @@
     --widgets-hide-transform-length: 62.5rem;
     --widgets-hsl-s: 66%;
     --widgets-hsl-l: 78%;
+    --widgets-disappear-times: 2.5;
 }
 
 @media print {
@@ -30,7 +31,7 @@
 }
 
 .page-right-tools-widgets-span-disappear {
-    transform: translate(calc(2 * var(--widgets-right)), 0);
+    transform: translate(calc(var(--widgets-disappear-times) * var(--widgets-right)), 0);
 }
 
 .page-right-tools-widgets-span {
@@ -75,7 +76,7 @@
 }
 
 .page-right-popups-disappear {
-    transform: translate(calc(2 * var(--widgets-gap) + var(--widgets-popup-width)), 0);
+    transform: translate(calc(var(--widgets-disappear-times) * var(--widgets-gap) + var(--widgets-popup-width)), 0);
 }
 
 /* 主题切换 */

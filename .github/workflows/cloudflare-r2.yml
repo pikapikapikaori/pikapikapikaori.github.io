@@ -28,4 +28,5 @@ jobs:
             --exclude "**/node_modules/**" \
             --exclude "**/hexo/package-lock.json" \
             --exclude "**/hexo/db.json" \
-            --checksum
+            --checksum \
+            -v

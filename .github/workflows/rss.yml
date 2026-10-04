@@ -4,28 +4,36 @@ on:
   push:
     branches-ignore:
       - master
+    paths:
+      - 'docs/**/*.md'
+      - '!docs/sources/**'
+      - '!docs/style/**'
+      - '!docs/pages/**'
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref }}
 
       - name: Install Pandoc
-        run:
+        run: |
+          sudo apt-get update
           sudo apt-get install -y pandoc
 
       - name: Build RSS
         run: |
           cd docs/
-          ./script/rss.sh
+          bash ./script/rss.sh
 
       - name: Commit Updated
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "action: build pikapikapi-blog-rss.atom"
+          file_pattern: "docs/pikapikapi-blog-rss.atom"

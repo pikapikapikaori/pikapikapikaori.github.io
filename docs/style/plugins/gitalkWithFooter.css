@@ -29,6 +29,10 @@
     font-size: 1rem;
 }
 
+#gitalk-container .gt-header-controls {
+    margin-top: 1.5rem;
+}
+
 #gitalk-container .gt-header-controls-tip {
     color: var(--theme-color);
 }
@@ -80,6 +84,11 @@
 
 #gitalk-container .gt-container a.is--active:before {
     background: var(--theme-color) !important;
+}
+
+#gitalk-container .gt-avatar,
+#gitalk-container .gt-avatar>img {
+    border-radius: var(--global-avatar-border-radius);
 }
 
 #gitalk-container .gt-container a {

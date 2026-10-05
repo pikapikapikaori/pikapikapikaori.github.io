@@ -138,6 +138,7 @@
     --global-link-decoration-width: 0.15em;
 
     --global-el-border-radius: 0.625rem;
+    --global-el-border-radius-small: 0.125rem;
     --global-el-border-radius-none: 0;
     --global-icon-border-radius: 0.3125rem;
     --global-widget-border-radius: 0.3rem;
@@ -637,8 +638,7 @@ body.sticky .sidebar-toggle {
 
 .markdown-section p.tip,
 .markdown-section p.warn {
-    border-bottom-right-radius: 0.125rem;
-    border-top-right-radius: 0.125rem;
+    border-radius: var(--global-el-border-radius);
     margin: 2rem 0;
     padding: 0.75rem 1.5rem 0.75rem 2.625rem;
     position: relative
@@ -1115,12 +1115,12 @@ body {
 
 .markdown-section output,
 .markdown-section pre>code {
-    border-radius: 0.125rem;
+    border-radius: var(--global-el-border-radius);
     display: block
 }
 
 .markdown-section code {
-    border-radius: 0.125rem;
+    border-radius: var(--global-el-border-radius-small);
     color: var(--inline-code-color);
     margin: 0 0.125rem;
     padding: 0.1875rem 0.3125rem;
@@ -1189,7 +1189,7 @@ body {
     padding: 0.3em 0.2em 0;
     background-color: var(--global-theme-color-1);
     color: var(--global-theme-color-8);
-    border-radius: 0.125rem;
+    border-radius: var(--global-el-border-radius-small);
 }
 
 .markdown-section details {

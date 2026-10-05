@@ -1,5 +1,5 @@
 :root {
-    --theme-bg: hsl(from var(--theme-color) h 30% 3%);
+    --theme-bg: hsl(from var(--theme-color) h 30% 5%);
     --theme-bg-card: hsl(from var(--theme-color) h 25% 12%);
     --theme-text: hsl(from var(--theme-color) h 14% 75%);
     --theme-heading: hsl(from var(--theme-color) h 60% 96%);
@@ -22,6 +22,8 @@
     --theme-sidebar-text: hsl(from var(--theme-color) h 18% 75%);
     --theme-sidebar-title: hsl(from var(--theme-color) h 50% 96%);
     --theme-scrollbar-bg: hsl(from var(--theme-color) h 60% 50% / .08);
+    --theme-orb: hsl(from var(--theme-color) h 70% 60% / .35);
+    --theme-grid-line: hsl(from var(--theme-color) h 50% 60% / .06);
 
     --theme-box-shadow: 0 1px 3px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .5);
     --theme-margin: 2rem;
@@ -72,6 +74,57 @@
     --cal-theme-color-l-6: 6;
     --cal-theme-color-l-7: 12;
     --cal-theme-color-l-8: 18;
+}
+
+html::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -99;
+    pointer-events: none;
+    background-image:
+        linear-gradient(var(--theme-grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--theme-grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000 20%, transparent 88%);
+    animation: grid 40s linear infinite;
+}
+
+@keyframes grid {
+    from {
+        background-position: 0 0, 0 0
+    }
+
+    to {
+        background-position: 48px 48px, 48px 48px
+    }
+}
+
+html::after {
+    content: '';
+    position: fixed;
+    right: -18vw;
+    top: -20vh;
+    width: 55vw;
+    height: 55vw;
+    z-index: -99;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--theme-orb), transparent 44%);
+    filter: blur(60px);
+    animation: orb 26s ease-in-out infinite alternate;
+}
+
+@keyframes orb {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: .7
+    }
+
+    to {
+        transform: translate3d(-9%, 10%, 0) scale(1.18);
+        opacity: 1
+    }
 }
 
 .app-nav {

@@ -3,16 +3,17 @@
 }
 
 /* Footer */
-#footer-under-gitalk>div {
+#footer-under-gitalk {
     text-align: center;
     max-width: var(--global-content-width);
     width: var(--global-content-width);
     align-self: center;
-    padding: 1.875rem 0.9375rem 1.25rem;
-    margin: 0 auto
+    padding: 2.5rem 0.9375rem 2.5rem;
+    margin: 1.5rem auto 0
 }
 
-#footer-under-gitalk>div>div {
+#footer-under-gitalk>div {
+    padding-top: 2.5rem;
     border-top: var(--global-border) var(--border-color);
 }
 
@@ -20,7 +21,7 @@
 #gitalk-container {
     max-width: var(--global-content-width);
     width: var(--global-content-width);
-    margin: 0 auto 1.25rem;
+    margin: 0.5rem auto 1.25rem;
     padding: 0 0.9375rem;
 }
 
@@ -30,6 +31,10 @@
 
 #gitalk-container .gt-header-controls-tip {
     color: var(--theme-color);
+}
+
+#gitalk-container .gt-header {
+    margin-top: 3rem;
 }
 
 #gitalk-container .gt-link {
@@ -155,9 +160,15 @@
 
 #gitalk-container .gt-container .gt-meta {
     border-bottom: var(--global-border) var(--border-color);
+    margin-top: 0;
+    padding-top: 0;
 }
 
 #gitalk-container .gt-comments .markdown-body,
 #gitalk-container .gt-header .markdown-body {
     font-family: var(--global-font);
+}
+
+#gitalk-container  .gt-comments-null {
+    display: none;
 }

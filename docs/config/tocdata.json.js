@@ -855,7 +855,7 @@ export default [
             en-us pages
     ========================= */
     {
-        "title": "Instructions for use",
+        "title": "Instructions for Use",
         "time": "",
         "editedTime": "2024.07.09",
         "cover": "",

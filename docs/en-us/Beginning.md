@@ -1,4 +1,4 @@
-# Instructions for use
+# Instructions for Use
 
 The floating widgets on the right are, from top to bottom:
 

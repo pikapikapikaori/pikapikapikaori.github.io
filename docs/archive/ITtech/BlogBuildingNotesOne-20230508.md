@@ -37,7 +37,7 @@
 
 <!-- div:right-panel -->
 
-<iframe width="100%" height="300px" src="//jsfiddle.net/pikapikapi/b9Lu37v6/embedded/html,css,result/?fontColor=c6a2eb&accentColor=c6a2eb" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<!-- iframe-link:height="300px" src="https://jsfiddle.net/pikapikapi/b9Lu37v6/embedded/css,result/" -->
 
 <!-- div:left-panel -->
 
@@ -47,7 +47,7 @@
 
 <!-- div:right-panel -->
 
-<iframe width="100%" height="300px" src="//jsfiddle.net/pikapikapi/pyb42tus/10/embedded/html,css,result/?fontColor=c6a2eb&accentColor=c6a2eb" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<!-- iframe-link:height="300px" src="https://jsfiddle.net/pikapikapi/pyb42tus/10/embedded/css,result/" -->
 
 <!-- div:left-panel -->
 
@@ -55,7 +55,7 @@
 
 <!-- div:right-panel -->
 
-<iframe width="100%" height="300px" src="//jsfiddle.net/pikapikapi/ft3kares/28/embedded/?fontColor=c6a2eb&accentColor=c6a2eb" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<!-- iframe-link:height="300px" src="https://jsfiddle.net/pikapikapi/ft3kares/28/embedded/js,css,result/" -->
 
 <!-- panels:end -->
 
@@ -74,7 +74,7 @@ js 逻辑里拿元素根据类名做 filter 的步骤感觉可以用 `querySelec
 
 <!-- div:right-panel -->
 
-<iframe width="100%" height="300" src="//jsfiddle.net/pikapikapi/fkt849L2/15/embedded/?fontColor=c6a2eb&accentColor=c6a2eb" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<!-- iframe-link:height="300px" src="https://jsfiddle.net/pikapikapi/fkt849L2/15/embedded/js,css,result/" -->
 
 <!-- panels:end -->
 

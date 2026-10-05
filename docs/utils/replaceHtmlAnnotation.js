@@ -98,7 +98,7 @@ const blockTagConfigMap = new Map([
         }
     ],
 
-    /* About Pge Container */
+    /* About Page Container */
     [
         'about-page-wrap',
         {
@@ -247,6 +247,16 @@ const inlineTagConfigMap = new Map([
     [
         'about-page-links',
         () => `<div class="main-page-about-me-links"><a href="${links.github}" target="_blank" rel="noopener">${icons.github}</a><a href="${links.email}" target="_blank" rel="noopener">${icons.email}</a><a href="${links.rss}" target="_blank" rel="noopener">${icons.rss}</a></div>`
+    ],
+
+    /* Frame */
+    [
+        'iframe-link',
+        (payload) => `<iframe width="100%" ${payload} frameborder="0" loading="lazy" title="Embedded Website" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>`
+    ],
+    [
+        'iframe-video-link',
+        (payload) => `<iframe style="aspect-ratio: var(--global-aspect-ratio-tv);" src="${payload}" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>`
     ]
 ])
 

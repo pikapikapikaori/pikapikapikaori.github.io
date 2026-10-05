@@ -91,7 +91,7 @@
 
 小魔女 doremi 25 周年新的特别映像，音乐选自四期最终话 ED 曲。比起上次更加聚焦于长大了的どれみ，别有味道。
 
-<iframe style="aspect-ratio: 16/9;" src="https://www.youtube.com/embed/4AMf-7R7B0k?si=jbtwVbIocQbh5ZXX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<!-- iframe-video-link:https://www.youtube.com/embed/4AMf-7R7B0k?si=jbtwVbIocQbh5ZXX -->
 
 <!-- brief-comments-divider:2024.07.31 -->
 <!-- brief-comments-comments-container:end -->
@@ -173,7 +173,7 @@
 
 小魔女 doremi 25 周年特别映像。比起前两年那个做作的「寻找见习魔女」还是这种看到成长后的 doremi 他们的方式更令人感动。虽然似乎要有新作，不过我想小说中那成长后的他们的故事大抵也不会再变成动画了。这几年这种成长为大人后的大家的动画片也未免太多了。作为已经成长为可悲大人的我而言，看到成长后的大家真是有种说不出的滋味。
 
-<iframe style="aspect-ratio: 16/9;" src="https://www.youtube.com/embed/i3mzMFy3dBg?si=FLPAmelZry08wb65" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<!-- iframe-video-link:https://www.youtube.com/embed/i3mzMFy3dBg?si=FLPAmelZry08wb65 -->
 
 音符，好喜欢。
 

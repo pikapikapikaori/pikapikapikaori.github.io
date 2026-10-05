@@ -9,6 +9,10 @@ section.cover p {
     font-family: var(--global-cover-paragraph-font);
 }
 
+section.cover img.ignore-view-full-image-img {
+    border-radius: var(--global-avatar-border-radius);
+}
+
 .cover-page-scroll-down-chevron-div {
     margin: 2.5rem 0 0;
     position: absolute;

@@ -89,14 +89,19 @@ pre .docsify-copy-code-button span {
     text-decoration-color: var(--theme-color);
 }
 
-.pagination-item:not(:last-child) a .pagination-item-label,
-.pagination-item:not(:last-child) a .pagination-item-subtitle,
-.pagination-item:not(:last-child) a .pagination-item-title {
-    transition-duration: var(--global-transition-duration) !important;
+.markdown-section .pagination-item:not(:last-child) a .pagination-item-label,
+.markdown-section .pagination-item:not(:last-child) a .pagination-item-subtitle,
+.markdown-section .pagination-item:not(:last-child) a .pagination-item-title {
+    transition-duration: var(--global-transition-duration);
 }
 
-.docsify-pagination-container {
-    border-top: var(--global-border) var(--border-color) !important;
+.markdown-section .docsify-pagination-container {
+    border-top: var(--global-border) var(--border-color);
+}
+
+.docsify-pagination-container:not(:has(.pagination-item)) {
+    border-top: 0;
+    margin-top: 2rem;
 }
 
 /* --- Docsify Example Panels --- */

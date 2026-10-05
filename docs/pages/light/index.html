@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./sources/npm/docsify@5/dist/themes/core.min.css">
     <link rel="stylesheet" href="./sources/npm/docsify@5/dist/themes/addons/core-dark.min.css"
         media="(prefers-color-scheme: dark)" />
-    
+
     <link rel="stylesheet" href="./style/plus.css">
 </head>
 
@@ -31,10 +31,19 @@
             name: 'ピカピカピ',
             basePath: '../../',
             coverpage: false,
-            loadNavbar: true,
-            loadSidebar: true,
+            hideSidebar: true,
+            loadNavbar:true,
             subMaxLevel: 2,
             auto2top: true,
+
+            alias: {
+                '/.*_navbar\\.md': function (path) {
+                    if (path.startsWith('/pages/light/helpers/')) {
+                        return path;
+                    }
+                    return '/pages/light/helpers/' + path.replace(/^\//, '')
+                }
+            },
 
             notFoundPage: {
                 '/jp': 'jp/404/_404.md',
@@ -73,7 +82,7 @@
 
             // 自用插件
             footer: {
-                html: '<div><div><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p></div></div>'
+                html: '<small>&copy; 2023 - {gitalk-footer-yyyy} 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small>'
             },
         };
     </script>
@@ -93,6 +102,12 @@
     <!-- 自用插件 -->
     <link rel="stylesheet" href="./style/plugins/footer.css">
     <script src="./utils/footer.js"></script>
+
+    <link rel="stylesheet" href="./style/plugins/replaceHtmlAnnotation.css">
+    <script type="module" src="./utils/replaceHtmlAnnotation.js"></script>
+
+    <link rel="stylesheet" href="./style/plugins/addTocPage.css">
+    <script type="module" src="./utils/addTocPage.js"></script>
 
     <script src="./utils/fixUrl.js"></script>
 </body>

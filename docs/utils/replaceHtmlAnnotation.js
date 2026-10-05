@@ -98,7 +98,7 @@ const blockTagConfigMap = new Map([
         }
     ],
 
-    /* About Pge Container */
+    /* About Page Container */
     [
         'about-page-wrap',
         {

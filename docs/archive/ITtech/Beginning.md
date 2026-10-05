@@ -30,4 +30,4 @@
 
 ### Brainfuck 解释器
 
-<iframe height="400px" src="archive/ITtech/_media/README/terminal.html"></iframe>
+<!-- iframe-link:height="400px" src="archive/ITtech/_media/README/terminal.html" -->

@@ -25,7 +25,7 @@
 
 遗憾的是过去才发现相机没电只能拿手机拍了，不过也没错过太多姑且将就看吧。
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![安藤忠雄展](_media/ArtExhibit-20240718/picture-1.jpg)
 ![安藤忠雄展](_media/ArtExhibit-20240718/picture-6.jpg)
@@ -34,15 +34,15 @@
 ![安藤忠雄展](_media/ArtExhibit-20240718/picture-4.jpg)
 ![安藤忠雄展](_media/ArtExhibit-20240718/picture-5.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 ## 附：封面组图
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![封面组图](_media/ArtExhibit-20240718/picture-7.jpg)
 ![封面组图](_media/ArtExhibit-20240718/picture-8.jpg)
 ![封面组图](_media/ArtExhibit-20240718/picture-9.jpg)
 ![封面组图](_media/ArtExhibit-20240718/picture-10.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->

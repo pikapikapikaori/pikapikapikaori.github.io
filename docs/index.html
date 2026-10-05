@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="./_media/favicon.ico">
     <title>ピカピカピ</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Don't worry, be happy.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="theme-color" content="#fff">
@@ -31,15 +30,12 @@
     <link rel="stylesheet" href="./style/fontMinorityLang.css">
 
     <link rel="stylesheet" href="./style/nonstandard/base.css">
-
-    <link rel="stylesheet" href="./style/nonstandard/mainPage.css">
+    <link rel="stylesheet" href="./style/nonstandard/plus.css">
 
     <link rel="stylesheet" href="./style/base.css">
     <link rel="stylesheet" href="./style/plus.css">
 
     <link id="theme-color" rel="stylesheet" href="" disabled>
-
-    <link rel="stylesheet" href="./style/mainPage.css">
 </head>
 
 <body>
@@ -54,6 +50,12 @@
             subMaxLevel: 3,
             auto2top: true,
             themeColor: '#c7a2ec',
+
+            nameLink: {
+                '/jp/': '#/jp/',
+                '/en-us/': '#/en-us/',
+                '/': '#/'
+            },
 
             notFoundPage: {
                 '/jp': 'jp/404/_404.md',
@@ -147,7 +149,7 @@
             // 自用插件
             // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
             gitalkWithFooter: {
-                footerInnerHtml: "<div><div><br><p><small>&copy; 2023 - 2026 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small></p></div></div>",
+                footerInnerHtml: "<small>&copy; 2023 - {gitalk-footer-yyyy} 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small>",
                 gitalkConfig: {
                     clientID: '6a54e5946401951488d1',
                     clientSecret: '5ca9de120592a9908348d09480cea6917112a4ec',
@@ -273,7 +275,7 @@
                         dark: './style/theme/midnight.css',
                         lightColor: '#fbfbf5',
                         darkColor: '#14171c',
-                        lightThemeColor: '#a2d9ec', 
+                        lightThemeColor: '#a2d9ec',
                         darkThemeColor: '#a2d9ec'
                     },
                     {
@@ -282,8 +284,8 @@
                         dark: './style/theme/candlelit.css',
                         lightColor: '#faf6ee',
                         darkColor: '#1a1614',
-                        lightThemeColor: '#eca2ae', 
-                        darkThemeColor: '#eca2ae' 
+                        lightThemeColor: '#eca2ae',
+                        darkThemeColor: '#eca2ae'
                     },
                     {
                         name: 'linen',
@@ -291,7 +293,7 @@
                         dark: './style/theme/weave.css',
                         lightColor: '#f7f3ec',
                         darkColor: '#18150f',
-                        lightThemeColor: '#eca2ae', 
+                        lightThemeColor: '#eca2ae',
                         darkThemeColor: '#eca2ae'
                     },
                     {
@@ -301,7 +303,7 @@
                         lightColor: '#f7fafc',
                         darkColor: '#1e2128',
                         lightThemeColor: '#d3a2ec',
-                        darkThemeColor: '#a2d3ec' 
+                        darkThemeColor: '#a2d3ec'
                     }
                 ]
             },
@@ -343,7 +345,7 @@
 
     <!-- Docsify LATEX 插件 -->
     <script src="./sources/npm/katex@latest/dist/katex.min.js"></script>
-    <link rel="stylesheet" href="./sources/npm/katex@latest/dist/katex.min.css" />
+    <link rel="stylesheet" href="./sources/npm/katex@latest/dist/katex.min.css">
     <script src="./sources/npm/marked@4/marked@4"></script>
 
     <!-- CDN files for docsify-katex -->

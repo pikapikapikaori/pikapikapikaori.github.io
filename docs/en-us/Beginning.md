@@ -1,10 +1,11 @@
-# Instructions for use
+# Instructions for Use
 
 The floating widgets on the right are, from top to bottom:
 
 - Mode switcher: Auto / Light / Dark mode
 - Theme picker: Click to choose theme
 - Theme color picker: Click to choose color
+- Font size switcher: Click to choose from five available sizes
 - Comment: Scroll to comment on click
 - Cherry blossom switcher: Turn on / off
 - Live 2d figure switcher: Turn on / off (Available only on Desktop)

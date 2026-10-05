@@ -4,7 +4,7 @@
 
 #### **景色**
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![景色写真](_media/Photograph/scenery-1.jpg)
 ![景色写真](_media/Photograph/scenery-2.jpg)
@@ -13,11 +13,11 @@
 ![景色写真](_media/Photograph/scenery-5.jpg)
 ![景色写真](_media/Photograph/scenery-6.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 #### **フィギュア**
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![フィギュア写真](_media/Photograph/figure-4.jpg)
 ![フィギュア写真](_media/Photograph/figure-2.jpg)
@@ -32,6 +32,6 @@
 ![フィギュア写真](_media/Photograph/figure-5.jpg)
 ![フィギュア写真](_media/Photograph/figure-7.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 <!-- tabs:end -->

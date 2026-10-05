@@ -11,7 +11,7 @@
 > 遇见博物馆\
 > 遇见勃鲁盖尔 16、17 世纪欧洲画坛大师真迹展
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![勃鲁盖尔展](_media/ArtExhibit-20240425/picture-1.jpg)
 ![勃鲁盖尔展](_media/ArtExhibit-20240425/picture-2.jpg)
@@ -26,14 +26,14 @@
 ![勃鲁盖尔展](_media/ArtExhibit-20240425/picture-10.jpg)
 ![勃鲁盖尔展](_media/ArtExhibit-20240425/picture-12.jpg)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 ## 启蒙时期
 
 > 东一美术馆\
 > 最后的故事——乌菲齐馆藏 18 世纪欧洲大师绘画
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![启蒙时期画展](_media/ArtExhibit-20240425/picture-13.jpeg)
 ![启蒙时期画展](_media/ArtExhibit-20240425/picture-14.jpeg)
@@ -51,4 +51,4 @@
 ![启蒙时期画展](_media/ArtExhibit-20240425/picture-26.jpeg)
 ![启蒙时期画展](_media/ArtExhibit-20240425/picture-27.jpeg)
 
-</section>
+<!-- multi-img-wrap:end -->

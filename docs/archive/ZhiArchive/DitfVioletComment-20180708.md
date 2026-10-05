@@ -54,12 +54,12 @@
 
 第三话在广同意 002 与充一同驾驶后的两个镜头，使用了两个特别的镜头遮蔽
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![Ditf 截图](_media/DitfVioletComment-20180708/picture-7.webp)
 ![Ditf 截图](_media/DitfVioletComment-20180708/picture-8.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 通常镜头遮蔽是为了突出重点，将观众的注意力引导到导演想强调的地方而存在的，这两个遮蔽的镜头显然也有这一作用，但不仅仅如此。002 的眼睛大特写仅露出了一个位于画面中左侧的矩形，而广的背影近景镜头则遮蔽了镜头左侧。在这里显然也破坏了画面中图形的平衡性，但也对立的突出了广和 002 两人心中不同的心理。
 

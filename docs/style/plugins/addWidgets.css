@@ -9,6 +9,7 @@
     --widgets-hide-transform-length: 62.5rem;
     --widgets-hsl-s: 66%;
     --widgets-hsl-l: 78%;
+    --widgets-disappear-times: 2.5;
 }
 
 @media print {
@@ -30,7 +31,7 @@
 }
 
 .page-right-tools-widgets-span-disappear {
-    transform: translate(calc(2 * var(--widgets-right)), 0);
+    transform: translate(calc(var(--widgets-disappear-times) * var(--widgets-right)), 0);
 }
 
 .page-right-tools-widgets-span {
@@ -75,7 +76,7 @@
 }
 
 .page-right-popups-disappear {
-    transform: translate(calc(2 * var(--widgets-gap) + var(--widgets-popup-width)), 0);
+    transform: translate(calc(var(--widgets-disappear-times) * var(--widgets-gap) + var(--widgets-popup-width)), 0);
 }
 
 /* 主题切换 */
@@ -209,6 +210,7 @@
 
 .font-picker-preset-size-btn-div {
     width: 100%;
+    padding-top: 0.2rem;
     aspect-ratio: var(--global-aspect-ratio-square);
     border-radius: var(--global-icon-border-radius);
     border: var(--global-border) var(--border-color);
@@ -422,21 +424,21 @@
 
 /* 字号切换：预设 */
 .font-picker-preset-size-btn-div[data-size-index="0"] {
-    font-size: 0.875rem;
+    font-size: 0.625rem;
 }
 
 .font-picker-preset-size-btn-div[data-size-index="1"] {
-    font-size: 1rem;
+    font-size: 0.75rem;
 }
 
 .font-picker-preset-size-btn-div[data-size-index="2"] {
-    font-size: 1.125rem;
+    font-size: 0.875rem;
 }
 
 .font-picker-preset-size-btn-div[data-size-index="3"] {
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .font-picker-preset-size-btn-div[data-size-index="4"] {
-    font-size: 1.375rem;
+    font-size: 1.125rem;
 }

@@ -88,7 +88,7 @@
 }
 
 .toc-paginator-div {
-    margin-top: 1.5625rem;
+    margin-top: 2rem;
     text-align: center;
     justify-content: center;
     display: flex;
@@ -150,11 +150,11 @@
 }
 
 body.has-toc .sidebar-toggle {
-    transform: translateX(-2rem);
+    transform: translateX(-7rem);
 }
 
 .sidebar-toggle {
-    transition: opacity var(--global-transition-duration-fast), transform var(--global-transition-duration-fast);
+    transition: opacity var(--global-transition-duration), transform var(--global-transition-duration);
 }
 
 body.no-transition .sidebar,

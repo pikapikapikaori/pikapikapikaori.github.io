@@ -104,13 +104,13 @@
 
 动画音乐中最具特色也最为惊艳的就是说唱小哥带来的 freestyle。基本上说唱小哥带来的说唱都是十分映衬主题的。它不仅仅十分带感，还推动了剧情的发展。例如第七集开头的说唱，当时恶魔的存在刚刚向世界揭露，也因此世界陷入恐慌。在说唱小哥的 freestyle 唱到“害怕的人们拿起武器杀人，不害怕的人手无寸铁，反遭其害”时，正配上恶魔搜查队欺负百姓的图像，不仅交代了当时的背景，更是突显出恶魔搜查队的毫无人性以及真正无辜的百姓的可怜。
 
-<section class="multi-images-container-section">
+<!-- multi-img-wrap:start -->
 
 ![恶魔人截图](_media/DevilmanCriticize-20180114/picture-16.webp)
 ![恶魔人截图](_media/DevilmanCriticize-20180114/picture-17.webp)
 ![恶魔人截图](_media/DevilmanCriticize-20180114/picture-18.webp)
 
-</section>
+<!-- multi-img-wrap:end -->
 
 bgm 最大的特色就是与剧情完全相反的感情基调。例如第六集中天才小哥变成恶魔后在体育场吃人时，镜头在某一个角色身上时配上了轻松欢快的 bgm，而背景却是杀人的恶魔。轻松的音乐配上如此血腥的画面，倒也多了一份讽刺。
 

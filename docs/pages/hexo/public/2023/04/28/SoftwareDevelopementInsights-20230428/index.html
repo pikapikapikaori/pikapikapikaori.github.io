@@ -1,342 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head prefix="og: https://ogp.me/ns#">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  
-  <title>软件项目实践的一些思索与后期优化方向：设计、开发以及其他 - ピカピカピ</title>
-  
+
+<head prefix="og: https://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+
+    <title>软件项目实践的一些思索与后期优化方向：设计、开发以及其他 - ピカピカピ</title>
+
     <link rel="shortcut icon" href="/pages/hexo/public/favicon.ico">
-  
-  
+
+
     <link rel='manifest' href='/pages/hexo/public/manifest.json'>
-  
 
-  
-  
-  
-  <meta property="og:title" content="软件项目实践的一些思索与后期优化方向：设计、开发以及其他 - ピカピカピ" />
-  
-  <meta property="og:type" content="article" />
-  
-  <meta property="og:url" content="https://pikapikapi.com/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/index.html" />
-  
-  <meta property="og:image" content="/favicon.ico" />
-  
-  <meta property="og:article:published_time" content="2023-04-28T06:30:02.000Z" />
-  
-  <meta property="og:article:author" content="李亦杨 / 李亦楊 / Yi-Yang Li" />
-  
-  
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/var.css">
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/main.css">
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/typography.css">
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/code-highlighting.css">
+    <meta property="og:title" content="软件项目实践的一些思索与后期优化方向：设计、开发以及其他 - ピカピカピ" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/components.css">
+    <meta property="og:type" content="article" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/nav.css">
+    <meta property="og:url" content="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/index.html" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/paginator.css">
+    <meta property="og:image" content="/favicon.ico" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/footer.css">
+    <meta property="og:article:published_time" content="2023-04-28T06:30:02.000Z" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/post-list.css">
+    <meta property="og:article:author" content="李亦杨 / 李亦楊 / Yi-Yang Li" />
 
-  
-  
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/toc.css">
 
-  
-  
-  
-  
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/post.css">
 
-  
-  
-  
-  
-  
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-    <body
-        data-color-scheme="auto"
-        data-uppercase-categories="true"
-        
-        data-config-root="/pages/hexo/public/"
-        
-        data-toc="true"
-        data-toc-max-depth="2"
-        
-        
-    >
-        <nav id="theme-nav">
-    <div class="inner">
-        <a class="title" href="/pages/hexo/public/index.html">ピカピカピ</a>
-        <div class="nav-arrow"></div>
-        <div class="nav-items">
-            <a class="nav-item nav-item-home" href="/pages/hexo/public/index.html">Home</a>
-            
-            
-            <a class="nav-item" href="/pages/hexo/public/archives/index.html">Archives</a>
-            
-            
-            
-            <a class="nav-item" href="/pages/hexo/public/categories/index.html">Categories</a>
-            
-            
-            
-            <a class="nav-item" href="/pages/hexo/public/about/index.html">About</a>
-            
-            
-            
-            <a class="nav-item nav-item-search nav-item-icon" href="/pages/hexo/public/search/index.html" target="_self" aria-label="Search">&nbsp;</a>
-            
-            
+    <link rel="stylesheet" href="/pages/hexo/public/css/var.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/main.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/typography.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/code-highlighting.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/components.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/nav.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/paginator.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/footer.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/post-list.css">
+
+
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/toc.css">
+
+
+
+
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/post.css">
+
+
+
+
+
+
+
+
+    <meta name="generator" content="Hexo 6.3.0">
+</head>
+
+<body data-color-scheme="auto" data-uppercase-categories="true" data-config-root="/pages/hexo/public/" data-toc="true"
+    data-toc-max-depth="2">
+    <nav id="theme-nav">
+        <div class="inner">
+            <a class="title" href="/pages/hexo/public/index.html">ピカピカピ</a>
+            <div class="nav-arrow"></div>
+            <div class="nav-items">
+                <a class="nav-item nav-item-home" href="/pages/hexo/public/index.html">Home</a>
+
+
+                <a class="nav-item" href="/pages/hexo/public/archives/index.html">Archives</a>
+
+
+
+                <a class="nav-item" href="/pages/hexo/public/categories/index.html">Categories</a>
+
+
+
+                <a class="nav-item" href="/pages/hexo/public/about/index.html">About</a>
+
+
+
+                <a class="nav-item nav-item-search nav-item-icon" href="/pages/hexo/public/search/index.html"
+                    target="_self" aria-label="Search">&nbsp;</a>
+
+
+            </div>
         </div>
-    </div>
-</nav>
-        
-<article class="post">
-    <div class="meta">
-        
-        <div class="categories text-uppercase">
-        
-            <a href="/pages/hexo/public/categories/技术/index.html">技术</a>
-        
+    </nav>
+
+    <article class="post">
+        <div class="meta">
+
+            <div class="categories text-uppercase">
+
+                <a href="/pages/hexo/public/categories/技术/index.html">技术</a>
+
+            </div>
+
+
+
+            <div class="date" id="date">
+                <span>April</span>
+                <span>28,</span>
+                <span>2023</span>
+            </div>
+
+
+            <h2 class="title">软件项目实践的一些思索与后期优化方向：设计、开发以及其他</h2>
         </div>
-        
 
-        
-        <div class="date" id="date">
-            <span>April</span>
-            <span>28,</span>
-            <span>2023</span>
+        <div class="divider"></div>
+
+        <div class="content">
+            <blockquote>
+                <p>本文首发于个人博客 <br>发表日期：2023.4.28</p>
+            </blockquote>
+            <p>大四下最后的一门课也结束了。这门课大体是由数个人组成一个小小团体进行一个小小项目从零到一的完整开发过程，不同于其他课程，这个项目要求以类似于实际开发的模式，让所有参与者都经历由需求确定、初期架构设计到中期开发、版本发布甚至于是需求变更以及迭代的完整软件开发的整个生命周期。当然其中也包括不同团队间的沟通协商。
+            </p>
+            <p>大体而言我在其中以项目经理、架构设计、团队Leader等各种身份参与了后端的完整开发，并也作为开发者参与到了前端部分的开发任务中。个人从中确实有不少感悟，故而写此文记录。在这里主要想谈谈设计、开发的一些感想，诸如进度管理、质量把控等等可能也略有涉及。
+            </p>
+            <h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1>
+            <p>大体而言这个课程项目要求做一个宠物医院的线上学习平台，主要受众大概就是即将毕业或是正在大学学习的兽医相关专业的学生。其功能简要来讲大概有这么几类：</p>
+            <ul>
+                <li>用户管理与鉴权：常规的大系统都有的功能，这里大体上就分为管理员、出题的老师和进行学习的学生三类用户。</li>
+                <li>一个完整医院的3D全景地图与导览模型：前端开发为主的功能，本文不涉及。</li>
+                <li>系统管理：要求对这个宠物医院内诸如药物、档案、收费项目、各类检查项目、住院者的信息等等各类内容进行管理，不过这个东西似乎没有在需求文档中体现出实际的意义与用处。</li>
+                <li>病例管理：大体上是需要把来医院就诊过的各类病例收集起来存储，其包括从入院诊断、具体检查到诊断结果与治疗方案等全过程的文字图片视频信息，当然也包括得的病的信息。</li>
+                <li>测试管理：由病例管理上游的疾病部分内容衍生而来。老师根据疾病生成题库，并从中选题整理为试卷。学生则参加考试进行答题。不过这部分内容似乎与虚拟宠物医院没有太大关系。</li>
+                <li>职能学习：一方面是让学生去学习疾病的相关知识（当然要看文字图片视频），一方面学生也可以通过看文字图片视频学习医院内各类角色（医生、医助等等）的具体操作内容。</li>
+                <li>数据管理：和上面提到的图片视频的存储有关。需求上还挺麻烦的，视频格式支持太多还需要进行视频的格式转换，反应到和用户的交互上来说还需要实现分块上传等功能等。</li>
+            </ul>
+            <p>尽管后文对具体业务尽量不会涉及，但姑且将背景记于这里。不难看出这个项目还是一个比较传统的要用到数据库后端前端三个维度的项目，因而后文也主要想从这三个维度的设计与开发两方面来聊聊。</p>
+            <p>项目可以参考：</p>
+            <ul>
+                <li><a target="_blank" rel="noopener"
+                        href="https://github.com/SoftwareDevelopmentPractice6/virtualPetHospital-backend">后端</a></li>
+                <li><a target="_blank" rel="noopener"
+                        href="https://github.com/SoftwareDevelopmentPractice6/virtualPetHospital-frontend">前端</a></li>
+            </ul>
+            <h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1>
+            <p>由于课程要求重各类文档，因而并没有采取如今主流的敏捷开发模式，而是采取的<a
+                    href="#RAD">RAD</a>模型。个人来讲其实并不是很习惯这个模型，一方面其由瀑布式改进而来，从某种角度上还是非常重文档和前期的设计的，对需求的变更与过程中的变化并不敏感，另一方面也是因此在开发过程中的抗风险能力也非常依赖于前期的设计以及开发过程中的质量，由此带来的风险是非常恐怖的。
+            </p>
+            <p>总之也是因此在进行前期设计时就花了相当多的时间。然而尽管如此，初期的设计还是有着比较大的漏洞，因而也给后期开发带来了一些麻烦。这些问题大多集中在数据库设计上。</p>
+            <h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2>
+            <p>由于项目较为庞大因而一些细节的设计我也没有来得及能够去亲自把控，而是交给了同组的其他人。在这里就出了问题。上文所述的测试管理中，题库中的问题需要记录与其相关的问题类别（属于哪种病）、问题类型（单选多选）、问题内容等等。针对此负责这块内容的组员A给出了这样的设计：
+            </p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-1.png"
+                    alt="er diagram"></p>
+            <p>且不谈同学A遗漏了需要对每张卷子上包含的题目、以及每位学生在试卷上答题所做出的回答进行存储的功能，单看<code>Question</code>与<code>Category</code>两张表。乍一看虽然是挺合理的设计，然而后者的实际有效字段只有<code>category_name</code>一栏。我不否认在大型项目中这样设计的合理性，但是考虑到这个项目的规模、以及后续可能会进行的功能上的拓展，我个人看来<code>Category</code>这张表完全冗余的。
+            </p>
+            <p>另一方面，<code>Exam</code>、<code>Paper</code>、<code>ExamSession</code>这三张一对一的表虽然也是很符合设计原则的设计，但是同样考虑到项目规模与未来可能的拓展，这三张表就算合在一起也不会对性能与吞吐量带来很大的负担。一般来讲，只有在表中有一栏以上可能包含大量空值的情况下，或是某一些栏可能被频繁更新时，一对一关系的设计才相对合理。而在当前的情形中，这样的设计则是给后期撰写<code>SQL</code>与开发上带来了巨大的麻烦。且不谈数据的整合与处理，仅仅是外键的存在就已经带来了巨大的麻烦。这也直接导致了在后期初始化数据<code>SQL</code>撰写上耗费了大量Debug的时间，在开发的编码中也需要增加大量检测外键存在性的不必要代码。
+            </p>
+            <h2 id="后端架构设计"><a href="#后端架构设计" class="headerlink" title="后端架构设计"></a>后端架构设计</h2>
+            <p>初期设计时我就已经敲定了<a
+                    href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1">微服务</a>的架构。通常，微服务确实不适合于本项目这样的小型项目：配置麻烦、DevOps麻烦，等等。此外，大型项目中服务间数据一致性以及安全性都是非常棘手且关键的问题。
+            </p>
+            <p>不过事实上，我其实很看重松散耦合这一点。其给后期开发与迭代过程中带来的自由度是相当大的。前述的问题，如配置、DevOps的确相对棘手，不过包含公用模块、各类插件的配置在初期完成后便一了百了，运维上利用Docker与统一的脚本进行自动化管理也是一经配置后就极易使用的，并没有给开发人员带来很高的成本。倘若有购买服务器配置Jenkins进行更多的自动化的话，相关成本应该还能进一步降低。
+            </p>
+            <p>实践中，jacoco、spotless、公共模块的配置实质上也仅仅耗费了我半天的时间，而后期部署时自动化测试脚本的编写仅仅耗费了我两个小时不到的时间。接口测试上所花费的时间略多一点，不过由于接口测试脚本基本是直接由swagger生成的，因而也没有耗费太多的成本。
+            </p>
+            <p>相较于这些仅局限于初期和末期的麻烦而言，微服务架构带来的好处是实打实巨大的。数据库与模块的分离带来的是各模块开发的高独立性以及运行时的高可用性。前文所提到的数据库尽管经常会碰到组员产生的Bug，但分离的数据库使得其余的几个模块并没有受到影响从而能够很顺利的进行开发。另一方面，后端模块的分离使得几个模块都能够被快速地开发出来，也因此能够较早地将接口给到前端，从而留出了大量可用于迭代的时间。产生缺陷时查找定位的范围仅仅在自身的子系统内，因而定位缺陷的成本也略有降低。而最最重要的，由于模块间的松散耦合，即使一个服务失败其他服务也能够继续工作，这给开发与测试都带来了相当程度上的便捷。
+            </p>
+            <p>更具体的，微服务给实践中的开发带来了巨大的便捷性。我在项目中大概采取了下图的架构：</p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-2.png"
+                    alt="architecture"></p>
+            <p>作为微服务而言其实也是非常常见与合理的架构。中间层充当网关的角色被外部服务（前端）统一调用，其内部则再根据具体的调用请求来选择合适的服务进行通信，并将数据进行处理后转发给外部服务。在实践中，前端组与后端组同时开发，需求细节与开发细节还不明了的情况下，接口的内容与种类尽管可以大体确定，但具体的数据内容与种类等都是难以确定的。因而，利用中间层也即网关这一角色，接口确定的难题得以被解决。前后端可以先按照自己的想法对接口进行设计与模拟，当有一定的进度、对接口需求更加明确时再利用中间层进行数据的整合与处理，从而节约了大量沟通与修改的时间。
+            </p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-3.png"
+                    alt="sequence diagram"></p>
+            <p>实践上，数据的转发与整合可以由后端的网关接管，也可以由前端利用nodejs来开发，无论哪种都是非常灵活的。事实上，nodejs构建的中间层或称node层的出现，就是为了让前后端都更关注于业务本身。尽管层数的增加可能会给性能带来一些影响，然而这与开发效率所节省的成本相比是微乎其微的。由过去后端渲染html发送给浏览器的前后端不分离，到前后端分离开发再到中间层的进化，我想这是一个相当自然的过程，也非常值得去学习与应用。
+            </p>
+            <p>此外，采取微服务架构，后期的扩展性也是相当高的。一方面，需要增加新业务时可以直接以模块为单位进行添加，而不需要再去对原有代码进行改动。另一方面，甚至也可以将同一服务运行在多台服务器上，并利用Eureka、Ribbon等等组件进行负载均衡与健康检查的功能，从而能够进一步提升可用性与性能，这些都是单体应用难以带来的好处。
+            </p>
+            <p>当然，微服务的思想也能直接应用到前端上，也就是前些年提出的<a
+                    href="#%E5%BE%AE%E5%89%8D%E7%AB%AF">微前端</a>的思想。似乎前端组也有利用这一思想进行开发，不过本文就先不作赘述了。</p>
+            <h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1>
+            <h2 id="后端开发仍存在的问题"><a href="#后端开发仍存在的问题" class="headerlink" title="后端开发仍存在的问题"></a>后端开发仍存在的问题</h2>
+            <p>开发上后端直接采用了SpringBoot的四层架构，基本上实现了增删改查四类功能。同时，调数据库方面使用了JPA。</p>
+            <p>需求上，为了满足全字段搜索、以及较简单的增删改功能，考虑到开发上的便捷性，查询相关的业务逻辑大体都是采取了下面的写法：</p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">getFeature</span><span class="params">(</span></span><br><span class="line"><span class="params">        Integer funcId,</span></span><br><span class="line"><span class="params">        String funcName,</span></span><br><span class="line"><span class="params">        String funcDescription,</span></span><br><span class="line"><span class="params">        String funcFlow,</span></span><br><span class="line"><span class="params">        String funcRole,</span></span><br><span class="line"><span class="params">        String funcTool,</span></span><br><span class="line"><span class="params">        String roomName)</span> &#123;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">    res.put(</span><br><span class="line">            Constants.featureList,</span><br><span class="line">            JSONObject.parseArray(JSON.toJSONString(featureRepository.findAll().stream()</span><br><span class="line">                    .filter(feature -&gt; SearchJudgeHelper.softEquals(funcName, feature.getFuncName())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softIncludes(funcDescription, feature.getFuncDescription())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softIncludes(funcFlow, feature.getFuncFlow())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softIncludes(funcRole, feature.getFuncRole())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softEquals(funcTool, feature.getFuncTool())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softEquals(</span><br><span class="line">                                    roomName, feature.getFeatureRoom().getRoomName())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softEquals(funcId, feature.getFuncId()))</span><br><span class="line">                    .collect(Collectors.toList()))));</span><br><span class="line">    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(res);</span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>先说查询逻辑。为了少写<code>SQL</code>因而这里是直接调用了JPA的<code>findAll</code>方法，随后利用<code>Java</code>的流函数对其进行遍历筛选，由此得到目标结果以返回。判断相等或包含的方法由自建类进行处理，以满足空数值的比较操作，例如：
+            </p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title function_">softEquals</span><span class="params">(String toBeJudged, String referencedValue)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (Objects.equals(toBeJudged, <span class="literal">null</span>) || Objects.equals(toBeJudged, <span class="string">&quot;&quot;</span>))</span><br><span class="line">                ? <span class="literal">true</span></span><br><span class="line">                : Objects.equals(referencedValue, URLDecoder.decode(toBeJudged, Constants.UTF8));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>小型项目中这样的写法大体上是没什么问题的，但如果遇上较大的项目这样的写法绝对会出很大的问题。一来，论谁都能看出的遍历查询的性能问题，在十万级别数据量下大概就能有很直观的感受了，这一工作本来应该在数据库中利用索引来优化解决。二来，大量的吞吐量给服务器带来了IO上巨大负担。其潜在的风险是难以估量的。
+            </p>
+            <p>为了在满足需求的基础上尽可能简化开发上的工作量（即少写<code>SQL</code>与对应的函数），我目前的想法是利用正则表达式（例如MySQL中的<code>REGEXP</code>关键字）进行查询，由此将查询的相关工作返还给数据库。利用数据库内部的索引等机制对查询进行优化（MySQL内部索引的B+树能带来数倍的性能），借此来消除服务器的负担。借由这一方法全字段搜索可以通过唯一的一条<code>SQL</code>来实现，也符合尽量不写<code>SQL</code>的原则。
+            </p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="comment">// Dao层</span></span><br><span class="line"><span class="meta">@Query(value = &quot;SELECT f.* FROM Feature f WHERE (f.name REGEXP :funcNameRegExp) AND (f.description REGEXP :funcDescriptionRegExp)&quot;, nativeQuery = true)</span></span><br><span class="line">ArrayList&lt;Feature&gt; <span class="title function_">findFeatureByRegExp</span><span class="params">(<span class="meta">@Param(&quot;funcNameRegExp&quot;)</span> String funcNameRegExp, <span class="meta">@Param(&quot;funcDescriptionRegExp&quot;)</span> String funcDescriptionRegExp)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Service层</span></span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">getFeature</span><span class="params">(</span></span><br><span class="line"><span class="params">        String funcName,</span></span><br><span class="line"><span class="params">        String funcDescription)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">funcNameRegExp</span> <span class="operator">=</span> funcName;</span><br><span class="line">    <span class="type">String</span> <span class="variable">funcDescriptionRegExp</span> <span class="operator">=</span>  <span class="string">&quot;^&quot;</span> + funcName + <span class="string">&quot;$&quot;</span>;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">    res.put(</span><br><span class="line">            Constants.featureList,</span><br><span class="line">            JSONObject.parseArray(JSON.toJSONString(featureRepository.findFeatureByRegExp(funcNameRegExp, funcDescriptionRegExp))));</span><br><span class="line">    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(res);</span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>再说增删改。项目中这些功能的实现大体如下：</p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line">\\ 增</span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">addExamine</span><span class="params">(String examineName, <span class="type">double</span> examinePrice, String roomName)</span> &#123;</span><br><span class="line">    List&lt;Examine&gt; targetExamineList = examineRepository.findAll().stream()</span><br><span class="line">            .filter(examine -&gt; Objects.equals(examine.getExamineName(), examineName))</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (Objects.equals(targetExamineList.size(), <span class="number">0</span>)) &#123;</span><br><span class="line">        Optional&lt;Room&gt; targetRoomOptional = roomRepository.findById(roomName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRoomOptional.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">Examine</span> <span class="variable">newExamine</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Examine</span>();</span><br><span class="line">            newExamine.setExamineName(examineName);</span><br><span class="line">            newExamine.setExaminePrice(examinePrice);</span><br><span class="line">            newExamine.setExamineRoom(targetRoomOptional.get());</span><br><span class="line"></span><br><span class="line">            <span class="type">Examine</span> <span class="variable">addedExamine</span> <span class="operator">=</span> examineRepository.saveAndFlush(newExamine);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(addedExamine);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">\\ 改</span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">updateExamine</span><span class="params">(<span class="type">int</span> examineId, String examineName, <span class="type">double</span> examinePrice, String roomName)</span> &#123;</span><br><span class="line">    Optional&lt;Examine&gt; targetExamineOptional = examineRepository.findById(examineId);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (targetExamineOptional.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;Examine&gt; targetExamineList = examineRepository.findAll().stream()</span><br><span class="line">                .filter(examine -&gt; Objects.equals(examine.getExamineName(), examineName)</span><br><span class="line">                        &amp;&amp; !Objects.equals(examine.getExamineId(), examineId))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        Optional&lt;Room&gt; targetRoomOptional = roomRepository.findById(roomName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRoomOptional.isEmpty() || !Objects.equals(targetExamineList.size(), <span class="number">0</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">Examine</span> <span class="variable">targetExamine</span> <span class="operator">=</span> targetExamineOptional.get();</span><br><span class="line">            targetExamine.setExamineName(examineName);</span><br><span class="line">            targetExamine.setExaminePrice(examinePrice);</span><br><span class="line">            targetExamine.setExamineRoom(targetRoomOptional.get());</span><br><span class="line"></span><br><span class="line">            <span class="type">Examine</span> <span class="variable">updatedExamine</span> <span class="operator">=</span> examineRepository.saveAndFlush(targetExamine);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(updatedExamine);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">\\ 删</span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">deleteExamine</span><span class="params">(<span class="type">int</span> examineId)</span> &#123;</span><br><span class="line">    Optional&lt;Examine&gt; targetExamineOptional = examineRepository.findById(examineId);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (targetExamineOptional.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        examineRepository.deleteById(examineId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (examineRepository.findById(examineId).isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(targetExamineOptional.get());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>说实话每个表增删改查写一遍还是挺繁琐的，毕竟业务逻辑上太过类似了。基本上都是这样的逻辑：</p>
+            <ul>
+                <li>增：查询重复数据存在情况$\rightarrow$查外键存在情况$\rightarrow$插入数据。</li>
+                <li>改：查自身数据存在情况$\rightarrow$查询重复数据存在情况$\rightarrow$查外键存在情况$\rightarrow$插入数据。</li>
+                <li>删：直接调用JPA的<code>deleteById</code>方法。</li>
+            </ul>
+            <p>这里的如果需要重构可以考虑利用<a
+                    href="#java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6"><code>Java</code>反射机制</a>。事实上，项目末期时根据前端需求增加的根据数据Id查询功能就是利用这一机制写的。
+            </p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GeneralService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RoomRepository roomRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FeatureRepository featureRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AdmissionRepository admissionRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ArchiveRepository archiveRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ChargeRepository chargeRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ExamineRepository examineRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MedicineRepository medicineRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> JSONObject <span class="title function_">getDataById</span><span class="params">(String tableName, <span class="type">int</span> id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Class&lt;?&gt; dataDaoClass = Class.forName(</span><br><span class="line">                Constants.projectPackageName + <span class="string">&quot;.&quot;</span> + Constants.systemModulePackageName + <span class="string">&quot;.&quot;</span></span><br><span class="line">                        + Constants.daoClassPackageName</span><br><span class="line">                        + <span class="string">&quot;.&quot;</span> + tableName</span><br><span class="line">                        + Constants.daoClassSuffix,</span><br><span class="line">                <span class="literal">true</span>,</span><br><span class="line">                Thread.currentThread().getContextClassLoader().getParent());</span><br><span class="line"></span><br><span class="line">        <span class="type">Method</span> <span class="variable">getByIdMethod</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Method classMethods : dataDaoClass.getMethods()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Objects.equals(classMethods.getName(), Constants.findByIdMethodName)) &#123;</span><br><span class="line">                getByIdMethod = classMethods;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Field selfField : <span class="built_in">this</span>.getClass().getDeclaredFields()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Objects.equals(selfField.getType().getName(), dataDaoClass.getName())) &#123;</span><br><span class="line">                Optional&lt;?&gt; getIdRes = (Optional&lt;?&gt;) getByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), id);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (getIdRes.isEmpty()) &#123;</span><br><span class="line">                    <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(getIdRes.get());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>事实上，删除功能可以直接套用这一写法。当然，在上面的<code>getDataById</code>方法中查找<code>Method</code>与<code>Field</code>的逻辑也可以进一步进行优化：
+            </p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> Class&lt;JPARepository&gt; <span class="title function_">getDataDaoClassByTableName</span> <span class="params">(String tableName)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">return</span> Class.forName(</span><br><span class="line">            Constants.projectPackageName + <span class="string">&quot;.&quot;</span> + Constants.systemModulePackageName + <span class="string">&quot;.&quot;</span></span><br><span class="line">                    + Constants.daoClassPackageName</span><br><span class="line">                    + <span class="string">&quot;.&quot;</span> + tableName</span><br><span class="line">                    + Constants.daoClassSuffix,</span><br><span class="line">            <span class="literal">true</span>,</span><br><span class="line">            Thread.currentThread().getContextClassLoader().getParent());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">getDataById</span><span class="params">(String tableName, <span class="type">int</span> id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    Class&lt;?&gt; dataDaoClass = <span class="built_in">this</span>.getDataDaoClassByTableName(tableName);</span><br><span class="line">    <span class="type">Method</span> <span class="variable">getByIdMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(Constants.findByIdMethodName, Integer.class);</span><br><span class="line">    <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getDeclaredField(tableName.toFirstCharLowerCase());</span><br><span class="line"></span><br><span class="line">    Optional&lt;?&gt; getIdRes = (Optional&lt;?&gt;) getByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> getIdRes.isEmpty() ? ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode) : ResponseHelper.constructSuccessResponse(getIdRes.get());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">deleteDataById</span><span class="params">(String tableName, <span class="type">int</span> id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">getDataByIdRes</span> <span class="operator">=</span> <span class="built_in">this</span>.getDataById(tableName, id);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 表内查询无数据</span></span><br><span class="line">    <span class="keyword">if</span> (Object.equals(getDataByIdRes.data, <span class="literal">null</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> getDataByIdRes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt; dataDaoClass = <span class="built_in">this</span>.getDataDaoClassByTableName(tableName);</span><br><span class="line">    <span class="type">Method</span> <span class="variable">deleteByIdMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(Constants.deleteByIdMethodName, Integer.class);</span><br><span class="line">    <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getDeclaredField(tableName.toFirstCharLowerCase());</span><br><span class="line"></span><br><span class="line">    deleteByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(getDataByIdRes.get());</span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>为了进一步简化开发工作量与代码逻辑，可以考虑先创建公共类：<code>BaseEntity</code>与<code>BaseRepository</code>，使得实体类继承前者，对应的<code>dao</code>类继承后者。
+            </p>
+            <p>对于增改功能而言，业务逻辑中唯二的区别在于判断重复条件与判断外键存在逻辑这两项。可以考虑抽象成统一的公共方法，通过接收可变个数个参数构成的List来进行判断。更具体的，其可能是下面的实现形式：</p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">updateDataById</span><span class="params">(</span></span><br><span class="line"><span class="params">    String tableName, </span></span><br><span class="line"><span class="params">    <span class="type">int</span> id, </span></span><br><span class="line"><span class="params">    ArrayList&lt;String&gt; duplicateConditionFields, </span></span><br><span class="line"><span class="params">    ArrayList&lt;String&gt; foreignKeys,</span></span><br><span class="line"><span class="params">    Map&lt;String, String&gt; newValues</span></span><br><span class="line"><span class="params">)</span> &#123;</span><br><span class="line">    Class&lt;?&gt; dataEntityClass = ...; <span class="comment">// 查找对应的Entity层类</span></span><br><span class="line">    Class&lt;?&gt; dataDaoClass = ...; <span class="comment">// 查找对应的Dao层类</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">updateByIdMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(<span class="string">&quot;saveAndFlush&quot;</span>); <span class="comment">// 查找保存数据的方法</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">findAllMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(<span class="string">&quot;findAll&quot;</span>); </span><br><span class="line">    <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> ...; <span class="comment">// 找到自身类中对应的field</span></span><br><span class="line"></span><br><span class="line">    <span class="type">Object</span> <span class="variable">targetData</span> <span class="operator">=</span> dataEntityClass.getConstructor().newInstance(); <span class="comment">//获取要更新数据</span></span><br><span class="line"></span><br><span class="line">    <span class="type">Boolean</span> <span class="variable">isForeignKeyExist</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果满足重复条件或外键不存在则直接返回，这里可以进一步优化</span></span><br><span class="line">    <span class="keyword">for</span>(foreignKey : foreignKeys) &#123;</span><br><span class="line">        Class&lt;?&gt; foreignKeyDaoClass = Class.forName(targetData.getDeclaredField(foreignKey).getType().getName() + ...); <span class="comment">//找到外键对应Dao层类</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">findByIdMethod</span> <span class="operator">=</span> foreignKeyDaoClass.getMethod(<span class="string">&quot;findById&quot;</span>); </span><br><span class="line">        <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> ...; <span class="comment">// 找到自身类中对应的field</span></span><br><span class="line">        Optional&lt;?&gt; getIdRes = (Optional&lt;?&gt;) findByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), Integer.parseInt(newValues.get(foreignKey).getId()));</span><br><span class="line">        isForeignKeyExist &amp;= !getIdRes.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;?&gt; getAllRes = (List&lt;?&gt;) findAllMethod.invoke(selfField.get(<span class="built_in">this</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (Object.equals(getAllRes.findAll().stream().filter(data -&gt; &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">isExist</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (duplicateConditionField : duplicateConditionFields) &#123;</span><br><span class="line">            isExist &amp;= Object.equals(</span><br><span class="line">                data.getDeclaredField(duplicateConditionField).get(data), </span><br><span class="line">                targetData.getDeclaredField(duplicateConditionField).get(targetData)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isExist;</span><br><span class="line">    &#125;).collect(Collectors.toList()).size(), <span class="number">0</span>) || !isForeignKeyExist) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不满足重复条件且外键都存在时，进行数据更新</span></span><br><span class="line">    <span class="keyword">for</span> (field : targetData.getDeclaredFields()) &#123;</span><br><span class="line">        field.set(targetData, newValues.get(field.getName()).toTargetType());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    updateByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), targetData);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ...; <span class="comment">// 返回值</span></span><br><span class="line">&#125;</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>考虑到增改功能逻辑也比较类似，因而增加功能的伪代码不再再次列出。</p>
+            <p>借此，大量类似的代码也可以被大幅省略，从而大幅减少工作量，同时也减少了冗余代码。</p>
+            <p>当然，这里也可以考虑使用拼接<code>SQL</code>的方法。不过考虑到后端开发上应该尽可能不写或少写原生的<code>SQL</code>，因而这一种写法更符合规范些。</p>
+            <p>通过利用上述的写法，项目中的代码可以精简许多，由此也可以使得所需要的测试代码大幅减少，从而使得项目整体的工作量大量降低。事实上，正是由于当前项目中有大量逻辑比较类似的代码，导致为满足覆盖率所需的测试代码非常庞大，从而难以完成自动化测试代码的编写。
+            </p>
+            <p>除此之外，一些类内的方法也可以作出一些更改。考虑到方法链的写法更加符合直觉，且也在一定程度上能提升开发效率并使代码更加简洁（尽管在一定程度上破坏了<code>.</code>运算符的原有语义，且也不是很符合
+                <a href="CQRS">CQRS</a>），因而我个人更倾向于尽可能使用方法链的写法。</p>
+            <h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2>
+            <p>我个人而言也作为开发人员参与到了前端组的开发中。事实上最大的优化点在于接口调用的时机。当前，前端组在页面渲染时会请求一次后端接口，获取全部数据并渲染到页面上。之后，在进行关键词查找、数据插入、数据删除时各自会调用一次接口。至此为止都是比较合理的，当数据量庞大时前端不应该负责数据的查找工作，利用在服务器侧进行过优化的查询接口比较合理。然而，前端在进行数据编辑时，则是采用下面的流程：
+            </p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-4.png"
+                    alt="sequence"></p>
+            <p>由于在包含全部数据的页面进行初期渲染时每条数据的全部内容前端都已经获取到，因而选中数据进入编辑页面时完全可以直接利用前端已经拿到的数据进行渲染，不需要再次调用后端端口。且不谈在网络延迟较高的情况下，上面的做法会使得用户体验较差，在服务器有大量请求的情况下，前端冗余的调用会加重服务器的负担，从而影响性能。
+            </p>
+            <p>另一方面我也注意到，前端由于没有将方法应用到了页面渲染的各个阶段，从而导致了某些请求会被重复多次执行，这也是影响性能的一大问题。当然，最好的解决方法应是前后端都做一下防抖处理。</p>
+            <h1 id="一些其他"><a href="#一些其他" class="headerlink" title="一些其他"></a>一些其他</h1>
+            <p>开发上的问题大体如上，基本上都是后续项目中值得进行进一步更改的地方。除此以外，整个项目的生命周期中最最值得被后续继承的地方在于严格的PR-Code
+                Review制度与文档的维护。其中前者保证了代码的质量与规范，后者则提高了有效沟通的效率。这两者才是在开发过程中降低工作量与各类成本的最关键因素。</p>
+            <h1 id="名词释义"><a href="#名词释义" class="headerlink" title="名词释义"></a>名词释义</h1>
+            <h2 id="RAD"><a href="#RAD" class="headerlink" title="RAD"></a>RAD</h2>
+            <p>快速应用开发模型（Rapid Application Development），又称V模型。似乎是为了改进瀑布式模型而在上世纪70至80年代提出的。这一模型大体上遵循下图的几个阶段：</p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/RAD-model.webp"
+                    alt="picture"></p>
+            <h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2>
+            <p>SOA（面向服务架构）的一种变体，提倡将单一应用程序划分为松耦合的服务组，每个服务可独立部署。其概念最早于2005年提出。</p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/microservice.png"
+                    alt="picture"></p>
+            <h2 id="微前端"><a href="#微前端" class="headerlink" title="微前端"></a>微前端</h2>
+            <p>2016年被正式提出，是微服务这一概念被扩展到前端的一种应用形式，便于新老项目的共存与过渡，以及项目独立开发等。</p>
+            <p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mircro-frontend.png"
+                    alt="picture"></p>
+            <h2 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a><code>Java</code>反射机制</h2>
+            <p><code>Java</code>先编译后运行，对象类型在编译期确定。在程序运行时类被动态加载，当类没被用到时没有被加载到JVM，因而利用反射，可以在运行时获得类的各种内容。通过利用反射，可以动态地创建对象，更加灵活，但是会消耗系统资源。
+            </p>
+            <h2 id="CQRS"><a href="#CQRS" class="headerlink" title="CQRS"></a>CQRS</h2>
+            <p>Command Query Responsibility
+                Segregation，即命令查询职责分离模式，要求一个方法更改对象的状态或返回一个结果，但是不能同时包含这两个行为。从某种角度来说算是继承了从前将系统交互视为CRUD的思想。相较之下，方法链（Method
+                Chaining）语法中由于对象被引用一次即可被多次调用，从某种意义上违反了这一原则。</p>
+            <p>更具体的，符合CQRS与<code>.</code>运算符原有语义（<code>调用者.操作名</code>）的写法形如下面的形式：</p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.getWater();</span><br><span class="line">p.drinkWater();</span><br><span class="line">p.getThirsty();</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>而方法链则形如下面的形式：</p>
+            <figure class="highlight java">
+                <table>
+                    <tr>
+                        <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                        </td>
+                        <td class="code">
+                            <pre><span class="line"><span class="keyword">new</span> <span class="title class_">Person</span>().getWater().drinkWater().getThirsty();</span><br></pre>
+                        </td>
+                    </tr>
+                </table>
+            </figure>
+
+            <p>这种写法更符合直觉，同时可以节省临时变量、简化代码。</p>
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
+            <ol>
+                <li>When I should use one to one relationship? (2012, September 7). Stack Overflow. <a target="_blank"
+                        rel="noopener"
+                        href="https://stackoverflow.com/questions/12318870/when-i-should-use-one-to-one-relationship">https://stackoverflow.com/questions/12318870/when-i-should-use-one-to-one-relationship</a>
+                </li>
+                <li>search using regex in JPA. (2020, June 15). Stack Overflow. <a target="_blank" rel="noopener"
+                        href="https://stackoverflow.com/questions/62379559/search-using-regex-in-jpa">https://stackoverflow.com/questions/62379559/search-using-regex-in-jpa</a>
+                </li>
+                <li>Using Java Reflection. (n.d.). Using Java Reflection. <a target="_blank" rel="noopener"
+                        href="https://www.oracle.com/technical-resources/articles/java/javareflection.html">https://www.oracle.com/technical-resources/articles/java/javareflection.html</a>
+                </li>
+                <li>Rapid application development - Wikipedia. (2014, July 2). Rapid Application Development -
+                    Wikipedia. <a target="_blank" rel="noopener"
+                        href="https://en.wikipedia.org/wiki/Rapid_application_development">https://en.wikipedia.org/wiki/Rapid_application_development</a>
+                </li>
+                <li>Jackson, C. (2019, June 19). Micro Frontends. martinfowler.com. <a target="_blank" rel="noopener"
+                        href="https://martinfowler.com/articles/micro-frontends.html">https://martinfowler.com/articles/micro-frontends.html</a>
+                </li>
+                <li>M. (n.d.). CQRS pattern - Azure Architecture Center. CQRS Pattern - Azure Architecture Center |
+                    Microsoft Learn. <a target="_blank" rel="noopener"
+                        href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs</a>
+                </li>
+                <li>Method chaining - why is it a good practice, or not? (2009, July 9). Stack Overflow. <a
+                        target="_blank" rel="noopener"
+                        href="https://stackoverflow.com/questions/1103985/method-chaining-why-is-it-a-good-practice-or-not">https://stackoverflow.com/questions/1103985/method-chaining-why-is-it-a-good-practice-or-not</a>
+                </li>
+            </ol>
+
         </div>
-        
 
-        <h2 class="title">软件项目实践的一些思索与后期优化方向：设计、开发以及其他</h2>
-    </div>
 
-    <div class="divider"></div>
+        <div class="about">
+            <h1>About this Post</h1>
+            <div class="details">
+                <p>This post is written by 李亦杨 / 李亦楊 / Yi-Yang Li, all rights reserved.</p>
+            </div>
 
-    <div class="content">
-        <blockquote>
-<p>本文首发于个人博客 <br>发表日期：2023.4.28</p>
-</blockquote>
-<p>大四下最后的一门课也结束了。这门课大体是由数个人组成一个小小团体进行一个小小项目从零到一的完整开发过程，不同于其他课程，这个项目要求以类似于实际开发的模式，让所有参与者都经历由需求确定、初期架构设计到中期开发、版本发布甚至于是需求变更以及迭代的完整软件开发的整个生命周期。当然其中也包括不同团队间的沟通协商。</p>
-<p>大体而言我在其中以项目经理、架构设计、团队Leader等各种身份参与了后端的完整开发，并也作为开发者参与到了前端部分的开发任务中。个人从中确实有不少感悟，故而写此文记录。在这里主要想谈谈设计、开发的一些感想，诸如进度管理、质量把控等等可能也略有涉及。</p>
-<h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>大体而言这个课程项目要求做一个宠物医院的线上学习平台，主要受众大概就是即将毕业或是正在大学学习的兽医相关专业的学生。其功能简要来讲大概有这么几类：</p>
-<ul>
-<li>用户管理与鉴权：常规的大系统都有的功能，这里大体上就分为管理员、出题的老师和进行学习的学生三类用户。</li>
-<li>一个完整医院的3D全景地图与导览模型：前端开发为主的功能，本文不涉及。</li>
-<li>系统管理：要求对这个宠物医院内诸如药物、档案、收费项目、各类检查项目、住院者的信息等等各类内容进行管理，不过这个东西似乎没有在需求文档中体现出实际的意义与用处。</li>
-<li>病例管理：大体上是需要把来医院就诊过的各类病例收集起来存储，其包括从入院诊断、具体检查到诊断结果与治疗方案等全过程的文字图片视频信息，当然也包括得的病的信息。</li>
-<li>测试管理：由病例管理上游的疾病部分内容衍生而来。老师根据疾病生成题库，并从中选题整理为试卷。学生则参加考试进行答题。不过这部分内容似乎与虚拟宠物医院没有太大关系。</li>
-<li>职能学习：一方面是让学生去学习疾病的相关知识（当然要看文字图片视频），一方面学生也可以通过看文字图片视频学习医院内各类角色（医生、医助等等）的具体操作内容。</li>
-<li>数据管理：和上面提到的图片视频的存储有关。需求上还挺麻烦的，视频格式支持太多还需要进行视频的格式转换，反应到和用户的交互上来说还需要实现分块上传等功能等。</li>
-</ul>
-<p>尽管后文对具体业务尽量不会涉及，但姑且将背景记于这里。不难看出这个项目还是一个比较传统的要用到数据库后端前端三个维度的项目，因而后文也主要想从这三个维度的设计与开发两方面来聊聊。</p>
-<p>项目可以参考：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/SoftwareDevelopmentPractice6/virtualPetHospital-backend">后端</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/SoftwareDevelopmentPractice6/virtualPetHospital-frontend">前端</a></li>
-</ul>
-<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>由于课程要求重各类文档，因而并没有采取如今主流的敏捷开发模式，而是采取的<a href="#RAD">RAD</a>模型。个人来讲其实并不是很习惯这个模型，一方面其由瀑布式改进而来，从某种角度上还是非常重文档和前期的设计的，对需求的变更与过程中的变化并不敏感，另一方面也是因此在开发过程中的抗风险能力也非常依赖于前期的设计以及开发过程中的质量，由此带来的风险是非常恐怖的。</p>
-<p>总之也是因此在进行前期设计时就花了相当多的时间。然而尽管如此，初期的设计还是有着比较大的漏洞，因而也给后期开发带来了一些麻烦。这些问题大多集中在数据库设计上。</p>
-<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p>由于项目较为庞大因而一些细节的设计我也没有来得及能够去亲自把控，而是交给了同组的其他人。在这里就出了问题。上文所述的测试管理中，题库中的问题需要记录与其相关的问题类别（属于哪种病）、问题类型（单选多选）、问题内容等等。针对此负责这块内容的组员A给出了这样的设计：</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-1.png" alt="er diagram"></p>
-<p>且不谈同学A遗漏了需要对每张卷子上包含的题目、以及每位学生在试卷上答题所做出的回答进行存储的功能，单看<code>Question</code>与<code>Category</code>两张表。乍一看虽然是挺合理的设计，然而后者的实际有效字段只有<code>category_name</code>一栏。我不否认在大型项目中这样设计的合理性，但是考虑到这个项目的规模、以及后续可能会进行的功能上的拓展，我个人看来<code>Category</code>这张表完全冗余的。</p>
-<p>另一方面，<code>Exam</code>、<code>Paper</code>、<code>ExamSession</code>这三张一对一的表虽然也是很符合设计原则的设计，但是同样考虑到项目规模与未来可能的拓展，这三张表就算合在一起也不会对性能与吞吐量带来很大的负担。一般来讲，只有在表中有一栏以上可能包含大量空值的情况下，或是某一些栏可能被频繁更新时，一对一关系的设计才相对合理。而在当前的情形中，这样的设计则是给后期撰写<code>SQL</code>与开发上带来了巨大的麻烦。且不谈数据的整合与处理，仅仅是外键的存在就已经带来了巨大的麻烦。这也直接导致了在后期初始化数据<code>SQL</code>撰写上耗费了大量Debug的时间，在开发的编码中也需要增加大量检测外键存在性的不必要代码。</p>
-<h2 id="后端架构设计"><a href="#后端架构设计" class="headerlink" title="后端架构设计"></a>后端架构设计</h2><p>初期设计时我就已经敲定了<a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1">微服务</a>的架构。通常，微服务确实不适合于本项目这样的小型项目：配置麻烦、DevOps麻烦，等等。此外，大型项目中服务间数据一致性以及安全性都是非常棘手且关键的问题。</p>
-<p>不过事实上，我其实很看重松散耦合这一点。其给后期开发与迭代过程中带来的自由度是相当大的。前述的问题，如配置、DevOps的确相对棘手，不过包含公用模块、各类插件的配置在初期完成后便一了百了，运维上利用Docker与统一的脚本进行自动化管理也是一经配置后就极易使用的，并没有给开发人员带来很高的成本。倘若有购买服务器配置Jenkins进行更多的自动化的话，相关成本应该还能进一步降低。</p>
-<p>实践中，jacoco、spotless、公共模块的配置实质上也仅仅耗费了我半天的时间，而后期部署时自动化测试脚本的编写仅仅耗费了我两个小时不到的时间。接口测试上所花费的时间略多一点，不过由于接口测试脚本基本是直接由swagger生成的，因而也没有耗费太多的成本。</p>
-<p>相较于这些仅局限于初期和末期的麻烦而言，微服务架构带来的好处是实打实巨大的。数据库与模块的分离带来的是各模块开发的高独立性以及运行时的高可用性。前文所提到的数据库尽管经常会碰到组员产生的Bug，但分离的数据库使得其余的几个模块并没有受到影响从而能够很顺利的进行开发。另一方面，后端模块的分离使得几个模块都能够被快速地开发出来，也因此能够较早地将接口给到前端，从而留出了大量可用于迭代的时间。产生缺陷时查找定位的范围仅仅在自身的子系统内，因而定位缺陷的成本也略有降低。而最最重要的，由于模块间的松散耦合，即使一个服务失败其他服务也能够继续工作，这给开发与测试都带来了相当程度上的便捷。</p>
-<p>更具体的，微服务给实践中的开发带来了巨大的便捷性。我在项目中大概采取了下图的架构：</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-2.png" alt="architecture"></p>
-<p>作为微服务而言其实也是非常常见与合理的架构。中间层充当网关的角色被外部服务（前端）统一调用，其内部则再根据具体的调用请求来选择合适的服务进行通信，并将数据进行处理后转发给外部服务。在实践中，前端组与后端组同时开发，需求细节与开发细节还不明了的情况下，接口的内容与种类尽管可以大体确定，但具体的数据内容与种类等都是难以确定的。因而，利用中间层也即网关这一角色，接口确定的难题得以被解决。前后端可以先按照自己的想法对接口进行设计与模拟，当有一定的进度、对接口需求更加明确时再利用中间层进行数据的整合与处理，从而节约了大量沟通与修改的时间。</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-3.png" alt="sequence diagram"></p>
-<p>实践上，数据的转发与整合可以由后端的网关接管，也可以由前端利用nodejs来开发，无论哪种都是非常灵活的。事实上，nodejs构建的中间层或称node层的出现，就是为了让前后端都更关注于业务本身。尽管层数的增加可能会给性能带来一些影响，然而这与开发效率所节省的成本相比是微乎其微的。由过去后端渲染html发送给浏览器的前后端不分离，到前后端分离开发再到中间层的进化，我想这是一个相当自然的过程，也非常值得去学习与应用。</p>
-<p>此外，采取微服务架构，后期的扩展性也是相当高的。一方面，需要增加新业务时可以直接以模块为单位进行添加，而不需要再去对原有代码进行改动。另一方面，甚至也可以将同一服务运行在多台服务器上，并利用Eureka、Ribbon等等组件进行负载均衡与健康检查的功能，从而能够进一步提升可用性与性能，这些都是单体应用难以带来的好处。</p>
-<p>当然，微服务的思想也能直接应用到前端上，也就是前些年提出的<a href="#%E5%BE%AE%E5%89%8D%E7%AB%AF">微前端</a>的思想。似乎前端组也有利用这一思想进行开发，不过本文就先不作赘述了。</p>
-<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><h2 id="后端开发仍存在的问题"><a href="#后端开发仍存在的问题" class="headerlink" title="后端开发仍存在的问题"></a>后端开发仍存在的问题</h2><p>开发上后端直接采用了SpringBoot的四层架构，基本上实现了增删改查四类功能。同时，调数据库方面使用了JPA。</p>
-<p>需求上，为了满足全字段搜索、以及较简单的增删改功能，考虑到开发上的便捷性，查询相关的业务逻辑大体都是采取了下面的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">getFeature</span><span class="params">(</span></span><br><span class="line"><span class="params">        Integer funcId,</span></span><br><span class="line"><span class="params">        String funcName,</span></span><br><span class="line"><span class="params">        String funcDescription,</span></span><br><span class="line"><span class="params">        String funcFlow,</span></span><br><span class="line"><span class="params">        String funcRole,</span></span><br><span class="line"><span class="params">        String funcTool,</span></span><br><span class="line"><span class="params">        String roomName)</span> &#123;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">    res.put(</span><br><span class="line">            Constants.featureList,</span><br><span class="line">            JSONObject.parseArray(JSON.toJSONString(featureRepository.findAll().stream()</span><br><span class="line">                    .filter(feature -&gt; SearchJudgeHelper.softEquals(funcName, feature.getFuncName())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softIncludes(funcDescription, feature.getFuncDescription())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softIncludes(funcFlow, feature.getFuncFlow())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softIncludes(funcRole, feature.getFuncRole())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softEquals(funcTool, feature.getFuncTool())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softEquals(</span><br><span class="line">                                    roomName, feature.getFeatureRoom().getRoomName())</span><br><span class="line">                            &amp;&amp; SearchJudgeHelper.softEquals(funcId, feature.getFuncId()))</span><br><span class="line">                    .collect(Collectors.toList()))));</span><br><span class="line">    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p class="tags">
 
-<p>先说查询逻辑。为了少写<code>SQL</code>因而这里是直接调用了JPA的<code>findAll</code>方法，随后利用<code>Java</code>的流函数对其进行遍历筛选，由此得到目标结果以返回。判断相等或包含的方法由自建类进行处理，以满足空数值的比较操作，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title function_">softEquals</span><span class="params">(String toBeJudged, String referencedValue)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (Objects.equals(toBeJudged, <span class="literal">null</span>) || Objects.equals(toBeJudged, <span class="string">&quot;&quot;</span>))</span><br><span class="line">                ? <span class="literal">true</span></span><br><span class="line">                : Objects.equals(referencedValue, URLDecoder.decode(toBeJudged, Constants.UTF8));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <i class="icon"></i>
+                <a href="/pages/hexo/public/tags/中文/index.html" class="tag">#中文</a><a
+                    href="/pages/hexo/public/tags/开发/index.html" class="tag">#开发</a>
+            </p>
 
-<p>小型项目中这样的写法大体上是没什么问题的，但如果遇上较大的项目这样的写法绝对会出很大的问题。一来，论谁都能看出的遍历查询的性能问题，在十万级别数据量下大概就能有很直观的感受了，这一工作本来应该在数据库中利用索引来优化解决。二来，大量的吞吐量给服务器带来了IO上巨大负担。其潜在的风险是难以估量的。</p>
-<p>为了在满足需求的基础上尽可能简化开发上的工作量（即少写<code>SQL</code>与对应的函数），我目前的想法是利用正则表达式（例如MySQL中的<code>REGEXP</code>关键字）进行查询，由此将查询的相关工作返还给数据库。利用数据库内部的索引等机制对查询进行优化（MySQL内部索引的B+树能带来数倍的性能），借此来消除服务器的负担。借由这一方法全字段搜索可以通过唯一的一条<code>SQL</code>来实现，也符合尽量不写<code>SQL</code>的原则。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Dao层</span></span><br><span class="line"><span class="meta">@Query(value = &quot;SELECT f.* FROM Feature f WHERE (f.name REGEXP :funcNameRegExp) AND (f.description REGEXP :funcDescriptionRegExp)&quot;, nativeQuery = true)</span></span><br><span class="line">ArrayList&lt;Feature&gt; <span class="title function_">findFeatureByRegExp</span><span class="params">(<span class="meta">@Param(&quot;funcNameRegExp&quot;)</span> String funcNameRegExp, <span class="meta">@Param(&quot;funcDescriptionRegExp&quot;)</span> String funcDescriptionRegExp)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Service层</span></span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">getFeature</span><span class="params">(</span></span><br><span class="line"><span class="params">        String funcName,</span></span><br><span class="line"><span class="params">        String funcDescription)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">funcNameRegExp</span> <span class="operator">=</span> funcName;</span><br><span class="line">    <span class="type">String</span> <span class="variable">funcDescriptionRegExp</span> <span class="operator">=</span>  <span class="string">&quot;^&quot;</span> + funcName + <span class="string">&quot;$&quot;</span>;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">    res.put(</span><br><span class="line">            Constants.featureList,</span><br><span class="line">            JSONObject.parseArray(JSON.toJSONString(featureRepository.findFeatureByRegExp(funcNameRegExp, funcDescriptionRegExp))));</span><br><span class="line">    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再说增删改。项目中这些功能的实现大体如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">\\ 增</span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">addExamine</span><span class="params">(String examineName, <span class="type">double</span> examinePrice, String roomName)</span> &#123;</span><br><span class="line">    List&lt;Examine&gt; targetExamineList = examineRepository.findAll().stream()</span><br><span class="line">            .filter(examine -&gt; Objects.equals(examine.getExamineName(), examineName))</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (Objects.equals(targetExamineList.size(), <span class="number">0</span>)) &#123;</span><br><span class="line">        Optional&lt;Room&gt; targetRoomOptional = roomRepository.findById(roomName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRoomOptional.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">Examine</span> <span class="variable">newExamine</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Examine</span>();</span><br><span class="line">            newExamine.setExamineName(examineName);</span><br><span class="line">            newExamine.setExaminePrice(examinePrice);</span><br><span class="line">            newExamine.setExamineRoom(targetRoomOptional.get());</span><br><span class="line"></span><br><span class="line">            <span class="type">Examine</span> <span class="variable">addedExamine</span> <span class="operator">=</span> examineRepository.saveAndFlush(newExamine);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(addedExamine);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">\\ 改</span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">updateExamine</span><span class="params">(<span class="type">int</span> examineId, String examineName, <span class="type">double</span> examinePrice, String roomName)</span> &#123;</span><br><span class="line">    Optional&lt;Examine&gt; targetExamineOptional = examineRepository.findById(examineId);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (targetExamineOptional.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;Examine&gt; targetExamineList = examineRepository.findAll().stream()</span><br><span class="line">                .filter(examine -&gt; Objects.equals(examine.getExamineName(), examineName)</span><br><span class="line">                        &amp;&amp; !Objects.equals(examine.getExamineId(), examineId))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        Optional&lt;Room&gt; targetRoomOptional = roomRepository.findById(roomName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRoomOptional.isEmpty() || !Objects.equals(targetExamineList.size(), <span class="number">0</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">Examine</span> <span class="variable">targetExamine</span> <span class="operator">=</span> targetExamineOptional.get();</span><br><span class="line">            targetExamine.setExamineName(examineName);</span><br><span class="line">            targetExamine.setExaminePrice(examinePrice);</span><br><span class="line">            targetExamine.setExamineRoom(targetRoomOptional.get());</span><br><span class="line"></span><br><span class="line">            <span class="type">Examine</span> <span class="variable">updatedExamine</span> <span class="operator">=</span> examineRepository.saveAndFlush(targetExamine);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(updatedExamine);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">\\ 删</span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">deleteExamine</span><span class="params">(<span class="type">int</span> examineId)</span> &#123;</span><br><span class="line">    Optional&lt;Examine&gt; targetExamineOptional = examineRepository.findById(examineId);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (targetExamineOptional.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        examineRepository.deleteById(examineId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (examineRepository.findById(examineId).isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(targetExamineOptional.get());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>说实话每个表增删改查写一遍还是挺繁琐的，毕竟业务逻辑上太过类似了。基本上都是这样的逻辑：</p>
-<ul>
-<li>增：查询重复数据存在情况$\rightarrow$查外键存在情况$\rightarrow$插入数据。</li>
-<li>改：查自身数据存在情况$\rightarrow$查询重复数据存在情况$\rightarrow$查外键存在情况$\rightarrow$插入数据。</li>
-<li>删：直接调用JPA的<code>deleteById</code>方法。</li>
-</ul>
-<p>这里的如果需要重构可以考虑利用<a href="#java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6"><code>Java</code>反射机制</a>。事实上，项目末期时根据前端需求增加的根据数据Id查询功能就是利用这一机制写的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GeneralService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RoomRepository roomRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FeatureRepository featureRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AdmissionRepository admissionRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ArchiveRepository archiveRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ChargeRepository chargeRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ExamineRepository examineRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MedicineRepository medicineRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> JSONObject <span class="title function_">getDataById</span><span class="params">(String tableName, <span class="type">int</span> id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Class&lt;?&gt; dataDaoClass = Class.forName(</span><br><span class="line">                Constants.projectPackageName + <span class="string">&quot;.&quot;</span> + Constants.systemModulePackageName + <span class="string">&quot;.&quot;</span></span><br><span class="line">                        + Constants.daoClassPackageName</span><br><span class="line">                        + <span class="string">&quot;.&quot;</span> + tableName</span><br><span class="line">                        + Constants.daoClassSuffix,</span><br><span class="line">                <span class="literal">true</span>,</span><br><span class="line">                Thread.currentThread().getContextClassLoader().getParent());</span><br><span class="line"></span><br><span class="line">        <span class="type">Method</span> <span class="variable">getByIdMethod</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Method classMethods : dataDaoClass.getMethods()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Objects.equals(classMethods.getName(), Constants.findByIdMethodName)) &#123;</span><br><span class="line">                getByIdMethod = classMethods;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Field selfField : <span class="built_in">this</span>.getClass().getDeclaredFields()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Objects.equals(selfField.getType().getName(), dataDaoClass.getName())) &#123;</span><br><span class="line">                Optional&lt;?&gt; getIdRes = (Optional&lt;?&gt;) getByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), id);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (getIdRes.isEmpty()) &#123;</span><br><span class="line">                    <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(getIdRes.get());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>事实上，删除功能可以直接套用这一写法。当然，在上面的<code>getDataById</code>方法中查找<code>Method</code>与<code>Field</code>的逻辑也可以进一步进行优化：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Class&lt;JPARepository&gt; <span class="title function_">getDataDaoClassByTableName</span> <span class="params">(String tableName)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">return</span> Class.forName(</span><br><span class="line">            Constants.projectPackageName + <span class="string">&quot;.&quot;</span> + Constants.systemModulePackageName + <span class="string">&quot;.&quot;</span></span><br><span class="line">                    + Constants.daoClassPackageName</span><br><span class="line">                    + <span class="string">&quot;.&quot;</span> + tableName</span><br><span class="line">                    + Constants.daoClassSuffix,</span><br><span class="line">            <span class="literal">true</span>,</span><br><span class="line">            Thread.currentThread().getContextClassLoader().getParent());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">getDataById</span><span class="params">(String tableName, <span class="type">int</span> id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    Class&lt;?&gt; dataDaoClass = <span class="built_in">this</span>.getDataDaoClassByTableName(tableName);</span><br><span class="line">    <span class="type">Method</span> <span class="variable">getByIdMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(Constants.findByIdMethodName, Integer.class);</span><br><span class="line">    <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getDeclaredField(tableName.toFirstCharLowerCase());</span><br><span class="line"></span><br><span class="line">    Optional&lt;?&gt; getIdRes = (Optional&lt;?&gt;) getByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> getIdRes.isEmpty() ? ResponseHelper.constructFailedResponse(ResponseHelper.requestErrorCode) : ResponseHelper.constructSuccessResponse(getIdRes.get());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">deleteDataById</span><span class="params">(String tableName, <span class="type">int</span> id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">getDataByIdRes</span> <span class="operator">=</span> <span class="built_in">this</span>.getDataById(tableName, id);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 表内查询无数据</span></span><br><span class="line">    <span class="keyword">if</span> (Object.equals(getDataByIdRes.data, <span class="literal">null</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> getDataByIdRes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt; dataDaoClass = <span class="built_in">this</span>.getDataDaoClassByTableName(tableName);</span><br><span class="line">    <span class="type">Method</span> <span class="variable">deleteByIdMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(Constants.deleteByIdMethodName, Integer.class);</span><br><span class="line">    <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getDeclaredField(tableName.toFirstCharLowerCase());</span><br><span class="line"></span><br><span class="line">    deleteByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ResponseHelper.constructSuccessResponse(getDataByIdRes.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了进一步简化开发工作量与代码逻辑，可以考虑先创建公共类：<code>BaseEntity</code>与<code>BaseRepository</code>，使得实体类继承前者，对应的<code>dao</code>类继承后者。</p>
-<p>对于增改功能而言，业务逻辑中唯二的区别在于判断重复条件与判断外键存在逻辑这两项。可以考虑抽象成统一的公共方法，通过接收可变个数个参数构成的List来进行判断。更具体的，其可能是下面的实现形式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> JSONObject <span class="title function_">updateDataById</span><span class="params">(</span></span><br><span class="line"><span class="params">    String tableName, </span></span><br><span class="line"><span class="params">    <span class="type">int</span> id, </span></span><br><span class="line"><span class="params">    ArrayList&lt;String&gt; duplicateConditionFields, </span></span><br><span class="line"><span class="params">    ArrayList&lt;String&gt; foreignKeys,</span></span><br><span class="line"><span class="params">    Map&lt;String, String&gt; newValues</span></span><br><span class="line"><span class="params">)</span> &#123;</span><br><span class="line">    Class&lt;?&gt; dataEntityClass = ...; <span class="comment">// 查找对应的Entity层类</span></span><br><span class="line">    Class&lt;?&gt; dataDaoClass = ...; <span class="comment">// 查找对应的Dao层类</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">updateByIdMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(<span class="string">&quot;saveAndFlush&quot;</span>); <span class="comment">// 查找保存数据的方法</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">findAllMethod</span> <span class="operator">=</span> dataDaoClass.getMethod(<span class="string">&quot;findAll&quot;</span>); </span><br><span class="line">    <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> ...; <span class="comment">// 找到自身类中对应的field</span></span><br><span class="line"></span><br><span class="line">    <span class="type">Object</span> <span class="variable">targetData</span> <span class="operator">=</span> dataEntityClass.getConstructor().newInstance(); <span class="comment">//获取要更新数据</span></span><br><span class="line"></span><br><span class="line">    <span class="type">Boolean</span> <span class="variable">isForeignKeyExist</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果满足重复条件或外键不存在则直接返回，这里可以进一步优化</span></span><br><span class="line">    <span class="keyword">for</span>(foreignKey : foreignKeys) &#123;</span><br><span class="line">        Class&lt;?&gt; foreignKeyDaoClass = Class.forName(targetData.getDeclaredField(foreignKey).getType().getName() + ...); <span class="comment">//找到外键对应Dao层类</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">findByIdMethod</span> <span class="operator">=</span> foreignKeyDaoClass.getMethod(<span class="string">&quot;findById&quot;</span>); </span><br><span class="line">        <span class="type">Field</span> <span class="variable">selfField</span> <span class="operator">=</span> ...; <span class="comment">// 找到自身类中对应的field</span></span><br><span class="line">        Optional&lt;?&gt; getIdRes = (Optional&lt;?&gt;) findByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), Integer.parseInt(newValues.get(foreignKey).getId()));</span><br><span class="line">        isForeignKeyExist &amp;= !getIdRes.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;?&gt; getAllRes = (List&lt;?&gt;) findAllMethod.invoke(selfField.get(<span class="built_in">this</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (Object.equals(getAllRes.findAll().stream().filter(data -&gt; &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">isExist</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (duplicateConditionField : duplicateConditionFields) &#123;</span><br><span class="line">            isExist &amp;= Object.equals(</span><br><span class="line">                data.getDeclaredField(duplicateConditionField).get(data), </span><br><span class="line">                targetData.getDeclaredField(duplicateConditionField).get(targetData)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isExist;</span><br><span class="line">    &#125;).collect(Collectors.toList()).size(), <span class="number">0</span>) || !isForeignKeyExist) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不满足重复条件且外键都存在时，进行数据更新</span></span><br><span class="line">    <span class="keyword">for</span> (field : targetData.getDeclaredFields()) &#123;</span><br><span class="line">        field.set(targetData, newValues.get(field.getName()).toTargetType());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    updateByIdMethod.invoke(selfField.get(<span class="built_in">this</span>), targetData);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ...; <span class="comment">// 返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>考虑到增改功能逻辑也比较类似，因而增加功能的伪代码不再再次列出。</p>
-<p>借此，大量类似的代码也可以被大幅省略，从而大幅减少工作量，同时也减少了冗余代码。</p>
-<p>当然，这里也可以考虑使用拼接<code>SQL</code>的方法。不过考虑到后端开发上应该尽可能不写或少写原生的<code>SQL</code>，因而这一种写法更符合规范些。</p>
-<p>通过利用上述的写法，项目中的代码可以精简许多，由此也可以使得所需要的测试代码大幅减少，从而使得项目整体的工作量大量降低。事实上，正是由于当前项目中有大量逻辑比较类似的代码，导致为满足覆盖率所需的测试代码非常庞大，从而难以完成自动化测试代码的编写。</p>
-<p>除此之外，一些类内的方法也可以作出一些更改。考虑到方法链的写法更加符合直觉，且也在一定程度上能提升开发效率并使代码更加简洁（尽管在一定程度上破坏了<code>.</code>运算符的原有语义，且也不是很符合 <a href="CQRS">CQRS</a>），因而我个人更倾向于尽可能使用方法链的写法。</p>
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>我个人而言也作为开发人员参与到了前端组的开发中。事实上最大的优化点在于接口调用的时机。当前，前端组在页面渲染时会请求一次后端接口，获取全部数据并渲染到页面上。之后，在进行关键词查找、数据插入、数据删除时各自会调用一次接口。至此为止都是比较合理的，当数据量庞大时前端不应该负责数据的查找工作，利用在服务器侧进行过优化的查询接口比较合理。然而，前端在进行数据编辑时，则是采用下面的流程：</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mermaid-4.png" alt="sequence"></p>
-<p>由于在包含全部数据的页面进行初期渲染时每条数据的全部内容前端都已经获取到，因而选中数据进入编辑页面时完全可以直接利用前端已经拿到的数据进行渲染，不需要再次调用后端端口。且不谈在网络延迟较高的情况下，上面的做法会使得用户体验较差，在服务器有大量请求的情况下，前端冗余的调用会加重服务器的负担，从而影响性能。</p>
-<p>另一方面我也注意到，前端由于没有将方法应用到了页面渲染的各个阶段，从而导致了某些请求会被重复多次执行，这也是影响性能的一大问题。当然，最好的解决方法应是前后端都做一下防抖处理。</p>
-<h1 id="一些其他"><a href="#一些其他" class="headerlink" title="一些其他"></a>一些其他</h1><p>开发上的问题大体如上，基本上都是后续项目中值得进行进一步更改的地方。除此以外，整个项目的生命周期中最最值得被后续继承的地方在于严格的PR-Code Review制度与文档的维护。其中前者保证了代码的质量与规范，后者则提高了有效沟通的效率。这两者才是在开发过程中降低工作量与各类成本的最关键因素。</p>
-<h1 id="名词释义"><a href="#名词释义" class="headerlink" title="名词释义"></a>名词释义</h1><h2 id="RAD"><a href="#RAD" class="headerlink" title="RAD"></a>RAD</h2><p>快速应用开发模型（Rapid Application Development），又称V模型。似乎是为了改进瀑布式模型而在上世纪70至80年代提出的。这一模型大体上遵循下图的几个阶段：</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/RAD-model.webp" alt="picture"></p>
-<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><p>SOA（面向服务架构）的一种变体，提倡将单一应用程序划分为松耦合的服务组，每个服务可独立部署。其概念最早于2005年提出。</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/microservice.png" alt="picture"></p>
-<h2 id="微前端"><a href="#微前端" class="headerlink" title="微前端"></a>微前端</h2><p>2016年被正式提出，是微服务这一概念被扩展到前端的一种应用形式，便于新老项目的共存与过渡，以及项目独立开发等。</p>
-<p><img src="/pages/hexo/public/2023/04/28/SoftwareDevelopementInsights-20230428/mircro-frontend.png" alt="picture"></p>
-<h2 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a><code>Java</code>反射机制</h2><p><code>Java</code>先编译后运行，对象类型在编译期确定。在程序运行时类被动态加载，当类没被用到时没有被加载到JVM，因而利用反射，可以在运行时获得类的各种内容。通过利用反射，可以动态地创建对象，更加灵活，但是会消耗系统资源。</p>
-<h2 id="CQRS"><a href="#CQRS" class="headerlink" title="CQRS"></a>CQRS</h2><p>Command Query Responsibility Segregation，即命令查询职责分离模式，要求一个方法更改对象的状态或返回一个结果，但是不能同时包含这两个行为。从某种角度来说算是继承了从前将系统交互视为CRUD的思想。相较之下，方法链（Method Chaining）语法中由于对象被引用一次即可被多次调用，从某种意义上违反了这一原则。</p>
-<p>更具体的，符合CQRS与<code>.</code>运算符原有语义（<code>调用者.操作名</code>）的写法形如下面的形式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.getWater();</span><br><span class="line">p.drinkWater();</span><br><span class="line">p.getThirsty();</span><br></pre></td></tr></table></figure>
-
-<p>而方法链则形如下面的形式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Person</span>().getWater().drinkWater().getThirsty();</span><br></pre></td></tr></table></figure>
-
-<p>这种写法更符合直觉，同时可以节省临时变量、简化代码。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li>When I should use one to one relationship? (2012, September 7). Stack Overflow. <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12318870/when-i-should-use-one-to-one-relationship">https://stackoverflow.com/questions/12318870/when-i-should-use-one-to-one-relationship</a></li>
-<li>search using regex in JPA. (2020, June 15). Stack Overflow. <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/62379559/search-using-regex-in-jpa">https://stackoverflow.com/questions/62379559/search-using-regex-in-jpa</a></li>
-<li>Using Java Reflection. (n.d.). Using Java Reflection. <a target="_blank" rel="noopener" href="https://www.oracle.com/technical-resources/articles/java/javareflection.html">https://www.oracle.com/technical-resources/articles/java/javareflection.html</a></li>
-<li>Rapid application development - Wikipedia. (2014, July 2). Rapid Application Development - Wikipedia. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rapid_application_development">https://en.wikipedia.org/wiki/Rapid_application_development</a></li>
-<li>Jackson, C. (2019, June 19). Micro Frontends. martinfowler.com. <a target="_blank" rel="noopener" href="https://martinfowler.com/articles/micro-frontends.html">https://martinfowler.com/articles/micro-frontends.html</a></li>
-<li>M. (n.d.). CQRS pattern - Azure Architecture Center. CQRS Pattern - Azure Architecture Center | Microsoft Learn. <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs</a></li>
-<li>Method chaining - why is it a good practice, or not? (2009, July 9). Stack Overflow. <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1103985/method-chaining-why-is-it-a-good-practice-or-not">https://stackoverflow.com/questions/1103985/method-chaining-why-is-it-a-good-practice-or-not</a></li>
-</ol>
-
-    </div>
-
-    
-    <div class="about">
-        <h1>About this Post</h1>
-        <div class="details">
-            <p>This post is written by 李亦杨 / 李亦楊 / Yi-Yang Li, all rights reserved.</p>
         </div>
-        
-        <p class="tags">
-            
-            <i class="icon"></i>
-            <a href="/pages/hexo/public/tags/中文/index.html" class="tag">#中文</a><a href="/pages/hexo/public/tags/开发/index.html" class="tag">#开发</a>
-        </p>
-        
-    </div>
-    
 
-    <div class="container post-prev-next">
-        
-        <a href="/pages/hexo/public/2023/05/08/Notes-20230508/index.html" class="next">
-            <div>
-                <div class="text">
-                    <p class="label">Next</p>
-                    <h3 class="title">ノート：アルバム　令和5年5月8日</h3>
+
+        <div class="container post-prev-next">
+
+            <a href="/pages/hexo/public/2023/05/08/Notes-20230508/index.html" class="next">
+                <div>
+                    <div class="text">
+                        <p class="label">Next</p>
+                        <h3 class="title">ノート：アルバム　令和5年5月8日</h3>
+                    </div>
                 </div>
-            </div>
-        </a>
-        
-        
-        <a href="/pages/hexo/public/2021/09/24/OOADAntProblem-20210924/index.html" class="prev">
-            <div>
-                <div class="text">
-                    <p class="label">Previous</p>
-                    <h3 class="title">生成n位全部二进制数，数组形式：蚂蚁爬杆问题</>
+            </a>
+
+
+            <a href="/pages/hexo/public/2021/09/24/OOADAntProblem-20210924/index.html" class="prev">
+                <div>
+                    <div class="text">
+                        <p class="label">Previous</p>
+                        <h3 class="title">生成n位全部二进制数，数组形式：蚂蚁爬杆问题</>
+                    </div>
                 </div>
-            </div>
-        </a>
-        
-    </div>
+            </a>
 
-    
-        
-        
-    
-</article>
-
-        <footer>
-    <div class="inner">
-        <div class="links">
-            
-            <div class="group">
-                <h2 class="title">ピカピカピ</h2>
-                
-                <a href="/pages/hexo/public/archives/index.html" class="item">Archives</a>
-                
-                <a href="/pages/hexo/public/categories/index.html" class="item">Categories</a>
-                
-                <a href="/pages/hexo/public/about/index.html" class="item">About</a>
-                
-                <a href="/pages/hexo/public/search/index.html" class="item">Search</a>
-                
-                <a href="/pages/hexo/public/atom.xml" class="item">RSS</a>
-                
-            </div>
-            
-            <div class="group">
-                <h2 class="title">Blogs</h2>
-                
-                <a href="/pages/hexo/public/../../homepage/index.html" class="item">Homepage</a>
-                
-            </div>
-            
-            <div class="group">
-                <h2 class="title">Contact</h2>
-                
-                <a href="mailto:Lyy8759@outlook.com" class="item">Email</a>
-                
-                <a target="_blank" rel="noopener" href="https://github.com/pikapikapikaori" class="item">GitHub</a>
-                
-                <a target="_blank" rel="noopener" href="https://bgm.tv/user/inuyasha559" class="item">Bangumi</a>
-                
-                <a target="_blank" rel="noopener" href="https://www.douban.com/people/160339816" class="item">Douban</a>
-                
-            </div>
-            
         </div>
-        <span id="copyright-script-generated"></span>
-        <script>
-            const year = new Date().getFullYear()
-            document.getElementById('copyright-script-generated').innerHTML =
-                `&copy; 2023 - ${year} 李亦杨 / 李亦楊 / Yi-Yang Li - All Rights Reserved.`
-        </script>
-        
-        
+
+
+
+
+
+    </article>
+
+    <footer>
+        <div class="inner">
+            <div class="links">
+
+                <div class="group">
+                    <h2 class="title">ピカピカピ</h2>
+
+                    <a href="/pages/hexo/public/archives/index.html" class="item">Archives</a>
+
+                    <a href="/pages/hexo/public/categories/index.html" class="item">Categories</a>
+
+                    <a href="/pages/hexo/public/about/index.html" class="item">About</a>
+
+                    <a href="/pages/hexo/public/search/index.html" class="item">Search</a>
+
+                    <a href="/pages/hexo/public/atom.xml" class="item">RSS</a>
+
+                </div>
+
+                <div class="group">
+                    <h2 class="title">Blogs</h2>
+
+                    <a href="/pages/hexo/public/../../homepage/index.html" class="item">Homepage</a>
+
+                </div>
+
+                <div class="group">
+                    <h2 class="title">Contact</h2>
+
+                    <a href="mailto:Lyy8759@outlook.com" class="item">Email</a>
+
+                    <a target="_blank" rel="noopener" href="https://github.com/pikapikapikaori" class="item">GitHub</a>
+
+                    <a target="_blank" rel="noopener" href="https://bgm.tv/user/inuyasha559" class="item">Bangumi</a>
+
+                    <a target="_blank" rel="noopener" href="https://www.douban.com/people/160339816"
+                        class="item">Douban</a>
+
+                </div>
+
+            </div>
+            <span id="copyright-script-generated"></span>
+            <script>
+                const year = new Date().getFullYear()
+                document.getElementById('copyright-script-generated').innerHTML =
+                    `&copy; 2023 - ${year} 李亦杨 / 李亦楊 / Yi-Yang Li - All Rights Reserved.`
+            </script>
+
+
             <br>
             <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
                 <label>
@@ -352,27 +521,28 @@
                     <span>Auto</span>
                 </label>
             </div>
-        
-    </div>
-</footer>
+
+        </div>
+    </footer>
 
 
-        
-<script src="/pages/hexo/public/js/main.js"></script>
 
-        
-        
-        
+    <script src="/pages/hexo/public/js/main.js"></script>
 
-        
-        <script src="/pages/hexo/public/scrollreveal/scrollreveal"></script>
-        <script>
-            window.addEventListener('load', () => {
-                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
-                ScrollReveal().reveal('.post-list-item .cover-img img')
-                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
-            })
-        </script>
-        
-    </body>
+
+
+
+
+
+    <script src="/pages/hexo/public/scrollreveal/scrollreveal"></script>
+    <script>
+        window.addEventListener('load', () => {
+            ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+            ScrollReveal().reveal('.post-list-item .cover-img img')
+            ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+        })
+    </script>
+
+</body>
+
 </html>

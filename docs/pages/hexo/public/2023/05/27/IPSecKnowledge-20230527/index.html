@@ -1,567 +1,619 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head prefix="og: https://ogp.me/ns#">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  
-  <title>IPSec 技术的理解 - ピカピカピ</title>
-  
+
+<head prefix="og: https://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+
+    <title>IPSec 技术的理解 - ピカピカピ</title>
+
     <link rel="shortcut icon" href="/pages/hexo/public/favicon.ico">
-  
-  
+
+
     <link rel='manifest' href='/pages/hexo/public/manifest.json'>
-  
 
-  
-  
-  
-  <meta property="og:title" content="IPSec 技术的理解 - ピカピカピ" />
-  
-  <meta property="og:type" content="article" />
-  
-  <meta property="og:url" content="https://pikapikapi.com/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/index.html" />
-  
-  <meta property="og:image" content="/favicon.ico" />
-  
-  <meta property="og:article:published_time" content="2023-05-27T10:02:27.000Z" />
-  
-  <meta property="og:article:author" content="李亦杨 / 李亦楊 / Yi-Yang Li" />
-  
-  
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/var.css">
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/main.css">
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/typography.css">
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/code-highlighting.css">
+    <meta property="og:title" content="IPSec 技术的理解 - ピカピカピ" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/components.css">
+    <meta property="og:type" content="article" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/nav.css">
+    <meta property="og:url" content="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/index.html" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/paginator.css">
+    <meta property="og:image" content="/favicon.ico" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/footer.css">
+    <meta property="og:article:published_time" content="2023-05-27T10:02:27.000Z" />
 
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/post-list.css">
+    <meta property="og:article:author" content="李亦杨 / 李亦楊 / Yi-Yang Li" />
 
-  
-  
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/toc.css">
 
-  
-  
-  
-  
-  
-<link rel="stylesheet" href="/pages/hexo/public/css/post.css">
 
-  
-  
-  
-  
-  
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-    <body
-        data-color-scheme="auto"
-        data-uppercase-categories="true"
-        
-        data-config-root="/pages/hexo/public/"
-        
-        data-toc="true"
-        data-toc-max-depth="2"
-        
-        
-    >
-        <nav id="theme-nav">
-    <div class="inner">
-        <a class="title" href="/pages/hexo/public/index.html">ピカピカピ</a>
-        <div class="nav-arrow"></div>
-        <div class="nav-items">
-            <a class="nav-item nav-item-home" href="/pages/hexo/public/index.html">Home</a>
-            
-            
-            <a class="nav-item" href="/pages/hexo/public/archives/index.html">Archives</a>
-            
-            
-            
-            <a class="nav-item" href="/pages/hexo/public/categories/index.html">Categories</a>
-            
-            
-            
-            <a class="nav-item" href="/pages/hexo/public/about/index.html">About</a>
-            
-            
-            
-            <a class="nav-item nav-item-search nav-item-icon" href="/pages/hexo/public/search/index.html" target="_self" aria-label="Search">&nbsp;</a>
-            
-            
+    <link rel="stylesheet" href="/pages/hexo/public/css/var.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/main.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/typography.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/code-highlighting.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/components.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/nav.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/paginator.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/footer.css">
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/post-list.css">
+
+
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/toc.css">
+
+
+
+
+
+
+    <link rel="stylesheet" href="/pages/hexo/public/css/post.css">
+
+
+
+
+
+
+
+
+    <meta name="generator" content="Hexo 6.3.0">
+</head>
+
+<body data-color-scheme="auto" data-uppercase-categories="true" data-config-root="/pages/hexo/public/" data-toc="true"
+    data-toc-max-depth="2">
+    <nav id="theme-nav">
+        <div class="inner">
+            <a class="title" href="/pages/hexo/public/index.html">ピカピカピ</a>
+            <div class="nav-arrow"></div>
+            <div class="nav-items">
+                <a class="nav-item nav-item-home" href="/pages/hexo/public/index.html">Home</a>
+
+
+                <a class="nav-item" href="/pages/hexo/public/archives/index.html">Archives</a>
+
+
+
+                <a class="nav-item" href="/pages/hexo/public/categories/index.html">Categories</a>
+
+
+
+                <a class="nav-item" href="/pages/hexo/public/about/index.html">About</a>
+
+
+
+                <a class="nav-item nav-item-search nav-item-icon" href="/pages/hexo/public/search/index.html"
+                    target="_self" aria-label="Search">&nbsp;</a>
+
+
+            </div>
         </div>
-    </div>
-</nav>
-        
-<article class="post">
-    <div class="meta">
-        
-        <div class="categories text-uppercase">
-        
-            <a href="/pages/hexo/public/categories/技术/index.html">技术</a>
-        
+    </nav>
+
+    <article class="post">
+        <div class="meta">
+
+            <div class="categories text-uppercase">
+
+                <a href="/pages/hexo/public/categories/技术/index.html">技术</a>
+
+            </div>
+
+
+
+            <div class="date" id="date">
+                <span>May</span>
+                <span>27,</span>
+                <span>2023</span>
+            </div>
+
+
+            <h2 class="title">IPSec 技术的理解</h2>
         </div>
-        
 
-        
-        <div class="date" id="date">
-            <span>May</span>
-            <span>27,</span>
-            <span>2023</span>
+        <div class="divider"></div>
+
+        <div class="content">
+            <blockquote>
+                <p>本文首发于个人博客 <br>发表日期：2023.5.27</p>
+            </blockquote>
+            <p>目前家里两个地方都有公网环境，为了保证安全性与防止备案问题（也就是不想给外部用户提供任何服务），所以利用华硕路由器都配置了IPSec VPN。这两天想看看他的安全性问题，所以看了看IPSec技术的原理。</p>
+            <h1 id="主流IPSec-VPN配置"><a href="#主流IPSec-VPN配置" class="headerlink" title="主流IPSec VPN配置"></a>主流IPSec VPN配置
+            </h1>
+            <p>看了看目前比较主流的配置大致就两种：</p>
+            <ul>
+                <li>L2TP &#x2F; IPSec</li>
+                <li>Cisco IPSec (IPSec &#x2F; IKE)</li>
+            </ul>
+            <p>华硕路由器原生支持的是后者，在MacOS上则是两种都支持。</p>
+            <h1 id="IPSec-技术"><a href="#IPSec-技术" class="headerlink" title="IPSec 技术"></a>IPSec 技术</h1>
+            <p>先看IPSec技术本身，其工作在第三层即网络层上，需要开放UDP500和4500端口。报文大致含有以下内容：</p>
+            <ul>
+                <li>认证头AH，维基上给出的结构如下（懒了直接把维基html抄下来了）：</li>
+            </ul>
+            <table class="wikitable" style="margin:1em auto; text-align: center">
+                <caption style="background:#781549; color:white;"><i>Authentication Header</i> format
+                </caption>
+                <tbody>
+                    <tr>
+                        <th style="border-bottom:none; border-right:none;"><i>Offsets</i>
+                        </th>
+                        <th style="border-left:none;">Octet<sub>16</sub>
+                        </th>
+                        <th colspan="8">0
+                        </th>
+                        <th colspan="8">1
+                        </th>
+                        <th colspan="8">2
+                        </th>
+                        <th colspan="8">3
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="border-top: none">Octet<sub>16</sub>
+                        </th>
+                        <th>Bit<sub>10</sub>
+                        </th>
+                        <th style="width:2.6%;">0
+                        </th>
+                        <th style="width:2.6%;">1
+                        </th>
+                        <th style="width:2.6%;">2
+                        </th>
+                        <th style="width:2.6%;">3
+                        </th>
+                        <th style="width:2.6%;">4
+                        </th>
+                        <th style="width:2.6%;">5
+                        </th>
+                        <th style="width:2.6%;">6
+                        </th>
+                        <th style="width:2.6%;">7
+                        </th>
+                        <th style="width:2.6%;">8
+                        </th>
+                        <th style="width:2.6%;">9
+                        </th>
+                        <th style="width:2.6%;">10
+                        </th>
+                        <th style="width:2.6%;">11
+                        </th>
+                        <th style="width:2.6%;">12
+                        </th>
+                        <th style="width:2.6%;">13
+                        </th>
+                        <th style="width:2.6%;">14
+                        </th>
+                        <th style="width:2.6%;">15
+                        </th>
+                        <th style="width:2.6%;">16
+                        </th>
+                        <th style="width:2.6%;">17
+                        </th>
+                        <th style="width:2.6%;">18
+                        </th>
+                        <th style="width:2.6%;">19
+                        </th>
+                        <th style="width:2.6%;">20
+                        </th>
+                        <th style="width:2.6%;">21
+                        </th>
+                        <th style="width:2.6%;">22
+                        </th>
+                        <th style="width:2.6%;">23
+                        </th>
+                        <th style="width:2.6%;">24
+                        </th>
+                        <th style="width:2.6%;">25
+                        </th>
+                        <th style="width:2.6%;">26
+                        </th>
+                        <th style="width:2.6%;">27
+                        </th>
+                        <th style="width:2.6%;">28
+                        </th>
+                        <th style="width:2.6%;">29
+                        </th>
+                        <th style="width:2.6%;">30
+                        </th>
+                        <th style="width:2.6%;">31
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>0
+                        </th>
+                        <th>0
+                        </th>
+                        <td colspan="8"><i>Next Header</i>
+                        </td>
+                        <td colspan="8"><i>Payload Len</i>
+                        </td>
+                        <td colspan="16"><i>Reserved</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>4
+                        </th>
+                        <th>32
+                        </th>
+                        <td colspan="32"><i>Security Parameters Index (SPI)</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>8
+                        </th>
+                        <th>64
+                        </th>
+                        <td colspan="32"><i>Sequence Number</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>C
+                        </th>
+                        <th>96
+                        </th>
+                        <td colspan="32" rowspan="2"><i>Integrity Check Value (ICV)</i><br>...
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul>
+                <li>加密过的报文ESP，同样可以看一下结构：</li>
+            </ul>
+            <table class="wikitable" style="margin:1em auto; text-align: center">
+                <caption style="background:#781549; color:white;"><i>Encapsulating Security Payload</i> format
+                </caption>
+                <tbody>
+                    <tr>
+                        <th style="border-bottom:none; border-right:none;"><i>Offsets</i>
+                        </th>
+                        <th style="border-left:none;">Octet<sub>16</sub>
+                        </th>
+                        <th colspan="8">0
+                        </th>
+                        <th colspan="8">1
+                        </th>
+                        <th colspan="8">2
+                        </th>
+                        <th colspan="8">3
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="border-top: none">Octet<sub>16</sub>
+                        </th>
+                        <th>Bit<sub>10</sub>
+                        </th>
+                        <th style="width:2.6%;">0
+                        </th>
+                        <th style="width:2.6%;">1
+                        </th>
+                        <th style="width:2.6%;">2
+                        </th>
+                        <th style="width:2.6%;">3
+                        </th>
+                        <th style="width:2.6%;">4
+                        </th>
+                        <th style="width:2.6%;">5
+                        </th>
+                        <th style="width:2.6%;">6
+                        </th>
+                        <th style="width:2.6%;">7
+                        </th>
+                        <th style="width:2.6%;">8
+                        </th>
+                        <th style="width:2.6%;">9
+                        </th>
+                        <th style="width:2.6%;">10
+                        </th>
+                        <th style="width:2.6%;">11
+                        </th>
+                        <th style="width:2.6%;">12
+                        </th>
+                        <th style="width:2.6%;">13
+                        </th>
+                        <th style="width:2.6%;">14
+                        </th>
+                        <th style="width:2.6%;">15
+                        </th>
+                        <th style="width:2.6%;">16
+                        </th>
+                        <th style="width:2.6%;">17
+                        </th>
+                        <th style="width:2.6%;">18
+                        </th>
+                        <th style="width:2.6%;">19
+                        </th>
+                        <th style="width:2.6%;">20
+                        </th>
+                        <th style="width:2.6%;">21
+                        </th>
+                        <th style="width:2.6%;">22
+                        </th>
+                        <th style="width:2.6%;">23
+                        </th>
+                        <th style="width:2.6%;">24
+                        </th>
+                        <th style="width:2.6%;">25
+                        </th>
+                        <th style="width:2.6%;">26
+                        </th>
+                        <th style="width:2.6%;">27
+                        </th>
+                        <th style="width:2.6%;">28
+                        </th>
+                        <th style="width:2.6%;">29
+                        </th>
+                        <th style="width:2.6%;">30
+                        </th>
+                        <th style="width:2.6%;">31
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>0
+                        </th>
+                        <th>0
+                        </th>
+                        <td colspan="32"><i>Security Parameters Index (SPI)</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>4
+                        </th>
+                        <th>32
+                        </th>
+                        <td colspan="32"><i>Sequence Number</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>8
+                        </th>
+                        <th>64
+                        </th>
+                        <td colspan="32" rowspan="2"><i>Payload data</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                        <td colspan="8" style="border-top-style: hidden;">&nbsp;
+                        </td>
+                        <td colspan="24" style="border-bottom-style: hidden;">&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                        <td colspan="8" style="border-right-style: hidden;">&nbsp;
+                        </td>
+                        <td colspan="16"><i>Padding (0-255 octets)</i>
+                        </td>
+                        <td colspan="8" style="border-left-style: hidden;">&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                        <td colspan="16" style="border-top-style: hidden;">&nbsp;
+                        </td>
+                        <td colspan="8"><i>Pad Length</i>
+                        </td>
+                        <td colspan="8"><i>Next Header</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                        <td colspan="32" rowspan="2"><i>Integrity Check Value (ICV)</i><br>...
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>...
+                        </th>
+                        <th>...
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>当然根据具体协议封装方式不同其结构也有所不同，但基本上都会含有上面的部分。从上面也可以看出，IPSec包含了这些协议：AH、ESP和ISAKMP。</p>
+            <p>IPSec通常有两种传输模式，即隧道模式和传输模式。工作方式见名知意。</p>
+            <p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-1.svg.png" alt="picture"></p>
+            <h2 id="L2TP-IPSec"><a href="#L2TP-IPSec" class="headerlink" title="L2TP &#x2F; IPSec"></a>L2TP &#x2F; IPSec
+            </h2>
+            <p>L2TP工作在第二层数据链路层，使用端口UDP1701。某种意义上可以理解成是把PPP载荷包了一层UDP。由于IPSec更多侧重于对数据报文的加密也就是安全性，在用户认证上比较薄弱。因而常会考虑将L2TP和IPSec结合。
+            </p>
+            <p>仔细想一下，当家里路由器桥接光猫，路由器拨号的时候，光猫只作Modem，路由器通过PPPoE方式拨号，这里PPPoE实质上就是封装了PPP协议。大概是由于PPP擅于进行身份认证和IP分配，所以大量采用PPPoE方式来接入宽带。
+            </p>
+            <p>总之由于L2TP可以很方便地做多用户的认证，可以很好地解决IPSec在这方面的缺陷，所以两者经常被组合使用。</p>
+            <h2 id="Cisco-IPSec-IPSec-IKE"><a href="#Cisco-IPSec-IPSec-IKE" class="headerlink"
+                    title="Cisco IPSec (IPSec &#x2F; IKE)"></a>Cisco IPSec (IPSec &#x2F; IKE)</h2>
+            <p>Cisco的IPSec大体上是结合使用了IKE协议，当然也有在此之上再利用L2TP协议的，不过华硕和MacOS似乎都没有支持？因而这里不作探讨。</p>
+            <p>先说IKE协议，全程即网络密钥交换协议，基本上是用下列方式进行身份认证和密钥分发的：</p>
+            <ul>
+                <li>身份认证，支持PSK、RSA、数字信封</li>
+                <li>身份保护，利用DH密钥交换算法和PFS</li>
+            </ul>
+            <p>IKEv1和v2最大不同在于v2简化了协商过程并修复了些安全漏洞。</p>
+            <p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-2.png" alt="picture"></p>
+            <p>基本的认证过程如上图。</p>
+            <p>现在考虑IPSec和IKE组合使用的情景，也就是大部分的实际情景：</p>
+            <p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-3.png" alt="picture"></p>
+            <p>注意这里IPSec进行加密和认证的时候支持MD5和SHA-1，在IKE认证部分则是利用了FPS和PSK或RSA（这里是提供给配置者自选的）。</p>
+            <p>可以再结合Cisco官网的图片和解释看一下：</p>
+            <p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-4.jpg.avif" alt="picture"></p>
+            <p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-5.jpg.avif" alt="picture"></p>
+            <p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-6.jpg.avif" alt="picture"></p>
+            <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1>
+            <p>个人来看对个人用户而言这种安全性是足够了的。嫌证书认证麻烦不用RSA而选择PSK都已经足够。其实华硕本身也提供了证书可以使用，不过由于家宽一般都是动态公网IP每次IP变了都要重新弄成本也确实相对高一点。</p>
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
+            <ol>
+                <li>IPsec and IKE. (2023, April 5). IPsec and IKE. <a target="_blank" rel="noopener"
+                        href="https://sc1.checkpoint.com/documents/R81/WebAdminGuides/EN/CP_R81_SitetoSiteVPN_AdminGuide/Topics-VPNSG/IPsec-and-IKE.htm">https://sc1.checkpoint.com/documents/R81/WebAdminGuides/EN/CP_R81_SitetoSiteVPN_AdminGuide/Topics-VPNSG/IPsec-and-IKE.htm</a>
+                </li>
+                <li>Introduction to Cisco IPsec Technology. (2007, August 3). Cisco. <a target="_blank" rel="noopener"
+                        href="https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/ip_security/provisioning/guide/IPsecPG1.html">https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/ip_security/provisioning/guide/IPsecPG1.html</a>
+                </li>
+                <li>IPsec - Wikipedia. (2014, February 18). IPsec - Wikipedia. <a target="_blank" rel="noopener"
+                        href="https://en.wikipedia.org/wiki/IPsec#">https://en.wikipedia.org/wiki/IPsec#</a></li>
+                <li>IPSec IKEv1&amp;IKEv2_ike sa是双向的吗_text1.txt的博客-CSDN博客. (2001, November 14). IPSec
+                    IKEv1&amp;IKEv2_Ike sa是双向的吗_text1.txt的博客-CSDN博客. <a target="_blank" rel="noopener"
+                        href="https://blog.csdn.net/weixin_51045259/article/details/113639007?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-5-113639007-blog-123870000.235%5Ev36%5Epc_relevant_default_base3&spm=1001.2101.3001.4242.4&utm_relevant_index=8">https://blog.csdn.net/weixin_51045259/article/details/113639007?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-5-113639007-blog-123870000.235^v36^pc_relevant_default_base3&amp;spm=1001.2101.3001.4242.4&amp;utm_relevant_index=8</a>
+                </li>
+                <li>HCIE-Security Day33：IPSec：深入学习ipsec ikev2、IKEV1和IKEV2比较_ike v1与ike v2的区别_小梁L同学的博客-CSDN博客. (2001, May
+                    12). HCIE-Security Day33：IPSec：深入学习ipsec Ikev2、IKEV1和IKEV2比较_Ike V1与ike V2的区别_小梁L同学的博客-CSDN博客. <a
+                        target="_blank" rel="noopener"
+                        href="https://blog.csdn.net/qq_36813857/article/details/123870000">https://blog.csdn.net/qq_36813857/article/details/123870000</a>
+                </li>
+                <li>Basic Concepts of IPSec - S600-E V200R011C10 Configuration Guide - VPN - Huawei. (2021, October 20).
+                    Basic Concepts of IPSec - S600-E V200R011C10 Configuration Guide - VPN - Huawei. <a target="_blank"
+                        rel="noopener"
+                        href="https://support.huawei.com/enterprise/en/doc/EDOC1000178025/ae03ecd3/basic-concepts-of-ipsec">https://support.huawei.com/enterprise/en/doc/EDOC1000178025/ae03ecd3/basic-concepts-of-ipsec</a>
+                </li>
+                <li>既然IPsec有隧道模式，为什么还有L2TP+IPsec这样的组合？ - 知乎. (2018, June 15). 既然IPsec有隧道模式，为什么还有L2TP+IPsec这样的组合？ - 知乎.
+                    <a target="_blank" rel="noopener"
+                        href="https://www.zhihu.com/question/279686051">https://www.zhihu.com/question/279686051</a>
+                </li>
+            </ol>
+
         </div>
-        
 
-        <h2 class="title">IPSec 技术的理解</h2>
-    </div>
 
-    <div class="divider"></div>
+        <div class="about">
+            <h1>About this Post</h1>
+            <div class="details">
+                <p>This post is written by 李亦杨 / 李亦楊 / Yi-Yang Li, all rights reserved.</p>
+            </div>
 
-    <div class="content">
-        <blockquote>
-<p>本文首发于个人博客 <br>发表日期：2023.5.27</p>
-</blockquote>
-<p>目前家里两个地方都有公网环境，为了保证安全性与防止备案问题（也就是不想给外部用户提供任何服务），所以利用华硕路由器都配置了IPSec VPN。这两天想看看他的安全性问题，所以看了看IPSec技术的原理。</p>
-<h1 id="主流IPSec-VPN配置"><a href="#主流IPSec-VPN配置" class="headerlink" title="主流IPSec VPN配置"></a>主流IPSec VPN配置</h1><p>看了看目前比较主流的配置大致就两种：</p>
-<ul>
-<li>L2TP &#x2F; IPSec</li>
-<li>Cisco IPSec (IPSec &#x2F; IKE)</li>
-</ul>
-<p>华硕路由器原生支持的是后者，在MacOS上则是两种都支持。</p>
-<h1 id="IPSec-技术"><a href="#IPSec-技术" class="headerlink" title="IPSec 技术"></a>IPSec 技术</h1><p>先看IPSec技术本身，其工作在第三层即网络层上，需要开放UDP500和4500端口。报文大致含有以下内容：</p>
-<ul>
-<li>认证头AH，维基上给出的结构如下（懒了直接把维基html抄下来了）：</li>
-</ul>
-<table class="wikitable" style="margin:1em auto; text-align: center">
-<caption style="background:#781549; color:white;"><i>Authentication Header</i> format
-</caption>
-<tbody><tr>
-<th style="border-bottom:none; border-right:none;"><i>Offsets</i>
-</th>
-<th style="border-left:none;">Octet<sub>16</sub>
-</th>
-<th colspan="8">0
-</th>
-<th colspan="8">1
-</th>
-<th colspan="8">2
-</th>
-<th colspan="8">3
-</th></tr>
-<tr>
-<th style="border-top: none">Octet<sub>16</sub>
-</th>
-<th>Bit<sub>10</sub>
-</th>
-<th style="width:2.6%;">0
-</th>
-<th style="width:2.6%;">1
-</th>
-<th style="width:2.6%;">2
-</th>
-<th style="width:2.6%;">3
-</th>
-<th style="width:2.6%;">4
-</th>
-<th style="width:2.6%;">5
-</th>
-<th style="width:2.6%;">6
-</th>
-<th style="width:2.6%;">7
-</th>
-<th style="width:2.6%;">8
-</th>
-<th style="width:2.6%;">9
-</th>
-<th style="width:2.6%;">10
-</th>
-<th style="width:2.6%;">11
-</th>
-<th style="width:2.6%;">12
-</th>
-<th style="width:2.6%;">13
-</th>
-<th style="width:2.6%;">14
-</th>
-<th style="width:2.6%;">15
-</th>
-<th style="width:2.6%;">16
-</th>
-<th style="width:2.6%;">17
-</th>
-<th style="width:2.6%;">18
-</th>
-<th style="width:2.6%;">19
-</th>
-<th style="width:2.6%;">20
-</th>
-<th style="width:2.6%;">21
-</th>
-<th style="width:2.6%;">22
-</th>
-<th style="width:2.6%;">23
-</th>
-<th style="width:2.6%;">24
-</th>
-<th style="width:2.6%;">25
-</th>
-<th style="width:2.6%;">26
-</th>
-<th style="width:2.6%;">27
-</th>
-<th style="width:2.6%;">28
-</th>
-<th style="width:2.6%;">29
-</th>
-<th style="width:2.6%;">30
-</th>
-<th style="width:2.6%;">31
-</th></tr>
-<tr>
-<th>0
-</th>
-<th>0
-</th>
-<td colspan="8"><i>Next Header</i>
-</td>
-<td colspan="8"><i>Payload Len</i>
-</td>
-<td colspan="16"><i>Reserved</i>
-</td></tr>
-<tr>
-<th>4
-</th>
-<th>32
-</th>
-<td colspan="32"><i>Security Parameters Index (SPI)</i>
-</td></tr>
-<tr>
-<th>8
-</th>
-<th>64
-</th>
-<td colspan="32"><i>Sequence Number</i>
-</td></tr>
-<tr>
-<th>C
-</th>
-<th>96
-</th>
-<td colspan="32" rowspan="2"><i>Integrity Check Value (ICV)</i><br>...
-</td></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th></tr></tbody></table>
+            <p class="tags">
 
-<ul>
-<li>加密过的报文ESP，同样可以看一下结构：</li>
-</ul>
-<table class="wikitable" style="margin:1em auto; text-align: center">
-<caption style="background:#781549; color:white;"><i>Encapsulating Security Payload</i> format
-</caption>
-<tbody><tr>
-<th style="border-bottom:none; border-right:none;"><i>Offsets</i>
-</th>
-<th style="border-left:none;">Octet<sub>16</sub>
-</th>
-<th colspan="8">0
-</th>
-<th colspan="8">1
-</th>
-<th colspan="8">2
-</th>
-<th colspan="8">3
-</th></tr>
-<tr>
-<th style="border-top: none">Octet<sub>16</sub>
-</th>
-<th>Bit<sub>10</sub>
-</th>
-<th style="width:2.6%;">0
-</th>
-<th style="width:2.6%;">1
-</th>
-<th style="width:2.6%;">2
-</th>
-<th style="width:2.6%;">3
-</th>
-<th style="width:2.6%;">4
-</th>
-<th style="width:2.6%;">5
-</th>
-<th style="width:2.6%;">6
-</th>
-<th style="width:2.6%;">7
-</th>
-<th style="width:2.6%;">8
-</th>
-<th style="width:2.6%;">9
-</th>
-<th style="width:2.6%;">10
-</th>
-<th style="width:2.6%;">11
-</th>
-<th style="width:2.6%;">12
-</th>
-<th style="width:2.6%;">13
-</th>
-<th style="width:2.6%;">14
-</th>
-<th style="width:2.6%;">15
-</th>
-<th style="width:2.6%;">16
-</th>
-<th style="width:2.6%;">17
-</th>
-<th style="width:2.6%;">18
-</th>
-<th style="width:2.6%;">19
-</th>
-<th style="width:2.6%;">20
-</th>
-<th style="width:2.6%;">21
-</th>
-<th style="width:2.6%;">22
-</th>
-<th style="width:2.6%;">23
-</th>
-<th style="width:2.6%;">24
-</th>
-<th style="width:2.6%;">25
-</th>
-<th style="width:2.6%;">26
-</th>
-<th style="width:2.6%;">27
-</th>
-<th style="width:2.6%;">28
-</th>
-<th style="width:2.6%;">29
-</th>
-<th style="width:2.6%;">30
-</th>
-<th style="width:2.6%;">31
-</th></tr>
-<tr>
-<th>0
-</th>
-<th>0
-</th>
-<td colspan="32"><i>Security Parameters Index (SPI)</i>
-</td></tr>
-<tr>
-<th>4
-</th>
-<th>32
-</th>
-<td colspan="32"><i>Sequence Number</i>
-</td></tr>
-<tr>
-<th>8
-</th>
-<th>64
-</th>
-<td colspan="32" rowspan="2"><i>Payload data</i>
-</td></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th>
-<td colspan="8" style="border-top-style: hidden;">&nbsp;
-</td>
-<td colspan="24" style="border-bottom-style: hidden;">&nbsp;
-</td></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th>
-<td colspan="8" style="border-right-style: hidden;">&nbsp;
-</td>
-<td colspan="16"><i>Padding (0-255 octets)</i>
-</td>
-<td colspan="8" style="border-left-style: hidden;">&nbsp;
-</td></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th>
-<td colspan="16" style="border-top-style: hidden;">&nbsp;
-</td>
-<td colspan="8"><i>Pad Length</i>
-</td>
-<td colspan="8"><i>Next Header</i>
-</td></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th>
-<td colspan="32" rowspan="2"><i>Integrity Check Value (ICV)</i><br>...
-</td></tr>
-<tr>
-<th>...
-</th>
-<th>...
-</th></tr></tbody></table>
+                <i class="icon"></i>
+                <a href="/pages/hexo/public/tags/中文/index.html" class="tag">#中文</a><a
+                    href="/pages/hexo/public/tags/安全/index.html" class="tag">#安全</a><a
+                    href="/pages/hexo/public/tags/网络/index.html" class="tag">#网络</a>
+            </p>
 
-<p>当然根据具体协议封装方式不同其结构也有所不同，但基本上都会含有上面的部分。从上面也可以看出，IPSec包含了这些协议：AH、ESP和ISAKMP。</p>
-<p>IPSec通常有两种传输模式，即隧道模式和传输模式。工作方式见名知意。</p>
-<p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-1.svg.png" alt="picture"></p>
-<h2 id="L2TP-IPSec"><a href="#L2TP-IPSec" class="headerlink" title="L2TP &#x2F; IPSec"></a>L2TP &#x2F; IPSec</h2><p>L2TP工作在第二层数据链路层，使用端口UDP1701。某种意义上可以理解成是把PPP载荷包了一层UDP。由于IPSec更多侧重于对数据报文的加密也就是安全性，在用户认证上比较薄弱。因而常会考虑将L2TP和IPSec结合。</p>
-<p>仔细想一下，当家里路由器桥接光猫，路由器拨号的时候，光猫只作Modem，路由器通过PPPoE方式拨号，这里PPPoE实质上就是封装了PPP协议。大概是由于PPP擅于进行身份认证和IP分配，所以大量采用PPPoE方式来接入宽带。</p>
-<p>总之由于L2TP可以很方便地做多用户的认证，可以很好地解决IPSec在这方面的缺陷，所以两者经常被组合使用。</p>
-<h2 id="Cisco-IPSec-IPSec-IKE"><a href="#Cisco-IPSec-IPSec-IKE" class="headerlink" title="Cisco IPSec (IPSec &#x2F; IKE)"></a>Cisco IPSec (IPSec &#x2F; IKE)</h2><p>Cisco的IPSec大体上是结合使用了IKE协议，当然也有在此之上再利用L2TP协议的，不过华硕和MacOS似乎都没有支持？因而这里不作探讨。</p>
-<p>先说IKE协议，全程即网络密钥交换协议，基本上是用下列方式进行身份认证和密钥分发的：</p>
-<ul>
-<li>身份认证，支持PSK、RSA、数字信封</li>
-<li>身份保护，利用DH密钥交换算法和PFS</li>
-</ul>
-<p>IKEv1和v2最大不同在于v2简化了协商过程并修复了些安全漏洞。</p>
-<p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-2.png" alt="picture"></p>
-<p>基本的认证过程如上图。</p>
-<p>现在考虑IPSec和IKE组合使用的情景，也就是大部分的实际情景：</p>
-<p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-3.png" alt="picture"></p>
-<p>注意这里IPSec进行加密和认证的时候支持MD5和SHA-1，在IKE认证部分则是利用了FPS和PSK或RSA（这里是提供给配置者自选的）。</p>
-<p>可以再结合Cisco官网的图片和解释看一下：</p>
-<p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-4.jpg.avif" alt="picture"></p>
-<p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-5.jpg.avif" alt="picture"></p>
-<p><img src="/pages/hexo/public/2023/05/27/IPSecKnowledge-20230527/picture-6.jpg.avif" alt="picture"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>个人来看对个人用户而言这种安全性是足够了的。嫌证书认证麻烦不用RSA而选择PSK都已经足够。其实华硕本身也提供了证书可以使用，不过由于家宽一般都是动态公网IP每次IP变了都要重新弄成本也确实相对高一点。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li>IPsec and IKE. (2023, April 5). IPsec and IKE. <a target="_blank" rel="noopener" href="https://sc1.checkpoint.com/documents/R81/WebAdminGuides/EN/CP_R81_SitetoSiteVPN_AdminGuide/Topics-VPNSG/IPsec-and-IKE.htm">https://sc1.checkpoint.com/documents/R81/WebAdminGuides/EN/CP_R81_SitetoSiteVPN_AdminGuide/Topics-VPNSG/IPsec-and-IKE.htm</a></li>
-<li>Introduction to Cisco IPsec Technology. (2007, August 3). Cisco. <a target="_blank" rel="noopener" href="https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/ip_security/provisioning/guide/IPsecPG1.html">https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/ip_security/provisioning/guide/IPsecPG1.html</a></li>
-<li>IPsec - Wikipedia. (2014, February 18). IPsec - Wikipedia. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IPsec#">https://en.wikipedia.org/wiki/IPsec#</a></li>
-<li>IPSec IKEv1&amp;IKEv2_ike sa是双向的吗_text1.txt的博客-CSDN博客. (2001, November 14). IPSec IKEv1&amp;IKEv2_Ike sa是双向的吗_text1.txt的博客-CSDN博客. <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51045259/article/details/113639007?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-5-113639007-blog-123870000.235%5Ev36%5Epc_relevant_default_base3&spm=1001.2101.3001.4242.4&utm_relevant_index=8">https://blog.csdn.net/weixin_51045259/article/details/113639007?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-5-113639007-blog-123870000.235^v36^pc_relevant_default_base3&amp;spm=1001.2101.3001.4242.4&amp;utm_relevant_index=8</a></li>
-<li>HCIE-Security Day33：IPSec：深入学习ipsec ikev2、IKEV1和IKEV2比较_ike v1与ike v2的区别_小梁L同学的博客-CSDN博客. (2001, May 12). HCIE-Security Day33：IPSec：深入学习ipsec Ikev2、IKEV1和IKEV2比较_Ike V1与ike V2的区别_小梁L同学的博客-CSDN博客. <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36813857/article/details/123870000">https://blog.csdn.net/qq_36813857/article/details/123870000</a></li>
-<li>Basic Concepts of IPSec - S600-E V200R011C10 Configuration Guide - VPN - Huawei. (2021, October 20). Basic Concepts of IPSec - S600-E V200R011C10 Configuration Guide - VPN - Huawei. <a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/en/doc/EDOC1000178025/ae03ecd3/basic-concepts-of-ipsec">https://support.huawei.com/enterprise/en/doc/EDOC1000178025/ae03ecd3/basic-concepts-of-ipsec</a></li>
-<li>既然IPsec有隧道模式，为什么还有L2TP+IPsec这样的组合？ - 知乎. (2018, June 15). 既然IPsec有隧道模式，为什么还有L2TP+IPsec这样的组合？ - 知乎. <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/279686051">https://www.zhihu.com/question/279686051</a></li>
-</ol>
-
-    </div>
-
-    
-    <div class="about">
-        <h1>About this Post</h1>
-        <div class="details">
-            <p>This post is written by 李亦杨 / 李亦楊 / Yi-Yang Li, all rights reserved.</p>
         </div>
-        
-        <p class="tags">
-            
-            <i class="icon"></i>
-            <a href="/pages/hexo/public/tags/中文/index.html" class="tag">#中文</a><a href="/pages/hexo/public/tags/安全/index.html" class="tag">#安全</a><a href="/pages/hexo/public/tags/网络/index.html" class="tag">#网络</a>
-        </p>
-        
-    </div>
-    
 
-    <div class="container post-prev-next">
-        
-        <a href="/pages/hexo/public/2023/06/04/PPPoE-20230603/index.html" class="next">
-            <div>
-                <div class="text">
-                    <p class="label">Next</p>
-                    <h3 class="title">对PPPoE协议的理解——从电信动态公网环境出发</h3>
+
+        <div class="container post-prev-next">
+
+            <a href="/pages/hexo/public/2023/06/04/PPPoE-20230603/index.html" class="next">
+                <div>
+                    <div class="text">
+                        <p class="label">Next</p>
+                        <h3 class="title">对PPPoE协议的理解——从电信动态公网环境出发</h3>
+                    </div>
                 </div>
-            </div>
-        </a>
-        
-        
-        <a href="/pages/hexo/public/2023/05/08/BlogBuildingInsightsNotesOne-20230508/index.html" class="prev">
-            <div>
-                <div class="text">
-                    <p class="label">Previous</p>
-                    <h3 class="title">个人博客搭建心得（壹）：以CSS 3为代表的一些前端开发感悟</>
+            </a>
+
+
+            <a href="/pages/hexo/public/2023/05/08/BlogBuildingInsightsNotesOne-20230508/index.html" class="prev">
+                <div>
+                    <div class="text">
+                        <p class="label">Previous</p>
+                        <h3 class="title">个人博客搭建心得（壹）：以CSS 3为代表的一些前端开发感悟</>
+                    </div>
                 </div>
-            </div>
-        </a>
-        
-    </div>
+            </a>
 
-    
-        
-        
-    
-</article>
-
-        <footer>
-    <div class="inner">
-        <div class="links">
-            
-            <div class="group">
-                <h2 class="title">ピカピカピ</h2>
-                
-                <a href="/pages/hexo/public/archives/index.html" class="item">Archives</a>
-                
-                <a href="/pages/hexo/public/categories/index.html" class="item">Categories</a>
-                
-                <a href="/pages/hexo/public/about/index.html" class="item">About</a>
-                
-                <a href="/pages/hexo/public/search/index.html" class="item">Search</a>
-                
-                <a href="/pages/hexo/public/atom.xml" class="item">RSS</a>
-                
-            </div>
-            
-            <div class="group">
-                <h2 class="title">Blogs</h2>
-                
-                <a href="/pages/hexo/public/../../homepage/index.html" class="item">Homepage</a>
-                
-            </div>
-            
-            <div class="group">
-                <h2 class="title">Contact</h2>
-                
-                <a href="mailto:Lyy8759@outlook.com" class="item">Email</a>
-                
-                <a target="_blank" rel="noopener" href="https://github.com/pikapikapikaori" class="item">GitHub</a>
-                
-                <a target="_blank" rel="noopener" href="https://bgm.tv/user/inuyasha559" class="item">Bangumi</a>
-                
-                <a target="_blank" rel="noopener" href="https://www.douban.com/people/160339816" class="item">Douban</a>
-                
-            </div>
-            
         </div>
-        <span id="copyright-script-generated"></span>
-        <script>
-            const year = new Date().getFullYear()
-            document.getElementById('copyright-script-generated').innerHTML =
-                `&copy; 2023 - ${year} 李亦杨 / 李亦楊 / Yi-Yang Li - All Rights Reserved.`
-        </script>
-        
-        
+
+
+
+
+
+    </article>
+
+    <footer>
+        <div class="inner">
+            <div class="links">
+
+                <div class="group">
+                    <h2 class="title">ピカピカピ</h2>
+
+                    <a href="/pages/hexo/public/archives/index.html" class="item">Archives</a>
+
+                    <a href="/pages/hexo/public/categories/index.html" class="item">Categories</a>
+
+                    <a href="/pages/hexo/public/about/index.html" class="item">About</a>
+
+                    <a href="/pages/hexo/public/search/index.html" class="item">Search</a>
+
+                    <a href="/pages/hexo/public/atom.xml" class="item">RSS</a>
+
+                </div>
+
+                <div class="group">
+                    <h2 class="title">Blogs</h2>
+
+                    <a href="/pages/hexo/public/../../homepage/index.html" class="item">Homepage</a>
+
+                </div>
+
+                <div class="group">
+                    <h2 class="title">Contact</h2>
+
+                    <a href="mailto:Lyy8759@outlook.com" class="item">Email</a>
+
+                    <a target="_blank" rel="noopener" href="https://github.com/pikapikapikaori" class="item">GitHub</a>
+
+                    <a target="_blank" rel="noopener" href="https://bgm.tv/user/inuyasha559" class="item">Bangumi</a>
+
+                    <a target="_blank" rel="noopener" href="https://www.douban.com/people/160339816"
+                        class="item">Douban</a>
+
+                </div>
+
+            </div>
+            <span id="copyright-script-generated"></span>
+            <script>
+                const year = new Date().getFullYear()
+                document.getElementById('copyright-script-generated').innerHTML =
+                    `&copy; 2023 - ${year} 李亦杨 / 李亦楊 / Yi-Yang Li - All Rights Reserved.`
+            </script>
+
+
             <br>
             <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
                 <label>
@@ -577,27 +629,28 @@
                     <span>Auto</span>
                 </label>
             </div>
-        
-    </div>
-</footer>
+
+        </div>
+    </footer>
 
 
-        
-<script src="/pages/hexo/public/js/main.js"></script>
 
-        
-        
-        
+    <script src="/pages/hexo/public/js/main.js"></script>
 
-        
-        <script src="/pages/hexo/public/scrollreveal/scrollreveal"></script>
-        <script>
-            window.addEventListener('load', () => {
-                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
-                ScrollReveal().reveal('.post-list-item .cover-img img')
-                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
-            })
-        </script>
-        
-    </body>
+
+
+
+
+
+    <script src="/pages/hexo/public/scrollreveal/scrollreveal"></script>
+    <script>
+        window.addEventListener('load', () => {
+            ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+            ScrollReveal().reveal('.post-list-item .cover-img img')
+            ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+        })
+    </script>
+
+</body>
+
 </html>

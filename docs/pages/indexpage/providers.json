@@ -1,15 +1,114 @@
 {
-    "providers" : [
-        {"name":"Allmusic","url":"https://www.allmusic.com/search/all/","prefix":"/a"},
-        {"name":"Discogs","url":"https://www.discogs.com/search/?q=","prefix":"/di"},
-        {"name":"Duck Duck Go","url":"https://duckduckgo.com/?q=","prefix":"/d"},
-        {"name":"iMDB","url":"https://www.imdb.com/find?q=","prefix":"/i"},
-        {"name":"TheMovieDB","url":"https://www.themoviedb.org/search?query=","prefix":"/m"},
-        {"name":"Reddit","url":"https://www.reddit.com/search?q=","prefix":"/r"},
-        {"name":"Qwant","url":"https://www.qwant.com/?q=","prefix":"/q"},
-        {"name":"Soundcloud","url":"https://soundcloud.com/search?q=","prefix":"/so"},
-        {"name":"Spotify","url":"https://open.spotify.com/search/results/","prefix":"/s"},
-        {"name":"TheTVDB","url":"https://www.thetvdb.com/search?query=","prefix":"/tv"},
-        {"name":"Trakt","url":"https://trakt.tv/search?query=","prefix":"/t"}
+    "providers": [
+        {
+            "category": "搜索引擎",
+            "items": [
+                {
+                    "name": "Google",
+                    "url": "https://www.google.com/",
+                    "prefix": "/sego"
+                },
+                {
+                    "name": "Duck Duck Go",
+                    "url": "https://duckduckgo.com/",
+                    "prefix": "/sedd"
+                },
+                {
+                    "name": "Qwant",
+                    "url": "https://www.qwant.com/",
+                    "prefix": "/seqw"
+                },
+                {
+                    "name": "百度",
+                    "url": "https://www.baidu.com/",
+                    "prefix": "/sebd"
+                }
+            ]
+        },
+        {
+            "category": "影视与剧集",
+            "items": [
+                {
+                    "name": "IMDB",
+                    "url": "https://www.imdb.com/",
+                    "prefix": "/tvim"
+                },
+                {
+                    "name": "TheMovieDB",
+                    "url": "https://www.themoviedb.org/",
+                    "prefix": "/tvtmdb"
+                },
+                {
+                    "name": "TheTVDB",
+                    "url": "https://www.thetvdb.com/",
+                    "prefix": "/tvtvdb"
+                },
+                {
+                    "name": "Trakt",
+                    "url": "https://trakt.tv/",
+                    "prefix": "/tvtr"
+                },
+                {
+                    "name": "豆瓣",
+                    "url": "https://www.douban.com/",
+                    "prefix": "/tvdb"
+                }
+            ]
+        },
+        {
+            "category": "音乐",
+            "items": [
+                {
+                    "name": "Allmusic",
+                    "url": "https://www.allmusic.com/",
+                    "prefix": "/muam"
+                },
+                {
+                    "name": "Discogs",
+                    "url": "https://www.discogs.com/",
+                    "prefix": "/mudi"
+                },
+                {
+                    "name": "Soundcloud",
+                    "url": "https://soundcloud.com/",
+                    "prefix": "/musc"
+                },
+                {
+                    "name": "Spotify",
+                    "url": "https://open.spotify.com/",
+                    "prefix": "/musp"
+                }
+            ]
+        },
+        {
+            "category": "社区与视频",
+            "items": [
+                {
+                    "name": "Reddit",
+                    "url": "https://www.reddit.com/",
+                    "prefix": "/cord"
+                },
+                {
+                    "name": "Youtube",
+                    "url": "https://www.youtube.com/",
+                    "prefix": "/coyt"
+                },
+                {
+                    "name": "Bangumi",
+                    "url": "https://bgm.tv/",
+                    "prefix": "/cobgm"
+                }
+            ]
+        },
+        {
+            "category": "开发",
+            "items": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/",
+                    "prefix": "/degh"
+                }
+            ]
+        }
     ]
 }

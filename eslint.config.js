@@ -56,10 +56,12 @@ const pagesGlobals = {
     animepage: {
         breakpoints: "readonly",
         browser: "readonly",
+        $: "readonly",
         jQuery: "readonly",
     },
     homepage: {
         $: "readonly",
+        jQuery: "readonly",
         cw: "readonly",
         ch: "readonly",
         requestAnimFrame: "readonly",
@@ -113,13 +115,8 @@ module.exports = defineConfig([
         languageOptions: {
             globals: pagesGlobals.animepage,
         },
-    },
-    {
-        files: [
-            "docs/pages/animepage/**/*.js"
-        ],
-        languageOptions: {
-            globals: pagesGlobals.animepage,
+        rules: {
+            "no-cond-assign": ["warn", "except-parens"],
         },
     },
     {

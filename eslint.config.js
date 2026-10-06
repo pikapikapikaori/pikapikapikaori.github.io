@@ -60,15 +60,13 @@ const pagesGlobals = {
     },
     homepage: {
         $: "readonly",
+        cw: "readonly",
+        ch: "readonly",
+        requestAnimFrame: "readonly",
     },
     indexpage: {
         Handlebars: "readonly",
     },
-    // cw: "readonly",
-    // ch: "readonly",
-    // requestAnimFrame: "readonly",
-    // getParameterByName: "readonly",
-    // updatetime: "readonly",
 };
 
 /* ============================== */

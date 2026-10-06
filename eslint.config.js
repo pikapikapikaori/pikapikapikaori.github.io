@@ -6,7 +6,9 @@ const {
 const globals = require("globals");
 const stylistic = require("@stylistic/eslint-plugin");
 
-// ── 唯一可配置区 ─────────────────────────────────
+/* ==============================
+ * 唯一可配置区 
+ ============================== */
 const lintConfig = {
     ext: [
         "js"
@@ -18,6 +20,58 @@ const lintConfig = {
         "docs/pages/**/hexo/**",
     ],
 };
+
+const commonRules = {
+    "no-empty": ["warn", { allowEmptyCatch: true }],
+    "no-cond-assign": ["warn", "always"],
+    "no-undef": "error",
+
+    "@stylistic/indent": ["warn", 4],
+    "@stylistic/linebreak-style": ["warn", "unix"],
+    "@stylistic/quotes": ["warn", "single"],
+    "@stylistic/semi": ["warn", "never"],
+    "@stylistic/spaced-comment": ["warn", "always"],
+    "@stylistic/arrow-spacing": ["warn", { before: true, after: true }],
+    "@stylistic/comma-spacing": ["warn", { before: false, after: true }],
+    "@stylistic/key-spacing": ["warn", { beforeColon: false, afterColon: true }],
+    "@stylistic/keyword-spacing": ["warn", { before: true, after: true }],
+};
+
+const baseGlobals = {
+    ...globals.node,
+    ...globals.browser,
+    ...globals.es2021,
+};
+
+// docs/utils/** 里额外认识的
+const utilsGlobals = {
+    Docsify: "readonly",
+    Gitalk: "readonly",
+    PIXI: "readonly",
+    Sakura: "readonly",
+};
+
+// docs/pages/** 里额外认识的
+const pagesGlobals = {
+    animepage: {
+        breakpoints: "readonly",
+        browser: "readonly",
+        jQuery: "readonly",
+    },
+    homepage: {
+        $: "readonly",
+    },
+    indexpage: {
+        Handlebars: "readonly",
+    },
+    // cw: "readonly",
+    // ch: "readonly",
+    // requestAnimFrame: "readonly",
+    // getParameterByName: "readonly",
+    // updatetime: "readonly",
+};
+
+/* ============================== */
 
 const extGlob = lintConfig.ext.length === 1
     ? `*.${lintConfig.ext[0]}`
@@ -40,34 +94,50 @@ module.exports = defineConfig([
             "@stylistic": stylistic,
         },
         languageOptions: {
-            globals: {
-                ...globals.node,
-                ...globals.browser,
-                ...globals.es2021,
-
-                Docsify: "readonly",
-                Gitalk: "readonly",
-                PIXI: "readonly",
-                Sakura: "readonly",
-            },
+            globals: baseGlobals,
             ecmaVersion: "latest",
             sourceType: "module",
         },
-        rules: {
-            "no-empty": "warn",
-            "no-cond-assign": ["warn", "always"],
-            "no-undef": "error",
-
-            "@stylistic/indent": ["warn", 4],
-            "@stylistic/linebreak-style": ["warn", "unix"],
-            "@stylistic/quotes": ["warn", "single"],
-            "@stylistic/semi": ["warn", "never"],
-            "@stylistic/spaced-comment": ["warn", "always"],
-            "@stylistic/arrow-spacing": ["warn", { before: true, after: true }],
-            // "@stylistic/comma-dangle": ["warn", "always"],
-            "@stylistic/comma-spacing": ["warn", { before: false, after: true }],
-            "@stylistic/key-spacing": ["warn", { beforeColon: false, afterColon: true }],
-            "@stylistic/keyword-spacing": ["warn", { before: true, after: true }],
+        rules: commonRules,
+    },
+    {
+        files: [
+            "docs/utils/**/*.js"
+        ],
+        languageOptions: {
+            globals: utilsGlobals,
+        },
+    },
+    {
+        files: [
+            "docs/pages/animepage/**/*.js"
+        ],
+        languageOptions: {
+            globals: pagesGlobals.animepage,
+        },
+    },
+    {
+        files: [
+            "docs/pages/animepage/**/*.js"
+        ],
+        languageOptions: {
+            globals: pagesGlobals.animepage,
+        },
+    },
+    {
+        files: [
+            "docs/pages/homepage/**/*.js"
+        ],
+        languageOptions: {
+            globals: pagesGlobals.homepage,
+        },
+    },
+    {
+        files: [
+            "docs/pages/indexpage/**/*.js"
+        ],
+        languageOptions: {
+            globals: pagesGlobals.indexpage,
         },
     },
 ]);

@@ -2,16 +2,16 @@ var sindex = 0
 var cycle = false
 var sengine = 'https://www.google.com/?q=' // Default search engine
 
-function start() {
-    var query = getParameterByName('q')
-    if (query) search(query.replaceAll('+', '%2B'))
+// function start() {
+//     var query = getParameterByName('q')
+//     if (query) search(query.replaceAll('+', '%2B'))
 
-    document.getElementById('keywords').focus()
+//     document.getElementById('keywords').focus()
 
-    window.setInterval(function () {
-        updatetime()
-    }, 200)
-}
+//     window.setInterval(function () {
+//         updatetime()
+//     }, 200)
+// }
 
 function handleKeyPress(e) {
     var key = e.keyCode || e.which

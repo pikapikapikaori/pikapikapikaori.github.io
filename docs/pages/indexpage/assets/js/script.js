@@ -29,9 +29,16 @@ function greet() {
     }
 }
 
+function copyright() {
+    const year = new Date().getFullYear()
+    document.getElementById('copyright-script-generated').innerHTML =
+        `&copy; 2023 - ${year} 李亦楊 - All Rights Reserved.`
+}
+
 function loadFunctions() {
-    date()  
-    greet()
+    // date()  
+    // greet()
+    copyright()
 }
 
 

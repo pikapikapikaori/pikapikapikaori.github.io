@@ -231,8 +231,12 @@ const inlineTagConfigMap = new Map([
         (payload) => `<div class="toc-page-display-title-img"><img class="ignore-view-full-image-img" src="${payload}"></center></div>`
     ],
     [
+        'toc-card-title',
+        (payload) => `<div class="toc-page-display-title-div">${payload}</div>`
+    ],
+    [
         'toc-card-description',
-        (payload) => `<div class="toc-page-display-title-div">ピカピカピ</div><div class="toc-page-display-date-div">${payload}</div>`
+        (payload) => `<div class="toc-page-display-date-div">${payload}</div>`
     ],
 
     /* About Page Container */

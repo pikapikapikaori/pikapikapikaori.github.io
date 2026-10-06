@@ -28,7 +28,7 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/light/# -->
+<!-- toc-card-href:./pages/light/#/ -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-light.png -->
 <!-- toc-card-title:博客 -->
 <!-- toc-card-description:极速轻量版 -->

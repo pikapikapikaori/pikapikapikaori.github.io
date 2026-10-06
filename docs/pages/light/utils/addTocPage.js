@@ -24,6 +24,59 @@ function plugin(hook, vm) {
 
     let maxPageIndex = 1
 
+    function getOrdinalSuffix(day) {
+        if (day > 3 && day < 21) return 'th'
+
+        switch (day % 10) {
+            case 1: return 'st'
+            case 2: return 'nd'
+            case 3: return 'rd'
+            default: return 'th'
+        }
+    }
+
+    const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    const dateLocalizationOptions = {
+        format: {
+            'default': (month, day) => `${month} 月 ${day} 日`,
+            '/jp/': (month, day) => `${month} 月 ${day} 日`,
+            '/en-us/': (month, day) => `${EN_MONTHS[month - 1]} ${day}${getOrdinalSuffix(day)}`
+        }
+    }
+
+    function formatPostDate(timeStr, routePath) {
+        if (!timeStr) return ''
+
+        const parts = timeStr.split('.')
+        if (parts.length < 3) return timeStr
+
+        const month = parseInt(parts[1], 10)
+        const day = parseInt(parts[2], 10)
+
+        let tempLocalization = {
+            format: ''
+        }
+
+        Object.keys(tempLocalization).forEach(key => {
+            const textValue = dateLocalizationOptions[key]
+
+            if (typeof textValue === 'object') {
+                Object.keys(textValue).some(match => {
+                    const isMatch = match !== 'default' && routePath.indexOf(match) > -1
+
+                    tempLocalization[key] = isMatch
+                        ? textValue[match](month, day)
+                        : textValue['default'](month, day)
+
+                    return isMatch
+                })
+            }
+        })
+
+        return tempLocalization.format
+    }
+
     function handleRouteChange(willBeToc) {
         const body = document.body
 
@@ -46,21 +99,18 @@ function plugin(hook, vm) {
         const codeMarkup = /(```[\s\S]*?```)/gm
         const codeBlocks = []
 
-        // 1. 先保护代码块
         content = content.replace(codeMarkup, (block) => {
             const marker = `<!-- toc-codeblock-${codeBlocks.length} -->`
             codeBlocks.push(block)
             return marker
         })
 
-        // 2. 在保护代码块之后，再判断是否真的有 <!-- toc -->
         const hasToc = content.includes(tocMarkup)
 
         if (hasToc) {
             content = content.replace(tocMarkup, tocDiv)
         }
 
-        // 3. 还原代码块
         codeBlocks.forEach((block, i) => {
             content = content.replace(`<!-- toc-codeblock-${i} -->`, () => block)
         })
@@ -131,10 +181,21 @@ function plugin(hook, vm) {
 
         let pages = sortedPages.slice((curPageIndex - 1) * recentAmount, curPageIndex * recentAmount)
 
+        let currentYear = ''
+
         pages.forEach(page => {
             let pageHref = '#' + page.href
 
-            let pageHrefDiv = `<li><a href='${pageHref}'>${page.title}</a>&emsp;<small>${page.time}</small></li>`
+            let year = page.time.split('.')[0]
+
+            let formattedDate = formatPostDate(page.time, vm.route.path)
+
+            if (year !== currentYear) {
+                tocPageDiv.innerHTML += `<li class="toc-year-group">${year}</li>`
+                currentYear = year
+            }
+
+            let pageHrefDiv = `<li class="toc-post-item"><span class="toc-post-date">${formattedDate}</span><a href="${pageHref}" class="toc-post-link">${page.title}</a></li>`
 
             tocPageDiv.innerHTML += pageHrefDiv
         })
@@ -184,6 +245,22 @@ function plugin(hook, vm) {
         }
     }
 
+    function resolveHeading(path) {
+        const matchedPage = pagesData.find(page => page && page.href === path)
+
+        if (matchedPage && matchedPage.title) {
+            return matchedPage.title
+        }
+
+        const h1 = document.querySelector('.markdown-section h1')
+        if (h1?.innerText) return h1.innerText
+        const link = Array.from(
+            document.querySelectorAll('.sidebar-nav a')
+        ).find(a => a.hash.slice(1) === path)
+
+        return link?.textContent
+    }
+
     hook.mounted(function () {
         narrowMql.addEventListener('change', onScreenWidthChange)
 
@@ -220,22 +297,11 @@ function plugin(hook, vm) {
             })
         }
 
-        // fix auto2top
         document.scrollingElement.scrollTop = 0
 
-        // fix autoHeader
         let path = vm.route.path
-        // for default title '- ピカピカピ'
         if (path != '/') {
-            Array.from(document.getElementsByClassName('sidebar-nav')[0].getElementsByTagName('a')).some(a => {
-                if (a.href.split('#')[1] === path) {
-                    if (document.title != a.textContent) {
-                        document.title = a.textContent
-                    }
-                    return true
-                }
-                return false
-            })
+            document.title = resolveHeading(path)
         }
     })
 }

@@ -153,50 +153,6 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="writing-direction-rtl-div">',
             endHtml: '</div>'
         }
-    ],
-
-    /* Minority Language Container */
-    [
-        'minor-lang-wrap',
-        {
-            startHtml: '<span class="minority-language-font">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-ranjana-wrap',
-        {
-            startHtml: '<span class="minority-language-font-ranjana">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-jiagu-wrap',
-        {
-            startHtml: '<span class="minority-language-font-jiagu">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-zhuanwen-wrap',
-        {
-            startHtml: '<span class="minority-language-font-zhuanwen">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-jinwen-wrap',
-        {
-            startHtml: '<span class="minority-language-font-jinwen">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-cjkext-wrap',
-        {
-            startHtml: '<span class="minority-language-font-cjkext">',
-            endHtml: '</span>'
-        }
     ]
 ])
 

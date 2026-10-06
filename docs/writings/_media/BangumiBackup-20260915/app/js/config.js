@@ -3,19 +3,19 @@
 // ============================================================
 
 // ---------- 数据源 ----------
-export const DEFAULT_DATA_URL = '../../PersonalRecordsBackup/bgm-20260906.json.zip';
-export const CORS_PROXY = '';
+export const DEFAULT_DATA_URL = '../../PersonalRecordsBackup/bgm-20260906.json.zip'
+export const CORS_PROXY = ''
 export const BANGUMI_EXPORT_URL = '../web/index.html'
 
 // ---------- 缓存 ----------
-export const DB_NAME = 'bgm-viewer';
-export const DB_VERSION = 1;
-export const STORE_NAME = 'collections';
-export const CACHE_KEY_PREFIX = 'user:';
+export const DB_NAME = 'bgm-viewer'
+export const DB_VERSION = 1
+export const STORE_NAME = 'collections'
+export const CACHE_KEY_PREFIX = 'user:'
 
 // ---------- 版权 ----------
-export const COPYRIGHT_START_YEAR = 2026;
-export const COPYRIGHT_HOLDER = '李亦杨';
+export const COPYRIGHT_START_YEAR = 2026
+export const COPYRIGHT_HOLDER = '李亦杨'
 
 // ---------- 状态映射 ----------
 export const STATUS_BY_TYPE = {
@@ -24,7 +24,7 @@ export const STATUS_BY_TYPE = {
     3: 'doing',
     4: 'onhold',
     5: 'dropped',
-};
+}
 
 // ---------- 类别映射 ----------
 export const CATEGORY_BY_SUBJECT_TYPE = {
@@ -33,7 +33,7 @@ export const CATEGORY_BY_SUBJECT_TYPE = {
     3: 'music',
     4: 'game',
     6: 'real',
-};
+}
 
 // ---------- 一级 tab ----------
 export const CATEGORIES = [
@@ -42,10 +42,10 @@ export const CATEGORIES = [
     { key: 'game', label: '游戏' },
     { key: 'music', label: '音乐' },
     { key: 'real', label: '三次元' },
-];
+]
 
 // ---------- 二级 tab ----------
-export const STATUS_ORDER = ['doing', 'done', 'wish', 'onhold', 'dropped'];
+export const STATUS_ORDER = ['doing', 'done', 'wish', 'onhold', 'dropped']
 
 export const STATUS_LABELS = {
     anime: { doing: '在看', done: '已看', wish: '想看' },
@@ -53,12 +53,12 @@ export const STATUS_LABELS = {
     book: { doing: '在读', done: '已读', wish: '想读' },
     game: { doing: '在玩', done: '已玩', wish: '想玩' },
     music: { doing: '在听', done: '已听', wish: '想听' },
-};
+}
 
 export const COMMON_STATUS_LABELS = {
     onhold: '搁置',
     dropped: '抛弃',
-};
+}
 
 // ---------- 排序 ----------
 export const SORT_OPTIONS = [
@@ -68,8 +68,8 @@ export const SORT_OPTIONS = [
     { key: 'rate_asc', label: '评分 ↑' },
     { key: 'date_desc', label: '作品日期 ↓' },
     { key: 'date_asc', label: '作品日期 ↑' },
-];
-export const DEFAULT_SORT = 'updated_desc';
+]
+export const DEFAULT_SORT = 'updated_desc'
 
 // ---------- 评分筛选（精确匹配） ----------
 export const RATE_FILTER_OPTIONS = [
@@ -80,24 +80,24 @@ export const RATE_FILTER_OPTIONS = [
     { key: '5', label: '=5' }, { key: '6', label: '=6' },
     { key: '7', label: '=7' }, { key: '8', label: '=8' },
     { key: '9', label: '=9' }, { key: '10', label: '=10' },
-];
-export const DEFAULT_RATE_FILTER = 'all';
+]
+export const DEFAULT_RATE_FILTER = 'all'
 
 // ---------- 标签筛选（精确匹配） ----------
-export const DEFAULT_TAG_FILTER = '';
+export const DEFAULT_TAG_FILTER = ''
 
 // ---------- 分页 ----------
-export const PAGE_SIZE_OPTIONS = [30, 50, 100, 200];
-export const DEFAULT_PAGE_SIZE = 50;
+export const PAGE_SIZE_OPTIONS = [30, 50, 100, 200]
+export const DEFAULT_PAGE_SIZE = 50
 
 // ---------- 当前用户 ----------
-export const CURRENT_USER_KEY = 'bgm-current-user';
-export const STATE_KEY = 'bgm-overview-state';
+export const CURRENT_USER_KEY = 'bgm-current-user'
+export const STATE_KEY = 'bgm-overview-state'
 
 // ---------- 主题 ----------
-export const THEME_STORAGE_KEY = 'bgm-viewer:theme';
-export const THEME_MODES = ['auto', 'light', 'dark'];
-export const THEME_LABELS = { auto: '自动', light: '明亮', dark: '黑暗' };
+export const THEME_STORAGE_KEY = 'bgm-viewer:theme'
+export const THEME_MODES = ['auto', 'light', 'dark']
+export const THEME_LABELS = { auto: '自动', light: '明亮', dark: '黑暗' }
 
 const THEME_ICON_SIZE = '1em'
 
@@ -108,5 +108,5 @@ export const THEME_ICONS = {
 }
 
 // ---------- 引导界面 ----------
-export const ACCEPT_FILE_TYPES = '.json,.zip,application/json,application/zip';
-export const MAX_FILE_SIZE = 200 * 1024 * 1024;
+export const ACCEPT_FILE_TYPES = '.json,.zip,application/json,application/zip'
+export const MAX_FILE_SIZE = 200 * 1024 * 1024

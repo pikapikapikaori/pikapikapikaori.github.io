@@ -1,3 +1,36 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+section.cover::before,
+section.cover::after {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 L0,80 C200,120 400,40 600,80 C800,120 1000,40 1200,80 L1200,120 Z' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-size: 1200px 120px;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position: 0 bottom;
+}
+
+@keyframes coverWaveMove {
+    from {
+        -webkit-mask-position: 0 bottom;
+    }
+    to {
+        -webkit-mask-position: 1200px bottom;
+    }
+}
+
+
+/* 
+ * Standard CSS
+ * 
+ */
+
 :root {
     --bg-color: #100e17;
     --text-color: #d3cbdd;
@@ -52,14 +85,16 @@
     --ghost-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 56'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23f4f8ff'/><stop offset='.62' stop-color='%23ccd8f2'/><stop offset='1' stop-color='%23aab9de'/></linearGradient></defs><path d='M23 3 C10 3 3 14 3 26 L3 51 L9 46 L15 52 L21 46 L27 52 L33 46 L39 52 L43 51 L43 26 C43 14 36 3 23 3 Z' fill='url(%23g)'/><ellipse cx='16' cy='24' rx='3' ry='4' fill='%23241c38'/><ellipse cx='30' cy='24' rx='3' ry='4' fill='%23241c38'/><ellipse cx='23' cy='37' rx='3.5' ry='4.5' fill='%23241c38'/></svg>");
 
     --jack-svg: url("../resource/jack.svg");
+
+    --sidebar-bg: rgba(16, 14, 23, .74);
+    --bg-img: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%),
+        radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
 }
 
 html {
     min-height: 100%;
     background-color: var(--bg-color);
-    background-image:
-        radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%),
-        radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
+    background-image: var(--bg-img);
     background-size: 100% 100%, var(--dot-size) var(--dot-size);
     background-repeat: no-repeat, repeat;
     background-attachment: fixed, fixed;
@@ -70,7 +105,7 @@ body {
 }
 
 .sidebar {
-    background-color: rgba(16, 14, 23, .74);
+    background-color: var(--sidebar-bg);
     background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
     background-size: var(--dot-size) var(--dot-size);
     background-attachment: local;
@@ -159,8 +194,8 @@ body::after {
 }
 
 body::before {
-    right: 0;
-    bottom: 0;
+    right: 2rem;
+    bottom: 2rem;
     width: var(--jack-w);
     height: var(--jack-h);
     transform-origin: 100% 100%;
@@ -191,23 +226,56 @@ body::before {
     }
 }
 
+section.cover::before,
+section.cover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    pointer-events: none;
+    background-color: var(--bg-color);
+    background-image: var(--bg-img);
+    background-size: 100% 100%, var(--dot-size) var(--dot-size);
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed, fixed;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 L0,80 C200,120 400,40 600,80 C800,120 1000,40 1200,80 L1200,120 Z' fill='white'/%3E%3C/svg%3E");
+    mask-size: 1200px 120px;
+    mask-repeat: repeat-x;
+    mask-position: 0 bottom;
+    z-index: 1;  
+}
+
+section.cover::before {
+    height: 120px;
+    opacity: 0.45;
+    animation: coverWaveMove 18s linear infinite;
+}
+
+section.cover::after {
+    height: 90px;
+    animation: coverWaveMove 10s linear infinite reverse;
+}
+
+section.cover .cover-main {
+    z-index: 2;
+}
+
+@keyframes coverWaveMove {
+    from {
+        mask-position: 0 bottom;
+    }
+    to {
+        mask-position: 1200px bottom;
+    }
+}
+
 ::selection {
     background: var(--accent-color);
     color: var(--accent-text-color);
 }
 
-@media (prefers-reduced-motion: reduce) {
-
-    html::before,
-    html::after,
-    body::before,
-    body::after {
-        animation: none;
-        opacity: .2;
-    }
-}
-
-@media (max-width: 720px) {
+@media (max-width: 768px) {
     :root {
         --jack-scale: .62;
     }

@@ -6,11 +6,36 @@ const {
 const globals = require("globals");
 const stylistic = require("@stylistic/eslint-plugin");
 
+// ── 唯一可配置区 ─────────────────────────────────
+const lintConfig = {
+    ext: [
+        "js"
+    ],
+    excludes: [
+        "docs/**/*.min.js",
+        "docs/**/sources/**",
+        "docs/**/npm/**",
+        "docs/pages/**/hexo/**",
+    ],
+};
+
+const extGlob = lintConfig.ext.length === 1
+    ? `*.${lintConfig.ext[0]}`
+    : `*.{${lintConfig.ext.join(",")}}`;
+
+const lintIncludes = [`docs/**/${extGlob}`];
+
+const lintExcludes = lintConfig.excludes;
+
 module.exports = defineConfig([
-    globalIgnores(["**/*.*", "!docs/utils/**/*.js"]),
+    globalIgnores([
+        "**/*.*",
+        ...lintIncludes.map(g => `!${g}`),
+        ...lintExcludes,
+    ]),
     {
-        // Only lint js files in docsify utils
-        files: ["docs/utils/**/*.js"],
+        files: lintIncludes,
+        ignores: lintExcludes,
         plugins: {
             "@stylistic": stylistic,
         },

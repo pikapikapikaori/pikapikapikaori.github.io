@@ -1,50 +1,50 @@
-import { state } from '../app.js';
+import { state } from '../app.js'
 import {
     CATEGORIES, STATUS_ORDER, SORT_OPTIONS, DEFAULT_SORT,
     RATE_FILTER_OPTIONS, DEFAULT_RATE_FILTER, DEFAULT_TAG_FILTER,
     STATUS_LABELS, COMMON_STATUS_LABELS,
     PAGE_SIZE_OPTIONS, DEFAULT_PAGE_SIZE,
     STATE_KEY,
-} from '../config.js';
-import { sortItems, filterByRate, filterByTag, countByCategory } from '../model.js';
+} from '../config.js'
+import { sortItems, filterByRate, filterByTag, countByCategory } from '../model.js'
 
-let currentCat = 'anime';
-let currentStatus = 'doing';
-let currentSort = DEFAULT_SORT;
-let currentRateFilter = DEFAULT_RATE_FILTER;
-let currentTagFilter = DEFAULT_TAG_FILTER;
-let currentPage = 1;
-let pageSize = DEFAULT_PAGE_SIZE;
-let initialized = false;
+let currentCat = 'anime'
+let currentStatus = 'doing'
+let currentSort = DEFAULT_SORT
+let currentRateFilter = DEFAULT_RATE_FILTER
+let currentTagFilter = DEFAULT_TAG_FILTER
+let currentPage = 1
+let pageSize = DEFAULT_PAGE_SIZE
+let initialized = false
 
 function readCatFromHash() {
-    const h = (location.hash || '').replace(/^#/, '');
-    if (CATEGORIES.some(c => c.key === h)) currentCat = h;
+    const h = (location.hash || '').replace(/^#/, '')
+    if (CATEGORIES.some(c => c.key === h)) currentCat = h
 }
-function resetPage() { currentPage = 1; }
+function resetPage() { currentPage = 1 }
 
 function getStateKey() {
-    const uid = state.data?.user?.id;
-    return uid ? `${STATE_KEY}:${uid}` : STATE_KEY;
+    const uid = state.data?.user?.id
+    return uid ? `${STATE_KEY}:${uid}` : STATE_KEY
 }
 
 function initState() {
     try {
-        const raw = localStorage.getItem(getStateKey());
+        const raw = localStorage.getItem(getStateKey())
         if (raw) {
-            const s = JSON.parse(raw);
-            if (s.cat && CATEGORIES.some(c => c.key === s.cat)) currentCat = s.cat;
-            if (s.status && STATUS_ORDER.includes(s.status)) currentStatus = s.status;
-            if (s.sort) currentSort = s.sort;
-            if (s.rate) currentRateFilter = s.rate;
-            if (typeof s.tag === 'string') currentTagFilter = s.tag;
+            const s = JSON.parse(raw)
+            if (s.cat && CATEGORIES.some(c => c.key === s.cat)) currentCat = s.cat
+            if (s.status && STATUS_ORDER.includes(s.status)) currentStatus = s.status
+            if (s.sort) currentSort = s.sort
+            if (s.rate) currentRateFilter = s.rate
+            if (typeof s.tag === 'string') currentTagFilter = s.tag
             if (s.pageSize && PAGE_SIZE_OPTIONS.includes(Number(s.pageSize))) {
-                pageSize = Number(s.pageSize);
+                pageSize = Number(s.pageSize)
             }
-            if (s.page) currentPage = Number(s.page);
+            if (s.page) currentPage = Number(s.page)
         }
     } catch {}
-    readCatFromHash();
+    readCatFromHash()
 }
 
 function saveState() {
@@ -57,26 +57,26 @@ function saveState() {
             tag: currentTagFilter,
             page: currentPage,
             pageSize,
-        }));
+        }))
     } catch {}
 }
 
 export function renderOverview() {
-    const main = document.getElementById('main');
-    if (!state.data) return;
+    const main = document.getElementById('main')
+    if (!state.data) return
     if (!initialized) {
-        initState();
-        initialized = true;
+        initState()
+        initialized = true
     }
 
-    const items = state.data.items || [];
-    const counts = countByCategory(items);
-    const catCount = counts[currentCat] || { total: 0, byStatus: {} };
+    const items = state.data.items || []
+    const counts = countByCategory(items)
+    const catCount = counts[currentCat] || { total: 0, byStatus: {} }
 
     const catStatuses = STATUS_ORDER.map(k => ({
         key: k,
         label: STATUS_LABELS[currentCat]?.[k] || COMMON_STATUS_LABELS[k] || k,
-    }));
+    }))
 
     main.innerHTML = `
         <div class="tabs" id="cat-tabs">
@@ -128,76 +128,76 @@ export function renderOverview() {
 
         <div id="grid-container"></div>
         <div id="pagination-container"></div>
-    `;
+    `
 
     main.querySelectorAll('#cat-tabs .tab').forEach(btn => {
         btn.addEventListener('click', () => {
-            currentCat = btn.dataset.cat;
-            resetPage();
-            history.replaceState(null, '', `#${currentCat}`);
-            renderOverview();
-        });
-    });
+            currentCat = btn.dataset.cat
+            resetPage()
+            history.replaceState(null, '', `#${currentCat}`)
+            renderOverview()
+        })
+    })
     main.querySelectorAll('#status-tabs .subtab').forEach(btn => {
         btn.addEventListener('click', () => {
-            currentStatus = btn.dataset.status;
-            resetPage();
-            renderOverview();
-        });
-    });
+            currentStatus = btn.dataset.status
+            resetPage()
+            renderOverview()
+        })
+    })
     main.querySelector('#sort-select').addEventListener('change', e => {
-        currentSort = e.target.value;
-        resetPage();
-        renderOverview();
-    });
+        currentSort = e.target.value
+        resetPage()
+        renderOverview()
+    })
     main.querySelector('#rate-select').addEventListener('change', e => {
-        currentRateFilter = e.target.value;
-        resetPage();
-        renderOverview();
-    });
+        currentRateFilter = e.target.value
+        resetPage()
+        renderOverview()
+    })
     main.querySelector('#tag-input').addEventListener('input', e => {
-        currentTagFilter = e.target.value;
-        resetPage();
-        saveState();
-        renderGrid();
-    });
+        currentTagFilter = e.target.value
+        resetPage()
+        saveState()
+        renderGrid()
+    })
     main.querySelector('#page-size-select').addEventListener('change', e => {
-        pageSize = Number(e.target.value);
-        resetPage();
-        renderOverview();
-    });
+        pageSize = Number(e.target.value)
+        resetPage()
+        renderOverview()
+    })
 
-    renderGrid();
-    saveState();
+    renderGrid()
+    saveState()
 }
 
 function renderGrid() {
-    const container = document.getElementById('grid-container');
-    const pager = document.getElementById('pagination-container');
-    if (!container || !pager) return;
+    const container = document.getElementById('grid-container')
+    const pager = document.getElementById('pagination-container')
+    if (!container || !pager) return
 
     let list = (state.data.items || []).filter(
         it => it.cat === currentCat && it.status === currentStatus
-    );
-    list = filterByRate(list, currentRateFilter);
-    list = filterByTag(list, currentTagFilter);
-    list = sortItems(list, currentSort);
+    )
+    list = filterByRate(list, currentRateFilter)
+    list = filterByTag(list, currentTagFilter)
+    list = sortItems(list, currentSort)
 
     if (!list.length) {
-        container.innerHTML = `<div class="empty">没有符合条件的条目</div>`;
-        pager.innerHTML = '';
-        return;
+        container.innerHTML = '<div class="empty">没有符合条件的条目</div>'
+        pager.innerHTML = ''
+        return
     }
 
-    const total = list.length;
-    const totalPages = Math.max(1, Math.ceil(total / pageSize));
-    if (currentPage > totalPages) currentPage = totalPages;
-    const start = (currentPage - 1) * pageSize;
-    const slice = list.slice(start, start + pageSize);
+    const total = list.length
+    const totalPages = Math.max(1, Math.ceil(total / pageSize))
+    if (currentPage > totalPages) currentPage = totalPages
+    const start = (currentPage - 1) * pageSize
+    const slice = list.slice(start, start + pageSize)
 
     container.innerHTML = `<div class="grid">
         ${slice.map(it => {
-            const cover = it.images?.common || it.images?.medium || it.images?.grid || '';
+            const cover = it.images?.common || it.images?.medium || it.images?.grid || ''
             return `
                 <a class="card" href="./detail.html?id=${it.id}">
                     <div class="card-cover">
@@ -211,67 +211,67 @@ function renderGrid() {
                         </div>
                     </div>
                 </a>
-            `;
-            }).join('')}
-        </div>`;
+            `
+        }).join('')}
+        </div>`
 
-    pager.innerHTML = pagerHtml(currentPage, totalPages, total);
+    pager.innerHTML = pagerHtml(currentPage, totalPages, total)
 
     const goToPage = (p) => {
-        if (!Number.isInteger(p) || p < 1 || p > totalPages || p === currentPage) return;
-        currentPage = p;
-        saveState();
-        renderGrid();
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
+        if (!Number.isInteger(p) || p < 1 || p > totalPages || p === currentPage) return
+        currentPage = p
+        saveState()
+        renderGrid()
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
 
     // 原来的页码 / 上一页 / 下一页按钮
     pager.querySelectorAll('[data-page]').forEach(btn => {
-        btn.addEventListener('click', () => goToPage(Number(btn.dataset.page)));
-    });
+        btn.addEventListener('click', () => goToPage(Number(btn.dataset.page)))
+    })
 
     // 新增：跳页输入框
-    const jump = pager.querySelector('.pager-input');
+    const jump = pager.querySelector('.pager-input')
     if (jump) {
         jump.addEventListener('keydown', e => {
             if (e.key === 'Enter') {
-                e.preventDefault();
-                jump.blur();          // 统一交给 blur 处理，避免重复跳转
+                e.preventDefault()
+                jump.blur()          // 统一交给 blur 处理，避免重复跳转
             }
-        });
+        })
         jump.addEventListener('blur', () => {
-            const p = Number(jump.value);
+            const p = Number(jump.value)
             if (!Number.isInteger(p) || p < 1 || p > totalPages) {
-                jump.value = currentPage;   // 非法值还原成当前页
-                return;
+                jump.value = currentPage   // 非法值还原成当前页
+                return
             }
-            goToPage(p);
-        });
+            goToPage(p)
+        })
     }
 }
 
 function pagerHtml(current, totalPages, total) {
-    if (totalPages <= 1) return '';
-    const pages = [];
-    const range = (a, b) => { for (let i = a; i <= b; i++) pages.push(i); };
+    if (totalPages <= 1) return ''
+    const pages = []
+    const range = (a, b) => { for (let i = a; i <= b; i++) pages.push(i) }
 
     if (totalPages <= 7) {
-        range(1, totalPages);
+        range(1, totalPages)
     } else {
-        pages.push(1);
-        if (current > 3) pages.push('...');
-        const from = Math.max(2, current - 1);
-        const to = Math.min(totalPages - 1, current + 1);
-        range(from, to);
-        if (current < totalPages - 2) pages.push('...');
-        pages.push(totalPages);
+        pages.push(1)
+        if (current > 3) pages.push('...')
+        const from = Math.max(2, current - 1)
+        const to = Math.min(totalPages - 1, current + 1)
+        range(from, to)
+        if (current < totalPages - 2) pages.push('...')
+        pages.push(totalPages)
     }
 
     return `
         <nav class="pager">
             <button type="button" class="pager-btn" data-page="${current - 1}" ${current === 1 ? 'disabled' : ''}>‹ 上一页</button>
             ${pages.map(p => p === '...'
-                ? `<span class="pager-ellipsis">…</span>`
+                ? '<span class="pager-ellipsis">…</span>'
                 : `<button type="button" class="pager-btn ${p === current ? 'is-active' : ''}" data-page="${p}">${p}</button>`
             ).join('')}
             <button type="button" class="pager-btn" data-page="${current + 1}" ${current === totalPages ? 'disabled' : ''}>下一页 ›</button>
@@ -283,11 +283,11 @@ function pagerHtml(current, totalPages, total) {
             </span>
             <span class="pager-info">第 ${current} / ${totalPages} 页 · 共 ${total} 条</span>
         </nav>
-    `;
+    `
 }
 
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    }[c]));
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#39;'
+    }[c]))
 }

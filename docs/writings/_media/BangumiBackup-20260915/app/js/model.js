@@ -1,14 +1,14 @@
 import {
     STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE, STATUS_ORDER,
-} from './config.js';
+} from './config.js'
 
 // ---------- 入口：把原始 JSON 变成内部结构 ----------
 export function normalize(raw) {
-    if (!raw || typeof raw !== 'object') throw new Error('数据格式错误');
-    const meta = raw.meta || {};
-    const user = meta.user || {};
-    if (!user.id) throw new Error('缺少 meta.user.id，无法区分用户');
-    const list = Array.isArray(raw.data) ? raw.data : [];
+    if (!raw || typeof raw !== 'object') throw new Error('数据格式错误')
+    const meta = raw.meta || {}
+    const user = meta.user || {}
+    if (!user.id) throw new Error('缺少 meta.user.id，无法区分用户')
+    const list = Array.isArray(raw.data) ? raw.data : []
 
     return {
         user: {
@@ -19,22 +19,22 @@ export function normalize(raw) {
         },
         generatedAt: meta.generated_at || 0,
         items: list.map(normalizeItem).filter(Boolean),
-    };
+    }
 }
 
 function normalizeItem(e) {
-    const s = e.subject;
-    if (!s || !s.id) return null;
+    const s = e.subject
+    if (!s || !s.id) return null
 
-    const sd = e.subject_data || {};
-    const epData = e.ep_data || {};
-    const mainEps = Array.isArray(epData['0']) ? epData['0'] : [];
-    const progress = e.progress || {};
+    const sd = e.subject_data || {}
+    const epData = e.ep_data || {}
+    const mainEps = Array.isArray(epData['0']) ? epData['0'] : []
+    const progress = e.progress || {}
     const watched = new Set(
         (progress.eps || [])
             .filter(x => x.status && x.status.id === 2)
             .map(x => x.id)
-    );
+    )
 
     return {
         // 身份
@@ -84,64 +84,64 @@ function normalizeItem(e) {
                 desc: ep.desc || '',
                 watched: watched.has(ep.id),
             })),
-    };
+    }
 }
 
 // ---------- 排序 ----------
-function cmpStr(a, b) { return (a || '').localeCompare(b || ''); }
+function cmpStr(a, b) { return (a || '').localeCompare(b || '') }
 
 export function sortItems(items, sortKey) {
-    const arr = items.slice();
+    const arr = items.slice()
     switch (sortKey) {
-        case 'updated_desc': arr.sort((a, b) => cmpStr(b.updatedAt, a.updatedAt)); break;
-        case 'updated_asc': arr.sort((a, b) => cmpStr(a.updatedAt, b.updatedAt)); break;
-        case 'rate_desc': arr.sort((a, b) => (b.rate - a.rate) || cmpStr(b.updatedAt, a.updatedAt)); break;
-        case 'rate_asc': arr.sort((a, b) => (a.rate - b.rate) || cmpStr(b.updatedAt, a.updatedAt)); break;
-        case 'date_desc': arr.sort((a, b) => cmpStr(b.date, a.date)); break;
-        case 'date_asc': arr.sort((a, b) => cmpStr(a.date, b.date)); break;
+        case 'updated_desc': arr.sort((a, b) => cmpStr(b.updatedAt, a.updatedAt)); break
+        case 'updated_asc': arr.sort((a, b) => cmpStr(a.updatedAt, b.updatedAt)); break
+        case 'rate_desc': arr.sort((a, b) => (b.rate - a.rate) || cmpStr(b.updatedAt, a.updatedAt)); break
+        case 'rate_asc': arr.sort((a, b) => (a.rate - b.rate) || cmpStr(b.updatedAt, a.updatedAt)); break
+        case 'date_desc': arr.sort((a, b) => cmpStr(b.date, a.date)); break
+        case 'date_asc': arr.sort((a, b) => cmpStr(a.date, b.date)); break
     }
-    return arr;
+    return arr
 }
 
 // ---------- 筛选（按评分精确匹配） ----------
 export function filterByRate(items, key) {
-    if (!key || key === 'all') return items;
-    if (key === 'unrated') return items.filter(i => i.rate === 0);
-    const n = Number(key);
-    return items.filter(i => i.rate === n);
+    if (!key || key === 'all') return items
+    if (key === 'unrated') return items.filter(i => i.rate === 0)
+    const n = Number(key)
+    return items.filter(i => i.rate === n)
 }
 
 // ---------- 筛选（按标签精确匹配） ----------
 export function filterByTag(items, tag) {
-    const keyword = String(tag ?? '').trim();
-    if (!keyword) return items;
+    const keyword = String(tag ?? '').trim()
+    if (!keyword) return items
 
     return items.filter(it => {
-        const tags = Array.isArray(it.myTags) ? it.myTags : [];
-        return tags.some(t => String(t).trim() === keyword);
-    });
+        const tags = Array.isArray(it.myTags) ? it.myTags : []
+        return tags.some(t => String(t).trim() === keyword)
+    })
 }
 
 // ---------- 搜索 ----------
 export function matchQuery(item, q) {
-    if (!q) return true;
-    const n = q.toLowerCase();
+    if (!q) return true
+    const n = q.toLowerCase()
     return (
         (item.name && item.name.toLowerCase().includes(n)) ||
         (item.nameCn && item.nameCn.toLowerCase().includes(n)) ||
         (item.shortSummary && item.shortSummary.toLowerCase().includes(n))
-    );
+    )
 }
 
 // ---------- 统计 ----------
 export function countByCategory(items) {
-    const out = {};
+    const out = {}
     for (const it of items) {
-        const bucket = out[it.cat] || (out[it.cat] = { total: 0, byStatus: {} });
-        bucket.total++;
-        bucket.byStatus[it.status] = (bucket.byStatus[it.status] || 0) + 1;
+        const bucket = out[it.cat] || (out[it.cat] = { total: 0, byStatus: {} })
+        bucket.total++
+        bucket.byStatus[it.status] = (bucket.byStatus[it.status] || 0) + 1
     }
-    return out;
+    return out
 }
 
 // ---------- 二级 tab 完整列表 ----------
@@ -149,5 +149,5 @@ export function statusesFor(cat) {
     return STATUS_ORDER.map(k => ({
         key: k,
         label: STATUS_LABELS[cat]?.[k] || COMMON_STATUS_LABELS[k] || k,
-    }));
+    }))
 }

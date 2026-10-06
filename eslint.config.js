@@ -68,6 +68,8 @@ const pagesGlobals = {
     },
     indexpage: {
         Handlebars: "readonly",
+        date: "readonly",
+        greet: "readonly",
     },
 };
 

@@ -2,16 +2,25 @@ var sindex = 0
 var cycle = false
 var sengine = 'https://www.google.com/?q=' // Default search engine
 
-// function start() {
-//     var query = getParameterByName('q')
-//     if (query) search(query.replaceAll('+', '%2B'))
+function getParameterByName(name) {
+    return new URLSearchParams(window.location.search).get(name)
+}
 
-//     document.getElementById('keywords').focus()
+function updatetime() {
+    date()  
+    greet()
+}
 
-//     window.setInterval(function () {
-//         updatetime()
-//     }, 200)
-// }
+function start() {
+    var query = getParameterByName('q')
+    if (query) search(query.replaceAll('+', '%2B'))
+
+    document.getElementById('keywords').focus()
+
+    window.setInterval(function () {
+        updatetime()
+    }, 5000)
+}
 
 function handleKeyPress(e) {
     var key = e.keyCode || e.which
@@ -44,7 +53,7 @@ function handleKeyPress(e) {
             }
         }
     }
-    if (key == 32){ // Space to go to search
+    if (key == 32) { // Space to go to search
         document.getElementById('keywords').focus()
     }
     sindex = 0
@@ -140,7 +149,9 @@ function containsProtocol(str) {
     return !!pattern.test(str)
 }
 
-String.prototype.replaceAll = function(search, replacement) {
+String.prototype.replaceAll = function (search, replacement) {
     var target = this
     return target.split(search).join(replacement)
 }
+
+window.addEventListener('DOMContentLoaded', start)

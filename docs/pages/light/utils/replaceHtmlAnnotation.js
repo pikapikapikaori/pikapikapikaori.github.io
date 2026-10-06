@@ -98,22 +98,6 @@ const blockTagConfigMap = new Map([
         }
     ],
 
-    /* About Page Container */
-    [
-        'about-page-wrap',
-        {
-            startHtml: '<div class="main-page-right-panel-container">',
-            endHtml: '</div>'
-        }
-    ],
-    [
-        'about-page-links-img',
-        {
-            startHtml: '<div class="main-page-about-me-image-links">',
-            endHtml: '</div>'
-        }
-    ],
-
     /* Multiple Image Container */
     [
         'multi-img-wrap',
@@ -153,50 +137,6 @@ const blockTagConfigMap = new Map([
             startHtml: '<div class="writing-direction-rtl-div">',
             endHtml: '</div>'
         }
-    ],
-
-    /* Minority Language Container */
-    [
-        'minor-lang-wrap',
-        {
-            startHtml: '<span class="minority-language-font">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-ranjana-wrap',
-        {
-            startHtml: '<span class="minority-language-font-ranjana">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-jiagu-wrap',
-        {
-            startHtml: '<span class="minority-language-font-jiagu">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-zhuanwen-wrap',
-        {
-            startHtml: '<span class="minority-language-font-zhuanwen">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-jinwen-wrap',
-        {
-            startHtml: '<span class="minority-language-font-jinwen">',
-            endHtml: '</span>'
-        }
-    ],
-    [
-        'minor-lang-cjkext-wrap',
-        {
-            startHtml: '<span class="minority-language-font-cjkext">',
-            endHtml: '</span>'
-        }
     ]
 ])
 
@@ -231,26 +171,8 @@ const inlineTagConfigMap = new Map([
         (payload) => `<div class="toc-page-display-title-img"><img class="ignore-view-full-image-img" src="${payload}"></center></div>`
     ],
     [
-        'toc-card-title',
-        (payload) => `<div class="toc-page-display-title-div">${payload}</div>`
-    ],
-    [
         'toc-card-description',
-        (payload) => `<div class="toc-page-display-date-div">${payload}</div>`
-    ],
-
-    /* About Page Container */
-    [
-        'about-page-title',
-        (payload) => `<h4 class="main-page-about-me-title">${payload}</h4>`
-    ],
-    [
-        'about-page-p',
-        (payload) => `<p class="main-page-about-me-description">${payload}</p>`
-    ],
-    [
-        'about-page-links',
-        () => `<div class="main-page-about-me-links"><a href="${links.github}" target="_blank" rel="noopener">${icons.github}</a><a href="${links.email}" target="_blank" rel="noopener">${icons.email}</a><a href="${links.rss}" target="_blank" rel="noopener">${icons.rss}</a></div>`
+        (payload) => `<div class="toc-page-display-title-div">ピカピカピ</div><div class="toc-page-display-date-div">${payload}</div>`
     ],
 
     /* Frame */

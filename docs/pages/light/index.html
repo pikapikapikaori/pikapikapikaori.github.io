@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../_media/favicon.ico">
+
+    <title>ピカピカピ</title>
+    <meta name="description" content="Don't worry, be happy.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="alternative" type="application/atom+xml" title="ピカピカピ"
+        href="https://pikapikapi.com/pikapikapi-blog-rss.atom">
+
+    <!-- Core Theme -->
+    <link rel="stylesheet" href="./sources/npm/docsify@5/dist/themes/core.min.css">
+    <link rel="stylesheet" href="./sources/npm/docsify@5/dist/themes/addons/core-dark.min.css"
+        media="(prefers-color-scheme: dark)" />
+
+    <link rel="stylesheet" href="./style/plus.css">
+</head>
+
+<body class="loading sidebar-chevron-right sidebar-group-box sidebar-link-clamp sidebar-toggle-chevron">
+    <div id="app"></div>
+
+    <!-- Configuration -->
+    <script>
+        window.$docsify = {
+            name: 'ピカピカピ',
+            basePath: '../../',
+            coverpage: false,
+            hideSidebar: true,
+            loadNavbar:true,
+            subMaxLevel: 2,
+            auto2top: true,
+
+            alias: {
+                '/.*_navbar\\.md': function (path) {
+                    if (path.startsWith('/pages/light/helpers/')) {
+                        return path;
+                    }
+                    return '/pages/light/helpers/' + path.replace(/^\//, '')
+                },
+                '/.*About': function (path) {
+                    if (path.startsWith('/pages/light/helpers/')) {
+                        return path;
+                    }
+                    return '/pages/light/helpers/' + path.replace(/^\//, '')
+                }
+            },
+
+            notFoundPage: {
+                '/jp': 'jp/404/_404.md',
+                '/en-us': 'en-us/404/_404.md',
+                '/': '404/_404.md'
+            },
+
+            // tab 插件设置
+            tabs: {
+                persist: false, // default
+                sync: false, // default
+                theme: 'material', // default
+                tabComments: true, // default
+                tabHeadings: true // default
+            },
+
+
+            // 自用插件
+            footer: {
+                html: '<small>&copy; 2023 - {gitalk-footer-yyyy} 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small>'
+            },
+        };
+    </script>
+
+    <!-- Docsify.js -->
+    <script src="./sources/npm/docsify@5/dist/docsify.min.js"></script>
+
+    <!-- Plugins (optional) -->
+    <script src="./sources/npm/docsify-tabs@1"></script>
+
+    <script src="./sources/npm/katex@0.19.0/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="./sources/npm/katex@0.19.0/dist/katex.min.css" />
+    <script src="./sources/npm/docsify-katex@2.0.2/dist/docsify-katex.js"></script>
+
+    <!-- 自用插件 -->
+    <link rel="stylesheet" href="./style/plugins//interceptImg.css">
+    <script src="./utils/interceptImg.js"></script>
+
+    <link rel="stylesheet" href="./style/plugins/footer.css">
+    <script src="./utils/footer.js"></script>
+
+    <link rel="stylesheet" href="./style/plugins/replaceHtmlAnnotation.css">
+    <script type="module" src="./utils/replaceHtmlAnnotation.js"></script>
+
+    <link rel="stylesheet" href="./style/plugins/addTocPage.css">
+    <script type="module" src="./utils/addTocPage.js"></script>
+
+    <script src="./utils/fixUrl.js"></script>
+</body>
+
+</html>

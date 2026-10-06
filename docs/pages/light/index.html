@@ -42,6 +42,12 @@
                         return path;
                     }
                     return '/pages/light/helpers/' + path.replace(/^\//, '')
+                },
+                '/.*About': function (path) {
+                    if (path.startsWith('/pages/light/helpers/')) {
+                        return path;
+                    }
+                    return '/pages/light/helpers/' + path.replace(/^\//, '')
                 }
             },
 

@@ -3,7 +3,7 @@
     max-width: calc(100% - var(--content-margin-inline)*2);
     width: var(--content-max-width);
     align-self: center;
-    padding: 2.5rem 0.9375rem 2.5rem;
+    padding: 2.5rem 0 2.5rem;
     margin: 1.5rem auto 0
 }
 

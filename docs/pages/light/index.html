@@ -60,25 +60,6 @@
                 tabHeadings: true // default
             },
 
-            // 全局搜索插件设置
-            search: {
-                insertAfter: '.app-name',
-                paths: 'auto', // or []
-                depth: 4,
-                placeholder: {
-                    '/en-us/': 'Type to search',
-                    '/jp/': '検索',
-                    '/': '搜索'
-                },
-                noData: {
-                    '/en-us/': 'No Results',
-                    '/jp/': '結果がありません',
-                    '/': '找不到结果'
-                },
-                hideOtherSidebarContent: true,
-                pathNamespaces: ['/jp', '/en-us'],
-            },
-
 
             // 自用插件
             footer: {
@@ -92,8 +73,6 @@
 
     <!-- Plugins (optional) -->
     <script src="./sources/npm/docsify-tabs@1"></script>
-
-    <script src="./sources/npm/docsify@5/dist/plugins/search.min.js"></script>
 
     <script src="./sources/npm/katex@0.19.0/dist/katex.min.js"></script>
     <link rel="stylesheet" href="./sources/npm/katex@0.19.0/dist/katex.min.css" />

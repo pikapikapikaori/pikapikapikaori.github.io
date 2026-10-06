@@ -1,3 +1,23 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+.toc-paginator-input input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+/* 
+ * Standard CSS
+ */
+
 :root {
     --tocpage-display-height: 18.75rem;
     --tocpage-display-img-height: 12.5rem;
@@ -100,10 +120,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-
-.toc-paginator-input input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
 }

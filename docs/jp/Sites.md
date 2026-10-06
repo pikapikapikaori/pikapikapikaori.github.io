@@ -19,6 +19,12 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
+<!-- toc-card-href:./pages/light/#/jp/ -->
+<!-- toc-card-img:./jp/_media/Sites/pikapikapi-light.png -->
+<!-- toc-card-description:ブログ、ライト版 -->
+<!-- toc-card:end -->
+
+<!-- toc-card:start -->
 <!-- toc-card-href:./#/jp/ -->
 <!-- toc-card-img:./jp/_media/Sites/pikapikapi-home.png -->
 <!-- toc-card-description:このサイト、メインサイト -->

@@ -25,6 +25,12 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
+<!-- toc-card-href:./pages/light/# -->
+<!-- toc-card-img:./_media/Sites/pikapikapi-light.png -->
+<!-- toc-card-description:博客，轻量版 -->
+<!-- toc-card:end -->
+
+<!-- toc-card:start -->
 <!-- toc-card-href:./ -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-home.png -->
 <!-- toc-card-description:本站，主站 -->

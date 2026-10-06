@@ -19,6 +19,12 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
+<!-- toc-card-href:./pages/light/#/en-us/ -->
+<!-- toc-card-img:./en-us/_media/Sites/pikapikapi-light.png -->
+<!-- toc-card-description:Blog, Lite Version -->
+<!-- toc-card:end -->
+
+<!-- toc-card:start -->
 <!-- toc-card-href:./#/en-us/ -->
 <!-- toc-card-img:./en-us/_media/Sites/pikapikapi-home.png -->
 <!-- toc-card-description:This Site, Main Site -->

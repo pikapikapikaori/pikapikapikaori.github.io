@@ -16,7 +16,7 @@
 
 - [Github](https://github.com/pikapikapikaori/)
 - [Email](mailto:Lyy8759@outlook.com)
-- [Rss](../../../../pikapikapi-blog-rss.atom)
+- [Rss](../../../../pikapikapi-blog-rss.atom ':ignore')
 
 ## このブログについて
 

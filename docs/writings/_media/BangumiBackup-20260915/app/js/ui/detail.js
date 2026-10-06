@@ -1,13 +1,8 @@
 import { state } from '../app.js'
-
-const CAT_LABELS = { anime: '动画', book: '书籍', game: '游戏', music: '音乐', real: '三次元' }
-const STATUS_LABELS = {
-    anime: { doing: '在看', done: '已看', wish: '想看' },
-    real: { doing: '在看', done: '已看', wish: '想看' },
-    book: { doing: '在读', done: '已读', wish: '想读' },
-    game: { doing: '在玩', done: '已玩', wish: '想玩' },
-    music: { doing: '在听', done: '已听', wish: '想听' },
-}
+import {
+    CATEGORIES, 
+    STATUS_LABELS, 
+} from '../config.js'
 
 export function renderDetail() {
     const main = document.getElementById('main')
@@ -22,7 +17,7 @@ export function renderDetail() {
         return
     }
 
-    const catLabel = CAT_LABELS[item.cat] || item.cat
+    const catLabel = CATEGORIES[item.cat] || item.cat
     const statusLabel = item.status === 'onhold' ? '搁置'
         : item.status === 'dropped' ? '抛弃'
             : STATUS_LABELS[item.cat]?.[item.status] || item.status

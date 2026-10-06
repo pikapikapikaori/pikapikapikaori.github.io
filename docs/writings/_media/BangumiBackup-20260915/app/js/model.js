@@ -1,5 +1,5 @@
 import {
-    STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE, STATUS_ORDER,
+    STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE, STATUS_ORDER, STATUS_LABELS, COMMON_STATUS_LABELS,
 } from './config.js'
 
 // ---------- 入口：把原始 JSON 变成内部结构 ----------

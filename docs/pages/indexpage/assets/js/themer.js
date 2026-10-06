@@ -1,46 +1,46 @@
 const setValue = (property, value) => {
     if (value) {
-        document.documentElement.style.setProperty(`--${property}`, value);
+        document.documentElement.style.setProperty(`--${property}`, value)
 
-        const input = document.querySelector(`#${property}`);
+        const input = document.querySelector(`#${property}`)
         if (input) {
-            value = value.replace('px', '');
-            input.value = value;
+            value = value.replace('px', '')
+            input.value = value
         }
     }
-};
+}
 
 const setValueFromLocalStorage = property => {
-    let value = localStorage.getItem(property);
-    if(!value) {
+    let value = localStorage.getItem(property)
+    if (!value) {
         localStorage.setItem('color-background', '#F8F6F1')
         localStorage.setItem('color-text-pri', '#4C432E')
         localStorage.setItem('color-text-acc', '#AA9A73')
     }
-    setValue(property, value);
-};
+    setValue(property, value)
+}
 
 const setTheme = options => {
     for (let option of Object.keys(options)) {
-        const property = option;
-        const value = options[option];
+        const property = option
+        const value = options[option]
 
-        setValue(property, value);
-        localStorage.setItem(property, value);
+        setValue(property, value)
+        localStorage.setItem(property, value)
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setValueFromLocalStorage('color-background');
-    setValueFromLocalStorage('color-text-pri');
-    setValueFromLocalStorage('color-text-acc');
-});
+    setValueFromLocalStorage('color-background')
+    setValueFromLocalStorage('color-text-pri')
+    setValueFromLocalStorage('color-text-acc')
+})
 
-const dataThemeButtons = document.querySelectorAll('[data-theme]');
+const dataThemeButtons = document.querySelectorAll('[data-theme]')
 
 for (let i = 0; i < dataThemeButtons.length; i++) {
     dataThemeButtons[i].addEventListener('click', () => {
-        const theme = dataThemeButtons[i].dataset.theme;
+        const theme = dataThemeButtons[i].dataset.theme
 
         switch (theme) {
             case 'blackboard':
@@ -48,96 +48,96 @@ for (let i = 0; i < dataThemeButtons.length; i++) {
                     'color-background': '#1a1a1a',
                     'color-text-pri': '#FFFDEA',
                     'color-text-acc': '#5c5c5c'
-                });
-                return;
+                })
+                return
 
             case 'gazette':
                 setTheme({
                     'color-background': '#F2F7FF',
                     'color-text-pri': '#000000',
                     'color-text-acc': '#5c5c5c'
-                });
-                return;
+                })
+                return
 
             case 'espresso':
                 setTheme({
                     'color-background': '#21211F',
                     'color-text-pri': '#D1B59A',
                     'color-text-acc': '#4E4E4E'
-                });
-                return;
+                })
+                return
 
             case 'cab':
                 setTheme({
                     'color-background': '#F6D305',
                     'color-text-pri': '#1F1F1F',
                     'color-text-acc': '#424242'
-                });
-                return;
+                })
+                return
 
             case 'cloud':
                 setTheme({
                     'color-background': '#f1f2f0',
                     'color-text-pri': '#35342f',
                     'color-text-acc': '#37bbe4'
-                });
-                return;
+                })
+                return
 
             case 'lime':
                 setTheme({
                     'color-background': '#263238',
                     'color-text-pri': '#AABBC3',
                     'color-text-acc': '#aeea00'
-                });
-                return;
+                })
+                return
 
             case 'white':
                 setTheme({
                     'color-background': '#ffffff',
                     'color-text-pri': '#222222',
                     'color-text-acc': '#dddddd'
-                });
-                return;
+                })
+                return
 
             case 'tron':
                 setTheme({
                     'color-background': '#242B33',
                     'color-text-pri': '#EFFBFF',
                     'color-text-acc': '#6EE2FF'
-                });
-                return;
+                })
+                return
             
             case 'blues':
                 setTheme({
                     'color-background': '#2B2C56',
                     'color-text-pri': '#EFF1FC',
                     'color-text-acc': '#6677EB'
-                });
-                return;
+                })
+                return
             
             case 'passion':
                 setTheme({
                     'color-background': '#f5f5f5',
                     'color-text-pri': '#12005e',
                     'color-text-acc': '#8e24aa'
-                });
-                return;
+                })
+                return
             
             case 'chalk':
                 setTheme({
                     'color-background': '#263238',
                     'color-text-pri': '#AABBC3',
                     'color-text-acc': '#FF869A'
-                });
-                return;
+                })
+                return
             
             case 'paper':
                 setTheme({
                     'color-background': '#F8F6F1',
                     'color-text-pri': '#4C432E',
                     'color-text-acc': '#AA9A73'
-                });
-                return;
+                })
+                return
 
         }
     })

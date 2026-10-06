@@ -22,6 +22,8 @@ function plugin(hook, vm) {
 
     let maxPageIndex = 1
 
+    const coverPath = ['/', '/en-us/', '/jp/']
+
     function handleRouteChange(willBeToc) {
         const body = document.body
 
@@ -174,6 +176,22 @@ function plugin(hook, vm) {
         }
     }
 
+    function resolveHeading(path) {
+        const matchedPage = pagesData.find(page => page && page.href === path)
+
+        if (matchedPage && matchedPage.title) {
+            return matchedPage.title
+        }
+
+        const h1 = document.querySelector('.markdown-section h1')
+        if (h1?.innerText) return h1.innerText
+        const link = Array.from(
+            document.querySelectorAll('.sidebar-nav a')
+        ).find(a => a.hash.slice(1) === path)   // 用 a.hash 更安全
+
+        return link?.textContent
+    }
+
     hook.mounted(function () {
         narrowMql.addEventListener('change', onScreenWidthChange)
 
@@ -216,16 +234,8 @@ function plugin(hook, vm) {
         // fix autoHeader
         let path = vm.route.path
         // for default title '- ピカピカピ'
-        if (path != '/') {
-            Array.from(document.getElementsByClassName('sidebar-nav')[0].getElementsByTagName('a')).some(a => {
-                if (a.href.split('#')[1] === path) {
-                    if (document.title != a.textContent) {
-                        document.title = a.textContent
-                    }
-                    return true
-                }
-                return false
-            })
+        if (!coverPath.includes(path)) {
+            document.title = resolveHeading(path)
         }
     })
 }

@@ -1,11 +1,11 @@
-import { boot } from '../bootstrap.js';
-import { renderLayout } from '../layout.js';
-import { renderDetail } from '../ui/detail.js';
+import { boot } from '../bootstrap.js'
+import { renderLayout } from '../layout.js'
+import { renderDetail } from '../ui/detail.js'
 
 function render() {
-    renderLayout();
-    renderDetail();
+    renderLayout()
+    renderDetail()
 }
 
-boot({ render });
-window.addEventListener('bgm:data-changed', render);
+boot({ render })
+window.addEventListener('bgm:data-changed', render)

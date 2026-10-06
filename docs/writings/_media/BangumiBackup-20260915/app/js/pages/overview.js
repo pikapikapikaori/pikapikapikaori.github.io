@@ -1,15 +1,15 @@
-import { boot } from '../bootstrap.js';
-import { renderLayout } from '../layout.js';
-import { renderOverview } from '../ui/overview.js';
+import { boot } from '../bootstrap.js'
+import { renderLayout } from '../layout.js'
+import { renderOverview } from '../ui/overview.js'
 
 function render() {
-    renderLayout();
-    renderOverview();
+    renderLayout()
+    renderOverview()
 }
 
-boot({ render });
-window.addEventListener('bgm:data-changed', render);
+boot({ render })
+window.addEventListener('bgm:data-changed', render)
 window.addEventListener('hashchange', () => {
-    if (document.getElementById('app').hidden) return;
-    render();
-});
+    if (document.getElementById('app').hidden) return
+    render()
+})

@@ -1,31 +1,26 @@
-import { state } from '../app.js';
-
-const CAT_LABELS = { anime: '动画', book: '书籍', game: '游戏', music: '音乐', real: '三次元' };
-const STATUS_LABELS = {
-    anime: { doing: '在看', done: '已看', wish: '想看' },
-    real: { doing: '在看', done: '已看', wish: '想看' },
-    book: { doing: '在读', done: '已读', wish: '想读' },
-    game: { doing: '在玩', done: '已玩', wish: '想玩' },
-    music: { doing: '在听', done: '已听', wish: '想听' },
-};
+import { state } from '../app.js'
+import {
+    CATEGORIES, 
+    STATUS_LABELS, 
+} from '../config.js'
 
 export function renderDetail() {
-    const main = document.getElementById('main');
-    if (!state.data) return;
+    const main = document.getElementById('main')
+    if (!state.data) return
 
-    const id = Number(new URLSearchParams(location.search).get('id'));
-    if (!id) { location.replace('./index.html'); return; }
+    const id = Number(new URLSearchParams(location.search).get('id'))
+    if (!id) { location.replace('./index.html'); return }
 
-    const item = state.data.items.find(it => it.id === id);
+    const item = state.data.items.find(it => it.id === id)
     if (!item) {
-        main.innerHTML = `<div class="empty">未找到该条目。<a href="./index.html">返回总览</a></div>`;
-        return;
+        main.innerHTML = '<div class="empty">未找到该条目。<a href="./index.html">返回总览</a></div>'
+        return
     }
 
-    const catLabel = CAT_LABELS[item.cat] || item.cat;
+    const catLabel = CATEGORIES[item.cat] || item.cat
     const statusLabel = item.status === 'onhold' ? '搁置'
         : item.status === 'dropped' ? '抛弃'
-            : STATUS_LABELS[item.cat]?.[item.status] || item.status;
+            : STATUS_LABELS[item.cat]?.[item.status] || item.status
 
     main.innerHTML = `
         <a class="back-link" href="./index.html">← 返回总览</a>
@@ -106,29 +101,29 @@ export function renderDetail() {
                 ${item.infobox ? renderInfobox(item.infobox) : ''}
             </div>
         </div>
-    `;
+    `
 
-    bindEpisodeToggles(main);
+    bindEpisodeToggles(main)
 }
 
 function renderScoreHistogram(details) {
-    const keys = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
-    const max = Math.max(...keys.map(k => details[k] || 0));
-    if (!max) return '';
+    const keys = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+    const max = Math.max(...keys.map(k => details[k] || 0))
+    if (!max) return ''
     return `
         <section class="detail-section">
             <div class="detail-section-title">评分分布</div>
             ${keys.map(k => {
-                const count = details[k] || 0;
-                const pct = max ? (count / max) * 100 : 0;
+                const count = details[k] || 0
+                const pct = max ? (count / max) * 100 : 0
                 return `<div class="score-bar">
                 <span class="score-bar-label">${k}</span>
                 <span class="score-bar-fill"><span style="width:${pct}%"></span></span>
                 <span class="score-bar-count">${count}</span>
-                </div>`;
+                </div>`
             }).join('')}
         </section>
-    `;
+    `
 }
 
 function renderFavorite(f) {
@@ -138,7 +133,7 @@ function renderFavorite(f) {
         wish: '想看 / 读 / 玩 / 听',
         on_hold: '搁置',
         dropped: '抛弃',
-    };
+    }
     return `
         <section class="detail-section">
             <div class="detail-section-title">大众收藏分布</div>
@@ -151,7 +146,7 @@ function renderFavorite(f) {
                 `).join('')}
             </div>
         </section>
-    `;
+    `
 }
 
 function renderEpisodes(eps) {
@@ -176,18 +171,18 @@ function renderEpisodes(eps) {
                 `).join('')}
             </ul>
         </section>
-    `;
+    `
 }
 
 function bindEpisodeToggles(root) {
     root.querySelectorAll('.ep-item').forEach(li => {
-        const btn = li.querySelector('.ep-toggle');
-        if (!btn) return;
+        const btn = li.querySelector('.ep-toggle')
+        if (!btn) return
         btn.addEventListener('click', () => {
-            const on = li.classList.toggle('is-expanded');
-            btn.textContent = on ? '▴' : '▾';
-        });
-    });
+            const on = li.classList.toggle('is-expanded')
+            btn.textContent = on ? '▴' : '▾'
+        })
+    })
 }
 
 function renderSubjectTags(tags) {
@@ -200,7 +195,7 @@ function renderSubjectTags(tags) {
                 `).join('')}
             </div>
         </section>
-    `;
+    `
 }
 
 function renderInfobox(text) {
@@ -211,20 +206,20 @@ function renderInfobox(text) {
                 <pre>${esc(text)}</pre>
             </details>
         </section>
-    `;
+    `
 }
 
 function stars(n) {
-    n = Math.max(0, Math.min(10, n || 0));
-    let out = '';
+    n = Math.max(0, Math.min(10, n || 0))
+    let out = ''
     for (let i = 1; i <= 10; i++) {
-        out += `<span class="star ${i <= n ? '' : 'is-empty'}">★</span>`;
+        out += `<span class="star ${i <= n ? '' : 'is-empty'}">★</span>`
     }
-    return out;
+    return out
 }
 
 function esc(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    }[c]));
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#39;'
+    }[c]))
 }

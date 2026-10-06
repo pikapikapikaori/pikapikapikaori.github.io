@@ -16,6 +16,10 @@ function rewriteHost(host, filePath) {
 
         default:
             // base domain @
+            if (filePath === 'pages/light/') {
+                return 'pages/light/index.html'
+            }
+            
             return filePath || 'index.html'
     }
 }

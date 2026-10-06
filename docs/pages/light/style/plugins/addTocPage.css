@@ -1,0 +1,123 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+.toc-paginator-input input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+/* 
+ * Standard CSS
+ */
+
+:root {
+    --tocpage-display-height: 18.75rem;
+    --tocpage-display-img-height: 12.5rem;
+    --tocpage-button-size: 1rem;
+    --tocpage-input-size: 1rem;
+}
+
+.toc-page-div {
+    margin: 1.2rem 0;
+}
+
+.toc-page-div ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.markdown-section .toc-page-div li.toc-year-group {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    color: var(--theme-color);
+}
+
+.markdown-section .toc-page-div li.toc-post-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+}
+
+.toc-page-div .toc-post-date {
+    width: 6.5rem;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+.toc-page-div .toc-post-link {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.toc-page-div .toc-post-link:hover {
+    color: var(--theme-color);
+    text-decoration: underline;
+}
+
+.toc-paginator-div {
+    margin: 2rem;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.toc-paginator-input {
+    font-size: var(--tocpage-input-size);
+}
+
+.toc-paginator-input input {
+    outline: 0;
+    font-size: inherit;
+    color: inherit;
+    width: 2rem;
+    margin: 0 0.3rem;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    appearance: textfield;
+}
+
+.toc-paginator-input span {
+    margin: 0 0.3rem;
+}
+
+.toc-paginator-input input:hover {
+    border-color: var(--theme-color);
+}
+
+.toc-paginator-input input:focus {
+    border-color: var(--theme-color);
+}
+
+.toc-paginator-input-box {
+    font-family: inherit;
+}
+
+.toc-paginator-button-div {
+    margin: 0 0.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.toc-paginator-button-span {
+    width: var(--tocpage-button-size);
+    height: var(--tocpage-button-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

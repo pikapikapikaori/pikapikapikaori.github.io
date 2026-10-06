@@ -1,5 +1,5 @@
 export function renderAbout() {
-    const main = document.getElementById('main');
+    const main = document.getElementById('main')
     main.innerHTML = `
         <div class="about">
             <h1>关于本站</h1>
@@ -31,5 +31,5 @@ export function renderAbout() {
             <h2>问题反馈</h2>
             <p>如遇到问题或有建议，请到<a href="https://github.com/pikapikapikaori/pikapikapikaori.github.io/issues/445" target="_blank" rel="noopener">这个 issue </a>提交。</p>
         </div>
-    `;
+    `
 }

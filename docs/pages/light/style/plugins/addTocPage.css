@@ -15,18 +15,18 @@
     margin: 0;
 }
 
-.toc-page-div .toc-year-group {
+.markdown-section .toc-page-div li.toc-year-group {
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 2rem;
-    margin-bottom: 1.2rem !important;
+    margin-bottom: 1.2rem;
     color: var(--theme-color);
 }
 
-.toc-page-div .toc-post-item {
+.markdown-section .toc-page-div li.toc-post-item {
     display: flex;
     align-items: baseline;
-    margin-bottom: 1.2rem !important;
+    margin-bottom: 1.2rem;
     line-height: 1.3;
 }
 

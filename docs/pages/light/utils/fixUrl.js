@@ -5,31 +5,31 @@ function plugin(hook, vm) {
     function fixRelativeUrls(el, prefix = '../../') {
         // 支持传字符串选择器或 DOM 元素
         if (typeof el === 'string') {
-            el = document.querySelector(el);
+            el = document.querySelector(el)
         }
         if (!el || el.nodeType !== 1) {
-            console.warn('fixRelativeUrls: 传入的不是有效 DOM 元素', el);
-            return el;
+            console.warn('fixRelativeUrls: 传入的不是有效 DOM 元素', el)
+            return el
         }
 
-        const protocolRe = /^(?:[a-zA-Z][a-zA-Z0-9+.\-]*:|\/\/|#)/;
+        const protocolRe = /^(?:[a-zA-Z][a-zA-Z0-9+.\-]*:|\/\/|#)/
 
         // 处理元素自身 + 所有后代
-        const nodes = [el, ...el.querySelectorAll('[src], [href]')];
+        const nodes = [el, ...el.querySelectorAll('[src], [href]')]
 
         nodes.forEach(node => {
             for (const attr of ['src', 'href']) {
-                if (!node.hasAttribute(attr)) continue;
-                const v = node.getAttribute(attr);
-                const stripped = (v || '').trim();
-                if (!stripped) continue;
-                if (protocolRe.test(stripped)) continue;
-                if (stripped.startsWith(prefix)) continue;
-                node.setAttribute(attr, prefix + v);
+                if (!node.hasAttribute(attr)) continue
+                const v = node.getAttribute(attr)
+                const stripped = (v || '').trim()
+                if (!stripped) continue
+                if (protocolRe.test(stripped)) continue
+                if (stripped.startsWith(prefix)) continue
+                node.setAttribute(attr, prefix + v)
             }
-        });
+        })
 
-        return el;
+        return el
     }
 
     hook.doneEach(() => {

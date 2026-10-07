@@ -59,6 +59,11 @@ section.cover img.ignore-view-full-image-img {
     color: var(--sidebar-text-color);
 }
 
+.sidebar-nav>ul>li {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
 /* --- Docsify Copy Code --- */
 pre .docsify-copy-code-button {
     border-radius: var(--global-icon-border-radius);

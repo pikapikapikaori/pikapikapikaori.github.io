@@ -53,15 +53,19 @@ section.cover img.ignore-view-full-image-img {
     color: var(--global-theme-color-7);
 }
 
+.sidebar-nav>ul>li {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.sidebar .sidebar-nav {
+    padding-right: 1.25rem;
+}
+
 /* --- Docsify Search --- */
 .input-wrap input[type=search] {
     background: var(--bg-color);
     color: var(--sidebar-text-color);
-}
-
-.sidebar-nav>ul>li {
-    margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
 }
 
 /* --- Docsify Copy Code --- */

@@ -182,6 +182,42 @@
                 isExpected: true,
             },
 
+            // 添加目录页
+            tocPage: {
+                recentAmount: 8,
+                coverPath: [
+                    '/', 
+                    '/en-us/', 
+                    '/jp/'
+                ]
+            },
+
+            // 添加动态封面
+            dynamicCover: {
+                backgrounds: [
+                    '_media/coverBackgrounds/cover-1.jpg',
+                    '_media/coverBackgrounds/cover-2.jpg',
+                    '_media/coverBackgrounds/cover-3.jpg',
+                ]
+            },
+
+            // 添加 breadcrumb 头
+            breadcrumb: {
+                localization: [
+                    'en-us', 
+                    'jp',
+                ]
+            },
+
+            // 更改 html lang 信息
+            htmlLang: {
+                localization: {
+                    'jp': 'ja',
+                    'en-us': 'en',
+                    'default': 'zh-Hans'
+                }
+            },
+
             // 添加小组件
             addWidgets: {
                 useSwitchMode: true,

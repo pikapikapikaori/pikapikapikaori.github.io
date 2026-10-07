@@ -1,5 +1,12 @@
 import pathNameData from '../config/breadcrumbData.json.js'
 
+let breadcrumbOptions = {
+    localization: [
+        'en-us', 
+        'jp',
+    ]
+}
+
 function plugin(hook, vm) {
     let isReadme = false
 
@@ -7,7 +14,7 @@ function plugin(hook, vm) {
 
         isReadme = false
 
-        const i18nPathList = ['en-us', 'jp',]
+        const i18nPathList = breadcrumbOptions.localization
 
         let parts = vm.route.path.split('/').slice(1)
         let breadcrumb = '<ul class=\'breadcrumb\'>'
@@ -79,4 +86,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['breadcrumb'] = Object.assign(
+    breadcrumbOptions,
+    window.$docsify['breadcrumb']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

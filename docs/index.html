@@ -65,11 +65,11 @@
 
             // tab 插件设置
             tabs: {
-                persist: false, // default
-                sync: false, // default
-                theme: 'material', // default
-                tabComments: true, // default
-                tabHeadings: true // default
+                persist: false,
+                sync: false,
+                theme: 'material',
+                tabComments: true,
+                tabHeadings: true
             },
 
             // 脚注插件设置
@@ -77,31 +77,19 @@
 
             // 全局搜索插件设置
             search: {
-                paths: 'auto', // or []
-
+                paths: 'auto', 
                 depth: 4,
-
-                // 支持本地化
                 placeholder: {
                     '/en-us/': 'Type to search',
                     '/jp/': '検索',
                     '/': '搜索'
                 },
-
-                // 支持本地化
                 noData: {
                     '/en-us/': 'No Results',
                     '/jp/': '結果がありません',
                     '/': '找不到结果'
                 },
-
                 hideOtherSidebarContent: true,
-
-                // 使用不同的索引作为路径前缀（namespaces）
-                // 注意：仅适用于 paths: 'auto' 模式
-                //
-                // 初始化索引时，我们从侧边栏查找第一个路径
-                // 如果它与列表中的前缀匹配，我们将切换到相应的索引
                 pathNamespaces: ['/jp', '/en-us'],
             },
 
@@ -186,8 +174,8 @@
             tocPage: {
                 recentAmount: 8,
                 coverPath: [
-                    '/', 
-                    '/en-us/', 
+                    '/',
+                    '/en-us/',
                     '/jp/'
                 ]
             },
@@ -204,7 +192,7 @@
             // 添加 breadcrumb 头
             breadcrumb: {
                 localization: [
-                    'en-us', 
+                    'en-us',
                     'jp',
                 ]
             },
@@ -358,6 +346,265 @@
                         '/': '文章列表'
                     },
                 }
+            },
+
+            // 添加替换 Markdown 中的 Html 注释
+            htmlReplace: {
+                links: {
+                    github: 'https://github.com/pikapikapikaori/',
+                    email: 'mailto:Lyy8759@outlook.com',
+                    rss: './pikapikapi-blog-rss.atom'
+                },
+                blockTagConfigMap: new Map([
+                    /* Brief Comments */
+                    [
+                        'brief-comments',
+                        {
+                            startHtml: '<div class="brief-comments-container">',
+                            endHtml: '</div>'
+                        }
+                    ],
+                    [
+                        'brief-comments-year',
+                        {
+                            startHtml: '<hr class="brief-comments-in-blog-title-year-divider"><details class="brief-comments-in-blog-title-year">',
+                            endHtml: '</details>'
+                        }
+                    ],
+                    [
+                        'brief-comments-comments',
+                        {
+                            startHtml: '<div class="brief-comments-in-blog">',
+                            endHtml: '</div>'
+                        }
+                    ],
+                    [
+                        'brief-comments-comments-container',
+                        {
+                            startHtml: '<div class="brief-comments-in-blog-comments-container">',
+                            endHtml: '</div>'
+                        }
+                    ],
+
+                    /* Personal Ten */
+                    [
+                        'personal-ten',
+                        {
+                            startHtml: '<div class="personal-ten-best-container">',
+                            endHtml: '</div>'
+                        }
+                    ],
+                    [
+                        'personal-ten-card',
+                        {
+                            startHtml: '<div class="personal-ten-best-card"><div class="personal-ten-best-content">',
+                            endHtml: '</div></div>'
+                        }
+                    ],
+                    [
+                        'personal-ten-img',
+                        {
+                            startHtml: '<div class="personal-ten-best-content-img">',
+                            endHtml: '</div>'
+                        }
+                    ],
+                    [
+                        'personal-ten-info',
+                        {
+                            startHtml: '<div class="personal-ten-best-content-info">',
+                            endHtml: '</div>'
+                        }
+                    ],
+
+                    /* Footnote */
+                    [
+                        'footnote',
+                        {
+                            startHtml: '<div class="footnote-div">',
+                            endHtml: '</div>'
+                        }
+                    ],
+
+                    /* Toc Style Card */
+                    [
+                        'toc-card-wrap',
+                        {
+                            startHtml: '<div class="toc-page-div">',
+                            endHtml: '</div>'
+                        }
+                    ],
+                    [
+                        'toc-card',
+                        {
+                            startHtml: '<a class="toc-page-display-a" ',
+                            endHtml: '</div></a>'
+                        }
+                    ],
+
+                    /* About Page Container */
+                    [
+                        'about-page-wrap',
+                        {
+                            startHtml: '<div class="main-page-right-panel-container">',
+                            endHtml: '</div>'
+                        }
+                    ],
+                    [
+                        'about-page-links-img',
+                        {
+                            startHtml: '<div class="main-page-about-me-image-links">',
+                            endHtml: '</div>'
+                        }
+                    ],
+
+                    /* Multiple Image Container */
+                    [
+                        'multi-img-wrap',
+                        {
+                            startHtml: '<section class="multi-images-container-section">',
+                            endHtml: '</section>'
+                        }
+                    ],
+
+                    /* Poem Container */
+                    [
+                        'poem-wrap',
+                        {
+                            startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div poem-div">',
+                            endHtml: '</div></div>'
+                        }
+                    ],
+
+                    /* Writing Direction Vertical Container */
+                    [
+                        'vertical-ltr-wrap',
+                        {
+                            startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-ltr-div">',
+                            endHtml: '</div></div>'
+                        }
+                    ],
+                    [
+                        'vertical-rtl-wrap',
+                        {
+                            startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div">',
+                            endHtml: '</div></div>'
+                        }
+                    ],
+                    [
+                        'rtl-wrap',
+                        {
+                            startHtml: '<div class="writing-direction-rtl-div">',
+                            endHtml: '</div>'
+                        }
+                    ],
+
+                    /* Minority Language Container */
+                    [
+                        'minor-lang-wrap',
+                        {
+                            startHtml: '<span class="minority-language-font">',
+                            endHtml: '</span>'
+                        }
+                    ],
+                    [
+                        'minor-lang-ranjana-wrap',
+                        {
+                            startHtml: '<span class="minority-language-font-ranjana">',
+                            endHtml: '</span>'
+                        }
+                    ],
+                    [
+                        'minor-lang-jiagu-wrap',
+                        {
+                            startHtml: '<span class="minority-language-font-jiagu">',
+                            endHtml: '</span>'
+                        }
+                    ],
+                    [
+                        'minor-lang-zhuanwen-wrap',
+                        {
+                            startHtml: '<span class="minority-language-font-zhuanwen">',
+                            endHtml: '</span>'
+                        }
+                    ],
+                    [
+                        'minor-lang-jinwen-wrap',
+                        {
+                            startHtml: '<span class="minority-language-font-jinwen">',
+                            endHtml: '</span>'
+                        }
+                    ],
+                    [
+                        'minor-lang-cjkext-wrap',
+                        {
+                            startHtml: '<span class="minority-language-font-cjkext">',
+                            endHtml: '</span>'
+                        }
+                    ]
+                ]),
+                inlineTagConfigMap: new Map([
+                    /* Brief Comments */
+                    [
+                        'brief-comments-summary',
+                        (payload) => `<summary>${payload}</summary>`
+                    ],
+                    [
+                        'brief-comments-logo',
+                        (payload) => `<div class="brief-comments-in-blog-image-container"><img src="${payload}" alt="Logo" class="ignore-view-full-image-img"></div>`
+                    ],
+                    [
+                        'brief-comments-divider',
+                        (payload) => `<hr class="brief-comments-in-blog-comments-divider"/><p>${payload}</p>`
+                    ],
+
+                    /* Footnote */
+                    [
+                        'footnote-num',
+                        (payload) => `<sup class="footnote-num-sup">${payload}</sup>`
+                    ],
+
+                    /* Toc Style Card */
+                    [
+                        'toc-card-href',
+                        (payload) => `href="${payload}" target="_blank"><div class="toc-page-display-div">`
+                    ],
+                    [
+                        'toc-card-img',
+                        (payload) => `<div class="toc-page-display-title-img"><img class="ignore-view-full-image-img" src="${payload}"></center></div>`
+                    ],
+                    [
+                        'toc-card-title',
+                        (payload) => `<div class="toc-page-display-title-div">${payload}</div>`
+                    ],
+                    [
+                        'toc-card-description',
+                        (payload) => `<div class="toc-page-display-date-div">${payload}</div>`
+                    ],
+
+                    /* About Page Container */
+                    [
+                        'about-page-title',
+                        (payload) => `<h4 class="main-page-about-me-title">${payload}</h4>`
+                    ],
+                    [
+                        'about-page-p',
+                        (payload) => `<p class="main-page-about-me-description">${payload}</p>`
+                    ],
+                    [
+                        'about-page-links',
+                        () => '<div class="main-page-about-me-links"><a href="{link-github}" target="_blank" rel="noopener">{icon-github}</a><a href="{link-email}" target="_blank" rel="noopener">{icon-email}</a><a href="{link-rss}" target="_blank" rel="noopener">{icon-rss}</a></div>'
+                    ],
+
+                    /* Frame */
+                    [
+                        'iframe-link',
+                        (payload) => `<iframe width="100%" ${payload} frameborder="0" loading="lazy" title="Embedded Website" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>`
+                    ],
+                    [
+                        'iframe-video-link',
+                        (payload) => `<iframe style="aspect-ratio: var(--global-aspect-ratio-tv);" src="${payload}" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>`
+                    ]
+                ])
             },
         }
     </script>

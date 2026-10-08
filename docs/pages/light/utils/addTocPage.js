@@ -1,4 +1,4 @@
-import pagesData from '../../../config/tocdata.json.js'
+import pagesData from '../../../assets/js/config/tocdata.json.js'
 
 function plugin(hook, vm) {
 

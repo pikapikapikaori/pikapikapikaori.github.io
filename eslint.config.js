@@ -49,6 +49,8 @@ const jsGlobals = {
     Gitalk: "readonly",
     PIXI: "readonly",
     Sakura: "readonly",
+
+    calLocalized: "readonly",
 };
 
 // docs/pages/** 里额外认识的

@@ -1,20 +1,18 @@
+import { calLocalized } from '../utils/localization.js'
+
 let htmlLangOptions = {
     localization: {
-        'jp': 'ja',
-        'en-us': 'en',
-        'default': 'zh-Hans'
+        lang: {
+            '/jp/': 'ja',
+            '/en-us/': 'en',
+            default: 'zh-Hans'
+        }
     }
 }
 
 function plugin(hook, vm) {
     hook.doneEach(function () {
-        const localization = htmlLangOptions.localization
-
-        const curLocal = vm.route.path.split('/')[1]
-
-        let lang = localization[curLocal] || localization.default
-
-        document.documentElement.lang = lang
+        document.documentElement.lang = calLocalized(htmlLangOptions.localization, undefined).lang
     })
 }
 

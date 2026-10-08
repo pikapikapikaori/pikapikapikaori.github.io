@@ -1,5 +1,5 @@
 // default values
-let addWidgetsOptions = {
+let widgetsOptions = {
     useSwitchMode: true,
     top: 0,
     topOffset: 500,
@@ -72,11 +72,11 @@ let addWidgetsOptions = {
 
 // Docsify plugin functions
 function plugin(hook, vm) {
-    if (!addWidgetsOptions.useSwitchMode) {
+    if (!widgetsOptions.useSwitchMode) {
         return
     }
 
-    document.documentElement.style.setProperty('--widgets-top', addWidgetsOptions.top + 'px')
+    document.documentElement.style.setProperty('--widgets-top', widgetsOptions.top + 'px')
 
     let switchSpan,
         themeSpan,
@@ -131,7 +131,7 @@ function plugin(hook, vm) {
         modes: ['auto', 'light', 'dark'],
 
         themeIndex: 0,
-        groups: addWidgetsOptions.themes
+        groups: widgetsOptions.themes
     }
 
     // 主题切换
@@ -367,7 +367,7 @@ function plugin(hook, vm) {
     // 回顶部
     let isScrollToTopVisible = function () {
         let offset = window.document.documentElement.scrollTop
-        return offset >= addWidgetsOptions.topOffset
+        return offset >= widgetsOptions.topOffset
     }
 
     // 黑暗模式切换
@@ -724,8 +724,8 @@ function plugin(hook, vm) {
 }
 
 // Docsify plugin options
-window.$docsify['addWidgets'] = Object.assign(
-    addWidgetsOptions,
-    window.$docsify['addWidgets']
+window.$docsify['widgets'] = Object.assign(
+    widgetsOptions,
+    window.$docsify['widgets']
 )
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

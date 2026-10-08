@@ -1,7 +1,9 @@
+import { calLocalized } from '../utils/localization.js'
+
 let tocSwitcherOptions = {
     localization: {
         toc: 'Contents',
-        default: 'Articles',
+        list: 'Articles',
     },
 }
 
@@ -10,34 +12,14 @@ function plugin(hook, vm) {
     let ticking = false
 
     hook.doneEach(function () {
-        let tempLocalization = {
-            toc: '',
-            default: '',
-        }
-
-        Object.keys(tempLocalization).forEach(key => {
-            const textValue = tocSwitcherOptions.localization[key]
-
-            if (typeof textValue === 'string') {
-                tempLocalization[key] = textValue
-            }
-            else if (typeof textValue === 'object') {
-                Object.keys(textValue).some(match => {
-                    const isMatch = location.href.indexOf(match) > -1
-
-                    tempLocalization[key] = isMatch ? textValue[match] : tocSwitcherOptions.localization[key]
-
-                    return isMatch
-                })
-            }
-        })
+        let tempLocalization = calLocalized(tocSwitcherOptions.localization, undefined)
 
         const sidebarNav = document.querySelector('.sidebar-nav')
 
         let switchWrap = document.querySelector('.switch-toc-wrap-div') ? document.querySelector('.switch-toc-wrap-div') : document.createElement('div')
 
         switchWrap.className = 'switch-toc-wrap-div'
-        switchWrap.innerHTML = `<button class="toc-btn active-btn">${tempLocalization.toc}</button><button class="default-btn">${tempLocalization.default}</button>`
+        switchWrap.innerHTML = `<button class="toc-btn active-btn">${tempLocalization.toc}</button><button class="default-btn">${tempLocalization.list}</button>`
 
         sidebarNav.before(switchWrap)
 

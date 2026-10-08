@@ -1,265 +1,16 @@
+import { TokenReplacer } from '../utils/tokenReplacer.js'
+
 let htmlReplaceOptions = {
     links: {
         github: 'https://github.com/pikapikapikaori/',
         email: 'mailto:Lyy8759@outlook.com',
-        rss: './pikapikapi-blog-rss.atom'
+        rss: './assets/resources/meta/pikapikapi-blog-rss.atom'
     },
-    blockTagConfigMap: new Map([
-        /* Brief Comments */
-        [
-            'brief-comments',
-            {
-                startHtml: '<div class="brief-comments-container">',
-                endHtml: '</div>'
-            }
-        ],
-        [
-            'brief-comments-year',
-            {
-                startHtml: '<hr class="brief-comments-in-blog-title-year-divider"><details class="brief-comments-in-blog-title-year">',
-                endHtml: '</details>'
-            }
-        ],
-        [
-            'brief-comments-comments',
-            {
-                startHtml: '<div class="brief-comments-in-blog">',
-                endHtml: '</div>'
-            }
-        ],
-        [
-            'brief-comments-comments-container',
-            {
-                startHtml: '<div class="brief-comments-in-blog-comments-container">',
-                endHtml: '</div>'
-            }
-        ],
-
-        /* Personal Ten */
-        [
-            'personal-ten',
-            {
-                startHtml: '<div class="personal-ten-best-container">',
-                endHtml: '</div>'
-            }
-        ],
-        [
-            'personal-ten-card',
-            {
-                startHtml: '<div class="personal-ten-best-card"><div class="personal-ten-best-content">',
-                endHtml: '</div></div>'
-            }
-        ],
-        [
-            'personal-ten-img',
-            {
-                startHtml: '<div class="personal-ten-best-content-img">',
-                endHtml: '</div>'
-            }
-        ],
-        [
-            'personal-ten-info',
-            {
-                startHtml: '<div class="personal-ten-best-content-info">',
-                endHtml: '</div>'
-            }
-        ],
-
-        /* Footnote */
-        [
-            'footnote',
-            {
-                startHtml: '<div class="footnote-div">',
-                endHtml: '</div>'
-            }
-        ],
-
-        /* Toc Style Card */
-        [
-            'toc-card-wrap',
-            {
-                startHtml: '<div class="toc-page-div">',
-                endHtml: '</div>'
-            }
-        ],
-        [
-            'toc-card',
-            {
-                startHtml: '<a class="toc-page-display-a" ',
-                endHtml: '</div></a>'
-            }
-        ],
-
-        /* About Page Container */
-        [
-            'about-page-wrap',
-            {
-                startHtml: '<div class="main-page-right-panel-container">',
-                endHtml: '</div>'
-            }
-        ],
-        [
-            'about-page-links-img',
-            {
-                startHtml: '<div class="main-page-about-me-image-links">',
-                endHtml: '</div>'
-            }
-        ],
-
-        /* Multiple Image Container */
-        [
-            'multi-img-wrap',
-            {
-                startHtml: '<section class="multi-images-container-section">',
-                endHtml: '</section>'
-            }
-        ],
-
-        /* Poem Container */
-        [
-            'poem-wrap',
-            {
-                startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div poem-div">',
-                endHtml: '</div></div>'
-            }
-        ],
-
-        /* Writing Direction Vertical Container */
-        [
-            'vertical-ltr-wrap',
-            {
-                startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-ltr-div">',
-                endHtml: '</div></div>'
-            }
-        ],
-        [
-            'vertical-rtl-wrap',
-            {
-                startHtml: '<div><div class="writing-direction-vertical-div writing-direction-vertical-rtl-div">',
-                endHtml: '</div></div>'
-            }
-        ],
-        [
-            'rtl-wrap',
-            {
-                startHtml: '<div class="writing-direction-rtl-div">',
-                endHtml: '</div>'
-            }
-        ],
-
-        /* Minority Language Container */
-        [
-            'minor-lang-wrap',
-            {
-                startHtml: '<span class="minority-language-font">',
-                endHtml: '</span>'
-            }
-        ],
-        [
-            'minor-lang-ranjana-wrap',
-            {
-                startHtml: '<span class="minority-language-font-ranjana">',
-                endHtml: '</span>'
-            }
-        ],
-        [
-            'minor-lang-jiagu-wrap',
-            {
-                startHtml: '<span class="minority-language-font-jiagu">',
-                endHtml: '</span>'
-            }
-        ],
-        [
-            'minor-lang-zhuanwen-wrap',
-            {
-                startHtml: '<span class="minority-language-font-zhuanwen">',
-                endHtml: '</span>'
-            }
-        ],
-        [
-            'minor-lang-jinwen-wrap',
-            {
-                startHtml: '<span class="minority-language-font-jinwen">',
-                endHtml: '</span>'
-            }
-        ],
-        [
-            'minor-lang-cjkext-wrap',
-            {
-                startHtml: '<span class="minority-language-font-cjkext">',
-                endHtml: '</span>'
-            }
-        ]
-    ]),
-    inlineTagConfigMap: new Map([
-        /* Brief Comments */
-        [
-            'brief-comments-summary',
-            (payload) => `<summary>${payload}</summary>`
-        ],
-        [
-            'brief-comments-logo',
-            (payload) => `<div class="brief-comments-in-blog-image-container"><img src="${payload}" alt="Logo" class="ignore-view-full-image-img"></div>`
-        ],
-        [
-            'brief-comments-divider',
-            (payload) => `<hr class="brief-comments-in-blog-comments-divider"/><p>${payload}</p>`
-        ],
-
-        /* Footnote */
-        [
-            'footnote-num',
-            (payload) => `<sup class="footnote-num-sup">${payload}</sup>`
-        ],
-
-        /* Toc Style Card */
-        [
-            'toc-card-href',
-            (payload) => `href="${payload}" target="_blank"><div class="toc-page-display-div">`
-        ],
-        [
-            'toc-card-img',
-            (payload) => `<div class="toc-page-display-title-img"><img class="ignore-view-full-image-img" src="${payload}"></center></div>`
-        ],
-        [
-            'toc-card-title',
-            (payload) => `<div class="toc-page-display-title-div">${payload}</div>`
-        ],
-        [
-            'toc-card-description',
-            (payload) => `<div class="toc-page-display-date-div">${payload}</div>`
-        ],
-
-        /* About Page Container */
-        [
-            'about-page-title',
-            (payload) => `<h4 class="main-page-about-me-title">${payload}</h4>`
-        ],
-        [
-            'about-page-p',
-            (payload) => `<p class="main-page-about-me-description">${payload}</p>`
-        ],
-        [
-            'about-page-links',
-            () => '<div class="main-page-about-me-links"><a href="{link-github}" target="_blank" rel="noopener">{icon-github}</a><a href="{link-email}" target="_blank" rel="noopener">{icon-email}</a><a href="{link-rss}" target="_blank" rel="noopener">{icon-rss}</a></div>'
-        ],
-
-        /* Frame */
-        [
-            'iframe-link',
-            (payload) => `<iframe width="100%" ${payload} frameborder="0" loading="lazy" title="Embedded Website" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>`
-        ],
-        [
-            'iframe-video-link',
-            (payload) => `<iframe style="aspect-ratio: var(--global-aspect-ratio-tv);" src="${payload}" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>`
-        ]
-    ])
+    tags: []
 }
 
 function plugin(hook, vm) {
     const commentReplaceMark = 'annotation:replace'
-
-    const links = htmlReplaceOptions.links
 
     const icons = {
         github: '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M16 22.027v-2.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7a5.44 5.44 0 00-1.5-3.75 5.07 5.07 0 00-.09-3.77s-1.18-.35-3.91 1.48a13.38 13.38 0 00-7 0c-2.73-1.83-3.91-1.48-3.91-1.48A5.07 5.07 0 005 5.797a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 00-.94 2.58v2.87M9 20.027c-3 .973-5.5 0-7-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
@@ -267,33 +18,56 @@ function plugin(hook, vm) {
         rss: '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 19c0-4.2-2.8-7-7-7M19 19c0-8.4-5.6-14-14-14M5 19.01l.01-.011" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
     }
 
+    const replacer = new TokenReplacer({
+        prefix: 'html_replace',
+    })
+
+    const blockTagConfigMap = new Map()
+    const inlineTagConfigMap = new Map()
+
     function resolvePlaceholders(str) {
-        if (typeof str !== 'string') return str
-        return str.replace(/\{(link|icon)-([\w-]+)\}/g, (match, type, key) => {
-            const source = type === 'link' ? links : icons
-            return Object.prototype.hasOwnProperty.call(source, key) ? source[key] : match
+        return replacer.replace(str)
+    }
+
+    function initializeReplacer() {
+        Object.keys(htmlReplaceOptions.links).forEach(key => {
+            replacer.registerToken(`link_${key}`, htmlReplaceOptions.links[key])
+        })
+
+        Object.keys(icons).forEach(key => {
+            replacer.registerToken(`icon_${key}`, icons[key])
         })
     }
 
-    const blockTagConfigMap = new Map(
-        Array.from(htmlReplaceOptions.blockTagConfigMap, ([key, cfg]) => [
-            key,
-            {
-                startHtml: resolvePlaceholders(cfg.startHtml),
-                endHtml: resolvePlaceholders(cfg.endHtml)
+    function initializeTags() {
+        htmlReplaceOptions.tags.forEach(item => {
+            if (!item || !item.tag) return
+
+            switch (item.type) {
+                case 'block':
+                    blockTagConfigMap.set(item.tag, {
+                        startHtml: resolvePlaceholders(item.startHtml),
+                        endHtml: resolvePlaceholders(item.endHtml)
+                    })
+                    break
+
+                case 'inline':
+                    inlineTagConfigMap.set(item.tag, payload =>
+                        resolvePlaceholders(item.startHtml + payload + item.endHtml)
+                    )
+                    break
+
+                case 'entire':
+                    inlineTagConfigMap.set(item.tag, () =>
+                        resolvePlaceholders(item.entireHtml)
+                    )
+                    break
+
+                default:
+                    console.warn(`[htmlReplace] Unknown type: ${item.type} (tag: ${item.tag})`)
             }
-        ])
-    )
-
-    const inlineTagConfigMap = new Map(
-        Array.from(htmlReplaceOptions.inlineTagConfigMap, ([key, fn]) => [
-            key,
-            (payload) => resolvePlaceholders(fn(payload))
-        ])
-    )
-
-    const blockTagKeys = Array.from(blockTagConfigMap.keys())
-    const inlineTagKeys = Array.from(inlineTagConfigMap.keys())
+        })
+    }
 
     const regex = {
         codeMarkup: /(```[\s\S]*?```)/gm,
@@ -372,7 +146,15 @@ function plugin(hook, vm) {
 
     let hasAnyMarker = false
 
+    hook.mounted(function () {
+        initializeReplacer()
+        initializeTags()
+    })
+
     hook.beforeEach(function (content) {
+        const blockTagKeys = Array.from(blockTagConfigMap.keys())
+        const inlineTagKeys = Array.from(inlineTagConfigMap.keys())
+
         hasAnyMarker = false
         for (const key of blockTagKeys) {
             if (content.includes(`<!-- ${key}:start -->`)) {

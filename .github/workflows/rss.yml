@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'docs/**/*.md'
+      - 'script/shell/rss.sh'
       - '!docs/assets/**'
       - '!docs/pages/**'
 
@@ -27,12 +28,10 @@ jobs:
           sudo apt-get install -y pandoc
 
       - name: Build RSS
-        run: |
-          cd docs/
-          bash ./script/rss.sh
+        run: bash ./script/shell/rss.sh
 
       - name: Commit Updated
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "action: build pikapikapi-blog-rss.atom"
-          file_pattern: "docs/pikapikapi-blog-rss.atom"
+          file_pattern: "docs/assets/resources/meta/pikapikapi-blog-rss.atom"

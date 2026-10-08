@@ -1,23 +1,24 @@
 #!/bin/bash
 
 # ============================================================
-feed="pikapikapi-blog-rss.atom"
+base_path="docs/"
+feed="assets/resources/meta/pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
 website_link="https://pikapikapi.com"
 description="Don't worry, be happy."
 author_name="李亦楊"
 # Path based on directory: docs/
 git_pathspecs=(
-    '**/*.md'
-    ':!:**/_*.md'
-    ':!:**/README.md'
-    ':!:**/About.md'
-    ':!:**/Personal*.md'
-    ':!:**/BriefComments.md'
-    ':!:**/Beginning.md'
-    ':!:**/Sites.md'
-    ':!:pages/**/*.md'
-    ':!:assets/**/*.md'
+    'docs/**/*.md'
+    ':!:docs/**/_*.md'
+    ':!:docs/**/README.md'
+    ':!:docs/**/About.md'
+    ':!:docs/**/Personal*.md'
+    ':!:docs/**/BriefComments.md'
+    ':!:docs/**/Beginning.md'
+    ':!:docs/**/Sites.md'
+    ':!:docs/pages/**/*.md'
+    ':!:docs/assets/**/*.md'
 )
 # ============================================================
 
@@ -46,7 +47,8 @@ items=""
 for file in ${newest_files[@]}; do
     echo $file
     title=$(grep "." $file | head -n1)
-    encode=$(urlencode "${file::-3}")
+    relative="${file#$base_path}"
+    encode=$(urlencode "${relative%.md}")
     link="$website_link/#/$encode"
     suffix="${file#docs/}"
     prefix="${suffix%/*}"
@@ -80,4 +82,4 @@ rss_content="<feed xmlns=\"http://www.w3.org/2005/Atom\">
 </feed>"
 
 echo "Writing content to RSS seed..."
-echo "$rss_content" >$feed
+echo "$rss_content" >$base_path$feed

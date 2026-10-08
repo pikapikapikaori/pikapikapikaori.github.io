@@ -1,4 +1,5 @@
-// default values
+import { calLocalized } from '../utils/localization.js'
+
 let countWordsOptions = {
     countable: true,
     position: 'top',
@@ -17,6 +18,7 @@ function plugin(hook, vm) {
         return
     }
     let wordsCount
+
     hook.beforeEach(function (content) {
         // Match regex every time you start parsing .md
         const matches = content.match(
@@ -26,27 +28,7 @@ function plugin(hook, vm) {
         return content
     })
     hook.doneEach(function () {
-        let tempLocalization = {
-            words: '',
-            minute: '',
-        }
-        // Update countWords.localization strings
-        Object.keys(tempLocalization).forEach(key => {
-            const textValue = countWordsOptions.localization[key]
-
-            if (typeof textValue === 'string') {
-                tempLocalization[key] = textValue
-            }
-            else if (typeof textValue === 'object') {
-                Object.keys(textValue).some(match => {
-                    const isMatch = location.href.indexOf(match) > -1
-
-                    tempLocalization[key] = isMatch ? textValue[match] : countWordsOptions.localization[key]
-
-                    return isMatch
-                })
-            }
-        })
+        let tempLocalization = calLocalized(countWordsOptions.localization, undefined)
 
         // Support localization
         let str = wordsCount + ' ' + tempLocalization.words

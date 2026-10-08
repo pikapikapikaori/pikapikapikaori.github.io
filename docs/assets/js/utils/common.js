@@ -20,12 +20,6 @@
  *   - mode='protect'：代码块已被替换成标记后的内容
  *   - mode='restore'：标记已被还原成原始代码块后的内容
  *
- * @example
- *   import { protectCodeBlocks } from '../common/protectCodeBlocks.js'
- *
- *   content = protectCodeBlocks(content, 'htmlReplace', 'protect')
- *   // ... 在 content 上做各种替换 ...
- *   content = protectCodeBlocks(content, 'htmlReplace', 'restore')
  */
 const codeBlockStore = new Map()
 

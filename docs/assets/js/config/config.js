@@ -116,12 +116,12 @@ window.$docsify = {
             words: {
                 '/en-us/': 'words',
                 '/jp/': '字',
-                '/': '字'
+                default: '字'
             },
             minute: {
                 '/en-us/': 'min',
                 '/jp/': '分',
-                '/': '分钟'
+                default: '分钟'
             },
         },
         isExpected: true,
@@ -157,14 +157,16 @@ window.$docsify = {
     // 更改 html lang 信息
     htmlLang: {
         localization: {
-            'jp': 'ja',
-            'en-us': 'en',
-            'default': 'zh-Hans'
+            lang: {
+                '/jp/': 'ja',
+                '/en-us/': 'en',
+                default: 'zh-Hans'
+            }
         }
     },
 
     // 添加小组件
-    addWidgets: {
+    widgets: {
         useSwitchMode: true,
         top: 20,
         topOffset: 500,
@@ -295,12 +297,12 @@ window.$docsify = {
             toc: {
                 '/en-us/': 'Contents',
                 '/jp/': '目次',
-                '/': '目录'
+                default: '目录'
             },
-            default: {
+            list: {
                 '/en-us/': 'Articles',
                 '/jp/': '文章一覧',
-                '/': '文章列表'
+                default: '文章列表'
             },
         }
     },

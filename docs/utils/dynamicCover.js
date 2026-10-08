@@ -1,9 +1,13 @@
-function plugin(hook, vm) {
-    const backgrounds = [
+let dynamicCoverOptions = {
+    backgrounds: [
         '_media/coverBackgrounds/cover-1.jpg',
         '_media/coverBackgrounds/cover-2.jpg',
         '_media/coverBackgrounds/cover-3.jpg',
     ]
+}
+
+function plugin(hook, vm) {
+    const backgrounds = dynamicCoverOptions.backgrounds
 
     const numberOfImages = backgrounds.length
     const fadeMultiplier = 3   // 淡入淡出 = 3 个基准单位
@@ -111,4 +115,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['dynamicCover'] = Object.assign(
+    dynamicCoverOptions,
+    window.$docsify['dynamicCover']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

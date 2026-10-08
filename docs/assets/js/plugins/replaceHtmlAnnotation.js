@@ -1,4 +1,5 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
+import { protectCodeBlocks } from '../utils/common.js'
 
 let htmlReplaceOptions = {
     links: {
@@ -69,19 +70,10 @@ function plugin(hook, vm) {
         })
     }
 
-    const regex = {
-        codeMarkup: /(```[\s\S]*?```)/gm,
-        commentReplaceMarkup: new RegExp(`<!-- ${commentReplaceMark} (.*?) -->`),
-    }
+    const commentReplaceMarkup = new RegExp(`<!-- ${commentReplaceMark} (.*?) -->`)
 
     function renderStage1(content) {
-        // 1.保护代码块
-        const codeBlockMatch = content.match(regex.codeMarkup) || []
-        const codeBlockMarkers = codeBlockMatch.map((item, i) => {
-            const marker = `<!-- ${commentReplaceMark} CODEBLOCK${i} -->`
-            content = content.replace(item, marker)
-            return marker
-        })
+        content = protectCodeBlocks(content, 'htmlReplace', 'protect')
 
         for (const [tagKey, cfg] of blockTagConfigMap) {
             const startMarker = `<!-- ${tagKey}:start -->`
@@ -124,9 +116,7 @@ function plugin(hook, vm) {
             })
         }
 
-        codeBlockMarkers.forEach((marker, i) => {
-            content = content.replace(marker, () => codeBlockMatch[i])
-        })
+        content = protectCodeBlocks(content, 'htmlReplace', 'restore')
 
         return content
     }
@@ -134,7 +124,7 @@ function plugin(hook, vm) {
     function renderStage2(html) {
         let match
         while (true) {
-            match = regex.commentReplaceMarkup.exec(html)
+            match = commentReplaceMarkup.exec(html)
             if (match === null) break
 
             const fullComment = match[0]

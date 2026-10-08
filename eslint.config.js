@@ -44,7 +44,7 @@ const baseGlobals = {
 };
 
 // docs/utils/** 里额外认识的
-const utilsGlobals = {
+const jsGlobals = {
     Docsify: "readonly",
     Gitalk: "readonly",
     PIXI: "readonly",
@@ -104,10 +104,10 @@ module.exports = defineConfig([
     },
     {
         files: [
-            "docs/utils/**/*.js"
+            "docs/assets/js/**/*.js"
         ],
         languageOptions: {
-            globals: utilsGlobals,
+            globals: jsGlobals,
         },
     },
     {

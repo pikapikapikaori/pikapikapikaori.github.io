@@ -16,7 +16,15 @@ section.cover::after {
     -webkit-mask-position: 0 bottom;
 }
 
-@keyframes coverWaveMove {
+section.cover::before {
+    -webkit-animation: coverWaveMove 18s linear infinite;
+}
+
+section.cover::after {
+    -webkit-animation: coverWaveMove 10s linear infinite reverse;
+}
+
+@-webkit-keyframes coverWaveMove {
     from {
         -webkit-mask-position: 0 bottom;
     }
@@ -39,22 +47,18 @@ section.cover::after {
     --h6-color: #8a8197;
     --sidebar-text-color: #b6acc6;
     --sidebar-title-color: #f3ecff;
-
     --border-color: #251f34;
     --border-color-strong: #372e4d;
     --border-color-mid: #372e4d;
     --sidebar-border-color: #251f34;
-
     --code-bg: #1a1626;
     --zebra-bg: #1a16268c;
     --tip-code-bg: #241d33;
     --inline-code-color: #ffa04d;
     --code-text-color: #d3cbdd;
-
     --accent-color: #ff7a18;
     --accent-text-color: #100e17;
     --blur-color: rgba(255, 122, 24, .14);
-
     --sidebar-toggle-bg: transparent;
 
     --cal-theme-color-s-1: -48;
@@ -83,28 +87,35 @@ section.cover::after {
 
     --ghost-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 56'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23f4f8ff'/><stop offset='.62' stop-color='%23ccd8f2'/><stop offset='1' stop-color='%23aab9de'/></linearGradient></defs><path d='M23 3 C10 3 3 14 3 26 L3 51 L9 46 L15 52 L21 46 L27 52 L33 46 L39 52 L43 51 L43 26 C43 14 36 3 23 3 Z' fill='url(%23g)'/><ellipse cx='16' cy='24' rx='3' ry='4' fill='%23241c38'/><ellipse cx='30' cy='24' rx='3' ry='4' fill='%23241c38'/><ellipse cx='23' cy='37' rx='3.5' ry='4.5' fill='%23241c38'/></svg>");
 
-    --jack-svg: url("../resource/jack.svg");
+    --jack-svg: url("../resource/icon/jack.svg");
+}
 
-    --sidebar-bg: rgba(16, 14, 23, .74);
-    --bg-img: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%),
-        radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
+@media (max-width: 768px) {
+    :root {
+        --jack-scale: .62;
+    }
+}
+
+::selection {
+    background: var(--accent-color);
+    color: var(--accent-text-color);
 }
 
 html {
     min-height: 100%;
     background-color: var(--bg-color);
-    background-image: var(--bg-img);
+    background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%), radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
     background-size: 100% 100%, var(--dot-size) var(--dot-size);
     background-repeat: no-repeat, repeat;
     background-attachment: fixed, fixed;
 }
 
 body {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 .sidebar {
-    background-color: var(--sidebar-bg);
+    background-color: rgba(16, 14, 23, .74);;
     background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
     background-size: var(--dot-size) var(--dot-size);
     background-attachment: local;
@@ -126,8 +137,8 @@ body::after {
 html::before {
     top: 12%;
     left: 0;
-    width: 46px;
-    height: 56px;
+    width: 2.875rem;
+    height: 3.5rem;
     background-image: var(--ghost-svg);
     filter: drop-shadow(0 0 10px rgba(150, 190, 255, .40));
     opacity: 0;
@@ -137,19 +148,25 @@ html::before {
 html::after {
     top: 44%;
     left: 0;
-    width: 58px;
-    height: 70px;
+    width: 3.625rem;
+    height: 4.375rem;
     background-image: var(--ghost-svg);
     filter: drop-shadow(0 0 12px rgba(150, 190, 255, .35));
     opacity: 0;
     animation: ghost-fly 52s linear -22s infinite;
 }
 
+@media (max-width: 768px) {
+    html::after {
+        display: none;
+    }
+}
+
 body::after {
     top: 74%;
     left: 0;
-    width: 40px;
-    height: 48px;
+    width: 2.5rem;
+    height: 3rem;
     background-image: var(--ghost-svg);
     filter: drop-shadow(0 0 8px rgba(150, 190, 255, .45));
     opacity: 0;
@@ -234,7 +251,7 @@ section.cover::after {
     width: 100%;
     pointer-events: none;
     background-color: var(--bg-color);
-    background-image: var(--bg-img);
+    background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%), radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
     background-size: 100% 100%, var(--dot-size) var(--dot-size);
     background-repeat: no-repeat, repeat;
     background-attachment: fixed, fixed;
@@ -266,20 +283,5 @@ section.cover .cover-main {
     }
     to {
         mask-position: 1200px bottom;
-    }
-}
-
-::selection {
-    background: var(--accent-color);
-    color: var(--accent-text-color);
-}
-
-@media (max-width: 768px) {
-    :root {
-        --jack-scale: .62;
-    }
-
-    html::after {
-        display: none;
     }
 }

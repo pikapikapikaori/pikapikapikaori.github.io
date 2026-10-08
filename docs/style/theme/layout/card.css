@@ -31,7 +31,8 @@
     --theme-border-radius: 1rem;
     --theme-padding: 3rem;
 
-    --global-sidebar-width: calc(300px + 4rem);
+    --global-sidebar-width: 300px;
+    --global-navbar-width: 350px;
 
     --bg-color: var(--theme-bg);
     --text-color: var(--theme-text);
@@ -127,18 +128,31 @@ html::after {
     }
 }
 
-.app-nav {
+.app-nav.no-badge {
     position: fixed;
     margin-top: var(--theme-margin);
-    margin-left: var(--theme-margin);
     padding: .5rem 1.2rem;
     background-color: var(--theme-bg-card);
     border-radius: var(--theme-border-radius-super-large);
     box-shadow: var(--theme-box-shadow);
-    right: auto !important;
-    width: var(--global-sidebar-width);
+    width: min(var(--global-navbar-width), var(--global-content-width));
     text-align: center;
     border: var(--global-border) var(--border-color);
+    left: var(--global-sidebar-width);
+    margin-left: auto;
+    margin-right: auto;
+    transition: left var(--global-transition-duration-fast) ease;
+}
+
+.app-nav li ul {
+    top: 150%;
+    right: -100%;
+    background-color: var(--theme-bg-card);
+    border-radius: var(--theme-border-radius);
+}
+
+body.close .app-nav {
+    left: 0;
 }
 
 .app-nav ul {
@@ -187,8 +201,17 @@ body.close .sidebar {
         --global-sidebar-width: var(--global-content-width);
     }
 
-    .app-nav {
-        margin-left: calc((100vw - var(--global-sidebar-width)) / 2);
+    .app-nav.no-badge {
+        left: 0;
+    }
+
+    .app-nav.no-badge li:has(ul) {
+        font-size: 0;
+    }
+
+    .app-nav li ul {
+        top: 200%;
+        right: -400%;
     }
 
     .sidebar {
@@ -234,10 +257,6 @@ body.close .sidebar {
     border: var(--global-border) var(--border-color);
 }
 
-.content-fade-edge {
-    --fade-bg: transparent !important;
-}
-
 :root {
     --widgets-size: 2rem !important;
     --widgets-gap: 2.5rem !important;
@@ -269,4 +288,27 @@ body.close .sidebar {
         --widgets-gap: 2.2rem !important;
         --widgets-pad: 0.15rem;
     }
+}
+
+.fade-edge {
+    --fade-bg: transparent !important;
+}
+
+footer:has(#footer-under-gitalk) {
+    margin-top: 1.75rem;
+    padding-bottom: 2.5rem;
+}
+
+footer #footer-under-gitalk {
+    background-color: var(--theme-bg-card);
+    border-radius: var(--theme-border-radius-super-large);
+    box-shadow: var(--theme-box-shadow);
+    border: var(--global-border) var(--border-color);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+footer #footer-under-gitalk>div {
+    border: none;
+    padding-top: 0;
 }

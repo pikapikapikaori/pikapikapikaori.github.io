@@ -8,7 +8,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/ApDevaSiddham.ttf') format('truetype');
+    src: url('../../resources/fonts/ApDevaSiddham.ttf') format('truetype');
     size-adjust: 130%;
     unicode-range: 
         /* Siddham: U+11580..U+115FF */
@@ -19,7 +19,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/Sahitya/Sahitya-Regular.ttf') format('truetype');
+    src: url('../../resources/fonts/Sahitya/Sahitya-Regular.ttf') format('truetype');
     size-adjust: 120%;
     unicode-range: 
         /* Devanagari: U+0900..U+097F */
@@ -30,7 +30,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/ninjal_hentaigana/ninjal_hentaigana.ttf') format('truetype');
+    src: url('../../resources/fonts/ninjal_hentaigana/ninjal_hentaigana.ttf') format('truetype');
     unicode-range: 
         /* Hiragana: U+3040..U+309F */
         U+3099-309A,
@@ -44,7 +44,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf') format('truetype');
+    src: url('../../resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf') format('truetype');
     size-adjust: 140%;
     unicode-range: 
         /* Mongolian: U+1800..U+18AF */
@@ -55,7 +55,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/Tinos/Tinos-Regular.ttf') format('truetype');
+    src: url('../../resources/fonts/Tinos/Tinos-Regular.ttf') format('truetype');
     size-adjust: 130%;
     unicode-range: 
         /* Hebrew: U+0590..U+05FF */
@@ -68,7 +68,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/PengliWenKai-Regular.ttf') format('truetype');
+    src: url('../../resources/fonts/PengliWenKai-Regular.ttf') format('truetype');
     unicode-range: 
         /* Yijing hexagram symbols: U+4DC0..U+4DFF */
         U+4DC0-4DFF,
@@ -85,7 +85,7 @@
 @font-face {
     font-display: swap;
     font-family: 'MinorityLang';
-    src: url('./fonts/Gentium_Plus/GentiumPlus-Regular.ttf') format('truetype');
+    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Regular.ttf') format('truetype');
     unicode-range: 
         /* Latin Extended-A: U+0100..U+017F  */
         U+0138, U+014A-014B,

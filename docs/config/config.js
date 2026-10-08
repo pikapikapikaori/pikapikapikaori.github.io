@@ -169,6 +169,15 @@ window.$docsify = {
         top: 20,
         topOffset: 500,
         themes: [
+            // {
+            //     name: 'card',
+            //     light: './style/theme/layout/card.css',
+            //     dark: './style/theme/layout/card.css',
+            //     lightColor: '#100e17',
+            //     darkColor: '#100e17',
+            //     lightThemeColor: '#c7a2ec',
+            //     darkThemeColor: '#c7a2ec'
+            // },
             {
                 name: 'default',
                 light: './style/theme/vue.css',
@@ -285,7 +294,16 @@ window.$docsify = {
                 darkColor: '#1e2128',
                 lightThemeColor: '#d3a2ec',
                 darkThemeColor: '#a2d3ec'
-            }
+            },
+            {
+                name: 'haunted',
+                light: './style/theme/ghost.css',
+                dark: './style/theme/haunted.css',
+                lightColor: '#faf8fd',
+                darkColor: '#100e17',
+                lightThemeColor: '#ecc1a2',
+                darkThemeColor: '#ecc1a2'
+            },
         ]
     },
 

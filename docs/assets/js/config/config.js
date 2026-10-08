@@ -312,7 +312,7 @@ window.$docsify = {
         links: {
             github: 'https://github.com/pikapikapikaori/',
             email: 'mailto:Lyy8759@outlook.com',
-            rss: './pikapikapi-blog-rss.atom'
+            rss: './assets/resources/meta/pikapikapi-blog-rss.atom'
         },
         tags: [
             /* Brief Comments */

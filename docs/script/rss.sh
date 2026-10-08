@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================================
-feed="pikapikapi-blog-rss.atom"
+feed="assets/resources/meta/pikapikapi-blog-rss.atom"
 website_title="ピカピカピ"
 website_link="https://pikapikapi.com"
 description="Don't worry, be happy."

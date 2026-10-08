@@ -35,4 +35,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "action: build pikapikapi-blog-rss.atom"
-          file_pattern: "docs/pikapikapi-blog-rss.atom"
+          file_pattern: "docs/assets/resources/meta/pikapikapi-blog-rss.atom"

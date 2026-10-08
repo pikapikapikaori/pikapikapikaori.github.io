@@ -3,7 +3,7 @@ const commentReplaceMark = 'annotation:replace'
 const links = {
     github: 'https://github.com/pikapikapikaori/',
     email: 'mailto:Lyy8759@outlook.com',
-    rss: './pikapikapi-blog-rss.atom'
+    rss: './assets/resources/meta/pikapikapi-blog-rss.atom'
 }
 
 const icons = {

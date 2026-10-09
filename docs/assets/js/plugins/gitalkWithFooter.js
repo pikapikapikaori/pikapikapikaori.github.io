@@ -1,73 +1,91 @@
-// default values
+import { TokenReplacer } from '../utils/tokenReplacer.js'
+import { calLocalized } from '../utils/localization.js'
+
 let gitalkWithFooterOptions = {
     footerInnerHtml: '',
+    localization: {
+        info: {
+            '/en-us/': 'Yi-Yang Li',
+            '/jp/': '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
+            default: '李亦杨'
+        }
+    },
     gitalkConfig: {
         clientID: '',
         clientSecret: '',
         repo: 'pikapikapi-blog',
         owner: 'pikapikapikaori',
         admin: ['pikapikapikaori',],
-        // facebook-like distraction free mode
         distractionFreeMode: false,
     },
 }
 
 // Docsify plugin functions
 function plugin(hook, vm) {
-    function renderFooterDate(input, date = new Date()) {
-        const pad = n => String(n).padStart(2, '0')
+    const replacer = new TokenReplacer({
+        prefix: 'gitalk_footer',
+    })
 
-        const replacements = {
-            yyyy: String(date.getFullYear()),
-            mm: pad(date.getMonth() + 1), // 月份
-            dd: pad(date.getDate()),
-        }
+    let gitalkContainer, footerDiv
 
-        return input.replace(/\{gitalk-footer-([^}]+)\}/g, (_, expr) => {
-            return expr.replace(
-                /(?<![a-zA-Z])(yyyy|mm|dd)(?![a-zA-Z])/g,
-                key => replacements[key]
-            )
+    function renderFooter(input) {
+        const tmpLocalization = calLocalized(gitalkWithFooterOptions.localization)
+        Object.keys(tmpLocalization).forEach(key => {
+            replacer.unregisterToken(key)
+            replacer.registerToken(key, tmpLocalization[key])
         })
+        return replacer.replace(input)
     }
 
-    hook.doneEach(function () {
+    hook.mounted(function () {
         const main = document.getElementById('main')
         if (!main) return
         const parent = main.parentNode
 
-        // 若没有gitalk容器，则添加gitalk容器重新
-        let previousGitalk = document.getElementById('gitalk-container')
-        if (!previousGitalk) {
-            let gitalkContainer = document.createElement('div')
-            gitalkContainer.id = 'gitalk-container'
-            parent.appendChild(gitalkContainer)
-        }
-
-        const footerInnerHtml = renderFooterDate(gitalkWithFooterOptions.footerInnerHtml)
-
-        // 若没有footer，则在gitalk容器下方重新添加footer
-        let previousFooter = document.getElementById('footer-under-gitalk')
-        if (!previousFooter) {
+        footerDiv = document.getElementById('footer-under-gitalk')
+        if (!footerDiv) {
             let footer = document.createElement('footer')
-            let footerDiv = document.createElement('div')
+            footerDiv = document.createElement('div')
             footerDiv.id = 'footer-under-gitalk'
-            footerDiv.innerHTML = `<div>${footerInnerHtml}</div>`
             footer.appendChild(footerDiv)
             parent.appendChild(footer)
         }
 
         if (typeof Gitalk === 'undefined') return
 
+        gitalkContainer = document.getElementById('gitalk-container')
+        if (!gitalkContainer) {
+            gitalkContainer = document.createElement('div')
+            gitalkContainer.id = 'gitalk-container'
+            footerDiv.parentNode.before(gitalkContainer)
+        }
+    })
+
+    hook.doneEach(function () {
+        if (!footerDiv) {
+            footerDiv = document.getElementById('footer-under-gitalk')
+            if (!footerDiv) return
+        }
+
+        const footerInnerHtml = renderFooter(gitalkWithFooterOptions.footerInnerHtml)
+
+        footerDiv.innerHTML = `<div>${footerInnerHtml}</div>`
+
+        if (typeof Gitalk === 'undefined') return
+
+        if (!gitalkContainer) {
+            gitalkContainer = document.getElementById('gitalk-container')
+            if (!gitalkContainer) return
+        }
+
         // render gitalk
-        document.getElementById('gitalk-container').innerHTML = ''
+        gitalkContainer.innerHTML = ''
         let gitalk = new Gitalk({
             clientID: gitalkWithFooterOptions.gitalkConfig.clientID,
             clientSecret: gitalkWithFooterOptions.gitalkConfig.clientSecret,
             repo: gitalkWithFooterOptions.gitalkConfig.repo,
             owner: gitalkWithFooterOptions.gitalkConfig.owner,
             admin: gitalkWithFooterOptions.gitalkConfig.admin,
-            // facebook-like distraction free mode
             distractionFreeMode: gitalkWithFooterOptions.gitalkConfig.distractionFreeMode,
             id: vm.route.path,
         })

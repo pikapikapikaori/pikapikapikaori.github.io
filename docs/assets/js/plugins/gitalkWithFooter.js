@@ -8,6 +8,16 @@ let gitalkWithFooterOptions = {
             '/en-us/': 'Yi-Yang Li',
             '/jp/': '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
             default: '李亦杨'
+        },
+        copy: {
+            '/en-us/': 'All Rights Reserved.',
+            '/jp/': '無断転載を禁じます',
+            default: '版权所有'
+        },
+        divider: {
+            '/en-us/': ' · ',
+            '/jp/': ' ・ ',
+            default: ' · '
         }
     },
     gitalkConfig: {

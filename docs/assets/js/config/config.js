@@ -189,8 +189,35 @@ window.$docsify = {
         themes: [
             {
                 name: 'card',
-                light: './style/theme/layout/card.css',
-                dark: './style/theme/layout/card.css',
+                light: './assets/css/theme/exper/card.css',
+                dark: './assets/css/theme/exper/card.css',
+                lightColor: '#100e17',
+                darkColor: '#100e17',
+                lightThemeColor: '#c7a2ec',
+                darkThemeColor: '#c7a2ec'
+            },
+            {
+                name: 'brutal',
+                light: './assets/css/theme/exper/brutal.css',
+                dark: './assets/css/theme/exper/brutal.css',
+                lightColor: '#100e17',
+                darkColor: '#100e17',
+                lightThemeColor: '#c7a2ec',
+                darkThemeColor: '#c7a2ec'
+            },
+            {
+                name: 'editorial',
+                light: './assets/css/theme/exper/editorial.css',
+                dark: './assets/css/theme/exper/editorial.css',
+                lightColor: '#100e17',
+                darkColor: '#100e17',
+                lightThemeColor: '#c7a2ec',
+                darkThemeColor: '#c7a2ec'
+            },
+            {
+                name: 'swiss',
+                light: './assets/css/theme/exper/swiss.css',
+                dark: './assets/css/theme/exper/swiss.css',
                 lightColor: '#100e17',
                 darkColor: '#100e17',
                 lightThemeColor: '#c7a2ec',

@@ -1,0 +1,225 @@
+:root {
+    --theme-color: #ff2d00;
+    --bg-color: #fdf3d8;
+    --text-color: #101010;
+    --heading-color: #000;
+    --muted-color: #4a4a4a;
+    --em-color: #101010;
+    --h6-color: #444;
+    --sidebar-text-color: #101010;
+    --sidebar-title-color: #000;
+    --border-color: #101010;
+    --border-color-strong: #101010;
+    --border-color-mid: #101010;
+    --code-bg: #101010;
+    --zebra-bg: #ffe600;
+    --tip-code-bg: #101010;
+    --inline-code-color: #ffe600;
+    --code-text-color: #ffe600;
+    --accent-color: #ff2d00;
+    --accent-text-color: #fff;
+    --info-color: #0047ff;
+    --info-text-color: #fff;
+    --sidebar-border-color: #101010;
+    --scrollbar-bg-color: rgba(0, 0, 0, .1);
+    --global-font: 'Courier New', ui-monospace, 'Noto Sans Mono CJK SC', monospace;
+    --global-code-font: 'Courier New', ui-monospace, monospace;
+    --global-sidebar-title-font: 'Courier New', monospace;
+    --global-content-width: min(86%, 820px);
+    --global-sidebar-width: 300px;
+    --global-sidebar-toggle-width: 300px;
+    --global-el-border-radius: 0;
+    --global-el-border-radius-small: 0;
+    --global-icon-border-radius: 0;
+    --global-widget-border-radius: 0;
+    --global-font-weight-semibold: 700;
+    --global-transition-duration: 120ms;
+    --global-transition-duration-fast: 120ms;
+}
+
+html .sidebar {
+    left: auto;
+    right: 0;
+    border-right: 0;
+    border-left: 3px solid #101010;
+    background: #ffe600;
+    padding-top: 6rem;
+}
+
+html .content {
+    left: 0;
+    right: var(--global-sidebar-width);
+    padding-top: 5rem;
+}
+
+html body.close .sidebar {
+    transform: translateX(100%)
+}
+
+html body.close .content {
+    left: 0;
+    right: 0
+}
+
+html .app-nav {
+    right: auto;
+    left: 0;
+    margin-left: 2rem;
+    margin-right: 0;
+    text-align: left;
+}
+
+html .sidebar-toggle,
+html body.close .sidebar-toggle {
+    position: fixed;
+    left: auto;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: .85rem;
+    background: #101010;
+    border: 0;
+    z-index: 50;
+}
+
+html .sidebar-toggle-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .22rem;
+}
+
+html .sidebar-toggle span {
+    background: #ffe600;
+    width: 1.5rem;
+    height: 3px;
+    margin: 0;
+}
+
+html .markdown-section {
+    background: #fff;
+    border: 3px solid #101010;
+    box-shadow: 12px 12px 0 0 #101010;
+    padding: 2.5rem 2.75rem 3rem;
+    margin: 2.5rem auto 0;
+}
+
+html .markdown-section h1 {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    letter-spacing: -.02em;
+    border-bottom: 4px solid #101010;
+    padding-bottom: .6rem;
+}
+
+html .markdown-section h2 {
+    background: #101010;
+    color: #ffe600;
+    font-size: 1.4rem;
+    padding: .3em .6em;
+    box-shadow: 6px 6px 0 var(--theme-color);
+}
+
+html .markdown-section blockquote {
+    border-left: 6px solid #101010;
+    background: #fff;
+    color: #101010;
+    padding: 1rem 1.5rem;
+    box-shadow: 6px 6px 0 var(--theme-color);
+}
+
+html .markdown-section pre {
+    border: 3px solid #101010;
+    box-shadow: 8px 8px 0 var(--theme-color);
+}
+
+html .markdown-section p a {
+    background: #ffe600;
+    padding: 0 .15em;
+    text-decoration-color: #101010;
+    text-decoration-thickness: 2px;
+}
+
+html #gitalk-container {
+    background: #fff;
+    border: 3px solid #101010;
+    box-shadow: 12px 12px 0 0 #101010;
+    border-radius: 0;
+    padding: 2rem 2.75rem;
+    margin-top: 2.5rem;
+}
+
+html .site-footer {
+    background: #fff;
+    border: 3px solid #101010;
+    box-shadow: 12px 12px 0 0 #101010;
+    color: #101010;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding: 1.5rem 2.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+/* ============================================================
+ * 1. app-nav 下拉菜单——硬阴影描边
+ * ============================================================ */
+.app-nav li ul {
+    background: #fff;
+    border: 3px solid #101010;
+    border-radius: 0;
+    box-shadow: 8px 8px 0 0 #101010;
+    padding: .4rem 0;
+    min-width: 10rem;
+    z-index: 200;
+}
+.app-nav li ul li {
+    margin: .15rem 0;
+    padding: 0;
+}
+.app-nav li ul a {
+    color: #101010;
+    font-family: 'Courier New', monospace;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    padding: .45rem 1rem;
+    display: block;
+}
+.app-nav li ul a:hover,
+.app-nav li ul a.active {
+    background: #ffe600;
+    color: #101010;
+    border-bottom: 0;
+}
+
+/* ============================================================
+ * 2. 分页器 / TOC 独立成块
+ * ============================================================ */
+.docsify-pagination-container,
+.toc-page-div,
+.toc-paginator-div {
+    max-width: var(--global-content-width);
+    margin: 2.5rem auto 0;
+    padding: 1.75rem 2.75rem;
+    box-sizing: border-box;
+    background: #fff;
+    border: 3px solid #101010;
+    box-shadow: 12px 12px 0 0 #101010;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-size: .82rem;
+    color: #101010;
+}
+.docsify-pagination-container a,
+.toc-page-div a,
+.toc-paginator-div a {
+    color: #ff2d00;
+    font-weight: 700;
+    text-decoration-color: #101010;
+    text-decoration-thickness: 2px;
+}

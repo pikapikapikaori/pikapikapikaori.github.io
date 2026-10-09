@@ -1,0 +1,230 @@
+:root {
+    --theme-color: #e2001a;
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --heading-color: #000000;
+    --muted-color: #6b6b6b;
+    --em-color: #6b6b6b;
+    --h6-color: #6b6b6b;
+    --sidebar-text-color: #333333;
+    --sidebar-title-color: #000;
+    --border-color: #e6e6e6;
+    --border-color-strong: #111111;
+    --border-color-mid: #d4d4d4;
+    --code-bg: #f2f2f2;
+    --zebra-bg: #f7f7f7;
+    --tip-code-bg: #eaeaea;
+    --inline-code-color: #e2001a;
+    --code-text-color: #333333;
+    --sidebar-border-color: #111111;
+    --scrollbar-bg-color: rgba(0, 0, 0, .08);
+    --global-font: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --global-sidebar-title-font: 'Helvetica Neue', Arial, sans-serif;
+    --global-content-width: min(94%, 1140px);
+    --global-sidebar-width: 220px;
+    --global-el-border-radius: 0;
+    --global-el-border-radius-small: 0;
+    --global-transition-duration: 200ms;
+}
+
+html .sidebar {
+    border-right: 1px solid #111;
+    background: #fff;
+    padding: 5.5rem 1.5rem 2rem;
+}
+
+html .sidebar>h1 {
+    text-align: left;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+html .sidebar li>p {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: .66rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--theme-color);
+    border-bottom: 1px solid #111;
+    padding-bottom: .4rem;
+    margin-top: 1.6rem;
+    max-width: 100%;
+}
+
+html .sidebar ul li a {
+    font-size: .76rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+html .sidebar ul li.active>a {
+    border-left: 0;
+    margin-left: 0;
+    color: #000;
+    font-weight: 700;
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: 3px;
+}
+
+html .sidebar-toggle,
+html body.close .sidebar-toggle {
+    position: fixed;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    top: auto;
+    width: var(--global-sidebar-width);
+    padding: .9rem;
+    background: #111;
+    border-radius: 0;
+    z-index: 50;
+}
+
+html .sidebar-toggle span {
+    background: #fff;
+    width: 1.2rem;
+    height: 2px;
+    margin: 0 auto .22rem;
+}
+
+html .markdown-section {
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid #e6e6e6;
+    padding-top: 0;
+}
+
+html .markdown-section>h1,
+html .markdown-section>h2,
+html .markdown-section>h3 {
+    column-span: all
+}
+
+html .markdown-section table,
+html .markdown-section pre,
+html .markdown-section blockquote,
+html .markdown-section p.tip {
+    break-inside: avoid
+}
+
+html .markdown-section h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 800;
+    line-height: .95;
+    letter-spacing: -.04em;
+    margin: 0 0 2.5rem;
+}
+
+html .markdown-section h2 {
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    margin: 3rem 0 1.2rem;
+    padding-top: 1rem;
+    border-top: 3px solid #111;
+}
+
+html .markdown-section h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: .02em;
+    margin-top: 2.4rem;
+}
+
+html .markdown-section p a {
+    color: #111;
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+html .markdown-section blockquote {
+    border-left: 0;
+    border-top: 3px solid var(--theme-color);
+    padding: .9rem 0 0;
+    color: #111;
+    font-weight: 500;
+}
+
+html #gitalk-container {
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 0;
+    padding: 2rem;
+}
+
+html .site-footer {
+    border-top: 1px solid #111;
+    border-radius: 0;
+    font-size: .72rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: #111;
+    padding-top: 1.2rem;
+}
+
+/* ============================================================
+ * 1. 补上内容宽度变量
+ * ============================================================ */
+:root {
+    --global-content-width: min(94%, 1140px);
+}
+
+/* ============================================================
+ * 2. app-nav 下拉菜单——极简黑线
+ * ============================================================ */
+.app-nav li ul {
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 0;
+    box-shadow: none;
+    padding: .3rem 0;
+    min-width: 9rem;
+    z-index: 200;
+}
+.app-nav li ul li {
+    margin: 0;
+    padding: 0;
+}
+.app-nav li ul a {
+    color: #111;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .45rem 1rem;
+    display: block;
+}
+.app-nav li ul a:hover,
+.app-nav li ul a.active {
+    background: #111;
+    color: #fff;
+    border-bottom: 0;
+}
+
+/* ============================================================
+ * 3. 分页器 / TOC 独立成块
+ * ============================================================ */
+.docsify-pagination-container,
+.toc-page-div,
+.toc-paginator-div {
+    max-width: var(--global-content-width);
+    margin: 3rem auto;
+    padding: 1.5rem 0;
+    box-sizing: border-box;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #111;
+}
+.docsify-pagination-container a,
+.toc-page-div a,
+.toc-paginator-div a {
+    color: #111;
+    text-decoration-color: #e2001a;
+    text-decoration-thickness: 2px;
+}

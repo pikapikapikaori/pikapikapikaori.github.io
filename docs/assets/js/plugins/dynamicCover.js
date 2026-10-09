@@ -1,8 +1,8 @@
 let dynamicCoverOptions = {
     backgrounds: [
-        '_media/coverBackgrounds/cover-1.jpg',
-        '_media/coverBackgrounds/cover-2.jpg',
-        '_media/coverBackgrounds/cover-3.jpg',
+        './assets/resources/img/cover/cover-1.jpg',
+        './assets/resources/img/cover/cover-2.jpg',
+        './assets/resources/img/cover/cover-3.jpg',
     ]
 }
 

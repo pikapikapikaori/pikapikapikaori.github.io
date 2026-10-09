@@ -146,6 +146,7 @@ window.$docsify = {
     // 添加目录页
     tocPage: {
         recentAmount: 8,
+        defaultImg: './assets/resources/img/default/picture-2.gif',
         coverPath: [
             '/',
             '/en-us/',
@@ -156,9 +157,9 @@ window.$docsify = {
     // 添加动态封面
     dynamicCover: {
         backgrounds: [
-            '_media/coverBackgrounds/cover-1.jpg',
-            '_media/coverBackgrounds/cover-2.jpg',
-            '_media/coverBackgrounds/cover-3.jpg',
+            './assets/resources/img/cover/cover-1.jpg',
+            './assets/resources/img/cover/cover-2.jpg',
+            './assets/resources/img/cover/cover-3.jpg',
         ]
     },
 

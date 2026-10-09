@@ -3,6 +3,7 @@ import { protectCodeBlocks } from '../utils/common.js'
 
 let tocPageOptions = {
     recentAmount: 8,
+    defaultImg: './assets/resources/img/default/picture-2.gif',
     coverPath: [
         '/', 
         '/en-us/', 
@@ -124,7 +125,7 @@ function plugin(hook, vm) {
             let pageHref = '#' + page.href
             let pagePictureHref = location.pathname.replace(/\/$/, '') + page.cover
 
-            let pageHrefDiv = '<a class=\'toc-page-display-a\' href=\'' + pageHref + '\'><div class=\'toc-page-display-div\'><div class=\'toc-page-display-title-img\'><img class=\'ignore-view-full-image-img\' src=\'' + pagePictureHref + '\' loading=\'lazy\' onerror=\'this.src=\"_media/defaultImg/picture-2.gif\"\'></div><div class=\'toc-page-display-title-div\'>' + page.title + '</div><div class=\'toc-page-display-date-div\'>' + page.time + '</div></div></a>'
+            let pageHrefDiv = `<a class='toc-page-display-a' href='${pageHref}'><div class='toc-page-display-div'><div class='toc-page-display-title-img'><img class='ignore-view-full-image-img' src='${pagePictureHref}' loading='lazy' onerror='this.src="${tocPageOptions.defaultImg}"'></div><div class='toc-page-display-title-div'>${page.title}</div><div class='toc-page-display-date-div'>${page.time}</div></div></a>`
 
             tocPageDiv.innerHTML += pageHrefDiv
         })

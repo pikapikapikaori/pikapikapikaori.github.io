@@ -303,7 +303,16 @@ window.$docsify = {
                 darkColor: '#1e2128',
                 lightThemeColor: '#d3a2ec',
                 darkThemeColor: '#a2d3ec'
-            }
+            },
+            {
+                name: 'haunted',
+                light: './assets/css/theme/ghost.css',
+                dark: './assets/css/theme/haunted.css',
+                lightColor: '#faf8fd',
+                darkColor: '#100e17',
+                lightThemeColor: '#ecc1a2',
+                darkThemeColor: '#ecc1a2'
+            },
         ]
     },
 

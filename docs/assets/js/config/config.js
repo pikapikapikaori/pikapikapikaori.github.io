@@ -188,6 +188,15 @@ window.$docsify = {
         topOffset: 500,
         themes: [
             {
+                name: 'card',
+                light: './style/theme/layout/card.css',
+                dark: './style/theme/layout/card.css',
+                lightColor: '#100e17',
+                darkColor: '#100e17',
+                lightThemeColor: '#c7a2ec',
+                darkThemeColor: '#c7a2ec'
+            },
+            {
                 name: 'default',
                 light: './assets/css/theme/vue.css',
                 dark: './assets/css/theme/dark.css',

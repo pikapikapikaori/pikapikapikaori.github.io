@@ -1,4 +1,5 @@
 import pagesData from '../config/tocdata.json.js'
+import { protectCodeBlocks } from '../utils/common.js'
 
 let tocPageOptions = {
     recentAmount: 8,
@@ -52,27 +53,15 @@ function plugin(hook, vm) {
     }
 
     function renderTocStage1(content, vm) {
-        const codeMarkup = /(```[\s\S]*?```)/gm
-        const codeBlocks = []
+        content = protectCodeBlocks(content, 'toc', 'protect')
 
-        // 1. 先保护代码块
-        content = content.replace(codeMarkup, (block) => {
-            const marker = `<!-- toc-codeblock-${codeBlocks.length} -->`
-            codeBlocks.push(block)
-            return marker
-        })
-
-        // 2. 在保护代码块之后，再判断是否真的有 <!-- toc -->
         const hasToc = content.includes(tocMarkup)
 
         if (hasToc) {
             content = content.replace(tocMarkup, tocDiv)
         }
 
-        // 3. 还原代码块
-        codeBlocks.forEach((block, i) => {
-            content = content.replace(`<!-- toc-codeblock-${i} -->`, () => block)
-        })
+        content = protectCodeBlocks(content, 'toc', 'restore')
 
         return {
             content,

@@ -19,7 +19,7 @@ Dream of becoming a person who holds love for wisdom and beauty.
 
 - [Github](https://github.com/pikapikapikaori/)
 - [Email](mailto:Lyy8759@outlook.com)
-- [Rss](../../../../pikapikapi-blog-rss.atom ':ignore')
+- [Rss](../../../../assets/resources/meta/pikapikapi-blog-rss.atom ':ignore')
 
 ## About This Blog
 

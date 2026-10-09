@@ -32,8 +32,10 @@ let gitalkWithFooterOptions = {
 
 // Docsify plugin functions
 function plugin(hook, vm) {
+    const pluginIdentifier = 'gitalk_footer'
+
     const replacer = new TokenReplacer({
-        prefix: 'gitalk_footer',
+        prefix: pluginIdentifier,
     })
 
     let gitalkContainer, footerDiv

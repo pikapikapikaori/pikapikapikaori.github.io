@@ -94,14 +94,30 @@ window.$docsify = {
     // 自用插件
     // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
     gitalkWithFooter: {
-        footerInnerHtml: '<small>&copy; 2023 - {gitalk-footer-yyyy} 李亦杨 / <ruby>李亦楊<rt>リエキヨウ</rt></ruby> / Yi-Yang Li - All Rights Reserved.</small>',
+        footerInnerHtml: '<small>&copy; 2023 - {gitalk_footer-yyyy}{gitalk_footer-divider}{gitalk_footer-info}{gitalk_footer-divider}{gitalk_footer-copy}</small>',
+        localization: {
+            info: {
+                '/en-us/': 'Yi-Yang Li',
+                '/jp/': '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
+                default: '李亦杨'
+            },
+            copy: {
+                '/en-us/': 'All Rights Reserved.',
+                '/jp/': '無断転載を禁じます',
+                default: '版权所有'
+            },
+            divider: {
+                '/en-us/': ' · ',
+                '/jp/': ' ・ ',
+                default: ' · '
+            }
+        },
         gitalkConfig: {
             clientID: '6a54e5946401951488d1',
             clientSecret: '5ca9de120592a9908348d09480cea6917112a4ec',
             repo: 'pikapikapi-blog',
             owner: 'pikapikapikaori',
             admin: ['pikapikapikaori'],
-            // facebook-like distraction free mode
             distractionFreeMode: false,
         }
     },

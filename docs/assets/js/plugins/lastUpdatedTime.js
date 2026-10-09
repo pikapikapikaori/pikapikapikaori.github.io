@@ -2,8 +2,6 @@ import pathNameData from '../config/tocdata.json.js'
 import { protectCodeBlocks } from '../utils/common.js'
 
 function plugin(hook, vm) {
-    const codeMarkup = /(```[\s\S]*?```)/g
-
     hook.beforeEach(function (content) {
         const matched = pathNameData.find(item => item.href === vm.route.path)
         const updated = (matched && matched.editedTime) ? matched.editedTime : '---'

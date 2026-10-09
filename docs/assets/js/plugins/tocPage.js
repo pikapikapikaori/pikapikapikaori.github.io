@@ -13,6 +13,8 @@ let tocPageOptions = {
 
 function plugin(hook, vm) {
 
+    const pluginIdentifier = 'toc'
+
     const tocMarkup = '<!-- toc -->'
 
     const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
@@ -54,7 +56,7 @@ function plugin(hook, vm) {
     }
 
     function renderTocStage1(content, vm) {
-        content = protectCodeBlocks(content, 'toc', 'protect')
+        content = protectCodeBlocks(content, pluginIdentifier, 'protect')
 
         const hasToc = content.includes(tocMarkup)
 
@@ -62,7 +64,7 @@ function plugin(hook, vm) {
             content = content.replace(tocMarkup, tocDiv)
         }
 
-        content = protectCodeBlocks(content, 'toc', 'restore')
+        content = protectCodeBlocks(content, pluginIdentifier, 'restore')
 
         return {
             content,
@@ -162,7 +164,7 @@ function plugin(hook, vm) {
             }
         }
 
-        tocPaginatorInputDiv.innerHTML = '<input class=\'toc-paginator-input-box\' type=\'number\' value=\'' + curPageIndex + '\' min=\'1\' max=\'' + maxPageIndex + '\'></input><span>/</span><span>' + maxPageIndex + '</span>'
+        tocPaginatorInputDiv.innerHTML = `<input class='toc-paginator-input-box' type='number' value='${curPageIndex}' min='1' max='${maxPageIndex}'></input><span>/</span><span>${maxPageIndex}</span>`
 
         let tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
 

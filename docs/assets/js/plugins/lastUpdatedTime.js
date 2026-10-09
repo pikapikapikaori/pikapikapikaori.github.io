@@ -3,14 +3,16 @@ import { protectCodeBlocks } from '../utils/common.js'
 
 function plugin(hook, vm) {
     hook.beforeEach(function (content) {
+        const pluginIdentifier = 'last_updated_code'
+
         const matched = pathNameData.find(item => item.href === vm.route.path)
         const updated = (matched && matched.editedTime) ? matched.editedTime : '---'
 
-        content = protectCodeBlocks(content, 'lastUpdatedCode', 'protect')
+        content = protectCodeBlocks(content, pluginIdentifier, 'protect')
 
         content = content.replace(/{docsify-last-updated}/g, () => updated)
 
-        content = protectCodeBlocks(content, 'lastUpdatedCode', 'restore')
+        content = protectCodeBlocks(content, pluginIdentifier, 'restore')
 
         return content
     })

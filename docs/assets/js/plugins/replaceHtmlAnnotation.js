@@ -11,6 +11,8 @@ let htmlReplaceOptions = {
 }
 
 function plugin(hook, vm) {
+    const pluginIdentifier = 'html_replace'
+    
     const commentReplaceMark = 'annotation:replace'
 
     const icons = {
@@ -20,7 +22,7 @@ function plugin(hook, vm) {
     }
 
     const replacer = new TokenReplacer({
-        prefix: 'html_replace',
+        prefix: pluginIdentifier,
     })
 
     const blockTagConfigMap = new Map()
@@ -73,7 +75,7 @@ function plugin(hook, vm) {
     const commentReplaceMarkup = new RegExp(`<!-- ${commentReplaceMark} (.*?) -->`)
 
     function renderStage1(content) {
-        content = protectCodeBlocks(content, 'htmlReplace', 'protect')
+        content = protectCodeBlocks(content, pluginIdentifier, 'protect')
 
         for (const [tagKey, cfg] of blockTagConfigMap) {
             const startMarker = `<!-- ${tagKey}:start -->`
@@ -116,7 +118,7 @@ function plugin(hook, vm) {
             })
         }
 
-        content = protectCodeBlocks(content, 'htmlReplace', 'restore')
+        content = protectCodeBlocks(content, pluginIdentifier, 'restore')
 
         return content
     }

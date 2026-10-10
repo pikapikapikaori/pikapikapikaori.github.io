@@ -71,3 +71,7 @@
     font-weight: var(--global-font-weight-semibold);
     margin-left: calc(-1 * var(--global-border-strong-width));
 }
+
+.sidebar:has(.search .results-panel.show) .switch-toc-wrap-div {
+    display: none;
+}

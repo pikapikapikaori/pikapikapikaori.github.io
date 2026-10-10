@@ -29,6 +29,11 @@
     border-block: var(--global-border) var(--theme-color);
 }
 
+.search .input-wrap input:focus,
+.search .input-wrap input:hover {
+    box-shadow: none;
+}
+
 .search h2 {
     font-size: 1.0625rem;
 }
@@ -47,4 +52,20 @@
 
 .search .results-panel .matching-post {
     border-color: var(--border-color);
+}
+
+.sidebar>h1.app-name {
+    transition: margin var(--global-transition-duration) ease, opacity var(--global-transition-duration) ease;
+}
+
+.sidebar > h1.app-name.hide {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.sidebar .app-name.hide {
+    display: inherit;
 }

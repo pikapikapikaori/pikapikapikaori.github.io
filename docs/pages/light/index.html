@@ -30,16 +30,17 @@
             basePath: '../../',
             coverpage: false,
             hideSidebar: true,
-            loadNavbar:true,
+            loadNavbar: true,
             subMaxLevel: 2,
             auto2top: true,
 
             alias: {
-                '/.*_navbar\\.md': function (path) {
-                    if (path.startsWith('/pages/light/helpers/')) {
-                        return path;
-                    }
-                    return '/pages/light/helpers/' + path.replace(/^\//, '')
+                '/.*_navbar\\.md$': function (path) {
+                    const locale = [
+                        'en-us',
+                        'jp'
+                    ].find(l => path.includes(l))
+                    return locale ? '/pages/light/helpers/' + locale + '/_navbar.md' : '/pages/light/helpers/_navbar.md'
                 },
                 '/.*About': function (path) {
                     if (path.startsWith('/pages/light/helpers/')) {

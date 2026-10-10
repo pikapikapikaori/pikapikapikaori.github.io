@@ -8,6 +8,16 @@ window.$docsify = {
     auto2top: true,
     themeColor: '#c7a2ec',
 
+    alias: {
+        '/.*_navbar\\.md$': function (path) {
+            const locale = [
+                'en-us',
+                'jp'
+            ].find(l => path.includes(l))
+            return locale ? '/' + locale + '/_navbar.md' : '/_navbar.md'
+        }
+    },
+
     nameLink: {
         '/jp/': '#/jp/',
         '/en-us/': '#/en-us/',

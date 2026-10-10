@@ -90,7 +90,7 @@
     })
 
     window.$docsify = {
-        name: '<h1 class="page-sidebar-title-class">ピカピカピ</h1>',
+        name: 'ピカピカピ',
         repo: '',
         coverpage: i18nLocalePrefixes,
         loadNavbar: true,

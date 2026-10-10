@@ -42,14 +42,20 @@ section.cover img.ignore-view-full-image-img {
 }
 
 /* Sidebar */
-.page-sidebar-title-class {
+.sidebar>h1.app-name {
     font-size: 2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
     font-family: var(--global-sidebar-name-font);
-    color: var(--theme-color);
-    transition-duration: var(--global-transition-duration);
 }
 
-.page-sidebar-title-class:hover {
+.sidebar>h1.app-name a {
+    color: var(--theme-color);
+    transition: color var(--global-transition-duration) ease;
+}
+
+.sidebar>h1.app-name a:hover {
     color: var(--global-theme-color-7);
 }
 

@@ -14,15 +14,6 @@ let widgetsOptions = {
             darkThemeColor: '#c7a2ec'
         },
         {
-            name: 'lavender',
-            light: './style/theme/lavender.css',
-            dark: './style/theme/lavandula.css',
-            lightColor: '#f5f0fa',
-            darkColor: '#1f1830',
-            lightThemeColor: '#cda2ec',
-            darkThemeColor: '#cda2ec'
-        },
-        {
             name: 'kraft',
             light: './style/theme/kraft.css',
             dark: './style/theme/bronze.css',
@@ -30,15 +21,6 @@ let widgetsOptions = {
             darkColor: '#2a1f14',
             lightThemeColor: '#ecc7a2',
             darkThemeColor: '#ecc7a2'
-        },
-        {
-            name: 'matcha',
-            light: './style/theme/matcha.css',
-            dark: './style/theme/library.css',
-            lightColor: '#e3efd1',
-            darkColor: '#1e3328',
-            lightThemeColor: '#c7eca2',
-            darkThemeColor: '#c7eca2'
         },
         {
             name: 'kirby',
@@ -55,15 +37,6 @@ let widgetsOptions = {
             dark: './style/theme/grid.css',
             lightColor: '#fbfbf5',
             darkColor: '#1a2028',
-            lightThemeColor: '#ecc7a2',
-            darkThemeColor: '#a2c7ec'
-        },
-        {
-            name: 'typography',
-            light: './style/theme/typography.css',
-            dark: './style/theme/dot.css',
-            lightColor: '#fafaf5',
-            darkColor: '#1e2128',
             lightThemeColor: '#ecc7a2',
             darkThemeColor: '#a2c7ec'
         }

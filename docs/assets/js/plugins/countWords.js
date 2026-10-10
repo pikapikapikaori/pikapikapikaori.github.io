@@ -1,4 +1,5 @@
 import { calLocalized } from '../utils/localization.js'
+import { countText } from '../utils/common.js'
 
 let countWordsOptions = {
     countable: true,
@@ -17,14 +18,12 @@ function plugin(hook, vm) {
     if (!countWordsOptions.countable) {
         return
     }
-    let wordsCount
+    let wordsCount, roughTime
 
     hook.beforeEach(function (content) {
-        // Match regex every time you start parsing .md
-        const matches = content.match(
-            /([\u0800-\u4e00]+?|[\u4e00-\u9fa5]+?|[a-zA-Z0-9]+)/g
-        )
-        wordsCount = matches ? matches.length : 0
+        const result = countText(content)
+        wordsCount = result.total.count
+        roughTime = Math.round(result.total.time)
         return content
     })
     hook.doneEach(function () {
@@ -32,7 +31,7 @@ function plugin(hook, vm) {
 
         // Support localization
         let str = wordsCount + ' ' + tempLocalization.words
-        let readTime = Math.ceil(wordsCount / 400) + ' ' + tempLocalization.minute
+        let readTime = roughTime + ' ' + tempLocalization.minute
 
         document.getElementById('count-words-block-span').innerText = str.concat(' | ').concat(countWordsOptions.isExpected ? readTime : '')
     })

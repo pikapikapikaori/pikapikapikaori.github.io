@@ -22,7 +22,7 @@ function plugin(hook, vm) {
     hook.beforeEach(function (content) {
         const result = countText(content)
         wordsCount = result.total.count
-        roughTime = Math.round(result.total.time)
+        roughTime = Math.ceil(result.total.time)
         return content
     })
     hook.doneEach(function () {

@@ -106,8 +106,18 @@ html .markdown-section>h3 {
 html .markdown-section table,
 html .markdown-section pre,
 html .markdown-section blockquote,
-html .markdown-section p.tip {
+html .markdown-section p.tip,
+html .markdown-section img:not(.emoji),
+html .markdown-section iframe,
+html .markdown-section video {
     break-inside: avoid
+}
+
+html .markdown-section p:has(> img:only-child),
+html .markdown-section p:has(> a:only-child > img:only-child) {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
 }
 
 html .markdown-section h1 {
@@ -227,4 +237,28 @@ html .site-footer {
     color: #111;
     text-decoration-color: #e2001a;
     text-decoration-thickness: 2px;
+}
+
+html .markdown-section > .multi-images-container-section,
+html .markdown-section > .toc-page-div,
+html .markdown-section > .toc-paginator-div,
+html .markdown-section > .docsify-pagination-container,
+html .markdown-section > .docsify-example-panels,
+html .markdown-section > .docsify-tabs {
+    column-span: all;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+}
+
+html .markdown-section > .multi-images-container-section,
+html .markdown-section > .docsify-example-panels,
+html .markdown-section > .docsify-tabs {
+    margin: 3rem 0 1.2rem;
+    padding-top: 1rem;
+    border-top: 3px solid #111;
+}
+
+.markdown-section .toc-page-div {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }

@@ -57,7 +57,7 @@
             nameLink: '#/'
         }
     }
-    
+
     // 全部 locale（含默认），顺序即 i18nTexts 的 key 顺序
     const i18nAllLocales = Object.keys(i18nTexts)
 
@@ -224,42 +224,24 @@
             topOffset: 500,
             themes: [
                 {
-                name: 'card',
-                light: './assets/css/theme/exper/card.css',
-                dark: './assets/css/theme/exper/card.css',
-                lightColor: '#100e17',
-                darkColor: '#100e17',
-                lightThemeColor: '#c7a2ec',
-                darkThemeColor: '#c7a2ec'
-            },
-            {
-                name: 'brutal',
-                light: './assets/css/theme/exper/brutal.css',
-                dark: './assets/css/theme/exper/brutal.css',
-                lightColor: '#100e17',
-                darkColor: '#100e17',
-                lightThemeColor: '#c7a2ec',
-                darkThemeColor: '#c7a2ec'
-            },
-            {
-                name: 'editorial',
-                light: './assets/css/theme/exper/editorial.css',
-                dark: './assets/css/theme/exper/editorial.css',
-                lightColor: '#100e17',
-                darkColor: '#100e17',
-                lightThemeColor: '#c7a2ec',
-                darkThemeColor: '#c7a2ec'
-            },
-            {
-                name: 'swiss',
-                light: './assets/css/theme/exper/swiss.css',
-                dark: './assets/css/theme/exper/swiss.css',
-                lightColor: '#100e17',
-                darkColor: '#100e17',
-                lightThemeColor: '#c7a2ec',
-                darkThemeColor: '#c7a2ec'
-            },
-            {
+                    name: 'swiss',
+                    light: './assets/css/theme/exper/swiss.css',
+                    dark: './assets/css/theme/exper/swiss.css',
+                    lightColor: '#100e17',
+                    darkColor: '#100e17',
+                    lightThemeColor: '#c7a2ec',
+                    darkThemeColor: '#c7a2ec'
+                },
+                {
+                    name: 'card',
+                    light: './assets/css/theme/exper/card.css',
+                    dark: './assets/css/theme/exper/card.css',
+                    lightColor: '#100e17',
+                    darkColor: '#100e17',
+                    lightThemeColor: '#c7a2ec',
+                    darkThemeColor: '#c7a2ec'
+                },
+                {
                     name: 'default',
                     light: './assets/css/theme/vue.css',
                     dark: './assets/css/theme/dark.css',
@@ -376,15 +358,15 @@
                     lightThemeColor: '#d3a2ec',
                     darkThemeColor: '#a2d3ec'
                 },
-            {
-                name: 'haunted',
-                light: './assets/css/theme/ghost.css',
-                dark: './assets/css/theme/haunted.css',
-                lightColor: '#faf8fd',
-                darkColor: '#100e17',
-                lightThemeColor: '#ecc1a2',
-                darkThemeColor: '#ecc1a2'
-            },
+                {
+                    name: 'haunted',
+                    light: './assets/css/theme/ghost.css',
+                    dark: './assets/css/theme/haunted.css',
+                    lightColor: '#faf8fd',
+                    darkColor: '#100e17',
+                    lightThemeColor: '#ecc1a2',
+                    darkThemeColor: '#ecc1a2'
+                },
             ]
         },
 

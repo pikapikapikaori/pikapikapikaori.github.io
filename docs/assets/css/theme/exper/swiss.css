@@ -110,11 +110,17 @@ html .markdown-section p.tip,
 html .markdown-section img:not(.emoji),
 html .markdown-section iframe,
 html .markdown-section video {
-    break-inside: avoid
+    break-inside: avoid;
+    max-width: 100%;
+    width: 100% !important; 
+    height: auto !important; 
 }
 
+
 html .markdown-section p:has(> img:only-child),
-html .markdown-section p:has(> a:only-child > img:only-child) {
+html .markdown-section p:has(> a:only-child > img:only-child),
+html .markdown-section p:has(> iframe:only-child),
+html .markdown-section p:has(> video:only-child) {
     break-inside: avoid;
     page-break-inside: avoid;
     -webkit-column-break-inside: avoid;

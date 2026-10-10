@@ -13,7 +13,6 @@ let countWordsOptions = {
     isExpected: true,
 }
 
-// Docsify plugin functions
 function plugin(hook, vm) {
     if (!countWordsOptions.countable) {
         return
@@ -29,14 +28,12 @@ function plugin(hook, vm) {
     hook.doneEach(function () {
         let tempLocalization = calLocalized(countWordsOptions.localization, undefined)
 
-        // Support localization
         let str = wordsCount + ' ' + tempLocalization.words
         let readTime = roughTime + ' ' + tempLocalization.minute
 
         document.getElementById('count-words-block-span').innerText = str.concat(' | ').concat(countWordsOptions.isExpected ? readTime : '')
     })
     hook.afterEach(function (html, next) {
-        // add html string
         next(
             `
         ${countWordsOptions.position === 'bottom' ? html : ''}
@@ -53,7 +50,6 @@ function plugin(hook, vm) {
     })
 }
 
-// Docsify plugin options
 window.$docsify['countWords'] = Object.assign(
     countWordsOptions,
     window.$docsify['countWords']

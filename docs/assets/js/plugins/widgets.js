@@ -1,4 +1,3 @@
-// default values
 let widgetsOptions = {
     useSwitchMode: true,
     top: 0,
@@ -43,7 +42,6 @@ let widgetsOptions = {
     ]
 }
 
-// Docsify plugin functions
 function plugin(hook, vm) {
     if (!widgetsOptions.useSwitchMode) {
         return
@@ -696,7 +694,6 @@ function plugin(hook, vm) {
     })
 }
 
-// Docsify plugin options
 window.$docsify['widgets'] = Object.assign(
     widgetsOptions,
     window.$docsify['widgets']

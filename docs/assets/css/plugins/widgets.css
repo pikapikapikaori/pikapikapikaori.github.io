@@ -387,6 +387,16 @@
     background-size: var(--widgets-preset-svg-size) var(--widgets-preset-svg-size);
 }
 
+.theme-picker-preset-color-btn-div[data-theme="haunted"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
+    background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .10), transparent 70%), radial-gradient(circle, rgba(124, 71, 201, .13) 1px, transparent 1.5px);
+    background-size: 100% 100%, var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
+}
+
+.theme-picker-preset-color-btn-div[data-theme="haunted"] .theme-picker-pattern-layer-dark {
+    background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%), radial-gradient(circle, rgba(255, 170, 80, .10) 1px, transparent 1.5px);
+    background-size: 100% 100%, var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
+}
+
 /* 页面主题色：预设，兜底 */
 .color-picker-preset-color-btn-div[data-hue="0"] {
     --widgets-hsl-h: 0deg;

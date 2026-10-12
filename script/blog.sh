@@ -34,6 +34,9 @@ PY_REQUIREMENTS="$PYTHON_DIR/requirements.txt"
 # ---------- Feed 生成脚本（必须在 docs/ 下运行）----------
 FEED_SCRIPT="$SCRIPTS_DIR/shell/feed.sh"
 
+# ---------- Sitemap 生成脚本（必须在 docs/ 下运行）----------
+SITEMAP_SCRIPT="$SCRIPTS_DIR/shell/sitemap.sh"
+
 # ---------- rclone 配置 ----------
 RCLONE_SRC="docs/"
 RCLONE_DST="r2:pikapikapi-blog/"
@@ -197,6 +200,13 @@ cmd_feed() {
     confirm_run "生成 Feed feed" bash -c "$inner"
 }
 
+cmd_sitemap() {
+    require_file "$SITEMAP_SCRIPT"
+    local inner
+    printf -v inner 'exec bash ./script/shell/sitemap.sh'
+    confirm_run "生成 Sitemap sitemap" bash -c "$inner"
+}
+
 # ---------- Python 依赖管理 ----------
 
 cmd_py_freeze() {
@@ -344,6 +354,8 @@ cmd_help() {
 
     feed                         生成 Feed（运行 script/shell/feed.sh）
 
+    sitemap                      生成 Sitemap（运行 script/shell/sitemap.sh）
+
 ====================  Python 脚本辅助  ====================
 
     py-freeze                   从虚拟环境生成 script/python/requirements.txt
@@ -387,6 +399,7 @@ case "${1:-help}" in
     unicode-gap)        shift; cmd_unicode_gap "$@" ;;
     font-range)         shift; cmd_font_range "$@" ;;
     feed)                cmd_feed ;;
+    sitemap)             cmd_sitemap ;;
     py-freeze)          cmd_py_freeze ;;
     py-install)         cmd_py_install ;;
     release)            shift; cmd_release "$@" ;;

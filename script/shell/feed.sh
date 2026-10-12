@@ -41,8 +41,8 @@ newest_files=$(
         cut -d " " -f2-
 )
 
-echo "Constructing RSS seed content..."
-echo "Listing articles to be included in the RSS seed:"
+echo "Constructing feed seed content..."
+echo "Listing articles to be included in the feed seed:"
 items=""
 for file in ${newest_files[@]}; do
     echo $file
@@ -59,7 +59,7 @@ for file in ${newest_files[@]}; do
   <entry>
     <title><![CDATA[${title:2}]]></title>
     <link href=\"$link\"/>
-    <id>\"$link\"</id>
+    <id>$link</id>
     <content type=\"html\"><![CDATA[$newhtml]]></content>
     <updated>$date</updated>
   </entry>
@@ -70,16 +70,16 @@ done
 
 feed_updated=$(date -u +"%Y-%m-%dT%H:%M:%SZ")  
 
-rss_content="<feed xmlns=\"http://www.w3.org/2005/Atom\">
+feed_content="<feed xmlns=\"http://www.w3.org/2005/Atom\">
   <title>$website_title</title>
   <author><name>$author_name</name></author>
   <link href=\"$website_link\"/>
   <link href=\"$website_link/$feed\" rel=\"self\"/>
-  <id>\"$website_link\"</id>
+  <id>$website_link</id>
   <subtitle>$description</subtitle>
   <updated>$feed_updated</updated>
   $items
 </feed>"
 
-echo "Writing content to RSS seed..."
-echo "$rss_content" >$base_path$feed
+echo "Writing content to feed seed..."
+echo "$feed_content" >$base_path$feed

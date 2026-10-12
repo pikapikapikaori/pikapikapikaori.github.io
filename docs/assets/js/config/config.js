@@ -365,7 +365,7 @@
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
-                rss: './assets/resources/meta/feed.atom'
+                feed: './assets/resources/meta/feed.atom'
             },
             tags: [
                 /* Brief Comments */
@@ -531,7 +531,7 @@
                 {
                     type: 'entire',
                     tag: 'about-page-links',
-                    entireHtml: '<div class="main-page-about-me-links"><a href="{html_replace-link_github}" target="_blank" rel="noopener">{html_replace-icon_github}</a><a href="{html_replace-link_email}" target="_blank" rel="noopener">{html_replace-icon_email}</a><a href="{html_replace-link_rss}" target="_blank" rel="noopener">{html_replace-icon_rss}</a></div>'
+                    entireHtml: '<div class="main-page-about-me-links"><a href="{html_replace-link_github}" target="_blank" rel="noopener">{html_replace-icon_github}</a><a href="{html_replace-link_email}" target="_blank" rel="noopener">{html_replace-icon_email}</a><a href="{html_replace-link_feed}" target="_blank" rel="noopener">{html_replace-icon_feed}</a></div>'
                 },
 
                 /* Multiple Image Container */

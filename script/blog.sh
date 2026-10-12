@@ -31,8 +31,8 @@ UNICODE_GAP="$PYTHON_DIR/unicode_gap.py"
 FONT_RANGE="$PYTHON_DIR/font_range.py"
 PY_REQUIREMENTS="$PYTHON_DIR/requirements.txt"
 
-# ---------- RSS 生成脚本（必须在 docs/ 下运行）----------
-RSS_SCRIPT="$SCRIPTS_DIR/shell/feed.sh"
+# ---------- Feed 生成脚本（必须在 docs/ 下运行）----------
+FEED_SCRIPT="$SCRIPTS_DIR/shell/feed.sh"
 
 # ---------- rclone 配置 ----------
 RCLONE_SRC="docs/"
@@ -190,11 +190,11 @@ cmd_font_range() {
     confirm_run "提取字体 unicode-range" python3 "$FONT_RANGE" "$@"
 }
 
-cmd_rss() {
-    require_file "$RSS_SCRIPT"
+cmd_feed() {
+    require_file "$FEED_SCRIPT"
     local inner
     printf -v inner 'exec bash ./script/shell/feed.sh'
-    confirm_run "生成 RSS feed" bash -c "$inner"
+    confirm_run "生成 Feed feed" bash -c "$inner"
 }
 
 # ---------- Python 依赖管理 ----------
@@ -342,7 +342,7 @@ cmd_help() {
 
 ====================  网站内容相关  ====================
 
-    rss                         生成 RSS feed（运行 script/shell/feed.sh）
+    feed                         生成 Feed（运行 script/shell/feed.sh）
 
 ====================  Python 脚本辅助  ====================
 
@@ -386,7 +386,7 @@ case "${1:-help}" in
     build-chunks)       shift; cmd_build_chunks "$@" ;;
     unicode-gap)        shift; cmd_unicode_gap "$@" ;;
     font-range)         shift; cmd_font_range "$@" ;;
-    rss)                cmd_rss ;;
+    feed)                cmd_feed ;;
     py-freeze)          cmd_py_freeze ;;
     py-install)         cmd_py_install ;;
     release)            shift; cmd_release "$@" ;;

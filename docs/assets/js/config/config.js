@@ -57,7 +57,7 @@
             nameLink: '#/'
         }
     }
-    
+
     // 全部 locale（含默认），顺序即 i18nTexts 的 key 顺序
     const i18nAllLocales = Object.keys(i18nTexts)
 
@@ -365,7 +365,7 @@
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
-                rss: './assets/resources/meta/pikapikapi-blog-rss.atom'
+                rss: './assets/resources/meta/feed.atom'
             },
             tags: [
                 /* Brief Comments */

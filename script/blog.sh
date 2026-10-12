@@ -32,7 +32,7 @@ FONT_RANGE="$PYTHON_DIR/font_range.py"
 PY_REQUIREMENTS="$PYTHON_DIR/requirements.txt"
 
 # ---------- RSS 生成脚本（必须在 docs/ 下运行）----------
-RSS_SCRIPT="$SCRIPTS_DIR/shell/rss.sh"
+RSS_SCRIPT="$SCRIPTS_DIR/shell/feed.sh"
 
 # ---------- rclone 配置 ----------
 RCLONE_SRC="docs/"
@@ -193,7 +193,7 @@ cmd_font_range() {
 cmd_rss() {
     require_file "$RSS_SCRIPT"
     local inner
-    printf -v inner 'exec bash ./script/shell/rss.sh'
+    printf -v inner 'exec bash ./script/shell/feed.sh'
     confirm_run "生成 RSS feed" bash -c "$inner"
 }
 
@@ -342,7 +342,7 @@ cmd_help() {
 
 ====================  网站内容相关  ====================
 
-    rss                         生成 RSS feed（运行 script/shell/rss.sh）
+    rss                         生成 RSS feed（运行 script/shell/feed.sh）
 
 ====================  Python 脚本辅助  ====================
 

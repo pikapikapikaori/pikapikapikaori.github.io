@@ -2,7 +2,7 @@
 
 # ============================================================
 base_path="docs/"
-feed="assets/resources/meta/pikapikapi-blog-rss.atom"
+feed="assets/resources/meta/feed.atom"
 website_title="ピカピカピ"
 website_link="https://pikapikapi.com"
 description="Don't worry, be happy."

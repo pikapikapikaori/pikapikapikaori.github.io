@@ -5,14 +5,14 @@ let htmlReplaceOptions = {
     links: {
         github: 'https://github.com/pikapikapikaori/',
         email: 'mailto:Lyy8759@outlook.com',
-        rss: './assets/resources/meta/pikapikapi-blog-rss.atom'
+        rss: './assets/resources/meta/feed.atom'
     },
     tags: []
 }
 
 function plugin(hook, vm) {
     const pluginIdentifier = 'html_replace'
-    
+
     const commentReplaceMark = 'annotation:replace'
 
     const icons = {

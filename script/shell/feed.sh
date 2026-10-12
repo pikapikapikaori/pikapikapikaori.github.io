@@ -9,8 +9,16 @@ description="Don't worry, be happy."
 author_name="李亦楊"
 # Path based on directory: docs/
 git_pathspecs=(
+    'docs/*.md'
     'docs/**/*.md'
+    ':!:docs/_*.md'
     ':!:docs/**/_*.md'
+    ':!:docs/README.md'
+    ':!:docs/About.md'
+    ':!:docs/Personal*.md'
+    ':!:docs/BriefComments.md'
+    ':!:docs/Beginning.md'
+    ':!:docs/Sites.md'
     ':!:docs/**/README.md'
     ':!:docs/**/About.md'
     ':!:docs/**/Personal*.md'
@@ -19,6 +27,8 @@ git_pathspecs=(
     ':!:docs/**/Sites.md'
     ':!:docs/pages/**/*.md'
     ':!:docs/assets/**/*.md'
+    ':!:docs/pages/*.md'
+    ':!:docs/assets/*.md'
 )
 # ============================================================
 

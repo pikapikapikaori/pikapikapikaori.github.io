@@ -5,6 +5,7 @@ on:
     branches-ignore:
       - master
     paths:
+      - "docs/*.md"
       - "docs/**/*.md"
       - "script/shell/feed.sh"
       - "!docs/assets/**"

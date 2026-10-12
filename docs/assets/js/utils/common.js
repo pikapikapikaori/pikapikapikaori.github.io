@@ -55,6 +55,18 @@ export function protectCodeBlocks(content, prefix = 'codeblock', mode = 'protect
     return content
 }
 
+/**
+ * 统计各脚本词/字数，并估算阅读时间（分钟）。不修改 content。
+ *
+ * @param {string} content 只读原文
+ * @param {{ speeds?: Record<string, number> }} [options] 可覆盖默认速度（单位/分钟）
+ * @returns {{
+ *   total: { count: number, time: number },  // 总和
+ *   word:  { count: number, time: number },  // 词部分小计
+ *   char:  { count: number, time: number },  // 字/假名部分小计
+ *   detail: Record<string, { count: number, time: number, speed: number, type: 'word' | 'char' }>
+ * }}
+ */
 const COUNT_RULES = [
     // —— 按“词”统计 ——
     { name: 'latin',      type: 'word', pattern: String.raw`\p{Script_Extensions=Latin}+`,      speed: 250 },
@@ -71,18 +83,6 @@ const COUNT_RULES = [
         speed: 400 }
 ]
 
-/**
- * 统计各脚本词/字数，并估算阅读时间（分钟）。不修改 content。
- *
- * @param {string} content 只读原文
- * @param {{ speeds?: Record<string, number> }} [options] 可覆盖默认速度（单位/分钟）
- * @returns {{
- *   total: { count: number, time: number },  // 总和
- *   word:  { count: number, time: number },  // 词部分小计
- *   char:  { count: number, time: number },  // 字/假名部分小计
- *   detail: Record<string, { count: number, time: number, speed: number, type: 'word' | 'char' }>
- * }}
- */
 export function countText(content, options = {}) {
     const src = (typeof content === 'string' ? content : String(content ?? ''))
         .normalize('NFC')

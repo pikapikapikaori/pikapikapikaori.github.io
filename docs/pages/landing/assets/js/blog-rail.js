@@ -1,0 +1,119 @@
+/* ========================================================
+   blog-rail.js —— 博客：横向滚动 rail
+   ======================================================== */
+(function () {
+    'use strict'
+
+    var App = window.App = window.App || {}
+    var BlogRail = App.blogRail = {}
+    var U = App.utils
+    var Pin = App.pin
+    var F = App.feed
+
+    var REDUCE = U.prefersReducedMotion()
+
+    function renderPost(p) {
+        var esc = U.escapeHtml
+        var img = p.cover
+            ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy" ' +
+            'decoding="async" referrerpolicy="no-referrer" ' +
+            'onerror="this.remove()">'
+            : ''
+
+        return '<article class="post-card">' +
+            '<a href="' + esc(p.link) + '">' +
+            '<div class="post-cover">' + img + '</div>' +
+            '<div class="post-body">' +
+            (p.date ? '<time>' + esc(p.date) + '</time>' : '') +
+            '<h3>' + esc(p.title) + '</h3>' +
+            '<p>' + esc(p.excerpt) + (p.excerpt ? '…' : '') + '</p>' +
+            '</div>' +
+            '</a>' +
+            '</article>'
+    }
+
+    BlogRail.init = function (rail) {
+        var section = rail.closest('.shelf')
+        var wrap = section.querySelector('.rail-wrap')
+        var sticky = section.querySelector('.shelf-sticky')
+        var bar = section.querySelector('.rail-progress > span')
+        var btns = section.querySelectorAll('.rail-btn')
+
+        var maxX = 0
+
+        function sizeFn() {
+            maxX = Math.max(0, rail.scrollWidth - wrap.clientWidth)
+            var on = maxX > 1
+            section.classList.toggle('pin-on', on)
+            return {
+                total: on ? maxX : 0,
+                height: sticky.offsetHeight + (on ? maxX : 0)
+            }
+        }
+
+        function apply(p) {
+            var x = p * maxX
+            rail.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0)'
+            if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'
+            section.classList.toggle('at-start', p <= 0.002)
+            section.classList.toggle('at-end', p >= 0.998)
+            section.dataset.p = p
+        }
+
+        var pin = Pin.make(section, apply, sizeFn)
+
+        /* 箭头：滚页面 = 滚卡片 */
+        function cardStep() {
+            var card = rail.firstElementChild
+            if (!card) return 300
+            var gap = parseFloat(getComputedStyle(rail).columnGap) || 16
+            return card.getBoundingClientRect().width + gap
+        }
+
+        btns.forEach(function (b) {
+            b.addEventListener('click', function () {
+                window.scrollBy({
+                    top: Number(b.dataset.dir) * cardStep(),
+                    behavior: 'smooth'
+                })
+            })
+        })
+
+        /* 键盘焦点落到视口外的卡片时，滚页面把它带进来 */
+        rail.addEventListener('focusin', function (e) {
+            if (maxX <= 1) return
+            var card = e.target.closest('.post-card')
+            if (!card) return
+
+            var pad = parseFloat(getComputedStyle(rail).paddingLeft) || 0
+            var left = card.offsetLeft - pad
+            var right = left + card.offsetWidth
+            var viewR = wrap.clientWidth
+
+            var np = null
+            if (left < 24) np = Math.max(0, (left - 24) / maxX)
+            else if (right > viewR - 24) np = Math.min(1, (right + 24 - viewR) / maxX)
+
+            if (np !== null &&
+                Math.abs(np - (parseFloat(section.dataset.p) || 0)) > 0.01) {
+                window.scrollTo({
+                    top: section.offsetTop + np * maxX,
+                    behavior: REDUCE ? 'auto' : 'smooth'
+                })
+            }
+        })
+
+        if (window.ResizeObserver) {
+            new ResizeObserver(function () { pin.scheduleMeasure() }).observe(wrap)
+        }
+
+        return pin
+    }
+
+    BlogRail.load = function (rail) {
+        return F.loadPosts().then(function (posts) {
+            rail.innerHTML = posts.map(renderPost).join('')
+            BlogRail.init(rail)
+        })
+    }
+})()

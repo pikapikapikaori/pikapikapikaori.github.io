@@ -1,0 +1,545 @@
+/* ========================================================
+   layout.css —— 页面骨架：颗粒、进度、顶栏、hero、引用、
+                 shelf 公共结构、about、footer、reveal
+   ======================================================== */
+
+/* ---------- 纸张颗粒 ---------- */
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    pointer-events: none;
+    opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+}
+
+html[data-theme="dark"] .grain {
+    mix-blend-mode: screen;
+    opacity: .05;
+}
+
+/* ---------- 顶部页面进度条 ---------- */
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 100;
+    background: transparent;
+}
+
+.progress span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: .9rem var(--pad);
+    backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s;
+}
+
+.topbar.solid {
+    border-bottom-color: var(--line);
+}
+
+.brand {
+    font-family: var(--font-en);
+    font-size: 1.05rem;
+    letter-spacing: .06em;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.topnav {
+    display: flex;
+    gap: 1.4rem;
+    margin-left: auto;
+}
+
+.topnav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .82rem;
+    font-family: var(--font-ui);
+    letter-spacing: .04em;
+    position: relative;
+    transition: color .3s;
+}
+
+.topnav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform .4s var(--ease);
+}
+
+.topnav a:hover {
+    color: var(--ink);
+}
+
+.topnav a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- 工具栏（语言 + 主题） ---------- */
+.tools {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.lang {
+    position: relative;
+}
+
+.lang select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .32rem 1.9rem .32rem .85rem;
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    letter-spacing: .03em;
+    cursor: pointer;
+    outline: none;
+    transition: border-color .3s;
+}
+
+.lang select:hover {
+    border-color: var(--accent);
+}
+
+.lang select option {
+    background: var(--bg);
+    color: var(--ink);
+}
+
+.lang svg {
+    position: absolute;
+    right: .7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 9px;
+    height: 9px;
+    pointer-events: none;
+    stroke: var(--muted);
+    fill: none;
+    stroke-width: 1.6;
+}
+
+.theme-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    font-size: .85rem;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    transition: border-color .3s, transform .4s var(--ease);
+}
+
+.theme-btn:hover {
+    border-color: var(--accent);
+    transform: rotate(180deg);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7rem var(--pad) 4rem;
+    position: relative;
+}
+
+.hero>* {
+    opacity: 0;
+    transform: translateY(26px);
+    animation: rise 1s var(--ease) forwards;
+}
+
+.hero>*:nth-child(1) {
+    animation-delay: .15s;
+}
+
+.hero>*:nth-child(2) {
+    animation-delay: .30s;
+}
+
+.hero>*:nth-child(3) {
+    animation-delay: .45s;
+}
+
+.hero>*:nth-child(4) {
+    animation-delay: .60s;
+}
+
+.hero>*:nth-child(5) {
+    animation-delay: .80s;
+}
+
+@keyframes rise {
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.hero-kicker {
+    font-family: var(--font-ui);
+    font-size: .75rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+}
+
+.hero-name {
+    font-family: var(--font-en);
+    font-weight: 400;
+    font-size: clamp(3.2rem, 13vw, 9.5rem);
+    line-height: .95;
+    letter-spacing: -.02em;
+    margin-bottom: 1.5rem;
+}
+
+.hero-tagline {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.65rem);
+    max-width: 24em;
+    opacity: .88;
+    text-wrap: balance;
+}
+
+.hero-meta {
+    margin-top: 2.2rem;
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    color: var(--muted);
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: var(--pad);
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: var(--font-ui);
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.scroll-hint i {
+    display: block;
+    width: 1px;
+    height: 34px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-hint i::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    animation: drop 2.2s var(--ease) infinite;
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    60%,
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* ---------- 引用 ---------- */
+.quote {
+    padding: clamp(5rem, 14vw, 10rem) var(--pad);
+    border-top: 1px solid var(--line);
+    background: var(--bg-soft);
+    transition: background .5s var(--ease);
+}
+
+blockquote {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+}
+
+blockquote::before {
+    content: "\201C";
+    position: absolute;
+    left: -.55em;
+    top: -.35em;
+    font-family: var(--font-en);
+    font-size: 5rem;
+    color: var(--accent);
+    opacity: .22;
+    line-height: 1;
+}
+
+blockquote p {
+    font-size: clamp(1.25rem, 3.2vw, 2rem);
+    line-height: 2;
+    text-wrap: balance;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 1.8rem;
+    font-style: normal;
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    color: var(--muted);
+}
+
+blockquote cite::before {
+    content: "\2014 ";
+}
+
+/* ---------- Shelf 公共结构 ---------- */
+.shelf {
+    position: relative;
+    border-top: 1px solid var(--line);
+}
+
+.shelf-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5rem 0 3rem;
+    overflow: hidden;
+    background: var(--bg);
+    transition: background .5s var(--ease);
+}
+
+.shelf-head {
+    padding: 0 var(--pad);
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-bottom: 1.4rem;
+}
+
+.shelf-head h2 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.shelf-head .hint {
+    font-family: var(--font-ui);
+    font-size: .7rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .35rem;
+}
+
+.rail-btns {
+    margin-left: auto;
+    display: flex;
+    gap: .5rem;
+}
+
+.shelf:not(.pin-on) .rail-btns {
+    display: none;
+}
+
+.rail-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: .85rem;
+    line-height: 1;
+    transition: border-color .3s, color .3s;
+}
+
+.rail-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.rail-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.rail-progress {
+    margin: 1.2rem var(--pad) 0;
+    height: 1px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+.shelf.pin-on .rail-progress {
+    opacity: 1;
+}
+
+.rail-progress>span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+}
+
+/* ---------- About ---------- */
+.about {
+    padding: clamp(4rem, 10vw, 8rem) var(--pad);
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: clamp(1.5rem, 5vw, 5rem);
+}
+
+.about h2 {
+    font-family: var(--font-ui);
+    font-size: .75rem;
+    font-weight: 400;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.about-body p+p {
+    margin-top: 1.1rem;
+}
+
+.about-now {
+    margin-top: 2rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    font-size: .92rem;
+    color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+footer {
+    padding: 3rem var(--pad) 3.5rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 2rem;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    color: var(--muted);
+}
+
+footer a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .3s;
+}
+
+footer a:hover {
+    color: var(--accent);
+}
+
+footer .spacer {
+    margin-left: auto;
+}
+
+/* ---------- Reveal ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+    .topnav {
+        display: none;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 6rem;
+    }
+
+    blockquote::before {
+        display: none;
+    }
+
+    .shelf-sticky {
+        padding: 4rem 0 2rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .hero>* {
+        opacity: 1;
+        transform: none;
+    }
+}

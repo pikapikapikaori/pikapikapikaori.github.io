@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>ピカピカピ</title>
+    <meta name="description" content="Don't worry, be happy.">
+    <meta name="theme-color" content="#f7f3ea" id="themeColorMeta">
+
+    <link rel="icon" type="image/x-icon" href="https://pikapikapi.com/assets/resources/logo/favicon.ico">
+    <link rel="apple-touch-icon" href="https://pikapikapi.com/assets/resources/logo/logo-180.png">
+    <link rel="manifest" href="https://pikapikapi.com/assets/resources/meta/manifest.json">
+    <link rel="alternate" type="application/atom+xml" title="ピカピカピ"
+        href="https://pikapikapi.com/assets/resources/meta/pikapikapi-blog-rss.atom">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ピカピカピ">
+    <meta property="og:title" content="ピカピカピ">
+    <meta property="og:url" content="https://pikapikapi.com/">
+    <meta property="og:image" content="https://pikapikapi.com/assets/resources/logo/og.jpg">
+    <meta property="og:image:alt" content="ピカピカピ">
+    <meta property="og:description" content="Don't worry, be happy.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!--
+  字体从 CDN 引入。如果要完全无外部依赖，把这两个 <link> 换成本地字体文件，
+  或者删除它们依赖系统回退（Goudy 会退到 Georgia，楷体会退到系统 Kaiti）。
+-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
+
+    <link rel="stylesheet" href="./assets/css/tokens.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
+    <link rel="stylesheet" href="./assets/css/blog.css">
+    <link rel="stylesheet" href="./assets/css/photo.css">
+</head>
+
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <header class="topbar" id="topbar">
+        <a class="brand" href="#top">pikapikapi</a>
+        <nav class="topnav">
+            <a href="#blog" data-i18n="nav.blog">博客</a>
+            <a href="#photo" data-i18n="nav.photo">摄影</a>
+            <a href="#about" data-i18n="nav.about">关于</a>
+        </nav>
+        <div class="tools">
+            <div class="lang">
+                <select id="langSelect" aria-label="Language">
+                    <option value="zh-Hans">中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                </select>
+                <svg viewBox="0 0 10 10" aria-hidden="true">
+                    <path d="M1 3.5 5 7l4-3.5" />
+                </svg>
+            </div>
+            <button class="theme-btn" id="themeBtn" aria-label="切换主题">◐</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="top">
+            <p class="hero-kicker">李亦楊 · ピカピカピ</p>
+            <h1 class="hero-name">pikapikapi</h1>
+            <p class="hero-tagline">Don't worry, be happy.</p>
+            <p class="hero-meta">
+                <span data-i18n="hero.location">上海</span> ·
+                <span id="clock">--:--</span>
+            </p>
+            <a class="scroll-hint" href="#quote">
+                <i aria-hidden="true"></i>
+                <span data-i18n="hero.scroll">向下</span>
+            </a>
+        </section>
+
+        <section class="quote reveal" id="quote">
+            <blockquote>
+                <p data-i18n="quote.text">露の世は　露の世ながら　さりながら。</p>
+                <cite data-i18n="quote.author">小林一茶</cite>
+            </blockquote>
+        </section>
+
+        <!-- 博客：横向 rail -->
+        <section class="shelf" id="blog">
+            <div class="shelf-sticky">
+                <div class="shelf-head reveal">
+                    <div>
+                        <h2 data-i18n="shelf.blog.title">博客</h2>
+                        <p class="hint" data-i18n="shelf.blog.hint">继续滚动 · 浏览</p>
+                    </div>
+                    <div class="rail-btns">
+                        <button class="rail-btn" data-dir="-1" data-i18n-attr="aria-label:shelf.prev"
+                            aria-label="上一组">←</button>
+                        <button class="rail-btn" data-dir="1" data-i18n-attr="aria-label:shelf.next"
+                            aria-label="下一组">→</button>
+                    </div>
+                </div>
+                <div class="rail-wrap">
+                    <div class="rail" id="blogRail" aria-label="博客文章"></div>
+                </div>
+                <div class="rail-progress"><span></span></div>
+            </div>
+        </section>
+
+        <!-- 摄影：三段式 stack -->
+        <section class="shelf shelf-photo" id="photo">
+            <div class="shelf-sticky">
+                <div class="photo-stage">
+                    <div class="photo-stack" id="photoStack"></div>
+                </div>
+                <div class="shelf-head reveal">
+                    <div>
+                        <h2 data-i18n="shelf.photo.title">摄影</h2>
+                        <p class="hint" data-i18n="shelf.photo.hint">继续滚动 · 展开</p>
+                    </div>
+                </div>
+                <div class="rail-progress"><span></span></div>
+            </div>
+        </section>
+
+        <section class="about reveal" id="about">
+            <h2 data-i18n="about.title">关于</h2>
+            <div class="about-body">
+                <p data-i18n="about.p1">我是李亦楊，写字、拍照，偶尔看很多动画。</p>
+                <p data-i18n="about.p2">这里是我在互联网上的一小块地方，把散落各处的东西连起来。</p>
+                <p class="about-now" data-i18n="about.now">最近在读旧书，也在整理上一季度的单集回顾。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="https://pikapikapi.com/assets/resources/meta/pikapikapi-blog-rss.atom" data-i18n="footer.rss">Atom</a>
+        <a href="mailto:hi@pikapikapi.com" data-i18n="footer.email">邮件</a>
+        <span class="spacer">© <span id="year"></span> 李亦楊 / ピカピカピ</span>
+    </footer>
+
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/utils.js"></script>
+    <script src="./assets/js/i18n.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <script src="./assets/js/feed.js"></script>
+    <script src="./assets/js/scroll-pin.js"></script>
+    <script src="./assets/js/blog-rail.js"></script>
+    <script src="./assets/js/photo-stack.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

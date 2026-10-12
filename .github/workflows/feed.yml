@@ -1,37 +1,42 @@
 name: Feed
 
 on:
-    push:
-        branches-ignore:
-            - master
-        paths:
-            - "docs/**/*.md"
-            - "script/shell/feed.sh"
-            - "!docs/assets/**"
-            - "!docs/pages/**"
+  push:
+    branches-ignore:
+      - master
+    paths:
+      - "docs/**/*.md"
+      - "script/shell/feed.sh"
+      - "!docs/assets/**"
+      - "!docs/pages/**"
 
 permissions:
-    contents: write
+  contents: write
+
+concurrency:
+  group: meta-build-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
 
-            - name: Install Pandoc
-              run: |
-                  sudo apt-get update
-                  sudo apt-get install -y pandoc
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
 
-            - name: Build Feed
-              run: bash ./script/shell/feed.sh
+      - name: Build Feed
+        run: bash ./script/shell/feed.sh
 
-            - name: Commit Updated
-              uses: stefanzweifel/git-auto-commit-action@v5
-              with:
-                  commit_message: "action: build feed.atom"
-                  file_pattern: "docs/assets/resources/meta/feed.atom"
+      - name: Commit Updated
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "action: build feed.atom"
+          file_pattern: "docs/assets/resources/meta/feed.atom"

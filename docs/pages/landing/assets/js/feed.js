@@ -1,6 +1,3 @@
-/* ========================================================
-   feed.js —— 从 Atom feed 拉取并解析
-   ======================================================== */
 (function () {
     'use strict'
 
@@ -16,7 +13,7 @@
             var imgEl = doc.querySelector('figure img, img')
             var cover = imgEl ? (imgEl.getAttribute('src') || '') : ''
 
-            /* 移除标题、图片、脚本、样式、"本文首发"之类的引用块 */
+            /* 移除标题、图片、脚本、样式之类的引用块 */
             doc.querySelectorAll('h1, figure, script, style').forEach(function (el) {
                 el.remove()
             })

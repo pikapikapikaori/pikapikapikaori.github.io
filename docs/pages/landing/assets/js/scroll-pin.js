@@ -1,12 +1,3 @@
-/* ========================================================
-   scroll-pin.js —— 通用"滚动驱动"封装
-
-   把一个 <section> 撑高，让它的内部 sticky 容器在滚动时
-   钉在视口上；section 的滚动进度（0–1）通过 applyFn 反馈。
-
-   因为语义完全建立在"页面纵向滚动"上，鼠标滚轮、触控板、
-   触摸、键盘 PageDown、锚点跳转都自动生效，无需任何拦截。
-   ======================================================== */
 (function () {
     'use strict'
 
@@ -19,13 +10,17 @@
     var registry = []
 
     /**
-     * @param {HTMLElement} section 需要被撑高的 <section>
-     * @param {function(number)} applyFn  p ∈ [0,1]，把状态画出来
-     * @param {function():{total:number,height:number}} sizeFn
-     *        total  = 走完全程需要多少像素纵向滚动
-     *        height = section 应被撑到多高
-     */
-    Pin.make = function (section, applyFn, sizeFn) {
+   * @param {HTMLElement} section 需要被撑高的 <section>
+   * @param {function(number)} applyFn   p ∈ [0,1]，把状态画出来
+   * @param {function():{total:number,height:number}} sizeFn
+   *        total  = 走完全程需要多少像素纵向滚动
+   *        height = section 应被撑到多高
+   * @param {function(number):number} [followFn]
+   *        可选。给定当前目标进度（0–1）返回这一帧的 follow 系数。
+   *        不传则使用 CFG.motion.follow。
+   *        用于让不同阶段拥有不同的阻尼手感。
+   */
+    Pin.make = function (section, applyFn, sizeFn, followFn) {
 
         var total = 0
         var target = 0
@@ -34,6 +29,11 @@
         var running = false
         var rafId = 0
         var firstMeasure = true
+
+        var baseFollow = CFG.motion.follow
+        var getFollow = (typeof followFn === 'function')
+            ? followFn
+            : function () { return baseFollow }
 
         /* ---------- 测量 ---------- */
         function doMeasure() {
@@ -68,10 +68,13 @@
 
             readTarget()
             var diff = target - current
+
             if (REDUCE || Math.abs(diff) < 0.0002) {
                 current = target
             } else {
-                current += diff * CFG.motion.follow
+                /* 每帧重新询问当前应使用的阻尼系数 */
+                var follow = getFollow(target)
+                current += diff * follow
             }
 
             if (Math.abs(current - last) > 0.0001) {

@@ -1,13 +1,8 @@
-/* ========================================================
-   blog.css —— 横向 rail（博客）
-   ======================================================== */
-
 .rail-wrap {
     position: relative;
     overflow: hidden;
 }
 
-/* 两端渐隐遮罩 */
 .rail-wrap::before,
 .rail-wrap::after {
     content: "";
@@ -43,7 +38,6 @@
     opacity: 0;
 }
 
-/* rail 本体 */
 .rail {
     --cols: 4;
     --gap: 1.15rem;
@@ -81,7 +75,6 @@
     }
 }
 
-/* 文章卡片 */
 .post-card {
     flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
     border: 1px solid var(--line);
@@ -147,6 +140,7 @@
     margin: .5rem 0 .65rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -158,6 +152,7 @@
     margin-top: auto;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

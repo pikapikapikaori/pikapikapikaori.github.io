@@ -8,11 +8,7 @@
     <meta name="description" content="Don't worry, be happy.">
     <meta name="theme-color" content="#f7f3ea" id="themeColorMeta">
 
-    <link rel="icon" type="image/x-icon" href="https://pikapikapi.com/assets/resources/logo/favicon.ico">
-    <link rel="apple-touch-icon" href="https://pikapikapi.com/assets/resources/logo/logo-180.png">
-    <link rel="manifest" href="https://pikapikapi.com/assets/resources/meta/manifest.json">
-    <link rel="alternate" type="application/atom+xml" title="ピカピカピ"
-        href="https://pikapikapi.com/assets/resources/meta/pikapikapi-blog-rss.atom">
+    <link rel="icon" type="image/x-icon" href="./assets/resources/logo/favicon.ico">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ピカピカピ">
@@ -21,19 +17,6 @@
     <meta property="og:image" content="https://pikapikapi.com/assets/resources/logo/og.jpg">
     <meta property="og:image:alt" content="ピカピカピ">
     <meta property="og:description" content="Don't worry, be happy.">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <!--
-  字体从 CDN 引入。如果要完全无外部依赖，把这两个 <link> 换成本地字体文件，
-  或者删除它们依赖系统回退（Goudy 会退到 Georgia，楷体会退到系统 Kaiti）。
--->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
 
     <link rel="stylesheet" href="./assets/css/tokens.css">
     <link rel="stylesheet" href="./assets/css/layout.css">
@@ -43,50 +26,55 @@
 
 <body>
 
+    <div class="boot" id="boot" aria-hidden="true">
+        <span class="boot-dot"></span>
+    </div>
+
     <div class="grain" aria-hidden="true"></div>
     <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
     <header class="topbar" id="topbar">
-        <a class="brand" href="#top">pikapikapi</a>
+        <a class="brand" href="#top" id="brandLink"></a>
         <nav class="topnav">
-            <a href="#blog" data-i18n="nav.blog">博客</a>
-            <a href="#photo" data-i18n="nav.photo">摄影</a>
-            <a href="#about" data-i18n="nav.about">关于</a>
+            <a href="#blog" data-i18n="nav.blog"></a>
+            <a href="#photo" data-i18n="nav.photo"></a>
+            <a href="#about" data-i18n="nav.about"></a>
         </nav>
         <div class="tools">
-            <div class="lang">
-                <select id="langSelect" aria-label="Language">
-                    <option value="zh-Hans">中文</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                </select>
-                <svg viewBox="0 0 10 10" aria-hidden="true">
-                    <path d="M1 3.5 5 7l4-3.5" />
-                </svg>
+            <div class="lang" id="langPicker">
+                <button class="lang-trigger" type="button" id="langTrigger" aria-haspopup="listbox"
+                    aria-expanded="false">
+                    <span class="lang-current" id="langCurrent"></span>
+                    <svg class="lang-caret" viewBox="0 0 10 10" aria-hidden="true">
+                        <path d="M1 3.5 5 7l4-3.5" />
+                    </svg>
+                </button>
+                <ul class="lang-menu" id="langMenu" role="listbox" data-i18n-attr="aria-label:lang.menu.label">
+                </ul>
             </div>
-            <button class="theme-btn" id="themeBtn" aria-label="切换主题">◐</button>
+            <button class="theme-btn" id="themeBtn" data-i18n-attr="aria-label:theme.toggle">◐</button>
         </div>
     </header>
 
     <main>
         <section class="hero" id="top">
-            <p class="hero-kicker">李亦楊 · ピカピカピ</p>
-            <h1 class="hero-name">pikapikapi</h1>
-            <p class="hero-tagline">Don't worry, be happy.</p>
+            <p class="hero-kicker" data-i18n="hero.kicker"></p>
+            <h1 class="hero-name" data-i18n="hero.name"></h1>
+            <p class="hero-tagline" data-i18n="hero.tagline"></p>
             <p class="hero-meta">
-                <span data-i18n="hero.location">上海</span> ·
+                <span data-i18n="hero.location"></span> ·
                 <span id="clock">--:--</span>
             </p>
             <a class="scroll-hint" href="#quote">
                 <i aria-hidden="true"></i>
-                <span data-i18n="hero.scroll">向下</span>
+                <span data-i18n="hero.scroll"></span>
             </a>
         </section>
 
         <section class="quote reveal" id="quote">
             <blockquote>
-                <p data-i18n="quote.text">露の世は　露の世ながら　さりながら。</p>
-                <cite data-i18n="quote.author">小林一茶</cite>
+                <p data-i18n="quote.text"></p>
+                <cite data-i18n="quote.author"></cite>
             </blockquote>
         </section>
 
@@ -95,18 +83,16 @@
             <div class="shelf-sticky">
                 <div class="shelf-head reveal">
                     <div>
-                        <h2 data-i18n="shelf.blog.title">博客</h2>
-                        <p class="hint" data-i18n="shelf.blog.hint">继续滚动 · 浏览</p>
+                        <h2 data-i18n="shelf.blog.title"></h2>
+                        <p class="hint" data-i18n="shelf.blog.hint"></p>
                     </div>
                     <div class="rail-btns">
-                        <button class="rail-btn" data-dir="-1" data-i18n-attr="aria-label:shelf.prev"
-                            aria-label="上一组">←</button>
-                        <button class="rail-btn" data-dir="1" data-i18n-attr="aria-label:shelf.next"
-                            aria-label="下一组">→</button>
+                        <button class="rail-btn" data-dir="-1" data-i18n-attr="aria-label:shelf.prev">←</button>
+                        <button class="rail-btn" data-dir="1" data-i18n-attr="aria-label:shelf.next">→</button>
                     </div>
                 </div>
                 <div class="rail-wrap">
-                    <div class="rail" id="blogRail" aria-label="博客文章"></div>
+                    <div class="rail" id="blogRail" data-i18n-attr="aria-label:rail.blog.label"></div>
                 </div>
                 <div class="rail-progress"><span></span></div>
             </div>
@@ -120,8 +106,8 @@
                 </div>
                 <div class="shelf-head reveal">
                     <div>
-                        <h2 data-i18n="shelf.photo.title">摄影</h2>
-                        <p class="hint" data-i18n="shelf.photo.hint">继续滚动 · 展开</p>
+                        <h2 data-i18n="shelf.photo.title"></h2>
+                        <p class="hint" data-i18n="shelf.photo.hint"></p>
                     </div>
                 </div>
                 <div class="rail-progress"><span></span></div>
@@ -129,19 +115,27 @@
         </section>
 
         <section class="about reveal" id="about">
-            <h2 data-i18n="about.title">关于</h2>
+            <h2 data-i18n="about.title"></h2>
             <div class="about-body">
-                <p data-i18n="about.p1">我是李亦楊，写字、拍照，偶尔看很多动画。</p>
-                <p data-i18n="about.p2">这里是我在互联网上的一小块地方，把散落各处的东西连起来。</p>
-                <p class="about-now" data-i18n="about.now">最近在读旧书，也在整理上一季度的单集回顾。</p>
+                <p data-i18n="about.p1"></p>
+                <p data-i18n="about.p2"></p>
+                <p class="about-now" data-i18n="about.now"></p>
             </div>
         </section>
     </main>
 
     <footer>
-        <a href="https://pikapikapi.com/assets/resources/meta/pikapikapi-blog-rss.atom" data-i18n="footer.rss">Atom</a>
-        <a href="mailto:hi@pikapikapi.com" data-i18n="footer.email">邮件</a>
-        <span class="spacer">© <span id="year"></span> 李亦楊 / ピカピカピ</span>
+        <a href="#" id="feedLink" data-i18n="footer.rss"></a>
+        <a href="#" id="emailLink" data-i18n="footer.email"></a>
+        <span class="spacer"></span>
+        <span class="copyright">
+            <span class="copyright-mark" aria-hidden="true">©</span>
+            <span class="copyright-years" id="copyrightYears"></span>
+            <span class="copyright-sep" aria-hidden="true">·</span>
+            <span data-i18n-html="footer.copyrightTitle"></span>
+            <span class="copyright-sep" aria-hidden="true">·</span>
+            <span data-i18n-html="footer.copyrightInfo"></span>
+        </span>
     </footer>
 
     <script src="./assets/js/config.js"></script>

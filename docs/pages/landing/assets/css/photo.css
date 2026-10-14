@@ -1,7 +1,3 @@
-/* ========================================================
-   photo.css —— 三段式堆叠（摄影）
-   ======================================================== */
-
 .shelf-photo .shelf-sticky {
     padding: 0;
     justify-content: flex-start;
@@ -24,11 +20,13 @@
     transform: translate3d(0, 0, 0);
 }
 
-/* 所有卡片叠在同一格 */
 .photo-card {
     grid-area: 1 / 1;
-    width: clamp(160px, 42vw, 320px);
-    aspect-ratio: 3 / 4;
+
+    --h: clamp(180px, min(34vw, 46svh), 420px);
+    height: var(--h);
+    width: auto;
+
     position: relative;
     overflow: hidden;
     border-radius: 6px;
@@ -37,6 +35,30 @@
     will-change: transform;
     transform-origin: center center;
     backface-visibility: hidden;
+}
+
+.photo-card[data-ratio="16/9"] {
+    aspect-ratio: 16 / 9;
+}
+
+.photo-card[data-ratio="4/3"] {
+    aspect-ratio: 4 / 3;
+}
+
+.photo-card[data-ratio="1/1"] {
+    aspect-ratio: 1 / 1;
+}
+
+.photo-card[data-ratio="3/4"] {
+    aspect-ratio: 3 / 4;
+}
+
+.photo-card[data-ratio="2/3"] {
+    aspect-ratio: 2 / 3;
+}
+
+.photo-card[data-ratio="9/16"] {
+    aspect-ratio: 9 / 16;
 }
 
 .photo-card img {
@@ -60,12 +82,10 @@
     background: linear-gradient(transparent, rgba(0, 0, 0, .55));
 }
 
-/* 首帧前隐藏，避免初始位置跳变被看到 */
 .photo-stack:not(.ready) .photo-card {
     opacity: 0;
 }
 
-/* 摄影区的标题与进度条绝对定位 */
 .shelf-photo .shelf-head {
     position: absolute;
     top: 0;

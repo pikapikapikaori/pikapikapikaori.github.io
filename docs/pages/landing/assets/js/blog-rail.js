@@ -1,6 +1,3 @@
-/* ========================================================
-   blog-rail.js —— 博客：横向滚动 rail
-   ======================================================== */
 (function () {
     'use strict'
 
@@ -62,7 +59,6 @@
 
         var pin = Pin.make(section, apply, sizeFn)
 
-        /* 箭头：滚页面 = 滚卡片 */
         function cardStep() {
             var card = rail.firstElementChild
             if (!card) return 300
@@ -79,7 +75,6 @@
             })
         })
 
-        /* 键盘焦点落到视口外的卡片时，滚页面把它带进来 */
         rail.addEventListener('focusin', function (e) {
             if (maxX <= 1) return
             var card = e.target.closest('.post-card')

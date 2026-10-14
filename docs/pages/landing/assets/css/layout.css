@@ -292,7 +292,7 @@ html[data-theme="dark"] .grain {
     letter-spacing: .28em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 1.4rem;
+    margin-bottom: 3rem;
 }
 
 .hero-name {

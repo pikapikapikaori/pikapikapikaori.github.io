@@ -156,9 +156,3 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .rail {
-        will-change: auto;
-    }
-}

@@ -6,20 +6,20 @@
     var CFG = App.config
 
     /* ============================================================
-       语言检测
+        语言检测
 
-       从纯文本采样，统计三类字符：
-         - 假名（平假名/片假名/半角片假名）
-         - 汉字（CJK 统一表意文字基本区）
-         - 拉丁字母
-       判定顺序：
-         1. 既无假名也无汉字 → 有拉丁就是 en，否则 null
-         2. 假名数 ≥ KANA_MIN 且 假名/(假名+汉字) ≥ KANA_RATIO → ja
-         3. 有汉字 → zh-Hans
-         4. 有拉丁 → en
-         5. 否则 null
-       关键在步骤 2 用"假名占 CJK 的比例"而非"占全部字符的比例"，
-       这样中文里夹杂少量日语引用（如「絵コンテ」）不会被误判。
+        从纯文本采样，统计三类字符：
+            - 假名（平假名/片假名/半角片假名）
+            - 汉字（CJK 统一表意文字基本区）
+            - 拉丁字母
+        判定顺序：
+            1. 既无假名也无汉字 → 有拉丁就是 en，否则 null
+            2. 假名数 ≥ KANA_MIN 且 假名/(假名+汉字) ≥ KANA_RATIO → ja
+            3. 有汉字 → zh-Hans
+            4. 有拉丁 → en
+            5. 否则 null
+        关键在步骤 2 用"假名占 CJK 的比例"而非"占全部字符的比例"，
+        这样中文里夹杂少量日语引用（如「絵コンテ」）不会被误判。
        ============================================================ */
 
     var KANA_MIN = 3
@@ -28,8 +28,8 @@
     function detectLang(text, sampleLen) {
         var sample = String(text || '').slice(0, sampleLen)
 
-        var kana  = (sample.match(/[\u3040-\u30FF\uFF65-\uFF9F]/g) || []).length
-        var han   = (sample.match(/[\u4E00-\u9FFF]/g) || []).length
+        var kana = (sample.match(/[\u3040-\u30FF\uFF65-\uFF9F]/g) || []).length
+        var han = (sample.match(/[\u4E00-\u9FFF]/g) || []).length
         var latin = (sample.match(/[A-Za-z]/g) || []).length
 
         if (kana + han === 0) {
@@ -46,10 +46,10 @@
     }
 
     /* ============================================================
-       从 entry 的 content HTML 中提取：
-         - cover    : 第一张图的 src
-         - fullText : 去掉标题/封面/首发说明后的正文纯文本
-         - excerpt  : fullText 的前 N 字符
+        从 entry 的 content HTML 中提取：
+            - cover    : 第一张图的 src
+            - fullText : 去掉标题/封面/首发说明后的正文纯文本
+            - excerpt  : fullText 的前 N 字符
        ============================================================ */
 
     /* 各种语言的"本文首发"标记 */
@@ -84,9 +84,7 @@
         }
     }
 
-    /* ============================================================
-       解析 Atom
-       ============================================================ */
+    /* ---------- 解析 Atom ---------- */
 
     function parseAtom(xml) {
         var doc = new DOMParser().parseFromString(xml, 'application/xml')
@@ -120,18 +118,12 @@
         }).filter(function (p) { return p.title })
     }
 
-    /* ============================================================
-       兜底
-       ============================================================ */
+    /* ---------- 兜底 ---------- */
 
     function getFallback(lang) {
         var map = CFG.fallbackPosts || {}
         return map[lang] || map['zh-Hans'] || []
     }
-
-    /* ============================================================
-       对外接口：loadPosts(lang) → Promise<Post[]>
-       ============================================================ */
 
     F.loadPosts = function (lang) {
         lang = lang || 'zh-Hans'

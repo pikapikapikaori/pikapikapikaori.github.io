@@ -101,16 +101,3 @@ html[lang="en"] body {
 section[id] {
     scroll-margin-top: 5rem;
 }
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}

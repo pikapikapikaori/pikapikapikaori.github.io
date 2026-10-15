@@ -309,8 +309,6 @@
         })
     }
 
-    /* ---------- 对外接口 ---------- */
-
     I.init = function () {
         initPicker()
         apply(readSaved() || guess())

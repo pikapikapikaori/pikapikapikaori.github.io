@@ -118,11 +118,3 @@
         padding: 4.5rem .6rem 4rem;
     }
 }
-
-@media (prefers-reduced-motion: reduce) {
-
-    .photo-stack,
-    .photo-card {
-        will-change: auto;
-    }
-}

@@ -650,20 +650,3 @@ html.booted .boot {
         padding: 4rem 0 2rem;
     }
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .reveal {
-        opacity: 1;
-        transform: none;
-    }
-
-    .hero>* {
-        opacity: 1;
-        transform: none;
-    }
-
-    .boot-dot {
-        animation: none;
-        opacity: .6;
-    }
-}

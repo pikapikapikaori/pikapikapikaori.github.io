@@ -13,38 +13,33 @@
         var esc = U.escapeHtml
         var img = p.cover
             ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy" ' +
-              'decoding="async" referrerpolicy="no-referrer" ' +
-              'onerror="this.remove()">'
+            'decoding="async" referrerpolicy="no-referrer" ' +
+            'onerror="this.remove()">'
             : ''
 
         return '<article class="post-card">' +
             '<a href="' + esc(p.link) + '">' +
-                '<div class="post-cover">' + img + '</div>' +
-                '<div class="post-body">' +
-                    (p.date ? '<time>' + esc(p.date) + '</time>' : '') +
-                    '<h3>' + esc(p.title) + '</h3>' +
-                    '<p>' + esc(p.excerpt) + (p.excerpt ? '…' : '') + '</p>' +
-                '</div>' +
+            '<div class="post-cover">' + img + '</div>' +
+            '<div class="post-body">' +
+            (p.date ? '<time>' + esc(p.date) + '</time>' : '') +
+            '<h3>' + esc(p.title) + '</h3>' +
+            '<p>' + esc(p.excerpt) + (p.excerpt ? '…' : '') + '</p>' +
+            '</div>' +
             '</a>' +
-        '</article>'
+            '</article>'
     }
 
-    /* ============================================================
-       load(rail) —— 初始化并返回 { reload(lang) } 接口
-       ============================================================ */
     BlogRail.load = function (rail) {
         var section = rail.closest('.shelf')
-        var wrap    = section.querySelector('.rail-wrap')
-        var sticky  = section.querySelector('.shelf-sticky')
-        var bar     = section.querySelector('.rail-progress > span')
-        var btns    = section.querySelectorAll('.rail-btn')
+        var wrap = section.querySelector('.rail-wrap')
+        var sticky = section.querySelector('.shelf-sticky')
+        var bar = section.querySelector('.rail-progress > span')
+        var btns = section.querySelectorAll('.rail-btn')
 
         var maxX = 0
         var pin = null
 
-        /* ---------- 尺寸测量 ----------
-           不用 scrollWidth：flex 容器的 padding-right 不计入它。
-           用 bounding rect 计算实际内容宽度。 */
+        /* ---------- 尺寸测量 ---------- */
         function sizeFn() {
             var last = rail.lastElementChild
 
@@ -54,7 +49,7 @@
                 var padRight = parseFloat(
                     getComputedStyle(rail).paddingRight
                 ) || 0
-                var railLeft  = rail.getBoundingClientRect().left
+                var railLeft = rail.getBoundingClientRect().left
                 var lastRight = last.getBoundingClientRect().right
                 maxX = Math.max(
                     0,
@@ -77,7 +72,7 @@
             rail.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0)'
             if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'
             section.classList.toggle('at-start', p <= 0.002)
-            section.classList.toggle('at-end',   p >= 0.998)
+            section.classList.toggle('at-end', p >= 0.998)
             section.dataset.p = p
         }
 
@@ -105,12 +100,12 @@
                 if (!card) return
 
                 var pad = parseFloat(getComputedStyle(rail).paddingLeft) || 0
-                var left  = card.offsetLeft - pad
+                var left = card.offsetLeft - pad
                 var right = left + card.offsetWidth
                 var viewR = wrap.clientWidth
 
                 var np = null
-                if (left < 24)               np = Math.max(0, (left - 24) / maxX)
+                if (left < 24) np = Math.max(0, (left - 24) / maxX)
                 else if (right > viewR - 24) np = Math.min(1, (right + 24 - viewR) / maxX)
 
                 if (np !== null &&
@@ -135,10 +130,8 @@
                 rail.innerHTML = posts.map(renderPost).join('')
 
                 if (pin) {
-                    /* 已初始化过 → 只重测高度和 maxX */
                     pin.scheduleMeasure()
                 } else {
-                    /* 首次 → 创建 pin 并绑定交互 */
                     pin = Pin.make(section, apply, sizeFn)
                     attachControls()
                 }

@@ -7,6 +7,7 @@ import {
     deleteAllInLanguage, recordReview, getWord
 } from '../store/word-store.js'
 import { posLabel, allSources } from '../models/word.js'
+import { normalizeSearch } from '../utils/text-normalize.js'
 
 export const SORT_FIELDS = [
     { value: 'addedAt',        label: '添加日期' },
@@ -59,9 +60,11 @@ export async function queryWords(userId, language, options = {}) {
 function applySearch(words, q) {
     const s = String(q || '').trim()
     if (!s) return words
+    const nq = normalizeSearch(s)
+    if (!nq) return words
     const hit = (w) => {
-        if (w.lemma.includes(s)) return true
-        if ((w.meanings || []).some((m) => String(m.text || '').includes(s))) return true
+        if (normalizeSearch(w.lemma).includes(nq)) return true
+        if ((w.meanings || []).some((m) => normalizeSearch(m.text || '').includes(nq))) return true
         return false
     }
     return words.filter(hit)

@@ -2,11 +2,12 @@
  * 检索（仅当前语言内）
  * 命中范围：lemma / meanings[].text / examples[].text / collocations[].text
  *
- * 大小写、变音、长短音敏感（与唯一键一致）。
+ * 大小写、变音、长短音不敏感。
  */
 
 import { listByLanguage } from '../store/word-store.js'
 import { highlight as hl, snippet as sn } from '../utils/text-normalize.js'
+import { normalizeSearch } from '../utils/text-normalize.js'
 
 export const SEARCH_SCOPE = [
     { value: 'all',         label: '全部' },
@@ -45,9 +46,13 @@ export async function search(userId, language, query, options = {}) {
 
 function collectMatches(word, q, scope) {
     const out = []
+    const nq = normalizeSearch(q)
+    if (!nq) return out
+
+    const hit = (s) => normalizeSearch(s).includes(nq)
 
     if (scope === 'all' || scope === 'lemma') {
-        if (word.lemma.includes(q)) {
+        if (hit(word.lemma)) {
             out.push({
                 field: 'lemma',
                 label: '基本形态',
@@ -61,7 +66,7 @@ function collectMatches(word, q, scope) {
     if (scope === 'all' || scope === 'meaning') {
         for (const m of word.meanings || []) {
             const t = String(m.text || '')
-            if (t.includes(q)) {
+            if (hit(t)) {
                 out.push({
                     field: 'meaning',
                     label: m.lang === 'en' ? '含义 (EN)' : '含义',
@@ -78,8 +83,8 @@ function collectMatches(word, q, scope) {
         for (const e of word.examples || []) {
             const t = String(e.text || '')
             const tr = String(e.translation || '')
-            if (t.includes(q) || tr.includes(q)) {
-                const src = t.includes(q) ? t : tr
+            if (hit(t) || hit(tr)) {
+                const src = hit(t) ? t : tr
                 out.push({
                     field: 'example',
                     label: '例句',
@@ -97,8 +102,8 @@ function collectMatches(word, q, scope) {
         for (const c of word.collocations || []) {
             const t = String(c.text || '')
             const g = String(c.gloss || '')
-            if (t.includes(q) || g.includes(q)) {
-                const src = t.includes(q) ? t : g
+            if (hit(t) || hit(g)) {
+                const src = hit(t) ? t : g
                 out.push({
                     field: 'collocation',
                     label: '固定搭配',

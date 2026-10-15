@@ -1,30 +1,78 @@
 /**
  * 文本工具
  *
- * 注意：本项目检索与查重要求 **区分大小写、变音符号、长短音**，
- * 因此这里不做任何归一化，仅提供高亮与截断等辅助函数。
+ * 检索使用「大小写 + 变音符号 / 气符不敏感」的规范化：
+ *   NFD 分解 → 去除组合标记 → 小写 → 词尾 sigma 归并
+ * 唯一键、查重仍然严格区分大小写与变音符号，不受本文件影响。
  */
 
-/** 返回 query 在 text 中出现的所有起止位置（区分大小写） */
-export function matchIndices(text, query) {
+/* ---------------- 规范化 ---------------- */
+
+/** 搜索规范化 */
+export function normalizeSearch(s) {
+    return String(s ?? '')
+        .normalize('NFD')
+        .replace(/\p{M}/gu, '')
+        .toLowerCase()
+        .replace(/ς/g, 'σ')
+}
+
+/**
+ * 规范化并保留「规范化位置 → 原始位置」的映射
+ * @returns {{ norm: string, map: number[] }}
+ */
+export function normalizeSearchWithMap(s) {
+    const src = String(s ?? '')
+    let norm = ''
+    const map = []
+    for (let i = 0; i < src.length; i++) {
+        const ch = src[i]
+        const stripped = ch.normalize('NFD').replace(/\p{M}/gu, '')
+        const lower = stripped.toLowerCase()
+        for (let j = 0; j < lower.length; j++) {
+            map.push(i)
+        }
+        norm += lower
+    }
+    if (norm.includes('ς')) {
+        norm = norm.replace(/ς/g, 'σ')
+    }
+    return { norm, map }
+}
+
+/* ---------------- 匹配 ---------------- */
+
+/** 返回原文中的匹配区间 [[start, end], ...] */
+export function matchRangesNorm(text, query) {
     const t = String(text ?? '')
     const q = String(query ?? '')
     if (!q) return []
+    const { norm, map } = normalizeSearchWithMap(t)
+    const nq = normalizeSearch(q)
+    if (!nq) return []
+
     const out = []
     let i = 0
-    while (i <= t.length - q.length) {
-        const idx = t.indexOf(q, i)
+    while (i <= norm.length - nq.length) {
+        const idx = norm.indexOf(nq, i)
         if (idx === -1) break
-        out.push([idx, idx + q.length])
-        i = idx + Math.max(1, q.length)
+        const origStart = map[idx]
+        const origEnd = map[idx + nq.length - 1] + 1
+        out.push([origStart, origEnd])
+        i = idx + Math.max(1, nq.length)
     }
     return out
 }
 
-/** 生成带 <mark> 的高亮片段（返回 DocumentFragment，安全） */
+/** 保留旧名，返回 [[start, end], ...]（已改为规范化匹配） */
+export function matchIndices(text, query) {
+    return matchRangesNorm(text, query)
+}
+
+/** 生成带 <mark> 的高亮片段（DocumentFragment） */
 export function highlight(text, query) {
     const t = String(text ?? '')
-    const spans = matchIndices(t, query)
+    const spans = matchRangesNorm(t, query)
     const frag = document.createDocumentFragment()
     if (spans.length === 0) {
         frag.appendChild(document.createTextNode(t))
@@ -48,26 +96,29 @@ export function snippet(text, query, radius = 40) {
     const t = String(text ?? '')
     const q = String(query ?? '')
     if (!q) return t.length > radius * 2 ? t.slice(0, radius * 2) + '…' : t
-    const idx = t.indexOf(q)
-    if (idx === -1) return t.length > radius * 2 ? t.slice(0, radius * 2) + '…' : t
-    const start = Math.max(0, idx - radius)
-    const end = Math.min(t.length, idx + q.length + radius)
+
+    const spans = matchRangesNorm(t, q)
+    if (spans.length === 0) {
+        return t.length > radius * 2 ? t.slice(0, radius * 2) + '…' : t
+    }
+    const [s, e] = spans[0]
+    const start = Math.max(0, s - radius)
+    const end = Math.min(t.length, e + radius)
     return (start > 0 ? '…' : '') + t.slice(start, end) + (end < t.length ? '…' : '')
 }
 
-/** 判断语言是否 RTL */
+/* ---------------- 语言辅助 ---------------- */
+
 export const RTL_LANGS = new Set(['he', 'ar', 'fa'])
 
 export function isRtl(lang) {
     return RTL_LANGS.has(lang)
 }
 
-/** 归一化语言 code（如 ja-classical 保留原样） */
 export function normalizeLangCode(code) {
     return String(code || '').trim().toLowerCase()
 }
 
-/** 安全地把数组变成非空字符串数组 */
 export function toStringArray(v) {
     if (Array.isArray(v)) return v.map((x) => String(x ?? '').trim()).filter(Boolean)
     if (v == null) return []

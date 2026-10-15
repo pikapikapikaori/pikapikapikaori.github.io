@@ -1,0 +1,161 @@
+/* 设计变量：颜色 / 间距 / 圆角 / 字体 / 字号 */
+
+:root {
+    /* 间距 */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 24px;
+    --sp-6: 32px;
+    --sp-7: 48px;
+
+    /* 圆角 */
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 16px;
+    --r-xl: 22px;
+    --r-full: 999px;
+
+    /* 字号 */
+    --fs-xs: 12px;
+    --fs-sm: 13px;
+    --fs-md: 15px;
+    --fs-lg: 18px;
+    --fs-xl: 22px;
+    --fs-2xl: 28px;
+    --fs-3xl: 34px;
+
+    /* 行高 */
+    --lh-tight: 1.25;
+    --lh-base: 1.6;
+    --lh-loose: 1.85;
+
+    /* 字体族 */
+    --ff-ui: "LN UI", system-ui, -apple-system, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    --ff-content: var(--ff-ui);
+    --ff-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+    /* 布局 */
+    --w-max: 1100px;
+    --h-header: 56px;
+
+    /* 动效 */
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    --dur: .22s;
+
+    /* 层级 */
+    --z-header: 50;
+    --z-fab: 60;
+    --z-modal: 100;
+    --z-toast: 200;
+}
+
+/* ---- 浅色（默认） ---- */
+:root,
+:root[data-theme="light"] {
+    --c-bg: #fafaf7;
+    --c-bg-elev: #ffffff;
+    --c-bg-subtle: #f2f1ec;
+    --c-bg-hover: #ecebe4;
+
+    --c-fg: #1a1a1a;
+    --c-fg-muted: #5b5b58;
+    --c-fg-subtle: #8a8a86;
+    --c-fg-invert: #ffffff;
+
+    --c-border: #e3e2db;
+    --c-border-strong: #cfcec6;
+
+    --c-accent: #3a5bd9;
+    --c-accent-fg: #ffffff;
+    --c-accent-soft: #e6ebff;
+
+    --c-success: #2f9e55;
+    --c-warning: #c98a12;
+    --c-danger: #cf4343;
+    --c-info: #3a7fd9;
+
+    --c-source-manual: #6a6a66;
+    --c-source-wiktionary: #2f7d8a;
+    --c-source-url: #8a6a2f;
+
+    --shadow-sm: 0 1px 2px rgba(20, 20, 20, .06);
+    --shadow-md: 0 4px 14px rgba(20, 20, 20, .08);
+    --shadow-lg: 0 10px 40px rgba(20, 20, 20, .14);
+}
+
+/* ---- 深色 ---- */
+:root[data-theme="dark"] {
+    --c-bg: #0f1115;
+    --c-bg-elev: #161922;
+    --c-bg-subtle: #1c2029;
+    --c-bg-hover: #232833;
+
+    --c-fg: #e8e9ec;
+    --c-fg-muted: #a0a3ac;
+    --c-fg-subtle: #6f727c;
+    --c-fg-invert: #0f1115;
+
+    --c-border: #262b36;
+    --c-border-strong: #3a4150;
+
+    --c-accent: #7a95ff;
+    --c-accent-fg: #0f1115;
+    --c-accent-soft: #1e2740;
+
+    --c-success: #56c47c;
+    --c-warning: #e0b34a;
+    --c-danger: #ef6a6a;
+    --c-info: #6aa8f0;
+
+    --c-source-manual: #a0a3ac;
+    --c-source-wiktionary: #6dc3d0;
+    --c-source-url: #e0b34a;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, .55);
+}
+
+/* ---- auto：跟随系统 ---- */
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] {
+        --c-bg: #0f1115;
+        --c-bg-elev: #161922;
+        --c-bg-subtle: #1c2029;
+        --c-bg-hover: #232833;
+
+        --c-fg: #e8e9ec;
+        --c-fg-muted: #a0a3ac;
+        --c-fg-subtle: #6f727c;
+        --c-fg-invert: #0f1115;
+
+        --c-border: #262b36;
+        --c-border-strong: #3a4150;
+
+        --c-accent: #7a95ff;
+        --c-accent-fg: #0f1115;
+        --c-accent-soft: #1e2740;
+
+        --c-success: #56c47c;
+        --c-warning: #e0b34a;
+        --c-danger: #ef6a6a;
+        --c-info: #6aa8f0;
+
+        --c-source-manual: #a0a3ac;
+        --c-source-wiktionary: #6dc3d0;
+        --c-source-url: #e0b34a;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+        --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, .55);
+    }
+}
+
+/* ---- 用户自定义字体注入点 ----
+   由 font-service.js 动态写入：
+   例：html[data-font-mode="local"] { --ff-ui: "UserLocal", system-ui, sans-serif; }
+   例：html[data-font-mode="system"] { --ff-ui: system-ui, sans-serif; }
+*/

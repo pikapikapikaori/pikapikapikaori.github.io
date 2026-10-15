@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="多语言古文献阅读生词本">
+    <title>语言生词本</title>
+
+    <link rel="manifest" href="./manifest.webmanifest">
+    <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="./assets/resources/icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./assets/resources/icons/icon-192.png">
+
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/fonts.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <link rel="stylesheet" href="./assets/css/pages.css">
+
+    <script>
+        // 提前应用主题，避免首屏闪烁。设置页会同步写入 localStorage。
+        (function () {
+            try {
+                var t = localStorage.getItem('ln.theme') || 'auto';
+                if (t !== 'auto' && t !== 'light' && t !== 'dark') t = 'auto';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
+</head>
+
+<body>
+    <a class="skip-link" href="#app">跳到主内容</a>
+    <div id="app" class="app"></div>
+    <div id="modal-root" class="modal-root" aria-hidden="true"></div>
+    <div id="toast-root" class="toast-root" role="status" aria-live="polite"></div>
+    <div id="fab-root" class="fab-root"></div>
+
+    <script type="module" src="./assets/js/main.js"></script>
+</body>
+
+</html>

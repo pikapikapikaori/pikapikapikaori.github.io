@@ -1,0 +1,1713 @@
+{
+    "version": 1,
+    "language": "de",
+    "name": "德语",
+    "paradigms": {
+        "verb": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变位",
+                    "columns": [
+                        {
+                            "key": "1sg",
+                            "label": "单1"
+                        },
+                        {
+                            "key": "2sg",
+                            "label": "单2"
+                        },
+                        {
+                            "key": "3sg",
+                            "label": "单3"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "复1"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "复2"
+                        },
+                        {
+                            "key": "3pl",
+                            "label": "复3"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "pres-ind",
+                            "label": "现在时 陈述式",
+                            "principal": true
+                        },
+                        {
+                            "key": "pret-ind",
+                            "label": "过去时"
+                        },
+                        {
+                            "key": "subj-1",
+                            "label": "虚拟式 1"
+                        },
+                        {
+                            "key": "subj-2",
+                            "label": "虚拟式 2"
+                        }
+                    ]
+                },
+                {
+                    "key": "participles",
+                    "title": "分词",
+                    "columns": [
+                        {
+                            "key": "m",
+                            "label": "阳性"
+                        },
+                        {
+                            "key": "n",
+                            "label": "中性"
+                        },
+                        {
+                            "key": "f",
+                            "label": "阴性"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "pres-act",
+                            "label": "现在分词"
+                        },
+                        {
+                            "key": "past",
+                            "label": "过去分词"
+                        }
+                    ]
+                }
+            ]
+        },
+        "noun": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变格",
+                    "columns": [
+                        {
+                            "key": "sg",
+                            "label": "单数"
+                        },
+                        {
+                            "key": "pl",
+                            "label": "复数"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "nom",
+                            "label": "主格"
+                        },
+                        {
+                            "key": "gen",
+                            "label": "属格"
+                        },
+                        {
+                            "key": "dat",
+                            "label": "与格"
+                        },
+                        {
+                            "key": "acc",
+                            "label": "宾格"
+                        }
+                    ]
+                }
+            ]
+        },
+        "adj": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变格",
+                    "columns": [
+                        {
+                            "key": "m_sg",
+                            "label": "阳单"
+                        },
+                        {
+                            "key": "n_sg",
+                            "label": "中单"
+                        },
+                        {
+                            "key": "f_sg",
+                            "label": "阴单"
+                        },
+                        {
+                            "key": "pl",
+                            "label": "复数"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "nom",
+                            "label": "主格"
+                        },
+                        {
+                            "key": "gen",
+                            "label": "属格"
+                        },
+                        {
+                            "key": "dat",
+                            "label": "与格"
+                        },
+                        {
+                            "key": "acc",
+                            "label": "宾格"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "sections": [
+        {
+            "id": "de-noun",
+            "title": "名词",
+            "items": [
+                {
+                    "id": "de-noun-gender",
+                    "title": "性与数",
+                    "tables": [
+                        {
+                            "caption": "名词的性与定冠词",
+                            "headers": [
+                                "",
+                                "阳性 (m)",
+                                "中性 (n)",
+                                "阴性 (f)",
+                                "复数 (pl)"
+                            ],
+                            "rows": [
+                                [
+                                    "定冠词",
+                                    "der",
+                                    "das",
+                                    "die",
+                                    "die"
+                                ],
+                                [
+                                    "不定冠词",
+                                    "ein",
+                                    "ein",
+                                    "eine",
+                                    "—"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "常见复数规则",
+                            "headers": [
+                                "单数结尾",
+                                "复数规则",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "一般阳性/中性",
+                                    "+ -e",
+                                    "der Tisch → die Tische"
+                                ],
+                                [
+                                    "一般阴性",
+                                    "+ -(e)n",
+                                    "die Frau → die Frauen"
+                                ],
+                                [
+                                    "-er / -el / -en（阳/中）",
+                                    "不变（部分变音）",
+                                    "der Lehrer → die Lehrer"
+                                ],
+                                [
+                                    "-nis",
+                                    "-nis → -nisse",
+                                    "das Ergebnis → die Ergebnisse"
+                                ],
+                                [
+                                    "-in（阴性，人）",
+                                    "-in → -innen",
+                                    "die Lehrerin → die Lehrerinnen"
+                                ],
+                                [
+                                    "-chen / -lein（中性）",
+                                    "不变",
+                                    "das Mädchen → die Mädchen"
+                                ],
+                                [
+                                    "外来词 -um / -us",
+                                    "-um → -en / -us → -en",
+                                    "das Museum → die Museen"
+                                ],
+                                [
+                                    "外来词 -ion",
+                                    "+ -en",
+                                    "die Nation → die Nationen"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "德语名词首字母一律大写。性别需按词记忆，但有一定后缀规律：-ung, -heit, -keit, -schaft, -tion, -tät, -ie 多为阴性；-chen, -lein, -ment, -um 多为中性；-er, -ling, -ismus 多为阳性。"
+                },
+                {
+                    "id": "de-noun-decl-strong",
+                    "title": "强变化名词",
+                    "tables": [
+                        {
+                            "caption": "强变化名词（der Tag 白天）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格 (Nominativ)",
+                                    "der Tag",
+                                    "die Tage"
+                                ],
+                                [
+                                    "属格 (Genitiv)",
+                                    "des Tages",
+                                    "der Tage"
+                                ],
+                                [
+                                    "与格 (Dativ)",
+                                    "dem Tag(e)",
+                                    "den Tagen"
+                                ],
+                                [
+                                    "宾格 (Akkusativ)",
+                                    "den Tag",
+                                    "die Tage"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "强变化名词（das Kind 孩子）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "das Kind",
+                                    "die Kinder"
+                                ],
+                                [
+                                    "属格",
+                                    "des Kindes",
+                                    "der Kinder"
+                                ],
+                                [
+                                    "与格",
+                                    "dem Kind(e)",
+                                    "den Kindern"
+                                ],
+                                [
+                                    "宾格",
+                                    "das Kind",
+                                    "die Kinder"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "强变化名词属格单数加 -es 或 -s，复数与格加 -n（若复数已以 -n 结尾则不再加）。"
+                },
+                {
+                    "id": "de-noun-decl-weak",
+                    "title": "弱变化名词",
+                    "tables": [
+                        {
+                            "caption": "弱变化名词（der Mensch 人）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "der Mensch",
+                                    "die Menschen"
+                                ],
+                                [
+                                    "属格",
+                                    "des Menschen",
+                                    "der Menschen"
+                                ],
+                                [
+                                    "与格",
+                                    "dem Menschen",
+                                    "den Menschen"
+                                ],
+                                [
+                                    "宾格",
+                                    "den Menschen",
+                                    "die Menschen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "弱变化名词（der Student 大学生）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "der Student",
+                                    "die Studenten"
+                                ],
+                                [
+                                    "属格",
+                                    "des Studenten",
+                                    "der Studenten"
+                                ],
+                                [
+                                    "与格",
+                                    "dem Studenten",
+                                    "den Studenten"
+                                ],
+                                [
+                                    "宾格",
+                                    "den Studenten",
+                                    "die Studenten"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "弱变化名词仅限阳性，且多为表示人或动物的词。除主格单数外，其余各格均以 -en / -n 结尾。"
+                },
+                {
+                    "id": "de-noun-decl-mixed",
+                    "title": "混合变化名词",
+                    "tables": [
+                        {
+                            "caption": "混合变化名词（das Auge 眼睛）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "das Auge",
+                                    "die Augen"
+                                ],
+                                [
+                                    "属格",
+                                    "des Auges",
+                                    "der Augen"
+                                ],
+                                [
+                                    "与格",
+                                    "dem Auge",
+                                    "den Augen"
+                                ],
+                                [
+                                    "宾格",
+                                    "das Auge",
+                                    "die Augen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "混合变化名词（der Name 名字）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "der Name",
+                                    "die Namen"
+                                ],
+                                [
+                                    "属格",
+                                    "des Namens",
+                                    "der Namen"
+                                ],
+                                [
+                                    "与格",
+                                    "dem Namen",
+                                    "den Namen"
+                                ],
+                                [
+                                    "宾格",
+                                    "den Namen",
+                                    "die Namen"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "混合变化名词兼有强变化（属格加 -s）和弱变化（其余格加 -n / -en）特征。"
+                }
+            ]
+        },
+        {
+            "id": "de-article",
+            "title": "冠词与限定词",
+            "items": [
+                {
+                    "id": "de-article-definite",
+                    "title": "定冠词",
+                    "tables": [
+                        {
+                            "caption": "定冠词变格",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "der",
+                                    "das",
+                                    "die",
+                                    "die"
+                                ],
+                                [
+                                    "属格",
+                                    "des",
+                                    "des",
+                                    "der",
+                                    "der"
+                                ],
+                                [
+                                    "与格",
+                                    "dem",
+                                    "dem",
+                                    "der",
+                                    "den"
+                                ],
+                                [
+                                    "宾格",
+                                    "den",
+                                    "das",
+                                    "die",
+                                    "die"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "定冠词也用作关系代词和指示代词的词干。"
+                },
+                {
+                    "id": "de-article-indefinite",
+                    "title": "不定冠词",
+                    "tables": [
+                        {
+                            "caption": "不定冠词变格",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "ein",
+                                    "ein",
+                                    "eine"
+                                ],
+                                [
+                                    "属格",
+                                    "eines",
+                                    "eines",
+                                    "einer"
+                                ],
+                                [
+                                    "与格",
+                                    "einem",
+                                    "einem",
+                                    "einer"
+                                ],
+                                [
+                                    "宾格",
+                                    "einen",
+                                    "ein",
+                                    "eine"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "否定形式 kein 变格与不定冠词相同（kein, keine, kein 等）。物主代词（mein, dein, sein 等）也按此变格。"
+                }
+            ]
+        },
+        {
+            "id": "de-adj",
+            "title": "形容词变格",
+            "items": [
+                {
+                    "id": "de-adj-weak",
+                    "title": "弱变化（定冠词后）",
+                    "tables": [
+                        {
+                            "caption": "定冠词 + 弱变化形容词（alt 老的）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "der alte",
+                                    "das alte",
+                                    "die alte",
+                                    "die alten"
+                                ],
+                                [
+                                    "属格",
+                                    "des alten",
+                                    "des alten",
+                                    "der alten",
+                                    "der alten"
+                                ],
+                                [
+                                    "与格",
+                                    "dem alten",
+                                    "dem alten",
+                                    "der alten",
+                                    "den alten"
+                                ],
+                                [
+                                    "宾格",
+                                    "den alten",
+                                    "das alte",
+                                    "die alte",
+                                    "die alten"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "弱变化形容词的词尾几乎全为 -en，仅主格阳性、主格/宾格中性与主格/宾格阴性为 -e。"
+                },
+                {
+                    "id": "de-adj-strong",
+                    "title": "强变化（无冠词）",
+                    "tables": [
+                        {
+                            "caption": "无冠词 + 强变化形容词（alt）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "alter",
+                                    "altes",
+                                    "alte",
+                                    "alte"
+                                ],
+                                [
+                                    "属格",
+                                    "alten",
+                                    "alten",
+                                    "alter",
+                                    "alter"
+                                ],
+                                [
+                                    "与格",
+                                    "altem",
+                                    "altem",
+                                    "alter",
+                                    "alten"
+                                ],
+                                [
+                                    "宾格",
+                                    "alten",
+                                    "altes",
+                                    "alte",
+                                    "alte"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "强变化形容词词尾与定冠词变格相似，承担显示格与性的功能。"
+                },
+                {
+                    "id": "de-adj-mixed",
+                    "title": "混合变化（不定冠词后）",
+                    "tables": [
+                        {
+                            "caption": "不定冠词 + 混合变化形容词（alt）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数（kein + 形容词）"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "ein alter",
+                                    "ein altes",
+                                    "eine alte",
+                                    "keine alten"
+                                ],
+                                [
+                                    "属格",
+                                    "eines alten",
+                                    "eines alten",
+                                    "einer alten",
+                                    "keiner alten"
+                                ],
+                                [
+                                    "与格",
+                                    "einem alten",
+                                    "einem alten",
+                                    "einer alten",
+                                    "keinen alten"
+                                ],
+                                [
+                                    "宾格",
+                                    "einen alten",
+                                    "ein altes",
+                                    "eine alte",
+                                    "keine alten"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "不定冠词已显示性，形容词多取 -en；仅主格阳性 / 中性、主格 / 宾格阴性取 -e 或 -es。"
+                },
+                {
+                    "id": "de-adj-comparison",
+                    "title": "比较级与最高级",
+                    "tables": [
+                        {
+                            "caption": "比较级与最高级构成",
+                            "headers": [
+                                "等级",
+                                "构成",
+                                "例（schnell 快）"
+                            ],
+                            "rows": [
+                                [
+                                    "原级",
+                                    "—",
+                                    "schnell"
+                                ],
+                                [
+                                    "比较级",
+                                    "+ -er",
+                                    "schneller"
+                                ],
+                                [
+                                    "最高级",
+                                    "+ -st(en)",
+                                    "am schnellsten / der schnellste"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "不规则比较级",
+                            "headers": [
+                                "原级",
+                                "比较级",
+                                "最高级"
+                            ],
+                            "rows": [
+                                [
+                                    "gut",
+                                    "besser",
+                                    "am besten"
+                                ],
+                                [
+                                    "viel",
+                                    "mehr",
+                                    "am meisten"
+                                ],
+                                [
+                                    "gern",
+                                    "lieber",
+                                    "am liebsten"
+                                ],
+                                [
+                                    "hoch",
+                                    "höher",
+                                    "am höchsten"
+                                ],
+                                [
+                                    "nah",
+                                    "näher",
+                                    "am nächsten"
+                                ],
+                                [
+                                    "groß",
+                                    "größer",
+                                    "am größten"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "比较级也需变格（与形容词相同）。最高级作定语时用 der / die / das + -ste 形式。"
+                }
+            ]
+        },
+        {
+            "id": "de-pron",
+            "title": "代词",
+            "items": [
+                {
+                    "id": "de-pron-personal",
+                    "title": "人称代词",
+                    "tables": [
+                        {
+                            "caption": "人称代词",
+                            "headers": [
+                                "人称",
+                                "主格",
+                                "属格",
+                                "与格",
+                                "宾格"
+                            ],
+                            "rows": [
+                                [
+                                    "1sg",
+                                    "ich",
+                                    "meiner",
+                                    "mir",
+                                    "mich"
+                                ],
+                                [
+                                    "2sg（亲）",
+                                    "du",
+                                    "deiner",
+                                    "dir",
+                                    "dich"
+                                ],
+                                [
+                                    "3sg m",
+                                    "er",
+                                    "seiner",
+                                    "ihm",
+                                    "ihn"
+                                ],
+                                [
+                                    "3sg n",
+                                    "es",
+                                    "seiner",
+                                    "ihm",
+                                    "es"
+                                ],
+                                [
+                                    "3sg f",
+                                    "sie",
+                                    "ihrer",
+                                    "ihr",
+                                    "sie"
+                                ],
+                                [
+                                    "1pl",
+                                    "wir",
+                                    "unser",
+                                    "uns",
+                                    "uns"
+                                ],
+                                [
+                                    "2pl（亲）",
+                                    "ihr",
+                                    "euer",
+                                    "euch",
+                                    "euch"
+                                ],
+                                [
+                                    "3pl",
+                                    "sie",
+                                    "ihrer",
+                                    "ihnen",
+                                    "sie"
+                                ],
+                                [
+                                    "2 敬称",
+                                    "Sie",
+                                    "Ihrer",
+                                    "Ihnen",
+                                    "Sie"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "属格人称代词现已很少使用，多被 von + 与格或物主代词取代。Sie 为尊称，首字母大写，动词变位与第三人称复数相同。"
+                },
+                {
+                    "id": "de-pron-possessive",
+                    "title": "物主代词",
+                    "tables": [
+                        {
+                            "caption": "物主代词词干",
+                            "headers": [
+                                "人称",
+                                "阳性 / 中性词干",
+                                "阴性 / 复数词干"
+                            ],
+                            "rows": [
+                                [
+                                    "1sg",
+                                    "mein-",
+                                    "mein-"
+                                ],
+                                [
+                                    "2sg（亲）",
+                                    "dein-",
+                                    "dein-"
+                                ],
+                                [
+                                    "3sg m / n",
+                                    "sein-",
+                                    "sein-"
+                                ],
+                                [
+                                    "3sg f / 3pl / 2 敬称",
+                                    "ihr- / Ihr-",
+                                    "ihr- / Ihr-"
+                                ],
+                                [
+                                    "1pl",
+                                    "unser-",
+                                    "unser-"
+                                ],
+                                [
+                                    "2pl（亲）",
+                                    "euer-",
+                                    "euer-"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "物主代词按不定冠词 / kein 的方式变格。euer 在添加词尾时省略 -e-（eure, euren, eurem 等）。"
+                },
+                {
+                    "id": "de-pron-relative",
+                    "title": "关系代词",
+                    "tables": [
+                        {
+                            "caption": "关系代词 der / die / das",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "der",
+                                    "das",
+                                    "die",
+                                    "die"
+                                ],
+                                [
+                                    "属格",
+                                    "dessen",
+                                    "dessen",
+                                    "deren",
+                                    "deren / derer"
+                                ],
+                                [
+                                    "与格",
+                                    "dem",
+                                    "dem",
+                                    "der",
+                                    "denen"
+                                ],
+                                [
+                                    "宾格",
+                                    "den",
+                                    "das",
+                                    "die",
+                                    "die"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "关系代词 welcher / welches / welche",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "welcher",
+                                    "welches",
+                                    "welche",
+                                    "welche"
+                                ],
+                                [
+                                    "属格",
+                                    "welches",
+                                    "welches",
+                                    "welcher",
+                                    "welcher"
+                                ],
+                                [
+                                    "与格",
+                                    "welchem",
+                                    "welchem",
+                                    "welcher",
+                                    "welchen"
+                                ],
+                                [
+                                    "宾格",
+                                    "welchen",
+                                    "welches",
+                                    "welche",
+                                    "welche"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "关系代词 wer / was",
+                            "headers": [
+                                "格",
+                                "wer（人）",
+                                "was（物）"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "wer",
+                                    "was"
+                                ],
+                                [
+                                    "属格",
+                                    "wessen",
+                                    "wessen"
+                                ],
+                                [
+                                    "与格",
+                                    "wem",
+                                    "—"
+                                ],
+                                [
+                                    "宾格",
+                                    "wen",
+                                    "was"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "der / die / das 是最常用的关系代词，与定冠词变格基本相同，仅属格与与格复数不同。"
+                },
+                {
+                    "id": "de-pron-demonstrative",
+                    "title": "指示代词",
+                    "tables": [
+                        {
+                            "caption": "指示代词 dieser / jener",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "中性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "dieser / jener",
+                                    "dieses / jenes",
+                                    "diese / jene",
+                                    "diese / jene"
+                                ],
+                                [
+                                    "属格",
+                                    "dieses / jenes",
+                                    "dieses / jenes",
+                                    "dieser / jener",
+                                    "dieser / jener"
+                                ],
+                                [
+                                    "与格",
+                                    "diesem / jenem",
+                                    "diesem / jenem",
+                                    "dieser / jener",
+                                    "diesen / jenen"
+                                ],
+                                [
+                                    "宾格",
+                                    "diesen / jenen",
+                                    "dieses / jenes",
+                                    "diese / jene",
+                                    "diese / jene"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "dieser（这）与 jener（那）变格相同。口语中常用 der / die / das 代替 dieser。"
+                }
+            ]
+        },
+        {
+            "id": "de-verb",
+            "title": "动词",
+            "items": [
+                {
+                    "id": "de-verb-weak",
+                    "title": "弱变化动词",
+                    "tables": [
+                        {
+                            "caption": "machen（做）现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "mache",
+                                    "machen"
+                                ],
+                                [
+                                    "第二人称（亲）",
+                                    "machst",
+                                    "macht"
+                                ],
+                                [
+                                    "第三人称",
+                                    "macht",
+                                    "machen"
+                                ],
+                                [
+                                    "第二人称（敬）",
+                                    "machen",
+                                    "machen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "machen 过去时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "machte",
+                                    "machten"
+                                ],
+                                [
+                                    "第二人称（亲）",
+                                    "machtest",
+                                    "machtet"
+                                ],
+                                [
+                                    "第三人称",
+                                    "machte",
+                                    "machten"
+                                ],
+                                [
+                                    "第二人称（敬）",
+                                    "machten",
+                                    "machten"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "machen 现在完成时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "habe gemacht",
+                                    "haben gemacht"
+                                ],
+                                [
+                                    "第二人称（亲）",
+                                    "hast gemacht",
+                                    "habt gemacht"
+                                ],
+                                [
+                                    "第三人称",
+                                    "hat gemacht",
+                                    "haben gemacht"
+                                ],
+                                [
+                                    "第二人称（敬）",
+                                    "haben gemacht",
+                                    "haben gemacht"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "弱变化动词词干不变，过去时加 -te，过去分词加 -t。词干以 -t / -d 结尾时，需加 -e-（arbeiten → arbeitete, gearbeitet）。"
+                },
+                {
+                    "id": "de-verb-strong",
+                    "title": "强变化动词",
+                    "tables": [
+                        {
+                            "caption": "sprechen（说）现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "spreche",
+                                    "sprechen"
+                                ],
+                                [
+                                    "第二人称（亲）",
+                                    "sprichst",
+                                    "sprecht"
+                                ],
+                                [
+                                    "第三人称",
+                                    "spricht",
+                                    "sprechen"
+                                ],
+                                [
+                                    "第二人称（敬）",
+                                    "sprechen",
+                                    "sprechen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "sprechen 过去时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "sprach",
+                                    "sprachen"
+                                ],
+                                [
+                                    "第二人称（亲）",
+                                    "sprachst",
+                                    "spracht"
+                                ],
+                                [
+                                    "第三人称",
+                                    "sprach",
+                                    "sprachen"
+                                ],
+                                [
+                                    "第二人称（敬）",
+                                    "sprachen",
+                                    "sprachen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "sprechen 现在完成时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "habe gesprochen",
+                                    "haben gesprochen"
+                                ],
+                                [
+                                    "第二人称（亲）",
+                                    "hast gesprochen",
+                                    "habt gesprochen"
+                                ],
+                                [
+                                    "第三人称",
+                                    "hat gesprochen",
+                                    "haben gesprochen"
+                                ],
+                                [
+                                    "第二人称（敬）",
+                                    "haben gesprochen",
+                                    "haben gesprochen"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "强变化动词通过词干元音变化（Ablaut）构成过去时和过去分词。过去分词以 -en 结尾，且常加前缀 ge-。第二人称单数现在时也常变音（sprechen → du sprichst）。"
+                },
+                {
+                    "id": "de-verb-aux",
+                    "title": "助动词",
+                    "tables": [
+                        {
+                            "caption": "sein（是）",
+                            "headers": [
+                                "人称",
+                                "现在时",
+                                "过去时",
+                                "现在完成时"
+                            ],
+                            "rows": [
+                                [
+                                    "ich",
+                                    "bin",
+                                    "war",
+                                    "bin gewesen"
+                                ],
+                                [
+                                    "du",
+                                    "bist",
+                                    "warst",
+                                    "bist gewesen"
+                                ],
+                                [
+                                    "er / sie / es",
+                                    "ist",
+                                    "war",
+                                    "ist gewesen"
+                                ],
+                                [
+                                    "wir",
+                                    "sind",
+                                    "waren",
+                                    "sind gewesen"
+                                ],
+                                [
+                                    "ihr",
+                                    "seid",
+                                    "wart",
+                                    "seid gewesen"
+                                ],
+                                [
+                                    "sie / Sie",
+                                    "sind",
+                                    "waren",
+                                    "sind gewesen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "haben（有）",
+                            "headers": [
+                                "人称",
+                                "现在时",
+                                "过去时",
+                                "现在完成时"
+                            ],
+                            "rows": [
+                                [
+                                    "ich",
+                                    "habe",
+                                    "hatte",
+                                    "habe gehabt"
+                                ],
+                                [
+                                    "du",
+                                    "hast",
+                                    "hattest",
+                                    "hast gehabt"
+                                ],
+                                [
+                                    "er / sie / es",
+                                    "hat",
+                                    "hatte",
+                                    "hat gehabt"
+                                ],
+                                [
+                                    "wir",
+                                    "haben",
+                                    "hatten",
+                                    "haben gehabt"
+                                ],
+                                [
+                                    "ihr",
+                                    "habt",
+                                    "hattet",
+                                    "habt gehabt"
+                                ],
+                                [
+                                    "sie / Sie",
+                                    "haben",
+                                    "hatten",
+                                    "haben gehabt"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "werden（成为 / 将来助动词 / 被动助动词）",
+                            "headers": [
+                                "人称",
+                                "现在时",
+                                "过去时",
+                                "现在完成时"
+                            ],
+                            "rows": [
+                                [
+                                    "ich",
+                                    "werde",
+                                    "wurde",
+                                    "bin geworden"
+                                ],
+                                [
+                                    "du",
+                                    "wirst",
+                                    "wurdest",
+                                    "bist geworden"
+                                ],
+                                [
+                                    "er / sie / es",
+                                    "wird",
+                                    "wurde",
+                                    "ist geworden"
+                                ],
+                                [
+                                    "wir",
+                                    "werden",
+                                    "wurden",
+                                    "sind geworden"
+                                ],
+                                [
+                                    "ihr",
+                                    "werdet",
+                                    "wurdet",
+                                    "seid geworden"
+                                ],
+                                [
+                                    "sie / Sie",
+                                    "werden",
+                                    "wurden",
+                                    "sind geworden"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "sein、haben、werden 是德语三大助动词。haben 构成大多数动词的完成时；sein 构成移动 / 状态变化动词的完成时；werden 构成将来时与被动语态。"
+                },
+                {
+                    "id": "de-verb-modal",
+                    "title": "情态动词",
+                    "tables": [
+                        {
+                            "caption": "情态动词现在时",
+                            "headers": [
+                                "人称",
+                                "können",
+                                "müssen",
+                                "wollen",
+                                "sollen",
+                                "dürfen",
+                                "mögen"
+                            ],
+                            "rows": [
+                                [
+                                    "ich",
+                                    "kann",
+                                    "muss",
+                                    "will",
+                                    "soll",
+                                    "darf",
+                                    "mag"
+                                ],
+                                [
+                                    "du",
+                                    "kannst",
+                                    "musst",
+                                    "willst",
+                                    "sollst",
+                                    "darfst",
+                                    "magst"
+                                ],
+                                [
+                                    "er / sie / es",
+                                    "kann",
+                                    "muss",
+                                    "will",
+                                    "soll",
+                                    "darf",
+                                    "mag"
+                                ],
+                                [
+                                    "wir",
+                                    "können",
+                                    "müssen",
+                                    "wollen",
+                                    "sollen",
+                                    "dürfen",
+                                    "mögen"
+                                ],
+                                [
+                                    "ihr",
+                                    "könnt",
+                                    "müsst",
+                                    "wollt",
+                                    "sollt",
+                                    "dürft",
+                                    "mögt"
+                                ],
+                                [
+                                    "sie / Sie",
+                                    "können",
+                                    "müssen",
+                                    "wollen",
+                                    "sollen",
+                                    "dürfen",
+                                    "mögen"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "情态动词过去时",
+                            "headers": [
+                                "人称",
+                                "können",
+                                "müssen",
+                                "wollen",
+                                "sollen",
+                                "dürfen",
+                                "mögen"
+                            ],
+                            "rows": [
+                                [
+                                    "ich",
+                                    "konnte",
+                                    "musste",
+                                    "wollte",
+                                    "sollte",
+                                    "durfte",
+                                    "mochte"
+                                ],
+                                [
+                                    "du",
+                                    "konntest",
+                                    "musstest",
+                                    "wolltest",
+                                    "solltest",
+                                    "durftest",
+                                    "mochtest"
+                                ],
+                                [
+                                    "er / sie / es",
+                                    "konnte",
+                                    "musste",
+                                    "wollte",
+                                    "sollte",
+                                    "durfte",
+                                    "mochte"
+                                ],
+                                [
+                                    "wir",
+                                    "konnten",
+                                    "mussten",
+                                    "wollten",
+                                    "sollten",
+                                    "durften",
+                                    "mochten"
+                                ],
+                                [
+                                    "ihr",
+                                    "konntet",
+                                    "musstet",
+                                    "wolltet",
+                                    "solltet",
+                                    "durftet",
+                                    "mochtet"
+                                ],
+                                [
+                                    "sie / Sie",
+                                    "konnten",
+                                    "mussten",
+                                    "wollten",
+                                    "sollten",
+                                    "durften",
+                                    "mochten"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "情态动词第一、三人称单数现在时同形且无词尾。情态动词完成时通常用 haben + 过去分词，但在双不定式结构中用「情态动词 + 实义动词不定式」的完成时形式。"
+                },
+                {
+                    "id": "de-verb-tenses",
+                    "title": "时态与语态",
+                    "tables": [
+                        {
+                            "caption": "六时态",
+                            "headers": [
+                                "时态",
+                                "构成",
+                                "例（machen）"
+                            ],
+                            "rows": [
+                                [
+                                    "现在时 (Präsens)",
+                                    "动词变位",
+                                    "ich mache"
+                                ],
+                                [
+                                    "过去时 (Präteritum)",
+                                    "弱 -te / 强变化",
+                                    "ich machte"
+                                ],
+                                [
+                                    "现在完成时 (Perfekt)",
+                                    "haben / sein + 过去分词",
+                                    "ich habe gemacht"
+                                ],
+                                [
+                                    "过去完成时 (Plusquamperfekt)",
+                                    "hatte / war + 过去分词",
+                                    "ich hatte gemacht"
+                                ],
+                                [
+                                    "将来时 (Futur I)",
+                                    "werden + 不定式",
+                                    "ich werde machen"
+                                ],
+                                [
+                                    "将来完成时 (Futur II)",
+                                    "werden + 过去分词 + haben / sein",
+                                    "ich werde gemacht haben"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "被动语态",
+                            "headers": [
+                                "时态",
+                                "构成",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "现在时被动",
+                                    "werden + 过去分词",
+                                    "es wird gemacht"
+                                ],
+                                [
+                                    "过去时被动",
+                                    "wurde + 过去分词",
+                                    "es wurde gemacht"
+                                ],
+                                [
+                                    "现在完成时被动",
+                                    "ist + 过去分词 + worden",
+                                    "es ist gemacht worden"
+                                ],
+                                [
+                                    "将来时被动",
+                                    "wird + 过去分词 + werden",
+                                    "es wird gemacht werden"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "被动语态与状态被动不同：werden + 过去分词表示过程；sein + 过去分词表示状态（Zustandspassiv）。"
+                },
+                {
+                    "id": "de-verb-participle",
+                    "title": "分词与不定式",
+                    "tables": [
+                        {
+                            "caption": "分词构成",
+                            "headers": [
+                                "类型",
+                                "构成",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "现在分词",
+                                    "不定式 + -d",
+                                    "machend, sprechend"
+                                ],
+                                [
+                                    "过去分词（弱）",
+                                    "ge- + 词干 + -t",
+                                    "gemacht"
+                                ],
+                                [
+                                    "过去分词（强）",
+                                    "ge- + 词干（常变化）+ -en",
+                                    "gesprochen, geschrieben"
+                                ],
+                                [
+                                    "过去分词（可分前缀）",
+                                    "前缀 + ge- + 词干 + 词尾",
+                                    "aufgemacht, eingekauft"
+                                ],
+                                [
+                                    "过去分词（不可分前缀）",
+                                    "无 ge-",
+                                    "besucht, verstanden"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "不定式",
+                            "headers": [
+                                "类型",
+                                "构成",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "现在不定式",
+                                    "词干 + -en / -n",
+                                    "machen, sprechen"
+                                ],
+                                [
+                                    "带 zu 不定式",
+                                    "zu + 不定式",
+                                    "zu machen"
+                                ],
+                                [
+                                    "完成不定式",
+                                    "过去分词 + haben / sein",
+                                    "gemacht haben"
+                                ],
+                                [
+                                    "将来不定式",
+                                    "不定式 + werden",
+                                    "machen werden"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "可分动词的 zu 插在可分前缀与词干之间（aufzumachen）。"
+                }
+            ]
+        }
+    ]
+}

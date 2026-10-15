@@ -1,0 +1,74 @@
+/* 项目内置字体声明
+ * 字体文件请放到 assets/resources/fonts/ 下，命名与下方一致即可生效。
+ * 若文件缺失，浏览器会回退到 variables.css 中的 --ff-ui 后备字体。
+ *
+ * 命名约定：
+ *   ui-regular.woff2 / ui-bold.woff2     界面字体（含中文）
+ *   la.woff2                              拉丁语
+ *   grc.woff2                             古希腊语（含变音符号）
+ *   he.woff2                              圣经希伯来语（RTL）
+ *   sa.woff2                              梵语（天城文）
+ *   mnc.woff2                             满语（传统蒙文）
+ *   ja.woff2                              日语
+ *   zh-cls.woff2                          古汉语
+ */
+
+@font-face {
+    font-family: "LN UI";
+    src: url("../resources/fonts/ui-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "LN UI";
+    src: url("../resources/fonts/ui-bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 各语言专用字体：字体文件就绪后取消注释 */
+
+/* @font-face {
+  font-family: "LN LA";
+  src: url("../resources/fonts/la.woff2") format("woff2");
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: "LN GRC";
+  src: url("../resources/fonts/grc.woff2") format("woff2");
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: "LN HE";
+  src: url("../resources/fonts/he.woff2") format("woff2");
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: "LN SA";
+  src: url("../resources/fonts/sa.woff2") format("woff2");
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: "LN MNC";
+  src: url("../resources/fonts/mnc.woff2") format("woff2");
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: "LN JA";
+  src: url("../resources/fonts/ja.woff2") format("woff2");
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: "LN ZH-CLS";
+  src: url("../resources/fonts/zh-cls.woff2") format("woff2");
+  font-display: swap;
+} */

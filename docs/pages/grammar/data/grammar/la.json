@@ -1,0 +1,1826 @@
+{
+    "version": 1,
+    "language": "la",
+    "name": "拉丁语",
+    "paradigms": {
+        "verb": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变位",
+                    "columns": [
+                        {
+                            "key": "1sg",
+                            "label": "单1"
+                        },
+                        {
+                            "key": "2sg",
+                            "label": "单2"
+                        },
+                        {
+                            "key": "3sg",
+                            "label": "单3"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "复1"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "复2"
+                        },
+                        {
+                            "key": "3pl",
+                            "label": "复3"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "pres-act-ind",
+                            "label": "现在时 主动 陈述式",
+                            "grammarRef": "la-verb-1st-conj",
+                            "principal": true
+                        },
+                        {
+                            "key": "pres-pass-ind",
+                            "label": "现在时 被动 陈述式",
+                            "grammarRef": "la-verb-1st-conj",
+                            "principal": true
+                        },
+                        {
+                            "key": "fut-act-ind",
+                            "label": "将来时 主动 陈述式",
+                            "grammarRef": "la-verb-tenses"
+                        },
+                        {
+                            "key": "perf-act-ind",
+                            "label": "完成时 主动 陈述式",
+                            "grammarRef": "la-verb-tenses",
+                            "principal": true
+                        },
+                        {
+                            "key": "perf-pass-part",
+                            "label": "完成时 被动 分词",
+                            "grammarRef": "la-verb-participle",
+                            "principal": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "noun": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变格",
+                    "columns": [
+                        {
+                            "key": "sg",
+                            "label": "单数"
+                        },
+                        {
+                            "key": "pl",
+                            "label": "复数"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "nom",
+                            "label": "主格"
+                        },
+                        {
+                            "key": "gen",
+                            "label": "属格"
+                        },
+                        {
+                            "key": "dat",
+                            "label": "与格"
+                        },
+                        {
+                            "key": "acc",
+                            "label": "宾格"
+                        },
+                        {
+                            "key": "abl",
+                            "label": "夺格"
+                        },
+                        {
+                            "key": "voc",
+                            "label": "呼格"
+                        }
+                    ]
+                }
+            ]
+        },
+        "adj": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变格",
+                    "columns": [
+                        {
+                            "key": "m_sg",
+                            "label": "阳单"
+                        },
+                        {
+                            "key": "f_sg",
+                            "label": "阴单"
+                        },
+                        {
+                            "key": "n_sg",
+                            "label": "中单"
+                        },
+                        {
+                            "key": "m_pl",
+                            "label": "阳复"
+                        },
+                        {
+                            "key": "f_pl",
+                            "label": "阴复"
+                        },
+                        {
+                            "key": "n_pl",
+                            "label": "中复"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "nom",
+                            "label": "主格"
+                        },
+                        {
+                            "key": "gen",
+                            "label": "属格"
+                        },
+                        {
+                            "key": "dat",
+                            "label": "与格"
+                        },
+                        {
+                            "key": "acc",
+                            "label": "宾格"
+                        },
+                        {
+                            "key": "abl",
+                            "label": "夺格"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "sections": [
+        {
+            "id": "la-noun",
+            "title": "名词变格",
+            "items": [
+                {
+                    "id": "la-noun-1st-decl",
+                    "title": "第一变格法",
+                    "tables": [
+                        {
+                            "caption": "aqua, aquae (f.) 水",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格 (nominativus)",
+                                    "aqua",
+                                    "aquae"
+                                ],
+                                [
+                                    "属格 (genetivus)",
+                                    "aquae",
+                                    "aquārum"
+                                ],
+                                [
+                                    "与格 (dativus)",
+                                    "aquae",
+                                    "aquīs"
+                                ],
+                                [
+                                    "宾格 (accusativus)",
+                                    "aquam",
+                                    "aquās"
+                                ],
+                                [
+                                    "夺格 (ablativus)",
+                                    "aquā",
+                                    "aquīs"
+                                ],
+                                [
+                                    "呼格 (vocativus)",
+                                    "aqua",
+                                    "aquae"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "多为阴性。少数为阳性（agricola 农民、nauta 水手、poēta 诗人），仍按阴性变格。"
+                },
+                {
+                    "id": "la-noun-2nd-decl",
+                    "title": "第二变格法",
+                    "tables": [
+                        {
+                            "caption": "dominus, dominī (m.) 主人",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "dominus",
+                                    "dominī"
+                                ],
+                                [
+                                    "属格",
+                                    "dominī",
+                                    "dominōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "dominō",
+                                    "dominīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "dominum",
+                                    "dominōs"
+                                ],
+                                [
+                                    "夺格",
+                                    "dominō",
+                                    "dominīs"
+                                ],
+                                [
+                                    "呼格",
+                                    "domine",
+                                    "dominī"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "bellum, bellī (n.) 战争",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "bellum",
+                                    "bella"
+                                ],
+                                [
+                                    "属格",
+                                    "bellī",
+                                    "bellōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "bellō",
+                                    "bellīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "bellum",
+                                    "bella"
+                                ],
+                                [
+                                    "夺格",
+                                    "bellō",
+                                    "bellīs"
+                                ],
+                                [
+                                    "呼格",
+                                    "bellum",
+                                    "bella"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "以 -us/-er/-ir 结尾多为阳性，以 -um 结尾为中性。中性名词主/宾/呼格同形。以 -er 结尾的阳性名词（如 puer）呼格保留 -er。"
+                },
+                {
+                    "id": "la-noun-3rd-decl",
+                    "title": "第三变格法",
+                    "tables": [
+                        {
+                            "caption": "rēx, rēgis (m.) 国王（辅音词干）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "rēx",
+                                    "rēgēs"
+                                ],
+                                [
+                                    "属格",
+                                    "rēgis",
+                                    "rēgum"
+                                ],
+                                [
+                                    "与格",
+                                    "rēgī",
+                                    "rēgibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "rēgem",
+                                    "rēgēs"
+                                ],
+                                [
+                                    "夺格",
+                                    "rēge",
+                                    "rēgibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "rēx",
+                                    "rēgēs"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "corpus, corporis (n.) 身体（辅音词干）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "corpus",
+                                    "corpora"
+                                ],
+                                [
+                                    "属格",
+                                    "corporis",
+                                    "corporum"
+                                ],
+                                [
+                                    "与格",
+                                    "corporī",
+                                    "corporibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "corpus",
+                                    "corpora"
+                                ],
+                                [
+                                    "夺格",
+                                    "corpore",
+                                    "corporibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "corpus",
+                                    "corpora"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "cīvis, cīvis (m./f.) 公民（i 词干）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "cīvis",
+                                    "cīvēs"
+                                ],
+                                [
+                                    "属格",
+                                    "cīvis",
+                                    "cīvium"
+                                ],
+                                [
+                                    "与格",
+                                    "cīvī",
+                                    "cīvibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "cīvem",
+                                    "cīvēs"
+                                ],
+                                [
+                                    "夺格",
+                                    "cīve",
+                                    "cīvibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "cīvis",
+                                    "cīvēs"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "mare, maris (n.) 海（i 词干中性）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "mare",
+                                    "maria"
+                                ],
+                                [
+                                    "属格",
+                                    "maris",
+                                    "marium"
+                                ],
+                                [
+                                    "与格",
+                                    "marī",
+                                    "maribus"
+                                ],
+                                [
+                                    "宾格",
+                                    "mare",
+                                    "maria"
+                                ],
+                                [
+                                    "夺格",
+                                    "marī",
+                                    "maribus"
+                                ],
+                                [
+                                    "呼格",
+                                    "mare",
+                                    "maria"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "属格单数词干才是真正的词干。辅音词干与 i 词干的复数属格分别为 -um / -ium。"
+                },
+                {
+                    "id": "la-noun-4th-decl",
+                    "title": "第四变格法",
+                    "tables": [
+                        {
+                            "caption": "manus, manūs (f.) 手",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "manus",
+                                    "manūs"
+                                ],
+                                [
+                                    "属格",
+                                    "manūs",
+                                    "manuum"
+                                ],
+                                [
+                                    "与格",
+                                    "manuī",
+                                    "manibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "manum",
+                                    "manūs"
+                                ],
+                                [
+                                    "夺格",
+                                    "manū",
+                                    "manibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "manus",
+                                    "manūs"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "cornū, cornūs (n.) 角",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "cornū",
+                                    "cornua"
+                                ],
+                                [
+                                    "属格",
+                                    "cornūs",
+                                    "cornuum"
+                                ],
+                                [
+                                    "与格",
+                                    "cornū",
+                                    "cornibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "cornū",
+                                    "cornua"
+                                ],
+                                [
+                                    "夺格",
+                                    "cornū",
+                                    "cornibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "cornū",
+                                    "cornua"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "以 -us/-ū 结尾。少数常用名词与格/夺格复数为 -ubus（domus → domibus；acus → acubus）。"
+                },
+                {
+                    "id": "la-noun-5th-decl",
+                    "title": "第五变格法",
+                    "tables": [
+                        {
+                            "caption": "rēs, reī (f.) 事物",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "rēs",
+                                    "rēs"
+                                ],
+                                [
+                                    "属格",
+                                    "reī",
+                                    "rērum"
+                                ],
+                                [
+                                    "与格",
+                                    "reī",
+                                    "rēbus"
+                                ],
+                                [
+                                    "宾格",
+                                    "rem",
+                                    "rēs"
+                                ],
+                                [
+                                    "夺格",
+                                    "rē",
+                                    "rēbus"
+                                ],
+                                [
+                                    "呼格",
+                                    "rēs",
+                                    "rēs"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "diēs, diēī (m.) 日",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "diēs",
+                                    "diēs"
+                                ],
+                                [
+                                    "属格",
+                                    "diēī",
+                                    "diērum"
+                                ],
+                                [
+                                    "与格",
+                                    "diēī",
+                                    "diēbus"
+                                ],
+                                [
+                                    "宾格",
+                                    "diem",
+                                    "diēs"
+                                ],
+                                [
+                                    "夺格",
+                                    "diē",
+                                    "diēbus"
+                                ],
+                                [
+                                    "呼格",
+                                    "diēs",
+                                    "diēs"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "多为阴性，diēs、merīdiēs 为阳性。常用词只有 rēs、diēs、spēs、fidēs 等。"
+                }
+            ]
+        },
+        {
+            "id": "la-adj",
+            "title": "形容词",
+            "items": [
+                {
+                    "id": "la-adj-1st-2nd",
+                    "title": "第一二变格形容词",
+                    "tables": [
+                        {
+                            "caption": "bonus, -a, -um 好的（阳性）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "bonus",
+                                    "bonī"
+                                ],
+                                [
+                                    "属格",
+                                    "bonī",
+                                    "bonōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "bonō",
+                                    "bonīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "bonum",
+                                    "bonōs"
+                                ],
+                                [
+                                    "夺格",
+                                    "bonō",
+                                    "bonīs"
+                                ],
+                                [
+                                    "呼格",
+                                    "bone",
+                                    "bonī"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "bonus, -a, -um 好的（阴性）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "bona",
+                                    "bonae"
+                                ],
+                                [
+                                    "属格",
+                                    "bonae",
+                                    "bonārum"
+                                ],
+                                [
+                                    "与格",
+                                    "bonae",
+                                    "bonīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "bonam",
+                                    "bonās"
+                                ],
+                                [
+                                    "夺格",
+                                    "bonā",
+                                    "bonīs"
+                                ],
+                                [
+                                    "呼格",
+                                    "bona",
+                                    "bonae"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "bonus, -a, -um 好的（中性）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "bonum",
+                                    "bona"
+                                ],
+                                [
+                                    "属格",
+                                    "bonī",
+                                    "bonōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "bonō",
+                                    "bonīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "bonum",
+                                    "bona"
+                                ],
+                                [
+                                    "夺格",
+                                    "bonō",
+                                    "bonīs"
+                                ],
+                                [
+                                    "呼格",
+                                    "bonum",
+                                    "bona"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "阳性按第二变格 -us/-er，阴性按第一变格 -a，中性按第二变格 -um。"
+                },
+                {
+                    "id": "la-adj-3rd",
+                    "title": "第三变格形容词",
+                    "tables": [
+                        {
+                            "caption": "fortis, -e 勇敢的（阳/阴性）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "fortis",
+                                    "fortēs"
+                                ],
+                                [
+                                    "属格",
+                                    "fortis",
+                                    "fortium"
+                                ],
+                                [
+                                    "与格",
+                                    "fortī",
+                                    "fortibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "fortem",
+                                    "fortēs"
+                                ],
+                                [
+                                    "夺格",
+                                    "fortī",
+                                    "fortibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "fortis",
+                                    "fortēs"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "fortis, -e 勇敢的（中性）",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "forte",
+                                    "fortia"
+                                ],
+                                [
+                                    "属格",
+                                    "fortis",
+                                    "fortium"
+                                ],
+                                [
+                                    "与格",
+                                    "fortī",
+                                    "fortibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "forte",
+                                    "fortia"
+                                ],
+                                [
+                                    "夺格",
+                                    "fortī",
+                                    "fortibus"
+                                ],
+                                [
+                                    "呼格",
+                                    "forte",
+                                    "fortia"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "两终止（-is, -e）、三终止（-er, -is, -e，如 ācer, ācris, ācre）。与名词第三变格同形，但夺格单数常为 -ī（而非 -e），复数属格为 -ium。"
+                }
+            ]
+        },
+        {
+            "id": "la-pron",
+            "title": "代词",
+            "items": [
+                {
+                    "id": "la-pron-personal",
+                    "title": "人称代词",
+                    "tables": [
+                        {
+                            "caption": "第一人称与第二人称（单数）",
+                            "headers": [
+                                "格",
+                                "ego 我",
+                                "tū 你"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "ego",
+                                    "tū"
+                                ],
+                                [
+                                    "属格",
+                                    "meī",
+                                    "tuī"
+                                ],
+                                [
+                                    "与格",
+                                    "mihi",
+                                    "tibi"
+                                ],
+                                [
+                                    "宾格",
+                                    "mē",
+                                    "tē"
+                                ],
+                                [
+                                    "夺格",
+                                    "mē",
+                                    "tē"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "第一人称与第二人称（复数）",
+                            "headers": [
+                                "格",
+                                "nōs 我们",
+                                "vōs 你们"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "nōs",
+                                    "vōs"
+                                ],
+                                [
+                                    "属格",
+                                    "nostrum / nostrī",
+                                    "vestrum / vestrī"
+                                ],
+                                [
+                                    "与格",
+                                    "nōbīs",
+                                    "vōbīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "nōs",
+                                    "vōs"
+                                ],
+                                [
+                                    "夺格",
+                                    "nōbīs",
+                                    "vōbīs"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "第三人称（is, ea, id 他/她/它）（单数）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "is",
+                                    "ea",
+                                    "id"
+                                ],
+                                [
+                                    "属格",
+                                    "eius",
+                                    "eius",
+                                    "eius"
+                                ],
+                                [
+                                    "与格",
+                                    "eī",
+                                    "eī",
+                                    "eī"
+                                ],
+                                [
+                                    "宾格",
+                                    "eum",
+                                    "eam",
+                                    "id"
+                                ],
+                                [
+                                    "夺格",
+                                    "eō",
+                                    "eā",
+                                    "eō"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "第三人称（复数）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "eī / iī",
+                                    "eae",
+                                    "ea"
+                                ],
+                                [
+                                    "属格",
+                                    "eōrum",
+                                    "eārum",
+                                    "eōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "eīs / iīs",
+                                    "eīs / iīs",
+                                    "eīs / iīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "eōs",
+                                    "eās",
+                                    "ea"
+                                ],
+                                [
+                                    "夺格",
+                                    "eīs / iīs",
+                                    "eīs / iīs",
+                                    "eīs / iīs"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "拉丁语常省略人称代词主语，动词人称已含信息；代词多用于强调或对比。"
+                },
+                {
+                    "id": "la-pron-demonstrative",
+                    "title": "指示代词",
+                    "tables": [
+                        {
+                            "caption": "hic, haec, hoc 这（近指）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "hic",
+                                    "haec",
+                                    "hoc"
+                                ],
+                                [
+                                    "属格",
+                                    "huius",
+                                    "huius",
+                                    "huius"
+                                ],
+                                [
+                                    "与格",
+                                    "huic",
+                                    "huic",
+                                    "huic"
+                                ],
+                                [
+                                    "宾格",
+                                    "hunc",
+                                    "hanc",
+                                    "hoc"
+                                ],
+                                [
+                                    "夺格",
+                                    "hōc",
+                                    "hāc",
+                                    "hōc"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "ille, illa, illud 那（远指）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "ille",
+                                    "illa",
+                                    "illud"
+                                ],
+                                [
+                                    "属格",
+                                    "illīus",
+                                    "illīus",
+                                    "illīus"
+                                ],
+                                [
+                                    "与格",
+                                    "illī",
+                                    "illī",
+                                    "illī"
+                                ],
+                                [
+                                    "宾格",
+                                    "illum",
+                                    "illam",
+                                    "illud"
+                                ],
+                                [
+                                    "夺格",
+                                    "illō",
+                                    "illā",
+                                    "illō"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "iste, ista, istud 那个（第二人称所指）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "iste",
+                                    "ista",
+                                    "istud"
+                                ],
+                                [
+                                    "属格",
+                                    "istīus",
+                                    "istīus",
+                                    "istīus"
+                                ],
+                                [
+                                    "与格",
+                                    "istī",
+                                    "istī",
+                                    "istī"
+                                ],
+                                [
+                                    "宾格",
+                                    "istum",
+                                    "istam",
+                                    "istud"
+                                ],
+                                [
+                                    "夺格",
+                                    "istō",
+                                    "istā",
+                                    "istō"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "指示代词的属格单数一律为 -īus，与格单数一律为 -ī。"
+                },
+                {
+                    "id": "la-pron-relative",
+                    "title": "关系代词 quī, quae, quod",
+                    "tables": [
+                        {
+                            "caption": "quī, quae, quod（单数）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "quī",
+                                    "quae",
+                                    "quod"
+                                ],
+                                [
+                                    "属格",
+                                    "cuius",
+                                    "cuius",
+                                    "cuius"
+                                ],
+                                [
+                                    "与格",
+                                    "cui",
+                                    "cui",
+                                    "cui"
+                                ],
+                                [
+                                    "宾格",
+                                    "quem",
+                                    "quam",
+                                    "quod"
+                                ],
+                                [
+                                    "夺格",
+                                    "quō",
+                                    "quā",
+                                    "quō"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "quī, quae, quod（复数）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "quī",
+                                    "quae",
+                                    "quae"
+                                ],
+                                [
+                                    "属格",
+                                    "quōrum",
+                                    "quārum",
+                                    "quōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "quibus",
+                                    "quibus",
+                                    "quibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "quōs",
+                                    "quās",
+                                    "quae"
+                                ],
+                                [
+                                    "夺格",
+                                    "quibus",
+                                    "quibus",
+                                    "quibus"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "性和数由先行词决定，格由从句中的地位决定。"
+                },
+                {
+                    "id": "la-pron-interrogative",
+                    "title": "疑问代词 quis, quid",
+                    "tables": [
+                        {
+                            "caption": "quis, quid（单数）",
+                            "headers": [
+                                "格",
+                                "阳性/阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "quis",
+                                    "quid"
+                                ],
+                                [
+                                    "属格",
+                                    "cuius",
+                                    "cuius"
+                                ],
+                                [
+                                    "与格",
+                                    "cui",
+                                    "cui"
+                                ],
+                                [
+                                    "宾格",
+                                    "quem",
+                                    "quid"
+                                ],
+                                [
+                                    "夺格",
+                                    "quō",
+                                    "quō"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "疑问形容词 quī, quae, quod（复数，作形容词用）",
+                            "headers": [
+                                "格",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "quī",
+                                    "quae",
+                                    "quae"
+                                ],
+                                [
+                                    "属格",
+                                    "quōrum",
+                                    "quārum",
+                                    "quōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "quibus",
+                                    "quibus",
+                                    "quibus"
+                                ],
+                                [
+                                    "宾格",
+                                    "quōs",
+                                    "quās",
+                                    "quae"
+                                ],
+                                [
+                                    "夺格",
+                                    "quibus",
+                                    "quibus",
+                                    "quibus"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "疑问代词与关系代词变格几乎同形，区别在主格单数（quis vs. quī）与中性主/宾格单数（quid vs. quod）。"
+                }
+            ]
+        },
+        {
+            "id": "la-verb",
+            "title": "动词变位",
+            "items": [
+                {
+                    "id": "la-verb-1st-conj",
+                    "title": "第一变位法 (-āre)",
+                    "tables": [
+                        {
+                            "caption": "amō, amāre, amāvī, amātum 爱（现在时主动陈述式）",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "amō",
+                                    "amāmus"
+                                ],
+                                [
+                                    "第二人称",
+                                    "amās",
+                                    "amātis"
+                                ],
+                                [
+                                    "第三人称",
+                                    "amat",
+                                    "amant"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "现在时被动陈述式",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "amor",
+                                    "amāmur"
+                                ],
+                                [
+                                    "第二人称",
+                                    "amāris / amāre",
+                                    "amāminī"
+                                ],
+                                [
+                                    "第三人称",
+                                    "amātur",
+                                    "amantur"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "不定式 -āre，命令式单数 -ā、复数 -āte。现在时词干以 -ā- 为特征。"
+                },
+                {
+                    "id": "la-verb-2nd-conj",
+                    "title": "第二变位法 (-ēre)",
+                    "tables": [
+                        {
+                            "caption": "moneō, monēre, monuī, monitum 警告（现在时主动陈述式）",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "moneō",
+                                    "monēmus"
+                                ],
+                                [
+                                    "第二人称",
+                                    "monēs",
+                                    "monētis"
+                                ],
+                                [
+                                    "第三人称",
+                                    "monet",
+                                    "monent"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "现在时被动陈述式",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "moneor",
+                                    "monēmur"
+                                ],
+                                [
+                                    "第二人称",
+                                    "monēris / monēre",
+                                    "monēminī"
+                                ],
+                                [
+                                    "第三人称",
+                                    "monētur",
+                                    "monentur"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "不定式 -ēre，命令式单数 -ē、复数 -ēte。现在时词干以 -ē- 为特征。"
+                },
+                {
+                    "id": "la-verb-3rd-conj",
+                    "title": "第三变位法 (-ere)",
+                    "tables": [
+                        {
+                            "caption": "regō, regere, rēxī, rēctum 统治（现在时主动陈述式）",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "regō",
+                                    "regimus"
+                                ],
+                                [
+                                    "第二人称",
+                                    "regis",
+                                    "regitis"
+                                ],
+                                [
+                                    "第三人称",
+                                    "regit",
+                                    "regunt"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "现在时被动陈述式",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "regor",
+                                    "regimur"
+                                ],
+                                [
+                                    "第二人称",
+                                    "regeris / regere",
+                                    "regiminī"
+                                ],
+                                [
+                                    "第三人称",
+                                    "regitur",
+                                    "reguntur"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "不定式 -ere（短 e）。命令式单数 -e、复数 -ite。词干与人称词尾之间加入连接元音 -i-。"
+                },
+                {
+                    "id": "la-verb-4th-conj",
+                    "title": "第四变位法 (-īre)",
+                    "tables": [
+                        {
+                            "caption": "audiō, audīre, audīvī, audītum 听（现在时主动陈述式）",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "audiō",
+                                    "audīmus"
+                                ],
+                                [
+                                    "第二人称",
+                                    "audīs",
+                                    "audītis"
+                                ],
+                                [
+                                    "第三人称",
+                                    "audit",
+                                    "audiunt"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "现在时被动陈述式",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "audior",
+                                    "audīmur"
+                                ],
+                                [
+                                    "第二人称",
+                                    "audīris / audīre",
+                                    "audīminī"
+                                ],
+                                [
+                                    "第三人称",
+                                    "audītur",
+                                    "audiuntur"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "不定式 -īre，命令式单数 -ī、复数 -īte。词干以 -ī- 为特征。"
+                },
+                {
+                    "id": "la-verb-tenses",
+                    "title": "时态构成（以 amō 为例）",
+                    "tables": [
+                        {
+                            "caption": "直陈式主动",
+                            "headers": [
+                                "时态",
+                                "第一人称单数",
+                                "不定式",
+                                "构成"
+                            ],
+                            "rows": [
+                                [
+                                    "现在时",
+                                    "amō",
+                                    "amāre",
+                                    "词干 + 人称词尾"
+                                ],
+                                [
+                                    "未完成时",
+                                    "amābam",
+                                    "—",
+                                    "词干 + -bā- + 词尾"
+                                ],
+                                [
+                                    "将来时",
+                                    "amābō",
+                                    "—",
+                                    "词干 + -bi-/-bu- + 词尾"
+                                ],
+                                [
+                                    "完成时",
+                                    "amāvī",
+                                    "amāvisse",
+                                    "完成词干 + 完成词尾"
+                                ],
+                                [
+                                    "过去完成时",
+                                    "amāveram",
+                                    "—",
+                                    "完成词干 + -erā- + 词尾"
+                                ],
+                                [
+                                    "将来完成时",
+                                    "amāverō",
+                                    "—",
+                                    "完成词干 + -eri- + 词尾"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "直陈式被动",
+                            "headers": [
+                                "时态",
+                                "第一人称单数",
+                                "不定式"
+                            ],
+                            "rows": [
+                                [
+                                    "现在时",
+                                    "amor",
+                                    "amārī"
+                                ],
+                                [
+                                    "未完成时",
+                                    "amābar",
+                                    "—"
+                                ],
+                                [
+                                    "将来时",
+                                    "amābor",
+                                    "—"
+                                ],
+                                [
+                                    "完成时",
+                                    "amātus sum",
+                                    "amātum esse"
+                                ],
+                                [
+                                    "过去完成时",
+                                    "amātus eram",
+                                    "—"
+                                ],
+                                [
+                                    "将来完成时",
+                                    "amātus erō",
+                                    "—"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "虚拟式主动（第一人称单数）",
+                            "headers": [
+                                "时态",
+                                "第一人称单数"
+                            ],
+                            "rows": [
+                                [
+                                    "现在时",
+                                    "amem"
+                                ],
+                                [
+                                    "未完成时",
+                                    "amārem"
+                                ],
+                                [
+                                    "完成时",
+                                    "amāverim"
+                                ],
+                                [
+                                    "过去完成时",
+                                    "amāvissem"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "命令式主动",
+                            "headers": [
+                                "变位法",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一变位法",
+                                    "amā",
+                                    "amāte"
+                                ],
+                                [
+                                    "第二变位法",
+                                    "monē",
+                                    "monēte"
+                                ],
+                                [
+                                    "第三变位法",
+                                    "rege",
+                                    "regite"
+                                ],
+                                [
+                                    "第四变位法",
+                                    "audī",
+                                    "audīte"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "四种变位法共用一套人称词尾，只是构成方式不同。完成词干通常不规则，需逐个记忆。"
+                },
+                {
+                    "id": "la-verb-participle",
+                    "title": "分词与不定式",
+                    "tables": [
+                        {
+                            "caption": "各变位法的分词",
+                            "headers": [
+                                "类型",
+                                "amō",
+                                "moneō",
+                                "regō",
+                                "audiō"
+                            ],
+                            "rows": [
+                                [
+                                    "现在主动",
+                                    "amāns, -antis",
+                                    "monēns, -entis",
+                                    "regēns, -entis",
+                                    "audiēns, -entis"
+                                ],
+                                [
+                                    "完成被动",
+                                    "amātus, -a, -um",
+                                    "monitus, -a, -um",
+                                    "rēctus, -a, -um",
+                                    "audītus, -a, -um"
+                                ],
+                                [
+                                    "将来主动",
+                                    "amātūrus, -a, -um",
+                                    "monitūrus, -a, -um",
+                                    "rēctūrus, -a, -um",
+                                    "audītūrus, -a, -um"
+                                ],
+                                [
+                                    "将来被动（动形词）",
+                                    "amandus, -a, -um",
+                                    "monendus, -a, -um",
+                                    "regendus, -a, -um",
+                                    "audiendus, -a, -um"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "不定式",
+                            "headers": [
+                                "类型",
+                                "amō",
+                                "moneō",
+                                "regō",
+                                "audiō"
+                            ],
+                            "rows": [
+                                [
+                                    "现在主动",
+                                    "amāre",
+                                    "monēre",
+                                    "regere",
+                                    "audīre"
+                                ],
+                                [
+                                    "现在被动",
+                                    "amārī",
+                                    "monērī",
+                                    "regī",
+                                    "audīrī"
+                                ],
+                                [
+                                    "完成主动",
+                                    "amāvisse",
+                                    "monuisse",
+                                    "rēxisse",
+                                    "audīvisse"
+                                ],
+                                [
+                                    "完成被动",
+                                    "amātum esse",
+                                    "monitum esse",
+                                    "rēctum esse",
+                                    "audītum esse"
+                                ],
+                                [
+                                    "将来主动",
+                                    "amātūrum esse",
+                                    "monitūrum esse",
+                                    "rēctūrum esse",
+                                    "audītūrum esse"
+                                ],
+                                [
+                                    "将来被动",
+                                    "amātum īrī",
+                                    "monitum īrī",
+                                    "rēctum īrī",
+                                    "audītum īrī"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "现在分词按第三变格形容词变格；完成被动、将来主动、动形词按第一二变格变格。"
+                }
+            ]
+        }
+    ]
+}

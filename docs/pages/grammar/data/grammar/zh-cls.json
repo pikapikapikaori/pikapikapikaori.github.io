@@ -1,0 +1,133 @@
+{
+    "version": 1,
+    "language": "zh-cls",
+    "name": "古汉语",
+    "sections": [
+        {
+            "id": "zh-cls-parts-of-speech",
+            "title": "词类",
+            "items": [
+                {
+                    "id": "zh-cls-parts-of-speech-overview",
+                    "title": "词类概览",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        },
+        {
+            "id": "zh-cls-function-words",
+            "title": "虚词",
+            "items": [
+                {
+                    "id": "zh-cls-function-words-zhi",
+                    "title": "之",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-qi",
+                    "title": "其",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-er",
+                    "title": "而",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-yi",
+                    "title": "以",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-yu",
+                    "title": "于 / 於",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-wei",
+                    "title": "为",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-zhe",
+                    "title": "者",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-ye",
+                    "title": "也",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-function-words-suo",
+                    "title": "所",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        },
+        {
+            "id": "zh-cls-syntax",
+            "title": "句式",
+            "items": [
+                {
+                    "id": "zh-cls-syntax-judgment",
+                    "title": "判断句",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-syntax-passive",
+                    "title": "被动句",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-syntax-inversion",
+                    "title": "倒装",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-syntax-omission",
+                    "title": "省略",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        },
+        {
+            "id": "zh-cls-usage",
+            "title": "词类活用",
+            "items": [
+                {
+                    "id": "zh-cls-usage-noun-as-verb",
+                    "title": "名词作动词",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-usage-causative",
+                    "title": "使动",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "zh-cls-usage-putative",
+                    "title": "意动",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        }
+    ]
+}

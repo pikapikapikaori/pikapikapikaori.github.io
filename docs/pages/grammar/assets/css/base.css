@@ -1,0 +1,128 @@
+html {
+    font-family: var(--ff-ui);
+    font-size: 16px;
+    line-height: var(--lh-base);
+    color: var(--c-fg);
+    background: var(--c-bg);
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: var(--fs-md);
+    color: var(--c-fg);
+    background: var(--c-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    font-size: var(--fs-2xl);
+    line-height: var(--lh-tight);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: var(--fs-xl);
+    line-height: var(--lh-tight);
+    font-weight: 700;
+}
+
+h3 {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-tight);
+    font-weight: 600;
+}
+
+h4 {
+    font-size: var(--fs-md);
+    font-weight: 600;
+}
+
+p {
+    line-height: var(--lh-base);
+}
+
+code,
+pre,
+.mono {
+    font-family: var(--ff-mono);
+}
+
+::selection {
+    background: var(--c-accent-soft);
+    color: var(--c-fg);
+}
+
+/* 语言内容样式：由 lang-* class 指定字体与方向 */
+[lang="la"] {
+    font-family: "LN LA", var(--ff-content);
+}
+
+[lang="grc"] {
+    font-family: "LN GRC", var(--ff-content);
+}
+
+[lang="he"] {
+    font-family: "LN HE", var(--ff-content);
+    direction: rtl;
+    unicode-bidi: isolate;
+}
+
+[lang="sa"] {
+    font-family: "LN SA", var(--ff-content);
+}
+
+[lang="mnc"] {
+    font-family: "LN MNC", var(--ff-content);
+}
+
+[lang="ja"],
+[lang="ja-cls"] {
+    font-family: "LN JA", var(--ff-content);
+}
+
+[lang="zh-cls"] {
+    font-family: "LN ZH-CLS", var(--ff-content);
+}
+
+[lang="en"],
+[lang="fr"],
+[lang="de"] {
+    font-family: var(--ff-content);
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+}
+
+.skip-link:focus {
+    left: var(--sp-3);
+    top: var(--sp-3);
+    padding: var(--sp-2) var(--sp-3);
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
+    border-radius: var(--r-sm);
+    z-index: 999;
+}
+
+/* 滚动条（webkit） */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--c-border-strong);
+    border-radius: var(--r-full);
+    border: 2px solid var(--c-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--c-fg-subtle);
+}

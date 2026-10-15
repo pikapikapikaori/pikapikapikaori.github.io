@@ -1,0 +1,79 @@
+{
+    "version": 1,
+    "language": "en",
+    "name": "现代英语",
+    "sections": [
+        {
+            "id": "en-noun",
+            "title": "名词",
+            "items": [
+                {
+                    "id": "en-noun-plural",
+                    "title": "名词复数",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        },
+        {
+            "id": "en-pron",
+            "title": "代词",
+            "items": [
+                {
+                    "id": "en-pron-personal",
+                    "title": "人称代词",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "en-pron-demonstrative",
+                    "title": "指示代词",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "en-pron-relative",
+                    "title": "关系代词",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        },
+        {
+            "id": "en-verb",
+            "title": "动词",
+            "items": [
+                {
+                    "id": "en-verb-be",
+                    "title": "be",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "en-verb-tenses",
+                    "title": "时态构成",
+                    "tables": [],
+                    "notes": "待补充"
+                },
+                {
+                    "id": "en-verb-irregular",
+                    "title": "不规则动词",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        },
+        {
+            "id": "en-adj",
+            "title": "形容词",
+            "items": [
+                {
+                    "id": "en-adj-comparison",
+                    "title": "比较级与最高级",
+                    "tables": [],
+                    "notes": "待补充"
+                }
+            ]
+        }
+    ]
+}

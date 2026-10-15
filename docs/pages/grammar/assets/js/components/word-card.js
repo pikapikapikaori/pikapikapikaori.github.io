@@ -1,0 +1,299 @@
+import { h } from '../utils/dom.js'
+import { posLabel, allSources } from '../models/word.js'
+import { isRtl } from '../utils/text-normalize.js'
+import { createSourceTabs } from './source-tabs.js'
+import { createParadigmTable } from './paradigm-table.js'
+
+/**
+ * 翻转词卡
+ *
+ * 新增参数：
+ *   paradigmTpl      语法 JSON 中对应词性的表格模板
+ */
+export function createWordCard(word, options = {}) {
+    const {
+        language = word.language,
+        startFlipped = false,
+        showSourceTabs = true,
+        resolveDerivative = null,
+        onDerivativeClick = null,
+        onEdit = null,
+        onDelete = null,
+        onGrammarRef = null,
+        compact = false,
+        paradigmTpl = null,
+    } = options
+
+    const rtl = isRtl(language)
+    const sources = allSources(word)
+    let activeSource = sources[0] || 'manual'
+
+    const inner = h('div', { class: 'word-card__inner' })
+    const front = buildFront()
+    const back = h('div', { class: 'word-card__face word-card__face--back' })
+    inner.append(front, back)
+
+    const el = h('div', {
+        class: 'word-card' + (startFlipped ? ' word-card--flipped' : '')
+                 + (compact ? ' word-card--compact' : ''),
+        dataset: { wordId: word.id },
+        tabindex: '0',
+        role: 'button',
+        'aria-label': `词卡：${word.lemma}`,
+        'aria-pressed': startFlipped ? 'true' : 'false'
+    }, inner)
+
+    function setFlipped(v) {
+        el.classList.toggle('word-card--flipped', !!v)
+        el.setAttribute('aria-pressed', String(!!v))
+    }
+    function flip() { setFlipped(!el.classList.contains('word-card--flipped')) }
+
+    el.addEventListener('click', (e) => {
+        if (e.target.closest('button, a, input, [data-no-flip]')) return
+        flip()
+    })
+    el.addEventListener('keydown', (e) => {
+        if (e.target !== el) return
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault()
+            flip()
+        }
+    })
+
+    el.flip = flip
+    el.setFlipped = setFlipped
+    el.isFlipped = () => el.classList.contains('word-card--flipped')
+    el.word = word
+
+    /* ---------- 正面 ---------- */
+
+    function buildFront() {
+        const face = h('div', { class: 'word-card__face word-card__face--front' })
+
+        /* ---------- 顶部行：badges（左） + count（右） ---------- */
+        const badges = h('div', { class: 'word-card__badges' },
+            h('span', { class: 'badge' }, posLabel(word.pos))
+        )
+
+        const it = word.inflectionType
+        if (it && it.label) {
+            const clickable = !!(it.grammarRef && onGrammarRef)
+            badges.appendChild(h(clickable ? 'button' : 'span', {
+                class: 'badge badge--accent' + (clickable ? ' badge--clickable' : ''),
+                type: clickable ? 'button' : null,
+                onclick: clickable
+                    ? (e) => { e.stopPropagation(); onGrammarRef(it.grammarRef) }
+                    : null
+            }, it.label))
+        }
+
+        for (const t of word.tags || []) {
+            badges.appendChild(h('span', { class: 'badge' }, t))
+        }
+
+        face.appendChild(h('div', { class: 'word-card__top' },
+            badges,
+            h('div', { class: 'word-card__count num' }, `×${word.encounterCount || 0}`)
+        ))
+
+        /* ---------- 中间：lemma + meta ---------- */
+        const center = h('div', { class: 'word-card__center' },
+            h('div', {
+                class: 'word-card__lemma' + (rtl ? ' word-card__lemma--rtl' : ''),
+                lang: language
+            }, word.lemma)
+        )
+
+        const meta = h('div', { class: 'word-card__meta' },
+            h('span', { class: 'num' }, `掌握度 ${word.mastery ?? 0}/5`)
+        )
+        if (word.addedAt) {
+            meta.appendChild(h('span', { class: 'num' },
+                new Date(word.addedAt).toLocaleDateString('zh-CN')
+            ))
+        }
+        center.appendChild(meta)
+        face.appendChild(center)
+
+        /* ---------- 底部：hint（居中） + actions（右下） ---------- */
+        const bottom = h('div', { class: 'word-card__bottom' },
+            h('div', { class: 'word-card__hint' }, '点击翻面')
+        )
+
+        if (!compact && (onEdit || onDelete)) {
+            const actions = h('div', { class: 'word-card__actions', 'data-no-flip': '' })
+            if (onEdit) {
+                actions.appendChild(h('button', {
+                    class: 'btn btn--ghost btn--sm',
+                    type: 'button',
+                    onclick: (e) => { e.stopPropagation(); onEdit(word) }
+                }, '编辑'))
+            }
+            if (onDelete) {
+                actions.appendChild(h('button', {
+                    class: 'btn btn--ghost btn--sm',
+                    type: 'button',
+                    onclick: (e) => { e.stopPropagation(); onDelete(word) }
+                }, '删除'))
+            }
+            bottom.appendChild(actions)
+        }
+        face.appendChild(bottom)
+
+        return face
+    }
+
+    /* ---------- 背面 ---------- */
+
+    function pick(items) {
+        if (!Array.isArray(items)) return []
+        return items.filter((it) => (it.source || 'manual') === activeSource)
+    }
+
+    function renderBack() {
+        back.replaceChildren()
+
+        if (showSourceTabs && sources.length > 1) {
+            back.appendChild(createSourceTabs(sources, activeSource, (s) => {
+                activeSource = s
+                renderBack()
+            }))
+        }
+
+        // paradigm（表格）
+        if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
+            for (const tableTpl of paradigmTpl.tables || []) {
+                const tableData = word.paradigm[tableTpl.key]
+                if (!tableData) continue
+                const tbl = createParadigmTable(tableTpl, tableData, {
+                    lang: language,
+                    mode: 'view',
+                    onGrammarRef
+                })
+                if (tbl) back.appendChild(tbl)
+            }
+        }
+
+        // 含义
+        const meanings = pick(word.meanings)
+        if (meanings.length) {
+            back.appendChild(section('含义',
+                h('div', { class: 'word-card__meanings' },
+                    ...meanings.map((m) => h('div', {
+                        class: 'word-card__meaning',
+                        lang: m.lang === 'en' ? 'en' : undefined
+                    }, m.text))
+                )
+            ))
+        }
+
+        // 补充形式（inflections）
+        const infs = pick(word.inflections)
+        if (infs.length) {
+            const groups = groupInflections(infs)
+            const container = h('div', {})
+            for (const [gname, list] of groups) {
+                if (gname) {
+                    container.appendChild(h('div', { class: 'word-card__inflection-group-title' }, gname))
+                }
+                container.appendChild(h('div', { class: 'word-card__inflections' },
+                    ...list.map((i) => h('div', { class: 'word-card__inflection' },
+                        i.label
+                            ? h('span', { class: 'word-card__inflection-label' }, i.label + '：')
+                            : null,
+                        h('span', { class: 'word-card__inflection-form', lang: language },
+                            i.form || '')
+                    ))
+                ))
+            }
+            back.appendChild(section('补充形式', container))
+        }
+
+        // 固定搭配
+        const cols = pick(word.collocations)
+        if (cols.length) {
+            back.appendChild(section('固定搭配',
+                h('div', {},
+                    ...cols.map((c) => h('div', { class: 'word-card__collocation' },
+                        h('span', { lang: language }, c.text || ''),
+                        c.gloss ? h('span', { class: 'word-card__gloss' }, ` — ${c.gloss}`) : null
+                    ))
+                )
+            ))
+        }
+
+        // 例句
+        const exs = pick(word.examples)
+        if (exs.length) {
+            back.appendChild(section('例句',
+                h('div', {},
+                    ...exs.map((e) => h('div', { class: 'word-card__example' },
+                        h('div', { class: 'word-card__example-text', lang: language }, e.text || ''),
+                        e.translation ? h('div', { class: 'word-card__example-tr' }, e.translation) : null,
+                        e.citation ? h('div', { class: 'word-card__citation' }, `— ${e.citation}`) : null
+                    ))
+                )
+            ))
+        }
+
+        // 派生词
+        if (word.derivatives && word.derivatives.length) {
+            back.appendChild(section('派生词',
+                h('div', { class: 'word-card__derivatives' },
+                    ...word.derivatives.map((d) => {
+                        const target = resolveDerivative ? resolveDerivative(d) : null
+                        if (target && onDerivativeClick) {
+                            return h('button', {
+                                class: 'badge badge--accent word-card__derivative',
+                                type: 'button',
+                                lang: language,
+                                onclick: (e) => {
+                                    e.stopPropagation()
+                                    onDerivativeClick(target)
+                                }
+                            }, d)
+                        }
+                        return h('span', {
+                            class: 'badge word-card__derivative',
+                            lang: language
+                        }, d)
+                    })
+                )
+            ))
+        }
+
+        if (word.notes) {
+            back.appendChild(section('备注', h('div', {}, word.notes)))
+        }
+
+        back.appendChild(h('div', { class: 'word-card__hint' }, '点击返回'))
+    }
+
+    renderBack()
+    return el
+}
+
+function groupInflections(list) {
+    const map = new Map()
+    for (const it of list) {
+        const g = (it.group || '').trim() || ''
+        if (!map.has(g)) map.set(g, [])
+        map.get(g).push(it)
+    }
+    // 无 group 的排最后
+    const entries = Array.from(map.entries())
+    entries.sort((a, b) => {
+        if (a[0] === '') return 1
+        if (b[0] === '') return -1
+        return 0
+    })
+    return entries
+}
+
+function section(title, ...children) {
+    return h('div', { class: 'word-card__section' },
+        h('div', { class: 'word-card__section-title' }, title),
+        ...children
+    )
+}

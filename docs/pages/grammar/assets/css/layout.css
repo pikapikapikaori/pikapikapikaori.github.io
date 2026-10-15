@@ -1,0 +1,165 @@
+.app {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 顶部栏 */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    height: var(--h-header);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: 0 var(--sp-4);
+    background: color-mix(in oklab, var(--c-bg-elev) 92%, transparent);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--c-border);
+}
+
+.app-header__brand {
+    font-weight: 700;
+    font-size: var(--fs-md);
+    white-space: nowrap;
+}
+
+.app-header__crumbs {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    min-width: 0;
+}
+
+.app-header__crumbs .sep {
+    color: var(--c-fg-subtle);
+}
+
+.app-header__spacer {
+    flex: 1;
+}
+
+.app-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+
+/* 主内容 */
+.app-main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--w-max);
+    margin: 0 auto;
+    padding: var(--sp-5) var(--sp-4) var(--sp-7);
+}
+
+.app-main--wide {
+    max-width: 100%;
+    padding-left: var(--sp-4);
+    padding-right: var(--sp-4);
+}
+
+.app-main--narrow {
+    max-width: 720px;
+}
+
+/* 通用页面块 */
+.page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+    flex-wrap: wrap;
+}
+
+.page-head__title {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+}
+
+.page-head__sub {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    margin-top: 2px;
+}
+
+.page-head__actions {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+}
+
+/* 工具栏：搜索 + 排序 + 筛选 */
+.toolbar {
+    display: flex;
+    gap: var(--sp-2);
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--sp-4);
+    padding: var(--sp-2);
+    background: var(--c-bg-elev);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+}
+
+.toolbar__grow {
+    flex: 1;
+    min-width: 160px;
+}
+
+/* 卡片网格 */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--sp-3);
+}
+
+/* 分页 */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-5);
+    flex-wrap: wrap;
+}
+
+/* FAB 容器 */
+.fab-root {
+    position: fixed;
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+    z-index: var(--z-fab);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    pointer-events: none;
+}
+
+.fab-root>* {
+    pointer-events: auto;
+}
+
+/* 响应式 */
+@media (max-width: 720px) {
+    .app-header {
+        padding: 0 var(--sp-3);
+    }
+
+    .app-header__crumbs {
+        display: none;
+    }
+
+    .app-main {
+        padding: var(--sp-4) var(--sp-3) var(--sp-6);
+    }
+
+    .grid-cards {
+        grid-template-columns: 1fr;
+    }
+}

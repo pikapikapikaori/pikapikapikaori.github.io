@@ -1,0 +1,1252 @@
+{
+    "version": 1,
+    "language": "fr",
+    "name": "法语",
+    "paradigms": {
+        "verb": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "变位",
+                    "columns": [
+                        {
+                            "key": "1sg",
+                            "label": "单1"
+                        },
+                        {
+                            "key": "2sg",
+                            "label": "单2"
+                        },
+                        {
+                            "key": "3sg",
+                            "label": "单3"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "复1"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "复2"
+                        },
+                        {
+                            "key": "3pl",
+                            "label": "复3"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "pres-ind",
+                            "label": "现在时 陈述式",
+                            "principal": true
+                        },
+                        {
+                            "key": "impf-ind",
+                            "label": "未完成过去时"
+                        },
+                        {
+                            "key": "hist-ind",
+                            "label": "历史过去时"
+                        },
+                        {
+                            "key": "fut-ind",
+                            "label": "简单将来时"
+                        },
+                        {
+                            "key": "pres-cond",
+                            "label": "条件式现在时"
+                        },
+                        {
+                            "key": "pres-subj",
+                            "label": "虚拟式现在时"
+                        },
+                        {
+                            "key": "impf-subj",
+                            "label": "虚拟式未完成时"
+                        }
+                    ]
+                },
+                {
+                    "key": "participles",
+                    "title": "分词",
+                    "columns": [
+                        {
+                            "key": "m",
+                            "label": "阳性"
+                        },
+                        {
+                            "key": "f",
+                            "label": "阴性"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "pres-act",
+                            "label": "现在分词"
+                        },
+                        {
+                            "key": "past",
+                            "label": "过去分词"
+                        }
+                    ]
+                }
+            ]
+        },
+        "noun": {
+            "tables": [
+                {
+                    "key": "main",
+                    "title": "名词形式",
+                    "columns": [
+                        {
+                            "key": "form",
+                            "label": "形式"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "sg",
+                            "label": "单数"
+                        },
+                        {
+                            "key": "pl",
+                            "label": "复数"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "sections": [
+        {
+            "id": "fr-noun",
+            "title": "名词",
+            "items": [
+                {
+                    "id": "fr-noun-gender",
+                    "title": "性与数",
+                    "tables": [
+                        {
+                            "caption": "名词的性与数",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "le livre",
+                                    "la table"
+                                ],
+                                [
+                                    "复数",
+                                    "les livres",
+                                    "les tables"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "常见复数规则",
+                            "headers": [
+                                "单数结尾",
+                                "复数规则",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "一般",
+                                    "+ -s",
+                                    "livre → livres"
+                                ],
+                                [
+                                    "-s, -x, -z",
+                                    "不变",
+                                    "voix → voix, nez → nez"
+                                ],
+                                [
+                                    "-al",
+                                    "-al → -aux",
+                                    "cheval → chevaux"
+                                ],
+                                [
+                                    "-eau, -au, -eu",
+                                    "+ -x",
+                                    "beau → beaux, feu → feux"
+                                ],
+                                [
+                                    "-ou（部分）",
+                                    "+ -x",
+                                    "bijou → bijoux, genou → genoux"
+                                ],
+                                [
+                                    "-ail（部分）",
+                                    "-ail → -aux",
+                                    "travail → travaux"
+                                ],
+                                [
+                                    "-s / -x / -z 结尾",
+                                    "不变",
+                                    "fils → fils"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "法语名词性别需按词记忆。以 -tion, -té, -ette, -elle, -ance, -ence 结尾多为阴性；以 -ment, -age, -isme, -eau 结尾多为阳性。"
+                }
+            ]
+        },
+        {
+            "id": "fr-article",
+            "title": "冠词",
+            "items": [
+                {
+                    "id": "fr-article-definite",
+                    "title": "定冠词",
+                    "tables": [
+                        {
+                            "caption": "定冠词",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "一般",
+                                    "le",
+                                    "la",
+                                    "les"
+                                ],
+                                [
+                                    "元音前",
+                                    "l'",
+                                    "l'",
+                                    "les"
+                                ],
+                                [
+                                    "缩合（à）",
+                                    "au",
+                                    "à la",
+                                    "aux"
+                                ],
+                                [
+                                    "缩合（de）",
+                                    "du",
+                                    "de la",
+                                    "des"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "le / la 遇元音或哑音 h 省音为 l'。à + le = au，à + les = aux，de + le = du，de + les = des。"
+                },
+                {
+                    "id": "fr-article-indefinite",
+                    "title": "不定冠词与部分冠词",
+                    "tables": [
+                        {
+                            "caption": "不定冠词",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "一般",
+                                    "un",
+                                    "une",
+                                    "des"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "部分冠词",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "一般",
+                                    "du",
+                                    "de la"
+                                ],
+                                [
+                                    "元音前",
+                                    "de l'",
+                                    "de l'"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "部分冠词用于不可数名词（du pain、de la viande）。否定句中不定冠词和部分冠词一般变为 de。"
+                }
+            ]
+        },
+        {
+            "id": "fr-pron",
+            "title": "代词",
+            "items": [
+                {
+                    "id": "fr-pron-personal",
+                    "title": "人称代词",
+                    "tables": [
+                        {
+                            "caption": "主语人称代词",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "je",
+                                    "nous"
+                                ],
+                                [
+                                    "第二人称",
+                                    "tu",
+                                    "vous"
+                                ],
+                                [
+                                    "第三人称 m",
+                                    "il",
+                                    "ils"
+                                ],
+                                [
+                                    "第三人称 f",
+                                    "elle",
+                                    "elles"
+                                ],
+                                [
+                                    "第三人称 n（泛指）",
+                                    "il",
+                                    "—"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "直接宾语人称代词",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "me",
+                                    "nous"
+                                ],
+                                [
+                                    "第二人称",
+                                    "te",
+                                    "vous"
+                                ],
+                                [
+                                    "第三人称 m",
+                                    "le",
+                                    "les"
+                                ],
+                                [
+                                    "第三人称 f",
+                                    "la",
+                                    "les"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "间接宾语人称代词",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "me",
+                                    "nous"
+                                ],
+                                [
+                                    "第二人称",
+                                    "te",
+                                    "vous"
+                                ],
+                                [
+                                    "第三人称",
+                                    "lui",
+                                    "leur"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "重读人称代词",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "moi",
+                                    "nous"
+                                ],
+                                [
+                                    "第二人称",
+                                    "toi",
+                                    "vous"
+                                ],
+                                [
+                                    "第三人称 m",
+                                    "lui",
+                                    "eux"
+                                ],
+                                [
+                                    "第三人称 f",
+                                    "elle",
+                                    "elles"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "me / te / le / la 在元音前省音为 m' / t' / l'。命令式肯定句中宾语代词后置，用重读形式（Donne-le-moi）。"
+                },
+                {
+                    "id": "fr-pron-relative",
+                    "title": "关系代词",
+                    "tables": [
+                        {
+                            "caption": "主要关系代词",
+                            "headers": [
+                                "关系代词",
+                                "功能",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "qui",
+                                    "主语",
+                                    "L'homme qui parle."
+                                ],
+                                [
+                                    "que",
+                                    "直接宾语",
+                                    "Le livre que je lis."
+                                ],
+                                [
+                                    "où",
+                                    "地点 / 时间",
+                                    "La ville où j'habite."
+                                ],
+                                [
+                                    "dont",
+                                    "de + 先行词",
+                                    "L'auteur dont je parle."
+                                ],
+                                [
+                                    "lequel / laquelle / lesquels / lesquelles",
+                                    "间接宾语 / 介词后",
+                                    "Le stylo avec lequel j'écris."
+                                ],
+                                [
+                                    "auquel / à laquelle / auxquels / auxquelles",
+                                    "à + 先行词",
+                                    "Le projet auquel je pense."
+                                ],
+                                [
+                                    "duquel / de laquelle / desquels / desquelles",
+                                    "de + 先行词",
+                                    "Le pays duquel il vient."
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "que 在元音前省音为 qu'。lequel 等与 à / de 缩合时形式不同。"
+                },
+                {
+                    "id": "fr-pron-demonstrative",
+                    "title": "指示代词",
+                    "tables": [
+                        {
+                            "caption": "指示代词",
+                            "headers": [
+                                "",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "阳性简单",
+                                    "celui",
+                                    "ceux"
+                                ],
+                                [
+                                    "阴性简单",
+                                    "celle",
+                                    "celles"
+                                ],
+                                [
+                                    "阳性复合（-ci 近指）",
+                                    "celui-ci",
+                                    "ceux-ci"
+                                ],
+                                [
+                                    "阳性复合（-là 远指）",
+                                    "celui-là",
+                                    "ceux-là"
+                                ],
+                                [
+                                    "阴性复合（-ci 近指）",
+                                    "celle-ci",
+                                    "celles-ci"
+                                ],
+                                [
+                                    "阴性复合（-là 远指）",
+                                    "celle-là",
+                                    "celles-là"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "简单形式后接 de 或关系从句；复合形式独立使用。中性指示代词为 ceci / cela（口语 ça）。"
+                }
+            ]
+        },
+        {
+            "id": "fr-verb",
+            "title": "动词",
+            "items": [
+                {
+                    "id": "fr-verb-1st-group",
+                    "title": "第一组动词（-er）",
+                    "tables": [
+                        {
+                            "caption": "parler 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "parle",
+                                    "parlons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "parles",
+                                    "parlez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "parle",
+                                    "parlent"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "parler 复合过去时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "ai parlé",
+                                    "avons parlé"
+                                ],
+                                [
+                                    "第二人称",
+                                    "as parlé",
+                                    "avez parlé"
+                                ],
+                                [
+                                    "第三人称",
+                                    "a parlé",
+                                    "ont parlé"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "parler 未完成过去时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "parlais",
+                                    "parlions"
+                                ],
+                                [
+                                    "第二人称",
+                                    "parlais",
+                                    "parliez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "parlait",
+                                    "parlaient"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "parler 简单将来时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "parlerai",
+                                    "parlerons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "parleras",
+                                    "parlerez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "parlera",
+                                    "parleront"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "parler 条件式现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "parlerais",
+                                    "parlerions"
+                                ],
+                                [
+                                    "第二人称",
+                                    "parlerais",
+                                    "parleriez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "parlerait",
+                                    "parleraient"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "第一组动词占法语动词绝大多数，不定式以 -er 结尾，变位规则。注意 -cer 和 -ger 的拼写变化（commencer → commençons；manger → mangeons）。"
+                },
+                {
+                    "id": "fr-verb-2nd-group",
+                    "title": "第二组动词（-ir）",
+                    "tables": [
+                        {
+                            "caption": "finir 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "finis",
+                                    "finissons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "finis",
+                                    "finissez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "finit",
+                                    "finissent"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "finir 复合过去时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "ai fini",
+                                    "avons fini"
+                                ],
+                                [
+                                    "第二人称",
+                                    "as fini",
+                                    "avez fini"
+                                ],
+                                [
+                                    "第三人称",
+                                    "a fini",
+                                    "ont fini"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "finir 简单将来时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "finirai",
+                                    "finirons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "finiras",
+                                    "finirez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "finira",
+                                    "finiront"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "第二组动词为规则 -ir 动词，现在分词以 -issant 结尾（finissant）。"
+                },
+                {
+                    "id": "fr-verb-3rd-group",
+                    "title": "第三组动词（不规则）",
+                    "tables": [
+                        {
+                            "caption": "être 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "suis",
+                                    "sommes"
+                                ],
+                                [
+                                    "第二人称",
+                                    "es",
+                                    "êtes"
+                                ],
+                                [
+                                    "第三人称",
+                                    "est",
+                                    "sont"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "avoir 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "ai",
+                                    "avons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "as",
+                                    "avez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "a",
+                                    "ont"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "aller 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "vais",
+                                    "allons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "vas",
+                                    "allez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "va",
+                                    "vont"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "faire 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "fais",
+                                    "faisons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "fais",
+                                    "faites"
+                                ],
+                                [
+                                    "第三人称",
+                                    "fait",
+                                    "font"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "venir 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "viens",
+                                    "venons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "viens",
+                                    "venez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "vient",
+                                    "viennent"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "pouvoir 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "peux",
+                                    "pouvons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "peux",
+                                    "pouvez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "peut",
+                                    "peuvent"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "voir 现在时",
+                            "headers": [
+                                "人称",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "第一人称",
+                                    "vois",
+                                    "voyons"
+                                ],
+                                [
+                                    "第二人称",
+                                    "vois",
+                                    "voyez"
+                                ],
+                                [
+                                    "第三人称",
+                                    "voit",
+                                    "voient"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "第三组动词包括所有不规则动词（-ir / -re / -oir 等）。être 和 avoir 是助动词，几乎所有复合时态由它们构成。"
+                },
+                {
+                    "id": "fr-verb-tenses",
+                    "title": "时态与语式",
+                    "tables": [
+                        {
+                            "caption": "直陈式主要时态",
+                            "headers": [
+                                "时态",
+                                "构成",
+                                "用法"
+                            ],
+                            "rows": [
+                                [
+                                    "现在时",
+                                    "变位",
+                                    "当前动作、习惯、普遍真理"
+                                ],
+                                [
+                                    "未完成过去时",
+                                    "词干 + -ais / -ais / -ait / -ions / -iez / -aient",
+                                    "过去持续或习惯动作、描写"
+                                ],
+                                [
+                                    "简单过去时",
+                                    "词干 + 特定词尾",
+                                    "书面语中一次性完成的过去动作"
+                                ],
+                                [
+                                    "复合过去时",
+                                    "助动词现在时 + 过去分词",
+                                    "口语中完成过去动作"
+                                ],
+                                [
+                                    "愈过去时",
+                                    "助动词未完成过去时 + 过去分词",
+                                    "过去的过去"
+                                ],
+                                [
+                                    "简单将来时",
+                                    "不定式 + -ai / -as / -a / -ons / -ez / -ont",
+                                    "将来"
+                                ],
+                                [
+                                    "先将来时",
+                                    "助动词简单将来时 + 过去分词",
+                                    "将来某时之前完成"
+                                ],
+                                [
+                                    "条件式现在时",
+                                    "不定式 + 未完成过去时词尾",
+                                    "假设、礼貌"
+                                ],
+                                [
+                                    "条件式过去时",
+                                    "助动词条件式现在时 + 过去分词",
+                                    "过去未实现的假设"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "虚拟式与命令式",
+                            "headers": [
+                                "语式",
+                                "时态",
+                                "用法"
+                            ],
+                            "rows": [
+                                [
+                                    "虚拟式",
+                                    "现在时",
+                                    "主观意愿、情感、必要"
+                                ],
+                                [
+                                    "虚拟式",
+                                    "过去时",
+                                    "过去时主句后的从句"
+                                ],
+                                [
+                                    "命令式",
+                                    "现在时",
+                                    "命令、建议"
+                                ],
+                                [
+                                    "命令式",
+                                    "过去时",
+                                    "过期命令（少用）"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "复合时态的助动词选择：大多数动词用 avoir；être 及少数表移动 / 状态变化的动词（aller、venir、arriver、partir、entrer、sortir、naître、mourir 等）用 être，且过去分词需与主语性数一致。"
+                },
+                {
+                    "id": "fr-verb-participle",
+                    "title": "分词与不定式",
+                    "tables": [
+                        {
+                            "caption": "分词",
+                            "headers": [
+                                "类型",
+                                "构成",
+                                "例（parler）"
+                            ],
+                            "rows": [
+                                [
+                                    "现在分词",
+                                    "词干 + -ant",
+                                    "parlant"
+                                ],
+                                [
+                                    "过去分词（第一组）",
+                                    "词干 + -é",
+                                    "parlé"
+                                ],
+                                [
+                                    "过去分词（第二组）",
+                                    "词干 + -i",
+                                    "fini"
+                                ],
+                                [
+                                    "过去分词（第三组）",
+                                    "不规则",
+                                    "fait, vu, pris, écrit, venu"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "不定式",
+                            "headers": [
+                                "类型",
+                                "构成",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "现在不定式",
+                                    "-er / -ir / -re",
+                                    "parler, finir, prendre"
+                                ],
+                                [
+                                    "过去不定式",
+                                    "avoir / être + 过去分词",
+                                    "avoir parlé, être venu"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "现在分词可作形容词或用于分词从句；过去分词用于复合时态和被动语态，且常需与主语或宾语性数一致。"
+                }
+            ]
+        },
+        {
+            "id": "fr-adj",
+            "title": "形容词",
+            "items": [
+                {
+                    "id": "fr-adj-gender-number",
+                    "title": "性与数变化",
+                    "tables": [
+                        {
+                            "caption": "形容词的性数变化",
+                            "headers": [
+                                "形式",
+                                "阳性单数",
+                                "阴性单数",
+                                "阳性复数",
+                                "阴性复数"
+                            ],
+                            "rows": [
+                                [
+                                    "一般",
+                                    "grand",
+                                    "grande",
+                                    "grands",
+                                    "grandes"
+                                ],
+                                [
+                                    "-e 结尾",
+                                    "rouge",
+                                    "rouge",
+                                    "rouges",
+                                    "rouges"
+                                ],
+                                [
+                                    "-f → -ve",
+                                    "actif",
+                                    "active",
+                                    "actifs",
+                                    "actives"
+                                ],
+                                [
+                                    "-x → -se",
+                                    "heureux",
+                                    "heureuse",
+                                    "heureux",
+                                    "heureuses"
+                                ],
+                                [
+                                    "-er → -ère",
+                                    "premier",
+                                    "première",
+                                    "premiers",
+                                    "premières"
+                                ],
+                                [
+                                    "-ien → -ienne",
+                                    "ancien",
+                                    "ancienne",
+                                    "anciens",
+                                    "anciennes"
+                                ],
+                                [
+                                    "-on → -onne",
+                                    "bon",
+                                    "bonne",
+                                    "bons",
+                                    "bonnes"
+                                ],
+                                [
+                                    "-el → -elle",
+                                    "cruel",
+                                    "cruelle",
+                                    "cruels",
+                                    "cruelles"
+                                ],
+                                [
+                                    "-eil → -eille",
+                                    "pareil",
+                                    "pareille",
+                                    "pareils",
+                                    "pareilles"
+                                ],
+                                [
+                                    "-s（不变）",
+                                    "gras",
+                                    "grasse",
+                                    "gras",
+                                    "grasses"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "少数形容词有不规则阴性形式（beau → belle, vieux → vieille, nouveau → nouvelle, blanc → blanche, long → longue, sec → sèche, frais → fraîche）。"
+                },
+                {
+                    "id": "fr-adj-comparison",
+                    "title": "比较级与最高级",
+                    "tables": [
+                        {
+                            "caption": "比较级",
+                            "headers": [
+                                "类型",
+                                "构成",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "较高",
+                                    "plus + 形容词 + que",
+                                    "plus grand que"
+                                ],
+                                [
+                                    "较低",
+                                    "moins + 形容词 + que",
+                                    "moins grand que"
+                                ],
+                                [
+                                    "相等",
+                                    "aussi + 形容词 + que",
+                                    "aussi grand que"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "最高级",
+                            "headers": [
+                                "类型",
+                                "构成",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "最高（相对）",
+                                    "le / la / les plus + 形容词",
+                                    "le plus grand"
+                                ],
+                                [
+                                    "最低（相对）",
+                                    "le / la / les moins + 形容词",
+                                    "le moins grand"
+                                ],
+                                [
+                                    "绝对最高",
+                                    "très / extrêmement + 形容词",
+                                    "très grand"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "不规则比较级",
+                            "headers": [
+                                "原级",
+                                "比较级",
+                                "最高级"
+                            ],
+                            "rows": [
+                                [
+                                    "bon",
+                                    "meilleur",
+                                    "le meilleur"
+                                ],
+                                [
+                                    "mauvais",
+                                    "pire / plus mauvais",
+                                    "le pire / le plus mauvais"
+                                ],
+                                [
+                                    "petit",
+                                    "moindre / plus petit",
+                                    "le moindre / le plus petit"
+                                ]
+                            ]
+                        }
+                    ],
+                    "notes": "bon 的比较级为 meilleur，副词 bien 的比较级为 mieux。"
+                }
+            ]
+        }
+    ]
+}

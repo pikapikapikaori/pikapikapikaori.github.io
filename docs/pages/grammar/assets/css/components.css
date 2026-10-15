@@ -95,6 +95,14 @@
     color: var(--c-fg-subtle);
 }
 
+.field__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-1);
+    flex-wrap: wrap;
+}
+
 .field__error {
     font-size: var(--fs-xs);
     color: var(--c-danger);

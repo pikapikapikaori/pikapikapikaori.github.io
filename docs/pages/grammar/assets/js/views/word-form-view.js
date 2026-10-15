@@ -7,11 +7,14 @@ import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
+import { lookupWordForForm } from '../services/wiktionary-service.js'
 
 const SOURCE_OPTIONS = [
     { value: 'manual', label: '手动' },
     { value: 'wiktionary', label: 'Wiktionary' }
 ]
+
+const SPECIAL_REF = '__special__'
 
 export default {
     needsUser: true,
@@ -29,7 +32,6 @@ export default {
         const editId = ctx.params.id || null
         const isEdit = !!editId
 
-        // 加载语法模板（如无则返回 null）
         const grammarDoc = await loadGrammar(lang)
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
@@ -51,7 +53,7 @@ export default {
                 language: lang,
                 lemma: '',
                 pos: 'noun',
-                inflectionType: { label: '', grammarRef: '' },
+                inflectionType: { label: '', grammarRef: null },
                 paradigm: {},
                 inflections: [],
                 meanings: [{ text: '', lang: 'zh', source: 'manual' }],
@@ -73,7 +75,7 @@ export default {
                 pos: w.pos,
                 inflectionType: {
                     label: (w.inflectionType && w.inflectionType.label) || '',
-                    grammarRef: (w.inflectionType && w.inflectionType.grammarRef) || ''
+                    grammarRef: (w.inflectionType && w.inflectionType.grammarRef) || null
                 },
                 paradigm: normalizeParadigm(w.paradigm),
                 inflections: (w.inflections || []).map((x) => ({ ...x })),
@@ -111,6 +113,11 @@ export default {
             onsubmit: (e) => { e.preventDefault(); onSubmit() }
         })
 
+        /* ---------- 渲染函数（先声明，后赋值） ---------- */
+        let renderMeanings = () => {}
+        let renderInflections = () => {}
+        let renderExamples = () => {}
+
         const lemmaInput = h('input', {
             class: 'input',
             type: 'text',
@@ -121,6 +128,15 @@ export default {
             disabled: isEdit
         })
 
+        const lookupBtn = h('button', {
+            class: 'btn btn--sm',
+            type: 'button',
+            title: '从 Wiktionary 英文版获取释义、例句、变格/变位',
+            onclick: onLookup
+        }, '从 Wiktionary 查询')
+
+        const lookupStatus = h('div', { class: 'field__hint' }, '')
+
         const posSelect = h('select', {
             class: 'select',
             disabled: isEdit
@@ -129,41 +145,80 @@ export default {
             selected: data.pos === p.value
         }, p.label)))
 
-        // 词性变化时刷新 paradigm 表
+        let currentOptionsById = {}
+
+        const inflectionRef = h('select', {
+            class: 'select',
+            onchange: (e) => {
+                const v = e.target.value
+                if (v === SPECIAL_REF) return
+                const opt = currentOptionsById[v]
+                if (opt) {
+                    const title = opt.label.split(' · ').pop()
+                    inflectionLabel.value = title
+                }
+            }
+        })
+
+        function rebuildRefOptions() {
+            const pos = posSelect.value
+            const opts = collectGrammarOptions(grammarDoc, pos)
+            currentOptionsById = Object.fromEntries(opts.map((o) => [o.id, o]))
+
+            const prev = inflectionRef.value
+            const ids = new Set(opts.map((o) => o.id))
+            const selected = (prev && prev !== SPECIAL_REF && ids.has(prev))
+                ? prev
+                : SPECIAL_REF
+
+            inflectionRef.replaceChildren(
+                h('option', {
+                    value: SPECIAL_REF,
+                    selected: selected === SPECIAL_REF
+                }, '特殊变格 / 变位（自行填写）'),
+                ...opts.map((o) => h('option', {
+                    value: o.id,
+                    selected: selected === o.id
+                }, o.label))
+            )
+        }
+
         posSelect.addEventListener('change', () => {
             data.pos = posSelect.value
+            rebuildRefOptions()
             renderParadigmBlock()
         })
 
         const inflectionLabel = h('input', {
             class: 'input',
             type: 'text',
-            placeholder: '变格 / 变位类型（如：第一变位法）',
+            placeholder: '变格 / 变位类型说明（如：第一变位法）',
             value: data.inflectionType.label
         })
 
-        const inflectionRef = h('input', {
-            class: 'input',
-            type: 'text',
-            placeholder: '语法锚点 id（如：la-verb-1st-conj）',
-            value: data.inflectionType.grammarRef
-        })
+        // 语法锚点下拉：特殊变格/变位 + 语法速查条目
 
         form.appendChild(h('div', { class: 'word-form__row' },
-            field('基本形态', lemmaInput, '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。'),
+            h('label', { class: 'field' },
+                h('span', { class: 'field__label' }, '基本形态'),
+                lemmaInput,
+                h('div', { class: 'field__actions' },
+                    lookupBtn,
+                    lookupStatus
+                ),
+                h('span', { class: 'field__hint' }, '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。')
+            ),
             field('词性', posSelect, '')
         ))
 
         form.appendChild(h('div', { class: 'word-form__row' },
             field('变格 / 变位类型', inflectionLabel, '显示在词卡正面的徽章。'),
-            field('语法锚点', inflectionRef, '填写后点击徽章可跳转语法速查。')
+            field('语法锚点', inflectionRef, '选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。')
         ))
 
-        // 表格容器（由 renderParadigmBlock 填充）
         const paradigmSlot = h('div', {})
         form.appendChild(paradigmSlot)
 
-        // 含义 / 补充形式 / 搭配 / 例句 / 派生 / 标签
         form.appendChild(buildMeaningGroup())
         form.appendChild(buildInflectionGroup())
         form.appendChild(buildCollocationGroup())
@@ -200,6 +255,7 @@ export default {
             ))
         }
 
+        rebuildRefOptions()
         replace(main, head, form)
 
         renderParadigmBlock()
@@ -243,7 +299,81 @@ export default {
             paradigmSlot.appendChild(wrap)
         }
 
-        /* ---------- 其余分组（沿用旧实现） ---------- */
+        /* ---------- Wiktionary 查询 ---------- */
+
+        async function onLookup() {
+            const lemma = lemmaInput.value.trim()
+            if (!lemma) {
+                toast.error('请先输入基本形态')
+                lemmaInput.focus()
+                return
+            }
+
+            lookupBtn.disabled = true
+            const originalText = lookupBtn.textContent
+            lookupBtn.textContent = '查询中…'
+            lookupStatus.textContent = ''
+            lookupStatus.style.color = ''
+
+            try {
+                const patch = await lookupWordForForm({
+                    lemma,
+                    langCode: lang,
+                    preferredPos: posSelect.value,
+                    grammarDoc
+                })
+
+                if (!patch) {
+                    lookupStatus.textContent = 'Wiktionary 未找到该词条'
+                    lookupStatus.style.color = 'var(--c-fg-subtle)'
+                    return
+                }
+
+                if (patch.pos && patch.pos !== posSelect.value) {
+                    posSelect.value = patch.pos
+                    data.pos = patch.pos
+                }
+
+                if (patch.meanings.length) {
+                    data.meanings = patch.meanings
+                    renderMeanings()
+                }
+
+                if (patch.examples.length) {
+                    data.examples = patch.examples
+                    renderExamples()
+                }
+
+                if (Object.keys(patch.paradigm).length) {
+                    const tpl = getParadigmTemplate(grammarDoc, patch.pos)
+                    if (tpl) {
+                        if (!data.paradigm) data.paradigm = {}
+                        if (!data.paradigm.main) data.paradigm.main = {}
+                        Object.assign(data.paradigm.main, patch.paradigm)
+                        renderParadigmBlock()
+                    }
+                }
+
+                if (patch.inflections.length) {
+                    data.inflections.push(...patch.inflections)
+                    renderInflections()
+                }
+
+                lookupStatus.textContent = `已获取：${patch.summary}`
+                lookupStatus.style.color = 'var(--c-success)'
+                toast.success(`已从 Wiktionary 获取「${lemma}」`)
+            } catch (err) {
+                console.error(err)
+                lookupStatus.textContent = `查询失败：${err.message}`
+                lookupStatus.style.color = 'var(--c-danger)'
+                toast.error(`查询失败：${err.message}`)
+            } finally {
+                lookupBtn.disabled = false
+                lookupBtn.textContent = originalText
+            }
+        }
+
+        /* ---------- 其余分组 ---------- */
 
         function buildMeaningGroup() {
             const list = h('div', { class: 'word-form__list' })
@@ -261,7 +391,7 @@ export default {
                 list
             )
 
-            function renderMeanings() {
+            renderMeanings = function () {
                 list.replaceChildren()
                 data.meanings.forEach((m, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--meaning' },
@@ -311,7 +441,7 @@ export default {
                 list
             )
 
-            function renderInflections() {
+            renderInflections = function () {
                 list.replaceChildren()
                 data.inflections.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--inflection' },
@@ -391,14 +521,14 @@ export default {
                         class: 'btn btn--ghost btn--sm', type: 'button',
                         onclick: () => {
                             data.examples.push({ text: '', translation: '', citation: '', source: 'manual' })
-                            render()
+                            renderExamples()
                         }
                     }, '＋ 添加')
                 ),
                 list
             )
 
-            function render() {
+            renderExamples = function () {
                 list.replaceChildren()
                 data.examples.forEach((it, idx) => {
                     list.appendChild(h('div', { style: { display: 'grid', gap: 'var(--sp-2)', padding: 'var(--sp-2) 0', borderBottom: '1px dashed var(--c-border)' } },
@@ -414,7 +544,7 @@ export default {
                             sourceSelect(it.source, (v) => { it.source = v }),
                             h('button', {
                                 class: 'btn btn--ghost btn--sm', type: 'button',
-                                onclick: () => { data.examples.splice(idx, 1); render() }
+                                onclick: () => { data.examples.splice(idx, 1); renderExamples() }
                             }, '✕')
                         ),
                         h('input', {
@@ -424,7 +554,7 @@ export default {
                     ))
                 })
             }
-            render()
+            renderExamples()
             return group
         }
 
@@ -491,13 +621,16 @@ export default {
                 return
             }
 
+            const refValue = inflectionRef.value
+            const grammarRef = (refValue && refValue !== SPECIAL_REF) ? refValue : null
+
             const payload = {
                 language: lang,
                 lemma,
                 pos: posSelect.value,
                 inflectionType: {
                     label: inflectionLabel.value.trim(),
-                    grammarRef: inflectionRef.value.trim() || null
+                    grammarRef
                 },
                 paradigm: normalizeParadigm(data.paradigm),
                 inflections: cleanList(data.inflections, ['form']),
@@ -580,4 +713,28 @@ function cleanList(list, requiredKeys) {
 function posLabel(pos) {
     const hit = POS_LIST.find((p) => p.value === pos)
     return hit ? hit.label : pos
+}
+
+function collectGrammarOptions(doc, pos) {
+    if (!doc || !Array.isArray(doc.sections)) return []
+
+    const all = []
+    for (const sec of doc.sections) {
+        for (const item of sec.items || []) {
+            if (item && item.id) {
+                all.push({
+                    id: item.id,
+                    label: `${sec.title} · ${item.title}`,
+                    sectionId: sec.id || ''
+                })
+            }
+        }
+    }
+
+    // 未选词性：返回全部
+    if (!pos) return all
+
+    // 按 section id 后缀过滤（如 la-noun / la-verb / la-adj / la-pron）
+    const filtered = all.filter((o) => o.sectionId.endsWith('-' + pos))
+    return filtered.length ? filtered : all
 }

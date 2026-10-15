@@ -110,7 +110,7 @@ html[data-theme="dark"] .grain {
     display: inline-flex;
     align-items: center;
     gap: .55rem;
-    padding: .32rem .72rem .32rem .9rem;
+    padding: .42rem .72rem .32rem .9rem;
     background: transparent;
     color: var(--ink);
     border: 1px solid var(--line);

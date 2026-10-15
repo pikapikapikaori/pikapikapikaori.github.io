@@ -13,102 +13,145 @@
         var esc = U.escapeHtml
         var img = p.cover
             ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy" ' +
-            'decoding="async" referrerpolicy="no-referrer" ' +
-            'onerror="this.remove()">'
+              'decoding="async" referrerpolicy="no-referrer" ' +
+              'onerror="this.remove()">'
             : ''
 
         return '<article class="post-card">' +
             '<a href="' + esc(p.link) + '">' +
-            '<div class="post-cover">' + img + '</div>' +
-            '<div class="post-body">' +
-            (p.date ? '<time>' + esc(p.date) + '</time>' : '') +
-            '<h3>' + esc(p.title) + '</h3>' +
-            '<p>' + esc(p.excerpt) + (p.excerpt ? '…' : '') + '</p>' +
-            '</div>' +
+                '<div class="post-cover">' + img + '</div>' +
+                '<div class="post-body">' +
+                    (p.date ? '<time>' + esc(p.date) + '</time>' : '') +
+                    '<h3>' + esc(p.title) + '</h3>' +
+                    '<p>' + esc(p.excerpt) + (p.excerpt ? '…' : '') + '</p>' +
+                '</div>' +
             '</a>' +
-            '</article>'
+        '</article>'
     }
 
-    BlogRail.init = function (rail) {
+    /* ============================================================
+       load(rail) —— 初始化并返回 { reload(lang) } 接口
+       ============================================================ */
+    BlogRail.load = function (rail) {
         var section = rail.closest('.shelf')
-        var wrap = section.querySelector('.rail-wrap')
-        var sticky = section.querySelector('.shelf-sticky')
-        var bar = section.querySelector('.rail-progress > span')
-        var btns = section.querySelectorAll('.rail-btn')
+        var wrap    = section.querySelector('.rail-wrap')
+        var sticky  = section.querySelector('.shelf-sticky')
+        var bar     = section.querySelector('.rail-progress > span')
+        var btns    = section.querySelectorAll('.rail-btn')
 
         var maxX = 0
+        var pin = null
 
+        /* ---------- 尺寸测量 ----------
+           不用 scrollWidth：flex 容器的 padding-right 不计入它。
+           用 bounding rect 计算实际内容宽度。 */
         function sizeFn() {
-            maxX = Math.max(0, rail.scrollWidth - wrap.clientWidth)
+            var last = rail.lastElementChild
+
+            if (!last) {
+                maxX = 0
+            } else {
+                var padRight = parseFloat(
+                    getComputedStyle(rail).paddingRight
+                ) || 0
+                var railLeft  = rail.getBoundingClientRect().left
+                var lastRight = last.getBoundingClientRect().right
+                maxX = Math.max(
+                    0,
+                    (lastRight - railLeft + padRight) - wrap.clientWidth
+                )
+            }
+
             var on = maxX > 1
             section.classList.toggle('pin-on', on)
+
             return {
                 total: on ? maxX : 0,
                 height: sticky.offsetHeight + (on ? maxX : 0)
             }
         }
 
+        /* ---------- 应用到 DOM ---------- */
         function apply(p) {
             var x = p * maxX
             rail.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0)'
             if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'
             section.classList.toggle('at-start', p <= 0.002)
-            section.classList.toggle('at-end', p >= 0.998)
+            section.classList.toggle('at-end',   p >= 0.998)
             section.dataset.p = p
         }
 
-        var pin = Pin.make(section, apply, sizeFn)
+        /* ---------- 箭头 / 键盘焦点 ---------- */
+        function attachControls() {
+            function cardStep() {
+                var card = rail.firstElementChild
+                if (!card) return 300
+                var gap = parseFloat(getComputedStyle(rail).columnGap) || 16
+                return card.getBoundingClientRect().width + gap
+            }
 
-        function cardStep() {
-            var card = rail.firstElementChild
-            if (!card) return 300
-            var gap = parseFloat(getComputedStyle(rail).columnGap) || 16
-            return card.getBoundingClientRect().width + gap
-        }
-
-        btns.forEach(function (b) {
-            b.addEventListener('click', function () {
-                window.scrollBy({
-                    top: Number(b.dataset.dir) * cardStep(),
-                    behavior: 'smooth'
+            btns.forEach(function (b) {
+                b.addEventListener('click', function () {
+                    window.scrollBy({
+                        top: Number(b.dataset.dir) * cardStep(),
+                        behavior: 'smooth'
+                    })
                 })
             })
-        })
 
-        rail.addEventListener('focusin', function (e) {
-            if (maxX <= 1) return
-            var card = e.target.closest('.post-card')
-            if (!card) return
+            rail.addEventListener('focusin', function (e) {
+                if (maxX <= 1) return
+                var card = e.target.closest('.post-card')
+                if (!card) return
 
-            var pad = parseFloat(getComputedStyle(rail).paddingLeft) || 0
-            var left = card.offsetLeft - pad
-            var right = left + card.offsetWidth
-            var viewR = wrap.clientWidth
+                var pad = parseFloat(getComputedStyle(rail).paddingLeft) || 0
+                var left  = card.offsetLeft - pad
+                var right = left + card.offsetWidth
+                var viewR = wrap.clientWidth
 
-            var np = null
-            if (left < 24) np = Math.max(0, (left - 24) / maxX)
-            else if (right > viewR - 24) np = Math.min(1, (right + 24 - viewR) / maxX)
+                var np = null
+                if (left < 24)               np = Math.max(0, (left - 24) / maxX)
+                else if (right > viewR - 24) np = Math.min(1, (right + 24 - viewR) / maxX)
 
-            if (np !== null &&
-                Math.abs(np - (parseFloat(section.dataset.p) || 0)) > 0.01) {
-                window.scrollTo({
-                    top: section.offsetTop + np * maxX,
-                    behavior: REDUCE ? 'auto' : 'smooth'
-                })
+                if (np !== null &&
+                    Math.abs(np - (parseFloat(section.dataset.p) || 0)) > 0.01) {
+                    window.scrollTo({
+                        top: section.offsetTop + np * maxX,
+                        behavior: REDUCE ? 'auto' : 'smooth'
+                    })
+                }
+            })
+
+            if (window.ResizeObserver) {
+                new ResizeObserver(function () {
+                    if (pin) pin.scheduleMeasure()
+                }).observe(wrap)
             }
-        })
-
-        if (window.ResizeObserver) {
-            new ResizeObserver(function () { pin.scheduleMeasure() }).observe(wrap)
         }
 
-        return pin
-    }
+        /* ---------- 内部：加载并渲染 ---------- */
+        function doLoad(lang) {
+            return F.loadPosts(lang).then(function (posts) {
+                rail.innerHTML = posts.map(renderPost).join('')
 
-    BlogRail.load = function (rail) {
-        return F.loadPosts().then(function (posts) {
-            rail.innerHTML = posts.map(renderPost).join('')
-            BlogRail.init(rail)
-        })
+                if (pin) {
+                    /* 已初始化过 → 只重测高度和 maxX */
+                    pin.scheduleMeasure()
+                } else {
+                    /* 首次 → 创建 pin 并绑定交互 */
+                    pin = Pin.make(section, apply, sizeFn)
+                    attachControls()
+                }
+            })
+        }
+
+        /* 首次加载 */
+        doLoad(App.i18n.get())
+
+        return {
+            reload: function (lang) {
+                return doLoad(lang)
+            }
+        }
     }
 })()

@@ -28,6 +28,8 @@
 
         /* 5. 语言切换：重载博客 rail + 重测所有 pin */
         App.i18n.onChange(function (newLang) {
+            scrollToTopInstant()
+
             if (blogInstance) blogInstance.reload(newLang)
             requestAnimationFrame(App.pin.remeasureAll)
         })
@@ -94,6 +96,18 @@
         setTimeout(function () {
             document.documentElement.classList.add('booted')
         }, wait)
+    }
+
+    /*
+     * 立即回到页面顶部，绕过 html { scroll-behavior: smooth }。
+     */
+    function scrollToTopInstant() {
+        var html = document.documentElement
+        html.style.scrollBehavior = 'auto'
+        window.scrollTo(0, 0)
+        requestAnimationFrame(function () {
+            html.style.scrollBehavior = ''
+        })
     }
 
     if (document.readyState === 'loading') {

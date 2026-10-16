@@ -5,6 +5,8 @@ html {
     color: var(--c-fg);
     background: var(--c-bg);
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-border-strong) transparent;
 }
 
 body {
@@ -105,24 +107,4 @@ pre,
     color: var(--c-accent-fg);
     border-radius: var(--r-sm);
     z-index: 999;
-}
-
-/* 滚动条（webkit） */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--c-border-strong);
-    border-radius: var(--r-full);
-    border: 2px solid var(--c-bg);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--c-fg-subtle);
 }

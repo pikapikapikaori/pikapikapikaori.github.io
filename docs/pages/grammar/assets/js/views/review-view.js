@@ -146,24 +146,23 @@ export default {
 
         function renderDone() {
             replace(cardWrap,
-                h('div', { class: 'review-done' },
-                    h('div', { class: 'review-done__title' }, '本轮完成'),
-                    h('div', { class: 'review-done__stats' },
+                h('div', { class: 'review-done-card' },
+                    h('div', { class: 'review-done-card__title' }, '本轮完成'),
+                    h('div', { class: 'review-done-card__stats' },
                         `共 ${stats.done} 张 · 正确 ${stats.correct} · 错误 ${stats.wrong}`
-                    ),
-                    h('div', { class: 'review-done__actions' },
-                        h('button', {
-                            class: 'btn', type: 'button',
-                            onclick: () => location.hash = `#/lang/${lang}/words`
-                        }, '返回列表'),
-                        h('button', {
-                            class: 'btn btn--primary', type: 'button',
-                            onclick: () => location.reload()
-                        }, '再来一轮')
                     )
                 )
             )
-            replace(actionEl)
+            replace(actionEl,
+                h('button', {
+                    class: 'btn', type: 'button',
+                    onclick: () => location.hash = `#/lang/${lang}/words`
+                }, '返回列表'),
+                h('button', {
+                    class: 'btn btn--primary', type: 'button',
+                    onclick: () => location.reload()
+                }, '再来一轮')
+            )
         }
 
         /* ---------- 键盘 ---------- */

@@ -224,6 +224,7 @@
     justify-content: space-between;
     gap: var(--sp-2);
     margin-bottom: var(--sp-2);
+    min-height: 28px;
 }
 
 .word-card__center {
@@ -279,6 +280,10 @@
     text-align: center;
 }
 
+.word-card__face--back>.word-card__hint {
+    margin-top: auto;
+}
+
 .word-card__section {
     margin-bottom: var(--sp-3);
     min-width: 0;
@@ -303,7 +308,6 @@
 }
 
 .word-card__bottom {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -311,9 +315,6 @@
 }
 
 .word-card__actions {
-    position: absolute;
-    right: 0;
-    bottom: 0;
     display: flex;
     gap: var(--sp-1);
 }
@@ -391,6 +392,43 @@
 
 button.word-card__derivative {
     cursor: pointer;
+}
+
+.word-card__back-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-2);
+}
+
+.word-card__back-bottom {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: var(--sp-2);
+}
+
+.word-card__zoom-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-sm);
+    border: none;
+    background: transparent;
+    color: var(--c-fg-muted);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.word-card__zoom-btn:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
 }
 
 .word-card--compact {
@@ -587,6 +625,18 @@ button.word-card__derivative {
     to {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1)
+    }
+}
+
+@keyframes card-overlay-in {
+    from {
+        opacity: 0;
+        transform: scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
@@ -940,4 +990,115 @@ button.word-card__derivative {
 .word-list>*,
 .grid-cards>* {
     min-width: 0;
+}
+
+.card-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in .18s var(--ease);
+}
+
+.card-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+}
+
+.card-overlay-panel {
+    position: relative;
+    width: min(1100px, 94vw);
+    height: min(90vh, 900px);
+    background: var(--c-bg-elev);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: card-overlay-in .2s var(--ease);
+}
+
+.card-overlay-close {
+    position: absolute;
+    top: var(--sp-3);
+    right: var(--sp-3);
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    border: none;
+    background: transparent;
+    color: var(--c-fg-muted);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    z-index: 2;
+}
+
+.card-overlay-close:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+.card-overlay-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--sp-5);
+}
+
+.card-overlay__head {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+    padding-bottom: var(--sp-3);
+    padding-right: 48px;
+    border-bottom: 1px solid var(--c-border);
+    flex-wrap: wrap;
+}
+
+.card-overlay__lemma {
+    font-size: var(--fs-3xl);
+    font-weight: 700;
+    line-height: 1.15;
+    word-break: break-word;
+    min-width: 0;
+}
+
+.card-overlay__badges {
+    display: flex;
+    gap: var(--sp-1);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    margin-left: var(--sp-2);
+}
+
+@media (max-width: 720px) {
+    .card-overlay-panel {
+        width: 100vw;
+        height: 100dvh;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card-overlay-body {
+        padding: var(--sp-4);
+    }
+
+    .card-overlay__head {
+        flex-direction: column;
+    }
+
+    .card-overlay__badges {
+        justify-content: flex-start;
+    }
 }

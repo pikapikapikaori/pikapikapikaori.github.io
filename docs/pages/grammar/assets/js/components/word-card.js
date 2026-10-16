@@ -3,13 +3,8 @@ import { posLabel, allSources } from '../models/word.js'
 import { isRtl } from '../utils/text-normalize.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
+import { openCardOverlay } from './card-overlay.js'
 
-/**
- * 翻转词卡
- *
- * 新增参数：
- *   paradigmTpl      语法 JSON 中对应词性的表格模板
- */
 export function createWordCard(word, options = {}) {
     const {
         language = word.language,
@@ -21,7 +16,7 @@ export function createWordCard(word, options = {}) {
         onDelete = null,
         onGrammarRef = null,
         compact = false,
-        paradigmTpl = null,
+        paradigmTpl = null
     } = options
 
     const rtl = isRtl(language)
@@ -35,7 +30,7 @@ export function createWordCard(word, options = {}) {
 
     const el = h('div', {
         class: 'word-card' + (startFlipped ? ' word-card--flipped' : '')
-                 + (compact ? ' word-card--compact' : ''),
+            + (compact ? ' word-card--compact' : ''),
         dataset: { wordId: word.id },
         tabindex: '0',
         role: 'button',
@@ -71,33 +66,37 @@ export function createWordCard(word, options = {}) {
     function buildFront() {
         const face = h('div', { class: 'word-card__face word-card__face--front' })
 
-        /* ---------- 顶部行：badges（左） + count（右） ---------- */
-        const badges = h('div', { class: 'word-card__badges' },
-            h('span', { class: 'badge' }, posLabel(word.pos))
-        )
+        // 顶部：左编辑/删除，右 ×N
+        const top = h('div', { class: 'word-card__top' })
 
-        const it = word.inflectionType
-        if (it && it.label) {
-            const clickable = !!(it.grammarRef && onGrammarRef)
-            badges.appendChild(h(clickable ? 'button' : 'span', {
-                class: 'badge badge--accent' + (clickable ? ' badge--clickable' : ''),
-                type: clickable ? 'button' : null,
-                onclick: clickable
-                    ? (e) => { e.stopPropagation(); onGrammarRef(it.grammarRef) }
-                    : null
-            }, it.label))
+        if (!compact && (onEdit || onDelete)) {
+            const actions = h('div', { class: 'word-card__actions', 'data-no-flip': '' })
+            if (onEdit) {
+                actions.appendChild(h('button', {
+                    class: 'btn btn--ghost btn--sm',
+                    type: 'button',
+                    onclick: (e) => { e.stopPropagation(); onEdit(word) }
+                }, '编辑'))
+            }
+            if (onDelete) {
+                actions.appendChild(h('button', {
+                    class: 'btn btn--ghost btn--sm',
+                    type: 'button',
+                    onclick: (e) => { e.stopPropagation(); onDelete(word) }
+                }, '删除'))
+            }
+            top.appendChild(actions)
+        } else {
+            top.appendChild(h('div', {}))
         }
 
-        for (const t of word.tags || []) {
-            badges.appendChild(h('span', { class: 'badge' }, t))
-        }
-
-        face.appendChild(h('div', { class: 'word-card__top' },
-            badges,
-            h('div', { class: 'word-card__count num' }, `×${word.encounterCount || 0}`)
+        top.appendChild(h('div', { class: 'word-card__count num' },
+            `×${word.encounterCount || 0}`
         ))
 
-        /* ---------- 中间：lemma + meta ---------- */
+        face.appendChild(top)
+
+        // 中间：lemma + meta
         const center = h('div', { class: 'word-card__center' },
             h('div', {
                 class: 'word-card__lemma' + (rtl ? ' word-card__lemma--rtl' : ''),
@@ -116,30 +115,10 @@ export function createWordCard(word, options = {}) {
         center.appendChild(meta)
         face.appendChild(center)
 
-        /* ---------- 底部：hint（居中） + actions（右下） ---------- */
-        const bottom = h('div', { class: 'word-card__bottom' },
+        // 底部：提示
+        face.appendChild(h('div', { class: 'word-card__bottom' },
             h('div', { class: 'word-card__hint' }, '点击翻面')
-        )
-
-        if (!compact && (onEdit || onDelete)) {
-            const actions = h('div', { class: 'word-card__actions', 'data-no-flip': '' })
-            if (onEdit) {
-                actions.appendChild(h('button', {
-                    class: 'btn btn--ghost btn--sm',
-                    type: 'button',
-                    onclick: (e) => { e.stopPropagation(); onEdit(word) }
-                }, '编辑'))
-            }
-            if (onDelete) {
-                actions.appendChild(h('button', {
-                    class: 'btn btn--ghost btn--sm',
-                    type: 'button',
-                    onclick: (e) => { e.stopPropagation(); onDelete(word) }
-                }, '删除'))
-            }
-            bottom.appendChild(actions)
-        }
-        face.appendChild(bottom)
+        ))
 
         return face
     }
@@ -154,6 +133,49 @@ export function createWordCard(word, options = {}) {
     function renderBack() {
         back.replaceChildren()
 
+        // 右上角徽章
+        const badges = h('div', { class: 'word-card__badges' },
+            h('span', { class: 'badge' }, posLabel(word.pos))
+        )
+        const it = word.inflectionType
+        if (it && it.label) {
+            const clickable = !!(it.grammarRef && onGrammarRef)
+            badges.appendChild(h(clickable ? 'button' : 'span', {
+                class: 'badge badge--accent' + (clickable ? ' badge--clickable' : ''),
+                type: clickable ? 'button' : null,
+                onclick: clickable
+                    ? (e) => { e.stopPropagation(); onGrammarRef(it.grammarRef) }
+                    : null
+            }, it.label))
+        }
+        for (const t of word.tags || []) {
+            badges.appendChild(h('span', { class: 'badge' }, t))
+        }
+
+        back.appendChild(h('div', {
+            class: 'word-card__back-head',
+            'data-no-flip': ''
+        },
+        badges,
+        h('button', {
+            class: 'word-card__zoom-btn',
+            type: 'button',
+            title: '放大显示',
+            'aria-label': '放大显示',
+            onclick: (e) => {
+                e.stopPropagation()
+                openCardOverlay(word, {
+                    language,
+                    paradigmTpl,
+                    onGrammarRef,
+                    resolveDerivative,
+                    onDerivativeClick
+                })
+            }
+        }, '⛶')
+        ))
+
+        // source tabs
         if (showSourceTabs && sources.length > 1) {
             back.appendChild(createSourceTabs(sources, activeSource, (s) => {
                 activeSource = s
@@ -161,7 +183,20 @@ export function createWordCard(word, options = {}) {
             }))
         }
 
-        // paradigm（表格）
+        // 含义（最先）
+        const meanings = pick(word.meanings)
+        if (meanings.length) {
+            back.appendChild(section('含义',
+                h('div', { class: 'word-card__meanings' },
+                    ...meanings.map((m) => h('div', {
+                        class: 'word-card__meaning',
+                        lang: m.lang === 'en' ? 'en' : undefined
+                    }, m.text))
+                )
+            ))
+        }
+
+        // paradigm 表格
         if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
             for (const tableTpl of paradigmTpl.tables || []) {
                 const tableData = word.paradigm[tableTpl.key]
@@ -175,35 +210,26 @@ export function createWordCard(word, options = {}) {
             }
         }
 
-        // 含义
-        const meanings = pick(word.meanings)
-        if (meanings.length) {
-            back.appendChild(section('含义',
-                h('div', { class: 'word-card__meanings' },
-                    ...meanings.map((m) => h('div', {
-                        class: 'word-card__meaning',
-                        lang: m.lang === 'en' ? 'en' : undefined
-                    }, m.text))
-                )
-            ))
-        }
-
-        // 补充形式（inflections）
+        // 补充形式
         const infs = pick(word.inflections)
         if (infs.length) {
             const groups = groupInflections(infs)
             const container = h('div', {})
             for (const [gname, list] of groups) {
                 if (gname) {
-                    container.appendChild(h('div', { class: 'word-card__inflection-group-title' }, gname))
+                    container.appendChild(
+                        h('div', { class: 'word-card__inflection-group-title' }, gname)
+                    )
                 }
                 container.appendChild(h('div', { class: 'word-card__inflections' },
                     ...list.map((i) => h('div', { class: 'word-card__inflection' },
                         i.label
                             ? h('span', { class: 'word-card__inflection-label' }, i.label + '：')
                             : null,
-                        h('span', { class: 'word-card__inflection-form', lang: language },
-                            i.form || '')
+                        h('span', {
+                            class: 'word-card__inflection-form',
+                            lang: language
+                        }, i.form || '')
                     ))
                 ))
             }
@@ -230,8 +256,12 @@ export function createWordCard(word, options = {}) {
                 h('div', {},
                     ...exs.map((e) => h('div', { class: 'word-card__example' },
                         h('div', { class: 'word-card__example-text', lang: language }, e.text || ''),
-                        e.translation ? h('div', { class: 'word-card__example-tr' }, e.translation) : null,
-                        e.citation ? h('div', { class: 'word-card__citation' }, `— ${e.citation}`) : null
+                        e.translation
+                            ? h('div', { class: 'word-card__example-tr' }, e.translation)
+                            : null,
+                        e.citation
+                            ? h('div', { class: 'word-card__citation' }, `— ${e.citation}`)
+                            : null
                     ))
                 )
             ))
@@ -263,6 +293,7 @@ export function createWordCard(word, options = {}) {
             ))
         }
 
+        // 备注
         if (word.notes) {
             back.appendChild(section('备注', h('div', {}, word.notes)))
         }
@@ -281,7 +312,6 @@ function groupInflections(list) {
         if (!map.has(g)) map.set(g, [])
         map.get(g).push(it)
     }
-    // 无 group 的排最后
     const entries = Array.from(map.entries())
     entries.sort((a, b) => {
         if (a[0] === '') return 1

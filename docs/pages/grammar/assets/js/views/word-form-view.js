@@ -216,10 +216,11 @@ export default {
             field('语法锚点', inflectionRef, '选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。')
         ))
 
+        form.appendChild(buildMeaningGroup())
+
         const paradigmSlot = h('div', {})
         form.appendChild(paradigmSlot)
 
-        form.appendChild(buildMeaningGroup())
         form.appendChild(buildInflectionGroup())
         form.appendChild(buildCollocationGroup())
         form.appendChild(buildExampleGroup())

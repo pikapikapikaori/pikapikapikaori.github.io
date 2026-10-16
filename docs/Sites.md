@@ -14,6 +14,13 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
+<!-- toc-card-href:./pages/landing/index.html?lang=zh-Hans -->
+<!-- toc-card-img:./_media/Sites/pikapikapi-landing.png -->
+<!-- toc-card-title:主页 -->
+<!-- toc-card-description:叁号个人主页 -->
+<!-- toc-card:end -->
+
+<!-- toc-card:start -->
 <!-- toc-card-href:./pages/animepage/index.html -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-photopage.png -->
 <!-- toc-card-title:摄影页 -->

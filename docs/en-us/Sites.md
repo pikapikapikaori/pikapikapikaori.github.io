@@ -14,6 +14,13 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
+<!-- toc-card-href:./pages/landing/index.html?lang=en -->
+<!-- toc-card-img:./en-us/_media/Sites/pikapikapi-landing.png -->
+<!-- toc-card-title:Homepage -->
+<!-- toc-card-description:No.3 Personal Homepage -->
+<!-- toc-card:end -->
+
+<!-- toc-card:start -->
 <!-- toc-card-href:./pages/animepage/i18n/en-us.html -->
 <!-- toc-card-img:./en-us/_media/Sites/pikapikapi-photopage.png -->
 <!-- toc-card-title:Photography -->

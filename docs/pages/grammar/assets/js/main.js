@@ -12,6 +12,7 @@ import { getSettings } from './store/settings-store.js'
 import { createRouter } from './router.js'
 import { appStore, setUser, setLanguage, setSettings, setRoute } from './app-state.js'
 import { h, replace, qs } from './utils/dom.js'
+import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
 
 const LS_USER_KEY = 'ln.currentUser'
 const LS_THEME_KEY = 'ln.theme'
@@ -138,6 +139,8 @@ async function mountView(name, ctx) {
         try { currentUnmount() } catch (err) { console.warn('[view] unmount error', err) }
         currentUnmount = null
     }
+    
+    hideVerticalPopover()
 
     const container = isFull
         ? renderShell({ withHeader: false, withMain: false })
@@ -216,6 +219,7 @@ async function bootstrap() {
 
     // Service Worker
     registerServiceWorker()
+    attachVerticalPopover()
 }
 
 function registerServiceWorker() {

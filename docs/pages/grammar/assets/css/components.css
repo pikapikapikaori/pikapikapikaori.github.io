@@ -1102,3 +1102,24 @@ button.word-card__derivative {
         justify-content: flex-start;
     }
 }
+
+/* ---------- 竖排 popover ---------- */
+.vertical-popover {
+    position: fixed;
+    z-index: var(--z-toast);
+    display: none;
+    padding: var(--sp-3);
+    background: var(--c-bg-elev);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-md);
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    line-height: 1.15;
+    letter-spacing: 0;
+    max-height: 70vh;
+    overflow: auto;
+    user-select: text;
+    -webkit-user-select: text;
+    cursor: text;
+}

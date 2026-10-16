@@ -1,27 +1,44 @@
 // ========== 1. Host 重写 ==========
+
+// host -> R2 前缀（默认域名不在这里，走 DIR_INDEX_PATHS）
+const HOST_PREFIX = {
+    'home.pikapikapi.com': 'pages/mondrian/',
+    'index.pikapikapi.com': 'pages/indexpage/',
+    'photo.pikapikapi.com': 'pages/animepage/',
+    'bgmtv.pikapikapi.com': 'writings/_media/BangumiBackup-20260915/web/',
+}
+
+// 需要自动补 index.html 的目录路径（含默认域名和子域名下的相对路径）
+// 只对表里出现的路径生效，不做尾斜杠兜底
+const DIR_INDEX_PATHS = new Set([
+    'pages/light/',
+])
+
 function rewriteHost(host, filePath) {
-    switch (host) {
-        case 'home.pikapikapi.com':
-            return filePath ? 'pages/mondrian/' + filePath : 'pages/mondrian/index.html'
+    const prefix = HOST_PREFIX[host]
 
-        case 'index.pikapikapi.com':
-            return filePath ? 'pages/indexpage/' + filePath : 'pages/indexpage/index.html'
-
-        case 'photo.pikapikapi.com':
-            return filePath ? 'pages/animepage/' + filePath : 'pages/animepage/index.html'
-
-
-        case 'bgmtv.pikapikapi.com':
-            return filePath ? 'writings/_media/BangumiBackup-20260915/web/' + filePath : 'writings/_media/BangumiBackup-20260915/web/index.html'
-
-        default:
-            // base domain @
-            if (filePath === 'pages/light/') {
-                return 'pages/light/index.html'
-            }
-            
-            return filePath || 'index.html'
+    // ---- 默认域名（base domain @）----
+    if (!prefix) {
+        if (filePath === '') {
+            return 'index.html'
+        }
+        if (DIR_INDEX_PATHS.has(filePath)) {
+            return filePath + 'index.html'
+        }
+        return filePath
     }
+
+    // ---- 子域名 ----
+    if (filePath === '') {
+        return prefix + 'index.html'
+    }
+
+    // 子域名下也走同一份白名单（这里用「相对该 host 前缀」的 key 匹配）
+    if (DIR_INDEX_PATHS.has(filePath)) {
+        return prefix + filePath + 'index.html'
+    }
+
+    return prefix + filePath
 }
 
 // ========== 2. 浏览器缓存策略 ==========

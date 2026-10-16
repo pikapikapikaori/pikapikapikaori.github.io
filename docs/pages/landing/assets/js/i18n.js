@@ -1,7 +1,19 @@
 /* ========================================================
+ * 多语言
+
+ * 初始语言解析优先级：
+ *   1. URL 的 ?lang=xx（有效时）
+ *   2. localStorage
+ *   3. navigator.language
+ * 解析结果会写入 localStorage，并把 URL 更新为对应的 ?lang=xx，
+ * 保证地址栏始终反映当前生效的语言（便于分享和收藏）。
+ *
+ * 用户切换语言时同步更新 URL，用 replaceState 不产生历史记录，
+ * 保留其他 query 参数和 hash。
+ *
  * 添加新语言只需改两处：
- * 1. 在 LANGUAGES 数组里加一项 { key, htmlLang, label }
- * 2. 在 DICT 里加一份对应 key 的翻译表
+ *   1. 在 LANGUAGES 数组里加一项 { key, htmlLang, label }
+ *   2. 在 DICT 里加一份对应 key 的翻译表
  * 菜单 DOM、<html lang>、显示名都会自动同步。
    ======================================================== */
 (function () {
@@ -14,7 +26,7 @@
 
     /* 
      * ---------- 语言清单 ----------
-     * key      —— 内部标识，同时用作 DICT 的键、data-lang 的值、存储值
+     * key      —— 内部标识，同时用作 DICT 的键、data-lang 的值、存储值、?lang= 的值
      * htmlLang —— 写到 <html lang> 上的值（BCP 47）
      * label    —— 在菜单里显示的名字，始终用该语言自身的写法 
      */
@@ -151,6 +163,37 @@
         return 'en'
     }
 
+    /* ---------- URL ---------- */
+
+    /* 从 ?lang= 读取，无效或缺失返回 null */
+    function readUrlLang() {
+        try {
+            var params = new URLSearchParams(window.location.search)
+            var v = params.get('lang')
+            if (v && SUPPORTED.indexOf(v) !== -1) return v
+        } catch (e) { /* ignore */ }
+        return null
+    }
+
+    /* 把当前语言写入 ?lang=，保留其他 query 参数和 hash。 */
+    function syncUrl(lang) {
+        try {
+            var url = new URL(window.location.href)
+            url.searchParams.set('lang', lang)
+            window.history.replaceState(null, '', url.toString())
+        } catch (e) { /* ignore（file:// 下会抛 SecurityError） */ }
+    }
+
+    /* 解析初始语言：URL > storage > navigator */
+    function resolveInitialLang() {
+        var fromUrl = readUrlLang()
+        if (fromUrl) {
+            writeSaved(fromUrl)
+            return fromUrl
+        }
+        return readSaved() || guess()
+    }
+
     /* ---------- 应用语言 ---------- */
 
     function apply(lang) {
@@ -181,6 +224,9 @@
         document.title = d['meta.title']
         var md = document.querySelector('meta[name="description"]')
         if (md) md.setAttribute('content', d['meta.desc'])
+
+        /* URL 始终反映当前语言 */
+        syncUrl(lang)
 
         syncPicker()
         writeSaved(lang)
@@ -309,9 +355,11 @@
         })
     }
 
+    /* ---------- 对外接口 ---------- */
+
     I.init = function () {
         initPicker()
-        apply(readSaved() || guess())
+        apply(resolveInitialLang())
     }
 
     I.set = apply

@@ -1,17 +1,3 @@
-/* ========================================================
- * 阶段 A（0 → flyIn）：每张照片从不同方位飞入，落在中心叠成
- * 一摞略微错位的卡片。
- * 阶段 B（flyIn → zoom）：整叠放大；除第一张外依次往下退位。
- * 阶段 C（zoom → 1）：剩下几张依次从下方升起，覆盖到顶。
- * 阶段 C 通过 magnetize 吸附到 N 个静止点，形成"滑一次切一张"
- * 的手感，并额外使用更低的 follow 系数让运动更有阻尼感。
-
- * 位移单位说明：
- * - config 里 entries.x/y、stackOffset.x/y 都是"卡片高度的百分比"
- * - 卡片高度 = CSS 变量 --h，横竖图共用同一高度
- * - 这里在 apply 时乘以 baseH（卡片高度 px），得到实际位移
- * - 这样横图（宽 654px）和竖图（宽 276px）飞出距离视觉一致
-   ======================================================== */
 (function () {
     'use strict'
 
@@ -30,46 +16,55 @@
             : ''
         return '<figure class="photo-card" ' +
             'data-ratio="' + esc(ratio) + '" ' +
-            'style="--g:' + ph.g + ';z-index:' + i + '">' +
+            'style="--g:' + ph.g + ';z-index:' + i  + ';aspect-ratio:' + esc(ratio) + '">' +
             img +
             '<figcaption>' + esc(ph.caption) + '</figcaption>' +
             '</figure>'
     }
 
-    PhotoStack.init = function (stack) {
+    /* 按语言取照片，找不到回退到中文组 */
+    function getPhotos(lang) {
+        var map = CFG.photos || {}
+        return map[lang] || map['zh-Hans'] || []
+    }
+
+    PhotoStack.load = function (stack) {
         var section = stack.closest('.shelf')
         var sticky = section.querySelector('.shelf-sticky')
-        var cards = [].slice.call(stack.querySelectorAll('.photo-card'))
         var bar = section.querySelector('.rail-progress > span')
-        var N = cards.length
-        if (!N) return
 
         var P = CFG.photo
-        var mid = (N - 1) / 2
-        var seg = N > 1 ? 1 / (N - 1) : 1
+        var pin = null
 
-        /* 位移基准（px），在 sizeFn 里刷新 */
+        /* 每次重新渲染时重建的派生数据 */
+        var cards = []
+        var N = 0
+        var mid = 0
+        var seg = 1
+        var entries = []
+        var stackPos = []
         var baseH = 300
 
-        /* 每张卡片的入场起点 */
-        var entries = cards.map(function (_, i) {
-            return P.entries[i % P.entries.length]
-        })
+        function rebuildDerived() {
+            cards = [].slice.call(stack.querySelectorAll('.photo-card'))
+            N = cards.length
+            mid = (N - 1) / 2
+            seg = N > 1 ? 1 / (N - 1) : 1
 
-        /* 堆叠时每张相对中心的偏移 */
-        var stackPos = cards.map(function (_, i) {
-            return {
-                x: (i - mid) * P.stackOffset.x,
-                y: (i - mid) * P.stackOffset.y,
-                r: (i - mid) * P.stackOffset.r
-            }
-        })
+            entries = cards.map(function (_, i) {
+                return P.entries[i % P.entries.length]
+            })
 
-        /* 
-         * ---------- 按阶段区分阻尼 ----------
-         * 阶段 B 之前用全局 follow，进入阶段 C 之后用更低的 follow，
-         * 中间用一个混合区间平滑过渡，避免边界处的"顿感"。
-         */
+            stackPos = cards.map(function (_, i) {
+                return {
+                    x: (i - mid) * P.stackOffset.x,
+                    y: (i - mid) * P.stackOffset.y,
+                    r: (i - mid) * P.stackOffset.r
+                }
+            })
+        }
+
+        /* ---------- 按阶段区分阻尼 ---------- */
         var GLOBAL_FOLLOW = CFG.motion.follow
         var PHASE_C_FOLLOW = P.followPhaseC
         var BLEND_RANGE = P.followBlendRange
@@ -81,15 +76,16 @@
             return U.lerp(GLOBAL_FOLLOW, PHASE_C_FOLLOW, blend)
         }
 
+        /* ---------- 尺寸 ---------- */
         function sizeFn() {
-            /* 刷新位移基准：所有卡片高度一致，取第一张 */
-            baseH = cards[0].offsetHeight || 300
+            baseH = cards.length ? (cards[0].offsetHeight || 300) : 300
 
             var vh = sticky.offsetHeight || window.innerHeight
             var total = vh * P.totalScreens
             return { total: total, height: vh + total }
         }
 
+        /* ---------- 应用到 DOM ---------- */
         function apply(p) {
             var endA = P.phases.flyIn
             var endB = P.phases.zoom
@@ -98,7 +94,6 @@
             var tB = U.clamp01((p - endA) / Math.max(0.0001, endB - endA))
             var tCraw = U.clamp01((p - endB) / Math.max(0.0001, 1 - endB))
 
-            /* 阶段 C 磁吸：连续进度 → 吸附到 N 个静止点 */
             var tC = U.magnetize(tCraw, N, P.magnetFlat)
 
             /* 阶段 B：整体放大 */
@@ -110,11 +105,9 @@
                 var entry = entries[i]
                 var sp = stackPos[i]
 
-                /* x, y 都是"卡片高度百分比"，r 是角度，s 是缩放 */
                 var x, y, r, s
 
                 if (i === 0) {
-                    /* 第一张一开始就在中心，不参与飞入 */
                     x = sp.x; y = sp.y; r = sp.r; s = 1
                 } else {
                     /* --- A：飞入 --- */
@@ -141,7 +134,6 @@
                     y = U.lerp(P.exitY, 0, U.easeInOutCubic(ltC))
                 }
 
-                /* 百分比 → px（以卡片高度为基准） */
                 var dx = x / 100 * baseH
                 var dy = y / 100 * baseH
 
@@ -155,24 +147,41 @@
             section.dataset.p = p
         }
 
-        /* 首帧前隐藏，避免初始位置跳变被看到 */
-        stack.classList.remove('ready')
+        /* ---------- 渲染（首次和 reload 都走这里） ---------- */
+        function doRender(lang) {
+            /* 隐藏，避免重建过程中的位置跳变被看到 */
+            stack.classList.remove('ready')
 
-        /* 传第四个参数：按目标进度返回 follow */
-        var pin = Pin.make(section, apply, sizeFn, followFor)
+            var photos = getPhotos(lang)
+            stack.innerHTML = photos.map(renderPhoto).join('')
 
-        /* makePin 里已 apply(0)，卡片位置已定，可以显示 */
-        stack.classList.add('ready')
+            rebuildDerived()
 
-        if (window.ResizeObserver) {
-            new ResizeObserver(function () { pin.scheduleMeasure() }).observe(sticky)
+            if (pin) {
+                /* 已初始化过：重测尺寸 + 重算位置 */
+                pin.measure()
+            } else {
+                /* 首次：建 pin */
+                pin = Pin.make(section, apply, sizeFn, followFor)
+
+                if (window.ResizeObserver) {
+                    new ResizeObserver(function () {
+                        pin.scheduleMeasure()
+                    }).observe(sticky)
+                }
+            }
+
+            /* 卡片位置已就位，显示 */
+            stack.classList.add('ready')
         }
 
-        return pin
-    }
+        /* 首次加载 */
+        doRender(App.i18n.get())
 
-    PhotoStack.load = function (stack) {
-        stack.innerHTML = CFG.photos.map(renderPhoto).join('')
-        PhotoStack.init(stack)
+        return {
+            reload: function (lang) {
+                doRender(lang)
+            }
+        }
     }
 })()

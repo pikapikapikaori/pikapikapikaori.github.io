@@ -37,30 +37,6 @@
     backface-visibility: hidden;
 }
 
-.photo-card[data-ratio="16/9"] {
-    aspect-ratio: 16 / 9;
-}
-
-.photo-card[data-ratio="4/3"] {
-    aspect-ratio: 4 / 3;
-}
-
-.photo-card[data-ratio="1/1"] {
-    aspect-ratio: 1 / 1;
-}
-
-.photo-card[data-ratio="3/4"] {
-    aspect-ratio: 3 / 4;
-}
-
-.photo-card[data-ratio="2/3"] {
-    aspect-ratio: 2 / 3;
-}
-
-.photo-card[data-ratio="9/16"] {
-    aspect-ratio: 9 / 16;
-}
-
 .photo-card img {
     width: 100%;
     height: 100%;

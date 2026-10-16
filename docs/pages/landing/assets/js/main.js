@@ -24,13 +24,16 @@
         if (blogRail) blogInstance = App.blogRail.load(blogRail)
 
         var photoStack = document.getElementById('photoStack')
-        if (photoStack) App.photoStack.load(photoStack)
+        var photoInstance = null
+        if (photoStack) photoInstance = App.photoStack.load(photoStack)
 
-        /* 5. 语言切换：重载博客 rail + 重测所有 pin */
+        /* 5. 语言切换：滚回顶部 + 重载博客 / 摄影 + 重测所有 pin */
         App.i18n.onChange(function (newLang) {
             scrollToTopInstant()
 
-            if (blogInstance) blogInstance.reload(newLang)
+            if (blogInstance)  blogInstance.reload(newLang)
+            if (photoInstance) photoInstance.reload(newLang)
+
             requestAnimationFrame(App.pin.remeasureAll)
         })
 
@@ -86,6 +89,16 @@
         revealBoot()
     }
 
+    /* 立即回到页面顶部，绕过 html { scroll-behavior: smooth } */
+    function scrollToTopInstant() {
+        var html = document.documentElement
+        html.style.scrollBehavior = 'auto'
+        window.scrollTo(0, 0)
+        requestAnimationFrame(function () {
+            html.style.scrollBehavior = ''
+        })
+    }
+
     function revealBoot() {
         var MIN_MS = 150
         var elapsed = (window.performance && performance.now)
@@ -96,18 +109,6 @@
         setTimeout(function () {
             document.documentElement.classList.add('booted')
         }, wait)
-    }
-
-    /*
-     * 立即回到页面顶部，绕过 html { scroll-behavior: smooth }。
-     */
-    function scrollToTopInstant() {
-        var html = document.documentElement
-        html.style.scrollBehavior = 'auto'
-        window.scrollTo(0, 0)
-        requestAnimationFrame(function () {
-            html.style.scrollBehavior = ''
-        })
     }
 
     if (document.readyState === 'loading') {

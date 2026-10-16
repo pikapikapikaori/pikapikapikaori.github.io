@@ -448,3 +448,79 @@
     gap: var(--sp-2);
     align-items: center;
 }
+
+/* ---------- 语言分组 ---------- */
+.lang-group {
+    margin-bottom: var(--sp-5);
+}
+
+.lang-group__title {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    color: var(--c-fg-muted);
+    margin-bottom: var(--sp-3);
+    padding-left: var(--sp-1);
+}
+
+.lang-group__title[draggable="true"] {
+    cursor: grab;
+    user-select: none;
+}
+
+.lang-group__title[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.lang-group__handle {
+    color: var(--c-fg-subtle);
+    font-size: var(--fs-sm);
+    letter-spacing: -2px;
+    opacity: 0.6;
+}
+
+.lang-group__title:hover .lang-group__handle {
+    opacity: 1;
+}
+
+.lang-group__label {
+    font-weight: 600;
+}
+
+.lang-group__title--dragging {
+    opacity: 0.4;
+}
+
+.lang-group__title--drop-target {
+    background: var(--c-accent-soft);
+    border-radius: var(--r-sm);
+    box-shadow: 0 0 0 2px var(--c-accent);
+}
+
+.lang-group__count {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+    font-weight: 400;
+}
+
+/* 拖动状态 */
+.lang-card[draggable="true"] {
+    cursor: grab;
+}
+
+.lang-card[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.lang-card--dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+}
+
+.lang-card--drop-target {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 3px var(--c-accent-soft);
+    transform: none;
+}

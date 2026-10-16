@@ -12,7 +12,7 @@
 export const LANGUAGES = [
     { code: 'la',     name: '拉丁语',       native: 'Latina',    classical: true,  vertical: false, rtl: false },
     { code: 'grc',    name: '古希腊语',     native: 'Ἑλληνική',  classical: true,  vertical: false, rtl: false },
-    { code: 'he',     name: '圣经希伯来语', native: 'עברית',     classical: false, vertical: false, rtl: true  },
+    { code: 'he',     name: '圣经希伯来语', native: 'עברית',     classical: true, vertical: false, rtl: true  },
     { code: 'sa',     name: '梵语',         native: 'संस्कृतम्',  classical: true,  vertical: false, rtl: false },
     { code: 'mnc',    name: '满语',         native: 'ᠮᠠᠨᠵᡠ',     classical: true,  vertical: true,  rtl: false },
     { code: 'ja',     name: '现代日语',     native: '日本語',     classical: false, vertical: false, rtl: false },

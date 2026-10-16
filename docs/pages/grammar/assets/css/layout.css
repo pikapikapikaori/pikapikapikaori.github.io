@@ -25,19 +25,6 @@
     white-space: nowrap;
 }
 
-.app-header__crumbs {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    color: var(--c-fg-muted);
-    font-size: var(--fs-sm);
-    min-width: 0;
-}
-
-.app-header__crumbs .sep {
-    color: var(--c-fg-subtle);
-}
-
 .app-header__spacer {
     flex: 1;
 }
@@ -46,6 +33,69 @@
     display: flex;
     align-items: center;
     gap: var(--sp-1);
+}
+
+/* ---------- 页面面包屑（位于 app-main 顶部） ---------- */
+.page-breadcrumbs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--c-fg-muted);
+    margin-bottom: var(--sp-4);
+}
+
+.page-breadcrumbs__trail {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    min-width: 0;
+}
+
+.page-breadcrumbs__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: 2px 10px;
+    border-radius: var(--r-full);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.page-breadcrumbs__back:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+.page-breadcrumbs__back-arrow {
+    font-size: var(--fs-sm);
+}
+
+.crumb-link {
+    color: var(--c-fg-muted);
+    white-space: nowrap;
+    transition: color var(--dur) var(--ease);
+}
+
+.crumb-link:hover {
+    color: var(--c-fg);
+    text-decoration: underline;
+}
+
+.crumb-current {
+    color: var(--c-fg);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.crumb-sep {
+    color: var(--c-fg-subtle);
+    user-select: none;
 }
 
 /* 主内容 */

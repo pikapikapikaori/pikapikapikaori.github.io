@@ -25,10 +25,19 @@ export const FILTER_EMPTY = {
     source: ''         // '' 表示全部
 }
 
+export const SEARCH_SCOPE = [
+    { value: 'all',         label: '全部' },
+    { value: 'lemma',       label: '基本形态' },
+    { value: 'meaning',     label: '含义' },
+    { value: 'example',     label: '例句' },
+    { value: 'collocation', label: '固定搭配' }
+]
+
 /** 主入口：查询当前语言的词条，带筛选、排序、分页 */
 export async function queryWords(userId, language, options = {}) {
     const {
         q = '',
+        scope = 'all',
         filter = FILTER_EMPTY,
         sortField = 'addedAt',
         sortOrder = 'desc',
@@ -37,7 +46,7 @@ export async function queryWords(userId, language, options = {}) {
     } = options
 
     let all = await listByLanguage(userId, language)
-    all = applySearch(all, q)
+    all = applySearch(all, q, scope)
     all = applyFilter(all, filter)
     all = applySort(all, sortField, sortOrder)
 
@@ -57,17 +66,34 @@ export async function queryWords(userId, language, options = {}) {
     }
 }
 
-function applySearch(words, q) {
+function applySearch(words, q, scope = 'all') {
     const s = String(q || '').trim()
     if (!s) return words
     const nq = normalizeSearch(s)
     if (!nq) return words
-    const hit = (w) => {
-        if (normalizeSearch(w.lemma).includes(nq)) return true
-        if ((w.meanings || []).some((m) => normalizeSearch(m.text || '').includes(nq))) return true
-        return false
-    }
-    return words.filter(hit)
+
+    const hitLemma = (w) => normalizeSearch(w.lemma).includes(nq)
+    const hitMeaning = (w) => (w.meanings || []).some((m) =>
+        normalizeSearch(m.text || '').includes(nq))
+    const hitExample = (w) => (w.examples || []).some((ex) =>
+        normalizeSearch(ex.text || '').includes(nq)
+    || normalizeSearch(ex.translation || '').includes(nq))
+    const hitCollocation = (w) => (w.collocations || []).some((c) =>
+        normalizeSearch(c.text || '').includes(nq)
+    || normalizeSearch(c.gloss || '').includes(nq))
+
+    return words.filter((w) => {
+        switch (scope) {
+            case 'lemma':       return hitLemma(w)
+            case 'meaning':     return hitMeaning(w)
+            case 'example':     return hitExample(w)
+            case 'collocation': return hitCollocation(w)
+            case 'all':
+            default:
+                return hitLemma(w) || hitMeaning(w)
+            || hitExample(w) || hitCollocation(w)
+        }
+    })
 }
 
 function applyFilter(words, f) {

@@ -52,6 +52,14 @@ export function openCardOverlay(word, opts = {}) {
     overlayEl = h('div', { class: 'card-overlay' }, backdrop, panel)
     document.body.appendChild(overlayEl)
 
+    /**
+     * 包装 onGrammarRef：跳转前先关闭 overlay
+     */
+    function wrappedGrammarRef(ref) {
+        close()
+        if (typeof onGrammarRef === 'function') onGrammarRef(ref)
+    }
+
     escHandler = (e) => {
         if (e.key === 'Escape') close()
     }
@@ -73,7 +81,7 @@ export function openCardOverlay(word, opts = {}) {
                 class: 'badge badge--accent' + (clickable ? ' badge--clickable' : ''),
                 type: clickable ? 'button' : null,
                 onclick: clickable
-                    ? (e) => { e.stopPropagation(); onGrammarRef(it.grammarRef) }
+                    ? (e) => { e.stopPropagation(); wrappedGrammarRef(it.grammarRef) }
                     : null
             }, it.label))
         }
@@ -118,7 +126,7 @@ export function openCardOverlay(word, opts = {}) {
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang: language,
                     mode: 'view',
-                    onGrammarRef
+                    onGrammarRef: wrappedGrammarRef
                 })
                 if (tbl) body.appendChild(tbl)
             }

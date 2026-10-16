@@ -8,6 +8,7 @@ import { createParadigmTable } from '../components/paradigm-table.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import { lookupWordForForm } from '../services/wiktionary-service.js'
+import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
 const SOURCE_OPTIONS = [
     { value: 'manual', label: '手动' },
@@ -31,6 +32,12 @@ export default {
 
         const editId = ctx.params.id || null
         const isEdit = !!editId
+
+        setBreadcrumbs([
+            { label: '语言选择', href: '#/languages' },
+            { label: language.name, href: `#/lang/${lang}/words` },
+            { label: isEdit ? '编辑生词' : '添加生词' }
+        ])
 
         const grammarDoc = await loadGrammar(lang)
 
@@ -98,12 +105,6 @@ export default {
                     h('span', { lang: lang }, language.native),
                     ' · ', language.name
                 )
-            ),
-            h('div', { class: 'page-head__actions' },
-                h('button', {
-                    class: 'btn', type: 'button',
-                    onclick: () => location.hash = `#/lang/${lang}/words`
-                }, '返回')
             )
         )
 
@@ -153,19 +154,20 @@ export default {
                 const v = e.target.value
                 if (v === SPECIAL_REF) return
                 const opt = currentOptionsById[v]
-                if (opt) {
+                // 只在 label 为空时自动填充，避免覆盖用户已填的内容
+                if (opt && !inflectionLabel.value.trim()) {
                     const title = opt.label.split(' · ').pop()
                     inflectionLabel.value = title
                 }
             }
         })
 
-        function rebuildRefOptions() {
+        function rebuildRefOptions(initialValue) {
             const pos = posSelect.value
             const opts = collectGrammarOptions(grammarDoc, pos)
             currentOptionsById = Object.fromEntries(opts.map((o) => [o.id, o]))
 
-            const prev = inflectionRef.value
+            const prev = initialValue !== undefined ? initialValue : inflectionRef.value
             const ids = new Set(opts.map((o) => o.id))
             const selected = (prev && prev !== SPECIAL_REF && ids.has(prev))
                 ? prev
@@ -256,7 +258,7 @@ export default {
             ))
         }
 
-        rebuildRefOptions()
+        rebuildRefOptions(data.inflectionType.grammarRef || SPECIAL_REF)
         replace(main, head, form)
 
         renderParadigmBlock()

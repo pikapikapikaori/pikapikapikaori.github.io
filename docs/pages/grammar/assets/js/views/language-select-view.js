@@ -12,7 +12,6 @@ import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
 import { formatRelative } from '../utils/date.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
-import { createThemeToggle } from '../components/theme-toggle.js'
 import { exportUser } from '../services/import-export-service.js'
 
 const GROUP_DEFS = {
@@ -65,22 +64,12 @@ export default {
                 h('div', { class: 'page-head__actions' },
                     h('button', {
                         class: 'btn', type: 'button',
-                        onclick: () => doImport()
-                    }, '导入生词'),
-                    h('button', {
-                        class: 'btn', type: 'button',
                         onclick: () => doExport()
                     }, '导出 JSON'),
                     h('button', {
                         class: 'btn btn--danger', type: 'button',
                         onclick: () => doClearAll()
-                    }, '清空数据'),
-                    createThemeToggle({
-                        onChange: async (t) => {
-                            settings = await saveSettings(userId, { theme: t })
-                            appStore.set({ settings })
-                        }
-                    })
+                    }, '清空数据')
                 )
             )
         }

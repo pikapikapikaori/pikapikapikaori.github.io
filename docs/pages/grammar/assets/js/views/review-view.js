@@ -1,8 +1,3 @@
-/**
- * 复习视图：随机卡片
- * 左侧记错，右侧记对，空格翻面
- */
-
 import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
@@ -10,6 +5,7 @@ import { buildQueue, answer, createSessionStats } from '../services/review-servi
 import { listByLanguage } from '../store/word-store.js'
 import { createWordCard } from '../components/word-card.js'
 import { toast } from '../components/toast.js'
+import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
 export default {
     needsUser: true,
@@ -25,6 +21,12 @@ export default {
             return
         }
 
+        setBreadcrumbs([
+            { label: '语言选择', href: '#/languages' },
+            { label: language.name, href: `#/lang/${lang}/words` },
+            { label: '复习' }
+        ])
+
         /* ---------- 数据 ---------- */
         const allWords = await listByLanguage(userId, lang)
         const lemmaMap = new Map()
@@ -38,21 +40,18 @@ export default {
         /* ---------- 空状态 ---------- */
         if (queue.length === 0) {
             replace(main,
-                h('div', { class: 'page-head' },
-                    h('div', {},
-                        h('div', { class: 'page-head__title' }, '复习'),
-                        h('div', { class: 'page-head__sub' },
-                            h('span', { lang: lang }, language.native), ' · ', language.name
+                h('div', { class: 'review-stage' },
+                    h('div', { class: 'review-card-wrap' },
+                        h('div', { class: 'empty' },
+                            h('div', { class: 'empty__title' }, '暂无词条可复习'),
+                            h('div', { class: 'empty__desc' }, '先添加一些生词，再来复习吧。'),
+                            h('button', {
+                                class: 'btn btn--primary',
+                                type: 'button',
+                                onclick: () => location.hash = `#/lang/${lang}/words`
+                            }, '返回列表')
                         )
-                    ),
-                    h('button', {
-                        class: 'btn', type: 'button',
-                        onclick: () => location.hash = `#/lang/${lang}/words`
-                    }, '返回列表')
-                ),
-                h('div', { class: 'empty' },
-                    h('div', { class: 'empty__title' }, '暂无词条可复习'),
-                    h('div', { class: 'empty__desc' }, '先添加一些生词，再来复习吧。')
+                    )
                 )
             )
             return
@@ -64,31 +63,29 @@ export default {
         let card = null
 
         /* ---------- DOM ---------- */
-        const statEl = h('div', { class: 'review-head__stat' })
+        const statEl = h('div', { class: 'review-stats' })
         const barEl = h('div', { class: 'progress__bar', style: { width: '0%' } })
         const progressEl = h('div', { class: 'progress', 'aria-label': '进度' }, barEl)
-        const cardSlot = h('div', { class: 'review-card' })
+        const cardWrap = h('div', { class: 'review-card-wrap' })
         const actionEl = h('div', { class: 'review-actions' })
 
-        const head = h('div', { class: 'review-head' },
-            h('button', {
-                class: 'btn btn--ghost btn--sm',
-                type: 'button',
-                onclick: () => location.hash = `#/lang/${lang}/words`
-            }, '← 退出'),
-            statEl
-        )
-
         replace(main,
-            h('div', { class: 'review-stage' }, head, progressEl, cardSlot, actionEl)
+            h('div', { class: 'review-stage' },
+                statEl,
+                progressEl,
+                cardWrap,
+                actionEl
+            )
         )
 
         /* ---------- 渲染函数 ---------- */
 
         function renderStats() {
             replace(statEl,
-                h('span', {}, '剩余 ', h('b', { class: 'num' }, String(Math.max(0, stats.total - stats.done)))),
-                h('span', {}, '进度 ', h('b', { class: 'num' }, `${stats.done}/${stats.total}`)),
+                h('span', {}, '剩余 ', h('b', { class: 'num' },
+                    String(Math.max(0, stats.total - stats.done)))),
+                h('span', {}, '进度 ', h('b', { class: 'num' },
+                    `${stats.done}/${stats.total}`)),
                 h('span', {}, '正确率 ', h('b', { class: 'num' },
                     stats.done ? `${Math.round(stats.accuracy * 100)}%` : '—'))
             )
@@ -98,23 +95,17 @@ export default {
         function renderActions() {
             replace(actionEl,
                 h('button', {
-                    class: 'btn btn--danger btn--lg',
+                    class: 'btn btn--danger',
                     type: 'button',
                     title: '记错（← 或 1）',
                     onclick: () => doAnswer(false)
-                }, '记错  ←'),
+                }, '← 记错'),
                 h('button', {
-                    class: 'btn btn--lg',
-                    type: 'button',
-                    title: '翻面（空格）',
-                    onclick: () => { if (card) card.flip() }
-                }, '翻面  Space'),
-                h('button', {
-                    class: 'btn btn--primary btn--lg',
+                    class: 'btn btn--primary',
                     type: 'button',
                     title: '记对（→ 或 2）',
                     onclick: () => doAnswer(true)
-                }, '记对  →')
+                }, '记对 →')
             )
         }
 
@@ -124,17 +115,16 @@ export default {
 
             card = createWordCard(word, {
                 language: lang,
-                compact: true,
                 showSourceTabs: false,
                 resolveDerivative: (lemma) => lemmaMap.get(lemma) || null,
                 onDerivativeClick: (target) => {
                     toast.info(`派生词：${target.lemma}`)
                 },
                 onGrammarRef: (ref) => {
-                    location.hash = `#/grammar/${lang}?ref=${encodeURIComponent(ref)}`
+                    location.hash = `#/grammar/${lang}#${ref}`
                 }
             })
-            replace(cardSlot, card)
+            replace(cardWrap, card)
             card.setFlipped(false)
         }
 
@@ -155,26 +145,21 @@ export default {
         }
 
         function renderDone() {
-            replace(cardSlot,
+            replace(cardWrap,
                 h('div', { class: 'review-done' },
-                    h('div', { class: 'empty__title' }, '本轮完成'),
-                    h('div', { class: 'empty__desc' },
+                    h('div', { class: 'review-done__title' }, '本轮完成'),
+                    h('div', { class: 'review-done__stats' },
                         `共 ${stats.done} 张 · 正确 ${stats.correct} · 错误 ${stats.wrong}`
                     ),
-                    h('div', {
-                        style: {
-                            display: 'flex', gap: 'var(--sp-2)',
-                            justifyContent: 'center', marginTop: 'var(--sp-4)'
-                        }
-                    },
-                    h('button', {
-                        class: 'btn', type: 'button',
-                        onclick: () => location.hash = `#/lang/${lang}/words`
-                    }, '返回列表'),
-                    h('button', {
-                        class: 'btn btn--primary', type: 'button',
-                        onclick: () => location.reload()
-                    }, '再来一轮')
+                    h('div', { class: 'review-done__actions' },
+                        h('button', {
+                            class: 'btn', type: 'button',
+                            onclick: () => location.hash = `#/lang/${lang}/words`
+                        }, '返回列表'),
+                        h('button', {
+                            class: 'btn btn--primary', type: 'button',
+                            onclick: () => location.reload()
+                        }, '再来一轮')
                     )
                 )
             )

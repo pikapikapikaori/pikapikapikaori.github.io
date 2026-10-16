@@ -8,11 +8,13 @@
 
 import { openDB } from './store/db.js'
 import { getUser, listUsers } from './store/user-store.js'
-import { getSettings } from './store/settings-store.js'
+import { getSettings, saveSettings } from './store/settings-store.js'
 import { createRouter } from './router.js'
 import { appStore, setUser, setLanguage, setSettings, setRoute } from './app-state.js'
 import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
+import { createThemeToggle } from './components/theme-toggle.js'
+import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 
 const LS_USER_KEY = 'ln.currentUser'
 const LS_THEME_KEY = 'ln.theme'
@@ -36,13 +38,24 @@ function getShell() {
 }
 
 function renderHeader() {
+    const themeToggle = createThemeToggle({
+        onChange: async (t) => {
+            const { userId } = appStore.get()
+            if (!userId) return
+            try {
+                const s = await saveSettings(userId, { theme: t })
+                setSettings(s)
+            } catch (err) {
+                console.warn('[theme] 保存失败', err)
+            }
+        }
+    })
+
     return h('header', { class: 'app-header' },
         h('a', { class: 'app-header__brand', href: '#/languages' }, '生词本'),
-        h('nav', { class: 'app-header__crumbs', 'aria-label': '面包屑' },
-            h('span', { class: 'crumb-slot' })
-        ),
         h('div', { class: 'app-header__spacer' }),
         h('div', { class: 'app-header__actions' },
+            themeToggle,
             h('button', {
                 class: 'btn btn--ghost btn--icon', title: '设置',
                 onclick: () => router.navigate('/settings')
@@ -90,7 +103,6 @@ const VIEW_MODULES = {
     wordNew: () => import('./views/word-form-view.js'),
     wordEdit: () => import('./views/word-form-view.js'),
     review: () => import('./views/review-view.js'),
-    search: () => import('./views/search-view.js'),
     grammar: () => import('./views/grammar-view.js'),
     settings: () => import('./views/settings-view.js')
 }
@@ -120,8 +132,7 @@ const router = createRouter([
     { path: '/lang/:lang/words/new', view: (ctx) => mountView('wordNew',    ctx) },
     { path: '/lang/:lang/words/:id', view: (ctx) => mountView('wordEdit',   ctx) },
     { path: '/lang/:lang/review',    view: (ctx) => mountView('review',     ctx) },
-    { path: '/lang/:lang/search',    view: (ctx) => mountView('search',     ctx) },
-    { path: '/grammar',              view: (ctx) => mountView('grammar',    ctx) },
+    { path: '/grammar',              view: () => router.navigate('/languages', { replace: true }) },
     { path: '/grammar/:lang',        view: (ctx) => mountView('grammar',    ctx) },
     { path: '/settings',             view: (ctx) => mountView('settings',   ctx) },
     { path: '/',                     view: () => router.navigate('/welcome', { replace: true }) }
@@ -140,6 +151,7 @@ async function mountView(name, ctx) {
         currentUnmount = null
     }
     
+    clearBreadcrumbs()
     hideVerticalPopover()
 
     const container = isFull
@@ -161,6 +173,7 @@ async function mountView(name, ctx) {
     setRoute(name, ctx.params, ctx.query)
     const unmount = await view.mount(container || getShell(), ctx)
     if (typeof unmount === 'function') currentUnmount = unmount
+    applyBreadcrumbs()
 }
 
 /* ---------------- 启动 ---------------- */

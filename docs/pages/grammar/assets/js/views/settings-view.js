@@ -16,6 +16,7 @@ import {
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
 import { applyTheme, currentTheme } from '../components/theme-toggle.js'
+import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
 export default {
     needsUser: true,
@@ -23,7 +24,14 @@ export default {
 
     async mount(main, ctx) {
         const state = appStore.get()
-        const { userId, user } = state
+        const userId = state.userId
+        const user = state.user
+
+        setBreadcrumbs([
+            { label: '语言选择', href: '#/languages' },
+            { label: '设置' }
+        ])
+
         let settings = await getSettings(userId)
 
         /* ---------- 头部 ---------- */
@@ -31,11 +39,7 @@ export default {
             h('div', {},
                 h('div', { class: 'page-head__title' }, '设置'),
                 h('div', { class: 'page-head__sub' }, `当前用户：${user.name}`)
-            ),
-            h('button', {
-                class: 'btn', type: 'button',
-                onclick: () => history.back()
-            }, '返回')
+            )
         )
 
         const container = h('div', {})

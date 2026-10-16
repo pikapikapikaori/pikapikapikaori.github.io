@@ -6,7 +6,7 @@ import { h, replace, delegate } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import {
-    queryWords, SORT_FIELDS, FILTER_EMPTY,
+    queryWords, SORT_FIELDS, FILTER_EMPTY, SEARCH_SCOPE,
     submitReview
 } from '../services/word-service.js'
 import { listByLanguage, deleteWord } from '../store/word-store.js'
@@ -17,6 +17,7 @@ import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
 import { loadGrammar, getParadigmTemplate, derivePrincipalParts } from '../services/grammar-service.js'
 import { openImportWordsModal } from '../components/import-words-modal.js'
+import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
 export default {
     needsUser: true,
@@ -31,9 +32,15 @@ export default {
             return
         }
 
+        setBreadcrumbs([
+            { label: '语言选择', href: '#/languages' },
+            { label: language.name }
+        ])
+
         // 视图状态（初始来自 URL 查询）
         const state = {
             q: ctx.query.q || '',
+            scope: ctx.query.scope || 'all',
             pos: ctx.query.pos || '',
             sortField: ctx.query.sort || (settings && settings.sortField) || 'addedAt',
             sortOrder: ctx.query.order || (settings && settings.sortOrder) || 'desc',
@@ -93,10 +100,6 @@ export default {
                         onclick: () => location.hash = `#/lang/${lang}/review`
                     }, '复习'),
                     h('button', {
-                        class: 'btn', type: 'button',
-                        onclick: () => location.hash = `#/lang/${lang}/search`
-                    }, '检索'),
-                    h('button', {
                         class: 'btn btn--primary', type: 'button',
                         onclick: () => location.hash = `#/lang/${lang}/words/new`
                     }, '＋ 添加生词'),
@@ -128,7 +131,7 @@ export default {
             const searchInput = h('input', {
                 class: 'input',
                 type: 'search',
-                placeholder: '在本语言内检索基本形态或含义…',
+                placeholder: '在本语言内检索…',
                 value: state.q,
                 oninput: debounce((e) => {
                     state.q = e.target.value
@@ -136,6 +139,19 @@ export default {
                     refresh()
                 }, 180)
             })
+
+            const scopeSelect = h('select', {
+                class: 'select',
+                style: { width: '120px' },
+                onchange: (e) => {
+                    state.scope = e.target.value
+                    state.page = 1
+                    refresh()
+                }
+            }, ...SEARCH_SCOPE.map((s) => h('option', {
+                value: s.value,
+                selected: state.scope === s.value
+            }, s.label)))
 
             const posSelect = h('select', {
                 class: 'select',
@@ -199,6 +215,7 @@ export default {
                 type: 'button',
                 onclick: () => {
                     state.q = ''
+                    state.scope = 'all'
                     state.pos = ''
                     state.sortField = 'addedAt'
                     state.sortOrder = 'desc'
@@ -208,8 +225,9 @@ export default {
             }, '重置')
 
             replace(toolbar,
-                h('div', { class: 'toolbar__grow' }, searchInput),
+                scopeSelect,
                 posSelect,
+                h('div', { class: 'toolbar__grow' }, searchInput),
                 sortSelect,
                 orderBtn,
                 sizeSelect,
@@ -296,7 +314,10 @@ export default {
 
         /* ---------- 主刷新 ---------- */
         async function refresh() {
-            const result = await queryWords(userId, lang, state)
+            const result = await queryWords(userId, lang, {
+                ...state,
+                filter: { ...FILTER_EMPTY, pos: state.pos }
+            })
             renderList(result)
             renderPagination(result)
             syncUrl()
@@ -305,6 +326,7 @@ export default {
         function syncUrl() {
             const params = new URLSearchParams()
             if (state.q) params.set('q', state.q)
+            if (state.scope && state.scope !== 'all') params.set('scope', state.scope)
             if (state.pos) params.set('pos', state.pos)
             if (state.sortField !== 'addedAt') params.set('sort', state.sortField)
             if (state.sortOrder !== 'desc') params.set('order', state.sortOrder)

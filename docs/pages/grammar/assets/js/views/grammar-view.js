@@ -1,17 +1,8 @@
-/**
- * 语法速查（只读）
- *
- * 路由：
- *   #/grammar               语言选择
- *   #/grammar/:lang         展示该语言语法
- *   #/grammar/:lang#anchor  锚点定位（由本视图从 location.hash 解析）
- *   #/grammar/:lang?ref=xxx ?ref 参数也支持
- */
-
 import { h, replace } from '../utils/dom.js'
-import { LANGUAGES, getLanguage } from '../data/languages.js'
+import { getLanguage } from '../data/languages.js'
 import { loadGrammar } from '../services/grammar-service.js'
 import { createGrammarTable } from '../components/grammar-table.js'
+import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
 export default {
     needsUser: false,
@@ -22,16 +13,17 @@ export default {
         let lang = rawLang
         let anchor = ''
 
-        // 处理 /grammar/la#la-noun-1st-decl 情况
         if (lang.includes('#')) {
             const parts = lang.split('#')
             lang = parts[0]
             anchor = parts[1] || ''
         }
-        // 优先 ?ref=
         if (ctx.query && ctx.query.ref) anchor = ctx.query.ref
 
-        if (!lang) { renderLanguagePicker(main); return }
+        if (!lang) {
+            location.replace('#/languages')
+            return
+        }
 
         const language = getLanguage(lang)
         if (!language) {
@@ -42,51 +34,17 @@ export default {
             return
         }
 
+        setBreadcrumbs([
+            { label: '语言选择', href: '#/languages' },
+            { label: language.name, href: `#/lang/${lang}/words` },
+            { label: '语法速查' }
+        ])
+
         const doc = await loadGrammar(lang)
         if (!doc) { renderNoData(main, lang, language); return }
 
         renderGrammar(main, lang, language, doc, anchor)
     }
-}
-
-/* ---------------- 子视图 ---------------- */
-
-function renderLanguagePicker(main) {
-    const grid = h('div', { class: 'lang-grid' })
-    for (const l of LANGUAGES) {
-        grid.appendChild(h('div', {
-            class: 'lang-card',
-            role: 'button',
-            tabindex: '0',
-            onclick: () => location.hash = `#/grammar/${l.code}`,
-            onkeydown: (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    location.hash = `#/grammar/${l.code}`
-                }
-            }
-        },
-        h('div', {
-            class: 'lang-card__native',
-            lang: l.code,
-            style: l.rtl ? { direction: 'rtl' } : {}
-        }, l.native),
-        h('div', { class: 'lang-card__name' }, l.name),
-        h('div', { class: 'lang-card__stats' },
-            h('span', { class: 'lang-card__stat' }, '点击查看基础语法')
-        )
-        ))
-    }
-
-    replace(main,
-        h('div', { class: 'page-head' },
-            h('div', {},
-                h('div', { class: 'page-head__title' }, '语法速查'),
-                h('div', { class: 'page-head__sub' }, '选择语言查看名词变格、动词变位、代词、字母形态等')
-            )
-        ),
-        grid
-    )
 }
 
 function renderNoData(main, lang, language) {
@@ -97,11 +55,7 @@ function renderNoData(main, lang, language) {
                     h('span', { lang: lang }, language.native), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' }, '语法速查')
-            ),
-            h('button', {
-                class: 'btn', type: 'button',
-                onclick: () => location.hash = '#/grammar'
-            }, '切换语言')
+            )
         ),
         h('div', { class: 'empty' },
             h('div', { class: 'empty__title' }, '尚未提供该语言的语法数据'),
@@ -143,7 +97,6 @@ function renderGrammar(main, lang, language, doc, anchor) {
         nav.appendChild(group)
     }
 
-    // 内容
     for (const section of doc.sections || []) {
         if (!section || !section.id) continue
         const sec = h('section', { class: 'grammar-section', id: section.id },
@@ -175,16 +128,10 @@ function renderGrammar(main, lang, language, doc, anchor) {
                     h('span', { lang: lang }, language.native), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' }, '语法速查')
-            ),
-            h('button', {
-                class: 'btn', type: 'button',
-                onclick: () => location.hash = '#/grammar'
-            }, '切换语言')
+            )
         ),
         h('div', { class: 'grammar-layout' }, nav, content)
     )
-
-    /* ---- 辅助 ---- */
 
     function setActiveNav(activeId) {
         nav.querySelectorAll('.grammar-nav__link').forEach((el) => {
@@ -192,14 +139,11 @@ function renderGrammar(main, lang, language, doc, anchor) {
         })
     }
 
-    /* ---- 锚点 ---- */
     if (anchor && allIds.has(anchor)) {
         setActiveNav(anchor)
         setTimeout(() => scrollToAnchor(anchor, lang, false), 60)
     }
 }
-
-/* ---------------- 工具 ---------------- */
 
 function scrollToAnchor(id, lang, updateUrl) {
     const el = document.getElementById(id)

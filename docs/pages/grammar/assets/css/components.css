@@ -66,6 +66,10 @@
     line-height: 1;
 }
 
+.btn--icon svg {
+    display: block;
+}
+
 .btn--sm {
     min-height: 30px;
     font-size: var(--fs-xs);
@@ -112,7 +116,6 @@
 .textarea,
 .select {
     width: 100%;
-    min-height: 38px;
     padding: var(--sp-2) var(--sp-3);
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
@@ -120,6 +123,11 @@
     color: var(--c-fg);
     font-size: var(--fs-md);
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.input,
+.select {
+    min-height: 38px;
 }
 
 .input:focus,
@@ -290,21 +298,23 @@
 }
 
 .word-card__section-title {
-    font-size: var(--fs-xs);
-    color: var(--c-fg-subtle);
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    margin-bottom: var(--sp-1);
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    color: var(--c-fg-muted);
+    margin-bottom: var(--sp-2);
 }
 
 .word-card__meanings {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    list-style: decimal;
+    padding-left: 1.5em;
 }
 
 .word-card__meaning {
     font-size: var(--fs-md);
+}
+
+.word-card__meaning + .word-card__meaning {
+    margin-top: 2px;
 }
 
 .word-card__bottom {
@@ -335,6 +345,7 @@
 .word-card__inflection-label {
     color: var(--c-fg-subtle);
     font-size: var(--fs-xs);
+    font-weight: 700;
     flex-shrink: 0;
 }
 
@@ -343,8 +354,8 @@
 }
 
 .word-card__inflection-group-title {
-    font-size: var(--fs-xs);
-    color: var(--c-fg-subtle);
+    font-size: var(--fs-md);
+    color: var(--c-fg-muted);
     margin: var(--sp-2) 0 2px;
     font-weight: 600;
 }
@@ -793,7 +804,7 @@ button.word-card__derivative {
 }
 
 .paradigm-block__title {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-lg);
     font-weight: 600;
     color: var(--c-fg-muted);
     margin-bottom: var(--sp-2);
@@ -912,14 +923,67 @@ button.word-card__derivative {
 .import-words-body {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-3);
+    gap: var(--sp-4);
 }
 
-.import-words-toolbar {
+/* 标题行 / 拖拽区 / JSON 输入框 / 识别结果之间统一留白 */
+.import-words-field {
+    gap: var(--sp-4);
+}
+
+.import-words-field .field__hint:empty {
+    display: none;
+}
+
+.import-words-head {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: var(--sp-2);
-    margin-bottom: var(--sp-2);
     flex-wrap: wrap;
+}
+
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-1);
+    padding: var(--sp-5) var(--sp-4);
+    border: 1.5px dashed var(--c-border-strong);
+    border-radius: var(--r-md);
+    background: var(--c-bg-subtle);
+    color: var(--c-fg-muted);
+    text-align: center;
+    cursor: pointer;
+    /* 键盘聚焦时用边框高亮替代默认外框 */
+    outline: none;
+    transition: border-color var(--dur) var(--ease),
+        background var(--dur) var(--ease),
+        color var(--dur) var(--ease);
+}
+
+.dropzone:hover,
+.dropzone:focus-visible,
+.dropzone--active {
+    border-color: var(--c-accent);
+    background: var(--c-accent-soft);
+}
+
+.dropzone__icon {
+    display: flex;
+    color: var(--c-accent);
+}
+
+.dropzone__title {
+    font-size: var(--fs-md);
+    font-weight: 500;
+    color: var(--c-fg);
+}
+
+.dropzone__hint {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
 }
 
 .import-result {

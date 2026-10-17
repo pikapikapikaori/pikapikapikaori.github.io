@@ -1,4 +1,4 @@
-# 数据源导入 · 待办
+# 待办事项
 
 数据源标记统一使用 `source` 字段：
 `manual` | `wiktionary` | `url:<host>` | 其它自定义字符串。
@@ -62,6 +62,22 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 - [ ] 古典日语与近现代日语区分（当前共用 `Japanese` 节）
 - [ ] 接入 Wiktionary REST API（`/api/rest_v1/page/definition/{term}`），替代当前的 wikitext 解析
 
-## 3. 通用
+## 3. 语法数据（`data/grammar/`）
+
+针对 `data/grammar/*.json` 的静态语法数据，与导入功能无关，但同属数据待办。
+编写规范见 `docs/SCHEMA.md` 第二部分。
+
+- [ ] **核对各语言语法点**：逐语言把 `sections` / `items` 与实际语法体系、以及
+  `SCHEMA.md` 第二部分第 4 节的覆盖清单对照一遍，补齐缺失语法点，修正错误分类、
+  错漏的表格行与说明。目前 `en` / `zh-cls` 等仍有 `notes: "待补充"` 与空 `tables`。
+  同时检查 `section.id` / `item.id` 全局唯一、命名符合 `{lang}-{category}-{item}`，
+  并确认 Word 的 `inflectionType.grammarRef` 与 paradigm 的 `rows[].grammarRef`
+  都能命中真实存在的锚点。
+- [ ] **优化各语言 paradigms 字段**：统一同一 `pos` 下 `tables[].key` /
+  `columns[].key` / `rows[].key` 的命名风格，补齐 `title` 与 `grammarRef`；
+  评估 `en` / `zh-cls` / `ja` / `ja-cls` 这些当前不使用 paradigm 的语言是否需要新增模板，
+  并核对 `rows[].principal` 标记与生词表单的 principal parts 提取逻辑一致。
+
+## 4. 通用
 
 - [ ] 导入前预览：新增 / 合并 / 跳过 三类计数

@@ -187,8 +187,8 @@ export function createWordCard(word, options = {}) {
         const meanings = pick(word.meanings)
         if (meanings.length) {
             back.appendChild(section('含义',
-                h('div', { class: 'word-card__meanings' },
-                    ...meanings.map((m) => h('div', {
+                h('ul', { class: 'word-card__meanings' },
+                    ...meanings.map((m) => h('li', {
                         class: 'word-card__meaning',
                         lang: m.lang === 'en' ? 'en' : undefined
                     }, m.text))

@@ -7,6 +7,7 @@
 - 语言元数据
 - Word 模型与多源合并策略
 - 语法速查 JSON 编写规范
+- 新增语言的接入流程
 - 检索规范
 - 版本迁移
 
@@ -494,6 +495,29 @@ const MIGRATIONS = {
 
 ---
 
+### 5. 新增一个语言的流程
+
+以新增语言 code `xx` 为例，按以下顺序改动：
+
+| 步骤 | 文件 | 改动内容 |
+| ---- | ---- | -------- |
+| 1 | `assets/js/data/languages.js` | 在 `LANGUAGES` 数组末尾追加一条元数据：`{ code: 'xx', name: '中文名', native: '本语言书写形式', classical, vertical, rtl }`。`code` 必须唯一。 |
+| 2 | `data/grammar/xx.json` | 新建语法文件，文件名必须与 `code` 一致。`version`（整数）、`language`（同 `code`）、`name` 必填，`sections` 必填（可为空数组，但建议至少给出一个条目），`paradigms` 可选。锚点按 `xx-{category}-{item}` 命名且全局唯一。 |
+| 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: "LN XX", var(--ff-content); }`；RTL 语言再补 `direction: rtl; unicode-bidi: isolate;`。 |
+| 4 | `assets/css/fonts.css` | 若准备专用字体：把 `xx.woff2` 放到 `assets/resources/fonts/`，并新增/取消对应 `@font-face`（`font-family: "LN XX"`）。没有专用字体可跳过，自动回退到 `--ff-content`。 |
+| 5 | `assets/js/services/wiktionary-service.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
+| 6 | `docs/SCHEMA.md` | 更新第一部分第 3 节的语言元数据表格、第二部分第 4 小节「各语言语法覆盖范围」，以及第 3 小节（锚点 id 命名）的示例表。 |
+
+补充说明：
+
+- **分组**：`classical` 决定语言进入「古典语言」还是「现代语言」组，分组本身不可由用户跨组拖动。
+- **竖排 / RTL**：`vertical: true` 会为带 `lang` 属性的内容启用竖排 popover；`rtl: true` 会为词条文本启用 RTL 方向，均无需额外代码。
+- **词性**：`pos` 取值来自 `assets/js/models/word.js` 的全局 `POS_LIST`，不是按语言定义。新语言的 `paradigms` 只能使用这些 key；确有新词性需求时需同时改 `POS_LIST` 和本文档第 4 节。
+- **语法文件加载**：`assets/js/services/grammar-service.js` 运行时按 `./data/grammar/{code}.json` 拉取，404 时该语言的「语法」页显示为空提示。`data/grammar/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
+- **既有用户数据**：老用户的 `settings.languageOrder` 里没有新 code 时，语言选择页会按 `LANGUAGES` 原始顺序把它追加到所在组末尾，不需要数据迁移。
+
+---
+
 ## 第三部分 · 检索规范
 
 ### 1. 检索范围
@@ -557,4 +581,4 @@ const MIGRATIONS = {
 
 入口形式：**按钮**，不是输入框。每个按钮对应一个内置数据源，URL 由开发者在对应的 `services/*.js` 中写死并维护。
 
-详见 `docs/TODO-IMPORT.md`。
+详见 `docs/TODO.md`。

@@ -14,6 +14,7 @@ import { appStore, setUser, setLanguage, setSettings, setRoute } from './app-sta
 import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
 import { createThemeToggle } from './components/theme-toggle.js'
+import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 
 const LS_USER_KEY = 'ln.currentUser'
@@ -59,7 +60,7 @@ function renderHeader() {
             h('button', {
                 class: 'btn btn--ghost btn--icon', title: '设置',
                 onclick: () => router.navigate('/settings')
-            }, '⚙'),
+            }, settingsIcon()),
             h('button', {
                 class: 'btn btn--ghost', title: '切换用户',
                 onclick: () => router.navigate('/welcome')

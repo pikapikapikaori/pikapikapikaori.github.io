@@ -1,8 +1,8 @@
-import { h } from '../utils/dom.js'
+import { h, replace } from '../utils/dom.js'
+import { THEME_ICONS } from './icons.js'
 
 const KEY = 'ln.theme'
 const CYCLE = ['auto', 'light', 'dark']
-const ICONS = { auto: '◐', light: '☀', dark: '☾' }
 const LABELS = { auto: '跟随系统', light: '浅色', dark: '深色' }
 
 export function currentTheme() {
@@ -32,7 +32,7 @@ export function createThemeToggle({ onChange } = {}) {
 
     function refresh() {
         const t = currentTheme()
-        btn.textContent = ICONS[t] || '◐'
+        replace(btn, THEME_ICONS[t]())
         btn.title = `主题：${LABELS[t]}（点击切换）`
         btn.setAttribute('aria-label', btn.title)
     }

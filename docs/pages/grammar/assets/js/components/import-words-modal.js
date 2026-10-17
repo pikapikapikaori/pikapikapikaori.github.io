@@ -2,7 +2,7 @@
  * 批量导入生词模态框
  */
 
-import { h } from '../utils/dom.js'
+import { h, svg } from '../utils/dom.js'
 import { openModal } from './modal.js'
 import { toast } from './toast.js'
 import {
@@ -37,6 +37,17 @@ export function openImportWordsModal({
         }
     })
 
+    async function loadFile(file) {
+        try {
+            const text = await file.text()
+            textarea.value = text
+            updateCount()
+            toast.success(`已载入 ${file.name}`, 2400)
+        } catch (err) {
+            toast.error(`读取文件失败：${err.message}`)
+        }
+    }
+
     const fileInput = h('input', {
         type: 'file',
         accept: '.json,application/json',
@@ -44,16 +55,62 @@ export function openImportWordsModal({
         onchange: async (e) => {
             const f = e.target.files && e.target.files[0]
             e.target.value = ''
-            if (!f) return
-            try {
-                const text = await f.text()
-                textarea.value = text
-                updateCount()
-            } catch (err) {
-                toast.error(`读取文件失败：${err.message}`)
-            }
+            if (f) await loadFile(f)
         }
     })
+
+    const dropzone = h('div', {
+        class: 'dropzone',
+        role: 'button',
+        tabindex: '0',
+        title: '点击选择文件，或把 JSON 文件拖到这里',
+        onclick: () => fileInput.click(),
+        onkeydown: (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                fileInput.click()
+            }
+        },
+        ondragenter: (e) => {
+            e.preventDefault()
+            dropzone.classList.add('dropzone--active')
+        },
+        ondragover: (e) => {
+            e.preventDefault()
+            dropzone.classList.add('dropzone--active')
+        },
+        ondragleave: (e) => {
+            if (!dropzone.contains(e.relatedTarget)) {
+                dropzone.classList.remove('dropzone--active')
+            }
+        },
+        ondrop: async (e) => {
+            e.preventDefault()
+            dropzone.classList.remove('dropzone--active')
+            const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]
+            if (f) await loadFile(f)
+        }
+    },
+    h('span', { class: 'dropzone__icon' },
+        svg('svg', {
+            viewBox: '0 0 24 24',
+            width: '28',
+            height: '28',
+            fill: 'none',
+            stroke: 'currentColor',
+            'stroke-width': '1.6',
+            'stroke-linecap': 'round',
+            'stroke-linejoin': 'round',
+            'aria-hidden': 'true'
+        },
+        svg('path', { d: 'M12 16V4' }),
+        svg('path', { d: 'm7 9 5-5 5 5' }),
+        svg('path', { d: 'M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2' })
+        )
+    ),
+    h('span', { class: 'dropzone__title' }, '拖拽 JSON 文件到这里'),
+    h('span', { class: 'dropzone__hint' }, '或点击选择文件 · 支持 .json')
+    )
 
     const countEl = h('div', { class: 'field__hint' }, '')
 
@@ -93,17 +150,13 @@ export function openImportWordsModal({
     }, '下载 AI 提示词')
 
     const body = h('div', { class: 'import-words-body' },
-        h('div', { class: 'field' },
-            h('span', { class: 'field__label' }, '上传或粘贴 JSON'),
-            h('div', { class: 'import-words-toolbar' },
-                h('button', {
-                    class: 'btn btn--sm',
-                    type: 'button',
-                    onclick: () => fileInput.click()
-                }, '选择文件'),
-                downloadBtn,
-                fileInput
+        h('div', { class: 'field import-words-field' },
+            h('div', { class: 'import-words-head' },
+                h('span', { class: 'field__label' }, '上传或粘贴 JSON'),
+                downloadBtn
             ),
+            dropzone,
+            fileInput,
             textarea,
             countEl
         ),

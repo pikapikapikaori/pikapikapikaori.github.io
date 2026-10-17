@@ -224,6 +224,16 @@
 
 .word-card__face--back {
     transform: rotateY(180deg);
+    /* 头尾固定，只有中段滚动 */
+    padding: 0;
+    overflow: hidden;
+}
+
+.word-card__back-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0 var(--sp-4) var(--sp-2);
 }
 
 .word-card__top {
@@ -289,7 +299,7 @@
 }
 
 .word-card__face--back>.word-card__hint {
-    margin-top: auto;
+    padding: var(--sp-2) var(--sp-4) var(--sp-4);
 }
 
 .word-card__section {
@@ -410,14 +420,7 @@ button.word-card__derivative {
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--sp-2);
-    margin-bottom: var(--sp-2);
-}
-
-.word-card__back-bottom {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: auto;
-    padding-top: var(--sp-2);
+    padding: var(--sp-4) var(--sp-4) var(--sp-2);
 }
 
 .word-card__zoom-btn {
@@ -1113,8 +1116,9 @@ button.word-card__derivative {
 
 .card-overlay-body {
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
-    padding: var(--sp-5);
+    padding: var(--sp-4) var(--sp-5) var(--sp-5);
 }
 
 .card-overlay__head {
@@ -1122,11 +1126,12 @@ button.word-card__derivative {
     align-items: center;
     justify-content: flex-start;
     gap: var(--sp-3);
-    margin-bottom: var(--sp-4);
-    padding-bottom: var(--sp-3);
-    padding-right: 48px;
-    border-bottom: 1px solid var(--c-border);
+    flex-shrink: 0;
     flex-wrap: wrap;
+    padding: var(--sp-5) var(--sp-5) var(--sp-3);
+    padding-right: 64px;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-bg-elev);
 }
 
 .card-overlay__lemma {
@@ -1160,6 +1165,9 @@ button.word-card__derivative {
 
     .card-overlay__head {
         flex-direction: column;
+        align-items: flex-start;
+        padding: var(--sp-4) var(--sp-4) var(--sp-3);
+        padding-right: 56px;
     }
 
     .card-overlay__badges {

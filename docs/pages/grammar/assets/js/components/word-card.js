@@ -131,7 +131,7 @@ export function createWordCard(word, options = {}) {
     }
 
     function renderBack() {
-        back.replaceChildren()
+        const content = h('div', { class: 'word-card__back-body' })
 
         // 右上角徽章
         const badges = h('div', { class: 'word-card__badges' },
@@ -152,7 +152,7 @@ export function createWordCard(word, options = {}) {
             badges.appendChild(h('span', { class: 'badge' }, t))
         }
 
-        back.appendChild(h('div', {
+        const head = h('div', {
             class: 'word-card__back-head',
             'data-no-flip': ''
         },
@@ -173,11 +173,11 @@ export function createWordCard(word, options = {}) {
                 })
             }
         }, '⛶')
-        ))
+        )
 
         // source tabs
         if (showSourceTabs && sources.length > 1) {
-            back.appendChild(createSourceTabs(sources, activeSource, (s) => {
+            content.appendChild(createSourceTabs(sources, activeSource, (s) => {
                 activeSource = s
                 renderBack()
             }))
@@ -186,7 +186,7 @@ export function createWordCard(word, options = {}) {
         // 含义（最先）
         const meanings = pick(word.meanings)
         if (meanings.length) {
-            back.appendChild(section('含义',
+            content.appendChild(section('含义',
                 h('ul', { class: 'word-card__meanings' },
                     ...meanings.map((m) => h('li', {
                         class: 'word-card__meaning',
@@ -206,7 +206,7 @@ export function createWordCard(word, options = {}) {
                     mode: 'view',
                     onGrammarRef
                 })
-                if (tbl) back.appendChild(tbl)
+                if (tbl) content.appendChild(tbl)
             }
         }
 
@@ -233,13 +233,13 @@ export function createWordCard(word, options = {}) {
                     ))
                 ))
             }
-            back.appendChild(section('补充形式', container))
+            content.appendChild(section('补充形式', container))
         }
 
         // 固定搭配
         const cols = pick(word.collocations)
         if (cols.length) {
-            back.appendChild(section('固定搭配',
+            content.appendChild(section('固定搭配',
                 h('div', {},
                     ...cols.map((c) => h('div', { class: 'word-card__collocation' },
                         h('span', { lang: language }, c.text || ''),
@@ -252,7 +252,7 @@ export function createWordCard(word, options = {}) {
         // 例句
         const exs = pick(word.examples)
         if (exs.length) {
-            back.appendChild(section('例句',
+            content.appendChild(section('例句',
                 h('div', {},
                     ...exs.map((e) => h('div', { class: 'word-card__example' },
                         h('div', { class: 'word-card__example-text', lang: language }, e.text || ''),
@@ -269,7 +269,7 @@ export function createWordCard(word, options = {}) {
 
         // 派生词
         if (word.derivatives && word.derivatives.length) {
-            back.appendChild(section('派生词',
+            content.appendChild(section('派生词',
                 h('div', { class: 'word-card__derivatives' },
                     ...word.derivatives.map((d) => {
                         const target = resolveDerivative ? resolveDerivative(d) : null
@@ -295,10 +295,11 @@ export function createWordCard(word, options = {}) {
 
         // 备注
         if (word.notes) {
-            back.appendChild(section('备注', h('div', {}, word.notes)))
+            content.appendChild(section('备注', h('div', {}, word.notes)))
         }
 
-        back.appendChild(h('div', { class: 'word-card__hint' }, '点击返回'))
+        back.replaceChildren(head, content,
+            h('div', { class: 'word-card__hint' }, '点击返回'))
     }
 
     renderBack()

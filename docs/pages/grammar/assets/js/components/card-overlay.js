@@ -33,6 +33,7 @@ export function openCardOverlay(word, opts = {}) {
         onclick: close
     })
 
+    const head = h('div', { class: 'card-overlay__head' })
     const body = h('div', { class: 'card-overlay-body' })
 
     const closeBtn = h('button', {
@@ -47,7 +48,7 @@ export function openCardOverlay(word, opts = {}) {
         class: 'card-overlay-panel',
         role: 'dialog',
         'aria-modal': 'true'
-    }, closeBtn, body)
+    }, closeBtn, head, body)
 
     overlayEl = h('div', { class: 'card-overlay' }, backdrop, panel)
     document.body.appendChild(overlayEl)
@@ -89,13 +90,13 @@ export function openCardOverlay(word, opts = {}) {
             badges.appendChild(h('span', { class: 'badge' }, t))
         }
 
-        body.appendChild(h('div', { class: 'card-overlay__head' },
+        head.replaceChildren(
             h('div', {
                 class: 'card-overlay__lemma' + (rtl ? ' word-card__lemma--rtl' : ''),
                 lang: language
             }, word.lemma),
             badges
-        ))
+        )
 
         /* ---------- source tabs ---------- */
         if (sources.length > 1) {

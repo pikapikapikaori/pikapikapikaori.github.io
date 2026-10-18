@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>ピカピカピ</title>
+    <meta name="description" content="Don't worry, be happy.">
+    <meta name="theme-color" content="#f7f3ea" id="themeColorMeta">
+
+    <link rel="icon" type="image/x-icon" href="./assets/resources/logo/favicon.ico">
+
+    <link rel="stylesheet" href="./assets/css/tokens.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
+    <link rel="stylesheet" href="./assets/css/blog.css">
+    <link rel="stylesheet" href="./assets/css/photo.css">
+</head>
+
+<body>
+
+    <div class="boot" id="boot" aria-hidden="true">
+        <span class="boot-dot"></span>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <header class="topbar" id="topbar">
+        <a class="brand" href="#top" id="brandLink"></a>
+        <nav class="topnav">
+            <a href="#blog" data-i18n="nav.blog"></a>
+            <a href="#photo" data-i18n="nav.photo"></a>
+            <a href="#about" data-i18n="nav.about"></a>
+        </nav>
+        <div class="tools">
+            <div class="lang" id="langPicker">
+                <button class="lang-trigger" type="button" id="langTrigger" aria-haspopup="listbox"
+                    aria-expanded="false">
+                    <span class="lang-current" id="langCurrent"></span>
+                    <svg class="lang-caret" viewBox="0 0 10 10" aria-hidden="true">
+                        <path d="M1 3.5 5 7l4-3.5" />
+                    </svg>
+                </button>
+                <ul class="lang-menu" id="langMenu" role="listbox" data-i18n-attr="aria-label:lang.menu.label">
+                </ul>
+            </div>
+            <button class="theme-btn" id="themeBtn" data-i18n-attr="aria-label:theme.toggle">◐</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="top">
+            <p class="hero-kicker" data-i18n="hero.kicker"></p>
+            <h1 class="hero-name" data-i18n-html="hero.name"></h1>
+            <p class="hero-tagline" data-i18n="hero.tagline"></p>
+            <p class="hero-meta">
+                <span data-i18n="hero.location"></span> ·
+                <span id="clock">--:--</span>
+            </p>
+            <a class="scroll-hint" href="#quote">
+                <i aria-hidden="true"></i>
+                <span data-i18n="hero.scroll"></span>
+            </a>
+        </section>
+
+        <section class="quote reveal" id="quote">
+            <blockquote>
+                <p data-i18n="quote.text"></p>
+                <cite data-i18n="quote.author"></cite>
+            </blockquote>
+        </section>
+
+        <!-- 博客：横向 rail -->
+        <section class="shelf" id="blog">
+            <div class="shelf-sticky">
+                <div class="shelf-head reveal">
+                    <div>
+                        <h2 data-i18n="shelf.blog.title"></h2>
+                        <p class="hint" data-i18n="shelf.blog.hint"></p>
+                    </div>
+                    <div class="rail-btns">
+                        <button class="rail-btn" data-dir="-1" data-i18n-attr="aria-label:shelf.prev">←</button>
+                        <button class="rail-btn" data-dir="1" data-i18n-attr="aria-label:shelf.next">→</button>
+                    </div>
+                </div>
+                <div class="rail-wrap">
+                    <div class="rail" id="blogRail" data-i18n-attr="aria-label:rail.blog.label"></div>
+                </div>
+                <div class="rail-progress"><span></span></div>
+            </div>
+        </section>
+
+        <!-- 摄影：三段式 stack -->
+        <section class="shelf shelf-photo" id="photo">
+            <div class="shelf-sticky">
+                <div class="photo-stage">
+                    <div class="photo-stack" id="photoStack"></div>
+                </div>
+                <div class="shelf-head reveal">
+                    <div>
+                        <h2 data-i18n="shelf.photo.title"></h2>
+                        <p class="hint" data-i18n="shelf.photo.hint"></p>
+                    </div>
+                </div>
+                <div class="rail-progress"><span></span></div>
+            </div>
+        </section>
+
+        <section class="about reveal" id="about">
+            <h2 data-i18n="about.title"></h2>
+            <div class="about-body">
+                <p data-i18n="about.p1"></p>
+                <p data-i18n="about.p2"></p>
+                <p class="about-now" data-i18n="about.now"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#" id="feedLink" data-i18n="footer.feed"></a>
+        <a href="#" id="emailLink" data-i18n="footer.email"></a>
+        <span class="spacer"></span>
+        <span class="copyright">
+            <span class="copyright-mark" aria-hidden="true">©</span>
+            <span class="copyright-years" id="copyrightYears"></span>
+            <span class="copyright-sep" aria-hidden="true">·</span>
+            <span data-i18n-html="footer.copyrightTitle"></span>
+            <span class="copyright-sep" aria-hidden="true">·</span>
+            <span data-i18n-html="footer.copyrightInfo"></span>
+        </span>
+    </footer>
+
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/utils.js"></script>
+    <script src="./assets/js/i18n.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <script src="./assets/js/feed.js"></script>
+    <script src="./assets/js/scroll-pin.js"></script>
+    <script src="./assets/js/blog-rail.js"></script>
+    <script src="./assets/js/photo-stack.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

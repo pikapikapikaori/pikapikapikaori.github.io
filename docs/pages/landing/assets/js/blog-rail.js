@@ -6,8 +6,18 @@
     var U = App.utils
     var Pin = App.pin
     var F = App.feed
+    var CFG = App.config
 
     var REDUCE = U.prefersReducedMotion()
+
+    var FOLLOW = CFG.motion.follow
+    var FOLLOW_END = CFG.blog.followEnd
+    var RAMP_START = CFG.blog.followRampStart
+
+    function followFor(p) {
+        var t = U.clamp01((p - RAMP_START) / Math.max(0.0001, 1 - RAMP_START))
+        return U.lerp(FOLLOW, FOLLOW_END, t)
+    }
 
     function renderPost(p) {
         var esc = U.escapeHtml
@@ -132,7 +142,7 @@
                 if (pin) {
                     pin.scheduleMeasure()
                 } else {
-                    pin = Pin.make(section, apply, sizeFn)
+                    pin = Pin.make(section, apply, sizeFn, followFor)
                     attachControls()
                 }
             })

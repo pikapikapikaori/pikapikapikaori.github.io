@@ -134,21 +134,23 @@
                 return res.text()
             })
             .then(function (text) {
-                var all = parseAtom(text)
-
-                var filtered = all.filter(function (p) {
+                var filtered = parseAtom(text).filter(function (p) {
                     return p.lang === lang
                 })
 
+                /* 拉取成功但没有该语言的文章：属于正常情况，只记一条普通日志 */
                 if (!filtered.length) {
-                    throw new Error('no posts in ' + lang)
+                    console.log(
+                        '[landing] Atom 中没有 ' + lang + ' 的文章，使用内嵌兜底'
+                    )
+                    return getFallback(lang)
                 }
 
                 return filtered.slice(0, CFG.blog.postLimit)
             })
             .catch(function (err) {
                 console.warn(
-                    '[landing] Atom 拉取或过滤失败（' + lang + '），使用内嵌兜底：',
+                    '[landing] Atom 拉取失败（' + lang + '），使用内嵌兜底：',
                     err.message
                 )
                 return getFallback(lang)

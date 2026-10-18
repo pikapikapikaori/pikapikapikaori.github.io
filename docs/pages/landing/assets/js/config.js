@@ -18,7 +18,12 @@
             /* 语言检测采样字符数：从正文纯文本开头取这么长来判断语言 */
             langSampleLength: 400,
             /* 每次最多解析多少条 entry，再按语言过滤，再取前 postLimit 条 */
-            scanLimit: 60
+            scanLimit: 60,
+            /* 结尾阻尼：进度超过 followRampStart 后，follow 从 motion.follow
+               线性升到 followEnd，让 rail 在解除吸附前精确停在末尾，
+               避免「页面已经下滑、rail 仍在横移」 */
+            followRampStart: 0.62,
+            followEnd: 0.95
         },
 
         /* ---------------- 摄影 stack ---------------- */

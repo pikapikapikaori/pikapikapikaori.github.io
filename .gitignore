@@ -1,7 +1,7 @@
 # macos
 **/.DS_Store
 
-# Editor directories and files
+# editor directories and files
 .editorconfig
 .idea
 .vscode
@@ -19,6 +19,13 @@
 # python
 **/.venv
 
+# local env files
+.env.local
+.env.*.local
+
+# local dev tools
+lib
+
 # hexo
 docs/pages/hexo/**/Thumbs.db
 docs/pages/hexo/**/db.json
@@ -27,7 +34,3 @@ docs/pages/hexo/**/.deploy*/
 
 # bgm-data
 docs/**/bgm-data/*.jsonlines
-
-# local env files
-.env.local
-.env.*.local

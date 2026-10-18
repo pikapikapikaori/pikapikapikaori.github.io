@@ -1,54 +1,86 @@
+/* ============================================================================
+ *  Swiss — 瑞士国际主义（International Typographic）风格
+ *  设计语言：黑 / 白 / 主题色三色，直角，粗黑分栏线，大写小字标签
+ *  变量优先复用 base.css；只覆盖主题确实需要的值，并新增少量自用变量
+ * ============================================================================ */
+
 :root {
+    /* —— 主题色：可被 config.js 与右侧拾色器覆盖 —— */
     --theme-color: #e2001a;
-    --bg-color: #ffffff;
+    --inline-code-color: var(--theme-color);
+
+    /* —— 黑白灰三色板：喂给 base.css 的语义变量 —— */
+    --bg-color: #fff;
     --text-color: #1a1a1a;
-    --heading-color: #000000;
+    --heading-color: #000;
     --muted-color: #6b6b6b;
     --em-color: #6b6b6b;
     --h6-color: #6b6b6b;
-    --sidebar-text-color: #333333;
+    --sidebar-text-color: #333;
     --sidebar-title-color: #000;
     --border-color: #e6e6e6;
-    --border-color-strong: #111111;
+    --border-color-strong: #111;
     --border-color-mid: #d4d4d4;
     --code-bg: #f2f2f2;
     --zebra-bg: #f7f7f7;
     --tip-code-bg: #eaeaea;
-    --inline-code-color: #e2001a;
-    --code-text-color: #333333;
-    --sidebar-border-color: #111111;
-    --scrollbar-bg-color: rgba(0, 0, 0, .08);
+    --code-text-color: #333;
+    --sidebar-border-color: #111;
+
+    /* —— 版式 —— */
     --global-font: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     --global-sidebar-title-font: 'Helvetica Neue', Arial, sans-serif;
-    --global-content-width: min(94%, 1140px);
     --global-sidebar-width: 220px;
+    --global-sidebar-toggle-width: var(--global-sidebar-width);
+
+    /* —— 直角 + 快节奏 —— */
     --global-el-border-radius: 0;
     --global-el-border-radius-small: 0;
+    --global-icon-border-radius: 0;
+    --global-widget-border-radius: 0;
     --global-transition-duration: 200ms;
+
+    /* —— 本主题自用 —— */
+    --swiss-rule: var(--global-border) var(--border-color-strong);
+    --swiss-rule-bold: 3px solid var(--border-color-strong);
+    --swiss-font-weight-black: 800;
+    --swiss-label-size: .72rem;
+    --swiss-toggle-size: 3.25rem;
 }
 
+/* ============================================================
+ * 1. 侧边栏
+ * ============================================================ */
 html .sidebar {
-    border-right: 1px solid #111;
-    background: #fff;
-    padding: 5.5rem 1.5rem 2rem;
+    border-right: var(--swiss-rule);
+    background: var(--bg-color);
+    /* 底部留出左下角菜单按钮的位置，避免遮住导航末项 */
+    padding: 5.5rem 1.5rem 5rem;
 }
 
-html .sidebar>h1 {
+/* plus.css 用 .sidebar>h1.app-name 指定了 2rem 衬线大标题，需要更高的优先级收回 */
+html .sidebar>h1.app-name {
     text-align: left;
+    font-family: var(--global-sidebar-title-font);
     font-size: .95rem;
-    font-weight: 700;
+    font-weight: var(--global-font-weight-bold);
     letter-spacing: .22em;
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    line-height: 1.3;
+    margin: 0 0 2rem;
+}
+
+html .sidebar>h1.app-name a {
+    color: var(--sidebar-title-color);
 }
 
 html .sidebar li>p {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--global-sidebar-title-font);
     font-size: .66rem;
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--theme-color);
-    border-bottom: 1px solid #111;
+    border-bottom: var(--swiss-rule);
     padding-bottom: .4rem;
     margin-top: 1.6rem;
     max-width: 100%;
@@ -63,60 +95,145 @@ html .sidebar ul li a {
 html .sidebar ul li.active>a {
     border-left: 0;
     margin-left: 0;
-    color: #000;
-    font-weight: 700;
+    color: var(--heading-color);
+    font-weight: var(--global-font-weight-bold);
     text-decoration-color: var(--theme-color);
     text-decoration-thickness: 3px;
 }
 
+/* 目录 / 文章列表 切换按钮：窄侧栏里需要更小的字号才不会折行 */
+html .switch-toc-wrap-div button {
+    font-family: var(--global-sidebar-title-font);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: .7em .3em;
+}
+
+/* 「目录」视图里的条目字号与「文章列表」视图保持一致（tocSwitcher.css 里是 1.25rem） */
+html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li>a {
+    font-size: .76rem;
+    font-weight: var(--global-font-weight-normal);
+}
+
+html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li.active>a {
+    font-weight: var(--global-font-weight-bold);
+}
+
+/* 侧栏搜索框：只剩一条下划线，悬停/聚焦时这条线变成主题色 */
+html .sidebar .search .input-wrap {
+    border-block: 0;
+    border-bottom: var(--global-border-strong) var(--border-color-strong);
+    transition: border-color var(--global-transition-duration);
+}
+
+html .sidebar .search .input-wrap>input[type=search] {
+    padding: .7rem 0;
+    font-size: .76rem;
+    letter-spacing: .06em;
+}
+
+html .sidebar .search .input-wrap:has(input[type=search]:hover),
+html .sidebar .search .input-wrap:has(input[type=search]:focus) {
+    box-shadow: none;
+    border-block: 0;
+    border-bottom: var(--global-border-strong) var(--theme-color);
+}
+
+/* ============================================================
+ * 2. 左下角菜单按钮
+ * ============================================================ */
 html .sidebar-toggle,
 html body.close .sidebar-toggle {
     position: fixed;
     left: 0;
     right: auto;
-    bottom: 0;
     top: auto;
-    width: var(--global-sidebar-width);
-    padding: .9rem;
-    background: #111;
+    bottom: 0;
+    width: var(--swiss-toggle-size);
+    height: var(--swiss-toggle-size);
+    padding: calc((var(--swiss-toggle-size) - 1.4rem) / 2);
+    background: var(--heading-color);
+    border: 0;
     border-radius: 0;
     z-index: 50;
 }
 
 html .sidebar-toggle span {
-    background: #fff;
-    width: 1.2rem;
+    background-color: var(--bg-color);
+    width: 1.4rem;
     height: 2px;
     margin: 0 auto .22rem;
 }
 
-html .markdown-section {
-    column-count: 2;
-    column-gap: 4rem;
-    column-rule: 1px solid #e6e6e6;
-    padding-top: 0;
+/* 有目录（has-toc）的页面本身就隐藏侧栏，切换侧栏的按钮也一并隐藏 */
+html body.has-toc .sidebar-toggle {
+    display: none;
 }
 
+/* ============================================================
+ * 3. 正文：宽屏杂志式双栏，窄屏单栏
+ * ============================================================ */
+html .markdown-section {
+    padding-top: 0;
+    /* 自成一体的绘制边界：防止多栏重排后残留旧内容的“重影” */
+    overflow: hidden;
+}
+
+/* 顶部标题与两行元信息，以及所有 h2/h3 横跨整幅（跨栏断点只落在标题处）。
+ * 为保证跨栏计算不出错，下面的图和视频都做了高度封顶，见第 3 节。 */
 html .markdown-section>h1,
 html .markdown-section>h2,
-html .markdown-section>h3 {
-    column-span: all
+html .markdown-section>h3,
+html .markdown-section>#count-words-block-span-div,
+html .markdown-section>ul.breadcrumb {
+    column-span: all;
 }
 
+/* WebKit（Safari）的多栏在 column-span 上有实现缺陷：跨栏断点之后的内容会被重复
+ * 绘制，图片也会被按栏裁断（Chrome 无此问题）。用 WebKit 独有的 -webkit-named-image
+ * 把它单独拎出来，只在这一支里取消 h2/h3 的横跨，其余版式保持不变。
+ *
+ * TODO 这只是降级方案（Safari 里标题不再满幅）。之后可以再找更彻底的实现方式，
+ *      让 Safari 也保留满幅标题：例如满幅黑线改用伪元素绘制、只让 h1 跨栏、
+ *      或给跨栏元素加 contain/isolation 试试能否绕开 WebKit 的重绘 bug。
+ *      复现与验证用的 WebKit 工具在 lib/ 下（已 gitignore）。 */
+@supports (background: -webkit-named-image(i)) {
+
+    html .markdown-section>h2,
+    html .markdown-section>h3 {
+        column-span: none;
+    }
+}
+
+@media screen and (max-width: 1099px) {
+    html .markdown-section {
+        column-count: 1;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    :root {
+        --global-content-width: min(94%, 1140px);
+    }
+
+    html .markdown-section {
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: var(--global-border) var(--border-color);
+    }
+}
+
+/* 避免表格 / 代码块 / 媒体在分栏处被拦腰截断；图片只限最大宽度，小图不再被拉伸 */
 html .markdown-section table,
 html .markdown-section pre,
+html .markdown-section output,
 html .markdown-section blockquote,
 html .markdown-section p.tip,
-html .markdown-section img:not(.emoji),
 html .markdown-section iframe,
-html .markdown-section video {
-    break-inside: avoid;
-    max-width: 100%;
-    width: 100% !important; 
-    height: auto !important; 
-}
-
-
+html .markdown-section video,
+html .markdown-section img:not(.emoji),
 html .markdown-section p:has(> img:only-child),
 html .markdown-section p:has(> a:only-child > img:only-child),
 html .markdown-section p:has(> iframe:only-child),
@@ -124,34 +241,53 @@ html .markdown-section p:has(> video:only-child) {
     break-inside: avoid;
     page-break-inside: avoid;
     -webkit-column-break-inside: avoid;
+    max-width: 100%;
 }
 
+html .markdown-section iframe,
+html .markdown-section video,
+html .markdown-section img:not(.emoji) {
+    height: auto;
+    /* 高度封顶：图/视频一旦高于栏高，Chrome 重算跨栏时会重绘出旧内容 */
+    max-height: 70vh;
+}
+
+html .markdown-section table {
+    width: 100%;
+}
+
+/* ============================================================
+ * 4. 正文排版
+ * ============================================================ */
 html .markdown-section h1 {
+    break-inside: avoid;
     font-size: clamp(2.4rem, 5.5vw, 4rem);
-    font-weight: 800;
+    font-weight: var(--swiss-font-weight-black);
     line-height: .95;
     letter-spacing: -.04em;
     margin: 0 0 2.5rem;
 }
 
 html .markdown-section h2 {
+    break-inside: avoid;
     font-size: 1.55rem;
-    font-weight: 800;
+    font-weight: var(--swiss-font-weight-black);
     letter-spacing: -.02em;
     margin: 3rem 0 1.2rem;
     padding-top: 1rem;
-    border-top: 3px solid #111;
+    border-top: var(--swiss-rule-bold);
 }
 
 html .markdown-section h3 {
+    break-inside: avoid;
     font-size: 1.1rem;
-    font-weight: 800;
+    font-weight: var(--swiss-font-weight-black);
     letter-spacing: .02em;
     margin-top: 2.4rem;
 }
 
 html .markdown-section p a {
-    color: #111;
+    color: var(--text-color);
     text-decoration-color: var(--theme-color);
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
@@ -159,112 +295,301 @@ html .markdown-section p a {
 
 html .markdown-section blockquote {
     border-left: 0;
-    border-top: 3px solid var(--theme-color);
+    border-top: var(--swiss-rule-bold);
     padding: .9rem 0 0;
-    color: #111;
-    font-weight: 500;
+    color: var(--text-color);
+    font-weight: var(--global-font-weight-medium);
 }
 
+/* ============================================================
+ * 5. 评论与页脚
+ * ============================================================ */
 html #gitalk-container {
-    background: #fff;
-    border: 1px solid #111;
-    border-radius: 0;
+    background: var(--bg-color);
+    border: var(--swiss-rule);
+    border-radius: var(--global-el-border-radius);
     padding: 2rem;
 }
 
-html .site-footer {
-    border-top: 1px solid #111;
-    border-radius: 0;
-    font-size: .72rem;
+/* base.css / plus.css 里没有 .site-footer 这个类，页脚实际是 footer > #footer-under-gitalk */
+html footer:has(#footer-under-gitalk) {
+    padding-top: 1.2rem;
+    font-size: var(--swiss-label-size);
     letter-spacing: .15em;
     text-transform: uppercase;
-    color: #111;
-    padding-top: 1.2rem;
+    color: var(--text-color);
+}
+
+html #footer-under-gitalk>div {
+    border-top: var(--swiss-rule);
 }
 
 /* ============================================================
- * 1. 补上内容宽度变量
- * ============================================================ */
-:root {
-    --global-content-width: min(94%, 1140px);
-}
-
-/* ============================================================
- * 2. app-nav 下拉菜单——极简黑线
+ * 6. app-nav 下拉菜单：极简黑线
  * ============================================================ */
 .app-nav li ul {
-    background: #fff;
-    border: 1px solid #111;
-    border-radius: 0;
+    background: var(--bg-color);
+    border: var(--swiss-rule);
+    border-radius: var(--global-el-border-radius);
     box-shadow: none;
     padding: .3rem 0;
     min-width: 9rem;
     z-index: 200;
 }
+
 .app-nav li ul li {
     margin: 0;
     padding: 0;
 }
+
 .app-nav li ul a {
-    color: #111;
-    font-size: .72rem;
+    color: var(--text-color);
+    font-size: var(--swiss-label-size);
     letter-spacing: .14em;
     text-transform: uppercase;
     padding: .45rem 1rem;
     display: block;
 }
+
 .app-nav li ul a:hover,
 .app-nav li ul a.active {
-    background: #111;
-    color: #fff;
+    background: var(--heading-color);
+    color: var(--bg-color);
     border-bottom: 0;
 }
 
 /* ============================================================
- * 3. 分页器 / TOC 独立成块
+ * 7. 翻页 / 目录卡片：独立成块并横跨整幅
  * ============================================================ */
-.docsify-pagination-container,
-.toc-page-div,
-.toc-paginator-div {
-    max-width: var(--global-content-width);
-    margin: 3rem auto;
-    padding: 1.5rem 0;
-    box-sizing: border-box;
-    border-top: 1px solid #111;
-    border-bottom: 1px solid #111;
-    font-size: .78rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #111;
-}
-.docsify-pagination-container a,
-.toc-page-div a,
-.toc-paginator-div a {
-    color: #111;
-    text-decoration-color: #e2001a;
-    text-decoration-thickness: 2px;
-}
-
-html .markdown-section > .multi-images-container-section,
-html .markdown-section > .toc-page-div,
-html .markdown-section > .toc-paginator-div,
-html .markdown-section > .docsify-pagination-container,
-html .markdown-section > .docsify-example-panels,
-html .markdown-section > .docsify-tabs {
+html .markdown-section>.multi-images-container-section,
+html .markdown-section>.toc-page-div,
+html .markdown-section>.toc-paginator-div,
+html .markdown-section>.docsify-pagination-container,
+html .markdown-section>.docsify-example-panels,
+html .markdown-section>.docsify-tabs {
     column-span: all;
     break-inside: avoid;
     page-break-inside: avoid;
     -webkit-column-break-inside: avoid;
 }
 
-html .markdown-section > .multi-images-container-section,
-html .markdown-section > .docsify-example-panels,
-html .markdown-section > .docsify-tabs {
+html .markdown-section>.multi-images-container-section,
+html .markdown-section>.docsify-example-panels,
+html .markdown-section>.docsify-tabs {
     margin: 3rem 0 1.2rem;
     padding-top: 1rem;
-    border-top: 3px solid #111;
+    border-top: var(--swiss-rule-bold);
 }
 
-.markdown-section .toc-page-div {
+.docsify-pagination-container,
+.toc-page-div {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 3rem 0;
+    padding: 1.5rem 0;
+    border-top: var(--swiss-rule);
+    border-bottom: var(--swiss-rule);
+    color: var(--text-color);
+}
+
+.docsify-pagination-container,
+.toc-paginator-div {
+    font-size: var(--swiss-label-size);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.docsify-pagination-container a,
+.toc-page-div a {
+    color: var(--text-color);
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: 2px;
+}
+
+/* 目录卡片：直角 + 黑描边；响应式列数需压过 tocPage.css 的单栏规则 */
+html .markdown-section .toc-page-div {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* 卡片封面尺寸由 tocPage.css 掌管，需在此压过上面那条通用 img 规则 */
+html .markdown-section .toc-page-div .toc-page-display-a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+html .markdown-section .toc-page-display-a {
+    border: var(--swiss-rule);
+}
+
+@media screen and (max-width: 1099px) {
+    html .markdown-section .toc-page-div {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 560px) {
+    html .markdown-section .toc-page-div {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+ * 8. 顶部导航：与正文同款的大写小字标签
+ * ============================================================ */
+html .app-nav a {
+    color: var(--text-color);
+    font-family: var(--global-sidebar-title-font);
+    font-size: var(--swiss-label-size);
+    font-weight: var(--global-font-weight-bold);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+html .app-nav a:hover,
+html .app-nav a.active {
+    color: var(--heading-color);
+}
+
+html .app-nav a.active {
+    border-bottom: 3px solid var(--theme-color);
+}
+
+html .app-nav li {
+    margin: 0 0 0 1.5rem;
+    /* “语言”这类不带 <a> 的条目也要和链接同款，否则会退回默认字号 */
+    font-family: var(--global-sidebar-title-font);
+    font-size: var(--swiss-label-size);
+    font-weight: var(--global-font-weight-bold);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+html .app-nav li>svg {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -.15em;
+    stroke: currentColor;
+}
+
+/* ============================================================
+ * 9. 右侧悬浮小组件：直角黑白方块，与主题同款
+ * ============================================================ */
+html .page-right-tools-widgets-span {
+    border: var(--swiss-rule);
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    padding: .1rem;
+}
+
+html .page-right-tools-widgets-span>svg {
+    color: var(--heading-color);
+}
+
+html .page-right-tools-widgets-span:hover {
+    background-color: var(--heading-color);
+    transform: none;
+}
+
+html .page-right-tools-widgets-span:hover>svg {
+    color: var(--bg-color);
+}
+
+html .page-right-popups-div {
+    border: var(--swiss-rule);
+    background-color: var(--bg-color);
+    backdrop-filter: none;
+}
+
+/* popup 内的控件统一成直角黑白方块 */
+html .page-right-popups .theme-picker-preset-color-btn-div,
+html .page-right-popups .color-picker-preset-color-btn-div,
+html .page-right-popups .font-picker-preset-size-btn-div {
+    border: var(--swiss-rule);
+    border-radius: 0;
+}
+
+/* 配色/主题预设：选中与悬停用“黑框套色块”，并用 transition 让它有过渡感 */
+html .page-right-popups .theme-picker-preset-color-btn-div,
+html .page-right-popups .color-picker-preset-color-btn-div {
+    outline: var(--global-border-strong) transparent;
+    outline-offset: 2px;
+    transition: outline-color var(--global-transition-duration),
+        border-color var(--global-transition-duration),
+        transform var(--global-transition-duration);
+}
+
+html .page-right-popups .theme-picker-preset-color-btn-div:hover,
+html .page-right-popups .theme-picker-preset-color-btn-div.is-active,
+html .page-right-popups .color-picker-preset-color-btn-div:hover,
+html .page-right-popups .color-picker-preset-color-btn-div.is-active {
+    outline-color: var(--heading-color);
+    border-color: var(--heading-color);
+    transform: scale(var(--global-transform-ratio-very-small));
+}
+
+/* 字号预设：反相成黑底白字 */
+html .page-right-popups .font-picker-preset-size-btn-div {
+    color: var(--heading-color);
+}
+
+html .page-right-popups .font-picker-preset-size-btn-div:hover,
+html .page-right-popups .font-picker-preset-size-btn-div.is-active {
+    background-color: var(--heading-color);
+    color: var(--bg-color);
+    transform: none;
+}
+
+/* 本页进度：方块自下而上填满 —— 数字隐藏时也能一眼看出进度；
+ * 数字用 difference 混合，压在填充上也不会看不见 */
+html .read-progress {
+    background-color: var(--bg-color);
+}
+
+html .read-progress::before {
+    inset: 0;
+    height: auto;
+    border-radius: 0;
+    mask: none;
+    background: linear-gradient(to top,
+            var(--heading-color) calc(var(--p) * 1%),
+            transparent calc(var(--p) * 1%));
+    transition: background var(--global-transition-duration);
+}
+
+html .read-progress .num {
+    color: var(--bg-color);
+    mix-blend-mode: difference;
+}
+
+html .read-progress:hover::before {
+    background: linear-gradient(to top,
+            var(--bg-color) calc(var(--p) * 1%),
+            transparent calc(var(--p) * 1%));
+}
+
+/* ============================================================
+ * 10. 边缘淡化（fadeEdge）：本主题不需要
+ * ============================================================ */
+html .fade-edge {
+    --fade-bg: transparent;
+}
+
+/* ============================================================
+ * 11. 移动端：给正文留出顶部导航的高度
+ * ============================================================ */
+@media screen and (max-width: 768px) {
+    :root {
+        /* base.css 默认 80% 在手机上偏窄，这里放宽一点 */
+        --global-content-width: min(92%, 800px);
+    }
+
+    html .markdown-section {
+        padding-top: 3.5rem;
+    }
+
+    html .markdown-section>#count-words-block-span-div {
+        padding-top: 0;
+    }
 }

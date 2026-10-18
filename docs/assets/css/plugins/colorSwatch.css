@@ -1,0 +1,9 @@
+.color-swatch {
+    display: inline-block;
+    box-sizing: border-box;
+    height: 1em;
+    aspect-ratio: var(--global-aspect-ratio-square);
+    margin: 0 0.15em -0.15em;
+    border: var(--global-border) var(--border-color-mid);
+    border-radius: var(--global-el-border-radius-small);
+}

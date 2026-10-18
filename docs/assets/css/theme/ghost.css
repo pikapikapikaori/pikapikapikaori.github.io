@@ -40,6 +40,8 @@ section.cover::after {
  */
 
 :root {
+    --theme-color: #ecc1a2;
+
     --bg-color: #faf8fd;
     --text-color: #3d3550;
     --heading-color: #241c38;

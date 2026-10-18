@@ -1,4 +1,6 @@
 :root {
+    --theme-color: #c7a2ec;
+
     --theme-bg: hsl(from var(--theme-color) h 30% 5%);
     --theme-bg-card: hsl(from var(--theme-color) h 25% 12%);
     --theme-text: hsl(from var(--theme-color) h 14% 75%);

@@ -39,6 +39,8 @@ section.cover::after {
  */
 
 :root {
+    --theme-color: #ecc1a2;
+
     --bg-color: #100e17;
     --text-color: #d3cbdd;
     --heading-color: #f3ecff;

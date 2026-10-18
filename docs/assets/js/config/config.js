@@ -229,8 +229,8 @@
                     dark: './assets/css/theme/exper/swiss.css',
                     lightColor: '#100e17',
                     darkColor: '#100e17',
-                    lightThemeColor: '#c7a2ec',
-                    darkThemeColor: '#c7a2ec'
+                    lightThemeColor: '#eca2a8',
+                    darkThemeColor: '#eca2a8'
                 },
                 {
                     name: 'card',

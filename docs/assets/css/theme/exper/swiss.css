@@ -5,9 +5,7 @@
  * ============================================================================ */
 
 :root {
-    /* —— 主题色：可被 config.js 与右侧拾色器覆盖 —— */
-    --theme-color: #e2001a;
-    --inline-code-color: var(--theme-color);
+    --theme-color: #eca2a8;
 
     /* —— 黑白灰三色板：喂给 base.css 的语义变量 —— */
     --bg-color: #fff;
@@ -24,6 +22,7 @@
     --code-bg: #f2f2f2;
     --zebra-bg: #f7f7f7;
     --tip-code-bg: #eaeaea;
+    --inline-code-color: var(--theme-color);
     --code-text-color: #333;
     --sidebar-border-color: #111;
 

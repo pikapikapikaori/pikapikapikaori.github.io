@@ -7,7 +7,7 @@ import { nowIso } from '../utils/date.js'
 import { DEFAULT_SETTINGS, normalizeSettings } from '../store/settings-store.js'
 
 export const EXPORT_KIND = 'langnotebook-user'
-export const CURRENT_VERSION = 1
+export const CURRENT_VERSION = 2
 
 export function createUser(name) {
     const t = nowIso()

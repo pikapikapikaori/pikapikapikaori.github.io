@@ -1,5 +1,5 @@
 import { h } from '../utils/dom.js'
-import { posLabel, allSources, stemDisplay } from '../models/word.js'
+import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
 import { genderOfColumn } from '../models/grammar.js'
 import { isRtl } from '../utils/text-normalize.js'
 import { createSourceTabs } from './source-tabs.js'
@@ -20,6 +20,7 @@ export function openCardOverlay(word, opts = {}) {
 
     const language = opts.language || word.language
     const paradigmTpl = opts.paradigmTpl || null
+    const partLabels = opts.partLabels || null
     const onGrammarRef = opts.onGrammarRef || null
     const resolveDerivative = opts.resolveDerivative || null
     const resolvePosRef = opts.resolvePosRef || null
@@ -132,9 +133,18 @@ export function openCardOverlay(word, opts = {}) {
         }
 
         /* ---------- 主要部分（在含义之前） ---------- */
-        if (word.stem) {
+        const baseStem = primaryStem(word)
+        if (baseStem) {
+            const extra = otherStems(word)
             body.appendChild(ovSection('主要部分',
-                h('div', { class: 'word-card__stem', lang: language }, stemDisplay(word.stem))
+                h('div', { class: 'word-card__stem', lang: language }, stemDisplay(baseStem)),
+                extra.length
+                    ? h('div', { class: 'word-card__stem-extra', lang: language },
+                        ...extra.map(([key, value]) => h('span', { class: 'word-card__stem-part' },
+                            partLabels?.[key] ? h('span', { class: 'word-card__stem-part-label' }, partLabels[key]) : null,
+                            stemDisplay(value)
+                        )))
+                    : null
             ))
         }
 

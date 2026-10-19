@@ -162,6 +162,12 @@ export function getDeriveSpec(doc, id) {
     return spec && typeof spec === 'object' ? spec : null
 }
 
+/** 取语法锚点上声明的主要部分：返回 [{ key, label, hint, example }]，没有则空数组 */
+export function getDeriveParts(doc, id) {
+    const spec = getDeriveSpec(doc, id)
+    return Array.isArray(spec?.parts) ? spec.parts.filter((p) => p && p.key) : []
+}
+
 /** 表格 id → 表模板 */
 export function indexParadigmTables(tpl) {
     const map = new Map()

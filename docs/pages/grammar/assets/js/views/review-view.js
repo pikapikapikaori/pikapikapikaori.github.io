@@ -6,7 +6,7 @@ import { listByLanguage } from '../store/word-store.js'
 import { createWordCard } from '../components/word-card.js'
 import { toast } from '../components/toast.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
-import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js'
+import { loadGrammar, getParadigmTemplate, getDeriveParts } from '../services/grammar-service.js'
 import { findAnchor } from '../models/grammar.js'
 
 export default {
@@ -41,6 +41,16 @@ export default {
         function resolvePosRef(pos) {
             const id = `${lang}-${pos}`
             return findAnchor(grammarDoc, id) ? id : null
+        }
+
+        /** 某个词的主要部分标签（来自它的变位 / 变格类型） */
+        function partLabelsFor(word) {
+            const parts = getDeriveParts(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef)
+            const out = {}
+            for (const part of parts) {
+                if (part.key !== 'base') out[part.key] = part.label || part.key
+            }
+            return out
         }
 
         const order = (settings && settings.reviewOrder) || 'mastery-asc'
@@ -126,6 +136,7 @@ export default {
                 language: lang,
                 showSourceTabs: false,
                 paradigmTpl: getParadigmTemplate(grammarDoc, word.pos),
+                partLabels: partLabelsFor(word),
                 resolvePosRef,
                 resolveDerivative: (lemma) => lemmaMap.get(lemma) || null,
                 onDerivativeClick: (target) => {

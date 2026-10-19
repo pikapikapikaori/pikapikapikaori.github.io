@@ -77,7 +77,8 @@ function applySearch(words, q, scope = 'all') {
     if (!nq) return words
 
     const hitLemma = (w) => normalizeSearch(w.lemma).includes(nq)
-    const hitStem = (w) => !!w.stem && normalizeSearch(w.stem).includes(nq)
+    const hitStem = (w) => Object.values(w.stems || {})
+        .some((stem) => !!stem && normalizeSearch(stem).includes(nq))
     const hitParadigm = (w) => Object.values(w.paradigm || {}).some((rows) =>
         Object.values(rows || {}).some((cells) =>
             Object.values(cells || {}).some((v) => normalizeSearch(v).includes(nq))))

@@ -2,7 +2,9 @@ import {
     STORE_WORDS,
     put, get, remove, getAllByIndex, getOneByIndex, removeByIndex
 } from './db.js'
-import { createWord, normalizeParadigm, normalizeStem, normalizeGenders, isParadigmEmpty } from '../models/word.js'
+import {
+    createWord, normalizeParadigm, normalizeStems, normalizeGenders, isParadigmEmpty, mergeStems
+} from '../models/word.js'
 import { nowIso, nextReviewFrom, clampMastery } from '../utils/date.js'
 
 export async function listByLanguage(userId, language) {
@@ -60,7 +62,7 @@ function mergeWord(existing, incoming) {
     merged.paradigm = mergeParadigm(existing.paradigm, incoming.paradigm)
 
     // 主要部分（词干）：已有值优先保留，为空时采用新来源的值
-    merged.stem = normalizeStem(existing.stem) || normalizeStem(incoming.stem)
+    merged.stems = mergeStems(existing.stems, incoming.stems)
 
     // 语法性：并集
     merged.gender = normalizeGenders(

@@ -81,6 +81,7 @@ export async function preload(languages) {
 export {
     getParadigmTemplate,
     getDeriveSpec,
+    getDeriveParts,
     getGenderOptions,
     genderOfColumn,
     collectInflectAnchors,

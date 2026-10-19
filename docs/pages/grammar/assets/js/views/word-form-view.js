@@ -2,7 +2,9 @@ import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import { submitWord, editWord, fetchWord, queryWords } from '../services/word-service.js'
-import { POS_LIST, GENDERS, normalizeParadigm, normalizeStem, normalizeGenders } from '../models/word.js'
+import {
+    POS_LIST, GENDERS, normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders
+} from '../models/word.js'
 import { loadGrammar, getParadigmTemplate, getDeriveSpec, getGenderOptions, collectInflectAnchors, genderOfColumn } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { generateParadigm } from '../models/paradigm-generate.js'
@@ -70,7 +72,7 @@ export default {
                 gender: [],
                 inflectionType: { label: '', grammarRef: null },
                 paradigm: {},
-                stem: '',
+                stems: { base: '' },
                 inflections: [],
                 meanings: [{ text: '', lang: 'zh', source: 'manual' }],
                 collocations: [],
@@ -95,7 +97,7 @@ export default {
                     grammarRef: (w.inflectionType && w.inflectionType.grammarRef) || null
                 },
                 paradigm: normalizeParadigm(w.paradigm),
-                stem: normalizeStem(w.stem),
+                stems: normalizeStems(w.stems),
                 inflections: (w.inflections || []).map((x) => ({ ...x })),
                 meanings: (w.meanings || []).map((x) => ({ ...x })),
                 collocations: (w.collocations || []).map((x) => ({ ...x })),
@@ -171,6 +173,7 @@ export default {
                 } else if (v === INDECL_REF && !inflectionLabel.value.trim()) {
                     inflectionLabel.value = indeclinableLabel(posSelect.value)
                 }
+                renderExtraParts()
                 refreshGenerateBtn()
             }
         })
@@ -200,6 +203,7 @@ export default {
                     selected: selected === o.id
                 }, o.label))
             )
+            renderExtraParts()
             refreshGenerateBtn()
         }
 
@@ -223,9 +227,12 @@ export default {
             type: 'text',
             lang: lang,
             placeholder: '主要部分，如 am、λόγ',
-            value: data.stem,
+            value: data.stems.base || '',
             oninput: () => refreshGenerateBtn()
         })
+
+        // 额外的主要部分（由当前变位 / 变格类型的 derive.parts 决定）
+        const extraPartsSlot = h('div', { class: 'field__parts' })
 
         const generateBtn = h('button', {
             class: 'btn btn--sm',
@@ -289,6 +296,7 @@ export default {
         form.appendChild(field('主要部分',
             h('div', { class: 'field__row' }, principalInput, generateBtn),
             '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。'))
+        form.appendChild(extraPartsSlot)
 
         form.appendChild(h('div', { class: 'word-form__row' },
             field('变格 / 变位类型', inflectionLabel, '显示在词卡正面的徽章。'),
@@ -351,6 +359,59 @@ export default {
             return getDeriveSpec(grammarDoc, ref)
         }
 
+        /** 当前锚点声明的主要部分（不含 base） */
+        function currentParts() {
+            const spec = currentDeriveSpec()
+            if (!spec || !Array.isArray(spec.parts)) return []
+            return spec.parts.filter((part) => part && part.key && part.key !== 'base')
+        }
+
+        /** 按当前锚点重建额外主要部分输入框；已填但新类型没有声明的部分丢弃 */
+        function renderExtraParts() {
+            const parts = currentParts()
+            const allowed = new Set(['base', ...parts.map((p) => p.key)])
+            for (const key of Object.keys(data.stems)) {
+                if (!allowed.has(key)) delete data.stems[key]
+            }
+
+            extraPartsSlot.replaceChildren()
+            if (!parts.length) return
+
+            extraPartsSlot.appendChild(h('div', { class: 'field__hint' },
+                '以下主要部分可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。'))
+
+            for (const part of parts) {
+                const input = h('input', {
+                    class: 'input',
+                    type: 'text',
+                    lang: lang,
+                    placeholder: part.example || '',
+                    value: data.stems[part.key] || '',
+                    oninput: (e) => {
+                        const value = normalizeStem(e.target.value)
+                        if (value) data.stems[part.key] = value
+                        else delete data.stems[part.key]
+                    }
+                })
+                extraPartsSlot.appendChild(h('label', { class: 'field field--part' },
+                    h('span', { class: 'field__label' }, part.label || part.key),
+                    input,
+                    part.hint ? h('span', { class: 'field__hint' }, part.hint) : null
+                ))
+            }
+        }
+
+        /** 收集主要部分：base + 已填的额外部分 */
+        function collectStems() {
+            const stems = {}
+            const base = normalizeStem(principalInput.value)
+            if (base) stems.base = base
+            for (const [key, value] of Object.entries(data.stems)) {
+                if (key !== 'base' && value) stems[key] = normalizeStem(value)
+            }
+            return stems
+        }
+
         function refreshGenerateBtn() {
             const spec = currentDeriveSpec()
             const hasStem = !!normalizeStem(principalInput.value)
@@ -373,6 +434,7 @@ export default {
 
             const { paradigm, filled } = generateParadigm({
                 stem,
+                stems: collectStems(),
                 spec,
                 template: getParadigmTemplate(grammarDoc, data.pos),
                 existing: data.paradigm
@@ -858,7 +920,7 @@ export default {
                     grammarRef
                 },
                 paradigm: normalizeParadigm(data.paradigm),
-                stem: normalizeStem(principalInput.value),
+                stems: collectStems(),
                 inflections: cleanList(data.inflections, ['form']),
                 meanings: cleanList(data.meanings, ['text']),
                 collocations: cleanList(data.collocations, ['text']),

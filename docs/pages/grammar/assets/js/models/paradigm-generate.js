@@ -45,17 +45,305 @@ export function applyRuleList(text, rules) {
     return out
 }
 
-/** 取某个词干变体的实际词干；未声明该变体时退回 base */
-export function resolveStem(stem, stemForm, spec) {
+/**
+ * 归一化 stemForms 的一项：
+ *   数组            → 直接作用于 base 的规则
+ *   { from, rules } → 先取另一个词干变体的结果，再套规则（同一词干的派生形式，如完成时中动词干）
+ */
+function readStemForm(entry) {
+    if (Array.isArray(entry)) return { from: null, rules: entry }
+    if (entry && typeof entry === 'object') {
+        return {
+            from: typeof entry.from === 'string' && entry.from ? entry.from : null,
+            rules: Array.isArray(entry.rules) ? entry.rules : []
+        }
+    }
+    return null
+}
+
+/**
+ * 取某个词干变体的实际词干
+ * 顺序：用户填的主要部分 → 类型里直接给出的字面量 → 词干变体规则 → base
+ * 规则可以链式：{ from: 'perf', rules: [...] } 表示「先按 perf 取词干，再做一次音变」
+ */
+export function resolveStem(stem, stemForm, spec, userStems, seen) {
     const base = String(stem ?? '').trim()
+
+    const provided = userStems && typeof userStems === 'object' ? userStems[stemForm] : ''
+    if (typeof provided === 'string' && provided.trim()) return provided.trim()
+
     if (!base || !stemForm || stemForm === 'base') return base
 
-    // 直接给出的词干（用于无法用规则表达的变体，如 la reg → rēx）
+    // 类型里直接给出的词干（无法用规则表达时使用）
     const literal = spec?.stems?.[stemForm]
     if (typeof literal === 'string' && literal) return literal
 
-    const rules = spec?.stemForms?.[stemForm]
-    return Array.isArray(rules) ? applyRuleList(base, rules) : base
+    const form = readStemForm(spec?.stemForms?.[stemForm])
+    if (!form) return base
+
+    const visited = seen instanceof Set ? seen : new Set()
+    if (visited.has(stemForm)) return base
+    visited.add(stemForm)
+
+    const source = form.from ? resolveStem(stem, form.from, spec, userStems, visited) : base
+    if (!source) return base
+    return applyRuleList(source, form.rules)
+}
+
+/** 归一化「主要部分」入参：允许直接给字符串（仅 base） */
+export function normalizeStemParts(stem, stems) {
+    const out = {}
+    if (stems && typeof stems === 'object') {
+        for (const [key, value] of Object.entries(stems)) {
+            const text = String(value ?? '').trim()
+            if (key && text) out[key] = text
+        }
+    } else if (typeof stems === 'string' && stems.trim()) {
+        out.base = stems.trim()
+    }
+    if (!out.base) {
+        const fallback = String(stem ?? '').trim()
+        if (fallback) out.base = fallback
+    }
+    return out
+}
+
+/* ---------------- 音节与重音（derive.post.accent） ---------------- */
+
+/*
+ * 由 derive.post.accent 指定：按音节重新指派重音。
+ * 「单一词干 + 词尾纯拼接」拿不到重音位置，而重音位置由音节数与音节量决定：
+ *   古希腊语动词用退重音（recessive），名词 / 形容词用持续重音（persistent）。
+ *
+ * 约定：
+ *   - 词干按它在基本形态里的样子写（重音照写）；重音落在词尾的类型，词尾自带重音。
+ *   - 该格的重音取词尾那一侧（词尾自带重音）或词干那一侧，再按限制法校正。
+ *   - 长音符（ᾱ ῑ ῡ，分解后是组合长音符 U+0304）只是元音长短的标注，输出会去掉。
+ */
+
+const VOWEL_LETTERS = new Set(['α', 'ε', 'η', 'ι', 'ο', 'υ', 'ω'])
+const DIPHTHONGS = new Set(['αι', 'ει', 'οι', 'υι', 'αυ', 'ευ', 'ου', 'ηυ', 'ωυ'])
+/** 词末的 αι / οι 按短音计算（希腊语重音法则） */
+const FINAL_SHORT_DIPHTHONGS = new Set(['αι', 'οι'])
+const DOUBLE_CONSONANTS = new Set(['ξ', 'ψ', 'ζ'])
+/** 词末 -εως / -εων（i 词干的阿提卡式属格，如 πόλεως / πόλεων）在限制法里按短末音节算 */
+const FINAL_SHORT_SEQUENCES = ['εως', 'εων']
+const IOTA_SUBSCRIPT = '\u0345'
+/** 分音符（ϊ / ϋ）：标明与前一元音不合为双元音 */
+const DIALYTIKA = '\u0308'
+const ACUTE = '\u0301'
+const CIRCUMFLEX = '\u0342'
+const MACRON = '\u0304'
+const BREVE = '\u0306'
+const ACCENT_MARKS = [ACUTE, CIRCUMFLEX, '\u0344']
+const LENGTH_MARKS = [MACRON, BREVE]
+const COMBINING = /\p{M}/u
+
+/** 支持的重音模式 */
+export const ACCENT_MODES = ['recessive', 'penult', 'persistent', 'acute', 'none']
+
+/** 拆成「字母 + 其后的组合记号」，便于按字母运算 */
+function toUnits(text) {
+    const units = []
+    for (const ch of String(text ?? '').normalize('NFD')) {
+        if (COMBINING.test(ch) && units.length) units[units.length - 1].marks.push(ch)
+        else units.push({ ch, marks: [] })
+    }
+    return units
+}
+
+function fromUnits(units, { stripLength = false } = {}) {
+    let out = ''
+    for (const unit of units) {
+        out += unit.ch
+        for (const mark of unit.marks) {
+            if (stripLength && LENGTH_MARKS.includes(mark)) continue
+            out += mark
+        }
+    }
+    return out.normalize('NFC')
+}
+
+function isVowel(unit) {
+    return VOWEL_LETTERS.has(unit.ch)
+}
+
+const GREEK_LETTER = /[\u0370-\u03ff\u1f00-\u1fff]/
+
+/** 音节量只看希腊字母；括号、斜杠等标记不算辅音 */
+function consonantWeight(ch) {
+    if (!GREEK_LETTER.test(ch)) return 0
+    return DOUBLE_CONSONANTS.has(ch) ? 2 : 1
+}
+
+/** 音节核：元音或双元音（双元音算一个核） */
+function findNuclei(units) {
+    const nuclei = []
+    let i = 0
+    while (i < units.length) {
+        if (!isVowel(units[i])) { i += 1; continue }
+        let end = i
+        const noDiphthong = units[i].marks.includes(DIALYTIKA)
+        if (!noDiphthong && i + 1 < units.length && isVowel(units[i + 1])
+            && !units[i + 1].marks.includes(DIALYTIKA)
+            && DIPHTHONGS.has(units[i].ch + units[i + 1].ch)) {
+            end = i + 1
+        }
+        nuclei.push({ start: i, end, letters: units.slice(i, end + 1).map((u) => u.ch).join('') })
+        i = end + 1
+    }
+    return nuclei
+}
+
+/** 音节切分（供调试与复用）：返回每个音节的核 */
+export function splitSyllables(text) {
+    const units = toUnits(text)
+    const nuclei = findNuclei(units)
+    return nuclei.map((nuc, i) => {
+        const from = i === 0 ? 0 : nuclei[i - 1].end + 1
+        return fromUnits(units.slice(from, nuc.end + 1), { stripLength: false })
+    })
+}
+
+/*
+ * 音节的量分两种，希腊语的重音法则对它们的用法不同：
+ *   nature   —— 核本身（长元音 / 双元音 / 标了长音符）为长
+ *   position —— 核后有两个以上辅音（或双辅音 ξ ψ ζ）为长
+ * 限制法只要求「倒数第三音节的重音必须配短末音节」；而「倒数第二音节转弯曲重音」
+ * 只在倒数第二是 nature 长时才发生（位置长不转，如 λυθέντος、ὄρνις）。
+ */
+function syllableWeights(units, nuclei) {
+    return nuclei.map((nuc) => {
+        let nature = 1
+        if (nuc.end > nuc.start) nature = 2
+        else if (nuc.letters === 'η' || nuc.letters === 'ω') nature = 2
+        else if (units[nuc.start].marks.includes(MACRON)) nature = 2
+        else if (units[nuc.start].marks.includes(IOTA_SUBSCRIPT)) nature = 2
+
+        let position = 0
+        for (let k = nuc.end + 1; k < units.length; k += 1) {
+            if (isVowel(units[k])) break
+            position += consonantWeight(units[k].ch)
+        }
+        return { nature, position }
+    })
+}
+
+/**
+ * 末音节是否算短。
+ * 词末的 αι / οι 与 -εως / -εων 按短音算；但祈愿式的词尾 -οι / -αι 是长音
+ * （λύοι 与 λύσαι 重音在倒数第二且为锐重音，对比不定式 λῦσαι 的弯曲重音），
+ * 由 finalDiphthongLong 标出。
+ */
+function ultimaIsShort(nuclei, weights, shortFinal, finalDiphthongLong) {
+    const last = nuclei.length - 1
+    if (last < 0) return true
+    if (shortFinal) return true
+    const { nature, position } = weights[last]
+    if (!position && FINAL_SHORT_DIPHTHONGS.has(nuclei[last].letters)) {
+        return !finalDiphthongLong
+    }
+    return nature < 2 && position < 2
+}
+
+function accentKindOf(unit) {
+    if (unit.marks.includes(ACUTE)) return 'acute'
+    if (unit.marks.includes(CIRCUMFLEX)) return 'circumflex'
+    return ''
+}
+
+/** 字符串里是否写了重音记号 */
+export function hasAccentMark(text) {
+    return toUnits(text).some((unit) => accentKindOf(unit))
+}
+
+/** 所有带重音的核，按从左到右排列 */
+function findAccents(units, nuclei) {
+    const out = []
+    nuclei.forEach((nuc, index) => {
+        for (let k = nuc.start; k <= nuc.end; k += 1) {
+            const kind = accentKindOf(units[k])
+            if (kind) { out.push({ index, kind }); return }
+        }
+    })
+    return out
+}
+
+/**
+ * 按音节指派重音。
+ * @param {string} text   已经拼好的词形（可含重音与长音符）
+ * @param {string} mode   'recessive' | 'persistent' | 'none'
+ * @param {object} [options]
+ * @param {boolean} [options.endingAccented] 词尾那一侧自带重音时置 true（优先取靠后的那个）
+ * @param {boolean} [options.finalDiphthongLong] 词末的 αι / οι 算长音（祈愿式）
+ */
+export function applyAccent(text, mode, { endingAccented = false, finalDiphthongLong = false } = {}) {
+    if (!mode || mode === 'none') return text
+    const units = toUnits(text)
+    const nuclei = findNuclei(units)
+    const plain = () => fromUnits(units, { stripLength: true })
+    if (!nuclei.length) return plain()
+
+    const weights = syllableWeights(units, nuclei)
+    const last = nuclei.length - 1
+    const plainText = fromUnits(units)
+    const shortFinal = FINAL_SHORT_SEQUENCES.some((seq) => plainText.endsWith(seq))
+    const shortUltima = ultimaIsShort(nuclei, weights, shortFinal, finalDiphthongLong)
+    let index = 0
+    let kind = 'acute'
+
+    if (mode === 'penult') {
+        // 固定在倒数第二音节（不定式 -ναι / -σθαι、-μενος 分词等）
+        index = Math.max(0, nuclei.length - 2)
+        if (index === last - 1 && weights[index].nature >= 2 && shortUltima) kind = 'circumflex'
+    } else if (mode === 'recessive') {
+        // 退重音：在限制法允许的范围内尽量往前
+        index = (nuclei.length >= 3 && shortUltima) ? nuclei.length - 3 : Math.max(0, nuclei.length - 2)
+        if (index === last - 1 && weights[index].nature >= 2 && shortUltima) kind = 'circumflex'
+    } else {
+        // 持续重音：保持原有的那一侧，只做限制法校正
+        const accents = findAccents(units, nuclei)
+        if (!accents.length) return plain()
+        const authored = endingAccented ? accents[accents.length - 1] : accents[0]
+        const earliest = shortUltima ? Math.max(0, nuclei.length - 3) : Math.max(0, nuclei.length - 2)
+        index = Math.min(last, Math.max(authored.index, earliest))
+        if (index === last) kind = authored.kind
+        else if (index === last - 1) {
+            kind = (weights[index].nature >= 2 && shortUltima) ? 'circumflex' : 'acute'
+        }
+        // 个别形式（如 λυθείεν）固定在原音节但用锐重音
+        if (mode === 'acute') kind = 'acute'
+    }
+
+    for (const unit of units) {
+        unit.marks = unit.marks.filter((m) => !ACCENT_MARKS.includes(m) && !LENGTH_MARKS.includes(m))
+    }
+    units[nuclei[index].end].marks.push(kind === 'circumflex' ? CIRCUMFLEX : ACUTE)
+    return fromUnits(units, { stripLength: true })
+}
+
+/**
+ * 取该格的重音模式
+ * post.accent 可写成字符串，或写成 { '*': 默认模式, 表: 模式 | { 行: 模式 } } 按表 / 行覆盖
+ */
+export function resolveAccentMode(spec, tableKey, rowKey, colKey) {
+    const node = spec?.post?.accent
+    if (typeof node === 'string') return node
+    if (!node || typeof node !== 'object') return ''
+    const pick = (value) => {
+        if (typeof value === 'string') return value
+        if (!value || typeof value !== 'object') return ''
+        const row = value[rowKey]
+        if (typeof row === 'string') return row
+        if (row && typeof row === 'object') {
+            if (typeof row[colKey] === 'string') return row[colKey]
+            if (typeof row['*'] === 'string') return row['*']
+        }
+        // 该表自己的默认档
+        if (typeof value['*'] === 'string') return value['*']
+        return ''
+    }
+    return pick(node[tableKey]) || pick(node['*'])
 }
 
 /** 合并行级默认值与格级声明，得到 { prefix, suffix, stemForm } */
@@ -80,16 +368,19 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
  * 按词尾规则填表。只填空格子，已有值一律不覆盖。
  *
  * @param {object}   options
- * @param {string}   options.stem      主要部分（词干）
+ * @param {string}   options.stem      主要部分（词干）；与 stems 二选一
+ * @param {object}   [options.stems]   多个主要部分 { base, perf, ppp, ... }，优先于 stem
  * @param {object}   options.spec      derive 规格
  * @param {object}   options.template  paradigms[pos]
  * @param {object}   [options.existing] 词条已有的 paradigm
  * @returns {{ paradigm: object, filled: object[], skipped: object[] }}
  */
-export function generateParadigm({ stem, spec, template, existing } = {}) {
+export function generateParadigm({ stem, stems, spec, template, existing } = {}) {
     const result = { paradigm: {}, filled: [], skipped: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
-    if (!String(stem ?? '').trim()) return result
+    const parts = normalizeStemParts(stem, stems)
+    const base = parts.base || ''
+    if (!base) return result
 
     const formRules = Array.isArray(spec.formRules) ? spec.formRules : []
     const current = existing && typeof existing === 'object' ? existing : {}
@@ -112,9 +403,16 @@ export function generateParadigm({ stem, spec, template, existing } = {}) {
                     continue
                 }
 
-                const base = resolveStem(stem, cell.stemForm, spec)
-                const naive = String(cell.prefix) + base + endingText(cell.suffix)
-                const form = applyRuleList(naive, formRules).trim()
+                const part = resolveStem(base, cell.stemForm, spec, parts)
+                const prefix = String(cell.prefix)
+                const suffix = endingText(cell.suffix)
+                const naive = prefix + part + suffix
+                const mode = resolveAccentMode(spec, table.key, row.key, col.key)
+                const form = applyAccent(applyRuleList(naive, formRules), mode, {
+                    endingAccented: hasAccentMark(suffix),
+                    // 祈愿式词尾 -οι / -αι 是长音
+                    finalDiphthongLong: /-opt$/.test(row.key)
+                }).trim()
                 if (!form) {
                     result.skipped.push({ ...at, reason: 'empty' })
                     continue
@@ -161,10 +459,18 @@ export function validateDeriveSpec(spec, template) {
     }
     if (spec.expect && !spec.stemExample) problems.push('有 expect 但没有 stemExample')
 
-    const checkRules = (rules, where) => {
+    const checkRules = (rules, where, entry = null) => {
+        if (entry && entry.from != null) {
+            const from = entry.from
+            const known = from === 'base'
+                || (spec.stemForms && Object.prototype.hasOwnProperty.call(spec.stemForms, from))
+                || (spec.stems && typeof spec.stems[from] === 'string')
+            if (typeof from !== 'string' || !from) problems.push(`${where}.from 不是字符串`)
+            else if (!known) problems.push(`${where}.from 指向了未定义的词干变体：${from}`)
+        }
         if (rules == null) return
         if (!Array.isArray(rules)) {
-            problems.push(`${where} 不是数组`)
+            problems.push(`${where}.rules 不是数组`)
             return
         }
         rules.forEach((rule, i) => {
@@ -183,17 +489,39 @@ export function validateDeriveSpec(spec, template) {
         })
     }
 
-    for (const [name, rules] of Object.entries(spec.stemForms || {})) {
-        checkRules(rules, `stemForms.${name}`)
+    for (const [name, entry] of Object.entries(spec.stemForms || {})) {
+        if (Array.isArray(entry)) {
+            checkRules(entry, `stemForms.${name}`)
+            continue
+        }
+        if (entry && typeof entry === 'object') {
+            checkRules(entry.rules, `stemForms.${name}`, entry)
+            continue
+        }
+        problems.push(`stemForms.${name} 不是数组或 { from, rules } 对象`)
     }
     checkRules(spec.formRules, 'formRules')
 
     const index = buildTableIndex(template)
+    // 'base' 是内置的原样词干，不需要在 stemForms 里声明
     const knownStemForm = (name) => !!(
-        name
-        && ((spec.stems && typeof spec.stems[name] === 'string')
-            || (spec.stemForms && spec.stemForms[name]))
+        name === 'base'
+        || (name && ((spec.stems && typeof spec.stems[name] === 'string')
+            || (spec.stemForms && spec.stemForms[name])))
     )
+
+    const checkTableKey = (tableKey, where) => {
+        if (!index.has(tableKey)) problems.push(`${where} 的表 key 不在模板中：${tableKey}`)
+    }
+
+    const checkRowKey = (tableKey, rowKey, where) => {
+        const rows = index.get(tableKey)
+        if (!rows) {
+            problems.push(`${where} 的表 key 不在模板中：${tableKey}`)
+            return
+        }
+        if (!rows.has(rowKey)) problems.push(`${where} 的行 key 不在模板中：${tableKey}/${rowKey}`)
+    }
 
     const checkPath = (tableKey, rowKey, colKey, where) => {
         if (!index.size) return
@@ -233,6 +561,54 @@ export function validateDeriveSpec(spec, template) {
         }
     }
 
+    const checkAccentNode = (node, where, level, path) => {
+        if (node == null) return
+        if (typeof node === 'string') {
+            if (!ACCENT_MODES.includes(node)) problems.push(`${where} 不是已知的重音模式：${node}`)
+            return
+        }
+        if (typeof node !== 'object') {
+            problems.push(`${where} 不是字符串或对象`)
+            return
+        }
+        for (const [key, value] of Object.entries(node)) {
+            const at = `${where}.${key}`
+            if (index.size && level === 'table' && key !== '*') checkTableKey(key, at)
+            if (index.size && level === 'row' && path.table) checkRowKey(path.table, key, at)
+            if (index.size && level === 'cell' && path.table && path.row) {
+                checkPath(path.table, path.row, key, at)
+            }
+            checkAccentNode(value, at, level === 'table' ? 'row' : 'cell', { table: path.table, row: key })
+        }
+    }
+    checkAccentNode(spec.post?.accent, 'post.accent', 'table', {})
+
+    // 主要部分声明：{ key, label?, example?, hint?, required? }，第一项固定为 base
+    if (spec.parts != null) {
+        if (!Array.isArray(spec.parts)) problems.push('parts 不是数组')
+        else {
+            spec.parts.forEach((part, i) => {
+                const at = `parts[${i}]`
+                if (!part || typeof part !== 'object') {
+                    problems.push(`${at} 不是对象`)
+                    return
+                }
+                if (typeof part.key !== 'string' || !part.key) problems.push(`${at} 缺少 key`)
+                for (const field of ['label', 'example', 'hint']) {
+                    if (part[field] != null && typeof part[field] !== 'string') {
+                        problems.push(`${at}.${field} 不是字符串`)
+                    }
+                }
+                if (part.required != null && typeof part.required !== 'boolean') {
+                    problems.push(`${at}.required 不是布尔值`)
+                }
+            })
+            if (spec.parts[0] && spec.parts[0].key !== 'base') {
+                problems.push('parts 的第一项 key 应当是 base')
+            }
+        }
+    }
+
     for (const [tableKey, rows] of Object.entries(spec.rowDefaults || {})) {
         for (const [rowKey, def] of Object.entries(rows || {})) {
             const where = `rowDefaults.${tableKey}.${rowKey}`
@@ -259,17 +635,21 @@ export function validateDeriveSpec(spec, template) {
  * @returns {{ ok: boolean, missing: object[], mismatches: object[], extra: object[] }}
  *   ok 只取决于 missing / mismatches；extra 是「生成了但 expect 没写」的提示
  */
-export function checkDeriveExample(spec, template) {    const out = { ok: false, missing: [], mismatches: [], extra: [] }
-    if (!spec?.stemExample || !spec?.expect) return out
+export function checkDeriveExample(spec, template, options = {}) {
+    const { stems = null, expect = null, reportExtra = true } = options
+    const out = { ok: false, missing: [], mismatches: [], extra: [] }
+    const want = expect || spec?.expect
+    if (!spec?.stemExample || !want) return out
 
     const { paradigm } = generateParadigm({
         stem: spec.stemExample,
+        stems,
         spec,
         template,
         existing: {}
     })
 
-    for (const [tableKey, rows] of Object.entries(spec.expect)) {
+    for (const [tableKey, rows] of Object.entries(want)) {
         for (const [rowKey, cells] of Object.entries(rows || {})) {
             for (const [colKey, want] of Object.entries(cells || {})) {
                 const got = paradigm?.[tableKey]?.[rowKey]?.[colKey]
@@ -280,11 +660,13 @@ export function checkDeriveExample(spec, template) {    const out = { ok: false,
         }
     }
 
-    for (const [tableKey, rows] of Object.entries(paradigm)) {
-        for (const [rowKey, cells] of Object.entries(rows)) {
-            for (const [colKey, got] of Object.entries(cells)) {
-                if (spec.expect?.[tableKey]?.[rowKey]?.[colKey] == null) {
-                    out.extra.push({ at: `${tableKey}/${rowKey}/${colKey}`, got })
+    if (reportExtra) {
+        for (const [tableKey, rows] of Object.entries(paradigm)) {
+            for (const [rowKey, cells] of Object.entries(rows)) {
+                for (const [colKey, got] of Object.entries(cells)) {
+                    if (want?.[tableKey]?.[rowKey]?.[colKey] == null) {
+                        out.extra.push({ at: `${tableKey}/${rowKey}/${colKey}`, got })
+                    }
                 }
             }
         }
@@ -341,11 +723,33 @@ export function verifyGrammarDoc(lang, doc) {
             return
         }
 
+        const report = (res, suffix) => {
+            for (const m of res.missing) out.errors.push(`${where}${suffix}: ${m.at} 未生成（期望 ${m.want}）`)
+            for (const m of res.mismatches) out.errors.push(`${where}${suffix}: ${m.at} 生成 ${m.got}，期望 ${m.want}`)
+            for (const m of res.extra) out.warnings.push(`${where}${suffix}: ${m.at} 生成了 ${m.got}，expect 未覆盖`)
+        }
+
+        // 第一遍：只填基准词干（验证词干变体规则）
         const res = checkDeriveExample(spec, tpl)
         out.checked++
-        for (const m of res.missing) out.errors.push(`${where}: ${m.at} 未生成（期望 ${m.want}）`)
-        for (const m of res.mismatches) out.errors.push(`${where}: ${m.at} 生成 ${m.got}，期望 ${m.want}`)
-        for (const m of res.extra) out.warnings.push(`${where}: ${m.at} 生成了 ${m.got}，expect 未覆盖`)
+        report(res, '')
+
+        // 第二遍：主要部分全填（用 parts 里的例词），验证「用户全填」这条路径
+        if (Array.isArray(spec.parts) && spec.parts.length) {
+            const stems = {}
+            for (const part of spec.parts) {
+                if (part?.key && typeof part.example === 'string' && part.example) stems[part.key] = part.example
+            }
+            if (!stems.base) stems.base = spec.stemExample
+            const wantParts = spec.expectParts || spec.expect
+            const resParts = checkDeriveExample(spec, tpl, {
+                stems,
+                expect: wantParts,
+                reportExtra: !!spec.expectParts
+            })
+            out.checked++
+            report(resParts, '（主要部分全填）')
+        }
     }
 
     for (const section of doc?.sections || []) {

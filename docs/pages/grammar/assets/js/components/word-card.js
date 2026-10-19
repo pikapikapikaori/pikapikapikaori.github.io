@@ -1,5 +1,5 @@
 import { h } from '../utils/dom.js'
-import { posLabel, allSources, stemDisplay } from '../models/word.js'
+import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
 import { genderOfColumn } from '../models/grammar.js'
 import { isRtl } from '../utils/text-normalize.js'
 import { createSourceTabs } from './source-tabs.js'
@@ -18,7 +18,8 @@ export function createWordCard(word, options = {}) {
         onGrammarRef = null,
         resolvePosRef = null,
         compact = false,
-        paradigmTpl = null
+        paradigmTpl = null,
+        partLabels = null
     } = options
 
     const rtl = isRtl(language)
@@ -209,9 +210,18 @@ export function createWordCard(word, options = {}) {
         }
 
         // 主要部分（在含义之前）
-        if (word.stem) {
+        const baseStem = primaryStem(word)
+        if (baseStem) {
+            const extra = otherStems(word)
             content.appendChild(section('主要部分',
-                h('div', { class: 'word-card__stem', lang: language }, stemDisplay(word.stem))
+                h('div', { class: 'word-card__stem', lang: language }, stemDisplay(baseStem)),
+                extra.length
+                    ? h('div', { class: 'word-card__stem-extra', lang: language },
+                        ...extra.map(([key, value]) => h('span', { class: 'word-card__stem-part' },
+                            partLabels?.[key] ? h('span', { class: 'word-card__stem-part-label' }, partLabels[key]) : null,
+                            stemDisplay(value)
+                        )))
+                    : null
             ))
         }
 

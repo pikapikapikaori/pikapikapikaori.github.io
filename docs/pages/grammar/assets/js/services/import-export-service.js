@@ -8,7 +8,7 @@ import {
 import { createUser, saveUser } from '../store/user-store.js'
 import { put as dbPut, STORE_SETTINGS, STORE_USERS } from '../store/db.js'
 import { normalizeSettings } from '../store/settings-store.js'
-import { normalizeParadigm, normalizeStem, normalizeGenders } from '../models/word.js'
+import { normalizeParadigm, normalizeStems, normalizeGenders, mergeStems } from '../models/word.js'
 import { wordId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
 
@@ -38,7 +38,7 @@ function cleanWordForExport(w) {
         inflectionType: w.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(w.paradigm),
         gender: normalizeGenders(w.gender, w.pos),
-        stem: normalizeStem(w.stem),
+        stems: normalizeStems(w.stems),
         inflections: w.inflections || [],
         meanings: w.meanings || [],
         collocations: w.collocations || [],
@@ -149,7 +149,7 @@ function normalizeImportedWord(raw, userId) {
         inflectionType: raw.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(raw.paradigm),
         gender: normalizeGenders(raw.gender, pos),
-        stem: normalizeStem(raw.stem),
+        stems: normalizeStems(raw.stems ?? raw.stem),
         inflections: raw.inflections || [],
         meanings: raw.meanings || [],
         collocations: raw.collocations || [],
@@ -171,7 +171,7 @@ function mergePreservingProgress(existing, incoming) {
 
     merged.paradigm = mergeParadigmLocal(existing.paradigm, incoming.paradigm)
 
-    merged.stem = normalizeStem(existing.stem) || normalizeStem(incoming.stem)
+    merged.stems = mergeStems(existing.stems, incoming.stems)
     merged.gender = normalizeGenders(
         [...(existing.gender || []), ...(incoming.gender || [])], merged.pos)
 
@@ -254,7 +254,17 @@ function uniqArray(arr) {
 
 /* ---------------- 迁移 ---------------- */
 
-const MIGRATIONS = {}
+const MIGRATIONS = {
+    // v1 → v2：单一 stem 字段改成多主要部分 stems
+    1: (payload) => ({
+        ...payload,
+        words: (Array.isArray(payload.words) ? payload.words : []).map((w) => {
+            if (!w || typeof w !== 'object') return w
+            const { stem, ...rest } = w
+            return { ...rest, stems: normalizeStems(w.stems ?? stem) }
+        })
+    })
+}
 
 function migrate(payload) {
     let cur = payload

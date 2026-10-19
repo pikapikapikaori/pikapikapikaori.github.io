@@ -457,6 +457,41 @@
     font-weight: 500;
 }
 
+/* 额外的主要部分（词卡 / 放大视图） */
+.word-card__stem-extra {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+    margin-top: 0.25rem;
+    font-size: 0.85em;
+    color: var(--c-text-muted);
+}
+
+.word-card__stem-part-label {
+    margin-right: 0.25rem;
+    opacity: 0.8;
+}
+
+/* 表单里的额外主要部分输入 */
+.field__parts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: -0.4rem;
+}
+
+.field--part {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.field--part .field__hint {
+    grid-column: 2;
+}
+
+
 .word-card__bottom {
     display: flex;
     align-items: center;

@@ -70,7 +70,7 @@ export function createWord(partial) {
         inflectionType: partial.inflectionType || { label: '', grammarRef: null },
         gender: normalizeGenders(partial.gender, partial.pos || 'other'),
         paradigm: normalizeParadigm(partial.paradigm),
-        stem: normalizeStem(partial.stem),
+        stems: normalizeStems(partial.stems ?? partial.stem),
 
         inflections: normalizeSourceList(partial.inflections, 'inflections'),
         meanings: normalizeSourceList(partial.meanings, 'meanings'),
@@ -165,6 +165,49 @@ export function normalizeStem(value) {
 export function stemDisplay(stem) {
     const s = normalizeStem(stem)
     return s ? s + '-' : ''
+}
+
+/**
+ * 规范化主要部分：{ key: 词干 }
+ * 兼容两种入参：新的对象形式，以及旧的单一 stem 字符串（落到 base）
+ */
+export function normalizeStems(value) {
+    const out = {}
+    if (typeof value === 'string') {
+        const s = normalizeStem(value)
+        if (s) out.base = s
+        return out
+    }
+    if (!value || typeof value !== 'object') return out
+    for (const [key, raw] of Object.entries(value)) {
+        const k = String(key || '').trim()
+        const s = normalizeStem(raw)
+        if (k && s) out[k] = s
+    }
+    return out
+}
+
+/** 基准主要部分（表单里的「主要部分」） */
+export function primaryStem(word) {
+    return normalizeStem(word?.stems?.base ?? '')
+}
+
+/** 除 base 之外的其它主要部分：[[key, 词干], ...] */
+export function otherStems(word) {
+    const stems = word?.stems
+    if (!stems || typeof stems !== 'object') return []
+    return Object.entries(stems)
+        .filter(([key, value]) => key !== 'base' && normalizeStem(value))
+        .map(([key, value]) => [key, normalizeStem(value)])
+}
+
+/** 合并主要部分：已有的值不被覆盖，只在缺失时填充 */
+export function mergeStems(existing, incoming) {
+    const merged = normalizeStems(existing)
+    for (const [key, value] of Object.entries(normalizeStems(incoming))) {
+        if (!merged[key]) merged[key] = value
+    }
+    return merged
 }
 
 /** 判断 paradigm 是否为空 */

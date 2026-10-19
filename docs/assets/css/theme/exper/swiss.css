@@ -194,10 +194,10 @@ html .markdown-section>ul.breadcrumb {
  * 绘制，图片也会被按栏裁断（Chrome 无此问题）。用 WebKit 独有的 -webkit-named-image
  * 把它单独拎出来，只在这一支里取消 h2/h3 的横跨，其余版式保持不变。
  *
- * TODO 这只是降级方案（Safari 里标题不再满幅）。之后可以再找更彻底的实现方式，
- *      让 Safari 也保留满幅标题：例如满幅黑线改用伪元素绘制、只让 h1 跨栏、
- *      或给跨栏元素加 contain/isolation 试试能否绕开 WebKit 的重绘 bug。
- *      复现与验证用的 WebKit 工具在 lib/ 下（已 gitignore）。 */
+ * TODO 这只是降级方案（Safari 里标题不再满幅）。已实测：contain/translateZ 隔离、
+ *      去掉 column-rule、把图片移出栏内、去掉 break-inside: avoid 等都无法修复，
+ *      唯一干净的做法是按 h2 分段、让标题留在栏外（不再用 column-span）。
+ *      完整实测数据与三个候选方案见 lib/README.md；复现工具在 lib/ 下（已 gitignore）。 */
 @supports (background: -webkit-named-image(i)) {
 
     html .markdown-section>h2,

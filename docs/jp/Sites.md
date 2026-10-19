@@ -14,6 +14,13 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
+<!-- toc-card-href:./pages/landing/index.html?lang=ja -->
+<!-- toc-card-img:./jp/_media/Sites/pikapikapi-landing.png -->
+<!-- toc-card-title:ホームページ -->
+<!-- toc-card-description:参号個人ページ -->
+<!-- toc-card:end -->
+
+<!-- toc-card:start -->
 <!-- toc-card-href:./pages/animepage/i18n/jp.html -->
 <!-- toc-card-img:./jp/_media/Sites/pikapikapi-photopage.png -->
 <!-- toc-card-title:写真ページ -->

@@ -19,18 +19,23 @@
 # python
 **/.venv/
 
-# hexo
+# local env files
+.env.local
+.env.*.local
+
+# local dev tools
+lib/
+
+# pages
+
+# hexo page
 docs/pages/hexo/**/Thumbs.db
 docs/pages/hexo/**/db.json
 docs/pages/hexo/**/*.log
 docs/pages/hexo/**/.deploy*/
 
-# bgm-data
-docs/**/bgm-data/*.jsonlines
-
-# local env files
-.env.local
-.env.*.local
-
 # grammar page
 docs/pages/grammar/**/dev/
+
+# bgm-takeout page
+docs/**/bgm-data/*.jsonlines

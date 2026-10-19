@@ -21,6 +21,26 @@ export const POS_LIST = [
     { value: 'other',     label: '其它' }
 ]
 
+/** 语法性；顺序即展示顺序 */
+export const GENDERS = [
+    { value: 'm', label: '阳性' },
+    { value: 'f', label: '阴性' },
+    { value: 'n', label: '中性' }
+]
+
+export function genderLabel(gender) {
+    const hit = GENDERS.find((g) => g.value === gender)
+    return hit ? hit.label : gender || ''
+}
+
+/** 只有名词有语法性，其它词性一律清空 */
+export function normalizeGenders(value, pos) {
+    if (pos !== 'noun') return []
+    const list = Array.isArray(value) ? value : (value ? [value] : [])
+    const set = new Set(list.map((v) => String(v).trim()))
+    return GENDERS.map((g) => g.value).filter((g) => set.has(g))
+}
+
 export function posLabel(pos) {
     const hit = POS_LIST.find((p) => p.value === pos)
     return hit ? hit.label : pos || ''
@@ -48,7 +68,9 @@ export function createWord(partial) {
         pos: partial.pos || 'other',
 
         inflectionType: partial.inflectionType || { label: '', grammarRef: null },
+        gender: normalizeGenders(partial.gender, partial.pos || 'other'),
         paradigm: normalizeParadigm(partial.paradigm),
+        stem: normalizeStem(partial.stem),
 
         inflections: normalizeSourceList(partial.inflections, 'inflections'),
         meanings: normalizeSourceList(partial.meanings, 'meanings'),
@@ -128,6 +150,21 @@ export function normalizeParadigm(p) {
         if (hasAny) out[tkey] = rows
     }
     return out
+}
+
+/**
+ * 规范化主要部分（词干）
+ * 词干是不变的部分，词形变化一律在其后追加词尾：la am → amō / amāre，grc λόγ → λόγος
+ * 末尾的连字符只是显示约定，不写入数据
+ */
+export function normalizeStem(value) {
+    return String(value ?? '').trim().replace(/[-\u2010-\u2015\uff0d]+$/, '').trim()
+}
+
+/** 主要部分的显示形式：统一补上末尾连字符 */
+export function stemDisplay(stem) {
+    const s = normalizeStem(stem)
+    return s ? s + '-' : ''
 }
 
 /** 判断 paradigm 是否为空 */

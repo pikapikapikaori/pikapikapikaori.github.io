@@ -87,6 +87,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--sp-1);
+    min-width: 0;
 }
 
 .field__label {
@@ -107,6 +108,125 @@
     flex-wrap: wrap;
 }
 
+/* 标签下的控件横向并排（如 主要部分 + 生成表格按钮） */
+.field__row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+.field__row > .input,
+.field__row > .select {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 多选 chip（如语法性） */
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 var(--sp-4);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    background: var(--c-bg-elev);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.chip:hover {
+    background: var(--c-bg-hover);
+}
+
+.chip--active,
+.chip--active:hover {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+    color: var(--c-accent-fg);
+}
+
+/* 派生词选择器：选中区 / 搜索区 / 结果区之间留白 */
+.derivative-picker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+}
+
+.chip__remove {
+    margin-left: var(--sp-2);
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: var(--fs-xs);
+    opacity: .8;
+    padding: 0;
+}
+
+.chip__remove:hover {
+    opacity: 1;
+}
+
+/* 派生词选择器 */
+.picker-results {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 240px;
+    overflow: auto;
+    margin-top: var(--sp-2);
+}
+
+.picker-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: baseline;
+    gap: var(--sp-2);
+    min-height: 34px;
+    padding: 4px var(--sp-3);
+    border: 1px solid transparent;
+    border-radius: var(--r-md);
+    background: transparent;
+    color: var(--c-fg);
+    text-align: left;
+    cursor: pointer;
+    font-size: var(--fs-sm);
+}
+
+.picker-item:hover {
+    background: var(--c-bg-hover);
+}
+
+.picker-item--picked {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+}
+
+.picker-item__lemma {
+    font-weight: 600;
+}
+
+.picker-item__pos {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+}
+
+.picker-item__gloss {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .field__error {
     font-size: var(--fs-xs);
     color: var(--c-danger);
@@ -116,7 +236,6 @@
 .textarea,
 .select {
     width: 100%;
-    padding: var(--sp-2) var(--sp-3);
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
     border-radius: var(--r-md);
@@ -125,9 +244,13 @@
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
+/* 单行控件统一高度：显式 height 抵消 input 继承的 line-height 与 select 原生行高的差异 */
 .input,
 .select {
+    height: 38px;
     min-height: 38px;
+    padding: 0 var(--sp-3);
+    line-height: var(--lh-tight);
 }
 
 .input:focus,
@@ -139,6 +262,7 @@
 }
 
 .textarea {
+    padding: var(--sp-2) var(--sp-3);
     min-height: 90px;
     resize: vertical;
     line-height: var(--lh-base);
@@ -325,6 +449,12 @@
 
 .word-card__meaning + .word-card__meaning {
     margin-top: 2px;
+}
+
+/* 主要部分（词干） */
+.word-card__stem {
+    font-size: var(--fs-md);
+    font-weight: 500;
 }
 
 .word-card__bottom {
@@ -707,6 +837,12 @@ button.word-card__derivative {
 }
 
 /* ---------- 语法速查表格 ---------- */
+.grammar-table-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .grammar-table {
     width: 100%;
     border: 1px solid var(--c-border);
@@ -898,11 +1034,24 @@ button.word-card__derivative {
     opacity: 0.4;
 }
 
+/* 该形式不存在（行 disabled / 名词非对应性别）：灰底 + 禁用 */
+.paradigm-table__cell--disabled {
+    background: var(--c-bg-subtle);
+    opacity: 0.45;
+}
+
+.paradigm-table__cell--disabled .input--cell {
+    background: transparent;
+    border-color: transparent;
+    cursor: not-allowed;
+}
+
 .paradigm-table__cell--edit {
     padding: 2px 3px;
 }
 
 .input--cell {
+    height: 28px;
     min-height: 28px;
     padding: 2px 6px;
     font-size: var(--fs-sm);
@@ -944,6 +1093,32 @@ button.word-card__derivative {
     justify-content: space-between;
     gap: var(--sp-2);
     flex-wrap: wrap;
+}
+
+.import-words-head__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+}
+
+/* ---------- 开发：语法数据校验结果 ---------- */
+.verify-list {
+    list-style: disc;
+    padding-left: 1.2em;
+    max-height: 320px;
+    overflow: auto;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+}
+
+.verify-list__item--error {
+    color: var(--c-danger);
+}
+
+.verify-list__item--warn {
+    color: var(--c-fg-muted);
 }
 
 .dropzone {

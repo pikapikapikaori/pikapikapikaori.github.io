@@ -80,7 +80,10 @@ export async function preload(languages) {
 /* ---------- 从 models/grammar.js re-export，方便视图层统一从 service 引入 ---------- */
 export {
     getParadigmTemplate,
+    getDeriveSpec,
+    getGenderOptions,
+    genderOfColumn,
+    collectInflectAnchors,
     indexParadigmTables,
-    indexParadigmRows,
-    derivePrincipalParts
+    indexParadigmRows
 } from '../models/grammar.js'

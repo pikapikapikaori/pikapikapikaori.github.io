@@ -8,7 +8,7 @@ import {
 import { createUser, saveUser } from '../store/user-store.js'
 import { put as dbPut, STORE_SETTINGS, STORE_USERS } from '../store/db.js'
 import { normalizeSettings } from '../store/settings-store.js'
-import { normalizeParadigm } from '../models/word.js'
+import { normalizeParadigm, normalizeStem, normalizeGenders } from '../models/word.js'
 import { wordId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
 
@@ -37,6 +37,8 @@ function cleanWordForExport(w) {
         pos: w.pos,
         inflectionType: w.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(w.paradigm),
+        gender: normalizeGenders(w.gender, w.pos),
+        stem: normalizeStem(w.stem),
         inflections: w.inflections || [],
         meanings: w.meanings || [],
         collocations: w.collocations || [],
@@ -146,6 +148,8 @@ function normalizeImportedWord(raw, userId) {
         pos,
         inflectionType: raw.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(raw.paradigm),
+        gender: normalizeGenders(raw.gender, pos),
+        stem: normalizeStem(raw.stem),
         inflections: raw.inflections || [],
         meanings: raw.meanings || [],
         collocations: raw.collocations || [],
@@ -166,6 +170,10 @@ function mergePreservingProgress(existing, incoming) {
     const merged = { ...existing }
 
     merged.paradigm = mergeParadigmLocal(existing.paradigm, incoming.paradigm)
+
+    merged.stem = normalizeStem(existing.stem) || normalizeStem(incoming.stem)
+    merged.gender = normalizeGenders(
+        [...(existing.gender || []), ...(incoming.gender || [])], merged.pos)
 
     merged.inflections = appendUnique(existing.inflections, incoming.inflections)
     merged.meanings    = appendUnique(existing.meanings, incoming.meanings)

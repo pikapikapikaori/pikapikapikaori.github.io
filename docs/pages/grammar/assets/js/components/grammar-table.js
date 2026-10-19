@@ -8,21 +8,21 @@ import { h } from '../utils/dom.js'
  *   rows: string[][]
  *   lang?: string  单元格内容所用语言
  */
-export function createGrammarTable(table) {
-    if (!table || !Array.isArray(table.headers) || !Array.isArray(table.rows)) {
+export function createGrammarTable(spec) {
+    if (!spec || !Array.isArray(spec.headers) || !Array.isArray(spec.rows)) {
         return null
     }
-    const lang = table.lang || null
+    const lang = spec.lang || null
 
-    return h('table', { class: 'grammar-table' },
-        table.caption ? h('caption', {}, String(table.caption)) : null,
+    const table = h('table', { class: 'grammar-table' },
+        spec.caption ? h('caption', {}, String(spec.caption)) : null,
         h('thead', {},
             h('tr', {},
-                ...table.headers.map((th) => h('th', { lang }, String(th ?? '')))
+                ...spec.headers.map((th) => h('th', { lang }, String(th ?? '')))
             )
         ),
         h('tbody', {},
-            ...table.rows.map((row) =>
+            ...spec.rows.map((row) =>
                 h('tr', {},
                     ...(Array.isArray(row) ? row : []).map((cell) =>
                         h('td', { lang }, String(cell ?? ''))
@@ -31,4 +31,7 @@ export function createGrammarTable(table) {
             )
         )
     )
+
+    // 列多时本容器横向滚动，避免整页被撑宽
+    return h('div', { class: 'grammar-table-wrap' }, table)
 }

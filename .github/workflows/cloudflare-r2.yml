@@ -26,7 +26,8 @@ jobs:
             --exclude "**/.DS_Store" \
             --exclude ".DS_Store" \
             --exclude "**/node_modules/**" \
-            --exclude "**/hexo/package-lock.json" \
-            --exclude "**/hexo/db.json" \
+            --exclude "pages/hexo/package-lock.json" \
+            --exclude "pages/hexo/db.json" \
+            --exclude "pages/grammar/**/dev/**" \
             --checksum \
             -v

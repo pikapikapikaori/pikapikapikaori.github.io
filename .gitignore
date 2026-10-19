@@ -3,8 +3,8 @@
 
 # Editor directories and files
 .editorconfig
-.idea
-.vscode
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
@@ -12,12 +12,12 @@
 *.sw?
 
 # node.js
-**/node_modules
+**/node_modules/
 **/package-lock.json
 **/yarn.lock
 
 # python
-**/.venv
+**/.venv/
 
 # hexo
 docs/pages/hexo/**/Thumbs.db
@@ -31,3 +31,6 @@ docs/**/bgm-data/*.jsonlines
 # local env files
 .env.local
 .env.*.local
+
+# grammar page
+docs/pages/grammar/**/dev/

@@ -15,7 +15,8 @@ import { createWordCard } from '../components/word-card.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
-import { loadGrammar, getParadigmTemplate, derivePrincipalParts } from '../services/grammar-service.js'
+import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js'
+import { findAnchor } from '../models/grammar.js'
 import { openImportWordsModal } from '../components/import-words-modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
@@ -77,6 +78,12 @@ export default {
 
         function paradigmTplFor(pos) {
             return getParadigmTemplate(grammarDoc, pos)
+        }
+
+        /** 词性徽章 → 对应语法章节（`{lang}-{pos}` 存在才可点） */
+        function resolvePosRef(pos) {
+            const id = `${lang}-${pos}`
+            return findAnchor(grammarDoc, id) ? id : null
         }
 
         /* ---------- 头部 ---------- */
@@ -269,6 +276,7 @@ export default {
                 frag.appendChild(createWordCard(w, {
                     language: lang,
                     paradigmTpl: paradigmTplFor(w.pos),
+                    resolvePosRef,
                     resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
                     onDerivativeClick: (target) => {
                         location.hash = `#/lang/${lang}/words/${target.id}`

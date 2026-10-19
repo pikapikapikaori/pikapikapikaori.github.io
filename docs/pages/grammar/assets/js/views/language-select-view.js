@@ -13,6 +13,7 @@ import { formatRelative } from '../utils/date.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import { exportUser } from '../services/import-export-service.js'
+import { isDevHost } from '../utils/env.js'
 
 const GROUP_DEFS = {
     classical: { key: 'classical', title: '古典语言', match: (l) => !!l.classical },
@@ -52,6 +53,17 @@ export default {
 
         replace(main, head, groupsEl)
 
+        // 开发环境：动态挂上「校验语法数据」按钮（dev 目录不提交也不发布，靠动态 import）
+        let devVerifyBtn = null
+        if (isDevHost()) {
+            import('../../dev/js/verify-ui.js')
+                .then((mod) => {
+                    devVerifyBtn = mod.createGrammarVerifyButton()
+                    if (devVerifyBtn) renderHead()
+                })
+                .catch(() => { /* dev 文件缺失时忽略 */ })
+        }
+
         /* ---------- 头部 ---------- */
         function renderHead() {
             replace(head,
@@ -62,6 +74,7 @@ export default {
                     )
                 ),
                 h('div', { class: 'page-head__actions' },
+                    devVerifyBtn,
                     h('button', {
                         class: 'btn', type: 'button',
                         onclick: () => doExport()

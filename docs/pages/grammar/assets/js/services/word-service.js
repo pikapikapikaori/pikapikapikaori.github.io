@@ -25,12 +25,16 @@ export const FILTER_EMPTY = {
     source: ''         // '' 表示全部
 }
 
+/**
+ * 检索范围（三档）
+ *   all    全部：词形 + 含义 / 例句 / 固定搭配
+ *   forms  词形：基本形态、主要部分、变格变位表、补充形式
+ *   head   原形：只有基本形态 + 主要部分
+ */
 export const SEARCH_SCOPE = [
-    { value: 'all',         label: '全部' },
-    { value: 'lemma',       label: '基本形态' },
-    { value: 'meaning',     label: '含义' },
-    { value: 'example',     label: '例句' },
-    { value: 'collocation', label: '固定搭配' }
+    { value: 'all',   label: '全部' },
+    { value: 'forms', label: '词形' },
+    { value: 'head',  label: '原形' }
 ]
 
 /** 主入口：查询当前语言的词条，带筛选、排序、分页 */
@@ -73,6 +77,16 @@ function applySearch(words, q, scope = 'all') {
     if (!nq) return words
 
     const hitLemma = (w) => normalizeSearch(w.lemma).includes(nq)
+    const hitStem = (w) => !!w.stem && normalizeSearch(w.stem).includes(nq)
+    const hitParadigm = (w) => Object.values(w.paradigm || {}).some((rows) =>
+        Object.values(rows || {}).some((cells) =>
+            Object.values(cells || {}).some((v) => normalizeSearch(v).includes(nq))))
+    const hitInflection = (w) => (w.inflections || []).some((it) =>
+        normalizeSearch(it.form || '').includes(nq))
+
+    const hitWordForm = (w) => hitLemma(w) || hitStem(w) || hitParadigm(w) || hitInflection(w)
+    const hitHead = (w) => hitLemma(w) || hitStem(w)
+
     const hitMeaning = (w) => (w.meanings || []).some((m) =>
         normalizeSearch(m.text || '').includes(nq))
     const hitExample = (w) => (w.examples || []).some((ex) =>
@@ -84,13 +98,11 @@ function applySearch(words, q, scope = 'all') {
 
     return words.filter((w) => {
         switch (scope) {
-            case 'lemma':       return hitLemma(w)
-            case 'meaning':     return hitMeaning(w)
-            case 'example':     return hitExample(w)
-            case 'collocation': return hitCollocation(w)
+            case 'head':  return hitHead(w)
+            case 'forms': return hitWordForm(w)
             case 'all':
             default:
-                return hitLemma(w) || hitMeaning(w)
+                return hitWordForm(w) || hitMeaning(w)
             || hitExample(w) || hitCollocation(w)
         }
     })

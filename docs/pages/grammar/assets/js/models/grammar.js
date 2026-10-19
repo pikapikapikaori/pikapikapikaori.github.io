@@ -63,14 +63,103 @@ export function findAnchor(doc, id) {
 
 /* ---------------- paradigm ---------------- */
 
+/**
+ * 解析 paradigms[pos]，支持通用 extends（可链式）
+ * - 本层写了 tables 就用本层的
+ * - 否则继承 extends 指向的词性的 tables
+ * - 环（a→b→a）直接返回 null
+ */
+function resolveTemplate(paradigms, pos, seen) {
+    if (!pos || seen.has(pos)) return null
+    const tpl = paradigms[pos]
+    if (!tpl || typeof tpl !== 'object') return null
+    if (Array.isArray(tpl.tables)) return tpl
+
+    const parent = typeof tpl.extends === 'string' ? tpl.extends.trim() : ''
+    if (!parent) return null
+
+    seen.add(pos)
+    const inherited = resolveTemplate(paradigms, parent, seen)
+    if (!inherited) return null
+    return { ...tpl, tables: inherited.tables, extends: parent }
+}
+
 /** 取某语言某词性的表格模板；返回 { tables: [...] } 或 null */
 export function getParadigmTemplate(doc, pos) {
     if (!isGrammarDoc(doc)) return null
     const p = doc.paradigms
     if (!p || typeof p !== 'object') return null
-    const tpl = p[pos]
-    if (!tpl || !Array.isArray(tpl.tables)) return null
-    return tpl
+    return resolveTemplate(p, pos, new Set())
+}
+
+/**
+ * 该词性可用的语法性：从模板列 key（`{数}_{性}`）里推导
+ * 例如 la noun → ['m','f','n']，fr noun → ['m','f']
+ */
+export function getGenderOptions(doc, pos = 'noun') {
+    const tpl = getParadigmTemplate(doc, pos)
+    const cols = new Set()
+    for (const table of tpl?.tables || []) {
+        for (const col of table.columns || []) cols.add(String(col.key))
+    }
+    const out = []
+    for (const g of ['m', 'f', 'n']) {
+        if ([...cols].some((k) => k.endsWith('_' + g))) out.push(g)
+    }
+    return out
+}
+
+/** 列的语法性（`sg_m` → 'm'），无性别维度时返回 '' */
+export function genderOfColumn(colKey) {
+    const m = /_([mfn])$/.exec(String(colKey || ''))
+    return m ? m[1] : ''
+}
+
+/** 该 pos 是否位于某 section 之下（section id 为 `{lang}-{pos}` 或以 `{lang}-{pos}-` 开头） */
+function sectionBelongsTo(sectionId, lang, pos) {
+    const base = `${lang}-${pos}`
+    return sectionId === base || String(sectionId).startsWith(base + '-')
+}
+
+/**
+ * 收集可作「变格 / 变位类型」的锚点：只取带 inflect 标记的 section / item
+ * @returns {{ id: string, label: string, kind: 'decl'|'conj' }[]}
+ */
+export function collectInflectAnchors(doc, lang, pos) {
+    const out = []
+    if (!isGrammarDoc(doc) || !pos) return out
+
+    for (const section of doc.sections) {
+        if (!section || !section.id) continue
+        if (!sectionBelongsTo(section.id, lang, pos)) continue
+
+        if (section.inflect) {
+            out.push({
+                id: section.id,
+                label: section.title || section.id,
+                short: String(section.title || section.id).split(/[　\s]/)[0],
+                kind: section.inflect
+            })
+        }
+        for (const item of section.items || []) {
+            if (!item || !item.id || !item.inflect) continue
+            out.push({
+                id: item.id,
+                label: `${section.title || section.id} · ${item.title || item.id}`,
+                short: item.title || item.id,
+                kind: item.inflect
+            })
+        }
+    }
+    return out
+}
+
+/** 取语法锚点上的 derive 规格（item 优先，其次 section）；没有则返回 null */
+export function getDeriveSpec(doc, id) {
+    const hit = findAnchor(doc, id)
+    if (!hit) return null
+    const spec = (hit.item && hit.item.derive) || (hit.section && hit.section.derive)
+    return spec && typeof spec === 'object' ? spec : null
 }
 
 /** 表格 id → 表模板 */
@@ -93,31 +182,4 @@ export function indexParadigmRows(tpl) {
         }
     }
     return map
-}
-
-/**
- * 从词条数据与表格模板派生 principal parts
- * 仅对 verb 生效；取 principal === true 的行，抽出主格值
- * @returns Array<{ label, form }>
- */
-export function derivePrincipalParts(word, tpl) {
-    if (!word || !word.paradigm || !tpl) return []
-    const out = []
-    for (const table of tpl.tables || []) {
-        if (table.key !== 'main') continue // 只从主表派生
-        const data = word.paradigm[table.key]
-        if (!data) continue
-        for (const row of table.rows || []) {
-            if (!row || !row.principal) continue
-            const cells = data[row.key]
-            if (!cells) continue
-
-            // 主格：优先 1sg，若 1pl 存在且不同则追加一行
-            const sg = cells['1sg']
-            const pl = cells['1pl']
-            if (sg) out.push({ label: row.label, form: sg })
-            if (pl && pl !== sg) out.push({ label: row.label + '（复）', form: pl })
-        }
-    }
-    return out
 }

@@ -6,6 +6,8 @@ import { listByLanguage } from '../store/word-store.js'
 import { createWordCard } from '../components/word-card.js'
 import { toast } from '../components/toast.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
+import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js'
+import { findAnchor } from '../models/grammar.js'
 
 export default {
     needsUser: true,
@@ -32,6 +34,13 @@ export default {
         const lemmaMap = new Map()
         for (const w of allWords) {
             if (!lemmaMap.has(w.lemma)) lemmaMap.set(w.lemma, w)
+        }
+
+        const grammarDoc = await loadGrammar(lang)
+
+        function resolvePosRef(pos) {
+            const id = `${lang}-${pos}`
+            return findAnchor(grammarDoc, id) ? id : null
         }
 
         const order = (settings && settings.reviewOrder) || 'mastery-asc'
@@ -116,6 +125,8 @@ export default {
             card = createWordCard(word, {
                 language: lang,
                 showSourceTabs: false,
+                paradigmTpl: getParadigmTemplate(grammarDoc, word.pos),
+                resolvePosRef,
                 resolveDerivative: (lemma) => lemmaMap.get(lemma) || null,
                 onDerivativeClick: (target) => {
                     toast.info(`派生词：${target.lemma}`)

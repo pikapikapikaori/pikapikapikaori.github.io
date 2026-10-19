@@ -145,6 +145,8 @@
     }
   },
 
+  "stem": "amā-",
+
   "inflections": [
     { "group": "不定式", "label": "现在时", "form": "amāre", "source": "manual" },
     { "group": "命令式", "label": "单数",   "form": "amā",   "source": "wiktionary" }
@@ -194,6 +196,8 @@
 | `inflectionType.label`      | 变格/变位类型显示名，词卡徽章                                                                     |
 | `inflectionType.grammarRef` | 指向语法 JSON 的锚点 id；无对应语法时为 `null`（此时视为「特殊变格 / 变位」，用户自行填写 label） |
 | `paradigm`                  | 表格化的变位/变格数据，稀疏存储，键为 `{tableKey: {rowKey: {colKey: value}}}`                     |
+| `stem`                      | 主要部分（词干），字符串；所有词形共有的、其后只追加词尾的部分                                     |
+| `gender`                    | 语法性，**仅 `pos=noun` 有意义**；字符串数组，取值 `m` / `f` / `n`，可多选（common gender）        |
 | `inflections[].group`       | 可选，用于分组显示（如「不定式」「命令式」）                                                      |
 | `meanings[].lang`           | `zh` / `en`                                                                                       |
 | `derivatives`               | 派生词 lemma 列表；仅当目标词已存在时渲染为可点击链接                                             |
@@ -218,7 +222,35 @@
 
 - `<tableKey>` / `<rowKey>` / `<colKey>` 由对应语言的语法 JSON 中 `paradigms` 字段定义。
 - 只保存有值的格子，空字符串、`null`、`undefined` 一律剔除。
+- **列 key 统一为 `{数}_{性}`**（`sg_m` / `pl_f` / `du_n`…）表示性数格；无性别维度时用 `{数}`（`sg` / `pl`）；
+  动词用人称（`1sg` / `2pl`…）；非定式用单列 `form`。
 - 找不到模板的语言（如 `en` / `zh-cls` / `ja` / `ja-cls`）不使用此字段，相关变位/活用全部走 `inflections`。
+
+#### 主要部分（stem）
+
+```json
+"stem": "am"
+```
+
+- **词干**：一个词所有词形共有的不变部分，词尾一律追加在其后。
+  - 拉丁语：`am` → `amō` / `amās` / `amāre` / `amāvī` / `amātum`
+  - 古希腊语：`λόγ` → `λόγος` / `λόγου` / `λόγῳ` / `λόγον`
+- **不写末尾的连字符**：数据里是 `am`、`λόγ`，只在界面显示时补成 `am-`、`λόγ-`。
+- 与 `lemma`（基本形态）不同：`lemma` 是词典形式，`stem` 是去掉词尾后的部分。
+- **尽量取一个能让词尾直接拼接的词干**（第一变位法用 `am` 而不是 `amā`），可省掉大量音变规则。
+- 与「变格 / 变位类型」配合用于**自动生成变格 / 变位表**，见第 6 节。
+- 为空时词卡背面不显示该区块。
+
+#### 语法性（gender）
+
+```json
+"gender": ["m", "f"]
+```
+
+- **只有名词有语法性**，其它词性一律存空数组。
+- 取值来自 `paradigms.noun` 的表列 key（`{数}_{性}` 中的性），所以 `fr` / `he` 自动只有 `m` / `f`。
+- 生词表单在 `pos=noun` 时显示多选 chip；**视图与编辑都隐藏未选中性别的列**
+  （如 `aqua`（f）只显示 `sg_f` / `pl_f`）。
 
 ---
 
@@ -228,6 +260,7 @@
 
 - `meanings` / `inflections` / `collocations` / `examples` 均为**数组**，新来源的内容**追加**，不覆盖。
 - `paradigm` 做**格子级合并**：同格子已有值不被覆盖，新格子填入。
+- `stem`：已有值时不覆盖，为空时填充。
 - `inflectionType`：已有 label / grammarRef 时不覆盖；为空时填充。
 - 界面按 `source` 分标签显示，默认优先 `manual`。
 - `encounterCount` +1。
@@ -363,7 +396,7 @@ const MIGRATIONS = {
 | `tables[].columns[]` | 列定义，`key` 是数据存储用的键，`label` 是显示名                     |
 | `tables[].rows[]`    | 行定义，`key` 是数据存储用的键，`label` 是显示名                     |
 | `rows[].grammarRef`  | 可选，指向同文件 `sections` 里的锚点 id，用于「语法」跳转按钮        |
-| `rows[].principal`   | 可选，为 `true` 时该行在派生 principal parts 时被提取                |
+| `rows[].principal`   | 可选，为 `true` 时标记该行为该变位类型的代表性行（词典列出的主要形式）；与 Word 的 `stem` 不是同一概念 |
 
 #### 覆盖范围
 
@@ -518,12 +551,132 @@ const MIGRATIONS = {
 
 ---
 
+### 6. paradigms 的两个通用机制
+
+#### `extends`（模板继承）
+
+```jsonc
+"paradigms": {
+  "participle": { "extends": "adj" },      // 分词按形容词变格，不重复数据
+  "adj": { "tables": [ ... ] }
+}
+```
+
+- 本层写了 `tables` 就用本层的，否则整体继承 `extends` 指向的词性的 `tables`（不做深合并）。
+- 可链式（`a → b → c`）；出现环时忽略 `extends` 并 `console.warn`。
+- 生成器、校验器、界面全部走同一个 `getParadigmTemplate`，行为一致。
+
+#### `disabled`（该形式不存在）
+
+```jsonc
+{ "key": "pres-act-impr", "label": "命令式 主动", "disabled": ["1sg", "1pl", "3sg", "3pl"] }
+```
+
+命令式只有第二人称，其余格不存在。三种模式统一处理：
+
+| 场景 | 行为 |
+| --- | --- |
+| 视图（词卡 / 放大） | 渲染灰底空单元格，`title="该形式不存在"` |
+| 编辑 / 新建 | 输入框 `disabled`，同款灰底 |
+| `derive` 生成 | 跳过该格 |
+| 校验 | `endings` / `expect` 若命中该格 → 报错 |
+
+通用函数：`paradigm-generate.js` 的 `isCellDisabled(row, colKey)`。
+
+#### `inflect`（语法锚点下拉的取数依据）
+
+```jsonc
+{ "id": "la-noun-1st-decl", "inflect": "decl" }     // item
+{ "id": "la-verb-1st-conj", "inflect": "conj" }     // section
+```
+
+- 生词表单的「语法锚点」下拉 **只列带 `inflect` 的 section / item**，再加内置的「特殊」与「不变格 / 不变位」。
+- 因此「时态构成」「分词与不定式」这类通用条目**不要**标 `inflect`，否则会混进下拉。
+- 代词 / 数词没有具体变格类型，所以下拉里只有 特殊 + 不变。
+- 词性徽章（词卡正面）点击跳转到 `${lang}-${pos}` 对应的语法 section，与 `inflect` 无关。
+
+---
+
+### 7. derive 字段（按主要部分生成变格 / 变位表）
+
+挂在 `sections[].items[]` 上，描述「给定词干 → 生成该类型的表格」的规则。
+
+- 生成逻辑：`assets/js/models/paradigm-generate.js`
+- 自检入口：语言选择页的「校验语法数据（dev）」按钮
+- 入口：生词表单「主要部分」右侧的「生成表格」按钮；没有 `derive` 的类型按钮为禁用状态
+
+```json
+{
+  "id": "la-noun-1st-decl",
+  "title": "第一变格法",
+  "derive": {
+    "pos": "noun",
+    "stemExample": "aqu",
+    "endings": {
+      "main": {
+        "nom": { "sg": "-a", "pl": "-ae" }
+      }
+    },
+    "expect": {
+      "main": { "nom": { "sg": "aqua", "pl": "aquae" } }
+    }
+  }
+}
+```
+
+| 字段                            | 说明                                                                        |
+| ------------------------------- | --------------------------------------------------------------------------- |
+| `pos`                           | 可选。对应的 `paradigms` 词性 key；缺省时按 section id / 表 key 推断         |
+| `stemExample`                   | 自检用词干，配 `expect` 使用                                                 |
+| `endings[tableKey][rowKey][colKey]` | 词尾。字符串 = 只加词尾（可写成 `-a`）；对象 = `{ suffix, prefix, stemForm }` |
+| `rowDefaults[tableKey][rowKey]` | 该行的 `prefix` / `suffix` / `stemForm` 默认值，被格级声明覆盖               |
+| `stems[名称]`                   | 直接给出词干变体（无法用规则表达时用，如 la `reg → rēx`）                    |
+| `stemForms[名称]`               | 词干变体规则 `[{ pattern, replace, flags? }]`，**只作用于词干**              |
+| `formRules`                     | 拼接后作用于整词的规则 `[{ pattern, replace, flags? }]`，按顺序执行           |
+| `expect`                        | 自检期望值，结构同 `paradigm`                                                |
+
+生成过程（每个格子）：
+
+```
+1. stemForm = 格级 ?? 行级 ?? 'base'
+2. stem     = 对词干套用 stemForms[stemForm]（'base' 为原样）
+3. naive    = prefix + stem + suffix
+4. form     = 对 naive 套用 formRules
+5. 该格已有值 → 跳过，不覆盖
+```
+
+约束：
+
+- 规则的 `pattern` **必须锚定**（以 `^` 开头或以 `$` 结尾），否则一次替换就能写坏整张表；校验器会直接报错。
+- `endings` / `rowDefaults` / `expect` 里的 key 必须能在 `paradigms[pos]` 中找到，列 key 也要对得上。
+- 生成的格**只填空格**，词条里已有内容（含用户手改）永不覆盖。
+- 没有 `derive` 的类型不参与生成，仍可手工填表。
+- `derive` **可以挂在 section 上**：一个变位法的规则天然覆盖它全部时态表，
+  于是 `endings` 按 `{pres, impf, fut, perf, plup, futp, inf, ptcp, gerund, supine}` 分块，
+  用 `rowDefaults` 声明各行默认使用哪个词干变体（完成系统各表用 `perf`，分词 / 目的动名词用 `ppp`）。
+- 语法里每个变格 / 变位条目都要给**两张表**：
+  1. `caption: "屈折词尾"` —— 只列词尾（`-ō` / `-ās`…）
+  2. `caption: "示例：amō, amāre, amāvī, amātum"` —— 完整词形
+
+  两张表行列一一对应，`derive.endings` 应与第一张表一致。
+
+---
+
 ## 第三部分 · 检索规范
 
 ### 1. 检索范围
 
 - **当前语言内**，不做跨语言检索。
-- 命中字段：`lemma`、`meanings[].text`、`examples[].text`、`examples[].translation`、`collocations[].text`、`collocations[].gloss`。
+- 列表页「检索范围」三档：
+
+| 值 | 名称 | 命中字段 |
+| --- | --- | --- |
+| `all` | 全部 | 词形（下列全部）+ `meanings[].text`、`examples[].text`、`examples[].translation`、`collocations[].text`、`collocations[].gloss` |
+| `forms` | 词形 | `lemma`、`stem`、`paradigm` 全部格子、`inflections[].form` |
+| `head` | 原形 | 只有 `lemma` + `stem` |
+
+- 默认 `all`。`head` 同时用于派生词选择器的搜索。
+- **数词的多种形式属于派生词**，不作为同一词条的变格形式参与检索。
 
 ### 2. 匹配方式
 
@@ -560,6 +713,8 @@ const MIGRATIONS = {
 - 支持导入/导出完整用户 JSON
 - 支持批量导入生词 JSON（单对象 / 数组 / `{ words: [...] }`）
 - 支持 AI 提示词下载，驱动模型按当前语言的 paradigm 模板生成结构化 JSON
+- **派生词只能从词库中选择**（外键语义）：用 `head` 范围搜索当前语言的词条，
+  选不中的词会提示「未找到，请先添加该词」，不提供自由文本输入
 
 ### 2. Wiktionary 在线查询
 
@@ -582,3 +737,28 @@ const MIGRATIONS = {
 入口形式：**按钮**，不是输入框。每个按钮对应一个内置数据源，URL 由开发者在对应的 `services/*.js` 中写死并维护。
 
 详见 `docs/TODO.md`。
+
+---
+
+### 4. 开发专用目录（`assets/dev/`）
+
+**整个 `assets/dev/` 都不提交、也不随站点发布**：
+
+- `.gitignore` → `docs/pages/grammar/assets/dev/`
+- `.github/workflows/cloudflare-r2.yml` → rclone `--exclude "pages/grammar/assets/dev/**"`
+
+因此**它里面不能放应用运行时必须存在的文件**：app 代码里禁止静态 import，只能用
+`isDevHost()` 判断后 `import()` 动态加载，这样生产环境根本不会发请求，干净 clone 也不会报错。
+
+| 文件                          | 用途                                                                 |
+| ----------------------------- | -------------------------------------------------------------------- |
+| `data/{lang}.json`            | 开发测试词，`{ "words": [...] }`，每个语言一个名词 + 一个动词，字段完整 |
+| `js/fixtures.js`              | 导入生词模态框里的「载入测试词（dev）」按钮                            |
+| `js/verify-ui.js`             | 语言选择页的「校验语法数据（dev）」按钮 + 结果对话框                    |
+
+- 界面上的两个 dev 按钮只在 localhost 出现，且各自通过动态 import 挂载。
+- 「校验语法数据」跑的是 `assets/js/models/paradigm-generate.js` 里的 `verifyGrammarDocs`，
+  与命令行版共用同一套引擎。
+- 语法 / 元数据每改一次，应同步更新对应语言的测试词。
+- **配套的 SW 环境切换代码不在这里**：`assets/js/main.js` 的 `setupServiceWorker()` +
+  `assets/js/utils/env.js` 的 `isDevHost()`。它必须被生产环境加载，不能依赖 dev 目录。

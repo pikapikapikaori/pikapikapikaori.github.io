@@ -16,6 +16,7 @@ import { attachVerticalPopover, hideVerticalPopover } from './components/vertica
 import { createThemeToggle } from './components/theme-toggle.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
+import { isDevHost } from './utils/env.js'
 
 const LS_USER_KEY = 'ln.currentUser'
 const LS_THEME_KEY = 'ln.theme'
@@ -231,21 +232,48 @@ async function bootstrap() {
     // 暴露给调试使用
     window.__ln = { router, appStore }
 
-    // Service Worker
-    registerServiceWorker()
+    // Service Worker：生产注册，开发注销（见下）
+    setupServiceWorker()
     attachVerticalPopover()
 }
 
-function registerServiceWorker() {
+/**
+ * SW 必须放在 assets/js 下而不是 assets/dev：
+ * dev 目录已被 gitignore 且不发布，main.js 不能静态依赖它。
+ */
+function setupServiceWorker() {
     if (!('serviceWorker' in navigator)) return
-    if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+
+    // 本地开发：SW 的 cache-first 会一直命中旧代码，改为注销并清空缓存
+    if (isDevHost()) {
+        disableServiceWorker().catch((err) => console.warn('[sw] 开发环境清理失败', err))
         return
     }
+
+    if (location.protocol !== 'https:') return
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch((err) => {
             console.warn('[sw] 注册失败', err)
         })
     })
+}
+
+/** 注销 SW 并清空其缓存；若当前页面仍被旧 SW 控制，重载一次以拿到最新资源 */
+async function disableServiceWorker() {
+    const controlled = !!navigator.serviceWorker.controller
+    const regs = await navigator.serviceWorker.getRegistrations()
+    if (regs.length) {
+        await Promise.all(regs.map((r) => r.unregister()))
+        console.info('[sw] 开发环境：已注销 Service Worker')
+    }
+    if ('caches' in window) {
+        const keys = await caches.keys()
+        await Promise.all(keys.map((k) => caches.delete(k)))
+    }
+    if (controlled && !sessionStorage.getItem('ln-sw-reset')) {
+        sessionStorage.setItem('ln-sw-reset', '1')
+        location.reload()
+    }
 }
 
 bootstrap()

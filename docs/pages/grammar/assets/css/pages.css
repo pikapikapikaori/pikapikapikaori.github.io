@@ -147,6 +147,10 @@
     padding: var(--sp-5);
 }
 
+.word-form > * {
+    min-width: 0;
+}
+
 .word-form__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -180,13 +184,40 @@
 
 .word-form__item {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr auto auto;
     gap: var(--sp-2);
     align-items: start;
 }
 
 .word-form__item--meaning {
     grid-template-columns: 1fr 120px 140px auto;
+}
+
+/* 例句：原文 / 出处 / 来源 / ✕ 在第一行，译文独占第二行 */
+.word-form__item--example {
+    grid-template-columns: 1.6fr 1fr auto auto;
+}
+
+.word-form__item--example .word-form__cell--wide {
+    grid-column: 1 / 3;
+    grid-row: 2;
+}
+
+.word-form__item--example .word-form__cell--remove {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    align-self: center;
+}
+
+/* 删除按钮不参与拉伸 */
+.word-form__cell--remove {
+    justify-self: end;
+}
+
+/* 多项之间加分隔线（上下排列时尤其是） */
+.word-form__list > * + * {
+    padding-top: var(--sp-3);
+    border-top: 1px dashed var(--c-border);
 }
 
 .word-form__actions {
@@ -203,8 +234,17 @@
     }
 
     .word-form__item,
-    .word-form__item--meaning {
+    .word-form__item--meaning,
+    .word-form__item--example {
         grid-template-columns: 1fr;
+    }
+
+    /* 窄屏下取消显式定位，让 ✕ 排在最后 */
+    .word-form__item--example .word-form__cell--wide,
+    .word-form__item--example .word-form__cell--remove {
+        grid-column: auto;
+        grid-row: auto;
+        align-self: auto;
     }
 }
 

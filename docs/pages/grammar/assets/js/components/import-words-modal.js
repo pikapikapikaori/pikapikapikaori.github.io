@@ -8,6 +8,7 @@ import { toast } from './toast.js'
 import {
     parseWordJson, importWords, downloadPrompt
 } from '../services/import-words-service.js'
+import { isDevHost } from '../utils/env.js'
 
 /**
  * @param {object} opts
@@ -149,11 +150,30 @@ export function openImportWordsModal({
         }
     }, '下载 AI 提示词')
 
+    const devActions = h('div', { class: 'import-words-head__actions' }, downloadBtn)
+
+    // 开发环境：动态挂上 dev 目录里的测试词按钮
+    // （dev 目录被 gitignore、也不发布，所以用动态 import，生产环境完全不请求）
+    if (isDevHost()) {
+        import('../../dev/js/fixtures.js')
+            .then(({ createDevFixtureButton }) => {
+                const btn = createDevFixtureButton({
+                    language: defaultLanguage,
+                    onLoad: (text) => {
+                        textarea.value = text
+                        updateCount()
+                    }
+                })
+                if (btn) devActions.prepend(btn)
+            })
+            .catch(() => { /* dev 文件缺失时忽略 */ })
+    }
+
     const body = h('div', { class: 'import-words-body' },
         h('div', { class: 'field import-words-field' },
             h('div', { class: 'import-words-head' },
                 h('span', { class: 'field__label' }, '上传或粘贴 JSON'),
-                downloadBtn
+                devActions
             ),
             dropzone,
             fileInput,

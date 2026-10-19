@@ -12,7 +12,8 @@ import { h } from '../utils/dom.js'
  *   showTitle   是否显示表标题（默认 true）
  *   onGrammarRef(grammarRef)
  *   editable    { onChange(rowKey, colKey, value) }  仅 mode='edit' 时使用
- *   rowEditable 仅在这些行上允许编辑（可选，默认全部）
+ *   hideColumns string[]  不渲染的列（如名词非对应性别 sg_m/pl_m）
+ *   isDisabledCell (row, col) => boolean  该格形式不存在：灰底 + 禁用
  *
  * @returns {HTMLElement|null}
  */
@@ -26,11 +27,25 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
         mode = 'view',
         showTitle = true,
         onGrammarRef = null,
-        editable = null
+        editable = null,
+        hideColumns = [],
+        isDisabledCell = null
     } = options
 
     const data = tableData && typeof tableData === 'object' ? tableData : {}
     const isEdit = mode === 'edit'
+
+    const hidden = new Set(hideColumns || [])
+    const columns = tableTpl.columns.filter((c) => !hidden.has(c.key))
+    if (columns.length === 0) return null
+
+    const rowDisabled = (row, colKey) => {
+        if (Array.isArray(row.disabled) && row.disabled.includes(colKey)) return true
+        if (typeof isDisabledCell === 'function') {
+            try { return !!isDisabledCell(row, colKey) } catch { return false }
+        }
+        return false
+    }
 
     // 视图模式：只保留有内容的行
     const rows = isEdit
@@ -38,7 +53,10 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
         : tableTpl.rows.filter((r) => {
             const cells = data[r.key]
             if (!cells) return false
-            return Object.values(cells).some((v) => String(v ?? '').trim())
+            return columns.some((c) => {
+                if (rowDisabled(r, c.key)) return false
+                return String(cells[c.key] ?? '').trim()
+            })
         })
 
     if (!isEdit && rows.length === 0) return null
@@ -55,7 +73,7 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
     const thead = h('thead', {},
         h('tr', {},
             h('th', { class: 'paradigm-table__corner' }, ''),
-            ...tableTpl.columns.map((c) =>
+            ...columns.map((c) =>
                 h('th', { class: 'paradigm-table__col', scope: 'col' }, c.label)
             )
         )
@@ -93,28 +111,37 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
             }, ...rowHeadChildren)
         )
 
-        for (const col of tableTpl.columns) {
+        for (const col of columns) {
             const value = cells[col.key] ?? ''
+            const off = rowDisabled(row, col.key)
             if (isEdit) {
-                tr.appendChild(h('td', { class: 'paradigm-table__cell paradigm-table__cell--edit' },
-                    h('input', {
-                        class: 'input input--cell',
-                        type: 'text',
-                        value,
-                        lang: lang || undefined,
-                        placeholder: '',
-                        oninput: (e) => {
-                            if (editable && typeof editable.onChange === 'function') {
-                                editable.onChange(row.key, col.key, e.target.value)
-                            }
+                tr.appendChild(h('td', {
+                    class: 'paradigm-table__cell paradigm-table__cell--edit'
+                        + (off ? ' paradigm-table__cell--disabled' : '')
+                },
+                h('input', {
+                    class: 'input input--cell',
+                    type: 'text',
+                    value: off ? '' : value,
+                    lang: lang || undefined,
+                    placeholder: '',
+                    disabled: off,
+                    title: off ? '该形式不存在' : null,
+                    oninput: (e) => {
+                        if (editable && typeof editable.onChange === 'function') {
+                            editable.onChange(row.key, col.key, e.target.value)
                         }
-                    })
+                    }
+                })
                 ))
             } else {
                 tr.appendChild(h('td', {
-                    class: 'paradigm-table__cell',
-                    lang: lang || undefined
-                }, value || ''))
+                    class: 'paradigm-table__cell'
+                        + (off ? ' paradigm-table__cell--disabled' : '')
+                        + (!off && !value ? ' paradigm-table__cell--empty' : ''),
+                    lang: lang || undefined,
+                    title: off ? '该形式不存在' : null
+                }, off ? '' : (value || '')))
             }
         }
 

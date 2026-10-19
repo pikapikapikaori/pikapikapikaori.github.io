@@ -1,10 +1,11 @@
 import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
-import { submitWord, editWord, fetchWord } from '../services/word-service.js'
-import { POS_LIST, normalizeParadigm } from '../models/word.js'
-import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js'
+import { submitWord, editWord, fetchWord, queryWords } from '../services/word-service.js'
+import { POS_LIST, GENDERS, normalizeParadigm, normalizeStem, normalizeGenders } from '../models/word.js'
+import { loadGrammar, getParadigmTemplate, getDeriveSpec, getGenderOptions, collectInflectAnchors, genderOfColumn } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
+import { generateParadigm } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import { lookupWordForForm } from '../services/wiktionary-service.js'
@@ -16,6 +17,12 @@ const SOURCE_OPTIONS = [
 ]
 
 const SPECIAL_REF = '__special__'
+const INDECL_REF = '__indeclinable__'
+
+/** 不变格 / 不变位的显示名 */
+function indeclinableLabel(pos) {
+    return pos === 'verb' ? '不变位' : '不变格'
+}
 
 export default {
     needsUser: true,
@@ -60,8 +67,10 @@ export default {
                 language: lang,
                 lemma: '',
                 pos: 'noun',
+                gender: [],
                 inflectionType: { label: '', grammarRef: null },
                 paradigm: {},
+                stem: '',
                 inflections: [],
                 meanings: [{ text: '', lang: 'zh', source: 'manual' }],
                 collocations: [],
@@ -80,11 +89,13 @@ export default {
                 language: w.language,
                 lemma: w.lemma,
                 pos: w.pos,
+                gender: normalizeGenders(w.gender, w.pos),
                 inflectionType: {
                     label: (w.inflectionType && w.inflectionType.label) || '',
                     grammarRef: (w.inflectionType && w.inflectionType.grammarRef) || null
                 },
                 paradigm: normalizeParadigm(w.paradigm),
+                stem: normalizeStem(w.stem),
                 inflections: (w.inflections || []).map((x) => ({ ...x })),
                 meanings: (w.meanings || []).map((x) => ({ ...x })),
                 collocations: (w.collocations || []).map((x) => ({ ...x })),
@@ -148,46 +159,55 @@ export default {
 
         let currentOptionsById = {}
 
+        // 语法锚点：只列「变格 / 变位类型」，外加 特殊 / 不变
         const inflectionRef = h('select', {
             class: 'select',
             onchange: (e) => {
                 const v = e.target.value
-                if (v === SPECIAL_REF) return
                 const opt = currentOptionsById[v]
                 // 只在 label 为空时自动填充，避免覆盖用户已填的内容
-                if (opt && !inflectionLabel.value.trim()) {
-                    const title = opt.label.split(' · ').pop()
-                    inflectionLabel.value = title
+                if (v !== SPECIAL_REF && opt && !inflectionLabel.value.trim()) {
+                    inflectionLabel.value = opt.short || opt.label
+                } else if (v === INDECL_REF && !inflectionLabel.value.trim()) {
+                    inflectionLabel.value = indeclinableLabel(posSelect.value)
                 }
+                refreshGenerateBtn()
             }
         })
 
         function rebuildRefOptions(initialValue) {
             const pos = posSelect.value
-            const opts = collectGrammarOptions(grammarDoc, pos)
+            const opts = collectInflectAnchors(grammarDoc, lang, pos)
             currentOptionsById = Object.fromEntries(opts.map((o) => [o.id, o]))
 
             const prev = initialValue !== undefined ? initialValue : inflectionRef.value
             const ids = new Set(opts.map((o) => o.id))
-            const selected = (prev && prev !== SPECIAL_REF && ids.has(prev))
+            const selected = (prev && ids.has(prev))
                 ? prev
-                : SPECIAL_REF
+                : (prev === INDECL_REF ? INDECL_REF : SPECIAL_REF)
 
             inflectionRef.replaceChildren(
                 h('option', {
                     value: SPECIAL_REF,
                     selected: selected === SPECIAL_REF
-                }, '特殊变格 / 变位（自行填写）'),
+                }, pos === 'verb' ? '特殊变位（自行填写）' : '特殊变格（自行填写）'),
+                h('option', {
+                    value: INDECL_REF,
+                    selected: selected === INDECL_REF
+                }, indeclinableLabel(pos)),
                 ...opts.map((o) => h('option', {
                     value: o.id,
                     selected: selected === o.id
                 }, o.label))
             )
+            refreshGenerateBtn()
         }
 
         posSelect.addEventListener('change', () => {
             data.pos = posSelect.value
+            data.gender = normalizeGenders(data.gender, data.pos)
             rebuildRefOptions()
+            renderGenderField()
             renderParadigmBlock()
         })
 
@@ -197,6 +217,57 @@ export default {
             placeholder: '变格 / 变位类型说明（如：第一变位法）',
             value: data.inflectionType.label
         })
+
+        const principalInput = h('input', {
+            class: 'input',
+            type: 'text',
+            lang: lang,
+            placeholder: '主要部分，如 am、λόγ',
+            value: data.stem,
+            oninput: () => refreshGenerateBtn()
+        })
+
+        const generateBtn = h('button', {
+            class: 'btn btn--sm',
+            type: 'button',
+            onclick: onGenerate
+        }, '生成表格')
+
+        /* ---------- 语法性（仅名词） ---------- */
+
+        const genderSlot = h('div', {})
+
+        function renderGenderField() {
+            genderSlot.replaceChildren()
+            if (posSelect.value !== 'noun') return
+
+            const options = getGenderOptions(grammarDoc, 'noun')
+            if (!options.length) return
+
+            const chips = h('div', { class: 'chip-group' },
+                ...options.map((g) => {
+                    const label = GENDERS.find((x) => x.value === g)
+                    const active = data.gender.includes(g)
+                    return h('button', {
+                        class: 'chip' + (active ? ' chip--active' : ''),
+                        type: 'button',
+                        'aria-pressed': String(active),
+                        onclick: (e) => {
+                            const i = data.gender.indexOf(g)
+                            if (i >= 0) data.gender.splice(i, 1)
+                            else data.gender.push(g)
+                            data.gender = normalizeGenders(data.gender, 'noun')
+                            e.currentTarget.classList.toggle('chip--active', data.gender.includes(g))
+                            e.currentTarget.setAttribute('aria-pressed', String(data.gender.includes(g)))
+                            renderParadigmBlock()
+                        }
+                    }, label ? label.label : g)
+                })
+            )
+
+            genderSlot.appendChild(field('语法性', chips,
+                '可多选（如 common gender 同时为阳性与阴性）。只显示所选性别的变格列。'))
+        }
 
         // 语法锚点下拉：特殊变格/变位 + 语法速查条目
 
@@ -212,6 +283,12 @@ export default {
             ),
             field('词性', posSelect, '')
         ))
+
+        form.appendChild(genderSlot)
+
+        form.appendChild(field('主要部分',
+            h('div', { class: 'field__row' }, principalInput, generateBtn),
+            '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。'))
 
         form.appendChild(h('div', { class: 'word-form__row' },
             field('变格 / 变位类型', inflectionLabel, '显示在词卡正面的徽章。'),
@@ -261,9 +338,76 @@ export default {
         rebuildRefOptions(data.inflectionType.grammarRef || SPECIAL_REF)
         replace(main, head, form)
 
+        renderGenderField()
         renderParadigmBlock()
+        refreshGenerateBtn()
+
+        /* ---------- 按主要部分生成表格 ---------- */
+
+        /** 当前「变格 / 变位类型」对应的生成规则 */
+        function currentDeriveSpec() {
+            const ref = inflectionRef.value
+            if (!ref || ref === SPECIAL_REF || ref === INDECL_REF) return null
+            return getDeriveSpec(grammarDoc, ref)
+        }
+
+        function refreshGenerateBtn() {
+            const spec = currentDeriveSpec()
+            const hasStem = !!normalizeStem(principalInput.value)
+            generateBtn.disabled = !spec || !hasStem
+            if (!spec) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
+            else if (!hasStem) generateBtn.title = '请先填写主要部分'
+            else generateBtn.title = '按主要部分和词尾规则自动填表'
+        }
+
+        function onGenerate() {
+            const spec = currentDeriveSpec()
+            if (!spec) return
+
+            const stem = normalizeStem(principalInput.value)
+            if (!stem) {
+                toast.error('请先填写主要部分')
+                principalInput.focus()
+                return
+            }
+
+            const { paradigm, filled } = generateParadigm({
+                stem,
+                spec,
+                template: getParadigmTemplate(grammarDoc, data.pos),
+                existing: data.paradigm
+            })
+
+            if (!filled.length) {
+                toast.info('没有可填的空格（已有内容不会被覆盖）')
+                return
+            }
+
+            for (const [tableKey, rows] of Object.entries(paradigm)) {
+                if (!data.paradigm[tableKey]) data.paradigm[tableKey] = {}
+                for (const [rowKey, cells] of Object.entries(rows)) {
+                    if (!data.paradigm[tableKey][rowKey]) data.paradigm[tableKey][rowKey] = {}
+                    Object.assign(data.paradigm[tableKey][rowKey], cells)
+                }
+            }
+            renderParadigmBlock()
+            toast.success(`已按主要部分生成 ${filled.length} 格，请确认无误后保存`, 5000)
+        }
 
         /* ---------- 表格块渲染 ---------- */
+
+        /** 名词只渲染所选性别的列 */
+        function hiddenGenderColumns(tpl) {
+            if (data.pos !== 'noun' || !data.gender.length) return []
+            const hidden = []
+            for (const table of tpl?.tables || []) {
+                for (const col of table.columns || []) {
+                    const g = genderOfColumn(col.key)
+                    if (g && !data.gender.includes(g)) hidden.push(col.key)
+                }
+            }
+            return hidden
+        }
 
         function renderParadigmBlock() {
             paradigmSlot.replaceChildren()
@@ -283,6 +427,7 @@ export default {
                     lang,
                     mode: 'edit',
                     showTitle: true,
+                    hideColumns: hiddenGenderColumns(tpl),
                     onGrammarRef: (ref) => {
                         location.hash = `#/grammar/${lang}#${ref}`
                     },
@@ -412,7 +557,8 @@ export default {
                         ),
                         sourceSelect(m.source, (v) => { m.source = v }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm', type: 'button',
+                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            title: '删除该含义',
                             onclick: () => {
                                 data.meanings.splice(idx, 1)
                                 if (data.meanings.length === 0) {
@@ -462,7 +608,8 @@ export default {
                         }),
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm', type: 'button',
+                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            title: '删除该形式',
                             onclick: () => {
                                 data.inflections.splice(idx, 1)
                                 renderInflections()
@@ -505,7 +652,8 @@ export default {
                         }),
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm', type: 'button',
+                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            title: '删除该搭配',
                             onclick: () => { data.collocations.splice(idx, 1); render() }
                         }, '✕')
                     ))
@@ -534,26 +682,25 @@ export default {
             renderExamples = function () {
                 list.replaceChildren()
                 data.examples.forEach((it, idx) => {
-                    list.appendChild(h('div', { style: { display: 'grid', gap: 'var(--sp-2)', padding: 'var(--sp-2) 0', borderBottom: '1px dashed var(--c-border)' } },
-                        h('div', { class: 'word-form__item' },
-                            h('input', {
-                                class: 'input', placeholder: '例句原文', value: it.text, lang: lang,
-                                oninput: (e) => { it.text = e.target.value }
-                            }),
-                            h('input', {
-                                class: 'input', placeholder: '出处', value: it.citation,
-                                oninput: (e) => { it.citation = e.target.value }
-                            }),
-                            sourceSelect(it.source, (v) => { it.source = v }),
-                            h('button', {
-                                class: 'btn btn--ghost btn--sm', type: 'button',
-                                onclick: () => { data.examples.splice(idx, 1); renderExamples() }
-                            }, '✕')
-                        ),
+                    list.appendChild(h('div', { class: 'word-form__item word-form__item--example' },
                         h('input', {
-                            class: 'input', placeholder: '译文', value: it.translation,
+                            class: 'input', placeholder: '例句原文', value: it.text, lang: lang,
+                            oninput: (e) => { it.text = e.target.value }
+                        }),
+                        h('input', {
+                            class: 'input', placeholder: '出处', value: it.citation,
+                            oninput: (e) => { it.citation = e.target.value }
+                        }),
+                        sourceSelect(it.source, (v) => { it.source = v }),
+                        h('input', {
+                            class: 'input word-form__cell--wide', placeholder: '译文', value: it.translation,
                             oninput: (e) => { it.translation = e.target.value }
-                        })
+                        }),
+                        h('button', {
+                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            title: '删除该例句',
+                            onclick: () => { data.examples.splice(idx, 1); renderExamples() }
+                        }, '✕')
                     ))
                 })
             }
@@ -562,34 +709,106 @@ export default {
         }
 
         function buildDerivativeGroup() {
-            const list = h('div', { class: 'word-form__list' })
+            const selected = h('div', { class: 'chip-group' })
+            const results = h('div', { class: 'picker-results' })
+            const hint = h('div', { class: 'field__hint' }, '')
+
+            const searchInput = h('input', {
+                class: 'input',
+                type: 'search',
+                placeholder: '搜索本语言词库（基本形态 / 主要部分）…',
+                oninput: () => scheduleSearch()
+            })
+
+            let timer = null
+            let seq = 0
+
+            function scheduleSearch() {
+                clearTimeout(timer)
+                timer = setTimeout(runSearch, 180)
+            }
+
+            async function runSearch() {
+                const q = searchInput.value.trim()
+                results.replaceChildren()
+                if (!q) {
+                    hint.textContent = ''
+                    return
+                }
+
+                const mySeq = ++seq
+                const res = await queryWords(userId, lang, {
+                    q,
+                    scope: 'head',      // 只检索基本形态 + 主要部分
+                    page: 1,
+                    pageSize: 50
+                })
+                if (mySeq !== seq) return
+
+                const items = res.items.filter((w) => w.lemma !== lemmaInput.value.trim())
+                if (!items.length) {
+                    hint.textContent = '未找到，请先添加该词'
+                    return
+                }
+                hint.textContent = ''
+
+                for (const w of items) {
+                    const picked = data.derivatives.includes(w.lemma)
+                    results.appendChild(h('button', {
+                        class: 'picker-item' + (picked ? ' picker-item--picked' : ''),
+                        type: 'button',
+                        onclick: () => {
+                            const i = data.derivatives.indexOf(w.lemma)
+                            if (i >= 0) data.derivatives.splice(i, 1)
+                            else data.derivatives.push(w.lemma)
+                            renderSelected()
+                            runSearch()
+                        }
+                    },
+                    h('span', { class: 'picker-item__lemma', lang }, w.lemma),
+                    h('span', { class: 'picker-item__pos' }, posLabel(w.pos)),
+                    h('span', { class: 'picker-item__gloss' },
+                        (w.meanings || []).map((m) => m.text).filter(Boolean).join('；'))
+                    ))
+                }
+            }
+
+            function renderSelected() {
+                selected.replaceChildren()
+                if (!data.derivatives.length) {
+                    selected.appendChild(h('span', { class: 'field__hint' }, '尚未选择派生词'))
+                    return
+                }
+                for (const lemma of data.derivatives) {
+                    selected.appendChild(h('span', { class: 'chip chip--active' },
+                        h('span', { lang }, lemma),
+                        h('button', {
+                            class: 'chip__remove',
+                            type: 'button',
+                            'aria-label': `移除 ${lemma}`,
+                            onclick: () => {
+                                data.derivatives = data.derivatives.filter((x) => x !== lemma)
+                                renderSelected()
+                                runSearch()
+                            }
+                        }, '✕')
+                    ))
+                }
+            }
+
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, '派生词（可选）'),
-                    h('button', {
-                        class: 'btn btn--ghost btn--sm', type: 'button',
-                        onclick: () => { data.derivatives.push(''); render() }
-                    }, '＋ 添加')
+                    h('span', { class: 'field__hint' }, '只能选择词库中已存在的词')
                 ),
-                list
+                h('div', { class: 'derivative-picker' },
+                    selected,
+                    h('div', { class: 'field' }, searchInput, hint),
+                    results
+                )
             )
 
-            function render() {
-                list.replaceChildren()
-                data.derivatives.forEach((lemma, idx) => {
-                    list.appendChild(h('div', { class: 'word-form__item', style: { gridTemplateColumns: '1fr auto' } },
-                        h('input', {
-                            class: 'input', placeholder: '派生词的基本形态', value: lemma, lang: lang,
-                            oninput: (e) => { data.derivatives[idx] = e.target.value }
-                        }),
-                        h('button', {
-                            class: 'btn btn--ghost btn--sm', type: 'button',
-                            onclick: () => { data.derivatives.splice(idx, 1); render() }
-                        }, '✕')
-                    ))
-                })
-            }
-            render()
+            renderSelected()
             return group
         }
 
@@ -625,17 +844,21 @@ export default {
             }
 
             const refValue = inflectionRef.value
-            const grammarRef = (refValue && refValue !== SPECIAL_REF) ? refValue : null
+            const grammarRef = (refValue && refValue !== SPECIAL_REF && refValue !== INDECL_REF)
+                ? refValue
+                : null
 
             const payload = {
                 language: lang,
                 lemma,
                 pos: posSelect.value,
+                gender: normalizeGenders(data.gender, posSelect.value),
                 inflectionType: {
                     label: inflectionLabel.value.trim(),
                     grammarRef
                 },
                 paradigm: normalizeParadigm(data.paradigm),
+                stem: normalizeStem(principalInput.value),
                 inflections: cleanList(data.inflections, ['form']),
                 meanings: cleanList(data.meanings, ['text']),
                 collocations: cleanList(data.collocations, ['text']),
@@ -718,26 +941,3 @@ function posLabel(pos) {
     return hit ? hit.label : pos
 }
 
-function collectGrammarOptions(doc, pos) {
-    if (!doc || !Array.isArray(doc.sections)) return []
-
-    const all = []
-    for (const sec of doc.sections) {
-        for (const item of sec.items || []) {
-            if (item && item.id) {
-                all.push({
-                    id: item.id,
-                    label: `${sec.title} · ${item.title}`,
-                    sectionId: sec.id || ''
-                })
-            }
-        }
-    }
-
-    // 未选词性：返回全部
-    if (!pos) return all
-
-    // 按 section id 后缀过滤（如 la-noun / la-verb / la-adj / la-pron）
-    const filtered = all.filter((o) => o.sectionId.endsWith('-' + pos))
-    return filtered.length ? filtered : all
-}

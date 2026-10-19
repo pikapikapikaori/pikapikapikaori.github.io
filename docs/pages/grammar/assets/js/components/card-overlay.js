@@ -1,5 +1,6 @@
 import { h } from '../utils/dom.js'
-import { posLabel, allSources } from '../models/word.js'
+import { posLabel, allSources, stemDisplay } from '../models/word.js'
+import { genderOfColumn } from '../models/grammar.js'
 import { isRtl } from '../utils/text-normalize.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
@@ -21,6 +22,8 @@ export function openCardOverlay(word, opts = {}) {
     const paradigmTpl = opts.paradigmTpl || null
     const onGrammarRef = opts.onGrammarRef || null
     const resolveDerivative = opts.resolveDerivative || null
+    const resolvePosRef = opts.resolvePosRef || null
+    const posGrammarRef = typeof resolvePosRef === 'function' ? resolvePosRef(word.pos) : null
     const onDerivativeClick = opts.onDerivativeClick || null
     const onClose = opts.onClose || null
 
@@ -66,14 +69,36 @@ export function openCardOverlay(word, opts = {}) {
     }
     document.addEventListener('keydown', escHandler)
 
+    /** 名词只显示所选性别的列（其它列整列不渲染） */
+    function hiddenGenderColumns(tpl) {
+        const genders = Array.isArray(word.gender) ? word.gender : []
+        if (word.pos !== 'noun' || genders.length === 0) return []
+        const hidden = []
+        for (const table of tpl?.tables || []) {
+            for (const col of table.columns || []) {
+                const g = genderOfColumn(col.key)
+                if (g && !genders.includes(g)) hidden.push(col.key)
+            }
+        }
+        return hidden
+    }
+
     renderBody()
 
     function renderBody() {
         body.replaceChildren()
 
         /* ---------- 顶部：lemma + badges ---------- */
+        const canPosRef = typeof onGrammarRef === 'function' && !!posGrammarRef
         const badges = h('div', { class: 'card-overlay__badges' },
-            h('span', { class: 'badge' }, posLabel(word.pos))
+            h(canPosRef ? 'button' : 'span', {
+                class: 'badge' + (canPosRef ? ' badge--accent badge--clickable' : ''),
+                type: canPosRef ? 'button' : null,
+                title: canPosRef ? '查看该词性的语法' : null,
+                onclick: canPosRef
+                    ? (e) => { e.stopPropagation(); wrappedGrammarRef(posGrammarRef) }
+                    : null
+            }, posLabel(word.pos))
         )
         const it = word.inflectionType
         if (it && it.label) {
@@ -106,6 +131,13 @@ export function openCardOverlay(word, opts = {}) {
             }))
         }
 
+        /* ---------- 主要部分（在含义之前） ---------- */
+        if (word.stem) {
+            body.appendChild(ovSection('主要部分',
+                h('div', { class: 'word-card__stem', lang: language }, stemDisplay(word.stem))
+            ))
+        }
+
         /* ---------- 含义（最先） ---------- */
         const meanings = pick(word.meanings)
         if (meanings.length) {
@@ -127,7 +159,8 @@ export function openCardOverlay(word, opts = {}) {
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang: language,
                     mode: 'view',
-                    onGrammarRef: wrappedGrammarRef
+                    onGrammarRef: wrappedGrammarRef,
+                    hideColumns: hiddenGenderColumns(paradigmTpl)
                 })
                 if (tbl) body.appendChild(tbl)
             }

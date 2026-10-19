@@ -6,7 +6,7 @@
  */
 
 import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
-import { POS_LIST, normalizeParadigm } from '../models/word.js'
+import { POS_LIST, normalizeParadigm, normalizeStem, normalizeGenders } from '../models/word.js'
 import { addOrMerge } from '../store/word-store.js'
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
@@ -49,6 +49,10 @@ export function validateWord(raw) {
     if (!POS_VALUES.has(pos)) return `未知词性：${pos}`
 
     if (raw.meanings != null && !Array.isArray(raw.meanings)) return 'meanings 不是数组'
+    if (raw.stem != null && typeof raw.stem !== 'string') return 'stem 不是字符串'
+    if (raw.gender != null
+        && !Array.isArray(raw.gender)
+        && typeof raw.gender !== 'string') return 'gender 不是数组'
     if (raw.paradigm != null && (typeof raw.paradigm !== 'object' || Array.isArray(raw.paradigm))) {
         return 'paradigm 不是对象'
     }
@@ -83,6 +87,8 @@ export async function importWords(userId, words) {
                 pos: String(raw.pos).trim(),
                 inflectionType: raw.inflectionType || null,
                 paradigm: normalizeParadigm(raw.paradigm),
+                gender: normalizeGenders(raw.gender, String(raw.pos).trim()),
+                stem: normalizeStem(raw.stem),
                 inflections: raw.inflections || [],
                 meanings: raw.meanings || [],
                 collocations: raw.collocations || [],
@@ -133,6 +139,8 @@ export function buildPrompt(languageCode, grammarDoc) {
     L.push('| inflectionType | object | 否 | `{ "label": string, "grammarRef": string \\| null }` |')
     L.push('| meanings | array | 是 | `[{ "text", "lang": "zh" \\| "en", "source" }]`，至少一条 |')
     L.push('| paradigm | object | 否 | 变位/变格表格，结构见下 |')
+    L.push('| stem | string | 否 | 主要部分（词干），**不写末尾连字符**，如 la `am`、grc `λόγ` |')
+    L.push('| gender | string[] | 否 | 语法性，**仅 pos=noun**；取值 `m` / `f` / `n`，可多选 |')
     L.push('| inflections | array | 否 | 补充形式 `[{ "group"?, "label", "form", "source" }]` |')
     L.push('| collocations | array | 否 | `[{ "text", "gloss", "source" }]` |')
     L.push('| examples | array | 否 | `[{ "text", "translation", "citation", "source" }]` |')
@@ -153,6 +161,10 @@ export function buildPrompt(languageCode, grammarDoc) {
     L.push('```')
     L.push('')
     L.push('**只填有值的格子，空白格不要写。不要编造 key，只能用下面列出的。**')
+    L.push('')
+    L.push('`stem` 是词干：所有词形共有的、其后只追加词尾的不变部分，**不要写末尾的连字符**。')
+    L.push('例：拉丁语 amō / amāre / amāvī → `am`；古希腊语 λόγος / λόγου → `λόγ`。')
+    L.push('尽量取一个能让词尾直接拼接的词干，不要带会随词尾变化的元音。')
     L.push('')
 
     const paradigms = grammarDoc && grammarDoc.paradigms
@@ -235,6 +247,9 @@ function buildExample(languageCode, grammarDoc) {
     } else {
         lines.push('  "paradigm": {},')
     }
+
+    lines.push('  "stem": "在此填词干（不带末尾连字符）",')
+    lines.push('  "gender": ["m"],')
 
     lines.push('  "inflections": [')
     lines.push('    { "group": "补充", "label": "不定式", "form": "在此填词形", "source": "wiktionary" }')

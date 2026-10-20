@@ -673,7 +673,9 @@ export function verifyGrammarDoc(lang, doc, profile) {
         }
 
         // 第一遍：只填基准词干（验证词干变体规则）
-        const res = checkDeriveExample(spec, tpl, { profile })
+        // `expectPartial: true`：expect 只覆盖部分格子（弱根网格很长，只人工核对关键格），
+        // 此时不报「生成了但 expect 未覆盖」的提示
+        const res = checkDeriveExample(spec, tpl, { profile, reportExtra: !spec.expectPartial })
         out.checked++
         report(res, '')
 

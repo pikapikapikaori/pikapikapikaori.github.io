@@ -67,6 +67,33 @@ export async function resolveRef(language, ref) {
     return { ok: true, ref, reason: 'ok' }
 }
 
+/* ---------- 语言档案（derive 的语言专属后期处理） ---------- */
+
+/**
+ * 语言档案位于 /data/paradigm/{lang}.js，导出 accentModes / accent / sandhi。
+ * 没有该文件的语言（如拉丁语）返回 null，通用引擎会跳过重音与连声。
+ */
+const profiles = new Map()  // lang -> profile | null
+
+export async function loadParadigmProfile(language) {
+    if (!language) return null
+    if (profiles.has(language)) return profiles.get(language)
+
+    let profile = null
+    try {
+        profile = await import(`../../../data/paradigm/${encodeURIComponent(language)}.js`)
+    } catch {
+        // 该语言没有专属档案
+    }
+    profiles.set(language, profile)
+    return profile
+}
+
+export function clearProfileCache(language) {
+    if (language) profiles.delete(language)
+    else profiles.clear()
+}
+
 export function clearCache(language) {
     if (language) cache.delete(language)
     else cache.clear()

@@ -585,7 +585,8 @@ const MIGRATIONS = {
 | 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: "LN XX", var(--ff-content); }`；RTL 语言再补 `direction: rtl; unicode-bidi: isolate;`。 |
 | 4 | `assets/css/fonts.css` | 若准备专用字体：把 `xx.woff2` 放到 `assets/resources/fonts/`，并新增/取消对应 `@font-face`（`font-family: "LN XX"`）。没有专用字体可跳过，自动回退到 `--ff-content`。 |
 | 5 | `assets/js/services/wiktionary-service.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
-| 6 | `docs/SCHEMA.md` | 更新第一部分第 3 节的语言元数据表格、第二部分第 4 小节「各语言语法覆盖范围」，以及第 3 小节（锚点 id 命名）的示例表。 |
+| 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见 §7.1。不需要就跳过，引擎会自动略过这两步。 |
+| 7 | `docs/SCHEMA.md` | 更新第一部分第 3 节的语言元数据表格、第二部分第 4 小节「各语言语法覆盖范围」，以及第 3 小节（锚点 id 命名）的示例表。 |
 
 补充说明：
 
@@ -647,7 +648,8 @@ const MIGRATIONS = {
 
 挂在 `sections[].items[]` 上，描述「给定词干 → 生成该类型的表格」的规则。
 
-- 生成逻辑：`assets/js/models/paradigm-generate.js`
+- 生成逻辑：`assets/js/models/paradigm-generate.js`（通用引擎，不 import 任何模块）
+- 语言专属后期处理：`data/paradigm/<lang>.js`（见 §7.1）
 - 自检入口：语言选择页的「校验语法数据（dev）」按钮
 - 入口：生词表单「主要部分」右侧的「生成表格」按钮；没有 `derive` 的类型按钮为禁用状态
 
@@ -682,7 +684,7 @@ const MIGRATIONS = {
 | `stemForms[名称]`               | 词干变体规则：`[{ pattern, replace, flags? }]`（作用于 `base`），或 `{ from, rules }`（先取另一个变体的词干，再套规则，可链式，见下） |
 | `formRules`                     | 拼接后作用于整词的规则 `[{ pattern, replace, flags? }]`，按顺序执行           |
 | `stemOnly`                      | 格级布尔值。整格就是词干本身（如呼格单数与主格同形），不拼接任何词尾        |
-| `post.sandhi`                   | 可选。`"sa"` = 词干与词尾接合处跑梵语连声；`"sa-word"` 或 `{ scope: "word" }` 额外做词尾停顿式 |
+| `post.sandhi`                   | 可选。交给语言档案的连声处理：`"sa"` = 词干与词尾接合处连声；`"sa-word"` 或 `{ scope: "word" }` 额外做词尾停顿式 |
 | `post.accent`                   | 可选。按音节重新指派重音，见下                                              |
 | `expect`                        | 自检期望值，结构同 `paradigm`                                                |
 
@@ -692,9 +694,10 @@ const MIGRATIONS = {
 1. stemForm = 格级 ?? 行级 ?? 'base'
 2. stem     = 用户填的 stems[stemForm] ?? derive.stems[stemForm] ?? 对 base 套用 stemForms[stemForm]
 3. naive    = prefix + stem + suffix
-4. form     = 对 naive 套用 formRules
-5. form     = 按 post.accent 指派重音
-6. 该格已有值 → 跳过，不覆盖
+4. naive    = 有 post.sandhi 时交给 profile.sandhi 处理
+5. form     = 对 naive 套用 formRules
+6. form     = 有 post.accent 时交给 profile.accent 处理
+7. 该格已有值 → 跳过，不覆盖
 ```
 
 约束：
@@ -714,6 +717,29 @@ const MIGRATIONS = {
   2. `caption: "示例：amō, amāre, amāvī, amātum"` —— 完整词形
 
   两张表行列一一对应，`derive.endings` 应与第一张表一致。
+
+### 7.1 语言档案（`data/paradigm/<lang>.js`）
+
+通用引擎只负责「词干 + 词尾 → 拼起来 → 套正则」这套机械流程。
+凡是需要语言学知识的后期处理（音节、重音、连声），一律放到该语言自己的档案文件里，
+由引擎在生成每一格时调用；没有档案文件的语言（如拉丁语）自动跳过这两步。
+
+档案是一个普通 ES 模块，可导出：
+
+| 导出            | 类型                        | 作用                                             |
+| --------------- | --------------------------- | ------------------------------------------------ |
+| `accentModes`   | `string[]`                  | 该语言允许的 `post.accent` 取值；校验器据此报错   |
+| `accent(text, mode, options)` | `function`     | 拼好之后按模式指派重音；`options.endingAccented` 表示该格词尾自带重音 |
+| `sandhi`        | `{ join, wordFinal }`       | `join(左段, 右段)` 做接合处连声；`wordFinal(整词)` 做词尾停顿式 |
+
+- 加载：`services/grammar-service.js` 的 `loadParadigmProfile(lang)`（动态 `import()`，结果缓存，缺失时返回 `null`）。
+- 传播：`generateParadigm({ …, profile })`、`checkDeriveExample(spec, tpl, { profile })`、
+  `verifyGrammarDoc(lang, doc, profile)` / `verifyGrammarDocs([{ lang, doc, profile }])`。
+- 共用工具在引擎里导出：`toUnits` / `fromUnits`（拆成「字母 + 组合记号」）与 `ACUTE` / `CIRCUMFLEX` /
+  `ACCENT_MARKS` / `LENGTH_MARKS` / `hasAccentMark`。
+- 现有档案：[`grc.js`](../data/paradigm/grc.js)（希腊语重音）、[`sa.js`](../data/paradigm/sa.js)（梵语连声 + 吠陀重音）。
+
+---
 
 ### 8. post.accent 字段（按音节指派重音）
 
@@ -760,7 +786,7 @@ const MIGRATIONS = {
 "post": { "sandhi": "sa", "accent": "sa-vedic" }
 ```
 
-**`sandhi`**（`saJoin` / `saWordFinal`）：
+**`sandhi`**（`data/paradigm/sa.js` 的 `join` / `wordFinal`）：
 
 | 类别 | 规则 |
 | --- | --- |

@@ -5,7 +5,10 @@ import { submitWord, editWord, fetchWord, queryWords } from '../services/word-se
 import {
     POS_LIST, GENDERS, normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders
 } from '../models/word.js'
-import { loadGrammar, getParadigmTemplate, getDeriveSpec, getGenderOptions, collectInflectAnchors, genderOfColumn } from '../services/grammar-service.js'
+import {
+    loadGrammar, loadParadigmProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
+    collectInflectAnchors, genderOfColumn
+} from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { generateParadigm } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
@@ -49,6 +52,7 @@ export default {
         ])
 
         const grammarDoc = await loadGrammar(lang)
+        const paradigmProfile = await loadParadigmProfile(lang)
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
         if (isEdit && !data) {
@@ -437,7 +441,8 @@ export default {
                 stems: collectStems(),
                 spec,
                 template: getParadigmTemplate(grammarDoc, data.pos),
-                existing: data.paradigm
+                existing: data.paradigm,
+                profile: paradigmProfile
             })
 
             if (!filled.length) {

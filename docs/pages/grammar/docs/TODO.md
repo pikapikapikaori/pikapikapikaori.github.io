@@ -97,7 +97,16 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 - [x] **梵语（sa）语法数据**：paradigms + 24 个 section / 122 条目（非动词 + 动词十类 + 其余系统）
 - [x] **梵语引擎连声/重音**：`post.sandhi`（`sa` / `sa-word`）与 `post.accent`（`sa` / `sa-vedic`）
 - [x] **梵语 derive 铺开**：15 类名词 + 4 类形容词 + **10 类动词全部**（第二、七类用多词干 `stems` + 格级 `stemForm` 表达连声/强弱的变体）
-- [x] **悉昙文对照**：辅音（独立 / 合写上 / 合写下）、元音（独立 / 附标）、符号；注：Unicode 无独立上标/下标码位，靠 virama 机制，当前字体不做叠合
+- [x] **悉昙文对照**：辅音（独立 / 合写上 / 合写下）、**特殊合写（连字）15 条**（क्ष / ज्ञ / त्र / श्र 等）、
+  元音（独立 / 附标 / **备注**，标注 ḷ / ḹ 吠陀专用）、符号（含 ॐ）；
+  注：Unicode 的悉昙区块无独立上标/下标与连字码位，一律靠 virama 拼接，当前字体不做叠合
+- [x] **Service Worker 缓存版本**：语法数据改动后需 bump `sw.js` 的 `CACHE` 名（现为 v4），否则读到旧数据
+- [x] **derive 按语言拆文件**：语言专属后期处理从 `models/paradigm-generate.js` 拆到 `data/paradigm/<lang>.js`
+  （现为 `grc.js` 重音、`sa.js` 连声 + 吠陀重音），通用引擎只保留机械流程，通过 `profile` 参数注入；
+  加载入口 `grammar-service.loadParadigmProfile(lang)`，文档见 SCHEMA §7.1。
+  拆分后自检结果与拆分前一致：la 23/27、grc 22/28、sa 29/39，错误 0
+- [ ] **希伯来语（he）**：名词补「附属形」与双数，动词按 binyan（qal / nifal / piel / pual /
+  hitpael / hiphil / hofal）分节，动词区分阴阳性；`主要部分` 改为「词根（辅音）」
 - [ ] **优化各语言 paradigms 字段**：统一同一 `pos` 下 `tables[].key` /
   `columns[].key` / `rows[].key` 的命名风格，补齐 `title` 与 `grammarRef`；
   评估 `en` / `zh-cls` / `ja` / `ja-cls` 这些当前不使用 paradigm 的语言是否需要新增模板，

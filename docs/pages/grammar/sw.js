@@ -1,5 +1,5 @@
 /* Service Worker · 缓存应用 shell，数据仍走 IndexedDB */
-const CACHE = 'langnotebook-shell-v3'
+const CACHE = 'langnotebook-shell-v4'
 
 const SHELL = [
     './',
@@ -30,7 +30,6 @@ const SHELL = [
     './assets/js/services/word-service.js',
     './assets/js/services/review-service.js',
     './assets/js/services/grammar-service.js',
-    './assets/js/services/search-service.js',
     './assets/js/services/import-export-service.js',
     './assets/js/services/font-service.js',
     './assets/js/data/languages.js'
@@ -59,8 +58,10 @@ self.addEventListener('fetch', (e) => {
     const url = new URL(req.url)
     if (url.origin !== self.location.origin) return
 
-    // 语法 JSON / 字体：stale-while-revalidate
-    if (url.pathname.includes('/data/grammar/') || url.pathname.includes('/resources/fonts/')) {
+    // 语法 JSON / 语言档案 / 字体：stale-while-revalidate
+    if (url.pathname.includes('/data/grammar/')
+        || url.pathname.includes('/data/paradigm/')
+        || url.pathname.includes('/resources/fonts/')) {
         e.respondWith(swr(req))
         return
     }

@@ -94,6 +94,10 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
   三尾形容词（ācer）、一尾形容词（fēlīx），并修正 mare 型 notes。
 - [x] **la 的代词补全**：加反身代词、物主代词、不定代词，章节顺序与 grc 对齐。
 - [x] **la.json 修掉重复表**：7 个条目的「屈折词尾」表原先各重复 3 份，已各删掉 2 份。
+- [x] **梵语（sa）语法数据**：paradigms + 24 个 section / 122 条目（非动词 + 动词十类 + 其余系统）
+- [x] **梵语引擎连声/重音**：`post.sandhi`（`sa` / `sa-word`）与 `post.accent`（`sa` / `sa-vedic`）
+- [x] **梵语 derive 铺开**：15 类名词 + 4 类形容词 + **10 类动词全部**（第二、七类用多词干 `stems` + 格级 `stemForm` 表达连声/强弱的变体）
+- [x] **悉昙文对照**：辅音（独立 / 合写上 / 合写下）、元音（独立 / 附标）、符号；注：Unicode 无独立上标/下标码位，靠 virama 机制，当前字体不做叠合
 - [ ] **优化各语言 paradigms 字段**：统一同一 `pos` 下 `tables[].key` /
   `columns[].key` / `rows[].key` 的命名风格，补齐 `title` 与 `grammarRef`；
   评估 `en` / `zh-cls` / `ja` / `ja-cls` 这些当前不使用 paradigm 的语言是否需要新增模板，

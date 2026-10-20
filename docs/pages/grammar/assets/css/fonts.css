@@ -31,6 +31,14 @@
 
 /* 各语言专用字体：字体文件就绪后取消注释 */
 
+/* 悉昙文（sa-script 章节用）；unicode-range 只覆盖 Siddham 区，其余字符自动回退 */
+@font-face {
+  font-family: "LN SIDDHAM";
+  src: url("../resources/fonts/siddham.woff2") format("woff2");
+  font-display: swap;
+  unicode-range: U+200C-200D, U+25CC, U+11580-115FF;
+}
+
 /* @font-face {
   font-family: "LN LA";
   src: url("../resources/fonts/la.woff2") format("woff2");

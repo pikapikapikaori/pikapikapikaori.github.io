@@ -71,7 +71,12 @@ pre,
 }
 
 [lang="sa"] {
-    font-family: "LN SA", var(--ff-content);
+    font-family: "LN SA", "Noto Sans Devanagari", var(--ff-content);
+}
+
+/* 悉昙文列：字体只覆盖 Siddham 区，天城文 / 拉丁自动回退 */
+[lang="sa-siddham"] {
+    font-family: "LN SIDDHAM", var(--ff-content);
 }
 
 [lang="mnc"] {

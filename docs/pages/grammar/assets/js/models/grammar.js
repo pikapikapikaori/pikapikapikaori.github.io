@@ -121,6 +121,14 @@ function sectionBelongsTo(sectionId, lang, pos) {
     return sectionId === base || String(sectionId).startsWith(base + '-')
 }
 
+/** 徽章用的短名：保留末尾括号里的关键信息（例词），去掉括号后的举例尾巴 */
+function shortLabel(title) {
+    const text = String(title || '').trim()
+    const m = /^(.*?)[（(]([^（）()]*)[）)](?:[　\s].*)?$/.exec(text)
+    if (m) return `${m[1].trim()}（${m[2].trim()}）`
+    return text.split('　')[0].trim() || text
+}
+
 /**
  * 收集可作「变格 / 变位类型」的锚点：只取带 inflect 标记的 section / item
  * @returns {{ id: string, label: string, kind: 'decl'|'conj' }[]}
@@ -137,7 +145,7 @@ export function collectInflectAnchors(doc, lang, pos) {
             out.push({
                 id: section.id,
                 label: section.title || section.id,
-                short: String(section.title || section.id).split(/[　\s]/)[0],
+                short: shortLabel(section.title || section.id),
                 kind: section.inflect
             })
         }
@@ -151,6 +159,12 @@ export function collectInflectAnchors(doc, lang, pos) {
             })
         }
     }
+
+    // 短名撞车时退回完整标题（如古希腊语四个「第二变位法」）
+    const seen = new Map()
+    for (const a of out) seen.set(a.short, (seen.get(a.short) || 0) + 1)
+    for (const a of out) if (seen.get(a.short) > 1) a.short = a.label
+
     return out
 }
 

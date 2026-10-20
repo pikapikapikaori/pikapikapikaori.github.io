@@ -145,7 +145,9 @@ export default {
             value: data.lemma,
             lang: lang,
             required: true,
-            disabled: isEdit
+            disabled: isEdit,
+            // 基本形态可以推出词干（stemForms.base.from = 'headword'）时影响生成按钮
+            oninput: () => refreshGenerateBtn()
         })
 
         const lookupBtn = h('button', {
@@ -180,6 +182,7 @@ export default {
                     inflectionLabel.value = indeclinableLabel(posSelect.value)
                 }
                 renderExtraParts()
+                renderParadigmBlock()
                 refreshGenerateBtn()
             }
         })
@@ -389,18 +392,30 @@ export default {
                 '以下主要部分可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。'))
 
             for (const part of parts) {
-                const input = h('input', {
-                    class: 'input',
-                    type: 'text',
-                    lang: lang,
-                    placeholder: part.example || '',
-                    value: data.stems[part.key] || '',
-                    oninput: (e) => {
-                        const value = normalizeStem(e.target.value)
-                        if (value) data.stems[part.key] = value
-                        else delete data.stems[part.key]
-                    }
-                })
+                const setValue = (raw) => {
+                    const value = String(raw ?? '').trim()
+                    if (value) data.stems[part.key] = value
+                    else delete data.stems[part.key]
+                }
+                // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）
+                const input = part.kind === 'select'
+                    ? h('select', {
+                        class: 'select',
+                        onchange: (e) => setValue(e.target.value)
+                    },
+                    h('option', { value: '', selected: !data.stems[part.key] }, '（未填写）'),
+                    ...(part.options || []).map((opt) => h('option', {
+                        value: opt,
+                        selected: data.stems[part.key] === opt
+                    }, opt)))
+                    : h('input', {
+                        class: 'input',
+                        type: 'text',
+                        lang: lang,
+                        placeholder: part.example || '',
+                        value: data.stems[part.key] || '',
+                        oninput: (e) => setValue(normalizeStem(e.target.value))
+                    })
                 extraPartsSlot.appendChild(h('label', { class: 'field field--part' },
                     h('span', { class: 'field__label' }, part.label || part.key),
                     input,
@@ -423,9 +438,12 @@ export default {
         function refreshGenerateBtn() {
             const spec = currentDeriveSpec()
             const hasStem = !!normalizeStem(principalInput.value)
-            generateBtn.disabled = !spec || !hasStem
+            // base 可以由基本形态（lemma）推出时，不强制填主要部分
+            const fromHeadword = !!(spec && (spec.stemForms?.base || spec.stems?.base)
+                && normalizeStem(lemmaInput?.value))
+            generateBtn.disabled = !spec || (!hasStem && !fromHeadword)
             if (!spec) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
-            else if (!hasStem) generateBtn.title = '请先填写主要部分'
+            else if (!hasStem && !fromHeadword) generateBtn.title = '请先填写基本形态或主要部分'
             else generateBtn.title = '按主要部分和词尾规则自动填表'
         }
 
@@ -434,9 +452,10 @@ export default {
             if (!spec) return
 
             const stem = normalizeStem(principalInput.value)
-            if (!stem) {
-                toast.error('请先填写主要部分')
-                principalInput.focus()
+            const fromHeadword = !!((spec.stemForms?.base || spec.stems?.base) && normalizeStem(lemmaInput.value))
+            if (!stem && !fromHeadword) {
+                toast.error('请先填写基本形态或主要部分')
+                ;(stem ? principalInput : lemmaInput).focus()
                 return
             }
 
@@ -491,6 +510,10 @@ export default {
             const tpl = getParadigmTemplate(grammarDoc, data.pos)
             if (!tpl) return
 
+            // 锚点的 derive.skipTables：该类型没有的语式（如情态动词没有命令式）不渲染表格
+            const spec = currentDeriveSpec()
+            const skip = Array.isArray(spec?.skipTables) ? spec.skipTables : []
+
             const wrap = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, `${posLabel(data.pos)}变${data.pos === 'verb' ? '位' : '格'}表格`),
@@ -499,6 +522,7 @@ export default {
             )
 
             for (const tableTpl of tpl.tables || []) {
+                if (skip.includes(tableTpl.key)) continue
                 const tableData = data.paradigm[tableTpl.key] || {}
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang,

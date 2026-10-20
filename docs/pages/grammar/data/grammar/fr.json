@@ -2368,7 +2368,7 @@
                             ]
                         }
                     ],
-                    "notes": "简单时态由一个动词形式构成（现在时、未完成过去时、简单过去时、简单将来时、条件式现在时、虚拟式现在时/未完成过去时、命令式现在时）；复合时态由「助动词 + 过去分词」构成，不列入变位表，见「复合时态」条目。"
+                    "notes": "**词条的基本形态（lemma）一律用不定式**（parler / finir / vendre）；变位表由基本形态自动推出——第一 / 第二组与第三组各模式都只需填不定式，只有过去分词不规则时才在「主要部分」里补填。\n\n简单时态由一个动词形式构成（现在时、未完成过去时、简单过去时、简单将来时、条件式现在时、虚拟式现在时/未完成过去时、命令式现在时）；复合时态由「助动词 + 过去分词」构成，不列入变位表，见「复合时态」条目。"
                 },
                 {
                     "id": "fr-verb-compound",
@@ -2755,27 +2755,25 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "parl",
+                "headwordExample": "parler",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干",
-                        "example": "parl",
-                        "required": true
-                    },
-                    {
-                        "key": "fut",
-                        "label": "将来时词干",
-                        "example": "parler",
-                        "hint": "留空 = 现在时词干 + er"
-                    },
-                    {
                         "key": "pp",
-                        "label": "过去分词词干",
+                        "label": "过去分词（不规则时填）",
                         "example": "parlé",
                         "hint": "留空 = 现在时词干 + é"
                     }
                 ],
                 "stemForms": {
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "er$",
+                                "replace": ""
+                            }
+                        ]
+                    },
                     "fut": [
                         {
                             "pattern": "$",
@@ -3428,33 +3426,25 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "fin",
+                "headwordExample": "finir",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干",
-                        "example": "fin",
-                        "required": true
-                    },
-                    {
-                        "key": "iss",
-                        "label": "复数词干（-iss-）",
-                        "example": "finiss",
-                        "hint": "留空 = 现在时词干 + iss"
-                    },
-                    {
-                        "key": "fut",
-                        "label": "将来时词干",
-                        "example": "finir",
-                        "hint": "留空 = 现在时词干 + ir"
-                    },
-                    {
                         "key": "pp",
-                        "label": "过去分词词干",
+                        "label": "过去分词（不规则时填）",
                         "example": "fini",
                         "hint": "留空 = 现在时词干 + i"
                     }
                 ],
                 "stemForms": {
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "ir$",
+                                "replace": ""
+                            }
+                        ]
+                    },
                     "iss": [
                         {
                             "pattern": "$",
@@ -4177,12 +4167,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "vend",
+                "headwordExample": "vendre",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干（去掉 -re）",
-                        "example": "vend",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "vendu",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -4203,7 +4194,16 @@
                             "pattern": "$",
                             "replace": "i"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "re$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -4842,12 +4842,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "recev",
+                "headwordExample": "recevoir",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干（第一、二人称复数）",
-                        "example": "recev",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "reçu",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -4895,7 +4896,16 @@
                             "pattern": "$",
                             "replace": "r"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "oir$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -5575,12 +5585,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "part",
+                "headwordExample": "partir",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干（第三人称单数形）",
-                        "example": "part",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "parti",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -5601,7 +5612,16 @@
                             "pattern": "t$",
                             "replace": ""
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "ir$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -6233,12 +6253,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "ven",
+                "headwordExample": "venir",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干（第一、二人称复数）",
-                        "example": "ven",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "venu",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -6283,7 +6304,16 @@
                             "pattern": "$",
                             "replace": "u"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "ir$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -6963,12 +6993,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "prend",
+                "headwordExample": "prendre",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干（单数）",
-                        "example": "prend",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "pris",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -7007,7 +7038,16 @@
                             "pattern": "$",
                             "replace": "r"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "re$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -7722,12 +7762,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "mett",
+                "headwordExample": "mettre",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干（第一、二人称复数）",
-                        "example": "mett",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "mis",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -7760,7 +7801,16 @@
                             "pattern": "$",
                             "replace": "r"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "re$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -8430,12 +8480,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "connaiss",
+                "headwordExample": "connaître",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时复数词干（-iss-）",
-                        "example": "connaiss",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "connu",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -8474,7 +8525,16 @@
                             "pattern": "aiss$",
                             "replace": "û"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "ître$",
+                                "replace": "iss"
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -9147,12 +9207,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "conduis",
+                "headwordExample": "conduire",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时单数词干",
-                        "example": "conduis",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "conduit",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -9179,7 +9240,16 @@
                             "pattern": "s$",
                             "replace": "t"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "re$",
+                                "replace": "s"
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -9813,12 +9883,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "peins",
+                "headwordExample": "peindre",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时单数词干",
-                        "example": "peins",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "peint",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -9851,7 +9922,16 @@
                             "pattern": "s$",
                             "replace": "t"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "dre$",
+                                "replace": "s"
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {
@@ -10569,12 +10649,13 @@
             "derive": {
                 "pos": "verb",
                 "stemExample": "ouvr",
+                "headwordExample": "ouvrir",
                 "parts": [
                     {
-                        "key": "base",
-                        "label": "现在时词干",
-                        "example": "ouvr",
-                        "required": true
+                        "key": "pp",
+                        "label": "过去分词（不规则时填）",
+                        "example": "ouvert",
+                        "hint": "留空按本类型的规则推导"
                     }
                 ],
                 "stemForms": {
@@ -10589,7 +10670,16 @@
                             "pattern": "r$",
                             "replace": "ert"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "ir$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "rowDefaults": {},
                 "endings": {

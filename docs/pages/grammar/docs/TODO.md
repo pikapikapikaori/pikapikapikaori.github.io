@@ -91,7 +91,7 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
   `stems: { base, perf, ppp, ... }`（导出 v1 → v2 自动迁移）；表单按 `parts` 渲染额外输入框，
   留空按规则从 `base` 推导、填了就覆盖；自检跑两遍（只填 base / 主要部分全填）。
 - [x] **la 第三变格补洞**：animal / calcar 型中性、turris 型（宾格 -im、夺格 -ī）、
-  三终止形容词（ācer）、一终止形容词（fēlīx），并修正 mare 型 notes。
+  三尾形容词（ācer）、一尾形容词（fēlīx），并修正 mare 型 notes。
 - [x] **la 的代词补全**：加反身代词、物主代词、不定代词，章节顺序与 grc 对齐。
 - [x] **la.json 修掉重复表**：7 个条目的「屈折词尾」表原先各重复 3 份，已各删掉 2 份。
 - [ ] **优化各语言 paradigms 字段**：统一同一 `pos` 下 `tables[].key` /

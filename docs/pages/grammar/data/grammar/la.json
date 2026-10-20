@@ -277,20 +277,20 @@
                             "label": "第一人称单数"
                         },
                         {
-                            "key": "1pl",
-                            "label": "第一人称复数"
-                        },
-                        {
                             "key": "2sg",
                             "label": "第二人称单数"
                         },
                         {
-                            "key": "2pl",
-                            "label": "第二人称复数"
-                        },
-                        {
                             "key": "3sg",
                             "label": "第三人称单数"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "第一人称复数"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "第二人称复数"
                         },
                         {
                             "key": "3pl",
@@ -345,20 +345,20 @@
                             "label": "第一人称单数"
                         },
                         {
-                            "key": "1pl",
-                            "label": "第一人称复数"
-                        },
-                        {
                             "key": "2sg",
                             "label": "第二人称单数"
                         },
                         {
-                            "key": "2pl",
-                            "label": "第二人称复数"
-                        },
-                        {
                             "key": "3sg",
                             "label": "第三人称单数"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "第一人称复数"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "第二人称复数"
                         },
                         {
                             "key": "3pl",
@@ -393,20 +393,20 @@
                             "label": "第一人称单数"
                         },
                         {
-                            "key": "1pl",
-                            "label": "第一人称复数"
-                        },
-                        {
                             "key": "2sg",
                             "label": "第二人称单数"
                         },
                         {
-                            "key": "2pl",
-                            "label": "第二人称复数"
-                        },
-                        {
                             "key": "3sg",
                             "label": "第三人称单数"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "第一人称复数"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "第二人称复数"
                         },
                         {
                             "key": "3pl",
@@ -451,20 +451,20 @@
                             "label": "第一人称单数"
                         },
                         {
-                            "key": "1pl",
-                            "label": "第一人称复数"
-                        },
-                        {
                             "key": "2sg",
                             "label": "第二人称单数"
                         },
                         {
-                            "key": "2pl",
-                            "label": "第二人称复数"
-                        },
-                        {
                             "key": "3sg",
                             "label": "第三人称单数"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "第一人称复数"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "第二人称复数"
                         },
                         {
                             "key": "3pl",
@@ -491,20 +491,20 @@
                             "label": "第一人称单数"
                         },
                         {
-                            "key": "1pl",
-                            "label": "第一人称复数"
-                        },
-                        {
                             "key": "2sg",
                             "label": "第二人称单数"
                         },
                         {
-                            "key": "2pl",
-                            "label": "第二人称复数"
-                        },
-                        {
                             "key": "3sg",
                             "label": "第三人称单数"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "第一人称复数"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "第二人称复数"
                         },
                         {
                             "key": "3pl",
@@ -531,20 +531,20 @@
                             "label": "第一人称单数"
                         },
                         {
-                            "key": "1pl",
-                            "label": "第一人称复数"
-                        },
-                        {
                             "key": "2sg",
                             "label": "第二人称单数"
                         },
                         {
-                            "key": "2pl",
-                            "label": "第二人称复数"
-                        },
-                        {
                             "key": "3sg",
                             "label": "第三人称单数"
+                        },
+                        {
+                            "key": "1pl",
+                            "label": "第一人称复数"
+                        },
+                        {
+                            "key": "2pl",
+                            "label": "第二人称复数"
                         },
                         {
                             "key": "3pl",
@@ -592,18 +592,22 @@
                 },
                 {
                     "key": "ptcp",
-                    "title": "分词",
+                    "title": "分词（三尾 / 二尾）",
                     "columns": [
                         {
-                            "key": "form",
-                            "label": "形式"
+                            "key": "m",
+                            "label": "阳性"
+                        },
+                        {
+                            "key": "f",
+                            "label": "阴性"
+                        },
+                        {
+                            "key": "n",
+                            "label": "中性"
                         }
                     ],
                     "rows": [
-                        {
-                            "key": "pres-act",
-                            "label": "现在时 主动"
-                        },
                         {
                             "key": "perf-pass",
                             "label": "完成时 被动"
@@ -615,6 +619,22 @@
                         {
                             "key": "fut-pass",
                             "label": "将来时 被动（动形词）"
+                        }
+                    ]
+                },
+                {
+                    "key": "ptcp1",
+                    "title": "分词（一尾）",
+                    "columns": [
+                        {
+                            "key": "form",
+                            "label": "形式"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "pres-act",
+                            "label": "现在时 主动"
                         }
                     ]
                 },
@@ -4245,7 +4265,7 @@
                 },
                 {
                     "id": "la-adj-3rd",
-                    "title": "第三变格形容词（fortis, -e 二终止型）",
+                    "title": "第三变格形容词（二尾：fortis, -e）",
                     "inflect": "decl",
                     "derive": {
                         "pos": "adj",
@@ -4495,11 +4515,11 @@
                             "lang": "la"
                         }
                     ],
-                    "notes": "二终止（fortis, -e）：阳 / 阴性同形，中性 -e。三终止（ācer, ācris, ācre）与一终止（fēlīx）在此基础上替换词干。"
+                    "notes": "二尾（fortis, -e）：阳 / 阴性同形，中性 -e。三尾（ācer, ācris, ācre）与一尾（fēlīx）在此基础上替换词干。"
                 },
                 {
                     "id": "la-adj-3rd-3term",
-                    "title": "第三变格形容词（三终止：ācer, ācris, ācre）",
+                    "title": "第三变格形容词（三尾：ācer, ācris, ācre）",
                     "inflect": "decl",
                     "derive": {
                         "pos": "adj",
@@ -4763,11 +4783,11 @@
                             "lang": "la"
                         }
                     ],
-                    "notes": "阳性主格把词干末的 r 变成 -er，阴性 -is、中性 -e；其余同二终止型。同类有 celer（词干 celer-）、pulcher（词干 pulchr-）。"
+                    "notes": "阳性主格把词干末的 r 变成 -er，阴性 -is、中性 -e；其余同二尾型。同类有 celer（词干 celer-）、pulcher（词干 pulchr-）。"
                 },
                 {
                     "id": "la-adj-3rd-1term",
-                    "title": "第三变格形容词（一终止：fēlīx, fēlīcis）",
+                    "title": "第三变格形容词（一尾：fēlīx, fēlīcis）",
                     "inflect": "decl",
                     "derive": {
                         "pos": "adj",
@@ -5380,34 +5400,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "-ō",
-                            "1pl": "-āmus",
                             "2sg": "-ās",
-                            "2pl": "-ātis",
                             "3sg": "-at",
+                            "1pl": "-āmus",
+                            "2pl": "-ātis",
                             "3pl": "-ant"
                         },
                         "pres-pass-ind": {
                             "1sg": "-or",
-                            "1pl": "-āmur",
                             "2sg": "-āris",
-                            "2pl": "-āminī",
                             "3sg": "-ātur",
+                            "1pl": "-āmur",
+                            "2pl": "-āminī",
                             "3pl": "-antur"
                         },
                         "pres-act-subj": {
                             "1sg": "-em",
-                            "1pl": "-ēmus",
                             "2sg": "-ēs",
-                            "2pl": "-ētis",
                             "3sg": "-et",
+                            "1pl": "-ēmus",
+                            "2pl": "-ētis",
                             "3pl": "-ent"
                         },
                         "pres-pass-subj": {
                             "1sg": "-er",
-                            "1pl": "-ēmur",
                             "2sg": "-ēris",
-                            "2pl": "-ēminī",
                             "3sg": "-ētur",
+                            "1pl": "-ēmur",
+                            "2pl": "-ēminī",
                             "3pl": "-entur"
                         },
                         "pres-act-impr": {
@@ -5422,58 +5442,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "-ābam",
-                            "1pl": "-ābāmus",
                             "2sg": "-ābās",
-                            "2pl": "-ābātis",
                             "3sg": "-ābat",
+                            "1pl": "-ābāmus",
+                            "2pl": "-ābātis",
                             "3pl": "-ābant"
                         },
                         "impf-pass-ind": {
                             "1sg": "-ābar",
-                            "1pl": "-ābāmur",
                             "2sg": "-ābāris",
-                            "2pl": "-ābāminī",
                             "3sg": "-ābātur",
+                            "1pl": "-ābāmur",
+                            "2pl": "-ābāminī",
                             "3pl": "-ābantur"
                         },
                         "impf-act-subj": {
                             "1sg": "-ārem",
-                            "1pl": "-ārēmus",
                             "2sg": "-ārēs",
-                            "2pl": "-ārētis",
                             "3sg": "-āret",
+                            "1pl": "-ārēmus",
+                            "2pl": "-ārētis",
                             "3pl": "-ārent"
                         },
                         "impf-pass-subj": {
                             "1sg": "-ārer",
-                            "1pl": "-ārēmur",
                             "2sg": "-ārēris",
-                            "2pl": "-ārēminī",
                             "3sg": "-ārētur",
+                            "1pl": "-ārēmur",
+                            "2pl": "-ārēminī",
                             "3pl": "-ārentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "-ābō",
-                            "1pl": "-ābimus",
                             "2sg": "-ābis",
-                            "2pl": "-ābitis",
                             "3sg": "-ābit",
+                            "1pl": "-ābimus",
+                            "2pl": "-ābitis",
                             "3pl": "-ābunt"
                         },
                         "fut-pass-ind": {
                             "1sg": "-ābor",
-                            "1pl": "-ābimur",
                             "2sg": "-āberis",
-                            "2pl": "-ābiminī",
                             "3sg": "-ābitur",
+                            "1pl": "-ābimur",
+                            "2pl": "-ābiminī",
                             "3pl": "-ābuntur"
                         },
                         "fut-act-impr": {
                             "2sg": "-ātō",
-                            "2pl": "-ātōte",
                             "3sg": "-ātō",
+                            "2pl": "-ātōte",
                             "3pl": "-antō"
                         },
                         "fut-pass-impr": {
@@ -5484,46 +5504,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "-ī",
-                            "1pl": "-imus",
                             "2sg": "-istī",
-                            "2pl": "-istis",
                             "3sg": "-it",
+                            "1pl": "-imus",
+                            "2pl": "-istis",
                             "3pl": "-ērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "-erim",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "-eram",
-                            "1pl": "-erāmus",
                             "2sg": "-erās",
-                            "2pl": "-erātis",
                             "3sg": "-erat",
+                            "1pl": "-erāmus",
+                            "2pl": "-erātis",
                             "3pl": "-erant"
                         },
                         "plup-act-subj": {
                             "1sg": "-issem",
-                            "1pl": "-issēmus",
                             "2sg": "-issēs",
-                            "2pl": "-issētis",
                             "3sg": "-isset",
+                            "1pl": "-issēmus",
+                            "2pl": "-issētis",
                             "3pl": "-issent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "-erō",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
@@ -5545,17 +5565,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "-āns"
-                        },
                         "perf-pass": {
-                            "form": "-us"
+                            "m": "-us",
+                            "f": "-a",
+                            "n": "-um"
                         },
                         "fut-act": {
-                            "form": "-ūrus"
+                            "m": "-ūrus",
+                            "f": "-ūra",
+                            "n": "-ūrum"
                         },
                         "fut-pass": {
-                            "form": "-andus"
+                            "m": "-andus",
+                            "f": "-anda",
+                            "n": "-andum"
                         }
                     },
                     "gerund": {
@@ -5578,6 +5601,11 @@
                         },
                         "abl": {
                             "form": "-ū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "-āns"
                         }
                     }
                 },
@@ -5635,34 +5663,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "amō",
-                            "1pl": "amāmus",
                             "2sg": "amās",
-                            "2pl": "amātis",
                             "3sg": "amat",
+                            "1pl": "amāmus",
+                            "2pl": "amātis",
                             "3pl": "amant"
                         },
                         "pres-pass-ind": {
                             "1sg": "amor",
-                            "1pl": "amāmur",
                             "2sg": "amāris",
-                            "2pl": "amāminī",
                             "3sg": "amātur",
+                            "1pl": "amāmur",
+                            "2pl": "amāminī",
                             "3pl": "amantur"
                         },
                         "pres-act-subj": {
                             "1sg": "amem",
-                            "1pl": "amēmus",
                             "2sg": "amēs",
-                            "2pl": "amētis",
                             "3sg": "amet",
+                            "1pl": "amēmus",
+                            "2pl": "amētis",
                             "3pl": "ament"
                         },
                         "pres-pass-subj": {
                             "1sg": "amer",
-                            "1pl": "amēmur",
                             "2sg": "amēris",
-                            "2pl": "amēminī",
                             "3sg": "amētur",
+                            "1pl": "amēmur",
+                            "2pl": "amēminī",
                             "3pl": "amentur"
                         },
                         "pres-act-impr": {
@@ -5677,58 +5705,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "amābam",
-                            "1pl": "amābāmus",
                             "2sg": "amābās",
-                            "2pl": "amābātis",
                             "3sg": "amābat",
+                            "1pl": "amābāmus",
+                            "2pl": "amābātis",
                             "3pl": "amābant"
                         },
                         "impf-pass-ind": {
                             "1sg": "amābar",
-                            "1pl": "amābāmur",
                             "2sg": "amābāris",
-                            "2pl": "amābāminī",
                             "3sg": "amābātur",
+                            "1pl": "amābāmur",
+                            "2pl": "amābāminī",
                             "3pl": "amābantur"
                         },
                         "impf-act-subj": {
                             "1sg": "amārem",
-                            "1pl": "amārēmus",
                             "2sg": "amārēs",
-                            "2pl": "amārētis",
                             "3sg": "amāret",
+                            "1pl": "amārēmus",
+                            "2pl": "amārētis",
                             "3pl": "amārent"
                         },
                         "impf-pass-subj": {
                             "1sg": "amārer",
-                            "1pl": "amārēmur",
                             "2sg": "amārēris",
-                            "2pl": "amārēminī",
                             "3sg": "amārētur",
+                            "1pl": "amārēmur",
+                            "2pl": "amārēminī",
                             "3pl": "amārentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "amābō",
-                            "1pl": "amābimus",
                             "2sg": "amābis",
-                            "2pl": "amābitis",
                             "3sg": "amābit",
+                            "1pl": "amābimus",
+                            "2pl": "amābitis",
                             "3pl": "amābunt"
                         },
                         "fut-pass-ind": {
                             "1sg": "amābor",
-                            "1pl": "amābimur",
                             "2sg": "amāberis",
-                            "2pl": "amābiminī",
                             "3sg": "amābitur",
+                            "1pl": "amābimur",
+                            "2pl": "amābiminī",
                             "3pl": "amābuntur"
                         },
                         "fut-act-impr": {
                             "2sg": "amātō",
-                            "2pl": "amātōte",
                             "3sg": "amātō",
+                            "2pl": "amātōte",
                             "3pl": "amantō"
                         },
                         "fut-pass-impr": {
@@ -5739,46 +5767,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "amāvī",
-                            "1pl": "amāvimus",
                             "2sg": "amāvistī",
-                            "2pl": "amāvistis",
                             "3sg": "amāvit",
+                            "1pl": "amāvimus",
+                            "2pl": "amāvistis",
                             "3pl": "amāvērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "amāverim",
-                            "1pl": "amāverimus",
                             "2sg": "amāveris",
-                            "2pl": "amāveritis",
                             "3sg": "amāverit",
+                            "1pl": "amāverimus",
+                            "2pl": "amāveritis",
                             "3pl": "amāverint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "amāveram",
-                            "1pl": "amāverāmus",
                             "2sg": "amāverās",
-                            "2pl": "amāverātis",
                             "3sg": "amāverat",
+                            "1pl": "amāverāmus",
+                            "2pl": "amāverātis",
                             "3pl": "amāverant"
                         },
                         "plup-act-subj": {
                             "1sg": "amāvissem",
-                            "1pl": "amāvissēmus",
                             "2sg": "amāvissēs",
-                            "2pl": "amāvissētis",
                             "3sg": "amāvisset",
+                            "1pl": "amāvissēmus",
+                            "2pl": "amāvissētis",
                             "3pl": "amāvissent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "amāverō",
-                            "1pl": "amāverimus",
                             "2sg": "amāveris",
-                            "2pl": "amāveritis",
                             "3sg": "amāverit",
+                            "1pl": "amāverimus",
+                            "2pl": "amāveritis",
                             "3pl": "amāverint"
                         }
                     },
@@ -5800,17 +5828,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "amāns"
-                        },
                         "perf-pass": {
-                            "form": "amātus"
+                            "m": "amātus",
+                            "f": "amāta",
+                            "n": "amātum"
                         },
                         "fut-act": {
-                            "form": "amātūrus"
+                            "m": "amātūrus",
+                            "f": "amātūra",
+                            "n": "amātūrum"
                         },
                         "fut-pass": {
-                            "form": "amandus"
+                            "m": "amandus",
+                            "f": "amanda",
+                            "n": "amandum"
                         }
                     },
                     "gerund": {
@@ -5833,6 +5864,11 @@
                         },
                         "abl": {
                             "form": "amātū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "amāns"
                         }
                     }
                 },
@@ -5881,65 +5917,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ō",
-                                    "-āmus",
                                     "-ās",
-                                    "-ātis",
                                     "-at",
+                                    "-āmus",
+                                    "-ātis",
                                     "-ant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-or",
-                                    "-āmur",
                                     "-āris",
-                                    "-āminī",
                                     "-ātur",
+                                    "-āmur",
+                                    "-āminī",
                                     "-antur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-em",
-                                    "-ēmus",
                                     "-ēs",
-                                    "-ētis",
                                     "-et",
+                                    "-ēmus",
+                                    "-ētis",
                                     "-ent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-er",
-                                    "-ēmur",
                                     "-ēris",
-                                    "-ēminī",
                                     "-ētur",
+                                    "-ēmur",
+                                    "-ēminī",
                                     "-entur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "-ā",
-                                    "-āte",
                                     "—",
+                                    "—",
+                                    "-āte",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "-āre",
-                                    "-āminī",
                                     "—",
+                                    "—",
+                                    "-āminī",
                                     "—"
                                 ]
                             ]
@@ -5949,65 +5985,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "amō",
-                                    "amāmus",
                                     "amās",
-                                    "amātis",
                                     "amat",
+                                    "amāmus",
+                                    "amātis",
                                     "amant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "amor",
-                                    "amāmur",
                                     "amāris",
-                                    "amāminī",
                                     "amātur",
+                                    "amāmur",
+                                    "amāminī",
                                     "amantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "amem",
-                                    "amēmus",
                                     "amēs",
-                                    "amētis",
                                     "amet",
+                                    "amēmus",
+                                    "amētis",
                                     "ament"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "amer",
-                                    "amēmur",
                                     "amēris",
-                                    "amēminī",
                                     "amētur",
+                                    "amēmur",
+                                    "amēminī",
                                     "amentur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "amā",
-                                    "amāte",
                                     "—",
+                                    "—",
+                                    "amāte",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "amāre",
-                                    "amāminī",
                                     "—",
+                                    "—",
+                                    "amāminī",
                                     "—"
                                 ]
                             ]
@@ -6023,47 +6059,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ābam",
-                                    "-ābāmus",
                                     "-ābās",
-                                    "-ābātis",
                                     "-ābat",
+                                    "-ābāmus",
+                                    "-ābātis",
                                     "-ābant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ābar",
-                                    "-ābāmur",
                                     "-ābāris",
-                                    "-ābāminī",
                                     "-ābātur",
+                                    "-ābāmur",
+                                    "-ābāminī",
                                     "-ābantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-ārem",
-                                    "-ārēmus",
                                     "-ārēs",
-                                    "-ārētis",
                                     "-āret",
+                                    "-ārēmus",
+                                    "-ārētis",
                                     "-ārent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-ārer",
-                                    "-ārēmur",
                                     "-ārēris",
-                                    "-ārēminī",
                                     "-ārētur",
+                                    "-ārēmur",
+                                    "-ārēminī",
                                     "-ārentur"
                                 ]
                             ]
@@ -6073,47 +6109,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "amābam",
-                                    "amābāmus",
                                     "amābās",
-                                    "amābātis",
                                     "amābat",
+                                    "amābāmus",
+                                    "amābātis",
                                     "amābant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "amābar",
-                                    "amābāmur",
                                     "amābāris",
-                                    "amābāminī",
                                     "amābātur",
+                                    "amābāmur",
+                                    "amābāminī",
                                     "amābantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "amārem",
-                                    "amārēmus",
                                     "amārēs",
-                                    "amārētis",
                                     "amāret",
+                                    "amārēmus",
+                                    "amārētis",
                                     "amārent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "amārer",
-                                    "amārēmur",
                                     "amārēris",
-                                    "amārēminī",
                                     "amārētur",
+                                    "amārēmur",
+                                    "amārēminī",
                                     "amārentur"
                                 ]
                             ]
@@ -6129,47 +6165,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ābō",
-                                    "-ābimus",
                                     "-ābis",
-                                    "-ābitis",
                                     "-ābit",
+                                    "-ābimus",
+                                    "-ābitis",
                                     "-ābunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ābor",
-                                    "-ābimur",
                                     "-āberis",
-                                    "-ābiminī",
                                     "-ābitur",
+                                    "-ābimur",
+                                    "-ābiminī",
                                     "-ābuntur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "-ātō",
+                                    "-ātō",
                                     "—",
-                                    "-ātō",
                                     "-ātōte",
-                                    "-ātō",
                                     "-antō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "-ātor",
+                                    "—",
+                                    "—",
                                     "-antor"
                                 ]
                             ]
@@ -6179,47 +6215,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "amābō",
-                                    "amābimus",
                                     "amābis",
-                                    "amābitis",
                                     "amābit",
+                                    "amābimus",
+                                    "amābitis",
                                     "amābunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "amābor",
-                                    "amābimur",
                                     "amāberis",
-                                    "amābiminī",
                                     "amābitur",
+                                    "amābimur",
+                                    "amābiminī",
                                     "amābuntur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "amātō",
+                                    "amātō",
                                     "—",
-                                    "amātō",
                                     "amātōte",
-                                    "amātō",
                                     "amantō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "amātor",
+                                    "—",
+                                    "—",
                                     "amantor"
                                 ]
                             ]
@@ -6235,29 +6271,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ī",
-                                    "-imus",
                                     "-istī",
-                                    "-istis",
                                     "-it",
+                                    "-imus",
+                                    "-istis",
                                     "-ērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-erim",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -6267,29 +6303,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "amāvī",
-                                    "amāvimus",
                                     "amāvistī",
-                                    "amāvistis",
                                     "amāvit",
+                                    "amāvimus",
+                                    "amāvistis",
                                     "amāvērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "amāverim",
-                                    "amāverimus",
                                     "amāveris",
-                                    "amāveritis",
                                     "amāverit",
+                                    "amāverimus",
+                                    "amāveritis",
                                     "amāverint"
                                 ]
                             ]
@@ -6305,29 +6341,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-eram",
-                                    "-erāmus",
                                     "-erās",
-                                    "-erātis",
                                     "-erat",
+                                    "-erāmus",
+                                    "-erātis",
                                     "-erant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-issem",
-                                    "-issēmus",
                                     "-issēs",
-                                    "-issētis",
                                     "-isset",
+                                    "-issēmus",
+                                    "-issētis",
                                     "-issent"
                                 ]
                             ]
@@ -6337,29 +6373,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "amāveram",
-                                    "amāverāmus",
                                     "amāverās",
-                                    "amāverātis",
                                     "amāverat",
+                                    "amāverāmus",
+                                    "amāverātis",
                                     "amāverant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "amāvissem",
-                                    "amāvissēmus",
                                     "amāvissēs",
-                                    "amāvissētis",
                                     "amāvisset",
+                                    "amāvissēmus",
+                                    "amāvissētis",
                                     "amāvissent"
                                 ]
                             ]
@@ -6375,20 +6411,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-erō",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -6398,20 +6434,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "amāverō",
-                                    "amāverimus",
                                     "amāveris",
-                                    "amāveritis",
                                     "amāverit",
+                                    "amāverimus",
+                                    "amāveritis",
                                     "amāverint"
                                 ]
                             ]
@@ -6487,7 +6523,65 @@
                     "title": "分词",
                     "tables": [
                         {
-                            "caption": "屈折词尾",
+                            "caption": "屈折词尾（三尾 / 二尾）",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "-us",
+                                    "-a",
+                                    "-um"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "-ūrus",
+                                    "-ūra",
+                                    "-ūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "-andus",
+                                    "-anda",
+                                    "-andum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "示例（三尾 / 二尾）：amō, amāre, amāvī, amātum",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "amātus",
+                                    "amāta",
+                                    "amātum"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "amātūrus",
+                                    "amātūra",
+                                    "amātūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "amandus",
+                                    "amanda",
+                                    "amandum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "屈折词尾（一尾）",
                             "headers": [
                                 "",
                                 "词尾"
@@ -6496,23 +6590,11 @@
                                 [
                                     "现在时 主动",
                                     "-āns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "-us"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "-ūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "-andus"
                                 ]
                             ]
                         },
                         {
-                            "caption": "示例：amō, amāre, amāvī, amātum",
+                            "caption": "示例（一尾）：amō, amāre, amāvī, amātum",
                             "headers": [
                                 "",
                                 "形式"
@@ -6521,18 +6603,6 @@
                                 [
                                     "现在时 主动",
                                     "amāns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "amātus"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "amātūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "amandus"
                                 ]
                             ]
                         }
@@ -6648,34 +6718,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "-eō",
-                            "1pl": "-ēmus",
                             "2sg": "-ēs",
-                            "2pl": "-ētis",
                             "3sg": "-et",
+                            "1pl": "-ēmus",
+                            "2pl": "-ētis",
                             "3pl": "-ent"
                         },
                         "pres-pass-ind": {
                             "1sg": "-eor",
-                            "1pl": "-ēmur",
                             "2sg": "-ēris",
-                            "2pl": "-ēminī",
                             "3sg": "-ētur",
+                            "1pl": "-ēmur",
+                            "2pl": "-ēminī",
                             "3pl": "-entur"
                         },
                         "pres-act-subj": {
                             "1sg": "-eam",
-                            "1pl": "-eāmus",
                             "2sg": "-eās",
-                            "2pl": "-eātis",
                             "3sg": "-eat",
+                            "1pl": "-eāmus",
+                            "2pl": "-eātis",
                             "3pl": "-eant"
                         },
                         "pres-pass-subj": {
                             "1sg": "-ear",
-                            "1pl": "-eāmur",
                             "2sg": "-eāris",
-                            "2pl": "-eāminī",
                             "3sg": "-eātur",
+                            "1pl": "-eāmur",
+                            "2pl": "-eāminī",
                             "3pl": "-eantur"
                         },
                         "pres-act-impr": {
@@ -6690,58 +6760,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "-ēbam",
-                            "1pl": "-ēbāmus",
                             "2sg": "-ēbās",
-                            "2pl": "-ēbātis",
                             "3sg": "-ēbat",
+                            "1pl": "-ēbāmus",
+                            "2pl": "-ēbātis",
                             "3pl": "-ēbant"
                         },
                         "impf-pass-ind": {
                             "1sg": "-ēbar",
-                            "1pl": "-ēbāmur",
                             "2sg": "-ēbāris",
-                            "2pl": "-ēbāminī",
                             "3sg": "-ēbātur",
+                            "1pl": "-ēbāmur",
+                            "2pl": "-ēbāminī",
                             "3pl": "-ēbantur"
                         },
                         "impf-act-subj": {
                             "1sg": "-ērem",
-                            "1pl": "-ērēmus",
                             "2sg": "-ērēs",
-                            "2pl": "-ērētis",
                             "3sg": "-ēret",
+                            "1pl": "-ērēmus",
+                            "2pl": "-ērētis",
                             "3pl": "-ērent"
                         },
                         "impf-pass-subj": {
                             "1sg": "-ērer",
-                            "1pl": "-ērēmur",
                             "2sg": "-ērēris",
-                            "2pl": "-ērēminī",
                             "3sg": "-ērētur",
+                            "1pl": "-ērēmur",
+                            "2pl": "-ērēminī",
                             "3pl": "-ērentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "-ēbō",
-                            "1pl": "-ēbimus",
                             "2sg": "-ēbis",
-                            "2pl": "-ēbitis",
                             "3sg": "-ēbit",
+                            "1pl": "-ēbimus",
+                            "2pl": "-ēbitis",
                             "3pl": "-ēbunt"
                         },
                         "fut-pass-ind": {
                             "1sg": "-ēbor",
-                            "1pl": "-ēbimur",
                             "2sg": "-ēberis",
-                            "2pl": "-ēbiminī",
                             "3sg": "-ēbitur",
+                            "1pl": "-ēbimur",
+                            "2pl": "-ēbiminī",
                             "3pl": "-ēbuntur"
                         },
                         "fut-act-impr": {
                             "2sg": "-ētō",
-                            "2pl": "-ētōte",
                             "3sg": "-ētō",
+                            "2pl": "-ētōte",
                             "3pl": "-entō"
                         },
                         "fut-pass-impr": {
@@ -6752,46 +6822,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "-ī",
-                            "1pl": "-imus",
                             "2sg": "-istī",
-                            "2pl": "-istis",
                             "3sg": "-it",
+                            "1pl": "-imus",
+                            "2pl": "-istis",
                             "3pl": "-ērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "-erim",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "-eram",
-                            "1pl": "-erāmus",
                             "2sg": "-erās",
-                            "2pl": "-erātis",
                             "3sg": "-erat",
+                            "1pl": "-erāmus",
+                            "2pl": "-erātis",
                             "3pl": "-erant"
                         },
                         "plup-act-subj": {
                             "1sg": "-issem",
-                            "1pl": "-issēmus",
                             "2sg": "-issēs",
-                            "2pl": "-issētis",
                             "3sg": "-isset",
+                            "1pl": "-issēmus",
+                            "2pl": "-issētis",
                             "3pl": "-issent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "-erō",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
@@ -6813,17 +6883,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "-ēns"
-                        },
                         "perf-pass": {
-                            "form": "-us"
+                            "m": "-us",
+                            "f": "-a",
+                            "n": "-um"
                         },
                         "fut-act": {
-                            "form": "-ūrus"
+                            "m": "-ūrus",
+                            "f": "-ūra",
+                            "n": "-ūrum"
                         },
                         "fut-pass": {
-                            "form": "-endus"
+                            "m": "-endus",
+                            "f": "-enda",
+                            "n": "-endum"
                         }
                     },
                     "gerund": {
@@ -6846,6 +6919,11 @@
                         },
                         "abl": {
                             "form": "-ū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "-ēns"
                         }
                     }
                 },
@@ -6903,34 +6981,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "moneō",
-                            "1pl": "monēmus",
                             "2sg": "monēs",
-                            "2pl": "monētis",
                             "3sg": "monet",
+                            "1pl": "monēmus",
+                            "2pl": "monētis",
                             "3pl": "monent"
                         },
                         "pres-pass-ind": {
                             "1sg": "moneor",
-                            "1pl": "monēmur",
                             "2sg": "monēris",
-                            "2pl": "monēminī",
                             "3sg": "monētur",
+                            "1pl": "monēmur",
+                            "2pl": "monēminī",
                             "3pl": "monentur"
                         },
                         "pres-act-subj": {
                             "1sg": "moneam",
-                            "1pl": "moneāmus",
                             "2sg": "moneās",
-                            "2pl": "moneātis",
                             "3sg": "moneat",
+                            "1pl": "moneāmus",
+                            "2pl": "moneātis",
                             "3pl": "moneant"
                         },
                         "pres-pass-subj": {
                             "1sg": "monear",
-                            "1pl": "moneāmur",
                             "2sg": "moneāris",
-                            "2pl": "moneāminī",
                             "3sg": "moneātur",
+                            "1pl": "moneāmur",
+                            "2pl": "moneāminī",
                             "3pl": "moneantur"
                         },
                         "pres-act-impr": {
@@ -6945,58 +7023,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "monēbam",
-                            "1pl": "monēbāmus",
                             "2sg": "monēbās",
-                            "2pl": "monēbātis",
                             "3sg": "monēbat",
+                            "1pl": "monēbāmus",
+                            "2pl": "monēbātis",
                             "3pl": "monēbant"
                         },
                         "impf-pass-ind": {
                             "1sg": "monēbar",
-                            "1pl": "monēbāmur",
                             "2sg": "monēbāris",
-                            "2pl": "monēbāminī",
                             "3sg": "monēbātur",
+                            "1pl": "monēbāmur",
+                            "2pl": "monēbāminī",
                             "3pl": "monēbantur"
                         },
                         "impf-act-subj": {
                             "1sg": "monērem",
-                            "1pl": "monērēmus",
                             "2sg": "monērēs",
-                            "2pl": "monērētis",
                             "3sg": "monēret",
+                            "1pl": "monērēmus",
+                            "2pl": "monērētis",
                             "3pl": "monērent"
                         },
                         "impf-pass-subj": {
                             "1sg": "monērer",
-                            "1pl": "monērēmur",
                             "2sg": "monērēris",
-                            "2pl": "monērēminī",
                             "3sg": "monērētur",
+                            "1pl": "monērēmur",
+                            "2pl": "monērēminī",
                             "3pl": "monērentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "monēbō",
-                            "1pl": "monēbimus",
                             "2sg": "monēbis",
-                            "2pl": "monēbitis",
                             "3sg": "monēbit",
+                            "1pl": "monēbimus",
+                            "2pl": "monēbitis",
                             "3pl": "monēbunt"
                         },
                         "fut-pass-ind": {
                             "1sg": "monēbor",
-                            "1pl": "monēbimur",
                             "2sg": "monēberis",
-                            "2pl": "monēbiminī",
                             "3sg": "monēbitur",
+                            "1pl": "monēbimur",
+                            "2pl": "monēbiminī",
                             "3pl": "monēbuntur"
                         },
                         "fut-act-impr": {
                             "2sg": "monētō",
-                            "2pl": "monētōte",
                             "3sg": "monētō",
+                            "2pl": "monētōte",
                             "3pl": "monentō"
                         },
                         "fut-pass-impr": {
@@ -7007,46 +7085,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "monuī",
-                            "1pl": "monuimus",
                             "2sg": "monuistī",
-                            "2pl": "monuistis",
                             "3sg": "monuit",
+                            "1pl": "monuimus",
+                            "2pl": "monuistis",
                             "3pl": "monuērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "monuerim",
-                            "1pl": "monuerimus",
                             "2sg": "monueris",
-                            "2pl": "monueritis",
                             "3sg": "monuerit",
+                            "1pl": "monuerimus",
+                            "2pl": "monueritis",
                             "3pl": "monuerint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "monueram",
-                            "1pl": "monuerāmus",
                             "2sg": "monuerās",
-                            "2pl": "monuerātis",
                             "3sg": "monuerat",
+                            "1pl": "monuerāmus",
+                            "2pl": "monuerātis",
                             "3pl": "monuerant"
                         },
                         "plup-act-subj": {
                             "1sg": "monuissem",
-                            "1pl": "monuissēmus",
                             "2sg": "monuissēs",
-                            "2pl": "monuissētis",
                             "3sg": "monuisset",
+                            "1pl": "monuissēmus",
+                            "2pl": "monuissētis",
                             "3pl": "monuissent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "monuerō",
-                            "1pl": "monuerimus",
                             "2sg": "monueris",
-                            "2pl": "monueritis",
                             "3sg": "monuerit",
+                            "1pl": "monuerimus",
+                            "2pl": "monueritis",
                             "3pl": "monuerint"
                         }
                     },
@@ -7068,17 +7146,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "monēns"
-                        },
                         "perf-pass": {
-                            "form": "monitus"
+                            "m": "monitus",
+                            "f": "monita",
+                            "n": "monitum"
                         },
                         "fut-act": {
-                            "form": "monitūrus"
+                            "m": "monitūrus",
+                            "f": "monitūra",
+                            "n": "monitūrum"
                         },
                         "fut-pass": {
-                            "form": "monendus"
+                            "m": "monendus",
+                            "f": "monenda",
+                            "n": "monendum"
                         }
                     },
                     "gerund": {
@@ -7101,6 +7182,11 @@
                         },
                         "abl": {
                             "form": "monitū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "monēns"
                         }
                     }
                 },
@@ -7149,65 +7235,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-eō",
-                                    "-ēmus",
                                     "-ēs",
-                                    "-ētis",
                                     "-et",
+                                    "-ēmus",
+                                    "-ētis",
                                     "-ent"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-eor",
-                                    "-ēmur",
                                     "-ēris",
-                                    "-ēminī",
                                     "-ētur",
+                                    "-ēmur",
+                                    "-ēminī",
                                     "-entur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-eam",
-                                    "-eāmus",
                                     "-eās",
-                                    "-eātis",
                                     "-eat",
+                                    "-eāmus",
+                                    "-eātis",
                                     "-eant"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-ear",
-                                    "-eāmur",
                                     "-eāris",
-                                    "-eāminī",
                                     "-eātur",
+                                    "-eāmur",
+                                    "-eāminī",
                                     "-eantur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "-ē",
-                                    "-ēte",
                                     "—",
+                                    "—",
+                                    "-ēte",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "-ēre",
-                                    "-ēminī",
                                     "—",
+                                    "—",
+                                    "-ēminī",
                                     "—"
                                 ]
                             ]
@@ -7217,65 +7303,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "moneō",
-                                    "monēmus",
                                     "monēs",
-                                    "monētis",
                                     "monet",
+                                    "monēmus",
+                                    "monētis",
                                     "monent"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "moneor",
-                                    "monēmur",
                                     "monēris",
-                                    "monēminī",
                                     "monētur",
+                                    "monēmur",
+                                    "monēminī",
                                     "monentur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "moneam",
-                                    "moneāmus",
                                     "moneās",
-                                    "moneātis",
                                     "moneat",
+                                    "moneāmus",
+                                    "moneātis",
                                     "moneant"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "monear",
-                                    "moneāmur",
                                     "moneāris",
-                                    "moneāminī",
                                     "moneātur",
+                                    "moneāmur",
+                                    "moneāminī",
                                     "moneantur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "monē",
-                                    "monēte",
                                     "—",
+                                    "—",
+                                    "monēte",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "monēre",
-                                    "monēminī",
                                     "—",
+                                    "—",
+                                    "monēminī",
                                     "—"
                                 ]
                             ]
@@ -7291,47 +7377,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ēbam",
-                                    "-ēbāmus",
                                     "-ēbās",
-                                    "-ēbātis",
                                     "-ēbat",
+                                    "-ēbāmus",
+                                    "-ēbātis",
                                     "-ēbant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ēbar",
-                                    "-ēbāmur",
                                     "-ēbāris",
-                                    "-ēbāminī",
                                     "-ēbātur",
+                                    "-ēbāmur",
+                                    "-ēbāminī",
                                     "-ēbantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-ērem",
-                                    "-ērēmus",
                                     "-ērēs",
-                                    "-ērētis",
                                     "-ēret",
+                                    "-ērēmus",
+                                    "-ērētis",
                                     "-ērent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-ērer",
-                                    "-ērēmur",
                                     "-ērēris",
-                                    "-ērēminī",
                                     "-ērētur",
+                                    "-ērēmur",
+                                    "-ērēminī",
                                     "-ērentur"
                                 ]
                             ]
@@ -7341,47 +7427,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "monēbam",
-                                    "monēbāmus",
                                     "monēbās",
-                                    "monēbātis",
                                     "monēbat",
+                                    "monēbāmus",
+                                    "monēbātis",
                                     "monēbant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "monēbar",
-                                    "monēbāmur",
                                     "monēbāris",
-                                    "monēbāminī",
                                     "monēbātur",
+                                    "monēbāmur",
+                                    "monēbāminī",
                                     "monēbantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "monērem",
-                                    "monērēmus",
                                     "monērēs",
-                                    "monērētis",
                                     "monēret",
+                                    "monērēmus",
+                                    "monērētis",
                                     "monērent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "monērer",
-                                    "monērēmur",
                                     "monērēris",
-                                    "monērēminī",
                                     "monērētur",
+                                    "monērēmur",
+                                    "monērēminī",
                                     "monērentur"
                                 ]
                             ]
@@ -7397,47 +7483,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ēbō",
-                                    "-ēbimus",
                                     "-ēbis",
-                                    "-ēbitis",
                                     "-ēbit",
+                                    "-ēbimus",
+                                    "-ēbitis",
                                     "-ēbunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ēbor",
-                                    "-ēbimur",
                                     "-ēberis",
-                                    "-ēbiminī",
                                     "-ēbitur",
+                                    "-ēbimur",
+                                    "-ēbiminī",
                                     "-ēbuntur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "-ētō",
+                                    "-ētō",
                                     "—",
-                                    "-ētō",
                                     "-ētōte",
-                                    "-ētō",
                                     "-entō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "-ētor",
+                                    "—",
+                                    "—",
                                     "-entor"
                                 ]
                             ]
@@ -7447,47 +7533,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "monēbō",
-                                    "monēbimus",
                                     "monēbis",
-                                    "monēbitis",
                                     "monēbit",
+                                    "monēbimus",
+                                    "monēbitis",
                                     "monēbunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "monēbor",
-                                    "monēbimur",
                                     "monēberis",
-                                    "monēbiminī",
                                     "monēbitur",
+                                    "monēbimur",
+                                    "monēbiminī",
                                     "monēbuntur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "monētō",
+                                    "monētō",
                                     "—",
-                                    "monētō",
                                     "monētōte",
-                                    "monētō",
                                     "monentō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "monētor",
+                                    "—",
+                                    "—",
                                     "monentor"
                                 ]
                             ]
@@ -7503,29 +7589,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ī",
-                                    "-imus",
                                     "-istī",
-                                    "-istis",
                                     "-it",
+                                    "-imus",
+                                    "-istis",
                                     "-ērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-erim",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -7535,29 +7621,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "monuī",
-                                    "monuimus",
                                     "monuistī",
-                                    "monuistis",
                                     "monuit",
+                                    "monuimus",
+                                    "monuistis",
                                     "monuērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "monuerim",
-                                    "monuerimus",
                                     "monueris",
-                                    "monueritis",
                                     "monuerit",
+                                    "monuerimus",
+                                    "monueritis",
                                     "monuerint"
                                 ]
                             ]
@@ -7573,29 +7659,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-eram",
-                                    "-erāmus",
                                     "-erās",
-                                    "-erātis",
                                     "-erat",
+                                    "-erāmus",
+                                    "-erātis",
                                     "-erant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-issem",
-                                    "-issēmus",
                                     "-issēs",
-                                    "-issētis",
                                     "-isset",
+                                    "-issēmus",
+                                    "-issētis",
                                     "-issent"
                                 ]
                             ]
@@ -7605,29 +7691,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "monueram",
-                                    "monuerāmus",
                                     "monuerās",
-                                    "monuerātis",
                                     "monuerat",
+                                    "monuerāmus",
+                                    "monuerātis",
                                     "monuerant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "monuissem",
-                                    "monuissēmus",
                                     "monuissēs",
-                                    "monuissētis",
                                     "monuisset",
+                                    "monuissēmus",
+                                    "monuissētis",
                                     "monuissent"
                                 ]
                             ]
@@ -7643,20 +7729,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-erō",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -7666,20 +7752,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "monuerō",
-                                    "monuerimus",
                                     "monueris",
-                                    "monueritis",
                                     "monuerit",
+                                    "monuerimus",
+                                    "monueritis",
                                     "monuerint"
                                 ]
                             ]
@@ -7755,7 +7841,65 @@
                     "title": "分词",
                     "tables": [
                         {
-                            "caption": "屈折词尾",
+                            "caption": "屈折词尾（三尾 / 二尾）",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "-us",
+                                    "-a",
+                                    "-um"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "-ūrus",
+                                    "-ūra",
+                                    "-ūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "-endus",
+                                    "-enda",
+                                    "-endum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "示例（三尾 / 二尾）：moneō, monēre, monuī, monitum",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "monitus",
+                                    "monita",
+                                    "monitum"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "monitūrus",
+                                    "monitūra",
+                                    "monitūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "monendus",
+                                    "monenda",
+                                    "monendum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "屈折词尾（一尾）",
                             "headers": [
                                 "",
                                 "词尾"
@@ -7764,23 +7908,11 @@
                                 [
                                     "现在时 主动",
                                     "-ēns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "-us"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "-ūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "-endus"
                                 ]
                             ]
                         },
                         {
-                            "caption": "示例：moneō, monēre, monuī, monitum",
+                            "caption": "示例（一尾）：moneō, monēre, monuī, monitum",
                             "headers": [
                                 "",
                                 "形式"
@@ -7789,18 +7921,6 @@
                                 [
                                     "现在时 主动",
                                     "monēns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "monitus"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "monitūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "monendus"
                                 ]
                             ]
                         }
@@ -7920,34 +8040,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "-ō",
-                            "1pl": "-imus",
                             "2sg": "-is",
-                            "2pl": "-itis",
                             "3sg": "-it",
+                            "1pl": "-imus",
+                            "2pl": "-itis",
                             "3pl": "-unt"
                         },
                         "pres-pass-ind": {
                             "1sg": "-or",
-                            "1pl": "-imur",
                             "2sg": "-eris",
-                            "2pl": "-iminī",
                             "3sg": "-itur",
+                            "1pl": "-imur",
+                            "2pl": "-iminī",
                             "3pl": "-untur"
                         },
                         "pres-act-subj": {
                             "1sg": "-am",
-                            "1pl": "-āmus",
                             "2sg": "-ās",
-                            "2pl": "-ātis",
                             "3sg": "-at",
+                            "1pl": "-āmus",
+                            "2pl": "-ātis",
                             "3pl": "-ant"
                         },
                         "pres-pass-subj": {
                             "1sg": "-ar",
-                            "1pl": "-āmur",
                             "2sg": "-āris",
-                            "2pl": "-āminī",
                             "3sg": "-ātur",
+                            "1pl": "-āmur",
+                            "2pl": "-āminī",
                             "3pl": "-antur"
                         },
                         "pres-act-impr": {
@@ -7962,58 +8082,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "-ēbam",
-                            "1pl": "-ēbāmus",
                             "2sg": "-ēbās",
-                            "2pl": "-ēbātis",
                             "3sg": "-ēbat",
+                            "1pl": "-ēbāmus",
+                            "2pl": "-ēbātis",
                             "3pl": "-ēbant"
                         },
                         "impf-pass-ind": {
                             "1sg": "-ēbar",
-                            "1pl": "-ēbāmur",
                             "2sg": "-ēbāris",
-                            "2pl": "-ēbāminī",
                             "3sg": "-ēbātur",
+                            "1pl": "-ēbāmur",
+                            "2pl": "-ēbāminī",
                             "3pl": "-ēbantur"
                         },
                         "impf-act-subj": {
                             "1sg": "-erem",
-                            "1pl": "-erēmus",
                             "2sg": "-erēs",
-                            "2pl": "-erētis",
                             "3sg": "-eret",
+                            "1pl": "-erēmus",
+                            "2pl": "-erētis",
                             "3pl": "-erent"
                         },
                         "impf-pass-subj": {
                             "1sg": "-erer",
-                            "1pl": "-erēmur",
                             "2sg": "-erēris",
-                            "2pl": "-erēminī",
                             "3sg": "-erētur",
+                            "1pl": "-erēmur",
+                            "2pl": "-erēminī",
                             "3pl": "-erentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "-am",
-                            "1pl": "-ēmus",
                             "2sg": "-ēs",
-                            "2pl": "-ētis",
                             "3sg": "-et",
+                            "1pl": "-ēmus",
+                            "2pl": "-ētis",
                             "3pl": "-ent"
                         },
                         "fut-pass-ind": {
                             "1sg": "-ar",
-                            "1pl": "-ēmur",
                             "2sg": "-ēris",
-                            "2pl": "-ēminī",
                             "3sg": "-ētur",
+                            "1pl": "-ēmur",
+                            "2pl": "-ēminī",
                             "3pl": "-entur"
                         },
                         "fut-act-impr": {
                             "2sg": "-itō",
-                            "2pl": "-itōte",
                             "3sg": "-itō",
+                            "2pl": "-itōte",
                             "3pl": "-untō"
                         },
                         "fut-pass-impr": {
@@ -8024,46 +8144,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "-ī",
-                            "1pl": "-imus",
                             "2sg": "-istī",
-                            "2pl": "-istis",
                             "3sg": "-it",
+                            "1pl": "-imus",
+                            "2pl": "-istis",
                             "3pl": "-ērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "-erim",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "-eram",
-                            "1pl": "-erāmus",
                             "2sg": "-erās",
-                            "2pl": "-erātis",
                             "3sg": "-erat",
+                            "1pl": "-erāmus",
+                            "2pl": "-erātis",
                             "3pl": "-erant"
                         },
                         "plup-act-subj": {
                             "1sg": "-issem",
-                            "1pl": "-issēmus",
                             "2sg": "-issēs",
-                            "2pl": "-issētis",
                             "3sg": "-isset",
+                            "1pl": "-issēmus",
+                            "2pl": "-issētis",
                             "3pl": "-issent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "-erō",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
@@ -8085,17 +8205,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "-ēns"
-                        },
                         "perf-pass": {
-                            "form": "-us"
+                            "m": "-us",
+                            "f": "-a",
+                            "n": "-um"
                         },
                         "fut-act": {
-                            "form": "-ūrus"
+                            "m": "-ūrus",
+                            "f": "-ūra",
+                            "n": "-ūrum"
                         },
                         "fut-pass": {
-                            "form": "-endus"
+                            "m": "-endus",
+                            "f": "-enda",
+                            "n": "-endum"
                         }
                     },
                     "gerund": {
@@ -8118,6 +8241,11 @@
                         },
                         "abl": {
                             "form": "-ū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "-ēns"
                         }
                     }
                 },
@@ -8175,34 +8303,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "regō",
-                            "1pl": "regimus",
                             "2sg": "regis",
-                            "2pl": "regitis",
                             "3sg": "regit",
+                            "1pl": "regimus",
+                            "2pl": "regitis",
                             "3pl": "regunt"
                         },
                         "pres-pass-ind": {
                             "1sg": "regor",
-                            "1pl": "regimur",
                             "2sg": "regeris",
-                            "2pl": "regiminī",
                             "3sg": "regitur",
+                            "1pl": "regimur",
+                            "2pl": "regiminī",
                             "3pl": "reguntur"
                         },
                         "pres-act-subj": {
                             "1sg": "regam",
-                            "1pl": "regāmus",
                             "2sg": "regās",
-                            "2pl": "regātis",
                             "3sg": "regat",
+                            "1pl": "regāmus",
+                            "2pl": "regātis",
                             "3pl": "regant"
                         },
                         "pres-pass-subj": {
                             "1sg": "regar",
-                            "1pl": "regāmur",
                             "2sg": "regāris",
-                            "2pl": "regāminī",
                             "3sg": "regātur",
+                            "1pl": "regāmur",
+                            "2pl": "regāminī",
                             "3pl": "regantur"
                         },
                         "pres-act-impr": {
@@ -8217,58 +8345,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "regēbam",
-                            "1pl": "regēbāmus",
                             "2sg": "regēbās",
-                            "2pl": "regēbātis",
                             "3sg": "regēbat",
+                            "1pl": "regēbāmus",
+                            "2pl": "regēbātis",
                             "3pl": "regēbant"
                         },
                         "impf-pass-ind": {
                             "1sg": "regēbar",
-                            "1pl": "regēbāmur",
                             "2sg": "regēbāris",
-                            "2pl": "regēbāminī",
                             "3sg": "regēbātur",
+                            "1pl": "regēbāmur",
+                            "2pl": "regēbāminī",
                             "3pl": "regēbantur"
                         },
                         "impf-act-subj": {
                             "1sg": "regerem",
-                            "1pl": "regerēmus",
                             "2sg": "regerēs",
-                            "2pl": "regerētis",
                             "3sg": "regeret",
+                            "1pl": "regerēmus",
+                            "2pl": "regerētis",
                             "3pl": "regerent"
                         },
                         "impf-pass-subj": {
                             "1sg": "regerer",
-                            "1pl": "regerēmur",
                             "2sg": "regerēris",
-                            "2pl": "regerēminī",
                             "3sg": "regerētur",
+                            "1pl": "regerēmur",
+                            "2pl": "regerēminī",
                             "3pl": "regerentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "regam",
-                            "1pl": "regēmus",
                             "2sg": "regēs",
-                            "2pl": "regētis",
                             "3sg": "reget",
+                            "1pl": "regēmus",
+                            "2pl": "regētis",
                             "3pl": "regent"
                         },
                         "fut-pass-ind": {
                             "1sg": "regar",
-                            "1pl": "regēmur",
                             "2sg": "regēris",
-                            "2pl": "regēminī",
                             "3sg": "regētur",
+                            "1pl": "regēmur",
+                            "2pl": "regēminī",
                             "3pl": "regentur"
                         },
                         "fut-act-impr": {
                             "2sg": "regitō",
-                            "2pl": "regitōte",
                             "3sg": "regitō",
+                            "2pl": "regitōte",
                             "3pl": "reguntō"
                         },
                         "fut-pass-impr": {
@@ -8279,46 +8407,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "rēxī",
-                            "1pl": "rēximus",
                             "2sg": "rēxistī",
-                            "2pl": "rēxistis",
                             "3sg": "rēxit",
+                            "1pl": "rēximus",
+                            "2pl": "rēxistis",
                             "3pl": "rēxērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "rēxerim",
-                            "1pl": "rēxerimus",
                             "2sg": "rēxeris",
-                            "2pl": "rēxeritis",
                             "3sg": "rēxerit",
+                            "1pl": "rēxerimus",
+                            "2pl": "rēxeritis",
                             "3pl": "rēxerint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "rēxeram",
-                            "1pl": "rēxerāmus",
                             "2sg": "rēxerās",
-                            "2pl": "rēxerātis",
                             "3sg": "rēxerat",
+                            "1pl": "rēxerāmus",
+                            "2pl": "rēxerātis",
                             "3pl": "rēxerant"
                         },
                         "plup-act-subj": {
                             "1sg": "rēxissem",
-                            "1pl": "rēxissēmus",
                             "2sg": "rēxissēs",
-                            "2pl": "rēxissētis",
                             "3sg": "rēxisset",
+                            "1pl": "rēxissēmus",
+                            "2pl": "rēxissētis",
                             "3pl": "rēxissent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "rēxerō",
-                            "1pl": "rēxerimus",
                             "2sg": "rēxeris",
-                            "2pl": "rēxeritis",
                             "3sg": "rēxerit",
+                            "1pl": "rēxerimus",
+                            "2pl": "rēxeritis",
                             "3pl": "rēxerint"
                         }
                     },
@@ -8340,17 +8468,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "regēns"
-                        },
                         "perf-pass": {
-                            "form": "rēctus"
+                            "m": "rēctus",
+                            "f": "rēcta",
+                            "n": "rēctum"
                         },
                         "fut-act": {
-                            "form": "rēctūrus"
+                            "m": "rēctūrus",
+                            "f": "rēctūra",
+                            "n": "rēctūrum"
                         },
                         "fut-pass": {
-                            "form": "regendus"
+                            "m": "regendus",
+                            "f": "regenda",
+                            "n": "regendum"
                         }
                     },
                     "gerund": {
@@ -8373,6 +8504,11 @@
                         },
                         "abl": {
                             "form": "rēctū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "regēns"
                         }
                     }
                 },
@@ -8485,65 +8621,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ō",
-                                    "-imus",
                                     "-is",
-                                    "-itis",
                                     "-it",
+                                    "-imus",
+                                    "-itis",
                                     "-unt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-or",
-                                    "-imur",
                                     "-eris",
-                                    "-iminī",
                                     "-itur",
+                                    "-imur",
+                                    "-iminī",
                                     "-untur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-am",
-                                    "-āmus",
                                     "-ās",
-                                    "-ātis",
                                     "-at",
+                                    "-āmus",
+                                    "-ātis",
                                     "-ant"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-ar",
-                                    "-āmur",
                                     "-āris",
-                                    "-āminī",
                                     "-ātur",
+                                    "-āmur",
+                                    "-āminī",
                                     "-antur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "-e",
-                                    "-ite",
                                     "—",
+                                    "—",
+                                    "-ite",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "-ere",
-                                    "-iminī",
                                     "—",
+                                    "—",
+                                    "-iminī",
                                     "—"
                                 ]
                             ]
@@ -8553,65 +8689,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "regō",
-                                    "regimus",
                                     "regis",
-                                    "regitis",
                                     "regit",
+                                    "regimus",
+                                    "regitis",
                                     "regunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "regor",
-                                    "regimur",
                                     "regeris",
-                                    "regiminī",
                                     "regitur",
+                                    "regimur",
+                                    "regiminī",
                                     "reguntur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "regam",
-                                    "regāmus",
                                     "regās",
-                                    "regātis",
                                     "regat",
+                                    "regāmus",
+                                    "regātis",
                                     "regant"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "regar",
-                                    "regāmur",
                                     "regāris",
-                                    "regāminī",
                                     "regātur",
+                                    "regāmur",
+                                    "regāminī",
                                     "regantur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "rege",
-                                    "regite",
                                     "—",
+                                    "—",
+                                    "regite",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "regere",
-                                    "regiminī",
                                     "—",
+                                    "—",
+                                    "regiminī",
                                     "—"
                                 ]
                             ]
@@ -8627,47 +8763,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ēbam",
-                                    "-ēbāmus",
                                     "-ēbās",
-                                    "-ēbātis",
                                     "-ēbat",
+                                    "-ēbāmus",
+                                    "-ēbātis",
                                     "-ēbant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ēbar",
-                                    "-ēbāmur",
                                     "-ēbāris",
-                                    "-ēbāminī",
                                     "-ēbātur",
+                                    "-ēbāmur",
+                                    "-ēbāminī",
                                     "-ēbantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-erem",
-                                    "-erēmus",
                                     "-erēs",
-                                    "-erētis",
                                     "-eret",
+                                    "-erēmus",
+                                    "-erētis",
                                     "-erent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-erer",
-                                    "-erēmur",
                                     "-erēris",
-                                    "-erēminī",
                                     "-erētur",
+                                    "-erēmur",
+                                    "-erēminī",
                                     "-erentur"
                                 ]
                             ]
@@ -8677,47 +8813,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "regēbam",
-                                    "regēbāmus",
                                     "regēbās",
-                                    "regēbātis",
                                     "regēbat",
+                                    "regēbāmus",
+                                    "regēbātis",
                                     "regēbant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "regēbar",
-                                    "regēbāmur",
                                     "regēbāris",
-                                    "regēbāminī",
                                     "regēbātur",
+                                    "regēbāmur",
+                                    "regēbāminī",
                                     "regēbantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "regerem",
-                                    "regerēmus",
                                     "regerēs",
-                                    "regerētis",
                                     "regeret",
+                                    "regerēmus",
+                                    "regerētis",
                                     "regerent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "regerer",
-                                    "regerēmur",
                                     "regerēris",
-                                    "regerēminī",
                                     "regerētur",
+                                    "regerēmur",
+                                    "regerēminī",
                                     "regerentur"
                                 ]
                             ]
@@ -8733,47 +8869,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-am",
-                                    "-ēmus",
                                     "-ēs",
-                                    "-ētis",
                                     "-et",
+                                    "-ēmus",
+                                    "-ētis",
                                     "-ent"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ar",
-                                    "-ēmur",
                                     "-ēris",
-                                    "-ēminī",
                                     "-ētur",
+                                    "-ēmur",
+                                    "-ēminī",
                                     "-entur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "-itō",
+                                    "-itō",
                                     "—",
-                                    "-itō",
                                     "-itōte",
-                                    "-itō",
                                     "-untō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "-itor",
+                                    "—",
+                                    "—",
                                     "-untor"
                                 ]
                             ]
@@ -8783,47 +8919,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "regam",
-                                    "regēmus",
                                     "regēs",
-                                    "regētis",
                                     "reget",
+                                    "regēmus",
+                                    "regētis",
                                     "regent"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "regar",
-                                    "regēmur",
                                     "regēris",
-                                    "regēminī",
                                     "regētur",
+                                    "regēmur",
+                                    "regēminī",
                                     "regentur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "regitō",
+                                    "regitō",
                                     "—",
-                                    "regitō",
                                     "regitōte",
-                                    "regitō",
                                     "reguntō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "regitor",
+                                    "—",
+                                    "—",
                                     "reguntor"
                                 ]
                             ]
@@ -8839,29 +8975,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ī",
-                                    "-imus",
                                     "-istī",
-                                    "-istis",
                                     "-it",
+                                    "-imus",
+                                    "-istis",
                                     "-ērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-erim",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -8871,29 +9007,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "rēxī",
-                                    "rēximus",
                                     "rēxistī",
-                                    "rēxistis",
                                     "rēxit",
+                                    "rēximus",
+                                    "rēxistis",
                                     "rēxērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "rēxerim",
-                                    "rēxerimus",
                                     "rēxeris",
-                                    "rēxeritis",
                                     "rēxerit",
+                                    "rēxerimus",
+                                    "rēxeritis",
                                     "rēxerint"
                                 ]
                             ]
@@ -8909,29 +9045,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-eram",
-                                    "-erāmus",
                                     "-erās",
-                                    "-erātis",
                                     "-erat",
+                                    "-erāmus",
+                                    "-erātis",
                                     "-erant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-issem",
-                                    "-issēmus",
                                     "-issēs",
-                                    "-issētis",
                                     "-isset",
+                                    "-issēmus",
+                                    "-issētis",
                                     "-issent"
                                 ]
                             ]
@@ -8941,29 +9077,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "rēxeram",
-                                    "rēxerāmus",
                                     "rēxerās",
-                                    "rēxerātis",
                                     "rēxerat",
+                                    "rēxerāmus",
+                                    "rēxerātis",
                                     "rēxerant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "rēxissem",
-                                    "rēxissēmus",
                                     "rēxissēs",
-                                    "rēxissētis",
                                     "rēxisset",
+                                    "rēxissēmus",
+                                    "rēxissētis",
                                     "rēxissent"
                                 ]
                             ]
@@ -8979,20 +9115,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-erō",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -9002,20 +9138,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "rēxerō",
-                                    "rēxerimus",
                                     "rēxeris",
-                                    "rēxeritis",
                                     "rēxerit",
+                                    "rēxerimus",
+                                    "rēxeritis",
                                     "rēxerint"
                                 ]
                             ]
@@ -9091,7 +9227,65 @@
                     "title": "分词",
                     "tables": [
                         {
-                            "caption": "屈折词尾",
+                            "caption": "屈折词尾（三尾 / 二尾）",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "-us",
+                                    "-a",
+                                    "-um"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "-ūrus",
+                                    "-ūra",
+                                    "-ūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "-endus",
+                                    "-enda",
+                                    "-endum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "示例（三尾 / 二尾）：regō, regere, rēxī, rēctum",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "rēctus",
+                                    "rēcta",
+                                    "rēctum"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "rēctūrus",
+                                    "rēctūra",
+                                    "rēctūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "regendus",
+                                    "regenda",
+                                    "regendum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "屈折词尾（一尾）",
                             "headers": [
                                 "",
                                 "词尾"
@@ -9100,23 +9294,11 @@
                                 [
                                     "现在时 主动",
                                     "-ēns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "-us"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "-ūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "-endus"
                                 ]
                             ]
                         },
                         {
-                            "caption": "示例：regō, regere, rēxī, rēctum",
+                            "caption": "示例（一尾）：regō, regere, rēxī, rēctum",
                             "headers": [
                                 "",
                                 "形式"
@@ -9125,18 +9307,6 @@
                                 [
                                     "现在时 主动",
                                     "regēns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "rēctus"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "rēctūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "regendus"
                                 ]
                             ]
                         }
@@ -9252,34 +9422,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "-iō",
-                            "1pl": "-īmus",
                             "2sg": "-īs",
-                            "2pl": "-ītis",
                             "3sg": "-it",
+                            "1pl": "-īmus",
+                            "2pl": "-ītis",
                             "3pl": "-iunt"
                         },
                         "pres-pass-ind": {
                             "1sg": "-ior",
-                            "1pl": "-īmur",
                             "2sg": "-īris",
-                            "2pl": "-īminī",
                             "3sg": "-ītur",
+                            "1pl": "-īmur",
+                            "2pl": "-īminī",
                             "3pl": "-iuntur"
                         },
                         "pres-act-subj": {
                             "1sg": "-iam",
-                            "1pl": "-iāmus",
                             "2sg": "-iās",
-                            "2pl": "-iātis",
                             "3sg": "-iat",
+                            "1pl": "-iāmus",
+                            "2pl": "-iātis",
                             "3pl": "-iant"
                         },
                         "pres-pass-subj": {
                             "1sg": "-iar",
-                            "1pl": "-iāmur",
                             "2sg": "-iāris",
-                            "2pl": "-iāminī",
                             "3sg": "-iātur",
+                            "1pl": "-iāmur",
+                            "2pl": "-iāminī",
                             "3pl": "-iantur"
                         },
                         "pres-act-impr": {
@@ -9294,58 +9464,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "-iēbam",
-                            "1pl": "-iēbāmus",
                             "2sg": "-iēbās",
-                            "2pl": "-iēbātis",
                             "3sg": "-iēbat",
+                            "1pl": "-iēbāmus",
+                            "2pl": "-iēbātis",
                             "3pl": "-iēbant"
                         },
                         "impf-pass-ind": {
                             "1sg": "-iēbar",
-                            "1pl": "-iēbāmur",
                             "2sg": "-iēbāris",
-                            "2pl": "-iēbāminī",
                             "3sg": "-iēbātur",
+                            "1pl": "-iēbāmur",
+                            "2pl": "-iēbāminī",
                             "3pl": "-iēbantur"
                         },
                         "impf-act-subj": {
                             "1sg": "-īrem",
-                            "1pl": "-īrēmus",
                             "2sg": "-īrēs",
-                            "2pl": "-īrētis",
                             "3sg": "-īret",
+                            "1pl": "-īrēmus",
+                            "2pl": "-īrētis",
                             "3pl": "-īrent"
                         },
                         "impf-pass-subj": {
                             "1sg": "-īrer",
-                            "1pl": "-īrēmur",
                             "2sg": "-īrēris",
-                            "2pl": "-īrēminī",
                             "3sg": "-īrētur",
+                            "1pl": "-īrēmur",
+                            "2pl": "-īrēminī",
                             "3pl": "-īrentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "-iam",
-                            "1pl": "-iēmus",
                             "2sg": "-iēs",
-                            "2pl": "-iētis",
                             "3sg": "-iet",
+                            "1pl": "-iēmus",
+                            "2pl": "-iētis",
                             "3pl": "-ient"
                         },
                         "fut-pass-ind": {
                             "1sg": "-iar",
-                            "1pl": "-iēmur",
                             "2sg": "-iēris",
-                            "2pl": "-iēminī",
                             "3sg": "-iētur",
+                            "1pl": "-iēmur",
+                            "2pl": "-iēminī",
                             "3pl": "-ientur"
                         },
                         "fut-act-impr": {
                             "2sg": "-ītō",
-                            "2pl": "-ītōte",
                             "3sg": "-ītō",
+                            "2pl": "-ītōte",
                             "3pl": "-iuntō"
                         },
                         "fut-pass-impr": {
@@ -9356,46 +9526,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "-ī",
-                            "1pl": "-imus",
                             "2sg": "-istī",
-                            "2pl": "-istis",
                             "3sg": "-it",
+                            "1pl": "-imus",
+                            "2pl": "-istis",
                             "3pl": "-ērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "-erim",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "-eram",
-                            "1pl": "-erāmus",
                             "2sg": "-erās",
-                            "2pl": "-erātis",
                             "3sg": "-erat",
+                            "1pl": "-erāmus",
+                            "2pl": "-erātis",
                             "3pl": "-erant"
                         },
                         "plup-act-subj": {
                             "1sg": "-issem",
-                            "1pl": "-issēmus",
                             "2sg": "-issēs",
-                            "2pl": "-issētis",
                             "3sg": "-isset",
+                            "1pl": "-issēmus",
+                            "2pl": "-issētis",
                             "3pl": "-issent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "-erō",
-                            "1pl": "-erimus",
                             "2sg": "-eris",
-                            "2pl": "-eritis",
                             "3sg": "-erit",
+                            "1pl": "-erimus",
+                            "2pl": "-eritis",
                             "3pl": "-erint"
                         }
                     },
@@ -9417,17 +9587,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "-iēns"
-                        },
                         "perf-pass": {
-                            "form": "-us"
+                            "m": "-us",
+                            "f": "-a",
+                            "n": "-um"
                         },
                         "fut-act": {
-                            "form": "-ūrus"
+                            "m": "-ūrus",
+                            "f": "-ūra",
+                            "n": "-ūrum"
                         },
                         "fut-pass": {
-                            "form": "-iendus"
+                            "m": "-iendus",
+                            "f": "-ienda",
+                            "n": "-iendum"
                         }
                     },
                     "gerund": {
@@ -9450,6 +9623,11 @@
                         },
                         "abl": {
                             "form": "-ū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "-iēns"
                         }
                     }
                 },
@@ -9507,34 +9685,34 @@
                     "pres": {
                         "pres-act-ind": {
                             "1sg": "audiō",
-                            "1pl": "audīmus",
                             "2sg": "audīs",
-                            "2pl": "audītis",
                             "3sg": "audit",
+                            "1pl": "audīmus",
+                            "2pl": "audītis",
                             "3pl": "audiunt"
                         },
                         "pres-pass-ind": {
                             "1sg": "audior",
-                            "1pl": "audīmur",
                             "2sg": "audīris",
-                            "2pl": "audīminī",
                             "3sg": "audītur",
+                            "1pl": "audīmur",
+                            "2pl": "audīminī",
                             "3pl": "audiuntur"
                         },
                         "pres-act-subj": {
                             "1sg": "audiam",
-                            "1pl": "audiāmus",
                             "2sg": "audiās",
-                            "2pl": "audiātis",
                             "3sg": "audiat",
+                            "1pl": "audiāmus",
+                            "2pl": "audiātis",
                             "3pl": "audiant"
                         },
                         "pres-pass-subj": {
                             "1sg": "audiar",
-                            "1pl": "audiāmur",
                             "2sg": "audiāris",
-                            "2pl": "audiāminī",
                             "3sg": "audiātur",
+                            "1pl": "audiāmur",
+                            "2pl": "audiāminī",
                             "3pl": "audiantur"
                         },
                         "pres-act-impr": {
@@ -9549,58 +9727,58 @@
                     "impf": {
                         "impf-act-ind": {
                             "1sg": "audiēbam",
-                            "1pl": "audiēbāmus",
                             "2sg": "audiēbās",
-                            "2pl": "audiēbātis",
                             "3sg": "audiēbat",
+                            "1pl": "audiēbāmus",
+                            "2pl": "audiēbātis",
                             "3pl": "audiēbant"
                         },
                         "impf-pass-ind": {
                             "1sg": "audiēbar",
-                            "1pl": "audiēbāmur",
                             "2sg": "audiēbāris",
-                            "2pl": "audiēbāminī",
                             "3sg": "audiēbātur",
+                            "1pl": "audiēbāmur",
+                            "2pl": "audiēbāminī",
                             "3pl": "audiēbantur"
                         },
                         "impf-act-subj": {
                             "1sg": "audīrem",
-                            "1pl": "audīrēmus",
                             "2sg": "audīrēs",
-                            "2pl": "audīrētis",
                             "3sg": "audīret",
+                            "1pl": "audīrēmus",
+                            "2pl": "audīrētis",
                             "3pl": "audīrent"
                         },
                         "impf-pass-subj": {
                             "1sg": "audīrer",
-                            "1pl": "audīrēmur",
                             "2sg": "audīrēris",
-                            "2pl": "audīrēminī",
                             "3sg": "audīrētur",
+                            "1pl": "audīrēmur",
+                            "2pl": "audīrēminī",
                             "3pl": "audīrentur"
                         }
                     },
                     "fut": {
                         "fut-act-ind": {
                             "1sg": "audiam",
-                            "1pl": "audiēmus",
                             "2sg": "audiēs",
-                            "2pl": "audiētis",
                             "3sg": "audiet",
+                            "1pl": "audiēmus",
+                            "2pl": "audiētis",
                             "3pl": "audient"
                         },
                         "fut-pass-ind": {
                             "1sg": "audiar",
-                            "1pl": "audiēmur",
                             "2sg": "audiēris",
-                            "2pl": "audiēminī",
                             "3sg": "audiētur",
+                            "1pl": "audiēmur",
+                            "2pl": "audiēminī",
                             "3pl": "audientur"
                         },
                         "fut-act-impr": {
                             "2sg": "audītō",
-                            "2pl": "audītōte",
                             "3sg": "audītō",
+                            "2pl": "audītōte",
                             "3pl": "audiuntō"
                         },
                         "fut-pass-impr": {
@@ -9611,46 +9789,46 @@
                     "perf": {
                         "perf-act-ind": {
                             "1sg": "audīvī",
-                            "1pl": "audīvimus",
                             "2sg": "audīvistī",
-                            "2pl": "audīvistis",
                             "3sg": "audīvit",
+                            "1pl": "audīvimus",
+                            "2pl": "audīvistis",
                             "3pl": "audīvērunt"
                         },
                         "perf-act-subj": {
                             "1sg": "audīverim",
-                            "1pl": "audīverimus",
                             "2sg": "audīveris",
-                            "2pl": "audīveritis",
                             "3sg": "audīverit",
+                            "1pl": "audīverimus",
+                            "2pl": "audīveritis",
                             "3pl": "audīverint"
                         }
                     },
                     "plup": {
                         "plup-act-ind": {
                             "1sg": "audīveram",
-                            "1pl": "audīverāmus",
                             "2sg": "audīverās",
-                            "2pl": "audīverātis",
                             "3sg": "audīverat",
+                            "1pl": "audīverāmus",
+                            "2pl": "audīverātis",
                             "3pl": "audīverant"
                         },
                         "plup-act-subj": {
                             "1sg": "audīvissem",
-                            "1pl": "audīvissēmus",
                             "2sg": "audīvissēs",
-                            "2pl": "audīvissētis",
                             "3sg": "audīvisset",
+                            "1pl": "audīvissēmus",
+                            "2pl": "audīvissētis",
                             "3pl": "audīvissent"
                         }
                     },
                     "futp": {
                         "futp-act-ind": {
                             "1sg": "audīverō",
-                            "1pl": "audīverimus",
                             "2sg": "audīveris",
-                            "2pl": "audīveritis",
                             "3sg": "audīverit",
+                            "1pl": "audīverimus",
+                            "2pl": "audīveritis",
                             "3pl": "audīverint"
                         }
                     },
@@ -9672,17 +9850,20 @@
                         }
                     },
                     "ptcp": {
-                        "pres-act": {
-                            "form": "audiēns"
-                        },
                         "perf-pass": {
-                            "form": "audītus"
+                            "m": "audītus",
+                            "f": "audīta",
+                            "n": "audītum"
                         },
                         "fut-act": {
-                            "form": "audītūrus"
+                            "m": "audītūrus",
+                            "f": "audītūra",
+                            "n": "audītūrum"
                         },
                         "fut-pass": {
-                            "form": "audiendus"
+                            "m": "audiendus",
+                            "f": "audienda",
+                            "n": "audiendum"
                         }
                     },
                     "gerund": {
@@ -9705,6 +9886,11 @@
                         },
                         "abl": {
                             "form": "audītū"
+                        }
+                    },
+                    "ptcp1": {
+                        "pres-act": {
+                            "form": "audiēns"
                         }
                     }
                 },
@@ -9753,65 +9939,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-iō",
-                                    "-īmus",
                                     "-īs",
-                                    "-ītis",
                                     "-it",
+                                    "-īmus",
+                                    "-ītis",
                                     "-iunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-ior",
-                                    "-īmur",
                                     "-īris",
-                                    "-īminī",
                                     "-ītur",
+                                    "-īmur",
+                                    "-īminī",
                                     "-iuntur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-iam",
-                                    "-iāmus",
                                     "-iās",
-                                    "-iātis",
                                     "-iat",
+                                    "-iāmus",
+                                    "-iātis",
                                     "-iant"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-iar",
-                                    "-iāmur",
                                     "-iāris",
-                                    "-iāminī",
                                     "-iātur",
+                                    "-iāmur",
+                                    "-iāminī",
                                     "-iantur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "-ī",
-                                    "-īte",
                                     "—",
+                                    "—",
+                                    "-īte",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "-īre",
-                                    "-īminī",
                                     "—",
+                                    "—",
+                                    "-īminī",
                                     "—"
                                 ]
                             ]
@@ -9821,65 +10007,65 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "audiō",
-                                    "audīmus",
                                     "audīs",
-                                    "audītis",
                                     "audit",
+                                    "audīmus",
+                                    "audītis",
                                     "audiunt"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "audior",
-                                    "audīmur",
                                     "audīris",
-                                    "audīminī",
                                     "audītur",
+                                    "audīmur",
+                                    "audīminī",
                                     "audiuntur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "audiam",
-                                    "audiāmus",
                                     "audiās",
-                                    "audiātis",
                                     "audiat",
+                                    "audiāmus",
+                                    "audiātis",
                                     "audiant"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "audiar",
-                                    "audiāmur",
                                     "audiāris",
-                                    "audiāminī",
                                     "audiātur",
+                                    "audiāmur",
+                                    "audiāminī",
                                     "audiantur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
-                                    "—",
                                     "audī",
-                                    "audīte",
                                     "—",
+                                    "—",
+                                    "audīte",
                                     "—"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
-                                    "—",
                                     "audīre",
-                                    "audīminī",
                                     "—",
+                                    "—",
+                                    "audīminī",
                                     "—"
                                 ]
                             ]
@@ -9895,47 +10081,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-iēbam",
-                                    "-iēbāmus",
                                     "-iēbās",
-                                    "-iēbātis",
                                     "-iēbat",
+                                    "-iēbāmus",
+                                    "-iēbātis",
                                     "-iēbant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-iēbar",
-                                    "-iēbāmur",
                                     "-iēbāris",
-                                    "-iēbāminī",
                                     "-iēbātur",
+                                    "-iēbāmur",
+                                    "-iēbāminī",
                                     "-iēbantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-īrem",
-                                    "-īrēmus",
                                     "-īrēs",
-                                    "-īrētis",
                                     "-īret",
+                                    "-īrēmus",
+                                    "-īrētis",
                                     "-īrent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "-īrer",
-                                    "-īrēmur",
                                     "-īrēris",
-                                    "-īrēminī",
                                     "-īrētur",
+                                    "-īrēmur",
+                                    "-īrēminī",
                                     "-īrentur"
                                 ]
                             ]
@@ -9945,47 +10131,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "audiēbam",
-                                    "audiēbāmus",
                                     "audiēbās",
-                                    "audiēbātis",
                                     "audiēbat",
+                                    "audiēbāmus",
+                                    "audiēbātis",
                                     "audiēbant"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "audiēbar",
-                                    "audiēbāmur",
                                     "audiēbāris",
-                                    "audiēbāminī",
                                     "audiēbātur",
+                                    "audiēbāmur",
+                                    "audiēbāminī",
                                     "audiēbantur"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "audīrem",
-                                    "audīrēmus",
                                     "audīrēs",
-                                    "audīrētis",
                                     "audīret",
+                                    "audīrēmus",
+                                    "audīrētis",
                                     "audīrent"
                                 ],
                                 [
                                     "虚拟式 被动",
                                     "audīrer",
-                                    "audīrēmur",
                                     "audīrēris",
-                                    "audīrēminī",
                                     "audīrētur",
+                                    "audīrēmur",
+                                    "audīrēminī",
                                     "audīrentur"
                                 ]
                             ]
@@ -10001,47 +10187,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-iam",
-                                    "-iēmus",
                                     "-iēs",
-                                    "-iētis",
                                     "-iet",
+                                    "-iēmus",
+                                    "-iētis",
                                     "-ient"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "-iar",
-                                    "-iēmur",
                                     "-iēris",
-                                    "-iēminī",
                                     "-iētur",
+                                    "-iēmur",
+                                    "-iēminī",
                                     "-ientur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "-ītō",
+                                    "-ītō",
                                     "—",
-                                    "-ītō",
                                     "-ītōte",
-                                    "-ītō",
                                     "-iuntō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "-ītor",
+                                    "—",
+                                    "—",
                                     "-iuntor"
                                 ]
                             ]
@@ -10051,47 +10237,47 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "audiam",
-                                    "audiēmus",
                                     "audiēs",
-                                    "audiētis",
                                     "audiet",
+                                    "audiēmus",
+                                    "audiētis",
                                     "audient"
                                 ],
                                 [
                                     "直陈式 被动",
                                     "audiar",
-                                    "audiēmur",
                                     "audiēris",
-                                    "audiēminī",
                                     "audiētur",
+                                    "audiēmur",
+                                    "audiēminī",
                                     "audientur"
                                 ],
                                 [
                                     "命令式 主动",
                                     "—",
+                                    "audītō",
+                                    "audītō",
                                     "—",
-                                    "audītō",
                                     "audītōte",
-                                    "audītō",
                                     "audiuntō"
                                 ],
                                 [
                                     "命令式 被动",
                                     "—",
                                     "—",
-                                    "—",
-                                    "—",
                                     "audītor",
+                                    "—",
+                                    "—",
                                     "audiuntor"
                                 ]
                             ]
@@ -10107,29 +10293,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-ī",
-                                    "-imus",
                                     "-istī",
-                                    "-istis",
                                     "-it",
+                                    "-imus",
+                                    "-istis",
                                     "-ērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-erim",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -10139,29 +10325,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "audīvī",
-                                    "audīvimus",
                                     "audīvistī",
-                                    "audīvistis",
                                     "audīvit",
+                                    "audīvimus",
+                                    "audīvistis",
                                     "audīvērunt"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "audīverim",
-                                    "audīverimus",
                                     "audīveris",
-                                    "audīveritis",
                                     "audīverit",
+                                    "audīverimus",
+                                    "audīveritis",
                                     "audīverint"
                                 ]
                             ]
@@ -10177,29 +10363,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-eram",
-                                    "-erāmus",
                                     "-erās",
-                                    "-erātis",
                                     "-erat",
+                                    "-erāmus",
+                                    "-erātis",
                                     "-erant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "-issem",
-                                    "-issēmus",
                                     "-issēs",
-                                    "-issētis",
                                     "-isset",
+                                    "-issēmus",
+                                    "-issētis",
                                     "-issent"
                                 ]
                             ]
@@ -10209,29 +10395,29 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "audīveram",
-                                    "audīverāmus",
                                     "audīverās",
-                                    "audīverātis",
                                     "audīverat",
+                                    "audīverāmus",
+                                    "audīverātis",
                                     "audīverant"
                                 ],
                                 [
                                     "虚拟式 主动",
                                     "audīvissem",
-                                    "audīvissēmus",
                                     "audīvissēs",
-                                    "audīvissētis",
                                     "audīvisset",
+                                    "audīvissēmus",
+                                    "audīvissētis",
                                     "audīvissent"
                                 ]
                             ]
@@ -10247,20 +10433,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "-erō",
-                                    "-erimus",
                                     "-eris",
-                                    "-eritis",
                                     "-erit",
+                                    "-erimus",
+                                    "-eritis",
                                     "-erint"
                                 ]
                             ]
@@ -10270,20 +10456,20 @@
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
-                                "第一人称复数",
                                 "第二人称单数",
-                                "第二人称复数",
                                 "第三人称单数",
+                                "第一人称复数",
+                                "第二人称复数",
                                 "第三人称复数"
                             ],
                             "rows": [
                                 [
                                     "直陈式 主动",
                                     "audīverō",
-                                    "audīverimus",
                                     "audīveris",
-                                    "audīveritis",
                                     "audīverit",
+                                    "audīverimus",
+                                    "audīveritis",
                                     "audīverint"
                                 ]
                             ]
@@ -10359,7 +10545,65 @@
                     "title": "分词",
                     "tables": [
                         {
-                            "caption": "屈折词尾",
+                            "caption": "屈折词尾（三尾 / 二尾）",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "-us",
+                                    "-a",
+                                    "-um"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "-ūrus",
+                                    "-ūra",
+                                    "-ūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "-iendus",
+                                    "-ienda",
+                                    "-iendum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "示例（三尾 / 二尾）：audiō, audīre, audīvī, audītum",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性",
+                                "中性"
+                            ],
+                            "rows": [
+                                [
+                                    "完成时 被动",
+                                    "audītus",
+                                    "audīta",
+                                    "audītum"
+                                ],
+                                [
+                                    "将来时 主动",
+                                    "audītūrus",
+                                    "audītūra",
+                                    "audītūrum"
+                                ],
+                                [
+                                    "将来时 被动（动形词）",
+                                    "audiendus",
+                                    "audienda",
+                                    "audiendum"
+                                ]
+                            ]
+                        },
+                        {
+                            "caption": "屈折词尾（一尾）",
                             "headers": [
                                 "",
                                 "词尾"
@@ -10368,23 +10612,11 @@
                                 [
                                     "现在时 主动",
                                     "-iēns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "-us"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "-ūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "-iendus"
                                 ]
                             ]
                         },
                         {
-                            "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "caption": "示例（一尾）：audiō, audīre, audīvī, audītum",
                             "headers": [
                                 "",
                                 "形式"
@@ -10393,18 +10625,6 @@
                                 [
                                     "现在时 主动",
                                     "audiēns"
-                                ],
-                                [
-                                    "完成时 被动",
-                                    "audītus"
-                                ],
-                                [
-                                    "将来时 主动",
-                                    "audītūrus"
-                                ],
-                                [
-                                    "将来时 被动（动形词）",
-                                    "audiendus"
                                 ]
                             ]
                         }

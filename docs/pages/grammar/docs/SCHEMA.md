@@ -223,7 +223,11 @@
 - `<tableKey>` / `<rowKey>` / `<colKey>` 由对应语言的语法 JSON 中 `paradigms` 字段定义。
 - 只保存有值的格子，空字符串、`null`、`undefined` 一律剔除。
 - **列 key 统一为 `{数}_{性}`**（`sg_m` / `pl_f` / `du_n`…）表示性数格；无性别维度时用 `{数}`（`sg` / `pl`）；
-  动词用人称（`1sg` / `2pl`…）；非定式用单列 `form`。
+  动词用人称，**统一按「数优先」排列**：先单数、再双数（有的话）、后复数，组内按 1/2/3 人称：
+  - 无双数：`1sg 2sg 3sg 1pl 2pl 3pl`
+  - 有双数：`1sg 2sg 3sg 1du 2du 3du 1pl 2pl 3pl`
+
+  非定式用单列 `form`。
 - 找不到模板的语言（如 `en` / `zh-cls` / `ja` / `ja-cls`）不使用此字段，相关变位/活用全部走 `inflections`。
 
 #### 主要部分（stems）
@@ -411,7 +415,7 @@ const MIGRATIONS = {
 - `la` / `grc` / `he` / `sa` / `mnc` / `fr` / `de`：定义了 `verb` 和/或 `noun` 的 paradigm 模板。
 - `la` 的 `noun` / `adj` 与 `grc` 一样按类型拆条目，并给出 `derive`（`la` 19 条、`grc` 22 条，均带 `expect` 自检）。
 - `grc` 另有 `pron`（有性 / 无性两张表）、`adj`（变格 + 比较等级）、`participle`（`extends: "adj"`）、`adv`（比较等级）；
-  `verb` 按 `{pres, impf, fut, aor, perf, plup, inf, ptcp}` 分表，列为 `1sg…3pl`（保留双数）。
+  `verb` 按 `{pres, impf, fut, aor, perf, plup, inf, ptcp}` 分表，列为 `1sg 2sg 3sg 1du 2du 3du 1pl 2pl 3pl`。
 - `ja` / `ja-cls`：**不使用 paradigm**，所有活用信息走 `inflections`（有 `group` 字段用于分组）。
 - `en` / `zh-cls`：不使用 paradigm。
 
@@ -466,7 +470,7 @@ const MIGRATIONS = {
 - 名词：第一变格（-a，含阳性）、第二变格（-us / -er 掉 e / -er 保留 e / -um）、
   第三变格（辅音词干、i 词干、辅音词干中性、i 词干中性）、第四变格（-us / -ū）、
   第五变格（rēs 型 / diēs 型）
-- 形容词：第一二变格、第三变格（二终止）
+- 形容词：第一二变格、第三变格（二尾）
 - 副词、比较等级：见形容词章
 - 动词：四种变位法；现在/未完成/将来/完成/过去完成/将来完成；主动/被动；陈述/虚拟/命令；不定式、分词、动名词、动形词。
   1 / 2 / 4 变位法的完成时与目的分词词干由规则推出（`-āv-` / `-u-` / `-īv-`）；
@@ -692,6 +696,9 @@ const MIGRATIONS = {
 - `derive` **可以挂在 section 上**：一个变位法的规则天然覆盖它全部时态表，
   于是 `endings` 按 `{pres, impf, fut, perf, plup, futp, inf, ptcp, gerund, supine}` 分块，
   用 `rowDefaults` 声明各行默认使用哪个词干变体（完成系统各表用 `perf`，分词 / 目的动名词用 `ppp`）。
+- **分词表按词尾类型拆表**：多词尾（三尾 / 二尾）的分词用 `m` / `f` / `n` 三列，
+  单词尾（一尾，如拉丁语 `amāns`）的分词用单列 `form`。拉丁语因此有 `ptcp`（三尾/二尾）
+  与 `ptcp1`（一尾）两张表，语法条目对应给 4 张表（两张词尾 + 两张示例）。
 - 语法里每个变格 / 变位条目都要给**两张表**：
   1. `caption: "屈折词尾"` —— 只列词尾（`-ō` / `-ās`…）
   2. `caption: "示例：amō, amāre, amāvī, amātum"` —— 完整词形

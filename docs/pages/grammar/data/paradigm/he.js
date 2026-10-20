@@ -1,0 +1,174 @@
+/**
+ * 圣经希伯来语专用的后期处理：骨架代入与重音。
+ *
+ * 通用部分（toUnits / fromUnits）在 models/paradigm-generate.js 里，
+ * 这里只放希伯来语的音系与马索拉符号规则。
+ *
+ * 希伯来语的屈折不是「词干 + 词尾」，而是「三辅音词根嵌进元音骨架」，
+ * 所以骨架表用 `_` 表示一个词根辅音占位（占位后可以带 dagesh 等附加点）。
+ */
+/** 重音模式：末音节重音（מִלְרַע，默认）/ 倒数第二音节重音（מִלְּעֵיל） */
+export const accentModes = ['he-milra', 'he-milel']
+
+/** 词根占位符 */
+export const ROOT_SLOT = '_'
+
+/** מֶתֶג（meteg，U+05BD）：标在重读音节的元音之后，马索拉文本的惯例符号 */
+const METEG = '\u05BD'
+const SHEWA = '\u05B0'
+/** 完整元音（可承载重音）：חִירִק צֵרֵי סֶגוֹל פַּתַח קָמָץ חוֹלָם קִבּוּץ */
+const FULL_VOWELS = new Set(['\u05B4', '\u05B5', '\u05B6', '\u05B7', '\u05B8', '\u05B9', '\u05BB'])
+/** שׁוּרֶק 写作 וֹ 的 דָּגֵשׁ 形式：带 dagesh 的 ו 也算一个元音 */
+const VAV = 'ו'
+const DAGESH = '\u05BC'
+
+
+const COMBINING_CHAR = /\p{M}/u
+/** ב ג ד כ פ ת：在音节开头读塞音，要带 דָּגֵשׁ קַל */
+const BEGADKEFAT = new Set(['ב', 'ג', 'ד', 'כ', 'פ', 'ת'])
+
+/**
+ * 补 דָּגֵשׁ קַל（dagesh lene）：ב ג ד כ פ ת 在**词首**读塞音，要带点。
+ *
+ * 骨架是与词根无关的，代入的词根辅音本身不带这个点，所以由这一步统一处理；
+ * 已有 דָּגֵשׁ（קַל 或 חָזָק）的字母跳过。
+ *
+ * 局限：词中「שְׁוָא נָח 之后」的 dagesh lene（如 יִכְתְּבוּ 的 ת）依赖词根字母的发音位置，
+ * 目前不做自动判定 —— 需要时在骨架里把该格写成 `_` + דָּגֵשׁ。见 docs/TODO.md。
+ */
+export function dageshLene(text) {
+    const chars = [...String(text ?? '').normalize('NFC')]
+    const out = []
+    for (let i = 0; i < chars.length; i += 1) {
+        const ch = chars[i]
+        const marks = []
+        while (i + 1 < chars.length && COMBINING_CHAR.test(chars[i + 1])) {
+            marks.push(chars[i + 1])
+            i += 1
+        }
+        if (out.length === 0 && BEGADKEFAT.has(ch) && !marks.includes(DAGESH)) {
+            marks.unshift(DAGESH)
+        }
+        out.push(ch, ...marks)
+    }
+    return out.join('').normalize('NFC')
+}
+
+/**
+ * 把三辅音词根代入元音骨架。
+ * `applySkeleton('קטל', '_ָ_ַ_')` → `קָטַל`
+ */
+export function applySkeleton(root, skeleton) {
+    const letters = [...String(root ?? '').replace(/[-\u2010-\u2015\s]/g, '')]
+    const chars = [...String(skeleton ?? '')]
+    let i = 0
+    let out = ''
+    for (let k = 0; k < chars.length; k += 1) {
+        const ch = chars[k]
+        if (ch !== ROOT_SLOT) {
+            out += ch
+            continue
+        }
+        // `_1` / `_2` / `_3`：显式指定第几个词根辅音（中空词根会跳过一个）
+        const next = chars[k + 1]
+        if (next && next >= '1' && next <= '9') {
+            out += letters[Number(next) - 1] ?? ROOT_SLOT
+            i = Number(next)
+            k += 1
+            continue
+        }
+        out += letters[i] ?? ROOT_SLOT
+        i += 1
+    }
+    return out.normalize('NFC')
+}
+
+
+/**
+ * 骨架的反向运算：把 base 形态里的词根辅音依次换成 `_`，得到该形态的骨架。
+ * 用于「由基本形态判定元音模式」：`toSkeleton('דָּבָר', 'דבר')` → `_ָ_ָ_`
+ */
+export function toSkeleton(form, root) {
+    const letters = [...String(root ?? '').replace(/[-\u2010-\u2015\s]/g, '')]
+    const chars = [...String(form ?? '').normalize('NFC')]
+    let from = 0
+    let next = 0
+    letters.forEach((letter, k) => {
+        // 词根辅音可能在词形里缺席（弱根脱落），缺席就跳过，继续找下一个
+        const at = chars.findIndex((ch, i) => i >= from && ch === letter)
+        if (at < 0) return
+        // 跳过了前面的词根辅音时改用显式下标（`_2` = 第 2 个辅音）
+        chars[at] = k === next ? ROOT_SLOT : `${ROOT_SLOT}${k + 1}`
+        from = at + 1
+        next = k + 1
+    })
+    return chars.join('').normalize('NFC')
+}
+
+/** 比较用的骨架指纹：忽略 dagesh，便于用户少写一个点也能匹配上模式 */
+export function skeletonKey(skeleton) {
+    return String(skeleton ?? '').normalize('NFC').split(DAGESH).join('')
+}
+
+/** 骨架里出现了几个词根占位 */
+export function countSlots(skeleton) {
+    return [...String(skeleton ?? '')].filter((ch) => ch === ROOT_SLOT).length
+}
+
+/**
+ * 标出每个可承载重音的元音在字串中的位置（码点下标）。
+ * שׁוּרֶק 的 וּ 与普通元音点都算。
+ */
+function vowelPositions(text) {
+    const chars = [...String(text ?? '').normalize('NFC')]
+    const out = []
+    for (let i = 0; i < chars.length; i += 1) {
+        const ch = chars[i]
+        if (FULL_VOWELS.has(ch)) {
+            out.push(i)
+            continue
+        }
+        if (ch === VAV) {
+            const next = chars[i + 1]
+            if (next === DAGESH) out.push(i + 1)
+        }
+    }
+    return { chars, positions: out }
+}
+
+/**
+ * 按马索拉惯例给重读音节加 מֶתֶג。
+ * mode: `he-milra`（末音节）/ `he-milel`（倒数第二音节）
+ */
+export function accent(text, mode) {
+    const src = String(text ?? '').normalize('NFC')
+    if (!src || mode === 'none' || !mode) return src
+    if (mode !== 'he-milra' && mode !== 'he-milel') return src
+    if (src.includes(METEG)) return src
+
+    const { chars, positions } = vowelPositions(src)
+    if (!positions.length) return src
+
+    const index = mode === 'he-milel'
+        ? (positions.length >= 2 ? positions[positions.length - 2] : positions[0])
+        : positions[positions.length - 1]
+
+    // 插在重读元音之后（元音点本身，或 שׁוּרֶק 的 dagesh 之后）
+    chars.splice(index + 1, 0, METEG)
+    return chars.join('').normalize('NFC')
+}
+
+/** 去掉已有的重音记号，方便反复重算 */
+export function stripAccent(text) {
+    return String(text ?? '').normalize('NFC').split(METEG).join('')
+}
+
+/** 供界面/校验用：骨架 + 词根 → 词形（补 dagesh lene；mode 为空时不标重音，交给 post.accent） */
+export function realize(root, skeleton, mode = 'none') {
+    return accent(dageshLene(applySkeleton(root, skeleton)), mode)
+}
+
+/** 只要词形、不标重音 */
+export function spell(root, skeleton) {
+    return dageshLene(applySkeleton(root, skeleton))
+}

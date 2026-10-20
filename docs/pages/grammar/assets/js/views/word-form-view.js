@@ -52,6 +52,8 @@ export default {
         ])
 
         const grammarDoc = await loadGrammar(lang)
+        // 语言可以自定义「主要部分」的叫法与提示（如希伯来语是词根辅音）
+        const stemsMeta = grammarDoc?.stems && typeof grammarDoc.stems === 'object' ? grammarDoc.stems : null
         const paradigmProfile = await loadParadigmProfile(lang)
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
@@ -230,7 +232,7 @@ export default {
             class: 'input',
             type: 'text',
             lang: lang,
-            placeholder: '主要部分，如 am、λόγ',
+            placeholder: stemsMeta?.placeholder || '主要部分，如 am、λόγ',
             value: data.stems.base || '',
             oninput: () => refreshGenerateBtn()
         })
@@ -297,9 +299,10 @@ export default {
 
         form.appendChild(genderSlot)
 
-        form.appendChild(field('主要部分',
+        form.appendChild(field(stemsMeta?.label || '主要部分',
             h('div', { class: 'field__row' }, principalInput, generateBtn),
-            '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。'))
+            stemsMeta?.hint
+                || '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。'))
         form.appendChild(extraPartsSlot)
 
         form.appendChild(h('div', { class: 'word-form__row' },
@@ -360,7 +363,8 @@ export default {
         function currentDeriveSpec() {
             const ref = inflectionRef.value
             if (!ref || ref === SPECIAL_REF || ref === INDECL_REF) return null
-            return getDeriveSpec(grammarDoc, ref)
+            // 锚点自己没写规则时，退回该词性的总规则（如希伯来语名词：按基本形态判定元音模式）
+            return getDeriveSpec(grammarDoc, ref) || getDeriveSpec(grammarDoc, `${lang}-${posSelect.value}`)
         }
 
         /** 当前锚点声明的主要部分（不含 base） */
@@ -436,14 +440,20 @@ export default {
                 return
             }
 
-            const { paradigm, filled } = generateParadigm({
+            const { paradigm, filled, noVariant } = generateParadigm({
                 stem,
                 stems: collectStems(),
+                headword: lemmaInput.value,
                 spec,
                 template: getParadigmTemplate(grammarDoc, data.pos),
                 existing: data.paradigm,
                 profile: paradigmProfile
             })
+
+            if (noVariant) {
+                toast.error('按基本形态判不出元音模式，请检查基本形态的元音点，或手动填表', 6000)
+                return
+            }
 
             if (!filled.length) {
                 toast.info('没有可填的空格（已有内容不会被覆盖）')

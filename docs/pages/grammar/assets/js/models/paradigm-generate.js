@@ -211,18 +211,42 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
  * @param {object}   options.spec      derive 规格
  * @param {object}   options.template  paradigms[pos]
  * @param {object}   [options.existing] 词条已有的 paradigm
- * @param {object}   [options.profile] 语言档案（data/paradigm/<lang>.js）：连声与重音
+ * @param {object}   [options.profile] 语言档案（data/paradigm/<lang>.js）：
+ *                                     `sandhi` / `accent`（拼接型）或 `realize`（骨架型）
  * @returns {{ paradigm: object, filled: object[], skipped: object[] }}
  */
-export function generateParadigm({ stem, stems, spec, template, existing, profile } = {}) {
+export function generateParadigm({ stem, stems, headword, spec, template, existing, profile } = {}) {
     const result = { paradigm: {}, filled: [], skipped: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
     const parts = normalizeStemParts(stem, stems)
     const base = parts.base || ''
     if (!base) return result
 
+    // 骨架型规格可以带 `variants`：按「基本形态的骨架」在几个模式变体里选一个
+    // （希伯来语名词就是这么由基本形态判定元音模式的）
+    let activeSpec = spec
+    if (spec.mode === 'skeleton' && Array.isArray(spec.variants) && spec.variants.length) {
+        const key = typeof profile?.skeletonKey === 'function'
+            ? profile.skeletonKey
+            : (x) => String(x ?? '')
+        const want = typeof profile?.toSkeleton === 'function' ? key(profile.toSkeleton(headword, base)) : null
+        const hit = want
+            ? spec.variants.find((v) => key(v.match) === want)
+                || spec.variants.find((v) => v.match && key(v.match) === want)
+            : null
+        if (!hit) {
+            result.noVariant = { headword: String(headword ?? ''), skeleton: want }
+            return result
+        }
+        activeSpec = { ...spec, endings: hit.endings, rowDefaults: hit.rowDefaults || spec.rowDefaults }
+        result.variant = hit.id || null
+    }
+
     const formRules = Array.isArray(spec.formRules) ? spec.formRules : []
     const current = existing && typeof existing === 'object' ? existing : {}
+    // 骨架型（`mode: 'skeleton'`）：格子写的是「元音（辅音）骨架」，`_` 由词根辅音依次代入，
+    // 例如希伯来语 `_ ָ _ ַ _` + 词根 קטל → קָטַל。代入由语言档案的 realize() 负责。
+    const skeletonMode = spec.mode === 'skeleton'
 
     for (const table of template.tables) {
         for (const row of table.rows || []) {
@@ -232,7 +256,7 @@ export function generateParadigm({ stem, stems, spec, template, existing, profil
                     result.skipped.push({ ...at, reason: 'disabled' })
                     continue
                 }
-                const cell = resolveCell(spec, table.key, row.key, col.key)
+                const cell = resolveCell(activeSpec, table.key, row.key, col.key)
                 if (!cell || (!cell.suffix && !cell.prefix && !cell.stemOnly)) {
                     result.skipped.push({ ...at, reason: 'no-ending' })
                     continue
@@ -247,8 +271,21 @@ export function generateParadigm({ stem, stems, spec, template, existing, profil
                 const suffix = endingText(cell.suffix)
                 const sandhi = spec.post?.sandhi
                 const join = profile?.sandhi?.join
-                let naive = cell.stemOnly ? prefix + part : prefix + part + suffix
-                if (sandhi && join && !cell.stemOnly) {
+                let naive
+                if (skeletonMode) {
+                    if (typeof profile?.realize !== 'function') {
+                        result.skipped.push({ ...at, reason: 'no-realize' })
+                        continue
+                    }
+                    naive = String(profile.realize(part, suffix) ?? '')
+                    if (!naive) {
+                        result.skipped.push({ ...at, reason: 'empty' })
+                        continue
+                    }
+                } else {
+                    naive = cell.stemOnly ? prefix + part : prefix + part + suffix
+                }
+                if (!skeletonMode && sandhi && join && !cell.stemOnly) {
                     naive = join(prefix + part, suffix)
                     const scope = typeof sandhi === 'object' ? sandhi.scope : undefined
                     if (scope === 'word' && profile?.sandhi?.wordFinal) {
@@ -256,7 +293,7 @@ export function generateParadigm({ stem, stems, spec, template, existing, profil
                     }
                 }
 
-                const mode = resolveAccentMode(spec, table.key, row.key, col.key)
+                const mode = resolveAccentMode(activeSpec, table.key, row.key, col.key)
                 const applied = applyRuleList(naive, formRules)
                 const accented = mode && typeof profile?.accent === 'function'
                     ? profile.accent(applied, mode, {
@@ -306,7 +343,23 @@ export function validateDeriveSpec(spec, template, profile) {
     const problems = []
     if (!spec || typeof spec !== 'object') return ['derive 不是对象']
 
-    if (!spec.endings || typeof spec.endings !== 'object') problems.push('缺少 endings')
+    const hasVariants = Array.isArray(spec.variants) && spec.variants.length > 0
+    if (!hasVariants && (!spec.endings || typeof spec.endings !== 'object')) problems.push('缺少 endings')
+    if (hasVariants) {
+        const seen = new Set()
+        spec.variants.forEach((v, i) => {
+            const at = `variants[${i}]`
+            if (!v || typeof v !== 'object') { problems.push(`${at} 不是对象`); return }
+            if (typeof v.match !== 'string' || !v.match) problems.push(`${at} 缺少 match（基本形态的骨架）`)
+            else if (seen.has(v.match)) problems.push(`${at}.match 与前面的变体重复：${v.match}`)
+            else seen.add(v.match)
+            if (!v.endings || typeof v.endings !== 'object') problems.push(`${at} 缺少 endings`)
+            if (v.headword != null && typeof v.headword !== 'string') problems.push(`${at}.headword 不是字符串`)
+        })
+    }
+    if (spec.mode != null && spec.mode !== 'skeleton') {
+        problems.push(`mode 只能是 "skeleton"：${spec.mode}`)
+    }
     if (spec.stemExample != null && typeof spec.stemExample !== 'string') {
         problems.push('stemExample 不是字符串')
     }
@@ -493,14 +546,41 @@ export function validateDeriveSpec(spec, template, profile) {
  *   ok 只取决于 missing / mismatches；extra 是「生成了但 expect 没写」的提示
  */
 export function checkDeriveExample(spec, template, options = {}) {
-    const { stems = null, expect = null, reportExtra = true, profile = null } = options
+    const { stems = null, expect = null, reportExtra = true, profile = null, headword = null } = options
     const out = { ok: false, missing: [], mismatches: [], extra: [] }
+
+    // 带 variants 的规格：逐个变体用自己的「基本形态」自检
+    if (Array.isArray(spec?.variants) && spec.variants.length) {
+        const out2 = { ok: true, missing: [], mismatches: [], extra: [] }
+        spec.variants.forEach((v, i) => {
+            if (!v || !v.headword || !v.expect) return
+            const res = checkDeriveExample(
+                {
+                    ...spec,
+                    variants: null,
+                    endings: v.endings,
+                    stemExample: v.root || spec.stemExample,
+                    expect: v.expect
+                },
+                template,
+                { ...options, expect: v.expect, headword: v.headword }
+            )
+            const tag = `${v.id || v.headword}`
+            for (const m of res.missing) out2.missing.push({ at: `${tag}: ${m.at}`, want: m.want })
+            for (const m of res.mismatches) out2.mismatches.push({ at: `${tag}: ${m.at}`, want: m.want, got: m.got })
+            for (const m of res.extra) out2.extra.push({ at: `${tag}: ${m.at}`, got: m.got })
+            out2.ok = out2.ok && res.ok
+        })
+        return out2
+    }
+
     const want = expect || spec?.expect
     if (!spec?.stemExample || !want) return out
 
     const { paradigm } = generateParadigm({
         stem: spec.stemExample,
         stems,
+        headword: headword ?? spec.headwordExample ?? null,
         spec,
         template,
         existing: {},
@@ -576,8 +656,13 @@ export function verifyGrammarDoc(lang, doc, profile) {
             out.warnings.push(`${where}: 未能确定对应的 paradigm 模板，跳过 key 对齐检查`)
         }
 
-        if (!spec.stemExample || !spec.expect) {
+        const isVariantSpec = Array.isArray(spec.variants) && spec.variants.length > 0
+        if (!isVariantSpec && (!spec.stemExample || !spec.expect)) {
             out.warnings.push(`${where}: 缺少 stemExample / expect，无法自检`)
+            return
+        }
+        if (isVariantSpec && !spec.variants.some((v) => v && v.headword && v.expect)) {
+            out.warnings.push(`${where}: variants 都没有 headword / expect，无法自检`)
             return
         }
 
@@ -593,7 +678,8 @@ export function verifyGrammarDoc(lang, doc, profile) {
         report(res, '')
 
         // 第二遍：主要部分全填（用 parts 里的例词），验证「用户全填」这条路径
-        if (Array.isArray(spec.parts) && spec.parts.length) {
+        // 带 variants 的规格每个变体自带词根，没有「全填」这一路径
+        if (!isVariantSpec && Array.isArray(spec.parts) && spec.parts.length) {
             const stems = {}
             for (const part of spec.parts) {
                 if (part?.key && typeof part.example === 'string' && part.example) stems[part.key] = part.example

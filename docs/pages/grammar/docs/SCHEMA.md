@@ -500,11 +500,40 @@ const MIGRATIONS = {
 
 #### he 圣经希伯来语
 
-- 名词：性、数、附属形、代词后缀
-- 形容词
-- 代词：独立、后缀
-- 动词：Qal / Nif'al / Pi'el / Pu'al / Hif'il / Hof'al / Hitpa'el；完成/未完成/命令/不定式/分词
-- 弱根动词分类
+- 章节顺序：代词 → 名词：元音模式 → 名词：形态类别 → 形容词 → 副词 → 动词总论 →
+  九个词根类型（完整词根 / 喉音根 / I-א / I-י / I-נ / III-ה / III-א / 中空 / 叠音）→
+  数词 → 马索拉符号 → 转写对照（共 18 节）
+- **每个条目都是「元音（辅音）表 + 示例表」两张同构的表**，没有词尾表：
+  格内写含词缀的完整骨架，`_` = 一个词根辅音（可带 dagesh 等附加点）；
+  `data/paradigm/he.js` 的 `applySkeleton(root, 骨架)` 把骨架还原成词形，两张表逐格可互推
+- 名词元音模式 18 项（קֵטֶל / קֹטֶל / קְטָל / קַטָּל / מִקְטָל / קִטּוּל / קָטוֹל / קְטָלָה /
+  קַטְלָה / קִטְלָה / קַטֶּלֶת / קְטִילָה / הַקְטָלָה / הִתְקַטְּלוּת / קַטְלוּת / קְטֻלָּה /
+  מִקְטָלָה / מַקְטֵל），开头一张判定总表；**不进语法锚点**（模式由基本形态的骨架判定）
+- 名词语法锚点 11 项（通用 + 10 个词根 / 形态类别）；双数类 / 唯复数 / 不规则 / 阴阳同形
+  保留为参考条目，词条请选「特殊变格」
+- 形容词 8 项，全部可锚定；比较级 / 最高级只在正文说明（希伯来语无形态比较级）
+- 动词：binyan 在「时态」层级 —— `paradigms.verb` = 7 个常用 binyan 表 + 不定式 + 分词（9 张），
+  每张表行 = 完成式 / 连续完成式 / 未完成式 / 连续未完成式 / 祈愿式 / 劝勉式 / 命令式，
+  列 = `1cs 2fs 2ms 3fs 3ms 1cp 2fp 2mp 3fp 3mp`（先单数后复数，同数内先阴后阳）
+- 罕见 binyan 8 个（Poel / Poal / Hitpoel / Pilpel / Palpel / Hitpalpel / Nitpael / Štaphel）只写在
+  `he-verb-strong` 正文，不进 paradigm 模板
+- 「主要部分」= 三辅音词根（`כ-ת-ב`），由 grammar 文档的 `stems` 字段给出标签与占位提示；
+  基本形态 = 名词单数绝对形 / 形容词 ms 绝对形 / 动词 3ms Qal 完成式
+- 重音：`data/paradigm/he.js` 的 `accent()` 用 מֶתֶג（U+05BD）标重读音节，
+  模式 `he-milra`（末音节）/ `he-milel`（倒数第二）
+
+`derive` 覆盖：**骨架型 derive**（`mode: "skeleton"`）10 条 ——
+
+| 规格 | 覆盖 | 自检 |
+| --- | --- | --- |
+| `he-verb-strong`（section 级） | 7 个 binyan × 7 式 × 10 身位 + 不定式 + 分词 = **428 格**，`post.accent: he-milra` | 428/428 |
+| 八个弱根类型（各 1 条） | Qal 的完成式 / 未完成式 3ms、命令式 2ms、分词单数、不定式附属形 = 5 格 | 40/40 |
+| `he-noun`（section 级，**按基本形态选变体**） | 19 个元音模式变体（18 个 מִשְׁקָל + 通用 קָטָל）× 绝对形 / 附属形 × 单 / 复 = 61 格 | 61/61 |
+
+骨架↔示例的逐格一致性另外由 `spell(root, 骨架)` 校验。
+
+未覆盖：弱根的其余 binyan 与弱根 Qal 的完整网格（见 `docs/TODO.md`：词尾形、槽位下标、
+词中 dagesh lene 三个坑需要逐类核对）。
 
 #### sa 梵语
 
@@ -675,6 +704,7 @@ const MIGRATIONS = {
 | 字段                            | 说明                                                                        |
 | ------------------------------- | --------------------------------------------------------------------------- |
 | `pos`                           | 可选。对应的 `paradigms` 词性 key；缺省时按 section id / 表 key 推断         |
+| `mode`                          | 可选。`"skeleton"` = **骨架型**：格子写的是「元音（辅音）骨架」而不是词尾，由 `profile.realize(stem, 骨架)` 把主要部分代入；缺省是词尾拼接型 |
 | `stemExample`                   | 自检用基准词干（即 `stems.base` 的例词），配 `expect` 使用                    |
 | `parts`                         | 主要部分声明 `[{ key, label?, example?, hint?, required? }]`，第一项固定为 `base` |
 | `expectParts`                   | 可选。主要部分全填时的期望值，缺省时用 `expect`                              |
@@ -693,12 +723,63 @@ const MIGRATIONS = {
 ```
 1. stemForm = 格级 ?? 行级 ?? 'base'
 2. stem     = 用户填的 stems[stemForm] ?? derive.stems[stemForm] ?? 对 base 套用 stemForms[stemForm]
-3. naive    = prefix + stem + suffix
-4. naive    = 有 post.sandhi 时交给 profile.sandhi 处理
+3. naive    = prefix + stem + suffix            （骨架型：profile.realize(stem, 骨架)）
+4. naive    = 有 post.sandhi 时交给 profile.sandhi 处理（骨架型跳过）
 5. form     = 对 naive 套用 formRules
 6. form     = 有 post.accent 时交给 profile.accent 处理
 7. 该格已有值 → 跳过，不覆盖
 ```
+
+#### 骨架型 derive（`mode: "skeleton"`）
+
+适用于**词根 + 元音骨架**型语言（目前是圣经希伯来语）：词干不是「加词尾的基础形」，
+而是三辅音词根，每个格子给出的是完整骨架，`_` 表示一个词根辅音（占位后可带 dagesh 等附加点）。
+
+```jsonc
+{
+  "mode": "skeleton",
+  "stemExample": "קטל",                     // 词根，不是词干
+  "parts": [{ "key": "base", "label": "词根（辅音）", "example": "קטל", "required": true }],
+  "post": { "accent": "he-milra" },
+  "endings": { "qal": { "perf": { "3ms": "_ָ_ַ_", "3fs": "_ָ_ְ_ָה" } } },
+  "expect":  { "qal": { "perf": { "3ms": "קָטַל", "3fs": "קָטְלָה" } } }
+}
+```
+
+- 代入由语言档案完成：`profile.realize(词根, 骨架)`（`he.js` 会先补词首的 dagesh lene，再按需落重音）。
+- `endings` / `expect` 的结构、`disabled` 跳过、`existing` 不覆盖等行为与词尾拼接型完全一致。
+- 校验器会拒绝除 `"skeleton"` 以外的 `mode` 值。
+
+**骨架的写法**（`data/paradigm/he.js` 的 `applySkeleton` / `toSkeleton`）：
+
+| 记号 | 含义 |
+| --- | --- |
+| `_` | 依次取下一个词根辅音 |
+| `_1` `_2` `_3` | 显式取第 n 个词根辅音 —— 词根辅音脱落时用（I-נ 同化、中空词根丢中辅音、III-ה 丢词尾 ה） |
+| 其他字符 | 原样保留（词缀、元音点、dagesh 等） |
+
+例：`_ָ_ַ_` + 词根 קטל → קָטַל；`יִ_2ֹּ_` + 词根 נפל → יִפֹּל（第 1 个辅音 נ 被同化，所以第 2 个用 `_2`）。
+
+**按基本形态选变体**（`variants`）：同一个 derive 规格可以声明多个模式变体，
+引擎用 `profile.toSkeleton(基本形态, 词根)` 求出基本形态的骨架，与该变体的 `match` 比对后选用：
+
+```jsonc
+{
+  "mode": "skeleton",
+  "headword": "基本形态",           // 由表单传入 generateParadigm({ headword })
+  "variants": [
+    { "id": "he-noun-qatal", "match": "_ָּ_ָ_", "root": "דבר", "headword": "דָּבָר",
+      "endings": { "main": { "abs": { "sg": "_ָּ_ָ_" }, "cst": { "sg": "_ְּ_ַ_" } } },
+      "expect":  { "main": { "abs": { "sg": "דָּבָר" }, "cst": { "sg": "דְּבַר" } } } }
+  ]
+}
+```
+
+- 比对时忽略 dagesh（`profile.skeletonKey`），用户少写一个点也能匹配上。
+- 一个变体都匹配不上时 `generateParadigm` 返回 `noVariant`，表单提示「按基本形态判不出元音模式」。
+- `variants` 里每个变体自带 `root` / `headword` / `expect`，自检逐个变体跑。
+- 锚点本身没有 `derive` 时，表单会退回该词性的总规则（`${lang}-${pos}` 这一节），
+  所以希伯来语名词的这条规格挂在 `he-noun` 上就够，不必在 11 个形态类别里重复。
 
 约束：
 

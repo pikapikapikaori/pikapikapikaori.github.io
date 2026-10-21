@@ -55,7 +55,7 @@
     "defaultSource": "manual",
     "sortField": "addedAt",
     "sortOrder": "desc",
-    "languageOrder": ["la", "grc", "sa", "mnc", "ja-cls", "zh-cls", "he", "ja", "en", "fr", "de"],
+    "languageOrder": ["la", "grc", "sa", "mnc", "zh-cls", "he", "ja", "en", "fr", "de"],
     "groupOrder": ["classical", "modern"]
   },
   "words": [ /* Word[] */ ]
@@ -121,7 +121,6 @@
 | `he` | 圣经希伯来语 | 古典语言 | ✅ | ✅ |
 | `sa` | 梵语 | 古典语言 | ✅ | ✅ |
 | `mnc` | 满语 | 古典语言 | ✅ | ✅ |
-| `ja-cls` | 古典日语 | 古典语言 | ✅ | ✅ |
 | `zh-cls` | 古汉语 | 古典语言 | ❌ | ❌ |
 | `ja` | 现代日语 | 现代语言 | ✅ | ✅ |
 | `en` | 现代英语 | 现代语言 | ❌ | ❌ |
@@ -257,7 +256,7 @@
   - 有双数：`1sg 2sg 3sg 1du 2du 3du 1pl 2pl 3pl`
 
   非定式用单列 `form`。
-- 找不到模板的语言（如 `en` / `zh-cls` / `ja` / `ja-cls`）不使用此字段，相关变位/活用全部走 `inflections`。
+- 找不到模板的语言（如 `en` / `zh-cls`）不使用此字段，相关变化全部走 `inflections`。
 
 #### 主要部分（stems）
 
@@ -463,7 +462,7 @@ const MIGRATIONS = {
 - `la` 的 `noun` / `adj` 与 `grc` 一样按类型拆条目，并给出 `derive`（`la` 19 条、`grc` 22 条，均带 `expect` 自检）。
 - `grc` 另有 `pron`（有性 / 无性两张表）、`adj`（变格 + 比较等级）、`participle`（`extends: "adj"`）、`adv`（比较等级）；
   `verb` 按 `{pres, impf, fut, aor, perf, plup, inf, ptcp}` 分表，列为 `1sg 2sg 3sg 1du 2du 3du 1pl 2pl 3pl`。
-- `ja` / `ja-cls`：**不使用 paradigm**，所有活用信息走 `inflections`（有 `group` 字段用于分组）。
+- `ja`：使用 paradigm，活用由 `fields` / `endings` 驱动（见 §4「ja 现代日语」）。
 - `en` / `zh-cls`：不使用 paradigm。
 
 ---
@@ -492,8 +491,6 @@ const MIGRATIONS = {
 | mnc    | `mnc-noun-genitive`      | 名词属格         |
 | ja     | `ja-verb-godan`          | 五段动词活用     |
 | ja     | `ja-adj-i`               | イ形容词活用     |
-| ja-cls | `ja-cls-verb-yodan`      | 四段活用         |
-| ja-cls | `ja-cls-kana-historical` | 历史假名遣       |
 | zh-cls | `zh-cls-parts-of-speech` | 词类             |
 | zh-cls | `zh-cls-function-words`  | 虚词             |
 | fr     | `fr-verb-1st-group`      | 第一组动词       |
@@ -665,15 +662,6 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
   表单在「语法性」的位置显示 chips（日语没有语法性，所以这一栏就是自他）
 - 派生动词（`ja-verb-secondary`）：自他动词对应（-aru/-eru、-ru/-su、-ku/-keru、同形）+ 自谦语 + 尊他语，不接 `derive`
 - 敬语章讲三分体系（尊敬 / 谦让 / 叮宁）+ 句式（お〜になる / お〜する / ご〜する），具体动词见派生动词章
-
-#### ja-cls 古典日语
-
-- 词类
-- 动词：四段、上一段、下一段、上二段、下二段、カ变、サ变、ナ变、ラ变
-- 活用形：未然、連用、終止、連体、已然、命令
-- 形容词、形容动词
-- 助动词
-- 历史假名遣
 
 #### zh-cls 古汉语
 
@@ -1211,7 +1199,6 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 **已知限制**
 
 - 表格行列映射只覆盖常见情况，未命中的行走 `inflections`
-- 古典日语与近现代日语共用 `Japanese` 节，暂未区分
 - 无缓存
 - 未处理速率限制
 

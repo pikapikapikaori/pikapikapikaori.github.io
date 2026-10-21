@@ -21,7 +21,7 @@
 
 /** 要加载的语言文件（顺序无所谓，显示顺序由 JSON 里的 group.order / order 决定） */
 const GRAMMAR_FILES = [
-    'la', 'grc', 'he', 'sa', 'mnc', 'ja', 'ja-cls', 'zh-cls', 'en', 'fr', 'de'
+    'la', 'grc', 'he', 'sa', 'mnc', 'ja', 'zh-cls', 'en', 'fr', 'de'
 ]
 
 /** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */

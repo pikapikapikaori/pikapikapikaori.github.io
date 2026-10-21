@@ -84,10 +84,6 @@ pre,
 }
 
 [lang="ja"],
-[lang="ja-cls"] {
-    font-family: "LN JA", var(--ff-content);
-}
-
 [lang="zh-cls"] {
     font-family: "LN ZH-CLS", var(--ff-content);
 }

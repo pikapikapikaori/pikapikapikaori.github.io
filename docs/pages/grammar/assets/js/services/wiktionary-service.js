@@ -11,7 +11,6 @@ const LANG_TO_WIKTIONARY = {
     'sa': 'Sanskrit',
     'mnc': 'Manchu',
     'ja': 'Japanese',
-    'ja-cls': 'Japanese',
     'zh-cls': 'Chinese',
     'en': 'English',
     'fr': 'French',

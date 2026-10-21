@@ -13,7 +13,7 @@
 
 ---
 
-## 第一部分 · 数据 Schema
+## 第一部分 数据 Schema
 
 所有持久数据存放在浏览器 **IndexedDB**（库名 `langnotebook`），运行时通过 `assets/js/store/*` 访问；导出/导入使用下文的用户 JSON。
 
@@ -214,7 +214,7 @@
 }
 ```
 
-#### 字段说明
+#### 字段说明（Word）
 
 | 字段                        | 说明                                                                                              |
 | --------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -285,7 +285,7 @@
 | `sa` | 单数主格 | 阳性单数主格 | 第三人称单数现在时 |
 
   法语 / 德语的动词 `derive` 用 `stemForms.base = { from: 'headword', rules }` 从不定式推出词干，
-  因此**主要部分不必重复填写**（见第二部分 §7）。
+  因此**主要部分不必重复填写**（见第二部分 [§7](#7-derive-字段用主要部分生成变格变位表)）。
 - **尽量取一个能让词尾直接拼接的词干**（第一变位法用 `am` 而不是 `amā`），可省掉大量音变规则。
 - 词卡正面显示 `base`，其余已填的部分在下面另起一行小字列出。
 - 与「变格 / 变位类型」配合用于**自动生成变格 / 变位表**，见第 7 节。
@@ -337,7 +337,7 @@ const MIGRATIONS = {
 
 ---
 
-## 第二部分 · 语法数据编写规范
+## 第二部分 语法数据编写规范
 
 语法数据为**只读**，由静态 JSON 提供，前端不提供任何修改入口。
 路径：`/data/grammar/{lang}.json`。
@@ -444,7 +444,7 @@ const MIGRATIONS = {
 }
 ```
 
-#### 字段说明
+#### 字段说明（paradigm 模板）
 
 | 字段                 | 说明                                                                 |
 | -------------------- | -------------------------------------------------------------------- |
@@ -462,7 +462,7 @@ const MIGRATIONS = {
 - `la` 的 `noun` / `adj` 与 `grc` 一样按类型拆条目，并给出 `derive`（`la` 19 条、`grc` 22 条，均带 `expect` 自检）。
 - `grc` 另有 `pron`（有性 / 无性两张表）、`adj`（变格 + 比较等级）、`participle`（`extends: "adj"`）、`adv`（比较等级）；
   `verb` 按 `{pres, impf, fut, aor, perf, plup, inf, ptcp}` 分表，列为 `1sg 2sg 3sg 1du 2du 3du 1pl 2pl 3pl`。
-- `ja`：使用 paradigm，活用由 `fields` / `endings` 驱动（见 §4「ja 现代日语」）。
+- `ja`：使用 paradigm，活用由 `fields` / `endings` 驱动（见 [§4「ja 现代日语」](#ja-现代日语)）。
 - `en` / `zh-cls`：不使用 paradigm。
 
 ---
@@ -498,7 +498,7 @@ const MIGRATIONS = {
 
 ### 关联
 
-### 1.1 章节分组（`groups` / `section.group`）
+### 1.1 章节分组（groups 与 section.group）
 
 语法页按**一级章节分页**：一条 `groups` 声明章节顺序与名称，每个 section 用 `group` 声明归属。
 
@@ -671,7 +671,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - 派生动词（`ja-verb-secondary`）：自他动词对应（-aru/-eru、-ru/-su、-ku/-keru、同形）+ 自谦语 + 尊他语，不接 `derive`
 - 敬语章讲三分体系（尊敬 / 谦让 / 叮宁）+ 句式（お〜になる / お〜する / ご〜する），具体动词见派生动词章
 
-#### zh-cls 古汉语 / en 现代英语
+#### zh-cls 古汉语与 en 现代英语
 
 两者都关闭 `grammar` 与 `paradigm`，`sections` 为空数组、不写 `paradigms`、没有 `derive`。
 表单只保留基本形态、词性、含义、补充形式、固定搭配、例句、派生词、标签备注；
@@ -760,8 +760,8 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 | 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: "LN XX", var(--ff-content); }`；RTL 语言再补 `direction: rtl; unicode-bidi: isolate;`。 |
 | 4 | `assets/css/fonts.css` | 若准备专用字体：把 `xx.woff2` 放到 `assets/resources/fonts/`，并新增/取消对应 `@font-face`（`font-family: "LN XX"`）。没有专用字体可跳过，自动回退到 `--ff-content`。 |
 | 5 | `external/js/wiktionary.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
-| 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见 §7.1。不需要就跳过，引擎会自动略过这两步。 |
-| 7 | `docs/SCHEMA.md` | 更新第一部分第 3 节的语言元数据表格、第二部分第 4 小节「各语言语法覆盖范围」，以及第 3 小节（锚点 id 命名）的示例表。 |
+| 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见 [§7.1](#71-语言档案dataparadigm-目录)。不需要就跳过，引擎会自动略过这两步。 |
+| 7 | `docs/SCHEMA.md` | 更新[§3 语言元数据](#3-语言元数据)的表格、[第二部分 §4](#4-各语言语法覆盖范围)「各语言语法覆盖范围」，以及[§3 锚点 id 命名](#3-锚点-id-命名)的示例表。 |
 
 补充说明：
 
@@ -789,7 +789,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 5. **`skipTables`**：某个变位类型整张表都不存在时（情态动词没有命令式）用它，
    不要留一张全空表；语法章与生词表单都会跳过，已填数据保留不删。
 6. **锚点**：要让某个 section / item 出现在「语法锚点」下拉里，就给它标
-   `inflect: "decl"` 或 `"conj"`（见 §6）。`collectInflectAnchors` 会拿标题做词卡徽章的短名，
+   `inflect: "decl"` 或 `"conj"`（见 [§6](#6-paradigms-的两个通用机制)）。`collectInflectAnchors` 会拿标题做词卡徽章的短名，
    **保留标题末尾括号里的例词**（`强变化动词（sprechen 型）`），短名撞车时回退完整标题；
    `section.id` 与 `item.id` 必须全局不重复。
 7. **表格写法**：
@@ -798,13 +798,13 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
    - 行标签只用分析语言（中文）。不要把示例词尾塞进标签（`连续完成式 וְ` 这种在窄首列会换行错位）。
    - 单元格 `—` 表示「该形式不存在」。**全空的行/列会自动隐藏**（含表头），所以缺数据时可以先留空，
      不会出现一排破折号；词卡的 `disabled` 格同样显示 `—`。
-8. **章节分组**：章节多于一个时，在文档顶部写 `groups`，每节用 `group` 归属（见 §1.1）；
+8. **章节分组**：章节多于一个时，在文档顶部写 `groups`，每节用 `group` 归属（见 [§1.1](#11-章节分组groups-与-sectiongroup)）；
    只有一两节的语言不分页，什么都不用写。
 9. **语言专属音系处理**：连声 / 重音 / 词根骨架代入这类需要音节或词根知识的逻辑，
-   放到 `data/paradigm/<lang>.js`，通过 `profile` 注入（见 §7.1）；通用引擎只保留机械流程。
+   放到 `data/paradigm/<lang>.js`，通过 `profile` 注入（见 [§7.1](#71-语言档案dataparadigm-目录)）；通用引擎只保留机械流程。
 10. **改完数据要 bump `sw.js` 的 `CACHE`**：`data/grammar/` 是 stale-while-revalidate，
     不 bump 时浏览器首次加载会读到旧文件。
-11. **跑自检**：`verifyGrammarDoc(lang, doc, profile)`（dev 环境下「校验语法数据」按钮），
+11. **跑自检**：`verifyGrammarDoc(lang, doc, profile)`（命令行跑法见[第四部分 §4](#4-校验语法数据命令行)），
     错误必须为 0；新增语言时同时确认章节能渲染、锚点下拉能取到条目。
 12. **说明文字用 HTML，不写 Markdown**：`notes` / `note` / 表格 caption 与单元格都按 HTML 片段渲染
     （`utils/dom.js` 的 `htmlFragment`），可用的标签只有
@@ -839,16 +839,16 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
       回退只对名词生效（与旧行为一致）；其它词性要显示字段必须显式声明 `fields`
     - 日语动词显式用 `fields` 声明「自他」。以后要加「及物性 / 有生性 / 体」之类，加一条就行
 
-**接入 derive 的四步**（详见 §7、§8，按顺序加，每步都能单独跑自检）：
+**接入 derive 的四步**（详见 [§7](#7-derive-字段用主要部分生成变格变位表)、[§8](#8-postaccent-字段按音节指派重音)，按顺序加，每步都能单独跑自检）：
 
 | 步骤 | 手段 | 用于 |
 | --- | --- | --- |
 | 1 | `endings` 纯拼接 | 词干 + 词尾型语言的主流情况 |
 | 2 | `stemForms`（含 `{ from, rules }` 链式、带环检测） | 多词干系统：复数变音、虚拟式 II 变音、只填一个主要部分派生其余 |
-| 3 | `formRules` | 接合处的音变（目前还没有语言用到） |
+| 3 | `formRules` | 接合处的音变：引擎已实现该处理器，目前没有语言使用，需要时直接加 |
 | 4 | `post.accent` | 重音 / 声调（古希腊语、梵语、希伯来语已在用） |
 
-骨架型语言（词根嵌进元音骨架，如圣经希伯来语）另见 §「骨架型 derive」。
+骨架型语言（词根嵌进元音骨架，如圣经希伯来语）另见 [§「骨架型 derive」](#骨架型-derivemode-取-skeleton)。
 
 ---
 
@@ -898,13 +898,13 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 ---
 
-### 7. derive 字段（按主要部分生成变格 / 变位表）
+### 7. derive 字段（用主要部分生成变格、变位表）
 
 挂在 `sections[].items[]` 上，描述「给定词干 → 生成该类型的表格」的规则。
 
 - 生成逻辑：`assets/js/models/paradigm-generate.js`（通用引擎，不 import 任何模块）
-- 语言专属后期处理：`data/paradigm/<lang>.js`（见 §7.1）
-- 自检入口：语言选择页的「校验语法数据（dev）」按钮
+- 语言专属后期处理：`data/paradigm/<lang>.js`（见 [§7.1](#71-语言档案dataparadigm-目录)）
+- 自检入口：命令行（见[第四部分 §4](#4-校验语法数据命令行)），页面上没有开发专用按钮
 - 入口：生词表单「主要部分」右侧的「生成表格」按钮；没有 `derive` 的类型按钮为禁用状态
 
 ```json
@@ -940,7 +940,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 | `rowDefaults[tableKey][rowKey]` | 该行的 `prefix` / `suffix` / `stemForm` 默认值，被格级声明覆盖               |
 | `stems[名称]`                   | 直接给出词干变体（无法用规则表达时用，如 la `reg → rēx`）                    |
 | `stemForms[名称]`               | 词干变体规则：`[{ pattern, replace, flags? }]`（作用于 `base`），或 `{ from, rules }`（先取另一个变体的词干，再套规则，可链式，见下） |
-| `formRules`                     | 拼接后作用于整词的规则 `[{ pattern, replace, flags? }]`，按顺序执行           |
+| `formRules`                     | 拼接后作用于整词的规则 `[{ pattern, replace, flags? }]`，按顺序执行。处理器已提供，目前没有语言使用——接合处音变（如拉丁语 `-s` 后的辅音变化、希腊语连声）用它表达 |
 | `stemOnly`                      | 格级布尔值。整格就是词干本身（如呼格单数与主格同形），不拼接任何词尾        |
 | `unlessEndsWith`                | 格级条件词尾：`prefix + 词干` 已以数组里任一字符串结尾时**不加** suffix。用于「第三格复数加 -n，但已以 -n / -s 结尾则不加」（德语 Tischen / Kindern / Frauen / Autos） |
 | `post.sandhi`                   | 可选。交给语言档案的连声处理：`"sa"` = 词干与词尾接合处连声；`"sa-word"` 或 `{ scope: "word" }` 额外做词尾停顿式 |
@@ -959,7 +959,13 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 7. 该格已有值 → 跳过，不覆盖
 ```
 
-#### 骨架型 derive（`mode: "skeleton"`）
+`formRules` 与 `stemForms` 的区别：`stemForms` 改的是**词干本身**（多词干系统，一次算好、所有格共用）；
+`formRules` 改的是**拼好的整词**（只在接合处发生的音变），因此它在 `prefix + stem + suffix`
+之后、`post.accent` 之前执行，作用范围是整份规格（不区分格）。目标语言的重音本身就依赖连声结果时，
+仍应优先用 `post.sandhi`（语言档案），`formRules` 用来处理档案里没有的零散音变。
+处理器已经实现、自检也会校验规则必须锚定，只是目前还没有语言用到——需要时按上表第 3 步直接加即可。
+
+#### 骨架型 derive（mode 取 skeleton）
 
 适用于**词根 + 元音骨架**型语言（目前是圣经希伯来语）：词干不是「加词尾的基础形」，
 而是三辅音词根，每个格子给出的是完整骨架，`_` 表示一个词根辅音（占位后可带 dagesh 等附加点）。
@@ -1039,7 +1045,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
   两张表行列一一对应，`derive.endings` 应与第一张表一致。
 
-### 7.1 语言档案（`data/paradigm/<lang>.js`）
+### 7.1 语言档案（data/paradigm 目录）
 
 通用引擎只负责「词干 + 词尾 → 拼起来 → 套正则」这套机械流程。
 凡是需要语言学知识的后期处理（音节、重音、连声），一律放到该语言自己的档案文件里，
@@ -1144,7 +1150,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 ---
 
-## 第三部分 · 检索规范
+## 第三部分 检索规范
 
 ### 1. 检索范围
 
@@ -1187,7 +1193,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 ---
 
-## 第四部分 · 数据源
+## 第四部分 数据源
 
 ### 1. 手动编写
 
@@ -1243,11 +1249,10 @@ export async function lookupWordForForm({ lemma, langCode, preferredPos, grammar
 - 无缓存
 - 未处理速率限制
 
-### 3. 外部数据源（待实现）
+### 3. 计划接入的外部数据源
 
-入口形式：**按钮**，不是输入框。每个按钮对应一个内置数据源，URL 由开发者在对应的 `services/*.js` 中写死并维护。
-
-详见 `docs/TODO.md`。
+具体候选与可行性（CORS / 限流 / 覆盖语言）见 `docs/TODO.md` 第一部分。
+接入方式就是 [§2](#2-外部数据源在线查询) 的两步：写一个 `external/js/<source>.js`，在 `EXTERNAL_SOURCES` 里加一条记录。
 
 ---
 

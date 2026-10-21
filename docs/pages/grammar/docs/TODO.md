@@ -1,18 +1,10 @@
 # 待办事项
 
-数据源标记统一使用 `source` 字段：
-`manual` | `wiktionary` | `url:<host>` | 其它自定义字符串。
-
 ---
 
 ## 1. 外部数据源导入
 
-入口形式：**按钮**，每个按钮对应一个内置数据源，URL 与解析逻辑写在该源自己的文件里，
-用户点击即触发查询，无需也无法自行填写地址。
-
-已落地的机制（见 SCHEMA 第二部分第 2 节）：数据源放在 `docs/pages/grammar/external/js/`，
-在 `assets/js/config/config.js` 的 `EXTERNAL_SOURCES` 注册 `{ id, label, file }`，
-表单按清单动态 import，每个源一个按钮，模块统一导出 `lookupWordForForm`。
+（注册方式与模块契约见 [SCHEMA 第四部分 §2](./SCHEMA.md#2-外部数据源在线查询)）
 
 - [ ] 新增更多源：每个源一个文件（如 `external/js/dictionaryapi.js`）+ 一条注册记录
 - [ ] 冲突策略同 Wiktionary（按唯一键合并、追加来源内容）
@@ -52,8 +44,6 @@
 
 ## 2. Wiktionary 在线查询的后续扩展
 
-当前实现位于 `external/js/wiktionary.js`。
-
 - [ ] 表格行列映射扩展（尤其 la / grc / sa / he 的长尾标签）
 - [ ] 查询结果缓存（IndexedDB，按 `[lang, lemma]` 存储 wikitext / HTML）
 - [ ] 请求节流 / 429 退避重试
@@ -64,13 +54,7 @@
 
 ## 3. 语法数据（`data/grammar/`）
 
-8 种语言的 `sections`、`paradigms`、`derive` 均已就位
-（`la` / `grc` / `sa` / `he` / `fr` / `de` / `mnc` / `ja`）。
-`en` / `zh-cls` 关闭了 `grammar` 与 `paradigm` 两个开关，`sections` 为空数组、没有 `paradigms`
-与 derive，表单只留基本形态、词性、含义、补充形式、固定搭配、例句、派生词、标签备注。
-编写规范见 `docs/SCHEMA.md`；校验方式见 SCHEMA §4（命令行）。
-
-- [ ] `formRules`：处理器已实现，但还没有语言用到（接合处音变可用它）
+（编写规范见 [SCHEMA 第二部分 §1–§8](./SCHEMA.md#第二部分-语法数据编写规范)，校验方式见 [第四部分 §4](./SCHEMA.md#4-校验语法数据命令行)）
 
 ### 已知数据缺口
 

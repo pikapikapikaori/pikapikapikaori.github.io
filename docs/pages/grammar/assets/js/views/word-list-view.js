@@ -101,7 +101,7 @@ export default {
             replace(head,
                 h('div', {},
                     h('div', { class: 'page-head__title' },
-                        h('span', { lang: lang }, language.native),
+                        h('bdi', { lang: lang }, language.native),
                         ' · ',
                         language.name
                     ),

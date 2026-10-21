@@ -75,15 +75,21 @@ export async function resolveRef(language, ref) {
  */
 const profiles = new Map()  // lang -> profile | null
 
-export async function loadParadigmProfile(language) {
+/**
+ * 语言档案（`data/paradigm/{lang}.js`）：只有该语言的 JSON 声明了 `profile: true`
+ * 才去 import，其余语言直接返回 null——否则每次打开生词表单都会报一个 404。
+ */
+export async function loadParadigmProfile(language, doc = null) {
     if (!language) return null
+    if (!doc || doc.profile !== true) return null
     if (profiles.has(language)) return profiles.get(language)
 
     let profile = null
     try {
         profile = await import(`../../../data/paradigm/${encodeURIComponent(language)}.js`)
     } catch {
-        // 该语言没有专属档案
+        // 声明了档案但文件缺失 / 加载失败
+        console.warn(`[grammar] ${language}: 档案加载失败`)
     }
     profiles.set(language, profile)
     return profile

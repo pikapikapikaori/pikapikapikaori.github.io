@@ -66,7 +66,7 @@ function renderNoData(main, lang, language) {
         h('div', { class: 'page-head' },
             h('div', {},
                 h('div', { class: 'page-head__title' },
-                    h('span', { lang: lang }, language.native), ' · ', language.name
+                    h('bdi', { lang: lang }, language.native), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' }, '语法速查')
             )
@@ -246,7 +246,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         h('div', { class: 'page-head' },
             h('div', {},
                 h('div', { class: 'page-head__title' },
-                    h('span', { lang: lang }, language.native), ' · ', language.name
+                    h('bdi', { lang: lang }, language.native), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' },
                     currentGroup ? `语法速查 · ${currentGroup.title}` : '语法速查')

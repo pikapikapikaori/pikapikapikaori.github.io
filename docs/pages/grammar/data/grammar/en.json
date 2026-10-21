@@ -14,6 +14,7 @@
     "rtl": false,
     "grammar": false,
     "paradigm": false,
+    "profile": false,
     "terms": {
         "inflectionType": "变化类型",
         "inflectionTypePlaceholder": "变化类型说明（如：规则动词 / 不规则动词）",

@@ -141,10 +141,6 @@
 .word-form {
     display: grid;
     gap: var(--sp-4);
-    background: var(--c-bg-elev);
-    border: 1px solid var(--c-border);
-    border-radius: var(--r-lg);
-    padding: var(--sp-5);
 }
 
 .word-form > * {
@@ -161,10 +157,71 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.word-form__group {
-    border: 1px dashed var(--c-border);
-    border-radius: var(--r-md);
-    padding: var(--sp-3);
+/* 表单里每个部分都是一张卡片 */
+.word-form__card,
+.word-form__group,
+.word-form__panel {
+    background: var(--c-bg-elev);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    padding: var(--sp-4);
+    min-width: 0;
+}
+
+/* 属性（语法性 / 自他…）+ 锚点 + 变格变位类型：同一块，窄屏自动换行 */
+.word-form__panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--sp-3);
+    align-items: start;
+}
+
+.word-form__panel > * {
+    min-width: 0;
+}
+
+/* 变格变位表里的主要部分区 */
+.word-form__stems + .word-form__group-title {
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--c-border);
+}
+
+/* 额外主要部分：主要部分下方，从左到右 */
+.word-form .field__parts {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: var(--sp-5);
+    row-gap: var(--sp-3);
+    margin-top: var(--sp-3);
+}
+
+.word-form .field__parts > .field {
+    flex: 1 1 240px;
+    min-width: 0;
+}
+
+.word-form .field__parts > .field__hint {
+    flex-basis: 100%;
+}
+
+/* 标签紧贴输入框，两项之间的间距由 column-gap 给 */
+.word-form .field--part {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--sp-2);
+}
+
+/* 表格下方那句提示 */
+.word-form__table-hint {
+    display: block;
+    margin-top: var(--sp-2);
+}
+
+/* 标签 / 备注：备注上方一条分割线 */
+.word-form__extras > .field + .field {
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--c-border);
 }
 
 .word-form__group-title {
@@ -190,7 +247,12 @@
 }
 
 .word-form__item--meaning {
-    grid-template-columns: 1fr 120px 140px auto;
+    grid-template-columns: 1fr 120px auto;
+}
+
+/* 「含义」顶部的来源 tab：贴着列表，少留点空 */
+.word-form__meaning-tabs {
+    margin-bottom: var(--sp-2);
 }
 
 /* 例句：原文 / 出处 / 来源 / ✕ 在第一行，译文独占第二行 */
@@ -209,15 +271,25 @@
     align-self: center;
 }
 
-/* 删除按钮不参与拉伸 */
+/* 删除按钮不参与拉伸，且是正方形；按钮尺寸不变，只把 ✕ 字号放大 */
 .word-form__cell--remove {
     justify-self: end;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    font-size: var(--fs-lg);
+    line-height: 1;
 }
 
 /* 多项之间加分隔线（上下排列时尤其是） */
 .word-form__list > * + * {
     padding-top: var(--sp-3);
-    border-top: 1px dashed var(--c-border);
+    border-top: 1px solid var(--c-border);
+}
+
+/* 表单里的按钮统一和输入框等高（查询 / 生成表格 / 添加 / ✕） */
+.word-form .btn {
+    height: 38px;
+    min-height: 38px;
 }
 
 .word-form__actions {

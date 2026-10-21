@@ -14,6 +14,7 @@
     "rtl": false,
     "grammar": true,
     "paradigm": true,
+    "profile": false,
     "terms": {
         "inflectionType": "变格 / 变位类型",
         "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",
@@ -1926,6 +1927,156 @@
                         }
                     ],
                     "notes": "呼格单数 -e（-ius 结尾的词为 -ī，如 fīlius → fīlī）。中性见 -um 型。"
+                },
+{
+                    "id": "la-noun-2nd-decl-f",
+                    "title": "第二变格法：-us 阴性（mālus 型）",
+                    "inflect": "decl",
+                    "derive": {
+                        "pos": "noun",
+                        "stemExample": "māl",
+                        "endings": {
+                            "main": {
+                                "nom": {
+                                    "sg_f": "-us",
+                                    "pl_f": "-ī"
+                                },
+                                "gen": {
+                                    "sg_f": "-ī",
+                                    "pl_f": "-ōrum"
+                                },
+                                "dat": {
+                                    "sg_f": "-ō",
+                                    "pl_f": "-īs"
+                                },
+                                "acc": {
+                                    "sg_f": "-um",
+                                    "pl_f": "-ōs"
+                                },
+                                "abl": {
+                                    "sg_f": "-ō",
+                                    "pl_f": "-īs"
+                                },
+                                "voc": {
+                                    "sg_f": "-e",
+                                    "pl_f": "-ī"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "nom": {
+                                    "sg_f": "mālus",
+                                    "pl_f": "mālī"
+                                },
+                                "gen": {
+                                    "sg_f": "mālī",
+                                    "pl_f": "mālōrum"
+                                },
+                                "dat": {
+                                    "sg_f": "mālō",
+                                    "pl_f": "mālīs"
+                                },
+                                "acc": {
+                                    "sg_f": "mālum",
+                                    "pl_f": "mālōs"
+                                },
+                                "abl": {
+                                    "sg_f": "mālō",
+                                    "pl_f": "mālīs"
+                                },
+                                "voc": {
+                                    "sg_f": "māle",
+                                    "pl_f": "mālī"
+                                }
+                            }
+                        }
+                    },
+                    "tables": [
+                        {
+                            "caption": "屈折词尾",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "-us",
+                                    "-ī"
+                                ],
+                                [
+                                    "属格",
+                                    "-ī",
+                                    "-ōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "-ō",
+                                    "-īs"
+                                ],
+                                [
+                                    "宾格",
+                                    "-um",
+                                    "-ōs"
+                                ],
+                                [
+                                    "夺格",
+                                    "-ō",
+                                    "-īs"
+                                ],
+                                [
+                                    "呼格",
+                                    "-e",
+                                    "-ī"
+                                ]
+                            ],
+                            "lang": "la"
+                        },
+                        {
+                            "caption": "示例：mālus, mālī (f.)",
+                            "headers": [
+                                "格",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "mālus",
+                                    "mālī"
+                                ],
+                                [
+                                    "属格",
+                                    "mālī",
+                                    "mālōrum"
+                                ],
+                                [
+                                    "与格",
+                                    "mālō",
+                                    "mālīs"
+                                ],
+                                [
+                                    "宾格",
+                                    "mālum",
+                                    "mālōs"
+                                ],
+                                [
+                                    "夺格",
+                                    "mālō",
+                                    "mālīs"
+                                ],
+                                [
+                                    "呼格",
+                                    "māle",
+                                    "mālī"
+                                ]
+                            ],
+                            "lang": "la"
+                        }
+                    ],
+                    "notes": "词尾与阳性 -us 型完全相同，只是名词本身是阴性（如 mālus 苹果树、pīnus 松树）；变格表只显示阴性列。"
                 },
                 {
                     "id": "la-noun-2nd-decl-er",
@@ -5968,7 +6119,7 @@
                     },
                     {
                         "key": "ppp",
-                        "label": "目的分词词干",
+                        "label": "完成时分词主要部分",
                         "example": "amāt",
                         "hint": "规则动词 = 现在时词干 + -āt-"
                     }
@@ -7287,7 +7438,7 @@
                     },
                     {
                         "key": "ppp",
-                        "label": "目的分词词干",
+                        "label": "完成时分词主要部分",
                         "example": "monit",
                         "hint": "规则动词 = 现在时词干 + -it-；doceō → doctum 这类要手填"
                     }
@@ -8596,7 +8747,7 @@
                     },
                     {
                         "key": "ppp",
-                        "label": "目的分词词干",
+                        "label": "完成时分词主要部分",
                         "example": "rēct",
                         "hint": "规则型 = 元音延长 + -ct- / -pt- / -s-；请以词典为准"
                     }
@@ -9993,7 +10144,7 @@
                     },
                     {
                         "key": "ppp",
-                        "label": "目的分词词干",
+                        "label": "完成时分词主要部分",
                         "example": "audīt",
                         "hint": "规则动词 = 现在时词干 + -īt-；veniō → ventum 这类要手填"
                     }

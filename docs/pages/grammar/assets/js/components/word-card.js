@@ -26,7 +26,11 @@ export function createWordCard(word, options = {}) {
     const rtl = isRtl(language)
     const posGrammarRef = typeof resolvePosRef === 'function' ? resolvePosRef(word.pos) : null
     const sources = allSources(word)
-    let activeSource = sources[0] || 'manual'
+    // 「手动」就是默认来源：有外部来源时就多一个 tab，别让含义没处可切
+    if (!sources.includes('manual')) sources.unshift('manual')
+    // 默认落在「有含义」的那个来源上，免得一打开是对着空 tab
+    const sourceWithMeanings = sources.find((s) => (word.meanings || []).some((m) => (m.source || 'manual') === s))
+    let activeSource = sourceWithMeanings || sources[0] || 'manual'
 
     const inner = h('div', { class: 'word-card__inner' })
     const front = buildFront()
@@ -238,7 +242,7 @@ export function createWordCard(word, options = {}) {
                     ...meanings.map((m) => h('li', {
                         class: 'word-card__meaning',
                         lang: m.lang === 'en' ? 'en' : undefined
-                    }, m.text))
+                    }, h('bdi', {}, m.text)))
                 )
             ))
         }

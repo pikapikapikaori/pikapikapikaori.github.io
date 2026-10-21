@@ -17,6 +17,35 @@ const LANG_TO_WIKTIONARY = {
     'de': 'German'
 }
 
+/** 界面文案：选词条时用「语言 · 词性」区分同页的多个条目 */
+const LANG_LABEL = {
+    'la': '拉丁语',
+    'grc': '古希腊语',
+    'he': '希伯来语',
+    'sa': '梵语',
+    'mnc': '满语',
+    'ja': '日语',
+    'zh-cls': '文言',
+    'en': '英语',
+    'fr': '法语',
+    'de': '德语'
+}
+
+const POS_LABEL = {
+    noun: '名词',
+    verb: '动词',
+    adj: '形容词',
+    adv: '副词',
+    pron: '代词',
+    prep: '介词',
+    conj: '连词',
+    particle: '助词',
+    participle: '分词',
+    num: '数词',
+    interj: '感叹词',
+    other: '其它'
+}
+
 const POS_MAP = {
     'Noun': 'noun',
     'Verb': 'verb',
@@ -37,36 +66,6 @@ const POS_MAP = {
     'Suffix': 'other'
 }
 
-const COL_KEY_MAP = {
-    'singular': 'sg', 'plural': 'pl', 'dual': 'du',
-    'masculine': 'm', 'feminine': 'f', 'neuter': 'n',
-    'masc': 'm', 'fem': 'f', 'neut': 'n',
-    '1st person singular': '1sg', '2nd person singular': '2sg', '3rd person singular': '3sg',
-    'first-person singular': '1sg', 'second-person singular': '2sg', 'third-person singular': '3sg',
-    '1st person dual': '1du', '2nd person dual': '2du', '3rd person dual': '3du',
-    '1st person plural': '1pl', '2nd person plural': '2pl', '3rd person plural': '3pl',
-    'first-person plural': '1pl', 'second-person plural': '2pl', 'third-person plural': '3pl',
-    '1sg': '1sg', '2sg': '2sg', '3sg': '3sg',
-    '1du': '1du', '2du': '2du', '3du': '3du',
-    '1pl': '1pl', '2pl': '2pl', '3pl': '3pl',
-    '单数': 'sg', '复数': 'pl', '双数': 'du',
-    '阳性': 'm', '阴性': 'f', '中性': 'n'
-}
-
-const ROW_KEY_MAP = {
-    'nominative': 'nom', 'genitive': 'gen', 'dative': 'dat',
-    'accusative': 'acc', 'ablative': 'abl', 'vocative': 'voc',
-    'locative': 'loc', 'instrumental': 'ins',
-    'present': 'pres', 'future': 'fut', 'perfect': 'perf',
-    'imperfect': 'impf', 'aorist': 'aor', 'past': 'past',
-    'active': 'act', 'passive': 'pass', 'middle': 'mid',
-    'indicative': 'ind', 'subjunctive': 'subj', 'imperative': 'imp',
-    'participle': 'part',
-    '主格': 'nom', '属格': 'gen', '与格': 'dat',
-    '宾格': 'acc', '夺格': 'abl', '呼格': 'voc',
-    '位格': 'loc', '工具格': 'ins', '离格': 'abl'
-}
-
 /* ---------------- HTTP ---------------- */
 
 async function apiGet(params) {
@@ -81,77 +80,111 @@ async function apiGet(params) {
     return res.json()
 }
 
-async function fetchWikitext(lemma) {
-    const data = await apiGet({
-        action: 'query',
-        titles: lemma,
-        prop: 'revisions',
-        rvprop: 'content',
-        rvslots: 'main',
-        format: 'json',
-        formatversion: '2',
-        redirects: '1'
-    })
-
-    const page = data?.query?.pages?.[0]
-    if (!page || page.missing) return null
-    return page.revisions?.[0]?.slots?.main?.content ?? null
-}
-
-async function fetchParsedHtml(lemma) {
+/**
+ * 一次拿全 `action=parse` 的结果：
+ * - `wikitext` 用来解析释义与词头模板
+ * - `sections` 是解析器给出的标题层级（section 切分依据，比正则可靠）
+ *
+ * 只要这两样：变格 / 变位表由本站的 derive 引擎按主要部分生成，不再从表格里刮。
+ */
+async function fetchParsedPage(lemma) {
     const data = await apiGet({
         action: 'parse',
         page: lemma,
-        prop: 'text',
+        prop: 'sections|wikitext',
         format: 'json',
         formatversion: '2',
         redirects: '1',
         disableeditsection: '1'
     })
     if (data?.error) return null
-    return data?.parse?.text ?? null
-}
 
-/* ---------------- wikitext 解析 ---------------- */
-
-function escapeRegex(s) {
-    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-function extractLanguageSection(wikitext, langName) {
-    const startRe = new RegExp(
-        `^==+\\s*${escapeRegex(langName)}\\s*==+\\s*$`,
-        'im'
-    )
-    const m = wikitext.match(startRe)
-    if (!m) return null
-
-    const start = m.index + m[0].length
-    const rest = wikitext.slice(start)
-
-    // 找下一个 h2 级标题（== xxx ==），不匹配 h3（=== xxx ===）
-    const endRe = /^==[^=]/m
-    const endM = rest.match(endRe)
-    const end = endM ? endM.index : rest.length
-
-    return rest.slice(0, end)
-}
-
-function extractPosSections(langSection) {
-    const re = /^(===+)\s*([^=\n]+?)\s*\1\s*$/gm
-    const marks = []
-    let m = re.exec(langSection)
-    while (m !== null) {
-        marks.push({ title: m[2].trim(), index: m.index, end: re.lastIndex })
-        m = re.exec(langSection)
+    const parse = data?.parse
+    if (!parse) return null
+    return {
+        wikitext: parse.wikitext || '',
+        sections: Array.isArray(parse.sections) ? parse.sections : []
     }
-    const out = []
-    for (let i = 0; i < marks.length; i++) {
-        const start = marks[i].end
-        const end = i + 1 < marks.length ? marks[i + 1].index : langSection.length
-        out.push({ pos: marks[i].title, content: langSection.slice(start, end).trim() })
+}
+
+/* ---------------- 按解析器的标题层级切分 wikitext ---------------- */
+
+/**
+ * 把 sections 里的 `byteoffset` 批量换算成 JS 字符串下标。
+ * 该值实际是字符（码点）偏移而不是 UTF-8 字节数——带变音符 / 组合符的 wikitext
+ * 上两者差得很远，按字节换算会整段错位；含代理对时再补一次偏移。
+ */
+function offsetsToIndexes(wikitext, offsets) {
+    const pending = new Set(offsets.map((off) => Math.max(0, off)))
+    const indexByOffset = new Map()
+
+    let count = 0
+    let index = 0
+    for (const ch of wikitext) {
+        if (pending.has(count)) indexByOffset.set(count, index)
+        count++
+        index += ch.length
     }
-    return out
+    return indexByOffset
+}
+
+/**
+ * 把 `action=parse` 的 sections 列表（标题层级 + byteoffset）落成 wikitext 切片。
+ * 每节的范围止于下一个「层级不高于它」的标题，子标题因此仍留在父节里。
+ */
+function buildSections(wikitext, rawSections) {
+    const offsets = rawSections.map((s) => Number(s.byteoffset) || 0)
+    const indexByOffset = offsetsToIndexes(wikitext, offsets)
+
+    const sections = rawSections.map((s, i) => {
+        const start = indexByOffset.get(Math.max(0, offsets[i])) ?? wikitext.length
+        const lineEnd = wikitext.indexOf('\n', start)
+        return {
+            level: Number(s.level) || 0,
+            line: String(s.line || '').trim(),
+            start,
+            contentStart: lineEnd === -1 ? wikitext.length : lineEnd + 1,
+            end: wikitext.length
+        }
+    })
+
+    for (let i = 0; i < sections.length; i++) {
+        for (let j = i + 1; j < sections.length; j++) {
+            if (sections[j].level <= sections[i].level) {
+                sections[i].end = sections[j].start
+                break
+            }
+        }
+        // 上一级标题（词性常挂在「Etymology 1」这类小节下面）
+        sections[i].parentLine = ''
+        for (let j = i - 1; j >= 0; j--) {
+            if (sections[j].level < sections[i].level) {
+                sections[i].parentLine = sections[j].line
+                break
+            }
+        }
+    }
+    return sections
+}
+
+/** 语言节 = 文本与语言名完全一致的二级标题 */
+function findLanguageSection(sections, langName) {
+    return sections.find((s) => s.level === 2 && s.line === langName) || null
+}
+
+/**
+ * 语言节里的词性小节。标题层级不固定：简单词条是 `===Noun===`，
+ * 分词源的词条会挂成 `===Etymology 1===` 下面的 `====Verb====`，所以按标题名认，不按层级认。
+ */
+function extractPosSections(wikitext, sections, langSection) {
+    return sections
+        .filter((s) => s.level > 2 && s.start > langSection.start && s.start < langSection.end)
+        .filter((s) => POS_MAP[s.line])
+        .map((s) => ({
+            pos: s.line,
+            parent: s.parentLine === langSection.line ? '' : s.parentLine,
+            content: wikitext.slice(s.contentStart, s.end).trim()
+        }))
 }
 
 function stripWikiMarkup(s) {
@@ -195,55 +228,16 @@ function stripWikiMarkup(s) {
     return str.replace(/\s+/g, ' ').trim()
 }
 
-function parseExample(raw) {
-    const cleaned = stripWikiMarkup(raw)
-    if (!cleaned) return null
-
-    let original = cleaned
-    let translation = ''
-    let citation = ''
-
-    const dashSplit = cleaned.split(/\s*[—–]\s*/)
-    if (dashSplit.length >= 2) {
-        original = dashSplit[0].trim()
-        let rest = dashSplit.slice(1).join(' — ').trim()
-
-        const citeMatch = rest.match(/\(([^()]+)\)\s*$/)
-        if (citeMatch) {
-            citation = citeMatch[1].trim()
-            rest = rest.slice(0, citeMatch.index).trim()
-        }
-        translation = rest
-    }
-
-    return { text: original, translation, citation, source: 'wiktionary' }
-}
-
+/** 词性小节里的释义行（`#` 开头的顶层列表项，不含 `#:` / `#*` 子层） */
 function extractMeanings(posContent) {
     const meanings = []
-    const examples = []
-    const lines = posContent.split('\n')
-    let cur = null
-
-    for (const line of lines) {
+    for (const line of posContent.split('\n')) {
         const t = line.trim()
-
-        // 释义：以 # 开头，但排除 #: / #* / #! 等子层
-        if (/^#[^*:!]/.test(t)) {
-            const text = stripWikiMarkup(t.replace(/^#\s*/, ''))
-            if (text) {
-                cur = { text, examples: [] }
-                meanings.push(cur)
-            }
-        } else if (/^#:/.test(t) && cur) {
-            const ex = parseExample(t.replace(/^#:\s*/, ''))
-            if (ex) {
-                examples.push(ex)
-                cur.examples.push(ex)
-            }
-        }
+        if (!/^#[^*:!]/.test(t)) continue
+        const text = stripWikiMarkup(t.replace(/^#\s*/, ''))
+        if (text) meanings.push({ text, lang: 'en', source: 'wiktionary' })
     }
-    return { meanings, examples }
+    return meanings
 }
 
 function extractTemplates(posContent) {
@@ -261,161 +255,136 @@ function extractTemplates(posContent) {
     return templates
 }
 
-/* ---------------- HTML 表格解析 ---------------- */
+/* ---------------- 词头模板：主要部分 ---------------- */
 
-function normalizeHeader(s) {
-    return String(s || '')
-        .toLowerCase()
-        .replace(/[()[\]{}:：]/g, '')
-        .replace(/\s+/g, ' ')
-        .trim()
+/**
+ * 从词头模板里抠「主要部分」。模板只报词形（如 regō、rēx），
+ * 词干要按各语言的规则自己剪；剪不出来就留空，交给用户填。
+ */
+const LA_VERB_ANCHORS = {
+    1: 'la-verb-1st-conj',
+    2: 'la-verb-2nd-conj',
+    3: 'la-verb-3rd-conj',
+    4: 'la-verb-4th-conj'
 }
 
-function tableToParadigm(tableEl) {
-    const allRows = Array.from(tableEl.querySelectorAll('tr'))
-    if (allRows.length < 2) return null
-
-    // 找表头行（前 3 行内第一个含 ≥2 个 th 的行）
-    let headerRow = null
-    let headerIdx = -1
-    for (let i = 0; i < Math.min(3, allRows.length); i++) {
-        const ths = allRows[i].querySelectorAll('th')
-        if (ths.length >= 2) {
-            headerRow = allRows[i]
-            headerIdx = i
-            break
-        }
-    }
-    if (!headerRow) return null
-
-    const headerCells = Array.from(headerRow.children)
-    const headerTexts = headerCells.map((c) => normalizeHeader(c.textContent))
-
-    // 判断表头第一列是不是角标（如空、或 "case"/"number"）
-    const firstKey = COL_KEY_MAP[headerTexts[0]]
-    const hasCorner = !firstKey
-    const colOffset = hasCorner ? 1 : 0
-
-    const colKeys = headerTexts.slice(colOffset).map((t) => COL_KEY_MAP[t] || null)
-    if (colKeys.filter(Boolean).length < 1) return null
-
-    const paradigm = {}
-    const inflections = []
-
-    for (let i = headerIdx + 1; i < allRows.length; i++) {
-        const row = allRows[i]
-        const cells = Array.from(row.children)
-        if (cells.length === 0) continue
-
-        let rowLabel = ''
-        let dataCells = cells
-
-        if (cells[0].tagName === 'TH') {
-            rowLabel = normalizeHeader(cells[0].textContent)
-            dataCells = cells.slice(1)
-        }
-
-        const rowKey = rowLabel ? ROW_KEY_MAP[rowLabel] : null
-
-        if (rowKey) {
-            const rowData = {}
-            for (let j = 0; j < dataCells.length && j < colKeys.length; j++) {
-                const colKey = colKeys[j]
-                if (!colKey) continue
-                const text = stripWikiMarkup(dataCells[j].textContent)
-                if (text) rowData[colKey] = text
-            }
-            if (Object.keys(rowData).length) paradigm[rowKey] = rowData
-        } else if (rowLabel) {
-            for (let j = 0; j < dataCells.length; j++) {
-                const text = stripWikiMarkup(dataCells[j].textContent)
-                if (text) {
-                    inflections.push({
-                        group: '',
-                        label: rowLabel,
-                        form: text,
-                        source: 'wiktionary'
-                    })
-                }
-            }
-        }
-    }
-
-    if (Object.keys(paradigm).length === 0 && inflections.length === 0) return null
-    return { paradigm, inflections }
+/** 位置参数（丢掉 `g=f` 这类具名参数） */
+function positionalArgs(args) {
+    return (args || []).filter((a) => a && !a.includes('='))
 }
 
-function getHeadingInfo(el) {
-    const clone = el.cloneNode(true)
-    clone.querySelectorAll('.mw-editsection, .mw-editsection-like').forEach((n) => n.remove())
+/**
+ * 拉丁语现在时词干：从第一人称单数去掉词尾与题元元音。
+ * amō → am，moneō → mon，regō → reg，audiō → aud，sequor → sequ
+ */
+function latinPresentStem(form) {
+    let s = String(form || '').trim()
+    if (/ō$/.test(s)) s = s.slice(0, -1)
+    else if (/or$/.test(s)) s = s.slice(0, -2)
+    else return null
+    s = s.replace(/[eīi]$/, '')
+    return s || null
+}
 
-    if (el.classList && el.classList.contains('mw-heading')) {
-        const h = el.querySelector('h2, h3, h4, h5')
-        if (h) return { level: parseInt(h.tagName[1], 10), text: clone.textContent.trim() }
+/**
+ * `{{la-verb|3|regō|rēx|rēct}}`
+ * 位置参数：变位类型、第一人称单数、完成时词干、目的分词词干。
+ * 异态 / 半异态（`depon` / `p3inf`）只给目的分词词干。
+ */
+function parseLatinVerb({ args }) {
+    const params = positionalArgs(args)
+    const cls = params[0] || ''
+    const oneSg = params[1] || ''
+    const deponent = /depon|p3inf/.test(cls)
+    const isForm = (v) => Boolean(v) && v !== '-'
+
+    const stems = {}
+    const base = latinPresentStem(oneSg)
+    if (base) stems.base = base
+    if (isForm(params[2])) {
+        if (deponent) stems.ppp = params[2]
+        else stems.perf = params[2]
     }
-    if (/^H[2-5]$/.test(el.tagName)) {
-        return { level: parseInt(el.tagName[1], 10), text: clone.textContent.trim() }
+    if (isForm(params[3])) stems.ppp = params[3]
+
+    const conj = Number(String(cls).charAt(0))
+    return {
+        stems,
+        inflectionType: LA_VERB_ANCHORS[conj]
+            ? { grammarRef: LA_VERB_ANCHORS[conj], label: '' }
+            : null
     }
+}
+
+/** 名词词干：`aqua<1>` → aqu；`rēx/rēg<3>` 的斜杠后是显式词干 */
+function latinNounStem(lemma, decl) {
+    const w = String(lemma || '').trim()
+    if (!w || /\s/.test(w)) return null
+    if (decl === '1') return w.replace(/[aā]$/, '') || null
+    // -er 名词有的掉 e（ager → agr）有的保留（puer），规则判不出来，保守取整词
+    if (decl === '2') return w.replace(/(?:us|um|os|om|on)$/, '') || null
+    if (decl === '4') return w.replace(/(?:ū|us|u)$/, '') || null
+    if (decl === '5') return w.replace(/(?:ēs|ēī)$/, '') || null
     return null
 }
 
-function extractParadigmFromHtml(html, langName, wikiPosTitle) {
-    if (!html) return null
-    const doc = new DOMParser().parseFromString(html, 'text/html')
-
-    const content = doc.querySelector('.mw-parser-output') || doc.body
-    const children = Array.from(content.children)
-
-    // 找语言 h2
-    let langStart = -1
-    for (let i = 0; i < children.length; i++) {
-        const h = getHeadingInfo(children[i])
-        if (h && h.level === 2 && h.text === langName) {
-            langStart = i
-            break
-        }
+/** 变格号 → 语法锚点；变格号本身分不出小类的（第三变格法等）不给 */
+function latinNounAnchor(lemma, decl, gender = '') {
+    const w = String(lemma || '')
+    if (decl === '1') return 'la-noun-1st-decl'
+    if (decl === '2') {
+        if (/(?:um|on|om)$/.test(w)) return 'la-noun-2nd-decl-n'
+        if (gender === 'f') return 'la-noun-2nd-decl-f'
+        return /(?:us|os)$/.test(w) ? 'la-noun-2nd-decl' : null
     }
-    if (langStart === -1) return null
+    if (decl === '4') return /(?:ū|u)$/.test(w) ? 'la-noun-4th-decl-n' : 'la-noun-4th-decl'
+    if (decl === '5') return /^diēs$/i.test(w) ? 'la-noun-5th-decl-dies' : 'la-noun-5th-decl'
+    return null
+}
 
-    // 语言 section 内找词性 h3
-    let posStart = -1
-    for (let i = langStart + 1; i < children.length; i++) {
-        const h = getHeadingInfo(children[i])
-        if (h && h.level === 2) break
-        if (h && h.level === 3 && h.text === wikiPosTitle) {
-            posStart = i
-            break
-        }
+/** `g=m` / `g2=f` 这类具名参数里的语法性 */
+function latinGender(args) {
+    for (const arg of args || []) {
+        const m = String(arg).match(/^g\d*\s*=\s*([mfn])\b/)
+        if (m) return m[1]
     }
-    if (posStart === -1) return null
+    return ''
+}
 
-    // 收集 posStart 之后、下一个 h2/h3 之前的所有 table
-    const tables = []
-    for (let i = posStart + 1; i < children.length; i++) {
-        const h = getHeadingInfo(children[i])
-        if (h && (h.level === 2 || h.level === 3)) break
+/** `{{la-noun|aqua<1>|g=f}}` / `{{la-noun|rēx/rēg<3>|g=m}}` */
+function parseLatinNoun({ args }) {
+    const raw = positionalArgs(args)[0] || ''
+    const decl = (raw.match(/<([^>]*)>/) || [])[1] || ''
+    const [lemma, explicitStem] = raw.replace(/<[^>]*>/g, '').split('/')
 
-        const el = children[i]
-        if (el.tagName === 'TABLE') tables.push(el)
-        else {
-            const inner = el.querySelectorAll('table')
-            for (const t of inner) tables.push(t)
-        }
+    const gender = latinGender(args)
+    const stem = explicitStem || latinNounStem(lemma, decl.charAt(0))
+    const anchor = latinNounAnchor(lemma, decl.charAt(0), gender)
+    return {
+        stems: stem ? { base: stem } : {},
+        inflectionType: anchor ? { grammarRef: anchor, label: '' } : null,
+        attributes: gender ? { gender } : null
     }
+}
 
-    if (tables.length === 0) return null
+const HEADWORD_TEMPLATES = {
+    'la-verb': { pos: 'verb', parse: parseLatinVerb },
+    'la-noun': { pos: 'noun', parse: parseLatinNoun }
+}
 
-    const merged = { paradigm: {}, inflections: [] }
-    for (const table of tables) {
-        const result = tableToParadigm(table)
-        if (!result) continue
-        Object.assign(merged.paradigm, result.paradigm)
-        merged.inflections.push(...result.inflections)
-        if (Object.keys(merged.paradigm).length > 0) break
+/** 该词性小节里的词头模板 → `{ stems, inflectionType }` */
+function extractHeadword(templates, pos) {
+    const head = templates.find((t) => {
+        const def = HEADWORD_TEMPLATES[t.name]
+        return def && def.pos === pos
+    })
+    if (!head) return { stems: {}, inflectionType: null, attributes: null }
+    try {
+        return HEADWORD_TEMPLATES[head.name].parse(head)
+    } catch (err) {
+        console.warn('[wiktionary] 词头模板解析失败', head.name, err)
+        return { stems: {}, inflectionType: null, attributes: null }
     }
-
-    const hasData = Object.keys(merged.paradigm).length > 0 || merged.inflections.length > 0
-    return hasData ? merged : null
 }
 
 /* ---------------- 主入口 ---------------- */
@@ -427,17 +396,15 @@ export async function lookupWord(lemma, langCode) {
     const wikiLang = LANG_TO_WIKTIONARY[langCode]
     if (!wikiLang) throw new Error(`不支持的语言：${langCode}`)
 
-    const [wikitext, html] = await Promise.all([
-        fetchWikitext(trimmed),
-        fetchParsedHtml(trimmed).catch(() => null)
-    ])
+    const page = await fetchParsedPage(trimmed)
+    if (!page) return null
 
-    if (!wikitext) return null
-
-    const langSection = extractLanguageSection(wikitext, wikiLang)
+    const wikitext = page.wikitext
+    const sections = buildSections(wikitext, page.sections)
+    const langSection = findLanguageSection(sections, wikiLang)
     if (!langSection) return null
 
-    const posSections = extractPosSections(langSection)
+    const posSections = extractPosSections(wikitext, sections, langSection)
     if (posSections.length === 0) return null
 
     const results = []
@@ -445,39 +412,58 @@ export async function lookupWord(lemma, langCode) {
         const pos = POS_MAP[sec.pos]
         if (!pos) continue
 
-        const { meanings, examples } = extractMeanings(sec.content)
+        const meanings = extractMeanings(sec.content)
         if (meanings.length === 0) continue
 
-        const templates = extractTemplates(sec.content)
-
-        let paradigmData = null
-        try {
-            paradigmData = extractParadigmFromHtml(html, wikiLang, sec.pos)
-        } catch (err) {
-            console.warn('[wiktionary] 表格解析失败', err)
-        }
+        const headword = extractHeadword(extractTemplates(sec.content), pos)
 
         results.push({
             language: langCode,
             lemma: trimmed,
             pos,
             wikiPos: sec.pos,
-            inflectionType: { label: sec.pos, grammarRef: null },
-            meanings: meanings.map((m) => ({
-                text: m.text, lang: 'en', source: 'wiktionary'
-            })),
-            examples: examples.map((e) => ({
-                text: e.text, translation: e.translation,
-                citation: e.citation, source: 'wiktionary'
-            })),
-            paradigm: paradigmData?.paradigm || {},
-            inflections: paradigmData?.inflections || [],
-            templates
+            label: [LANG_LABEL[langCode] || wikiLang, POS_LABEL[pos] || sec.pos, sec.parent]
+                .filter(Boolean)
+                .join(' · '),
+            inflectionType: headword.inflectionType,
+            stems: headword.stems,
+            attributes: headword.attributes,
+            meanings
         })
     }
 
     if (results.length === 0) return null
     return results
+}
+
+/** 单条查询结果 → 表单补丁（只回填释义与主要部分，变格 / 变位表交给 derive 生成） */
+function buildPatch(result) {
+    const meanings = (result.meanings || []).map((m) => ({
+        text: m.text,
+        lang: m.lang || 'en',
+        source: 'wiktionary'
+    }))
+
+    const stems = Object.keys(result.stems || {}).length ? { ...result.stems } : null
+    const inflectionType = result.inflectionType?.grammarRef
+        ? { ...result.inflectionType }
+        : null
+    const attributes = result.attributes && Object.keys(result.attributes).length
+        ? { ...result.attributes }
+        : null
+
+    const parts = [`词性 ${POS_LABEL[result.pos] || result.pos}`]
+    if (meanings.length) parts.push(`${meanings.length} 条释义`)
+    if (stems) parts.push(`主要部分 ${Object.keys(stems).join(' / ')}`)
+
+    return {
+        pos: result.pos,
+        meanings,
+        stems,
+        inflectionType,
+        attributes,
+        summary: parts.join(' · ')
+    }
 }
 
 /**
@@ -492,10 +478,10 @@ export async function lookupWord(lemma, langCode) {
  *   {
  *     pos,            // 建议填充到 posSelect 的词性
  *     meanings,       // Word.meanings 格式
- *     examples,       // Word.examples 格式
- *     paradigm,       // 建议合并到 data.paradigm.main
- *     inflections,    // 建议追加到 data.inflections
- *     summary         // 提示文案
+ *     stems,          // 建议回填的主要部分（来自 {{la-noun}} / {{la-verb}} 等词头模板）
+ *     inflectionType, // 建议选中的语法锚点 { grammarRef, label }
+ *     summary,        // 提示文案
+ *     choices         // 同一页有多个词条时：`[{ label, patch }]`，patch 结构与本对象相同
  *   }
  *   未找到返回 null
  */
@@ -508,42 +494,22 @@ export async function lookupWordForForm({
     const results = await lookupWord(lemma, langCode)
     if (!results || results.length === 0) return null
 
-    let picked = results.find((r) => r.pos === preferredPos)
-    if (!picked) picked = results[0]
+    const patches = results.map(buildPatch)
+    const primary = patches.find((p) => p.pos === preferredPos) || patches[0]
 
-    const meanings = (picked.meanings || []).map((m) => ({
-        text: m.text,
-        lang: m.lang || 'en',
-        source: 'wiktionary'
-    }))
-
-    const examples = (picked.examples || []).map((e) => ({
-        text: e.text,
-        translation: e.translation || '',
-        citation: e.citation || '',
-        source: 'wiktionary'
-    }))
-
-    const paradigm = picked.paradigm || {}
-    const inflections = (picked.inflections || []).map((it) => ({
-        group: it.group || '',
-        label: it.label || '',
-        form: it.form || '',
-        source: 'wiktionary'
-    }))
-
-    const parts = [`词性 ${picked.pos}`]
-    if (meanings.length) parts.push(`${meanings.length} 条释义`)
-    if (examples.length) parts.push(`${examples.length} 条例句`)
-    if (Object.keys(paradigm).length) parts.push('含变格/变位表')
-    if (inflections.length) parts.push(`${inflections.length} 条补充形式`)
-
-    return {
-        pos: picked.pos,
-        meanings,
-        examples,
-        paradigm,
-        inflections,
-        summary: parts.join(' · ')
+    if (patches.length > 1) {
+        const choices = results.map((r, i) => ({ label: r.label, patch: patches[i] }))
+        // 同名词条（同一词源小节下的同名词性）补序号，不然下拉里分不出来
+        const counts = new Map()
+        for (const c of choices) counts.set(c.label, (counts.get(c.label) || 0) + 1)
+        const seen = new Map()
+        for (const c of choices) {
+            if (counts.get(c.label) < 2) continue
+            const n = (seen.get(c.label) || 0) + 1
+            seen.set(c.label, n)
+            c.label = `${c.label} (${n})`
+        }
+        primary.choices = choices
     }
+    return primary
 }

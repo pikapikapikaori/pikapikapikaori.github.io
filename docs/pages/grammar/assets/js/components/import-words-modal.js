@@ -29,7 +29,7 @@ export function openImportWordsModal({
 
     const textarea = h('textarea', {
         class: 'textarea',
-        placeholder: '把 AI 生成的 JSON 粘贴到这里…',
+        placeholder: '把 JSON 粘贴到这里…',
         style: {
             minHeight: '220px',
             fontFamily: 'var(--ff-mono)',
@@ -147,7 +147,7 @@ export function openImportWordsModal({
                 toast.error(`生成提示词失败：${err.message}`)
             }
         }
-    }, '下载 AI 提示词')
+    }, '下载提示词')
 
     const headActions = h('div', { class: 'import-words-head__actions' }, downloadBtn)
 

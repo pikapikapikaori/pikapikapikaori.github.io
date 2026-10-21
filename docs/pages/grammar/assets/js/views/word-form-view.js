@@ -3,7 +3,7 @@ import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import { submitWord, editWord, fetchWord, queryWords } from '../services/word-service.js'
 import {
-    normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders
+    normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders, sourceLabel
 } from '../models/word.js'
 import {
     loadGrammar, loadParadigmProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
@@ -12,7 +12,7 @@ import {
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { generateParadigm } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
-import { confirmModal } from '../components/modal.js'
+import { confirmModal, openModal } from '../components/modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import {
     EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS
@@ -78,7 +78,7 @@ export default {
             if (extra) extra.textContent = t.extraForms
         }
         const stemsMeta = grammarDoc?.stems && typeof grammarDoc.stems === 'object' ? grammarDoc.stems : null
-        const paradigmProfile = await loadParadigmProfile(lang)
+        const paradigmProfile = await loadParadigmProfile(lang, grammarDoc)
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
         if (isEdit && !data) {
@@ -147,7 +147,7 @@ export default {
                     isEdit ? '编辑生词' : '添加生词'
                 ),
                 h('div', { class: 'page-head__sub' },
-                    h('span', { lang: lang }, language.native),
+                    h('bdi', { lang: lang }, language.native),
                     ' · ', language.name
                 )
             )
@@ -163,6 +163,11 @@ export default {
         let renderMeanings = () => {}
         let renderInflections = () => {}
         let renderExamples = () => {}
+        let renderCollocations = () => {}
+        let renderDerivatives = () => {}
+        let renderExtras = () => {}
+        /** 切换「含义」的来源 tab（查询回填后跳到对应来源） */
+        let setMeaningSource = () => {}
 
         const lemmaInput = h('input', {
             class: 'input',
@@ -173,18 +178,35 @@ export default {
             required: true,
             disabled: isEdit,
             // 基本形态可以推出词干（stemForms.base.from = 'headword'）时影响生成按钮
-            oninput: () => refreshGenerateBtn()
+            oninput: () => {
+                refreshGenerateBtn()
+                refreshLookupBtn()
+            }
         })
 
-        // 每个外部数据源一个查询按钮（清单见 config.EXTERNAL_SOURCES）
-        const lookupButtons = externalSources.map((source) => h('button', {
+        /* ---------- 外部数据源：按一次查全部，多个词性弹窗选 ---------- */
+
+        /** 上一次由查询自动填的「变格 / 变位类型」文案，用于切换候选时判断能否覆盖 */
+        let autoInflectionLabel = ''
+        /** 正在套用查询结果时，词性变更不应触发「清空下面所有内容」 */
+        let applyingLookup = false
+
+        const lookupStatus = h('span', { class: 'field__hint lookup__status' }, '')
+
+        const lookupBtn = h('button', {
             class: 'btn btn--sm',
             type: 'button',
-            title: `从 ${source.label} 获取释义、例句、变格/变位`,
-            onclick: (e) => onLookup(source, e.currentTarget)
-        }, `从 ${source.label} 查询`))
+            onclick: () => onLookupAll()
+        }, '从来源查询')
 
-        const lookupStatus = h('div', { class: 'field__hint' }, '')
+        /** 没填基本形态就不能查：和「主要部分没填时生成表格」一样的禁用逻辑 */
+        function refreshLookupBtn() {
+            const has = Boolean(lemmaInput.value.trim()) && externalSources.length > 0
+            lookupBtn.disabled = !has
+            lookupBtn.title = has
+                ? '从所有外部来源获取语法性、变格变位类型、语法锚点、主要部分与含义'
+                : '请先填写基本形态'
+        }
 
         const posSelect = h('select', {
             class: 'select',
@@ -257,12 +279,15 @@ export default {
                 }, o.label))
             )
             renderExtraParts()
-            generateRow.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
+            generateBtn.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
             refreshGenerateBtn()
         }
 
         posSelect.addEventListener('change', () => {
             data.pos = posSelect.value
+            // 手动词性切换：下面所有内容都属于旧词性，直接清空
+            if (!applyingLookup) clearPosContent()
+
             const allowed = new Set(getFieldDefs(grammarDoc, data.pos).map((f) => f.key))
             for (const key of Object.keys(data.attributes)) {
                 if (!allowed.has(key)) delete data.attributes[key]
@@ -273,6 +298,39 @@ export default {
             renderGenderField()
             renderParadigmBlock()
         })
+
+        /** 清掉词性相关的一切（换词性后旧内容不再适用） */
+        function clearPosContent() {
+            data.attributes = {}
+            data.inflectionType = { label: '', grammarRef: '' }
+            data.stems = { base: '' }
+            data.paradigm = {}
+            data.inflections = []
+            data.collocations = []
+            data.examples = []
+            data.derivatives = []
+            data.meanings = [{ text: '', lang: 'zh', source: 'manual' }]
+            data.tags = []
+            data.notes = ''
+
+            appliedStems = {}
+            autoInflectionLabel = ''
+            inflectionLabel.value = ''
+            principalInput.value = ''
+            lookupStatus.textContent = ''
+            lookupStatus.style.color = ''
+            setMeaningSource('manual')
+
+            renderGenderField()
+            renderMeanings()
+            renderInflections()
+            renderCollocations()
+            renderExamples()
+            renderDerivatives()
+            renderExtras()
+            renderParadigmBlock()
+            refreshGenerateBtn()
+        }
 
         const inflectionLabel = h('input', {
             class: 'input',
@@ -297,13 +355,12 @@ export default {
         function updateStemsVisibility() {
             const tpl = getParadigmTemplate(grammarDoc, posSelect.value)
             const needed = grammarDoc?.paradigm !== false && !!tpl && tpl.stems !== false
-            stemsRow.hidden = !needed
-            extraPartsSlot.hidden = !needed
+            stemsBlock.hidden = !needed
+            generateBtn.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
             if (!needed) {
                 for (const key of Object.keys(data.stems)) delete data.stems[key]
                 principalInput.value = ''
             }
-            generateRow.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
         }
 
         const generateBtn = h('button', {
@@ -316,98 +373,89 @@ export default {
 
         const genderSlot = h('div', {})
 
+        /** 词性自己声明的属性（语法性 / 自他…），和语法锚点一样用下拉 */
         function renderGenderField() {
             genderSlot.replaceChildren()
             const defs = getFieldDefs(grammarDoc, posSelect.value)
+            // 没有属性字段的词性，整格隐藏，让后面两栏占满一行
+            genderSlot.hidden = defs.length === 0
             if (!defs.length) return
 
             for (const def of defs) {
+                // 语法性这类必填属性不提供空选项，没值时默认第一项
+                const required = def.key === 'gender' || def.declensionColumns
                 const raw = data.attributes[def.key]
-                const selected = def.multi
-                    ? (Array.isArray(raw) ? raw.map(String) : (raw ? [String(raw)] : []))
-                    : (raw ? [String(raw)] : [])
+                let current = Array.isArray(raw) ? (raw[0] ?? '') : (raw ?? '')
+                if (!current && required && def.options.length) {
+                    current = def.options[0].value
+                    data.attributes[def.key] = current
+                }
 
-                const chips = h('div', { class: 'chip-group' },
-                    ...def.options.map((opt) => {
-                        const on = selected.includes(opt.value)
-                        return h('button', {
-                            class: 'chip' + (on ? ' chip--active' : ''),
-                            type: 'button',
-                            'aria-pressed': String(on),
-                            onclick: (e) => {
-                                const btn = e.currentTarget
-                                if (def.multi) {
-                                    const list = Array.isArray(data.attributes[def.key])
-                                        ? [...data.attributes[def.key]]
-                                        : (data.attributes[def.key] ? [data.attributes[def.key]] : [])
-                                    const i = list.indexOf(opt.value)
-                                    if (i >= 0) list.splice(i, 1)
-                                    else list.push(opt.value)
-                                    if (list.length) data.attributes[def.key] = list
-                                    else delete data.attributes[def.key]
-                                    const now = list.includes(opt.value)
-                                    btn.classList.toggle('chip--active', now)
-                                    btn.setAttribute('aria-pressed', String(now))
-                                } else {
-                                    const next = selected[0] === opt.value ? '' : opt.value
-                                    if (next) data.attributes[def.key] = next
-                                    else delete data.attributes[def.key]
-                                    for (const other of btn.parentNode.children) {
-                                        const active = other === btn && next !== ''
-                                        other.classList.toggle('chip--active', active)
-                                        other.setAttribute('aria-pressed', String(active))
-                                    }
-                                }
-                                renderParadigmBlock()
-                            }
-                        }, opt.label)
-                    })
+                const select = h('select', {
+                    class: 'select',
+                    onchange: (e) => {
+                        const v = e.target.value
+                        if (v) data.attributes[def.key] = v
+                        else delete data.attributes[def.key]
+                        renderParadigmBlock()
+                    }
+                },
+                ...(required && current ? [] : [h('option', {
+                    value: '',
+                    selected: !current
+                }, '（未选择）')]),
+                ...def.options.map((opt) => h('option', {
+                    value: opt.value,
+                    selected: current === opt.value
+                }, opt.label))
                 )
-                genderSlot.appendChild(field(def.label, chips, def.hint || ''))
+
+                genderSlot.appendChild(field(def.label, select, def.hint || ''))
             }
         }
 
         // 语法锚点下拉：特殊变格/变位 + 语法速查条目
 
-        form.appendChild(h('div', { class: 'word-form__row' },
+        form.appendChild(h('div', { class: 'word-form__row word-form__card' },
             h('label', { class: 'field' },
                 h('span', { class: 'field__label' }, '基本形态'),
                 lemmaInput,
-                lookupButtons.length
-                    ? h('div', { class: 'field__actions' }, ...lookupButtons, lookupStatus)
-                    : null,
                 h('span', { class: 'field__hint' }, '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。')
             ),
-            field('词性', posSelect, '')
+            h('div', { class: 'field' },
+                h('span', { class: 'field__label' }, '词性'),
+                h('div', { class: 'field__row' },
+                    posSelect,
+                    externalSources.length ? lookupBtn : null
+                ),
+                lookupStatus
+            )
         ))
 
         const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)
         const inflectionTypeHintEl = h('span', { class: 'field__hint' }, currentTerms().inflectionTypeHint)
         const anchorHintEl = h('span', { class: 'field__hint' }, currentTerms().anchorHint)
-        const inflectionRow = h('div', { class: 'word-form__row' },
-            h('label', { class: 'field' }, inflectionTypeLabelEl, inflectionLabel, inflectionTypeHintEl),
-            h('label', { class: 'field' }, h('span', { class: 'field__label' }, '语法锚点'), inflectionRef, anchorHintEl)
+        // 语法性之类的属性 + 类型 + 锚点：一行放不下时自适应换行
+        const inflectionRow = h('div', { class: 'word-form__panel' },
+            genderSlot,
+            h('label', { class: 'field' }, h('span', { class: 'field__label' }, '语法锚点'), inflectionRef, anchorHintEl),
+            h('label', { class: 'field' }, inflectionTypeLabelEl, inflectionLabel, inflectionTypeHintEl)
         )
 
         const stemsLabelEl = h('span', { class: 'field__label' }, stemsMeta?.label || currentTerms().stems.label)
         const stemsHintEl = h('span', { class: 'field__hint' }, stemsMeta?.hint || currentTerms().stems.hint)
         const stemsRow = h('label', { class: 'field' },
             stemsLabelEl,
-            h('div', { class: 'field__row' }, principalInput),
+            h('div', { class: 'field__row' }, principalInput, generateBtn),
             stemsHintEl
         )
 
-        // 生成按钮单独一行：没有「主要部分」的词性（如满语名词）也要能生成
-        const generateRow = h('div', { class: 'word-form__row' },
-            h('div', {}, generateBtn))
+        // 主要部分 + 额外主要部分：放在变格 / 变位表头顶
+        const stemsBlock = h('div', { class: 'word-form__stems' }, stemsRow, extraPartsSlot)
 
-        // 字段顺序：基本形态+词性 → 语法性 → 类型+锚点 → 含义 → 主要部分 → 表格
-        form.appendChild(genderSlot)
+        // 字段顺序：基本形态+词性 → 属性/类型/锚点 → 含义 → 变格变位表（含主要部分）
         form.appendChild(inflectionRow)
         form.appendChild(buildMeaningGroup())
-        form.appendChild(stemsRow)
-        form.appendChild(extraPartsSlot)
-        form.appendChild(generateRow)
 
         const paradigmSlot = h('div', {})
         form.appendChild(paradigmSlot)
@@ -454,6 +502,7 @@ export default {
         updateStemsVisibility()
         renderParadigmBlock()
         refreshGenerateBtn()
+        refreshLookupBtn()
 
         /* ---------- 按主要部分生成表格 ---------- */
 
@@ -646,20 +695,23 @@ export default {
             const spec = currentDeriveSpec()
             const skip = Array.isArray(spec?.skipTables) ? spec.skipTables : []
 
-            const wrap = h('div', { class: 'word-form__group' },
-                h('div', { class: 'word-form__group-title' },
-                    h('span', {}, fillTerms(currentTerms().paradigmTitle, posLabel(data.pos))),
-                    h('span', { class: 'field__hint' }, '仅填写你需要的形式，空白格不渲染')
-                )
+            const titleRow = h('div', { class: 'word-form__group-title' },
+                h('span', {}, fillTerms(currentTerms().paradigmTitle, posLabel(data.pos)))
             )
 
-            for (const tableTpl of tpl.tables || []) {
-                if (skip.includes(tableTpl.key)) continue
+            const tables = (tpl.tables || []).filter((t) => !skip.includes(t.key))
+            // 只有一张表时，标题行直接占掉表格自带的标题位置（表格不再重复一遍）
+            const singleTable = tables.length <= 1
+
+            const wrap = h('div', { class: 'word-form__group' }, stemsBlock)
+            if (!singleTable) wrap.appendChild(titleRow)
+
+            for (const tableTpl of tables) {
                 const tableData = data.paradigm[tableTpl.key] || {}
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang,
                     mode: 'edit',
-                    showTitle: true,
+                    showTitle: !singleTable,
                     hideColumns: hiddenGenderColumns(tpl),
                     onGrammarRef: (ref) => {
                         location.hash = `#/grammar/${lang}#${ref}`
@@ -677,104 +729,297 @@ export default {
                 if (tbl) wrap.appendChild(tbl)
             }
 
+            // 单表：标题行紧贴表格上方，替代被去掉的那行表名
+            if (singleTable && wrap.querySelector('.paradigm-block')) {
+                wrap.insertBefore(titleRow, wrap.querySelector('.paradigm-block'))
+            }
+            // 表格句尾提示
+            wrap.appendChild(h('div', { class: 'field__hint word-form__table-hint' },
+                '仅填写你需要的形式，空白格不渲染'))
+
             paradigmSlot.appendChild(wrap)
         }
 
         /* ---------- 外部数据源查询（config.EXTERNAL_SOURCES） ---------- */
 
-        async function onLookup(source, btn) {
+        /** 把查到的词条回填到表单：词性 / 属性 / 类型 / 锚点 / 主要部分 / 含义 */
+        function applyEntry(entry, entries) {
+            applyingLookup = true
+            try {
+                fillEntry(entry, entries)
+            } finally {
+                applyingLookup = false
+            }
+        }
+
+        function fillEntry(entry, entries) {
+            if (entry.pos && entry.pos !== posSelect.value) {
+                // 借 change 事件走一遍词性切换的连带刷新（属性 / 锚点 / 表格）
+                posSelect.value = entry.pos
+                posSelect.dispatchEvent(new Event('change'))
+            }
+
+            const allowed = new Set(getFieldDefs(grammarDoc, posSelect.value).map((f) => f.key))
+            for (const [key, value] of Object.entries(entry.patch.attributes || {})) {
+                if (!allowed.has(key)) continue
+                const v = String(value ?? '').trim()
+                if (v) data.attributes[key] = v
+            }
+            renderGenderField()
+
+            applyInflectionType(entry.patch.inflectionType)
+
+            if (!stemsBlock.hidden) applyStems(entry.patch.stems)
+
+            // 含义：所有来源里「同一个词性」的条目，各写进自己的来源
+            const bySource = new Map()
+            for (const e of entries) {
+                if (e.pos !== entry.pos || bySource.has(e.sourceId)) continue
+                if (e.patch.meanings?.length) bySource.set(e.sourceId, e.patch)
+            }
+            for (const [sourceId, patch] of bySource) {
+                const items = patch.meanings.map((m) => ({
+                    text: m.text,
+                    lang: m.lang || 'en',
+                    source: sourceId
+                }))
+                data.meanings = data.meanings.filter((m) => (m.source || 'manual') !== sourceId)
+                data.meanings.push(...items)
+            }
+            if (!data.meanings.length) {
+                data.meanings.push({ text: '', lang: 'zh', source: 'manual' })
+            }
+            setMeaningSource(entry.sourceId)
+            renderMeanings()
+            // 属性（如语法性）变了要重画表格的列
+            renderParadigmBlock()
+        }
+
+        /** 上一次查询填进去的主要部分（换词条时先撤掉，免得残留上一个词性的词干） */
+        let appliedStems = {}
+
+        function applyStems(stems) {
+            for (const [key, value] of Object.entries(appliedStems)) {
+                if (data.stems[key] === value) delete data.stems[key]
+            }
+            appliedStems = {}
+
+            for (const [key, value] of Object.entries(stems || {})) {
+                const stem = normalizeStem(value)
+                if (!stem) continue
+                data.stems[key] = stem
+                appliedStems[key] = stem
+            }
+
+            principalInput.value = data.stems.base || ''
+            renderExtraParts()
+            refreshGenerateBtn()
+        }
+
+        /** 类型与锚点：只在没手改过文案时才覆盖 */
+        function applyInflectionType(inflectionType) {
+            const ref = inflectionType?.grammarRef
+            if (!ref || !currentOptionsById[ref]) {
+                // 新词条没有可靠锚点：撤掉上次自动填的类型文案
+                if (autoInflectionLabel && inflectionLabel.value.trim() === autoInflectionLabel) {
+                    inflectionLabel.value = ''
+                }
+                autoInflectionLabel = ''
+                return
+            }
+
+            rebuildRefOptions(ref)
+            const current = inflectionLabel.value.trim()
+            if (!current || current === autoInflectionLabel) {
+                autoInflectionLabel = inflectionType.label || currentOptionsById[ref].short || ''
+                inflectionLabel.value = autoInflectionLabel
+            }
+            renderExtraParts()
+        }
+
+        /** 多个候选（多词性 / 多来源）时，弹窗让用户选一个 */
+        function chooseEntry(entries, initial) {
+            return new Promise((resolve) => {
+                let picked = initial
+
+                const items = entries.map((entry) => {
+                    const btn = h('button', {
+                        class: 'lookup-choice' + (entry === picked ? ' lookup-choice--active' : ''),
+                        type: 'button',
+                        onclick: () => {
+                            picked = entry
+                            for (const other of items) {
+                                other.classList.toggle('lookup-choice--active', other === btn)
+                            }
+                        }
+                    },
+                    h('span', { class: 'lookup-choice__pos' }, posLabel(entry.pos)),
+                    h('span', { class: 'lookup-choice__source' }, entry.sourceLabel),
+                    h('span', { class: 'lookup-choice__label' }, entry.label)
+                    )
+                    return btn
+                })
+
+                openModal({
+                    title: '选择词条',
+                    body: h('div', {},
+                        h('div', { class: 'field__hint' }, '这一页有多个词条，选一个用来回填'),
+                        h('div', { class: 'lookup-choices' }, ...items)
+                    ),
+                    actions: [
+                        { label: '取消', onClick: () => resolve(null) },
+                        { label: '使用所选', className: 'btn--primary', onClick: () => resolve(picked) }
+                    ],
+                    onClose: () => resolve(null)
+                })
+            })
+        }
+
+        async function onLookupAll() {
             const lemma = lemmaInput.value.trim()
             if (!lemma) {
                 toast.error('请先输入基本形态')
                 lemmaInput.focus()
                 return
             }
+            if (!externalSources.length) return
 
-            btn.disabled = true
-            const originalText = btn.textContent
-            btn.textContent = '查询中…'
-            lookupStatus.textContent = ''
+            lookupBtn.disabled = true
+            lookupStatus.textContent = '查询中…'
             lookupStatus.style.color = ''
 
             try {
-                const patch = await source.lookupWordForForm({
-                    lemma,
-                    langCode: lang,
-                    preferredPos: posSelect.value,
-                    grammarDoc
-                })
+                const settled = await Promise.all(externalSources.map(async (source) => {
+                    try {
+                        const patch = await source.lookupWordForForm({
+                            lemma,
+                            langCode: lang,
+                            preferredPos: posSelect.value,
+                            grammarDoc
+                        })
+                        return { source, patch }
+                    } catch (err) {
+                        console.error(`[external] ${source.id}`, err)
+                        return { source, error: err }
+                    }
+                }))
 
-                if (!patch) {
-                    lookupStatus.textContent = `${source.label} 未找到该词条`
+                const entries = []
+                for (const { source, patch } of settled) {
+                    if (!patch) continue
+                    const choices = Array.isArray(patch.choices) && patch.choices.length
+                        ? patch.choices
+                        : [{ label: source.label, patch }]
+                    for (const choice of choices) {
+                        if (!choice?.patch) continue
+                        entries.push({
+                            sourceId: source.id,
+                            sourceLabel: source.label,
+                            pos: choice.patch.pos,
+                            label: choice.label || source.label,
+                            patch: choice.patch
+                        })
+                    }
+                }
+
+                if (!entries.length) {
+                    lookupStatus.textContent = '所有来源都没有找到该词条'
                     lookupStatus.style.color = 'var(--c-fg-subtle)'
                     return
                 }
 
-                if (patch.pos && patch.pos !== posSelect.value) {
-                    posSelect.value = patch.pos
-                    data.pos = patch.pos
-                }
-
-                if (patch.meanings.length) {
-                    data.meanings = patch.meanings
-                    renderMeanings()
-                }
-
-                if (patch.examples.length) {
-                    data.examples = patch.examples
-                    renderExamples()
-                }
-
-                if (Object.keys(patch.paradigm).length) {
-                    const tpl = getParadigmTemplate(grammarDoc, patch.pos)
-                    if (tpl) {
-                        if (!data.paradigm) data.paradigm = {}
-                        if (!data.paradigm.main) data.paradigm.main = {}
-                        Object.assign(data.paradigm.main, patch.paradigm)
-                        renderParadigmBlock()
+                let picked = entries.find((e) => e.pos === posSelect.value) || entries[0]
+                if (entries.length > 1) {
+                    picked = await chooseEntry(entries, picked)
+                    if (!picked) {
+                        lookupStatus.textContent = '已取消'
+                        lookupStatus.style.color = 'var(--c-fg-subtle)'
+                        return
                     }
                 }
 
-                if (patch.inflections.length) {
-                    data.inflections.push(...patch.inflections)
-                    renderInflections()
-                }
-
-                lookupStatus.textContent = `已获取：${patch.summary}`
+                applyEntry(picked, entries)
+                lookupStatus.textContent = `已从 ${picked.sourceLabel} 获取：${posLabel(picked.pos)}`
                 lookupStatus.style.color = 'var(--c-success)'
-                toast.success(`已从 ${source.label} 获取「${lemma}」`)
+                toast.success(`已从 ${picked.sourceLabel} 获取「${lemma}」`)
             } catch (err) {
                 console.error(err)
                 lookupStatus.textContent = `查询失败：${err.message}`
                 lookupStatus.style.color = 'var(--c-danger)'
                 toast.error(`查询失败：${err.message}`)
             } finally {
-                btn.disabled = false
-                btn.textContent = originalText
+                lookupBtn.disabled = false
             }
         }
 
         /* ---------- 其余分组 ---------- */
 
+        /** 「含义」按来源分 tab：手动 + 各外部源；切换只影响这一块 */
         function buildMeaningGroup() {
+            let activeSource = 'manual'
+
+            const tabs = h('div', { class: 'source-tabs word-form__meaning-tabs' })
             const list = h('div', { class: 'word-form__list' })
+            const empty = h('div', { class: 'field__hint' }, '该来源还没有含义')
+
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, '含义'),
                     h('button', {
-                        class: 'btn btn--ghost btn--sm', type: 'button',
+                        class: 'btn btn--sm', type: 'button',
                         onclick: () => {
-                            data.meanings.push({ text: '', lang: 'zh', source: 'manual' })
+                            data.meanings.push({ text: '', lang: 'zh', source: activeSource })
                             renderMeanings()
                         }
                     }, '＋ 添加含义')
                 ),
+                tabs,
+                empty,
                 list
             )
 
+            /** tab 列表：手动 → 已注册的外部源 → 数据里出现的其它来源 */
+            function meaningSources() {
+                const ids = ['manual', ...externalSources.map((s) => s.id)]
+                for (const m of data.meanings) {
+                    const src = m.source || 'manual'
+                    if (!ids.includes(src)) ids.push(src)
+                }
+                return ids
+            }
+
+            function renderTabs() {
+                tabs.replaceChildren(...meaningSources().map((id) => h('button', {
+                    class: 'source-tab' + (id === activeSource ? ' source-tab--active' : ''),
+                    type: 'button',
+                    role: 'tab',
+                    'aria-selected': String(id === activeSource),
+                    onclick: () => {
+                        activeSource = id
+                        renderMeanings()
+                    }
+                },
+                h('span', { class: 'source-tab__dot' }),
+                sourceLabel(id)
+                )))
+            }
+
+            setMeaningSource = (id) => {
+                if (!id) return
+                activeSource = id
+            }
+
             renderMeanings = function () {
+                renderTabs()
                 list.replaceChildren()
-                data.meanings.forEach((m, idx) => {
+
+                const rows = data.meanings
+                    .map((m, idx) => ({ m, idx }))
+                    .filter(({ m }) => (m.source || 'manual') === activeSource)
+
+                empty.hidden = rows.length > 0
+
+                for (const { m, idx } of rows) {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--meaning' },
                         h('input', {
                             class: 'input', placeholder: '含义', value: m.text,
@@ -788,20 +1033,19 @@ export default {
                         h('option', { value: 'zh', selected: m.lang === 'zh' }, '中文'),
                         h('option', { value: 'en', selected: m.lang === 'en' }, 'English')
                         ),
-                        sourceSelect(m.source, (v) => { m.source = v }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该含义',
                             onclick: () => {
                                 data.meanings.splice(idx, 1)
-                                if (data.meanings.length === 0) {
+                                if (!data.meanings.length) {
                                     data.meanings.push({ text: '', lang: 'zh', source: 'manual' })
                                 }
                                 renderMeanings()
                             }
                         }, '✕')
                     ))
-                })
+                }
             }
             renderMeanings()
             return group
@@ -813,7 +1057,7 @@ export default {
                 h('div', { class: 'word-form__group-title' },
                     h('span', { class: 'js-extra-forms-title' }, currentTerms().extraForms),
                     h('button', {
-                        class: 'btn btn--ghost btn--sm', type: 'button',
+                        class: 'btn btn--sm', type: 'button',
                         onclick: () => {
                             data.inflections.push({ group: '', label: '', form: '', source: 'manual' })
                             renderInflections()
@@ -841,7 +1085,7 @@ export default {
                         }),
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该形式',
                             onclick: () => {
                                 data.inflections.splice(idx, 1)
@@ -861,7 +1105,7 @@ export default {
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, '固定搭配（可选）'),
                     h('button', {
-                        class: 'btn btn--ghost btn--sm', type: 'button',
+                        class: 'btn btn--sm', type: 'button',
                         onclick: () => {
                             data.collocations.push({ text: '', gloss: '', source: 'manual' })
                             render()
@@ -885,14 +1129,14 @@ export default {
                         }),
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该搭配',
-                            onclick: () => { data.collocations.splice(idx, 1); render() }
+                            onclick: () => { data.collocations.splice(idx, 1); renderCollocations() }
                         }, '✕')
                     ))
                 })
             }
-            render()
+            renderCollocations()
             return group
         }
 
@@ -902,7 +1146,7 @@ export default {
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, '例句（可选）'),
                     h('button', {
-                        class: 'btn btn--ghost btn--sm', type: 'button',
+                        class: 'btn btn--sm', type: 'button',
                         onclick: () => {
                             data.examples.push({ text: '', translation: '', citation: '', source: 'manual' })
                             renderExamples()
@@ -930,7 +1174,7 @@ export default {
                             oninput: (e) => { it.translation = e.target.value }
                         }),
                         h('button', {
-                            class: 'btn btn--ghost btn--sm word-form__cell--remove', type: 'button',
+                            class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该例句',
                             onclick: () => { data.examples.splice(idx, 1); renderExamples() }
                         }, '✕')
@@ -1031,16 +1275,20 @@ export default {
 
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, '派生词（可选）'),
-                    h('span', { class: 'field__hint' }, '只能选择词库中已存在的词')
+                    h('span', {}, '派生词（可选）')
                 ),
                 h('div', { class: 'derivative-picker' },
                     selected,
-                    h('div', { class: 'field' }, searchInput, hint),
+                    h('div', { class: 'field' },
+                        searchInput,
+                        h('span', { class: 'field__hint' }, '只能选择词库中已存在的词'),
+                        hint
+                    ),
                     results
                 )
             )
 
+            renderDerivatives = renderSelected
             renderSelected()
             return group
         }
@@ -1056,8 +1304,12 @@ export default {
                 placeholder: '备注',
                 value: data.notes
             })
-            return h('div', { class: 'word-form__group' },
-                h('div', { class: 'word-form__group-title' }, h('span', {}, '标签与备注')),
+            renderExtras = () => {
+                tagsInput.value = data.tags.join(', ')
+                notesInput.value = data.notes || ''
+            }
+
+            return h('div', { class: 'word-form__group word-form__extras' },
                 field('标签', tagsInput),
                 field('备注', notesInput)
             )
@@ -1085,8 +1337,9 @@ export default {
                 language: lang,
                 lemma,
                 pos: posSelect.value,
-                gender: normalizeGenders(
-                    Array.isArray(data.attributes.gender) ? data.attributes.gender : [], posSelect.value),
+                // attributes 里放词性声明的字段（语法性 / 自他…）；gender 仍留旧字段做镜像
+                attributes: { ...data.attributes },
+                gender: normalizeGenders(data.attributes.gender, posSelect.value),
                 inflectionType: {
                     label: inflectionLabel.value.trim(),
                     grammarRef

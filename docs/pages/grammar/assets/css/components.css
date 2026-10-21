@@ -139,11 +139,20 @@
     color: var(--c-fg-muted);
     font-size: var(--fs-md);
     cursor: pointer;
-    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    /* 只让选中态有过渡；hover 立即生效，免得移开时和另一个按钮同时「补间」 */
+    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
-.chip:hover {
-    background: var(--c-bg-hover);
+@media (hover: hover) {
+    .chip:hover {
+        background: var(--c-bg-hover);
+    }
+}
+
+/* 键盘聚焦时给个和选中态同款的轮廓 */
+.chip:focus-visible {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
 }
 
 .chip--active,
@@ -1014,9 +1023,13 @@ button.word-card__derivative {
     border-right: none;
 }
 
-.paradigm-table tr:last-child td,
-.paradigm-table tr:last-child th {
+.paradigm-table tbody tr:last-child td,
+.paradigm-table tbody tr:last-child th {
     border-bottom: none;
+}
+
+.paradigm-table thead th {
+    border-bottom: 1px solid var(--c-border);
 }
 
 .paradigm-table__corner {
@@ -1033,7 +1046,7 @@ button.word-card__derivative {
 
 .paradigm-table__row-head {
     background: var(--c-bg-subtle);
-    color: var(--c-fg);
+    color: var(--c-fg-muted);
     font-weight: 500;
     text-align: left;
     white-space: normal;
@@ -1410,4 +1423,112 @@ button.word-card__derivative {
     user-select: text;
     -webkit-user-select: text;
     cursor: text;
+}
+
+/* ---------- 生词表单：外部数据源查询 ---------- */
+.lookup__status {
+    min-height: 1.2em;
+}
+
+/* 选择词条的弹窗 */
+.lookup-choices {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-top: var(--sp-3);
+    max-height: 50vh;
+    overflow: auto;
+}
+
+.lookup-choice {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    background: var(--c-bg-elev);
+    color: var(--c-fg);
+    text-align: start;
+    cursor: pointer;
+}
+
+.lookup-choice:hover {
+    background: var(--c-bg-hover);
+}
+
+.lookup-choice--active,
+.lookup-choice--active:hover {
+    border-color: var(--c-accent);
+    background: var(--c-accent-soft);
+}
+
+.lookup-choice__pos {
+    font-size: var(--fs-xs);
+    padding: 1px 8px;
+    border-radius: var(--r-full);
+    background: var(--c-bg-subtle);
+    color: var(--c-fg-muted);
+}
+
+.lookup-choice__source {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+}
+
+.lookup-choice__label {
+    font-size: var(--fs-sm);
+    overflow-wrap: anywhere;
+}
+
+/* ---------- 自定义下拉菜单（替代原生 select 弹出层） ---------- */
+.select-menu {
+    position: fixed;
+    z-index: 150;
+    max-height: 320px;
+    overflow: auto;
+    padding: var(--sp-1);
+    background: var(--c-bg-elev);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-lg);
+    font-size: var(--fs-sm);
+}
+
+.select-menu__group {
+    padding: var(--sp-1) var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+}
+
+.select-menu__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    padding: 6px var(--sp-2);
+    border-radius: var(--r-sm);
+    color: var(--c-fg);
+    cursor: pointer;
+    white-space: normal;
+}
+
+.select-menu__item--active {
+    background: var(--c-bg-hover);
+}
+
+.select-menu__item--selected {
+    color: var(--c-accent);
+    background: var(--c-accent-soft);
+}
+
+.select-menu__label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.select-menu__check {
+    flex-shrink: 0;
+    color: var(--c-accent);
 }

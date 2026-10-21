@@ -114,19 +114,16 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
         for (const col of columns) {
             const value = cells[col.key] ?? ''
             const off = rowDisabled(row, col.key)
-            if (isEdit) {
+            if (isEdit && !off) {
                 tr.appendChild(h('td', {
                     class: 'paradigm-table__cell paradigm-table__cell--edit'
-                        + (off ? ' paradigm-table__cell--disabled' : '')
                 },
                 h('input', {
                     class: 'input input--cell',
                     type: 'text',
-                    value: off ? '' : value,
+                    value,
                     lang: lang || undefined,
                     placeholder: '',
-                    disabled: off,
-                    title: off ? '该形式不存在' : null,
                     oninput: (e) => {
                         if (editable && typeof editable.onChange === 'function') {
                             editable.onChange(row.key, col.key, e.target.value)

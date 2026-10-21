@@ -144,7 +144,7 @@ export default {
                 class: 'lang-card__native',
                 lang: lang.code,
                 style: isRtlNative ? { direction: 'rtl' } : {}
-            }, lang.native),
+            }, h('bdi', {}, lang.native)),
             h('div', { class: 'lang-card__name' }, lang.name),
             h('div', { class: 'lang-card__stats' },
                 h('span', { class: 'lang-card__stat' },

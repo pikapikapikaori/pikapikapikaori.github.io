@@ -14,6 +14,7 @@
     "rtl": true,
     "grammar": true,
     "paradigm": true,
+    "profile": true,
     "terms": {
         "inflectionType": "变格 / 变位类型",
         "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",

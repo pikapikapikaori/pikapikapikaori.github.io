@@ -108,29 +108,33 @@
   "grammar": true,               // 是否有语法页（false：列表页不显示「语法」，词性徽章不可点）
   "paradigm": true,              // 是否有变格 / 变位表（false：表单只留基本形态、词性、含义、
                                  //   补充形式、固定搭配、例句、派生词、标签备注）
+  "profile": false,              // 是否有专属语言档案 data/paradigm/{lang}.js；
+                                 //   false 时表单不会去 import 它（避免 404）
   "terms": { … },                // 界面用词，见下
   "paradigms": { … },            // paradigm: false 的语言不写这个字段
   "sections": [ … ]              // grammar: false 的语言写空数组 []
 }
 ```
 
-| code | name | group | grammar | paradigm |
-| --- | --- | --- | --- | --- |
-| `la` | 拉丁语 | 古典语言 | ✅ | ✅ |
-| `grc` | 古希腊语 | 古典语言 | ✅ | ✅ |
-| `he` | 圣经希伯来语 | 古典语言 | ✅ | ✅ |
-| `sa` | 梵语 | 古典语言 | ✅ | ✅ |
-| `mnc` | 满语 | 古典语言 | ✅ | ✅ |
-| `zh-cls` | 古汉语 | 古典语言 | ❌ | ❌ |
-| `ja` | 现代日语 | 现代语言 | ✅ | ✅ |
-| `en` | 现代英语 | 现代语言 | ❌ | ❌ |
-| `fr` | 法语 | 现代语言 | ✅ | ✅ |
-| `de` | 德语 | 现代语言 | ✅ | ✅ |
+| code | name | group | grammar | paradigm | profile |
+| --- | --- | --- | --- | --- | --- |
+| `la` | 拉丁语 | 古典语言 | ✅ | ✅ | ❌ |
+| `grc` | 古希腊语 | 古典语言 | ✅ | ✅ | ✅ |
+| `he` | 圣经希伯来语 | 古典语言 | ✅ | ✅ | ✅ |
+| `sa` | 梵语 | 古典语言 | ✅ | ✅ | ✅ |
+| `mnc` | 满语 | 古典语言 | ✅ | ✅ | ✅ |
+| `zh-cls` | 古汉语 | 古典语言 | ❌ | ❌ | ❌ |
+| `ja` | 现代日语 | 现代语言 | ✅ | ✅ | ❌ |
+| `en` | 现代英语 | 现代语言 | ❌ | ❌ | ❌ |
+| `fr` | 法语 | 现代语言 | ✅ | ✅ | ❌ |
+| `de` | 德语 | 现代语言 | ✅ | ✅ | ❌ |
 
 - **`group` / `order`**：语言选择页按 `group.order` → `order` 排序；组标题只写在各自 JSON 里，不在代码中硬编码。分组本身不可跨组拖动，组内顺序存 `settings.languageOrder`，组间顺序存 `settings.groupOrder`。
 - **`vertical` / `rtl`**：`true` 时分别触发竖排 popover 与 RTL 行内方向。
 - **`grammar: false`**：生词列表不显示「语法」按钮；直接访问 `#/grammar/{code}` 会跳回词列表；词卡的词性徽章不可点。
 - **`paradigm: false`**：表单与词卡都不出现变格 / 变位相关的字段与表格。
+- **`profile`**：有 `data/paradigm/{lang}.js` 才写 `true`；表单据此决定要不要 import 语言档案，
+  写 `false` 的语言不会发那个请求。新增 / 删除档案时同步改这个字段。
 
 #### terms：界面用词
 
@@ -527,7 +531,7 @@ const MIGRATIONS = {
 #### la 拉丁语
 
 - 代词：人称、反身、物主、指示、关系、疑问、不定（章节顺序与 grc 一致）
-- 名词：第一变格（-a，含阳性）、第二变格（-us / -er 掉 e / -er 保留 e / -um）、
+- 名词：第一变格（-a，含阳性）、第二变格（-us 阳性 / -us 阴性 / -er 掉 e / -er 保留 e / -um）、
   第三变格（辅音词干、i 词干、辅音词干中性、i 词干中性）、第四变格（-us / -ū）、
   第五变格（rēs 型 / diēs 型）
 - 形容词：第一二变格、第三变格（二尾）
@@ -1059,7 +1063,8 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 | `accent(text, mode, options)` | `function`     | 拼好之后按模式指派重音；`options.endingAccented` 表示该格词尾自带重音 |
 | `sandhi`        | `{ join, wordFinal }`       | `join(左段, 右段)` 做接合处连声；`wordFinal(整词)` 做词尾停顿式 |
 
-- 加载：`services/grammar-service.js` 的 `loadParadigmProfile(lang)`（动态 `import()`，结果缓存，缺失时返回 `null`）。
+- 加载：`services/grammar-service.js` 的 `loadParadigmProfile(lang, doc)`（动态 `import()`，结果缓存，
+  只有 JSON 里 `profile: true` 时才加载，其余直接返回 `null`）。
 - 传播：`generateParadigm({ …, profile })`、`checkDeriveExample(spec, tpl, { profile })`、
   `verifyGrammarDoc(lang, doc, profile)` / `verifyGrammarDocs([{ lang, doc, profile }])`。
 - 共用工具在引擎里导出：`toUnits` / `fromUnits`（拆成「字母 + 组合记号」）与 `ACUTE` / `CIRCUMFLEX` /
@@ -1219,33 +1224,61 @@ export const EXTERNAL_SOURCES = [
 - `id` 同时写进词条的 `source` 字段（`meanings` / `examples` / `inflections`），
   也会出现在表单「来源」下拉里（`WORD_SOURCE_OPTIONS` = 手动 + 各外部源）。
 - `file` 对应 `external/js/{file}.js`。
-- 生词表单在 `mount()` 时按清单 `Promise.all` 动态 import，
-  **一个源一个「从 {label} 查询」按钮**；某个文件缺失或断网时该源不显示，表单其余部分照常。
-- 新增一个源 = 加一条 `EXTERNAL_SOURCES` 记录 + 一个导出 `lookupWordForForm` 的文件，不改视图代码。
+- 生词表单在 `mount()` 时按清单 `Promise.all` 动态 import；某个文件缺失或断网时该源不显示，
+  表单其余部分照常。新增一个源 = 加一条 `EXTERNAL_SOURCES` 记录 + 一个导出 `lookupWordForForm` 的文件，
+  不改视图代码。
+- **界面**：
+  - 「词性」下拉右边是**唯一一个**「从来源查询」按钮，按一次并发查全部外部源；
+  - 查回来的内容按来源落到各自的 `source` 上：
+    语法性等 `attributes`、变格 / 变位类型、语法锚点、主要部分取自选中的那个词条；
+    含义则每个来源各写一份；
+  - 候选多于一个（同一页多个词性，或多个源都有结果）时弹窗列出「来源 · 词性 · 词源小节」，
+    用户选定后按它回填；`preferredPos`（表单当前词性）优先作为默认选项；
+  - 「含义」块内部有来源标签页（`手动` + 各外部源 + 数据里出现过的其它来源），
+    **切换 tab 只影响含义**；每条含义不再带「来源」下拉，归属由 tab 决定。
+- **词性**：查询到的词条自己带 `pos`，选中后表单词性跟着变；属性字段按新词性重新渲染。
+  本次没有可靠锚点的词条会清掉上次自动填的「变格 / 变位类型」文案。
 
 **模块契约**：
 
 ```js
 // external/js/<source>.js
 export async function lookupWordForForm({ lemma, langCode, preferredPos, grammarDoc })
-// → { pos, meanings, examples, paradigm, inflections, summary } | null
+// → { pos, meanings, stems?, inflectionType?, attributes?, summary, choices? } | null
 ```
 
-返回的是**回填用的补丁**：`pos` 会切词性，`meanings` / `examples` 覆盖对应分组，
-`paradigm` 合并进 `data.paradigm.main`，`inflections` 追加到「补充形式」。
+返回的是**回填用的补丁**：`pos` 会切词性，`meanings` 写进该来源的含义页，
+`stems` 写进「主要部分」，`attributes`（如 `{ gender: "f" }`）填词性声明的属性字段，
+`inflectionType`（`{ grammarRef, label }`）选中「语法锚点」——
+`grammarRef` 必须是该词性下确实存在的锚点 id，对不上的会被视图忽略。
 来源标记由模块自己盖（`source: '<id>'`）。
+
+变格 / 变位表由 `derive` 引擎按主要部分生成，**不要求外部源提供表格**；
+视图另外还认 `examples`（覆盖例句）、`paradigm`（合并进 `data.paradigm.main`）、
+`inflections`（追加到「补充形式」），哪个源能拿到再给，拿不到就不返回。
+
+同一页有多个可用词条时（多词性，或同一词性分属多个词源小节），
+除了按 `preferredPos` 挑一条当主结果，还要给出 `choices: [{ label, patch }]`，
+`patch` 与本对象同构。视图在查询按钮旁多一个下拉，切换即用该 `patch` 重新回填；
+`label` 要带上语言与词性（Wiktionary 源还会带词源小节名），以便区分。
 
 **Wiktionary 实现**（`external/js/wiktionary.js`）：
 
-- MediaWiki Action API（`action=query`）拉取 wikitext
-- `action=parse` 拉取渲染后 HTML
-- 解析内容：语言节、词性小节、释义、例句、例句译文与出处、变格/变位表
-- 该文件内部的 `LANG_TO_WIKTIONARY` / `POS_MAP` / `COL_KEY_MAP` / `ROW_KEY_MAP` 是
+- 一次 `action=parse`（`prop=sections|wikitext`）拿全 wikitext 与标题层级
+- 按 `sections` 的标题层级 + `byteoffset` 切 wikitext：语言节是二级标题，
+  词性小节按标题名认（`===Noun===` 与 `Etymology 1` 下的 `====Verb====` 都要认），
+  四级以下只作词性小节的子节
+- 只解析三样：`#` 开头的释义行、词头模板里报的主要部分、以及模板里的语法性（`g=f` 等）
+- 词头模板（`{{la-verb}}` / `{{la-noun}}`）里的主要部分会回填 `stems`，
+  变位 / 变格号能可靠对应到锚点时一并给出 `inflectionType`（好让 `derive` 直接出表）
+- 该文件内部的 `LANG_TO_WIKTIONARY` / `POS_MAP` / `HEADWORD_TEMPLATES` 是
   这个源专属的解析表，不放进 `config.js`
 
 **已知限制**
 
-- 表格行列映射只覆盖常见情况，未命中的行走 `inflections`
+- 词头模板只处理拉丁语；词干靠规则剪（现在时词干、名词词干），
+  第二变格法会按模板里的 `g=` 选阳性 / 阴性锚点；第三变格法等分不出小类时不猜锚点
+- 只认 `#` 顶层的释义行；纯模板释义（如 `{{medieval spelling of|...}}`）清洗后为空会被跳过
 - 无缓存
 - 未处理速率限制
 

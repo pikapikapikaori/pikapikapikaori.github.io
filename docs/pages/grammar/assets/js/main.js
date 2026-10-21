@@ -13,6 +13,7 @@ import { createRouter } from './router.js'
 import { appStore, setUser, setLanguage, setSettings, setRoute } from './app-state.js'
 import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
+import { enhanceSelects } from './components/select-menu.js'
 import { createThemeToggle, applyTheme } from './components/theme-toggle.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
@@ -225,6 +226,7 @@ async function bootstrap() {
         applyTheme(s.theme || theme)
     }
 
+    enhanceSelects()
     router.start()
 
     // 首帧渲染完成后再撤下遮罩（用 timeout 而不是 rAF：后台标签页里 rAF 不触发）

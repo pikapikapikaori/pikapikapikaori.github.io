@@ -14,6 +14,7 @@
     "rtl": false,
     "grammar": true,
     "paradigm": true,
+    "profile": true,
     "terms": {
         "inflectionType": "词形类型",
         "inflectionTypePlaceholder": "词形类型说明（如：-sa 型复数）",

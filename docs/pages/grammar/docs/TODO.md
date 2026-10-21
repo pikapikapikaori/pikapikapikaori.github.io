@@ -44,12 +44,11 @@
 
 ## 2. Wiktionary 在线查询的后续扩展
 
-- [ ] 表格行列映射扩展（尤其 la / grc / sa / he 的长尾标签）
-- [ ] 查询结果缓存（IndexedDB，按 `[lang, lemma]` 存储 wikitext / HTML）
+- [ ] 查询结果缓存（IndexedDB，按 `[lang, lemma]` 存储 wikitext / 解析结果）
 - [ ] 请求节流 / 429 退避重试
-- [ ] 多语言词条同页时提供选择 UI（当前自动取首个匹配词性）
-- [ ] 处理 `{{la-noun}}` / `{{la-verb}}` 等模板参数，提取主要部分
-- [ ] 从 `action=parse` 的 heading 层级切分，取代当前 wikitext 正则的粗糙节切
+- [x] 多语言词条同页时提供选择 UI（当前自动取首个匹配词性）
+- [x] 处理 `{{la-noun}}` / `{{la-verb}}` 等模板参数，提取主要部分
+- [x] 从 `action=parse` 的 heading 层级切分，取代当前 wikitext 正则的粗糙节切
 - [ ] 接入 Wiktionary REST API（`/api/rest_v1/page/definition/{term}`），替代当前的 wikitext 解析
 
 ## 3. 语法数据（`data/grammar/`）

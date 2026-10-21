@@ -73,6 +73,24 @@
                         }
                     ]
                 }
+            ],
+            "fields": [
+                {
+                    "key": "gender",
+                    "label": "语法性",
+                    "hint": "希伯来语名词分阳性、阴性；词尾 ־ָה / ־ֶת 多为阴性。",
+                    "multi": false,
+                    "options": [
+                        {
+                            "value": "m",
+                            "label": "阳性"
+                        },
+                        {
+                            "value": "f",
+                            "label": "阴性"
+                        }
+                    ]
+                }
             ]
         },
         "adj": {
@@ -3193,7 +3211,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "词根无弱化、无喉音；一切按元音模式走。"
+                    "notes": "词根无弱化、无喉音；一切按元音模式走。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-iii-he",
@@ -3253,7 +3272,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "词根末 ה 在部分形式中保留为词尾 ה，复数多为 ־וֹת（阳性也如此）。"
+                    "notes": "词根末 ה 在部分形式中保留为词尾 ה，复数多为 ־וֹת（阳性也如此）。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-iii-alef",
@@ -3305,7 +3325,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "א 不发音，复数常缩为 כִּסְאוֹת。"
+                    "notes": "א 不发音，复数常缩为 כִּסְאוֹת。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-final-guttural",
@@ -3357,7 +3378,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "末喉音不能带 dagesh，复数用 ־ִים 并补偿元音。"
+                    "notes": "末喉音不能带 dagesh，复数用 ־ִים 并补偿元音。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-middle-guttural",
@@ -3409,7 +3431,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "中喉音偏好 a 类元音，常出现 חֲטָף。"
+                    "notes": "中喉音偏好 a 类元音，常出现 חֲטָף。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-i-alef",
@@ -3461,7 +3484,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "א 不参与 dagesh；复数第一音节用 חֲטַף־פַּתַח。"
+                    "notes": "א 不参与 dagesh；复数第一音节用 חֲטַף־פַּתַח。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-i-yod",
@@ -3513,7 +3537,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "词首 י 在屈折中脱落为 שְׁוָא（יֶלֶד → יְלָדִים）。"
+                    "notes": "词首 י 在屈折中脱落为 שְׁוָא（יֶלֶד → יְלָדִים）。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-i-nun",
@@ -3565,7 +3590,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "词首 נ 常被后一辅音同化（מַגָּע 来自 נ-ג-ע）。"
+                    "notes": "词首 נ 常被后一辅音同化（מַגָּע 来自 נ-ג-ע）。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-hollow",
@@ -3617,7 +3643,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "中间弱根在屈折时消失，用 וֹ / וּ 标出。"
+                    "notes": "中间弱根在屈折时消失，用 וֹ / וּ 标出。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-geminate",
@@ -3669,7 +3696,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "第二、三辅音相同，绝对形常只写一个并带 dagesh。"
+                    "notes": "第二、三辅音相同，绝对形常只写一个并带 dagesh。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-quadriliteral",
@@ -3721,7 +3749,8 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "四辅音名词（עַקְרָב 蝎子）；复数在第三辅音后加 dagesh。"
+                    "notes": "四辅音名词（עַקְרָב 蝎子）；复数在第三辅音后加 dagesh。",
+                    "deriveRef": "he-noun"
                 },
                 {
                     "id": "he-class-dual",
@@ -3994,7 +4023,42 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "最常见的形容词模式：ms 无词尾，fs 加 ָה，复数加 ִים / וֹת。"
+                    "notes": "最常见的形容词模式：ms 无词尾，fs 加 ָה，复数加 ִים / וֹת。",
+                    "derive": {
+                        "pos": "adj",
+                        "mode": "skeleton",
+                        "stemExample": "גדל",
+                        "headwordExample": "גָּדוֹל",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词根（辅音）",
+                                "example": "גדל",
+                                "required": true
+                            }
+                        ],
+                        "note": "形容词无附属形，只填绝对形的四个格子；骨架用 `_` 表示词根辅音。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": "_ָּ_וֹ_",
+                                    "fs": "_ְּ_וֹ_ָה",
+                                    "mp": "_ְּ_וֹ_ִים",
+                                    "fp": "_ְּ_וֹ_וֹת"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "גָּדוֹל",
+                                    "fs": "גְּדוֹלָה",
+                                    "mp": "גְּדוֹלִים",
+                                    "fp": "גְּדוֹלוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-segolate",
@@ -4056,7 +4120,42 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "复数把词干缩为 קְטַנִּים 型（זָקֵן → זְקֵנִים 属另一亚型）。"
+                    "notes": "复数把词干缩为 קְטַנִּים 型（זָקֵן → זְקֵנִים 属另一亚型）。",
+                    "derive": {
+                        "pos": "adj",
+                        "mode": "skeleton",
+                        "stemExample": "קטן",
+                        "headwordExample": "קָטֹן",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词根（辅音）",
+                                "example": "קטן",
+                                "required": true
+                            }
+                        ],
+                        "note": "形容词无附属形，只填绝对形的四个格子；骨架用 `_` 表示词根辅音。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": "_ָ_ֹ_",
+                                    "fs": "_ְ_ַ_ָּה",
+                                    "mp": "_ְ_ַ_ִּים",
+                                    "fp": "_ְ_ַ_ּוֹת"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "קָטֹן",
+                                    "fs": "קְטַנָּה",
+                                    "mp": "קְטַנִּים",
+                                    "fp": "קְטַנּוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-qadosh",
@@ -4118,7 +4217,42 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "复数第一音节缩为 שְׁוָא：קְדֹשִׁים。"
+                    "notes": "复数第一音节缩为 שְׁוָא：קְדֹשִׁים。",
+                    "derive": {
+                        "pos": "adj",
+                        "mode": "skeleton",
+                        "stemExample": "קדש",
+                        "headwordExample": "קָדוֹשׁ",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词根（辅音）",
+                                "example": "קדש",
+                                "required": true
+                            }
+                        ],
+                        "note": "形容词无附属形，只填绝对形的四个格子；骨架用 `_` 表示词根辅音。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": "_ָ_וֹ_ׁ",
+                                    "fs": "_ְ_וֹ_ָׁה",
+                                    "mp": "_ְ_וֹ_ִׁים",
+                                    "fp": "_ְ_וֹ_ׁוֹת"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "קָדוֹשׁ",
+                                    "fs": "קְדוֹשָׁה",
+                                    "mp": "קְדוֹשִׁים",
+                                    "fp": "קְדוֹשׁוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-iii-he",
@@ -4180,7 +4314,42 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "fs 与 ms 同形貌但词尾为 ָה；复数 ־ִים。"
+                    "notes": "fs 与 ms 同形貌但词尾为 ָה；复数 ־ִים。",
+                    "derive": {
+                        "pos": "adj",
+                        "mode": "skeleton",
+                        "stemExample": "קשה",
+                        "headwordExample": "קָשֶׁה",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词根（辅音）",
+                                "example": "קשה",
+                                "required": true
+                            }
+                        ],
+                        "note": "形容词无附属形，只填绝对形的四个格子；骨架用 `_` 表示词根辅音。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": "_ָ_ֶׁ_",
+                                    "fs": "_ָ_ָׁ_",
+                                    "mp": "_ָ_ִׁים",
+                                    "fp": "_ָ_ׁוֹת"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "קָשֶׁה",
+                                    "fs": "קָשָׁה",
+                                    "mp": "קָשִׁים",
+                                    "fp": "קָשׁוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-guttural",
@@ -4242,7 +4411,42 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "末喉音不能带 dagesh 预判；复数常分拆为 חֲכָמִים。"
+                    "notes": "末喉音不能带 dagesh 预判；复数常分拆为 חֲכָמִים。",
+                    "derive": {
+                        "pos": "adj",
+                        "mode": "skeleton",
+                        "stemExample": "חכמ",
+                        "headwordExample": "חָכָם",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词根（辅音）",
+                                "example": "חכמ",
+                                "required": true
+                            }
+                        ],
+                        "note": "形容词无附属形，只填绝对形的四个格子；骨架用 `_` 表示词根辅音。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": "_ָ_ָ_",
+                                    "fs": "_ֲ_ָ_ָה",
+                                    "mp": "_ֲ_ָ_ִים",
+                                    "fp": "_ֲ_ָ_וֹת"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "חָכָם",
+                                    "fs": "חֲכָמָה",
+                                    "mp": "חֲכָמִים",
+                                    "fp": "חֲכָמוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-hollow",
@@ -4304,7 +4508,42 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "中间弱根以 וֹ 标出。"
+                    "notes": "中间弱根以 וֹ 标出。",
+                    "derive": {
+                        "pos": "adj",
+                        "mode": "skeleton",
+                        "stemExample": "טוב",
+                        "headwordExample": "טוֹב",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词根（辅音）",
+                                "example": "טוב",
+                                "required": true
+                            }
+                        ],
+                        "note": "形容词无附属形，只填绝对形的四个格子；骨架用 `_` 表示词根辅音。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": "__ֹ_",
+                                    "fs": "__ֹ_ָה",
+                                    "mp": "__ֹ_ִים",
+                                    "fp": "__ֹ_וֹת"
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "טוֹב",
+                                    "fs": "טוֹבָה",
+                                    "mp": "טוֹבִים",
+                                    "fp": "טוֹבוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-nisba",
@@ -4366,7 +4605,49 @@
                             "lang": "he"
                         }
                     ],
-                    "notes": "关系形容词；阴性 ־ִית，复数 ־ִיִּים。"
+                    "notes": "关系形容词；阴性 ־ִית，复数 ־ִיִּים。",
+                    "derive": {
+                        "pos": "adj",
+                        "stemExample": "אַדְמוֹנ",
+                        "headwordExample": "אַדְמוֹנִי",
+                        "parts": [
+                            {
+                                "key": "base",
+                                "label": "词干（名词词干，不含 ־ִי）",
+                                "example": "אַדְמוֹנ",
+                                "required": true
+                            }
+                        ],
+                        "note": "nisba 形容词由名词词干加 ־ִי 构成，主要部分填词干（不带 ־ִי）。",
+                        "endings": {
+                            "main": {
+                                "abs": {
+                                    "ms": {
+                                        "suffix": "ִי"
+                                    },
+                                    "fs": {
+                                        "suffix": "ִית"
+                                    },
+                                    "mp": {
+                                        "suffix": "ִיִּים"
+                                    },
+                                    "fp": {
+                                        "suffix": "ִיּוֹת"
+                                    }
+                                }
+                            }
+                        },
+                        "expect": {
+                            "main": {
+                                "abs": {
+                                    "ms": "אַדְמוֹנִי",
+                                    "fs": "אַדְמוֹנִית",
+                                    "mp": "אַדְמוֹנִיִּים",
+                                    "fp": "אַדְמוֹנִיּוֹת"
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "id": "he-adj-quadriliteral",

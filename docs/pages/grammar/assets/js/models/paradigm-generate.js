@@ -690,6 +690,33 @@ export function checkDeriveExample(spec, template, options = {}) {
  * 找出某个 derive 规格对应的 paradigms 模板
  * 依次尝试：spec.pos → section id 里的词性 → 包含全部 endings 表 key 的那个词性
  */
+/**
+ * 取锚点上的 derive 规格（item 优先，其次 section）。
+ * 锚点自己没写 `derive` 时可以写 `deriveRef: "<另一个锚点 id>"` 复用那份规格，
+ * 避免把同一份长规格复制到多个章节（满语元音和谐、希伯来语名词类别）。
+ */
+export function resolveDeriveSpec(doc, id, seen = null) {
+    if (!doc || !id) return null
+    let section = null
+    let item = null
+    for (const sec of doc.sections || []) {
+        if (sec && sec.id === id) { section = sec; break }
+        const hit = (sec?.items || []).find((it) => it && it.id === id)
+        if (hit) { section = sec; item = hit; break }
+    }
+    if (!section && !item) return null
+
+    const spec = (item && item.derive) || (section && section.derive)
+    if (spec && typeof spec === 'object') return spec
+
+    const ref = (item && item.deriveRef) || (section && section.deriveRef)
+    if (!ref || typeof ref !== 'string') return null
+    const visited = seen || new Set()
+    if (visited.has(id)) return null
+    visited.add(id)
+    return resolveDeriveSpec(doc, ref, visited)
+}
+
 export function resolveDeriveTemplate(doc, spec, sectionId, itemId) {
     const paradigms = doc?.paradigms || {}
     if (spec?.pos && paradigms[spec.pos]) return paradigms[spec.pos]
@@ -778,6 +805,34 @@ export function verifyGrammarDoc(lang, doc, profile) {
 
         for (const item of section.items || []) {
             if (item && item.derive) check(item.derive, item.id, section.id, item.id)
+        }
+    }
+
+    // deriveRef：锚点复用别处的 derive，检查指向是否存在、能否解出规格、是否与 derive 同时出现
+    const ids = new Set()
+    for (const section of doc?.sections || []) {
+        if (section?.id) ids.add(section.id)
+        for (const item of section?.items || []) if (item?.id) ids.add(item.id)
+    }
+    for (const section of doc?.sections || []) {
+        for (const node of [section, ...(section?.items || [])]) {
+            if (!node || !node.deriveRef) continue
+            const where = `${lang} · ${node.id || '(无 id)'}`
+            if (typeof node.deriveRef !== 'string') {
+                out.errors.push(`${where}: deriveRef 不是字符串`)
+                continue
+            }
+            if (node.derive) {
+                out.errors.push(`${where}: deriveRef 与 derive 同时存在，只能二选一`)
+                continue
+            }
+            if (!ids.has(node.deriveRef)) {
+                out.errors.push(`${where}: deriveRef 指向不存在的锚点 ${node.deriveRef}`)
+                continue
+            }
+            if (!resolveDeriveSpec(doc, node.id)) {
+                out.errors.push(`${where}: deriveRef ${node.deriveRef} 解不出 derive 规格（可能循环引用）`)
+            }
         }
     }
 

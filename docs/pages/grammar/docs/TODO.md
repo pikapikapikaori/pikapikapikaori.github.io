@@ -73,18 +73,9 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 
 ### 已知数据缺口
 
-- [ ] **`mnc` 动词锚点取不到 derive**：`derive` 挂在章节 `mnc-verb` 上，而可选锚点是
-  `mnc-verb-harmony-back/front/round` 三个独立章节，`getDeriveSpec()` 因此返回 null，
-  表单里点「生成」没有反应。修法二选一：把 `derive` 复制到三个和谐章节，或在
-  `grammar.js` 里给锚点加显式 `deriveRef` 指向 `mnc-verb`。
-- [ ] **`he` 名词锚点取不到 derive**：`derive`（骨架型 + variants）挂在章节 `he-noun` 上，
-  锚点却在 `he-noun-class` 的 `he-class-*` 条目上，同样 `getDeriveSpec()` 返回 null。
-  修法同上。
-- [ ] **`he` 形容词没有 derive**：`he-adj-*` 锚点无 `derive`，形容词表只能手填。
-- [ ] **`de` 名词没有语法性字段**：`de-noun*` 模板的列名是 `m_sg` / `f_sg` / `n_sg`（前缀式），
-  而 `fieldDefsOfTemplate()` 的语法性回退只认 `_m` / `_f` / `_n` 后缀，且 `de.json` 没有
-  显式 `fields`。补一个 `fields` 声明即可（`declensionColumns` + `columns` 前缀匹配）。
-- [ ] **`he` 名词没有语法性字段**：列名是 `sg` / `du` / `pl`，同理需要显式 `fields`。
+- [ ] **`he-adj-quadriliteral`（四辅音形容词）不接 derive**：这类词干常含弱根
+  （如 צַדִּיק 的 י 在阴性单数 צַדֶּקֶת 里脱落），一张骨架套不住全部词干，目前手填。
+  真要接的话，得按「三辅音 + 弱根」拆成两个锚点。
 - [ ] 从 Wiktionary 导入时提取主要部分后，回填 `stems` 并复用 `derive` 自动出表。
 
 ## 4. 通用

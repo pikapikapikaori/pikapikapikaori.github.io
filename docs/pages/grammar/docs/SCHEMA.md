@@ -591,6 +591,15 @@ const MIGRATIONS = {
 | `he-verb-strong`（section 级） | 7 个 binyan × 7 式 × 10 身位 + 不定式 + 分词 = **428 格**，`post.accent: he-milra` | 428/428 |
 | 九个弱根类型（各 1 条） | 7 个 binyan 的骨架，缺的行由规则补齐（连续完成式 / 愿式 / 劝勉式 / 命令式） | 全覆盖 |
 | `he-noun`（section 级，**按基本形态选变体**） | 19 个元音模式变体（18 个 מִשְׁקָל + 通用 קָטָל）× 绝对形 / 附属形 × 单 / 复 = 61 格 | 61/61 |
+| `he-adj-strong` / `segolate` / `qadosh` / `iii-he` / `guttural` / `hollow`（6 条，骨架型） | 各 1 张表 × 绝对形 × 四个身位（ms / fs / mp / fp）= 每类 4 格 | 各 4/4 |
+| `he-adj-nisba`（1 条，**词干 + 词尾**） | 名词词干 + `־ִי` / `־ִית` / `־ִיִּים` / `־ִיּוֹת` | 4/4 |
+
+- 11 个名词形态类别（`he-class-*`）与 6 个形容词骨架条目都不重复写规格，
+  分别用 `deriveRef` 指向 `he-noun` 与自己的 `derive`。
+- `he-adj-quadriliteral`（四辅音）**不接 derive**：这类词干常含弱根（如 צַדִּיק 的 י 在
+  阴性单数 צַדֶּקֶת 里脱落），一张骨架套不住全部词干，留手填。
+- 名词模板声明了 `fields`：语法性（阳性 / 阴性，单选）。希伯来语名词的变格表只有
+  `sg` / `du` / `pl` 三列、不按性别分列，所以这个字段只作记录，不参与列筛选。
 
 骨架↔示例的逐格一致性另外由 `spell(root, 骨架)` 校验。
 
@@ -636,7 +645,8 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - 代词**没有锚点**（也没有 paradigm）：格融合形式（`bi → mini / minde / mimbe / minci`）只写在语法页
 - 动词 `paradigms.verb`：4 张单列表 —— 时制与体（10 行）/ 式与否定（6 行）/ 副动（5 行）/ 形动与名词化（5 行）
 - `derive` 覆盖：动词 1 条（`stemForms.base` 由基本形态去 `-mbi`）+ 名词复数 7 条；
-  后缀里的元音写成占位符 `V`，由 `data/paradigm/mnc.js` 的 `harmonize()` 按词干末元音替换
+  后缀里的元音写成占位符 `V`，由 `data/paradigm/mnc.js` 的 `harmonize()` 按词干末元音替换。
+  三个元音和谐锚点（`mnc-verb-harmony-back/front/round`）用 `deriveRef: "mnc-verb"` 复用同一份规格
 - 派生动词单独一节（`mnc-verb-secondary`）：使役/被动 `-bu`、相互 `-nu`·`-ndu`、协同 `-ca`·`-ce`。
   派生出来的是**新词**（词干改变），不标 `inflect`、不接 `derive`；派生词仍按普通动词接全部后缀，
   **元音和谐按派生后的词干算**（`arambu-` → `arambuha`）。在生词本里另立词条，用「派生词」链接回原词
@@ -997,8 +1007,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - 比对时忽略 dagesh（`profile.skeletonKey`），用户少写一个点也能匹配上。
 - 一个变体都匹配不上时 `generateParadigm` 返回 `noVariant`，表单提示「按基本形态判不出元音模式」。
 - `variants` 里每个变体自带 `root` / `headword` / `expect`，自检逐个变体跑。
-- 锚点本身没有 `derive` 时，表单会退回该词性的总规则（`${lang}-${pos}` 这一节），
-  所以希伯来语名词的这条规格挂在 `he-noun` 上就够，不必在 11 个形态类别里重复。
+- 锚点本身没有 `derive` 时用 `deriveRef` 指向提供规格的锚点 id 复用（见下）。
 
 约束：
 
@@ -1006,6 +1015,18 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - `endings` / `rowDefaults` / `expect` 里的 key 必须能在 `paradigms[pos]` 中找到，列 key 也要对得上。
 - 生成的格**只填空格**，词条里已有内容（含用户手改）永不覆盖。
 - 没有 `derive` 的类型不参与生成，仍可手工填表。
+
+**`deriveRef`：复用别处的规格。** 锚点自己不想重复写 `derive` 时，写
+`"deriveRef": "he-noun"` 即可复用那个锚点的 `derive`（也支持指向 section id）。
+典型场景是「一份规则 + 多个可选锚点」：
+
+- 满语 `mnc-verb-harmony-back/front/round` 三个章节共用 `mnc-verb` 的规格，
+  元音和谐由 `profile.harmonize()` 按词干处理，规则本身只有一份。
+- 希伯来语 `he-class-*` 11 个形态类别共用 `he-noun` 的骨架型规格，
+  具体走哪个变体由基本形态的骨架决定。
+
+约束：`derive` 与 `deriveRef` 只能二选一；`deriveRef` 必须指向存在的锚点且不能成环，
+校验器会报错。
 - `derive` **可以挂在 section 上**：一个变位法的规则天然覆盖它全部时态表，
   于是 `endings` 按 `{pres, impf, fut, perf, plup, futp, inf, ptcp, gerund, supine}` 分块，
   用 `rowDefaults` 声明各行默认使用哪个词干变体（完成系统各表用 `perf`，分词 / 目的动名词用 `ppp`）。

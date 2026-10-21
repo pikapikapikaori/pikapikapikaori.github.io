@@ -153,13 +153,15 @@ export function applySkeleton(root, skeleton) {
  * 用于「由基本形态判定元音模式」：`toSkeleton('דָּבָר', 'דבר')` → `_ָ_ָ_`
  */
 export function toSkeleton(form, root) {
+    // 词根里的 ן ף ץ ם ך 与词形中的词中形是同一个字母，比对前先统一成常规形
     const letters = [...String(root ?? '').replace(/[-\u2010-\u2015\s]/g, '')]
+        .map((ch) => FINAL_TO_REGULAR[ch] || ch)
     const chars = [...String(form ?? '').normalize('NFC')]
     let from = 0
     let next = 0
     letters.forEach((letter, k) => {
         // 词根辅音可能在词形里缺席（弱根脱落），缺席就跳过，继续找下一个
-        const at = chars.findIndex((ch, i) => i >= from && ch === letter)
+        const at = chars.findIndex((ch, i) => i >= from && (FINAL_TO_REGULAR[ch] || ch) === letter)
         if (at < 0) return
         // 跳过了前面的词根辅音时改用显式下标（`_2` = 第 2 个辅音）
         chars[at] = k === next ? ROOT_SLOT : `${ROOT_SLOT}${k + 1}`

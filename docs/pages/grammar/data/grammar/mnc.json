@@ -1663,7 +1663,8 @@
                 }
             ],
             "inflect": "conj",
-            "notes": "词干最后一个元音是 a 或 ū：过去 -ha、将来 -ra、否定 -rakū、副动 -hai。"
+            "notes": "词干最后一个元音是 a 或 ū：过去 -ha、将来 -ra、否定 -rakū、副动 -hai。",
+            "deriveRef": "mnc-verb"
         },
         {
             "id": "mnc-verb-harmony-front",
@@ -1705,7 +1706,8 @@
                 }
             ],
             "inflect": "conj",
-            "notes": "词干最后一个元音是 e 或 u：过去 -he、将来 -re、否定 -rekū、副动 -hei。"
+            "notes": "词干最后一个元音是 e 或 u：过去 -he、将来 -re、否定 -rekū、副动 -hei。",
+            "deriveRef": "mnc-verb"
         },
         {
             "id": "mnc-verb-harmony-round",
@@ -1740,7 +1742,8 @@
                 }
             ],
             "inflect": "conj",
-            "notes": "词干最后一个元音是 o：过去 -ho、将来 -ro、否定 -rokū、副动 -hoi。"
+            "notes": "词干最后一个元音是 o：过去 -ho、将来 -ro、否定 -rokū、副动 -hoi。",
+            "deriveRef": "mnc-verb"
         },
         {
             "id": "mnc-num",

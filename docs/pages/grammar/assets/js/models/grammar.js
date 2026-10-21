@@ -1,3 +1,5 @@
+import { resolveDeriveSpec } from './paradigm-generate.js'
+
 /**
  * 语法数据结构（只读）
  *
@@ -278,12 +280,15 @@ export function collectInflectAnchors(doc, lang, pos) {
     return out
 }
 
-/** 取语法锚点上的 derive 规格（item 优先，其次 section）；没有则返回 null */
+/**
+ * 取语法锚点上的 derive 规格（item 优先，其次 section）。
+ *
+ * 锚点自己没写 `derive` 时可以写 `deriveRef` 指向另一个锚点 id，复用那份规格
+ * （满语三个元音和谐章节共用 `mnc-verb`、希伯来语名词类别共用 `he-noun`）。
+ * 实现放在 paradigm-generate.js（它要自检 dangling ref，不能反过来 import 这里）。
+ */
 export function getDeriveSpec(doc, id) {
-    const hit = findAnchor(doc, id)
-    if (!hit) return null
-    const spec = (hit.item && hit.item.derive) || (hit.section && hit.section.derive)
-    return spec && typeof spec === 'object' ? spec : null
+    return resolveDeriveSpec(doc, id)
 }
 
 /** 取语法锚点上声明的主要部分：返回 [{ key, label, hint, example }]，没有则空数组 */

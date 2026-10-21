@@ -1262,9 +1262,31 @@ export async function lookupWordForForm({ lemma, langCode, preferredPos, grammar
 `patch` 与本对象同构。视图在查询按钮旁多一个下拉，切换即用该 `patch` 重新回填；
 `label` 要带上语言与词性（Wiktionary 源还会带词源小节名），以便区分。
 
+**共用 HTTP 层**（`assets/js/services/http.js`）：各源不直接调 `fetch`，统一走这一层。
+
+```js
+import { requestJSON, requestText } from '../../assets/js/services/http.js'
+
+requestJSON(url, {
+    query: { action: 'parse', page: lemma, origin: '*' },
+    timeout: 15000,      // 单次超时（ms）
+    retries: 2,          // 网络错误 / 超时 / 5xx / 429 才重试
+    minInterval: 250,    // 同站点相邻请求的最小间隔（ms）
+    concurrency: 1,      // 同站点并发数
+    cacheTtl: 7 * 24 * 60 * 60 * 1000   // >0 时缓存到 IndexedDB
+})
+```
+
+- 节流按 `origin` 全局生效：不同源请求同一站点也会排队；同一站点被多个源请求时取各自声明的较大值。
+  参数没有默认值，由各源自己声明（写在源文件顶部的 `HTTP` 常量里）。
+- 429 / 503 优先按 `Retry-After`（秒数或 HTTP-date）等待，其余按 `400ms·2^n` + 抖动退避；
+  其他 4xx 不重试，抛 `HTTP <status>`；超时抛「请求超时」。
+- `cacheTtl > 0` 时，成功响应写进 IndexedDB 的 `httpCache`（库 `langnotebook` v2，键是排序后的 URL），
+  过期条目按需清理；`store/http-cache.js` 里也导出 `clearHttpCache()` 供以后做「清理缓存」入口。
+
 **Wiktionary 实现**（`external/js/wiktionary.js`）：
 
-- 一次 `action=parse`（`prop=sections|wikitext`）拿全 wikitext 与标题层级
+- 一次 `action=parse`（`prop=sections|wikitext`）拿全 wikitext 与标题层级；走共用 HTTP 层，缓存 7 天
 - 按 `sections` 的标题层级 + `byteoffset` 切 wikitext：语言节是二级标题，
   词性小节按标题名认（`===Noun===` 与 `Etymology 1` 下的 `====Verb====` 都要认），
   四级以下只作词性小节的子节

@@ -7,9 +7,6 @@
 （注册方式与模块契约见 [SCHEMA 第四部分 §2](./SCHEMA.md#2-外部数据源在线查询)）
 
 - [ ] 新增更多源：每个源一个文件（如 `external/js/dictionaryapi.js`）+ 一条注册记录
-- [ ] 冲突策略同 Wiktionary（按唯一键合并、追加来源内容）
-- [ ] 失败重试与超时
-- [ ] 限流 / 429 退避
 
 ### 可用的外部数据源
 
@@ -42,16 +39,7 @@
 - 古籍词形分析：Perseus Hopper（需调研接口格式）
 - 不可用的数据源（CORS 不支持）需要一个本地 CORS 代理或直接放弃
 
-## 2. Wiktionary 在线查询的后续扩展
-
-- [ ] 查询结果缓存（IndexedDB，按 `[lang, lemma]` 存储 wikitext / 解析结果）
-- [ ] 请求节流 / 429 退避重试
-- [x] 多语言词条同页时提供选择 UI（当前自动取首个匹配词性）
-- [x] 处理 `{{la-noun}}` / `{{la-verb}}` 等模板参数，提取主要部分
-- [x] 从 `action=parse` 的 heading 层级切分，取代当前 wikitext 正则的粗糙节切
-- [ ] 接入 Wiktionary REST API（`/api/rest_v1/page/definition/{term}`），替代当前的 wikitext 解析
-
-## 3. 语法数据（`data/grammar/`）
+## 2. 语法数据（`data/grammar/`）
 
 （编写规范见 [SCHEMA 第二部分 §1–§8](./SCHEMA.md#第二部分-语法数据编写规范)，校验方式见 [第四部分 §4](./SCHEMA.md#4-校验语法数据命令行)）
 
@@ -60,8 +48,7 @@
 - [ ] **`he-adj-quadriliteral`（四辅音形容词）不接 derive**：这类词干常含弱根
   （如 צַדִּיק 的 י 在阴性单数 צַדֶּקֶת 里脱落），一张骨架套不住全部词干，目前手填。
   真要接的话，得按「三辅音 + 弱根」拆成两个锚点。
-- [ ] 从 Wiktionary 导入时提取主要部分后，回填 `stems` 并复用 `derive` 自动出表。
 
-## 4. 通用
+## 3. 通用
 
 - [ ] 导入前预览：新增 / 合并 / 跳过 三类计数

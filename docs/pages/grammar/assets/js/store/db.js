@@ -2,22 +2,24 @@
  * IndexedDB 封装
  *
  * 库名: langnotebook
- * 版本: 1
+ * 版本: 2
  *
  * stores:
- *   users    keyPath: id          index: name
- *   words    keyPath: id          index: userId,
- *                                        userId_language [userId, language],
- *                                        uniq_user_lang_lemma_pos [userId, language, lemma, pos] (unique)
- *   settings keyPath: userId
+ *   users     keyPath: id          index: name
+ *   words     keyPath: id          index: userId,
+ *                                         userId_language [userId, language],
+ *                                         uniq_user_lang_lemma_pos [userId, language, lemma, pos] (unique)
+ *   settings  keyPath: userId
+ *   httpCache keyPath: key         index: storedAt（外部请求的响应缓存）
  */
 
 export const DB_NAME = 'langnotebook'
-export const DB_VERSION = 1
+export const DB_VERSION = 2
 
 export const STORE_USERS = 'users'
 export const STORE_WORDS = 'words'
 export const STORE_SETTINGS = 'settings'
+export const STORE_HTTP_CACHE = 'httpCache'
 
 let _dbPromise = null
 
@@ -65,7 +67,13 @@ function upgrade(db, oldVersion) {
             db.createObjectStore(STORE_SETTINGS, { keyPath: 'userId' })
         }
     }
-    // 未来版本在此追加 if (oldVersion < 2) {...}
+    if (oldVersion < 2) {
+        if (!db.objectStoreNames.contains(STORE_HTTP_CACHE)) {
+            const s = db.createObjectStore(STORE_HTTP_CACHE, { keyPath: 'key' })
+            s.createIndex('storedAt', 'storedAt', { unique: false })
+        }
+    }
+    // 未来版本在此追加 if (oldVersion < 3) {...}
 }
 
 /* ---------- 基础请求封装 ---------- */

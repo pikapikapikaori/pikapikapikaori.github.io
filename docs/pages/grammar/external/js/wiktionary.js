@@ -2,7 +2,21 @@
  * Wiktionary 查询服务
  */
 
+import { requestJSON } from '../../assets/js/services/http.js'
+
 const API = 'https://en.wiktionary.org/w/api.php'
+
+/**
+ * 这个源自己的请求参数（节流 / 超时 / 重试 / 缓存）：
+ * 统一由 assets/js/services/http.js 执行，按站点排队，跨源共享。
+ */
+const HTTP = {
+    timeout: 15000,
+    retries: 2,
+    minInterval: 250,
+    concurrency: 1,
+    cacheTtl: 7 * 24 * 60 * 60 * 1000
+}
 
 const LANG_TO_WIKTIONARY = {
     'la': 'Latin',
@@ -68,16 +82,11 @@ const POS_MAP = {
 
 /* ---------------- HTTP ---------------- */
 
-async function apiGet(params) {
-    const url = new URL(API)
-    for (const [k, v] of Object.entries(params)) {
-        url.searchParams.set(k, v)
-    }
-    url.searchParams.set('origin', '*')
-
-    const res = await fetch(url.toString())
-    if (!res.ok) throw new Error(`Wiktionary HTTP ${res.status}`)
-    return res.json()
+function apiGet(params) {
+    return requestJSON(API, {
+        ...HTTP,
+        query: { ...params, origin: '*' }
+    })
 }
 
 /**

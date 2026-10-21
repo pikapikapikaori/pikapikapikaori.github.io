@@ -73,6 +73,52 @@ function append(el, children) {
     }
 }
 
+/**
+ * 把语法数据里的说明文字解析成 DOM 片段。
+ *
+ * 数据是静态的语法 JSON，说明里允许少量 HTML（`<strong>` / `<code>` / `<em>` 等）。
+ * 只保留白名单标签与普通属性，`on*` 事件与 `javascript:` 链接一律丢弃，
+ * 不认识的标签会被拆掉但保留里面的文字 —— 这样即使数据里混进脚本也执行不了。
+ */
+const HTML_TAGS = new Set(['STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN'])
+
+export function htmlFragment(text) {
+    const out = document.createDocumentFragment()
+    const source = String(text ?? '')
+    if (!source) return out
+    if (!/[<&]/.test(source)) {
+        out.appendChild(document.createTextNode(source))
+        return out
+    }
+    const tpl = document.createElement('template')
+    tpl.innerHTML = source
+    copyFlow(tpl.content, out)
+    return out
+}
+
+function copyFlow(from, to) {
+    for (const child of Array.from(from.childNodes)) {
+        if (child.nodeType === Node.TEXT_NODE) {
+            to.appendChild(document.createTextNode(child.nodeValue))
+            continue
+        }
+        if (child.nodeType !== Node.ELEMENT_NODE) continue
+        if (!HTML_TAGS.has(child.tagName)) {
+            copyFlow(child, to)
+            continue
+        }
+        const el = document.createElement(child.tagName.toLowerCase())
+        for (const attr of Array.from(child.attributes)) {
+            const name = attr.name.toLowerCase()
+            if (name.startsWith('on')) continue
+            if (name === 'href' && /^\s*javascript:/i.test(attr.value)) continue
+            el.setAttribute(attr.name, attr.value)
+        }
+        copyFlow(child, el)
+        to.appendChild(el)
+    }
+}
+
 export function qs(sel, root = document) { return root.querySelector(sel) }
 export function qsa(sel, root = document) { return Array.from(root.querySelectorAll(sel)) }
 

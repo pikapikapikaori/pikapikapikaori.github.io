@@ -2,48 +2,79 @@
     "version": 1,
     "language": "mnc",
     "name": "满语",
+    "groups": [
+        {
+            "id": "pron",
+            "title": "代词"
+        },
+        {
+            "id": "noun",
+            "title": "名词"
+        },
+        {
+            "id": "adj",
+            "title": "形容词"
+        },
+        {
+            "id": "verb",
+            "title": "动词"
+        },
+        {
+            "id": "num",
+            "title": "数词"
+        },
+        {
+            "id": "adv",
+            "title": "副词"
+        },
+        {
+            "id": "postp",
+            "title": "后置词"
+        },
+        {
+            "id": "sound",
+            "title": "语音与元音和谐"
+        },
+        {
+            "id": "script",
+            "title": "文字"
+        },
+        {
+            "id": "syntax",
+            "title": "句法"
+        }
+    ],
     "paradigms": {
-        "verb": {
+        "noun": {
+            "stems": false,
             "tables": [
                 {
-                    "key": "main",
-                    "title": "动词时态",
+                    "key": "number",
+                    "title": "数",
                     "columns": [
                         {
-                            "key": "form",
-                            "label": "形式"
+                            "key": "sg",
+                            "label": "单数"
+                        },
+                        {
+                            "key": "pl",
+                            "label": "复数"
                         }
                     ],
                     "rows": [
                         {
-                            "key": "pres-fut",
-                            "label": "现在-将来时",
-                            "grammarRef": "mnc-verb-tenses"
-                        },
-                        {
-                            "key": "past",
-                            "label": "过去时",
-                            "grammarRef": "mnc-verb-tenses"
-                        },
-                        {
-                            "key": "prog",
-                            "label": "进行体",
-                            "grammarRef": "mnc-verb-tenses"
-                        },
-                        {
-                            "key": "perf",
-                            "label": "完成体",
-                            "grammarRef": "mnc-verb-tenses"
+                            "key": "abs",
+                            "label": "绝对形"
                         }
                     ]
                 }
             ]
         },
-        "noun": {
+        "verb": {
             "tables": [
                 {
-                    "key": "main",
-                    "title": "格形式",
+                    "key": "tense",
+                    "title": "时制与体",
                     "columns": [
                         {
                             "key": "form",
@@ -52,29 +83,170 @@
                     ],
                     "rows": [
                         {
-                            "key": "nom",
-                            "label": "主格",
-                            "grammarRef": "mnc-noun-cases"
+                            "key": "mbi",
+                            "label": "现在-将来时 (-mbi)",
+                            "grammarRef": "mnc-verb-tense"
                         },
                         {
-                            "key": "gen",
-                            "label": "属格",
-                            "grammarRef": "mnc-noun-cases"
+                            "key": "fut",
+                            "label": "将来/未完成 (-ra/-re/-ro)",
+                            "grammarRef": "mnc-verb-tense"
                         },
                         {
-                            "key": "dat",
-                            "label": "与格",
-                            "grammarRef": "mnc-noun-cases"
+                            "key": "past",
+                            "label": "过去时 (-ha/-he/-ho)",
+                            "grammarRef": "mnc-verb-tense"
                         },
                         {
-                            "key": "acc",
-                            "label": "宾格",
-                            "grammarRef": "mnc-noun-cases"
+                            "key": "mbime",
+                            "label": "同时持续 (-mbime)",
+                            "grammarRef": "mnc-verb-tense"
                         },
                         {
-                            "key": "abl",
-                            "label": "夺格",
-                            "grammarRef": "mnc-noun-cases"
+                            "key": "mbihe",
+                            "label": "过去进行 (-mbihe)",
+                            "grammarRef": "mnc-verb-tense"
+                        },
+                        {
+                            "key": "prog",
+                            "label": "进行 (-me bi)",
+                            "grammarRef": "mnc-verb-tense"
+                        },
+                        {
+                            "key": "prog2",
+                            "label": "进行/持续 (-me ilihabi)",
+                            "grammarRef": "mnc-verb-tense"
+                        },
+                        {
+                            "key": "perf",
+                            "label": "完成/已毕 (-mahabi)",
+                            "grammarRef": "mnc-verb-tense"
+                        },
+                        {
+                            "key": "perf2",
+                            "label": "完成 (-ha bi)",
+                            "grammarRef": "mnc-verb-tense"
+                        },
+                        {
+                            "key": "plup",
+                            "label": "过去完成 (-he bihe)",
+                            "grammarRef": "mnc-verb-tense"
+                        }
+                    ]
+                },
+                {
+                    "key": "mood",
+                    "title": "式与否定",
+                    "columns": [
+                        {
+                            "key": "form",
+                            "label": "形式"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "impv",
+                            "label": "命令式（词干）",
+                            "grammarRef": "mnc-verb-mood"
+                        },
+                        {
+                            "key": "opt",
+                            "label": "祈愿 (-kini)",
+                            "grammarRef": "mnc-verb-mood"
+                        },
+                        {
+                            "key": "prec",
+                            "label": "祈使 (-cina)",
+                            "grammarRef": "mnc-verb-mood"
+                        },
+                        {
+                            "key": "negpres",
+                            "label": "现在否定 (-rakū)",
+                            "grammarRef": "mnc-verb-negation"
+                        },
+                        {
+                            "key": "negpast",
+                            "label": "过去否定 (-hakū)",
+                            "grammarRef": "mnc-verb-negation"
+                        },
+                        {
+                            "key": "prohib",
+                            "label": "禁止 (ume + -ra)",
+                            "grammarRef": "mnc-verb-negation"
+                        }
+                    ]
+                },
+                {
+                    "key": "converb",
+                    "title": "副动形式",
+                    "columns": [
+                        {
+                            "key": "form",
+                            "label": "形式"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "cvbme",
+                            "label": "同时 (-me)",
+                            "grammarRef": "mnc-verb-converb"
+                        },
+                        {
+                            "key": "cvbfi",
+                            "label": "先后完成 (-fi)",
+                            "grammarRef": "mnc-verb-converb"
+                        },
+                        {
+                            "key": "cvbhai",
+                            "label": "持续 (-hai/-hei/-hoi)",
+                            "grammarRef": "mnc-verb-converb"
+                        },
+                        {
+                            "key": "cvbtala",
+                            "label": "直到 (-tala/-tele)",
+                            "grammarRef": "mnc-verb-converb"
+                        },
+                        {
+                            "key": "cvbnggala",
+                            "label": "当…时 (-nggala/-nggele)",
+                            "grammarRef": "mnc-verb-converb"
+                        }
+                    ]
+                },
+                {
+                    "key": "nominal",
+                    "title": "形动与名词化",
+                    "columns": [
+                        {
+                            "key": "form",
+                            "label": "形式"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "key": "ptcppast",
+                            "label": "已发生形动 (-ha)",
+                            "grammarRef": "mnc-verb-participle"
+                        },
+                        {
+                            "key": "ptcpfut",
+                            "label": "未发生形动 (-ra)",
+                            "grammarRef": "mnc-verb-participle"
+                        },
+                        {
+                            "key": "nomn",
+                            "label": "名词化 (-n)",
+                            "grammarRef": "mnc-verb-participle"
+                        },
+                        {
+                            "key": "nomsi",
+                            "label": "名词化 (-si)",
+                            "grammarRef": "mnc-verb-participle"
+                        },
+                        {
+                            "key": "nomtan",
+                            "label": "名词化 (-tan)",
+                            "grammarRef": "mnc-verb-participle"
                         }
                     ]
                 }
@@ -83,359 +255,491 @@
     },
     "sections": [
         {
-            "id": "mnc-script",
-            "title": "满文字母形态",
+            "id": "mnc-pron",
+            "title": "代词",
+            "group": "pron",
             "items": [
                 {
-                    "id": "mnc-letter-a-initial",
-                    "title": "元音字母 a 的四种形态",
+                    "id": "mnc-pron-personal",
+                    "title": "人称代词及格形式",
                     "tables": [
                         {
-                            "caption": "满文元音 a 的形态",
+                            "caption": "人称代词与格助词的结合形式",
                             "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
+                                "人称",
+                                "主格",
+                                "属格 -i/-ni",
+                                "与格-方位格 -de",
+                                "宾格 -be",
+                                "夺格 -ci"
                             ],
                             "rows": [
                                 [
-                                    "独立形 (Isolated)",
-                                    "ᠠ",
-                                    "a"
+                                    "1sg 我",
+                                    "ᠪᡳ (bi)",
+                                    "ᠮᡳᠨᡳ (mini)",
+                                    "ᠮᡳᠨᡩᡝ (minde)",
+                                    "ᠮᡳᠮᠪᡝ (mimbe)",
+                                    "ᠮᡳᠨᠴᡳ (minci)"
                                 ],
                                 [
-                                    "词首形 (Initial)",
-                                    "ᠠ",
-                                    "a-"
+                                    "2sg 你",
+                                    "ᠰᡳ (si)",
+                                    "ᠰᡳᠨᡳ (sini)",
+                                    "ᠰᡳᠨᡩᡝ (sinde)",
+                                    "ᠰᡳᠮᠪᡝ (simbe)",
+                                    "ᠰᡳᠨᠴᡳ (sinci)"
                                 ],
                                 [
-                                    "词中形 (Medial)",
-                                    "ᠠ",
-                                    "-a-"
+                                    "3sg 他/她",
+                                    "ᡳ (i)",
+                                    "ᡳᠨᡳ (ini)",
+                                    "ᡳᠨᡩᡝ (inde)",
+                                    "ᡳᠮᠪᡝ (imbe)",
+                                    "ᡳᠨᠴᡳ (inci)"
                                 ],
                                 [
-                                    "词尾形 (Final)",
-                                    "ᠠ",
-                                    "-a"
+                                    "1pl 排除（我们）",
+                                    "ᠪᡝ (be)",
+                                    "ᠮᡝᠨᡳ (meni)",
+                                    "ᠮᡝᠨᡩᡝ (mende)",
+                                    "ᠮᡝᠮᠪᡝ (membe)",
+                                    "ᠮᡝᠨᠴᡳ (menci)"
+                                ],
+                                [
+                                    "1pl 包括（咱们）",
+                                    "ᠮᡠᠰᡝ (muse)",
+                                    "ᠮᡠᠰᡝᡳ (musei)",
+                                    "ᠮᡠᠰᡝᠩᡩᡝ (musende)",
+                                    "ᠮᡠᠰᡝᠪᡝ (musebe)",
+                                    "ᠮᡠᠰᡝᠴᡳ (museci)"
+                                ],
+                                [
+                                    "2pl 你们",
+                                    "ᠰᡠᠸᡝ (suwe)",
+                                    "ᠰᡠᠸᡝᠨᡳ (suweni)",
+                                    "ᠰᡠᠸᡝᠨᡩᡝ (suwende)",
+                                    "ᠰᡠᠸᡝᠮᠪᡝ (suwembe)",
+                                    "ᠰᡠᠸᡝᠨᠴᡳ (suwenci)"
+                                ],
+                                [
+                                    "3pl 他们",
+                                    "ᠴᡝ (ce)",
+                                    "ᠴᡝᠨᡳ (ceni)",
+                                    "ᠴᡝᠨᡩᡝ (cende)",
+                                    "ᠴᡝᠮᠪᡝ (cembe)",
+                                    "ᠴᡝᠨᠴᡳ (cenci)"
                                 ]
-                            ]
+                            ],
+                            "lang": "mnc"
                         }
                     ],
-                    "notes": "满文元音字母的独立形与词首形通常相同。词尾形与前接辅音字形相连。"
+                    "notes": "第一人称复数区分<strong>排除式</strong>（be，不含听话者）与<strong>包括式</strong>（muse，含听话者）。代词本身不随格变化，而是接格助词；但接助词后多与词干缩合成异干形式（bi → mini / minde / mimbe / minci），不能简单地把助词拼在原形后面。"
                 },
                 {
-                    "id": "mnc-letter-e-initial",
-                    "title": "元音字母 e 的四种形态",
+                    "id": "mnc-pron-case-fusion",
+                    "title": "代词接格助词后的形式变化",
                     "tables": [
                         {
-                            "caption": "满文元音 e 的形态",
+                            "caption": "格助词接代词时发生的变化",
                             "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
+                                "格助词",
+                                "一般名词后",
+                                "代词后的变化",
+                                "例"
                             ],
                             "rows": [
                                 [
-                                    "独立形",
-                                    "ᡝ",
-                                    "e"
+                                    "-i（属格-工具格）",
+                                    "元音后接 -i，n 后接 -ni",
+                                    "多用斜格词干 + -i / -ni",
+                                    "bi → mini；i → ini；muse → musei；tere → terei"
                                 ],
                                 [
-                                    "词首形",
-                                    "ᡝ",
-                                    "e-"
+                                    "-de（与格-方位格）",
+                                    "直接接 -de",
+                                    "斜格词干 + -de（常带 -n-）",
+                                    "bi → minde；si → sinde；muse → musende"
                                 ],
                                 [
-                                    "词中形",
-                                    "ᡝ",
-                                    "-e-"
+                                    "-be（宾格）",
+                                    "直接接 -be",
+                                    "斜格词干 + -mbe / -be",
+                                    "bi → mimbe；si → simbe；muse → musebe"
                                 ],
                                 [
-                                    "词尾形",
-                                    "ᡝ",
-                                    "-e"
+                                    "-ci（夺格）",
+                                    "直接接 -ci",
+                                    "斜格词干 + -ci（常带 -n-）",
+                                    "bi → minci；i → inci；suwe → suwenci"
                                 ]
-                            ]
+                            ],
+                            "lang": "mnc"
                         }
                     ],
-                    "notes": "元音 e 的形态与 a 类似，但字形不同。e 属于前元音组，与 u 一起参与元音和谐。"
+                    "notes": "拿不准时优先记住整块形式（mini / minde / mimbe / minci），不要临时拼；第三人称 i 的斜格词干是 in-，复数 ce 是 cen-。"
                 },
                 {
-                    "id": "mnc-letter-i-initial",
-                    "title": "元音字母 i 的四种形态",
+                    "id": "mnc-pron-demonstrative",
+                    "title": "指示、疑问与反身代词",
                     "tables": [
                         {
-                            "caption": "满文元音 i 的形态",
+                            "caption": "常见形式",
                             "headers": [
-                                "位置",
+                                "类别",
                                 "形式",
-                                "罗马化"
+                                "说明"
                             ],
                             "rows": [
                                 [
-                                    "独立形",
-                                    "ᡳ",
-                                    "i"
+                                    "指示（近）",
+                                    "ᡝᡵᡝ (ere)",
+                                    "这；作定语直接放名词前"
                                 ],
                                 [
-                                    "词首形",
-                                    "ᡳ",
-                                    "i-"
+                                    "指示（远）",
+                                    "ᡨᡝᡵᡝ (tere)",
+                                    "那"
                                 ],
                                 [
-                                    "词中形",
-                                    "ᡳ",
-                                    "-i-"
+                                    "疑问（人）",
+                                    "ᠸᡝ (we)",
+                                    "谁"
                                 ],
                                 [
-                                    "词尾形",
-                                    "ᡳ",
-                                    "-i"
+                                    "疑问（物）",
+                                    "ᠶᠠ (ya)",
+                                    "什么"
+                                ],
+                                [
+                                    "疑问（选择）",
+                                    "ᠠᡳ (ai)",
+                                    "什么 / 哪个（多作定语）"
+                                ],
+                                [
+                                    "反身",
+                                    "ᠪᡝᠶᡝ (beye)",
+                                    "自己（可接格助词，也可泛指「身体」）"
+                                ],
+                                [
+                                    "相互",
+                                    "ᡳᠰᡥᡠᠨᡩᡝ (ishunde)",
+                                    "彼此"
                                 ]
-                            ]
-                        }
-                    ],
-                    "notes": "i 是中性元音，可与前元音或后元音共现。"
-                },
-                {
-                    "id": "mnc-letter-o-initial",
-                    "title": "元音字母 o 的四种形态",
-                    "tables": [
-                        {
-                            "caption": "满文元音 o 的形态",
-                            "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
                             ],
-                            "rows": [
-                                [
-                                    "独立形",
-                                    "ᠣ",
-                                    "o"
-                                ],
-                                [
-                                    "词首形",
-                                    "ᠣ",
-                                    "o-"
-                                ],
-                                [
-                                    "词中形",
-                                    "ᠣ",
-                                    "-o-"
-                                ],
-                                [
-                                    "词尾形",
-                                    "ᠣ",
-                                    "-o"
-                                ]
-                            ]
+                            "lang": "mnc"
                         }
                     ],
-                    "notes": "o 是后元音，与 a、ū 同组参与元音和谐。"
-                },
-                {
-                    "id": "mnc-letter-u-initial",
-                    "title": "元音字母 u 的四种形态",
-                    "tables": [
-                        {
-                            "caption": "满文元音 u 的形态",
-                            "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
-                            ],
-                            "rows": [
-                                [
-                                    "独立形",
-                                    "ᡠ",
-                                    "u"
-                                ],
-                                [
-                                    "词首形",
-                                    "ᡠ",
-                                    "u-"
-                                ],
-                                [
-                                    "词中形",
-                                    "ᡠ",
-                                    "-u-"
-                                ],
-                                [
-                                    "词尾形",
-                                    "ᡠ",
-                                    "-u"
-                                ]
-                            ]
-                        }
-                    ],
-                    "notes": "u 是前元音（「阴性元音」），与 e 同组参与元音和谐。满文的 ū 用 ᡡ 表示。"
-                },
-                {
-                    "id": "mnc-letter-n-initial",
-                    "title": "辅音字母 n 的形态",
-                    "tables": [
-                        {
-                            "caption": "满文辅音 n 的形态",
-                            "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
-                            ],
-                            "rows": [
-                                [
-                                    "独立形",
-                                    "ᠨ",
-                                    "n"
-                                ],
-                                [
-                                    "词首形",
-                                    "ᠨ",
-                                    "n-"
-                                ],
-                                [
-                                    "词中形",
-                                    "ᠨ",
-                                    "-n-"
-                                ],
-                                [
-                                    "词尾形",
-                                    "ᠨ",
-                                    "-n"
-                                ]
-                            ]
-                        }
-                    ],
-                    "notes": "辅音字母一般有词首、词中、词尾三种形式；元音字母和部分音节字母有四种形式。"
-                },
-                {
-                    "id": "mnc-letter-k-initial",
-                    "title": "辅音字母 k 的形态",
-                    "tables": [
-                        {
-                            "caption": "满文辅音 k 的形态",
-                            "headers": [
-                                "位置",
-                                "形式（后元音前）",
-                                "形式（前元音前）",
-                                "罗马化"
-                            ],
-                            "rows": [
-                                [
-                                    "独立形",
-                                    "ᡴ",
-                                    "ᡴ",
-                                    "k"
-                                ],
-                                [
-                                    "词首形",
-                                    "ᡴ",
-                                    "ᡴ",
-                                    "k-"
-                                ],
-                                [
-                                    "词中形",
-                                    "ᡴ",
-                                    "ᡴ",
-                                    "-k-"
-                                ],
-                                [
-                                    "词尾形",
-                                    "ᡴ",
-                                    "ᡴ",
-                                    "-k"
-                                ]
-                            ]
-                        }
-                    ],
-                    "notes": "k / g / h 三个字母共用基本字形：g 在 k 的字形右侧加点，h 在 k 的字形右侧加小圈。同一 Unicode 码位，字形随前接元音由字体自动选择。"
-                },
-                {
-                    "id": "mnc-letter-b-initial",
-                    "title": "辅音字母 b 的形态",
-                    "tables": [
-                        {
-                            "caption": "满文辅音 b 的形态",
-                            "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
-                            ],
-                            "rows": [
-                                [
-                                    "独立形",
-                                    "ᠪ",
-                                    "b"
-                                ],
-                                [
-                                    "词首形",
-                                    "ᠪ",
-                                    "b-"
-                                ],
-                                [
-                                    "词中形",
-                                    "ᠪ",
-                                    "-b-"
-                                ],
-                                [
-                                    "词尾形",
-                                    "ᠪ",
-                                    "-b"
-                                ]
-                            ]
-                        }
-                    ],
-                    "notes": "b 与 p 字形相近但不同（p 为 ᡦ）。"
-                },
-                {
-                    "id": "mnc-letter-m-initial",
-                    "title": "辅音字母 m 的形态",
-                    "tables": [
-                        {
-                            "caption": "满文辅音 m 的形态",
-                            "headers": [
-                                "位置",
-                                "形式",
-                                "罗马化"
-                            ],
-                            "rows": [
-                                [
-                                    "独立形",
-                                    "ᠮ",
-                                    "m"
-                                ],
-                                [
-                                    "词首形",
-                                    "ᠮ",
-                                    "m-"
-                                ],
-                                [
-                                    "词中形",
-                                    "ᠮ",
-                                    "-m-"
-                                ],
-                                [
-                                    "词尾形",
-                                    "ᠮ",
-                                    "-m"
-                                ]
-                            ]
-                        }
-                    ],
-                    "notes": "m 的形态比较稳定，词尾形通常带一个向下的撇。"
+                    "notes": "满语代词没有性、数的形态变化（第三人称复数用 ce），也不区分主格/宾格的词形，全靠格助词。"
                 }
             ]
         },
         {
             "id": "mnc-noun",
-            "title": "名词格助词",
+            "title": "名词",
+            "group": "noun",
             "items": [
                 {
-                    "id": "mnc-noun-cases",
-                    "title": "名词的格系统",
+                    "id": "mnc-noun-pl-zero",
+                    "title": "无标记（绝大多数名词）",
                     "tables": [
                         {
-                            "caption": "满语名词的五个格",
+                            "caption": "示例：niyalma",
+                            "headers": [
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "niyalma",
+                                    "niyalma"
+                                ],
+                                [
+                                    "boo",
+                                    "boo"
+                                ],
+                                [
+                                    "bithe",
+                                    "bithe"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "inflect": "decl",
+                    "notes": "满语名词的复数<strong>多数不靠后缀</strong>：需要时用数词、形容词或上下文表示。只有指人名词较常用复数后缀；不确定时选这一类。",
+                    "derive": {
+                        "pos": "noun",
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
+                            }
+                        },
+                        "stemExample": "niyalma",
+                        "headwordExample": "niyalma",
+                        "parts": [],
+                        "endings": {
+                            "number": {
+                                "abs": {
+                                    "sg": {
+                                        "stemOnly": true
+                                    },
+                                    "pl": {
+                                        "stemOnly": true
+                                    }
+                                }
+                            }
+                        },
+                        "expect": {
+                            "number": {
+                                "abs": {
+                                    "sg": "niyalma",
+                                    "pl": "niyalma"
+                                }
+                            }
+                        },
+                        "note": "满语名词的「主要部分」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+                    }
+                },
+                {
+                    "id": "mnc-noun-pl-sa",
+                    "title": "-sa / -se / -so 型",
+                    "tables": [
+                        {
+                            "caption": "示例：niyalma",
+                            "headers": [
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "niyalma",
+                                    "niyalmasa"
+                                ],
+                                [
+                                    "bithe",
+                                    "bithese"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "inflect": "decl",
+                    "notes": "最常见的指人复数后缀，元音随词干和谐：后元音 -sa、前元音 -se、圆唇 -so。",
+                    "derive": {
+                        "pos": "noun",
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
+                            }
+                        },
+                        "stemExample": "niyalma",
+                        "headwordExample": "niyalma",
+                        "parts": [],
+                        "endings": {
+                            "number": {
+                                "abs": {
+                                    "sg": {
+                                        "stemOnly": true
+                                    },
+                                    "pl": {
+                                        "suffix": "-sV"
+                                    }
+                                }
+                            }
+                        },
+                        "expect": {
+                            "number": {
+                                "abs": {
+                                    "sg": "niyalma",
+                                    "pl": "niyalmasa"
+                                }
+                            }
+                        },
+                        "note": "满语名词的「主要部分」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+                    }
+                },
+                {
+                    "id": "mnc-noun-pl-ta",
+                    "title": "-ta / -te 型",
+                    "tables": [
+                        {
+                            "caption": "示例：ama",
+                            "headers": [
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "ama",
+                                    "amata"
+                                ],
+                                [
+                                    "eme",
+                                    "emete"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "inflect": "decl",
+                    "notes": "多用于亲属称谓等少数名词，元音随词干和谐（-ta / -te / -to）。",
+                    "derive": {
+                        "pos": "noun",
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
+                            }
+                        },
+                        "stemExample": "ama",
+                        "headwordExample": "ama",
+                        "parts": [],
+                        "endings": {
+                            "number": {
+                                "abs": {
+                                    "sg": {
+                                        "stemOnly": true
+                                    },
+                                    "pl": {
+                                        "suffix": "-tV"
+                                    }
+                                }
+                            }
+                        },
+                        "expect": {
+                            "number": {
+                                "abs": {
+                                    "sg": "ama",
+                                    "pl": "amata"
+                                }
+                            }
+                        },
+                        "note": "满语名词的「主要部分」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+                    }
+                },
+                {
+                    "id": "mnc-noun-pl-si",
+                    "title": "-si 型",
+                    "tables": [
+                        {
+                            "caption": "示例：haha",
+                            "headers": [
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "haha",
+                                    "hahasi"
+                                ],
+                                [
+                                    "hehe",
+                                    "hehesi"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "inflect": "decl",
+                    "notes": "少数指人名词用 -si，不随和谐变化。",
+                    "derive": {
+                        "pos": "noun",
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
+                            }
+                        },
+                        "stemExample": "haha",
+                        "headwordExample": "haha",
+                        "parts": [],
+                        "endings": {
+                            "number": {
+                                "abs": {
+                                    "sg": {
+                                        "stemOnly": true
+                                    },
+                                    "pl": {
+                                        "suffix": "-si"
+                                    }
+                                }
+                            }
+                        },
+                        "expect": {
+                            "number": {
+                                "abs": {
+                                    "sg": "haha",
+                                    "pl": "hahasi"
+                                }
+                            }
+                        },
+                        "note": "满语名词的「主要部分」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+                    }
+                },
+                {
+                    "id": "mnc-noun-pl-ri",
+                    "title": "-ri 型",
+                    "tables": [
+                        {
+                            "caption": "示例：mafa",
+                            "headers": [
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "mafa",
+                                    "mafari"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "inflect": "decl",
+                    "notes": "少数名词用 -ri 复数（祖父 mafa → mafari）；不能产，遇到时就近按这一类记。",
+                    "derive": {
+                        "pos": "noun",
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
+                            }
+                        },
+                        "stemExample": "mafa",
+                        "headwordExample": "mafa",
+                        "parts": [],
+                        "endings": {
+                            "number": {
+                                "abs": {
+                                    "sg": {
+                                        "stemOnly": true
+                                    },
+                                    "pl": {
+                                        "suffix": "-ri"
+                                    }
+                                }
+                            }
+                        },
+                        "expect": {
+                            "number": {
+                                "abs": {
+                                    "sg": "mafa",
+                                    "pl": "mafari"
+                                }
+                            }
+                        },
+                        "note": "少数名词的复数后缀 -ri，不随元音和谐变化。"
+                    }
+                },
+                {
+                    "id": "mnc-noun-cases",
+                    "title": "格助词",
+                    "tables": [
+                        {
+                            "caption": "五个格及其格助词",
                             "headers": [
                                 "格",
                                 "格助词",
@@ -444,171 +748,708 @@
                             ],
                             "rows": [
                                 [
-                                    "主格 (Nominative)",
+                                    "主格",
                                     "无",
-                                    "主语、施事者",
-                                    "ᠪᡳ (bi) 我"
+                                    "主语、判断句的主题",
+                                    "ᠪᠣᠣ (boo) 房子"
                                 ],
                                 [
-                                    "属格-工具格 (Genitive-Instrumental)",
+                                    "属格-工具格",
                                     "ᡳ (i) / ᠨᡳ (ni)",
-                                    "所属、工具、材料",
-                                    "ᠪᠣᠣ ᡳ ᡝᠵᡝᠨ (boo i ejen) 房的主人"
+                                    "所属、材料、工具；元音后接 i，n 后接 ni",
+                                    "ᠪᠣᠣ ᡳ ᡝᠵᡝᠨ (boo i ejen) 房主"
                                 ],
                                 [
-                                    "与格-方位格 (Dative-Locative)",
+                                    "与格-方位格",
                                     "ᡩᡝ (de)",
                                     "间接宾语、地点、时间、方向",
                                     "ᠪᠣᠣ ᡩᡝ (boo de) 在家里 / 向家"
                                 ],
                                 [
-                                    "宾格-经格 (Accusative-Prolative)",
+                                    "宾格-经格",
                                     "ᠪᡝ (be)",
-                                    "直接宾语、经过的路径",
+                                    "直接宾语；经过的路径",
                                     "ᠪᡳᡨᡥᡝ ᠪᡝ (bithe be) 把书"
                                 ],
                                 [
-                                    "夺格-比格 (Ablative-Comparative)",
+                                    "夺格-比格",
                                     "ᠴᡳ (ci)",
                                     "起点、来源、比较基准",
-                                    "ᠪᠣᠣ ᠴᡳ (boo ci) 从家 / 比家"
+                                    "ᠪᠣᠣ ᠴᡳ (boo ci) 从家 / 比房子"
                                 ]
-                            ]
+                            ],
+                            "lang": "mnc"
                         }
                     ],
-                    "notes": "满语没有像印欧语那样的形态变格，而是通过在名词后加格助词来表示格关系。格助词 i / ni 的选择取决于前一个词是否以元音或 n 结尾：元音后接 i，n 后接 ni。de 是满语中最常用的格助词之一，功能非常丰富。"
+                    "notes": "满语没有形态上的变格，格关系由<strong>格助词</strong>表示，名词词形本身不变；格助词接在整个名词短语末尾（ᠪᠣᠣ ᡳ ᡝᠵᡝᠨ = 房子 + 属格 + 主人）。"
+                },
+                {
+                    "id": "mnc-noun-possessive",
+                    "title": "领属与「有 / 没有」",
+                    "tables": [
+                        {
+                            "caption": "常见表达",
+                            "headers": [
+                                "结构",
+                                "例",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "名词 + ᡳ + 名词",
+                                    "ᠮᡳᠨᡳ ᠪᠣᠣ (mini boo)",
+                                    "我的房子（代词属格 + 名词）"
+                                ],
+                                [
+                                    "有：名词 + ᠪᡳ (bi)",
+                                    "ᠪᠣᠣ ᠪᡳ (boo bi)",
+                                    "有房子"
+                                ],
+                                [
+                                    "没有：名词 + ᠠᡴᡡ (akū)",
+                                    "ᠪᠣᠣ ᠠᡴᡡ (boo akū)",
+                                    "没有房子"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "满语没有专门的「有」动词，用 bi / akū 表示存在与否定。"
                 }
             ]
         },
         {
-            "id": "mnc-pron",
-            "title": "代词",
+            "id": "mnc-adj",
+            "title": "形容词",
+            "group": "adj",
             "items": [
                 {
-                    "id": "mnc-pron-personal",
-                    "title": "人称代词",
+                    "id": "mnc-adj-invariable",
+                    "title": "形容词不变形",
                     "tables": [
                         {
-                            "caption": "人称代词及其格形式",
+                            "caption": "形容词的用法",
                             "headers": [
-                                "人称",
-                                "主格",
-                                "属格",
-                                "与格",
-                                "宾格",
-                                "夺格"
+                                "用法",
+                                "例",
+                                "说明"
                             ],
                             "rows": [
                                 [
-                                    "1sg",
-                                    "ᠪᡳ (bi) 我",
-                                    "ᠮᡳᠨᡳ (mini)",
-                                    "ᠮᡳᠨᡩᡝ (minde)",
-                                    "ᠮᡳᠮᠪᡝ (mimbe)",
-                                    "ᠮᡳᠨᠴᡳ (minci)"
+                                    "直接作定语",
+                                    "ᠰᠠᡳᠨ ᠨᡳᠶᠠᠯᠮᠠ (sain niyalma)",
+                                    "好人：形容词在名词前，不加任何词尾"
                                 ],
                                 [
-                                    "2sg",
-                                    "ᠰᡳ (si) 你",
-                                    "ᠰᡳᠨᡳ (sini)",
-                                    "ᠰᡳᠨᡩᡝ (sinde)",
-                                    "ᠰᡳᠮᠪᡝ (simbe)",
-                                    "ᠰᡳᠨᠴᡳ (sinci)"
+                                    "作谓语",
+                                    "ᠪᠣᠣ ᠰᠠᡳᠨ (boo sain)",
+                                    "房子好：不需要系词"
                                 ],
                                 [
-                                    "3sg",
-                                    "ᡳ (i) 他/她",
-                                    "ᡳᠨᡳ (ini)",
-                                    "ᡳᠨᡩᡝ (inde)",
-                                    "ᡳᠮᠪᡝ (imbe)",
-                                    "ᡳᠨᠴᡳ (inci)"
-                                ],
-                                [
-                                    "1pl（排除）",
-                                    "ᠪᡝ (be) 我们",
-                                    "ᠮᡝᠨᡳ (meni)",
-                                    "ᠮᡝᠨᡩᡝ (mende)",
-                                    "ᠮᡝᠮᠪᡝ (membe)",
-                                    "ᠮᡝᠨᠴᡳ (menci)"
-                                ],
-                                [
-                                    "1pl（包括）",
-                                    "ᠮᡠᠰᡝ (muse) 咱们",
-                                    "ᠮᡠᠰᡝᡳ (musei)",
-                                    "ᠮᡠᠰᡝᠩᡩᡝ (musende)",
-                                    "ᠮᡠᠰᡝᠪᡝ (musebe)",
-                                    "ᠮᡠᠰᡝᠴᡳ (museci)"
-                                ],
-                                [
-                                    "2pl",
-                                    "ᠰᡠᠸᡝ (suwe) 你们",
-                                    "ᠰᡠᠸᡝᠨᡳ (suweni)",
-                                    "ᠰᡠᠸᡝᠨᡩᡝ (suwende)",
-                                    "ᠰᡠᠸᡝᠮᠪᡝ (suwembe)",
-                                    "ᠰᡠᠸᡝᠨᠴᡳ (suwenci)"
-                                ],
-                                [
-                                    "3pl",
-                                    "ᠴᡝ (ce) 他们",
-                                    "ᠴᡝᠨᡳ (ceni)",
-                                    "ᠴᡝᠨᡩᡝ (cende)",
-                                    "ᠴᡝᠮᠪᡝ (cembe)",
-                                    "ᠴᡝᠨᠴᡳ (cenci)"
+                                    "否定",
+                                    "ᠰᠠᡳᠨ ᠠᡴᡡ (sain akū)",
+                                    "不好：用 akū"
                                 ]
-                            ]
+                            ],
+                            "lang": "mnc"
                         }
                     ],
-                    "notes": "满语第一人称复数有排除式（be，不包括听话者）和包括式（muse，包括听话者）的区别。人称代词的格形式通过加格助词构成，但部分代词有特殊的缩合形式（如 mini 而非 bi i）。"
+                    "notes": "满语形容词不随名词的性、数、格变化，也没有比较级词尾。"
+                },
+                {
+                    "id": "mnc-adj-comparison",
+                    "title": "比较与程度",
+                    "tables": [
+                        {
+                            "caption": "比较结构",
+                            "headers": [
+                                "结构",
+                                "例",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "基准 + -ci + 形容词",
+                                    "ᠪᡳ ᠰᡳᠨᠴᡳ ᠠᠮᠪᠠ (bi sinci amba)",
+                                    "我比你大：基准用夺格 -ci"
+                                ],
+                                [
+                                    "程度副词 + 形容词",
+                                    "ᡠᡵᡤᡠᠨᠵᡝᠴᡠᡴᡝ ᠰᠠᡳᠨ (urgunječuke sain)",
+                                    "很好"
+                                ],
+                                [
+                                    "指小 -kan/-ken/-kon",
+                                    "ᠠᠮᠪᠠᡴᠠᠨ (ambakan)",
+                                    "稍大"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "比较不用专门的比较级形式：用夺格 -ci 引出基准；指小后缀随词干和谐。"
+                },
+                {
+                    "id": "mnc-adj-adverb",
+                    "title": "形容词与副词的转换",
+                    "tables": [
+                        {
+                            "caption": "常见手段",
+                            "headers": [
+                                "手段",
+                                "例",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "形容词 + -i",
+                                    "ᡥᡡᡩᡠᠨ ᡳ (hūdun i)",
+                                    "快地（-i 使其作状语）"
+                                ],
+                                [
+                                    "形容词 + -ken",
+                                    "ᠰᠠᡳᠨᡴᡝᠨ (sainken)",
+                                    "稍好"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "形容词作状语时接 -i（与属格-工具格同形）；少数形容词本身兼作副词。"
                 }
             ]
         },
         {
             "id": "mnc-verb",
             "title": "动词",
+            "group": "verb",
             "items": [
                 {
-                    "id": "mnc-verb-tenses",
-                    "title": "动词时态",
+                    "id": "mnc-verb-general",
+                    "title": "动词总论：-mbi 形式与词干",
                     "tables": [
                         {
-                            "caption": "满语动词主要时态",
+                            "caption": "动词的基本形态",
                             "headers": [
-                                "时态",
-                                "词尾",
-                                "例（sambi 知道）"
+                                "项目",
+                                "形式",
+                                "说明"
                             ],
                             "rows": [
                                 [
-                                    "现在-将来时 (Present-Future)",
-                                    "-ᠮᠪᡳ (-mbi)",
-                                    "ᠰᠠᠮᠪᡳ (sambi) 知道 / 会知道"
+                                    "词典形",
+                                    "ᠠᡵᠠᠮᠪᡳ (arambi)",
+                                    "以 -mbi 结尾，兼表现在-将来时，也是词条的基本形态"
                                 ],
                                 [
-                                    "过去时 (Past)",
-                                    "-ᡥᠠ / -ᡥᡝ / -ᡥᠣ (-ha / -he / -ho)",
-                                    "ᠰᠠᡥᠠ (saha) 知道了"
+                                    "词干",
+                                    "ᠠᡵᠠ- (ara-)",
+                                    "去掉 -mbi；所有后缀都接在词干上（生词表单的「主要部分」）"
                                 ],
                                 [
-                                    "进行体 (Progressive)",
-                                    "-ᠮᡝ ᠪᡳ- (-me bi-)",
-                                    "ᠰᠠᠮᡝ ᠪᡳ (same bi) 正在知道"
-                                ],
-                                [
-                                    "完成体 (Perfect)",
-                                    "-ᡥᠠ ᠪᡳ- (-ha bi-)",
-                                    "ᠰᠠᡥᠠ ᠪᡳ (saha bi) 已经知道了"
+                                    "否定",
+                                    "ᠠᡵᠠᡵᠠᡴᡡ (ararakū)",
+                                    "-ra + -kū，元音随词干和谐"
                                 ]
-                            ]
+                            ],
+                            "lang": "mnc"
                         }
                     ],
-                    "notes": "满语动词词尾有元音和谐：-ha 用于后元音词干，-he 用于前元音词干，-ho 用于圆唇元音词干。动词词尾 -mbi 的 -b- 在口语中不发音。满语动词还有丰富的态（主动、被动、使役等）和式（陈述、祈使、条件等）系统。"
+                    "notes": "满语动词只接后缀，不随人称变化（没有人称词尾）；后缀元音与<strong>词干最后一个元音</strong>和谐。"
                 },
                 {
-                    "id": "mnc-verb-voice",
-                    "title": "动词语态",
+                    "id": "mnc-verb-tense",
+                    "title": "时制与体",
                     "tables": [
                         {
-                            "caption": "动词语态后缀",
+                            "caption": "时制与体后缀（例：arambi 写）",
+                            "headers": [
+                                "形式",
+                                "后缀",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "现在-将来",
+                                    "-mbi",
+                                    "ᠠᡵᠠᠮᠪᡳ (arambi) 写 / 将写"
+                                ],
+                                [
+                                    "将来 / 未完成",
+                                    "-ra / -re / -ro",
+                                    "ᠠᡵᠠᡵᠠ (arara) 将要写"
+                                ],
+                                [
+                                    "过去",
+                                    "-ha / -he / -ho",
+                                    "ᠠᡵᠠᡥᠠ (araha) 写了"
+                                ],
+                                [
+                                    "同时持续",
+                                    "-mbime",
+                                    "ᠠᡵᠠᠮᠪᡳᠮᡝ (arambime) 一边写"
+                                ],
+                                [
+                                    "过去进行",
+                                    "-mbihe",
+                                    "ᠠᡵᠠᠮᠪᡳᡥᡝ (arambihe) 当时正在写"
+                                ],
+                                [
+                                    "进行",
+                                    "-me bi",
+                                    "ᠠᡵᠠᠮᡝ ᠪᡳ (arame bi) 正在写"
+                                ],
+                                [
+                                    "进行/持续",
+                                    "-me ilihabi",
+                                    "ᠠᡵᠠᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ (arame ilihabi) 保持着写的状态"
+                                ],
+                                [
+                                    "完成/已毕",
+                                    "-mahabi",
+                                    "ᠠᡵᠠᠮᠠᡥᠠᠪᡳ (aramahabi) 已经写了"
+                                ],
+                                [
+                                    "完成",
+                                    "-ha bi",
+                                    "ᠠᡵᠠᡥᠠ ᠪᡳ (araha bi) 已经写了"
+                                ],
+                                [
+                                    "过去完成",
+                                    "-he bihe",
+                                    "ᠠᡵᠠᡥᡝ ᠪᡳᡥᡝ (arahe bihe) 早已写了"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "<code>-ha bi</code> / <code>-he bihe</code> / <code>-me bi</code> 这类是「后缀 + bi / bihe」的复合形式，书写时中间有空格。"
+                },
+                {
+                    "id": "mnc-verb-mood",
+                    "title": "式：命令、祈愿、祈使",
+                    "tables": [
+                        {
+                            "caption": "式",
+                            "headers": [
+                                "形式",
+                                "后缀",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "命令（第二人称）",
+                                    "词干本身",
+                                    "ᠠᡵᠠ (ara) 写！"
+                                ],
+                                [
+                                    "祈愿（第三人称）",
+                                    "-kini",
+                                    "ᠠᡵᠠᡴᡳᠨᡳ (arakini) 愿他写"
+                                ],
+                                [
+                                    "祈使（第一人称）",
+                                    "-cina",
+                                    "ᠠᡵᠠᠴᡳᠨᠠ (aracina) 让我写吧"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "-kini / -cina 不随元音和谐变化；命令式的否定见「否定」一节的 ume。"
+                },
+                {
+                    "id": "mnc-verb-negation",
+                    "title": "否定与禁止",
+                    "tables": [
+                        {
+                            "caption": "否定",
+                            "headers": [
+                                "形式",
+                                "后缀 / 结构",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "现在-将来否定",
+                                    "-rakū / -rekū / -rokū",
+                                    "ᠠᡵᠠᡵᠠᡴᡡ (ararakū) 不写"
+                                ],
+                                [
+                                    "过去否定",
+                                    "-hakū / -hekū / -hokū",
+                                    "ᠠᡵᠠᡥᠠᡴᡡ (arahakū) 没写"
+                                ],
+                                [
+                                    "禁止",
+                                    "ume + -ra / -re / -ro",
+                                    "ᡠᠮᡝ ᠠᡵᠠᡵᠠ (ume arara) 别写"
+                                ],
+                                [
+                                    "名词性否定",
+                                    "akū / waka",
+                                    "ᠠᡴᡡ (akū) 没有；ᠸᠠᡴᠠ (waka) 不是"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "否定后缀的元音同样随词干和谐；判断句否定用 waka，存在/拥有否定用 akū。"
+                },
+                {
+                    "id": "mnc-verb-converb",
+                    "title": "副动形式（converb）",
+                    "tables": [
+                        {
+                            "caption": "副动后缀",
+                            "headers": [
+                                "形式",
+                                "后缀",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "同时",
+                                    "-me",
+                                    "ᠠᡵᠠᠮᡝ (arame) 一边写"
+                                ],
+                                [
+                                    "先后完成",
+                                    "-fi",
+                                    "ᠠᡵᠠᡶᡳ (arafi) 写完之后"
+                                ],
+                                [
+                                    "持续",
+                                    "-hai / -hei / -hoi",
+                                    "ᠠᡵᠠᡥᠠᡳ (arahai) 一直写着"
+                                ],
+                                [
+                                    "直到",
+                                    "-tala / -tele",
+                                    "ᠠᡵᠠᡨᠠᠯᠠ (aratala) 写到…为止"
+                                ],
+                                [
+                                    "当…时",
+                                    "-nggala / -nggele",
+                                    "ᠠᡵᠠᠩᡤᠠᠯᠠ (aranggala) 正要写的时候"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "副动形式不能单独作谓语，只能连接另一个动词或表示伴随状况。"
+                },
+                {
+                    "id": "mnc-verb-participle",
+                    "title": "形动形式与名词化",
+                    "tables": [
+                        {
+                            "caption": "形动与名词化",
+                            "headers": [
+                                "形式",
+                                "后缀",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "已发生（形动）",
+                                    "-ha / -he / -ho",
+                                    "ᠠᡵᠠᡥᠠ ᠨᡳᠶᠠᠯᠮᠠ (araha niyalma) 写了的人"
+                                ],
+                                [
+                                    "未发生（形动）",
+                                    "-ra / -re / -ro",
+                                    "ᠠᡵᠠᡵᠠ ᠨᡳᠶᠠᠯᠮᠠ (arara niyalma) 要写的人"
+                                ],
+                                [
+                                    "名词化 -n",
+                                    "-n",
+                                    "ᠠᡵᠠᠨ (aran) 写的这件事 / 情形"
+                                ],
+                                [
+                                    "名词化 -si",
+                                    "-si",
+                                    "少数动词"
+                                ],
+                                [
+                                    "名词化 -tan / -ten",
+                                    "-tan / -ten",
+                                    "少数动词"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "形动可直接修饰名词，也可作名词用；-n / -si / -tan 不太能产。"
+                }
+            ],
+            "derive": {
+                "pos": "verb",
+                "stemForms": {
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "mbi$",
+                                "replace": ""
+                            }
+                        ]
+                    }
+                },
+                "stemExample": "ara",
+                "headwordExample": "arambi",
+                "parts": [
+                    {
+                        "key": "base",
+                        "label": "词干（去掉 -mbi）",
+                        "example": "ara",
+                        "required": false,
+                        "hint": "留空时由基本形态去掉 -mbi 自动推出。"
+                    }
+                ],
+                "endings": {
+                    "tense": {
+                        "mbi": {
+                            "form": {
+                                "suffix": "-mbi"
+                            }
+                        },
+                        "fut": {
+                            "form": {
+                                "suffix": "-rV"
+                            }
+                        },
+                        "past": {
+                            "form": {
+                                "suffix": "-hV"
+                            }
+                        },
+                        "mbime": {
+                            "form": {
+                                "suffix": "-mbime"
+                            }
+                        },
+                        "mbihe": {
+                            "form": {
+                                "suffix": "-mbihe"
+                            }
+                        },
+                        "prog": {
+                            "form": {
+                                "suffix": "-me bi"
+                            }
+                        },
+                        "prog2": {
+                            "form": {
+                                "suffix": "-me ilihabi"
+                            }
+                        },
+                        "perf": {
+                            "form": {
+                                "suffix": "-mahabi"
+                            }
+                        },
+                        "perf2": {
+                            "form": {
+                                "suffix": "-hV bi"
+                            }
+                        },
+                        "plup": {
+                            "form": {
+                                "suffix": "-hV bihe"
+                            }
+                        }
+                    },
+                    "mood": {
+                        "impv": {
+                            "form": {
+                                "stemOnly": true
+                            }
+                        },
+                        "opt": {
+                            "form": {
+                                "suffix": "-kini"
+                            }
+                        },
+                        "prec": {
+                            "form": {
+                                "suffix": "-cina"
+                            }
+                        },
+                        "negpres": {
+                            "form": {
+                                "suffix": "-rVkū"
+                            }
+                        },
+                        "negpast": {
+                            "form": {
+                                "suffix": "-hVkū"
+                            }
+                        },
+                        "prohib": {
+                            "form": {
+                                "prefix": "ume ",
+                                "suffix": "-rV"
+                            }
+                        }
+                    },
+                    "converb": {
+                        "cvbme": {
+                            "form": {
+                                "suffix": "-me"
+                            }
+                        },
+                        "cvbfi": {
+                            "form": {
+                                "suffix": "-fi"
+                            }
+                        },
+                        "cvbhai": {
+                            "form": {
+                                "suffix": "-hVi"
+                            }
+                        },
+                        "cvbtala": {
+                            "form": {
+                                "suffix": "-tVlV"
+                            }
+                        },
+                        "cvbnggala": {
+                            "form": {
+                                "suffix": "-nggVlV"
+                            }
+                        }
+                    },
+                    "nominal": {
+                        "ptcppast": {
+                            "form": {
+                                "suffix": "-hV"
+                            }
+                        },
+                        "ptcpfut": {
+                            "form": {
+                                "suffix": "-rV"
+                            }
+                        },
+                        "nomn": {
+                            "form": {
+                                "suffix": "-n"
+                            }
+                        },
+                        "nomsi": {
+                            "form": {
+                                "suffix": "-si"
+                            }
+                        },
+                        "nomtan": {
+                            "form": {
+                                "suffix": "-tVn"
+                            }
+                        }
+                    }
+                },
+                "note": "满语动词只接后缀、不随人称变化；后缀里的元音占位 <code>V</code> 由 data/paradigm/mnc.js 的 harmonize() 按词干末元音替换（-hV → -ha / -he / -ho）。",
+                "expect": {
+                    "tense": {
+                        "mbi": {
+                            "form": "arambi"
+                        },
+                        "fut": {
+                            "form": "arara"
+                        },
+                        "past": {
+                            "form": "araha"
+                        },
+                        "mbime": {
+                            "form": "arambime"
+                        },
+                        "mbihe": {
+                            "form": "arambihe"
+                        },
+                        "prog": {
+                            "form": "arame bi"
+                        },
+                        "prog2": {
+                            "form": "arame ilihabi"
+                        },
+                        "perf": {
+                            "form": "aramahabi"
+                        },
+                        "perf2": {
+                            "form": "araha bi"
+                        },
+                        "plup": {
+                            "form": "araha bihe"
+                        }
+                    },
+                    "mood": {
+                        "impv": {
+                            "form": "ara"
+                        },
+                        "opt": {
+                            "form": "arakini"
+                        },
+                        "prec": {
+                            "form": "aracina"
+                        },
+                        "negpres": {
+                            "form": "ararakū"
+                        },
+                        "negpast": {
+                            "form": "arahakū"
+                        },
+                        "prohib": {
+                            "form": "ume arara"
+                        }
+                    },
+                    "converb": {
+                        "cvbme": {
+                            "form": "arame"
+                        },
+                        "cvbfi": {
+                            "form": "arafi"
+                        },
+                        "cvbhai": {
+                            "form": "arahai"
+                        },
+                        "cvbtala": {
+                            "form": "aratala"
+                        },
+                        "cvbnggala": {
+                            "form": "aranggala"
+                        }
+                    },
+                    "nominal": {
+                        "ptcppast": {
+                            "form": "araha"
+                        },
+                        "ptcpfut": {
+                            "form": "arara"
+                        },
+                        "nomn": {
+                            "form": "aran"
+                        },
+                        "nomsi": {
+                            "form": "arasi"
+                        },
+                        "nomtan": {
+                            "form": "aratan"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": "mnc-verb-secondary",
+            "title": "派生动词",
+            "group": "verb",
+            "items": [
+                {
+                    "id": "mnc-verb-voice-overview",
+                    "title": "四类语态概览",
+                    "tables": [
+                        {
+                            "caption": "语态",
                             "headers": [
                                 "语态",
                                 "后缀",
@@ -622,23 +1463,1040 @@
                                 ],
                                 [
                                     "被动 / 使役",
-                                    "-ᠪᡠ (-bu)",
-                                    "ᠠᡵᠠᠮᠪᡠᠮᠪᡳ (arambumbi) 被写 / 使写"
+                                    "-bu",
+                                    "ᠠᡵᠠᠪᡠᠮᠪᡳ (arambumbi) 被写 / 使写"
                                 ],
                                 [
                                     "相互",
-                                    "-ᠨᡠ / -ᠨᡩᡠ (-nu / -ndu)",
+                                    "-nu / -ndu",
                                     "ᠠᡳᠰᡳᠯᠠᠨᡩᡠᠮᠪᡳ (aisilandumbi) 互相帮助"
                                 ],
                                 [
                                     "协同",
-                                    "-ᠴᠠ / -ᠴᡝ (-ca / -ce)",
+                                    "-ca / -ce",
                                     "ᠵᠠᡶᠠᠴᠠᠮᠪᡳ (jafacambi) 一起抓"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "主动式没有专门后缀；其余三类都用后缀派生<strong>新词</strong>（词干改变），不是同一个词的形式变化。"
+                },
+                {
+                    "id": "mnc-verb-voice-bu",
+                    "title": "使役 / 被动（-bu）",
+                    "tables": [
+                        {
+                            "caption": "构成",
+                            "headers": [
+                                "要素",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "词干",
+                                    "原词干 + -bu-（arambi → arambu-）"
+                                ],
+                                [
+                                    "词义",
+                                    "「使…做」或「被…做」—— 同形，靠上下文区分"
+                                ],
+                                [
+                                    "变位",
+                                    "完全按普通动词接后缀（-mbi / -ha / -rV / -me…）"
+                                ],
+                                [
+                                    "示例",
+                                    "arambi 写 → arambumbi 被写 / 使写"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "派生后的词干照常参与元音和谐：arambu- 是后元音 → arambuha；genebu- 是前元音 → genebuhe。"
+                },
+                {
+                    "id": "mnc-verb-voice-nu",
+                    "title": "相互（-nu / -ndu）",
+                    "tables": [
+                        {
+                            "caption": "构成",
+                            "headers": [
+                                "要素",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "词干",
+                                    "原词干 + -nu- / -ndu-"
+                                ],
+                                [
+                                    "词义",
+                                    "「互相…」"
+                                ],
+                                [
+                                    "变位",
+                                    "同普通动词"
+                                ],
+                                [
+                                    "示例",
+                                    "aisilambi 帮助 → aisilandumbi 互相帮助"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "-ndu 多接在以 -n 结尾的词干后（aisila- → aisilandu-）；同样按派生后的词干继续和谐。"
+                },
+                {
+                    "id": "mnc-verb-voice-ca",
+                    "title": "协同（-ca / -ce）",
+                    "tables": [
+                        {
+                            "caption": "构成",
+                            "headers": [
+                                "要素",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "词干",
+                                    "原词干 + -ca- / -ce-（随词干和谐）"
+                                ],
+                                [
+                                    "词义",
+                                    "「一起…」"
+                                ],
+                                [
+                                    "变位",
+                                    "同普通动词"
+                                ],
+                                [
+                                    "示例",
+                                    "jafambi 抓 → jafacambi 一起抓"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "元音随词干和谐：后元音 -ca、前元音 -ce。"
+                }
+            ],
+            "notes": "派生词仍是<strong>普通动词</strong>，接 -mbi / -ha / -rV / -me / -fi / -kini… 全部同一套后缀；<strong>元音和谐按派生后的词干算</strong>（arambu- 是后元音 → arambuha；genebu- 是前元音 → genebuhe）。这三个后缀产生的是新词，请在生词本里另立词条，并用「派生词」链接回原动词。"
+        },
+        {
+            "id": "mnc-verb-harmony-back",
+            "title": "后元音词干（a / ū）",
+            "group": "verb",
+            "items": [
+                {
+                    "id": "mnc-verb-harmony-back-table",
+                    "title": "该类的后缀变体",
+                    "tables": [
+                        {
+                            "caption": "后缀变体",
+                            "headers": [
+                                "词干",
+                                "过去",
+                                "将来",
+                                "否定",
+                                "副动"
+                            ],
+                            "rows": [
+                                [
+                                    "ᠠᡵᠠ- (ara-)",
+                                    "-ha",
+                                    "-ra",
+                                    "-rakū",
+                                    "-hai"
+                                ],
+                                [
+                                    "ᠰᠠᠪᡠ- (sabu-)",
+                                    "-ha",
+                                    "-ra",
+                                    "-rakū",
+                                    "-hai"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ]
+                }
+            ],
+            "inflect": "conj",
+            "notes": "词干最后一个元音是 a 或 ū：过去 -ha、将来 -ra、否定 -rakū、副动 -hai。"
+        },
+        {
+            "id": "mnc-verb-harmony-front",
+            "title": "前元音词干（e / u）",
+            "group": "verb",
+            "items": [
+                {
+                    "id": "mnc-verb-harmony-front-table",
+                    "title": "该类的后缀变体",
+                    "tables": [
+                        {
+                            "caption": "后缀变体",
+                            "headers": [
+                                "词干",
+                                "过去",
+                                "将来",
+                                "否定",
+                                "副动"
+                            ],
+                            "rows": [
+                                [
+                                    "ᡤᡝᠨᡝ- (gene-)",
+                                    "-he",
+                                    "-re",
+                                    "-rekū",
+                                    "-hei"
+                                ],
+                                [
+                                    "ᠪᡠ- (bu-)",
+                                    "-he",
+                                    "-re",
+                                    "-rekū",
+                                    "-hei"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ]
+                }
+            ],
+            "inflect": "conj",
+            "notes": "词干最后一个元音是 e 或 u：过去 -he、将来 -re、否定 -rekū、副动 -hei。"
+        },
+        {
+            "id": "mnc-verb-harmony-round",
+            "title": "圆唇词干（o）",
+            "group": "verb",
+            "items": [
+                {
+                    "id": "mnc-verb-harmony-round-table",
+                    "title": "该类的后缀变体",
+                    "tables": [
+                        {
+                            "caption": "后缀变体",
+                            "headers": [
+                                "词干",
+                                "过去",
+                                "将来",
+                                "否定",
+                                "副动"
+                            ],
+                            "rows": [
+                                [
+                                    "ᠰᠣᠩᡤᠣ- (songgo-)",
+                                    "-ho",
+                                    "-ro",
+                                    "-rokū",
+                                    "-hoi"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ]
+                }
+            ],
+            "inflect": "conj",
+            "notes": "词干最后一个元音是 o：过去 -ho、将来 -ro、否定 -rokū、副动 -hoi。"
+        },
+        {
+            "id": "mnc-num",
+            "title": "数词",
+            "group": "num",
+            "items": [
+                {
+                    "id": "mnc-num-cardinal",
+                    "title": "基数词",
+                    "tables": [
+                        {
+                            "caption": "1–10、整十与百千",
+                            "headers": [
+                                "数",
+                                "形式",
+                                "数",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "1",
+                                    "ᡝᠮᡠ (emu)",
+                                    "20",
+                                    "ᠣᡵᡳᠨ (orin)"
+                                ],
+                                [
+                                    "2",
+                                    "ᠵᡠᠸᡝ (juwe)",
+                                    "30",
+                                    "ᡤᡡᠰᡳᠨ (gūsin)"
+                                ],
+                                [
+                                    "3",
+                                    "ᡳᠯᠠᠨ (ilan)",
+                                    "40",
+                                    "ᡩᡝᡥᡳ (dehi)"
+                                ],
+                                [
+                                    "4",
+                                    "ᡩᡠᡳᠨ (duin)",
+                                    "50",
+                                    "ᠰᡠᠰᠠᡳ (susai)"
+                                ],
+                                [
+                                    "5",
+                                    "ᠰᡠᠨᠵᠠ (sunja)",
+                                    "60",
+                                    "ᠨᡳᠨᠵᡠ (ninju)"
+                                ],
+                                [
+                                    "6",
+                                    "ᠨᡳᠩᡤᡠᠨ (ninggun)",
+                                    "70",
+                                    "ᠨᠠᡩᠠᠨᠵᡠ (nadanju)"
+                                ],
+                                [
+                                    "7",
+                                    "ᠨᠠᡩᠠᠨ (nadan)",
+                                    "80",
+                                    "ᠵᠠᡴᡡᠨᠵᡠ (jakūnju)"
+                                ],
+                                [
+                                    "8",
+                                    "ᠵᠠᡴᡡᠨ (jakūn)",
+                                    "90",
+                                    "ᡠᠶᡠᠨᠵᡠ (uyunju)"
+                                ],
+                                [
+                                    "9",
+                                    "ᡠᠶᡠᠨ (uyun)",
+                                    "100",
+                                    "ᡨᠠᠩᡤᡡ (tanggū)"
+                                ],
+                                [
+                                    "10",
+                                    "ᠵᡠᠸᠠᠨ (juwan)",
+                                    "1000",
+                                    "ᠮᡳᠩᡤᠠᠨ (minggan)"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "数词放在名词前，名词<strong>不加复数后缀</strong>（juwe niyalma 两个人）。"
+                },
+                {
+                    "id": "mnc-num-ordinal",
+                    "title": "序数与日期",
+                    "tables": [
+                        {
+                            "caption": "序数",
+                            "headers": [
+                                "序数",
+                                "构成"
+                            ],
+                            "rows": [
+                                [
+                                    "第一",
+                                    "ᡝᠮᡠᠴᡳ (emuci)"
+                                ],
+                                [
+                                    "第二",
+                                    "ᠵᡠᠸᡝᠴᡳ (juweci)"
+                                ],
+                                [
+                                    "第三",
+                                    "ᡳᠯᠠᠨᠴᡳ (ilanci)"
+                                ],
+                                [
+                                    "规则",
+                                    "基数 + -ci"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "序数后缀 -ci 也用于日期（「几号」）。"
+                }
+            ]
+        },
+        {
+            "id": "mnc-adv",
+            "title": "副词",
+            "group": "adv",
+            "items": [
+                {
+                    "id": "mnc-adv-kinds",
+                    "title": "常用副词",
+                    "tables": [
+                        {
+                            "caption": "分类与例",
+                            "headers": [
+                                "类别",
+                                "例",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "时间",
+                                    "ᡨᡝ (te) 现在、ᠴᡳᠮᠠᡵᡳ (cimari) 明天、ᠰᡳᡴᠰᡝ (sikse) 昨天",
+                                    "多放句首或谓语前"
+                                ],
+                                [
+                                    "程度",
+                                    "ᡠᡵᡤᡠᠨᠵᡝᠴᡠᡴᡝ (urgunječuke) 非常",
+                                    "修饰形容词"
+                                ],
+                                [
+                                    "方式",
+                                    "ᡥᡡᡩᡠᠨ (hūdun) 快、ᠸᡝᡳᡥᡠᡴᡝᠨ (weihuken) 轻",
+                                    "可加 -i 作状语"
+                                ],
+                                [
+                                    "否定",
+                                    "ᠠᡴᡡ (akū) 没有、ᡠᠮᡝ (ume) 别",
+                                    "akū 表存在否定；ume 表禁止"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "副词不变化；不少形容词本身可兼作副词（见「形容词」章）。"
+                },
+                {
+                    "id": "mnc-adv-order",
+                    "title": "副词的位置",
+                    "tables": [
+                        {
+                            "caption": "语序",
+                            "headers": [
+                                "位置",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "句首（时间）",
+                                    "ᠴᡳᠮᠠᡵᡳ ᠪᡳ ᠪᠣᠣ ᡩᡝ ᡤᡝᠨᡝᠮᠪᡳ (cimari bi boo de genembi) 明天我去家"
+                                ],
+                                [
+                                    "谓语前（方式）",
+                                    "ᡥᡡᡩᡠᠨ ᡳ ᡤᡝᠨᡝᠮᠪᡳ (hūdun i genembi) 快去"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "满语是 SOV 语序，副词放在谓语之前。"
+                }
+            ]
+        },
+        {
+            "id": "mnc-postp",
+            "title": "后置词",
+            "group": "postp",
+            "items": [
+                {
+                    "id": "mnc-postp-common",
+                    "title": "常用后置词",
+                    "tables": [
+                        {
+                            "caption": "后置词及其支配的格",
+                            "headers": [
+                                "后置词",
+                                "意义",
+                                "要求",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "ᠪᠠᡵᡠ (baru)",
+                                    "向、朝",
+                                    "直接接名词",
+                                    "ᠪᠣᠣ ᠪᠠᡵᡠ (boo baru) 朝房子"
+                                ],
+                                [
+                                    "ᡝᠪᠰᡳ (ebsi)",
+                                    "向这边",
+                                    "直接接名词",
+                                    "ᠪᠣᠣ ᡝᠪᠰᡳ (boo ebsi) 往房子这边"
+                                ],
+                                [
+                                    "ᠠᠮᠠᠯᠠ (amala)",
+                                    "在…之后",
+                                    "属格 -i",
+                                    "ᡨᡝᡵᡝ ᡳ ᠠᠮᠠᠯᠠ (tere i amala) 在那之后"
+                                ],
+                                [
+                                    "ᠣᠩᡤᠣᠯᠣ (onggolo)",
+                                    "在…之前",
+                                    "属格 -i",
+                                    "ᡨᡝᡵᡝ ᡳ ᠣᠩᡤᠣᠯᠣ (tere i onggolo) 在那之前"
+                                ],
+                                [
+                                    "ᠵᠠᠯᡳᠨ (jalin)",
+                                    "为了",
+                                    "属格 -i",
+                                    "ᠪᠣᠣ ᡳ ᠵᠠᠯᡳᠨ (boo i jalin) 为了房子"
+                                ],
+                                [
+                                    "ᡝᠮᡤᡳ (emgi)",
+                                    "和…一起",
+                                    "属格 -i",
+                                    "ᠮᡳᠨᡳ ᡝᠮᡤᡳ (mini emgi) 和我一起"
+                                ],
+                                [
+                                    "ᠠᡩᠠᠯᡳ (adali)",
+                                    "像…一样",
+                                    "与格 -de",
+                                    "ᠮᡳᠨᡩᡝ ᠠᡩᠠᠯᡳ (minde adali) 像我一样"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "后置词放在名词短语<strong>之后</strong>（与汉语的介词相反），本身不变形；有的要求属格 -i，有的要求与格 -de，需要按词记。"
+                },
+                {
+                    "id": "mnc-postp-vs-case",
+                    "title": "后置词与格助词的分工",
+                    "tables": [
+                        {
+                            "caption": "对比",
+                            "headers": [
+                                "手段",
+                                "性质",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "格助词",
+                                    "封闭的五个、语法关系、必须用",
+                                    "be / de / i / ci"
+                                ],
+                                [
+                                    "后置词",
+                                    "开放的词汇手段、方位时间原因等",
+                                    "baru / amala / jalin"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "格助词是语法标记，后置词是词汇手段；两者可以叠加（属格 -i + 后置词 amala）。"
+                }
+            ]
+        },
+        {
+            "id": "mnc-sound",
+            "title": "语音与元音和谐",
+            "group": "sound",
+            "items": [
+                {
+                    "id": "mnc-sound-vowels",
+                    "title": "元音系统与分组",
+                    "tables": [
+                        {
+                            "caption": "元音分组（和谐的依据）",
+                            "headers": [
+                                "组",
+                                "元音",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "后元音（阳性）",
+                                    "ᠠ a、ᡡ ū",
+                                    "搭配 -ha / -ra / -sa 型后缀"
+                                ],
+                                [
+                                    "前元音（阴性）",
+                                    "ᡝ e、ᡠ u",
+                                    "搭配 -he / -re / -se 型后缀"
+                                ],
+                                [
+                                    "圆唇元音",
+                                    "ᠣ o",
+                                    "搭配 -ho / -ro / -so 型后缀"
+                                ],
+                                [
+                                    "中性元音",
+                                    "ᡳ i",
+                                    "不决定分组：向前找最近的非 i 元音，找不到时按前元音处理"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "ū（带长音符）属后元音，u 属前元音，二者是不同音位，拼写必须区分。"
+                },
+                {
+                    "id": "mnc-sound-harmony",
+                    "title": "元音和谐的作用范围",
+                    "tables": [
+                        {
+                            "caption": "受和谐影响的后缀",
+                            "headers": [
+                                "后缀",
+                                "后元音",
+                                "前元音",
+                                "圆唇"
+                            ],
+                            "rows": [
+                                [
+                                    "过去时",
+                                    "-ha",
+                                    "-he",
+                                    "-ho"
+                                ],
+                                [
+                                    "将来时",
+                                    "-ra",
+                                    "-re",
+                                    "-ro"
+                                ],
+                                [
+                                    "否定",
+                                    "-rakū",
+                                    "-rekū",
+                                    "-rokū"
+                                ],
+                                [
+                                    "复数（-sa 型）",
+                                    "-sa",
+                                    "-se",
+                                    "-so"
+                                ],
+                                [
+                                    "复数（-ta 型）",
+                                    "-ta",
+                                    "-te",
+                                    "-to"
+                                ],
+                                [
+                                    "副动 -hai",
+                                    "-hai",
+                                    "-hei",
+                                    "-hoi"
+                                ],
+                                [
+                                    "副动 -tala",
+                                    "-tala",
+                                    "-tele",
+                                    "-tolo"
+                                ],
+                                [
+                                    "指小",
+                                    "-kan",
+                                    "-ken",
+                                    "-kon"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "不受和谐影响的后缀（-kini / -cina / -be / -de）用固定元音；派生词（-bu / -nu / -ca）接在词干后，后面的后缀按<strong>新词干</strong>的末元音继续和谐。"
+                }
+            ]
+        },
+        {
+            "id": "mnc-script",
+            "title": "满文字母与书写",
+            "group": "script",
+            "items": [
+                {
+                    "id": "mnc-script-vowels",
+                    "title": "元音字母（6）",
+                    "tables": [
+                        {
+                            "caption": "元音字母的四种位置形式",
+                            "headers": [
+                                "转写",
+                                "独立形",
+                                "词首形",
+                                "词中形",
+                                "词尾形",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "a",
+                                    "‌ᠠ‌",
+                                    "ᠠ‍",
+                                    "‍ᠠ‍",
+                                    "‍ᠠ",
+                                    "独立形与词首形不同（独立形多一笔）；单独成词时用独立形"
+                                ],
+                                [
+                                    "e",
+                                    "‌ᡝ‌",
+                                    "ᡝ‍",
+                                    "‍ᡝ‍",
+                                    "‍ᡝ",
+                                    "独立形与词首形不同；属前元音组"
+                                ],
+                                [
+                                    "i",
+                                    "‌ᡳ‌",
+                                    "ᡳ‍",
+                                    "‍ᡳ‍",
+                                    "‍ᡳ",
+                                    "独立形与词首形不同；中性元音"
+                                ],
+                                [
+                                    "o",
+                                    "‌ᠣ‌",
+                                    "ᠣ‍",
+                                    "‍ᠣ‍",
+                                    "‍ᠣ",
+                                    "圆唇元音，可单独成词（o = 「和」）"
+                                ],
+                                [
+                                    "u",
+                                    "‌ᡠ‌",
+                                    "ᡠ‍",
+                                    "‍ᡠ‍",
+                                    "‍ᡠ",
+                                    "前元音（与 e 同组）"
+                                ],
+                                [
+                                    "ū",
+                                    "‌ᡡ‌",
+                                    "ᡡ‍",
+                                    "‍ᡡ‍",
+                                    "‍ᡡ",
+                                    "后元音（与 a 同组），与 u 是两个不同字母"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ]
+                },
+                {
+                    "id": "mnc-script-consonants",
+                    "title": "辅音字母（19）",
+                    "tables": [
+                        {
+                            "caption": "辅音字母的四种位置形式",
+                            "headers": [
+                                "转写",
+                                "独立形",
+                                "词首形",
+                                "词中形",
+                                "词尾形",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "n",
+                                    "‌ᠨ‌",
+                                    "ᠨ‍",
+                                    "‍ᠨ‍",
+                                    "‍ᠨ",
+                                    "词尾形带下撇"
+                                ],
+                                [
+                                    "ng",
+                                    "‌ᠩ‌",
+                                    "ᠩ‍",
+                                    "‍ᠩ‍",
+                                    "‍ᠩ",
+                                    "只用于词中、词尾，不能作词首"
+                                ],
+                                [
+                                    "k",
+                                    "‌ᡴ‌",
+                                    "ᡴ‍",
+                                    "‍ᡴ‍",
+                                    "‍ᡴ",
+                                    "与 g、h 共用基本字形：g 加点、h 加小圈；后接前元音（e / i / u）时字形变窄"
+                                ],
+                                [
+                                    "g",
+                                    "‌ᡤ‌",
+                                    "ᡤ‍",
+                                    "‍ᡤ‍",
+                                    "‍ᡤ",
+                                    "见 k"
+                                ],
+                                [
+                                    "h",
+                                    "‌ᡥ‌",
+                                    "ᡥ‍",
+                                    "‍ᡥ‍",
+                                    "‍ᡥ",
+                                    "见 k"
+                                ],
+                                [
+                                    "b",
+                                    "‌ᠪ‌",
+                                    "ᠪ‍",
+                                    "‍ᠪ‍",
+                                    "‍ᠪ",
+                                    "与 p 是两个不同字母，字形相近，不可混用"
+                                ],
+                                [
+                                    "p",
+                                    "‌ᡦ‌",
+                                    "ᡦ‍",
+                                    "‍ᡦ‍",
+                                    "‍ᡦ",
+                                    "见 b"
+                                ],
+                                [
+                                    "s",
+                                    "‌ᠰ‌",
+                                    "ᠰ‍",
+                                    "‍ᠰ‍",
+                                    "‍ᠰ",
+                                    "与 š 同为齿音，š 加区别符号"
+                                ],
+                                [
+                                    "š",
+                                    "‌ᡧ‌",
+                                    "ᡧ‍",
+                                    "‍ᡧ‍",
+                                    "‍ᡧ",
+                                    "见 s"
+                                ],
+                                [
+                                    "t",
+                                    "‌ᡨ‌",
+                                    "ᡨ‍",
+                                    "‍ᡨ‍",
+                                    "‍ᡨ",
+                                    "与 d 同基形"
+                                ],
+                                [
+                                    "d",
+                                    "‌ᡩ‌",
+                                    "ᡩ‍",
+                                    "‍ᡩ‍",
+                                    "‍ᡩ",
+                                    "在 t 的基形上加一点"
+                                ],
+                                [
+                                    "m",
+                                    "‌ᠮ‌",
+                                    "ᠮ‍",
+                                    "‍ᠮ‍",
+                                    "‍ᠮ",
+                                    "与 n、l 同族"
+                                ],
+                                [
+                                    "l",
+                                    "‌ᠯ‌",
+                                    "ᠯ‍",
+                                    "‍ᠯ‍",
+                                    "‍ᠯ",
+                                    "与 m、n 同族"
+                                ],
+                                [
+                                    "r",
+                                    "‌ᡵ‌",
+                                    "ᡵ‍",
+                                    "‍ᡵ‍",
+                                    "‍ᡵ",
+                                    "词尾形带下撇"
+                                ],
+                                [
+                                    "j",
+                                    "‌ᠵ‌",
+                                    "ᠵ‍",
+                                    "‍ᠵ‍",
+                                    "‍ᠵ",
+                                    "词中、词尾形带下撇"
+                                ],
+                                [
+                                    "c",
+                                    "‌ᠴ‌",
+                                    "ᠴ‍",
+                                    "‍ᠴ‍",
+                                    "‍ᠴ",
+                                    "词尾形带下撇"
+                                ],
+                                [
+                                    "f",
+                                    "‌ᡶ‌",
+                                    "ᡶ‍",
+                                    "‍ᡶ‍",
+                                    "‍ᡶ",
+                                    "词首形与词中形差别较大"
+                                ],
+                                [
+                                    "w",
+                                    "‌ᠸ‌",
+                                    "ᠸ‍",
+                                    "‍ᠸ‍",
+                                    "‍ᠸ",
+                                    "词尾形带下撇"
+                                ],
+                                [
+                                    "y",
+                                    "‌ᠶ‌",
+                                    "ᠶ‍",
+                                    "‍ᠶ‍",
+                                    "‍ᠶ",
+                                    "中性，可与前、后元音共现"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ]
+                },
+                {
+                    "id": "mnc-script-rules",
+                    "title": "书写与连接规则",
+                    "tables": [
+                        {
+                            "caption": "规则",
+                            "headers": [
+                                "规则",
+                                "说明"
+                            ],
+                            "lang": "mnc",
+                            "rows": [
+                                [
+                                    "方向",
+                                    "满文自上而下竖写，列自左向右（本表格为了排版改为横排）"
+                                ],
+                                [
+                                    "连写",
+                                    "一个词内部字母相连，不断开；词与词之间留空"
+                                ],
+                                [
+                                    "位置形",
+                                    "同一个字母在词首 / 词中 / 词尾 / 单独成词时取不同字形，由字体按上下文自动选择"
+                                ],
+                                [
+                                    "独立形",
+                                    "只有单独成词时才用（如 o「和」、i「他」）"
+                                ],
+                                [
+                                    "词的界线",
+                                    "词首形 / 词尾形只出现在词的两端，词中间的字母一律用词中形"
                                 ]
                             ]
                         }
                     ],
-                    "notes": "满语的被动和使役共用 -bu 后缀，具体意义由上下文决定。-nu/-ndu 和 -ca/-ce 表示相互或协同动作。"
+                    "notes": "表里的四种字形其实是<strong>同一个 Unicode 码位</strong>，位置形由字体按上下文决定；为了把四种形状并排显示，单元格里用了零宽连接符（ZWJ / ZWNJ）强制指定位置，复制到别处时请只复制字母本身。"
+                }
+            ]
+        },
+        {
+            "id": "mnc-syntax",
+            "title": "句法",
+            "group": "syntax",
+            "items": [
+                {
+                    "id": "mnc-syntax-order",
+                    "title": "基本语序",
+                    "tables": [
+                        {
+                            "caption": "SOV 语序",
+                            "headers": [
+                                "成分",
+                                "例",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "主 + 宾 + 谓",
+                                    "ᠪᡳ ᠪᡳᡨᡥᡝ ᠪᡝ ᠠᡵᠠᠮᠪᡳ (bi bithe be arambi)",
+                                    "我 书 宾格 写：我写字"
+                                ],
+                                [
+                                    "定语 + 中心语",
+                                    "ᠰᠠᡳᠨ ᠨᡳᠶᠠᠯᠮᠠ (sain niyalma)",
+                                    "形容词在名词前"
+                                ],
+                                [
+                                    "状语 + 谓语",
+                                    "ᡥᡡᡩᡠᠨ ᡳ ᡤᡝᠨᡝᠮᠪᡳ (hūdun i genembi)",
+                                    "状语在谓语前"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "满语是 SOV 语序，谓语在句末；格助词跟着宾语走（bithe <strong>be</strong>）。"
+                },
+                {
+                    "id": "mnc-syntax-copula",
+                    "title": "判断句与疑问",
+                    "tables": [
+                        {
+                            "caption": "判断与疑问",
+                            "headers": [
+                                "类型",
+                                "结构",
+                                "例"
+                            ],
+                            "rows": [
+                                [
+                                    "判断（肯定）",
+                                    "主题 + 名词",
+                                    "ᠪᡳ ᠮᠠᠨᠵᡠ ᠨᡳᠶᠠᠯᠮᠠ (bi manju niyalma) 我是满人"
+                                ],
+                                [
+                                    "判断（否定）",
+                                    "主题 + 名词 + waka",
+                                    "ᠪᡳ ᠮᠠᠨᠵᡠ ᠨᡳᠶᠠᠯᠮᠠ ᠸᠠᡴᠠ (bi manju niyalma waka) 我不是满人"
+                                ],
+                                [
+                                    "是非问",
+                                    "句末 -o",
+                                    "ᠰᡳ ᡤᡝᠨᡝᠮᠪᡳᠣ (si genembio) 你去吗？"
+                                ],
+                                [
+                                    "特指问",
+                                    "疑问代词",
+                                    "ᠰᡳ ᠸᡝ (si we) 你是谁"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "满语没有必须出现的系词：名词谓语直接成句，否定用 waka。"
+                },
+                {
+                    "id": "mnc-syntax-negation",
+                    "title": "否定与并列",
+                    "tables": [
+                        {
+                            "caption": "否定与并列",
+                            "headers": [
+                                "手段",
+                                "例",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "动词否定",
+                                    "ᠠᡵᠠᡵᠠᡴᡡ (ararakū)",
+                                    "后缀 -rakū"
+                                ],
+                                [
+                                    "名词否定",
+                                    "ᠠᡴᡡ / ᠸᠠᡴᠠ",
+                                    "akū 没有；waka 不是"
+                                ],
+                                [
+                                    "名词并列",
+                                    "A B（直接并置）",
+                                    "很少用连词"
+                                ],
+                                [
+                                    "动词并列",
+                                    "-me / -fi 副动形式",
+                                    "用副动形式连接多个动作"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        }
+                    ],
+                    "notes": "满语很少用连词，靠副动形式和语序表达连接关系。"
                 }
             ]
         }

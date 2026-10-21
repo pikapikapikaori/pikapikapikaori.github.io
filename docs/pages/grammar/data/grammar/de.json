@@ -1932,7 +1932,7 @@
                             ]
                         }
                     ],
-                    "notes": "形容词变格由**前面的限定词**决定：限定词已经显示性数格时用弱变化（-e / -en），没有限定词时用强变化（自己承担标记性数格的功能），介于两者之间用混合变化。"
+                    "notes": "形容词变格由<strong>前面的限定词</strong>决定：限定词已经显示性数格时用弱变化（-e / -en），没有限定词时用强变化（自己承担标记性数格的功能），介于两者之间用混合变化。"
                 },
                 {
                     "id": "de-adj-schnell",
@@ -3136,13 +3136,13 @@
                             ]
                         }
                     ],
-                    "notes": "**词条的基本形态（lemma）一律用不定式**（sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「第二分词」两个主要部分，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt）另填「现在时 2/3 单数词干」一栏。\n\n弱变化大类下分三个锚点：一般弱变化（machen）、词干以 d / t 等结尾要插 -e- 的（arbeiten / atmen）、以及第二分词不加 ge- 的两个子类——`-ieren` 动词（studieren）和不可分前缀动词（besuchen）。强变化里的可分动词（aufstehen）照常用强变化锚点，第二分词整条填进「第二分词」栏。\n\n「完成时助动词」一栏填 haben / sein / beide（三个选项），记录完成时用哪个助动词。\n\n六个时态里只有现在时与过去时是单一动词形式（另加虚拟式 I / II、命令式、不定式、分词），其余都是复合形式，见下一条。"
+                    "notes": "<strong>词条的基本形态（lemma）一律用不定式</strong>（sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「第二分词」两个主要部分，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt）另填「现在时 2/3 单数词干」一栏。\n\n弱变化大类下分三个锚点：一般弱变化（machen）、词干以 d / t 等结尾要插 -e- 的（arbeiten / atmen）、以及第二分词不加 ge- 的两个子类——<code>-ieren</code> 动词（studieren）和不可分前缀动词（besuchen）。强变化里的可分动词（aufstehen）照常用强变化锚点，第二分词整条填进「第二分词」栏。\n\n「完成时助动词」一栏填 haben / sein / beide（三个选项），记录完成时用哪个助动词。\n\n六个时态里只有现在时与过去时是单一动词形式（另加虚拟式 I / II、命令式、不定式、分词），其余都是复合形式，见下一条。"
                 },
                 {
                     "id": "de-verb-compound",
                     "title": "复合时态（助动词 + 第二分词）",
                     "tables": [],
-                    "notes": "完成时、过去完成时、将来时 I / II 都是复合形式，**不写进变位表**：\n\n· 现在完成时 = haben / sein 的现在时 + 第二分词：ich habe gemacht、ich bin gefahren\n· 过去完成时 = haben / sein 的过去时 + 第二分词：ich hatte gemacht、ich war gefahren\n· 将来时 I = werden 的现在时 + 不定式：ich werde machen\n· 将来时 II = werden 的现在时 + 第二分词 + haben/sein：ich werde gemacht haben\n\n**助动词的选择**：多数动词用 haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。词条的「完成时助动词」字段用来记录这个选择。"
+                    "notes": "完成时、过去完成时、将来时 I / II 都是复合形式，<strong>不写进变位表</strong>：\n\n· 现在完成时 = haben / sein 的现在时 + 第二分词：ich habe gemacht、ich bin gefahren\n· 过去完成时 = haben / sein 的过去时 + 第二分词：ich hatte gemacht、ich war gefahren\n· 将来时 I = werden 的现在时 + 不定式：ich werde machen\n· 将来时 II = werden 的现在时 + 第二分词 + haben/sein：ich werde gemacht haben\n\n<strong>助动词的选择</strong>：多数动词用 haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。词条的「完成时助动词」字段用来记录这个选择。"
                 },
                 {
                     "id": "de-verb-passive",
@@ -3307,7 +3307,7 @@
                             "lang": "de"
                         }
                     ],
-                    "notes": "可分动词在不定式里连写（aufstehen），在现在时 / 过去时主句里拆开（ich stehe auf）；从句与情态动词后仍连写。不可分前缀动词的前缀永远不分开：弱变化的（besuchen）用「弱变化：不可分前缀动词」锚点，强变化的（verstehen、bekommen）用强变化锚点并填第二分词；`-ieren` 动词（studieren）也属弱变化，第二分词不加 ge-。"
+                    "notes": "可分动词在不定式里连写（aufstehen），在现在时 / 过去时主句里拆开（ich stehe auf）；从句与情态动词后仍连写。不可分前缀动词的前缀永远不分开：弱变化的（besuchen）用「弱变化：不可分前缀动词」锚点，强变化的（verstehen、bekommen）用强变化锚点并填第二分词；<code>-ieren</code> 动词（studieren）也属弱变化，第二分词不加 ge-。"
                 },
                 {
                     "id": "de-verb-reflexive",
@@ -8486,7 +8486,7 @@
                                 ],
                                 [
                                     "第 2 位",
-                                    "**变位动词**",
+                                    "<strong>变位动词</strong>",
                                     "Morgen fahre ich nach Berlin."
                                 ],
                                 [

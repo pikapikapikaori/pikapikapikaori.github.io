@@ -498,10 +498,35 @@
     white-space: nowrap;
 }
 
+.grammar-section__notes,
 .grammar-item__notes {
     color: var(--c-fg-muted);
     font-size: var(--fs-sm);
     margin: var(--sp-2) 0 var(--sp-3);
+    white-space: pre-wrap;
+}
+
+.grammar-section__notes {
+    margin-top: calc(var(--sp-2) * -1);
+    padding-bottom: var(--sp-2);
+}
+
+.grammar-item__notes strong,
+.grammar-section__notes strong,
+.grammar-table strong {
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+.grammar-item__notes code,
+.grammar-section__notes code,
+.grammar-table code {
+    font-family: var(--ff-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: .92em;
+    padding: 0 3px;
+    border-radius: var(--r-sm);
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
 }
 
 .grammar-item:target,

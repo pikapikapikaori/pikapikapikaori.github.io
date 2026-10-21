@@ -306,6 +306,10 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                 const part = resolveStem(base, cell.stemForm, spec, parts)
                 const prefix = String(cell.prefix)
                 let suffix = endingText(cell.suffix)
+                // 语言档案可以按词干改写字尾（如满语的元音和谐：-hV → -ha / -he / -ho）
+                if (suffix && typeof profile?.harmonize === 'function') {
+                    suffix = profile.harmonize(part, suffix, { tableKey: table.key, rowKey: row.key, colKey: col.key })
+                }
                 if (suffix && Array.isArray(cell.unlessEndsWith)
                     && cell.unlessEndsWith.some((end) => String(prefix + part).endsWith(String(end)))) {
                     suffix = ''

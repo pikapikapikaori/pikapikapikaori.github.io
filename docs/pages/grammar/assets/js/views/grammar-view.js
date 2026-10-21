@@ -1,4 +1,4 @@
-import { h, replace } from '../utils/dom.js'
+import { h, replace, htmlFragment } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
 import { loadGrammar } from '../services/grammar-service.js'
 import { createGrammarTable } from '../components/grammar-table.js'
@@ -182,7 +182,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
             if (table) it.appendChild(table)
         }
         if (item.notes) {
-            it.appendChild(h('div', { class: 'grammar-item__notes' }, item.notes))
+            it.appendChild(h('div', { class: 'grammar-item__notes' }, htmlFragment(item.notes)))
         }
     }
 
@@ -198,6 +198,9 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         const sec = h('section', { class: 'grammar-section', id: section.id },
             h('h1', { class: 'grammar-section__title' }, section.title || section.id)
         )
+        if (section.notes) {
+            sec.appendChild(h('div', { class: 'grammar-section__notes' }, htmlFragment(section.notes)))
+        }
 
         for (const item of section.items || []) {
             if (!item || !item.id) continue

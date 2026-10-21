@@ -70,18 +70,16 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 
 - [ ] **核对各语言语法点**：逐语言把 `sections` / `items` 与实际语法体系、以及
   SCHEMA 第 4 节的覆盖清单对照一遍，补齐缺失语法点，修正错误分类与错漏的表格行/说明。
-  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de`
-  - 待做：`en` / `zh-cls`（仍有 `notes: "待补充"` 与空 `tables`）；`ja` / `ja-cls` / `mnc` 待逐条核对
+  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de` / `mnc`
+  - 待做：`en` / `zh-cls`（仍 `notes: "待补充"`、`tables` 为空）；`ja` / `ja-cls` 待逐条核对
 - [ ] **优化各语言 paradigms 字段**：统一 `tables[].key` / `columns[].key` / `rows[].key`
   的命名风格，补齐 `title` 与 `grammarRef`，核对 `rows[].principal` 与表单的主要部分逻辑一致。
-  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de`
-  - 待做：`en` / `zh-cls` / `ja` / `ja-cls` 评估是否需要新增模板；`mnc` 补齐 `title` / `grammarRef` / `principal`
-- [ ] **其余语言接 `derive`**：引擎与四种接入方式（`endings` / `stemForms` / `formRules` /
-  `post.accent`）都已完成，接入步骤与注意事项见 SCHEMA §5.1、§7、§8。
-  - 已完成：`la`（4 个变位法）、`grc`（22 条）、`sa`（29 条）、`he`（骨架型，11 条）、
-    `fr`（22 条：12 个动词组 + 4 个名词复数 + 6 个形容词类型）、
-    `de`（17 条：8 个动词组 + 5 个名词变格 + 4 个形容词类型）
-  - 待做：`en` / `zh-cls` / `ja` / `ja-cls` / `mnc`
+  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de` / `mnc`
+  - 待做：`en` / `zh-cls` / `ja` / `ja-cls` 评估是否需要新增模板
+- [ ] **其余语言接 `derive`**：四种接入方式（`endings` / `stemForms` / `formRules` /
+  `post.accent`）均已实现，接入步骤与注意事项见 SCHEMA §5.1、§7、§8。
+  - 已完成：`la` / `grc` / `sa` / `he`（骨架型）/ `fr` / `de` / `mnc`（词尾占位 `V` + 元音和谐）
+  - 待做：`en` / `zh-cls` / `ja` / `ja-cls`
   - [ ] `formRules`：处理器已实现，但还没有语言用到（接合处音变可用它）
 
 ## 4. 通用

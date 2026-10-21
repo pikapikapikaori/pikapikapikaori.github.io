@@ -192,6 +192,22 @@ export default {
             const opts = collectInflectAnchors(grammarDoc, lang, pos)
             currentOptionsById = Object.fromEntries(opts.map((o) => [o.id, o]))
 
+            // 该词性没有任何锚点：这一行整块隐藏，连「特殊 / 不变」两个内置项也不提供
+            // （永远不变格变位的词性谈不上「特殊变格」，也没有「不变格」的对应关系）
+            if (!opts.length) {
+                inflectionRef.replaceChildren()
+                inflectionRef.disabled = true
+                inflectionRow.hidden = true
+                inflectionLabel.value = ''
+                data.inflectionType = { label: '', grammarRef: '' }
+                renderExtraParts()
+                refreshGenerateBtn()
+                return
+            }
+
+            inflectionRow.hidden = false
+            inflectionRef.disabled = false
+
             const prev = initialValue !== undefined ? initialValue : inflectionRef.value
             const ids = new Set(opts.map((o) => o.id))
             const selected = (prev && ids.has(prev))
@@ -213,12 +229,14 @@ export default {
                 }, o.label))
             )
             renderExtraParts()
+            generateRow.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
             refreshGenerateBtn()
         }
 
         posSelect.addEventListener('change', () => {
             data.pos = posSelect.value
             data.gender = normalizeGenders(data.gender, data.pos)
+            updateStemsVisibility()
             rebuildRefOptions()
             renderGenderField()
             renderParadigmBlock()
@@ -242,6 +260,19 @@ export default {
 
         // 额外的主要部分（由当前变位 / 变格类型的 derive.parts 决定）
         const extraPartsSlot = h('div', { class: 'field__parts' })
+
+        /** 该词性是否用「主要部分」：没有 paradigm 模板、或模板声明 stems: false 时不用 */
+        function updateStemsVisibility() {
+            const tpl = getParadigmTemplate(grammarDoc, posSelect.value)
+            const needed = !!tpl && tpl.stems !== false
+            stemsRow.hidden = !needed
+            extraPartsSlot.hidden = !needed
+            if (!needed) {
+                for (const key of Object.keys(data.stems)) delete data.stems[key]
+                principalInput.value = ''
+            }
+            generateRow.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
+        }
 
         const generateBtn = h('button', {
             class: 'btn btn--sm',
@@ -300,20 +331,27 @@ export default {
             field('词性', posSelect, '')
         ))
 
-        form.appendChild(genderSlot)
-
-        form.appendChild(field(stemsMeta?.label || '主要部分',
-            h('div', { class: 'field__row' }, principalInput, generateBtn),
-            stemsMeta?.hint
-                || '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。'))
-        form.appendChild(extraPartsSlot)
-
-        form.appendChild(h('div', { class: 'word-form__row' },
+        const inflectionRow = h('div', { class: 'word-form__row' },
             field('变格 / 变位类型', inflectionLabel, '显示在词卡正面的徽章。'),
             field('语法锚点', inflectionRef, '选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。')
-        ))
+        )
 
+        const stemsRow = field(stemsMeta?.label || '主要部分',
+            h('div', { class: 'field__row' }, principalInput),
+            stemsMeta?.hint
+                || '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。')
+
+        // 生成按钮单独一行：没有「主要部分」的词性（如满语名词）也要能生成
+        const generateRow = h('div', { class: 'word-form__row' },
+            h('div', {}, generateBtn))
+
+        // 字段顺序：基本形态+词性 → 语法性 → 类型+锚点 → 含义 → 主要部分 → 表格
+        form.appendChild(genderSlot)
+        form.appendChild(inflectionRow)
         form.appendChild(buildMeaningGroup())
+        form.appendChild(stemsRow)
+        form.appendChild(extraPartsSlot)
+        form.appendChild(generateRow)
 
         const paradigmSlot = h('div', {})
         form.appendChild(paradigmSlot)
@@ -357,6 +395,7 @@ export default {
         replace(main, head, form)
 
         renderGenderField()
+        updateStemsVisibility()
         renderParadigmBlock()
         refreshGenerateBtn()
 
@@ -519,7 +558,7 @@ export default {
                 }
             }
             renderParadigmBlock()
-            toast.success(`已按主要部分生成 ${filled.length} 格，请确认无误后保存`, 5000)
+            toast.success(`已生成 ${filled.length} 格，请确认无误后保存`, 5000)
         }
 
         /* ---------- 表格块渲染 ---------- */

@@ -1,4 +1,4 @@
-import { h } from '../utils/dom.js'
+import { h, htmlFragment } from '../utils/dom.js'
 
 /**
  * 语法表格
@@ -35,11 +35,11 @@ export function createGrammarTable(spec) {
     if (!rows.length) return null
 
     const table = h('table', { class: 'grammar-table' },
-        spec.caption ? h('caption', {}, String(spec.caption)) : null,
+        spec.caption ? h('caption', {}, htmlFragment(spec.caption)) : null,
         h('thead', {},
             h('tr', {},
                 ...headers.map((th, index) => (keepCol[index]
-                    ? h('th', { lang }, th)
+                    ? h('th', { lang }, htmlFragment(th))
                     : null)).filter(Boolean)
             )
         ),
@@ -47,7 +47,7 @@ export function createGrammarTable(spec) {
             ...rows.map((row) =>
                 h('tr', {},
                     ...row.map((cell, index) => (keepCol[index]
-                        ? h('td', { lang }, String(cell ?? ''))
+                        ? h('td', { lang }, htmlFragment(cell ?? ''))
                         : null)).filter(Boolean)
                 )
             )

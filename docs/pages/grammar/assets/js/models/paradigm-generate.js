@@ -231,7 +231,9 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
         prefix: cell.prefix ?? def.prefix ?? '',
         suffix: cell.suffix ?? def.suffix ?? '',
         stemForm: cell.stemForm ?? def.stemForm,
-        stemOnly: cell.stemOnly === true
+        stemOnly: cell.stemOnly === true,
+        // 条件词尾：词干已经以这些串之一结尾时不再追加 suffix
+        unlessEndsWith: cell.unlessEndsWith ?? def.unlessEndsWith
     }
 }
 
@@ -303,7 +305,11 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
 
                 const part = resolveStem(base, cell.stemForm, spec, parts)
                 const prefix = String(cell.prefix)
-                const suffix = endingText(cell.suffix)
+                let suffix = endingText(cell.suffix)
+                if (suffix && Array.isArray(cell.unlessEndsWith)
+                    && cell.unlessEndsWith.some((end) => String(prefix + part).endsWith(String(end)))) {
+                    suffix = ''
+                }
                 const sandhi = spec.post?.sandhi
                 const join = profile?.sandhi?.join
                 let naive
@@ -445,10 +451,12 @@ export function validateDeriveSpec(spec, template, profile) {
 
     const index = buildTableIndex(template)
     // 'base' 是内置的原样词干，不需要在 stemForms 里声明
+    // 可用的词干变体：base、stems 字面量、stemForms 规则，以及 parts 里声明由用户填写的项
     const knownStemForm = (name) => !!(
         name === 'base'
         || (name && ((spec.stems && typeof spec.stems[name] === 'string')
-            || (spec.stemForms && spec.stemForms[name])))
+            || (spec.stemForms && spec.stemForms[name])
+            || (Array.isArray(spec.parts) && spec.parts.some((part) => part && part.key === name))))
     )
 
     const checkTableKey = (tableKey, where) => {
@@ -497,6 +505,12 @@ export function validateDeriveSpec(spec, template, profile) {
                     }
                     if (cell.stemForm && !knownStemForm(cell.stemForm)) {
                         problems.push(`${where} 引用了未定义的 stemForm：${cell.stemForm}`)
+                    }
+                    if (cell.unlessEndsWith != null) {
+                        const ok = Array.isArray(cell.unlessEndsWith)
+                            && cell.unlessEndsWith.every((x) => typeof x === 'string' && x)
+                        if (!ok) problems.push(`${where}.unlessEndsWith 应为非空字符串数组`)
+                        else if (cell.suffix == null) problems.push(`${where}.unlessEndsWith 需要同时给 suffix`)
                     }
                 }
             }

@@ -356,10 +356,41 @@
             ]
         }
     },
+    "groups": [
+        {
+            "id": "pron",
+            "title": "代词"
+        },
+        {
+            "id": "noun",
+            "title": "名词"
+        },
+        {
+            "id": "adj",
+            "title": "形容词"
+        },
+        {
+            "id": "adv",
+            "title": "副词"
+        },
+        {
+            "id": "verb",
+            "title": "动词"
+        },
+        {
+            "id": "num",
+            "title": "数词"
+        },
+        {
+            "id": "misc",
+            "title": "句法与正字（冠词、介词、语序、正字法）"
+        }
+    ],
     "sections": [
         {
             "id": "de-pron",
             "title": "代词",
+            "group": "pron",
             "items": [
                 {
                     "id": "de-pron-personal",
@@ -991,6 +1022,7 @@
         {
             "id": "de-noun",
             "title": "名词",
+            "group": "noun",
             "items": [
                 {
                     "id": "de-noun-gender",
@@ -1124,7 +1156,11 @@
                                         "stemOnly": true
                                     },
                                     "pl": {
-                                        "stemOnly": true,
+                                        "suffix": "-n",
+                                        "unlessEndsWith": [
+                                            "n",
+                                            "s"
+                                        ],
                                         "stemForm": "pl"
                                     }
                                 },
@@ -1151,7 +1187,7 @@
                                 },
                                 "dat": {
                                     "sg_m": "Tisch",
-                                    "pl": "Tische"
+                                    "pl": "Tischen"
                                 },
                                 "acc": {
                                     "sg_m": "Tisch",
@@ -1182,7 +1218,7 @@
                                 [
                                     "与格",
                                     "Tisch",
-                                    "Tische"
+                                    "Tischen"
                                 ],
                                 [
                                     "宾格",
@@ -1244,7 +1280,11 @@
                                         "stemOnly": true
                                     },
                                     "pl": {
-                                        "stemOnly": true,
+                                        "suffix": "-n",
+                                        "unlessEndsWith": [
+                                            "n",
+                                            "s"
+                                        ],
                                         "stemForm": "pl"
                                     }
                                 },
@@ -1271,7 +1311,7 @@
                                 },
                                 "dat": {
                                     "sg_n": "Kind",
-                                    "pl": "Kinder"
+                                    "pl": "Kindern"
                                 },
                                 "acc": {
                                     "sg_n": "Kind",
@@ -1302,7 +1342,7 @@
                                 [
                                     "与格",
                                     "Kind",
-                                    "Kinder"
+                                    "Kindern"
                                 ],
                                 [
                                     "宾格",
@@ -1366,7 +1406,11 @@
                                         "stemOnly": true
                                     },
                                     "pl": {
-                                        "stemOnly": true,
+                                        "suffix": "-n",
+                                        "unlessEndsWith": [
+                                            "n",
+                                            "s"
+                                        ],
                                         "stemForm": "pl"
                                     }
                                 },
@@ -1735,6 +1779,7 @@
         {
             "id": "de-adj",
             "title": "形容词",
+            "group": "adj",
             "items": [
                 {
                     "id": "de-adj-overview",
@@ -2890,6 +2935,7 @@
         {
             "id": "de-adv",
             "title": "副词",
+            "group": "adv",
             "items": [
                 {
                     "id": "de-adv-kinds",
@@ -3043,6 +3089,7 @@
         {
             "id": "de-verb",
             "title": "动词总论",
+            "group": "verb",
             "items": [
                 {
                     "id": "de-verb-overview",
@@ -3141,6 +3188,7 @@
                         {
                             "caption": "语式",
                             "headers": [
+                                "语式",
                                 "用法",
                                 "例"
                             ],
@@ -3563,6 +3611,7 @@
         {
             "id": "de-verb-weak",
             "title": "弱变化动词（machen 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -4015,6 +4064,7 @@
         {
             "id": "de-verb-weak-ep",
             "title": "弱变化（arbeiten / atmen 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -4467,6 +4517,7 @@
         {
             "id": "de-verb-weak-eln",
             "title": "弱变化：-eln / -ern 动词（sammeln / ändern 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -4938,6 +4989,7 @@
         {
             "id": "de-verb-weak-ieren",
             "title": "弱变化：-ieren 动词（studieren 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -5380,6 +5432,7 @@
         {
             "id": "de-verb-weak-insep",
             "title": "弱变化：不可分前缀动词（besuchen 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -5822,6 +5875,7 @@
         {
             "id": "de-verb-strong",
             "title": "强变化动词（sprechen 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -6355,6 +6409,7 @@
         {
             "id": "de-verb-mixed",
             "title": "混合变化动词（bringen 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -6868,6 +6923,7 @@
         {
             "id": "de-verb-modal",
             "title": "情态动词（können 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -7343,6 +7399,7 @@
         {
             "id": "de-verb-special",
             "title": "特殊变位（参考）",
+            "group": "verb",
             "items": [
                 {
                     "id": "de-verb-special-aux",
@@ -7720,6 +7777,7 @@
         {
             "id": "de-num",
             "title": "数词",
+            "group": "num",
             "items": [
                 {
                     "id": "de-num-cardinal",
@@ -8038,6 +8096,7 @@
         {
             "id": "de-article",
             "title": "冠词与限定词",
+            "group": "misc",
             "items": [
                 {
                     "id": "de-article-definite",
@@ -8133,6 +8192,7 @@
         {
             "id": "de-prep",
             "title": "介词与格支配",
+            "group": "misc",
             "items": [
                 {
                     "id": "de-prep-accusative",
@@ -8405,6 +8465,7 @@
         {
             "id": "de-order",
             "title": "语序",
+            "group": "misc",
             "items": [
                 {
                     "id": "de-order-main",
@@ -8630,6 +8691,7 @@
         {
             "id": "de-orthography",
             "title": "正字法",
+            "group": "misc",
             "items": [
                 {
                     "id": "de-orthography-sharp-s",

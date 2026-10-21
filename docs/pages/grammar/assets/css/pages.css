@@ -401,8 +401,41 @@
     padding-right: var(--sp-2);
 }
 
+/* 章节切换（一级分页） */
+.grammar-chapters {
+    margin-bottom: var(--sp-4);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--c-border);
+}
+
+.grammar-chapter {
+    display: block;
+    padding: 6px 10px;
+    margin-bottom: 2px;
+    border-radius: var(--r-sm);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+}
+
+.grammar-chapter:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+.grammar-chapter--active {
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+    font-weight: 600;
+}
+
 .grammar-nav__group {
     margin-bottom: var(--sp-4);
+}
+
+.grammar-nav__link--section {
+    font-weight: 600;
+    color: var(--c-fg);
 }
 
 .grammar-nav__title {
@@ -442,9 +475,10 @@
 }
 
 .grammar-section__title {
-    font-size: var(--fs-xl);
     font-weight: 700;
-    margin-bottom: var(--sp-3);
+    margin: 0 0 var(--sp-3);
+    padding-bottom: var(--sp-2);
+    border-bottom: 1px solid var(--c-border);
 }
 
 .grammar-item {
@@ -455,7 +489,13 @@
 .grammar-item__title {
     font-size: var(--fs-lg);
     font-weight: 600;
-    margin-bottom: var(--sp-2);
+    margin: 0 0 var(--sp-2);
+}
+
+/* 行标题列不折行（「连续未完成式」这类标签） */
+.grammar-table tbody th,
+.grammar-table tbody td:first-child {
+    white-space: nowrap;
 }
 
 .grammar-item__notes {

@@ -135,6 +135,7 @@ const router = createRouter([
     { path: '/lang/:lang/words/:id', view: (ctx) => mountView('wordEdit',   ctx) },
     { path: '/lang/:lang/review',    view: (ctx) => mountView('review',     ctx) },
     { path: '/grammar',              view: () => router.navigate('/languages', { replace: true }) },
+    { path: '/grammar/:lang/:group',  view: (ctx) => mountView('grammar',    ctx) },
     { path: '/grammar/:lang',        view: (ctx) => mountView('grammar',    ctx) },
     { path: '/settings',             view: (ctx) => mountView('settings',   ctx) },
     { path: '/',                     view: () => router.navigate('/welcome', { replace: true }) }

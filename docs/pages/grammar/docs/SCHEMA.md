@@ -347,10 +347,16 @@ const MIGRATIONS = {
     }
   },
 
+  "groups": [
+    { "id": "pron", "title": "代词" },
+    { "id": "noun", "title": "名词" }
+  ],
+
   "sections": [
     {
       "id": "la-noun",
       "title": "名词变格",
+      "group": "noun",
       "items": [
         {
           "id": "la-noun-1st-decl",
@@ -467,6 +473,24 @@ const MIGRATIONS = {
 生词表中 `inflectionType.grammarRef` 即写入上述 id。
 
 ### 关联
+
+### 1.1 章节分组（`groups` / `section.group`）
+
+语法页按**一级章节分页**：一条 `groups` 声明章节顺序与名称，每个 section 用 `group` 声明归属。
+
+| 字段 | 说明 |
+| --- | --- |
+| `groups[]` | `{ id, title }`。顺序即章节顺序。**缺省或只有一章时不分页**（整篇在一页里显示，适用于节数很少的语言） |
+| `sections[].group` | 该 section 归属的 `groups[].id`。缺省时算第一章 |
+
+- 路由：`#/grammar/{lang}/{group}`（如 `#/grammar/he/verb`）；`#/grammar/{lang}` 落到第一章。
+- 章节页里，**section 标题是页面的一级标题（h1）**，item 标题是二级标题（h2）。
+- 旧锚点（`#/grammar/he#he-verb-iii-he`）仍然有效：视图会按 anchor 反查它所在的章节并渲染那一页。
+- 左栏分两段：上面是章节切换，下面是本页的 section / item 目录。
+- 页面很长时 item 的表格**懒渲染**（IntersectionObserver，rootMargin 900px），锚点所在 section 及其之前的内容始终立即渲染，保证滚动位置准确。
+- **空内容不渲染**：语法表的行/列如果除首列外全是空或 `—`，整行/整列（含表头）都不渲染；
+  一张表全空就不渲染。单格缺内容照常显示 `—`（表示「该形式不存在」，如 Piel 没有命令式）。
+  词卡的 `paradigm` 表格同理：行全空的隐藏，`disabled` 的格子显示 `—` 并带 `title="该形式不存在"`。
 
 - Word 中 `inflectionType.grammarRef` 引用 `sections[].items[].id`。
 - paradigm 中 `rows[].grammarRef` 引用同文件的 `sections[].items[].id`。
@@ -705,6 +729,53 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - **语法文件加载**：`assets/js/services/grammar-service.js` 运行时按 `./data/grammar/{code}.json` 拉取，404 时该语言的「语法」页显示为空提示。`data/grammar/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
 - **既有用户数据**：老用户的 `settings.languageOrder` 里没有新 code 时，语言选择页会按 `LANGUAGES` 原始顺序把它追加到所在组末尾，不需要数据迁移。
 
+#### 5.1 写语法数据的清单与坑
+
+**先定 `paradigms`，再写 `sections`** —— 模板决定生词表单与词卡能填什么，改起来最贵。
+
+1. **词干要取成「词尾能直接拼上去」的形式**。拉丁语第一变位法用 `am` 而不是 `amā`，
+   规则最省。德语 `-eln` / `-ern` 动词的不定式以 `-ln` / `-rn` 结尾，`en$ → ''` 匹配不到，
+   必须写 `ln$ → l` / `rn$ → r`；`-eln` 还要给 1 单与命令式另备一个短词干（`el$ → l`）。
+   接新语言时，先只填「基本形态」跑一遍，确认每个格子都对。
+2. **`expect` 要同步写全**，它是自检唯一的对照物；只写一部分（`expectPartial: true`）等于
+   放弃大部分格子的把关。凡是「主要部分推不出来」的格子（德语强变化的过去时 / 第二分词），
+   要在 `exampleStems` 里给自检用的样例词干，否则必然报错。
+3. **`parts[].required`**：标了 `required` 又没填，表单会禁用「生成表格」并在 tooltip 里列出缺项。
+   能用 `stemForms` / `stems` 推出的**不要**标 required，否则用户会被多余地拦住。
+4. **`parts[].kind: "select"`**：这类字段是元数据（德语完成时助动词 `haben` / `sein` / `beide`），
+   **不要给 `example`**，否则自检的「主要部分全填」路径会把它当词干填进去。
+5. **`skipTables`**：某个变位类型整张表都不存在时（情态动词没有命令式）用它，
+   不要留一张全空表；语法章与生词表单都会跳过，已填数据保留不删。
+6. **锚点**：要让某个 section / item 出现在「语法锚点」下拉里，就给它标
+   `inflect: "decl"` 或 `"conj"`（见 §6）。`collectInflectAnchors` 会拿标题做词卡徽章的短名，
+   **保留标题末尾括号里的例词**（`强变化动词（sprechen 型）`），短名撞车时回退完整标题；
+   `section.id` 与 `item.id` 必须全局不重复。
+7. **表格写法**：
+   - 每个条目两张表（「屈折词尾」/「元音（辅音）表」+「示例表」），**两表形状必须一致、逐格可互推**；
+     骨架型语言靠 `profile.realize` 保证互推。
+   - 行标签只用分析语言（中文）。不要把示例词尾塞进标签（`连续完成式 וְ` 这种在窄首列会换行错位）。
+   - 单元格 `—` 表示「该形式不存在」。**全空的行/列会自动隐藏**（含表头），所以缺数据时可以先留空，
+     不会出现一排破折号；词卡的 `disabled` 格同样显示 `—`。
+8. **章节分组**：章节多于一个时，在文档顶部写 `groups`，每节用 `group` 归属（见 §1.1）；
+   只有一两节的语言不分页，什么都不用写。
+9. **语言专属音系处理**：连声 / 重音 / 词根骨架代入这类需要音节或词根知识的逻辑，
+   放到 `data/paradigm/<lang>.js`，通过 `profile` 注入（见 §7.1）；通用引擎只保留机械流程。
+10. **改完数据要 bump `sw.js` 的 `CACHE`**：`data/grammar/` 是 stale-while-revalidate，
+    不 bump 时浏览器首次加载会读到旧文件。
+11. **跑自检**：`verifyGrammarDoc(lang, doc, profile)`（dev 环境下「校验语法数据」按钮），
+    错误必须为 0；新增语言时同时确认章节能渲染、锚点下拉能取到条目。
+
+**接入 derive 的四步**（详见 §7、§8，按顺序加，每步都能单独跑自检）：
+
+| 步骤 | 手段 | 用于 |
+| --- | --- | --- |
+| 1 | `endings` 纯拼接 | 词干 + 词尾型语言的主流情况 |
+| 2 | `stemForms`（含 `{ from, rules }` 链式、带环检测） | 多词干系统：复数变音、虚拟式 II 变音、只填一个主要部分派生其余 |
+| 3 | `formRules` | 接合处的音变（目前还没有语言用到） |
+| 4 | `post.accent` | 重音 / 声调（古希腊语、梵语、希伯来语已在用） |
+
+骨架型语言（词根嵌进元音骨架，如圣经希伯来语）另见 §「骨架型 derive」。
+
 ---
 
 ### 6. paradigms 的两个通用机制
@@ -797,6 +868,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 | `stemForms[名称]`               | 词干变体规则：`[{ pattern, replace, flags? }]`（作用于 `base`），或 `{ from, rules }`（先取另一个变体的词干，再套规则，可链式，见下） |
 | `formRules`                     | 拼接后作用于整词的规则 `[{ pattern, replace, flags? }]`，按顺序执行           |
 | `stemOnly`                      | 格级布尔值。整格就是词干本身（如呼格单数与主格同形），不拼接任何词尾        |
+| `unlessEndsWith`                | 格级条件词尾：`prefix + 词干` 已以数组里任一字符串结尾时**不加** suffix。用于「第三格复数加 -n，但已以 -n / -s 结尾则不加」（德语 Tischen / Kindern / Frauen / Autos） |
 | `post.sandhi`                   | 可选。交给语言档案的连声处理：`"sa"` = 词干与词尾接合处连声；`"sa-word"` 或 `{ scope: "word" }` 额外做词尾停顿式 |
 | `post.accent`                   | 可选。按音节重新指派重音，见下                                              |
 | `expect`                        | 自检期望值，结构同 `paradigm`                                                |

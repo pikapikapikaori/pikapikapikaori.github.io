@@ -689,10 +689,37 @@
             ]
         }
     },
+    "groups": [
+        {
+            "id": "pron",
+            "title": "代词"
+        },
+        {
+            "id": "noun",
+            "title": "名词"
+        },
+        {
+            "id": "adj",
+            "title": "形容词"
+        },
+        {
+            "id": "adv",
+            "title": "副词"
+        },
+        {
+            "id": "verb",
+            "title": "动词"
+        },
+        {
+            "id": "num",
+            "title": "数词"
+        }
+    ],
     "sections": [
         {
             "id": "la-pron",
             "title": "代词",
+            "group": "pron",
             "items": [
                 {
                     "id": "la-pron-personal",
@@ -1511,6 +1538,7 @@
         {
             "id": "la-noun",
             "title": "名词变格",
+            "group": "noun",
             "items": [
                 {
                     "id": "la-noun-1st-decl",
@@ -4008,6 +4036,7 @@
         {
             "id": "la-adj",
             "title": "形容词",
+            "group": "adj",
             "items": [
                 {
                     "id": "la-adj-1st-2nd",
@@ -5244,6 +5273,7 @@
         {
             "id": "la-adv",
             "title": "副词",
+            "group": "adv",
             "items": [
                 {
                     "id": "la-adv-comparison",
@@ -5322,6 +5352,7 @@
         {
             "id": "la-verb",
             "title": "动词变位",
+            "group": "verb",
             "items": [
                 {
                     "id": "la-verb-overview",
@@ -5392,6 +5423,7 @@
         {
             "id": "la-verb-1st-conj",
             "title": "第一变位法 (-āre)　amō, amāre, amāvī, amātum",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -6710,6 +6742,7 @@
         {
             "id": "la-verb-2nd-conj",
             "title": "第二变位法 (-ēre)　moneō, monēre, monuī, monitum",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -8028,6 +8061,7 @@
         {
             "id": "la-verb-3rd-conj",
             "title": "第三变位法 (-ere)　regō, regere, rēxī, rēctum",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -9414,6 +9448,7 @@
         {
             "id": "la-verb-4th-conj",
             "title": "第四变位法 (-īre)　audiō, audīre, audīvī, audītum",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -10732,6 +10767,7 @@
         {
             "id": "la-num",
             "title": "数词",
+            "group": "num",
             "items": [
                 {
                     "id": "la-num-1-20",

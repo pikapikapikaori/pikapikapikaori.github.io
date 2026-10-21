@@ -835,10 +835,41 @@
             ]
         }
     },
+    "groups": [
+        {
+            "id": "pron",
+            "title": "代词"
+        },
+        {
+            "id": "noun",
+            "title": "名词"
+        },
+        {
+            "id": "adj",
+            "title": "形容词"
+        },
+        {
+            "id": "adv",
+            "title": "副词"
+        },
+        {
+            "id": "verb",
+            "title": "动词"
+        },
+        {
+            "id": "num",
+            "title": "数词"
+        },
+        {
+            "id": "misc",
+            "title": "其他语法（冠词、缩合、重音、方言）"
+        }
+    ],
     "sections": [
         {
             "id": "grc-pron",
             "title": "代词",
+            "group": "pron",
             "items": [
                 {
                     "id": "grc-pron-personal",
@@ -1506,6 +1537,7 @@
         {
             "id": "grc-noun",
             "title": "名词变格",
+            "group": "noun",
             "items": [
                 {
                     "id": "grc-noun-1st-decl-e",
@@ -3890,6 +3922,7 @@
         {
             "id": "grc-adj",
             "title": "形容词",
+            "group": "adj",
             "items": [
                 {
                     "id": "grc-adj-1st-2nd",
@@ -4501,6 +4534,7 @@
         {
             "id": "grc-adv",
             "title": "副词",
+            "group": "adv",
             "items": [
                 {
                     "id": "grc-adv-comparison",
@@ -4681,6 +4715,7 @@
         {
             "id": "grc-verb",
             "title": "动词总论",
+            "group": "verb",
             "items": [
                 {
                     "id": "grc-verb-overview",
@@ -5028,6 +5063,7 @@
         {
             "id": "grc-verb-vowel-conj",
             "title": "第一变位法：元音词干动词（-ω）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -7494,6 +7530,7 @@
         {
             "id": "grc-verb-contract-e-conj",
             "title": "第二变位法：缩合动词 -έω（φιλέω 爱）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -9985,6 +10022,7 @@
         {
             "id": "grc-verb-contract-a-conj",
             "title": "第二变位法：缩合动词 -άω（τιμάω 尊敬）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -12476,6 +12514,7 @@
         {
             "id": "grc-verb-contract-o-conj",
             "title": "第二变位法：缩合动词 -όω（δηλόω 表明）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -14967,6 +15006,7 @@
         {
             "id": "grc-verb-cons-conj",
             "title": "第三变位法：辅音词干动词（γράφω 写）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -17576,6 +17616,7 @@
         {
             "id": "grc-verb-mi-conj",
             "title": "第四变位法：-μι 动词（δίδωμι 给）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -20375,6 +20416,7 @@
         {
             "id": "grc-num",
             "title": "数词",
+            "group": "num",
             "items": [
                 {
                     "id": "grc-num-cardinal",
@@ -20659,6 +20701,7 @@
         {
             "id": "grc-article",
             "title": "冠词",
+            "group": "misc",
             "items": [
                 {
                     "id": "grc-article-definite",
@@ -20768,6 +20811,7 @@
         {
             "id": "grc-contraction",
             "title": "元音缩合规则",
+            "group": "misc",
             "items": [
                 {
                     "id": "grc-contraction-rules",
@@ -20943,6 +20987,7 @@
         {
             "id": "grc-accent",
             "title": "重音规则",
+            "group": "misc",
             "items": [
                 {
                     "id": "grc-accent-basic",
@@ -21042,6 +21087,7 @@
         {
             "id": "grc-dialect",
             "title": "方言与诗歌形式",
+            "group": "misc",
             "items": [
                 {
                     "id": "grc-dialect-overview",

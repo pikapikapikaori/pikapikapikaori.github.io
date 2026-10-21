@@ -396,6 +396,7 @@ export default {
                     const value = String(raw ?? '').trim()
                     if (value) data.stems[part.key] = value
                     else delete data.stems[part.key]
+                    refreshGenerateBtn()
                 }
                 // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）
                 const input = part.kind === 'select'
@@ -435,16 +436,42 @@ export default {
             return stems
         }
 
+        /** 该词干变体是否能由规则/基本形态自动推出（空规则数组 `[]` 表示推不出） */
+        function hasStemRule(form) {
+            if (!form) return false
+            if (typeof form === 'string') return !!form.trim()
+            if (Array.isArray(form)) return form.length > 0
+            if (typeof form === 'object') {
+                if (form.from) return true
+                return Array.isArray(form.rules) && form.rules.length > 0
+            }
+            return false
+        }
+
+        /** 必填但还没填的主要部分（有规则能自动推出的不算） */
+        function missingRequiredParts(spec) {
+            if (!spec || !Array.isArray(spec.parts)) return []
+            return spec.parts
+                .filter((part) => part && part.required === true && part.key !== 'base')
+                .filter((part) => !hasStemRule(spec.stemForms && spec.stemForms[part.key]))
+                .filter((part) => !(spec.stems && typeof spec.stems[part.key] === 'string'))
+                .filter((part) => !String(data.stems[part.key] || '').trim())
+                .map((part) => part.label || part.key)
+        }
+
         function refreshGenerateBtn() {
             const spec = currentDeriveSpec()
             const hasStem = !!normalizeStem(principalInput.value)
             // base 可以由基本形态（lemma）推出时，不强制填主要部分
             const fromHeadword = !!(spec && (spec.stemForms?.base || spec.stems?.base)
                 && normalizeStem(lemmaInput?.value))
-            generateBtn.disabled = !spec || (!hasStem && !fromHeadword)
+            const missing = missingRequiredParts(spec)
+            generateBtn.disabled = !spec || (!hasStem && !fromHeadword) || missing.length > 0
             if (!spec) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
             else if (!hasStem && !fromHeadword) generateBtn.title = '请先填写基本形态或主要部分'
+            else if (missing.length) generateBtn.title = `请先填写：${missing.join('、')}`
             else generateBtn.title = '按主要部分和词尾规则自动填表'
+            return missing
         }
 
         function onGenerate() {
@@ -456,6 +483,11 @@ export default {
             if (!stem && !fromHeadword) {
                 toast.error('请先填写基本形态或主要部分')
                 ;(stem ? principalInput : lemmaInput).focus()
+                return
+            }
+            const missing = missingRequiredParts(spec)
+            if (missing.length) {
+                toast.error(`请先填写：${missing.join('、')}`, 5000)
                 return
             }
 

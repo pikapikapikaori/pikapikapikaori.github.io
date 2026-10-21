@@ -141,7 +141,7 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
                         + (!off && !value ? ' paradigm-table__cell--empty' : ''),
                     lang: lang || undefined,
                     title: off ? '该形式不存在' : null
-                }, off ? '' : (value || '')))
+                }, off ? '—' : (value || '')))
             }
         }
 

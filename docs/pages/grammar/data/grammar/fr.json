@@ -325,10 +325,41 @@
             ]
         }
     },
+    "groups": [
+        {
+            "id": "pron",
+            "title": "代词"
+        },
+        {
+            "id": "noun",
+            "title": "名词"
+        },
+        {
+            "id": "adj",
+            "title": "形容词"
+        },
+        {
+            "id": "adv",
+            "title": "副词"
+        },
+        {
+            "id": "verb",
+            "title": "动词"
+        },
+        {
+            "id": "num",
+            "title": "数词"
+        },
+        {
+            "id": "misc",
+            "title": "句法与正字（冠词、正字法、联诵）"
+        }
+    ],
     "sections": [
         {
             "id": "fr-pron",
             "title": "代词",
+            "group": "pron",
             "items": [
                 {
                     "id": "fr-pron-subject",
@@ -905,6 +936,7 @@
         {
             "id": "fr-noun",
             "title": "名词",
+            "group": "noun",
             "items": [
                 {
                     "id": "fr-noun-gender",
@@ -1314,6 +1346,7 @@
         {
             "id": "fr-adj",
             "title": "形容词",
+            "group": "adj",
             "items": [
                 {
                     "id": "fr-adj-rules",
@@ -2129,6 +2162,7 @@
         {
             "id": "fr-adv",
             "title": "副词",
+            "group": "adv",
             "items": [
                 {
                     "id": "fr-adv-kinds",
@@ -2277,6 +2311,7 @@
         {
             "id": "fr-verb",
             "title": "动词总论",
+            "group": "verb",
             "items": [
                 {
                     "id": "fr-verb-overview",
@@ -2751,6 +2786,7 @@
         {
             "id": "fr-verb-er",
             "title": "-er 动词（parler 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -3422,6 +3458,7 @@
         {
             "id": "fr-verb-ir",
             "title": "-ir 动词（finir 型，-iss-）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -4163,6 +4200,7 @@
         {
             "id": "fr-verb-3rd-re",
             "title": "-re 动词（vendre 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -4838,6 +4876,7 @@
         {
             "id": "fr-verb-3rd-oir",
             "title": "-oir 动词（recevoir 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -5581,6 +5620,7 @@
         {
             "id": "fr-verb-3rd-ir",
             "title": "-ir 不规则（partir 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -6249,6 +6289,7 @@
         {
             "id": "fr-verb-3rd-venir",
             "title": "venir / tenir 型",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -6989,6 +7030,7 @@
         {
             "id": "fr-verb-3rd-prendre",
             "title": "prendre 型",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -7758,6 +7800,7 @@
         {
             "id": "fr-verb-3rd-mettre",
             "title": "mettre 型",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -8476,6 +8519,7 @@
         {
             "id": "fr-verb-3rd-aitre",
             "title": "-aître / -oître（connaître 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -9203,6 +9247,7 @@
         {
             "id": "fr-verb-3rd-uire",
             "title": "-uire（conduire 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -9879,6 +9924,7 @@
         {
             "id": "fr-verb-3rd-eindre",
             "title": "-eindre / -aindre / -oindre（peindre 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -10645,6 +10691,7 @@
         {
             "id": "fr-verb-3rd-vrir",
             "title": "-vrir / -frir（ouvrir 型）",
+            "group": "verb",
             "inflect": "conj",
             "derive": {
                 "pos": "verb",
@@ -11296,6 +11343,7 @@
         {
             "id": "fr-verb-irregular",
             "title": "特殊变位（参考）",
+            "group": "verb",
             "items": [
                 {
                     "id": "fr-verb-irregular-common",
@@ -11613,6 +11661,7 @@
         {
             "id": "fr-num",
             "title": "数词",
+            "group": "num",
             "items": [
                 {
                     "id": "fr-num-cardinal",
@@ -11851,6 +11900,7 @@
         {
             "id": "fr-article",
             "title": "冠词",
+            "group": "misc",
             "items": [
                 {
                     "id": "fr-article-definite",
@@ -11943,6 +11993,7 @@
         {
             "id": "fr-orthography",
             "title": "正字法",
+            "group": "misc",
             "items": [
                 {
                     "id": "fr-orthography-accents",
@@ -12339,6 +12390,7 @@
         {
             "id": "fr-liaison",
             "title": "联诵与连音",
+            "group": "misc",
             "items": [
                 {
                     "id": "fr-liaison-rules",

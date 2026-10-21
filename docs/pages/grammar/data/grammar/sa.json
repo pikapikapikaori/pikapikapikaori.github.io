@@ -993,10 +993,41 @@
             ]
         }
     },
+    "groups": [
+        {
+            "id": "pron",
+            "title": "代词"
+        },
+        {
+            "id": "noun",
+            "title": "名词"
+        },
+        {
+            "id": "adj",
+            "title": "形容词"
+        },
+        {
+            "id": "adv",
+            "title": "副词"
+        },
+        {
+            "id": "verb",
+            "title": "动词"
+        },
+        {
+            "id": "num",
+            "title": "数词"
+        },
+        {
+            "id": "sound",
+            "title": "语音与文字（连声、元音交替、天城文与转写）"
+        }
+    ],
     "sections": [
         {
             "id": "sa-pron",
             "title": "代词",
+            "group": "pron",
             "items": [
                 {
                     "id": "sa-pron-personal",
@@ -1672,6 +1703,7 @@
         {
             "id": "sa-noun",
             "title": "名词变格",
+            "group": "noun",
             "items": [
                 {
                     "id": "sa-noun-a-m",
@@ -4999,6 +5031,7 @@
         {
             "id": "sa-adj",
             "title": "形容词",
+            "group": "adj",
             "items": [
                 {
                     "id": "sa-adj-a",
@@ -6845,6 +6878,7 @@
         {
             "id": "sa-adv",
             "title": "副词",
+            "group": "adv",
             "items": [
                 {
                     "id": "sa-adv-formation",
@@ -7000,6 +7034,7 @@
         {
             "id": "sa-verb",
             "title": "动词总论",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-overview",
@@ -7302,6 +7337,7 @@
         {
             "id": "sa-verb-class1",
             "title": "第一类：a 词干（√bhū 是）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class1-pres",
@@ -8106,6 +8142,7 @@
         {
             "id": "sa-verb-class2",
             "title": "第二类：词根类，无词干元音（√ad 吃）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class2-pres",
@@ -8940,6 +8977,7 @@
         {
             "id": "sa-verb-class3",
             "title": "第三类：重复类（√hu 献）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class3-pres",
@@ -9743,6 +9781,7 @@
         {
             "id": "sa-verb-class4",
             "title": "第四类：ya- 词干（√div 玩）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class4-pres",
@@ -10546,6 +10585,7 @@
         {
             "id": "sa-verb-class5",
             "title": "第五类：nu- 词干（√su 榨）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class5-pres",
@@ -11349,6 +11389,7 @@
         {
             "id": "sa-verb-class6",
             "title": "第六类：a 词干（无重音，√tud 击）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class6-pres",
@@ -12152,6 +12193,7 @@
         {
             "id": "sa-verb-class7",
             "title": "第七类：鼻音插入（√rudh 阻）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class7-pres",
@@ -12989,6 +13031,7 @@
         {
             "id": "sa-verb-class8",
             "title": "第八类：o- 词干（√tan 伸展）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class8-pres",
@@ -13792,6 +13835,7 @@
         {
             "id": "sa-verb-class9",
             "title": "第九类：nā- 词干（√krī 买）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class9-pres",
@@ -14595,6 +14639,7 @@
         {
             "id": "sa-verb-class10",
             "title": "第十类：aya- 词干（√cur 偷）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-class10-pres",
@@ -15398,6 +15443,7 @@
         {
             "id": "sa-verb-future",
             "title": "将来时 · 条件式 · 祝愿式",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-fut-simple",
@@ -15633,6 +15679,7 @@
         {
             "id": "sa-verb-aorist",
             "title": "不定过去（luṅ）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-aorist-root",
@@ -16094,6 +16141,7 @@
         {
             "id": "sa-verb-perfect",
             "title": "完成时（liṭ）",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-perfect-redup",
@@ -16290,6 +16338,7 @@
         {
             "id": "sa-verb-nonfinite",
             "title": "非定式",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-infinitive",
@@ -16494,6 +16543,7 @@
         {
             "id": "sa-verb-secondary",
             "title": "派生动词",
+            "group": "verb",
             "items": [
                 {
                     "id": "sa-verb-causative",
@@ -16692,6 +16742,7 @@
         {
             "id": "sa-num",
             "title": "数词",
+            "group": "num",
             "items": [
                 {
                     "id": "sa-num-1-4",
@@ -16948,6 +16999,7 @@
         {
             "id": "sa-sandhi",
             "title": "连声",
+            "group": "sound",
             "items": [
                 {
                     "id": "sa-sandhi-vowel",
@@ -17147,6 +17199,7 @@
         {
             "id": "sa-vowel-grades",
             "title": "元音交替",
+            "group": "sound",
             "items": [
                 {
                     "id": "sa-vowel-grades-table",
@@ -17250,6 +17303,7 @@
         {
             "id": "sa-script",
             "title": "天城文与转写",
+            "group": "sound",
             "items": [
                 {
                     "id": "sa-script-devanagari",

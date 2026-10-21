@@ -65,65 +65,24 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 ## 3. 语法数据（`data/grammar/`）
 
 针对 `data/grammar/*.json` 的静态语法数据，与导入功能无关，但同属数据待办。
-编写规范见 `docs/SCHEMA.md` 第二部分。
+编写规范、新增语言的流程与「每加一种语言都要过一遍的坑」见 `docs/SCHEMA.md` 第二部分
+（§5 与 §5.1）；接入 derive 的四步见 §7、§8。
 
 - [ ] **核对各语言语法点**：逐语言把 `sections` / `items` 与实际语法体系、以及
-  `SCHEMA.md` 第二部分第 4 节的覆盖清单对照一遍，补齐缺失语法点，修正错误分类、
-  错漏的表格行与说明。同时检查 `section.id` / `item.id` 全局唯一、命名符合
-  `{lang}-{category}-{item}`，并确认 Word 的 `inflectionType.grammarRef` 与 paradigm 的
-  `rows[].grammarRef` 都能命中真实存在的锚点。
-  - **已完成**：`la` / `grc` / `sa` / `he` / `fr` / `de`
-  - 待做：`en` / `zh-cls` 仍有 `notes: "待补充"` 与空 `tables`；
-    `ja` / `ja-cls` / `mnc` 待逐条核对
-- [ ] **优化各语言 paradigms 字段**：统一同一 `pos` 下 `tables[].key` /
-  `columns[].key` / `rows[].key` 的命名风格，补齐 `title` 与 `grammarRef`；
-  核对 `rows[].principal` 标记与生词表单的 principal parts 提取逻辑一致。
-  - **已完成**：`la` / `grc` / `sa` / `he` / `fr` / `de`
-  - 待做：`en` / `zh-cls` / `ja` / `ja-cls` 评估是否需要新增模板；
-    `mnc` 补齐 `title` / `grammarRef` / `principal`
-- [ ] **其余语言接 `derive`**：引擎已完成（已接入的语言见上两条）；
-  其余语言按下述四步补 `endings` + `expect`，每完成一类就跑一次自检。
-  `fr` 已完成 22 条（12 个动词组 + 4 个名词复数 + 6 个形容词类型）；
-  `de` 已完成 17 条（8 个动词组：一般弱变化 / -e- 插入 / -eln·-ern / -ieren / 不可分前缀 /
-  强变化 / 混合变化 / 情态动词，5 个名词变格，4 个形容词类型）。
-  自检里**主要部分推不出来时**（德语强变化的过去时 / 第二分词）要给 `exampleStems`，否则必然报错。
-  1. [ ] `endings` 纯拼接。**优先把词干取成能让词尾直接拼接的形式**（拉丁语第一变位法用
-     `am` 而不是 `amā`），这样最省规则；`expect` 必须同步写，否则自检形同虚设。
-  2. [x] `stemForms` 处理多词干系统（复数变音、虚拟式 II 变音等）。已支持
-     `{ from, rules }` 链式写法：先取另一个变体的词干，再做一次音变（可链式、带环检测），
-     用于「只填一个主要部分，其余从它派生」。
-  3. [ ] `formRules` 处理接合处音变。
-  4. [x] **重音与声调**：`derive.post.accent` 已实现（音节切分 + 退重音 / 持续重音 /
-     `penult` / `acute`，见 SCHEMA 第二部分第 8 节）；梵语声调与拉丁语重音位置可复用同一层。
-- [x] **`parts[].kind: "select"`**：主要部分里可以混入「从固定选项里选」的元数据
-  （德语完成时助动词 `haben` / `sein` / `beide`），值同样存进 `words[].stems[名称]`；
-  这类字段**不要给 `example`**，否则自检的「主要部分全填」路径会把它当词干填进去，
-  破坏从基准词干推导出来的格子。
-- [x] **`skipTables`**：某个变位类型缺整个语式时（情态动词没有命令式）跳过整张表——
-  语法速查的章节条目和生词表单的变位表格都按它过滤；表单里已填的数据保留、只是不显示。
-- [x] **词干取法要整块吃掉词尾**：德语 -eln / -ern 动词的不定式以 `-ln` / `-rn` 结尾，
-  `en$ → ''` 匹配不到，必须写 `ln$ → l` / `rn$ → r`（否则生成 `sammelne`）；
-  且 `-eln` 还要另给一个短词干（`el$ → l`）供 1 单与命令式用。
-  新语言接 derive 时，先验证「只填基本形态」这条路能生成全部正确形式。
-- [x] **锚点短名（词卡徽章）**：`collectInflectAnchors` 取章节标题做短名时保留末尾括号里的例词
-  （`强变化动词（sprechen 型）` 而不是截断成 `强变化动词（sprechen`），短名撞车时回退完整标题；
-  同时保证 `section.id` 与 `item.id` 全局不重复（`de-adj` 曾与同名章节撞车，已改成 `de-adj-schnell`）。
-- [x] **多主要部分（stems）**：语法 JSON 的 `derive.parts` 声明各主要部分，Word 只存
-  `stems: { base, perf, ppp, ... }`（导出 v1 → v2 自动迁移）；表单按 `parts` 渲染额外输入框，
-  留空按规则从 `base` 推导、填了就覆盖；自检跑两遍（只填 base / 主要部分全填）。
-- [x] **骨架型 derive**（`mode: "skeleton"`）：适用于「词根 + 元音骨架」型语言。
-  格子写骨架，`profile.realize(词根, 骨架)` 负责代入；`endings` / `expect` / `disabled` /
-  `existing` 的行为与词尾拼接型一致。写法见 SCHEMA 第二部分 §7：
-  - `_1` / `_2` / `_3` 显式指定第几个词根辅音（某辅音脱落时用，避免顺序错位）
-  - `_~` 条件的 dagesh lene（该辅音属 בגדכפת 才补点）
-  - 词尾形按位置自动归一（希伯来语 ן ם ף ך ץ ↔ נ מ פ כ צ 一类）
-  - `he-noun` 另用 `variants` 按「基本形态的骨架」自动选元音模式
-- [x] **derive 按语言拆文件**：语言专属后期处理放在 `data/paradigm/<lang>.js`
-  （现有 `grc.js` 重音、`sa.js` 连声 + 吠陀重音、`he.js` 骨架 + מֶתֶג），
-  通用引擎只保留机械流程，通过 `profile` 参数注入；
-  加载入口 `grammar-service.loadParadigmProfile(lang)`，文档见 SCHEMA §7.1。
-- [x] **Service Worker 缓存版本**：语法数据改动后要 bump `sw.js` 的 `CACHE` 名
-  （现为 `v21`），否则浏览器会读到旧数据；验证时先在浏览器里 unregister SW + 清 caches。
+  SCHEMA 第 4 节的覆盖清单对照一遍，补齐缺失语法点，修正错误分类与错漏的表格行/说明。
+  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de`
+  - 待做：`en` / `zh-cls`（仍有 `notes: "待补充"` 与空 `tables`）；`ja` / `ja-cls` / `mnc` 待逐条核对
+- [ ] **优化各语言 paradigms 字段**：统一 `tables[].key` / `columns[].key` / `rows[].key`
+  的命名风格，补齐 `title` 与 `grammarRef`，核对 `rows[].principal` 与表单的主要部分逻辑一致。
+  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de`
+  - 待做：`en` / `zh-cls` / `ja` / `ja-cls` 评估是否需要新增模板；`mnc` 补齐 `title` / `grammarRef` / `principal`
+- [ ] **其余语言接 `derive`**：引擎与四种接入方式（`endings` / `stemForms` / `formRules` /
+  `post.accent`）都已完成，接入步骤与注意事项见 SCHEMA §5.1、§7、§8。
+  - 已完成：`la`（4 个变位法）、`grc`（22 条）、`sa`（29 条）、`he`（骨架型，11 条）、
+    `fr`（22 条：12 个动词组 + 4 个名词复数 + 6 个形容词类型）、
+    `de`（17 条：8 个动词组 + 5 个名词变格 + 4 个形容词类型）
+  - 待做：`en` / `zh-cls` / `ja` / `ja-cls` / `mnc`
+  - [ ] `formRules`：处理器已实现，但还没有语言用到（接合处音变可用它）
 
 ## 4. 通用
 

@@ -34,8 +34,5 @@ docs/pages/hexo/**/db.json
 docs/pages/hexo/**/*.log
 docs/pages/hexo/**/.deploy*/
 
-# grammar page
-docs/pages/grammar/**/dev/
-
 # bgm-takeout page
 docs/**/bgm-data/*.jsonlines

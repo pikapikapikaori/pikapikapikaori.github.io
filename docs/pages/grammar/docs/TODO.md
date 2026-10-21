@@ -63,23 +63,29 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 
 ## 3. 语法数据（`data/grammar/`）
 
-针对 `data/grammar/*.json` 的静态语法数据，与导入功能无关，但同属数据待办。
-编写规范、新增语言的流程与「每加一种语言都要过一遍的坑」见 `docs/SCHEMA.md` 第二部分
-（§5 与 §5.1）；接入 derive 的四步见 §7、§8。
+8 种语言的 `sections`、`paradigms`、`derive` 均已就位
+（`la` / `grc` / `sa` / `he` / `fr` / `de` / `mnc` / `ja`）。
+`en` / `zh-cls` 关闭了 `grammar` 与 `paradigm` 两个开关，`sections` 为空数组、没有 `paradigms`
+与 derive，表单只留基本形态、词性、含义、补充形式、固定搭配、例句、派生词、标签备注。
+编写规范见 `docs/SCHEMA.md`；校验方式见 SCHEMA §4（命令行）。
 
-- [ ] **核对各语言语法点**：逐语言把 `sections` / `items` 与实际语法体系、以及
-  SCHEMA 第 4 节的覆盖清单对照一遍，补齐缺失语法点，修正错误分类与错漏的表格行/说明。
-  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de` / `mnc` / `ja`
-  - 待做：`en` / `zh-cls`（仍 `notes: "待补充"`、`tables` 为空）
-- [ ] **优化各语言 paradigms 字段**：统一 `tables[].key` / `columns[].key` / `rows[].key`
-  的命名风格，补齐 `title` 与 `grammarRef`，核对 `rows[].principal` 与表单的主要部分逻辑一致。
-  - 已完成：`la` / `grc` / `sa` / `he` / `fr` / `de` / `mnc` / `ja`
-  - 待做：`en` / `zh-cls` 评估是否需要新增模板
-- [ ] **其余语言接 `derive`**：四种接入方式（`endings` / `stemForms` / `formRules` /
-  `post.accent`）均已实现，接入步骤与注意事项见 SCHEMA §5.1、§7、§8。
-  - 已完成：`la` / `grc` / `sa` / `he`（骨架型）/ `fr` / `de` / `mnc`（词尾占位 `V` + 元音和谐）/ `ja`（辞书形 + 音便正则）
-  - 待做：`en` / `zh-cls`
-  - [ ] `formRules`：处理器已实现，但还没有语言用到（接合处音变可用它）
+- [ ] `formRules`：处理器已实现，但还没有语言用到（接合处音变可用它）
+
+### 已知数据缺口
+
+- [ ] **`mnc` 动词锚点取不到 derive**：`derive` 挂在章节 `mnc-verb` 上，而可选锚点是
+  `mnc-verb-harmony-back/front/round` 三个独立章节，`getDeriveSpec()` 因此返回 null，
+  表单里点「生成」没有反应。修法二选一：把 `derive` 复制到三个和谐章节，或在
+  `grammar.js` 里给锚点加显式 `deriveRef` 指向 `mnc-verb`。
+- [ ] **`he` 名词锚点取不到 derive**：`derive`（骨架型 + variants）挂在章节 `he-noun` 上，
+  锚点却在 `he-noun-class` 的 `he-class-*` 条目上，同样 `getDeriveSpec()` 返回 null。
+  修法同上。
+- [ ] **`he` 形容词没有 derive**：`he-adj-*` 锚点无 `derive`，形容词表只能手填。
+- [ ] **`de` 名词没有语法性字段**：`de-noun*` 模板的列名是 `m_sg` / `f_sg` / `n_sg`（前缀式），
+  而 `fieldDefsOfTemplate()` 的语法性回退只认 `_m` / `_f` / `_n` 后缀，且 `de.json` 没有
+  显式 `fields`。补一个 `fields` 声明即可（`declensionColumns` + `columns` 前缀匹配）。
+- [ ] **`he` 名词没有语法性字段**：列名是 `sg` / `du` / `pl`，同理需要显式 `fields`。
+- [ ] 从 Wiktionary 导入时提取主要部分后，回填 `stems` 并复用 `derive` 自动出表。
 
 ## 4. 通用
 

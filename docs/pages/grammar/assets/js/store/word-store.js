@@ -3,7 +3,8 @@ import {
     put, get, remove, getAllByIndex, getOneByIndex, removeByIndex
 } from './db.js'
 import {
-    createWord, normalizeParadigm, normalizeStems, normalizeGenders, isParadigmEmpty, mergeStems
+    createWord, normalizeParadigm, normalizeStems, normalizeGenders, normalizeAttributes,
+    isParadigmEmpty, mergeStems
 } from '../models/word.js'
 import { nowIso, nextReviewFrom, clampMastery } from '../utils/date.js'
 
@@ -67,6 +68,12 @@ function mergeWord(existing, incoming) {
     // 语法性：并集
     merged.gender = normalizeGenders(
         [...(existing.gender || []), ...(incoming.gender || [])], merged.pos)
+
+    // 属性字段（语法性、自他…）：已有值优先，缺的用新来源补
+    merged.attributes = normalizeAttributes({
+        ...(incoming.attributes || {}),
+        ...(existing.attributes || {}),
+    })
 
     merged.inflections = appendUnique(existing.inflections, incoming.inflections)
     merged.meanings    = appendUnique(existing.meanings, incoming.meanings)

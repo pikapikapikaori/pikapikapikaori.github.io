@@ -95,6 +95,7 @@ export async function importWords(userId, words) {
                 inflectionType: raw.inflectionType || null,
                 paradigm: normalizeParadigm(raw.paradigm),
                 gender: normalizeGenders(raw.gender, String(raw.pos).trim()),
+                attributes: raw.attributes || {},
                 stems: normalizeStems(raw.stems ?? raw.stem),
                 inflections: raw.inflections || [],
                 meanings: raw.meanings || [],

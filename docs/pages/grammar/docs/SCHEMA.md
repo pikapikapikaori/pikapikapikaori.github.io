@@ -109,8 +109,8 @@
   "paradigm": true,              // 是否有变格 / 变位表（false：表单只留基本形态、词性、含义、
                                  //   补充形式、固定搭配、例句、派生词、标签备注）
   "terms": { … },                // 界面用词，见下
-  "paradigms": { … },
-  "sections": [ … ]
+  "paradigms": { … },            // paradigm: false 的语言不写这个字段
+  "sections": [ … ]              // grammar: false 的语言写空数组 []
 }
 ```
 
@@ -491,8 +491,6 @@ const MIGRATIONS = {
 | mnc    | `mnc-noun-genitive`      | 名词属格         |
 | ja     | `ja-verb-godan`          | 五段动词活用     |
 | ja     | `ja-adj-i`               | イ形容词活用     |
-| zh-cls | `zh-cls-parts-of-speech` | 词类             |
-| zh-cls | `zh-cls-function-words`  | 虚词             |
 | fr     | `fr-verb-1st-group`      | 第一组动词       |
 | de     | `de-noun-decl-strong`    | 强变化名词       |
 
@@ -663,19 +661,11 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - 派生动词（`ja-verb-secondary`）：自他动词对应（-aru/-eru、-ru/-su、-ku/-keru、同形）+ 自谦语 + 尊他语，不接 `derive`
 - 敬语章讲三分体系（尊敬 / 谦让 / 叮宁）+ 句式（お〜になる / お〜する / ご〜する），具体动词见派生动词章
 
-#### zh-cls 古汉语
+#### zh-cls 古汉语 / en 现代英语
 
-- 词类
-- 常见虚词（之、其、而、以、于、为、者、也、所 等）
-- 常见句式（判断句、被动句、倒装、省略）
-- 词类活用（名词作动词、使动、意动）
-
-#### en 现代英语
-
-- 名词复数规则
-- 代词
-- 动词：时态、语态、语气；不规则动词表
-- 形容词比较级
+两者都关闭 `grammar` 与 `paradigm`，`sections` 为空数组、不写 `paradigms`、没有 `derive`。
+表单只保留基本形态、词性、含义、补充形式、固定搭配、例句、派生词、标签备注；
+词卡没有词性与语法锚点徽章，也没有语法页入口。
 
 #### fr 法语
 
@@ -1210,25 +1200,28 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 ---
 
-### 4. 开发专用目录（`assets/dev/`）
+### 4. 校验语法数据（命令行）
 
-**整个 `assets/dev/` 都不提交、也不随站点发布**：
+页面上没有开发专用按钮，`assets/dev/` 目录已移除。改完 `data/grammar/*.json` 后直接用
+`paradigm-generate.js` 的自检函数跑一遍（该模块自包含，可直接在 node 里 import）：
 
-- `.gitignore` → `docs/pages/grammar/assets/dev/`
-- `.github/workflows/cloudflare-r2.yml` → rclone `--exclude "pages/grammar/assets/dev/**"`
+```bash
+cd docs/pages/grammar
+node --input-type=module -e "
+import fs from 'node:fs'
+import { verifyGrammarDoc } from './assets/js/models/paradigm-generate.js'
+for (const f of fs.readdirSync('data/grammar')) {
+  const lang = f.replace('.json', '')
+  const doc = JSON.parse(fs.readFileSync('data/grammar/' + f, 'utf8'))
+  const profile = await import('./data/paradigm/' + lang + '.js').catch(() => null)
+  const r = verifyGrammarDoc(lang, doc, profile)
+  console.log(lang, 'errors', r.errors.length, 'warnings', r.warnings.length)
+  for (const e of r.errors.concat(r.warnings)) console.log('   ', e)
+}
+"
+```
 
-因此**它里面不能放应用运行时必须存在的文件**：app 代码里禁止静态 import，只能用
-`isDevHost()` 判断后 `import()` 动态加载，这样生产环境根本不会发请求，干净 clone 也不会报错。
-
-| 文件                          | 用途                                                                 |
-| ----------------------------- | -------------------------------------------------------------------- |
-| `data/{lang}.json`            | 开发测试词，`{ "words": [...] }`，每个语言一个名词 + 一个动词，字段完整 |
-| `js/fixtures.js`              | 导入生词模态框里的「载入测试词（dev）」按钮                            |
-| `js/verify-ui.js`             | 语言选择页的「校验语法数据（dev）」按钮 + 结果对话框                    |
-
-- 界面上的两个 dev 按钮只在 localhost 出现，且各自通过动态 import 挂载。
-- 「校验语法数据」跑的是 `assets/js/models/paradigm-generate.js` 里的 `verifyGrammarDocs`，
-  与命令行版共用同一套引擎。
-- 语法 / 元数据每改一次，应同步更新对应语言的测试词。
-- **配套的 SW 环境切换代码不在这里**：`assets/js/main.js` 的 `setupServiceWorker()` +
-  `assets/js/utils/env.js` 的 `isDevHost()`。它必须被生产环境加载，不能依赖 dev 目录。
+- 期望结果：每个语言 **errors 0 / warnings 0**。
+- 需要真实表格做样本时，用 `generateParadigm()` 按 `spec` + `template` 生成再核对，
+  方式与 `sample-words.json`（项目根目录的导入样例）一致。
+- 语法 / 元数据每改一次，应同步更新 `sample-words.json` 里对应语言的样例词。

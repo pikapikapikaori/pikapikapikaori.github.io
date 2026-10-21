@@ -1,19 +1,6 @@
 import { STORE_SETTINGS, put, get, remove } from './db.js'
 import { LANGUAGES } from '../data/languages.js'
-
-export const DEFAULT_SETTINGS = {
-    theme: 'auto',            // auto | light | dark
-    fontMode: 'default',      // default | system | local
-    fontFamily: null,         // local 模式下的字体名
-    fontUrl: null,            // local 模式下的 objectURL（不持久化跨会话，仅本次会话有效）
-    pageSize: 30,             // 20 - 50
-    reviewOrder: 'mastery-asc', // mastery-asc | added-desc | random
-    defaultSource: 'manual',  // manual | wiktionary | ...
-    sortField: 'addedAt',     // addedAt | encounterCount | mastery | lemma
-    sortOrder: 'desc',        // asc | desc
-    languageOrder: [],        // 用户自定义的语言排列顺序
-    groupOrder: ['classical', 'modern']
-}
+import { DEFAULT_SETTINGS } from '../config/config.js'
 
 export function normalizeSettings(raw) {
     const s = { ...DEFAULT_SETTINGS, ...(raw || {}) }

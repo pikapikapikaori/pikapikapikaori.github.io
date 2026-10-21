@@ -3,7 +3,7 @@ import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import { submitWord, editWord, fetchWord, queryWords } from '../services/word-service.js'
 import {
-    POS_LIST, GENDERS, normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders
+    normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders
 } from '../models/word.js'
 import {
     loadGrammar, loadParadigmProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
@@ -13,13 +13,10 @@ import { createParadigmTable } from '../components/paradigm-table.js'
 import { generateParadigm } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
-import { lookupWordForForm } from '../services/wiktionary-service.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
-
-const SOURCE_OPTIONS = [
-    { value: 'manual', label: '手动' },
-    { value: 'wiktionary', label: 'Wiktionary' }
-]
+import {
+    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS
+} from '../config/config.js'
 
 const SPECIAL_REF = '__special__'
 const INDECL_REF = '__indeclinable__'
@@ -48,6 +45,21 @@ export default {
         ])
 
         const grammarDoc = await loadGrammar(lang)
+
+        // 外部数据源：按 config 清单逐个动态 import，缺文件 / 离线时跳过
+        const externalSources = (await Promise.all(EXTERNAL_SOURCES.map(async (src) => {
+            try {
+                const mod = await import(new URL(`${src.file}.js`, EXTERNAL_BASE))
+                if (typeof mod.lookupWordForForm !== 'function') {
+                    console.warn(`[external] ${src.id} 没有导出 lookupWordForForm`)
+                    return null
+                }
+                return { ...src, lookupWordForForm: mod.lookupWordForForm }
+            } catch (err) {
+                console.warn(`[external] ${src.id} 加载失败`, err)
+                return null
+            }
+        }))).filter(Boolean)
         // 语言可以自定义「主要部分」的叫法与提示（如希伯来语是词根辅音）
         /** 当前词性的界面用词（各语言在自己的 JSON 里声明） */
         function currentTerms() { return termsOf(grammarDoc, posSelect.value) }
@@ -164,12 +176,13 @@ export default {
             oninput: () => refreshGenerateBtn()
         })
 
-        const lookupBtn = h('button', {
+        // 每个外部数据源一个查询按钮（清单见 config.EXTERNAL_SOURCES）
+        const lookupButtons = externalSources.map((source) => h('button', {
             class: 'btn btn--sm',
             type: 'button',
-            title: '从 Wiktionary 英文版获取释义、例句、变格/变位',
-            onclick: onLookup
-        }, '从 Wiktionary 查询')
+            title: `从 ${source.label} 获取释义、例句、变格/变位`,
+            onclick: (e) => onLookup(source, e.currentTarget)
+        }, `从 ${source.label} 查询`))
 
         const lookupStatus = h('div', { class: 'field__hint' }, '')
 
@@ -360,10 +373,9 @@ export default {
             h('label', { class: 'field' },
                 h('span', { class: 'field__label' }, '基本形态'),
                 lemmaInput,
-                h('div', { class: 'field__actions' },
-                    lookupBtn,
-                    lookupStatus
-                ),
+                lookupButtons.length
+                    ? h('div', { class: 'field__actions' }, ...lookupButtons, lookupStatus)
+                    : null,
                 h('span', { class: 'field__hint' }, '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。')
             ),
             field('词性', posSelect, '')
@@ -668,9 +680,9 @@ export default {
             paradigmSlot.appendChild(wrap)
         }
 
-        /* ---------- Wiktionary 查询 ---------- */
+        /* ---------- 外部数据源查询（config.EXTERNAL_SOURCES） ---------- */
 
-        async function onLookup() {
+        async function onLookup(source, btn) {
             const lemma = lemmaInput.value.trim()
             if (!lemma) {
                 toast.error('请先输入基本形态')
@@ -678,14 +690,14 @@ export default {
                 return
             }
 
-            lookupBtn.disabled = true
-            const originalText = lookupBtn.textContent
-            lookupBtn.textContent = '查询中…'
+            btn.disabled = true
+            const originalText = btn.textContent
+            btn.textContent = '查询中…'
             lookupStatus.textContent = ''
             lookupStatus.style.color = ''
 
             try {
-                const patch = await lookupWordForForm({
+                const patch = await source.lookupWordForForm({
                     lemma,
                     langCode: lang,
                     preferredPos: posSelect.value,
@@ -693,7 +705,7 @@ export default {
                 })
 
                 if (!patch) {
-                    lookupStatus.textContent = 'Wiktionary 未找到该词条'
+                    lookupStatus.textContent = `${source.label} 未找到该词条`
                     lookupStatus.style.color = 'var(--c-fg-subtle)'
                     return
                 }
@@ -730,15 +742,15 @@ export default {
 
                 lookupStatus.textContent = `已获取：${patch.summary}`
                 lookupStatus.style.color = 'var(--c-success)'
-                toast.success(`已从 Wiktionary 获取「${lemma}」`)
+                toast.success(`已从 ${source.label} 获取「${lemma}」`)
             } catch (err) {
                 console.error(err)
                 lookupStatus.textContent = `查询失败：${err.message}`
                 lookupStatus.style.color = 'var(--c-danger)'
                 toast.error(`查询失败：${err.message}`)
             } finally {
-                lookupBtn.disabled = false
-                lookupBtn.textContent = originalText
+                btn.disabled = false
+                btn.textContent = originalText
             }
         }
 
@@ -1138,7 +1150,7 @@ function sourceSelect(value, onChange) {
     return h('select', {
         class: 'select',
         onchange: (e) => onChange(e.target.value)
-    }, ...SOURCE_OPTIONS.map((o) => h('option', {
+    }, ...WORD_SOURCE_OPTIONS.map((o) => h('option', {
         value: o.value,
         selected: (value || 'manual') === o.value
     }, o.label)))

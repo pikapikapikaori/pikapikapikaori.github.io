@@ -7,13 +7,14 @@
 
 ## 1. 外部数据源导入
 
-入口形式：**按钮**，每个按钮对应一个内置数据源，
-URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击即触发查询，
-无需也无法自行填写地址。
+入口形式：**按钮**，每个按钮对应一个内置数据源，URL 与解析逻辑写在该源自己的文件里，
+用户点击即触发查询，无需也无法自行填写地址。
 
-- [ ] 每个数据源实现为一个独立的 service 模块（如 `dictionaryapi-service.js`）
-- [ ] 每个 service 暴露统一接口：`lookup(lemma, langCode) → Word[] | null`
-- [ ] 按钮集中管理：新增数据源时只需注册一个 `{ id, label, service }`
+已落地的机制（见 SCHEMA 第二部分第 2 节）：数据源放在 `docs/pages/grammar/external/js/`，
+在 `assets/js/config/config.js` 的 `EXTERNAL_SOURCES` 注册 `{ id, label, file }`，
+表单按清单动态 import，每个源一个按钮，模块统一导出 `lookupWordForForm`。
+
+- [ ] 新增更多源：每个源一个文件（如 `external/js/dictionaryapi.js`）+ 一条注册记录
 - [ ] 冲突策略同 Wiktionary（按唯一键合并、追加来源内容）
 - [ ] 失败重试与超时
 - [ ] 限流 / 429 退避
@@ -51,7 +52,7 @@ URL 由开发者在对应的 `services/*.js` 中写死并维护。用户点击�
 
 ## 2. Wiktionary 在线查询的后续扩展
 
-当前实现位于 `assets/js/services/wiktionary-service.js`。
+当前实现位于 `external/js/wiktionary.js`。
 
 - [ ] 表格行列映射扩展（尤其 la / grc / sa / he 的长尾标签）
 - [ ] 查询结果缓存（IndexedDB，按 `[lang, lemma]` 存储 wikitext / HTML）

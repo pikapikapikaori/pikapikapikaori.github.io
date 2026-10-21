@@ -13,6 +13,7 @@ import { formatRelative } from '../utils/date.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import { exportUser } from '../services/import-export-service.js'
+import { LS_KEYS } from '../config/config.js'
 
 const GROUP_DEFS = {
     classical: { key: 'classical', title: '古典语言', match: (l) => !!l.classical },
@@ -354,7 +355,7 @@ export default {
             try {
                 const { deleteUser } = await import('../store/user-store.js')
                 await deleteUser(userId)
-                try { localStorage.removeItem('ln.currentUser') } catch { /* ignore */ }
+                try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
                 appStore.set({ user: null, userId: null, settings: null })
                 location.hash = '#/welcome'
             } catch (err) {

@@ -4,7 +4,8 @@
 
 import { userId as genUserId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
-import { DEFAULT_SETTINGS, normalizeSettings } from '../store/settings-store.js'
+import { DEFAULT_SETTINGS } from '../config/config.js'
+import { normalizeSettings } from '../store/settings-store.js'
 
 export const EXPORT_KIND = 'langnotebook-user'
 export const CURRENT_VERSION = 2

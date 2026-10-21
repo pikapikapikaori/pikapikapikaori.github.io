@@ -755,11 +755,11 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 | 步骤 | 文件 | 改动内容 |
 | ---- | ---- | -------- |
-| 1 | `assets/js/data/languages.js` | 在 `LANGUAGES` 数组末尾追加一条元数据：`{ code: 'xx', name: '中文名', native: '本语言书写形式', classical, vertical, rtl }`。`code` 必须唯一。 |
+| 1 | `assets/js/config/config.js` | 在 `GRAMMAR_FILES` 末尾追加语言 code `'xx'`。元信息全部写在 `data/grammar/xx.json` 顶层（见第 3 节），`code` 必须唯一。 |
 | 2 | `data/grammar/xx.json` | 新建语法文件，文件名必须与 `code` 一致。`version`（整数）、`language`（同 `code`）、`name` 必填，`sections` 必填（可为空数组，但建议至少给出一个条目），`paradigms` 可选。锚点按 `xx-{category}-{item}` 命名且全局唯一。 |
 | 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: "LN XX", var(--ff-content); }`；RTL 语言再补 `direction: rtl; unicode-bidi: isolate;`。 |
 | 4 | `assets/css/fonts.css` | 若准备专用字体：把 `xx.woff2` 放到 `assets/resources/fonts/`，并新增/取消对应 `@font-face`（`font-family: "LN XX"`）。没有专用字体可跳过，自动回退到 `--ff-content`。 |
-| 5 | `assets/js/services/wiktionary-service.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
+| 5 | `external/js/wiktionary.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
 | 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见 §7.1。不需要就跳过，引擎会自动略过这两步。 |
 | 7 | `docs/SCHEMA.md` | 更新第一部分第 3 节的语言元数据表格、第二部分第 4 小节「各语言语法覆盖范围」，以及第 3 小节（锚点 id 命名）的示例表。 |
 
@@ -767,7 +767,7 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 - **分组**：`classical` 决定语言进入「古典语言」还是「现代语言」组，分组本身不可由用户跨组拖动。
 - **竖排 / RTL**：`vertical: true` 会为带 `lang` 属性的内容启用竖排 popover；`rtl: true` 会为词条文本启用 RTL 方向，均无需额外代码。
-- **词性**：`pos` 取值来自 `assets/js/models/word.js` 的全局 `POS_LIST`，不是按语言定义。新语言的 `paradigms` 只能使用这些 key；确有新词性需求时需同时改 `POS_LIST` 和本文档第 4 节。
+- **词性**：`pos` 取值来自 `assets/js/config/config.js` 的全局 `POS_LIST`，不是按语言定义。新语言的 `paradigms` 只能使用这些 key；确有新词性需求时需同时改 `POS_LIST` 和本文档第 4 节。
 - **语法文件加载**：`assets/js/services/grammar-service.js` 运行时按 `./data/grammar/{code}.json` 拉取，404 时该语言的「语法」页显示为空提示。`data/grammar/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
 - **既有用户数据**：老用户的 `settings.languageOrder` 里没有新 code 时，语言选择页会按 `LANGUAGES` 原始顺序把它追加到所在组末尾，不需要数据迁移。
 
@@ -1198,14 +1198,44 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 - **派生词只能从词库中选择**（外键语义）：用 `head` 范围搜索当前语言的词条，
   选不中的词会提示「未找到，请先添加该词」，不提供自由文本输入
 
-### 2. Wiktionary 在线查询
+### 2. 外部数据源（在线查询）
 
-实现位置：`assets/js/services/wiktionary-service.js`
+外部依赖统一放在 `docs/pages/grammar/external/js/`，一个源一个文件，**不静态 import**。
+
+**注册方式**（`assets/js/config/config.js`）：
+
+```js
+export const EXTERNAL_SOURCES = [
+    { id: 'wiktionary', label: 'Wiktionary', file: 'wiktionary' },
+]
+```
+
+- `id` 同时写进词条的 `source` 字段（`meanings` / `examples` / `inflections`），
+  也会出现在表单「来源」下拉里（`WORD_SOURCE_OPTIONS` = 手动 + 各外部源）。
+- `file` 对应 `external/js/{file}.js`。
+- 生词表单在 `mount()` 时按清单 `Promise.all` 动态 import，
+  **一个源一个「从 {label} 查询」按钮**；某个文件缺失或断网时该源不显示，表单其余部分照常。
+- 新增一个源 = 加一条 `EXTERNAL_SOURCES` 记录 + 一个导出 `lookupWordForForm` 的文件，不改视图代码。
+
+**模块契约**：
+
+```js
+// external/js/<source>.js
+export async function lookupWordForForm({ lemma, langCode, preferredPos, grammarDoc })
+// → { pos, meanings, examples, paradigm, inflections, summary } | null
+```
+
+返回的是**回填用的补丁**：`pos` 会切词性，`meanings` / `examples` 覆盖对应分组，
+`paradigm` 合并进 `data.paradigm.main`，`inflections` 追加到「补充形式」。
+来源标记由模块自己盖（`source: '<id>'`）。
+
+**Wiktionary 实现**（`external/js/wiktionary.js`）：
 
 - MediaWiki Action API（`action=query`）拉取 wikitext
 - `action=parse` 拉取渲染后 HTML
 - 解析内容：语言节、词性小节、释义、例句、例句译文与出处、变格/变位表
-- 表单集成：添加生词页「从 Wiktionary 查询」按钮
+- 该文件内部的 `LANG_TO_WIKTIONARY` / `POS_MAP` / `COL_KEY_MAP` / `ROW_KEY_MAP` 是
+  这个源专属的解析表，不放进 `config.js`
 
 **已知限制**
 
@@ -1246,3 +1276,6 @@ for (const f of fs.readdirSync('data/grammar')) {
 - 需要真实表格做样本时，用 `generateParadigm()` 按 `spec` + `template` 生成再核对，
   方式与 `sample-words.json`（项目根目录的导入样例）一致。
 - 语法 / 元数据每改一次，应同步更新 `sample-words.json` 里对应语言的样例词。
+
+改完界面枚举（词性、语法性、主题、页码、外部源）后记得对一下 `assets/js/config/config.js`：
+站点级常量都收在这个文件里，各模块不再各自写一份。

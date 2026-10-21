@@ -1,9 +1,10 @@
 import { h, replace } from '../utils/dom.js'
 import { THEME_ICONS } from './icons.js'
+import { LS_KEYS, THEMES } from '../config/config.js'
 
-const KEY = 'ln.theme'
-const CYCLE = ['auto', 'light', 'dark']
-const LABELS = { auto: '跟随系统', light: '浅色', dark: '深色' }
+const KEY = LS_KEYS.theme
+const CYCLE = THEMES.map((t) => t.value)
+const LABELS = Object.fromEntries(THEMES.map((t) => [t.value, t.label]))
 
 export function currentTheme() {
     try {

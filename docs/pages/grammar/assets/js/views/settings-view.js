@@ -15,6 +15,7 @@ import {
     getStoredFontMode, getStoredFontFamily
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
+import { LS_KEYS, PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
 import { applyTheme, currentTheme } from '../components/theme-toggle.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
@@ -56,9 +57,7 @@ export default {
         container.appendChild(buildSection('外观',
             row('主题', 'auto / light / dark',
                 selectControl(
-                    [{ value: 'auto', label: '跟随系统' },
-                        { value: 'light', label: '浅色' },
-                        { value: 'dark', label: '深色' }],
+                    THEMES.map((t) => ({ value: t.value, label: t.label })),
                     currentTheme(),
                     async (v) => {
                         applyTheme(v)
@@ -75,7 +74,7 @@ export default {
         container.appendChild(buildSection('列表与复习',
             row('每页卡片数', '20 - 50',
                 selectControl(
-                    [20, 30, 40, 50].map((n) => ({ value: String(n), label: `${n} 张` })),
+                    PAGE_SIZE_OPTIONS.map((n) => ({ value: String(n), label: `${n} 张` })),
                     String(settings.pageSize),
                     async (v) => { await patchSettings({ pageSize: Number(v) }) }
                 )
@@ -259,7 +258,7 @@ export default {
             if (!ok) return
             try {
                 await deleteUser(userId)
-                try { localStorage.removeItem('ln.currentUser') } catch { /* ignore */ }
+                try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
                 appStore.set({ user: null, userId: null, settings: null })
                 location.hash = '#/welcome'
             } catch (err) {

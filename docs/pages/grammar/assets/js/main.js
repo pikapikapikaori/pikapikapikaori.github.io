@@ -13,22 +13,13 @@ import { createRouter } from './router.js'
 import { appStore, setUser, setLanguage, setSettings, setRoute } from './app-state.js'
 import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
-import { createThemeToggle } from './components/theme-toggle.js'
+import { createThemeToggle, applyTheme } from './components/theme-toggle.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { loadLanguages } from './data/languages.js'
+import { LS_KEYS, THEMES } from './config/config.js'
 
-const LS_USER_KEY = 'ln.currentUser'
-const LS_THEME_KEY = 'ln.theme'
-const LS_FONT_KEY = 'ln.font.mode'
-
-/* ---------------- 主题 ---------------- */
-
-function applyTheme(theme) {
-    const t = ['auto', 'light', 'dark'].includes(theme) ? theme : 'auto'
-    document.documentElement.setAttribute('data-theme', t)
-    try { localStorage.setItem(LS_THEME_KEY, t) } catch { /* ignore */ }
-}
+const DEFAULT_THEME = THEMES[0].value
 
 /* ---------------- Shell 渲染 ---------------- */
 
@@ -205,8 +196,8 @@ async function bootstrap() {
     }
 
     // 主题
-    let theme = 'auto'
-    try { theme = localStorage.getItem(LS_THEME_KEY) || 'auto' } catch { /* ignore */ }
+    let theme = DEFAULT_THEME
+    try { theme = localStorage.getItem(LS_KEYS.theme) || DEFAULT_THEME } catch { /* ignore */ }
     applyTheme(theme)
 
     // 语言元信息（各语言 JSON 顶层；语言选择页需要全部语言的元信息）
@@ -220,11 +211,11 @@ async function bootstrap() {
     // 当前用户
     let cur = null
     let uid = null
-    try { uid = localStorage.getItem(LS_USER_KEY) } catch { /* ignore */ }
+    try { uid = localStorage.getItem(LS_KEYS.user) } catch { /* ignore */ }
     if (uid) {
         cur = await getUser(uid)
         if (!cur) {
-            try { localStorage.removeItem(LS_USER_KEY) } catch { /* ignore */ }
+            try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
         }
     }
     if (cur) {

@@ -11,9 +11,10 @@ import { setUser, setSettings } from '../app-state.js'
 import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { formatDate } from '../utils/date.js'
+import { LS_KEYS } from '../config/config.js'
 
-const LS_USER_KEY = 'ln.currentUser'
-const LS_THEME_KEY = 'ln.theme'
+const LS_USER_KEY = LS_KEYS.user
+const LS_THEME_KEY = LS_KEYS.theme
 
 async function enterUser(userId) {
     const u = await getUser(userId)

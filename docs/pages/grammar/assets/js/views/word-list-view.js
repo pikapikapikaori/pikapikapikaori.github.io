@@ -10,7 +10,7 @@ import {
     submitReview
 } from '../services/word-service.js'
 import { listByLanguage, deleteWord } from '../store/word-store.js'
-import { POS_LIST } from '../models/word.js'
+import { POS_LIST, PAGE_SIZE_OPTIONS } from '../config/config.js'
 import { createWordCard } from '../components/word-card.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
@@ -221,7 +221,7 @@ export default {
                     refresh()
                 }
             },
-            ...[20, 30, 40, 50].map((n) => h('option', {
+            ...PAGE_SIZE_OPTIONS.map((n) => h('option', {
                 value: String(n),
                 selected: state.pageSize === n
             }, `${n} / 页`))

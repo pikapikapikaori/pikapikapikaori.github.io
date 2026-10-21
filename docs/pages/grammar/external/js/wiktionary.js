@@ -249,8 +249,7 @@ function extractMeanings(posContent) {
 function extractTemplates(posContent) {
     const templates = []
     const re = /\{\{([^|}\n]+)((?:\|[^{}\n]*)*)\}\}/g
-    let m = re.exec(posContent)
-    while (m !== null) {
+    for (const m of posContent.matchAll(re)) {
         const name = m[1].trim()
         const args = m[2]
             .split('|')

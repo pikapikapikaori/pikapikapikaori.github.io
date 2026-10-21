@@ -11,8 +11,10 @@
  *   objectURL 不持久化；每次会话需要重新选择本地文件
  */
 
-const LS_FONT_MODE = 'ln.font.mode'
-const LS_FONT_FAMILY = 'ln.font.family'
+import { LS_KEYS } from '../config/config.js'
+
+const LS_FONT_MODE = LS_KEYS.font
+const LS_FONT_FAMILY = LS_KEYS.fontFamily
 
 const STYLE_ID = 'ln-user-font'
 

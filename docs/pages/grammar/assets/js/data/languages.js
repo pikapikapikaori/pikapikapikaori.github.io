@@ -1,5 +1,7 @@
+import { GRAMMAR_FILES } from '../config/config.js'
+
 /**
- * 语言元数据
+ * 语言元数据（清单在 `config/config.js` 的 `GRAMMAR_FILES`）
  *
  * 真源是 `data/grammar/<code>.json` 顶层的元信息，这里只列出**要加载哪些语言文件**：
  *
@@ -18,11 +20,6 @@
  * 语言选择页需要所有语言的元信息，所以启动时会把这份清单里的 JSON 全部拉一遍并缓存；
  * 正文（sections / paradigms）随后打开该语言时直接复用已下载的内容。
  */
-
-/** 要加载的语言文件（顺序无所谓，显示顺序由 JSON 里的 group.order / order 决定） */
-const GRAMMAR_FILES = [
-    'la', 'grc', 'he', 'sa', 'mnc', 'ja', 'zh-cls', 'en', 'fr', 'de'
-]
 
 /** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */
 export let LANGUAGES = []

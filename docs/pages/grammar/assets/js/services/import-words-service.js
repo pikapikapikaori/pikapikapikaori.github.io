@@ -6,7 +6,8 @@
  */
 
 import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
-import { POS_LIST, normalizeParadigm, normalizeStems, normalizeGenders } from '../models/word.js'
+import { POS_LIST } from '../config/config.js'
+import { normalizeParadigm, normalizeStems, normalizeGenders } from '../models/word.js'
 import { addOrMerge } from '../store/word-store.js'
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))

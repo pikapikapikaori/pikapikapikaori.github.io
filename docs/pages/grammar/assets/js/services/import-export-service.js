@@ -8,8 +8,9 @@ import {
 import { createUser, saveUser } from '../store/user-store.js'
 import { put as dbPut, STORE_SETTINGS, STORE_USERS } from '../store/db.js'
 import { normalizeSettings } from '../store/settings-store.js'
-import { normalizeParadigm, normalizeStems, normalizeGenders, mergeStems } from '../models/word.js'
+import { normalizeParadigm, normalizeStems, normalizeGenders, mergeStems, normalizeAttributes } from '../models/word.js'
 import { wordId } from '../utils/id.js'
+import { fieldValues } from '../models/grammar.js'
 import { nowIso } from '../utils/date.js'
 
 /* ---------------- 导出 ---------------- */
@@ -37,7 +38,9 @@ function cleanWordForExport(w) {
         pos: w.pos,
         inflectionType: w.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(w.paradigm),
-        gender: normalizeGenders(w.gender, w.pos),
+        // gender 只作为旧格式的兼容镜像导出，真实来源是 attributes
+        gender: normalizeGenders(fieldValues(w, 'gender'), w.pos),
+        attributes: normalizeAttributes(w.attributes),
         stems: normalizeStems(w.stems),
         inflections: w.inflections || [],
         meanings: w.meanings || [],
@@ -148,7 +151,11 @@ function normalizeImportedWord(raw, userId) {
         pos,
         inflectionType: raw.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(raw.paradigm),
-        gender: normalizeGenders(raw.gender, pos),
+        gender: normalizeGenders(fieldValues(raw, 'gender'), pos),
+        attributes: normalizeAttributes({
+            ...(Array.isArray(raw.gender) && raw.gender.length ? { gender: raw.gender } : {}),
+            ...(raw.attributes || {}),
+        }),
         stems: normalizeStems(raw.stems ?? raw.stem),
         inflections: raw.inflections || [],
         meanings: raw.meanings || [],
@@ -172,6 +179,10 @@ function mergePreservingProgress(existing, incoming) {
     merged.paradigm = mergeParadigmLocal(existing.paradigm, incoming.paradigm)
 
     merged.stems = mergeStems(existing.stems, incoming.stems)
+    merged.attributes = normalizeAttributes({
+        ...(existing.attributes || {}),
+        ...(incoming.attributes || {}),
+    })
     merged.gender = normalizeGenders(
         [...(existing.gender || []), ...(incoming.gender || [])], merged.pos)
 

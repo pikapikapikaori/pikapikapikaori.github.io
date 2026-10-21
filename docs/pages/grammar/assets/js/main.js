@@ -17,6 +17,7 @@ import { createThemeToggle } from './components/theme-toggle.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { isDevHost } from './utils/env.js'
+import { loadLanguages } from './data/languages.js'
 
 const LS_USER_KEY = 'ln.currentUser'
 const LS_THEME_KEY = 'ln.theme'
@@ -181,11 +182,26 @@ async function mountView(name, ctx) {
 
 /* ---------------- 启动 ---------------- */
 
+/** 隐藏启动遮罩（首帧渲染完成后再淡出） */
+function hideBootLoader() {
+    const el = document.getElementById('boot-loader')
+    if (!el) return
+    el.classList.add('boot-loader--hidden')
+    setTimeout(() => el.remove(), 400)
+}
+
+/** 启动遮罩里显示一段提示（例如致命错误） */
+function setBootLoaderText(text) {
+    const el = document.querySelector('#boot-loader .boot-loader__text')
+    if (el) el.textContent = text
+}
+
 async function bootstrap() {
     try {
         await openDB()
     } catch (err) {
         renderFatal(`IndexedDB 初始化失败：${err.message}`)
+        hideBootLoader()
         return
     }
 
@@ -193,6 +209,14 @@ async function bootstrap() {
     let theme = 'auto'
     try { theme = localStorage.getItem(LS_THEME_KEY) || 'auto' } catch { /* ignore */ }
     applyTheme(theme)
+
+    // 语言元信息（各语言 JSON 顶层；语言选择页需要全部语言的元信息）
+    setBootLoaderText('正在加载语言数据…')
+    try {
+        await loadLanguages()
+    } catch (err) {
+        console.warn('[bootstrap] 语言元信息加载失败', err)
+    }
 
     // 当前用户
     let cur = null
@@ -212,6 +236,9 @@ async function bootstrap() {
     }
 
     router.start()
+
+    // 首帧渲染完成后再撤下遮罩（用 timeout 而不是 rAF：后台标签页里 rAF 不触发）
+    setTimeout(hideBootLoader, 30)
 
     router.onNotFound(() => {
         router.navigate('/welcome', { replace: true })
@@ -277,4 +304,9 @@ async function disableServiceWorker() {
     }
 }
 
-bootstrap()
+bootstrap().catch((err) => {
+    console.error(err)
+    setBootLoaderText('启动失败')
+    renderFatal(String(err && err.message || err))
+    hideBootLoader()
+})

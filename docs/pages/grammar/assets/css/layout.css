@@ -220,3 +220,46 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ---------- 启动遮罩 ---------- */
+.boot-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-4);
+    background: var(--c-bg);
+    color: var(--c-fg-muted);
+    transition: opacity .25s var(--ease);
+}
+
+.boot-loader--hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.boot-loader__spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--c-border);
+    border-top-color: var(--c-accent);
+    border-radius: 50%;
+    animation: boot-spin .8s linear infinite;
+}
+
+.boot-loader__text {
+    font-size: var(--fs-sm);
+}
+
+@keyframes boot-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .boot-loader__spinner {
+        animation-duration: 2.4s;
+    }
+}

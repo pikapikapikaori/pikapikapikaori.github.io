@@ -89,41 +89,70 @@
 
 ### 3. 语言元数据
 
-定义在 `assets/js/data/languages.js`，不可由用户修改。
+**真源在每个语言自己的 `data/grammar/{code}.json` 顶层**，`assets/js/data/languages.js` 只列出
+**要加载哪些文件**（`GRAMMAR_FILES`），启动时把这份清单里的 JSON 全拉一遍、取出元信息。
+语言选择页需要所有语言的元信息，所以这一层是启动时的固定开销（当前合计约 5 MB）。
 
-```js
+```jsonc
+// data/grammar/ja.json 顶层
 {
-  code: 'la',        // 语言 code，与 /data/grammar/{code}.json 对应
-  name: '拉丁语',     // 中文名
-  native: 'Latina',  // 本语言书写形式
-  classical: true,   // 是否古典语言（决定语言选择页的分组）
-  vertical: false,   // 是否纵向书写（满语 true）
-  rtl: false         // 是否从右到左（希伯来 true）
+  "version": 1,
+  "language": "ja",              // = code，文件名也是它
+  "name": "现代日语",             // 中文名
+  "native": "日本語",             // 本语言书写形式
+  "classical": false,            // 是否古典语言（兼容字段，等价于 group.id === 'classical'）
+  "group": { "id": "modern", "title": "现代语言", "order": 2 },  // 选择页分组
+  "order": 1,                    // 组内顺序
+  "vertical": false,             // 纵向书写
+  "rtl": false,                  // 从右到左
+  "grammar": true,               // 是否有语法页（false：列表页不显示「语法」，词性徽章不可点）
+  "paradigm": true,              // 是否有变格 / 变位表（false：表单只留基本形态、词性、含义、
+                                 //   补充形式、固定搭配、例句、派生词、标签备注）
+  "terms": { … },                // 界面用词，见下
+  "paradigms": { … },
+  "sections": [ … ]
 }
 ```
 
-完整列表：
+| code | name | group | grammar | paradigm |
+| --- | --- | --- | --- | --- |
+| `la` | 拉丁语 | 古典语言 | ✅ | ✅ |
+| `grc` | 古希腊语 | 古典语言 | ✅ | ✅ |
+| `he` | 圣经希伯来语 | 古典语言 | ✅ | ✅ |
+| `sa` | 梵语 | 古典语言 | ✅ | ✅ |
+| `mnc` | 满语 | 古典语言 | ✅ | ✅ |
+| `ja-cls` | 古典日语 | 古典语言 | ✅ | ✅ |
+| `zh-cls` | 古汉语 | 古典语言 | ❌ | ❌ |
+| `ja` | 现代日语 | 现代语言 | ✅ | ✅ |
+| `en` | 现代英语 | 现代语言 | ❌ | ❌ |
+| `fr` | 法语 | 现代语言 | ✅ | ✅ |
+| `de` | 德语 | 现代语言 | ✅ | ✅ |
 
-| code     | name         | classical | vertical | rtl |
-| -------- | ------------ | --------- | -------- | --- |
-| `la`     | 拉丁语       | ✅         | ❌        | ❌   |
-| `grc`    | 古希腊语     | ✅         | ❌        | ❌   |
-| `he`     | 圣经希伯来语 | ❌         | ❌        | ✅   |
-| `sa`     | 梵语         | ✅         | ❌        | ❌   |
-| `mnc`    | 满语         | ✅         | ✅        | ❌   |
-| `ja`     | 现代日语     | ❌         | ❌        | ❌   |
-| `ja-cls` | 古典日语     | ✅         | ❌        | ❌   |
-| `zh-cls` | 古汉语       | ✅         | ❌        | ❌   |
-| `en`     | 现代英语     | ❌         | ❌        | ❌   |
-| `fr`     | 法语         | ❌         | ❌        | ❌   |
-| `de`     | 德语         | ❌         | ❌        | ❌   |
+- **`group` / `order`**：语言选择页按 `group.order` → `order` 排序；组标题只写在各自 JSON 里，不在代码中硬编码。分组本身不可跨组拖动，组内顺序存 `settings.languageOrder`，组间顺序存 `settings.groupOrder`。
+- **`vertical` / `rtl`**：`true` 时分别触发竖排 popover 与 RTL 行内方向。
+- **`grammar: false`**：生词列表不显示「语法」按钮；直接访问 `#/grammar/{code}` 会跳回词列表；词卡的词性徽章不可点。
+- **`paradigm: false`**：表单与词卡都不出现变格 / 变位相关的字段与表格。
 
-- **`classical`**：不可由用户修改。语言选择页按此字段分为「古典语言」「现代语言」两组。分组本身不可跨组拖动，组内语言顺序可由用户拖动调整，保存到 `settings.languageOrder`。组间顺序保存到 `settings.groupOrder`。
-- **`vertical`**：为 `true` 时，语言内容元素触发竖排 popover。
-- **`rtl`**：为 `true` 时，行内文字方向为 RTL。
+#### terms：界面用词
+
+**每个语言必须自己写一套**，代码里不留默认文案。语言级的值可以按词性用 `byPos` 覆盖
+（满语名词锚点是「复数类型」、动词是「活用类型」，就靠这个区分）。
+
+| key | 用途 |
+| --- | --- |
+| `inflectionType` | 「变格 / 变位类型」这一栏的标签 |
+| `inflectionTypePlaceholder` | 该输入框的 placeholder |
+| `inflectionTypeHint` | 该栏的说明文字 |
+| `special` | 锚点下拉里的「特殊…（自行填写）」 |
+| `indeclinable` | 锚点下拉里的「不变格 / 不变形 / 无活用」 |
+| `paradigmTitle` | 变格 / 变位表块标题，`{pos}` 会替换成词性名（如 `{pos}词形表`） |
+| `anchorHint` | 语法锚点下拉的说明 |
+| `extraForms` | 「补充形式」块标题 |
+| `extraPartsHint` | 额外主要部分那一栏的说明 |
+| `stems` | `{ label, placeholder, hint }`：主要部分那一栏的三处文案 |
+| `byPos` | `{ [pos]: { 上面任意键 } }`，按词性覆盖 |
 
 ---
-
 ### 4. Word
 
 ```json
@@ -621,11 +650,21 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
 
 #### ja 现代日语
 
-- 词类
-- 动词：五段、一段、不规则；辞书形、ます形、て形、た形、ない形、可能、被动、使役、命令、意志、条件
-- 形容词：イ、ナ
-- 助词
-- 敬语
+- 章节顺序：**名词 → 形容词 → 动词 → 助词 → 敬语 → 数词 → 句法**（7 章，分页显示）
+- 黏着语，没有语法性、没有复数形态；词形变化只发生在**动词 / 形容词**上，格关系由**助词**表示
+- 名词、助词、数词等**无锚点**，`paradigms` 里也没有模板 → 表单自动隐藏「类型 + 锚点」「主要部分」
+- **动词锚点 = 四类活用**：五段 / 一段 / サ変（する）/ カ変（来る）；`paradigms.verb.stems: false`（基本形态 = 辞书形）
+- **形容词锚点 = 两类**：形容詞（イ・高い型）/ 形容動詞（ナ・静か型）
+- 活用形按**学校文法**列：未然・連用1・連用2（音便）・終止（＝辞書形）・連体・已然（仮定）・命令；
+  合成形式另列一张表（ます / ない / た / て / 意志 / 可能 / 受身 / 使役 / 使役受身 / 已然＋ば），
+  每行标注**基于哪个活用形**
+- `derive` 覆盖：动词 4 条 + 形容词 2 条，全部以辞书形为唯一输入。
+  五段用 `stemForms` 的 9 条正则做五段化与音便（`く→か/き/い/け/こ`、`つ/る/う→っ`…），
+  一段去 `る`，する用 `stems` 字面量（し / さ / すれ / できる），カ変按汉字写法去 `る`（命令形 `-い`）
+- **自他**：`paradigms.verb.fields` 声明「他动词 / 自动词 / 自他两用」，词条存 `word.attributes.transitivity`，
+  表单在「语法性」的位置显示 chips（日语没有语法性，所以这一栏就是自他）
+- 派生动词（`ja-verb-secondary`）：自他动词对应（-aru/-eru、-ru/-su、-ku/-keru、同形）+ 自谦语 + 尊他语，不接 `derive`
+- 敬语章讲三分体系（尊敬 / 谦让 / 叮宁）+ 句式（お〜になる / お〜する / ご〜する），具体动词见派生动词章
 
 #### ja-cls 古典日语
 
@@ -792,6 +831,25 @@ III-ה / 叠音 / 喉音 III / 喉音 II / I-א / I-י / I-נ / III-א / 中空�
     生成按钮独立成一行，只要该词性有可锚定的类型就显示。
 14. **字段顺序**：基本形态 + 词性 → 语法性（有则显示）→ 变格 / 变位类型 + 语法锚点 → 含义 →
     主要部分（+ 额外主要部分）→ 变格 / 变位表（→ 补充形式 / 搭配 / 例句 / 派生词 / 标签备注）。
+15. **属性字段 `paradigms[pos].fields`**：词性自己的「要不要填、显示什么、有哪些选项」都由这里声明，
+    表单按顺序渲染成 chips（位置在「语法性」当年所在的那一行）。
+    ```jsonc
+    "fields": [
+      { "key": "gender", "label": "语法性", "multi": true, "declensionColumns": true,
+        "hint": "可多选（如 common gender 同时为阳性与阴性）。只显示所选性别的变格列。",
+        "options": [{ "value": "m", "label": "阳性" }, { "value": "f", "label": "阴性" }, { "value": "n", "label": "中性" }] },
+      { "key": "transitivity", "label": "自他",
+        "options": [{ "value": "trans", "label": "他动词" }, { "value": "intrans", "label": "自动词" }, { "value": "both", "label": "自他两用" }] }
+    ]
+    ```
+    - `multi: true` 存数组（语法性），否则存字符串（自他）
+    - `declensionColumns: true` 表示这个字段用来筛变格列（列 key 形如 `sg_m`）：词卡与表单只渲染所选值对应的列
+    - 取值统一存进 `word.attributes`（对象）。旧的 `word.gender` 只作为兼容镜像保留，
+      读旧数据时自动迁移到 `attributes.gender`；导出时也一并写 `gender`
+    - **不声明 `fields` 也不会坏**：只要**名词**的变格列名带 `_m` / `_f` / `_n` 后缀，
+      就自动推导出一个「语法性」字段（la / grc / sa / de / fr 走的就是这条回退路径）。
+      回退只对名词生效（与旧行为一致）；其它词性要显示字段必须显式声明 `fields`
+    - 日语动词显式用 `fields` 声明「自他」。以后要加「及物性 / 有生性 / 体」之类，加一条就行
 
 **接入 derive 的四步**（详见 §7、§8，按顺序加，每步都能单独跑自检）：
 

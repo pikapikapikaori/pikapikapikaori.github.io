@@ -108,7 +108,7 @@ export default {
                     h('div', { class: 'page-head__sub' }, '生词列表')
                 ),
                 h('div', { class: 'page-head__actions' },
-                    h('button', {
+                    language.grammar === false ? null : h('button', {
                         class: 'btn', type: 'button',
                         onclick: () => location.hash = `#/grammar/${lang}`
                     }, '语法'),

@@ -1,5 +1,5 @@
 /* Service Worker · 缓存应用 shell，数据仍走 IndexedDB */
-const CACHE = 'langnotebook-shell-v32'
+const CACHE = 'langnotebook-shell-v39'
 
 const SHELL = [
     './',

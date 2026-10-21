@@ -7,7 +7,7 @@ import {
 } from '../models/word.js'
 import {
     loadGrammar, loadParadigmProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
-    collectInflectAnchors, genderOfColumn
+    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, termsOf, fillTerms
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { generateParadigm } from '../models/paradigm-generate.js'
@@ -24,10 +24,6 @@ const SOURCE_OPTIONS = [
 const SPECIAL_REF = '__special__'
 const INDECL_REF = '__indeclinable__'
 
-/** 不变格 / 不变位的显示名 */
-function indeclinableLabel(pos) {
-    return pos === 'verb' ? '不变位' : '不变格'
-}
 
 export default {
     needsUser: true,
@@ -53,6 +49,22 @@ export default {
 
         const grammarDoc = await loadGrammar(lang)
         // 语言可以自定义「主要部分」的叫法与提示（如希伯来语是词根辅音）
+        /** 当前词性的界面用词（各语言在自己的 JSON 里声明） */
+        function currentTerms() { return termsOf(grammarDoc, posSelect.value) }
+
+        /** 词性变了以后，界面上这些文案要跟着换（各词性可以有自己的说法） */
+        function applyTerms() {
+            const t = currentTerms()
+            inflectionTypeLabelEl.textContent = t.inflectionType
+            inflectionTypeHintEl.textContent = t.inflectionTypeHint
+            anchorHintEl.textContent = t.anchorHint
+            inflectionLabel.placeholder = t.inflectionTypePlaceholder
+            stemsLabelEl.textContent = stemsMeta?.label || t.stems.label
+            stemsHintEl.textContent = stemsMeta?.hint || t.stems.hint
+            principalInput.placeholder = stemsMeta?.placeholder || t.stems.placeholder
+            const extra = form.querySelector('.js-extra-forms-title')
+            if (extra) extra.textContent = t.extraForms
+        }
         const stemsMeta = grammarDoc?.stems && typeof grammarDoc.stems === 'object' ? grammarDoc.stems : null
         const paradigmProfile = await loadParadigmProfile(lang)
 
@@ -76,6 +88,7 @@ export default {
                 lemma: '',
                 pos: 'noun',
                 gender: [],
+                attributes: {},
                 inflectionType: { label: '', grammarRef: null },
                 paradigm: {},
                 stems: { base: '' },
@@ -98,6 +111,7 @@ export default {
                 lemma: w.lemma,
                 pos: w.pos,
                 gender: normalizeGenders(w.gender, w.pos),
+                attributes: { ...(w.attributes || {}) },
                 inflectionType: {
                     label: (w.inflectionType && w.inflectionType.label) || '',
                     grammarRef: (w.inflectionType && w.inflectionType.grammarRef) || null
@@ -179,7 +193,7 @@ export default {
                 if (v !== SPECIAL_REF && opt && !inflectionLabel.value.trim()) {
                     inflectionLabel.value = opt.short || opt.label
                 } else if (v === INDECL_REF && !inflectionLabel.value.trim()) {
-                    inflectionLabel.value = indeclinableLabel(posSelect.value)
+                    inflectionLabel.value = currentTerms().indeclinable
                 }
                 renderExtraParts()
                 renderParadigmBlock()
@@ -192,9 +206,10 @@ export default {
             const opts = collectInflectAnchors(grammarDoc, lang, pos)
             currentOptionsById = Object.fromEntries(opts.map((o) => [o.id, o]))
 
-            // 该词性没有任何锚点：这一行整块隐藏，连「特殊 / 不变」两个内置项也不提供
+            // 该语言不启用变格变位表（paradigm: false），或该词性没有任何锚点：
+            // 这一行整块隐藏，连「特殊 / 不变」两个内置项也不提供
             // （永远不变格变位的词性谈不上「特殊变格」，也没有「不变格」的对应关系）
-            if (!opts.length) {
+            if (grammarDoc?.paradigm === false || !opts.length) {
                 inflectionRef.replaceChildren()
                 inflectionRef.disabled = true
                 inflectionRow.hidden = true
@@ -218,11 +233,11 @@ export default {
                 h('option', {
                     value: SPECIAL_REF,
                     selected: selected === SPECIAL_REF
-                }, pos === 'verb' ? '特殊变位（自行填写）' : '特殊变格（自行填写）'),
+                }, currentTerms().special),
                 h('option', {
                     value: INDECL_REF,
                     selected: selected === INDECL_REF
-                }, indeclinableLabel(pos)),
+                }, currentTerms().indeclinable),
                 ...opts.map((o) => h('option', {
                     value: o.id,
                     selected: selected === o.id
@@ -235,7 +250,11 @@ export default {
 
         posSelect.addEventListener('change', () => {
             data.pos = posSelect.value
-            data.gender = normalizeGenders(data.gender, data.pos)
+            const allowed = new Set(getFieldDefs(grammarDoc, data.pos).map((f) => f.key))
+            for (const key of Object.keys(data.attributes)) {
+                if (!allowed.has(key)) delete data.attributes[key]
+            }
+            applyTerms()
             updateStemsVisibility()
             rebuildRefOptions()
             renderGenderField()
@@ -245,7 +264,7 @@ export default {
         const inflectionLabel = h('input', {
             class: 'input',
             type: 'text',
-            placeholder: '变格 / 变位类型说明（如：第一变位法）',
+            placeholder: currentTerms().inflectionTypePlaceholder,
             value: data.inflectionType.label
         })
 
@@ -253,7 +272,7 @@ export default {
             class: 'input',
             type: 'text',
             lang: lang,
-            placeholder: stemsMeta?.placeholder || '主要部分，如 am、λόγ',
+            placeholder: stemsMeta?.placeholder || currentTerms().stems.placeholder,
             value: data.stems.base || '',
             oninput: () => refreshGenerateBtn()
         })
@@ -264,7 +283,7 @@ export default {
         /** 该词性是否用「主要部分」：没有 paradigm 模板、或模板声明 stems: false 时不用 */
         function updateStemsVisibility() {
             const tpl = getParadigmTemplate(grammarDoc, posSelect.value)
-            const needed = !!tpl && tpl.stems !== false
+            const needed = grammarDoc?.paradigm !== false && !!tpl && tpl.stems !== false
             stemsRow.hidden = !needed
             extraPartsSlot.hidden = !needed
             if (!needed) {
@@ -280,40 +299,59 @@ export default {
             onclick: onGenerate
         }, '生成表格')
 
-        /* ---------- 语法性（仅名词） ---------- */
+        /* ---------- 词性自己声明的属性字段（语法性 / 自他…） ---------- */
 
         const genderSlot = h('div', {})
 
         function renderGenderField() {
             genderSlot.replaceChildren()
-            if (posSelect.value !== 'noun') return
+            const defs = getFieldDefs(grammarDoc, posSelect.value)
+            if (!defs.length) return
 
-            const options = getGenderOptions(grammarDoc, 'noun')
-            if (!options.length) return
+            for (const def of defs) {
+                const raw = data.attributes[def.key]
+                const selected = def.multi
+                    ? (Array.isArray(raw) ? raw.map(String) : (raw ? [String(raw)] : []))
+                    : (raw ? [String(raw)] : [])
 
-            const chips = h('div', { class: 'chip-group' },
-                ...options.map((g) => {
-                    const label = GENDERS.find((x) => x.value === g)
-                    const active = data.gender.includes(g)
-                    return h('button', {
-                        class: 'chip' + (active ? ' chip--active' : ''),
-                        type: 'button',
-                        'aria-pressed': String(active),
-                        onclick: (e) => {
-                            const i = data.gender.indexOf(g)
-                            if (i >= 0) data.gender.splice(i, 1)
-                            else data.gender.push(g)
-                            data.gender = normalizeGenders(data.gender, 'noun')
-                            e.currentTarget.classList.toggle('chip--active', data.gender.includes(g))
-                            e.currentTarget.setAttribute('aria-pressed', String(data.gender.includes(g)))
-                            renderParadigmBlock()
-                        }
-                    }, label ? label.label : g)
-                })
-            )
-
-            genderSlot.appendChild(field('语法性', chips,
-                '可多选（如 common gender 同时为阳性与阴性）。只显示所选性别的变格列。'))
+                const chips = h('div', { class: 'chip-group' },
+                    ...def.options.map((opt) => {
+                        const on = selected.includes(opt.value)
+                        return h('button', {
+                            class: 'chip' + (on ? ' chip--active' : ''),
+                            type: 'button',
+                            'aria-pressed': String(on),
+                            onclick: (e) => {
+                                const btn = e.currentTarget
+                                if (def.multi) {
+                                    const list = Array.isArray(data.attributes[def.key])
+                                        ? [...data.attributes[def.key]]
+                                        : (data.attributes[def.key] ? [data.attributes[def.key]] : [])
+                                    const i = list.indexOf(opt.value)
+                                    if (i >= 0) list.splice(i, 1)
+                                    else list.push(opt.value)
+                                    if (list.length) data.attributes[def.key] = list
+                                    else delete data.attributes[def.key]
+                                    const now = list.includes(opt.value)
+                                    btn.classList.toggle('chip--active', now)
+                                    btn.setAttribute('aria-pressed', String(now))
+                                } else {
+                                    const next = selected[0] === opt.value ? '' : opt.value
+                                    if (next) data.attributes[def.key] = next
+                                    else delete data.attributes[def.key]
+                                    for (const other of btn.parentNode.children) {
+                                        const active = other === btn && next !== ''
+                                        other.classList.toggle('chip--active', active)
+                                        other.setAttribute('aria-pressed', String(active))
+                                    }
+                                }
+                                renderParadigmBlock()
+                            }
+                        }, opt.label)
+                    })
+                )
+                genderSlot.appendChild(field(def.label, chips, def.hint || ''))
+            }
         }
 
         // 语法锚点下拉：特殊变格/变位 + 语法速查条目
@@ -331,15 +369,21 @@ export default {
             field('词性', posSelect, '')
         ))
 
+        const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)
+        const inflectionTypeHintEl = h('span', { class: 'field__hint' }, currentTerms().inflectionTypeHint)
+        const anchorHintEl = h('span', { class: 'field__hint' }, currentTerms().anchorHint)
         const inflectionRow = h('div', { class: 'word-form__row' },
-            field('变格 / 变位类型', inflectionLabel, '显示在词卡正面的徽章。'),
-            field('语法锚点', inflectionRef, '选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。')
+            h('label', { class: 'field' }, inflectionTypeLabelEl, inflectionLabel, inflectionTypeHintEl),
+            h('label', { class: 'field' }, h('span', { class: 'field__label' }, '语法锚点'), inflectionRef, anchorHintEl)
         )
 
-        const stemsRow = field(stemsMeta?.label || '主要部分',
+        const stemsLabelEl = h('span', { class: 'field__label' }, stemsMeta?.label || currentTerms().stems.label)
+        const stemsHintEl = h('span', { class: 'field__hint' }, stemsMeta?.hint || currentTerms().stems.hint)
+        const stemsRow = h('label', { class: 'field' },
+            stemsLabelEl,
             h('div', { class: 'field__row' }, principalInput),
-            stemsMeta?.hint
-                || '词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。')
+            stemsHintEl
+        )
 
         // 生成按钮单独一行：没有「主要部分」的词性（如满语名词）也要能生成
         const generateRow = h('div', { class: 'word-form__row' },
@@ -428,7 +472,7 @@ export default {
             if (!parts.length) return
 
             extraPartsSlot.appendChild(h('div', { class: 'field__hint' },
-                '以下主要部分可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。'))
+                currentTerms().extraPartsHint))
 
             for (const part of parts) {
                 const setValue = (raw) => {
@@ -563,14 +607,18 @@ export default {
 
         /* ---------- 表格块渲染 ---------- */
 
-        /** 名词只渲染所选性别的列 */
+        /** 只渲染所选「变格列字段」（通常是语法性）对应的列 */
         function hiddenGenderColumns(tpl) {
-            if (data.pos !== 'noun' || !data.gender.length) return []
+            const field = fieldDefsOfTemplate(tpl, data.pos).find((f) => f.declensionColumns)
+            if (!field) return []
+            const raw = data.attributes[field.key]
+            const picked = Array.isArray(raw) ? raw : (raw ? [raw] : [])
+            if (!picked.length) return []
             const hidden = []
             for (const table of tpl?.tables || []) {
                 for (const col of table.columns || []) {
                     const g = genderOfColumn(col.key)
-                    if (g && !data.gender.includes(g)) hidden.push(col.key)
+                    if (g && !picked.includes(g)) hidden.push(col.key)
                 }
             }
             return hidden
@@ -578,6 +626,7 @@ export default {
 
         function renderParadigmBlock() {
             paradigmSlot.replaceChildren()
+            if (grammarDoc?.paradigm === false) return
             const tpl = getParadigmTemplate(grammarDoc, data.pos)
             if (!tpl) return
 
@@ -587,7 +636,7 @@ export default {
 
             const wrap = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, `${posLabel(data.pos)}变${data.pos === 'verb' ? '位' : '格'}表格`),
+                    h('span', {}, fillTerms(currentTerms().paradigmTitle, posLabel(data.pos))),
                     h('span', { class: 'field__hint' }, '仅填写你需要的形式，空白格不渲染')
                 )
             )
@@ -750,7 +799,7 @@ export default {
             const list = h('div', { class: 'word-form__list' })
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, '补充形式（不定式、命令式、动名词、日语活用等）'),
+                    h('span', { class: 'js-extra-forms-title' }, currentTerms().extraForms),
                     h('button', {
                         class: 'btn btn--ghost btn--sm', type: 'button',
                         onclick: () => {
@@ -1024,7 +1073,8 @@ export default {
                 language: lang,
                 lemma,
                 pos: posSelect.value,
-                gender: normalizeGenders(data.gender, posSelect.value),
+                gender: normalizeGenders(
+                    Array.isArray(data.attributes.gender) ? data.attributes.gender : [], posSelect.value),
                 inflectionType: {
                     label: inflectionLabel.value.trim(),
                     grammarRef

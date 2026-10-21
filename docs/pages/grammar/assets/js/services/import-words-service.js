@@ -10,7 +10,8 @@ import { POS_LIST, normalizeParadigm, normalizeStems, normalizeGenders } from '.
 import { addOrMerge } from '../store/word-store.js'
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
-const LANG_VALUES = new Set(LANGUAGES.map((l) => l.code))
+/** 语言 code 集合（LANGUAGES 是启动后才填充的，所以要按需计算） */
+const langValues = () => new Set(LANGUAGES.map((l) => l.code))
 
 /* ---------------- 解析 ---------------- */
 
@@ -39,7 +40,7 @@ export function validateWord(raw) {
 
     const language = String(raw.language || '').trim()
     if (!language) return 'language 字段为空'
-    if (!LANG_VALUES.has(language)) return `未知语言：${language}`
+    if (!langValues().has(language)) return `未知语言：${language}`
 
     const lemma = String(raw.lemma || '').trim()
     if (!lemma) return 'lemma 字段为空'

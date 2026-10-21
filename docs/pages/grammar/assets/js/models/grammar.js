@@ -96,6 +96,116 @@ export function getParadigmTemplate(doc, pos) {
  * 该词性可用的语法性：从模板列 key（`{数}_{性}`）里推导
  * 例如 la noun → ['m','f','n']，fr noun → ['m','f']
  */
+/**
+ * 该词性声明的额外属性字段（如日语的「自他」）。
+ * `paradigms[pos].attributes = [{ key, label, hint?, multi?, options: [{ value, label }] }]`
+ */
+export function getAttributeFields(doc, pos) {
+    const tpl = getParadigmTemplate(doc, pos)
+    if (!tpl || !Array.isArray(tpl.attributes)) return []
+    return tpl.attributes.filter((f) => f && f.key && Array.isArray(f.options) && f.options.length)
+}
+
+/**
+ * 该词性在生词表单里要显示的「属性字段」。
+ *
+ * 数据里用 `paradigms[pos].fields` 声明（每个字段：是否用、显示什么、有哪些选项）：
+ *
+ *   "fields": [
+ *     { "key": "gender", "label": "语法性", "multi": true, "declensionColumns": true,
+ *       "options": [{ "value": "m", "label": "阳性" }, …] },
+ *     { "key": "transitivity", "label": "自他",
+ *       "options": [{ "value": "trans", "label": "他动词" }, …] }
+ *   ]
+ *
+ * 没有声明时退回旧行为：如果变格列名带 `_m` / `_f` / `_n` 后缀，就推导出一个「语法性」字段。
+ * 这样已有语言（la / grc / sa / he / de / fr）不用改数据，日语只要显式声明「自他」。
+ */
+/**
+ * 该语言在该词性下要用的界面用词（来自 `data/grammar/<code>.json` 的 `terms`）。
+ * 语言级的值可以被 `terms.byPos[pos]` 覆盖；没有声明的键返回空字符串
+ * （不在代码里留默认文案，文案由每个语言自己写）。
+ */
+const TERM_KEYS = [
+    'inflectionType', 'inflectionTypePlaceholder', 'inflectionTypeHint',
+    'special', 'indeclinable', 'paradigmTitle', 'anchorHint', 'extraForms',
+    'extraPartsHint',
+]
+
+export function termsOf(doc, pos) {
+    const base = (doc && typeof doc.terms === 'object' && doc.terms) || {}
+    const over = (pos && base.byPos && typeof base.byPos === 'object' ? base.byPos[pos] : null) || {}
+    const pick = (key) => {
+        const v = over[key] !== undefined ? over[key] : base[key]
+        return typeof v === 'string' ? v : ''
+    }
+    const out = {}
+    for (const key of TERM_KEYS) out[key] = pick(key)
+    const stems = over.stems || base.stems || {}
+    out.stems = {
+        label: typeof stems.label === 'string' ? stems.label : '',
+        placeholder: typeof stems.placeholder === 'string' ? stems.placeholder : '',
+        hint: typeof stems.hint === 'string' ? stems.hint : '',
+    }
+    return out
+}
+
+/** `'{pos}变格表格'` 这类模板里的 `{pos}` 用词性名替换 */
+export function fillTerms(text, posLabel) {
+    return String(text || '').replace(/\{pos\}/g, String(posLabel ?? ''))
+}
+
+export function getFieldDefs(doc, pos) {
+    return fieldDefsOfTemplate(getParadigmTemplate(doc, pos), pos)
+}
+
+/** 只看模板的版本（词卡 / 放大卡只有模板，没有整份文档） */
+export function fieldDefsOfTemplate(tpl, pos) {
+    if (!tpl) return []
+    const declared = Array.isArray(tpl.fields) ? tpl.fields : []
+    const out = []
+    for (const f of declared) {
+        if (!f || !f.key || !Array.isArray(f.options) || !f.options.length) continue
+        out.push({
+            key: String(f.key),
+            label: f.label || f.key,
+            hint: f.hint || '',
+            multi: f.multi === true,
+            declensionColumns: f.declensionColumns === true,
+            options: f.options.map((o) => ({ value: String(o.value), label: o.label || String(o.value) })),
+        })
+    }
+    if (out.length) return out
+
+    // 兼容旧数据：只有名词按变格列名推导语法性（与旧行为一致）；
+    // 其它词性要显示字段请在 `fields` 里显式声明
+    if (pos && pos !== 'noun') return []
+    const cols = new Set()
+    for (const table of tpl.tables || []) {
+        for (const col of table.columns || []) cols.add(String(col.key))
+    }
+    const genders = ['m', 'f', 'n'].filter((g) => [...cols].some((k) => k.endsWith('_' + g)))
+    if (!genders.length) return []
+    const labels = { m: '阳性', f: '阴性', n: '中性' }
+    return [{
+        key: 'gender', label: '语法性', hint: '', multi: true, declensionColumns: true,
+        options: genders.map((g) => ({ value: g, label: labels[g] || g })),
+    }]
+}
+
+/** 该词性的「用于筛选变格列」的字段（通常是语法性），没有则返回 null */
+export function getDeclensionField(doc, pos) {
+    return getFieldDefs(doc, pos).find((f) => f.declensionColumns) || null
+}
+
+/** 词条里某个字段的取值（统一成数组） */
+export function fieldValues(word, key) {
+    const raw = word && word.attributes ? word.attributes[key] : null
+    if (Array.isArray(raw)) return raw.map(String).filter(Boolean)
+    if (typeof raw === 'string' && raw.trim()) return [raw.trim()]
+    return []
+}
+
 export function getGenderOptions(doc, pos = 'noun') {
     const tpl = getParadigmTemplate(doc, pos)
     const cols = new Set()

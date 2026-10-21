@@ -1,7 +1,8 @@
 import { h } from '../utils/dom.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
-import { genderOfColumn } from '../models/grammar.js'
+import { fieldDefsOfTemplate, fieldValues, genderOfColumn } from '../models/grammar.js'
 import { isRtl } from '../utils/text-normalize.js'
+import { getLanguage } from '../data/languages.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 
@@ -72,13 +73,15 @@ export function openCardOverlay(word, opts = {}) {
 
     /** 名词只显示所选性别的列（其它列整列不渲染） */
     function hiddenGenderColumns(tpl) {
-        const genders = Array.isArray(word.gender) ? word.gender : []
-        if (word.pos !== 'noun' || genders.length === 0) return []
+        const field = fieldDefsOfTemplate(tpl, word.pos).find((f) => f.declensionColumns)
+        if (!field) return []
+        const picked = fieldValues(word, field.key)
+        if (!picked.length) return []
         const hidden = []
         for (const table of tpl?.tables || []) {
             for (const col of table.columns || []) {
                 const g = genderOfColumn(col.key)
-                if (g && !genders.includes(g)) hidden.push(col.key)
+                if (g && !picked.includes(g)) hidden.push(col.key)
             }
         }
         return hidden
@@ -90,7 +93,9 @@ export function openCardOverlay(word, opts = {}) {
         body.replaceChildren()
 
         /* ---------- 顶部：lemma + badges ---------- */
+        const langMeta = getLanguage(word.language)
         const canPosRef = typeof onGrammarRef === 'function' && !!posGrammarRef
+            && langMeta?.grammar !== false
         const badges = h('div', { class: 'card-overlay__badges' },
             h(canPosRef ? 'button' : 'span', {
                 class: 'badge' + (canPosRef ? ' badge--accent badge--clickable' : ''),
@@ -102,7 +107,7 @@ export function openCardOverlay(word, opts = {}) {
             }, posLabel(word.pos))
         )
         const it = word.inflectionType
-        if (it && it.label) {
+        if (it && it.label && langMeta?.paradigm !== false) {
             const clickable = !!(it.grammarRef && onGrammarRef)
             badges.appendChild(h(clickable ? 'button' : 'span', {
                 class: 'badge badge--accent' + (clickable ? ' badge--clickable' : ''),

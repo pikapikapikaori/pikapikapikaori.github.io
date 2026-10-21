@@ -2,6 +2,34 @@
     "version": 1,
     "language": "zh-cls",
     "name": "古汉语",
+    "native": "文言",
+    "classical": true,
+    "group": {
+        "id": "classical",
+        "title": "古典语言",
+        "order": 1
+    },
+    "order": 7,
+    "vertical": false,
+    "rtl": false,
+    "grammar": false,
+    "paradigm": false,
+    "terms": {
+        "inflectionType": "用法类型",
+        "inflectionTypePlaceholder": "用法类型说明（如：名词作动词）",
+        "inflectionTypeHint": "显示在词卡正面的徽章。",
+        "special": "特殊用法（自行填写）",
+        "indeclinable": "无形态变化",
+        "paradigmTitle": "{pos}变化表",
+        "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写说明。",
+        "extraForms": "补充形式（其他用法）",
+        "stems": {
+            "label": "主要部分",
+            "placeholder": "主要部分",
+            "hint": "古汉语没有形态变化，一般无需填写。"
+        },
+        "extraPartsHint": "以下主要部分可以留空。"
+    },
     "sections": [
         {
             "id": "zh-cls-parts-of-speech",

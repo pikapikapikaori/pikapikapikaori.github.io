@@ -49,6 +49,11 @@ export default {
             { label: '语法速查' }
         ])
 
+        if (language.grammar === false) {
+            location.replace(`#/lang/${lang}/words`)
+            return
+        }
+
         const doc = await loadGrammar(lang)
         if (!doc) { renderNoData(main, lang, language); return }
 

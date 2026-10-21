@@ -2,6 +2,42 @@
     "version": 1,
     "language": "ja-cls",
     "name": "古典日语",
+    "native": "古文",
+    "classical": true,
+    "group": {
+        "id": "classical",
+        "title": "古典语言",
+        "order": 1
+    },
+    "order": 6,
+    "vertical": false,
+    "rtl": false,
+    "grammar": true,
+    "paradigm": true,
+    "terms": {
+        "inflectionType": "活用类型",
+        "inflectionTypePlaceholder": "活用类型说明（如：四段活用）",
+        "inflectionTypeHint": "显示在词卡正面的徽章。",
+        "special": "特殊活用（自行填写）",
+        "indeclinable": "无活用",
+        "paradigmTitle": "{pos}活用表",
+        "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写活用类型。",
+        "extraForms": "补充形式（其他活用形）",
+        "stems": {
+            "label": "词干",
+            "placeholder": "词干（一般留空，由辞书形推导）",
+            "hint": "日语以辞书形为基本形态，词干可留空。"
+        },
+        "extraPartsHint": "以下词干可以留空，留空时按活用类型自动推导。",
+        "byPos": {
+            "verb": {
+                "inflectionType": "活用类型（四段・二段・变格活用）"
+            },
+            "adj": {
+                "inflectionType": "活用类型（ク活用・シク活用）"
+            }
+        }
+    },
     "sections": [
         {
             "id": "ja-cls-parts-of-speech",

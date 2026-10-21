@@ -2,6 +2,45 @@
     "version": 1,
     "language": "mnc",
     "name": "满语",
+    "native": "ᠮᠠᠨᠵᡠ",
+    "classical": true,
+    "group": {
+        "id": "classical",
+        "title": "古典语言",
+        "order": 1
+    },
+    "order": 5,
+    "vertical": true,
+    "rtl": false,
+    "grammar": true,
+    "paradigm": true,
+    "terms": {
+        "inflectionType": "词形类型",
+        "inflectionTypePlaceholder": "词形类型说明（如：-sa 型复数）",
+        "inflectionTypeHint": "显示在词卡正面的徽章。",
+        "special": "特殊词形（自行填写）",
+        "indeclinable": "不变形",
+        "paradigmTitle": "{pos}词形表",
+        "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
+        "extraForms": "补充形式（其他词形）",
+        "stems": {
+            "label": "词干",
+            "placeholder": "词干，如 ara-",
+            "hint": "接后缀的部分；满语名词的「词干」与单数形式相同。"
+        },
+        "extraPartsHint": "以下部分可以留空，留空时按所选词形类型的规则推导。",
+        "byPos": {
+            "noun": {
+                "inflectionType": "复数类型",
+                "special": "特殊复数（自行填写）"
+            },
+            "verb": {
+                "inflectionType": "活用类型",
+                "special": "特殊活用（自行填写）",
+                "indeclinable": "无活用"
+            }
+        }
+    },
     "groups": [
         {
             "id": "pron",

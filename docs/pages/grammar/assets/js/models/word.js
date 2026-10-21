@@ -34,6 +34,34 @@ export function genderLabel(gender) {
 }
 
 /** 只有名词有语法性，其它词性一律清空 */
+/**
+ * 词条的「属性字段」取值（语法性、自他…）：只保留有值的内容。
+ * 单选字段存字符串，多选字段（如语法性）存字符串数组。
+ */
+/** 旧数据里 gender 是独立字段，统一迁进 attributes.gender */
+function mergeLegacyGender(partial) {
+    const attrs = { ...(partial && partial.attributes ? partial.attributes : {}) }
+    const legacy = Array.isArray(partial && partial.gender) ? partial.gender.filter(Boolean) : []
+    if (legacy.length && !attrs.gender) attrs.gender = legacy
+    return attrs
+}
+
+export function normalizeAttributes(input) {
+    const out = {}
+    if (!input || typeof input !== 'object') return out
+    for (const [key, value] of Object.entries(input)) {
+        if (!key) continue
+        if (Array.isArray(value)) {
+            const list = value.map((x) => String(x ?? '').trim()).filter(Boolean)
+            if (list.length) out[key] = [...new Set(list)]
+            continue
+        }
+        const v = String(value ?? '').trim()
+        if (v) out[key] = v
+    }
+    return out
+}
+
 export function normalizeGenders(value, pos) {
     if (pos !== 'noun') return []
     const list = Array.isArray(value) ? value : (value ? [value] : [])
@@ -68,7 +96,10 @@ export function createWord(partial) {
         pos: partial.pos || 'other',
 
         inflectionType: partial.inflectionType || { label: '', grammarRef: null },
-        gender: normalizeGenders(partial.gender, partial.pos || 'other'),
+        // 旧字段：只作为 attributes.gender 的镜像保留，方便老代码读取
+        gender: normalizeGenders(
+            (normalizeAttributes(mergeLegacyGender(partial)).gender || []), partial.pos || 'other'),
+        attributes: normalizeAttributes(mergeLegacyGender(partial)),
         paradigm: normalizeParadigm(partial.paradigm),
         stems: normalizeStems(partial.stems ?? partial.stem),
 

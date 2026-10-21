@@ -6,7 +6,7 @@
     gap: var(--sp-2);
     min-height: 36px;
     padding: 0 var(--sp-3);
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     border: 1px solid var(--c-border);
     background: var(--c-bg-elev);
     color: var(--c-fg);
@@ -134,7 +134,7 @@
     height: 38px;
     padding: 0 var(--sp-4);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     background: var(--c-bg-elev);
     color: var(--c-fg-muted);
     font-size: var(--fs-md);
@@ -202,7 +202,7 @@
     min-height: 34px;
     padding: 4px var(--sp-3);
     border: 1px solid transparent;
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     background: transparent;
     color: var(--c-fg);
     text-align: left;
@@ -247,7 +247,7 @@
     width: 100%;
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     color: var(--c-fg);
     font-size: var(--fs-md);
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
@@ -260,6 +260,18 @@
     min-height: 38px;
     padding: 0 var(--sp-3);
     line-height: var(--lh-tight);
+}
+
+/* 去掉原生外观：不然 Safari 会忽略 border-radius / border；箭头自己画 */
+.select {
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: start;
+    padding-right: 32px;
+    background-image: var(--img-chevron);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px 12px;
 }
 
 .input:focus,
@@ -300,7 +312,7 @@
 .card {
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-lg);
+    border-radius: var(--r-surface);
     padding: var(--sp-4);
 }
 
@@ -341,7 +353,7 @@
     padding: var(--sp-4);
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-lg);
+    border-radius: var(--r-surface);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     overflow-x: hidden;
@@ -609,7 +621,7 @@ button.word-card__derivative {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--r-sm);
+    border-radius: var(--r-control);
     border: none;
     background: transparent;
     color: var(--c-fg-muted);
@@ -779,7 +791,7 @@ button.word-card__derivative {
     overflow: auto;
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-lg);
+    border-radius: var(--r-surface);
     box-shadow: var(--shadow-lg);
     animation: pop-in .2s var(--ease);
 }
@@ -858,7 +870,7 @@ button.word-card__derivative {
 
 .toast {
     padding: var(--sp-2) var(--sp-4);
-    border-radius: var(--r-full);
+    border-radius: var(--r-surface);
     background: var(--c-fg);
     color: var(--c-bg);
     font-size: var(--fs-sm);
@@ -905,7 +917,7 @@ button.word-card__derivative {
 .grammar-table {
     width: 100%;
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     overflow: hidden;
     margin: var(--sp-2) 0 var(--sp-4);
     font-size: var(--fs-sm);
@@ -1018,7 +1030,7 @@ button.word-card__derivative {
     width: auto;
     min-width: 100%;
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     font-size: var(--fs-sm);
     margin-bottom: var(--sp-2);
 }
@@ -1198,7 +1210,7 @@ button.word-card__derivative {
     gap: var(--sp-1);
     padding: var(--sp-5) var(--sp-4);
     border: 1.5px dashed var(--c-border-strong);
-    border-radius: var(--r-md);
+    border-radius: var(--r-surface);
     background: var(--c-bg-subtle);
     color: var(--c-fg-muted);
     text-align: center;
@@ -1252,7 +1264,7 @@ button.word-card__derivative {
 
 .import-result__errors {
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-surface);
     padding: var(--sp-3);
     font-size: var(--fs-sm);
     background: var(--c-bg-subtle);
@@ -1326,7 +1338,7 @@ button.word-card__derivative {
     height: min(90vh, 900px);
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-lg);
+    border-radius: var(--r-surface);
     box-shadow: var(--shadow-lg);
     overflow: hidden;
     display: flex;
@@ -1343,7 +1355,7 @@ button.word-card__derivative {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     border: none;
     background: transparent;
     color: var(--c-fg-muted);
@@ -1427,7 +1439,7 @@ button.word-card__derivative {
     padding: var(--sp-3);
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-surface);
     box-shadow: var(--shadow-md);
     writing-mode: vertical-lr;
     text-orientation: mixed;
@@ -1462,7 +1474,7 @@ button.word-card__derivative {
     gap: var(--sp-2);
     padding: var(--sp-2) var(--sp-3);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-control);
     background: var(--c-bg-elev);
     color: var(--c-fg);
     text-align: start;
@@ -1506,7 +1518,7 @@ button.word-card__derivative {
     padding: var(--sp-1);
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
+    border-radius: var(--r-surface);
     box-shadow: var(--shadow-lg);
     font-size: var(--fs-sm);
 }
@@ -1523,7 +1535,7 @@ button.word-card__derivative {
     justify-content: space-between;
     gap: var(--sp-2);
     padding: 6px var(--sp-2);
-    border-radius: var(--r-sm);
+    border-radius: var(--r-control);
     color: var(--c-fg);
     cursor: pointer;
     white-space: normal;

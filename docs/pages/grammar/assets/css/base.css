@@ -106,6 +106,6 @@ pre,
     padding: var(--sp-2) var(--sp-3);
     background: var(--c-accent);
     color: var(--c-accent-fg);
-    border-radius: var(--r-sm);
+    border-radius: var(--r-control);
     z-index: 999;
 }

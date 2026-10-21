@@ -10,12 +10,10 @@
     --sp-6: 32px;
     --sp-7: 48px;
 
-    /* 圆角 */
-    --r-sm: 6px;
-    --r-md: 10px;
-    --r-lg: 16px;
-    --r-xl: 22px;
-    --r-full: 999px;
+    /* 圆角：只分两档——卡片 / 弹层 / 词卡用 surface，控件（输入框 / 按钮 / 表格…）用 control */
+    --r-surface: 16px;
+    --r-control: 6px;
+    --r-full: 999px;   /* 胶囊（来源 tab、徽章）与圆点 */
 
     /* 字号 */
     --fs-xs: 12px;
@@ -65,6 +63,8 @@
     --c-fg-subtle: #8a8a86;
     --c-fg-invert: #ffffff;
 
+    --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%235b5b58' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
     --c-border: #e3e2db;
     --c-border-strong: #cfcec6;
 
@@ -97,6 +97,8 @@
     --c-fg-muted: #a0a3ac;
     --c-fg-subtle: #6f727c;
     --c-fg-invert: #0f1115;
+
+    --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23a0a3ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 
     --c-border: #262b36;
     --c-border-strong: #3a4150;
@@ -131,6 +133,8 @@
         --c-fg-muted: #a0a3ac;
         --c-fg-subtle: #6f727c;
         --c-fg-invert: #0f1115;
+
+        --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23a0a3ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 
         --c-border: #262b36;
         --c-border-strong: #3a4150;

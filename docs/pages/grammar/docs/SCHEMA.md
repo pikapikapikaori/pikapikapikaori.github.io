@@ -426,6 +426,10 @@ const MIGRATIONS = {
 
 用于生词表单与词卡中的结构化变位/变格表格。按词性分表。
 
+- 一个词性有多张表时（如拉丁语动词的 11 张），表单和词卡都用 `tables[].title` 做成 tab 切换，
+  同一时间只显示一张；只有一张表时不显示 tab 条。
+- 单表时表单用卡片标题（`terms.paradigmTitle`）、词卡用表自己的 `title`，表内不再重复。
+
 ```json
 "paradigms": {
   "<pos>": {

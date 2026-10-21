@@ -435,9 +435,15 @@
     padding: var(--sp-2) var(--sp-4) var(--sp-4);
 }
 
+/* 词卡背面：每段之间一条分割线（同设置页 .settings-row） */
 .word-card__section {
-    margin-bottom: var(--sp-3);
     min-width: 0;
+}
+
+.word-card__section + .word-card__section {
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--c-border);
 }
 
 .word-card__section-title {
@@ -669,6 +675,15 @@ button.word-card__derivative {
     border-radius: 50%;
     background: currentColor;
     flex-shrink: 0;
+}
+
+/* 表格 / 面板的 tab 栏 */
+.tab-bar--tables {
+    margin-bottom: var(--sp-2);
+}
+
+.tab-body {
+    min-width: 0;
 }
 
 /* ---------- 徽章 ---------- */

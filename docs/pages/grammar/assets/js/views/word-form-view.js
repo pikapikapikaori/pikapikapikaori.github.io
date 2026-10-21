@@ -10,6 +10,7 @@ import {
     getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, termsOf, fillTerms
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
+import { createTabGroup } from '../components/tabs.js'
 import { generateParadigm } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
@@ -186,6 +187,8 @@ export default {
 
         /* ---------- 外部数据源：按一次查全部，多个词性弹窗选 ---------- */
 
+        /** 当前选中的变格 / 变位表（多表时用 tab 切换） */
+        let paradigmTab = null
         /** 上一次由查询自动填的「变格 / 变位类型」文案，用于切换候选时判断能否覆盖 */
         let autoInflectionLabel = ''
         /** 正在套用查询结果时，词性变更不应触发「清空下面所有内容」 */
@@ -703,15 +706,16 @@ export default {
             // 只有一张表时，标题行直接占掉表格自带的标题位置（表格不再重复一遍）
             const singleTable = tables.length <= 1
 
-            const wrap = h('div', { class: 'word-form__group' }, stemsBlock)
-            if (!singleTable) wrap.appendChild(titleRow)
+            const wrap = h('div', { class: 'word-form__group' }, stemsBlock, titleRow)
 
+            const panels = []
             for (const tableTpl of tables) {
                 const tableData = data.paradigm[tableTpl.key] || {}
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang,
                     mode: 'edit',
-                    showTitle: !singleTable,
+                    // 单表用上面的标题行，多表用 tab 名，表内不再重复标题
+                    showTitle: false,
                     hideColumns: hiddenGenderColumns(tpl),
                     onGrammarRef: (ref) => {
                         location.hash = `#/grammar/${lang}#${ref}`
@@ -726,13 +730,22 @@ export default {
                         }
                     }
                 })
-                if (tbl) wrap.appendChild(tbl)
+                if (tbl) panels.push({ key: tableTpl.key, label: tableTpl.title || tableTpl.key, node: tbl })
             }
 
-            // 单表：标题行紧贴表格上方，替代被去掉的那行表名
-            if (singleTable && wrap.querySelector('.paradigm-block')) {
-                wrap.insertBefore(titleRow, wrap.querySelector('.paradigm-block'))
+            // 多张表用 tab 切换（输入内容在各表自己的数据里，切换不会丢）
+            if (panels.length > 1) {
+                if (!panels.some((p) => p.key === paradigmTab)) paradigmTab = panels[0].key
+                wrap.appendChild(createTabGroup({
+                    items: panels,
+                    active: paradigmTab,
+                    onChange: (key) => { paradigmTab = key },
+                    className: 'tab-bar--tables'
+                }).el)
+            } else if (panels.length === 1) {
+                wrap.appendChild(panels[0].node)
             }
+
             // 表格句尾提示
             wrap.appendChild(h('div', { class: 'field__hint word-form__table-hint' },
                 '仅填写你需要的形式，空白格不渲染'))

@@ -4,6 +4,7 @@ import { fieldDefsOfTemplate, fieldValues, genderOfColumn } from '../models/gram
 import { isRtl } from '../utils/text-normalize.js'
 import { getLanguage } from '../data/languages.js'
 import { createSourceTabs } from './source-tabs.js'
+import { createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 
 let overlayEl = null
@@ -36,6 +37,8 @@ export function openCardOverlay(word, opts = {}) {
     // 默认落在「有含义」的那个来源上，免得一打开是对着空 tab
     const sourceWithMeanings = sources.find((s) => (word.meanings || []).some((m) => (m.source || 'manual') === s))
     let activeSource = sourceWithMeanings || sources[0] || 'manual'
+    /** 多张变格 / 变位表时当前选中的那张 */
+    let activeTable = null
 
     const backdrop = h('div', {
         class: 'card-overlay-backdrop',
@@ -133,14 +136,6 @@ export function openCardOverlay(word, opts = {}) {
             badges
         )
 
-        /* ---------- source tabs ---------- */
-        if (sources.length > 1) {
-            body.appendChild(createSourceTabs(sources, activeSource, (s) => {
-                activeSource = s
-                renderBody()
-            }))
-        }
-
         /* ---------- 主要部分（在含义之前） ---------- */
         const baseStem = primaryStem(word)
         if (baseStem) {
@@ -157,31 +152,52 @@ export function openCardOverlay(word, opts = {}) {
             ))
         }
 
-        /* ---------- 含义（最先） ---------- */
+        /* ---------- 含义（来源 tab 收在这一段里） ---------- */
         const meanings = pick(word.meanings)
-        if (meanings.length) {
+        const showTabs = sources.length > 1
+        if (meanings.length || showTabs) {
             body.appendChild(ovSection('含义',
-                h('ul', { class: 'word-card__meanings' },
-                    ...meanings.map((m) => h('li', {
-                        class: 'word-card__meaning',
-                        lang: m.lang === 'en' ? 'en' : undefined
-                    }, h('bdi', {}, m.text)))
-                )
+                showTabs
+                    ? createSourceTabs(sources, activeSource, (s) => {
+                        activeSource = s
+                        renderBody()
+                    })
+                    : null,
+                meanings.length
+                    ? h('ul', { class: 'word-card__meanings' },
+                        ...meanings.map((m) => h('li', {
+                            class: 'word-card__meaning',
+                            lang: m.lang === 'en' ? 'en' : undefined
+                        }, h('bdi', {}, m.text)))
+                    )
+                    : h('div', { class: 'field__hint' }, '该来源没有含义')
             ))
         }
 
         /* ---------- paradigm 表格 ---------- */
         if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
-            for (const tableTpl of paradigmTpl.tables || []) {
+            const panels = []
+            const candidates = (paradigmTpl.tables || []).filter((t) => word.paradigm[t.key])
+            for (const tableTpl of candidates) {
                 const tableData = word.paradigm[tableTpl.key]
-                if (!tableData) continue
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang: language,
                     mode: 'view',
                     onGrammarRef: wrappedGrammarRef,
+                    // 只有一张表时保留表自己的标题；多张时用 tab 名
+                    showTitle: candidates.length <= 1,
                     hideColumns: hiddenGenderColumns(paradigmTpl)
                 })
-                if (tbl) body.appendChild(tbl)
+                if (tbl) panels.push({ key: tableTpl.key, label: tableTpl.title || tableTpl.key, node: tbl })
+            }
+            if (panels.length) {
+                if (!panels.some((p) => p.key === activeTable)) activeTable = panels[0].key
+                body.appendChild(ovSection(null, createTabGroup({
+                    items: panels,
+                    active: activeTable,
+                    onChange: (key) => { activeTable = key },
+                    className: 'tab-bar--tables'
+                }).el))
             }
         }
 
@@ -307,7 +323,7 @@ export function closeCardOverlay() {
 
 function ovSection(title, ...children) {
     return h('div', { class: 'word-card__section' },
-        h('div', { class: 'word-card__section-title' }, title),
+        title ? h('div', { class: 'word-card__section-title' }, title) : null,
         ...children
     )
 }

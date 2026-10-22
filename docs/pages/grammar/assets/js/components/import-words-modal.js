@@ -6,7 +6,7 @@ import { h, svg } from '../utils/dom.js'
 import { openModal } from './modal.js'
 import { toast } from './toast.js'
 import {
-    parseWordJson, importWords, downloadPrompt
+    parseWordJson, importWords, previewWords, downloadPrompt
 } from '../services/import-words-service.js'
 
 /**
@@ -114,8 +114,13 @@ export function openImportWordsModal({
 
     const countEl = h('div', { class: 'field__hint' }, '')
 
+    const previewEl = h('div', { class: 'import-preview', hidden: true })
+
     function updateCount() {
         const v = textarea.value
+        // 内容变了，之前的预览结果就作废了
+        previewEl.hidden = true
+        previewEl.replaceChildren()
         if (!v.trim()) {
             countEl.textContent = ''
             countEl.style.color = ''
@@ -162,14 +167,47 @@ export function openImportWordsModal({
             textarea,
             countEl
         ),
+        previewEl,
         h('div', { class: 'field__hint' },
             '支持「单对象 / 数组 / { words: [...] }」三种格式。',
             '每条记录需包含 language、lemma、pos 字段。',
-            '同语言下 lemma + pos 相同的词条会自动合并，记录次数 +1。'
+            '同语言下 lemma + pos 相同的词条会自动合并，记录次数 +1。',
+            '可先点「预览」查看新增 / 合并 / 跳过三类计数。'
         )
     )
 
     /* ---------- 打开 ---------- */
+
+    let previewing = false
+
+    function readWords() {
+        const { words, error } = parseWordJson(textarea.value.trim())
+        if (error) {
+            toast.error(error, 5000)
+            return null
+        }
+        if (words.length === 0) {
+            toast.error('没有可导入的记录')
+            return null
+        }
+        return words
+    }
+
+    async function doPreview() {
+        if (previewing) return
+        const words = readWords()
+        if (!words) return
+        previewing = true
+        try {
+            const stats = await previewWords(userId, words)
+            renderPreview(stats, previewEl)
+            previewEl.scrollIntoView({ block: 'nearest' })
+        } catch (err) {
+            toast.error(`预览失败：${err.message}`, 5000)
+        } finally {
+            previewing = false
+        }
+    }
 
     const close = openModal({
         title,
@@ -177,23 +215,19 @@ export function openImportWordsModal({
         actions: [
             { label: '取消' },
             {
+                label: '预览',
+                // 必须同步返回 false，模态框才会保持打开
+                onClick: () => {
+                    doPreview()
+                    return false
+                }
+            },
+            {
                 label: '导入',
                 className: 'btn--primary',
                 onClick: async () => {
-                    const text = textarea.value.trim()
-                    if (!text) {
-                        toast.error('内容为空')
-                        return false
-                    }
-                    const { words, error } = parseWordJson(text)
-                    if (error) {
-                        toast.error(error, 5000)
-                        return false
-                    }
-                    if (words.length === 0) {
-                        toast.error('没有可导入的记录')
-                        return false
-                    }
+                    const words = readWords()
+                    if (!words) return false
 
                     let stats
                     try {
@@ -217,6 +251,55 @@ export function openImportWordsModal({
     return close
 }
 
+/* ---------------- 导入前预览 ---------------- */
+
+function renderPreview(stats, container) {
+    const { created, merged, skipped, total, errors, items } = stats
+
+    container.replaceChildren(
+        h('div', { class: 'import-result import-result--preview' },
+            h('div', { class: 'import-result__title' }, '导入预览'),
+            h('div', { class: 'field__hint' },
+                '以下为模拟结果，尚未写入任何数据；确认无误后点「导入」。'),
+            h('div', { class: 'import-result__stats' },
+                h('span', { class: 'badge badge--success' }, `新增 ${created}`),
+                h('span', { class: 'badge' }, `合并 ${merged}`),
+                skipped > 0
+                    ? h('span', { class: 'badge badge--danger' }, `跳过 ${skipped}`)
+                    : null,
+                h('span', { class: 'badge' }, `共 ${total}`)
+            ),
+            renderItemList('将新增', items.created),
+            renderItemList('将合并', items.merged),
+            renderErrors(errors)
+        )
+    )
+    container.hidden = false
+}
+
+function renderItemList(title, items) {
+    if (!items || items.length === 0) return null
+    return h('details', { class: 'import-list' },
+        h('summary', {}, `${title}（${items.length}）`),
+        h('ul', {}, ...items.map((text) => h('li', {}, text)))
+    )
+}
+
+function renderErrors(errors) {
+    if (!errors || errors.length === 0) return null
+    return h('details', { class: 'import-result__errors', open: true },
+        h('summary', {}, `跳过原因（${errors.length}）`),
+        h('ul', {},
+            ...errors.map((err) => h('li', {},
+                h('span', { class: 'import-result__lemma' },
+                    `#${err.index + 1} ${err.lemma}`),
+                ' — ',
+                h('span', { class: 'import-result__reason' }, err.reason)
+            ))
+        )
+    )
+}
+
 /* ---------------- 结果面板 ---------------- */
 
 function renderResult(stats, closeFn) {
@@ -232,19 +315,7 @@ function renderResult(stats, closeFn) {
                 : null,
             h('span', { class: 'badge' }, `共 ${total}`)
         ),
-        errors.length > 0
-            ? h('details', { class: 'import-result__errors', open: true },
-                h('summary', {}, `跳过原因（${errors.length}）`),
-                h('ul', {},
-                    ...errors.map((err) => h('li', {},
-                        h('span', { class: 'import-result__lemma' },
-                            `#${err.index + 1} ${err.lemma}`),
-                        ' — ',
-                        h('span', { class: 'import-result__reason' }, err.reason)
-                    ))
-                )
-            )
-            : null,
+        renderErrors(errors),
         h('div', { class: 'import-result__actions' },
             h('button', {
                 class: 'btn',

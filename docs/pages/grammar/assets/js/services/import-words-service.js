@@ -8,7 +8,7 @@
 import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
 import { POS_LIST } from '../config/config.js'
 import { normalizeParadigm, normalizeStems, normalizeGenders } from '../models/word.js'
-import { addOrMerge } from '../store/word-store.js'
+import { addOrMerge, findByKey } from '../store/word-store.js'
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
 /** 语言 code 集合（LANGUAGES 是启动后才填充的，所以要按需计算） */
@@ -68,6 +68,67 @@ export function validateWord(raw) {
 }
 
 /* ---------------- 导入 ---------------- */
+
+function entryLabel(raw, index) {
+    const lemma = raw && raw.lemma ? String(raw.lemma).trim() : '?'
+    const pos = raw && raw.pos ? String(raw.pos).trim() : ''
+    return pos ? `#${index + 1} ${lemma}（${pos}）` : `#${index + 1} ${lemma}`
+}
+
+/**
+ * 与 addOrMerge 的唯一键保持一致（userId + language + lemma + pos）
+ */
+function recordKey(userId, raw) {
+    return [
+        userId,
+        String(raw.language).trim(),
+        String(raw.lemma).trim(),
+        String(raw.pos).trim() || 'other'
+    ].join('\u0001')
+}
+
+/**
+ * 导入前预览：只统计「新增 / 合并 / 跳过」，不写入任何数据
+ * 同一批次内重复的条目按「合并」计入，与实际导入行为一致。
+ * @returns { created, merged, skipped, total, errors, items: { created, merged } }
+ */
+export async function previewWords(userId, words) {
+    const stats = {
+        created: 0, merged: 0, skipped: 0, total: words.length,
+        errors: [], items: { created: [], merged: [] }
+    }
+    // 本批次已出现过的键：后续重复条目会合并到前一条上
+    const seen = new Set()
+
+    for (let i = 0; i < words.length; i++) {
+        const raw = words[i]
+        const reason = validateWord(raw)
+        if (reason) {
+            stats.skipped++
+            stats.errors.push({
+                index: i,
+                lemma: raw && raw.lemma ? String(raw.lemma) : '?',
+                reason
+            })
+            continue
+        }
+
+        const key = recordKey(userId, raw)
+        const exists = seen.has(key)
+            || !!(await findByKey(userId, String(raw.language).trim(),
+                String(raw.lemma).trim(), String(raw.pos).trim()))
+
+        if (exists) {
+            stats.merged++
+            stats.items.merged.push(entryLabel(raw, i))
+        } else {
+            stats.created++
+            stats.items.created.push(entryLabel(raw, i))
+            seen.add(key)
+        }
+    }
+    return stats
+}
 
 /**
  * @returns { created, merged, skipped, total, errors: [{index, lemma, reason}] }

@@ -1251,6 +1251,18 @@ button.word-card__derivative {
     gap: var(--sp-3);
 }
 
+/* 导入前预览：嵌在表单里的结果块 */
+.import-preview {
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-surface);
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--c-bg-subtle);
+}
+
+.import-preview[hidden] {
+    display: none;
+}
+
 .import-result__title {
     font-size: var(--fs-lg);
     font-weight: 600;
@@ -1262,7 +1274,8 @@ button.word-card__derivative {
     flex-wrap: wrap;
 }
 
-.import-result__errors {
+.import-result__errors,
+.import-list {
     border: 1px solid var(--c-border);
     border-radius: var(--r-surface);
     padding: var(--sp-3);
@@ -1272,25 +1285,29 @@ button.word-card__derivative {
     overflow: auto;
 }
 
-.import-result__errors summary {
+.import-result__errors summary,
+.import-list summary {
     cursor: pointer;
     font-weight: 500;
     margin-bottom: var(--sp-2);
 }
 
-.import-result__errors ul {
+.import-result__errors ul,
+.import-list ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.import-result__errors li {
+.import-result__errors li,
+.import-list li {
     padding: 4px 0;
     border-bottom: 1px dashed var(--c-border);
     word-break: break-word;
 }
 
-.import-result__errors li:last-child {
+.import-result__errors li:last-child,
+.import-list li:last-child {
     border-bottom: none;
 }
 

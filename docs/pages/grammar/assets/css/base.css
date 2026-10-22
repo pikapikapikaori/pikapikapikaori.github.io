@@ -94,6 +94,19 @@ pre,
     font-family: var(--ff-content);
 }
 
+/*
+ * 输入框 / 下拉框里的内容是用户输入的，方向要按内容判定：
+ * 中文 placeholder 保持左对齐，输入 RTL 文字时自动切到右对齐。
+ * 不加这条的话，[lang="he"] 的 direction: rtl 会把中文 placeholder 也右对齐。
+ */
+input[lang],
+textarea[lang],
+select[lang] {
+    direction: ltr;
+    unicode-bidi: plaintext;
+    text-align: start;
+}
+
 .skip-link {
     position: absolute;
     left: -9999px;

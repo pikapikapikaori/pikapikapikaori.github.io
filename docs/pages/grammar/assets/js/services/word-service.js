@@ -8,6 +8,7 @@ import {
 } from '../store/word-store.js'
 import { posLabel, allSources } from '../models/word.js'
 import { normalizeSearch } from '../utils/text-normalize.js'
+import { TRANSLIT_SEARCH_LANGS } from '../config/config.js'
 
 export const SORT_FIELDS = [
     { value: 'addedAt',        label: '添加日期' },
@@ -79,9 +80,13 @@ function applySearch(words, q, scope = 'all') {
     const hitLemma = (w) => normalizeSearch(w.lemma).includes(nq)
     const hitStem = (w) => Object.values(w.stems || {})
         .some((stem) => !!stem && normalizeSearch(stem).includes(nq))
-    const hitParadigm = (w) => Object.values(w.paradigm || {}).some((rows) =>
+    const hitGrid = (grid) => Object.values(grid || {}).some((rows) =>
         Object.values(rows || {}).some((cells) =>
             Object.values(cells || {}).some((v) => normalizeSearch(v).includes(nq))))
+    // 只有登记在 TRANSLIT_SEARCH_LANGS 里的语言才同时按「原文 + 转写」检索；
+    // 其它语言的数据本身就是自己的文字，只按原文检索
+    const hitParadigm = (w) => hitGrid(w.paradigm)
+        || (TRANSLIT_SEARCH_LANGS.includes(w.language) && hitGrid(w.paradigmRoman))
     const hitInflection = (w) => (w.inflections || []).some((it) =>
         normalizeSearch(it.form || '').includes(nq))
 

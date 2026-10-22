@@ -1,4 +1,5 @@
 import { h } from '../utils/dom.js'
+import { applyBdi, bdiDir, needsBdi } from '../utils/bdi.js'
 
 /**
  * 通用表格渲染
@@ -147,5 +148,10 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
     table.appendChild(tbody)
 
     wrap.appendChild(table)
+    // 输入框不能包 <bdi>，改用 dir；只读文字按字符范围包 bdi
+    if (needsBdi(lang)) {
+        for (const input of wrap.querySelectorAll('input')) input.setAttribute('dir', bdiDir(lang))
+    }
+    applyBdi(wrap)
     return wrap
 }

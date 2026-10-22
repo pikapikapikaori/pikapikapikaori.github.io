@@ -1,5 +1,6 @@
 import { h, htmlFragment } from '../utils/dom.js'
 import { createTabBar } from './tabs.js'
+import { applyBdi } from '../utils/bdi.js'
 
 /**
  * 语法表格
@@ -55,6 +56,9 @@ export function createGrammarTable(spec) {
         )
     )
 
+    // 书写方向不同的文字（满文 / 希伯来文）按字符范围包进 <bdi>
+    applyBdi(table)
+
     // 列多时本容器横向滚动，避免整页被撑宽
     return h('div', { class: 'grammar-table-wrap' }, table)
 }
@@ -90,7 +94,10 @@ export function createGrammarTables(tables, lang = null) {
     }
 
     const paired = groups.some((g) => g.pattern.length && g.example.length)
-    if (!paired) return h('div', { class: 'grammar-tables' }, ...entries.map((entry) => entry.node))
+    // 多组时始终用组 tab（组里只有一类表时，第二行「变化表 / 示例表」不显示）
+    if (groups.length <= 1 && !paired) {
+        return h('div', { class: 'grammar-tables' }, ...entries.map((entry) => entry.node))
+    }
 
     const ROLE_LABEL = { pattern: '变化表', example: '示例表' }
     let groupIndex = Math.max(0, groups.findIndex((g) => g.pattern.length || g.example.length))

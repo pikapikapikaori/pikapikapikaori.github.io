@@ -38,6 +38,7 @@ function cleanWordForExport(w) {
         pos: w.pos,
         inflectionType: w.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(w.paradigm),
+        paradigmRoman: normalizeParadigm(w.paradigmRoman),
         // gender 只作为旧格式的兼容镜像导出，真实来源是 attributes
         gender: normalizeGenders(fieldValues(w, 'gender'), w.pos),
         attributes: normalizeAttributes(w.attributes),
@@ -151,6 +152,7 @@ function normalizeImportedWord(raw, userId) {
         pos,
         inflectionType: raw.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(raw.paradigm),
+        paradigmRoman: normalizeParadigm(raw.paradigmRoman),
         gender: normalizeGenders(fieldValues(raw, 'gender'), pos),
         attributes: normalizeAttributes({
             ...(Array.isArray(raw.gender) && raw.gender.length ? { gender: raw.gender } : {}),
@@ -177,6 +179,8 @@ function mergePreservingProgress(existing, incoming) {
     const merged = { ...existing }
 
     merged.paradigm = mergeParadigmLocal(existing.paradigm, incoming.paradigm)
+    merged.paradigmRoman = mergeParadigmLocal(existing.paradigmRoman, incoming.paradigmRoman)
+    if (!Object.keys(merged.paradigmRoman).length) delete merged.paradigmRoman
 
     merged.stems = mergeStems(existing.stems, incoming.stems)
     merged.attributes = normalizeAttributes({

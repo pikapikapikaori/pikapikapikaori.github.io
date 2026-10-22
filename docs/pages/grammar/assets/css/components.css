@@ -253,6 +253,41 @@
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
+/* 带推导提示的输入框：灰色剩余部分叠在文字后面（幽灵文字） */
+.ghost-input {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ghost-input > .input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ghost-input__hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--sp-3);
+    pointer-events: none;
+    overflow: hidden;
+    white-space: pre;
+    font-size: var(--fs-md);
+    line-height: var(--lh-tight);
+    color: var(--c-fg-subtle);
+}
+
+.ghost-input__hint[hidden] {
+    display: none;
+}
+
+.ghost-input__typed {
+    color: transparent;
+}
+
 /* 单行控件统一高度：显式 height 抵消 input 继承的 line-height 与 select 原生行高的差异 */
 .input,
 .select {
@@ -515,15 +550,34 @@
     margin-top: -0.4rem;
 }
 
+/* 标签 / 输入框 / 提示排成固定两列，提示固定落在输入框下方，
+   这样有没有提示都不会把输入框挤得上下错位 */
 .field--part {
     display: grid;
-    grid-template-columns: 9rem 1fr;
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    grid-template-areas:
+        "label control"
+        ".     hint";
     align-items: center;
-    gap: 0.5rem;
+    align-content: start;
+    column-gap: var(--sp-2);
+    row-gap: 2px;
+}
+
+.field--part > .field__label {
+    grid-area: label;
+    text-align: left;
+    justify-self: stretch;
+}
+
+.field--part > .input,
+.field--part > .select {
+    grid-area: control;
 }
 
 .field--part .field__hint {
-    grid-column: 2;
+    grid-area: hint;
+    align-self: start;
 }
 
 
@@ -1489,6 +1543,18 @@ button.word-card__derivative {
     user-select: text;
     -webkit-user-select: text;
     cursor: text;
+}
+
+/* 非竖写语言（如希伯来文）：横排、放大显示 */
+.vertical-popover--horizontal {
+    writing-mode: horizontal-tb;
+    direction: inherit;
+    min-width: 2.5em;
+    margin-inline-end: inherit;
+    max-height: none;
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 1.4em;
+    text-align: center;
 }
 
 /* ---------- 生词表单：外部数据源查询 ---------- */

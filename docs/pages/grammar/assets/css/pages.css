@@ -187,28 +187,22 @@
     border-top: 1px solid var(--c-border);
 }
 
-/* 额外主要部分：主要部分下方，从左到右 */
+/* 额外主要部分：主要部分下方，每行最多两项（条目多时不会挤成一团） */
 .word-form .field__parts {
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: var(--sp-5);
     row-gap: var(--sp-3);
     margin-top: var(--sp-3);
 }
 
-.word-form .field__parts > .field {
-    flex: 1 1 240px;
-    min-width: 0;
-}
-
 .word-form .field__parts > .field__hint {
-    flex-basis: 100%;
+    grid-column: 1 / -1;
 }
 
 /* 标签紧贴输入框，两项之间的间距由 column-gap 给 */
 .word-form .field--part {
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: var(--sp-2);
+    grid-template-columns: 11.5rem minmax(0, 1fr);
 }
 
 /* 表格下方那句提示 */
@@ -303,6 +297,23 @@
     .word-form__row,
     .word-form__row--3 {
         grid-template-columns: 1fr;
+    }
+
+    /* 主要部分在窄屏下一栏排，标签回到输入框上方 */
+    .word-form .field__parts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .word-form .field--part {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "label"
+            "control"
+            "hint";
+    }
+
+    .word-form .field--part > .field__label {
+        text-align: left;
     }
 
     .word-form__item,
@@ -588,6 +599,31 @@
 .grammar-table strong {
     color: var(--c-fg);
     font-weight: 600;
+}
+
+/* 说明里的列表（迂说式等）：reset.css 清掉了默认符号，这里补回来 */
+.grammar-section__notes ul,
+.grammar-item__notes ul,
+.grammar-section__notes ol,
+.grammar-item__notes ol {
+    margin: var(--sp-2) 0;
+    padding-left: 1.5em;
+    list-style: disc;
+}
+
+.grammar-section__notes ol,
+.grammar-item__notes ol {
+    list-style: decimal;
+}
+
+.grammar-section__notes li,
+.grammar-item__notes li {
+    margin: 2px 0;
+}
+
+.grammar-section__notes p,
+.grammar-item__notes p {
+    margin: var(--sp-1) 0;
 }
 
 .grammar-item__notes code,

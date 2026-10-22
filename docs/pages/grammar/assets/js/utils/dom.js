@@ -80,7 +80,10 @@ function append(el, children) {
  * 只保留白名单标签与普通属性，`on*` 事件与 `javascript:` 链接一律丢弃，
  * 不认识的标签会被拆掉但保留里面的文字 —— 这样即使数据里混进脚本也执行不了。
  */
-const HTML_TAGS = new Set(['STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN'])
+const HTML_TAGS = new Set([
+    'STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN',
+    'UL', 'OL', 'LI', 'P'
+])
 
 export function htmlFragment(text) {
     const out = document.createDocumentFragment()

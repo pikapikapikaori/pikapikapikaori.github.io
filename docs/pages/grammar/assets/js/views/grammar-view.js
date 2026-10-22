@@ -3,6 +3,7 @@ import { getLanguage } from '../data/languages.js'
 import { loadGrammar } from '../services/grammar-service.js'
 import { createGrammarTables } from '../components/grammar-table.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
+import { applyBdi, bdiNode } from '../utils/bdi.js'
 
 export default {
     needsUser: false,
@@ -57,7 +58,7 @@ export default {
         const doc = await loadGrammar(lang)
         if (!doc) { renderNoData(main, lang, language); return }
 
-        renderGrammar(main, lang, language, doc, anchor, group)
+        return renderGrammar(main, lang, language, doc, anchor, group)
     }
 }
 
@@ -66,7 +67,7 @@ function renderNoData(main, lang, language) {
         h('div', { class: 'page-head' },
             h('div', {},
                 h('div', { class: 'page-head__title' },
-                    h('bdi', { lang: lang }, language.native), ' · ', language.name
+                    bdiNode(language.native, lang), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' }, '语法速查')
             )
@@ -177,6 +178,8 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         }
     }
     nav.appendChild(toc)
+    // 目录里可能直接带原文（如希伯来文条目标题）
+    applyBdi(nav, lang)
 
     /** 渲染一个条目的表格与说明（懒加载时按需调用） */
     function fillItem(it, item) {
@@ -187,6 +190,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         if (item.notes) {
             it.appendChild(h('div', { class: 'grammar-item__notes' }, htmlFragment(item.notes)))
         }
+        applyBdi(it, lang)
     }
 
     // 带锚点时，锚点所在章节及其之前的条目立即渲染，保证滚动位置准确
@@ -195,6 +199,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
             || (s.items || []).some((item) => item && item.id === anchor)))
         : -1
     const lazy = new Map()   // element -> item
+    const itemOrder = []     // 全部条目元素，按文档顺序（跳转时要把前面的先渲染出来）
 
     sections.forEach((section, index) => {
         if (!section || !section.id) return
@@ -204,6 +209,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         if (section.notes) {
             sec.appendChild(h('div', { class: 'grammar-section__notes' }, htmlFragment(section.notes)))
         }
+        applyBdi(sec, lang)
 
         for (const item of section.items || []) {
             if (!item || !item.id) continue
@@ -212,6 +218,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
             )
             if (anchorSectionIndex < 0 || index <= anchorSectionIndex) fillItem(it, item)
             else lazy.set(it, item)
+            itemOrder.push({ el: it, item })
             sec.appendChild(it)
         }
         content.appendChild(sec)
@@ -233,10 +240,14 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         lazy.clear()
     }
 
-    /** 锚点可能在懒加载区里：先渲染再滚动 */
+    /** 锚点可能在懒加载区里：先把它和它前面的条目都渲染出来再滚动，避免表格撑开导致位置漂移 */
     function ensureRendered(id) {
-        for (const [el, item] of [...lazy]) {
-            if (item.id === id) { fillItem(el, item); lazy.delete(el) }
+        for (const entry of itemOrder) {
+            if (lazy.has(entry.el)) {
+                fillItem(entry.el, entry.item)
+                lazy.delete(entry.el)
+            }
+            if (entry.item.id === id) break
         }
     }
 
@@ -244,7 +255,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         h('div', { class: 'page-head' },
             h('div', {},
                 h('div', { class: 'page-head__title' },
-                    h('bdi', { lang: lang }, language.native), ' · ', language.name
+                    bdiNode(language.native, lang), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' },
                     currentGroup ? `语法速查 · ${currentGroup.title}` : '语法速查')
@@ -263,6 +274,52 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         setActiveNav(anchor)
         ensureRendered(anchor)
         setTimeout(() => scrollToAnchor(anchor, lang, false), 60)
+    }
+
+    /** 目录随滚动同步：高亮正在阅读的 section / item */
+    const spyTargets = Array.from(content.querySelectorAll('.grammar-section, .grammar-item'))
+        .filter((el) => el.id)
+    let spyFrame = 0
+
+    function syncActiveByScroll() {
+        spyFrame = 0
+        if (!spyTargets.length) return
+        // 标题的 scroll-margin-top = --h-header + 间距，判定线取同一位置再往下一行
+        const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--h-header')) || 56
+        const offset = header + 24
+        let active = spyTargets[0].id
+        for (const el of spyTargets) {
+            if (el.getBoundingClientRect().top - offset > 0) break
+            active = el.id
+        }
+        // 滚到底时高亮最后一项（末条很短，永远到不了判定线）
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+            active = spyTargets[spyTargets.length - 1].id
+        }
+        setActiveNav(active)
+    }
+
+    function onScroll() {
+        if (!spyFrame) spyFrame = requestAnimationFrame(syncActiveByScroll)
+    }
+
+    applyBdi(content, lang)
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    // 懒加载的表格插进来会改变高度，重新判定一次当前阅读位置
+    const heightObserver = typeof ResizeObserver === 'function'
+        ? new ResizeObserver(onScroll)
+        : null
+    if (heightObserver) heightObserver.observe(content)
+    // 带锚点时先保留锚点的高亮，等滚动（scrollToAnchor）到位后由监听器接管
+    if (!(anchor && allIds.has(anchor))) syncActiveByScroll()
+
+    return () => {
+        window.removeEventListener('scroll', onScroll)
+        window.removeEventListener('resize', onScroll)
+        if (heightObserver) heightObserver.disconnect()
+        if (spyFrame) cancelAnimationFrame(spyFrame)
     }
 }
 

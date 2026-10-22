@@ -30,6 +30,37 @@ export const EXTERNAL_SOURCES = [
 /** 外部数据源模块的根路径 */
 export const EXTERNAL_BASE = new URL('../../../external/js/', import.meta.url)
 
+/* ---------------- 文字处理 ---------------- */
+
+/**
+ * 需要「原文预览浮层」（hover / click 弹出原文）的语言。
+ * 键是语言 code，值是用来判断元素里是否真有该文字的脚本范围；不写正则则一律允许。
+ * 与是否竖写无关 —— 竖写只影响浮层的样式（看 languages.js 里的 `vertical`）。
+ */
+export const SCRIPT_POPUP_LANGS = {
+    // 传统蒙古文 / 满文 / 锡伯文，U+1800 – U+18AF
+    mnc: /[\u1800-\u18AF]/
+}
+
+/**
+ * 检索时同时匹配「原文」与「转写副本」（Word.paradigmRoman）的语言。
+ * 不在列表里的语言只按自己的文字检索（如梵语只搜天城体、日语只搜假名与和制汉字）。
+ */
+export const TRANSLIT_SEARCH_LANGS = ['mnc']
+
+/**
+ * 渲染时用 <bdi> 包住文字的语言：文字本身的书写方向与界面不同（竖写 / RTL），
+ * 不包的话会影响周围的标点与排版。值是**该文字的 Unicode 范围** —— 只有命中的字符才会被包进 <bdi>，
+ * 同一格里的中文、拉丁转写等保持原样（如 `<td lang="he">מִי（人）/ מָה（物）</td>` 只包 מִי 与 מָה）。
+ * `dir` 由语言元数据决定（`rtl: true` → "rtl"，否则 "auto"）。
+ */
+export const BDI_LANGS = {
+    // 传统蒙古文 / 满文 / 锡伯文
+    mnc: /[\u1800-\u18AF]/,
+    // 希伯来文（含元音点与重复号）
+    he: /[\u0590-\u05FF\uFB1D-\uFB4F]/
+}
+
 /* ---------------- 词条枚举 ---------------- */
 
 /** 词性；顺序即展示顺序 */
@@ -39,9 +70,11 @@ export const POS_LIST = [
     { value: 'adj',       label: '形容词' },
     { value: 'adv',       label: '副词' },
     { value: 'pron',      label: '代词' },
-    { value: 'prep',      label: '介词 / 前置词' },
+    { value: 'prep',      label: '前置介词' },
+    { value: 'postp',     label: '后置介词' },
+    { value: 'midp',      label: '中置介词' },
     { value: 'conj',      label: '连词' },
-    { value: 'particle',  label: '助词 / 虚词' },
+    { value: 'particle',  label: '助词' },
     { value: 'participle', label: '分词' },
     { value: 'num',       label: '数词' },
     { value: 'interj',    label: '感叹词' },

@@ -1,26 +1,18 @@
 /**
- * 竖排 popover
- * 事件委托：整个文档里任何带 lang 属性、且该语言 vertical: true、
+ * 原文预览浮层（竖排 / RTL 文字的 popover）
+ * 事件委托：整个文档里任何带 lang 属性、且该语言登记在 SCRIPT_POPUP_LANGS 里、
  * 且文本真的包含该语言字符的元素，在 hover（延迟）或 click 时，
- * 在鼠标位置附近弹出一个只包含竖排原文的浮层。
+ * 在鼠标位置附近弹出一个只包含**原文**（<bdi> 里的内容）的浮层。
+ * 竖写语言用竖排样式，其余语言用放大的横排原文。
  */
 
 import { h } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
+import { SCRIPT_POPUP_LANGS } from '../config/config.js'
 
 const HOVER_DELAY = 200
 const HIDE_DELAY = 120
 const EDGE_MARGIN = 12
-
-/**
- * 各竖排语言的 Unicode 脚本范围。
- * 只有文本里至少含有一个该范围内的字符，才触发 popover。
- * 这样行头、按钮、纯中文/拉丁内容都不会误触发。
- */
-const VERTICAL_SCRIPT_RANGES = {
-    // 传统蒙古文 / 满文 / 锡伯文，U+1800 – U+18AF
-    mnc: /[\u1800-\u18AF]/
-}
 
 let popoverEl = null
 let currentSourceEl = null
@@ -30,18 +22,30 @@ let attached = false
 
 /* ---------------- 判定 ---------------- */
 
-function isVerticalEl(el) {
+function isPopupLang(el) {
     if (!el || !el.getAttribute) return false
     const lang = el.getAttribute('lang')
     if (!lang) return false
-    const meta = getLanguage(lang)
-    return !!(meta && meta.vertical)
+    return Object.prototype.hasOwnProperty.call(SCRIPT_POPUP_LANGS, lang)
+}
+
+/**
+ * 元素的「可读文本」：输入框 / 文本框取 value；
+ * 普通元素优先取里面 <bdi> 的内容（只显示原文，不带中文说明），没有才退回 textContent。
+ */
+function textOf(el) {
+    if (!el) return ''
+    const tag = el.tagName
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return el.value || ''
+    const bdis = el.querySelectorAll ? el.querySelectorAll('bdi') : []
+    if (bdis.length) return [...bdis].map((x) => x.textContent).join(' ').trim()
+    return el.textContent || ''
 }
 
 function hasVerticalScript(el, lang) {
-    const text = el.textContent || ''
+    const text = textOf(el)
     if (!text) return false
-    const re = VERTICAL_SCRIPT_RANGES[lang]
+    const re = SCRIPT_POPUP_LANGS[lang]
     if (!re) return true // 未登记脚本范围的语言，默认放行
     return re.test(text)
 }
@@ -51,7 +55,7 @@ function findVerticalEl(node) {
     while (cur && cur !== document && cur.nodeType === 1) {
         if (cur.hasAttribute('lang')) {
             const lang = cur.getAttribute('lang')
-            if (isVerticalEl(cur) && hasVerticalScript(cur, lang)) return cur
+            if (isPopupLang(cur) && hasVerticalScript(cur, lang)) return cur
         }
         cur = cur.parentNode
     }
@@ -96,12 +100,17 @@ function ensurePopover() {
 /* ---------------- 显示 / 隐藏 ---------------- */
 
 function show(sourceEl, x, y) {
-    const text = (sourceEl.textContent || '').trim()
+    const text = textOf(sourceEl).trim()
     if (!text) return
 
     const el = ensurePopover()
     el.textContent = text
-    el.setAttribute('lang', sourceEl.getAttribute('lang') || '')
+    const lang = sourceEl.getAttribute('lang') || ''
+    const meta = getLanguage(lang)
+    el.setAttribute('lang', lang)
+    el.setAttribute('dir', meta && meta.rtl ? 'rtl' : 'auto')
+    // 竖写语言用竖排样式，其余语言用放大的横排原文
+    el.classList.toggle('vertical-popover--horizontal', !(meta && meta.vertical))
     currentSourceEl = sourceEl
 
     // 字体跟随源元素，略放大一点便于看清
@@ -192,6 +201,9 @@ function onMouseOut(e) {
 
 function onClick(e) {
     if (popoverEl && popoverEl.contains(e.target)) return
+    // 输入框里点击要留给光标定位，不能拦截
+    const tag = e.target && e.target.tagName
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
 
     const el = findVerticalEl(e.target)
     if (el) {
@@ -208,6 +220,11 @@ function onKeyDown(e) {
     if (e.key === 'Escape') hide()
 }
 
+/** 输入框内容变了：正在显示的浮层已经过期，先收起 */
+function onInput(e) {
+    if (currentSourceEl && currentSourceEl === e.target) hide()
+}
+
 function onScroll() { hide() }
 function onResize() { hide() }
 
@@ -221,6 +238,7 @@ export function attachVerticalPopover() {
     document.addEventListener('mouseout', onMouseOut, true)
     document.addEventListener('click', onClick, true)
     document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('input', onInput, true)
     window.addEventListener('scroll', onScroll, true)
     window.addEventListener('resize', onResize)
 }

@@ -5,6 +5,7 @@
  */
 
 import { h, replace } from '../utils/dom.js'
+import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { appStore } from '../app-state.js'
 import { listAll } from '../store/word-store.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
@@ -144,7 +145,7 @@ export default {
                 class: 'lang-card__native',
                 lang: lang.code,
                 style: isRtlNative ? { direction: 'rtl' } : {}
-            }, h('bdi', {}, lang.native)),
+            }, bdiNode(lang.native, lang.code)),
             h('div', { class: 'lang-card__name' }, lang.name),
             h('div', { class: 'lang-card__stats' },
                 h('span', { class: 'lang-card__stat' },

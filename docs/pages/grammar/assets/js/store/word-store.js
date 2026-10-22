@@ -61,6 +61,8 @@ function mergeWord(existing, incoming) {
     }
 
     merged.paradigm = mergeParadigm(existing.paradigm, incoming.paradigm)
+    merged.paradigmRoman = mergeParadigm(existing.paradigmRoman, incoming.paradigmRoman)
+    if (!merged.paradigmRoman || !Object.keys(merged.paradigmRoman).length) delete merged.paradigmRoman
 
     // 主要部分（词干）：已有值优先保留，为空时采用新来源的值
     merged.stems = mergeStems(existing.stems, incoming.stems)
@@ -172,6 +174,11 @@ export async function updateWord(id, patch) {
     next.userId = cur.userId
     if (patch.paradigm !== undefined) {
         next.paradigm = normalizeParadigm(patch.paradigm)
+    }
+    if (patch.paradigmRoman !== undefined) {
+        const roman = normalizeParadigm(patch.paradigmRoman)
+        if (Object.keys(roman).length) next.paradigmRoman = roman
+        else delete next.paradigmRoman
     }
     await put(STORE_WORDS, next)
     return next

@@ -12,6 +12,7 @@ import {
 import { listByLanguage, deleteWord } from '../store/word-store.js'
 import { POS_LIST, PAGE_SIZE_OPTIONS } from '../config/config.js'
 import { createWordCard } from '../components/word-card.js'
+import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
@@ -101,7 +102,7 @@ export default {
             replace(head,
                 h('div', {},
                     h('div', { class: 'page-head__title' },
-                        h('bdi', { lang: lang }, language.native),
+                        bdiNode(language.native, lang),
                         ' · ',
                         language.name
                     ),

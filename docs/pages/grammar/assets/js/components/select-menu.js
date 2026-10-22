@@ -7,6 +7,7 @@
  */
 
 import { h } from '../utils/dom.js'
+import { bdiText } from '../utils/bdi.js'
 
 let menuEl = null
 let currentSelect = null
@@ -88,7 +89,8 @@ function openMenu(select) {
             onpointerdown: (e) => e.preventDefault(),
             onclick: () => choose(select, option)
         },
-        h('span', { class: 'select-menu__label' }, option.textContent),
+        h('span', { class: 'select-menu__label' },
+            bdiText(option.textContent, select.getAttribute('lang'))),
         option.selected ? h('span', { class: 'select-menu__check' }, '✓') : null
         ))
     }

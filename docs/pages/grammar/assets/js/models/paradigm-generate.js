@@ -95,6 +95,50 @@ function resolveBase(stem, spec, parts, seen) {
     return source ? applyRuleList(source, form.rules) : ''
 }
 
+/**
+ * 该词干变体是否「有来源」：用户填的主要部分、类型里的字面量、或能由规则（含 headword）推出。
+ * 生成表格前用它判断整张表是否可生成 —— 没有来源时**不能**悄悄退回 base。
+ */
+function baseHasSource(stem, spec, parts, seen) {
+    if (String(parts.base ?? stem ?? '').trim()) return true
+    if (typeof spec?.stems?.base === 'string' && spec.stems.base) return true
+    const form = readStemForm(spec?.stemForms?.base)
+    if (!form) return false
+    if (form.from === 'headword') return !!String(parts.headword ?? '').trim()
+    if (form.from) return canResolveStem(stem, form.from, spec, parts, seen)
+    return false
+}
+
+export function canResolveStem(stem, stemForm, spec, userStems, seen) {
+    const parts = userStems && typeof userStems === 'object' ? userStems : {}
+    const key = stemForm || 'base'
+    const visited = seen instanceof Set ? seen : new Set()
+
+    if (String(parts[key] ?? '').trim()) return true
+    if (typeof spec?.stems?.[key] === 'string' && spec.stems[key]) return true
+
+    const form = readStemForm(spec?.stemForms?.[key])
+    const requiredPart = Array.isArray(spec?.parts)
+        && spec.parts.some((p) => p && p.key === key && p.required === true)
+    // 空规则数组 `[]` 表示「与 base 相同」（法语不变的复数 / 阴性），算有来源；
+    // 但声明成必填的主要部分（德语强变化的 pret / pp）即使写了空数组也不能自动推出
+    if (!form) return key === 'base' ? baseHasSource(stem, spec, parts, visited) : false
+    if (!form.from && !form.rules.length && requiredPart) return false
+
+    if (visited.has(key)) return false
+    visited.add(key)
+
+    if (form.from === 'headword') return !!String(parts.headword ?? '').trim()
+    if (form.from) return canResolveStem(stem, form.from, spec, parts, visited)
+    return baseHasSource(stem, spec, parts, visited)
+}
+
+/** 主要部分输入框的「推导预览」：能推出来就给值，推不出给空串 */
+export function previewStem(stem, stemForm, spec, userStems) {
+    if (!spec || !canResolveStem(stem, stemForm, spec, userStems)) return ''
+    return resolveStem(stem, stemForm, spec, userStems)
+}
+
 export function resolveStem(stem, stemForm, spec, userStems, seen) {
     const parts = userStems && typeof userStems === 'object' ? userStems : {}
     const key = stemForm || 'base'
@@ -250,10 +294,19 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
  *                                     `sandhi` / `accent`（拼接型）或 `realize`（骨架型）
  * @returns {{ paradigm: object, filled: object[], skipped: object[] }}
  */
-export function generateParadigm({ stem, stems, headword, spec, template, existing, profile } = {}) {
-    const result = { paradigm: {}, filled: [], skipped: [] }
+export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, overwrite = false } = {}) {
+    const result = { paradigm: {}, paradigmRoman: {}, filled: [], skipped: [], skippedTables: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
     const parts = normalizeStemParts(stem, stems, headword)
+    // 竖排文字（满文等）：用户填的可能是文字本身，先统一转成转写再做规则与重音
+    if (typeof profile?.toRoman === 'function') {
+        for (const key of Object.keys(parts)) {
+            const value = String(parts[key] ?? '')
+            if (value) parts[key] = profile.toRoman(value)
+        }
+    }
+    // 是否要把结果转成文字（满文）
+    const useScript = typeof profile?.toScript === 'function'
     const base = parts.base || ''
     // base 可以为空：只要类型声明了 base 的规则（通常是 { from: 'headword' }）
     const canDeriveBase = !!spec.stems?.base || !!spec.stemForms?.base
@@ -286,6 +339,23 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
     const skeletonMode = spec.mode === 'skeleton'
 
     for (const table of template.tables) {
+        // 词干没有来源（没填、也没有规则可推）时整张表跳过，不能退回 base 硬凑
+        if (!skeletonMode) {
+            const need = new Set()
+            for (const row of table.rows || []) {
+                for (const col of table.columns || []) {
+                    if (isCellDisabled(row, col.key)) continue
+                    const cell = resolveCell(activeSpec, table.key, row.key, col.key)
+                    if (!cell || (!cell.suffix && !cell.prefix && !cell.stemOnly)) continue
+                    need.add(cell.stemForm || 'base')
+                }
+            }
+            const missing = [...need].filter((key) => !canResolveStem(base, key, activeSpec, parts))
+            if (missing.length) {
+                result.skippedTables.push({ tableKey: table.key, missing })
+                continue
+            }
+        }
         for (const row of table.rows || []) {
             for (const col of table.columns || []) {
                 const at = { tableKey: table.key, rowKey: row.key, colKey: col.key }
@@ -298,7 +368,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                     result.skipped.push({ ...at, reason: 'no-ending' })
                     continue
                 }
-                if (String(current[table.key]?.[row.key]?.[col.key] ?? '').trim()) {
+                if (!overwrite && String(current[table.key]?.[row.key]?.[col.key] ?? '').trim()) {
                     result.skipped.push({ ...at, reason: 'existing' })
                     continue
                 }
@@ -353,10 +423,16 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                     continue
                 }
 
+                const shown = useScript ? String(profile.toScript(form) ?? form) : form
                 if (!result.paradigm[table.key]) result.paradigm[table.key] = {}
                 if (!result.paradigm[table.key][row.key]) result.paradigm[table.key][row.key] = {}
-                result.paradigm[table.key][row.key][col.key] = form
-                result.filled.push({ ...at, form })
+                result.paradigm[table.key][row.key][col.key] = shown
+                if (useScript) {
+                    if (!result.paradigmRoman[table.key]) result.paradigmRoman[table.key] = {}
+                    if (!result.paradigmRoman[table.key][row.key]) result.paradigmRoman[table.key][row.key] = {}
+                    result.paradigmRoman[table.key][row.key][col.key] = form
+                }
+                result.filled.push({ ...at, form: shown })
             }
         }
     }
@@ -647,7 +723,7 @@ export function checkDeriveExample(spec, template, options = {}) {
     const want = expect || spec?.expect
     if (!spec?.stemExample || !want) return out
 
-    const { paradigm } = generateParadigm({
+    const generated = generateParadigm({
         stem: spec.stemExample,
         stems,
         headword: headword ?? spec.headwordExample ?? null,
@@ -656,6 +732,10 @@ export function checkDeriveExample(spec, template, options = {}) {
         existing: {},
         profile
     })
+    // 有「转写 → 文字」转换的语言（满文）：expect 写的是转写，比对转写那一份
+    const paradigm = Object.keys(generated.paradigmRoman || {}).length
+        ? generated.paradigmRoman
+        : generated.paradigm
 
     for (const [tableKey, rows] of Object.entries(want)) {
         for (const [rowKey, cells] of Object.entries(rows || {})) {
@@ -814,6 +894,18 @@ export function verifyGrammarDoc(lang, doc, profile) {
         if (section?.id) ids.add(section.id)
         for (const item of section?.items || []) if (item?.id) ids.add(item.id)
     }
+
+    // 表格上的 anchors 必须指向存在的锚点，否则词卡会永远显示默认表
+    for (const [pos, tpl] of Object.entries(doc?.paradigms || {})) {
+        for (const table of tpl?.tables || []) {
+            for (const id of table?.anchors || []) {
+                if (!ids.has(id)) {
+                    out.errors.push(`${lang} · paradigms.${pos}.${table.key}: anchors 指向不存在的锚点 ${id}`)
+                }
+            }
+        }
+    }
+
     for (const section of doc?.sections || []) {
         for (const node of [section, ...(section?.items || [])]) {
             if (!node || !node.deriveRef) continue

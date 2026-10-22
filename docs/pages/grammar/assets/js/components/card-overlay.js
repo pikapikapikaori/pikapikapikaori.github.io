@@ -1,4 +1,5 @@
 import { h } from '../utils/dom.js'
+import { applyBdi } from '../utils/bdi.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
 import { fieldDefsOfTemplate, fieldValues, genderOfColumn } from '../models/grammar.js'
 import { isRtl } from '../utils/text-normalize.js'
@@ -63,6 +64,7 @@ export function openCardOverlay(word, opts = {}) {
     }, closeBtn, head, body)
 
     overlayEl = h('div', { class: 'card-overlay' }, backdrop, panel)
+    applyBdi(overlayEl)
     document.body.appendChild(overlayEl)
 
     /**

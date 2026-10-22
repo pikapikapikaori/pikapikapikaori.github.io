@@ -79,6 +79,8 @@ export function createWord(partial) {
             (normalizeAttributes(mergeLegacyGender(partial)).gender || []), partial.pos || 'other'),
         attributes: normalizeAttributes(mergeLegacyGender(partial)),
         paradigm: normalizeParadigm(partial.paradigm),
+        // 竖写文字（满文）的转写副本：paradigm 存文字，这里存转写，只用于检索
+        paradigmRoman: normalizeParadigm(partial.paradigmRoman),
         stems: normalizeStems(partial.stems ?? partial.stem),
 
         inflections: normalizeSourceList(partial.inflections, 'inflections'),

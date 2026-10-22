@@ -345,6 +345,14 @@
     transform: rotateY(180deg);
 }
 
+/* 高亮：hover / 已翻面 / 放大中 / 派生词跳转定位 */
+.word-card:hover .word-card__face,
+.word-card--flipped .word-card__face,
+.word-card--active .word-card__face {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 2px var(--c-accent-soft), var(--shadow-sm);
+}
+
 .word-card__face {
     grid-area: 1 / 1;
     position: relative;

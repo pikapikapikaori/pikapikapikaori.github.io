@@ -73,6 +73,14 @@ export function openCardOverlay(word, opts = {}) {
         if (typeof onGrammarRef === 'function') onGrammarRef(ref)
     }
 
+    /**
+     * 包装 onDerivativeClick：跳转前先关闭 overlay，避免弹窗留在页面上
+     */
+    function wrappedDerivativeClick(target) {
+        close()
+        if (typeof onDerivativeClick === 'function') onDerivativeClick(target)
+    }
+
     escHandler = (e) => {
         if (e.key === 'Escape') close()
     }
@@ -271,7 +279,7 @@ export function openCardOverlay(word, opts = {}) {
                                 lang: language,
                                 onclick: (e) => {
                                     e.stopPropagation()
-                                    onDerivativeClick(target)
+                                    wrappedDerivativeClick(target)
                                 }
                             }, d)
                         }

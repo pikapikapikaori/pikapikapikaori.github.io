@@ -255,6 +255,51 @@ export default {
         /* ---------- 列表 ---------- */
         let currentPageIds = []
 
+        /** 派生词跳转后高亮的卡片（保留到下一次点击） */
+        let activeCardEl = null
+
+        function clearActiveCard() {
+            if (activeCardEl) activeCardEl.classList.remove('word-card--active')
+            activeCardEl = null
+        }
+
+        function highlightCard(id) {
+            clearActiveCard()
+            const card = listWrap.querySelector(`[data-word-id="${id}"]`)
+            if (!card) return
+            card.classList.add('word-card--active')
+            activeCardEl = card
+            if (typeof card.scrollIntoView === 'function') {
+                card.scrollIntoView({ block: 'center', behavior: 'smooth' })
+            }
+        }
+
+        /**
+         * 派生词跳转：先清空搜索与筛选，再定位到目标词所在页并高亮它的卡片
+         */
+        async function focusDerivative(target) {
+            state.q = ''
+            state.scope = 'all'
+            state.pos = ''
+            state.page = 1
+            renderToolbar()
+
+            const result = await queryWords(userId, lang, {
+                ...state,
+                filter: { ...FILTER_EMPTY, pos: '' }
+            })
+            const index = result.allIds.indexOf(target.id)
+            if (index < 0) {
+                await refresh()
+                toast.error(`未找到派生词「${target.lemma}」`)
+                return
+            }
+
+            state.page = Math.floor(index / state.pageSize) + 1
+            await refresh()
+            highlightCard(target.id)
+        }
+
         function renderList(result) {
             replace(listWrap)
             emptyWrap.replaceChildren()
@@ -290,7 +335,9 @@ export default {
                     resolvePosRef,
                     resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
                     onDerivativeClick: (target) => {
-                        location.hash = `#/lang/${lang}/words/${target.id}`
+                        focusDerivative(target).catch((err) => {
+                            toast.error(`跳转失败：${err.message}`)
+                        })
                     },
                     onEdit: (word) => {
                         location.hash = `#/lang/${lang}/words/${word.id}`
@@ -363,6 +410,10 @@ export default {
         renderToolbar()
         await refresh()
 
+        // 派生词高亮只保留到下一次点击（捕获阶段先清掉旧的，再由点击它的处理重新设置）
+        const onGlobalClick = () => clearActiveCard()
+        document.addEventListener('click', onGlobalClick, true)
+
         /* ---------- 快捷键 ---------- */
         const onKey = (e) => {
             const target = e.target
@@ -387,6 +438,8 @@ export default {
         // 卸载时清理
         return () => {
             document.removeEventListener('keydown', onKey)
+            document.removeEventListener('click', onGlobalClick, true)
+            clearActiveCard()
         }
     }
 }

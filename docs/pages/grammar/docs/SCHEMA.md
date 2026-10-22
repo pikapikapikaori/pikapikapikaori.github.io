@@ -232,7 +232,7 @@
 | `gender`                    | 语法性，**仅 `pos=noun` 有意义**；字符串数组，取值 `m` / `f` / `n`，可多选（common gender）        |
 | `inflections[].group`       | 可选，用于分组显示（如「不定式」「命令式」）                                                      |
 | `meanings[].lang`           | `zh` / `en`                                                                                       |
-| `derivatives`               | 派生词 lemma 列表；仅当目标词已存在时渲染为可点击链接                                             |
+| `derivatives`               | 派生词 lemma 列表；仅当目标词已存在时渲染为可点击链接。点击后清空搜索 / 筛选，跳到目标词所在页并高亮它的卡片 |
 | `encounterCount`            | 每次添加时若命中唯一键则 +1                                                                       |
 | `mastery`                   | 0–5，复习对 +1、错 −1，clamp 到区间                                                               |
 | `nextReviewAt`              | 按 mastery 从间隔表 `[0,1,3,7,14,30]` 天取值                                                      |

@@ -201,13 +201,16 @@ export function createWordCard(word, options = {}) {
             'aria-label': '放大显示',
             onclick: (e) => {
                 e.stopPropagation()
+                // 放大期间原卡片保持高亮，关闭后取消
+                el.classList.add('word-card--active')
                 openCardOverlay(word, {
                     language,
                     paradigmTpl,
                     onGrammarRef,
                     resolvePosRef,
                     resolveDerivative,
-                    onDerivativeClick
+                    onDerivativeClick,
+                    onClose: () => el.classList.remove('word-card--active')
                 })
             }
         }, '⛶')

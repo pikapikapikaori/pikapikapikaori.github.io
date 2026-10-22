@@ -1,5 +1,6 @@
 import { h } from '../utils/dom.js'
-import { applyBdi, bdiDir, needsBdi } from '../utils/bdi.js'
+import { applyBdi } from '../utils/bdi.js'
+import { createEditableInput } from './editable-input.js'
 
 /**
  * 通用表格渲染
@@ -119,13 +120,11 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
                 tr.appendChild(h('td', {
                     class: 'paradigm-table__cell paradigm-table__cell--edit'
                 },
-                h('input', {
-                    class: 'input input--cell',
-                    type: 'text',
+                createEditableInput({
                     value,
-                    lang: lang || undefined,
-                    placeholder: '',
-                    oninput: (e) => {
+                    lang,
+                    className: 'input input--cell',
+                    onInput: (e) => {
                         if (editable && typeof editable.onChange === 'function') {
                             editable.onChange(row.key, col.key, e.target.value)
                         }
@@ -148,10 +147,7 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
     table.appendChild(tbody)
 
     wrap.appendChild(table)
-    // 输入框不能包 <bdi>，改用 dir；只读文字按字符范围包 bdi
-    if (needsBdi(lang)) {
-        for (const input of wrap.querySelectorAll('input')) input.setAttribute('dir', bdiDir(lang))
-    }
+    // 可编辑单元格本身就是 contenteditable（内容里的原文已包 bdi），只读文字再统一处理一遍
     applyBdi(wrap)
     return wrap
 }

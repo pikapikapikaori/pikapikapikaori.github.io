@@ -11,7 +11,8 @@ import {
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { createGhostInput } from '../components/ghost-input.js'
-import { bdiDir, bdiNode, needsBdi } from '../utils/bdi.js'
+import { createSelect } from '../components/select-field.js'
+import { bdiNode, bdiText } from '../utils/bdi.js'
 import { createTabGroup } from '../components/tabs.js'
 import { generateParadigm, previewStem } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
@@ -67,15 +68,21 @@ export default {
         /** 当前词性的界面用词（各语言在自己的 JSON 里声明） */
         function currentTerms() { return termsOf(grammarDoc, posSelect.value) }
 
+        /**
+         * 说明文字（.field__hint）：内容来自语法 JSON，里面可能夹着原文
+         * （如希伯来语的「词尾 ־ָה / ־ֶת 多为阴性」），同样按字符范围包 bdi。
+         */
+        function hintText(text) { return bdiText(text, lang) }
+
         /** 词性变了以后，界面上这些文案要跟着换（各词性可以有自己的说法） */
         function applyTerms() {
             const t = currentTerms()
             inflectionTypeLabelEl.textContent = t.inflectionType
-            inflectionTypeHintEl.textContent = t.inflectionTypeHint
-            anchorHintEl.textContent = t.anchorHint
+            inflectionTypeHintEl.replaceChildren(hintText(t.inflectionTypeHint))
+            anchorHintEl.replaceChildren(hintText(t.anchorHint))
             inflectionLabel.placeholder = t.inflectionTypePlaceholder
             stemsLabelEl.textContent = stemsMeta?.label || t.stems.label
-            stemsHintEl.textContent = stemsMeta?.hint || t.stems.hint
+            stemsHintEl.replaceChildren(hintText(stemsMeta?.hint || t.stems.hint))
             principalInput.placeholder = stemsMeta?.placeholder || t.stems.placeholder
             const extra = form.querySelector('.js-extra-forms-title')
             if (extra) extra.textContent = t.extraForms
@@ -171,22 +178,22 @@ export default {
         let renderExtras = () => {}
         /** 切换「含义」的来源 tab（查询回填后跳到对应来源） */
         let setMeaningSource = () => {}
+        /** 「标签」输入框（提交时读它） */
+        let tagsInput = null
 
-        const lemmaInput = h('input', {
-            class: 'input',
-            type: 'text',
-            placeholder: '基本形态',
+        const lemmaField = createGhostInput({
             value: data.lemma,
-            lang: lang,
-            required: true,
+            lang,
+            placeholder: '基本形态',
             disabled: isEdit,
             // 基本形态可以推出词干（stemForms.base.from = 'headword'）时影响 placeholder 预览
-            oninput: () => {
+            onInput: () => {
                 refreshStemGhosts()
                 refreshGenerateBtn()
                 refreshLookupBtn()
             }
         })
+        const lemmaInput = lemmaField.input
 
         /* ---------- 外部数据源：按一次查全部，多个词性弹窗选 ---------- */
 
@@ -225,18 +232,18 @@ export default {
         let currentOptionsById = {}
 
         // 语法锚点：只列「变格 / 变位类型」，外加 特殊 / 不变
-        const inflectionRef = h('select', {
-            class: 'select',
+        // 类别名里带着原文（如希伯来语「III-ה 词根」），所以用自绘下拉，收起态也能包 bdi
+        const inflectionRef = createSelect({
             lang,
-            onchange: (e) => {
-                const v = e.target.value
+            className: 'select',
+            onChange: (v) => {
                 const opt = currentOptionsById[v]
-                // 只在 label 为空时自动填充，避免覆盖用户已填的内容
-                if (v !== SPECIAL_REF && opt && !inflectionLabel.value.trim()) {
-                    inflectionLabel.value = opt.short || opt.label
-                } else if (v === INDECL_REF && !inflectionLabel.value.trim()) {
-                    inflectionLabel.value = currentTerms().indeclinable
-                }
+                // 换锚点就重写类型说明：特殊 → 清空待填；不变 → 用该语言的「不变形」；
+                // 其余 → 锚点的短名（原来是「只在为空时填」，导致换了锚点内容不跟着变）
+                if (v === SPECIAL_REF) inflectionLabel.value = ''
+                else if (v === INDECL_REF) inflectionLabel.value = currentTerms().indeclinable
+                else if (opt) inflectionLabel.value = opt.short || opt.label
+                autoInflectionLabel = inflectionLabel.value
                 renderExtraParts()
                 renderParadigmBlock()
                 refreshGenerateBtn()
@@ -252,7 +259,7 @@ export default {
             // 这一行整块隐藏，连「特殊 / 不变」两个内置项也不提供
             // （永远不变格变位的词性谈不上「特殊变格」，也没有「不变格」的对应关系）
             if (grammarDoc?.paradigm === false || !opts.length) {
-                inflectionRef.replaceChildren()
+                inflectionRef.setOptions([])
                 inflectionRef.disabled = true
                 inflectionRow.hidden = true
                 inflectionLabel.value = ''
@@ -271,20 +278,11 @@ export default {
                 ? prev
                 : (prev === INDECL_REF ? INDECL_REF : SPECIAL_REF)
 
-            inflectionRef.replaceChildren(
-                h('option', {
-                    value: SPECIAL_REF,
-                    selected: selected === SPECIAL_REF
-                }, currentTerms().special),
-                h('option', {
-                    value: INDECL_REF,
-                    selected: selected === INDECL_REF
-                }, currentTerms().indeclinable),
-                ...opts.map((o) => h('option', {
-                    value: o.id,
-                    selected: selected === o.id
-                }, o.label))
-            )
+            inflectionRef.setOptions([
+                { value: SPECIAL_REF, label: currentTerms().special },
+                { value: INDECL_REF, label: currentTerms().indeclinable },
+                ...opts.map((o) => ({ value: o.id, label: o.label }))
+            ], selected)
             renderExtraParts()
             generateBtn.hidden = !collectInflectAnchors(grammarDoc, lang, posSelect.value).length
             refreshGenerateBtn()
@@ -339,17 +337,16 @@ export default {
             refreshGenerateBtn()
         }
 
-        const inflectionLabel = h('input', {
-            class: 'input',
-            type: 'text',
-            placeholder: currentTerms().inflectionTypePlaceholder,
-            value: data.inflectionType.label
+        const inflectionField = createGhostInput({
+            value: data.inflectionType.label,
+            lang,
+            placeholder: currentTerms().inflectionTypePlaceholder
         })
+        const inflectionLabel = inflectionField.input
 
         const principalField = createGhostInput({
             value: data.stems.base || '',
             lang,
-            dir: needsBdi(lang) ? bdiDir(lang) : null,
             placeholder: stemsMeta?.placeholder || currentTerms().stems.placeholder,
             getGhost: () => derivedBase(),
             onInput: () => { refreshStemGhosts(); refreshGenerateBtn() }
@@ -401,26 +398,22 @@ export default {
                     data.attributes[def.key] = current
                 }
 
-                const select = h('select', {
-                    class: 'select',
-                    onchange: (e) => {
-                        const v = e.target.value
+                const select = createSelect({
+                    lang,
+                    className: 'select',
+                    value: current,
+                    options: [
+                        ...(required && current ? [] : [{ value: '', label: '（未选择）' }]),
+                        ...def.options.map((opt) => ({ value: opt.value, label: opt.label }))
+                    ],
+                    onChange: (v) => {
                         if (v) data.attributes[def.key] = v
                         else delete data.attributes[def.key]
                         renderParadigmBlock()
                     }
-                },
-                ...(required && current ? [] : [h('option', {
-                    value: '',
-                    selected: !current
-                }, '（未选择）')]),
-                ...def.options.map((opt) => h('option', {
-                    value: opt.value,
-                    selected: current === opt.value
-                }, opt.label))
-                )
+                })
 
-                genderSlot.appendChild(field(def.label, select, def.hint || ''))
+                genderSlot.appendChild(field(def.label, select, def.hint || '', lang))
             }
         }
 
@@ -429,8 +422,8 @@ export default {
         form.appendChild(h('div', { class: 'word-form__row word-form__card' },
             h('label', { class: 'field' },
                 h('span', { class: 'field__label' }, '基本形态'),
-                lemmaInput,
-                h('span', { class: 'field__hint' }, '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。')
+                lemmaField.el,
+                h('span', { class: 'field__hint' }, hintText('唯一键的一部分，同一语言下必须唯一。编辑时不可修改。'))
             ),
             h('div', { class: 'field' },
                 h('span', { class: 'field__label' }, '词性'),
@@ -443,17 +436,17 @@ export default {
         ))
 
         const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)
-        const inflectionTypeHintEl = h('span', { class: 'field__hint' }, currentTerms().inflectionTypeHint)
-        const anchorHintEl = h('span', { class: 'field__hint' }, currentTerms().anchorHint)
+        const inflectionTypeHintEl = h('span', { class: 'field__hint' }, hintText(currentTerms().inflectionTypeHint))
+        const anchorHintEl = h('span', { class: 'field__hint' }, hintText(currentTerms().anchorHint))
         // 语法性之类的属性 + 类型 + 锚点：一行放不下时自适应换行
         const inflectionRow = h('div', { class: 'word-form__panel' },
             genderSlot,
             h('label', { class: 'field' }, h('span', { class: 'field__label' }, '语法锚点'), inflectionRef, anchorHintEl),
-            h('label', { class: 'field' }, inflectionTypeLabelEl, inflectionLabel, inflectionTypeHintEl)
+            h('label', { class: 'field' }, inflectionTypeLabelEl, inflectionField.el, inflectionTypeHintEl)
         )
 
         const stemsLabelEl = h('span', { class: 'field__label' }, stemsMeta?.label || currentTerms().stems.label)
-        const stemsHintEl = h('span', { class: 'field__hint' }, stemsMeta?.hint || currentTerms().stems.hint)
+        const stemsHintEl = h('span', { class: 'field__hint' }, hintText(stemsMeta?.hint || currentTerms().stems.hint))
         const stemsRow = h('label', { class: 'field' },
             stemsLabelEl,
             h('div', { class: 'field__row' }, principalField.el, generateBtn),
@@ -545,7 +538,7 @@ export default {
             if (!parts.length) return
 
             extraPartsSlot.appendChild(h('div', { class: 'field__hint' },
-                currentTerms().extraPartsHint))
+                hintText(currentTerms().extraPartsHint)))
 
             for (const part of parts) {
                 const setValue = (raw) => {
@@ -557,22 +550,22 @@ export default {
                 }
                 // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）
                 const input = part.kind === 'select'
-                    ? h('select', {
-                        class: 'select',
-                        onchange: (e) => setValue(e.target.value)
-                    },
-                    h('option', { value: '', selected: !data.stems[part.key] }, '（未填写）'),
-                    ...(part.options || []).map((opt) => h('option', {
-                        value: opt,
-                        selected: data.stems[part.key] === opt
-                    }, opt)))
+                    ? createSelect({
+                        lang,
+                        className: 'select',
+                        value: data.stems[part.key] || '',
+                        options: [
+                            { value: '', label: '（未填写）' },
+                            ...(part.options || []).map((opt) => ({ value: String(opt), label: String(opt) }))
+                        ],
+                        onChange: (v) => setValue(v)
+                    })
                     : ((ghost) => {
                         extraGhosts.push(ghost)
                         return ghost
                     })(createGhostInput({
                         value: data.stems[part.key] || '',
                         lang,
-                        dir: needsBdi(lang) ? bdiDir(lang) : null,
                         dataset: { partKey: part.key },
                         getGhost: () => derivedPart(part.key),
                         onInput: (e) => {
@@ -583,7 +576,7 @@ export default {
                 extraPartsSlot.appendChild(h('label', { class: 'field field--part' },
                     h('span', { class: 'field__label' }, part.label || part.key),
                     input,
-                    part.hint ? h('span', { class: 'field__hint' }, part.hint) : null
+                    part.hint ? h('span', { class: 'field__hint' }, hintText(part.hint)) : null
                 ))
             }
             refreshStemGhosts()
@@ -753,6 +746,12 @@ export default {
         function renderParadigmBlock() {
             paradigmSlot.replaceChildren()
             if (grammarDoc?.paradigm === false) return
+            // 选了「不变格 / 不变形 / 不变位」：没有变化表可填，整块（主要部分、标题、表格、横线）都不渲染
+            if (inflectionRef.value === INDECL_REF) {
+                paradigmSlot.hidden = true
+                return
+            }
+            paradigmSlot.hidden = false
             const tpl = getParadigmTemplate(grammarDoc, data.pos)
             if (!tpl) return
 
@@ -824,7 +823,7 @@ export default {
 
             // 表格句尾提示
             wrap.appendChild(h('div', { class: 'field__hint word-form__table-hint' },
-                '仅填写你需要的形式，空白格不渲染'))
+                hintText('仅填写你需要的形式，空白格不渲染')))
 
             paradigmSlot.appendChild(wrap)
         }
@@ -952,7 +951,7 @@ export default {
                 openModal({
                     title: '选择词条',
                     body: h('div', {},
-                        h('div', { class: 'field__hint' }, '这一页有多个词条，选一个用来回填'),
+                        h('div', { class: 'field__hint' }, hintText('这一页有多个词条，选一个用来回填')),
                         h('div', { class: 'lookup-choices' }, ...items)
                     ),
                     actions: [
@@ -1049,7 +1048,7 @@ export default {
 
             const tabs = h('div', { class: 'source-tabs word-form__meaning-tabs' })
             const list = h('div', { class: 'word-form__list' })
-            const empty = h('div', { class: 'field__hint' }, '该来源还没有含义')
+            const empty = h('div', { class: 'field__hint' }, hintText('该来源还没有含义'))
 
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
@@ -1110,11 +1109,13 @@ export default {
 
                 for (const { m, idx } of rows) {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--meaning' },
-                        h('input', {
-                            class: 'input', placeholder: '含义', value: m.text,
-                            lang: m.lang === 'en' ? 'en' : undefined,
-                            oninput: (e) => { m.text = e.target.value }
-                        }),
+                        createGhostInput({
+                            value: m.text,
+                            lang: m.lang === 'en' ? 'en' : null,
+                            bdiLang: lang,
+                            placeholder: '含义',
+                            onInput: (e) => { m.text = e.target.value }
+                        }).el,
                         h('select', {
                             class: 'select',
                             onchange: (e) => { m.lang = e.target.value }
@@ -1168,10 +1169,12 @@ export default {
                             class: 'input', placeholder: '标签', value: it.label,
                             oninput: (e) => { it.label = e.target.value }
                         }),
-                        h('input', {
-                            class: 'input', placeholder: '形态', value: it.form, lang: lang,
-                            oninput: (e) => { it.form = e.target.value }
-                        }),
+                        createGhostInput({
+                            value: it.form,
+                            lang,
+                            placeholder: '形态',
+                            onInput: (e) => { it.form = e.target.value }
+                        }).el,
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
                             class: 'btn btn--sm word-form__cell--remove', type: 'button',
@@ -1208,10 +1211,12 @@ export default {
                 list.replaceChildren()
                 data.collocations.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item' },
-                        h('input', {
-                            class: 'input', placeholder: '搭配文本', value: it.text, lang: lang,
-                            oninput: (e) => { it.text = e.target.value }
-                        }),
+                        createGhostInput({
+                            value: it.text,
+                            lang,
+                            placeholder: '搭配文本',
+                            onInput: (e) => { it.text = e.target.value }
+                        }).el,
                         h('input', {
                             class: 'input', placeholder: '释义', value: it.gloss,
                             oninput: (e) => { it.gloss = e.target.value }
@@ -1249,10 +1254,12 @@ export default {
                 list.replaceChildren()
                 data.examples.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--example' },
-                        h('input', {
-                            class: 'input', placeholder: '例句原文', value: it.text, lang: lang,
-                            oninput: (e) => { it.text = e.target.value }
-                        }),
+                        createGhostInput({
+                            value: it.text,
+                            lang,
+                            placeholder: '例句原文',
+                            onInput: (e) => { it.text = e.target.value }
+                        }).el,
                         h('input', {
                             class: 'input', placeholder: '出处', value: it.citation,
                             oninput: (e) => { it.citation = e.target.value }
@@ -1279,12 +1286,12 @@ export default {
             const results = h('div', { class: 'picker-results' })
             const hint = h('div', { class: 'field__hint' }, '')
 
-            const searchInput = h('input', {
-                class: 'input',
-                type: 'search',
+            const searchField = createGhostInput({
+                lang,
                 placeholder: '搜索本语言词库（基本形态 / 主要部分）…',
-                oninput: () => scheduleSearch()
+                onInput: () => scheduleSearch()
             })
+            const searchInput = searchField.input
 
             let timer = null
             let seq = 0
@@ -1342,7 +1349,7 @@ export default {
             function renderSelected() {
                 selected.replaceChildren()
                 if (!data.derivatives.length) {
-                    selected.appendChild(h('span', { class: 'field__hint' }, '尚未选择派生词'))
+                    selected.appendChild(h('span', { class: 'field__hint' }, hintText('尚未选择派生词')))
                     return
                 }
                 for (const lemma of data.derivatives) {
@@ -1369,8 +1376,8 @@ export default {
                 h('div', { class: 'derivative-picker' },
                     selected,
                     h('div', { class: 'field' },
-                        searchInput,
-                        h('span', { class: 'field__hint' }, '只能选择词库中已存在的词'),
+                        searchField.el,
+                        h('span', { class: 'field__hint' }, hintText('只能选择词库中已存在的词')),
                         hint
                     ),
                     results
@@ -1383,7 +1390,7 @@ export default {
         }
 
         function buildExtrasGroup() {
-            const tagsInput = h('input', {
+            tagsInput = h('input', {
                 class: 'input',
                 placeholder: '标签，用逗号分隔（如 高频, 文献A）',
                 value: data.tags.join(', ')
@@ -1399,15 +1406,15 @@ export default {
             }
 
             return h('div', { class: 'word-form__group word-form__extras' },
-                field('标签', tagsInput),
-                field('备注', notesInput)
+                field('标签', tagsInput, '', lang),
+                field('备注', notesInput, '', lang)
             )
         }
 
         /* ---------- 提交 ---------- */
 
         async function onSubmit() {
-            const tagsRaw = form.querySelector('input[placeholder^="标签"]').value
+            const tagsRaw = tagsInput.value
             data.tags = tagsRaw.split(/[,，]/).map((s) => s.trim()).filter(Boolean)
 
             const lemma = lemmaInput.value.trim()
@@ -1481,11 +1488,11 @@ export default {
     }
 }
 
-function field(label, control, hint) {
+function field(label, control, hint, lang = null) {
     return h('label', { class: 'field' },
         h('span', { class: 'field__label' }, label),
         control,
-        hint ? h('span', { class: 'field__hint' }, hint) : null
+        hint ? h('span', { class: 'field__hint' }, bdiText(hint, lang)) : null
     )
 }
 

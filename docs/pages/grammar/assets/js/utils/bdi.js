@@ -37,26 +37,36 @@ function isScriptChar(ch, re) {
     return JOINERS.has(ch) || re.test(ch)
 }
 
-/** 把文本切成「该文字 / 其他」的连续片段 */
+/**
+ * 把文本切成「该文字 / 其他」的连续片段。
+ *
+ * 夹在两个原文之间的分隔符（词根里的连字符 `ק-ט-ל`、gershayim `ע"ו` 等）并进同一个片段：
+ * 否则每个字母各自成一个 <bdi>，RTL 的字母会被按 LTR 顺序排开，词根看起来就是反的。
+ */
 export function splitScriptRuns(text, lang) {
     const re = scriptRe(lang)
     const source = String(text ?? '')
     if (!re || !source) return [{ text: source, script: false }]
 
+    const chars = [...source]
+    const script = chars.map((ch) => isScriptChar(ch, re))
+    for (let i = 1; i < chars.length - 1; i += 1) {
+        if (!script[i] && script[i - 1] && script[i + 1]) script[i] = true
+    }
+
     const runs = []
     let buf = ''
     let current = null
-    for (const ch of source) {
-        const script = isScriptChar(ch, re)
-        if (current === null || script === current) {
+    chars.forEach((ch, i) => {
+        if (current === null || script[i] === current) {
             buf += ch
-            current = script
+            current = script[i]
         } else {
             runs.push({ text: buf, script: current })
             buf = ch
-            current = script
+            current = script[i]
         }
-    }
+    })
     if (buf || current !== null) runs.push({ text: buf, script: !!current })
     return runs
 }

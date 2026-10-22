@@ -243,7 +243,10 @@ function shortLabel(title) {
 
 /**
  * 收集可作「变格 / 变位类型」的锚点：只取带 inflect 标记的 section / item
- * @returns {{ id: string, label: string, kind: 'decl'|'conj' }[]}
+ *
+ * 条目的锚点名**不带章节前缀**（直接是条目标题，如「III-ה 词根」）；只有同一个词性里
+ * 出现重名条目时才退回「章节 · 条目」，避免两个选项长得一模一样。
+ * @returns {{ id: string, label: string, short: string, kind: 'decl'|'conj' }[]}
  */
 export function collectInflectAnchors(doc, lang, pos) {
     const out = []
@@ -265,17 +268,25 @@ export function collectInflectAnchors(doc, lang, pos) {
             if (!item || !item.id || !item.inflect) continue
             out.push({
                 id: item.id,
-                label: `${section.title || section.id} · ${item.title || item.id}`,
+                label: item.title || item.id,
                 short: item.title || item.id,
-                kind: item.inflect
+                kind: item.inflect,
+                // 重名时的退路（内部用，不对外）
+                fullLabel: `${section.title || section.id} · ${item.title || item.id}`
             })
         }
     }
 
-    // 短名撞车时退回完整标题（如古希腊语四个「第二变位法」）
+    // 条目锚点重名：两边都退回带章节前缀的完整标题（如古希腊语四个「第二变位法」）
     const seen = new Map()
-    for (const a of out) seen.set(a.short, (seen.get(a.short) || 0) + 1)
-    for (const a of out) if (seen.get(a.short) > 1) a.short = a.label
+    for (const a of out) seen.set(a.label, (seen.get(a.label) || 0) + 1)
+    for (const a of out) {
+        if (seen.get(a.label) > 1 && a.fullLabel) {
+            a.label = a.fullLabel
+            a.short = a.fullLabel
+        }
+        delete a.fullLabel
+    }
 
     return out
 }

@@ -334,8 +334,8 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
 
     const formRules = Array.isArray(spec.formRules) ? spec.formRules : []
     const current = existing && typeof existing === 'object' ? existing : {}
-    // 骨架型（`mode: 'skeleton'`）：格子写的是「元音（辅音）骨架」，`_` 由词根辅音依次代入，
-    // 例如希伯来语 `_ ָ _ ַ _` + 词根 קטל → קָטַל。代入由语言档案的 realize() 负责。
+    // 骨架型（`mode: 'skeleton'`）：格子写的是「辅音 + 元音骨架」，`־` 由词根辅音依次代入，
+    // 例如希伯来语 `־ ָ ־ ַ ־` + 词根 קטל → קָטַל。代入由语言档案的 realize() 负责。
     const skeletonMode = spec.mode === 'skeleton'
 
     for (const table of template.tables) {

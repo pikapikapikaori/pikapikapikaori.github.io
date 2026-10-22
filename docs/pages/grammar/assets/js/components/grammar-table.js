@@ -64,11 +64,11 @@ export function createGrammarTable(spec) {
 }
 
 /**
- * 一个条目的多张表：有「变化表 + 示例表」配对时用 tab 切换
+ * 一个条目的多张表：用 tab 切换
  *
- * - 只有一组：一行 tab（变化表 / 示例表）
- * - 多组（表对象带 `group` / `groupLabel`）：两行 tab，先选组再选变化 / 示例
- * - 没有配对关系（只有变化表或只有示例表）：按原顺序堆叠
+ * - 同一组里有多张表：一张表一个 tab（`示例表：<词>` / `变化表` / 表自己的 `roleLabel`）
+ * - 多组（表对象带 `group` / `groupLabel`）：两行 tab，先选组再选表
+ * - 只有一张表：直接渲染，不画 tab
  *
  * @param {object[]} tables  语法 JSON 里的 `item.tables`
  * @param {string}   lang    默认单元格语言（表自己带 `lang` 时优先）
@@ -86,55 +86,69 @@ export function createGrammarTables(tables, lang = null) {
         const key = entry.spec.group || ''
         let group = groups.find((g) => g.key === key)
         if (!group) {
-            group = { key, label: entry.spec.groupLabel || '', pattern: [], example: [] }
+            group = { key, label: entry.spec.groupLabel || '', items: [] }
             groups.push(group)
         }
-        if (entry.spec.role === 'example') group.example.push(entry.node)
-        else group.pattern.push(entry.node)
+        group.items.push(entry)
     }
 
-    const paired = groups.some((g) => g.pattern.length && g.example.length)
-    // 多组时始终用组 tab（组里只有一类表时，第二行「变化表 / 示例表」不显示）
-    if (groups.length <= 1 && !paired) {
-        return h('div', { class: 'grammar-tables' }, ...entries.map((entry) => entry.node))
+    // 只有一组、且组里只有一张表：不用 tab
+    if (groups.length === 1 && groups[0].items.length === 1) return groups[0].items[0].node
+
+    // 会被做成 tab 的表：标题已经在 tab 上了，表内不再重复一遍 caption
+    for (const group of groups) {
+        const tabbed = group.items.length > 1 && group.items.some((entry) => entry.spec.role === 'example')
+        if (!tabbed) continue
+        for (const entry of group.items) entry.node.querySelector('caption')?.remove()
     }
 
-    const ROLE_LABEL = { pattern: '变化表', example: '示例表' }
-    let groupIndex = Math.max(0, groups.findIndex((g) => g.pattern.length || g.example.length))
-    let role = groups[groupIndex].pattern.length ? 'pattern' : 'example'
+    let groupIndex = Math.max(0, groups.findIndex((g) => g.items.length))
+    let tableIndex = 0
 
     const groupRow = h('div', { class: 'grammar-tabs__row' })
-    const roleRow = h('div', { class: 'grammar-tabs__row' })
+    const tableRow = h('div', { class: 'grammar-tabs__row' })
     const content = h('div', { class: 'grammar-tables' })
 
     function render() {
         const group = groups[groupIndex]
-        const available = ['pattern', 'example'].filter((key) => group[key].length)
-        if (!available.includes(role)) role = available[0]
+        // 有示例表配对时才按表分 tab；只有一堆同类表（如德语的几张变格表）仍旧按原样叠着放
+        const tabbed = group.items.length > 1 && group.items.some((entry) => entry.spec.role === 'example')
+        if (tableIndex >= group.items.length) tableIndex = 0
 
         groupRow.replaceChildren()
         if (groups.length > 1) {
             groupRow.appendChild(createTabBar({
                 items: groups.map((g, index) => ({ key: String(index), label: g.label || `表 ${index + 1}` })),
                 active: String(groupIndex),
-                onChange: (key) => { groupIndex = Number(key); render() },
+                onChange: (key) => { groupIndex = Number(key); tableIndex = 0; render() },
                 className: 'tab-bar--tables'
             }).el)
         }
 
-        roleRow.replaceChildren()
-        if (available.length > 1) {
-            roleRow.appendChild(createTabBar({
-                items: available.map((key) => ({ key, label: ROLE_LABEL[key] })),
-                active: role,
-                onChange: (key) => { role = key; render() },
+        tableRow.replaceChildren()
+        if (tabbed) {
+            tableRow.appendChild(createTabBar({
+                items: group.items.map((entry, index) => ({ key: String(index), label: tabLabelOf(entry.spec) })),
+                active: String(tableIndex),
+                onChange: (key) => { tableIndex = Number(key); render() },
                 className: 'tab-bar--tables'
             }).el)
         }
 
-        content.replaceChildren(...group[role])
+        content.replaceChildren(...(tabbed ? [group.items[tableIndex].node] : group.items.map((entry) => entry.node)))
     }
 
     render()
-    return h('div', { class: 'grammar-tabs' }, groupRow, roleRow, content)
+    return h('div', { class: 'grammar-tabs' }, groupRow, tableRow, content)
 }
+
+/**
+ * 表的 tab 名：示例表带上自己的例词（`示例表：דָּבָר`），其余叫「变化表」，
+ * 表自己写了 `roleLabel` 时优先（如代词的后缀表）。
+ */
+function tabLabelOf(spec) {
+    if (spec && spec.roleLabel) return String(spec.roleLabel)
+    if (!spec || spec.role !== 'example') return '变化表'
+    return spec.exampleWord ? `示例表：${spec.exampleWord}` : '示例表'
+}
+

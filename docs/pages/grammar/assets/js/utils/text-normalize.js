@@ -109,12 +109,6 @@ export function snippet(text, query, radius = 40) {
 
 /* ---------------- 语言辅助 ---------------- */
 
-export const RTL_LANGS = new Set(['he', 'ar', 'fa'])
-
-export function isRtl(lang) {
-    return RTL_LANGS.has(lang)
-}
-
 export function normalizeLangCode(code) {
     return String(code || '').trim().toLowerCase()
 }

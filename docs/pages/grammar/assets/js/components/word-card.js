@@ -2,7 +2,6 @@ import { h } from '../utils/dom.js'
 import { applyBdi } from '../utils/bdi.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
 import { fieldDefsOfTemplate, fieldValues, genderOfColumn } from '../models/grammar.js'
-import { isRtl } from '../utils/text-normalize.js'
 import { getLanguage } from '../data/languages.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
@@ -25,7 +24,6 @@ export function createWordCard(word, options = {}) {
         partLabels = null
     } = options
 
-    const rtl = isRtl(language)
     const posGrammarRef = typeof resolvePosRef === 'function' ? resolvePosRef(word.pos) : null
     const sources = allSources(word)
     // 「手动」就是默认来源：有外部来源时就多一个 tab，别让含义没处可切
@@ -111,10 +109,7 @@ export function createWordCard(word, options = {}) {
 
         // 中间：lemma + meta
         const center = h('div', { class: 'word-card__center' },
-            h('div', {
-                class: 'word-card__lemma' + (rtl ? ' word-card__lemma--rtl' : ''),
-                lang: language
-            }, word.lemma)
+            h('div', { class: 'word-card__lemma', lang: language }, word.lemma)
         )
 
         const meta = h('div', { class: 'word-card__meta' },

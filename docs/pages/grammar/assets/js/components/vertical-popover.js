@@ -201,9 +201,10 @@ function onMouseOut(e) {
 
 function onClick(e) {
     if (popoverEl && popoverEl.contains(e.target)) return
-    // 输入框里点击要留给光标定位，不能拦截
+    // 输入框 / 自绘输入框里点击要留给光标定位，不能拦截
     const tag = e.target && e.target.tagName
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+    if (e.target instanceof Element && e.target.closest('[contenteditable]')) return
 
     const el = findVerticalEl(e.target)
     if (el) {

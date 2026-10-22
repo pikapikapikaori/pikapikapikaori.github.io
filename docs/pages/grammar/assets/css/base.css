@@ -66,9 +66,10 @@ pre,
 
 [lang="he"] {
     font-family: "LN HE", var(--ff-content);
-    direction: rtl;
-    unicode-bidi: isolate;
 }
+
+/* 方向不在这里定：原文一律包进 <bdi dir>（见 utils/bdi.js），
+   全局 direction: rtl 会把同一格里的中文一起带成 RTL 段落，导致中文被排到原文后面。 */
 
 [lang="sa"] {
     font-family: "LN SA", "Noto Sans Devanagari", var(--ff-content);
@@ -97,11 +98,12 @@ pre,
 /*
  * 输入框 / 下拉框里的内容是用户输入的，方向要按内容判定：
  * 中文 placeholder 保持左对齐，输入 RTL 文字时自动切到右对齐。
- * 不加这条的话，[lang="he"] 的 direction: rtl 会把中文 placeholder 也右对齐。
+ * contenteditable 自绘输入框同理（原文交给里面的 <bdi>，外框保持界面方向）。
  */
 input[lang],
 textarea[lang],
-select[lang] {
+select[lang],
+.input--editable[lang] {
     direction: ltr;
     unicode-bidi: plaintext;
     text-align: start;

@@ -5,16 +5,25 @@
  * 这里只放希伯来语的音系与马索拉符号规则。
  *
  * 希伯来语的屈折不是「词干 + 词尾」，而是「三辅音词根嵌进元音骨架」，
- * 所以骨架表用 `_` 表示一个词根辅音占位（占位后可以带 dagesh 等附加点）。
+ * 所以骨架表用四个占位符分别表示第 1–4 个词根辅音（占位符后面可以带 dagesh 等附加点）：
+ *   `־`（מַקָּף）= 第 1 个，`׳`（גֵּרֵשׁ）= 第 2 个，`״`（גֵּרְשַׁיִם）= 第 3 个，
+ *   `׀`（פָּסֵק）= 第 4 个（四辅音词根）。
+ * 用固定符号而不是「按顺序自动编号 + 下标数字」，是因为数字夹在占位符和它的元音附标之间时，
+ * 附标会挂到数字上、在 RTL 里叠成一团。
  */
 /** 重音模式：末音节重音（מִלְרַע，默认）/ 倒数第二音节重音（מִלְּעֵיל） */
 export const accentModes = ['he-milra', 'he-milel']
 
 /** 词根占位符 */
-export const ROOT_SLOT = '_'
+/**
+ * 词根占位符：下标 0–3 依次是第 1 / 2 / 3 / 4 个词根辅音。
+ * 顺便导出第一个，供只关心「有没有占位符」的地方使用。
+ */
+export const ROOT_SLOTS = ['־', '׳', '״', '׀']
+export const ROOT_SLOT = ROOT_SLOTS[0]
 
 /**
- * 「条件 dagesh」标记：写在 `_` 之后（`_~`），表示**若该词根辅音属于 בגדכפת** 就补 דָּגֵשׁ קַל。
+ * 「条件 dagesh」标记：写在占位符之后（如 `׳~`），表示**若该词根辅音属于 בגדכפת** 就补 דָּגֵשׁ קַל。
  * 用于词中 dagesh lene 不确定的格子：同一个骨架配 ל/מ/ש 等词根时不会误加 dagesh（那会变成 dagesh forte）。
  */
 export const DAGESH_SLOT = '~'
@@ -44,7 +53,7 @@ const BEGADKEFAT = new Set(['ב', 'ג', 'ד', 'כ', 'פ', 'ת'])
  * 已有 דָּגֵשׁ（קַל 或 חָזָק）的字母跳过。
  *
  * 局限：词中「שְׁוָא נָח 之后」的 dagesh lene（如 יִכְתְּבוּ 的 ת）依赖词根字母的发音位置，
- * 目前不做自动判定 —— 需要时在骨架里把该格写成 `_` + דָּגֵשׁ。见 docs/TODO.md。
+ * 目前不做自动判定 —— 需要时在骨架里把该格写成 `־` + דָּגֵשׁ。见 docs/TODO.md。
  */
 export function dageshLene(text) {
     const chars = [...String(text ?? '').normalize('NFC')]
@@ -65,12 +74,12 @@ export function dageshLene(text) {
 }
 
 /**
- * 把三辅音词根代入元音骨架。
- * `applySkeleton('קטל', '_ָ_ַ_')` → `קָטַל`
+ * 把词根辅音代入元音骨架。
+ * `applySkeleton('קטל', '־ָ׳ַ״')` → `קָטַל`
  *
- * 支持两种后缀记号：
- *   `_1` / `_2` / `_3` —— 显式指定第几个词根辅音（弱根脱落时用，避免顺序错位）
- *   `_~`              —— 该词根辅音若是 בגדכפת 就补 דָּגֵשׁ קַל（词中 dagesh lene）
+ * 记号：
+ *   `־` / `׳` / `״` / `׀` —— 第 1 / 2 / 3 / 4 个词根辅音（弱根脱落时看符号就知道缺的是哪一个）
+ *   `~`                   —— 跟在占位符之后：该词根辅音若是 בגדכפת 就补 דָּגֵשׁ קַל（词中 dagesh lene）
  */
 export function applySkeleton(root, skeleton) {
     const letters = [...String(root ?? '').replace(/[-\u2010-\u2015\s]/g, '')]
@@ -78,29 +87,28 @@ export function applySkeleton(root, skeleton) {
 
     // ---- 第一步：解析成单元。词根占位连同其后紧跟的组合记号算一个单元 ----
     const units = []
-    let slot = 0
     for (let k = 0; k < chars.length; k += 1) {
         const ch = chars[k]
-        if (ch === ROOT_SLOT) {
-            let index = slot
-            const next = chars[k + 1]
-            if (next && next >= '1' && next <= '9') {
-                index = Number(next) - 1
-                slot = index + 1
-                k += 1
-            } else {
-                slot += 1
-            }
-            let forceDagesh = false
-            if (chars[k + 1] === DAGESH_SLOT) {
-                forceDagesh = true
-                k += 1
-            }
-            const unit = { ch: letters[index] ?? ROOT_SLOT, marks: [], fromRoot: true, forceDagesh }
-            // 骨架里紧跟的组合记号归到这个词根字母上
-            while (k + 1 < chars.length && COMBINING_CHAR.test(chars[k + 1])) {
-                unit.marks.push(chars[k + 1])
-                k += 1
+        const rootIndex = ROOT_SLOTS.indexOf(ch)
+        if (rootIndex >= 0) {
+            // 词根字母不够长时保留占位符本身，避免把数据错误悄悄吃掉
+            const unit = { ch: letters[rootIndex] ?? ch, marks: [], fromRoot: true, forceDagesh: false }
+            // 紧跟的 `~`（条件 dagesh）与组合记号都归到这个词根字母上，两者先后顺序不敏感。
+            // 数据里写成「附标在前、`~` 在后」（如 `׳ַ~`）：`~` 是 ASCII 字符，夹在占位符和附标之间
+            // 时附标会挂到它身上、在 RTL 里渲染成乱码。
+            while (k + 1 < chars.length) {
+                const next = chars[k + 1]
+                if (next === DAGESH_SLOT) {
+                    unit.forceDagesh = true
+                    k += 1
+                    continue
+                }
+                if (COMBINING_CHAR.test(next)) {
+                    unit.marks.push(next)
+                    k += 1
+                    continue
+                }
+                break
             }
             units.push(unit)
             continue
@@ -117,7 +125,7 @@ export function applySkeleton(root, skeleton) {
 
     // ---- 第二步：词尾形归一。只有「后面再没有字母」的那个字母才用词尾形 ----
     let lastLetter = -1
-    units.forEach((u, index) => { if (u.ch !== ROOT_SLOT) lastLetter = index })
+    units.forEach((u, index) => { if (!ROOT_SLOTS.includes(u.ch)) lastLetter = index })
     units.forEach((u, index) => {
         if (index === lastLetter) {
             if (REGULAR_TO_FINAL[u.ch]) u.ch = REGULAR_TO_FINAL[u.ch]
@@ -134,7 +142,7 @@ export function applySkeleton(root, skeleton) {
     let out = ''
     let letterIndex = 0
     for (const unit of units) {
-        const isLetter = unit.ch !== ROOT_SLOT
+        const isLetter = !ROOT_SLOTS.includes(unit.ch)
         const hasDagesh = unit.marks.includes(DAGESH)
         const addDagesh = isLetter
             && BEGADKEFAT.has(unit.ch)
@@ -149,8 +157,8 @@ export function applySkeleton(root, skeleton) {
 }
 
 /**
- * 骨架的反向运算：把 base 形态里的词根辅音依次换成 `_`，得到该形态的骨架。
- * 用于「由基本形态判定元音模式」：`toSkeleton('דָּבָר', 'דבר')` → `_ָ_ָ_`
+ * 骨架的反向运算：把 base 形态里的词根辅音换成对应位置的占位符，得到该形态的骨架。
+ * 用于「由基本形态判定元音模式」：`toSkeleton('דָּבָר', 'דבר')` → `־ָ׳ָ״`
  */
 export function toSkeleton(form, root) {
     // 词根里的 ן ף ץ ם ך 与词形中的词中形是同一个字母，比对前先统一成常规形
@@ -163,8 +171,8 @@ export function toSkeleton(form, root) {
         // 词根辅音可能在词形里缺席（弱根脱落），缺席就跳过，继续找下一个
         const at = chars.findIndex((ch, i) => i >= from && (FINAL_TO_REGULAR[ch] || ch) === letter)
         if (at < 0) return
-        // 跳过了前面的词根辅音时改用显式下标（`_2` = 第 2 个辅音）
-        chars[at] = k === next ? ROOT_SLOT : `${ROOT_SLOT}${k + 1}`
+        // 缺席的词根辅音不会被替换，剩下几个占位符就说明缺的是哪一个
+        chars[at] = ROOT_SLOTS[k] ?? ROOT_SLOT
         from = at + 1
         next = k + 1
     })
@@ -180,7 +188,7 @@ export function skeletonKey(skeleton) {
 
 /** 骨架里出现了几个词根占位 */
 export function countSlots(skeleton) {
-    return [...String(skeleton ?? '')].filter((ch) => ch === ROOT_SLOT).length
+    return [...String(skeleton ?? '')].filter((ch) => ROOT_SLOTS.includes(ch)).length
 }
 
 /**

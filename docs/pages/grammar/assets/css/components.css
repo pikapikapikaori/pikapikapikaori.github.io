@@ -317,6 +317,57 @@
     box-shadow: 0 0 0 3px var(--c-accent-soft);
 }
 
+/*
+ * contenteditable 自绘输入框（components/editable-input.js）：
+ * 外观复用 .input，内容是 HTML，所以原文可以包 <bdi>。单行，不折行。
+ */
+.input--editable {
+    display: block;
+    line-height: 36px;
+    white-space: pre;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    cursor: text;
+}
+
+.input--editable::-webkit-scrollbar {
+    display: none;
+}
+
+.input--editable[contenteditable="false"] {
+    background: var(--c-bg-subtle);
+    color: var(--c-fg-subtle);
+    cursor: not-allowed;
+}
+
+/* 表格单元格里的紧凑版（.input--cell 的 28px 高：28 - 边框 2 - 上下内边距 4） */
+.input--cell.input--editable {
+    line-height: 22px;
+}
+
+/* 自绘下拉（components/select-field.js）：外观复用 .select，收起态文字可包 <bdi> */
+.select--custom {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    text-align: start;
+    cursor: pointer;
+}
+
+.select--custom .select__value {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.select--custom[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
 .textarea {
     padding: var(--sp-2) var(--sp-3);
     min-height: 90px;
@@ -453,10 +504,6 @@
     max-width: 100%;
 }
 
-.word-card__lemma--rtl {
-    direction: rtl;
-}
-
 .word-card__meta {
     display: flex;
     gap: var(--sp-2);
@@ -571,7 +618,8 @@
 }
 
 .field--part > .input,
-.field--part > .select {
+.field--part > .select,
+.field--part > .ghost-input {
     grid-area: control;
 }
 
@@ -1545,10 +1593,9 @@ button.word-card__derivative {
     cursor: text;
 }
 
-/* 非竖写语言（如希伯来文）：横排、放大显示 */
+/* 非竖写语言（如希伯来文）：横排、放大显示；方向由元素自己的 dir 属性决定 */
 .vertical-popover--horizontal {
     writing-mode: horizontal-tb;
-    direction: inherit;
     min-width: 2.5em;
     margin-inline-end: inherit;
     max-height: none;
@@ -1653,6 +1700,11 @@ button.word-card__derivative {
 .select-menu__item--selected {
     color: var(--c-accent);
     background: var(--c-accent-soft);
+}
+
+.select-menu__item--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .select-menu__label {

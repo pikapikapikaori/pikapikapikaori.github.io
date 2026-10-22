@@ -332,6 +332,10 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
         result.variant = hit.id || null
     }
 
+    const skeletonOptions = (s) => ({
+        leneSlots: Array.isArray(s?.post?.leneSlots) ? s.post.leneSlots : []
+    })
+
     const formRules = Array.isArray(spec.formRules) ? spec.formRules : []
     const current = existing && typeof existing === 'object' ? existing : {}
     // 骨架型（`mode: 'skeleton'`）：格子写的是「辅音 + 元音骨架」，`־` 由词根辅音依次代入，
@@ -392,7 +396,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                         result.skipped.push({ ...at, reason: 'no-realize' })
                         continue
                     }
-                    naive = String(profile.realize(part, suffix) ?? '')
+                    naive = String(profile.realize(part, suffix, skeletonOptions(spec)) ?? '')
                     if (!naive) {
                         result.skipped.push({ ...at, reason: 'empty' })
                         continue

@@ -22,12 +22,6 @@ export const accentModes = ['he-milra', 'he-milel']
 export const ROOT_SLOTS = ['־', '׳', '״', '׀']
 export const ROOT_SLOT = ROOT_SLOTS[0]
 
-/**
- * 「条件 dagesh」标记：写在占位符之后（如 `׳~`），表示**若该词根辅音属于 בגדכפת** 就补 דָּגֵשׁ קַל。
- * 用于词中 dagesh lene 不确定的格子：同一个骨架配 ל/מ/ש 等词根时不会误加 dagesh（那会变成 dagesh forte）。
- */
-export const DAGESH_SLOT = '~'
-
 /** 词尾形 ↔ 词中形：ץ ף ן ם ך ↔ צ פ נ מ כ */
 const FINAL_TO_REGULAR = { 'ץ': 'צ', 'ף': 'פ', 'ן': 'נ', 'ם': 'מ', 'ך': 'כ' }
 const REGULAR_TO_FINAL = { 'צ': 'ץ', 'פ': 'ף', 'נ': 'ן', 'מ': 'ם', 'כ': 'ך' }
@@ -49,11 +43,12 @@ const BEGADKEFAT = new Set(['ב', 'ג', 'ד', 'כ', 'פ', 'ת'])
 /**
  * 补 דָּגֵשׁ קַל（dagesh lene）：ב ג ד כ פ ת 在**词首**读塞音，要带点。
  *
- * 骨架是与词根无关的，代入的词根辅音本身不带这个点，所以由这一步统一处理；
- * 已有 דָּגֵשׁ（קַל 或 חָזָק）的字母跳过。
+ * 骨架与词根无关，代入的词根辅音本身不带这个点，所以词首由这里统一补。
+ * 词中要不要补取决于 שְׁוָא 是发声道还是静默（如 מַלְכוּת 的 שְׁוָא 发声道 → 不加点，
+ * יִכְתְּבוּ 的静默 → 加点），无法从词形可靠推断，因此由骨架直接写点、
+ * 用 `derive.post.leneSlots` 声明哪几个槽位的点是「条件 dagesh lene」。
  *
- * 局限：词中「שְׁוָא נָח 之后」的 dagesh lene（如 יִכְתְּבוּ 的 ת）依赖词根字母的发音位置，
- * 目前不做自动判定 —— 需要时在骨架里把该格写成 `־` + דָּגֵשׁ。见 docs/TODO.md。
+ * 已有 דָּגֵשׁ（קַל 或 חָזָק）的字母跳过。
  */
 export function dageshLene(text) {
     const chars = [...String(text ?? '').normalize('NFC')]
@@ -79,11 +74,17 @@ export function dageshLene(text) {
  *
  * 记号：
  *   `־` / `׳` / `״` / `׀` —— 第 1 / 2 / 3 / 4 个词根辅音（弱根脱落时看符号就知道缺的是哪一个）
- *   `~`                   —— 跟在占位符之后：该词根辅音若是 בגדכפת 就补 דָּגֵשׁ קַל（词中 dagesh lene）
+ *
+ * 骨架里只有这四个占位符：元音点、dagesh 等附标直接写在占位符后面。
+ * 词首的 dagesh lene 由 `dageshLene()` 补；词中的 dagesh lene 写在骨架里，并由
+ * `options.leneSlots`（取自 `derive.post.leneSlots`，如 `['1']`）声明：代入的辅音若不属于
+ * בגדכפת，就把这个点去掉（同一个骨架因此能同时服务 בנה 与 עשה）。
  */
-export function applySkeleton(root, skeleton) {
+export function applySkeleton(root, skeleton, options = {}) {
     const letters = [...String(root ?? '').replace(/[-\u2010-\u2015\s]/g, '')]
     const chars = [...String(skeleton ?? '')]
+
+    const leneSlots = new Set((options?.leneSlots || []).map((x) => String(x)))
 
     // ---- 第一步：解析成单元。词根占位连同其后紧跟的组合记号算一个单元 ----
     const units = []
@@ -92,28 +93,20 @@ export function applySkeleton(root, skeleton) {
         const rootIndex = ROOT_SLOTS.indexOf(ch)
         if (rootIndex >= 0) {
             // 词根字母不够长时保留占位符本身，避免把数据错误悄悄吃掉
-            const unit = { ch: letters[rootIndex] ?? ch, marks: [], fromRoot: true, forceDagesh: false }
-            // 紧跟的 `~`（条件 dagesh）与组合记号都归到这个词根字母上，两者先后顺序不敏感。
-            // 数据里写成「附标在前、`~` 在后」（如 `׳ַ~`）：`~` 是 ASCII 字符，夹在占位符和附标之间
-            // 时附标会挂到它身上、在 RTL 里渲染成乱码。
-            while (k + 1 < chars.length) {
-                const next = chars[k + 1]
-                if (next === DAGESH_SLOT) {
-                    unit.forceDagesh = true
-                    k += 1
-                    continue
-                }
-                if (COMBINING_CHAR.test(next)) {
-                    unit.marks.push(next)
-                    k += 1
-                    continue
-                }
-                break
+            const rootLetter = letters[rootIndex]
+            const unit = { ch: rootLetter ?? ch, marks: [], fromRoot: true }
+            // 骨架里紧跟占位符的组合记号（元音点、dagesh forte 等）归到这个词根字母上
+            while (k + 1 < chars.length && COMBINING_CHAR.test(chars[k + 1])) {
+                unit.marks.push(chars[k + 1])
+                k += 1
+            }
+            // 条件 dagesh lene：该槽位声明为「条件点」、代入的辅音又不是 בגדכפת 时去掉
+            if (leneSlots.has(String(rootIndex + 1)) && rootLetter && !BEGADKEFAT.has(rootLetter)) {
+                unit.marks = unit.marks.filter((m) => m !== DAGESH)
             }
             units.push(unit)
             continue
         }
-        if (ch === DAGESH_SLOT) continue
         if (COMBINING_CHAR.test(ch)) {
             // 骨架里独立书写的组合记号：挂到前一个字母上
             const prev = units[units.length - 1]
@@ -138,7 +131,7 @@ export function applySkeleton(root, skeleton) {
     // 词首的 בגדכפת 一律补（等同于 dageshLene 的词首规则）。
     // 词中的 dagesh lene **不自动判定**：שְׁוָא 是发声道还是静默取决于词形本身
     // （מַלְכוּת 的 שְׁוָא 发声道 → 不加点；יִכְתְּבוּ 的是静默 → 加点），
-    // 因此由骨架里的 `~` 显式声明（见 docs/TODO.md E3）。
+    // 由 `dageshLene()` 按「词首 / 静默 shewa 之后」两条规则补，骨架里不写。
     let out = ''
     let letterIndex = 0
     for (const unit of units) {
@@ -147,7 +140,7 @@ export function applySkeleton(root, skeleton) {
         const addDagesh = isLetter
             && BEGADKEFAT.has(unit.ch)
             && !hasDagesh
-            && (letterIndex === 0 || unit.forceDagesh)
+            && letterIndex === 0
         out += unit.ch
         if (addDagesh) out += DAGESH
         for (const mark of unit.marks) out += mark
@@ -183,7 +176,6 @@ export function toSkeleton(form, root) {
 export function skeletonKey(skeleton) {
     return String(skeleton ?? '').normalize('NFC')
         .split(DAGESH).join('')
-        .split(DAGESH_SLOT).join('')
 }
 
 /** 骨架里出现了几个词根占位 */
@@ -240,11 +232,11 @@ export function stripAccent(text) {
 }
 
 /** 供界面/校验用：骨架 + 词根 → 词形（补 dagesh lene；mode 为空时不标重音，交给 post.accent） */
-export function realize(root, skeleton, mode = 'none') {
-    return accent(dageshLene(applySkeleton(root, skeleton)), mode)
+export function realize(root, skeleton, options = {}) {
+    return accent(dageshLene(applySkeleton(root, skeleton, options)), options.mode)
 }
 
 /** 只要词形、不标重音 */
-export function spell(root, skeleton) {
-    return dageshLene(applySkeleton(root, skeleton))
+export function spell(root, skeleton, options = {}) {
+    return dageshLene(applySkeleton(root, skeleton, options))
 }

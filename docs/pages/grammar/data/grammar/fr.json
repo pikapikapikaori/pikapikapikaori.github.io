@@ -403,6 +403,7 @@
                     "tables": [
                         {
                             "caption": "主语人称代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "单数",
@@ -445,6 +446,7 @@
                     "tables": [
                         {
                             "caption": "直接宾语人称代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "单数",
@@ -482,6 +484,7 @@
                     "tables": [
                         {
                             "caption": "间接宾语人称代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "单数",
@@ -514,6 +517,7 @@
                     "tables": [
                         {
                             "caption": "自反代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "形式",
@@ -562,6 +566,7 @@
                     "tables": [
                         {
                             "caption": "重读人称代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "单数",
@@ -599,6 +604,7 @@
                     "tables": [
                         {
                             "caption": "en / y",
+                            "role": "pattern",
                             "headers": [
                                 "代词",
                                 "代替",
@@ -637,6 +643,7 @@
                     "tables": [
                         {
                             "caption": "物主形容词（限定语）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "阳性单数",
@@ -685,6 +692,7 @@
                         },
                         {
                             "caption": "物主代词（独立使用）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "阳性单数",
@@ -747,6 +755,7 @@
                     "tables": [
                         {
                             "caption": "指示代词",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -787,6 +796,7 @@
                         },
                         {
                             "caption": "中性指示代词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "用法",
@@ -820,6 +830,7 @@
                     "tables": [
                         {
                             "caption": "主要关系代词",
+                            "role": "pattern",
                             "headers": [
                                 "关系代词",
                                 "功能",
@@ -872,6 +883,7 @@
                     "tables": [
                         {
                             "caption": "疑问代词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "指人 / 指物",
@@ -915,6 +927,7 @@
                     "tables": [
                         {
                             "caption": "常用不定代词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "含义",
@@ -980,6 +993,7 @@
                     "tables": [
                         {
                             "caption": "名词的性与数",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1000,6 +1014,7 @@
                         },
                         {
                             "caption": "常见复数规则",
+                            "role": "pattern",
                             "headers": [
                                 "单数结尾",
                                 "复数规则",
@@ -1094,7 +1109,31 @@
                     },
                     "tables": [
                         {
+                            "caption": "规则：一般名词",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "一般名词",
+                                    "+ -s"
+                                ],
+                                [
+                                    "-s 的读音",
+                                    "不发音"
+                                ],
+                                [
+                                    "单复数区分",
+                                    "靠限定词"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -1166,7 +1205,31 @@
                     },
                     "tables": [
                         {
+                            "caption": "规则：-al → -aux",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "-al 结尾",
+                                    "-aux"
+                                ],
+                                [
+                                    "例外",
+                                    "bal / carnaval / festival / récital 等 + -s"
+                                ],
+                                [
+                                    "读音",
+                                    "-aux 读 [o]"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -1238,7 +1301,31 @@
                     },
                     "tables": [
                         {
+                            "caption": "规则：-eau / -au / -eu → + -x",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "-eau / -au / -eu 结尾",
+                                    "+ -x"
+                                ],
+                                [
+                                    "例外",
+                                    "pneu / landau / bleu + -s"
+                                ],
+                                [
+                                    "读音",
+                                    "-x 不发音"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -1305,7 +1392,31 @@
                     },
                     "tables": [
                         {
+                            "caption": "规则：以 -s / -x / -z 结尾",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "以 -s / -x / -z 结尾",
+                                    "单复数同形"
+                                ],
+                                [
+                                    "区分方式",
+                                    "靠限定词（le bras / les bras）"
+                                ],
+                                [
+                                    "读音",
+                                    "词尾辅音不发音"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -1335,6 +1446,7 @@
                     "tables": [
                         {
                             "caption": "常见不规则复数",
+                            "role": "pattern",
                             "headers": [
                                 "单数",
                                 "复数",
@@ -1390,6 +1502,7 @@
                     "tables": [
                         {
                             "caption": "形容词的性数变化",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "阳性单数",
@@ -1519,7 +1632,30 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：规则变化",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "—",
+                                    "+ -e"
+                                ],
+                                [
+                                    "复数",
+                                    "+ -s",
+                                    "+ -es"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词 grand",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1583,7 +1719,30 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：阴阳同形",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "—",
+                                    "—"
+                                ],
+                                [
+                                    "复数",
+                                    "+ -s",
+                                    "+ -s"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词 rouge",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1652,7 +1811,30 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：-f → -ve",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "-f",
+                                    "-ve"
+                                ],
+                                [
+                                    "复数",
+                                    "-fs",
+                                    "-ves"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词 neuf",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1723,7 +1905,30 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：-eux → -euse",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "-eux",
+                                    "-euse"
+                                ],
+                                [
+                                    "复数",
+                                    "-eux",
+                                    "-euses"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词 heureux",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1792,7 +1997,30 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：-er → -ère",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "-er",
+                                    "-ère"
+                                ],
+                                [
+                                    "复数",
+                                    "-ers",
+                                    "-ères"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词 léger",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1861,7 +2089,30 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：双写结尾辅音",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "阳性",
+                                "阴性"
+                            ],
+                            "rows": [
+                                [
+                                    "单数",
+                                    "-on",
+                                    "-onne"
+                                ],
+                                [
+                                    "复数",
+                                    "-ons",
+                                    "-onnes"
+                                ]
+                            ],
+                            "lang": "fr"
+                        },
+                        {
                             "caption": "例词 bon",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性",
@@ -1890,6 +2141,7 @@
                     "tables": [
                         {
                             "caption": "位置规则",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "位置",
@@ -1928,6 +2180,7 @@
                     "tables": [
                         {
                             "caption": "比较级",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -1953,6 +2206,7 @@
                         },
                         {
                             "caption": "最高级",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -1978,6 +2232,7 @@
                         },
                         {
                             "caption": "不规则比较级",
+                            "role": "pattern",
                             "headers": [
                                 "原级",
                                 "比较级",
@@ -2010,6 +2265,7 @@
                     "tables": [
                         {
                             "caption": "构成规则",
+                            "role": "pattern",
                             "headers": [
                                 "形容词结尾",
                                 "构成",
@@ -2046,6 +2302,7 @@
                         },
                         {
                             "caption": "不规则与例外",
+                            "role": "pattern",
                             "headers": [
                                 "形容词",
                                 "副词",
@@ -2087,6 +2344,7 @@
                         },
                         {
                             "caption": "对照表",
+                            "role": "pattern",
                             "headers": [
                                 "形容词（阳）",
                                 "副词",
@@ -2120,6 +2378,7 @@
                     "tables": [
                         {
                             "caption": "常见不规则",
+                            "role": "pattern",
                             "headers": [
                                 "阳性单数",
                                 "阴性单数",
@@ -2206,6 +2465,7 @@
                     "tables": [
                         {
                             "caption": "按意义分类",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "例"
@@ -2247,6 +2507,7 @@
                     "tables": [
                         {
                             "caption": "比较级与最高级",
+                            "role": "pattern",
                             "headers": [
                                 "级别",
                                 "构成",
@@ -2290,6 +2551,7 @@
                     "tables": [
                         {
                             "caption": "常见否定",
+                            "role": "pattern",
                             "headers": [
                                 "结构",
                                 "含义",
@@ -2355,6 +2617,7 @@
                     "tables": [
                         {
                             "caption": "直陈式主要时态",
+                            "role": "pattern",
                             "headers": [
                                 "时态",
                                 "构成",
@@ -2410,6 +2673,7 @@
                         },
                         {
                             "caption": "虚拟式与命令式",
+                            "role": "pattern",
                             "headers": [
                                 "语式",
                                 "时态",
@@ -2453,6 +2717,7 @@
                     "tables": [
                         {
                             "caption": "助动词现在时",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "avoir",
@@ -2494,6 +2759,7 @@
                         },
                         {
                             "caption": "如何选择",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "助动词",
@@ -2532,6 +2798,7 @@
                     "tables": [
                         {
                             "caption": "配合规则",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "是否配合",
@@ -2580,6 +2847,7 @@
                     "tables": [
                         {
                             "caption": "语式与主要用法",
+                            "role": "pattern",
                             "headers": [
                                 "语式",
                                 "用法",
@@ -2621,6 +2889,7 @@
                         },
                         {
                             "caption": "命令式的时态",
+                            "role": "pattern",
                             "headers": [
                                 "时态",
                                 "构成",
@@ -2649,6 +2918,7 @@
                     "tables": [
                         {
                             "caption": "四类代词式动词",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "意义",
@@ -2680,6 +2950,7 @@
                         },
                         {
                             "caption": "否定与疑问时的语序",
+                            "role": "pattern",
                             "headers": [
                                 "句式",
                                 "语序",
@@ -2718,6 +2989,7 @@
                     "tables": [
                         {
                             "caption": "常见变化",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "变化",
@@ -2766,6 +3038,7 @@
                     "tables": [
                         {
                             "caption": "分词",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -2796,6 +3069,7 @@
                         },
                         {
                             "caption": "不定式",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -3079,6 +3353,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3130,6 +3405,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3187,6 +3463,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3220,6 +3497,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3259,6 +3537,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3283,6 +3562,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3313,6 +3593,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3337,6 +3618,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3367,6 +3649,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -3381,6 +3664,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -3401,6 +3685,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -3428,6 +3713,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -3461,6 +3747,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -3475,6 +3762,7 @@
                         },
                         {
                             "caption": "示例：parler, parlant, parlé",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -3821,6 +4109,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3872,6 +4161,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3929,6 +4219,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3962,6 +4253,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4001,6 +4293,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4025,6 +4318,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4055,6 +4349,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4079,6 +4374,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4109,6 +4405,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4123,6 +4420,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4143,6 +4441,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -4170,6 +4469,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -4203,6 +4503,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4217,6 +4518,7 @@
                         },
                         {
                             "caption": "示例：finir, finissant, fini",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4497,6 +4799,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4548,6 +4851,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4605,6 +4909,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4638,6 +4943,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4677,6 +4983,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4701,6 +5008,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4731,6 +5039,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4755,6 +5064,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4785,6 +5095,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4799,6 +5110,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4819,6 +5131,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -4846,6 +5159,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -4879,6 +5193,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4893,6 +5208,7 @@
                         },
                         {
                             "caption": "示例：vendre, vendant, vendu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5241,6 +5557,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5292,6 +5609,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5349,6 +5667,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5382,6 +5701,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5421,6 +5741,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5445,6 +5766,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5475,6 +5797,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5499,6 +5822,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5529,6 +5853,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5543,6 +5868,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5563,6 +5889,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -5590,6 +5917,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -5623,6 +5951,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5637,6 +5966,7 @@
                         },
                         {
                             "caption": "示例：recevoir, recevant, reçu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5910,6 +6240,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5961,6 +6292,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6018,6 +6350,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6051,6 +6384,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6090,6 +6424,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6114,6 +6449,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6144,6 +6480,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6168,6 +6505,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6198,6 +6536,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6212,6 +6551,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6232,6 +6572,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -6259,6 +6600,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -6292,6 +6634,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6306,6 +6649,7 @@
                         },
                         {
                             "caption": "示例：partir, partant, parti",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6651,6 +6995,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6702,6 +7047,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6759,6 +7105,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6792,6 +7139,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6831,6 +7179,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6855,6 +7204,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6885,6 +7235,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6909,6 +7260,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6939,6 +7291,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6953,6 +7306,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6973,6 +7327,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -7000,6 +7355,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -7033,6 +7389,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -7047,6 +7404,7 @@
                         },
                         {
                             "caption": "示例：venir, venant, venu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -7421,6 +7779,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -7472,6 +7831,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -7529,6 +7889,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -7562,6 +7923,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -7601,6 +7963,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -7625,6 +7988,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -7655,6 +8019,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -7679,6 +8044,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -7709,6 +8075,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -7723,6 +8090,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -7743,6 +8111,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -7770,6 +8139,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -7803,6 +8173,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -7817,6 +8188,7 @@
                         },
                         {
                             "caption": "示例：prendre, prenant, pris",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -8140,6 +8512,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -8191,6 +8564,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -8248,6 +8622,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -8281,6 +8656,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -8320,6 +8696,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -8344,6 +8721,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -8374,6 +8752,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -8398,6 +8777,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -8428,6 +8808,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -8442,6 +8823,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -8462,6 +8844,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -8489,6 +8872,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -8522,6 +8906,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -8536,6 +8921,7 @@
                         },
                         {
                             "caption": "示例：mettre, mettant, mis",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -8868,6 +9254,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -8919,6 +9306,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -8976,6 +9364,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9009,6 +9398,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9048,6 +9438,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9072,6 +9463,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9102,6 +9494,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9126,6 +9519,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9156,6 +9550,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -9170,6 +9565,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -9190,6 +9586,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -9217,6 +9614,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -9250,6 +9648,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -9264,6 +9663,7 @@
                         },
                         {
                             "caption": "示例：connaître, connaissant, connu",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -9545,6 +9945,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9596,6 +9997,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9653,6 +10055,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9686,6 +10089,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9725,6 +10129,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9749,6 +10154,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9779,6 +10185,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -9803,6 +10210,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -9833,6 +10241,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -9847,6 +10256,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -9867,6 +10277,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -9894,6 +10305,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -9927,6 +10339,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -9941,6 +10354,7 @@
                         },
                         {
                             "caption": "示例：conduire, conduisant, conduit",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10312,6 +10726,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -10363,6 +10778,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -10420,6 +10836,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -10453,6 +10870,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -10492,6 +10910,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -10516,6 +10935,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -10546,6 +10966,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -10570,6 +10991,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -10600,6 +11022,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -10614,6 +11037,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10634,6 +11058,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -10661,6 +11086,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -10694,6 +11120,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -10708,6 +11135,7 @@
                         },
                         {
                             "caption": "示例：peindre, peignant, peint",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10964,6 +11392,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -11015,6 +11444,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -11072,6 +11502,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -11105,6 +11536,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -11144,6 +11576,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -11168,6 +11601,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -11198,6 +11632,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -11222,6 +11657,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -11252,6 +11688,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -11266,6 +11703,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -11286,6 +11724,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -11313,6 +11752,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数 阳性",
@@ -11346,6 +11786,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -11360,6 +11801,7 @@
                         },
                         {
                             "caption": "示例：ouvrir, ouvrant, ouvert",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -11387,6 +11829,7 @@
                     "tables": [
                         {
                             "caption": "现在时",
+                            "role": "pattern",
                             "headers": [
                                 "不定式",
                                 "单1",
@@ -11571,6 +12014,7 @@
                     "tables": [
                         {
                             "caption": "过去分词与将来时词干",
+                            "role": "pattern",
                             "headers": [
                                 "不定式",
                                 "过去分词",
@@ -11705,6 +12149,7 @@
                     "tables": [
                         {
                             "caption": "0–20",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "写法",
@@ -11783,6 +12228,7 @@
                         },
                         {
                             "caption": "十位以上",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "写法",
@@ -11846,6 +12292,7 @@
                     "tables": [
                         {
                             "caption": "构成",
+                            "role": "pattern",
                             "headers": [
                                 "基数",
                                 "序数",
@@ -11889,6 +12336,7 @@
                     "tables": [
                         {
                             "caption": "分数与倍数",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "写法",
@@ -11944,6 +12392,7 @@
                     "tables": [
                         {
                             "caption": "定冠词",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性",
@@ -11986,6 +12435,7 @@
                     "tables": [
                         {
                             "caption": "不定冠词",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性",
@@ -12003,6 +12453,7 @@
                         },
                         {
                             "caption": "部分冠词",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性",
@@ -12037,6 +12488,7 @@
                     "tables": [
                         {
                             "caption": "五种音符",
+                            "role": "pattern",
                             "headers": [
                                 "音符",
                                 "名称",
@@ -12091,6 +12543,7 @@
                         },
                         {
                             "caption": "易混词",
+                            "role": "pattern",
                             "headers": [
                                 "带音符",
                                 "不带音符",
@@ -12139,6 +12592,7 @@
                     "tables": [
                         {
                             "caption": "省音",
+                            "role": "pattern",
                             "headers": [
                                 "原形式",
                                 "省音后",
@@ -12202,6 +12656,7 @@
                     "tables": [
                         {
                             "caption": "必须用连字符的情况",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "例",
@@ -12243,6 +12698,7 @@
                         },
                         {
                             "caption": "不用连字符的情况",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "例"
@@ -12276,6 +12732,7 @@
                     "tables": [
                         {
                             "caption": "大写规则",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "大写",
@@ -12334,6 +12791,7 @@
                     "tables": [
                         {
                             "caption": "法语特有的空格",
+                            "role": "pattern",
                             "headers": [
                                 "标点",
                                 "前后空格",
@@ -12390,6 +12848,7 @@
                         },
                         {
                             "caption": "其他约定",
+                            "role": "pattern",
                             "headers": [
                                 "项目",
                                 "规则"
@@ -12434,6 +12893,7 @@
                     "tables": [
                         {
                             "caption": "联诵的三种情况",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "规则",
@@ -12467,6 +12927,7 @@
                     "tables": [
                         {
                             "caption": "音变",
+                            "role": "pattern",
                             "headers": [
                                 "词尾字母",
                                 "联诵音",
@@ -12515,6 +12976,7 @@
                     "tables": [
                         {
                             "caption": "例表",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "短语",

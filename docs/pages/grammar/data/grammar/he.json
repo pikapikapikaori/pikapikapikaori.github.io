@@ -1159,6 +1159,7 @@
                     "tables": [
                         {
                             "caption": "独立人称代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "单数",
@@ -1202,6 +1203,7 @@
                     "tables": [
                         {
                             "caption": "名词 + 代词后缀（以 דָּבָר 为例）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "单数",
@@ -1245,6 +1247,7 @@
                     "tables": [
                         {
                             "caption": "介词 + 代词后缀",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "לְ",
@@ -1339,6 +1342,7 @@
                     "tables": [
                         {
                             "caption": "完成式 + 宾语后缀（כָּתַב）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "后缀",
@@ -1387,6 +1391,7 @@
                     "tables": [
                         {
                             "caption": "指示 / 疑问 / 关系",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "阳性",
@@ -1443,6 +1448,7 @@
                     "tables": [
                         {
                             "caption": "看基本形态定模式",
+                            "role": "pattern",
                             "headers": [
                                 "模式",
                                 "类型",
@@ -1589,6 +1595,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1613,6 +1620,7 @@
                         },
                         {
                             "caption": "示例表（סֵפֶר）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1644,6 +1652,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1668,6 +1677,7 @@
                         },
                         {
                             "caption": "示例表（קֹדֶשׁ）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1699,6 +1709,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1723,6 +1734,7 @@
                         },
                         {
                             "caption": "示例表（זְמַן）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1754,6 +1766,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1778,6 +1791,7 @@
                         },
                         {
                             "caption": "示例表（דַּיָּג）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1809,6 +1823,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1833,6 +1848,7 @@
                         },
                         {
                             "caption": "示例表（מִקְדָּשׁ）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1864,6 +1880,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1888,6 +1905,7 @@
                         },
                         {
                             "caption": "示例表（סִפּוּר）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1919,6 +1937,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1943,6 +1962,7 @@
                         },
                         {
                             "caption": "示例表（שָׁלוֹם）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1974,6 +1994,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -1998,6 +2019,7 @@
                         },
                         {
                             "caption": "示例表（בְּרָכָה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2029,6 +2051,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2053,6 +2076,7 @@
                         },
                         {
                             "caption": "示例表（מַלְכָּה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2084,6 +2108,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2108,6 +2133,7 @@
                         },
                         {
                             "caption": "示例表（סִפְרָה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2139,6 +2165,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2163,6 +2190,7 @@
                         },
                         {
                             "caption": "示例表（קַדַּחַת）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2194,6 +2222,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2218,6 +2247,7 @@
                         },
                         {
                             "caption": "示例表（פְּקִידָה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2249,6 +2279,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2273,6 +2304,7 @@
                         },
                         {
                             "caption": "示例表（הַצְלָחָה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2304,6 +2336,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2328,6 +2361,7 @@
                         },
                         {
                             "caption": "示例表（הִתְפַּתְּחוּת）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2359,6 +2393,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2383,6 +2418,7 @@
                         },
                         {
                             "caption": "示例表（מַלְכוּת）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2414,6 +2450,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2438,6 +2475,7 @@
                         },
                         {
                             "caption": "示例表（גְּאֻלָּה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2469,6 +2507,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2493,6 +2532,7 @@
                         },
                         {
                             "caption": "示例表（מִשְׁפָּחָה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -2524,6 +2564,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单数",
@@ -2548,6 +2589,7 @@
                         },
                         {
                             "caption": "示例表（מַחְשֵׁב）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -3161,6 +3203,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3187,6 +3230,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3222,6 +3266,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3248,6 +3293,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3283,6 +3329,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3305,6 +3352,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3336,6 +3384,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3358,6 +3407,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3389,6 +3439,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3411,6 +3462,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3442,6 +3494,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3464,6 +3517,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3495,6 +3549,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3517,6 +3572,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3548,6 +3604,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3570,6 +3627,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3601,6 +3659,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3623,6 +3682,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3654,6 +3714,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3676,6 +3737,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3707,6 +3769,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3729,6 +3792,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3759,6 +3823,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3777,6 +3842,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3802,6 +3868,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3820,6 +3887,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3845,6 +3913,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3879,6 +3948,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3920,6 +3990,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -3938,6 +4009,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -3971,6 +4043,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -3998,6 +4071,7 @@
                         },
                         {
                             "caption": "示例表（גָּדוֹל）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4068,6 +4142,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4095,6 +4170,7 @@
                         },
                         {
                             "caption": "示例表（קָטֹן）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4165,6 +4241,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4192,6 +4269,7 @@
                         },
                         {
                             "caption": "示例表（קָדוֹשׁ）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4262,6 +4340,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4289,6 +4368,7 @@
                         },
                         {
                             "caption": "示例表（קָשֶׁה）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4359,6 +4439,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4386,6 +4467,7 @@
                         },
                         {
                             "caption": "示例表（חָכָם）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4456,6 +4538,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4483,6 +4566,7 @@
                         },
                         {
                             "caption": "示例表（טוֹב）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4553,6 +4637,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4580,6 +4665,7 @@
                         },
                         {
                             "caption": "示例表（אַדְמוֹנִי）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4657,6 +4743,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4684,6 +4771,7 @@
                         },
                         {
                             "caption": "示例表（אַדִּיר）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4754,6 +4842,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4781,6 +4870,7 @@
                         },
                         {
                             "caption": "示例表（צַדִּיק）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4851,6 +4941,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4878,6 +4969,7 @@
                         },
                         {
                             "caption": "示例表（אַכְזָר）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4948,6 +5040,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -4975,6 +5068,7 @@
                         },
                         {
                             "caption": "示例表（שַׁאֲנָן）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -5045,6 +5139,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -5072,6 +5167,7 @@
                         },
                         {
                             "caption": "示例表（רַעֲנָן）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -5148,6 +5244,7 @@
                     "tables": [
                         {
                             "caption": "常见构成方式",
+                            "role": "pattern",
                             "headers": [
                                 "方式",
                                 "例",
@@ -5193,6 +5290,7 @@
                     "tables": [
                         {
                             "caption": "常用 binyan",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "希伯来语名",
@@ -5255,6 +5353,7 @@
                         },
                         {
                             "caption": "罕见 binyan",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "希伯来语名",
@@ -5331,6 +5430,7 @@
                     "tables": [
                         {
                             "caption": "两个时态系统",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "性质",
@@ -5374,6 +5474,7 @@
                     "tables": [
                         {
                             "caption": "三辅音词根",
+                            "role": "pattern",
                             "headers": [
                                 "概念",
                                 "说明"
@@ -5403,6 +5504,7 @@
                     "tables": [
                         {
                             "caption": "宾语后缀",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "完成式后",
@@ -5449,6 +5551,9 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Qal",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -5559,6 +5664,9 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Qal",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -5669,6 +5777,9 @@
                         },
                         {
                             "caption": "Qal · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Qal · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -5685,6 +5796,9 @@
                         },
                         {
                             "caption": "Qal · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Qal · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -5701,6 +5815,9 @@
                         },
                         {
                             "caption": "Qal · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Qal · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -5728,6 +5845,9 @@
                         },
                         {
                             "caption": "Qal · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Qal · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -5762,6 +5882,9 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Nifal",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -5872,6 +5995,9 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Nifal",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -5982,6 +6108,9 @@
                         },
                         {
                             "caption": "Nifal · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Nifal · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -5998,6 +6127,9 @@
                         },
                         {
                             "caption": "Nifal · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Nifal · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6014,6 +6146,9 @@
                         },
                         {
                             "caption": "Nifal · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Nifal · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6034,6 +6169,9 @@
                         },
                         {
                             "caption": "Nifal · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Nifal · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6061,6 +6199,9 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Piel",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -6171,6 +6312,9 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Piel",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -6281,6 +6425,9 @@
                         },
                         {
                             "caption": "Piel · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Piel · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6297,6 +6444,9 @@
                         },
                         {
                             "caption": "Piel · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Piel · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6313,6 +6463,9 @@
                         },
                         {
                             "caption": "Piel · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Piel · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6333,6 +6486,9 @@
                         },
                         {
                             "caption": "Piel · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Piel · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6360,6 +6516,9 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Pual",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -6470,6 +6629,9 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Pual",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -6580,6 +6742,9 @@
                         },
                         {
                             "caption": "Pual · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Pual · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6596,6 +6761,9 @@
                         },
                         {
                             "caption": "Pual · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Pual · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6612,6 +6780,9 @@
                         },
                         {
                             "caption": "Pual · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Pual · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6632,6 +6803,9 @@
                         },
                         {
                             "caption": "Pual · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Pual · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6659,6 +6833,9 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Hitpael",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -6769,6 +6946,9 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Hitpael",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -6879,6 +7059,9 @@
                         },
                         {
                             "caption": "Hitpael · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Hitpael · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6895,6 +7078,9 @@
                         },
                         {
                             "caption": "Hitpael · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Hitpael · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -6911,6 +7097,9 @@
                         },
                         {
                             "caption": "Hitpael · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Hitpael · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6931,6 +7120,9 @@
                         },
                         {
                             "caption": "Hitpael · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Hitpael · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -6958,6 +7150,9 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Hiphil",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -7068,6 +7263,9 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Hiphil",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -7178,6 +7376,9 @@
                         },
                         {
                             "caption": "Hiphil · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Hiphil · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -7194,6 +7395,9 @@
                         },
                         {
                             "caption": "Hiphil · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Hiphil · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -7210,6 +7414,9 @@
                         },
                         {
                             "caption": "Hiphil · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Hiphil · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -7230,6 +7437,9 @@
                         },
                         {
                             "caption": "Hiphil · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Hiphil · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -7257,6 +7467,9 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "Hophal",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -7367,6 +7580,9 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "Hophal",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -7477,6 +7693,9 @@
                         },
                         {
                             "caption": "Hophal · 不定式 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "Hophal · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -7493,6 +7712,9 @@
                         },
                         {
                             "caption": "Hophal · 不定式 示例表",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "Hophal · 不定式",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -7509,6 +7731,9 @@
                         },
                         {
                             "caption": "Hophal · 分词 元音（辅音）表",
+                            "role": "pattern",
+                            "group": "g3",
+                            "groupLabel": "Hophal · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -7529,6 +7754,9 @@
                         },
                         {
                             "caption": "Hophal · 分词 示例表",
+                            "role": "example",
+                            "group": "g3",
+                            "groupLabel": "Hophal · 分词",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -7556,6 +7784,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7570,6 +7799,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7591,6 +7821,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7605,6 +7836,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7626,6 +7858,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7640,6 +7873,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7661,6 +7895,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7675,6 +7910,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7696,6 +7932,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7710,6 +7947,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7731,6 +7969,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7745,6 +7984,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7766,6 +8006,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7780,6 +8021,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -7801,6 +8043,7 @@
                     "tables": [
                         {
                             "caption": "元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "骨架"
@@ -7815,6 +8058,7 @@
                         },
                         {
                             "caption": "示例表",
+                            "role": "example",
                             "headers": [
                                 "形式",
                                 "示例"
@@ -9007,6 +9251,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9117,6 +9362,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9234,6 +9480,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9344,6 +9591,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9461,6 +9709,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9571,6 +9820,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9688,6 +9938,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9798,6 +10049,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -9915,6 +10167,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -10025,6 +10278,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -10142,6 +10396,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -10252,6 +10507,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -10369,6 +10625,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -10479,6 +10736,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -10596,6 +10854,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -10647,6 +10906,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -10705,6 +10965,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -10774,6 +11035,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -11950,6 +12212,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12060,6 +12323,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12177,6 +12441,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12287,6 +12552,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12404,6 +12670,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12514,6 +12781,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12631,6 +12899,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12741,6 +13010,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12858,6 +13128,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -12968,6 +13239,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -13085,6 +13357,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -13195,6 +13468,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -13312,6 +13586,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -13422,6 +13697,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -13539,6 +13815,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -13590,6 +13867,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -13648,6 +13926,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -13717,6 +13996,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -14936,6 +15216,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15046,6 +15327,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15163,6 +15445,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15273,6 +15556,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15390,6 +15674,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15500,6 +15785,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15617,6 +15903,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15727,6 +16014,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15844,6 +16132,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -15954,6 +16243,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -16071,6 +16361,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -16181,6 +16472,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -16298,6 +16590,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -16408,6 +16701,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -16525,6 +16819,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -16576,6 +16871,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -16634,6 +16930,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -16703,6 +17000,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -17836,6 +18134,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -17946,6 +18245,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18063,6 +18363,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18173,6 +18474,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18290,6 +18592,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18400,6 +18703,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18517,6 +18821,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18627,6 +18932,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18744,6 +19050,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18854,6 +19161,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -18971,6 +19279,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -19081,6 +19390,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -19198,6 +19508,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -19308,6 +19619,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -19425,6 +19737,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -19476,6 +19789,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -19534,6 +19848,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -19603,6 +19918,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -20735,6 +21051,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -20845,6 +21162,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -20962,6 +21280,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21072,6 +21391,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21189,6 +21509,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21299,6 +21620,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21416,6 +21738,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21526,6 +21849,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21643,6 +21967,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21753,6 +22078,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21870,6 +22196,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -21980,6 +22307,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -22097,6 +22425,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -22207,6 +22536,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -22324,6 +22654,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -22375,6 +22706,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -22433,6 +22765,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -22481,6 +22814,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -23609,6 +23943,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -23719,6 +24054,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -23836,6 +24172,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -23946,6 +24283,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24063,6 +24401,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24173,6 +24512,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24290,6 +24630,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24400,6 +24741,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24517,6 +24859,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24627,6 +24970,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24744,6 +25088,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24854,6 +25199,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -24971,6 +25317,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -25081,6 +25428,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -25198,6 +25546,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -25249,6 +25598,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -25307,6 +25657,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -25376,6 +25727,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -26613,6 +26965,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -26723,6 +27076,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -26840,6 +27194,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -26950,6 +27305,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27067,6 +27423,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27177,6 +27534,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27294,6 +27652,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27404,6 +27763,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27521,6 +27881,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27631,6 +27992,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27748,6 +28110,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27858,6 +28221,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -27975,6 +28339,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -28085,6 +28450,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -28202,6 +28568,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -28253,6 +28620,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -28311,6 +28679,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -28380,6 +28749,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -29465,6 +29835,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -29575,6 +29946,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -29692,6 +30064,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -29802,6 +30175,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -29919,6 +30293,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30029,6 +30404,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30146,6 +30522,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30256,6 +30633,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30373,6 +30751,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30483,6 +30862,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30600,6 +30980,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30710,6 +31091,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30827,6 +31209,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -30937,6 +31320,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -31054,6 +31438,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -31105,6 +31490,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -31163,6 +31549,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -31232,6 +31619,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -32369,6 +32757,7 @@
                     "tables": [
                         {
                             "caption": "Qal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -32479,6 +32868,7 @@
                         },
                         {
                             "caption": "Qal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -32596,6 +32986,7 @@
                     "tables": [
                         {
                             "caption": "Nifal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -32706,6 +33097,7 @@
                         },
                         {
                             "caption": "Nifal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -32823,6 +33215,7 @@
                     "tables": [
                         {
                             "caption": "Piel · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -32933,6 +33326,7 @@
                         },
                         {
                             "caption": "Piel · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33050,6 +33444,7 @@
                     "tables": [
                         {
                             "caption": "Pual · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33160,6 +33555,7 @@
                         },
                         {
                             "caption": "Pual · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33277,6 +33673,7 @@
                     "tables": [
                         {
                             "caption": "Hitpael · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33387,6 +33784,7 @@
                         },
                         {
                             "caption": "Hitpael · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33504,6 +33902,7 @@
                     "tables": [
                         {
                             "caption": "Hiphil · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33614,6 +34013,7 @@
                         },
                         {
                             "caption": "Hiphil · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33731,6 +34131,7 @@
                     "tables": [
                         {
                             "caption": "Hophal · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33841,6 +34242,7 @@
                         },
                         {
                             "caption": "Hophal · 示例表",
+                            "role": "example",
                             "headers": [
                                 "式",
                                 "第一人称单数",
@@ -33958,6 +34360,7 @@
                     "tables": [
                         {
                             "caption": "不定式 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -34009,6 +34412,7 @@
                         },
                         {
                             "caption": "不定式 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "binyan",
                                 "附属形",
@@ -34067,6 +34471,7 @@
                     "tables": [
                         {
                             "caption": "分词 · 元音（辅音）表",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -34136,6 +34541,7 @@
                         },
                         {
                             "caption": "分词 · 示例表",
+                            "role": "example",
                             "headers": [
                                 "分词",
                                 "阳性单数",
@@ -35354,6 +35760,7 @@
                     "tables": [
                         {
                             "caption": "1–10（阴阳配对）",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "阳性",
@@ -35422,6 +35829,7 @@
                     "tables": [
                         {
                             "caption": "大数",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "形式"
@@ -35467,6 +35875,7 @@
                     "tables": [
                         {
                             "caption": "序数",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "阳性",
@@ -35512,6 +35921,7 @@
                     "tables": [
                         {
                             "caption": "元音",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "名称",
@@ -35630,6 +36040,7 @@
                     "tables": [
                         {
                             "caption": "附加点",
+                            "role": "pattern",
                             "headers": [
                                 "名称",
                                 "符号",
@@ -35679,6 +36090,7 @@
                     "tables": [
                         {
                             "caption": "符号",
+                            "role": "pattern",
                             "headers": [
                                 "名称",
                                 "符号",
@@ -35722,6 +36134,7 @@
                     "tables": [
                         {
                             "caption": "常见 טְעָמִים",
+                            "role": "pattern",
                             "headers": [
                                 "名称",
                                 "符号",
@@ -35796,6 +36209,7 @@
                     "tables": [
                         {
                             "caption": "22 个辅音 + 5 个词尾形",
+                            "role": "pattern",
                             "headers": [
                                 "字母",
                                 "词尾形",
@@ -35977,6 +36391,7 @@
                     "tables": [
                         {
                             "caption": "元音转写",
+                            "role": "pattern",
                             "headers": [
                                 "符号",
                                 "名称",
@@ -36068,6 +36483,7 @@
                     "tables": [
                         {
                             "caption": "规则",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "处理"

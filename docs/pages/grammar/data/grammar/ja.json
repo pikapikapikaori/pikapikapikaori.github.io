@@ -307,6 +307,7 @@
                     "tables": [
                         {
                             "caption": "名词的用法",
+                            "role": "pattern",
                             "headers": [
                                 "用法",
                                 "例",
@@ -345,6 +346,7 @@
                     "tables": [
                         {
                             "caption": "数量表达",
+                            "role": "pattern",
                             "headers": [
                                 "结构",
                                 "例",
@@ -385,6 +387,7 @@
                     "tables": [
                         {
                             "caption": "两类形容词",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "辞书形",
@@ -414,6 +417,7 @@
                     "tables": [
                         {
                             "caption": "活用形",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "词形",
@@ -455,6 +459,7 @@
                         },
                         {
                             "caption": "合成形式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "词形",
@@ -642,6 +647,7 @@
                     "tables": [
                         {
                             "caption": "活用形",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "词形",
@@ -683,6 +689,7 @@
                         },
                         {
                             "caption": "合成形式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "词形",
@@ -879,6 +886,7 @@
                     "tables": [
                         {
                             "caption": "活用形（学校文法）",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "作用",
@@ -956,6 +964,7 @@
                     "tables": [
                         {
                             "caption": "形式与活用形的对应",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "构成",
@@ -1032,6 +1041,7 @@
                     "tables": [
                         {
                             "caption": "活用形",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "词形",
@@ -1084,6 +1094,7 @@
                     "tables": [
                         {
                             "caption": "合成形式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "词形",
@@ -1541,6 +1552,7 @@
                     "tables": [
                         {
                             "caption": "活用形",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "词形",
@@ -1593,6 +1605,7 @@
                     "tables": [
                         {
                             "caption": "合成形式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "词形",
@@ -1863,6 +1876,7 @@
                     "tables": [
                         {
                             "caption": "活用形",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "词形",
@@ -1915,6 +1929,7 @@
                     "tables": [
                         {
                             "caption": "合成形式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "词形",
@@ -2173,6 +2188,7 @@
                     "tables": [
                         {
                             "caption": "活用形",
+                            "role": "pattern",
                             "headers": [
                                 "活用形",
                                 "词形",
@@ -2225,6 +2241,7 @@
                     "tables": [
                         {
                             "caption": "合成形式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "词形",
@@ -2494,6 +2511,7 @@
                     "tables": [
                         {
                             "caption": "常见的自他对应模式",
+                            "role": "pattern",
                             "headers": [
                                 "模式",
                                 "自动词",
@@ -2549,6 +2567,7 @@
                     "tables": [
                         {
                             "caption": "常见的自谦动词",
+                            "role": "pattern",
                             "headers": [
                                 "普通动词",
                                 "自谦语",
@@ -2607,6 +2626,7 @@
                     "tables": [
                         {
                             "caption": "常见的尊他动词",
+                            "role": "pattern",
                             "headers": [
                                 "普通动词",
                                 "尊他语",
@@ -2672,6 +2692,7 @@
                     "tables": [
                         {
                             "caption": "格助词",
+                            "role": "pattern",
                             "headers": [
                                 "助词",
                                 "作用",
@@ -2740,6 +2761,7 @@
                     "tables": [
                         {
                             "caption": "提示助词",
+                            "role": "pattern",
                             "headers": [
                                 "助词",
                                 "作用",
@@ -2783,6 +2805,7 @@
                     "tables": [
                         {
                             "caption": "终助词",
+                            "role": "pattern",
                             "headers": [
                                 "助词",
                                 "作用",
@@ -2814,6 +2837,7 @@
                         },
                         {
                             "caption": "接续助词",
+                            "role": "pattern",
                             "headers": [
                                 "助词",
                                 "作用",
@@ -2864,6 +2888,7 @@
                     "tables": [
                         {
                             "caption": "敬语的分类",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "抬高谁",
@@ -2901,6 +2926,7 @@
                     "tables": [
                         {
                             "caption": "句式",
+                            "role": "pattern",
                             "headers": [
                                 "句式",
                                 "类别",
@@ -2949,6 +2975,7 @@
                     "tables": [
                         {
                             "caption": "叮咛体的构成",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "普通体",
@@ -3004,6 +3031,7 @@
                     "tables": [
                         {
                             "caption": "1–10",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "常用",
@@ -3072,6 +3100,7 @@
                     "tables": [
                         {
                             "caption": "常见助数词",
+                            "role": "pattern",
                             "headers": [
                                 "助数词",
                                 "用于",
@@ -3132,6 +3161,7 @@
                     "tables": [
                         {
                             "caption": "SOV",
+                            "role": "pattern",
                             "headers": [
                                 "成分",
                                 "例",
@@ -3165,6 +3195,7 @@
                     "tables": [
                         {
                             "caption": "判断句",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "普通体",
@@ -3196,6 +3227,7 @@
                         },
                         {
                             "caption": "动词否定",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "例"
@@ -3225,6 +3257,7 @@
                     "tables": [
                         {
                             "caption": "疑问",
+                            "role": "pattern",
                             "headers": [
                                 "手段",
                                 "例"
@@ -3247,6 +3280,7 @@
                         },
                         {
                             "caption": "其他特征",
+                            "role": "pattern",
                             "headers": [
                                 "特点",
                                 "例"

@@ -763,6 +763,7 @@
                     "tables": [
                         {
                             "caption": "第一人称与第二人称（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "ego 我",
@@ -798,6 +799,7 @@
                         },
                         {
                             "caption": "第一人称与第二人称（复数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "nōs 我们",
@@ -833,6 +835,7 @@
                         },
                         {
                             "caption": "第三人称（is, ea, id 他/她/它）（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -874,6 +877,7 @@
                         },
                         {
                             "caption": "第三人称（复数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -922,6 +926,7 @@
                     "tables": [
                         {
                             "caption": "suī 自己（第三人称，只有斜格）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "形式",
@@ -958,6 +963,7 @@
                         },
                         {
                             "caption": "第一、二人称反身（用人称代词的斜格）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "第一人称",
@@ -996,6 +1002,7 @@
                     "tables": [
                         {
                             "caption": "五组物主代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "阳性",
@@ -1038,6 +1045,7 @@
                         },
                         {
                             "caption": "meus, mea, meum（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1086,6 +1094,7 @@
                         },
                         {
                             "caption": "meus, mea, meum（复数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1141,6 +1150,7 @@
                     "tables": [
                         {
                             "caption": "hic, haec, hoc 这（近指）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1182,6 +1192,7 @@
                         },
                         {
                             "caption": "ille, illa, illud 那（远指）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1223,6 +1234,7 @@
                         },
                         {
                             "caption": "iste, ista, istud 那个（第二人称所指）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1271,6 +1283,7 @@
                     "tables": [
                         {
                             "caption": "quī, quae, quod（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1312,6 +1325,7 @@
                         },
                         {
                             "caption": "quī, quae, quod（复数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1360,6 +1374,7 @@
                     "tables": [
                         {
                             "caption": "quis, quid（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性/阴性",
@@ -1395,6 +1410,7 @@
                         },
                         {
                             "caption": "疑问形容词 quī, quae, quod（复数，作形容词用）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1443,6 +1459,7 @@
                     "tables": [
                         {
                             "caption": "常用不定代词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "含义",
@@ -1484,6 +1501,7 @@
                         },
                         {
                             "caption": "aliquis, aliqua, aliquid（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1526,6 +1544,7 @@
                         },
                         {
                             "caption": "quīdam, quaedam, quoddam（单数）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1667,6 +1686,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -1722,6 +1742,7 @@
                         },
                         {
                             "caption": "示例：aqua, aquae (f.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -1845,6 +1866,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -1886,6 +1908,7 @@
                         },
                         {
                             "caption": "示例：dominus, dominī (m.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -1928,7 +1951,7 @@
                     ],
                     "notes": "呼格单数 -e（-ius 结尾的词为 -ī，如 fīlius → fīlī）。中性见 -um 型。"
                 },
-{
+                {
                     "id": "la-noun-2nd-decl-f",
                     "title": "第二变格法：-us 阴性（mālus 型）",
                     "inflect": "decl",
@@ -1995,6 +2018,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2036,6 +2060,7 @@
                         },
                         {
                             "caption": "示例：mālus, mālī (f.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2183,6 +2208,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2224,6 +2250,7 @@
                         },
                         {
                             "caption": "示例：ager, agrī (m.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2333,6 +2360,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2374,6 +2402,7 @@
                         },
                         {
                             "caption": "示例：puer, puerī (m.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2483,6 +2512,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2524,6 +2554,7 @@
                         },
                         {
                             "caption": "示例：bellum, bellī (n.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2655,6 +2686,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2696,6 +2728,7 @@
                         },
                         {
                             "caption": "示例：rēx, rēgis (m.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -2829,6 +2862,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -2884,6 +2918,7 @@
                         },
                         {
                             "caption": "示例：cīvis, cīvis (m./f.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -3007,6 +3042,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3048,6 +3084,7 @@
                         },
                         {
                             "caption": "示例：turris, turris (f.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3182,6 +3219,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3223,6 +3261,7 @@
                         },
                         {
                             "caption": "示例：corpus, corporis (n.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3332,6 +3371,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3373,6 +3413,7 @@
                         },
                         {
                             "caption": "示例：mare, maris (n.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3482,6 +3523,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3523,6 +3565,7 @@
                         },
                         {
                             "caption": "示例：animāl, animālis (n.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3656,6 +3699,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -3711,6 +3755,7 @@
                         },
                         {
                             "caption": "示例：manus, manūs (f.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -3834,6 +3879,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3875,6 +3921,7 @@
                         },
                         {
                             "caption": "示例：cornū, cornūs (n.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -3984,6 +4031,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -4025,6 +4073,7 @@
                         },
                         {
                             "caption": "示例：rēs, reī (f.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -4134,6 +4183,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数",
@@ -4175,6 +4225,7 @@
                         },
                         {
                             "caption": "示例：diēs, diēī (m.)",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数",
@@ -4339,6 +4390,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -4408,6 +4460,7 @@
                         },
                         {
                             "caption": "示例：bonus, bona, bonum",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -4593,6 +4646,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -4662,6 +4716,7 @@
                         },
                         {
                             "caption": "示例：fortis, fortis, forte",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -4861,6 +4916,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -4930,6 +4986,7 @@
                         },
                         {
                             "caption": "示例：ācer, ācris, ācre",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -5148,6 +5205,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -5217,6 +5275,7 @@
                         },
                         {
                             "caption": "示例：fēlīx, fēlīx, fēlīx",
+                            "role": "example",
                             "headers": [
                                 "格",
                                 "单数阳性",
@@ -5293,6 +5352,7 @@
                     "tables": [
                         {
                             "caption": "比较等级（规则）",
+                            "role": "pattern",
                             "headers": [
                                 "等级",
                                 "阳性",
@@ -5322,6 +5382,7 @@
                         },
                         {
                             "caption": "比较级 / 最高级的变格",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "单数（m/f）",
@@ -5376,6 +5437,7 @@
                     "tables": [
                         {
                             "caption": "构成规则",
+                            "role": "pattern",
                             "headers": [
                                 "形容词类型",
                                 "词尾",
@@ -5406,6 +5468,7 @@
                         },
                         {
                             "caption": "对照",
+                            "role": "pattern",
                             "headers": [
                                 "形容词",
                                 "副词",
@@ -5467,6 +5530,7 @@
                     "tables": [
                         {
                             "caption": "构成",
+                            "role": "pattern",
                             "headers": [
                                 "等级",
                                 "构成方式",
@@ -5497,6 +5561,7 @@
                         },
                         {
                             "caption": "不规则",
+                            "role": "pattern",
                             "headers": [
                                 "原级",
                                 "比较级",
@@ -5546,6 +5611,7 @@
                     "tables": [
                         {
                             "caption": "变位法速查",
+                            "role": "pattern",
                             "headers": [
                                 "变位法",
                                 "不定式",
@@ -6132,6 +6198,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6200,6 +6267,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6274,6 +6342,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6324,6 +6393,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6380,6 +6450,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6430,6 +6501,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6486,6 +6558,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6518,6 +6591,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6556,6 +6630,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6588,6 +6663,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6626,6 +6702,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6649,6 +6726,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -6678,6 +6756,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -6707,6 +6786,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6742,6 +6822,9 @@
                     "tables": [
                         {
                             "caption": "屈折词尾（三尾 / 二尾）",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -6771,6 +6854,9 @@
                         },
                         {
                             "caption": "示例（三尾 / 二尾）：amō, amāre, amāvī, amātum",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -6800,6 +6886,9 @@
                         },
                         {
                             "caption": "屈折词尾（一尾）",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "词尾"
@@ -6813,6 +6902,9 @@
                         },
                         {
                             "caption": "示例（一尾）：amō, amāre, amāvī, amātum",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "形式"
@@ -6832,6 +6924,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -6857,6 +6950,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6888,6 +6982,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -6905,6 +7000,7 @@
                         },
                         {
                             "caption": "示例：amō, amāre, amāvī, amātum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -7451,6 +7547,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7519,6 +7616,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7593,6 +7691,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7643,6 +7742,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7699,6 +7799,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7749,6 +7850,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7805,6 +7907,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7837,6 +7940,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7875,6 +7979,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7907,6 +8012,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7945,6 +8051,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7968,6 +8075,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -7997,6 +8105,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -8026,6 +8135,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -8061,6 +8171,9 @@
                     "tables": [
                         {
                             "caption": "屈折词尾（三尾 / 二尾）",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -8090,6 +8203,9 @@
                         },
                         {
                             "caption": "示例（三尾 / 二尾）：moneō, monēre, monuī, monitum",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -8119,6 +8235,9 @@
                         },
                         {
                             "caption": "屈折词尾（一尾）",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "词尾"
@@ -8132,6 +8251,9 @@
                         },
                         {
                             "caption": "示例（一尾）：moneō, monēre, monuī, monitum",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "形式"
@@ -8151,6 +8273,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -8176,6 +8299,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -8207,6 +8331,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -8224,6 +8349,7 @@
                         },
                         {
                             "caption": "示例：moneō, monēre, monuī, monitum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -8838,6 +8964,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -8906,6 +9033,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -8980,6 +9108,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9030,6 +9159,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9086,6 +9216,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9136,6 +9267,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9192,6 +9324,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9224,6 +9357,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9262,6 +9396,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9294,6 +9429,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9332,6 +9468,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9355,6 +9492,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -9384,6 +9522,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -9413,6 +9552,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -9448,6 +9588,9 @@
                     "tables": [
                         {
                             "caption": "屈折词尾（三尾 / 二尾）",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -9477,6 +9620,9 @@
                         },
                         {
                             "caption": "示例（三尾 / 二尾）：regō, regere, rēxī, rēctum",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -9506,6 +9652,9 @@
                         },
                         {
                             "caption": "屈折词尾（一尾）",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "词尾"
@@ -9519,6 +9668,9 @@
                         },
                         {
                             "caption": "示例（一尾）：regō, regere, rēxī, rēctum",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "形式"
@@ -9538,6 +9690,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -9563,6 +9716,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -9594,6 +9748,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -9611,6 +9766,7 @@
                         },
                         {
                             "caption": "示例：regō, regere, rēxī, rēctum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10157,6 +10313,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10225,6 +10382,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10299,6 +10457,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10349,6 +10508,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10405,6 +10565,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10455,6 +10616,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10511,6 +10673,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10543,6 +10706,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10581,6 +10745,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10613,6 +10778,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10651,6 +10817,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10674,6 +10841,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "语气 / 语态",
                                 "第一人称单数",
@@ -10703,6 +10871,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -10732,6 +10901,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10767,6 +10937,9 @@
                     "tables": [
                         {
                             "caption": "屈折词尾（三尾 / 二尾）",
+                            "role": "pattern",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -10796,6 +10969,9 @@
                         },
                         {
                             "caption": "示例（三尾 / 二尾）：audiō, audīre, audīvī, audītum",
+                            "role": "example",
+                            "group": "g1",
+                            "groupLabel": "三尾 / 二尾",
                             "headers": [
                                 "",
                                 "阳性",
@@ -10825,6 +11001,9 @@
                         },
                         {
                             "caption": "屈折词尾（一尾）",
+                            "role": "pattern",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "词尾"
@@ -10838,6 +11017,9 @@
                         },
                         {
                             "caption": "示例（一尾）：audiō, audīre, audīvī, audītum",
+                            "role": "example",
+                            "group": "g2",
+                            "groupLabel": "一尾",
                             "headers": [
                                 "",
                                 "形式"
@@ -10857,6 +11039,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -10882,6 +11065,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10913,6 +11097,7 @@
                     "tables": [
                         {
                             "caption": "屈折词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "词尾"
@@ -10930,6 +11115,7 @@
                         },
                         {
                             "caption": "示例：audiō, audīre, audīvī, audītum",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -10961,6 +11147,7 @@
                     "tables": [
                         {
                             "caption": "基数词 · 序数词 · 分配数词 · 数词副词 · 序数副词",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "基数词",
@@ -11134,6 +11321,7 @@
                         },
                         {
                             "caption": "倍数 · 比例 · 分数",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "倍数词",
@@ -11188,6 +11376,7 @@
                     "tables": [
                         {
                             "caption": "十位",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "基数词",
@@ -11264,6 +11453,7 @@
                     "tables": [
                         {
                             "caption": "百位",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "基数词",

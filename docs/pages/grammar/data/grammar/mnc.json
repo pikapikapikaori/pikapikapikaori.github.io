@@ -305,6 +305,7 @@
                     "tables": [
                         {
                             "caption": "人称代词与格助词的结合形式",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "主格",
@@ -382,6 +383,7 @@
                     "tables": [
                         {
                             "caption": "格助词接代词时发生的变化",
+                            "role": "pattern",
                             "headers": [
                                 "格助词",
                                 "一般名词后",
@@ -425,6 +427,7 @@
                     "tables": [
                         {
                             "caption": "常见形式",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "形式",
@@ -484,7 +487,31 @@
                     "title": "无标记（绝大多数名词）",
                     "tables": [
                         {
+                            "caption": "规则：无标记复数",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "词干",
+                                    "词干（不加后缀）"
+                                ],
+                                [
+                                    "指人名词",
+                                    "可用复数后缀（见下）"
+                                ],
+                                [
+                                    "其他名词",
+                                    "靠数词 / 上下文"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        },
+                        {
                             "caption": "示例：niyalma",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -547,7 +574,27 @@
                     "title": "-sa / -se / -so 型",
                     "tables": [
                         {
+                            "caption": "后缀：-sa / -se / -so",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "后元音词干",
+                                    "+ -sa"
+                                ],
+                                [
+                                    "前元音词干",
+                                    "+ -se（圆唇 + -so）"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        },
+                        {
                             "caption": "示例：niyalma",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -606,7 +653,27 @@
                     "title": "-ta / -te 型",
                     "tables": [
                         {
+                            "caption": "后缀：-ta / -te",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "后元音词干",
+                                    "+ -ta"
+                                ],
+                                [
+                                    "前元音词干",
+                                    "+ -te（圆唇 + -to）"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        },
+                        {
                             "caption": "示例：ama",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -665,7 +732,27 @@
                     "title": "-si 型",
                     "tables": [
                         {
+                            "caption": "后缀：-si",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "指人名词",
+                                    "+ -si"
+                                ],
+                                [
+                                    "元音和谐",
+                                    "不参与"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        },
+                        {
                             "caption": "示例：haha",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -724,7 +811,23 @@
                     "title": "-ri 型",
                     "tables": [
                         {
+                            "caption": "后缀：-ri",
+                            "role": "pattern",
+                            "headers": [
+                                "情况",
+                                "说明"
+                            ],
+                            "rows": [
+                                [
+                                    "少数名词",
+                                    "+ -ri（不能产）"
+                                ]
+                            ],
+                            "lang": "mnc"
+                        },
+                        {
                             "caption": "示例：mafa",
+                            "role": "example",
                             "headers": [
                                 "单数",
                                 "复数"
@@ -780,6 +883,7 @@
                     "tables": [
                         {
                             "caption": "五个格及其格助词",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "格助词",
@@ -829,6 +933,7 @@
                     "tables": [
                         {
                             "caption": "常见表达",
+                            "role": "pattern",
                             "headers": [
                                 "结构",
                                 "例",
@@ -869,6 +974,7 @@
                     "tables": [
                         {
                             "caption": "形容词的用法",
+                            "role": "pattern",
                             "headers": [
                                 "用法",
                                 "例",
@@ -902,6 +1008,7 @@
                     "tables": [
                         {
                             "caption": "比较结构",
+                            "role": "pattern",
                             "headers": [
                                 "结构",
                                 "例",
@@ -935,6 +1042,7 @@
                     "tables": [
                         {
                             "caption": "常见手段",
+                            "role": "pattern",
                             "headers": [
                                 "手段",
                                 "例",
@@ -970,6 +1078,7 @@
                     "tables": [
                         {
                             "caption": "动词的基本形态",
+                            "role": "pattern",
                             "headers": [
                                 "项目",
                                 "形式",
@@ -1003,6 +1112,7 @@
                     "tables": [
                         {
                             "caption": "时制与体后缀（例：arambi 写）",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "后缀",
@@ -1071,6 +1181,7 @@
                     "tables": [
                         {
                             "caption": "式",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "后缀",
@@ -1104,6 +1215,7 @@
                     "tables": [
                         {
                             "caption": "否定",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "后缀 / 结构",
@@ -1142,6 +1254,7 @@
                     "tables": [
                         {
                             "caption": "副动后缀",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "后缀",
@@ -1185,6 +1298,7 @@
                     "tables": [
                         {
                             "caption": "形动与名词化",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "后缀",
@@ -1490,6 +1604,7 @@
                     "tables": [
                         {
                             "caption": "语态",
+                            "role": "pattern",
                             "headers": [
                                 "语态",
                                 "后缀",
@@ -1528,6 +1643,7 @@
                     "tables": [
                         {
                             "caption": "构成",
+                            "role": "pattern",
                             "headers": [
                                 "要素",
                                 "形式"
@@ -1561,6 +1677,7 @@
                     "tables": [
                         {
                             "caption": "构成",
+                            "role": "pattern",
                             "headers": [
                                 "要素",
                                 "形式"
@@ -1594,6 +1711,7 @@
                     "tables": [
                         {
                             "caption": "构成",
+                            "role": "pattern",
                             "headers": [
                                 "要素",
                                 "形式"
@@ -1635,6 +1753,7 @@
                     "tables": [
                         {
                             "caption": "后缀变体",
+                            "role": "pattern",
                             "headers": [
                                 "词干",
                                 "过去",
@@ -1678,6 +1797,7 @@
                     "tables": [
                         {
                             "caption": "后缀变体",
+                            "role": "pattern",
                             "headers": [
                                 "词干",
                                 "过去",
@@ -1721,6 +1841,7 @@
                     "tables": [
                         {
                             "caption": "后缀变体",
+                            "role": "pattern",
                             "headers": [
                                 "词干",
                                 "过去",
@@ -1757,6 +1878,7 @@
                     "tables": [
                         {
                             "caption": "1–10、整十与百千",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "形式",
@@ -1836,6 +1958,7 @@
                     "tables": [
                         {
                             "caption": "序数",
+                            "role": "pattern",
                             "headers": [
                                 "序数",
                                 "构成"
@@ -1876,6 +1999,7 @@
                     "tables": [
                         {
                             "caption": "分类与例",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "例",
@@ -1914,6 +2038,7 @@
                     "tables": [
                         {
                             "caption": "语序",
+                            "role": "pattern",
                             "headers": [
                                 "位置",
                                 "例"
@@ -1946,6 +2071,7 @@
                     "tables": [
                         {
                             "caption": "后置词及其支配的格",
+                            "role": "pattern",
                             "headers": [
                                 "后置词",
                                 "意义",
@@ -2007,6 +2133,7 @@
                     "tables": [
                         {
                             "caption": "对比",
+                            "role": "pattern",
                             "headers": [
                                 "手段",
                                 "性质",
@@ -2042,6 +2169,7 @@
                     "tables": [
                         {
                             "caption": "元音分组（和谐的依据）",
+                            "role": "pattern",
                             "headers": [
                                 "组",
                                 "元音",
@@ -2080,6 +2208,7 @@
                     "tables": [
                         {
                             "caption": "受和谐影响的后缀",
+                            "role": "pattern",
                             "headers": [
                                 "后缀",
                                 "后元音",
@@ -2154,6 +2283,7 @@
                     "tables": [
                         {
                             "caption": "元音字母的四种位置形式",
+                            "role": "pattern",
                             "headers": [
                                 "转写",
                                 "独立形",
@@ -2222,6 +2352,7 @@
                     "tables": [
                         {
                             "caption": "辅音字母的四种位置形式",
+                            "role": "pattern",
                             "headers": [
                                 "转写",
                                 "独立形",
@@ -2394,6 +2525,7 @@
                     "tables": [
                         {
                             "caption": "规则",
+                            "role": "pattern",
                             "headers": [
                                 "规则",
                                 "说明"
@@ -2438,6 +2570,7 @@
                     "tables": [
                         {
                             "caption": "SOV 语序",
+                            "role": "pattern",
                             "headers": [
                                 "成分",
                                 "例",
@@ -2471,6 +2604,7 @@
                     "tables": [
                         {
                             "caption": "判断与疑问",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "结构",
@@ -2509,6 +2643,7 @@
                     "tables": [
                         {
                             "caption": "否定与并列",
+                            "role": "pattern",
                             "headers": [
                                 "手段",
                                 "例",

@@ -434,6 +434,7 @@
                     "tables": [
                         {
                             "caption": "人称代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "主格",
@@ -516,6 +517,7 @@
                     "tables": [
                         {
                             "caption": "反身代词",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "第四格（Akkusativ）",
@@ -564,6 +566,7 @@
                     "tables": [
                         {
                             "caption": "物主代词词干",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "阳性 / 中性词干",
@@ -604,6 +607,7 @@
                         },
                         {
                             "caption": "物主代词变格（mein-，词尾同 ein）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -645,6 +649,7 @@
                         },
                         {
                             "caption": "各人称的词干与变格（主格 / 宾格阳性）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "词干",
@@ -712,6 +717,7 @@
                     "tables": [
                         {
                             "caption": "指示代词 dieser / jener",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -752,6 +758,7 @@
                         },
                         {
                             "caption": "derselbe / dieselbe / dasselbe（前后两部分都变格）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -793,6 +800,7 @@
                         },
                         {
                             "caption": "solcher（只用来修饰名词，按定冠词变格）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -841,6 +849,7 @@
                     "tables": [
                         {
                             "caption": "关系代词 der / die / das",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -881,6 +890,7 @@
                         },
                         {
                             "caption": "关系代词 welcher / welches / welche",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -921,6 +931,7 @@
                         },
                         {
                             "caption": "关系代词 wer / was",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "wer（人）",
@@ -958,6 +969,7 @@
                     "tables": [
                         {
                             "caption": "疑问代词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "指人 / 指物",
@@ -1001,6 +1013,7 @@
                     "tables": [
                         {
                             "caption": "常用不定代词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "含义",
@@ -1066,6 +1079,7 @@
                     "tables": [
                         {
                             "caption": "名词的性与定冠词",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "阳性 (m)",
@@ -1092,6 +1106,7 @@
                         },
                         {
                             "caption": "常见复数规则",
+                            "role": "pattern",
                             "headers": [
                                 "单数结尾",
                                 "复数规则",
@@ -1234,7 +1249,40 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：阳性强变化（Tisch 型）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "—",
+                                    "-e"
+                                ],
+                                [
+                                    "属格",
+                                    "-es",
+                                    "-e"
+                                ],
+                                [
+                                    "与格",
+                                    "—",
+                                    "-en"
+                                ],
+                                [
+                                    "宾格",
+                                    "—",
+                                    "-e"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：Tisch（复数 Tische）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1358,7 +1406,40 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：中性强变化（Kind 型）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "—",
+                                    "-er"
+                                ],
+                                [
+                                    "属格",
+                                    "-es",
+                                    "-er"
+                                ],
+                                [
+                                    "与格",
+                                    "—",
+                                    "-ern"
+                                ],
+                                [
+                                    "宾格",
+                                    "—",
+                                    "-er"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：Kind（复数 Kinder）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1484,7 +1565,40 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：阴性（Frau 型）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "—",
+                                    "-en"
+                                ],
+                                [
+                                    "属格",
+                                    "—",
+                                    "-en"
+                                ],
+                                [
+                                    "与格",
+                                    "—",
+                                    "-en"
+                                ],
+                                [
+                                    "宾格",
+                                    "—",
+                                    "-en"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：Frau（复数 Frauen）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1600,7 +1714,40 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：阳性弱变化（Student 型）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "—",
+                                    "-en"
+                                ],
+                                [
+                                    "属格",
+                                    "-en",
+                                    "-en"
+                                ],
+                                [
+                                    "与格",
+                                    "-en",
+                                    "-en"
+                                ],
+                                [
+                                    "宾格",
+                                    "-en",
+                                    "-en"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：Student（复数 Studenten）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1719,7 +1866,40 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：混合变化（Name 型）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "—",
+                                    "-n"
+                                ],
+                                [
+                                    "属格",
+                                    "-ns",
+                                    "-n"
+                                ],
+                                [
+                                    "与格",
+                                    "-n",
+                                    "-n"
+                                ],
+                                [
+                                    "宾格",
+                                    "-n",
+                                    "-n"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：Name（复数 Namen）",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单数",
@@ -1758,6 +1938,7 @@
                     "tables": [
                         {
                             "caption": "常见特殊复数",
+                            "role": "pattern",
                             "headers": [
                                 "单数",
                                 "复数",
@@ -1823,6 +2004,7 @@
                     "tables": [
                         {
                             "caption": "按前面的词选择变格",
+                            "role": "pattern",
                             "headers": [
                                 "前面是什么",
                                 "变格类型",
@@ -1849,6 +2031,7 @@
                         },
                         {
                             "caption": "定冠词 + 弱变化形容词（alt 老的）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1889,6 +2072,7 @@
                         },
                         {
                             "caption": "不定冠词 + 混合变化形容词（alt）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -1929,6 +2113,7 @@
                         },
                         {
                             "caption": "无冠词 + 强变化形容词（alt）",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -2166,7 +2351,54 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：弱变化（定冠词后）",
+                            "role": "pattern",
+                            "group": "weak",
+                            "groupLabel": "弱变化",
+                            "headers": [
+                                "",
+                                "阳性单数",
+                                "阴性单数",
+                                "中性单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "-e",
+                                    "-e",
+                                    "-e",
+                                    "-en"
+                                ],
+                                [
+                                    "属格",
+                                    "-en",
+                                    "-en",
+                                    "-en",
+                                    "-en"
+                                ],
+                                [
+                                    "与格",
+                                    "-en",
+                                    "-en",
+                                    "-en",
+                                    "-en"
+                                ],
+                                [
+                                    "宾格",
+                                    "-en",
+                                    "-e",
+                                    "-e",
+                                    "-en"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：schnell · 弱变化（定冠词后）",
+                            "role": "example",
+                            "group": "weak",
+                            "groupLabel": "弱变化",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -2207,7 +2439,54 @@
                             "lang": "de"
                         },
                         {
+                            "caption": "词尾：混合变化（不定冠词后）",
+                            "role": "pattern",
+                            "group": "mixed",
+                            "groupLabel": "混合变化",
+                            "headers": [
+                                "",
+                                "阳性单数",
+                                "阴性单数",
+                                "中性单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "-er",
+                                    "-e",
+                                    "-es",
+                                    "-en"
+                                ],
+                                [
+                                    "属格",
+                                    "-en",
+                                    "-en",
+                                    "-en",
+                                    "-en"
+                                ],
+                                [
+                                    "与格",
+                                    "-en",
+                                    "-en",
+                                    "-en",
+                                    "-en"
+                                ],
+                                [
+                                    "宾格",
+                                    "-en",
+                                    "-e",
+                                    "-es",
+                                    "-en"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：schnell · 混合变化（不定冠词后）",
+                            "role": "example",
+                            "group": "mixed",
+                            "groupLabel": "混合变化",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -2248,7 +2527,54 @@
                             "lang": "de"
                         },
                         {
+                            "caption": "词尾：强变化（无冠词）",
+                            "role": "pattern",
+                            "group": "strong",
+                            "groupLabel": "强变化",
+                            "headers": [
+                                "",
+                                "阳性单数",
+                                "阴性单数",
+                                "中性单数",
+                                "复数"
+                            ],
+                            "rows": [
+                                [
+                                    "主格",
+                                    "-er",
+                                    "-e",
+                                    "-es",
+                                    "-e"
+                                ],
+                                [
+                                    "属格",
+                                    "-en",
+                                    "-er",
+                                    "-en",
+                                    "-er"
+                                ],
+                                [
+                                    "与格",
+                                    "-em",
+                                    "-er",
+                                    "-em",
+                                    "-en"
+                                ],
+                                [
+                                    "宾格",
+                                    "-en",
+                                    "-e",
+                                    "-es",
+                                    "-e"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：schnell · 强变化（无冠词）",
+                            "role": "example",
+                            "group": "strong",
+                            "groupLabel": "强变化",
                             "headers": [
                                 "",
                                 "阳性单数",
@@ -2289,7 +2615,31 @@
                             "lang": "de"
                         },
                         {
+                            "caption": "词尾：比较等级",
+                            "role": "pattern",
+                            "group": "comparison",
+                            "groupLabel": "比较等级",
+                            "headers": [
+                                "",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "比较级",
+                                    "-er"
+                                ],
+                                [
+                                    "最高级",
+                                    "am …-sten"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：schnell · 比较等级",
+                            "role": "example",
+                            "group": "comparison",
+                            "groupLabel": "比较等级",
                             "headers": [
                                 "",
                                 "形式"
@@ -2456,7 +2806,27 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：比较等级（词干变音）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "比较级",
+                                    "-er（词干变音）"
+                                ],
+                                [
+                                    "最高级",
+                                    "am …-sten（词干变音）"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：jung · 比较等级",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -2623,7 +2993,27 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：比较等级（-esten）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "比较级",
+                                    "-er"
+                                ],
+                                [
+                                    "最高级",
+                                    "am …-esten（d / t / s / ß / z 后插入 -e-）"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：breit · 比较等级",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -2782,7 +3172,27 @@
                     },
                     "tables": [
                         {
+                            "caption": "词尾：比较等级（丢 e）",
+                            "role": "pattern",
+                            "headers": [
+                                "",
+                                "形式"
+                            ],
+                            "rows": [
+                                [
+                                    "比较级",
+                                    "-er（词干丢 e）"
+                                ],
+                                [
+                                    "最高级",
+                                    "am …-sten（用完整词干）"
+                                ]
+                            ],
+                            "lang": "de"
+                        },
+                        {
                             "caption": "例词：dunkel · 比较等级",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -2808,6 +3218,7 @@
                     "tables": [
                         {
                             "caption": "比较级与最高级构成",
+                            "role": "pattern",
                             "headers": [
                                 "等级",
                                 "构成",
@@ -2833,6 +3244,7 @@
                         },
                         {
                             "caption": "不规则比较级",
+                            "role": "pattern",
                             "headers": [
                                 "原级",
                                 "比较级",
@@ -2880,6 +3292,7 @@
                     "tables": [
                         {
                             "caption": "两种分词",
+                            "role": "pattern",
                             "headers": [
                                 "分词",
                                 "构成",
@@ -2901,6 +3314,7 @@
                         },
                         {
                             "caption": "作形容词时的变化",
+                            "role": "pattern",
                             "headers": [
                                 "用法",
                                 "变化",
@@ -2929,6 +3343,7 @@
                     "tables": [
                         {
                             "caption": "常见构成方式",
+                            "role": "pattern",
                             "headers": [
                                 "方式",
                                 "构成",
@@ -2979,6 +3394,7 @@
                     "tables": [
                         {
                             "caption": "按意义分类",
+                            "role": "pattern",
                             "headers": [
                                 "类别",
                                 "例"
@@ -3024,6 +3440,7 @@
                     "tables": [
                         {
                             "caption": "比较级与最高级",
+                            "role": "pattern",
                             "headers": [
                                 "原级",
                                 "比较级",
@@ -3067,6 +3484,7 @@
                     "tables": [
                         {
                             "caption": "构成与用法",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "用途",
@@ -3098,6 +3516,7 @@
                         },
                         {
                             "caption": "人 vs 物",
+                            "role": "pattern",
                             "headers": [
                                 "所指",
                                 "用什么",
@@ -3133,6 +3552,7 @@
                     "tables": [
                         {
                             "caption": "六时态",
+                            "role": "pattern",
                             "headers": [
                                 "时态",
                                 "构成",
@@ -3186,6 +3606,7 @@
                     "tables": [
                         {
                             "caption": "被动语态",
+                            "role": "pattern",
                             "headers": [
                                 "时态",
                                 "构成",
@@ -3223,6 +3644,7 @@
                     "tables": [
                         {
                             "caption": "语式",
+                            "role": "pattern",
                             "headers": [
                                 "语式",
                                 "用法",
@@ -3259,6 +3681,7 @@
                         },
                         {
                             "caption": "虚拟式的构成要点",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "规则",
@@ -3297,6 +3720,7 @@
                     "tables": [
                         {
                             "caption": "可分前缀",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "例",
@@ -3323,6 +3747,7 @@
                         },
                         {
                             "caption": "第二分词",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -3351,6 +3776,7 @@
                     "tables": [
                         {
                             "caption": "常见反身动词",
+                            "role": "pattern",
                             "headers": [
                                 "动词",
                                 "含义",
@@ -3387,6 +3813,7 @@
                         },
                         {
                             "caption": "第三格反身",
+                            "role": "pattern",
                             "headers": [
                                 "动词",
                                 "例",
@@ -3415,6 +3842,7 @@
                     "tables": [
                         {
                             "caption": "情态动词现在时",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "können",
@@ -3483,6 +3911,7 @@
                         },
                         {
                             "caption": "情态动词过去时",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "können",
@@ -3551,6 +3980,7 @@
                         },
                         {
                             "caption": "语序",
+                            "role": "pattern",
                             "headers": [
                                 "结构",
                                 "例"
@@ -3576,6 +4006,7 @@
                     "tables": [
                         {
                             "caption": "分词构成",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -3611,6 +4042,7 @@
                         },
                         {
                             "caption": "不定式",
+                            "role": "pattern",
                             "headers": [
                                 "类型",
                                 "构成",
@@ -3826,6 +4258,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3859,6 +4292,7 @@
                         },
                         {
                             "caption": "例词：machen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3898,6 +4332,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3931,6 +4366,7 @@
                         },
                         {
                             "caption": "例词：machen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -3970,6 +4406,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -3994,6 +4431,7 @@
                         },
                         {
                             "caption": "例词：machen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4024,6 +4462,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4038,6 +4477,7 @@
                         },
                         {
                             "caption": "例词：machen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4058,6 +4498,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4076,6 +4517,7 @@
                         },
                         {
                             "caption": "例词：machen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4279,6 +4721,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4312,6 +4755,7 @@
                         },
                         {
                             "caption": "例词：arbeiten",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4351,6 +4795,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4384,6 +4829,7 @@
                         },
                         {
                             "caption": "例词：arbeiten",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4423,6 +4869,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4447,6 +4894,7 @@
                         },
                         {
                             "caption": "例词：arbeiten",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4477,6 +4925,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4491,6 +4940,7 @@
                         },
                         {
                             "caption": "例词：arbeiten",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4511,6 +4961,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4529,6 +4980,7 @@
                         },
                         {
                             "caption": "例词：arbeiten",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4751,6 +5203,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4784,6 +5237,7 @@
                         },
                         {
                             "caption": "例词：sammeln",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4823,6 +5277,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4856,6 +5311,7 @@
                         },
                         {
                             "caption": "例词：sammeln",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4895,6 +5351,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -4919,6 +5376,7 @@
                         },
                         {
                             "caption": "例词：sammeln",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -4949,6 +5407,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -4963,6 +5422,7 @@
                         },
                         {
                             "caption": "例词：sammeln",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -4983,6 +5443,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5001,6 +5462,7 @@
                         },
                         {
                             "caption": "例词：sammeln",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5194,6 +5656,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5227,6 +5690,7 @@
                         },
                         {
                             "caption": "例词：studieren",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5266,6 +5730,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5299,6 +5764,7 @@
                         },
                         {
                             "caption": "例词：studieren",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5338,6 +5804,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5362,6 +5829,7 @@
                         },
                         {
                             "caption": "例词：studieren",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5392,6 +5860,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5406,6 +5875,7 @@
                         },
                         {
                             "caption": "例词：studieren",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5426,6 +5896,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5444,6 +5915,7 @@
                         },
                         {
                             "caption": "例词：studieren",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5637,6 +6109,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5670,6 +6143,7 @@
                         },
                         {
                             "caption": "例词：besuchen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5709,6 +6183,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5742,6 +6217,7 @@
                         },
                         {
                             "caption": "例词：besuchen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5781,6 +6257,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -5805,6 +6282,7 @@
                         },
                         {
                             "caption": "例词：besuchen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -5835,6 +6313,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5849,6 +6328,7 @@
                         },
                         {
                             "caption": "例词：besuchen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -5869,6 +6349,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -5887,6 +6368,7 @@
                         },
                         {
                             "caption": "例词：besuchen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6171,6 +6653,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6204,6 +6687,7 @@
                         },
                         {
                             "caption": "例词：sprechen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6243,6 +6727,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6276,6 +6761,7 @@
                         },
                         {
                             "caption": "例词：sprechen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6315,6 +6801,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6339,6 +6826,7 @@
                         },
                         {
                             "caption": "例词：sprechen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6369,6 +6857,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6383,6 +6872,7 @@
                         },
                         {
                             "caption": "例词：sprechen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6403,6 +6893,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6421,6 +6912,7 @@
                         },
                         {
                             "caption": "例词：sprechen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6685,6 +7177,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6718,6 +7211,7 @@
                         },
                         {
                             "caption": "例词：bringen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6757,6 +7251,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6790,6 +7285,7 @@
                         },
                         {
                             "caption": "例词：bringen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6829,6 +7325,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -6853,6 +7350,7 @@
                         },
                         {
                             "caption": "例词：bringen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -6883,6 +7381,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6897,6 +7396,7 @@
                         },
                         {
                             "caption": "例词：bringen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -6917,6 +7417,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -6935,6 +7436,7 @@
                         },
                         {
                             "caption": "例词：bringen",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -7215,6 +7717,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -7248,6 +7751,7 @@
                         },
                         {
                             "caption": "例词：können",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -7287,6 +7791,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "单1",
@@ -7320,6 +7825,7 @@
                         },
                         {
                             "caption": "例词：können",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "单1",
@@ -7359,6 +7865,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -7373,6 +7880,7 @@
                         },
                         {
                             "caption": "例词：können",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -7393,6 +7901,7 @@
                     "tables": [
                         {
                             "caption": "词尾",
+                            "role": "pattern",
                             "headers": [
                                 "",
                                 "形式"
@@ -7411,6 +7920,7 @@
                         },
                         {
                             "caption": "例词：können",
+                            "role": "example",
                             "headers": [
                                 "",
                                 "形式"
@@ -7443,6 +7953,7 @@
                     "tables": [
                         {
                             "caption": "sein（是）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "现在时",
@@ -7490,6 +8001,7 @@
                         },
                         {
                             "caption": "haben（有）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "现在时",
@@ -7537,6 +8049,7 @@
                         },
                         {
                             "caption": "werden（成为 / 将来助动词 / 被动助动词）",
+                            "role": "pattern",
                             "headers": [
                                 "人称",
                                 "现在时",
@@ -7591,6 +8104,7 @@
                     "tables": [
                         {
                             "caption": "主要形式",
+                            "role": "pattern",
                             "headers": [
                                 "不定式",
                                 "过去时",
@@ -7716,6 +8230,7 @@
                         },
                         {
                             "caption": "现在时（第三人称单数 / 复数）",
+                            "role": "pattern",
                             "headers": [
                                 "不定式",
                                 "3sg",
@@ -7821,6 +8336,7 @@
                     "tables": [
                         {
                             "caption": "0–20",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "写法",
@@ -7899,6 +8415,7 @@
                         },
                         {
                             "caption": "十位以上",
+                            "role": "pattern",
                             "headers": [
                                 "数",
                                 "写法",
@@ -7942,6 +8459,7 @@
                     "tables": [
                         {
                             "caption": "构成",
+                            "role": "pattern",
                             "headers": [
                                 "基数",
                                 "序数",
@@ -7985,6 +8503,7 @@
                     "tables": [
                         {
                             "caption": "分数与倍数",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "写法",
@@ -8028,6 +8547,7 @@
                     "tables": [
                         {
                             "caption": "钟点",
+                            "role": "pattern",
                             "headers": [
                                 "写法",
                                 "读法",
@@ -8069,6 +8589,7 @@
                         },
                         {
                             "caption": "日期",
+                            "role": "pattern",
                             "headers": [
                                 "项目",
                                 "规则",
@@ -8100,6 +8621,7 @@
                         },
                         {
                             "caption": "年份",
+                            "role": "pattern",
                             "headers": [
                                 "年份",
                                 "读法"
@@ -8140,6 +8662,7 @@
                     "tables": [
                         {
                             "caption": "定冠词变格",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -8187,6 +8710,7 @@
                     "tables": [
                         {
                             "caption": "不定冠词变格",
+                            "role": "pattern",
                             "headers": [
                                 "格",
                                 "阳性",
@@ -8236,6 +8760,7 @@
                     "tables": [
                         {
                             "caption": "Akkusativ",
+                            "role": "pattern",
                             "headers": [
                                 "介词",
                                 "例"
@@ -8281,6 +8806,7 @@
                     "tables": [
                         {
                             "caption": "Dativ",
+                            "role": "pattern",
                             "headers": [
                                 "介词",
                                 "例"
@@ -8330,6 +8856,7 @@
                     "tables": [
                         {
                             "caption": "方向用第四格，位置用第三格",
+                            "role": "pattern",
                             "headers": [
                                 "介词",
                                 "方向（Wohin? → Akk.）",
@@ -8393,6 +8920,7 @@
                     "tables": [
                         {
                             "caption": "Genitiv",
+                            "role": "pattern",
                             "headers": [
                                 "介词",
                                 "例"
@@ -8434,6 +8962,7 @@
                     "tables": [
                         {
                             "caption": "常见缩合形式",
+                            "role": "pattern",
                             "headers": [
                                 "缩合",
                                 "原形",
@@ -8509,6 +9038,7 @@
                     "tables": [
                         {
                             "caption": "基本规则",
+                            "role": "pattern",
                             "headers": [
                                 "成分位置",
                                 "规则",
@@ -8542,6 +9072,7 @@
                     "tables": [
                         {
                             "caption": "连词与语序",
+                            "role": "pattern",
                             "headers": [
                                 "连词类型",
                                 "语序",
@@ -8580,6 +9111,7 @@
                     "tables": [
                         {
                             "caption": "框型结构（Satzklammer）",
+                            "role": "pattern",
                             "headers": [
                                 "结构",
                                 "框的前半",
@@ -8611,6 +9143,7 @@
                         },
                         {
                             "caption": "多个状语时的顺序（TeKaMoLo）",
+                            "role": "pattern",
                             "headers": [
                                 "顺序",
                                 "类别",
@@ -8654,6 +9187,7 @@
                     "tables": [
                         {
                             "caption": "nicht 的位置",
+                            "role": "pattern",
                             "headers": [
                                 "否定对象",
                                 "位置",
@@ -8690,6 +9224,7 @@
                         },
                         {
                             "caption": "其他否定词",
+                            "role": "pattern",
                             "headers": [
                                 "形式",
                                 "含义",
@@ -8735,6 +9270,7 @@
                     "tables": [
                         {
                             "caption": "规则",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "写法",
@@ -8768,6 +9304,7 @@
                     "tables": [
                         {
                             "caption": "大写规则",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "大写",
@@ -8816,6 +9353,7 @@
                     "tables": [
                         {
                             "caption": "常见情况",
+                            "role": "pattern",
                             "headers": [
                                 "情况",
                                 "写法",
@@ -8859,6 +9397,7 @@
                     "tables": [
                         {
                             "caption": "标点与符号",
+                            "role": "pattern",
                             "headers": [
                                 "符号",
                                 "用法",

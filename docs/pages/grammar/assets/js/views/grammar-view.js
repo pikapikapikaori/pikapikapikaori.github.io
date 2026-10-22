@@ -1,7 +1,7 @@
 import { h, replace, htmlFragment } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
 import { loadGrammar } from '../services/grammar-service.js'
-import { createGrammarTable } from '../components/grammar-table.js'
+import { createGrammarTables } from '../components/grammar-table.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
 export default {
@@ -182,10 +182,8 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
     function fillItem(it, item) {
         if (it.dataset.filled === '1') return
         it.dataset.filled = '1'
-        for (const t of item.tables || []) {
-            const table = createGrammarTable({ ...t, lang: t.lang || lang })
-            if (table) it.appendChild(table)
-        }
+        const tables = createGrammarTables(item.tables || [], lang)
+        if (tables) it.appendChild(tables)
         if (item.notes) {
             it.appendChild(h('div', { class: 'grammar-item__notes' }, htmlFragment(item.notes)))
         }

@@ -916,6 +916,20 @@ button.word-card__derivative {
 }
 
 /* ---------- 语法速查表格 ---------- */
+/* 一个条目的多表 tab：第一行选表（多组时），第二行选变化 / 示例 */
+.grammar-tabs {
+    display: flex;
+    flex-direction: column;
+}
+
+.grammar-tabs__row:empty {
+    display: none;
+}
+
+.grammar-tabs__row .tab-bar--tables {
+    margin-bottom: var(--sp-1);
+}
+
 .grammar-table-wrap {
     max-width: 100%;
     overflow-x: auto;

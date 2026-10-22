@@ -1,4 +1,5 @@
 import { h, htmlFragment } from '../utils/dom.js'
+import { createTabBar } from './tabs.js'
 
 /**
  * 语法表格
@@ -56,4 +57,77 @@ export function createGrammarTable(spec) {
 
     // 列多时本容器横向滚动，避免整页被撑宽
     return h('div', { class: 'grammar-table-wrap' }, table)
+}
+
+/**
+ * 一个条目的多张表：有「变化表 + 示例表」配对时用 tab 切换
+ *
+ * - 只有一组：一行 tab（变化表 / 示例表）
+ * - 多组（表对象带 `group` / `groupLabel`）：两行 tab，先选组再选变化 / 示例
+ * - 没有配对关系（只有变化表或只有示例表）：按原顺序堆叠
+ *
+ * @param {object[]} tables  语法 JSON 里的 `item.tables`
+ * @param {string}   lang    默认单元格语言（表自己带 `lang` 时优先）
+ */
+export function createGrammarTables(tables, lang = null) {
+    const entries = (tables || [])
+        .map((spec) => ({ spec, node: createGrammarTable({ ...spec, lang: spec.lang || lang }) }))
+        .filter((entry) => entry.node)
+
+    if (!entries.length) return null
+    if (entries.length === 1) return entries[0].node
+
+    const groups = []
+    for (const entry of entries) {
+        const key = entry.spec.group || ''
+        let group = groups.find((g) => g.key === key)
+        if (!group) {
+            group = { key, label: entry.spec.groupLabel || '', pattern: [], example: [] }
+            groups.push(group)
+        }
+        if (entry.spec.role === 'example') group.example.push(entry.node)
+        else group.pattern.push(entry.node)
+    }
+
+    const paired = groups.some((g) => g.pattern.length && g.example.length)
+    if (!paired) return h('div', { class: 'grammar-tables' }, ...entries.map((entry) => entry.node))
+
+    const ROLE_LABEL = { pattern: '变化表', example: '示例表' }
+    let groupIndex = Math.max(0, groups.findIndex((g) => g.pattern.length || g.example.length))
+    let role = groups[groupIndex].pattern.length ? 'pattern' : 'example'
+
+    const groupRow = h('div', { class: 'grammar-tabs__row' })
+    const roleRow = h('div', { class: 'grammar-tabs__row' })
+    const content = h('div', { class: 'grammar-tables' })
+
+    function render() {
+        const group = groups[groupIndex]
+        const available = ['pattern', 'example'].filter((key) => group[key].length)
+        if (!available.includes(role)) role = available[0]
+
+        groupRow.replaceChildren()
+        if (groups.length > 1) {
+            groupRow.appendChild(createTabBar({
+                items: groups.map((g, index) => ({ key: String(index), label: g.label || `表 ${index + 1}` })),
+                active: String(groupIndex),
+                onChange: (key) => { groupIndex = Number(key); render() },
+                className: 'tab-bar--tables'
+            }).el)
+        }
+
+        roleRow.replaceChildren()
+        if (available.length > 1) {
+            roleRow.appendChild(createTabBar({
+                items: available.map((key) => ({ key, label: ROLE_LABEL[key] })),
+                active: role,
+                onChange: (key) => { role = key; render() },
+                className: 'tab-bar--tables'
+            }).el)
+        }
+
+        content.replaceChildren(...group[role])
+    }
+
+    render()
+    return h('div', { class: 'grammar-tabs' }, groupRow, roleRow, content)
 }

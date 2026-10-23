@@ -30,8 +30,8 @@ export const FILTER_EMPTY = {
 /**
  * 检索范围（三档）
  *   all    全部：词形 + 含义 / 例句 / 固定搭配
- *   forms  词形：基本形态、主要部分、变格变位表、补充形式
- *   head   原形：只有基本形态 + 主要部分
+ *   forms  词形：基本形态、词干、变格变位表、补充形式
+ *   head   原形：只有基本形态 + 词干
  */
 export const SEARCH_SCOPE = [
     { value: 'all',   label: '全部' },

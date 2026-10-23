@@ -10,13 +10,13 @@ import {
     submitReview
 } from '../services/word-service.js'
 import { listByLanguage, deleteWord } from '../store/word-store.js'
-import { POS_LIST, PAGE_SIZE_OPTIONS } from '../config/config.js'
+import { POS_LIST, PAGE_SIZE_OPTIONS, posOptions } from '../config/config.js'
 import { createWordCard } from '../components/word-card.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
-import { loadGrammar, getParadigmTemplate, getDeriveParts } from '../services/grammar-service.js'
+import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf } from '../services/grammar-service.js'
 import { findAnchor } from '../models/grammar.js'
 import { openImportWordsModal } from '../components/import-words-modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
@@ -81,7 +81,7 @@ export default {
             return getParadigmTemplate(grammarDoc, pos)
         }
 
-        /** 某个词的主要部分标签（来自它的变位 / 变格类型） */
+        /** 某个词的词干标签（来自它的变位 / 变格类型） */
         function partLabelsFor(word) {
             const parts = getDeriveParts(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef)
             const out = {}
@@ -89,6 +89,11 @@ export default {
                 if (part.key !== 'base') out[part.key] = part.label || part.key
             }
             return out
+        }
+
+        /** 主词干那一栏的标题（梵语动词是「词根」、名词是「弱词干」） */
+        function stemLabelFor(word) {
+            return stemLabelOf(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef, word && word.pos)
         }
 
         /** 词性徽章 → 对应语法章节（`{lang}-{pos}` 存在才可点） */
@@ -181,7 +186,7 @@ export default {
                 }
             },
             h('option', { value: '' }, '全部词性'),
-            ...POS_LIST.map((p) => h('option', {
+            ...posOptions(language.pos).map((p) => h('option', {
                 value: p.value,
                 selected: state.pos === p.value
             }, p.label))
@@ -333,6 +338,7 @@ export default {
                     language: lang,
                     paradigmTpl: paradigmTplFor(w.pos),
                     partLabels: partLabelsFor(w),
+                    stemLabel: stemLabelFor(w),
                     resolvePosRef,
                     resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
                     onDerivativeClick: (target) => {

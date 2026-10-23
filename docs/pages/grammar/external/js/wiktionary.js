@@ -94,7 +94,7 @@ function apiGet(params) {
  * - `wikitext` 用来解析释义与词头模板
  * - `sections` 是解析器给出的标题层级（section 切分依据，比正则可靠）
  *
- * 只要这两样：变格 / 变位表由本站的 derive 引擎按主要部分生成，不再从表格里刮。
+ * 只要这两样：变格 / 变位表由本站的 derive 引擎按词干生成，不再从表格里刮。
  */
 async function fetchParsedPage(lemma) {
     const data = await apiGet({
@@ -264,10 +264,10 @@ function extractTemplates(posContent) {
     return templates
 }
 
-/* ---------------- 词头模板：主要部分 ---------------- */
+/* ---------------- 词头模板：词干 ---------------- */
 
 /**
- * 从词头模板里抠「主要部分」。模板只报词形（如 regō、rēx），
+ * 从词头模板里抠「词干」。模板只报词形（如 regō、rēx），
  * 词干要按各语言的规则自己剪；剪不出来就留空，交给用户填。
  */
 const LA_VERB_ANCHORS = {
@@ -445,7 +445,7 @@ export async function lookupWord(lemma, langCode) {
     return results
 }
 
-/** 单条查询结果 → 表单补丁（只回填释义与主要部分，变格 / 变位表交给 derive 生成） */
+/** 单条查询结果 → 表单补丁（只回填释义与词干，变格 / 变位表交给 derive 生成） */
 function buildPatch(result) {
     const meanings = (result.meanings || []).map((m) => ({
         text: m.text,
@@ -463,7 +463,7 @@ function buildPatch(result) {
 
     const parts = [`词性 ${POS_LABEL[result.pos] || result.pos}`]
     if (meanings.length) parts.push(`${meanings.length} 条释义`)
-    if (stems) parts.push(`主要部分 ${Object.keys(stems).join(' / ')}`)
+    if (stems) parts.push(`词干 ${Object.keys(stems).join(' / ')}`)
 
     return {
         pos: result.pos,
@@ -487,7 +487,7 @@ function buildPatch(result) {
  *   {
  *     pos,            // 建议填充到 posSelect 的词性
  *     meanings,       // Word.meanings 格式
- *     stems,          // 建议回填的主要部分（来自 {{la-noun}} / {{la-verb}} 等词头模板）
+ *     stems,          // 建议回填的词干（来自 {{la-noun}} / {{la-verb}} 等词头模板）
  *     inflectionType, // 建议选中的语法锚点 { grammarRef, label }
  *     summary,        // 提示文案
  *     choices         // 同一页有多个词条时：`[{ label, patch }]`，patch 结构与本对象相同

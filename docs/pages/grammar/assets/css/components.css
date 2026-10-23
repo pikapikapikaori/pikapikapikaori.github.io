@@ -109,7 +109,7 @@
     flex-wrap: wrap;
 }
 
-/* 标签下的控件横向并排（如 主要部分 + 生成表格按钮） */
+/* 标签下的控件横向并排（如 词干 + 生成表格按钮） */
 .field__row {
     display: flex;
     align-items: center;
@@ -569,13 +569,13 @@
     margin-top: 2px;
 }
 
-/* 主要部分（词干） */
+/* 词干 */
 .word-card__stem {
     font-size: var(--fs-md);
     font-weight: 500;
 }
 
-/* 额外的主要部分（词卡 / 放大视图） */
+/* 额外的词干（词卡 / 放大视图） */
 .word-card__stem-extra {
     display: flex;
     flex-wrap: wrap;
@@ -590,7 +590,7 @@
     opacity: 0.8;
 }
 
-/* 表单里的额外主要部分输入 */
+/* 表单里的额外词干输入 */
 .field__parts {
     display: flex;
     flex-direction: column;
@@ -1068,6 +1068,13 @@ button.word-card__derivative {
 
 .grammar-table tr:last-child td {
     border-bottom: none;
+}
+
+.grammar-table td.grammar-table__cell--disabled {
+    background: var(--c-bg-subtle);
+    color: var(--c-fg-subtle);
+    opacity: 0.55;
+    text-align: center;
 }
 
 .grammar-table th {

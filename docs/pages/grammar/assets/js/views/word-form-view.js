@@ -19,7 +19,7 @@ import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import {
-    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS
+    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS, posOptions
 } from '../config/config.js'
 
 const SPECIAL_REF = '__special__'
@@ -64,7 +64,7 @@ export default {
                 return null
             }
         }))).filter(Boolean)
-        // 语言可以自定义「主要部分」的叫法与提示（如希伯来语是词根辅音）
+        // 语言可以自定义「词干」的叫法与提示（如希伯来语是词根辅音）
         /** 当前词性的界面用词（各语言在自己的 JSON 里声明） */
         function currentTerms() { return termsOf(grammarDoc, posSelect.value) }
 
@@ -95,9 +95,7 @@ export default {
             inflectionTypeHintEl.replaceChildren(hintText(t.inflectionTypeHint))
             anchorHintEl.replaceChildren(hintText(t.anchorHint))
             inflectionLabel.placeholder = t.inflectionTypePlaceholder
-            stemsLabelEl.textContent = stemsMeta?.label || t.stems.label
-            stemsHintEl.replaceChildren(hintText(stemsMeta?.hint || t.stems.hint))
-            principalInput.placeholder = stemsMeta?.placeholder || t.stems.placeholder
+            refreshStemsText()
             const extra = form.querySelector('.js-extra-forms-title')
             if (extra) extra.textContent = t.extraForms
         }
@@ -235,19 +233,19 @@ export default {
             onclick: () => onLookupAll()
         }, '从来源查询')
 
-        /** 没填基本形态就不能查：和「主要部分没填时生成表格」一样的禁用逻辑 */
+        /** 没填基本形态就不能查：和「词干没填时生成表格」一样的禁用逻辑 */
         function refreshLookupBtn() {
             const has = Boolean(lemmaInput.value.trim()) && externalSources.length > 0
             lookupBtn.disabled = !has
             lookupBtn.title = has
-                ? '从所有外部来源获取语法性、变格变位类型、语法锚点、主要部分与含义'
+                ? '从所有外部来源获取语法性、变格变位类型、语法锚点、词干与含义'
                 : '请先填写基本形态'
         }
 
         const posSelect = h('select', {
             class: 'select',
             disabled: isEdit
-        }, ...POS_LIST.map((p) => h('option', {
+        }, ...posOptions(language.pos).map((p) => h('option', {
             value: p.value,
             selected: data.pos === p.value
         }, p.label)))
@@ -377,12 +375,12 @@ export default {
         const principalInput = principalField.input
         attachScriptNormalize(principalInput)
 
-        // 额外的主要部分（由当前变位 / 变格类型的 derive.parts 决定）
+        // 额外的词干（由当前变位 / 变格类型的 derive.parts 决定）
         const extraPartsSlot = h('div', { class: 'field__parts' })
-        // 额外主要部分的 ghost input 实例（刷新推导提示时用）
+        // 额外词干的 ghost input 实例（刷新推导提示时用）
         let extraGhosts = []
 
-        /** 该词性是否用「主要部分」：没有 paradigm 模板、或模板声明 stems: false 时不用 */
+        /** 该词性是否用「词干」：没有 paradigm 模板、或模板声明 stems: false 时不用 */
         function updateStemsVisibility() {
             const tpl = getParadigmTemplate(grammarDoc, posSelect.value)
             const needed = grammarDoc?.paradigm !== false && !!tpl && tpl.stems !== false
@@ -414,7 +412,7 @@ export default {
 
             for (const def of defs) {
                 // 语法性这类必填属性不提供空选项，没值时默认第一项
-                const required = def.key === 'gender' || def.declensionCells
+                const required = def.required === true || def.key === 'gender' || def.declensionCells
                 const raw = data.attributes[def.key]
                 let current = Array.isArray(raw) ? (raw[0] ?? '') : (raw ?? '')
                 if (!current && required && def.options.length) {
@@ -477,10 +475,10 @@ export default {
             stemsHintEl
         )
 
-        // 主要部分 + 额外主要部分：放在变格 / 变位表头顶
+        // 词干 + 额外词干：放在变格 / 变位表头顶
         const stemsBlock = h('div', { class: 'word-form__stems' }, stemsRow, extraPartsSlot)
 
-        // 字段顺序：基本形态+词性 → 属性/类型/锚点 → 含义 → 变格变位表（含主要部分）
+        // 字段顺序：基本形态+词性 → 属性/类型/锚点 → 含义 → 变格变位表（含词干）
         form.appendChild(inflectionRow)
         form.appendChild(buildMeaningGroup())
 
@@ -532,29 +530,46 @@ export default {
         refreshGenerateBtn()
         refreshLookupBtn()
 
-        /* ---------- 按主要部分生成表格 ---------- */
+        /* ---------- 按词干生成表格 ---------- */
 
         /** 当前「变格 / 变位类型」对应的生成规则 */
         function currentDeriveSpec() {
             const ref = inflectionRef.value
             if (!ref || ref === INDECL_REF) return null
-            // 「特殊」也回退到词性的总规则，这样还能拿到声明的主要部分（如法语动词的助动词）；
-            // 没有 endings 的总规则只用来渲染主要部分，不参与生成
+            // 「特殊」也回退到词性的总规则，这样还能拿到声明的词干（如法语动词的助动词）；
+            // 没有 endings 的总规则只用来渲染词干，不参与生成
             if (ref === SPECIAL_REF) return getDeriveSpec(grammarDoc, `${lang}-${posSelect.value}`)
             // 锚点自己没写规则时，退回该词性的总规则（如希伯来语名词：按基本形态判定元音模式）
             return getDeriveSpec(grammarDoc, ref) || getDeriveSpec(grammarDoc, `${lang}-${posSelect.value}`)
         }
 
-        /** 当前锚点声明的主要部分（不含 base） */
+        /** 当前锚点声明的 base 词干（可自带标题 / placeholder / 提示） */
+        function currentBasePart() {
+            const spec = currentDeriveSpec()
+            if (!spec || !Array.isArray(spec.parts)) return null
+            return spec.parts.find((part) => part && part.key === 'base') || null
+        }
+
+        /** 主词干的文案：锚点给 base 声明了 label / placeholder / hint 时优先用它 */
+        function refreshStemsText() {
+            const t = currentTerms()
+            const base = currentBasePart()
+            stemsLabelEl.textContent = base?.label || stemsMeta?.label || t.stems.label
+            stemsHintEl.replaceChildren(hintText(base?.hint || stemsMeta?.hint || t.stems.hint))
+            principalInput.placeholder = base?.placeholder || stemsMeta?.placeholder || t.stems.placeholder
+        }
+
+        /** 当前锚点声明的词干（不含 base） */
         function currentParts() {
             const spec = currentDeriveSpec()
             if (!spec || !Array.isArray(spec.parts)) return []
             return spec.parts.filter((part) => part && part.key && part.key !== 'base')
         }
 
-        /** 按当前锚点重建额外主要部分输入框；已填但新类型没有声明的部分丢弃 */
+        /** 按当前锚点重建额外词干输入框；已填但新类型没有声明的部分丢弃 */
         function renderExtraParts() {
             extraGhosts = []
+            refreshStemsText()
             const parts = currentParts()
             const allowed = new Set(['base', ...parts.map((p) => p.key)])
             for (const key of Object.keys(data.stems)) {
@@ -574,6 +589,11 @@ export default {
                     else delete data.stems[part.key]
                     refreshStemGhosts()
                     refreshGenerateBtn()
+                    // 有别的字段依赖这个下拉的值显隐时，重建一次额外词干区
+                    if (part.kind === 'select'
+                        && currentParts().some((p) => p.showWhen && p.showWhen[part.key] !== undefined)) {
+                        renderExtraParts()
+                    }
                 }
                 // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）。
                 // 这类字段没有空选项：没值时默认第一项并写进数据（助动词默认 haben / avoir）。
@@ -604,13 +624,37 @@ export default {
                             refreshStemGhosts()
                         }
                     })).el
-                extraPartsSlot.appendChild(h('label', { class: 'field field--part' },
-                    h('span', { class: 'field__label' }, part.label || part.key),
-                    input,
-                    part.hint ? h('span', { class: 'field__hint' }, hintText(part.hint)) : null
+                const visible = !part.showWhen
+                    || Object.entries(part.showWhen).every(([k, v]) => data.stems[k] === v)
+                extraPartsSlot.appendChild(h('label', {
+                    class: 'field field--part',
+                    hidden: !visible
+                },
+                h('span', { class: 'field__label' }, part.label || part.key),
+                input,
+                part.hint ? h('span', { class: 'field__hint' }, hintText(part.hint)) : null
                 ))
             }
             refreshStemGhosts()
+        }
+
+        /** 推导结果是 IAST；界面与存储都用原文（天城文） */
+        function toScriptText(value) {
+            if (!value || typeof scriptProfile?.toScript !== 'function') return value
+            return String(scriptProfile.toScript(value) ?? value)
+        }
+
+        /** 生成 / 推导都在 IAST 上做；用户输入的是天城文，先转写再交给引擎 */
+        function romanStems(stems) {
+            if (typeof scriptProfile?.toRoman !== 'function') return stems
+            const metaKeys = new Set(currentParts().filter((p) => p.kind === 'select').map((p) => p.key))
+            const out = { ...stems }
+            for (const [key, value] of Object.entries(out)) {
+                if (typeof value === 'string' && value && !metaKeys.has(key)) {
+                    out[key] = String(scriptProfile.toRoman(value) ?? value)
+                }
+            }
+            return out
         }
 
         /** 由基本形态 + 规则推出的词干（不含用户已填的 base） */
@@ -620,26 +664,27 @@ export default {
             const stems = collectStems()
             delete stems.base
             const headword = normalizeStem(lemmaInput.value)
-            return previewStem('', 'base', spec, { ...stems, headword })
+            return toScriptText(previewStem('', 'base', spec, { ...romanStems(stems), headword }, paradigmProfile))
         }
 
-        /** 某个补充主要部分的推导值（忽略该框自己已填的内容） */
+        /** 某个补充词干的推导值（忽略该框自己已填的内容） */
         function derivedPart(key) {
             const spec = currentDeriveSpec()
             if (!spec) return ''
             const stems = collectStems()
             delete stems[key]
             const headword = normalizeStem(lemmaInput.value)
-            return previewStem(stems.base || derivedBase(), key, spec, { ...stems, headword })
+            const roman = romanStems(stems)
+            return toScriptText(previewStem(roman.base || '', key, spec, { ...roman, headword }, paradigmProfile))
         }
 
-        /** 刷新所有主要部分输入框上的「推导提示」 */
+        /** 刷新所有词干输入框上的「推导提示」 */
         function refreshStemGhosts() {
             principalField.refresh()
             for (const item of extraGhosts) item.refresh()
         }
 
-        /** 收集主要部分：base + 已填的额外部分 */
+        /** 收集词干：base + 已填的额外部分 */
         function collectStems() {
             const stems = {}
             const base = normalizeStem(principalInput.value)
@@ -662,7 +707,7 @@ export default {
             return false
         }
 
-        /** 必填但还没填的主要部分（有规则能自动推出的不算） */
+        /** 必填但还没填的词干（有规则能自动推出的不算） */
         function missingRequiredParts(spec) {
             if (!spec || !Array.isArray(spec.parts)) return []
             return spec.parts
@@ -676,25 +721,27 @@ export default {
         function refreshGenerateBtn() {
             const spec = currentDeriveSpec()
             const canGenerate = !!spec && !!spec.endings && Object.keys(spec.endings).length > 0
-            const hasStem = !!normalizeStem(principalInput.value)
+            const hasStem = !!normalizeStem(principalInput.value) || !!derivedBase()
             const missing = missingRequiredParts(spec)
             generateBtn.disabled = !canGenerate || !hasStem || missing.length > 0
             if (!canGenerate) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
             else if (!hasStem) generateBtn.title = '请先填写词干'
             else if (missing.length) generateBtn.title = `请先填写：${missing.join('、')}`
-            else generateBtn.title = '按主要部分和词尾规则自动填表（会覆盖已填内容）'
+            else generateBtn.title = '按词干和词尾规则自动填表（会覆盖已填内容）'
             return missing
         }
 
         function onGenerate() {
             const spec = currentDeriveSpec()
-            // partsOnly 的规则只提供主要部分，没有 endings，不能用来生成表格
+            // partsOnly 的规则只提供词干，没有 endings，不能用来生成表格
             if (!spec || !spec.endings || !Object.keys(spec.endings).length) return
 
-            const stem = normalizeStem(principalInput.value)
+            // 没有「词干」输入框的语言（日语）：直接用基本形态推导出的 base
+            const stem = normalizeStem(principalInput.value) || derivedBase()
             if (!stem) {
-                toast.error('请先填写词干')
-                principalInput.focus()
+                toast.error(stemsBlock.hidden ? '请先填写基本形态' : '请先填写词干')
+                if (!stemsBlock.hidden) principalInput.focus()
+                else lemmaInput.focus()
                 return
             }
             const missing = missingRequiredParts(spec)
@@ -703,24 +750,25 @@ export default {
                 return
             }
 
-            // 先把能推导出来的补充主要部分回填到输入框（生成时也用同一套值）
+            // 先把能推导出来的补充词干回填到输入框（生成时也用同一套值）
             {
                 const headword = normalizeStem(lemmaInput.value)
                 const filledParts = []
                 const currentStems = collectStems()
                 for (const part of currentParts()) {
                     if (String(data.stems[part.key] ?? '').trim()) continue
-                    const value = previewStem(currentStems.base || '', part.key, spec,
-                        { ...currentStems, headword })
+                    const roman = romanStems(currentStems)
+                    const value = previewStem(roman.base || '', part.key, spec,
+                        { ...roman, headword }, paradigmProfile)
                     if (!value) continue
-                    data.stems[part.key] = value
+                    data.stems[part.key] = toScriptText(value)
                     filledParts.push(part.key)
                 }
                 if (filledParts.length) renderExtraParts()
             }
 
             const tpl = getParadigmTemplate(grammarDoc, data.pos)
-            const { paradigm, paradigmRoman, filled, noVariant, skippedTables } = generateParadigm({
+            const { paradigm, paradigmRoman, filled, noVariant, skippedTables, usedTables } = generateParadigm({
                 stem,
                 stems: collectStems(),
                 headword: lemmaInput.value,
@@ -737,8 +785,19 @@ export default {
                 return
             }
 
-            // 全量覆盖：本次生成的结果就是新的表格数据，没有生成的表一并清空
-            data.paradigm = paradigm
+            // 本次生成覆盖有规则的表；完全没有规则的表（如未选类型的不定过去时 / 完成时）
+            // 保留手填内容，避免点一次「生成表格」就把它们清空
+            const used = new Set(usedTables || [])
+            const next = { ...paradigm }
+            for (const [tableKey, rows] of Object.entries(data.paradigm || {})) {
+                if (used.has(tableKey) || !rows || typeof rows !== 'object') continue
+                if (!next[tableKey]) next[tableKey] = {}
+                for (const [rowKey, cells] of Object.entries(rows)) {
+                    if (!cells || typeof cells !== 'object') continue
+                    next[tableKey][rowKey] = { ...(next[tableKey][rowKey] || {}), ...cells }
+                }
+            }
+            data.paradigm = next
             data.paradigmRoman = paradigmRoman
             for (const key of Object.keys(data.paradigmRoman)) {
                 if (!Object.keys(data.paradigmRoman[key] || {}).length) delete data.paradigmRoman[key]
@@ -752,7 +811,7 @@ export default {
                 const detail = skippedTables
                     .map((x) => `${titleOf(x.tableKey)}（缺 ${x.missing.join('、')}）`)
                     .join('、')
-                toast.info(`已生成 ${filled.length} 格；以下表格因缺少主要部分组成，未生成并已清空：${detail}`, 8000)
+                toast.info(`已生成 ${filled.length} 格；以下表格因缺少词干，未生成并已清空：${detail}`, 8000)
             } else {
                 toast.success(`已生成 ${filled.length} 格（已覆盖原有内容），请确认无误后保存`, 5000)
             }
@@ -785,7 +844,7 @@ export default {
         function renderParadigmBlock() {
             paradigmSlot.replaceChildren()
             if (grammarDoc?.paradigm === false) return
-            // 选了「不变格 / 不变形 / 不变位」：没有变化表可填，整块（主要部分、标题、表格、横线）都不渲染
+            // 选了「不变格 / 不变形 / 不变位」：没有变化表可填，整块（词干、标题、表格、横线）都不渲染
             if (inflectionRef.value === INDECL_REF) {
                 paradigmSlot.hidden = true
                 return
@@ -817,10 +876,16 @@ export default {
             if (!tables.length && anchored) {
                 tables = (tpl.tables || []).filter((t) => t.default === true && !skip.includes(t.key))
             }
+            // 这个锚点没有表格、也没有词干可填（如日语形容动词）：整块不渲染
+            if (!tables.length && stemsBlock.hidden) {
+                paradigmSlot.hidden = true
+                return
+            }
+
             // 只有一张表时，标题行直接占掉表格自带的标题位置（表格不再重复一遍）
             const singleTable = tables.length <= 1
 
-            // 这个锚点没有对应的表（如代词的「特殊变形」）：只留主要部分，不画光秃秃的标题
+            // 这个锚点没有对应的表（如代词的「特殊变形」）：只留词干，不画光秃秃的标题
             const wrap = h('div', { class: 'word-form__group' }, stemsBlock,
                 tables.length ? titleRow : null)
 
@@ -873,7 +938,7 @@ export default {
 
         /* ---------- 外部数据源查询（config.EXTERNAL_SOURCES） ---------- */
 
-        /** 把查到的词条回填到表单：词性 / 属性 / 类型 / 锚点 / 主要部分 / 含义 */
+        /** 把查到的词条回填到表单：词性 / 属性 / 类型 / 锚点 / 词干 / 含义 */
         function applyEntry(entry, entries) {
             applyingLookup = true
             try {
@@ -926,7 +991,7 @@ export default {
             renderParadigmBlock()
         }
 
-        /** 上一次查询填进去的主要部分（换词条时先撤掉，免得残留上一个词性的词干） */
+        /** 上一次查询填进去的词干（换词条时先撤掉，免得残留上一个词性的词干） */
         let appliedStems = {}
 
         function applyStems(stems) {
@@ -1331,7 +1396,7 @@ export default {
 
             const searchField = createGhostInput({
                 lang,
-                placeholder: '搜索本语言词库（基本形态 / 主要部分）…',
+                placeholder: '搜索本语言词库（基本形态 / 词干）…',
                 onInput: () => scheduleSearch()
             })
             const searchInput = searchField.input
@@ -1355,7 +1420,7 @@ export default {
                 const mySeq = ++seq
                 const res = await queryWords(userId, lang, {
                     q,
-                    scope: 'head',      // 只检索基本形态 + 主要部分
+                    scope: 'head',      // 只检索基本形态 + 词干
                     page: 1,
                     pageSize: 50
                 })

@@ -173,6 +173,8 @@ export function fieldDefsOfTemplate(tpl, pos) {
             label: f.label || f.key,
             hint: f.hint || '',
             multi: f.multi === true,
+            // 必选字段：不提供「（未选择）」，没值时默认第一项（如日语动词的自他）
+            required: f.required === true,
             // 该字段用来过滤变化表的格子（性写在列或行上都行）
             declensionCells: f.declensionCells === true || f.declensionColumns === true,
             options: f.options.map((o) => ({ value: String(o.value), label: o.label || String(o.value) })),
@@ -315,10 +317,23 @@ export function getDeriveSpec(doc, id) {
     return resolveDeriveSpec(doc, id)
 }
 
-/** 取语法锚点上声明的主要部分：返回 [{ key, label, hint, example }]，没有则空数组 */
+/** 取语法锚点上声明的词干：返回 [{ key, label, hint, example }]，没有则空数组 */
 export function getDeriveParts(doc, id) {
     const spec = getDeriveSpec(doc, id)
     return Array.isArray(spec?.parts) ? spec.parts.filter((p) => p && p.key) : []
+}
+
+/**
+ * 「词干」这一栏的标题：锚点的 derive.parts 给 base 写了 label 时用它
+ * （如梵语的名词是「弱词干」、动词是「词根」），否则退回该词性的 terms.stems.label。
+ */
+export function stemLabelOf(doc, ref, pos) {
+    const spec = ref ? getDeriveSpec(doc, ref) : null
+    const parts = Array.isArray(spec?.parts) ? spec.parts : []
+    const base = parts.find((part) => part && part.key === 'base')
+    if (base && typeof base.label === 'string' && base.label.trim()) return base.label.trim()
+    const label = termsOf(doc, pos).stems.label
+    return label || '词干'
 }
 
 /** 表格 id → 表模板 */

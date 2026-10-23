@@ -23,6 +23,7 @@ export function openCardOverlay(word, opts = {}) {
     const language = opts.language || word.language
     const paradigmTpl = opts.paradigmTpl || null
     const partLabels = opts.partLabels || null
+    const stemLabel = opts.stemLabel || '词干'
     const onGrammarRef = opts.onGrammarRef || null
     const resolveDerivative = opts.resolveDerivative || null
     const resolvePosRef = opts.resolvePosRef || null
@@ -146,11 +147,11 @@ export function openCardOverlay(word, opts = {}) {
             badges
         )
 
-        /* ---------- 主要部分（在含义之前） ---------- */
+        /* ---------- 词干（在含义之前） ---------- */
         const baseStem = primaryStem(word)
         if (baseStem) {
             const extra = otherStems(word)
-            body.appendChild(ovSection('主要部分',
+            body.appendChild(ovSection(stemLabel,
                 h('div', { class: 'word-card__stem', lang: language }, stemDisplay(baseStem)),
                 extra.length
                     ? h('div', { class: 'word-card__stem-extra', lang: language },

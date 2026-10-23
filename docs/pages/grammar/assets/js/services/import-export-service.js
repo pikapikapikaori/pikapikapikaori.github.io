@@ -270,7 +270,7 @@ function uniqArray(arr) {
 /* ---------------- 迁移 ---------------- */
 
 const MIGRATIONS = {
-    // v1 → v2：单一 stem 字段改成多主要部分 stems
+    // v1 → v2：单一 stem 字段改成多词干 stems
     1: (payload) => ({
         ...payload,
         words: (Array.isArray(payload.words) ? payload.words : []).map((w) => {

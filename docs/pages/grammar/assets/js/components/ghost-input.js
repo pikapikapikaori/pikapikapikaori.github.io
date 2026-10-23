@@ -55,7 +55,7 @@ export function createGhostInput({
         dataset,
         disabled,
         onPlaceholderChange: () => refresh(),
-        // 程序化赋值（按锚点自动回填类型说明、查询回填主要部分…）同样要刷新提示层
+        // 程序化赋值（按锚点自动回填类型说明、查询回填词干…）同样要刷新提示层
         onValueChange: () => refresh(),
         onInput: (e) => {
             refresh()

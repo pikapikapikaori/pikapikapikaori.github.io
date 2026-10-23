@@ -164,7 +164,7 @@ export function normalizeParadigm(p) {
 }
 
 /**
- * 规范化主要部分（词干）
+ * 规范化词干
  * 词干是不变的部分，词形变化一律在其后追加词尾：la am → amō / amāre，grc λόγ → λόγος
  * 末尾的连字符只是显示约定，不写入数据
  */
@@ -172,14 +172,14 @@ export function normalizeStem(value) {
     return String(value ?? '').trim().replace(/[-\u2010-\u2015\uff0d]+$/, '').trim()
 }
 
-/** 主要部分的显示形式：统一补上末尾连字符 */
+/** 词干的显示形式：统一补上末尾连字符 */
 export function stemDisplay(stem) {
     const s = normalizeStem(stem)
     return s ? s + '-' : ''
 }
 
 /**
- * 规范化主要部分：{ key: 词干 }
+ * 规范化词干：{ key: 词干 }
  * 兼容两种入参：新的对象形式，以及旧的单一 stem 字符串（落到 base）
  */
 export function normalizeStems(value) {
@@ -198,12 +198,12 @@ export function normalizeStems(value) {
     return out
 }
 
-/** 基准主要部分（表单里的「主要部分」） */
+/** 基准词干（表单里的「词干」） */
 export function primaryStem(word) {
     return normalizeStem(word?.stems?.base ?? '')
 }
 
-/** 除 base 之外的其它主要部分：[[key, 词干], ...] */
+/** 除 base 之外的其它词干：[[key, 词干], ...] */
 export function otherStems(word) {
     const stems = word?.stems
     if (!stems || typeof stems !== 'object') return []
@@ -212,7 +212,7 @@ export function otherStems(word) {
         .map(([key, value]) => [key, normalizeStem(value)])
 }
 
-/** 合并主要部分：已有的值不被覆盖，只在缺失时填充 */
+/** 合并词干：已有的值不被覆盖，只在缺失时填充 */
 export function mergeStems(existing, incoming) {
     const merged = normalizeStems(existing)
     for (const [key, value] of Object.entries(normalizeStems(incoming))) {

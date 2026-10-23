@@ -1,5 +1,5 @@
 /**
- * 由「主要部分（词干）+ 变格 / 变位类型」生成 paradigm 表格。
+ * 由「词干 + 变格 / 变位类型」生成 paradigm 表格。
  *
  * 规则数据来自语法 JSON：`sections[].items[].derive`，字段说明见 docs/SCHEMA.md。
  *
@@ -66,14 +66,26 @@ function readStemForm(entry) {
 
 /**
  * 取某个词干变体的实际词干
- * 顺序：用户填的主要部分 → 类型里直接给出的字面量 → 词干变体规则 → base
+ * 顺序：用户填的词干 → 类型里直接给出的字面量 → 词干变体规则 → base
  * 规则可以链式：{ from: 'perf', rules: [...] } 表示「先按 perf 取词干，再做一次音变」
  *
  * 特殊来源 `from: 'headword'`：拿**基本形态**（lemma，如法语 / 德语动词的不定式）作为输入，
  * 让 base 这类词干不必由用户重复填写。
  */
+/** 语言档案 `profile.deriveStems()` 的单个词干查询（没有档案 / 推不出时返回空串） */
+function derivedStem(profile, key, stem, spec, parts) {
+    if (!profile || typeof profile.deriveStems !== 'function' || !key || key === 'base') return ''
+    try {
+        const all = profile.deriveStems(String(parts.base ?? stem ?? '').trim(), { spec, stems: parts })
+        const value = all && all[key]
+        return typeof value === 'string' ? value.trim() : ''
+    } catch {
+        return ''
+    }
+}
+
 /** base 词干：用户填的 base → stems.base 字面量 → stemForms.base（通常来自 headword） */
-function resolveBase(stem, spec, parts, seen) {
+function resolveBase(stem, spec, parts, seen, profile) {
     const direct = String(parts.base ?? stem ?? '').trim()
     if (direct) return direct
 
@@ -89,57 +101,58 @@ function resolveBase(stem, spec, parts, seen) {
 
     let source = ''
     if (form.from === 'headword') source = String(parts.headword ?? '').trim()
-    else if (form.from) source = resolveStem(stem, form.from, spec, parts, visited)
+    else if (form.from) source = resolveStem(stem, form.from, spec, parts, visited, profile)
     else source = ''
 
     return source ? applyRuleList(source, form.rules) : ''
 }
 
 /**
- * 该词干变体是否「有来源」：用户填的主要部分、类型里的字面量、或能由规则（含 headword）推出。
+ * 该词干变体是否「有来源」：用户填的词干、类型里的字面量、或能由规则（含 headword）推出。
  * 生成表格前用它判断整张表是否可生成 —— 没有来源时**不能**悄悄退回 base。
  */
-function baseHasSource(stem, spec, parts, seen) {
+function baseHasSource(stem, spec, parts, seen, profile) {
     if (String(parts.base ?? stem ?? '').trim()) return true
     if (typeof spec?.stems?.base === 'string' && spec.stems.base) return true
     const form = readStemForm(spec?.stemForms?.base)
     if (!form) return false
     if (form.from === 'headword') return !!String(parts.headword ?? '').trim()
-    if (form.from) return canResolveStem(stem, form.from, spec, parts, seen)
+    if (form.from) return canResolveStem(stem, form.from, spec, parts, seen, profile)
     return false
 }
 
-export function canResolveStem(stem, stemForm, spec, userStems, seen) {
+export function canResolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const parts = userStems && typeof userStems === 'object' ? userStems : {}
     const key = stemForm || 'base'
     const visited = seen instanceof Set ? seen : new Set()
 
     if (String(parts[key] ?? '').trim()) return true
     if (typeof spec?.stems?.[key] === 'string' && spec.stems[key]) return true
+    if (derivedStem(profile, key, stem, spec, parts)) return true
 
     const form = readStemForm(spec?.stemForms?.[key])
     const requiredPart = Array.isArray(spec?.parts)
         && spec.parts.some((p) => p && p.key === key && p.required === true)
     // 空规则数组 `[]` 表示「与 base 相同」（法语不变的复数 / 阴性），算有来源；
-    // 但声明成必填的主要部分（德语强变化的 pret / pp）即使写了空数组也不能自动推出
-    if (!form) return key === 'base' ? baseHasSource(stem, spec, parts, visited) : false
+    // 但声明成必填的词干（德语强变化的 pret / pp）即使写了空数组也不能自动推出
+    if (!form) return key === 'base' ? baseHasSource(stem, spec, parts, visited, profile) : false
     if (!form.from && !form.rules.length && requiredPart) return false
 
     if (visited.has(key)) return false
     visited.add(key)
 
     if (form.from === 'headword') return !!String(parts.headword ?? '').trim()
-    if (form.from) return canResolveStem(stem, form.from, spec, parts, visited)
-    return baseHasSource(stem, spec, parts, visited)
+    if (form.from) return canResolveStem(stem, form.from, spec, parts, visited, profile)
+    return baseHasSource(stem, spec, parts, visited, profile)
 }
 
-/** 主要部分输入框的「推导预览」：能推出来就给值，推不出给空串 */
-export function previewStem(stem, stemForm, spec, userStems) {
-    if (!spec || !canResolveStem(stem, stemForm, spec, userStems)) return ''
-    return resolveStem(stem, stemForm, spec, userStems)
+/** 词干输入框的「推导预览」：能推出来就给值，推不出给空串 */
+export function previewStem(stem, stemForm, spec, userStems, profile = null) {
+    if (!spec || !canResolveStem(stem, stemForm, spec, userStems, null, profile)) return ''
+    return resolveStem(stem, stemForm, spec, userStems, null, profile)
 }
 
-export function resolveStem(stem, stemForm, spec, userStems, seen) {
+export function resolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const parts = userStems && typeof userStems === 'object' ? userStems : {}
     const key = stemForm || 'base'
     const visited = seen instanceof Set ? seen : new Set()
@@ -151,24 +164,24 @@ export function resolveStem(stem, stemForm, spec, userStems, seen) {
     const literal = spec?.stems?.[key]
     if (typeof literal === 'string' && literal) return literal
 
-    if (key === 'base') return resolveBase(stem, spec, parts, visited)
+    if (key === 'base') return resolveBase(stem, spec, parts, visited, profile)
 
     const form = readStemForm(spec?.stemForms?.[key])
-    if (!form) return resolveBase(stem, spec, parts, visited)
+    if (!form) return derivedStem(profile, key, stem, spec, parts) || resolveBase(stem, spec, parts, visited, profile)
 
-    if (visited.has(key)) return resolveBase(stem, spec, parts, visited)
+    if (visited.has(key)) return derivedStem(profile, key, stem, spec, parts) || resolveBase(stem, spec, parts, visited, profile)
     visited.add(key)
 
     let source = ''
     if (form.from === 'headword') source = String(parts.headword ?? '').trim()
-    else if (form.from) source = resolveStem(stem, form.from, spec, parts, visited)
-    else source = resolveBase(stem, spec, parts, visited)
+    else if (form.from) source = resolveStem(stem, form.from, spec, parts, visited, profile)
+    else source = resolveBase(stem, spec, parts, visited, profile)
 
     if (!source) return ''
     return applyRuleList(source, form.rules)
 }
 
-/** 归一化「主要部分」入参：允许直接给字符串（仅 base）；headword = 基本形态 */
+/** 归一化「词干」入参：允许直接给字符串（仅 base）；headword = 基本形态 */
 export function normalizeStemParts(stem, stems, headword) {
     const out = {}
     if (stems && typeof stems === 'object') {
@@ -285,8 +298,8 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
  * 按词尾规则填表。只填空格子，已有值一律不覆盖。
  *
  * @param {object}   options
- * @param {string}   options.stem      主要部分（词干）；与 stems 二选一
- * @param {object}   [options.stems]   多个主要部分 { base, perf, ppp, ... }，优先于 stem
+ * @param {string}   options.stem      词干；与 stems 二选一
+ * @param {object}   [options.stems]   多个词干 { base, perf, ppp, ... }，优先于 stem
  * @param {object}   options.spec      derive 规格
  * @param {object}   options.template  paradigms[pos]
  * @param {object}   [options.existing] 词条已有的 paradigm
@@ -302,9 +315,11 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
     const parts = normalizeStemParts(stem, stems, headword)
     // 竖排文字（满文等）：用户填的可能是文字本身，先统一转成转写再做规则与重音
     if (typeof script?.toRoman === 'function') {
+        // 下拉选项（如 aorist / perfect 的类型名）是元数据，不做转写
+        const metaKeys = new Set((spec.parts || []).filter((p) => p && p.kind === 'select').map((p) => p.key))
         for (const key of Object.keys(parts)) {
             const value = String(parts[key] ?? '')
-            if (value) parts[key] = script.toRoman(value)
+            if (value && !metaKeys.has(key)) parts[key] = script.toRoman(value)
         }
     }
     // 是否要把结果转成文字（满文）
@@ -334,6 +349,34 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
         result.variant = hit.id || null
     }
 
+    // 按用户选中的词干值切换 endings（梵语：aorist / perfect 的类型）
+    if (spec.variantByStem && typeof spec.variantByStem === 'object') {
+        const addEndings = {}
+        const addDefaults = {}
+        for (const [stemKey, options] of Object.entries(spec.variantByStem)) {
+            const chosen = parts[stemKey]
+            const hit = chosen && options && typeof options === 'object' ? options[chosen] : null
+            if (!hit) continue
+            // 条件变体：只有其他词干取到指定值时生效（如“迂说完成时助动词”只在完成时=迂说完成时时）
+            if (hit.when && typeof hit.when === 'object') {
+                const ok = Object.entries(hit.when).every(([k, v]) => parts[k] === v)
+                if (!ok) continue
+            }
+            Object.assign(addEndings, hit.endings || {})
+            Object.assign(addDefaults, hit.rowDefaults || {})
+        }
+        if (Object.keys(addEndings).length) {
+            activeSpec = {
+                ...activeSpec,
+                endings: { ...activeSpec.endings, ...addEndings },
+                rowDefaults: { ...activeSpec.rowDefaults, ...addDefaults }
+            }
+        }
+    }
+
+    // 生成结果里报告「本次实际使用的表」，生词表单据此保留没有规则的表里的手填内容
+    result.usedTables = Object.keys(activeSpec.endings || {})
+
     const skeletonOptions = (s) => ({
         leneSlots: Array.isArray(s?.post?.leneSlots) ? s.post.leneSlots : []
     })
@@ -356,7 +399,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                     need.add(cell.stemForm || 'base')
                 }
             }
-            const missing = [...need].filter((key) => !canResolveStem(base, key, activeSpec, parts))
+            const missing = [...need].filter((key) => !canResolveStem(base, key, activeSpec, parts, null, profile))
             if (missing.length) {
                 result.skippedTables.push({ tableKey: table.key, missing })
                 continue
@@ -379,7 +422,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                     continue
                 }
 
-                const part = resolveStem(base, cell.stemForm, spec, parts)
+                const part = resolveStem(base, cell.stemForm, spec, parts, null, profile)
                 const prefix = String(cell.prefix)
                 let suffix = endingText(cell.suffix)
                 // 语言档案可以按词干改写字尾（如满语的元音和谐：-hV → -ha / -he / -ho）
@@ -471,7 +514,7 @@ export function validateDeriveSpec(spec, template, profile) {
     if (!spec || typeof spec !== 'object') return ['derive 不是对象']
 
     const hasVariants = Array.isArray(spec.variants) && spec.variants.length > 0
-    // partsOnly：只声明主要部分（如法语动词的助动词），不生成表格，所以不要求 endings
+    // partsOnly：只声明词干（如法语动词的助动词），不生成表格，所以不要求 endings
     const partsOnly = spec.partsOnly === true
     if (!hasVariants && !partsOnly && (!spec.endings || typeof spec.endings !== 'object')) problems.push('缺少 endings')
     if (hasVariants) {
@@ -539,11 +582,21 @@ export function validateDeriveSpec(spec, template, profile) {
 
     const index = buildTableIndex(template)
     // 'base' 是内置的原样词干，不需要在 stemForms 里声明
-    // 可用的词干变体：base、stems 字面量、stemForms 规则，以及 parts 里声明由用户填写的项
+    // 可用的词干变体：base、stems 字面量、stemForms 规则、parts 里声明由用户填写的项，
+    // 以及语言档案 deriveStems() 能算出来的词干（如梵语的 present / strong / passive）
+    const derivedNames = (() => {
+        if (!profile || typeof profile.deriveStems !== 'function') return new Set()
+        try {
+            return new Set(Object.keys(profile.deriveStems(spec.stemExample || '', { spec, stems: {} }) || {}))
+        } catch {
+            return new Set()
+        }
+    })()
     const knownStemForm = (name) => !!(
         name === 'base'
         || (name && ((spec.stems && typeof spec.stems[name] === 'string')
             || (spec.stemForms && spec.stemForms[name])
+            || derivedNames.has(name)
             || (Array.isArray(spec.parts) && spec.parts.some((part) => part && part.key === name))))
     )
 
@@ -630,7 +683,7 @@ export function validateDeriveSpec(spec, template, profile) {
     }
     checkAccentNode(spec.post?.accent, 'post.accent', 'table', {})
 
-    // 主要部分声明：{ key, label?, example?, hint?, required? }，第一项固定为 base
+    // 词干声明：{ key, label?, example?, hint?, required? }，第一项固定为 base
     if (spec.parts != null) {
         if (!Array.isArray(spec.parts)) problems.push('parts 不是数组')
         else {
@@ -654,7 +707,7 @@ export function validateDeriveSpec(spec, template, profile) {
             if (!partsOnly && spec.parts[0] && spec.parts[0].key !== 'base' && !declaresBase) {
                 problems.push('parts 的第一项 key 应当是 base（或用 stemForms.base / stems.base 声明）')
             }
-            if (partsOnly && !spec.parts.length) problems.push('partsOnly 的 derive 至少要声明一个主要部分')
+            if (partsOnly && !spec.parts.length) problems.push('partsOnly 的 derive 至少要声明一个词干')
             for (const part of spec.parts) {
                 if (!part || typeof part !== 'object') continue
                 if (part.kind != null && part.kind !== 'select') {
@@ -698,7 +751,7 @@ export function validateDeriveSpec(spec, template, profile) {
  */
 export function checkDeriveExample(spec, template, options = {}) {
     const { stems: optionStems = null, expect = null, reportExtra = true, profile = null } = options
-    // exampleStems：主要部分无法由基本形态推导时（如德语强变化的过去时），
+    // exampleStems：词干无法由基本形态推导时（如德语强变化的过去时），
     // 自检就用这里给出的示例值，否则 expect 里那些格子必然对不上
     const stems = { ...(spec?.exampleStems || {}), ...(optionStems || {}) }
     const headword = options.headword ?? spec?.headwordExample ?? null
@@ -865,7 +918,7 @@ export function verifyGrammarDoc(lang, doc, profile) {
         out.checked++
         report(res, '')
 
-        // 第二遍：主要部分全填（用 parts 里的例词），验证「用户全填」这条路径
+        // 第二遍：词干全填（用 parts 里的例词），验证「用户全填」这条路径
         // 带 variants 的规格每个变体自带词根，没有「全填」这一路径
         if (!isVariantSpec && Array.isArray(spec.parts) && spec.parts.length) {
             const stems = {}
@@ -883,7 +936,7 @@ export function verifyGrammarDoc(lang, doc, profile) {
                 profile
             })
             out.checked++
-            report(resParts, '（主要部分全填）')
+            report(resParts, '（词干全填）')
         }
     }
 
@@ -911,6 +964,21 @@ export function verifyGrammarDoc(lang, doc, profile) {
                 if (!ids.has(id)) {
                     out.errors.push(`${lang} · paradigms.${pos}.${table.key}: anchors 指向不存在的锚点 ${id}`)
                 }
+            }
+        }
+    }
+
+    // 章节分组：文档声明了 groups 时，section.group 必须存在且指向已声明的章节，
+    // 否则语法页会把这个 section 归到第一章（表现为整章空白、另一章多出一堆内容）
+    const groups = Array.isArray(doc?.groups) ? doc.groups.filter((g) => g && g.id) : []
+    if (groups.length > 1) {
+        const groupIds = new Set(groups.map((g) => g.id))
+        for (const section of doc?.sections || []) {
+            if (!section || !section.id) continue
+            if (!section.group) {
+                out.errors.push(`${lang} · ${section.id}: 缺少 group（文档声明了 ${groups.length} 个章节）`)
+            } else if (!groupIds.has(section.group)) {
+                out.errors.push(`${lang} · ${section.id}: group "${section.group}" 不在 groups 里`)
             }
         }
     }

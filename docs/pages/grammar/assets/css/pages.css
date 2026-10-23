@@ -180,14 +180,14 @@
     min-width: 0;
 }
 
-/* 变格变位表里的主要部分区 */
-.word-form__stems + .word-form__group-title {
+/* 变格变位表里的词干区 */
+.word-form__stems:not([hidden]) + .word-form__group-title {
     margin-top: var(--sp-3);
     padding-top: var(--sp-3);
     border-top: 1px solid var(--c-border);
 }
 
-/* 额外主要部分：主要部分下方，每行最多两项（条目多时不会挤成一团） */
+/* 额外词干：词干下方，每行最多两项（条目多时不会挤成一团） */
 .word-form .field__parts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -299,7 +299,7 @@
         grid-template-columns: 1fr;
     }
 
-    /* 主要部分在窄屏下一栏排，标签回到输入框上方 */
+    /* 词干在窄屏下一栏排，标签回到输入框上方 */
     .word-form .field__parts {
         grid-template-columns: minmax(0, 1fr);
     }

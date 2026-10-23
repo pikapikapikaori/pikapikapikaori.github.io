@@ -64,7 +64,7 @@ function mergeWord(existing, incoming) {
     merged.paradigmRoman = mergeParadigm(existing.paradigmRoman, incoming.paradigmRoman)
     if (!merged.paradigmRoman || !Object.keys(merged.paradigmRoman).length) delete merged.paradigmRoman
 
-    // 主要部分（词干）：已有值优先保留，为空时采用新来源的值
+    // 词干：已有值优先保留，为空时采用新来源的值
     merged.stems = mergeStems(existing.stems, incoming.stems)
 
     // 语法性：并集

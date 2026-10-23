@@ -47,6 +47,7 @@ function metaOf(code, doc) {
         grammar: doc.grammar !== false,
         paradigm: doc.paradigm !== false,
         terms: doc.terms && typeof doc.terms === 'object' ? doc.terms : {},
+        pos: Array.isArray(doc.pos) ? doc.pos : null,
     }
 }
 

@@ -10,6 +10,20 @@
         "order": 2
     },
     "order": 2,
+    "pos": [
+        "noun",
+        "verb",
+        "adj",
+        "participle",
+        "adv",
+        "pron",
+        "prep",
+        "conj",
+        "particle",
+        "interj",
+        "num",
+        "other"
+    ],
     "vertical": false,
     "rtl": false,
     "grammar": false,
@@ -25,11 +39,11 @@
         "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写说明。",
         "extraForms": "补充形式（过去式、过去分词等）",
         "stems": {
-            "label": "主要部分",
-            "placeholder": "主要部分，如 walk",
+            "label": "词干",
+            "placeholder": "词干，如 walk",
             "hint": "词形变化在其后追加词尾。"
         },
-        "extraPartsHint": "以下主要部分可以留空，留空时按类型规则推导。"
+        "extraPartsHint": "以下词干可以留空，留空时按类型规则推导。"
     },
     "sections": []
 }

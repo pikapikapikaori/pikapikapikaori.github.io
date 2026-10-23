@@ -10,6 +10,20 @@
         "order": 2
     },
     "order": 4,
+    "pos": [
+        "noun",
+        "verb",
+        "adj",
+        "participle",
+        "adv",
+        "pron",
+        "prep",
+        "conj",
+        "particle",
+        "interj",
+        "num",
+        "other"
+    ],
     "vertical": false,
     "rtl": false,
     "grammar": true,
@@ -25,11 +39,11 @@
         "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
         "extraForms": "补充形式（不定式、命令式、动名词、日语活用等）",
         "stems": {
-            "label": "主要部分",
-            "placeholder": "主要部分，如 am、λόγ",
+            "label": "词干",
+            "placeholder": "词干，如 am、λόγ",
             "hint": "词干：不变的部分，词形变化在其后追加词尾，如拉丁语 am → amō / amāre、古希腊语 λόγ → λόγος。末尾的「-」只是显示用，不用填。"
         },
-        "extraPartsHint": "以下主要部分可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。",
+        "extraPartsHint": "以下词干可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。",
         "byPos": {
             "verb": {
                 "special": "特殊变位（自行填写）",
@@ -39,8 +53,8 @@
         }
     },
     "stems": {
-        "label": "主要部分",
-        "placeholder": "主要部分，如 sprech、mach、Tisch",
+        "label": "词干",
+        "placeholder": "词干，如 sprech、mach、Tisch",
         "hint": "各类型的词干：动词 = 不定式去掉 -en（sprechen → sprech、machen → mach）；名词 = 单数主格（Tisch）；形容词 = 原形（schnell）。末尾的「-」只是显示用，不用填。"
     },
     "paradigms": {
@@ -1431,7 +1445,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Tisch",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -1603,7 +1617,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Männ",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -1763,7 +1777,7 @@
                             "lang": "de"
                         }
                     ],
-                    "notes": "单数与 Tisch 型相同，复数加 -er，词干常变音（Mann → Männer、Wald → Wälder、Geist → Geister）。复数主要部分填变音后的词干（Männ），复数词尾 -er 由类型补上。"
+                    "notes": "单数与 Tisch 型相同，复数加 -er，词干常变音（Mann → Männer、Wald → Wälder、Geist → Geister）。复数词干填变音后的形式（Männ），复数词尾 -er 由类型补上。"
                 },
                 {
                     "id": "de-noun-n-strong",
@@ -1775,7 +1789,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Kind",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -1947,7 +1961,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Jahr",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -2107,7 +2121,7 @@
                             "lang": "de"
                         }
                     ],
-                    "notes": "复数加 -e，部分词变音（Jahr → Jahre、Wort → Wörter 属例外，需填 Wört 作复数主要部分）。"
+                    "notes": "复数加 -e，部分词变音（Jahr → Jahre、Wort → Wörter 属例外，需填 Wört 作复数词干）。"
                 },
                 {
                     "id": "de-noun-n-strong-zero",
@@ -2119,7 +2133,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Fenster",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -2291,7 +2305,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Frau",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -2465,7 +2479,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Händ",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -2627,7 +2641,7 @@
                             "lang": "de"
                         }
                     ],
-                    "notes": "单数与 Frau 型相同；复数加 -e，通常变音（Hand → Hände、Stadt → Städte、Nacht → Nächte）。复数主要部分填变音后的词干（Händ）。"
+                    "notes": "单数与 Frau 型相同；复数加 -e，通常变音（Hand → Hände、Stadt → Städte、Nacht → Nächte）。复数词干填变音后的形式（Händ）。"
                 },
                 {
                     "id": "de-noun-m-weak",
@@ -2639,7 +2653,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Student",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -2807,7 +2821,7 @@
                         "parts": [
                             {
                                 "key": "pl",
-                                "label": "复数主要部分",
+                                "label": "复数词干",
                                 "example": "Nam",
                                 "required": true,
                                 "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
@@ -2966,7 +2980,7 @@
                             "lang": "de"
                         }
                     ],
-                    "notes": "主格单数以 -e 结尾，属格加 -ns，其余加 -n；同类：Gedanke、Glaube、Wille、Friede。主要部分填 -e 之前的部分（Name → Nam）。"
+                    "notes": "主格单数以 -e 结尾，属格加 -ns，其余加 -n；同类：Gedanke、Glaube、Wille、Friede。词干填 -e 之前的部分（Name → Nam）。"
                 },
                 {
                     "id": "de-noun-special-plural",
@@ -3274,15 +3288,15 @@
                         "parts": [
                             {
                                 "key": "cmp",
-                                "label": "比较级主要部分",
+                                "label": "比较级词干",
                                 "example": "schnell",
                                 "hint": "比较级的词干（无词尾）：jung → jüng、dunkel → dunkl。留空 = 原形本身。"
                             },
                             {
                                 "key": "sup",
-                                "label": "最高级主要部分",
+                                "label": "最高级词干",
                                 "example": "schnellst",
-                                "hint": "最高级的词干：breit → breitest、alt → ältest。留空 = 比较级主要部分 + st。"
+                                "hint": "最高级的词干：breit → breitest、alt → ältest。留空 = 比较级词干 + st。"
                             }
                         ]
                     }
@@ -4084,7 +4098,7 @@
                             "lang": "de"
                         }
                     ],
-                    "notes": "<strong>词条的基本形态（lemma）一律用不定式</strong>（sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「过去分词」等主要部分，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt）另填「现在时 2/3 单数主要部分」。\n\n「构成」一列只区分两种：<strong>变位</strong>（单一动词形式，写进变位表）与<strong>复合</strong>（助动词 + 过去分词 / 不定式，不写进变位表，见「复合时态与被动语态」）。\n\n<strong>语式用法</strong>：直陈式陈述事实、提问（Er kommt morgen.）；虚拟式 I 用于间接引语（Er sagt, er komme morgen.）；虚拟式 II 表示非现实、假设、委婉（Wenn ich Zeit hätte, käme ich.），弱变化动词常用 würde + 不定式代替（Ich würde kommen.）；命令式表示命令、请求（Komm her!）。\n\n<strong>虚拟式的构成</strong>：虚拟式 I = 不定式词干 + -e / -est / -e / -en / -et / -en（er komme、du kommest），第三人称单数与直陈式现在时容易混，要注意区分；虚拟式 II = 过去时词干 + 变音 + -e（er käme、er gäbe）；过去完成虚拟 = hätte / wäre + 过去分词（er wäre gekommen）。\n\n现在分词只作形容词 / 状语；过去分词用于复合时态、被动语态，也可作形容词。"
+                    "notes": "<strong>词条的基本形态（lemma）一律用不定式</strong>（sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「过去分词」等词干，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt）另填「现在时 2/3 单数词干」。\n\n「构成」一列只区分两种：<strong>变位</strong>（单一动词形式，写进变位表）与<strong>复合</strong>（助动词 + 过去分词 / 不定式，不写进变位表，见「复合时态与被动语态」）。\n\n<strong>语式用法</strong>：直陈式陈述事实、提问（Er kommt morgen.）；虚拟式 I 用于间接引语（Er sagt, er komme morgen.）；虚拟式 II 表示非现实、假设、委婉（Wenn ich Zeit hätte, käme ich.），弱变化动词常用 würde + 不定式代替（Ich würde kommen.）；命令式表示命令、请求（Komm her!）。\n\n<strong>虚拟式的构成</strong>：虚拟式 I = 不定式词干 + -e / -est / -e / -en / -et / -en（er komme、du kommest），第三人称单数与直陈式现在时容易混，要注意区分；虚拟式 II = 过去时词干 + 变音 + -e（er käme、er gäbe）；过去完成虚拟 = hätte / wäre + 过去分词（er wäre gekommen）。\n\n现在分词只作形容词 / 状语；过去分词用于复合时态、被动语态，也可作形容词。"
                 },
                 {
                     "id": "de-verb-compound",
@@ -4323,27 +4337,27 @@
                 "parts": [
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "mach",
                         "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "gemacht",
                         "hint": "留空 = ge- + 词干 + t。以 be- / ge- / er- / ver- / ent- / zer- 开头或以 -ieren 结尾的动词不加 ge-，请改用下面的「不可分前缀」「-ieren」两个锚点。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "mach",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "mach",
-                        "hint": "留空 = 过去时主要部分变音（sprach → spräch、konnte → könnt）。"
+                        "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
                     },
                     {
                         "key": "aux",
@@ -4867,27 +4881,27 @@
                 "parts": [
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "arbeit",
                         "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "gearbeitet",
                         "hint": "留空 = ge- + 词干 + et。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "arbeit",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "arbeit",
-                        "hint": "留空 = 过去时主要部分变音（sprach → spräch、konnte → könnt）。"
+                        "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
                     },
                     {
                         "key": "aux",
@@ -5424,27 +5438,27 @@
                 "parts": [
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "sammel",
                         "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "gesammelt",
                         "hint": "留空 = ge- + 词干 + t（gesammelt / geändert）。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "sammel",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "sammel",
-                        "hint": "留空 = 过去时主要部分变音（sprach → spräch、konnte → könnt）。"
+                        "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
                     },
                     {
                         "key": "aux",
@@ -5970,27 +5984,27 @@
                 "parts": [
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "studier",
                         "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "studiert",
                         "hint": "留空 = 词干 + t（-ieren 动词不加 ge-）。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "studier",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "studier",
-                        "hint": "留空 = 过去时主要部分变音（sprach → spräch、konnte → könnt）。"
+                        "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
                     },
                     {
                         "key": "aux",
@@ -6510,27 +6524,27 @@
                 "parts": [
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "besuch",
                         "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "besucht",
                         "hint": "留空 = 词干 + t（不可分前缀动词不加 ge-）。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "besuch",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "besuch",
-                        "hint": "留空 = 过去时主要部分变音（sprach → spräch、konnte → könnt）。"
+                        "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
                     },
                     {
                         "key": "aux",
@@ -7066,33 +7080,33 @@
                 "parts": [
                     {
                         "key": "p23",
-                        "label": "现在时 2/3 单数主要部分",
+                        "label": "现在时 2/3 单数词干",
                         "example": "sprich",
                         "hint": "换音的动词填换音后的词干：sprechen → sprich、nehmen → nimm、fahren → fähr。留空 = 现在时词干。"
                     },
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "sprach",
                         "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "gesprochen",
                         "hint": "强变化的过去分词不规则，必须填（gesprochen / genommen / gefunden）。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "sprech",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "spräch",
-                        "hint": "留空 = 过去时主要部分变音（sprach → spräch、konnte → könnt）。"
+                        "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
                     },
                     {
                         "key": "aux",
@@ -7638,27 +7652,27 @@
                 "parts": [
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "brachte",
                         "hint": "过去时带 -te 但词干变了（brachte / dachte / kannte），填整个过去时形式。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "gebracht",
                         "hint": "混合变化的过去分词不规则，必须填（gebracht / gedacht / gekannt）。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "bring",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "brächte",
-                        "hint": "留空 = 过去时主要部分变音（brachte → brächte）。"
+                        "hint": "留空 = 过去时词干变音（brachte → brächte）。"
                     },
                     {
                         "key": "aux",
@@ -8204,33 +8218,33 @@
                 "parts": [
                     {
                         "key": "p1",
-                        "label": "现在时单数主要部分",
+                        "label": "现在时单数词干",
                         "example": "kann",
                         "hint": "情态动词现在时第一、三人称单数同形（kann / muss / will / darf），填这个形式。"
                     },
                     {
                         "key": "pret",
-                        "label": "过去时主要部分",
+                        "label": "过去时词干",
                         "example": "konnte",
                         "hint": "如 konnte / musste / wollte。"
                     },
                     {
                         "key": "pp",
-                        "label": "过去分词主要部分",
+                        "label": "过去分词词干",
                         "example": "gekonnt",
                         "hint": "如 gekonnt / gemusst / gewollt。"
                     },
                     {
                         "key": "k1",
-                        "label": "虚拟式 I 主要部分",
+                        "label": "虚拟式 I 词干",
                         "example": "könn",
                         "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
                     },
                     {
                         "key": "k2",
-                        "label": "虚拟式 II 主要部分",
+                        "label": "虚拟式 II 词干",
                         "example": "könnte",
-                        "hint": "留空 = 过去时主要部分变音（konnte → könnte）。wollen / sollen 的虚拟式 II 与过去时同形，填 wollte / sollte。"
+                        "hint": "留空 = 过去时词干变音（konnte → könnte）。wollen / sollen 的虚拟式 II 与过去时同形，填 wollte / sollte。"
                     },
                     {
                         "key": "aux",

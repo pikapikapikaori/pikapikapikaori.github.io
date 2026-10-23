@@ -21,7 +21,8 @@ export function createWordCard(word, options = {}) {
         resolvePosRef = null,
         compact = false,
         paradigmTpl = null,
-        partLabels = null
+        partLabels = null,
+        stemLabel = '词干'
     } = options
 
     const posGrammarRef = typeof resolvePosRef === 'function' ? resolvePosRef(word.pos) : null
@@ -207,6 +208,8 @@ export function createWordCard(word, options = {}) {
                 openCardOverlay(word, {
                     language,
                     paradigmTpl,
+                    partLabels,
+                    stemLabel,
                     onGrammarRef,
                     resolvePosRef,
                     resolveDerivative,
@@ -217,11 +220,11 @@ export function createWordCard(word, options = {}) {
         }, '⛶')
         )
 
-        // 主要部分（在含义之前）
+        // 词干（在含义之前）
         const baseStem = primaryStem(word)
         if (baseStem) {
             const extra = otherStems(word)
-            content.appendChild(section('主要部分',
+            content.appendChild(section(stemLabel,
                 h('div', { class: 'word-card__stem', lang: language }, stemDisplay(baseStem)),
                 extra.length
                     ? h('div', { class: 'word-card__stem-extra', lang: language },

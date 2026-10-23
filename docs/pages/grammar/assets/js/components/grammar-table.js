@@ -16,8 +16,18 @@ const EMPTY_CELL = /^\s*(?:[—–-]|)\s*$/u
  * 单元格是否「没有内容」：空字符串或只有占位破折号。
  * 「—」表示该形式不存在（如 Piel 没有命令式），全空的行/列要整块隐藏。
  */
+function cellText(value) {
+    return value && typeof value === 'object' ? String(value.text ?? '') : String(value ?? '')
+}
+
+/** 单元格可以是字符串，也可以是 { text, disabled }（disabled 表示该形式不存在） */
+function cellDisabled(value) {
+    return !!(value && typeof value === 'object' && value.disabled === true)
+}
+
 function isEmptyCell(value) {
-    return EMPTY_CELL.test(String(value ?? ''))
+    if (cellDisabled(value)) return false
+    return EMPTY_CELL.test(cellText(value))
 }
 
 export function createGrammarTable(spec) {
@@ -48,9 +58,14 @@ export function createGrammarTable(spec) {
         h('tbody', {},
             ...rows.map((row) =>
                 h('tr', {},
-                    ...row.map((cell, index) => (keepCol[index]
-                        ? h('td', { lang }, htmlFragment(cell ?? ''))
-                        : null)).filter(Boolean)
+                    ...row.map((cell, index) => {
+                        if (!keepCol[index]) return null
+                        const off = cellDisabled(cell)
+                        return h('td', {
+                            lang,
+                            class: off ? 'grammar-table__cell--disabled' : null
+                        }, off ? (cellText(cell) || '—') : htmlFragment(cellText(cell)))
+                    }).filter(Boolean)
                 )
             )
         )

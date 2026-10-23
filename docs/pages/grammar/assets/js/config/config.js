@@ -78,7 +78,7 @@ export const POS_LIST = [
     { value: 'pron',      label: '代词' },
     { value: 'prep',      label: '前置介词' },
     { value: 'postp',     label: '后置介词' },
-    { value: 'midp',      label: '中置介词' },
+    { value: 'ambip',     label: '中置介词' },
     { value: 'conj',      label: '连词' },
     { value: 'particle',  label: '助词' },
     { value: 'participle', label: '分词' },
@@ -86,6 +86,15 @@ export const POS_LIST = [
     { value: 'interj',    label: '感叹词' },
     { value: 'other',     label: '其它' },
 ]
+
+/** 某个语言可用的词性（JSON 顶层 `pos` 数组；缺省用全局清单） */
+export function posOptions(posValues) {
+    const values = Array.isArray(posValues) && posValues.length
+        ? posValues
+        : POS_LIST.map((p) => p.value)
+    const set = new Set(values)
+    return POS_LIST.filter((p) => set.has(p.value))
+}
 
 /** 语法性；顺序即展示顺序 */
 export const GENDERS = [

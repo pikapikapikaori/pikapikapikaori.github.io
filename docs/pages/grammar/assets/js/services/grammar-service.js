@@ -170,6 +170,7 @@ export {
     genderOfColumn,
     genderOfRow,
     collectInflectAnchors,
+    stemLabelOf,
     indexParadigmTables,
     indexParadigmRows
 } from '../models/grammar.js'

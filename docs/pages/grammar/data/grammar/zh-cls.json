@@ -10,6 +10,19 @@
         "order": 1
     },
     "order": 7,
+    "pos": [
+        "noun",
+        "verb",
+        "adj",
+        "adv",
+        "pron",
+        "prep",
+        "conj",
+        "particle",
+        "interj",
+        "num",
+        "other"
+    ],
     "vertical": false,
     "rtl": false,
     "grammar": false,
@@ -25,11 +38,11 @@
         "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写说明。",
         "extraForms": "补充形式（其他用法）",
         "stems": {
-            "label": "主要部分",
-            "placeholder": "主要部分",
+            "label": "词干",
+            "placeholder": "词干",
             "hint": "古汉语没有形态变化，一般无需填写。"
         },
-        "extraPartsHint": "以下主要部分可以留空。"
+        "extraPartsHint": "以下词干可以留空。"
     },
     "sections": []
 }

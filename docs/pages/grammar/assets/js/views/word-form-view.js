@@ -6,7 +6,7 @@ import {
     normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders, sourceLabel
 } from '../models/word.js'
 import {
-    loadGrammar, loadParadigmProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
+    loadGrammar, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
     getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
@@ -74,6 +74,20 @@ export default {
          */
         function hintText(text) { return bdiText(text, lang) }
 
+        /**
+         * 原文语言（满文 / 天城文）：输入允许写转写，失焦时归一成原文。
+         * 存储与生词卡显示都用原文，转写只在检索与「显示转写」开关里出现。
+         */
+        function attachScriptNormalize(input) {
+            if (typeof scriptProfile?.toScript !== 'function') return
+            input.addEventListener('focusout', () => {
+                const value = input.value
+                if (!value || !value.trim()) return
+                const next = String(scriptProfile.toScript(value) ?? value)
+                if (next !== value) input.value = next
+            })
+        }
+
         /** 词性变了以后，界面上这些文案要跟着换（各词性可以有自己的说法） */
         function applyTerms() {
             const t = currentTerms()
@@ -89,6 +103,8 @@ export default {
         }
         const stemsMeta = grammarDoc?.stems && typeof grammarDoc.stems === 'object' ? grammarDoc.stems : null
         const paradigmProfile = await loadParadigmProfile(lang, grammarDoc)
+        // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写
+        const scriptProfile = await loadScriptProfile(lang, grammarDoc)
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
         if (isEdit && !data) {
@@ -194,6 +210,13 @@ export default {
             }
         })
         const lemmaInput = lemmaField.input
+        lemmaField.el.addEventListener('focusout', () => {
+            if (typeof scriptProfile?.toScript !== 'function') return
+            const value = lemmaInput.value
+            if (!value || !value.trim()) return
+            const next = String(scriptProfile.toScript(value) ?? value)
+            if (next !== value) lemmaInput.value = next
+        })
 
         /* ---------- 外部数据源：按一次查全部，多个词性弹窗选 ---------- */
 
@@ -352,6 +375,7 @@ export default {
             onInput: () => { refreshStemGhosts(); refreshGenerateBtn() }
         })
         const principalInput = principalField.input
+        attachScriptNormalize(principalInput)
 
         // 额外的主要部分（由当前变位 / 变格类型的 derive.parts 决定）
         const extraPartsSlot = h('div', { class: 'field__parts' })
@@ -568,6 +592,7 @@ export default {
                     })
                     : ((ghost) => {
                         extraGhosts.push(ghost)
+                        attachScriptNormalize(ghost.input)
                         return ghost
                     })(createGhostInput({
                         value: data.stems[part.key] || '',
@@ -703,7 +728,8 @@ export default {
                 template: tpl,
                 existing: {},
                 overwrite: true,
-                profile: paradigmProfile
+                profile: paradigmProfile,
+                script: scriptProfile
             })
 
             if (noVariant) {

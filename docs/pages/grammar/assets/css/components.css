@@ -1717,3 +1717,61 @@ button.word-card__derivative {
     flex-shrink: 0;
     color: var(--c-accent);
 }
+
+/* ---------- 语法页浮动工具（回到顶部 / 显示转写） ---------- */
+.page-tools {
+    position: fixed;
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+    z-index: var(--z-fab);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
+.page-tools__btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--c-border);
+    background: var(--c-bg-elev);
+    color: var(--c-fg);
+    font-size: var(--fs-md);
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.page-tools__btn:not(:disabled):hover {
+    background: var(--c-bg-hover);
+}
+
+.page-tools__btn[disabled] {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.page-tools__btn--on {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+    color: var(--c-accent-fg);
+}
+
+/* 双行文本：默认只显示原文，打开开关后在原文片段后补出转写 */
+.dual-text__roman {
+    display: none;
+    margin-left: .35em;
+    font-size: .9em;
+    color: var(--c-fg-muted);
+    /* 转写是拉丁字母，不能继承原文的方向与字体 */
+    unicode-bidi: isolate;
+    font-family: inherit;
+}
+
+html.show-dual-text .dual-text__roman {
+    display: inline;
+}

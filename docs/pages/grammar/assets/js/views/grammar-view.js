@@ -1,6 +1,8 @@
 import { h, replace, htmlFragment } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
-import { loadGrammar } from '../services/grammar-service.js'
+import { loadGrammar, loadScriptProfile } from '../services/grammar-service.js'
+import { createPageTools } from '../components/page-tools.js'
+import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
 import { createGrammarTables } from '../components/grammar-table.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
@@ -58,7 +60,9 @@ export default {
         const doc = await loadGrammar(lang)
         if (!doc) { renderNoData(main, lang, language); return }
 
-        return renderGrammar(main, lang, language, doc, anchor, group)
+        // 文字档案（满文 / 天城文）：「显示转写」开关用它把原文转成转写
+        const scriptProfile = await loadScriptProfile(lang, doc)
+        return renderGrammar(main, lang, language, doc, anchor, group, scriptProfile)
     }
 }
 
@@ -97,7 +101,7 @@ function groupOfAnchor(doc, anchor, groups) {
     return ''
 }
 
-function renderGrammar(main, lang, language, doc, anchor, groupParam) {
+function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProfile = null) {
     // 章节来自文档的 groups（少于两章就不分页）
     const groups = Array.isArray(doc.groups) && doc.groups.length > 1 ? doc.groups : null
 
@@ -142,6 +146,29 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
 
     const content = h('div', { class: 'grammar-content' })
     const allIds = new Set()
+
+    /* ---------- 右下角浮动工具：回到顶部 + 显示转写 ---------- */
+    const toRoman = typeof scriptProfile?.toRoman === 'function'
+        ? (text) => scriptProfile.toRoman(text)
+        : null
+    const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
+        ? scriptProfile.scriptRange
+        : null
+    const tools = createPageTools({
+        lang,
+        toRoman,
+        anchorEl: main,
+        onChange: (on) => {
+            setDualTextVisible(on)
+            if (on) annotateDualText(content, { range: scriptRange, toRoman })
+        }
+    })
+    document.body.appendChild(tools.el)
+    if (tools.isOn() && toRoman) {
+        setDualTextVisible(true)
+        annotateDualText(content, { range: scriptRange, toRoman })
+    }
+
 
     // 本页的目录（一级标题 = section）
     const toc = h('div', { class: 'grammar-nav__group' })
@@ -191,6 +218,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
             it.appendChild(h('div', { class: 'grammar-item__notes' }, htmlFragment(item.notes)))
         }
         applyBdi(it, lang)
+        if (tools.isOn() && toRoman) annotateDualText(it, { range: scriptRange, toRoman })
     }
 
     // 带锚点时，锚点所在章节及其之前的条目立即渲染，保证滚动位置准确
@@ -320,6 +348,8 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam) {
         window.removeEventListener('resize', onScroll)
         if (heightObserver) heightObserver.disconnect()
         if (spyFrame) cancelAnimationFrame(spyFrame)
+        tools.destroy()
+        setDualTextVisible(false)
     }
 }
 

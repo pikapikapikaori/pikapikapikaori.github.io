@@ -18,7 +18,8 @@ import { createThemeToggle, applyTheme } from './components/theme-toggle.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { loadLanguages } from './data/languages.js'
-import { LS_KEYS, THEMES } from './config/config.js'
+import { LS_KEYS, THEMES, SCRIPT_SEARCH_LANGS } from './config/config.js'
+import { preloadScriptProfiles } from './services/grammar-service.js'
 
 const DEFAULT_THEME = THEMES[0].value
 
@@ -208,6 +209,9 @@ async function bootstrap() {
     } catch (err) {
         console.warn('[bootstrap] 语言元信息加载失败', err)
     }
+
+    // 检索要同步用到「转写 ⇄ 原文」的转换函数，先把这些语言的文字档案加载进来
+    await preloadScriptProfiles(SCRIPT_SEARCH_LANGS)
 
     // 当前用户
     let cur = null

@@ -292,21 +292,23 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
  * @param {object}   [options.existing] 词条已有的 paradigm
  * @param {object}   [options.profile] 语言档案（data/paradigm/<lang>.js）：
  *                                     `sandhi` / `accent`（拼接型）或 `realize`（骨架型）
+ * @param {object}   [options.script]  文字档案（data/script/<lang>.js）：`toScript` 把结果转成
+ *                                     原文，`toRoman` 把用户输入的原文转回转写（可缺省）
  * @returns {{ paradigm: object, filled: object[], skipped: object[] }}
  */
-export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, overwrite = false } = {}) {
+export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, script, overwrite = false } = {}) {
     const result = { paradigm: {}, paradigmRoman: {}, filled: [], skipped: [], skippedTables: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
     const parts = normalizeStemParts(stem, stems, headword)
     // 竖排文字（满文等）：用户填的可能是文字本身，先统一转成转写再做规则与重音
-    if (typeof profile?.toRoman === 'function') {
+    if (typeof script?.toRoman === 'function') {
         for (const key of Object.keys(parts)) {
             const value = String(parts[key] ?? '')
-            if (value) parts[key] = profile.toRoman(value)
+            if (value) parts[key] = script.toRoman(value)
         }
     }
     // 是否要把结果转成文字（满文）
-    const useScript = typeof profile?.toScript === 'function'
+    const useScript = typeof script?.toScript === 'function'
     const base = parts.base || ''
     // base 可以为空：只要类型声明了 base 的规则（通常是 { from: 'headword' }）
     const canDeriveBase = !!spec.stems?.base || !!spec.stemForms?.base
@@ -427,7 +429,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                     continue
                 }
 
-                const shown = useScript ? String(profile.toScript(form) ?? form) : form
+                const shown = useScript ? String(script.toScript(form) ?? form) : form
                 if (!result.paradigm[table.key]) result.paradigm[table.key] = {}
                 if (!result.paradigm[table.key][row.key]) result.paradigm[table.key][row.key] = {}
                 result.paradigm[table.key][row.key][col.key] = shown

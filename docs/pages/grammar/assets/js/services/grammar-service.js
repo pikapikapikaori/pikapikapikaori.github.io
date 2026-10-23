@@ -73,7 +73,8 @@ export async function resolveRef(language, ref) {
  * 语言档案位于 /data/paradigm/{lang}.js，导出 accentModes / accent / sandhi。
  * 没有该文件的语言（如拉丁语）返回 null，通用引擎会跳过重音与连声。
  */
-const profiles = new Map()  // lang -> profile | null
+const profiles = new Map()
+const scriptProfiles = new Map()  // lang -> profile | null
 
 /**
  * 语言档案（`data/paradigm/{lang}.js`）：只有该语言的 JSON 声明了 `profile: true`
@@ -93,6 +94,50 @@ export async function loadParadigmProfile(language, doc = null) {
     }
     profiles.set(language, profile)
     return profile
+}
+
+/**
+ * 「文字档案」：`data/script/<lang>.js`（转写 ⇄ 原文）。
+ * 与 data/paradigm/ 完全同一套加载方式，只是由文档里的 `script: true` 声明。
+ * 档案导出 `toScript` / `toRoman`（`hasScript` 可选）。
+ */
+export async function loadScriptProfile(language, doc = null) {
+    if (!language) return null
+    if (!doc || doc.script !== true) return null
+    if (scriptProfiles.has(language)) return scriptProfiles.get(language)
+
+    let profile = null
+    try {
+        profile = await import(`../../../data/script/${encodeURIComponent(language)}.js`)
+    } catch {
+        console.warn(`[grammar] ${language}: 文字档案加载失败`)
+    }
+    scriptProfiles.set(language, profile)
+    return profile
+}
+
+/** 同步取已预加载的文字档案（检索等同步场景用） */
+export function getScriptProfile(language) {
+    return scriptProfiles.get(language) || null
+}
+
+/** 应用启动时预加载（检索要在同步流程里用到转换函数） */
+export async function preloadScriptProfiles(languages = []) {
+    await Promise.all(languages.map(async (language) => {
+        if (scriptProfiles.has(language)) return
+        let profile = null
+        try {
+            profile = await import(`../../../data/script/${encodeURIComponent(language)}.js`)
+        } catch {
+            console.warn(`[grammar] ${language}: 文字档案加载失败`)
+        }
+        scriptProfiles.set(language, profile)
+    }))
+}
+
+export function clearScriptProfileCache(language) {
+    if (language) scriptProfiles.delete(language)
+    else scriptProfiles.clear()
 }
 
 export function clearProfileCache(language) {

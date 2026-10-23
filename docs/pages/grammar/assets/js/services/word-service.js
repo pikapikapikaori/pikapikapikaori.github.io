@@ -8,7 +8,8 @@ import {
 } from '../store/word-store.js'
 import { posLabel, allSources } from '../models/word.js'
 import { normalizeSearch } from '../utils/text-normalize.js'
-import { TRANSLIT_SEARCH_LANGS } from '../config/config.js'
+import { getScriptProfile } from './grammar-service.js'
+import { TRANSLIT_SEARCH_LANGS, SCRIPT_SEARCH_LANGS } from '../config/config.js'
 
 export const SORT_FIELDS = [
     { value: 'addedAt',        label: '添加日期' },
@@ -71,36 +72,59 @@ export async function queryWords(userId, language, options = {}) {
     }
 }
 
+/**
+ * 查询串的规范化变体：天城体语言（梵语）同时按 IAST 与原文检索，
+ * 所以「kāmaḥ」与「कामः」都能搜到同一条。
+ */
+function searchVariants(query) {
+    const out = new Set()
+    const push = (text) => {
+        const nq = normalizeSearch(text)
+        if (nq) out.add(nq)
+    }
+    push(query)
+    // 有文字档案的语言（梵语）：转写与原文两种写法都能搜到
+    for (const lang of SCRIPT_SEARCH_LANGS) {
+        const profile = getScriptProfile(lang)
+        if (!profile) continue
+        if (typeof profile.toScript === 'function') push(profile.toScript(query))
+        if (typeof profile.toRoman === 'function') push(profile.toRoman(query))
+    }
+    return [...out]
+}
+
 function applySearch(words, q, scope = 'all') {
     const s = String(q || '').trim()
     if (!s) return words
-    const nq = normalizeSearch(s)
-    if (!nq) return words
+    // 原文 / 转写两种写法都能搜到：查询串同时展开成 IAST 与天城体
+    const queries = searchVariants(s)
+    if (!queries.length) return words
+    const anyHit = (text) => {
+        const norm = normalizeSearch(text)
+        return queries.some((nq) => norm.includes(nq))
+    }
 
-    const hitLemma = (w) => normalizeSearch(w.lemma).includes(nq)
+    const hitLemma = (w) => anyHit(w.lemma)
     const hitStem = (w) => Object.values(w.stems || {})
-        .some((stem) => !!stem && normalizeSearch(stem).includes(nq))
+        .some((stem) => !!stem && anyHit(stem))
     const hitGrid = (grid) => Object.values(grid || {}).some((rows) =>
         Object.values(rows || {}).some((cells) =>
-            Object.values(cells || {}).some((v) => normalizeSearch(v).includes(nq))))
+            Object.values(cells || {}).some((v) => anyHit(v))))
     // 只有登记在 TRANSLIT_SEARCH_LANGS 里的语言才同时按「原文 + 转写」检索；
     // 其它语言的数据本身就是自己的文字，只按原文检索
     const hitParadigm = (w) => hitGrid(w.paradigm)
         || (TRANSLIT_SEARCH_LANGS.includes(w.language) && hitGrid(w.paradigmRoman))
     const hitInflection = (w) => (w.inflections || []).some((it) =>
-        normalizeSearch(it.form || '').includes(nq))
+        anyHit(it.form || ''))
 
     const hitWordForm = (w) => hitLemma(w) || hitStem(w) || hitParadigm(w) || hitInflection(w)
     const hitHead = (w) => hitLemma(w) || hitStem(w)
 
-    const hitMeaning = (w) => (w.meanings || []).some((m) =>
-        normalizeSearch(m.text || '').includes(nq))
+    const hitMeaning = (w) => (w.meanings || []).some((m) => anyHit(m.text || ''))
     const hitExample = (w) => (w.examples || []).some((ex) =>
-        normalizeSearch(ex.text || '').includes(nq)
-    || normalizeSearch(ex.translation || '').includes(nq))
+        anyHit(ex.text || '') || anyHit(ex.translation || ''))
     const hitCollocation = (w) => (w.collocations || []).some((c) =>
-        normalizeSearch(c.text || '').includes(nq)
-    || normalizeSearch(c.gloss || '').includes(nq))
+        anyHit(c.text || '') || anyHit(c.gloss || ''))
 
     return words.filter((w) => {
         switch (scope) {

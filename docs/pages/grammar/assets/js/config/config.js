@@ -49,6 +49,12 @@ export const SCRIPT_POPUP_LANGS = {
 export const TRANSLIT_SEARCH_LANGS = ['mnc']
 
 /**
+ * 检索时把查询串同时展开成「原文 + 转写」的语言。
+ * 梵语数据存天城体，用户可能输入 IAST，两边都要能命中。
+ */
+export const SCRIPT_SEARCH_LANGS = ['sa']
+
+/**
  * 渲染时用 <bdi> 包住文字的语言：文字本身的书写方向与界面不同（竖写 / RTL），
  * 不包的话会影响周围的标点与排版。值是**该文字的 Unicode 范围** —— 只有命中的字符才会被包进 <bdi>，
  * 同一格里的中文、拉丁转写等保持原样（如 `<td lang="he">מִי（人）/ מָה（物）</td>` 只包 מִי 与 מָה）。

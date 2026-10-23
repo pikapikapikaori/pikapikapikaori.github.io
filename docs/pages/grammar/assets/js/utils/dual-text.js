@@ -12,14 +12,15 @@
  */
 
 /**
- * @param {HTMLElement} root   要处理的容器（处理其中的 td / th / dd / li）
+ * @param {HTMLElement} root   要处理的容器（只处理其中的表格单元格 td / th）
  * @param {object} options
  *   range    RegExp  原文的字符范围（如 /[\u1800-\u18AF]/）
  *   toRoman  (text) => string  原文 → 转写
  */
 export function annotateDualText(root, { range, toRoman } = {}) {
     if (!root || !(range instanceof RegExp) || typeof toRoman !== 'function') return
-    const cells = root.querySelectorAll('td, th, dd, li')
+    // 只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读
+    const cells = root.querySelectorAll('td, th')
     for (const cell of cells) {
         if (cell.dataset.dualText === '1') continue
         // 带输入框的格子（变格表 / 词卡）不处理；纯文本、<bdi>、<code> 都可以

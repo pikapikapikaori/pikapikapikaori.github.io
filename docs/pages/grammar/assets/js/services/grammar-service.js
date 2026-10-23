@@ -123,6 +123,7 @@ export {
     fieldDefsOfTemplate,
     fieldValues,
     genderOfColumn,
+    genderOfRow,
     collectInflectAnchors,
     indexParadigmTables,
     indexParadigmRows

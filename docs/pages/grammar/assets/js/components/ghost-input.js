@@ -65,8 +65,33 @@ export function createGhostInput({
 
     const el = h('span', { class: 'ghost-input' }, hint, input)
 
+    /** 当前的推导值（每次刷新时调用） */
+    function ghostTarget() {
+        return typeof getGhost === 'function' ? String(getGhost() || '') : ''
+    }
+
+    // Tab 补全：当前输入是推导值的前缀时，按 Tab 直接补成完整值（否则保留正常的焦点切换）
+    input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) return
+        const target = ghostTarget()
+        const current = input.value
+        if (!target || target === current || !target.startsWith(current)) return
+        e.preventDefault()
+        input.value = target
+        input.dispatchEvent(new Event('input'))
+        const range = document.createRange()
+        range.selectNodeContents(input)
+        range.collapse(false)
+        const sel = window.getSelection()
+        if (sel) {
+            sel.removeAllRanges()
+            sel.addRange(range)
+        }
+        refresh()
+    })
+
     function refresh() {
-        const target = typeof getGhost === 'function' ? String(getGhost() || '') : ''
+        const target = ghostTarget()
         const current = input.value
         const showGhost = !!target && target !== current && target.startsWith(current)
 

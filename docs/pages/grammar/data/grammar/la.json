@@ -47,27 +47,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -156,27 +156,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -216,27 +216,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -645,27 +645,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -701,27 +701,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -757,27 +757,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -813,27 +813,27 @@
                     "columns": [
                         {
                             "key": "sg_m",
-                            "label": "单数 阳性"
+                            "label": "单数阳性"
                         },
                         {
                             "key": "sg_f",
-                            "label": "单数 阴性"
+                            "label": "单数阴性"
                         },
                         {
                             "key": "sg_n",
-                            "label": "单数 中性"
+                            "label": "单数中性"
                         },
                         {
                             "key": "pl_m",
-                            "label": "复数 阳性"
+                            "label": "复数阳性"
                         },
                         {
                             "key": "pl_f",
-                            "label": "复数 阴性"
+                            "label": "复数阴性"
                         },
                         {
                             "key": "pl_n",
-                            "label": "复数 中性"
+                            "label": "复数中性"
                         }
                     ],
                     "rows": [
@@ -1885,6 +1885,17 @@
                                     "pl_m": "aquae"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "a$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -2065,6 +2076,17 @@
                                     "pl_m": "dominī"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "us$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -2217,6 +2239,17 @@
                                     "pl_f": "mālī"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "us$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -2320,7 +2353,16 @@
                                     "pattern": "er$",
                                     "replace": "r"
                                 }
-                            ]
+                            ],
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "er$",
+                                        "replace": "r"
+                                    }
+                                ]
+                            }
                         },
                         "endings": {
                             "main": {
@@ -2559,6 +2601,12 @@
                                     "pl_m": "puerī"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
+                            }
                         }
                     },
                     "tables": [
@@ -2710,6 +2758,17 @@
                                     "sg_n": "bellum",
                                     "pl_n": "bella"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "um$",
+                                        "replace": ""
+                                    }
+                                ]
                             }
                         }
                     },
@@ -3061,6 +3120,17 @@
                                     "pl_f": "cīvēs"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "is$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -3240,6 +3310,17 @@
                                     "sg_f": "turris",
                                     "pl_f": "turrēs"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "is$",
+                                        "replace": ""
+                                    }
+                                ]
                             }
                         }
                     },
@@ -3570,6 +3651,17 @@
                                     "pl_n": "maria"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "e$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -3721,6 +3813,12 @@
                                     "sg_n": "animāl",
                                     "pl_n": "animālia"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": []
                             }
                         }
                     },
@@ -3897,6 +3995,17 @@
                                     "sg_m": "manus",
                                     "pl_m": "manūs"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "us$",
+                                        "replace": ""
+                                    }
+                                ]
                             }
                         }
                     },
@@ -4078,6 +4187,17 @@
                                     "pl_n": "cornua"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "ū$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -4230,6 +4350,17 @@
                                     "pl_f": "rēs"
                                 }
                             }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "ēs$",
+                                        "replace": ""
+                                    }
+                                ]
+                            }
                         }
                     },
                     "tables": [
@@ -4381,6 +4512,17 @@
                                     "sg_m": "diēs",
                                     "pl_m": "diēs"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "ēs$",
+                                        "replace": ""
+                                    }
+                                ]
                             }
                         }
                     },
@@ -4588,6 +4730,17 @@
                                     "pl_f": "bonae",
                                     "pl_n": "bona"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "us$",
+                                        "replace": ""
+                                    }
+                                ]
                             }
                         }
                     },
@@ -5114,6 +5267,17 @@
                                     "sg_f": "fortis",
                                     "pl_f": "fortēs"
                                 }
+                            }
+                        },
+                        "stemForms": {
+                            "base": {
+                                "from": "headword",
+                                "rules": [
+                                    {
+                                        "pattern": "is$",
+                                        "replace": ""
+                                    }
+                                ]
                             }
                         }
                     },
@@ -5819,9 +5983,9 @@
                             "headers": [
                                 "变位法",
                                 "不定式",
-                                "现在时单1",
-                                "命令式单2",
-                                "完成时单1",
+                                "现在时第一人称单数",
+                                "命令式第二人称单数",
+                                "完成时第一人称单数",
                                 "目的动名词"
                             ],
                             "rows": [
@@ -6815,7 +6979,16 @@
                             "pattern": "$",
                             "replace": "and"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "ō$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "parts": [
                     {
@@ -9179,7 +9352,16 @@
                             "pattern": "$",
                             "replace": "end"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "eō$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "parts": [
                     {
@@ -11649,7 +11831,20 @@
                             "pattern": "$",
                             "replace": "end"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "iō$",
+                                "replace": ""
+                            },
+                            {
+                                "pattern": "ō$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "formRules": [
                     {
@@ -13975,7 +14170,20 @@
                             "pattern": "$",
                             "replace": "iend"
                         }
-                    ]
+                    ],
+                    "base": {
+                        "from": "headword",
+                        "rules": [
+                            {
+                                "pattern": "iō$",
+                                "replace": ""
+                            },
+                            {
+                                "pattern": "ō$",
+                                "replace": ""
+                            }
+                        ]
+                    }
                 },
                 "parts": [
                     {

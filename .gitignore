@@ -1,7 +1,12 @@
 # macos
 **/.DS_Store
 
-# Editor directories and files
+# agents
+
+.agents/
+**/skills-lock.json
+
+# editor directories and files
 .editorconfig
 .idea/
 .vscode/
@@ -25,6 +30,7 @@
 
 # local dev tools
 lib/
+
 
 # pages
 

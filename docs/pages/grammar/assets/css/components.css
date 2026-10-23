@@ -17,11 +17,12 @@
     user-select: none;
 }
 
-.btn:hover {
+/* 禁用态不响应 hover / active：按钮可能被 <label> 包着，label 会把交互转发给它 */
+.btn:not(:disabled):hover {
     background: var(--c-bg-hover);
 }
 
-.btn:active {
+.btn:not(:disabled):active {
     transform: translateY(1px);
 }
 
@@ -36,7 +37,7 @@
     color: var(--c-accent-fg);
 }
 
-.btn--primary:hover {
+.btn--primary:not(:disabled):hover {
     background: color-mix(in oklab, var(--c-accent) 88%, black);
 }
 
@@ -45,7 +46,7 @@
     border-color: transparent;
 }
 
-.btn--ghost:hover {
+.btn--ghost:not(:disabled):hover {
     background: var(--c-bg-hover);
 }
 
@@ -55,7 +56,7 @@
     background: transparent;
 }
 
-.btn--danger:hover {
+.btn--danger:not(:disabled):hover {
     background: color-mix(in oklab, var(--c-danger) 12%, transparent);
 }
 

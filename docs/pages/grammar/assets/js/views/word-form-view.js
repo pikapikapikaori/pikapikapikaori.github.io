@@ -7,7 +7,7 @@ import {
 } from '../models/word.js'
 import {
     loadGrammar, loadParadigmProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
-    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, termsOf, fillTerms
+    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { createGhostInput } from '../components/ghost-input.js'
@@ -390,7 +390,7 @@ export default {
 
             for (const def of defs) {
                 // 语法性这类必填属性不提供空选项，没值时默认第一项
-                const required = def.key === 'gender' || def.declensionColumns
+                const required = def.key === 'gender' || def.declensionCells
                 const raw = data.attributes[def.key]
                 let current = Array.isArray(raw) ? (raw[0] ?? '') : (raw ?? '')
                 if (!current && required && def.options.length) {
@@ -513,7 +513,10 @@ export default {
         /** 当前「变格 / 变位类型」对应的生成规则 */
         function currentDeriveSpec() {
             const ref = inflectionRef.value
-            if (!ref || ref === SPECIAL_REF || ref === INDECL_REF) return null
+            if (!ref || ref === INDECL_REF) return null
+            // 「特殊」也回退到词性的总规则，这样还能拿到声明的主要部分（如法语动词的助动词）；
+            // 没有 endings 的总规则只用来渲染主要部分，不参与生成
+            if (ref === SPECIAL_REF) return getDeriveSpec(grammarDoc, `${lang}-${posSelect.value}`)
             // 锚点自己没写规则时，退回该词性的总规则（如希伯来语名词：按基本形态判定元音模式）
             return getDeriveSpec(grammarDoc, ref) || getDeriveSpec(grammarDoc, `${lang}-${posSelect.value}`)
         }
@@ -548,16 +551,19 @@ export default {
                     refreshStemGhosts()
                     refreshGenerateBtn()
                 }
-                // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）
+                // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）。
+                // 这类字段没有空选项：没值时默认第一项并写进数据（助动词默认 haben / avoir）。
+                const selectOptions = (part.options || [])
+                    .map((opt) => ({ value: String(opt), label: String(opt) }))
+                if (part.kind === 'select' && selectOptions.length && !data.stems[part.key]) {
+                    data.stems[part.key] = selectOptions[0].value
+                }
                 const input = part.kind === 'select'
                     ? createSelect({
                         lang,
                         className: 'select',
                         value: data.stems[part.key] || '',
-                        options: [
-                            { value: '', label: '（未填写）' },
-                            ...(part.options || []).map((opt) => ({ value: String(opt), label: String(opt) }))
-                        ],
+                        options: selectOptions,
                         onChange: (v) => setValue(v)
                     })
                     : ((ghost) => {
@@ -644,10 +650,11 @@ export default {
 
         function refreshGenerateBtn() {
             const spec = currentDeriveSpec()
+            const canGenerate = !!spec && !!spec.endings && Object.keys(spec.endings).length > 0
             const hasStem = !!normalizeStem(principalInput.value)
             const missing = missingRequiredParts(spec)
-            generateBtn.disabled = !spec || !hasStem || missing.length > 0
-            if (!spec) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
+            generateBtn.disabled = !canGenerate || !hasStem || missing.length > 0
+            if (!canGenerate) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
             else if (!hasStem) generateBtn.title = '请先填写词干'
             else if (missing.length) generateBtn.title = `请先填写：${missing.join('、')}`
             else generateBtn.title = '按主要部分和词尾规则自动填表（会覆盖已填内容）'
@@ -656,7 +663,8 @@ export default {
 
         function onGenerate() {
             const spec = currentDeriveSpec()
-            if (!spec) return
+            // partsOnly 的规则只提供主要部分，没有 endings，不能用来生成表格
+            if (!spec || !spec.endings || !Object.keys(spec.endings).length) return
 
             const stem = normalizeStem(principalInput.value)
             if (!stem) {
@@ -726,18 +734,23 @@ export default {
 
         /* ---------- 表格块渲染 ---------- */
 
-        /** 只渲染所选「变格列字段」（通常是语法性）对应的列 */
-        function hiddenGenderColumns(tpl) {
-            const field = fieldDefsOfTemplate(tpl, data.pos).find((f) => f.declensionColumns)
-            if (!field) return []
+        /** 只渲染所选「语法性」对应的格子：对不上的列 / 行都不渲染（性可能写在列上，也可能写在行上） */
+        function hiddenGenderCells(tpl) {
+            const empty = { columns: [], rows: [] }
+            const field = fieldDefsOfTemplate(tpl, data.pos).find((f) => f.declensionCells)
+            if (!field) return empty
             const raw = data.attributes[field.key]
             const picked = Array.isArray(raw) ? raw : (raw ? [raw] : [])
-            if (!picked.length) return []
-            const hidden = []
+            if (!picked.length) return empty
+            const hidden = { columns: [], rows: [] }
             for (const table of tpl?.tables || []) {
                 for (const col of table.columns || []) {
                     const g = genderOfColumn(col.key)
-                    if (g && !picked.includes(g)) hidden.push(col.key)
+                    if (g && !picked.includes(g)) hidden.columns.push(col.key)
+                }
+                for (const row of table.rows || []) {
+                    const g = genderOfRow(row.key)
+                    if (g && !picked.includes(g)) hidden.rows.push(row.key)
                 }
             }
             return hidden
@@ -781,9 +794,12 @@ export default {
             // 只有一张表时，标题行直接占掉表格自带的标题位置（表格不再重复一遍）
             const singleTable = tables.length <= 1
 
-            const wrap = h('div', { class: 'word-form__group' }, stemsBlock, titleRow)
+            // 这个锚点没有对应的表（如代词的「特殊变形」）：只留主要部分，不画光秃秃的标题
+            const wrap = h('div', { class: 'word-form__group' }, stemsBlock,
+                tables.length ? titleRow : null)
 
             const panels = []
+            const hiddenGender = hiddenGenderCells(tpl)
             for (const tableTpl of tables) {
                 const tableData = data.paradigm[tableTpl.key] || {}
                 const tbl = createParadigmTable(tableTpl, tableData, {
@@ -791,7 +807,8 @@ export default {
                     mode: 'edit',
                     // 单表用上面的标题行，多表用 tab 名，表内不再重复标题
                     showTitle: false,
-                    hideColumns: hiddenGenderColumns(tpl),
+                    hideColumns: hiddenGender.columns,
+                    hideRows: hiddenGender.rows,
                     onGrammarRef: (ref) => {
                         location.hash = `#/grammar/${lang}#${ref}`
                     },

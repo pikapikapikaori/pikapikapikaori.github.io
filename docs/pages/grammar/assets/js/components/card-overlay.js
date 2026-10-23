@@ -1,7 +1,7 @@
 import { h } from '../utils/dom.js'
 import { applyBdi } from '../utils/bdi.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
-import { fieldDefsOfTemplate, fieldValues, genderOfColumn } from '../models/grammar.js'
+import { fieldDefsOfTemplate, fieldValues, genderOfColumn, genderOfRow } from '../models/grammar.js'
 import { getLanguage } from '../data/languages.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
@@ -86,17 +86,22 @@ export function openCardOverlay(word, opts = {}) {
     }
     document.addEventListener('keydown', escHandler)
 
-    /** 名词只显示所选性别的列（其它列整列不渲染） */
-    function hiddenGenderColumns(tpl) {
-        const field = fieldDefsOfTemplate(tpl, word.pos).find((f) => f.declensionColumns)
-        if (!field) return []
+    /** 名词只显示所选性别的格子（性在列上就整列不渲染，在行上就整行不渲染） */
+    function hiddenGenderCells(tpl) {
+        const empty = { columns: [], rows: [] }
+        const field = fieldDefsOfTemplate(tpl, word.pos).find((f) => f.declensionCells)
+        if (!field) return empty
         const picked = fieldValues(word, field.key)
-        if (!picked.length) return []
-        const hidden = []
+        if (!picked.length) return empty
+        const hidden = { columns: [], rows: [] }
         for (const table of tpl?.tables || []) {
             for (const col of table.columns || []) {
                 const g = genderOfColumn(col.key)
-                if (g && !picked.includes(g)) hidden.push(col.key)
+                if (g && !picked.includes(g)) hidden.columns.push(col.key)
+            }
+            for (const row of table.rows || []) {
+                const g = genderOfRow(row.key)
+                if (g && !picked.includes(g)) hidden.rows.push(row.key)
             }
         }
         return hidden
@@ -183,6 +188,7 @@ export function openCardOverlay(word, opts = {}) {
         if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
             const panels = []
             const candidates = (paradigmTpl.tables || []).filter((t) => word.paradigm[t.key])
+            const hiddenGender = hiddenGenderCells(paradigmTpl)
             for (const tableTpl of candidates) {
                 const tableData = word.paradigm[tableTpl.key]
                 const tbl = createParadigmTable(tableTpl, tableData, {
@@ -191,7 +197,8 @@ export function openCardOverlay(word, opts = {}) {
                     onGrammarRef: wrappedGrammarRef,
                     // 只有一张表时保留表自己的标题；多张时用 tab 名
                     showTitle: candidates.length <= 1,
-                    hideColumns: hiddenGenderColumns(paradigmTpl)
+                    hideColumns: hiddenGender.columns,
+                    hideRows: hiddenGender.rows
                 })
                 if (tbl) panels.push({ key: tableTpl.key, label: tableTpl.title || tableTpl.key, node: tbl })
             }

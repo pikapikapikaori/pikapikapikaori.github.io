@@ -469,7 +469,9 @@ export function validateDeriveSpec(spec, template, profile) {
     if (!spec || typeof spec !== 'object') return ['derive 不是对象']
 
     const hasVariants = Array.isArray(spec.variants) && spec.variants.length > 0
-    if (!hasVariants && (!spec.endings || typeof spec.endings !== 'object')) problems.push('缺少 endings')
+    // partsOnly：只声明主要部分（如法语动词的助动词），不生成表格，所以不要求 endings
+    const partsOnly = spec.partsOnly === true
+    if (!hasVariants && !partsOnly && (!spec.endings || typeof spec.endings !== 'object')) problems.push('缺少 endings')
     if (hasVariants) {
         const seen = new Set()
         spec.variants.forEach((v, i) => {
@@ -647,9 +649,10 @@ export function validateDeriveSpec(spec, template, profile) {
                 }
             })
             const declaresBase = !!(spec.stems?.base || spec.stemForms?.base)
-            if (spec.parts[0] && spec.parts[0].key !== 'base' && !declaresBase) {
+            if (!partsOnly && spec.parts[0] && spec.parts[0].key !== 'base' && !declaresBase) {
                 problems.push('parts 的第一项 key 应当是 base（或用 stemForms.base / stems.base 声明）')
             }
+            if (partsOnly && !spec.parts.length) problems.push('partsOnly 的 derive 至少要声明一个主要部分')
             for (const part of spec.parts) {
                 if (!part || typeof part !== 'object') continue
                 if (part.kind != null && part.kind !== 'select') {
@@ -838,7 +841,7 @@ export function verifyGrammarDoc(lang, doc, profile) {
         }
 
         const isVariantSpec = Array.isArray(spec.variants) && spec.variants.length > 0
-        if (!isVariantSpec && (!spec.stemExample || !spec.expect)) {
+        if (!isVariantSpec && spec.partsOnly !== true && (!spec.stemExample || !spec.expect)) {
             out.warnings.push(`${where}: 缺少 stemExample / expect，无法自检`)
             return
         }

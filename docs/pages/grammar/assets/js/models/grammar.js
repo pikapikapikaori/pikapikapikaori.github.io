@@ -114,7 +114,7 @@ export function getAttributeFields(doc, pos) {
  * 数据里用 `paradigms[pos].fields` 声明（每个字段：是否用、显示什么、有哪些选项）：
  *
  *   "fields": [
- *     { "key": "gender", "label": "语法性", "multi": true, "declensionColumns": true,
+ *     { "key": "gender", "label": "语法性", "multi": true, "declensionCells": true,
  *       "options": [{ "value": "m", "label": "阳性" }, …] },
  *     { "key": "transitivity", "label": "自他",
  *       "options": [{ "value": "trans", "label": "他动词" }, …] }
@@ -173,31 +173,35 @@ export function fieldDefsOfTemplate(tpl, pos) {
             label: f.label || f.key,
             hint: f.hint || '',
             multi: f.multi === true,
-            declensionColumns: f.declensionColumns === true,
+            // 该字段用来过滤变化表的格子（性写在列或行上都行）
+            declensionCells: f.declensionCells === true || f.declensionColumns === true,
             options: f.options.map((o) => ({ value: String(o.value), label: o.label || String(o.value) })),
         })
     }
     if (out.length) return out
 
-    // 兼容旧数据：只有名词按变格列名推导语法性（与旧行为一致）；
+    // 兼容旧数据：只有名词按变化表的列名 / 行名推导语法性（与旧行为一致）；
     // 其它词性要显示字段请在 `fields` 里显式声明
     if (pos && pos !== 'noun') return []
     const cols = new Set()
+    const rows = new Set()
     for (const table of tpl.tables || []) {
         for (const col of table.columns || []) cols.add(String(col.key))
+        for (const row of table.rows || []) rows.add(String(row.key))
     }
-    const genders = ['m', 'f', 'n'].filter((g) => [...cols].some((k) => k.endsWith('_' + g)))
+    let genders = ['m', 'f', 'n'].filter((g) => [...cols].some((k) => k.endsWith('_' + g)))
+    if (!genders.length) genders = ['m', 'f', 'n'].filter((g) => rows.has(g))
     if (!genders.length) return []
     const labels = { m: '阳性', f: '阴性', n: '中性' }
     return [{
-        key: 'gender', label: '语法性', hint: '', multi: true, declensionColumns: true,
+        key: 'gender', label: '语法性', hint: '', multi: true, declensionCells: true,
         options: genders.map((g) => ({ value: g, label: labels[g] || g })),
     }]
 }
 
-/** 该词性的「用于筛选变格列」的字段（通常是语法性），没有则返回 null */
+/** 该词性的「用于筛选变化表格子」的字段（通常是语法性），没有则返回 null */
 export function getDeclensionField(doc, pos) {
-    return getFieldDefs(doc, pos).find((f) => f.declensionColumns) || null
+    return getFieldDefs(doc, pos).find((f) => f.declensionCells) || null
 }
 
 /** 词条里某个字段的取值（统一成数组） */
@@ -211,12 +215,14 @@ export function fieldValues(word, key) {
 export function getGenderOptions(doc, pos = 'noun') {
     const tpl = getParadigmTemplate(doc, pos)
     const cols = new Set()
+    const rows = new Set()
     for (const table of tpl?.tables || []) {
         for (const col of table.columns || []) cols.add(String(col.key))
+        for (const row of table.rows || []) rows.add(String(row.key))
     }
     const out = []
     for (const g of ['m', 'f', 'n']) {
-        if ([...cols].some((k) => k.endsWith('_' + g))) out.push(g)
+        if ([...cols].some((k) => k.endsWith('_' + g)) || rows.has(g)) out.push(g)
     }
     return out
 }
@@ -225,6 +231,12 @@ export function getGenderOptions(doc, pos = 'noun') {
 export function genderOfColumn(colKey) {
     const m = /_([mfn])$/.exec(String(colKey || ''))
     return m ? m[1] : ''
+}
+
+/** 行的语法性（行 key 直接是 `m` / `f` / `n`），无性别维度时返回 '' */
+export function genderOfRow(rowKey) {
+    const key = String(rowKey || '')
+    return key === 'm' || key === 'f' || key === 'n' ? key : ''
 }
 
 /** 该 pos 是否位于某 section 之下（section id 为 `{lang}-{pos}` 或以 `{lang}-{pos}-` 开头） */
@@ -259,7 +271,7 @@ export function collectInflectAnchors(doc, lang, pos) {
         if (section.inflect) {
             out.push({
                 id: section.id,
-                label: section.title || section.id,
+                label: section.anchorLabel || section.title || section.id,
                 short: shortLabel(section.title || section.id),
                 kind: section.inflect
             })
@@ -268,8 +280,9 @@ export function collectInflectAnchors(doc, lang, pos) {
             if (!item || !item.id || !item.inflect) continue
             out.push({
                 id: item.id,
-                label: item.title || item.id,
-                short: item.title || item.id,
+                // anchorLabel：下拉里的名字可以和语法页的条目标题不同（法语/德语代词按类别归并）
+                label: item.anchorLabel || item.title || item.id,
+                short: item.anchorLabel || item.title || item.id,
                 kind: item.inflect,
                 // 重名时的退路（内部用，不对外）
                 fullLabel: `${section.title || section.id} · ${item.title || item.id}`

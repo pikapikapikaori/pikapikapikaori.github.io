@@ -15,6 +15,7 @@ import { createEditableInput } from './editable-input.js'
  *   onGrammarRef(grammarRef)
  *   editable    { onChange(rowKey, colKey, value) }  仅 mode='edit' 时使用
  *   hideColumns string[]  不渲染的列（如名词非对应性别 sg_m/pl_m）
+ *   hideRows    string[]  不渲染的行（如名词非对应性别 m / f）
  *   isDisabledCell (row, col) => boolean  该格形式不存在：灰底 + 禁用
  *
  * @returns {HTMLElement|null}
@@ -31,15 +32,12 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
         onGrammarRef = null,
         editable = null,
         hideColumns = [],
+        hideRows = [],
         isDisabledCell = null
     } = options
 
     const data = tableData && typeof tableData === 'object' ? tableData : {}
     const isEdit = mode === 'edit'
-
-    const hidden = new Set(hideColumns || [])
-    const columns = tableTpl.columns.filter((c) => !hidden.has(c.key))
-    if (columns.length === 0) return null
 
     const rowDisabled = (row, colKey) => {
         if (Array.isArray(row.disabled) && row.disabled.includes(colKey)) return true
@@ -49,10 +47,20 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
         return false
     }
 
+    const hidden = new Set(hideColumns || [])
+    const hiddenRows = new Set(hideRows || [])
+    const visibleRows = tableTpl.rows.filter((r) => !hiddenRows.has(r.key))
+
+    // 所有行都标了 disabled 的列（如法语的命令式没有 1sg / 3sg / 3pl）整列不渲染
+    const disabledEverywhere = (colKey) => visibleRows.length > 0
+        && visibleRows.every((r) => rowDisabled(r, colKey))
+    const columns = tableTpl.columns.filter((c) => !hidden.has(c.key) && !disabledEverywhere(c.key))
+    if (columns.length === 0) return null
+
     // 视图模式：只保留有内容的行
     const rows = isEdit
-        ? tableTpl.rows
-        : tableTpl.rows.filter((r) => {
+        ? visibleRows
+        : visibleRows.filter((r) => {
             const cells = data[r.key]
             if (!cells) return false
             return columns.some((c) => {

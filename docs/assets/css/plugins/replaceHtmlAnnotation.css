@@ -382,10 +382,9 @@
 
 .multi-images-container-section>p>img {
     /* Just in case there are inline attributes */
-    width: 100% !important;
-    height: auto !important;
-
-    margin: 0.3125rem 0 0 !important;
+    width: 100%;
+    height: auto;
+    margin: 0.3125rem 0 0;
 }
 
 @media screen and (max-width: 1000px) {

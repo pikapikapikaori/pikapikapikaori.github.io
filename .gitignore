@@ -7,7 +7,6 @@
 **/skills-lock.json
 
 # editor directories and files
-.editorconfig
 .idea/
 .vscode/
 *.suo

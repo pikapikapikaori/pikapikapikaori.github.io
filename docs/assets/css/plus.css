@@ -186,3 +186,11 @@ pre .docsify-copy-code-button span {
 .mermaid button svg {
     color: var(--theme-color);
 }
+
+/* --- Utils --- */
+body.no-transition,
+body.no-transition *,
+body.no-transition *::before,
+body.no-transition *::after {
+    transition: none !important;
+}

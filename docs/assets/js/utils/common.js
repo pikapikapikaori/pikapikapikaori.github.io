@@ -113,3 +113,27 @@ export function countText(content, options = {}) {
         detail
     }
 }
+
+/**
+ * 临时禁用页面过渡（引用计数，可嵌套）。
+ *
+ * 与 `body.no-transition` 样式配合：需要瞬时生效的样式修改前后成对调用，
+ * 保证这次修改不触发 transition。最后一个 unlock 会强制一次 reflow 再摘类。
+ */
+let noTransitionDepth = 0
+
+export function lockNoTransition() {
+    noTransitionDepth++
+    document.body.classList.add('no-transition')
+}
+
+export function unlockNoTransition() {
+    if (noTransitionDepth === 0) return
+
+    noTransitionDepth--
+
+    if (noTransitionDepth > 0) return
+
+    void document.body.offsetHeight
+    document.body.classList.remove('no-transition')
+}

@@ -1,3 +1,5 @@
+import { lockNoTransition, unlockNoTransition } from '../utils/common.js'
+
 let widgetsOptions = {
     useSwitchMode: true,
     top: 0,
@@ -5,39 +7,63 @@ let widgetsOptions = {
     themes: [
         {
             name: 'default',
-            light: './style/theme/vue.css',
-            dark: './style/theme/dark.css',
-            lightColor: '#ffffff',
-            darkColor: '#3f3f3f',
-            lightThemeColor: '#c7a2ec',
-            darkThemeColor: '#c7a2ec'
+            light: {
+                themeColor: '#c7a2ec',
+                bgColor: '#ffffff',
+                css: './assets/css/theme/vue.css',
+                js: null
+            },
+            dark: {
+                themeColor: '#c7a2ec',
+                bgColor: '#3f3f3f',
+                css: './assets/css/theme/dark.css',
+                js: null
+            }
         },
         {
             name: 'kraft',
-            light: './style/theme/kraft.css',
-            dark: './style/theme/bronze.css',
-            lightColor: '#f4ecd8',
-            darkColor: '#2a1f14',
-            lightThemeColor: '#ecc7a2',
-            darkThemeColor: '#ecc7a2'
+            light: {
+                themeColor: '#ecc7a2',
+                bgColor: '#f4ecd8',
+                css: './assets/css/theme/kraft.css',
+                js: null
+            },
+            dark: {
+                themeColor: '#ecc7a2',
+                bgColor: '#2a1f14',
+                css: './assets/css/theme/bronze.css',
+                js: null
+            }
         },
         {
             name: 'kirby',
-            light: './style/theme/kirby.css',
-            dark: './style/theme/metaknight.css',
-            lightColor: '#ffeef4',
-            darkColor: '#1a2238',
-            lightThemeColor: '#eca2bb',
-            darkThemeColor: '#a2aeec'
+            light: {
+                themeColor: '#eca2bb',
+                bgColor: '#ffeef4',
+                css: './assets/css/theme/kirby.css',
+                js: null
+            },
+            dark: {
+                themeColor: '#a2aeec',
+                bgColor: '#1a2238',
+                css: './assets/css/theme/metaknight.css',
+                js: null
+            }
         },
         {
             name: 'calligraphy',
-            light: './style/theme/calligraphy.css',
-            dark: './style/theme/grid.css',
-            lightColor: '#fbfbf5',
-            darkColor: '#1a2028',
-            lightThemeColor: '#ecc7a2',
-            darkThemeColor: '#a2c7ec'
+            light: {
+                themeColor: '#ecc7a2',
+                bgColor: '#fbfbf5',
+                css: './assets/css/theme/calligraphy.css',
+                js: null
+            },
+            dark: {
+                themeColor: '#a2c7ec',
+                bgColor: '#1a2028',
+                css: './assets/css/theme/grid.css',
+                js: null
+            }
         }
     ]
 }
@@ -250,44 +276,290 @@ function plugin(hook, vm) {
         syncColorPickerActiveBtn(hue)
     }
 
-    let syncThemeColorMeta = function (isDark) {
-        const group = themeState.groups[themeState.themeIndex]
-        const bg = isDark ? group.darkColor : group.lightColor
+    // 主题某一侧的可选项：null、空字符串等空值都视为未配置
+    const isThemeValue = value => Boolean(value)
 
-        if (!bg) return
+    let getThemeGroup = function () {
+        return themeState.groups[themeState.themeIndex]
+    }
+
+    let syncThemeColorMeta = function (bgColor) {
+        if (!isThemeValue(bgColor)) return
 
         let meta = document.querySelector('meta[name="theme-color"]')
         if (!meta) return
 
-        meta.content = bg
+        meta.content = bgColor
     }
 
     function applyThemeColorCss(themeColor) {
+        lockNoTransition()
         document.documentElement.style.setProperty('--theme-color', themeColor)
+        unlockNoTransition()
+    }
+
+    // 等主题 CSS 生效后再跑主题脚本，避免脚本读到上一个主题的 CSS 变量
+    function waitForStylesheet(link) {
+        if (!link || link.disabled || link.getAttribute('href') === 'data:text/css,') {
+            return Promise.resolve()
+        }
+
+        return new Promise(function (resolve) {
+            let isDone = false
+
+            const finish = function () {
+                if (isDone) return
+                isDone = true
+                link.removeEventListener('load', finish)
+                link.removeEventListener('error', finish)
+                resolve()
+            }
+
+            link.addEventListener('load', finish)
+            link.addEventListener('error', finish)
+            setTimeout(finish, 300)
+        })
     }
 
     let applyThemeColor = function () {
-        const isDark = resolveIsDark()
+        const group = getThemeGroup()
+        const side = resolveIsDark() ? group.dark : group.light
         const colorTheme = document.getElementById('theme-color')
 
-        const group = themeState.groups[themeState.themeIndex]
-        const file = isDark ? group.dark : group.light
-        const themeColor = isDark ? group.darkThemeColor : group.lightThemeColor
+        let waits = Promise.resolve()
 
-        if (file) {
+        if (isThemeValue(side.css)) {
             colorTheme.disabled = false
-            colorTheme.href = file
+            if (colorTheme.getAttribute('href') !== side.css) {
+                colorTheme.href = side.css
+                waits = waitForStylesheet(colorTheme)
+            }
         } else {
             colorTheme.disabled = true
             colorTheme.href = 'data:text/css,'
         }
 
-        applyThemeColorCss(themeColor)
+        if (isThemeValue(side.themeColor)) {
+            applyThemeColorCss(side.themeColor)
+            updateColorPickerSlider(side.themeColor)
+        }
 
-        updateColorPickerSlider(themeColor)
         syncThemePickerActiveBtn()
 
-        syncThemeColorMeta(isDark)
+        syncThemeColorMeta(side.bgColor)
+
+        return waits
+    }
+
+    const themeModuleCache = new Map()
+    let themeJsCleanups = []
+    let themeJournal = null
+    let themeRenderToken = 0
+
+    function loadThemeModule(path) {
+        const url = new URL(path, document.baseURI).href
+
+        if (!themeModuleCache.has(url)) {
+            const loading = import(url).catch(function (e) {
+                themeModuleCache.delete(url)
+                throw e
+            })
+            themeModuleCache.set(url, loading)
+        }
+
+        return themeModuleCache.get(url)
+    }
+
+    // 记录主题脚本在 renderTheme 期间对 DOM 的改动，供反向撤销
+    function startDomJournal() {
+        const journal = { records: [], observer: null, styleAfter: new Map(), stopped: false }
+
+        journal.observer = new MutationObserver(function (mutations) {
+            journal.records.push(...mutations)
+        })
+
+        journal.observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeOldValue: true,
+            characterData: true,
+            characterDataOldValue: true
+        })
+
+        return journal
+    }
+
+    function stopDomJournal(journal) {
+        if (!journal || journal.stopped) return
+
+        journal.stopped = true
+
+        // 记录是异步派发的，disconnect 会丢弃未派发的记录，必须先同步取出
+        journal.records.push(...journal.observer.takeRecords())
+
+        // 渲染结束时的 style，用于判断哪些内联属性仍属于主题脚本
+        journal.records.forEach(function (record) {
+            if (record.type === 'attributes' && record.attributeName === 'style') {
+                journal.styleAfter.set(record.target, record.target.getAttribute('style'))
+            }
+        })
+
+        journal.observer.disconnect()
+    }
+
+    // 只回滚仍未被动过的内联样式属性
+    function restoreStyleDelta(element, oldValue, afterValue) {
+        if (!element.isConnected || !afterValue) return
+
+        const oldStyle = document.createElement('div').style
+        oldStyle.cssText = oldValue || ''
+        const afterStyle = document.createElement('div').style
+        afterStyle.cssText = afterValue
+
+        Array.from(afterStyle).forEach(function (name) {
+            const afterProp = afterStyle.getPropertyValue(name)
+
+            if (element.style.getPropertyValue(name) !== afterProp) return
+
+            const oldProp = oldStyle.getPropertyValue(name)
+            if (oldProp) element.style.setProperty(name, oldProp, oldStyle.getPropertyPriority(name))
+            else element.style.removeProperty(name)
+        })
+
+        Array.from(oldStyle).forEach(function (name) {
+            if (afterStyle.getPropertyValue(name) || element.style.getPropertyValue(name)) return
+
+            element.style.setProperty(name, oldStyle.getPropertyValue(name), oldStyle.getPropertyPriority(name))
+        })
+    }
+
+    function revertDomJournal(journal) {
+        if (!journal) return
+
+        stopDomJournal(journal)
+
+        const firstStyleRecords = new Map()
+        journal.records.forEach(function (record) {
+            if (record.type === 'attributes' && record.attributeName === 'style' && !firstStyleRecords.has(record.target)) {
+                firstStyleRecords.set(record.target, record)
+            }
+        })
+
+        const revertedStyles = new Set()
+
+        for (let i = journal.records.length - 1; i >= 0; i--) {
+            const record = journal.records[i]
+
+            try {
+                if (record.type === 'attributes') {
+                    if (!record.target.isConnected) continue
+
+                    if (record.attributeName === 'style') {
+                        if (revertedStyles.has(record.target)) continue
+                        revertedStyles.add(record.target)
+
+                        restoreStyleDelta(
+                            record.target,
+                            firstStyleRecords.get(record.target).oldValue,
+                            journal.styleAfter.get(record.target)
+                        )
+                    } else if (record.oldValue === null) record.target.removeAttribute(record.attributeName)
+                    else record.target.setAttribute(record.attributeName, record.oldValue)
+                } else if (record.type === 'characterData') {
+                    if (!record.target.isConnected) continue
+
+                    record.target.data = record.oldValue
+                } else {
+                    record.addedNodes.forEach(function (node) {
+                        if (node.isConnected) node.remove()
+                    })
+
+                    record.removedNodes.forEach(function (node) {
+                        const parent = record.target
+                        if (!parent.isConnected || node.isConnected) return
+
+                        const next = record.nextSibling
+                        const prev = record.previousSibling
+
+                        if (next && next.parentNode === parent) parent.insertBefore(node, next)
+                        else if (prev && prev.parentNode === parent) parent.insertBefore(node, prev.nextSibling)
+                        else if (!next && !prev && !parent.childNodes.length) parent.appendChild(node)
+                    })
+                }
+            } catch (e) {
+                console.warn('[widgets] 撤销主题脚本的 DOM 改动失败', e)
+            }
+        }
+    }
+
+    function themeCleanup() {
+        themeRenderToken++
+
+        themeJsCleanups.forEach(function (cleanup) {
+            try {
+                cleanup()
+            } catch (e) {
+                console.warn('[widgets] 主题脚本的清理任务执行失败', e)
+            }
+        })
+        themeJsCleanups = []
+
+        revertDomJournal(themeJournal)
+        themeJournal = null
+    }
+
+    async function renderTheme() {
+        themeCleanup()
+
+        const token = themeRenderToken
+        const group = getThemeGroup()
+        const isDark = resolveIsDark()
+        const side = isDark ? group.dark : group.light
+
+        if (!side || !isThemeValue(side.js)) return
+
+        let themeModule
+
+        try {
+            themeModule = await loadThemeModule(side.js)
+        } catch (e) {
+            console.warn('[widgets] 主题脚本加载失败：' + side.js, e)
+            return
+        }
+
+        if (token !== themeRenderToken) return
+
+        if (typeof themeModule.renderTheme !== 'function') {
+            console.warn('[widgets] 主题脚本未导出 renderTheme()：' + side.js)
+            return
+        }
+
+        themeJournal = startDomJournal()
+
+        try {
+            themeModule.renderTheme({
+                isDark: isDark,
+                name: group.name,
+                onCleanup: function (cleanup) {
+                    if (typeof cleanup === 'function') themeJsCleanups.push(cleanup)
+                }
+            })
+        } catch (e) {
+            console.warn('[widgets] 主题脚本执行失败：' + side.js, e)
+        } finally {
+            stopDomJournal(themeJournal)
+        }
+    }
+
+    let applyTheme = function () {
+        themeCleanup()
+        lockNoTransition()
+
+        return Promise.resolve()
+            .then(applyThemeColor)
+            .then(renderTheme)
+            .finally(unlockNoTransition)
     }
 
     let syncThemePickerActiveBtn = function () {
@@ -354,16 +626,18 @@ function plugin(hook, vm) {
             switchSpan.innerHTML = iconMap[themeState.modes[themeState.modeIndex]]
         }
 
-        let renderTheme = function () {
-            applyThemeColor()
+        let renderSwitchMode = function () {
+            applyTheme()
             updateIcon()
         }
 
-        renderTheme()
+        // 首屏只应用样式，脚本交给首次 doneEach
+        applyThemeColor()
+        updateIcon()
 
         let onPreferredModeChange = function () {
             if (themeState.modeIndex === 0) {
-                renderTheme()
+                renderSwitchMode()
             }
         }
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', onPreferredModeChange)
@@ -371,7 +645,7 @@ function plugin(hook, vm) {
         switchSpan.onclick = function () {
 
             themeState.modeIndex = (themeState.modeIndex + 1) % themeState.modes.length
-            renderTheme()
+            renderSwitchMode()
         }
 
         widgetsContainer.appendChild(switchSpan)
@@ -399,11 +673,11 @@ function plugin(hook, vm) {
             btnDiv.className = 'theme-picker-preset-color-btn-div'
             btnDiv.dataset.theme = group.name
             btnDiv.dataset.themeIndex = index
-            btnDiv.style.setProperty('--light-color', group.lightColor)
-            btnDiv.style.setProperty('--dark-color', group.darkColor)
+            btnDiv.style.setProperty('--light-color', group.light.bgColor)
+            btnDiv.style.setProperty('--dark-color', group.dark.bgColor)
 
-            let l = group.lightThemeColor
-            let d = group.darkThemeColor
+            let l = group.light.themeColor
+            let d = group.dark.themeColor
             let lSoft = l + '66'
             let dSoft = d + '66'
 
@@ -420,7 +694,7 @@ function plugin(hook, vm) {
 
             btnDiv.onclick = function () {
                 themeState.themeIndex = index
-                applyThemeColor()
+                applyTheme()
             }
 
             presetListDiv.appendChild(btnDiv)
@@ -459,6 +733,24 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(colorPickerPopupSpan)
 
         let colorPickerSlider = colorPickerPopupDiv.getElementsByClassName('color-picker-slider')[0]
+        let isDraggingColorPicker = false
+
+        let endColorPickerDrag = function () {
+            if (!isDraggingColorPicker) return
+
+            isDraggingColorPicker = false
+            unlockNoTransition()
+        }
+
+        colorPickerSlider.addEventListener('pointerdown', function () {
+            if (isDraggingColorPicker) return
+
+            isDraggingColorPicker = true
+            lockNoTransition()
+        })
+        window.addEventListener('pointerup', endColorPickerDrag)
+        window.addEventListener('pointercancel', endColorPickerDrag)
+        colorPickerSlider.addEventListener('change', endColorPickerDrag)
 
         colorPickerSlider.oninput = function () {
             let hue = Number(this.value)
@@ -691,6 +983,13 @@ function plugin(hook, vm) {
         initProgress()
         initScrollToTop()
 
+    })
+
+    hook.doneEach(function () {
+        if (!widgetsContainer) return
+
+        // 路由切换：清理旧主题脚本后对新页面重跑
+        renderTheme()
     })
 }
 

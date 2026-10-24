@@ -1,5 +1,5 @@
 import pagesData from '../config/tocdata.json.js'
-import { protectCodeBlocks } from '../utils/common.js'
+import { protectCodeBlocks, lockNoTransition, unlockNoTransition } from '../utils/common.js'
 
 let tocPageOptions = {
     recentAmount: 8,
@@ -198,10 +198,9 @@ function plugin(hook, vm) {
 
         function onScreenWidthChange(e) {
             if (!hasTocs) return
-            document.body.classList.add('no-transition')
+            lockNoTransition()
             document.body.classList.toggle('close', !e.matches)
-            void document.body.offsetHeight
-            document.body.classList.remove('no-transition')
+            unlockNoTransition()
         }
     })
 

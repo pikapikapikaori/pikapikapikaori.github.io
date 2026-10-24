@@ -225,148 +225,244 @@
             themes: [
                 {
                     name: 'swiss',
-                    light: './assets/css/theme/exper/swiss.css',
-                    dark: './assets/css/theme/exper/swiss.css',
-                    lightColor: '#100e17',
-                    darkColor: '#100e17',
-                    lightThemeColor: '#eca2a8',
-                    darkThemeColor: '#eca2a8'
+                    light: {
+                        themeColor: '#eca2a8',
+                        bgColor: '#100e17',
+                        css: './assets/css/theme/exper/swiss.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#eca2a8',
+                        bgColor: '#100e17',
+                        css: './assets/css/theme/exper/swiss.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'card',
-                    light: './assets/css/theme/exper/card.css',
-                    dark: './assets/css/theme/exper/card.css',
-                    lightColor: '#100e17',
-                    darkColor: '#100e17',
-                    lightThemeColor: '#c7a2ec',
-                    darkThemeColor: '#c7a2ec'
+                    light: {
+                        themeColor: '#c7a2ec',
+                        bgColor: '#100e17',
+                        css: './assets/css/theme/exper/card.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#c7a2ec',
+                        bgColor: '#100e17',
+                        css: './assets/css/theme/exper/card.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'default',
-                    light: './assets/css/theme/vue.css',
-                    dark: './assets/css/theme/dark.css',
-                    lightColor: '#ffffff',
-                    darkColor: '#3f3f3f',
-                    lightThemeColor: '#c7a2ec',
-                    darkThemeColor: '#c7a2ec'
+                    light: {
+                        themeColor: '#c7a2ec',
+                        bgColor: '#ffffff',
+                        css: './assets/css/theme/vue.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#c7a2ec',
+                        bgColor: '#3f3f3f',
+                        css: './assets/css/theme/dark.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'lavender',
-                    light: './assets/css/theme/lavender.css',
-                    dark: './assets/css/theme/lavandula.css',
-                    lightColor: '#f5f0fa',
-                    darkColor: '#1f1830',
-                    lightThemeColor: '#cda2ec',
-                    darkThemeColor: '#cda2ec'
+                    light: {
+                        themeColor: '#cda2ec',
+                        bgColor: '#f5f0fa',
+                        css: './assets/css/theme/lavender.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#cda2ec',
+                        bgColor: '#1f1830',
+                        css: './assets/css/theme/lavandula.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'kraft',
-                    light: './assets/css/theme/kraft.css',
-                    dark: './assets/css/theme/bronze.css',
-                    lightColor: '#f4ecd8',
-                    darkColor: '#2a1f14',
-                    lightThemeColor: '#ecc7a2',
-                    darkThemeColor: '#ecc7a2'
+                    light: {
+                        themeColor: '#ecc7a2',
+                        bgColor: '#f4ecd8',
+                        css: './assets/css/theme/kraft.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#ecc7a2',
+                        bgColor: '#2a1f14',
+                        css: './assets/css/theme/bronze.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'matcha',
-                    light: './assets/css/theme/matcha.css',
-                    dark: './assets/css/theme/library.css',
-                    lightColor: '#e3efd1',
-                    darkColor: '#1e3328',
-                    lightThemeColor: '#c7eca2',
-                    darkThemeColor: '#c7eca2'
+                    light: {
+                        themeColor: '#c7eca2',
+                        bgColor: '#e3efd1',
+                        css: './assets/css/theme/matcha.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#c7eca2',
+                        bgColor: '#1e3328',
+                        css: './assets/css/theme/library.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'kirby',
-                    light: './assets/css/theme/kirby.css',
-                    dark: './assets/css/theme/metaknight.css',
-                    lightColor: '#ffeef4',
-                    darkColor: '#1a2238',
-                    lightThemeColor: '#eca2bb',
-                    darkThemeColor: '#a2aeec'
+                    light: {
+                        themeColor: '#eca2bb',
+                        bgColor: '#ffeef4',
+                        css: './assets/css/theme/kirby.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#a2aeec',
+                        bgColor: '#1a2238',
+                        css: './assets/css/theme/metaknight.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'catppuccin',
-                    light: './assets/css/theme/latte.css',
-                    dark: './assets/css/theme/catppuccin.css',
-                    lightColor: '#eff1f5',
-                    darkColor: '#1e1e2e',
-                    lightThemeColor: '#c1a2ec',
-                    darkThemeColor: '#c1a2ec'
+                    light: {
+                        themeColor: '#c1a2ec',
+                        bgColor: '#eff1f5',
+                        css: './assets/css/theme/latte.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#c1a2ec',
+                        bgColor: '#1e1e2e',
+                        css: './assets/css/theme/catppuccin.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'gold',
-                    light: './assets/css/theme/whitegold.css',
-                    dark: './assets/css/theme/darkgold.css',
-                    lightColor: '#f5f0e8',
-                    darkColor: '#0a0a0a',
-                    lightThemeColor: '#ecdaa2',
-                    darkThemeColor: '#ecdaa2'
+                    light: {
+                        themeColor: '#ecdaa2',
+                        bgColor: '#f5f0e8',
+                        css: './assets/css/theme/whitegold.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#ecdaa2',
+                        bgColor: '#0a0a0a',
+                        css: './assets/css/theme/darkgold.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'calligraphy',
-                    light: './assets/css/theme/calligraphy.css',
-                    dark: './assets/css/theme/grid.css',
-                    lightColor: '#fbfbf5',
-                    darkColor: '#1a2028',
-                    lightThemeColor: '#ecc7a2',
-                    darkThemeColor: '#a2c7ec'
+                    light: {
+                        themeColor: '#ecc7a2',
+                        bgColor: '#fbfbf5',
+                        css: './assets/css/theme/calligraphy.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#a2c7ec',
+                        bgColor: '#1a2028',
+                        css: './assets/css/theme/grid.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'typography',
-                    light: './assets/css/theme/typography.css',
-                    dark: './assets/css/theme/dot.css',
-                    lightColor: '#fafaf5',
-                    darkColor: '#1e2128',
-                    lightThemeColor: '#ecc7a2',
-                    darkThemeColor: '#a2c7ec'
+                    light: {
+                        themeColor: '#ecc7a2',
+                        bgColor: '#fafaf5',
+                        css: './assets/css/theme/typography.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#a2c7ec',
+                        bgColor: '#1e2128',
+                        css: './assets/css/theme/dot.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'misty',
-                    light: './assets/css/theme/misty.css',
-                    dark: './assets/css/theme/midnight.css',
-                    lightColor: '#fbfbf5',
-                    darkColor: '#14171c',
-                    lightThemeColor: '#a2d9ec',
-                    darkThemeColor: '#a2d9ec'
+                    light: {
+                        themeColor: '#a2d9ec',
+                        bgColor: '#fbfbf5',
+                        css: './assets/css/theme/misty.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#a2d9ec',
+                        bgColor: '#14171c',
+                        css: './assets/css/theme/midnight.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'sunlit',
-                    light: './assets/css/theme/sunlit.css',
-                    dark: './assets/css/theme/candlelit.css',
-                    lightColor: '#faf6ee',
-                    darkColor: '#1a1614',
-                    lightThemeColor: '#eca2ae',
-                    darkThemeColor: '#eca2ae'
+                    light: {
+                        themeColor: '#eca2ae',
+                        bgColor: '#faf6ee',
+                        css: './assets/css/theme/sunlit.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#eca2ae',
+                        bgColor: '#1a1614',
+                        css: './assets/css/theme/candlelit.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'linen',
-                    light: './assets/css/theme/linen.css',
-                    dark: './assets/css/theme/weave.css',
-                    lightColor: '#f7f3ec',
-                    darkColor: '#18150f',
-                    lightThemeColor: '#eca2ae',
-                    darkThemeColor: '#eca2ae'
+                    light: {
+                        themeColor: '#eca2ae',
+                        bgColor: '#f7f3ec',
+                        css: './assets/css/theme/linen.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#eca2ae',
+                        bgColor: '#18150f',
+                        css: './assets/css/theme/weave.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'cross',
-                    light: './assets/css/theme/sky.css',
-                    dark: './assets/css/theme/star.css',
-                    lightColor: '#f7fafc',
-                    darkColor: '#1e2128',
-                    lightThemeColor: '#d3a2ec',
-                    darkThemeColor: '#a2d3ec'
+                    light: {
+                        themeColor: '#d3a2ec',
+                        bgColor: '#f7fafc',
+                        css: './assets/css/theme/sky.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#a2d3ec',
+                        bgColor: '#1e2128',
+                        css: './assets/css/theme/star.css',
+                        js: null
+                    }
                 },
                 {
                     name: 'haunted',
-                    light: './assets/css/theme/ghost.css',
-                    dark: './assets/css/theme/haunted.css',
-                    lightColor: '#faf8fd',
-                    darkColor: '#100e17',
-                    lightThemeColor: '#ecc1a2',
-                    darkThemeColor: '#ecc1a2'
-                },
+                    light: {
+                        themeColor: '#ecc1a2',
+                        bgColor: '#faf8fd',
+                        css: './assets/css/theme/ghost.css',
+                        js: null
+                    },
+                    dark: {
+                        themeColor: '#ecc1a2',
+                        bgColor: '#100e17',
+                        css: './assets/css/theme/haunted.css',
+                        js: null
+                    }
+                }
             ]
         },
 
@@ -383,7 +479,7 @@
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
-                rss: './assets/resources/meta/pikapikapi-blog-rss.atom'
+                feed: './assets/resources/meta/feed.atom'
             },
             tags: [
                 /* Brief Comments */
@@ -549,7 +645,7 @@
                 {
                     type: 'entire',
                     tag: 'about-page-links',
-                    entireHtml: '<div class="main-page-about-me-links"><a href="{html_replace-link_github}" target="_blank" rel="noopener">{html_replace-icon_github}</a><a href="{html_replace-link_email}" target="_blank" rel="noopener">{html_replace-icon_email}</a><a href="{html_replace-link_rss}" target="_blank" rel="noopener">{html_replace-icon_rss}</a></div>'
+                    entireHtml: '<div class="main-page-about-me-links"><a href="{html_replace-link_github}" target="_blank" rel="noopener">{html_replace-icon_github}</a><a href="{html_replace-link_email}" target="_blank" rel="noopener">{html_replace-icon_email}</a><a href="{html_replace-link_feed}" target="_blank" rel="noopener">{html_replace-icon_feed}</a></div>'
                 },
 
                 /* Multiple Image Container */

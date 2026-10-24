@@ -1,0 +1,96 @@
+.shelf-photo .shelf-sticky {
+    padding: 0;
+    justify-content: flex-start;
+}
+
+.photo-stage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 6rem 1rem 5rem;
+    pointer-events: none;
+}
+
+.photo-stack {
+    display: grid;
+    place-items: center;
+    will-change: transform;
+    transform-origin: center center;
+    transform: translate3d(0, 0, 0);
+}
+
+.photo-card {
+    grid-area: 1 / 1;
+
+    --h: clamp(180px, min(34vw, 46svh), 420px);
+    height: var(--h);
+    width: auto;
+
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--g, linear-gradient(140deg, #c9b79c, #7a6a55));
+    box-shadow: 0 26px 70px -34px rgba(28, 26, 23, .65);
+    will-change: transform;
+    transform-origin: center center;
+    backface-visibility: hidden;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-card figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2.2rem 1rem .9rem;
+    font-family: var(--font-ui);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    color: #fff;
+    pointer-events: none;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .55));
+}
+
+.photo-stack:not(.ready) .photo-card {
+    opacity: 0;
+}
+
+.shelf-photo .shelf-head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 6.6rem var(--pad) 0;
+    z-index: 5;
+    pointer-events: none;
+    margin-bottom: 0;
+}
+
+.shelf-photo .rail-progress {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 2.2rem;
+    margin: 0;
+}
+
+@media (max-width: 720px) {
+    .shelf-photo .shelf-sticky {
+        padding: 0;
+    }
+
+    .shelf-photo .shelf-head {
+        padding-top: 5.6rem;
+    }
+
+    .photo-stage {
+        padding: 4.5rem .6rem 4rem;
+    }
+}

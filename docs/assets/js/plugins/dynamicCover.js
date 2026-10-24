@@ -13,7 +13,6 @@ function plugin(hook, vm) {
     const fadeMultiplier = 3   // 淡入淡出 = 3 个基准单位
     const intervalMultiplier = 8   // 轮播间隔 = 8 个基准单位
 
-    // 从 CSS 变量读取时长并解析成毫秒
     function getDurationMs(varName, fallbackMs) {
         const raw = getComputedStyle(document.documentElement)
             .getPropertyValue(varName)
@@ -29,7 +28,6 @@ function plugin(hook, vm) {
     let coverTimer = null
 
     hook.doneEach(function () {
-        // 清理上一次的定时器
         if (coverTimer !== null) {
             clearInterval(coverTimer)
             coverTimer = null
@@ -38,7 +36,6 @@ function plugin(hook, vm) {
         const cover = document.getElementsByClassName('cover')[0]
         if (!cover) return
 
-        // 从 CSS 变量读取基准时长
         const baseMs = getDurationMs('--global-transition-duration-slow', 1000)
         const fadeDurationMs = fadeMultiplier * baseMs
         const intervalMs = intervalMultiplier * baseMs

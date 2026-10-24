@@ -30,7 +30,6 @@ let gitalkWithFooterOptions = {
     },
 }
 
-// Docsify plugin functions
 function plugin(hook, vm) {
     const pluginIdentifier = 'gitalk_footer'
 
@@ -105,7 +104,6 @@ function plugin(hook, vm) {
     })
 }
 
-// Docsify plugin options
 window.$docsify['gitalkWithFooter'] = Object.assign(
     gitalkWithFooterOptions,
     window.$docsify['gitalkWithFooter']

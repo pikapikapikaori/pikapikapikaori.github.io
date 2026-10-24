@@ -1,4 +1,5 @@
 import { calLocalized } from '../utils/localization.js'
+import { countText } from '../utils/common.js'
 
 let countWordsOptions = {
     countable: true,
@@ -12,32 +13,27 @@ let countWordsOptions = {
     isExpected: true,
 }
 
-// Docsify plugin functions
 function plugin(hook, vm) {
     if (!countWordsOptions.countable) {
         return
     }
-    let wordsCount
+    let wordsCount, roughTime
 
     hook.beforeEach(function (content) {
-        // Match regex every time you start parsing .md
-        const matches = content.match(
-            /([\u0800-\u4e00]+?|[\u4e00-\u9fa5]+?|[a-zA-Z0-9]+)/g
-        )
-        wordsCount = matches ? matches.length : 0
+        const result = countText(content)
+        wordsCount = result.total.count
+        roughTime = Math.ceil(result.total.time)
         return content
     })
     hook.doneEach(function () {
         let tempLocalization = calLocalized(countWordsOptions.localization, undefined)
 
-        // Support localization
         let str = wordsCount + ' ' + tempLocalization.words
-        let readTime = Math.ceil(wordsCount / 400) + ' ' + tempLocalization.minute
+        let readTime = roughTime + ' ' + tempLocalization.minute
 
         document.getElementById('count-words-block-span').innerText = str.concat(' | ').concat(countWordsOptions.isExpected ? readTime : '')
     })
     hook.afterEach(function (html, next) {
-        // add html string
         next(
             `
         ${countWordsOptions.position === 'bottom' ? html : ''}
@@ -54,7 +50,6 @@ function plugin(hook, vm) {
     })
 }
 
-// Docsify plugin options
 window.$docsify['countWords'] = Object.assign(
     countWordsOptions,
     window.$docsify['countWords']

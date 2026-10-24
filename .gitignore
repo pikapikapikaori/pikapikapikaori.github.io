@@ -1,10 +1,14 @@
 # macos
 **/.DS_Store
 
+# agents
+
+.agents/
+**/skills-lock.json
+
 # editor directories and files
-.editorconfig
-.idea
-.vscode
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
@@ -12,25 +16,28 @@
 *.sw?
 
 # node.js
-**/node_modules
+**/node_modules/
 **/package-lock.json
 **/yarn.lock
 
 # python
-**/.venv
+**/.venv/
 
 # local env files
 .env.local
 .env.*.local
 
 # local dev tools
-lib
+lib/
 
-# hexo
+
+# pages
+
+# hexo page
 docs/pages/hexo/**/Thumbs.db
 docs/pages/hexo/**/db.json
 docs/pages/hexo/**/*.log
 docs/pages/hexo/**/.deploy*/
 
-# bgm-data
+# bgm-takeout page
 docs/**/bgm-data/*.jsonlines

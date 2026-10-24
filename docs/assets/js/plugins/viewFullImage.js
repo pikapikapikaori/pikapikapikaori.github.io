@@ -1,4 +1,3 @@
-// Docsify plugin functions
 function plugin(hook, vm) {
 
     let curImg = undefined

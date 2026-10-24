@@ -11,7 +11,9 @@ import {
 } from '../services/word-service.js'
 import { listByLanguage, deleteWord } from '../store/word-store.js'
 import { POS_LIST, PAGE_SIZE_OPTIONS, posOptions } from '../config/config.js'
-import { createWordCard } from '../components/word-card.js'
+import { openCardOverlay, closeCardOverlay } from '../components/card-overlay.js'
+import { openSelectMenu } from '../components/select-menu.js'
+import { formatRelative, formatDate } from '../utils/date.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
@@ -51,7 +53,7 @@ export default {
         }
 
         /* ---------- 容器 ---------- */
-        const head = h('div', { class: 'page-head' })
+        const head = h('div', { class: 'page-head page-head--display' })
         const toolbar = h('div', { class: 'toolbar' })
         const listWrap = h('div', { class: 'word-list' })
         const pagWrap = h('div', {})
@@ -106,7 +108,7 @@ export default {
         function renderHead() {
             replace(head,
                 h('div', {},
-                    h('div', { class: 'page-head__title' },
+                    h('h1', { class: 'page-head__title' },
                         bdiNode(language.native, lang),
                         ' · ',
                         language.name
@@ -122,16 +124,33 @@ export default {
                         class: 'btn', type: 'button',
                         onclick: () => location.hash = `#/lang/${lang}/review`
                     }, '复习'),
-                    h('button', {
-                        class: 'btn btn--primary', type: 'button',
-                        onclick: () => location.hash = `#/lang/${lang}/words/new`
-                    }, '＋ 添加生词'),
-                    h('button', {
-                        class: 'btn btn--primary', type: 'button',
-                        onclick: () => doImport()
-                    }, '＋ 导入生词')
+                    h('div', { class: 'split-btn' },
+                        h('button', {
+                            class: 'btn btn--primary split-btn__main', type: 'button',
+                            onclick: () => goNew()
+                        }, '＋ 添加生词'),
+                        h('button', {
+                            class: 'btn btn--primary split-btn__caret', type: 'button',
+                            'aria-haspopup': 'menu',
+                            'aria-expanded': 'false',
+                            'aria-label': '更多添加方式',
+                            onclick: (e) => openSelectMenu({
+                                anchor: e.currentTarget,
+                                owner: e.currentTarget,
+                                items: [
+                                    { value: 'manual', label: '手动添加' },
+                                    { value: 'import', label: '从 JSON 导入' }
+                                ],
+                                onPick: (v) => { if (v === 'import') doImport(); else goNew() }
+                            })
+                        }, '▾')
+                    )
                 )
             )
+        }
+
+        function goNew() {
+            location.hash = `#/lang/${lang}/words/new`
         }
 
         function doImport() {
@@ -333,8 +352,78 @@ export default {
             }
 
             const frag = document.createDocumentFragment()
+            frag.appendChild(h('div', { class: 'word-list__head' },
+                h('span', {}, '词条'),
+                h('span', {}, '掌握度'),
+                h('span', {}, '添加'),
+                h('span', {})
+            ))
             for (const w of result.items) {
-                frag.appendChild(createWordCard(w, {
+                frag.appendChild(renderRow(w))
+            }
+            listWrap.appendChild(frag)
+        }
+
+        /** 掌握度：五格刻度 */
+        function masteryTicks(level) {
+            const n = Math.max(0, Math.min(5, Number(level) || 0))
+            return h('div', {
+                class: 'word-row__mastery',
+                title: `掌握度 ${n} / 5`,
+                'aria-label': `掌握度 ${n} / 5`
+            },
+            ...Array.from({ length: 5 }, (_, i) =>
+                h('span', { class: 'word-row__tick' + (i < n ? ' word-row__tick--on' : '') })
+            )
+            )
+        }
+
+        /** 一行一个词：只给词形、掌握度、时间。含义要打开词卡才看得到。 */
+        function renderRow(w) {
+            const row = h('div', {
+                class: 'word-row',
+                dataset: { wordId: w.id },
+                role: 'button',
+                tabindex: '0',
+                onclick: openDetail,
+                onkeydown: (e) => {
+                    if (e.target !== row) return
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        openDetail()
+                    }
+                }
+            },
+            h('div', { class: 'word-row__main' },
+                h('div', { class: 'word-row__lemma' }, bdiNode(w.lemma, lang)),
+                w.tags && w.tags.length
+                    ? h('div', { class: 'word-row__tags' },
+                        ...w.tags.slice(0, 3).map((t) => h('span', { class: 'word-row__tag' }, t)),
+                        w.tags.length > 3
+                            ? h('span', { class: 'word-row__tag word-row__tag--more' }, `+${w.tags.length - 3}`)
+                            : null
+                    )
+                    : null
+            ),
+            masteryTicks(w.mastery),
+            h('div', { class: 'word-row__date', title: formatDate(w.addedAt) },
+                formatRelative(w.addedAt)),
+            h('div', { class: 'word-row__actions' },
+                h('button', {
+                    class: 'btn btn--sm btn--ghost',
+                    type: 'button',
+                    onclick: (e) => { e.stopPropagation(); onEdit(w) }
+                }, '编辑'),
+                h('button', {
+                    class: 'btn btn--sm btn--ghost word-row__delete',
+                    type: 'button',
+                    onclick: (e) => { e.stopPropagation(); onDelete(w) }
+                }, '删除')
+            )
+            )
+
+            function openDetail() {
+                openCardOverlay(w, {
                     language: lang,
                     paradigmTpl: paradigmTplFor(w.pos),
                     partLabels: partLabelsFor(w),
@@ -342,32 +431,37 @@ export default {
                     resolvePosRef,
                     resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
                     onDerivativeClick: (target) => {
+                        closeCardOverlay()
                         focusDerivative(target).catch((err) => {
                             toast.error(`跳转失败：${err.message}`)
                         })
                     },
-                    onEdit: (word) => {
-                        location.hash = `#/lang/${lang}/words/${word.id}`
-                    },
-                    onDelete: async (word) => {
-                        const ok = await confirmModal({
-                            title: '删除词条',
-                            message: `确定删除「${word.lemma}」？`,
-                            confirmLabel: '删除',
-                            danger: true
-                        })
-                        if (!ok) return
-                        await deleteWord(word.id)
-                        toast.success('已删除')
-                        await refreshCache()
-                        refresh()
-                    },
                     onGrammarRef: (ref) => {
+                        closeCardOverlay()
                         location.hash = `#/grammar/${lang}#${ref}`
                     }
-                }))
+                })
             }
-            listWrap.appendChild(frag)
+
+            return row
+        }
+
+        function onEdit(word) {
+            location.hash = `#/lang/${lang}/words/${word.id}`
+        }
+
+        async function onDelete(word) {
+            const ok = await confirmModal({
+                title: '删除词条',
+                message: `确定删除「${word.lemma}」？`,
+                confirmLabel: '删除',
+                danger: true
+            })
+            if (!ok) return
+            await deleteWord(word.id)
+            toast.success('已删除')
+            await refreshCache()
+            refresh()
         }
 
         /* ---------- 分页 ---------- */

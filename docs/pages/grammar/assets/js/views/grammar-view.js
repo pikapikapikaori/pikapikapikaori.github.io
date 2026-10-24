@@ -70,7 +70,7 @@ function renderNoData(main, lang, language) {
     replace(main,
         h('div', { class: 'page-head' },
             h('div', {},
-                h('div', { class: 'page-head__title' },
+                h('h1', { class: 'page-head__title' },
                     bdiNode(language.native, lang), ' · ', language.name
                 ),
                 h('div', { class: 'page-head__sub' }, '语法速查')
@@ -170,23 +170,43 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     }
 
 
-    // 本页的目录（一级标题 = section）
-    const toc = h('div', { class: 'grammar-nav__group' })
-    toc.appendChild(h('div', { class: 'grammar-nav__title' }, currentGroup ? currentGroup.title : '目录'))
+    // 本页的目录（一级标题 = section）。窄屏收进「本页目录」浮层。
+    const tocCurrent = h('span', { class: 'grammar-toc__current' })
+    const tocDetails = h('details', { class: 'grammar-toc', open: true },
+        h('summary', { class: 'grammar-toc__summary' },
+            h('span', {}, '本页目录'),
+            tocCurrent
+        )
+    )
+    const toc = h('div', { class: 'grammar-nav__group' },
+        h('div', { class: 'grammar-nav__title' }, '本页目录')
+    )
+
+    // 只有一章一节、且节名与章名相同时，目录里不再重复这一条
+    const skipSectionLink = sections.length === 1 && currentGroup
+        && (sections[0].title || sections[0].id) === currentGroup.title
+    const narrowQuery = window.matchMedia('(max-width: 1024px)')
+    function afterTocJump() {
+        if (narrowQuery.matches) tocDetails.open = false
+    }
+
     for (const section of sections) {
         if (!section || !section.id) continue
         allIds.add(section.id)
-        toc.appendChild(h('a', {
-            class: 'grammar-nav__link grammar-nav__link--section',
-            href: `#/grammar/${lang}${groups ? '/' + current : ''}#${section.id}`,
-            dataset: { anchor: section.id },
-            onclick: (e) => {
-                e.preventDefault()
-                ensureRendered(section.id)
-                scrollToAnchor(section.id, lang, true)
-                setActiveNav(section.id)
-            }
-        }, section.title || section.id))
+        if (!skipSectionLink) {
+            toc.appendChild(h('a', {
+                class: 'grammar-nav__link grammar-nav__link--section',
+                href: `#/grammar/${lang}${groups ? '/' + current : ''}#${section.id}`,
+                dataset: { anchor: section.id },
+                onclick: (e) => {
+                    e.preventDefault()
+                    ensureRendered(section.id)
+                    scrollToAnchor(section.id, lang, true)
+                    setActiveNav(section.id)
+                    afterTocJump()
+                }
+            }, section.title || section.id))
+        }
 
         for (const item of section.items || []) {
             if (!item || !item.id) continue
@@ -200,11 +220,19 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
                     ensureRendered(item.id)
                     scrollToAnchor(item.id, lang, true)
                     setActiveNav(item.id)
+                    afterTocJump()
                 }
             }, item.title || item.id))
         }
     }
-    nav.appendChild(toc)
+    tocDetails.appendChild(toc)
+    nav.appendChild(tocDetails)
+
+    function syncTocOpen() {
+        tocDetails.open = !narrowQuery.matches
+    }
+    syncTocOpen()
+    narrowQuery.addEventListener('change', syncTocOpen)
     // 目录里可能直接带原文（如希伯来文条目标题）
     applyBdi(nav, lang)
 
@@ -212,7 +240,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     function fillItem(it, item) {
         if (it.dataset.filled === '1') return
         it.dataset.filled = '1'
-        const tables = createGrammarTables(item.tables || [], lang)
+        const tables = createGrammarTables(item.tables || [], lang, item.title || '')
         if (tables) it.appendChild(tables)
         if (item.notes) {
             it.appendChild(h('div', { class: 'grammar-item__notes' }, htmlFragment(item.notes)))
@@ -232,7 +260,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     sections.forEach((section, index) => {
         if (!section || !section.id) return
         const sec = h('section', { class: 'grammar-section', id: section.id },
-            h('h1', { class: 'grammar-section__title' }, section.title || section.id)
+            h('h2', { class: 'grammar-section__title' }, section.title || section.id)
         )
         if (section.notes) {
             sec.appendChild(h('div', { class: 'grammar-section__notes' }, htmlFragment(section.notes)))
@@ -242,7 +270,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         for (const item of section.items || []) {
             if (!item || !item.id) continue
             const it = h('div', { class: 'grammar-item', id: item.id },
-                h('h2', { class: 'grammar-item__title' }, item.title || item.id)
+                h('h3', { class: 'grammar-item__title' }, item.title || item.id)
             )
             if (anchorSectionIndex < 0 || index <= anchorSectionIndex) fillItem(it, item)
             else lazy.set(it, item)
@@ -282,20 +310,31 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     replace(main,
         h('div', { class: 'page-head' },
             h('div', {},
-                h('div', { class: 'page-head__title' },
+                h('h1', { class: 'page-head__title' },
                     bdiNode(language.native, lang), ' · ', language.name
                 ),
-                h('div', { class: 'page-head__sub' },
-                    currentGroup ? `语法速查 · ${currentGroup.title}` : '语法速查')
+                h('div', { class: 'page-head__sub' }, '语法速查')
             )
         ),
         h('div', { class: 'grammar-layout' }, nav, content)
     )
 
     function setActiveNav(activeId) {
+        let label = ''
         nav.querySelectorAll('.grammar-nav__link').forEach((el) => {
-            el.classList.toggle('grammar-nav__link--active', el.dataset.anchor === activeId)
+            const on = el.dataset.anchor === activeId
+            el.classList.toggle('grammar-nav__link--active', on)
+            if (on) label = el.textContent
         })
+        // 单节章节的节标题没有单独的目录项：落到本章第一个条目上
+        if (!label) {
+            const first = toc.querySelector('.grammar-nav__link')
+            if (first) {
+                first.classList.add('grammar-nav__link--active')
+                label = first.textContent
+            }
+        }
+        tocCurrent.textContent = label
     }
 
     if (anchor && allIds.has(anchor)) {
@@ -312,9 +351,10 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     function syncActiveByScroll() {
         spyFrame = 0
         if (!spyTargets.length) return
-        // 标题的 scroll-margin-top = --h-header + 间距，判定线取同一位置再往下一行
+        // 判定线与锚点的 scroll-margin-top 对齐，跳转后当前条目才会立刻算作「在读」
+        const margin = parseFloat(getComputedStyle(spyTargets[0]).scrollMarginTop)
         const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--h-header')) || 56
-        const offset = header + 24
+        const offset = (Number.isFinite(margin) ? margin : header + 24) + 1
         let active = spyTargets[0].id
         for (const el of spyTargets) {
             if (el.getBoundingClientRect().top - offset > 0) break
@@ -346,6 +386,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     return () => {
         window.removeEventListener('scroll', onScroll)
         window.removeEventListener('resize', onScroll)
+        narrowQuery.removeEventListener('change', syncTocOpen)
         if (heightObserver) heightObserver.disconnect()
         if (spyFrame) cancelAnimationFrame(spyFrame)
         tools.destroy()

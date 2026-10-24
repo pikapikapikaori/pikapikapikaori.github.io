@@ -128,6 +128,7 @@ export const LS_KEYS = {
     theme: 'ln.theme',
     font: 'ln.font.mode',
     fontFamily: 'ln.font.family',
+    fontSize: 'ln.font.size',
 }
 
 /* ---------------- 用户设置默认值 ---------------- */

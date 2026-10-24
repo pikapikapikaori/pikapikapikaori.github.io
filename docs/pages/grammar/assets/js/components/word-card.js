@@ -7,6 +7,7 @@ import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 import { openCardOverlay } from './card-overlay.js'
+import { expandIcon } from './icons.js'
 
 export function createWordCard(word, options = {}) {
     const {
@@ -36,9 +37,8 @@ export function createWordCard(word, options = {}) {
     let activeTable = null
 
     const inner = h('div', { class: 'word-card__inner' })
-    const front = buildFront()
     const back = h('div', { class: 'word-card__face word-card__face--back' })
-    inner.append(front, back)
+    inner.append(buildFront(), back)
 
     const el = h('div', {
         class: 'word-card' + (startFlipped ? ' word-card--flipped' : '')
@@ -102,8 +102,8 @@ export function createWordCard(word, options = {}) {
             top.appendChild(h('div', {}))
         }
 
-        top.appendChild(h('div', { class: 'word-card__count num' },
-            `×${word.encounterCount || 0}`
+        top.appendChild(h('div', { class: 'word-card__count' },
+            `遇到 ${word.encounterCount || 0} 次`
         ))
 
         face.appendChild(top)
@@ -118,7 +118,7 @@ export function createWordCard(word, options = {}) {
         )
         if (word.addedAt) {
             meta.appendChild(h('span', { class: 'num' },
-                new Date(word.addedAt).toLocaleDateString('zh-CN')
+                `加入 ${new Date(word.addedAt).toLocaleDateString('zh-CN')}`
             ))
         }
         center.appendChild(meta)
@@ -217,7 +217,7 @@ export function createWordCard(word, options = {}) {
                     onClose: () => el.classList.remove('word-card--active')
                 })
             }
-        }, '⛶')
+        }, expandIcon())
         )
 
         // 词干（在含义之前）

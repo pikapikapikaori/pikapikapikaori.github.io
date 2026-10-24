@@ -19,6 +19,18 @@ function icon(...children) {
     }, ...children)
 }
 
+/* ---------- 通用 ---------- */
+
+/** 放大 / 展开 */
+export function expandIcon() {
+    return icon(
+        svg('path', { d: 'M9 4H4v5' }),
+        svg('path', { d: 'M15 4h5v5' }),
+        svg('path', { d: 'M20 15v5h-5' }),
+        svg('path', { d: 'M4 15v5h5' })
+    )
+}
+
 /* ---------- 主题 ---------- */
 
 export function themeAutoIcon() {

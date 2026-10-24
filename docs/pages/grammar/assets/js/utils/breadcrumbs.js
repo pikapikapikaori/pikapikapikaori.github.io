@@ -63,19 +63,5 @@ export function applyBreadcrumbs() {
 
     nav.appendChild(trail)
 
-    // 返回上一层级
-    const parent = items[items.length - 2]
-    if (parent && parent.href) {
-        nav.appendChild(h('a', {
-            class: 'page-breadcrumbs__back',
-            href: parent.href,
-            title: `返回 ${parent.label}`,
-            'aria-label': `返回 ${parent.label}`
-        },
-        h('span', { class: 'page-breadcrumbs__back-arrow', 'aria-hidden': 'true' }, '←'),
-        h('span', { class: 'page-breadcrumbs__back-label' }, parent.label)
-        ))
-    }
-
     main.insertBefore(nav, main.firstChild)
 }

@@ -15,6 +15,7 @@ import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
 import { enhanceSelects } from './components/select-menu.js'
 import { createThemeToggle, applyTheme } from './components/theme-toggle.js'
+import { applyFont, applyFontSize, getStoredFontMode, getStoredFontFamily, getStoredFontSize } from './services/font-service.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { loadLanguages } from './data/languages.js'
@@ -201,6 +202,11 @@ async function bootstrap() {
     let theme = DEFAULT_THEME
     try { theme = localStorage.getItem(LS_KEYS.theme) || DEFAULT_THEME } catch { /* ignore */ }
     applyTheme(theme)
+
+    // 字体与字号：设置页的选择存在 localStorage，启动时必须应用，
+    // 否则刷新后界面用默认字体、设置页却显示上次选的，两边对不上。
+    applyFont({ mode: getStoredFontMode(), family: getStoredFontFamily() })
+    applyFontSize(getStoredFontSize())
 
     // 语言元信息（各语言 JSON 顶层；语言选择页需要全部语言的元信息）
     setBootLoaderText('正在加载语言数据…')

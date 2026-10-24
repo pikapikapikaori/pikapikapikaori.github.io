@@ -27,7 +27,6 @@ export function createTabBar({ items, active = null, onChange = null, className 
             'aria-selected': String(it.key === current),
             onclick: () => setActive(it.key)
         },
-        h('span', { class: 'source-tab__dot' }),
         it.label
         )))
     }

@@ -1,6 +1,7 @@
 html {
     font-family: var(--ff-ui);
-    font-size: 16px;
+    /* 全站字号的唯一旋钮（rem 都相对它） */
+    font-size: var(--fs-base);
     line-height: var(--lh-base);
     color: var(--c-fg);
     background: var(--c-bg);
@@ -55,44 +56,69 @@ pre,
     color: var(--c-fg);
 }
 
-/* 语言内容样式：由 lang-* class 指定字体与方向 */
+/* 语言内容样式：字体与「展示字体」都在这里定，全局生效（含语法页、词卡详情）。
+ * 每个 [lang] 同时改写 --ff-display，所以标题 / 词形 / 复习大词
+ * 只要写 font-family: var(--ff-display) 就自动跟着语言走。 */
 [lang="la"] {
-    font-family: "LN LA", var(--ff-content);
+    font-family: var(--ff-la);
+    --ff-display: var(--ff-la);
 }
 
 [lang="grc"] {
-    font-family: "LN GRC", var(--ff-content);
+    font-family: var(--ff-grc);
+    --ff-display: var(--ff-grc);
 }
 
 [lang="he"] {
-    font-family: "LN HE", var(--ff-content);
+    font-family: var(--ff-he);
+    --ff-display: var(--ff-he);
 }
 
 /* 方向不在这里定：原文一律包进 <bdi dir>（见 utils/bdi.js），
    全局 direction: rtl 会把同一格里的中文一起带成 RTL 段落，导致中文被排到原文后面。 */
 
 [lang="sa"] {
-    font-family: "LN SA", "Noto Sans Devanagari", var(--ff-content);
+    font-family: var(--ff-sa);
+    --ff-display: var(--ff-sa);
 }
 
 /* 悉昙文列：字体只覆盖 Siddham 区，天城文 / 拉丁自动回退 */
 [lang="sa-siddham"] {
-    font-family: "LN SIDDHAM", var(--ff-content);
+    font-family: var(--ff-siddham);
+    --ff-display: var(--ff-siddham);
 }
 
 [lang="mnc"] {
-    font-family: "LN MNC", var(--ff-content);
+    font-family: var(--ff-mnc);
+    --ff-display: var(--ff-mnc);
 }
 
 [lang="ja"],
 [lang="zh-cls"] {
-    font-family: "LN ZH-CLS", var(--ff-content);
+    font-family: var(--ff-zh-cls);
+    --ff-display: var(--ff-zh-cls);
 }
 
-[lang="en"],
-[lang="fr"],
+/* 中文（注意：只匹配精确的 zh，别匹配 <html lang="zh-CN">，
+   否则整页中文都会被钉死在这里，设置页换字体就不生效了） */
+[lang="zh"] {
+    font-family: var(--ff-zh);
+    --ff-display: var(--ff-zh);
+}
+
+[lang="en"] {
+    font-family: var(--ff-en);
+    --ff-display: var(--ff-en);
+}
+
+[lang="fr"] {
+    font-family: var(--ff-fr);
+    --ff-display: var(--ff-fr);
+}
+
 [lang="de"] {
-    font-family: var(--ff-content);
+    font-family: var(--ff-de);
+    --ff-display: var(--ff-de);
 }
 
 /*

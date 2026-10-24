@@ -165,9 +165,9 @@ export default {
         }
 
         /* ---------- 顶部 ---------- */
-        const head = h('div', { class: 'page-head' },
+        const head = h('div', { class: 'page-head page-head--display' },
             h('div', {},
-                h('div', { class: 'page-head__title' },
+                h('h1', { class: 'page-head__title' },
                     isEdit ? '编辑生词' : '添加生词'
                 ),
                 h('div', { class: 'page-head__sub' },
@@ -447,7 +447,7 @@ export default {
                 lemmaField.el,
                 h('span', { class: 'field__hint' }, hintText('唯一键的一部分，同一语言下必须唯一。编辑时不可修改。'))
             ),
-            h('div', { class: 'field' },
+            h('label', { class: 'field' },
                 h('span', { class: 'field__label' }, '词性'),
                 h('div', { class: 'field__row' },
                     posSelect,
@@ -1195,7 +1195,6 @@ export default {
                         renderMeanings()
                     }
                 },
-                h('span', { class: 'source-tab__dot' }),
                 sourceLabel(id)
                 )))
             }
@@ -1483,7 +1482,8 @@ export default {
                 ),
                 h('div', { class: 'derivative-picker' },
                     selected,
-                    h('div', { class: 'field' },
+                    h('label', { class: 'field' },
+                        h('span', { class: 'field__label' }, '搜索词条'),
                         searchField.el,
                         h('span', { class: 'field__hint' }, hintText('只能选择词库中已存在的词')),
                         hint

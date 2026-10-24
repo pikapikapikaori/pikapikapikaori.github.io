@@ -2,12 +2,12 @@ import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import { buildQueue, answer, createSessionStats } from '../services/review-service.js'
-import { listByLanguage } from '../store/word-store.js'
-import { createWordCard } from '../components/word-card.js'
+import { createParadigmTable } from '../components/paradigm-table.js'
+import { posLabel } from '../models/word.js'
+import { bdiNode } from '../utils/bdi.js'
 import { toast } from '../components/toast.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
-import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf } from '../services/grammar-service.js'
-import { findAnchor } from '../models/grammar.js'
+import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js'
 
 export default {
     needsUser: true,
@@ -30,51 +30,34 @@ export default {
         ])
 
         /* ---------- 数据 ---------- */
-        const allWords = await listByLanguage(userId, lang)
-        const lemmaMap = new Map()
-        for (const w of allWords) {
-            if (!lemmaMap.has(w.lemma)) lemmaMap.set(w.lemma, w)
-        }
-
         const grammarDoc = await loadGrammar(lang)
-
-        function resolvePosRef(pos) {
-            const id = `${lang}-${pos}`
-            return findAnchor(grammarDoc, id) ? id : null
-        }
-
-        /** 某个词的词干标签（来自它的变位 / 变格类型） */
-        function partLabelsFor(word) {
-            const parts = getDeriveParts(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef)
-            const out = {}
-            for (const part of parts) {
-                if (part.key !== 'base') out[part.key] = part.label || part.key
-            }
-            return out
-        }
-
-        /** 主词干那一栏的标题（梵语动词是「词根」、名词是「弱词干」） */
-        function stemLabelFor(word) {
-            return stemLabelOf(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef, word && word.pos)
-        }
-
         const order = (settings && settings.reviewOrder) || 'mastery-asc'
         const queue = await buildQueue(userId, lang, { order })
 
+        const statEl = h('div', { class: 'review-counts' })
+        const headEl = h('div', { class: 'page-head page-head--display' },
+            h('div', {},
+                h('h1', { class: 'page-head__title' }, '复习'),
+                h('div', { class: 'page-head__sub' },
+                    bdiNode(language.native, lang), ' · ', language.name)
+            ),
+            statEl
+        )
+
         /* ---------- 空状态 ---------- */
         if (queue.length === 0) {
+            statEl.hidden = true
             replace(main,
-                h('div', { class: 'review-stage' },
-                    h('div', { class: 'review-card-wrap' },
-                        h('div', { class: 'empty' },
-                            h('div', { class: 'empty__title' }, '暂无词条可复习'),
-                            h('div', { class: 'empty__desc' }, '先添加一些生词，再来复习吧。'),
-                            h('button', {
-                                class: 'btn btn--primary',
-                                type: 'button',
-                                onclick: () => location.hash = `#/lang/${lang}/words`
-                            }, '返回列表')
-                        )
+                headEl,
+                h('div', { class: 'review-sheet review-sheet--empty' },
+                    h('div', { class: 'empty' },
+                        h('div', { class: 'empty__title' }, '暂无词条可复习'),
+                        h('div', { class: 'empty__desc' }, '先添加一些生词，再来复习吧。'),
+                        h('button', {
+                            class: 'btn btn--primary',
+                            type: 'button',
+                            onclick: () => location.hash = `#/lang/${lang}/words`
+                        }, '返回列表')
                     )
                 )
             )
@@ -83,35 +66,43 @@ export default {
 
         /* ---------- 状态 ---------- */
         const stats = createSessionStats(queue)
+        const wrongWords = []
         let idx = 0
-        let card = null
 
         /* ---------- DOM ---------- */
-        const statEl = h('div', { class: 'review-stats' })
-        const barEl = h('div', { class: 'progress__bar', style: { width: '0%' } })
-        const progressEl = h('div', { class: 'progress', 'aria-label': '进度' }, barEl)
-        const cardWrap = h('div', { class: 'review-card-wrap' })
+        const barEl = h('div', { class: 'review-sheet__fill', style: { width: '0%' } })
+        const faceWrap = h('div', { class: 'review-face', onclick: () => toggleFace(), title: '点击翻面' })
+        let showBack = false
         const actionEl = h('div', { class: 'review-actions' })
+        const hintEl = h('div', { class: 'review-hint' },
+            h('kbd', {}, '空格'), '翻面',
+            h('span', { class: 'review-hint__sep' }, '·'),
+            h('kbd', {}, '←'), '记错',
+            h('span', { class: 'review-hint__sep' }, '·'),
+            h('kbd', {}, '→'), '记对'
+        )
 
         replace(main,
-            h('div', { class: 'review-stage' },
-                statEl,
-                progressEl,
-                cardWrap,
+            headEl,
+            h('div', { class: 'review-sheet' },
+                h('div', { class: 'review-sheet__bar', 'aria-hidden': 'true' }, barEl),
+                faceWrap,
                 actionEl
-            )
+            ),
+            hintEl
         )
 
         /* ---------- 渲染函数 ---------- */
 
         function renderStats() {
+            const left = Math.max(0, stats.total - stats.done)
             replace(statEl,
-                h('span', {}, '剩余 ', h('b', { class: 'num' },
-                    String(Math.max(0, stats.total - stats.done)))),
-                h('span', {}, '进度 ', h('b', { class: 'num' },
-                    `${stats.done}/${stats.total}`)),
-                h('span', {}, '正确率 ', h('b', { class: 'num' },
-                    stats.done ? `${Math.round(stats.accuracy * 100)}%` : '—'))
+                h('span', {},
+                    h('b', { class: 'num' }, String(stats.done)), ' / ', String(stats.total),
+                    left > 0 ? '' : ' · 已走完'),
+                h('span', {},
+                    '正确率 ',
+                    stats.done ? `${Math.round(stats.accuracy * 100)}%` : '—')
             )
             barEl.style.width = `${Math.round((stats.progress || 0) * 100)}%`
         }
@@ -119,7 +110,7 @@ export default {
         function renderActions() {
             replace(actionEl,
                 h('button', {
-                    class: 'btn btn--danger',
+                    class: 'btn',
                     type: 'button',
                     title: '记错（← 或 1）',
                     onclick: () => doAnswer(false)
@@ -133,27 +124,70 @@ export default {
             )
         }
 
-        function renderCard() {
-            const word = queue[idx]
-            if (!word) { renderDone(); return }
+        function toggleFace() {
+            if (!queue[idx]) return
+            showBack = !showBack
+            renderFace()
+        }
 
-            card = createWordCard(word, {
-                language: lang,
-                showSourceTabs: false,
-                paradigmTpl: getParadigmTemplate(grammarDoc, word.pos),
-                partLabels: partLabelsFor(word),
-                stemLabel: stemLabelFor(word),
-                resolvePosRef,
-                resolveDerivative: (lemma) => lemmaMap.get(lemma) || null,
-                onDerivativeClick: (target) => {
-                    toast.info(`派生词：${target.lemma}`)
-                },
-                onGrammarRef: (ref) => {
-                    location.hash = `#/grammar/${lang}#${ref}`
-                }
-            })
-            replace(cardWrap, card)
-            card.setFlipped(false)
+        /** 淡入 + 上移：像翻页，而不是转卡片 */
+        function renderFace() {
+            const word = queue[idx]
+            if (!word) return
+            faceWrap.classList.remove('review-face--in')
+            replace(faceWrap, showBack ? buildBack(word) : buildFront(word))
+            void faceWrap.offsetWidth
+            faceWrap.classList.add('review-face--in')
+        }
+
+        function buildFront(word) {
+            return h('div', { class: 'review-front' },
+                h('div', { class: 'review-word', lang }, bdiNode(word.lemma, lang))
+            )
+        }
+
+        function buildBack(word) {
+            const source = (word.meanings || []).filter((m) => (m.text || '').trim())
+            const meanings = source.filter((m) => (m.source || 'manual') === 'manual')
+            const list = meanings.length ? meanings : source
+
+            const parts = [
+                h('div', { class: 'review-section' },
+                    h('div', { class: 'review-section__label' }, '含义'),
+                    list.length
+                        ? h('div', { class: 'review-meanings' },
+                            ...list.map((m) => h('div', { class: 'review-meaning' }, h('bdi', {}, m.text)))
+                        )
+                        : h('div', { class: 'review-empty' }, '还没有填写含义')
+                )
+            ]
+
+            const tpl = getParadigmTemplate(grammarDoc, word.pos)
+            const tables = []
+            for (const tableTpl of tpl?.tables || []) {
+                if (!word.paradigm || !word.paradigm[tableTpl.key]) continue
+                const tbl = createParadigmTable(tableTpl, word.paradigm[tableTpl.key], {
+                    lang,
+                    mode: 'view',
+                    showTitle: true
+                })
+                if (tbl) tables.push(tbl)
+            }
+            if (tables.length) {
+                parts.push(h('div', { class: 'review-section review-section--table' },
+                    h('div', { class: 'review-section__label' }, '变格 / 变位'),
+                    ...tables
+                ))
+            }
+
+            return h('div', { class: 'review-back' }, ...parts)
+        }
+
+        function renderCard() {
+            if (!queue[idx]) { renderDone(); return }
+            showBack = false
+            hintEl.hidden = false
+            renderFace()
         }
 
         async function doAnswer(correct) {
@@ -165,6 +199,7 @@ export default {
                 toast.error(`保存失败：${err.message}`)
                 return
             }
+            if (!correct) wrongWords.push(word)
             stats.record(correct)
             idx += 1
             renderStats()
@@ -173,12 +208,30 @@ export default {
         }
 
         function renderDone() {
-            replace(cardWrap,
-                h('div', { class: 'review-done-card' },
-                    h('div', { class: 'review-done-card__title' }, '本轮完成'),
-                    h('div', { class: 'review-done-card__stats' },
+            hintEl.hidden = true
+            showBack = false
+            faceWrap.classList.remove('review-face--in')
+            faceWrap.removeAttribute('title')
+            faceWrap.classList.add('review-face--done')
+            replace(faceWrap,
+                h('div', { class: 'review-done' },
+                    h('div', { class: 'review-done__title' }, '本轮完成'),
+                    h('div', { class: 'review-done__stats' },
                         `共 ${stats.done} 张 · 正确 ${stats.correct} · 错误 ${stats.wrong}`
-                    )
+                    ),
+                    wrongWords.length
+                        ? h('div', { class: 'review-done__wrong' },
+                            h('div', { class: 'review-done__wrong-title' }, '这轮记错的词'),
+                            ...wrongWords.map((w) => h('button', {
+                                class: 'review-done__word',
+                                type: 'button',
+                                onclick: () => { location.hash = `#/lang/${lang}/words/${w.id}` }
+                            },
+                            h('span', { class: 'review-done__lemma', lang }, bdiNode(w.lemma, lang)),
+                            h('span', { class: 'review-done__pos' }, posLabel(w.pos))
+                            ))
+                        )
+                        : null
                 )
             )
             replace(actionEl,
@@ -204,7 +257,7 @@ export default {
                 case ' ':
                 case 'Spacebar':
                     e.preventDefault()
-                    if (card) card.flip()
+                    toggleFace()
                     break
                 case 'ArrowLeft':
                 case '1':

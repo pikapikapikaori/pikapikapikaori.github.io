@@ -49,7 +49,7 @@ export default {
         }
 
         /* ---------- DOM 容器 ---------- */
-        const head = h('div', { class: 'page-head' })
+        const head = h('div', { class: 'page-head page-head--display' })
         const groupsEl = h('div', {})
 
         replace(main, head, groupsEl)
@@ -58,9 +58,9 @@ export default {
         function renderHead() {
             replace(head,
                 h('div', {},
-                    h('div', { class: 'page-head__title' }, `你好，${user.name}`),
+                    h('h1', { class: 'page-head__title' }, '语言列表'),
                     h('div', { class: 'page-head__sub' },
-                        `共 ${all.length} 条词 · ${byLang.size} 个语言`
+                        `${user.name} · 共 ${all.length} 条词 · ${byLang.size} 个语言`
                     )
                 ),
                 h('div', { class: 'page-head__actions' },
@@ -69,7 +69,7 @@ export default {
                         onclick: () => doExport()
                     }, '导出 JSON'),
                     h('button', {
-                        class: 'btn btn--danger', type: 'button',
+                        class: 'btn btn--danger-quiet', type: 'button',
                         onclick: () => doClearAll()
                     }, '清空数据')
                 )
@@ -108,9 +108,9 @@ export default {
                 dataset: { groupKey },
                 title: '拖动调整组的顺序'
             },
-            h('span', { class: 'lang-group__handle' }, '⋮⋮'),
             h('span', { class: 'lang-group__label' }, title),
-            h('span', { class: 'lang-group__count' }, `${list.length}`)
+            h('span', { class: 'lang-group__count' }, `${list.length}`),
+            h('span', { class: 'lang-group__handle', 'aria-hidden': 'true' }, '⋮⋮')
             )
 
             attachGroupDragHandlers(header, groupKey)
@@ -141,25 +141,27 @@ export default {
                     }
                 }
             },
-            h('div', {
-                class: 'lang-card__native',
-                lang: lang.code,
-                style: isRtlNative ? { direction: 'rtl' } : {}
-            }, bdiNode(lang.native, lang.code)),
-            h('div', { class: 'lang-card__name' }, lang.name),
+            h('div', { class: 'lang-card__title' },
+                h('span', {
+                    class: 'lang-card__native',
+                    lang: lang.code,
+                    style: isRtlNative ? { direction: 'rtl' } : {}
+                }, bdiNode(lang.native, lang.code)),
+                h('span', { class: 'lang-card__name' }, lang.name)
+            ),
             h('div', { class: 'lang-card__stats' },
-                h('span', { class: 'lang-card__stat' },
-                    h('span', { class: 'num' }, String(bucket.count)),
-                    ' 词'
-                ),
-                h('span', { class: 'lang-card__stat' },
-                    '累计 ',
-                    h('span', { class: 'num' }, String(bucket.encounters))
-                ),
-                bucket.last
-                    ? h('span', { class: 'lang-card__stat' },
-                        `最近 ${formatRelative(bucket.last)}`)
-                    : h('span', { class: 'lang-card__stat' }, '暂无')
+                bucket.count
+                    ? [
+                        h('span', { class: 'lang-card__stat' },
+                            h('span', { class: 'num' }, String(bucket.count)), ' 词'),
+                        h('span', { class: 'lang-card__stat lang-card__stat--extra' },
+                            '累计 ', h('span', { class: 'num' }, String(bucket.encounters))),
+                        bucket.last
+                            ? h('span', { class: 'lang-card__stat lang-card__stat--extra' },
+                                formatRelative(bucket.last))
+                            : null
+                    ]
+                    : h('span', { class: 'lang-card__stat lang-card__stat--empty' }, '暂无词条')
             )
             )
 

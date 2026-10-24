@@ -16,23 +16,53 @@
     --r-full: 999px;   /* 胶囊（来源 tab、徽章）与圆点 */
 
     /* 字号 */
-    --fs-xs: 12px;
-    --fs-sm: 13px;
-    --fs-md: 15px;
-    --fs-lg: 18px;
-    --fs-xl: 22px;
-    --fs-2xl: 28px;
-    --fs-3xl: 34px;
+    /* 字号：只有一个旋钮 --fs-base（正文 1rem），其余按它等比缩放。
+     * 设置页的「字号」只改 --fs-base；间距仍是 px，不会被拉大。 */
+    --fs-base: 16px;
+    --fs-xs: 0.8125rem;
+    --fs-sm: 0.875rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.1875rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 1.875rem;
+    --fs-3xl: 2.25rem;
 
     /* 行高 */
     --lh-tight: 1.25;
     --lh-base: 1.6;
     --lh-loose: 1.85;
 
-    /* 字体族 */
+    /* 字体族
+     * 界面字体：中文楷体 + 拉丁 Gentium，在 fonts.css 里合成一个 family。
+     * 设置页的「界面字体」只会改写 --ff-ui，不影响下面的各语言字体。
+     */
     --ff-ui: "LN UI", system-ui, -apple-system, "Segoe UI", "PingFang SC",
-        "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
-    --ff-content: var(--ff-ui);
+        "Microsoft YaHei", "Hiragino Sans GB", serif;
+
+    /* 各语言字体栈：只在这里配置（文件见 fonts.css）。
+     * 每个语言字体只覆盖自己那种文字的 unicode-range，其余字符（说明性中英文）
+     * 落到 var(--ff-ui) —— 也就是界面字体。 */
+    --ff-la: "LN LA", var(--ff-ui);
+    --ff-grc: "LN GRC", var(--ff-ui);
+    --ff-he: "LN HE", var(--ff-ui);
+    --ff-sa: "LN SA", var(--ff-ui);
+    --ff-siddham: "LN SIDDHAM", var(--ff-ui);
+    --ff-mnc: "LN MNC", var(--ff-ui);
+    --ff-ja: "LN JA", var(--ff-ui);
+    --ff-zh-cls: "LN ZH-CLS", var(--ff-ui);
+
+    /* 拉丁语系的其它语言共用同一套拉丁字体 */
+    --ff-en: var(--ff-la);
+    --ff-fr: var(--ff-la);
+    --ff-de: var(--ff-la);
+
+    /* 中文：LN UI 的 CJK 段（楷体） */
+    --ff-zh: var(--ff-ui);
+
+    /* 展示字体：没有 lang 的标题/数字用它，跟随界面字体；
+     * 有 lang 的元素在 base.css 里各自改写这个变量（见 [lang] 规则）。 */
+    --ff-display: var(--ff-ui);
+
     --ff-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 
     /* 布局 */
@@ -60,7 +90,7 @@
 
     --c-fg: #1a1a1a;
     --c-fg-muted: #5b5b58;
-    --c-fg-subtle: #8a8a86;
+    --c-fg-subtle: #6b6b66;
     --c-fg-invert: #ffffff;
 
     --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%235b5b58' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -68,9 +98,18 @@
     --c-border: #e3e2db;
     --c-border-strong: #cfcec6;
 
-    --c-accent: #3a5bd9;
+    /* 表格内部的分隔线：比表面深 3–7%，弱于 --c-border */
+    --c-rule: #ecebe5;
+    --c-rule-strong: #dddbd2;
+
+    /* 朱红：古抄本里用于标题与标记，这里只做「当前 / 焦点 / 链接」，不做大块填充 */
+    --c-accent: #9a2f2b;
     --c-accent-fg: #ffffff;
-    --c-accent-soft: #e6ebff;
+    --c-accent-soft: #f7e8e5;
+
+    /* 实心主按钮用墨色，避免红按钮被读成危险操作 */
+    --c-action: #1a1a1a;
+    --c-action-fg: #ffffff;
 
     --c-success: #2f9e55;
     --c-warning: #c98a12;
@@ -95,7 +134,7 @@
 
     --c-fg: #e8e9ec;
     --c-fg-muted: #a0a3ac;
-    --c-fg-subtle: #6f727c;
+    --c-fg-subtle: #8f929c;
     --c-fg-invert: #0f1115;
 
     --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23a0a3ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -103,9 +142,15 @@
     --c-border: #262b36;
     --c-border-strong: #3a4150;
 
-    --c-accent: #7a95ff;
+    --c-rule: #20242d;
+    --c-rule-strong: #2d3340;
+
+    --c-accent: #e08a86;
     --c-accent-fg: #0f1115;
-    --c-accent-soft: #1e2740;
+    --c-accent-soft: #2b1c1c;
+
+    --c-action: #e8e9ec;
+    --c-action-fg: #0f1115;
 
     --c-success: #56c47c;
     --c-warning: #e0b34a;
@@ -131,7 +176,7 @@
 
         --c-fg: #e8e9ec;
         --c-fg-muted: #a0a3ac;
-        --c-fg-subtle: #6f727c;
+        --c-fg-subtle: #8f929c;
         --c-fg-invert: #0f1115;
 
         --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23a0a3ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -139,9 +184,15 @@
         --c-border: #262b36;
         --c-border-strong: #3a4150;
 
-        --c-accent: #7a95ff;
+        --c-rule: #20242d;
+        --c-rule-strong: #2d3340;
+
+        --c-accent: #e08a86;
         --c-accent-fg: #0f1115;
-        --c-accent-soft: #1e2740;
+        --c-accent-soft: #2b1c1c;
+
+        --c-action: #e8e9ec;
+        --c-action-fg: #0f1115;
 
         --c-success: #56c47c;
         --c-warning: #e0b34a;

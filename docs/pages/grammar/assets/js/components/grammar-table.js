@@ -30,12 +30,23 @@ function isEmptyCell(value) {
     return EMPTY_CELL.test(cellText(value))
 }
 
+/** 去掉标签、压平空白，用来比较「表名」和它周围的标题是否重复 */
+function plainText(value) {
+    return String(value ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+}
+
 export function createGrammarTable(spec) {
     if (!spec || !Array.isArray(spec.headers) || !Array.isArray(spec.rows)) {
         return null
     }
     const lang = spec.lang || null
     const headers = spec.headers.map((x) => String(x ?? ''))
+
+    // 表名与上方的条目标题 / 首列表头是同一个词时不再重复
+    const captionText = plainText(spec.caption)
+    const hideCaption = !captionText
+        || captionText === plainText(spec.ownerTitle)
+        || captionText === plainText(headers[0])
 
     // 首列是行标题，永远保留；其余列若每一行都是空/—就整列隐藏
     const keepCol = headers.map((_, index) => index === 0
@@ -46,29 +57,52 @@ export function createGrammarTable(spec) {
         && row.some((cell, index) => index > 0 && !isEmptyCell(cell)))
     if (!rows.length) return null
 
-    const table = h('table', { class: 'grammar-table' },
-        spec.caption ? h('caption', {}, htmlFragment(spec.caption)) : null,
-        h('thead', {},
+    // 首列不是短行标题（如「形式」「用法」）时，允许它折行并占一份宽度
+    const wrapFirst = rows.some((row) => plainText(cellText(row[0])).length > 10)
+
+    // 词形列平分剩余宽度：两列词形（如 ego / tū）时等分，避免短列被挤成一条缝。
+    // 列更多时交给浏览器按内容分配，说明类长文本才有地方，必要时整表横向滚动。
+    const formIndexes = keepCol.map((keep, index) => (keep && index > 0 ? index : -1))
+        .filter((index) => index > 0)
+    const formWidth = formIndexes.length && formIndexes.length <= 2 && !wrapFirst
+        ? `${(99 / formIndexes.length).toFixed(2)}%`
+        : null
+
+    // 列数多，或某列是整句说明时，窄屏宁可横向滚动，也不把列压成一条缝
+    const hasProse = rows.some((row) => row.some(
+        (cell, index) => index > 0 && plainText(cellText(cell)).length > 24))
+    const wide = keepCol.filter(Boolean).length >= 5 || hasProse
+
+    const table = h('table', {
+        class: 'grammar-table'
+            + (wrapFirst ? ' grammar-table--wrap-first' : '')
+            + (wide ? ' grammar-table--wide' : '')
+    },
+    hideCaption ? null : h('caption', {}, htmlFragment(spec.caption)),
+    h('thead', {},
+        h('tr', {},
+            ...headers.map((th, index) => (keepCol[index]
+                ? h('th', {
+                    lang,
+                    style: index > 0 && formWidth ? { width: formWidth } : null
+                }, htmlFragment(th))
+                : null)).filter(Boolean)
+        )
+    ),
+    h('tbody', {},
+        ...rows.map((row) =>
             h('tr', {},
-                ...headers.map((th, index) => (keepCol[index]
-                    ? h('th', { lang }, htmlFragment(th))
-                    : null)).filter(Boolean)
-            )
-        ),
-        h('tbody', {},
-            ...rows.map((row) =>
-                h('tr', {},
-                    ...row.map((cell, index) => {
-                        if (!keepCol[index]) return null
-                        const off = cellDisabled(cell)
-                        return h('td', {
-                            lang,
-                            class: off ? 'grammar-table__cell--disabled' : null
-                        }, off ? (cellText(cell) || '—') : htmlFragment(cellText(cell)))
-                    }).filter(Boolean)
-                )
+                ...row.map((cell, index) => {
+                    if (!keepCol[index]) return null
+                    const off = cellDisabled(cell)
+                    return h('td', {
+                        lang,
+                        class: off ? 'grammar-table__cell--disabled' : null
+                    }, off ? (cellText(cell) || '—') : htmlFragment(cellText(cell)))
+                }).filter(Boolean)
             )
         )
+    )
     )
 
     // 书写方向不同的文字（满文 / 希伯来文）按字符范围包进 <bdi>
@@ -88,9 +122,12 @@ export function createGrammarTable(spec) {
  * @param {object[]} tables  语法 JSON 里的 `item.tables`
  * @param {string}   lang    默认单元格语言（表自己带 `lang` 时优先）
  */
-export function createGrammarTables(tables, lang = null) {
+export function createGrammarTables(tables, lang = null, ownerTitle = '') {
     const entries = (tables || [])
-        .map((spec) => ({ spec, node: createGrammarTable({ ...spec, lang: spec.lang || lang }) }))
+        .map((spec) => ({
+            spec,
+            node: createGrammarTable({ ...spec, lang: spec.lang || lang, ownerTitle })
+        }))
         .filter((entry) => entry.node)
 
     if (!entries.length) return null

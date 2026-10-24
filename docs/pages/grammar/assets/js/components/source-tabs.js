@@ -28,7 +28,6 @@ export function createSourceTabs(sources, active, onChange) {
                 if (typeof onChange === 'function') onChange(s)
             }
         },
-        h('span', { class: 'source-tab__dot' }),
         sourceLabel(s)
         ))
     }

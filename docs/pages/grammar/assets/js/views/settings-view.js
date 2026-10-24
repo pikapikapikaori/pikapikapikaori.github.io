@@ -11,8 +11,8 @@ import { deleteUser } from '../store/user-store.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import {
-    applyFont, applyLocalFontFile, FONT_MODES,
-    getStoredFontMode, getStoredFontFamily
+    applyFont, applyLocalFontFile, applyFontSize, FONT_MODES, FONT_SIZES,
+    getStoredFontMode, getStoredFontFamily, getStoredFontSize
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
 import { LS_KEYS, PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
@@ -36,9 +36,9 @@ export default {
         let settings = await getSettings(userId)
 
         /* ---------- 头部 ---------- */
-        const head = h('div', { class: 'page-head' },
+        const head = h('div', { class: 'page-head page-head--display' },
             h('div', {},
-                h('div', { class: 'page-head__title' }, '设置'),
+                h('h1', { class: 'page-head__title' }, '设置'),
                 h('div', { class: 'page-head__sub' }, `当前用户：${user.name}`)
             )
         )
@@ -67,6 +67,13 @@ export default {
             ),
             row('界面字体', '内置 / 系统 / 本地',
                 fontControl()
+            ),
+            row('字号', '只影响文字，间距不变',
+                selectControl(
+                    FONT_SIZES.map((f) => ({ value: f.value, label: f.label })),
+                    getStoredFontSize(),
+                    (v) => applyFontSize(v)
+                )
             )
         ))
 

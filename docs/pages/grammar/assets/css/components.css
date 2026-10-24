@@ -32,13 +32,13 @@
 }
 
 .btn--primary {
-    background: var(--c-accent);
-    border-color: var(--c-accent);
-    color: var(--c-accent-fg);
+    background: var(--c-action);
+    border-color: var(--c-action);
+    color: var(--c-action-fg);
 }
 
 .btn--primary:not(:disabled):hover {
-    background: color-mix(in oklab, var(--c-accent) 88%, black);
+    background: color-mix(in oklab, var(--c-action) 86%, var(--c-fg-invert));
 }
 
 .btn--ghost {
@@ -60,10 +60,21 @@
     background: color-mix(in oklab, var(--c-danger) 12%, transparent);
 }
 
+/* 页头里的破坏性操作：不描边，不抢按钮的注意力 */
+.btn--danger-quiet {
+    border-color: transparent;
+    background: transparent;
+    color: var(--c-danger);
+}
+
+.btn--danger-quiet:not(:disabled):hover {
+    background: color-mix(in oklab, var(--c-danger) 10%, transparent);
+}
+
 .btn--icon {
     width: 36px;
     padding: 0;
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1;
 }
 
@@ -497,6 +508,7 @@
 }
 
 .word-card__lemma {
+    font-family: var(--ff-display);
     font-size: var(--fs-3xl);
     font-weight: 700;
     line-height: 1.15;
@@ -737,10 +749,14 @@ button.word-card__derivative {
     background: transparent;
     color: var(--c-fg-muted);
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1;
     flex-shrink: 0;
     transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.word-card__zoom-btn svg {
+    display: block;
 }
 
 .word-card__zoom-btn:hover {
@@ -792,17 +808,14 @@ button.word-card__derivative {
     background: var(--c-accent-soft);
 }
 
-.source-tab__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-    flex-shrink: 0;
-}
-
 /* 表格 / 面板的 tab 栏 */
 .tab-bar--tables {
     margin-bottom: var(--sp-2);
+}
+
+.tab-bar--tables .source-tab {
+    padding: 4px 10px;
+    font-size: var(--fs-sm);
 }
 
 .tab-body {
@@ -1041,62 +1054,78 @@ button.word-card__derivative {
 
 .grammar-table {
     width: 100%;
-    border: 1px solid var(--c-border);
-    border-radius: var(--r-control);
-    overflow: hidden;
-    margin: var(--sp-2) 0 var(--sp-4);
-    font-size: var(--fs-sm);
+    border-collapse: collapse;
+    margin: 0 0 var(--sp-5);
+    font-size: var(--fs-md);
 }
 
+/* 表名是表外的一行说明，不再做成第二个表头色带 */
 .grammar-table caption {
     caption-side: top;
     text-align: left;
-    padding: var(--sp-2) var(--sp-3);
-    background: var(--c-bg-subtle);
-    color: var(--c-fg-muted);
+    padding: 0 0 var(--sp-2);
+    color: var(--c-fg);
+    font-size: var(--fs-sm);
     font-weight: 600;
-    border-bottom: 1px solid var(--c-border);
 }
 
-.grammar-table th,
-.grammar-table td {
-    padding: var(--sp-2) var(--sp-3);
-    border-bottom: 1px solid var(--c-border);
+.grammar-table thead th {
+    padding: 0 var(--sp-3) var(--sp-2);
+    border-bottom: 1px solid var(--c-rule-strong);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    font-weight: 500;
     text-align: left;
-    vertical-align: top;
+    word-break: keep-all;
 }
 
-.grammar-table tr:last-child td {
+.grammar-table tbody th,
+.grammar-table tbody td {
+    padding: var(--sp-3);
+    border-bottom: 1px solid var(--c-rule);
+    text-align: left;
+    vertical-align: baseline;
+    line-height: 1.45;
+}
+
+/* 行标题列按内容收窄，剩下的宽度平分给词形列 */
+.grammar-table tbody th,
+.grammar-table tbody td:first-child {
+    width: 1%;
+    white-space: nowrap;
+    padding-right: var(--sp-6);
+    color: var(--c-fg-muted);
+}
+
+.grammar-table tbody tr:last-child > * {
     border-bottom: none;
 }
 
-.grammar-table td.grammar-table__cell--disabled {
+.grammar-table tbody tr:hover {
     background: var(--c-bg-subtle);
+}
+
+.grammar-table td.grammar-table__cell--disabled {
     color: var(--c-fg-subtle);
-    opacity: 0.55;
     text-align: center;
 }
 
-.grammar-table th {
-    background: var(--c-bg-subtle);
-    color: var(--c-fg-muted);
-    font-weight: 600;
-    white-space: nowrap;
+/* 首列是「形式 / 用法」这类长文本而不是行标题时，允许它折行并占一份宽度 */
+.grammar-table--wrap-first tbody th,
+.grammar-table--wrap-first tbody td:first-child {
+    width: auto;
+    min-width: 34%;
+    white-space: normal;
 }
 
 .grammar-table tr:target {
     background: var(--c-accent-soft);
 }
 
-.grammar-table td[lang],
-.grammar-table th[lang] {
-    font-family: var(--ff-content);
-}
-
-/* 悉昙文列覆盖上面这条通用规则 */
+/* 悉昙文列用专用字体（其余列由 base.css 的 [lang] 规则决定） */
 .grammar-table td[lang="sa-siddham"],
 .grammar-table th[lang="sa-siddham"] {
-    font-family: "LN SIDDHAM", var(--ff-content);
+    font-family: var(--ff-siddham);
 }
 
 /* ---------- 进度条 ---------- */
@@ -1236,7 +1265,6 @@ button.word-card__derivative {
 }
 
 .paradigm-table__cell {
-    font-family: var(--ff-content);
     text-align: center;
     white-space: nowrap;
     min-width: 56px;
@@ -1509,7 +1537,7 @@ button.word-card__derivative {
     background: transparent;
     color: var(--c-fg-muted);
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1;
     z-index: 2;
 }
@@ -1540,6 +1568,7 @@ button.word-card__derivative {
 }
 
 .card-overlay__lemma {
+    font-family: var(--ff-display);
     font-size: var(--fs-3xl);
     font-weight: 700;
     line-height: 1.15;

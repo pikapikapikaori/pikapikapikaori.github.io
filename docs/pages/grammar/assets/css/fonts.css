@@ -1,82 +1,189 @@
 /* 项目内置字体声明
- * 字体文件请放到 assets/resources/fonts/ 下，命名与下方一致即可生效。
- * 若文件缺失，浏览器会回退到 variables.css 中的 --ff-ui 后备字体。
+ * 字体文件放在 assets/resources/fonts/ 下，文件名与下方一致即可。
  *
- * 命名约定：
- *   ui-regular.woff2 / ui-bold.woff2     界面字体（含中文）
- *   la.woff2                              拉丁语
- *   grc.woff2                             古希腊语（含变音符号）
- *   he.woff2                              圣经希伯来语（RTL）
- *   sa.woff2                              梵语（天城文）
- *   mnc.woff2                             满语（传统蒙文）
- *   ja.woff2                              日语
- *   zh-cls.woff2                          古汉语
+ * 每个 family 都只声明自己那种文字的 unicode-range：
+ *   - 命中范围的字用该语言字体；
+ *   - 同一元素里的中文/英文说明文字不命中，自动落到栈里的 var(--ff-ui)（界面字体）。
+ * 界面字体 LN UI 由「拉丁 Gentium + 中文楷体」两段合成，两段范围不重叠。
+ * 只声明实际拥有的字重，缺的粗体由浏览器合成。
  */
+
+/* ---------- 界面字体 ---------- */
 
 @font-face {
     font-family: "LN UI";
-    src: url("../resources/fonts/ui-regular.woff2") format("woff2");
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.ttf");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+    /* 拉丁 / 希腊 / 标点 / 数字 / 数学符号 */
+    unicode-range: U+0000-2E7F, U+1D00-1DBF, U+1E00-1EFF, U+2000-2BFF,
+        U+A000-A4CF, U+FB00-FB06, U+FE20-FE2F, U+FF60-FF9F;
 }
 
 @font-face {
     font-family: "LN UI";
-    src: url("../resources/fonts/ui-bold.woff2") format("woff2");
-    font-weight: 700;
+    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.ttf");
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
+    /* CJK 与全角标点 */
+    unicode-range: U+2E80-303F, U+3100-312F, U+31C0-31EF, U+3200-33FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F,
+        U+FF00-FFEF, U+20000-2FA1F;
 }
 
-/* 各语言专用字体：字体文件就绪后取消注释 */
+/* ---------- 各语言原文 ---------- */
 
-/* 悉昙文（sa-script 章节用）；unicode-range 只覆盖 Siddham 区，其余字符自动回退 */
+/* 拉丁语：Gentium Plus（拉丁 + 希腊 + 西里尔） */
 @font-face {
-  font-family: "LN SIDDHAM";
-  src: url("../resources/fonts/siddham.woff2") format("woff2");
-  font-display: swap;
-  unicode-range: U+200C-200D, U+25CC, U+11580-115FF;
+    font-family: "LN LA";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.ttf");
+    font-display: swap;
+    unicode-range: U+0000-024F, U+0250-02AF, U+0300-036F, U+0370-03FF,
+        U+0400-04FF, U+1D00-1DBF, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* @font-face {
-  font-family: "LN LA";
-  src: url("../resources/fonts/la.woff2") format("woff2");
-  font-display: swap;
-} */
+@font-face {
+    font-family: "LN LA";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Bold.ttf");
+    font-weight: bold;
+    font-display: swap;
+    unicode-range: U+0000-024F, U+0250-02AF, U+0300-036F, U+0370-03FF,
+        U+0400-04FF, U+1D00-1DBF, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF;
+}
 
-/* @font-face {
-  font-family: "LN GRC";
-  src: url("../resources/fonts/grc.woff2") format("woff2");
-  font-display: swap;
-} */
+@font-face {
+    font-family: "LN LA";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Italic.ttf");
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0000-024F, U+0250-02AF, U+0300-036F, U+0370-03FF,
+        U+0400-04FF, U+1D00-1DBF, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF;
+}
 
-/* @font-face {
-  font-family: "LN HE";
-  src: url("../resources/fonts/he.woff2") format("woff2");
-  font-display: swap;
-} */
+@font-face {
+    font-family: "LN LA";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0000-024F, U+0250-02AF, U+0300-036F, U+0370-03FF,
+        U+0400-04FF, U+1D00-1DBF, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF;
+}
 
-/* @font-face {
-  font-family: "LN SA";
-  src: url("../resources/fonts/sa.woff2") format("woff2");
-  font-display: swap;
-} */
+/* 古希腊语：Gentium Plus，只覆盖希腊区（含多调符号） */
+@font-face {
+    font-family: "LN GRC";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.ttf");
+    font-display: swap;
+    unicode-range: U+0370-03FF, U+1F00-1FFF, U+200C-200D;
+}
 
-/* @font-face {
-  font-family: "LN MNC";
-  src: url("../resources/fonts/mnc.woff2") format("woff2");
-  font-display: swap;
-} */
+@font-face {
+    font-family: "LN GRC";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Bold.ttf");
+    font-weight: bold;
+    font-display: swap;
+    unicode-range: U+0370-03FF, U+1F00-1FFF, U+200C-200D;
+}
 
-/* @font-face {
-  font-family: "LN JA";
-  src: url("../resources/fonts/ja.woff2") format("woff2");
-  font-display: swap;
-} */
+@font-face {
+    font-family: "LN GRC";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Italic.ttf");
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0370-03FF, U+1F00-1FFF, U+200C-200D;
+}
 
-/* @font-face {
-  font-family: "LN ZH-CLS";
-  src: url("../resources/fonts/zh-cls.woff2") format("woff2");
-  font-display: swap;
-} */
+@font-face {
+    font-family: "LN GRC";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0370-03FF, U+1F00-1FFF, U+200C-200D;
+}
+
+/* 圣经希伯来语：Tinos */
+@font-face {
+    font-family: "LN HE";
+    src: url("../resources/fonts/Tinos/Tinos-Regular.ttf");
+    font-display: swap;
+    unicode-range: U+0590-05FF, U+FB1D-FB4F, U+200C-200D, U+200E-200F;
+}
+
+@font-face {
+    font-family: "LN HE";
+    src: url("../resources/fonts/Tinos/Tinos-Bold.ttf");
+    font-weight: bold;
+    font-display: swap;
+    unicode-range: U+0590-05FF, U+FB1D-FB4F, U+200C-200D, U+200E-200F;
+}
+
+@font-face {
+    font-family: "LN HE";
+    src: url("../resources/fonts/Tinos/Tinos-Italic.ttf");
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0590-05FF, U+FB1D-FB4F, U+200C-200D, U+200E-200F;
+}
+
+@font-face {
+    font-family: "LN HE";
+    src: url("../resources/fonts/Tinos/Tinos-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0590-05FF, U+FB1D-FB4F, U+200C-200D, U+200E-200F;
+}
+
+/* 梵语：Sahitya（天城文） */
+@font-face {
+    font-family: "LN SA";
+    src: url("../resources/fonts/Sahitya/Sahitya-Regular.ttf");
+    font-display: swap;
+    unicode-range: U+0900-097F, U+1CD0-1CFF, U+A8E0-A8FF, U+200C-200D, U+25CC;
+}
+
+@font-face {
+    font-family: "LN SA";
+    src: url("../resources/fonts/Sahitya/Sahitya-Bold.ttf");
+    font-weight: bold;
+    font-display: swap;
+    unicode-range: U+0900-097F, U+1CD0-1CFF, U+A8E0-A8FF, U+200C-200D, U+25CC;
+}
+
+/* 悉昙文列：只覆盖 Siddham 区 */
+@font-face {
+    font-family: "LN SIDDHAM";
+    src: url("../resources/fonts/Noto_Sans_Siddham/NotoSansSiddham-Regular.ttf");
+    font-display: swap;
+    unicode-range: U+11580-115FF, U+200C-200D, U+25CC;
+}
+
+/* 满文：FuYong 楷体（自带连写；只覆盖蒙古文区，避免被别的字体的孤立字形抢走） */
+@font-face {
+    font-family: "LN MNC";
+    src: url("../resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf");
+    font-display: swap;
+    unicode-range: U+1800-18AF, U+11660-1167F, U+200C-200D, U+202F;
+}
+
+/* 现代日语：楷体（假名 + 汉字） */
+@font-face {
+    font-family: "LN JA";
+    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.ttf");
+    font-display: swap;
+    unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+31F0-31FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
+}
+
+/* 古汉语：楷体（汉字） */
+@font-face {
+    font-family: "LN ZH-CLS";
+    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.ttf");
+    font-display: swap;
+    unicode-range: U+2E80-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF,
+        U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-2FA1F;
+}

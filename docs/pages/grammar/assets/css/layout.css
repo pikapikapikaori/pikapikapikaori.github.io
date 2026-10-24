@@ -54,28 +54,6 @@
     min-width: 0;
 }
 
-.page-breadcrumbs__back {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-1);
-    padding: 2px 10px;
-    border-radius: var(--r-control);
-    color: var(--c-fg-muted);
-    font-size: var(--fs-xs);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-
-.page-breadcrumbs__back:hover {
-    background: var(--c-bg-hover);
-    color: var(--c-fg);
-}
-
-.page-breadcrumbs__back-arrow {
-    font-size: var(--fs-sm);
-}
-
 .crumb-link {
     color: var(--c-fg-muted);
     white-space: nowrap;
@@ -132,10 +110,35 @@
     font-weight: 700;
 }
 
+/* 语法页把标题做成 h1：一页一个，字号提到 --fs-2xl */
+h1.page-head__title {
+    font-size: var(--fs-2xl);
+    letter-spacing: -.02em;
+    line-height: var(--lh-tight);
+    margin: 0;
+}
+
+/* 书目式页头：语言索引这类整页标题用衬线大字。
+ * app 屏幕的标题上限是 32px（手机上 24px），所以不用 --fs-3xl。 */
+.page-head--display .page-head__title {
+    font-family: var(--ff-display);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin: 0;
+}
+
+@media (max-width: 720px) {
+    .page-head--display .page-head__title {
+        font-size: 1.5rem;
+    }
+}
+
 .page-head__sub {
     color: var(--c-fg-muted);
     font-size: var(--fs-sm);
-    margin-top: 2px;
+    margin-top: var(--sp-1);
 }
 
 .page-head__actions {
@@ -205,7 +208,7 @@
 /* 响应式 */
 @media (max-width: 720px) {
     .app-header {
-        padding: 0 var(--sp-3);
+        padding: 0 var(--sp-4);
     }
 
     .app-header__crumbs {
@@ -213,7 +216,7 @@
     }
 
     .app-main {
-        padding: var(--sp-4) var(--sp-3) var(--sp-6);
+        padding: var(--sp-4) var(--sp-4) var(--sp-6);
     }
 
     .grid-cards {

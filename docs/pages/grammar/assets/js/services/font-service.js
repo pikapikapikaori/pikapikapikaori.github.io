@@ -15,6 +15,7 @@ import { LS_KEYS } from '../config/config.js'
 
 const LS_FONT_MODE = LS_KEYS.font
 const LS_FONT_FAMILY = LS_KEYS.fontFamily
+const LS_FONT_SIZE = LS_KEYS.fontSize
 
 const STYLE_ID = 'ln-user-font'
 
@@ -32,6 +33,26 @@ export function getStoredFontFamily() {
     catch { return '' }
 }
 
+/** 字号档位：只改 --fs-base，其余字号都是相对它的 rem */
+export const FONT_SIZES = [
+    { value: '14', label: '小' },
+    { value: '16', label: '标准' },
+    { value: '18', label: '大' },
+    { value: '20', label: '特大' }
+]
+
+export function getStoredFontSize() {
+    try { return localStorage.getItem(LS_FONT_SIZE) || '16' }
+    catch { return '16' }
+}
+
+export function applyFontSize(size) {
+    const px = FONT_SIZES.some((f) => f.value === String(size)) ? String(size) : '16'
+    document.documentElement.style.setProperty('--fs-base', `${px}px`)
+    try { localStorage.setItem(LS_FONT_SIZE, px) }
+    catch { /* ignore */ }
+}
+
 /**
  * 应用字体设置
  * @param {object} opts
@@ -44,7 +65,6 @@ export function applyFont({ mode = 'default', family = '' } = {}) {
     if (mode === 'system') {
         html.dataset.fontMode = 'system'
         html.style.setProperty('--ff-ui', SYSTEM_STACK)
-        html.style.setProperty('--ff-content', SYSTEM_STACK)
         removeStyle()
         persist(mode, '')
         return
@@ -54,7 +74,6 @@ export function applyFont({ mode = 'default', family = '' } = {}) {
         html.dataset.fontMode = 'local'
         const stack = `"${family}", ${SYSTEM_STACK}`
         html.style.setProperty('--ff-ui', stack)
-        html.style.setProperty('--ff-content', stack)
         persist(mode, family)
         return
     }
@@ -62,7 +81,6 @@ export function applyFont({ mode = 'default', family = '' } = {}) {
     // default
     html.dataset.fontMode = 'default'
     html.style.removeProperty('--ff-ui')
-    html.style.removeProperty('--ff-content')
     removeStyle()
     persist('default', '')
 }
@@ -149,7 +167,6 @@ export function initFont() {
         html.dataset.fontMode = 'local'
         const stack = `"${family}", ${SYSTEM_STACK}`
         html.style.setProperty('--ff-ui', stack)
-        html.style.setProperty('--ff-content', stack)
         return
     }
     applyFont({ mode, family })

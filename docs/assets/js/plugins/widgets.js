@@ -1,3 +1,5 @@
+import { lockNoTransition, unlockNoTransition } from '../utils/common.js'
+
 let widgetsOptions = {
     useSwitchMode: true,
     top: 0,
@@ -291,7 +293,9 @@ function plugin(hook, vm) {
     }
 
     function applyThemeColorCss(themeColor) {
+        lockNoTransition()
         document.documentElement.style.setProperty('--theme-color', themeColor)
+        unlockNoTransition()
     }
 
     // 等主题 CSS 生效后再跑主题脚本，避免脚本读到上一个主题的 CSS 变量
@@ -550,8 +554,12 @@ function plugin(hook, vm) {
 
     let applyTheme = function () {
         themeCleanup()
+        lockNoTransition()
 
-        return applyThemeColor().then(renderTheme)
+        return Promise.resolve()
+            .then(applyThemeColor)
+            .then(renderTheme)
+            .finally(unlockNoTransition)
     }
 
     let syncThemePickerActiveBtn = function () {
@@ -725,6 +733,24 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(colorPickerPopupSpan)
 
         let colorPickerSlider = colorPickerPopupDiv.getElementsByClassName('color-picker-slider')[0]
+        let isDraggingColorPicker = false
+
+        let endColorPickerDrag = function () {
+            if (!isDraggingColorPicker) return
+
+            isDraggingColorPicker = false
+            unlockNoTransition()
+        }
+
+        colorPickerSlider.addEventListener('pointerdown', function () {
+            if (isDraggingColorPicker) return
+
+            isDraggingColorPicker = true
+            lockNoTransition()
+        })
+        window.addEventListener('pointerup', endColorPickerDrag)
+        window.addEventListener('pointercancel', endColorPickerDrag)
+        colorPickerSlider.addEventListener('change', endColorPickerDrag)
 
         colorPickerSlider.oninput = function () {
             let hue = Number(this.value)

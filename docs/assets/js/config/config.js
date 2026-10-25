@@ -228,29 +228,14 @@
                     light: {
                         themeColor: '#eca2a8',
                         bgColor: '#ffffff',
-                        css: './assets/css/theme/exper/swiss.css',
+                        css: './assets/css/theme/swiss.css',
                         js: './assets/js/theme/swiss.js'
                     },
                     dark: {
                         themeColor: '#eca2a8',
                         bgColor: '#0d0d0d',
-                        css: './assets/css/theme/exper/editorial.css',
+                        css: './assets/css/theme/editorial.css',
                         js: './assets/js/theme/editorial.js'
-                    }
-                },
-                {
-                    name: 'card',
-                    light: {
-                        themeColor: '#c7a2ec',
-                        bgColor: '#100e17',
-                        css: './assets/css/theme/exper/card.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#c7a2ec',
-                        bgColor: '#100e17',
-                        css: './assets/css/theme/exper/card.css',
-                        js: null
                     }
                 },
                 {

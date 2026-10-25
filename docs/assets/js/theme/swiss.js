@@ -190,6 +190,22 @@ function demoteSidebarTitle() {
     el.replaceWith(box)
 }
 
+/* 报眉左侧的站名：从侧栏的站名链接取，不在脚本里写死 */
+function buildNavWordmark() {
+    const nav = document.querySelector('.app-nav')
+    if (!nav) return
+    if (nav.querySelector('.sw-wordmark')) return
+
+    const side = document.querySelector('.sidebar .app-name a')
+    const name = (side ? side.textContent : document.title || '').trim()
+    if (!name) return
+
+    const link = makeEl('a', 'sw-wordmark')
+    link.href = '#/'
+    link.textContent = name
+    nav.insertBefore(link, nav.firstChild)
+}
+
 function buildMast(root) {
     const h1 = root.querySelector(':scope > h1')
     const crumb = root.querySelector(':scope > ul.breadcrumb')
@@ -364,6 +380,7 @@ export function renderTheme(options) {
     if (root && root.dataset.swOn !== '1') {
         root.dataset.swOn = '1'
         demoteSidebarTitle()
+        buildNavWordmark()
         buildMast(root)
         buildSections(root)
         writeCols(root, readCols())

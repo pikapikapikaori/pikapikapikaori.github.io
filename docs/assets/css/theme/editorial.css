@@ -14,6 +14,45 @@
  *      类名前缀 ed-，与 swiss.css 的 sw- 完全隔离，两个文件不共享任何代码。
  * ============================================================================ */
 
+/* ============================================================
+ * ① 非标准（vendor）属性
+ * ============================================================ */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* ============================================================
+ * ② 封面报头复合字体 CoverTitleLang
+ *    按 unicode-range 拼：拉丁=UnifrakturMaguntia（哥特体）
+ *                      汉字与中文标点=ChaoShiJiYinZhuan（潮石记忆篆）
+ *                      假名=KouzanBrushFontSousyo（行书）
+ *    只在封面用到，section.cover 为 display:none 的页面不会触发下载
+ * ============================================================ */
+@font-face {
+    font-family: 'CoverTitleLang';
+    font-display: swap;
+    src: url('../../resources/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf') format('truetype');
+    unicode-range: U+0020-007E, U+00A0-024F, U+2000-206F, U+2018-201D;
+}
+
+@font-face {
+    font-family: 'CoverTitleLang';
+    font-display: swap;
+    src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan.ttf') format('truetype');
+    unicode-range: U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF01-FF60;
+}
+
+@font-face {
+    font-family: 'CoverTitleLang';
+    font-display: swap;
+    src: url('../../resources/fonts/KouzanBrushFontSousyo.ttf') format('truetype');
+    unicode-range: U+3040-30FF, U+31F0-31FF, U+FF66-FF9D;
+}
+
+/* ============================================================
+ * ③ 自定义属性
+ * ============================================================ */
 :root {
     /* 主题色：hsl(355 66% 78%)，只做线与底块，块上文字永远用墨色 */
     --theme-color: #eca2a8;
@@ -352,6 +391,21 @@ html .ed-plate {
 
 html .ed-plate:first-child {
     margin-top: 0;
+}
+
+/* 正文末尾：翻页块与结束符之间不再吃分区间距 */
+html .ed-plate:has(.docsify-pagination-container) {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+html .ed-plate:has(> footer) {
+    margin-top: 1.25rem;
+    margin-bottom: 0;
+}
+
+html .ed-plate > footer > hr {
+    margin: 0;
 }
 
 html .ed-plate > p,
@@ -755,11 +809,15 @@ html body.has-toc .sidebar-toggle {
 }
 
 /* —— 顶部导航 —— */
-/* 报眉：左右两端贴住画框，不再整条挤在右边 */
+/* 报眉：左边站名，右边四项（站名由 swiss.js / editorial.js 从侧栏取） */
 html .app-nav {
     left: var(--global-sidebar-width);
     right: var(--ed-gutter);
     margin: 1.5rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2rem;
     text-align: left;
 }
 
@@ -767,14 +825,32 @@ html body.close .app-nav {
     left: var(--ed-gutter);
 }
 
+html .ed-wordmark {
+    font-size: var(--ed-fs-body);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--heading-color);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+html .ed-wordmark:hover {
+    text-decoration: none;
+    color: var(--heading-color);
+}
+
 html .app-nav > ul,
 html .app-nav > p {
     display: flex;
-    justify-content: space-between;
+    flex: 0 0 auto;
+    justify-content: flex-end;
     align-items: baseline;
-    width: 100%;
+    gap: 1.75rem;
+    width: auto;
     margin: 0;
 }
+
 
 html .app-nav a,
 html .app-nav li {
@@ -799,6 +875,7 @@ html .app-nav a.active {
 
 html .app-nav li {
     margin: 0;
+    white-space: nowrap;
 }
 
 html .app-nav li > svg {
@@ -998,12 +1075,14 @@ html .markdown-section .docsify-pagination-container {
 }
 
 html .docsify-pagination-container .pagination-item {
-    flex: 0 1 46%;
+    flex: 0 1 auto;
+    max-width: 46%;
     min-width: 0;
     margin: 0;
 }
 
 html .docsify-pagination-container .pagination-item--next {
+    margin-left: auto;
     text-align: right;
 }
 
@@ -1603,8 +1682,20 @@ html .mermaid button svg {
         padding: 0.6rem 1rem;
         background: var(--ed-paper);
         border-bottom: var(--ed-border);
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
         text-align: left;
+    }
+
+    html .ed-wordmark {
+        font-size: var(--ed-fs-small);
+    }
+
+    html .app-nav > ul,
+    html .app-nav > p {
+        gap: 0.9rem;
     }
 
     html .app-nav > ul,

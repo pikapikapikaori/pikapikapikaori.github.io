@@ -92,7 +92,7 @@ function mergeWord(existing, incoming) {
     return merged
 }
 
-/** 表格合并：格子级别，非空值优先保留 incoming */
+/** 表格合并是格子级别的：非空格子用 incoming 覆盖 */
 export function mergeParadigm(a, b) {
     const A = normalizeParadigm(a)
     const B = normalizeParadigm(b)

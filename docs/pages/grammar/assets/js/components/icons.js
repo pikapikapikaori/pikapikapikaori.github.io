@@ -1,7 +1,4 @@
-/**
- * 内联 SVG 图标
- * 不使用 emoji / 特殊字符，避免不同平台字形不一致
- */
+/** 内联 SVG 图标：不用 emoji / 特殊字符，避免不同平台字形不一致 */
 
 import { svg } from '../utils/dom.js'
 
@@ -21,7 +18,6 @@ function icon(...children) {
 
 /* ---------- 通用 ---------- */
 
-/** 放大 / 展开 */
 export function expandIcon() {
     return icon(
         svg('path', { d: 'M9 4H4v5' }),
@@ -56,7 +52,6 @@ export function themeDarkIcon() {
     )
 }
 
-/** 主题 code -> 图标构造函数 */
 export const THEME_ICONS = {
     auto: themeAutoIcon,
     light: themeLightIcon,

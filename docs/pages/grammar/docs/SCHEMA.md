@@ -1,19 +1,17 @@
-# 数据 Schema 与语法数据编写规范
+# 数据 Schema 与语法数据规范
 
-本文档合并原有的「数据 Schema」与「语法数据编写规范」两份文档，覆盖：
+本文档分四块，按你要做的事选读：
 
-- IndexedDB 存储结构
-- 用户导出 / 导入 JSON 结构
-- 语言元数据
-- Word 模型与多源合并策略
-- 语法速查 JSON 编写规范
-- 新增语言的接入流程
-- 检索规范
-- 版本迁移
+| 你要做什么 | 看哪块 |
+| --- | --- |
+| 改存储结构、导入 / 导出格式、Word 字段、检索与唯一键规则、HTTP 层 | [一、数据契约](#一数据契约) |
+| 写 / 改某个语言的语法 JSON（`sections`、`paradigms`、`derive`、锚点） | [二、语言数据手册](#二语言数据手册) |
+| 加一个新语言、一个新外部源、一个新分析源 | [三、新增流程](#三新增流程) |
+| 看某个语言 / 某个源目前是怎么实现的、有哪些坑 | [四、现有实现](#四现有实现) |
 
 ---
 
-## 第一部分 数据 Schema
+## 一、数据契约
 
 所有持久数据存放在浏览器 **IndexedDB**（库名 `langnotebook`），运行时通过 `assets/js/store/*` 访问；导出/导入使用下文的用户 JSON。
 
@@ -29,36 +27,19 @@
 
 `words` 的唯一索引强制约束：**同一用户、同一语言下，`lemma + pos` 完全一致即视为同一个词**。比较时严格区分大小写、变音符号、长短音，不做任何归一化。
 
-> 注意：**检索**采用规范化比较（见第 7 节），但**唯一键查重**始终严格敏感。`amō` 与 `amo` 是两个词条。
+> 注意：**检索**采用规范化比较（见 §6），但**唯一键查重**始终严格敏感。`amō` 与 `amo` 是两个词条。
 
 ---
 
-### 2. 用户导出 JSON（也是导入格式）
+### 2. 用户导出 / 导入 JSON
 
-```json
+```jsonc
 {
   "version": 1,
   "kind": "langnotebook-user",
-  "user": {
-    "id": "u_xxxxxxxx",
-    "name": "默认用户",
-    "createdAt": "2026-10-15T10:00:00.000Z",
-    "updatedAt": "2026-10-15T10:00:00.000Z"
-  },
-  "settings": {
-    "theme": "auto",
-    "fontMode": "default",
-    "fontFamily": null,
-    "fontUrl": null,
-    "pageSize": 30,
-    "reviewOrder": "mastery-asc",
-    "defaultSource": "manual",
-    "sortField": "addedAt",
-    "sortOrder": "desc",
-    "languageOrder": ["la", "grc", "sa", "mnc", "zh-cls", "he", "ja", "en", "fr", "de"],
-    "groupOrder": ["classical", "modern"]
-  },
-  "words": [ /* Word[] */ ]
+  "user":     { "id": "u_xxxxxxxx", "name": "默认用户", "createdAt": "…", "updatedAt": "…" },
+  "settings": { "theme": "auto", "pageSize": 30, … },   // 字段见下表
+  "words":    [ /* Word[]，结构见 §3 */ ]
 }
 ```
 
@@ -87,82 +68,18 @@
 
 ---
 
-### 3. 语言元数据
+#### 写入方式
 
-**真源在每个语言自己的 `data/grammar/{code}.json` 顶层**，`assets/js/data/languages.js` 只列出
-**要加载哪些文件**（`GRAMMAR_FILES`），启动时把这份清单里的 JSON 全拉一遍、取出元信息。
-语言选择页需要所有语言的元信息，所以这一层是启动时的固定开销（当前合计约 5 MB）。
+- 通过「添加生词」表单输入
+- 支持导入/导出完整用户 JSON
+- 支持批量导入生词 JSON（单对象 / 数组 / `{ words: [...] }`）
+- 支持导入前预览：按唯一键（`userId + language + lemma + pos`）模拟统计「新增 / 合并 / 跳过」，不写入数据；
+  同一批次内的重复条目按合并计入，与实际导入结果一致
+- 支持 AI 提示词下载，驱动模型按当前语言的 paradigm 模板生成结构化 JSON
+- **派生词只能从词库中选择**（外键语义）：用 `head` 范围搜索当前语言的词条，
+  选不中的词会提示「未找到，请先添加该词」，不提供自由文本输入
 
-```jsonc
-// data/grammar/ja.json 顶层
-{
-  "version": 1,
-  "language": "ja",              // = code，文件名也是它
-  "name": "现代日语",             // 中文名
-  "native": "日本語",             // 本语言书写形式
-  "classical": false,            // 是否古典语言（兼容字段，等价于 group.id === 'classical'）
-  "group": { "id": "modern", "title": "现代语言", "order": 2 },  // 选择页分组
-  "order": 1,                    // 组内顺序
-  "vertical": false,             // 纵向书写
-  "rtl": false,                  // 从右到左
-  "grammar": true,               // 是否有语法页（false：列表页不显示「语法」，词性徽章不可点）
-  "paradigm": true,              // 是否有变格 / 变位表（false：表单只留基本形态、词性、含义、
-                                 //   补充形式、固定搭配、例句、派生词、标签备注）
-  "profile": false,              // 是否有专属语言档案 data/paradigm/{lang}.js；
-                                 //   false 时表单不会去 import 它（避免 404）
-  "pos": ["noun", "verb", …],    // 该语言可选的词性（值引用全局 POS_LIST；缺省用全部）
-  "terms": { … },                // 界面用词，见下
-  "paradigms": { … },            // paradigm: false 的语言不写这个字段
-  "sections": [ … ]              // grammar: false 的语言写空数组 []
-}
-```
-
-- **`group` / `order`**：语言选择页按 `group.order` → `order` 排序；组标题只写在各自 JSON 里，不在代码中硬编码。分组本身不可跨组拖动，组内顺序存 `settings.languageOrder`，组间顺序存 `settings.groupOrder`。
-- **`vertical` / `rtl`**：只影响**呈现样式** —— `vertical: true` 的 popover 用竖排样式，
-  `rtl: true` 决定 `<bdi>` 与浮层的 `dir`。它们**不**决定能否弹浮层、也不决定检索行为。
-- 与文字相关的三份配置都在 `assets/js/config/config.js`，彼此独立、按语言 code 登记：
-  | 配置 | 作用 |
-  | --- | --- |
-  | `SCRIPT_POPUP_LANGS` | 允许弹「原文预览浮层」的语言；值是该文字的 Unicode 范围（用来判断元素里是否真有该文字）。浮层只显示 `<bdi>` 里的原文，输入框取 `value` |
-  | `TRANSLIT_SEARCH_LANGS` | 检索时同时匹配原文与 `paradigmRoman`（转写）的语言；不在列表里的只搜原文 |
-  | `BDI_LANGS` | 渲染时把**命中的字符**包进 `<bdi>` 的语言（满文、希伯来文…）；同一段文本里的中文 / 拉丁不包 |
-  渲染原文一律走 `assets/js/utils/bdi.js`：组件渲染完后调用 `applyBdi(root, lang)` 即可（按 `[lang]` 与字符范围包 `<bdi>`，重复调用安全）。
-  夹在两个原文之间的分隔符（词根 `ק-ט-ל`、gershayim `ע"ו`）会并进同一个 `<bdi>`，否则每个字母各自成 bdi，
-  RTL 字母会被按 LTR 顺序排开、词根看起来是反的。
-  原生 `placeholder` 带不了标记 —— 含原文的 placeholder 会由 `ghost-input` 组件或 `applyBdiPlaceholders()` 叠一层自绘提示；
-  词干输入框的「推导提示」也用同一套幽灵文字（前缀匹配，输入不符即消失）。
-  原生 `<input>` / `<select>` 只放纯文本、收起态的文字也由浏览器直接画，同样包不了 `<bdi>`，所以生词表单里的文本输入框与下拉框都是自绘控件：
-  `components/editable-input.js`（contenteditable，值仍是纯文本，`el.value` 照旧）、`components/ghost-input.js`（在其上叠 placeholder / 推导提示）、
-  `components/select-field.js`（按钮 + 自绘列表，收起态用 `bdiText` 渲染当前项）。展开的列表统一由 `components/select-menu.js` 画，
-  原生 `<select>` 与自绘下拉共用同一套，键盘与 `role="listbox" / combobox` 语义一致。
-- **`grammar: false`**：生词列表不显示「语法」按钮；直接访问 `#/grammar/{code}` 会跳回词列表；词卡的词性徽章不可点。
-- **`paradigm: false`**：表单与词卡都不出现变格 / 变位相关的字段与表格。
-- **`profile`**：有 `data/paradigm/{lang}.js` 才写 `true`；表单据此决定要不要 import 语言档案，
-  写 `false` 的语言不会发那个请求。新增 / 删除档案时同步改这个字段。
-- **`pos`**：该语言生词表单 / 筛选器里出现的词性，顺序即下拉顺序；值必须是 `config.js` 里
-  `POS_LIST` 的 value（如 `noun` / `verb` / `ambip`）。缺省时用全部词性。
-
-#### terms：界面用词
-
-**每个语言必须自己写一套**，代码里不留默认文案。语言级的值可以按词性用 `byPos` 覆盖
-（满语名词锚点是「复数类型」、动词是「活用类型」，就靠这个区分）。
-
-| key | 用途 |
-| --- | --- |
-| `inflectionType` | 「变格 / 变位类型」这一栏的标签 |
-| `inflectionTypePlaceholder` | 该输入框的 placeholder |
-| `inflectionTypeHint` | 该栏的说明文字 |
-| `special` | 锚点下拉里的「特殊…（自行填写）」 |
-| `indeclinable` | 锚点下拉里的「不变格 / 不变形 / 无活用」 |
-| `paradigmTitle` | 变化表块标题，`{pos}` 会替换成词性名（如 `{pos}词形表`；希伯来语直接用「变化表」） |
-| `anchorHint` | 语法锚点下拉的说明 |
-| `extraForms` | 「补充形式」块标题 |
-| `extraPartsHint` | 额外词干那一栏的说明 |
-| `stems` | `{ label, placeholder, hint }`：词干那一栏的三处文案 |
-| `byPos` | `{ [pos]: { 上面任意键 } }`，按词性覆盖 |
-
----
-### 4. Word
+### 3. Word
 
 ```json
 {
@@ -172,42 +89,17 @@
   "lemma": "amō",
   "pos": "verb",
 
-  "inflectionType": {
-    "label": "第一变位法",
-    "grammarRef": "la-verb-1st-conj"
-  },
-
-  "paradigm": {
-    "main": {
-      "pres-act-ind": { "1sg": "amō", "2sg": "amās", "3sg": "amat" }
-    }
-  },
-
+  "inflectionType": { "label": "第一变位法", "grammarRef": "la-verb-1st-conj" },
+  "paradigm": { "main": { "pres-act-ind": { "1sg": "amō", "2sg": "amās", "3sg": "amat" } } },
   "stems": { "base": "am", "perf": "amāv", "ppp": "amāt" },
 
-  "inflections": [
-    { "group": "不定式", "label": "现在时", "form": "amāre", "source": "manual" },
-    { "group": "命令式", "label": "单数",   "form": "amā",   "source": "wiktionary" }
-  ],
-
-  "meanings": [
-    { "text": "爱，热爱", "lang": "zh", "source": "manual" },
-    { "text": "to love",  "lang": "en", "source": "wiktionary" }
-  ],
-
-  "collocations": [
-    { "text": "amō aliquem", "gloss": "爱某人", "source": "manual" }
-  ],
-
-  "examples": [
-    {
-      "text": "Amō tē.",
-      "translation": "我爱你。",
-      "citation": "Verg. Ecl. 1.1",
-      "source": "manual"
-    }
-  ],
-
+  "inflections": [{ "group": "不定式", "label": "现在时", "form": "amāre", "source": "manual" }],
+  "meanings": [{ "text": "爱，热爱", "lang": "zh", "source": "manual" }],
+  "collocations": [{ "text": "amō aliquem", "gloss": "爱某人", "source": "manual" }],
+  "examples": [{
+    "text": "Amō tē.", "translation": "我爱你。",
+    "citation": "Verg. Ecl. 1.1", "source": "manual"
+  }],
   "derivatives": ["amor", "amīcitia"],
 
   "encounterCount": 3,
@@ -215,11 +107,10 @@
   "correctCount": 5,
   "wrongCount": 1,
   "lastReviewedAt": "2026-10-15T10:00:00.000Z",
-  "nextReviewAt":   "2026-10-17T10:00:00.000Z",
-
+  "nextReviewAt": "2026-10-17T10:00:00.000Z",
   "tags": ["高频"],
   "notes": "",
-  "addedAt":   "2026-10-01T00:00:00.000Z",
+  "addedAt": "2026-10-01T00:00:00.000Z",
   "updatedAt": "2026-10-15T10:00:00.000Z"
 }
 ```
@@ -295,10 +186,10 @@
 - **不写末尾的连字符**：数据里是 `am`、`λόγ`，只在界面显示时补成 `am-`、`λόγ-`。
 - 与 `lemma`（基本形态）不同：`lemma` 是词典形式，词干是去掉词尾后的部分。
   法语 / 德语的动词 `derive` 用 `stemForms.base = { from: 'headword', rules }` 从不定式推出词干，
-  因此**词干不必重复填写**（见第二部分 [derive 字段](#derive-字段用词干生成变格变位表)）。
+  因此**词干不必重复填写**（见手册 [derive 字段](#derive-字段用词干生成变格变位表)）。
 - **尽量取一个能让词尾直接拼接的词干**（第一变位法用 `am` 而不是 `amā`），可省掉大量音变规则。
 - 词卡正面显示 `base`，其余已填的部分在下面另起一行小字列出。
-- 与「变格 / 变位类型」配合用于**自动生成变格 / 变位表**，见第 7 节。
+- 与「变格 / 变位类型」配合用于**自动生成变格 / 变位表**，见手册 [derive 字段](#derive-字段用词干生成变格变位表)。
 - `base` 为空时词卡背面不显示该区块，生成的按钮也为禁用状态。
 
 #### 语法性（gender）
@@ -314,7 +205,7 @@
 
 ---
 
-### 5. 多源合并策略
+### 4. 多源合并策略
 
 同一条词（`userId + language + lemma + pos` 相同）：
 
@@ -330,7 +221,7 @@
 
 ---
 
-### 6. 版本迁移
+### 5. 版本迁移
 
 `assets/js/services/import-export-service.js` 中维护 `MIGRATIONS`：
 
@@ -347,75 +238,170 @@ const MIGRATIONS = {
 
 ---
 
-## 第二部分 语法数据编写规范
+### 6. 检索规则
 
-语法数据为**只读**，由静态 JSON 提供，前端不提供任何修改入口。
-路径：`/data/grammar/{lang}.json`。
+#### 6.1 检索范围
+
+- **当前语言内**，不做跨语言检索。
+- 列表页「检索范围」三档：
+
+| 值 | 名称 | 命中字段 |
+| --- | --- | --- |
+| `all` | 全部 | 词形（下列全部）+ `meanings[].text`、`examples[].text`、`examples[].translation`、`collocations[].text`、`collocations[].gloss` |
+| `forms` | 词形 | `lemma`、`stems` 全部值、`paradigm` 全部格子、`inflections[].form` |
+| `head` | 原形 | 只有 `lemma` + `stems` 全部值 |
+
+- 默认 `all`。`head` 同时用于派生词选择器的搜索。
+- **数词的多种形式属于派生词**，不作为同一词条的变格形式参与检索。
+
+#### 6.2 匹配方式
+
+**大小写、变音符号、长短音、气符不敏感**。
+
+规范化流程（`utils/text-normalize.js` 的 `normalizeSearch`）：
+
+1. `String.prototype.normalize('NFD')` —— 分解预组合字符
+2. 去除所有 Unicode 组合标记（`\p{M}`）
+3. `toLowerCase()`
+4. 词尾 sigma `ς` 归并为 `σ`（古希腊语）
+
+例：
+
+- 检索 `amo` 命中 `amō` / `AMŌ` / `ămō`
+- 检索 `λυω` 命中 `λύω`
+- 检索 `λογος` 命中 `λόγος`
+- 检索 `kama` 命中 `kāma`
+- 检索 `ete` 命中 `été`
+
+**高亮与片段**保留原始文本，索引映射通过 `normalizeSearchWithMap` 计算。
+
+#### 6.3 唯一键
+
+**不受检索规范化影响**。`addOrMerge` / `findByKey` / 导入合并时仍按原始字符串严格比较。
 
 ---
 
-### 1. 文件结构
+### 7. 共用 HTTP 层
 
-```json
+各源不直接调 `fetch`，统一用 `requestJSON` / `requestText`，参数写在源文件顶部的 `HTTP` 常量里
+（`timeout` / `retries` / `minInterval` / `concurrency` / `cacheTtl`，含义见 http.js 顶部注释）。
+
+- 节流按 `origin` 全局生效：不同源请求同一站点也会排队；同一站点被多个源请求时取各自声明的较大值。
+  参数没有默认值，由各源自己声明（写在源文件顶部的 `HTTP` 常量里）。
+- 429 / 503 优先按 `Retry-After`（秒数或 HTTP-date）等待，其余按 `400ms·2^n` + 抖动退避；
+  其他 4xx 不重试，抛 `HTTP <status>`；超时抛「请求超时」。
+- `cacheTtl > 0` 时，成功响应写进 IndexedDB 的 `httpCache`（库 `langnotebook` v2，键是排序后的 URL），
+  过期条目按需清理；`store/http-cache.js` 里也导出 `clearHttpCache()` 供以后做「清理缓存」入口。
+
+---
+
+## 二、语言数据手册
+
+这一块是 `data/grammar/{lang}.json` 的写法。语法数据为**只读**，由静态 JSON 提供，前端不提供任何修改入口。
+
+### 1. 语言元数据
+
+**真源在每个语言自己的 `data/grammar/{code}.json` 顶层**，`assets/js/data/languages.js` 只列出
+**要加载哪些文件**（`GRAMMAR_FILES`），启动时把这份清单里的 JSON 全拉一遍、取出元信息。
+语言选择页需要所有语言的元信息，所以这一层是启动时的固定开销（当前合计约 5 MB）。
+
+```jsonc
+// data/grammar/ja.json 顶层
 {
   "version": 1,
-  "language": "la",
-  "name": "拉丁语",
-
-  "paradigms": {
-    "verb": {
-      "tables": [
-        {
-          "key": "main",
-          "title": "变位",
-          "columns": [
-            { "key": "1sg", "label": "单1" },
-            { "key": "2sg", "label": "单2" }
-          ],
-          "rows": [
-            {
-              "key": "pres-act-ind",
-              "label": "现在时 主动 陈述式",
-              "grammarRef": "la-verb-1st-conj",
-              "principal": true
-            }
-          ]
-        }
-      ]
-    }
-  },
-
-  "groups": [
-    { "id": "pron", "title": "代词" },
-    { "id": "noun", "title": "名词" }
-  ],
-
-  "sections": [
-    {
-      "id": "la-noun",
-      "title": "名词变格",
-      "group": "noun",
-      "items": [
-        {
-          "id": "la-noun-1st-decl",
-          "title": "第一变格法",
-          "tables": [
-            {
-              "caption": "aqua, -ae (f.)",
-              "headers": ["格", "单数", "复数"],
-              "rows": [
-                ["主格", "aqua", "aquae"],
-                ["属格", "aquae", "aquārum"]
-              ]
-            }
-          ],
-          "notes": "多用于阴性名词。"
-        }
-      ]
-    }
-  ]
+  "language": "ja",              // = code，文件名也是它
+  "name": "现代日语",             // 中文名
+  "native": "日本語",             // 本语言书写形式
+  "classical": false,            // 是否古典语言（兼容字段，等价于 group.id === 'classical'）
+  "group": { "id": "modern", "title": "现代语言", "order": 2 },  // 选择页分组
+  "order": 1,                    // 组内顺序
+  "vertical": false,             // 纵向书写
+  "rtl": false,                  // 从右到左
+  "grammar": true,               // 是否有语法页（false：列表页不显示「语法」，词性徽章不可点）
+  "paradigm": true,              // 是否有变格 / 变位表（false：表单只留基本形态、词性、含义、
+                                 //   补充形式、固定搭配、例句、派生词、标签备注）
+  "profile": false,              // 是否有专属语言档案 data/paradigm/{lang}.js；
+                                 //   false 时表单不会去 import 它（避免 404）
+  "pos": ["noun", "verb", …],    // 该语言可选的词性（值引用全局 POS_LIST；缺省用全部）
+  "terms": { … },                // 界面用词，见下
+  "paradigms": { … },            // paradigm: false 的语言不写这个字段
+  "sections": [ … ]              // grammar: false 的语言写空数组 []
 }
 ```
+
+- **`group` / `order`**：语言选择页按 `group.order` → `order` 排序；组标题只写在各自 JSON 里，不在代码中硬编码。分组本身不可跨组拖动，组内顺序存 `settings.languageOrder`，组间顺序存 `settings.groupOrder`。
+- **`vertical` / `rtl`**：只影响**呈现样式** —— `vertical: true` 的 popover 用竖排样式，
+  `rtl: true` 决定 `<bdi>` 与浮层的 `dir`。它们**不**决定能否弹浮层、也不决定检索行为。
+与文字相关的三份配置都在 `assets/js/config/config.js`，彼此独立、按语言 code 登记：
+
+| 配置 | 作用 |
+| --- | --- |
+| `SCRIPT_POPUP_LANGS` | 允许弹「原文预览浮层」的语言；值是该文字的 Unicode 范围（用来判断元素里是否真有该文字）。浮层只显示 `<bdi>` 里的原文，输入框取 `value` |
+| `TRANSLIT_SEARCH_LANGS` | 检索时同时匹配原文与 `paradigmRoman`（转写）的语言；不在列表里的只搜原文 |
+| `BDI_LANGS` | 渲染时把**命中的字符**包进 `<bdi>` 的语言（满文、希伯来文…）；同一段文本里的中文 / 拉丁不包 |
+
+渲染原文一律走 `assets/js/utils/bdi.js`：组件渲染完后调用 `applyBdi(root, lang)` 即可（按 `[lang]` 与字符范围包 `<bdi>`，重复调用安全）。
+夹在两个原文之间的分隔符（词根 `ק-ט-ל`、gershayim `ע"ו`）会并进同一个 `<bdi>`，否则每个字母各自成 bdi，
+RTL 字母会被按 LTR 顺序排开、词根看起来是反的。
+
+原生 `placeholder` 带不了标记 —— 含原文的 placeholder 会由 `ghost-input` 组件或 `applyBdiPlaceholders()` 叠一层自绘提示；
+词干输入框的「推导提示」也用同一套幽灵文字（前缀匹配，输入不符即消失）。
+原生 `<input>` / `<select>` 只放纯文本、收起态的文字也由浏览器直接画，同样包不了 `<bdi>`，所以生词表单里的文本输入框与下拉框都是自绘控件：
+`components/editable-input.js`（contenteditable，值仍是纯文本，`el.value` 照旧）、`components/ghost-input.js`（在其上叠 placeholder / 推导提示）、
+`components/select-field.js`（按钮 + 自绘列表，收起态用 `bdiText` 渲染当前项）。展开的列表统一由 `components/select-menu.js` 画，
+原生 `<select>` 与自绘下拉共用同一套，键盘与 `role="listbox" / combobox` 语义一致。
+- **`grammar: false`**：生词列表不显示「语法」按钮；直接访问 `#/grammar/{code}` 会跳回词列表；词卡的词性徽章不可点。
+- **`paradigm: false`**：表单与词卡都不出现变格 / 变位相关的字段与表格。
+- **`profile`**：有 `data/paradigm/{lang}.js` 才写 `true`；表单据此决定要不要 import 语言档案，
+  写 `false` 的语言不会发那个请求。新增 / 删除档案时同步改这个字段。
+- **`pos`**：该语言生词表单 / 筛选器里出现的词性，顺序即下拉顺序；值必须是 `config.js` 里
+  `POS_LIST` 的 value（如 `noun` / `verb` / `ambip`）。缺省时用全部词性。
+
+#### terms：界面用词
+
+**每个语言必须自己写一套**，代码里不留默认文案。语言级的值可以按词性用 `byPos` 覆盖
+（满语名词锚点是「复数类型」、动词是「活用类型」，就靠这个区分）。
+
+| key | 用途 |
+| --- | --- |
+| `inflectionType` | 「变格 / 变位类型」这一栏的标签 |
+| `inflectionTypePlaceholder` | 该输入框的 placeholder |
+| `inflectionTypeHint` | 该栏的说明文字 |
+| `special` | 锚点下拉里的「特殊…（自行填写）」 |
+| `indeclinable` | 锚点下拉里的「不变格 / 不变形 / 无活用」 |
+| `paradigmTitle` | 变化表块标题，`{pos}` 会替换成词性名（如 `{pos}词形表`；希伯来语直接用「变化表」） |
+| `anchorHint` | 语法锚点下拉的说明 |
+| `extraForms` | 「补充形式」块标题 |
+| `extraPartsHint` | 额外词干那一栏的说明 |
+| `stems` | `{ label, placeholder, hint }`：词干那一栏的三处文案 |
+| `byPos` | `{ [pos]: { 上面任意键 } }`，按词性覆盖 |
+
+---
+
+### 2. 文件结构与约束
+
+```jsonc
+{
+  "version": 1,
+  "language": "la",             // = 文件名，也是语言 code
+  "name": "拉丁语",
+  "paradigms": { "verb": { "tables": [ /* 表 / 行 / 列，见 §3 */ ] } },
+  "groups": [{ "id": "noun", "title": "名词" }],
+  "sections": [{
+    "id": "la-noun",
+    "title": "名词变格",
+    "group": "noun",
+    "items": [{
+      "id": "la-noun-1st-decl",     // 全局唯一，用作锚点
+      "title": "第一变格法",
+      "tables": [{ "caption": "aqua, -ae (f.)", "headers": ["格", "单数", "复数"], "rows": [["主格", "aqua", "aquae"]] }],
+      "notes": "多用于阴性名词。"
+    }]
+  }]
+}
+```
+
+完整实物见 `data/grammar/la.json`（带 `derive` 的语言）与 `data/grammar/en.json`（只有 `sections`）。
 
 #### 约束
 
@@ -440,7 +426,7 @@ const MIGRATIONS = {
 
 ---
 
-### 2. paradigms 字段
+### 3. paradigms 字段
 
 用于生词表单与词卡中的结构化变位/变格表格。按词性分表。
 
@@ -508,7 +494,7 @@ const MIGRATIONS = {
 
 ---
 
-### 3. sections 字段说明
+### 4. sections 字段说明
 
 `sections[]` 是语法页的正文：每个 section 带一个 `id`（锚点）、标题、所属分组和条目；`items[]` 上挂 derive 与 post。
 
@@ -578,8 +564,8 @@ const MIGRATIONS = {
 
 - 生成逻辑：`assets/js/models/paradigm-generate.js`（通用引擎，不 import 任何模块）
 - 语言专属后期处理：`data/paradigm/<lang>.js`（见 [语言档案](#语言档案dataparadigm-目录)）
-- 自检入口：命令行（见[第四部分 §3](#3-校验语法数据命令行)），页面上没有开发专用按钮
-- 入口：生词表单「词干 / 词干」右侧的「生成表格」按钮。按钮的启用条件是
+- 自检入口：**设置页 → 语法数据 → 校验语法 JSON**，规则见[§6](#6-校验语法数据)
+- 入口：生词表单「词干」那一栏右侧的「生成表格」按钮。按钮的启用条件是
   **填了词干** + **`required` 的词干都填了** + 该类型有 `derive`；基本形态能推出词干也只作为
   placeholder 预览，不再单独构成启用条件。
 - **每次点击都是全量覆盖**：本次生成的结果即新的表格数据，已有内容会被覆盖；
@@ -618,7 +604,6 @@ const MIGRATIONS = {
 | `parts[].showWhen`              | 可选。`{ 词干键: 值 }`，只有这些词干取到指定值时这一栏才显示（梵语「迂说完成时助动词」只在完成时类别 = 迂说完成时时出现） |
 | `exampleStems`                  | 可选。自检用的词干示例 `{ 名称: 词形 }`。词干无法由基本形态推出时（德语强变化的过去时 / 第二分词）必须给，否则那些格子必然对不上 |
 | `skipTables`                    | 可选。该类型没有的表格 `["impr"]`：语法速查的章节条目与生词表单的变位表格都会跳过（德语情态动词没有命令式）；表单里已填过的数据不会被删除，只是不显示 |
-| `expectParts`                   | 可选。词干全填时的期望值，缺省时用 `expect`                              |
 | `endings[tableKey][rowKey][colKey]` | 词尾。字符串 = 只加词尾（可写成 `-a`）；对象 = `{ suffix, prefix, stemForm }` |
 | `rowDefaults[tableKey][rowKey]` | 该行的 `prefix` / `suffix` / `stemForm` 默认值，被格级声明覆盖               |
 | `stems[名称]`                   | 直接给出词干变体（无法用规则表达时用，如 la `reg → rēx`）                    |
@@ -628,7 +613,7 @@ const MIGRATIONS = {
 | `unlessEndsWith`                | 格级条件词尾：`prefix + 词干` 已以数组里任一字符串结尾时**不加** suffix。用于「第三格复数加 -n，但已以 -n / -s 结尾则不加」（德语 Tischen / Kindern / Frauen / Autos） |
 | `post.sandhi`                   | 可选。交给语言档案的连声处理：`"sa"` = 词干与词尾接合处连声；`"sa-word"` 或 `{ scope: "word" }` 额外做词尾停顿式 |
 | `post.accent`                   | 可选。按音节重新指派重音，见下                                              |
-| `expect`                        | 自检期望值，结构同 `paradigm`                                                |
+| `expect` / `expectParts`        | 自检期望值，结构同 `paradigm`；`expectParts` 是「词干全填时」的那份，缺省回落到 `expect` |
 
 生成过程（每个格子）：
 
@@ -749,7 +734,7 @@ const MIGRATIONS = {
 | `accent(text, mode, options)` | `function`     | 拼好之后按模式指派重音；`options.endingAccented` 表示该格词尾自带重音 |
 | `sandhi`        | `{ join, wordFinal }`       | `join(左段, 右段)` 做接合处连声；`wordFinal(整词)` 做词尾停顿式 |
 | `deriveStems(data, { spec, stems })` | `function` | 从词根 / 弱词干推出「现在时词干、强/中/弱词干、词根弱化形式、被动词干」等；返回 `{ 名称: 词干 }`。`derive.stemDerive` 决定用哪套规则 |
-| ~~`toScript` / `toRoman`~~ | — | **已移出**：转写转换改由 `data/script/<lang>.js` 提供，见 §7.2 |
+| ~~`toScript` / `toRoman`~~ | — | **已移出**：转写转换改由 `data/script/<lang>.js` 提供，见 [文字档案](#文字档案datascript-目录) |
 
 - 加载：`services/grammar-service.js` 的 `loadParadigmProfile(lang, doc)`（动态 `import()`，结果缓存，
   只有 JSON 里 `profile: true` 时才加载，其余直接返回 `null`）。
@@ -870,65 +855,7 @@ const MIGRATIONS = {
 
 ---
 
-### 4. 各语言约定与已知坑
-
-覆盖范围以数据文件为准，本文档不再逐语言罗列 —— 改数据时不需要回来同步这里。
-
-| 语言 | 数据文件 | 看这些字段 |
-| ---- | -------- | ---------- |
-| `la` 拉丁语、`grc` 古希腊语、`he` 圣经希伯来语 | `data/grammar/{la,grc,he}.json` | `sections[]`、`paradigms` |
-| `sa` 梵语、`mnc` 满语、`de` 德语、`fr` 法语 | `data/grammar/{sa,mnc,de,fr}.json` | `sections[]`、`paradigms` |
-| `ja` 现代日语（活用由 `fields` / `endings` 驱动） | `data/grammar/ja.json` | `sections[]`、`paradigms` |
-| `en` 现代英语、`zh-cls` 古汉语 | `data/grammar/{en,zh-cls}.json` | 只有 `sections[]` |
-
-- 想知道某语言讲了哪些语法：看对应 JSON 的 `sections[].title` 与 `items[].title`。
-- 想知道某个词性会生成哪些表：看 `paradigms.<pos>.tables[].key`（模板字段见 [§2](#2-paradigms-字段)）。
-
-#### 基本形态约定
-
-| 语言 | 名词 | 形容词 | 动词 |
-| --- | --- | --- | --- |
-| `la` / `grc` | 单数主格 | 阳性单数主格 | 第一人称单数现在时（`amō` / `λύω`） |
-| `fr` | 单数（带冠词与否不限） | 阳性单数 | **不定式**（`parler`） |
-| `de` | 单数主格 | 无词尾词干（词典形式） | **不定式**（`sprechen`） |
-| `he` | 单数绝对形 | 阳性单数绝对形 | 3ms Qal 完成式 |
-| `sa` | 单数主格 | 阳性单数主格 | 第三人称单数现在时 |
-
-#### 已知坑
-
-- **拉丁语第三变位法**：完成时词干（regō → rēxī）和各类分词词干是词汇性的，规则推不出来；
-  换词后要手工核对，`parts[].required` 里不要假装能推。
-- **希伯来语四辅音形容词**：不能用 `variants` 自动判型 —— אַדִּיר 与 צַדִּיק 的
-  `toSkeleton(基本形态, 词根)` 完全相同，差别只在阴性单数。必须拆成独立锚点，由用户按词选择。
-- **满文位置形**：同一码位的字形由字体按上下文决定，表格里用 ZWJ / ZWNJ 强制显示
-  独立 / 词首 / 词中 / 词尾四种位置形；复制单元格会带上这些不可见字符。
-
-写数据时更通用的清单（词干取法、`expect`、`skipTables`、锚点等）见 [§5.1](#51-写语法数据的清单与坑)。
-
-### 5. 新增一个语言的流程
-
-以新增语言 code `xx` 为例，按以下顺序改动：
-
-| 步骤 | 文件 | 改动内容 |
-| ---- | ---- | -------- |
-| 1 | `assets/js/config/config.js` | 在 `GRAMMAR_FILES` 末尾追加语言 code `'xx'`。元信息全部写在 `data/grammar/xx.json` 顶层（见第 3 节），`code` 必须唯一。 |
-| 2 | `data/grammar/xx.json` | 新建语法文件，文件名必须与 `code` 一致。`version`（整数）、`language`（同 `code`）、`name` 必填，`sections` 必填（可为空数组，但建议至少给出一个条目），`paradigms` 可选。锚点按 `xx-{category}-{item}` 命名且全局唯一。 |
-| 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: var(--ff-xx); --ff-display: var(--ff-xx); }`。**方向不写在这里**：RTL / 竖排由 `config.js` 的 `BDI_LANGS` / `SCRIPT_POPUP_LANGS` 决定，原文会自动包进 `<bdi dir>`。 |
-| 4 | `assets/css/variables.css` + `fonts.css` | `variables.css` 加 `--ff-xx: "LN XX", var(--ff-ui);`（缺字时回退到界面字体）。`fonts.css` 加 `@font-face`，**只声明该文字的 `unicode-range`**，这样同一段里的说明性中英文会落到界面字体；只声明实际拥有的字重，缺的粗体由浏览器合成。没有专用字体可跳过这一步。 |
-| 5 | `external/js/wiktionary.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
-| 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见 [语言档案](#语言档案dataparadigm-目录)。不需要就跳过，引擎会自动略过这两步。 |
-| 7 | `docs/SCHEMA.md` | 更新 [锚点 id 命名](#锚点-id-命名)的示例表。（语言元数据表与 §4 都以数据文件为准，不用回来改） |
-
-补充说明：
-
-- **分组**：`classical` 决定语言进入「古典语言」还是「现代语言」组，分组本身不可由用户跨组拖动。
-- **竖排 / RTL**：`vertical: true` 只让浮层用竖排样式；`rtl: true` 决定 `<bdi>` 与浮层的 `dir`。
-  能否弹浮层看 `SCRIPT_POPUP_LANGS`，`<bdi>` 的包裹范围看 `BDI_LANGS`（都按字符范围判定）。
-- **词性**：`pos` 取值来自 `assets/js/config/config.js` 的全局 `POS_LIST`，不是按语言定义。新语言的 `paradigms` 只能使用这些 key；确有新词性需求时需同时改 `POS_LIST` 和本文档第 4 节。
-- **语法文件加载**：`assets/js/services/grammar-service.js` 运行时按 `./data/grammar/{code}.json` 拉取，404 时该语言的「语法」页显示为空提示。`data/grammar/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
-- **既有用户数据**：老用户的 `settings.languageOrder` 里没有新 code 时，语言选择页会按 `LANGUAGES` 原始顺序把它追加到所在组末尾，不需要数据迁移。
-
-#### 5.1 写语法数据的清单与坑
+### 5. 写语法数据的清单与坑
 
 **先定 `paradigms`，再写 `sections`** —— 模板决定生词表单与词卡能填什么，改起来最贵。
 
@@ -950,7 +877,7 @@ const MIGRATIONS = {
 5. **`skipTables`**：某个变位类型整张表都不存在时（情态动词没有命令式）用它，
    不要留一张全空表；语法章与生词表单都会跳过，已填数据保留不删。
 6. **锚点**：要让某个 section / item 出现在「语法锚点」下拉里，就给它标
-   `inflect: "decl"` 或 `"conj"`（见 [§2](#2-paradigms-字段)）。`collectInflectAnchors` 会拿标题做词卡徽章的短名，
+   `inflect: "decl"` 或 `"conj"`（见 [§3](#3-paradigms-字段)）。`collectInflectAnchors` 会拿标题做词卡徽章的短名，
    **保留标题末尾括号里的例词**（`强变化动词（sprechen 型）`），短名撞车时回退完整标题；
    下拉里 item 级锚点只显示条目标题（不带章节前缀）。`section.id` 与 `item.id` 必须全局不重复。
 7. **表格写法**：
@@ -970,7 +897,7 @@ const MIGRATIONS = {
    放到 `data/paradigm/<lang>.js`，通过 `profile` 注入（见 [语言档案](#语言档案dataparadigm-目录)）；通用引擎只保留机械流程。
 10. **改完数据要 bump `sw.js` 的 `CACHE`**：`data/grammar/` 是 stale-while-revalidate，
     不 bump 时浏览器首次加载会读到旧文件。
-11. **跑自检**：`verifyGrammarDoc(lang, doc, profile)`（命令行跑法见[第四部分 §3](#3-校验语法数据命令行)），
+11. **跑自检**：`verifyGrammarDoc(lang, doc, profile)`（设置页按钮或命令行，见[§6](#6-校验语法数据)），
     错误必须为 0；新增语言时同时确认章节能渲染、锚点下拉能取到条目。
 12. **说明文字用 HTML，不写 Markdown**：`notes` / `note` / 表格 caption 与单元格都按 HTML 片段渲染
     （`utils/dom.js` 的 `htmlFragment`），可用的标签只有
@@ -1019,71 +946,83 @@ const MIGRATIONS = {
 
 骨架型语言（词根嵌进元音骨架，如圣经希伯来语）另见 [§「骨架型 derive」](#骨架型-derivemode-取-skeleton)。
 
+### 6. 校验语法数据
+
+两段式，两边调用同一套规则，结论一致：
+
+- **结构校验** `validateGrammarDoc(lang, doc)`：字段类型、必需字段、锚点 id 唯一、`group` / `extends` 等跨字段引用。
+- **derive 自检** `verifyGrammarDoc(lang, doc, profile)`：按 `stemExample` + `endings` 生成表格，逐格比对 `expect`，同时验证「词干全填」那条路径。
+
+**设置页 → 语法数据 → 校验语法 JSON**：一次跑完全部语言，结果分两段列在浮层里 ——
+**有没有问题都会弹**。耗时约 1 秒（`sa` / `grc` / `he` 的 derive 试算各占 ~0.1 秒），
+逐语言之间让出主线程，按钮上显示「校验中… 3/10 sa」这样的进度。
+
+**加载时也会跑结构校验**（`loadGrammar()` 与启动时的 `loadLanguages()`）：
+有 error 的文件**不加载**（该语言语法页为空、锚点下拉退回「特殊变形」），错误逐条 `console.error`；
+只有 warning 时照常加载，逐条 `console.warn`。derive 自检只在设置页按需跑，不拖慢加载。
+
+**命令行**（CI / 批量检查，输出到终端）：
+
+```bash
+cd docs/pages/grammar
+node --input-type=module -e "
+import fs from 'node:fs'
+import { validateGrammarDoc } from './assets/js/models/grammar.js'
+import { verifyGrammarDoc } from './assets/js/models/paradigm-generate.js'
+for (const f of fs.readdirSync('data/grammar')) {
+  const lang = f.replace('.json', '')
+  const doc = JSON.parse(fs.readFileSync('data/grammar/' + f, 'utf8'))
+  const structure = validateGrammarDoc(lang, doc)
+  const profile = await import('./data/paradigm/' + lang + '.js').catch(() => null)
+  const derive = verifyGrammarDoc(lang, doc, profile)
+  console.log(lang, '结构', structure.errors.length + 'E/' + structure.warnings.length + 'W',
+              '· derive', derive.errors.length + 'E/' + derive.warnings.length + 'W')
+  for (const line of [...structure.errors, ...structure.warnings, ...derive.errors, ...derive.warnings]) {
+    console.log('   ', line)
+  }
+}
+"
+```
+
+- 期望结果：每个语言 **errors 0 / warnings 0**。
+- 需要真实表格做样本时，用 `generateParadigm()` 按 `spec` + `template` 生成再核对。
 ---
 
-## 第三部分 检索规范
-
-### 1. 检索范围
-
-- **当前语言内**，不做跨语言检索。
-- 列表页「检索范围」三档：
-
-| 值 | 名称 | 命中字段 |
-| --- | --- | --- |
-| `all` | 全部 | 词形（下列全部）+ `meanings[].text`、`examples[].text`、`examples[].translation`、`collocations[].text`、`collocations[].gloss` |
-| `forms` | 词形 | `lemma`、`stems` 全部值、`paradigm` 全部格子、`inflections[].form` |
-| `head` | 原形 | 只有 `lemma` + `stems` 全部值 |
-
-- 默认 `all`。`head` 同时用于派生词选择器的搜索。
-- **数词的多种形式属于派生词**，不作为同一词条的变格形式参与检索。
-
-### 2. 匹配方式
-
-**大小写、变音符号、长短音、气符不敏感**。
-
-规范化流程（`utils/text-normalize.js` 的 `normalizeSearch`）：
-
-1. `String.prototype.normalize('NFD')` —— 分解预组合字符
-2. 去除所有 Unicode 组合标记（`\p{M}`）
-3. `toLowerCase()`
-4. 词尾 sigma `ς` 归并为 `σ`（古希腊语）
-
-例：
-
-- 检索 `amo` 命中 `amō` / `AMŌ` / `ămō`
-- 检索 `λυω` 命中 `λύω`
-- 检索 `λογος` 命中 `λόγος`
-- 检索 `kama` 命中 `kāma`
-- 检索 `ete` 命中 `été`
-
-**高亮与片段**保留原始文本，索引映射通过 `normalizeSearchWithMap` 计算。
-
-### 3. 唯一键
-
-**不受检索规范化影响**。`addOrMerge` / `findByKey` / 导入合并时仍按原始字符串严格比较。
-
 ---
 
-## 第四部分 数据源
+## 三、新增流程
 
-### 1. 手动编写
+这块只讲「加什么、放哪里」，具体实现与坑见 **四、现有实现** 的对应小节。
 
-- 通过「添加生词」表单输入
-- 支持导入/导出完整用户 JSON
-- 支持批量导入生词 JSON（单对象 / 数组 / `{ words: [...] }`）
-- 支持导入前预览：按唯一键（`userId + language + lemma + pos`）模拟统计「新增 / 合并 / 跳过」，不写入数据；
-  同一批次内的重复条目按合并计入，与实际导入结果一致
-- 支持 AI 提示词下载，驱动模型按当前语言的 paradigm 模板生成结构化 JSON
-- **派生词只能从词库中选择**（外键语义）：用 `head` 范围搜索当前语言的词条，
-  选不中的词会提示「未找到，请先添加该词」，不提供自由文本输入
+### 1. 新增一个语言
 
-### 2. 新增数据源流程
+以新增语言 code `xx` 为例，按以下顺序改动：
 
-外部依赖统一放在 `docs/pages/grammar/external/js/`，一个源一个文件，**不静态 import**。
+| 步骤 | 文件 | 改动内容 |
+| ---- | ---- | -------- |
+| 1 | `assets/js/config/config.js` | 在 `GRAMMAR_FILES` 末尾追加语言 code `'xx'`。元信息全部写在 `data/grammar/xx.json` 顶层（见手册 §1），`code` 必须唯一。 |
+| 2 | `data/grammar/xx.json` | 新建语法文件，文件名必须与 `code` 一致。`version`（整数）、`language`（同 `code`）、`name` 必填，`sections` 必填（可为空数组，但建议至少给出一个条目），`paradigms` 可选。锚点按 `xx-{category}-{item}` 命名且全局唯一。 |
+| 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: var(--ff-xx); --ff-display: var(--ff-xx); }`。**方向不写在这里**：RTL / 竖排由 `config.js` 的 `BDI_LANGS` / `SCRIPT_POPUP_LANGS` 决定，原文会自动包进 `<bdi dir>`。 |
+| 4 | `assets/css/variables.css` + `fonts.css` | `variables.css` 加 `--ff-xx: "LN XX", var(--ff-ui);`（缺字时回退到界面字体）。`fonts.css` 加 `@font-face`，**只声明该文字的 `unicode-range`**，这样同一段里的说明性中英文会落到界面字体；只声明实际拥有的字重，缺的粗体由浏览器合成。没有专用字体可跳过这一步。 |
+| 5 | `external/js/wiktionary.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
+| 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见 [语言档案](#语言档案dataparadigm-目录)。不需要就跳过，引擎会自动略过这两步。 |
+| 7 | `docs/SCHEMA.md` | 更新 [锚点 id 命名](#锚点-id-命名)的示例表。（语言元数据表与四·1 都以数据文件为准，不用回来改） |
+
+补充说明：
+
+- **分组**：`classical` 决定语言进入「古典语言」还是「现代语言」组，分组本身不可由用户跨组拖动。
+- **竖排 / RTL**：`vertical: true` 只让浮层用竖排样式；`rtl: true` 决定 `<bdi>` 与浮层的 `dir`。
+  能否弹浮层看 `SCRIPT_POPUP_LANGS`，`<bdi>` 的包裹范围看 `BDI_LANGS`（都按字符范围判定）。
+- **词性**：`pos` 取值来自 `assets/js/config/config.js` 的全局 `POS_LIST`，不是按语言定义。新语言的 `paradigms` 只能使用这些 key；确有新词性需求时需同时改 `POS_LIST` 和四·1。
+- **语法文件加载**：`assets/js/services/grammar-service.js` 运行时按 `./data/grammar/{code}.json` 拉取，404 时该语言的「语法」页显示为空提示。`data/grammar/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
+- **既有用户数据**：老用户的 `settings.languageOrder` 里没有新 code 时，语言选择页会按 `LANGUAGES` 原始顺序把它追加到所在组末尾，不需要数据迁移。
+
+### 2. 新增外部数据源
 
 新增一个源就是两步：写一个 `external/js/<source>.js`（导出 `lookupWordForForm`），
-在 `EXTERNAL_SOURCES` 里加一条记录。接入前先确认可行性 —— CORS、限流、覆盖哪些语言，
-候选清单见 `docs/TODO.md` 第一部分。
+在 `EXTERNAL_SOURCES` 里加一条记录（源一律动态 import，不静态引用）。接入前先确认可行性 —— **CORS、限流、覆盖哪些语言**：
+CORS 是硬门槛（无 `Access-Control-Allow-Origin` 的站点前端直连不了，只能换接口或不做），
+限流则写在源文件顶部的 `HTTP` 常量里（见一·7）。
 
 **注册方式**（`assets/js/config/config.js`）：
 
@@ -1134,29 +1073,81 @@ export async function lookupWordForForm({ lemma, langCode, preferredPos, grammar
 `patch` 与本对象同构。视图在查询按钮旁多一个下拉，切换即用该 `patch` 重新回填；
 `label` 要带上语言与词性（Wiktionary 源还会带词源小节名），以便区分。
 
-**共用 HTTP 层**（`assets/js/services/http.js`）：各源不直接调 `fetch`，统一走这一层。
+### 3. 新增形态分析源
+
+形态分析（「这个屈折形式是什么」）是**独立于生词表单**的功能，不注册进 `EXTERNAL_SOURCES`：
+入口在生词列表页标题栏的「分析」按钮，打开 `components/analyze-modal.js` 浮层。
+和外部数据源一样，一个 API 一个文件、动态 import、共用 HTTP 层。
+
+**注册方式**（`assets/js/config/config.js`）：
 
 ```js
-import { requestJSON, requestText } from '../../assets/js/services/http.js'
-
-requestJSON(url, {
-    query: { action: 'parse', page: lemma, origin: '*' },
-    timeout: 15000,      // 单次超时（ms）
-    retries: 2,          // 网络错误 / 超时 / 5xx / 429 才重试
-    minInterval: 250,    // 同站点相邻请求的最小间隔（ms）
-    concurrency: 1,      // 同站点并发数
-    cacheTtl: 7 * 24 * 60 * 60 * 1000   // >0 时缓存到 IndexedDB
-})
+export const ANALYZE_SOURCES = [
+    { id: 'perseus', label: 'Perseus', file: 'perseus', langs: ['grc', 'la'] },
+]
 ```
 
-- 节流按 `origin` 全局生效：不同源请求同一站点也会排队；同一站点被多个源请求时取各自声明的较大值。
-  参数没有默认值，由各源自己声明（写在源文件顶部的 `HTTP` 常量里）。
-- 429 / 503 优先按 `Retry-After`（秒数或 HTTP-date）等待，其余按 `400ms·2^n` + 抖动退避；
-  其他 4xx 不重试，抛 `HTTP <status>`；超时抛「请求超时」。
-- `cacheTtl > 0` 时，成功响应写进 IndexedDB 的 `httpCache`（库 `langnotebook` v2，键是排序后的 URL），
-  过期条目按需清理；`store/http-cache.js` 里也导出 `clearHttpCache()` 供以后做「清理缓存」入口。
+- `file` 对应 `external/js/{file}.js`；`langs` 决定哪些语言的生词列表页出现「分析」入口
+  （一个源都没有时整颗按钮不渲染，与 `grammar: false` 时隐藏「语法」是同一种写法）。
+- 配置只有数据；筛源 / 加载 / 并发查询在 `assets/js/services/analyze-service.js`：
+  `hasAnalyzer(lang)`（列表页判断入口）、`loadAnalyzers(lang)`（动态 import + 校验导出，缺文件跳过）、
+  `analyze({ word, langCode, sources })`（并发查全部源，返回 `{ entries, errors }`）。
+  浮层与列表页都只调这三个函数，不直接碰清单或 `external/js/`。
+- **新增一个分析源 = 两步**：写 `external/js/<source>.js` 导出 `analyzeWord({ word, langCode })`
+  + 在 `ANALYZE_SOURCES` 加一条（带 `langs`）。`analyze-service.js` 与视图代码都不用改。
 
-**Wiktionary 实现**（`external/js/wiktionary.js`）：
+**模块契约**：
+
+```js
+// external/js/<source>.js
+export async function analyzeWord({ word, langCode })
+// → { entries: [{ lemma, pos, posLabel, analysis, classLabel, stem, patch, rawPos? }] } | null
+```
+
+- 一个词形可能有多个候选：按「原形 + 词性」归并，一组一张卡片，`analysis` 是该组各种形态
+  （「主格 · 单数 · 阴性；呼格 · 单数 · 阴性」）。
+- `patch` 与 `lookupWordForForm()` 的返回值**同构**（`pos` / `meanings` / `stems` /
+  `inflectionType` / `attributes` / `summary`），「存为生词」时交给
+  `store/pending-lookup.js` 一次性交给新建生词表单，表单用**同一套回填逻辑**（`applyEntry`）
+  套上去 —— 所以新增一个分析源不需要碰表单代码。
+- 分析源通常不产出释义（`meanings: []`），浮层文案里已写明「只做词形分析，不提供释义」。
+- 判不出来的词干 / 语法锚点一律留空：错填会静默生成一张错的变格表，比不填更贵。
+
+---
+
+## 四、现有实现
+
+各语言（`data/grammar/*.json` + `data/paradigm|script/*.js`）与各外部源（`external/js/*.js`）
+都是按第一、二块的契约接入的插件：满足约定即可自由接入，本块记录各自现在怎么实现。
+
+### 1. 各语言的写法要点
+
+覆盖范围以数据文件为准，本文档不再逐语言罗列 —— 改数据时不需要回来同步这里。
+想知道某语言讲了哪些语法，看对应 JSON 的 `sections[].title` / `items[].title`；
+想知道某个词性会生成哪些表，看 `paradigms.<pos>.tables[].key`（模板字段见 [手册 §3](#3-paradigms-字段)）。
+
+#### 基本形态约定
+
+| 语言 | 名词 | 形容词 | 动词 |
+| --- | --- | --- | --- |
+| `la` / `grc` | 单数主格 | 阳性单数主格 | 第一人称单数现在时（`amō` / `λύω`） |
+| `fr` | 单数（带冠词与否不限） | 阳性单数 | **不定式**（`parler`） |
+| `de` | 单数主格 | 无词尾词干（词典形式） | **不定式**（`sprechen`） |
+| `he` | 单数绝对形 | 阳性单数绝对形 | 3ms Qal 完成式 |
+| `sa` | 单数主格 | 阳性单数主格 | 第三人称单数现在时 |
+
+#### 已知坑
+
+- **拉丁语第三变位法**：完成时词干（regō → rēxī）和各类分词词干是词汇性的，规则推不出来；
+  换词后要手工核对，`parts[].required` 里不要假装能推。
+- **希伯来语四辅音形容词**：不能用 `variants` 自动判型 —— אַדִּיר 与 צַדִּיק 的
+  `toSkeleton(基本形态, 词根)` 完全相同，差别只在阴性单数。必须拆成独立锚点，由用户按词选择。
+- **满文位置形**：同一码位的字形由字体按上下文决定，表格里用 ZWJ / ZWNJ 强制显示
+  独立 / 词首 / 词中 / 词尾四种位置形；复制单元格会带上这些不可见字符。
+
+写数据时更通用的清单（词干取法、`expect`、`skipTables`、锚点等）见 [手册 §5](#5-写语法数据的清单与坑)。
+
+### 2. 外部数据源：Wiktionary
 
 - 一次 `action=parse`（`prop=sections|wikitext`）拿全 wikitext 与标题层级；走共用 HTTP 层，缓存 7 天
 - 按 `sections` 的标题层级 + `byteoffset` 切 wikitext：语言节是二级标题，
@@ -1167,40 +1158,38 @@ requestJSON(url, {
   变位 / 变格号能可靠对应到锚点时一并给出 `inflectionType`（好让 `derive` 直接出表）
 - 该文件内部的 `LANG_TO_WIKTIONARY` / `POS_MAP` / `HEADWORD_TEMPLATES` 是
   这个源专属的解析表，不放进 `config.js`
+- `QUERY_FORM` 是这个源专属的「检索形」转换表：部分语言的词条建在不带附加符号的写法上，
+  查之前先转换一次（结果里的 `lemma` 仍是用户输入的原文）。
+  目前只有希伯来语 —— 去掉 U+0591–U+05C7（元音点 niqqud、重音号 te'amim 与 maqaf / paseq / sof pasuq），
+  即「基本形态填带元音点的词形，检索用纯辅音字母」。新增语言若也有这种落差，在 `QUERY_FORM` 里加一条。
 
 **已知限制**
 
 - 词头模板只处理拉丁语；词干靠规则剪（现在时词干、名词词干），
   第二变格法会按模板里的 `g=` 选阳性 / 阴性锚点；第三变格法等分不出小类时不猜锚点
 - 只认 `#` 顶层的释义行；纯模板释义（如 `{{medieval spelling of|...}}`）清洗后为空会被跳过
-- 无缓存
-- 未处理速率限制
+- 只解析 wikitext 文本，模板渲染后的内容（模板生成的表格、释义块）拿不到
 
-### 3. 校验语法数据（命令行）
+### 3. 形态分析源：Perseus
 
-页面上没有开发专用按钮，`assets/dev/` 目录已移除。改完 `data/grammar/*.json` 后直接用
-`paradigm-generate.js` 的自检函数跑一遍（该模块自包含，可直接在 node 里 import）：
+- 数据源 `morph.perseids.org`（Perseids 的 Morpheus）：**只给形态、没有释义**；
+  入口是生词列表页标题栏的「分析」，结果可一键「存为生词」。只支持古希腊语 / 拉丁语。
+- Perseus 官方的 Word Study Tool 页面**没有 CORS 头**，新站 Scaife 有反爬验证，前端都直连不了；
+  可直连的只有 Perseids 的 Morpheus 服务（与 Hopper 背后同一套引擎）：
+  `GET https://morph.perseids.org/analysis/word?lang=grc|lat&engine=morpheusgrc|morpheuslat&word=…`
+  —— `Access-Control-Allow-Origin: *`，返回 JSON-LD，缓存 30 天。
+- 返回的 `Body` / `infl` 都可能是对象或数组，先归一化再按 `dict.hdwd`（去掉 `manus1` 这种词书序号）
+  + `dict.pofs` 归组。
+- 换算：`pofs` → 本站词性；`gend` → `attributes.gender`；`decl` / `stemtype` → 语法锚点
+  （拉丁语 1–5 变格、`conj1`–`conj4`；希腊语只给 1 / 2 变格，第三变格法的主格判不出小类，留空）。
+- 词干只回填能确认的：拉丁语动词（现在时词干）与 1 / 2 / 4 变格名词。
+  Morpheus 用 `_` 标长音（`re_` → `rē`），转写后仍有 `_` 就不认；
+  拉丁语第三变格法只有主格时词干不可靠（rēx 的真实词干是 rēg），不填；
+  希腊语词干不带重音（λογ vs 语法表的 λόγ），留给表单按基本形态推导。
 
-```bash
-cd docs/pages/grammar
-node --input-type=module -e "
-import fs from 'node:fs'
-import { verifyGrammarDoc } from './assets/js/models/paradigm-generate.js'
-for (const f of fs.readdirSync('data/grammar')) {
-  const lang = f.replace('.json', '')
-  const doc = JSON.parse(fs.readFileSync('data/grammar/' + f, 'utf8'))
-  const profile = await import('./data/paradigm/' + lang + '.js').catch(() => null)
-  const r = verifyGrammarDoc(lang, doc, profile)
-  console.log(lang, 'errors', r.errors.length, 'warnings', r.warnings.length)
-  for (const e of r.errors.concat(r.warnings)) console.log('   ', e)
-}
-"
-```
+**已知限制**
 
-- 期望结果：每个语言 **errors 0 / warnings 0**。
-- 需要真实表格做样本时，用 `generateParadigm()` 按 `spec` + `template` 生成再核对，
-  方式与 `sample-words.json`（项目根目录的导入样例）一致。
-- 语法 / 元数据每改一次，应同步更新 `sample-words.json` 里对应语言的样例词。
-
-改完界面枚举（词性、语法性、主题、页码、外部源）后记得对一下 `assets/js/config/config.js`：
-站点级常量都收在这个文件里，各模块不再各自写一份。
+- 只有 `grc` / `la` 有源；Morpheus 偶尔超时（`dies` 这类词要算很久），失败时浮层显示「查询失败：…」
+- **希腊语第三变格法与动词不回填语法锚点**：第三变格法的小类（-σ / 流音 / -ι …）在主格上判不出来；
+  希腊语动词的锚点是「类 × 时态」，没有一个类就是一个锚点的对应关系。
+  卡片上仍显示变格法 / stemtype 换出来的类名（如「第三变格法」「-ω 动词」），交用户自己选锚点

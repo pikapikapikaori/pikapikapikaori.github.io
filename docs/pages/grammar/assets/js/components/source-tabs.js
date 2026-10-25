@@ -1,12 +1,7 @@
 import { h } from '../utils/dom.js'
 import { sourceLabel } from '../models/word.js'
 
-/**
- * 来源切换标签
- * @param {string[]} sources
- * @param {string} active
- * @param {(source:string)=>void} onChange
- */
+/** 来源切换标签 @param {string[]} sources @param {string} active @param {(source:string)=>void} onChange */
 export function createSourceTabs(sources, active, onChange) {
     const wrap = h('div', {
         class: 'source-tabs',

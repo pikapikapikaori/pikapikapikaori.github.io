@@ -3,13 +3,7 @@ import { h, qs } from '../utils/dom.js'
 let activeModal = null
 
 /**
- * 打开模态框
- * @param {object} opts
- *   title           标题
- *   body            HTMLElement / string
- *   actions         [{ label, className?, onClick? }]
- *   closeOnBackdrop 默认 true
- *   onClose         关闭后回调
+ * @param {object} opts title / body（HTMLElement 或 string）/ actions([{ label, className?, onClick? }]) / closeOnBackdrop / onClose
  * @returns {Function} close
  */
 export function openModal({
@@ -22,7 +16,6 @@ export function openModal({
     const root = qs('#modal-root')
     if (!root) return () => {}
 
-    // 关闭已有模态
     if (activeModal) activeModal.close()
 
     const backdrop = h('div', { class: 'modal-backdrop' })
@@ -82,10 +75,9 @@ export function openModal({
 
     if (closeOnBackdrop) backdrop.addEventListener('click', close)
 
-    // 记录打开前的焦点
+    // 关闭后把焦点还给打开前的元素
     const prevFocus = document.activeElement
 
-    // 自动聚焦
     setTimeout(() => {
         const focusable = modal.querySelector(
             'input:not([type=hidden]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled])'
@@ -117,10 +109,7 @@ export function isModalOpen() {
     return !!activeModal
 }
 
-/**
- * 确认对话框
- * @returns {Promise<boolean>}
- */
+/** @returns {Promise<boolean>} */
 export function confirmModal({
     title = '确认',
     message = '',

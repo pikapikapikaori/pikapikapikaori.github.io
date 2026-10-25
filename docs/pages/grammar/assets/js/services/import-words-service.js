@@ -1,8 +1,6 @@
 /**
- * 批量导入生词
- * - 解析 JSON（单对象 / 数组 / { words: [...] }）
- * - 逐条校验 + 合并到 store
- * - 动态生成 AI 提示词（含当前语言的完整 paradigm 模板）
+ * 批量导入生词：解析 JSON（单对象 / 数组 / `{ words: [...] }`）、逐条校验并合并到 store，
+ * 以及按当前语言的 paradigm 模板生成 AI 提示词。
  */
 
 import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
@@ -75,9 +73,7 @@ function entryLabel(raw, index) {
     return pos ? `#${index + 1} ${lemma}（${pos}）` : `#${index + 1} ${lemma}`
 }
 
-/**
- * 与 addOrMerge 的唯一键保持一致（userId + language + lemma + pos）
- */
+/** 与 addOrMerge 的唯一键保持一致（userId + language + lemma + pos） */
 function recordKey(userId, raw) {
     return [
         userId,
@@ -88,9 +84,8 @@ function recordKey(userId, raw) {
 }
 
 /**
- * 导入前预览：只统计「新增 / 合并 / 跳过」，不写入任何数据
- * 同一批次内重复的条目按「合并」计入，与实际导入行为一致。
- * @returns { created, merged, skipped, total, errors, items: { created, merged } }
+ * 导入前预览：只统计「新增 / 合并 / 跳过」，不写入任何数据；同批次内重复的条目按「合并」计入，与实际导入一致
+ * @returns {{ created, merged, skipped, total, errors, items: { created, merged } }}
  */
 export async function previewWords(userId, words) {
     const stats = {
@@ -130,9 +125,7 @@ export async function previewWords(userId, words) {
     return stats
 }
 
-/**
- * @returns { created, merged, skipped, total, errors: [{index, lemma, reason}] }
- */
+/** @returns {{ created, merged, skipped, total, errors: [{ index, lemma, reason }] }} */
 export async function importWords(userId, words) {
     const stats = { created: 0, merged: 0, skipped: 0, total: words.length, errors: [] }
 

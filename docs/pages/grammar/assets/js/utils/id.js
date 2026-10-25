@@ -1,7 +1,4 @@
-/**
- * id 生成
- * 用户: u_xxx  词条: w_xxx
- */
+/** id 生成：用户 `u_xxx`，词条 `w_xxx` */
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789'
 

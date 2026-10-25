@@ -1,12 +1,17 @@
-/**
- * 语法数据加载（只读）
- * 数据位于 /data/grammar/{lang}.json
- */
+/** 语法数据加载（只读），数据位于 /data/grammar/{lang}.json */
 
-import { isGrammarDoc, indexGrammar, collectIds } from '../models/grammar.js'
+import { GRAMMAR_FILES } from '../config/config.js'
+import { isGrammarDoc, indexGrammar, collectIds, validateGrammarDoc } from '../models/grammar.js'
+import { verifyGrammarDoc } from '../models/paradigm-generate.js'
 
 const cache = new Map()     // lang -> doc
 const pending = new Map()   // lang -> Promise
+
+/** 把一次校验结果打给 console：errors 用 error，warnings 用 warn */
+function logReport(scope, code, { errors, warnings }) {
+    for (const e of errors) console.error(`[${scope}] ${code}: ${e}`)
+    for (const w of warnings) console.warn(`[${scope}] ${code}: ${w}`)
+}
 
 export async function loadGrammar(language) {
     if (!language) return null
@@ -20,9 +25,11 @@ export async function loadGrammar(language) {
             if (res.status === 404) return null
             if (!res.ok) throw new Error(`加载语法失败：${res.status} ${res.statusText}`)
             const json = await res.json()
-            if (!isGrammarDoc(json)) {
-                throw new Error(`语法文件格式不正确：${language}`)
-            }
+            // 有结构错误就不加载（视图会退化成「无语法数据」），错误逐条打出来
+            const report = validateGrammarDoc(language, json)
+            logReport('grammar', language, report)
+            if (report.errors.length) return null
+            if (!isGrammarDoc(json)) return null
             cache.set(language, json)
             return json
         })
@@ -54,9 +61,7 @@ export async function getIds(language) {
 }
 
 /**
- * 校验并规范化 grammarRef：
- *   - 语法文件不存在 → 原样返回，由 UI 处理为普通文本
- *   - 语法文件存在但 id 不存在 → 返回 null
+ * 校验并规范化 grammarRef：语法文件不存在 → 原样返回（UI 当普通文本处理）；文件存在但 id 不存在 → 返回 null
  */
 export async function resolveRef(language, ref) {
     if (!ref) return { ok: false, ref: null, reason: 'empty' }
@@ -69,16 +74,12 @@ export async function resolveRef(language, ref) {
 
 /* ---------- 语言档案（derive 的语言专属后期处理） ---------- */
 
-/**
- * 语言档案位于 /data/paradigm/{lang}.js，导出 accentModes / accent / sandhi。
- * 没有该文件的语言（如拉丁语）返回 null，通用引擎会跳过重音与连声。
- */
 const profiles = new Map()
 const scriptProfiles = new Map()  // lang -> profile | null
 
 /**
- * 语言档案（`data/paradigm/{lang}.js`）：只有该语言的 JSON 声明了 `profile: true`
- * 才去 import，其余语言直接返回 null——否则每次打开生词表单都会报一个 404。
+ * 语言档案（`data/paradigm/{lang}.js`，导出 accentModes / accent / sandhi）：只有该语言的 JSON
+ * 声明了 `profile: true` 才去 import，其余语言直接返回 null——否则每次打开生词表单都会报一个 404。
  */
 export async function loadParadigmProfile(language, doc = null) {
     if (!language) return null
@@ -97,9 +98,8 @@ export async function loadParadigmProfile(language, doc = null) {
 }
 
 /**
- * 「文字档案」：`data/script/<lang>.js`（转写 ⇄ 原文）。
- * 与 data/paradigm/ 完全同一套加载方式，只是由文档里的 `script: true` 声明。
- * 档案导出 `toScript` / `toRoman`（`hasScript` 可选）。
+ * 「文字档案」`data/script/<lang>.js`（转写 ⇄ 原文）：加载方式同 language 档案，由文档里的 `script: true` 声明。
+ * 导出 `toScript` / `toRoman`（`hasScript` 可选）。
  */
 export async function loadScriptProfile(language, doc = null) {
     if (!language) return null
@@ -153,6 +153,69 @@ export function clearCache(language) {
 /** 批量预加载 */
 export async function preload(languages) {
     await Promise.all(languages.map((l) => loadGrammar(l)))
+}
+
+/**
+ * 逐个语言跑「结构校验 + derive 自检」，供设置页的「校验语法 JSON」按钮用。
+ *
+ * 与 `loadGrammar()` 的区别：这里直接抓 JSON，不走缓存、也不因为有 error 就中止，
+ * 坏文件同样要能报出来。每个语言之间让出一帧，避免 sa / grc 的 derive 试算（约 100ms）
+ * 把界面卡住。
+ *
+ * @returns {Promise<Array<{
+ *   code, name,
+ *   structure: { errors: string[], warnings: string[] },
+ *   derive: { specs, checked, errors, warnings, skipped? }
+ * }>>}
+ */
+export async function verifyGrammarFiles({ onProgress = null } = {}) {
+    const codes = [...GRAMMAR_FILES]
+    const out = []
+
+    for (let i = 0; i < codes.length; i++) {
+        const code = codes[i]
+        if (typeof onProgress === 'function') onProgress(i, codes.length, code)
+
+        const item = {
+            code,
+            name: '',
+            structure: { errors: [], warnings: [] },
+            derive: { specs: 0, checked: 0, errors: [], warnings: [] }
+        }
+
+        try {
+            const res = await fetch(`./data/grammar/${encodeURIComponent(code)}.json`, { cache: 'no-cache' })
+            if (!res.ok) throw new Error(`HTTP ${res.status}`)
+            const doc = await res.json()
+            item.name = typeof doc?.name === 'string' ? doc.name : ''
+            item.structure = validateGrammarDoc(code, doc)
+
+            let profile = null
+            if (doc?.profile === true) {
+                profile = await import(`../../../data/paradigm/${encodeURIComponent(code)}.js`).catch(() => null)
+            }
+            try {
+                const r = verifyGrammarDoc(code, doc, profile)
+                item.derive = {
+                    specs: r.specs,
+                    checked: r.checked,
+                    errors: r.errors,
+                    warnings: r.warnings
+                }
+                if (doc?.profile === true && !profile) {
+                    item.derive.warnings.push('声明了 `profile: true`，但 data/paradigm 下的语言档案加载失败')
+                }
+            } catch (err) {
+                item.derive.errors.push(`derive 自检抛错：${err.message}`)
+            }
+        } catch (err) {
+            item.structure.errors.push(`读取失败：${err.message}`)
+        }
+
+        out.push(item)
+        await new Promise((resolve) => setTimeout(resolve, 0))
+    }
+    return out
 }
 
 /* ---------- 从 models/grammar.js re-export，方便视图层统一从 service 引入 ---------- */

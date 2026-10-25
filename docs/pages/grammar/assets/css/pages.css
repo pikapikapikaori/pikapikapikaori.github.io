@@ -239,7 +239,6 @@
     flex: 0 1 auto;
 }
 
-/* 标签：填掉词形右侧的空档 */
 .word-row__tags {
     display: flex;
     gap: var(--sp-1);
@@ -304,7 +303,6 @@
     color: var(--c-danger);
 }
 
-/* 添加入口：一个主按钮 + 一个下拉（手动 / 导入） */
 .split-btn {
     display: inline-flex;
 }
@@ -373,7 +371,6 @@
     min-width: 0;
 }
 
-/* 标签做左栏，控件在右栏 */
 .word-form .field {
     display: grid;
     grid-template-columns: 104px minmax(0, 1fr);
@@ -409,7 +406,6 @@
     grid-column: 1 / -1;
 }
 
-/* 变格变位表里的词干区 */
 .word-form__stems:not([hidden]) + .word-form__group-title {
     margin-top: var(--sp-3);
     padding-top: var(--sp-3);
@@ -429,18 +425,15 @@
     grid-column: 1 / -1;
 }
 
-/* 标签紧贴输入框，两项之间的间距由 column-gap 给 */
 .word-form .field--part {
     grid-template-columns: 11.5rem minmax(0, 1fr);
 }
 
-/* 表格下方那句提示 */
 .word-form__table-hint {
     display: block;
     margin-top: var(--sp-2);
 }
 
-/* 标签 / 备注：备注上方一条分割线 */
 .word-form__extras > .field + .field {
     margin-top: var(--sp-3);
     padding-top: var(--sp-3);
@@ -475,7 +468,6 @@
     grid-template-columns: 1fr 120px auto;
 }
 
-/* 「含义」顶部的来源 tab：贴着列表，少留点空 */
 .word-form__meaning-tabs {
     margin-bottom: var(--sp-2);
 }
@@ -505,13 +497,11 @@
     line-height: 1;
 }
 
-/* 多项之间加分隔线（上下排列时尤其是） */
 .word-form__list > * + * {
     padding-top: var(--sp-3);
     border-top: 1px solid var(--c-border);
 }
 
-/* 表单里的按钮统一和输入框等高（查询 / 生成表格 / 添加 / ✕） */
 .word-form .btn {
     height: 38px;
     min-height: 38px;
@@ -551,7 +541,6 @@
         grid-column: 1;
     }
 
-    /* 词干在窄屏下一栏排，标签回到输入框上方 */
     .word-form .field__parts {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -958,7 +947,6 @@
     height: 16px;
 }
 
-/* 本章目录：小节标题 + 条目 */
 .grammar-nav__group {
     display: flex;
     flex-direction: column;

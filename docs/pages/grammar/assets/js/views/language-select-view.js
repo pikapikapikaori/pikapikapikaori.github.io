@@ -1,8 +1,4 @@
-/**
- * 语言选择
- * - 按 classical 分组
- * - 组内可拖动调整顺序，顺序保存在 settings.languageOrder
- */
+/** 语言选择：按 classical 分组，组内可拖动排序（顺序存 settings.languageOrder） */
 
 import { h, replace } from '../utils/dom.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
@@ -258,7 +254,6 @@ export default {
                 if (!dragCode || dragCode === lang.code) return
                 const dragMeta = LANGUAGE_MAP[dragCode]
                 if (!dragMeta) return
-                // 只允许同组
                 if (Boolean(dragMeta.classical) !== Boolean(lang.classical)) {
                     e.dataTransfer.dropEffect = 'none'
                     return
@@ -308,7 +303,6 @@ export default {
             const toIdx = order.indexOf(toCode)
             if (fromIdx === -1 || toIdx === -1) return
 
-            // 从数组移除 from，再插到 to 的当前索引
             order.splice(fromIdx, 1)
             const newToIdx = order.indexOf(toCode)
             order.splice(newToIdx, 0, fromCode)
@@ -318,7 +312,7 @@ export default {
             renderGroups()
         }
 
-        /* ---------- 数据操作（沿用旧实现） ---------- */
+        /* ---------- 数据操作 ---------- */
 
         async function doExport() {
             try {
@@ -374,9 +368,7 @@ export default {
 
 /* ---------------- 工具 ---------------- */
 
-/**
- * 按 settings.languageOrder 排序，未在 order 中的按 LANGUAGES 原顺序追加。
- */
+/** 按 settings.languageOrder 排序，未在 order 中的按 LANGUAGES 原顺序追加 */
 function orderedLanguages(order) {
     const arr = Array.isArray(order) ? order : []
     const posMap = new Map(arr.map((c, i) => [c, i]))

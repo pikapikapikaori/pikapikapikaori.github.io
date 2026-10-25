@@ -1,11 +1,4 @@
-/**
- * Hash 路由
- *
- * 用法：
- *   const router = createRouter([{ path: '/lang/:lang/words', view: () => import(...) }]);
- *   router.start();
- *   router.navigate('/lang/la/words');
- */
+/** Hash 路由：createRouter(routes).start()，路由项形如 { path: '/lang/:lang/words', view: (ctx) => import(...) } */
 
 import { createEmitter } from './utils/events.js'
 

@@ -1,22 +1,9 @@
 /**
- * 「原文 + 转写」双行显示
- *
- * 表格里存的是原文（满文 / 天城文），转写由语言档案 `data/script/<lang>.js` 的
- * `toRoman` 现场算出来。这里只做 DOM 层的事：
- *
- *   - `annotateDualText()` 在每个**原文片段**后面插一个转写 span（中文等其它字符原样保留），
- *     不整格复制文本，所以「ᠠᵃ 写 / 将写」这种混排只给满文部分加注；
- *   - `setDualTextVisible()` 只切根节点上的 class，CSS 决定显示与隐藏。
- *
- * 这个模块不含任何具体语言的知识：脚本范围与转换函数都由调用方传入。
+ * 「原文 + 转写」双行显示：转写由调用方传入的 toRoman 现场算出，只给原文片段加注，
+ * 中文等其它字符原样保留；本模块不含任何具体语言的知识。
  */
 
-/**
- * @param {HTMLElement} root   要处理的容器（只处理其中的表格单元格 td / th）
- * @param {object} options
- *   range    RegExp  原文的字符范围（如 /[\u1800-\u18AF]/）
- *   toRoman  (text) => string  原文 → 转写
- */
+/** @param {HTMLElement} root 只处理其中的 td / th @param {{ range: RegExp, toRoman: (text) => string }} options */
 export function annotateDualText(root, { range, toRoman } = {}) {
     if (!root || !(range instanceof RegExp) || typeof toRoman !== 'function') return
     // 只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读
@@ -36,7 +23,7 @@ export function annotateDualText(root, { range, toRoman } = {}) {
             const pieces = splitByScript(node.nodeValue, range)
             if (!pieces.some((piece) => piece.script)) continue
 
-            // 原文已经被 applyBdi 包进 <bdi lang="mnc" dir="auto">：转写必须放在 bdi 外面，
+            // 原文已被 applyBdi 包进 <bdi lang="mnc" dir="auto">：转写必须放在 bdi 外面，
             // 否则会继承原文的字体（[lang="mnc"] 选满文字体）与书写方向。
             const bdi = node.parentElement?.closest?.('bdi')
             if (bdi && bdi.parentNode && bdi.textContent === node.nodeValue
@@ -59,12 +46,11 @@ export function annotateDualText(root, { range, toRoman } = {}) {
     }
 }
 
-/** 切换显示：只改根节点 class，不重排 DOM */
+/** 只切根节点 class，不重排 DOM */
 export function setDualTextVisible(on) {
     document.documentElement.classList.toggle('show-dual-text', !!on)
 }
 
-/** 把一段文字按「原文 / 非原文」切成若干段 */
 function splitByScript(text, range) {
     const out = []
     let current = null

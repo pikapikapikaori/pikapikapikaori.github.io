@@ -19,8 +19,10 @@ import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import {
-    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS, posOptions
+    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS
 } from '../config/config.js'
+import { posOptions } from '../utils/pos.js'
+import { takePendingLookup } from '../store/pending-lookup.js'
 
 const SPECIAL_REF = '__special__'
 const INDECL_REF = '__indeclinable__'
@@ -68,16 +70,10 @@ export default {
         /** 当前词性的界面用词（各语言在自己的 JSON 里声明） */
         function currentTerms() { return termsOf(grammarDoc, posSelect.value) }
 
-        /**
-         * 说明文字（.field__hint）：内容来自语法 JSON，里面可能夹着原文
-         * （如希伯来语的「词尾 ־ָה / ־ֶת 多为阴性」），同样按字符范围包 bdi。
-         */
+        /** 说明文字可能夹原文（如希伯来语词尾 ־ָה / ־ֶת），按字符范围包 bdi */
         function hintText(text) { return bdiText(text, lang) }
 
-        /**
-         * 原文语言（满文 / 天城文）：输入允许写转写，失焦时归一成原文。
-         * 存储与生词卡显示都用原文，转写只在检索与「显示转写」开关里出现。
-         */
+        /** 满文 / 天城文：输入允许写转写，失焦时归一成原文；存储与生词卡都用原文 */
         function attachScriptNormalize(input) {
             if (typeof scriptProfile?.toScript !== 'function') return
             input.addEventListener('focusout', () => {
@@ -259,8 +255,8 @@ export default {
             className: 'select',
             onChange: (v) => {
                 const opt = currentOptionsById[v]
-                // 换锚点就重写类型说明：特殊 → 清空待填；不变 → 用该语言的「不变形」；
-                // 其余 → 锚点的短名（原来是「只在为空时填」，导致换了锚点内容不跟着变）
+                // 换锚点要重写类型说明，否则内容不跟着变：特殊 → 清空待填；
+                // 不变 → 该语言的「不变形」；其余 → 锚点的短名
                 if (v === SPECIAL_REF) inflectionLabel.value = ''
                 else if (v === INDECL_REF) inflectionLabel.value = currentTerms().indeclinable
                 else if (opt) inflectionLabel.value = opt.short || opt.label
@@ -325,7 +321,7 @@ export default {
             renderParadigmBlock()
         })
 
-        /** 清掉词性相关的一切（换词性后旧内容不再适用） */
+        /** 换词性后旧内容全部作废 */
         function clearPosContent() {
             data.attributes = {}
             data.inflectionType = { label: '', grammarRef: '' }
@@ -929,7 +925,6 @@ export default {
                 wrap.appendChild(panels[0].node)
             }
 
-            // 表格句尾提示
             wrap.appendChild(h('div', { class: 'field__hint word-form__table-hint' },
                 hintText('仅填写你需要的形式，空白格不渲染')))
 
@@ -1517,6 +1512,30 @@ export default {
                 field('标签', tagsInput, '', lang),
                 field('备注', notesInput, '', lang)
             )
+        }
+
+        /* ---------- 形态分析浮层带过来的一次性预填 ---------- */
+
+        /**
+         * 分析浮层的「存为生词」把原形与 patch 放进 store/pending-lookup.js，这里取一次（取后即清），
+         * 复用外部数据源那套回填逻辑
+         */
+        if (!isEdit) {
+            const pending = takePendingLookup()
+            if (pending && pending.patch && pending.langCode === lang) {
+                if (pending.lemma && !lemmaInput.value.trim()) {
+                    lemmaInput.value = pending.lemma
+                    lemmaField.refresh()
+                }
+                applyEntry({
+                    pos: pending.patch.pos,
+                    sourceId: 'manual',
+                    patch: pending.patch
+                }, [])
+                refreshStemGhosts()
+                refreshGenerateBtn()
+                refreshLookupBtn()
+            }
         }
 
         /* ---------- 提交 ---------- */

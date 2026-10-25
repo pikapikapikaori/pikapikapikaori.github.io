@@ -1,9 +1,6 @@
 /**
- * 原文预览浮层（竖排 / RTL 文字的 popover）
- * 事件委托：整个文档里任何带 lang 属性、且该语言登记在 SCRIPT_POPUP_LANGS 里、
- * 且文本真的包含该语言字符的元素，在 hover（延迟）或 click 时，
- * 在鼠标位置附近弹出一个只包含**原文**（<bdi> 里的内容）的浮层。
- * 竖写语言用竖排样式，其余语言用放大的横排原文。
+ * 原文预览浮层：事件委托，带 lang 且登记在 SCRIPT_POPUP_LANGS、文本确实含该语言字符的元素，
+ * hover（延迟）或 click 时在鼠标附近弹出只含原文的浮层；竖写语言用竖排样式。
  */
 
 import { h } from '../utils/dom.js'
@@ -29,10 +26,7 @@ function isPopupLang(el) {
     return Object.prototype.hasOwnProperty.call(SCRIPT_POPUP_LANGS, lang)
 }
 
-/**
- * 元素的「可读文本」：输入框 / 文本框取 value；
- * 普通元素优先取里面 <bdi> 的内容（只显示原文，不带中文说明），没有才退回 textContent。
- */
+/** 可读文本：输入框取 value；普通元素优先取 <bdi> 内容（只显示原文，不带中文说明），没有才退回 textContent */
 function textOf(el) {
     if (!el) return ''
     const tag = el.tagName
@@ -84,7 +78,6 @@ function ensurePopover() {
         'aria-hidden': 'false'
     })
 
-    // 内部交互不关闭
     popoverEl.addEventListener('mousedown', (e) => e.stopPropagation())
     popoverEl.addEventListener('mouseover', () => cancelHide())
     popoverEl.addEventListener('mouseout', (e) => {
@@ -109,7 +102,6 @@ function show(sourceEl, x, y) {
     const meta = getLanguage(lang)
     el.setAttribute('lang', lang)
     el.setAttribute('dir', meta && meta.rtl ? 'rtl' : 'auto')
-    // 竖写语言用竖排样式，其余语言用放大的横排原文
     el.classList.toggle('vertical-popover--horizontal', !(meta && meta.vertical))
     currentSourceEl = sourceEl
 
@@ -159,7 +151,6 @@ export function hideVerticalPopover() {
 /* ---------------- 事件 ---------------- */
 
 function onMouseOver(e) {
-    // 鼠标进入 popover 内部：取消待隐藏
     if (popoverEl && popoverEl.contains(e.target)) {
         cancelHide()
         return
@@ -168,10 +159,9 @@ function onMouseOver(e) {
     const el = findVerticalEl(e.target)
     if (!el) return
 
-    // 无论后面是否重新计时，先取消待隐藏
     cancelHide()
 
-    // 已经显示的就是这个元素：保持，不再重新计时
+    // 已经显示的就是这个元素：保持，不重新计时
     if (el === currentSourceEl && popoverEl && popoverEl.style.display !== 'none') {
         return
     }

@@ -20,11 +20,7 @@ export function applyTheme(theme) {
     return v
 }
 
-/**
- * 主题切换按钮
- * @param {object} opts
- *   onChange(theme)
- */
+/** 主题切换按钮：按 auto → light → dark 循环，并写入 localStorage @param {object} opts onChange(theme) */
 export function createThemeToggle({ onChange } = {}) {
     const btn = h('button', {
         class: 'btn btn--ghost btn--icon',

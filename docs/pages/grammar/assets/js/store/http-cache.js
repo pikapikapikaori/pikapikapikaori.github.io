@@ -1,8 +1,6 @@
 /**
- * 外部请求的响应缓存（IndexedDB）
- *
- * 键是完整的请求 URL，值是 `{ key, url, type, body, storedAt, expiresAt }`。
- * 只做「读 / 写 / 清」，什么时候用由 services/http.js 决定。
+ * 外部请求的响应缓存（IndexedDB）：键是完整请求 URL，值形如 `{ key, url, type, body, storedAt, expiresAt }`；
+ * 只做读 / 写 / 清，什么时候用由 services/http.js 决定。
  */
 
 import { STORE_HTTP_CACHE, get, put, withStore, clearStore } from './db.js'
@@ -31,7 +29,6 @@ export async function writeCache(key, { url = '', type = 'json', body = '', ttl 
     }
 }
 
-/** 删掉过期的条目 */
 export async function pruneCache() {
     const now = Date.now()
     return withStore(STORE_HTTP_CACHE, 'readwrite', (store) => {

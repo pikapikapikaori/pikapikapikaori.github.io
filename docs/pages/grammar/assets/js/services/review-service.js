@@ -1,10 +1,6 @@
 /**
- * 复习队列构建与结果记录
- *
- * 队列策略（reviewOrder）：
- *   - mastery-asc  ：掌握度低优先，同掌握度按 lastReviewedAt 升序（最久未复习优先）
- *   - added-desc   ：最新添加优先
- *   - random       ：随机
+ * 复习队列构建与结果记录。队列策略（reviewOrder）：
+ *   mastery-asc：掌握度低优先，同掌握度按 lastReviewedAt 升序（最久未复习优先）；added-desc：最新添加优先；random：随机
  */
 
 import { listByLanguage } from '../store/word-store.js'

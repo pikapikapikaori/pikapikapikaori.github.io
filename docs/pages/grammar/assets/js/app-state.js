@@ -1,7 +1,4 @@
-/**
- * 全局 UI 状态（非持久数据）
- * 持久数据请走各自的 store
- */
+/** 全局 UI 状态（非持久数据）；持久数据走各自的 store。 */
 
 import { createStore } from './utils/events.js'
 

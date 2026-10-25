@@ -1,13 +1,6 @@
 /**
- * 自绘下拉（收起态可以包 <bdi>）
- *
- * 原生 <select> 收起时是浏览器直接画选中项的文字，没法把原文包进 <bdi>
- * （希伯来文 / 满文的 anchor 名称里就带着原文），所以换成「按钮 + 自绘列表」：
- *
- *   - 收起态用 bdiText 渲染当前选中项；
- *   - 展开的列表复用 components/select-menu.js（键盘、aria 都在那边）；
- *   - 用法贴近 <select>：el.value / el.disabled / addEventListener('change')，
- *     选项整体替换用 el.setOptions()。
+ * 自绘下拉：原生 <select> 收起态是浏览器画选中项的文字，没法包 <bdi>，这里换成「按钮 + 自绘列表」，
+ * 展开的列表复用 select-menu.js。用法贴近 <select>：el.value / el.disabled / change 事件 / el.setOptions()。
  */
 
 import { h } from '../utils/dom.js'
@@ -25,14 +18,8 @@ function normalizeOption(option) {
 }
 
 /**
- * @param {object} options
- *   options     [{ value, label }]（或纯字符串数组）
- *   value       初始值
- *   lang        bdi 判定语言
- *   className   附加 class（默认 select；外观复用 .select）
- *   disabled    禁用
- *   onChange    (value) => void（同时会派发 change 事件）
- * @returns {HTMLButtonElement} 触发按钮；额外挂了 value / setOptions
+ * @param {object} options options（[{ value, label }] 或字符串数组）/ value / lang / className / disabled / onChange(value)
+ * @returns {HTMLButtonElement} 触发按钮，额外挂了 value / setOptions
  */
 export function createSelect({
     options = [],

@@ -13,7 +13,7 @@ export function normalizeSettings(raw) {
         .map((c) => String(c || '').trim())
         .filter((c) => valid.has(c) && !seen.has(c) && seen.add(c))
 
-    // groupOrder 校验
+    // groupOrder：过滤非法值，缺的组按默认顺序补到末尾
     const VALID_GROUPS = ['classical', 'modern']
     const ga = Array.isArray(s.groupOrder) ? s.groupOrder : []
     const gseen = new Set()

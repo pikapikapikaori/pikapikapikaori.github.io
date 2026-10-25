@@ -1,13 +1,6 @@
 /**
- * 由「词干 + 变格 / 变位类型」生成 paradigm 表格。
- *
- * 规则数据来自语法 JSON：`sections[].items[].derive`，字段说明见 docs/SCHEMA.md。
- *
- * 分工：本文件只做「词干 + 词尾 → 拼接 → 套正则」这套与语言无关的机械流程；
- * 重音、连声等需要语言学知识的后期处理放在 data/paradigm/<lang>.js，
- * 由调用方通过 `profile` 参数传进来（见 docs/SCHEMA.md §7.1）。
- *
- * 本文件必须保持自包含（不 import 其它模块）：界面上的校验按钮直接 import 它，没有构建步骤。
+ * 由「词干 + 词尾」按 derive 规格生成 paradigm 表格；重音、连声等语言学后期处理由调用方传入的 `profile` 负责。
+ * 本文件不 import 其它模块：界面上的校验按钮直接 import 它，没有构建步骤。
  */
 
 /** 词尾允许写成 "-a"，读入时去掉开头的连字符 */
@@ -15,10 +8,7 @@ function endingText(value) {
     return String(value ?? '').replace(/^[-\u2010-\u2015\uff0d]+/, '')
 }
 
-/**
- * 该表格行是否声明了不存在的列
- * 例如命令式只有第二人称：{ key: 'pres-act-impr', disabled: ['1sg','1pl','3sg','3pl'] }
- */
+/** 该行是否声明了这一格不存在（如命令式只有第二人称） */
 export function isCellDisabled(row, colKey) {
     if (!row || !Array.isArray(row.disabled)) return false
     return row.disabled.includes(String(colKey))
@@ -49,9 +39,8 @@ export function applyRuleList(text, rules) {
 }
 
 /**
- * 归一化 stemForms 的一项：
- *   数组            → 直接作用于 base 的规则
- *   { from, rules } → 先取另一个词干变体的结果，再套规则（同一词干的派生形式，如完成时中动词干）
+ * 归一化 stemForms 的一项：数组 = 直接作用于 base 的规则；
+ * `{ from, rules }` = 先取另一个词干变体的结果再套规则（如完成时中动词干）。
  */
 function readStemForm(entry) {
     if (Array.isArray(entry)) return { from: null, rules: entry }
@@ -64,14 +53,6 @@ function readStemForm(entry) {
     return null
 }
 
-/**
- * 取某个词干变体的实际词干
- * 顺序：用户填的词干 → 类型里直接给出的字面量 → 词干变体规则 → base
- * 规则可以链式：{ from: 'perf', rules: [...] } 表示「先按 perf 取词干，再做一次音变」
- *
- * 特殊来源 `from: 'headword'`：拿**基本形态**（lemma，如法语 / 德语动词的不定式）作为输入，
- * 让 base 这类词干不必由用户重复填写。
- */
 /** 语言档案 `profile.deriveStems()` 的单个词干查询（没有档案 / 推不出时返回空串） */
 function derivedStem(profile, key, stem, spec, parts) {
     if (!profile || typeof profile.deriveStems !== 'function' || !key || key === 'base') return ''
@@ -108,8 +89,8 @@ function resolveBase(stem, spec, parts, seen, profile) {
 }
 
 /**
- * 该词干变体是否「有来源」：用户填的词干、类型里的字面量、或能由规则（含 headword）推出。
- * 生成表格前用它判断整张表是否可生成 —— 没有来源时**不能**悄悄退回 base。
+ * 该词干变体是否「有来源」：用户填的词干、spec 里的字面量、或能由规则（含 headword）推出。
+ * 生成前用它判断整张表能否生成 —— 没有来源时不能悄悄退回 base。
  */
 function baseHasSource(stem, spec, parts, seen, profile) {
     if (String(parts.base ?? stem ?? '').trim()) return true
@@ -152,6 +133,11 @@ export function previewStem(stem, stemForm, spec, userStems, profile = null) {
     return resolveStem(stem, stemForm, spec, userStems, null, profile)
 }
 
+/**
+ * 取某个词干变体的实际词干。来源优先级：用户填的词干 → spec.stems 字面量 → stemForms 规则 → base
+ * （再不行才问语言档案的 deriveStems）。规则可链式，`from: 'headword'` 表示拿基本形态作输入
+ * （法语 / 德语动词的不定式），让这类词干不必由用户重复填写。
+ */
 export function resolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const parts = userStems && typeof userStems === 'object' ? userStems : {}
     const key = stemForm || 'base'
@@ -204,14 +190,11 @@ export function normalizeStemParts(stem, stems, headword) {
 /* ---------------- 音节与重音（derive.post.accent） ---------------- */
 
 /*
- * 由 derive.post.accent 指定：按音节重新指派重音。
- * 「单一词干 + 词尾纯拼接」拿不到重音位置，而重音位置由音节数与音节量决定：
- *   古希腊语动词用退重音（recessive），名词 / 形容词用持续重音（persistent）。
- *
- * 约定：
- *   - 词干按它在基本形态里的样子写（重音照写）；重音落在词尾的类型，词尾自带重音。
- *   - 该格的重音取词尾那一侧（词尾自带重音）或词干那一侧，再按限制法校正。
- *   - 长音符（ᾱ ῑ ῡ，分解后是组合长音符 U+0304）只是元音长短的标注，输出会去掉。
+ * derive.post.accent：按音节重新指派重音。词干 + 词尾纯拼接拿不到重音位置，
+ * 它由音节数与音节量决定（古希腊语动词用退重音，名词 / 形容词用持续重音）。
+ * 词干按基本形态里的样子写（重音照写）；重音落在词尾的类型，词尾自带重音，
+ * 该格取词尾侧或词干侧后再按限制法校正。
+ * 长音符（ᾱ ῑ ῡ，分解后是组合长音符 U+0304）只是元音长短标注，输出会去掉。
  */
 
 export const ACUTE = '\u0301'
@@ -295,19 +278,10 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
 }
 
 /**
- * 按词尾规则填表。只填空格子，已有值一律不覆盖。
- *
- * @param {object}   options
- * @param {string}   options.stem      词干；与 stems 二选一
- * @param {object}   [options.stems]   多个词干 { base, perf, ppp, ... }，优先于 stem
- * @param {object}   options.spec      derive 规格
- * @param {object}   options.template  paradigms[pos]
- * @param {object}   [options.existing] 词条已有的 paradigm
- * @param {object}   [options.profile] 语言档案（data/paradigm/<lang>.js）：
- *                                     `sandhi` / `accent`（拼接型）或 `realize`（骨架型）
- * @param {object}   [options.script]  文字档案（data/script/<lang>.js）：`toScript` 把结果转成
- *                                     原文，`toRoman` 把用户输入的原文转回转写（可缺省）
- * @returns {{ paradigm: object, filled: object[], skipped: object[] }}
+ * 按词尾规则填表，只填空格子，已有值不覆盖（`overwrite` 为真时覆盖）。
+ * 入参：`{ stem | stems, headword, spec, template, existing, profile, script, overwrite }`，
+ * 其中 `profile` 是语言档案（`sandhi` / `accent` 或骨架型的 `realize`），`script` 负责转写与原文互转。
+ * @returns {{ paradigm, paradigmRoman, filled, skipped, skippedTables }}（另有 `variant` / `usedTables` / `noVariant`）
  */
 export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, script, overwrite = false } = {}) {
     const result = { paradigm: {}, paradigmRoman: {}, filled: [], skipped: [], skippedTables: [] }
@@ -504,11 +478,7 @@ function buildTableIndex(template) {
     return index
 }
 
-/**
- * 校验 derive 规格，返回问题描述数组（空数组即通过）。
- * @param {object} spec
- * @param {object} [template] paradigms[pos]，传入时同时校验 key 与模板是否对齐
- */
+/** 校验 derive 规格，返回问题描述数组（空数组即通过）；传入 template 时同时校验 key 与模板是否对齐 */
 export function validateDeriveSpec(spec, template, profile) {
     const problems = []
     if (!spec || typeof spec !== 'object') return ['derive 不是对象']
@@ -745,9 +715,8 @@ export function validateDeriveSpec(spec, template, profile) {
 }
 
 /**
- * 用 stemExample 自检：生成结果与 expect 逐格比对。
+ * 用 stemExample 自检：生成结果与 expect 逐格比对。ok 只取决于 missing / mismatches，extra 是「生成了但 expect 没写」。
  * @returns {{ ok: boolean, missing: object[], mismatches: object[], extra: object[] }}
- *   ok 只取决于 missing / mismatches；extra 是「生成了但 expect 没写」的提示
  */
 export function checkDeriveExample(spec, template, options = {}) {
     const { stems: optionStems = null, expect = null, reportExtra = true, profile = null } = options
@@ -829,12 +798,7 @@ export function checkDeriveExample(spec, template, options = {}) {
 /* ---------------- 全量校验（浏览器按钮 / node 脚本共用） ---------------- */
 
 /**
- * 找出某个 derive 规格对应的 paradigms 模板
- * 依次尝试：spec.pos → section id 里的词性 → 包含全部 endings 表 key 的那个词性
- */
-/**
- * 取锚点上的 derive 规格（item 优先，其次 section）。
- * 锚点自己没写 `derive` 时可以写 `deriveRef: "<另一个锚点 id>"` 复用那份规格，
+ * 取锚点上的 derive 规格（item 优先，其次 section）；锚点可写 `deriveRef` 指向另一个锚点复用规格，
  * 避免把同一份长规格复制到多个章节（满语元音和谐、希伯来语名词类别）。
  */
 export function resolveDeriveSpec(doc, id, seen = null) {
@@ -859,6 +823,7 @@ export function resolveDeriveSpec(doc, id, seen = null) {
     return resolveDeriveSpec(doc, ref, visited)
 }
 
+/** 找出某个 derive 规格对应的 paradigms 模板：spec.pos → section id 里的词性 → 包含全部 endings 表 key 的词性 */
 export function resolveDeriveTemplate(doc, spec, sectionId, itemId) {
     const paradigms = doc?.paradigms || {}
     if (spec?.pos && paradigms[spec.pos]) return paradigms[spec.pos]
@@ -1008,11 +973,7 @@ export function verifyGrammarDoc(lang, doc, profile) {
     return out
 }
 
-/**
- * 汇总多份语法文档的校验结果
- * @param {{ lang: string, doc: object }[]} docs
- * @returns {{ files, specs, checked, errors: string[], warnings: string[], ok: boolean }}
- */
+/** 汇总多份语法文档的校验结果；@returns {{ files, specs, checked, errors, warnings, ok }} */
 export function verifyGrammarDocs(docs) {
     const errors = []
     const warnings = []

@@ -56,9 +56,8 @@ pre,
     color: var(--c-fg);
 }
 
-/* 语言内容样式：字体与「展示字体」都在这里定，全局生效（含语法页、词卡详情）。
- * 每个 [lang] 同时改写 --ff-display，所以标题 / 词形 / 复习大词
- * 只要写 font-family: var(--ff-display) 就自动跟着语言走。 */
+/* 语言内容样式：字体与展示字体都在这里定，全局生效（含语法页、词卡详情）。
+ * 每个 [lang] 同时改写 --ff-display，写 font-family: var(--ff-display) 的元素自动跟着语言走。 */
 [lang="la"] {
     font-family: var(--ff-la);
     --ff-display: var(--ff-la);
@@ -121,11 +120,8 @@ pre,
     --ff-display: var(--ff-de);
 }
 
-/*
- * 输入框 / 下拉框里的内容是用户输入的，方向要按内容判定：
- * 中文 placeholder 保持左对齐，输入 RTL 文字时自动切到右对齐。
- * contenteditable 自绘输入框同理（原文交给里面的 <bdi>，外框保持界面方向）。
- */
+/* 输入框 / 下拉框的方向按内容判定：中文 placeholder 保持左对齐，输入 RTL 文字时自动切右对齐。
+ * contenteditable 自绘输入框同理（原文交给里面的 <bdi>，外框保持界面方向）。 */
 input[lang],
 textarea[lang],
 select[lang],

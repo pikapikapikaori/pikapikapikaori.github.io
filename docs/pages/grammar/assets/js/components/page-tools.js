@@ -1,18 +1,5 @@
 import { h } from '../utils/dom.js'
 
-/**
- * 语法页右下角的浮动工具：回到顶部 + 显示转写
- *
- * - 回到顶：页面滚过一屏后出现（语法页很长）
- * - 显示转写：只有提供 `toRoman` 的语言可用（满文 / 天城文），否则禁用；
- *   状态按语言记在 localStorage（`ln.roman.<lang>`），默认关闭
- *
- * @param {object} options
- *   lang       语言 code（用于记忆开关状态）
- *   toRoman    (text) => string | null  文字 → 转写；为 null 时开关禁用
- *   onChange   (on: boolean) => void
- * @returns {{ el: HTMLElement, destroy: () => void }}
- */
 /** 从挂载点往上找真正在滚的容器；找不到就用 window */
 function findScroller(start) {
     let el = start?.parentElement || null
@@ -24,12 +11,16 @@ function findScroller(start) {
     return window
 }
 
+/**
+ * 语法页右下角的浮动工具：回到顶部 + 显示转写（无 toRoman 时不渲染，状态按语言存 localStorage）。
+ * @param {object} options lang / toRoman（(text) => string | null）/ onChange(on) / anchorEl
+ * @returns {{ el: HTMLElement, isOn: () => boolean, destroy: () => void }}
+ */
 export function createPageTools({ lang, toRoman = null, onChange = null, anchorEl = null } = {}) {
     const key = `ln.roman.${lang}`
     let romanOn = false
     try { romanOn = localStorage.getItem(key) === '1' } catch { /* ignore */ }
 
-    // 页面的滚动容器可能是 window，也可能是某个 overflow 容器，挂载时先找出来
     const scroller = findScroller(anchorEl)
 
     function scrollTopNow() {
@@ -89,7 +80,6 @@ export function createPageTools({ lang, toRoman = null, onChange = null, anchorE
     document.addEventListener('scroll', onScroll, { capture: true, passive: true })
     onScroll()
 
-    // 没有转写的语言：整个按钮都不渲染
     const el = h('div', { class: 'page-tools' }, toRoman ? romanBtn : null, topBtn)
 
     return {

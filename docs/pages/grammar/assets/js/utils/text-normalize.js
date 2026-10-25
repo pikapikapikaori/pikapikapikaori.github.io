@@ -1,14 +1,10 @@
 /**
- * 文本工具
- *
- * 检索使用「大小写 + 变音符号 / 气符不敏感」的规范化：
- *   NFD 分解 → 去除组合标记 → 小写 → 词尾 sigma 归并
- * 唯一键、查重仍然严格区分大小写与变音符号，不受本文件影响。
+ * 文本工具：检索用「大小写 + 变音符号 / 气符不敏感」的规范化（NFD 分解 → 去组合标记 → 小写 → 词尾 sigma 归并）；
+ * 唯一键、查重仍严格区分大小写与变音符号，不受本文件影响。
  */
 
 /* ---------------- 规范化 ---------------- */
 
-/** 搜索规范化 */
 export function normalizeSearch(s) {
     return String(s ?? '')
         .normalize('NFD')
@@ -17,10 +13,7 @@ export function normalizeSearch(s) {
         .replace(/ς/g, 'σ')
 }
 
-/**
- * 规范化并保留「规范化位置 → 原始位置」的映射
- * @returns {{ norm: string, map: number[] }}
- */
+/** 同 normalizeSearch，并返回「规范化位置 → 原始位置」的映射 @returns {{ norm: string, map: number[] }} */
 export function normalizeSearchWithMap(s) {
     const src = String(s ?? '')
     let norm = ''
@@ -64,12 +57,10 @@ export function matchRangesNorm(text, query) {
     return out
 }
 
-/** 保留旧名，返回 [[start, end], ...]（已改为规范化匹配） */
 export function matchIndices(text, query) {
     return matchRangesNorm(text, query)
 }
 
-/** 生成带 <mark> 的高亮片段（DocumentFragment） */
 export function highlight(text, query) {
     const t = String(text ?? '')
     const spans = matchRangesNorm(t, query)
@@ -91,7 +82,6 @@ export function highlight(text, query) {
     return frag
 }
 
-/** 截取一段包含 query 的上下文片段 */
 export function snippet(text, query, radius = 40) {
     const t = String(text ?? '')
     const q = String(query ?? '')

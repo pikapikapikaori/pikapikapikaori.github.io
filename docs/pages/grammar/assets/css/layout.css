@@ -4,7 +4,6 @@
     flex-direction: column;
 }
 
-/* 顶部栏 */
 .app-header {
     position: sticky;
     top: 0;
@@ -76,7 +75,6 @@
     user-select: none;
 }
 
-/* 主内容 */
 .app-main {
     flex: 1;
     width: 100%;
@@ -95,7 +93,6 @@
     max-width: 720px;
 }
 
-/* 通用页面块 */
 .page-head {
     display: flex;
     align-items: flex-end;
@@ -147,7 +144,6 @@ h1.page-head__title {
     flex-wrap: wrap;
 }
 
-/* 工具栏：搜索 + 排序 + 筛选 */
 .toolbar {
     display: flex;
     gap: var(--sp-2);
@@ -172,14 +168,12 @@ h1.page-head__title {
     min-height: 38px;
 }
 
-/* 卡片网格 */
 .grid-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: var(--sp-3);
 }
 
-/* 分页 */
 .pagination {
     display: flex;
     align-items: center;
@@ -189,7 +183,6 @@ h1.page-head__title {
     flex-wrap: wrap;
 }
 
-/* FAB 容器 */
 .fab-root {
     position: fixed;
     right: var(--sp-4);
@@ -205,7 +198,6 @@ h1.page-head__title {
     pointer-events: auto;
 }
 
-/* 响应式 */
 @media (max-width: 720px) {
     .app-header {
         padding: 0 var(--sp-4);

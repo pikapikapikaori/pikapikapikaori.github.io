@@ -120,7 +120,6 @@
     flex-wrap: wrap;
 }
 
-/* 标签下的控件横向并排（如 词干 + 生成表格按钮） */
 .field__row {
     display: flex;
     align-items: center;
@@ -133,7 +132,6 @@
     min-width: 0;
 }
 
-/* 多选 chip（如语法性） */
 .chip-group {
     display: flex;
     flex-wrap: wrap;
@@ -161,7 +159,6 @@
     }
 }
 
-/* 键盘聚焦时给个和选中态同款的轮廓 */
 .chip:focus-visible {
     border-color: var(--c-accent);
     color: var(--c-accent);
@@ -174,7 +171,6 @@
     color: var(--c-accent-fg);
 }
 
-/* 派生词选择器：选中区 / 搜索区 / 结果区之间留白 */
 .derivative-picker {
     display: flex;
     flex-direction: column;
@@ -196,7 +192,6 @@
     opacity: 1;
 }
 
-/* 派生词选择器 */
 .picker-results {
     display: flex;
     flex-direction: column;
@@ -329,10 +324,7 @@
     box-shadow: 0 0 0 3px var(--c-accent-soft);
 }
 
-/*
- * contenteditable 自绘输入框（components/editable-input.js）：
- * 外观复用 .input，内容是 HTML，所以原文可以包 <bdi>。单行，不折行。
- */
+/* contenteditable 自绘输入框（editable-input.js）：外观复用 .input，内容是 HTML，可包 <bdi>，单行不折行 */
 .input--editable {
     display: block;
     line-height: 36px;
@@ -581,13 +573,11 @@
     margin-top: 2px;
 }
 
-/* 词干 */
 .word-card__stem {
     font-size: var(--fs-md);
     font-weight: 500;
 }
 
-/* 额外的词干（词卡 / 放大视图） */
 .word-card__stem-extra {
     display: flex;
     flex-wrap: wrap;
@@ -602,7 +592,6 @@
     opacity: 0.8;
 }
 
-/* 表单里的额外词干输入 */
 .field__parts {
     display: flex;
     flex-direction: column;
@@ -640,7 +629,6 @@
     grid-area: hint;
     align-self: start;
 }
-
 
 .word-card__bottom {
     display: flex;
@@ -808,7 +796,6 @@ button.word-card__derivative {
     background: var(--c-accent-soft);
 }
 
-/* 表格 / 面板的 tab 栏 */
 .tab-bar--tables {
     margin-bottom: var(--sp-2);
 }
@@ -1059,7 +1046,7 @@ button.word-card__derivative {
     font-size: var(--fs-md);
 }
 
-/* 表名是表外的一行说明，不再做成第二个表头色带 */
+/* 表名是表外的一行说明，不用第二个表头色带 */
 .grammar-table caption {
     caption-side: top;
     text-align: left;
@@ -1319,7 +1306,6 @@ button.word-card__derivative {
     gap: var(--sp-4);
 }
 
-/* 标题行 / 拖拽区 / JSON 输入框 / 识别结果之间统一留白 */
 .import-words-field {
     gap: var(--sp-4);
 }
@@ -1375,7 +1361,6 @@ button.word-card__derivative {
     color: var(--c-fg-muted);
     text-align: center;
     cursor: pointer;
-    /* 键盘聚焦时用边框高亮替代默认外框 */
     outline: none;
     transition: border-color var(--dur) var(--ease),
         background var(--dur) var(--ease),
@@ -1411,7 +1396,6 @@ button.word-card__derivative {
     gap: var(--sp-3);
 }
 
-/* 导入前预览：嵌在表单里的结果块 */
 .import-preview {
     border: 1px solid var(--c-border);
     border-radius: var(--r-surface);
@@ -1646,7 +1630,6 @@ button.word-card__derivative {
     min-height: 1.2em;
 }
 
-/* 选择词条的弹窗 */
 .lookup-choices {
     display: flex;
     flex-direction: column;
@@ -1696,6 +1679,164 @@ button.word-card__derivative {
 .lookup-choice__label {
     font-size: var(--fs-sm);
     overflow-wrap: anywhere;
+}
+
+/* ---------- 形态分析浮层（生词列表 → 分析） ---------- */
+
+.analyze-query {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--sp-2);
+}
+
+.analyze-query .field {
+    flex: 1;
+    min-width: 0;
+}
+
+.analyze-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-top: var(--sp-3);
+}
+
+.analyze-entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding: var(--sp-3);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-control);
+    background: var(--c-bg-elev);
+}
+
+.analyze-entry__head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+
+.analyze-entry__lemma {
+    font-size: var(--fs-base);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.analyze-entry__analysis {
+    font-size: var(--fs-sm);
+    color: var(--c-fg);
+    overflow-wrap: anywhere;
+}
+
+.analyze-entry .btn {
+    align-self: flex-start;
+}
+
+/* ---------- 语法数据校验结果（设置 → 校验语法 JSON） ---------- */
+
+.verify-body {
+    max-height: min(56vh, 520px);
+    overflow: auto;
+    margin-top: var(--sp-2);
+}
+
+.verify-part + .verify-part {
+    margin-top: var(--sp-4);
+}
+
+.verify-part__title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-2);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+}
+
+.verify-part__count {
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    color: var(--c-fg-subtle);
+}
+
+.verify-part__count--error {
+    color: var(--c-danger);
+}
+
+.verify-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
+.verify-card {
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-control);
+    background: var(--c-bg-elev);
+}
+
+.verify-card__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+
+.verify-card__code,
+.verify-line__code {
+    min-width: 3.5em;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+}
+
+.verify-card__name {
+    font-size: var(--fs-sm);
+    color: var(--c-fg-muted);
+}
+
+.verify-card__meta,
+.verify-line__result {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+}
+
+.verify-card__meta--error,
+.verify-line__result--error {
+    color: var(--c-danger);
+}
+
+.verify-line {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    font-size: var(--fs-sm);
+}
+
+.verify-line__text {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.verify-problems {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: var(--sp-1);
+}
+
+.verify-problems__item {
+    font-size: var(--fs-xs);
+    color: var(--c-danger);
+    overflow-wrap: anywhere;
+}
+
+.verify-problems__item--warn {
+    color: var(--c-fg-subtle);
 }
 
 /* ---------- 自定义下拉菜单（替代原生 select 弹出层） ---------- */

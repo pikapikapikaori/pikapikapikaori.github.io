@@ -10,13 +10,7 @@ import { createParadigmTable } from './paradigm-table.js'
 let overlayEl = null
 let escHandler = null
 
-/**
- * 打开放大版卡片
- *
- * @param {object} word
- * @param {object} opts
- *   language, paradigmTpl, onGrammarRef, resolveDerivative, onDerivativeClick, onClose
- */
+/** 打开放大版卡片；opts 里的 language / paradigmTpl / onGrammarRef / resolveDerivative / onDerivativeClick / onClose 可选 */
 export function openCardOverlay(word, opts = {}) {
     closeCardOverlay()
 
@@ -66,17 +60,13 @@ export function openCardOverlay(word, opts = {}) {
     applyBdi(overlayEl)
     document.body.appendChild(overlayEl)
 
-    /**
-     * 包装 onGrammarRef：跳转前先关闭 overlay
-     */
+    /** 跳转前先关闭 overlay，避免弹窗留在旧页面上 */
     function wrappedGrammarRef(ref) {
         close()
         if (typeof onGrammarRef === 'function') onGrammarRef(ref)
     }
 
-    /**
-     * 包装 onDerivativeClick：跳转前先关闭 overlay，避免弹窗留在页面上
-     */
+    /** 同上，跳转前关闭 overlay */
     function wrappedDerivativeClick(target) {
         close()
         if (typeof onDerivativeClick === 'function') onDerivativeClick(target)

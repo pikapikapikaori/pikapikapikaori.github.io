@@ -1,6 +1,4 @@
-/**
- * 起始页：选择已有用户 / 新建空用户 / 导入 JSON
- */
+/** 起始页：选择已有用户 / 新建空用户 / 导入 JSON */
 
 import { h, replace } from '../utils/dom.js'
 import { listUsers, getUser, deleteUser } from '../store/user-store.js'
@@ -122,7 +120,6 @@ const welcomeView = {
                 )
             )
 
-            // 异步补统计
             statsOf(user.id).then(({ total, langs }) => {
                 meta.textContent = `创建于 ${formatDate(user.createdAt)} · ${total} 词 · ${langs} 语言`
             })
@@ -213,7 +210,6 @@ const welcomeView = {
                     }
                 } catch { /* ignore */ }
                 toast.success('已删除')
-                // 重新渲染
                 await welcomeView.mount(root)
             } catch (err) {
                 toast.error(`删除失败：${err.message}`)

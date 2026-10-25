@@ -1,6 +1,4 @@
-/**
- * Word 模型：唯一键、去重合并、序列化
- */
+/** Word 模型：唯一键、去重合并、序列化 */
 
 import { POS_LIST, GENDERS, WORD_SOURCE_OPTIONS } from '../config/config.js'
 import { wordId } from '../utils/id.js'
@@ -12,10 +10,6 @@ export function genderLabel(gender) {
     return hit ? hit.label : gender || ''
 }
 
-/**
- * 词条的「属性字段」取值（语法性、自他…）：只保留有值的内容。
- * 单选字段存字符串，多选字段（如语法性）存字符串数组。
- */
 /** 旧数据里 gender 是独立字段，统一迁进 attributes.gender */
 function mergeLegacyGender(partial) {
     const attrs = { ...(partial && partial.attributes ? partial.attributes : {}) }
@@ -24,6 +18,7 @@ function mergeLegacyGender(partial) {
     return attrs
 }
 
+/** 词条的「属性字段」取值：只保留有值的内容；单选存字符串，多选（如语法性）存数组 */
 export function normalizeAttributes(input) {
     const out = {}
     if (!input || typeof input !== 'object') return out
@@ -63,7 +58,6 @@ export function sameKey(a, b) {
       && a.pos === b.pos
 }
 
-/** 生成空词条 */
 export function createWord(partial) {
     const t = nowIso()
     return {
@@ -138,8 +132,7 @@ function defaultEntry(kind, text) {
 }
 
 /**
- * 规范化 paradigm
- * 结构：{ [tableKey]: { [rowKey]: { [colKey]: string } } }
+ * 规范化 paradigm：{ [tableKey]: { [rowKey]: { [colKey]: string } } }
  * 空字符串、null、undefined 一律剔除
  */
 export function normalizeParadigm(p) {
@@ -164,8 +157,7 @@ export function normalizeParadigm(p) {
 }
 
 /**
- * 规范化词干
- * 词干是不变的部分，词形变化一律在其后追加词尾：la am → amō / amāre，grc λόγ → λόγος
+ * 规范化词干。词干是不变的部分，词形变化一律在其后追加词尾（la am → amō / amāre，grc λόγ → λόγος）；
  * 末尾的连字符只是显示约定，不写入数据
  */
 export function normalizeStem(value) {
@@ -178,10 +170,7 @@ export function stemDisplay(stem) {
     return s ? s + '-' : ''
 }
 
-/**
- * 规范化词干：{ key: 词干 }
- * 兼容两种入参：新的对象形式，以及旧的单一 stem 字符串（落到 base）
- */
+/** 规范化词干 { key: 词干 }；也接受旧的单一 stem 字符串（落到 base） */
 export function normalizeStems(value) {
     const out = {}
     if (typeof value === 'string') {

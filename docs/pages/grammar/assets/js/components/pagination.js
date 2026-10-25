@@ -1,11 +1,6 @@
 import { h } from '../utils/dom.js'
 
-/**
- * 分页控件
- * @param {object} p
- *   page, totalPages, total, pageSize
- *   onChange(page)
- */
+/** 分页控件：page / totalPages / total / pageSize / onChange(page) */
 export function createPagination({ page, totalPages, total, pageSize, onChange }) {
     const wrap = h('nav', { class: 'pagination', 'aria-label': '分页' })
     if (!total || totalPages <= 0) return wrap

@@ -1,17 +1,6 @@
 /**
- * 统一 HTTP 层：超时 / 重试 / 按站点节流 / 响应缓存
- *
- * 与具体数据源无关——调用方（各外部源）自己声明参数：
- *
- *   await requestJSON(url, {
- *       query: { action: 'parse', page: 'amo' },
- *       timeout: 15000,          // 单次超时（ms）
- *       retries: 2,              // 失败最多再试几次
- *       minInterval: 250,        // 同站点相邻请求的最小间隔（ms）
- *       concurrency: 1,          // 同站点并发数
- *       cacheTtl: 7 * 86400000,  // >0 时把响应缓存到 IndexedDB
- *   })
- *
+ * 统一 HTTP 层：超时 / 重试 / 按 origin 节流 / IndexedDB 响应缓存，与具体数据源无关。
+ * 调用方用 `requestJSON(url, { query, timeout, retries, minInterval, concurrency, cacheTtl, headers, signal })` 声明参数；
  * 节流按 origin 全局生效：不同源请求同一个站点也会排队。
  */
 

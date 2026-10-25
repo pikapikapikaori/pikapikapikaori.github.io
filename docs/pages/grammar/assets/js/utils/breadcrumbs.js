@@ -1,13 +1,8 @@
 import { h, qs } from './dom.js'
 
 /**
- * 面包屑改为渲染在 .app-main 最上方（正文顶部），不再放 header。
- *
- * 用法：
- *   view.mount() 开头调 setBreadcrumbs([...])
- *   main.js 的 mountView 在 await view.mount() 之后调 applyBreadcrumbs()
- *
- * 这样避免 view 内部的 replace(main, ...) 把面包屑清掉。
+ * 面包屑渲染在 .app-main 顶部，不放 header：视图 mount 开头调 setBreadcrumbs()，
+ * mountView 在 await 之后调 applyBreadcrumbs()，这样视图内部的 replace(main, ...) 不会把面包屑清掉。
  */
 
 let pendingItems = null
@@ -20,7 +15,6 @@ export function clearBreadcrumbs() {
     pendingItems = null
 }
 
-/** 由 mountView 在视图挂载完成后调用 */
 export function applyBreadcrumbs() {
     const main = qs('.app-main')
     if (!main) return

@@ -44,18 +44,16 @@ export async function deleteUser(id) {
     }
 }
 
-/** 清空某个用户的所有数据（用户本身也删除） */
 export async function purgeUser(id) {
     await deleteUser(id)
 }
 
-/** 用户词条数统计 */
 export async function countWords(id) {
     const list = await getAllByIndex(STORE_WORDS, 'userId', id)
     return list.length
 }
 
-/** 内部：仅清空 settings（保留用户） */
+/** 内部：只清 settings，保留用户 */
 export async function clearUserSettings(id) {
     if (!id) return
     await remove(STORE_SETTINGS, id)

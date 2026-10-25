@@ -1,14 +1,6 @@
 /**
- * 自绘下拉菜单
- *
- * 原生 <select> 的弹出层是浏览器画的，和站点主题对不上，位置也不受控。
- * 这里统一画一套列表：
- *
- *   - 文档级接管 <select>：点开时在控件正下方画同风格的列表，选中后照常写回
- *     select.value 并派发 change，其它代码完全不用改；
- *   - 自绘下拉（components/select-field.js）直接调用 openSelectMenu() 复用同一套列表。
- *
- * 列表项的文字统一经 bdiText 处理，原文（希伯来文 / 满文）会包进 <bdi>。
+ * 自绘下拉菜单：文档级接管 <select>（选中后照常写回 value 并派发 change），
+ * select-field.js 的自绘下拉复用同一套列表。列表项文字统一经 bdiText 包 <bdi>。
  */
 
 import { h } from '../utils/dom.js'
@@ -77,17 +69,8 @@ function choose(index) {
 }
 
 /**
- * 打开下拉列表
- *
- * @param {object} options
- *   anchor      列表挂靠的元素（定位用）
- *   items       [{ value, label, group?, disabled? }]
- *   value       当前值（用于高亮 / 打勾）
- *   lang        bdi 判定语言
- *   owner       aria-expanded / aria-activedescendant 的载体（默认 anchor）
- *   activeIndex 打开时的高亮项（缺省为当前值）
- *   onPick      (value, item) => void
- *   onClose     () => void
+ * @param {object} options anchor（定位用）/ items([{ value, label, group?, disabled? }]) / value（高亮与打勾）/ lang
+ *   / owner（aria 属性的载体，默认 anchor）/ activeIndex（缺省为当前值）/ onPick(value, item) / onClose()
  */
 export function openSelectMenu({
     anchor,
@@ -186,9 +169,7 @@ function onPointerDown(e) {
     const select = target.closest('select')
 
     if (session) {
-        // 点菜单内部：交给菜单项自己处理
         if (menuEl && menuEl.contains(target)) return
-        // 点触发控件：交给控件自己开关
         const onOwner = session.owner === target || (session.owner?.contains?.(target) ?? false)
         const onAnchor = session.anchor === target || (session.anchor?.contains?.(target) ?? false)
         if (onOwner || onAnchor) {

@@ -78,7 +78,7 @@ export function createWordCard(word, options = {}) {
     function buildFront() {
         const face = h('div', { class: 'word-card__face word-card__face--front' })
 
-        // 顶部：左编辑/删除，右 ×N
+        // 左编辑/删除，右 ×N
         const top = h('div', { class: 'word-card__top' })
 
         if (!compact && (onEdit || onDelete)) {
@@ -108,7 +108,6 @@ export function createWordCard(word, options = {}) {
 
         face.appendChild(top)
 
-        // 中间：lemma + meta
         const center = h('div', { class: 'word-card__center' },
             h('div', { class: 'word-card__lemma', lang: language }, word.lemma)
         )
@@ -124,7 +123,6 @@ export function createWordCard(word, options = {}) {
         center.appendChild(meta)
         face.appendChild(center)
 
-        // 底部：提示
         face.appendChild(h('div', { class: 'word-card__bottom' },
             h('div', { class: 'word-card__hint' }, '点击翻面')
         ))
@@ -163,7 +161,6 @@ export function createWordCard(word, options = {}) {
     function renderBack() {
         const content = h('div', { class: 'word-card__back-body' })
 
-        // 右上角徽章
         const langMeta = getLanguage(word.language)
         const canPosRef = typeof onGrammarRef === 'function' && !!posGrammarRef
             && langMeta?.grammar !== false
@@ -220,7 +217,7 @@ export function createWordCard(word, options = {}) {
         }, expandIcon())
         )
 
-        // 词干（在含义之前）
+        // 词干排在含义之前
         const baseStem = primaryStem(word)
         if (baseStem) {
             const extra = otherStems(word)
@@ -236,7 +233,7 @@ export function createWordCard(word, options = {}) {
             ))
         }
 
-        // 含义（来源 tab 收在这一段里）
+        // 来源 tab 收在含义这一段里
         const meanings = pick(word.meanings)
         const showTabs = showSourceTabs && sources.length > 1
         if (meanings.length || showTabs) {
@@ -258,7 +255,6 @@ export function createWordCard(word, options = {}) {
             ))
         }
 
-        // paradigm 表格：多张时用 tab 切换
         if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
             const panels = []
             const candidates = (paradigmTpl.tables || []).filter((t) => word.paradigm[t.key])
@@ -287,7 +283,6 @@ export function createWordCard(word, options = {}) {
             }
         }
 
-        // 补充形式
         const infs = pick(word.inflections)
         if (infs.length) {
             const groups = groupInflections(infs)
@@ -313,7 +308,6 @@ export function createWordCard(word, options = {}) {
             content.appendChild(section('补充形式', container))
         }
 
-        // 固定搭配
         const cols = pick(word.collocations)
         if (cols.length) {
             content.appendChild(section('固定搭配',
@@ -326,7 +320,6 @@ export function createWordCard(word, options = {}) {
             ))
         }
 
-        // 例句
         const exs = pick(word.examples)
         if (exs.length) {
             content.appendChild(section('例句',
@@ -344,7 +337,6 @@ export function createWordCard(word, options = {}) {
             ))
         }
 
-        // 派生词
         if (word.derivatives && word.derivatives.length) {
             content.appendChild(section('派生词',
                 h('div', { class: 'word-card__derivatives' },
@@ -370,7 +362,6 @@ export function createWordCard(word, options = {}) {
             ))
         }
 
-        // 备注
         if (word.notes) {
             content.appendChild(section('备注', h('div', {}, word.notes)))
         }

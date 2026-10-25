@@ -1,13 +1,8 @@
 import { h } from '../utils/dom.js'
 
 /**
- * 纯标签栏（不管理面板），和来源 tab 同一套样式
- *
- * @param {object} opts
- *   items    [{ key, label }]
- *   active   初始选中的 key（缺省第一个）
- *   onChange (key) => void
- *   className 追加到标签栏的 class
+ * 纯标签栏（不管理面板），和来源 tab 同一套样式。
+ * @param {object} opts items([{ key, label }]) / active（缺省第一个）/ onChange(key) / className
  * @returns {{ el, setActive, getActive }}
  */
 export function createTabBar({ items, active = null, onChange = null, className = '' } = {}) {
@@ -48,15 +43,9 @@ export function createTabBar({ items, active = null, onChange = null, className 
 }
 
 /**
- * 胶囊标签页（和来源 tab 同一套样式）
- *
- * 所有面板先建好，切换只切 `hidden`——表单里切换时输入内容与焦点都不会丢。
- *
- * @param {object} opts
- *   items    [{ key, label, node }]
- *   active   初始选中的 key（缺省第一个）
- *   onChange (key) => void
- *   className 追加到标签栏的 class
+ * 胶囊标签页（和来源 tab 同一套样式）。所有面板先建好，切换只切 `hidden`，
+ * 表单里切换时输入内容与焦点都不会丢。
+ * @param {object} opts items([{ key, label, node }]) / active（缺省第一个）/ onChange(key) / className
  * @returns {{ el, setActive, getActive }}
  */
 export function createTabGroup({ items, active = null, onChange = null, className = '' } = {}) {

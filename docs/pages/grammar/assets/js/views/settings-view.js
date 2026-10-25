@@ -1,6 +1,4 @@
-/**
- * 设置
- */
+/** 设置 */
 
 import { h, replace } from '../utils/dom.js'
 import { appStore, setSettings } from '../app-state.js'
@@ -16,6 +14,8 @@ import {
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
 import { LS_KEYS, PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
+import { verifyGrammarFiles } from '../services/grammar-service.js'
+import { openGrammarVerifyModal } from '../components/grammar-verify-modal.js'
 import { applyTheme, currentTheme } from '../components/theme-toggle.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 
@@ -122,6 +122,17 @@ export default {
             )
         ))
 
+        /* ---------- 语法数据 ---------- */
+        container.appendChild(buildSection('语法数据',
+            row('校验语法 JSON',
+                '逐个检查全部语言：结构（字段 / 锚点 id / 跨字段引用）与 derive 规则（按词干生成表格后与 expect 比对）',
+                h('button', {
+                    class: 'btn', type: 'button',
+                    onclick: (e) => doVerifyGrammar(e.currentTarget)
+                }, '开始校验')
+            )
+        ))
+
         /* ---------- 关于 ---------- */
         container.appendChild(buildSection('关于',
             row('数据存储', '所有数据存放在浏览器本地 IndexedDB，不上传任何服务器', null),
@@ -171,9 +182,8 @@ export default {
                 currentMode,
                 async (v) => {
                     if (v === 'local') {
-                        // 切到本地时打开文件选择器
                         fileInput.click()
-                        // 复位到 default，等文件选好再设置
+                        // 文件选好前不落库：避免留下一个没有字体的本地模式
                         return
                     }
                     applyFont({ mode: v })
@@ -252,6 +262,27 @@ export default {
             } catch (err) {
                 console.error(err)
                 toast.error(`导入失败：${err.message}`, 6000)
+            }
+        }
+
+        /** 校验全部语言的语法 JSON：结构 + derive，结果放浮层里 */
+        async function doVerifyGrammar(btn) {
+            const label = btn.textContent
+            btn.disabled = true
+            const started = performance.now()
+            try {
+                const results = await verifyGrammarFiles({
+                    onProgress: (done, total, code) => {
+                        btn.textContent = `校验中… ${done + 1}/${total} ${code}`
+                    }
+                })
+                openGrammarVerifyModal({ results, elapsed: performance.now() - started })
+            } catch (err) {
+                console.error(err)
+                toast.error(`校验失败：${err.message}`, 6000)
+            } finally {
+                btn.disabled = false
+                btn.textContent = label
             }
         }
 

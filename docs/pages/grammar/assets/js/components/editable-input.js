@@ -1,21 +1,6 @@
 /**
- * contenteditable 单行输入框
- *
- * 原生 <input> 只能放纯文本，没法把原文包进 <bdi>（希伯来文 RTL、满文竖写放在中文界面里
- * 需要独立的方向，否则会带偏周围的标点与排版）。这里用 contenteditable 自绘一个：
- *
- *   - 外观对齐 `.input`（class 仍是 input，样式复用）；
- *   - `el.value` 读写纯文本，`oninput` 里的 `e.target.value` 照旧可用；
- *   - 每次输入后把内容按 Unicode 范围重新包 <bdi lang dir>（拆分规则见 utils/bdi.js），
- *     并用「字符偏移」恢复光标，所以不会跳字；
- *   - 输入法组合期间不重建 DOM，组合结束后再统一重建；
- *   - `el.placeholder` 只是记账，真正的提示由 ghost-input.js 叠一层画出来
- *     （中文说明在 <bdi> 外，原文部分在 <bdi> 里）。
- *
- * 用法：
- *   const el = createEditableInput({ value, lang })
- *   el.value          // 读 / 写纯文本（写入会触发 onValueChange，外层据此刷新提示层）
- *   el.placeholder    // 读 / 写提示文字（触发 onPlaceholderChange）
+ * contenteditable 单行输入框：原生 <input> 没法把原文包进 <bdi>，这里自绘；每次输入重包 bdi 后按字符偏移恢复光标，
+ * 输入法组合期间不重建 DOM。el.value / el.placeholder 读写纯文本并触发对应的 on*Change 回调。
  */
 
 import { h } from '../utils/dom.js'
@@ -40,7 +25,6 @@ function applyRange(range) {
     sel.addRange(range)
 }
 
-/** 把光标放到第 offset 个字符处 */
 function setCaret(el, offset) {
     const range = document.createRange()
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)

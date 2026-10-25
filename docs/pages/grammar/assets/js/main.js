@@ -1,10 +1,4 @@
-/**
- * 应用入口
- * - 打开 IndexedDB
- * - 注册 Service Worker
- * - 初始化主题
- * - 挂载路由
- */
+/** 应用入口：打开 IndexedDB、注册 Service Worker、初始化主题与字体、挂载路由。 */
 
 import { openDB } from './store/db.js'
 import { getUser, listUsers } from './store/user-store.js'
@@ -110,14 +104,7 @@ async function loadView(name) {
     return mod.default || mod
 }
 
-/**
- * 视图模块约定：
- * export default {
- *   needsUser: boolean,
- *   layout: 'full' | 'shell' | 'main',
- *   async mount(ctx) {}
- * }
- */
+/** 视图模块约定：export default { needsUser, layout: 'full' | 'shell' | 'main', async mount(ctx) } */
 
 /* ---------------- 路由 ---------------- */
 
@@ -142,7 +129,6 @@ async function mountView(name, ctx) {
     const isFull = view.layout === 'full'
     || NO_LAYOUT_ROUTES.has(ctx.path)
 
-    // 清理上一个视图
     if (typeof currentUnmount === 'function') {
         try { currentUnmount() } catch (err) { console.warn('[view] unmount error', err) }
         currentUnmount = null
@@ -175,7 +161,6 @@ async function mountView(name, ctx) {
 
 /* ---------------- 启动 ---------------- */
 
-/** 隐藏启动遮罩（首帧渲染完成后再淡出） */
 function hideBootLoader() {
     const el = document.getElementById('boot-loader')
     if (!el) return
@@ -183,7 +168,6 @@ function hideBootLoader() {
     setTimeout(() => el.remove(), 400)
 }
 
-/** 启动遮罩里显示一段提示（例如致命错误） */
 function setBootLoaderText(text) {
     const el = document.querySelector('#boot-loader .boot-loader__text')
     if (el) el.textContent = text
@@ -198,17 +182,14 @@ async function bootstrap() {
         return
     }
 
-    // 主题
     let theme = DEFAULT_THEME
     try { theme = localStorage.getItem(LS_KEYS.theme) || DEFAULT_THEME } catch { /* ignore */ }
     applyTheme(theme)
 
-    // 字体与字号：设置页的选择存在 localStorage，启动时必须应用，
-    // 否则刷新后界面用默认字体、设置页却显示上次选的，两边对不上。
+    // 字体与字号存在 localStorage，启动时须应用，否则界面与设置页显示不一致。
     applyFont({ mode: getStoredFontMode(), family: getStoredFontFamily() })
     applyFontSize(getStoredFontSize())
 
-    // 语言元信息（各语言 JSON 顶层；语言选择页需要全部语言的元信息）
     setBootLoaderText('正在加载语言数据…')
     try {
         await loadLanguages()
@@ -216,10 +197,9 @@ async function bootstrap() {
         console.warn('[bootstrap] 语言元信息加载失败', err)
     }
 
-    // 检索要同步用到「转写 ⇄ 原文」的转换函数，先把这些语言的文字档案加载进来
+    // 检索同步需要「转写 ⇄ 原文」转换，先加载这些语言的文字档案
     await preloadScriptProfiles(SCRIPT_SEARCH_LANGS)
 
-    // 当前用户
     let cur = null
     let uid = null
     try { uid = localStorage.getItem(LS_KEYS.user) } catch { /* ignore */ }
@@ -259,10 +239,8 @@ async function bootstrap() {
         }
     })
 
-    // 暴露给调试使用
     window.__ln = { router, appStore }
 
-    // Service Worker
     setupServiceWorker()
     attachVerticalPopover()
 }

@@ -1,7 +1,4 @@
-/**
- * DOM 构造与操作
- * 统一用 h() 构造元素，避免 innerHTML 拼接。
- */
+/** DOM 构造与操作：统一用 h() 构造元素，避免 innerHTML 拼接 */
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 
@@ -74,11 +71,8 @@ function append(el, children) {
 }
 
 /**
- * 把语法数据里的说明文字解析成 DOM 片段。
- *
- * 数据是静态的语法 JSON，说明里允许少量 HTML（`<strong>` / `<code>` / `<em>` 等）。
- * 只保留白名单标签与普通属性，`on*` 事件与 `javascript:` 链接一律丢弃，
- * 不认识的标签会被拆掉但保留里面的文字 —— 这样即使数据里混进脚本也执行不了。
+ * 把语法数据里的说明文字解析成 DOM 片段：只保留白名单标签与普通属性，
+ * `on*` 事件与 `javascript:` 链接一律丢弃，不认识的标签拆掉但保留里面的文字。
  */
 const HTML_TAGS = new Set([
     'STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN',

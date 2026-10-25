@@ -1,6 +1,4 @@
-/**
- * 生词列表（卡片 + 分页 + 筛选 + 排序）
- */
+/** 生词列表（卡片 + 分页 + 筛选 + 排序） */
 
 import { h, replace, delegate } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
@@ -10,8 +8,11 @@ import {
     submitReview
 } from '../services/word-service.js'
 import { listByLanguage, deleteWord } from '../store/word-store.js'
-import { POS_LIST, PAGE_SIZE_OPTIONS, posOptions } from '../config/config.js'
+import { POS_LIST, PAGE_SIZE_OPTIONS } from '../config/config.js'
+import { posOptions } from '../utils/pos.js'
 import { openCardOverlay, closeCardOverlay } from '../components/card-overlay.js'
+import { openAnalyzeModal } from '../components/analyze-modal.js'
+import { hasAnalyzer } from '../services/analyze-service.js'
 import { openSelectMenu } from '../components/select-menu.js'
 import { formatRelative, formatDate } from '../utils/date.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
@@ -41,7 +42,6 @@ export default {
             { label: language.name }
         ])
 
-        // 视图状态（初始来自 URL 查询）
         const state = {
             q: ctx.query.q || '',
             scope: ctx.query.scope || 'all',
@@ -76,7 +76,6 @@ export default {
 
         await refreshCache()
 
-        // 加载语法模板（只一次）
         const grammarDoc = await loadGrammar(lang)
 
         function paradigmTplFor(pos) {
@@ -120,6 +119,11 @@ export default {
                         class: 'btn', type: 'button',
                         onclick: () => location.hash = `#/grammar/${lang}`
                     }, '语法'),
+                    // 形态分析：只有该语言有分析源时才出现（与「语法」用的是同一种按能力隐藏的写法）
+                    hasAnalyzer(lang) ? h('button', {
+                        class: 'btn', type: 'button',
+                        onclick: () => openAnalyzeModal({ langCode: lang, langName: language.name })
+                    }, '分析') : null,
                     h('button', {
                         class: 'btn', type: 'button',
                         onclick: () => location.hash = `#/lang/${lang}/review`
@@ -299,9 +303,7 @@ export default {
             }
         }
 
-        /**
-         * 派生词跳转：先清空搜索与筛选，再定位到目标词所在页并高亮它的卡片
-         */
+        /** 派生词跳转：清掉搜索与筛选后定位到目标词所在页并高亮卡片 */
         async function focusDerivative(target) {
             state.q = ''
             state.scope = 'all'
@@ -536,7 +538,6 @@ export default {
         }
         document.addEventListener('keydown', onKey)
 
-        // 卸载时清理
         return () => {
             document.removeEventListener('keydown', onKey)
             document.removeEventListener('click', onGlobalClick, true)

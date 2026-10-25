@@ -1,14 +1,6 @@
 /**
- * 字体服务
- *
- * 三种模式：
- *   default 使用 assets/resources/fonts 下的内置字体（fonts.css 中的 @font-face）
- *   system  使用系统字体栈（system-ui）
- *   local   使用用户选择的本地字体文件（会话级 objectURL）
- *
- * 持久化：
- *   localStorage 保存 fontMode 与 fontFamily（字体名）
- *   objectURL 不持久化；每次会话需要重新选择本地文件
+ * 字体服务：default（内置字体）/ system（系统字体栈）/ local（用户选的本地字体文件）。
+ * 只持久化 fontMode 与 fontFamily；objectURL 不持久化，每次会话都要重新选本地文件。
  */
 
 import { LS_KEYS } from '../config/config.js'
@@ -53,12 +45,7 @@ export function applyFontSize(size) {
     catch { /* ignore */ }
 }
 
-/**
- * 应用字体设置
- * @param {object} opts
- *   mode: 'default' | 'system' | 'local'
- *   family: 字体名（local 时必填）
- */
+/** 应用字体设置；mode 为 'default' | 'system' | 'local'（local 时 family 必填） */
 export function applyFont({ mode = 'default', family = '' } = {}) {
     const html = document.documentElement
 
@@ -93,10 +80,7 @@ function persist(mode, family) {
     } catch { /* ignore */ }
 }
 
-/**
- * 从本地文件加载字体并应用
- * @param {File} file
- */
+/** 从本地文件加载字体并应用 */
 export async function applyLocalFontFile(file) {
     if (!file) throw new Error('未选择字体文件')
     const name = deriveFontName(file.name)

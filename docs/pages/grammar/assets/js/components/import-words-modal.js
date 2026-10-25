@@ -1,6 +1,4 @@
-/**
- * 批量导入生词模态框
- */
+/** 批量导入生词模态框 */
 
 import { h, svg } from '../utils/dom.js'
 import { openModal } from './modal.js'
@@ -9,14 +7,7 @@ import {
     parseWordJson, importWords, previewWords, downloadPrompt
 } from '../services/import-words-service.js'
 
-/**
- * @param {object} opts
- *   userId             当前用户
- *   defaultLanguage    默认语言 code（用于生成提示词；为空时禁用下载按钮）
- *   grammarDoc         当前语言的语法 JSON（可为 null）
- *   onDone             (stats) => void
- *   title              模态框标题
- */
+/** @param {object} opts userId / defaultLanguage（为空时禁用下载提示词）/ grammarDoc / onDone(stats) / title */
 export function openImportWordsModal({
     userId,
     defaultLanguage = '',
@@ -322,8 +313,6 @@ function renderResult(stats, closeFn) {
                 type: 'button',
                 onclick: () => {
                     if (closeFn) closeFn()
-                    // 重新打开，方便连续导入
-                    // 由调用方通过 onDone 重新触发
                 }
             }, '关闭')
         )

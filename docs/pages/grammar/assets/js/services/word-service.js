@@ -1,6 +1,4 @@
-/**
- * 生词业务逻辑：列表、筛选、排序、分页、统计
- */
+/** 生词业务逻辑：列表、筛选、排序、分页、统计 */
 
 import {
     listByLanguage, addOrMerge, updateWord, deleteWord,
@@ -28,10 +26,8 @@ export const FILTER_EMPTY = {
 }
 
 /**
- * 检索范围（三档）
- *   all    全部：词形 + 含义 / 例句 / 固定搭配
- *   forms  词形：基本形态、词干、变格变位表、补充形式
- *   head   原形：只有基本形态 + 词干
+ * 检索范围（三档）：all = 词形 + 含义 / 例句 / 固定搭配；forms = 词形（基本形态、词干、变格变位表、补充形式）；
+ * head = 只有基本形态 + 词干
  */
 export const SEARCH_SCOPE = [
     { value: 'all',   label: '全部' },
@@ -73,8 +69,7 @@ export async function queryWords(userId, language, options = {}) {
 }
 
 /**
- * 查询串的规范化变体：天城体语言（梵语）同时按 IAST 与原文检索，
- * 所以「kāmaḥ」与「कामः」都能搜到同一条。
+ * 查询串的规范化变体：天城体语言（梵语）同时按 IAST 与原文检索，所以「kāmaḥ」与「कामः」都能搜到同一条
  */
 function searchVariants(query) {
     const out = new Set()
@@ -178,7 +173,6 @@ export function applySort(words, field, order) {
     return arr
 }
 
-/** 添加或合并 */
 export async function submitWord(userId, language, payload) {
     if (!payload || !payload.lemma || !String(payload.lemma).trim()) {
         throw new Error('基本形态不能为空')
@@ -207,7 +201,6 @@ export async function fetchWord(id) {
     return getWord(id)
 }
 
-/** 语言统计 */
 export async function languageStats(userId, language) {
     const all = await listByLanguage(userId, language)
     const total = all.length

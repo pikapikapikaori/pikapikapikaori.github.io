@@ -2,14 +2,6 @@ import { h, htmlFragment } from '../utils/dom.js'
 import { createTabBar } from './tabs.js'
 import { applyBdi } from '../utils/bdi.js'
 
-/**
- * 语法表格
- * @param {object} table
- *   caption?: string
- *   headers: string[]
- *   rows: string[][]
- *   lang?: string  单元格内容所用语言
- */
 const EMPTY_CELL = /^\s*(?:[—–-]|)\s*$/u
 
 /**
@@ -35,6 +27,7 @@ function plainText(value) {
     return String(value ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
 }
 
+/** 语法表格：caption / headers / rows / lang（单元格语言），空/— 的行与列整块隐藏 */
 export function createGrammarTable(spec) {
     if (!spec || !Array.isArray(spec.headers) || !Array.isArray(spec.rows)) {
         return null
@@ -105,7 +98,6 @@ export function createGrammarTable(spec) {
     )
     )
 
-    // 书写方向不同的文字（满文 / 希伯来文）按字符范围包进 <bdi>
     applyBdi(table)
 
     // 列多时本容器横向滚动，避免整页被撑宽
@@ -113,14 +105,10 @@ export function createGrammarTable(spec) {
 }
 
 /**
- * 一个条目的多张表：用 tab 切换
+ * 一个条目的多张表：多张表时按表分 tab（带 group / groupLabel 时叠成两行 tab），只有一张时直接渲染。
  *
- * - 同一组里有多张表：一张表一个 tab（`示例表：<词>` / `变化表` / 表自己的 `roleLabel`）
- * - 多组（表对象带 `group` / `groupLabel`）：两行 tab，先选组再选表
- * - 只有一张表：直接渲染，不画 tab
- *
- * @param {object[]} tables  语法 JSON 里的 `item.tables`
- * @param {string}   lang    默认单元格语言（表自己带 `lang` 时优先）
+ * @param {object[]} tables 语法 JSON 里的 `item.tables`
+ * @param {string}   lang   默认单元格语言（表自己带 `lang` 时优先）
  */
 export function createGrammarTables(tables, lang = null, ownerTitle = '') {
     const entries = (tables || [])
@@ -144,7 +132,6 @@ export function createGrammarTables(tables, lang = null, ownerTitle = '') {
         group.items.push(entry)
     }
 
-    // 只有一组、且组里只有一张表：不用 tab
     if (groups.length === 1 && groups[0].items.length === 1) return groups[0].items[0].node
 
     // 会被做成 tab 的表：标题已经在 tab 上了，表内不再重复一遍 caption

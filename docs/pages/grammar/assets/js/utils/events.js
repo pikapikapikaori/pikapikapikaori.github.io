@@ -63,7 +63,7 @@ export function createStore(initialState) {
             return state
         },
         subscribe(fn) { return bus.on('change', fn) },
-        /** 不触发变更通知的读取式更新，用于内部缓存 */
+        /** 不触发变更通知，用于内部缓存 */
         _raw() { return state }
     }
 }

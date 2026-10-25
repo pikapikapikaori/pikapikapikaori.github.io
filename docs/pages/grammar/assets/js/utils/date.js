@@ -29,7 +29,6 @@ export function clampMastery(n) {
     return v
 }
 
-/** 依据掌握度计算下次复习时间 */
 export function nextReviewFrom(mastery, fromIso = nowIso()) {
     const idx = clampMastery(mastery)
     const days = REVIEW_INTERVALS_DAYS[idx] ?? 0

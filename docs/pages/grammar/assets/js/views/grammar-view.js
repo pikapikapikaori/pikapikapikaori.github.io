@@ -60,7 +60,7 @@ export default {
         const doc = await loadGrammar(lang)
         if (!doc) { renderNoData(main, lang, language); return }
 
-        // 文字档案（满文 / 天城文）：「显示转写」开关用它把原文转成转写
+        // 文字档案（满文 / 天城文）：供「显示转写」把原文转成转写
         const scriptProfile = await loadScriptProfile(lang, doc)
         return renderGrammar(main, lang, language, doc, anchor, group, scriptProfile)
     }
@@ -111,7 +111,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         if (!current && groupParam && groups.some((g) => g.id === groupParam)) current = groupParam
         if (!current) current = groups[0].id
 
-        // 锚点不在本章时，跳到它真正所在的章节页
         const here = (doc.sections || []).filter((s) => s && s.id && groupOfSection(s, groups) === current)
         const inPage = here.some((s) => s.id === anchor
             || (s.items || []).some((item) => item && item.id === anchor))
@@ -131,7 +130,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     const currentGroup = groups ? groups.find((g) => g.id === current) : null
     const nav = h('aside', { class: 'grammar-nav', 'aria-label': '语法目录' })
 
-    // 章节切换
     if (groups) {
         const chapters = h('div', { class: 'grammar-chapters' })
         chapters.appendChild(h('div', { class: 'grammar-nav__title' }, '章节'))
@@ -170,7 +168,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     }
 
 
-    // 本页的目录（一级标题 = section）。窄屏收进「本页目录」浮层。
+    // 本页目录：一级标题即 section，窄屏收进「本页目录」浮层
     const tocCurrent = h('span', { class: 'grammar-toc__current' })
     const tocDetails = h('details', { class: 'grammar-toc', open: true },
         h('summary', { class: 'grammar-toc__summary' },
@@ -343,7 +341,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         setTimeout(() => scrollToAnchor(anchor, lang, false), 60)
     }
 
-    /** 目录随滚动同步：高亮正在阅读的 section / item */
     const spyTargets = Array.from(content.querySelectorAll('.grammar-section, .grammar-item'))
         .filter((el) => el.id)
     let spyFrame = 0

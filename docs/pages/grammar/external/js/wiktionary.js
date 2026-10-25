@@ -6,16 +6,29 @@ import { requestJSON } from '../../assets/js/services/http.js'
 
 const API = 'https://en.wiktionary.org/w/api.php'
 
-/**
- * 这个源自己的请求参数（节流 / 超时 / 重试 / 缓存）：
- * 统一由 assets/js/services/http.js 执行，按站点排队，跨源共享。
- */
+/** 请求参数统一由 http.js 执行：按站点排队，跨源共享 */
 const HTTP = {
     timeout: 15000,
     retries: 2,
     minInterval: 250,
     concurrency: 1,
     cacheTtl: 7 * 24 * 60 * 60 * 1000
+}
+
+/**
+ * 该语言在 Wiktionary 上的「检索形」：部分语言的词条建在不带附加符号的写法上，
+ * 直接用带点 / 带调形式查会 `missingtitle`（结果里的 `lemma` 仍是用户输入的原文）。
+ *
+ * 希伯来语词条按纯辅音字母建页，元音点（niqqud）、重音号（te'amim）与 maqaf / paseq /
+ * sof pasuq 都落在 U+0591–U+05C7，去掉这一段即可，辅音字母本身不受影响。
+ */
+const QUERY_FORM = {
+    he: (s) => s.replace(/[\u0591-\u05C7]/g, '').replace(/\s+/g, ' ').trim()
+}
+
+function queryFormOf(lemma, langCode) {
+    const transform = QUERY_FORM[langCode]
+    return transform ? transform(lemma) : lemma
 }
 
 const LANG_TO_WIKTIONARY = {
@@ -31,7 +44,6 @@ const LANG_TO_WIKTIONARY = {
     'de': 'German'
 }
 
-/** 界面文案：选词条时用「语言 · 词性」区分同页的多个条目 */
 const LANG_LABEL = {
     'la': '拉丁语',
     'grc': '古希腊语',
@@ -90,11 +102,8 @@ function apiGet(params) {
 }
 
 /**
- * 一次拿全 `action=parse` 的结果：
- * - `wikitext` 用来解析释义与词头模板
- * - `sections` 是解析器给出的标题层级（section 切分依据，比正则可靠）
- *
- * 只要这两样：变格 / 变位表由本站的 derive 引擎按词干生成，不再从表格里刮。
+ * `wikitext` 用来解析释义与词头模板；`sections` 是解析器给的标题层级，比正则可靠。
+ * 变格 / 变位表由本站的 derive 引擎按词干生成，不从表格里刮。
  */
 async function fetchParsedPage(lemma) {
     const data = await apiGet({
@@ -119,8 +128,7 @@ async function fetchParsedPage(lemma) {
 /* ---------------- 按解析器的标题层级切分 wikitext ---------------- */
 
 /**
- * 把 sections 里的 `byteoffset` 批量换算成 JS 字符串下标。
- * 该值实际是字符（码点）偏移而不是 UTF-8 字节数——带变音符 / 组合符的 wikitext
+ * `byteoffset` 实际是字符（码点）偏移，不是 UTF-8 字节数：带变音符 / 组合符的 wikitext
  * 上两者差得很远，按字节换算会整段错位；含代理对时再补一次偏移。
  */
 function offsetsToIndexes(wikitext, offsets) {
@@ -138,7 +146,6 @@ function offsetsToIndexes(wikitext, offsets) {
 }
 
 /**
- * 把 `action=parse` 的 sections 列表（标题层级 + byteoffset）落成 wikitext 切片。
  * 每节的范围止于下一个「层级不高于它」的标题，子标题因此仍留在父节里。
  */
 function buildSections(wikitext, rawSections) {
@@ -176,14 +183,13 @@ function buildSections(wikitext, rawSections) {
     return sections
 }
 
-/** 语言节 = 文本与语言名完全一致的二级标题 */
 function findLanguageSection(sections, langName) {
     return sections.find((s) => s.level === 2 && s.line === langName) || null
 }
 
 /**
- * 语言节里的词性小节。标题层级不固定：简单词条是 `===Noun===`，
- * 分词源的词条会挂成 `===Etymology 1===` 下面的 `====Verb====`，所以按标题名认，不按层级认。
+ * 词性小节按标题名认，不按层级认：简单词条是 `===Noun===`，
+ * 分词源的词条会挂成 `===Etymology 1===` 下面的 `====Verb====`。
  */
 function extractPosSections(wikitext, sections, langSection) {
     return sections
@@ -199,15 +205,13 @@ function extractPosSections(wikitext, sections, langSection) {
 function stripWikiMarkup(s) {
     let str = String(s)
 
-    // 注释、HTML 标签
     str = str.replace(/<!--[\s\S]*?-->/g, '')
     str = str.replace(/<\/?[^>]+>/g, '')
 
-    // 粗体 / 斜体
     str = str.replace(/'''/g, '')
     str = str.replace(/''/g, '')
 
-    // 循环处理模板与链接，直到字符串稳定
+    // 模板与链接可能嵌套，循环到字符串稳定
     let prev
     let guard = 0
     do {
@@ -217,15 +221,12 @@ function stripWikiMarkup(s) {
         guard++
     } while (str !== prev && guard < 6)
 
-    // 未闭合的链接标记
     str = str.replace(/\[\[/g, '')
     str = str.replace(/\]\]/g, '')
 
-    // 外链 [url text] / [url]
     str = str.replace(/\[https?:[^\s\]]+\s+([^\]]+)\]/g, '$1')
     str = str.replace(/\[https?:[^\s\]]+\]/g, '')
 
-    // HTML 实体
     str = str
         .replace(/&nbsp;/g, ' ')
         .replace(/&amp;/g, '&')
@@ -237,7 +238,7 @@ function stripWikiMarkup(s) {
     return str.replace(/\s+/g, ' ').trim()
 }
 
-/** 词性小节里的释义行（`#` 开头的顶层列表项，不含 `#:` / `#*` 子层） */
+/** 释义行只取 `#` 开头的顶层列表项，不含 `#:` / `#*` 子层 */
 function extractMeanings(posContent) {
     const meanings = []
     for (const line of posContent.split('\n')) {
@@ -267,8 +268,8 @@ function extractTemplates(posContent) {
 /* ---------------- 词头模板：词干 ---------------- */
 
 /**
- * 从词头模板里抠「词干」。模板只报词形（如 regō、rēx），
- * 词干要按各语言的规则自己剪；剪不出来就留空，交给用户填。
+ * 从词头模板里抠「词干」：模板只报词形（regō、rēx），词干按各语言规则自己剪，
+ * 剪不出来就留空，交给用户填。
  */
 const LA_VERB_ANCHORS = {
     1: 'la-verb-1st-conj',
@@ -282,10 +283,7 @@ function positionalArgs(args) {
     return (args || []).filter((a) => a && !a.includes('='))
 }
 
-/**
- * 拉丁语现在时词干：从第一人称单数去掉词尾与题元元音。
- * amō → am，moneō → mon，regō → reg，audiō → aud，sequor → sequ
- */
+/** 现在时词干：amō → am，moneō → mon，regō → reg，audiō → aud，sequor → sequ */
 function latinPresentStem(form) {
     let s = String(form || '').trim()
     if (/ō$/.test(s)) s = s.slice(0, -1)
@@ -296,8 +294,7 @@ function latinPresentStem(form) {
 }
 
 /**
- * `{{la-verb|3|regō|rēx|rēct}}`
- * 位置参数：变位类型、第一人称单数、完成时词干、目的分词词干。
+ * `{{la-verb|3|regō|rēx|rēct}}` 位置参数：变位类型、第一人称单数、完成时词干、目的分词词干。
  * 异态 / 半异态（`depon` / `p3inf`）只给目的分词词干。
  */
 function parseLatinVerb({ args }) {
@@ -405,7 +402,10 @@ export async function lookupWord(lemma, langCode) {
     const wikiLang = LANG_TO_WIKTIONARY[langCode]
     if (!wikiLang) throw new Error(`不支持的语言：${langCode}`)
 
-    const page = await fetchParsedPage(trimmed)
+    const query = queryFormOf(trimmed, langCode)
+    if (!query) throw new Error('基本形态为空')
+
+    const page = await fetchParsedPage(query)
     if (!page) return null
 
     const wikitext = page.wikitext
@@ -476,23 +476,11 @@ function buildPatch(result) {
 }
 
 /**
- * 表单便捷入口：查询并返回 ready-to-apply 的数据
+ * 表单便捷入口：查询并返回可直接回填表单的数据，未找到返回 null。
  *
- * @param {object} opts
- *   lemma          待查询的基本形态
- *   langCode       项目内语言 code
- *   preferredPos   当前表单已选的词性（优先匹配）
- *   grammarDoc     语法速查 JSON（未使用，保留签名以备未来扩展）
- * @returns {Promise<object|null>}
- *   {
- *     pos,            // 建议填充到 posSelect 的词性
- *     meanings,       // Word.meanings 格式
- *     stems,          // 建议回填的词干（来自 {{la-noun}} / {{la-verb}} 等词头模板）
- *     inflectionType, // 建议选中的语法锚点 { grammarRef, label }
- *     summary,        // 提示文案
- *     choices         // 同一页有多个词条时：`[{ label, patch }]`，patch 结构与本对象相同
- *   }
- *   未找到返回 null
+ * @param {object} opts  `{ lemma, langCode, preferredPos, grammarDoc }`（grammarDoc 未使用，仅为调用签名一致）
+ * @returns {Promise<object|null>} `{ pos, meanings, stems, inflectionType, summary, choices? }`，
+ *   `choices` 仅在同一个页面有多个词条时给出，为 `[{ label, patch }]`
  */
 export async function lookupWordForForm({
     lemma,

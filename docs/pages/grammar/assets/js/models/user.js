@@ -1,6 +1,4 @@
-/**
- * User 模型与导出 JSON 顶层结构
- */
+/** User 模型与导出 JSON 顶层结构 */
 
 import { userId as genUserId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
@@ -28,7 +26,6 @@ export function isUserShape(obj) {
     && typeof obj.name === 'string'
 }
 
-/** 组装导出对象 */
 export function buildExportPayload({ user, settings, words }) {
     return {
         version: CURRENT_VERSION,
@@ -39,7 +36,6 @@ export function buildExportPayload({ user, settings, words }) {
     }
 }
 
-/** 校验导入对象顶层结构 */
 export function validateExportPayload(payload) {
     const errors = []
     if (!payload || typeof payload !== 'object') {

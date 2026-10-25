@@ -1,24 +1,9 @@
 import { GRAMMAR_FILES } from '../config/config.js'
+import { validateGrammarDoc } from '../models/grammar.js'
 
 /**
- * 语言元数据（清单在 `config/config.js` 的 `GRAMMAR_FILES`）
- *
- * 真源是 `data/grammar/<code>.json` 顶层的元信息，这里只列出**要加载哪些语言文件**：
- *
- *   code        文件名（`data/grammar/{code}.json`）
- *   name        中文名                （来自 JSON）
- *   native      本语言书写形式         （来自 JSON）
- *   classical   是否古典语言           （来自 JSON）
- *   group       显示分组 `{ id, title, order }`（来自 JSON）
- *   order       组内顺序               （来自 JSON）
- *   vertical    是否纵向书写           （来自 JSON）
- *   rtl         是否从右到左           （来自 JSON）
- *   grammar     是否有语法页           （来自 JSON，缺省 true）
- *   paradigm    是否有变格 / 变位表     （来自 JSON，缺省 true）
- *   terms       界面用词（每个语言自己写，见 SCHEMA「语言元信息」）
- *
- * 语言选择页需要所有语言的元信息，所以启动时会把这份清单里的 JSON 全部拉一遍并缓存；
- * 正文（sections / paradigms）随后打开该语言时直接复用已下载的内容。
+ * 语言元数据：真源是 `data/grammar/<code>.json` 顶层，这里只负责把它们全拉一遍并缓存
+ * （语言选择页需要所有语言的元信息；正文在各语言打开时复用已下载的内容）。
  */
 
 /** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */
@@ -61,6 +46,10 @@ export function loadLanguages() {
                 const res = await fetch(new URL(`${code}.json`, base))
                 if (!res.ok) throw new Error(String(res.status))
                 const doc = await res.json()
+                const report = validateGrammarDoc(code, doc)
+                for (const e of report.errors) console.error(`[languages] ${code}: ${e}`)
+                for (const w of report.warnings) console.warn(`[languages] ${code}: ${w}`)
+                if (report.errors.length) return null
                 return metaOf(code, doc)
             } catch (err) {
                 console.warn(`[languages] 读取 ${code}.json 失败：`, err)

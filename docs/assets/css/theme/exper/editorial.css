@@ -1,0 +1,1734 @@
+/* ============================================================================
+ * Editorial — 瑞士国际主义 / 报纸版面（深色版，独立于 light 的 swiss）
+ *
+ * 目录
+ *   ① 非标准（vendor）属性 —— 全文件只有这一段出现 -webkit-*
+ *   ② 封面报头复合字体 CoverTitleLang
+ *   ③ 自定义属性
+ *   ④ 版式：画框 / 报头 / 分节 / 分栏 / 图版 / 正文
+ *   ⑤ 组件：侧栏 / 导航 / 索引 / 翻页 / 评论 / 页脚 / 封面 / 小组件
+ *   ⑥ 状态与动效
+ *   ⑦ 插件
+ *
+ * 约定：字号一律 rem；颜色与尺寸一律走变量；不使用 !important。
+ *      类名前缀 ed-，与 swiss.css 的 sw- 完全隔离，两个文件不共享任何代码。
+ * ============================================================================ */
+
+:root {
+    /* 主题色：hsl(355 66% 78%)，只做线与底块，块上文字永远用墨色 */
+    --theme-color: #eca2a8;
+
+    /* —— 本主题调色：纸 / 墨 / 灰 / 色阶 —— */
+    --ed-paper: #0d0d0d;
+    --ed-ink: #f0eee9;
+    --ed-ink-strong: #ffffff;
+    --ed-ink-muted: #9a9892;
+    --ed-tone: #191919;
+    --ed-tone-line: #33322f;
+
+    /* —— 喂给 base.css 的语义变量 —— */
+    --bg-color: var(--ed-paper);
+    --text-color: var(--ed-ink);
+    --heading-color: var(--ed-ink-strong);
+    --muted-color: var(--ed-ink-muted);
+    --em-color: #cfcdc7;
+    --h6-color: var(--ed-ink-muted);
+    --sidebar-text-color: #d8d6d0;
+    --sidebar-title-color: var(--ed-ink-strong);
+    --border-color: var(--ed-tone-line);
+    --border-color-strong: var(--ed-ink-strong);
+    --border-color-mid: #46443f;
+    --code-bg: var(--ed-tone);
+    --zebra-bg: var(--ed-tone);
+    --tip-code-bg: #232323;
+    --inline-code-color: var(--ed-ink);
+    --code-text-color: #e6e4df;
+    --sidebar-border-color: var(--ed-ink-strong);
+    --accent-color: var(--ed-ink-strong);
+    --accent-text-color: var(--ed-paper);
+
+    /* —— 字体：正文沿用 base 的衬线栈；封面报头用复合字体 CoverTitleLang —— */
+    --global-cover-font: 'CoverTitleLang', serif;
+    --global-cover-paragraph-font: 'SortsMillGoudy', serif;
+
+    /* —— 画框与节奏 —— */
+    --ed-max: 80rem;
+    --ed-gutter: 1rem;
+    --ed-gap-col: 2.5rem;
+    --ed-gap-block: 1.5rem;
+    --ed-gap-sec: 5rem;
+
+    /* —— 规：一律粗规，不用 1px 线 —— */
+    --ed-rule: 0.1875rem;
+    --ed-rule-mast: 0.375rem;
+    --ed-rule-mid: 0.125rem;
+    --ed-border: var(--ed-rule) solid var(--ed-ink-strong);
+    --ed-border-mast: var(--ed-rule-mast) solid var(--ed-ink-strong);
+    --ed-border-mid: var(--ed-rule-mid) solid var(--ed-ink-strong);
+    --ed-border-soft: var(--ed-rule-mid) solid var(--ed-tone-line);
+
+    /* —— 字号：五档 —— */
+    --ed-fs-display: 3.5rem;
+    --ed-fs-cover: 4rem;
+    --ed-fs-h2: 1.75rem;
+    --ed-fs-h3: 1.125rem;
+    --ed-fs-body: 1rem;
+    --ed-fs-small: 0.8125rem;
+    --ed-lh-body: 1.8;
+    --ed-lh-tight: 1.06;
+
+    /* —— base 的全局项 —— */
+    --global-content-width: min(94%, var(--ed-max));
+    --global-sidebar-width: 13.75rem;
+    --global-sidebar-toggle-width: var(--global-sidebar-width);
+    --global-el-border-radius: 0;
+    --global-el-border-radius-small: 0;
+    --global-icon-border-radius: 0;
+    --global-widget-border-radius: 0;
+    --global-transition-duration: 200ms;
+    --global-transition-duration-fast: 160ms;
+
+    /* —— 本主题自用组件尺寸 —— */
+    --ed-toggle-size: 3rem;
+    --ed-plate-radius: 0;
+    --ed-plate-h: 26rem;
+    --ed-cover-ratio: 2 / 1;
+    --ed-thumb-w: 10.5rem;
+    --ed-thumb-h: 7.875rem;
+
+    /* 本主题不用毛玻璃 */
+    --global-backdrop-filter: none;
+}
+
+/* 窄屏（≤1000px）：单栏，栏数控件收起 —— 默认是双栏，这里只做覆盖 */
+@media screen and (max-width: 1000px) {
+    :root {
+        --ed-fs-display: 2.125rem;
+        --ed-fs-cover: 2.5rem;
+        --ed-gap-sec: 3rem;
+        --ed-gap-col: 2rem;
+        --ed-lh-body: 1.75;
+        --ed-plate-h: 22rem;
+    }
+
+    html .ed-mastline .ed-cols {
+        display: none;
+    }
+}
+
+/* 手机（≤768px） */
+@media screen and (max-width: 768px) {
+    :root {
+        --ed-gap-sec: 2.5rem;
+        --ed-plate-h: 18rem;
+        --ed-cover-ratio: 3 / 2;
+        --ed-thumb-w: 5rem;
+        --ed-thumb-h: 3.75rem;
+    }
+}
+
+/* ============================================================
+ * ③ 版式
+ * ============================================================ */
+
+html body {
+    background: var(--ed-paper);
+    color: var(--ed-ink);
+}
+
+html .markdown-section {
+    max-width: var(--global-content-width);
+    padding: 0 var(--ed-gutter) 6rem;
+    margin: 0 auto;
+}
+
+/* —— 报头 —— */
+html .ed-mast {
+    margin: 0 0 var(--ed-gap-sec);
+}
+
+html .markdown-section h1 {
+    font-size: var(--ed-fs-display);
+    font-weight: 700;
+    line-height: var(--ed-lh-tight);
+    letter-spacing: -0.02em;
+    margin: 0 0 1.25rem;
+    color: var(--heading-color);
+}
+
+html .ed-mastline {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.35rem 1.5rem;
+    padding-top: 0.625rem;
+    border-top: var(--ed-border-mast);
+    font-size: var(--ed-fs-small);
+    line-height: 1.5;
+    color: var(--ed-ink-muted);
+}
+
+/* 两色印刷：报头规的左端压一段主题色 */
+html .ed-mastline::before {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--ed-rule-mast));
+    left: 0;
+    width: 8rem;
+    height: var(--ed-rule-mast);
+    background: var(--theme-color);
+}
+
+html .ed-mastline > * {
+    margin: 0;
+}
+
+html .ed-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-self: end;
+}
+
+html .ed-byline {
+    grid-column: 1 / -1;
+    font-size: inherit;
+    color: var(--ed-ink);
+}
+
+/* 字数插件：让它整块退出盒子，两半成为报头行的 flex item，行内 float 自然失效 */
+html .ed-mastline #count-words-block-span-div {
+    display: contents;
+}
+
+html .ed-mastline #count-words-block-span-div > div {
+    display: none;
+}
+
+html .ed-mastline #count-words-block-span {
+    display: block;
+    font-size: inherit;
+    color: var(--ed-ink-muted);
+    white-space: nowrap;
+}
+
+html .ed-cols {
+    display: flex;
+    gap: 0.375rem;
+}
+
+html .ed-cols button {
+    font-family: inherit;
+    font-size: var(--ed-fs-small);
+    line-height: 1;
+    padding: 0.35rem 0.5rem;
+    color: var(--ed-ink);
+    background: transparent;
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
+    cursor: pointer;
+    transition: background-color var(--global-transition-duration-fast),
+        color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast);
+}
+
+html .ed-cols button:hover {
+    border-color: var(--ed-ink-strong);
+}
+
+html .ed-cols button[aria-pressed="true"] {
+    background: var(--ed-ink-strong);
+    border-color: var(--ed-ink-strong);
+    color: var(--ed-paper);
+}
+
+/* —— 封面图版（紧跟报头） —— */
+html .ed-cover {
+    margin: 0 0 var(--ed-gap-sec);
+}
+
+/* —— 分节 —— */
+html .ed-sec {
+    margin: 0 0 var(--ed-gap-sec);
+}
+
+html .ed-sec-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 2rem;
+    padding-top: 0.75rem;
+    margin: 0 0 var(--ed-gap-block);
+    border-top: var(--ed-border);
+}
+
+html .ed-sec-head > h2,
+html .ed-sec-head > h3 {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+html .ed-sec-head > h2 {
+    font-size: var(--ed-fs-h2);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+html .ed-sec-head > h3 {
+    font-size: var(--ed-fs-h3);
+    line-height: 1.3;
+}
+
+/* 小节日期：整块引用搬到栏目行右端，不拆行 */
+html .markdown-section blockquote.ed-dateline {
+    grid-column: 2;
+    min-width: 13rem;
+    max-width: 20rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: var(--global-font-weight-normal);
+    text-align: right;
+    font-size: var(--ed-fs-small);
+    line-height: 1.55;
+    color: var(--ed-ink-muted);
+    font-weight: var(--global-font-weight-normal);
+}
+
+html .ed-dateline p {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    text-wrap: wrap;
+}
+
+/* —— 分栏正文：每一段文字自己是一个双栏块 —— */
+html .ed-run {
+    margin: 0 0 var(--ed-gap-block);
+}
+
+html .ed-run > h3 {
+    font-size: var(--ed-fs-h3);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0;
+    margin: 2rem 0 0.75rem;
+    break-after: avoid;
+    page-break-after: avoid;
+}
+
+html .ed-run > h3:first-child {
+    margin-top: 0;
+}
+
+html .ed-run {
+    column-count: 2;
+    column-gap: var(--ed-gap-col);
+}
+
+html .markdown-section[data-ed-cols="1"] .ed-run {
+    column-count: 1;
+}
+
+html .markdown-section[data-ed-cols="2"] .ed-run {
+    column-count: 2;
+}
+
+/* 窄屏一律单栏，覆盖上面的栏数选择 */
+@media screen and (max-width: 1000px) {
+    html .markdown-section .ed-run,
+    html .markdown-section[data-ed-cols="1"] .ed-run,
+    html .markdown-section[data-ed-cols="2"] .ed-run {
+        column-count: 1;
+    }
+}
+
+/* —— 图版 —— */
+html .ed-plate {
+    margin: var(--ed-gap-sec) 0;
+}
+
+html .ed-plate:first-child {
+    margin-top: 0;
+}
+
+html .ed-plate > p,
+html .ed-plate > center,
+html .ed-plate > figure {
+    margin: 0;
+}
+
+html .ed-plate > p > center,
+html .ed-plate center {
+    display: block;
+    text-align: left;
+}
+
+/* 图版里的图按高度封顶、居中，不再撑成一整屏 */
+html .ed-plate > img,
+html .ed-plate > p img,
+html .ed-plate > center img,
+html .ed-plate > figure > img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+    max-height: var(--ed-plate-h);
+    height: auto;
+    border-radius: var(--ed-plate-radius);
+    filter: brightness(0.92) contrast(1.02);
+}
+
+/* 封面：一条通栏图带，居中裁切 */
+html .ed-cover > p img,
+html .ed-cover > center img,
+html .ed-cover > img {
+    width: 100%;
+    max-height: none;
+    aspect-ratio: var(--ed-cover-ratio);
+    object-fit: cover;
+    object-position: center 35%;
+}
+
+html .ed-plate > iframe,
+html .ed-plate > video {
+    display: block;
+    width: 100%;
+    border: 0;
+}
+
+html .ed-plate figcaption {
+    margin-top: 0.5rem;
+    font-size: var(--ed-fs-small);
+    color: var(--ed-ink-muted);
+}
+
+/* —— 正文 —— */
+html .markdown-section p,
+html .markdown-section li,
+html .markdown-section td,
+html .markdown-section th {
+    font-size: var(--ed-fs-body);
+    line-height: var(--ed-lh-body);
+}
+
+html .markdown-section p {
+    margin: 0 0 var(--ed-gap-block);
+}
+
+html .ed-run > p {
+    orphans: 2;
+    widows: 2;
+}
+
+html .markdown-section a {
+    color: var(--ed-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: var(--ed-rule-mid);
+    text-underline-offset: 0.1875rem;
+    transition: text-decoration-color var(--global-transition-duration-fast);
+}
+
+html .markdown-section a:hover {
+    text-decoration-color: var(--ed-ink-strong);
+}
+
+html .ed-mast > h1,
+html .ed-sec-head > h2,
+html .ed-sec-head > h3 {
+    line-break: strict;
+    text-wrap: balance;
+}
+
+html .markdown-section p,
+html .markdown-section li {
+    line-break: strict;
+    text-wrap: pretty;
+}
+
+html .sidebar ul li a {
+    line-break: strict;
+}
+
+/* 标题里的锚点链接（docsify 自动加的）不该带下划线和主题色 */
+html .markdown-section :is(h1, h2, h3, h4, h5, h6) a,
+html .markdown-section :is(h1, h2, h3, h4, h5, h6) a:hover {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+html .markdown-section strong {
+    font-weight: 700;
+    color: var(--heading-color);
+}
+
+html .markdown-section em {
+    color: var(--ed-ink);
+}
+
+html .markdown-section ul,
+html .markdown-section ol {
+    margin: 0 0 var(--ed-gap-block);
+    padding-left: 1.25rem;
+}
+
+html .markdown-section li {
+    margin-bottom: 0.3rem;
+}
+
+html .markdown-section li::marker {
+    color: var(--ed-ink-strong);
+}
+
+html .markdown-section h2,
+html .markdown-section h4,
+html .markdown-section h5,
+html .markdown-section h6 {
+    color: var(--heading-color);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+html .markdown-section h2 {
+    font-size: var(--ed-fs-h2);
+    line-height: 1.2;
+    margin: 0;
+}
+
+html .markdown-section h4 {
+    font-size: var(--ed-fs-h3);
+    margin: 1.75rem 0 0.5rem;
+}
+
+html .markdown-section h5,
+html .markdown-section h6 {
+    font-size: var(--ed-fs-body);
+    margin: 1.5rem 0 0.5rem;
+}
+
+html .markdown-section blockquote {
+    margin: 0 0 var(--ed-gap-block);
+    padding: 0 0 0 1.25rem;
+    border: 0;
+    border-left: var(--ed-rule) solid var(--theme-color);
+    color: var(--ed-ink);
+    font-weight: var(--global-font-weight-medium);
+    break-inside: avoid;
+}
+
+html .markdown-section blockquote p {
+    margin: 0 0 0.5rem;
+}
+
+html .markdown-section blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+html .markdown-section hr {
+    border: 0;
+    height: var(--ed-rule);
+    background: var(--ed-ink-strong);
+    margin: var(--ed-gap-sec) 0;
+}
+
+/* —— 代码与表格（两者的界线属于内容本身，允许细线） —— */
+html .markdown-section code {
+    font-family: var(--global-code-font);
+    font-size: 0.875em;
+    color: var(--code-text-color);
+    background: var(--code-bg);
+    padding: 0.1em 0.35em;
+}
+
+html .markdown-section pre {
+    margin: 0 0 var(--ed-gap-block);
+    padding: 1rem;
+    background: var(--code-bg);
+    overflow-x: auto;
+    break-inside: avoid;
+}
+
+html .markdown-section pre code {
+    display: block;
+    background: none;
+    padding: 0;
+    font-size: var(--ed-fs-small);
+    line-height: 1.7;
+}
+
+html .markdown-section table {
+    width: 100%;
+    margin: 0 0 var(--ed-gap-block);
+    border-collapse: collapse;
+    font-size: var(--ed-fs-small);
+    break-inside: avoid;
+}
+
+html .markdown-section th {
+    text-align: left;
+    font-weight: 700;
+    border-bottom: var(--ed-border);
+    padding: 0.5rem 0.75rem 0.5rem 0;
+}
+
+html .markdown-section td {
+    border-bottom: 1px solid var(--ed-tone-line);
+    padding: 0.45rem 0.75rem 0.45rem 0;
+    font-size: var(--ed-fs-small);
+}
+
+/* ============================================================
+ * ④ 组件
+ * ============================================================ */
+
+/* —— 侧栏 —— */
+html .sidebar {
+    background: var(--ed-paper);
+    border-right: var(--ed-border);
+    padding: 2.5rem 1.25rem 4.5rem;
+}
+
+html .sidebar > .app-name {
+    margin: 0 0 1.25rem;
+    text-align: left;
+    font-size: var(--ed-fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    text-transform: none;
+    padding-bottom: 0.75rem;
+    border-bottom: var(--ed-border-mast);
+}
+
+html .sidebar > .app-name a {
+    color: var(--sidebar-title-color);
+    text-decoration: none;
+}
+
+html .sidebar li > p {
+    margin: 1.75rem 0 0.5rem;
+    max-width: 100%;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: var(--ed-fs-small);
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ed-ink-strong);
+}
+
+html .sidebar .sidebar-nav {
+    line-height: 1.6;
+    padding-bottom: 2rem;
+}
+
+html .sidebar ul li a {
+    font-size: var(--ed-fs-small);
+    line-height: 1.45;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--sidebar-text-color);
+    padding: 0.35rem 0 0.35rem 0.5rem;
+    border-left: var(--ed-rule) solid transparent;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: break-word;
+    transition: border-color var(--global-transition-duration-fast),
+        color var(--global-transition-duration-fast);
+}
+
+/* 二级条目前面那条主题色短横（base.css 的 ::before）与折行后的文字打架，去掉 */
+html .sidebar .app-sub-sidebar li::before {
+    content: none;
+    display: none;
+}
+
+html .sidebar ul li a:hover {
+    color: var(--ed-ink-strong);
+    border-left-color: var(--ed-tone-line);
+}
+
+html .sidebar ul li.active > a {
+    margin-left: 0;
+    padding-left: 0.625rem;
+    border-left: var(--ed-rule) solid var(--theme-color);
+    color: var(--ed-ink-strong);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* 目录 / 文章列表 切换 */
+html .switch-toc-wrap-div {
+    margin: 0 0 1.25rem;
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-tone-line);
+    gap: 0;
+}
+
+html .switch-toc-wrap-div button {
+    font-family: inherit;
+    font-size: var(--ed-fs-small);
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    padding: 0.6rem 0.25rem;
+    color: var(--ed-ink-muted);
+}
+
+html .switch-toc-wrap-div button.active-btn {
+    border-bottom: var(--ed-border);
+    color: var(--ed-ink-strong);
+}
+
+html .switch-toc-wrap-div button:not(.active-btn):hover {
+    color: var(--ed-ink-strong);
+}
+
+html .sidebar:has(.toc-btn.active-btn) .sidebar-nav > ul > li > ul > li > a {
+    font-size: var(--ed-fs-small);
+    line-height: 1.45;
+    font-weight: var(--global-font-weight-normal);
+}
+
+html .sidebar:has(.toc-btn.active-btn) .sidebar-nav > ul > li > ul > li.active > a {
+    font-weight: 700;
+}
+
+/* 搜索 */
+html .sidebar .search .input-wrap {
+    border-block: 0;
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-tone-line);
+    border-radius: 0;
+    transition: border-color var(--global-transition-duration-fast);
+}
+
+/* 悬停只换颜色，不改粗细，避免下方内容跳动 */
+
+html .sidebar .search .input-wrap > input[type=search] {
+    padding: 0.65rem 0;
+    font-size: var(--ed-fs-body);
+    letter-spacing: 0;
+}
+
+html .sidebar .search .input-wrap:has(input[type=search]:hover),
+html .sidebar .search .input-wrap:has(input[type=search]:focus) {
+    box-shadow: none;
+    border-block: 0;
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-ink-strong);
+}
+
+/* —— 左下角菜单键 —— */
+html .sidebar-toggle,
+html body.close .sidebar-toggle {
+    position: fixed;
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: 0;
+    width: var(--ed-toggle-size);
+    height: var(--ed-toggle-size);
+    padding: calc((var(--ed-toggle-size) - 1.25rem) / 2);
+    background: var(--ed-ink-strong);
+    border: 0;
+    border-radius: 0;
+    z-index: 50;
+}
+
+html .sidebar-toggle span {
+    width: 1.25rem;
+    height: var(--ed-rule-mid);
+    margin: 0 auto 0.25rem;
+    background-color: var(--ed-paper);
+}
+
+html body.has-toc .sidebar-toggle {
+    display: none;
+}
+
+/* —— 顶部导航 —— */
+/* 报眉：左右两端贴住画框，不再整条挤在右边 */
+html .app-nav {
+    left: var(--global-sidebar-width);
+    right: var(--ed-gutter);
+    margin: 1.5rem 0 0;
+    text-align: left;
+}
+
+html body.close .app-nav {
+    left: var(--ed-gutter);
+}
+
+html .app-nav > ul,
+html .app-nav > p {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    margin: 0;
+}
+
+html .app-nav a,
+html .app-nav li {
+    font-family: inherit;
+    font-size: var(--ed-fs-body);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ed-ink);
+}
+
+html .app-nav a:hover,
+html .app-nav a.active {
+    color: var(--ed-ink-strong);
+}
+
+html .app-nav a.active {
+    border-bottom: var(--ed-border);
+    border-bottom-color: var(--theme-color);
+    padding-bottom: 0.2rem;
+}
+
+html .app-nav li {
+    margin: 0;
+}
+
+html .app-nav li > svg {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -0.15em;
+    stroke: currentColor;
+}
+
+html .app-nav li ul {
+    padding: 0.25rem 0;
+    background: var(--ed-paper);
+    border: var(--ed-border);
+    border-radius: 0;
+    box-shadow: none;
+    min-width: 9rem;
+    z-index: 200;
+}
+
+html .app-nav li ul li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: var(--ed-fs-small);
+}
+
+html .app-nav li ul a {
+    display: block;
+    padding: 0.45rem 0.9rem;
+    font-size: inherit;
+    color: var(--ed-ink);
+}
+
+html .app-nav li ul a:hover,
+html .app-nav li ul a.active {
+    background: var(--ed-ink-strong);
+    border-bottom: 0;
+    color: var(--ed-paper);
+}
+
+/* —— 文章索引（首页 / 随笔 / 存档） —— */
+html .markdown-section .toc-page-div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: var(--ed-gap-block) 0 0;
+    border-top: var(--ed-border);
+}
+
+html .markdown-section .toc-page-div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+}
+
+@media screen and (max-width: 1000px) {
+    html .markdown-section .toc-page-div {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+}
+
+html .markdown-section .toc-page-display-a {
+    display: block;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    text-align: left;
+    text-decoration: none;
+}
+
+html .markdown-section .toc-page-display-div {
+    display: grid;
+    grid-template-columns: var(--ed-thumb-w) 1fr auto;
+    align-items: baseline;
+    gap: 1.25rem;
+    height: auto;
+    padding: 0.875rem 0;
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-tone-line);
+}
+
+html .markdown-section .toc-page-display-title-img {
+    position: relative;
+    width: var(--ed-thumb-w);
+    height: var(--ed-thumb-h);
+    align-self: center;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--ed-tone);
+}
+
+html .markdown-section .toc-page-div .toc-page-display-a img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: filter var(--global-transition-duration-fast);
+}
+
+html .markdown-section .toc-page-display-title-div {
+    padding: 0;
+    font-size: var(--ed-fs-h3);
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--heading-color);
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    text-align: left;
+}
+
+html .markdown-section .toc-page-display-date-div {
+    padding: 0;
+    font-size: var(--ed-fs-small);
+    color: var(--ed-ink-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+html .markdown-section .toc-page-display-a:hover .toc-page-display-title-div {
+    text-decoration: underline;
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: var(--ed-rule-mid);
+    text-underline-offset: 0.2rem;
+}
+
+html .markdown-section .toc-page-display-a:hover img {
+    filter: contrast(1.06);
+    transform: none;
+}
+
+/* —— 目录页码 —— */
+html .toc-paginator-div {
+    margin: 1.5rem 0 0;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--ed-fs-small);
+    color: var(--ed-ink);
+}
+
+html .toc-paginator-input {
+    font-size: var(--ed-fs-small);
+    font-variant-numeric: tabular-nums;
+}
+
+html .toc-paginator-input input {
+    width: 2.25rem;
+    margin: 0 0.35rem;
+    padding: 0.15rem 0;
+    border: 0;
+    border-bottom: var(--ed-border-mid);
+    border-radius: 0;
+    background: transparent;
+    font-size: inherit;
+}
+
+html .toc-paginator-input input:focus {
+    outline: 0;
+    border-bottom: var(--ed-border);
+}
+
+html .toc-paginator-button-div {
+    margin: 0 0.25rem 0 0;
+}
+
+html .toc-paginator-button-span {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0;
+    transition: background-color var(--global-transition-duration-fast),
+        color var(--global-transition-duration-fast);
+}
+
+html .toc-paginator-button-span:hover {
+    background: var(--ed-ink-strong);
+    color: var(--ed-paper);
+}
+
+/* —— 上一篇 / 下一篇 —— */
+html .markdown-section .docsify-pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: var(--ed-gap-sec) 0 0;
+    padding: 0.75rem 0 0;
+    border-top: var(--ed-border);
+    border-bottom: 0;
+    font-size: var(--ed-fs-small);
+    color: var(--ed-ink);
+}
+
+html .docsify-pagination-container .pagination-item {
+    flex: 0 1 46%;
+    min-width: 0;
+    margin: 0;
+}
+
+html .docsify-pagination-container .pagination-item--next {
+    text-align: right;
+}
+
+html .docsify-pagination-container .pagination-item a {
+    color: var(--ed-ink);
+    text-decoration: none;
+}
+
+html .docsify-pagination-container .pagination-item-title {
+    font-size: var(--ed-fs-body);
+    font-weight: 700;
+}
+
+html .docsify-pagination-container .pagination-item a:hover .pagination-item-title {
+    text-decoration: underline;
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: var(--ed-rule-mid);
+    text-underline-offset: 0.2rem;
+}
+
+/* —— 评论：读者来信 —— */
+html #gitalk-container {
+    max-width: var(--global-content-width);
+    width: auto;
+    margin: var(--ed-gap-sec) auto 0;
+    padding: 0 var(--ed-gutter);
+    background: none;
+    border: 0;
+}
+
+html #gitalk-container .gt-container {
+    font-size: var(--ed-fs-small);
+    line-height: 1.7;
+}
+
+/* gitalk 自带 1px 分隔线与大量 10/12px 字号，统一到本主题的两档 */
+html #gitalk-container .gt-meta {
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-tone-line);
+}
+
+html #gitalk-container .gt-container .gt-svg svg,
+html #gitalk-container .gt-container .gt-ico {
+    fill: currentColor;
+    color: var(--ed-ink);
+}
+
+html #gitalk-container .gt-container .gt-comment-content {
+    background: var(--ed-paper);
+}
+
+html #gitalk-container .gt-container .gt-comment-admin .gt-comment-content {
+    background: var(--ed-tone);
+}
+
+html #gitalk-container .gt-header {
+    margin-top: 2rem;
+    padding-top: 0.75rem;
+    border-top: var(--ed-border);
+}
+
+html #gitalk-container .gt-header p {
+    padding: 0.5rem 0 0;
+}
+
+html #gitalk-container .gt-header-controls-tip {
+    color: var(--ed-ink-muted);
+    font-size: var(--ed-fs-small);
+}
+
+html #gitalk-container .gt-link {
+    color: var(--ed-ink);
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--theme-color);
+}
+
+html #gitalk-container .gt-header-textarea,
+html #gitalk-container .gt-comment-content {
+    padding: 0.75rem;
+    border: var(--ed-border-mid);
+    border-radius: 0;
+    background: var(--ed-tone);
+    box-shadow: none;
+    transition: border-color var(--global-transition-duration-fast);
+}
+
+html #gitalk-container .gt-header-textarea:hover,
+html #gitalk-container .gt-header-textarea:focus {
+    background: var(--ed-tone);
+    border-color: var(--ed-ink-strong);
+}
+
+html #gitalk-container .gt-btn {
+    padding: 0.5rem 1rem;
+    border: var(--ed-border-mid);
+    border-radius: 0;
+    font-size: var(--ed-fs-small);
+    font-weight: 700;
+    letter-spacing: 0;
+    transition: background-color var(--global-transition-duration-fast),
+        color var(--global-transition-duration-fast);
+}
+
+html #gitalk-container .gt-btn-preview {
+    background: transparent;
+    color: var(--ed-ink);
+    border-color: var(--ed-ink-strong);
+}
+
+html #gitalk-container .gt-btn-preview:hover {
+    background: var(--ed-ink-strong);
+    color: var(--ed-paper);
+}
+
+html #gitalk-container .gt-btn-login,
+html #gitalk-container .gt-btn-public {
+    background: var(--ed-ink-strong);
+    border-color: var(--ed-ink-strong);
+    color: var(--ed-paper);
+}
+
+html #gitalk-container .gt-btn-login:hover,
+html #gitalk-container .gt-btn-public:hover {
+    background: var(--ed-ink);
+    border-color: var(--ed-ink);
+    color: var(--ed-paper);
+}
+
+html #gitalk-container .gt-comment-body,
+html #gitalk-container .gt-comment-text,
+html #gitalk-container .gt-comment-body * {
+    font-size: var(--ed-fs-body);
+    line-height: var(--ed-lh-body);
+}
+
+html #gitalk-container .gt-comment-username {
+    color: var(--ed-ink-strong);
+    font-weight: 700;
+}
+
+html #gitalk-container .gt-comment-date,
+html #gitalk-container .gt-counts,
+html #gitalk-container .gt-ico-text {
+    font-size: var(--ed-fs-small);
+    color: var(--ed-ink-muted);
+}
+
+/* —— 页脚：反相窄带 —— */
+html footer:has(#footer-under-gitalk) {
+    margin-top: var(--ed-gap-sec);
+    background: var(--ed-ink-strong);
+    color: var(--ed-paper);
+}
+
+html #footer-under-gitalk {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 3rem var(--ed-gutter) 3.5rem;
+    align-self: auto;
+    text-align: left;
+    border-top: var(--ed-rule-mast) solid var(--theme-color);
+    font-size: var(--ed-fs-small);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ed-paper);
+}
+
+html #footer-under-gitalk > div {
+    padding-top: 0;
+    border-top: 0;
+}
+
+html #footer-under-gitalk small {
+    font-size: var(--ed-fs-small);
+    line-height: 1.6;
+    color: var(--ed-paper);
+}
+
+/* —— 封面：白纸报头压在封面上，右侧留出照片 —— */
+html section.cover.show {
+    display: block;
+    /* 封面照由 .cover-fade-layer(z-index:-1) 承载，这里的底色必须透明，否则会盖住它 */
+    background-color: transparent;
+}
+
+/* 非当前页的封面（docsify 常驻 DOM）必须保持不占位 */
+html section.cover:not(.show) {
+    display: none;
+}
+
+html section.cover .mask {
+    display: none;
+}
+
+html section.cover .cover-main {
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    width: min(46rem, 100%);
+    min-height: 100vh;
+    max-width: none;
+    margin: 0;
+    /* base.css 给的是 flex:1 1 0%，会把宽度吃掉，这里收回 */
+    flex: 0 0 auto;
+    padding: 6rem 3rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: var(--ed-paper);
+    border-right: var(--ed-border);
+    text-align: left;
+    color: var(--ed-ink);
+}
+
+/* 头像：直角、固定尺寸，不受封面别处的 p/img 规则影响 */
+html section.cover .cover-main > p:first-child {
+    margin: 0 0 2rem;
+    padding: 0;
+    border: 0;
+    width: auto;
+    max-width: none;
+    font-size: inherit;
+}
+
+html section.cover .cover-main > p:first-child img {
+    display: block;
+    width: 7.5rem;
+    height: 7.5rem;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+html section.cover h1 {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: var(--ed-fs-cover);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+    text-align: left;
+}
+
+html section.cover h1 a {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+html section.cover h1 small {
+    position: static;
+    display: block;
+    margin: 0.75rem 0 0;
+    padding: 0.75rem 0 0;
+    border-top: var(--ed-border-mast);
+    font-family: var(--global-cover-font);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
+    color: var(--ed-ink);
+}
+
+html section.cover h1 small ruby rt {
+    font-family: inherit;
+    font-size: 0.5em;
+}
+
+html section.cover blockquote {
+    margin: 2rem 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+}
+
+html section.cover blockquote p {
+    max-width: 30rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ed-ink);
+}
+
+/* 封面不需要下滑箭头 */
+html section.cover .cover-page-scroll-down-chevron-div {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    html section.cover .cover-main {
+        width: 100%;
+        min-height: 100vh;
+        padding: 4rem 1.75rem 4rem;
+        border-right: 0;
+    }
+
+}
+
+/* 封面页：导航坐进白色报头面板，纸面之外不出现 */
+html body:has(section.cover.show) .app-nav {
+    left: 0;
+    right: auto;
+    width: min(46rem, 100%);
+    box-sizing: border-box;
+    padding: 1.5rem 3rem 0;
+    margin: 0;
+}
+
+/* —— 右侧小组件 —— */
+html .page-right-tools-widgets-span {
+    box-sizing: border-box;
+    padding: 0.1rem;
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
+    background-color: var(--ed-paper);
+    transition: transform var(--global-transition-duration),
+        background-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast);
+}
+
+html .page-right-tools-widgets-span > svg {
+    color: var(--ed-ink-strong);
+}
+
+/* 隐藏状态（-disappear 的位移）不能被 hover 覆盖 */
+html .page-right-tools-widgets-span:not(.page-right-tools-widgets-span-disappear):hover {
+    background-color: var(--ed-ink-strong);
+    border-color: var(--ed-ink-strong);
+}
+
+html .page-right-tools-widgets-span:hover > svg {
+    color: var(--ed-paper);
+}
+
+html .page-right-popups-div {
+    border: var(--ed-border);
+    border-radius: 0;
+    background-color: var(--ed-paper);
+    box-shadow: none;
+}
+
+html .page-right-popups .theme-picker-preset-color-btn-div,
+html .page-right-popups .color-picker-preset-color-btn-div,
+html .page-right-popups .font-picker-preset-size-btn-div {
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
+    border-radius: 0;
+}
+
+html .page-right-popups .theme-picker-preset-color-btn-div,
+html .page-right-popups .color-picker-preset-color-btn-div {
+    outline: var(--ed-rule-mid) solid transparent;
+    outline-offset: 2px;
+    transition: outline-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast);
+}
+
+html .page-right-popups .theme-picker-preset-color-btn-div:hover,
+html .page-right-popups .theme-picker-preset-color-btn-div.is-active,
+html .page-right-popups .color-picker-preset-color-btn-div:hover,
+html .page-right-popups .color-picker-preset-color-btn-div.is-active {
+    outline-color: var(--ed-ink-strong);
+    border-color: var(--ed-ink-strong);
+    transform: none;
+}
+
+html .page-right-popups .font-picker-preset-size-btn-div {
+    color: var(--ed-ink-strong);
+}
+
+html .page-right-popups .font-picker-preset-size-btn-div:hover,
+html .page-right-popups .font-picker-preset-size-btn-div.is-active {
+    background-color: var(--ed-ink-strong);
+    color: var(--ed-paper);
+    transform: none;
+}
+
+/* 本页进度：方块自下而上填满，不显示数字 */
+html .read-progress {
+    background-color: var(--ed-paper);
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
+}
+
+html .read-progress::before {
+    background: none;
+    border-radius: 0;
+    mask: none;
+}
+
+html .read-progress::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ed-ink-strong);
+    transform: scaleY(calc(var(--p) / 100));
+    transform-origin: bottom;
+}
+
+html .read-progress .num {
+    display: none;
+}
+
+html .fade-edge {
+    --fade-bg: transparent;
+}
+
+/* ============================================================
+ * ⑤ 状态与动效
+ * ============================================================ */
+
+html .markdown-section :focus-visible,
+html .sidebar :focus-visible,
+html .app-nav :focus-visible,
+html .toc-page-div :focus-visible {
+    outline: var(--ed-border-mid);
+    outline-offset: 2px;
+}
+
+html ::selection {
+    background: var(--theme-color);
+    color: #0d0d0d;
+}
+
+/* 报头大字：自基线后方向升起 */
+html.ed-motion .ed-mast > h1 {
+    transform: translateY(0.4em);
+    transition: transform 760ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+html.ed-motion .ed-mast > h1.ed-in {
+    transform: translateY(0);
+}
+
+/* 入场：只动 transform，文字首帧即已绘出（不用 opacity，避免任何时刻不可读） */
+html.ed-motion [data-ed-in] {
+    transform: translateY(1.5rem);
+    transition: transform 560ms cubic-bezier(0.22, 0.61, 0.24, 1);
+    transition-delay: var(--ed-delay, 0ms);
+}
+
+html.ed-motion [data-ed-in].ed-in {
+    transform: translateY(0);
+}
+
+/* 封面图版：极慢的收拢（页面上唯一的“会动的图”） */
+html.ed-motion .ed-cover img {
+    transform: scale(1.05);
+    transition: transform 1800ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+html.ed-motion .ed-cover.ed-in img {
+    transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    html.ed-motion .ed-mast > h1,
+    html.ed-motion [data-ed-in],
+    html.ed-motion [data-ed-in].ed-in {
+        transform: none;
+        opacity: 1;
+        transition: none;
+    }
+}
+
+/* ============================================================
+ * ⑥ 插件
+ * ============================================================ */
+
+/* 图片题注插件：把 <center> 的居中与 0.8em 收回版式 */
+html .markdown-section .img-caption {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--ed-ink-muted);
+    font-size: var(--ed-fs-small);
+    line-height: 1.55;
+    text-align: left;
+}
+
+/* 字数插件：正文里不该再出现它（已被搬进报头行） */
+html .markdown-section > #count-words-block-span-div {
+    margin: 0;
+}
+
+html .markdown-section > #count-words-block-span-div + * {
+    margin-top: 0;
+}
+
+/* 面包屑 */
+html .markdown-section ul.breadcrumb {
+    flex-basis: 100%;
+    padding-left: 0;
+    margin: 0;
+    font-size: inherit;
+    color: var(--ed-ink-muted);
+}
+
+/* 插件给面包屑里的链接塞了图标，这里收回 */
+html .markdown-section ul.breadcrumb img,
+html .markdown-section ul.breadcrumb svg {
+    display: none;
+}
+
+html .markdown-section ul.breadcrumb a {
+    color: var(--ed-ink-muted);
+    text-decoration-color: transparent;
+}
+
+html .markdown-section ul.breadcrumb a:hover {
+    color: var(--ed-ink-strong);
+    text-decoration-color: var(--theme-color);
+}
+
+html .markdown-section ul.breadcrumb li::after {
+    color: var(--ed-tone-line);
+}
+
+/* 标签页 */
+html .docsify-tabs {
+    margin: 0 0 var(--ed-gap-block);
+}
+
+html .markdown-section .docsify-tabs__tab {
+    padding: 0.5rem 0.9rem;
+    border: 0;
+    border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-tone-line);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font-size: var(--ed-fs-small);
+    font-weight: 700;
+    color: var(--ed-ink-muted);
+}
+
+html .markdown-section .docsify-tabs__tab--active {
+    border-bottom: var(--ed-border);
+    background: none;
+    box-shadow: none;
+    color: var(--ed-ink-strong);
+}
+
+html .markdown-section .docsify-tabs__content {
+    border: 0;
+    border-radius: 0;
+    padding: 1.25rem 0 0;
+}
+
+/* 示例面板 / 多图容器 */
+html .docsify-example-panels {
+    margin: 0 0 var(--ed-gap-block);
+    border: 0;
+}
+
+html .docsify-example-panels > * {
+    border-radius: 0;
+}
+
+/* 代码复制按钮 */
+html pre .docsify-copy-code-button {
+    border-radius: 0;
+    background: var(--ed-ink-strong);
+    color: var(--ed-paper);
+    font-size: var(--ed-fs-small);
+}
+
+/* 搜索结果的「无结果」与高亮 */
+html .markdown-section mark {
+    background: var(--theme-color);
+    color: #0d0d0d;
+}
+
+/* Mermaid */
+html .mermaid button svg {
+    color: var(--ed-ink-strong);
+}
+
+/* ============================================================
+ * 移动端
+ * ============================================================ */
+@media screen and (max-width: 768px) {
+
+    html .app-nav {
+        position: fixed;
+        inset: 0 0 auto 0;
+        margin: 0;
+        padding: 0.6rem 1rem;
+        background: var(--ed-paper);
+        border-bottom: var(--ed-border);
+        display: block;
+        text-align: left;
+    }
+
+    html .app-nav > ul,
+    html .app-nav > p {
+        align-items: baseline;
+    }
+
+    html .app-nav a {
+        font-size: var(--ed-fs-small);
+    }
+
+    html .app-nav li ul {
+        top: 1.75rem;
+        right: 0;
+    }
+
+    html .markdown-section {
+        padding-top: 4rem;
+    }
+
+    html .markdown-section h1 {
+        margin-bottom: 1rem;
+    }
+
+    html .ed-sec-head {
+        display: block;
+    }
+
+    html .ed-dateline {
+        max-width: none;
+        margin-top: 0.35rem;
+        text-align: left;
+    }
+
+    html .ed-mastline {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.35rem 1rem;
+    }
+
+    /* 手机上：面包屑 / 署名 / 字数与栏数，署名必须在控件之前 */
+    html .ed-mastline > ul.breadcrumb {
+        grid-row: 1;
+    }
+
+    html .ed-mastline > .ed-byline {
+        grid-row: 2;
+    }
+
+    html .ed-mastline > .ed-meta {
+        grid-row: 3;
+        justify-self: start;
+    }
+
+    /* 拇指尺寸的控件 */
+    html .ed-cols button {
+        min-height: 2.25rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    html .markdown-section .toc-page-display-div {
+        grid-template-columns: var(--ed-thumb-w) 1fr;
+        grid-template-areas: "thumb title" "thumb date";
+        gap: 0.25rem 1rem;
+        align-items: start;
+    }
+
+    html .markdown-section .toc-page-display-title-img {
+        grid-area: thumb;
+        align-self: start;
+    }
+
+    html .markdown-section .toc-page-display-title-div {
+        grid-area: title;
+        font-size: var(--ed-fs-body);
+    }
+
+    html .markdown-section .toc-page-display-date-div {
+        grid-area: date;
+        text-align: left;
+    }
+
+    /* 手机端：右侧小组件改为底部固定横条，不再压正文 */
+    html #page-right-widgets-container {
+        position: fixed;
+        inset: auto 0 0 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.4rem var(--ed-gutter);
+        background: var(--ed-paper);
+        border-top: var(--ed-border-mid);
+        border-top-color: var(--ed-tone-line);
+        z-index: 60;
+    }
+
+    html #page-right-widgets-container .page-right-tools-widgets-span {
+        position: static;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    /* 站点的 Live2D 小人在窄屏必然压住正文，这里与站点自身的"移动端不加载"保持一致 */
+    html #canvas {
+        display: none;
+    }
+
+    /* 底部横条里的隐藏动画向下滑，不沿用桌面的横向位移 */
+    html #page-right-widgets-container .page-right-tools-widgets-span-disappear {
+        transform: translateY(180%);
+    }
+
+    html #page-right-widgets-container .page-right-popups {
+        position: fixed;
+        top: auto;
+        bottom: 3.25rem;
+        right: var(--ed-gutter);
+    }
+
+    html body {
+        padding-bottom: 3rem;
+    }
+
+    html footer:has(#footer-under-gitalk) {
+        margin-bottom: 0;
+    }
+}

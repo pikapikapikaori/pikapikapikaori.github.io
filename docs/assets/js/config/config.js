@@ -227,15 +227,15 @@
                     name: 'swiss',
                     light: {
                         themeColor: '#eca2a8',
-                        bgColor: '#100e17',
+                        bgColor: '#ffffff',
                         css: './assets/css/theme/exper/swiss.css',
-                        js: null
+                        js: './assets/js/theme/swiss.js'
                     },
                     dark: {
                         themeColor: '#eca2a8',
-                        bgColor: '#100e17',
-                        css: './assets/css/theme/exper/swiss.css',
-                        js: null
+                        bgColor: '#0d0d0d',
+                        css: './assets/css/theme/exper/editorial.css',
+                        js: './assets/js/theme/editorial.js'
                     }
                 },
                 {

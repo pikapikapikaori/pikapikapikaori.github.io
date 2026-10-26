@@ -51,7 +51,7 @@ body.close:not(.has-toc) .content-fade-edge::before {
 
 .fade-edge {
     height: 0;
-    z-index: 99;
+    z-index: 300;
     pointer-events: none;
     --fade-direction: to bottom;
 }

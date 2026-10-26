@@ -35,7 +35,7 @@
 }
 
 .page-right-tools-widgets-span {
-    z-index: 999;
+    z-index: 200;
     transition-duration: var(--global-transition-duration);
     width: var(--widgets-size);
     height: var(--widgets-size);
@@ -60,7 +60,7 @@
 
 .page-right-popups {
     position: fixed;
-    z-index: 998;
+    z-index: 190;
     transition-duration: var(--global-transition-duration-slow);
     right: calc(var(--widgets-right) + var(--widgets-gap));
     top: calc(var(--widgets-top) + (100vh - var(--widgets-gap) * var(--widgets-cnt)) / 2 + var(--widgets-gap) * var(--widgets-index, 0));

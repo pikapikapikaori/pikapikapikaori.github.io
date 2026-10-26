@@ -190,14 +190,14 @@
     }
 }
 
-::selection {
-    background-color: var(--global-theme-color-8);
-    color: var(--global-theme-color-1);
-}
-
 center {
     display: block;
     text-align: center;
+}
+
+::selection {
+    background-color: var(--global-theme-color-8);
+    color: var(--global-theme-color-1);
 }
 
 html {

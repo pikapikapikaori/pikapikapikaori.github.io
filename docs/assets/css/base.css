@@ -195,6 +195,11 @@
     color: var(--global-theme-color-1);
 }
 
+center {
+    display: block;
+    text-align: center;
+}
+
 html {
     font-size: var(--global-font-size);
     scrollbar-width: thin;
@@ -721,7 +726,7 @@ body.close .content {
         width: auto;
         height: auto;
     }
-    
+
     .content {
         left: auto;
         right: auto;

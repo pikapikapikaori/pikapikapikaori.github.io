@@ -669,8 +669,7 @@ html .sidebar ul li a {
     overflow: visible;
     text-overflow: clip;
     overflow-wrap: break-word;
-    transition: border-color var(--global-transition-duration-fast),
-        color var(--global-transition-duration-fast);
+    transition: color var(--global-transition-duration-fast);
 }
 
 html .sidebar .app-sub-sidebar li::before {
@@ -685,7 +684,6 @@ html .sidebar ul li a:hover {
 
 html .sidebar ul li.active>a {
     margin-left: 0;
-    padding-left: 0.625rem;
     border-left: var(--sw-rule) solid var(--theme-color);
     color: var(--sw-ink-strong);
     font-weight: 700;
@@ -1375,6 +1373,10 @@ html .brief-comments-container .brief-comments-in-blog-title-year-divider {
 
 html .brief-comments-in-blog-comments-container {
     padding: 1.25rem;
+}
+
+html .main-page-right-panel-container center {
+    text-align: center;
 }
 
 html .sw-mastline #count-words-block-span-div {

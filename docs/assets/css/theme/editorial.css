@@ -1480,16 +1480,38 @@ html .read-progress .num {
         justify-content: flex-end;
         align-items: center;
         gap: 0.25rem;
-        padding: var(--ed-bar-pad) var(--ed-gutter);
+        padding: var(--ed-bar-pad) var(--ed-gutter) var(--ed-bar-pad) calc(var(--ed-bar-h) + var(--ed-bar-pad));
         background: var(--ed-paper);
         border-top: var(--ed-border-mid);
         border-top-color: var(--ed-tone-line);
         z-index: 60;
     }
 
+    html #page-right-widgets-container .widgets-row {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+    }
+
+    html #page-right-widgets-container .widgets-row::before {
+        content: "";
+        margin-left: auto;
+    }
+
+    html #page-right-widgets-container .widgets-row::-webkit-scrollbar {
+        display: none;
+    }
+
     html #page-right-widgets-container .page-right-tools-widgets-span {
         position: relative;
         inset: auto;
+        flex: 0 0 auto;
         width: var(--ed-bar-item);
         height: var(--ed-bar-item);
     }

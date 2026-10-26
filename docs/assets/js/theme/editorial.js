@@ -356,6 +356,109 @@ function setupMotion(root) {
     return observer
 }
 
+function setupWidgetsRow() {
+    const container = document.getElementById('page-right-widgets-container')
+    if (!container) return
+
+    let row = container.querySelector(':scope > .widgets-row')
+    if (!row) {
+        row = document.createElement('div')
+        row.className = 'widgets-row'
+        container.insertBefore(row, container.firstChild)
+    }
+
+    Array.prototype.forEach.call(
+        container.querySelectorAll(':scope > .page-right-tools-widgets-span'),
+        function (el) { row.appendChild(el) }
+    )
+}
+
+function setupTocSpy() {
+    const nav = document.querySelector('.sidebar-nav')
+    if (!nav) return null
+
+    let items = []
+    let ticking = false
+    let frame = 0
+
+    const collect = function () {
+        const heads = []
+        Array.prototype.forEach.call(
+            document.querySelectorAll('.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4'),
+            function (h) {
+                const span = h.querySelector('span')
+                const text = (span ? span.textContent : h.textContent).trim()
+                if (text) heads.push({ el: h, text: text })
+            }
+        )
+
+        const found = []
+        Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
+            const title = (a.getAttribute('title') || a.textContent || '').trim()
+            if (!title) return
+            const match = heads.find(function (item) { return item.text === title })
+            const li = a.closest('li')
+            if (!match || !li) return
+            found.push({ li: li, heading: match.el })
+        })
+
+        found.sort(function (a, b) {
+            return a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
+        })
+        return found
+    }
+
+    const apply = function () {
+        if (!items.length) items = collect()
+        if (!items.length) return
+
+        const doc = document.scrollingElement || document.documentElement
+        const threshold = 100
+        let current = items[0]
+
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].heading.getBoundingClientRect().top <= threshold) current = items[i]
+            else break
+        }
+
+        if (doc.scrollTop + window.innerHeight >= doc.scrollHeight - 2) {
+            current = items[items.length - 1]
+        }
+
+        const marked = items.filter(function (it) { return it.li.classList.contains('active') })
+        if (marked.length === 1 && marked[0] === current) return
+
+        items.forEach(function (it) { it.li.classList.toggle('active', it === current) })
+    }
+
+    const onScroll = function () {
+        if (ticking) return
+        ticking = true
+        frame = requestAnimationFrame(function () {
+            apply()
+            ticking = false
+        })
+    }
+
+    const fixer = new MutationObserver(function () { apply() })
+    fixer.observe(nav, { subtree: true, attributes: true, attributeFilter: ['class'] })
+
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true })
+    window.addEventListener('resize', onScroll)
+    ticking = true
+    frame = requestAnimationFrame(function () {
+        apply()
+        ticking = false
+    })
+
+    return function cleanup() {
+        window.cancelAnimationFrame(frame)
+        fixer.disconnect()
+        document.removeEventListener('scroll', onScroll, { capture: true })
+        window.removeEventListener('resize', onScroll)
+    }
+}
+
 export function renderTheme(options) {
     const onCleanup = options && options.onCleanup
     const root = document.querySelector('.markdown-section')
@@ -378,11 +481,18 @@ export function renderTheme(options) {
         if (title) titleTimer = window.setTimeout(function () { title.classList.add('ed-in') }, 60)
     }
 
-    if (typeof onCleanup !== 'function') return
+    setupWidgetsRow()
+    const stopTocSpy = setupTocSpy()
+
+    if (typeof onCleanup !== 'function') {
+        if (stopTocSpy) stopTocSpy()
+        return
+    }
 
     onCleanup(function () {
         window.clearTimeout(titleTimer)
         if (observer) observer.disconnect()
+        if (stopTocSpy) stopTocSpy()
         document.documentElement.classList.remove('ed-active', 'ed-motion')
         restoreInline()
     })

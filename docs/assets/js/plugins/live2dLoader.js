@@ -75,6 +75,7 @@ class Live2dLoader {
         document.body.appendChild(canvas)
         canvas.style.position = 'fixed'
         canvas.style.zIndex = 99999
+        canvas.style.pointerEvents = 'none'
         if (config.left) canvas.style.left = config.left
         if (config.right) canvas.style.right = config.right
         if (config.top) canvas.style.top = config.top
@@ -101,26 +102,125 @@ class Live2dLoader {
             canvas.style.height * 0.5 + (config.offsetY || 0)
         )
         this.model.scale.set(config.scale || 0.1)
-        if (config.draggable === true) this.draggable(this.model)
-        this.addListener(config, canvas, this.initMotionIndex())
+        this.config = config
+        this.motionIndex = this.initMotionIndex()
+        this.addListener(config, canvas, this.motionIndex)
+        this.createHitArea(config, canvas)
     }
 
-    // 可拖动
-    draggable(model) {
-        model.buttonMode = true
-        model.on('pointerdown', (e) => {
-            model.dragging = true
-            model._pointerX = e.data.global.x - model.x
-            model._pointerY = e.data.global.y - model.y
+    createHitArea(config, canvas) {
+        if (!config.hitArea) return
+        const area = document.createElement('div')
+        area.id = 'live2d-hit-area'
+        area.setAttribute('aria-hidden', 'true')
+        Object.assign(area.style, {
+            position: 'fixed',
+            zIndex: 50,
+            pointerEvents: 'auto',
+            background: 'transparent',
+            touchAction: 'none',
+            cursor: config.cursor || 'default',
         })
-        model.on('pointermove', (e) => {
-            if (model.dragging) {
-                model.position.x = e.data.global.x - model._pointerX
-                model.position.y = e.data.global.y - model._pointerY
+        document.body.appendChild(area)
+        this.hitArea = area
+        this.syncHitArea()
+        addEventListener('resize', () => this.syncHitArea())
+        new MutationObserver(() => this.syncHitArea())
+            .observe(canvas, { attributes: true, attributeFilter: ['class'] })
+        this.app.ticker.add(() => this.syncHitArea())
+        if (config.draggable === true) this.enableDrag(area, canvas)
+        area.addEventListener('click', (event) => {
+            if (this._suppressTap) {
+                this._suppressTap = false
+                return
             }
+            const rect = canvas.getBoundingClientRect()
+            this.tap(event.clientX - rect.left, event.clientY - rect.top, this.motionIndex)
         })
-        model.on('pointerupoutside', () => (model.dragging = false))
-        model.on('pointerup', () => (model.dragging = false))
+    }
+
+    enableDrag(area, canvas) {
+        const LIMIT = 4
+        let dragging = false
+        let moved = false
+        let startX = 0
+        let startY = 0
+        let originLeft = 0
+        let originTop = 0
+
+        area.style.cursor = 'grab'
+
+        area.addEventListener('pointerdown', (event) => {
+            if (event.button !== 0) return
+            const rect = canvas.getBoundingClientRect()
+            canvas.style.left = rect.left + 'px'
+            canvas.style.top = rect.top + 'px'
+            canvas.style.right = 'auto'
+            canvas.style.bottom = 'auto'
+            dragging = true
+            moved = false
+            startX = event.clientX
+            startY = event.clientY
+            originLeft = rect.left
+            originTop = rect.top
+            try {
+                area.setPointerCapture(event.pointerId)
+            } catch (e) {
+            }
+            area.style.cursor = 'grabbing'
+            event.preventDefault()
+        })
+
+        area.addEventListener('pointermove', (event) => {
+            if (!dragging) return
+            const dx = event.clientX - startX
+            const dy = event.clientY - startY
+            if (!moved && Math.abs(dx) + Math.abs(dy) > LIMIT) moved = true
+            const rect = canvas.getBoundingClientRect()
+            const left = Math.min(Math.max(originLeft + dx, 0), Math.max(innerWidth - rect.width, 0))
+            const top = Math.min(Math.max(originTop + dy, 0), Math.max(innerHeight - rect.height, 0))
+            canvas.style.left = left + 'px'
+            canvas.style.top = top + 'px'
+            this.syncHitArea()
+        })
+
+        const stop = (event) => {
+            if (!dragging) return
+            dragging = false
+            area.style.cursor = 'grab'
+            if (area.hasPointerCapture(event.pointerId)) area.releasePointerCapture(event.pointerId)
+            this._suppressTap = moved
+        }
+
+        area.addEventListener('pointerup', stop)
+        area.addEventListener('pointercancel', stop)
+    }
+
+    syncHitArea() {
+        const area = this.hitArea
+        if (!area) return
+        const canvas = this.app.view
+        const rect = canvas.getBoundingClientRect()
+        const box = this.config.hitArea
+        const detached =
+            getComputedStyle(canvas).display === 'none' ||
+            canvas.classList.contains('canvas-hide') ||
+            rect.width === 0 ||
+            rect.right <= 0 || rect.left >= innerWidth ||
+            rect.bottom <= 0 || rect.top >= innerHeight
+        const next = detached
+            ? { display: 'none' }
+            : {
+                display: 'block',
+                left: rect.left + box.x + 'px',
+                top: rect.top + box.y + 'px',
+                width: box.w + 'px',
+                height: box.h + 'px',
+            }
+        const prev = this._areaRect || {}
+        if (Object.keys(next).every((k) => prev[k] === next[k])) return
+        this._areaRect = next
+        Object.assign(area.style, next)
     }
 
     initMotionIndex() {
@@ -138,80 +238,65 @@ class Live2dLoader {
     }
 
     addListener(config, canvas, motionIndex) {
-        // 有的旧模型(比如lafei)不支持, 无法触发执行; 所以统一监听document的点击事件
-        // this.model.on("hit", (hitAreas) => {});
-        // this.model.emit("hit");
-
+        if (config.hitArea) return
         document.addEventListener('click', (event) => {
-            let offsetX = event.clientX - this.app.view.offsetLeft,
-                offsetY = event.clientY - this.app.view.offsetTop
-            if (
-                0 < offsetX &&
-                offsetX < this.app.view.width &&
-                0 < offsetY &&
-                offsetY < this.app.view.height
-            ) {
-                if (config.pierceThrough !== false) {
-                    // 鼠标穿透, 先把 canvas 设为可穿透
-                    canvas.style.pointerEvents = 'none'
-                    // 为该元素派发点击事件 https://www.blogwxb.cn/js%E4%B8%AD%E7%94%A8x%EF%BC%8Cy%E5%9D%90%E6%A0%87%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%A8%A1%E6%8B%9F%E7%82%B9%E5%87%BB%E5%8A%9F%E8%83%BD/
-                    document
-                        .elementsFromPoint(event.clientX, event.clientY)[0]
-                        .dispatchEvent(
-                            new MouseEvent('click', {
-                                bubbles: true, // 事件冒泡
-                                cancelable: true, // 默认事件
-                                view: window,
-                            })
-                        )
-                    canvas.style.pointerEvents = 'auto'
-                }
-
-                let po = this.model.toModelPosition(new PIXI.Point(offsetX, offsetY)),
-                    hitAreas,
-                    ifRandom
-
-                if (Object.keys(this.model.internalModel.hitAreas).length == 0) {
-                    hitAreas = this.hitTest(po.x, po.y)
-                    if (hitAreas.includes('TouchHead')) {
-                        this.model.internalModel.motionManager.startMotion(
-                            '',
-                            motionIndex[0]
-                        )
-                    } else if (hitAreas.includes('TouchSpecial')) {
-                        this.model.internalModel.motionManager.startMotion(
-                            '',
-                            motionIndex[1]
-                        )
-                    } else if (hitAreas.includes('TouchBody')) {
-                        this.model.internalModel.motionManager.startMotion(
-                            '',
-                            motionIndex[2]
-                        )
-                    } else ifRandom = true
-                } else {
-                    hitAreas = this.model.internalModel.hitTest(po.x, po.y)
-                    if (hitAreas.includes('head') || hitAreas.includes('Head')) {
-                        this.model.expression()
-                        this.model.motion('Tap')
-                    } else if (hitAreas.includes('body') || hitAreas.includes('Body')) {
-                        this.model.motion('tap_body')
-                        this.model.motion('Tap')
-                    } else ifRandom = true
-                }
-
-                if (ifRandom === true) {
-                    let keys = Object.keys(
-                        this.model.internalModel.motionManager.motionGroups
-                    )
-                    this.model.internalModel.motionManager.startRandomMotion(
-                        keys[Math.floor(Math.random() * keys.length)]
-                    )
-                }
-
-                console.log('Start motion: ', hitAreas.join(' / ') || 'random')
-            }
+            const rect = this.app.view.getBoundingClientRect()
+            this.tap(event.clientX - rect.left, event.clientY - rect.top, motionIndex)
         })
+    }
+
+    tap(offsetX, offsetY, motionIndex) {
+        const rect = this.app.view.getBoundingClientRect()
+        if (
+            0 < offsetX &&
+            offsetX < rect.width &&
+            0 < offsetY &&
+            offsetY < rect.height
+        ) {
+            let po = this.model.toModelPosition(new PIXI.Point(offsetX, offsetY)),
+                hitAreas,
+                ifRandom
+
+            if (Object.keys(this.model.internalModel.hitAreas).length == 0) {
+                hitAreas = this.hitTest(po.x, po.y)
+                if (hitAreas.includes('TouchHead')) {
+                    this.model.internalModel.motionManager.startMotion(
+                        '',
+                        motionIndex[0]
+                    )
+                } else if (hitAreas.includes('TouchSpecial')) {
+                    this.model.internalModel.motionManager.startMotion(
+                        '',
+                        motionIndex[1]
+                    )
+                } else if (hitAreas.includes('TouchBody')) {
+                    this.model.internalModel.motionManager.startMotion(
+                        '',
+                        motionIndex[2]
+                    )
+                } else ifRandom = true
+            } else {
+                hitAreas = this.model.internalModel.hitTest(po.x, po.y)
+                if (hitAreas.includes('head') || hitAreas.includes('Head')) {
+                    this.model.expression()
+                    this.model.motion('Tap')
+                } else if (hitAreas.includes('body') || hitAreas.includes('Body')) {
+                    this.model.motion('tap_body')
+                    this.model.motion('Tap')
+                } else ifRandom = true
+            }
+
+            if (ifRandom === true) {
+                let keys = Object.keys(
+                    this.model.internalModel.motionManager.motionGroups
+                )
+                this.model.internalModel.motionManager.startRandomMotion(
+                    keys[Math.floor(Math.random() * keys.length)]
+                )
+            }
+
+            console.log('Start motion: ', hitAreas.join(' / ') || 'random')
+        }
     }
 
     hitTest(poX, poY) {

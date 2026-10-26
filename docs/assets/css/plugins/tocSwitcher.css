@@ -22,10 +22,11 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+    margin-bottom: calc(-1 * var(--global-border-width));
 }
 
 .switch-toc-wrap-div button.active-btn {
-    border-bottom: var(--global-border-strong) var(--theme-color);
+    border-bottom: var(--global-border-semistrong) var(--theme-color);
     cursor: default;
 }
 

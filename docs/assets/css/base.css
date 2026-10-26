@@ -129,8 +129,10 @@
 
     --global-border: 1px solid;
     --global-border-strong: 2px solid;
+    --global-border-semistrong: 3px solid;
     --global-border-emphasis: 4px solid;
     --global-border-weak: 1px dotted;
+    --global-border-width: 1px;
     --global-border-strong-width: 2px;
 
     --global-box-shadow-width: 0.625rem;

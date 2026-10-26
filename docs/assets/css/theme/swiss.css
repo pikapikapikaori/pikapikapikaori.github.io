@@ -151,6 +151,10 @@ html {
         --sw-cover-ratio: 3 / 2;
         --sw-thumb-w: 5rem;
         --sw-thumb-h: 3.75rem;
+
+        --sw-bar-item: 2rem;
+        --sw-bar-pad: 0.4rem;
+        --sw-bar-h: calc(var(--sw-bar-item) + var(--sw-bar-pad) * 2 + var(--sw-rule-mid));
     }
 }
 
@@ -1128,6 +1132,10 @@ html .markdown-section .docsify-pagination-container {
     color: var(--sw-ink);
 }
 
+html .markdown-section .docsify-pagination-container:not(:has(.pagination-item)) {
+    border-top: 0;
+}
+
 html .docsify-pagination-container .pagination-item {
     flex: 0 1 auto;
     max-width: 46%;
@@ -1472,7 +1480,7 @@ html .read-progress .num {
         justify-content: flex-end;
         align-items: center;
         gap: 0.25rem;
-        padding: 0.4rem var(--sw-gutter);
+        padding: var(--sw-bar-pad) var(--sw-gutter);
         background: var(--sw-paper);
         border-top: var(--sw-border-mid);
         border-top-color: var(--sw-tone-line);
@@ -1480,13 +1488,27 @@ html .read-progress .num {
     }
 
     html #page-right-widgets-container .page-right-tools-widgets-span {
-        position: static;
-        width: 2rem;
-        height: 2rem;
+        position: relative;
+        inset: auto;
+        width: var(--sw-bar-item);
+        height: var(--sw-bar-item);
     }
 
-    html #canvas {
-        display: none;
+    html main {
+        z-index: auto;
+    }
+
+    html .sidebar-toggle,
+    html body.close .sidebar-toggle {
+        left: 0;
+        bottom: 0;
+        width: var(--sw-bar-h);
+        height: var(--sw-bar-h);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 61;
     }
 
     html #page-right-widgets-container .page-right-tools-widgets-span-disappear {
@@ -1721,6 +1743,7 @@ html .switch-toc-wrap-div button {
     white-space: nowrap;
     padding: 0.6rem 0.25rem;
     color: var(--sw-ink-muted);
+    margin-bottom: calc(-1 * var(--sw-rule-mid));
 }
 
 html .switch-toc-wrap-div button.active-btn {

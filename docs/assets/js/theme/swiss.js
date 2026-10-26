@@ -1,10 +1,4 @@
 /**
- * Swiss（light）—— 报纸版面引擎
- *
- * 由 widgets.js 在每次 doneEach（路由切换）与主题切换时调用：
- *   renderTheme({ isDark, name, onCleanup })
- *
- * 只做四件事：
  *   1. 把 h1 / 面包屑 / 版记 / 字数 拼成报头行
  *   2. 按 h2 切节，按块级媒体切段，每段正文自己是一个双栏块（不用 column-span）
  *   3. 栏数切换（1 / 2），存 localStorage
@@ -17,7 +11,7 @@
 const COLS_KEY = 'swiss-cols'
 const DATE_RE = /\d{4}\s*[.\-/年]\s*\d{1,2}\s*[.\-/月]?\s*\d{0,2}/
 
-/** 块级媒体：这些元素不进栏，自己独占整幅 */
+/** 块级媒体：不进栏，独占整幅 */
 const PLATE_SELECTOR = [
     'iframe',
     'video',
@@ -76,7 +70,6 @@ function imgIn(el) {
     return null
 }
 
-/** <p><img></p>、<p><a><img></a></p>，以及题注插件改造后的 <p><center><img></center></p> */
 function isImageParagraph(el) {
     if (!el || el.tagName !== 'P') return false
     const kids = Array.prototype.filter.call(el.childNodes, function (n) { return !isBlankText(n) })
@@ -92,7 +85,6 @@ function isPlate(el) {
     return el.matches(PLATE_SELECTOR)
 }
 
-/** 引用块按 <br> 分行，用于辨认版记 / 小节日期 */
 function quoteLines(el) {
     const box = el.querySelector('p') || el
     const clone = box.cloneNode(true)
@@ -106,7 +98,6 @@ function datedLineCount(lines) {
     return lines.filter(function (line) { return DATE_RE.test(line) }).length
 }
 
-/** 版记：h1 之后、两级标题之前，至少两行、至少一行带日期 */
 function isBylineQuote(el) {
     if (!el || el.tagName !== 'BLOCKQUOTE') return false
     const lines = quoteLines(el)
@@ -114,7 +105,6 @@ function isBylineQuote(el) {
     return datedLineCount(lines) >= 1
 }
 
-/** 小节日期：紧跟在 h2/h3 之后，至多三行、至少一行带日期、总长有限 */
 function isDatelineQuote(el) {
     if (!el || el.tagName !== 'BLOCKQUOTE') return false
     if (el.textContent.trim().length > 80) return false
@@ -180,7 +170,6 @@ function buildColsControl(root) {
 
 /* ---------- 主流程 ---------- */
 
-/* 侧栏站名是导航，不是标题：把 docsify 的 h1 降级为 div，全页只留一个 h1 */
 function demoteSidebarTitle() {
     const el = document.querySelector('.sidebar > h1.app-name')
     if (!el) return
@@ -190,7 +179,6 @@ function demoteSidebarTitle() {
     el.replaceWith(box)
 }
 
-/* 报眉左侧的站名：从侧栏的站名链接取，不在脚本里写死 */
 function buildNavWordmark() {
     const nav = document.querySelector('.app-nav')
     if (!nav) return
@@ -240,7 +228,7 @@ function buildMast(root) {
 
     if (countWords) {
         meta.appendChild(countWords)
-        /* 插件给这一行写死了 0.9rem 与 float，报头行要统一字号 —— 这是唯一需要清内联的地方 */
+        /* 清插件写死的内联样式 */
         stashInline(countWords.querySelector('#count-words-block-span'), ['font-size'])
     }
 
@@ -326,7 +314,6 @@ function buildSections(root) {
 
     root.appendChild(fragment)
 
-    /* 索引页的封面在首屏附近，改成即时加载，别等滚动才出现 */
     Array.prototype.forEach.call(root.querySelectorAll('.toc-page-div img'), function (img, index) {
         if (index < 6) img.loading = 'eager'
     })

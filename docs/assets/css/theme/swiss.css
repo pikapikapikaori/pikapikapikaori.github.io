@@ -1,34 +1,22 @@
-/* ============================================================================
- * Swiss — 瑞士国际主义 / 报纸版面（light）
- *
- * 目录
- *   ① 非标准（vendor）属性 —— 全文件只有这一段出现 -webkit-*
- *   ② 封面报头复合字体 CoverTitleLang
- *   ③ 自定义属性
- *   ④ 版式：画框 / 报头 / 分节 / 分栏 / 图版 / 正文
- *   ⑤ 组件：侧栏 / 导航 / 索引 / 翻页 / 评论 / 页脚 / 封面 / 小组件
- *   ⑥ 状态与动效
- *   ⑦ 插件
- *
- * 约定：字号一律 rem；颜色与尺寸一律走变量；不使用 !important。
- *      字号 1rem = 正文 16px（由字号插件统一调整）。
- * ============================================================================ */
+/* 
+ * Nonstandard CSS
+ * 
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
 
-/* ============================================================
- * ① 非标准（vendor）属性
- * ============================================================ */
+/* Webkit-specific properties */
+
 html {
     -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
 }
 
-/* ============================================================
- * ② 封面报头复合字体 CoverTitleLang
- *    按 unicode-range 拼：拉丁=UnifrakturMaguntia（哥特体）
- *                      汉字与中文标点=ChaoShiJiYinZhuan（潮石记忆篆）
- *                      假名=KouzanBrushFontSousyo（行书）
- *    只在封面用到，section.cover 为 display:none 的页面不会触发下载
- * ============================================================ */
+
+/* 
+ * Standard CSS
+ */
+
 @font-face {
     font-family: 'CoverTitleLang';
     font-display: swap;
@@ -50,35 +38,22 @@ html {
     unicode-range: U+3040-30FF, U+31F0-31FF, U+FF66-FF9D;
 }
 
-/* ============================================================
- * ③ 自定义属性
- * ============================================================ */
 :root {
-    /* 主题色：hsl(355 66% 78%)，只做线与底块，块上文字永远用墨色 */
     --theme-color: #eca2a8;
 
-    /* —— 本主题调色：纸 / 墨 / 灰 / 色阶 —— */
-    --sw-paper: #fff;
-    --sw-ink: #111;
-    --sw-ink-strong: #000;
-    --sw-ink-muted: #6b6b6b;
-    --sw-tone: #f4f4f2;
-    --sw-tone-line: #d9d9d6;
-
-    /* —— 喂给 base.css 的语义变量 —— */
-    --bg-color: var(--sw-paper);
-    --text-color: var(--sw-ink);
-    --heading-color: var(--sw-ink-strong);
-    --muted-color: var(--sw-ink-muted);
+    --bg-color: #fff;
+    --text-color: #111;
+    --heading-color: #000;
+    --muted-color: #6b6b6b;
     --em-color: #444;
     --h6-color: var(--sw-ink-muted);
     --sidebar-text-color: #222;
     --sidebar-title-color: var(--sw-ink-strong);
-    --border-color: var(--sw-tone-line);
+    --border-color: #d9d9d6;
     --border-color-strong: var(--sw-ink-strong);
     --border-color-mid: #bcbcb8;
-    --code-bg: var(--sw-tone);
-    --zebra-bg: var(--sw-tone);
+    --code-bg: #f4f4f2;
+    --zebra-bg: var(--code-bg);
     --tip-code-bg: #ececea;
     --inline-code-color: var(--sw-ink);
     --code-text-color: #222;
@@ -86,18 +61,53 @@ html {
     --accent-color: var(--sw-ink-strong);
     --accent-text-color: var(--sw-paper);
 
-    /* —— 字体：正文沿用 base 的衬线栈；封面报头用复合字体 CoverTitleLang —— */
+    --cal-theme-color-s-1: 32;
+    --cal-theme-color-s-2: 24;
+    --cal-theme-color-s-3: 14;
+    --cal-theme-color-s-4: 6;
+    --cal-theme-color-s-5: -8;
+    --cal-theme-color-s-6: -18;
+    --cal-theme-color-s-7: -32;
+    --cal-theme-color-s-8: -48;
+    --cal-theme-color-l-1: 18;
+    --cal-theme-color-l-2: 12;
+    --cal-theme-color-l-3: 6;
+    --cal-theme-color-l-4: 3;
+    --cal-theme-color-l-5: -8;
+    --cal-theme-color-l-6: -18;
+    --cal-theme-color-l-7: -30;
+    --cal-theme-color-l-8: -44;
+
     --global-cover-font: 'CoverTitleLang', serif;
     --global-cover-paragraph-font: 'SortsMillGoudy', serif;
 
-    /* —— 画框与节奏 —— */
+    --global-content-width: min(94%, var(--sw-max));
+    --global-sidebar-width: 13.75rem;
+    --global-sidebar-toggle-width: var(--global-sidebar-width);
+
+    --global-el-border-radius: 0;
+    --global-el-border-radius-small: 0;
+    --global-icon-border-radius: 0;
+    --global-widget-border-radius: 0;
+
+    --global-backdrop-filter: none;
+
+    --global-transition-duration: 200ms;
+    --global-transition-duration-fast: 160ms;
+
+    --sw-paper: var(--bg-color);
+    --sw-ink: var(--text-color);
+    --sw-ink-strong: var(--heading-color);
+    --sw-ink-muted: var(--muted-color);
+    --sw-tone: var(--code-bg);
+    --sw-tone-line: var(--border-color);
+
     --sw-max: 80rem;
     --sw-gutter: 1rem;
     --sw-gap-col: 2.5rem;
     --sw-gap-block: 1.5rem;
     --sw-gap-sec: 5rem;
 
-    /* —— 规：一律粗规，不用 1px 线 —— */
     --sw-rule: 0.1875rem;
     --sw-rule-mast: 0.375rem;
     --sw-rule-mid: 0.125rem;
@@ -106,7 +116,6 @@ html {
     --sw-border-mid: var(--sw-rule-mid) solid var(--sw-ink-strong);
     --sw-border-soft: var(--sw-rule-mid) solid var(--sw-tone-line);
 
-    /* —— 字号：五档 —— */
     --sw-fs-display: 3.5rem;
     --sw-fs-cover: 4rem;
     --sw-fs-h2: 1.75rem;
@@ -116,30 +125,14 @@ html {
     --sw-lh-body: 1.8;
     --sw-lh-tight: 1.06;
 
-    /* —— base 的全局项 —— */
-    --global-content-width: min(94%, var(--sw-max));
-    --global-sidebar-width: 13.75rem;
-    --global-sidebar-toggle-width: var(--global-sidebar-width);
-    --global-el-border-radius: 0;
-    --global-el-border-radius-small: 0;
-    --global-icon-border-radius: 0;
-    --global-widget-border-radius: 0;
-    --global-transition-duration: 200ms;
-    --global-transition-duration-fast: 160ms;
-
-    /* —— 本主题自用组件尺寸 —— */
     --sw-toggle-size: 3rem;
     --sw-plate-radius: 0;
     --sw-plate-h: 26rem;
     --sw-cover-ratio: 2 / 1;
     --sw-thumb-w: 10.5rem;
     --sw-thumb-h: 7.875rem;
-
-    /* 本主题不用毛玻璃 */
-    --global-backdrop-filter: none;
 }
 
-/* 窄屏（≤1000px）：单栏，栏数控件收起 —— 默认是双栏，这里只做覆盖 */
 @media screen and (max-width: 1000px) {
     :root {
         --sw-fs-display: 2.125rem;
@@ -149,13 +142,8 @@ html {
         --sw-lh-body: 1.75;
         --sw-plate-h: 22rem;
     }
-
-    html .sw-mastline .sw-cols {
-        display: none;
-    }
 }
 
-/* 手机（≤768px） */
 @media screen and (max-width: 768px) {
     :root {
         --sw-gap-sec: 2.5rem;
@@ -166,9 +154,9 @@ html {
     }
 }
 
-/* ============================================================
- * ③ 版式
- * ============================================================ */
+html {
+    text-size-adjust: 100%;
+}
 
 html body {
     background: var(--sw-paper);
@@ -181,7 +169,6 @@ html .markdown-section {
     margin: 0 auto;
 }
 
-/* —— 报头 —— */
 html .sw-mast {
     margin: 0 0 var(--sw-gap-sec);
 }
@@ -208,7 +195,6 @@ html .sw-mastline {
     color: var(--sw-ink-muted);
 }
 
-/* 两色印刷：报头规的左端压一段主题色 */
 html .sw-mastline::before {
     content: "";
     position: absolute;
@@ -219,7 +205,7 @@ html .sw-mastline::before {
     background: var(--theme-color);
 }
 
-html .sw-mastline > * {
+html .sw-mastline>* {
     margin: 0;
 }
 
@@ -236,25 +222,15 @@ html .sw-byline {
     color: var(--sw-ink);
 }
 
-/* 字数插件：让它整块退出盒子，两半成为报头行的 flex item，行内 float 自然失效 */
-html .sw-mastline #count-words-block-span-div {
-    display: contents;
-}
-
-html .sw-mastline #count-words-block-span-div > div {
-    display: none;
-}
-
-html .sw-mastline #count-words-block-span {
-    display: block;
-    font-size: inherit;
-    color: var(--sw-ink-muted);
-    white-space: nowrap;
-}
-
 html .sw-cols {
     display: flex;
     gap: 0.375rem;
+}
+
+@media screen and (max-width: 1000px) {
+    html .sw-mastline .sw-cols {
+        display: none;
+    }
 }
 
 html .sw-cols button {
@@ -282,12 +258,10 @@ html .sw-cols button[aria-pressed="true"] {
     color: var(--sw-paper);
 }
 
-/* —— 封面图版（紧跟报头） —— */
 html .sw-cover {
     margin: 0 0 var(--sw-gap-sec);
 }
 
-/* —— 分节 —— */
 html .sw-sec {
     margin: 0 0 var(--sw-gap-sec);
 }
@@ -302,25 +276,24 @@ html .sw-sec-head {
     border-top: var(--sw-border);
 }
 
-html .sw-sec-head > h2,
-html .sw-sec-head > h3 {
+html .sw-sec-head>h2,
+html .sw-sec-head>h3 {
     margin: 0;
     border: 0;
     padding: 0;
 }
 
-html .sw-sec-head > h2 {
+html .sw-sec-head>h2 {
     font-size: var(--sw-fs-h2);
     line-height: 1.2;
     letter-spacing: -0.01em;
 }
 
-html .sw-sec-head > h3 {
+html .sw-sec-head>h3 {
     font-size: var(--sw-fs-h3);
     line-height: 1.3;
 }
 
-/* 小节日期：整块引用搬到栏目行右端，不拆行 */
 html .markdown-section blockquote.sw-dateline {
     grid-column: 2;
     min-width: 13rem;
@@ -343,12 +316,11 @@ html .sw-dateline p {
     text-wrap: wrap;
 }
 
-/* —— 分栏正文：每一段文字自己是一个双栏块 —— */
 html .sw-run {
     margin: 0 0 var(--sw-gap-block);
 }
 
-html .sw-run > h3 {
+html .sw-run>h3 {
     font-size: var(--sw-fs-h3);
     font-weight: 700;
     line-height: 1.35;
@@ -358,7 +330,7 @@ html .sw-run > h3 {
     page-break-after: avoid;
 }
 
-html .sw-run > h3:first-child {
+html .sw-run>h3:first-child {
     margin-top: 0;
 }
 
@@ -375,8 +347,8 @@ html .markdown-section[data-sw-cols="2"] .sw-run {
     column-count: 2;
 }
 
-/* 窄屏一律单栏，覆盖上面的栏数选择 */
 @media screen and (max-width: 1000px) {
+
     html .markdown-section .sw-run,
     html .markdown-section[data-sw-cols="1"] .sw-run,
     html .markdown-section[data-sw-cols="2"] .sw-run {
@@ -384,7 +356,6 @@ html .markdown-section[data-sw-cols="2"] .sw-run {
     }
 }
 
-/* —— 图版 —— */
 html .sw-plate {
     margin: var(--sw-gap-sec) 0;
 }
@@ -393,7 +364,6 @@ html .sw-plate:first-child {
     margin-top: 0;
 }
 
-/* 正文末尾：翻页块与结束符之间不再吃分区间距 */
 html .sw-plate:has(.docsify-pagination-container) {
     margin-top: 0;
     margin-bottom: 0;
@@ -404,27 +374,26 @@ html .sw-plate:has(> footer) {
     margin-bottom: 0;
 }
 
-html .sw-plate > footer > hr {
+html .sw-plate>footer>hr {
     margin: 0;
 }
 
-html .sw-plate > p,
-html .sw-plate > center,
-html .sw-plate > figure {
+html .sw-plate>p,
+html .sw-plate>center,
+html .sw-plate>figure {
     margin: 0;
 }
 
-html .sw-plate > p > center,
+html .sw-plate>p>center,
 html .sw-plate center {
     display: block;
     text-align: left;
 }
 
-/* 图版里的图按高度封顶、居中，不再撑成一整屏 */
-html .sw-plate > img,
-html .sw-plate > p img,
-html .sw-plate > center img,
-html .sw-plate > figure > img {
+html .sw-plate>img,
+html .sw-plate>p img,
+html .sw-plate>center img,
+html .sw-plate>figure>img {
     display: block;
     margin: 0 auto;
     width: auto;
@@ -434,10 +403,9 @@ html .sw-plate > figure > img {
     border-radius: var(--sw-plate-radius);
 }
 
-/* 封面：一条通栏图带，居中裁切 */
-html .sw-cover > p img,
-html .sw-cover > center img,
-html .sw-cover > img {
+html .sw-cover>p img,
+html .sw-cover>center img,
+html .sw-cover>img {
     width: 100%;
     max-height: none;
     aspect-ratio: var(--sw-cover-ratio);
@@ -445,8 +413,8 @@ html .sw-cover > img {
     object-position: center 35%;
 }
 
-html .sw-plate > iframe,
-html .sw-plate > video {
+html .sw-plate>iframe,
+html .sw-plate>video {
     display: block;
     width: 100%;
     border: 0;
@@ -458,7 +426,6 @@ html .sw-plate figcaption {
     color: var(--sw-ink-muted);
 }
 
-/* —— 正文 —— */
 html .markdown-section p,
 html .markdown-section li,
 html .markdown-section td,
@@ -471,7 +438,7 @@ html .markdown-section p {
     margin: 0 0 var(--sw-gap-block);
 }
 
-html .sw-run > p {
+html .sw-run>p {
     orphans: 2;
     widows: 2;
 }
@@ -489,9 +456,9 @@ html .markdown-section a:hover {
     text-decoration-color: var(--sw-ink-strong);
 }
 
-html .sw-mast > h1,
-html .sw-sec-head > h2,
-html .sw-sec-head > h3 {
+html .sw-mast>h1,
+html .sw-sec-head>h2,
+html .sw-sec-head>h3 {
     line-break: strict;
     text-wrap: balance;
 }
@@ -506,7 +473,6 @@ html .sidebar ul li a {
     line-break: strict;
 }
 
-/* 标题里的锚点链接（docsify 自动加的）不该带下划线和主题色 */
 html .markdown-section :is(h1, h2, h3, h4, h5, h6) a,
 html .markdown-section :is(h1, h2, h3, h4, h5, h6) a:hover {
     color: inherit;
@@ -588,7 +554,6 @@ html .markdown-section hr {
     margin: var(--sw-gap-sec) 0;
 }
 
-/* —— 代码与表格（两者的界线属于内容本身，允许细线） —— */
 html .markdown-section code {
     font-family: var(--global-code-font);
     font-size: 0.875em;
@@ -634,18 +599,13 @@ html .markdown-section td {
     font-size: var(--sw-fs-small);
 }
 
-/* ============================================================
- * ④ 组件
- * ============================================================ */
-
-/* —— 侧栏 —— */
 html .sidebar {
     background: var(--sw-paper);
     border-right: var(--sw-border);
     padding: 2.5rem 1.25rem 4.5rem;
 }
 
-html .sidebar > .app-name {
+html .sidebar>.app-name {
     margin: 0 0 1.25rem;
     text-align: left;
     font-size: var(--sw-fs-h2);
@@ -657,12 +617,12 @@ html .sidebar > .app-name {
     border-bottom: var(--sw-border-mast);
 }
 
-html .sidebar > .app-name a {
+html .sidebar>.app-name a {
     color: var(--sidebar-title-color);
     text-decoration: none;
 }
 
-html .sidebar li > p {
+html .sidebar li>p {
     margin: 1.75rem 0 0.5rem;
     max-width: 100%;
     padding: 0;
@@ -696,7 +656,6 @@ html .sidebar ul li a {
         color var(--global-transition-duration-fast);
 }
 
-/* 二级条目前面那条主题色短横（base.css 的 ::before）与折行后的文字打架，去掉 */
 html .sidebar .app-sub-sidebar li::before {
     content: none;
     display: none;
@@ -707,7 +666,7 @@ html .sidebar ul li a:hover {
     border-left-color: var(--sw-tone-line);
 }
 
-html .sidebar ul li.active > a {
+html .sidebar ul li.active>a {
     margin-left: 0;
     padding-left: 0.625rem;
     border-left: var(--sw-rule) solid var(--theme-color);
@@ -716,70 +675,6 @@ html .sidebar ul li.active > a {
     text-decoration: none;
 }
 
-/* 目录 / 文章列表 切换 */
-html .switch-toc-wrap-div {
-    margin: 0 0 1.25rem;
-    border-bottom: var(--sw-border-mid);
-    border-bottom-color: var(--sw-tone-line);
-    gap: 0;
-}
-
-html .switch-toc-wrap-div button {
-    font-family: inherit;
-    font-size: var(--sw-fs-small);
-    font-weight: 700;
-    letter-spacing: 0;
-    text-transform: none;
-    white-space: nowrap;
-    padding: 0.6rem 0.25rem;
-    color: var(--sw-ink-muted);
-}
-
-html .switch-toc-wrap-div button.active-btn {
-    border-bottom: var(--sw-border);
-    color: var(--sw-ink-strong);
-}
-
-html .switch-toc-wrap-div button:not(.active-btn):hover {
-    color: var(--sw-ink-strong);
-}
-
-html .sidebar:has(.toc-btn.active-btn) .sidebar-nav > ul > li > ul > li > a {
-    font-size: var(--sw-fs-small);
-    line-height: 1.45;
-    font-weight: var(--global-font-weight-normal);
-}
-
-html .sidebar:has(.toc-btn.active-btn) .sidebar-nav > ul > li > ul > li.active > a {
-    font-weight: 700;
-}
-
-/* 搜索 */
-html .sidebar .search .input-wrap {
-    border-block: 0;
-    border-bottom: var(--sw-border-mid);
-    border-bottom-color: var(--sw-tone-line);
-    border-radius: 0;
-    transition: border-color var(--global-transition-duration-fast);
-}
-
-/* 悬停只换颜色，不改粗细，避免下方内容跳动 */
-
-html .sidebar .search .input-wrap > input[type=search] {
-    padding: 0.65rem 0;
-    font-size: var(--sw-fs-body);
-    letter-spacing: 0;
-}
-
-html .sidebar .search .input-wrap:has(input[type=search]:hover),
-html .sidebar .search .input-wrap:has(input[type=search]:focus) {
-    box-shadow: none;
-    border-block: 0;
-    border-bottom: var(--sw-border-mid);
-    border-bottom-color: var(--sw-ink-strong);
-}
-
-/* —— 左下角菜单键 —— */
 html .sidebar-toggle,
 html body.close .sidebar-toggle {
     position: fixed;
@@ -803,12 +698,6 @@ html .sidebar-toggle span {
     background-color: var(--sw-paper);
 }
 
-html body.has-toc .sidebar-toggle {
-    display: none;
-}
-
-/* —— 顶部导航 —— */
-/* 报眉：左边站名，右边四项（站名由 swiss.js / editorial.js 从侧栏取） */
 html .app-nav {
     left: var(--global-sidebar-width);
     right: var(--sw-gutter);
@@ -839,8 +728,8 @@ html .sw-wordmark:hover {
     color: var(--heading-color);
 }
 
-html .app-nav > ul,
-html .app-nav > p {
+html .app-nav>ul,
+html .app-nav>p {
     display: flex;
     flex: 0 0 auto;
     justify-content: flex-end;
@@ -877,7 +766,7 @@ html .app-nav li {
     white-space: nowrap;
 }
 
-html .app-nav li > svg {
+html .app-nav li>svg {
     width: 1.1em;
     height: 1.1em;
     vertical-align: -0.15em;
@@ -915,151 +804,317 @@ html .app-nav li ul a.active {
     color: var(--sw-paper);
 }
 
-/* —— 文章索引（首页 / 随笔 / 存档） —— */
-html .markdown-section .toc-page-div {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin: var(--sw-gap-block) 0 0;
-    border-top: var(--sw-border);
-}
-
-html .markdown-section .toc-page-div {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 3rem;
-}
-
-@media screen and (max-width: 1000px) {
-    html .markdown-section .toc-page-div {
-        grid-template-columns: 1fr;
-        column-gap: 0;
-    }
-}
-
-html .markdown-section .toc-page-display-a {
+html section.cover.show {
     display: block;
-    min-height: 0;
-    max-height: none;
-    margin: 0;
-    background: none;
-    border: 0;
-    border-radius: 0;
-    text-align: left;
-    text-decoration: none;
+    background-color: transparent;
 }
 
-html .markdown-section .toc-page-display-div {
-    display: grid;
-    grid-template-columns: var(--sw-thumb-w) 1fr auto;
-    align-items: baseline;
-    gap: 1.25rem;
-    height: auto;
-    padding: 0.875rem 0;
-    border-bottom: var(--sw-border-mid);
-    border-bottom-color: var(--sw-tone-line);
+html section.cover:not(.show) {
+    display: none;
 }
 
-html .markdown-section .toc-page-display-title-img {
+html section.cover .mask {
+    display: none;
+}
+
+html section.cover .cover-main {
     position: relative;
-    width: var(--sw-thumb-w);
-    height: var(--sw-thumb-h);
-    align-self: center;
-    border-radius: 0;
-    overflow: hidden;
-    background: var(--sw-tone);
-}
-
-html .markdown-section .toc-page-div .toc-page-display-a img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0;
-    transition: filter var(--global-transition-duration-fast);
-}
-
-html .markdown-section .toc-page-display-title-div {
-    padding: 0;
-    font-size: var(--sw-fs-h3);
-    line-height: 1.4;
-    font-weight: 700;
-    color: var(--heading-color);
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
+    z-index: 2;
+    box-sizing: border-box;
+    width: min(46rem, 100%);
+    min-height: 100vh;
+    max-width: none;
+    margin: 0;
+    flex: 0 0 auto;
+    padding: 6rem 3rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: var(--sw-paper);
+    border-right: var(--sw-border);
     text-align: left;
-}
-
-html .markdown-section .toc-page-display-date-div {
-    padding: 0;
-    font-size: var(--sw-fs-small);
-    color: var(--sw-ink-muted);
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-}
-
-html .markdown-section .toc-page-display-a:hover .toc-page-display-title-div {
-    text-decoration: underline;
-    text-decoration-color: var(--theme-color);
-    text-decoration-thickness: var(--sw-rule-mid);
-    text-underline-offset: 0.2rem;
-}
-
-html .markdown-section .toc-page-display-a:hover img {
-    filter: contrast(1.06);
-    transform: none;
-}
-
-/* —— 目录页码 —— */
-html .toc-paginator-div {
-    margin: 1.5rem 0 0;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: var(--sw-fs-small);
     color: var(--sw-ink);
 }
 
-html .toc-paginator-input {
-    font-size: var(--sw-fs-small);
-    font-variant-numeric: tabular-nums;
-}
-
-html .toc-paginator-input input {
-    width: 2.25rem;
-    margin: 0 0.35rem;
-    padding: 0.15rem 0;
+html section.cover .cover-main>p:first-child {
+    margin: 0 0 2rem;
+    padding: 0;
     border: 0;
-    border-bottom: var(--sw-border-mid);
-    border-radius: 0;
-    background: transparent;
+    width: auto;
+    max-width: none;
     font-size: inherit;
 }
 
-html .toc-paginator-input input:focus {
-    outline: 0;
-    border-bottom: var(--sw-border);
-}
-
-html .toc-paginator-button-div {
-    margin: 0 0.25rem 0 0;
-}
-
-html .toc-paginator-button-span {
-    width: 1.75rem;
-    height: 1.75rem;
+html section.cover .cover-main>p:first-child img {
+    display: block;
+    width: 7.5rem;
+    height: 7.5rem;
+    object-fit: cover;
     border-radius: 0;
-    transition: background-color var(--global-transition-duration-fast),
-        color var(--global-transition-duration-fast);
+    box-shadow: none;
 }
 
-html .toc-paginator-button-span:hover {
-    background: var(--sw-ink-strong);
-    color: var(--sw-paper);
+html section.cover h1 {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: var(--sw-fs-cover);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+    text-align: left;
 }
 
-/* —— 上一篇 / 下一篇 —— */
+html section.cover h1 a {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+html section.cover h1 small {
+    position: static;
+    display: block;
+    margin: 0.75rem 0 0;
+    padding: 0.75rem 0 0;
+    border-top: var(--sw-border-mast);
+    font-family: var(--global-cover-font);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
+    color: var(--sw-ink);
+}
+
+html section.cover h1 small ruby rt {
+    font-family: inherit;
+    font-size: 0.5em;
+}
+
+html section.cover blockquote {
+    margin: 2rem 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+}
+
+html section.cover blockquote p {
+    max-width: 30rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--sw-ink);
+}
+
+html section.cover .cover-page-scroll-down-chevron-div {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    html section.cover .cover-main {
+        width: 100%;
+        min-height: 100vh;
+        padding: 4rem 1.75rem 4rem;
+        border-right: 0;
+    }
+
+}
+
+html body:has(section.cover.show) .app-nav {
+    left: 0;
+    right: auto;
+    width: min(46rem, 100%);
+    box-sizing: border-box;
+    padding: 1.5rem 3rem 0;
+    margin: 0;
+}
+
+html .markdown-section :focus-visible,
+html .sidebar :focus-visible,
+html .app-nav :focus-visible,
+html .toc-page-div :focus-visible {
+    outline: var(--sw-border-mid);
+    outline-offset: 2px;
+}
+
+html ::selection {
+    background: var(--theme-color);
+    color: var(--sw-ink-strong);
+}
+
+html.sw-motion .sw-mast>h1 {
+    transform: translateY(0.4em);
+    transition: transform 760ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+html.sw-motion .sw-mast>h1.sw-in {
+    transform: translateY(0);
+}
+
+html.sw-motion [data-sw-in] {
+    transform: translateY(1.5rem);
+    transition: transform 560ms cubic-bezier(0.22, 0.61, 0.24, 1);
+    transition-delay: var(--sw-delay, 0ms);
+}
+
+html.sw-motion [data-sw-in].sw-in {
+    transform: translateY(0);
+}
+
+html.sw-motion .sw-cover img {
+    transform: scale(1.05);
+    transition: transform 1800ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+html.sw-motion .sw-cover.sw-in img {
+    transform: scale(1);
+}
+
+@media screen and (max-width: 768px) {
+
+    html .app-nav {
+        position: fixed;
+        inset: 0 0 auto 0;
+        margin: 0;
+        padding: 0.6rem 1rem;
+        background: var(--sw-paper);
+        border-bottom: var(--sw-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        text-align: left;
+    }
+
+    html .sw-wordmark {
+        font-size: var(--sw-fs-small);
+    }
+
+    html .app-nav>ul,
+    html .app-nav>p {
+        gap: 0.9rem;
+    }
+
+    html .app-nav>ul,
+    html .app-nav>p {
+        align-items: baseline;
+    }
+
+    html .app-nav a {
+        font-size: var(--sw-fs-small);
+    }
+
+    html .app-nav li ul {
+        top: 1.75rem;
+        right: 0;
+    }
+
+    html .markdown-section {
+        padding-top: 4rem;
+    }
+
+    html .markdown-section h1 {
+        margin-bottom: 1rem;
+    }
+
+    html .sw-sec-head {
+        display: block;
+    }
+
+    html .sw-dateline {
+        max-width: none;
+        margin-top: 0.35rem;
+        text-align: left;
+    }
+
+    html .sw-mastline {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.35rem 1rem;
+    }
+
+    html .sw-mastline>.sw-byline {
+        grid-row: 2;
+    }
+
+    html .sw-mastline>.sw-meta {
+        grid-row: 3;
+        justify-self: start;
+    }
+
+    html .sw-cols button {
+        min-height: 2.25rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    html body {
+        padding-bottom: 3rem;
+    }
+}
+
+
+html .docsify-tabs {
+    margin: 0 0 var(--sw-gap-block);
+}
+
+html .markdown-section .docsify-tabs__tab {
+    padding: 0.5rem 0.9rem;
+    border: 0;
+    border-bottom: var(--sw-border-mid);
+    border-bottom-color: var(--sw-tone-line);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font-size: var(--sw-fs-small);
+    font-weight: 700;
+    color: var(--sw-ink-muted);
+}
+
+html .markdown-section .docsify-tabs__tab--active {
+    border-bottom: var(--sw-border);
+    background: none;
+    box-shadow: none;
+    color: var(--sw-ink-strong);
+}
+
+html .markdown-section .docsify-tabs__content {
+    border: 0;
+    border-radius: 0;
+    padding: 1.25rem 0 0;
+}
+
+html .sidebar .search .input-wrap {
+    border-block: 0;
+    border-bottom: var(--sw-border-mid);
+    border-bottom-color: var(--sw-tone-line);
+    border-radius: 0;
+    transition: border-color var(--global-transition-duration-fast);
+}
+
+html .sidebar .search .input-wrap>input[type=search] {
+    padding: 0.65rem 0;
+    font-size: var(--sw-fs-body);
+    letter-spacing: 0;
+}
+
+html .sidebar .search .input-wrap:has(input[type=search]:hover),
+html .sidebar .search .input-wrap:has(input[type=search]:focus) {
+    box-shadow: none;
+    border-block: 0;
+    border-bottom: var(--sw-border-mid);
+    border-bottom-color: var(--sw-ink-strong);
+}
+
+html .markdown-section mark {
+    background: var(--theme-color);
+    color: var(--sw-ink-strong);
+}
+
 html .markdown-section .docsify-pagination-container {
     display: flex;
     justify-content: space-between;
@@ -1102,7 +1157,35 @@ html .docsify-pagination-container .pagination-item a:hover .pagination-item-tit
     text-underline-offset: 0.2rem;
 }
 
-/* —— 评论：读者来信 —— */
+html .markdown-section .img-caption {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--sw-ink-muted);
+    font-size: var(--sw-fs-small);
+    line-height: 1.55;
+    text-align: left;
+}
+
+html pre .docsify-copy-code-button {
+    border-radius: 0;
+    background: var(--sw-ink-strong);
+    color: var(--sw-paper);
+    font-size: var(--sw-fs-small);
+}
+
+html .mermaid button svg {
+    color: var(--sw-ink-strong);
+}
+
+html .docsify-example-panels {
+    margin: 0 0 var(--sw-gap-block);
+    border: 0;
+}
+
+html .docsify-example-panels>* {
+    border-radius: 0;
+}
+
 html #gitalk-container {
     max-width: var(--global-content-width);
     width: auto;
@@ -1117,7 +1200,6 @@ html #gitalk-container .gt-container {
     line-height: 1.7;
 }
 
-/* gitalk 自带 1px 分隔线与大量 10/12px 字号，统一到本主题的两档 */
 html #gitalk-container .gt-meta {
     border-bottom: var(--sw-border-mid);
     border-bottom-color: var(--sw-tone-line);
@@ -1229,7 +1311,6 @@ html #gitalk-container .gt-ico-text {
     color: var(--sw-ink-muted);
 }
 
-/* —— 页脚：反相窄带 —— */
 html footer:has(#footer-under-gitalk) {
     margin-top: var(--sw-gap-sec);
     background: var(--sw-ink-strong);
@@ -1250,7 +1331,7 @@ html #footer-under-gitalk {
     color: var(--sw-paper);
 }
 
-html #footer-under-gitalk > div {
+html #footer-under-gitalk>div {
     padding-top: 0;
     border-top: 0;
 }
@@ -1261,145 +1342,35 @@ html #footer-under-gitalk small {
     color: var(--sw-paper);
 }
 
-/* —— 封面：白纸报头压在封面上，右侧留出照片 —— */
-html section.cover.show {
-    display: block;
-    /* 封面照由 .cover-fade-layer(z-index:-1) 承载，这里的底色必须透明，否则会盖住它 */
-    background-color: transparent;
-}
-
-/* 非当前页的封面（docsify 常驻 DOM）必须保持不占位 */
-html section.cover:not(.show) {
-    display: none;
-}
-
-html section.cover .mask {
-    display: none;
-}
-
-html section.cover .cover-main {
-    position: relative;
-    z-index: 2;
-    box-sizing: border-box;
-    width: min(46rem, 100%);
-    min-height: 100vh;
-    max-width: none;
-    margin: 0;
-    /* base.css 给的是 flex:1 1 0%，会把宽度吃掉，这里收回 */
-    flex: 0 0 auto;
-    padding: 6rem 3rem 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    background: var(--sw-paper);
-    border-right: var(--sw-border);
-    text-align: left;
-    color: var(--sw-ink);
-}
-
-/* 头像：直角、固定尺寸，不受封面别处的 p/img 规则影响 */
-html section.cover .cover-main > p:first-child {
-    margin: 0 0 2rem;
-    padding: 0;
-    border: 0;
-    width: auto;
-    max-width: none;
-    font-size: inherit;
-}
-
-html section.cover .cover-main > p:first-child img {
-    display: block;
-    width: 7.5rem;
-    height: 7.5rem;
-    object-fit: cover;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-html section.cover h1 {
-    position: static;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: var(--sw-fs-cover);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: 0;
-    text-align: left;
-}
-
-html section.cover h1 a {
-    color: inherit;
-    font-weight: inherit;
-    text-decoration: none;
-}
-
-html section.cover h1 small {
-    position: static;
-    display: block;
-    margin: 0.75rem 0 0;
-    padding: 0.75rem 0 0;
-    border-top: var(--sw-border-mast);
-    font-family: var(--global-cover-font);
-    font-size: 2rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1.3;
-    color: var(--sw-ink);
-}
-
-html section.cover h1 small ruby rt {
-    font-family: inherit;
-    font-size: 0.5em;
-}
-
-html section.cover blockquote {
-    margin: 2rem 0 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    text-align: left;
-}
-
-html section.cover blockquote p {
-    max-width: 30rem;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-family: inherit;
-    font-size: 1.5rem;
-    font-style: italic;
-    line-height: 1.4;
-    color: var(--sw-ink);
-}
-
-/* 封面不需要下滑箭头 */
-html section.cover .cover-page-scroll-down-chevron-div {
-    display: none;
-}
-
 @media screen and (max-width: 768px) {
-    html section.cover .cover-main {
-        width: 100%;
-        min-height: 100vh;
-        padding: 4rem 1.75rem 4rem;
-        border-right: 0;
+    html footer:has(#footer-under-gitalk) {
+        margin-bottom: 0;
     }
-
 }
 
-/* 封面页：导航坐进白色报头面板，纸面之外不出现 */
-html body:has(section.cover.show) .app-nav {
-    left: 0;
-    right: auto;
-    width: min(46rem, 100%);
-    box-sizing: border-box;
-    padding: 1.5rem 3rem 0;
+html .sw-mastline #count-words-block-span-div {
+    display: contents;
+}
+
+html .sw-mastline #count-words-block-span-div>div {
+    display: none;
+}
+
+html .sw-mastline #count-words-block-span {
+    display: block;
+    font-size: inherit;
+    color: var(--sw-ink-muted);
+    white-space: nowrap;
+}
+
+html .markdown-section>#count-words-block-span-div {
     margin: 0;
 }
 
-/* —— 右侧小组件 —— */
+html .markdown-section>#count-words-block-span-div+* {
+    margin-top: 0;
+}
+
 html .page-right-tools-widgets-span {
     box-sizing: border-box;
     padding: 0.1rem;
@@ -1411,17 +1382,16 @@ html .page-right-tools-widgets-span {
         border-color var(--global-transition-duration-fast);
 }
 
-html .page-right-tools-widgets-span > svg {
+html .page-right-tools-widgets-span>svg {
     color: var(--sw-ink-strong);
 }
 
-/* 隐藏状态（-disappear 的位移）不能被 hover 覆盖 */
 html .page-right-tools-widgets-span:not(.page-right-tools-widgets-span-disappear):hover {
     background-color: var(--sw-ink-strong);
     border-color: var(--sw-ink-strong);
 }
 
-html .page-right-tools-widgets-span:hover > svg {
+html .page-right-tools-widgets-span:hover>svg {
     color: var(--sw-paper);
 }
 
@@ -1468,7 +1438,6 @@ html .page-right-popups .font-picker-preset-size-btn-div.is-active {
     transform: none;
 }
 
-/* 本页进度：方块自下而上填满，不显示数字 */
 html .read-progress {
     background-color: var(--sw-paper);
     border: var(--sw-border-mid);
@@ -1494,265 +1463,191 @@ html .read-progress .num {
     display: none;
 }
 
-html .fade-edge {
-    --fade-bg: transparent;
-}
+@media screen and (max-width: 768px) {
 
-/* ============================================================
- * ⑤ 状态与动效
- * ============================================================ */
+    html #page-right-widgets-container {
+        position: fixed;
+        inset: auto 0 0 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.4rem var(--sw-gutter);
+        background: var(--sw-paper);
+        border-top: var(--sw-border-mid);
+        border-top-color: var(--sw-tone-line);
+        z-index: 60;
+    }
 
-html .markdown-section :focus-visible,
-html .sidebar :focus-visible,
-html .app-nav :focus-visible,
-html .toc-page-div :focus-visible {
-    outline: var(--sw-border-mid);
-    outline-offset: 2px;
-}
+    html #page-right-widgets-container .page-right-tools-widgets-span {
+        position: static;
+        width: 2rem;
+        height: 2rem;
+    }
 
-html ::selection {
-    background: var(--theme-color);
-    color: var(--sw-ink-strong);
-}
+    html #canvas {
+        display: none;
+    }
 
-/* 报头大字：自基线后方向升起 */
-html.sw-motion .sw-mast > h1 {
-    transform: translateY(0.4em);
-    transition: transform 760ms cubic-bezier(0.22, 0.61, 0.24, 1);
-}
+    html #page-right-widgets-container .page-right-tools-widgets-span-disappear {
+        transform: translateY(180%);
+    }
 
-html.sw-motion .sw-mast > h1.sw-in {
-    transform: translateY(0);
-}
-
-/* 入场：只动 transform，文字首帧即已绘出（不用 opacity，避免任何时刻不可读） */
-html.sw-motion [data-sw-in] {
-    transform: translateY(1.5rem);
-    transition: transform 560ms cubic-bezier(0.22, 0.61, 0.24, 1);
-    transition-delay: var(--sw-delay, 0ms);
-}
-
-html.sw-motion [data-sw-in].sw-in {
-    transform: translateY(0);
-}
-
-/* 封面图版：极慢的收拢（页面上唯一的“会动的图”） */
-html.sw-motion .sw-cover img {
-    transform: scale(1.05);
-    transition: transform 1800ms cubic-bezier(0.22, 0.61, 0.24, 1);
-}
-
-html.sw-motion .sw-cover.sw-in img {
-    transform: scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    html.sw-motion .sw-mast > h1,
-    html.sw-motion [data-sw-in],
-    html.sw-motion [data-sw-in].sw-in {
-        transform: none;
-        opacity: 1;
-        transition: none;
+    html #page-right-widgets-container .page-right-popups {
+        position: fixed;
+        top: auto;
+        bottom: 3.25rem;
+        right: var(--sw-gutter);
     }
 }
 
-/* ============================================================
- * ⑥ 插件
- * ============================================================ */
+html .markdown-section .toc-page-div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: var(--sw-gap-block) 0 0;
+    border-top: var(--sw-border);
+}
 
-/* 图片题注插件：把 <center> 的居中与 0.8em 收回版式 */
-html .markdown-section .img-caption {
+html .markdown-section .toc-page-div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+}
+
+@media screen and (max-width: 1000px) {
+    html .markdown-section .toc-page-div {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+}
+
+html .markdown-section .toc-page-display-a {
     display: block;
-    margin-top: 0.5rem;
-    color: var(--sw-ink-muted);
-    font-size: var(--sw-fs-small);
-    line-height: 1.55;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    text-align: left;
+    text-decoration: none;
+}
+
+html .markdown-section .toc-page-display-div {
+    display: grid;
+    grid-template-columns: var(--sw-thumb-w) 1fr auto;
+    align-items: baseline;
+    gap: 1.25rem;
+    height: auto;
+    padding: 0.875rem 0;
+    border-bottom: var(--sw-border-mid);
+    border-bottom-color: var(--sw-tone-line);
+}
+
+html .markdown-section .toc-page-display-title-img {
+    position: relative;
+    width: var(--sw-thumb-w);
+    height: var(--sw-thumb-h);
+    align-self: center;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--sw-tone);
+}
+
+html .markdown-section .toc-page-div .toc-page-display-a img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: filter var(--global-transition-duration-fast);
+}
+
+html .markdown-section .toc-page-display-title-div {
+    padding: 0;
+    font-size: var(--sw-fs-h3);
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--heading-color);
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
     text-align: left;
 }
 
-/* 字数插件：正文里不该再出现它（已被搬进报头行） */
-html .markdown-section > #count-words-block-span-div {
-    margin: 0;
-}
-
-html .markdown-section > #count-words-block-span-div + * {
-    margin-top: 0;
-}
-
-/* 面包屑 */
-html .markdown-section ul.breadcrumb {
-    flex-basis: 100%;
-    padding-left: 0;
-    margin: 0;
-    font-size: inherit;
+html .markdown-section .toc-page-display-date-div {
+    padding: 0;
+    font-size: var(--sw-fs-small);
     color: var(--sw-ink-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
 }
 
-/* 插件给面包屑里的链接塞了图标，这里收回 */
-html .markdown-section ul.breadcrumb img,
-html .markdown-section ul.breadcrumb svg {
+html .markdown-section .toc-page-display-a:hover .toc-page-display-title-div {
+    text-decoration: underline;
+    text-decoration-color: var(--theme-color);
+    text-decoration-thickness: var(--sw-rule-mid);
+    text-underline-offset: 0.2rem;
+}
+
+html .markdown-section .toc-page-display-a:hover img {
+    filter: contrast(1.06);
+    transform: none;
+}
+
+html .toc-paginator-div {
+    margin: 1.5rem 0 0;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--sw-fs-small);
+    color: var(--sw-ink);
+}
+
+html .toc-paginator-input {
+    font-size: var(--sw-fs-small);
+    font-variant-numeric: tabular-nums;
+}
+
+html .toc-paginator-input input {
+    width: 2.25rem;
+    margin: 0 0.35rem;
+    padding: 0.15rem 0;
+    border: 0;
+    border-bottom: var(--sw-border-mid);
+    border-radius: 0;
+    background: transparent;
+    font-size: inherit;
+}
+
+html .toc-paginator-input input:focus {
+    outline: 0;
+    border-bottom: var(--sw-border);
+}
+
+html .toc-paginator-button-div {
+    margin: 0 0.25rem 0 0;
+}
+
+html .toc-paginator-button-span {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0;
+    transition: background-color var(--global-transition-duration-fast),
+        color var(--global-transition-duration-fast);
+}
+
+html .toc-paginator-button-span:hover {
+    background: var(--sw-ink-strong);
+    color: var(--sw-paper);
+}
+
+html body.has-toc .sidebar-toggle {
     display: none;
 }
 
-html .markdown-section ul.breadcrumb a {
-    color: var(--sw-ink-muted);
-    text-decoration-color: transparent;
-}
-
-html .markdown-section ul.breadcrumb a:hover {
-    color: var(--sw-ink-strong);
-    text-decoration-color: var(--theme-color);
-}
-
-html .markdown-section ul.breadcrumb li::after {
-    color: var(--sw-tone-line);
-}
-
-/* 标签页 */
-html .docsify-tabs {
-    margin: 0 0 var(--sw-gap-block);
-}
-
-html .markdown-section .docsify-tabs__tab {
-    padding: 0.5rem 0.9rem;
-    border: 0;
-    border-bottom: var(--sw-border-mid);
-    border-bottom-color: var(--sw-tone-line);
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-    font-size: var(--sw-fs-small);
-    font-weight: 700;
-    color: var(--sw-ink-muted);
-}
-
-html .markdown-section .docsify-tabs__tab--active {
-    border-bottom: var(--sw-border);
-    background: none;
-    box-shadow: none;
-    color: var(--sw-ink-strong);
-}
-
-html .markdown-section .docsify-tabs__content {
-    border: 0;
-    border-radius: 0;
-    padding: 1.25rem 0 0;
-}
-
-/* 示例面板 / 多图容器 */
-html .docsify-example-panels {
-    margin: 0 0 var(--sw-gap-block);
-    border: 0;
-}
-
-html .docsify-example-panels > * {
-    border-radius: 0;
-}
-
-/* 代码复制按钮 */
-html pre .docsify-copy-code-button {
-    border-radius: 0;
-    background: var(--sw-ink-strong);
-    color: var(--sw-paper);
-    font-size: var(--sw-fs-small);
-}
-
-/* 搜索结果的「无结果」与高亮 */
-html .markdown-section mark {
-    background: var(--theme-color);
-    color: var(--sw-ink-strong);
-}
-
-/* Mermaid */
-html .mermaid button svg {
-    color: var(--sw-ink-strong);
-}
-
-/* ============================================================
- * 移动端
- * ============================================================ */
 @media screen and (max-width: 768px) {
-
-    html .app-nav {
-        position: fixed;
-        inset: 0 0 auto 0;
-        margin: 0;
-        padding: 0.6rem 1rem;
-        background: var(--sw-paper);
-        border-bottom: var(--sw-border);
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 1rem;
-        text-align: left;
-    }
-
-    html .sw-wordmark {
-        font-size: var(--sw-fs-small);
-    }
-
-    html .app-nav > ul,
-    html .app-nav > p {
-        gap: 0.9rem;
-    }
-
-    html .app-nav > ul,
-    html .app-nav > p {
-        align-items: baseline;
-    }
-
-    html .app-nav a {
-        font-size: var(--sw-fs-small);
-    }
-
-    html .app-nav li ul {
-        top: 1.75rem;
-        right: 0;
-    }
-
-    html .markdown-section {
-        padding-top: 4rem;
-    }
-
-    html .markdown-section h1 {
-        margin-bottom: 1rem;
-    }
-
-    html .sw-sec-head {
-        display: block;
-    }
-
-    html .sw-dateline {
-        max-width: none;
-        margin-top: 0.35rem;
-        text-align: left;
-    }
-
-    html .sw-mastline {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0.35rem 1rem;
-    }
-
-    /* 手机上：面包屑 / 署名 / 字数与栏数，署名必须在控件之前 */
-    html .sw-mastline > ul.breadcrumb {
-        grid-row: 1;
-    }
-
-    html .sw-mastline > .sw-byline {
-        grid-row: 2;
-    }
-
-    html .sw-mastline > .sw-meta {
-        grid-row: 3;
-        justify-self: start;
-    }
-
-    /* 拇指尺寸的控件 */
-    html .sw-cols button {
-        min-height: 2.25rem;
-        padding: 0.5rem 0.75rem;
-    }
 
     html .markdown-section .toc-page-display-div {
         grid-template-columns: var(--sw-thumb-w) 1fr;
@@ -1775,50 +1670,78 @@ html .mermaid button svg {
         grid-area: date;
         text-align: left;
     }
+}
 
-    /* 手机端：右侧小组件改为底部固定横条，不再压正文 */
-    html #page-right-widgets-container {
-        position: fixed;
-        inset: auto 0 0 0;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 0.25rem;
-        padding: 0.4rem var(--sw-gutter);
-        background: var(--sw-paper);
-        border-top: var(--sw-border-mid);
-        border-top-color: var(--sw-tone-line);
-        z-index: 60;
-    }
+html .markdown-section ul.breadcrumb {
+    flex-basis: 100%;
+    padding-left: 0;
+    margin: 0;
+    font-size: inherit;
+    color: var(--sw-ink-muted);
+}
 
-    html #page-right-widgets-container .page-right-tools-widgets-span {
-        position: static;
-        width: 2rem;
-        height: 2rem;
-    }
+html .markdown-section ul.breadcrumb img,
+html .markdown-section ul.breadcrumb svg {
+    display: none;
+}
 
-    /* 站点的 Live2D 小人在窄屏必然压住正文，这里与站点自身的"移动端不加载"保持一致 */
-    html #canvas {
-        display: none;
-    }
+html .markdown-section ul.breadcrumb a {
+    color: var(--sw-ink-muted);
+    text-decoration-color: transparent;
+}
 
-    /* 底部横条里的隐藏动画向下滑，不沿用桌面的横向位移 */
-    html #page-right-widgets-container .page-right-tools-widgets-span-disappear {
-        transform: translateY(180%);
-    }
+html .markdown-section ul.breadcrumb a:hover {
+    color: var(--sw-ink-strong);
+    text-decoration-color: var(--theme-color);
+}
 
-    html #page-right-widgets-container .page-right-popups {
-        position: fixed;
-        top: auto;
-        bottom: 3.25rem;
-        right: var(--sw-gutter);
-    }
+html .markdown-section ul.breadcrumb li::after {
+    color: var(--sw-tone-line);
+}
 
-    html body {
-        padding-bottom: 3rem;
+@media screen and (max-width: 768px) {
+    html .sw-mastline>ul.breadcrumb {
+        grid-row: 1;
     }
+}
 
-    html footer:has(#footer-under-gitalk) {
-        margin-bottom: 0;
-    }
+html .switch-toc-wrap-div {
+    margin: 0 0 1.25rem;
+    border-bottom: var(--sw-border-mid);
+    border-bottom-color: var(--sw-tone-line);
+    gap: 0;
+}
+
+html .switch-toc-wrap-div button {
+    font-family: inherit;
+    font-size: var(--sw-fs-small);
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    padding: 0.6rem 0.25rem;
+    color: var(--sw-ink-muted);
+}
+
+html .switch-toc-wrap-div button.active-btn {
+    border-bottom: var(--sw-border);
+    color: var(--sw-ink-strong);
+}
+
+html .switch-toc-wrap-div button:not(.active-btn):hover {
+    color: var(--sw-ink-strong);
+}
+
+html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li>a {
+    font-size: var(--sw-fs-small);
+    line-height: 1.45;
+    font-weight: var(--global-font-weight-normal);
+}
+
+html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li.active>a {
+    font-weight: 700;
+}
+
+html .fade-edge {
+    --fade-bg: transparent;
 }

@@ -3,6 +3,7 @@
  *   2. 按 h2 切节，按块级媒体切段，每段正文自己是一个双栏块（不用 column-span）
  *   3. 栏数切换（1 / 2），存 localStorage
  *   4. 入场动效（IntersectionObserver）
+ *   5. 进度条兼作回顶：插件的 #scroll-to-top-span 由 CSS 隐掉，箭头画进进度条
  *
  * 结构性改动都发生在 renderTheme 内，会被 widgets 的 DOM journal 记录并回滚；
  * 异步加的类名一律挂在 html.sw-active 之下，切主题后自然失效。
@@ -25,8 +26,17 @@ const PLATE_SELECTOR = [
     '.toc-paginator-div',
     '.docsify-pagination-container',
     '.docsify-example-panels',
-    '.multi-images-container-section'
+    '.multi-images-container-section',
+    '.brief-comments-container'
 ].join(',')
+
+const COLS_ICONS = {
+    1: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="3.5" y="6" width="17" height="3"></rect><rect x="3.5" y="10.5" width="17" height="3"></rect><rect x="3.5" y="15" width="11" height="3"></rect></svg>',
+    2: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="3.5" y="6" width="7" height="3"></rect><rect x="3.5" y="10.5" width="7" height="3"></rect><rect x="3.5" y="15" width="7" height="3"></rect><rect x="13.5" y="6" width="7" height="3"></rect><rect x="13.5" y="10.5" width="7" height="3"></rect><rect x="13.5" y="15" width="7" height="3"></rect></svg>'
+}
+
+
+const TOP_ARROW = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
 /* ---------- 内联样式暂存：只在「CSS 盖不掉」时才用，复原由自己负责 ---------- */
 
@@ -145,25 +155,19 @@ function writeCols(root, cols) {
     root.dataset.swCols = String(cols)
     localStorage.setItem(COLS_KEY, String(cols))
     Array.prototype.forEach.call(root.querySelectorAll('.sw-cols button'), function (btn) {
-        btn.setAttribute('aria-pressed', String(Number(btn.dataset.cols) === cols))
+        btn.setAttribute('aria-pressed', String(cols === 2))
+        btn.innerHTML = COLS_ICONS[cols]
     })
 }
 
 function buildColsControl(root) {
     const wrap = makeEl('div', 'sw-cols')
-    wrap.setAttribute('role', 'group')
-    wrap.setAttribute('aria-label', '正文栏数')
-
-    ;[1, 2].forEach(function (cols) {
-        const btn = makeEl('button')
-        btn.type = 'button'
-        btn.dataset.cols = String(cols)
-        btn.textContent = cols === 1 ? '单栏' : '双栏'
-        btn.addEventListener('click', function () {
-            writeCols(root, cols)
-        })
-        wrap.appendChild(btn)
+    const btn = makeEl('button')
+    btn.type = 'button'
+    btn.addEventListener('click', function () {
+        writeCols(root, Number(root.dataset.swCols) === 1 ? 2 : 1)
     })
+    wrap.appendChild(btn)
 
     return wrap
 }
@@ -194,10 +198,10 @@ function buildNavWordmark() {
     nav.insertBefore(link, nav.firstChild)
 }
 
-function buildMast(root) {
+function buildMast(root, parts) {
     const h1 = root.querySelector(':scope > h1')
-    const crumb = root.querySelector(':scope > ul.breadcrumb')
-    const countWords = root.querySelector(':scope > #count-words-block-span-div')
+    const crumb = parts && parts.crumb
+    const countWords = parts && parts.countWords
 
     let coverParagraph = null
     let bylineQuote = null
@@ -226,11 +230,7 @@ function buildMast(root) {
 
     const meta = makeEl('div', 'sw-meta')
 
-    if (countWords) {
-        meta.appendChild(countWords)
-        /* 清插件写死的内联样式 */
-        stashInline(countWords.querySelector('#count-words-block-span'), ['font-size'])
-    }
+    if (countWords) meta.appendChild(countWords)
 
     meta.appendChild(buildColsControl(root))
     line.appendChild(meta)
@@ -313,10 +313,6 @@ function buildSections(root) {
     })
 
     root.appendChild(fragment)
-
-    Array.prototype.forEach.call(root.querySelectorAll('.toc-page-div img'), function (img, index) {
-        if (index < 6) img.loading = 'eager'
-    })
 }
 
 function setupMotion(root) {
@@ -356,9 +352,27 @@ function setupMotion(root) {
     return observer
 }
 
+
+function takeBreadcrumb(root) {
+    return root.querySelector(':scope > ul.breadcrumb')
+}
+
+function takeCountWords(root) {
+    const el = root.querySelector(':scope > #count-words-block-span-div')
+    if (!el) return null
+    stashInline(el.querySelector('#count-words-block-span'), ['font-size'])
+    return el
+}
+
+function eagerTocPageImages(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('.toc-page-div img'), function (img, index) {
+        if (index < 6) img.loading = 'eager'
+    })
+}
+
 function setupWidgetsRow() {
     const container = document.getElementById('page-right-widgets-container')
-    if (!container) return
+    if (!container) return null
 
     let row = container.querySelector(':scope > .widgets-row')
     if (!row) {
@@ -371,6 +385,49 @@ function setupWidgetsRow() {
         container.querySelectorAll(':scope > .page-right-tools-widgets-span'),
         function (el) { row.appendChild(el) }
     )
+
+    let hidden = row.querySelectorAll('.page-right-tools-widgets-span-disappear').length
+
+    const anchor = new MutationObserver(function () {
+        const now = row.querySelectorAll('.page-right-tools-widgets-span-disappear').length
+        const wasHidden = hidden > 0
+        hidden = now
+        if (!wasHidden || now > 0) return
+        requestAnimationFrame(function () {
+            row.scrollLeft = row.scrollWidth
+        })
+    })
+    anchor.observe(row, { subtree: true, attributes: true, attributeFilter: ['class'] })
+
+    return function stop() {
+        anchor.disconnect()
+    }
+}
+
+function setupReadProgress() {
+    const el = document.getElementById('progress-span')
+    if (!el) return null
+
+    let icon = el.querySelector('.sw-top-arrow')
+    if (!icon) {
+        const holder = makeEl('span')
+        holder.innerHTML = TOP_ARROW
+        icon = holder.firstElementChild
+        icon.classList.add('sw-top-arrow')
+        el.appendChild(icon)
+    }
+
+    const onClick = function () {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+    }
+
+    el.addEventListener('click', onClick)
+
+    return function stop() {
+        el.removeEventListener('click', onClick)
+        if (icon.isConnected) icon.remove()
+    }
 }
 
 function setupTocSpy() {
@@ -471,8 +528,12 @@ export function renderTheme(options) {
         root.dataset.swOn = '1'
         demoteSidebarTitle()
         buildNavWordmark()
-        buildMast(root)
+        buildMast(root, {
+            crumb: takeBreadcrumb(root),
+            countWords: takeCountWords(root)
+        })
         buildSections(root)
+        eagerTocPageImages(root)
         writeCols(root, readCols())
         document.documentElement.classList.add('sw-active')
         observer = setupMotion(root)
@@ -481,10 +542,13 @@ export function renderTheme(options) {
         if (title) titleTimer = window.setTimeout(function () { title.classList.add('sw-in') }, 60)
     }
 
-    setupWidgetsRow()
+    const stopWidgetsRow = setupWidgetsRow()
+    const stopReadProgress = setupReadProgress()
     const stopTocSpy = setupTocSpy()
 
     if (typeof onCleanup !== 'function') {
+        if (stopWidgetsRow) stopWidgetsRow()
+        if (stopReadProgress) stopReadProgress()
         if (stopTocSpy) stopTocSpy()
         return
     }
@@ -492,6 +556,8 @@ export function renderTheme(options) {
     onCleanup(function () {
         window.clearTimeout(titleTimer)
         if (observer) observer.disconnect()
+        if (stopWidgetsRow) stopWidgetsRow()
+        if (stopReadProgress) stopReadProgress()
         if (stopTocSpy) stopTocSpy()
         document.documentElement.classList.remove('sw-active', 'sw-motion')
         restoreInline()

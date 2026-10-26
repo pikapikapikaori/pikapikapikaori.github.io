@@ -805,7 +805,7 @@ body.close .content {
     }
 
     body.close .content::before {
-        z-index: 10;
+        z-index: 15;
         opacity: 1;
     }
 

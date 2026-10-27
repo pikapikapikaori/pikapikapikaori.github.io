@@ -1,4 +1,5 @@
 @import url('../base-dark.css');
+@import url('./misty.css');
 
 :root {
     --theme-color: #a2d9ec;
@@ -24,38 +25,6 @@
     --blur-color: rgba(200, 212, 224, .08);
     --sidebar-toggle-bg: transparent;
     --sidebar-border-color: rgba(120, 160, 200, .18);
-
-    --grid-size: 22px;
     --grid-color: rgba(120, 160, 200, .10);
-    --grid-size-strong: 110px;
     --grid-color-strong: rgba(120, 160, 200, .20);
-}
-
-body {
-    background-color: var(--bg-color);
-    background-image:
-        linear-gradient(var(--grid-color-strong) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px),
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size:
-        var(--grid-size-strong) var(--grid-size-strong),
-        var(--grid-size-strong) var(--grid-size-strong),
-        var(--grid-size) var(--grid-size),
-        var(--grid-size) var(--grid-size);
-}
-
-.sidebar {
-    background-color: var(--bg-color);
-    background-image:
-        linear-gradient(var(--grid-color-strong) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px),
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size:
-        var(--grid-size-strong) var(--grid-size-strong),
-        var(--grid-size-strong) var(--grid-size-strong),
-        var(--grid-size) var(--grid-size),
-        var(--grid-size) var(--grid-size);
-    background-attachment: local;
 }

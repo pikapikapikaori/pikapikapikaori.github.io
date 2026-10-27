@@ -1,4 +1,5 @@
 @import url('../base-light.css');
+@import url('./sunlit.css');
 
 :root {
     --theme-color: #eca2ae;
@@ -23,23 +24,7 @@
     --accent-text-color: #2a2220;
     --blur-color: rgba(58, 50, 48, .08);
     --sidebar-toggle-bg: transparent;
-    --sidebar-border-color: #d4534b; 
+    --sidebar-border-color: #d4534b;
 
-    --rule-size: 48px;
     --rule-color: rgba(180, 160, 130, .22);
-}
-
-body {
-    background-color: var(--bg-color);
-    background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0 calc(var(--rule-size) - 1px),
-        var(--rule-color) calc(var(--rule-size) - 1px) var(--rule-size)
-    );
-}
-
-.sidebar {
-    background-color: var(--bg-color);
-    background-image: none;
-    border-right: 1px solid var(--sidebar-border-color);
 }

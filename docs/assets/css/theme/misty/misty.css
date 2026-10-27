@@ -1,0 +1,17 @@
+:root {
+    --grid-size: 22px;
+    --grid-size-strong: 110px;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: linear-gradient(var(--grid-color-strong) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px), linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size-strong) var(--grid-size-strong), var(--grid-size-strong) var(--grid-size-strong), var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    background-image: linear-gradient(var(--grid-color-strong) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px), linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size-strong) var(--grid-size-strong), var(--grid-size-strong) var(--grid-size-strong), var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+    background-attachment: local;
+}

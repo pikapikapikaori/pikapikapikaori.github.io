@@ -1,5 +1,6 @@
 import pagesData from '../config/tocdata.json.js'
 import { protectCodeBlocks, lockNoTransition, unlockNoTransition } from '../utils/common.js'
+import { bindShortcuts } from '../utils/shortcut.js'
 
 let tocPageOptions = {
     recentAmount: 8,
@@ -142,6 +143,16 @@ function plugin(hook, vm) {
         document.scrollingElement.scrollTop = 0
     }
 
+    function gotoPage(index) {
+        const target = Math.min(Math.max(Number(index) || 1, 1), maxPageIndex)
+
+        if (target === Number(curPageIndex)) return
+
+        curPageIndex = target
+
+        renderTocPageUnderPaginator()
+    }
+
     function renderTocPaginator() {
         let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')[0]
         let tocPaginatorLeftButtonDiv = document.getElementsByClassName('tocPaginatorLeftButtonDiv')[0]
@@ -152,16 +163,10 @@ function plugin(hook, vm) {
         }
 
         tocPaginatorLeftButtonDiv.onclick = function (e) {
-            if (curPageIndex > 1) {
-                curPageIndex -= 1
-                renderTocPageUnderPaginator()
-            }
+            gotoPage(curPageIndex - 1)
         }
         tocPaginatorRightButtonDiv.onclick = function (e) {
-            if (curPageIndex < maxPageIndex) {
-                curPageIndex += 1
-                renderTocPageUnderPaginator()
-            }
+            gotoPage(curPageIndex + 1)
         }
 
         tocPaginatorInputDiv.innerHTML = `<input class='toc-paginator-input-box' type='number' value='${curPageIndex}' min='1' max='${maxPageIndex}'></input><span>/</span><span>${maxPageIndex}</span>`
@@ -169,9 +174,7 @@ function plugin(hook, vm) {
         let tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
 
         tocPaginatorInput.onchange = function () {
-            curPageIndex = this.value
-
-            renderTocPageUnderPaginator()
+            gotoPage(this.value)
 
             this.value = curPageIndex
         }
@@ -195,6 +198,27 @@ function plugin(hook, vm) {
 
     hook.mounted(function () {
         narrowMql.addEventListener('change', onScreenWidthChange)
+
+        bindShortcuts({
+            ArrowLeft: { handler: () => gotoPage(curPageIndex - 1), repeat: true },
+            ArrowRight: { handler: () => gotoPage(curPageIndex + 1), repeat: true },
+            KeyP: function () {
+                const input = document.querySelector('.toc-paginator-input input')
+                if (!input) return
+
+                input.focus()
+                input.select()
+            },
+            Escape: {
+                allowInInput: true,
+                handler: function () {
+                    const input = document.querySelector('.toc-paginator-input input')
+                    if (!input || document.activeElement !== input) return
+
+                    input.blur()
+                }
+            }
+        }, { when: () => hasTocs })
 
         function onScreenWidthChange(e) {
             if (!hasTocs) return

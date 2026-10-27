@@ -1,4 +1,5 @@
 import { lockNoTransition, unlockNoTransition } from '../utils/common.js'
+import { bindShortcuts } from '../utils/shortcut.js'
 
 let widgetsOptions = {
     useSwitchMode: true,
@@ -353,7 +354,7 @@ function plugin(hook, vm) {
 
     const themeModuleCache = new Map()
     let themeJsCleanups = []
-    let themeJournal = null
+    let domTracking = null
     let themeRenderToken = 0
 
     function loadThemeModule(path) {
@@ -370,15 +371,15 @@ function plugin(hook, vm) {
         return themeModuleCache.get(url)
     }
 
-    // 记录主题脚本在 renderTheme 期间对 DOM 的改动，供反向撤销
-    function startDomJournal() {
-        const journal = { records: [], observer: null, styleAfter: new Map(), stopped: false }
+    // 记录 renderTheme 期间对 DOM 的改动，供反向撤销（与具体主题无关）
+    function beginDomTracking() {
+        const tracking = { records: [], observer: null, styleAfter: new Map(), stopped: false }
 
-        journal.observer = new MutationObserver(function (mutations) {
-            journal.records.push(...mutations)
+        tracking.observer = new MutationObserver(function (mutations) {
+            tracking.records.push(...mutations)
         })
 
-        journal.observer.observe(document.documentElement, {
+        tracking.observer.observe(document.documentElement, {
             childList: true,
             subtree: true,
             attributes: true,
@@ -387,25 +388,25 @@ function plugin(hook, vm) {
             characterDataOldValue: true
         })
 
-        return journal
+        return tracking
     }
 
-    function stopDomJournal(journal) {
-        if (!journal || journal.stopped) return
+    function endDomTracking(tracking) {
+        if (!tracking || tracking.stopped) return
 
-        journal.stopped = true
+        tracking.stopped = true
 
         // 记录是异步派发的，disconnect 会丢弃未派发的记录，必须先同步取出
-        journal.records.push(...journal.observer.takeRecords())
+        tracking.records.push(...tracking.observer.takeRecords())
 
         // 渲染结束时的 style，用于判断哪些内联属性仍属于主题脚本
-        journal.records.forEach(function (record) {
+        tracking.records.forEach(function (record) {
             if (record.type === 'attributes' && record.attributeName === 'style') {
-                journal.styleAfter.set(record.target, record.target.getAttribute('style'))
+                tracking.styleAfter.set(record.target, record.target.getAttribute('style'))
             }
         })
 
-        journal.observer.disconnect()
+        tracking.observer.disconnect()
     }
 
     // 只回滚仍未被动过的内联样式属性
@@ -434,13 +435,13 @@ function plugin(hook, vm) {
         })
     }
 
-    function revertDomJournal(journal) {
-        if (!journal) return
+    function rollbackDomChanges(tracking) {
+        if (!tracking) return
 
-        stopDomJournal(journal)
+        endDomTracking(tracking)
 
         const firstStyleRecords = new Map()
-        journal.records.forEach(function (record) {
+        tracking.records.forEach(function (record) {
             if (record.type === 'attributes' && record.attributeName === 'style' && !firstStyleRecords.has(record.target)) {
                 firstStyleRecords.set(record.target, record)
             }
@@ -448,8 +449,8 @@ function plugin(hook, vm) {
 
         const revertedStyles = new Set()
 
-        for (let i = journal.records.length - 1; i >= 0; i--) {
-            const record = journal.records[i]
+        for (let i = tracking.records.length - 1; i >= 0; i--) {
+            const record = tracking.records[i]
 
             try {
                 if (record.type === 'attributes') {
@@ -462,7 +463,7 @@ function plugin(hook, vm) {
                         restoreStyleDelta(
                             record.target,
                             firstStyleRecords.get(record.target).oldValue,
-                            journal.styleAfter.get(record.target)
+                            tracking.styleAfter.get(record.target)
                         )
                     } else if (record.oldValue === null) record.target.removeAttribute(record.attributeName)
                     else record.target.setAttribute(record.attributeName, record.oldValue)
@@ -488,7 +489,7 @@ function plugin(hook, vm) {
                     })
                 }
             } catch (e) {
-                console.warn('[widgets] 撤销主题脚本的 DOM 改动失败', e)
+                console.warn('[widgets] 回滚渲染期间的 DOM 改动失败', e)
             }
         }
     }
@@ -505,8 +506,8 @@ function plugin(hook, vm) {
         })
         themeJsCleanups = []
 
-        revertDomJournal(themeJournal)
-        themeJournal = null
+        rollbackDomChanges(domTracking)
+        domTracking = null
     }
 
     async function renderTheme() {
@@ -535,7 +536,7 @@ function plugin(hook, vm) {
             return
         }
 
-        themeJournal = startDomJournal()
+        domTracking = beginDomTracking()
 
         try {
             themeModule.renderTheme({
@@ -548,7 +549,7 @@ function plugin(hook, vm) {
         } catch (e) {
             console.warn('[widgets] 主题脚本执行失败：' + side.js, e)
         } finally {
-            stopDomJournal(themeJournal)
+            endDomTracking(domTracking)
         }
     }
 
@@ -982,6 +983,58 @@ function plugin(hook, vm) {
         initShowWidgets()
         initProgress()
         initScrollToTop()
+
+        let clickWidget = function (widget) {
+            if (!widget) return
+
+            widget.click()
+        }
+
+        let pickPreset = function (index) {
+            let buttons = null
+
+            if (isthemePickerOpen && themePickerPopupSpan) {
+                buttons = themePickerPopupSpan.getElementsByClassName('theme-picker-preset-color-btn-div')
+            } else if (iscolorPickerPopupOpen && colorPickerPopupSpan) {
+                buttons = colorPickerPopupSpan.getElementsByClassName('color-picker-preset-color-btn-div')
+            } else if (isfontPickerOpen && fontPickerPopupSpan) {
+                buttons = fontPickerPopupSpan.getElementsByClassName('font-picker-preset-size-btn-div')
+            }
+
+            if (!buttons || !buttons[index]) return
+
+            buttons[index].click()
+        }
+
+        let presetBindings = {}
+
+        for (let number = 1; number <= 10; number++) {
+            const index = number - 1
+            const digit = number === 10 ? 0 : number
+            const handler = function () {
+                pickPreset(index)
+            }
+
+            presetBindings['Digit' + digit] = handler
+            presetBindings['Numpad' + digit] = handler
+        }
+
+        bindShortcuts(Object.assign({
+            KeyM: () => clickWidget(switchSpan),
+            KeyT: () => clickWidget(themeSpan),
+            KeyC: () => clickWidget(colorPickerSpan),
+            KeyF: () => clickWidget(fontPickerSpan),
+            KeyS: () => clickWidget(showSakuraSpan),
+            KeyG: () => clickWidget(showLive2dSpan),
+            KeyW: () => clickWidget(showWidgetsSpan),
+            KeyN: () => clickWidget(progressSpan),
+            ArrowUp: () => clickWidget(scrollToTopSpan),
+            KeyL: function () {
+                if (!document.getElementById('gitalk-container')) return
+
+                clickWidget(scrollToCommentSpan)
+            }
+        }, presetBindings), { when: () => !document.body.classList.contains('image-viewer-open') })
 
     })
 

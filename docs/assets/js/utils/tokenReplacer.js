@@ -1,5 +1,3 @@
-// TokenReplacer.js
-
 /**
  * TokenReplacer
  * 模板替换工具：识别字符串里被 {} 包裹的内容，按 - 分隔后逐段替换。

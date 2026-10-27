@@ -1,3 +1,5 @@
+import { bindShortcuts } from '../utils/shortcut.js'
+
 function plugin(hook, vm) {
 
     let curImg = undefined
@@ -8,6 +10,8 @@ function plugin(hook, vm) {
     const tarImageHeight = '80%'
 
     const keyframeDuration = 150
+    const keyframeEasing = 'cubic-bezier(0.25, 0.1, 0.25, 1)'
+    const openCloseKeyframeDuration = 240
     const tarImageLeftStart = '-90%'
     const tarImageRightStart = '110%'
 
@@ -16,6 +20,8 @@ function plugin(hook, vm) {
     let lockContentY = 0
 
     let switchImageDirection = null
+    let closeFullImage = null
+    let unbindViewerShortcuts = null
 
     // 滚轮节流锁
     let wheelSwitchCooldown = false
@@ -67,18 +73,6 @@ function plugin(hook, vm) {
         const scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']
         if (scrollKeys.includes(e.key)) {
             e.preventDefault()
-            return
-        }
-
-        if (!switchImageDirection) return
-
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault()
-            switchImageDirection(true)
-        }
-        else if (e.key === 'ArrowRight') {
-            e.preventDefault()
-            switchImageDirection(false)
         }
     }
 
@@ -94,6 +88,12 @@ function plugin(hook, vm) {
         window.addEventListener('touchmove', preventTouchMove, { passive: false })
         window.addEventListener('keydown', preventKeyScroll)
 
+        unbindViewerShortcuts = bindShortcuts({
+            ArrowLeft: { handler: () => switchImageDirection(true), repeat: true },
+            ArrowRight: { handler: () => switchImageDirection(false), repeat: true },
+            Escape: () => closeFullImage()
+        }, { when: () => scrollLocked })
+
         // 只加状态类，不动任何布局样式
         document.body.classList.add('image-viewer-open')
     }
@@ -105,6 +105,11 @@ function plugin(hook, vm) {
         window.removeEventListener('wheel', preventWheel)
         window.removeEventListener('touchmove', preventTouchMove)
         window.removeEventListener('keydown', preventKeyScroll)
+
+        if (unbindViewerShortcuts) {
+            unbindViewerShortcuts()
+            unbindViewerShortcuts = null
+        }
 
         const content = document.querySelector('.content')
         if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
@@ -135,7 +140,10 @@ function plugin(hook, vm) {
                         height: tarImageHeight,
                     },
                 ],
-                keyframeDuration,
+                {
+                    duration: openCloseKeyframeDuration,
+                    easing: keyframeEasing,
+                },
             )
         }
         else {
@@ -154,7 +162,10 @@ function plugin(hook, vm) {
                         height: fullImageHeight,
                     },
                 ],
-                keyframeDuration,
+                {
+                    duration: openCloseKeyframeDuration,
+                    easing: keyframeEasing,
+                },
             )
         }
     }
@@ -204,7 +215,10 @@ function plugin(hook, vm) {
                         backgroundImage: newBackground,
                     },
                 ],
-                keyframeDuration * 3,
+                {
+                    duration: keyframeDuration * 3,
+                    easing: keyframeEasing,
+                },
             )
         }
         else {
@@ -251,7 +265,10 @@ function plugin(hook, vm) {
                         backgroundImage: newBackground,
                     },
                 ],
-                keyframeDuration * 3,
+                {
+                    duration: keyframeDuration * 3,
+                    easing: keyframeEasing,
+                },
             )
         }
     }
@@ -285,11 +302,8 @@ function plugin(hook, vm) {
         document.body.appendChild(viewFullImageSpan)
 
         // true for left button
-        function buttonLeftRightOnClick(direction) {
-            const imgEl = document.getElementById('view-full-image-span-inner-img-div')
-            const textEl = document.getElementById('view-full-image-span-inner-text-div')
-
-            const imgArray = Array.from(document.getElementsByTagName('img')).filter(img => {
+        function collectImages() {
+            return Array.from(document.getElementsByTagName('img')).filter(img => {
                 const shouldIgnore =
                     img.classList.contains('ignore-view-full-image-img') ||
                     img.className.includes('emoji') ||
@@ -297,35 +311,68 @@ function plugin(hook, vm) {
 
                 return !shouldIgnore
             })
-
-            if (imgArray.length !== 1) {
-                imgArray.some((img, index, arr) => {
-                    if (imgEl.style.backgroundImage.indexOf(img.src) > -1) {
-                        const newImgIndex = direction ? (index === 0 ? imgArray.length - 1 : index - 1) : (index === imgArray.length - 1 ? 0 : index + 1)
-                        imgEl.style.backgroundImage = 'url(' + imgArray[newImgIndex].src + ')'
-                        textEl.innerHTML = (newImgIndex + 1).toString() + ' / ' + arr.length.toString()
-                        curImg = imgArray[newImgIndex]
-
-                        createImageSwitchKeyframe(imgEl, direction, 'url(' + imgArray[index].src + ')', 'url(' + imgArray[newImgIndex].src + ')')
-                        return true
-                    }
-                })
-            }
         }
 
-        // 暴露给 preventWheel / preventKeyScroll
+        function currentImageIndex(imgArray) {
+            const imgEl = document.getElementById('view-full-image-span-inner-img-div')
+
+            for (let i = 0; i < imgArray.length; i++) {
+                if (imgEl.style.backgroundImage.indexOf(imgArray[i].src) > -1) return i
+            }
+
+            return -1
+        }
+
+        function updateCounter(textEl, index, count) {
+            textEl.innerHTML = (index + 1).toString() + ' / ' + count.toString()
+        }
+
+        function showImage(imgArray, index, direction) {
+            const imgEl = document.getElementById('view-full-image-span-inner-img-div')
+            const textEl = document.getElementById('view-full-image-span-inner-text-div')
+
+            const oldBackground = imgEl.style.backgroundImage
+            const newBackground = 'url(' + imgArray[index].src + ')'
+
+            imgEl.style.backgroundImage = newBackground
+            curImg = imgArray[index]
+
+            createImageSwitchKeyframe(imgEl, direction, oldBackground, newBackground)
+            updateCounter(textEl, index, imgArray.length)
+        }
+
+        function buttonLeftRightOnClick(direction) {
+            const imgArray = collectImages()
+            if (imgArray.length <= 1) return
+
+            const index = currentImageIndex(imgArray)
+            if (index < 0) return
+
+            const newImgIndex = direction ? index - 1 : index + 1
+            if (newImgIndex < 0 || newImgIndex >= imgArray.length) return
+
+            showImage(imgArray, newImgIndex, direction)
+        }
+
+        async function closeViewer() {
+            if (curImg === undefined) return
+
+            createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, false)
+            await new Promise(r => setTimeout(r, openCloseKeyframeDuration))
+            viewFullImageSpan.style.display = 'none'
+
+            unlockScroll()
+        }
+
+        // 暴露给 preventWheel 与快捷键
         switchImageDirection = buttonLeftRightOnClick
+        closeFullImage = closeViewer
 
         const notPreventParentOnClickEventElementId = [viewFullImageSpanInnerImgDiv.id, viewFullImageSpan.id, viewFullImageSpanInnerTextDiv.id]
 
-        viewFullImageSpan.onclick = async function (e) {
+        viewFullImageSpan.onclick = function (e) {
             if (notPreventParentOnClickEventElementId.indexOf(e.target.id) === -1) return
-            if (curImg === undefined) return
-            createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, false)
-            await new Promise(r => setTimeout(r, keyframeDuration))
-            this.style.display = 'none'
-
-            unlockScroll()
+            closeViewer()
         }
 
         let touchStartX, touchEndX

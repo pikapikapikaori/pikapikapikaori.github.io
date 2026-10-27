@@ -1856,14 +1856,12 @@ html .toc-paginator-button-span path {
     stroke: var(--sw-ink-strong);
 }
 
-html .toc-paginator-button-span:hover,
-html .toc-paginator-button-div:focus-visible .toc-paginator-button-span {
+html .toc-paginator-button-span:hover {
     background: var(--sw-ink-strong);
     border-color: var(--sw-ink-strong);
 }
 
-html .toc-paginator-button-span:hover path,
-html .toc-paginator-button-div:focus-visible .toc-paginator-button-span path {
+html .toc-paginator-button-span:hover path {
     stroke: var(--sw-paper);
 }
 

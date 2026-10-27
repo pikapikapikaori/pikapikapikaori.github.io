@@ -295,7 +295,7 @@ class Live2dLoader {
                 )
             }
 
-            console.log('Start motion: ', hitAreas.join(' / ') || 'random')
+            // console.log('Start motion: ', hitAreas.join(' / ') || 'random')
         }
     }
 

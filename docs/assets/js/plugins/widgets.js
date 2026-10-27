@@ -8,62 +8,50 @@ let widgetsOptions = {
     themes: [
         {
             name: 'default',
+            css: './assets/css/theme/default',
             light: {
                 themeColor: '#c7a2ec',
-                bgColor: '#ffffff',
-                css: './assets/css/theme/vue.css',
-                js: null
+                bgColor: '#ffffff'
             },
             dark: {
                 themeColor: '#c7a2ec',
-                bgColor: '#3f3f3f',
-                css: './assets/css/theme/dark.css',
-                js: null
+                bgColor: '#3f3f3f'
             }
         },
         {
             name: 'kraft',
+            css: './assets/css/theme/kraft',
             light: {
                 themeColor: '#ecc7a2',
-                bgColor: '#f4ecd8',
-                css: './assets/css/theme/kraft.css',
-                js: null
+                bgColor: '#f4ecd8'
             },
             dark: {
                 themeColor: '#ecc7a2',
-                bgColor: '#2a1f14',
-                css: './assets/css/theme/bronze.css',
-                js: null
+                bgColor: '#2a1f14'
             }
         },
         {
             name: 'kirby',
+            css: './assets/css/theme/kirby',
             light: {
                 themeColor: '#eca2bb',
-                bgColor: '#ffeef4',
-                css: './assets/css/theme/kirby.css',
-                js: null
+                bgColor: '#ffeef4'
             },
             dark: {
                 themeColor: '#a2aeec',
-                bgColor: '#1a2238',
-                css: './assets/css/theme/metaknight.css',
-                js: null
+                bgColor: '#1a2238'
             }
         },
         {
             name: 'calligraphy',
+            css: './assets/css/theme/calligraphy',
             light: {
                 themeColor: '#ecc7a2',
-                bgColor: '#fbfbf5',
-                css: './assets/css/theme/calligraphy.css',
-                js: null
+                bgColor: '#fbfbf5'
             },
             dark: {
                 themeColor: '#a2c7ec',
-                bgColor: '#1a2028',
-                css: './assets/css/theme/grid.css',
-                js: null
+                bgColor: '#1a2028'
             }
         }
     ]
@@ -124,6 +112,9 @@ function plugin(hook, vm) {
     let themeState = {
         modeIndex: 0,
         modes: ['auto', 'light', 'dark'],
+
+        lightFile: 'light',
+        darkFile: 'dark',
 
         themeIndex: 0,
         groups: widgetsOptions.themes
@@ -207,11 +198,19 @@ function plugin(hook, vm) {
         syncColorPickerActiveBtn(hue)
     }
 
-    // 主题某一侧的可选项：null、空字符串等空值都视为未配置
     const isThemeValue = value => Boolean(value)
 
     let getThemeGroup = function () {
         return themeState.groups[themeState.themeIndex]
+    }
+
+    let getSideAsset = function (group, isDark, ext) {
+        const side = isDark ? group.dark : group.light
+        if (!side) return null
+        if (isThemeValue(side[ext])) return side[ext]
+        if (!isThemeValue(group[ext])) return null
+
+        return group[ext] + '/' + (isDark ? themeState.darkFile : themeState.lightFile) + '.' + ext
     }
 
     let syncThemeColorMeta = function (bgColor) {
@@ -254,15 +253,17 @@ function plugin(hook, vm) {
 
     let applyThemeColor = function () {
         const group = getThemeGroup()
-        const side = resolveIsDark() ? group.dark : group.light
+        const isDark = resolveIsDark()
+        const side = isDark ? group.dark : group.light
+        const cssPath = getSideAsset(group, isDark, 'css')
         const colorTheme = document.getElementById('theme-color')
 
         let waits = Promise.resolve()
 
-        if (isThemeValue(side.css)) {
+        if (isThemeValue(cssPath)) {
             colorTheme.disabled = false
-            if (colorTheme.getAttribute('href') !== side.css) {
-                colorTheme.href = side.css
+            if (colorTheme.getAttribute('href') !== cssPath) {
+                colorTheme.href = cssPath
                 waits = waitForStylesheet(colorTheme)
             }
         } else {
@@ -446,23 +447,23 @@ function plugin(hook, vm) {
         const token = themeRenderToken
         const group = getThemeGroup()
         const isDark = resolveIsDark()
-        const side = isDark ? group.dark : group.light
+        const jsPath = getSideAsset(group, isDark, 'js')
 
-        if (!side || !isThemeValue(side.js)) return
+        if (!isThemeValue(jsPath)) return
 
         let themeModule
 
         try {
-            themeModule = await loadThemeModule(side.js)
+            themeModule = await loadThemeModule(jsPath)
         } catch (e) {
-            console.warn('[widgets] 主题脚本加载失败：' + side.js, e)
+            console.warn('[widgets] 主题脚本加载失败：' + jsPath, e)
             return
         }
 
         if (token !== themeRenderToken) return
 
         if (typeof themeModule.renderTheme !== 'function') {
-            console.warn('[widgets] 主题脚本未导出 renderTheme()：' + side.js)
+            console.warn('[widgets] 主题脚本未导出 renderTheme()：' + jsPath)
             return
         }
 
@@ -477,7 +478,7 @@ function plugin(hook, vm) {
                 }
             })
         } catch (e) {
-            console.warn('[widgets] 主题脚本执行失败：' + side.js, e)
+            console.warn('[widgets] 主题脚本执行失败：' + jsPath, e)
         } finally {
             endDomTracking(domTracking)
         }

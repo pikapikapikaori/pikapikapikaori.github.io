@@ -106,7 +106,8 @@ html {
     --ed-gutter: 1rem;
     --ed-gap-col: 2.5rem;
     --ed-gap-block: 1.5rem;
-    --ed-gap-sec: 5rem;
+    --ed-gap-sec: 4rem;
+    --ed-gap-plate: 3rem;
 
     --ed-rule: 0.1875rem;
     --ed-rule-mast: 0.375rem;
@@ -125,7 +126,7 @@ html {
     --ed-lh-body: 1.8;
     --ed-lh-tight: 1.06;
 
-    --ed-toggle-size: 3rem;
+    --ed-toggle-size: 2.25rem;
     --ed-plate-radius: 0;
     --ed-plate-h: 26rem;
     --ed-cover-ratio: 2 / 1;
@@ -137,7 +138,8 @@ html {
     :root {
         --ed-fs-display: 2.125rem;
         --ed-fs-cover: 2.5rem;
-        --ed-gap-sec: 3rem;
+        --ed-gap-sec: 2.5rem;
+        --ed-gap-plate: 2rem;
         --ed-gap-col: 2rem;
         --ed-lh-body: 1.75;
         --ed-plate-h: 22rem;
@@ -146,7 +148,8 @@ html {
 
 @media screen and (max-width: 768px) {
     :root {
-        --ed-gap-sec: 2.5rem;
+        --ed-gap-sec: 2rem;
+        --ed-gap-plate: 1.5rem;
         --ed-plate-h: 18rem;
         --ed-cover-ratio: 3 / 2;
         --ed-thumb-w: 5rem;
@@ -169,7 +172,7 @@ html body {
 
 html .markdown-section {
     max-width: var(--global-content-width);
-    padding: 0 var(--ed-gutter) 6rem;
+    padding: 1.5rem var(--ed-gutter) 6rem;
     margin: 0 auto;
 }
 
@@ -244,8 +247,8 @@ html .ed-cols button {
     width: 1.75rem;
     height: 1.75rem;
     padding: 0;
-    color: var(--ed-ink);
-    background: transparent;
+    color: var(--ed-ink-strong);
+    background: var(--ed-paper);
     border: var(--ed-border-mid);
     border-color: var(--ed-tone-line);
     cursor: pointer;
@@ -271,8 +274,8 @@ html .ed-cols button[aria-pressed="true"] {
 }
 
 html .ed-cols button[aria-pressed="true"]:hover {
-    background: transparent;
-    color: var(--ed-ink);
+    background: var(--ed-paper);
+    color: var(--ed-ink-strong);
 }
 
 html .ed-cover {
@@ -289,7 +292,7 @@ html .ed-sec-head {
     align-items: baseline;
     column-gap: 2rem;
     padding-top: 0.75rem;
-    margin: 0 0 var(--ed-gap-block);
+    margin: 0 0 1.25rem;
     border-top: var(--ed-border);
 }
 
@@ -364,6 +367,12 @@ html .markdown-section[data-ed-cols="2"] .ed-run {
     column-count: 2;
 }
 
+html .markdown-section .ed-run.ed-run--head,
+html .markdown-section[data-ed-cols="1"] .ed-run.ed-run--head,
+html .markdown-section[data-ed-cols="2"] .ed-run.ed-run--head {
+    column-count: 1;
+}
+
 @media screen and (max-width: 1000px) {
 
     html .markdown-section .ed-run,
@@ -374,7 +383,7 @@ html .markdown-section[data-ed-cols="2"] .ed-run {
 }
 
 html .ed-plate {
-    margin: var(--ed-gap-sec) 0;
+    margin: var(--ed-gap-plate) 0;
 }
 
 html .ed-plate:first-child {
@@ -498,6 +507,10 @@ html .markdown-section :is(h1, h2, h3, h4, h5, h6) a:hover {
     text-decoration: none;
 }
 
+html .markdown-section :is(h1, h2, h3, h4, h5, h6)>a.anchor {
+    display: inline;
+}
+
 html .markdown-section strong {
     font-weight: 700;
     color: var(--heading-color);
@@ -538,13 +551,13 @@ html .markdown-section h2 {
 
 html .markdown-section h4 {
     font-size: var(--ed-fs-h3);
-    margin: 1.75rem 0 0.5rem;
+    margin: 1.25rem 0 0.5rem;
 }
 
 html .markdown-section h5,
 html .markdown-section h6 {
     font-size: var(--ed-fs-body);
-    margin: 1.5rem 0 0.5rem;
+    margin: 1rem 0 0.5rem;
 }
 
 html .markdown-section blockquote {
@@ -604,17 +617,41 @@ html .markdown-section table {
     break-inside: avoid;
 }
 
+html .markdown-section tr,
+html .markdown-section tr:nth-child(2n),
+html .markdown-section thead tr,
+html .markdown-section thead tr:nth-child(2n) {
+    border-top: 0;
+    background-color: transparent;
+}
+
 html .markdown-section th {
     text-align: left;
     font-weight: 700;
+    border: 0;
     border-bottom: var(--ed-border);
-    padding: 0.5rem 0.75rem 0.5rem 0;
+    padding: 0.5rem 0.75rem;
 }
 
 html .markdown-section td {
+    border: 0;
     border-bottom: 1px solid var(--ed-tone-line);
-    padding: 0.45rem 0.75rem 0.45rem 0;
+    padding: 0.5rem 0.75rem;
     font-size: var(--ed-fs-small);
+}
+
+html .markdown-section th:first-child,
+html .markdown-section td:first-child {
+    padding-left: 0;
+}
+
+html .markdown-section th:last-child,
+html .markdown-section td:last-child {
+    padding-right: 0;
+}
+
+html .markdown-section table tr:last-child>td {
+    border-bottom: var(--ed-border);
 }
 
 html .sidebar {
@@ -698,20 +735,81 @@ html body.close .sidebar-toggle {
     right: auto;
     top: auto;
     bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: var(--ed-toggle-size);
     height: var(--ed-toggle-size);
-    padding: calc((var(--ed-toggle-size) - 1.25rem) / 2);
-    background: var(--ed-ink-strong);
-    border: 0;
+    padding: 0;
+    background: var(--ed-paper);
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
     border-radius: 0;
     z-index: 50;
+    transition: background-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast);
+}
+
+html .sidebar-toggle:hover,
+html body.close .sidebar-toggle:hover {
+    border-color: var(--ed-ink-strong);
+}
+
+html .sidebar-toggle:hover .sidebar-toggle-button {
+    opacity: 1;
 }
 
 html .sidebar-toggle span {
     width: 1.25rem;
     height: var(--ed-rule-mid);
     margin: 0 auto 0.25rem;
-    background-color: var(--ed-paper);
+    background-color: var(--ed-ink-strong);
+}
+
+html .sidebar-toggle span:last-child {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 769px) {
+
+    html body:not(.close) .sidebar-toggle {
+        background: var(--ed-ink-strong);
+        border-color: var(--ed-ink-strong);
+    }
+
+    html body:not(.close) .sidebar-toggle:hover {
+        background: var(--ed-paper);
+    }
+
+    html body:not(.close) .sidebar-toggle span {
+        background-color: var(--ed-paper);
+    }
+
+    html body:not(.close) .sidebar-toggle:hover span {
+        background-color: var(--ed-ink-strong);
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    html body.close .sidebar-toggle {
+        background: var(--ed-ink-strong);
+        border-color: var(--ed-ink-strong);
+    }
+
+    html body.close .sidebar-toggle:hover {
+        background: var(--ed-paper);
+    }
+
+    html body.close .sidebar-toggle span {
+        background-color: var(--ed-paper);
+    }
+
+    html body.close .sidebar-toggle:hover span {
+        background-color: var(--ed-ink-strong);
+    }
 }
 
 html .app-nav {
@@ -1126,6 +1224,10 @@ html .sidebar .search .input-wrap:has(input[type=search]:focus) {
     border-bottom-color: var(--ed-ink-strong);
 }
 
+html .sidebar .search .input-wrap>input[type=search]:focus {
+    outline: 0;
+}
+
 html .markdown-section mark {
     background: var(--theme-color);
     color: var(--ed-paper);
@@ -1408,19 +1510,23 @@ html .page-right-tools-widgets-span {
     padding: 0.1rem;
     border: var(--ed-border-mid);
     border-color: var(--ed-tone-line);
-    background-color: var(--ed-paper);
-    transition: transform var(--global-transition-duration),
-        background-color var(--global-transition-duration-fast),
-        border-color var(--global-transition-duration-fast);
+    border-radius: 0;
+    background: var(--ed-paper);
+    color: var(--ed-ink-strong);
+    transition: background-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast),
+        color var(--global-transition-duration-fast);
 }
 
 html .page-right-tools-widgets-span>svg {
     color: var(--ed-ink-strong);
 }
 
-html .page-right-tools-widgets-span:not(.page-right-tools-widgets-span-disappear):hover {
-    background-color: var(--ed-ink-strong);
+html .page-right-tools-widgets-span:hover {
+    background: var(--ed-ink-strong);
     border-color: var(--ed-ink-strong);
+    color: var(--ed-paper);
+    transform: none;
 }
 
 html .page-right-tools-widgets-span:hover>svg {
@@ -1718,14 +1824,16 @@ html .toc-paginator-input input {
     padding: 0.15rem 0;
     border: 0;
     border-bottom: var(--ed-border-mid);
+    border-bottom-color: var(--ed-tone-line);
     border-radius: 0;
     background: transparent;
     font-size: inherit;
 }
 
+html .toc-paginator-input input:hover,
 html .toc-paginator-input input:focus {
     outline: 0;
-    border-bottom: var(--ed-border);
+    border-bottom-color: var(--ed-ink-strong);
 }
 
 html .toc-paginator-button-div {
@@ -1733,16 +1841,30 @@ html .toc-paginator-button-div {
 }
 
 html .toc-paginator-button-span {
+    box-sizing: border-box;
     width: 1.75rem;
     height: 1.75rem;
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
     border-radius: 0;
+    background: var(--ed-paper);
     transition: background-color var(--global-transition-duration-fast),
-        color var(--global-transition-duration-fast);
+        border-color var(--global-transition-duration-fast);
 }
 
-html .toc-paginator-button-span:hover {
+html .toc-paginator-button-span path {
+    stroke: var(--ed-ink-strong);
+}
+
+html .toc-paginator-button-span:hover,
+html .toc-paginator-button-div:focus-visible .toc-paginator-button-span {
     background: var(--ed-ink-strong);
-    color: var(--ed-paper);
+    border-color: var(--ed-ink-strong);
+}
+
+html .toc-paginator-button-span:hover path,
+html .toc-paginator-button-div:focus-visible .toc-paginator-button-span path {
+    stroke: var(--ed-paper);
 }
 
 html body.has-toc .sidebar-toggle {
@@ -1847,4 +1969,71 @@ html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li.active>a {
 
 html .fade-edge {
     --fade-bg: transparent;
+}
+
+html #view-full-image-span {
+    background-color: var(--ed-paper);
+}
+
+html #view-full-image-span-inner-left-div,
+html #view-full-image-span-inner-right-div {
+    box-sizing: border-box;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: calc((100% - 2.5rem) / 2);
+    justify-content: center;
+    border: var(--ed-border-mid);
+    border-color: var(--ed-tone-line);
+    border-radius: 0;
+    background: var(--ed-paper);
+    transition: background-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast);
+}
+
+html #view-full-image-span-inner-left-div path,
+html #view-full-image-span-inner-right-div path {
+    stroke: var(--ed-ink-strong);
+}
+
+html #view-full-image-span-inner-left-div:hover,
+html #view-full-image-span-inner-right-div:hover {
+    background: var(--ed-ink-strong);
+    border-color: var(--ed-ink-strong);
+}
+
+html #view-full-image-span-inner-left-div:hover path,
+html #view-full-image-span-inner-right-div:hover path {
+    stroke: var(--ed-paper);
+}
+
+html #view-full-image-span-inner-text-div {
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    height: auto;
+    font-size: var(--ed-fs-small);
+    font-variant-numeric: tabular-nums;
+    color: var(--ed-ink-muted);
+}
+
+@media screen and (max-width: 768px) {
+
+    html #view-full-image-span-inner-left-div,
+    html #view-full-image-span-inner-right-div {
+        top: auto;
+        bottom: 1.25rem;
+    }
+
+    html #view-full-image-span-inner-left-div {
+        left: 1rem;
+    }
+
+    html #view-full-image-span-inner-right-div {
+        right: 1rem;
+    }
+
+    html #view-full-image-span-inner-text-div {
+        bottom: 1.25rem;
+        line-height: 2.5rem;
+    }
 }

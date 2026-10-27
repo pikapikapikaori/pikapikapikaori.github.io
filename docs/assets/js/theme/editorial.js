@@ -312,6 +312,14 @@ function buildSections(root) {
         run.appendChild(el)
     })
 
+    Array.prototype.forEach.call(fragment.querySelectorAll('.ed-run'), function (run) {
+        if (!run.children.length) return
+        const onlyHeads = Array.prototype.every.call(run.children, function (el) {
+            return /^H[3-6]$/.test(el.tagName)
+        })
+        if (onlyHeads) run.classList.add('ed-run--head')
+    })
+
     root.appendChild(fragment)
 }
 

@@ -10,7 +10,7 @@
  */
 
 const COLS_KEY = 'swiss-cols'
-const DATE_RE = /\d{4}\s*[.\-/年]\s*\d{1,2}\s*[.\-/月]?\s*\d{0,2}/
+const DATE_RE = /\d{4}\s*[.\-/]\s*\d{1,2}\s*(?:[.\-/]\s*\d{1,2})?/
 
 /** 块级媒体：不进栏，独占整幅 */
 const PLATE_SELECTOR = [

@@ -1,7 +1,3 @@
-// Under two lines for dev to see functions, Comment before Commit.
-// import * as PIXI from "pixi.js";
-// import * as live2d from "pixi-live2d-display";
-
 let live2d = PIXI.live2d
 class Live2dLoader {
     constructor(models) {
@@ -232,7 +228,6 @@ class Live2dLoader {
                 if (file.match('touch_head') != null) motionIndex[0] = index
                 else if (file.match('touch_special') != null) motionIndex[1] = index
                 else if (file.match('touch_body') != null) motionIndex[2] = index
-                // console.log(motionIndex, file);
             })
         return motionIndex
     }
@@ -294,8 +289,6 @@ class Live2dLoader {
                     keys[Math.floor(Math.random() * keys.length)]
                 )
             }
-
-            // console.log('Start motion: ', hitAreas.join(' / ') || 'random')
         }
     }
 
@@ -310,7 +303,6 @@ class Live2dLoader {
                 poY < bounds.y + bounds.height
             if (b) {
                 hitAreas.push(id)
-                // console.log(id);
             }
         })
         return hitAreas

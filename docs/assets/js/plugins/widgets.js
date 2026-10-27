@@ -1,4 +1,4 @@
-import { lockNoTransition, unlockNoTransition, isMobile, hexToHsl, hslToHex } from '../utils/common.js'
+import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex } from '../utils/common.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 
 let widgetsOptions = {
@@ -93,7 +93,6 @@ function plugin(hook, vm) {
     let widgets = []
     let widgetsContainer
     let widgetsCnt = 9
-    let widgetsDesktopCnt = 1
 
     let popups = {
         theme: 'theme',
@@ -120,8 +119,6 @@ function plugin(hook, vm) {
         showWidgets: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 12h7M15 12h7" stroke="currentColor" stroke-width="1.5"></path></svg>',
         topScroller: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
     }
-
-    let isNowMobile = false
 
     // 黑暗模式切换、主题切换
     let themeState = {
@@ -804,12 +801,9 @@ function plugin(hook, vm) {
                 colorPickerSpan,
                 fontPickerSpan,
                 scrollToCommentSpan,
-                showSakuraSpan
+                showSakuraSpan,
+                showLive2dSpan
             ]
-
-            if (!isNowMobile) {
-                widgetsSpanList.push(showLive2dSpan)
-            }
 
             isWidgetsOpen = !isWidgetsOpen
 
@@ -884,12 +878,6 @@ function plugin(hook, vm) {
         widgetsContainer.className = 'page-right-widgets-container'
         document.body.appendChild(widgetsContainer)
 
-        isNowMobile = isMobile()
-
-        if (!isNowMobile) {
-            widgetsCnt = widgetsCnt + widgetsDesktopCnt
-        }
-
         document.documentElement.style.setProperty('--widgets-cnt', widgetsCnt)
 
         initSwitchMode()
@@ -898,9 +886,7 @@ function plugin(hook, vm) {
         initFontPicker()
         initCommentScroll()
         initSakuraRain()
-        if (!isNowMobile) {
-            initLive2d()
-        }
+        initLive2d()
         initShowWidgets()
         initProgress()
         initScrollToTop()

@@ -1,3 +1,5 @@
+@import url("../nonstandard/plugins/tocPage.css");
+
 :root {
     --tocpage-display-height: 18.75rem;
     --tocpage-display-img-height: 12.5rem;

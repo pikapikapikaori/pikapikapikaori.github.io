@@ -1,3 +1,5 @@
+@import url("../nonstandard/plugins/tocSwitcher.css");
+
 .switch-toc-wrap-div {
     margin: 0 0 1.25rem;
     border-bottom: var(--global-border) var(--border-color);

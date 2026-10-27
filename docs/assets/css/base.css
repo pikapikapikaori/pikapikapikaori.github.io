@@ -610,9 +610,12 @@ body.sticky .sidebar-toggle {
     border-spacing: 0;
     display: block;
     margin-bottom: 1.2rem;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 1.2rem;
+    max-width: 100%;
     overflow: auto;
-    width: 100%
+    width: max-content
 }
 
 .markdown-section th {

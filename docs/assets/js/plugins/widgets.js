@@ -8,51 +8,19 @@ let widgetsOptions = {
     themes: [
         {
             name: 'default',
-            css: './assets/css/theme/default',
-            light: {
-                themeColor: '#c7a2ec',
-                bgColor: '#ffffff'
-            },
-            dark: {
-                themeColor: '#c7a2ec',
-                bgColor: '#3f3f3f'
-            }
+            css: './assets/css/theme/default'
         },
         {
             name: 'kraft',
-            css: './assets/css/theme/kraft',
-            light: {
-                themeColor: '#ecc7a2',
-                bgColor: '#f4ecd8'
-            },
-            dark: {
-                themeColor: '#ecc7a2',
-                bgColor: '#2a1f14'
-            }
+            css: './assets/css/theme/kraft'
         },
         {
             name: 'kirby',
-            css: './assets/css/theme/kirby',
-            light: {
-                themeColor: '#eca2bb',
-                bgColor: '#ffeef4'
-            },
-            dark: {
-                themeColor: '#a2aeec',
-                bgColor: '#1a2238'
-            }
+            css: './assets/css/theme/kirby'
         },
         {
             name: 'calligraphy',
-            css: './assets/css/theme/calligraphy',
-            light: {
-                themeColor: '#ecc7a2',
-                bgColor: '#fbfbf5'
-            },
-            dark: {
-                themeColor: '#a2c7ec',
-                bgColor: '#1a2028'
-            }
+            css: './assets/css/theme/calligraphy'
         }
     ]
 }
@@ -115,6 +83,9 @@ function plugin(hook, vm) {
 
         lightFile: 'light',
         darkFile: 'dark',
+
+        themeColor: '',
+        bgColor: '',
 
         themeIndex: 0,
         groups: widgetsOptions.themes
@@ -205,12 +176,37 @@ function plugin(hook, vm) {
     }
 
     let getSideAsset = function (group, isDark, ext) {
-        const side = isDark ? group.dark : group.light
-        if (!side) return null
-        if (isThemeValue(side[ext])) return side[ext]
         if (!isThemeValue(group[ext])) return null
 
         return group[ext] + '/' + (isDark ? themeState.darkFile : themeState.lightFile) + '.' + ext
+    }
+
+    let readThemeSheetColor = function (link, name) {
+        if (!link || !link.sheet) return ''
+
+        try {
+            const rules = link.sheet.cssRules
+            for (let i = 0; i < rules.length; i++) {
+                const rule = rules[i]
+                if (!rule.style || rule.selectorText !== ':root') continue
+                const value = rule.style.getPropertyValue(name)
+                if (value) return value.trim()
+            }
+        } catch (e) {
+            console.warn('[widgets] 主题 CSS 变量读取失败：' + name, e)
+        }
+
+        return ''
+    }
+
+    let readAppliedThemeColors = function (link) {
+        const computed = getComputedStyle(document.documentElement)
+        const themeColor = readThemeSheetColor(link, '--theme-color')
+
+        return {
+            themeColor: themeColor,
+            bgColor: computed.getPropertyValue('--bg-color').trim()
+        }
     }
 
     let syncThemeColorMeta = function (bgColor) {
@@ -254,7 +250,6 @@ function plugin(hook, vm) {
     let applyThemeColor = function () {
         const group = getThemeGroup()
         const isDark = resolveIsDark()
-        const side = isDark ? group.dark : group.light
         const cssPath = getSideAsset(group, isDark, 'css')
         const colorTheme = document.getElementById('theme-color')
 
@@ -271,16 +266,20 @@ function plugin(hook, vm) {
             colorTheme.href = 'data:text/css,'
         }
 
-        if (isThemeValue(side.themeColor)) {
-            applyThemeColorCss(side.themeColor)
-            updateColorPickerSlider(side.themeColor)
-        }
+        return waits.then(function () {
+            const applied = readAppliedThemeColors(colorTheme)
+            themeState.themeColor = applied.themeColor
+            themeState.bgColor = applied.bgColor
 
-        syncThemePickerActiveBtn()
+            if (isThemeValue(applied.themeColor)) {
+                applyThemeColorCss(applied.themeColor)
+                updateColorPickerSlider(applied.themeColor)
+            }
 
-        syncThemeColorMeta(side.bgColor)
+            syncThemePickerActiveBtn()
 
-        return waits
+            syncThemeColorMeta(applied.bgColor)
+        })
     }
 
     const themeModuleCache = new Map()
@@ -593,18 +592,11 @@ function plugin(hook, vm) {
             btnDiv.className = 'theme-picker-preset-color-btn-div'
             btnDiv.dataset.theme = group.name
             btnDiv.dataset.themeIndex = index
-            btnDiv.style.setProperty('--light-color', group.light.bgColor)
-            btnDiv.style.setProperty('--dark-color', group.dark.bgColor)
-
-            let l = group.light.themeColor
-            let d = group.dark.themeColor
-            let lSoft = l + '66'
-            let dSoft = d + '66'
 
             btnDiv.innerHTML = `
                 <div class="theme-picker-pattern-layer"></div>
                 <div class="theme-picker-pattern-layer theme-picker-pattern-layer-dark"></div>
-                <div class="theme-picker-dot" style="--l: ${l}; --l-soft: ${lSoft}; --d: ${d}; --d-soft: ${dSoft};">
+                <div class="theme-picker-dot">
                     <div class="theme-picker-dot-layer theme-picker-dot-glow-left"></div>
                     <div class="theme-picker-dot-layer theme-picker-dot-glow-right"></div>
                     <div class="theme-picker-dot-layer theme-picker-dot-core-left"></div>

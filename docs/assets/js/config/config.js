@@ -226,183 +226,63 @@
                 {
                     name: 'swiss',
                     css: './assets/css/theme/swiss',
-                    js: './assets/js/theme/swiss',
-                    light: {
-                        themeColor: '#eca2a8',
-                        bgColor: '#ffffff'
-                    },
-                    dark: {
-                        themeColor: '#eca2a8',
-                        bgColor: '#0d0d0d'
-                    }
+                    js: './assets/js/theme/swiss'
                 },
                 {
                     name: 'default',
-                    css: './assets/css/theme/default',
-                    light: {
-                        themeColor: '#c7a2ec',
-                        bgColor: '#ffffff'
-                    },
-                    dark: {
-                        themeColor: '#c7a2ec',
-                        bgColor: '#3f3f3f'
-                    }
+                    css: './assets/css/theme/default'
                 },
                 {
                     name: 'lavender',
-                    css: './assets/css/theme/lavender',
-                    light: {
-                        themeColor: '#cda2ec',
-                        bgColor: '#f5f0fa'
-                    },
-                    dark: {
-                        themeColor: '#cda2ec',
-                        bgColor: '#1f1830'
-                    }
+                    css: './assets/css/theme/lavender'
                 },
                 {
                     name: 'kraft',
-                    css: './assets/css/theme/kraft',
-                    light: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#f4ecd8'
-                    },
-                    dark: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#2a1f14'
-                    }
+                    css: './assets/css/theme/kraft'
                 },
                 {
                     name: 'matcha',
-                    css: './assets/css/theme/matcha',
-                    light: {
-                        themeColor: '#c7eca2',
-                        bgColor: '#e3efd1'
-                    },
-                    dark: {
-                        themeColor: '#c7eca2',
-                        bgColor: '#1e3328'
-                    }
+                    css: './assets/css/theme/matcha'
                 },
                 {
                     name: 'kirby',
-                    css: './assets/css/theme/kirby',
-                    light: {
-                        themeColor: '#eca2bb',
-                        bgColor: '#ffeef4'
-                    },
-                    dark: {
-                        themeColor: '#a2aeec',
-                        bgColor: '#1a2238'
-                    }
+                    css: './assets/css/theme/kirby'
                 },
                 {
                     name: 'catppuccin',
-                    css: './assets/css/theme/catppuccin',
-                    light: {
-                        themeColor: '#c1a2ec',
-                        bgColor: '#eff1f5'
-                    },
-                    dark: {
-                        themeColor: '#c1a2ec',
-                        bgColor: '#1e1e2e'
-                    }
+                    css: './assets/css/theme/catppuccin'
                 },
                 {
                     name: 'gold',
-                    css: './assets/css/theme/gold',
-                    light: {
-                        themeColor: '#ecdaa2',
-                        bgColor: '#f5f0e8'
-                    },
-                    dark: {
-                        themeColor: '#ecdaa2',
-                        bgColor: '#0a0a0a'
-                    }
+                    css: './assets/css/theme/gold'
                 },
                 {
                     name: 'calligraphy',
-                    css: './assets/css/theme/calligraphy',
-                    light: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#fbfbf5'
-                    },
-                    dark: {
-                        themeColor: '#a2c7ec',
-                        bgColor: '#1a2028'
-                    }
+                    css: './assets/css/theme/calligraphy'
                 },
                 {
                     name: 'typography',
-                    css: './assets/css/theme/typography',
-                    light: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#fafaf5'
-                    },
-                    dark: {
-                        themeColor: '#a2c7ec',
-                        bgColor: '#1e2128'
-                    }
+                    css: './assets/css/theme/typography'
                 },
                 {
                     name: 'misty',
-                    css: './assets/css/theme/misty',
-                    light: {
-                        themeColor: '#a2d9ec',
-                        bgColor: '#fbfbf5'
-                    },
-                    dark: {
-                        themeColor: '#a2d9ec',
-                        bgColor: '#14171c'
-                    }
+                    css: './assets/css/theme/misty'
                 },
                 {
                     name: 'sunlit',
-                    css: './assets/css/theme/sunlit',
-                    light: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#faf6ee'
-                    },
-                    dark: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#1a1614'
-                    }
+                    css: './assets/css/theme/sunlit'
                 },
                 {
                     name: 'linen',
-                    css: './assets/css/theme/linen',
-                    light: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#f7f3ec'
-                    },
-                    dark: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#18150f'
-                    }
+                    css: './assets/css/theme/linen'
                 },
                 {
                     name: 'cross',
-                    css: './assets/css/theme/cross',
-                    light: {
-                        themeColor: '#d3a2ec',
-                        bgColor: '#f7fafc'
-                    },
-                    dark: {
-                        themeColor: '#a2d3ec',
-                        bgColor: '#1e2128'
-                    }
+                    css: './assets/css/theme/cross'
                 },
                 {
                     name: 'haunted',
-                    css: './assets/css/theme/haunted',
-                    light: {
-                        themeColor: '#ecc1a2',
-                        bgColor: '#faf8fd'
-                    },
-                    dark: {
-                        themeColor: '#ecc1a2',
-                        bgColor: '#100e17'
-                    }
+                    css: './assets/css/theme/haunted'
                 }
             ]
         },

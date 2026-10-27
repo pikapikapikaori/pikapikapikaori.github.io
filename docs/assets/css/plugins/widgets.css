@@ -317,6 +317,78 @@
 }
 
 /* 主题切换 */
+.theme-picker-preset-color-btn-div[data-theme="default"] {
+    --light-color: #fff;
+    --dark-color: #3f3f3f;
+    --l: #c7a2ec;
+    --l-soft: #c7a2ec66;
+    --d: #c7a2ec;
+    --d-soft: #c7a2ec66;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="lavender"] {
+    --light-color: #f5f0fa;
+    --dark-color: #1f1830;
+    --l: #cda2ec;
+    --l-soft: #cda2ec66;
+    --d: #cda2ec;
+    --d-soft: #cda2ec66;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="kraft"] {
+    --light-color: #f4ecd8;
+    --dark-color: #2a1f14;
+    --l: #ecc7a2;
+    --l-soft: #ecc7a266;
+    --d: #ecc7a2;
+    --d-soft: #ecc7a266;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="matcha"] {
+    --light-color: #e3efd1;
+    --dark-color: #1e3328;
+    --l: #c7eca2;
+    --l-soft: #c7eca266;
+    --d: #c7eca2;
+    --d-soft: #c7eca266;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="kirby"] {
+    --light-color: #ffeef4;
+    --dark-color: #1a2238;
+    --l: #eca2bb;
+    --l-soft: #eca2bb66;
+    --d: #a2aeec;
+    --d-soft: #a2aeec66;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="catppuccin"] {
+    --light-color: #eff1f5;
+    --dark-color: #1e1e2e;
+    --l: #c1a2ec;
+    --l-soft: #c1a2ec66;
+    --d: #c1a2ec;
+    --d-soft: #c1a2ec66;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="gold"] {
+    --light-color: #f5f0e8;
+    --dark-color: #0a0a0a;
+    --l: #ecdaa2;
+    --l-soft: #ecdaa266;
+    --d: #ecdaa2;
+    --d-soft: #ecdaa266;
+}
+
+.theme-picker-preset-color-btn-div[data-theme="calligraphy"] {
+    --light-color: #fbfbf5;
+    --dark-color: #1a2028;
+    --l: #ecc7a2;
+    --l-soft: #ecc7a266;
+    --d: #a2c7ec;
+    --d-soft: #a2c7ec66;
+}
+
 .theme-picker-preset-color-btn-div[data-theme="calligraphy"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
     background-image:
         linear-gradient(rgba(120, 160, 200, .18) 1px, transparent 1px),
@@ -331,6 +403,15 @@
     background-size: var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
 }
 
+.theme-picker-preset-color-btn-div[data-theme="typography"] {
+    --light-color: #fafaf5;
+    --dark-color: #1e2128;
+    --l: #ecc7a2;
+    --l-soft: #ecc7a266;
+    --d: #a2c7ec;
+    --d-soft: #a2c7ec66;
+}
+
 .theme-picker-preset-color-btn-div[data-theme="typography"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
     background-image: radial-gradient(circle, rgba(180, 200, 220, .12) .7px, transparent 1.1px);
     background-size: var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
@@ -339,6 +420,15 @@
 .theme-picker-preset-color-btn-div[data-theme="typography"] .theme-picker-pattern-layer-dark {
     background-image: radial-gradient(circle, rgba(80, 100, 120, .25) .7px, transparent 1.1px);
     background-size: var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
+}
+
+.theme-picker-preset-color-btn-div[data-theme="misty"] {
+    --light-color: #fbfbf5;
+    --dark-color: #14171c;
+    --l: #a2d9ec;
+    --l-soft: #a2d9ec66;
+    --d: #a2d9ec;
+    --d-soft: #a2d9ec66;
 }
 
 .theme-picker-preset-color-btn-div[data-theme="misty"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
@@ -359,12 +449,30 @@
     background-size: var(--widgets-preset-line-gap) var(--widgets-preset-line-gap), var(--widgets-preset-line-gap) var(--widgets-preset-line-gap), var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin), var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
 }
 
+.theme-picker-preset-color-btn-div[data-theme="sunlit"] {
+    --light-color: #faf6ee;
+    --dark-color: #1a1614;
+    --l: #eca2ae;
+    --l-soft: #eca2ae66;
+    --d: #eca2ae;
+    --d-soft: #eca2ae66;
+}
+
 .theme-picker-preset-color-btn-div[data-theme="sunlit"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
     background-image: repeating-linear-gradient(to bottom, transparent 0 var(--widgets-preset-line-width-light), rgba(180, 160, 130, .22) var(--widgets-preset-line-width-light) calc(var(--widgets-preset-line-width-light) + 1px));
 }
 
 .theme-picker-preset-color-btn-div[data-theme="sunlit"] .theme-picker-pattern-layer-dark {
     background-image: repeating-linear-gradient(to bottom, transparent 0 var(--widgets-preset-line-width-light), rgba(200, 180, 150, .10) var(--widgets-preset-line-width-light) calc(var(--widgets-preset-line-width-light) + 1px));
+}
+
+.theme-picker-preset-color-btn-div[data-theme="linen"] {
+    --light-color: #f7f3ec;
+    --dark-color: #18150f;
+    --l: #eca2ae;
+    --l-soft: #eca2ae66;
+    --d: #eca2ae;
+    --d-soft: #eca2ae66;
 }
 
 .theme-picker-preset-color-btn-div[data-theme="linen"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
@@ -379,6 +487,15 @@
         repeating-linear-gradient(-45deg, rgba(180, 160, 120, .08) 0 1px, transparent 1px var(--widgets-preset-line-width-thin));
 }
 
+.theme-picker-preset-color-btn-div[data-theme="cross"] {
+    --light-color: #f7fafc;
+    --dark-color: #12161c;
+    --l: #d3a2ec;
+    --l-soft: #d3a2ec66;
+    --d: #a2d3ec;
+    --d-soft: #a2d3ec66;
+}
+
 .theme-picker-preset-color-btn-div[data-theme="cross"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%3E%3Cpath%20d%3D%22M6%204v4M4%206h4%22%20fill%3D%22none%22%20stroke%3D%22%236a8aaa%22%20stroke-opacity%3D%220.30%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
     background-size: var(--widgets-preset-svg-size) var(--widgets-preset-svg-size);
@@ -389,6 +506,15 @@
     background-size: var(--widgets-preset-svg-size) var(--widgets-preset-svg-size);
 }
 
+.theme-picker-preset-color-btn-div[data-theme="haunted"] {
+    --light-color: #faf8fd;
+    --dark-color: #100e17;
+    --l: #ecc1a2;
+    --l-soft: #ecc1a266;
+    --d: #ecc1a2;
+    --d-soft: #ecc1a266;
+}
+
 .theme-picker-preset-color-btn-div[data-theme="haunted"] .theme-picker-pattern-layer:not(.theme-picker-pattern-layer-dark) {
     background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .10), transparent 70%), radial-gradient(circle, rgba(124, 71, 201, .13) 1px, transparent 1.5px);
     background-size: 100% 100%, var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
@@ -397,6 +523,15 @@
 .theme-picker-preset-color-btn-div[data-theme="haunted"] .theme-picker-pattern-layer-dark {
     background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .22), transparent 70%), radial-gradient(circle, rgba(255, 170, 80, .10) 1px, transparent 1.5px);
     background-size: 100% 100%, var(--widgets-preset-line-width-thin) var(--widgets-preset-line-width-thin);
+}
+
+.theme-picker-preset-color-btn-div[data-theme="swiss"] {
+    --light-color: #fff;
+    --dark-color: #0d0d0d;
+    --l: #eca2a8;
+    --l-soft: #eca2a866;
+    --d: #eca2a8;
+    --d-soft: #eca2a866;
 }
 
 /* 页面主题色：预设，兜底 */

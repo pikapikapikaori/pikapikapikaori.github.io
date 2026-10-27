@@ -28,7 +28,7 @@ function plugin(hook, vm) {
 
     let pendingCloseToggle = undefined
 
-    const narrowMql = window.matchMedia('(max-width: 768px)')
+    const narrowMql = window.matchMedia('screen and (max-width: 768px)')
 
     let sortedPages = []
 

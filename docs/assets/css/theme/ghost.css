@@ -93,7 +93,7 @@ section.cover::after {
     --jack-svg: url("../../resources/icon/jack.svg");
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     :root {
         --jack-scale: .62;
     }
@@ -159,7 +159,7 @@ html::after {
     animation: ghost-appear 47s linear -23s infinite;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     html::after {
         display: none;
     }

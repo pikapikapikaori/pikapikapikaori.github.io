@@ -745,7 +745,10 @@ function plugin(hook, vm) {
         scrollToCommentSpan.innerHTML = icons.commentScroller
 
         scrollToCommentSpan.onclick = function () {
-            document.getElementById('gitalk-container').scrollIntoView({ behavior: 'smooth', })
+            const gitalk = document.getElementById('gitalk-container')
+            if (!gitalk) return
+
+            gitalk.scrollIntoView({ behavior: 'smooth' })
         }
 
         widgetsContainer.appendChild(scrollToCommentSpan)
@@ -892,7 +895,7 @@ function plugin(hook, vm) {
         initScrollToTop()
 
         let clickWidget = function (widget) {
-            if (!widget) return
+            if (!widget || widget.classList.contains('page-right-tools-widgets-span-disappear')) return
 
             widget.click()
         }
@@ -936,11 +939,7 @@ function plugin(hook, vm) {
             KeyW: () => clickWidget(showWidgetsSpan),
             KeyN: () => clickWidget(progressSpan),
             ArrowUp: () => clickWidget(scrollToTopSpan),
-            KeyL: function () {
-                if (!document.getElementById('gitalk-container')) return
-
-                clickWidget(scrollToCommentSpan)
-            }
+            KeyL: () => clickWidget(scrollToCommentSpan)
         }, presetBindings), { when: () => !document.body.classList.contains('image-viewer-open') })
 
     })

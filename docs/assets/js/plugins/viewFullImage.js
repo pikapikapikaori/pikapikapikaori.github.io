@@ -89,9 +89,9 @@ function plugin(hook, vm) {
         window.addEventListener('keydown', preventKeyScroll)
 
         unbindViewerShortcuts = bindShortcuts({
-            ArrowLeft: { handler: () => switchImageDirection(true), repeat: true },
-            ArrowRight: { handler: () => switchImageDirection(false), repeat: true },
-            Escape: () => closeFullImage()
+            ArrowLeft: { handler: () => switchImageDirection(true), repeat: true, allowInInput: true },
+            ArrowRight: { handler: () => switchImageDirection(false), repeat: true, allowInInput: true },
+            Escape: { handler: () => closeFullImage(), allowInInput: true }
         }, { when: () => scrollLocked })
 
         // 只加状态类，不动任何布局样式

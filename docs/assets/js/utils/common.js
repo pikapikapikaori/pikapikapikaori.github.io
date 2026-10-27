@@ -136,3 +136,107 @@ export function unlockNoTransition() {
     void document.body.offsetHeight
     document.body.classList.remove('no-transition')
 }
+
+/**
+ * 判断当前设备是否属于移动端。
+ *
+ * 命中时会给 <html> 补上 android / iphone / winphone 类名。
+ *
+ * @returns {boolean} 是否移动端
+ */
+export function isMobile() {
+    let WIN = window
+    let NA = WIN.navigator
+    let UA = NA.userAgent.toLowerCase()
+
+    function test(needle) {
+        return needle.test(UA)
+    }
+
+    let IsAndroid = test(/android|htc/) || /linux/i.test(NA.platform + '')
+    let IsIPhone = !IsAndroid && test(/ipod|iphone/)
+    let IsWinPhone = test(/windows phone/)
+
+    let device = {
+        IsAndroid: IsAndroid,
+        IsIPhone: IsIPhone,
+        IsWinPhone: IsWinPhone,
+    }
+
+    let documentElement = WIN.document.documentElement
+    for (var i in device) {
+        if (device[i]) {
+            documentElement.className += ' ' + i.replace('Is', '').toLowerCase()
+        }
+    }
+
+    return device.IsAndroid || device.IsIPhone || device.IsWinPhone
+}
+
+/**
+ * #rgb / #rrggbb / #rrggbbaa → [h, s, l]。
+ *
+ * @param {string} hex 十六进制颜色
+ * @returns {number[]} [h(0-360), s(0-100), l(0-100)]，均为整数
+ */
+export function hexToHsl(hex) {
+    hex = hex.replace('#', '')
+
+    if (hex.length === 3) {
+        hex = hex.split('').map(c => c + c).join('')
+    }
+
+    if (hex.length === 8) {
+        hex = hex.substring(0, 6)
+    }
+
+    const r = parseInt(hex.substring(0, 2), 16) / 255
+    const g = parseInt(hex.substring(2, 4), 16) / 255
+    const b = parseInt(hex.substring(4, 6), 16) / 255
+
+    const max = Math.max(r, g, b)
+    const min = Math.min(r, g, b)
+    const delta = max - min
+
+    let h = 0
+    if (delta !== 0) {
+        if (max === r) {
+            h = 60 * (((g - b) / delta) % 6)
+        } else if (max === g) {
+            h = 60 * ((b - r) / delta + 2)
+        } else {
+            h = 60 * ((r - g) / delta + 4)
+        }
+    }
+    if (h < 0) h += 360
+
+    let s = 0
+    if (delta !== 0) {
+        s = delta / (1 - Math.abs(2 * (max + min) / 2 - 1))
+    }
+
+    const l = (max + min) / 2
+
+    return [Math.round(h), Math.round(s * 100), Math.round(l * 100)]
+}
+
+/**
+ * [h, s, l] → #rrggbb。
+ *
+ * @param {number} h 色相 0-360
+ * @param {number} s 饱和度 0-100
+ * @param {number} l 亮度 0-100
+ * @returns {string} 十六进制颜色
+ */
+export function hslToHex(h, s, l) {
+    l /= 100
+
+    const a = s * Math.min(l, 1 - l) / 100
+    const f = n => {
+        const k = (n + h / 30) % 12
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
+        return Math.round(255 * color).toString(16).padStart(2, '0')
+    }
+
+    return `#${f(0)}${f(8)}${f(4)}`
+}

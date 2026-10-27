@@ -609,8 +609,9 @@ html .markdown-section pre code {
 }
 
 html .markdown-section table {
-    width: 100%;
-    margin: 0 0 var(--sw-gap-block);
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto var(--sw-gap-block);
     border-collapse: collapse;
     font-size: var(--sw-fs-small);
     break-inside: avoid;

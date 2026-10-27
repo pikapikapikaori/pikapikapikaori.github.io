@@ -1,0 +1,35 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+section.cover::before,
+section.cover::after {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 L0,80 C200,120 400,40 600,80 C800,120 1000,40 1200,80 L1200,120 Z' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-size: 1200px 120px;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position: 0 bottom;
+}
+
+section.cover::before {
+    -webkit-animation: coverWaveMove 18s linear infinite;
+}
+
+section.cover::after {
+    -webkit-animation: coverWaveMove 10s linear infinite reverse;
+}
+
+@-webkit-keyframes coverWaveMove {
+    from {
+        -webkit-mask-position: 0 bottom;
+    }
+
+    to {
+        -webkit-mask-position: 1200px bottom;
+    }
+}

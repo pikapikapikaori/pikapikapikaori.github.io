@@ -1,6 +1,17 @@
 #count-words-block-span-div {
+    --count-words-float: left;
+    --count-words-font-size: 0.9em;
     padding-top: 0;
     margin: 1.2rem 0;
+}
+
+#count-words-block-span {
+    float: var(--count-words-float);
+    font-size: var(--count-words-font-size);
+}
+
+.count-words-block-clear {
+    clear: both;
 }
 
 .markdown-section>#count-words-block-span-div:first-child {

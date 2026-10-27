@@ -38,33 +38,6 @@ const COLS_ICONS = {
 
 const TOP_ARROW = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
-/* ---------- 内联样式暂存：只在「CSS 盖不掉」时才用，复原由自己负责 ---------- */
-
-const stashed = new Map()
-
-function stashInline(el, props) {
-    if (!el) return
-    const current = el.getAttribute('style')
-    if (current === null) return
-    if (!stashed.has(el)) stashed.set(el, current)
-    props.forEach(function (prop) {
-        el.style.removeProperty(prop)
-    })
-}
-
-function restoreInline() {
-    stashed.forEach(function (orig, el) {
-        if (!el.isConnected) return
-        const old = document.createElement('div').style
-        old.cssText = orig
-        Array.from(old).forEach(function (name) {
-            if (el.style.getPropertyValue(name)) return
-            el.style.setProperty(name, old.getPropertyValue(name), old.getPropertyPriority(name))
-        })
-    })
-    stashed.clear()
-}
-
 /* ---------- 结构判定 ---------- */
 
 function isBlankText(node) {
@@ -366,10 +339,7 @@ function takeBreadcrumb(root) {
 }
 
 function takeCountWords(root) {
-    const el = root.querySelector(':scope > #count-words-block-span-div')
-    if (!el) return null
-    stashInline(el.querySelector('#count-words-block-span'), ['font-size'])
-    return el
+    return root.querySelector(':scope > #count-words-block-span-div')
 }
 
 function eagerTocPageImages(root) {
@@ -530,8 +500,6 @@ export function renderTheme(options) {
     let observer = null
     let titleTimer = 0
 
-    restoreInline()
-
     if (root && root.dataset.swOn !== '1') {
         root.dataset.swOn = '1'
         demoteSidebarTitle()
@@ -568,6 +536,5 @@ export function renderTheme(options) {
         if (stopReadProgress) stopReadProgress()
         if (stopTocSpy) stopTocSpy()
         document.documentElement.classList.remove('sw-active', 'sw-motion')
-        restoreInline()
     })
 }

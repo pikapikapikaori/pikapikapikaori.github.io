@@ -28,6 +28,8 @@
     --global-sidebar-width: 13.75rem;
     --global-sidebar-toggle-width: var(--global-sidebar-width);
 
+    --global-scrollbar-border-radius: 0;
+
     --global-el-border-radius: 0;
     --global-el-border-radius-small: 0;
     --global-icon-border-radius: 0;

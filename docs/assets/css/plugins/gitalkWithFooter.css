@@ -45,7 +45,7 @@
 
 #gitalk-container .gt-link {
     color: var(--theme-color);
-    border-bottom: var(--global-border-weak) var(--theme-color);
+    border-bottom: 0;
 }
 
 #gitalk-container .gt-btn-login {

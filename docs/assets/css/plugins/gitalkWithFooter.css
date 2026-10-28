@@ -160,6 +160,16 @@
     background-color: var(--bg-color);
 }
 
+#gitalk-container .gt-container .gt-btn {
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: var(--global-focus-outline-offset);
+    transition: var(--global-transition-color)
+}
+
+#gitalk-container .gt-container .gt-btn:focus-visible {
+    outline-color: var(--global-focus-outline-color);
+}
+
 #gitalk-container .gt-container {
 
     .gt-header-textarea,

@@ -54,7 +54,7 @@ section.cover img.ignore-view-full-image-img {
 
 .sidebar>h1.app-name a {
     color: var(--theme-color);
-    transition: color var(--global-transition-duration) ease;
+    transition: var(--global-transition-color);
 }
 
 .sidebar>h1.app-name a:hover {
@@ -124,6 +124,24 @@ pre .docsify-copy-code-button span {
 .docsify-pagination-container:not(:has(.pagination-item)) {
     border-top: 0;
     margin-top: 2rem;
+}
+
+.docsify-pagination-container .pagination-item {
+    padding: var(--global-focus-outline-offset);
+}
+
+.docsify-pagination-container .pagination-item:has(a[href]) {
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: calc(-1 * var(--global-focus-outline-width));
+    transition: var(--global-transition-color)
+}
+
+.docsify-pagination-container .pagination-item:has(a[href]:focus-visible) {
+    outline-color: var(--global-focus-outline-color);
+}
+
+.docsify-pagination-container .pagination-item a:focus-visible {
+    outline: none;
 }
 
 /* --- Docsify Example Panels --- */

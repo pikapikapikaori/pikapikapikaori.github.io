@@ -141,7 +141,9 @@
 
     --global-link-decoration-width: 0.15em;
 
-    --global-focus-outline: var(--global-border-strong) var(--global-theme-color-8);
+    --global-focus-outline: var(--global-border-strong);
+    --global-focus-outline-width: var(--global-border-strong-width);
+    --global-focus-outline-color: var(--global-theme-color-8);
     --global-focus-outline-offset: 2px;
 
     --global-el-border-radius: 0.625rem;
@@ -242,8 +244,9 @@ center {
     input[type="submit"],
     input[type="reset"],
     input[type="image"]) {
-    outline: var(--global-border-strong) transparent;
-    outline-offset: var(--global-focus-outline-offset)
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: var(--global-focus-outline-offset);
+    transition: var(--global-transition-color)
 }
 
 :is(a[href],
@@ -260,9 +263,7 @@ center {
     input[type="submit"],
     input[type="reset"],
     input[type="image"]):focus-visible {
-    outline: var(--global-focus-outline);
-    outline-offset: var(--global-focus-outline-offset);
-    transition-duration: var(--global-transition-duration)
+    outline-color: var(--global-focus-outline-color);
 }
 
 input,
@@ -1024,7 +1025,7 @@ section.cover .cover-main>p:last-child a:hover {
 
 section.cover blockquote>p>a {
     border-bottom: var(--global-border-strong) var(--theme-color);
-    transition: color var(--global-transition-duration-fast);
+    transition: var(--global-transition-color-fast);
 }
 
 section.cover blockquote>p>a:hover {
@@ -1049,7 +1050,7 @@ body {
     text-decoration-color: transparent;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: text-decoration-color var(--global-transition-duration);
+    transition: text-decoration-color var(--global-transition-duration), outline-color var(--global-transition-duration);
 }
 
 .sidebar ul li a:hover {

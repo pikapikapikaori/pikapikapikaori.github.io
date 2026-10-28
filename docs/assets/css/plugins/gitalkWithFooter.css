@@ -98,16 +98,18 @@
     transition: var(--global-transition-color);
 }
 
-#gitalk-container .gt-container a:hover {
+#gitalk-container .gt-user-name {
+    transition: var(--global-transition-color);
+}
+
+#gitalk-container .gt-container a:hover,
+#gitalk-container .gt-user-name:hover,
+#gitalk-container .gt-popup .gt-action:hover {
     color: var(--theme-color);
 }
 
 #gitalk-container .gt-popup .gt-action {
     color: inherit;
-}
-
-#gitalk-container .gt-popup .gt-action:hover {
-    color: var(--theme-color);
 }
 
 #gitalk-container .gt-container .gt-comment-content {

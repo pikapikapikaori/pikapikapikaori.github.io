@@ -36,7 +36,7 @@
     transform: translate(calc(var(--widgets-disappear-times) * var(--widgets-right)), 0);
 }
 
-.page-right-tools-widgets-span {
+.page-right-widgets-container .page-right-tools-widgets-span {
     z-index: 200;
     transition: var(--global-transition-color), var(--global-transition-transform);
     width: var(--widgets-size);
@@ -88,7 +88,7 @@
     gap: 0.4375rem;
 }
 
-.theme-picker-preset-color-btn-div {
+.page-right-widgets-container .theme-picker-preset-color-btn-div {
     width: 100%;
     aspect-ratio: var(--global-aspect-ratio-square);
     border-radius: var(--global-icon-border-radius);
@@ -181,7 +181,7 @@
     margin: calc(3 / 4 * var(--global-widget-size-normal)) calc(3 / 4 * var(--global-widget-size-normal)) 0;
 }
 
-.color-picker-preset-color-btn-div {
+.page-right-widgets-container .color-picker-preset-color-btn-div {
     width: 100%;
     aspect-ratio: var(--global-aspect-ratio-tall);
     border-radius: var(--global-icon-border-radius);
@@ -210,7 +210,7 @@
     gap: 0.4375rem;
 }
 
-.font-picker-preset-size-btn-div {
+.page-right-widgets-container .font-picker-preset-size-btn-div {
     width: 100%;
     padding-top: 0.2rem;
     aspect-ratio: var(--global-aspect-ratio-square);

@@ -1903,3 +1903,7 @@ html #view-full-image-span-inner-text-div {
         line-height: 2.5rem;
     }
 }
+
+html .main-page-right-panel-container center {
+    text-align: center;
+}

@@ -56,6 +56,36 @@ function plugin(hook, vm) {
         hasTocs = willBeToc
     }
 
+    function syncSidebarA11y() {
+        const body = document.body
+        const closed = body.classList.contains('close')
+
+        const sidebar = document.querySelector('.sidebar')
+        if (sidebar) {
+            const sidebarHidden = narrowMql.matches ? !closed : closed
+            if (sidebar.inert !== sidebarHidden) sidebar.inert = sidebarHidden
+        }
+
+        const toggle = document.querySelector('.sidebar-toggle')
+        if (toggle) {
+            const toggleHidden = body.classList.contains('has-toc')
+            if (toggle.inert !== toggleHidden) toggle.inert = toggleHidden
+        }
+    }
+
+    function bindSidebarA11y() {
+        if (window.__tocPageSidebarA11yBound) return
+        window.__tocPageSidebarA11yBound = true
+
+        narrowMql.addEventListener('change', syncSidebarA11y)
+        new MutationObserver(syncSidebarA11y).observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        })
+
+        syncSidebarA11y()
+    }
+
     function renderTocStage1(content, vm) {
         content = protectCodeBlocks(content, pluginIdentifier, 'protect')
 
@@ -202,6 +232,8 @@ function plugin(hook, vm) {
     hook.mounted(function () {
         narrowMql.addEventListener('change', onScreenWidthChange)
 
+        bindSidebarA11y()
+
         bindShortcuts({
             ArrowLeft: { handler: () => gotoPage(curPageIndex - 1), repeat: true },
             ArrowRight: { handler: () => gotoPage(curPageIndex + 1), repeat: true },
@@ -264,6 +296,8 @@ function plugin(hook, vm) {
         if (!coverPath.includes(path)) {
             document.title = resolveHeading(path)
         }
+
+        syncSidebarA11y()
     })
 }
 

@@ -11,7 +11,6 @@
 
 .switch-toc-wrap-div button {
     border: none;
-    outline: none;
     background: none;
     font-family: var(--global-sidebar-title-font);
     color: inherit;
@@ -34,7 +33,7 @@
 
 .switch-toc-wrap-div button:not(.active-btn) {
     cursor: pointer;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color);
 }
 
 .switch-toc-wrap-div button:not(.active-btn):hover {

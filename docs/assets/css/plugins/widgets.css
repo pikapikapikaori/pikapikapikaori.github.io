@@ -38,7 +38,7 @@
 
 .page-right-tools-widgets-span {
     z-index: 200;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color), var(--global-transition-transform);
     width: var(--widgets-size);
     height: var(--widgets-size);
     border-radius: var(--global-widget-border-radius);
@@ -63,7 +63,7 @@
 .page-right-popups {
     position: fixed;
     z-index: 190;
-    transition-duration: var(--global-transition-duration-slow);
+    transition: var(--global-transition-transform-slow);
     right: calc(var(--widgets-right) + var(--widgets-gap));
     top: calc(var(--widgets-top) + (100vh - var(--widgets-gap) * var(--widgets-cnt)) / 2 + var(--widgets-gap) * var(--widgets-index, 0));
 }
@@ -95,7 +95,7 @@
     overflow: hidden;
     cursor: pointer;
     border: var(--global-border) var(--border-color);
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color), var(--global-transition-transform);
     position: relative;
     background: linear-gradient(135deg,
             var(--light-color) 0 50%,
@@ -187,7 +187,7 @@
     border-radius: var(--global-icon-border-radius);
     cursor: pointer;
     border: var(--global-border) var(--border-color);
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color), var(--global-transition-transform);
     background-color: hsl(var(--widgets-hsl-h), var(--widgets-hsl-s), var(--widgets-hsl-l));
 }
 
@@ -222,7 +222,7 @@
     color: var(--theme-color);
     line-height: 1;
     font-weight: 600;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color), var(--global-transition-transform);
 }
 
 .font-picker-preset-size-btn-div:hover,

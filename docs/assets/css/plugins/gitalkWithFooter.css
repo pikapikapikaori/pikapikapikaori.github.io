@@ -95,7 +95,7 @@
 
 #gitalk-container .gt-container a {
     color: inherit;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color);
 }
 
 #gitalk-container .gt-container a:hover {
@@ -180,6 +180,16 @@
     font-family: var(--global-font);
 }
 
-#gitalk-container  .gt-comments-null {
+#gitalk-container .gt-comments-null {
     display: none;
+}
+
+#gitalk-container .gt-container .gt-header-textarea:focus-visible {
+    border-color: var(--global-theme-color-8);
+}
+
+#gitalk-container .gt-container .gt-btn:focus-visible,
+#gitalk-container .gt-container .gt-link:focus-visible {
+    outline: var(--global-focus-outline);
+    outline-offset: var(--global-focus-outline-offset);
 }

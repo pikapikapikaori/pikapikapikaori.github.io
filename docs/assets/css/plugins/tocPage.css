@@ -62,7 +62,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-transform);
     border-bottom-left-radius: var(--global-el-border-radius-none);
     border-bottom-right-radius: var(--global-el-border-radius-none);
 }
@@ -101,7 +101,6 @@
 }
 
 .toc-paginator-input input {
-    outline: 0;
     font-size: inherit;
     color: inherit;
     width: 2rem;
@@ -110,7 +109,7 @@
     background-color: transparent;
     border-radius: var(--global-widget-border-radius);
     border: var(--global-border) var(--border-color);
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color);
     appearance: textfield;
 }
 
@@ -144,7 +143,7 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--global-widget-border-radius);
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color);
 }
 
 .toc-paginator-button-span:hover {

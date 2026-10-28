@@ -15,7 +15,7 @@
 
 .search .input-wrap {
     border-block: var(--global-border) var(--border-color);
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color);
 }
 
 .search .input-wrap>input[type=search] {

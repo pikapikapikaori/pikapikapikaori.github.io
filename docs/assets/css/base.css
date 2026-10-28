@@ -141,6 +141,9 @@
 
     --global-link-decoration-width: 0.15em;
 
+    --global-focus-outline: var(--global-border-strong) var(--global-theme-color-8);
+    --global-focus-outline-offset: 2px;
+
     --global-el-border-radius: 0.625rem;
     --global-el-border-radius-small: 0.125rem;
     --global-el-border-radius-none: 0;
@@ -179,6 +182,24 @@
     --global-transition-duration-super-slow: 3s;
     --global-transition-duration-most-slow: 5s;
 
+    --global-transition-color:
+        color var(--global-transition-duration),
+        text-decoration-color var(--global-transition-duration),
+        border-color var(--global-transition-duration),
+        box-shadow var(--global-transition-duration),
+        background-color var(--global-transition-duration);
+    --global-transition-transform: transform var(--global-transition-duration);
+    --global-transition-filter:
+        opacity var(--global-transition-duration),
+        filter var(--global-transition-duration);
+    --global-transition-color-fast:
+        color var(--global-transition-duration-fast),
+        text-decoration-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast),
+        box-shadow var(--global-transition-duration-fast),
+        background-color var(--global-transition-duration-fast);
+    --global-transition-transform-slow: transform var(--global-transition-duration-slow);
+
     --global-transform-ratio-big: 1.3;
     --global-transform-ratio-normal: 1.2;
     --global-transform-ratio-small: 1.1;
@@ -200,6 +221,18 @@ center {
 ::selection {
     background-color: var(--global-theme-color-8);
     color: var(--global-theme-color-1);
+}
+
+:focus-visible {
+    outline: var(--global-focus-outline);
+    outline-offset: var(--global-focus-outline-offset)
+}
+
+input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+    border-color: var(--global-theme-color-8)
 }
 
 html {
@@ -267,7 +300,7 @@ span.emoji {
 }
 
 .search a {
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color)
 }
 
 .search .search-keyword,
@@ -309,14 +342,18 @@ a[disabled] {
 }
 
 kbd {
-    border: var(--global-border) var(--border-color-mid);
-    border-radius: 0.1875rem;
+    background: var(--code-bg);
+    border: var(--global-border) var(--border-color-strong);
+    border-bottom-width: var(--global-border-strong-width);
+    border-radius: var(--global-el-border-radius-small);
+    color: var(--text-color);
     display: inline-block;
-    font-size: 0.75rem !important;
-    line-height: 0.75rem;
-    margin-bottom: 0.1875rem;
-    padding: 0.1875rem 0.3125rem;
-    vertical-align: middle
+    font-family: inherit;
+    font-size: 0.875em;
+    line-height: 1.2;
+    margin: 0 0.1em;
+    padding: 0.12em 0.42em;
+    vertical-align: 0.06em
 }
 
 li input[type=checkbox] {
@@ -356,7 +393,7 @@ li input[type=checkbox] {
     color: inherit;
     font-size: 1rem;
     text-decoration: none;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color)
 }
 
 .app-nav a.active,
@@ -451,7 +488,7 @@ main.hidden {
     display: inline-block;
     text-decoration: underline;
     text-decoration-color: transparent;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color)
 }
 
 .anchor span {
@@ -536,7 +573,6 @@ main.hidden {
 .sidebar-toggle {
     background-color: var(--sidebar-toggle-bg);
     border: 0;
-    outline: none;
     padding: 0.625rem;
     position: absolute;
     bottom: 0;
@@ -553,7 +589,7 @@ main.hidden {
 }
 
 .sidebar-toggle-button {
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-filter)
 }
 
 .sidebar-toggle span {
@@ -934,7 +970,7 @@ section.cover .cover-main>p:last-child a {
     margin: .5rem 1rem;
     padding: .75em 2rem;
     text-decoration: none;
-    transition: all var(--global-transition-duration-fast) ease
+    transition: var(--global-transition-color-fast)
 }
 
 section.cover .cover-main>p:last-child a:last-child {
@@ -1250,7 +1286,7 @@ body {
             font-weight: inherit;
             text-decoration-color: var(--theme-color);
             text-decoration-thickness: var(--global-link-decoration-width);
-            transition-duration: var(--global-transition-duration);
+            transition: var(--global-transition-color)
         }
 
         a:hover {

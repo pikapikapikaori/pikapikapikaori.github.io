@@ -55,7 +55,7 @@
     list-style: none;
     margin-bottom: 2.5rem;
     position: relative;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-color);
     cursor: pointer;
     padding-left: 0;
 }
@@ -85,7 +85,8 @@
     height: 0.625rem;
     width: 0.625rem;
     transform: rotate(45deg);
-    transition: var(--global-transition-duration-fast) ease-in-out;
+    transition: transform var(--global-transition-duration-fast) ease-in-out,
+        border-color var(--global-transition-duration-fast) ease-in-out;
 }
 
 .brief-comments-in-blog-title-year[open]>summary {
@@ -98,7 +99,8 @@
 
 .brief-comments-in-blog-title-year[open]>summary::after {
     transform: rotate(225deg);
-    transition: var(--global-transition-duration-fast) ease-in-out;
+    transition: transform var(--global-transition-duration-fast) ease-in-out,
+        border-color var(--global-transition-duration-fast) ease-in-out;
 }
 
 .brief-comments-in-blog-title-year>summary::before {
@@ -350,7 +352,7 @@
 }
 
 .main-page-about-me-links>a>svg {
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-transform);
 }
 
 .main-page-about-me-links>a>svg:hover {

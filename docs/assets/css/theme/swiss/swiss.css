@@ -62,7 +62,9 @@
     --sw-border-mid: var(--sw-rule-mid) solid var(--sw-ink-strong);
     --sw-border-soft: var(--sw-rule-mid) solid var(--sw-tone-line);
 
-    --global-focus-outline: var(--sw-border-mid);
+    --global-focus-outline: var(--sw-rule-mid) solid;
+    --global-focus-outline-width: var(--sw-rule-mid);
+    --global-focus-outline-color: var(--sw-ink-strong);
 
     --sw-fs-display: 3.5rem;
     --sw-fs-cover: 4rem;
@@ -1446,6 +1448,8 @@ html .page-right-popups .color-picker-preset-color-btn-div {
     transition: outline-color var(--global-transition-duration), border-color var(--global-transition-duration);
 }
 
+html .page-right-popups .theme-picker-preset-color-btn-div:focus-visible,
+html .page-right-popups .color-picker-preset-color-btn-div:focus-visible,
 html .page-right-popups .theme-picker-preset-color-btn-div:hover,
 html .page-right-popups .theme-picker-preset-color-btn-div.is-active,
 html .page-right-popups .color-picker-preset-color-btn-div:hover,

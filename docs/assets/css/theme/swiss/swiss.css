@@ -1006,8 +1006,7 @@ html :focus-visible {
     outline-offset: var(--global-focus-outline-offset);
 }
 
-html :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]), textarea, select):focus-visible,
-html #gitalk-container .gt-container .gt-header-textarea:focus-visible {
+html :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]), textarea, select):focus-visible {
     border-color: var(--sw-ink-strong);
 }
 
@@ -1175,6 +1174,13 @@ html .sidebar .search .input-wrap:has(input[type=search]:focus) {
     border-block: 0;
     border-bottom: var(--sw-border-mid);
     border-bottom-color: var(--sw-ink-strong);
+}
+
+html .sidebar .search .input-wrap:has(input[type=search]:focus-visible) {
+    box-shadow: none;
+    border-block: 0;
+    border-bottom: var(--sw-border-mid);
+    border-color: var(--sw-ink-strong);
 }
 
 html .markdown-section mark {
@@ -1378,6 +1384,10 @@ html #gitalk-container .gt-counts,
 html #gitalk-container .gt-ico-text {
     font-size: var(--sw-fs-small);
     color: var(--sw-ink-muted);
+}
+
+html #gitalk-container .gt-container .gt-header-textarea:focus-visible {
+    border-color: var(--sw-ink-strong);
 }
 
 html footer:has(#footer-under-gitalk) {

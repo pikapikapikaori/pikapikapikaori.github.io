@@ -116,6 +116,10 @@ html body {
     color: var(--sw-ink);
 }
 
+html .markdown-section summary {
+    transition: outline-color var(--global-transition-duration);
+}
+
 html .markdown-section {
     max-width: var(--global-content-width);
     padding: 1.5rem var(--sw-gutter) 6rem;
@@ -198,7 +202,7 @@ html .sw-cols button {
     border: var(--sw-border-mid);
     border-color: var(--sw-tone-line);
     cursor: pointer;
-    transition: background-color var(--global-transition-duration-fast), color var(--global-transition-duration-fast), border-color var(--global-transition-duration-fast);
+    transition: background-color var(--global-transition-duration), color var(--global-transition-duration), border-color var(--global-transition-duration), outline-color var(--global-transition-duration);
 }
 
 html .sw-cols button>svg {
@@ -418,7 +422,7 @@ html .markdown-section a {
     text-decoration-color: var(--theme-color);
     text-decoration-thickness: var(--sw-rule-mid);
     text-underline-offset: 0.1875rem;
-    transition: text-decoration-color var(--global-transition-duration-fast);
+    transition: text-decoration-color var(--global-transition-duration-fast), outline-color var(--global-transition-duration-fast);
 }
 
 html .markdown-section a:hover {
@@ -650,7 +654,7 @@ html .sidebar ul li a {
     overflow: visible;
     text-overflow: clip;
     overflow-wrap: break-word;
-    transition: color var(--global-transition-duration-fast);
+    transition: color var(--global-transition-duration-fast), outline-color var(--global-transition-duration-fast);
 }
 
 html .sidebar .app-sub-sidebar li::before {
@@ -691,7 +695,7 @@ html body.close .sidebar-toggle {
     border-color: var(--sw-tone-line);
     border-radius: 0;
     z-index: 50;
-    transition: background-color var(--global-transition-duration-fast), border-color var(--global-transition-duration-fast);
+    transition: background-color var(--global-transition-duration), border-color var(--global-transition-duration), outline-color var(--global-transition-duration);
 }
 
 html .sidebar-toggle:hover,
@@ -780,6 +784,11 @@ html .sw-wordmark {
 html .sw-wordmark:hover {
     text-decoration: none;
     color: var(--heading-color);
+}
+
+html .app-nav a,
+html .sw-wordmark {
+    transition: var(--global-transition-color-fast);
 }
 
 html .app-nav>ul,
@@ -1231,6 +1240,7 @@ html pre .docsify-copy-code-button {
     background: var(--sw-ink-strong);
     color: var(--sw-paper);
     font-size: var(--sw-fs-small);
+    transition: var(--global-transition-color), var(--global-transition-filter);
 }
 
 html .mermaid button svg {
@@ -1323,7 +1333,7 @@ html #gitalk-container .gt-btn {
     font-size: var(--sw-fs-small);
     font-weight: 700;
     letter-spacing: 0;
-    transition: background-color var(--global-transition-duration-fast), color var(--global-transition-duration-fast);
+    transition: background-color var(--global-transition-duration), color var(--global-transition-duration), outline-color var(--global-transition-duration);
 }
 
 html #gitalk-container .gt-btn-preview {
@@ -1368,6 +1378,10 @@ html #gitalk-container .gt-counts,
 html #gitalk-container .gt-ico-text {
     font-size: var(--sw-fs-small);
     color: var(--sw-ink-muted);
+}
+
+html #gitalk-container .gt-container a {
+    transition: var(--global-transition-color-fast);
 }
 
 html footer:has(#footer-under-gitalk) {
@@ -1450,7 +1464,7 @@ html .page-right-tools-widgets-span {
     border-radius: 0;
     background: var(--sw-paper);
     color: var(--sw-ink-strong);
-    transition: background-color var(--global-transition-duration-fast), border-color var(--global-transition-duration-fast), color var(--global-transition-duration-fast);
+    transition: background-color var(--global-transition-duration), border-color var(--global-transition-duration), color var(--global-transition-duration), outline-color var(--global-transition-duration);
 }
 
 html .page-right-tools-widgets-span>svg {
@@ -1496,7 +1510,7 @@ html .page-right-popups .theme-picker-preset-color-btn-div,
 html .page-right-popups .color-picker-preset-color-btn-div {
     outline: var(--sw-rule-mid) solid transparent;
     outline-offset: 2px;
-    transition: outline-color var(--global-transition-duration-fast), border-color var(--global-transition-duration-fast);
+    transition: outline-color var(--global-transition-duration), border-color var(--global-transition-duration);
 }
 
 html .page-right-popups .theme-picker-preset-color-btn-div:hover,
@@ -1510,6 +1524,7 @@ html .page-right-popups .color-picker-preset-color-btn-div.is-active {
 
 html .page-right-popups .font-picker-preset-size-btn-div {
     color: var(--sw-ink-strong);
+    transition: var(--global-transition-color);
 }
 
 html .page-right-popups .font-picker-preset-size-btn-div:hover,
@@ -1772,7 +1787,7 @@ html .toc-paginator-button-span {
     border-color: var(--sw-tone-line);
     border-radius: 0;
     background: var(--sw-paper);
-    transition: background-color var(--global-transition-duration-fast), border-color var(--global-transition-duration-fast);
+    transition: background-color var(--global-transition-duration), border-color var(--global-transition-duration), outline-color var(--global-transition-duration);
 }
 
 html .toc-paginator-button-span path {
@@ -1871,6 +1886,10 @@ html .switch-toc-wrap-div button {
 html .switch-toc-wrap-div button.active-btn {
     border-bottom: var(--sw-border);
     color: var(--sw-ink-strong);
+}
+
+html .switch-toc-wrap-div button:not(.active-btn) {
+    transition: var(--global-transition-color);
 }
 
 html .switch-toc-wrap-div button:not(.active-btn):hover {

@@ -162,8 +162,8 @@ function plugin(hook, vm) {
             return
         }
 
-        makeButtonLike(tocPaginatorLeftButtonDiv)
-        makeButtonLike(tocPaginatorRightButtonDiv)
+        makeButtonLike(tocPaginatorLeftButtonDiv.childNodes[0])
+        makeButtonLike(tocPaginatorRightButtonDiv.childNodes[0])
 
         tocPaginatorLeftButtonDiv.onclick = function (e) {
             gotoPage(curPageIndex - 1)

@@ -228,19 +228,44 @@ center {
     color: var(--global-theme-color-1);
 }
 
-:is(a[href], button, summary, [tabindex]) {
+:is(a[href],
+    button,
+    summary,
+    select,
+    [tabindex],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="range"],
+    input[type="color"],
+    input[type="file"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="image"]) {
     outline: var(--global-border-strong) transparent;
     outline-offset: var(--global-focus-outline-offset)
 }
 
-:is(a[href], button, summary, [tabindex]):focus-visible {
+:is(a[href],
+    button,
+    summary,
+    select,
+    [tabindex],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="range"],
+    input[type="color"],
+    input[type="file"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="image"]):focus-visible {
     outline: var(--global-focus-outline);
     outline-offset: var(--global-focus-outline-offset);
     transition-duration: var(--global-transition-duration)
 }
 
 input,
-select,
 textarea {
     outline: none
 }

@@ -240,3 +240,26 @@ export function hslToHex(h, s, l) {
 
     return `#${f(0)}${f(8)}${f(4)}`
 }
+
+/**
+ * 让原本只能点击的元素可键盘操作。
+ *
+ * 加上 role="button" 与 tabindex="0"，并把 Enter / Space 转成一次 click。
+ *
+ * @param {HTMLElement} el 目标元素
+ */
+const buttonLikeElements = new WeakSet()
+
+export function makeButtonLike(el) {
+    if (buttonLikeElements.has(el)) return
+    buttonLikeElements.add(el)
+
+    el.setAttribute('role', 'button')
+    el.tabIndex = 0
+    el.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+        if (event.key === ' ') event.preventDefault()
+        if (event.repeat) return
+        el.click()
+    })
+}

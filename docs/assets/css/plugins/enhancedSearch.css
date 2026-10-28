@@ -29,11 +29,6 @@
     border-block: var(--global-border) var(--theme-color);
 }
 
-.search .input-wrap:has(input[type=search]:focus-visible) {
-    outline: none;
-    border-color: var(--global-theme-color-8)
-}
-
 .search .input-wrap input:focus,
 .search .input-wrap input:hover {
     box-shadow: none;

@@ -188,12 +188,8 @@
     transition: var(--global-transition-color);
 }
 
-#gitalk-container .gt-container .gt-header-textarea:focus-visible {
-    border-color: var(--global-theme-color-8);
+#gitalk-container .gt-container .gt-header-textarea:hover,
+#gitalk-container .gt-container .gt-header-textarea:focus {
+    border-color: var(--theme-color);
 }
 
-#gitalk-container .gt-container .gt-btn:focus-visible,
-#gitalk-container .gt-container .gt-link:focus-visible {
-    outline: var(--global-focus-outline);
-    outline-offset: var(--global-focus-outline-offset);
-}

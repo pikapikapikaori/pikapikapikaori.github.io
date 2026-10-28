@@ -1,4 +1,4 @@
-import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex } from '../utils/common.js'
+import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex, makeButtonLike } from '../utils/common.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 
 let widgetsOptions = {
@@ -116,6 +116,7 @@ function plugin(hook, vm) {
         elSpan.id = spanId
         widgets.push(elSpan)
         initializeWidgetSpan(elSpan)
+        makeButtonLike(elSpan)
 
         return elSpan
     }
@@ -127,12 +128,15 @@ function plugin(hook, vm) {
 
         if (themePickerPopupSpan) {
             themePickerPopupSpan.classList.toggle('page-right-popups-disappear', !isthemePickerOpen)
+            themePickerPopupSpan.inert = !isthemePickerOpen
         }
         if (colorPickerPopupSpan) {
             colorPickerPopupSpan.classList.toggle('page-right-popups-disappear', !iscolorPickerPopupOpen)
+            colorPickerPopupSpan.inert = !iscolorPickerPopupOpen
         }
         if (fontPickerPopupSpan) {
             fontPickerPopupSpan.classList.toggle('page-right-popups-disappear', !isfontPickerOpen)
+            fontPickerPopupSpan.inert = !isfontPickerOpen
         }
     }
 
@@ -604,6 +608,8 @@ function plugin(hook, vm) {
                 </div>
             `
 
+            makeButtonLike(btnDiv)
+
             btnDiv.onclick = function () {
                 themeState.themeIndex = index
                 applyTheme()
@@ -671,6 +677,8 @@ function plugin(hook, vm) {
         }
 
         Array.from(colorPickerPopupDiv.getElementsByClassName('color-picker-preset-color-btn-div')).forEach(colorPickerPresetColorBtn => {
+            makeButtonLike(colorPickerPresetColorBtn)
+
             colorPickerPresetColorBtn.onclick = function () {
                 let hue = Number(this.dataset.hue)
                 applyThemeColorCss(hslToHex(hue, hslFixed.s, hslFixed.l))
@@ -710,6 +718,8 @@ function plugin(hook, vm) {
             btnDiv.className = 'font-picker-preset-size-btn-div'
             btnDiv.dataset.sizeIndex = index
             btnDiv.textContent = 'A'
+
+            makeButtonLike(btnDiv)
 
             btnDiv.onclick = function () {
                 fontSizeLevelIndex = index
@@ -803,7 +813,10 @@ function plugin(hook, vm) {
 
             isWidgetsOpen = !isWidgetsOpen
 
-            widgetsSpanList.forEach(widget => widget.classList.toggle('page-right-tools-widgets-span-disappear'))
+            widgetsSpanList.forEach(widget => {
+                widget.classList.toggle('page-right-tools-widgets-span-disappear')
+                widget.inert = !isWidgetsOpen
+            })
 
             if (!isWidgetsOpen) {
                 switchPopup(null)
@@ -886,6 +899,8 @@ function plugin(hook, vm) {
         initShowWidgets()
         initProgress()
         initScrollToTop()
+
+        switchPopup(null)
 
         let clickWidget = function (widget) {
             if (!widget || widget.classList.contains('page-right-tools-widgets-span-disappear')) return

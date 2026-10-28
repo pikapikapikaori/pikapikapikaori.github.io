@@ -82,11 +82,6 @@ pre .docsify-copy-code-button {
     transition: var(--global-transition-filter);
 }
 
-.docsify-copy-code-button:focus-visible {
-    outline: var(--global-focus-outline);
-    outline-offset: var(--global-focus-outline-offset);
-}
-
 pre .docsify-copy-code-button span {
     border-radius: var(--global-icon-border-radius);
 }

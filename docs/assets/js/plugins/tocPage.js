@@ -1,5 +1,5 @@
 import pagesData from '../config/tocdata.json.js'
-import { protectCodeBlocks, lockNoTransition, unlockNoTransition } from '../utils/common.js'
+import { protectCodeBlocks, lockNoTransition, unlockNoTransition, makeButtonLike } from '../utils/common.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 
 let tocPageOptions = {
@@ -161,6 +161,9 @@ function plugin(hook, vm) {
         if (!tocPaginatorInputDiv || !tocPaginatorLeftButtonDiv || !tocPaginatorRightButtonDiv) {
             return
         }
+
+        makeButtonLike(tocPaginatorLeftButtonDiv)
+        makeButtonLike(tocPaginatorRightButtonDiv)
 
         tocPaginatorLeftButtonDiv.onclick = function (e) {
             gotoPage(curPageIndex - 1)

@@ -186,6 +186,7 @@
         color var(--global-transition-duration),
         text-decoration-color var(--global-transition-duration),
         border-color var(--global-transition-duration),
+        outline-color var(--global-transition-duration),
         box-shadow var(--global-transition-duration),
         background-color var(--global-transition-duration);
     --global-transition-transform: transform var(--global-transition-duration);
@@ -196,6 +197,7 @@
         color var(--global-transition-duration-fast),
         text-decoration-color var(--global-transition-duration-fast),
         border-color var(--global-transition-duration-fast),
+        outline-color var(--global-transition-duration-fast),
         box-shadow var(--global-transition-duration-fast),
         background-color var(--global-transition-duration-fast);
     --global-transition-transform-slow: transform var(--global-transition-duration-slow);
@@ -226,16 +228,21 @@ center {
     color: var(--global-theme-color-1);
 }
 
-:focus-visible {
-    outline: var(--global-focus-outline);
+:is(a[href], button, summary, [tabindex]) {
+    outline: var(--global-border-strong) transparent;
     outline-offset: var(--global-focus-outline-offset)
 }
 
-input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]):focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-    outline: none;
-    border-color: var(--global-theme-color-8)
+:is(a[href], button, summary, [tabindex]):focus-visible {
+    outline: var(--global-focus-outline);
+    outline-offset: var(--global-focus-outline-offset);
+    transition-duration: var(--global-transition-duration)
+}
+
+input,
+select,
+textarea {
+    outline: none
 }
 
 html {

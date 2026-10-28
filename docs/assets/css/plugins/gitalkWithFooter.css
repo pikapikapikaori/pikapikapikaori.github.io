@@ -184,6 +184,10 @@
     display: none;
 }
 
+#gitalk-container .gt-container .gt-header-textarea {
+    transition: var(--global-transition-color);
+}
+
 #gitalk-container .gt-container .gt-header-textarea:focus-visible {
     border-color: var(--global-theme-color-8);
 }

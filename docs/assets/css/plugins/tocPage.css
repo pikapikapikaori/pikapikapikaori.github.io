@@ -62,7 +62,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: var(--global-transition-transform);
+    transition: var(--global-transition-transform), var(--global-transition-filter);
     border-bottom-left-radius: var(--global-el-border-radius-none);
     border-bottom-right-radius: var(--global-el-border-radius-none);
 }

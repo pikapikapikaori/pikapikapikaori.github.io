@@ -119,7 +119,7 @@ pre .docsify-copy-code-button span {
 .markdown-section .pagination-item:not(:last-child) a .pagination-item-label,
 .markdown-section .pagination-item:not(:last-child) a .pagination-item-subtitle,
 .markdown-section .pagination-item:not(:last-child) a .pagination-item-title {
-    transition: var(--global-transition-color);
+    transition: var(--global-transition-color), var(--global-transition-filter);
 }
 
 .markdown-section .docsify-pagination-container {

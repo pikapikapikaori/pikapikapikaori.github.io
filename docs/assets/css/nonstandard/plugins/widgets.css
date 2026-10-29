@@ -34,19 +34,19 @@
     background-color: var(--theme-color);
     border-radius: var(--global-scrollbar-border-radius);
     cursor: pointer;
-    transition: transform var(--global-transition-duration);
+    transition: transform var(--global-transition-duration), border-color var(--global-transition-duration);
     border: var(--global-border) var(--global-control-border-rest);
 }
 
 .color-picker-slider::-webkit-slider-thumb:hover {
     transform: scale(var(--global-scale-hover));
     border-color: var(--global-control-border-hover);
-    transition: transform var(--global-transition-duration), border-color var(--global-transition-duration);
 }
 
 .color-picker-slider::-webkit-slider-thumb:active {
     transform: scale(var(--global-scale-active));
     border-color: var(--global-control-border-active);
+    transition: transform var(--global-transition-duration);
 }
 
 .read-progress::before {

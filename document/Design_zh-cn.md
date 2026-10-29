@@ -2,11 +2,13 @@
 
 [English](./Design.md) | 简体中文
 
-## 交互标准
+## 默认主题
 
-适用于默认主题，即除 `swiss` 之外的全部主题；`swiss` 自带一套交互规则。
+除 `swiss` 之外的全部主题。所有颜色都由 `--theme-color` 派生，因此改主题色即改全部状态色。
 
-### 三级阶梯
+### 交互标准
+
+#### 三级阶梯
 
 所有可交互元素都沿同一条阶梯上行。每一列都是从该列自身静止状态起算的三步阶梯，元素只沿自己所在的那一列上行，且不跳级。
 
@@ -117,6 +119,7 @@
 | `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 55%, transparent)` |
 | `--global-surface-hollow-border-rest` | `var(--global-accent-level-1)` |
 | `--global-surface-hollow-border-hover` | `var(--global-accent-level-2)` |
+| `--global-surface-hollow-border-active` | `var(--global-accent-level-2)` |
 | `--global-surface-hollow-border-press` | `var(--global-accent-level-3)` |
 | `--global-surface-hollow-text-rest` | `var(--global-accent-level-2)` |
 | `--global-surface-hollow-text-hover` | `var(--global-accent-level-3)` |
@@ -137,19 +140,23 @@
 | **行内文字链接 2** | 站名、标题锚点、`summary`、分页标题、搜索结果、评论链接、gitalk 提示文字 | `transparent` 下划线 | `--global-link-decoration-hover` 下划线 | — | — | 继承 |
 | **幽灵图标** | widgets 九个图标、侧栏开关、回顶部、阅读进度环、评论 like/edit/reply、about-me 图标、封面 chevron | 1 | `--global-scale-hover` | — | `--global-scale-active` | accent，不随状态变化 |
 | **输入框** | 搜索框、分页输入框、gitalk 文本框 | `--global-control-border-rest` | `--global-control-border-hover` | `--global-control-border-active`（`:focus`） | — | 继承 |
-| **选择类色卡** | 主题 / 颜色 / 字号预设 | `--global-control-border-rest`，1 | `--global-control-border-hover`，`--global-scale-hover` | `--global-control-border-active`，`--global-scale-active` | 未选中：按选中态取值；已选中：`--global-control-border-press`，`--global-scale-press` | 继承 |
-| **表面（空心）按钮** | toc 分页箭头、看大图左右箭头、gitalk 预览 | 描边 45%，底透明 | 描边实色，底 45%，文字 `-7` | — | 描边 `-7`，底 55%，文字 `-7` | accent → `-7` → `-7` |
+| **选择类色卡** | 主题预设、颜色预设、色轮 thumb | `--global-control-border-rest`，1 | `--global-control-border-hover`，`--global-scale-hover` | `--global-control-border-active`，`--global-scale-active` | 未选中：按选中态取值；已选中：`--global-control-border-press`，`--global-scale-press` | 继承 |
+| **表面（空心）按钮** | toc 分页箭头、看大图左右箭头、gitalk 预览、字号预设 | 描边 45%，底透明，文字 accent | 描边实色，底 45%，文字 `-7` | 描边实色，底 45%，文字 accent（仅字号预设） | 描边 `-7`，底 55%，文字 `-7` | accent → `-7` → `-7` |
 | **表面（实心）按钮** | gitalk 登录与发布、cover 主按钮、复制代码 | `--global-surface-solid-rest` | `--global-surface-solid-hover` | — | `--global-surface-solid-press` | 恒为 `--global-surface-solid-text` |
 
 面包屑的当前页（`.breadcrumb li.active`）不是链接，但语义上属于选中态，取第 2 级：`--global-nav-bar-active` 条 + accent 文字 + 加粗。
+
+色轮 thumb 是选择类色卡的一种，但它的边框过渡只在 hover 时生效：hover 与拖动时 `border-color` 立即变化（`:active` 覆盖 transition 列表，只剩 `transform` 继续插值），松手回到静止态时才平滑回退。
 
 ### 三种按钮
 
 | 种类 | 面 | 描边 | 反馈 | 成员 |
 | --- | --- | --- | --- | --- |
 | **幽灵图标** | 无 | 无 | 只有缩放 | widgets 九个图标、侧栏开关、回顶部、阅读进度环、评论 like/edit/reply、about-me 图标、封面 chevron |
-| **表面（空心）按钮** | 有（阶梯底色） | 1px（阶梯描边） | 描边、底色、文字一起走阶梯 | toc 分页箭头、看大图左右箭头、gitalk 预览 |
+| **表面（空心）按钮** | 有（阶梯底色） | 1px（阶梯描边） | 描边、底色、文字一起走阶梯 | toc 分页箭头、看大图左右箭头、gitalk 预览、字号预设 |
 | **表面（实心）按钮** | 有（实心底） | 与底色同色 | 只有底色加深，文字色恒定 | gitalk 登录与发布、cover 主按钮、复制代码 |
+
+**表面（空心）按钮的选中态**：该类按钮自身没有“选中”语义，但字号预设会停在某个字号上。选中时取「实色描边 + 45% 底色 + accent 文字」，即停在 hover 与静止之间的一半；按下仍是 `-7` 描边 + 55% 底色。
 
 判定方法：**有底色就是表面按钮，没有底色就是幽灵图标**；表面按钮再看静止时有没有实心底——有就是实心，只有描边就是空心。
 
@@ -169,6 +176,7 @@
 两点补充：
 
 - 同一组导航项之间不留间隙（TOC 切换器 `gap: 0`），条才能连续相接；间距由各项的内边距承担。
+- toc 分页按钮的外框是 28×28（1.75rem），内部图标是 100% 的 svg，靠父元素 `padding: var(--global-border-width)` 缩到 24px（28 − 1px 边框 ×2 − 1px 内边距 ×2）。swiss 的边框是 2px，因此它的 `padding` 为 0，图标同样是 24px。
 - 面包屑的当前页允许自然换行，折行时每一行各画一条——这是预期行为（inline 元素的边框就是这样工作的）。面包屑字号 `0.9rem`，比顶栏小一级。
 
 ### 浮窗
@@ -183,4 +191,106 @@
 
 ### cursor
 
-navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），所以保持 `cursor: pointer`；docsify tabs 与 TOC 切换器的选中项点了没有效果，使用 `cursor: default`；面包屑当前页不是链接，无需 cursor 规则；其余可交互元素保持 `cursor: pointer`。
+navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），所以保持 `cursor: pointer`；docsify tabs、TOC 切换器与字号预设的选中项点了没有效果，使用 `cursor: default`；面包屑当前页不是链接，无需 cursor 规则；其余可交互元素保持 `cursor: pointer`。
+
+## swiss 主题
+
+`swiss` 用「纸 / 墨 / 线」的版面语言，与默认主题共用同一套交互意图，但取色、线宽和反馈方向都不同。
+
+### 交互标准
+
+#### 三级阶梯
+
+swiss 只有两级色阶，方向与默认主题相反：默认主题是“主题色由浅入深”，swiss 是“纸与墨互换”。
+
+| 级 | 语义 | 底色 | 描边 | 文字 / 图标 |
+| --- | --- | --- | --- | --- |
+| 静止 | — | paper | tone-line | ink |
+| 1 | hover：可以点 | ink-strong | ink-strong | paper |
+| 2 | 激活（`.active`、`.active-btn`、`.is-active`） | ink-strong | ink-strong | paper |
+| 3 | 按下（`:active`） | 与 hover 相同 | 与 hover 相同 | 与 hover 相同 |
+
+三条 swiss 独有的规则：
+
+- **一律不缩放**（含色轮 thumb）。默认主题用缩放表达的层级，swiss 全部用底色互换表达。
+- **按下与 hover 同态**，不额外加深。
+- **带激活态的按钮在激活后 hover 会反相**（paper 底 + 墨描边 + 墨字），用来表示“再点一次会退出该状态”。
+
+#### 键盘焦点
+
+同默认主题：`outline: 2px solid var(--sw-ink-strong)`（swiss 把 `--global-focus-outline-color` 指向墨色），静止用透明 outline 预留。
+
+#### 过渡
+
+只有两档：`--global-transition-duration` 200ms、`--global-transition-duration-fast` 160ms（swiss 在主题文件里重定义了这两个 token）。所有 hover / 激活反馈都用这两档，不再使用默认主题的 500ms。
+
+#### 圆角
+
+一律 `0`，不区分大面与控件。
+
+#### 尺寸变量
+
+同默认主题（`--global-container-*` 与两个派生值）。
+
+#### 交互变量
+
+| 用途 | 取值 |
+| --- | --- |
+| 纸 / 墨 / 线 | `--sw-paper` / `--sw-ink` / `--sw-ink-strong` / `--sw-tone-line` |
+| 线宽 | `--sw-border`、`--sw-border-mid`、`--sw-rule-mid` |
+| hover 条 | `var(--global-nav-bar-hover)`（45% 主题色） |
+| 激活条 | `var(--theme-color)` |
+
+### 组件类型
+
+| 类型 | swiss 表现 |
+| --- | --- |
+| 导航链接 | 静止预留透明条，hover 45% 主题色条，激活实色条（条宽 `--sw-border`） |
+| 行内文字链接 | 静止透明下划线，hover 主题色下划线；`.gt-link` 的常态下划线去掉，只留 hover 一条 |
+| 幽灵图标 | 改用「不带激活态按钮」 |
+| 输入框 | 线色：tone-line → hover / focus 墨色 |
+| 色卡 | 见「三种按钮 · 色卡选择」 |
+| 浮窗 | paper 底 + 墨描边，圆角 0 |
+
+### 三种按钮
+
+**一、不带激活态按钮**
+
+| 状态 | 底色 | 描边 | 文字 / 图标 |
+| --- | --- | --- | --- |
+| 静止 | paper | tone-line | ink |
+| hover / 按下 | ink-strong | ink-strong | paper |
+
+成员：widgets 九个图标、侧栏开关、toc 分页箭头、看大图左右箭头、复制代码、gitalk 登录与发布、cover 主按钮。
+
+**二、带激活态按钮**
+
+| 状态 | 底色 | 描边 | 文字 / 图标 |
+| --- | --- | --- | --- |
+| 静止 | paper | tone-line | ink |
+| hover / 按下 | ink-strong | ink-strong | paper |
+| 激活 | ink-strong | ink-strong | paper |
+| 激活 + hover | paper | ink-strong | ink |
+
+成员：gitalk 预览（激活 = 预览面板可见，即 `.gt-header-textarea` 带 `hide` 类）、TOC 切换器、字号预设。
+
+**三、色卡选择**
+
+| 状态 | 描边 | 附加 |
+| --- | --- | --- |
+| 静止 | tone-line | — |
+| hover / 激活 | ink-strong | 2px 墨色 outline |
+
+成员：主题预设、颜色预设。**色轮 thumb 不跟随该套**：它只把描边从 tone-line 换成墨色，不加 outline、不缩放。
+
+### 引导线
+
+swiss 没有引导线，导航项之间只用 `--sw-border-mid` 的底线分隔；条宽由 `--sw-border` 决定，“比引导线宽 2px”不适用。
+
+### 浮窗
+
+paper 底 + 墨描边，圆角 0，无阴影。组件浮窗（widgets popup）、常规浮窗（评论卡、菜单、关于页右侧面板）、突出浮窗（博主评论用 `--sw-tone` 底色）三者只在底色上区分。
+
+### cursor
+
+同默认主题：navbar 与侧栏的选中项 `pointer`；TOC 切换器与字号预设的选中项 `default`；其余 `pointer`。

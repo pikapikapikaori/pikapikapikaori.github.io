@@ -188,6 +188,7 @@
     --global-icon-size-big: 80px;
     --global-widget-size-normal: 1.5rem;
     --global-widget-size-small: 1.3rem;
+    --global-widget-size-very-small: 1.1rem;
 
     /* ============================================================
      *  控件变量
@@ -256,6 +257,7 @@
     --global-surface-hollow-press: color-mix(in srgb, var(--theme-color) 55%, transparent);
     --global-surface-hollow-border-rest: var(--global-accent-level-1);
     --global-surface-hollow-border-hover: var(--global-accent-level-2);
+    --global-surface-hollow-border-active: var(--global-accent-level-2);
     --global-surface-hollow-border-press: var(--global-accent-level-3);
     --global-surface-hollow-text-rest: var(--global-accent-level-2);
     --global-surface-hollow-text-hover: var(--global-accent-level-3);

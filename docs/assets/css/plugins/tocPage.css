@@ -3,8 +3,8 @@
 :root {
     --tocpage-display-height: 18.75rem;
     --tocpage-display-img-height: 12.5rem;
-    --tocpage-button-size: var(--global-widget-size-normal);
-    --tocpage-input-size: var(--global-widget-size-small);
+    --tocpage-button-size: 1.75rem;
+    --tocpage-input-size: var(--global-widget-size-very-small);
 }
 
 .toc-page-div {
@@ -104,6 +104,10 @@
     font-size: inherit;
     color: inherit;
     width: 2rem;
+    height: var(--tocpage-button-size);
+    box-sizing: border-box;
+    line-height: 1;
+    padding: 0 0.25rem;
     margin: 0 0.3rem;
     text-align: center;
     background-color: transparent;
@@ -130,7 +134,7 @@
 }
 
 .toc-paginator-button-div {
-    margin: 0 0.2rem;
+    margin: 0 0.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -139,6 +143,7 @@
 .toc-paginator-button-span {
     width: var(--tocpage-button-size);
     height: var(--tocpage-button-size);
+    padding: 0.0625rem;
     display: flex;
     align-items: center;
     justify-content: center;

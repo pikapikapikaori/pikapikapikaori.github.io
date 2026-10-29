@@ -35,14 +35,14 @@
     margin-top: 1.5rem;
 }
 
-#gitalk-container .gt-container .gt-header-controls-tip {
+#gitalk-container .gt-container .gt-header-controls-tip .gt-ico-text {
     text-decoration: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color);
 }
 
-#gitalk-container .gt-container .gt-header-controls-tip:hover {
+#gitalk-container .gt-container .gt-header-controls-tip:hover .gt-ico-text {
     text-decoration-color: var(--global-link-decoration-hover);
 }
 

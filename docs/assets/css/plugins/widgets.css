@@ -245,35 +245,35 @@
     width: 100%;
     padding-top: 0.2rem;
     aspect-ratio: var(--global-aspect-ratio-square);
+    box-sizing: border-box;
     border-radius: var(--global-icon-border-radius);
-    border: var(--global-border) var(--border-color);
+    border: var(--global-border) var(--global-surface-hollow-border-rest);
+    background-color: var(--global-surface-hollow-rest);
+    color: var(--global-surface-hollow-text-rest);
     cursor: pointer;
     display: grid;
     place-items: center;
-    color: var(--theme-color);
     line-height: 1;
     font-weight: 600;
-    transition: var(--global-transition-color), var(--global-transition-transform);
+    transition: var(--global-transition-color);
 }
 
 .font-picker-preset-size-btn-div:hover {
-    border-color: var(--global-control-border-hover);
-    transform: scale(var(--global-scale-hover));
+    border-color: var(--global-surface-hollow-border-hover);
+    background-color: var(--global-surface-hollow-hover);
+    color: var(--global-surface-hollow-text-hover);
 }
 
 .font-picker-preset-size-btn-div.is-active {
-    border-color: var(--global-control-border-active);
-    transform: scale(var(--global-scale-active));
+    border-color: var(--global-surface-hollow-border-active);
+    background-color: var(--global-surface-hollow-hover);
+    color: var(--global-surface-hollow-text-rest);
 }
 
-.font-picker-preset-size-btn-div:not(.is-active):active {
-    border-color: var(--global-control-border-active);
-    transform: scale(var(--global-scale-active));
-}
-
-.font-picker-preset-size-btn-div.is-active:active {
-    border-color: var(--global-control-border-press);
-    transform: scale(var(--global-scale-press));
+.font-picker-preset-size-btn-div:active {
+    border-color: var(--global-surface-hollow-border-press);
+    background-color: var(--global-surface-hollow-press);
+    color: var(--global-surface-hollow-text-press);
 }
 
 /* Live 2d 小人 */

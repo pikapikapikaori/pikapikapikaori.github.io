@@ -22,7 +22,10 @@
     top: calc((100% - 1.5rem) / 2);
     position: absolute;
     cursor: pointer;
+    box-sizing: border-box;
+    border: var(--global-border) var(--global-surface-hollow-border-rest);
     border-radius: var(--global-control-border-radius);
+    color: var(--global-surface-hollow-text-rest);
     display: flex;
     align-items: center;
     transition: var(--global-transition-color);
@@ -41,11 +44,15 @@
 #view-full-image-span-inner-left-div:hover,
 #view-full-image-span-inner-right-div:hover {
     background-color: var(--global-surface-hollow-hover);
+    border-color: var(--global-surface-hollow-border-hover);
+    color: var(--global-surface-hollow-text-hover);
 }
 
 #view-full-image-span-inner-left-div:active,
 #view-full-image-span-inner-right-div:active {
     background-color: var(--global-surface-hollow-press);
+    border-color: var(--global-surface-hollow-border-press);
+    color: var(--global-surface-hollow-text-press);
 }
 
 #view-full-image-span-inner-img-div {

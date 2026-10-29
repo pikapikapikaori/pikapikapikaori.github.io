@@ -43,6 +43,18 @@ section.cover img.ignore-view-full-image-img {
     }
 }
 
+.cover-page-scroll-down-chevron svg {
+    transition: var(--global-transition-transform);
+}
+
+.cover-page-scroll-down-chevron:hover svg {
+    transform: scale(var(--global-scale-hover));
+}
+
+.cover-page-scroll-down-chevron:active svg {
+    transform: scale(var(--global-scale-active));
+}
+
 /* Sidebar */
 .sidebar>h1.app-name {
     font-size: 2rem;
@@ -53,7 +65,6 @@ section.cover img.ignore-view-full-image-img {
 }
 
 .sidebar>h1.app-name a {
-    color: var(--theme-color);
     text-decoration: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: var(--global-link-decoration-width);
@@ -85,6 +96,7 @@ pre .docsify-copy-code-button {
     right: 0.5rem;
     font-size: 0.825em;
     opacity: 1;
+    color: var(--global-surface-solid-text);
     background-color: var(--global-surface-solid-rest);
     border-radius: var(--global-control-border-radius);
     transition: var(--global-transition-color);

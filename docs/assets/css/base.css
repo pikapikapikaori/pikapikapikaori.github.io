@@ -254,10 +254,17 @@
     --global-surface-hollow-rest: transparent;
     --global-surface-hollow-hover: var(--global-accent-level-1);
     --global-surface-hollow-press: color-mix(in srgb, var(--theme-color) 55%, transparent);
+    --global-surface-hollow-border-rest: var(--global-accent-level-1);
+    --global-surface-hollow-border-hover: var(--global-accent-level-2);
+    --global-surface-hollow-border-press: var(--global-accent-level-3);
+    --global-surface-hollow-text-rest: var(--global-accent-level-2);
+    --global-surface-hollow-text-hover: var(--global-accent-level-3);
+    --global-surface-hollow-text-press: var(--global-accent-level-3);
 
     --global-surface-solid-rest: var(--global-accent-level-2);
     --global-surface-solid-hover: var(--global-accent-level-3);
     --global-surface-solid-press: var(--global-accent-level-4);
+    --global-surface-solid-text: var(--accent-text-color);
 
     --global-writing-container-height: var(--global-container-height);
     --global-sidenote-width: var(--global-container-width);
@@ -496,7 +503,6 @@ li input[type=checkbox] {
 .app-nav a.active {
     color: var(--theme-color);
     font-weight: var(--global-font-weight-semibold);
-    cursor: default;
     border-bottom-color: var(--global-nav-bar-active)
 }
 
@@ -540,7 +546,7 @@ li input[type=checkbox] {
 }
 
 .app-nav li ul a.active {
-    border-bottom: 0
+    border-bottom-color: var(--global-nav-bar-active)
 }
 
 .app-nav li:hover ul {
@@ -1059,49 +1065,15 @@ section.cover ul {
     padding: 0
 }
 
-section.cover .cover-main>p:last-child a {
-    border-radius: 2rem;
-    border: var(--global-border) var(--theme-color);
-    box-sizing: border-box;
-    color: var(--theme-color);
-    display: inline-block;
-    font-size: 1.05rem;
-    letter-spacing: .1rem;
-    margin: .5rem 1rem;
-    padding: .75em 2rem;
-    text-decoration: none;
+section.cover :is(p, li, blockquote) a {
+    text-decoration: underline;
+    text-decoration-color: var(--global-link-decoration-rest);
+    text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color)
 }
 
-section.cover .cover-main>p:last-child a:last-child {
-    background-color: var(--theme-color);
-    color: var(--cover-link-color);
-}
-
-section.cover .cover-main>p:last-child a:last-child:hover {
-    background-color: var(--global-surface-solid-hover);
-    border-color: var(--global-surface-solid-hover);
-    color: var(--cover-link-color);
-    opacity: var(--global-opacity-none);
-}
-
-section.cover .cover-main>p:last-child a:last-child:active {
-    background-color: var(--global-surface-solid-press);
-    border-color: var(--global-surface-solid-press);
-}
-
-section.cover .cover-main>p:last-child a:not(:last-child):hover {
-    background-color: var(--global-surface-hollow-hover);
-    color: var(--theme-color);
-}
-
-section.cover blockquote>p>a {
-    border-bottom: var(--global-border-strong) var(--theme-color);
-    transition: var(--global-transition-color-fast);
-}
-
-section.cover blockquote>p>a:hover {
-    color: var(--theme-color)
+section.cover :is(p, li, blockquote) a:hover {
+    text-decoration-color: var(--global-link-decoration-hover)
 }
 
 .sidebar,
@@ -1134,7 +1106,6 @@ body {
     color: var(--theme-color);
     font-weight: var(--global-font-weight-semibold);
     border-left-color: var(--global-nav-bar-active);
-    cursor: default;
 }
 
 .app-sub-sidebar li:before {

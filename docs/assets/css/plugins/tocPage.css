@@ -142,17 +142,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    border: var(--global-border) var(--global-surface-hollow-border-rest);
     border-radius: var(--global-control-border-radius);
+    color: var(--global-surface-hollow-text-rest);
     transition: var(--global-transition-color);
 }
 
 .toc-paginator-button-span:hover {
     background-color: var(--global-surface-hollow-hover);
+    border-color: var(--global-surface-hollow-border-hover);
+    color: var(--global-surface-hollow-text-hover);
 }
 
 .toc-paginator-button-div:active .toc-paginator-button-span,
 .toc-paginator-button-span:active {
     background-color: var(--global-surface-hollow-press);
+    border-color: var(--global-surface-hollow-border-press);
+    color: var(--global-surface-hollow-text-press);
 }
 
 body.has-toc .sidebar-toggle {

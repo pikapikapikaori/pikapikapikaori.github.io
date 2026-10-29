@@ -35,15 +35,14 @@
     margin-top: 1.5rem;
 }
 
-#gitalk-container .gt-header-controls-tip {
-    color: var(--theme-color);
+#gitalk-container .gt-container .gt-header-controls-tip {
     text-decoration: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color);
 }
 
-#gitalk-container .gt-header-controls-tip:hover {
+#gitalk-container .gt-container .gt-header-controls-tip:hover {
     text-decoration-color: var(--global-link-decoration-hover);
 }
 
@@ -57,28 +56,32 @@
 }
 
 #gitalk-container .gt-btn-login {
+    color: var(--global-surface-solid-text);
     background-color: var(--global-surface-solid-rest);
     border: var(--global-border) var(--global-surface-solid-rest);
 }
 
 #gitalk-container .gt-btn-preview {
-    color: var(--theme-color);
-    border: var(--global-border) var(--theme-color);
+    color: var(--global-surface-hollow-text-rest);
+    border: var(--global-border) var(--global-surface-hollow-border-rest);
 }
 
 #gitalk-container .gt-btn-public {
+    color: var(--global-surface-solid-text);
     background-color: var(--global-surface-solid-rest);
     border-color: var(--global-surface-solid-rest);
 }
 
 #gitalk-container .gt-container .gt-btn-preview:hover {
     background-color: var(--global-surface-hollow-hover);
-    border-color: var(--theme-color);
-    color: var(--theme-color);
+    border-color: var(--global-surface-hollow-border-hover);
+    color: var(--global-surface-hollow-text-hover);
 }
 
 #gitalk-container .gt-container .gt-btn-preview:active {
     background-color: var(--global-surface-hollow-press);
+    border-color: var(--global-surface-hollow-border-press);
+    color: var(--global-surface-hollow-text-press);
 }
 
 #gitalk-container .gt-container .gt-btn-login:hover,

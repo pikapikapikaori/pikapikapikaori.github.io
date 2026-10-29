@@ -10,30 +10,22 @@ Every theme except `swiss`. All colours derive from `--theme-color`, so changing
 
 #### Emphasis Ladder
 
-Every interactive element walks up one ladder. Each column is a three-step ramp measured from that column's own resting state, and an element only walks up its own column without skipping a step.
+Every interactive element walks up one four-step ladder. Each column is that column's own ramp, measured from its resting state, and an element only walks up its own column without skipping a step; **a selected control that is hovered stays on level 2** and does not fall back to level 1.
 
-| Level | Meaning | Border / Bar | Surface (hollow) | Surface (solid) | Text / Icon | Scale |
-| --- | --- | --- | --- | --- | --- | --- |
-| Rest | — | none / neutral 1px | transparent | accent fill | accent | 1 |
-| 1 | hover: this can be clicked | accent 45% | accent 45% | `-7` | `-7` | 1.1 |
-| 2 | selected (`.active`) / focus (`:focus`) | accent (solid) | accent 55% | not applicable | — | 1.2 |
-| 3 | press (`:active`) | `-7` | accent 55% | `-8` | `-7` | 1.3 |
+| Level | Meaning | Border / Bar | Surface (hollow) | Surface (solid) | Text / Icon | Scale | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | rest: colourless | none / neutral 1px | transparent | theme colour, solid | hollow `-8`; solid inverted ink | 1 | rest shows no emphasis at all |
+| 1 | hover: this can be clicked | theme colour 45% | theme colour 30% | theme colour + 10% white, 2px 45% ink ring | hollow `-8`; solid inverted ink | 1.1 | says "this can be clicked", the text stays put |
+| 2 | selected (`.active`) / focus (`:focus`) | theme colour, solid | theme colour 30%, `-7` border | theme colour + 16% white, 2px solid ink ring | hollow `-8`; solid inverted ink | 1.2 | one step deeper than level 1; a hovered selected control stays here |
+| 3 | press (`:active`) | `-7` | theme colour 40%, `-8` border | theme colour + 24% white, 3px solid ink ring | hollow `-8`; solid inverted ink | 1.3 | press is `:active`, held while the pointer is down and released back to hover or to the selected state. Navigation links, inline links and swatches do nothing when clicked, so they have no press state |
 
 Three consequences, none of them extra rules:
 
-- **Surface (solid)** starts on the accent fill, so its hover and press can only continue upwards, landing on levels 3 and 4.
-- **Surface (hollow)** has no selected state, so it needs two steps only: 45% on hover, 55% on press.
-- **The border of a hollow button** starts on level 1: 45% at rest, solid on hover, `-7` on press. This is the same rule as "the fill of a solid button starts on level 2" — a higher start point means fewer steps to walk.
+- **The fill of a solid button is already the lightest step.** The theme colour is the brightest colour there is, so deepening it drowns the inverted ink text (the resting state already measures 4.88 at worst). Its ladder therefore moves **towards white**, and the ink ring's density and weight carry the steps.
+- **The text of a hollow button never changes.** `-8` is the step furthest from the paper, the fill only lays down 30% / 40%, and the text stays put, so contrast never drops in any state.
+- **The border of a hollow button** starts on level 1: 45% at rest, solid on hover, `-7` when selected, `-8` when pressed. This is the same rule as "the fill of a solid button starts on level 2" — a higher start point means fewer steps to walk.
 
-The text column applies to hollow buttons only; the text and icon of a solid button stay on `--global-surface-solid-text` (a light colour) because deepening the fill only improves contrast.
-
-#### Press
-
-Press is `:active`: it lasts for as long as the pointer is held down on the element and reverts to hover or to the selected state on release.
-
-The following elements provide no press state, because clicking them has no effect: navbar items, sidebar items, docsify tabs and TOC switcher buttons.
-
-Color swatches preview the selection instead: pressing an unselected swatch shows the second level (solid border, scale 1.2) and releases into exactly the selected state, while pressing an already selected swatch goes one step further (`-7`, scale 1.3).
+The text column: a hollow button always uses `--global-theme-color-8` (coloured text), a solid button always uses `--global-solid-ink` (the theme colour flipped to the other end of the lightness axis). The two are told apart by hue — **hollow is "no fill + coloured text", solid is "coloured fill + inverted text"**.
 
 #### Keyboard focus
 
@@ -80,10 +72,6 @@ Semantic aliases (never write the numbers directly): `--global-el-border-radius`
 | --- | --- | --- |
 | `--global-container-width` | 25rem | the width of the article content container |
 | `--global-container-height` | 18.75rem | the height of the article content container |
-| `--global-writing-container-height` | `var(--global-container-height)` | the height reference of that container |
-| `--global-sidenote-width` | `var(--global-container-width)` | the max width of a sidenote |
-
-The last two derive from the first two: changing `--global-container-width` changes both the content container width and the sidenote width, and the same holds for the height.
 
 #### Interaction Tokens
 
@@ -93,10 +81,10 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 
 | Token | Value | Meaning |
 | --- | --- | --- |
-| `--global-accent-level-1` | `var(--global-theme-color-blur-weak)` (accent 45%) | level 1: hover |
-| `--global-accent-level-2` | `var(--theme-color)` (accent, solid) | level 2: selected / focus |
-| `--global-accent-level-3` | `var(--global-theme-color-7)` | level 3: press |
-| `--global-accent-level-4` | `var(--global-theme-color-8)` | level 4: only used by the press of a solid button |
+| `--global-accent-level-1` | `var(--global-theme-color-blur-weak)` (theme colour 45%) | level 1: hover |
+| `--global-accent-level-2` | `var(--theme-color)` (theme colour, solid) | level 2: selected / focus |
+| `--global-accent-level-3` | `var(--global-theme-color-7)` | level 3: the border of a selected hollow button, and press |
+| `--global-accent-level-4` | `var(--global-theme-color-8)` | level 4: the border of a pressed hollow button |
 | `--global-scale-hover` | `var(--global-transform-ratio-small)` (1.1) | level 1 scale |
 | `--global-scale-active` | `var(--global-transform-ratio-normal)` (1.2) | level 2 scale |
 | `--global-scale-press` | `var(--global-transform-ratio-big)` (1.3) | level 3 scale |
@@ -115,50 +103,51 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 | `--global-control-border-active` | `var(--global-accent-level-2)` |
 | `--global-control-border-press` | `var(--global-accent-level-3)` |
 | `--global-surface-hollow-rest` | `transparent` |
-| `--global-surface-hollow-hover` | `var(--global-accent-level-1)` |
-| `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 55%, transparent)` |
+| `--global-surface-hollow-hover` | `color-mix(in srgb, var(--theme-color) 30%, transparent)` |
+| `--global-surface-hollow-active` | `color-mix(in srgb, var(--theme-color) 30%, transparent)` |
+| `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 40%, transparent)` |
 | `--global-surface-hollow-border-rest` | `var(--global-accent-level-1)` |
 | `--global-surface-hollow-border-hover` | `var(--global-accent-level-2)` |
-| `--global-surface-hollow-border-active` | `var(--global-accent-level-2)` |
-| `--global-surface-hollow-border-press` | `var(--global-accent-level-3)` |
-| `--global-surface-hollow-text-rest` | `var(--global-accent-level-2)` |
-| `--global-surface-hollow-text-hover` | `var(--global-accent-level-3)` |
-| `--global-surface-hollow-text-press` | `var(--global-accent-level-3)` |
+| `--global-surface-hollow-border-active` | `var(--global-accent-level-3)` |
+| `--global-surface-hollow-border-press` | `var(--global-accent-level-4)` |
+| `--global-surface-hollow-text-rest` | `var(--global-theme-color-8)` |
+| `--global-surface-hollow-text-hover` | `var(--global-theme-color-8)` |
+| `--global-surface-hollow-text-active` | `var(--global-theme-color-8)` |
+| `--global-surface-hollow-text-press` | `var(--global-theme-color-8)` |
 | `--global-surface-solid-rest` | `var(--global-accent-level-2)` |
-| `--global-surface-solid-hover` | `var(--global-accent-level-3)` |
-| `--global-surface-solid-press` | `var(--global-accent-level-4)` |
-| `--global-surface-solid-text` | `var(--accent-text-color)` |
+| `--global-surface-solid-hover` | `color-mix(in oklab, var(--theme-color) 90%, #fff)` |
+| `--global-surface-solid-active` | `color-mix(in oklab, var(--theme-color) 84%, #fff)` |
+| `--global-surface-solid-press` | `color-mix(in oklab, var(--theme-color) 76%, #fff)` |
+| `--global-surface-solid-text` | `var(--global-solid-ink)` |
+| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-solid-ink) 45%, transparent)` |
+| `--global-surface-solid-ring-active` | `var(--global-solid-ink)` |
+| `--global-surface-solid-ring-press` | `var(--global-solid-ink)` |
+| `--global-table-row-hover` | `color-mix(in srgb, var(--theme-color) 18%, transparent)` |
+
+One more token, `--global-solid-ink`, is computed automatically in `base.css`; it needs neither the light/dark scheme nor a per-theme value:
+
+```css
+--global-solid-ink: color-mix(in srgb, var(--theme-color) 12%, #000);
+--global-solid-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+```
+
+The second declaration is the real value: it flips the OKLCH lightness of the theme colour to the other end (`1 - l`, clamped to 0.08–0.92), so a light theme colour yields a dark grey and a dark one a light grey, whatever the hue. Measured: lavender `#c7a2ec` becomes `#1c1c1c` (7.92:1), matcha `#c7eca2` becomes `#030303` (15.62:1), misty `#a2d9ec` becomes `#0a0a0a` (12.87:1). The first declaration is the fallback for browsers without relative colour syntax. Both the text and the ring of a solid button use it.
 
 ### Component Types
 
-Elements are grouped by interaction mechanism; every element of a type shares the same values. The token names refer to "Interaction Tokens".
+Grouped by interaction mechanism. Each state cell reads **fill / border / text**; the token names refer to "Interaction Tokens".
 
-| Type | Covered elements | Rest | Hover (1) | Selected (2) | Press (3) | Text / Icon |
-| --- | --- | --- | --- | --- | --- | --- |
-| **Navigation link** | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `--global-nav-bar-rest` | `--global-nav-bar-hover` | `--global-nav-bar-active` bar + accent + bold text | none | inherits; accent + bold when selected |
-| **Inline text link 1** | links inside the article body (`p` / `li` / `blockquote` / `table`), links inside the cover | `--global-link-decoration-rest` underline | `--global-link-decoration-hover` underline | — | — | inherits |
-| **Inline text link 2** | site name, heading anchor, `summary`, pagination title, search results, comment links, gitalk tip | `transparent` underline | `--global-link-decoration-hover` underline | — | — | inherits |
-| **Ghost icon** | the nine widgets, sidebar toggle, back to top, reading progress, comment like/edit/reply, about-me icons, cover chevron | 1 | `--global-scale-hover` | — | `--global-scale-active` | accent, does not change |
-| **Input** | search box, pagination input, gitalk textarea | `--global-control-border-rest` | `--global-control-border-hover` | `--global-control-border-active` (`:focus`) | — | inherits |
-| **Selection swatch** | theme presets, colour presets, colour picker thumb | `--global-control-border-rest`, 1 | `--global-control-border-hover`, `--global-scale-hover` | `--global-control-border-active`, `--global-scale-active` | unselected: the selected values; selected: `--global-control-border-press`, `--global-scale-press` | inherits |
-| **Hollow surface button** | toc pagination arrows, full-image arrows, gitalk preview, font presets | 45% border, transparent fill, accent text | solid border, 45% fill, `-7` text | solid border, 45% fill, accent text (font presets only) | `-7` border, 55% fill, `-7` text | accent → `-7` → `-7` |
-| **Solid surface button** | gitalk login and publish, cover primary button, copy code | `--global-surface-solid-rest` | `--global-surface-solid-hover` | — | `--global-surface-solid-press` | always `--global-surface-solid-text` |
-
-The current breadcrumb page (`.breadcrumb li.active`) is not a link, but it is selected in meaning and takes level 2: a `--global-nav-bar-active` bar plus accent and bold text.
-
-The colour picker thumb counts as a swatch, but its border only transitions on hover: on hover and while dragging, `border-color` changes at once (`:active` overrides the transition list, leaving only `transform` to interpolate) and it eases back to the resting colour when released.
-
-### The Three Kinds of Button
-
-| Kind | Surface | Border | Feedback | Members |
-| --- | --- | --- | --- | --- |
-| **Ghost icon** | none | none | scale only | the nine widgets, sidebar toggle, back to top, reading progress, comment like/edit/reply, about-me icons, cover chevron |
-| **Hollow surface button** | yes (ladder fill) | 1px (ladder border) | border, fill and text walk the ladder together | toc pagination arrows, full-image arrows, gitalk preview, font presets |
-| **Solid surface button** | yes (solid fill) | same colour as the fill | only the fill deepens, the text colour is constant | gitalk login and publish, cover primary button, copy code |
-
-**The selected state of a hollow button**: this kind has no selection meaning of its own, but the font presets stop on a chosen size. The selected one sits half-way between rest and hover: solid border, 45% fill, accent text. Press stays at a `-7` border with a 55% fill.
-
-How to tell them apart: **a surface means it is a surface button, no surface means it is a ghost icon**; among surface buttons, a solid fill at rest means solid, a border only means hollow.
+| Type | Group | Covered elements | Rest (0) | Hover (1) | Selected (2) | Press (3) | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Navigation link** | Link | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `--global-nav-bar-rest` bar (transparent), text inherits | `--global-nav-bar-hover` bar (45%), text unchanged | `--global-nav-bar-active` bar (solid), text in the theme colour + bold | not applicable | Clicking only re-enters the current page and gives no extra feedback, so there is no press state. The current breadcrumb is not a link but is selected in meaning and takes level 2 |
+| **Inline text link 1** | Link | links inside the article body (`p` / `li` / `blockquote` / `table`), links inside the cover | `--global-link-decoration-rest` underline, text inherits | `--global-link-decoration-hover` underline, text inherits | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
+| **Inline text link 2** | Link | site name, heading anchor, `summary`, pagination title, search results, comment links, gitalk tip | `transparent` underline, text inherits | `--global-link-decoration-hover` underline, text inherits | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
+| **Inline icon link** | Link | the about-me icons | icon at 1 | `--global-scale-hover` | not applicable | `--global-scale-active` | Looks exactly like a ghost icon, but it is a link inside the article, so it gets its own row and takes no part in the button ladder |
+| **Ghost icon** | Button | the nine widgets, sidebar toggle, back to top, reading progress, comment like/edit/reply, cover chevron | icon at 1 | `--global-scale-hover` | not applicable | `--global-scale-active` | Scale only; no fill and no border |
+| **Input** | Input | search box, pagination input, gitalk textarea | `--global-control-border-rest`, text inherits | `--global-control-border-hover`, text inherits | `--global-control-border-active` (`:focus`), text inherits | not applicable | Focus shares the selected value; press gives no extra feedback |
+| **Selection swatch** | Button | theme presets, colour presets, colour picker thumb | `--global-control-border-rest`, scale 1 | `--global-control-border-hover`, `--global-scale-hover` | `--global-control-border-active`, `--global-scale-active` | unselected: the level 2 values; selected: `--global-control-border-press`, `--global-scale-press` | Press previews the selection: an unselected swatch shows level 2 while held and lands on the selected state on release, a selected one goes one step further. The colour picker thumb only swaps its border (`--border-color` to `--theme-color`), adds no ring and does not scale, and its border transitions on hover only |
+| **Hollow surface button** | Button | toc pagination arrows, full-image arrows, gitalk preview, font presets | transparent fill, `--global-accent-level-1` border, `-8` text | 30% fill, `--global-accent-level-2` border, `-8` text | 30% fill, `--global-accent-level-3` border, `-8` text | 40% fill, `--global-accent-level-4` border, `-8` text | Border only, no solid fill; the selected state is used by the font presets alone |
+| **Solid surface button** | Button | gitalk login and publish, cover primary button, copy code | `--global-surface-solid-rest` fill, inverted ink text | fill +10% white, 2px 45% ink ring, inverted ink text | fill +16% white, 2px solid ink ring, inverted ink text | fill +24% white, 3px solid ink ring, inverted ink text | Solid at rest. How to tell them apart: a solid fill means solid, a border alone means hollow |
 
 ### Guide Line
 
@@ -173,11 +162,25 @@ A navigation bar is always 2px wider than the guide line of its container, so it
 | TOC switcher | 1px | bottom | 3px |
 | breadcrumb | none | bottom | 2px |
 
-Two notes:
+Three notes:
 
 - Items inside one group of navigation links leave no gap between them (TOC switcher `gap: 0`), so their bars meet; the spacing comes from each item's padding.
 - The current breadcrumb page wraps naturally and draws one bar per line — that is expected, because that is how an inline element's border works. The breadcrumb is set at `0.9rem`, one step below the navbar.
 - A toc pagination button is a 28×28 outer box (1.75rem) holding a 100% svg that `padding: var(--global-border-width)` on the parent brings down to 24px (28 − 1px border ×2 − 1px padding ×2). swiss draws a 2px border, so its `padding` is 0 and the icon is 24px there too.
+
+### Tables
+
+A body table already carries a 1px `--border-color-strong` border on every cell (from base) plus a 1px `--border-color-mid` top border per row; **no zebra stripes are drawn, and reading is carried by hover**.
+
+| Part | Rest | Hover |
+| --- | --- | --- |
+| Header `thead th` | no fill, bold, text in `--heading-color` | not applicable |
+| Row `tbody tr` | transparent | `--global-table-row-hover` (18% theme colour), 500ms transition |
+
+Two notes:
+
+- The highlight is painted on the row, not on the cells: a cell merged by `rowspan` belongs to the first row, and a row background fills the whole band, so it is tinted in the second and third rows it covers as well; a `colspan` row naturally changes as one. The limitation is that a pointer resting inside a merged cell can only hit the row that owns it — CSS cannot see the span, and that is expected.
+- The header never takes part in hover; its edge is expressed by weight and the grid, not by a fill.
 
 ### Popups
 
@@ -185,9 +188,23 @@ The three kinds of popup share the large radius `--global-el-border-radius` and 
 
 | Kind | Members | Border | Fill | Other |
 | --- | --- | --- | --- | --- |
-| **Widget popup** | the widgets popup (`.page-right-popups-div`) | 1px **accent** | `--global-theme-color-blur` (10% accent) | `backdrop-filter: var(--global-backdrop-filter)` |
-| **Regular popup** | gitalk comment card `.gt-comment-content`, `.gt-popup` menu, about page right panel `.main-page-right-panel-container` | 1px `--border-color-strong` | `--zebra-bg` | — |
-| **Highlighted popup** | the blog owner's own comments (`.gt-comment.gt-comment-admin`) | same as a regular popup | `--global-theme-color-blur` (10% accent) | identity is told by the fill alone |
+| **Widget popup** | the widgets popup (`.page-right-popups-div`) | 1px **theme colour** | `--global-theme-color-blur` (10% theme colour) | `backdrop-filter: var(--global-backdrop-filter)` |
+| **Regular popup** | gitalk comment card `.gt-comment-content`, `.gt-popup` menu, about page right panel `.main-page-right-panel-container` | 1px `--border-color-strong` | `--zebra-bg` | none |
+| **Highlighted popup** | the blog owner's own comments (`.gt-comment.gt-comment-admin`) | same as a regular popup | `--global-theme-color-blur` (10% theme colour) | identity is told by the fill alone |
+
+### Brief Comments
+
+`writings/BriefComments.md` is a year-by-year quote stream with no cards.
+
+| Element | Spec |
+| --- | --- |
+| Year block | title left-aligned, `--heading-color`, 2.25rem, with a 2px `--border-color-strong` rule underneath; the year icon sits to the left of the title and doubles as the open/closed indicator |
+| Year icon | a native 512×512 RGBA image; closed: `rotate(-14deg) scale(0.9)`, `opacity 0.5`; open: back to normal and opaque; 500ms transition on `opacity` and `transform` |
+| Year hover | the title gains an underline in `--global-link-decoration-hover`; its colour does not change |
+| The old year divider | removed. The icon moves from the divider to the left of the title, and the two short theme-colour rules are no longer drawn |
+| Entry | no card, no fill; a 1px `--border-color` top border per entry (none on the first); avatar 2.25rem |
+| Quote line | 2px `--border-color-strong` on the left of the card, easing to the theme colour on hover, 500ms |
+| Inner divider | `0.2rem dotted --border-color`; the original walking icon is kept and no longer coloured |
 
 ### Cursor
 
@@ -195,102 +212,198 @@ Selected items of navbar and sidebar stay clickable (they re-enter the current p
 
 ## swiss Theme
 
-`swiss` speaks a "paper / ink / line" language. It shares the interaction intent of the default theme but differs in colour, line weight and the direction of every response.
+`swiss` speaks a "paper / ink / line" language. It shares the interaction intent of the default theme, but its palette is black, white and grey only, and the theme colour retreats to a handful of places (see "Theme Colour Budget").
 
 ### Interaction Standard
 
 #### Emphasis Ladder
 
-swiss has two colour steps and they run the opposite way: the default theme deepens the theme colour, swiss swaps paper and ink.
+Every interactive element walks up one four-step ladder, each column measured from its own resting state, without skipping a step; **a selected or latched control that is hovered stays on its level**. The big difference from the default theme: **navigation moves by its line, buttons move by swapping paper and ink, and text stays put**.
 
-| Level | Meaning | Fill | Border | Text / Icon |
-| --- | --- | --- | --- | --- |
-| Rest | — | paper | tone-line | ink |
-| 1 | hover: this can be clicked | ink-strong | ink-strong | paper |
-| 2 | active (`.active`, `.active-btn`, `.is-active`) | ink-strong | ink-strong | paper |
-| 3 | press (`:active`) | same as hover | same as hover | same as hover |
+| Level | Meaning | Line / Bar | Surface (unlatched) | Surface (latched) | Text / Icon | Scale | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | rest: colourless | `tone-line` 2px, or transparent 3px reserved | paper fill + tone-line border | paper fill + tone-line border | ink | none | navigation hover never changes the text, only the line walks |
+| 1 | hover: this can be clicked | `--border-color-mid` (neutral grey) | ink fill + ink border | same, while not latched | paper | none | the neutral grey is one step deeper than tone-line, otherwise the tabs' resting baseline would show no change |
+| 2 | selected / latched (`.active`, `.active-btn`, `.is-active`) | ink-strong | not applicable | ink fill + ink border | paper | none | a hovered latched button stays here and does not invert; inversion happens only at "latched + hover", see below |
+| 3 | press (`:active`) | same as level 1 | same as level 1 | same as level 1 | paper | none | press equals hover. Navigation links, inline links and swatches do nothing when clicked, so they have no press state |
 
-Three rules of its own:
+Two rules of its own:
 
 - **Nothing scales** (the colour picker thumb included). Everything the default theme expresses with scale, swiss expresses by swapping fill.
-- **Press is identical to hover**; there is no extra depth while the button is held.
-- **A button that carries an active state inverts on hover once active** (paper fill, ink border, ink text), which says "clicking again leaves this state".
+- **A latched button inverts on hover once latched**: paper fill, ink border, ink text, meaning "clicking again leaves this state". It is a sub-state of level 2 and appears only while already latched; press does not invert.
+
+Two deliberate asymmetries:
+
+- **Navigation hover never changes the text colour**; only the line turns grey. Only the selected state turns the line to ink and bolds the text.
+- **A permanently latched button fades on hover**: ink fill with paper text becomes paper fill with ink text, the same rule as "a latched button inverts on hover once latched".
 
 #### Keyboard focus
 
-Same as the default theme: `outline: 2px solid var(--sw-ink-strong)` (swiss points `--global-focus-outline-color` at the ink colour), with a transparent outline reserved at rest.
+Same as the default theme with the ink colour swapped in:
+
+- `outline: var(--global-focus-outline)`, width `--global-focus-outline-width` (2px), colour `--global-focus-outline-color` (pointing at `--sw-ink-strong`), `outline-offset` 2px
+- the resting state reserves a transparent outline, so focusing never shifts the layout
+- applies to `a[href]`, `button`, `summary`, `select`, `[tabindex]` and the various `input` types
 
 #### Transitions
 
-Two durations only: `--global-transition-duration` 200ms and `--global-transition-duration-fast` 160ms; swiss redefines both tokens in its theme file. Every hover and active response uses them instead of the default theme's 500ms.
+Two durations only, redefined by swiss in its theme file: `--global-transition-duration` 200ms and `--global-transition-duration-fast` 160ms.
+
+| Use | Duration |
+| --- | --- |
+| navigation line, navigation text | 160ms |
+| button fill, border, text | 200ms |
+| input line, swatch border | 160ms |
+| table row hover | 160ms |
+| brief-comments year icon | 200ms |
 
 #### Border radius
 
 Always `0`; large surfaces and controls are not distinguished.
 
+| Token | Value | Use |
+| --- | --- | --- |
+| `--global-el-border-radius` | 0 | large surfaces: cards, popups, code blocks |
+| `--global-el-border-radius-small` | 0 | the small step of large surfaces |
+| `--global-icon-border-radius` | 0 | icon controls |
+| `--global-widget-border-radius` | 0 | the right-hand widgets |
+| `--global-scrollbar-border-radius` | 0 | the scrollbar |
+| `--global-border-radius-round` | 50% | circles (avatars), a shape rather than a step |
+
 #### Size tokens
 
-Same as the default theme (`--global-container-*` and its two derived values).
+| Token | swiss value | Use |
+| --- | --- | --- |
+| `--global-container-width` | 25rem | the width of the article content container |
+| `--global-container-height` | 18.75rem | the height of the article content container |
+| `--global-content-width` | `min(94%, var(--sw-max))` | the body column width, with `--sw-max` at 80rem |
+| `--global-sidebar-width` | 13.75rem | the sidebar width |
+
+swiss also carries a set of typographic and geometric tokens of its own (`--sw-fs-*`, `--sw-gap-*`, `--sw-plate-*`). They shape the page and take no part in interaction.
 
 #### Interaction Tokens
 
-| Purpose | Value |
+Colours come in two layers: changing the theme colour touches `--theme-color` only, changing the palette touches layer 1 only, and re-colouring one channel touches layer 2 only. Both live in the `:root` of `swiss.css`.
+
+**Layer 1: palette and line weights**
+
+| Token | Value | Meaning |
+| --- | --- | --- |
+| `--sw-paper` | `var(--bg-color)` | paper |
+| `--sw-ink` | `var(--text-color)` | body ink |
+| `--sw-ink-strong` | `var(--heading-color)` | heading ink (the heaviest step) |
+| `--sw-ink-muted` | `var(--muted-color)` | muted text |
+| `--sw-tone` | `var(--code-bg)` | paper grey (popups, code, highlighted fills) |
+| `--sw-tone-line` | `var(--border-color)` | light line (resting lines, structural baseline) |
+| `--sw-rule` | 0.1875rem (3px) | navigation bar / heavy rule |
+| `--sw-rule-mid` | 0.125rem (2px) | thin rule, the middle step |
+| `--sw-rule-mast` | 0.375rem (6px) | masthead rule |
+| `--sw-border` | `var(--sw-rule) solid var(--sw-ink-strong)` | 3px solid ink |
+| `--sw-border-mid` | `var(--sw-rule-mid) solid var(--sw-ink-strong)` | 2px solid ink |
+| `--sw-border-mast` | `var(--sw-rule-mast) solid var(--sw-ink-strong)` | 6px solid ink |
+
+**Layer 2: the channels**
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--sw-nav-rest` | `transparent` | navigation bar at rest |
+| `--sw-nav-hover` | `var(--border-color-mid)` | navigation bar on hover (neutral grey) |
+| `--sw-nav-active` | `var(--sw-ink-strong)` | navigation bar when active |
+| `--sw-line-rest` | `var(--sw-tone-line)` | input line at rest |
+| `--sw-line-hover` | `var(--sw-ink-strong)` | input line on hover / focus |
+| `--sw-fill-rest` | `var(--sw-paper)` | button fill at rest |
+| `--sw-fill-hover` | `var(--sw-ink-strong)` | button fill on hover / press / latched |
+| `--sw-fill-inverse` | `var(--sw-paper)` | the fill when inverted (latched + hover) |
+| `--sw-on-rest` | `var(--sw-ink)` | text at rest |
+| `--sw-on-fill` | `var(--sw-paper)` | text on an ink fill |
+| `--sw-swatch-rest` | `var(--sw-tone-line)` | swatch border at rest |
+| `--sw-swatch-hover` | `var(--sw-ink-strong)` | swatch border on hover / active |
+| `--sw-swatch-outline` | `var(--sw-ink-strong)` | the 2px outline a swatch adds on hover / active |
+| `--sw-accent` | `var(--theme-color)` | the only colour allowed, and only where "Theme Colour Budget" lists it |
+
+### Theme Colour Budget
+
+swiss uses the theme colour in these places only; everything else is paper, ink or grey:
+
+| Place | Purpose |
 | --- | --- |
-| paper / ink / line | `--sw-paper` / `--sw-ink` / `--sw-ink-strong` / `--sw-tone-line` |
-| line weights | `--sw-border`, `--sw-border-mid`, `--sw-rule-mid` |
-| hover bar | `var(--global-nav-bar-hover)` (45% theme colour) |
-| active bar | `var(--theme-color)` |
+| the short rule of the article masthead (`--sw-mastline::before`) | a decorative accent |
+| the 6px rule on top of the footer (`#footer-under-gitalk`) | the boundary between the article and the letterpress footer |
+| the hover underline of inline text links | clickable feedback |
+| the hover underline of pagination and toc-page titles | clickable feedback |
+| the `mark` fill and the `::selection` fill | highlight / selection meaning |
+| the fill of the colour picker thumb | it is a colour-picking control |
+| `--sw-accent` | the shared alias for the above |
 
 ### Component Types
 
-| Type | swiss |
-| --- | --- |
-| Navigation link | transparent bar reserved at rest, 45% theme bar on hover, solid bar when active (width from `--sw-border`) |
-| Inline text link | transparent underline at rest, theme-coloured underline on hover; the resting underline of `.gt-link` is removed so only the hover one remains |
-| Ghost icon | becomes an "unlatched button" |
-| Input | line colour: tone-line → ink on hover / focus |
-| Swatch | see "Three Kinds of Button · Swatch" |
-| Popup | paper fill + ink border, radius 0 |
+Grouped by interaction mechanism. Each state cell reads **fill / border / text**; the token names refer to "Interaction Tokens".
 
-### The Three Kinds of Button
-
-**One: unlatched button**
-
-| State | Fill | Border | Text / Icon |
-| --- | --- | --- | --- |
-| Rest | paper | tone-line | ink |
-| hover / press | ink-strong | ink-strong | paper |
-
-Members: the nine widgets, sidebar toggle, toc pagination arrows, full-image arrows, copy code, gitalk login and publish, cover primary button.
-
-**Two: latched button**
-
-| State | Fill | Border | Text / Icon |
-| --- | --- | --- | --- |
-| Rest | paper | tone-line | ink |
-| hover / press | ink-strong | ink-strong | paper |
-| Active | ink-strong | ink-strong | paper |
-| Active + hover | paper | ink-strong | ink |
-
-Members: gitalk preview (active while the preview panel is shown, i.e. `.gt-header-textarea` carries the `hide` class), the TOC switcher, the font presets.
-
-**Three: swatch**
-
-| State | Border | Extra |
-| --- | --- | --- |
-| Rest | tone-line | — |
-| hover / active | ink-strong | a 2px ink outline |
-
-Members: theme presets, colour presets. **The colour picker thumb does not join this set**: it only swaps its border from tone-line to ink, with no outline and no scale.
+| Type | Group | Covered elements | Rest (0) | Hover (1) | Selected / latched (2) | Press (3) | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Navigation link** | Link | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `--sw-nav-rest` bar, ink text; tabs excepted, they draw a 3px tone-line baseline at rest | `--sw-nav-hover` bar, text unchanged | `--sw-nav-active` bar, bold text | not applicable | Clicking only re-enters the current page, so there is no press state. The current breadcrumb takes the level 2 bar and bold text, its colour unchanged |
+| **Inline text link 1** | Link | links inside the article body (`p` / `li` / `blockquote` / `table`), links inside the cover | ink underline, 2px | `--sw-accent` underline | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
+| **Inline text link 2** | Link | site name, heading anchor, `summary`, pagination title, toc-page title, search results, comment links, gitalk tip | transparent underline | `--sw-accent` underline | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
+| **Inline icon link** | Link | the about-me icons | ink, at 1 | ink-strong, no scale | not applicable | ink-strong, no scale | Close to a ghost icon, but it is a link inside the article; swiss never scales, so only the colour changes |
+| **Unlatched button** | Button | the nine widgets, sidebar toggle, toc pagination arrows, full-image arrows, cover chevron | paper fill + tone-line border + ink text | ink fill + ink border + paper text | not applicable | same as hover | One feedback only: paper and ink swap |
+| **Latched button** | Button | gitalk preview, TOC switcher, font presets | paper fill + tone-line border + ink text | ink fill + ink border + paper text | ink fill + ink border + paper text | same as hover | Latched + hover inverts to paper fill with ink text; gitalk preview is latched while `.gt-header-textarea` carries the `hide` class |
+| **Permanently latched button** | Button | gitalk login and publish, copy code | ink fill + ink border + paper text | paper fill + ink border + ink text | not applicable | same as hover | Latched at rest; hover fades it |
+| **Input** | Input | search box, pagination input, gitalk textarea | `--sw-line-rest`, text inherits | `--sw-line-hover`, text inherits | `--sw-line-hover` (`:focus`), text inherits | not applicable | Focus shares the hover value; press gives no extra feedback |
+| **Selection swatch** | Button | theme presets, colour presets, colour picker thumb | `--sw-swatch-rest` | `--sw-swatch-hover` + 2px `--sw-swatch-outline` | same as hover | same as hover | A swatch applies on click, so press equals hover. The colour picker thumb only swaps its border, adds no outline and does not scale; its border transitions on hover only, and its fill is the theme colour |
 
 ### Guide Line
 
-swiss has no guide line; navigation items are separated by a `--sw-border-mid` baseline only, and the bar width comes from `--sw-border`, so "2px wider than the guide line" does not apply.
+swiss has no guide line: navigation items are separated by the line itself, the bar width comes from `--sw-rule`, and the default theme's "2px wider than the guide line" rule does not apply.
+
+| Container | Structural line | Edge | Bar width |
+| --- | --- | --- | --- |
+| top navbar | none | bottom | 3px |
+| sidebar | none | left | 3px |
+| sidebar (TOC mode) | none | left | 3px |
+| docsify tabs | a 3px tone-line baseline | bottom | 3px |
+| TOC switcher | a 3px tone-line bottom border on the container | bottom | 3px |
+| breadcrumb | none | bottom | 2px |
+
+Two notes:
+
+- Items inside one group leave no gap (TOC switcher `gap: 0`) so the bars meet; spacing comes from each item's padding.
+- The breadcrumb is set at 0.9rem, one step below the navbar, so its bar stays 2px; every other navigation bar is 3px, which keeps the tabs from jumping when they change state.
+
+### Tables
+
+Same shape as the default theme: no zebra stripes, every cell carries a 2px tone-line border and each row a 2px tone-line top border, and reading is carried by hover.
+
+| Part | Rest | Hover |
+| --- | --- | --- |
+| Header `thead th` | no fill, bold, text in `--sw-ink-strong` | not applicable |
+| Row `tbody tr` | transparent | `--sw-tone`, 160ms transition |
+
+Merged cells behave as in the default theme: the highlight is painted on the row (`tbody tr:hover`), so a `rowspan` cell is tinted in the other rows it covers too; a pointer resting inside a merged cell hits only the row that owns it.
 
 ### Popups
 
-Paper fill + ink border, radius 0, no shadow. The widget popup, the regular popups (comment card, menu, about page right panel) and the highlighted popup (the owner's comments, on `--sw-tone`) differ in fill alone.
+All three kinds share square corners and no shadow, and differ only in border and fill:
+
+| Kind | Members | Border | Fill | Other |
+| --- | --- | --- | --- | --- |
+| **Widget popup** | the widgets popup (`.page-right-popups-div`) | 3px ink `--sw-border` | paper | no backdrop-filter |
+| **Regular popup** | gitalk comment card `.gt-comment-content`, `.gt-popup` menu, about page right panel | 2px tone-line | paper | no shadow |
+| **Highlighted popup** | the blog owner's own comments (`.gt-comment.gt-comment-admin`) | same as a regular popup | `--sw-tone` | identity is told by the fill alone |
+
+### Brief Comments
+
+The same quote stream as the default theme, with every line turned to grey or ink.
+
+| Element | Spec |
+| --- | --- |
+| Year block | title left-aligned, `--sw-ink-strong`, 2.25rem, with a 3px `--sw-border` underneath; the year icon sits to the left of the title |
+| Year icon | a native 512×512 RGBA image, `filter: grayscale(1)`, doubling as the open/closed indicator: closed `rotate(-14deg) scale(0.9)`, `opacity 0.5`; open back to normal and opaque; 200ms transition |
+| Year hover | the title gains a `--sw-accent` underline; its colour does not change |
+| The old year divider | removed (the icon moves to the left of the title and the two short theme-colour rules are no longer drawn) |
+| Entry | no card, no fill; a 2px `--sw-tone-line` top border per entry (none on the first); avatar 2.25rem |
+| Quote line | 2px `--sw-tone-line`, easing to `--sw-ink-strong` on hover, 160ms |
+| Inner divider | 2px dotted `--sw-tone-line`; the original walking icon is kept and desaturated |
 
 ### Cursor
 
-Same as the default theme: selected items of navbar and sidebar are `pointer`; selected items of the TOC switcher and font presets are `default`; everything else is `pointer`.
+Same as the default theme: active items of navbar and sidebar stay clickable, so they keep `cursor: pointer`; active items of docsify tabs, the TOC switcher and the font presets do nothing when clicked and use `cursor: default`; the current breadcrumb is not a link and needs no cursor rule; every other interactive element keeps `cursor: pointer`.

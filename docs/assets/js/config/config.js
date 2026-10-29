@@ -314,7 +314,7 @@
                     type: 'block',
                     tag: 'brief-comments-year',
 
-                    startHtml: '<hr class="brief-comments-in-blog-title-year-divider"><details class="brief-comments-in-blog-title-year">',
+                    startHtml: '<details class="brief-comments-in-blog-title-year">',
                     endHtml: '</details>'
                 },
                 {

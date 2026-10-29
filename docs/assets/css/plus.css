@@ -110,10 +110,12 @@ pre .docsify-copy-code-button span.label {
 
 pre .docsify-copy-code-button:hover {
     background-color: var(--global-surface-solid-hover);
+    box-shadow: inset 0 0 0 2px var(--global-surface-solid-ring-hover);
 }
 
 pre .docsify-copy-code-button:active {
     background-color: var(--global-surface-solid-press);
+    box-shadow: inset 0 0 0 3px var(--global-surface-solid-ring-press);
 }
 
 pre .docsify-copy-code-button .error,

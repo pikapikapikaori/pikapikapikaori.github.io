@@ -78,6 +78,9 @@
     --global-text-color-light: #34495e;
     --global-text-color-dark: #c8c8c8;
 
+    --global-sun: #fff;
+    --global-shadow: #000;
+
     --global-content-width: min(80%, 800px);
     --global-sidebar-width: 300px;
     --global-sidebar-width-none: 0;
@@ -88,12 +91,16 @@
      *  框架变量
      * ============================================================ */
 
-    --global-theme-color-blur: color-mix(in srgb,
-            var(--theme-color) 10%,
-            transparent);
-    --global-theme-color-blur-weak: color-mix(in srgb,
-            var(--theme-color) 45%,
-            transparent);
+    --global-theme-color-blur: color-mix(in srgb, var(--theme-color) 10%, transparent);
+    --global-theme-color-blur-near-weak: color-mix(in srgb, var(--theme-color) 18%, transparent);
+    --global-theme-color-blur-little-weak: color-mix(in srgb, var(--theme-color) 30%, transparent);
+    --global-theme-color-blur-semiweak: color-mix(in srgb, var(--theme-color) 40%, transparent);
+    --global-theme-color-blur-weak: color-mix(in srgb, var(--theme-color) 45%, transparent);
+
+    --global-theme-color-sun-strong: color-mix(in oklab, var(--theme-color) 90%, var(--global-sun));
+    --global-theme-color-sun-semistrong: color-mix(in oklab, var(--theme-color) 84%, var(--global-sun));
+    --global-theme-color-sun: color-mix(in oklab, var(--theme-color) 76%, var(--global-sun));
+
     --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-1)), 100) clamp(0, calc(l + var(--cal-theme-color-l-1)), 100));
     --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-2)), 100) clamp(0, calc(l + var(--cal-theme-color-l-2)), 100));
     --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-3)), 100) clamp(0, calc(l + var(--cal-theme-color-l-3)), 100));
@@ -102,6 +109,11 @@
     --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-6)), 100) clamp(0, calc(l + var(--cal-theme-color-l-6)), 100));
     --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
     --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
+
+    --global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
+    --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+
+    --global-theme-ink-blur: color-mix(in srgb, var(--global-solid-ink) 45%, transparent);
 
     --global-font-size: 16px;
     --global-emoji-size: 1.2em;
@@ -155,7 +167,6 @@
 
     --global-box-shadow-width: 0.625rem;
 
-    --global-shadow: #000;
     --global-shadow-blur: color-mix(in srgb,
             var(--global-shadow) calc(var(--global-opacity-weak) * 100%),
             transparent);
@@ -253,20 +264,30 @@
     --global-control-border-press: var(--global-accent-level-3);
 
     --global-surface-hollow-rest: transparent;
-    --global-surface-hollow-hover: var(--global-accent-level-1);
-    --global-surface-hollow-press: color-mix(in srgb, var(--theme-color) 55%, transparent);
+    --global-surface-hollow-hover: var(--global-theme-color-blur-little-weak);
+    --global-surface-hollow-active: var(--global-theme-color-blur-little-weak);
+    --global-surface-hollow-press: var(--global-theme-color-blur-semiweak);
     --global-surface-hollow-border-rest: var(--global-accent-level-1);
     --global-surface-hollow-border-hover: var(--global-accent-level-2);
-    --global-surface-hollow-border-active: var(--global-accent-level-2);
-    --global-surface-hollow-border-press: var(--global-accent-level-3);
-    --global-surface-hollow-text-rest: var(--global-accent-level-2);
-    --global-surface-hollow-text-hover: var(--global-accent-level-3);
-    --global-surface-hollow-text-press: var(--global-accent-level-3);
+    --global-surface-hollow-border-active: var(--global-accent-level-3);
+    --global-surface-hollow-border-press: var(--global-accent-level-4);
+    --global-surface-hollow-text-rest: var(--global-theme-color-8);
+    --global-surface-hollow-text-hover: var(--global-theme-color-8);
+    --global-surface-hollow-text-active: var(--global-theme-color-8);
+    --global-surface-hollow-text-press: var(--global-theme-color-8);
+
+    --global-solid-ink: var(--global-theme-ink);
 
     --global-surface-solid-rest: var(--global-accent-level-2);
-    --global-surface-solid-hover: var(--global-accent-level-3);
-    --global-surface-solid-press: var(--global-accent-level-4);
-    --global-surface-solid-text: var(--accent-text-color);
+    --global-surface-solid-hover: var(--global-theme-color-sun-strong);
+    --global-surface-solid-active: var(--global-theme-color-sun-semistrong);
+    --global-surface-solid-press: var(--global-theme-color-sun);
+    --global-surface-solid-text: var(--global-solid-ink);
+    --global-surface-solid-ring-hover: var(--global-theme-ink-blur);
+    --global-surface-solid-ring-active: var(--global-solid-ink);
+    --global-surface-solid-ring-press: var(--global-solid-ink);
+
+    --global-table-row-hover: var(--global-theme-color-blur-near-weak);
 
     --global-writing-container-height: var(--global-container-height);
     --global-sidenote-width: var(--global-container-width);
@@ -766,6 +787,7 @@ body.sticky .sidebar-toggle {
 
 .markdown-section th {
     font-weight: var(--global-font-weight-bold);
+    color: var(--heading-color);
 }
 
 .markdown-section td,
@@ -779,17 +801,16 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip,
-.markdown-section p.warn,
-.markdown-section tr:nth-child(2n) {
+.markdown-section p.warn {
     background-color: var(--zebra-bg)
 }
 
-.markdown-section thead tr {
-    background-color: var(--zebra-bg)
+.markdown-section tbody tr {
+    transition: var(--global-transition-color)
 }
 
-.markdown-section thead tr:nth-child(2n) {
-    background-color: var(--bg-color)
+.markdown-section tbody tr:hover {
+    background-color: var(--global-table-row-hover)
 }
 
 .markdown-section p.tip,

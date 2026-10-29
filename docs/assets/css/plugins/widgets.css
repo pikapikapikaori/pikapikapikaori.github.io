@@ -266,8 +266,8 @@
 
 .font-picker-preset-size-btn-div.is-active {
     border-color: var(--global-surface-hollow-border-active);
-    background-color: var(--global-surface-hollow-hover);
-    color: var(--global-surface-hollow-text-rest);
+    background-color: var(--global-surface-hollow-active);
+    color: var(--global-surface-hollow-text-active);
 }
 
 .font-picker-preset-size-btn-div:active {

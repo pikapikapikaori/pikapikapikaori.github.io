@@ -22,7 +22,7 @@
     top: calc((100% - 1.5rem) / 2);
     position: absolute;
     cursor: pointer;
-    border-radius: var(--global-widget-border-radius);
+    border-radius: var(--global-control-border-radius);
     display: flex;
     align-items: center;
     transition: var(--global-transition-color);
@@ -40,7 +40,12 @@
 
 #view-full-image-span-inner-left-div:hover,
 #view-full-image-span-inner-right-div:hover {
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-surface-hollow-hover);
+}
+
+#view-full-image-span-inner-left-div:active,
+#view-full-image-span-inner-right-div:active {
+    background-color: var(--global-surface-hollow-press);
 }
 
 #view-full-image-span-inner-img-div {

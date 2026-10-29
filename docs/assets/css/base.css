@@ -6,9 +6,11 @@
 }
 
 :root {
+
     /* ============================================================
      *  主题颜色变量：换主题只改这一段
      * ============================================================ */
+
     --bg-color: #fff;
     --text-color: #34495e;
     --heading-color: #2c3e50;
@@ -68,8 +70,24 @@
 
 
     /* ============================================================
-     *  主题色相关变量
+     *  布局变量
      * ============================================================ */
+
+    --global-bg-color-light: #fff;
+    --global-bg-color-dark: #3f3f3f;
+    --global-text-color-light: #34495e;
+    --global-text-color-dark: #c8c8c8;
+
+    --global-content-width: min(80%, 800px);
+    --global-sidebar-width: 300px;
+    --global-sidebar-width-none: 0;
+    --global-sidebar-toggle-width: 284px;
+    --global-cover-ul-width: 500px;
+
+    /* ============================================================
+     *  框架变量
+     * ============================================================ */
+
     --global-theme-color-blur: color-mix(in srgb,
             var(--theme-color) 10%,
             transparent);
@@ -85,9 +103,6 @@
     --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
     --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
 
-    /* ============================================================
-     *  框架变量
-     * ============================================================ */
     --global-font-size: 16px;
     --global-emoji-size: 1.2em;
 
@@ -111,53 +126,6 @@
     --global-font-weight-semibold: 600;
     --global-font-weight-bold: 700;
 
-    --global-bg-color-light: #fff;
-    --global-bg-color-dark: #3f3f3f;
-    --global-text-color-light: #34495e;
-    --global-text-color-dark: #c8c8c8;
-
-    --global-content-width: min(80%, 800px);
-    --global-sidebar-width: 300px;
-    --global-sidebar-width-none: 0;
-    --global-sidebar-toggle-width: 284px;
-    --global-cover-ul-width: 500px;
-
-    --global-writing-container-height: 18.75rem;
-    --global-sidenote-width: 400px;
-
-    --global-progress-width: 2px;
-    --global-scrollbar-width: 4px;
-    --global-scrollbar-border-radius: 4px;
-
-    --global-border: 1px solid;
-    --global-border-strong: 2px solid;
-    --global-border-semistrong: 3px solid;
-    --global-border-emphasis: 4px solid;
-    --global-border-weak: 1px dotted;
-    --global-border-width: 1px;
-    --global-border-strong-width: 2px;
-
-    --global-box-shadow-width: 0.625rem;
-
-    --global-link-decoration-width: 0.15em;
-
-    --global-focus-outline: var(--global-border-strong);
-    --global-focus-outline-width: var(--global-border-strong-width);
-    --global-focus-outline-color: var(--global-theme-color-8);
-    --global-focus-outline-offset: 2px;
-
-    --global-el-border-radius: 0.625rem;
-    --global-el-border-radius-small: 0.125rem;
-    --global-el-border-radius-none: 0;
-    --global-icon-border-radius: 0.3125rem;
-    --global-widget-border-radius: 0.3rem;
-    --global-avatar-border-radius: 50%;
-
-    --global-icon-size-large: 100px;
-    --global-icon-size-big: 80px;
-    --global-widget-size-normal: 1.5rem;
-    --global-widget-size-small: 1.3rem;
-
     --global-brightness-blur: 0.85;
     --global-opacity-none: 1;
     --global-opacity-strong: 0.8;
@@ -167,6 +135,25 @@
     --global-opacity-very-weak: 0.3;
 
     --global-backdrop-filter: blur(30px);
+
+    --global-border: 1px solid;
+    --global-border-strong: 2px solid;
+    --global-border-semistrong: 3px solid;
+    --global-border-emphasis: 4px solid;
+    --global-border-weak: 1px dotted;
+    --global-border-width: 1px;
+    --global-border-strong-width: 2px;
+    --global-border-semistrong-width: 3px;
+
+    --global-border-radius-big: 0.625rem;
+    --global-border-radius: 0.3125rem;
+    --global-border-radius-small: 0.125rem;
+    --global-border-radius-none: 0;
+    --global-border-radius-round: 50%;
+
+    --global-outline-offset: 2px;
+
+    --global-box-shadow-width: 0.625rem;
 
     --global-shadow: #000;
     --global-shadow-blur: color-mix(in srgb,
@@ -184,6 +171,41 @@
     --global-transition-duration-super-slow: 3s;
     --global-transition-duration-most-slow: 5s;
 
+    --global-transform-ratio-big: 1.3;
+    --global-transform-ratio-normal: 1.2;
+    --global-transform-ratio-small: 1.1;
+    --global-transform-ratio-very-small: 1.03;
+
+    --global-container-height: 18.75rem;
+    --global-container-width: 25rem;
+
+    --global-progress-width: 2px;
+    --global-scrollbar-width: 4px;
+    --global-scrollbar-border-radius: 4px;
+    --global-link-decoration-width: 0.15em;
+
+    --global-icon-size-large: 100px;
+    --global-icon-size-big: 80px;
+    --global-widget-size-normal: 1.5rem;
+    --global-widget-size-small: 1.3rem;
+
+    /* ============================================================
+     *  控件变量
+     * ============================================================ */
+
+    --global-el-border-radius: var(--global-border-radius-big);
+    --global-el-border-radius-small: var(--global-border-radius-small);
+    --global-el-border-radius-none: var(--global-border-radius-none);
+    --global-control-border-radius: var(--global-border-radius);
+    --global-icon-border-radius: var(--global-control-border-radius);
+    --global-widget-border-radius: var(--global-control-border-radius);
+    --global-avatar-border-radius: var(--global-border-radius-round);
+
+    --global-focus-outline: var(--global-border-strong);
+    --global-focus-outline-width: var(--global-border-strong-width);
+    --global-focus-outline-color: var(--global-theme-color-8);
+    --global-focus-outline-offset: var(--global-outline-offset);
+
     --global-transition-color:
         color var(--global-transition-duration),
         text-decoration-color var(--global-transition-duration),
@@ -195,6 +217,7 @@
     --global-transition-filter:
         opacity var(--global-transition-duration),
         filter var(--global-transition-duration);
+    --global-transition-font: font-weight var(--global-transition-duration);
     --global-transition-color-fast:
         color var(--global-transition-duration-fast),
         text-decoration-color var(--global-transition-duration-fast),
@@ -207,10 +230,37 @@
         opacity var(--global-transition-duration-fast),
         filter var(--global-transition-duration-fast);
 
-    --global-transform-ratio-big: 1.3;
-    --global-transform-ratio-normal: 1.2;
-    --global-transform-ratio-small: 1.1;
-    --global-transform-ratio-very-small: 1.03;
+    --global-scale-hover: var(--global-transform-ratio-small);
+    --global-scale-active: var(--global-transform-ratio-normal);
+    --global-scale-press: var(--global-transform-ratio-big);
+
+    --global-accent-level-1: var(--global-theme-color-blur-weak);
+    --global-accent-level-2: var(--theme-color);
+    --global-accent-level-3: var(--global-theme-color-7);
+    --global-accent-level-4: var(--global-theme-color-8);
+
+    --global-nav-bar-rest: transparent;
+    --global-nav-bar-hover: var(--global-accent-level-1);
+    --global-nav-bar-active: var(--global-accent-level-2);
+
+    --global-link-decoration-rest: var(--global-accent-level-2);
+    --global-link-decoration-hover: var(--global-accent-level-3);
+
+    --global-control-border-rest: var(--border-color);
+    --global-control-border-hover: var(--global-accent-level-1);
+    --global-control-border-active: var(--global-accent-level-2);
+    --global-control-border-press: var(--global-accent-level-3);
+
+    --global-surface-hollow-rest: transparent;
+    --global-surface-hollow-hover: var(--global-accent-level-1);
+    --global-surface-hollow-press: color-mix(in srgb, var(--theme-color) 55%, transparent);
+
+    --global-surface-solid-rest: var(--global-accent-level-2);
+    --global-surface-solid-hover: var(--global-accent-level-3);
+    --global-surface-solid-press: var(--global-accent-level-4);
+
+    --global-writing-container-height: var(--global-container-height);
+    --global-sidenote-width: var(--global-container-width);
 }
 
 @media screen and (max-width:768px) {
@@ -335,12 +385,18 @@ span.emoji {
     z-index: 999999
 }
 
-.search a {
+.search .results-panel a {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color)
 }
 
-.search .search-keyword,
-.search a:hover {
+.search .results-panel a:hover {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+.search .search-keyword {
     color: var(--theme-color)
 }
 
@@ -429,16 +485,19 @@ li input[type=checkbox] {
     color: inherit;
     font-size: 1rem;
     text-decoration: none;
-    transition: var(--global-transition-color)
+    transition: var(--global-transition-color), var(--global-transition-font);
+    border-bottom: var(--global-border-strong) var(--global-nav-bar-rest)
 }
 
-.app-nav a.active,
 .app-nav a:hover {
-    color: var(--theme-color)
+    border-bottom-color: var(--global-nav-bar-hover)
 }
 
 .app-nav a.active {
-    border-bottom: var(--global-border-strong) var(--theme-color)
+    color: var(--theme-color);
+    font-weight: var(--global-font-weight-semibold);
+    cursor: default;
+    border-bottom-color: var(--global-nav-bar-active)
 }
 
 .app-nav li {
@@ -532,7 +591,7 @@ main.hidden {
 }
 
 .anchor:hover {
-    text-decoration-color: var(--theme-color);
+    text-decoration-color: var(--global-link-decoration-hover);
 }
 
 .sidebar {
@@ -621,11 +680,16 @@ main.hidden {
 }
 
 .sidebar-toggle:hover .sidebar-toggle-button {
-    opacity: var(--global-opacity-weak);
+    transform: scale(var(--global-scale-hover));
+}
+
+.sidebar-toggle:active .sidebar-toggle-button {
+    transform: scale(var(--global-scale-active));
 }
 
 .sidebar-toggle-button {
-    transition: var(--global-transition-filter)
+    width: max-content;
+    transition: var(--global-transition-transform)
 }
 
 .sidebar-toggle span {
@@ -1006,7 +1070,7 @@ section.cover .cover-main>p:last-child a {
     margin: .5rem 1rem;
     padding: .75em 2rem;
     text-decoration: none;
-    transition: var(--global-transition-color-fast), var(--global-transition-filter-fast)
+    transition: var(--global-transition-color)
 }
 
 section.cover .cover-main>p:last-child a:last-child {
@@ -1015,12 +1079,20 @@ section.cover .cover-main>p:last-child a:last-child {
 }
 
 section.cover .cover-main>p:last-child a:last-child:hover {
-    color: inherit;
-    opacity: var(--global-opacity-strong);
+    background-color: var(--global-surface-solid-hover);
+    border-color: var(--global-surface-solid-hover);
+    color: var(--cover-link-color);
+    opacity: var(--global-opacity-none);
 }
 
-section.cover .cover-main>p:last-child a:hover {
-    color: inherit
+section.cover .cover-main>p:last-child a:last-child:active {
+    background-color: var(--global-surface-solid-press);
+    border-color: var(--global-surface-solid-press);
+}
+
+section.cover .cover-main>p:last-child a:not(:last-child):hover {
+    background-color: var(--global-surface-hollow-hover);
+    color: var(--theme-color);
 }
 
 section.cover blockquote>p>a {
@@ -1046,22 +1118,23 @@ body {
     font-size: 0.875rem;
     font-weight: var(--global-font-weight-normal);
     overflow: hidden;
-    text-decoration: underline;
-    text-decoration-color: transparent;
+    border-left: var(--global-border-strong) var(--global-nav-bar-rest);
+    margin-left: calc(-1 * var(--global-border-strong-width));
+    text-decoration: none;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: text-decoration-color var(--global-transition-duration), outline-color var(--global-transition-duration);
+    transition: var(--global-transition-color), var(--global-transition-font);
 }
 
 .sidebar ul li a:hover {
-    text-decoration-color: var(--theme-color);
+    border-left-color: var(--global-nav-bar-hover);
 }
 
 .sidebar ul li.active>a {
     color: var(--theme-color);
     font-weight: var(--global-font-weight-semibold);
-    border-left: var(--global-border-strong);
-    margin-left: calc(-1 * var(--global-border-strong-width));
+    border-left-color: var(--global-nav-bar-active);
+    cursor: default;
 }
 
 .app-sub-sidebar li:before {
@@ -1285,6 +1358,14 @@ body {
     cursor: pointer;
     position: relative;
     padding-left: 1.5em;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+    transition: var(--global-transition-color);
+}
+
+.markdown-section summary:hover {
+    text-decoration-color: var(--global-link-decoration-hover);
 }
 
 .markdown-section summary::marker {
@@ -1320,13 +1401,13 @@ body {
         a {
             color: inherit;
             font-weight: inherit;
-            text-decoration-color: var(--theme-color);
+            text-decoration-color: var(--global-link-decoration-rest);
             text-decoration-thickness: var(--global-link-decoration-width);
             transition: var(--global-transition-color)
         }
 
         a:hover {
-            text-decoration-color: var(--global-theme-color-7);
+            text-decoration-color: var(--global-link-decoration-hover);
         }
 
         svg {

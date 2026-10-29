@@ -15,6 +15,8 @@ function plugin(hook, vm) {
 
             if (a.dataset.linkIcon) return
 
+            if (a.closest('.breadcrumb')) return
+
             if (curLink === documentLink) return
 
             let isInternal = curURL.origin === location.origin

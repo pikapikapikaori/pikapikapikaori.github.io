@@ -58,9 +58,11 @@
 | `--global-transition-duration-super-slow` | 3s |
 | `--global-transition-duration-most-slow` | 5s |
 
-由其组合出：`--global-transition-color`（color、text-decoration-color、border-color、outline-color、box-shadow、background-color）、`--global-transition-transform`、`--global-transition-filter`，以及 `-color-fast`、`-filter-fast`、`-transform-slow` 三个变体。
+由其组合出：`--global-transition-color`（color、text-decoration-color、border-color、outline-color、box-shadow、background-color）、`--global-transition-transform`、`--global-transition-filter`、`--global-transition-font`（font-weight），以及 `-color-fast`、`-filter-fast`、`-transform-slow` 三个变体。
 
 全部 hover 反馈使用 500ms 这一组；更短与更长的档位留给换主题、装饰动画等其它动效。
+
+`font-weight` 以数值插值，但静态字体只携带少数几个字重，浏览器在插值过程中会就近取档，因此字重表现为"软化后的跳变"而不是连续变化。
 
 #### 圆角
 
@@ -77,23 +79,77 @@
 
 标准保留三档：大面使用 `--global-el-border-radius`（0.625rem），控件一律使用 `--global-control-border-radius`（0.3125rem），直角使用 `0`。头像的圆角属于形状，不计入档位。
 
-### 示例：元素归属
+#### 交互变量
 
-| 元素 | 静止 | hover（1） | 选中（2） | 按下（3） |
-| --- | --- | --- | --- | --- |
-| navbar 项目 | 2px 透明底边 | 2px 45% 底边 | 2px 实色底边，文字 accent + 加粗 | 无 |
-| 侧栏项目 | 2px 透明左边 | 2px 45% 左边（1px 引导线内为 3px） | 2px 实色左边（引导线内 3px），文字 accent + 加粗 | 无 |
-| docsify tabs | 3px 透明底边 | 3px 45% 底边 | 3px 实色底边，文字 accent + 加粗 | 无 |
-| TOC 切换器 | 3px 透明底边 | 3px 45% 底边 | 3px 实色底边，文字 accent + 加粗 | 无 |
-| 行内文字链接（正文、面包屑、站名、标题锚点、`summary`、分页标题、搜索与评论链接） | 正文为实色下划线，其余透明 | `-7` 下划线 | — | — |
-| 幽灵图标（widgets、两处分页箭头、回顶部、阅读进度环、评论 like/edit/reply、about-me、文字内 svg） | 1 | 1.1 | — | 1.2 |
-| 输入框（搜索、分页输入框、gitalk 文本框） | 中性描边 | 45% 描边 | `:focus` 实色描边 | — |
-| 选择类色卡 | 中性描边，1 | 45% 描边，1.1 | 实色描边，1.2 | `-7` 描边，1.3 |
-| 表面（空心）按钮（复制代码、评论内的文字按钮） | 透明 | 45% 表面 | — | 55% 表面 |
-| 表面（实心）按钮（gitalk 登录与发布、cover 主按钮） | accent 底色 | `-7` 底色 | — | `-8` 底色 |
+阶梯的颜色分两层：改主题色只改 `--theme-color`，改阶梯只改第一层，改某条通道的取色只改第二层。全部定义在 `base.css` 的「控件变量」一节。
 
-条宽随容器而定：accent 条比容器自身的基准线宽 2px。navbar 2px、侧栏 2px（在 TOC 侧栏的 1px 引导线内变为 3px）、docsify tabs 3px（其基准线 1px）、TOC 切换器 3px（其基准线 1px）。hover 与选中同宽，只差颜色。
+**第一层：阶梯**
 
-### 示例：cursor
+| 变量 | 值 | 含义 |
+| --- | --- | --- |
+| `--global-accent-level-1` | `var(--global-theme-color-blur-weak)`（accent 45%） | 第 1 级：hover |
+| `--global-accent-level-2` | `var(--theme-color)`（accent 实色） | 第 2 级：选中 / 聚焦 |
+| `--global-accent-level-3` | `var(--global-theme-color-7)` | 第 3 级：按下 |
+| `--global-accent-level-4` | `var(--global-theme-color-8)` | 第 4 级：只有实心按钮的按下会用到（起点已在第 2 级） |
+| `--global-scale-hover` | `var(--global-transform-ratio-small)`（1.1） | 第 1 级缩放 |
+| `--global-scale-active` | `var(--global-transform-ratio-normal)`（1.2） | 第 2 级缩放 |
+| `--global-scale-press` | `var(--global-transform-ratio-big)`（1.3） | 第 3 级缩放 |
 
-navbar、侧栏、docsify tabs、TOC 切换器的选中项使用 `cursor: default`，因为点击它们没有效果；其余可交互元素保持 `cursor: pointer`。
+**第二层：通道**
+
+| 变量 | 值 |
+| --- | --- |
+| `--global-nav-bar-rest` | `transparent` |
+| `--global-nav-bar-hover` | `var(--global-accent-level-1)` |
+| `--global-nav-bar-active` | `var(--global-accent-level-2)` |
+| `--global-link-decoration-rest` | `var(--global-accent-level-2)` |
+| `--global-link-decoration-hover` | `var(--global-accent-level-3)` |
+| `--global-control-border-rest` | `var(--border-color)` |
+| `--global-control-border-hover` | `var(--global-accent-level-1)` |
+| `--global-control-border-active` | `var(--global-accent-level-2)` |
+| `--global-control-border-press` | `var(--global-accent-level-3)` |
+| `--global-surface-hollow-rest` | `transparent` |
+| `--global-surface-hollow-hover` | `var(--global-accent-level-1)` |
+| `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 55%, transparent)` |
+| `--global-surface-solid-rest` | `var(--global-accent-level-2)` |
+| `--global-surface-solid-hover` | `var(--global-accent-level-3)` |
+| `--global-surface-solid-press` | `var(--global-accent-level-4)` |
+
+### 组件类型
+
+按交互机制归类，同一类型的元素共用同一套取值；表里的变量名对应「交互变量」一节。
+
+| 类型 | 覆盖元素 | 静止 | hover（1） | 选中（2） | 按下（3） |
+| --- | --- | --- | --- | --- | --- |
+| **导航链接** | 顶栏 navbar、侧栏、docsify tabs、TOC 切换器、面包屑 | `--global-nav-bar-rest` | `--global-nav-bar-hover` | `--global-nav-bar-active` 条 + accent 文字 + 加粗 | 无 |
+| **行内文字链接 1** | 正文内联链接（`p` / `li` / `blockquote` / `table` 内的 `a`） | `--global-link-decoration-rest` 下划线 | `--global-link-decoration-hover` 下划线 | — | — |
+| **行内文字链接 2** | 站名、标题锚点、`summary`、分页标题、搜索结果、评论链接、gitalk 提示文字 | `transparent` 下划线 | `--global-link-decoration-hover` 下划线 | — | — |
+| **幽灵图标** | widgets 九个图标、侧栏开关、回顶部、阅读进度环、评论 like/edit/reply、about-me 图标 | 1 | `--global-scale-hover` | — | `--global-scale-active` |
+| **输入框** | 搜索框、分页输入框、gitalk 文本框 | `--global-control-border-rest` | `--global-control-border-hover` | `--global-control-border-active`（`:focus`） | — |
+| **选择类色卡** | 主题 / 颜色 / 字号预设 | `--global-control-border-rest`，1 | `--global-control-border-hover`，`--global-scale-hover` | `--global-control-border-active`，`--global-scale-active` | 未选中：按选中态取值；已选中：`--global-control-border-press`，`--global-scale-press` |
+| **表面（空心）按钮** | toc 分页箭头、看大图左右箭头、评论内的文字按钮 | `--global-surface-hollow-rest` | `--global-surface-hollow-hover` | — | `--global-surface-hollow-press` |
+| **表面（实心）按钮** | gitalk 登录与发布、cover 主按钮、复制代码 | `--global-surface-solid-rest` | `--global-surface-solid-hover` | — | `--global-surface-solid-press` |
+
+面包屑的当前页（`.breadcrumb li.active`）不是链接，但语义上属于选中态，取第 2 级：`--global-nav-bar-active` 条 + accent 文字 + 加粗。
+
+### 引导线
+
+导航链接的 accent 条永远比所在容器的引导线宽 2px，因此有引导线的地方是 3px、没有的地方是 2px，视觉上"粗出的量"保持一致；hover 与选中同宽，只差颜色。
+
+| 容器 | 引导线 | 位置 | 条宽 |
+| --- | --- | --- | --- |
+| 顶栏 navbar | 无 | 底边 | 2px |
+| 侧栏 | 无 | 左边 | 2px |
+| 侧栏（目录模式，`.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul` 这一层） | 1px | 左边 | 3px |
+| docsify tabs | 1px | 底边 | 3px |
+| TOC 切换器 | 1px | 底边 | 3px |
+| 面包屑 | 无 | 底边 | 2px |
+
+两处刻意保留的细节：
+
+- 面包屑的字号是 `0.9rem`（比顶栏小一级），当前页被限制为单行、超宽时省略号，因为 inline 边框换行会在每一行重复绘制；完整标题就在下方 `h1`。
+- 复制代码常态显示（不依赖 hover），字号与"复制成功/失败"提示一致，提示覆盖按钮文字显示。
+
+### cursor
+
+navbar、侧栏、docsify tabs、TOC 切换器的选中项使用 `cursor: default`，因为点击它们没有效果；面包屑的当前页不是链接，无需 cursor 规则；其余可交互元素保持 `cursor: pointer`。

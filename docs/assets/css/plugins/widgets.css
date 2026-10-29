@@ -49,8 +49,11 @@
 }
 
 .page-right-tools-widgets-span:hover {
-    transform: scale(var(--global-transform-ratio-normal));
-    background-color: var(--global-theme-color-blur);
+    transform: scale(var(--global-scale-hover));
+}
+
+.page-right-tools-widgets-span:active {
+    transform: scale(var(--global-scale-active));
 }
 
 .page-right-tools-widgets-span>svg {
@@ -102,10 +105,24 @@
             var(--dark-color) 50% 100%);
 }
 
-.theme-picker-preset-color-btn-div:hover,
+.theme-picker-preset-color-btn-div:hover {
+    border-color: var(--global-control-border-hover);
+    transform: scale(var(--global-scale-hover));
+}
+
 .theme-picker-preset-color-btn-div.is-active {
-    border-color: var(--theme-color);
-    transform: scale(var(--global-transform-ratio-small));
+    border-color: var(--global-control-border-active);
+    transform: scale(var(--global-scale-active));
+}
+
+.theme-picker-preset-color-btn-div:not(.is-active):active {
+    border-color: var(--global-control-border-active);
+    transform: scale(var(--global-scale-active));
+}
+
+.theme-picker-preset-color-btn-div.is-active:active {
+    border-color: var(--global-control-border-press);
+    transform: scale(var(--global-scale-press));
 }
 
 .theme-picker-pattern-layer {
@@ -197,10 +214,24 @@
     }
 }
 
-.color-picker-preset-color-btn-div:hover,
+.color-picker-preset-color-btn-div:hover {
+    border-color: var(--global-control-border-hover);
+    transform: scale(var(--global-scale-hover));
+}
+
 .color-picker-preset-color-btn-div.is-active {
-    border-color: var(--theme-color);
-    transform: scale(var(--global-transform-ratio-small));
+    border-color: var(--global-control-border-active);
+    transform: scale(var(--global-scale-active));
+}
+
+.color-picker-preset-color-btn-div:not(.is-active):active {
+    border-color: var(--global-control-border-active);
+    transform: scale(var(--global-scale-active));
+}
+
+.color-picker-preset-color-btn-div.is-active:active {
+    border-color: var(--global-control-border-press);
+    transform: scale(var(--global-scale-press));
 }
 
 /* 字号切换 */
@@ -225,11 +256,24 @@
     transition: var(--global-transition-color), var(--global-transition-transform);
 }
 
-.font-picker-preset-size-btn-div:hover,
+.font-picker-preset-size-btn-div:hover {
+    border-color: var(--global-control-border-hover);
+    transform: scale(var(--global-scale-hover));
+}
+
 .font-picker-preset-size-btn-div.is-active {
-    background-color: var(--global-theme-color-blur);
-    border-color: var(--theme-color);
-    transform: scale(var(--global-transform-ratio-small));
+    border-color: var(--global-control-border-active);
+    transform: scale(var(--global-scale-active));
+}
+
+.font-picker-preset-size-btn-div:not(.is-active):active {
+    border-color: var(--global-control-border-active);
+    transform: scale(var(--global-scale-active));
+}
+
+.font-picker-preset-size-btn-div.is-active:active {
+    border-color: var(--global-control-border-press);
+    transform: scale(var(--global-scale-press));
 }
 
 /* Live 2d 小人 */

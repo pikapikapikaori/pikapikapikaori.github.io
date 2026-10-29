@@ -58,9 +58,11 @@ Six durations are defined:
 | `--global-transition-duration-super-slow` | 3s |
 | `--global-transition-duration-most-slow` | 5s |
 
-Composed from them: `--global-transition-color` (color, text-decoration-color, border-color, outline-color, box-shadow, background-color), `--global-transition-transform`, `--global-transition-filter`, plus the `-color-fast`, `-filter-fast` and `-transform-slow` variants.
+Composed from them: `--global-transition-color` (color, text-decoration-color, border-color, outline-color, box-shadow, background-color), `--global-transition-transform`, `--global-transition-filter`, `--global-transition-font` (font-weight), plus the `-color-fast`, `-filter-fast` and `-transform-slow` variants.
 
 All hover feedback uses the 500ms group; the shorter and longer groups are reserved for other motion such as theme switching and decorative animation.
+
+`font-weight` interpolates as a number, but a static font only carries a few weights, so the browser picks the nearest available face while interpolating. The weight therefore changes as a softened step rather than a continuous morph.
 
 #### Border radius
 
@@ -77,23 +79,77 @@ Current tokens:
 
 The standard keeps three of them: large surfaces use `--global-el-border-radius` (0.625rem), every control uses `--global-control-border-radius` (0.3125rem), and square corners use `0`. The avatar radius is a shape rather than a step of the scale.
 
-### Example: Element Ownership
+#### Interaction Tokens
 
-| Element | Rest | Hover (1) | Selected (2) | Press (3) |
-| --- | --- | --- | --- | --- |
-| navbar item | 2px transparent bottom edge | 2px 45% bottom edge | 2px solid bottom edge, accent + bold text | none |
-| sidebar item | 2px transparent left edge | 2px 45% left edge (3px inside the 1px guide line) | 2px solid left edge (3px inside the guide line), accent + bold text | none |
-| docsify tabs | 3px transparent bottom edge | 3px 45% bottom edge | 3px solid bottom edge, accent + bold text | none |
-| TOC switcher | 3px transparent bottom edge | 3px 45% bottom edge | 3px solid bottom edge, accent + bold text | none |
-| Inline text link (article body, breadcrumb, site name, heading anchor, `summary`, pagination title, search and comment links) | solid underline in article body, transparent elsewhere | `-7` underline | — | — |
-| Ghost icon (widgets, both pagers, back to top, reading progress, comment like/edit/reply, about-me, svg inside text) | 1 | 1.1 | — | 1.2 |
-| Input (search, pagination input, gitalk textarea) | neutral border | 45% border | solid border on `:focus` | — |
-| Color swatch | neutral border, 1 | 45% border, 1.1 | solid border, 1.2 | `-7` border, 1.3 |
-| Hollow surface button (copy code, text buttons in comments) | transparent | 45% surface | — | 55% surface |
-| Solid surface button (gitalk login and publish, cover primary button) | accent fill | `-7` fill | — | `-8` fill |
+The ladder's colours are defined in two layers: changing the theme colour means changing `--theme-color` only, changing the ladder means changing the first layer only, and re-colouring one channel means changing the second layer only. All of them live in the "control variables" block of `base.css`.
 
-Bar widths follow the container: a bar is two pixels wider than the container's own baseline line. navbar 2px, sidebar 2px (the same 2px becomes 3px inside the 1px guide line of the TOC sidebar), docsify tabs 3px (above its 1px baseline), TOC switcher 3px (above its 1px baseline). Hover and selected share the same width and differ only in colour.
+**Layer 1: the ladder**
 
-### Example: Cursor
+| Token | Value | Meaning |
+| --- | --- | --- |
+| `--global-accent-level-1` | `var(--global-theme-color-blur-weak)` (accent 45%) | level 1: hover |
+| `--global-accent-level-2` | `var(--theme-color)` (accent, solid) | level 2: selected / focus |
+| `--global-accent-level-3` | `var(--global-theme-color-7)` | level 3: press |
+| `--global-accent-level-4` | `var(--global-theme-color-8)` | level 4: only used by the press of a solid button, whose rest state already sits on level 2 |
+| `--global-scale-hover` | `var(--global-transform-ratio-small)` (1.1) | level 1 scale |
+| `--global-scale-active` | `var(--global-transform-ratio-normal)` (1.2) | level 2 scale |
+| `--global-scale-press` | `var(--global-transform-ratio-big)` (1.3) | level 3 scale |
 
-Selected items of navbar, sidebar, docsify tabs and TOC switcher use `cursor: default`, because clicking them does nothing. Every other interactive element keeps `cursor: pointer`.
+**Layer 2: the channels**
+
+| Token | Value |
+| --- | --- |
+| `--global-nav-bar-rest` | `transparent` |
+| `--global-nav-bar-hover` | `var(--global-accent-level-1)` |
+| `--global-nav-bar-active` | `var(--global-accent-level-2)` |
+| `--global-link-decoration-rest` | `var(--global-accent-level-2)` |
+| `--global-link-decoration-hover` | `var(--global-accent-level-3)` |
+| `--global-control-border-rest` | `var(--border-color)` |
+| `--global-control-border-hover` | `var(--global-accent-level-1)` |
+| `--global-control-border-active` | `var(--global-accent-level-2)` |
+| `--global-control-border-press` | `var(--global-accent-level-3)` |
+| `--global-surface-hollow-rest` | `transparent` |
+| `--global-surface-hollow-hover` | `var(--global-accent-level-1)` |
+| `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 55%, transparent)` |
+| `--global-surface-solid-rest` | `var(--global-accent-level-2)` |
+| `--global-surface-solid-hover` | `var(--global-accent-level-3)` |
+| `--global-surface-solid-press` | `var(--global-accent-level-4)` |
+
+### Component Types
+
+Elements are grouped by interaction mechanism; every element of a type shares the same values. The token names refer to "Interaction Tokens".
+
+| Type | Covered elements | Rest | Hover (1) | Selected (2) | Press (3) |
+| --- | --- | --- | --- | --- | --- |
+| **Navigation link** | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `--global-nav-bar-rest` | `--global-nav-bar-hover` | `--global-nav-bar-active` bar + accent + bold text | none |
+| **Inline text link 1** | links inside the article body (`p` / `li` / `blockquote` / `table`) | `--global-link-decoration-rest` underline | `--global-link-decoration-hover` underline | — | — |
+| **Inline text link 2** | site name, heading anchor, `summary`, pagination title, search results, comment links, gitalk tip | `transparent` underline | `--global-link-decoration-hover` underline | — | — |
+| **Ghost icon** | the nine widgets, sidebar toggle, back to top, reading progress, comment like/edit/reply, about-me icons | 1 | `--global-scale-hover` | — | `--global-scale-active` |
+| **Input** | search box, pagination input, gitalk textarea | `--global-control-border-rest` | `--global-control-border-hover` | `--global-control-border-active` (`:focus`) | — |
+| **Selection swatch** | theme / colour / font presets | `--global-control-border-rest`, 1 | `--global-control-border-hover`, `--global-scale-hover` | `--global-control-border-active`, `--global-scale-active` | unselected: the selected values; selected: `--global-control-border-press`, `--global-scale-press` |
+| **Hollow surface button** | toc pagination arrows, full-image arrows, text buttons inside comments | `--global-surface-hollow-rest` | `--global-surface-hollow-hover` | — | `--global-surface-hollow-press` |
+| **Solid surface button** | gitalk login and publish, cover primary button, copy code | `--global-surface-solid-rest` | `--global-surface-solid-hover` | — | `--global-surface-solid-press` |
+
+The current breadcrumb page (`.breadcrumb li.active`) is not a link, but it is selected in meaning and takes level 2: a `--global-nav-bar-active` bar plus accent and bold text.
+
+### Guide Line
+
+A navigation bar is always 2px wider than the guide line of its container, so it is 3px where a guide line exists and 2px where none does; the extra weight stays the same in both cases. Hover and selected share the width and differ only in colour.
+
+| Container | Guide line | Edge | Bar width |
+| --- | --- | --- | --- |
+| top navbar | none | bottom | 2px |
+| sidebar | none | left | 2px |
+| sidebar (TOC mode, the level selected by `.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul`) | 1px | left | 3px |
+| docsify tabs | 1px | bottom | 3px |
+| TOC switcher | 1px | bottom | 3px |
+| breadcrumb | none | bottom | 2px |
+
+Two details kept on purpose:
+
+- The breadcrumb is set at `0.9rem`, one step below the navbar, and its current page is kept on a single line with an ellipsis when it is wider than the container, because an inline border is drawn again on every line it wraps onto; the full title sits in the `h1` right below.
+- Copy code is always visible (it does not depend on hover), uses the same font size as its success and failure message, and reports them by covering the button label.
+
+### Cursor
+
+Selected items of navbar, sidebar, docsify tabs and TOC switcher use `cursor: default`, because clicking them does nothing. The current breadcrumb is not a link, so it needs no cursor rule. Every other interactive element keeps `cursor: pointer`.

@@ -54,11 +54,14 @@ section.cover img.ignore-view-full-image-img {
 
 .sidebar>h1.app-name a {
     color: var(--theme-color);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color);
 }
 
 .sidebar>h1.app-name a:hover {
-    color: var(--global-theme-color-7);
+    text-decoration-color: var(--global-link-decoration-hover);
 }
 
 .sidebar-nav>ul>li {
@@ -78,22 +81,71 @@ section.cover img.ignore-view-full-image-img {
 
 /* --- Docsify Copy Code --- */
 pre .docsify-copy-code-button {
-    border-radius: var(--global-icon-border-radius);
-    transition: var(--global-transition-filter);
-}
-
-pre .docsify-copy-code-button span {
-    border-radius: var(--global-icon-border-radius);
-}
-
-/* --- Docsify Tabs --- */
-.docsify-tabs__tab:not(.docsify-tabs__tab--active) {
-    cursor: pointer;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.825em;
+    opacity: 1;
+    background-color: var(--global-surface-solid-rest);
+    border-radius: var(--global-control-border-radius);
     transition: var(--global-transition-color);
 }
 
-.docsify-tabs__tab:not(.docsify-tabs__tab--active):hover {
+pre .docsify-copy-code-button span.label {
+    background: transparent;
+    border-radius: var(--global-control-border-radius);
+    transition: none;
+}
+
+pre .docsify-copy-code-button:hover {
+    background-color: var(--global-surface-solid-hover);
+}
+
+pre .docsify-copy-code-button:active {
+    background-color: var(--global-surface-solid-press);
+}
+
+pre .docsify-copy-code-button .error,
+pre .docsify-copy-code-button .success {
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: inherit;
+    background: inherit;
+    border-radius: inherit;
+    opacity: 0;
+    transform: none;
+    z-index: 1;
+    transition: var(--global-transition-filter);
+}
+
+pre .docsify-copy-code-button.error .error,
+pre .docsify-copy-code-button.success .success {
+    right: 0;
+    opacity: 1;
+    transform: none;
+}
+
+/* --- Docsify Tabs --- */
+.docsify-tabs .docsify-tabs__tab {
+    border-bottom: var(--global-border-semistrong) var(--global-nav-bar-rest);
+    margin-bottom: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transition: var(--global-transition-color), var(--global-transition-font);
+}
+
+.docsify-tabs .docsify-tabs__tab:not(.docsify-tabs__tab--active):hover {
+    border-bottom-color: var(--global-nav-bar-hover);
+}
+
+.docsify-tabs .docsify-tabs__tab--active {
+    border-bottom-color: var(--global-nav-bar-active);
+    box-shadow: none;
     color: var(--theme-color);
+    font-weight: var(--global-font-weight-semibold);
+    cursor: default;
 }
 
 .docsify-tabs--material>.docsify-tabs__content {
@@ -108,7 +160,7 @@ pre .docsify-copy-code-button span {
 }
 
 .docsify-pagination-container .pagination-item a:hover .pagination-item-title {
-    text-decoration-color: var(--theme-color);
+    text-decoration-color: var(--global-link-decoration-hover);
 }
 
 .markdown-section .pagination-item:not(:last-child) a .pagination-item-label,

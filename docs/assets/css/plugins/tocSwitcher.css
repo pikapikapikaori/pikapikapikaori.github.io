@@ -11,6 +11,7 @@
 
 .switch-toc-wrap-div button {
     border: none;
+    border-bottom: var(--global-border-semistrong) var(--global-nav-bar-rest);
     background: none;
     font-family: var(--global-sidebar-title-font);
     color: inherit;
@@ -24,20 +25,22 @@
     align-items: center;
     flex: 1;
     margin-bottom: calc(-1 * var(--global-border-width));
+    transition: var(--global-transition-color), var(--global-transition-font);
 }
 
 .switch-toc-wrap-div button.active-btn {
-    border-bottom: var(--global-border-semistrong) var(--theme-color);
+    border-bottom-color: var(--global-nav-bar-active);
+    color: var(--theme-color);
+    font-weight: var(--global-font-weight-semibold);
     cursor: default;
 }
 
 .switch-toc-wrap-div button:not(.active-btn) {
     cursor: pointer;
-    transition: var(--global-transition-color);
 }
 
 .switch-toc-wrap-div button:not(.active-btn):hover {
-    color: var(--theme-color);
+    border-bottom-color: var(--global-nav-bar-hover);
 }
 
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav li.collapse .app-sub-sidebar {
@@ -76,4 +79,9 @@
 
 .sidebar:has(.search .results-panel.show) .switch-toc-wrap-div {
     display: none;
+}
+
+.sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul :is(li>a:hover, li.active>a) {
+    border-left-width: var(--global-border-semistrong-width);
+    margin-left: calc(-1 * var(--global-border-semistrong-width));
 }

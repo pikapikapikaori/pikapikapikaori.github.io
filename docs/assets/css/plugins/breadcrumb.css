@@ -19,4 +19,34 @@
 
 .breadcrumb li.active::after {
     content: "";
+    display: none;
+}
+
+.markdown-section .breadcrumb li {
+    border-bottom: var(--global-border-strong) var(--global-nav-bar-rest);
+    transition: var(--global-transition-color), var(--global-transition-font);
+}
+
+.markdown-section .breadcrumb li.active {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+    position: relative;
+    top: 1px;
+    border-bottom-color: var(--global-nav-bar-active);
+    color: var(--theme-color);
+    font-weight: var(--global-font-weight-semibold);
+}
+
+.markdown-section .breadcrumb a {
+    text-decoration: none;
+    border-bottom: var(--global-border-strong) var(--global-nav-bar-rest);
+    transition: var(--global-transition-color);
+}
+
+.markdown-section .breadcrumb a:hover {
+    border-bottom-color: var(--global-nav-bar-hover);
 }

@@ -23,10 +23,14 @@
     border: 0;
 }
 
-.search .input-wrap:has(input[type=search]:focus),
 .search .input-wrap:has(input[type=search]:hover) {
-    box-shadow: 0 0 var(--global-box-shadow-width) var(--theme-color);
-    border-block: var(--global-border) var(--theme-color);
+    box-shadow: none;
+    border-block-color: var(--global-control-border-hover);
+}
+
+.search .input-wrap:has(input[type=search]:focus) {
+    box-shadow: none;
+    border-block: var(--global-border) var(--global-control-border-active);
 }
 
 .search .input-wrap input:focus,

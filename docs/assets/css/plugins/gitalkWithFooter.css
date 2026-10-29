@@ -37,6 +37,14 @@
 
 #gitalk-container .gt-header-controls-tip {
     color: var(--theme-color);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+    transition: var(--global-transition-color);
+}
+
+#gitalk-container .gt-header-controls-tip:hover {
+    text-decoration-color: var(--global-link-decoration-hover);
 }
 
 #gitalk-container .gt-header {
@@ -49,8 +57,8 @@
 }
 
 #gitalk-container .gt-btn-login {
-    background-color: var(--theme-color);
-    border: var(--global-border) var(--theme-color);
+    background-color: var(--global-surface-solid-rest);
+    border: var(--global-border) var(--global-surface-solid-rest);
 }
 
 #gitalk-container .gt-btn-preview {
@@ -59,17 +67,35 @@
 }
 
 #gitalk-container .gt-btn-public {
-    background-color: var(--theme-color);
+    background-color: var(--global-surface-solid-rest);
+    border-color: var(--global-surface-solid-rest);
+}
+
+#gitalk-container .gt-container .gt-btn-preview:hover {
+    background-color: var(--global-surface-hollow-hover);
     border-color: var(--theme-color);
+    color: var(--theme-color);
+}
+
+#gitalk-container .gt-container .gt-btn-preview:active {
+    background-color: var(--global-surface-hollow-press);
+}
+
+#gitalk-container .gt-container .gt-btn-login:hover,
+#gitalk-container .gt-container .gt-btn-public:hover {
+    background-color: var(--global-surface-solid-hover);
+    border-color: var(--global-surface-solid-hover);
+}
+
+#gitalk-container .gt-container .gt-btn-login:active,
+#gitalk-container .gt-container .gt-btn-public:active {
+    background-color: var(--global-surface-solid-press);
+    border-color: var(--global-surface-solid-press);
 }
 
 #gitalk-container .gt-container .gt-comment-username {
     color: var(--heading-color);
     font-weight: var(--global-font-weight-semibold);
-}
-
-#gitalk-container .gt-container .gt-comment-username:hover {
-    text-decoration: none;
 }
 
 #gitalk-container .gt-container .gt-ico-github .gt-svg svg {
@@ -95,21 +121,30 @@
 
 #gitalk-container .gt-container a {
     color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color);
 }
 
 #gitalk-container .gt-user-name {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
     transition: var(--global-transition-color);
+}
+
+#gitalk-container .gt-popup .gt-action {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
 }
 
 #gitalk-container .gt-container a:hover,
 #gitalk-container .gt-user-name:hover,
 #gitalk-container .gt-popup .gt-action:hover {
-    color: var(--theme-color);
-}
-
-#gitalk-container .gt-popup .gt-action {
-    color: inherit;
+    text-decoration-color: var(--global-link-decoration-hover);
 }
 
 #gitalk-container .gt-container .gt-comment-content {
@@ -163,6 +198,7 @@
 }
 
 #gitalk-container .gt-container .gt-btn {
+    border-radius: var(--global-control-border-radius);
     outline: var(--global-focus-outline) transparent;
     outline-offset: var(--global-focus-outline-offset);
     transition: var(--global-transition-color)
@@ -200,8 +236,15 @@
     transition: var(--global-transition-color);
 }
 
-#gitalk-container .gt-container .gt-header-textarea:hover,
+#gitalk-container .gt-container .gt-header-textarea {
+    border-color: var(--global-control-border-rest);
+}
+
+#gitalk-container .gt-container .gt-header-textarea:hover {
+    border-color: var(--global-control-border-hover);
+}
+
 #gitalk-container .gt-container .gt-header-textarea:focus {
-    border-color: var(--theme-color);
+    border-color: var(--global-control-border-active);
 }
 

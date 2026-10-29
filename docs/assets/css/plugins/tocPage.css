@@ -118,11 +118,11 @@
 }
 
 .toc-paginator-input input:hover {
-    border-color: var(--theme-color);
+    border-color: var(--global-control-border-hover);
 }
 
 .toc-paginator-input input:focus {
-    border-color: var(--theme-color);
+    border-color: var(--global-control-border-active);
 }
 
 .toc-paginator-input-box {
@@ -142,12 +142,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--global-widget-border-radius);
+    border-radius: var(--global-control-border-radius);
     transition: var(--global-transition-color);
 }
 
 .toc-paginator-button-span:hover {
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-surface-hollow-hover);
+}
+
+.toc-paginator-button-div:active .toc-paginator-button-span,
+.toc-paginator-button-span:active {
+    background-color: var(--global-surface-hollow-press);
 }
 
 body.has-toc .sidebar-toggle {

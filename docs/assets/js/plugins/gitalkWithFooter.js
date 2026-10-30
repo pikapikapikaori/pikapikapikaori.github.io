@@ -43,6 +43,10 @@ function plugin(hook, vm) {
     let gitalkObserver = null
     let gitalkScheduled = false
     let gitalkHadPopup = false
+    let lastInputWasKeyboard = false
+
+    document.addEventListener('keydown', function () { lastInputWasKeyboard = true }, true)
+    document.addEventListener('pointerdown', function () { lastInputWasKeyboard = false }, true)
 
     function enhanceGitalk(container) {
         const inner = container.querySelector('.gt-user-inner')
@@ -50,6 +54,10 @@ function plugin(hook, vm) {
 
         for (const action of container.querySelectorAll('.gt-popup .gt-action')) {
             makeButtonLike(action)
+        }
+
+        for (const icon of container.querySelectorAll('.gt-comment-like, .gt-comment-reply, .gt-comment-edit')) {
+            makeButtonLike(icon)
         }
 
         for (const copyright of container.querySelectorAll('.gt-popup .gt-copyright')) {
@@ -65,7 +73,7 @@ function plugin(hook, vm) {
         }
 
         const popupOpen = !!popup
-        if (popupOpen && !gitalkHadPopup && document.activeElement === document.body) {
+        if (popupOpen && !gitalkHadPopup && lastInputWasKeyboard && document.activeElement === document.body) {
             const fresh = container.querySelector('.gt-user-inner')
             if (fresh) fresh.focus()
         }

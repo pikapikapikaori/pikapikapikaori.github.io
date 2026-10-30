@@ -108,7 +108,6 @@ class Live2dLoader {
         if (!config.hitArea) return
         const area = document.createElement('div')
         area.id = 'live2d-hit-area'
-        area.setAttribute('aria-hidden', 'true')
         Object.assign(area.style, {
             position: 'fixed',
             zIndex: 50,

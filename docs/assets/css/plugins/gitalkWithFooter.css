@@ -55,7 +55,8 @@
     border-bottom: 0;
 }
 
-#gitalk-container .gt-btn-login {
+#gitalk-container .gt-btn-login,
+#gitalk-container .gt-btn-public {
     color: var(--global-surface-solid-text);
     background-color: var(--global-surface-solid-rest);
     border: var(--global-border-normal) var(--global-surface-solid-rest);
@@ -64,12 +65,6 @@
 #gitalk-container .gt-btn-preview {
     color: var(--global-surface-hollow-text-rest);
     border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
-}
-
-#gitalk-container .gt-btn-public {
-    color: var(--global-surface-solid-text);
-    background-color: var(--global-surface-solid-rest);
-    border-color: var(--global-surface-solid-rest);
 }
 
 #gitalk-container .gt-container .gt-btn-preview:hover {
@@ -150,6 +145,36 @@
 #gitalk-container .gt-user-name:hover,
 #gitalk-container .gt-popup .gt-action:hover {
     text-decoration-color: var(--global-link-decoration-hover);
+}
+
+#gitalk-container .gt-container a.gt-comment-like,
+#gitalk-container .gt-container a.gt-comment-reply,
+#gitalk-container .gt-container a.gt-comment-edit {
+    text-decoration: none;
+}
+
+#gitalk-container .gt-comment-like svg,
+#gitalk-container .gt-comment-reply svg,
+#gitalk-container .gt-comment-edit svg {
+    transition: var(--global-transition-transform);
+}
+
+#gitalk-container .gt-comment-like:hover svg,
+#gitalk-container .gt-comment-reply:hover svg,
+#gitalk-container .gt-comment-edit:hover svg {
+    transform: scale(var(--global-scale-hover));
+}
+
+#gitalk-container .gt-comment-like:active svg,
+#gitalk-container .gt-comment-reply:active svg,
+#gitalk-container .gt-comment-edit:active svg {
+    transform: scale(var(--global-scale-press));
+}
+
+#gitalk-container .gt-comment-like .gt-ico-text,
+#gitalk-container .gt-container .gt-comment-text,
+#gitalk-container .gt-container .gt-comment-date {
+    color: var(--global-muted-color);
 }
 
 #gitalk-container .gt-container .gt-comment-content {

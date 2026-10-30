@@ -125,6 +125,10 @@ function plugin(hook, vm) {
         iscolorPickerPopupOpen = (target === popups.color)
         isfontPickerOpen = (target === popups.font)
 
+        if (themeSpan) themeSpan.classList.toggle('is-active', isthemePickerOpen)
+        if (colorPickerSpan) colorPickerSpan.classList.toggle('is-active', iscolorPickerPopupOpen)
+        if (fontPickerSpan) fontPickerSpan.classList.toggle('is-active', isfontPickerOpen)
+
         if (themePickerPopupSpan) {
             themePickerPopupSpan.classList.toggle('page-right-popups-disappear', !isthemePickerOpen)
             themePickerPopupSpan.inert = !isthemePickerOpen
@@ -799,6 +803,7 @@ function plugin(hook, vm) {
         showSakuraSpan.innerHTML = icons.showSakura
 
         let isSakuraDisplayed = true
+        showSakuraSpan.classList.toggle('is-active', isSakuraDisplayed)
 
         showSakuraSpan.onclick = function () {
             if (isSakuraDisplayed) {
@@ -809,6 +814,7 @@ function plugin(hook, vm) {
             }
 
             isSakuraDisplayed = !isSakuraDisplayed
+            showSakuraSpan.classList.toggle('is-active', isSakuraDisplayed)
         }
 
         widgetsContainer.appendChild(showSakuraSpan)
@@ -819,9 +825,15 @@ function plugin(hook, vm) {
         showLive2dSpan = createWidget('show-live2d-span')
         showLive2dSpan.innerHTML = icons.live2d
 
+        let isLive2dDisplayed = true
+        showLive2dSpan.classList.toggle('is-active', isLive2dDisplayed)
+
         showLive2dSpan.onclick = function () {
             let live2dCanvas = document.getElementById('canvas')
             live2dCanvas.classList.toggle('canvas-hide')
+
+            isLive2dDisplayed = !isLive2dDisplayed
+            showLive2dSpan.classList.toggle('is-active', isLive2dDisplayed)
         }
 
         widgetsContainer.appendChild(showLive2dSpan)
@@ -833,6 +845,7 @@ function plugin(hook, vm) {
         showWidgetsSpan.innerHTML = icons.showWidgets
 
         let isWidgetsOpen = true
+        showWidgetsSpan.classList.toggle('is-active', isWidgetsOpen)
 
         showWidgetsSpan.onclick = function () {
             let widgetsSpanList = [
@@ -846,6 +859,7 @@ function plugin(hook, vm) {
             ]
 
             isWidgetsOpen = !isWidgetsOpen
+            showWidgetsSpan.classList.toggle('is-active', isWidgetsOpen)
 
             widgetsSpanList.forEach(widget => {
                 widget.classList.toggle('page-right-tools-widgets-span-disappear')

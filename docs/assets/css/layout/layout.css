@@ -412,11 +412,7 @@ main.hidden {
 }
 
 .sidebar-toggle:hover .sidebar-toggle-button {
-    transform: scale(var(--global-scale-hover));
-}
-
-.sidebar-toggle:active .sidebar-toggle-button {
-    transform: scale(var(--global-scale-active));
+    opacity: var(--global-opacity-weak);
 }
 
 .sidebar-toggle-button {

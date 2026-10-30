@@ -335,7 +335,7 @@
 }
 
 .main-page-about-me-links>a:active>svg {
-    transform: scale(var(--global-scale-active));
+    transform: scale(var(--global-scale-press));
 }
 
 .main-page-right-panel-container .main-page-about-me-image-links {

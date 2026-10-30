@@ -31,12 +31,12 @@ const PLATE_SELECTOR = [
 ].join(',')
 
 const COLS_ICONS = {
-    1: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="3.5" y="6" width="17" height="3"></rect><rect x="3.5" y="10.5" width="17" height="3"></rect><rect x="3.5" y="15" width="11" height="3"></rect></svg>',
-    2: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="3.5" y="6" width="7" height="3"></rect><rect x="3.5" y="10.5" width="7" height="3"></rect><rect x="3.5" y="15" width="7" height="3"></rect><rect x="13.5" y="6" width="7" height="3"></rect><rect x="13.5" y="10.5" width="7" height="3"></rect><rect x="13.5" y="15" width="7" height="3"></rect></svg>'
+    1: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="17" height="3"></rect><rect x="3.5" y="10.5" width="17" height="3"></rect><rect x="3.5" y="15" width="11" height="3"></rect></svg>',
+    2: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="7" height="3"></rect><rect x="3.5" y="10.5" width="7" height="3"></rect><rect x="3.5" y="15" width="7" height="3"></rect><rect x="13.5" y="6" width="7" height="3"></rect><rect x="13.5" y="10.5" width="7" height="3"></rect><rect x="13.5" y="15" width="7" height="3"></rect></svg>'
 }
 
 
-const TOP_ARROW = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+const TOP_ARROW = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
 /* ---------- 结构判定 ---------- */
 
@@ -128,7 +128,7 @@ function writeCols(root, cols) {
     root.dataset.swCols = String(cols)
     localStorage.setItem(COLS_KEY, String(cols))
     Array.prototype.forEach.call(root.querySelectorAll('.sw-cols button'), function (btn) {
-        btn.setAttribute('aria-pressed', String(cols === 2))
+        btn.classList.toggle('is-active', cols === 2)
         btn.innerHTML = COLS_ICONS[cols]
     })
 }

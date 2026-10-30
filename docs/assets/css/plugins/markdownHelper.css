@@ -52,7 +52,7 @@ section.cover img.ignore-view-full-image-img {
 }
 
 .cover-page-scroll-down-chevron:active svg {
-    transform: scale(var(--global-scale-active));
+    transform: scale(var(--global-scale-press));
 }
 
 /* Sidebar */
@@ -73,6 +73,19 @@ section.cover img.ignore-view-full-image-img {
 
 .sidebar>h1.app-name a:hover {
     text-decoration-color: var(--global-link-decoration-hover);
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button,
+.sidebar-toggle:active .sidebar-toggle-button {
+    opacity: var(--global-opacity-full);
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button {
+    transform: scale(var(--global-scale-hover));
+}
+
+.sidebar-toggle:active .sidebar-toggle-button {
+    transform: scale(var(--global-scale-press));
 }
 
 .sidebar-nav>ul>li {

@@ -1279,13 +1279,7 @@ html #gitalk-container .gt-header-controls-tip {
 
 html #gitalk-container .gt-container .gt-link {
     color: var(--sw-on-rest);
-    border-bottom: var(--sw-border-mid);
-    border-bottom-color: transparent;
     transition: var(--global-transition-color-fast);
-}
-
-html #gitalk-container .gt-container .gt-link:hover {
-    border-bottom-color: var(--sw-accent);
 }
 
 html #gitalk-container .gt-container a:hover,

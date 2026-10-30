@@ -242,14 +242,14 @@
     --global-surface-hollow-hover: var(--global-theme-color-blur-very-weak);
     --global-surface-hollow-active: var(--global-theme-color-blur-very-weak);
     --global-surface-hollow-press: var(--global-theme-color-blur-weak);
-    --global-surface-hollow-border-rest: var(--global-accent-level-1);
-    --global-surface-hollow-border-hover: var(--global-accent-level-2);
-    --global-surface-hollow-border-active: var(--global-accent-level-3);
-    --global-surface-hollow-border-press: var(--global-accent-level-4);
-    --global-surface-hollow-text-rest: var(--global-theme-color-ultra-strong);
-    --global-surface-hollow-text-hover: var(--global-theme-color-ultra-strong);
-    --global-surface-hollow-text-active: var(--global-theme-color-ultra-strong);
-    --global-surface-hollow-text-press: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-border-rest: var(--global-theme-color-normal);
+    --global-surface-hollow-border-hover: var(--global-theme-color-strong);
+    --global-surface-hollow-border-active: var(--global-theme-color-extra-strong);
+    --global-surface-hollow-border-press: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-rest: var(--global-surface-hollow-border-rest);
+    --global-surface-hollow-text-hover: var(--global-surface-hollow-border-hover);
+    --global-surface-hollow-text-active: var(--global-surface-hollow-border-active);
+    --global-surface-hollow-text-press: var(--global-surface-hollow-border-press);
 
     --global-surface-solid-rest: var(--global-accent-level-2);
     --global-surface-solid-hover: var(--global-theme-color-light-extra-strong);

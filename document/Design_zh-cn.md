@@ -161,6 +161,7 @@ none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
 | 类型 | 分组 | 覆盖元素 | 静止（0） | hover（1） | 选中（2） | 按下（3） | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **导航链接** | 链接 | 顶栏 navbar、侧栏、docsify tabs、TOC 切换器、面包屑 | 条 `--global-nav-bar-rest`（透明），字继承 | 条 `--global-nav-bar-hover`（45%），字不变 | 条 `--global-nav-bar-active`（实色），字主题色 + 加粗 | 无此态 | 点击只是重新进入当前页，没有额外反馈，所以不设按下态。面包屑的当前页不是链接，但语义上是选中态，取第 2 级 |
+| **导航展开按钮** | 按钮 | 顶栏里带子菜单的项（`语言`） | 条 `--global-nav-bar-rest`（透明），字继承 | 条 `--global-nav-bar-hover`（45%），字不变 | 打开常驻：条 `--global-nav-bar-active`，字主题色 + 加粗（菜单里含当前页时是否也亮，由 `markdownHelper.highlightNavMenuCurrent` 控制，默认关） | 无此态 | 点击开合，不随 hover 展开；键盘 Tab 聚焦后按 Enter / Space（`role="button"`）；焦点离开整项即收起 |
 | **行内文字链接 1** | 链接 | 正文内联链接（`p` / `li` / `blockquote` / `table` 内的 `a`）、封面内的正文链接 | `--global-link-decoration-rest` 下划线，字继承 | `--global-link-decoration-hover` 下划线，字继承 | 无此态 | 无此态 | 点击即跳转，按下不额外反馈 |
 | **行内文字链接 2** | 链接 | 站名、标题锚点、`summary`、分页标题、搜索结果、评论链接、gitalk 提示文字 | `transparent` 下划线，字继承 | `--global-link-decoration-hover` 下划线，字继承 | 无此态 | 无此态 | 点击即跳转，按下不额外反馈 |
 | **正文图标链接** | 链接 | about-me 图标 | 图标 1 倍 | `--global-scale-hover` | 无此态 | `--global-scale-active` | 观感与幽灵图标完全相同，但语义是正文里的图标链接，所以单独成行，不参与按钮层级 |
@@ -206,6 +207,8 @@ none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
 - 表头不参与 hover；它的边界靠加粗与网格线表达，不用底色。
 
 ### 浮窗
+
+所有浮窗点空白处、或键盘焦点离开「触发图标 + 弹层」这一组时自动收起。
 
 三种浮窗共用大面圆角 `--global-el-border-radius`，差别只在描边用不用主题色、底色是斑马底还是主题色浅底：
 
@@ -365,6 +368,7 @@ swiss 只在下面这些位置使用主题色，其余一律纸 / 墨 / 灰：
 | 类型 | 分组 | 覆盖元素 | 静止（0） | hover（1） | 选中 / 激活（2） | 按下（3） | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **导航链接** | 链接 | 顶栏 navbar、侧栏、docsify tabs、TOC 切换器、面包屑 | 条 `--sw-nav-rest`，字 ink；tabs 例外，静止画 3px tone-line 基线 | 条 `--sw-nav-hover`，字不变 | 条 `--sw-nav-active`，字加粗 | 无此态 | 点击只是重新进入当前页，所以不设按下态。面包屑当前页取第 2 级的条 + 加粗，文字颜色不变 |
+| **导航展开按钮** | 按钮 | 顶栏里带子菜单的项（`言語` / `Language`） | 条 `--sw-nav-rest`（透明），字 ink | 条 `--sw-nav-hover`，字不变 | 打开常驻：条 `--sw-nav-active`，字 ink-strong + 加粗（菜单里含当前页时是否也亮，由 `markdownHelper.highlightNavMenuCurrent` 控制，默认关） | 无此态 | 点击开合，不随 hover 展开；键盘 Tab 聚焦后按 Enter / Space（`role="button"`）；焦点离开整项即收起 |
 | **行内文字链接 1** | 链接 | 正文内联链接（`p` / `li` / `blockquote` / `table` 内的 `a`）、封面内的正文链接 | ink 下划线 2px | `--sw-accent` 下划线 | 无此态 | 无此态 | 点击即跳转，按下不额外反馈 |
 | **行内文字链接 2** | 链接 | 站名、标题锚点、`summary`、分页标题、目录页标题、搜索结果、评论链接、gitalk 提示文字 | 透明下划线 | `--sw-accent` 下划线 | 无此态 | 无此态 | 点击即跳转，按下不额外反馈 |
 | **正文图标链接** | 链接 | about-me 图标 | ink，1 倍 | ink-strong，不缩放 | 无此态 | ink-strong，不缩放 | 观感接近幽灵图标，但语义是正文里的图标链接；swiss 不缩放，所以只换颜色 |

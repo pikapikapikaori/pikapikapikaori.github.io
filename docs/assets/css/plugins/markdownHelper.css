@@ -104,6 +104,39 @@ section.cover img.ignore-view-full-image-img {
     display: inherit;
 }
 
+/* --- Navbar --- */
+.app-nav > ul > li > ul {
+    margin-top: 0.5rem;
+}
+
+.app-nav > ul > li > .app-nav-toggle {
+    display: inline-block;
+    border-bottom: var(--global-border-strong) var(--global-nav-bar-rest);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: var(--global-transition-color), var(--global-transition-font);
+}
+
+.app-nav > ul > li:not(.is-open):hover > .app-nav-toggle {
+    border-bottom-color: var(--global-nav-bar-hover);
+}
+
+.app-nav > ul > li.is-open > .app-nav-toggle,
+.app-nav > ul > li.is-current > .app-nav-toggle {
+    border-bottom-color: var(--global-nav-bar-active);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
+}
+
+.app-nav > ul > li:not(.is-open):hover > ul {
+    display: none;
+}
+
+.app-nav > ul > li.is-open > ul {
+    display: block;
+}
+
 /* --- Table --- */
 .markdown-section tbody td,
 .markdown-section tbody th {

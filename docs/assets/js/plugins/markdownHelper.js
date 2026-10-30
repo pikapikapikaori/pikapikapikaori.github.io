@@ -1,4 +1,9 @@
 import { bindShortcuts } from '../utils/shortcut.js'
+import { makeButtonLike } from '../utils/common.js'
+
+let markdownHelperOptions = {
+    highlightNavMenuCurrent: false
+}
 
 function plugin(hook, vm) {
     function searchInput() {
@@ -102,6 +107,67 @@ function plugin(hook, vm) {
         }
     }
 
+    let navObserver = null
+    let navScheduled = false
+
+    function observeNav() {
+        const nav = document.querySelector('.app-nav')
+        if (!nav || navObserver) return
+
+        navObserver = new MutationObserver(function () {
+            if (navScheduled) return
+            navScheduled = true
+            setTimeout(function () {
+                navScheduled = false
+                setupNavMenus()
+            }, 0)
+        })
+        navObserver.observe(nav, { childList: true, subtree: true })
+    }
+
+    function setupNavMenus() {
+        const current = (location.hash || '#/').split('?')[0].replace(/\/+$/, '')
+
+        for (const list of document.querySelectorAll('.app-nav > ul')) {
+            for (const li of list.children) {
+                if (li.tagName !== 'LI') continue
+
+                const menu = li.querySelector(':scope > ul')
+                if (!menu) continue
+
+                if (!li.querySelector(':scope > .app-nav-toggle')) {
+                    if (li.firstChild === menu || li.querySelector(':scope > a')) continue
+
+                    const toggle = document.createElement('span')
+                    toggle.className = 'app-nav-toggle'
+                    while (li.firstChild && li.firstChild !== menu) toggle.appendChild(li.firstChild)
+                    li.insertBefore(toggle, menu)
+
+                    makeButtonLike(toggle)
+
+                    toggle.addEventListener('click', function () {
+                        li.classList.toggle('is-open')
+                    })
+
+                    li.addEventListener('focusout', function (e) {
+                        if (!e.relatedTarget || li.contains(e.relatedTarget)) return
+                        li.classList.remove('is-open')
+                    })
+                }
+
+                if (markdownHelperOptions.highlightNavMenuCurrent) {
+                    li.classList.toggle('is-current', [...menu.querySelectorAll('a')].some(function (a) {
+                        const href = (a.getAttribute('href') || '').split('?')[0].replace(/\/+$/, '')
+                        return href === current
+                    }))
+                }
+                else {
+                    li.classList.remove('is-current')
+                }
+            }
+        }
+    }
+
     hook.mounted(function () {
         bindShortcuts({
             Slash: focusSearch,
@@ -118,6 +184,14 @@ function plugin(hook, vm) {
             setHover(e.target.closest('.markdown-section tbody td, .markdown-section tbody th'))
         })
 
+        document.addEventListener('click', function (e) {
+            for (const li of document.querySelectorAll('.app-nav > ul > li.is-open')) {
+                if (!li.contains(e.target)) li.classList.remove('is-open')
+            }
+        })
+
+        observeNav()
+
         updateSticky()
     })
 
@@ -128,6 +202,8 @@ function plugin(hook, vm) {
 
         if (appName && search) search.before(appName)
 
+        setupNavMenus()
+
         rowSpanCache = new WeakMap()
         hoveredCell = null
         clearHover()
@@ -135,4 +211,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['markdownHelper'] = Object.assign(
+    markdownHelperOptions,
+    window.$docsify['markdownHelper']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

@@ -826,6 +826,7 @@ html .app-nav a.active,
 html .app-nav a.active:hover {
     border-bottom-color: var(--sw-nav-active);
     color: var(--sw-ink-strong);
+    font-weight: 700;
 }
 
 html .app-nav li {
@@ -2118,4 +2119,33 @@ html .markdown-section tbody tr.is-group-hover {
 html .markdown-section tbody td.is-row-hover,
 html .markdown-section tbody th.is-row-hover {
     background-color: var(--sw-tone);
+}
+
+html .app-nav > ul > li > .app-nav-toggle {
+    display: inline-block;
+    padding: 0 0 0.2rem;
+    border-bottom: var(--sw-border);
+    border-bottom-color: transparent;
+    color: var(--sw-ink);
+    font: inherit;
+    cursor: pointer;
+    transition: var(--global-transition-color-fast);
+}
+
+html .app-nav > ul > li > .app-nav-toggle>svg {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -0.15em;
+    stroke: currentColor;
+}
+
+html .app-nav > ul > li:not(.is-open):hover > .app-nav-toggle {
+    border-bottom-color: var(--sw-nav-hover);
+}
+
+html .app-nav > ul > li.is-open > .app-nav-toggle,
+html .app-nav > ul > li.is-current > .app-nav-toggle {
+    border-bottom-color: var(--sw-nav-active);
+    color: var(--sw-ink-strong);
+    font-weight: 700;
 }

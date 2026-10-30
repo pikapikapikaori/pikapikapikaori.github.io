@@ -61,7 +61,6 @@ function plugin(hook, vm) {
         l: 78
     }
 
-    // 图标：只保留 SVG 路径，尺寸/颜色全部由 CSS 负责
     const icons = {
         lightMode: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
         darkMode: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11.507a9.493 9.493 0 0018 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.494 9.494 0 003 11.507z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
@@ -138,6 +137,41 @@ function plugin(hook, vm) {
             fontPickerPopupSpan.classList.toggle('page-right-popups-disappear', !isfontPickerOpen)
             fontPickerPopupSpan.inert = !isfontPickerOpen
         }
+    }
+
+    let clickWidget = function (widget) {
+        if (!widget || widget.classList.contains('page-right-tools-widgets-span-disappear')) return
+
+        widget.click()
+    }
+
+    let pickPreset = function (index) {
+        let buttons = null
+
+        if (isthemePickerOpen && themePickerPopupSpan) {
+            buttons = themePickerPopupSpan.getElementsByClassName('theme-picker-preset-color-btn-div')
+        } else if (iscolorPickerPopupOpen && colorPickerPopupSpan) {
+            buttons = colorPickerPopupSpan.getElementsByClassName('color-picker-preset-color-btn-div')
+        } else if (isfontPickerOpen && fontPickerPopupSpan) {
+            buttons = fontPickerPopupSpan.getElementsByClassName('font-picker-preset-size-btn-div')
+        }
+
+        if (!buttons || !buttons[index]) return
+
+        buttons[index].click()
+    }
+
+    let bindFocusLeave = function (trigger, popup) {
+        if (!trigger || !popup) return
+
+        let onFocusOut = function (e) {
+            if (!e.relatedTarget) return
+            if (trigger.contains(e.relatedTarget) || popup.contains(e.relatedTarget)) return
+            switchPopup(null)
+        }
+
+        trigger.addEventListener('focusout', onFocusOut)
+        popup.addEventListener('focusout', onFocusOut)
     }
 
     // 黑暗模式切换、主题切换
@@ -902,27 +936,15 @@ function plugin(hook, vm) {
 
         switchPopup(null)
 
-        let clickWidget = function (widget) {
-            if (!widget || widget.classList.contains('page-right-tools-widgets-span-disappear')) return
+        document.addEventListener('click', function (e) {
+            if (!isthemePickerOpen && !iscolorPickerPopupOpen && !isfontPickerOpen) return
+            if (e.target.closest('.page-right-tools-widgets-span') || e.target.closest('.page-right-popups')) return
+            switchPopup(null)
+        })
 
-            widget.click()
-        }
-
-        let pickPreset = function (index) {
-            let buttons = null
-
-            if (isthemePickerOpen && themePickerPopupSpan) {
-                buttons = themePickerPopupSpan.getElementsByClassName('theme-picker-preset-color-btn-div')
-            } else if (iscolorPickerPopupOpen && colorPickerPopupSpan) {
-                buttons = colorPickerPopupSpan.getElementsByClassName('color-picker-preset-color-btn-div')
-            } else if (isfontPickerOpen && fontPickerPopupSpan) {
-                buttons = fontPickerPopupSpan.getElementsByClassName('font-picker-preset-size-btn-div')
-            }
-
-            if (!buttons || !buttons[index]) return
-
-            buttons[index].click()
-        }
+        bindFocusLeave(themeSpan, themePickerPopupSpan)
+        bindFocusLeave(colorPickerSpan, colorPickerPopupSpan)
+        bindFocusLeave(fontPickerSpan, fontPickerPopupSpan)
 
         let presetBindings = {}
 

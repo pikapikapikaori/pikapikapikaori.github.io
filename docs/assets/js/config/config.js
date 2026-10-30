@@ -210,6 +210,11 @@
             localization: i18nLocales
         },
 
+        // 修改 docsify 与插件原生样式
+        markdownHelper: {
+            highlightNavMenuCurrent: false,
+        },
+
         // 更改 html lang 信息
         htmlLang: {
             localization: {

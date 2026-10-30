@@ -161,6 +161,7 @@ Grouped by interaction mechanism. Each state cell reads **fill / border / text**
 | Type | Group | Covered elements | Rest (0) | Hover (1) | Selected (2) | Press (3) | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Navigation link** | Link | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `--global-nav-bar-rest` bar (transparent), text inherits | `--global-nav-bar-hover` bar (45%), text unchanged | `--global-nav-bar-active` bar (solid), text in the theme colour + bold | not applicable | Clicking only re-enters the current page and gives no extra feedback, so there is no press state. The current breadcrumb is not a link but is selected in meaning and takes level 2 |
+| **Nav disclosure** | Button | the navbar item that holds a submenu (`语言`) | `--global-nav-bar-rest` bar (transparent), text inherits | `--global-nav-bar-hover` bar (45%), text unchanged | open and pinned: `--global-nav-bar-active` bar, text in the theme colour + bold (whether a menu holding the current page also lights up is set by `markdownHelper.highlightNavMenuCurrent`, off by default) | not applicable | A click opens and closes it; hover never opens it. Tab to it and press Enter / Space (`role="button"`); focus leaving the item closes it |
 | **Inline text link 1** | Link | links inside the article body (`p` / `li` / `blockquote` / `table`), links inside the cover | `--global-link-decoration-rest` underline, text inherits | `--global-link-decoration-hover` underline, text inherits | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
 | **Inline text link 2** | Link | site name, heading anchor, `summary`, pagination title, search results, comment links, gitalk tip | `transparent` underline, text inherits | `--global-link-decoration-hover` underline, text inherits | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
 | **Inline icon link** | Link | the about-me icons | icon at 1 | `--global-scale-hover` | not applicable | `--global-scale-active` | Looks exactly like a ghost icon, but it is a link inside the article, so it gets its own row and takes no part in the button ladder |
@@ -206,6 +207,8 @@ Three notes:
 - The header never takes part in hover; its edge is expressed by weight and the grid, not by a fill.
 
 ### Popups
+
+Every popup closes on a click outside it, and when keyboard focus leaves the "trigger + popup" pair.
 
 The three kinds of popup share the large radius `--global-el-border-radius` and differ only in whether the border uses the theme colour and whether the fill is the zebra background or a light theme tint:
 
@@ -365,6 +368,7 @@ Grouped by interaction mechanism. Each state cell reads **fill / border / text**
 | Type | Group | Covered elements | Rest (0) | Hover (1) | Selected / latched (2) | Press (3) | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Navigation link** | Link | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `--sw-nav-rest` bar, ink text; tabs excepted, they draw a 3px tone-line baseline at rest | `--sw-nav-hover` bar, text unchanged | `--sw-nav-active` bar, bold text | not applicable | Clicking only re-enters the current page, so there is no press state. The current breadcrumb takes the level 2 bar and bold text, its colour unchanged |
+| **Nav disclosure** | Button | the navbar item that holds a submenu (`言語` / `Language`) | `--sw-nav-rest` bar (transparent), ink text | `--sw-nav-hover` bar, text unchanged | open and pinned: `--sw-nav-active` bar, ink-strong text + bold (whether a menu holding the current page also lights up is set by `markdownHelper.highlightNavMenuCurrent`, off by default) | not applicable | A click opens and closes it; hover never opens it. Tab to it and press Enter / Space (`role="button"`); focus leaving the item closes it |
 | **Inline text link 1** | Link | links inside the article body (`p` / `li` / `blockquote` / `table`), links inside the cover | ink underline, 2px | `--sw-accent` underline | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
 | **Inline text link 2** | Link | site name, heading anchor, `summary`, pagination title, toc-page title, search results, comment links, gitalk tip | transparent underline | `--sw-accent` underline | not applicable | not applicable | Clicking navigates away; press gives no extra feedback |
 | **Inline icon link** | Link | the about-me icons | ink, at 1 | ink-strong, no scale | not applicable | ink-strong, no scale | Close to a ghost icon, but it is a link inside the article; swiss never scales, so only the colour changes |

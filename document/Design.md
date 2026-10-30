@@ -208,7 +208,9 @@ Three notes:
 
 ### Popups
 
-Every popup closes on a click outside it, and when keyboard focus leaves the "trigger + popup" pair.
+Every popup closes on a click outside it, and when keyboard focus leaves the "trigger + popup" pair. A popup sits directly after its trigger in the DOM (`gt-popup` after `gt-user`, the widget popups after their icons), so **the first Tab stop after the trigger is the popup itself**.
+
+In gitalk, the "未登录用户" trigger block and the popup entries without an `href` are made button-like (tabbable, Enter / Space acts as a click), while the copyright line stays out of the keyboard order.
 
 The three kinds of popup share the large radius `--global-el-border-radius` and differ only in whether the border uses the theme colour and whether the fill is the zebra background or a light theme tint:
 

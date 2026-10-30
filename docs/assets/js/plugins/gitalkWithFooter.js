@@ -1,5 +1,6 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
 import { calLocalized } from '../utils/localization.js'
+import { makeButtonLike } from '../utils/common.js'
 
 let gitalkWithFooterOptions = {
     footerInnerHtml: '',
@@ -39,6 +40,57 @@ function plugin(hook, vm) {
 
     let gitalkContainer, footerDiv
 
+    let gitalkObserver = null
+    let gitalkScheduled = false
+    let gitalkHadPopup = false
+
+    function enhanceGitalk(container) {
+        const inner = container.querySelector('.gt-user-inner')
+        if (inner) makeButtonLike(inner)
+
+        for (const action of container.querySelectorAll('.gt-popup .gt-action')) {
+            makeButtonLike(action)
+        }
+
+        for (const copyright of container.querySelectorAll('.gt-popup .gt-copyright')) {
+            copyright.removeAttribute('role')
+            copyright.removeAttribute('tabindex')
+        }
+
+        const meta = container.querySelector('.gt-meta')
+        const popup = meta && meta.querySelector(':scope > .gt-popup')
+        const user = meta && meta.querySelector(':scope > .gt-user')
+        if (popup && user && popup !== user.nextElementSibling) {
+            meta.insertBefore(popup, user.nextSibling)
+        }
+
+        const popupOpen = !!popup
+        if (popupOpen && !gitalkHadPopup && document.activeElement === document.body) {
+            const fresh = container.querySelector('.gt-user-inner')
+            if (fresh) fresh.focus()
+        }
+        gitalkHadPopup = popupOpen
+    }
+
+    function observeGitalk(container) {
+        if (!container || gitalkObserver) return
+
+        gitalkObserver = new MutationObserver(function () {
+            if (gitalkScheduled) return
+            gitalkScheduled = true
+            enhanceGitalk(container)
+            gitalkScheduled = false
+        })
+        gitalkObserver.observe(container, { childList: true, subtree: true })
+
+        container.addEventListener('focusout', function (e) {
+            if (!container.querySelector('.gt-popup')) return
+            if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.gt-meta')) return
+            const inner = container.querySelector('.gt-user-inner')
+            if (inner) inner.click()
+        })
+    }
+
     function renderFooter(input) {
         const tmpLocalization = calLocalized(gitalkWithFooterOptions.localization)
         Object.keys(tmpLocalization).forEach(key => {
@@ -70,6 +122,8 @@ function plugin(hook, vm) {
             gitalkContainer.id = 'gitalk-container'
             footerDiv.parentNode.before(gitalkContainer)
         }
+
+        observeGitalk(gitalkContainer)
     })
 
     hook.doneEach(function () {
@@ -101,6 +155,7 @@ function plugin(hook, vm) {
             id: vm.route.path,
         })
         gitalk.render('gitalk-container')
+        enhanceGitalk(gitalkContainer)
     })
 }
 

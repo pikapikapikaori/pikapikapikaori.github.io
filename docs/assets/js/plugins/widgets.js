@@ -654,7 +654,6 @@ function plugin(hook, vm) {
 
         themePickerPopupDiv.appendChild(presetListDiv)
         themePickerPopupSpan.appendChild(themePickerPopupDiv)
-        widgetsContainer.appendChild(themePickerPopupSpan)
 
         syncThemePickerActiveBtn()
 
@@ -663,6 +662,7 @@ function plugin(hook, vm) {
         }
 
         widgetsContainer.appendChild(themeSpan)
+        widgetsContainer.appendChild(themePickerPopupSpan)
     }
 
     // 页面主题色
@@ -765,13 +765,13 @@ function plugin(hook, vm) {
 
         fontPickerPopupDiv.appendChild(presetListDiv)
         fontPickerPopupSpan.appendChild(fontPickerPopupDiv)
-        widgetsContainer.appendChild(fontPickerPopupSpan)
 
         fontPickerSpan.onclick = function () {
             switchPopup(isfontPickerOpen ? null : popups.font)
         }
 
         widgetsContainer.appendChild(fontPickerSpan)
+        widgetsContainer.appendChild(fontPickerPopupSpan)
 
         applyFontSize()
     }

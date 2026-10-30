@@ -360,7 +360,7 @@ function setupWidgetsRow() {
     }
 
     Array.prototype.forEach.call(
-        container.querySelectorAll(':scope > .page-right-tools-widgets-span'),
+        container.querySelectorAll(':scope > .page-right-tools-widgets-span, :scope > .page-right-popups'),
         function (el) { row.appendChild(el) }
     )
 

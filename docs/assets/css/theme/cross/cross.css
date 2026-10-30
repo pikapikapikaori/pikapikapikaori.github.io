@@ -3,13 +3,13 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-image: var(--plus-img);
     background-size: var(--plus-size) var(--plus-size);
 }
 
 .sidebar {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-image: var(--plus-img);
     background-size: var(--plus-size) var(--plus-size);
     background-attachment: local;

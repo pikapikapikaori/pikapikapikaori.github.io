@@ -2,7 +2,7 @@
 
 .switch-toc-wrap-div {
     margin: 0 0 1.25rem;
-    border-bottom: var(--global-border) var(--border-color);
+    border-bottom: var(--global-border-normal) var(--global-border-color);
     display: flex;
     width: 100%;
     box-sizing: border-box;
@@ -11,7 +11,7 @@
 
 .switch-toc-wrap-div button {
     border: none;
-    border-bottom: var(--global-border-semistrong) var(--global-nav-bar-rest);
+    border-bottom: var(--global-border-very-strong) var(--global-nav-bar-rest);
     background: none;
     font-family: var(--global-sidebar-title-font);
     color: inherit;
@@ -24,14 +24,14 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-    margin-bottom: calc(-1 * var(--global-border-width));
+    margin-bottom: calc(-1 * var(--global-border-normal-width));
     transition: var(--global-transition-color), var(--global-transition-font);
 }
 
 .switch-toc-wrap-div button.active-btn {
     border-bottom-color: var(--global-nav-bar-active);
-    color: var(--theme-color);
-    font-weight: var(--global-font-weight-semibold);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
     cursor: default;
 }
 
@@ -52,12 +52,12 @@
 }
 
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li>a {
-    font-weight: var(--global-font-weight-semibold);
+    font-weight: var(--global-font-weight-very-bold);
     font-size: 1.25rem;
 }
 
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul {
-    border-left: var(--global-border) var(--theme-color);
+    border-left: var(--global-border-normal) var(--global-theme-color-normal);
 }
 
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li:not(:has(li.active)),
@@ -72,8 +72,8 @@
 
 .sidebar:has(.default-btn.active-btn) .sidebar-nav>ul>li>ul>li:has(li.active)>a {
     border-left: var(--global-border-strong);
-    color: var(--theme-color);
-    font-weight: var(--global-font-weight-semibold);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
     margin-left: calc(-1 * var(--global-border-strong-width));
 }
 
@@ -82,6 +82,6 @@
 }
 
 .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul :is(li>a:hover, li.active>a) {
-    border-left-width: var(--global-border-semistrong-width);
-    margin-left: calc(-1 * var(--global-border-semistrong-width));
+    border-left-width: var(--global-border-very-strong-width);
+    margin-left: calc(-1 * var(--global-border-very-strong-width));
 }

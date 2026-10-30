@@ -16,7 +16,7 @@ html .color-picker-slider::-webkit-slider-thumb {
     border-radius: 0;
     border-color: var(--sw-swatch-rest);
     background-color: var(--sw-accent);
-    transition: border-color var(--global-transition-duration), transform var(--global-transition-duration);
+    transition: border-color var(--global-transition-duration-normal), transform var(--global-transition-duration-normal);
 }
 
 html .color-picker-slider::-webkit-slider-thumb:hover,

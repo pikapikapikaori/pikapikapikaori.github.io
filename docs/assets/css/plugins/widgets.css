@@ -60,7 +60,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    color: var(--theme-color);
+    color: var(--global-theme-color-normal);
 }
 
 .page-right-popups {
@@ -72,9 +72,9 @@
 }
 
 .page-right-popups-div {
-    border: var(--global-border) var(--theme-color);
+    border: var(--global-border-normal) var(--global-theme-color-normal);
     border-radius: var(--global-el-border-radius);
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-theme-color-blur-ultra-weak);
     backdrop-filter: var(--global-backdrop-filter);
     padding: calc(3 / 4 * var(--global-widget-size-normal));
     width: var(--widgets-popup-width);
@@ -97,7 +97,7 @@
     border-radius: var(--global-icon-border-radius);
     overflow: hidden;
     cursor: pointer;
-    border: var(--global-border) var(--border-color);
+    border: var(--global-border-normal) var(--global-border-color);
     transition: var(--global-transition-color), var(--global-transition-transform);
     position: relative;
     background: linear-gradient(135deg,
@@ -187,7 +187,7 @@
     border-radius: var(--global-el-border-radius);
     appearance: none;
     height: 0.3125rem;
-    background-color: var(--theme-color);
+    background-color: var(--global-theme-color-normal);
 }
 
 .color-picker-preset-color-list-div {
@@ -203,7 +203,7 @@
     aspect-ratio: var(--global-aspect-ratio-tall);
     border-radius: var(--global-icon-border-radius);
     cursor: pointer;
-    border: var(--global-border) var(--border-color);
+    border: var(--global-border-normal) var(--global-border-color);
     transition: var(--global-transition-color), var(--global-transition-transform);
     background-color: hsl(var(--widgets-hsl-h), var(--widgets-hsl-s), var(--widgets-hsl-l));
 }
@@ -247,7 +247,7 @@
     aspect-ratio: var(--global-aspect-ratio-square);
     box-sizing: border-box;
     border-radius: var(--global-icon-border-radius);
-    border: var(--global-border) var(--global-surface-hollow-border-rest);
+    border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
     background-color: var(--global-surface-hollow-rest);
     color: var(--global-surface-hollow-text-rest);
     cursor: pointer;
@@ -285,7 +285,7 @@
 .read-progress {
     --p: 0;
     --thickness: 0.2rem;
-    --ring-border: var(--theme-color);
+    --ring-border: var(--global-theme-color-normal);
     --bw: 1px;
 
     display: grid;
@@ -322,7 +322,7 @@
             var(--ring-border) calc(100% - var(--thickness) + var(--bw)),
             transparent calc(100% - var(--thickness) + var(--bw))),
         /* 进度 + 轨道 */
-        conic-gradient(var(--theme-color) calc(var(--p) * 1%), transparent 0);
+        conic-gradient(var(--global-theme-color-normal) calc(var(--p) * 1%), transparent 0);
     mask: radial-gradient(farthest-side,
             #0000 calc(100% - var(--thickness)),
             #000 calc(100% - var(--thickness)));
@@ -335,7 +335,7 @@
     font-variant-numeric: tabular-nums;
     letter-spacing: -.02em;
     cursor: pointer;
-    color: var(--theme-color);
+    color: var(--global-theme-color-normal);
 }
 
 .progress-num-hide {

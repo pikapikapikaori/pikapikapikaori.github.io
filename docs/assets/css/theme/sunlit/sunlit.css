@@ -3,12 +3,12 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-image: repeating-linear-gradient( to bottom, transparent 0 calc(var(--rule-size) - 1px), var(--rule-color) calc(var(--rule-size) - 1px) var(--rule-size) );
 }
 
 .sidebar {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-image: none;
-    border-right: 1px solid var(--sidebar-border-color);
+    border-right: 1px solid var(--global-sidebar-border-color);
 }

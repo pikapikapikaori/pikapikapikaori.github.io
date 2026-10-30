@@ -27,7 +27,7 @@
     min-width: 0;
     margin: 0;
     text-align: center;
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-theme-color-blur-ultra-weak);
     min-height: var(--tocpage-display-height);
     max-height: var(--tocpage-display-height);
     text-decoration: none;
@@ -69,7 +69,7 @@
 
 .toc-page-display-a:hover img {
     transform: scale(var(--global-transform-ratio-very-small));
-    filter: brightness(var(--global-brightness-blur));
+    filter: brightness(var(--global-brightness-weak));
 }
 
 .toc-page-display-title-div {
@@ -86,7 +86,7 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 1rem;
-    color: var(--em-color);
+    color: var(--global-em-color);
 }
 
 .toc-paginator-div {
@@ -112,7 +112,7 @@
     text-align: center;
     background-color: transparent;
     border-radius: var(--global-widget-border-radius);
-    border: var(--global-border) var(--border-color);
+    border: var(--global-border-normal) var(--global-border-color);
     transition: var(--global-transition-color);
     appearance: textfield;
 }
@@ -148,7 +148,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    border: var(--global-border) var(--global-surface-hollow-border-rest);
+    border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
     border-radius: var(--global-control-border-radius);
     color: var(--global-surface-hollow-text-rest);
     transition: var(--global-transition-color);
@@ -172,5 +172,5 @@ body.has-toc .sidebar-toggle {
 }
 
 .sidebar-toggle {
-    transition: opacity var(--global-transition-duration), transform var(--global-transition-duration);
+    transition: opacity var(--global-transition-duration-normal), transform var(--global-transition-duration-normal);
 }

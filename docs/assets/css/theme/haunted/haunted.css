@@ -17,13 +17,13 @@
 }
 
 ::selection {
-    background: var(--accent-color);
-    color: var(--accent-text-color);
+    background: var(--global-accent-color);
+    color: var(--global-accent-text-color);
 }
 
 html {
     min-height: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-size: 100% 100%, var(--dot-size) var(--dot-size);
     background-repeat: no-repeat, repeat;
     background-attachment: fixed, fixed;
@@ -95,7 +95,7 @@ section.cover::before, section.cover::after {
     bottom: -1px;
     width: 100%;
     pointer-events: none;
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-size: 100% 100%, var(--dot-size) var(--dot-size);
     background-repeat: no-repeat, repeat;
     background-attachment: fixed, fixed;

@@ -14,26 +14,37 @@
 
 | 级 | 语义 | 描边 / 条 | 表面（空心） | 表面（实心） | 文字 / 图标 | 缩放 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | 静止：无色 | 无 / 中性 1px | 透明 | 主题色实色 | 空心 `-8`；实心反色墨 | 1 | 静止不显示任何强调 |
-| 1 | hover：可以点 | 主题色 45% | 主题色 30% | 主题色 + 白 10%，2px 45% 墨环 | 空心 `-8`；实心反色墨 | 1.1 | 只表达“可以点”，文字不动 |
-| 2 | 选中（`.active`）/ 聚焦（`:focus`） | 主题色实色 | 主题色 30%，描边 `-7` | 主题色 + 白 16%，2px 实色墨环 | 空心 `-8`；实心反色墨 | 1.2 | 比第 1 级深一级；选中项被 hover 时停在本级 |
-| 3 | 按下（`:active`） | `-7` | 主题色 40%，描边 `-8` | 主题色 + 白 24%，3px 实色墨环 | 空心 `-8`；实心反色墨 | 1.3 | 按下即 `:active`，按住期间生效，松开回到 hover 或选中。导航链接、行内链接、色卡点击无效果，故不设按下态 |
+| 0 | 静止：无色 | 无 / 中性 1px | 透明 | 主题色实色 | 空心 `ultra-strong`；实心反色墨 | 1 | 静止不显示任何强调 |
+| 1 | hover：可以点 | 主题色 45% | 主题色 30% | 主题色 + 白 10%，2px 45% 墨环 | 空心 `ultra-strong`；实心反色墨 | 1.1 | 只表达“可以点”，文字不动 |
+| 2 | 选中（`.active`）/ 聚焦（`:focus`） | 主题色实色 | 主题色 30%，描边 `extra-strong` | 主题色 + 白 16%，2px 实色墨环 | 空心 `ultra-strong`；实心反色墨 | 1.2 | 比第 1 级深一级；选中项被 hover 时停在本级 |
+| 3 | 按下（`:active`） | `extra-strong` | 主题色 40%，描边 `ultra-strong` | 主题色 + 白 24%，3px 实色墨环 | 空心 `ultra-strong`；实心反色墨 | 1.3 | 按下即 `:active`，按住期间生效，松开回到 hover 或选中。导航链接、行内链接、色卡点击无效果，故不设按下态 |
 
 三条推论，都不是额外规则：
 
 - **表面（实心）的底色已经是最浅一档**。主题色本身就是最亮的颜色，继续加深只会把反色墨字压没（实测静止态已低至 4.88），所以它的阶梯改为**向白偏移**，并用墨色内环的浓度与粗细补足层级。
-- **表面（空心）的文字恒定**。`-8` 是离纸最远的一档主题色，底只铺 30% / 40%，文字不随状态变化，因此任何状态下都不会掉对比度。
-- **表面（空心）的描边**从第 1 级起步：静止 45%、hover 实色、选中 `-7`、按下 `-8`。这和“实心按钮的底色从第 2 级起步”是同一条规则——起点高就少走一步。
+- **表面（空心）的文字恒定**。`ultra-strong` 是离纸最远的一档主题色，底只铺 30% / 40%，文字不随状态变化，因此任何状态下都不会掉对比度。
+- **表面（空心）的描边**从第 1 级起步：静止 45%、hover 实色、选中 `extra-strong`、按下 `ultra-strong`。这和“实心按钮的底色从第 2 级起步”是同一条规则——起点高就少走一步。
 
-文字列：空心按钮恒为 `--global-theme-color-8`（彩色字），实心按钮恒为 `--global-theme-ink`（把主题色翻到明度另一端的反色墨）。两者靠色相区分——**空心是“无色底 + 彩字”，实心是“彩底 + 反色字”**。
+文字列：空心按钮恒为 `--global-theme-color-ultra-strong`（彩色字），实心按钮恒为 `--global-theme-color-dark-normal`（把主题色翻到明度另一端的反色墨）。两者靠色相区分——**空心是“无色底 + 彩字”，实心是“彩底 + 反色字”**。
 
 #### 键盘焦点
 
 `:focus-visible` 不属于阶梯，并且刻意与 hover 保持差别：
 
-- `outline: 2px solid var(--global-theme-color-8)`，`outline-offset: var(--global-outline-offset)`（2px）
+- `outline: 2px solid var(--global-theme-color-ultra-strong)`，`outline-offset: var(--global-outline-offset)`（2px）
 - 静止状态用 `outline: 2px solid transparent` 预留描边，聚焦时不产生位移
 - 作用于 `a[href]`、`button`、`summary`、`select`、`[tabindex]` 以及各类 `input`
+
+#### 等级命名
+
+框架变量按「离中档的距离」分档，最多每侧五级，中档统一叫 `normal`：
+
+```
+none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
+     < semi-<词> < <词> < very-<词> < extra-<词> < ultra-<词>
+```
+
+`<词>` 按类不同：透明度与明度用 `weak` / `strong`，字重用 `thin` / `bold`，尺寸用 `small` / `big`，时长用 `fast` / `slow`。现有一侧只有两级或三级时，按「离 `normal` 由近及远」占前几档，`semi-*` 留给以后往中间插的档位；`none` 表示 0，`full` 表示满值（如 `--global-opacity-full: 1`）。
 
 #### 过渡
 
@@ -42,11 +53,11 @@
 | 变量 | 值 |
 | --- | --- |
 | `--global-transition-duration-fast` | 250ms |
-| `--global-transition-duration` | 500ms |
+| `--global-transition-duration-normal` | 500ms |
 | `--global-transition-duration-slow` | 1s |
 | `--global-transition-duration-very-slow` | 2s |
-| `--global-transition-duration-super-slow` | 3s |
-| `--global-transition-duration-most-slow` | 5s |
+| `--global-transition-duration-extra-slow` | 3s |
+| `--global-transition-duration-ultra-slow` | 5s |
 
 由其组合出：`--global-transition-color`（color、text-decoration-color、border-color、outline-color、box-shadow、background-color）、`--global-transition-transform`、`--global-transition-filter`、`--global-transition-font`（font-weight），以及 `-color-fast`、`-filter-fast`、`-transform-slow` 三个变体。
 
@@ -59,7 +70,7 @@
 | 变量 | 值 | 用途 |
 | --- | --- | --- |
 | `--global-border-radius-big` | 0.625rem | 大面：卡片、浮窗、代码块 |
-| `--global-border-radius` | 0.3125rem | 控件：按钮、输入框、色卡 |
+| `--global-border-radius-normal` | 0.3125rem | 控件：按钮、输入框、色卡 |
 | `--global-border-radius-small` | 0.125rem | 小件 |
 | `--global-border-radius-none` | 0 | 直角 |
 | `--global-border-radius-round` | 50% | 圆形（头像），属于形状而非档位 |
@@ -81,10 +92,10 @@
 
 | 变量 | 值 | 含义 |
 | --- | --- | --- |
-| `--global-accent-level-1` | `var(--global-theme-color-blur-weak)`（主题色 45%） | 第 1 级：hover |
-| `--global-accent-level-2` | `var(--theme-color)`（主题色实色） | 第 2 级：选中 / 聚焦 |
-| `--global-accent-level-3` | `var(--global-theme-color-7)` | 第 3 级：选中后的描边、按下 |
-| `--global-accent-level-4` | `var(--global-theme-color-8)` | 第 4 级：按下后的描边 |
+| `--global-accent-level-1` | `var(--global-theme-color-blur-normal)`（主题色 45%） | 第 1 级：hover |
+| `--global-accent-level-2` | `var(--global-theme-color-normal)`（主题色实色） | 第 2 级：选中 / 聚焦 |
+| `--global-accent-level-3` | `var(--global-theme-color-extra-strong)` | 第 3 级：选中后的描边、按下 |
+| `--global-accent-level-4` | `var(--global-theme-color-ultra-strong)` | 第 4 级：按下后的描边 |
 | `--global-scale-hover` | `var(--global-transform-ratio-small)`（1.1） | 第 1 级缩放 |
 | `--global-scale-active` | `var(--global-transform-ratio-normal)`（1.2） | 第 2 级缩放 |
 | `--global-scale-press` | `var(--global-transform-ratio-big)`（1.3） | 第 3 级缩放 |
@@ -98,47 +109,49 @@
 | `--global-nav-bar-active` | `var(--global-accent-level-2)` |
 | `--global-link-decoration-rest` | `var(--global-accent-level-2)` |
 | `--global-link-decoration-hover` | `var(--global-accent-level-3)` |
-| `--global-control-border-rest` | `var(--border-color)` |
+| `--global-control-border-rest` | `var(--global-border-color)` |
 | `--global-control-border-hover` | `var(--global-accent-level-1)` |
 | `--global-control-border-active` | `var(--global-accent-level-2)` |
 | `--global-control-border-press` | `var(--global-accent-level-3)` |
 | `--global-surface-hollow-rest` | `transparent` |
-| `--global-surface-hollow-hover` | `color-mix(in srgb, var(--theme-color) 30%, transparent)` |
-| `--global-surface-hollow-active` | `color-mix(in srgb, var(--theme-color) 30%, transparent)` |
-| `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 40%, transparent)` |
+| `--global-surface-hollow-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 30%, transparent)` |
+| `--global-surface-hollow-active` | `color-mix(in srgb, var(--global-theme-color-normal) 30%, transparent)` |
+| `--global-surface-hollow-press` | `color-mix(in srgb, var(--global-theme-color-normal) 40%, transparent)` |
 | `--global-surface-hollow-border-rest` | `var(--global-accent-level-1)` |
 | `--global-surface-hollow-border-hover` | `var(--global-accent-level-2)` |
 | `--global-surface-hollow-border-active` | `var(--global-accent-level-3)` |
 | `--global-surface-hollow-border-press` | `var(--global-accent-level-4)` |
-| `--global-surface-hollow-text-rest` | `var(--global-theme-color-8)` |
-| `--global-surface-hollow-text-hover` | `var(--global-theme-color-8)` |
-| `--global-surface-hollow-text-active` | `var(--global-theme-color-8)` |
-| `--global-surface-hollow-text-press` | `var(--global-theme-color-8)` |
+| `--global-surface-hollow-text-rest` | `var(--global-theme-color-ultra-strong)` |
+| `--global-surface-hollow-text-hover` | `var(--global-theme-color-ultra-strong)` |
+| `--global-surface-hollow-text-active` | `var(--global-theme-color-ultra-strong)` |
+| `--global-surface-hollow-text-press` | `var(--global-theme-color-ultra-strong)` |
 | `--global-surface-solid-rest` | `var(--global-accent-level-2)` |
-| `--global-surface-solid-hover` | `color-mix(in oklab, var(--theme-color) 90%, #fff)` |
-| `--global-surface-solid-active` | `color-mix(in oklab, var(--theme-color) 84%, #fff)` |
-| `--global-surface-solid-press` | `color-mix(in oklab, var(--theme-color) 76%, #fff)` |
-| `--global-surface-solid-text` | `var(--global-theme-ink)` |
-| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-theme-ink) 45%, transparent)` |
-| `--global-surface-solid-ring-active` | `var(--global-theme-ink)` |
-| `--global-surface-solid-ring-press` | `var(--global-theme-ink)` |
-| `--global-table-row-hover` | `color-mix(in srgb, var(--theme-color) 18%, transparent)` |
+| `--global-surface-solid-hover` | `color-mix(in oklab, var(--global-theme-color-normal) 90%, #fff)` |
+| `--global-surface-solid-active` | `color-mix(in oklab, var(--global-theme-color-normal) 84%, #fff)` |
+| `--global-surface-solid-press` | `color-mix(in oklab, var(--global-theme-color-normal) 76%, #fff)` |
+| `--global-surface-solid-text` | `var(--global-theme-color-dark-normal)` |
+| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-theme-color-dark-normal) 45%, transparent)` |
+| `--global-surface-solid-ring-active` | `var(--global-theme-color-dark-normal)` |
+| `--global-surface-solid-ring-press` | `var(--global-theme-color-dark-normal)` |
+| `--global-surface-solid-inset-ring-hover` | `var(--global-inset-box-shadow-normal) var(--global-surface-solid-ring-hover)` |
+| `--global-surface-solid-inset-ring-press` | `var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press)` |
+| `--global-table-row-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent)` |
 
-另有一个自动计算的令牌 `--global-theme-ink`，定义在 `base.css`，不依赖明暗方案、也不需要逐个主题配置：
+另有一个自动计算的令牌 `--global-theme-color-dark-normal`，定义在 `base.css`，不依赖明暗方案、也不需要逐个主题配置：
 
 ```css
---global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
+--global-theme-color-dark-normal: color-mix(in srgb, var(--global-theme-color-normal) 12%, var(--global-dark));
 
 @supports (color: oklch(from red 0.5 0 h)) {
     :root {
-        --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+        --global-theme-color-dark-normal: oklch(from var(--global-theme-color-normal) clamp(0.08, calc(1 - l), 0.92) 0 h);
     }
 }
 ```
 
 支持相对颜色语法时取 `oklch()`：它把主题色的 OKLCH 明度翻到另一端（`1 - l`，再夹在 0.08–0.92 之间），于是浅主题色得到深灰、深主题色得到浅灰，色相无关。实测：薰衣草 `#c7a2ec` 算出 `#1c1c1c`（7.92:1），抹茶 `#c7eca2` 算出 `#030303`（15.62:1），雾蓝 `#a2d9ec` 算出 `#0a0a0a`（12.87:1）。不支持时保留 `color-mix` 的近似值。实心按钮的文字与内环都用它。
 
-兜底必须用 `@supports` 包住：自定义属性在声明时不做校验，同一个属性写两遍时后一条会直接覆盖前一条，只在真正用到（`color: var(--global-theme-ink)`）时才发现无效，结果是“继承”而不是“回退”。
+兜底必须用 `@supports` 包住：自定义属性在声明时不做校验，同一个属性写两遍时后一条会直接覆盖前一条，只在真正用到（`color: var(--global-theme-color-dark-normal)`）时才发现无效，结果是“继承”而不是“回退”。
 
 ### 组件类型
 
@@ -152,8 +165,8 @@
 | **正文图标链接** | 链接 | about-me 图标 | 图标 1 倍 | `--global-scale-hover` | 无此态 | `--global-scale-active` | 观感与幽灵图标完全相同，但语义是正文里的图标链接，所以单独成行，不参与按钮层级 |
 | **幽灵图标** | 按钮 | widgets 九个图标、侧栏开关、回顶部、阅读进度环、评论 like/edit/reply、封面 chevron | 图标 1 倍 | `--global-scale-hover` | 无此态 | `--global-scale-active` | 只有缩放，没有底也没有描边 |
 | **输入框** | 输入 | 搜索框、分页输入框、gitalk 文本框 | `--global-control-border-rest`，字继承 | `--global-control-border-hover`，字继承 | `--global-control-border-active`（`:focus`），字继承 | 无此态 | 聚焦与选中同值；按下无额外反馈 |
-| **选择类色卡** | 按钮 | 主题预设、颜色预设、色轮 thumb | `--global-control-border-rest`，1 倍 | `--global-control-border-hover`，`--global-scale-hover` | `--global-control-border-active`，`--global-scale-active` | 未选中：取第 2 级的取值；已选中：`--global-control-border-press`，`--global-scale-press` | 按下即“预告选中”：未选中的色卡按下时呈现第 2 级，松开正好落入选中；已选中的色卡按下时再上一级。色轮 thumb 只换描边（`--border-color` → `--theme-color`），不加描边环、不缩放，且描边过渡只在 hover 时生效 |
-| **表面（空心）按钮** | 按钮 | toc 分页箭头、看大图左右箭头、gitalk 预览、字号预设 | 透明底，描边 `--global-accent-level-1`，字 `-8` | 底 30%，描边 `--global-accent-level-2`，字 `-8` | 底 30%，描边 `--global-accent-level-3`，字 `-8` | 底 40%，描边 `--global-accent-level-4`，字 `-8` | 只有描边、没有实心底；选中态只用于字号预设 |
+| **选择类色卡** | 按钮 | 主题预设、颜色预设、色轮 thumb | `--global-control-border-rest`，1 倍 | `--global-control-border-hover`，`--global-scale-hover` | `--global-control-border-active`，`--global-scale-active` | 未选中：取第 2 级的取值；已选中：`--global-control-border-press`，`--global-scale-press` | 按下即“预告选中”：未选中的色卡按下时呈现第 2 级，松开正好落入选中；已选中的色卡按下时再上一级。色轮 thumb 只换描边（`--global-border-color` → `--global-theme-color-normal`），不加描边环、不缩放，且描边过渡只在 hover 时生效 |
+| **表面（空心）按钮** | 按钮 | toc 分页箭头、看大图左右箭头、gitalk 预览、字号预设 | 透明底，描边 `--global-accent-level-1`，字 `ultra-strong` | 底 30%，描边 `--global-accent-level-2`，字 `ultra-strong` | 底 30%，描边 `--global-accent-level-3`，字 `ultra-strong` | 底 40%，描边 `--global-accent-level-4`，字 `ultra-strong` | 只有描边、没有实心底；选中态只用于字号预设 |
 | **表面（实心）按钮** | 按钮 | gitalk 登录与发布、cover 主按钮、复制代码 | 底 `--global-surface-solid-rest`，字反色墨 | 底 +白 10%，2px 45% 墨环，字反色墨 | 底 +白 16%，2px 实色墨环，字反色墨 | 底 +白 24%，3px 实色墨环，字反色墨 | 静止即实心底。判定：有实心底为实心，只有描边为空心 |
 
 ### 引导线
@@ -173,15 +186,15 @@
 
 - 同一组导航项之间不留间隙（TOC 切换器 `gap: 0`），条才能连续相接；间距由各项的内边距承担。
 - 面包屑的当前页允许自然换行，折行时每一行各画一条——这是预期行为（inline 元素的边框就是这样工作的）。面包屑字号 `0.9rem`，比顶栏小一级。
-- toc 分页按钮的外框是 28×28（1.75rem），内部图标是 100% 的 svg，靠父元素 `padding: var(--global-border-width)` 缩到 24px（28 − 1px 边框 ×2 − 1px 内边距 ×2）。swiss 的边框是 2px，因此它的 `padding` 为 0，图标同样是 24px。
+- toc 分页按钮的外框是 28×28（1.75rem），内部图标是 100% 的 svg，靠父元素 `padding: var(--global-border-normal-width)` 缩到 24px（28 − 1px 边框 ×2 − 1px 内边距 ×2）。swiss 的边框是 2px，因此它的 `padding` 为 0，图标同样是 24px。
 
 ### 表格
 
-正文表格的单元格本身带 1px `--border-color-strong` 全边框（来自 base），行与行之间另有 1px `--border-color-mid` 上边线；**不画斑马纹，读数靠 hover**。
+正文表格的单元格本身带 1px `--global-border-color-strong` 全边框（来自 base），行与行之间另有 1px `--global-border-color-mid` 上边线；**不画斑马纹，读数靠 hover**。
 
 | 部位 | 静止 | hover |
 | --- | --- | --- |
-| 表头 `thead th` | 无底色，加粗，文字取 `--heading-color` | 无此态 |
+| 表头 `thead th` | 无底色，加粗，文字取 `--global-heading-color` | 无此态 |
 | 行 `tbody tr` | 透明 | `--global-table-row-hover`（18% 主题色），过渡 500ms |
 
 两点：
@@ -195,9 +208,9 @@
 
 | 种类 | 成员 | 描边 | 底色 | 其它 |
 | --- | --- | --- | --- | --- |
-| **组件浮窗** | widgets 的 popup（`.page-right-popups-div`） | 1px **主题色** | `--global-theme-color-blur`（10% 主题色） | `backdrop-filter: var(--global-backdrop-filter)` |
-| **常规浮窗** | gitalk 评论卡 `.gt-comment-content`、`.gt-popup` 菜单、关于页右侧面板 `.main-page-right-panel-container` | 1px `--border-color-strong` | `--zebra-bg` | 无 |
-| **突出浮窗** | 博主自己的评论（`.gt-comment.gt-comment-admin`） | 同常规浮窗 | `--global-theme-color-blur`（10% 主题色） | 只靠底色区分身份，其它与常规浮窗一致 |
+| **组件浮窗** | widgets 的 popup（`.page-right-popups-div`） | 1px **主题色** | `--global-theme-color-blur-ultra-weak`（10% 主题色） | `backdrop-filter: var(--global-backdrop-filter)` |
+| **常规浮窗** | gitalk 评论卡 `.gt-comment-content`、`.gt-popup` 菜单、关于页右侧面板 `.main-page-right-panel-container` | 1px `--global-border-color-strong` | `--global-zebra-bg` | 无 |
+| **突出浮窗** | 博主自己的评论（`.gt-comment.gt-comment-admin`） | 同常规浮窗 | `--global-theme-color-blur-ultra-weak`（10% 主题色） | 只靠底色区分身份，其它与常规浮窗一致 |
 
 ### 短评集
 
@@ -205,13 +218,13 @@
 
 | 元素 | 规格 |
 | --- | --- |
-| 年份区 | 标题左对齐、`--heading-color`、2.25rem、下压一条 2px `--border-color-strong` 横线；标题左侧是年份图标，兼作开合指示 |
+| 年份区 | 标题左对齐、`--global-heading-color`、2.25rem、下压一条 2px `--global-border-color-strong` 横线；标题左侧是年份图标，兼作开合指示 |
 | 年份图标 | 原生 512×512 RGBA 图片；收起 `rotate(-14deg) scale(0.9)`、`opacity 0.5`；展开回正、不透明；过渡 500ms（`opacity` + `transform`） |
 | 年份 hover | 标题出现下划线，颜色取 `--global-link-decoration-hover`；字色不变 |
 | 原来的年份分隔线 | 移除。图标从分隔线搬到标题左侧，两条主题色短横线不再绘制 |
-| 条目 | 无卡片、无底色；每条上方 1px `--border-color` 分隔（首条无）；头像 2.25rem |
-| 引用线 | 卡片左侧 2px `--border-color-strong`，hover 过渡到主题色，500ms |
-| 条内分隔 | `0.2rem dotted --border-color`；原走动图标保留，不再染色 |
+| 条目 | 无卡片、无底色；每条上方 1px `--global-border-color` 分隔（首条无）；头像 2.25rem |
+| 引用线 | 卡片左侧 2px `--global-border-color-strong`，hover 过渡到主题色，500ms |
+| 条内分隔 | `0.2rem dotted --global-border-color`；原走动图标保留，不再染色 |
 
 ### cursor
 
@@ -230,7 +243,7 @@ navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），�
 | 级 | 语义 | 线 / 条 | 表面（不带激活态） | 表面（带激活态） | 文字 / 图标 | 缩放 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 静止：无色 | `tone-line` 2px，或透明 3px 预留 | paper 底 + tone-line 边 | paper 底 + tone-line 边 | ink | 无 | 导航 hover 不改字色，只有线走阶梯 |
-| 1 | hover：可以点 | `--border-color-mid`（中性灰） | ink 底 + ink 边 | 同左（尚未激活时） | paper | 无 | 中性灰比 tone-line 深一档，否则 tabs 的静态基线看不出变化 |
+| 1 | hover：可以点 | `--global-border-color-mid`（中性灰） | ink 底 + ink 边 | 同左（尚未激活时） | paper | 无 | 中性灰比 tone-line 深一档，否则 tabs 的静态基线看不出变化 |
 | 2 | 选中 / 激活（`.active`、`.active-btn`、`.is-active`） | ink-strong | 无此态 | ink 底 + ink 边 | paper | 无 | 带激活态按钮被 hover 时停在本级，不反相；反相只发生在“已激活 + hover”，见下 |
 | 3 | 按下（`:active`） | 同第 1 级 | 同第 1 级 | 同第 1 级 | paper | 无 | 按下与 hover 同态。导航链接、行内链接、色卡点击无效果，故不设按下态 |
 
@@ -254,7 +267,7 @@ navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），�
 
 #### 过渡
 
-只有两档，swiss 在主题文件里重定义：`--global-transition-duration` 200ms、`--global-transition-duration-fast` 160ms。
+只有两档，swiss 在主题文件里重定义：`--global-transition-duration-normal` 200ms、`--global-transition-duration-fast` 160ms。
 
 | 用途 | 时长 |
 | --- | --- |
@@ -296,12 +309,12 @@ navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），�
 
 | 变量 | 值 | 含义 |
 | --- | --- | --- |
-| `--sw-paper` | `var(--bg-color)` | 纸 |
-| `--sw-ink` | `var(--text-color)` | 正文墨 |
-| `--sw-ink-strong` | `var(--heading-color)` | 标题墨（最重的一档） |
-| `--sw-ink-muted` | `var(--muted-color)` | 弱化文字 |
-| `--sw-tone` | `var(--code-bg)` | 纸灰（浮窗、代码、高亮底） |
-| `--sw-tone-line` | `var(--border-color)` | 淡线（静止线、结构基线） |
+| `--sw-paper` | `var(--global-bg-color)` | 纸 |
+| `--sw-ink` | `var(--global-text-color)` | 正文墨 |
+| `--sw-ink-strong` | `var(--global-heading-color)` | 标题墨（最重的一档） |
+| `--sw-ink-muted` | `var(--global-muted-color)` | 弱化文字 |
+| `--sw-tone` | `var(--global-code-bg)` | 纸灰（浮窗、代码、高亮底） |
+| `--sw-tone-line` | `var(--global-border-color)` | 淡线（静止线、结构基线） |
 | `--sw-rule` | 0.1875rem（3px） | 导航条 / 粗线 |
 | `--sw-rule-mid` | 0.125rem（2px） | 细线、中间档 |
 | `--sw-rule-mast` | 0.375rem（6px） | 报头线 |
@@ -314,7 +327,7 @@ navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），�
 | 变量 | 值 | 用途 |
 | --- | --- | --- |
 | `--sw-nav-rest` | `transparent` | 导航条静止 |
-| `--sw-nav-hover` | `var(--border-color-mid)` | 导航条 hover（中性灰） |
+| `--sw-nav-hover` | `var(--global-border-color-mid)` | 导航条 hover（中性灰） |
 | `--sw-nav-active` | `var(--sw-ink-strong)` | 导航条激活 |
 | `--sw-line-rest` | `var(--sw-tone-line)` | 输入框线静止 |
 | `--sw-line-hover` | `var(--sw-ink-strong)` | 输入框线 hover / 聚焦 |
@@ -326,7 +339,7 @@ navbar 与侧栏的选中项仍然可以点击（会重新进入当前页），�
 | `--sw-swatch-rest` | `var(--sw-tone-line)` | 色卡描边静止 |
 | `--sw-swatch-hover` | `var(--sw-ink-strong)` | 色卡描边 hover / 激活 |
 | `--sw-swatch-outline` | `var(--sw-ink-strong)` | 色卡 hover / 激活附加的 2px outline |
-| `--sw-accent` | `var(--theme-color)` | 唯一允许的彩色，只给下面「主题色预算」里列出的位置 |
+| `--sw-accent` | `var(--global-theme-color-normal)` | 唯一允许的彩色，只给下面「主题色预算」里列出的位置 |
 
 ### 主题色预算
 

@@ -73,13 +73,13 @@
      *  布局变量
      * ============================================================ */
 
-    --global-bg-color-light: #fff;
-    --global-bg-color-dark: #3f3f3f;
-    --global-text-color-light: #34495e;
-    --global-text-color-dark: #c8c8c8;
+    --global-default-bg-color-light: #fff;
+    --global-default-bg-color-dark: #3f3f3f;
+    --global-default-text-color-light: #34495e;
+    --global-default-text-color-dark: #c8c8c8;
 
-    --global-sun: #fff;
-    --global-shadow: #000;
+    --global-light: #fff;
+    --global-dark: #000;
 
     --global-content-width: min(80%, 800px);
     --global-sidebar-width: 300px;
@@ -91,28 +91,70 @@
      *  框架变量
      * ============================================================ */
 
-    --global-theme-color-blur: color-mix(in srgb, var(--theme-color) 10%, transparent);
-    --global-theme-color-blur-near-weak: color-mix(in srgb, var(--theme-color) 18%, transparent);
-    --global-theme-color-blur-little-weak: color-mix(in srgb, var(--theme-color) 30%, transparent);
-    --global-theme-color-blur-semiweak: color-mix(in srgb, var(--theme-color) 40%, transparent);
-    --global-theme-color-blur-weak: color-mix(in srgb, var(--theme-color) 45%, transparent);
+    --global-bg-color: var(--bg-color);
+    --global-text-color: var(--text-color);
+    --global-heading-color: var(--heading-color);
+    --global-muted-color: var(--muted-color);
+    --global-em-color: var(--em-color);
+    --global-h6-color: var(--h6-color);
+    --global-sidebar-text-color: var(--sidebar-text-color);
+    --global-sidebar-title-color: var(--sidebar-title-color);
+    --global-border-color: var(--border-color);
+    --global-border-color-strong: var(--border-color-strong);
+    --global-border-color-mid: var(--border-color-mid);
+    --global-code-bg: var(--code-bg);
+    --global-zebra-bg: var(--zebra-bg);
+    --global-tip-code-bg: var(--tip-code-bg);
+    --global-inline-code-color: var(--inline-code-color);
+    --global-code-text-color: var(--code-text-color);
+    --global-accent-color: var(--accent-color);
+    --global-accent-text-color: var(--accent-text-color);
+    --global-info-color: var(--info-color);
+    --global-info-text-color: var(--info-text-color);
+    --global-blur-color: var(--blur-color);
+    --global-sidebar-toggle-bg: var(--sidebar-toggle-bg);
+    --global-sidebar-border-color: var(--sidebar-border-color);
+    --global-scrollbar-bg-color: var(--scrollbar-bg-color);
+    --global-cover-link-color: var(--cover-link-color);
 
-    --global-theme-color-sun-strong: color-mix(in oklab, var(--theme-color) 90%, var(--global-sun));
-    --global-theme-color-sun-semistrong: color-mix(in oklab, var(--theme-color) 84%, var(--global-sun));
-    --global-theme-color-sun: color-mix(in oklab, var(--theme-color) 76%, var(--global-sun));
+    --global-token-data-color: var(--token-data-color);
+    --global-token-number-color: var(--token-number-color);
+    --global-token-punctuation-color: var(--token-punctuation-color);
+    --global-token-property-color: var(--token-property-color);
+    --global-token-tag-color: var(--token-tag-color);
+    --global-token-selector-color: var(--token-selector-color);
+    --global-token-attr-color: var(--token-attr-color);
+    --global-token-url-color: var(--token-url-color);
+    --global-token-keyword-color: var(--token-keyword-color);
+    --global-token-statement-color: var(--token-statement-color);
+    --global-token-variable-color: var(--token-variable-color);
+    --global-token-inserted-color: var(--token-inserted-color);
+    --global-token-important-color: var(--token-important-color);
 
-    --global-theme-color-1: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-1)), 100) clamp(0, calc(l + var(--cal-theme-color-l-1)), 100));
-    --global-theme-color-2: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-2)), 100) clamp(0, calc(l + var(--cal-theme-color-l-2)), 100));
-    --global-theme-color-3: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-3)), 100) clamp(0, calc(l + var(--cal-theme-color-l-3)), 100));
-    --global-theme-color-4: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-4)), 100) clamp(0, calc(l + var(--cal-theme-color-l-4)), 100));
-    --global-theme-color-5: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-5)), 100) clamp(0, calc(l + var(--cal-theme-color-l-5)), 100));
-    --global-theme-color-6: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-6)), 100) clamp(0, calc(l + var(--cal-theme-color-l-6)), 100));
-    --global-theme-color-7: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
-    --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
+    --global-theme-color-normal: var(--theme-color);
 
-    --global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
+    --global-theme-color-blur-ultra-weak: color-mix(in srgb, var(--global-theme-color-normal) 10%, transparent);
+    --global-theme-color-blur-extra-weak: color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent);
+    --global-theme-color-blur-very-weak: color-mix(in srgb, var(--global-theme-color-normal) 30%, transparent);
+    --global-theme-color-blur-weak: color-mix(in srgb, var(--global-theme-color-normal) 40%, transparent);
+    --global-theme-color-blur-normal: color-mix(in srgb, var(--global-theme-color-normal) 45%, transparent);
 
-    --global-theme-ink-blur: color-mix(in srgb, var(--global-theme-ink) 45%, transparent);
+    --global-theme-color-light-extra-strong: color-mix(in oklab, var(--global-theme-color-normal) 90%, var(--global-light));
+    --global-theme-color-light-very-strong: color-mix(in oklab, var(--global-theme-color-normal) 84%, var(--global-light));
+    --global-theme-color-light-strong: color-mix(in oklab, var(--global-theme-color-normal) 76%, var(--global-light));
+
+    --global-theme-color-ultra-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-1)), 100) clamp(0, calc(l + var(--cal-theme-color-l-1)), 100));
+    --global-theme-color-extra-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-2)), 100) clamp(0, calc(l + var(--cal-theme-color-l-2)), 100));
+    --global-theme-color-very-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-3)), 100) clamp(0, calc(l + var(--cal-theme-color-l-3)), 100));
+    --global-theme-color-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-4)), 100) clamp(0, calc(l + var(--cal-theme-color-l-4)), 100));
+    --global-theme-color-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-5)), 100) clamp(0, calc(l + var(--cal-theme-color-l-5)), 100));
+    --global-theme-color-very-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-6)), 100) clamp(0, calc(l + var(--cal-theme-color-l-6)), 100));
+    --global-theme-color-extra-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
+    --global-theme-color-ultra-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
+
+    --global-theme-color-dark-normal: color-mix(in srgb, var(--global-theme-color-normal) 12%, var(--global-dark));
+
+    --global-theme-color-dark-blur-normal: color-mix(in srgb, var(--global-theme-color-dark-normal) 45%, transparent);
 
     --global-font-size: 16px;
     --global-emoji-size: 1.2em;
@@ -130,44 +172,46 @@
     --global-handwriting-font: 'HanyiSentyFlorCalligraphy', cursive;
     --global-fancy-font: 'HYLuoHuaShiW', cursive;
 
-    --global-font-weight-thin: 100;
-    --global-font-weight-light: 300;
+    --global-font-weight-very-thin: 100;
+    --global-font-weight-thin: 300;
     --global-font-weight-normal: 400;
-    --global-font-weight-medium: 500;
-    --global-font-weight-semibold: 600;
-    --global-font-weight-bold: 700;
+    --global-font-weight-bold: 500;
+    --global-font-weight-very-bold: 600;
+    --global-font-weight-extra-bold: 700;
 
-    --global-brightness-blur: 0.85;
-    --global-opacity-none: 1;
-    --global-opacity-strong: 0.8;
-    --global-opacity-semistrong: 0.7;
+    --global-brightness-weak: 0.85;
+    --global-opacity-full: 1;
+    --global-opacity-very-strong: 0.8;
+    --global-opacity-strong: 0.7;
     --global-opacity-normal: 0.6;
     --global-opacity-weak: 0.4;
     --global-opacity-very-weak: 0.3;
+    --global-opacity-none: 0;
 
     --global-backdrop-filter: blur(30px);
 
-    --global-border: 1px solid;
+    --global-border-normal: 1px solid;
     --global-border-strong: 2px solid;
-    --global-border-semistrong: 3px solid;
-    --global-border-emphasis: 4px solid;
+    --global-border-very-strong: 3px solid;
+    --global-border-extra-strong: 4px solid;
     --global-border-weak: 1px dotted;
-    --global-border-width: 1px;
+    --global-border-normal-width: 1px;
     --global-border-strong-width: 2px;
-    --global-border-semistrong-width: 3px;
+    --global-border-very-strong-width: 3px;
 
     --global-border-radius-big: 0.625rem;
-    --global-border-radius: 0.3125rem;
+    --global-border-radius-normal: 0.3125rem;
     --global-border-radius-small: 0.125rem;
     --global-border-radius-none: 0;
     --global-border-radius-round: 50%;
 
     --global-outline-offset: 2px;
 
-    --global-box-shadow-width: 0.625rem;
+    --global-inset-box-shadow-normal: inset 0 0 0 2px;
+    --global-inset-box-shadow-semi-strong: inset 0 0 0 3px;
 
-    --global-shadow-blur: color-mix(in srgb,
-            var(--global-shadow) calc(var(--global-opacity-weak) * 100%),
+    --global-dark-blur: color-mix(in srgb,
+            var(--global-dark) calc(var(--global-opacity-weak) * 100%),
             transparent);
 
     --global-aspect-ratio-square: 1 / 1;
@@ -175,11 +219,11 @@
     --global-aspect-ratio-tv: 16 / 9;
 
     --global-transition-duration-fast: 250ms;
-    --global-transition-duration: 500ms;
+    --global-transition-duration-normal: 500ms;
     --global-transition-duration-slow: 1s;
     --global-transition-duration-very-slow: 2s;
-    --global-transition-duration-super-slow: 3s;
-    --global-transition-duration-most-slow: 5s;
+    --global-transition-duration-extra-slow: 3s;
+    --global-transition-duration-ultra-slow: 5s;
 
     --global-transform-ratio-big: 1.3;
     --global-transform-ratio-normal: 1.2;
@@ -194,7 +238,7 @@
     --global-scrollbar-border-radius: 4px;
     --global-link-decoration-width: 0.15em;
 
-    --global-icon-size-large: 100px;
+    --global-icon-size-very-big: 100px;
     --global-icon-size-big: 80px;
     --global-widget-size-normal: 1.5rem;
     --global-widget-size-small: 1.3rem;
@@ -207,28 +251,28 @@
     --global-el-border-radius: var(--global-border-radius-big);
     --global-el-border-radius-small: var(--global-border-radius-small);
     --global-el-border-radius-none: var(--global-border-radius-none);
-    --global-control-border-radius: var(--global-border-radius);
+    --global-control-border-radius: var(--global-border-radius-normal);
     --global-icon-border-radius: var(--global-control-border-radius);
     --global-widget-border-radius: var(--global-control-border-radius);
     --global-avatar-border-radius: var(--global-border-radius-round);
 
     --global-focus-outline: var(--global-border-strong);
     --global-focus-outline-width: var(--global-border-strong-width);
-    --global-focus-outline-color: var(--global-theme-color-8);
+    --global-focus-outline-color: var(--global-theme-color-ultra-strong);
     --global-focus-outline-offset: var(--global-outline-offset);
 
     --global-transition-color:
-        color var(--global-transition-duration),
-        text-decoration-color var(--global-transition-duration),
-        border-color var(--global-transition-duration),
-        outline-color var(--global-transition-duration),
-        box-shadow var(--global-transition-duration),
-        background-color var(--global-transition-duration);
-    --global-transition-transform: transform var(--global-transition-duration);
+        color var(--global-transition-duration-normal),
+        text-decoration-color var(--global-transition-duration-normal),
+        border-color var(--global-transition-duration-normal),
+        outline-color var(--global-transition-duration-normal),
+        box-shadow var(--global-transition-duration-normal),
+        background-color var(--global-transition-duration-normal);
+    --global-transition-transform: transform var(--global-transition-duration-normal);
     --global-transition-filter:
-        opacity var(--global-transition-duration),
-        filter var(--global-transition-duration);
-    --global-transition-font: font-weight var(--global-transition-duration);
+        opacity var(--global-transition-duration-normal),
+        filter var(--global-transition-duration-normal);
+    --global-transition-font: font-weight var(--global-transition-duration-normal);
     --global-transition-color-fast:
         color var(--global-transition-duration-fast),
         text-decoration-color var(--global-transition-duration-fast),
@@ -245,10 +289,10 @@
     --global-scale-active: var(--global-transform-ratio-normal);
     --global-scale-press: var(--global-transform-ratio-big);
 
-    --global-accent-level-1: var(--global-theme-color-blur-weak);
-    --global-accent-level-2: var(--theme-color);
-    --global-accent-level-3: var(--global-theme-color-7);
-    --global-accent-level-4: var(--global-theme-color-8);
+    --global-accent-level-1: var(--global-theme-color-blur-normal);
+    --global-accent-level-2: var(--global-theme-color-normal);
+    --global-accent-level-3: var(--global-theme-color-extra-strong);
+    --global-accent-level-4: var(--global-theme-color-ultra-strong);
 
     --global-nav-bar-rest: transparent;
     --global-nav-bar-hover: var(--global-accent-level-1);
@@ -257,34 +301,37 @@
     --global-link-decoration-rest: var(--global-accent-level-2);
     --global-link-decoration-hover: var(--global-accent-level-3);
 
-    --global-control-border-rest: var(--border-color);
+    --global-control-border-rest: var(--global-border-color);
     --global-control-border-hover: var(--global-accent-level-1);
     --global-control-border-active: var(--global-accent-level-2);
     --global-control-border-press: var(--global-accent-level-3);
 
     --global-surface-hollow-rest: transparent;
-    --global-surface-hollow-hover: var(--global-theme-color-blur-little-weak);
-    --global-surface-hollow-active: var(--global-theme-color-blur-little-weak);
-    --global-surface-hollow-press: var(--global-theme-color-blur-semiweak);
+    --global-surface-hollow-hover: var(--global-theme-color-blur-very-weak);
+    --global-surface-hollow-active: var(--global-theme-color-blur-very-weak);
+    --global-surface-hollow-press: var(--global-theme-color-blur-weak);
     --global-surface-hollow-border-rest: var(--global-accent-level-1);
     --global-surface-hollow-border-hover: var(--global-accent-level-2);
     --global-surface-hollow-border-active: var(--global-accent-level-3);
     --global-surface-hollow-border-press: var(--global-accent-level-4);
-    --global-surface-hollow-text-rest: var(--global-theme-color-8);
-    --global-surface-hollow-text-hover: var(--global-theme-color-8);
-    --global-surface-hollow-text-active: var(--global-theme-color-8);
-    --global-surface-hollow-text-press: var(--global-theme-color-8);
+    --global-surface-hollow-text-rest: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-hover: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-active: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-press: var(--global-theme-color-ultra-strong);
 
     --global-surface-solid-rest: var(--global-accent-level-2);
-    --global-surface-solid-hover: var(--global-theme-color-sun-strong);
-    --global-surface-solid-active: var(--global-theme-color-sun-semistrong);
-    --global-surface-solid-press: var(--global-theme-color-sun);
-    --global-surface-solid-text: var(--global-theme-ink);
-    --global-surface-solid-ring-hover: var(--global-theme-ink-blur);
-    --global-surface-solid-ring-active: var(--global-theme-ink);
-    --global-surface-solid-ring-press: var(--global-theme-ink);
+    --global-surface-solid-hover: var(--global-theme-color-light-extra-strong);
+    --global-surface-solid-active: var(--global-theme-color-light-very-strong);
+    --global-surface-solid-press: var(--global-theme-color-light-strong);
+    --global-surface-solid-text: var(--global-theme-color-dark-normal);
+    --global-surface-solid-ring-hover: var(--global-theme-color-dark-blur-normal);
+    --global-surface-solid-ring-active: var(--global-theme-color-dark-normal);
+    --global-surface-solid-ring-press: var(--global-theme-color-dark-normal);
 
-    --global-table-row-hover: var(--global-theme-color-blur-near-weak);
+    --global-surface-solid-inset-ring-hover: var(--global-inset-box-shadow-normal) var(--global-surface-solid-ring-hover);
+    --global-surface-solid-inset-ring-press: var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press);
+
+    --global-table-row-hover: var(--global-theme-color-blur-extra-weak);
 
     --global-writing-container-height: var(--global-container-height);
     --global-sidenote-width: var(--global-container-width);
@@ -292,14 +339,15 @@
 
 @supports (color: oklch(from red 0.5 0 h)) {
     :root {
-        --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+        --global-theme-color-dark-normal: oklch(from var(--global-theme-color-normal) clamp(0.08, calc(1 - l), 0.92) 0 h);
     }
 }
 
 @media screen and (max-width:768px) {
     :root {
         --global-widget-size-normal: 1.3rem;
-        --global-widget-size-small: 1rem;
+        --global-widget-size-small: 1.1rem;
+        --global-widget-size-very-small: 0.9rem;
     }
 }
 
@@ -309,8 +357,8 @@ center {
 }
 
 ::selection {
-    background-color: var(--global-theme-color-8);
-    color: var(--global-theme-color-1);
+    background-color: var(--global-theme-color-ultra-strong);
+    color: var(--global-theme-color-ultra-weak);
 }
 
 :is(a[href],
@@ -357,7 +405,7 @@ textarea {
 html {
     font-size: var(--global-font-size);
     scrollbar-width: thin;
-    scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
+    scrollbar-color: var(--global-theme-color-normal) var(--global-scrollbar-bg-color);
 }
 
 body:not(.ready) {
@@ -372,19 +420,19 @@ body:not(.ready) [data-cloak] {
 
 div#app {
     font-size: 1.875rem;
-    font-weight: var(--global-font-weight-thin);
+    font-weight: var(--global-font-weight-very-thin);
     padding: 40vh 0;
     height: 100vh;
     width: 100vw;
-    background-color: var(--global-bg-color-light);
-    color: var(--global-text-color-light);
+    background-color: var(--global-default-bg-color-light);
+    color: var(--global-default-text-color-light);
     text-align: center
 }
 
 @media (prefers-color-scheme: dark) {
     div#app {
-        background-color: var(--global-bg-color-dark);
-        color: var(--global-text-color-dark);
+        background-color: var(--global-default-bg-color-dark);
+        color: var(--global-default-text-color-dark);
     }
 }
 
@@ -407,13 +455,13 @@ span.emoji {
 }
 
 .progress {
-    background-color: var(--theme-color);
+    background-color: var(--global-theme-color-normal);
     height: var(--global-progress-width);
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
-    transition: width var(--global-transition-duration-fast), opacity var(--global-transition-duration);
+    transition: width var(--global-transition-duration-fast), opacity var(--global-transition-duration-normal);
     width: 0;
     z-index: 999999
 }
@@ -430,12 +478,12 @@ span.emoji {
 }
 
 .search .search-keyword {
-    color: var(--theme-color)
+    color: var(--global-theme-color-normal)
 }
 
 .search .search-keyword {
     font-style: normal;
-    font-weight: var(--global-font-weight-bold)
+    font-weight: var(--global-font-weight-extra-bold)
 }
 
 body,
@@ -444,7 +492,7 @@ html {
 }
 
 body {
-    color: var(--text-color);
+    color: var(--global-text-color);
     font-family: var(--global-font);
     font-size: 1rem;
     letter-spacing: 0;
@@ -467,11 +515,11 @@ a[disabled] {
 }
 
 kbd {
-    background: var(--code-bg);
-    border: var(--global-border) var(--border-color-strong);
+    background: var(--global-code-bg);
+    border: var(--global-border-normal) var(--global-border-color-strong);
     border-bottom-width: var(--global-border-strong-width);
     border-radius: var(--global-el-border-radius-small);
-    color: var(--text-color);
+    color: var(--global-text-color);
     display: inline-block;
     font-family: inherit;
     font-size: 0.875em;
@@ -527,8 +575,8 @@ li input[type=checkbox] {
 }
 
 .app-nav a.active {
-    color: var(--theme-color);
-    font-weight: var(--global-font-weight-semibold);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
     border-bottom-color: var(--global-nav-bar-active)
 }
 
@@ -541,8 +589,8 @@ li input[type=checkbox] {
 }
 
 .app-nav li ul {
-    background-color: var(--zebra-bg);
-    border: var(--global-border) var(--border-color-strong);
+    background-color: var(--global-zebra-bg);
+    border: var(--global-border-normal) var(--global-border-color-strong);
     border-radius: 0.25rem;
     box-sizing: border-box;
     display: none;
@@ -589,12 +637,12 @@ li input[type=checkbox] {
 }
 
 .github-corner:hover .octo-arm {
-    animation: octocat-wave var(--global-transition-duration) ease-in-out
+    animation: octocat-wave var(--global-transition-duration-normal) ease-in-out
 }
 
 .github-corner svg {
-    color: var(--bg-color);
-    fill: var(--theme-color);
+    color: var(--global-bg-color);
+    fill: var(--global-theme-color-normal);
     height: var(--global-icon-size-big);
     width: var(--global-icon-size-big)
 }
@@ -619,7 +667,7 @@ main.hidden {
 }
 
 .anchor span {
-    color: var(--text-color)
+    color: var(--global-text-color)
 }
 
 .anchor:hover {
@@ -627,8 +675,8 @@ main.hidden {
 }
 
 .sidebar {
-    color: var(--sidebar-title-color);
-    border-right: var(--global-border) var(--sidebar-border-color);
+    color: var(--global-sidebar-title-color);
+    border-right: var(--global-border-normal) var(--global-sidebar-border-color);
     overflow-y: auto;
     padding: 2.5rem 0 0;
     position: absolute;
@@ -639,13 +687,13 @@ main.hidden {
     width: var(--global-sidebar-width);
     z-index: 20;
     scrollbar-width: thin;
-    scrollbar-color: var(--theme-color) var(--scrollbar-bg-color);
+    scrollbar-color: var(--global-theme-color-normal) var(--global-scrollbar-bg-color);
 }
 
 .sidebar>h1 {
     margin: 0 auto 1rem;
     font-size: 1.5rem;
-    font-weight: var(--global-font-weight-light);
+    font-weight: var(--global-font-weight-thin);
     text-align: center
 }
 
@@ -684,7 +732,7 @@ main.hidden {
     margin: 0.625rem 0;
     padding-right: 5%;
     padding-bottom: 0.3125rem;
-    border-bottom: var(--global-border) var(--border-color);
+    border-bottom: var(--global-border-normal) var(--global-border-color);
 }
 
 .sidebar ul,
@@ -698,7 +746,7 @@ main.hidden {
 }
 
 .sidebar-toggle {
-    background-color: var(--sidebar-toggle-bg);
+    background-color: var(--global-sidebar-toggle-bg);
     border: 0;
     padding: 0.625rem;
     position: absolute;
@@ -725,7 +773,7 @@ main.hidden {
 }
 
 .sidebar-toggle span {
-    background-color: var(--theme-color);
+    background-color: var(--global-theme-color-normal);
     display: block;
     margin-bottom: 0.25rem;
     width: 1rem;
@@ -765,12 +813,12 @@ body.sticky .sidebar-toggle {
 
 .markdown-section hr {
     border: none;
-    border-bottom: var(--global-border) var(--border-color);
+    border-bottom: var(--global-border-normal) var(--global-border-color);
     margin: 2rem 0
 }
 
 .markdown-section iframe {
-    border: var(--global-border) var(--border-color);
+    border: var(--global-border-normal) var(--global-border-color);
     width: 1px;
     min-width: 100%
 }
@@ -789,23 +837,23 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section th {
-    font-weight: var(--global-font-weight-bold);
-    color: var(--heading-color);
+    font-weight: var(--global-font-weight-extra-bold);
+    color: var(--global-heading-color);
 }
 
 .markdown-section td,
 .markdown-section th {
-    border: var(--global-border) var(--border-color-strong);
+    border: var(--global-border-normal) var(--global-border-color-strong);
     padding: 0.375rem 0.8125rem
 }
 
 .markdown-section tr {
-    border-top: var(--global-border) var(--border-color-mid)
+    border-top: var(--global-border-normal) var(--global-border-color-mid)
 }
 
 .markdown-section p.tip,
 .markdown-section p.warn {
-    background-color: var(--zebra-bg)
+    background-color: var(--global-zebra-bg)
 }
 
 .markdown-section tbody tr {
@@ -829,7 +877,7 @@ body.sticky .sidebar-toggle {
     border-radius: 100%;
     font-family: var(--global-code-font);
     font-size: 1rem;
-    font-weight: var(--global-font-weight-bold);
+    font-weight: var(--global-font-weight-extra-bold);
     left: 0.75rem;
     line-height: 1.25rem;
     position: absolute;
@@ -841,32 +889,32 @@ body.sticky .sidebar-toggle {
 
 .markdown-section p.tip code,
 .markdown-section p.warn code {
-    background-color: var(--tip-code-bg)
+    background-color: var(--global-tip-code-bg)
 }
 
 .markdown-section p.tip em,
 .markdown-section p.warn em {
-    color: var(--text-color)
+    color: var(--global-text-color)
 }
 
 .markdown-section p.tip {
-    border-left: var(--global-border-emphasis) var(--accent-color);
+    border-left: var(--global-border-extra-strong) var(--global-accent-color);
 }
 
 .markdown-section p.warn {
-    border-left: var(--global-border-emphasis) var(--info-color);
+    border-left: var(--global-border-extra-strong) var(--global-info-color);
 }
 
 .markdown-section p.tip:before {
     content: "!";
-    background-color: var(--accent-color);
-    color: var(--accent-text-color);
+    background-color: var(--global-accent-color);
+    color: var(--global-accent-text-color);
 }
 
 .markdown-section p.warn:before {
     content: "i";
-    background-color: var(--info-color);
-    color: var(--info-text-color);
+    background-color: var(--global-info-color);
+    color: var(--global-info-text-color);
 }
 
 .markdown-section ul.task-list>li {
@@ -956,7 +1004,7 @@ body.close .content {
     }
 
     body.close .sidebar-toggle {
-        background-color: var(--sidebar-toggle-bg);
+        background-color: var(--global-sidebar-toggle-bg);
         transition: background-color var(--global-transition-duration-slow);
         width: var(--global-sidebar-toggle-width);
         padding: 0.625rem
@@ -976,7 +1024,7 @@ body.close .content {
         content: '';
         position: fixed;
         inset: 0;
-        background-color: var(--global-shadow-blur);
+        background-color: var(--global-dark-blur);
         opacity: 0;
         z-index: -1;
         transition: opacity var(--global-transition-duration-fast) ease;
@@ -992,7 +1040,7 @@ body.close .content {
     }
 
     .github-corner .octo-arm {
-        animation: octocat-wave var(--global-transition-duration) ease-in-out
+        animation: octocat-wave var(--global-transition-duration-normal) ease-in-out
     }
 }
 
@@ -1030,8 +1078,8 @@ section.cover.show {
 }
 
 section.cover.has-mask .mask {
-    background-color: var(--bg-color);
-    opacity: var(--global-opacity-strong);
+    background-color: var(--global-bg-color);
+    opacity: var(--global-opacity-very-strong);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -1062,7 +1110,7 @@ section.cover p {
 section.cover h1 {
     color: inherit;
     font-size: 2.5rem;
-    font-weight: var(--global-font-weight-light);
+    font-weight: var(--global-font-weight-thin);
     margin: .625rem 0 2.5rem;
     position: relative;
     text-align: center
@@ -1104,7 +1152,7 @@ section.cover :is(p, li, blockquote) a:hover {
 
 .sidebar,
 body {
-    background-color: var(--bg-color)
+    background-color: var(--global-bg-color)
 }
 
 .sidebar li {
@@ -1112,7 +1160,7 @@ body {
 }
 
 .sidebar ul li a {
-    color: var(--sidebar-text-color);
+    color: var(--global-sidebar-text-color);
     font-size: 0.875rem;
     font-weight: var(--global-font-weight-normal);
     overflow: hidden;
@@ -1129,8 +1177,8 @@ body {
 }
 
 .sidebar ul li.active>a {
-    color: var(--theme-color);
-    font-weight: var(--global-font-weight-semibold);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
     border-left-color: var(--global-nav-bar-active);
 }
 
@@ -1144,13 +1192,13 @@ body {
 .markdown-section h3,
 .markdown-section h4,
 .markdown-section strong {
-    color: var(--heading-color);
-    font-weight: var(--global-font-weight-semibold)
+    color: var(--global-heading-color);
+    font-weight: var(--global-font-weight-very-bold)
 }
 
 .markdown-section a {
-    color: var(--theme-color);
-    font-weight: var(--global-font-weight-semibold)
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold)
 }
 
 .markdown-section h1 {
@@ -1179,7 +1227,7 @@ body {
 }
 
 .markdown-section h6 {
-    color: var(--h6-color);
+    color: var(--global-h6-color);
     font-size: 1rem;
     margin: 1.2rem 0
 }
@@ -1227,14 +1275,14 @@ body {
 }
 
 .markdown-section blockquote {
-    border-left: var(--global-border-emphasis) var(--theme-color);
-    color: var(--muted-color);
+    border-left: var(--global-border-extra-strong) var(--global-theme-color-normal);
+    color: var(--global-muted-color);
     margin: 2rem 0;
     padding-left: 1.25rem
 }
 
 .markdown-section blockquote p {
-    font-weight: var(--global-font-weight-semibold);
+    font-weight: var(--global-font-weight-very-bold);
     margin-left: 0
 }
 
@@ -1247,7 +1295,7 @@ body {
 }
 
 .markdown-section em {
-    color: var(--em-color)
+    color: var(--global-em-color)
 }
 
 .markdown-section code,
@@ -1258,7 +1306,7 @@ body {
 
 .markdown-section code,
 .markdown-section pre {
-    background-color: var(--code-bg)
+    background-color: var(--global-code-bg)
 }
 
 .markdown-section output,
@@ -1275,7 +1323,7 @@ body {
 
 .markdown-section code {
     border-radius: var(--global-el-border-radius-small);
-    color: var(--inline-code-color);
+    color: var(--global-inline-code-color);
     margin: 0 0.125rem;
     padding: 0.1875rem 0.3125rem;
     white-space: pre-wrap
@@ -1293,7 +1341,7 @@ body {
 }
 
 .markdown-section pre>code {
-    color: var(--code-text-color);
+    color: var(--global-code-text-color);
     font-size: .8rem;
     padding: 1.76rem 0.3125rem;
     line-height: inherit;
@@ -1305,8 +1353,8 @@ body {
 
 .markdown-section output {
     padding: 1.7rem 1.4rem;
-    background-color: var(--zebra-bg);
-    border: var(--global-border) var(--border-color-strong)
+    background-color: var(--global-zebra-bg);
+    border: var(--global-border-normal) var(--global-border-color-strong)
 }
 
 .markdown-section output>:first-child {
@@ -1326,9 +1374,9 @@ body {
 
 .markdown-section output:after,
 .markdown-section pre:after {
-    color: var(--border-color-mid);
+    color: var(--global-border-color-mid);
     font-size: .6rem;
-    font-weight: var(--global-font-weight-semibold);
+    font-weight: var(--global-font-weight-very-bold);
     height: 0.9375rem;
     line-height: 0.9375rem;
     padding: 0.3125rem 0.625rem 0;
@@ -1341,8 +1389,8 @@ body {
 
 .markdown-section mark {
     padding: 0.3em 0.2em 0;
-    background-color: var(--global-theme-color-1);
-    color: var(--global-theme-color-8);
+    background-color: var(--global-theme-color-ultra-weak);
+    color: var(--global-theme-color-ultra-strong);
     border-radius: var(--global-el-border-radius-small);
 }
 
@@ -1381,7 +1429,7 @@ body {
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 4 L16 10 L5 16 Z' fill='black' stroke='black' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 
     transform-origin: center;
-    transition: transform var(--global-transition-duration);
+    transition: transform var(--global-transition-duration-normal);
 }
 
 .markdown-section details[open] summary::before {
@@ -1419,70 +1467,70 @@ body {
 .token.comment,
 .token.doctype,
 .token.prolog {
-    color: var(--token-data-color)
+    color: var(--global-token-data-color)
 }
 
 .token.namespace {
-    opacity: var(--global-opacity-semistrong)
+    opacity: var(--global-opacity-strong)
 }
 
 .token.boolean,
 .token.number {
-    color: var(--token-number-color);
+    color: var(--global-token-number-color);
 }
 
 .token.punctuation {
-    color: var(--token-punctuation-color);
+    color: var(--global-token-punctuation-color);
 }
 
 .token.property {
-    color: var(--token-property-color);
+    color: var(--global-token-property-color);
 }
 
 .token.tag {
-    color: var(--token-tag-color);
+    color: var(--global-token-tag-color);
 }
 
 .token.string {
-    color: var(--theme-color)
+    color: var(--global-theme-color-normal)
 }
 
 .token.selector {
-    color: var(--token-selector-color);
+    color: var(--global-token-selector-color);
 }
 
 .token.attr-name {
-    color: var(--token-attr-color);
+    color: var(--global-token-attr-color);
 }
 
 .language-css .token.string,
 .style .token.string,
 .token.entity,
 .token.url {
-    color: var(--token-url-color);
+    color: var(--global-token-url-color);
 }
 
 .token.attr-value,
 .token.control,
 .token.directive,
 .token.unit {
-    color: var(--theme-color)
+    color: var(--global-theme-color-normal)
 }
 
 .token.function,
 .token.keyword {
-    color: var(--token-keyword-color);
+    color: var(--global-token-keyword-color);
 }
 
 .token.atrule,
 .token.regex,
 .token.statement {
-    color: var(--token-statement-color);
+    color: var(--global-token-statement-color);
 }
 
 .token.placeholder,
 .token.variable {
-    color: var(--token-variable-color);
+    color: var(--global-token-variable-color);
 }
 
 .token.deleted {
@@ -1490,7 +1538,7 @@ body {
 }
 
 .token.inserted {
-    border-bottom: var(--global-border-weak) var(--token-inserted-color);
+    border-bottom: var(--global-border-weak) var(--global-token-inserted-color);
     text-decoration: none
 }
 
@@ -1500,11 +1548,11 @@ body {
 
 .token.bold,
 .token.important {
-    font-weight: var(--global-font-weight-bold)
+    font-weight: var(--global-font-weight-extra-bold)
 }
 
 .token.important {
-    color: var(--token-important-color);
+    color: var(--global-token-important-color);
 }
 
 .token.entity {

@@ -12,7 +12,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-theme-color-blur-ultra-weak);
     backdrop-filter: var(--global-backdrop-filter);
     cursor: zoom-out;
 }
@@ -23,7 +23,7 @@
     position: absolute;
     cursor: pointer;
     box-sizing: border-box;
-    border: var(--global-border) var(--global-surface-hollow-border-rest);
+    border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
     border-radius: var(--global-control-border-radius);
     color: var(--global-surface-hollow-text-rest);
     display: flex;
@@ -73,7 +73,7 @@
     height: 3%;
     position: absolute;
     text-align: center;
-    color: var(--theme-color);
+    color: var(--global-theme-color-normal);
     font-size: var(--viewImg-button-size);
 }
 
@@ -82,7 +82,7 @@ img:not(.ignore-view-full-image-img):not(.emoji) {
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji):hover {
-    filter: brightness(var(--global-brightness-blur));
+    filter: brightness(var(--global-brightness-weak));
 }
 
 img:not(.ignore-view-full-image-img):not(.emoji) {

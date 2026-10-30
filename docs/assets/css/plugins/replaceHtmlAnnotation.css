@@ -24,11 +24,11 @@
     font-family: var(--global-classic-font);
     font-size: 2.25rem;
     line-height: 1.2;
-    color: var(--heading-color);
+    color: var(--global-heading-color);
     list-style: none;
     margin: 0 0 0.4rem;
     padding: 0 0 0.5rem;
-    border-bottom: 2px solid var(--border-color-strong);
+    border-bottom: 2px solid var(--global-border-color-strong);
     position: relative;
     transition: var(--global-transition-color);
     cursor: pointer;
@@ -58,7 +58,7 @@
     opacity: 0.5;
     transform: rotate(-14deg) scale(0.9);
     transform-origin: center;
-    transition: opacity var(--global-transition-duration), transform var(--global-transition-duration);
+    transition: opacity var(--global-transition-duration-normal), transform var(--global-transition-duration-normal);
 }
 
 .brief-comments-container .brief-comments-in-blog-title-year[open]>summary::before {
@@ -79,7 +79,7 @@
     gap: 1rem;
     margin: 0;
     padding: 1.1rem 0;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--global-border-color);
 }
 
 .brief-comments-in-blog:first-of-type {
@@ -105,13 +105,13 @@
     padding: 0 0 0 1rem;
     background: none;
     border: 0;
-    border-left: 2px solid var(--border-color-strong);
+    border-left: 2px solid var(--global-border-color-strong);
     border-radius: 0;
     transition: var(--global-transition-color);
 }
 
 .brief-comments-in-blog-comments-container:hover {
-    border-left-color: var(--theme-color);
+    border-left-color: var(--global-theme-color-normal);
 }
 
 .brief-comments-container .brief-comments-in-blog-comments-container blockquote {
@@ -122,14 +122,14 @@
     border: 0;
     width: 100%;
     height: 0;
-    border-top: 2px dotted var(--border-color);
+    border-top: 2px dotted var(--global-border-color);
     position: relative;
     overflow: visible;
     margin: 1.2rem 0;
 }
 
 .brief-comments-in-blog-comments-divider:before {
-    animation: move var(--global-transition-duration-most-slow) infinite linear;
+    animation: move var(--global-transition-duration-ultra-slow) infinite linear;
     position: absolute;
     top: -0.875rem;
     left: 0;
@@ -159,7 +159,7 @@
     }
 
     .brief-comments-in-blog-comments-divider:before {
-        animation: move var(--global-transition-duration-super-slow) infinite linear;
+        animation: move var(--global-transition-duration-extra-slow) infinite linear;
     }
 }
 
@@ -186,9 +186,9 @@
     overflow: hidden;
     min-height: 11.375rem;
     padding: 1rem 1.25rem;
-    background-color: var(--zebra-bg);
+    background-color: var(--global-zebra-bg);
     border-radius: var(--global-el-border-radius);
-    border: var(--global-border) var(--border-color-strong);
+    border: var(--global-border-normal) var(--global-border-color-strong);
     align-items: center;
     box-sizing: border-box;
 }
@@ -222,7 +222,6 @@
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: var(--text-muted);
 }
 
 @media screen and (max-width: 768px) {
@@ -257,19 +256,19 @@
 
 /* Footnote */
 .footnote-num-sup {
-    color: var(--theme-color);
+    color: var(--global-theme-color-normal);
     padding: 0 0.125rem;
 }
 
 .footnote-div {
-    border-left: var(--global-border-strong) var(--global-theme-color-3);
-    color: var(--muted-color);
+    border-left: var(--global-border-strong) var(--global-theme-color-very-weak);
+    color: var(--global-muted-color);
     padding-left: 0.75rem;
-    background: var(--zebra-bg);
+    background: var(--global-zebra-bg);
 }
 
 .footnote-div ol li::marker {
-    color: var(--theme-color);
+    color: var(--global-theme-color-normal);
 }
 
 .docsify-example-panels:has(.footnote-div) .left-panel {
@@ -285,8 +284,8 @@
 /* About Page */
 .main-page-right-panel-container {
     font-family: var(--global-handwriting-font);
-    border: var(--global-border) var(--border-color-strong);
-    background-color: var(--zebra-bg);
+    border: var(--global-border-normal) var(--global-border-color-strong);
+    background-color: var(--global-zebra-bg);
     border-radius: var(--global-el-border-radius);
     margin: 1.2rem auto;
     max-width: var(--global-sidenote-width);
@@ -298,7 +297,7 @@
 }
 
 .main-page-about-me-avatar {
-    max-width: var(--global-icon-size-large);
+    max-width: var(--global-icon-size-very-big);
     margin-top: 1.25rem;
     border-radius: var(--global-avatar-border-radius);
     overflow: hidden;
@@ -389,7 +388,7 @@
     text-align: right;
 
     blockquote {
-        border-right: var(--global-border-emphasis) var(--theme-color);
+        border-right: var(--global-border-extra-strong) var(--global-theme-color-normal);
         border-left: 0;
         padding-right: 1.25rem;
         padding-left: 0;
@@ -408,8 +407,8 @@
 
 .writing-direction-vertical-div {
     padding: 1rem 0;
-    border-top: var(--global-border) var(--border-color);
-    border-bottom: var(--global-border) var(--border-color);
+    border-top: var(--global-border-normal) var(--global-border-color);
+    border-bottom: var(--global-border-normal) var(--global-border-color);
 
     h1 {
         margin: 0 0 0 1.2rem;
@@ -430,7 +429,7 @@
 
     blockquote {
         margin: 0 2rem;
-        border-top: var(--global-border-emphasis) var(--theme-color);
+        border-top: var(--global-border-extra-strong) var(--global-theme-color-normal);
         border-left: 0;
         padding-top: 1.25rem;
         padding-left: 0;

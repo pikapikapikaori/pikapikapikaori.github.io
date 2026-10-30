@@ -29,8 +29,8 @@
 
 .markdown-section .breadcrumb li.active {
     border-bottom-color: var(--global-nav-bar-active);
-    color: var(--theme-color);
-    font-weight: var(--global-font-weight-semibold);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
 }
 
 .markdown-section .breadcrumb a {

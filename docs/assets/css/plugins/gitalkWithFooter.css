@@ -16,7 +16,7 @@
 
 #footer-under-gitalk>div {
     padding-top: 2.5rem;
-    border-top: var(--global-border) var(--border-color);
+    border-top: var(--global-border-normal) var(--global-border-color);
 }
 
 /* Gitalk */
@@ -51,19 +51,19 @@
 }
 
 #gitalk-container .gt-link {
-    color: var(--theme-color);
+    color: var(--global-theme-color-normal);
     border-bottom: 0;
 }
 
 #gitalk-container .gt-btn-login {
     color: var(--global-surface-solid-text);
     background-color: var(--global-surface-solid-rest);
-    border: var(--global-border) var(--global-surface-solid-rest);
+    border: var(--global-border-normal) var(--global-surface-solid-rest);
 }
 
 #gitalk-container .gt-btn-preview {
     color: var(--global-surface-hollow-text-rest);
-    border: var(--global-border) var(--global-surface-hollow-border-rest);
+    border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
 }
 
 #gitalk-container .gt-btn-public {
@@ -88,35 +88,35 @@
 #gitalk-container .gt-container .gt-btn-public:hover {
     background-color: var(--global-surface-solid-hover);
     border-color: var(--global-surface-solid-hover);
-    box-shadow: inset 0 0 0 2px var(--global-surface-solid-ring-hover);
+    box-shadow: var(--global-surface-solid-inset-ring-hover);
 }
 
 #gitalk-container .gt-container .gt-btn-login:active,
 #gitalk-container .gt-container .gt-btn-public:active {
     background-color: var(--global-surface-solid-press);
     border-color: var(--global-surface-solid-press);
-    box-shadow: inset 0 0 0 3px var(--global-surface-solid-ring-press);
+    box-shadow: var(--global-surface-solid-inset-ring-press);
 }
 
 #gitalk-container .gt-container .gt-comment-username {
-    color: var(--heading-color);
-    font-weight: var(--global-font-weight-semibold);
+    color: var(--global-heading-color);
+    font-weight: var(--global-font-weight-very-bold);
 }
 
 #gitalk-container .gt-container .gt-ico-github .gt-svg svg {
-    fill: var(--theme-color);
+    fill: var(--global-theme-color-normal);
 }
 
 #gitalk-container .gt-container .gt-svg svg {
-    fill: var(--theme-color);
+    fill: var(--global-theme-color-normal);
 }
 
 #gitalk-container .gt-container a.is--active {
-    color: var(--theme-color) !important;
+    color: var(--global-theme-color-normal) !important;
 }
 
 #gitalk-container .gt-container a.is--active:before {
-    background: var(--theme-color) !important;
+    background: var(--global-theme-color-normal) !important;
 }
 
 #gitalk-container .gt-avatar,
@@ -154,12 +154,12 @@
 
 #gitalk-container .gt-container .gt-comment-content {
     border-radius: var(--global-el-border-radius);
-    background: var(--zebra-bg);
-    border: var(--global-border) var(--border-color-strong);
+    background: var(--global-zebra-bg);
+    border: var(--global-border-normal) var(--global-border-color-strong);
 }
 
 #gitalk-container .gt-container .gt-comment.gt-comment-admin .gt-comment-content {
-    background: var(--global-theme-color-blur);
+    background: var(--global-theme-color-blur-ultra-weak);
 }
 
 #gitalk-container .gt-container .gt-comment-content:hover {
@@ -186,20 +186,20 @@
 }
 
 #gitalk-container .gt-container .gt-popup {
-    background-color: var(--zebra-bg);
-    border-color: var(--border-color-strong);
+    background-color: var(--global-zebra-bg);
+    border-color: var(--global-border-color-strong);
 }
 
 #gitalk-container .gt-container .gt-popup .gt-copyright {
-    border-color: var(--border-color);
+    border-color: var(--global-border-color);
 }
 
 #gitalk-container .gt-container .gt-popup .gt-copyright .gt-version {
-    color: var(--em-color);
+    color: var(--global-em-color);
 }
 
 #gitalk-container .gt-container .gt-btn-preview {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
 }
 
 #gitalk-container .gt-container .gt-btn {
@@ -217,13 +217,13 @@
 
     .gt-header-textarea,
     .gt-header-preview {
-        background-color: var(--zebra-bg);
-        border: var(--global-border) var(--border-color-strong);
+        background-color: var(--global-zebra-bg);
+        border: var(--global-border-normal) var(--global-border-color-strong);
     }
 }
 
 #gitalk-container .gt-container .gt-meta {
-    border-bottom: var(--global-border) var(--border-color);
+    border-bottom: var(--global-border-normal) var(--global-border-color);
     margin-top: 0;
     padding-top: 0;
 }

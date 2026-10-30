@@ -4,11 +4,11 @@
 }
 
 .sidebar {
-    --fade-bg: var(--bg-color);
+    --fade-bg: var(--global-bg-color);
 }
 
 .content-fade-edge {
-    --fade-bg: var(--bg-color);
+    --fade-bg: var(--global-bg-color);
 
     position: fixed;
     left: 0;

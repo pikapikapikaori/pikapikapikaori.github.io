@@ -24,7 +24,7 @@
 
     50% {
         top: 0.9375rem;
-        opacity: var(--global-opacity-none);
+        opacity: var(--global-opacity-full);
     }
 
     100% {

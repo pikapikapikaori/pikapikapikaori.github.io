@@ -14,26 +14,37 @@ Every interactive element walks up one four-step ladder. Each column is that col
 
 | Level | Meaning | Border / Bar | Surface (hollow) | Surface (solid) | Text / Icon | Scale | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | rest: colourless | none / neutral 1px | transparent | theme colour, solid | hollow `-8`; solid inverted ink | 1 | rest shows no emphasis at all |
-| 1 | hover: this can be clicked | theme colour 45% | theme colour 30% | theme colour + 10% white, 2px 45% ink ring | hollow `-8`; solid inverted ink | 1.1 | says "this can be clicked", the text stays put |
-| 2 | selected (`.active`) / focus (`:focus`) | theme colour, solid | theme colour 30%, `-7` border | theme colour + 16% white, 2px solid ink ring | hollow `-8`; solid inverted ink | 1.2 | one step deeper than level 1; a hovered selected control stays here |
-| 3 | press (`:active`) | `-7` | theme colour 40%, `-8` border | theme colour + 24% white, 3px solid ink ring | hollow `-8`; solid inverted ink | 1.3 | press is `:active`, held while the pointer is down and released back to hover or to the selected state. Navigation links, inline links and swatches do nothing when clicked, so they have no press state |
+| 0 | rest: colourless | none / neutral 1px | transparent | theme colour, solid | hollow `ultra-strong`; solid inverted ink | 1 | rest shows no emphasis at all |
+| 1 | hover: this can be clicked | theme colour 45% | theme colour 30% | theme colour + 10% white, 2px 45% ink ring | hollow `ultra-strong`; solid inverted ink | 1.1 | says "this can be clicked", the text stays put |
+| 2 | selected (`.active`) / focus (`:focus`) | theme colour, solid | theme colour 30%, `extra-strong` border | theme colour + 16% white, 2px solid ink ring | hollow `ultra-strong`; solid inverted ink | 1.2 | one step deeper than level 1; a hovered selected control stays here |
+| 3 | press (`:active`) | `extra-strong` | theme colour 40%, `ultra-strong` border | theme colour + 24% white, 3px solid ink ring | hollow `ultra-strong`; solid inverted ink | 1.3 | press is `:active`, held while the pointer is down and released back to hover or to the selected state. Navigation links, inline links and swatches do nothing when clicked, so they have no press state |
 
 Three consequences, none of them extra rules:
 
 - **The fill of a solid button is already the lightest step.** The theme colour is the brightest colour there is, so deepening it drowns the inverted ink text (the resting state already measures 4.88 at worst). Its ladder therefore moves **towards white**, and the ink ring's density and weight carry the steps.
-- **The text of a hollow button never changes.** `-8` is the step furthest from the paper, the fill only lays down 30% / 40%, and the text stays put, so contrast never drops in any state.
-- **The border of a hollow button** starts on level 1: 45% at rest, solid on hover, `-7` when selected, `-8` when pressed. This is the same rule as "the fill of a solid button starts on level 2" — a higher start point means fewer steps to walk.
+- **The text of a hollow button never changes.** `ultra-strong` is the step furthest from the paper, the fill only lays down 30% / 40%, and the text stays put, so contrast never drops in any state.
+- **The border of a hollow button** starts on level 1: 45% at rest, solid on hover, `extra-strong` when selected, `ultra-strong` when pressed. This is the same rule as "the fill of a solid button starts on level 2" — a higher start point means fewer steps to walk.
 
-The text column: a hollow button always uses `--global-theme-color-8` (coloured text), a solid button always uses `--global-theme-ink` (the theme colour flipped to the other end of the lightness axis). The two are told apart by hue — **hollow is "no fill + coloured text", solid is "coloured fill + inverted text"**.
+The text column: a hollow button always uses `--global-theme-color-ultra-strong` (coloured text), a solid button always uses `--global-theme-color-dark-normal` (the theme colour flipped to the other end of the lightness axis). The two are told apart by hue — **hollow is "no fill + coloured text", solid is "coloured fill + inverted text"**.
 
 #### Keyboard focus
 
 `:focus-visible` is not part of the ladder and deliberately differs from hover:
 
-- `outline: 2px solid var(--global-theme-color-8)`, `outline-offset: var(--global-outline-offset)` (2px)
+- `outline: 2px solid var(--global-theme-color-ultra-strong)`, `outline-offset: var(--global-outline-offset)` (2px)
 - the resting state reserves the ring with `outline: 2px solid transparent`, so focusing never shifts the layout
 - applies to `a[href]`, `button`, `summary`, `select`, `[tabindex]` and the various `input` types
+
+#### Level naming
+
+Framework variables are graded by distance from the middle level, at most five steps per side, and the middle level is always `normal`:
+
+```
+none < ultra-<word> < extra-<word> < very-<word> < <word> < semi-<word> < normal
+     < semi-<word> < <word> < very-<word> < extra-<word> < ultra-<word>
+```
+
+The `<word>` depends on the class: `weak` / `strong` for opacity and tone, `thin` / `bold` for font weight, `small` / `big` for size, `fast` / `slow` for duration. When a side currently has only two or three steps, they take the first slots counting outward from `normal`; `semi-*` is reserved for steps inserted closer to the middle later. `none` means 0 and `full` means the maximum value (e.g. `--global-opacity-full: 1`).
 
 #### Transitions
 
@@ -42,11 +53,11 @@ Six durations are defined:
 | Token | Value |
 | --- | --- |
 | `--global-transition-duration-fast` | 250ms |
-| `--global-transition-duration` | 500ms |
+| `--global-transition-duration-normal` | 500ms |
 | `--global-transition-duration-slow` | 1s |
 | `--global-transition-duration-very-slow` | 2s |
-| `--global-transition-duration-super-slow` | 3s |
-| `--global-transition-duration-most-slow` | 5s |
+| `--global-transition-duration-extra-slow` | 3s |
+| `--global-transition-duration-ultra-slow` | 5s |
 
 Composed from them: `--global-transition-color` (color, text-decoration-color, border-color, outline-color, box-shadow, background-color), `--global-transition-transform`, `--global-transition-filter`, `--global-transition-font` (font-weight), plus the `-color-fast`, `-filter-fast` and `-transform-slow` variants.
 
@@ -59,7 +70,7 @@ All hover feedback uses the 500ms group; the shorter and longer groups are reser
 | Token | Value | Use |
 | --- | --- | --- |
 | `--global-border-radius-big` | 0.625rem | large surfaces: cards, popups, code blocks |
-| `--global-border-radius` | 0.3125rem | controls: buttons, inputs, swatches |
+| `--global-border-radius-normal` | 0.3125rem | controls: buttons, inputs, swatches |
 | `--global-border-radius-small` | 0.125rem | small parts |
 | `--global-border-radius-none` | 0 | square corners |
 | `--global-border-radius-round` | 50% | circles (avatars), a shape rather than a step |
@@ -81,10 +92,10 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 
 | Token | Value | Meaning |
 | --- | --- | --- |
-| `--global-accent-level-1` | `var(--global-theme-color-blur-weak)` (theme colour 45%) | level 1: hover |
-| `--global-accent-level-2` | `var(--theme-color)` (theme colour, solid) | level 2: selected / focus |
-| `--global-accent-level-3` | `var(--global-theme-color-7)` | level 3: the border of a selected hollow button, and press |
-| `--global-accent-level-4` | `var(--global-theme-color-8)` | level 4: the border of a pressed hollow button |
+| `--global-accent-level-1` | `var(--global-theme-color-blur-normal)` (theme colour 45%) | level 1: hover |
+| `--global-accent-level-2` | `var(--global-theme-color-normal)` (theme colour, solid) | level 2: selected / focus |
+| `--global-accent-level-3` | `var(--global-theme-color-extra-strong)` | level 3: the border of a selected hollow button, and press |
+| `--global-accent-level-4` | `var(--global-theme-color-ultra-strong)` | level 4: the border of a pressed hollow button |
 | `--global-scale-hover` | `var(--global-transform-ratio-small)` (1.1) | level 1 scale |
 | `--global-scale-active` | `var(--global-transform-ratio-normal)` (1.2) | level 2 scale |
 | `--global-scale-press` | `var(--global-transform-ratio-big)` (1.3) | level 3 scale |
@@ -98,47 +109,49 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 | `--global-nav-bar-active` | `var(--global-accent-level-2)` |
 | `--global-link-decoration-rest` | `var(--global-accent-level-2)` |
 | `--global-link-decoration-hover` | `var(--global-accent-level-3)` |
-| `--global-control-border-rest` | `var(--border-color)` |
+| `--global-control-border-rest` | `var(--global-border-color)` |
 | `--global-control-border-hover` | `var(--global-accent-level-1)` |
 | `--global-control-border-active` | `var(--global-accent-level-2)` |
 | `--global-control-border-press` | `var(--global-accent-level-3)` |
 | `--global-surface-hollow-rest` | `transparent` |
-| `--global-surface-hollow-hover` | `color-mix(in srgb, var(--theme-color) 30%, transparent)` |
-| `--global-surface-hollow-active` | `color-mix(in srgb, var(--theme-color) 30%, transparent)` |
-| `--global-surface-hollow-press` | `color-mix(in srgb, var(--theme-color) 40%, transparent)` |
+| `--global-surface-hollow-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 30%, transparent)` |
+| `--global-surface-hollow-active` | `color-mix(in srgb, var(--global-theme-color-normal) 30%, transparent)` |
+| `--global-surface-hollow-press` | `color-mix(in srgb, var(--global-theme-color-normal) 40%, transparent)` |
 | `--global-surface-hollow-border-rest` | `var(--global-accent-level-1)` |
 | `--global-surface-hollow-border-hover` | `var(--global-accent-level-2)` |
 | `--global-surface-hollow-border-active` | `var(--global-accent-level-3)` |
 | `--global-surface-hollow-border-press` | `var(--global-accent-level-4)` |
-| `--global-surface-hollow-text-rest` | `var(--global-theme-color-8)` |
-| `--global-surface-hollow-text-hover` | `var(--global-theme-color-8)` |
-| `--global-surface-hollow-text-active` | `var(--global-theme-color-8)` |
-| `--global-surface-hollow-text-press` | `var(--global-theme-color-8)` |
+| `--global-surface-hollow-text-rest` | `var(--global-theme-color-ultra-strong)` |
+| `--global-surface-hollow-text-hover` | `var(--global-theme-color-ultra-strong)` |
+| `--global-surface-hollow-text-active` | `var(--global-theme-color-ultra-strong)` |
+| `--global-surface-hollow-text-press` | `var(--global-theme-color-ultra-strong)` |
 | `--global-surface-solid-rest` | `var(--global-accent-level-2)` |
-| `--global-surface-solid-hover` | `color-mix(in oklab, var(--theme-color) 90%, #fff)` |
-| `--global-surface-solid-active` | `color-mix(in oklab, var(--theme-color) 84%, #fff)` |
-| `--global-surface-solid-press` | `color-mix(in oklab, var(--theme-color) 76%, #fff)` |
-| `--global-surface-solid-text` | `var(--global-theme-ink)` |
-| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-theme-ink) 45%, transparent)` |
-| `--global-surface-solid-ring-active` | `var(--global-theme-ink)` |
-| `--global-surface-solid-ring-press` | `var(--global-theme-ink)` |
-| `--global-table-row-hover` | `color-mix(in srgb, var(--theme-color) 18%, transparent)` |
+| `--global-surface-solid-hover` | `color-mix(in oklab, var(--global-theme-color-normal) 90%, #fff)` |
+| `--global-surface-solid-active` | `color-mix(in oklab, var(--global-theme-color-normal) 84%, #fff)` |
+| `--global-surface-solid-press` | `color-mix(in oklab, var(--global-theme-color-normal) 76%, #fff)` |
+| `--global-surface-solid-text` | `var(--global-theme-color-dark-normal)` |
+| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-theme-color-dark-normal) 45%, transparent)` |
+| `--global-surface-solid-ring-active` | `var(--global-theme-color-dark-normal)` |
+| `--global-surface-solid-ring-press` | `var(--global-theme-color-dark-normal)` |
+| `--global-surface-solid-inset-ring-hover` | `var(--global-inset-box-shadow-normal) var(--global-surface-solid-ring-hover)` |
+| `--global-surface-solid-inset-ring-press` | `var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press)` |
+| `--global-table-row-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent)` |
 
-One more token, `--global-theme-ink`, is computed automatically in `base.css`; it needs neither the light/dark scheme nor a per-theme value:
+One more token, `--global-theme-color-dark-normal`, is computed automatically in `base.css`; it needs neither the light/dark scheme nor a per-theme value:
 
 ```css
---global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
+--global-theme-color-dark-normal: color-mix(in srgb, var(--global-theme-color-normal) 12%, var(--global-dark));
 
 @supports (color: oklch(from red 0.5 0 h)) {
     :root {
-        --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+        --global-theme-color-dark-normal: oklch(from var(--global-theme-color-normal) clamp(0.08, calc(1 - l), 0.92) 0 h);
     }
 }
 ```
 
 Where relative colour syntax is supported it uses `oklch()`: it flips the OKLCH lightness of the theme colour to the other end (`1 - l`, clamped to 0.08–0.92), so a light theme colour yields a dark grey and a dark one a light grey, whatever the hue. Measured: lavender `#c7a2ec` becomes `#1c1c1c` (7.92:1), matcha `#c7eca2` becomes `#030303` (15.62:1), misty `#a2d9ec` becomes `#0a0a0a` (12.87:1). Elsewhere the `color-mix` approximation stays in place. Both the text and the ring of a solid button use it.
 
-The fallback has to be wrapped in `@supports`: custom properties are not validated when declared, so a repeated declaration simply overrides the previous one; the invalid value only surfaces when it is used (`color: var(--global-theme-ink)`), and the result is "inherit", not "fall back".
+The fallback has to be wrapped in `@supports`: custom properties are not validated when declared, so a repeated declaration simply overrides the previous one; the invalid value only surfaces when it is used (`color: var(--global-theme-color-dark-normal)`), and the result is "inherit", not "fall back".
 
 ### Component Types
 
@@ -152,8 +165,8 @@ Grouped by interaction mechanism. Each state cell reads **fill / border / text**
 | **Inline icon link** | Link | the about-me icons | icon at 1 | `--global-scale-hover` | not applicable | `--global-scale-active` | Looks exactly like a ghost icon, but it is a link inside the article, so it gets its own row and takes no part in the button ladder |
 | **Ghost icon** | Button | the nine widgets, sidebar toggle, back to top, reading progress, comment like/edit/reply, cover chevron | icon at 1 | `--global-scale-hover` | not applicable | `--global-scale-active` | Scale only; no fill and no border |
 | **Input** | Input | search box, pagination input, gitalk textarea | `--global-control-border-rest`, text inherits | `--global-control-border-hover`, text inherits | `--global-control-border-active` (`:focus`), text inherits | not applicable | Focus shares the selected value; press gives no extra feedback |
-| **Selection swatch** | Button | theme presets, colour presets, colour picker thumb | `--global-control-border-rest`, scale 1 | `--global-control-border-hover`, `--global-scale-hover` | `--global-control-border-active`, `--global-scale-active` | unselected: the level 2 values; selected: `--global-control-border-press`, `--global-scale-press` | Press previews the selection: an unselected swatch shows level 2 while held and lands on the selected state on release, a selected one goes one step further. The colour picker thumb only swaps its border (`--border-color` to `--theme-color`), adds no ring and does not scale, and its border transitions on hover only |
-| **Hollow surface button** | Button | toc pagination arrows, full-image arrows, gitalk preview, font presets | transparent fill, `--global-accent-level-1` border, `-8` text | 30% fill, `--global-accent-level-2` border, `-8` text | 30% fill, `--global-accent-level-3` border, `-8` text | 40% fill, `--global-accent-level-4` border, `-8` text | Border only, no solid fill; the selected state is used by the font presets alone |
+| **Selection swatch** | Button | theme presets, colour presets, colour picker thumb | `--global-control-border-rest`, scale 1 | `--global-control-border-hover`, `--global-scale-hover` | `--global-control-border-active`, `--global-scale-active` | unselected: the level 2 values; selected: `--global-control-border-press`, `--global-scale-press` | Press previews the selection: an unselected swatch shows level 2 while held and lands on the selected state on release, a selected one goes one step further. The colour picker thumb only swaps its border (`--global-border-color` to `--global-theme-color-normal`), adds no ring and does not scale, and its border transitions on hover only |
+| **Hollow surface button** | Button | toc pagination arrows, full-image arrows, gitalk preview, font presets | transparent fill, `--global-accent-level-1` border, `ultra-strong` text | 30% fill, `--global-accent-level-2` border, `ultra-strong` text | 30% fill, `--global-accent-level-3` border, `ultra-strong` text | 40% fill, `--global-accent-level-4` border, `ultra-strong` text | Border only, no solid fill; the selected state is used by the font presets alone |
 | **Solid surface button** | Button | gitalk login and publish, cover primary button, copy code | `--global-surface-solid-rest` fill, inverted ink text | fill +10% white, 2px 45% ink ring, inverted ink text | fill +16% white, 2px solid ink ring, inverted ink text | fill +24% white, 3px solid ink ring, inverted ink text | Solid at rest. How to tell them apart: a solid fill means solid, a border alone means hollow |
 
 ### Guide Line
@@ -173,15 +186,15 @@ Three notes:
 
 - Items inside one group of navigation links leave no gap between them (TOC switcher `gap: 0`), so their bars meet; the spacing comes from each item's padding.
 - The current breadcrumb page wraps naturally and draws one bar per line — that is expected, because that is how an inline element's border works. The breadcrumb is set at `0.9rem`, one step below the navbar.
-- A toc pagination button is a 28×28 outer box (1.75rem) holding a 100% svg that `padding: var(--global-border-width)` on the parent brings down to 24px (28 − 1px border ×2 − 1px padding ×2). swiss draws a 2px border, so its `padding` is 0 and the icon is 24px there too.
+- A toc pagination button is a 28×28 outer box (1.75rem) holding a 100% svg that `padding: var(--global-border-normal-width)` on the parent brings down to 24px (28 − 1px border ×2 − 1px padding ×2). swiss draws a 2px border, so its `padding` is 0 and the icon is 24px there too.
 
 ### Tables
 
-A body table already carries a 1px `--border-color-strong` border on every cell (from base) plus a 1px `--border-color-mid` top border per row; **no zebra stripes are drawn, and reading is carried by hover**.
+A body table already carries a 1px `--global-border-color-strong` border on every cell (from base) plus a 1px `--global-border-color-mid` top border per row; **no zebra stripes are drawn, and reading is carried by hover**.
 
 | Part | Rest | Hover |
 | --- | --- | --- |
-| Header `thead th` | no fill, bold, text in `--heading-color` | not applicable |
+| Header `thead th` | no fill, bold, text in `--global-heading-color` | not applicable |
 | Row `tbody tr` | transparent | `--global-table-row-hover` (18% theme colour), 500ms transition |
 
 Two notes:
@@ -195,9 +208,9 @@ The three kinds of popup share the large radius `--global-el-border-radius` and 
 
 | Kind | Members | Border | Fill | Other |
 | --- | --- | --- | --- | --- |
-| **Widget popup** | the widgets popup (`.page-right-popups-div`) | 1px **theme colour** | `--global-theme-color-blur` (10% theme colour) | `backdrop-filter: var(--global-backdrop-filter)` |
-| **Regular popup** | gitalk comment card `.gt-comment-content`, `.gt-popup` menu, about page right panel `.main-page-right-panel-container` | 1px `--border-color-strong` | `--zebra-bg` | none |
-| **Highlighted popup** | the blog owner's own comments (`.gt-comment.gt-comment-admin`) | same as a regular popup | `--global-theme-color-blur` (10% theme colour) | identity is told by the fill alone |
+| **Widget popup** | the widgets popup (`.page-right-popups-div`) | 1px **theme colour** | `--global-theme-color-blur-ultra-weak` (10% theme colour) | `backdrop-filter: var(--global-backdrop-filter)` |
+| **Regular popup** | gitalk comment card `.gt-comment-content`, `.gt-popup` menu, about page right panel `.main-page-right-panel-container` | 1px `--global-border-color-strong` | `--global-zebra-bg` | none |
+| **Highlighted popup** | the blog owner's own comments (`.gt-comment.gt-comment-admin`) | same as a regular popup | `--global-theme-color-blur-ultra-weak` (10% theme colour) | identity is told by the fill alone |
 
 ### Brief Comments
 
@@ -205,13 +218,13 @@ The three kinds of popup share the large radius `--global-el-border-radius` and 
 
 | Element | Spec |
 | --- | --- |
-| Year block | title left-aligned, `--heading-color`, 2.25rem, with a 2px `--border-color-strong` rule underneath; the year icon sits to the left of the title and doubles as the open/closed indicator |
+| Year block | title left-aligned, `--global-heading-color`, 2.25rem, with a 2px `--global-border-color-strong` rule underneath; the year icon sits to the left of the title and doubles as the open/closed indicator |
 | Year icon | a native 512×512 RGBA image; closed: `rotate(-14deg) scale(0.9)`, `opacity 0.5`; open: back to normal and opaque; 500ms transition on `opacity` and `transform` |
 | Year hover | the title gains an underline in `--global-link-decoration-hover`; its colour does not change |
 | The old year divider | removed. The icon moves from the divider to the left of the title, and the two short theme-colour rules are no longer drawn |
-| Entry | no card, no fill; a 1px `--border-color` top border per entry (none on the first); avatar 2.25rem |
-| Quote line | 2px `--border-color-strong` on the left of the card, easing to the theme colour on hover, 500ms |
-| Inner divider | `0.2rem dotted --border-color`; the original walking icon is kept and no longer coloured |
+| Entry | no card, no fill; a 1px `--global-border-color` top border per entry (none on the first); avatar 2.25rem |
+| Quote line | 2px `--global-border-color-strong` on the left of the card, easing to the theme colour on hover, 500ms |
+| Inner divider | `0.2rem dotted --global-border-color`; the original walking icon is kept and no longer coloured |
 
 ### Cursor
 
@@ -230,7 +243,7 @@ Every interactive element walks up one four-step ladder, each column measured fr
 | Level | Meaning | Line / Bar | Surface (unlatched) | Surface (latched) | Text / Icon | Scale | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | rest: colourless | `tone-line` 2px, or transparent 3px reserved | paper fill + tone-line border | paper fill + tone-line border | ink | none | navigation hover never changes the text, only the line walks |
-| 1 | hover: this can be clicked | `--border-color-mid` (neutral grey) | ink fill + ink border | same, while not latched | paper | none | the neutral grey is one step deeper than tone-line, otherwise the tabs' resting baseline would show no change |
+| 1 | hover: this can be clicked | `--global-border-color-mid` (neutral grey) | ink fill + ink border | same, while not latched | paper | none | the neutral grey is one step deeper than tone-line, otherwise the tabs' resting baseline would show no change |
 | 2 | selected / latched (`.active`, `.active-btn`, `.is-active`) | ink-strong | not applicable | ink fill + ink border | paper | none | a hovered latched button stays here and does not invert; inversion happens only at "latched + hover", see below |
 | 3 | press (`:active`) | same as level 1 | same as level 1 | same as level 1 | paper | none | press equals hover. Navigation links, inline links and swatches do nothing when clicked, so they have no press state |
 
@@ -254,7 +267,7 @@ Same as the default theme with the ink colour swapped in:
 
 #### Transitions
 
-Two durations only, redefined by swiss in its theme file: `--global-transition-duration` 200ms and `--global-transition-duration-fast` 160ms.
+Two durations only, redefined by swiss in its theme file: `--global-transition-duration-normal` 200ms and `--global-transition-duration-fast` 160ms.
 
 | Use | Duration |
 | --- | --- |
@@ -296,12 +309,12 @@ Colours come in two layers: changing the theme colour touches `--theme-color` on
 
 | Token | Value | Meaning |
 | --- | --- | --- |
-| `--sw-paper` | `var(--bg-color)` | paper |
-| `--sw-ink` | `var(--text-color)` | body ink |
-| `--sw-ink-strong` | `var(--heading-color)` | heading ink (the heaviest step) |
-| `--sw-ink-muted` | `var(--muted-color)` | muted text |
-| `--sw-tone` | `var(--code-bg)` | paper grey (popups, code, highlighted fills) |
-| `--sw-tone-line` | `var(--border-color)` | light line (resting lines, structural baseline) |
+| `--sw-paper` | `var(--global-bg-color)` | paper |
+| `--sw-ink` | `var(--global-text-color)` | body ink |
+| `--sw-ink-strong` | `var(--global-heading-color)` | heading ink (the heaviest step) |
+| `--sw-ink-muted` | `var(--global-muted-color)` | muted text |
+| `--sw-tone` | `var(--global-code-bg)` | paper grey (popups, code, highlighted fills) |
+| `--sw-tone-line` | `var(--global-border-color)` | light line (resting lines, structural baseline) |
 | `--sw-rule` | 0.1875rem (3px) | navigation bar / heavy rule |
 | `--sw-rule-mid` | 0.125rem (2px) | thin rule, the middle step |
 | `--sw-rule-mast` | 0.375rem (6px) | masthead rule |
@@ -314,7 +327,7 @@ Colours come in two layers: changing the theme colour touches `--theme-color` on
 | Token | Value | Use |
 | --- | --- | --- |
 | `--sw-nav-rest` | `transparent` | navigation bar at rest |
-| `--sw-nav-hover` | `var(--border-color-mid)` | navigation bar on hover (neutral grey) |
+| `--sw-nav-hover` | `var(--global-border-color-mid)` | navigation bar on hover (neutral grey) |
 | `--sw-nav-active` | `var(--sw-ink-strong)` | navigation bar when active |
 | `--sw-line-rest` | `var(--sw-tone-line)` | input line at rest |
 | `--sw-line-hover` | `var(--sw-ink-strong)` | input line on hover / focus |
@@ -326,7 +339,7 @@ Colours come in two layers: changing the theme colour touches `--theme-color` on
 | `--sw-swatch-rest` | `var(--sw-tone-line)` | swatch border at rest |
 | `--sw-swatch-hover` | `var(--sw-ink-strong)` | swatch border on hover / active |
 | `--sw-swatch-outline` | `var(--sw-ink-strong)` | the 2px outline a swatch adds on hover / active |
-| `--sw-accent` | `var(--theme-color)` | the only colour allowed, and only where "Theme Colour Budget" lists it |
+| `--sw-accent` | `var(--global-theme-color-normal)` | the only colour allowed, and only where "Theme Colour Budget" lists it |
 
 ### Theme Colour Budget
 

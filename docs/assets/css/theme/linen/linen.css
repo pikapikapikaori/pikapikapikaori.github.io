@@ -3,12 +3,12 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-image: repeating-linear-gradient(45deg, var(--hatch-color) 0 1px, transparent 1px var(--hatch-size)), repeating-linear-gradient(-45deg, var(--hatch-color) 0 1px, transparent 1px var(--hatch-size));
 }
 
 .sidebar {
-    background-color: var(--bg-color);
+    background-color: var(--global-bg-color);
     background-image: repeating-linear-gradient(45deg, var(--hatch-color) 0 1px, transparent 1px var(--hatch-size)), repeating-linear-gradient(-45deg, var(--hatch-color) 0 1px, transparent 1px var(--hatch-size));
     background-attachment: local;
 }

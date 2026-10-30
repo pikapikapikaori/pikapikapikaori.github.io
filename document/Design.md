@@ -86,7 +86,7 @@ Semantic aliases (never write the numbers directly): `--global-el-border-radius`
 
 #### Interaction Tokens
 
-The ladder's colours are defined in two layers: changing the theme colour means changing `--theme-color` only, changing the ladder means changing the first layer only, and re-colouring one channel means changing the second layer only. All of them live in the "control variables" block of `base.css`.
+The ladder's colours are defined in two layers: changing the theme colour means changing `--theme-color` only, changing the ladder means changing the first layer only, and re-colouring one channel means changing the second layer only. All of them live in the "control variables" block of `layout/variable.css`.
 
 **Layer 1: the ladder**
 
@@ -137,7 +137,7 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 | `--global-surface-solid-inset-ring-press` | `var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press)` |
 | `--global-table-row-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent)` |
 
-One more token, `--global-theme-color-dark-normal`, is computed automatically in `base.css`; it needs neither the light/dark scheme nor a per-theme value:
+One more token, `--global-theme-color-dark-normal`, is computed automatically in `layout/variable.css`; it needs neither the light/dark scheme nor a per-theme value:
 
 ```css
 --global-theme-color-dark-normal: color-mix(in srgb, var(--global-theme-color-normal) 12%, var(--global-dark));

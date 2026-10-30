@@ -86,7 +86,7 @@ none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
 
 #### 交互变量
 
-阶梯的颜色分两层：改主题色只改 `--theme-color`，改阶梯只改第一层，改某条通道的取色只改第二层。全部定义在 `base.css` 的「控件变量」一节。
+阶梯的颜色分两层：改主题色只改 `--theme-color`，改阶梯只改第一层，改某条通道的取色只改第二层。全部定义在 `layout/variable.css` 的「控件变量」一节。
 
 **第一层：阶梯**
 
@@ -137,7 +137,7 @@ none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
 | `--global-surface-solid-inset-ring-press` | `var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press)` |
 | `--global-table-row-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent)` |
 
-另有一个自动计算的令牌 `--global-theme-color-dark-normal`，定义在 `base.css`，不依赖明暗方案、也不需要逐个主题配置：
+另有一个自动计算的令牌 `--global-theme-color-dark-normal`，定义在 `layout/variable.css`，不依赖明暗方案、也不需要逐个主题配置：
 
 ```css
 --global-theme-color-dark-normal: color-mix(in srgb, var(--global-theme-color-normal) 12%, var(--global-dark));

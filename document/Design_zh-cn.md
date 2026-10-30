@@ -25,7 +25,7 @@
 - **表面（空心）的文字恒定**。`-8` 是离纸最远的一档主题色，底只铺 30% / 40%，文字不随状态变化，因此任何状态下都不会掉对比度。
 - **表面（空心）的描边**从第 1 级起步：静止 45%、hover 实色、选中 `-7`、按下 `-8`。这和“实心按钮的底色从第 2 级起步”是同一条规则——起点高就少走一步。
 
-文字列：空心按钮恒为 `--global-theme-color-8`（彩色字），实心按钮恒为 `--global-solid-ink`（把主题色翻到明度另一端的反色墨）。两者靠色相区分——**空心是“无色底 + 彩字”，实心是“彩底 + 反色字”**。
+文字列：空心按钮恒为 `--global-theme-color-8`（彩色字），实心按钮恒为 `--global-theme-ink`（把主题色翻到明度另一端的反色墨）。两者靠色相区分——**空心是“无色底 + 彩字”，实心是“彩底 + 反色字”**。
 
 #### 键盘焦点
 
@@ -118,20 +118,27 @@
 | `--global-surface-solid-hover` | `color-mix(in oklab, var(--theme-color) 90%, #fff)` |
 | `--global-surface-solid-active` | `color-mix(in oklab, var(--theme-color) 84%, #fff)` |
 | `--global-surface-solid-press` | `color-mix(in oklab, var(--theme-color) 76%, #fff)` |
-| `--global-surface-solid-text` | `var(--global-solid-ink)` |
-| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-solid-ink) 45%, transparent)` |
-| `--global-surface-solid-ring-active` | `var(--global-solid-ink)` |
-| `--global-surface-solid-ring-press` | `var(--global-solid-ink)` |
+| `--global-surface-solid-text` | `var(--global-theme-ink)` |
+| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-theme-ink) 45%, transparent)` |
+| `--global-surface-solid-ring-active` | `var(--global-theme-ink)` |
+| `--global-surface-solid-ring-press` | `var(--global-theme-ink)` |
 | `--global-table-row-hover` | `color-mix(in srgb, var(--theme-color) 18%, transparent)` |
 
-另有一个自动计算的令牌 `--global-solid-ink`，定义在 `base.css`，不依赖明暗方案、也不需要逐个主题配置：
+另有一个自动计算的令牌 `--global-theme-ink`，定义在 `base.css`，不依赖明暗方案、也不需要逐个主题配置：
 
 ```css
---global-solid-ink: color-mix(in srgb, var(--theme-color) 12%, #000);
---global-solid-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+--global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
+
+@supports (color: oklch(from red 0.5 0 h)) {
+    :root {
+        --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+    }
+}
 ```
 
-第二条是真正的取值：它把主题色的 OKLCH 明度翻到另一端（`1 - l`，再夹在 0.08–0.92 之间），于是浅主题色得到深灰、深主题色得到浅灰，色相无关。实测：薰衣草 `#c7a2ec` 算出 `#1c1c1c`（7.92:1），抹茶 `#c7eca2` 算出 `#030303`（15.62:1），雾蓝 `#a2d9ec` 算出 `#0a0a0a`（12.87:1）。第一条是给不支持相对颜色语法的浏览器兜底。实心按钮的文字与内环都用它。
+支持相对颜色语法时取 `oklch()`：它把主题色的 OKLCH 明度翻到另一端（`1 - l`，再夹在 0.08–0.92 之间），于是浅主题色得到深灰、深主题色得到浅灰，色相无关。实测：薰衣草 `#c7a2ec` 算出 `#1c1c1c`（7.92:1），抹茶 `#c7eca2` 算出 `#030303`（15.62:1），雾蓝 `#a2d9ec` 算出 `#0a0a0a`（12.87:1）。不支持时保留 `color-mix` 的近似值。实心按钮的文字与内环都用它。
+
+兜底必须用 `@supports` 包住：自定义属性在声明时不做校验，同一个属性写两遍时后一条会直接覆盖前一条，只在真正用到（`color: var(--global-theme-ink)`）时才发现无效，结果是“继承”而不是“回退”。
 
 ### 组件类型
 

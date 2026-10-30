@@ -25,7 +25,7 @@ Three consequences, none of them extra rules:
 - **The text of a hollow button never changes.** `-8` is the step furthest from the paper, the fill only lays down 30% / 40%, and the text stays put, so contrast never drops in any state.
 - **The border of a hollow button** starts on level 1: 45% at rest, solid on hover, `-7` when selected, `-8` when pressed. This is the same rule as "the fill of a solid button starts on level 2" — a higher start point means fewer steps to walk.
 
-The text column: a hollow button always uses `--global-theme-color-8` (coloured text), a solid button always uses `--global-solid-ink` (the theme colour flipped to the other end of the lightness axis). The two are told apart by hue — **hollow is "no fill + coloured text", solid is "coloured fill + inverted text"**.
+The text column: a hollow button always uses `--global-theme-color-8` (coloured text), a solid button always uses `--global-theme-ink` (the theme colour flipped to the other end of the lightness axis). The two are told apart by hue — **hollow is "no fill + coloured text", solid is "coloured fill + inverted text"**.
 
 #### Keyboard focus
 
@@ -118,20 +118,27 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 | `--global-surface-solid-hover` | `color-mix(in oklab, var(--theme-color) 90%, #fff)` |
 | `--global-surface-solid-active` | `color-mix(in oklab, var(--theme-color) 84%, #fff)` |
 | `--global-surface-solid-press` | `color-mix(in oklab, var(--theme-color) 76%, #fff)` |
-| `--global-surface-solid-text` | `var(--global-solid-ink)` |
-| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-solid-ink) 45%, transparent)` |
-| `--global-surface-solid-ring-active` | `var(--global-solid-ink)` |
-| `--global-surface-solid-ring-press` | `var(--global-solid-ink)` |
+| `--global-surface-solid-text` | `var(--global-theme-ink)` |
+| `--global-surface-solid-ring-hover` | `color-mix(in srgb, var(--global-theme-ink) 45%, transparent)` |
+| `--global-surface-solid-ring-active` | `var(--global-theme-ink)` |
+| `--global-surface-solid-ring-press` | `var(--global-theme-ink)` |
 | `--global-table-row-hover` | `color-mix(in srgb, var(--theme-color) 18%, transparent)` |
 
-One more token, `--global-solid-ink`, is computed automatically in `base.css`; it needs neither the light/dark scheme nor a per-theme value:
+One more token, `--global-theme-ink`, is computed automatically in `base.css`; it needs neither the light/dark scheme nor a per-theme value:
 
 ```css
---global-solid-ink: color-mix(in srgb, var(--theme-color) 12%, #000);
---global-solid-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+--global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
+
+@supports (color: oklch(from red 0.5 0 h)) {
+    :root {
+        --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+    }
+}
 ```
 
-The second declaration is the real value: it flips the OKLCH lightness of the theme colour to the other end (`1 - l`, clamped to 0.08–0.92), so a light theme colour yields a dark grey and a dark one a light grey, whatever the hue. Measured: lavender `#c7a2ec` becomes `#1c1c1c` (7.92:1), matcha `#c7eca2` becomes `#030303` (15.62:1), misty `#a2d9ec` becomes `#0a0a0a` (12.87:1). The first declaration is the fallback for browsers without relative colour syntax. Both the text and the ring of a solid button use it.
+Where relative colour syntax is supported it uses `oklch()`: it flips the OKLCH lightness of the theme colour to the other end (`1 - l`, clamped to 0.08–0.92), so a light theme colour yields a dark grey and a dark one a light grey, whatever the hue. Measured: lavender `#c7a2ec` becomes `#1c1c1c` (7.92:1), matcha `#c7eca2` becomes `#030303` (15.62:1), misty `#a2d9ec` becomes `#0a0a0a` (12.87:1). Elsewhere the `color-mix` approximation stays in place. Both the text and the ring of a solid button use it.
+
+The fallback has to be wrapped in `@supports`: custom properties are not validated when declared, so a repeated declaration simply overrides the previous one; the invalid value only surfaces when it is used (`color: var(--global-theme-ink)`), and the result is "inherit", not "fall back".
 
 ### Component Types
 

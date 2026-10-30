@@ -1272,7 +1272,6 @@ html #gitalk-container .gt-container {
 
 html #gitalk-container .gt-container .gt-meta {
     border-bottom: var(--sw-border-mid);
-    border-bottom-color: var(--sw-tone-line);
 }
 
 html #gitalk-container .gt-container .gt-svg svg,
@@ -1288,7 +1287,6 @@ html #gitalk-container .gt-container .gt-ico-github .gt-svg svg {
 html #gitalk-container .gt-header {
     margin-top: 2rem;
     padding-top: 0.75rem;
-    border-top: var(--sw-border);
 }
 
 html #gitalk-container .gt-header p {
@@ -1824,7 +1822,7 @@ html .toc-paginator-input input:focus {
 }
 
 html .toc-paginator-button-div {
-    margin: 0 0.5rem 0 0;
+    margin: 0 0.75rem;
 }
 
 html .toc-paginator-button-span {
@@ -1970,7 +1968,7 @@ html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li.active>a {
 }
 
 html .sidebar:has(.toc-btn.active-btn) .sidebar-nav>ul>li>ul>li ul ul {
-    border-left-color: var(--sw-tone-line);
+    border-left-color: transparent;
 }
 
 html .sidebar:has(.default-btn.active-btn) .sidebar-nav>ul>li>ul>li:has(li.active)>a {

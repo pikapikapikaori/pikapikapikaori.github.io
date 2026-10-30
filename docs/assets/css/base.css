@@ -111,9 +111,8 @@
     --global-theme-color-8: hsl(from var(--theme-color) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
 
     --global-theme-ink: color-mix(in srgb, var(--theme-color) 12%, var(--global-shadow));
-    --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
 
-    --global-theme-ink-blur: color-mix(in srgb, var(--global-solid-ink) 45%, transparent);
+    --global-theme-ink-blur: color-mix(in srgb, var(--global-theme-ink) 45%, transparent);
 
     --global-font-size: 16px;
     --global-emoji-size: 1.2em;
@@ -276,21 +275,25 @@
     --global-surface-hollow-text-active: var(--global-theme-color-8);
     --global-surface-hollow-text-press: var(--global-theme-color-8);
 
-    --global-solid-ink: var(--global-theme-ink);
-
     --global-surface-solid-rest: var(--global-accent-level-2);
     --global-surface-solid-hover: var(--global-theme-color-sun-strong);
     --global-surface-solid-active: var(--global-theme-color-sun-semistrong);
     --global-surface-solid-press: var(--global-theme-color-sun);
-    --global-surface-solid-text: var(--global-solid-ink);
+    --global-surface-solid-text: var(--global-theme-ink);
     --global-surface-solid-ring-hover: var(--global-theme-ink-blur);
-    --global-surface-solid-ring-active: var(--global-solid-ink);
-    --global-surface-solid-ring-press: var(--global-solid-ink);
+    --global-surface-solid-ring-active: var(--global-theme-ink);
+    --global-surface-solid-ring-press: var(--global-theme-ink);
 
     --global-table-row-hover: var(--global-theme-color-blur-near-weak);
 
     --global-writing-container-height: var(--global-container-height);
     --global-sidenote-width: var(--global-container-width);
+}
+
+@supports (color: oklch(from red 0.5 0 h)) {
+    :root {
+        --global-theme-ink: oklch(from var(--theme-color) clamp(0.08, calc(1 - l), 0.92) 0 h);
+    }
 }
 
 @media screen and (max-width:768px) {

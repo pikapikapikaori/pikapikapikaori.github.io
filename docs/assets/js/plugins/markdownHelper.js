@@ -143,6 +143,14 @@ function plugin(hook, vm) {
                     while (li.firstChild && li.firstChild !== menu) toggle.appendChild(li.firstChild)
                     li.insertBefore(toggle, menu)
 
+                    const inner = document.createElement('span')
+                    inner.className = 'app-nav-toggle-inner'
+                    while (toggle.firstChild) inner.appendChild(toggle.firstChild)
+                    const ghost = inner.cloneNode(true)
+                    ghost.className = 'app-nav-toggle-inner app-nav-toggle-ghost'
+                    toggle.appendChild(inner)
+                    toggle.appendChild(ghost)
+
                     makeButtonLike(toggle)
 
                     toggle.addEventListener('click', function () {

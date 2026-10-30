@@ -123,12 +123,22 @@ section.cover img.ignore-view-full-image-img {
 }
 
 .app-nav > ul > li > .app-nav-toggle {
-    display: inline-block;
+    display: inline-grid;
     border-bottom: var(--global-border-strong) var(--global-nav-bar-rest);
     color: inherit;
     font: inherit;
     cursor: pointer;
     transition: var(--global-transition-color), var(--global-transition-font);
+}
+
+.app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-inner {
+    grid-area: 1 / 1;
+}
+
+.app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-ghost {
+    font-weight: var(--global-font-weight-very-bold);
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .app-nav > ul > li:not(.is-open):hover > .app-nav-toggle {

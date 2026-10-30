@@ -1294,13 +1294,13 @@ html #gitalk-container .gt-popup .gt-action:hover {
     text-decoration-color: var(--sw-link-hover);
 }
 
-html #gitalk-container .gt-user-name.is-hover {
+html #gitalk-container .gt-meta.is-hover .gt-user-name,
+html #gitalk-container .gt-meta.is-popup-open .gt-user-name {
     text-decoration-color: var(--sw-accent);
 }
 
 html #gitalk-container .gt-user-inner.is-popup-open .gt-user-name {
     color: var(--sw-ink-strong);
-    text-decoration-color: var(--sw-accent);
 }
 
 html #gitalk-container .gt-container .gt-header-textarea,

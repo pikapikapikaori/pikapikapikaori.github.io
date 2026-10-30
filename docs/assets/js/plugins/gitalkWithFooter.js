@@ -53,6 +53,7 @@ function plugin(hook, vm) {
     document.addEventListener('pointerdown', function (e) {
         lastInputWasKeyboard = false
         pointerOverTrigger = !!(e.target && e.target.closest && e.target.closest('.gt-user-inner'))
+        if (gitalkContainer) syncHover(gitalkContainer)
         for (const ring of document.querySelectorAll('.gt-focus-ring.is-keyboard')) {
             ring.classList.remove('is-keyboard')
         }
@@ -83,25 +84,33 @@ function plugin(hook, vm) {
 
     function syncPopupState(container) {
         const inner = container.querySelector('.gt-user-inner')
-        if (!inner || inner.dataset.popupSynced === '1') return
-        inner.dataset.popupSynced = '1'
-
-        const name = container.querySelector('.gt-user-name')
-        const hovered = pointerOverTrigger || (!!name && name.matches(':hover'))
-        if (hovered && name) name.classList.add('is-hover')
+        const meta = container.querySelector('.gt-meta')
+        if (!inner) return
 
         const popupOpen = !!container.querySelector('.gt-popup')
+        if (meta) meta.classList.toggle('is-popup-open', popupOpen)
+
+        if (inner.dataset.popupSynced === '1') return
+        inner.dataset.popupSynced = '1'
+
         inner.classList.toggle('is-popup-open', lastPopupOpen)
         void inner.offsetWidth
         requestAnimationFrame(function () {
             inner.classList.toggle('is-popup-open', popupOpen)
             lastPopupOpen = popupOpen
-            if (hovered && name.isConnected) name.classList.remove('is-hover')
         })
+    }
+
+    function syncHover(container) {
+        const meta = container.querySelector('.gt-meta')
+        if (!meta) return
+        const hovered = pointerOverTrigger || meta.contains(document.querySelector('.gt-user-name:hover'))
+        meta.classList.toggle('is-hover', hovered)
     }
 
     function updateGitalk(container) {
         enhanceGitalk(container)
+        syncHover(container)
         syncPopupState(container)
         syncRing(container)
     }
@@ -150,6 +159,7 @@ function plugin(hook, vm) {
             if (!inner) return
             if (e.relatedTarget && inner.contains(e.relatedTarget)) return
             pointerOverTrigger = true
+            syncHover(container)
         })
 
         container.addEventListener('pointerout', function (e) {
@@ -157,7 +167,9 @@ function plugin(hook, vm) {
             const inner = e.target.closest('.gt-user-inner')
             if (!inner) return
             if (e.relatedTarget && inner.contains(e.relatedTarget)) return
+            if (!inner.isConnected) return
             pointerOverTrigger = false
+            syncHover(container)
         })
 
         container.addEventListener('focusin', function () {

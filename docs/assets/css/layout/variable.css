@@ -150,6 +150,7 @@
     --global-border-radius-none: 0;
     --global-border-radius-round: 50%;
 
+    --global-transition-duration-none: 0s;
     --global-transition-duration-fast: 250ms;
     --global-transition-duration-normal: 500ms;
     --global-transition-duration-slow: 1s;

@@ -134,6 +134,41 @@
     transition: var(--global-transition-color);
 }
 
+#gitalk-container .gt-meta {
+    position: relative;
+}
+
+#gitalk-container .gt-user-name,
+#gitalk-container .gt-user-name:focus,
+#gitalk-container .gt-user-name:focus-visible {
+    outline: 0;
+}
+
+#gitalk-container .gt-focus-ring {
+    position: absolute;
+    top: var(--gitalk-ring-top, 0);
+    left: var(--gitalk-ring-left, 0);
+    width: var(--gitalk-ring-width, 0);
+    height: var(--gitalk-ring-height, 0);
+    pointer-events: none;
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: var(--global-focus-outline-offset);
+    transition: var(--global-transition-color);
+}
+
+#gitalk-container .gt-focus-ring.is-keyboard {
+    outline-color: var(--global-focus-outline-color);
+}
+
+#gitalk-container .gt-user-name.is-hover {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+#gitalk-container .gt-user-inner.is-popup-open .gt-user-name {
+    color: var(--global-heading-color);
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
 #gitalk-container .gt-popup .gt-action {
     color: inherit;
     text-decoration: underline;

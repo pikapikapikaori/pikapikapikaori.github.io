@@ -1294,6 +1294,15 @@ html #gitalk-container .gt-popup .gt-action:hover {
     text-decoration-color: var(--sw-link-hover);
 }
 
+html #gitalk-container .gt-user-name.is-hover {
+    text-decoration-color: var(--sw-accent);
+}
+
+html #gitalk-container .gt-user-inner.is-popup-open .gt-user-name {
+    color: var(--sw-ink-strong);
+    text-decoration-color: var(--sw-accent);
+}
+
 html #gitalk-container .gt-container .gt-header-textarea,
 html #gitalk-container .gt-container .gt-comment-content {
     padding: 0.75rem;
@@ -2151,11 +2160,22 @@ html .app-nav > ul > li > .app-nav-toggle {
     transition: var(--global-transition-color-fast);
 }
 
-html .app-nav > ul > li > .app-nav-toggle>svg {
+html .app-nav > ul > li > .app-nav-toggle>svg,
+html .app-nav > ul > li > .app-nav-toggle svg {
     width: 1.1em;
     height: 1.1em;
     vertical-align: -0.15em;
     stroke: currentColor;
+}
+
+html .app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-inner {
+    grid-area: 1 / 1;
+}
+
+html .app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-ghost {
+    font-weight: var(--global-font-weight-extra-bold);
+    visibility: hidden;
+    pointer-events: none;
 }
 
 html .app-nav > ul > li:not(.is-open):hover > .app-nav-toggle {

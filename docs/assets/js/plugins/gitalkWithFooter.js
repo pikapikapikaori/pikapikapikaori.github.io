@@ -42,15 +42,73 @@ function plugin(hook, vm) {
 
     let gitalkObserver = null
     let gitalkScheduled = false
-    let gitalkHadPopup = false
     let lastInputWasKeyboard = false
+    let lastPopupOpen = false
+    let pointerOverTrigger = false
 
-    document.addEventListener('keydown', function () { lastInputWasKeyboard = true }, true)
-    document.addEventListener('pointerdown', function () { lastInputWasKeyboard = false }, true)
+    document.addEventListener('keydown', function () {
+        lastInputWasKeyboard = true
+        if (gitalkContainer) syncRing(gitalkContainer)
+    }, true)
+    document.addEventListener('pointerdown', function (e) {
+        lastInputWasKeyboard = false
+        pointerOverTrigger = !!(e.target && e.target.closest && e.target.closest('.gt-user-inner'))
+        for (const ring of document.querySelectorAll('.gt-focus-ring.is-keyboard')) {
+            ring.classList.remove('is-keyboard')
+        }
+    }, true)
+
+    function syncRing(container) {
+        const meta = container.querySelector('.gt-meta')
+        const name = container.querySelector('.gt-user-name')
+        if (!meta || !name) return
+
+        let ring = meta.querySelector(':scope > .gt-focus-ring')
+        if (!ring) {
+            ring = document.createElement('span')
+            ring.className = 'gt-focus-ring'
+            meta.appendChild(ring)
+        }
+
+        const metaRect = meta.getBoundingClientRect()
+        const nameRect = name.getBoundingClientRect()
+        ring.style.setProperty('--gitalk-ring-top', (nameRect.top - metaRect.top) + 'px')
+        ring.style.setProperty('--gitalk-ring-left', (nameRect.left - metaRect.left) + 'px')
+        ring.style.setProperty('--gitalk-ring-width', nameRect.width + 'px')
+        ring.style.setProperty('--gitalk-ring-height', nameRect.height + 'px')
+
+        const focused = document.activeElement === name
+        ring.classList.toggle('is-keyboard', focused && lastInputWasKeyboard)
+    }
+
+    function syncPopupState(container) {
+        const inner = container.querySelector('.gt-user-inner')
+        if (!inner || inner.dataset.popupSynced === '1') return
+        inner.dataset.popupSynced = '1'
+
+        const name = container.querySelector('.gt-user-name')
+        const hovered = pointerOverTrigger || (!!name && name.matches(':hover'))
+        if (hovered && name) name.classList.add('is-hover')
+
+        const popupOpen = !!container.querySelector('.gt-popup')
+        inner.classList.toggle('is-popup-open', lastPopupOpen)
+        void inner.offsetWidth
+        requestAnimationFrame(function () {
+            inner.classList.toggle('is-popup-open', popupOpen)
+            lastPopupOpen = popupOpen
+            if (hovered && name.isConnected) name.classList.remove('is-hover')
+        })
+    }
+
+    function updateGitalk(container) {
+        enhanceGitalk(container)
+        syncPopupState(container)
+        syncRing(container)
+    }
 
     function enhanceGitalk(container) {
-        const inner = container.querySelector('.gt-user-inner')
-        if (inner) makeButtonLike(inner)
+        const userName = container.querySelector('.gt-user-inner .gt-user-name')
+        if (userName) makeButtonLike(userName)
 
         for (const action of container.querySelectorAll('.gt-popup .gt-action')) {
             makeButtonLike(action)
@@ -63,6 +121,8 @@ function plugin(hook, vm) {
         for (const copyright of container.querySelectorAll('.gt-popup .gt-copyright')) {
             copyright.removeAttribute('role')
             copyright.removeAttribute('tabindex')
+            const version = copyright.querySelector('.gt-version')
+            if (version) version.removeAttribute('tabindex')
         }
 
         const meta = container.querySelector('.gt-meta')
@@ -71,13 +131,6 @@ function plugin(hook, vm) {
         if (popup && user && popup !== user.nextElementSibling) {
             meta.insertBefore(popup, user.nextSibling)
         }
-
-        const popupOpen = !!popup
-        if (popupOpen && !gitalkHadPopup && lastInputWasKeyboard && document.activeElement === document.body) {
-            const fresh = container.querySelector('.gt-user-inner')
-            if (fresh) fresh.focus()
-        }
-        gitalkHadPopup = popupOpen
     }
 
     function observeGitalk(container) {
@@ -86,17 +139,51 @@ function plugin(hook, vm) {
         gitalkObserver = new MutationObserver(function () {
             if (gitalkScheduled) return
             gitalkScheduled = true
-            enhanceGitalk(container)
+            updateGitalk(container)
             gitalkScheduled = false
         })
         gitalkObserver.observe(container, { childList: true, subtree: true })
 
+        container.addEventListener('pointerover', function (e) {
+            if (!e.target.closest) return
+            const inner = e.target.closest('.gt-user-inner')
+            if (!inner) return
+            if (e.relatedTarget && inner.contains(e.relatedTarget)) return
+            pointerOverTrigger = true
+        })
+
+        container.addEventListener('pointerout', function (e) {
+            if (!e.target.closest) return
+            const inner = e.target.closest('.gt-user-inner')
+            if (!inner) return
+            if (e.relatedTarget && inner.contains(e.relatedTarget)) return
+            pointerOverTrigger = false
+        })
+
+        container.addEventListener('focusin', function () {
+            syncRing(container)
+        })
+
         container.addEventListener('focusout', function (e) {
+            syncRing(container)
             if (!container.querySelector('.gt-popup')) return
             if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.gt-meta')) return
             const inner = container.querySelector('.gt-user-inner')
             if (inner) inner.click()
         })
+
+        container.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter' && e.key !== ' ') return
+            if (!e.target.closest || !e.target.closest('.gt-user-name')) return
+            setTimeout(function () {
+                const fresh = container.querySelector('.gt-user-name')
+                if (!fresh) return
+                if (document.activeElement !== fresh) fresh.focus()
+                syncRing(container)
+            }, 0)
+        })
+
+        window.addEventListener('resize', function () { syncRing(container) })
     }
 
     function renderFooter(input) {

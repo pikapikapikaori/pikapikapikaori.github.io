@@ -43,6 +43,65 @@ function plugin(hook, vm) {
         document.body.classList.toggle('sticky', scrollTop >= threshold)
     }
 
+    let rowSpanCache = new WeakMap()
+    let hoveredCell = null
+    let groupRows = []
+    let rowCells = []
+
+    function rowSpanCoverage(table) {
+        let coverage = rowSpanCache.get(table)
+        if (coverage) return coverage
+
+        const rows = [...table.rows]
+        coverage = rows.map(function () { return new Set() })
+
+        rows.forEach(function (row, r) {
+            for (const cell of row.cells) {
+                const span = Math.min(cell.rowSpan || 1, rows.length - r)
+                for (let i = r; i < r + span; i++) {
+                    for (let j = r; j < r + span; j++) coverage[i].add(j)
+                }
+            }
+        })
+
+        rowSpanCache.set(table, coverage)
+        return coverage
+    }
+
+    function clearHover() {
+        for (const r of groupRows) r.classList.remove('is-group-hover')
+        for (const c of rowCells) c.classList.remove('is-row-hover')
+        groupRows = []
+        rowCells = []
+    }
+
+    function setHover(cell) {
+        if (cell === hoveredCell) return
+        hoveredCell = cell
+        clearHover()
+
+        if (!cell) return
+
+        const row = cell.closest('tr')
+        const table = row && row.closest('table')
+        if (!table) return
+
+        for (const index of rowSpanCoverage(table)[row.rowIndex]) {
+            const r = table.rows[index]
+            if (!r) continue
+            r.classList.add('is-group-hover')
+            groupRows.push(r)
+        }
+
+        if ((cell.rowSpan || 1) > 1) return
+
+        for (const c of row.cells) {
+            if ((c.rowSpan || 1) > 1) continue
+            c.classList.add('is-row-hover')
+            rowCells.push(c)
+        }
+    }
+
     hook.mounted(function () {
         bindShortcuts({
             Slash: focusSearch,
@@ -55,6 +114,10 @@ function plugin(hook, vm) {
         const cover = document.querySelector('section.cover')
         if (cover) new MutationObserver(updateSticky).observe(cover, { attributes: true, attributeFilter: ['class'] })
 
+        document.addEventListener('mouseover', function (e) {
+            setHover(e.target.closest('.markdown-section tbody td, .markdown-section tbody th'))
+        })
+
         updateSticky()
     })
 
@@ -65,6 +128,9 @@ function plugin(hook, vm) {
 
         if (appName && search) search.before(appName)
 
+        rowSpanCache = new WeakMap()
+        hoveredCell = null
+        clearHover()
         updateSticky()
     })
 }

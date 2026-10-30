@@ -2105,3 +2105,17 @@ html .brief-comments-in-blog-comments-divider {
 html .brief-comments-in-blog-comments-divider:before {
     filter: grayscale(1);
 }
+
+html .markdown-section tbody td,
+html .markdown-section tbody th {
+    transition: background-color var(--global-transition-duration-fast);
+}
+
+html .markdown-section tbody tr.is-group-hover {
+    background-color: color-mix(in srgb, var(--sw-tone) 60%, var(--sw-paper));
+}
+
+html .markdown-section tbody td.is-row-hover,
+html .markdown-section tbody th.is-row-hover {
+    background-color: var(--sw-tone);
+}

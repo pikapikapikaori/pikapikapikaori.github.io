@@ -104,6 +104,21 @@ section.cover img.ignore-view-full-image-img {
     display: inherit;
 }
 
+/* --- Table --- */
+.markdown-section tbody td,
+.markdown-section tbody th {
+    transition: background-color var(--global-transition-duration-normal);
+}
+
+.markdown-section tbody tr.is-group-hover {
+    background-color: var(--global-table-group-hover);
+}
+
+.markdown-section tbody td.is-row-hover,
+.markdown-section tbody th.is-row-hover {
+    background-color: var(--global-table-row-hover);
+}
+
 /* --- Docsify Search --- */
 .input-wrap input[type=search] {
     background: var(--global-bg-color);

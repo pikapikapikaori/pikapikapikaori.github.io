@@ -263,6 +263,7 @@
     --global-surface-solid-inset-ring-press: var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press);
 
     --global-table-row-hover: var(--global-theme-color-blur-extra-weak);
+    --global-table-group-hover: var(--global-theme-color-blur-ultra-weak);
 
     --global-writing-container-height: var(--global-container-height);
     --global-sidenote-width: var(--global-container-width);

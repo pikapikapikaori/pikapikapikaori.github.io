@@ -136,6 +136,7 @@ The ladder's colours are defined in two layers: changing the theme colour means 
 | `--global-surface-solid-inset-ring-hover` | `var(--global-inset-box-shadow-normal) var(--global-surface-solid-ring-hover)` |
 | `--global-surface-solid-inset-ring-press` | `var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press)` |
 | `--global-table-row-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent)` |
+| `--global-table-group-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 10%, transparent)` |
 
 One more token, `--global-theme-color-dark-normal`, is computed automatically in `layout/variable.css`; it needs neither the light/dark scheme nor a per-theme value:
 
@@ -195,11 +196,13 @@ A body table already carries a 1px `--global-border-color-strong` border on ever
 | Part | Rest | Hover |
 | --- | --- | --- |
 | Header `thead th` | no fill, bold, text in `--global-heading-color` | not applicable |
-| Row `tbody tr` | transparent | `--global-table-row-hover` (18% theme colour), 500ms transition |
+| Plain cells of the row under the pointer, `td.is-row-hover` | transparent | `--global-table-row-hover` (18% theme colour), 500ms transition |
+| Other rows of a merged block, `tr.is-group-hover` | transparent | `--global-table-group-hover` (10% theme colour), 500ms transition |
 
-Two notes:
+Three notes:
 
-- The highlight is painted on the row, not on the cells: a cell merged by `rowspan` belongs to the first row, and a row background fills the whole band, so it is tinted in the second and third rows it covers as well; a `colspan` row naturally changes as one. The limitation is that a pointer resting inside a merged cell can only hit the row that owns it — CSS cannot see the span, and that is expected.
+- The highlight is painted on the row, not on the cells: a cell merged by `rowspan` belongs to the first row, and a row background fills the whole band, so it is tinted in the second and third rows it covers as well; a `colspan` row naturally changes as one.
+- Cross-row blocks use two tones: every `tr` of the block gets `.is-group-hover` with `--global-table-group-hover` (10% theme colour) as a faint ground for “this group”; the cells of the row under the pointer whose `rowspan === 1` then get `.is-row-hover` with `--global-table-row-hover` (18% theme colour). When the pointer sits on a merged cell there is no single current row, so only the faint ground shows. Rules live in `plugins/markdownHelper.css`; swiss swaps both tones for `color-mix(--sw-tone 60%, --sw-paper)` and `--sw-tone` at the end of `swiss.css`. A table without merged cells shows one tone only, exactly as before.
 - The header never takes part in hover; its edge is expressed by weight and the grid, not by a fill.
 
 ### Popups
@@ -396,9 +399,10 @@ Same shape as the default theme: no zebra stripes, every cell carries a 2px tone
 | Part | Rest | Hover |
 | --- | --- | --- |
 | Header `thead th` | no fill, bold, text in `--sw-ink-strong` | not applicable |
-| Row `tbody tr` | transparent | `--sw-tone`, 160ms transition |
+| Plain cells of the row under the pointer, `td.is-row-hover` | transparent | `--sw-tone`, 160ms transition |
+| Other rows of a merged block, `tr.is-group-hover` | transparent | `color-mix(in srgb, var(--sw-tone) 60%, var(--sw-paper))`, 160ms transition |
 
-Merged cells behave as in the default theme: the highlight is painted on the row (`tbody tr:hover`), so a `rowspan` cell is tinted in the other rows it covers too; a pointer resting inside a merged cell hits only the row that owns it.
+Merged cells behave as in the default theme: the other rows of the block take a faint ground of `color-mix(in srgb, var(--sw-tone) 60%, var(--sw-paper))` and the plain cells of the row under the pointer take `--sw-tone`, both driven by `.is-group-hover` / `.is-row-hover` from `markdownHelper`.
 
 ### Popups
 

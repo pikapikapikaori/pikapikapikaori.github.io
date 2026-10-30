@@ -136,6 +136,7 @@ none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
 | `--global-surface-solid-inset-ring-hover` | `var(--global-inset-box-shadow-normal) var(--global-surface-solid-ring-hover)` |
 | `--global-surface-solid-inset-ring-press` | `var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press)` |
 | `--global-table-row-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent)` |
+| `--global-table-group-hover` | `color-mix(in srgb, var(--global-theme-color-normal) 10%, transparent)` |
 
 另有一个自动计算的令牌 `--global-theme-color-dark-normal`，定义在 `layout/variable.css`，不依赖明暗方案、也不需要逐个主题配置：
 
@@ -195,11 +196,13 @@ none < ultra-<词> < extra-<词> < very-<词> < <词> < semi-<词> < normal
 | 部位 | 静止 | hover |
 | --- | --- | --- |
 | 表头 `thead th` | 无底色，加粗，文字取 `--global-heading-color` | 无此态 |
-| 行 `tbody tr` | 透明 | `--global-table-row-hover`（18% 主题色），过渡 500ms |
+| 指针所在行的普通格 `td.is-row-hover` | 透明 | `--global-table-row-hover`（18% 主题色），过渡 500ms |
+| 合并块的其他行 `tr.is-group-hover` | 透明 | `--global-table-group-hover`（10% 主题色），过渡 500ms |
 
-两点：
+三点：
 
-- hover 用的是行的背景，而不是单元格：`rowspan` 合并出来的单元格归属首行，行背景会铺满整条带状区域，因此它在被覆盖的第二行、第三行里也会一起染上；`colspan` 的行自然整行一起变。局限是指针停在跨行单元格内部时，命中的只能是它所属的那一行——CSS 无法感知 span 覆盖范围，这是预期行为。
+- hover 用的是行的背景，而不是单元格：`rowspan` 合并出来的单元格归属首行，行背景会铺满整条带状区域，因此它在被覆盖的第二行、第三行里也会一起染上；`colspan` 的行自然整行一起变。
+- 跨行块分两档：块覆盖的所有 `tr` 加 `.is-group-hover`，铺 `--global-table-group-hover`（10% 主题色）作为“这一组”的浅托底；指针所在行里 `rowspan === 1` 的单元格再加 `.is-row-hover`，铺 `--global-table-row-hover`（18% 主题色）。指针落在合并格本体上时无从判断当前行，只保留整块的浅色。规则在 `plugins/markdownHelper.css`，swiss 在 `swiss.css` 末尾把两档换成 `color-mix(--sw-tone 60%, --sw-paper)` 与 `--sw-tone`。没有合并单元格的表只有一档色，观感与以前一致。
 - 表头不参与 hover；它的边界靠加粗与网格线表达，不用底色。
 
 ### 浮窗
@@ -396,9 +399,10 @@ swiss 没有引导线：导航项之间只用线本身分隔，条宽由 `--sw-r
 | 部位 | 静止 | hover |
 | --- | --- | --- |
 | 表头 `thead th` | 无底色，加粗，文字取 `--sw-ink-strong` | 无此态 |
-| 行 `tbody tr` | 透明 | `--sw-tone`，过渡 160ms |
+| 指针所在行的普通格 `td.is-row-hover` | 透明 | `--sw-tone`，过渡 160ms |
+| 合并块的其他行 `tr.is-group-hover` | 透明 | `color-mix(in srgb, var(--sw-tone) 60%, var(--sw-paper))`，过渡 160ms |
 
-合并单元格的处理与默认主题相同：hover 用行背景（`tbody tr:hover`），`rowspan` 单元格在它覆盖的其他行里也会一起染上；指针停在跨行单元格内部时只命中它所属的那一行。
+合并单元格的处理与默认主题相同：块内其他行用 `color-mix(in srgb, var(--sw-tone) 60%, var(--sw-paper))` 浅浅托底，指针所在行的普通格用 `--sw-tone`，两档由 `markdownHelper` 的 `.is-group-hover` / `.is-row-hover` 驱动。
 
 ### 浮窗
 

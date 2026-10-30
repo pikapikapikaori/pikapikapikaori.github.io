@@ -1,0 +1,283 @@
+:root {
+
+    /* ============================================================
+     *  布局变量
+     * ============================================================ */
+
+    --global-default-bg-color-light: #fff;
+    --global-default-bg-color-dark: #3f3f3f;
+    --global-default-text-color-light: #34495e;
+    --global-default-text-color-dark: #c8c8c8;
+
+    --global-light: #fff;
+    --global-dark: #000;
+
+    --global-content-width: min(80%, 800px);
+    --global-sidebar-width: 300px;
+    --global-sidebar-width-none: 0;
+    --global-sidebar-toggle-width: 284px;
+    --global-cover-ul-width: 500px;
+
+    --global-font-size: 16px;
+    --global-emoji-size: 1.2em;
+
+    --global-font: 'MinorityLang', 'SortsMillGoudy', 'HYQuanTangShiJF-Kana', 'HYQuanTangShiJF', 'HYKaiTiS', 'QuanZiKuKai', 'QuanZiKuKai-extb', 'TwitterColorEmoji', serif;
+    --global-emoji-font: 'TwitterColorEmoji';
+    --global-code-font: 'Menlo', courier, monospace;
+    --global-sidebar-title-font: 'WeibeiSC-Bold', serif;
+    --global-cover-font: 'KakuGyoStd', cursive;
+    --global-cover-paragraph-font: 'Claire-Palmer-Script', cursive;
+    --global-sidebar-name-font: 'KouzanBrushFontSousyo', cursive;
+    --global-classic-font: 'CormorantGaramond', serif;
+    --global-minority-lang-font: 'GentiumPlus', serif;
+    --global-poem-font: 'HuiZongGong-tc', 'HuiZongGong-sc', cursive;
+    --global-handwriting-font: 'HanyiSentyFlorCalligraphy', cursive;
+    --global-fancy-font: 'HYLuoHuaShiW', cursive;
+
+    --global-backdrop-filter: blur(30px);
+
+    --global-outline-offset: 2px;
+
+    --global-aspect-ratio-square: 1 / 1;
+    --global-aspect-ratio-tall: 1 / 1.25;
+    --global-aspect-ratio-tv: 16 / 9;
+
+    --global-container-height: 18.75rem;
+    --global-container-width: 25rem;
+
+    --global-progress-width: 2px;
+    --global-scrollbar-width: 4px;
+    --global-scrollbar-border-radius: 4px;
+    --global-link-decoration-width: 0.15em;
+
+    /* ============================================================
+     *  框架变量
+     * ============================================================ */
+
+    --global-bg-color: var(--bg-color);
+    --global-text-color: var(--text-color);
+    --global-heading-color: var(--heading-color);
+    --global-muted-color: var(--muted-color);
+    --global-em-color: var(--em-color);
+    --global-h6-color: var(--h6-color);
+    --global-sidebar-text-color: var(--sidebar-text-color);
+    --global-sidebar-title-color: var(--sidebar-title-color);
+    --global-border-color: var(--border-color);
+    --global-border-color-strong: var(--border-color-strong);
+    --global-border-color-mid: var(--border-color-mid);
+    --global-code-bg: var(--code-bg);
+    --global-zebra-bg: var(--zebra-bg);
+    --global-tip-code-bg: var(--tip-code-bg);
+    --global-inline-code-color: var(--inline-code-color);
+    --global-code-text-color: var(--code-text-color);
+    --global-accent-color: var(--accent-color);
+    --global-accent-text-color: var(--accent-text-color);
+    --global-info-color: var(--info-color);
+    --global-info-text-color: var(--info-text-color);
+    --global-blur-color: var(--blur-color);
+    --global-sidebar-toggle-bg: var(--sidebar-toggle-bg);
+    --global-sidebar-border-color: var(--sidebar-border-color);
+    --global-scrollbar-bg-color: var(--scrollbar-bg-color);
+    --global-cover-link-color: var(--cover-link-color);
+
+    --global-token-data-color: var(--token-data-color);
+    --global-token-number-color: var(--token-number-color);
+    --global-token-punctuation-color: var(--token-punctuation-color);
+    --global-token-property-color: var(--token-property-color);
+    --global-token-tag-color: var(--token-tag-color);
+    --global-token-selector-color: var(--token-selector-color);
+    --global-token-attr-color: var(--token-attr-color);
+    --global-token-url-color: var(--token-url-color);
+    --global-token-keyword-color: var(--token-keyword-color);
+    --global-token-statement-color: var(--token-statement-color);
+    --global-token-variable-color: var(--token-variable-color);
+    --global-token-inserted-color: var(--token-inserted-color);
+    --global-token-important-color: var(--token-important-color);
+
+    --global-theme-color-normal: var(--theme-color);
+
+    --global-theme-color-ultra-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-1)), 100) clamp(0, calc(l + var(--cal-theme-color-l-1)), 100));
+    --global-theme-color-extra-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-2)), 100) clamp(0, calc(l + var(--cal-theme-color-l-2)), 100));
+    --global-theme-color-very-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-3)), 100) clamp(0, calc(l + var(--cal-theme-color-l-3)), 100));
+    --global-theme-color-weak: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-4)), 100) clamp(0, calc(l + var(--cal-theme-color-l-4)), 100));
+    --global-theme-color-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-5)), 100) clamp(0, calc(l + var(--cal-theme-color-l-5)), 100));
+    --global-theme-color-very-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-6)), 100) clamp(0, calc(l + var(--cal-theme-color-l-6)), 100));
+    --global-theme-color-extra-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-7)), 100) clamp(0, calc(l + var(--cal-theme-color-l-7)), 100));
+    --global-theme-color-ultra-strong: hsl(from var(--global-theme-color-normal) h clamp(0, calc(s + var(--cal-theme-color-s-8)), 100) clamp(0, calc(l + var(--cal-theme-color-l-8)), 100));
+
+    --global-theme-color-blur-ultra-weak: color-mix(in srgb, var(--global-theme-color-normal) 10%, transparent);
+    --global-theme-color-blur-extra-weak: color-mix(in srgb, var(--global-theme-color-normal) 18%, transparent);
+    --global-theme-color-blur-very-weak: color-mix(in srgb, var(--global-theme-color-normal) 30%, transparent);
+    --global-theme-color-blur-weak: color-mix(in srgb, var(--global-theme-color-normal) 40%, transparent);
+    --global-theme-color-blur-normal: color-mix(in srgb, var(--global-theme-color-normal) 45%, transparent);
+
+    --global-theme-color-light-extra-strong: color-mix(in oklab, var(--global-theme-color-normal) 90%, var(--global-light));
+    --global-theme-color-light-very-strong: color-mix(in oklab, var(--global-theme-color-normal) 84%, var(--global-light));
+    --global-theme-color-light-strong: color-mix(in oklab, var(--global-theme-color-normal) 76%, var(--global-light));
+
+    --global-theme-color-dark-normal: color-mix(in srgb, var(--global-theme-color-normal) 12%, var(--global-dark));
+
+    --global-theme-color-dark-blur-normal: color-mix(in srgb, var(--global-theme-color-dark-normal) 45%, transparent);
+
+    --global-brightness-weak: 0.85;
+
+    --global-opacity-full: 1;
+    --global-opacity-very-strong: 0.8;
+    --global-opacity-strong: 0.7;
+    --global-opacity-normal: 0.6;
+    --global-opacity-weak: 0.4;
+    --global-opacity-very-weak: 0.3;
+    --global-opacity-none: 0;
+
+    --global-dark-blur: color-mix(in srgb, var(--global-dark) calc(var(--global-opacity-weak) * 100%), transparent);
+
+    --global-border-normal: 1px solid;
+    --global-border-strong: 2px solid;
+    --global-border-very-strong: 3px solid;
+    --global-border-extra-strong: 4px solid;
+    --global-border-weak: 1px dotted;
+
+    --global-border-normal-width: 1px;
+    --global-border-strong-width: 2px;
+    --global-border-very-strong-width: 3px;
+
+    --global-inset-box-shadow-normal: inset 0 0 0 2px;
+    --global-inset-box-shadow-semi-strong: inset 0 0 0 3px;
+
+    --global-border-radius-big: 0.625rem;
+    --global-border-radius-normal: 0.3125rem;
+    --global-border-radius-small: 0.125rem;
+    --global-border-radius-none: 0;
+    --global-border-radius-round: 50%;
+
+    --global-transition-duration-fast: 250ms;
+    --global-transition-duration-normal: 500ms;
+    --global-transition-duration-slow: 1s;
+    --global-transition-duration-very-slow: 2s;
+    --global-transition-duration-extra-slow: 3s;
+    --global-transition-duration-ultra-slow: 5s;
+
+    --global-transform-ratio-big: 1.3;
+    --global-transform-ratio-normal: 1.2;
+    --global-transform-ratio-small: 1.1;
+    --global-transform-ratio-very-small: 1.03;
+
+    --global-font-weight-very-thin: 100;
+    --global-font-weight-thin: 300;
+    --global-font-weight-normal: 400;
+    --global-font-weight-bold: 500;
+    --global-font-weight-very-bold: 600;
+    --global-font-weight-extra-bold: 700;
+
+    --global-icon-size-very-big: 100px;
+    --global-icon-size-big: 80px;
+    --global-widget-size-normal: 1.5rem;
+    --global-widget-size-small: 1.3rem;
+    --global-widget-size-very-small: 1.1rem;
+
+    /* ============================================================
+     *  控件变量
+     * ============================================================ */
+
+    --global-el-border-radius: var(--global-border-radius-big);
+    --global-el-border-radius-small: var(--global-border-radius-small);
+    --global-el-border-radius-none: var(--global-border-radius-none);
+    --global-control-border-radius: var(--global-border-radius-normal);
+    --global-icon-border-radius: var(--global-control-border-radius);
+    --global-widget-border-radius: var(--global-control-border-radius);
+    --global-avatar-border-radius: var(--global-border-radius-round);
+
+    --global-focus-outline: var(--global-border-strong);
+    --global-focus-outline-width: var(--global-border-strong-width);
+    --global-focus-outline-color: var(--global-theme-color-ultra-strong);
+    --global-focus-outline-offset: var(--global-outline-offset);
+
+    --global-transition-color:
+        color var(--global-transition-duration-normal),
+        text-decoration-color var(--global-transition-duration-normal),
+        border-color var(--global-transition-duration-normal),
+        outline-color var(--global-transition-duration-normal),
+        box-shadow var(--global-transition-duration-normal),
+        background-color var(--global-transition-duration-normal);
+    --global-transition-transform: transform var(--global-transition-duration-normal);
+    --global-transition-filter:
+        opacity var(--global-transition-duration-normal),
+        filter var(--global-transition-duration-normal);
+    --global-transition-font: font-weight var(--global-transition-duration-normal);
+    --global-transition-color-fast:
+        color var(--global-transition-duration-fast),
+        text-decoration-color var(--global-transition-duration-fast),
+        border-color var(--global-transition-duration-fast),
+        outline-color var(--global-transition-duration-fast),
+        box-shadow var(--global-transition-duration-fast),
+        background-color var(--global-transition-duration-fast);
+    --global-transition-transform-slow: transform var(--global-transition-duration-slow);
+    --global-transition-filter-fast:
+        opacity var(--global-transition-duration-fast),
+        filter var(--global-transition-duration-fast);
+
+    --global-scale-hover: var(--global-transform-ratio-small);
+    --global-scale-active: var(--global-transform-ratio-normal);
+    --global-scale-press: var(--global-transform-ratio-big);
+
+    --global-accent-level-1: var(--global-theme-color-blur-normal);
+    --global-accent-level-2: var(--global-theme-color-normal);
+    --global-accent-level-3: var(--global-theme-color-extra-strong);
+    --global-accent-level-4: var(--global-theme-color-ultra-strong);
+
+    --global-nav-bar-rest: transparent;
+    --global-nav-bar-hover: var(--global-accent-level-1);
+    --global-nav-bar-active: var(--global-accent-level-2);
+
+    --global-link-decoration-rest: var(--global-accent-level-2);
+    --global-link-decoration-hover: var(--global-accent-level-3);
+
+    --global-control-border-rest: var(--global-border-color);
+    --global-control-border-hover: var(--global-accent-level-1);
+    --global-control-border-active: var(--global-accent-level-2);
+    --global-control-border-press: var(--global-accent-level-3);
+
+    --global-surface-hollow-rest: transparent;
+    --global-surface-hollow-hover: var(--global-theme-color-blur-very-weak);
+    --global-surface-hollow-active: var(--global-theme-color-blur-very-weak);
+    --global-surface-hollow-press: var(--global-theme-color-blur-weak);
+    --global-surface-hollow-border-rest: var(--global-accent-level-1);
+    --global-surface-hollow-border-hover: var(--global-accent-level-2);
+    --global-surface-hollow-border-active: var(--global-accent-level-3);
+    --global-surface-hollow-border-press: var(--global-accent-level-4);
+    --global-surface-hollow-text-rest: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-hover: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-active: var(--global-theme-color-ultra-strong);
+    --global-surface-hollow-text-press: var(--global-theme-color-ultra-strong);
+
+    --global-surface-solid-rest: var(--global-accent-level-2);
+    --global-surface-solid-hover: var(--global-theme-color-light-extra-strong);
+    --global-surface-solid-active: var(--global-theme-color-light-very-strong);
+    --global-surface-solid-press: var(--global-theme-color-light-strong);
+    --global-surface-solid-text: var(--global-theme-color-dark-normal);
+    --global-surface-solid-ring-hover: var(--global-theme-color-dark-blur-normal);
+    --global-surface-solid-ring-active: var(--global-theme-color-dark-normal);
+    --global-surface-solid-ring-press: var(--global-theme-color-dark-normal);
+
+    --global-surface-solid-inset-ring-hover: var(--global-inset-box-shadow-normal) var(--global-surface-solid-ring-hover);
+    --global-surface-solid-inset-ring-press: var(--global-inset-box-shadow-semi-strong) var(--global-surface-solid-ring-press);
+
+    --global-table-row-hover: var(--global-theme-color-blur-extra-weak);
+
+    --global-writing-container-height: var(--global-container-height);
+    --global-sidenote-width: var(--global-container-width);
+}
+
+@supports (color: oklch(from red 0.5 0 h)) {
+    :root {
+        --global-theme-color-dark-normal: oklch(from var(--global-theme-color-normal) clamp(0.08, calc(1 - l), 0.92) 0 h);
+    }
+}
+
+@media screen and (max-width:768px) {
+    :root {
+        --global-widget-size-normal: 1.3rem;
+        --global-widget-size-small: 1.1rem;
+        --global-widget-size-very-small: 0.9rem;
+    }
+}

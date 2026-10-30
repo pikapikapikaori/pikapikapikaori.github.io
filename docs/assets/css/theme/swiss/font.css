@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'CoverTitleLang';
+    font-display: swap;
+    src: url('../../../resources/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf') format('truetype');
+    unicode-range: U+0020-007E, U+00A0-024F, U+2000-206F, U+2018-201D;
+}
+
+@font-face {
+    font-family: 'CoverTitleLang';
+    font-display: swap;
+    src: url('../../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan.ttf') format('truetype');
+    unicode-range: U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF01-FF60;
+}
+
+@font-face {
+    font-family: 'CoverTitleLang';
+    font-display: swap;
+    src: url('../../../resources/fonts/KouzanBrushFontSousyo.ttf') format('truetype');
+    unicode-range: U+3040-30FF, U+31F0-31FF, U+FF66-FF9D;
+}

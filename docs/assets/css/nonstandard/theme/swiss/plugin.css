@@ -1,0 +1,22 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+html .color-picker-slider::-webkit-slider-thumb {
+    border-radius: 0;
+    border-color: var(--sw-swatch-rest);
+    background-color: var(--sw-accent);
+    transition: border-color var(--global-transition-duration-normal), transform var(--global-transition-duration-normal);
+}
+
+html .color-picker-slider::-webkit-slider-thumb:hover,
+html .color-picker-slider::-webkit-slider-thumb:active {
+    transform: none;
+    border-color: var(--sw-swatch-hover);
+}

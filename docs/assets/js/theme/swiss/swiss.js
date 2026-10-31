@@ -9,6 +9,9 @@
  *   异步加的类名一律挂在 html.sw-active 之下，切主题后自然失效。
  */
 
+import { takeSlots, setupPlugin } from './plugin.js'
+import { makeEl } from './util.js'
+
 const COLS_KEY = 'swiss-cols'
 const DATE_RE = /\d{4}\s*[.\-/]\s*\d{1,2}\s*(?:[.\-/]\s*\d{1,2})?/
 
@@ -34,9 +37,6 @@ const COLS_ICONS = {
     1: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="17" height="3"></rect><rect x="3.5" y="10.5" width="17" height="3"></rect><rect x="3.5" y="15" width="11" height="3"></rect></svg>',
     2: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="7" height="3"></rect><rect x="3.5" y="10.5" width="7" height="3"></rect><rect x="3.5" y="15" width="7" height="3"></rect><rect x="13.5" y="6" width="7" height="3"></rect><rect x="13.5" y="10.5" width="7" height="3"></rect><rect x="13.5" y="15" width="7" height="3"></rect></svg>'
 }
-
-
-const TOP_ARROW = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
 /* ---------- 结构判定 ---------- */
 
@@ -107,12 +107,6 @@ function joinQuoteLines(el) {
 
 /* ---------- 拼装 ---------- */
 
-function makeEl(tag, className) {
-    const el = document.createElement(tag)
-    if (className) el.className = className
-    return el
-}
-
 function plateFor(el) {
     const figure = makeEl(isImageParagraph(el) ? 'figure' : 'div', 'sw-plate')
     figure.appendChild(el)
@@ -171,10 +165,17 @@ function buildNavWordmark() {
     nav.insertBefore(link, nav.firstChild)
 }
 
-function buildMast(root, parts) {
+function buildMast(root, slots) {
     const h1 = root.querySelector(':scope > h1')
-    const crumb = parts && parts.crumb
-    const countWords = parts && parts.countWords
+
+    const slotsAt = function (at) {
+        return (slots || []).reduce(function (out, slot) {
+            if (slot.at !== at) return out
+            const el = slot.take()
+            if (el) out.push(el)
+            return out
+        }, [])
+    }
 
     let coverParagraph = null
     let bylineQuote = null
@@ -199,11 +200,10 @@ function buildMast(root, parts) {
     if (h1) mast.appendChild(h1)
 
     const line = makeEl('div', 'sw-mastline')
-    if (crumb) line.appendChild(crumb)
+    slotsAt('line').forEach(function (el) { line.appendChild(el) })
 
     const meta = makeEl('div', 'sw-meta')
-
-    if (countWords) meta.appendChild(countWords)
+    slotsAt('meta').forEach(function (el) { meta.appendChild(el) })
 
     meta.appendChild(buildColsControl(root))
     line.appendChild(meta)
@@ -333,167 +333,6 @@ function setupMotion(root) {
     return observer
 }
 
-
-function takeBreadcrumb(root) {
-    return root.querySelector(':scope > ul.breadcrumb')
-}
-
-function takeCountWords(root) {
-    return root.querySelector(':scope > #count-words-block-span-div')
-}
-
-function eagerTocPageImages(root) {
-    Array.prototype.forEach.call(root.querySelectorAll('.toc-page-div img'), function (img, index) {
-        if (index < 6) img.loading = 'eager'
-    })
-}
-
-function setupWidgetsRow() {
-    const container = document.getElementById('page-right-widgets-container')
-    if (!container) return null
-
-    let row = container.querySelector(':scope > .widgets-row')
-    if (!row) {
-        row = document.createElement('div')
-        row.className = 'widgets-row'
-        container.insertBefore(row, container.firstChild)
-    }
-
-    Array.prototype.forEach.call(
-        container.querySelectorAll(':scope > .page-right-tools-widgets-span, :scope > .page-right-popups'),
-        function (el) { row.appendChild(el) }
-    )
-
-    let hidden = row.querySelectorAll('.page-right-tools-widgets-span-disappear').length
-
-    const anchor = new MutationObserver(function () {
-        const now = row.querySelectorAll('.page-right-tools-widgets-span-disappear').length
-        const wasHidden = hidden > 0
-        hidden = now
-        if (!wasHidden || now > 0) return
-        requestAnimationFrame(function () {
-            row.scrollLeft = row.scrollWidth
-        })
-    })
-    anchor.observe(row, { subtree: true, attributes: true, attributeFilter: ['class'] })
-
-    return function stop() {
-        anchor.disconnect()
-    }
-}
-
-function setupReadProgress() {
-    const el = document.getElementById('progress-span')
-    if (!el) return null
-
-    let icon = el.querySelector('.sw-top-arrow')
-    if (!icon) {
-        const holder = makeEl('span')
-        holder.innerHTML = TOP_ARROW
-        icon = holder.firstElementChild
-        icon.classList.add('sw-top-arrow')
-        el.appendChild(icon)
-    }
-
-    const onClick = function () {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
-    }
-
-    el.addEventListener('click', onClick)
-
-    return function stop() {
-        el.removeEventListener('click', onClick)
-        if (icon.isConnected) icon.remove()
-    }
-}
-
-function setupTocSpy() {
-    const nav = document.querySelector('.sidebar-nav')
-    if (!nav) return null
-
-    let items = []
-    let ticking = false
-    let frame = 0
-
-    const collect = function () {
-        const heads = []
-        Array.prototype.forEach.call(
-            document.querySelectorAll('.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4'),
-            function (h) {
-                const span = h.querySelector('span')
-                const text = (span ? span.textContent : h.textContent).trim()
-                if (text) heads.push({ el: h, text: text })
-            }
-        )
-
-        const found = []
-        Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
-            const title = (a.getAttribute('title') || a.textContent || '').trim()
-            if (!title) return
-            const match = heads.find(function (item) { return item.text === title })
-            const li = a.closest('li')
-            if (!match || !li) return
-            found.push({ li: li, heading: match.el })
-        })
-
-        found.sort(function (a, b) {
-            return a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
-        })
-        return found
-    }
-
-    const apply = function () {
-        if (!items.length) items = collect()
-        if (!items.length) return
-
-        const doc = document.scrollingElement || document.documentElement
-        const threshold = 100
-        let current = items[0]
-
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].heading.getBoundingClientRect().top <= threshold) current = items[i]
-            else break
-        }
-
-        if (doc.scrollTop + window.innerHeight >= doc.scrollHeight - 2) {
-            current = items[items.length - 1]
-        }
-
-        const marked = items.filter(function (it) { return it.li.classList.contains('active') })
-        if (marked.length === 1 && marked[0] === current) return
-
-        items.forEach(function (it) { it.li.classList.toggle('active', it === current) })
-    }
-
-    const onScroll = function () {
-        if (ticking) return
-        ticking = true
-        frame = requestAnimationFrame(function () {
-            apply()
-            ticking = false
-        })
-    }
-
-    const fixer = new MutationObserver(function () { apply() })
-    fixer.observe(nav, { subtree: true, attributes: true, attributeFilter: ['class'] })
-
-    document.addEventListener('scroll', onScroll, { capture: true, passive: true })
-    window.addEventListener('resize', onScroll)
-    ticking = true
-    frame = requestAnimationFrame(function () {
-        apply()
-        ticking = false
-    })
-
-    return function cleanup() {
-        window.cancelAnimationFrame(frame)
-        fixer.disconnect()
-        document.removeEventListener('scroll', onScroll, { capture: true })
-        window.removeEventListener('resize', onScroll)
-    }
-}
-
 export function renderTheme(options) {
     const onCleanup = options && options.onCleanup
     const root = document.querySelector('.markdown-section')
@@ -504,12 +343,8 @@ export function renderTheme(options) {
         root.dataset.swOn = '1'
         demoteSidebarTitle()
         buildNavWordmark()
-        buildMast(root, {
-            crumb: takeBreadcrumb(root),
-            countWords: takeCountWords(root)
-        })
+        buildMast(root, takeSlots(root))
         buildSections(root)
-        eagerTocPageImages(root)
         writeCols(root, readCols())
         document.documentElement.classList.add('sw-active')
         observer = setupMotion(root)
@@ -518,23 +353,17 @@ export function renderTheme(options) {
         if (title) titleTimer = window.setTimeout(function () { title.classList.add('sw-in') }, 60)
     }
 
-    const stopWidgetsRow = setupWidgetsRow()
-    const stopReadProgress = setupReadProgress()
-    const stopTocSpy = setupTocSpy()
+    const stopPlugin = setupPlugin(root)
 
     if (typeof onCleanup !== 'function') {
-        if (stopWidgetsRow) stopWidgetsRow()
-        if (stopReadProgress) stopReadProgress()
-        if (stopTocSpy) stopTocSpy()
+        stopPlugin()
         return
     }
 
     onCleanup(function () {
         window.clearTimeout(titleTimer)
         if (observer) observer.disconnect()
-        if (stopWidgetsRow) stopWidgetsRow()
-        if (stopReadProgress) stopReadProgress()
-        if (stopTocSpy) stopTocSpy()
+        stopPlugin()
         document.documentElement.classList.remove('sw-active', 'sw-motion')
     })
 }

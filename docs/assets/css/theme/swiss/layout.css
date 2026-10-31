@@ -16,6 +16,10 @@
 
     --global-backdrop-filter: none;
 
+    --global-focus-outline: var(--sw-rule-mid) solid;
+    --global-focus-outline-width: var(--sw-rule-mid);
+    --global-focus-outline-color: var(--sw-ink-strong);
+
     --global-transition-duration-normal: 200ms;
     --global-transition-duration-fast: 160ms;
 
@@ -41,10 +45,6 @@
     --sw-border-mid: var(--sw-rule-mid) solid var(--sw-ink-strong);
     --sw-border-soft: var(--sw-rule-mid) solid var(--sw-tone-line);
     --sw-border-soft-rule: var(--sw-rule) solid var(--sw-tone-line);
-
-    --global-focus-outline: var(--sw-rule-mid) solid;
-    --global-focus-outline-width: var(--sw-rule-mid);
-    --global-focus-outline-color: var(--sw-ink-strong);
 
     --sw-fs-display: 3.5rem;
     --sw-fs-cover: 4rem;

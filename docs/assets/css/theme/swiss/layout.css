@@ -1,56 +1,27 @@
 :root {
-    --global-cover-font: 'CoverTitleLang', serif;
-    --global-cover-paragraph-font: 'SortsMillGoudy', serif;
-
     --global-content-width: min(94%, var(--sw-max));
     --global-sidebar-width: 13.75rem;
     --global-sidebar-toggle-width: var(--global-sidebar-width);
 
-    --global-scrollbar-border-radius: 0;
-
-    --global-el-border-radius: 0;
-    --global-el-border-radius-small: 0;
-    --global-icon-border-radius: 0;
-    --global-widget-border-radius: 0;
-    --global-control-border-radius: 0;
+    --global-cover-font: 'CoverTitleLang', serif;
+    --global-cover-paragraph-font: 'SortsMillGoudy', serif;
 
     --global-backdrop-filter: none;
 
-    --global-transition-color:
-        color var(--global-transition-duration-normal) var(--sw-ease),
-        text-decoration-color var(--global-transition-duration-normal) var(--sw-ease),
-        border-color var(--global-transition-duration-normal) var(--sw-ease),
-        outline-color var(--global-transition-duration-normal) var(--sw-ease),
-        box-shadow var(--global-transition-duration-normal) var(--sw-ease),
-        background-color var(--global-transition-duration-normal) var(--sw-ease);
-    --global-transition-transform: transform var(--global-transition-duration-normal) var(--sw-ease);
-    --global-transition-filter:
-        opacity var(--global-transition-duration-normal) var(--sw-ease),
-        filter var(--global-transition-duration-normal) var(--sw-ease);
-    --global-transition-font: font-weight var(--global-transition-duration-normal) var(--sw-ease);
-    --global-transition-open-vertical:
-        clip-path var(--global-transition-duration-normal) var(--sw-ease),
-        visibility 0s;
-    --global-transition-close-vertical:
-        clip-path var(--global-transition-duration-normal) var(--sw-ease),
-        visibility 0s linear var(--global-transition-duration-normal);
-    --global-transition-color-fast:
-        color var(--global-transition-duration-fast) var(--sw-ease),
-        text-decoration-color var(--global-transition-duration-fast) var(--sw-ease),
-        border-color var(--global-transition-duration-fast) var(--sw-ease),
-        outline-color var(--global-transition-duration-fast) var(--sw-ease),
-        box-shadow var(--global-transition-duration-fast) var(--sw-ease),
-        background-color var(--global-transition-duration-fast) var(--sw-ease);
-    --global-transition-transform-slow: transform var(--global-transition-duration-slow) var(--sw-ease);
-    --global-transition-filter-fast:
-        opacity var(--global-transition-duration-fast) var(--sw-ease),
-        filter var(--global-transition-duration-fast) var(--sw-ease);
-    --global-focus-outline: var(--sw-rule-mid) solid;
-    --global-focus-outline-width: var(--sw-rule-mid);
-    --global-focus-outline-color: var(--sw-ink-strong);
+    --global-transition-ease: cubic-bezier(0.22, 0.61, 0.24, 1);
+
+    --global-scrollbar-border-radius: 0;
+
+    --global-border-radius-big: 0;
+    --global-border-radius-normal: 0;
+    --global-border-radius-small: 0;
 
     --global-transition-duration-normal: 200ms;
     --global-transition-duration-fast: 160ms;
+
+    --global-focus-outline: var(--sw-rule-mid) solid;
+    --global-focus-outline-width: var(--sw-rule-mid);
+    --global-focus-outline-color: var(--sw-ink-strong);
 
     --sw-paper: var(--global-bg-color);
     --sw-ink: var(--global-text-color);
@@ -92,7 +63,6 @@
 
     --sw-accent: var(--global-theme-color-normal);
     --sw-link-hover: var(--sw-accent);
-    --sw-ease: cubic-bezier(0.22, 0.61, 0.24, 1);
     --sw-dur-title: 760ms;
     --sw-dur-reveal: 560ms;
     --sw-dur-cover: 1800ms;
@@ -996,7 +966,7 @@ html ::selection {
 
 html.sw-motion .sw-mast>h1 {
     transform: translateY(0.4em);
-    transition: transform var(--sw-dur-title) var(--sw-ease);
+    transition: transform var(--sw-dur-title) var(--global-transition-ease);
 }
 
 html.sw-motion .sw-mast>h1.sw-in {
@@ -1006,7 +976,7 @@ html.sw-motion .sw-mast>h1.sw-in {
 html.sw-motion [data-sw-in] {
     --sw-delay: 0ms;
     transform: translateY(1.5rem);
-    transition: transform var(--sw-dur-reveal) var(--sw-ease);
+    transition: transform var(--sw-dur-reveal) var(--global-transition-ease);
     transition-delay: var(--sw-delay);
 }
 
@@ -1016,7 +986,7 @@ html.sw-motion [data-sw-in].sw-in {
 
 html.sw-motion .sw-cover img {
     transform: scale(1.05);
-    transition: transform var(--sw-dur-cover) var(--sw-ease);
+    transition: transform var(--sw-dur-cover) var(--global-transition-ease);
 }
 
 html.sw-motion .sw-cover.sw-in img {

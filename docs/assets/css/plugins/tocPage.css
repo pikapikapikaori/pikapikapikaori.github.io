@@ -172,5 +172,5 @@ body.has-toc .sidebar-toggle {
 }
 
 .sidebar-toggle {
-    transition: opacity var(--global-transition-duration-normal), transform var(--global-transition-duration-normal);
+    transition: var(--global-transition-filter), var(--global-transition-transform);
 }

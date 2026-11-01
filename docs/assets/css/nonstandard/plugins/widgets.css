@@ -34,7 +34,7 @@
     background-color: var(--global-theme-color-normal);
     border-radius: var(--global-scrollbar-border-radius);
     cursor: pointer;
-    transition: transform var(--global-transition-duration-normal), border-color var(--global-transition-duration-normal);
+    transition: var(--global-transition-transform), border-color var(--global-transition-duration-normal) var(--global-transition-ease);
     border: var(--global-border-normal) var(--global-control-border-rest);
 }
 
@@ -46,7 +46,7 @@
 .color-picker-slider::-webkit-slider-thumb:active {
     transform: scale(var(--global-scale-press));
     border-color: var(--global-control-border-active);
-    transition: transform var(--global-transition-duration-normal);
+    transition: var(--global-transition-transform);
 }
 
 .read-progress::before {

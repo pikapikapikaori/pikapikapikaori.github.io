@@ -58,7 +58,7 @@
     opacity: 0.5;
     transform: rotate(-14deg) scale(0.9);
     transform-origin: center;
-    transition: opacity var(--global-transition-duration-normal), transform var(--global-transition-duration-normal);
+    transition: var(--global-transition-filter), var(--global-transition-transform);
 }
 
 .brief-comments-container .brief-comments-in-blog-title-year[open]>summary::before {

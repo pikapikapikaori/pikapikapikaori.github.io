@@ -187,16 +187,12 @@ html .app-nav > ul > li.is-current > .app-nav-toggle {
 
 html .app-nav > ul > li > ul {
     transform: translateY(-0.4375rem);
-    transition:
-        var(--global-transition-close-vertical),
-        transform var(--global-transition-duration-normal) var(--sw-ease);
+    transition: var(--global-transition-close-vertical), var(--global-transition-transform);
 }
 
 html .app-nav > ul > li.is-open > ul {
     transform: translateY(0);
-    transition:
-        var(--global-transition-open-vertical),
-        transform var(--global-transition-duration-normal) var(--sw-ease);
+    transition: var(--global-transition-open-vertical), var(--global-transition-transform);
 }
 
 html section.cover .cover-page-scroll-down-chevron-div {
@@ -289,11 +285,11 @@ html #gitalk-container .gt-user-inner.is-popup-open .gt-user-name {
 }
 
 html #gitalk-container .gt-container .gt-popup {
-    animation: sw-gt-popup-in var(--global-transition-duration-normal) var(--sw-ease);
+    animation: sw-gt-popup-in var(--global-transition-duration-normal) var(--global-transition-ease);
 }
 
 html #gitalk-container .gt-container .gt-popup.is-leaving {
-    animation: sw-gt-popup-out var(--global-transition-duration-normal) var(--sw-ease);
+    animation: sw-gt-popup-out var(--global-transition-duration-normal) var(--global-transition-ease);
 }
 
 html #gitalk-container .gt-container .gt-header-textarea,
@@ -303,7 +299,7 @@ html #gitalk-container .gt-container .gt-comment-content {
     border-color: var(--sw-line-rest);
     background: var(--sw-tone);
     box-shadow: none;
-    transition: border-color var(--global-transition-duration-fast), background-color var(--global-transition-duration-fast);
+    transition: var(--global-transition-color-fast);
 }
 
 html #gitalk-container .gt-container .gt-comment-content {
@@ -725,7 +721,7 @@ html .read-progress:hover>svg {
         border-width: 0;
         margin-left: calc(-1 * 0.25rem);
         transform: translateY(180%);
-        transition: transform var(--global-transition-duration-normal) ease, width 0s var(--global-transition-duration-normal), padding 0s var(--global-transition-duration-normal), border-width 0s var(--global-transition-duration-normal), margin 0s var(--global-transition-duration-normal);
+        transition: var(--global-transition-transform), width 0s var(--global-transition-duration-normal) var(--global-transition-ease), padding 0s var(--global-transition-duration-normal) var(--global-transition-ease), border-width 0s var(--global-transition-duration-normal) var(--global-transition-ease), margin 0s var(--global-transition-duration-normal) var(--global-transition-ease);
     }
 
     html #page-right-widgets-container .page-right-popups {
@@ -789,7 +785,6 @@ html .markdown-section .toc-page-div .toc-page-display-a img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: filter var(--global-transition-duration-fast);
 }
 
 html .markdown-section .toc-page-display-title-div {

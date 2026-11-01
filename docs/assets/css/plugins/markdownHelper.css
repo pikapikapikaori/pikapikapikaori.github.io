@@ -102,7 +102,7 @@ section.cover img.ignore-view-full-image-img {
 }
 
 .sidebar>h1.app-name {
-    transition: margin var(--global-transition-duration-normal) ease, opacity var(--global-transition-duration-normal) ease;
+    transition: margin var(--global-transition-duration-normal) var(--global-transition-ease), var(--global-transition-filter);
 }
 
 .sidebar > h1.app-name.hide {
@@ -167,7 +167,7 @@ section.cover img.ignore-view-full-image-img {
 /* --- Table --- */
 .markdown-section tbody td,
 .markdown-section tbody th {
-    transition: background-color var(--global-transition-duration-normal);
+    transition: var(--global-transition-color);
 }
 
 .markdown-section tbody tr.is-group-hover {

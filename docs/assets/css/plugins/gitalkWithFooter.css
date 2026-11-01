@@ -267,11 +267,11 @@
 }
 
 #gitalk-container .gt-container .gt-popup {
-    animation: gt-popup-in var(--global-transition-duration-normal) ease;
+    animation: gt-popup-in var(--global-transition-duration-normal) var(--global-transition-ease);
 }
 
 #gitalk-container .gt-container .gt-popup.is-leaving {
-    animation: gt-popup-out var(--global-transition-duration-normal) ease;
+    animation: gt-popup-out var(--global-transition-duration-normal) var(--global-transition-ease);
     pointer-events: none;
 }
 

@@ -38,6 +38,11 @@
 
     --global-outline-offset: 2px;
 
+    --global-transition-ease: ease;
+    --global-transition-ease-in: ease-in;
+    --global-transition-ease-out: ease-out;
+    --global-transition-ease-in-out: ease-in-out;
+
     --global-aspect-ratio-square: 1 / 1;
     --global-aspect-ratio-tall: 1 / 1.25;
     --global-aspect-ratio-tv: 16 / 9;
@@ -197,34 +202,43 @@
     --global-focus-outline-offset: var(--global-outline-offset);
 
     --global-transition-color:
-        color var(--global-transition-duration-normal),
-        text-decoration-color var(--global-transition-duration-normal),
-        border-color var(--global-transition-duration-normal),
-        outline-color var(--global-transition-duration-normal),
-        box-shadow var(--global-transition-duration-normal),
-        background-color var(--global-transition-duration-normal);
-    --global-transition-transform: transform var(--global-transition-duration-normal);
+        color var(--global-transition-duration-normal) var(--global-transition-ease),
+        text-decoration-color var(--global-transition-duration-normal) var(--global-transition-ease),
+        border-color var(--global-transition-duration-normal) var(--global-transition-ease),
+        outline-color var(--global-transition-duration-normal) var(--global-transition-ease),
+        box-shadow var(--global-transition-duration-normal) var(--global-transition-ease),
+        background-color var(--global-transition-duration-normal) var(--global-transition-ease);
+    --global-transition-transform: transform var(--global-transition-duration-normal) var(--global-transition-ease);
     --global-transition-filter:
-        opacity var(--global-transition-duration-normal),
-        filter var(--global-transition-duration-normal);
-    --global-transition-font: font-weight var(--global-transition-duration-normal);
+        opacity var(--global-transition-duration-normal) var(--global-transition-ease),
+        filter var(--global-transition-duration-normal) var(--global-transition-ease);
+    --global-transition-font: font-weight var(--global-transition-duration-normal) var(--global-transition-ease);
     --global-transition-open-vertical:
-        clip-path var(--global-transition-duration-normal),
+        clip-path var(--global-transition-duration-normal) var(--global-transition-ease),
         visibility 0s;
     --global-transition-close-vertical:
-        clip-path var(--global-transition-duration-normal),
+        clip-path var(--global-transition-duration-normal) var(--global-transition-ease),
         visibility 0s linear var(--global-transition-duration-normal);
     --global-transition-color-fast:
-        color var(--global-transition-duration-fast),
-        text-decoration-color var(--global-transition-duration-fast),
-        border-color var(--global-transition-duration-fast),
-        outline-color var(--global-transition-duration-fast),
-        box-shadow var(--global-transition-duration-fast),
-        background-color var(--global-transition-duration-fast);
-    --global-transition-transform-slow: transform var(--global-transition-duration-slow);
+        color var(--global-transition-duration-fast) var(--global-transition-ease),
+        text-decoration-color var(--global-transition-duration-fast) var(--global-transition-ease),
+        border-color var(--global-transition-duration-fast) var(--global-transition-ease),
+        outline-color var(--global-transition-duration-fast) var(--global-transition-ease),
+        box-shadow var(--global-transition-duration-fast) var(--global-transition-ease),
+        background-color var(--global-transition-duration-fast) var(--global-transition-ease);
+    --global-transition-color-slow:
+        color var(--global-transition-duration-slow) var(--global-transition-ease),
+        text-decoration-color var(--global-transition-duration-slow) var(--global-transition-ease),
+        border-color var(--global-transition-duration-slow) var(--global-transition-ease),
+        outline-color var(--global-transition-duration-slow) var(--global-transition-ease),
+        box-shadow var(--global-transition-duration-slow) var(--global-transition-ease),
+        background-color var(--global-transition-duration-slow) var(--global-transition-ease);
+    --global-transition-transform-fast: transform var(--global-transition-duration-fast) var(--global-transition-ease);
+    --global-transition-transform-slow: transform var(--global-transition-duration-slow) var(--global-transition-ease);
     --global-transition-filter-fast:
-        opacity var(--global-transition-duration-fast),
-        filter var(--global-transition-duration-fast);
+        opacity var(--global-transition-duration-fast) var(--global-transition-ease),
+        filter var(--global-transition-duration-fast) var(--global-transition-ease);
+
     --global-scale-hover: var(--global-transform-ratio-small);
     --global-scale-active: var(--global-transform-ratio-normal);
     --global-scale-press: var(--global-transform-ratio-big);

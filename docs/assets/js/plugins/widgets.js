@@ -5,6 +5,7 @@ let widgetsOptions = {
     useSwitchMode: true,
     top: 0,
     topOffset: 500,
+    defaultTheme: '',
     themes: [
         {
             name: 'default',
@@ -76,6 +77,11 @@ function plugin(hook, vm) {
     }
 
     // 黑暗模式切换、主题切换
+    let themeGroups = widgetsOptions.themes || []
+    let defaultThemeIndex = themeGroups.findIndex(function (group) {
+        return group && group.name === widgetsOptions.defaultTheme
+    })
+
     let themeState = {
         modeIndex: 0,
         modes: ['auto', 'light', 'dark'],
@@ -86,8 +92,8 @@ function plugin(hook, vm) {
         themeColor: '',
         bgColor: '',
 
-        themeIndex: 0,
-        groups: widgetsOptions.themes
+        themeIndex: defaultThemeIndex === -1 ? 0 : defaultThemeIndex,
+        groups: themeGroups
     }
 
     // 主题切换

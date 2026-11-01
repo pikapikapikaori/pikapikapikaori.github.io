@@ -227,12 +227,8 @@
             useSwitchMode: true,
             top: 20,
             topOffset: 500,
+            defaultTheme: 'swiss',
             themes: [
-                {
-                    name: 'swiss',
-                    css: './assets/css/theme/swiss',
-                    js: './assets/js/theme/swiss'
-                },
                 {
                     name: 'default',
                     css: './assets/css/theme/default'
@@ -288,6 +284,11 @@
                 {
                     name: 'haunted',
                     css: './assets/css/theme/haunted'
+                },
+                {
+                    name: 'swiss',
+                    css: './assets/css/theme/swiss',
+                    js: './assets/js/theme/swiss'
                 }
             ]
         },

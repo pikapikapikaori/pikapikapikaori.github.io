@@ -104,6 +104,13 @@
     src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan.ttf');
 }
 
+@font-face{
+    font-display: swap;
+    font-family: 'ChaoShiJiYinZhuan';
+    font-weight: bold;
+    src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan-Bold.ttf');
+}
+
 /* ZhouWen */
 @font-face {
     font-display: swap;

@@ -15,6 +15,6 @@
 @font-face {
     font-family: 'CoverTitleLang';
     font-display: swap;
-    src: url('../../../resources/fonts/KouzanBrushFontSousyo.ttf') format('truetype');
+    src: url('../../../resources/fonts/HakuShuZhuanYin.otf');
     unicode-range: U+3040-30FF, U+31F0-31FF, U+FF66-FF9D;
 }

@@ -2,6 +2,11 @@
 
 :root {
     --gitalk-github-color: #000;
+
+    --gitalk-ring-top: 0;
+    --gitalk-ring-left: 0;
+    --gitalk-ring-width: 0;
+    --gitalk-ring-height: 0;
 }
 
 /* Footer */
@@ -146,10 +151,10 @@
 
 #gitalk-container .gt-focus-ring {
     position: absolute;
-    top: var(--gitalk-ring-top, 0);
-    left: var(--gitalk-ring-left, 0);
-    width: var(--gitalk-ring-width, 0);
-    height: var(--gitalk-ring-height, 0);
+    top: var(--gitalk-ring-top);
+    left: var(--gitalk-ring-left);
+    width: var(--gitalk-ring-width);
+    height: var(--gitalk-ring-height);
     pointer-events: none;
     outline: var(--global-focus-outline) transparent;
     outline-offset: var(--global-focus-outline-offset);
@@ -239,6 +244,35 @@
 
 #gitalk-container .gt-popup {
     border-radius: var(--global-icon-border-radius);
+}
+
+@keyframes gt-popup-in {
+    from {
+        clip-path: var(--global-clip-path-vertical-full);
+    }
+
+    to {
+        clip-path: var(--global-clip-path-vertical-none);
+    }
+}
+
+@keyframes gt-popup-out {
+    from {
+        clip-path: var(--global-clip-path-vertical-none);
+    }
+
+    to {
+        clip-path: var(--global-clip-path-vertical-full);
+    }
+}
+
+#gitalk-container .gt-container .gt-popup {
+    animation: gt-popup-in var(--global-transition-duration-normal) ease;
+}
+
+#gitalk-container .gt-container .gt-popup.is-leaving {
+    animation: gt-popup-out var(--global-transition-duration-normal) ease;
+    pointer-events: none;
 }
 
 #gitalk-container .gt-container .gt-comment-content .gt-comment-body {

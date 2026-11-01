@@ -32,17 +32,19 @@ Framework variables are graded by distance from the middle level, at most five s
 | Border width | `border-<level>-width` | — | the same steps as `border` |
 | Inset shadow | `inset-box-shadow` | `strong` | used by the ink ring of a solid button |
 | Corner radius | `border-radius` | `small` / `big` | `none` is square and `round` is a circle |
+| Clip | `clip-path-vertical` | `none` / `full` | the two end points of a vertical reveal / collapse from the top edge |
 | Transition duration | `transition-duration` | `fast` / `slow` | every hover feedback uses `normal`; the longer and shorter steps are reserved for other motion such as theme switching and decorative animation |
 | Scale ratio | `transform-ratio` | `small` / `big` | used by the hover, selected and press scales |
 | Container size | `container-width`, `container-height`, `content-width`, `sidebar-width` | — | the article content container, the body column, the sidebar |
 
-Transitions come in three templates by purpose:
+Transitions come in four general templates by purpose:
 
 | Name | Properties covered |
 | --- | --- |
 | `transition-color` | `color`, `text-decoration-color`, `border-color`, `outline-color`, `box-shadow`, `background-color` |
 | `transition-transform` | `transform` |
 | `transition-filter` | `opacity`, `filter` |
+| `transition-open-vertical`, `transition-close-vertical` | `clip-path`, `visibility` |
 
 ### Interaction Standard
 

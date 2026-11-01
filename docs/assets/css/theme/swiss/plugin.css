@@ -185,6 +185,20 @@ html .app-nav > ul > li.is-current > .app-nav-toggle {
     font-weight: var(--global-font-weight-extra-bold);
 }
 
+html .app-nav > ul > li > ul {
+    transform: translateY(-0.4375rem);
+    transition:
+        var(--global-transition-close-vertical),
+        transform var(--global-transition-duration-normal) var(--sw-ease);
+}
+
+html .app-nav > ul > li.is-open > ul {
+    transform: translateY(0);
+    transition:
+        var(--global-transition-open-vertical),
+        transform var(--global-transition-duration-normal) var(--sw-ease);
+}
+
 html section.cover .cover-page-scroll-down-chevron-div {
     display: none;
 }
@@ -248,6 +262,38 @@ html #gitalk-container .gt-meta.is-popup-open .gt-user-name {
 
 html #gitalk-container .gt-user-inner.is-popup-open .gt-user-name {
     color: var(--sw-ink-strong);
+}
+
+@keyframes sw-gt-popup-in {
+    from {
+        clip-path: var(--global-clip-path-vertical-full);
+        transform: translateY(-0.4375rem);
+    }
+
+    to {
+        clip-path: var(--global-clip-path-vertical-none);
+        transform: translateY(0);
+    }
+}
+
+@keyframes sw-gt-popup-out {
+    from {
+        clip-path: var(--global-clip-path-vertical-none);
+        transform: translateY(0);
+    }
+
+    to {
+        clip-path: var(--global-clip-path-vertical-full);
+        transform: translateY(-0.4375rem);
+    }
+}
+
+html #gitalk-container .gt-container .gt-popup {
+    animation: sw-gt-popup-in var(--global-transition-duration-normal) var(--sw-ease);
+}
+
+html #gitalk-container .gt-container .gt-popup.is-leaving {
+    animation: sw-gt-popup-out var(--global-transition-duration-normal) var(--sw-ease);
 }
 
 html #gitalk-container .gt-container .gt-header-textarea,

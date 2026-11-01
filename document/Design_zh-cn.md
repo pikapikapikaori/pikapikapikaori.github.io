@@ -32,17 +32,19 @@
 | 边框宽度 | `border-<level>-width` | — | 与 `border` 同档 |
 | 内阴影 | `inset-box-shadow` | `strong` | 实心按钮的墨色内环用 |
 | 圆角 | `border-radius` | `small` / `big` | `none` 是直角、`round` 是圆形 |
+| 裁剪 | `clip-path-vertical` | `none` / `full` | 垂直方向上从顶边展开 / 折叠的两个端点 |
 | 过渡时长 | `transition-duration` | `fast` / `slow` | 全部悬停反馈用 `normal`，更短与更长的档位留给换主题、装饰动画等其它动效 |
 | 变换比 | `transform-ratio` | `small` / `big` | 供悬停、选中、按下的缩放取用 |
 | 容器尺寸 | `container-width`、`container-height`、`content-width`、`sidebar-width` | — | 文章内容器、正文栏、侧栏 |
 
-过渡按用途提供三套模板：
+过渡按用途提供四套通用模板：
 
 | 变量名称 | 覆盖的属性 |
 | --- | --- |
 | `transition-color` | `color`、`text-decoration-color`、`border-color`、`outline-color`、`box-shadow`、`background-color` |
 | `transition-transform` | `transform` |
 | `transition-filter` | `opacity`、`filter` |
+| `transition-open-vertical`、`transition-close-vertical` | `clip-path`、`visibility` |
 
 ### 交互标准
 

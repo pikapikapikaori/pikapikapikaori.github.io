@@ -12,6 +12,7 @@
     --widgets-hsl-s: 66%;
     --widgets-hsl-l: 78%;
     --widgets-disappear-times: 2.5;
+    --widgets-index: 0;
 }
 
 @media print {
@@ -45,7 +46,7 @@
     cursor: pointer;
     position: fixed;
     right: var(--widgets-right);
-    top: calc(var(--widgets-top) + (100vh - var(--widgets-gap) * var(--widgets-cnt)) / 2 + var(--widgets-gap) * var(--widgets-index, 0));
+    top: calc(var(--widgets-top) + (100vh - var(--widgets-gap) * var(--widgets-cnt)) / 2 + var(--widgets-gap) * var(--widgets-index));
 }
 
 .page-right-tools-widgets-span:hover {
@@ -68,7 +69,7 @@
     z-index: 190;
     transition: var(--global-transition-transform-slow);
     right: calc(var(--widgets-right) + var(--widgets-gap));
-    top: calc(var(--widgets-top) + (100vh - var(--widgets-gap) * var(--widgets-cnt)) / 2 + var(--widgets-gap) * var(--widgets-index, 0));
+    top: calc(var(--widgets-top) + (100vh - var(--widgets-gap) * var(--widgets-cnt)) / 2 + var(--widgets-gap) * var(--widgets-index));
 }
 
 .page-right-popups-div {

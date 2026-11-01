@@ -82,12 +82,57 @@ function plugin(hook, vm) {
         ring.classList.toggle('is-keyboard', focused && lastInputWasKeyboard)
     }
 
+    function spawnPopupGhost(node, parent) {
+        if (!parent || !parent.isConnected) return
+
+        const ghost = node.cloneNode(true)
+        ghost.classList.add('is-leaving')
+        ghost.setAttribute('aria-hidden', 'true')
+        ghost.setAttribute('inert', '')
+        ghost.style.pointerEvents = 'none'
+
+        for (const el of ghost.querySelectorAll('[tabindex], [role], [id]')) {
+            el.removeAttribute('tabindex')
+            el.removeAttribute('role')
+            el.removeAttribute('id')
+        }
+
+        parent.appendChild(ghost)
+
+        let done = false
+        const drop = function () {
+            if (done) return
+            done = true
+            ghost.remove()
+        }
+
+        ghost.addEventListener('animationend', drop)
+        setTimeout(drop, 600)
+    }
+
+    function harvestRemovedPopups(mutations) {
+        for (const mutation of mutations) {
+            for (const node of mutation.removedNodes) {
+                if (node.nodeType === 1 && node.classList.contains('gt-popup') && !node.classList.contains('is-leaving')) {
+                    spawnPopupGhost(node, mutation.target)
+                }
+            }
+        }
+    }
+
+    function dropPopupGhosts(container) {
+        for (const ghost of container.querySelectorAll('.gt-popup.is-leaving')) {
+            ghost.remove()
+        }
+    }
+
     function syncPopupState(container) {
         const inner = container.querySelector('.gt-user-inner')
         const meta = container.querySelector('.gt-meta')
         if (!inner) return
 
-        const popupOpen = !!container.querySelector('.gt-popup')
+        const popupOpen = !!container.querySelector('.gt-popup:not(.is-leaving)')
+        if (popupOpen) dropPopupGhosts(container)
         if (meta) meta.classList.toggle('is-popup-open', popupOpen)
 
         if (inner.dataset.popupSynced === '1') return
@@ -119,7 +164,7 @@ function plugin(hook, vm) {
         const userName = container.querySelector('.gt-user-inner .gt-user-name')
         if (userName) makeButtonLike(userName)
 
-        for (const action of container.querySelectorAll('.gt-popup .gt-action')) {
+        for (const action of container.querySelectorAll('.gt-popup:not(.is-leaving) .gt-action')) {
             makeButtonLike(action)
         }
 
@@ -127,7 +172,7 @@ function plugin(hook, vm) {
             makeButtonLike(icon)
         }
 
-        for (const copyright of container.querySelectorAll('.gt-popup .gt-copyright')) {
+        for (const copyright of container.querySelectorAll('.gt-popup:not(.is-leaving) .gt-copyright')) {
             copyright.removeAttribute('role')
             copyright.removeAttribute('tabindex')
             const version = copyright.querySelector('.gt-version')
@@ -135,7 +180,7 @@ function plugin(hook, vm) {
         }
 
         const meta = container.querySelector('.gt-meta')
-        const popup = meta && meta.querySelector(':scope > .gt-popup')
+        const popup = meta && meta.querySelector(':scope > .gt-popup:not(.is-leaving)')
         const user = meta && meta.querySelector(':scope > .gt-user')
         if (popup && user && popup !== user.nextElementSibling) {
             meta.insertBefore(popup, user.nextSibling)
@@ -145,9 +190,10 @@ function plugin(hook, vm) {
     function observeGitalk(container) {
         if (!container || gitalkObserver) return
 
-        gitalkObserver = new MutationObserver(function () {
+        gitalkObserver = new MutationObserver(function (mutations) {
             if (gitalkScheduled) return
             gitalkScheduled = true
+            harvestRemovedPopups(mutations)
             updateGitalk(container)
             gitalkScheduled = false
         })
@@ -178,7 +224,7 @@ function plugin(hook, vm) {
 
         container.addEventListener('focusout', function (e) {
             syncRing(container)
-            if (!container.querySelector('.gt-popup')) return
+            if (!container.querySelector('.gt-popup:not(.is-leaving)')) return
             if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.gt-meta')) return
             const inner = container.querySelector('.gt-user-inner')
             if (inner) inner.click()

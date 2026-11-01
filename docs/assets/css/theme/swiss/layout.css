@@ -16,6 +16,35 @@
 
     --global-backdrop-filter: none;
 
+    --global-transition-color:
+        color var(--global-transition-duration-normal) var(--sw-ease),
+        text-decoration-color var(--global-transition-duration-normal) var(--sw-ease),
+        border-color var(--global-transition-duration-normal) var(--sw-ease),
+        outline-color var(--global-transition-duration-normal) var(--sw-ease),
+        box-shadow var(--global-transition-duration-normal) var(--sw-ease),
+        background-color var(--global-transition-duration-normal) var(--sw-ease);
+    --global-transition-transform: transform var(--global-transition-duration-normal) var(--sw-ease);
+    --global-transition-filter:
+        opacity var(--global-transition-duration-normal) var(--sw-ease),
+        filter var(--global-transition-duration-normal) var(--sw-ease);
+    --global-transition-font: font-weight var(--global-transition-duration-normal) var(--sw-ease);
+    --global-transition-open-vertical:
+        clip-path var(--global-transition-duration-normal) var(--sw-ease),
+        visibility 0s;
+    --global-transition-close-vertical:
+        clip-path var(--global-transition-duration-normal) var(--sw-ease),
+        visibility 0s linear var(--global-transition-duration-normal);
+    --global-transition-color-fast:
+        color var(--global-transition-duration-fast) var(--sw-ease),
+        text-decoration-color var(--global-transition-duration-fast) var(--sw-ease),
+        border-color var(--global-transition-duration-fast) var(--sw-ease),
+        outline-color var(--global-transition-duration-fast) var(--sw-ease),
+        box-shadow var(--global-transition-duration-fast) var(--sw-ease),
+        background-color var(--global-transition-duration-fast) var(--sw-ease);
+    --global-transition-transform-slow: transform var(--global-transition-duration-slow) var(--sw-ease);
+    --global-transition-filter-fast:
+        opacity var(--global-transition-duration-fast) var(--sw-ease),
+        filter var(--global-transition-duration-fast) var(--sw-ease);
     --global-focus-outline: var(--sw-rule-mid) solid;
     --global-focus-outline-width: var(--sw-rule-mid);
     --global-focus-outline-color: var(--sw-ink-strong);
@@ -63,6 +92,10 @@
 
     --sw-accent: var(--global-theme-color-normal);
     --sw-link-hover: var(--sw-accent);
+    --sw-ease: cubic-bezier(0.22, 0.61, 0.24, 1);
+    --sw-dur-title: 760ms;
+    --sw-dur-reveal: 560ms;
+    --sw-dur-cover: 1800ms;
     --sw-border-accent: var(--sw-rule-mast) solid var(--sw-accent);
 
     --sw-nav-rest: transparent;
@@ -963,7 +996,7 @@ html ::selection {
 
 html.sw-motion .sw-mast>h1 {
     transform: translateY(0.4em);
-    transition: transform 760ms cubic-bezier(0.22, 0.61, 0.24, 1);
+    transition: transform var(--sw-dur-title) var(--sw-ease);
 }
 
 html.sw-motion .sw-mast>h1.sw-in {
@@ -971,9 +1004,10 @@ html.sw-motion .sw-mast>h1.sw-in {
 }
 
 html.sw-motion [data-sw-in] {
+    --sw-delay: 0ms;
     transform: translateY(1.5rem);
-    transition: transform 560ms cubic-bezier(0.22, 0.61, 0.24, 1);
-    transition-delay: var(--sw-delay, 0ms);
+    transition: transform var(--sw-dur-reveal) var(--sw-ease);
+    transition-delay: var(--sw-delay);
 }
 
 html.sw-motion [data-sw-in].sw-in {
@@ -982,7 +1016,7 @@ html.sw-motion [data-sw-in].sw-in {
 
 html.sw-motion .sw-cover img {
     transform: scale(1.05);
-    transition: transform 1800ms cubic-bezier(0.22, 0.61, 0.24, 1);
+    transition: transform var(--sw-dur-cover) var(--sw-ease);
 }
 
 html.sw-motion .sw-cover.sw-in img {

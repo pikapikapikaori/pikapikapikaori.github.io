@@ -14,8 +14,7 @@ function setupWidgetsRow() {
 
     let row = container.querySelector(':scope > .widgets-row')
     if (!row) {
-        row = document.createElement('div')
-        row.className = 'widgets-row'
+        row = makeEl('div', 'widgets-row')
         container.insertBefore(row, container.firstChild)
     }
 

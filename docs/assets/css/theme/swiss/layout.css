@@ -9,6 +9,9 @@
     --global-backdrop-filter: none;
 
     --global-transition-ease: cubic-bezier(0.22, 0.61, 0.24, 1);
+    --global-transition-ease-in: var(--global-transition-ease);
+    --global-transition-ease-out: var(--global-transition-ease);
+    --global-transition-ease-in-out: var(--global-transition-ease);
 
     --global-scrollbar-border-radius: 0;
 

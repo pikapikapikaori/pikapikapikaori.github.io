@@ -653,7 +653,7 @@ body.close .content {
 
     body.close .sidebar-toggle {
         background-color: var(--global-sidebar-toggle-bg);
-        transition: var(--global-transition-color-slow);
+        transition: var(--global-transition-color-slow), var(--global-transition-filter-fast);
         width: var(--global-sidebar-toggle-width);
         padding: 0.625rem
     }

@@ -15,7 +15,6 @@ HanYi/HYKaiTi/HYKaiTiS.ttf
 HanYi/HYLuoHuaShiW/HYLuoHuaShiW.ttf
 HanYi/HYQuanTangShi/HYQuanTangShiJF.ttf
 HakuShu/HakuShuZhuanYin/HakuShuZhuanYin.otf
-HanYi/HanyiSentyFlorCalligraphy/HanyiSentyFlorCalligraphy.ttf
 HuaKang/HuiZongGong/HuiZongGong-sc.ttf
 HuaKang/HuiZongGong/HuiZongGong-tc.ttf
 Jigmo/Jigmo.ttf

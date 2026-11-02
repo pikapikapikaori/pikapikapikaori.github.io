@@ -242,13 +242,6 @@
     size-adjust: 110%;
 }
 
-@font-face {
-    font-family: 'HanyiSentyFlorCalligraphy';
-    src: url('../../resources/fonts/HanYi/HanyiSentyFlorCalligraphy/HanyiSentyFlorCalligraphy.woff2') format('woff2');
-    font-display: swap;
-    size-adjust: 140%;
-}
-
 /* Japanese */
 @font-face {
     font-family: 'KakuGyoStd';

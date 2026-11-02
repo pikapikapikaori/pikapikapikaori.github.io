@@ -165,9 +165,12 @@
     outline-color: var(--global-focus-outline-color);
 }
 
-#gitalk-container .gt-meta.is-hover .gt-user-name,
-#gitalk-container .gt-meta.is-popup-open .gt-user-name {
+#gitalk-container .gt-meta.is-hover .gt-user-name {
     text-decoration-color: var(--global-link-decoration-hover);
+}
+
+#gitalk-container .gt-meta.is-popup-open .gt-user-name {
+    text-decoration-color: var(--global-link-decoration-active);
 }
 
 #gitalk-container .gt-user-inner.is-popup-open .gt-user-name {

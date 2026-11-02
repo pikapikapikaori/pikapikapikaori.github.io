@@ -2,6 +2,8 @@
 
 [English](./Design.md) | 简体中文
 
+> 短评集（`writings/BriefComments.md`）是特殊页面，设计独立，不跟随本文档的全局设计。
+
 ## 默认主题
 
 ### 变量命名
@@ -50,7 +52,7 @@
 
 #### 四级阶梯
 
-所有可交互元素都沿同一条四级阶梯上行。每一列都是从该列自身的静止状态起算的阶梯，元素只沿自己所在的那一列上行，且不跳级；**选中项被悬停时停留在第 2 级**，不退回第 1 级。
+所有可交互元素都沿同一条四级阶梯上行。每一列都是从该列自身的静止状态起算的阶梯，元素只沿自己所在的那一列上行，且不跳级；**选中项被悬停时停留在第 2 级**，不退回第 1 级。链接列从第 2 级起步（静止为第 2 级，悬停换第 3 级），所以选中态比悬停再深一级，取 `accent-level-4`。
 
 | 级 | 语义 | 变量后缀 | 代表色变量 | 备注 |
 | --- | --- | --- | --- | --- |
@@ -70,7 +72,7 @@
 | **导航链接** | 链接 | 顶栏 navbar、侧栏、docsify tabs、TOC 切换器、面包屑 | `nav-bar (border-bottom、border-left)` | `press` | `pointer`；docsify tabs、TOC 切换器的选中项 `default`；面包屑当前页不是链接，无规则 | 点击只是重新进入当前页，没有额外反馈。面包屑的当前页语义上是选中态，取第 2 级 |
 | **导航展开按钮** | 按钮 | 顶栏里带子菜单的项（`语言`） | `nav-bar (border-bottom)` | `press` | `pointer` | 点击开合，不随悬停展开；`makeButtonLike` 只给它 `tabindex="0"`，Enter / Space 等同点击；焦点离开整项即收起 |
 | **行内文字链接 1** | 链接 | 正文内联链接（`p` / `li` / `blockquote` / `table` 内的 `a`）、封面内的正文链接 | `link-decoration (text-decoration-color)` | `active`、`press` | `pointer` | 静止是第 2 级下划线，悬停换第 3 级；字色不变，点击即跳转 |
-| **行内文字链接 2** | 链接 | 站名、标题锚点、`summary`、分页标题、搜索结果、评论链接、gitalk 提示文字 | `link-decoration (text-decoration-color)` | `active`、`press` | `pointer` | 同上，只是静止为透明下划线 |
+| **行内文字链接 2** | 链接 | 站名、标题锚点、`summary`、分页标题、搜索结果、评论链接、gitalk 提示文字 | `link-decoration (text-decoration-color)` | `press` | `pointer` | 同上，只是静止为透明下划线；选中态比悬停再深一级（`accent-level-4`），落在 gitalk 用户名菜单打开与 `details[open] > summary` 上，选中项被悬停时停在本级 |
 | **正文图标链接** | 链接 | about-me 图标 | `scale (transform)` | `rest`、`active` | `pointer` | 观感与幽灵图标完全相同，但语义是正文里的图标链接，所以单独成行，不参与按钮层级 |
 | **幽灵图标** | 按钮 | widgets 九个图标、侧栏开关、回顶部、阅读进度环、评论 like/edit/reply、封面 chevron | `scale (transform)` | `rest`、`active` | `pointer` | 只有缩放，没有底也没有描边 |
 | **输入框** | 输入 | 搜索框、分页输入框、gitalk 文本框 | `control-border (border-color)` | `press` | `text` | `active` 兼作 `:focus`，与选中同值 |
@@ -106,7 +108,7 @@
 
 ## swiss 主题
 
-`swiss` 用「纸 / 墨 / 线」的版面语言。它与默认主题共用同一套交互意图，但取色只有黑白灰，主题色退到极少数几处（见「主题色预算」）。
+`swiss` 用「纸 / 墨 / 线」的版面语言。它与默认主题共用同一套交互意图，但取色只有黑白灰，主题色退到极少数几处（见「主题色预算」）。整本主题只有一档主题色，没有能再深一级的色阶，所以 `hover` 与 `active` 同值：需要选中态的地方不另设表现，与悬停完全相同。
 
 ### 主题色预算
 

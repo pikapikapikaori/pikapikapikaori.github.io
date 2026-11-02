@@ -2,6 +2,8 @@
 
 English | [简体中文](./Design_zh-cn.md)
 
+> The brief-comments page (`writings/BriefComments.md`) is a special page: its design is independent and does not follow the global design described here.
+
 ## Default Theme
 
 ### Variable Naming
@@ -50,7 +52,7 @@ Transitions come in four general templates by purpose:
 
 #### Emphasis Ladder
 
-Every interactive element walks up one four-step ladder. Each column is that column's own ramp, measured from its resting state, and an element only walks up its own column without skipping a step; **a selected control that is hovered stays on level 2** and does not fall back to level 1.
+Every interactive element walks up one four-step ladder. Each column is that column's own ramp, measured from its resting state, and an element only walks up its own column without skipping a step; **a selected control that is hovered stays on level 2** and does not fall back to level 1. The link columns start at level 2 (level 2 at rest, level 3 on hover), so their selected state goes one step deeper still, to `accent-level-4`.
 
 | Level | Meaning | Suffix | Colour variable | Notes |
 | --- | --- | --- | --- | --- |
@@ -70,7 +72,7 @@ Grouped by interaction mechanism. Every variable carries the `global` prefix, so
 | **Navigation link** | Link | top navbar, sidebar, docsify tabs, TOC switcher, breadcrumb | `nav-bar (border-bottom, border-left)` | `press` | `pointer`; selected items of docsify tabs and the TOC switcher `default`; the current breadcrumb is not a link and has no rule | clicking only re-enters the current page and gives no extra feedback. The current breadcrumb is selected in meaning and takes level 2 |
 | **Nav disclosure** | Button | the navbar item that holds a submenu (`语言`) | `nav-bar (border-bottom)` | `press` | `pointer` | a click opens and closes it and hover never opens it; `makeButtonLike` only gives it `tabindex="0"`, with Enter / Space acting as a click; focus leaving the item closes it |
 | **Inline text link 1** | Link | links inside the article body (`p` / `li` / `blockquote` / `table`), links inside the cover | `link-decoration (text-decoration-color)` | `active`, `press` | `pointer` | the underline is level 2 at rest and level 3 on hover; the text keeps its colour and a click navigates away |
-| **Inline text link 2** | Link | site name, heading anchor, `summary`, pagination title, search results, comment links, gitalk tip | `link-decoration (text-decoration-color)` | `active`, `press` | `pointer` | the same, except the resting underline is `transparent` |
+| **Inline text link 2** | Link | site name, heading anchor, `summary`, pagination title, search results, comment links, gitalk tip | `link-decoration (text-decoration-color)` | `press` | `pointer` | the same, except the resting underline is `transparent`; the selected state goes one step deeper (`accent-level-4`) and lands on the gitalk user name while its menu is open and on `details[open] > summary`, with a hovered selected item staying there |
 | **Inline icon link** | Link | the about-me icons | `scale (transform)` | `rest`, `active` | `pointer` | it looks exactly like a ghost icon, but it is a link inside the article, so it gets its own row and takes no part in the button ladder |
 | **Ghost icon** | Button | the nine widgets, sidebar toggle, back to top, reading progress, comment like/edit/reply, cover chevron | `scale (transform)` | `rest`, `active` | `pointer` | scale alone, no fill and no border |
 | **Input** | Input | search box, pagination input, gitalk textarea | `control-border (border-color)` | `press` | `text` | `active` doubles as `:focus` and shares the selected value |
@@ -106,7 +108,7 @@ Every popup closes on a click outside it, and when keyboard focus leaves the "tr
 
 ## swiss Theme
 
-`swiss` speaks a "paper / ink / line" language. It shares the interaction intent of the default theme, but its palette is black, white and grey only, and the theme colour retreats to a handful of places (see "Theme Colour Budget").
+`swiss` speaks a "paper / ink / line" language. It shares the interaction intent of the default theme, but its palette is black, white and grey only, and the theme colour retreats to a handful of places (see "Theme Colour Budget"). The whole theme has a single step of theme colour and no darker step, so `hover` and `active` share one value: wherever a selected state is needed it adds nothing and looks exactly like hover.
 
 ### Theme Colour Budget
 

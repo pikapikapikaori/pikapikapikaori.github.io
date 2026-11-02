@@ -419,6 +419,11 @@ html .markdown-section a:hover {
     text-decoration-color: var(--sw-link-hover);
 }
 
+html .markdown-section summary:hover,
+html .markdown-section details[open]>summary {
+    text-decoration-color: var(--sw-link-hover);
+}
+
 html .sw-mast>h1,
 html .sw-sec-head>h2,
 html .sw-sec-head>h3 {

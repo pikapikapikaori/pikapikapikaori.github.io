@@ -254,6 +254,7 @@
 
     --global-link-decoration-rest: var(--global-accent-level-2);
     --global-link-decoration-hover: var(--global-accent-level-3);
+    --global-link-decoration-active: var(--global-accent-level-4);
 
     --global-control-border-rest: var(--global-border-color);
     --global-control-border-hover: var(--global-accent-level-1);

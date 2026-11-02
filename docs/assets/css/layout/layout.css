@@ -1061,6 +1061,10 @@ body {
     text-decoration-color: var(--global-link-decoration-hover);
 }
 
+.markdown-section details[open]>summary {
+    text-decoration-color: var(--global-link-decoration-active);
+}
+
 .markdown-section summary::marker {
     content: "";
 }

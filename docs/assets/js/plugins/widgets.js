@@ -77,6 +77,9 @@ function plugin(hook, vm) {
     }
 
     // 黑暗模式切换、主题切换
+    const THEME_SHEET_WAIT_MS = 3000
+    const THEME_SHEET_POLL_MS = 16
+
     let themeGroups = widgetsOptions.themes || []
     let defaultThemeIndex = themeGroups.findIndex(function (group) {
         return group && group.name === widgetsOptions.defaultTheme
@@ -247,13 +250,14 @@ function plugin(hook, vm) {
         return ''
     }
 
-    let readAppliedThemeColors = function (link) {
+    let readAppliedThemeColors = function (link, readSheet) {
         const computed = getComputedStyle(document.documentElement)
-        const themeColor = readThemeSheetColor(link, '--theme-color')
+        const themeColor = readSheet ? readThemeSheetColor(link, '--theme-color') : ''
+        const sheetBgColor = readSheet ? readThemeSheetColor(link, '--bg-color') : ''
 
         return {
             themeColor: themeColor,
-            bgColor: computed.getPropertyValue('--bg-color').trim()
+            bgColor: sheetBgColor || computed.getPropertyValue('--bg-color').trim()
         }
     }
 
@@ -272,26 +276,49 @@ function plugin(hook, vm) {
         unlockNoTransition()
     }
 
-    // 等主题 CSS 生效后再跑主题脚本，避免脚本读到上一个主题的 CSS 变量
-    function waitForStylesheet(link) {
-        if (!link || link.disabled || link.getAttribute('href') === 'data:text/css,') {
+    // 等主题 CSS 生效后再跑主题脚本，避免脚本读到上一个主题的 CSS 变量。
+    function waitForStylesheet(link, cssPath) {
+        if (!link || link.disabled || !cssPath) {
             return Promise.resolve()
         }
 
+        const expected = new URL(cssPath, document.baseURI).href
+
+        const isReady = function () {
+            const sheet = link.sheet
+            if (!sheet || !sheet.cssRules || sheet.cssRules.length === 0) return false
+            return !sheet.href || sheet.href === expected
+        }
+
+        if (isReady()) return Promise.resolve()
+
         return new Promise(function (resolve) {
             let isDone = false
+            let timer = null
+            let deadline = 0
 
             const finish = function () {
                 if (isDone) return
                 isDone = true
-                link.removeEventListener('load', finish)
+                link.removeEventListener('load', check)
                 link.removeEventListener('error', finish)
+                if (timer) clearTimeout(timer)
                 resolve()
             }
 
-            link.addEventListener('load', finish)
+            const check = function () {
+                if (isDone) return
+                if (isReady() || Date.now() >= deadline) {
+                    finish()
+                    return
+                }
+                timer = setTimeout(check, THEME_SHEET_POLL_MS)
+            }
+
+            deadline = Date.now() + THEME_SHEET_WAIT_MS
+            link.addEventListener('load', check)
             link.addEventListener('error', finish)
-            setTimeout(finish, 300)
+            check()
         })
     }
 
@@ -307,15 +334,15 @@ function plugin(hook, vm) {
             colorTheme.disabled = false
             if (colorTheme.getAttribute('href') !== cssPath) {
                 colorTheme.href = cssPath
-                waits = waitForStylesheet(colorTheme)
             }
+            waits = waitForStylesheet(colorTheme, cssPath)
         } else {
             colorTheme.disabled = true
             colorTheme.href = 'data:text/css,'
         }
 
         return waits.then(function () {
-            const applied = readAppliedThemeColors(colorTheme)
+            const applied = readAppliedThemeColors(colorTheme, isThemeValue(cssPath))
             themeState.themeColor = applied.themeColor
             themeState.bgColor = applied.bgColor
 

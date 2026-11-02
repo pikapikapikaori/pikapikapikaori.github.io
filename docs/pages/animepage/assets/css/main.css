@@ -2,13 +2,8 @@
 /* @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300i,400i"); */
 
 @font-face {
-    font-family: 'HYQuanTangShiJF';
-    src: url('../webfonts/fonts/HYQuanTangShiJF.ttf');
-}
-
-@font-face {
     font-family: 'KakuGyoStd';
-    src: url('../webfonts/fonts/A-OTF-KakuGyoStd-Light.otf');
+    src: url('../webfonts/fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
 }
 /*
 	Ethereal by HTML5 UP

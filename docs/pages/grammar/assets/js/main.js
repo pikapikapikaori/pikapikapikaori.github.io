@@ -9,7 +9,7 @@ import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
 import { enhanceSelects } from './components/select-menu.js'
 import { createThemeToggle, applyTheme } from './components/theme-toggle.js'
-import { applyFont, applyFontSize, getStoredFontMode, getStoredFontFamily, getStoredFontSize } from './services/font-service.js'
+import { initFont, applyFontSize, getStoredFontSize } from './services/font-service.js'
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { loadLanguages } from './data/languages.js'
@@ -187,7 +187,7 @@ async function bootstrap() {
     applyTheme(theme)
 
     // 字体与字号存在 localStorage，启动时须应用，否则界面与设置页显示不一致。
-    applyFont({ mode: getStoredFontMode(), family: getStoredFontFamily() })
+    initFont()
     applyFontSize(getStoredFontSize())
 
     setBootLoaderText('正在加载语言数据…')

@@ -28,11 +28,21 @@ export function closeSelectMenu() {
     if (typeof onClose === 'function') onClose()
 }
 
+/** 选项不折行时允许菜单比触发控件宽，最多 30rem；超出的文字由条目自己省略 */
+const MENU_MAX_WIDTH = 480
+
 function placeMenu(anchor) {
     if (!menuEl || !anchor) return
     const rect = anchor.getBoundingClientRect()
-    const width = Math.max(rect.width, 160)
     const gap = 4
+
+    let width = Math.max(rect.width, 160)
+    if (session?.nowrap) {
+        menuEl.style.width = 'max-content'
+        width = Math.min(Math.max(rect.width, menuEl.offsetWidth), MENU_MAX_WIDTH)
+        menuEl.style.width = `${width}px`
+    }
+    // 高度要在宽度定了之后再量：折行的条目会随宽度变高
     const height = menuEl.offsetHeight
 
     let top = rect.bottom + gap
@@ -40,7 +50,7 @@ function placeMenu(anchor) {
         const above = rect.top - gap - height
         top = above >= 8 ? above : Math.max(8, window.innerHeight - height - 8)
     }
-    const left = Math.min(rect.left, window.innerWidth - width - 8)
+    const left = Math.max(8, Math.min(rect.left, window.innerWidth - width - 8))
 
     menuEl.style.top = `${top}px`
     menuEl.style.left = `${left}px`
@@ -69,8 +79,9 @@ function choose(index) {
 }
 
 /**
- * @param {object} options anchor（定位用）/ items([{ value, label, group?, disabled? }]) / value（高亮与打勾）/ lang
- *   / owner（aria 属性的载体，默认 anchor）/ activeIndex（缺省为当前值）/ onPick(value, item) / onClose()
+ * @param {object} options anchor（定位用）/ items([{ value, label, group?, title?, disabled? }]) / value（高亮与打勾）/ lang
+ *   / owner（aria 属性的载体，默认 anchor）/ activeIndex（缺省为当前值）/ nowrap（条目单行 + 省略号，菜单可加宽）
+ *   / onPick(value, item) / onClose()
  */
 export function openSelectMenu({
     anchor,
@@ -79,6 +90,7 @@ export function openSelectMenu({
     lang = null,
     owner = null,
     activeIndex = null,
+    nowrap = false,
     onPick = null,
     onClose = null
 }) {
@@ -91,11 +103,16 @@ export function openSelectMenu({
         items,
         owner: owner || anchor,
         activeIndex: 0,
+        nowrap,
         onPick,
         onClose
     }
 
-    menuEl = h('div', { class: 'select-menu', role: 'listbox', id: session.id })
+    menuEl = h('div', {
+        class: 'select-menu' + (nowrap ? ' select-menu--nowrap' : ''),
+        role: 'listbox',
+        id: session.id
+    })
 
     let lastGroup = null
     items.forEach((item, index) => {
@@ -110,6 +127,7 @@ export function openSelectMenu({
                 + (selected ? ' select-menu__item--selected' : '')
                 + (item.disabled ? ' select-menu__item--disabled' : ''),
             role: 'option',
+            title: item.title || (nowrap ? item.label : null),
             'aria-selected': String(selected),
             'aria-disabled': item.disabled ? 'true' : null,
             onpointerdown: (e) => e.preventDefault(),

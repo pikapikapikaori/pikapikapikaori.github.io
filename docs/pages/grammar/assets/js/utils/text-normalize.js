@@ -57,10 +57,6 @@ export function matchRangesNorm(text, query) {
     return out
 }
 
-export function matchIndices(text, query) {
-    return matchRangesNorm(text, query)
-}
-
 export function highlight(text, query) {
     const t = String(text ?? '')
     const spans = matchRangesNorm(t, query)
@@ -82,26 +78,7 @@ export function highlight(text, query) {
     return frag
 }
 
-export function snippet(text, query, radius = 40) {
-    const t = String(text ?? '')
-    const q = String(query ?? '')
-    if (!q) return t.length > radius * 2 ? t.slice(0, radius * 2) + '…' : t
-
-    const spans = matchRangesNorm(t, q)
-    if (spans.length === 0) {
-        return t.length > radius * 2 ? t.slice(0, radius * 2) + '…' : t
-    }
-    const [s, e] = spans[0]
-    const start = Math.max(0, s - radius)
-    const end = Math.min(t.length, e + radius)
-    return (start > 0 ? '…' : '') + t.slice(start, end) + (end < t.length ? '…' : '')
-}
-
 /* ---------------- 语言辅助 ---------------- */
-
-export function normalizeLangCode(code) {
-    return String(code || '').trim().toLowerCase()
-}
 
 export function toStringArray(v) {
     if (Array.isArray(v)) return v.map((x) => String(x ?? '').trim()).filter(Boolean)

@@ -11,14 +11,21 @@ function normalizeOption(option) {
     if (option && typeof option === 'object') {
         return {
             value: String(option.value ?? ''),
-            label: String(option.label ?? option.value ?? '')
+            label: String(option.label ?? option.value ?? ''),
+            // group / title 只用于展开的列表：group 出分组小标题，title 给省略后的全文
+            group: option.group ? String(option.group) : null,
+            title: option.title ? String(option.title) : null,
+            // 收起态可以换一种写法（如补上来源名），展开的列表仍用 label
+            display: option.display ? String(option.display) : null
         }
     }
-    return { value: String(option ?? ''), label: String(option ?? '') }
+    return { value: String(option ?? ''), label: String(option ?? ''), group: null, title: null, display: null }
 }
 
 /**
- * @param {object} options options（[{ value, label }] 或字符串数组）/ value / lang / className / disabled / onChange(value)
+ * @param {object} options options（[{ value, label, group?, title?, display? }] 或字符串数组，也可以是返回它们的函数——每次展开时重算）
+ *   / value / lang / className / disabled
+ *   / nowrap（展开列表里条目单行，超长省略；收起态始终省略）/ onChange(value)
  * @returns {HTMLButtonElement} 触发按钮，额外挂了 value / setOptions
  */
 export function createSelect({
@@ -27,9 +34,12 @@ export function createSelect({
     lang = null,
     className = 'select',
     disabled = false,
+    nowrap = false,
     onChange = null
 } = {}) {
-    let items = options.map(normalizeOption)
+    const dynamic = typeof options === 'function'
+    const readOptions = () => (dynamic ? options() : options).map(normalizeOption)
+    let items = readOptions()
     let current = items.some((item) => item.value === value) ? String(value) : (items[0]?.value ?? '')
 
     const valueEl = h('span', { class: 'select__value' })
@@ -45,11 +55,21 @@ export function createSelect({
 
     function renderValue() {
         const hit = items.find((item) => item.value === current)
-        valueEl.replaceChildren(bdiText(hit ? hit.label : '', lang))
+        const label = hit ? (hit.display || hit.label) : ''
+        valueEl.replaceChildren(bdiText(label, lang))
+        // 收起态会省略长文本，鼠标停上去给全文（只在单行模式下加，免得其它下拉到处冒提示）
+        if (nowrap && label) el.title = label
+        else el.removeAttribute('title')
     }
 
     function open(step = 0) {
-        if (el.disabled || !items.length) return
+        if (el.disabled) return
+        // 选项可能随表单其它部分变化（如新增了含义），函数式选项在展开时重算；
+        // 静态数组与 setOptions 给的就是当前快照，重读反而会把 setOptions 的结果清掉
+        if (dynamic) items = readOptions()
+        if (!items.length) return
+        if (!items.some((item) => item.value === current)) current = items[0].value
+        renderValue()
         const index = items.findIndex((item) => item.value === current)
         const base = index < 0 ? 0 : index
         openSelectMenu({
@@ -58,6 +78,7 @@ export function createSelect({
             items,
             value: current,
             lang,
+            nowrap,
             activeIndex: Math.min(items.length - 1, Math.max(0, base + step)),
             onPick: (next) => {
                 if (next === current) return

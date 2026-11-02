@@ -117,8 +117,6 @@ function copyFlow(from, to) {
 }
 
 export function qs(sel, root = document) { return root.querySelector(sel) }
-export function qsa(sel, root = document) { return Array.from(root.querySelectorAll(sel)) }
-
 export function on(el, type, handler, opts) {
     el.addEventListener(type, handler, opts)
     return () => el.removeEventListener(type, handler, opts)
@@ -134,15 +132,6 @@ export function replace(container, ...children) {
     return container
 }
 
-export function escapeHtml(str) {
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-}
-
 export function delegate(root, selector, type, handler) {
     const listener = (e) => {
         const target = e.target.closest(selector)
@@ -150,11 +139,4 @@ export function delegate(root, selector, type, handler) {
     }
     root.addEventListener(type, listener)
     return () => root.removeEventListener(type, listener)
-}
-
-export function focusFirst(container) {
-    const el = container.querySelector(
-        'input:not([type=hidden]):not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    )
-    if (el) el.focus()
 }

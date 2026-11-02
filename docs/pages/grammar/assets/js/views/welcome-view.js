@@ -165,7 +165,7 @@ const welcomeView = {
             const textarea = h('textarea', {
                 class: 'textarea',
                 placeholder: '把用户 JSON 粘贴到这里…',
-                style: { minHeight: '220px', fontFamily: 'var(--ff-mono)', fontSize: 'var(--fs-sm)' }
+                style: { minHeight: '220px', fontSize: 'var(--fs-sm)' }
             })
 
             openModal({

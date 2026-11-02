@@ -207,7 +207,7 @@ export function buildPrompt(languageCode, grammarDoc) {
     L.push('| gender | string[] | 否 | 语法性，**仅 pos=noun**；取值 `m` / `f` / `n`，可多选 |')
     L.push('| inflections | array | 否 | 补充形式 `[{ "group"?, "label", "form", "source" }]` |')
     L.push('| collocations | array | 否 | `[{ "text", "gloss", "source" }]` |')
-    L.push('| examples | array | 否 | `[{ "text", "translation", "citation", "source" }]` |')
+    L.push('| examples | array | 否 | `[{ "text", "translation", "citation", "source", "meaning"?: { "text", "source" } }]`；`meaning` 是例句关联的那条含义的快照，按文本自动对应序号 |')
     L.push('| derivatives | string[] | 否 | 派生词基本形态 |')
     L.push('| tags | string[] | 否 | 标签 |')
     L.push('| notes | string | 否 | 备注 |')

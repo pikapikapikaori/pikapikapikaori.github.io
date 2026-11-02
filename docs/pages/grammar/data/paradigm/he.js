@@ -178,11 +178,6 @@ export function skeletonKey(skeleton) {
         .split(DAGESH).join('')
 }
 
-/** 骨架里出现了几个词根占位 */
-export function countSlots(skeleton) {
-    return [...String(skeleton ?? '')].filter((ch) => ROOT_SLOTS.includes(ch)).length
-}
-
 /**
  * 标出每个可承载重音的元音在字串中的位置（码点下标）。
  * שׁוּרֶק 的 וּ 与普通元音点都算。
@@ -226,17 +221,7 @@ export function accent(text, mode) {
     return chars.join('').normalize('NFC')
 }
 
-/** 去掉已有的重音记号，方便反复重算 */
-export function stripAccent(text) {
-    return String(text ?? '').normalize('NFC').split(METEG).join('')
-}
-
 /** 供界面/校验用：骨架 + 词根 → 词形（补 dagesh lene；mode 为空时不标重音，交给 post.accent） */
 export function realize(root, skeleton, options = {}) {
     return accent(dageshLene(applySkeleton(root, skeleton, options)), options.mode)
-}
-
-/** 只要词形、不标重音 */
-export function spell(root, skeleton, options = {}) {
-    return dageshLene(applySkeleton(root, skeleton, options))
 }

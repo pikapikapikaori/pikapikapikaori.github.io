@@ -60,8 +60,3 @@ export function harmonize(stem, suffix) {
     const vowel = harmonyOf(stem)
     return text.split('V').join(vowel)
 }
-
-/** 供界面/文档示例用：给一个词干，列出三种和谐结果 */
-export function harmonizeOptions(suffix) {
-    return ['a', 'e', 'o'].map((v) => String(suffix ?? '').split('V').join(v))
-}

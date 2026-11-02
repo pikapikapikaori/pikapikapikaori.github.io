@@ -406,143 +406,7 @@
     padding: var(--sp-4);
 }
 
-/* ---------- 词卡（翻转） ---------- */
-.word-card {
-    position: relative;
-    perspective: 1200px;
-    cursor: pointer;
-    min-width: 0;
-    height: 350px;
-    max-height: 70vh;
-}
-
-.word-card__inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    transition: transform .55s var(--ease);
-    transform-style: preserve-3d;
-}
-
-/* grid item 防撑破 */
-.word-card__inner>* {
-    min-width: 0;
-}
-
-.word-card--flipped .word-card__inner {
-    transform: rotateY(180deg);
-}
-
-/* 高亮：hover / 已翻面 / 放大中 / 派生词跳转定位 */
-.word-card:hover .word-card__face,
-.word-card--flipped .word-card__face,
-.word-card--active .word-card__face {
-    border-color: var(--c-accent);
-    box-shadow: 0 0 0 2px var(--c-accent-soft), var(--shadow-sm);
-}
-
-.word-card__face {
-    grid-area: 1 / 1;
-    position: relative;
-    min-width: 0;
-    min-height: 0;
-    padding: var(--sp-4);
-    background: var(--c-bg-elev);
-    border: 1px solid var(--c-border);
-    border-radius: var(--r-surface);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow-sm);
-}
-
-.word-card__face>* {
-    flex-shrink: 0;
-}
-
-.word-card__face--back {
-    transform: rotateY(180deg);
-    /* 头尾固定，只有中段滚动 */
-    padding: 0;
-    overflow: hidden;
-}
-
-.word-card__back-body {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    padding: 0 var(--sp-4) var(--sp-2);
-}
-
-.word-card__top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-2);
-    min-height: 28px;
-}
-
-.word-card__center {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--sp-2);
-    min-height: 0;
-    padding: var(--sp-3) 0;
-}
-
-.word-card__lemma {
-    font-family: var(--ff-display);
-    font-size: var(--fs-3xl);
-    font-weight: 700;
-    line-height: 1.15;
-    text-align: center;
-    word-break: break-word;
-    max-width: 100%;
-}
-
-.word-card__meta {
-    display: flex;
-    gap: var(--sp-2);
-    flex-wrap: wrap;
-    justify-content: center;
-    color: var(--c-fg-muted);
-    font-size: var(--fs-xs);
-}
-
-.word-card__badges {
-    display: flex;
-    gap: var(--sp-1);
-    flex-wrap: wrap;
-}
-
-.word-card__count {
-    font-variant-numeric: tabular-nums;
-    color: var(--c-fg-subtle);
-    font-size: var(--fs-xs);
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.word-card__hint {
-    color: var(--c-fg-subtle);
-    font-size: var(--fs-xs);
-    text-align: center;
-}
-
-.word-card__face--back>.word-card__hint {
-    padding: var(--sp-2) var(--sp-4) var(--sp-4);
-}
-
-/* 词卡背面：每段之间一条分割线（同设置页 .settings-row） */
+/* 词卡详情：每段之间一条分割线（同设置页 .settings-row） */
 .word-card__section {
     min-width: 0;
 }
@@ -560,17 +424,25 @@
     margin-bottom: var(--sp-2);
 }
 
-.word-card__meanings {
-    list-style: decimal;
-    padding-left: 1.5em;
-}
-
 .word-card__meaning {
     font-size: var(--fs-md);
 }
 
-.word-card__meaning + .word-card__meaning {
-    margin-top: 2px;
+/* 含义 / 固定搭配 / 例句共用一套序号列表：数字按「一条数据」读，不用等宽字体也不用花号 */
+.word-card__list {
+    list-style: decimal;
+    padding-left: 1.5em;
+}
+
+.word-card__list > li + li {
+    margin-top: var(--sp-2);
+}
+
+.word-card__list > li::marker {
+    color: var(--c-fg-subtle);
+    /* 三块列表的序号同一号字，条目字号不同也不影响编号的观感 */
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
 }
 
 .word-card__stem {
@@ -630,18 +502,6 @@
     align-self: start;
 }
 
-.word-card__bottom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 32px;
-}
-
-.word-card__actions {
-    display: flex;
-    gap: var(--sp-1);
-}
-
 .word-card__inflections {
     display: flex;
     flex-direction: column;
@@ -682,19 +542,32 @@
     color: var(--c-fg-muted);
 }
 
-.word-card__example {
-    margin-bottom: var(--sp-2);
-    padding-left: var(--sp-3);
-    border-left: 2px solid var(--c-border);
-}
-
 .word-card__example-text {
     font-size: var(--fs-md);
+}
+
+/* 译文与它对应的含义同处一行：含义跟排在后，装不下就换行再省略 */
+.word-card__example-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px var(--sp-2);
+    margin-top: 2px;
 }
 
 .word-card__example-tr {
     font-size: var(--fs-sm);
     color: var(--c-fg-muted);
+}
+
+.word-card__example-meaning {
+    flex: none;
+    max-width: 100%;
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .word-card__citation {
@@ -716,49 +589,6 @@
 
 button.word-card__derivative {
     cursor: pointer;
-}
-
-.word-card__back-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--sp-2);
-    padding: var(--sp-4) var(--sp-4) var(--sp-2);
-}
-
-.word-card__zoom-btn {
-    width: 32px;
-    height: 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--r-control);
-    border: none;
-    background: transparent;
-    color: var(--c-fg-muted);
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-    flex-shrink: 0;
-    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-
-.word-card__zoom-btn svg {
-    display: block;
-}
-
-.word-card__zoom-btn:hover {
-    background: var(--c-bg-hover);
-    color: var(--c-fg);
-}
-
-.word-card--compact {
-    height: min(70vh, 560px);
-    max-height: none;
-}
-
-.word-card--compact .word-card__face {
-    min-height: min(60vh, 420px);
 }
 
 .badge--clickable {
@@ -1286,17 +1116,6 @@ button.word-card__derivative {
     text-align: center;
     min-width: 60px;
     width: 100%;
-}
-
-/* ---------- word-form 中的 inflection 行 ---------- */
-.word-form__item--inflection {
-    grid-template-columns: 1fr 1fr 1fr 100px auto;
-}
-
-@media (max-width: 720px) {
-    .word-form__item--inflection {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* ---------- 批量导入生词 ---------- */
@@ -1888,6 +1707,18 @@ button.word-card__derivative {
 .select-menu__label {
     min-width: 0;
     overflow-wrap: anywhere;
+}
+
+/* 选项单行：菜单按内容加宽（最多 30rem），装不下的部分省略，全文在 title 里 */
+.select-menu--nowrap .select-menu__item {
+    white-space: nowrap;
+}
+
+.select-menu--nowrap .select-menu__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: normal;
 }
 
 .select-menu__check {

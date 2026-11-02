@@ -23,7 +23,6 @@ export function openImportWordsModal({
         placeholder: '把 JSON 粘贴到这里…',
         style: {
             minHeight: '220px',
-            fontFamily: 'var(--ff-mono)',
             fontSize: 'var(--fs-sm)'
         }
     })

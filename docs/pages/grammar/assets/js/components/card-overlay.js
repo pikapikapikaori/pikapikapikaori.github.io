@@ -6,6 +6,7 @@ import { getLanguage } from '../data/languages.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
+import { collocationList, exampleList } from './entry-lists.js'
 
 let overlayEl = null
 let escHandler = null
@@ -165,7 +166,7 @@ export function openCardOverlay(word, opts = {}) {
                     })
                     : null,
                 meanings.length
-                    ? h('ul', { class: 'word-card__meanings' },
+                    ? h('ol', { class: 'word-card__list' },
                         ...meanings.map((m) => h('li', {
                             class: 'word-card__meaning',
                             lang: m.lang === 'en' ? 'en' : undefined
@@ -233,31 +234,17 @@ export function openCardOverlay(word, opts = {}) {
         /* ---------- 固定搭配 ---------- */
         const cols = pick(word.collocations)
         if (cols.length) {
-            body.appendChild(ovSection('固定搭配',
-                h('div', {},
-                    ...cols.map((c) => h('div', { class: 'word-card__collocation' },
-                        h('span', { lang: language }, c.text || ''),
-                        c.gloss ? h('span', { class: 'word-card__gloss' }, ` — ${c.gloss}`) : null
-                    ))
-                )
-            ))
+            body.appendChild(ovSection('固定搭配', collocationList(cols, language)))
         }
 
         /* ---------- 例句 ---------- */
         const exs = pick(word.examples)
         if (exs.length) {
             body.appendChild(ovSection('例句',
-                h('div', {},
-                    ...exs.map((e) => h('div', { class: 'word-card__example' },
-                        h('div', { class: 'word-card__example-text', lang: language }, e.text || ''),
-                        e.translation
-                            ? h('div', { class: 'word-card__example-tr' }, e.translation)
-                            : null,
-                        e.citation
-                            ? h('div', { class: 'word-card__citation' }, `— ${e.citation}`)
-                            : null
-                    ))
-                )
+                exampleList(exs, language, {
+                    meanings: word.meanings,
+                    activeSource
+                })
             ))
         }
 

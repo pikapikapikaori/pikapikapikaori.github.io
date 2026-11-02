@@ -246,16 +246,6 @@ export function getParadigmTemplate(doc, pos) {
 }
 
 /**
- * `paradigms[pos].attributes` 声明的额外属性字段（如日语的「自他」）：
- * `[{ key, label, hint?, multi?, options: [{ value, label }] }]`
- */
-export function getAttributeFields(doc, pos) {
-    const tpl = getParadigmTemplate(doc, pos)
-    if (!tpl || !Array.isArray(tpl.attributes)) return []
-    return tpl.attributes.filter((f) => f && f.key && Array.isArray(f.options) && f.options.length)
-}
-
-/**
  * 该语言在该词性下的界面用词：`terms` 可被 `terms.byPos[pos]` 覆盖；
  * 未声明的键返回空串（代码里不留默认文案，文案由语言数据自己写）。
  */

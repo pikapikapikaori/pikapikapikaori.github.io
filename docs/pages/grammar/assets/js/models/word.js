@@ -5,11 +5,6 @@ import { wordId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
 import { toStringArray } from '../utils/text-normalize.js'
 
-export function genderLabel(gender) {
-    const hit = GENDERS.find((g) => g.value === gender)
-    return hit ? hit.label : gender || ''
-}
-
 /** 旧数据里 gender 是独立字段，统一迁进 attributes.gender */
 function mergeLegacyGender(partial) {
     const attrs = { ...(partial && partial.attributes ? partial.attributes : {}) }
@@ -45,17 +40,6 @@ export function normalizeGenders(value, pos) {
 export function posLabel(pos) {
     const hit = POS_LIST.find((p) => p.value === pos)
     return hit ? hit.label : pos || ''
-}
-
-export function uniqueKeyOf(word) {
-    return [word.userId, word.language, word.lemma, word.pos]
-}
-
-export function sameKey(a, b) {
-    return a.userId === b.userId
-      && a.language === b.language
-      && a.lemma === b.lemma
-      && a.pos === b.pos
 }
 
 export function createWord(partial) {
@@ -217,17 +201,6 @@ export function isParadigmEmpty(p) {
         if (table && typeof table === 'object' && Object.keys(table).length) return false
     }
     return true
-}
-
-/** 按 source 分组 */
-export function groupBySource(list) {
-    const map = new Map()
-    for (const item of list || []) {
-        const s = item.source || 'manual'
-        if (!map.has(s)) map.set(s, [])
-        map.get(s).push(item)
-    }
-    return map
 }
 
 /** 收集词条中所有 source 标识，按 manual 优先排序 */

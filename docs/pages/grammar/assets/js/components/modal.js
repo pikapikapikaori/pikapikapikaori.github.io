@@ -101,14 +101,6 @@ export function openModal({
     return close
 }
 
-export function closeModal() {
-    if (activeModal) activeModal.close()
-}
-
-export function isModalOpen() {
-    return !!activeModal
-}
-
 /** @returns {Promise<boolean>} */
 export function confirmModal({
     title = '确认',

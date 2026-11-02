@@ -71,12 +71,3 @@ export function loadLanguages() {
 export function getLanguage(code) {
     return LANGUAGES.find((l) => l.code === code) || null
 }
-
-/** 分组标题（按 group.order 排序） */
-export function languageGroups() {
-    const map = new Map()
-    for (const l of LANGUAGES) {
-        if (!map.has(l.group.id)) map.set(l.group.id, { id: l.group.id, title: l.group.title, order: l.group.order })
-    }
-    return [...map.values()].sort((a, b) => a.order - b.order)
-}

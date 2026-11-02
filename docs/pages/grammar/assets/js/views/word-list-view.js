@@ -284,26 +284,7 @@ export default {
         /* ---------- 列表 ---------- */
         let currentPageIds = []
 
-        /** 派生词跳转后高亮的卡片（保留到下一次点击） */
-        let activeCardEl = null
-
-        function clearActiveCard() {
-            if (activeCardEl) activeCardEl.classList.remove('word-card--active')
-            activeCardEl = null
-        }
-
-        function highlightCard(id) {
-            clearActiveCard()
-            const card = listWrap.querySelector(`[data-word-id="${id}"]`)
-            if (!card) return
-            card.classList.add('word-card--active')
-            activeCardEl = card
-            if (typeof card.scrollIntoView === 'function') {
-                card.scrollIntoView({ block: 'center', behavior: 'smooth' })
-            }
-        }
-
-        /** 派生词跳转：清掉搜索与筛选后定位到目标词所在页并高亮卡片 */
+        /** 派生词跳转：清掉搜索与筛选后定位到目标词所在页 */
         async function focusDerivative(target) {
             state.q = ''
             state.scope = 'all'
@@ -324,7 +305,6 @@ export default {
 
             state.page = Math.floor(index / state.pageSize) + 1
             await refresh()
-            highlightCard(target.id)
         }
 
         function renderList(result) {
@@ -513,10 +493,6 @@ export default {
         renderToolbar()
         await refresh()
 
-        // 派生词高亮只保留到下一次点击（捕获阶段先清掉旧的，再由点击它的处理重新设置）
-        const onGlobalClick = () => clearActiveCard()
-        document.addEventListener('click', onGlobalClick, true)
-
         /* ---------- 快捷键 ---------- */
         const onKey = (e) => {
             const target = e.target
@@ -540,8 +516,6 @@ export default {
 
         return () => {
             document.removeEventListener('keydown', onKey)
-            document.removeEventListener('click', onGlobalClick, true)
-            clearActiveCard()
         }
     }
 }

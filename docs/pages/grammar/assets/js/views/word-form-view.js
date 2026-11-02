@@ -12,6 +12,8 @@ import {
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { createGhostInput } from '../components/ghost-input.js'
 import { createSelect } from '../components/select-field.js'
+import { meaningsOfSource, meaningRefLabel } from '../components/entry-lists.js'
+import { fieldRow } from '../components/form-field.js'
 import { bdiNode, bdiText } from '../utils/bdi.js'
 import { createTabGroup } from '../components/tabs.js'
 import { generateParadigm, previewStem } from '../models/paradigm-generate.js'
@@ -190,6 +192,32 @@ export default {
         let setMeaningSource = () => {}
         /** 「标签」输入框（提交时读它） */
         let tagsInput = null
+        /** 「含义」区当前所在的来源 tab：例句里的含义引用靠它判断要不要加来源前缀 */
+        let meaningSource = 'manual'
+
+        /** 行首序号的占位格：内容由 renumberItems 填，空行保持空白 */
+        function indexCell() {
+            return h('span', { class: 'word-form__index' })
+        }
+
+        /**
+         * 只有填了必填内容（会被保存）的行才占号 —— 空行不算，
+         * 这样表单里的编号和保存后词卡里的编号是同一套。
+         * 直接改序号格、不重渲染，打字时不会丢焦点。
+         */
+        function renumberItems(listEl, isFilled) {
+            let n = 0
+            Array.from(listEl.children).forEach((item, i) => {
+                const cell = item.querySelector('.word-form__index')
+                if (!cell) return
+                if (isFilled(i)) {
+                    n += 1
+                    cell.textContent = String(n)
+                } else {
+                    cell.textContent = ''
+                }
+            })
+        }
 
         const lemmaField = createGhostInput({
             value: data.lemma,
@@ -262,6 +290,8 @@ export default {
                 else if (opt) inflectionLabel.value = opt.short || opt.label
                 autoInflectionLabel = inflectionLabel.value
                 renderExtraParts()
+                // 锚点决定词干推导规则，换锚点后推导提示要跟着重算
+                refreshStemGhosts()
                 renderParadigmBlock()
                 refreshGenerateBtn()
             }
@@ -438,19 +468,14 @@ export default {
         // 语法锚点下拉：特殊变格/变位 + 语法速查条目
 
         form.appendChild(h('div', { class: 'word-form__row word-form__card' },
-            h('label', { class: 'field' },
-                h('span', { class: 'field__label' }, '基本形态'),
-                lemmaField.el,
-                h('span', { class: 'field__hint' }, hintText('唯一键的一部分，同一语言下必须唯一。编辑时不可修改。'))
-            ),
-            h('label', { class: 'field' },
-                h('span', { class: 'field__label' }, '词性'),
-                h('div', { class: 'field__row' },
-                    posSelect,
-                    externalSources.length ? lookupBtn : null
-                ),
-                lookupStatus
-            )
+            fieldRow('基本形态', lemmaField.el, {
+                hint: '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。',
+                lang
+            }),
+            fieldRow('词性', h('div', { class: 'field__row' },
+                posSelect,
+                externalSources.length ? lookupBtn : null
+            ), { extras: [lookupStatus], target: posSelect })
         ))
 
         const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)
@@ -459,17 +484,16 @@ export default {
         // 语法性之类的属性 + 类型 + 锚点：一行放不下时自适应换行
         const inflectionRow = h('div', { class: 'word-form__panel' },
             genderSlot,
-            h('label', { class: 'field' }, h('span', { class: 'field__label' }, '语法锚点'), inflectionRef, anchorHintEl),
-            h('label', { class: 'field' }, inflectionTypeLabelEl, inflectionField.el, inflectionTypeHintEl)
+            fieldRow('语法锚点', inflectionRef, { extras: [anchorHintEl] }),
+            fieldRow(inflectionTypeLabelEl, inflectionField.el, { extras: [inflectionTypeHintEl] })
         )
 
         const stemsLabelEl = h('span', { class: 'field__label' }, stemsMeta?.label || currentTerms().stems.label)
         const stemsHintEl = h('span', { class: 'field__hint' }, hintText(stemsMeta?.hint || currentTerms().stems.hint))
-        const stemsRow = h('label', { class: 'field' },
-            stemsLabelEl,
-            h('div', { class: 'field__row' }, principalField.el, generateBtn),
-            stemsHintEl
-        )
+        const stemsRow = fieldRow(stemsLabelEl, h('div', { class: 'field__row' }, principalField.el, generateBtn), {
+            extras: [stemsHintEl],
+            target: principalInput
+        })
 
         // 词干 + 额外词干：放在变格 / 变位表头顶
         const stemsBlock = h('div', { class: 'word-form__stems' }, stemsRow, extraPartsSlot)
@@ -573,7 +597,11 @@ export default {
             }
 
             extraPartsSlot.replaceChildren()
-            if (!parts.length) return
+            // 锚点没有额外词干时也要刷新推导提示：la 的一、二变格只声明 stemForms 没有 parts
+            if (!parts.length) {
+                refreshStemGhosts()
+                return
+            }
 
             extraPartsSlot.appendChild(h('div', { class: 'field__hint' },
                 hintText(currentTerms().extraPartsHint)))
@@ -622,14 +650,12 @@ export default {
                     })).el
                 const visible = !part.showWhen
                     || Object.entries(part.showWhen).every(([k, v]) => data.stems[k] === v)
-                extraPartsSlot.appendChild(h('label', {
-                    class: 'field field--part',
-                    hidden: !visible
-                },
-                h('span', { class: 'field__label' }, part.label || part.key),
-                input,
-                part.hint ? h('span', { class: 'field__hint' }, hintText(part.hint)) : null
-                ))
+                const partField = fieldRow(part.label || part.key, input, {
+                    className: 'field--part',
+                    extras: [part.hint ? h('span', { class: 'field__hint' }, hintText(part.hint)) : null]
+                })
+                partField.hidden = !visible
+                extraPartsSlot.appendChild(partField)
             }
             refreshStemGhosts()
         }
@@ -1147,8 +1173,6 @@ export default {
 
         /** 「含义」按来源分 tab：手动 + 各外部源；切换只影响这一块 */
         function buildMeaningGroup() {
-            let activeSource = 'manual'
-
             const tabs = h('div', { class: 'source-tabs word-form__meaning-tabs' })
             const list = h('div', { class: 'word-form__list' })
             const empty = h('div', { class: 'field__hint' }, hintText('该来源还没有含义'))
@@ -1159,7 +1183,7 @@ export default {
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
-                            data.meanings.push({ text: '', lang: 'zh', source: activeSource })
+                            data.meanings.push({ text: '', lang: 'zh', source: meaningSource })
                             renderMeanings()
                         }
                     }, '＋ 添加含义')
@@ -1181,13 +1205,16 @@ export default {
 
             function renderTabs() {
                 tabs.replaceChildren(...meaningSources().map((id) => h('button', {
-                    class: 'source-tab' + (id === activeSource ? ' source-tab--active' : ''),
+                    class: 'source-tab' + (id === meaningSource ? ' source-tab--active' : ''),
                     type: 'button',
                     role: 'tab',
-                    'aria-selected': String(id === activeSource),
+                    'aria-selected': String(id === meaningSource),
                     onclick: () => {
-                        activeSource = id
+                        if (id === meaningSource) return
+                        meaningSource = id
                         renderMeanings()
+                        // 例句里的含义引用按当前来源决定是否加前缀，跟着一起刷新
+                        renderExamples()
                     }
                 },
                 sourceLabel(id)
@@ -1195,8 +1222,10 @@ export default {
             }
 
             setMeaningSource = (id) => {
-                if (!id) return
-                activeSource = id
+                if (!id || id === meaningSource) return
+                meaningSource = id
+                renderTabs()
+                renderExamples()
             }
 
             renderMeanings = function () {
@@ -1205,18 +1234,24 @@ export default {
 
                 const rows = data.meanings
                     .map((m, idx) => ({ m, idx }))
-                    .filter(({ m }) => (m.source || 'manual') === activeSource)
+                    .filter(({ m }) => (m.source || 'manual') === meaningSource)
 
                 empty.hidden = rows.length > 0
 
-                for (const { m, idx } of rows) {
+                const renumber = () => renumberItems(list, (i) => String(rows[i]?.m.text || '').trim() !== '')
+
+                rows.forEach(({ m, idx }, order) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--meaning' },
+                        indexCell(),
                         createGhostInput({
                             value: m.text,
                             lang: m.lang === 'en' ? 'en' : null,
                             bdiLang: lang,
                             placeholder: '含义',
-                            onInput: (e) => { m.text = e.target.value }
+                            onInput: (e) => {
+                                m.text = e.target.value
+                                renumber()
+                            }
                         }).el,
                         h('select', {
                             class: 'select',
@@ -1237,7 +1272,8 @@ export default {
                             }
                         }, '✕')
                     ))
-                }
+                })
+                renumber()
             }
             renderMeanings()
             return group
@@ -1259,10 +1295,13 @@ export default {
                 list
             )
 
+            const renumber = () => renumberItems(list, (i) => String(data.inflections[i]?.form || '').trim() !== '')
+
             renderInflections = function () {
                 list.replaceChildren()
                 data.inflections.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--inflection' },
+                        indexCell(),
                         h('input', {
                             class: 'input', placeholder: '分组（可选）', value: it.group || '',
                             oninput: (e) => { it.group = e.target.value }
@@ -1275,7 +1314,10 @@ export default {
                             value: it.form,
                             lang,
                             placeholder: '形态',
-                            onInput: (e) => { it.form = e.target.value }
+                            onInput: (e) => {
+                                it.form = e.target.value
+                                renumber()
+                            }
                         }).el,
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
@@ -1288,6 +1330,7 @@ export default {
                         }, '✕')
                     ))
                 })
+                renumber()
             }
             renderInflections()
             return group
@@ -1309,15 +1352,21 @@ export default {
                 list
             )
 
+            const renumber = () => renumberItems(list, (i) => String(data.collocations[i]?.text || '').trim() !== '')
+
             function render() {
                 list.replaceChildren()
                 data.collocations.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item' },
+                        indexCell(),
                         createGhostInput({
                             value: it.text,
                             lang,
                             placeholder: '搭配文本',
-                            onInput: (e) => { it.text = e.target.value }
+                            onInput: (e) => {
+                                it.text = e.target.value
+                                renumber()
+                            }
                         }).el,
                         h('input', {
                             class: 'input', placeholder: '释义', value: it.gloss,
@@ -1327,13 +1376,74 @@ export default {
                         h('button', {
                             class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该搭配',
-                            onclick: () => { data.collocations.splice(idx, 1); renderCollocations() }
+                            onclick: () => { data.collocations.splice(idx, 1); render() }
                         }, '✕')
                     ))
                 })
+                renumber()
             }
-            renderCollocations()
+            renderCollocations = render
+            render()
             return group
+        }
+
+        /* ---------- 例句关联的含义：按来源分组，序号与该来源 tab 里显示的一致 ---------- */
+
+        function meaningOptions() {
+            const sources = []
+            for (const m of data.meanings) {
+                const id = m.source || 'manual'
+                if (!sources.includes(id)) sources.push(id)
+            }
+            const options = [{ value: '', label: '不关联含义' }]
+            for (const id of sources) {
+                // 与含义 tab 里的行号同一套：空白行不占号
+                let order = 0
+                for (const m of meaningsOfSource(data.meanings, id)) {
+                    const text = String(m.text || '').trim()
+                    if (!text) continue
+                    order += 1
+                    const ref = { source: id, text }
+                    options.push({
+                        value: exampleMeaningValue(ref),
+                        label: `${order}. ${text}`,
+                        // 收起态补上来源名：跨 tab 引用时序号才有出处可对
+                        display: meaningRefLabel(ref, data.meanings, meaningSource),
+                        group: sourceLabel(id)
+                    })
+                }
+            }
+            return options
+        }
+
+        /** 某条例句的可选含义；关联的那条后来被删 / 改名时，仍按原文本留一个条目，别悄悄改成「不关联」 */
+        function meaningOptionsOf(example) {
+            const options = meaningOptions()
+            const value = exampleMeaningValue(example.meaning)
+            if (value && !options.some((o) => o.value === value)) {
+                options.push({
+                    value,
+                    label: meaningRefLabel(example.meaning, data.meanings, meaningSource),
+                    title: String(example.meaning.text || '')
+                })
+            }
+            return options
+        }
+
+        /** 下拉存的是「来源 + 文本」快照，不是序号：含义调序不会指错，删了也不至于张冠李戴 */
+        function exampleMeaningValue(ref) {
+            const text = String(ref?.text || '').trim()
+            return text ? JSON.stringify({ source: ref.source || 'manual', text }) : ''
+        }
+
+        function readExampleMeaning(value) {
+            if (!value) return { text: '', source: 'manual' }
+            try {
+                const parsed = JSON.parse(value)
+                return { text: String(parsed.text || ''), source: parsed.source || 'manual' }
+            } catch {
+                return { text: '', source: 'manual' }
+            }
         }
 
         function buildExampleGroup() {
@@ -1352,15 +1462,21 @@ export default {
                 list
             )
 
+            const renumber = () => renumberItems(list, (i) => String(data.examples[i]?.text || '').trim() !== '')
+
             renderExamples = function () {
                 list.replaceChildren()
                 data.examples.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--example' },
+                        indexCell(),
                         createGhostInput({
                             value: it.text,
                             lang,
                             placeholder: '例句原文',
-                            onInput: (e) => { it.text = e.target.value }
+                            onInput: (e) => {
+                                it.text = e.target.value
+                                renumber()
+                            }
                         }).el,
                         h('input', {
                             class: 'input', placeholder: '出处', value: it.citation,
@@ -1368,8 +1484,17 @@ export default {
                         }),
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('input', {
-                            class: 'input word-form__cell--wide', placeholder: '译文', value: it.translation,
+                            class: 'input word-form__cell--translation', placeholder: '译文', value: it.translation,
                             oninput: (e) => { it.translation = e.target.value }
+                        }),
+                        createSelect({
+                            lang,
+                            className: 'select word-form__cell--meaning',
+                            value: exampleMeaningValue(it.meaning),
+                            // 含义随时会增删，选项在每次展开时重算
+                            options: () => meaningOptionsOf(it),
+                            nowrap: true,
+                            onChange: (v) => { it.meaning = readExampleMeaning(v) }
                         }),
                         h('button', {
                             class: 'btn btn--sm word-form__cell--remove', type: 'button',
@@ -1378,6 +1503,7 @@ export default {
                         }, '✕')
                     ))
                 })
+                renumber()
             }
             renderExamples()
             return group
@@ -1477,12 +1603,9 @@ export default {
                 ),
                 h('div', { class: 'derivative-picker' },
                     selected,
-                    h('label', { class: 'field' },
-                        h('span', { class: 'field__label' }, '搜索词条'),
-                        searchField.el,
-                        h('span', { class: 'field__hint' }, hintText('只能选择词库中已存在的词')),
-                        hint
-                    ),
+                    fieldRow('搜索词条', searchField.el, {
+                        extras: [h('span', { class: 'field__hint' }, hintText('只能选择词库中已存在的词')), hint]
+                    }),
                     results
                 )
             )
@@ -1573,7 +1696,7 @@ export default {
                 inflections: cleanList(data.inflections, ['form']),
                 meanings: cleanList(data.meanings, ['text']),
                 collocations: cleanList(data.collocations, ['text']),
-                examples: cleanList(data.examples, ['text']),
+                examples: cleanList(data.examples, ['text']).map(cleanExampleMeaning),
                 derivatives: data.derivatives.map((s) => s.trim()).filter(Boolean),
                 tags: data.tags,
                 notes: data.notes || ''
@@ -1616,11 +1739,7 @@ export default {
 }
 
 function field(label, control, hint, lang = null) {
-    return h('label', { class: 'field' },
-        h('span', { class: 'field__label' }, label),
-        control,
-        hint ? h('span', { class: 'field__hint' }, bdiText(hint, lang)) : null
-    )
+    return fieldRow(label, control, { hint, lang })
 }
 
 function sourceSelect(value, onChange) {
@@ -1645,6 +1764,17 @@ function cleanList(list, requiredKeys) {
         out.push(copy)
     }
     return out
+}
+
+/** 例句关联的含义：空的不落库，免得导出多出一堆空壳 */
+function cleanExampleMeaning(example) {
+    const text = String(example.meaning?.text || '').trim()
+    if (!text) {
+        const copy = { ...example }
+        delete copy.meaning
+        return copy
+    }
+    return { ...example, meaning: { text, source: example.meaning.source || 'manual' } }
 }
 
 function posLabel(pos) {

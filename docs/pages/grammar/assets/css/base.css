@@ -131,6 +131,13 @@ select[lang],
     text-align: start;
 }
 
+/* 提示文字统一一个颜色：原生 placeholder 与 ghost 输入框的提示层（--c-fg-subtle）对齐，
+ * 否则浏览器默认灰不跟主题走，深色下和自绘提示层是两种颜色。 */
+::placeholder {
+    color: var(--c-fg-subtle);
+    opacity: 1;
+}
+
 .skip-link {
     position: absolute;
     left: -9999px;

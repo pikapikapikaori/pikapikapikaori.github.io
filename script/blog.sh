@@ -29,6 +29,7 @@ GET_CDN="$PYTHON_DIR/get_cdn.py"
 BUILD_CHUNKS="$PYTHON_DIR/build_chunks.py"
 UNICODE_GAP="$PYTHON_DIR/unicode_gap.py"
 FONT_RANGE="$PYTHON_DIR/font_range.py"
+FONTS_TO_WOFF2="$PYTHON_DIR/fonts_to_woff2.py"
 PY_REQUIREMENTS="$PYTHON_DIR/requirements.txt"
 
 # ---------- Feed 生成脚本（必须在 docs/ 下运行）----------
@@ -191,6 +192,11 @@ cmd_unicode_gap() {
 cmd_font_range() {
     require_file "$FONT_RANGE"
     confirm_run "提取字体 unicode-range" python3 "$FONT_RANGE" "$@"
+}
+
+cmd_fonts_woff2() {
+    require_file "$FONTS_TO_WOFF2"
+    confirm_run "把原字体转换为 woff2" python3 "$FONTS_TO_WOFF2" "$@"
 }
 
 cmd_feed() {
@@ -379,6 +385,10 @@ cmd_help() {
                                 例: ./blog.sh font-range ./fonts
                                     ./blog.sh font-range ./fonts -o all.md
 
+    fonts-woff2   [...args]     把 resource/fonts 的原字体转成 woff2
+                                例: ./blog.sh fonts-woff2
+                                    ./blog.sh fonts-woff2 --check
+
 ====================  Bangumi Takeout 子项目工具脚本  ====================
 
     build-chunks  [...args]     构建 subject/episode 分片
@@ -398,6 +408,7 @@ case "${1:-help}" in
     build-chunks)       shift; cmd_build_chunks "$@" ;;
     unicode-gap)        shift; cmd_unicode_gap "$@" ;;
     font-range)         shift; cmd_font_range "$@" ;;
+    fonts-woff2)        shift; cmd_fonts_woff2 "$@" ;;
     feed)                cmd_feed ;;
     sitemap)             cmd_sitemap ;;
     py-freeze)          cmd_py_freeze ;;

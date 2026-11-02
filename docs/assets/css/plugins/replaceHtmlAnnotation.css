@@ -288,7 +288,7 @@
 
 /* About Page */
 .main-page-right-panel-container {
-    font-family: var(--global-handwriting-font);
+    font-family: var(--global-poem-font);
     border: var(--global-border-normal) var(--global-border-color-strong);
     background-color: var(--global-zebra-bg);
     border-radius: var(--global-el-border-radius);

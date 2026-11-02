@@ -1,3 +1,5 @@
+@import url("./fontMinorityLang.css");
+
 /* --- Serif --- */
 
 /* Chinese */
@@ -88,6 +90,25 @@
     font-display: swap;
     font-family: 'FZXiaoZhuan';
     src: url('../../resources/fonts/FZXiaoZhuan.ttf');
+}
+
+@font-face{
+    font-display: swap;
+    font-family: 'BeiShiDaJiaGuWenZiTi';
+    src: url('../../resources/fonts/BeiShiDaJiaGuWen/BeiShiDaJiaGuWenZiTi-1.ttf');
+}
+
+@font-face{
+    font-display: swap;
+    font-family: 'ChaoShiJiYinZhuan';
+    src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan.ttf');
+}
+
+@font-face{
+    font-display: swap;
+    font-family: 'ChaoShiJiYinZhuan';
+    font-weight: bold;
+    src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan-Bold.ttf');
 }
 
 /* ZhouWen */

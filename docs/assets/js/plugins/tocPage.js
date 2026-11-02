@@ -1,5 +1,6 @@
 import pagesData from '../config/tocdata.json.js'
-import { protectCodeBlocks, lockNoTransition, unlockNoTransition } from '../utils/common.js'
+import { protectCodeBlocks, lockNoTransition, unlockNoTransition, makeButtonLike } from '../utils/common.js'
+import { bindShortcuts } from '../utils/shortcut.js'
 
 let tocPageOptions = {
     recentAmount: 8,
@@ -17,7 +18,7 @@ function plugin(hook, vm) {
 
     const tocMarkup = '<!-- toc -->'
 
-    const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M15 6l-6 6 6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--theme-color)"><path d="M9 6l6 6-6 6" stroke="var(--theme-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
+    const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
 
     const recentAmount = tocPageOptions.recentAmount
 
@@ -27,7 +28,7 @@ function plugin(hook, vm) {
 
     let pendingCloseToggle = undefined
 
-    const narrowMql = window.matchMedia('(max-width: 768px)')
+    const narrowMql = window.matchMedia('screen and (max-width: 768px)')
 
     let sortedPages = []
 
@@ -53,6 +54,36 @@ function plugin(hook, vm) {
         body.classList.toggle('has-toc', willBeToc)
 
         hasTocs = willBeToc
+    }
+
+    function syncSidebarA11y() {
+        const body = document.body
+        const closed = body.classList.contains('close')
+
+        const sidebar = document.querySelector('.sidebar')
+        if (sidebar) {
+            const sidebarHidden = narrowMql.matches ? !closed : closed
+            if (sidebar.inert !== sidebarHidden) sidebar.inert = sidebarHidden
+        }
+
+        const toggle = document.querySelector('.sidebar-toggle')
+        if (toggle) {
+            const toggleHidden = body.classList.contains('has-toc')
+            if (toggle.inert !== toggleHidden) toggle.inert = toggleHidden
+        }
+    }
+
+    function bindSidebarA11y() {
+        if (window.__tocPageSidebarA11yBound) return
+        window.__tocPageSidebarA11yBound = true
+
+        narrowMql.addEventListener('change', syncSidebarA11y)
+        new MutationObserver(syncSidebarA11y).observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        })
+
+        syncSidebarA11y()
     }
 
     function renderTocStage1(content, vm) {
@@ -142,6 +173,16 @@ function plugin(hook, vm) {
         document.scrollingElement.scrollTop = 0
     }
 
+    function gotoPage(index) {
+        const target = Math.min(Math.max(Number(index) || 1, 1), maxPageIndex)
+
+        if (target === Number(curPageIndex)) return
+
+        curPageIndex = target
+
+        renderTocPageUnderPaginator()
+    }
+
     function renderTocPaginator() {
         let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')[0]
         let tocPaginatorLeftButtonDiv = document.getElementsByClassName('tocPaginatorLeftButtonDiv')[0]
@@ -151,17 +192,14 @@ function plugin(hook, vm) {
             return
         }
 
+        makeButtonLike(tocPaginatorLeftButtonDiv.childNodes[0])
+        makeButtonLike(tocPaginatorRightButtonDiv.childNodes[0])
+
         tocPaginatorLeftButtonDiv.onclick = function (e) {
-            if (curPageIndex > 1) {
-                curPageIndex -= 1
-                renderTocPageUnderPaginator()
-            }
+            gotoPage(curPageIndex - 1)
         }
         tocPaginatorRightButtonDiv.onclick = function (e) {
-            if (curPageIndex < maxPageIndex) {
-                curPageIndex += 1
-                renderTocPageUnderPaginator()
-            }
+            gotoPage(curPageIndex + 1)
         }
 
         tocPaginatorInputDiv.innerHTML = `<input class='toc-paginator-input-box' type='number' value='${curPageIndex}' min='1' max='${maxPageIndex}'></input><span>/</span><span>${maxPageIndex}</span>`
@@ -169,9 +207,7 @@ function plugin(hook, vm) {
         let tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
 
         tocPaginatorInput.onchange = function () {
-            curPageIndex = this.value
-
-            renderTocPageUnderPaginator()
+            gotoPage(this.value)
 
             this.value = curPageIndex
         }
@@ -195,6 +231,29 @@ function plugin(hook, vm) {
 
     hook.mounted(function () {
         narrowMql.addEventListener('change', onScreenWidthChange)
+
+        bindSidebarA11y()
+
+        bindShortcuts({
+            ArrowLeft: { handler: () => gotoPage(curPageIndex - 1), repeat: true },
+            ArrowRight: { handler: () => gotoPage(curPageIndex + 1), repeat: true },
+            KeyP: function () {
+                const input = document.querySelector('.toc-paginator-input input')
+                if (!input) return
+
+                input.focus()
+                input.select()
+            },
+            Escape: {
+                allowInInput: true,
+                handler: function () {
+                    const input = document.querySelector('.toc-paginator-input input')
+                    if (!input || document.activeElement !== input) return
+
+                    input.blur()
+                }
+            }
+        }, { when: () => hasTocs })
 
         function onScreenWidthChange(e) {
             if (!hasTocs) return
@@ -237,6 +296,8 @@ function plugin(hook, vm) {
         if (!coverPath.includes(path)) {
             document.title = resolveHeading(path)
         }
+
+        syncSidebarA11y()
     })
 }
 

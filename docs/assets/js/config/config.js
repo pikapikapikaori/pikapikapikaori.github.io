@@ -210,6 +210,11 @@
             localization: i18nLocales
         },
 
+        // 修改 docsify 与插件原生样式
+        markdownHelper: {
+            highlightNavMenuCurrent: false,
+        },
+
         // 更改 html lang 信息
         htmlLang: {
             localization: {
@@ -222,216 +227,68 @@
             useSwitchMode: true,
             top: 20,
             topOffset: 500,
+            defaultTheme: 'swiss',
             themes: [
                 {
                     name: 'default',
-                    light: {
-                        themeColor: '#c7a2ec',
-                        bgColor: '#ffffff',
-                        css: './assets/css/theme/vue.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#c7a2ec',
-                        bgColor: '#3f3f3f',
-                        css: './assets/css/theme/dark.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/default'
                 },
                 {
                     name: 'lavender',
-                    light: {
-                        themeColor: '#cda2ec',
-                        bgColor: '#f5f0fa',
-                        css: './assets/css/theme/lavender.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#cda2ec',
-                        bgColor: '#1f1830',
-                        css: './assets/css/theme/lavandula.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/lavender'
                 },
                 {
                     name: 'kraft',
-                    light: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#f4ecd8',
-                        css: './assets/css/theme/kraft.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#2a1f14',
-                        css: './assets/css/theme/bronze.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/kraft'
                 },
                 {
                     name: 'matcha',
-                    light: {
-                        themeColor: '#c7eca2',
-                        bgColor: '#e3efd1',
-                        css: './assets/css/theme/matcha.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#c7eca2',
-                        bgColor: '#1e3328',
-                        css: './assets/css/theme/library.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/matcha'
                 },
                 {
                     name: 'kirby',
-                    light: {
-                        themeColor: '#eca2bb',
-                        bgColor: '#ffeef4',
-                        css: './assets/css/theme/kirby.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#a2aeec',
-                        bgColor: '#1a2238',
-                        css: './assets/css/theme/metaknight.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/kirby'
                 },
                 {
                     name: 'catppuccin',
-                    light: {
-                        themeColor: '#c1a2ec',
-                        bgColor: '#eff1f5',
-                        css: './assets/css/theme/latte.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#c1a2ec',
-                        bgColor: '#1e1e2e',
-                        css: './assets/css/theme/catppuccin.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/catppuccin'
                 },
                 {
                     name: 'gold',
-                    light: {
-                        themeColor: '#ecdaa2',
-                        bgColor: '#f5f0e8',
-                        css: './assets/css/theme/whitegold.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#ecdaa2',
-                        bgColor: '#0a0a0a',
-                        css: './assets/css/theme/darkgold.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/gold'
                 },
                 {
                     name: 'calligraphy',
-                    light: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#fbfbf5',
-                        css: './assets/css/theme/calligraphy.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#a2c7ec',
-                        bgColor: '#1a2028',
-                        css: './assets/css/theme/grid.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/calligraphy'
                 },
                 {
                     name: 'typography',
-                    light: {
-                        themeColor: '#ecc7a2',
-                        bgColor: '#fafaf5',
-                        css: './assets/css/theme/typography.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#a2c7ec',
-                        bgColor: '#1e2128',
-                        css: './assets/css/theme/dot.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/typography'
                 },
                 {
                     name: 'misty',
-                    light: {
-                        themeColor: '#a2d9ec',
-                        bgColor: '#fbfbf5',
-                        css: './assets/css/theme/misty.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#a2d9ec',
-                        bgColor: '#14171c',
-                        css: './assets/css/theme/midnight.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/misty'
                 },
                 {
                     name: 'sunlit',
-                    light: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#faf6ee',
-                        css: './assets/css/theme/sunlit.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#1a1614',
-                        css: './assets/css/theme/candlelit.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/sunlit'
                 },
                 {
                     name: 'linen',
-                    light: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#f7f3ec',
-                        css: './assets/css/theme/linen.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#eca2ae',
-                        bgColor: '#18150f',
-                        css: './assets/css/theme/weave.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/linen'
                 },
                 {
                     name: 'cross',
-                    light: {
-                        themeColor: '#d3a2ec',
-                        bgColor: '#f7fafc',
-                        css: './assets/css/theme/sky.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#a2d3ec',
-                        bgColor: '#1e2128',
-                        css: './assets/css/theme/star.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/cross'
                 },
                 {
                     name: 'haunted',
-                    light: {
-                        themeColor: '#ecc1a2',
-                        bgColor: '#faf8fd',
-                        css: './assets/css/theme/ghost.css',
-                        js: null
-                    },
-                    dark: {
-                        themeColor: '#ecc1a2',
-                        bgColor: '#100e17',
-                        css: './assets/css/theme/haunted.css',
-                        js: null
-                    }
+                    css: './assets/css/theme/haunted'
+                },
+                {
+                    name: 'swiss',
+                    css: './assets/css/theme/swiss',
+                    js: './assets/js/theme/swiss'
                 }
             ]
         },
@@ -463,7 +320,7 @@
                     type: 'block',
                     tag: 'brief-comments-year',
 
-                    startHtml: '<hr class="brief-comments-in-blog-title-year-divider"><details class="brief-comments-in-blog-title-year">',
+                    startHtml: '<details class="brief-comments-in-blog-title-year">',
                     endHtml: '</details>'
                 },
                 {

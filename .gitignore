@@ -2,7 +2,6 @@
 **/.DS_Store
 
 # agents
-
 .agents/
 **/skills-lock.json
 

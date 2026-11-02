@@ -1,0 +1,39 @@
+@import url('../base-light.css');
+@import url('./swiss.css');
+
+:root {
+    --theme-color: #eca2a8;
+
+    --bg-color: #fff;
+    --text-color: #111;
+    --heading-color: #000;
+    --muted-color: #6b6b6b;
+    --em-color: #444;
+    --h6-color: var(--muted-color);
+    --sidebar-text-color: #222;
+    --sidebar-title-color: var(--heading-color);
+    --border-color: #d9d9d6;
+    --border-color-strong: var(--heading-color);
+    --border-color-mid: #bcbcb8;
+    --code-bg: #f4f4f2;
+    --zebra-bg: var(--code-bg);
+    --tip-code-bg: #ececea;
+    --inline-code-color: var(--text-color);
+    --code-text-color: #222;
+    --sidebar-border-color: var(--heading-color);
+    --accent-color: var(--heading-color);
+    --accent-text-color: var(--bg-color);
+}
+
+html ::selection {
+    color: var(--sw-ink-strong);
+}
+
+html .markdown-section mark {
+    color: var(--sw-ink-strong);
+}
+
+html .read-progress>svg,
+html .read-progress:hover>svg {
+    color: var(--sw-paper);
+}

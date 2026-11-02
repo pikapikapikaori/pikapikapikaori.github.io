@@ -1,8 +1,10 @@
+@import url("../nonstandard/plugins/tocPage.css");
+
 :root {
     --tocpage-display-height: 18.75rem;
     --tocpage-display-img-height: 12.5rem;
-    --tocpage-button-size: var(--global-widget-size-normal);
-    --tocpage-input-size: var(--global-widget-size-small);
+    --tocpage-button-size: 1.75rem;
+    --tocpage-input-size: var(--global-widget-size-very-small);
 }
 
 .toc-page-div {
@@ -25,7 +27,7 @@
     min-width: 0;
     margin: 0;
     text-align: center;
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-theme-color-blur-ultra-weak);
     min-height: var(--tocpage-display-height);
     max-height: var(--tocpage-display-height);
     text-decoration: none;
@@ -60,14 +62,14 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition-duration: var(--global-transition-duration);
+    transition: var(--global-transition-transform), var(--global-transition-filter);
     border-bottom-left-radius: var(--global-el-border-radius-none);
     border-bottom-right-radius: var(--global-el-border-radius-none);
 }
 
 .toc-page-display-a:hover img {
     transform: scale(var(--global-transform-ratio-very-small));
-    filter: brightness(var(--global-brightness-blur));
+    filter: brightness(var(--global-brightness-weak));
 }
 
 .toc-page-display-title-div {
@@ -84,7 +86,7 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 1rem;
-    color: var(--em-color);
+    color: var(--global-em-color);
 }
 
 .toc-paginator-div {
@@ -99,16 +101,19 @@
 }
 
 .toc-paginator-input input {
-    outline: 0;
     font-size: inherit;
     color: inherit;
     width: 2rem;
+    height: var(--tocpage-button-size);
+    box-sizing: border-box;
+    line-height: 1;
+    padding: 0 0.25rem;
     margin: 0 0.3rem;
     text-align: center;
     background-color: transparent;
     border-radius: var(--global-widget-border-radius);
-    border: var(--global-border) var(--border-color);
-    transition-duration: var(--global-transition-duration);
+    border: var(--global-border-normal) var(--global-border-color);
+    transition: var(--global-transition-color);
     appearance: textfield;
 }
 
@@ -117,11 +122,11 @@
 }
 
 .toc-paginator-input input:hover {
-    border-color: var(--theme-color);
+    border-color: var(--global-control-border-hover);
 }
 
 .toc-paginator-input input:focus {
-    border-color: var(--theme-color);
+    border-color: var(--global-control-border-active);
 }
 
 .toc-paginator-input-box {
@@ -129,7 +134,7 @@
 }
 
 .toc-paginator-button-div {
-    margin: 0 0.2rem;
+    margin: 0 0.75rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -138,15 +143,28 @@
 .toc-paginator-button-span {
     width: var(--tocpage-button-size);
     height: var(--tocpage-button-size);
+    padding: 0.0625rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--global-widget-border-radius);
-    transition-duration: var(--global-transition-duration);
+    box-sizing: border-box;
+    border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
+    border-radius: var(--global-control-border-radius);
+    color: var(--global-surface-hollow-text-rest);
+    transition: var(--global-transition-color);
 }
 
 .toc-paginator-button-span:hover {
-    background-color: var(--global-theme-color-blur);
+    background-color: var(--global-surface-hollow-hover);
+    border-color: var(--global-surface-hollow-border-hover);
+    color: var(--global-surface-hollow-text-hover);
+}
+
+.toc-paginator-button-div:active .toc-paginator-button-span,
+.toc-paginator-button-span:active {
+    background-color: var(--global-surface-hollow-press);
+    border-color: var(--global-surface-hollow-border-press);
+    color: var(--global-surface-hollow-text-press);
 }
 
 body.has-toc .sidebar-toggle {
@@ -154,5 +172,5 @@ body.has-toc .sidebar-toggle {
 }
 
 .sidebar-toggle {
-    transition: opacity var(--global-transition-duration), transform var(--global-transition-duration);
+    transition: var(--global-transition-filter), var(--global-transition-transform);
 }

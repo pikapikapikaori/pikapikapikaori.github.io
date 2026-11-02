@@ -37,12 +37,11 @@ function plugin(hook, vm) {
         next(
             `
         ${countWordsOptions.position === 'bottom' ? html : ''}
-        <div id="count-words-block-span-div">
-            <span id="count-words-block-span" style="
-                float: ${countWordsOptions.float === 'right' ? 'right' : 'left'};
-                font-size: ${countWordsOptions.fontsize};">
-            </span>
-            <div style="clear: both"></div>
+        <div id="count-words-block-span-div" style="
+            --count-words-float: ${countWordsOptions.float === 'right' ? 'right' : 'left'};
+            --count-words-font-size: ${countWordsOptions.fontsize};">
+            <span id="count-words-block-span"></span>
+            <div class="count-words-block-clear"></div>
         </div>
         ${countWordsOptions.position !== 'bottom' ? html : ''}
         `

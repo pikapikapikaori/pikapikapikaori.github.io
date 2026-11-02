@@ -102,6 +102,48 @@ class Live2dLoader {
         this.motionIndex = this.initMotionIndex()
         this.addListener(config, canvas, this.motionIndex)
         this.createHitArea(config, canvas)
+        this.watchVisibility(canvas)
+    }
+
+    // 只在真正看得见时渲染
+    watchVisibility(canvas) {
+        let onScreen = false
+
+        const setRunning = (running) => {
+            const tickers = [this.app.ticker, window.PIXI && PIXI.Ticker && PIXI.Ticker.shared]
+            tickers.forEach(function (ticker) {
+                if (!ticker) return
+                if (running) {
+                    if (!ticker.started) ticker.start()
+                }
+                else if (ticker.started) {
+                    ticker.stop()
+                }
+            })
+            if (this.model) this.model.autoUpdate = running
+        }
+
+        const sync = () => {
+            const running = onScreen && !document.hidden
+            setRunning(running)
+            if (!running && this.app.render) this.app.render()
+        }
+
+        document.addEventListener('visibilitychange', sync)
+
+        if ('IntersectionObserver' in window) {
+            this.visibilityObserver = new IntersectionObserver(function (entries) {
+                onScreen = entries.some(entry => entry.isIntersecting)
+                sync()
+            }, { threshold: 0 })
+            this.visibilityObserver.observe(canvas)
+        }
+        else {
+            onScreen = true
+        }
+
+        onScreen = canvas.getBoundingClientRect().bottom > 0
+        sync()
     }
 
     createHitArea(config, canvas) {

@@ -48,6 +48,27 @@ function plugin(hook, vm) {
         document.body.classList.toggle('sticky', scrollTop >= threshold)
     }
 
+    // 封面滚出视口后暂停下拉箭头动画
+    let chevronObserver = null
+    let chevronWatched = null
+
+    function watchChevronVisibility() {
+        if (!('IntersectionObserver' in window)) return
+
+        const cover = document.querySelector('section.cover')
+        const wrap = document.querySelector('.cover-page-scroll-down-chevron-div')
+        if (!cover || !wrap || (chevronWatched && chevronWatched.cover === cover && chevronWatched.wrap === wrap)) return
+
+        if (chevronObserver) chevronObserver.disconnect()
+
+        chevronWatched = { cover: cover, wrap: wrap }
+        chevronObserver = new IntersectionObserver(function (entries) {
+            const onScreen = entries.some(entry => entry.isIntersecting)
+            wrap.classList.toggle('is-offscreen', !onScreen)
+        }, { threshold: 0 })
+        chevronObserver.observe(cover)
+    }
+
     let rowSpanCache = new WeakMap()
     let hoveredCell = null
     let groupRows = []
@@ -188,6 +209,8 @@ function plugin(hook, vm) {
         const cover = document.querySelector('section.cover')
         if (cover) new MutationObserver(updateSticky).observe(cover, { attributes: true, attributeFilter: ['class'] })
 
+        watchChevronVisibility()
+
         document.addEventListener('mouseover', function (e) {
             setHover(e.target.closest('.markdown-section tbody td, .markdown-section tbody th'))
         })
@@ -211,6 +234,7 @@ function plugin(hook, vm) {
         if (appName && search) search.before(appName)
 
         setupNavMenus()
+        watchChevronVisibility()
 
         rowSpanCache = new WeakMap()
         hoveredCell = null

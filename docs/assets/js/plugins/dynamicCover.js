@@ -26,8 +26,13 @@ function plugin(hook, vm) {
     }
 
     let coverTimer = null
+    let coverCleanup = null
 
     hook.doneEach(function () {
+        if (coverCleanup) {
+            coverCleanup()
+            coverCleanup = null
+        }
         if (coverTimer !== null) {
             clearInterval(coverTimer)
             coverTimer = null
@@ -93,7 +98,7 @@ function plugin(hook, vm) {
         let curImgId = 1
         let useA = false
 
-        coverTimer = setInterval(function () {
+        const advance = function () {
             const next = coverBackgrounds[curImgId]
 
             if (useA) {
@@ -108,7 +113,53 @@ function plugin(hook, vm) {
 
             useA = !useA
             curImgId = (curImgId + 1) % numberOfImages
-        }, intervalMs)
+        }
+
+        // 只在封面可见且页面在前台时轮播
+        let onScreen = false
+
+        const startTimer = function () {
+            if (coverTimer !== null) return
+            coverTimer = setInterval(advance, intervalMs)
+        }
+
+        const stopTimer = function () {
+            if (coverTimer === null) return
+            clearInterval(coverTimer)
+            coverTimer = null
+        }
+
+        const sync = function () {
+            if (onScreen && !document.hidden) startTimer()
+            else stopTimer()
+        }
+
+        const onVisibilityChange = function () {
+            sync()
+        }
+
+        document.addEventListener('visibilitychange', onVisibilityChange)
+
+        let observer = null
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver(function (entries) {
+                onScreen = entries.some(entry => entry.isIntersecting)
+                sync()
+            }, { threshold: 0 })
+            observer.observe(cover)
+        }
+        else {
+            onScreen = true
+        }
+
+        onScreen = cover.getBoundingClientRect().bottom > 0
+        sync()
+
+        coverCleanup = function () {
+            stopTimer()
+            document.removeEventListener('visibilitychange', onVisibilityChange)
+            if (observer) observer.disconnect()
+        }
     })
 }
 

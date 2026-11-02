@@ -55,8 +55,7 @@ function setupReadProgress() {
     }
 
     const onClick = function () {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
     el.addEventListener('click', onClick)

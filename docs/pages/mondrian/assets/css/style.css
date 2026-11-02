@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'HYKaiTiS';
-    src: url('../fonts/HYKaiTiS.ttf');
+    src: url('../fonts/HYKaiTiS.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'SortsMillGoudy';
-    src: url('../fonts/SortsMillGoudy-Regular.ttf');
+    src: url('../fonts/SortsMillGoudy-Regular.woff2') format('woff2');
 }
 
 :root {

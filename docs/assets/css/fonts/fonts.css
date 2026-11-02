@@ -5,460 +5,260 @@
 /* Chinese */
 @font-face {
     font-family: 'HYQuanTangShiJF-Kana';
-    src: url('../../resources/fonts/HYQuanTangShi/HYQuanTangShiJF.ttf');
+    src: url('../../resources/fonts/HanYi/HYQuanTangShi/HYQuanTangShiJF.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 100%;
     unicode-range: U+3040-30FF, U+31F0-31FF, U+FF66-FF9D, U+1B000-1B0FF;
-    font-display: swap;
 }
 
 @font-face {
     font-family: 'HYQuanTangShiJF';
-    src: url('../../resources/fonts/HYQuanTangShi/HYQuanTangShiJF.ttf');
-    size-adjust: 115%;
+    src: url('../../resources/fonts/HanYi/HYQuanTangShi/HYQuanTangShiJF.woff2') format('woff2');
     font-display: swap;
+    size-adjust: 115%;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'HYKaiTiS';
-    src: url('../../resources/fonts/HYKaiTi/HYKaiTiS.ttf');
+    src: url('../../resources/fonts/HanYi/HYKaiTi/HYKaiTiS.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 115%;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'QuanZiKuKai';
-    src: url('../../resources/fonts/QuanZiKuKai/TW-Kai-98_1.ttf');
+    src: url('../../resources/fonts/QuanZiKuKai/TW-Kai-98_1.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 115%;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'QuanZiKuKai-extb';
-    src: url('../../resources/fonts/QuanZiKuKai/TW-Kai-Ext-B-98_1.ttf');
-    size-adjust: 115%;
-}
-
-@font-face {
+    src: url('../../resources/fonts/QuanZiKuKai/TW-Kai-Ext-B-98_1.woff2') format('woff2');
     font-display: swap;
-    font-family: 'QuanZiKuKai-plus';
-    src: url('../../resources/fonts/QuanZiKuKai/TW-Kai-Plus-98_1.ttf');
     size-adjust: 115%;
 }
 
 /* CJK Ext A-I */
 @font-face {
-    font-display: swap;
     font-family: 'Jigmo';
-    src: url('../../resources/fonts/Jigmo-20230816/Jigmo.ttf');
+    src: url('../../resources/fonts/Jigmo/Jigmo.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'Jigmo-2';
-    src: url('../../resources/fonts/Jigmo-20230816/Jigmo2.ttf');
+    src: url('../../resources/fonts/Jigmo/Jigmo2.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'Jigmo-3';
-    src: url('../../resources/fonts/Jigmo-20230816/Jigmo3.ttf');
+    src: url('../../resources/fonts/Jigmo/Jigmo3.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'WeibeiSC-Bold';
-    src: url('../../resources/fonts/WeibeiSC-Bold.otf');
+    src: url('../../resources/fonts/WeibeiSC/WeibeiSC-Bold.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 110%;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'HYLuoHuaShiW';
-    src: url('../../resources/fonts/HYLuoHuaShiW.ttf');
+    src: url('../../resources/fonts/HanYi/HYLuoHuaShiW/HYLuoHuaShiW.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 120%;
 }
 
 /* Old Chinese */
 @font-face {
-    font-display: swap;
     font-family: 'FZJiaGW';
-    src: url('../../resources/fonts/FZJiaGW.ttf');
+    src: url('../../resources/fonts/FangZheng/FZJiaGW/FZJiaGW.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'FZXiaoZhuan';
-    src: url('../../resources/fonts/FZXiaoZhuan.ttf');
-}
-
-@font-face{
+    src: url('../../resources/fonts/FangZheng/FZXiaoZhuan/FZXiaoZhuan.woff2') format('woff2');
     font-display: swap;
-    font-family: 'BeiShiDaJiaGuWenZiTi';
-    src: url('../../resources/fonts/BeiShiDaJiaGuWen/BeiShiDaJiaGuWenZiTi-1.ttf');
 }
 
-@font-face{
-    font-display: swap;
-    font-family: 'ChaoShiJiYinZhuan';
-    src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan.ttf');
-}
-
-@font-face{
-    font-display: swap;
-    font-family: 'ChaoShiJiYinZhuan';
-    font-weight: bold;
-    src: url('../../resources/fonts/ChaoShiJiYinZhuan/ChaoShiJiYinZhuan-Bold.ttf');
-}
-
-/* ZhouWen */
 @font-face {
+    font-family: 'BeiShiDaJiaGuWenZiTi';
+    src: url('../../resources/fonts/BeiShiDaJiaGuWen/BeiShiDaJiaGuWenZiTi-1.woff2') format('woff2');
     font-display: swap;
-    font-family: 'ShirakawaChubun';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaChubun.ttf');
 }
 
 /* JinWen */
 @font-face {
-    font-display: swap;
     font-family: 'ShirakawaKinbun';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaKinbun.ttf');
+    src: url('../../resources/fonts/Shirakawa/ShirakawaKinbun.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'ShirakawaKinbun-2';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaKinbun2.ttf');
-}
-
-/* GuWen */
-@font-face {
+    src: url('../../resources/fonts/Shirakawa/ShirakawaKinbun2.woff2') format('woff2');
     font-display: swap;
-    font-family: 'ShirakawaKobun';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaKobun.ttf');
 }
 
 /* JiaGu */
 @font-face {
-    font-display: swap;
     font-family: 'ShirakawaKoukotsu';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaKoukotsu.ttf');
+    src: url('../../resources/fonts/Shirakawa/ShirakawaKoukotsu.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'ShirakawaKoukotsu-2';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaKoukotsu2.ttf');
+    src: url('../../resources/fonts/Shirakawa/ShirakawaKoukotsu2.woff2') format('woff2');
+    font-display: swap;
 }
 
 /* XiaoZhuan */
 @font-face {
-    font-display: swap;
     font-family: 'ShirakawaTenbun';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaTenbun.ttf');
+    src: url('../../resources/fonts/Shirakawa/ShirakawaTenbun.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'ShirakawaTenbun-2';
-    src: url('../../resources/fonts/Shirakawa_v1_101/ShirakawaTenbun2.ttf');
+    src: url('../../resources/fonts/Shirakawa/ShirakawaTenbun2.woff2') format('woff2');
+    font-display: swap;
 }
 
 /* Old Chinese Symbols */
 @font-face {
-    font-display: swap;
     font-family: 'PengliWenKai';
-    src: url('../../resources/fonts/PengliWenKai-Regular.ttf');
+    src: url('../../resources/fonts/KleeOne/PengliWenKai/PengliWenKai-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 /* Japanese */
 @font-face {
-    font-display: swap;
     font-family: 'Ninjal-Hentaigana';
-    src: url('../../resources/fonts/ninjal_hentaigana/ninjal_hentaigana.ttf');
+    src: url('../../resources/fonts/ninjal_hentaigana/ninjal_hentaigana.woff2') format('woff2');
+    font-display: swap;
 }
 
 /* Lati & Greek */
 @font-face {
-    font-display: swap;
     font-family: 'SortsMillGoudy';
-    src: url('../../resources/fonts/Sorts_Mill_Goudy/SortsMillGoudy-Regular.ttf');
+    src: url('../../resources/fonts/Goudy/Sorts_Mill_Goudy/SortsMillGoudy-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'SortsMillGoudy';
-    src: url('../../resources/fonts/Sorts_Mill_Goudy/SortsMillGoudy-Italic.ttf');
+    src: url('../../resources/fonts/Goudy/Sorts_Mill_Goudy/SortsMillGoudy-Italic.woff2') format('woff2');
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'CormorantGaramond';
-    src: url('../../resources/fonts/Cormorant_Garamond/CormorantGaramond-VariableFont_wght.ttf') format('truetype-variations');
+    src: url('../../resources/fonts/Garamond/Cormorant_Garamond/CormorantGaramond-VariableFont_wght.woff2') format('woff2');
     font-weight: 100 900;
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'CormorantGaramond';
-    src: url('../../resources/fonts/Cormorant_Garamond/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype-variations');
+    src: url('../../resources/fonts/Garamond/Cormorant_Garamond/CormorantGaramond-Italic-VariableFont_wght.woff2') format('woff2');
     font-weight: 100 900;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'GentiumPlus';
-    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Regular.ttf');
+    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'GentiumPlus';
-    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Bold.ttf');
+    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Bold.woff2') format('woff2');
     font-weight: bold;
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'GentiumPlus';
-    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Italic.ttf');
+    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-Italic.woff2') format('woff2');
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'GentiumPlus';
-    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-BoldItalic.ttf');
+    src: url('../../resources/fonts/Gentium_Plus/GentiumPlus-BoldItalic.woff2') format('woff2');
     font-weight: bold;
     font-style: italic;
-}
-
-/* Brahmi */
-
-/* Devanagari */
-@font-face {
     font-display: swap;
-    font-family: 'Sahitya';
-    src: url('../../resources/fonts/Sahitya/Sahitya-Regular.ttf');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Sahitya';
-    src: url('../../resources/fonts/Sahitya/Sahitya-Bold.ttf');
-    font-weight: bold;
 }
 
 /* Ranjana */
 @font-face {
-    font-display: swap;
     font-family: 'NithyaRanjana';
-    src: url('../../resources/fonts/NithyaRanjana-Regular/NithyaRanjanaDU-Regular.otf');
+    src: url('../../resources/fonts/NithyaRanjana/NithyaRanjanaDU-Regular.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 110%;
-}
-
-/* Siddham */
-@font-face {
-    font-display: swap;
-    font-family: 'ApDevaSiddham';
-    src: url('../../resources/fonts/ApDevaSiddham.ttf');
-}
-
-/* Hebrew */
-@font-face {
-    font-display: swap;
-    font-family: 'Tinos';
-    src: url('../../resources/fonts/Tinos/Tinos-Regular.ttf');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Tinos';
-    src: url('../../resources/fonts/Tinos/Tinos-Bold.ttf');
-    font-weight: bold;
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Tinos';
-    src: url('../../resources/fonts/Tinos/Tinos-Italic.ttf');
-    font-style: italic;
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Tinos';
-    src: url('../../resources/fonts/Tinos/Tinos-BoldItalic.ttf');
-    font-style: italic;
-    font-weight: bold;
-}
-
-/* Uyghur */
-@font-face {
-    font-display: swap;
-    font-family: 'FuYongShuKai';
-    src: url('../../resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.ttf');
-}
-
-/* Blackletter */
-@font-face {
-    font-display: swap;
-    font-family: 'UnifrakturMaguntia';
-    src: url('../../resources/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf');
-}
-
-/* --- Serif Unused --- */
-
-/* Chinese */
-@font-face {
-    font-display: swap;
-    font-family: 'LXGWWenKai';
-    src: url('../../resources/fonts/LXGWWenKai/LXGWWenKai-Regular.ttf');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'LXGWWenKai';
-    src: url('../../resources/fonts/LXGWWenKai/LXGWWenKai-Light.ttf');
-    font-weight: 300;
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'LXGWWenKai';
-    src: url('../../resources/fonts/LXGWWenKai/LXGWWenKai-Bold.ttf');
-    font-weight: bold;
-}
-
-/* Latin */
-@font-face {
-    font-display: swap;
-    font-family: 'Claire-Palmer-Serif';
-    src: url('../../resources/fonts/Claire-Palmer-Serif.otf');
-}
-
-/* Uyghur */
-@font-face {
-    font-display: swap;
-    font-family: 'FuYongXingShu';
-    src: url('../../resources/fonts/FuYong/Manchu_FuYong_XingShu_running_script.ttf');
 }
 
 /* --- Sans --- */
 
 /* Latin */
 @font-face {
-    font-display: swap;
     font-family: 'Menlo';
-    src: local('Menlo'), url('../../resources/fonts/Menlo-Regular.woff2');
+    src: url('../../resources/fonts/Apple/Menlo/Menlo-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 /* Emoji */
 @font-face {
-    font-display: swap;
     font-family: 'TwitterColorEmoji';
-    src: url('../../resources/fonts/TwitterColorEmoji-SVGinOT-15.1.0/TwitterColorEmoji-SVGinOT.ttf');
-}
-
-/* --- Sans Unused --- */
-
-@font-face {
+    src: url('../../resources/fonts/Twitter/TwitterColorEmoji/TwitterColorEmoji-SVGinOT.woff2') format('woff2');
     font-display: swap;
-    font-family: 'Italiana';
-    src: url('../../resources/fonts/Italiana-Regular.ttf');
 }
 
 /* --- Handwriting --- */
 
 /* Chinese */
 @font-face {
-    font-display: swap;
     font-family: 'HuiZongGong-sc';
-    src: url('../../resources/fonts/HuiZongGong/HuiZongGong-sc.ttf');
+    src: url('../../resources/fonts/HuaKang/HuiZongGong/HuiZongGong-sc.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 110%;
 }
 
 @font-face {
-    font-display: swap;
     font-family: 'HuiZongGong-tc';
-    src: url('../../resources/fonts/HuiZongGong/HuiZongGong-tc.ttf');
+    src: url('../../resources/fonts/HuaKang/HuiZongGong/HuiZongGong-tc.woff2') format('woff2');
+    font-display: swap;
     size-adjust: 110%;
 }
 
-@font-face {
-    font-display: swap;
-    font-family: 'HanyiSentyFlorCalligraphy';
-    src: url('../../resources/fonts/HanyiSentyFlorCalligraphy.ttf');
-    size-adjust: 140%;
-}
-
 /* Japanese */
 @font-face {
-    font-display: swap;
     font-family: 'KakuGyoStd';
-    src: url('../../resources/fonts/A-OTF-KakuGyoStd-Light.otf');
+    src: url('../../resources/fonts/Adobe/KakuGyoStd/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
+    font-display: swap;
 }
 
 /* Latin */
 @font-face {
-    font-display: swap;
     font-family: 'Claire-Palmer-Script';
-    src: url('../../resources/fonts/Claire-Palmer-Script.otf');
-}
-
-/* Handwriting Unused */
-
-/* Chinese */
-@font-face {
+    src: url('../../resources/fonts/Claire-Palmer/Claire-Palmer-Script/Claire-Palmer-Script.woff2') format('woff2');
     font-display: swap;
-    font-family: 'HYGuoQiangXingShuW';
-    src: url('../../resources/fonts/HYGuoQiangXingShuW.ttf');
-    size-adjust: 125%;
 }
 
 /* Japanese */
 @font-face {
-    font-display: swap;
     font-family: 'KouzanBrushFontSousyo';
-    src: url('../../resources/fonts/KouzanBrushFontSousyo.ttf');
-}
-
-/* Latin */
-@font-face {
+    src: url('../../resources/fonts/KouzanBrushFontSousyo/KouzanBrushFontSousyo.woff2') format('woff2');
     font-display: swap;
-    font-family: 'Ballet';
-    src: url('../../resources/fonts/Ballet/Ballet-Regular-VariableFont_opsz.ttf') format('truetype-variations');
-    font-weight: 100 900;
-}
-
-/* --- Fancy --- */
-
-/* Japanese */
-@font-face {
-    font-display: swap;
-    font-family: 'MRT';
-    src: url('../../resources/fonts/MRT/MRT-beta.ttf');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'MRT-a';
-    src: url('../../resources/fonts/MRT/MRT-alpha.ttf');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'MRT-k';
-    src: url('../../resources/fonts/MRT/MRT-kananomi.ttf');
-}
-
-/* --- Fancy Unused --- */
-
-/* Latin */
-@font-face {
-    font-display: swap;
-    font-family: 'MadokaRunes';
-    src: url('../../resources/fonts/MadokaRunes-2.0.ttf');
 }

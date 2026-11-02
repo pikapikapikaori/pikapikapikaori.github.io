@@ -22,23 +22,27 @@ section.cover img.ignore-view-full-image-img {
 }
 
 .cover-page-scroll-down-chevron {
-    position: relative;
+    display: inline-block;
     animation: moveChevron var(--global-transition-duration-very-slow) infinite;
+}
+
+.cover-page-scroll-down-chevron-div.is-offscreen .cover-page-scroll-down-chevron {
+    animation-play-state: paused;
 }
 
 @keyframes moveChevron {
     0% {
-        top: 0;
+        transform: translateY(0);
         opacity: var(--global-opacity-very-weak);
     }
 
     50% {
-        top: 0.9375rem;
+        transform: translateY(0.9375rem);
         opacity: var(--global-opacity-full);
     }
 
     100% {
-        top: 0;
+        transform: translateY(0);
         opacity: var(--global-opacity-very-weak);
     }
 }

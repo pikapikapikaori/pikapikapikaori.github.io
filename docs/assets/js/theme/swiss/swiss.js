@@ -297,7 +297,6 @@ function buildSections(root) {
 }
 
 function setupMotion(root) {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     document.documentElement.classList.add('sw-motion')
 
     const targets = []

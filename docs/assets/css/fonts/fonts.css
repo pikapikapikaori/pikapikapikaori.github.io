@@ -39,13 +39,6 @@
     size-adjust: 115%;
 }
 
-@font-face {
-    font-family: 'QuanZiKuKai-plus';
-    src: url('../../resources/fonts/QuanZiKuKai/TW-Kai-Plus-98_1.woff2') format('woff2');
-    font-display: swap;
-    size-adjust: 115%;
-}
-
 /* CJK Ext A-I */
 @font-face {
     font-family: 'Jigmo';

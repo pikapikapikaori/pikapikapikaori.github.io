@@ -1,0 +1,34 @@
+/* 
+ * Nonstandard CSS
+ * 
+ * This file contains nonstandard CSS properties that are not part of the official CSS specification.
+ * These properties are used to enhance the appearance and behavior of the website in specific browsers.
+ * 
+ * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
+ */
+
+/* Webkit-specific properties */
+
+/* --- Docsify --- */
+
+/* Cover */
+.cover-page-scroll-down-chevron {
+    -webkit-animation: moveChevron var(--global-transition-duration-very-slow) infinite;
+}
+
+@-webkit-keyframes moveChevron {
+    0% {
+        top: 0;
+        opacity: var(--global-opacity-very-weak);
+    }
+
+    50% {
+        top: 0.9375rem;
+        opacity: var(--global-opacity-full);
+    }
+
+    100% {
+        top: 0;
+        opacity: var(--global-opacity-very-weak);
+    }
+}

@@ -21,12 +21,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--theme-color);
+    background: var(--global-theme-color-normal);
     border-radius: var(--global-scrollbar-border-radius);
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--scrollbar-bg-color)
+    background: var(--global-scrollbar-bg-color)
 }
 
 body {
@@ -38,12 +38,12 @@ body {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background: var(--theme-color);
+    background: var(--global-theme-color-normal);
     border-radius: var(--global-scrollbar-border-radius);
 }
 
 .sidebar::-webkit-scrollbar-track {
-    background: var(--scrollbar-bg-color)
+    background: var(--global-scrollbar-bg-color)
 }
 
 .markdown-section output:after,

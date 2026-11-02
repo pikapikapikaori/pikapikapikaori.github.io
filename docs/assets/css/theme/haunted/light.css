@@ -1,0 +1,173 @@
+@import url('../base-light.css');
+@import url('./haunted.css');
+
+:root {
+    --theme-color: #ecc1a2;
+
+    --bg-color: #faf8fd;
+    --text-color: #3d3550;
+    --heading-color: #241c38;
+    --muted-color: #7a7191;
+    --em-color: #5f5677;
+    --h6-color: #7a7191;
+    --sidebar-text-color: #4a4160;
+    --sidebar-title-color: #241c38;
+    --border-color: #ebe5f6;
+    --border-color-strong: #d9d0ec;
+    --border-color-mid: #d9d0ec;
+    --sidebar-border-color: #ebe5f6;
+    --code-bg: #f3effb;
+    --zebra-bg: #f3effb8c;
+    --tip-code-bg: #ede7f9;
+    --inline-code-color: #c2410c;
+    --code-text-color: #3d3550;
+    --accent-color: #e2610c;
+    --accent-text-color: #ffffff;
+    --blur-color: rgba(226, 97, 12, .14);
+    --sidebar-toggle-bg: transparent;
+
+    --dot-color: rgba(124, 71, 201, .13);
+}
+
+html {
+    background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .10), transparent 70%), radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
+}
+
+.sidebar {
+    background-color: rgba(252, 250, 255, .78);
+}
+
+html::before,
+html::after,
+body::before,
+body::after {
+    will-change: opacity;
+}
+
+html::before {
+    left: 8%;
+    filter: brightness(.78) saturate(1.5) drop-shadow(0 8px 14px rgba(90, 105, 150, .26));
+    animation: ghost-appear 31s linear -5s infinite;
+}
+
+html::after {
+    left: 68%;
+    filter: brightness(.80) saturate(1.5) drop-shadow(0 10px 16px rgba(90, 105, 150, .22));
+    animation: ghost-appear 47s linear -23s infinite;
+}
+
+body::after {
+    left: 34%;
+    filter: brightness(.76) saturate(1.5) drop-shadow(0 6px 12px rgba(90, 105, 150, .30));
+    animation: ghost-appear 41s linear -34s infinite;
+}
+
+@keyframes ghost-appear {
+
+    0% {
+        opacity: 0;
+    }
+
+    2% {
+        opacity: 0;
+    }
+
+    3% {
+        opacity: .50;
+    }
+
+    6% {
+        opacity: .50;
+    }
+
+    7% {
+        opacity: 0;
+    }
+
+    9% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .26;
+    }
+
+    12% {
+        opacity: .26;
+    }
+
+    13% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    21% {
+        opacity: .52;
+    }
+
+    25% {
+        opacity: .52;
+    }
+
+    26% {
+        opacity: 0;
+    }
+
+    45% {
+        opacity: 0;
+    }
+
+    46% {
+        opacity: .32;
+    }
+
+    48% {
+        opacity: 0;
+    }
+
+    49% {
+        opacity: .48;
+    }
+
+    52% {
+        opacity: .48;
+    }
+
+    53% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    76% {
+        opacity: .38;
+    }
+
+    79% {
+        opacity: .38;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+body::before {
+    transform: scale(var(--jack-scale));
+    opacity: .96;
+    filter: sepia(1) saturate(6) hue-rotate(-38deg) brightness(1.05) drop-shadow(0 6px 14px rgba(214, 90, 12, .30));
+}
+
+section.cover::before,
+section.cover::after {
+    background-image: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(124, 71, 201, .10), transparent 70%), radial-gradient(circle, var(--dot-color) 1px, transparent 1.5px);
+}

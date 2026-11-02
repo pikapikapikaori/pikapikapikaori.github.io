@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'HYQuanTangShiJF';
-    src: url('./fonts/HYQuanTangShiJF.ttf');
+    src: url('./fonts/HYQuanTangShiJF.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'KakuGyoStd';
-    src: url('./fonts/A-OTF-KakuGyoStd-Light.otf');
+    src: url('./fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
 }
 
 :root {

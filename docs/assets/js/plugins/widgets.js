@@ -1,69 +1,27 @@
-import { lockNoTransition, unlockNoTransition } from '../utils/common.js'
+import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex, makeButtonLike } from '../utils/common.js'
+import { bindShortcuts } from '../utils/shortcut.js'
 
 let widgetsOptions = {
     useSwitchMode: true,
     top: 0,
     topOffset: 500,
+    defaultTheme: '',
     themes: [
         {
             name: 'default',
-            light: {
-                themeColor: '#c7a2ec',
-                bgColor: '#ffffff',
-                css: './assets/css/theme/vue.css',
-                js: null
-            },
-            dark: {
-                themeColor: '#c7a2ec',
-                bgColor: '#3f3f3f',
-                css: './assets/css/theme/dark.css',
-                js: null
-            }
+            css: './assets/css/theme/default'
         },
         {
             name: 'kraft',
-            light: {
-                themeColor: '#ecc7a2',
-                bgColor: '#f4ecd8',
-                css: './assets/css/theme/kraft.css',
-                js: null
-            },
-            dark: {
-                themeColor: '#ecc7a2',
-                bgColor: '#2a1f14',
-                css: './assets/css/theme/bronze.css',
-                js: null
-            }
+            css: './assets/css/theme/kraft'
         },
         {
             name: 'kirby',
-            light: {
-                themeColor: '#eca2bb',
-                bgColor: '#ffeef4',
-                css: './assets/css/theme/kirby.css',
-                js: null
-            },
-            dark: {
-                themeColor: '#a2aeec',
-                bgColor: '#1a2238',
-                css: './assets/css/theme/metaknight.css',
-                js: null
-            }
+            css: './assets/css/theme/kirby'
         },
         {
             name: 'calligraphy',
-            light: {
-                themeColor: '#ecc7a2',
-                bgColor: '#fbfbf5',
-                css: './assets/css/theme/calligraphy.css',
-                js: null
-            },
-            dark: {
-                themeColor: '#a2c7ec',
-                bgColor: '#1a2028',
-                css: './assets/css/theme/grid.css',
-                js: null
-            }
+            css: './assets/css/theme/calligraphy'
         }
     ]
 }
@@ -92,7 +50,6 @@ function plugin(hook, vm) {
     let widgets = []
     let widgetsContainer
     let widgetsCnt = 9
-    let widgetsDesktopCnt = 1
 
     let popups = {
         theme: 'theme',
@@ -105,7 +62,6 @@ function plugin(hook, vm) {
         l: 78
     }
 
-    // 图标：只保留 SVG 路径，尺寸/颜色全部由 CSS 负责
     const icons = {
         lightMode: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
         darkMode: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11.507a9.493 9.493 0 0018 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.494 9.494 0 003 11.507z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
@@ -120,15 +76,27 @@ function plugin(hook, vm) {
         topScroller: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
     }
 
-    let isNowMobile = false
-
     // 黑暗模式切换、主题切换
+    const THEME_SHEET_WAIT_MS = 3000
+    const THEME_SHEET_POLL_MS = 16
+
+    let themeGroups = widgetsOptions.themes || []
+    let defaultThemeIndex = themeGroups.findIndex(function (group) {
+        return group && group.name === widgetsOptions.defaultTheme
+    })
+
     let themeState = {
         modeIndex: 0,
         modes: ['auto', 'light', 'dark'],
 
-        themeIndex: 0,
-        groups: widgetsOptions.themes
+        lightFile: 'light',
+        darkFile: 'dark',
+
+        themeColor: '',
+        bgColor: '',
+
+        themeIndex: defaultThemeIndex === -1 ? 0 : defaultThemeIndex,
+        groups: themeGroups
     }
 
     // 主题切换
@@ -156,75 +124,9 @@ function plugin(hook, vm) {
         elSpan.id = spanId
         widgets.push(elSpan)
         initializeWidgetSpan(elSpan)
+        makeButtonLike(elSpan)
 
         return elSpan
-    }
-
-    function isMobile() {
-        let WIN = window
-        let NA = WIN.navigator
-        let UA = NA.userAgent.toLowerCase()
-
-        function test(needle) {
-            return needle.test(UA)
-        }
-        let IsAndroid = test(/android|htc/) || /linux/i.test(NA.platform + '')
-        let IsIPhone = !IsAndroid && test(/ipod|iphone/)
-        let IsWinPhone = test(/windows phone/)
-
-        let device = {
-            IsAndroid: IsAndroid,
-            IsIPhone: IsIPhone,
-            IsWinPhone: IsWinPhone,
-        }
-        let documentElement = WIN.document.documentElement
-        for (var i in device) {
-            if (device[i]) {
-                documentElement.className += ' ' + i.replace('Is', '').toLowerCase()
-            }
-        }
-        return device.IsAndroid || device.IsIPhone || device.IsWinPhone
-    }
-
-    function hexToHsl(hex) {
-        hex = hex.replace('#', '')
-
-        if (hex.length === 3) {
-            hex = hex.split('').map(c => c + c).join('')
-        }
-
-        if (hex.length === 8) {
-            hex = hex.substring(0, 6)
-        }
-
-        const r = parseInt(hex.substring(0, 2), 16) / 255
-        const g = parseInt(hex.substring(2, 4), 16) / 255
-        const b = parseInt(hex.substring(4, 6), 16) / 255
-
-        const max = Math.max(r, g, b)
-        const min = Math.min(r, g, b)
-        const delta = max - min
-
-        let h = 0
-        if (delta !== 0) {
-            if (max === r) {
-                h = 60 * (((g - b) / delta) % 6)
-            } else if (max === g) {
-                h = 60 * ((b - r) / delta + 2)
-            } else {
-                h = 60 * ((r - g) / delta + 4)
-            }
-        }
-        if (h < 0) h += 360
-
-        let s = 0
-        if (delta !== 0) {
-            s = delta / (1 - Math.abs(2 * (max + min) / 2 - 1))
-        }
-
-        const l = (max + min) / 2
-
-        return [Math.round(h), Math.round(s * 100), Math.round(l * 100)]
     }
 
     let switchPopup = function (target) {
@@ -232,15 +134,57 @@ function plugin(hook, vm) {
         iscolorPickerPopupOpen = (target === popups.color)
         isfontPickerOpen = (target === popups.font)
 
+        if (themeSpan) themeSpan.classList.toggle('is-active', isthemePickerOpen)
+        if (colorPickerSpan) colorPickerSpan.classList.toggle('is-active', iscolorPickerPopupOpen)
+        if (fontPickerSpan) fontPickerSpan.classList.toggle('is-active', isfontPickerOpen)
+
         if (themePickerPopupSpan) {
             themePickerPopupSpan.classList.toggle('page-right-popups-disappear', !isthemePickerOpen)
+            themePickerPopupSpan.inert = !isthemePickerOpen
         }
         if (colorPickerPopupSpan) {
             colorPickerPopupSpan.classList.toggle('page-right-popups-disappear', !iscolorPickerPopupOpen)
+            colorPickerPopupSpan.inert = !iscolorPickerPopupOpen
         }
         if (fontPickerPopupSpan) {
             fontPickerPopupSpan.classList.toggle('page-right-popups-disappear', !isfontPickerOpen)
+            fontPickerPopupSpan.inert = !isfontPickerOpen
         }
+    }
+
+    let clickWidget = function (widget) {
+        if (!widget || widget.classList.contains('page-right-tools-widgets-span-disappear')) return
+
+        widget.click()
+    }
+
+    let pickPreset = function (index) {
+        let buttons = null
+
+        if (isthemePickerOpen && themePickerPopupSpan) {
+            buttons = themePickerPopupSpan.getElementsByClassName('theme-picker-preset-color-btn-div')
+        } else if (iscolorPickerPopupOpen && colorPickerPopupSpan) {
+            buttons = colorPickerPopupSpan.getElementsByClassName('color-picker-preset-color-btn-div')
+        } else if (isfontPickerOpen && fontPickerPopupSpan) {
+            buttons = fontPickerPopupSpan.getElementsByClassName('font-picker-preset-size-btn-div')
+        }
+
+        if (!buttons || !buttons[index]) return
+
+        buttons[index].click()
+    }
+
+    let bindFocusLeave = function (trigger, popup) {
+        if (!trigger || !popup) return
+
+        let onFocusOut = function (e) {
+            if (!e.relatedTarget) return
+            if (trigger.contains(e.relatedTarget) || popup.contains(e.relatedTarget)) return
+            switchPopup(null)
+        }
+
+        trigger.addEventListener('focusout', onFocusOut)
+        popup.addEventListener('focusout', onFocusOut)
     }
 
     // 黑暗模式切换、主题切换
@@ -276,11 +220,45 @@ function plugin(hook, vm) {
         syncColorPickerActiveBtn(hue)
     }
 
-    // 主题某一侧的可选项：null、空字符串等空值都视为未配置
     const isThemeValue = value => Boolean(value)
 
     let getThemeGroup = function () {
         return themeState.groups[themeState.themeIndex]
+    }
+
+    let getSideAsset = function (group, isDark, ext) {
+        if (!isThemeValue(group[ext])) return null
+
+        return group[ext] + '/' + (isDark ? themeState.darkFile : themeState.lightFile) + '.' + ext
+    }
+
+    let readThemeSheetColor = function (link, name) {
+        if (!link || !link.sheet) return ''
+
+        try {
+            const rules = link.sheet.cssRules
+            for (let i = 0; i < rules.length; i++) {
+                const rule = rules[i]
+                if (!rule.style || rule.selectorText !== ':root') continue
+                const value = rule.style.getPropertyValue(name)
+                if (value) return value.trim()
+            }
+        } catch (e) {
+            console.warn('[widgets] 主题 CSS 变量读取失败：' + name, e)
+        }
+
+        return ''
+    }
+
+    let readAppliedThemeColors = function (link, readSheet) {
+        const computed = getComputedStyle(document.documentElement)
+        const themeColor = readSheet ? readThemeSheetColor(link, '--theme-color') : ''
+        const sheetBgColor = readSheet ? readThemeSheetColor(link, '--bg-color') : ''
+
+        return {
+            themeColor: themeColor,
+            bgColor: sheetBgColor || computed.getPropertyValue('--bg-color').trim()
+        }
     }
 
     let syncThemeColorMeta = function (bgColor) {
@@ -298,62 +276,90 @@ function plugin(hook, vm) {
         unlockNoTransition()
     }
 
-    // 等主题 CSS 生效后再跑主题脚本，避免脚本读到上一个主题的 CSS 变量
-    function waitForStylesheet(link) {
-        if (!link || link.disabled || link.getAttribute('href') === 'data:text/css,') {
+    // 等主题 CSS 生效后再跑主题脚本，避免脚本读到上一个主题的 CSS 变量。
+    function waitForStylesheet(link, cssPath) {
+        if (!link || link.disabled || !cssPath) {
             return Promise.resolve()
         }
 
+        const expected = new URL(cssPath, document.baseURI).href
+
+        const isReady = function () {
+            const sheet = link.sheet
+            if (!sheet || !sheet.cssRules || sheet.cssRules.length === 0) return false
+            return !sheet.href || sheet.href === expected
+        }
+
+        if (isReady()) return Promise.resolve()
+
         return new Promise(function (resolve) {
             let isDone = false
+            let timer = null
+            let deadline = 0
 
             const finish = function () {
                 if (isDone) return
                 isDone = true
-                link.removeEventListener('load', finish)
+                link.removeEventListener('load', check)
                 link.removeEventListener('error', finish)
+                if (timer) clearTimeout(timer)
                 resolve()
             }
 
-            link.addEventListener('load', finish)
+            const check = function () {
+                if (isDone) return
+                if (isReady() || Date.now() >= deadline) {
+                    finish()
+                    return
+                }
+                timer = setTimeout(check, THEME_SHEET_POLL_MS)
+            }
+
+            deadline = Date.now() + THEME_SHEET_WAIT_MS
+            link.addEventListener('load', check)
             link.addEventListener('error', finish)
-            setTimeout(finish, 300)
+            check()
         })
     }
 
     let applyThemeColor = function () {
         const group = getThemeGroup()
-        const side = resolveIsDark() ? group.dark : group.light
+        const isDark = resolveIsDark()
+        const cssPath = getSideAsset(group, isDark, 'css')
         const colorTheme = document.getElementById('theme-color')
 
         let waits = Promise.resolve()
 
-        if (isThemeValue(side.css)) {
+        if (isThemeValue(cssPath)) {
             colorTheme.disabled = false
-            if (colorTheme.getAttribute('href') !== side.css) {
-                colorTheme.href = side.css
-                waits = waitForStylesheet(colorTheme)
+            if (colorTheme.getAttribute('href') !== cssPath) {
+                colorTheme.href = cssPath
             }
+            waits = waitForStylesheet(colorTheme, cssPath)
         } else {
             colorTheme.disabled = true
             colorTheme.href = 'data:text/css,'
         }
 
-        if (isThemeValue(side.themeColor)) {
-            applyThemeColorCss(side.themeColor)
-            updateColorPickerSlider(side.themeColor)
-        }
+        return waits.then(function () {
+            const applied = readAppliedThemeColors(colorTheme, isThemeValue(cssPath))
+            themeState.themeColor = applied.themeColor
+            themeState.bgColor = applied.bgColor
 
-        syncThemePickerActiveBtn()
+            if (isThemeValue(applied.themeColor)) {
+                applyThemeColorCss(applied.themeColor)
+                updateColorPickerSlider(applied.themeColor)
+            }
 
-        syncThemeColorMeta(side.bgColor)
+            syncThemePickerActiveBtn()
 
-        return waits
+            syncThemeColorMeta(applied.bgColor)
+        })
     }
 
     const themeModuleCache = new Map()
     let themeJsCleanups = []
-    let themeJournal = null
+    let domTracking = null
     let themeRenderToken = 0
 
     function loadThemeModule(path) {
@@ -370,15 +376,15 @@ function plugin(hook, vm) {
         return themeModuleCache.get(url)
     }
 
-    // 记录主题脚本在 renderTheme 期间对 DOM 的改动，供反向撤销
-    function startDomJournal() {
-        const journal = { records: [], observer: null, styleAfter: new Map(), stopped: false }
+    // 记录 renderTheme 期间对 DOM 的改动，供反向撤销（与具体主题无关）
+    function beginDomTracking() {
+        const tracking = { records: [], observer: null, styleAfter: new Map(), stopped: false }
 
-        journal.observer = new MutationObserver(function (mutations) {
-            journal.records.push(...mutations)
+        tracking.observer = new MutationObserver(function (mutations) {
+            tracking.records.push(...mutations)
         })
 
-        journal.observer.observe(document.documentElement, {
+        tracking.observer.observe(document.documentElement, {
             childList: true,
             subtree: true,
             attributes: true,
@@ -387,25 +393,25 @@ function plugin(hook, vm) {
             characterDataOldValue: true
         })
 
-        return journal
+        return tracking
     }
 
-    function stopDomJournal(journal) {
-        if (!journal || journal.stopped) return
+    function endDomTracking(tracking) {
+        if (!tracking || tracking.stopped) return
 
-        journal.stopped = true
+        tracking.stopped = true
 
         // 记录是异步派发的，disconnect 会丢弃未派发的记录，必须先同步取出
-        journal.records.push(...journal.observer.takeRecords())
+        tracking.records.push(...tracking.observer.takeRecords())
 
         // 渲染结束时的 style，用于判断哪些内联属性仍属于主题脚本
-        journal.records.forEach(function (record) {
+        tracking.records.forEach(function (record) {
             if (record.type === 'attributes' && record.attributeName === 'style') {
-                journal.styleAfter.set(record.target, record.target.getAttribute('style'))
+                tracking.styleAfter.set(record.target, record.target.getAttribute('style'))
             }
         })
 
-        journal.observer.disconnect()
+        tracking.observer.disconnect()
     }
 
     // 只回滚仍未被动过的内联样式属性
@@ -434,13 +440,13 @@ function plugin(hook, vm) {
         })
     }
 
-    function revertDomJournal(journal) {
-        if (!journal) return
+    function rollbackDomChanges(tracking) {
+        if (!tracking) return
 
-        stopDomJournal(journal)
+        endDomTracking(tracking)
 
         const firstStyleRecords = new Map()
-        journal.records.forEach(function (record) {
+        tracking.records.forEach(function (record) {
             if (record.type === 'attributes' && record.attributeName === 'style' && !firstStyleRecords.has(record.target)) {
                 firstStyleRecords.set(record.target, record)
             }
@@ -448,8 +454,8 @@ function plugin(hook, vm) {
 
         const revertedStyles = new Set()
 
-        for (let i = journal.records.length - 1; i >= 0; i--) {
-            const record = journal.records[i]
+        for (let i = tracking.records.length - 1; i >= 0; i--) {
+            const record = tracking.records[i]
 
             try {
                 if (record.type === 'attributes') {
@@ -462,7 +468,7 @@ function plugin(hook, vm) {
                         restoreStyleDelta(
                             record.target,
                             firstStyleRecords.get(record.target).oldValue,
-                            journal.styleAfter.get(record.target)
+                            tracking.styleAfter.get(record.target)
                         )
                     } else if (record.oldValue === null) record.target.removeAttribute(record.attributeName)
                     else record.target.setAttribute(record.attributeName, record.oldValue)
@@ -488,7 +494,7 @@ function plugin(hook, vm) {
                     })
                 }
             } catch (e) {
-                console.warn('[widgets] 撤销主题脚本的 DOM 改动失败', e)
+                console.warn('[widgets] 回滚渲染期间的 DOM 改动失败', e)
             }
         }
     }
@@ -505,8 +511,8 @@ function plugin(hook, vm) {
         })
         themeJsCleanups = []
 
-        revertDomJournal(themeJournal)
-        themeJournal = null
+        rollbackDomChanges(domTracking)
+        domTracking = null
     }
 
     async function renderTheme() {
@@ -515,27 +521,27 @@ function plugin(hook, vm) {
         const token = themeRenderToken
         const group = getThemeGroup()
         const isDark = resolveIsDark()
-        const side = isDark ? group.dark : group.light
+        const jsPath = getSideAsset(group, isDark, 'js')
 
-        if (!side || !isThemeValue(side.js)) return
+        if (!isThemeValue(jsPath)) return
 
         let themeModule
 
         try {
-            themeModule = await loadThemeModule(side.js)
+            themeModule = await loadThemeModule(jsPath)
         } catch (e) {
-            console.warn('[widgets] 主题脚本加载失败：' + side.js, e)
+            console.warn('[widgets] 主题脚本加载失败：' + jsPath, e)
             return
         }
 
         if (token !== themeRenderToken) return
 
         if (typeof themeModule.renderTheme !== 'function') {
-            console.warn('[widgets] 主题脚本未导出 renderTheme()：' + side.js)
+            console.warn('[widgets] 主题脚本未导出 renderTheme()：' + jsPath)
             return
         }
 
-        themeJournal = startDomJournal()
+        domTracking = beginDomTracking()
 
         try {
             themeModule.renderTheme({
@@ -546,9 +552,9 @@ function plugin(hook, vm) {
                 }
             })
         } catch (e) {
-            console.warn('[widgets] 主题脚本执行失败：' + side.js, e)
+            console.warn('[widgets] 主题脚本执行失败：' + jsPath, e)
         } finally {
-            stopDomJournal(themeJournal)
+            endDomTracking(domTracking)
         }
     }
 
@@ -567,18 +573,6 @@ function plugin(hook, vm) {
         Array.from(btns).forEach(btn => {
             btn.classList.toggle('is-active', Number(btn.dataset.themeIndex) === themeState.themeIndex)
         })
-    }
-
-    // 页面主题色
-    function hslToHex(h, s, l) {
-        l /= 100
-        const a = s * Math.min(l, 1 - l) / 100
-        const f = n => {
-            const k = (n + h / 30) % 12
-            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
-            return Math.round(255 * color).toString(16).padStart(2, '0')   // convert to Hex and prefix "0" if needed
-        }
-        return `#${f(0)}${f(8)}${f(4)}`
     }
 
     // 字号切换
@@ -673,24 +667,19 @@ function plugin(hook, vm) {
             btnDiv.className = 'theme-picker-preset-color-btn-div'
             btnDiv.dataset.theme = group.name
             btnDiv.dataset.themeIndex = index
-            btnDiv.style.setProperty('--light-color', group.light.bgColor)
-            btnDiv.style.setProperty('--dark-color', group.dark.bgColor)
-
-            let l = group.light.themeColor
-            let d = group.dark.themeColor
-            let lSoft = l + '66'
-            let dSoft = d + '66'
 
             btnDiv.innerHTML = `
                 <div class="theme-picker-pattern-layer"></div>
                 <div class="theme-picker-pattern-layer theme-picker-pattern-layer-dark"></div>
-                <div class="theme-picker-dot" style="--l: ${l}; --l-soft: ${lSoft}; --d: ${d}; --d-soft: ${dSoft};">
+                <div class="theme-picker-dot">
                     <div class="theme-picker-dot-layer theme-picker-dot-glow-left"></div>
                     <div class="theme-picker-dot-layer theme-picker-dot-glow-right"></div>
                     <div class="theme-picker-dot-layer theme-picker-dot-core-left"></div>
                     <div class="theme-picker-dot-layer theme-picker-dot-core-right"></div>
                 </div>
             `
+
+            makeButtonLike(btnDiv)
 
             btnDiv.onclick = function () {
                 themeState.themeIndex = index
@@ -702,7 +691,6 @@ function plugin(hook, vm) {
 
         themePickerPopupDiv.appendChild(presetListDiv)
         themePickerPopupSpan.appendChild(themePickerPopupDiv)
-        widgetsContainer.appendChild(themePickerPopupSpan)
 
         syncThemePickerActiveBtn()
 
@@ -711,6 +699,7 @@ function plugin(hook, vm) {
         }
 
         widgetsContainer.appendChild(themeSpan)
+        widgetsContainer.appendChild(themePickerPopupSpan)
     }
 
     // 页面主题色
@@ -759,6 +748,8 @@ function plugin(hook, vm) {
         }
 
         Array.from(colorPickerPopupDiv.getElementsByClassName('color-picker-preset-color-btn-div')).forEach(colorPickerPresetColorBtn => {
+            makeButtonLike(colorPickerPresetColorBtn)
+
             colorPickerPresetColorBtn.onclick = function () {
                 let hue = Number(this.dataset.hue)
                 applyThemeColorCss(hslToHex(hue, hslFixed.s, hslFixed.l))
@@ -799,6 +790,8 @@ function plugin(hook, vm) {
             btnDiv.dataset.sizeIndex = index
             btnDiv.textContent = 'A'
 
+            makeButtonLike(btnDiv)
+
             btnDiv.onclick = function () {
                 fontSizeLevelIndex = index
                 applyFontSize()
@@ -809,13 +802,13 @@ function plugin(hook, vm) {
 
         fontPickerPopupDiv.appendChild(presetListDiv)
         fontPickerPopupSpan.appendChild(fontPickerPopupDiv)
-        widgetsContainer.appendChild(fontPickerPopupSpan)
 
         fontPickerSpan.onclick = function () {
             switchPopup(isfontPickerOpen ? null : popups.font)
         }
 
         widgetsContainer.appendChild(fontPickerSpan)
+        widgetsContainer.appendChild(fontPickerPopupSpan)
 
         applyFontSize()
     }
@@ -826,7 +819,10 @@ function plugin(hook, vm) {
         scrollToCommentSpan.innerHTML = icons.commentScroller
 
         scrollToCommentSpan.onclick = function () {
-            document.getElementById('gitalk-container').scrollIntoView({ behavior: 'smooth', })
+            const gitalk = document.getElementById('gitalk-container')
+            if (!gitalk) return
+
+            gitalk.scrollIntoView({ behavior: 'smooth' })
         }
 
         widgetsContainer.appendChild(scrollToCommentSpan)
@@ -840,6 +836,7 @@ function plugin(hook, vm) {
         showSakuraSpan.innerHTML = icons.showSakura
 
         let isSakuraDisplayed = true
+        showSakuraSpan.classList.toggle('is-active', isSakuraDisplayed)
 
         showSakuraSpan.onclick = function () {
             if (isSakuraDisplayed) {
@@ -850,6 +847,7 @@ function plugin(hook, vm) {
             }
 
             isSakuraDisplayed = !isSakuraDisplayed
+            showSakuraSpan.classList.toggle('is-active', isSakuraDisplayed)
         }
 
         widgetsContainer.appendChild(showSakuraSpan)
@@ -860,9 +858,15 @@ function plugin(hook, vm) {
         showLive2dSpan = createWidget('show-live2d-span')
         showLive2dSpan.innerHTML = icons.live2d
 
+        let isLive2dDisplayed = true
+        showLive2dSpan.classList.toggle('is-active', isLive2dDisplayed)
+
         showLive2dSpan.onclick = function () {
             let live2dCanvas = document.getElementById('canvas')
             live2dCanvas.classList.toggle('canvas-hide')
+
+            isLive2dDisplayed = !isLive2dDisplayed
+            showLive2dSpan.classList.toggle('is-active', isLive2dDisplayed)
         }
 
         widgetsContainer.appendChild(showLive2dSpan)
@@ -874,6 +878,7 @@ function plugin(hook, vm) {
         showWidgetsSpan.innerHTML = icons.showWidgets
 
         let isWidgetsOpen = true
+        showWidgetsSpan.classList.toggle('is-active', isWidgetsOpen)
 
         showWidgetsSpan.onclick = function () {
             let widgetsSpanList = [
@@ -882,16 +887,17 @@ function plugin(hook, vm) {
                 colorPickerSpan,
                 fontPickerSpan,
                 scrollToCommentSpan,
-                showSakuraSpan
+                showSakuraSpan,
+                showLive2dSpan
             ]
 
-            if (!isNowMobile) {
-                widgetsSpanList.push(showLive2dSpan)
-            }
-
             isWidgetsOpen = !isWidgetsOpen
+            showWidgetsSpan.classList.toggle('is-active', isWidgetsOpen)
 
-            widgetsSpanList.forEach(widget => widget.classList.toggle('page-right-tools-widgets-span-disappear'))
+            widgetsSpanList.forEach(widget => {
+                widget.classList.toggle('page-right-tools-widgets-span-disappear')
+                widget.inert = !isWidgetsOpen
+            })
 
             if (!isWidgetsOpen) {
                 switchPopup(null)
@@ -962,12 +968,6 @@ function plugin(hook, vm) {
         widgetsContainer.className = 'page-right-widgets-container'
         document.body.appendChild(widgetsContainer)
 
-        isNowMobile = isMobile()
-
-        if (!isNowMobile) {
-            widgetsCnt = widgetsCnt + widgetsDesktopCnt
-        }
-
         document.documentElement.style.setProperty('--widgets-cnt', widgetsCnt)
 
         initSwitchMode()
@@ -976,12 +976,48 @@ function plugin(hook, vm) {
         initFontPicker()
         initCommentScroll()
         initSakuraRain()
-        if (!isNowMobile) {
-            initLive2d()
-        }
+        initLive2d()
         initShowWidgets()
         initProgress()
         initScrollToTop()
+
+        switchPopup(null)
+
+        document.addEventListener('click', function (e) {
+            if (!isthemePickerOpen && !iscolorPickerPopupOpen && !isfontPickerOpen) return
+            if (e.target.closest('.page-right-tools-widgets-span') || e.target.closest('.page-right-popups')) return
+            switchPopup(null)
+        })
+
+        bindFocusLeave(themeSpan, themePickerPopupSpan)
+        bindFocusLeave(colorPickerSpan, colorPickerPopupSpan)
+        bindFocusLeave(fontPickerSpan, fontPickerPopupSpan)
+
+        let presetBindings = {}
+
+        for (let number = 1; number <= 10; number++) {
+            const index = number - 1
+            const digit = number === 10 ? 0 : number
+            const handler = function () {
+                pickPreset(index)
+            }
+
+            presetBindings['Digit' + digit] = handler
+            presetBindings['Numpad' + digit] = handler
+        }
+
+        bindShortcuts(Object.assign({
+            KeyM: () => clickWidget(switchSpan),
+            KeyT: () => clickWidget(themeSpan),
+            KeyC: () => clickWidget(colorPickerSpan),
+            KeyF: () => clickWidget(fontPickerSpan),
+            KeyS: () => clickWidget(showSakuraSpan),
+            KeyG: () => clickWidget(showLive2dSpan),
+            KeyW: () => clickWidget(showWidgetsSpan),
+            KeyN: () => clickWidget(progressSpan),
+            ArrowUp: () => clickWidget(scrollToTopSpan),
+            KeyL: () => clickWidget(scrollToCommentSpan)
+        }, presetBindings), { when: () => !document.body.classList.contains('image-viewer-open') })
 
     })
 

@@ -1,0 +1,438 @@
+@import url("../nonstandard/plugins/markdownHelper.css");
+
+/* --- Docsify --- */
+
+/* Cover */
+section.cover h1 {
+    font-family: var(--global-cover-font);
+}
+
+section.cover p {
+    font-family: var(--global-cover-paragraph-font);
+}
+
+section.cover img.ignore-view-full-image-img {
+    border-radius: var(--global-avatar-border-radius);
+}
+
+.cover-page-scroll-down-chevron-div {
+    margin: 2.5rem 0 0;
+    position: absolute;
+    left: calc(50% - 0.625rem);
+}
+
+.cover-page-scroll-down-chevron {
+    display: inline-block;
+    animation: moveChevron var(--global-transition-duration-very-slow) infinite;
+}
+
+.cover-page-scroll-down-chevron-div.is-offscreen .cover-page-scroll-down-chevron {
+    animation-play-state: paused;
+}
+
+@keyframes moveChevron {
+    0% {
+        transform: translateY(0);
+        opacity: var(--global-opacity-very-weak);
+    }
+
+    50% {
+        transform: translateY(0.9375rem);
+        opacity: var(--global-opacity-full);
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: var(--global-opacity-very-weak);
+    }
+}
+
+.cover-page-scroll-down-chevron svg {
+    transition: var(--global-transition-transform);
+}
+
+.cover-page-scroll-down-chevron:hover svg {
+    transform: scale(var(--global-scale-hover));
+}
+
+.cover-page-scroll-down-chevron:active svg {
+    transform: scale(var(--global-scale-press));
+}
+
+/* Sidebar */
+.sidebar>h1.app-name {
+    font-size: 2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+    font-family: var(--global-sidebar-name-font);
+}
+
+.sidebar>h1.app-name a {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+    transition: var(--global-transition-color);
+}
+
+.sidebar>h1.app-name a:hover {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button,
+.sidebar-toggle:active .sidebar-toggle-button {
+    opacity: var(--global-opacity-full);
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button {
+    transform: scale(var(--global-scale-hover));
+}
+
+.sidebar-toggle:active .sidebar-toggle-button {
+    transform: scale(var(--global-scale-press));
+}
+
+.sidebar-nav>ul>li {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.sidebar .sidebar-nav {
+    padding-right: 1.25rem;
+}
+
+.app-name {
+    display: inherit;
+}
+
+.sidebar>h1.app-name {
+    transition: margin var(--global-transition-duration-normal) var(--global-transition-ease), var(--global-transition-filter);
+}
+
+.sidebar > h1.app-name.hide {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.sidebar .app-name.hide {
+    display: inherit;
+}
+
+/* --- Navbar --- */
+.app-nav > ul > li > ul {
+    margin-top: 0.5rem;
+    display: block;
+    visibility: hidden;
+    clip-path: var(--global-clip-path-vertical-full);
+    pointer-events: none;
+    transition: var(--global-transition-close-vertical);
+}
+
+.app-nav > ul > li.is-open > ul {
+    visibility: visible;
+    clip-path: var(--global-clip-path-vertical-none);
+    pointer-events: auto;
+    transition: var(--global-transition-open-vertical);
+}
+
+.app-nav > ul > li > .app-nav-toggle {
+    display: inline-grid;
+    border-bottom: var(--global-border-strong) var(--global-nav-bar-rest);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: var(--global-transition-color), var(--global-transition-font);
+}
+
+.app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-inner {
+    grid-area: 1 / 1;
+}
+
+.app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-ghost {
+    font-weight: var(--global-font-weight-very-bold);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.app-nav > ul > li:not(.is-open):hover > .app-nav-toggle {
+    border-bottom-color: var(--global-nav-bar-hover);
+}
+
+.app-nav > ul > li.is-open > .app-nav-toggle,
+.app-nav > ul > li.is-current > .app-nav-toggle {
+    border-bottom-color: var(--global-nav-bar-active);
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
+}
+
+/* --- Table --- */
+.markdown-section tbody td,
+.markdown-section tbody th {
+    transition: var(--global-transition-color);
+}
+
+.markdown-section tbody tr.is-group-hover {
+    background-color: var(--global-table-group-hover);
+}
+
+.markdown-section tbody td.is-row-hover,
+.markdown-section tbody th.is-row-hover {
+    background-color: var(--global-table-row-hover);
+}
+
+/* --- Docsify Search --- */
+.input-wrap input[type=search] {
+    background: var(--global-bg-color);
+    color: var(--global-sidebar-text-color);
+}
+
+.search {
+    padding: 0;
+    border: 0;
+}
+
+.sidebar .search {
+    margin-bottom: 0.625rem;
+}
+
+.search input {
+    border: 0;
+    box-shadow: 0 0 0;
+    font-family: inherit;
+}
+
+.search .input-wrap {
+    border-block: var(--global-border-normal) var(--global-border-color);
+    transition: var(--global-transition-color);
+}
+
+.search .input-wrap>input[type=search] {
+    padding: 0.75rem 1.25rem;
+    border: 0;
+}
+
+.search .input-wrap:has(input[type=search]:hover) {
+    box-shadow: none;
+    border-block-color: var(--global-control-border-hover);
+}
+
+.search .input-wrap:has(input[type=search]:focus) {
+    box-shadow: none;
+    border-block: var(--global-border-normal) var(--global-control-border-active);
+}
+
+.search .input-wrap input:focus,
+.search .input-wrap input:hover {
+    box-shadow: none;
+}
+
+.search h2 {
+    font-size: 1.0625rem;
+}
+
+.search p {
+    font-size: 0.875rem;
+}
+
+.search .results-panel {
+    padding: 0.625rem 1.25rem;
+}
+
+.search .results-panel .matching-post {
+    border-color: var(--global-border-color);
+}
+
+/* --- Docsify Copy Code --- */
+pre .docsify-copy-code-button {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.825em;
+    opacity: 1;
+    color: var(--global-surface-solid-text);
+    background-color: var(--global-surface-solid-rest);
+    border-radius: var(--global-control-border-radius);
+    transition: var(--global-transition-color);
+}
+
+pre .docsify-copy-code-button span.label {
+    background: transparent;
+    border-radius: var(--global-control-border-radius);
+    transition: none;
+}
+
+pre .docsify-copy-code-button:hover {
+    background-color: var(--global-surface-solid-hover);
+    box-shadow: var(--global-surface-solid-inset-ring-hover);
+}
+
+pre .docsify-copy-code-button:active {
+    background-color: var(--global-surface-solid-press);
+    box-shadow: var(--global-surface-solid-inset-ring-press);
+}
+
+pre .docsify-copy-code-button .error,
+pre .docsify-copy-code-button .success {
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: inherit;
+    background: inherit;
+    border-radius: inherit;
+    opacity: 0;
+    transform: none;
+    z-index: 1;
+    transition: var(--global-transition-filter);
+}
+
+pre .docsify-copy-code-button.error .error,
+pre .docsify-copy-code-button.success .success {
+    right: 0;
+    opacity: 1;
+    transform: none;
+}
+
+/* --- Docsify Tabs --- */
+.docsify-tabs .docsify-tabs__tab {
+    border-bottom: var(--global-border-very-strong) var(--global-nav-bar-rest);
+    margin-bottom: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transition: var(--global-transition-color), var(--global-transition-font);
+}
+
+.docsify-tabs .docsify-tabs__tab:not(.docsify-tabs__tab--active):hover {
+    border-bottom-color: var(--global-nav-bar-hover);
+}
+
+.docsify-tabs .docsify-tabs__tab--active {
+    border-bottom-color: var(--global-nav-bar-active);
+    box-shadow: none;
+    color: var(--global-theme-color-normal);
+    font-weight: var(--global-font-weight-very-bold);
+    cursor: default;
+}
+
+.docsify-tabs--material>.docsify-tabs__content {
+    border-color: var(--global-border-color);
+}
+
+/* --- Docsify Pagination --- */
+.docsify-pagination-container .pagination-item a .pagination-item-title {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: var(--global-transition-color);
+}
+
+.docsify-pagination-container .pagination-item a:hover .pagination-item-title {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+.markdown-section .pagination-item:not(:last-child) a .pagination-item-label,
+.markdown-section .pagination-item:not(:last-child) a .pagination-item-subtitle,
+.markdown-section .pagination-item:not(:last-child) a .pagination-item-title {
+    transition: var(--global-transition-color), var(--global-transition-filter);
+}
+
+.markdown-section .docsify-pagination-container {
+    border-top: var(--global-border-normal) var(--global-border-color);
+}
+
+.docsify-pagination-container:not(:has(.pagination-item)) {
+    border-top: 0;
+    margin-top: 2rem;
+}
+
+.docsify-pagination-container .pagination-item {
+    padding: var(--global-focus-outline-offset);
+}
+
+.docsify-pagination-container .pagination-item:has(a[href]) {
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: calc(-1 * var(--global-focus-outline-width));
+    transition: var(--global-transition-color)
+}
+
+.docsify-pagination-container .pagination-item:has(a[href]:focus-visible) {
+    outline-color: var(--global-focus-outline-color);
+}
+
+.docsify-pagination-container .pagination-item a:focus-visible {
+    outline: none;
+}
+
+/* --- Docsify Example Panels --- */
+:root {
+    --docsify-example-panels-document-width: var(--global-content-width);
+}
+
+.docsify-example-panels .left-panel,
+.docsify-example-panels .right-panel {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.markdown-section>:not(blockquote):not(.tip):not(.warn):has(+.docsify-example-panels) {
+    margin-bottom: 0;
+}
+
+.markdown-section>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panels),
+.markdown-section>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panels) :last-child:not(.markdown-section>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panels) :not(:last-child) *) {
+    margin-bottom: 0.8rem;
+}
+
+.docsify-example-panels :last-child:not(.docsify-example-panels :not(:last-child) *):not(blockquote):not(.tip):not(.warn) {
+    margin-bottom: 0;
+}
+
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *),
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *) :last-child:not(.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *) :not(:last-child) *) {
+    margin-bottom: 0.8rem;
+}
+
+.docsify-example-panels>:has(+.docsify-example-panel):not(blockquote):not(.tip):not(.warn),
+.docsify-example-panels>:has(+.docsify-example-panel) :last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *):not(blockquote):not(.tip):not(.warn) {
+    margin-bottom: 0;
+}
+
+.docsify-example-panels>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panel),
+.docsify-example-panels>:has(+.docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *),
+.docsify-example-panels>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panel) :last-child:not(.docsify-example-panels>:is(blockquote, hr, .tip, .warn):has(+.docsify-example-panel) :not(:last-child) *),
+.docsify-example-panels>:has(+.docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *) :last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels>:has(+.docsify-example-panel) :not(:last-child) *) :not(:last-child) *) {
+    margin-bottom: 0.8rem;
+}
+
+
+.markdown-section> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)),
+.markdown-section> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :last-child:not(.markdown-section> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :not(:last-child) *) {
+    margin-bottom: 0;
+}
+
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)),
+.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :last-child:not(.docsify-example-panels :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels :not(:last-child) *):has(+ .docsify-example-panels :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panels :not(:first-child) *)) :not(:last-child) *) {
+    margin-bottom: 0;
+}
+
+.docsify-example-panels> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)),
+.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)),
+.docsify-example-panels> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :last-child:not(.docsify-example-panels> :is(blockquote, hr, .tip, .warn):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :not(:last-child) *),
+.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :last-child:not(.docsify-example-panels> :has(+ .docsify-example-panel) :is(blockquote, hr, .tip, .warn):last-child:not(.docsify-example-panels > :has(+ .docsify-example-panel) :not(:last-child) *):has(+ .docsify-example-panel :is(h1, h2, h3, h4, h5):first-child:not(.docsify-example-panel :not(:first-child) *)) :not(:last-child) *) {
+    margin-bottom: 0;
+}
+
+/* --- Docsify Mermaid --- */
+.mermaid button svg {
+    color: var(--global-theme-color-normal);
+}
+
+/* --- Utils --- */
+body.no-transition,
+body.no-transition *,
+body.no-transition *::before,
+body.no-transition *::after {
+    transition: none !important;
+}

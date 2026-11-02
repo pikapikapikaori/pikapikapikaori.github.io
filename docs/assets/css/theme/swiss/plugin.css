@@ -116,13 +116,15 @@ html pre .docsify-copy-code-button {
     color: var(--sw-on-fill);
     font-size: var(--sw-fs-small);
     transition: var(--global-transition-color), var(--global-transition-filter);
+    border: var(--sw-border-mid);
 }
 
 html pre .docsify-copy-code-button:hover,
 html pre .docsify-copy-code-button:active {
     background: var(--sw-fill-rest);
     color: var(--sw-ink-strong);
-    box-shadow: inset 0 0 0 var(--sw-rule-mid) var(--sw-line-hover);
+    border-color: var(--sw-line-hover);
+    box-shadow: none;
 }
 
 html .mermaid button svg {
@@ -373,6 +375,7 @@ html #gitalk-container .gt-container .gt-btn-public:active {
     background: var(--sw-fill-rest);
     border-color: var(--sw-line-hover);
     color: var(--sw-ink-strong);
+    box-shadow: none;
 }
 
 html #gitalk-container .gt-container a.is--active {

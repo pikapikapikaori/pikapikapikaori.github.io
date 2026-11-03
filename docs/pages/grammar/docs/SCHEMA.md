@@ -103,7 +103,7 @@ const MIGRATIONS = {
 | 步骤 | 文件 | 改动内容 |
 | ---- | ---- | -------- |
 | 1 | `assets/js/config/config.js` | 在 `GRAMMAR_FILES` 末尾追加语言 code `'xx'`。元信息全部写在 `data/language/xx/meta.json`（见手册 §1），`code` 必须唯一。 |
-| 2 | `data/language/xx/` | 新建语言目录，目录名必须与 `code` 一致：`meta.json`（`version`（整数）、`language`（同 `code`）、`name`、`files`、`grammarFiles` 必填）、`grammar/paradigms.json`、`grammar/{章}.json`（一章一个文件，文件名 = 章节 id）。锚点按 `xx-{category}-{item}` 命名且全局唯一，并登记到 `grammarFiles.chapters[].anchors`。 |
+| 2 | `data/language/xx/` | 新建语言目录，目录名必须与 `code` 一致：`meta.json`（`version`（整数）、`language`（同 `code`）、`name`、`files`、`grammarFiles` 必填）、`grammar/paradigms.json`、`grammar/{章}.json`（一章一个文件，文件名 = 章节 id）。没有变格变位表的语言把 `grammarFiles.paradigms` 写 `false`，没有语法页的把 `grammarFiles.chapters` 写 `false`（不要写空数组），并省掉对应文件。锚点按 `xx-{category}-{item}` 命名且全局唯一，并登记到 `grammarFiles.chapters[].anchors`。 |
 | 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: var(--ff-xx); --ff-display: var(--ff-xx); }`。**方向不写在这里**：RTL / 竖排由 `config.js` 的 `BDI_LANGS` / `SCRIPT_POPUP_LANGS` 决定，原文会自动包进 `<bdi dir>`。 |
 | 4 | `assets/css/variables.css` + `fonts.css` | `variables.css` 加 `--ff-xx: "LN XX", var(--ff-ui);`（缺字时回退到界面字体）。`fonts.css` 加 `@font-face`，**只声明该文字的 `unicode-range`**，这样同一段里的说明性中英文会落到界面字体；只声明实际拥有的字重，缺的粗体由浏览器合成。没有专用字体可跳过这一步。 |
 | 5 | `external/js/wiktionary.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |

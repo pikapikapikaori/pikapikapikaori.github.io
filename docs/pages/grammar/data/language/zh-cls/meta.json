@@ -25,8 +25,6 @@
   ],
   "vertical": false,
   "rtl": false,
-  "grammar": false,
-  "paradigm": false,
   "terms": {
     "inflectionType": "用法类型",
     "inflectionTypePlaceholder": "用法类型说明（如：名词作动词）",
@@ -49,7 +47,7 @@
   },
   "files": {},
   "grammarFiles": {
-    "paradigms": "grammar/paradigms.json",
-    "chapters": []
+    "paradigms": false,
+    "chapters": false
   }
 }

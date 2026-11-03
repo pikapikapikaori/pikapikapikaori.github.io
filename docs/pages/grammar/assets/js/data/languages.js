@@ -1,4 +1,5 @@
 import { GRAMMAR_FILES } from '../config/config.js'
+import { grammarFlags } from '../models/grammar.js'
 
 /**
  * 语言元数据：真源是 `data/language/<code>/meta.json`，这里只负责把它们全拉一遍并缓存
@@ -15,6 +16,7 @@ let loading = null
 
 function metaOf(code, doc) {
     const group = doc.group && typeof doc.group === 'object' ? doc.group : {}
+    const flags = grammarFlags(doc)
     return {
         code,
         name: doc.name || code,
@@ -28,8 +30,8 @@ function metaOf(code, doc) {
         order: Number.isFinite(doc.order) ? doc.order : 99,
         vertical: doc.vertical === true,
         rtl: doc.rtl === true,
-        grammar: doc.grammar !== false,
-        paradigm: doc.paradigm !== false,
+        grammar: flags.grammar,
+        paradigm: flags.paradigm,
         terms: doc.terms && typeof doc.terms === 'object' ? doc.terms : {},
         pos: Array.isArray(doc.pos) ? doc.pos : null,
     }
@@ -73,8 +75,17 @@ function checkMeta(code, meta) {
     if (!Number.isInteger(meta.version)) errors.push('`version` 必须是整数')
     if (meta.language !== code) errors.push(`\`language\` 是 "${meta.language}"，与目录名 "${code}" 不一致`)
     if (typeof meta.name !== 'string' || !meta.name) errors.push('缺少 `name`')
-    if (!meta.grammarFiles || typeof meta.grammarFiles !== 'object') errors.push('缺少 `grammarFiles`')
-    else if (!Array.isArray(meta.grammarFiles.chapters)) errors.push('`grammarFiles.chapters` 必须是数组')
+    if (!meta.grammarFiles || typeof meta.grammarFiles !== 'object') {
+        errors.push('缺少 `grammarFiles`')
+    } else {
+        const { chapters, paradigms } = meta.grammarFiles
+        if (chapters !== false && !(Array.isArray(chapters) && chapters.length > 0)) {
+            errors.push('`grammarFiles.chapters` 必须是非空数组或 false')
+        }
+        if (paradigms !== false && (typeof paradigms !== 'string' || !paradigms)) {
+            errors.push('`grammarFiles.paradigms` 必须是路径字符串或 false')
+        }
+    }
     return errors
 }
 

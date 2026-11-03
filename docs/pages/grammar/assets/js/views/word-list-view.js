@@ -255,7 +255,7 @@ export default {
             )
 
             const resetBtn = h('button', {
-                class: 'btn btn--ghost',
+                class: 'btn',
                 type: 'button',
                 onclick: () => {
                     state.q = ''
@@ -284,6 +284,15 @@ export default {
 
         /** 派生词跳转：清掉搜索与筛选后定位到目标词所在页 */
         async function focusDerivative(target) {
+            const filtered = !!state.q.trim() || !!state.pos || state.scope !== 'all'
+
+            // 目标已经在当前这一页：不重画列表，直接滚动 + 换弹窗内容（否则会闪两下）
+            if (!filtered && currentPageIds.includes(target.id)) {
+                scrollToWord(target.id)
+                openDetailFor(target)
+                return
+            }
+
             state.q = ''
             state.scope = 'all'
             state.pos = ''
@@ -296,18 +305,30 @@ export default {
             })
             const index = result.allIds.indexOf(target.id)
             if (index < 0) {
+                closeCardOverlay()
                 await refresh()
                 toast.error(`未找到派生词「${target.lemma}」`)
                 return
             }
 
-            state.page = Math.floor(index / state.pageSize) + 1
-            await refresh()
+            const page = Math.floor(index / state.pageSize) + 1
+            if (page !== state.page) {
+                state.page = page
+                await refresh()
+            } else {
+                renderList(result)
+                renderPagination(result)
+                syncUrl()
+            }
 
-            // 跳到那一页之后直接展开这一词的详情 —— 等价于跳过去再点一下
-            const row = listWrap.querySelector(`.word-row[data-word-id="${target.id}"]`)
-            if (row) row.scrollIntoView({ block: 'center' })
+            // 先定位到那一行，再换弹窗内容 —— 等价于跳过去再点一下
+            scrollToWord(target.id)
             openDetailFor(target)
+        }
+
+        function scrollToWord(id) {
+            const row = listWrap.querySelector(`.word-row[data-word-id="${id}"]`)
+            if (row) row.scrollIntoView({ block: 'center' })
         }
 
         function renderList(result) {
@@ -372,9 +393,10 @@ export default {
                 stemLabel: stemLabelFor(word),
                 resolvePosRef,
                 resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
+                stayOpenOnDerivative: true,
                 onDerivativeClick: (target) => {
-                    closeCardOverlay()
                     focusDerivative(target).catch((err) => {
+                        closeCardOverlay()
                         toast.error(`跳转失败：${err.message}`)
                     })
                 },

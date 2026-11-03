@@ -170,6 +170,18 @@ export function validateGrammarDoc(lang, doc) {
     return { errors, warnings }
 }
 
+/**
+ * 从 meta.json 的 `grammarFiles` 派生「有没有语法页 / 有没有变格变位表」：
+ * 路径写着就是有，写 `false` 就是没有。数据里不再单独存这两个布尔。
+ */
+export function grammarFlags(meta) {
+    const files = (meta && meta.grammarFiles) || {}
+    return {
+        grammar: Array.isArray(files.chapters) && files.chapters.length > 0,
+        paradigm: typeof files.paradigms === 'string' && files.paradigms.length > 0
+    }
+}
+
 export function isGrammarDoc(obj) {
     return obj
     && typeof obj === 'object'

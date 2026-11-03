@@ -352,8 +352,8 @@
         {
           "key": "base",
           "label": "词根",
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         }
       ]
     }
@@ -541,8 +541,8 @@
           "label": "词根",
           "example": "bhū",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "present",
@@ -4176,8 +4176,8 @@
           "label": "词根",
           "example": "dviṣ",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "strong",
@@ -7794,8 +7794,8 @@
           "label": "词根",
           "example": "hu",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "strong",
@@ -11403,8 +11403,8 @@
           "label": "词根",
           "example": "div",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "present",
@@ -14902,8 +14902,8 @@
           "label": "词根",
           "example": "su",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "strong",
@@ -18513,8 +18513,8 @@
           "label": "词根",
           "example": "tud",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "present",
@@ -22012,8 +22012,8 @@
           "label": "词根",
           "example": "rudh",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "strong",
@@ -25629,8 +25629,8 @@
           "label": "词根",
           "example": "tan",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "strong",
@@ -29245,8 +29245,8 @@
           "label": "词根",
           "example": "krī",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "strong",
@@ -32878,8 +32878,8 @@
           "label": "词根",
           "example": "cur",
           "required": true,
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         },
         {
           "key": "present",

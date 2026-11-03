@@ -25,8 +25,6 @@
   ],
   "vertical": true,
   "rtl": false,
-  "grammar": true,
-  "paradigm": true,
   "terms": {
     "inflectionType": "词形类型",
     "inflectionTypePlaceholder": "词形类型说明（如：-sa 型复数）",
@@ -38,7 +36,7 @@
     "extraForms": "补充形式（其他词形）",
     "stems": {
       "label": "词干",
-      "placeholder": "词干，如 ara-",
+      "placeholder": "词干，如 ᠠᡵᠠ-",
       "hint": "接后缀的部分；满语名词的「词干」与单数形式相同。"
     },
     "extraPartsHint": "以下部分可以留空，留空时按所选词形类型的规则推导。",

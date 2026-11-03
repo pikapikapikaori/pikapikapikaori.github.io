@@ -299,6 +299,32 @@
     color: var(--c-danger);
 }
 
+/* 行 hover 时整行底色已经变了，ghost 按钮再 hover 同一色阶看不出反馈：
+ * 让按钮自己升一格到 --c-bg-elev（白）并补一圈边，行 hover 的底色就退到按钮后面 */
+.word-row__actions .btn {
+    color: var(--c-fg-muted);
+    border-color: transparent;
+    background: transparent;
+}
+
+.word-row__actions .btn:not(:disabled):hover {
+    color: var(--c-fg);
+    background: var(--c-bg-elev);
+    border-color: var(--c-border);
+}
+
+.word-row__actions .btn--danger-quiet:not(:disabled):hover,
+.word-row__actions .word-row__delete:not(:disabled):hover {
+    color: var(--c-danger);
+}
+
+.word-row__actions .btn:focus-visible {
+    background: var(--c-bg-elev);
+    border-color: var(--c-border-strong);
+    outline: 2px solid var(--c-accent);
+    outline-offset: 1px;
+}
+
 .split-btn {
     display: inline-flex;
 }
@@ -323,19 +349,53 @@
 
     .word-list__head > span:nth-child(2),
     .word-list__head > span:nth-child(4),
-    .word-row__mastery,
-    .word-row__actions {
+    .word-row__mastery {
         display: none;
     }
 
+    /* 手机上：词形 + 日期在左，编辑 / 删除常显在右；行内操作不再靠 hover 才出现 */
     .word-row {
-        grid-template-columns: minmax(0, 1fr) 92px;
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: var(--sp-3);
-        min-height: 52px;
+        min-height: 56px;
+        padding-top: var(--sp-2);
+        padding-bottom: var(--sp-2);
+    }
+
+    .word-row__main {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .word-row__date {
+        grid-column: 1;
+        grid-row: 2;
+        display: block;
+        padding-top: 2px;
+        font-size: var(--fs-xs);
+        color: var(--c-fg-subtle);
+        white-space: nowrap;
+    }
+
+    .word-row__actions {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: center;
+        opacity: 1;
+        gap: var(--sp-1);
+    }
+
+    .word-row__actions .btn {
+        min-height: 32px;
+        padding: 0 var(--sp-2);
     }
 
     .word-row__lemma {
-        font-size: var(--fs-xl);
+        font-size: var(--fs-lg);
     }
 }
 
@@ -574,21 +634,41 @@
         text-align: left;
     }
 
-    /* 窄屏下只保留「序号 + 内容」两列，显式定位全部取消，按 DOM 顺序往下排 */
+    /* 窄屏：序号 | 内容（竖排），删除按钮绝对定位在第一行右侧，不再被挤到下一行 */
     .word-form__item,
     .word-form__item--meaning,
     .word-form__item--inflection,
     .word-form__item--example {
+        position: relative;
         grid-template-columns: 1.75rem minmax(0, 1fr);
+        align-items: start;
+        column-gap: var(--sp-2);
+        row-gap: var(--sp-2);
+        padding-right: 40px;
     }
 
-    .word-form__item > *:not(.word-form__index) {
+    .word-form__item > *:not(.word-form__index):not(.word-form__cell--remove) {
         grid-column: 2;
         grid-row: auto;
     }
 
-    .word-form__item--example .word-form__cell--remove {
-        align-self: auto;
+    .word-form__item .word-form__cell--remove {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 32px;
+        height: 38px;
+        padding: 0;
+        border-color: transparent;
+        background: transparent;
+        font-size: var(--fs-md);
+    }
+
+    /* 例句的译文 / 含义原本跨列，窄屏回到第 2 列 */
+    .word-form__item--example .word-form__cell--translation,
+    .word-form__item--example .word-form__cell--meaning {
+        grid-column: 2;
+        grid-row: auto;
     }
 }
 

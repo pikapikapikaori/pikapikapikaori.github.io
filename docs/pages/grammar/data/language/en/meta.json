@@ -26,8 +26,6 @@
   ],
   "vertical": false,
   "rtl": false,
-  "grammar": false,
-  "paradigm": false,
   "terms": {
     "inflectionType": "变化类型",
     "inflectionTypePlaceholder": "变化类型说明（如：规则动词 / 不规则动词）",
@@ -50,7 +48,7 @@
   },
   "files": {},
   "grammarFiles": {
-    "paradigms": "grammar/paradigms.json",
-    "chapters": []
+    "paradigms": false,
+    "chapters": false
   }
 }

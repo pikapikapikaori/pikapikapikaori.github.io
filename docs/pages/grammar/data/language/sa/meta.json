@@ -28,8 +28,6 @@
   ],
   "vertical": false,
   "rtl": false,
-  "grammar": true,
-  "paradigm": true,
   "terms": {
     "inflectionType": "变格 / 变位类型",
     "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",
@@ -52,8 +50,8 @@
         "paradigmTitle": "{pos}变位表格",
         "stems": {
           "label": "词根",
-          "placeholder": "词根，如 √bhū",
-          "hint": "填词根，不带 √，如 भू（bhū）。"
+          "placeholder": "词根，如 √भू",
+          "hint": "填词根，不带 √，如 भू。"
         }
       }
     },

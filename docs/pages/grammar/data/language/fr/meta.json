@@ -26,8 +26,6 @@
   ],
   "vertical": false,
   "rtl": false,
-  "grammar": true,
-  "paradigm": true,
   "terms": {
     "inflectionType": "变形 / 变位类型",
     "inflectionTypePlaceholder": "变形 / 变位类型说明（如：第一变位法）",

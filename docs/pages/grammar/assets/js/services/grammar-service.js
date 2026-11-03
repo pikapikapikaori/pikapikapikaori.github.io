@@ -5,7 +5,7 @@
  */
 
 import { GRAMMAR_FILES } from '../config/config.js'
-import { isGrammarDoc, validateGrammarDoc } from '../models/grammar.js'
+import { isGrammarDoc, grammarFlags, validateGrammarDoc } from '../models/grammar.js'
 import { verifyGrammarDoc } from '../models/paradigm-generate.js'
 
 const LANG_BASE = new URL('../../../data/language/', import.meta.url)
@@ -79,11 +79,15 @@ function assemble(meta, paradigms, chapterSections) {
         if (key === 'files' || key === 'grammarFiles') continue
         doc[key] = value
     }
-    const chapters = meta.grammarFiles?.chapters || []
+    const chapters = Array.isArray(meta.grammarFiles?.chapters) ? meta.grammarFiles.chapters : []
+    const flags = grammarFlags(meta)
     doc.groups = chapters.map(({ id, title }) => ({ id, title }))
     doc.paradigms = paradigms || {}
     doc.sections = chapterSections.flatMap(({ id, sections }) =>
         sections.map((section) => ({ ...section, group: id })))
+    // 派生值：数据里不存这两个布尔，视图与校验照旧读 doc.grammar / doc.paradigm
+    doc.grammar = flags.grammar
+    doc.paradigm = flags.paradigm
     return doc
 }
 
@@ -105,12 +109,12 @@ export async function loadGrammar(language) {
     const p = (async () => {
         const meta = await loadGrammarMeta(language)
         if (!meta) return null
-        if (meta.grammar === false) return null
+        if (!grammarFlags(meta).grammar) return null
 
-        const chapters = meta.grammarFiles?.chapters || []
+        const chapters = meta.grammarFiles.chapters
+        const paradigmPath = meta.grammarFiles.paradigms
         const [paradigms, ...sectionLists] = await Promise.all([
-            fetchJSON(langUrl(language, meta.grammarFiles?.paradigms || 'grammar/paradigms.json'))
-                .catch(() => null),
+            paradigmPath === false ? null : fetchJSON(langUrl(language, paradigmPath)).catch(() => null),
             ...chapters.map((chapter) => loadChapter(language, chapter.id))
         ])
 
@@ -142,12 +146,12 @@ export async function loadGrammar(language) {
  */
 export async function loadGrammarForChapter(language, chapterId) {
     const meta = await loadGrammarMeta(language)
-    if (!meta || meta.grammar === false) return null
-    const chapters = meta.grammarFiles?.chapters || []
+    if (!meta || !grammarFlags(meta).grammar) return null
+    const chapters = meta.grammarFiles.chapters
     if (!chapterId || chapters.length <= 1) return loadGrammar(language)
 
     const [paradigms, sections] = await Promise.all([
-        fetchJSON(langUrl(language, meta.grammarFiles?.paradigms || 'grammar/paradigms.json')).catch(() => null),
+        fetchJSON(langUrl(language, meta.grammarFiles.paradigms)).catch(() => null),
         loadChapter(language, chapterId)
     ])
     const doc = assemble(meta, paradigms, [{ id: chapterId, sections }])
@@ -274,13 +278,16 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
             if (!meta) throw new Error('HTTP 404')
             item.name = typeof meta?.name === 'string' ? meta.name : ''
 
-            const chapters = meta.grammarFiles?.chapters || []
+            const files = meta.grammarFiles || {}
+            const chapters = Array.isArray(files.chapters) ? files.chapters : []
             const [paradigms, ...sectionLists] = await Promise.all([
-                fetchJSON(langUrl(code, meta.grammarFiles?.paradigms || 'grammar/paradigms.json'))
-                    .catch((err) => {
-                        item.structure.errors.push(`paradigms 读取失败：${err.message}`)
-                        return null
-                    }),
+                files.paradigms === false
+                    ? null
+                    : fetchJSON(langUrl(code, files.paradigms))
+                        .catch((err) => {
+                            item.structure.errors.push(`paradigms 读取失败：${err.message}`)
+                            return null
+                        }),
                 ...chapters.map((chapter) => fetchJSON(langUrl(code, chapter.file))
                     .catch((err) => {
                         item.structure.errors.push(`${chapter.file} 读取失败：${err.message}`)
@@ -299,8 +306,11 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
                 if (list === null) continue
                 if (!Array.isArray(list)) item.structure.errors.push(`${chapters[i].file} 不是数组`)
             }
-            if (chapters.length === 0 && (meta.grammar !== false)) {
-                item.structure.warnings.push('没有登记任何章节（grammarFiles.chapters 为空）')
+            if (Array.isArray(files.chapters) && files.chapters.length === 0) {
+                item.structure.warnings.push('`grammarFiles.chapters` 写成了空数组；没有语法页请写 false')
+            }
+            if (files.paradigms !== false && typeof files.paradigms !== 'string') {
+                item.structure.errors.push('`grammarFiles.paradigms` 必须是路径字符串或 false')
             }
 
             let profile = null

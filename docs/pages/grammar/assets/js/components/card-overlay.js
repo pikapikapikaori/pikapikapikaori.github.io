@@ -24,6 +24,8 @@ export function openCardOverlay(word, opts = {}) {
     const resolvePosRef = opts.resolvePosRef || null
     const posGrammarRef = typeof resolvePosRef === 'function' ? resolvePosRef(word.pos) : null
     const onDerivativeClick = opts.onDerivativeClick || null
+    // 跳到派生词时先不关：等新卡片直接替换旧卡片，中间不出现空白
+    const stayOpenOnDerivative = opts.stayOpenOnDerivative === true
     const onClose = opts.onClose || null
 
     const sources = allSources(word)
@@ -67,9 +69,9 @@ export function openCardOverlay(word, opts = {}) {
         if (typeof onGrammarRef === 'function') onGrammarRef(ref)
     }
 
-    /** 同上，跳转前关闭 overlay */
+    /** 跳转前关闭 overlay（stayOpenOnDerivative 时交给调用方用新卡片替换） */
     function wrappedDerivativeClick(target) {
-        close()
+        if (!stayOpenOnDerivative) close()
         if (typeof onDerivativeClick === 'function') onDerivativeClick(target)
     }
 

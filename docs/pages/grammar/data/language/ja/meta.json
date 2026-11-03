@@ -24,8 +24,6 @@
   ],
   "vertical": false,
   "rtl": false,
-  "grammar": true,
-  "paradigm": true,
   "terms": {
     "inflectionType": "活用类型",
     "inflectionTypePlaceholder": "活用类型说明（如：五段活用）",

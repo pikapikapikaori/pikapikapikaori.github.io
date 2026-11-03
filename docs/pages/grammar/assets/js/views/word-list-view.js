@@ -160,8 +160,6 @@ export default {
         function doImport() {
             openImportWordsModal({
                 userId,
-                defaultLanguage: lang,
-                grammarDoc,
                 title: `导入生词 · ${language.name}`,
                 onDone: async (stats) => {
                     if (stats.created > 0 || stats.merged > 0) {
@@ -305,6 +303,11 @@ export default {
 
             state.page = Math.floor(index / state.pageSize) + 1
             await refresh()
+
+            // 跳到那一页之后直接展开这一词的详情 —— 等价于跳过去再点一下
+            const row = listWrap.querySelector(`.word-row[data-word-id="${target.id}"]`)
+            if (row) row.scrollIntoView({ block: 'center' })
+            openDetailFor(target)
         }
 
         function renderList(result) {
@@ -360,6 +363,28 @@ export default {
             )
         }
 
+        /** 打开词卡详情：列表行点击与派生词跳转共用 */
+        function openDetailFor(word) {
+            openCardOverlay(word, {
+                language: lang,
+                paradigmTpl: paradigmTplFor(word.pos),
+                partLabels: partLabelsFor(word),
+                stemLabel: stemLabelFor(word),
+                resolvePosRef,
+                resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
+                onDerivativeClick: (target) => {
+                    closeCardOverlay()
+                    focusDerivative(target).catch((err) => {
+                        toast.error(`跳转失败：${err.message}`)
+                    })
+                },
+                onGrammarRef: (ref) => {
+                    closeCardOverlay()
+                    location.hash = `#/grammar/${lang}#${ref}`
+                }
+            })
+        }
+
         /** 一行一个词：只给词形、掌握度、时间。含义要打开词卡才看得到。 */
         function renderRow(w) {
             const row = h('div', {
@@ -367,12 +392,12 @@ export default {
                 dataset: { wordId: w.id },
                 role: 'button',
                 tabindex: '0',
-                onclick: openDetail,
+                onclick: () => openDetailFor(w),
                 onkeydown: (e) => {
                     if (e.target !== row) return
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault()
-                        openDetail()
+                        openDetailFor(w)
                     }
                 }
             },
@@ -403,27 +428,6 @@ export default {
                 }, '删除')
             )
             )
-
-            function openDetail() {
-                openCardOverlay(w, {
-                    language: lang,
-                    paradigmTpl: paradigmTplFor(w.pos),
-                    partLabels: partLabelsFor(w),
-                    stemLabel: stemLabelFor(w),
-                    resolvePosRef,
-                    resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
-                    onDerivativeClick: (target) => {
-                        closeCardOverlay()
-                        focusDerivative(target).catch((err) => {
-                            toast.error(`跳转失败：${err.message}`)
-                        })
-                    },
-                    onGrammarRef: (ref) => {
-                        closeCardOverlay()
-                        location.hash = `#/grammar/${lang}#${ref}`
-                    }
-                })
-            }
 
             return row
         }

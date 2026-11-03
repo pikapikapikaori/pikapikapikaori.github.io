@@ -326,11 +326,6 @@ export function fieldDefsOfTemplate(tpl, pos) {
     }]
 }
 
-/** 该词性的「用于筛选变化表格子」的字段（通常是语法性），没有则返回 null */
-export function getDeclensionField(doc, pos) {
-    return getFieldDefs(doc, pos).find((f) => f.declensionCells) || null
-}
-
 /** 词条里某个字段的取值（统一成数组） */
 export function fieldValues(word, key) {
     const raw = word && word.attributes ? word.attributes[key] : null
@@ -454,24 +449,3 @@ export function stemLabelOf(doc, ref, pos) {
     return label || '词干'
 }
 
-/** 表格 id → 表模板 */
-export function indexParadigmTables(tpl) {
-    const map = new Map()
-    if (!tpl || !Array.isArray(tpl.tables)) return map
-    for (const t of tpl.tables) {
-        if (t && typeof t.key === 'string') map.set(t.key, t)
-    }
-    return map
-}
-
-/** 行 id → 行模板（合并所有表） */
-export function indexParadigmRows(tpl) {
-    const map = new Map()
-    if (!tpl || !Array.isArray(tpl.tables)) return map
-    for (const t of tpl.tables) {
-        for (const r of t.rows || []) {
-            if (r && typeof r.key === 'string') map.set(r.key, r)
-        }
-    }
-    return map
-}

@@ -8,6 +8,7 @@ import { createEmptyUser, importUser } from '../services/import-export-service.j
 import { setUser, setSettings } from '../app-state.js'
 import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
+import { createJsonInput } from '../components/json-input.js'
 import { formatDate } from '../utils/date.js'
 import { LS_KEYS } from '../config/config.js'
 
@@ -162,32 +163,61 @@ const welcomeView = {
         }
 
         function doPasteImport() {
-            const textarea = h('textarea', {
-                class: 'textarea',
+            const schemaBtn = h('button', {
+                class: 'btn btn--sm',
+                type: 'button',
+                title: '查看 JSON 的数据格式',
+                onclick: () => {
+                    close()
+                    location.hash = '#/schema/export'
+                }
+            }, '数据格式')
+
+            const input = createJsonInput({
+                label: '上传或粘贴 JSON',
                 placeholder: '把用户 JSON 粘贴到这里…',
-                style: { minHeight: '220px', fontSize: 'var(--fs-sm)' }
+                actions: [schemaBtn],
+                validate: (text) => {
+                    try {
+                        JSON.parse(text)
+                        return { message: 'JSON 格式正确' }
+                    } catch (err) {
+                        return { error: `JSON 解析失败：${err.message}` }
+                    }
+                }
             })
 
-            openModal({
-                title: '粘贴 JSON 导入',
-                body: textarea,
+            const close = openModal({
+                title: '导入用户 JSON',
+                body: h('div', { class: 'import-words-body' },
+                    input.el,
+                    h('div', { class: 'field__hint' },
+                        '文件格式为 { version, kind: "langnotebook-user", user, settings, words }。',
+                        '导入会新建一个用户，不会覆盖已有用户。'
+                    )
+                ),
                 actions: [
                     { label: '取消' },
                     {
                         label: '导入',
                         className: 'btn--primary',
                         onClick: async () => {
-                            const text = textarea.value.trim()
+                            const text = input.getValue()
                             if (!text) {
                                 toast.error('内容为空')
-                                throw new Error('empty')
+                                return false
                             }
-                            const { user, stats } = await importUser(text, { mode: 'new' })
-                            toast.success(
-                                `已导入「${user.name}」：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`,
-                                5000
-                            )
-                            await enterUser(user.id)
+                            try {
+                                const { user, stats } = await importUser(text, { mode: 'new' })
+                                toast.success(
+                                    `已导入「${user.name}」：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`,
+                                    5000
+                                )
+                                await enterUser(user.id)
+                            } catch (err) {
+                                toast.error(`导入失败：${err.message}`, 6000)
+                                return false
+                            }
                         }
                     }
                 ]

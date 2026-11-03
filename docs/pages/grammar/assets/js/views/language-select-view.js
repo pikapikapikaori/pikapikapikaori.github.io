@@ -4,6 +4,8 @@ import { h, replace } from '../utils/dom.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { appStore } from '../app-state.js'
 import { listAll } from '../store/word-store.js'
+import { deleteUser } from '../store/user-store.js'
+import { clearHttpCache } from '../store/http-cache.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
 import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
 import { formatRelative } from '../utils/date.js'
@@ -60,6 +62,10 @@ export default {
                     )
                 ),
                 h('div', { class: 'page-head__actions' },
+                    h('button', {
+                        class: 'btn', type: 'button',
+                        onclick: () => { location.hash = '#/schema' }
+                    }, '数据格式'),
                     h('button', {
                         class: 'btn', type: 'button',
                         onclick: () => doExport()
@@ -325,22 +331,6 @@ export default {
             }
         }
 
-        function doImport() {
-            import('../components/import-words-modal.js').then(({ openImportWordsModal }) => {
-                openImportWordsModal({
-                    userId,
-                    defaultLanguage: '',
-                    grammarDoc: null,
-                    title: '导入生词',
-                    onDone: async (stats) => {
-                        if (stats.created > 0 || stats.merged > 0) {
-                            setTimeout(() => location.reload(), 800)
-                        }
-                    }
-                })
-            })
-        }
-
         async function doClearAll() {
             const ok = await confirmModal({
                 title: '清空数据',
@@ -350,10 +340,11 @@ export default {
             })
             if (!ok) return
             try {
-                const { deleteUser } = await import('../store/user-store.js')
                 await deleteUser(userId)
                 try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
                 appStore.set({ user: null, userId: null, settings: null })
+                // 外部源的 HTTP 响应缓存也是这份数据的一部分
+                clearHttpCache().catch((err) => console.warn('[http-cache] 清理失败', err))
                 location.hash = '#/welcome'
             } catch (err) {
                 toast.error(`清空失败：${err.message}`)

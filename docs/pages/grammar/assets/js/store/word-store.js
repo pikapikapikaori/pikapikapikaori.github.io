@@ -193,10 +193,6 @@ export async function deleteAllInLanguage(userId, language) {
     await removeByIndex(STORE_WORDS, 'userId_language', [userId, language])
 }
 
-export async function deleteAllOfUser(userId) {
-    await removeByIndex(STORE_WORDS, 'userId', userId)
-}
-
 export async function recordReview(id, { correct }) {
     const cur = await getWord(id)
     if (!cur) return null

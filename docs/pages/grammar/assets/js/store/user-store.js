@@ -44,19 +44,4 @@ export async function deleteUser(id) {
     }
 }
 
-export async function purgeUser(id) {
-    await deleteUser(id)
-}
-
-export async function countWords(id) {
-    const list = await getAllByIndex(STORE_WORDS, 'userId', id)
-    return list.length
-}
-
-/** 内部：只清 settings，保留用户 */
-export async function clearUserSettings(id) {
-    if (!id) return
-    await remove(STORE_SETTINGS, id)
-}
-
 export { clearStore }

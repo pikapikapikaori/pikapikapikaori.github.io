@@ -50,13 +50,6 @@ export function formatDate(iso) {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
-export function formatDateTime(iso) {
-    const d = parseIso(iso)
-    if (!d) return ''
-    const pad = (n) => String(n).padStart(2, '0')
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`
-}
-
 export function formatRelative(iso) {
     const d = parseIso(iso)
     if (!d) return ''
@@ -71,11 +64,3 @@ export function formatRelative(iso) {
     return formatDate(iso)
 }
 
-export function isToday(iso) {
-    const d = parseIso(iso)
-    if (!d) return false
-    const n = new Date()
-    return d.getFullYear() === n.getFullYear()
-      && d.getMonth() === n.getMonth()
-      && d.getDate() === n.getDate()
-}

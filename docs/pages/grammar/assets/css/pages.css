@@ -1387,3 +1387,221 @@
 .lang-card--drop-target {
     background: var(--c-accent-soft);
 }
+
+/* ---------- 数据格式（/schema，结构与语法页共用 .grammar-*） ---------- */
+.doc-body {
+    font-size: var(--fs-md);
+    line-height: var(--lh-base);
+    color: var(--c-fg);
+}
+
+.doc-heading {
+    max-width: 42em;
+    scroll-margin-top: calc(var(--h-header) + var(--sp-4));
+}
+
+.doc-body .doc-heading[data-level="2"] {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: -.005em;
+    margin: var(--sp-6) 0 var(--sp-3);
+}
+
+.doc-body .doc-heading[data-level="3"] {
+    font-size: var(--fs-md);
+    font-weight: 600;
+    margin: var(--sp-5) 0 var(--sp-2);
+}
+
+.doc-body .doc-heading[data-level="4"],
+.doc-body .doc-heading[data-level="5"] {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-fg-muted);
+    margin: var(--sp-4) 0 var(--sp-2);
+}
+
+.doc-body > .doc-heading:first-child {
+    margin-top: 0;
+}
+
+.doc-p {
+    max-width: 42em;
+    margin: var(--sp-3) 0;
+}
+
+.doc-list {
+    max-width: 42em;
+    margin: var(--sp-3) 0;
+    padding-left: 1.5em;
+}
+
+.doc-list > li {
+    margin: var(--sp-1) 0;
+}
+
+.doc-list > li > .doc-list {
+    margin: var(--sp-1) 0;
+}
+
+/* 结论条：全篇只有这一处朱红，和「当前篇」的标记呼应 */
+.doc-quote {
+    max-width: 42em;
+    margin: var(--sp-5) 0;
+    padding-left: var(--sp-4);
+    border-left: 3px solid var(--c-accent);
+    color: var(--c-fg);
+}
+
+.doc-quote > p {
+    margin: 0;
+}
+
+.doc-quote--lead {
+    max-width: none;
+    margin: 0 0 var(--sp-5);
+}
+
+.doc-quote--lead > p {
+    max-width: 42em;
+}
+
+.doc-code {
+    margin: var(--sp-4) 0;
+    padding: var(--sp-3) var(--sp-4);
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    overflow-x: auto;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+}
+
+.doc-code > code {
+    font: inherit;
+    white-space: pre;
+}
+
+.doc-inline-code {
+    padding: 0 .3em;
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    font-family: var(--ff-mono);
+    font-size: .92em;
+}
+
+.doc-table-wrap {
+    margin: var(--sp-4) 0;
+    overflow-x: auto;
+}
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+}
+
+.doc-table th {
+    padding: var(--sp-2) var(--sp-4) var(--sp-2) 0;
+    border-bottom: 1px solid var(--c-border);
+    color: var(--c-fg-muted);
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.doc-table td {
+    padding: var(--sp-2) var(--sp-4) var(--sp-2) 0;
+    border-bottom: 1px solid var(--c-rule);
+    vertical-align: top;
+}
+
+.doc-table th:last-child,
+.doc-table td:last-child {
+    padding-right: 0;
+}
+
+.doc-cell--right {
+    text-align: right;
+}
+
+.doc-cell--center {
+    text-align: center;
+}
+
+.doc-link {
+    color: var(--c-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.doc-link--plain {
+    color: inherit;
+    text-decoration: none;
+}
+
+.doc-rule {
+    margin: var(--sp-5) 0;
+    border: 0;
+    border-top: 1px solid var(--c-rule);
+}
+
+.doc-pager {
+    display: flex;
+    max-width: 42em;
+    gap: var(--sp-4);
+    margin: var(--sp-7) 0 var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--c-border);
+}
+
+.doc-pager__link {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    color: var(--c-fg);
+    text-decoration: none;
+}
+
+.doc-pager__link--next {
+    margin-left: auto;
+    text-align: right;
+}
+
+.doc-pager__dir {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-muted);
+}
+
+.doc-pager__title {
+    font-weight: 600;
+}
+
+.doc-pager__link:hover .doc-pager__title,
+.doc-pager__link:focus-visible .doc-pager__title {
+    color: var(--c-accent);
+}
+
+/* 窄屏：长代码换行，而不是横向滚动 */
+@media (max-width: 720px) {
+    .schema-head h1.page-head__title {
+        font-size: var(--fs-xl);
+    }
+
+    .doc-code > code {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 1024px) {
+    .doc-heading {
+        scroll-margin-top: calc(var(--h-header) + 84px);
+    }
+
+    .doc-body .doc-heading[data-level="2"] {
+        font-size: var(--fs-md);
+    }
+}

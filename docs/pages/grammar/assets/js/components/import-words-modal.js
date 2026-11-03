@@ -1,162 +1,48 @@
 /** 批量导入生词模态框 */
 
-import { h, svg } from '../utils/dom.js'
+import { h } from '../utils/dom.js'
 import { openModal } from './modal.js'
 import { toast } from './toast.js'
-import {
-    parseWordJson, importWords, previewWords, downloadPrompt
-} from '../services/import-words-service.js'
+import { createJsonInput } from './json-input.js'
+import { parseWordJson, importWords, previewWords } from '../services/import-words-service.js'
 
-/** @param {object} opts userId / defaultLanguage（为空时禁用下载提示词）/ grammarDoc / onDone(stats) / title */
+/** @param {object} opts userId / onDone(stats) / title */
 export function openImportWordsModal({
     userId,
-    defaultLanguage = '',
-    grammarDoc = null,
     onDone = null,
     title = '批量导入生词'
 } = {}) {
 
     /* ---------- 表单 ---------- */
 
-    const textarea = h('textarea', {
-        class: 'textarea',
-        placeholder: '把 JSON 粘贴到这里…',
-        style: {
-            minHeight: '220px',
-            fontSize: 'var(--fs-sm)'
-        }
-    })
-
-    async function loadFile(file) {
-        try {
-            const text = await file.text()
-            textarea.value = text
-            updateCount()
-            toast.success(`已载入 ${file.name}`, 2400)
-        } catch (err) {
-            toast.error(`读取文件失败：${err.message}`)
-        }
-    }
-
-    const fileInput = h('input', {
-        type: 'file',
-        accept: '.json,application/json',
-        hidden: true,
-        onchange: async (e) => {
-            const f = e.target.files && e.target.files[0]
-            e.target.value = ''
-            if (f) await loadFile(f)
-        }
-    })
-
-    const dropzone = h('div', {
-        class: 'dropzone',
-        role: 'button',
-        tabindex: '0',
-        title: '点击选择文件，或把 JSON 文件拖到这里',
-        onclick: () => fileInput.click(),
-        onkeydown: (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                fileInput.click()
-            }
-        },
-        ondragenter: (e) => {
-            e.preventDefault()
-            dropzone.classList.add('dropzone--active')
-        },
-        ondragover: (e) => {
-            e.preventDefault()
-            dropzone.classList.add('dropzone--active')
-        },
-        ondragleave: (e) => {
-            if (!dropzone.contains(e.relatedTarget)) {
-                dropzone.classList.remove('dropzone--active')
-            }
-        },
-        ondrop: async (e) => {
-            e.preventDefault()
-            dropzone.classList.remove('dropzone--active')
-            const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]
-            if (f) await loadFile(f)
-        }
-    },
-    h('span', { class: 'dropzone__icon' },
-        svg('svg', {
-            viewBox: '0 0 24 24',
-            width: '28',
-            height: '28',
-            fill: 'none',
-            stroke: 'currentColor',
-            'stroke-width': '1.6',
-            'stroke-linecap': 'round',
-            'stroke-linejoin': 'round',
-            'aria-hidden': 'true'
-        },
-        svg('path', { d: 'M12 16V4' }),
-        svg('path', { d: 'm7 9 5-5 5 5' }),
-        svg('path', { d: 'M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2' })
-        )
-    ),
-    h('span', { class: 'dropzone__title' }, '拖拽 JSON 文件到这里'),
-    h('span', { class: 'dropzone__hint' }, '或点击选择文件 · 支持 .json')
-    )
-
-    const countEl = h('div', { class: 'field__hint' }, '')
-
     const previewEl = h('div', { class: 'import-preview', hidden: true })
 
-    function updateCount() {
-        const v = textarea.value
-        // 内容变了，之前的预览结果就作废了
-        previewEl.hidden = true
-        previewEl.replaceChildren()
-        if (!v.trim()) {
-            countEl.textContent = ''
-            countEl.style.color = ''
-            return
-        }
-        const { words, error } = parseWordJson(v)
-        if (error) {
-            countEl.textContent = `⚠ ${error}`
-            countEl.style.color = 'var(--c-danger)'
-            return
-        }
-        countEl.textContent = `已识别 ${words.length} 条`
-        countEl.style.color = ''
-    }
-
-    textarea.addEventListener('input', updateCount)
-
-    const downloadBtn = h('button', {
+    const schemaBtn = h('button', {
         class: 'btn btn--sm',
         type: 'button',
-        disabled: !defaultLanguage,
-        title: defaultLanguage ? '下载提示词' : '请先进入具体语言再下载提示词',
+        title: '查看 JSON 的数据格式',
         onclick: () => {
-            if (!defaultLanguage) return
-            try {
-                const name = downloadPrompt(defaultLanguage, grammarDoc)
-                toast.success(`已下载 ${name}`, 3000)
-            } catch (err) {
-                toast.error(`生成提示词失败：${err.message}`)
-            }
+            close()
+            location.hash = '#/schema/word'
         }
-    }, '下载提示词')
+    }, '数据格式')
 
-    const headActions = h('div', { class: 'import-words-head__actions' }, downloadBtn)
+    const input = createJsonInput({
+        placeholder: '把 JSON 粘贴到这里…',
+        actions: [schemaBtn],
+        validate: (text) => {
+            const { words, error } = parseWordJson(text)
+            return error ? { error } : { message: `已识别 ${words.length} 条` }
+        },
+        // 内容变了，之前的预览结果就作废
+        onChange: () => {
+            previewEl.hidden = true
+            previewEl.replaceChildren()
+        }
+    })
 
     const body = h('div', { class: 'import-words-body' },
-        h('div', { class: 'field import-words-field' },
-            h('div', { class: 'import-words-head' },
-                h('span', { class: 'field__label' }, '上传或粘贴 JSON'),
-                headActions
-            ),
-            dropzone,
-            fileInput,
-            textarea,
-            countEl
-        ),
+        input.el,
         previewEl,
         h('div', { class: 'field__hint' },
             '支持「单对象 / 数组 / { words: [...] }」三种格式。',
@@ -171,7 +57,7 @@ export function openImportWordsModal({
     let previewing = false
 
     function readWords() {
-        const { words, error } = parseWordJson(textarea.value.trim())
+        const { words, error } = parseWordJson(input.getValue())
         if (error) {
             toast.error(error, 5000)
             return null

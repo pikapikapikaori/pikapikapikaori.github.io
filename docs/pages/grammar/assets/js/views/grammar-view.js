@@ -305,6 +305,27 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         }
     }
 
+    /* ---------- 篇尾翻页：按章节 ---------- */
+    if (groups) {
+        const gi = groups.findIndex((g) => g.id === current)
+        const prevGroup = gi > 0 ? groups[gi - 1] : null
+        const nextGroup = gi >= 0 && gi < groups.length - 1 ? groups[gi + 1] : null
+        if (prevGroup || nextGroup) {
+            content.appendChild(h('nav', { class: 'doc-pager', 'aria-label': '章节翻页' },
+                prevGroup
+                    ? h('a', { class: 'doc-pager__link', href: `#/grammar/${lang}/${prevGroup.id}` },
+                        h('span', { class: 'doc-pager__dir' }, '上一章'),
+                        h('span', { class: 'doc-pager__title' }, prevGroup.title))
+                    : null,
+                nextGroup
+                    ? h('a', { class: 'doc-pager__link doc-pager__link--next', href: `#/grammar/${lang}/${nextGroup.id}` },
+                        h('span', { class: 'doc-pager__dir' }, '下一章'),
+                        h('span', { class: 'doc-pager__title' }, nextGroup.title))
+                    : null
+            ))
+        }
+    }
+
     replace(main,
         h('div', { class: 'page-head' },
             h('div', {},

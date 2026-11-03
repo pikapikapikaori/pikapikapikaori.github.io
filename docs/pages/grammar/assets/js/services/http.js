@@ -200,19 +200,3 @@ export async function requestJSON(url, options = {}) {
     return data
 }
 
-export async function requestText(url, options = {}) {
-    const opts = normalizeOptions(options)
-    const full = buildUrl(url, opts.query)
-    const key = opts.cacheTtl > 0 ? cacheKey(full) : ''
-
-    const cached = await readCached(key, 'text')
-    if (cached != null) return cached
-
-    const text = await request(full, {
-        ...opts,
-        parse: async (res) => res.text()
-    })
-
-    if (key) await writeCache(key, { url: full, type: 'text', body: text, ttl: opts.cacheTtl })
-    return text
-}

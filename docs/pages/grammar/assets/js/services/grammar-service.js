@@ -1,7 +1,7 @@
 /** 语法数据加载（只读），数据位于 /data/grammar/{lang}.json */
 
 import { GRAMMAR_FILES } from '../config/config.js'
-import { isGrammarDoc, indexGrammar, collectIds, validateGrammarDoc } from '../models/grammar.js'
+import { isGrammarDoc, validateGrammarDoc } from '../models/grammar.js'
 import { verifyGrammarDoc } from '../models/paradigm-generate.js'
 
 const cache = new Map()     // lang -> doc
@@ -43,33 +43,6 @@ export async function loadGrammar(language) {
 
     pending.set(language, p)
     return p
-}
-
-export async function hasGrammar(language) {
-    const doc = await loadGrammar(language)
-    return !!doc
-}
-
-export async function getIndex(language) {
-    const doc = await loadGrammar(language)
-    return indexGrammar(doc)
-}
-
-export async function getIds(language) {
-    const doc = await loadGrammar(language)
-    return collectIds(doc)
-}
-
-/**
- * 校验并规范化 grammarRef：语法文件不存在 → 原样返回（UI 当普通文本处理）；文件存在但 id 不存在 → 返回 null
- */
-export async function resolveRef(language, ref) {
-    if (!ref) return { ok: false, ref: null, reason: 'empty' }
-    const doc = await loadGrammar(language)
-    if (!doc) return { ok: false, ref, reason: 'no-grammar' }
-    const ids = collectIds(doc)
-    if (!ids.has(ref)) return { ok: false, ref, reason: 'not-found' }
-    return { ok: true, ref, reason: 'ok' }
 }
 
 /* ---------- 语言档案（derive 的语言专属后期处理） ---------- */
@@ -150,11 +123,6 @@ export function clearCache(language) {
     else cache.clear()
 }
 
-/** 批量预加载 */
-export async function preload(languages) {
-    await Promise.all(languages.map((l) => loadGrammar(l)))
-}
-
 /**
  * 逐个语言跑「结构校验 + derive 自检」，供设置页的「校验语法 JSON」按钮用。
  *
@@ -168,13 +136,13 @@ export async function preload(languages) {
  *   derive: { specs, checked, errors, warnings, skipped? }
  * }>>}
  */
-export async function verifyGrammarFiles({ onProgress = null } = {}) {
-    const codes = [...GRAMMAR_FILES]
+export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FILES } = {}) {
+    const list = [...codes]
     const out = []
 
-    for (let i = 0; i < codes.length; i++) {
-        const code = codes[i]
-        if (typeof onProgress === 'function') onProgress(i, codes.length, code)
+    for (let i = 0; i < list.length; i++) {
+        const code = list[i]
+        if (typeof onProgress === 'function') onProgress(i, list.length, code)
 
         const item = {
             code,
@@ -227,13 +195,10 @@ export {
     getFieldDefs,
     termsOf,
     fillTerms,
-    getDeclensionField,
     fieldDefsOfTemplate,
     fieldValues,
     genderOfColumn,
     genderOfRow,
     collectInflectAnchors,
-    stemLabelOf,
-    indexParadigmTables,
-    indexParadigmRows
+    stemLabelOf
 } from '../models/grammar.js'

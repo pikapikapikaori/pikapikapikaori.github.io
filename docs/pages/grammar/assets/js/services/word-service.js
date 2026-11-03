@@ -185,14 +185,6 @@ export async function editWord(id, patch) {
     return updateWord(id, patch)
 }
 
-export async function removeWord(id) {
-    return deleteWord(id)
-}
-
-export async function clearLanguage(userId, language) {
-    return deleteAllInLanguage(userId, language)
-}
-
 export async function submitReview(id, correct) {
     return recordReview(id, { correct })
 }
@@ -224,16 +216,4 @@ export async function languageStats(userId, language) {
 }
 
 /** 聚合所有语言统计（用于语言选择页） */
-export async function allLanguageStats(userId, languages, byLang) {
-    const out = {}
-    for (const lang of languages) {
-        if (byLang && byLang[lang.code]) {
-            out[lang.code] = byLang[lang.code]
-            continue
-        }
-        out[lang.code] = await languageStats(userId, lang.code)
-    }
-    return out
-}
-
 export { posLabel }

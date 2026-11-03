@@ -1,4 +1,4 @@
-import { STORE_SETTINGS, put, get, remove } from './db.js'
+import { STORE_SETTINGS, put, get } from './db.js'
 import { LANGUAGES } from '../data/languages.js'
 import { DEFAULT_SETTINGS } from '../config/config.js'
 
@@ -45,7 +45,3 @@ export async function saveSettings(userId, patch) {
     return next
 }
 
-export async function resetSettings(userId) {
-    if (!userId) return
-    await remove(STORE_SETTINGS, userId)
-}

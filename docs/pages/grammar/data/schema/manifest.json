@@ -1,0 +1,29 @@
+{
+  "title": "数据格式",
+  "docs": [
+    {
+      "id": "word",
+      "order": 1,
+      "title": "Word 与多源合并策略",
+      "file": "word.json"
+    },
+    {
+      "id": "language",
+      "order": 2,
+      "title": "语言数据手册",
+      "file": "language.json"
+    },
+    {
+      "id": "export",
+      "order": 3,
+      "title": "用户导出 / 导入 JSON",
+      "file": "export.json"
+    },
+    {
+      "id": "storage",
+      "order": 4,
+      "title": "IndexedDB 对象存储",
+      "file": "storage.json"
+    }
+  ]
+}

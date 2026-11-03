@@ -99,17 +99,6 @@ export async function put(storeName, value) {
     return withStore(storeName, 'readwrite', (s) => reqToPromise(s.put(value)))
 }
 
-export async function bulkPut(storeName, values) {
-    return withStore(storeName, 'readwrite', (s, tx) => {
-        for (const v of values) s.put(v)
-        return new Promise((resolve, reject) => {
-            tx.oncomplete = () => resolve(values.length)
-            tx.onerror = () => reject(tx.error)
-            tx.onabort = () => reject(tx.error)
-        })
-    })
-}
-
 export async function get(storeName, key) {
     return withStore(storeName, 'readonly', (s) => reqToPromise(s.get(key)))
 }
@@ -129,13 +118,6 @@ export async function getOneByIndex(storeName, indexName, query) {
     return withStore(storeName, 'readonly', (s) => {
         const idx = s.index(indexName)
         return reqToPromise(idx.get(query))
-    })
-}
-
-export async function countByIndex(storeName, indexName, query) {
-    return withStore(storeName, 'readonly', (s) => {
-        const idx = s.index(indexName)
-        return reqToPromise(idx.count(query))
     })
 }
 

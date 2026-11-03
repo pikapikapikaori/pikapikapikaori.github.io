@@ -58,15 +58,6 @@ function findNuclei(units) {
     return nuclei
 }
 
-/** 音节切分（供调试与复用）：返回每个音节的核 */
-export function splitSyllables(text) {
-    const units = toUnits(text)
-    const nuclei = findNuclei(units)
-    return nuclei.map((nuc, i) => {
-        const from = i === 0 ? 0 : nuclei[i - 1].end + 1
-        return fromUnits(units.slice(from, nuc.end + 1), { stripLength: false })
-    })
-}
 
 /*
  * 音节的量分两种，希腊语的重音法则对它们的用法不同：

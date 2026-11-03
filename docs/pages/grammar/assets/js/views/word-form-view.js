@@ -25,6 +25,7 @@ import {
 } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { takePendingLookup } from '../store/pending-lookup.js'
+import { deleteWord } from '../store/word-store.js'
 
 const SPECIAL_REF = '__special__'
 const INDECL_REF = '__indeclinable__'
@@ -1730,7 +1731,6 @@ export default {
                 danger: true
             })
             if (!ok) return
-            const { deleteWord } = await import('../store/word-store.js')
             await deleteWord(data.id)
             toast.success('已删除')
             location.hash = `#/lang/${lang}/words`

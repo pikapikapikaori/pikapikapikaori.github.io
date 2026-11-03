@@ -15,6 +15,7 @@ import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { loadLanguages } from './data/languages.js'
 import { LS_KEYS, THEMES, SCRIPT_SEARCH_LANGS } from './config/config.js'
 import { preloadScriptProfiles } from './services/grammar-service.js'
+import { createDevTools } from './dev/index.js'
 
 const DEFAULT_THEME = THEMES[0].value
 
@@ -94,6 +95,7 @@ const VIEW_MODULES = {
     wordEdit: () => import('./views/word-form-view.js'),
     review: () => import('./views/review-view.js'),
     grammar: () => import('./views/grammar-view.js'),
+    schema: () => import('./views/schema-view.js'),
     settings: () => import('./views/settings-view.js')
 }
 
@@ -118,6 +120,8 @@ const router = createRouter([
     { path: '/grammar',              view: () => router.navigate('/languages', { replace: true }) },
     { path: '/grammar/:lang/:group',  view: (ctx) => mountView('grammar',    ctx) },
     { path: '/grammar/:lang',        view: (ctx) => mountView('grammar',    ctx) },
+    { path: '/schema',               view: (ctx) => mountView('schema',     ctx) },
+    { path: '/schema/:doc',          view: (ctx) => mountView('schema',     ctx) },
     { path: '/settings',             view: (ctx) => mountView('settings',   ctx) },
     { path: '/',                     view: () => router.navigate('/welcome', { replace: true }) }
 ])
@@ -239,7 +243,7 @@ async function bootstrap() {
         }
     })
 
-    window.__ln = { router, appStore }
+    window.__ln = { router, appStore, dev: createDevTools() }
 
     setupServiceWorker()
     attachVerticalPopover()

@@ -973,27 +973,3 @@ export function verifyGrammarDoc(lang, doc, profile) {
     return out
 }
 
-/** 汇总多份语法文档的校验结果；@returns {{ files, specs, checked, errors, warnings, ok }} */
-export function verifyGrammarDocs(docs) {
-    const errors = []
-    const warnings = []
-    let specs = 0
-    let checked = 0
-
-    for (const entry of docs || []) {
-        const res = verifyGrammarDoc(entry.lang, entry.doc, entry.profile)
-        specs += res.specs
-        checked += res.checked
-        errors.push(...res.errors)
-        warnings.push(...res.warnings)
-    }
-
-    return {
-        files: (docs || []).length,
-        specs,
-        checked,
-        errors,
-        warnings,
-        ok: errors.length === 0
-    }
-}

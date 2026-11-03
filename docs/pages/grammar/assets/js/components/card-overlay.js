@@ -13,6 +13,9 @@ let escHandler = null
 
 /** 打开放大版卡片；opts 里的 language / paradigmTpl / onGrammarRef / resolveDerivative / onDerivativeClick / onClose 可选 */
 export function openCardOverlay(word, opts = {}) {
+    // 已经有一张卡片在屏幕上 = 这是「跳到派生词」式的原地替换：不重播入场动画，
+    // 否则整个弹窗会再淡入 + 放大一次，看起来像页面闪了一下
+    const replacing = !!document.querySelector('.card-overlay')
     closeCardOverlay()
 
     const language = opts.language || word.language
@@ -59,7 +62,7 @@ export function openCardOverlay(word, opts = {}) {
         'aria-modal': 'true'
     }, closeBtn, head, body)
 
-    overlayEl = h('div', { class: 'card-overlay' }, backdrop, panel)
+    overlayEl = h('div', { class: 'card-overlay' + (replacing ? ' card-overlay--instant' : '') }, backdrop, panel)
     applyBdi(overlayEl)
     document.body.appendChild(overlayEl)
 

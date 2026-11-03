@@ -1312,6 +1312,12 @@ button.word-card__derivative {
     backdrop-filter: blur(4px);
 }
 
+/* 原地替换（派生词跳转）时不播入场动画：只换内容，不闪 */
+.card-overlay--instant,
+.card-overlay--instant .card-overlay-panel {
+    animation: none;
+}
+
 .card-overlay-panel {
     position: relative;
     width: min(1100px, 94vw);

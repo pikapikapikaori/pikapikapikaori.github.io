@@ -169,7 +169,7 @@ const welcomeView = {
                 title: '查看 JSON 的数据格式',
                 onclick: () => {
                     close()
-                    location.hash = '#/schema/export'
+                    location.hash = '#/schema/user'
                 }
             }, '数据格式')
 

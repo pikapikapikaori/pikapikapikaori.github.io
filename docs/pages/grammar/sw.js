@@ -1,5 +1,5 @@
 /* Service Worker · 缓存应用 shell，数据仍走 IndexedDB */
-const CACHE = 'langnotebook-shell-v74'
+const CACHE = 'langnotebook-shell-v75'
 
 const SHELL = [
     './',
@@ -65,8 +65,7 @@ self.addEventListener('fetch', (e) => {
     if (url.origin !== self.location.origin) return
 
     // 语法 JSON / 语言档案 / 字体：stale-while-revalidate
-    if (url.pathname.includes('/data/grammar/')
-        || url.pathname.includes('/data/paradigm/')
+    if (url.pathname.includes('/data/language/')
         || url.pathname.includes('/data/schema/')
         || url.pathname.includes('/resources/fonts/')) {
         e.respondWith(swr(req))

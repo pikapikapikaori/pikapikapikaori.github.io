@@ -1,0 +1,801 @@
+[
+  {
+    "id": "mnc-verb",
+    "title": "动词",
+    "items": [
+      {
+        "id": "mnc-verb-general",
+        "title": "动词总论：-mbi 形式与词干",
+        "tables": [
+          {
+            "caption": "动词的基本形态",
+            "role": "pattern",
+            "headers": [
+              "项目",
+              "形式",
+              "说明"
+            ],
+            "rows": [
+              [
+                "词典形",
+                "ᠠᡵᠠᠮᠪᡳ",
+                "以 -mbi 结尾，兼表现在-将来时，也是词条的基本形态"
+              ],
+              [
+                "词干",
+                "ᠠᡵᠠ-",
+                "去掉 -mbi；所有后缀都接在词干上（生词表单的「词干」）"
+              ],
+              [
+                "否定",
+                "ᠠᡵᠠᡵᠠᡴᡡ",
+                "-ra + -kū，元音随词干和谐"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "满语动词只接后缀，不随人称变化（没有人称词尾）；后缀元音与<strong>词干最后一个元音</strong>和谐。"
+      },
+      {
+        "id": "mnc-verb-tense",
+        "title": "时制与体",
+        "tables": [
+          {
+            "caption": "时制与体后缀（例：ᠠᡵᠠᠮᠪᡳ 写）",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "现在-将来",
+                "-mbi",
+                "ᠠᡵᠠᠮᠪᡳ 写 / 将写"
+              ],
+              [
+                "将来 / 未完成",
+                "-ra / -re / -ro",
+                "ᠠᡵᠠᡵᠠ 将要写"
+              ],
+              [
+                "过去",
+                "-ha / -he / -ho",
+                "ᠠᡵᠠᡥᠠ 写了"
+              ],
+              [
+                "同时持续",
+                "-mbime",
+                "ᠠᡵᠠᠮᠪᡳᠮᡝ 一边写"
+              ],
+              [
+                "过去进行",
+                "-mbihe",
+                "ᠠᡵᠠᠮᠪᡳᡥᡝ 当时正在写"
+              ],
+              [
+                "进行",
+                "-me bi",
+                "ᠠᡵᠠᠮᡝ ᠪᡳ 正在写"
+              ],
+              [
+                "进行/持续",
+                "-me ilihabi",
+                "ᠠᡵᠠᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ 保持着写的状态"
+              ],
+              [
+                "完成/已毕",
+                "-mahabi",
+                "ᠠᡵᠠᠮᠠᡥᠠᠪᡳ 已经写了"
+              ],
+              [
+                "完成",
+                "-ha bi",
+                "ᠠᡵᠠᡥᠠ ᠪᡳ 已经写了"
+              ],
+              [
+                "过去完成",
+                "-he ᠪᡳᡥᡝ",
+                "ᠠᡵᠠᡥᡝ ᠪᡳᡥᡝ 早已写了"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "<code>-ha ᠪᡳ</code> / <code>-he ᠪᡳᡥᡝ</code> / <code>-me ᠪᡳ</code> 这类是「后缀 + ᠪᡳ / ᠪᡳᡥᡝ」的复合形式，书写时中间有空格。"
+      },
+      {
+        "id": "mnc-verb-mood",
+        "title": "式：命令、祈愿、祈使",
+        "tables": [
+          {
+            "caption": "式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "命令（第二人称）",
+                "词干本身",
+                "ᠠᡵᠠ 写！"
+              ],
+              [
+                "祈愿（第三人称）",
+                "-kini",
+                "ᠠᡵᠠᡴᡳᠨᡳ 愿他写"
+              ],
+              [
+                "祈使（第一人称）",
+                "-cina",
+                "ᠠᡵᠠᠴᡳᠨᠠ 让我写吧"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "-kini / -cina 不随元音和谐变化；命令式的否定见「否定」一节的 ᡠᠮᡝ。"
+      },
+      {
+        "id": "mnc-verb-negation",
+        "title": "否定与禁止",
+        "tables": [
+          {
+            "caption": "否定",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀 / 结构",
+              "例"
+            ],
+            "rows": [
+              [
+                "现在-将来否定",
+                "-rakū / -rekū / -rokū",
+                "ᠠᡵᠠᡵᠠᡴᡡ 不写"
+              ],
+              [
+                "过去否定",
+                "-hakū / -hekū / -hokū",
+                "ᠠᡵᠠᡥᠠᡴᡡ 没写"
+              ],
+              [
+                "禁止",
+                "ume + -ra / -re / -ro",
+                "ᡠᠮᡝ ᠠᡵᠠᡵᠠ 别写"
+              ],
+              [
+                "名词性否定",
+                "ᠠᡴᡡ / ᠸᠠᡴᠠ",
+                "ᠠᡴᡡ 没有；ᠸᠠᡴᠠ 不是"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "否定后缀的元音同样随词干和谐；判断句否定用 ᠸᠠᡴᠠ，存在/拥有否定用 ᠠᡴᡡ。"
+      },
+      {
+        "id": "mnc-verb-converb",
+        "title": "副动形式（converb）",
+        "tables": [
+          {
+            "caption": "副动后缀",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "同时",
+                "-me",
+                "ᠠᡵᠠᠮᡝ 一边写"
+              ],
+              [
+                "先后完成",
+                "-fi",
+                "ᠠᡵᠠᡶᡳ 写完之后"
+              ],
+              [
+                "持续",
+                "-hai / -hei / -hoi",
+                "ᠠᡵᠠᡥᠠᡳ 一直写着"
+              ],
+              [
+                "直到",
+                "-tala / -tele",
+                "ᠠᡵᠠᡨᠠᠯᠠ 写到…为止"
+              ],
+              [
+                "当…时",
+                "-nggala / -nggele",
+                "ᠠᡵᠠᠩᡤᠠᠯᠠ 正要写的时候"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "副动形式不能单独作谓语，只能连接另一个动词或表示伴随状况。"
+      },
+      {
+        "id": "mnc-verb-participle",
+        "title": "形动形式与名词化",
+        "tables": [
+          {
+            "caption": "形动与名词化",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "已发生（形动）",
+                "-ha / -he / -ho",
+                "ᠠᡵᠠᡥᠠ ᠨᡳᠶᠠᠯᠮᠠ 写了的人"
+              ],
+              [
+                "未发生（形动）",
+                "-ra / -re / -ro",
+                "ᠠᡵᠠᡵᠠ ᠨᡳᠶᠠᠯᠮᠠ 要写的人"
+              ],
+              [
+                "名词化 -n",
+                "-n",
+                "ᠠᡵᠠᠨ 写的这件事 / 情形"
+              ],
+              [
+                "名词化 -si",
+                "-si",
+                "少数动词"
+              ],
+              [
+                "名词化 -tan / -ten",
+                "-tan / -ten",
+                "少数动词"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "形动可直接修饰名词，也可作名词用；-n / -ᠰᡳ / -tan 不太能产。"
+      }
+    ],
+    "derive": {
+      "pos": "verb",
+      "stemForms": {
+        "base": {
+          "from": "headword",
+          "rules": [
+            {
+              "pattern": "mbi$",
+              "replace": ""
+            }
+          ]
+        }
+      },
+      "stemExample": "ara",
+      "headwordExample": "arambi",
+      "parts": [
+        {
+          "key": "base",
+          "label": "词干（去掉 -mbi）",
+          "example": "ara",
+          "required": false,
+          "hint": "留空时由基本形态去掉 -mbi 自动推出。"
+        }
+      ],
+      "endings": {
+        "tense": {
+          "mbi": {
+            "form": {
+              "suffix": "-mbi"
+            }
+          },
+          "fut": {
+            "form": {
+              "suffix": "-rV"
+            }
+          },
+          "past": {
+            "form": {
+              "suffix": "-hV"
+            }
+          },
+          "mbime": {
+            "form": {
+              "suffix": "-mbime"
+            }
+          },
+          "mbihe": {
+            "form": {
+              "suffix": "-mbihe"
+            }
+          },
+          "prog": {
+            "form": {
+              "suffix": "-me bi"
+            }
+          },
+          "prog2": {
+            "form": {
+              "suffix": "-me ilihabi"
+            }
+          },
+          "perf": {
+            "form": {
+              "suffix": "-mahabi"
+            }
+          },
+          "perf2": {
+            "form": {
+              "suffix": "-hV bi"
+            }
+          },
+          "plup": {
+            "form": {
+              "suffix": "-hV bihe"
+            }
+          }
+        },
+        "mood": {
+          "impv": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "opt": {
+            "form": {
+              "suffix": "-kini"
+            }
+          },
+          "prec": {
+            "form": {
+              "suffix": "-cina"
+            }
+          },
+          "negpres": {
+            "form": {
+              "suffix": "-rVkū"
+            }
+          },
+          "negpast": {
+            "form": {
+              "suffix": "-hVkū"
+            }
+          },
+          "prohib": {
+            "form": {
+              "prefix": "ume ",
+              "suffix": "-rV"
+            }
+          }
+        },
+        "converb": {
+          "cvbme": {
+            "form": {
+              "suffix": "-me"
+            }
+          },
+          "cvbfi": {
+            "form": {
+              "suffix": "-fi"
+            }
+          },
+          "cvbhai": {
+            "form": {
+              "suffix": "-hVi"
+            }
+          },
+          "cvbtala": {
+            "form": {
+              "suffix": "-tVlV"
+            }
+          },
+          "cvbnggala": {
+            "form": {
+              "suffix": "-nggVlV"
+            }
+          }
+        },
+        "nominal": {
+          "ptcppast": {
+            "form": {
+              "suffix": "-hV"
+            }
+          },
+          "ptcpfut": {
+            "form": {
+              "suffix": "-rV"
+            }
+          },
+          "nomn": {
+            "form": {
+              "suffix": "-n"
+            }
+          },
+          "nomsi": {
+            "form": {
+              "suffix": "-si"
+            }
+          },
+          "nomtan": {
+            "form": {
+              "suffix": "-tVn"
+            }
+          }
+        }
+      },
+      "note": "满语动词只接后缀、不随人称变化；后缀里的元音占位 <code>V</code> 由 data/paradigm/mnc.js 的 harmonize() 按词干末元音替换（-hV → -ha / -he / -ho）。",
+      "expect": {
+        "tense": {
+          "mbi": {
+            "form": "arambi"
+          },
+          "fut": {
+            "form": "arara"
+          },
+          "past": {
+            "form": "araha"
+          },
+          "mbime": {
+            "form": "arambime"
+          },
+          "mbihe": {
+            "form": "arambihe"
+          },
+          "prog": {
+            "form": "arame bi"
+          },
+          "prog2": {
+            "form": "arame ilihabi"
+          },
+          "perf": {
+            "form": "aramahabi"
+          },
+          "perf2": {
+            "form": "araha bi"
+          },
+          "plup": {
+            "form": "araha bihe"
+          }
+        },
+        "mood": {
+          "impv": {
+            "form": "ara"
+          },
+          "opt": {
+            "form": "arakini"
+          },
+          "prec": {
+            "form": "aracina"
+          },
+          "negpres": {
+            "form": "ararakū"
+          },
+          "negpast": {
+            "form": "arahakū"
+          },
+          "prohib": {
+            "form": "ume arara"
+          }
+        },
+        "converb": {
+          "cvbme": {
+            "form": "arame"
+          },
+          "cvbfi": {
+            "form": "arafi"
+          },
+          "cvbhai": {
+            "form": "arahai"
+          },
+          "cvbtala": {
+            "form": "aratala"
+          },
+          "cvbnggala": {
+            "form": "aranggala"
+          }
+        },
+        "nominal": {
+          "ptcppast": {
+            "form": "araha"
+          },
+          "ptcpfut": {
+            "form": "arara"
+          },
+          "nomn": {
+            "form": "aran"
+          },
+          "nomsi": {
+            "form": "arasi"
+          },
+          "nomtan": {
+            "form": "aratan"
+          }
+        }
+      }
+    },
+    "notes": null
+  },
+  {
+    "id": "mnc-verb-secondary",
+    "title": "派生动词",
+    "items": [
+      {
+        "id": "mnc-verb-voice-overview",
+        "title": "四类语态概览",
+        "tables": [
+          {
+            "caption": "语态",
+            "role": "pattern",
+            "headers": [
+              "语态",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "主动",
+                "无",
+                "ᠠᡵᠠᠮᠪᡳ 写"
+              ],
+              [
+                "被动 / 使役",
+                "-bu",
+                "ᠠᡵᠠᠪᡠᠮᠪᡳ 被写 / 使写"
+              ],
+              [
+                "相互",
+                "-nu / -ndu",
+                "ᠠᡳᠰᡳᠯᠠᠨᡩᡠᠮᠪᡳ 互相帮助"
+              ],
+              [
+                "协同",
+                "-ca / -ce",
+                "ᠵᠠᡶᠠᠴᠠᠮᠪᡳ 一起抓"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "主动式没有专门后缀；其余三类都用后缀派生<strong>新词</strong>（词干改变），不是同一个词的形式变化。"
+      },
+      {
+        "id": "mnc-verb-voice-bu",
+        "title": "使役 / 被动（-bu）",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "要素",
+              "形式"
+            ],
+            "rows": [
+              [
+                "词干",
+                "原词干 + -bu-（arambi → arambu-）"
+              ],
+              [
+                "词义",
+                "「使…做」或「被…做」—— 同形，靠上下文区分"
+              ],
+              [
+                "变位",
+                "完全按普通动词接后缀（-mbi / -ha / -rV / -me…）"
+              ],
+              [
+                "示例",
+                "arambi 写 → arambumbi 被写 / 使写"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "派生后的词干照常参与元音和谐：arambu- 是后元音 → arambuha；genebu- 是前元音 → genebuhe。"
+      },
+      {
+        "id": "mnc-verb-voice-nu",
+        "title": "相互（-nu / -ndu）",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "要素",
+              "形式"
+            ],
+            "rows": [
+              [
+                "词干",
+                "原词干 + -nu- / -ndu-"
+              ],
+              [
+                "词义",
+                "「互相…」"
+              ],
+              [
+                "变位",
+                "同普通动词"
+              ],
+              [
+                "示例",
+                "aisilambi 帮助 → aisilandumbi 互相帮助"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "-ndu 多接在以 -n 结尾的词干后（aisila- → aisilandu-）；同样按派生后的词干继续和谐。"
+      },
+      {
+        "id": "mnc-verb-voice-ca",
+        "title": "协同（-ca / -ᠴᡝ）",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "要素",
+              "形式"
+            ],
+            "rows": [
+              [
+                "词干",
+                "原词干 + -ca- / -ce-（随词干和谐）"
+              ],
+              [
+                "词义",
+                "「一起…」"
+              ],
+              [
+                "变位",
+                "同普通动词"
+              ],
+              [
+                "示例",
+                "jafambi 抓 → jafacambi 一起抓"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "元音随词干和谐：后元音 -ca、前元音 -ᠴᡝ。"
+      }
+    ],
+    "notes": "派生词仍是<strong>普通动词</strong>，接 -mbi / -ha / -rV / -me / -fi / -kini… 全部同一套后缀；<strong>元音和谐按派生后的词干算</strong>（arambu- 是后元音 → arambuha；genebu- 是前元音 → genebuhe）。这三个后缀产生的是新词，请在生词本里另立词条，并用「派生词」链接回原动词。"
+  },
+  {
+    "id": "mnc-verb-harmony-back",
+    "title": "后元音词干（a / ū）",
+    "items": [
+      {
+        "id": "mnc-verb-harmony-back-table",
+        "title": "该类的后缀变体",
+        "tables": [
+          {
+            "caption": "后缀变体",
+            "role": "pattern",
+            "headers": [
+              "词干",
+              "过去",
+              "将来",
+              "否定",
+              "副动"
+            ],
+            "rows": [
+              [
+                "ᠠᡵᠠ-",
+                "-ha",
+                "-ra",
+                "-rakū",
+                "-hai"
+              ],
+              [
+                "ᠰᠠᠪᡠ-",
+                "-ha",
+                "-ra",
+                "-rakū",
+                "-hai"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": null
+      }
+    ],
+    "inflect": "conj",
+    "notes": "词干最后一个元音是 a 或 ū：过去 -ha、将来 -ra、否定 -rakū、副动 -hai。",
+    "deriveRef": "mnc-verb"
+  },
+  {
+    "id": "mnc-verb-harmony-front",
+    "title": "前元音词干（e / u）",
+    "items": [
+      {
+        "id": "mnc-verb-harmony-front-table",
+        "title": "该类的后缀变体",
+        "tables": [
+          {
+            "caption": "后缀变体",
+            "role": "pattern",
+            "headers": [
+              "词干",
+              "过去",
+              "将来",
+              "否定",
+              "副动"
+            ],
+            "rows": [
+              [
+                "ᡤᡝᠨᡝ-",
+                "-he",
+                "-re",
+                "-rekū",
+                "-hei"
+              ],
+              [
+                "ᠪᡠ-",
+                "-he",
+                "-re",
+                "-rekū",
+                "-hei"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": null
+      }
+    ],
+    "inflect": "conj",
+    "notes": "词干最后一个元音是 e 或 u：过去 -he、将来 -re、否定 -rekū、副动 -hei。",
+    "deriveRef": "mnc-verb"
+  },
+  {
+    "id": "mnc-verb-harmony-round",
+    "title": "圆唇词干（o）",
+    "items": [
+      {
+        "id": "mnc-verb-harmony-round-table",
+        "title": "该类的后缀变体",
+        "tables": [
+          {
+            "caption": "后缀变体",
+            "role": "pattern",
+            "headers": [
+              "词干",
+              "过去",
+              "将来",
+              "否定",
+              "副动"
+            ],
+            "rows": [
+              [
+                "ᠰᠣᠩᡤᠣ-",
+                "-ho",
+                "-ro",
+                "-rokū",
+                "-hoi"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": null
+      }
+    ],
+    "inflect": "conj",
+    "notes": "词干最后一个元音是 o：过去 -ho、将来 -ro、否定 -rokū、副动 -hoi。",
+    "deriveRef": "mnc-verb"
+  }
+]

@@ -1,0 +1,209 @@
+{
+  "noun": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "number",
+        "title": "数",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "abs",
+            "label": "绝对形"
+          }
+        ]
+      }
+    ]
+  },
+  "verb": {
+    "tables": [
+      {
+        "key": "tense",
+        "title": "时制与体",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "mbi",
+            "label": "现在-将来时 (-mbi)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "fut",
+            "label": "将来/未完成 (-ra/-re/-ro)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "past",
+            "label": "过去时 (-ha/-he/-ho)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "mbime",
+            "label": "同时持续 (-mbime)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "mbihe",
+            "label": "过去进行 (-mbihe)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "prog",
+            "label": "进行 (-me bi)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "prog2",
+            "label": "进行/持续 (-me ilihabi)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "perf",
+            "label": "完成/已毕 (-mahabi)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "perf2",
+            "label": "完成 (-ha bi)",
+            "grammarRef": "mnc-verb-tense"
+          },
+          {
+            "key": "plup",
+            "label": "过去完成 (-he bihe)",
+            "grammarRef": "mnc-verb-tense"
+          }
+        ]
+      },
+      {
+        "key": "mood",
+        "title": "式与否定",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "impv",
+            "label": "命令式（词干）",
+            "grammarRef": "mnc-verb-mood"
+          },
+          {
+            "key": "opt",
+            "label": "祈愿 (-kini)",
+            "grammarRef": "mnc-verb-mood"
+          },
+          {
+            "key": "prec",
+            "label": "祈使 (-cina)",
+            "grammarRef": "mnc-verb-mood"
+          },
+          {
+            "key": "negpres",
+            "label": "现在否定 (-rakū)",
+            "grammarRef": "mnc-verb-negation"
+          },
+          {
+            "key": "negpast",
+            "label": "过去否定 (-hakū)",
+            "grammarRef": "mnc-verb-negation"
+          },
+          {
+            "key": "prohib",
+            "label": "禁止 (ume + -ra)",
+            "grammarRef": "mnc-verb-negation"
+          }
+        ]
+      },
+      {
+        "key": "converb",
+        "title": "副动形式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "cvbme",
+            "label": "同时 (-me)",
+            "grammarRef": "mnc-verb-converb"
+          },
+          {
+            "key": "cvbfi",
+            "label": "先后完成 (-fi)",
+            "grammarRef": "mnc-verb-converb"
+          },
+          {
+            "key": "cvbhai",
+            "label": "持续 (-hai/-hei/-hoi)",
+            "grammarRef": "mnc-verb-converb"
+          },
+          {
+            "key": "cvbtala",
+            "label": "直到 (-tala/-tele)",
+            "grammarRef": "mnc-verb-converb"
+          },
+          {
+            "key": "cvbnggala",
+            "label": "当…时 (-nggala/-nggele)",
+            "grammarRef": "mnc-verb-converb"
+          }
+        ]
+      },
+      {
+        "key": "nominal",
+        "title": "形动与名词化",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "ptcppast",
+            "label": "已发生形动 (-ha)",
+            "grammarRef": "mnc-verb-participle"
+          },
+          {
+            "key": "ptcpfut",
+            "label": "未发生形动 (-ra)",
+            "grammarRef": "mnc-verb-participle"
+          },
+          {
+            "key": "nomn",
+            "label": "名词化 (-n)",
+            "grammarRef": "mnc-verb-participle"
+          },
+          {
+            "key": "nomsi",
+            "label": "名词化 (-si)",
+            "grammarRef": "mnc-verb-participle"
+          },
+          {
+            "key": "nomtan",
+            "label": "名词化 (-tan)",
+            "grammarRef": "mnc-verb-participle"
+          }
+        ]
+      }
+    ]
+  }
+}

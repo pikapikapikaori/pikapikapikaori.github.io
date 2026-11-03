@@ -1,0 +1,332 @@
+[
+  {
+    "id": "de-num",
+    "title": "数词",
+    "items": [
+      {
+        "id": "de-num-cardinal",
+        "title": "基数词",
+        "tables": [
+          {
+            "caption": "0–20",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "写法",
+              "数",
+              "写法"
+            ],
+            "rows": [
+              [
+                "0",
+                "null",
+                "11",
+                "elf"
+              ],
+              [
+                "1",
+                "eins",
+                "12",
+                "zwölf"
+              ],
+              [
+                "2",
+                "zwei",
+                "13",
+                "dreizehn"
+              ],
+              [
+                "3",
+                "drei",
+                "14",
+                "vierzehn"
+              ],
+              [
+                "4",
+                "vier",
+                "15",
+                "fünfzehn"
+              ],
+              [
+                "5",
+                "fünf",
+                "16",
+                "sechzehn"
+              ],
+              [
+                "6",
+                "sechs",
+                "17",
+                "siebzehn"
+              ],
+              [
+                "7",
+                "sieben",
+                "18",
+                "achtzehn"
+              ],
+              [
+                "8",
+                "acht",
+                "19",
+                "neunzehn"
+              ],
+              [
+                "9",
+                "neun",
+                "20",
+                "zwanzig"
+              ],
+              [
+                "10",
+                "zehn",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "十位以上",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "写法",
+              "说明"
+            ],
+            "rows": [
+              [
+                "21",
+                "einundzwanzig",
+                "先个位后十位，中间用 und"
+              ],
+              [
+                "30 / 40",
+                "dreißig / vierzig",
+                "30 用 -ßig"
+              ],
+              [
+                "100",
+                "(ein)hundert",
+                "—"
+              ],
+              [
+                "1000",
+                "(ein)tausend",
+                "—"
+              ],
+              [
+                "1000000",
+                "eine Million",
+                "名词，复数 Millionen"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<strong>ein 有变格：按不定冠词变格</strong>（ein / eine / eines / einem / einen），与 kein、物主代词（mein 等）完全一致；只有在强调「一个」时才重读。zwei 在口语里有时说 zwo，以免与 drei 混淆。"
+      },
+      {
+        "id": "de-num-ordinal",
+        "title": "序数词",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "基数",
+              "序数",
+              "规则"
+            ],
+            "rows": [
+              [
+                "0",
+                "nullte",
+                "极少用"
+              ],
+              [
+                "1",
+                "erste",
+                "不规则"
+              ],
+              [
+                "3",
+                "dritte",
+                "不规则"
+              ],
+              [
+                "7",
+                "siebte",
+                "不规则"
+              ],
+              [
+                "4–19（除 7）",
+                "vierte / fünfte / sechste …",
+                "1–19：+ -te"
+              ],
+              [
+                "20 以上",
+                "zwanzigste / hundertste",
+                "+ -ste"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "序数词按形容词变格（der erste Tag / am ersten Tag）。"
+      },
+      {
+        "id": "de-num-other",
+        "title": "分数、倍数与约数",
+        "tables": [
+          {
+            "caption": "分数与倍数",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "写法",
+              "例"
+            ],
+            "rows": [
+              [
+                "1/2",
+                "die Hälfte / halb",
+                "die Hälfte des Kuchens"
+              ],
+              [
+                "1/3",
+                "ein Drittel",
+                "ein Drittel der Zeit"
+              ],
+              [
+                "1/4",
+                "ein Viertel",
+                "ein Viertel Liter"
+              ],
+              [
+                "倍数",
+                "zweimal / doppelt",
+                "zweimal so groß"
+              ],
+              [
+                "约数",
+                "ein paar / einige / Dutzende",
+                "ein paar Leute"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "分数词大多名词化，首字母大写（das Drittel、das Viertel）。"
+      },
+      {
+        "id": "de-num-time-date",
+        "title": "时间与日期",
+        "tables": [
+          {
+            "caption": "钟点",
+            "role": "pattern",
+            "headers": [
+              "写法",
+              "读法",
+              "口语"
+            ],
+            "rows": [
+              [
+                "14:30",
+                "vierzehn Uhr dreißig",
+                "halb drei（半点说「下一个钟点的半点」）"
+              ],
+              [
+                "14:15",
+                "vierzehn Uhr fünfzehn",
+                "Viertel nach zwei"
+              ],
+              [
+                "14:45",
+                "vierzehn Uhr fünfundvierzig",
+                "Viertel vor drei"
+              ],
+              [
+                "8:05",
+                "acht Uhr fünf",
+                "fünf nach acht"
+              ],
+              [
+                "8:55",
+                "acht Uhr fünfundfünfzig",
+                "fünf vor neun"
+              ],
+              [
+                "1:00",
+                "ein Uhr",
+                "Punkt eins"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "日期",
+            "role": "pattern",
+            "headers": [
+              "项目",
+              "规则",
+              "例"
+            ],
+            "rows": [
+              [
+                "日",
+                "序数词 + 形容词变格（am = an + dem）",
+                "am 3. Oktober / am dritten Oktober"
+              ],
+              [
+                "写法",
+                "序数词 + 点",
+                "der 3. Oktober 2026 / 03.10.2026"
+              ],
+              [
+                "问日期",
+                "Der Wievielte ist heute?",
+                "Heute ist der 3. Oktober."
+              ],
+              [
+                "星期 / 月份",
+                "首字母大写",
+                "am Montag, im Januar"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "年份",
+            "role": "pattern",
+            "headers": [
+              "年份",
+              "读法"
+            ],
+            "rows": [
+              [
+                "1990",
+                "neunzehnhundertneunzig"
+              ],
+              [
+                "2005",
+                "zweitausendfünf"
+              ],
+              [
+                "2026",
+                "zweitausendsechsundzwanzig"
+              ],
+              [
+                "in + 年份",
+                "im Jahr(e) 1990 / 1990（不加介词时用 im Jahr）"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "钟点用 24 小时制书写、12 小时制口语；半点用 halb + 下一个钟点（halb drei = 2:30）。日期中的序数词按形容词变格（am dritten Oktober），书面用数字加点（3. Oktober）。"
+      }
+    ]
+  }
+]

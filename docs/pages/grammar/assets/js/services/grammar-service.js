@@ -1,11 +1,91 @@
-/** 语法数据加载（只读），数据位于 /data/grammar/{lang}.json */
+/**
+ * 语法数据加载（只读）。
+ * 数据位于 /data/language/{lang}/：meta.json（元信息 + 章节索引）、grammar/paradigms.json、
+ * grammar/{chapter}.json（一章一个文件，文件名 = 章节 id）。
+ */
 
 import { GRAMMAR_FILES } from '../config/config.js'
 import { isGrammarDoc, validateGrammarDoc } from '../models/grammar.js'
 import { verifyGrammarDoc } from '../models/paradigm-generate.js'
 
-const cache = new Map()     // lang -> doc
-const pending = new Map()   // lang -> Promise
+const LANG_BASE = new URL('../../../data/language/', import.meta.url)
+
+const cache = new Map()       // lang -> 组合后的整份 doc
+const pending = new Map()     // lang -> Promise
+const metaCache = new Map()   // lang -> meta.json
+const metaPending = new Map()
+const chapterCache = new Map()  // `${lang}/${id}` -> sections
+const chapterPending = new Map()
+
+function langUrl(language, relative) {
+    return new URL(`${encodeURIComponent(language)}/${relative}`, LANG_BASE)
+}
+
+async function fetchJSON(url) {
+    const res = await fetch(url, { cache: 'no-cache' })
+    if (res.status === 404) return null
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+    return res.json()
+}
+
+/** 元信息（启动时 languages.js 已经拉过一次，这里命中同一份 JSON） */
+export function loadGrammarMeta(language) {
+    if (!language) return Promise.resolve(null)
+    if (metaCache.has(language)) return Promise.resolve(metaCache.get(language))
+    if (metaPending.has(language)) return metaPending.get(language)
+
+    const p = fetchJSON(langUrl(language, 'meta.json'))
+        .then((meta) => {
+            if (meta) metaCache.set(language, meta)
+            return meta
+        })
+        .catch((err) => {
+            console.warn(`[grammar] ${language}: meta.json 读取失败：${err.message}`)
+            return null
+        })
+        .finally(() => { metaPending.delete(language) })
+
+    metaPending.set(language, p)
+    return p
+}
+
+/** 一章的 sections */
+export function loadChapter(language, chapterId) {
+    if (!language || !chapterId) return Promise.resolve([])
+    const key = `${language}/${chapterId}`
+    if (chapterCache.has(key)) return Promise.resolve(chapterCache.get(key))
+    if (chapterPending.has(key)) return chapterPending.get(key)
+
+    const p = fetchJSON(langUrl(language, `grammar/${encodeURIComponent(chapterId)}.json`))
+        .then((list) => {
+            const sections = Array.isArray(list) ? list : []
+            chapterCache.set(key, sections)
+            return sections
+        })
+        .catch((err) => {
+            console.warn(`[grammar] ${language}/${chapterId}: 章节读取失败：${err.message}`)
+            return []
+        })
+        .finally(() => { chapterPending.delete(key) })
+
+    chapterPending.set(key, p)
+    return p
+}
+
+/** 把 meta + paradigms + 若干章组装成运行时统一使用的 doc 形状 */
+function assemble(meta, paradigms, chapterSections) {
+    const doc = {}
+    for (const [key, value] of Object.entries(meta)) {
+        if (key === 'files' || key === 'grammarFiles') continue
+        doc[key] = value
+    }
+    const chapters = meta.grammarFiles?.chapters || []
+    doc.groups = chapters.map(({ id, title }) => ({ id, title }))
+    doc.paradigms = paradigms || {}
+    doc.sections = chapterSections.flatMap(({ id, sections }) =>
+        sections.map((section) => ({ ...section, group: id })))
+    return doc
+}
 
 /** 把一次校验结果打给 console：errors 用 error，warnings 用 warn */
 function logReport(scope, code, { errors, warnings }) {
@@ -13,36 +93,68 @@ function logReport(scope, code, { errors, warnings }) {
     for (const w of warnings) console.warn(`[${scope}] ${code}: ${w}`)
 }
 
+/**
+ * 组合整份语法文档（元信息 + 全部章节 + paradigms）。
+ * 词表单 / 词列表需要跨章的锚点，语法页请改用 loadGrammarForChapter()。
+ */
 export async function loadGrammar(language) {
     if (!language) return null
     if (cache.has(language)) return cache.get(language)
     if (pending.has(language)) return pending.get(language)
 
-    const url = `./data/grammar/${encodeURIComponent(language)}.json`
+    const p = (async () => {
+        const meta = await loadGrammarMeta(language)
+        if (!meta) return null
+        if (meta.grammar === false) return null
 
-    const p = fetch(url, { cache: 'no-cache' })
-        .then(async (res) => {
-            if (res.status === 404) return null
-            if (!res.ok) throw new Error(`加载语法失败：${res.status} ${res.statusText}`)
-            const json = await res.json()
-            // 有结构错误就不加载（视图会退化成「无语法数据」），错误逐条打出来
-            const report = validateGrammarDoc(language, json)
-            logReport('grammar', language, report)
-            if (report.errors.length) return null
-            if (!isGrammarDoc(json)) return null
-            cache.set(language, json)
-            return json
-        })
+        const chapters = meta.grammarFiles?.chapters || []
+        const [paradigms, ...sectionLists] = await Promise.all([
+            fetchJSON(langUrl(language, meta.grammarFiles?.paradigms || 'grammar/paradigms.json'))
+                .catch(() => null),
+            ...chapters.map((chapter) => loadChapter(language, chapter.id))
+        ])
+
+        const doc = assemble(meta,
+            paradigms,
+            chapters.map((chapter, i) => ({ id: chapter.id, sections: sectionLists[i] || [] })))
+
+        // 有结构错误就不加载（视图会退化成「无语法数据」），错误逐条打出来
+        const report = validateGrammarDoc(language, doc)
+        logReport('grammar', language, report)
+        if (report.errors.length) return null
+        if (!isGrammarDoc(doc)) return null
+        cache.set(language, doc)
+        return doc
+    })()
         .catch((err) => {
             console.warn(`[grammar] ${language}: ${err.message}`)
             return null
         })
-        .finally(() => {
-            pending.delete(language)
-        })
+        .finally(() => { pending.delete(language) })
 
     pending.set(language, p)
     return p
+}
+
+/**
+ * 只要一章的文档（语法页用）：`groups` 仍是完整章节列表，`sections` 只含本章。
+ * chapterId 为空时退回整份文档。
+ */
+export async function loadGrammarForChapter(language, chapterId) {
+    const meta = await loadGrammarMeta(language)
+    if (!meta || meta.grammar === false) return null
+    const chapters = meta.grammarFiles?.chapters || []
+    if (!chapterId || chapters.length <= 1) return loadGrammar(language)
+
+    const [paradigms, sections] = await Promise.all([
+        fetchJSON(langUrl(language, meta.grammarFiles?.paradigms || 'grammar/paradigms.json')).catch(() => null),
+        loadChapter(language, chapterId)
+    ])
+    const doc = assemble(meta, paradigms, [{ id: chapterId, sections }])
+
+    const report = validateGrammarDoc(language, doc)
+    logReport('grammar', language, report)
+    return report.errors.length ? null : doc
 }
 
 /* ---------- 语言档案（derive 的语言专属后期处理） ---------- */
@@ -51,17 +163,17 @@ const profiles = new Map()
 const scriptProfiles = new Map()  // lang -> profile | null
 
 /**
- * 语言档案（`data/paradigm/{lang}.js`，导出 accentModes / accent / sandhi）：只有该语言的 JSON
- * 声明了 `profile: true` 才去 import，其余语言直接返回 null——否则每次打开生词表单都会报一个 404。
+ * 语言档案（meta.files.paradigm，导出 accentModes / accent / sandhi）：meta 里没写这一项就直接返回 null，
+ * 其余语言不去 import——否则每次打开生词表单都会报一个 404。
  */
-export async function loadParadigmProfile(language, doc = null) {
+export async function loadParadigmProfile(language, meta = null) {
     if (!language) return null
-    if (!doc || doc.profile !== true) return null
+    if (!meta || !meta.files || !meta.files.paradigm) return null
     if (profiles.has(language)) return profiles.get(language)
 
     let profile = null
     try {
-        profile = await import(`../../../data/paradigm/${encodeURIComponent(language)}.js`)
+        profile = await import(/* @vite-ignore */ langUrl(language, meta.files.paradigm).href)
     } catch {
         // 声明了档案但文件缺失 / 加载失败
         console.warn(`[grammar] ${language}: 档案加载失败`)
@@ -71,17 +183,17 @@ export async function loadParadigmProfile(language, doc = null) {
 }
 
 /**
- * 「文字档案」`data/script/<lang>.js`（转写 ⇄ 原文）：加载方式同 language 档案，由文档里的 `script: true` 声明。
+ * 「文字档案」（meta.files.script，转写 ⇄ 原文）：加载方式同语言档案。
  * 导出 `toScript` / `toRoman`（`hasScript` 可选）。
  */
-export async function loadScriptProfile(language, doc = null) {
+export async function loadScriptProfile(language, meta = null) {
     if (!language) return null
-    if (!doc || doc.script !== true) return null
+    if (!meta || !meta.files || !meta.files.script) return null
     if (scriptProfiles.has(language)) return scriptProfiles.get(language)
 
     let profile = null
     try {
-        profile = await import(`../../../data/script/${encodeURIComponent(language)}.js`)
+        profile = await import(/* @vite-ignore */ langUrl(language, meta.files.script).href)
     } catch {
         console.warn(`[grammar] ${language}: 文字档案加载失败`)
     }
@@ -98,13 +210,9 @@ export function getScriptProfile(language) {
 export async function preloadScriptProfiles(languages = []) {
     await Promise.all(languages.map(async (language) => {
         if (scriptProfiles.has(language)) return
-        let profile = null
-        try {
-            profile = await import(`../../../data/script/${encodeURIComponent(language)}.js`)
-        } catch {
-            console.warn(`[grammar] ${language}: 文字档案加载失败`)
-        }
-        scriptProfiles.set(language, profile)
+        const meta = await loadGrammarMeta(language)
+        await loadScriptProfile(language, meta)
+        if (!scriptProfiles.has(language)) scriptProfiles.set(language, null)
     }))
 }
 
@@ -119,8 +227,17 @@ export function clearProfileCache(language) {
 }
 
 export function clearCache(language) {
-    if (language) cache.delete(language)
-    else cache.clear()
+    if (language) {
+        cache.delete(language)
+        metaCache.delete(language)
+        for (const key of chapterCache.keys()) {
+            if (key.startsWith(`${language}/`)) chapterCache.delete(key)
+        }
+        return
+    }
+    cache.clear()
+    metaCache.clear()
+    chapterCache.clear()
 }
 
 /**
@@ -152,15 +269,47 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
         }
 
         try {
-            const res = await fetch(`./data/grammar/${encodeURIComponent(code)}.json`, { cache: 'no-cache' })
-            if (!res.ok) throw new Error(`HTTP ${res.status}`)
-            const doc = await res.json()
-            item.name = typeof doc?.name === 'string' ? doc.name : ''
-            item.structure = validateGrammarDoc(code, doc)
+            // 不走缓存：坏文件也要报出来
+            const meta = await fetchJSON(langUrl(code, 'meta.json'))
+            if (!meta) throw new Error('HTTP 404')
+            item.name = typeof meta?.name === 'string' ? meta.name : ''
+
+            const chapters = meta.grammarFiles?.chapters || []
+            const [paradigms, ...sectionLists] = await Promise.all([
+                fetchJSON(langUrl(code, meta.grammarFiles?.paradigms || 'grammar/paradigms.json'))
+                    .catch((err) => {
+                        item.structure.errors.push(`paradigms 读取失败：${err.message}`)
+                        return null
+                    }),
+                ...chapters.map((chapter) => fetchJSON(langUrl(code, chapter.file))
+                    .catch((err) => {
+                        item.structure.errors.push(`${chapter.file} 读取失败：${err.message}`)
+                        return null
+                    }))
+            ])
+
+            const doc = assemble(meta, paradigms,
+                chapters.map((chapter, i) => ({ id: chapter.id, sections: sectionLists[i] || [] })))
+            const structure = validateGrammarDoc(code, doc)
+            item.structure.errors.push(...structure.errors)
+            item.structure.warnings.push(...structure.warnings)
+
+            // 目录里没有登记进 chapters 的章节文件 = 漏登记
+            for (const [i, list] of sectionLists.entries()) {
+                if (list === null) continue
+                if (!Array.isArray(list)) item.structure.errors.push(`${chapters[i].file} 不是数组`)
+            }
+            if (chapters.length === 0 && (meta.grammar !== false)) {
+                item.structure.warnings.push('没有登记任何章节（grammarFiles.chapters 为空）')
+            }
 
             let profile = null
-            if (doc?.profile === true) {
-                profile = await import(`../../../data/paradigm/${encodeURIComponent(code)}.js`).catch(() => null)
+            if (meta.files?.paradigm) {
+                profile = await import(/* @vite-ignore */ langUrl(code, meta.files.paradigm).href).catch(() => null)
+            }
+            if (meta.files?.script) {
+                const script = await import(/* @vite-ignore */ langUrl(code, meta.files.script).href).catch(() => null)
+                if (!script) item.structure.errors.push(`文字档案 ${meta.files.script} 加载失败`)
             }
             try {
                 const r = verifyGrammarDoc(code, doc, profile)
@@ -170,8 +319,8 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
                     errors: r.errors,
                     warnings: r.warnings
                 }
-                if (doc?.profile === true && !profile) {
-                    item.derive.warnings.push('声明了 `profile: true`，但 data/paradigm 下的语言档案加载失败')
+                if (meta.files?.paradigm && !profile) {
+                    item.derive.warnings.push(`声明了 ${meta.files.paradigm}，但语言档案加载失败`)
                 }
             } catch (err) {
                 item.derive.errors.push(`derive 自检抛错：${err.message}`)

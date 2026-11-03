@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "language": "la",
+  "name": "拉丁语",
+  "native": "Latina",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 1,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "participle",
+    "adv",
+    "pron",
+    "prep",
+    "postp",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "grammar": true,
+  "paradigm": true,
+  "terms": {
+    "inflectionType": "变格 / 变位类型",
+    "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",
+    "inflectionTypeHint": "显示在词卡正面的徽章。",
+    "special": "特殊变格（自行填写）",
+    "indeclinable": "不变格",
+    "paradigmTitle": "{pos}变格表格",
+    "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
+    "extraForms": "补充形式（不定式、命令式、动名词、日语活用等）",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 am",
+      "hint": "词干：不变的部分，词形变化在其后追加词尾，如 am → amō / amāre。末尾的「-」只是显示用，不用填。"
+    },
+    "extraPartsHint": "以下词干可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。",
+    "byPos": {
+      "verb": {
+        "special": "特殊变位（自行填写）",
+        "indeclinable": "不变位",
+        "paradigmTitle": "{pos}变位表格"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 aqua"
+    }
+  },
+  "files": {},
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "la-pron",
+          "la-pron-1st-2nd",
+          "la-pron-3rd",
+          "la-pron-reflexive",
+          "la-pron-possessive",
+          "la-pron-demonstrative",
+          "la-pron-relative",
+          "la-pron-interrogative",
+          "la-pron-indefinite"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "la-noun",
+          "la-noun-1st-decl",
+          "la-noun-2nd-decl",
+          "la-noun-2nd-decl-f",
+          "la-noun-2nd-decl-er",
+          "la-noun-2nd-decl-er-keep",
+          "la-noun-2nd-decl-n",
+          "la-noun-3rd-decl",
+          "la-noun-3rd-decl-i",
+          "la-noun-3rd-decl-i-abli",
+          "la-noun-3rd-decl-n",
+          "la-noun-3rd-decl-i-n",
+          "la-noun-3rd-decl-i-n-al",
+          "la-noun-4th-decl",
+          "la-noun-4th-decl-n",
+          "la-noun-5th-decl",
+          "la-noun-5th-decl-dies"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "la-adj",
+          "la-adj-1st-2nd",
+          "la-adj-3rd-3term",
+          "la-adj-3rd",
+          "la-adj-3rd-1term",
+          "la-adj-comparison",
+          "la-adj-adverb"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "la-adv",
+          "la-adv-comparison"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "la-verb",
+          "la-verb-overview",
+          "la-verb-deponent",
+          "la-verb-1st-conj",
+          "la-verb-1st-pres",
+          "la-verb-1st-impf",
+          "la-verb-1st-fut",
+          "la-verb-1st-perf",
+          "la-verb-1st-plup",
+          "la-verb-1st-futp",
+          "la-verb-1st-sigmatic",
+          "la-verb-1st-inf",
+          "la-verb-1st-ptcp",
+          "la-verb-1st-gerund",
+          "la-verb-1st-supine",
+          "la-verb-2nd-conj",
+          "la-verb-2nd-pres",
+          "la-verb-2nd-impf",
+          "la-verb-2nd-fut",
+          "la-verb-2nd-perf",
+          "la-verb-2nd-plup",
+          "la-verb-2nd-futp",
+          "la-verb-2nd-sigmatic",
+          "la-verb-2nd-inf",
+          "la-verb-2nd-ptcp",
+          "la-verb-2nd-gerund",
+          "la-verb-2nd-supine",
+          "la-verb-3rd-conj",
+          "la-verb-3rd-pres",
+          "la-verb-3rd-impf",
+          "la-verb-3rd-fut",
+          "la-verb-3rd-perf",
+          "la-verb-3rd-plup",
+          "la-verb-3rd-futp",
+          "la-verb-3rd-sigmatic",
+          "la-verb-3rd-inf",
+          "la-verb-3rd-ptcp",
+          "la-verb-3rd-gerund",
+          "la-verb-3rd-supine",
+          "la-verb-4th-conj",
+          "la-verb-4th-pres",
+          "la-verb-4th-impf",
+          "la-verb-4th-fut",
+          "la-verb-4th-perf",
+          "la-verb-4th-plup",
+          "la-verb-4th-futp",
+          "la-verb-4th-sigmatic",
+          "la-verb-4th-inf",
+          "la-verb-4th-ptcp",
+          "la-verb-4th-gerund",
+          "la-verb-4th-supine"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "la-num",
+          "la-num-1-20",
+          "la-num-tens",
+          "la-num-hundreds"
+        ]
+      }
+    ]
+  }
+}

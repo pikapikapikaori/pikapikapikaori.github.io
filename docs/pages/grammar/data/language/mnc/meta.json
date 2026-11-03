@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "language": "mnc",
+  "name": "满语",
+  "native": "ᠮᠠᠨᠵᡠ",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 5,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "adv",
+    "pron",
+    "postp",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": true,
+  "rtl": false,
+  "grammar": true,
+  "paradigm": true,
+  "terms": {
+    "inflectionType": "词形类型",
+    "inflectionTypePlaceholder": "词形类型说明（如：-sa 型复数）",
+    "inflectionTypeHint": "显示在词卡正面的徽章。",
+    "special": "特殊词形（自行填写）",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}词形表",
+    "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
+    "extraForms": "补充形式（其他词形）",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 ara-",
+      "hint": "接后缀的部分；满语名词的「词干」与单数形式相同。"
+    },
+    "extraPartsHint": "以下部分可以留空，留空时按所选词形类型的规则推导。",
+    "byPos": {
+      "noun": {
+        "inflectionType": "复数类型",
+        "special": "特殊复数（自行填写）"
+      },
+      "verb": {
+        "inflectionType": "活用类型",
+        "special": "特殊活用（自行填写）",
+        "indeclinable": "无活用"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 ᠨᡳᠶᠠᠯᠮᠠ"
+    }
+  },
+  "files": {
+    "paradigm": "paradigm.js",
+    "script": "script.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "mnc-pron",
+          "mnc-pron-personal",
+          "mnc-pron-case-fusion",
+          "mnc-pron-demonstrative"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "mnc-noun",
+          "mnc-noun-pl-zero",
+          "mnc-noun-pl-sa",
+          "mnc-noun-pl-ta",
+          "mnc-noun-pl-si",
+          "mnc-noun-pl-ri",
+          "mnc-noun-cases",
+          "mnc-noun-possessive"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "mnc-adj",
+          "mnc-adj-invariable",
+          "mnc-adj-comparison",
+          "mnc-adj-adverb"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "mnc-verb",
+          "mnc-verb-general",
+          "mnc-verb-tense",
+          "mnc-verb-mood",
+          "mnc-verb-negation",
+          "mnc-verb-converb",
+          "mnc-verb-participle",
+          "mnc-verb-secondary",
+          "mnc-verb-voice-overview",
+          "mnc-verb-voice-bu",
+          "mnc-verb-voice-nu",
+          "mnc-verb-voice-ca",
+          "mnc-verb-harmony-back",
+          "mnc-verb-harmony-back-table",
+          "mnc-verb-harmony-front",
+          "mnc-verb-harmony-front-table",
+          "mnc-verb-harmony-round",
+          "mnc-verb-harmony-round-table"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "mnc-num",
+          "mnc-num-cardinal",
+          "mnc-num-ordinal"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "mnc-adv",
+          "mnc-adv-kinds",
+          "mnc-adv-order"
+        ]
+      },
+      {
+        "id": "postp",
+        "title": "后置词",
+        "file": "grammar/postp.json",
+        "anchors": [
+          "mnc-postp",
+          "mnc-postp-common",
+          "mnc-postp-vs-case"
+        ]
+      },
+      {
+        "id": "sound",
+        "title": "语音与元音和谐",
+        "file": "grammar/sound.json",
+        "anchors": [
+          "mnc-sound",
+          "mnc-sound-vowels",
+          "mnc-sound-harmony"
+        ]
+      },
+      {
+        "id": "script",
+        "title": "文字",
+        "file": "grammar/script.json",
+        "anchors": [
+          "mnc-script",
+          "mnc-script-vowels",
+          "mnc-script-consonants",
+          "mnc-script-dotted",
+          "mnc-script-loan",
+          "mnc-script-rules"
+        ]
+      },
+      {
+        "id": "syntax",
+        "title": "句法",
+        "file": "grammar/syntax.json",
+        "anchors": [
+          "mnc-syntax",
+          "mnc-syntax-order",
+          "mnc-syntax-copula",
+          "mnc-syntax-negation"
+        ]
+      }
+    ]
+  }
+}

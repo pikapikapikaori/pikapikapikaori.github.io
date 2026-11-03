@@ -1,0 +1,700 @@
+[
+  {
+    "id": "fr-article",
+    "title": "冠词",
+    "items": [
+      {
+        "id": "fr-article-definite",
+        "title": "定冠词",
+        "tables": [
+          {
+            "caption": "定冠词",
+            "role": "pattern",
+            "headers": [
+              "",
+              "阳性",
+              "阴性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "一般",
+                "le",
+                "la",
+                "les"
+              ],
+              [
+                "元音前",
+                "l'",
+                "l'",
+                "les"
+              ]
+            ]
+          }
+        ],
+        "notes": "le / la / les 在元音或哑音 h 前省音（l'ami）。与介词缩合的形式见「缩合冠词」。"
+      },
+      {
+        "id": "fr-article-indefinite",
+        "title": "不定冠词与部分冠词",
+        "tables": [
+          {
+            "caption": "不定冠词",
+            "role": "pattern",
+            "headers": [
+              "",
+              "阳性",
+              "阴性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "一般",
+                "un",
+                "une",
+                "des"
+              ]
+            ]
+          },
+          {
+            "caption": "部分冠词",
+            "role": "pattern",
+            "headers": [
+              "",
+              "阳性",
+              "阴性"
+            ],
+            "rows": [
+              [
+                "一般",
+                "du",
+                "de la"
+              ],
+              [
+                "元音前",
+                "de l'",
+                "de l'"
+              ]
+            ]
+          }
+        ],
+        "notes": "否定句里不定冠词与部分冠词通常变为 de（Je n'ai pas de pain）。"
+      },
+      {
+        "id": "fr-article-contraction",
+        "title": "缩合冠词",
+        "tables": [
+          {
+            "caption": "介词 + 定冠词的缩合",
+            "role": "pattern",
+            "headers": [
+              "组合",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "de + le",
+                "du",
+                "du livre"
+              ],
+              [
+                "de + les",
+                "des",
+                "des livres"
+              ],
+              [
+                "à + le",
+                "au",
+                "au marché"
+              ],
+              [
+                "à + les",
+                "aux",
+                "aux enfants"
+              ],
+              [
+                "de + la / de + l'",
+                "不缩合",
+                "de la table / de l'eau"
+              ],
+              [
+                "à + la / à + l'",
+                "不缩合",
+                "à la plage / à l'école"
+              ],
+              [
+                "de + un / une / des",
+                "不缩合（不定冠词）",
+                "de un → d'un（省音），une / des 不变"
+              ]
+            ]
+          }
+        ],
+        "notes": "只有阳性单数 le 与复数 les 才与 de / à 缩合；阴性 la 与省音形式 l' 不缩合。"
+      }
+    ]
+  },
+  {
+    "id": "fr-orthography",
+    "title": "正字法",
+    "items": [
+      {
+        "id": "fr-orthography-accents",
+        "title": "音符与特殊字符",
+        "tables": [
+          {
+            "caption": "五种音符",
+            "role": "pattern",
+            "headers": [
+              "音符",
+              "名称",
+              "作用",
+              "例"
+            ],
+            "rows": [
+              [
+                "é",
+                "accent aigu（闭音符）",
+                "只出现在 e 上，表示 [e]",
+                "été、parler"
+              ],
+              [
+                "è / ê",
+                "accent grave / circonflexe",
+                "表示 [ɛ]；ê 常来自历史上消失的 s",
+                "père、forêt（forest）"
+              ],
+              [
+                "à / ù",
+                "accent grave",
+                "只用来区分同形词",
+                "à（介词）、où（哪里）"
+              ],
+              [
+                "â / î / ô / û",
+                "accent circonflexe",
+                "标记历史上的长音或消失的字母",
+                "âme、île、hôtel、dû"
+              ],
+              [
+                "ë / ï / ü",
+                "tréma（分音符）",
+                "表示与前一元音分开读，不构成双元音",
+                "Noël、maïs、aiguë"
+              ],
+              [
+                "ç",
+                "cédille（软音符）",
+                "让 c 在 a / o / u 前读 [s]",
+                "français、reçu、leçon"
+              ],
+              [
+                "œ",
+                "ligature",
+                "o + e 的合字",
+                "cœur、œuf、sœur"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "易混词",
+            "role": "pattern",
+            "headers": [
+              "带音符",
+              "不带音符",
+              "区别"
+            ],
+            "rows": [
+              [
+                "à（介词）",
+                "a（avoir 的第三人称单数）",
+                "Il a à faire."
+              ],
+              [
+                "ou（或者）",
+                "où（哪里）",
+                "Tu viens ou non ? / Où es-tu ?"
+              ],
+              [
+                "la（冠词）",
+                "là（那里）",
+                "la table / là-bas"
+              ],
+              [
+                "sur（在…上）",
+                "sûr（确定的）",
+                "sur la table / je suis sûr"
+              ],
+              [
+                "du（部分冠词）",
+                "dû（devoir 的过去分词）",
+                "du pain / j'ai dû partir"
+              ],
+              [
+                "notre（我们的）",
+                "nôtre（物主代词）",
+                "notre maison / le nôtre"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "音符是拼写的一部分，不能省略；打字时可以用输入法的法语布局或组合键。"
+      },
+      {
+        "id": "fr-orthography-elision",
+        "title": "省音（élision）",
+        "tables": [
+          {
+            "caption": "省音",
+            "role": "pattern",
+            "headers": [
+              "原形式",
+              "省音后",
+              "例"
+            ],
+            "rows": [
+              [
+                "le / la + 元音或哑音 h",
+                "l'",
+                "l'ami、l'heure"
+              ],
+              [
+                "je + 元音",
+                "j'",
+                "j'arrive"
+              ],
+              [
+                "me / te / se + 元音",
+                "m' / t' / s'",
+                "il m'aime"
+              ],
+              [
+                "ne + 元音",
+                "n'",
+                "il n'a pas"
+              ],
+              [
+                "de + 元音",
+                "d'",
+                "d'accord"
+              ],
+              [
+                "que + 元音",
+                "qu'",
+                "qu'il vienne"
+              ],
+              [
+                "ce + 元音",
+                "c'",
+                "c'est"
+              ],
+              [
+                "jusque + 元音",
+                "jusqu'",
+                "jusqu'ici"
+              ],
+              [
+                "lorsque / puisque / quoique",
+                "lorsqu' / puisqu' / quoiqu'",
+                "lorsqu'il arrive"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "哑音 h（heure、homme、histoire）要省音；嘘音 h（héros、hasard、hibou）不省音：le héros。数字 onze / onzième 前也不省音（le onze）。"
+      },
+      {
+        "id": "fr-orthography-hyphen",
+        "title": "连字符（trait d'union）",
+        "tables": [
+          {
+            "caption": "必须用连字符的情况",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "例",
+              "说明"
+            ],
+            "rows": [
+              [
+                "倒装疑问",
+                "Vient-il ?",
+                "主语代词与动词之间"
+              ],
+              [
+                "肯定命令式 + 代词",
+                "Donne-le-moi.",
+                "代词之间也用连字符"
+              ],
+              [
+                "复合词",
+                "grand-père、porte-monnaie、arc-en-ciel",
+                "固定复合词"
+              ],
+              [
+                "数词",
+                "dix-sept、vingt et un、quatre-vingt-un",
+                "et 前后不加连字符"
+              ],
+              [
+                "自反代词后置（命令式）",
+                "Lève-toi !",
+                ""
+              ],
+              [
+                "「那里 / 这里」",
+                "là-bas、ici-là",
+                ""
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "不用连字符的情况",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "例"
+            ],
+            "rows": [
+              [
+                "名词 + 形容词",
+                "une robe rouge"
+              ],
+              [
+                "副词 + 形容词",
+                "très grand"
+              ],
+              [
+                "动词 + 补语",
+                "il parle vite"
+              ],
+              [
+                "数词 + et + un",
+                "vingt et un"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "1990 年正字法改革建议把很多复合词用连字符连接（如 porte-monnaie 不变，但 vingt-et-un 一类写法仍有争议）；写作时以词典为准。"
+      },
+      {
+        "id": "fr-orthography-capital",
+        "title": "大写（majuscules）",
+        "tables": [
+          {
+            "caption": "大写规则",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "大写",
+              "例"
+            ],
+            "rows": [
+              [
+                "句首",
+                "要",
+                "Il fait beau."
+              ],
+              [
+                "专有名词",
+                "要",
+                "Marie、Paris"
+              ],
+              [
+                "国名 / 地区作名词",
+                "要",
+                "la France、la Bretagne"
+              ],
+              [
+                "国民（人）作名词",
+                "要",
+                "un Français、une Française"
+              ],
+              [
+                "语言",
+                "不要",
+                "le français、l'anglais"
+              ],
+              [
+                "星期 / 月份",
+                "不要",
+                "lundi、janvier"
+              ],
+              [
+                "形容词化的国名",
+                "不要",
+                "la cuisine française"
+              ],
+              [
+                "书名 / 作品名",
+                "首词大写",
+                "Les Misérables"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "法语的大写比英语少：语言名、星期、月份、国民形容词、以及由专名派生的形容词都小写。"
+      },
+      {
+        "id": "fr-orthography-punctuation",
+        "title": "标点与空格",
+        "tables": [
+          {
+            "caption": "法语特有的空格",
+            "role": "pattern",
+            "headers": [
+              "标点",
+              "前后空格",
+              "例"
+            ],
+            "rows": [
+              [
+                ",",
+                "前无、后一个空格",
+                "Oui, je viens."
+              ],
+              [
+                ".",
+                "前无、后一个空格",
+                "Il vient."
+              ],
+              [
+                ";",
+                "前后各一个空格",
+                "Il est tard ; rentrons."
+              ],
+              [
+                ":",
+                "前后各一个空格",
+                "Notez ceci : il pleut."
+              ],
+              [
+                "!",
+                "前后各一个空格",
+                "Viens !"
+              ],
+              [
+                "?",
+                "前后各一个空格",
+                "Tu viens ?"
+              ],
+              [
+                "« »",
+                "内侧各一个空格",
+                "« Bonjour ! »"
+              ],
+              [
+                "—（破折号）",
+                "前后各一个空格",
+                "Il arrive — enfin !"
+              ],
+              [
+                "-（连字符）",
+                "前后都无空格",
+                "Vient-il ?"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "其他约定",
+            "role": "pattern",
+            "headers": [
+              "项目",
+              "规则"
+            ],
+            "rows": [
+              [
+                "小数点",
+                "用逗号：3,14（不用 3.14）"
+              ],
+              [
+                "千位分隔",
+                "用空格：1 000 000"
+              ],
+              [
+                "百分比",
+                "数字与 % 之间加空格：50 %"
+              ],
+              [
+                "货币",
+                "5 €（数字后加空格）"
+              ],
+              [
+                "引号",
+                "法语用 « »，不用英语的 “ ”"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "这些空格规则在排版上叫「espaces insécables」（不换行空格），正规排版要防止标点被拆到行首。"
+      }
+    ]
+  },
+  {
+    "id": "fr-liaison",
+    "title": "联诵与连音",
+    "items": [
+      {
+        "id": "fr-liaison-rules",
+        "title": "三类联诵",
+        "tables": [
+          {
+            "caption": "联诵的三种情况",
+            "role": "pattern",
+            "headers": [
+              "类别",
+              "规则",
+              "例"
+            ],
+            "rows": [
+              [
+                "必须联诵",
+                "限定词 + 名词、代词 + 动词、形容词 + 名词、单音节副词 / 介词 + 词、数词",
+                "les_amis、nous_avons、petit_enfant、très_important、deux_ans"
+              ],
+              [
+                "禁止联诵",
+                "et 之后、嘘音 h 开头的词、数字 un 与名词之间（部分用法）、词组间停顿处",
+                "et_#puis、les_#héros、un_#chat（部分变体）"
+              ],
+              [
+                "可选联诵",
+                "名词 + 形容词、动词 + 补语、复数名词之间",
+                "des livres_(anciens)、ils parlent_(à moi)"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "联诵是词尾<strong>不发音的辅音</strong>与后一词开头的元音连读；连音（enchaînement）是<strong>本来发音的辅音</strong>与后一词的元音连读（elle_est），不属于联诵、也不可省略。"
+      },
+      {
+        "id": "fr-liaison-sounds",
+        "title": "联诵音的读音变化",
+        "tables": [
+          {
+            "caption": "音变",
+            "role": "pattern",
+            "headers": [
+              "词尾字母",
+              "联诵音",
+              "例"
+            ],
+            "rows": [
+              [
+                "-s / -x",
+                "[z]",
+                "les amis [le-za-mi]、deux ans [dø-zɑ̃]"
+              ],
+              [
+                "-d",
+                "[t]",
+                "grand homme [ɡʁɑ̃-tɔm]"
+              ],
+              [
+                "-f",
+                "[v]",
+                "neuf ans [nø-vɑ̃]"
+              ],
+              [
+                "-n / -m（鼻化元音）",
+                "去鼻化 + [n]",
+                "bon ami [bɔ-n‿a-mi]、un homme [œ̃-nɔm]"
+              ],
+              [
+                "-t（在 et 以外）",
+                "[t]",
+                "petit enfant [pə-ti-tɑ̃-fɑ̃]"
+              ],
+              [
+                "-r（部分词）",
+                "[ʁ]",
+                "premier étage [pʁə-mje-ʁe-taʒ]"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "鼻化元音（in / an / on）在联诵时失去鼻化，后接 [n]：un / œ̃/ → /œ-n/。"
+      },
+      {
+        "id": "fr-liaison-examples",
+        "title": "常见必须联诵的组合",
+        "tables": [
+          {
+            "caption": "例表",
+            "role": "pattern",
+            "headers": [
+              "类型",
+              "短语",
+              "联诵音"
+            ],
+            "rows": [
+              [
+                "冠词 + 名词",
+                "les enfants",
+                "[le-zɑ̃-fɑ̃]"
+              ],
+              [
+                "冠词 + 名词",
+                "un appartement",
+                "[œ-n‿a-paʁ-tə-mɑ̃]"
+              ],
+              [
+                "代词 + 动词",
+                "vous avez",
+                "[vu-za-ve]"
+              ],
+              [
+                "代词 + 动词",
+                "nous allons",
+                "[nu-za-lɔ̃]"
+              ],
+              [
+                "形容词 + 名词",
+                "un grand arbre",
+                "[œ̃-ɡʁɑ̃-taʁbʁ]"
+              ],
+              [
+                "形容词 + 名词",
+                "un petit ami",
+                "[œ̃-pə-ti-ta-mi]"
+              ],
+              [
+                "介词 / 副词 + 词",
+                "chez elle",
+                "[ʃe-zɛl]"
+              ],
+              [
+                "介词 / 副词 + 词",
+                "très utile",
+                "[tʁɛ-zy-til]"
+              ],
+              [
+                "数词 + 名词",
+                "deux enfants",
+                "[dø-zɑ̃-fɑ̃]"
+              ],
+              [
+                "数词 + 名词",
+                "trois amis",
+                "[tʁwa-za-mi]"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "禁止联诵的固定组合：et + 任何词（et_un）、les héros（嘘音 h）、以及名词与后置形容词之间一般是可选联诵。"
+      }
+    ]
+  }
+]

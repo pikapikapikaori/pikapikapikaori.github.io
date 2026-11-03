@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "language": "sa",
+  "name": "梵语",
+  "native": "संस्कृतम्",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 4,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "participle",
+    "adv",
+    "pron",
+    "prep",
+    "postp",
+    "ambip",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "grammar": true,
+  "paradigm": true,
+  "terms": {
+    "inflectionType": "变格 / 变位类型",
+    "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",
+    "inflectionTypeHint": "显示在词卡正面的徽章。",
+    "special": "特殊变格（自行填写）",
+    "indeclinable": "不变格",
+    "paradigmTitle": "{pos}变格表格",
+    "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
+    "extraForms": "补充形式（不定式、命令式、动名词、日语活用等）",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 काम्、अग्नि、राज्",
+      "hint": "词干 = 不带词尾的形式（连声前的词干）：काम- 填 काम्、अग्नि- 填 अग्नि、राजन्- 填 राज्。词尾由变格类型补上，末尾的「-」只是显示用，不用填。"
+    },
+    "extraPartsHint": "以下词干按实际情况填写；该类型没有的可以留空。",
+    "byPos": {
+      "verb": {
+        "special": "特殊变位（自行填写）",
+        "indeclinable": "不变位",
+        "paradigmTitle": "{pos}变位表格",
+        "stems": {
+          "label": "词根",
+          "placeholder": "词根，如 √bhū",
+          "hint": "填词根，不带 √，如 भू（bhū）。"
+        }
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 देवः"
+    }
+  },
+  "files": {
+    "paradigm": "paradigm.js",
+    "script": "script.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "sa-pron",
+          "sa-pron-declension",
+          "sa-pron-other",
+          "sa-pron-personal",
+          "sa-pron-reflexive"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "sa-noun",
+          "sa-noun-a",
+          "sa-noun-aa",
+          "sa-noun-i",
+          "sa-noun-ii",
+          "sa-noun-u",
+          "sa-noun-uu",
+          "sa-noun-r",
+          "sa-noun-endings-cons",
+          "sa-noun-ant",
+          "sa-noun-in",
+          "sa-noun-as",
+          "sa-noun-vas",
+          "sa-noun-cons"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "sa-adj",
+          "sa-adj-a",
+          "sa-adj-i-u",
+          "sa-adj-r",
+          "sa-adj-endings-cons",
+          "sa-adj-ant",
+          "sa-adj-comparison"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "sa-adv",
+          "sa-adv-formation",
+          "sa-adv-comparison",
+          "sa-adv-kinds"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "sa-verb",
+          "sa-verb-endings",
+          "sa-verb-systems",
+          "sa-verb-voice",
+          "sa-verb-reduplication",
+          "sa-verb-class1",
+          "sa-verb-class1-pres",
+          "sa-verb-class2",
+          "sa-verb-class2-pres",
+          "sa-verb-class3",
+          "sa-verb-class3-pres",
+          "sa-verb-class4",
+          "sa-verb-class4-pres",
+          "sa-verb-class5",
+          "sa-verb-class5-pres",
+          "sa-verb-class6",
+          "sa-verb-class6-pres",
+          "sa-verb-class7",
+          "sa-verb-class7-pres",
+          "sa-verb-class8",
+          "sa-verb-class8-pres",
+          "sa-verb-class9",
+          "sa-verb-class9-pres",
+          "sa-verb-class10",
+          "sa-verb-class10-pres",
+          "sa-verb-passive",
+          "sa-verb-passive-present",
+          "sa-verb-passive-other",
+          "sa-verb-future",
+          "sa-verb-future-tenses",
+          "sa-verb-aorist",
+          "sa-verb-aorist-overview",
+          "sa-verb-perfect",
+          "sa-verb-perfect-endings",
+          "sa-verb-perfect-overview",
+          "sa-verb-nonfinite",
+          "sa-verb-infinitive",
+          "sa-verb-participle",
+          "sa-verb-secondary",
+          "sa-verb-secondary-overview"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "sa-num",
+          "sa-num-cardinal",
+          "sa-num-ordinal"
+        ]
+      },
+      {
+        "id": "sound",
+        "title": "语音与文字（连声、元音交替、文字与转写）",
+        "file": "grammar/sound.json",
+        "anchors": [
+          "sa-sandhi",
+          "sa-sandhi-types",
+          "sa-sandhi-pada",
+          "sa-sandhi-vowel",
+          "sa-sandhi-visarga",
+          "sa-sandhi-consonant",
+          "sa-sandhi-special",
+          "sa-sandhi-chart",
+          "sa-vowel-grades",
+          "sa-vowel-grades-table",
+          "sa-vowel-grades-use",
+          "sa-script",
+          "sa-script-siddham",
+          "sa-script-special"
+        ]
+      }
+    ]
+  }
+}

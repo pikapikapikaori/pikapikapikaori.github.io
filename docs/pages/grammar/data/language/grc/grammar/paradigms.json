@@ -1,0 +1,1525 @@
+{
+  "pron": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "有性代词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ],
+        "default": true,
+        "anchors": [
+          "grc-pron-3rd",
+          "grc-pron-reflexive",
+          "grc-pron-possessive",
+          "grc-pron-demonstrative",
+          "grc-pron-relative",
+          "grc-pron-interrogative",
+          "grc-pron-indefinite"
+        ]
+      },
+      {
+        "key": "common",
+        "title": "无性代词",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "du",
+            "label": "双数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ],
+        "anchors": [
+          "grc-pron-1st-2nd"
+        ]
+      }
+    ]
+  },
+  "noun": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      }
+    ]
+  },
+  "adj": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "comparison",
+        "title": "比较等级",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "comparative",
+            "label": "比较级"
+          },
+          {
+            "key": "superlative",
+            "label": "最高级"
+          }
+        ]
+      }
+    ]
+  },
+  "participle": {
+    "extends": "adj"
+  },
+  "adv": {
+    "tables": [
+      {
+        "key": "comparison",
+        "title": "比较等级",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "comparative",
+            "label": "比较级"
+          },
+          {
+            "key": "superlative",
+            "label": "最高级"
+          }
+        ]
+      }
+    ]
+  },
+  "verb": {
+    "tables": [
+      {
+        "key": "pres",
+        "title": "现在时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres-act-ind",
+            "label": "直陈式 主动",
+            "principal": true
+          },
+          {
+            "key": "pres-midpass-ind",
+            "label": "直陈式 中动/被动"
+          },
+          {
+            "key": "pres-act-subj",
+            "label": "虚拟式 主动"
+          },
+          {
+            "key": "pres-midpass-subj",
+            "label": "虚拟式 中动/被动"
+          },
+          {
+            "key": "pres-act-opt",
+            "label": "祈愿式 主动"
+          },
+          {
+            "key": "pres-midpass-opt",
+            "label": "祈愿式 中动/被动"
+          },
+          {
+            "key": "pres-act-impr",
+            "label": "命令式 主动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          },
+          {
+            "key": "pres-midpass-impr",
+            "label": "命令式 中动/被动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "impf",
+        "title": "未完成时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "impf-act-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "impf-midpass-ind",
+            "label": "直陈式 中动/被动"
+          }
+        ]
+      },
+      {
+        "key": "fut",
+        "title": "将来时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "fut-act-ind",
+            "label": "直陈式 主动",
+            "principal": true
+          },
+          {
+            "key": "fut-mid-ind",
+            "label": "直陈式 中动"
+          },
+          {
+            "key": "fut-pass-ind",
+            "label": "直陈式 被动"
+          },
+          {
+            "key": "fut-act-opt",
+            "label": "祈愿式 主动"
+          },
+          {
+            "key": "fut-mid-opt",
+            "label": "祈愿式 中动"
+          },
+          {
+            "key": "fut-pass-opt",
+            "label": "祈愿式 被动"
+          }
+        ]
+      },
+      {
+        "key": "aor",
+        "title": "不定过去时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "aor-act-ind",
+            "label": "直陈式 主动",
+            "principal": true
+          },
+          {
+            "key": "aor-mid-ind",
+            "label": "直陈式 中动"
+          },
+          {
+            "key": "aor-pass-ind",
+            "label": "直陈式 被动",
+            "principal": true
+          },
+          {
+            "key": "aor-act-subj",
+            "label": "虚拟式 主动"
+          },
+          {
+            "key": "aor-mid-subj",
+            "label": "虚拟式 中动"
+          },
+          {
+            "key": "aor-pass-subj",
+            "label": "虚拟式 被动"
+          },
+          {
+            "key": "aor-act-opt",
+            "label": "祈愿式 主动"
+          },
+          {
+            "key": "aor-mid-opt",
+            "label": "祈愿式 中动"
+          },
+          {
+            "key": "aor-pass-opt",
+            "label": "祈愿式 被动"
+          },
+          {
+            "key": "aor-act-impr",
+            "label": "命令式 主动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          },
+          {
+            "key": "aor-mid-impr",
+            "label": "命令式 中动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          },
+          {
+            "key": "aor-pass-impr",
+            "label": "命令式 被动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "perf",
+        "title": "完成时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf-act-ind",
+            "label": "直陈式 主动",
+            "principal": true
+          },
+          {
+            "key": "perf-act-subj",
+            "label": "虚拟式 主动"
+          },
+          {
+            "key": "perf-act-opt",
+            "label": "祈愿式 主动"
+          },
+          {
+            "key": "perf-act-impr",
+            "label": "命令式 主动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          },
+          {
+            "key": "perf-midpass-ind",
+            "label": "直陈式 中动/被动",
+            "principal": true
+          },
+          {
+            "key": "perf-midpass-impr",
+            "label": "命令式 中动/被动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "plup",
+        "title": "过去完成时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "plup-act-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "plup-midpass-ind",
+            "label": "直陈式 中动/被动"
+          }
+        ]
+      },
+      {
+        "key": "futp",
+        "title": "将来完成时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "futp-midpass-ind",
+            "label": "直陈式 中动/被动",
+            "disabled": [
+              "1du"
+            ]
+          },
+          {
+            "key": "futp-midpass-opt",
+            "label": "祈愿式 中动/被动",
+            "disabled": [
+              "1du"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "inf",
+        "title": "不定式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres-act",
+            "label": "现在时 主动"
+          },
+          {
+            "key": "pres-midpass",
+            "label": "现在时 中动/被动"
+          },
+          {
+            "key": "fut-act",
+            "label": "将来时 主动"
+          },
+          {
+            "key": "fut-mid",
+            "label": "将来时 中动"
+          },
+          {
+            "key": "fut-pass",
+            "label": "将来时 被动"
+          },
+          {
+            "key": "aor-act",
+            "label": "不定过去时 主动"
+          },
+          {
+            "key": "aor-mid",
+            "label": "不定过去时 中动"
+          },
+          {
+            "key": "aor-pass",
+            "label": "不定过去时 被动"
+          },
+          {
+            "key": "perf-act",
+            "label": "完成时 主动"
+          },
+          {
+            "key": "perf-midpass",
+            "label": "完成时 中动/被动"
+          },
+          {
+            "key": "futp-midpass",
+            "label": "将来完成时 中动/被动"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-pres-act",
+        "title": "现在时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-pres-midpass",
+        "title": "现在时中动·被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-fut-act",
+        "title": "将来时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-fut-mid",
+        "title": "将来时中动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-fut-pass",
+        "title": "将来时被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-aor-act",
+        "title": "不定过去时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-aor-mid",
+        "title": "不定过去时中动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-aor-pass",
+        "title": "不定过去时被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-perf-act",
+        "title": "完成时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-perf-midpass",
+        "title": "完成时中动·被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-futp-midpass",
+        "title": "将来完成时中动·被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      }
+    ]
+  }
+}

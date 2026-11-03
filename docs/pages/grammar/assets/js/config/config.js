@@ -5,7 +5,7 @@
 
 /* ---------------- 语言数据 ---------------- */
 
-/** 要加载的语言文件：`data/grammar/{code}.json`；显示顺序由 JSON 里的 group.order / order 决定 */
+/** 要加载的语言：`data/language/{code}/meta.json`；显示顺序由 meta 里的 group.order / order 决定 */
 export const GRAMMAR_FILES = [
     'la', 'grc', 'he', 'sa', 'mnc', 'ja', 'zh-cls', 'en', 'fr', 'de',
 ]

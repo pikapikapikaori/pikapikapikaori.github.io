@@ -1,0 +1,854 @@
+[
+  {
+    "id": "la-pron",
+    "title": "代词",
+    "items": [
+      {
+        "id": "la-pron-1st-2nd",
+        "title": "一二人称代词（ego / tū）",
+        "inflect": "pron",
+        "tables": [
+          {
+            "caption": "第一人称与第二人称（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "ego 我",
+              "tū 你"
+            ],
+            "rows": [
+              [
+                "主格",
+                "ego",
+                "tū"
+              ],
+              [
+                "属格",
+                "meī",
+                "tuī"
+              ],
+              [
+                "与格",
+                "mihi",
+                "tibi"
+              ],
+              [
+                "宾格",
+                "mē",
+                "tē"
+              ],
+              [
+                "夺格",
+                "mē",
+                "tē"
+              ]
+            ]
+          },
+          {
+            "caption": "第一人称与第二人称（复数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "nōs 我们",
+              "vōs 你们"
+            ],
+            "rows": [
+              [
+                "主格",
+                "nōs",
+                "vōs"
+              ],
+              [
+                "属格",
+                "nostrum / nostrī",
+                "vestrum / vestrī"
+              ],
+              [
+                "与格",
+                "nōbīs",
+                "vōbīs"
+              ],
+              [
+                "宾格",
+                "nōs",
+                "vōs"
+              ],
+              [
+                "夺格",
+                "nōbīs",
+                "vōbīs"
+              ]
+            ]
+          }
+        ],
+        "notes": "第一、二人称代词没有性别区分，只有数（单 / 复）与格的变化；夺格带介词时多用 mē / tē（mēcum、tēcum 是固定的后置用法）。"
+      },
+      {
+        "id": "la-pron-3rd",
+        "title": "三人称代词（is, ea, id）",
+        "inflect": "pron",
+        "tables": [
+          {
+            "caption": "第三人称（is, ea, id 他/她/它）（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "is",
+                "ea",
+                "id"
+              ],
+              [
+                "属格",
+                "eius",
+                "eius",
+                "eius"
+              ],
+              [
+                "与格",
+                "eī",
+                "eī",
+                "eī"
+              ],
+              [
+                "宾格",
+                "eum",
+                "eam",
+                "id"
+              ],
+              [
+                "夺格",
+                "eō",
+                "eā",
+                "eō"
+              ]
+            ]
+          },
+          {
+            "caption": "第三人称（复数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "eī / iī",
+                "eae",
+                "ea"
+              ],
+              [
+                "属格",
+                "eōrum",
+                "eārum",
+                "eōrum"
+              ],
+              [
+                "与格",
+                "eīs / iīs",
+                "eīs / iīs",
+                "eīs / iīs"
+              ],
+              [
+                "宾格",
+                "eōs",
+                "eās",
+                "ea"
+              ],
+              [
+                "夺格",
+                "eīs / iīs",
+                "eīs / iīs",
+                "eīs / iīs"
+              ]
+            ]
+          }
+        ],
+        "notes": "拉丁语常省略人称代词主语，动词人称已含信息；代词多用于强调或对比。"
+      },
+      {
+        "id": "la-pron-reflexive",
+        "title": "反身代词 suī",
+        "tables": [
+          {
+            "caption": "suī 自己（第三人称，只有斜格）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "形式",
+              "说明"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "反身代词没有主格"
+              ],
+              [
+                "属格",
+                "suī",
+                "「自己的（东西）」"
+              ],
+              [
+                "与格",
+                "sibi",
+                "「给自己」"
+              ],
+              [
+                "宾格",
+                "sē / sēsē",
+                "「自己（宾格）」"
+              ],
+              [
+                "夺格",
+                "sē / sēsē",
+                "「靠/与自己」"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "第一、二人称反身（用人称代词的斜格）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "第一人称",
+              "第二人称"
+            ],
+            "rows": [
+              [
+                "属格",
+                "meī",
+                "tuī"
+              ],
+              [
+                "与格",
+                "mihi",
+                "tibi"
+              ],
+              [
+                "宾格",
+                "mē",
+                "tē"
+              ],
+              [
+                "夺格",
+                "mē",
+                "tē"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "反身代词只有第三人称有专门形式 suī / sibi / sē，且没有主格（动作不会反射到主语自身以外）；第一、二人称直接用 ego / tū 的斜格。反身代词指向主语，非反身的「他/她」用 is / ea / id 的斜格。",
+        "inflect": "pron"
+      },
+      {
+        "id": "la-pron-possessive",
+        "title": "物主代词",
+        "tables": [
+          {
+            "caption": "五组物主代词",
+            "role": "pattern",
+            "headers": [
+              "人称",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "第一人称单数",
+                "meus",
+                "mea",
+                "meum"
+              ],
+              [
+                "第二人称单数",
+                "tuus",
+                "tua",
+                "tuum"
+              ],
+              [
+                "第三人称（反身）",
+                "suus",
+                "sua",
+                "suum"
+              ],
+              [
+                "第一人称复数",
+                "noster",
+                "nostra",
+                "nostrum"
+              ],
+              [
+                "第二人称复数",
+                "vester",
+                "vestra",
+                "vestrum"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "meus, mea, meum（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "meus",
+                "mea",
+                "meum"
+              ],
+              [
+                "属格",
+                "meī",
+                "meae",
+                "meī"
+              ],
+              [
+                "与格",
+                "meō",
+                "meae",
+                "meō"
+              ],
+              [
+                "宾格",
+                "meum",
+                "meam",
+                "meum"
+              ],
+              [
+                "夺格",
+                "meō",
+                "meā",
+                "meō"
+              ],
+              [
+                "呼格",
+                "mī",
+                "mea",
+                "meum"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "meus, mea, meum（复数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "meī",
+                "meae",
+                "mea"
+              ],
+              [
+                "属格",
+                "meōrum",
+                "meārum",
+                "meōrum"
+              ],
+              [
+                "与格",
+                "meīs",
+                "meīs",
+                "meīs"
+              ],
+              [
+                "宾格",
+                "meōs",
+                "meās",
+                "mea"
+              ],
+              [
+                "夺格",
+                "meīs",
+                "meīs",
+                "meīs"
+              ],
+              [
+                "呼格",
+                "meī",
+                "meae",
+                "mea"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "变格同第一二变格形容词。呼格单数阳性为 mī（只有 meus 有这个特殊形式）；noster / vester 保留词干的 -er。suus 是反身（指向主语），非反身的「他的」用 eius（属格）/ suus 以外的形式。",
+        "inflect": "pron"
+      },
+      {
+        "id": "la-pron-demonstrative",
+        "title": "指示代词",
+        "tables": [
+          {
+            "caption": "hic, haec, hoc 这（近指）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "hic",
+                "haec",
+                "hoc"
+              ],
+              [
+                "属格",
+                "huius",
+                "huius",
+                "huius"
+              ],
+              [
+                "与格",
+                "huic",
+                "huic",
+                "huic"
+              ],
+              [
+                "宾格",
+                "hunc",
+                "hanc",
+                "hoc"
+              ],
+              [
+                "夺格",
+                "hōc",
+                "hāc",
+                "hōc"
+              ]
+            ]
+          },
+          {
+            "caption": "ille, illa, illud 那（远指）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "ille",
+                "illa",
+                "illud"
+              ],
+              [
+                "属格",
+                "illīus",
+                "illīus",
+                "illīus"
+              ],
+              [
+                "与格",
+                "illī",
+                "illī",
+                "illī"
+              ],
+              [
+                "宾格",
+                "illum",
+                "illam",
+                "illud"
+              ],
+              [
+                "夺格",
+                "illō",
+                "illā",
+                "illō"
+              ]
+            ]
+          },
+          {
+            "caption": "iste, ista, istud 那个（第二人称所指）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "iste",
+                "ista",
+                "istud"
+              ],
+              [
+                "属格",
+                "istīus",
+                "istīus",
+                "istīus"
+              ],
+              [
+                "与格",
+                "istī",
+                "istī",
+                "istī"
+              ],
+              [
+                "宾格",
+                "istum",
+                "istam",
+                "istud"
+              ],
+              [
+                "夺格",
+                "istō",
+                "istā",
+                "istō"
+              ]
+            ]
+          }
+        ],
+        "notes": "指示代词的属格单数一律为 -īus，与格单数一律为 -ī。",
+        "inflect": "pron"
+      },
+      {
+        "id": "la-pron-relative",
+        "title": "关系代词 quī, quae, quod",
+        "tables": [
+          {
+            "caption": "quī, quae, quod（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "quī",
+                "quae",
+                "quod"
+              ],
+              [
+                "属格",
+                "cuius",
+                "cuius",
+                "cuius"
+              ],
+              [
+                "与格",
+                "cui",
+                "cui",
+                "cui"
+              ],
+              [
+                "宾格",
+                "quem",
+                "quam",
+                "quod"
+              ],
+              [
+                "夺格",
+                "quō",
+                "quā",
+                "quō"
+              ]
+            ]
+          },
+          {
+            "caption": "quī, quae, quod（复数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "quī",
+                "quae",
+                "quae"
+              ],
+              [
+                "属格",
+                "quōrum",
+                "quārum",
+                "quōrum"
+              ],
+              [
+                "与格",
+                "quibus",
+                "quibus",
+                "quibus"
+              ],
+              [
+                "宾格",
+                "quōs",
+                "quās",
+                "quae"
+              ],
+              [
+                "夺格",
+                "quibus",
+                "quibus",
+                "quibus"
+              ]
+            ]
+          }
+        ],
+        "notes": "性和数由先行词决定，格由从句中的地位决定。",
+        "inflect": "pron"
+      },
+      {
+        "id": "la-pron-interrogative",
+        "title": "疑问代词 quis, quid",
+        "tables": [
+          {
+            "caption": "quis, quid（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性/阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "quis",
+                "quid"
+              ],
+              [
+                "属格",
+                "cuius",
+                "cuius"
+              ],
+              [
+                "与格",
+                "cui",
+                "cui"
+              ],
+              [
+                "宾格",
+                "quem",
+                "quid"
+              ],
+              [
+                "夺格",
+                "quō",
+                "quō"
+              ]
+            ]
+          },
+          {
+            "caption": "疑问形容词 quī, quae, quod（复数，作形容词用）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "quī",
+                "quae",
+                "quae"
+              ],
+              [
+                "属格",
+                "quōrum",
+                "quārum",
+                "quōrum"
+              ],
+              [
+                "与格",
+                "quibus",
+                "quibus",
+                "quibus"
+              ],
+              [
+                "宾格",
+                "quōs",
+                "quās",
+                "quae"
+              ],
+              [
+                "夺格",
+                "quibus",
+                "quibus",
+                "quibus"
+              ]
+            ]
+          }
+        ],
+        "notes": "疑问代词与关系代词变格几乎同形，区别在主格单数（quis vs. quī）与中性主/宾格单数（quid vs. quod）。",
+        "inflect": "pron"
+      },
+      {
+        "id": "la-pron-indefinite",
+        "title": "不定代词",
+        "tables": [
+          {
+            "caption": "常用不定代词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "含义",
+              "用法"
+            ],
+            "rows": [
+              [
+                "quis（sī / nisi / nē / num / quō 之后）",
+                "某人",
+                "条件句、间接疑问"
+              ],
+              [
+                "aliquis",
+                "某人",
+                "肯定句"
+              ],
+              [
+                "quispiam",
+                "某人",
+                "少见，语气比 aliquis 更轻"
+              ],
+              [
+                "quisquam",
+                "任何人",
+                "多与否定、虚拟连用"
+              ],
+              [
+                "quīdam",
+                "某个（确指）",
+                "说话人心里有具体对象"
+              ],
+              [
+                "quīvīs / quīlibet",
+                "任何一个",
+                "随意挑，让步"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "aliquis, aliqua, aliquid（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "aliquis",
+                "aliqua",
+                "aliquid"
+              ],
+              [
+                "属格",
+                "alicuius",
+                "alicuius",
+                "alicuius"
+              ],
+              [
+                "与格",
+                "alicui",
+                "alicui",
+                "alicui"
+              ],
+              [
+                "宾格",
+                "aliquem",
+                "aliquam",
+                "aliquid"
+              ],
+              [
+                "夺格",
+                "aliquō",
+                "aliquā",
+                "aliquō"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "quīdam, quaedam, quoddam（单数）",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "quīdam",
+                "quaedam",
+                "quoddam"
+              ],
+              [
+                "属格",
+                "cuiusdam",
+                "cuiusdam",
+                "cuiusdam"
+              ],
+              [
+                "与格",
+                "cuidam",
+                "cuidam",
+                "cuidam"
+              ],
+              [
+                "宾格",
+                "quendam",
+                "quandam",
+                "quoddam"
+              ],
+              [
+                "夺格",
+                "quōdam",
+                "quādam",
+                "quōdam"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "不定代词的属格单数一律 -ius、与格单数一律 -ī（同指示代词）；-dam 直接缀在变格形式之后（cuiusdam、quendam）。",
+        "inflect": "pron"
+      }
+    ]
+  }
+]

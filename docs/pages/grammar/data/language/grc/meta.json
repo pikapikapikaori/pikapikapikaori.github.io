@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "language": "grc",
+  "name": "古希腊语",
+  "native": "Ἑλληνική",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 2,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "participle",
+    "adv",
+    "pron",
+    "prep",
+    "postp",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "grammar": true,
+  "paradigm": true,
+  "terms": {
+    "inflectionType": "变格 / 变位类型",
+    "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",
+    "inflectionTypeHint": "显示在词卡正面的徽章。",
+    "special": "特殊变格（自行填写）",
+    "indeclinable": "不变格",
+    "paradigmTitle": "{pos}变格表格",
+    "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
+    "extraForms": "补充形式（不定式、命令式、动名词、日语活用等）",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 λόγ",
+      "hint": "词干：不变的部分，词形变化在其后追加词尾，如 λόγ → λόγος、λύ → λύω。末尾的「-」只是显示用，不用填。"
+    },
+    "extraPartsHint": "以下词干可以留空：留空时按这个变位 / 变格类型的规则从基准词干推导，不规则的词请核对或直接填写。",
+    "byPos": {
+      "verb": {
+        "special": "特殊变位（自行填写）",
+        "indeclinable": "不变位",
+        "paradigmTitle": "{pos}变位表格"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 λόγος"
+    }
+  },
+  "files": {
+    "paradigm": "paradigm.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "grc-pron",
+          "grc-pron-1st-2nd",
+          "grc-pron-3rd",
+          "grc-pron-reflexive",
+          "grc-pron-possessive",
+          "grc-pron-demonstrative",
+          "grc-pron-relative",
+          "grc-pron-interrogative",
+          "grc-pron-indefinite"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "grc-noun",
+          "grc-noun-1st-decl-e",
+          "grc-noun-1st-decl-a",
+          "grc-noun-1st-decl-e-oxytone",
+          "grc-noun-1st-decl-a-oxytone",
+          "grc-noun-1st-decl-m",
+          "grc-noun-2nd-decl-m",
+          "grc-noun-2nd-decl-m-oxytone",
+          "grc-noun-2nd-decl-n",
+          "grc-noun-3rd-decl-stop",
+          "grc-noun-3rd-decl-liquid",
+          "grc-noun-3rd-decl-s",
+          "grc-noun-3rd-decl-i",
+          "grc-noun-3rd-decl-y",
+          "grc-noun-3rd-decl-eus"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "grc-adj",
+          "grc-adj-1st-2nd",
+          "grc-adj-3rd"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "grc-adv",
+          "grc-adv-comparison",
+          "grc-adv-place",
+          "grc-adv-kinds"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "grc-verb",
+          "grc-verb-overview",
+          "grc-verb-principal-parts",
+          "grc-verb-augment",
+          "grc-verb-moods",
+          "grc-verb-deponent",
+          "grc-verb-vowel-conj",
+          "grc-verb-vowel-pres",
+          "grc-verb-vowel-impf",
+          "grc-verb-vowel-fut",
+          "grc-verb-vowel-aor",
+          "grc-verb-vowel-perf",
+          "grc-verb-vowel-plup",
+          "grc-verb-vowel-futp",
+          "grc-verb-vowel-inf",
+          "grc-verb-vowel-ptcp",
+          "grc-verb-contract-e-conj",
+          "grc-verb-contract-e-pres",
+          "grc-verb-contract-e-impf",
+          "grc-verb-contract-e-fut",
+          "grc-verb-contract-e-aor",
+          "grc-verb-contract-e-perf",
+          "grc-verb-contract-e-plup",
+          "grc-verb-contract-e-futp",
+          "grc-verb-contract-e-inf",
+          "grc-verb-contract-e-ptcp",
+          "grc-verb-contract-a-conj",
+          "grc-verb-contract-a-pres",
+          "grc-verb-contract-a-impf",
+          "grc-verb-contract-a-fut",
+          "grc-verb-contract-a-aor",
+          "grc-verb-contract-a-perf",
+          "grc-verb-contract-a-plup",
+          "grc-verb-contract-a-futp",
+          "grc-verb-contract-a-inf",
+          "grc-verb-contract-a-ptcp",
+          "grc-verb-contract-o-conj",
+          "grc-verb-contract-o-pres",
+          "grc-verb-contract-o-impf",
+          "grc-verb-contract-o-fut",
+          "grc-verb-contract-o-aor",
+          "grc-verb-contract-o-perf",
+          "grc-verb-contract-o-plup",
+          "grc-verb-contract-o-futp",
+          "grc-verb-contract-o-inf",
+          "grc-verb-contract-o-ptcp",
+          "grc-verb-cons-conj",
+          "grc-verb-cons-pres",
+          "grc-verb-cons-impf",
+          "grc-verb-cons-fut",
+          "grc-verb-cons-aor",
+          "grc-verb-cons-perf",
+          "grc-verb-cons-plup",
+          "grc-verb-cons-futp",
+          "grc-verb-cons-inf",
+          "grc-verb-cons-ptcp",
+          "grc-verb-mi-conj",
+          "grc-verb-mi-pres",
+          "grc-verb-mi-impf",
+          "grc-verb-mi-fut",
+          "grc-verb-mi-aor",
+          "grc-verb-mi-perf",
+          "grc-verb-mi-plup",
+          "grc-verb-mi-futp",
+          "grc-verb-mi-inf",
+          "grc-verb-mi-ptcp"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "grc-num",
+          "grc-num-cardinal",
+          "grc-num-declension",
+          "grc-num-ordinal"
+        ]
+      },
+      {
+        "id": "misc",
+        "title": "其他语法（冠词、缩合、重音、方言）",
+        "file": "grammar/misc.json",
+        "anchors": [
+          "grc-article",
+          "grc-article-definite",
+          "grc-contraction",
+          "grc-contraction-rules",
+          "grc-contraction-examples",
+          "grc-accent",
+          "grc-accent-basic",
+          "grc-accent-types",
+          "grc-dialect",
+          "grc-dialect-overview",
+          "grc-dialect-epic",
+          "grc-dialect-ionic-koine"
+        ]
+      }
+    ]
+  }
+}

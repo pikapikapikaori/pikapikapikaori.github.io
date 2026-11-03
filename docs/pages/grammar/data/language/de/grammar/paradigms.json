@@ -1,0 +1,523 @@
+{
+  "noun": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      }
+    ]
+  },
+  "adj": {
+    "tables": [
+      {
+        "key": "weak",
+        "title": "弱变化（定冠词后）",
+        "columns": [
+          {
+            "key": "m_sg",
+            "label": "单数阳性"
+          },
+          {
+            "key": "f_sg",
+            "label": "单数阴性"
+          },
+          {
+            "key": "n_sg",
+            "label": "单数中性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "mixed",
+        "title": "混合变化（不定冠词后）",
+        "columns": [
+          {
+            "key": "m_sg",
+            "label": "单数阳性"
+          },
+          {
+            "key": "f_sg",
+            "label": "单数阴性"
+          },
+          {
+            "key": "n_sg",
+            "label": "单数中性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "strong",
+        "title": "强变化（无冠词）",
+        "columns": [
+          {
+            "key": "m_sg",
+            "label": "单数阳性"
+          },
+          {
+            "key": "f_sg",
+            "label": "单数阴性"
+          },
+          {
+            "key": "n_sg",
+            "label": "单数中性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "comparison",
+        "title": "比较等级",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "comparative",
+            "label": "比较级"
+          },
+          {
+            "key": "superlative",
+            "label": "最高级（am …-sten）"
+          }
+        ]
+      }
+    ]
+  },
+  "participle": {
+    "extends": "adj"
+  },
+  "verb": {
+    "tables": [
+      {
+        "key": "ind",
+        "title": "直陈式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时",
+            "principal": true
+          },
+          {
+            "key": "pret",
+            "label": "过去时"
+          }
+        ]
+      },
+      {
+        "key": "konj",
+        "title": "虚拟式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "konj1",
+            "label": "虚拟式 I"
+          },
+          {
+            "key": "konj2",
+            "label": "虚拟式 II"
+          }
+        ]
+      },
+      {
+        "key": "impr",
+        "title": "命令式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时",
+            "disabled": [
+              "1sg",
+              "3sg"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "inf",
+        "title": "不定式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时"
+          }
+        ]
+      },
+      {
+        "key": "ptcp",
+        "title": "分词",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在分词"
+          },
+          {
+            "key": "past",
+            "label": "过去分词"
+          }
+        ]
+      }
+    ]
+  },
+  "pron": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "p12",
+        "title": "第一二人称",
+        "anchors": [
+          "de-pron-1st-2nd"
+        ],
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "p3",
+        "title": "第三人称",
+        "anchors": [
+          "de-pron-3rd"
+        ],
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "refl",
+        "title": "反身代词",
+        "anchors": [
+          "de-pron-reflexive"
+        ],
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      },
+      {
+        "key": "poss",
+        "title": "物主代词",
+        "anchors": [
+          "de-pron-possessive"
+        ],
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "dat",
+            "label": "与格"
+          },
+          {
+            "key": "acc",
+            "label": "宾格"
+          }
+        ]
+      }
+    ]
+  }
+}

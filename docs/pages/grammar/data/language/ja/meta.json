@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "language": "ja",
+  "name": "现代日语",
+  "native": "日本語",
+  "classical": false,
+  "group": {
+    "id": "modern",
+    "title": "现代语言",
+    "order": 2
+  },
+  "order": 1,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "adv",
+    "pron",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "grammar": true,
+  "paradigm": true,
+  "terms": {
+    "inflectionType": "活用类型",
+    "inflectionTypePlaceholder": "活用类型说明（如：五段活用）",
+    "inflectionTypeHint": "显示在词卡正面的徽章。",
+    "special": "特殊活用（自行填写）",
+    "indeclinable": "无活用",
+    "paradigmTitle": "{pos}活用表",
+    "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写活用类型。",
+    "extraForms": "补充形式（其他活用形）",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干（一般留空，由辞书形推导）",
+      "hint": "日语以辞书形为基本形态，词干可留空。"
+    },
+    "extraPartsHint": "以下词干可以留空，留空时按活用类型自动推导。",
+    "byPos": {
+      "verb": {
+        "inflectionType": "活用类型（几段动词）"
+      },
+      "adj": {
+        "inflectionType": "形容词类型"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 食べる"
+    }
+  },
+  "files": {},
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "taigen",
+        "title": "体言",
+        "file": "grammar/taigen.json",
+        "anchors": [
+          "ja-taigen",
+          "ja-noun-invariable",
+          "ja-adj-na-section",
+          "ja-adj-na"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "用言·形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "ja-adj",
+          "ja-adj-overview",
+          "ja-adj-i"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "用言·动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "ja-verb",
+          "ja-verb-overview",
+          "ja-verb-compound",
+          "ja-verb-godan",
+          "ja-verb-godan-forms",
+          "ja-verb-godan-compound",
+          "ja-verb-ichidan",
+          "ja-verb-ichidan-forms",
+          "ja-verb-ichidan-compound",
+          "ja-verb-suru",
+          "ja-verb-suru-forms",
+          "ja-verb-suru-compound",
+          "ja-verb-karu",
+          "ja-verb-karu-forms",
+          "ja-verb-karu-compound",
+          "ja-verb-secondary",
+          "ja-verb-transitivity",
+          "ja-verb-keigo"
+        ]
+      },
+      {
+        "id": "particle",
+        "title": "助词",
+        "file": "grammar/particle.json",
+        "anchors": [
+          "ja-particle",
+          "ja-particle-case",
+          "ja-particle-topic",
+          "ja-particle-final"
+        ]
+      },
+      {
+        "id": "honorific",
+        "title": "敬语",
+        "file": "grammar/honorific.json",
+        "anchors": [
+          "ja-honorific",
+          "ja-honorific-overview",
+          "ja-honorific-pattern",
+          "ja-honorific-teinei"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "ja-num",
+          "ja-num-cardinal",
+          "ja-num-date",
+          "ja-num-counter"
+        ]
+      },
+      {
+        "id": "syntax",
+        "title": "句法",
+        "file": "grammar/syntax.json",
+        "anchors": [
+          "ja-syntax",
+          "ja-syntax-order",
+          "ja-syntax-copula",
+          "ja-syntax-question"
+        ]
+      }
+    ]
+  }
+}

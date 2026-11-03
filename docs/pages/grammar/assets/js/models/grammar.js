@@ -255,6 +255,14 @@ const TERM_KEYS = [
     'extraPartsHint',
 ]
 
+/** 把 `{ label, placeholder, hint }` 这类对象归一成字符串字段 */
+function textSet(value, keys) {
+    const src = value && typeof value === 'object' ? value : {}
+    const out = {}
+    for (const key of keys) out[key] = typeof src[key] === 'string' ? src[key] : ''
+    return out
+}
+
 export function termsOf(doc, pos) {
     const base = (doc && typeof doc.terms === 'object' && doc.terms) || {}
     const over = (pos && base.byPos && typeof base.byPos === 'object' ? base.byPos[pos] : null) || {}
@@ -264,12 +272,8 @@ export function termsOf(doc, pos) {
     }
     const out = {}
     for (const key of TERM_KEYS) out[key] = pick(key)
-    const stems = over.stems || base.stems || {}
-    out.stems = {
-        label: typeof stems.label === 'string' ? stems.label : '',
-        placeholder: typeof stems.placeholder === 'string' ? stems.placeholder : '',
-        hint: typeof stems.hint === 'string' ? stems.hint : '',
-    }
+    out.stems = textSet(over.stems || base.stems, ['label', 'placeholder', 'hint'])
+    out.lemma = textSet(over.lemma || base.lemma, ['label', 'placeholder'])
     return out
 }
 

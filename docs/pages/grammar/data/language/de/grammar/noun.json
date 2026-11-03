@@ -1,0 +1,1718 @@
+[
+  {
+    "id": "de-noun",
+    "title": "名词",
+    "items": [
+      {
+        "id": "de-noun-gender",
+        "title": "性与数",
+        "tables": [
+          {
+            "caption": "名词的性与定冠词",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "定冠词",
+                "der",
+                "die",
+                "das",
+                "die"
+              ],
+              [
+                "不定冠词",
+                "ein",
+                "eine",
+                "ein",
+                "—"
+              ],
+              [
+                "否定冠词",
+                "kein",
+                "keine",
+                "kein",
+                "keine"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "复数词尾一览",
+            "role": "pattern",
+            "headers": [
+              "类型",
+              "复数词尾",
+              "例"
+            ],
+            "rows": [
+              [
+                "阳性强变化",
+                "-e",
+                "Tisch → Tische"
+              ],
+              [
+                "阳性强变化（-er）",
+                "-er",
+                "Mann → Männer"
+              ],
+              [
+                "中性强变化（-er）",
+                "-er",
+                "Kind → Kinder"
+              ],
+              [
+                "中性强变化（-e）",
+                "-e",
+                "Jahr → Jahre"
+              ],
+              [
+                "中性强变化（同形）",
+                "—",
+                "Fenster → Fenster"
+              ],
+              [
+                "阴性（-en）",
+                "-en",
+                "Frau → Frauen"
+              ],
+              [
+                "阴性（-e）",
+                "-e",
+                "Hand → Hände"
+              ],
+              [
+                "阳性弱变化",
+                "-en",
+                "Student → Studenten"
+              ],
+              [
+                "混合变化",
+                "-en",
+                "Name → Namen"
+              ],
+              [
+                "其他",
+                "-s 等",
+                "Auto → Autos（用特殊变格）"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "德语名词首字母一律大写。性别需按词记忆，但有后缀规律：-ung / -heit / -keit / -schaft / -tion / -tät / -ie 多为阴性；-chen / -lein / -ment / -um 多为中性；-er / -ling / -ismus 多为阳性。"
+      },
+      {
+        "id": "de-noun-m-strong",
+        "title": "阳性强变化（Tisch 型，复数 -e）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Tisch",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Tisch",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Tisch"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_m": "-es",
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "Tisch",
+                "pl": "Tische"
+              },
+              "gen": {
+                "sg_m": "Tisches",
+                "pl": "Tische"
+              },
+              "dat": {
+                "sg_m": "Tisch",
+                "pl": "Tischen"
+              },
+              "acc": {
+                "sg_m": "Tisch",
+                "pl": "Tische"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：阳性强变化（Tisch 型，复数 -e）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ],
+              [
+                "属格",
+                "-es",
+                "—",
+                "—",
+                "-e"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Tisch（复数 Tische）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "Tisch",
+                "—",
+                "—",
+                "Tische"
+              ],
+              [
+                "属格",
+                "Tisches",
+                "—",
+                "—",
+                "Tische"
+              ],
+              [
+                "与格",
+                "Tisch",
+                "—",
+                "—",
+                "Tischen"
+              ],
+              [
+                "宾格",
+                "Tisch",
+                "—",
+                "—",
+                "Tische"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "属格单数加 -es（Tisches），第三、四格与主格同形。以 -s / -ß / -z 结尾或外来词属格多用 -s（Autos）。复数词尾不同的阳性名词（Mann → Männer、Wald → Wälder）用「阳性强变化（Mann 型，复数 -er）」。"
+      },
+      {
+        "id": "de-noun-m-strong-er",
+        "title": "阳性强变化（Mann 型，复数 -er）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Mann",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Männ",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Männ"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-er",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_m": "-es",
+                "pl": {
+                  "suffix": "-er",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-ern",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-er",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "Mann",
+                "pl": "Männer"
+              },
+              "gen": {
+                "sg_m": "Mannes",
+                "pl": "Männer"
+              },
+              "dat": {
+                "sg_m": "Mann",
+                "pl": "Männern"
+              },
+              "acc": {
+                "sg_m": "Mann",
+                "pl": "Männer"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：阳性强变化（Mann 型，复数 -er）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-er"
+              ],
+              [
+                "属格",
+                "-es",
+                "—",
+                "—",
+                "-er"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-ern"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "-er"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Mann（复数 Männer）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "Mann",
+                "—",
+                "—",
+                "Männer"
+              ],
+              [
+                "属格",
+                "Mannes",
+                "—",
+                "—",
+                "Männer"
+              ],
+              [
+                "与格",
+                "Mann",
+                "—",
+                "—",
+                "Männern"
+              ],
+              [
+                "宾格",
+                "Mann",
+                "—",
+                "—",
+                "Männer"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "单数与 Tisch 型相同，复数加 -er，词干常变音（Mann → Männer、Wald → Wälder、Geist → Geister）。复数词干填变音后的形式（Männ），复数词尾 -er 由类型补上。"
+      },
+      {
+        "id": "de-noun-n-strong",
+        "title": "中性强变化（Kind 型，复数 -er）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Kind",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Kind",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Kind"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-er",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_n": "-es",
+                "pl": {
+                  "suffix": "-er",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-ern",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-er",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "Kind",
+                "pl": "Kinder"
+              },
+              "gen": {
+                "sg_n": "Kindes",
+                "pl": "Kinder"
+              },
+              "dat": {
+                "sg_n": "Kind",
+                "pl": "Kindern"
+              },
+              "acc": {
+                "sg_n": "Kind",
+                "pl": "Kinder"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：中性强变化（Kind 型，复数 -er）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-er"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "-es",
+                "-er"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-ern"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "-er"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Kind（复数 Kinder）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "Kind",
+                "Kinder"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "Kindes",
+                "Kinder"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "Kind",
+                "Kindern"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "Kind",
+                "Kinder"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "单数变格与阳性强变化相同（属格 -es）；复数加 -er，常变音（Kind → Kinder、Buch → Bücher、Haus → Häuser）。"
+      },
+      {
+        "id": "de-noun-n-strong-e",
+        "title": "中性强变化（Jahr 型，复数 -e）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Jahr",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Jahr",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Jahr"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_n": "-es",
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "Jahr",
+                "pl": "Jahre"
+              },
+              "gen": {
+                "sg_n": "Jahres",
+                "pl": "Jahre"
+              },
+              "dat": {
+                "sg_n": "Jahr",
+                "pl": "Jahren"
+              },
+              "acc": {
+                "sg_n": "Jahr",
+                "pl": "Jahre"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：中性强变化（Jahr 型，复数 -e）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "-es",
+                "-e"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Jahr（复数 Jahre）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "Jahr",
+                "Jahre"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "Jahres",
+                "Jahre"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "Jahr",
+                "Jahren"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "Jahr",
+                "Jahre"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "复数加 -e，部分词变音（Jahr → Jahre、Wort → Wörter 属例外，需填 Wört 作复数词干）。"
+      },
+      {
+        "id": "de-noun-n-strong-zero",
+        "title": "中性强变化（Fenster 型，复数同形）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Fenster",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Fenster",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Fenster"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_n": "-s",
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-n",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_n": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "Fenster",
+                "pl": "Fenster"
+              },
+              "gen": {
+                "sg_n": "Fensters",
+                "pl": "Fenster"
+              },
+              "dat": {
+                "sg_n": "Fenster",
+                "pl": "Fenstern"
+              },
+              "acc": {
+                "sg_n": "Fenster",
+                "pl": "Fenster"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：中性强变化（Fenster 型，复数同形）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "—"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "-s",
+                "—"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-n"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Fenster（复数 Fenster）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "Fenster",
+                "Fenster"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "Fensters",
+                "Fenster"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "Fenster",
+                "Fenstern"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "Fenster",
+                "Fenster"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "复数与单数同形（Fenster、Mädchen、Leben），属格单数加 -s，与格复数加 -n。"
+      },
+      {
+        "id": "de-noun-f",
+        "title": "阴性（Frau 型，复数 -en）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Frau",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Frau",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Frau"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "Frau",
+                "pl": "Frauen"
+              },
+              "gen": {
+                "sg_f": "Frau",
+                "pl": "Frauen"
+              },
+              "dat": {
+                "sg_f": "Frau",
+                "pl": "Frauen"
+              },
+              "acc": {
+                "sg_f": "Frau",
+                "pl": "Frauen"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：阴性（Frau 型，复数 -en）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Frau（复数 Frauen）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "Frau",
+                "—",
+                "Frauen"
+              ],
+              [
+                "属格",
+                "—",
+                "Frau",
+                "—",
+                "Frauen"
+              ],
+              [
+                "与格",
+                "—",
+                "Frau",
+                "—",
+                "Frauen"
+              ],
+              [
+                "宾格",
+                "—",
+                "Frau",
+                "—",
+                "Frauen"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "阴性名词单数四个格同形，没有任何词尾；复数一律 -en（-in 结尾的加 -nen：Lehrerin → Lehrerinnen）。"
+      },
+      {
+        "id": "de-noun-f-e",
+        "title": "阴性（Hand 型，复数 -e）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Hand",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Händ",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Händ"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_f": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-e",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "Hand",
+                "pl": "Hände"
+              },
+              "gen": {
+                "sg_f": "Hand",
+                "pl": "Hände"
+              },
+              "dat": {
+                "sg_f": "Hand",
+                "pl": "Händen"
+              },
+              "acc": {
+                "sg_f": "Hand",
+                "pl": "Hände"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：阴性（Hand 型，复数 -e）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ],
+              [
+                "属格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ],
+              [
+                "与格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "宾格",
+                "—",
+                "—",
+                "—",
+                "-e"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Hand（复数 Hände）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "Hand",
+                "—",
+                "Hände"
+              ],
+              [
+                "属格",
+                "—",
+                "Hand",
+                "—",
+                "Hände"
+              ],
+              [
+                "与格",
+                "—",
+                "Hand",
+                "—",
+                "Händen"
+              ],
+              [
+                "宾格",
+                "—",
+                "Hand",
+                "—",
+                "Hände"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "单数与 Frau 型相同；复数加 -e，通常变音（Hand → Hände、Stadt → Städte、Nacht → Nächte）。复数词干填变音后的形式（Händ）。"
+      },
+      {
+        "id": "de-noun-m-weak",
+        "title": "阳性弱变化（Student 型，复数 -en）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Student",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Student",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "exampleStems": {
+            "pl": "Student"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_m": "-en",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_m": "-en",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_m": "-en",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "Student",
+                "pl": "Studenten"
+              },
+              "gen": {
+                "sg_m": "Studenten",
+                "pl": "Studenten"
+              },
+              "dat": {
+                "sg_m": "Studenten",
+                "pl": "Studenten"
+              },
+              "acc": {
+                "sg_m": "Studenten",
+                "pl": "Studenten"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：阳性弱变化（Student 型，复数 -en）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "属格",
+                "-en",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "与格",
+                "-en",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "宾格",
+                "-en",
+                "—",
+                "—",
+                "-en"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Student（复数 Studenten）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "Student",
+                "—",
+                "—",
+                "Studenten"
+              ],
+              [
+                "属格",
+                "Studenten",
+                "—",
+                "—",
+                "Studenten"
+              ],
+              [
+                "与格",
+                "Studenten",
+                "—",
+                "—",
+                "Studenten"
+              ],
+              [
+                "宾格",
+                "Studenten",
+                "—",
+                "—",
+                "Studenten"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "只有主格单数是词干本身，其余各格一律加 -en（-n）。同类：Junge、Herr、Mensch、Nachbar 等。"
+      },
+      {
+        "id": "de-noun-mixed",
+        "title": "混合变化（Name 型，复数 -en）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "Nam",
+          "parts": [
+            {
+              "key": "pl",
+              "label": "复数词干",
+              "example": "Nam",
+              "required": true,
+              "hint": "复数各格共有的部分，不含复数词尾：Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ。词尾用本类型的复数词尾补上。"
+            }
+          ],
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "e$",
+                  "replace": ""
+                }
+              ]
+            }
+          },
+          "exampleStems": {
+            "pl": "Nam"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-e",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "gen": {
+                "sg_m": "-ens",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "dat": {
+                "sg_m": "-en",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              },
+              "acc": {
+                "sg_m": "-en",
+                "pl": {
+                  "suffix": "-en",
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "Name",
+                "pl": "Namen"
+              },
+              "gen": {
+                "sg_m": "Namens",
+                "pl": "Namen"
+              },
+              "dat": {
+                "sg_m": "Namen",
+                "pl": "Namen"
+              },
+              "acc": {
+                "sg_m": "Namen",
+                "pl": "Namen"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：混合变化（Name 型，复数 -en）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-e",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "属格",
+                "-ens",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "与格",
+                "-en",
+                "—",
+                "—",
+                "-en"
+              ],
+              [
+                "宾格",
+                "-en",
+                "—",
+                "—",
+                "-en"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：Name（复数 Namen）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "Name",
+                "—",
+                "—",
+                "Namen"
+              ],
+              [
+                "属格",
+                "Namens",
+                "—",
+                "—",
+                "Namen"
+              ],
+              [
+                "与格",
+                "Namen",
+                "—",
+                "—",
+                "Namen"
+              ],
+              [
+                "宾格",
+                "Namen",
+                "—",
+                "—",
+                "Namen"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "主格单数以 -e 结尾，属格加 -ns，其余加 -n；同类：Gedanke、Glaube、Wille、Friede。词干填 -e 之前的部分（Name → Nam）。"
+      },
+      {
+        "id": "de-noun-special-plural",
+        "title": "特殊复数与外来词",
+        "tables": [
+          {
+            "caption": "常见特殊复数",
+            "role": "pattern",
+            "headers": [
+              "单数",
+              "复数",
+              "说明"
+            ],
+            "rows": [
+              [
+                "das Datum",
+                "die Daten",
+                "-um → -en"
+              ],
+              [
+                "das Museum",
+                "die Museen",
+                "-um → -en"
+              ],
+              [
+                "das Thema",
+                "die Themen",
+                "-a → -en"
+              ],
+              [
+                "das Praktikum",
+                "die Praktika",
+                "部分 -um → -a"
+              ],
+              [
+                "das Auto",
+                "die Autos",
+                "外来词 / 缩写加 -s"
+              ],
+              [
+                "das Hotel",
+                "die Hotels",
+                "部分外来词加 -s"
+              ],
+              [
+                "der Atlas",
+                "die Atlanten",
+                "-as → -en"
+              ],
+              [
+                "das Herz",
+                "die Herzen",
+                "弱变化 + 特殊属格 des Herzens"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "外来词与少数本族词没有统一规则，需要按词记忆；生词表里可直接选「特殊变格」并自行填写四个格。"
+      }
+    ]
+  }
+]

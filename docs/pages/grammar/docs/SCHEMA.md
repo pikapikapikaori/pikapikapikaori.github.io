@@ -102,12 +102,12 @@ const MIGRATIONS = {
 
 | 步骤 | 文件 | 改动内容 |
 | ---- | ---- | -------- |
-| 1 | `assets/js/config/config.js` | 在 `GRAMMAR_FILES` 末尾追加语言 code `'xx'`。元信息全部写在 `data/grammar/xx.json` 顶层（见手册 §1），`code` 必须唯一。 |
-| 2 | `data/grammar/xx.json` | 新建语法文件，文件名必须与 `code` 一致。`version`（整数）、`language`（同 `code`）、`name` 必填，`sections` 必填（可为空数组，但建议至少给出一个条目），`paradigms` 可选。锚点按 `xx-{category}-{item}` 命名且全局唯一。 |
+| 1 | `assets/js/config/config.js` | 在 `GRAMMAR_FILES` 末尾追加语言 code `'xx'`。元信息全部写在 `data/language/xx/meta.json`（见手册 §1），`code` 必须唯一。 |
+| 2 | `data/language/xx/` | 新建语言目录，目录名必须与 `code` 一致：`meta.json`（`version`（整数）、`language`（同 `code`）、`name`、`files`、`grammarFiles` 必填）、`grammar/paradigms.json`、`grammar/{章}.json`（一章一个文件，文件名 = 章节 id）。锚点按 `xx-{category}-{item}` 命名且全局唯一，并登记到 `grammarFiles.chapters[].anchors`。 |
 | 3 | `assets/css/base.css` | 在语言字体区块加 `[lang="xx"] { font-family: var(--ff-xx); --ff-display: var(--ff-xx); }`。**方向不写在这里**：RTL / 竖排由 `config.js` 的 `BDI_LANGS` / `SCRIPT_POPUP_LANGS` 决定，原文会自动包进 `<bdi dir>`。 |
 | 4 | `assets/css/variables.css` + `fonts.css` | `variables.css` 加 `--ff-xx: "LN XX", var(--ff-ui);`（缺字时回退到界面字体）。`fonts.css` 加 `@font-face`，**只声明该文字的 `unicode-range`**，这样同一段里的说明性中英文会落到界面字体；只声明实际拥有的字重，缺的粗体由浏览器合成。没有专用字体可跳过这一步。 |
 | 5 | `external/js/wiktionary.js` | 需要 Wiktionary 在线查询时，在 `LANG_TO_WIKTIONARY` 增加 `'xx': '<英文 Wiktionary 的二级标题名>'`；该语言在 Wiktionary 没有词条时不要加，否则查询永远返回空。 |
-| 6 | `data/paradigm/xx.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），见「数据格式 · 语言数据手册」的「语言档案」一节。不需要就跳过，引擎会自动略过这两步。 |
+| 6 | `data/language/xx/paradigm.js` | 可选。该语言的 derive 后期处理（重音 / 连声 / 词尾变音），在 `meta.files.paradigm` 里登记，见「数据格式 · 语言数据手册」的「语言档案」一节。不需要就跳过，引擎会自动略过这两步。 |
 | 7 | `docs/SCHEMA.md` | 更新「锚点 id 命名」的示例表（见「数据格式 · 语言数据手册」）。（语言元数据表与四·1 都以数据文件为准，不用回来改） |
 
 补充说明：
@@ -116,7 +116,7 @@ const MIGRATIONS = {
 - **竖排 / RTL**：`vertical: true` 只让浮层用竖排样式；`rtl: true` 决定 `<bdi>` 与浮层的 `dir`。
   能否弹浮层看 `SCRIPT_POPUP_LANGS`，`<bdi>` 的包裹范围看 `BDI_LANGS`（都按字符范围判定）。
 - **词性**：`pos` 取值来自 `assets/js/config/config.js` 的全局 `POS_LIST`，不是按语言定义。新语言的 `paradigms` 只能使用这些 key；确有新词性需求时需同时改 `POS_LIST` 和四·1。
-- **语法文件加载**：`assets/js/services/grammar-service.js` 运行时按 `./data/grammar/{code}.json` 拉取，404 时该语言的「语法」页显示为空提示。`data/grammar/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
+- **语法文件加载**：`assets/js/services/grammar-service.js` 先取 `./data/language/{code}/meta.json`，再按当前章节取 `grammar/{章}.json`（词表单 / 词列表会组合全部章节），404 时该语言的「语法」页显示为空提示。`data/language/` 在 `sw.js` 中走 stale-while-revalidate，新增语言文件不需要改动 `sw.js`。
 - **既有用户数据**：老用户的 `settings.languageOrder` 里没有新 code 时，语言选择页会按 `LANGUAGES` 原始顺序把它追加到所在组末尾，不需要数据迁移。
 
 ### 2. 新增外部数据源
@@ -219,7 +219,7 @@ export async function analyzeWord({ word, langCode })
 
 ## 四、现有实现
 
-各语言（`data/grammar/*.json` + `data/paradigm|script/*.js`）与各外部源（`external/js/*.js`）
+各语言（`data/language/*/`）与各外部源（`external/js/*.js`）
 都是按第一、二块的契约接入的插件：满足约定即可自由接入，本块记录各自现在怎么实现。
 
 ### 1. 各语言的写法要点

@@ -1,0 +1,227 @@
+{
+  "verb": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "forms",
+        "title": "活用形",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "mizen",
+            "label": "未然形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "renyo1",
+            "label": "連用形1",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "renyo2",
+            "label": "連用形2（音便）",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "shusi",
+            "label": "終止形（辞書形）",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "rentai",
+            "label": "連体形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "katei",
+            "label": "已然形（仮定）",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "meirei",
+            "label": "命令形",
+            "grammarRef": "ja-verb-overview"
+          }
+        ]
+      },
+      {
+        "key": "compound",
+        "title": "合成形式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "masu",
+            "label": "ます形（叮咛）",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "nai",
+            "label": "ない形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "ta",
+            "label": "た形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "te",
+            "label": "て形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "ishi",
+            "label": "意志形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "kano",
+            "label": "可能形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "ukemi",
+            "label": "受身形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "shieki",
+            "label": "使役形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "shiekiukemi",
+            "label": "使役受身形",
+            "grammarRef": "ja-verb-overview"
+          },
+          {
+            "key": "kateiba",
+            "label": "仮定形＋ば",
+            "grammarRef": "ja-verb-overview"
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "key": "transitivity",
+        "label": "自他",
+        "hint": "自动词表示自发的状态变化，他动词带宾语。成对的动词常以自他区分。",
+        "options": [
+          {
+            "value": "trans",
+            "label": "他动词"
+          },
+          {
+            "value": "intrans",
+            "label": "自动词"
+          },
+          {
+            "value": "both",
+            "label": "自他两用"
+          }
+        ],
+        "required": true
+      }
+    ]
+  },
+  "adj": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "forms",
+        "title": "活用形",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "mizen",
+            "label": "未然形",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "renyo1",
+            "label": "連用形1",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "renyo2",
+            "label": "連用形2（音便）",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "shusi",
+            "label": "終止形（辞書形）",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "rentai",
+            "label": "連体形",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "katei",
+            "label": "已然形（仮定）",
+            "grammarRef": "ja-adj-overview"
+          }
+        ]
+      },
+      {
+        "key": "compound",
+        "title": "合成形式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "teinei",
+            "label": "叮咛形（です）",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "nai",
+            "label": "ない形",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "ta",
+            "label": "た形",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "te",
+            "label": "て形",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "kateiba",
+            "label": "仮定形＋ば",
+            "grammarRef": "ja-adj-overview"
+          },
+          {
+            "key": "renyo",
+            "label": "连用（副词）用法",
+            "grammarRef": "ja-adj-overview"
+          }
+        ]
+      }
+    ]
+  }
+}

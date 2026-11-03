@@ -1,6 +1,6 @@
 import { h, replace, htmlFragment } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
-import { loadGrammar, loadScriptProfile } from '../services/grammar-service.js'
+import { loadGrammarMeta, loadGrammarForChapter, loadScriptProfile } from '../services/grammar-service.js'
 import { createPageTools } from '../components/page-tools.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
 import { createGrammarTables } from '../components/grammar-table.js'
@@ -57,11 +57,33 @@ export default {
             return
         }
 
-        const doc = await loadGrammar(lang)
+        // 只加载当前这一章：章节与锚点都在 meta.json 里，不必读正文
+        const meta = await loadGrammarMeta(lang)
+        if (!meta) { renderNoData(main, lang, language); return }
+
+        const chapters = meta.grammarFiles?.chapters || []
+        let current = ''
+        if (chapters.length > 1) {
+            const byAnchor = anchor ? chapterOfAnchor(meta, anchor) : ''
+            current = byAnchor
+                || (chapters.some((c) => c.id === group) ? group : '')
+                || chapters[0].id
+            if (byAnchor && byAnchor !== current) {
+                location.hash = `#/grammar/${lang}/${byAnchor}#${anchor}`
+                return
+            }
+            // 地址里没写章节时补全，方便分享
+            if (!group) {
+                const target = `#/grammar/${lang}/${current}${anchor ? `#${anchor}` : ''}`
+                if (location.hash !== target) history.replaceState(null, '', target)
+            }
+        }
+
+        const doc = await loadGrammarForChapter(lang, current)
         if (!doc) { renderNoData(main, lang, language); return }
 
         // 文字档案（满文 / 天城文）：供「显示转写」把原文转成转写
-        const scriptProfile = await loadScriptProfile(lang, doc)
+        const scriptProfile = await loadScriptProfile(lang, meta)
         return renderGrammar(main, lang, language, doc, anchor, group, scriptProfile)
     }
 }
@@ -78,9 +100,17 @@ function renderNoData(main, lang, language) {
         ),
         h('div', { class: 'empty' },
             h('div', { class: 'empty__title' }, '尚未提供该语言的语法数据'),
-            h('div', { class: 'empty__desc' }, `请创建 /data/grammar/${lang}.json`)
+            h('div', { class: 'empty__desc' }, `请创建 /data/language/${lang}/grammar/*.json`)
         )
     )
+}
+
+/** 锚点属于哪一章（只查 meta 里登记的 anchors，不读正文） */
+function chapterOfAnchor(meta, anchor) {
+    for (const chapter of meta.grammarFiles?.chapters || []) {
+        if ((chapter.anchors || []).includes(anchor)) return chapter.id
+    }
+    return ''
 }
 
 /** 该 section 属于哪一章（没有 groups 的文档整篇算一章） */

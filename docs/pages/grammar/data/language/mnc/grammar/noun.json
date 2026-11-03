@@ -1,0 +1,488 @@
+[
+  {
+    "id": "mnc-noun",
+    "title": "名词",
+    "items": [
+      {
+        "id": "mnc-noun-pl-zero",
+        "title": "无标记（绝大多数名词）",
+        "tables": [
+          {
+            "caption": "规则：无标记复数",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "词干",
+                "词干（不加后缀）"
+              ],
+              [
+                "指人名词",
+                "可用复数后缀（见下）"
+              ],
+              [
+                "其他名词",
+                "靠数词 / 上下文"
+              ]
+            ],
+            "lang": "mnc"
+          },
+          {
+            "caption": "示例：ᠨᡳᠶᠠᠯᠮᠠ",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "ᠨᡳᠶᠠᠯᠮᠠ",
+                "ᠨᡳᠶᠠᠯᠮᠠ"
+              ],
+              [
+                "ᠪᠣᠣ",
+                "ᠪᠣᠣ"
+              ],
+              [
+                "ᠪᡳᡨᡥᡝ",
+                "ᠪᡳᡨᡥᡝ"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "inflect": "decl",
+        "notes": "满语名词的复数<strong>多数不靠后缀</strong>：需要时用数词、形容词或上下文表示。只有指人名词较常用复数后缀；不确定时选这一类。",
+        "derive": {
+          "pos": "noun",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "stemExample": "niyalma",
+          "headwordExample": "niyalma",
+          "parts": [],
+          "endings": {
+            "number": {
+              "abs": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true
+                }
+              }
+            }
+          },
+          "expect": {
+            "number": {
+              "abs": {
+                "sg": "niyalma",
+                "pl": "niyalma"
+              }
+            }
+          },
+          "note": "满语名词的「词干」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+        }
+      },
+      {
+        "id": "mnc-noun-pl-sa",
+        "title": "-sa / -se / -so 型",
+        "tables": [
+          {
+            "caption": "后缀：-sa / -se / -so",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "后元音词干",
+                "+ -sa"
+              ],
+              [
+                "前元音词干",
+                "+ -se（圆唇 + -so）"
+              ]
+            ],
+            "lang": "mnc"
+          },
+          {
+            "caption": "示例：ᠨᡳᠶᠠᠯᠮᠠ",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "ᠨᡳᠶᠠᠯᠮᠠ",
+                "ᠨᡳᠶᠠᠯᠮᠠᠰᠠ"
+              ],
+              [
+                "ᠪᡳᡨᡥᡝ",
+                "ᠪᡳᡨᡥᡝᠰᡝ"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "inflect": "decl",
+        "notes": "最常见的指人复数后缀，元音随词干和谐：后元音 -sa、前元音 -se、圆唇 -so。",
+        "derive": {
+          "pos": "noun",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "stemExample": "niyalma",
+          "headwordExample": "niyalma",
+          "parts": [],
+          "endings": {
+            "number": {
+              "abs": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-sV"
+                }
+              }
+            }
+          },
+          "expect": {
+            "number": {
+              "abs": {
+                "sg": "niyalma",
+                "pl": "niyalmasa"
+              }
+            }
+          },
+          "note": "满语名词的「词干」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+        }
+      },
+      {
+        "id": "mnc-noun-pl-ta",
+        "title": "-ta / -te 型",
+        "tables": [
+          {
+            "caption": "后缀：-ta / -te",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "后元音词干",
+                "+ -ta"
+              ],
+              [
+                "前元音词干",
+                "+ -te（圆唇 + -to）"
+              ]
+            ],
+            "lang": "mnc"
+          },
+          {
+            "caption": "示例：ᠠᠮᠠ",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "ᠠᠮᠠ",
+                "ᠠᠮᠠᡨᠠ"
+              ],
+              [
+                "ᡝᠮᡝ",
+                "ᡝᠮᡝᡨᡝ"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "inflect": "decl",
+        "notes": "多用于亲属称谓等少数名词，元音随词干和谐（-ta / -te / -to）。",
+        "derive": {
+          "pos": "noun",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "stemExample": "ama",
+          "headwordExample": "ama",
+          "parts": [],
+          "endings": {
+            "number": {
+              "abs": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-tV"
+                }
+              }
+            }
+          },
+          "expect": {
+            "number": {
+              "abs": {
+                "sg": "ama",
+                "pl": "amata"
+              }
+            }
+          },
+          "note": "满语名词的「词干」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+        }
+      },
+      {
+        "id": "mnc-noun-pl-si",
+        "title": "-ᠰᡳ 型",
+        "tables": [
+          {
+            "caption": "后缀：-ᠰᡳ",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "指人名词",
+                "+ -si"
+              ],
+              [
+                "元音和谐",
+                "不参与"
+              ]
+            ],
+            "lang": "mnc"
+          },
+          {
+            "caption": "示例：ᡥᠠᡥᠠ",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "ᡥᠠᡥᠠ",
+                "ᡥᠠᡥᠠᠰᡳ"
+              ],
+              [
+                "ᡥᡝᡥᡝ",
+                "ᡥᡝᡥᡝᠰᡳ"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "inflect": "decl",
+        "notes": "少数指人名词用 -ᠰᡳ，不随和谐变化。",
+        "derive": {
+          "pos": "noun",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "stemExample": "haha",
+          "headwordExample": "haha",
+          "parts": [],
+          "endings": {
+            "number": {
+              "abs": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-si"
+                }
+              }
+            }
+          },
+          "expect": {
+            "number": {
+              "abs": {
+                "sg": "haha",
+                "pl": "hahasi"
+              }
+            }
+          },
+          "note": "满语名词的「词干」与基本形态（单数）相同，所以不需要另填；复数按所选的复数类型加后缀，后缀元音随词干和谐（见「元音和谐」一节）。"
+        }
+      },
+      {
+        "id": "mnc-noun-pl-ri",
+        "title": "-ri 型",
+        "tables": [
+          {
+            "caption": "后缀：-ri",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "少数名词",
+                "+ -ri（不能产）"
+              ]
+            ],
+            "lang": "mnc"
+          },
+          {
+            "caption": "示例：ᠮᠠᡶᠠ",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "ᠮᠠᡶᠠ",
+                "ᠮᠠᡶᠠᡵᡳ"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "inflect": "decl",
+        "notes": "少数名词用 -ri 复数（祖父 ᠮᠠᡶᠠ → mafari）；不能产，遇到时就近按这一类记。",
+        "derive": {
+          "pos": "noun",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          },
+          "stemExample": "mafa",
+          "headwordExample": "mafa",
+          "parts": [],
+          "endings": {
+            "number": {
+              "abs": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "suffix": "-ri"
+                }
+              }
+            }
+          },
+          "expect": {
+            "number": {
+              "abs": {
+                "sg": "mafa",
+                "pl": "mafari"
+              }
+            }
+          },
+          "note": "少数名词的复数后缀 -ri，不随元音和谐变化。"
+        }
+      },
+      {
+        "id": "mnc-noun-cases",
+        "title": "格助词",
+        "tables": [
+          {
+            "caption": "五个格及其格助词",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "格助词",
+              "功能",
+              "例"
+            ],
+            "rows": [
+              [
+                "主格",
+                "无",
+                "主语、判断句的主题",
+                "ᠪᠣᠣ 房子"
+              ],
+              [
+                "属格-工具格",
+                "ᡳ / ᠨᡳ",
+                "所属、材料、工具；元音后接 i，n 后接 ni",
+                "ᠪᠣᠣ ᡳ ᡝᠵᡝᠨ 房主"
+              ],
+              [
+                "与格-方位格",
+                "ᡩᡝ",
+                "间接宾语、地点、时间、方向",
+                "ᠪᠣᠣ ᡩᡝ 在家里 / 向家"
+              ],
+              [
+                "宾格-经格",
+                "ᠪᡝ",
+                "直接宾语；经过的路径",
+                "ᠪᡳᡨᡥᡝ ᠪᡝ 把书"
+              ],
+              [
+                "夺格-比格",
+                "ᠴᡳ",
+                "起点、来源、比较基准",
+                "ᠪᠣᠣ ᠴᡳ 从家 / 比房子"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "满语没有形态上的变格，格关系由<strong>格助词</strong>表示，名词词形本身不变；格助词接在整个名词短语末尾（ᠪᠣᠣ ᡳ ᡝᠵᡝᠨ = 房子 + 属格 + 主人）。"
+      },
+      {
+        "id": "mnc-noun-possessive",
+        "title": "领属与「有 / 没有」",
+        "tables": [
+          {
+            "caption": "常见表达",
+            "role": "pattern",
+            "headers": [
+              "结构",
+              "例",
+              "说明"
+            ],
+            "rows": [
+              [
+                "名词 + ᡳ + 名词",
+                "ᠮᡳᠨᡳ ᠪᠣᠣ",
+                "我的房子（代词属格 + 名词）"
+              ],
+              [
+                "有：名词 + ᠪᡳ",
+                "ᠪᠣᠣ ᠪᡳ",
+                "有房子"
+              ],
+              [
+                "没有：名词 + ᠠᡴᡡ",
+                "ᠪᠣᠣ ᠠᡴᡡ",
+                "没有房子"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "满语没有专门的「有」动词，用 ᠪᡳ / ᠠᡴᡡ 表示存在与否定。"
+      }
+    ],
+    "notes": null
+  }
+]

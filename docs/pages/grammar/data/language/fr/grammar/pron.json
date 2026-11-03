@@ -1,0 +1,518 @@
+[
+  {
+    "id": "fr-pron",
+    "title": "代词",
+    "items": [
+      {
+        "id": "fr-pron-1st-2nd",
+        "title": "第一二人称代词",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "第一人称",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主语",
+                "je",
+                "nous"
+              ],
+              [
+                "直接宾语",
+                "me",
+                "nous"
+              ],
+              [
+                "间接宾语",
+                "me",
+                "nous"
+              ],
+              [
+                "自反",
+                "me",
+                "nous"
+              ],
+              [
+                "重读",
+                "moi",
+                "nous"
+              ]
+            ]
+          },
+          {
+            "caption": "第二人称",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主语",
+                "tu",
+                "vous"
+              ],
+              [
+                "直接宾语",
+                "te",
+                "vous"
+              ],
+              [
+                "间接宾语",
+                "te",
+                "vous"
+              ],
+              [
+                "自反",
+                "te",
+                "vous"
+              ],
+              [
+                "重读",
+                "toi",
+                "vous"
+              ]
+            ]
+          }
+        ],
+        "notes": "主语代词不可省略（与意大利语、西班牙语不同）。宾语代词置于动词前（肯定命令式除外：Regarde-le !），me / te 在元音或哑音 h 前省音（m'aime、t'appelle）。重读形式用于介词后（avec moi）、强调（Moi, je…）与省略句（Qui ? — Lui.）。"
+      },
+      {
+        "id": "fr-pron-3rd",
+        "title": "第三人称代词",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "第三人称",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主语",
+                "il",
+                "elle",
+                "ils",
+                "elles"
+              ],
+              [
+                "直接宾语",
+                "le",
+                "la",
+                "les",
+                "les"
+              ],
+              [
+                "间接宾语",
+                "lui",
+                "lui",
+                "leur",
+                "leur"
+              ],
+              [
+                "自反",
+                "se",
+                "se",
+                "se",
+                "se"
+              ],
+              [
+                "重读",
+                "lui",
+                "elle",
+                "eux",
+                "elles"
+              ]
+            ]
+          }
+        ],
+        "notes": "il 也可作无人称主语（il pleut）。直接宾语 le / la 在元音或哑音 h 前省音（l'homme）；间接宾语与自反不分性别（lui / leur / se）。重读形式用于介词后与强调（avec elle、Eux, ils savent.）。"
+      },
+      {
+        "id": "fr-pron-possessive",
+        "title": "物主代词",
+        "tables": [
+          {
+            "caption": "物主形容词（限定语）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "第一人称单数",
+                "mon",
+                "ma",
+                "mes"
+              ],
+              [
+                "第二人称单数",
+                "ton",
+                "ta",
+                "tes"
+              ],
+              [
+                "第三人称单数",
+                "son",
+                "sa",
+                "ses"
+              ],
+              [
+                "第一人称复数",
+                "notre",
+                "notre",
+                "nos"
+              ],
+              [
+                "第二人称复数",
+                "votre",
+                "votre",
+                "vos"
+              ],
+              [
+                "第三人称复数",
+                "leur",
+                "leur",
+                "leurs"
+              ]
+            ]
+          },
+          {
+            "caption": "物主代词（独立使用）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "第一人称单数",
+                "le mien",
+                "la mienne",
+                "les miens",
+                "les miennes"
+              ],
+              [
+                "第二人称单数",
+                "le tien",
+                "la tienne",
+                "les tiens",
+                "les tiennes"
+              ],
+              [
+                "第三人称单数",
+                "le sien",
+                "la sienne",
+                "les siens",
+                "les siennes"
+              ],
+              [
+                "第一人称复数",
+                "le nôtre",
+                "la nôtre",
+                "les nôtres",
+                "les nôtres"
+              ],
+              [
+                "第二人称复数",
+                "le vôtre",
+                "la vôtre",
+                "les vôtres",
+                "les vôtres"
+              ],
+              [
+                "第三人称复数",
+                "le leur",
+                "la leur",
+                "les leurs",
+                "les leurs"
+              ]
+            ]
+          }
+        ],
+        "notes": "物主形容词按<strong>被限定名词</strong>的性数变化，不按所有者：sa mère 可以是「他的母亲」或「她的母亲」。复数形式（mes / tes / ses / nos / vos / leurs）不分性别。",
+        "inflect": "decl"
+      },
+      {
+        "id": "fr-pron-demonstrative",
+        "title": "指示代词",
+        "tables": [
+          {
+            "caption": "指示代词",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "简单",
+                "celui",
+                "celle",
+                "ceux",
+                "celles"
+              ],
+              [
+                "复合（-ci 近指）",
+                "celui-ci",
+                "celle-ci",
+                "ceux-ci",
+                "celles-ci"
+              ],
+              [
+                "复合（-là 远指）",
+                "celui-là",
+                "celle-là",
+                "ceux-là",
+                "celles-là"
+              ]
+            ]
+          },
+          {
+            "caption": "中性指示代词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "用法",
+              "例"
+            ],
+            "rows": [
+              [
+                "ceci",
+                "指下文 / 近指",
+                "Écoutez ceci."
+              ],
+              [
+                "cela",
+                "指上文 / 远指",
+                "Cela est vrai."
+              ],
+              [
+                "ça",
+                "cela 的口语形式",
+                "Ça va ?"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "ce 在元音或哑音 h 前变 cet（cet homme）；指示代词 celui 系列常带 -ci / -là 区分远近（celui-ci / celui-là）。"
+      },
+      {
+        "id": "fr-pron-adverbial",
+        "title": "副代词 en 与 y",
+        "tables": [
+          {
+            "caption": "en / y",
+            "role": "pattern",
+            "headers": [
+              "代词",
+              "代替",
+              "例"
+            ],
+            "rows": [
+              [
+                "en",
+                "de + 名词（部分冠词、数量、来源）",
+                "Tu veux du café ? — Oui, j'en veux."
+              ],
+              [
+                "en",
+                "数词 / 数量副词后的名词",
+                "Combien de livres ? — J'en ai trois."
+              ],
+              [
+                "y",
+                "à + 事物 / 地点",
+                "Tu penses à ce projet ? — J'y pense."
+              ],
+              [
+                "y",
+                "地点「在那里」",
+                "Je vais à Paris. — J'y vais."
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "注意：代替「à + 人」用间接宾语代词（lui / leur），不用 y。位置与其它宾语代词相同，置于动词前。"
+      },
+      {
+        "id": "fr-pron-relative",
+        "title": "关系代词",
+        "tables": [
+          {
+            "caption": "主要关系代词",
+            "role": "pattern",
+            "headers": [
+              "关系代词",
+              "功能",
+              "例"
+            ],
+            "rows": [
+              [
+                "qui",
+                "主语",
+                "L'homme qui parle."
+              ],
+              [
+                "que",
+                "直接宾语",
+                "Le livre que je lis."
+              ],
+              [
+                "où",
+                "地点 / 时间",
+                "La ville où j'habite."
+              ],
+              [
+                "dont",
+                "de + 先行词",
+                "L'auteur dont je parle."
+              ],
+              [
+                "lequel / laquelle / lesquels / lesquelles",
+                "间接宾语 / 介词后",
+                "Le stylo avec lequel j'écris."
+              ],
+              [
+                "auquel / à laquelle / auxquels / auxquelles",
+                "à + 先行词",
+                "Le projet auquel je pense."
+              ],
+              [
+                "duquel / de laquelle / desquels / desquelles",
+                "de + 先行词",
+                "Le pays duquel il vient."
+              ]
+            ]
+          }
+        ],
+        "notes": "que 在从句中作宾语，遇元音省音（l'homme qu'il voit）；dont = de + 先行词；où 兼指时间与地点。"
+      },
+      {
+        "id": "fr-pron-interrogative",
+        "title": "疑问代词",
+        "tables": [
+          {
+            "caption": "疑问代词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "指人 / 指物",
+              "例"
+            ],
+            "rows": [
+              [
+                "qui",
+                "只指人",
+                "Qui vient ?"
+              ],
+              [
+                "que / qu'est-ce que",
+                "只指物",
+                "Que fais-tu ?"
+              ],
+              [
+                "quoi",
+                "指物（介词后 / 口语）",
+                "À quoi penses-tu ?"
+              ],
+              [
+                "lequel / laquelle / lesquels / lesquelles",
+                "指人或物（有限选择）",
+                "Lequel préfères-tu ?"
+              ],
+              [
+                "quel / quelle / quels / quelles",
+                "疑问形容词",
+                "Quel livre ?"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "qui 作主语时动词用第三人称单数；口语常用「qui est-ce qui / qu'est-ce que」结构。"
+      },
+      {
+        "id": "fr-pron-indefinite",
+        "title": "不定代词",
+        "tables": [
+          {
+            "caption": "常用不定代词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "含义",
+              "例"
+            ],
+            "rows": [
+              [
+                "on",
+                "人们 / 我们",
+                "On parle français ici."
+              ],
+              [
+                "quelqu'un / quelque chose",
+                "某人 / 某物",
+                "Quelqu'un a appelé."
+              ],
+              [
+                "personne / rien",
+                "没人 / 什么也没有（与 ne 连用）",
+                "Je ne vois personne."
+              ],
+              [
+                "chacun / chacune",
+                "每个（人）",
+                "Chacun sait."
+              ],
+              [
+                "tout / tous / toutes",
+                "一切 / 全部",
+                "Tout est prêt."
+              ],
+              [
+                "aucun / aucune",
+                "没有一个（与 ne 连用）",
+                "Aucun n'est venu."
+              ],
+              [
+                "plusieurs",
+                "好几个（不变）",
+                "Plusieurs sont partis."
+              ],
+              [
+                "certains / certaines",
+                "某些（人）",
+                "Certains pensent autrement."
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "personne / rien / aucun 作主语时与 ne 连用；作宾语时 ne 在动词前、代词在后。"
+      }
+    ]
+  }
+]

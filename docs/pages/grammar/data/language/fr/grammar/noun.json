@@ -1,0 +1,526 @@
+[
+  {
+    "id": "fr-noun",
+    "title": "名词",
+    "items": [
+      {
+        "id": "fr-noun-gender",
+        "title": "性与数",
+        "tables": [
+          {
+            "caption": "名词的性与数",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "le livre",
+                "les livres"
+              ],
+              [
+                "阴性",
+                "la table",
+                "les tables"
+              ]
+            ]
+          },
+          {
+            "caption": "常见复数规则",
+            "role": "pattern",
+            "headers": [
+              "单数结尾",
+              "复数规则",
+              "例"
+            ],
+            "rows": [
+              [
+                "一般",
+                "+ -s",
+                "livre → livres"
+              ],
+              [
+                "-s, -x, -z",
+                "不变",
+                "voix → voix, nez → nez"
+              ],
+              [
+                "-al",
+                "-al → -aux",
+                "cheval → chevaux"
+              ],
+              [
+                "-eau, -au, -eu",
+                "+ -x",
+                "beau → beaux, feu → feux"
+              ],
+              [
+                "-ou（部分）",
+                "+ -x",
+                "bijou → bijoux, genou → genoux"
+              ],
+              [
+                "-ail（部分）",
+                "-ail → -aux",
+                "travail → travaux"
+              ],
+              [
+                "-s / -x / -z 结尾",
+                "不变",
+                "fils → fils"
+              ]
+            ]
+          }
+        ],
+        "notes": "法语名词的性别需按词记忆：以 -tion / -té / -ette / -elle / -ance / -ence 结尾多为阴性，以 -ment / -age / -isme / -eau 结尾多为阳性。"
+      },
+      {
+        "id": "fr-noun-plural-regular",
+        "title": "一般规则（+ -s）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "livre",
+          "stemForms": {
+            "pl": [
+              {
+                "pattern": "$",
+                "replace": "s"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "livre",
+                "pl": "livres"
+              },
+              "f": {
+                "sg": "livre",
+                "pl": "livres"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：一般名词",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "一般名词",
+                "+ -s"
+              ],
+              [
+                "-s 的读音",
+                "不发音"
+              ],
+              [
+                "单复数区分",
+                "靠限定词"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "livre",
+                "livres"
+              ],
+              [
+                "table",
+                "tables"
+              ],
+              [
+                "étudiant",
+                "étudiants"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "绝大多数名词在单数形式后加 -s；-s 本身不发音。"
+      },
+      {
+        "id": "fr-noun-plural-al",
+        "title": "-al → -aux",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "cheval",
+          "stemForms": {
+            "pl": [
+              {
+                "pattern": "al$",
+                "replace": "aux"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "cheval",
+                "pl": "chevaux"
+              },
+              "f": {
+                "sg": "cheval",
+                "pl": "chevaux"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：-al → -aux",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "-al 结尾",
+                "-aux"
+              ],
+              [
+                "例外",
+                "bal / carnaval / festival / récital 等 + -s"
+              ],
+              [
+                "读音",
+                "-aux 读 [o]"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "cheval",
+                "chevaux"
+              ],
+              [
+                "journal",
+                "journaux"
+              ],
+              [
+                "animal",
+                "animaux"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "例外：bal / carnaval / festival / récital 等加 -s（bals）。"
+      },
+      {
+        "id": "fr-noun-plural-eau",
+        "title": "-eau / -au / -eu → + -x",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "bateau",
+          "stemForms": {
+            "pl": [
+              {
+                "pattern": "$",
+                "replace": "x"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "bateau",
+                "pl": "bateaux"
+              },
+              "f": {
+                "sg": "bateau",
+                "pl": "bateaux"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：-eau / -au / -eu → + -x",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "-eau / -au / -eu 结尾",
+                "+ -x"
+              ],
+              [
+                "例外",
+                "pneu / landau / bleu + -s"
+              ],
+              [
+                "读音",
+                "-x 不发音"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "bateau",
+                "bateaux"
+              ],
+              [
+                "château",
+                "châteaux"
+              ],
+              [
+                "feu",
+                "feux"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "例外：pneu / landau / bleu 加 -s（pneus）。"
+      },
+      {
+        "id": "fr-noun-plural-invariable",
+        "title": "不变（-s / -x / -z 结尾）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "voix",
+          "stemForms": {
+            "pl": []
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "voix",
+                "pl": "voix"
+              },
+              "f": {
+                "sg": "voix",
+                "pl": "voix"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：以 -s / -x / -z 结尾",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "以 -s / -x / -z 结尾",
+                "单复数同形"
+              ],
+              [
+                "区分方式",
+                "靠限定词（le bras / les bras）"
+              ],
+              [
+                "读音",
+                "词尾辅音不发音"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "voix",
+                "voix"
+              ],
+              [
+                "nez",
+                "nez"
+              ],
+              [
+                "bras",
+                "bras"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "以 -s / -x / -z 结尾的名词复数形式不变，靠限定词区分（le bras / les bras）。"
+      },
+      {
+        "id": "fr-noun-irregular",
+        "title": "不规则复数（参考）",
+        "tables": [
+          {
+            "caption": "常见不规则复数",
+            "role": "pattern",
+            "headers": [
+              "单数",
+              "复数",
+              "说明"
+            ],
+            "rows": [
+              [
+                "œil",
+                "yeux",
+                "最常用的不规则复数"
+              ],
+              [
+                "ciel",
+                "cieux",
+                "「天空」；ciels 指「气候」"
+              ],
+              [
+                "travail",
+                "travaux",
+                "-ail → -aux"
+              ],
+              [
+                "vitrail",
+                "vitraux",
+                "-ail → -aux"
+              ],
+              [
+                "bijou / caillou / chou / genou / hibou / joujou / pou",
+                "…-x",
+                "以 -ou 结尾但加 -x 的七个词"
+              ],
+              [
+                "monsieur / madame / mademoiselle",
+                "messieurs / mesdames / mesdemoiselles",
+                "敬称"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "这些词没有统一规则，需要按词记忆；生词表里可直接选「特殊变形」并自行填写复数。"
+      }
+    ]
+  }
+]

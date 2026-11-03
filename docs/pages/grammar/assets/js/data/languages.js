@@ -1,9 +1,8 @@
 import { GRAMMAR_FILES } from '../config/config.js'
-import { validateGrammarDoc } from '../models/grammar.js'
 
 /**
- * 语言元数据：真源是 `data/grammar/<code>.json` 顶层，这里只负责把它们全拉一遍并缓存
- * （语言选择页需要所有语言的元信息；正文在各语言打开时复用已下载的内容）。
+ * 语言元数据：真源是 `data/language/<code>/meta.json`，这里只负责把它们全拉一遍并缓存
+ * （语言选择页需要所有语言的元信息；语法正文按章在打开时再取）。
  */
 
 /** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */
@@ -40,19 +39,18 @@ function metaOf(code, doc) {
 export function loadLanguages() {
     if (loading) return loading
     loading = (async () => {
-        const base = new URL('../../../data/grammar/', import.meta.url)
+        const base = new URL('../../../data/language/', import.meta.url)
         const list = await Promise.all(GRAMMAR_FILES.map(async (code) => {
             try {
-                const res = await fetch(new URL(`${code}.json`, base))
+                const res = await fetch(new URL(`${code}/meta.json`, base))
                 if (!res.ok) throw new Error(String(res.status))
-                const doc = await res.json()
-                const report = validateGrammarDoc(code, doc)
-                for (const e of report.errors) console.error(`[languages] ${code}: ${e}`)
-                for (const w of report.warnings) console.warn(`[languages] ${code}: ${w}`)
-                if (report.errors.length) return null
-                return metaOf(code, doc)
+                const meta = await res.json()
+                const errors = checkMeta(code, meta)
+                for (const e of errors) console.error(`[languages] ${code}: ${e}`)
+                if (errors.length) return null
+                return metaOf(code, meta)
             } catch (err) {
-                console.warn(`[languages] 读取 ${code}.json 失败：`, err)
+                console.warn(`[languages] 读取 ${code}/meta.json 失败：`, err)
                 return null
             }
         }))
@@ -66,6 +64,18 @@ export function loadLanguages() {
         return LANGUAGES
     })()
     return loading
+}
+
+/** 启动时只做元信息层面的轻校验；语法正文的完整校验在 loadGrammar() 里做 */
+function checkMeta(code, meta) {
+    const errors = []
+    if (!meta || typeof meta !== 'object') return ['meta.json 不是对象']
+    if (!Number.isInteger(meta.version)) errors.push('`version` 必须是整数')
+    if (meta.language !== code) errors.push(`\`language\` 是 "${meta.language}"，与目录名 "${code}" 不一致`)
+    if (typeof meta.name !== 'string' || !meta.name) errors.push('缺少 `name`')
+    if (!meta.grammarFiles || typeof meta.grammarFiles !== 'object') errors.push('缺少 `grammarFiles`')
+    else if (!Array.isArray(meta.grammarFiles.chapters)) errors.push('`grammarFiles.chapters` 必须是数组')
+    return errors
 }
 
 export function getLanguage(code) {

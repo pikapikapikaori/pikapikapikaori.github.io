@@ -1,0 +1,82 @@
+[
+  {
+    "id": "la-adv",
+    "title": "副词",
+    "items": [
+      {
+        "id": "la-adv-comparison",
+        "title": "副词比较等级",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "等级",
+              "构成方式",
+              "例"
+            ],
+            "rows": [
+              [
+                "原级",
+                "形容词词干 + -ē / -iter",
+                "longē, fortiter"
+              ],
+              [
+                "比较级",
+                "形容词比较级中性单数宾格",
+                "longius, fortius"
+              ],
+              [
+                "最高级",
+                "形容词最高级词干 + -ē",
+                "longissimē, fortissimē"
+              ],
+              [
+                "（以 -ē 结尾的）",
+                "加 magis / maximē",
+                "magis longē, maximē longē"
+              ]
+            ]
+          },
+          {
+            "caption": "不规则",
+            "role": "pattern",
+            "headers": [
+              "原级",
+              "比较级",
+              "最高级"
+            ],
+            "rows": [
+              [
+                "bene",
+                "melius",
+                "optimē"
+              ],
+              [
+                "male",
+                "pēius",
+                "pessimē"
+              ],
+              [
+                "magnopere",
+                "magis",
+                "maximē"
+              ],
+              [
+                "multum",
+                "plūs",
+                "plūrimum"
+              ],
+              [
+                "parum",
+                "minus",
+                "minimē"
+              ]
+            ]
+          }
+        ],
+        "notes": "副词比较级无词形变化（中性单数形式），与形容词比较级的变格形式区分。"
+      }
+    ]
+  }
+]

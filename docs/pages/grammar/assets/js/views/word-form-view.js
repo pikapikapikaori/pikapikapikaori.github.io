@@ -98,7 +98,6 @@ export default {
             const extra = form.querySelector('.js-extra-forms-title')
             if (extra) extra.textContent = t.extraForms
         }
-        const stemsMeta = grammarDoc?.stems && typeof grammarDoc.stems === 'object' ? grammarDoc.stems : null
         const paradigmProfile = await loadParadigmProfile(lang, grammarDoc)
         // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写
         const scriptProfile = await loadScriptProfile(lang, grammarDoc)
@@ -223,7 +222,7 @@ export default {
         const lemmaField = createGhostInput({
             value: data.lemma,
             lang,
-            placeholder: '基本形态',
+            placeholder: grammarDoc?.terms?.lemma?.placeholder || '基本形态',
             disabled: isEdit,
             // 基本形态可以推出词干（stemForms.base.from = 'headword'）时影响 placeholder 预览
             onInput: () => {
@@ -395,7 +394,7 @@ export default {
         const principalField = createGhostInput({
             value: data.stems.base || '',
             lang,
-            placeholder: stemsMeta?.placeholder || currentTerms().stems.placeholder,
+            placeholder: currentTerms().stems.placeholder,
             getGhost: () => derivedBase(),
             onInput: () => { refreshStemGhosts(); refreshGenerateBtn() }
         })
@@ -489,8 +488,8 @@ export default {
             fieldRow(inflectionTypeLabelEl, inflectionField.el, { extras: [inflectionTypeHintEl] })
         )
 
-        const stemsLabelEl = h('span', { class: 'field__label' }, stemsMeta?.label || currentTerms().stems.label)
-        const stemsHintEl = h('span', { class: 'field__hint' }, hintText(stemsMeta?.hint || currentTerms().stems.hint))
+        const stemsLabelEl = h('span', { class: 'field__label' }, currentTerms().stems.label)
+        const stemsHintEl = h('span', { class: 'field__hint' }, hintText(currentTerms().stems.hint))
         const stemsRow = fieldRow(stemsLabelEl, h('div', { class: 'field__row' }, principalField.el, generateBtn), {
             extras: [stemsHintEl],
             target: principalInput
@@ -575,9 +574,10 @@ export default {
         function refreshStemsText() {
             const t = currentTerms()
             const base = currentBasePart()
-            stemsLabelEl.textContent = base?.label || stemsMeta?.label || t.stems.label
-            stemsHintEl.replaceChildren(hintText(base?.hint || stemsMeta?.hint || t.stems.hint))
-            principalInput.placeholder = base?.placeholder || stemsMeta?.placeholder || t.stems.placeholder
+            lemmaInput.placeholder = t.lemma.placeholder || '基本形态'
+            stemsLabelEl.textContent = base?.label || t.stems.label
+            stemsHintEl.replaceChildren(hintText(base?.hint || t.stems.hint))
+            principalInput.placeholder = base?.placeholder || t.stems.placeholder
         }
 
         /** 当前锚点声明的词干（不含 base） */

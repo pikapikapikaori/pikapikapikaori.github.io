@@ -356,6 +356,7 @@ export {
     fillTerms,
     fieldDefsOfTemplate,
     fieldValues,
+    migrateFieldStems,
     genderOfColumn,
     genderOfRow,
     collectInflectAnchors,

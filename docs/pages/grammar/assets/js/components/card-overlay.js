@@ -179,6 +179,13 @@ export function openCardOverlay(word, opts = {}) {
                     : null
             }, posLabel(word.pos))
         )
+        // 属性（语法性 / 自他 / 助动词…）紧跟词性，排在变位类型与标签之前
+        for (const def of fieldDefsOfTemplate(paradigmTpl, word.pos)) {
+            for (const value of fieldValues(word, def.key)) {
+                const label = (def.options.find((o) => o.value === value) || {}).label || value
+                badges.appendChild(h('span', { class: 'badge', title: def.label }, label))
+            }
+        }
         const it = word.inflectionType
         if (it && it.label && langMeta?.paradigm !== false) {
             const clickable = !!(it.grammarRef && onGrammarRef)

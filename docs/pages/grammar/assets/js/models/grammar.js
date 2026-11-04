@@ -350,6 +350,33 @@ export function fieldValues(word, key) {
     return []
 }
 
+/**
+ * 旧数据把 `fields` 声明的属性（语法性、法 / 德动词的助动词…）当成词干存进了 `stems`，
+ * 读出来时搬到 `attributes`：表单才不会按默认值覆盖，词卡也不会把它当词干显示。
+ * 返回新对象，没搬动任何东西时原样返回；不改入参。
+ */
+export function migrateFieldStems(doc, word) {
+    const defs = getFieldDefs(doc, word && word.pos)
+    const stems = word && word.stems
+    if (!defs.length || !stems || typeof stems !== 'object') return word
+    const attrs = word.attributes && typeof word.attributes === 'object' ? word.attributes : {}
+    const moved = {}
+    for (const def of defs) {
+        const value = stems[def.key]
+        if (!value) continue
+        const existing = attrs[def.key]
+        const empty = Array.isArray(existing)
+            ? !existing.filter(Boolean).length
+            : existing == null || !String(existing).trim()
+        if (!empty) continue
+        moved[def.key] = def.multi && !Array.isArray(value) ? [value] : value
+    }
+    if (!Object.keys(moved).length) return word
+    const nextStems = { ...stems }
+    for (const key of Object.keys(moved)) delete nextStems[key]
+    return { ...word, attributes: { ...attrs, ...moved }, stems: nextStems }
+}
+
 export function getGenderOptions(doc, pos = 'noun') {
     const tpl = getParadigmTemplate(doc, pos)
     const cols = new Set()

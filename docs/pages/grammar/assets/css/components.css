@@ -1777,9 +1777,9 @@ button.word-card__derivative {
     gap: var(--sp-2);
 }
 
-/* 输入助手的按钮占着右下角：工具列往左让一格，两者不叠在一起 */
+/* 输入助手的按钮占着右下角：工具列整列抬到它上面，三者同一列从上往下排 */
 html.has-ime-fab .page-tools {
-    right: calc(var(--sp-4) + 48px);
+    bottom: calc(var(--sp-4) + var(--ime-kb, 0px) + var(--ime-lift, 0px) + 40px + var(--sp-2));
 }
 
 .page-tools__btn {

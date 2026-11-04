@@ -8,7 +8,7 @@ import {
 import {
     loadGrammar, loadGrammarMeta, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
     getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms,
-    getDeriveParts, stemLabelOf
+    getDeriveParts, stemLabelOf, migrateFieldStems
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { openCardOverlay } from '../components/card-overlay.js'
@@ -143,7 +143,8 @@ export default {
         }
 
         async function loadForEdit(id) {
-            const w = await fetchWord(id)
+            // 旧数据把助动词之类的属性存在词干里，读进来时先搬到 attributes
+            const w = migrateFieldStems(grammarDoc, await fetchWord(id))
             if (!w) return null
             return {
                 id: w.id,

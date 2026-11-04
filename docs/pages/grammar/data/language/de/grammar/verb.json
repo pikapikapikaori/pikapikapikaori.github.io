@@ -229,7 +229,7 @@
             "lang": "de"
           }
         ],
-        "notes": "复合时态与被动都是<strong>迂说法</strong>：由助动词 + 过去分词（或不定式）构成，<strong>不写进变位表</strong>。\n\n<strong>助动词的选择</strong>：多数动词用 haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。词条的「完成时助动词」字段用来记录这个选择。\n\n被动由 werden + 过去分词构成（过程被动），另有 sein + 过去分词表示状态被动（Zustandspassiv，如 Die Tür ist geöffnet）。"
+        "notes": "复合时态与被动都是<strong>迂说法</strong>：由助动词 + 过去分词（或不定式）构成，<strong>不写进变位表</strong>。\n\n<strong>助动词的选择</strong>：多数动词用 haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。生词表单里的「完成时助动词」属性用来记录这个选择。\n\n被动由 werden + 过去分词构成（过程被动），另有 sein + 过去分词表示状态被动（Zustandspassiv，如 Die Tür ist geöffnet）。"
       },
       {
         "id": "de-verb-separable",
@@ -417,17 +417,6 @@
           "label": "虚拟式 II 词干",
           "example": "mach",
           "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "endings": {
@@ -960,17 +949,6 @@
           "label": "虚拟式 II 词干",
           "example": "arbeit",
           "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "endings": {
@@ -1516,17 +1494,6 @@
           "label": "虚拟式 II 词干",
           "example": "sammel",
           "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "endings": {
@@ -2061,17 +2028,6 @@
           "label": "虚拟式 II 词干",
           "example": "studier",
           "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "endings": {
@@ -2600,17 +2556,6 @@
           "label": "虚拟式 II 词干",
           "example": "besuch",
           "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "endings": {
@@ -3161,17 +3106,6 @@
           "label": "虚拟式 II 词干",
           "example": "spräch",
           "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "exampleStems": {
@@ -3726,17 +3660,6 @@
           "label": "虚拟式 II 词干",
           "example": "brächte",
           "hint": "留空 = 过去时词干变音（brachte → brächte）。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "exampleStems": {
@@ -4297,17 +4220,6 @@
           "label": "虚拟式 II 词干",
           "example": "könnte",
           "hint": "留空 = 过去时词干变音（konnte → könnte）。wollen / sollen 的虚拟式 II 与过去时同形，填 wollte / sollte。"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "完成时助动词",
-          "options": [
-            "haben",
-            "sein",
-            "beide"
-          ],
-          "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。"
         }
       ],
       "exampleStems": {

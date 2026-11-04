@@ -378,24 +378,7 @@
         ],
         "notes": "这些变化只影响拼写，读音不变；第一组动词占法语动词的绝大多数，因此规则要记牢。"
       }
-    ],
-    "derive": {
-      "pos": "verb",
-      "partsOnly": true,
-      "parts": [
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": "fr-verb-er",
@@ -411,17 +394,6 @@
           "label": "过去分词（不规则时填）",
           "example": "parlé",
           "hint": "留空 = 现在时词干 + é"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -1058,17 +1030,6 @@
           "label": "过去分词（不规则时填）",
           "example": "fini",
           "hint": "留空 = 现在时词干 + i"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -1774,17 +1735,6 @@
           "label": "过去分词（不规则时填）",
           "example": "vendu",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -2425,17 +2375,6 @@
           "label": "过去分词（不规则时填）",
           "example": "reçu",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -3150,17 +3089,6 @@
           "label": "过去分词（不规则时填）",
           "example": "parti",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -3799,17 +3727,6 @@
           "label": "过去分词（不规则时填）",
           "example": "venu",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -4520,17 +4437,6 @@
           "label": "过去分词（不规则时填）",
           "example": "pris",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -5270,17 +5176,6 @@
           "label": "过去分词（不规则时填）",
           "example": "mis",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -5970,17 +5865,6 @@
           "label": "过去分词（不规则时填）",
           "example": "connu",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -6679,17 +6563,6 @@
           "label": "过去分词（不规则时填）",
           "example": "conduit",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -7337,17 +7210,6 @@
           "label": "过去分词（不规则时填）",
           "example": "peint",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {
@@ -8084,17 +7946,6 @@
           "label": "过去分词（不规则时填）",
           "example": "ouvert",
           "hint": "留空按本类型的规则推导"
-        },
-        {
-          "key": "aux",
-          "kind": "select",
-          "label": "复合时态助动词",
-          "options": [
-            "avoir",
-            "être",
-            "两可"
-          ],
-          "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。"
         }
       ],
       "stemForms": {

@@ -20,20 +20,14 @@
       "file": "user.json"
     },
     {
-      "id": "storage",
-      "order": 4,
-      "title": "IndexedDB 数据手册",
-      "file": "storage.json"
-    },
-    {
       "id": "source",
-      "order": 5,
+      "order": 4,
       "title": "外部源手册",
       "file": "source.json"
     },
     {
       "id": "impl",
-      "order": 6,
+      "order": 5,
       "title": "实现说明",
       "file": "impl.json"
     }

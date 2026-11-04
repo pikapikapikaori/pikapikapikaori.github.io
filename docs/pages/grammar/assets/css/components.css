@@ -1384,6 +1384,12 @@ button.word-card__derivative {
     color: var(--c-accent-fg);
 }
 
+/* 打开态悬停：回到「未打开」的悬停配色，提示再点一下就关 */
+.card-overlay-roman.is-on:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
 /* 短音符开关排在转写开关右边 */
 .card-overlay-roman--breve {
     right: calc(var(--sp-3) + 80px);
@@ -1814,6 +1820,13 @@ html.has-ime-fab .page-tools {
     color: var(--c-accent-fg);
 }
 
+/* 打开态悬停：回到「未打开」的悬停配色，提示再点一下就关 */
+.page-tools__btn--on:not(:disabled):hover {
+    background: var(--c-bg-hover);
+    border-color: var(--c-border);
+    color: var(--c-fg);
+}
+
 /* 双行文本：默认只显示原文，打开开关后在原文片段后补出转写 */
 /* 短音符：默认藏起来，html.show-breve 时才显示（由右下角的 Ă 按钮切换） */
 .breve {
@@ -1873,8 +1886,11 @@ html.show-dual-text .dual-text__roman {
     color: var(--c-accent-fg);
 }
 
+/* 打开态悬停：回到「未打开」的悬停配色，提示再点一下就关 */
 .ime-fab--on:hover {
-    background: var(--c-accent);
+    background: var(--c-bg-hover);
+    border-color: var(--c-border);
+    color: var(--c-fg);
 }
 
 .ime-fab:focus-visible {

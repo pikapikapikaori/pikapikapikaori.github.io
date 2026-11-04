@@ -1,8 +1,0 @@
-{
-  "updatedAt": "2026-11-03",
-  "id": "storage",
-  "order": 4,
-  "title": "IndexedDB 数据手册",
-  "lead": "三个 store：`users`、`words`、`settings`；唯一索引强制「同用户、同语言、`lemma + pos`」唯一。",
-  "markdown": "## 三个 store\n\n| Store      | 主键     | 索引                                                                       |\n| ---------- | -------- | -------------------------------------------------------------------------- |\n| `users`    | `id`     | `name`                                                                     |\n| `words`    | `id`     | `userId`、`[userId, language]`、`[userId, language, lemma, pos]`（unique） |\n| `settings` | `userId` | —                                                                          |\n\n`words` 的唯一索引强制约束：**同一用户、同一语言下，`lemma + pos` 完全一致即视为同一个词**。比较时严格区分大小写、变音符号、长短音，不做任何归一化。\n\n> 注意：**检索**采用规范化比较，但**唯一键查重**始终严格敏感。`amō` 与 `amo` 是两个词条。"
-}

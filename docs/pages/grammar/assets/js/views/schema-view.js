@@ -9,6 +9,7 @@ import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { renderMarkdown, scanHeadings } from '../utils/markdown.js'
 import { loadSchema, copyText, downloadMarkdown } from '../services/schema-service.js'
 import { openSelectMenu } from '../components/select-menu.js'
+import { createPageTools } from '../components/page-tools.js'
 import { toast } from '../components/toast.js'
 
 const NARROW = '(max-width: 1024px)'
@@ -58,11 +59,11 @@ export default {
             appStore.get().userId
                 ? { label: '语言选择', href: '#/languages' }
                 : { label: '首页', href: '#/welcome' },
-            { label: title, href: `#/schema/${docs[0].id}` },
-            { label: doc.title }
+            // 当前手册不再进面包屑：末项就是「数据格式」本身
+            { label: title }
         ])
 
-        render(main, { title, docs, index, doc, anchor })
+        return render(main, { title, docs, index, doc, anchor })
     }
 }
 
@@ -233,6 +234,11 @@ function render(main, { title, docs, index, doc, anchor }) {
 
     replace(main, head, h('div', { class: 'grammar-layout' }, nav, content))
 
+    /* ---------------- 右下角浮动工具：回到顶部 ---------------- */
+    // 数据格式页没有转写 / 短音符，这里只会渲染「↑」一个按钮，行为与语法页一致
+    const tools = createPageTools({ anchorEl: main })
+    document.body.appendChild(tools.el)
+
     /* ---------------- 滚动与高亮 ---------------- */
 
     const targets = Array.from(content.querySelectorAll('.doc-heading'))
@@ -300,5 +306,6 @@ function render(main, { title, docs, index, doc, anchor }) {
         window.removeEventListener('resize', onScroll)
         narrowQuery.removeEventListener('change', syncTocOpen)
         if (frame) cancelAnimationFrame(frame)
+        tools.destroy()
     }
 }

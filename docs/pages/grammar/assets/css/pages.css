@@ -1516,6 +1516,19 @@
     padding-left: 1.5em;
 }
 
+/* 全局 reset 去掉了列表标记，文档里显式加回来 */
+ul.doc-list {
+    list-style: disc;
+}
+
+ul.doc-list ul.doc-list {
+    list-style: circle;
+}
+
+ol.doc-list {
+    list-style: decimal;
+}
+
 .doc-list > li {
     margin: var(--sp-1) 0;
 }

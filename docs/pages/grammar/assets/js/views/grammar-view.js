@@ -3,6 +3,7 @@ import { getLanguage } from '../data/languages.js'
 import { loadGrammarMeta, loadGrammarForChapter, loadScriptProfile } from '../services/grammar-service.js'
 import { createPageTools } from '../components/page-tools.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
+import { annotateBreves, setBreveVisible } from '../utils/breve.js'
 import { createGrammarTables } from '../components/grammar-table.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { applyBdi, bdiNode } from '../utils/bdi.js'
@@ -189,6 +190,10 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         onChange: (on) => {
             setDualTextVisible(on)
             if (on) annotateDualText(content, { range: scriptRange, toRoman })
+        },
+        onBreveChange: (on) => {
+            setBreveVisible(on)
+            annotateBreves(content, { selector: 'td, th' })
         }
     })
     document.body.appendChild(tools.el)
@@ -196,6 +201,8 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         setDualTextVisible(true)
         annotateDualText(content, { range: scriptRange, toRoman })
     }
+    if (tools.isBreveOn()) setBreveVisible(true)
+    annotateBreves(content, { selector: 'td, th' })
 
 
     // 本页目录：一级标题即 section，窄屏收进「本页目录」浮层
@@ -439,6 +446,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         if (spyFrame) cancelAnimationFrame(spyFrame)
         tools.destroy()
         setDualTextVisible(false)
+        setBreveVisible(false)
     }
 }
 

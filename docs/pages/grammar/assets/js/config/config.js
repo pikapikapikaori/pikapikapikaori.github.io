@@ -46,6 +46,12 @@ export const SCRIPT_POPUP_LANGS = {
 export const TRANSLIT_SEARCH_LANGS = ['mnc']
 
 /**
+ * 有「短音符（˘）」概念的语言：显示时可以隐藏短音符，也可以用按钮切出来看。
+ * 值是 ISO code，见「短音符」相关工具 utils/breve.js。
+ */
+export const BREVE_LANGS = ['la', 'grc']
+
+/**
  * 检索时把查询串同时展开成「原文 + 转写」的语言：这些语言的数据存的是非拉丁文字，
  * 用户可能直接输入罗马字（IAST / 希腊语转写 / 希伯来语转写）。
  */

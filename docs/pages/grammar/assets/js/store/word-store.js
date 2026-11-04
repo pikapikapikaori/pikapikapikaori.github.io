@@ -7,6 +7,7 @@ import {
     isParadigmEmpty, mergeStems
 } from '../models/word.js'
 import { nowIso, nextReviewFrom, clampMastery } from '../utils/date.js'
+import { foldBreve } from '../utils/breve.js'
 
 export async function listByLanguage(userId, language) {
     const all = await getAllByIndex(STORE_WORDS, 'userId_language', [userId, language])
@@ -34,7 +35,13 @@ export async function addOrMerge(userId, payload) {
     const lemma = String(payload.lemma ?? '').trim()
     const pos = payload.pos || 'other'
 
-    const existing = await findByKey(userId, language, lemma, pos)
+    let existing = await findByKey(userId, language, lemma, pos)
+    if (!existing) {
+        // 短音符不参与唯一性：i 与 ĭ 视为同一个词（长音符仍然区分）
+        const folded = foldBreve(lemma)
+        const siblings = await listByLanguage(userId, language)
+        existing = siblings.find((w) => w.pos === pos && foldBreve(w.lemma) === folded) || null
+    }
 
     if (!existing) {
         const word = createWord({

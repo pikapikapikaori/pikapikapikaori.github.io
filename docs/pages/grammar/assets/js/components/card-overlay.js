@@ -3,11 +3,13 @@ import { applyBdi } from '../utils/bdi.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
 import { fieldDefsOfTemplate, fieldValues, genderOfColumn, genderOfRow } from '../models/grammar.js'
 import { getLanguage } from '../data/languages.js'
+import { BREVE_LANGS } from '../config/config.js'
 import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 import { collocationList, exampleList } from './entry-lists.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
+import { annotateBreves, setBreveVisible } from '../utils/breve.js'
 import { getScriptProfile } from '../services/grammar-service.js'
 
 let overlayEl = null
@@ -45,6 +47,12 @@ export function openCardOverlay(word, opts = {}) {
     let romanOn = false
     try { romanOn = localStorage.getItem(romanKey) === '1' } catch { /* 无痕模式忽略 */ }
     if (!toRoman) romanOn = false
+
+    // 短音符（只有拉丁语 / 古希腊语有）：默认藏着，右上角这颗按钮切出来
+    const breveKey = `ln.breve.${language}`
+    let breveOn = false
+    try { breveOn = localStorage.getItem(breveKey) === '1' } catch { /* ignore */ }
+    const showBreve = BREVE_LANGS.includes(language)
 
     const sources = allSources(word)
     // 「手动」就是默认来源：有外部来源时就多一个 tab，别让含义没处可切
@@ -88,11 +96,27 @@ export function openCardOverlay(word, opts = {}) {
         }
     }, romanOn ? 'A' : '文') : null
 
+    const breveBtn = showBreve ? h('button', {
+        class: 'card-overlay-roman card-overlay-roman--breve' + (breveOn ? ' is-on' : ''),
+        type: 'button',
+        title: breveOn ? '隐藏短音符' : '显示短音符',
+        'aria-pressed': String(breveOn),
+        onclick: () => {
+            breveOn = !breveOn
+            try { localStorage.setItem(breveKey, breveOn ? '1' : '0') } catch { /* ignore */ }
+            breveBtn.setAttribute('aria-pressed', String(breveOn))
+            breveBtn.classList.toggle('is-on', breveOn)
+            breveBtn.title = breveOn ? '隐藏短音符' : '显示短音符'
+            setBreveVisible(breveOn)
+            annotateBreveText()
+        }
+    }, '\u0102') : null
+
     const panel = h('div', {
         class: 'card-overlay-panel',
         role: 'dialog',
         'aria-modal': 'true'
-    }, romanBtn, closeBtn, head, body)
+    }, breveBtn, romanBtn, closeBtn, head, body)
 
     overlayEl = h('div', { class: 'card-overlay' + (replacing ? ' card-overlay--instant' : '') }, backdrop, panel)
     applyBdi(overlayEl)
@@ -317,6 +341,18 @@ export function openCardOverlay(word, opts = {}) {
         }
 
         annotateRoman()
+        annotateBreveText()
+    }
+
+    /** 把短音符包起来：默认隐藏，按钮切换显示 */
+    function annotateBreveText() {
+        if (!showBreve) return
+        if (breveOn) setBreveVisible(true)
+        annotateBreves(head, { selector: '.card-overlay__lemma' })
+        annotateBreves(body, {
+            selector: 'td, th, .word-card__stem, .word-card__stem-part, .word-card__example-text,'
+                + ' .word-card__derivative, .word-card__inflection-form'
+        })
     }
 
     /** 在原文旁标出转写：标题、词干、变格表、例句、派生词 */

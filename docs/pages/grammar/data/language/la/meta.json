@@ -55,6 +55,7 @@
     }
   },
   "files": {
+    "paradigm": "paradigm.js",
     "ime": "ime.js"
   },
   "grammarFiles": {

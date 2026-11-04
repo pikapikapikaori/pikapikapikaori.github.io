@@ -6,7 +6,8 @@ import {
 } from '../store/word-store.js'
 import { posLabel, allSources } from '../models/word.js'
 import { normalizeSearch } from '../utils/text-normalize.js'
-import { getScriptProfile } from './grammar-service.js'
+import { foldBreve } from '../utils/breve.js'
+import { getScriptProfile, loadGrammarMeta, loadParadigmProfile } from './grammar-service.js'
 import { TRANSLIT_SEARCH_LANGS, SCRIPT_SEARCH_LANGS } from '../config/config.js'
 
 export const SORT_FIELDS = [
@@ -51,6 +52,8 @@ export async function queryWords(userId, language, options = {}) {
     all = applySearch(all, q, scope)
     all = applyFilter(all, filter)
     all = applySort(all, sortField, sortOrder)
+    // 有查询且带附加符号时，「写法完全一致」的排前面
+    all = applyExactFirst(all, q, scope)
 
     const total = all.length
     const totalPages = Math.max(1, Math.ceil(total / pageSize))
@@ -88,15 +91,14 @@ function searchVariants(query) {
     return [...out]
 }
 
-function applySearch(words, q, scope = 'all') {
-    const s = String(q || '').trim()
-    if (!s) return words
-    // 原文 / 转写两种写法都能搜到：查询串同时展开成 IAST 与天城体
-    const queries = searchVariants(s)
-    if (!queries.length) return words
+/**
+ * 判定器：给一组（已规范化的）查询串，返回按范围判断词条是否命中的函数。
+ * 折叠检索与「写法完全一致」的检索共用这里的字段覆盖范围。
+ */
+function searchMatcher(queries, normalize) {
     const anyHit = (text) => {
-        const norm = normalizeSearch(text)
-        return queries.some((nq) => norm.includes(nq))
+        const norm = normalize(text)
+        return !!norm && queries.some((nq) => norm.includes(nq))
     }
 
     const hitLemma = (w) => anyHit(w.lemma)
@@ -121,7 +123,7 @@ function applySearch(words, q, scope = 'all') {
     const hitCollocation = (w) => (w.collocations || []).some((c) =>
         anyHit(c.text || '') || anyHit(c.gloss || ''))
 
-    return words.filter((w) => {
+    return (w, scope) => {
         switch (scope) {
             case 'head':  return hitHead(w)
             case 'forms': return hitWordForm(w)
@@ -130,7 +132,60 @@ function applySearch(words, q, scope = 'all') {
                 return hitWordForm(w) || hitMeaning(w)
             || hitExample(w) || hitCollocation(w)
         }
-    })
+    }
+}
+
+function applySearch(words, q, scope = 'all') {
+    const s = String(q || '').trim()
+    if (!s) return words
+    // 原文 / 转写两种写法都能搜到：查询串同时展开成 IAST 与天城体
+    const queries = searchVariants(s)
+    if (!queries.length) return words
+    const matches = searchMatcher(queries, normalizeSearch)
+    return words.filter((w) => matches(w, scope))
+}
+
+/**
+ * 「写法完全一致」用的规范化：保留附加符号（长音符、重音…），只忽略短音符 ——
+ * 短音符是保存时自动补的，不该影响精度判定。另外统一大小写与词尾 ς。
+ */
+function normalizeExact(s) {
+    return foldBreve(s).normalize('NFC').toLowerCase().replace(/\u03C2/g, '\u03C3')
+}
+
+/** 与 searchVariants 相同，但保留附加符号（用于「写法完全一致」优先） */
+function exactVariants(query) {
+    const out = new Set()
+    const push = (text) => {
+        const nq = normalizeExact(text)
+        if (nq) out.add(nq)
+    }
+    push(query)
+    for (const lang of SCRIPT_SEARCH_LANGS) {
+        const profile = getScriptProfile(lang)
+        if (!profile) continue
+        if (typeof profile.toScript === 'function') push(profile.toScript(query))
+        if (typeof profile.toRoman === 'function') push(profile.toRoman(query))
+    }
+    return [...out]
+}
+
+/**
+ * 查询串里带了附加符号时，把「写法完全一致」的词条提到前面（层内保持原有排序）。
+ * 折叠后才命中的排在后面 —— 搜 mālum 时 mālum 先于 malum。
+ */
+function applyExactFirst(words, q, scope = 'all') {
+    const s = String(q || '').trim()
+    if (!s) return words
+    if (normalizeExact(s) === normalizeSearch(s)) return words   // 查询串没有附加符号，不用分层
+    const queries = exactVariants(s)
+    if (!queries.length) return words
+    const matches = searchMatcher(queries, normalizeExact)
+    const first = []
+    const rest = []
+    for (const w of words) (matches(w, scope) ? first : rest).push(w)
+    if (!first.length || !rest.length) return words
+    return first.concat(rest)
 }
 
 function applyFilter(words, f) {
@@ -173,16 +228,58 @@ export function applySort(words, field, order) {
     return arr
 }
 
+/**
+ * 保存前的规范化：原文类字段交给语言自己的 `canonicalize`（`data/language/<code>/paradigm.js`）。
+ * 目前只有拉丁语 / 古希腊语有（单元音默认补短音符），其它语言原样返回。
+ */
+async function canonicalizePayload(language, payload) {
+    if (!payload) return payload
+    const meta = await loadGrammarMeta(language)
+    const profile = await loadParadigmProfile(language, meta)
+    const fn = typeof profile?.canonicalize === 'function' ? profile.canonicalize : null
+    if (!fn) return payload
+
+    const fix = (value) => (typeof value === 'string' && value ? fn(value) : value)
+    const fixMap = (obj) => {
+        if (!obj || typeof obj !== 'object') return obj
+        const out = {}
+        for (const [key, value] of Object.entries(obj)) {
+            out[key] = typeof value === 'string' ? fix(value) : fixMap(value)
+        }
+        return out
+    }
+    const fixList = (list, key) => (Array.isArray(list)
+        ? list.map((item) => (item && typeof item === 'object' ? { ...item, [key]: fix(item[key]) } : item))
+        : list)
+
+    return {
+        ...payload,
+        lemma: fix(payload.lemma),
+        stems: fixMap(payload.stems || {}),
+        // 变格 / 变位表：{ 表: { 行: { 列: '词形' } } }
+        paradigm: fixMap(payload.paradigm || {}),
+        inflections: fixList(payload.inflections, 'form'),
+        collocations: fixList(payload.collocations, 'text'),
+        examples: fixList(payload.examples, 'text'),
+        derivatives: Array.isArray(payload.derivatives) ? payload.derivatives.map(fix) : payload.derivatives
+    }
+}
+
 export async function submitWord(userId, language, payload) {
     if (!payload || !payload.lemma || !String(payload.lemma).trim()) {
         throw new Error('基本形态不能为空')
     }
-    const result = await addOrMerge(userId, { ...payload, language })
+    const normalized = await canonicalizePayload(language, payload)
+    const result = await addOrMerge(userId, { ...normalized, language })
     return result
 }
 
 export async function editWord(id, patch) {
-    return updateWord(id, patch)
+    const existing = await getWord(id)
+    const normalized = existing
+        ? await canonicalizePayload(existing.language, patch)
+        : patch
+    return updateWord(id, normalized)
 }
 
 export async function submitReview(id, correct) {

@@ -29,6 +29,7 @@ import { posOptions } from '../utils/pos.js'
 import { takePendingLookup } from '../store/pending-lookup.js'
 import { createPageTools } from '../components/page-tools.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
+import { annotateBreves, setBreveVisible } from '../utils/breve.js'
 import { deleteWord } from '../store/word-store.js'
 
 const SPECIAL_REF = '__special__'
@@ -546,14 +547,14 @@ export default {
                     onclick: onDelete
                 }, '删除'),
                 h('div', { style: { flex: 1 } }),
-                previewBtn,
                 cancelBtn,
+                previewBtn,
                 submitBtn
             ))
         } else {
             form.appendChild(h('div', { class: 'word-form__actions' },
-                previewBtn,
                 cancelBtn,
+                previewBtn,
                 submitBtn
             ))
         }
@@ -580,6 +581,10 @@ export default {
             onChange: (on) => {
                 setDualTextVisible(on)
                 if (on) annotateForm()
+            },
+            onBreveChange: (on) => {
+                setBreveVisible(on)
+                annotateBreves(form, { selector: '.ghost-input__hint' })
             }
         })
         document.body.appendChild(pageTools.el)
@@ -587,6 +592,7 @@ export default {
             setDualTextVisible(true)
             annotateForm()
         }
+        if (pageTools.isBreveOn()) setBreveVisible(true)
 
         rebuildRefOptions(data.inflectionType.grammarRef || SPECIAL_REF)
         replace(main, head, form)
@@ -754,6 +760,7 @@ export default {
             principalField.refresh()
             for (const item of extraGhosts) item.refresh()
             annotateForm()
+            annotateBreves(form, { selector: '.ghost-input__hint' })
         }
 
         /** 收集词干：base + 已填的额外部分 */
@@ -1811,6 +1818,7 @@ export default {
         return () => {
             pageTools.destroy()
             setDualTextVisible(false)
+            setBreveVisible(false)
         }
     }
 }

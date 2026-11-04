@@ -22,6 +22,7 @@ import { toast } from '../components/toast.js'
 import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf, loadGrammarMeta, loadScriptProfile } from '../services/grammar-service.js'
 import { createPageTools } from '../components/page-tools.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
+import { annotateBreves, setBreveVisible, foldBreve } from '../utils/breve.js'
 import { findAnchor } from '../models/grammar.js'
 import { openImportWordsModal } from '../components/import-words-modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
@@ -71,8 +72,10 @@ export default {
             langWordsCache = await listByLanguage(userId, lang)
             langWordsMap = new Map()
             for (const w of langWordsCache) {
-                // 同 lemma 多个 pos 时保留第一个（用于派生词跳转）
-                if (!langWordsMap.has(w.lemma)) langWordsMap.set(w.lemma, w)
+                // 同 lemma 多个 pos 时保留第一个（用于派生词跳转）；
+                // 短音符不参与匹配：派生词写 i 也能指到存成 ĭ 的那条
+                const key = foldBreve(w.lemma)
+                if (!langWordsMap.has(key)) langWordsMap.set(key, w)
             }
         }
 
@@ -101,10 +104,15 @@ export default {
             onChange: (on) => {
                 setDualTextVisible(on)
                 if (on) annotateWords()
+            },
+            onBreveChange: (on) => {
+                setBreveVisible(on)
+                annotateBreves(listWrap, { selector: '.word-row__lemma' })
             }
         })
         document.body.appendChild(tools.el)
         if (tools.isOn() && toRoman) setDualTextVisible(true)
+        if (tools.isBreveOn()) setBreveVisible(true)
 
         function paradigmTplFor(pos) {
             return getParadigmTemplate(grammarDoc, pos)
@@ -397,6 +405,7 @@ export default {
             }
             listWrap.appendChild(frag)
             annotateWords()
+            annotateBreves(listWrap, { selector: '.word-row__lemma' })
         }
 
         /** 掌握度：五格刻度 */
@@ -421,7 +430,7 @@ export default {
                 partLabels: partLabelsFor(word),
                 stemLabel: stemLabelFor(word),
                 resolvePosRef,
-                resolveDerivative: (lemma) => langWordsMap.get(lemma) || null,
+                resolveDerivative: (lemma) => langWordsMap.get(foldBreve(lemma)) || null,
                 stayOpenOnDerivative: true,
                 onDerivativeClick: (target) => {
                     focusDerivative(target).catch((err) => {
@@ -573,6 +582,7 @@ export default {
             document.removeEventListener('keydown', onKey)
             tools.destroy()
             setDualTextVisible(false)
+            setBreveVisible(false)
         }
     }
 }

@@ -181,3 +181,61 @@ export function applyAccent(text, mode, { endingAccented = false, finalDiphthong
 export function accent(text, mode, options = {}) {
     return applyAccent(text, mode, options)
 }
+
+/* ---------------- 保存时的规范化：单元音默认短 ---------------- */
+
+const BREVE = '\u0306'
+
+/** 有长短对立的元音：只有 α ι υ；η ω 天然长，ε ο 天然短 */
+const LENGTH_VOWELS = 'αιυ'
+/** 按「基字 + 组合符」切成簇 */
+function toClusters(text) {
+    const out = []
+    for (const ch of text) {
+        if (/\p{M}/u.test(ch) && out.length) out[out.length - 1].marks += ch
+        else out.push({ base: ch, marks: '' })
+    }
+    return out
+}
+
+/**
+ * 古希腊语规范化：**单元音默认短**。
+ * α ι υ 单独出现（不在双元音里、没有长音符、没有 iota 下标）→ 补上短音符 ˘；
+ * 双元音两个成员都不补；η ω（天然长）与 ε ο（天然短）不补；带分音符的 ϊ ϋ 算单元音，补。
+ *
+ * @param {string} text
+ * @returns {string}
+ */
+export function canonicalize(text) {
+    const src = String(text ?? '')
+    if (!src) return src
+    const clusters = toClusters(src.normalize('NFD'))
+    const inDiphthong = new Set()
+
+    for (let i = 0; i < clusters.length - 1; i++) {
+        const a = clusters[i]
+        const b = clusters[i + 1]
+        const pair = a.base + b.base
+        if (!DIPHTHONGS.has(pair)) continue
+        // 任一边带分音符（ϊ）就说明不是双元音
+        if (a.marks.includes(DIALYTIKA) || b.marks.includes(DIALYTIKA)) continue
+        // υι 在希腊语里几乎只有 υἱός 这种「分读」：第二个元音带气符就算两个独立元音
+        // （其它双元音的气符本来就写在第二个元音上，αἱ / οἶ / οὐ，不能一并否掉）
+        if (pair === 'υι' && (b.marks.includes('\u0313') || b.marks.includes('\u0314'))) continue
+        inDiphthong.add(i)
+        inDiphthong.add(i + 1)
+    }
+
+    const out = clusters.map((cluster, index) => {
+        const { base, marks } = cluster
+        const keep = base + marks.split(BREVE).join('')
+        // 不该有短音符的位置顺手去掉，保证「同一写法」收敛
+        if (!LENGTH_VOWELS.includes(base) || inDiphthong.has(index)) return keep
+        if (marks.includes(MACRON)) return keep
+        // iota 下标说明这个元音是长的
+        if (marks.includes(IOTA_SUBSCRIPT)) return keep
+        return base + marks + (marks.includes(BREVE) ? '' : BREVE)
+    })
+
+    return out.join('').normalize('NFC')
+}

@@ -5,6 +5,8 @@ import { buildQueue, answer, createSessionStats } from '../services/review-servi
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { posLabel } from '../models/word.js'
 import { bdiNode } from '../utils/bdi.js'
+import { annotateBreves, setBreveVisible } from '../utils/breve.js'
+import { createPageTools } from '../components/page-tools.js'
 import { toast } from '../components/toast.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { loadGrammar, getParadigmTemplate } from '../services/grammar-service.js'
@@ -72,6 +74,19 @@ export default {
         /* ---------- DOM ---------- */
         const barEl = h('div', { class: 'review-sheet__fill', style: { width: '0%' } })
         const faceWrap = h('div', { class: 'review-face', onclick: () => toggleFace(), title: '点击翻面' })
+
+        /* ---------- 右下角浮动工具：显示短音符 ---------- */
+        const tools = createPageTools({
+            lang,
+            toRoman: null,
+            anchorEl: main,
+            onBreveChange: (on) => {
+                setBreveVisible(on)
+                annotateBreves(faceWrap, { selector: '.review-word, .review-done__lemma' })
+            }
+        })
+        document.body.appendChild(tools.el)
+        if (tools.isBreveOn()) setBreveVisible(true)
         let showBack = false
         const actionEl = h('div', { class: 'review-actions' })
         const hintEl = h('div', { class: 'review-hint' },
@@ -136,6 +151,7 @@ export default {
             if (!word) return
             faceWrap.classList.remove('review-face--in')
             replace(faceWrap, showBack ? buildBack(word) : buildFront(word))
+            annotateBreves(faceWrap, { selector: '.review-word, .review-done__lemma' })
             void faceWrap.offsetWidth
             faceWrap.classList.add('review-face--in')
         }
@@ -278,6 +294,10 @@ export default {
         renderActions()
         renderCard()
 
-        return () => document.removeEventListener('keydown', onKey)
+        return () => {
+            document.removeEventListener('keydown', onKey)
+            tools?.destroy()
+            setBreveVisible(false)
+        }
     }
 }

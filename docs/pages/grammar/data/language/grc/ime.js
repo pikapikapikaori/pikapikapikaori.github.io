@@ -9,7 +9,13 @@
  */
 
 const VOWELS = 'αεηιουω'
+/** 有长短对立的只有 α ι υ；η ω 天然长、ε ο 天然短，不标音长 */
+const LENGTH_VOWELS = 'αιυ'
 const isVowel = (base) => VOWELS.includes(String(base || '').normalize('NFD')[0])
+const isLengthVowel = (base) => LENGTH_VOWELS.includes(String(base || '').normalize('NFD')[0])
+/** iota 下标只跟在 α η ω 后面（ᾳ ῃ ῳ） */
+const IOTA_VOWELS = 'αηω'
+const isIotaVowel = (base) => IOTA_VOWELS.includes(String(base || '').normalize('NFD')[0])
 const isVowelOrRho = (base) => {
     const b = String(base || '').normalize('NFD')[0]
     return VOWELS.includes(b) || b === 'ρ'
@@ -46,17 +52,19 @@ export default {
             label: '音长',
             row: 1,
             items: [
-                { c: '\u0304', label: '长', applies: isVowel },
-                { c: '\u0306', label: '短', applies: isVowel }
+                { c: '\u0304', label: '长', applies: isLengthVowel },
+                { c: '\u0306', label: '短', applies: isLengthVowel }
             ]
         },
-        { key: 'iota', label: '下标', row: 1, items: [{ c: '\u0345', label: 'iota', applies: isVowel }] }
+        { key: 'iota', label: '下标', row: 1, items: [{ c: '\u0345', label: 'iota', applies: isIotaVowel }] }
     ],
     /* 「还原」并到音长/下标那一行 */
     restoreRow: 1,
     applies(base, group) {
         const b = String(base || '').normalize('NFD')[0]
         if (group === 'accent') return VOWELS.includes(b) || b === 'ι' || b === 'υ'
+        if (group === 'length') return isLengthVowel(base)
+        if (group === 'iota') return isIotaVowel(base)
         return isVowelOrRho(base)
     },
     keyboard: {

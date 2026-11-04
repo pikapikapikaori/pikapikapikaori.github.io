@@ -1,4 +1,5 @@
 import { h } from '../utils/dom.js'
+import { BREVE_LANGS } from '../config/config.js'
 
 /** 从挂载点往上找真正在滚的容器；找不到就用 window */
 function findScroller(start) {
@@ -12,14 +13,19 @@ function findScroller(start) {
 }
 
 /**
- * 语法页右下角的浮动工具：回到顶部 + 显示转写（无 toRoman 时不渲染，状态按语言存 localStorage）。
- * @param {object} options lang / toRoman（(text) => string | null）/ onChange(on) / anchorEl
- * @returns {{ el: HTMLElement, isOn: () => boolean, destroy: () => void }}
+ * 页面右下角的浮动工具：回到顶部 + 显示转写（无 toRoman 时不渲染）+ 显示短音符（只有拉丁语 / 古希腊语有）。
+ * 两个开关的状态都按语言存 localStorage。
+ * @param {object} options lang / toRoman（(text) => string | null）/ onChange(on) / onBreveChange(on) / anchorEl
+ * @returns {{ el: HTMLElement, isOn: () => boolean, isBreveOn: () => boolean, destroy: () => void }}
  */
-export function createPageTools({ lang, toRoman = null, onChange = null, anchorEl = null } = {}) {
+export function createPageTools({ lang, toRoman = null, onChange = null, onBreveChange = null, anchorEl = null } = {}) {
     const key = `ln.roman.${lang}`
     let romanOn = false
     try { romanOn = localStorage.getItem(key) === '1' } catch { /* ignore */ }
+
+    const breveKey = `ln.breve.${lang}`
+    let breveOn = false
+    try { breveOn = localStorage.getItem(breveKey) === '1' } catch { /* ignore */ }
 
     const scroller = findScroller(anchorEl)
 
@@ -62,6 +68,28 @@ export function createPageTools({ lang, toRoman = null, onChange = null, anchorE
         }
     }, '文')
 
+    const breveBtn = BREVE_LANGS.includes(lang)
+        ? h('button', {
+            class: 'page-tools__btn' + (breveOn ? ' page-tools__btn--on' : ''),
+            type: 'button',
+            title: breveOn ? '隐藏短音符' : '显示短音符',
+            'aria-pressed': breveOn ? 'true' : 'false',
+            onclick: () => {
+                breveOn = !breveOn
+                try { localStorage.setItem(breveKey, breveOn ? '1' : '0') } catch { /* ignore */ }
+                syncBreve()
+                if (typeof onBreveChange === 'function') onBreveChange(breveOn)
+            }
+        }, '\u0102')
+        : null
+
+    function syncBreve() {
+        if (!breveBtn) return
+        breveBtn.setAttribute('aria-pressed', breveOn ? 'true' : 'false')
+        breveBtn.classList.toggle('page-tools__btn--on', breveOn)
+        breveBtn.title = breveOn ? '隐藏短音符' : '显示短音符'
+    }
+
     function sync() {
         romanBtn.setAttribute('aria-pressed', romanOn ? 'true' : 'false')
         romanBtn.classList.toggle('page-tools__btn--on', romanOn)
@@ -80,11 +108,12 @@ export function createPageTools({ lang, toRoman = null, onChange = null, anchorE
     document.addEventListener('scroll', onScroll, { capture: true, passive: true })
     onScroll()
 
-    const el = h('div', { class: 'page-tools' }, toRoman ? romanBtn : null, topBtn)
+    const el = h('div', { class: 'page-tools' }, breveBtn, toRoman ? romanBtn : null, topBtn)
 
     return {
         el,
         isOn: () => romanOn,
+        isBreveOn: () => breveOn,
         destroy() {
             scroller.removeEventListener('scroll', onScroll)
             document.removeEventListener('scroll', onScroll, { capture: true })

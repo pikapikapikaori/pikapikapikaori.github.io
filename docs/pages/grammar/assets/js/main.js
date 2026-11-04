@@ -87,6 +87,9 @@ function renderFatal(message) {
 
 /* ---------------- 视图加载 ---------------- */
 
+/** 需要输入助手的视图（其余页面没有常驻按钮） */
+const IME_VIEWS = new Set(['words', 'wordNew', 'wordEdit'])
+
 const VIEW_MODULES = {
     welcome: () => import('./views/welcome-view.js'),
     languages: () => import('./views/language-select-view.js'),
@@ -137,6 +140,9 @@ async function mountView(name, ctx) {
         try { currentUnmount() } catch (err) { console.warn('[view] unmount error', err) }
         currentUnmount = null
     }
+    import('./components/input-helper.js')
+        .then((mod) => mod.unmountInputHelper())
+        .catch(() => { /* 助手没加载成功时不需要卸载 */ })
     
     clearBreadcrumbs()
     hideVerticalPopover()
@@ -160,6 +166,15 @@ async function mountView(name, ctx) {
     setRoute(name, ctx.params, ctx.query)
     const unmount = await view.mount(container || getShell(), ctx)
     if (typeof unmount === 'function') currentUnmount = unmount
+
+    // 输入助手：只有「词列表 / 生词表单」需要，语言决定面板内容。
+    // 动态加载：助手模块出问题（半更新、缓存、语法错）时只是没有助手，不会拖垮整个视图。
+    if (IME_VIEWS.has(name) && ctx.params && ctx.params.lang) {
+        const lang = ctx.params.lang
+        import('./components/input-helper.js')
+            .then((mod) => mod.mountInputHelper({ lang }))
+            .catch((err) => console.warn('[ime] 输入助手加载失败，已跳过', err))
+    }
     applyBreadcrumbs()
 }
 

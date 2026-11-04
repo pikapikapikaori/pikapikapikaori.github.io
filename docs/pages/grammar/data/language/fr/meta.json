@@ -53,7 +53,10 @@
       "placeholder": "基本形态，如 livre"
     }
   },
-  "files": {},
+  "files": {
+    "ime": "ime.js",
+    "script": "script.js"
+  },
   "grammarFiles": {
     "paradigms": "grammar/paradigms.json",
     "chapters": [

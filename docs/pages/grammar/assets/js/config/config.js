@@ -45,8 +45,11 @@ export const SCRIPT_POPUP_LANGS = {
  */
 export const TRANSLIT_SEARCH_LANGS = ['mnc']
 
-/** 检索时把查询串同时展开成「原文 + 转写」的语言：梵语数据存天城体，用户可能输入 IAST。 */
-export const SCRIPT_SEARCH_LANGS = ['sa']
+/**
+ * 检索时把查询串同时展开成「原文 + 转写」的语言：这些语言的数据存的是非拉丁文字，
+ * 用户可能直接输入罗马字（IAST / 希腊语转写 / 希伯来语转写）。
+ */
+export const SCRIPT_SEARCH_LANGS = ['sa', 'grc', 'he']
 
 /**
  * 渲染时用 <bdi> 包住文字的语言：值是**该文字的 Unicode 范围**，只有命中的字符才被包进 <bdi>，

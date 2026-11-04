@@ -3,16 +3,21 @@
  * 中文等其它字符原样保留；本模块不含任何具体语言的知识。
  */
 
-/** @param {HTMLElement} root 只处理其中的 td / th @param {{ range: RegExp, toRoman: (text) => string }} options */
-export function annotateDualText(root, { range, toRoman } = {}) {
+/**
+ * @param {HTMLElement} root 在其内部查找要加注的节点
+ * @param {{ range: RegExp, toRoman: (text) => string, selector?: string }} options
+ *   selector 默认只处理表格单元格；词列表标题、词卡标题这类非表格节点由调用方传 [data-dual]
+ */
+export function annotateDualText(root, { range, toRoman, selector = 'td, th' } = {}) {
     if (!root || !(range instanceof RegExp) || typeof toRoman !== 'function') return
-    // 只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读
-    const cells = root.querySelectorAll('td, th')
+    // 默认只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读
+    const cells = root.querySelectorAll(selector)
     for (const cell of cells) {
-        if (cell.dataset.dualText === '1') continue
         // 带输入框的格子（变格表 / 词卡）不处理；纯文本、<bdi>、<code> 都可以
         if (cell.querySelector('input, textarea, [contenteditable]')) continue
-        if (cell.querySelector('.dual-text__roman')) continue
+        // 内容会变的节点（表单里的「推导提示」）每次都要重算：先撤掉旧转写再加，
+        // 否则提示文字换了、旧转写还挂在那儿
+        for (const old of cell.querySelectorAll('.dual-text__roman')) old.remove()
 
         const walker = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT)
         const nodes = []

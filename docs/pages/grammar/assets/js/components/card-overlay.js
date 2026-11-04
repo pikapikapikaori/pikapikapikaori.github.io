@@ -7,6 +7,8 @@ import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 import { collocationList, exampleList } from './entry-lists.js'
+import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
+import { getScriptProfile } from '../services/grammar-service.js'
 
 let overlayEl = null
 let escHandler = null
@@ -30,6 +32,19 @@ export function openCardOverlay(word, opts = {}) {
     // 跳到派生词时先不关：等新卡片直接替换旧卡片，中间不出现空白
     const stayOpenOnDerivative = opts.stayOpenOnDerivative === true
     const onClose = opts.onClose || null
+
+    // 「显示转写」和语法页 / 词列表共用同一个开关：localStorage 记状态，html 上的 class 控显示
+    const scriptProfile = opts.scriptProfile || getScriptProfile(language)
+    const toRoman = typeof scriptProfile?.toRoman === 'function'
+        ? (text) => scriptProfile.toRoman(text)
+        : null
+    const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
+        ? scriptProfile.scriptRange
+        : null
+    const romanKey = `ln.roman.${language}`
+    let romanOn = false
+    try { romanOn = localStorage.getItem(romanKey) === '1' } catch { /* 无痕模式忽略 */ }
+    if (!toRoman) romanOn = false
 
     const sources = allSources(word)
     // 「手动」就是默认来源：有外部来源时就多一个 tab，别让含义没处可切
@@ -56,11 +71,28 @@ export function openCardOverlay(word, opts = {}) {
         onclick: close
     }, '✕')
 
+    const romanBtn = toRoman ? h('button', {
+        class: 'card-overlay-roman' + (romanOn ? ' is-on' : ''),
+        type: 'button',
+        title: romanOn ? '隐藏转写' : '显示转写',
+        'aria-pressed': String(romanOn),
+        onclick: () => {
+            romanOn = !romanOn
+            try { localStorage.setItem(romanKey, romanOn ? '1' : '0') } catch { /* ignore */ }
+            romanBtn.setAttribute('aria-pressed', String(romanOn))
+            romanBtn.classList.toggle('is-on', romanOn)
+            romanBtn.title = romanOn ? '隐藏转写' : '显示转写'
+            romanBtn.textContent = romanOn ? 'A' : '文'
+            setDualTextVisible(romanOn)
+            annotateRoman()
+        }
+    }, romanOn ? 'A' : '文') : null
+
     const panel = h('div', {
         class: 'card-overlay-panel',
         role: 'dialog',
         'aria-modal': 'true'
-    }, closeBtn, head, body)
+    }, romanBtn, closeBtn, head, body)
 
     overlayEl = h('div', { class: 'card-overlay' + (replacing ? ' card-overlay--instant' : '') }, backdrop, panel)
     applyBdi(overlayEl)
@@ -283,6 +315,21 @@ export function openCardOverlay(word, opts = {}) {
         if (word.notes) {
             body.appendChild(ovSection('备注', h('div', {}, word.notes)))
         }
+
+        annotateRoman()
+    }
+
+    /** 在原文旁标出转写：标题、词干、变格表、例句、派生词 */
+    function annotateRoman() {
+        if (!toRoman || !scriptRange || !romanOn) return
+        setDualTextVisible(true)
+        annotateDualText(head, { range: scriptRange, toRoman, selector: '.card-overlay__lemma' })
+        annotateDualText(body, { range: scriptRange, toRoman })
+        annotateDualText(body, {
+            range: scriptRange,
+            toRoman,
+            selector: '.word-card__stem, .word-card__stem-part, .word-card__example-text, .word-card__derivative'
+        })
     }
 
     function pick(items) {

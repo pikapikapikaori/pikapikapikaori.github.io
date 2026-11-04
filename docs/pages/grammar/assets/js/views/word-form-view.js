@@ -6,10 +6,12 @@ import {
     normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders, sourceLabel
 } from '../models/word.js'
 import {
-    loadGrammar, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
-    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms
+    loadGrammar, loadGrammarMeta, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
+    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms,
+    getDeriveParts, stemLabelOf
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
+import { openCardOverlay } from '../components/card-overlay.js'
 import { createGhostInput } from '../components/ghost-input.js'
 import { createSelect } from '../components/select-field.js'
 import { meaningsOfSource, meaningRefLabel } from '../components/entry-lists.js'
@@ -25,6 +27,8 @@ import {
 } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { takePendingLookup } from '../store/pending-lookup.js'
+import { createPageTools } from '../components/page-tools.js'
+import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
 import { deleteWord } from '../store/word-store.js'
 
 const SPECIAL_REF = '__special__'
@@ -99,8 +103,9 @@ export default {
             if (extra) extra.textContent = t.extraForms
         }
         const paradigmProfile = await loadParadigmProfile(lang, grammarDoc)
-        // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写
-        const scriptProfile = await loadScriptProfile(lang, grammarDoc)
+        // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写。
+        // 注意第二个参数是 meta（要读 meta.files.script），不是 grammar 文档。
+        const scriptProfile = await loadScriptProfile(lang, await loadGrammarMeta(lang))
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
         if (isEdit && !data) {
@@ -522,6 +527,17 @@ export default {
             onclick: () => location.hash = `#/lang/${lang}/words`
         }, '取消')
 
+        // 预览：把当前填的内容直接当成一张词卡打开（词卡自带「显示转写」开关）
+        const previewBtn = h('button', {
+            class: 'btn',
+            type: 'button',
+            onclick: onPreview
+        }, '预览')
+        // 没有基本形态就没什么可预览的
+        const syncPreview = () => { previewBtn.disabled = !lemmaInput.value.trim() }
+        lemmaField.input.addEventListener('input', syncPreview)
+        syncPreview()
+
         if (isEdit) {
             form.appendChild(h('div', { class: 'word-form__actions' },
                 h('button', {
@@ -530,14 +546,46 @@ export default {
                     onclick: onDelete
                 }, '删除'),
                 h('div', { style: { flex: 1 } }),
+                previewBtn,
                 cancelBtn,
                 submitBtn
             ))
         } else {
             form.appendChild(h('div', { class: 'word-form__actions' },
+                previewBtn,
                 cancelBtn,
                 submitBtn
             ))
+        }
+
+
+        /* ---------- 右下角浮动工具：回到顶部 + 显示转写 ---------- */
+        const toRoman = typeof scriptProfile?.toRoman === 'function'
+            ? (text) => scriptProfile.toRoman(text)
+            : null
+        const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
+            ? scriptProfile.scriptRange
+            : null
+
+        /** 表单里能加注的原文只有「推导出来的词干」这类提示文字 */
+        function annotateForm() {
+            if (!toRoman || !scriptRange) return
+            annotateDualText(form, { range: scriptRange, toRoman, selector: '.ghost-input__hint' })
+        }
+
+        const pageTools = createPageTools({
+            lang,
+            toRoman,
+            anchorEl: main,
+            onChange: (on) => {
+                setDualTextVisible(on)
+                if (on) annotateForm()
+            }
+        })
+        document.body.appendChild(pageTools.el)
+        if (pageTools.isOn() && toRoman) {
+            setDualTextVisible(true)
+            annotateForm()
         }
 
         rebuildRefOptions(data.inflectionType.grammarRef || SPECIAL_REF)
@@ -705,6 +753,7 @@ export default {
         function refreshStemGhosts() {
             principalField.refresh()
             for (const item of extraGhosts) item.refresh()
+            annotateForm()
         }
 
         /** 收集词干：base + 已填的额外部分 */
@@ -1311,7 +1360,7 @@ export default {
                             class: 'input', placeholder: '标签', value: it.label,
                             oninput: (e) => { it.label = e.target.value }
                         }),
-                        createGhostInput({
+                        ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.form,
                             lang,
                             placeholder: '形态',
@@ -1319,7 +1368,7 @@ export default {
                                 it.form = e.target.value
                                 renumber()
                             }
-                        }).el,
+                        })),
                         sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
                             class: 'btn btn--sm word-form__cell--remove', type: 'button',
@@ -1360,7 +1409,7 @@ export default {
                 data.collocations.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item' },
                         indexCell(),
-                        createGhostInput({
+                        ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
                             lang,
                             placeholder: '搭配文本',
@@ -1368,7 +1417,7 @@ export default {
                                 it.text = e.target.value
                                 renumber()
                             }
-                        }).el,
+                        })),
                         h('input', {
                             class: 'input', placeholder: '释义', value: it.gloss,
                             oninput: (e) => { it.gloss = e.target.value }
@@ -1470,7 +1519,7 @@ export default {
                 data.examples.forEach((it, idx) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--example' },
                         indexCell(),
-                        createGhostInput({
+                        ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
                             lang,
                             placeholder: '例句原文',
@@ -1478,7 +1527,7 @@ export default {
                                 it.text = e.target.value
                                 renumber()
                             }
-                        }).el,
+                        })),
                         h('input', {
                             class: 'input', placeholder: '出处', value: it.citation,
                             oninput: (e) => { it.citation = e.target.value }
@@ -1664,25 +1713,18 @@ export default {
 
         /* ---------- 提交 ---------- */
 
-        async function onSubmit() {
-            const tagsRaw = tagsInput.value
-            data.tags = tagsRaw.split(/[,，]/).map((s) => s.trim()).filter(Boolean)
-
-            const lemma = lemmaInput.value.trim()
-            if (!lemma) {
-                toast.error('基本形态不能为空')
-                lemmaInput.focus()
-                return
-            }
-
+        /** 把表单当前内容收成一个词条对象（保存与预览共用） */
+        function buildPayload() {
+            const tags = tagsInput.value.split(/[,，]/).map((s) => s.trim()).filter(Boolean)
+            data.tags = tags
             const refValue = inflectionRef.value
             const grammarRef = (refValue && refValue !== SPECIAL_REF && refValue !== INDECL_REF)
                 ? refValue
                 : null
 
-            const payload = {
+            return {
                 language: lang,
-                lemma,
+                lemma: lemmaInput.value.trim(),
                 pos: posSelect.value,
                 // attributes 里放词性声明的字段（语法性 / 自他…）；gender 仍留旧字段做镜像
                 attributes: { ...data.attributes },
@@ -1699,8 +1741,38 @@ export default {
                 collocations: cleanList(data.collocations, ['text']),
                 examples: cleanList(data.examples, ['text']).map(cleanExampleMeaning),
                 derivatives: data.derivatives.map((s) => s.trim()).filter(Boolean),
-                tags: data.tags,
+                tags,
                 notes: data.notes || ''
+            }
+        }
+
+        /** 预览：把当前填的内容当成一张词卡打开（和列表里点开的那张卡是同一个组件） */
+        function onPreview() {
+            const payload = buildPayload()
+            if (!payload.lemma) {
+                toast.error('先填基本形态再看预览')
+                lemmaInput.focus()
+                return
+            }
+            const partLabels = {}
+            for (const part of getDeriveParts(grammarDoc, payload.inflectionType.grammarRef)) {
+                if (part.key !== 'base') partLabels[part.key] = part.label || part.key
+            }
+            openCardOverlay({ ...payload, id: data.id || 'preview' }, {
+                language: lang,
+                paradigmTpl: getParadigmTemplate(grammarDoc, payload.pos),
+                partLabels,
+                stemLabel: stemLabelOf(grammarDoc, payload.inflectionType.grammarRef, payload.pos)
+            })
+        }
+
+        async function onSubmit() {
+            const payload = buildPayload()
+            const lemma = payload.lemma
+            if (!lemma) {
+                toast.error('基本形态不能为空')
+                lemmaInput.focus()
+                return
             }
 
             try {
@@ -1734,6 +1806,11 @@ export default {
             await deleteWord(data.id)
             toast.success('已删除')
             location.hash = `#/lang/${lang}/words`
+        }
+
+        return () => {
+            pageTools.destroy()
+            setDualTextVisible(false)
         }
     }
 }

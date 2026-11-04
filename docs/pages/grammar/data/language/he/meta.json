@@ -52,7 +52,9 @@
     }
   },
   "files": {
-    "paradigm": "paradigm.js"
+    "paradigm": "paradigm.js",
+    "ime": "ime.js",
+    "script": "script.js"
   },
   "grammarFiles": {
     "paradigms": "grammar/paradigms.json",

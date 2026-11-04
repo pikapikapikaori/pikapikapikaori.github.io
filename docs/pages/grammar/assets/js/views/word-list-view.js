@@ -19,7 +19,9 @@ import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
-import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf } from '../services/grammar-service.js'
+import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf, loadGrammarMeta, loadScriptProfile } from '../services/grammar-service.js'
+import { createPageTools } from '../components/page-tools.js'
+import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
 import { findAnchor } from '../models/grammar.js'
 import { openImportWordsModal } from '../components/import-words-modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
@@ -77,6 +79,32 @@ export default {
         await refreshCache()
 
         const grammarDoc = await loadGrammar(lang)
+
+        /* ---------- 右下角浮动工具：回到顶部 + 显示转写 ---------- */
+        const scriptProfile = await loadScriptProfile(lang, await loadGrammarMeta(lang))
+        const toRoman = typeof scriptProfile?.toRoman === 'function'
+            ? (text) => scriptProfile.toRoman(text)
+            : null
+        const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
+            ? scriptProfile.scriptRange
+            : null
+
+        function annotateWords() {
+            if (!toRoman || !scriptRange) return
+            annotateDualText(listWrap, { range: scriptRange, toRoman, selector: '[data-dual]' })
+        }
+
+        const tools = createPageTools({
+            lang,
+            toRoman,
+            anchorEl: main,
+            onChange: (on) => {
+                setDualTextVisible(on)
+                if (on) annotateWords()
+            }
+        })
+        document.body.appendChild(tools.el)
+        if (tools.isOn() && toRoman) setDualTextVisible(true)
 
         function paradigmTplFor(pos) {
             return getParadigmTemplate(grammarDoc, pos)
@@ -368,6 +396,7 @@ export default {
                 frag.appendChild(renderRow(w))
             }
             listWrap.appendChild(frag)
+            annotateWords()
         }
 
         /** 掌握度：五格刻度 */
@@ -424,7 +453,7 @@ export default {
                 }
             },
             h('div', { class: 'word-row__main' },
-                h('div', { class: 'word-row__lemma' }, bdiNode(w.lemma, lang)),
+                h('div', { class: 'word-row__lemma', dataset: { dual: '1' } }, bdiNode(w.lemma, lang)),
                 w.tags && w.tags.length
                     ? h('div', { class: 'word-row__tags' },
                         ...w.tags.slice(0, 3).map((t) => h('span', { class: 'word-row__tag' }, t)),
@@ -542,6 +571,8 @@ export default {
 
         return () => {
             document.removeEventListener('keydown', onKey)
+            tools.destroy()
+            setDualTextVisible(false)
         }
     }
 }

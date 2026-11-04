@@ -54,7 +54,9 @@
       "placeholder": "基本形态，如 aqua"
     }
   },
-  "files": {},
+  "files": {
+    "ime": "ime.js"
+  },
   "grammarFiles": {
     "paradigms": "grammar/paradigms.json",
     "chapters": [

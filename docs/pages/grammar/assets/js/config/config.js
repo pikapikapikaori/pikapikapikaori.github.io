@@ -83,13 +83,6 @@ export const POS_LIST = [
     { value: 'other',     label: '其它' },
 ]
 
-/** 语法性；顺序即展示顺序 */
-export const GENDERS = [
-    { value: 'm', label: '阳性' },
-    { value: 'f', label: '阴性' },
-    { value: 'n', label: '中性' },
-]
-
 export const WORD_SOURCE_OPTIONS = [
     { value: 'manual', label: '手动' },
     ...EXTERNAL_SOURCES.map((s) => ({ value: s.id, label: s.label })),

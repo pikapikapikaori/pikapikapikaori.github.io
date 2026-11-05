@@ -3,12 +3,12 @@ import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import { submitWord, editWord, fetchWord, queryWords } from '../services/word-service.js'
 import {
-    normalizeParadigm, normalizeStem, normalizeStems, normalizeGenders, sourceLabel
+    normalizeParadigm, normalizeStem, normalizeStems, sourceLabel
 } from '../models/word.js'
 import {
     loadGrammar, loadGrammarMeta, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
     getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms,
-    getDeriveParts, stemLabelOf, migrateFieldStems
+    getDeriveParts, stemLabelOf
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { openCardOverlay } from '../components/card-overlay.js'
@@ -23,7 +23,7 @@ import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import {
-    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS
+    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST
 } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { takePendingLookup } from '../store/pending-lookup.js'
@@ -143,15 +143,13 @@ export default {
         }
 
         async function loadForEdit(id) {
-            // 旧数据把助动词之类的属性存在词干里，读进来时先搬到 attributes
-            const w = migrateFieldStems(grammarDoc, await fetchWord(id))
+            const w = await fetchWord(id)
             if (!w) return null
             return {
                 id: w.id,
                 language: w.language,
                 lemma: w.lemma,
                 pos: w.pos,
-                gender: normalizeGenders(w.gender, w.pos),
                 attributes: { ...(w.attributes || {}) },
                 inflectionType: {
                     label: (w.inflectionType && w.inflectionType.label) || '',
@@ -469,7 +467,7 @@ export default {
 
         const genderSlot = h('div', {})
 
-        /** 词性自己声明的属性（语法性 / 自他…），和语法锚点一样用下拉 */
+        /** 词性自己声明的属性（语法性 / 自他 / 助动词…）：多选字段用 chip 组，单选字段用下拉 */
         function renderGenderField() {
             genderSlot.replaceChildren()
             const defs = getFieldDefs(grammarDoc, posSelect.value)
@@ -478,32 +476,71 @@ export default {
             if (!defs.length) return
 
             for (const def of defs) {
-                // 语法性这类必填属性不提供空选项，没值时默认第一项
+                // 必填属性（语法性 / 助动词 / 自他）至少选一个，没值时默认第一项
                 const required = def.required === true || def.key === 'gender' || def.declensionCells
                 const raw = data.attributes[def.key]
-                let current = Array.isArray(raw) ? (raw[0] ?? '') : (raw ?? '')
-                if (!current && required && def.options.length) {
-                    current = def.options[0].value
-                    data.attributes[def.key] = current
+                const picked = Array.isArray(raw) ? raw.filter(Boolean) : (raw ? [raw] : [])
+                if (!picked.length && required && def.options.length) {
+                    picked.push(def.options[0].value)
+                    data.attributes[def.key] = [...picked]
                 }
 
-                const select = createSelect({
-                    lang,
-                    className: 'select',
-                    value: current,
-                    options: [
-                        ...(required && current ? [] : [{ value: '', label: '（未选择）' }]),
-                        ...def.options.map((opt) => ({ value: opt.value, label: opt.label }))
-                    ],
-                    onChange: (v) => {
-                        if (v) data.attributes[def.key] = v
-                        else delete data.attributes[def.key]
-                        renderParadigmBlock()
-                    }
-                })
+                const control = def.multi
+                    ? multiChipField(def, picked, required)
+                    : createSelect({
+                        lang,
+                        className: 'select',
+                        value: picked[0] || '',
+                        options: [
+                            ...(required && picked.length ? [] : [{ value: '', label: '（未选择）' }]),
+                            ...def.options.map((opt) => ({ value: opt.value, label: opt.label }))
+                        ],
+                        onChange: (v) => {
+                            if (v) data.attributes[def.key] = v
+                            else delete data.attributes[def.key]
+                            renderParadigmBlock()
+                        }
+                    })
 
-                genderSlot.appendChild(field(def.label, select, def.hint || '', lang))
+                genderSlot.appendChild(field(def.label, control, def.hint || '', lang))
             }
+        }
+
+        /** 多选属性：一组 chip，点一下切换；必填字段不允许取消最后一个 */
+        function multiChipField(def, picked, required) {
+            const values = [...picked]
+            const group = h('div', { class: 'chip-group', role: 'group', 'aria-label': def.label })
+
+            const paint = () => {
+                group.replaceChildren(...def.options.map((opt) => {
+                    const on = values.includes(opt.value)
+                    return h('button', {
+                        class: 'chip' + (on ? ' chip--active' : ''),
+                        type: 'button',
+                        'aria-pressed': String(on),
+                        onclick: () => {
+                            const i = values.indexOf(opt.value)
+                            if (i >= 0) {
+                                if (required && values.length === 1) return
+                                values.splice(i, 1)
+                            } else {
+                                values.push(opt.value)
+                            }
+                            // 按选项顺序存，导出与展示都稳定
+                            const ordered = def.options.map((o) => o.value).filter((v) => values.includes(v))
+                            values.length = 0
+                            values.push(...ordered)
+                            data.attributes[def.key] = [...ordered]
+                            paint()
+                            renderParadigmBlock()
+                        }
+                    }, opt.label)
+                }))
+            }
+
+            paint()
+            if (values.length) data.attributes[def.key] = [...values]
+            return group
         }
 
         // 语法锚点下拉：特殊变格/变位 + 语法速查条目
@@ -1076,11 +1113,17 @@ export default {
                 posSelect.dispatchEvent(new Event('change'))
             }
 
-            const allowed = new Set(getFieldDefs(grammarDoc, posSelect.value).map((f) => f.key))
+            const defs = getFieldDefs(grammarDoc, posSelect.value)
+            const allowed = new Map(defs.map((f) => [f.key, f]))
             for (const [key, value] of Object.entries(entry.patch.attributes || {})) {
-                if (!allowed.has(key)) continue
-                const v = String(value ?? '').trim()
-                if (v) data.attributes[key] = v
+                const def = allowed.get(key)
+                if (!def) continue
+                const list = (Array.isArray(value) ? value : [value])
+                    .map((v) => String(v ?? '').trim())
+                    .filter(Boolean)
+                if (!list.length) continue
+                // 多选字段存数组，单选字段存字符串
+                data.attributes[key] = def.multi ? list : list[0]
             }
             renderGenderField()
 
@@ -1805,9 +1848,8 @@ export default {
                 // 词条基本形态、词干一律存原文：用户可能直接敲了转写，没走失焦转换
                 lemma: toScriptText(lemmaInput.value.trim()),
                 pos: posSelect.value,
-                // attributes 里放词性声明的字段（语法性 / 自他…）；gender 仍留旧字段做镜像
+                // attributes 里放词性声明的字段（语法性 / 自他 / 助动词…）
                 attributes: { ...data.attributes },
-                gender: normalizeGenders(data.attributes.gender, posSelect.value),
                 inflectionType: {
                     label: inflectionLabel.value.trim(),
                     grammarRef

@@ -1,19 +1,11 @@
 /** Word 模型：唯一键、去重合并、序列化 */
 
-import { POS_LIST, GENDERS, WORD_SOURCE_OPTIONS } from '../config/config.js'
+import { POS_LIST, WORD_SOURCE_OPTIONS } from '../config/config.js'
 import { wordId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
 import { toStringArray } from '../utils/text-normalize.js'
 
-/** 旧数据里 gender 是独立字段，统一迁进 attributes.gender */
-function mergeLegacyGender(partial) {
-    const attrs = { ...(partial && partial.attributes ? partial.attributes : {}) }
-    const legacy = Array.isArray(partial && partial.gender) ? partial.gender.filter(Boolean) : []
-    if (legacy.length && !attrs.gender) attrs.gender = legacy
-    return attrs
-}
-
-/** 词条的「属性字段」取值：只保留有值的内容；单选存字符串，多选（如语法性）存数组 */
+/** 词条的「属性字段」取值：只保留有值的内容；多选（如语法性、助动词）存数组 */
 export function normalizeAttributes(input) {
     const out = {}
     if (!input || typeof input !== 'object') return out
@@ -28,13 +20,6 @@ export function normalizeAttributes(input) {
         if (v) out[key] = v
     }
     return out
-}
-
-export function normalizeGenders(value, pos) {
-    if (pos !== 'noun') return []
-    const list = Array.isArray(value) ? value : (value ? [value] : [])
-    const set = new Set(list.map((v) => String(v).trim()))
-    return GENDERS.map((g) => g.value).filter((g) => set.has(g))
 }
 
 export function posLabel(pos) {
@@ -52,12 +37,9 @@ export function createWord(partial) {
         pos: partial.pos || 'other',
 
         inflectionType: partial.inflectionType || { label: '', grammarRef: null },
-        // 旧字段：只作为 attributes.gender 的镜像保留，方便老代码读取
-        gender: normalizeGenders(
-            (normalizeAttributes(mergeLegacyGender(partial)).gender || []), partial.pos || 'other'),
-        attributes: normalizeAttributes(mergeLegacyGender(partial)),
+        attributes: normalizeAttributes(partial.attributes),
         paradigm: normalizeParadigm(partial.paradigm),
-        stems: normalizeStems(partial.stems ?? partial.stem),
+        stems: normalizeStems(partial.stems),
 
         inflections: normalizeSourceList(partial.inflections, 'inflections'),
         meanings: normalizeSourceList(partial.meanings, 'meanings'),
@@ -154,14 +136,9 @@ export function stemDisplay(stem) {
     return s ? s + '-' : ''
 }
 
-/** 规范化词干 { key: 词干 }；也接受旧的单一 stem 字符串（落到 base） */
+/** 规范化词干 { key: 词干 } */
 export function normalizeStems(value) {
     const out = {}
-    if (typeof value === 'string') {
-        const s = normalizeStem(value)
-        if (s) out.base = s
-        return out
-    }
     if (!value || typeof value !== 'object') return out
     for (const [key, raw] of Object.entries(value)) {
         const k = String(key || '').trim()

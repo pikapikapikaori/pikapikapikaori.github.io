@@ -8,7 +8,7 @@ import {
 import { createUser, saveUser } from '../store/user-store.js'
 import { put as dbPut, STORE_SETTINGS, STORE_USERS } from '../store/db.js'
 import { normalizeSettings } from '../store/settings-store.js'
-import { normalizeParadigm, normalizeStems, normalizeGenders, mergeStems, normalizeAttributes } from '../models/word.js'
+import { normalizeParadigm, normalizeStems, mergeStems, normalizeAttributes } from '../models/word.js'
 import { wordId } from '../utils/id.js'
 import { fieldValues } from '../models/grammar.js'
 import { nowIso } from '../utils/date.js'
@@ -38,8 +38,6 @@ function cleanWordForExport(w) {
         pos: w.pos,
         inflectionType: w.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(w.paradigm),
-        // gender 只作为旧格式的兼容镜像导出，真实来源是 attributes
-        gender: normalizeGenders(fieldValues(w, 'gender'), w.pos),
         attributes: normalizeAttributes(w.attributes),
         stems: normalizeStems(w.stems),
         inflections: normalizeInflections(w.inflections),
@@ -96,8 +94,7 @@ export async function importUser(source, options = {}) {
         throw new Error(`文件校验失败：\n${check.errors.join('\n')}`)
     }
 
-    const migrated = migrate(payload)
-    const { user, settings, words } = migrated
+    const { user, settings, words } = payload
 
     let finalUser
     if (mode === 'replace' && targetUserId) {
@@ -151,12 +148,8 @@ function normalizeImportedWord(raw, userId) {
         pos,
         inflectionType: raw.inflectionType || { label: '', grammarRef: null },
         paradigm: normalizeParadigm(raw.paradigm),
-        gender: normalizeGenders(fieldValues(raw, 'gender'), pos),
-        attributes: normalizeAttributes({
-            ...(Array.isArray(raw.gender) && raw.gender.length ? { gender: raw.gender } : {}),
-            ...(raw.attributes || {}),
-        }),
-        stems: normalizeStems(raw.stems ?? raw.stem),
+        attributes: normalizeAttributes(raw.attributes),
+        stems: normalizeStems(raw.stems),
         inflections: normalizeInflections(raw.inflections),
         meanings: raw.meanings || [],
         collocations: raw.collocations || [],
@@ -189,9 +182,6 @@ function mergePreservingProgress(existing, incoming) {
         ...(existing.attributes || {}),
         ...(incoming.attributes || {}),
     })
-    merged.gender = normalizeGenders(
-        [...(existing.gender || []), ...(incoming.gender || [])], merged.pos)
-
     merged.inflections = appendUnique(existing.inflections, incoming.inflections)
     merged.meanings    = appendUnique(existing.meanings, incoming.meanings)
     merged.collocations= appendUnique(existing.collocations, incoming.collocations)
@@ -267,37 +257,6 @@ function uniqArray(arr) {
         seen.add(s); out.push(s)
     }
     return out
-}
-
-/* ---------------- 迁移 ---------------- */
-
-const MIGRATIONS = {
-    // v1 → v2：单一 stem 迁进多词干 stems
-    1: (payload) => ({
-        ...payload,
-        words: (Array.isArray(payload.words) ? payload.words : []).map((w) => {
-            if (!w || typeof w !== 'object') return w
-            const { stem, ...rest } = w
-            return { ...rest, stems: normalizeStems(w.stems ?? stem) }
-        })
-    })
-}
-
-function migrate(payload) {
-    let cur = payload
-    while (cur.version < CURRENT_VERSION) {
-        const from = cur.version
-        const fn = MIGRATIONS[from]
-        if (typeof fn !== 'function') {
-            throw new Error(`缺少从 v${from} 到 v${from + 1} 的迁移函数`)
-        }
-        cur = fn(cur)
-        if (!cur || typeof cur !== 'object') {
-            throw new Error(`迁移 v${from} → v${from + 1} 返回了非法结果`)
-        }
-        cur.version = from + 1
-    }
-    return cur
 }
 
 export async function createEmptyUser(name) {

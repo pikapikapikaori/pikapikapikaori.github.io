@@ -317,29 +317,11 @@ export function fieldDefsOfTemplate(tpl, pos) {
             // 必选字段：不提供「（未选择）」，没值时默认第一项（如日语动词的自他）
             required: f.required === true,
             // 该字段用来过滤变化表的格子（性写在列或行上都行）
-            declensionCells: f.declensionCells === true || f.declensionColumns === true,
+            declensionCells: f.declensionCells === true,
             options: f.options.map((o) => ({ value: String(o.value), label: o.label || String(o.value) })),
         })
     }
-    if (out.length) return out
-
-    // 兼容旧数据：只有名词按变化表的列名 / 行名推导语法性（与旧行为一致）；
-    // 其它词性要显示字段请在 `fields` 里显式声明
-    if (pos && pos !== 'noun') return []
-    const cols = new Set()
-    const rows = new Set()
-    for (const table of tpl.tables || []) {
-        for (const col of table.columns || []) cols.add(String(col.key))
-        for (const row of table.rows || []) rows.add(String(row.key))
-    }
-    let genders = ['m', 'f', 'n'].filter((g) => [...cols].some((k) => k.endsWith('_' + g)))
-    if (!genders.length) genders = ['m', 'f', 'n'].filter((g) => rows.has(g))
-    if (!genders.length) return []
-    const labels = { m: '阳性', f: '阴性', n: '中性' }
-    return [{
-        key: 'gender', label: '语法性', hint: '', multi: true, declensionCells: true,
-        options: genders.map((g) => ({ value: g, label: labels[g] || g })),
-    }]
+    return out
 }
 
 /** 词条里某个字段的取值（统一成数组） */
@@ -348,33 +330,6 @@ export function fieldValues(word, key) {
     if (Array.isArray(raw)) return raw.map(String).filter(Boolean)
     if (typeof raw === 'string' && raw.trim()) return [raw.trim()]
     return []
-}
-
-/**
- * 旧数据把 `fields` 声明的属性（语法性、法 / 德动词的助动词…）当成词干存进了 `stems`，
- * 读出来时搬到 `attributes`：表单才不会按默认值覆盖，词卡也不会把它当词干显示。
- * 返回新对象，没搬动任何东西时原样返回；不改入参。
- */
-export function migrateFieldStems(doc, word) {
-    const defs = getFieldDefs(doc, word && word.pos)
-    const stems = word && word.stems
-    if (!defs.length || !stems || typeof stems !== 'object') return word
-    const attrs = word.attributes && typeof word.attributes === 'object' ? word.attributes : {}
-    const moved = {}
-    for (const def of defs) {
-        const value = stems[def.key]
-        if (!value) continue
-        const existing = attrs[def.key]
-        const empty = Array.isArray(existing)
-            ? !existing.filter(Boolean).length
-            : existing == null || !String(existing).trim()
-        if (!empty) continue
-        moved[def.key] = def.multi && !Array.isArray(value) ? [value] : value
-    }
-    if (!Object.keys(moved).length) return word
-    const nextStems = { ...stems }
-    for (const key of Object.keys(moved)) delete nextStems[key]
-    return { ...word, attributes: { ...attrs, ...moved }, stems: nextStems }
 }
 
 export function getGenderOptions(doc, pos = 'noun') {

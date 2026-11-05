@@ -109,6 +109,28 @@
     ]
   },
   "noun": {
+    "fields": [
+      {
+        "key": "gender",
+        "label": "语法性",
+        "multi": true,
+        "declensionCells": true,
+        "options": [
+          {
+            "value": "m",
+            "label": "阳性"
+          },
+          {
+            "value": "f",
+            "label": "阴性"
+          },
+          {
+            "value": "n",
+            "label": "中性"
+          }
+        ]
+      }
+    ],
     "tables": [
       {
         "key": "main",

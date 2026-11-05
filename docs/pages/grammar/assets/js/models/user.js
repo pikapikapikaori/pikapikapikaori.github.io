@@ -6,7 +6,7 @@ import { DEFAULT_SETTINGS } from '../config/config.js'
 import { normalizeSettings } from '../store/settings-store.js'
 
 export const EXPORT_KIND = 'langnotebook-user'
-export const CURRENT_VERSION = 2
+export const CURRENT_VERSION = 1
 
 export function createUser(name) {
     const t = nowIso()
@@ -44,8 +44,8 @@ export function validateExportPayload(payload) {
     if (payload.kind !== EXPORT_KIND) {
         errors.push(`kind 不匹配，期望 "${EXPORT_KIND}"，实际 "${payload.kind}"`)
     }
-    if (!Number.isInteger(payload.version) || payload.version < 1) {
-        errors.push(`version 无效：${payload.version}`)
+    if (payload.version !== CURRENT_VERSION) {
+        errors.push(`version 不匹配，期望 ${CURRENT_VERSION}，实际 ${payload.version}`)
     }
     if (!isUserShape(payload.user)) {
         errors.push('user 字段缺失或格式不正确')

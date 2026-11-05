@@ -19,7 +19,7 @@ import { applyBdi, bdiNode } from '../utils/bdi.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
-import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf, loadGrammarMeta, loadScriptProfile, migrateFieldStems } from '../services/grammar-service.js'
+import { loadGrammar, getParadigmTemplate, getDeriveParts, stemLabelOf, loadGrammarMeta, loadScriptProfile } from '../services/grammar-service.js'
 import { createPageTools } from '../components/page-tools.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
 import { annotateBreves, setBreveVisible, foldBreve } from '../utils/breve.js'
@@ -69,8 +69,7 @@ export default {
         let langWordsMap = new Map()
 
         async function refreshCache() {
-            // 旧数据把助动词之类的属性存在词干里，读出来时统一搬到 attributes
-            langWordsCache = (await listByLanguage(userId, lang)).map((w) => migrateFieldStems(grammarDoc, w))
+            langWordsCache = await listByLanguage(userId, lang)
             langWordsMap = new Map()
             for (const w of langWordsCache) {
                 // 同 lemma 多个 pos 时保留第一个（用于派生词跳转）；
@@ -402,7 +401,7 @@ export default {
                 h('span', {})
             ))
             for (const w of result.items) {
-                frag.appendChild(renderRow(migrateFieldStems(grammarDoc, w)))
+                frag.appendChild(renderRow(w))
             }
             listWrap.appendChild(frag)
             annotateWords()

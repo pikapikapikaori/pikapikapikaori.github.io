@@ -4,7 +4,7 @@
 
 import { LANGUAGES } from '../data/languages.js'
 import { POS_LIST } from '../config/config.js'
-import { normalizeParadigm, normalizeStems, normalizeGenders } from '../models/word.js'
+import { normalizeParadigm, normalizeStems } from '../models/word.js'
 import { addOrMerge, findByKey } from '../store/word-store.js'
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
@@ -54,10 +54,6 @@ export function validateWord(raw) {
             if (typeof value !== 'string') return `stems.${key} 不是字符串`
         }
     }
-    if (raw.stem != null && typeof raw.stem !== 'string') return 'stem 不是字符串（旧字段，建议用 stems）'
-    if (raw.gender != null
-        && !Array.isArray(raw.gender)
-        && typeof raw.gender !== 'string') return 'gender 不是数组'
     if (raw.paradigm != null && (typeof raw.paradigm !== 'object' || Array.isArray(raw.paradigm))) {
         return 'paradigm 不是对象'
     }
@@ -148,9 +144,8 @@ export async function importWords(userId, words) {
                 pos: String(raw.pos).trim(),
                 inflectionType: raw.inflectionType || null,
                 paradigm: normalizeParadigm(raw.paradigm),
-                gender: normalizeGenders(raw.gender, String(raw.pos).trim()),
                 attributes: raw.attributes || {},
-                stems: normalizeStems(raw.stems ?? raw.stem),
+                stems: normalizeStems(raw.stems),
                 inflections: (raw.inflections || []).map(({ source, ...rest }) => rest),
                 meanings: raw.meanings || [],
                 collocations: raw.collocations || [],

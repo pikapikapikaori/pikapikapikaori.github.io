@@ -1,5 +1,27 @@
 {
   "noun": {
+    "fields": [
+      {
+        "key": "gender",
+        "label": "语法性",
+        "multi": true,
+        "declensionCells": true,
+        "options": [
+          {
+            "value": "m",
+            "label": "阳性"
+          },
+          {
+            "value": "f",
+            "label": "阴性"
+          },
+          {
+            "value": "n",
+            "label": "中性"
+          }
+        ]
+      }
+    ],
     "tables": [
       {
         "key": "main",
@@ -196,7 +218,7 @@
         "key": "aux",
         "label": "完成时助动词",
         "required": true,
-        "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，有些两可（如 fahren 及物时用 haben）。",
+        "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，两者都用时两个都选（如 fahren 及物时用 haben、不及物时用 sein）。",
         "options": [
           {
             "value": "haben",
@@ -205,12 +227,9 @@
           {
             "value": "sein",
             "label": "sein"
-          },
-          {
-            "value": "beide",
-            "label": "beide（haben / sein）"
           }
-        ]
+        ],
+        "multi": true
       }
     ],
     "tables": [

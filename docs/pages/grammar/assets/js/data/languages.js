@@ -9,7 +9,7 @@ import { grammarFlags } from '../models/grammar.js'
 /** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */
 export let LANGUAGES = []
 
-/** code → 元信息（加载后填充，供按 code 取对象的旧写法使用） */
+/** 语言名称 → 元信息（加载后填充） */
 export const LANGUAGE_MAP = {}
 
 let loading = null

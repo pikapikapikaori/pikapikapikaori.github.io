@@ -82,7 +82,7 @@
         "key": "aux",
         "label": "复合时态助动词",
         "required": true,
-        "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；有些两可（如 sortir 作及物时用 avoir）。",
+        "hint": "复合时态用 avoir 还是 être：多数动词用 avoir；表示位置移动、状态变化（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）以及代词式动词用 être；两者都用时两个都选（如 sortir 作及物时用 avoir、作不及物时用 être）。",
         "options": [
           {
             "value": "avoir",
@@ -91,12 +91,9 @@
           {
             "value": "être",
             "label": "être"
-          },
-          {
-            "value": "两可",
-            "label": "两可（avoir / être）"
           }
-        ]
+        ],
+        "multi": true
       }
     ],
     "tables": [

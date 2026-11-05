@@ -1,5 +1,5 @@
 /* Service Worker · 缓存应用 shell，数据仍走 IndexedDB */
-const CACHE = 'langnotebook-shell-v83'
+const CACHE = 'langnotebook-shell-v1'
 
 const SHELL = [
     './',
@@ -8,6 +8,7 @@ const SHELL = [
     './assets/css/reset.css',
     './assets/css/variables.css',
     './assets/css/fonts.css',
+    './assets/css/lang.css',
     './assets/css/base.css',
     './assets/css/layout.css',
     './assets/css/components.css',

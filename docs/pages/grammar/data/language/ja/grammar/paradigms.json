@@ -116,7 +116,7 @@
       {
         "key": "transitivity",
         "label": "自他",
-        "hint": "自动词表示自发的状态变化，他动词带宾语。成对的动词常以自他区分。",
+        "hint": "自动词表示自发的状态变化，他动词带宾语。自他两用时两个都选。",
         "options": [
           {
             "value": "trans",
@@ -125,13 +125,10 @@
           {
             "value": "intrans",
             "label": "自动词"
-          },
-          {
-            "value": "both",
-            "label": "自他两用"
           }
         ],
-        "required": true
+        "required": true,
+        "multi": true
       }
     ]
   },

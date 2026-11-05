@@ -171,6 +171,59 @@
     color: var(--c-accent-fg);
 }
 
+/* 属性多选（语法性 / 助动词 / 自他）：一行可点文字，选中的前面亮一颗朱红圆点 */
+.dot-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+}
+
+.dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    border-radius: var(--r-control);
+    background: none;
+    color: var(--c-fg-subtle);
+    font-family: inherit;
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: color var(--dur) var(--ease);
+}
+
+.dot::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-border-strong);
+    transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+@media (hover: hover) {
+    .dot:hover {
+        color: var(--c-fg);
+    }
+}
+
+.dot:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+}
+
+.dot[aria-pressed="true"] {
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+.dot[aria-pressed="true"]::before {
+    background: var(--c-accent);
+    transform: scale(1.25);
+}
+
 .derivative-picker {
     display: flex;
     flex-direction: column;

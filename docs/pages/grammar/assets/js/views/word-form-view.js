@@ -467,7 +467,7 @@ export default {
 
         const genderSlot = h('div', {})
 
-        /** 词性自己声明的属性（语法性 / 自他 / 助动词…）：多选字段用 chip 组，单选字段用下拉 */
+        /** 词性自己声明的属性（语法性 / 自他 / 助动词…）：多选字段用圆点组，单选字段用下拉 */
         function renderGenderField() {
             genderSlot.replaceChildren()
             const defs = getFieldDefs(grammarDoc, posSelect.value)
@@ -486,7 +486,7 @@ export default {
                 }
 
                 const control = def.multi
-                    ? multiChipField(def, picked, required)
+                    ? multiDotField(def, picked, required)
                     : createSelect({
                         lang,
                         className: 'select',
@@ -506,16 +506,16 @@ export default {
             }
         }
 
-        /** 多选属性：一组 chip，点一下切换；必填字段不允许取消最后一个 */
-        function multiChipField(def, picked, required) {
+        /** 多选属性：一行圆点，点一下切换；必填字段不允许取消最后一个 */
+        function multiDotField(def, picked, required) {
             const values = [...picked]
-            const group = h('div', { class: 'chip-group', role: 'group', 'aria-label': def.label })
+            const group = h('div', { class: 'dot-group', role: 'group', 'aria-label': def.label })
 
             const paint = () => {
                 group.replaceChildren(...def.options.map((opt) => {
                     const on = values.includes(opt.value)
                     return h('button', {
-                        class: 'chip' + (on ? ' chip--active' : ''),
+                        class: 'dot',
                         type: 'button',
                         'aria-pressed': String(on),
                         onclick: () => {

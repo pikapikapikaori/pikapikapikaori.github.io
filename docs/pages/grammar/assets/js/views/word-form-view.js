@@ -722,6 +722,19 @@ export default {
             return String(scriptProfile.toScript(value) ?? value)
         }
 
+        /** 保存前把词干统一成原文：用户可能直接敲了转写，下拉类的元数据（如助动词）不转 */
+        function toScriptStems(stems) {
+            if (typeof scriptProfile?.toScript !== 'function') return stems
+            const metaKeys = new Set(currentParts().filter((p) => p.kind === 'select').map((p) => p.key))
+            const out = {}
+            for (const [key, value] of Object.entries(stems)) {
+                out[key] = (typeof value === 'string' && value && !metaKeys.has(key))
+                    ? toScriptText(value)
+                    : value
+            }
+            return out
+        }
+
         /** 生成 / 推导都在 IAST 上做；用户输入的是天城文，先转写再交给引擎 */
         function romanStems(stems) {
             if (typeof scriptProfile?.toRoman !== 'function') return stems
@@ -848,9 +861,9 @@ export default {
             }
 
             const tpl = getParadigmTemplate(grammarDoc, data.pos)
-            const { paradigm, paradigmRoman, filled, noVariant, skippedTables, usedTables } = generateParadigm({
+            const { paradigm, filled, noVariant, skippedTables, usedTables } = generateParadigm({
                 stem,
-                stems: collectStems(),
+                stems: toScriptStems(collectStems()),
                 headword: lemmaInput.value,
                 spec,
                 template: tpl,
@@ -878,11 +891,6 @@ export default {
                 }
             }
             data.paradigm = next
-            data.paradigmRoman = paradigmRoman
-            for (const key of Object.keys(data.paradigmRoman)) {
-                if (!Object.keys(data.paradigmRoman[key] || {}).length) delete data.paradigmRoman[key]
-            }
-            if (!Object.keys(data.paradigmRoman).length) delete data.paradigmRoman
 
             renderParadigmBlock()
 
@@ -1732,7 +1740,8 @@ export default {
 
             return {
                 language: lang,
-                lemma: lemmaInput.value.trim(),
+                // 词条基本形态、词干一律存原文：用户可能直接敲了转写，没走失焦转换
+                lemma: toScriptText(lemmaInput.value.trim()),
                 pos: posSelect.value,
                 // attributes 里放词性声明的字段（语法性 / 自他…）；gender 仍留旧字段做镜像
                 attributes: { ...data.attributes },
@@ -1742,7 +1751,6 @@ export default {
                     grammarRef
                 },
                 paradigm: normalizeParadigm(data.paradigm),
-                paradigmRoman: normalizeParadigm(data.paradigmRoman),
                 stems: collectStems(),
                 inflections: cleanList(data.inflections, ['form']),
                 meanings: cleanList(data.meanings, ['text']),

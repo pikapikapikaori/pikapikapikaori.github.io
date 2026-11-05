@@ -277,18 +277,35 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
     }
 }
 
+/** 词尾规则是不是用转写写的：满文 / 梵语的 endings 是拉丁转写，古希腊语 / 希伯来语是原文 */
+function rulesInRoman(spec, script) {
+    if (typeof script?.hasScript !== 'function') return false
+    const texts = []
+    const collect = (node) => {
+        if (node == null) return
+        if (typeof node === 'string') { texts.push(node); return }
+        if (Array.isArray(node)) { node.forEach(collect); return }
+        if (typeof node === 'object') Object.values(node).forEach(collect)
+    }
+    collect(spec?.endings)
+    for (const v of spec?.variants || []) collect(v?.endings)
+    if (!texts.length) return false
+    return !texts.some((t) => script.hasScript(t))
+}
+
 /**
  * 按词尾规则填表，只填空格子，已有值不覆盖（`overwrite` 为真时覆盖）。
  * 入参：`{ stem | stems, headword, spec, template, existing, profile, script, overwrite }`，
  * 其中 `profile` 是语言档案（`sandhi` / `accent` 或骨架型的 `realize`），`script` 负责转写与原文互转。
- * @returns {{ paradigm, paradigmRoman, filled, skipped, skippedTables }}（另有 `variant` / `usedTables` / `noVariant`）
+ * @returns {{ paradigm, filled, skipped, skippedTables }}（另有 `variant` / `usedTables` / `noVariant`）
  */
 export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, script, overwrite = false } = {}) {
-    const result = { paradigm: {}, paradigmRoman: {}, filled: [], skipped: [], skippedTables: [] }
+    const result = { paradigm: {}, filled: [], skipped: [], skippedTables: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
     const parts = normalizeStemParts(stem, stems, headword)
-    // 竖排文字（满文等）：用户填的可能是文字本身，先统一转成转写再做规则与重音
-    if (typeof script?.toRoman === 'function') {
+    // 只有「词尾规则用转写写」的语言才需要先把输入转成转写（满文、梵语）；
+    // 古希腊语 / 希伯来语的词尾本身就是原文，再转一次会把重音、气符弄丢
+    if (typeof script?.toRoman === 'function' && rulesInRoman(spec, script)) {
         // 下拉选项（如 aorist / perfect 的类型名）是元数据，不做转写
         const metaKeys = new Set((spec.parts || []).filter((p) => p && p.kind === 'select').map((p) => p.key))
         for (const key of Object.keys(parts)) {
@@ -450,11 +467,6 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                 if (!result.paradigm[table.key]) result.paradigm[table.key] = {}
                 if (!result.paradigm[table.key][row.key]) result.paradigm[table.key][row.key] = {}
                 result.paradigm[table.key][row.key][col.key] = shown
-                if (useScript) {
-                    if (!result.paradigmRoman[table.key]) result.paradigmRoman[table.key] = {}
-                    if (!result.paradigmRoman[table.key][row.key]) result.paradigmRoman[table.key][row.key] = {}
-                    result.paradigmRoman[table.key][row.key][col.key] = form
-                }
                 result.filled.push({ ...at, form: shown })
             }
         }
@@ -719,7 +731,7 @@ export function validateDeriveSpec(spec, template, profile) {
  * @returns {{ ok: boolean, missing: object[], mismatches: object[], extra: object[] }}
  */
 export function checkDeriveExample(spec, template, options = {}) {
-    const { stems: optionStems = null, expect = null, reportExtra = true, profile = null } = options
+    const { stems: optionStems = null, expect = null, reportExtra = true, profile = null, script = null } = options
     // exampleStems：词干无法由基本形态推导时（如德语强变化的过去时），
     // 自检就用这里给出的示例值，否则 expect 里那些格子必然对不上
     const stems = { ...(spec?.exampleStems || {}), ...(optionStems || {}) }
@@ -761,12 +773,10 @@ export function checkDeriveExample(spec, template, options = {}) {
         spec,
         template,
         existing: {},
-        profile
+        profile,
+        script
     })
-    // 有「转写 → 文字」转换的语言（满文）：expect 写的是转写，比对转写那一份
-    const paradigm = Object.keys(generated.paradigmRoman || {}).length
-        ? generated.paradigmRoman
-        : generated.paradigm
+    const paradigm = generated.paradigm
 
     for (const [tableKey, rows] of Object.entries(want)) {
         for (const [rowKey, cells] of Object.entries(rows || {})) {
@@ -845,7 +855,7 @@ export function resolveDeriveTemplate(doc, spec, sectionId, itemId) {
  * 校验一份语法文档里的全部 derive 规格
  * @returns {{ lang, specs, checked, errors: string[], warnings: string[] }}
  */
-export function verifyGrammarDoc(lang, doc, profile) {
+export function verifyGrammarDoc(lang, doc, profile, script = null) {
     const out = { lang, specs: 0, checked: 0, errors: [], warnings: [] }
 
     const check = (spec, id, sectionId, itemId) => {
@@ -879,7 +889,7 @@ export function verifyGrammarDoc(lang, doc, profile) {
         // 第一遍：只填基准词干（验证词干变体规则）
         // `expectPartial: true`：expect 只覆盖部分格子（弱根网格很长，只人工核对关键格），
         // 此时不报「生成了但 expect 未覆盖」的提示
-        const res = checkDeriveExample(spec, tpl, { profile, reportExtra: !spec.expectPartial })
+        const res = checkDeriveExample(spec, tpl, { profile, script, reportExtra: !spec.expectPartial })
         out.checked++
         report(res, '')
 
@@ -898,7 +908,8 @@ export function verifyGrammarDoc(lang, doc, profile) {
                 stems,
                 expect: wantParts,
                 reportExtra: !!spec.expectParts,
-                profile
+                profile,
+                script
             })
             out.checked++
             report(resParts, '（词干全填）')

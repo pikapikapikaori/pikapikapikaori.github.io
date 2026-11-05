@@ -84,44 +84,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "kāmaḥ",
-                "du_m": "kāmau",
-                "pl_m": "kāmāḥ"
+                "sg_m": "कामः",
+                "du_m": "कामौ",
+                "pl_m": "कामाः"
               },
               "acc": {
-                "sg_m": "kāmam",
-                "du_m": "kāmau",
-                "pl_m": "kāmān"
+                "sg_m": "कामम्",
+                "du_m": "कामौ",
+                "pl_m": "कामान्"
               },
               "ins": {
-                "sg_m": "kāmena",
-                "du_m": "kāmābhyām",
-                "pl_m": "kāmaiḥ"
+                "sg_m": "कामेन",
+                "du_m": "कामाभ्याम्",
+                "pl_m": "कामैः"
               },
               "dat": {
-                "sg_m": "kāmāya",
-                "du_m": "kāmābhyām",
-                "pl_m": "kāmebhyaḥ"
+                "sg_m": "कामाय",
+                "du_m": "कामाभ्याम्",
+                "pl_m": "कामेभ्यः"
               },
               "abl": {
-                "sg_m": "kāmāt",
-                "du_m": "kāmābhyām",
-                "pl_m": "kāmebhyaḥ"
+                "sg_m": "कामात्",
+                "du_m": "कामाभ्याम्",
+                "pl_m": "कामेभ्यः"
               },
               "gen": {
-                "sg_m": "kāmasya",
-                "du_m": "kāmayoḥ",
-                "pl_m": "kāmānām"
+                "sg_m": "कामस्य",
+                "du_m": "कामयोः",
+                "pl_m": "कामानाम्"
               },
               "loc": {
-                "sg_m": "kāme",
-                "du_m": "kāmayoḥ",
-                "pl_m": "kāmeṣu"
+                "sg_m": "कामे",
+                "du_m": "कामयोः",
+                "pl_m": "कामेषु"
               },
               "voc": {
-                "sg_m": "kāma",
-                "du_m": "kāmau",
-                "pl_m": "kāmāḥ"
+                "sg_m": "काम",
+                "du_m": "कामौ",
+                "pl_m": "कामाः"
               }
             }
           },
@@ -421,44 +421,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_f": "senā",
-                "du_f": "sene",
-                "pl_f": "senāḥ"
+                "sg_f": "सेना",
+                "du_f": "सेने",
+                "pl_f": "सेनाः"
               },
               "acc": {
-                "sg_f": "senām",
-                "du_f": "sene",
-                "pl_f": "senāḥ"
+                "sg_f": "सेनाम्",
+                "du_f": "सेने",
+                "pl_f": "सेनाः"
               },
               "ins": {
-                "sg_f": "senayā",
-                "du_f": "senābhyām",
-                "pl_f": "senābhiḥ"
+                "sg_f": "सेनया",
+                "du_f": "सेनाभ्याम्",
+                "pl_f": "सेनाभिः"
               },
               "dat": {
-                "sg_f": "senāyai",
-                "du_f": "senābhyām",
-                "pl_f": "senābhyaḥ"
+                "sg_f": "सेनायै",
+                "du_f": "सेनाभ्याम्",
+                "pl_f": "सेनाभ्यः"
               },
               "abl": {
-                "sg_f": "senāyāḥ",
-                "du_f": "senābhyām",
-                "pl_f": "senābhyaḥ"
+                "sg_f": "सेनायाः",
+                "du_f": "सेनाभ्याम्",
+                "pl_f": "सेनाभ्यः"
               },
               "gen": {
-                "sg_f": "senāyāḥ",
-                "du_f": "senayoḥ",
-                "pl_f": "senānām"
+                "sg_f": "सेनायाः",
+                "du_f": "सेनयोः",
+                "pl_f": "सेनानाम्"
               },
               "loc": {
-                "sg_f": "senāyām",
-                "du_f": "senayoḥ",
-                "pl_f": "senāsu"
+                "sg_f": "सेनायाम्",
+                "du_f": "सेनयोः",
+                "pl_f": "सेनासु"
               },
               "voc": {
-                "sg_f": "sene",
-                "du_f": "sene",
-                "pl_f": "senāḥ"
+                "sg_f": "सेने",
+                "du_f": "सेने",
+                "pl_f": "सेनाः"
               }
             }
           }
@@ -781,44 +781,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "agniḥ",
-                "du_m": "agnī",
-                "pl_m": "agnayaḥ"
+                "sg_m": "अग्निः",
+                "du_m": "अग्नी",
+                "pl_m": "अग्नयः"
               },
               "acc": {
-                "sg_m": "agnim",
-                "du_m": "agnī",
-                "pl_m": "agnīn"
+                "sg_m": "अग्निम्",
+                "du_m": "अग्नी",
+                "pl_m": "अग्नीन्"
               },
               "ins": {
-                "sg_m": "agninā",
-                "du_m": "agnibhyām",
-                "pl_m": "agnibhiḥ"
+                "sg_m": "अग्निना",
+                "du_m": "अग्निभ्याम्",
+                "pl_m": "अग्निभिः"
               },
               "dat": {
-                "sg_m": "agnaye",
-                "du_m": "agnibhyām",
-                "pl_m": "agnibhyaḥ"
+                "sg_m": "अग्नये",
+                "du_m": "अग्निभ्याम्",
+                "pl_m": "अग्निभ्यः"
               },
               "abl": {
-                "sg_m": "agneḥ",
-                "du_m": "agnibhyām",
-                "pl_m": "agnibhyaḥ"
+                "sg_m": "अग्नेः",
+                "du_m": "अग्निभ्याम्",
+                "pl_m": "अग्निभ्यः"
               },
               "gen": {
-                "sg_m": "agneḥ",
-                "du_m": "agnyoḥ",
-                "pl_m": "agnīnām"
+                "sg_m": "अग्नेः",
+                "du_m": "अग्न्योः",
+                "pl_m": "अग्नीनाम्"
               },
               "loc": {
-                "sg_m": "agnau",
-                "du_m": "agnyoḥ",
-                "pl_m": "agniṣu"
+                "sg_m": "अग्नौ",
+                "du_m": "अग्न्योः",
+                "pl_m": "अग्निषु"
               },
               "voc": {
-                "sg_m": "agne",
-                "du_m": "agnī",
-                "pl_m": "agnayaḥ"
+                "sg_m": "अग्ने",
+                "du_m": "अग्नी",
+                "pl_m": "अग्नयः"
               }
             }
           },
@@ -1118,44 +1118,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_f": "nadī",
-                "du_f": "nadyau",
-                "pl_f": "nadyaḥ"
+                "sg_f": "नदी",
+                "du_f": "नद्यौ",
+                "pl_f": "नद्यः"
               },
               "acc": {
-                "sg_f": "nadīm",
-                "du_f": "nadyau",
-                "pl_f": "nadīḥ"
+                "sg_f": "नदीम्",
+                "du_f": "नद्यौ",
+                "pl_f": "नदीः"
               },
               "ins": {
-                "sg_f": "nadyā",
-                "du_f": "nadībhyām",
-                "pl_f": "nadībhiḥ"
+                "sg_f": "नद्या",
+                "du_f": "नदीभ्याम्",
+                "pl_f": "नदीभिः"
               },
               "dat": {
-                "sg_f": "nadyai",
-                "du_f": "nadībhyām",
-                "pl_f": "nadībhyaḥ"
+                "sg_f": "नद्यै",
+                "du_f": "नदीभ्याम्",
+                "pl_f": "नदीभ्यः"
               },
               "abl": {
-                "sg_f": "nadyāḥ",
-                "du_f": "nadībhyām",
-                "pl_f": "nadībhyaḥ"
+                "sg_f": "नद्याः",
+                "du_f": "नदीभ्याम्",
+                "pl_f": "नदीभ्यः"
               },
               "gen": {
-                "sg_f": "nadyāḥ",
-                "du_f": "nadyoḥ",
-                "pl_f": "nadīnām"
+                "sg_f": "नद्याः",
+                "du_f": "नद्योः",
+                "pl_f": "नदीनाम्"
               },
               "loc": {
-                "sg_f": "nadyām",
-                "du_f": "nadyoḥ",
-                "pl_f": "nadīṣu"
+                "sg_f": "नद्याम्",
+                "du_f": "नद्योः",
+                "pl_f": "नदीषु"
               },
               "voc": {
-                "sg_f": "nadi",
-                "du_f": "nadyau",
-                "pl_f": "nadyaḥ"
+                "sg_f": "नदि",
+                "du_f": "नद्यौ",
+                "pl_f": "नद्यः"
               }
             }
           }
@@ -1478,44 +1478,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "śatruḥ",
-                "du_m": "śatrū",
-                "pl_m": "śatravaḥ"
+                "sg_m": "शत्रुः",
+                "du_m": "शत्रू",
+                "pl_m": "शत्रवः"
               },
               "acc": {
-                "sg_m": "śatrum",
-                "du_m": "śatrū",
-                "pl_m": "śatrūn"
+                "sg_m": "शत्रुम्",
+                "du_m": "शत्रू",
+                "pl_m": "शत्रून्"
               },
               "ins": {
-                "sg_m": "śatruṇā",
-                "du_m": "śatrubhyām",
-                "pl_m": "śatrubhiḥ"
+                "sg_m": "शत्रुणा",
+                "du_m": "शत्रुभ्याम्",
+                "pl_m": "शत्रुभिः"
               },
               "dat": {
-                "sg_m": "śatrave",
-                "du_m": "śatrubhyām",
-                "pl_m": "śatrubhyaḥ"
+                "sg_m": "शत्रवे",
+                "du_m": "शत्रुभ्याम्",
+                "pl_m": "शत्रुभ्यः"
               },
               "abl": {
-                "sg_m": "śatroḥ",
-                "du_m": "śatrubhyām",
-                "pl_m": "śatrubhyaḥ"
+                "sg_m": "शत्रोः",
+                "du_m": "शत्रुभ्याम्",
+                "pl_m": "शत्रुभ्यः"
               },
               "gen": {
-                "sg_m": "śatroḥ",
-                "du_m": "śatrvoḥ",
-                "pl_m": "śatrūṇām"
+                "sg_m": "शत्रोः",
+                "du_m": "शत्र्वोः",
+                "pl_m": "शत्रूणाम्"
               },
               "loc": {
-                "sg_m": "śatrau",
-                "du_m": "śatrvoḥ",
-                "pl_m": "śatruṣu"
+                "sg_m": "शत्रौ",
+                "du_m": "शत्र्वोः",
+                "pl_m": "शत्रुषु"
               },
               "voc": {
-                "sg_m": "śatro",
-                "du_m": "śatrū",
-                "pl_m": "śatravaḥ"
+                "sg_m": "शत्रो",
+                "du_m": "शत्रू",
+                "pl_m": "शत्रवः"
               }
             }
           },
@@ -1815,44 +1815,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_f": "vadhūḥ",
-                "du_f": "vadhvau",
-                "pl_f": "vadhvaḥ"
+                "sg_f": "वधूः",
+                "du_f": "वध्वौ",
+                "pl_f": "वध्वः"
               },
               "acc": {
-                "sg_f": "vadhūm",
-                "du_f": "vadhvau",
-                "pl_f": "vadhūḥ"
+                "sg_f": "वधूम्",
+                "du_f": "वध्वौ",
+                "pl_f": "वधूः"
               },
               "ins": {
-                "sg_f": "vadhvā",
-                "du_f": "vadhūbhyām",
-                "pl_f": "vadhūbhiḥ"
+                "sg_f": "वध्वा",
+                "du_f": "वधूभ्याम्",
+                "pl_f": "वधूभिः"
               },
               "dat": {
-                "sg_f": "vadhvai",
-                "du_f": "vadhūbhyām",
-                "pl_f": "vadhūbhyaḥ"
+                "sg_f": "वध्वै",
+                "du_f": "वधूभ्याम्",
+                "pl_f": "वधूभ्यः"
               },
               "abl": {
-                "sg_f": "vadhvāḥ",
-                "du_f": "vadhūbhyām",
-                "pl_f": "vadhūbhyaḥ"
+                "sg_f": "वध्वाः",
+                "du_f": "वधूभ्याम्",
+                "pl_f": "वधूभ्यः"
               },
               "gen": {
-                "sg_f": "vadhvāḥ",
-                "du_f": "vadhvoḥ",
-                "pl_f": "vadhūnām"
+                "sg_f": "वध्वाः",
+                "du_f": "वध्वोः",
+                "pl_f": "वधूनाम्"
               },
               "loc": {
-                "sg_f": "vadhvām",
-                "du_f": "vadhvoḥ",
-                "pl_f": "vadhūṣu"
+                "sg_f": "वध्वाम्",
+                "du_f": "वध्वोः",
+                "pl_f": "वधूषु"
               },
               "voc": {
-                "sg_f": "vadhu",
-                "du_f": "vadhvau",
-                "pl_f": "vadhvaḥ"
+                "sg_f": "वधु",
+                "du_f": "वध्वौ",
+                "pl_f": "वध्वः"
               }
             }
           }
@@ -2151,44 +2151,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "pitā",
-                "du_m": "pitarau",
-                "pl_m": "pitaraḥ"
+                "sg_m": "पिता",
+                "du_m": "पितरौ",
+                "pl_m": "पितरः"
               },
               "acc": {
-                "sg_m": "pitaram",
-                "du_m": "pitarau",
-                "pl_m": "pitṝn"
+                "sg_m": "पितरम्",
+                "du_m": "पितरौ",
+                "pl_m": "पितॄन्"
               },
               "ins": {
-                "sg_m": "pitrā",
-                "du_m": "pitṛbhyām",
-                "pl_m": "pitṛbhiḥ"
+                "sg_m": "पित्रा",
+                "du_m": "पितृभ्याम्",
+                "pl_m": "पितृभिः"
               },
               "dat": {
-                "sg_m": "pitre",
-                "du_m": "pitṛbhyām",
-                "pl_m": "pitṛbhyaḥ"
+                "sg_m": "पित्रे",
+                "du_m": "पितृभ्याम्",
+                "pl_m": "पितृभ्यः"
               },
               "abl": {
-                "sg_m": "pituḥ",
-                "du_m": "pitṛbhyām",
-                "pl_m": "pitṛbhyaḥ"
+                "sg_m": "पितुः",
+                "du_m": "पितृभ्याम्",
+                "pl_m": "पितृभ्यः"
               },
               "gen": {
-                "sg_m": "pituḥ",
-                "du_m": "pitroḥ",
-                "pl_m": "pitṝṇām"
+                "sg_m": "पितुः",
+                "du_m": "पित्रोः",
+                "pl_m": "पितॄणाम्"
               },
               "loc": {
-                "sg_m": "pitari",
-                "du_m": "pitroḥ",
-                "pl_m": "pitṛṣu"
+                "sg_m": "पितरि",
+                "du_m": "पित्रोः",
+                "pl_m": "पितृषु"
               },
               "voc": {
-                "sg_m": "pitar",
-                "du_m": "pitarau",
-                "pl_m": "pitaraḥ"
+                "sg_m": "पितर्",
+                "du_m": "पितरौ",
+                "pl_m": "पितरः"
               }
             }
           }
@@ -2694,44 +2694,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "bhavan",
-                "du_m": "bhavantau",
-                "pl_m": "bhavantaḥ"
+                "sg_m": "भवन्",
+                "du_m": "भवन्तौ",
+                "pl_m": "भवन्तः"
               },
               "acc": {
-                "sg_m": "bhavantam",
-                "du_m": "bhavantau",
-                "pl_m": "bhavataḥ"
+                "sg_m": "भवन्तम्",
+                "du_m": "भवन्तौ",
+                "pl_m": "भवतः"
               },
               "ins": {
-                "sg_m": "bhavatā",
-                "du_m": "bhavadbhyām",
-                "pl_m": "bhavadbhiḥ"
+                "sg_m": "भवता",
+                "du_m": "भवद्भ्याम्",
+                "pl_m": "भवद्भिः"
               },
               "dat": {
-                "sg_m": "bhavate",
-                "du_m": "bhavadbhyām",
-                "pl_m": "bhavadbhyaḥ"
+                "sg_m": "भवते",
+                "du_m": "भवद्भ्याम्",
+                "pl_m": "भवद्भ्यः"
               },
               "abl": {
-                "sg_m": "bhavataḥ",
-                "du_m": "bhavadbhyām",
-                "pl_m": "bhavadbhyaḥ"
+                "sg_m": "भवतः",
+                "du_m": "भवद्भ्याम्",
+                "pl_m": "भवद्भ्यः"
               },
               "gen": {
-                "sg_m": "bhavataḥ",
-                "du_m": "bhavatoḥ",
-                "pl_m": "bhavatām"
+                "sg_m": "भवतः",
+                "du_m": "भवतोः",
+                "pl_m": "भवताम्"
               },
               "loc": {
-                "sg_m": "bhavati",
-                "du_m": "bhavatoḥ",
-                "pl_m": "bhavatsu"
+                "sg_m": "भवति",
+                "du_m": "भवतोः",
+                "pl_m": "भवत्सु"
               },
               "voc": {
-                "sg_m": "bhavan",
-                "du_m": "bhavantau",
-                "pl_m": "bhavantaḥ"
+                "sg_m": "भवन्",
+                "du_m": "भवन्तौ",
+                "pl_m": "भवन्तः"
               }
             }
           },
@@ -2958,44 +2958,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "hastī",
-                "du_m": "hastinau",
-                "pl_m": "hastinaḥ"
+                "sg_m": "हस्ती",
+                "du_m": "हस्तिनौ",
+                "pl_m": "हस्तिनः"
               },
               "acc": {
-                "sg_m": "hastinam",
-                "du_m": "hastinau",
-                "pl_m": "hastinaḥ"
+                "sg_m": "हस्तिनम्",
+                "du_m": "हस्तिनौ",
+                "pl_m": "हस्तिनः"
               },
               "ins": {
-                "sg_m": "hastinā",
-                "du_m": "hastibhyām",
-                "pl_m": "hastibhiḥ"
+                "sg_m": "हस्तिना",
+                "du_m": "हस्तिभ्याम्",
+                "pl_m": "हस्तिभिः"
               },
               "dat": {
-                "sg_m": "hastine",
-                "du_m": "hastibhyām",
-                "pl_m": "hastibhyaḥ"
+                "sg_m": "हस्तिने",
+                "du_m": "हस्तिभ्याम्",
+                "pl_m": "हस्तिभ्यः"
               },
               "abl": {
-                "sg_m": "hastinaḥ",
-                "du_m": "hastibhyām",
-                "pl_m": "hastibhyaḥ"
+                "sg_m": "हस्तिनः",
+                "du_m": "हस्तिभ्याम्",
+                "pl_m": "हस्तिभ्यः"
               },
               "gen": {
-                "sg_m": "hastinaḥ",
-                "du_m": "hastinoḥ",
-                "pl_m": "hastinām"
+                "sg_m": "हस्तिनः",
+                "du_m": "हस्तिनोः",
+                "pl_m": "हस्तिनाम्"
               },
               "loc": {
-                "sg_m": "hastini",
-                "du_m": "hastinoḥ",
-                "pl_m": "hastiṣu"
+                "sg_m": "हस्तिनि",
+                "du_m": "हस्तिनोः",
+                "pl_m": "हस्तिषु"
               },
               "voc": {
-                "sg_m": "hastin",
-                "du_m": "hastinau",
-                "pl_m": "hastinaḥ"
+                "sg_m": "हस्तिन्",
+                "du_m": "हस्तिनौ",
+                "pl_m": "हस्तिनः"
               }
             }
           }
@@ -3296,44 +3296,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_n": "manaḥ",
-                "du_n": "manasī",
-                "pl_n": "manāṃsi"
+                "sg_n": "मनः",
+                "du_n": "मनसी",
+                "pl_n": "मनांसि"
               },
               "acc": {
-                "sg_n": "manaḥ",
-                "du_n": "manasī",
-                "pl_n": "manāṃsi"
+                "sg_n": "मनः",
+                "du_n": "मनसी",
+                "pl_n": "मनांसि"
               },
               "ins": {
-                "sg_n": "manasā",
-                "du_n": "manobhyām",
-                "pl_n": "manobhiḥ"
+                "sg_n": "मनसा",
+                "du_n": "मनोभ्याम्",
+                "pl_n": "मनोभिः"
               },
               "dat": {
-                "sg_n": "manase",
-                "du_n": "manobhyām",
-                "pl_n": "manobhyaḥ"
+                "sg_n": "मनसे",
+                "du_n": "मनोभ्याम्",
+                "pl_n": "मनोभ्यः"
               },
               "abl": {
-                "sg_n": "manasaḥ",
-                "du_n": "manobhyām",
-                "pl_n": "manobhyaḥ"
+                "sg_n": "मनसः",
+                "du_n": "मनोभ्याम्",
+                "pl_n": "मनोभ्यः"
               },
               "gen": {
-                "sg_n": "manasaḥ",
-                "du_n": "manasoḥ",
-                "pl_n": "manasām"
+                "sg_n": "मनसः",
+                "du_n": "मनसोः",
+                "pl_n": "मनसाम्"
               },
               "loc": {
-                "sg_n": "manasi",
-                "du_n": "manasoḥ",
-                "pl_n": "manaḥsu"
+                "sg_n": "मनसि",
+                "du_n": "मनसोः",
+                "pl_n": "मनःसु"
               },
               "voc": {
-                "sg_n": "manaḥ",
-                "du_n": "manasī",
-                "pl_n": "manāṃsi"
+                "sg_n": "मनः",
+                "du_n": "मनसी",
+                "pl_n": "मनांसि"
               }
             }
           }
@@ -3636,44 +3636,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "vidvān",
-                "du_m": "vidvāṃsau",
-                "pl_m": "vidvāṃsaḥ"
+                "sg_m": "विद्वान्",
+                "du_m": "विद्वांसौ",
+                "pl_m": "विद्वांसः"
               },
               "acc": {
-                "sg_m": "vidvāṃsam",
-                "du_m": "vidvāṃsau",
-                "pl_m": "viduṣaḥ"
+                "sg_m": "विद्वांसम्",
+                "du_m": "विद्वांसौ",
+                "pl_m": "विदुषः"
               },
               "ins": {
-                "sg_m": "viduṣā",
-                "du_m": "vidvadbhyām",
-                "pl_m": "vidvadbhiḥ"
+                "sg_m": "विदुषा",
+                "du_m": "विद्वद्भ्याम्",
+                "pl_m": "विद्वद्भिः"
               },
               "dat": {
-                "sg_m": "viduṣe",
-                "du_m": "vidvadbhyām",
-                "pl_m": "vidvadbhyaḥ"
+                "sg_m": "विदुषे",
+                "du_m": "विद्वद्भ्याम्",
+                "pl_m": "विद्वद्भ्यः"
               },
               "abl": {
-                "sg_m": "viduṣaḥ",
-                "du_m": "vidvadbhyām",
-                "pl_m": "vidvadbhyaḥ"
+                "sg_m": "विदुषः",
+                "du_m": "विद्वद्भ्याम्",
+                "pl_m": "विद्वद्भ्यः"
               },
               "gen": {
-                "sg_m": "viduṣaḥ",
-                "du_m": "viduṣoḥ",
-                "pl_m": "viduṣām"
+                "sg_m": "विदुषः",
+                "du_m": "विदुषोः",
+                "pl_m": "विदुषाम्"
               },
               "loc": {
-                "sg_m": "viduṣi",
-                "du_m": "viduṣoḥ",
-                "pl_m": "vidvatsu"
+                "sg_m": "विदुषि",
+                "du_m": "विदुषोः",
+                "pl_m": "विद्वत्सु"
               },
               "voc": {
-                "sg_m": "vidvan",
-                "du_m": "vidvāṃsau",
-                "pl_m": "vidvāṃsaḥ"
+                "sg_m": "विद्वन्",
+                "du_m": "विद्वांसौ",
+                "pl_m": "विद्वांसः"
               }
             }
           },
@@ -3997,44 +3997,44 @@
           "expect": {
             "main": {
               "nom": {
-                "sg_m": "rājā",
-                "du_m": "rājānau",
-                "pl_m": "rājānaḥ"
+                "sg_m": "राजा",
+                "du_m": "राजानौ",
+                "pl_m": "राजानः"
               },
               "acc": {
-                "sg_m": "rājānam",
-                "du_m": "rājānau",
-                "pl_m": "rājñaḥ"
+                "sg_m": "राजानम्",
+                "du_m": "राजानौ",
+                "pl_m": "राज्ञः"
               },
               "ins": {
-                "sg_m": "rājñā",
-                "du_m": "rājabhyām",
-                "pl_m": "rājabhiḥ"
+                "sg_m": "राज्ञा",
+                "du_m": "राजभ्याम्",
+                "pl_m": "राजभिः"
               },
               "dat": {
-                "sg_m": "rājñe",
-                "du_m": "rājabhyām",
-                "pl_m": "rājabhyaḥ"
+                "sg_m": "राज्ञे",
+                "du_m": "राजभ्याम्",
+                "pl_m": "राजभ्यः"
               },
               "abl": {
-                "sg_m": "rājñaḥ",
-                "du_m": "rājabhyām",
-                "pl_m": "rājabhyaḥ"
+                "sg_m": "राज्ञः",
+                "du_m": "राजभ्याम्",
+                "pl_m": "राजभ्यः"
               },
               "gen": {
-                "sg_m": "rājñaḥ",
-                "du_m": "rājñoḥ",
-                "pl_m": "rājñām"
+                "sg_m": "राज्ञः",
+                "du_m": "राज्ञोः",
+                "pl_m": "राज्ञाम्"
               },
               "loc": {
-                "sg_m": "rājñi",
-                "du_m": "rājñoḥ",
-                "pl_m": "rājasu"
+                "sg_m": "राज्ञि",
+                "du_m": "राज्ञोः",
+                "pl_m": "राजसु"
               },
               "voc": {
-                "sg_m": "rājan",
-                "du_m": "rājānau",
-                "pl_m": "rājānaḥ"
+                "sg_m": "राजन्",
+                "du_m": "राजानौ",
+                "pl_m": "राजानः"
               }
             }
           },

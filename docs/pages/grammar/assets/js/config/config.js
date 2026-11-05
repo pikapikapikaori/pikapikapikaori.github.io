@@ -41,11 +41,6 @@ export const SCRIPT_POPUP_LANGS = {
 }
 
 /**
- * 检索时同时匹配「原文」与「转写副本」（Word.paradigmRoman）的语言；不在列表里的只按自己的文字检索。
- */
-export const TRANSLIT_SEARCH_LANGS = ['mnc']
-
-/**
  * 有「短音符（˘）」概念的语言：显示时可以隐藏短音符，也可以用按钮切出来看。
  * 值是 ISO code，见「短音符」相关工具 utils/breve.js。
  */
@@ -53,9 +48,9 @@ export const BREVE_LANGS = ['la', 'grc']
 
 /**
  * 检索时把查询串同时展开成「原文 + 转写」的语言：这些语言的数据存的是非拉丁文字，
- * 用户可能直接输入罗马字（IAST / 希腊语转写 / 希伯来语转写）。
+ * 用户可能直接输入罗马字（IAST / 希腊语转写 / 希伯来语转写 / 满文转写）。
  */
-export const SCRIPT_SEARCH_LANGS = ['sa', 'grc', 'he']
+export const SCRIPT_SEARCH_LANGS = ['sa', 'grc', 'he', 'mnc']
 
 /**
  * 渲染时用 <bdi> 包住文字的语言：值是**该文字的 Unicode 范围**，只有命中的字符才被包进 <bdi>，

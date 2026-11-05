@@ -82,8 +82,8 @@
           "expect": {
             "number": {
               "abs": {
-                "sg": "niyalma",
-                "pl": "niyalma"
+                "sg": "ᠨᡳᠶᠠᠯᠮᠠ",
+                "pl": "ᠨᡳᠶᠠᠯᠮᠠ"
               }
             }
           },
@@ -161,8 +161,8 @@
           "expect": {
             "number": {
               "abs": {
-                "sg": "niyalma",
-                "pl": "niyalmasa"
+                "sg": "ᠨᡳᠶᠠᠯᠮᠠ",
+                "pl": "ᠨᡳᠶᠠᠯᠮᠠᠰᠠ"
               }
             }
           },
@@ -240,8 +240,8 @@
           "expect": {
             "number": {
               "abs": {
-                "sg": "ama",
-                "pl": "amata"
+                "sg": "ᠠᠮᠠ",
+                "pl": "ᠠᠮᠠᡨᠠ"
               }
             }
           },
@@ -319,8 +319,8 @@
           "expect": {
             "number": {
               "abs": {
-                "sg": "haha",
-                "pl": "hahasi"
+                "sg": "ᡥᠠᡥᠠ",
+                "pl": "ᡥᠠᡥᠠᠰᡳ"
               }
             }
           },
@@ -390,8 +390,8 @@
           "expect": {
             "number": {
               "abs": {
-                "sg": "mafa",
-                "pl": "mafari"
+                "sg": "ᠮᠠᡶᠠ",
+                "pl": "ᠮᠠᡶᠠᡵᡳ"
               }
             }
           },

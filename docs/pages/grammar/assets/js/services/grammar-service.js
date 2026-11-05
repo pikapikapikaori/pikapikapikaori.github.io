@@ -317,12 +317,14 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
             if (meta.files?.paradigm) {
                 profile = await import(/* @vite-ignore */ langUrl(code, meta.files.paradigm).href).catch(() => null)
             }
+            let script = null
             if (meta.files?.script) {
-                const script = await import(/* @vite-ignore */ langUrl(code, meta.files.script).href).catch(() => null)
+                script = await import(/* @vite-ignore */ langUrl(code, meta.files.script).href).catch(() => null)
                 if (!script) item.structure.errors.push(`文字档案 ${meta.files.script} 加载失败`)
             }
             try {
-                const r = verifyGrammarDoc(code, doc, profile)
+                // 自检按「最终存储的写法」比对 expect，所以要把文字档案一并传进去
+                const r = verifyGrammarDoc(code, doc, profile, script)
                 item.derive = {
                     specs: r.specs,
                     checked: r.checked,

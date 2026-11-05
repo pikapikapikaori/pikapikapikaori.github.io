@@ -437,88 +437,88 @@
       "expect": {
         "tense": {
           "mbi": {
-            "form": "arambi"
+            "form": "ᠠᡵᠠᠮᠪᡳ"
           },
           "fut": {
-            "form": "arara"
+            "form": "ᠠᡵᠠᡵᠠ"
           },
           "past": {
-            "form": "araha"
+            "form": "ᠠᡵᠠᡥᠠ"
           },
           "mbime": {
-            "form": "arambime"
+            "form": "ᠠᡵᠠᠮᠪᡳᠮᡝ"
           },
           "mbihe": {
-            "form": "arambihe"
+            "form": "ᠠᡵᠠᠮᠪᡳᡥᡝ"
           },
           "prog": {
-            "form": "arame bi"
+            "form": "ᠠᡵᠠᠮᡝ ᠪᡳ"
           },
           "prog2": {
-            "form": "arame ilihabi"
+            "form": "ᠠᡵᠠᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ"
           },
           "perf": {
-            "form": "aramahabi"
+            "form": "ᠠᡵᠠᠮᠠᡥᠠᠪᡳ"
           },
           "perf2": {
-            "form": "araha bi"
+            "form": "ᠠᡵᠠᡥᠠ ᠪᡳ"
           },
           "plup": {
-            "form": "araha bihe"
+            "form": "ᠠᡵᠠᡥᠠ ᠪᡳᡥᡝ"
           }
         },
         "mood": {
           "impv": {
-            "form": "ara"
+            "form": "ᠠᡵᠠ"
           },
           "opt": {
-            "form": "arakini"
+            "form": "ᠠᡵᠠᡴᡳᠨᡳ"
           },
           "prec": {
-            "form": "aracina"
+            "form": "ᠠᡵᠠᠴᡳᠨᠠ"
           },
           "negpres": {
-            "form": "ararakū"
+            "form": "ᠠᡵᠠᡵᠠᡴᡡ"
           },
           "negpast": {
-            "form": "arahakū"
+            "form": "ᠠᡵᠠᡥᠠᡴᡡ"
           },
           "prohib": {
-            "form": "ume arara"
+            "form": "ᡠᠮᡝ ᠠᡵᠠᡵᠠ"
           }
         },
         "converb": {
           "cvbme": {
-            "form": "arame"
+            "form": "ᠠᡵᠠᠮᡝ"
           },
           "cvbfi": {
-            "form": "arafi"
+            "form": "ᠠᡵᠠᡶᡳ"
           },
           "cvbhai": {
-            "form": "arahai"
+            "form": "ᠠᡵᠠᡥᠠᡳ"
           },
           "cvbtala": {
-            "form": "aratala"
+            "form": "ᠠᡵᠠᡨᠠᠯᠠ"
           },
           "cvbnggala": {
-            "form": "aranggala"
+            "form": "ᠠᡵᠠᠩᡤᠠᠯᠠ"
           }
         },
         "nominal": {
           "ptcppast": {
-            "form": "araha"
+            "form": "ᠠᡵᠠᡥᠠ"
           },
           "ptcpfut": {
-            "form": "arara"
+            "form": "ᠠᡵᠠᡵᠠ"
           },
           "nomn": {
-            "form": "aran"
+            "form": "ᠠᡵᠠᠨ"
           },
           "nomsi": {
-            "form": "arasi"
+            "form": "ᠠᡵᠠᠰᡳ"
           },
           "nomtan": {
-            "form": "aratan"
+            "form": "ᠠᡵᠠᡨᠠᠨ"
           }
         }
       }

@@ -1583,6 +1583,22 @@ ol.doc-list {
     font-size: .92em;
 }
 
+/* 键盘按键：空格、Tab 这类（文档里的 <kbd>） */
+.doc-body kbd {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 0 .35em;
+    border: 1px solid var(--c-border);
+    border-bottom-width: 2px;
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    color: var(--c-fg);
+    font-family: var(--ff-mono);
+    font-size: .85em;
+    line-height: 1.5;
+    text-align: center;
+}
+
 .doc-table-wrap {
     margin: var(--sp-4) 0;
     overflow-x: auto;

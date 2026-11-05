@@ -60,8 +60,11 @@ export function openCardOverlay(word, opts = {}) {
     // 默认落在「有含义」的那个来源上，免得一打开是对着空 tab
     const sourceWithMeanings = sources.find((s) => (word.meanings || []).some((m) => (m.source || 'manual') === s))
     let activeSource = sourceWithMeanings || sources[0] || 'manual'
-    /** 多张变格 / 变位表时当前选中的那张 */
+    /** 多张形态变形表时当前选中的那张 */
     let activeTable = null
+    /** 「固定搭配」「例句」各自的来源 tab（与「含义」互不影响） */
+    let activeCollocationSource = firstSourceWith(word.collocations) || activeSource
+    let activeExampleSource = firstSourceWith(word.examples) || activeSource
 
     const backdrop = h('div', {
         class: 'card-overlay-backdrop',
@@ -223,7 +226,7 @@ export function openCardOverlay(word, opts = {}) {
         }
 
         /* ---------- 含义（来源 tab 收在这一段里） ---------- */
-        const meanings = pick(word.meanings)
+        const meanings = pick(word.meanings, activeSource)
         const showTabs = sources.length > 1
         if (meanings.length || showTabs) {
             body.appendChild(ovSection('含义',
@@ -274,7 +277,7 @@ export function openCardOverlay(word, opts = {}) {
         }
 
         /* ---------- 补充形式 ---------- */
-        const infs = pick(word.inflections)
+        const infs = Array.isArray(word.inflections) ? word.inflections : []
         if (infs.length) {
             const groups = groupInflections(infs)
             const container = h('div', {})
@@ -300,19 +303,37 @@ export function openCardOverlay(word, opts = {}) {
         }
 
         /* ---------- 固定搭配 ---------- */
-        const cols = pick(word.collocations)
-        if (cols.length) {
-            body.appendChild(ovSection('固定搭配', collocationList(cols, language)))
+        const cols = pick(word.collocations, activeCollocationSource)
+        if (cols.length || showTabs) {
+            body.appendChild(ovSection('固定搭配',
+                showTabs
+                    ? createSourceTabs(sources, activeCollocationSource, (s) => {
+                        activeCollocationSource = s
+                        renderBody()
+                    })
+                    : null,
+                cols.length
+                    ? collocationList(cols, language)
+                    : h('div', { class: 'field__hint' }, '该来源没有固定搭配')
+            ))
         }
 
         /* ---------- 例句 ---------- */
-        const exs = pick(word.examples)
-        if (exs.length) {
+        const exs = pick(word.examples, activeExampleSource)
+        if (exs.length || showTabs) {
             body.appendChild(ovSection('例句',
-                exampleList(exs, language, {
-                    meanings: word.meanings,
-                    activeSource
-                })
+                showTabs
+                    ? createSourceTabs(sources, activeExampleSource, (s) => {
+                        activeExampleSource = s
+                        renderBody()
+                    })
+                    : null,
+                exs.length
+                    ? exampleList(exs, language, {
+                        meanings: word.meanings,
+                        activeSource
+                    })
+                    : h('div', { class: 'field__hint' }, '该来源没有例句')
             ))
         }
 
@@ -375,9 +396,9 @@ export function openCardOverlay(word, opts = {}) {
         })
     }
 
-    function pick(items) {
+    function pick(items, source = activeSource) {
         if (!Array.isArray(items)) return []
-        return items.filter((it) => (it.source || 'manual') === activeSource)
+        return items.filter((it) => (it.source || 'manual') === source)
     }
 
     function close() {
@@ -404,6 +425,15 @@ export function closeCardOverlay() {
         overlayEl.parentNode.removeChild(overlayEl)
     }
     overlayEl = null
+}
+
+/** 该区块里第一个「有内容」的来源，用来决定 tab 的初始落点 */
+function firstSourceWith(items) {
+    const list = Array.isArray(items) ? items : []
+    for (const it of list) {
+        if (Object.values(it || {}).some((v) => typeof v === 'string' && v.trim())) return it.source || 'manual'
+    }
+    return null
 }
 
 function ovSection(title, ...children) {

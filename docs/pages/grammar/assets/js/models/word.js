@@ -92,7 +92,9 @@ function normalizeSourceList(list, kind) {
             continue
         }
         const entry = { ...item }
-        entry.source = entry.source || 'manual'
+        // 补充形式属于词条本身，不区分来源
+        if (kind === 'inflections') delete entry.source
+        else entry.source = entry.source || 'manual'
         if (typeof entry.text === 'string') entry.text = entry.text.trim()
         if (typeof entry.form === 'string') entry.form = entry.form.trim()
         if (kind === 'inflections' && entry.group != null) {
@@ -106,7 +108,7 @@ function normalizeSourceList(list, kind) {
 function defaultEntry(kind, text) {
     switch (kind) {
         case 'meanings':     return { text, lang: 'zh', source: 'manual' }
-        case 'inflections':  return { label: '', form: text, source: 'manual' }
+        case 'inflections':  return { label: '', form: text }
         case 'collocations': return { text, gloss: '', source: 'manual' }
         case 'examples':     return { text, translation: '', citation: '', source: 'manual' }
         default:             return { text, source: 'manual' }
@@ -204,7 +206,7 @@ export function isParadigmEmpty(p) {
 /** 收集词条中所有 source 标识，按 manual 优先排序 */
 export function allSources(word) {
     const set = new Set()
-    for (const k of ['inflections', 'meanings', 'collocations', 'examples']) {
+    for (const k of ['meanings', 'collocations', 'examples']) {
         for (const it of word[k] || []) set.add(it.source || 'manual')
     }
     if (set.size === 0) set.add('manual')

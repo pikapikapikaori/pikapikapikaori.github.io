@@ -42,7 +42,7 @@ function cleanWordForExport(w) {
         gender: normalizeGenders(fieldValues(w, 'gender'), w.pos),
         attributes: normalizeAttributes(w.attributes),
         stems: normalizeStems(w.stems),
-        inflections: w.inflections || [],
+        inflections: normalizeInflections(w.inflections),
         meanings: w.meanings || [],
         collocations: w.collocations || [],
         examples: w.examples || [],
@@ -157,7 +157,7 @@ function normalizeImportedWord(raw, userId) {
             ...(raw.attributes || {}),
         }),
         stems: normalizeStems(raw.stems ?? raw.stem),
-        inflections: raw.inflections || [],
+        inflections: normalizeInflections(raw.inflections),
         meanings: raw.meanings || [],
         collocations: raw.collocations || [],
         examples: raw.examples || [],
@@ -171,6 +171,12 @@ function normalizeImportedWord(raw, userId) {
         addedAt: raw.addedAt || nowIso(),
         updatedAt: raw.updatedAt || nowIso()
     }
+}
+
+/** 补充形式属于词条本身，不区分来源；旧文件里的 source 直接丢掉 */
+function normalizeInflections(list) {
+    if (!Array.isArray(list)) return []
+    return list.map(({ source, ...rest }) => rest)
 }
 
 function mergePreservingProgress(existing, incoming) {

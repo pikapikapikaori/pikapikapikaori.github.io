@@ -270,7 +270,7 @@ function leadingSpaces(line) {
 /* ---------------- 行内 ---------------- */
 
 /** 行内记号：每次调用都新建正则 —— inline() 会递归，共用同一个实例会串 lastIndex */
-const INLINE_SOURCE = '(`[^`\\n]+`)|(\\*\\*[^*\\n]+\\*\\*)|(\\*[^*\\n]+\\*)|(\\[[^\\]\\n]+\\]\\([^)\\s]+\\))'
+const INLINE_SOURCE = '(<kbd>[^<\\n]+</kbd>)|(`[^`\\n]+`)|(\\*\\*[^*\\n]+\\*\\*)|(\\*[^*\\n]+\\*)|(\\[[^\\]\\n]+\\]\\([^)\\s]+\\))'
 
 function inline(text) {
     const out = []
@@ -283,7 +283,9 @@ function inline(text) {
         if (!m) break
         if (m.index > last) out.push(source.slice(last, m.index))
         const token = m[0]
-        if (token.startsWith('`')) {
+        if (token.startsWith('<kbd>')) {
+            out.push(h('kbd', { text: token.slice(5, -6) }))
+        } else if (token.startsWith('`')) {
             out.push(h('code', { class: 'doc-inline-code', text: token.slice(1, -1) }))
         } else if (token.startsWith('**')) {
             out.push(h('strong', {}, ...inline(token.slice(2, -2))))
@@ -318,6 +320,7 @@ function linkEl(token) {
 /** 去掉行内标记，用于标题文字与 slug */
 function plainText(text) {
     return String(text)
+        .replace(/<kbd>([^<]*)<\/kbd>/g, '$1')
         .replace(/`([^`]*)`/g, '$1')
         .replace(/\*\*([^*]*)\*\*/g, '$1')
         .replace(/\*([^*]*)\*/g, '$1')

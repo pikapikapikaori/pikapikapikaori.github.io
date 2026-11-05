@@ -151,7 +151,7 @@ export async function importWords(userId, words) {
                 gender: normalizeGenders(raw.gender, String(raw.pos).trim()),
                 attributes: raw.attributes || {},
                 stems: normalizeStems(raw.stems ?? raw.stem),
-                inflections: raw.inflections || [],
+                inflections: (raw.inflections || []).map(({ source, ...rest }) => rest),
                 meanings: raw.meanings || [],
                 collocations: raw.collocations || [],
                 examples: raw.examples || [],

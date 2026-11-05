@@ -32,7 +32,7 @@
     "indeclinable": "无活用",
     "paradigmTitle": "{pos}活用表",
     "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写活用类型。",
-    "extraForms": "补充形式（其他活用形）",
+    "extraForms": "补充形式",
     "stems": {
       "label": "词干",
       "placeholder": "词干（一般留空，由辞书形推导）",

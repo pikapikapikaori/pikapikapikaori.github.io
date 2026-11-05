@@ -33,7 +33,7 @@
     "indeclinable": "不变形",
     "paradigmTitle": "{pos}词形表",
     "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
-    "extraForms": "补充形式（其他词形）",
+    "extraForms": "补充形式",
     "stems": {
       "label": "词干",
       "placeholder": "词干，如 ᠠᡵᠠ-",

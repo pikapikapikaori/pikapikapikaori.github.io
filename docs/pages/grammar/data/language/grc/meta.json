@@ -35,7 +35,7 @@
     "indeclinable": "不变格",
     "paradigmTitle": "{pos}变格表格",
     "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
-    "extraForms": "补充形式（不定式、命令式、动名词、日语活用等）",
+    "extraForms": "补充形式",
     "stems": {
       "label": "词干",
       "placeholder": "词干，如 λόγ",

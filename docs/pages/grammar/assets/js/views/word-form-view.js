@@ -23,7 +23,7 @@ import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import {
-    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS, WORD_SOURCE_OPTIONS
+    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST, GENDERS
 } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { takePendingLookup } from '../store/pending-lookup.js'
@@ -201,6 +201,38 @@ export default {
         let tagsInput = null
         /** 「含义」区当前所在的来源 tab：例句里的含义引用靠它判断要不要加来源前缀 */
         let meaningSource = 'manual'
+        /** 「固定搭配」「例句」各自的来源 tab */
+        let collocationSource = 'manual'
+        let exampleSource = 'manual'
+
+        /** 来源 tab 的候选：手动 → 已注册的外部源 → 数据里实际出现的其它来源 */
+        function sourceIds(items = []) {
+            const ids = ['manual', ...externalSources.map((src) => src.id)]
+            for (const it of items) {
+                const id = it.source || 'manual'
+                if (!ids.includes(id)) ids.push(id)
+            }
+            return ids
+        }
+
+        /** 某个区块的来源 tab 条 */
+        function sourceTabBar({ items, active, onPick }) {
+            return h('div', { class: 'source-tabs word-form__meaning-tabs' },
+                ...sourceIds(items).map((id) => h('button', {
+                    class: 'source-tab' + (id === active ? ' source-tab--active' : ''),
+                    type: 'button',
+                    role: 'tab',
+                    'aria-selected': String(id === active),
+                    onclick: () => { if (id !== active) onPick(id) }
+                }, sourceLabel(id)))
+            )
+        }
+
+        /** 切换后默认落在第一个有内容的来源上 */
+        function firstSourceWithContent(items) {
+            const hit = sourceIds(items).find((id) => items.some((it) => (it.source || 'manual') === id && Object.values(it).some((v) => typeof v === 'string' && v.trim())))
+            return hit || 'manual'
+        }
 
         /** 行首序号的占位格：内容由 renumberItems 填，空行保持空白 */
         function indexCell() {
@@ -379,6 +411,8 @@ export default {
             lookupStatus.textContent = ''
             lookupStatus.style.color = ''
             setMeaningSource('manual')
+            collocationSource = 'manual'
+            exampleSource = 'manual'
 
             renderGenderField()
             renderMeanings()
@@ -1353,7 +1387,7 @@ export default {
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
-                            data.inflections.push({ group: '', label: '', form: '', source: 'manual' })
+                            data.inflections.push({ group: '', label: '', form: '' })
                             renderInflections()
                         }
                     }, '＋ 添加')
@@ -1385,7 +1419,6 @@ export default {
                                 renumber()
                             }
                         })),
-                        sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
                             class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该形式',
@@ -1403,42 +1436,55 @@ export default {
         }
 
         function buildCollocationGroup() {
+            const tabs = h('div', {})
             const list = h('div', { class: 'word-form__list' })
+            const empty = h('div', { class: 'field__hint' }, '该来源还没有固定搭配')
+
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, '固定搭配（可选）'),
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
-                            data.collocations.push({ text: '', gloss: '', source: 'manual' })
+                            data.collocations.push({ text: '', gloss: '', source: collocationSource })
                             render()
                         }
                     }, '＋ 添加')
                 ),
+                tabs,
+                empty,
                 list
             )
 
-            const renumber = () => renumberItems(list, (i) => String(data.collocations[i]?.text || '').trim() !== '')
+            let rows = []
 
             function render() {
+                tabs.replaceChildren(sourceTabBar({
+                    items: data.collocations,
+                    active: collocationSource,
+                    onPick: (id) => { collocationSource = id; render() }
+                }))
                 list.replaceChildren()
-                data.collocations.forEach((it, idx) => {
+                rows = data.collocations
+                    .map((it, idx) => ({ it, idx }))
+                    .filter(({ it }) => (it.source || 'manual') === collocationSource)
+                empty.hidden = rows.length > 0
+                rows.forEach(({ it, idx }) => {
                     list.appendChild(h('div', { class: 'word-form__item' },
                         indexCell(),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
                             lang,
-                            placeholder: '搭配文本',
+                            placeholder: '固定搭配原文',
                             onInput: (e) => {
                                 it.text = e.target.value
-                                renumber()
+                                renumberItems(list, (i) => String(rows[i]?.it.text || '').trim() !== '')
                             }
                         })),
                         h('input', {
-                            class: 'input', placeholder: '释义', value: it.gloss,
+                            class: 'input', placeholder: '含义', value: it.gloss,
                             oninput: (e) => { it.gloss = e.target.value }
                         }),
-                        sourceSelect(it.source, (v) => { it.source = v }),
                         h('button', {
                             class: 'btn btn--sm word-form__cell--remove', type: 'button',
                             title: '删除该搭配',
@@ -1446,7 +1492,7 @@ export default {
                         }, '✕')
                     ))
                 })
-                renumber()
+                renumberItems(list, (i) => String(rows[i]?.it.text || '').trim() !== '')
             }
             renderCollocations = render
             render()
@@ -1513,26 +1559,43 @@ export default {
         }
 
         function buildExampleGroup() {
+            const tabs = h('div', {})
             const list = h('div', { class: 'word-form__list' })
+            const empty = h('div', { class: 'field__hint' }, '该来源还没有例句')
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
                     h('span', {}, '例句（可选）'),
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
-                            data.examples.push({ text: '', translation: '', citation: '', source: 'manual' })
+                            data.examples.push({ text: '', translation: '', citation: '', source: exampleSource })
                             renderExamples()
                         }
                     }, '＋ 添加')
                 ),
+                tabs,
+                empty,
                 list
             )
 
-            const renumber = () => renumberItems(list, (i) => String(data.examples[i]?.text || '').trim() !== '')
+            let rows = []
 
             renderExamples = function () {
+                tabs.replaceChildren(sourceTabBar({
+                    items: data.examples,
+                    active: exampleSource,
+                    onPick: (id) => {
+                        exampleSource = id
+                        // 含义 tab 决定例句里含义引用的来源前缀，切例句 tab 时把这些引用一起刷新
+                        renderExamples()
+                    }
+                }))
                 list.replaceChildren()
-                data.examples.forEach((it, idx) => {
+                rows = data.examples
+                    .map((it, idx) => ({ it, idx }))
+                    .filter(({ it }) => (it.source || 'manual') === exampleSource)
+                empty.hidden = rows.length > 0
+                rows.forEach(({ it, idx }) => {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--example' },
                         indexCell(),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
@@ -1541,16 +1604,15 @@ export default {
                             placeholder: '例句原文',
                             onInput: (e) => {
                                 it.text = e.target.value
-                                renumber()
+                                renumberItems(list, (i) => String(rows[i]?.it.text || '').trim() !== '')
                             }
                         })),
                         h('input', {
                             class: 'input', placeholder: '出处', value: it.citation,
                             oninput: (e) => { it.citation = e.target.value }
                         }),
-                        sourceSelect(it.source, (v) => { it.source = v }),
                         h('input', {
-                            class: 'input word-form__cell--translation', placeholder: '译文', value: it.translation,
+                            class: 'input word-form__cell--translation', placeholder: '含义', value: it.translation,
                             oninput: (e) => { it.translation = e.target.value }
                         }),
                         createSelect({
@@ -1569,7 +1631,7 @@ export default {
                         }, '✕')
                     ))
                 })
-                renumber()
+                renumberItems(list, (i) => String(rows[i]?.it.text || '').trim() !== '')
             }
             renderExamples()
             return group
@@ -1752,7 +1814,8 @@ export default {
                 },
                 paradigm: normalizeParadigm(data.paradigm),
                 stems: collectStems(),
-                inflections: cleanList(data.inflections, ['form']),
+                // 补充形式属于词条本身，不区分来源
+                inflections: cleanList(data.inflections, ['form']).map(({ source, ...rest }) => rest),
                 meanings: cleanList(data.meanings, ['text']),
                 collocations: cleanList(data.collocations, ['text']),
                 examples: cleanList(data.examples, ['text']).map(cleanExampleMeaning),
@@ -1834,16 +1897,6 @@ export default {
 
 function field(label, control, hint, lang = null) {
     return fieldRow(label, control, { hint, lang })
-}
-
-function sourceSelect(value, onChange) {
-    return h('select', {
-        class: 'select',
-        onchange: (e) => onChange(e.target.value)
-    }, ...WORD_SOURCE_OPTIONS.map((o) => h('option', {
-        value: o.value,
-        selected: (value || 'manual') === o.value
-    }, o.label)))
 }
 
 function cleanList(list, requiredKeys) {

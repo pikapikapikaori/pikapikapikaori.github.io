@@ -255,7 +255,8 @@ async function canonicalizePayload(language, payload) {
         stems: fixMap(payload.stems || {}),
         // 变格 / 变位表：{ 表: { 行: { 列: '词形' } } }
         paradigm: fixMap(payload.paradigm || {}),
-        inflections: fixList(payload.inflections, 'form'),
+        // 补充形式不带来源
+        inflections: fixList(payload.inflections, 'form').map(({ source, ...rest }) => rest),
         collocations: fixList(payload.collocations, 'text'),
         examples: fixList(payload.examples, 'text'),
         derivatives: Array.isArray(payload.derivatives) ? payload.derivatives.map(fix) : payload.derivatives

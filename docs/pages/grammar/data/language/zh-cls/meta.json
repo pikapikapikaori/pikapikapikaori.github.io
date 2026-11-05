@@ -33,7 +33,7 @@
     "indeclinable": "无形态变化",
     "paradigmTitle": "{pos}变化表",
     "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写说明。",
-    "extraForms": "补充形式（其他用法）",
+    "extraForms": "补充形式",
     "stems": {
       "label": "词干",
       "placeholder": "词干",

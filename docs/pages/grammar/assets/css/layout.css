@@ -83,16 +83,6 @@
     padding: var(--sp-5) var(--sp-4) var(--sp-7);
 }
 
-.app-main--wide {
-    max-width: 100%;
-    padding-left: var(--sp-4);
-    padding-right: var(--sp-4);
-}
-
-.app-main--narrow {
-    max-width: 720px;
-}
-
 .page-head {
     display: flex;
     align-items: flex-end;

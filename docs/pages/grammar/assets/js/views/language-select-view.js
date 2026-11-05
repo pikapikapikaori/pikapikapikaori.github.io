@@ -1,18 +1,12 @@
-/** 语言选择：按 classical 分组，组内可拖动排序（顺序存 settings.languageOrder） */
+/** 语言列表：按 classical 分组，组内可拖动排序（顺序存 settings.languageOrder） */
 
 import { h, replace } from '../utils/dom.js'
-import { applyBdi, bdiNode } from '../utils/bdi.js'
+import { bdiNode } from '../utils/bdi.js'
 import { appStore } from '../app-state.js'
 import { listAll } from '../store/word-store.js'
-import { deleteUser } from '../store/user-store.js'
-import { clearHttpCache } from '../store/http-cache.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
 import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
 import { formatRelative } from '../utils/date.js'
-import { toast } from '../components/toast.js'
-import { confirmModal } from '../components/modal.js'
-import { exportUser } from '../services/import-export-service.js'
-import { LS_KEYS } from '../config/config.js'
 
 const GROUP_DEFS = {
     classical: { key: 'classical', title: '古典语言', match: (l) => !!l.classical },
@@ -65,15 +59,7 @@ export default {
                     h('button', {
                         class: 'btn', type: 'button',
                         onclick: () => { location.hash = '#/schema' }
-                    }, '数据格式'),
-                    h('button', {
-                        class: 'btn', type: 'button',
-                        onclick: () => doExport()
-                    }, '导出 JSON'),
-                    h('button', {
-                        class: 'btn btn--danger-quiet', type: 'button',
-                        onclick: () => doClearAll()
-                    }, '清空数据')
+                    }, '数据格式')
                 )
             )
         }
@@ -316,39 +302,6 @@ export default {
             settings = await saveSettings(userId, { languageOrder: order })
             appStore.set({ settings })
             renderGroups()
-        }
-
-        /* ---------- 数据操作 ---------- */
-
-        async function doExport() {
-            try {
-                const fresh = await listAll(userId)
-                const s = await getSettings(userId)
-                const name = await exportUser(user, s, fresh)
-                toast.success(`已导出 ${name}`, 3600)
-            } catch (err) {
-                toast.error(`导出失败：${err.message}`)
-            }
-        }
-
-        async function doClearAll() {
-            const ok = await confirmModal({
-                title: '清空数据',
-                message: '将删除该用户全部词条与设置，用户本身也会被删除。此操作不可恢复。',
-                confirmLabel: '清空并删除',
-                danger: true
-            })
-            if (!ok) return
-            try {
-                await deleteUser(userId)
-                try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
-                appStore.set({ user: null, userId: null, settings: null })
-                // 外部源的 HTTP 响应缓存也是这份数据的一部分
-                clearHttpCache().catch((err) => console.warn('[http-cache] 清理失败', err))
-                location.hash = '#/welcome'
-            } catch (err) {
-                toast.error(`清空失败：${err.message}`)
-            }
         }
 
         /* ---------- 首次渲染 ---------- */

@@ -1,22 +1,10 @@
 /** User 模型与导出 JSON 顶层结构 */
 
-import { userId as genUserId } from '../utils/id.js'
-import { nowIso } from '../utils/date.js'
 import { DEFAULT_SETTINGS } from '../config/config.js'
 import { normalizeSettings } from '../store/settings-store.js'
 
 export const EXPORT_KIND = 'langnotebook-user'
 export const CURRENT_VERSION = 1
-
-export function createUser(name) {
-    const t = nowIso()
-    return {
-        id: genUserId(),
-        name: String(name || '').trim() || '未命名用户',
-        createdAt: t,
-        updatedAt: t
-    }
-}
 
 export function isUserShape(obj) {
     return obj

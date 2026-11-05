@@ -774,6 +774,19 @@
     margin-bottom: var(--sp-2);
 }
 
+/* 有序列表：序号自己画小一号、弱化，正文的字号与字重保持不变 */
+.review-meanings {
+    list-style: decimal outside;
+    padding-inline-start: 1.6em;
+}
+
+.review-meanings ::marker {
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    color: var(--c-fg-subtle);
+    font-variant-numeric: tabular-nums;
+}
+
 .review-meaning {
     font-size: 2.125rem;
     line-height: 1.45;
@@ -1351,7 +1364,6 @@
 
 /* ---------- Settings ---------- */
 .settings-section {
-    max-width: 760px;
     margin-bottom: var(--sp-7);
 }
 

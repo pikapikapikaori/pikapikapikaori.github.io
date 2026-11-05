@@ -310,5 +310,5 @@ export async function languageStats(userId, language) {
     }
 }
 
-/** 聚合所有语言统计（用于语言选择页） */
+/** 聚合所有语言统计（用于语言列表页） */
 export { posLabel }

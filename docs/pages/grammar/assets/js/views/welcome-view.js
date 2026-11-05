@@ -52,33 +52,17 @@ const welcomeView = {
         )
 
         /* ---------- 操作按钮 ---------- */
-        const fileInput = h('input', {
-            type: 'file',
-            accept: 'application/json,.json',
-            hidden: true,
-            onchange: async (e) => {
-                const f = e.target.files && e.target.files[0]
-                e.target.value = ''
-                if (!f) return
-                await doImport(f)
-            }
-        })
-
         const actions = h('div', { class: 'welcome__actions' },
             h('button', {
                 class: 'btn btn--primary btn--lg',
                 type: 'button',
                 onclick: doCreateEmpty
             }, '新建空用户'),
-            h('label', { class: 'btn btn--lg', style: { cursor: 'pointer' } },
-                '导入 JSON 文件',
-                fileInput
-            ),
             h('button', {
                 class: 'btn btn--lg',
                 type: 'button',
-                onclick: doPasteImport
-            }, '粘贴 JSON')
+                onclick: openImport
+            }, '导入 JSON')
         )
         panel.appendChild(actions)
 
@@ -148,21 +132,7 @@ const welcomeView = {
             return `${base} ${i}`
         }
 
-        async function doImport(file) {
-            try {
-                const { user, stats } = await importUser(file, { mode: 'new' })
-                toast.success(
-                    `已导入「${user.name}」：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`,
-                    5000
-                )
-                await enterUser(user.id)
-            } catch (err) {
-                console.error(err)
-                toast.error(`导入失败：${err.message}`, 6000)
-            }
-        }
-
-        function doPasteImport() {
+        function openImport() {
             const schemaBtn = h('button', {
                 class: 'btn btn--sm',
                 type: 'button',

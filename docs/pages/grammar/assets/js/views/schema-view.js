@@ -1,10 +1,10 @@
 /**
- * 数据格式：四篇 JSON 结构文档。
- * 结构与语法页一致 —— 左侧「篇」+「本页目录」，右侧正文；正文开头一条结论，篇尾翻页。
+ * 数据格式：几章 JSON 结构文档。
+ * 结构与语法页一致 —— 左侧「章节」+「本页目录」，右侧正文；正文开头一条结论，章尾翻页。
  */
 
 import { h, replace } from '../utils/dom.js'
-import { appStore } from '../app-state.js'
+import { appStore, setNavContext } from '../app-state.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { renderMarkdown, scanHeadings } from '../utils/markdown.js'
 import { loadSchema, copyText, downloadMarkdown } from '../services/schema-service.js'
@@ -14,11 +14,18 @@ import { toast } from '../components/toast.js'
 
 const NARROW = '(max-width: 1024px)'
 
+/* 从哪个路由进的数据格式：本页切换文档会再走一次 schema → schema，不能让它冲掉来源 */
+let entryFrom = null
+
 export default {
     needsUser: false,
     layout: 'shell',
 
     async mount(main, ctx) {
+        // 入口来源要在任何提前返回之前记下：'#/schema' 会重定向到 '#/schema/<doc>'
+        const prevRoute = appStore.get().prevRoute
+        if (prevRoute && prevRoute !== 'schema') entryFrom = prevRoute
+
         const raw = (ctx.params && ctx.params.doc) || ''
         const [rawId, rawAnchor] = raw.split('#')
         const anchor = rawAnchor || (ctx.query && ctx.query.ref) || ''
@@ -55,10 +62,14 @@ export default {
 
         const doc = docs[index]
 
+        // 从首页（未登录 / 欢迎页）进来的回首页，否则回语言列表
+        const fromHome = entryFrom === 'welcome' || !appStore.get().userId
+        // 顶栏也跟着回到来源：从首页进来时「生词本」「设置」都回首页
+        setNavContext(fromHome ? 'welcome' : 'user')
         setBreadcrumbs([
-            appStore.get().userId
-                ? { label: '语言选择', href: '#/languages' }
-                : { label: '首页', href: '#/welcome' },
+            fromHome
+                ? { label: '首页', href: '#/welcome' }
+                : { label: '语言列表', href: '#/languages' },
             // 当前手册不再进面包屑：末项就是「数据格式」本身
             { label: title }
         ])
@@ -119,7 +130,7 @@ function render(main, { title, docs, index, doc, anchor }) {
         }
     }
 
-    const head = h('div', { class: 'page-head schema-head' },
+    const head = h('div', { class: 'page-head page-head--display schema-head' },
         h('div', {},
             h('h1', { class: 'page-head__title' }, title),
             h('div', { class: 'page-head__sub' }, doc.title)
@@ -129,12 +140,12 @@ function render(main, { title, docs, index, doc, anchor }) {
         )
     )
 
-    /* ---------------- 左栏：篇 + 本页目录 ---------------- */
+    /* ---------------- 左栏：章节 + 本页目录 ---------------- */
 
     const nav = h('aside', { class: 'grammar-nav', 'aria-label': '数据格式目录' })
 
     const parts = h('div', { class: 'grammar-chapters' },
-        h('div', { class: 'grammar-nav__title' }, '篇')
+        h('div', { class: 'grammar-nav__title' }, '章节')
     )
     for (const item of docs) {
         parts.appendChild(h('a', {
@@ -187,24 +198,24 @@ function render(main, { title, docs, index, doc, anchor }) {
         toc.appendChild(link)
     }
 
-    /* ---------------- 篇尾翻页 ---------------- */
+    /* ---------------- 章尾翻页 ---------------- */
 
     const prev = docs[index - 1]
     const next = docs[index + 1]
-    content.appendChild(h('nav', { class: 'doc-pager', 'aria-label': '篇目翻页' },
+    content.appendChild(h('nav', { class: 'doc-pager', 'aria-label': '章节翻页' },
         prev
             ? h('a', { class: 'doc-pager__link', href: `#/schema/${prev.id}` },
-                h('span', { class: 'doc-pager__dir' }, '上一篇'),
+                h('span', { class: 'doc-pager__dir' }, '上一章'),
                 h('span', { class: 'doc-pager__title' }, prev.title))
             : null,
         next
             ? h('a', { class: 'doc-pager__link doc-pager__link--next', href: `#/schema/${next.id}` },
-                h('span', { class: 'doc-pager__dir' }, '下一篇'),
+                h('span', { class: 'doc-pager__dir' }, '下一章'),
                 h('span', { class: 'doc-pager__title' }, next.title))
             : null
     ))
 
-    /* ---------------- 跨篇锚点 ---------------- */
+    /* ---------------- 跨章锚点 ---------------- */
 
     const anchorDocs = new Map()
     for (const item of docs) {
@@ -229,7 +240,7 @@ function render(main, { title, docs, index, doc, anchor }) {
             location.hash = `#/schema/${where}#${target}`
             return
         }
-        toast.error('这篇文档里没有该条目', 2600)
+        toast.error('这一章里没有该条目', 2600)
     })
 
     replace(main, head, h('div', { class: 'grammar-layout' }, nav, content))

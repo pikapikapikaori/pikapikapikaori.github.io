@@ -4,6 +4,7 @@ import { getLanguage } from '../data/languages.js'
 import { buildQueue, answer, createSessionStats } from '../services/review-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
 import { posLabel } from '../models/word.js'
+import { termsOf } from '../models/grammar.js'
 import { bdiNode } from '../utils/bdi.js'
 import { annotateBreves, setBreveVisible } from '../utils/breve.js'
 import { createPageTools } from '../components/page-tools.js'
@@ -26,7 +27,7 @@ export default {
         }
 
         setBreadcrumbs([
-            { label: '语言选择', href: '#/languages' },
+            { label: '语言列表', href: '#/languages' },
             { label: language.name, href: `#/lang/${lang}/words` },
             { label: '复习' }
         ])
@@ -39,9 +40,9 @@ export default {
         const statEl = h('div', { class: 'review-counts' })
         const headEl = h('div', { class: 'page-head page-head--display' },
             h('div', {},
-                h('h1', { class: 'page-head__title' }, '复习'),
-                h('div', { class: 'page-head__sub' },
-                    bdiNode(language.native, lang), ' · ', language.name)
+                h('h1', { class: 'page-head__title' },
+                    bdiNode(language.native, lang), ' · ', language.name),
+                h('div', { class: 'page-head__sub' }, '复习')
             ),
             statEl
         )
@@ -163,18 +164,19 @@ export default {
         }
 
         function buildBack(word) {
+            const t = termsOf(language, word.pos)
             const source = (word.meanings || []).filter((m) => (m.text || '').trim())
             const meanings = source.filter((m) => (m.source || 'manual') === 'manual')
             const list = meanings.length ? meanings : source
 
             const parts = [
                 h('div', { class: 'review-section' },
-                    h('div', { class: 'review-section__label' }, '含义'),
+                    h('div', { class: 'review-section__label' }, t.meanings),
                     list.length
-                        ? h('div', { class: 'review-meanings' },
-                            ...list.map((m) => h('div', { class: 'review-meaning' }, h('bdi', {}, m.text)))
+                        ? h('ol', { class: 'review-meanings' },
+                            ...list.map((m) => h('li', { class: 'review-meaning' }, h('bdi', {}, m.text)))
                         )
-                        : h('div', { class: 'review-empty' }, '还没有填写含义')
+                        : h('div', { class: 'review-empty' }, t.emptyMeanings)
                 )
             ]
 
@@ -191,7 +193,7 @@ export default {
             }
             if (tables.length) {
                 parts.push(h('div', { class: 'review-section review-section--table' },
-                    h('div', { class: 'review-section__label' }, '变格 / 变位'),
+                    h('div', { class: 'review-section__label' }, t.paradigmTable),
                     ...tables
                 ))
             }

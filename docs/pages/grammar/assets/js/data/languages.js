@@ -3,7 +3,7 @@ import { grammarFlags } from '../models/grammar.js'
 
 /**
  * 语言元数据：真源是 `data/language/<code>/meta.json`，这里只负责把它们全拉一遍并缓存
- * （语言选择页需要所有语言的元信息；语法正文按章在打开时再取）。
+ * （语言列表页需要所有语言的元信息；语法正文按章在打开时再取）。
  */
 
 /** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */

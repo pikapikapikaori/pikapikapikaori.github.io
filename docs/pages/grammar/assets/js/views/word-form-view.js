@@ -53,12 +53,14 @@ export default {
         const isEdit = !!editId
 
         setBreadcrumbs([
-            { label: '语言选择', href: '#/languages' },
+            { label: '语言列表', href: '#/languages' },
             { label: language.name, href: `#/lang/${lang}/words` },
             { label: isEdit ? '编辑生词' : '添加生词' }
         ])
 
         const grammarDoc = await loadGrammar(lang)
+        // 没有语法数据的语言（英 / 古汉语）也要能读到 meta.terms 里的文案
+        const grammarMeta = await loadGrammarMeta(lang)
 
         // 外部数据源：按 config 清单逐个动态 import，缺文件 / 离线时跳过
         const externalSources = (await Promise.all(EXTERNAL_SOURCES.map(async (src) => {
@@ -76,7 +78,20 @@ export default {
         }))).filter(Boolean)
         // 语言可以自定义「词干」的叫法与提示（如希伯来语是词根辅音）
         /** 当前词性的界面用词（各语言在自己的 JSON 里声明） */
-        function currentTerms() { return termsOf(grammarDoc, posSelect.value) }
+        // 用 data.pos 而不是 posSelect.value：后者在表单搭好之前还取不到（TDZ）
+        function currentTerms() { return termsOf(grammarDoc || grammarMeta, data.pos) }
+
+        /** 取 terms 里的文案；`lemma.label` 这种带点的键走子对象 */
+        function termText(key, suffix = '') {
+            const t = currentTerms()
+            const value = key.split('.').reduce((obj, k) => (obj == null ? undefined : obj[k]), t)
+            return (typeof value === 'string' ? value : '') + (suffix ? t[suffix] : '')
+        }
+
+        /** 文案来自 terms：挂 data-term，切词性时由 applyTerms() 统一刷新（data-term-suffix 追加可选后缀） */
+        function termNode(key, suffix = '') {
+            return h('span', { dataset: { term: key, termSuffix: suffix } }, termText(key, suffix))
+        }
 
         /** 说明文字可能夹原文（如希伯来语词尾 ־ָה / ־ֶת），按字符范围包 bdi */
         function hintText(text) { return bdiText(text, lang) }
@@ -102,11 +117,22 @@ export default {
             refreshStemsText()
             const extra = form.querySelector('.js-extra-forms-title')
             if (extra) extra.textContent = t.extraForms
+
+            for (const el of form.querySelectorAll('[data-term]')) {
+                el.textContent = termText(el.dataset.term, el.dataset.termSuffix)
+            }
+            // placeholder 与空态文案在行渲染时取，重新渲染这几块
+            renderMeanings()
+            renderInflections()
+            renderCollocations()
+            renderExamples()
+            renderDerivatives()
+            renderExtras()
         }
         const paradigmProfile = await loadParadigmProfile(lang, grammarDoc)
         // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写。
         // 注意第二个参数是 meta（要读 meta.files.script），不是 grammar 文档。
-        const scriptProfile = await loadScriptProfile(lang, await loadGrammarMeta(lang))
+        const scriptProfile = await loadScriptProfile(lang, grammarMeta)
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
         if (isEdit && !data) {
@@ -171,12 +197,10 @@ export default {
         const head = h('div', { class: 'page-head page-head--display' },
             h('div', {},
                 h('h1', { class: 'page-head__title' },
-                    isEdit ? '编辑生词' : '添加生词'
-                ),
-                h('div', { class: 'page-head__sub' },
                     bdiNode(language.native, lang),
                     ' · ', language.name
-                )
+                ),
+                h('div', { class: 'page-head__sub' }, isEdit ? '编辑生词' : '添加生词')
             )
         )
 
@@ -259,7 +283,7 @@ export default {
         const lemmaField = createGhostInput({
             value: data.lemma,
             lang,
-            placeholder: grammarDoc?.terms?.lemma?.placeholder || '基本形态',
+            placeholder: currentTerms().lemma.placeholder,
             disabled: isEdit,
             // 基本形态可以推出词干（stemForms.base.from = 'headword'）时影响 placeholder 预览
             onInput: () => {
@@ -546,11 +570,11 @@ export default {
         // 语法锚点下拉：特殊变格/变位 + 语法速查条目
 
         form.appendChild(h('div', { class: 'word-form__row word-form__card' },
-            fieldRow('基本形态', lemmaField.el, {
-                hint: '唯一键的一部分，同一语言下必须唯一。编辑时不可修改。',
+            fieldRow(termNode('lemma.label'), lemmaField.el, {
+                extras: [h('span', { class: 'field__hint' }, termNode('lemmaHint'))],
                 lang
             }),
-            fieldRow('词性', h('div', { class: 'field__row' },
+            fieldRow(termNode('posLabel'), h('div', { class: 'field__row' },
                 posSelect,
                 externalSources.length ? lookupBtn : null
             ), { extras: [lookupStatus], target: posSelect })
@@ -562,7 +586,7 @@ export default {
         // 语法性之类的属性 + 类型 + 锚点：一行放不下时自适应换行
         const inflectionRow = h('div', { class: 'word-form__panel' },
             genderSlot,
-            fieldRow('语法锚点', inflectionRef, { extras: [anchorHintEl] }),
+            fieldRow(termNode('anchorLabel'), inflectionRef, { extras: [anchorHintEl] }),
             fieldRow(inflectionTypeLabelEl, inflectionField.el, { extras: [inflectionTypeHintEl] })
         )
 
@@ -700,7 +724,7 @@ export default {
         function refreshStemsText() {
             const t = currentTerms()
             const base = currentBasePart()
-            lemmaInput.placeholder = t.lemma.placeholder || '基本形态'
+            lemmaInput.placeholder = t.lemma.placeholder
             stemsLabelEl.textContent = base?.label || t.stems.label
             stemsHintEl.replaceChildren(hintText(base?.hint || t.stems.hint))
             principalInput.placeholder = base?.placeholder || t.stems.placeholder
@@ -1089,7 +1113,7 @@ export default {
             }
 
             wrap.appendChild(h('div', { class: 'field__hint word-form__table-hint' },
-                hintText('仅填写你需要的形式，空白格不渲染')))
+                termNode('paradigmHint')))
 
             paradigmSlot.appendChild(wrap)
         }
@@ -1318,18 +1342,18 @@ export default {
         function buildMeaningGroup() {
             const tabs = h('div', { class: 'source-tabs word-form__meaning-tabs' })
             const list = h('div', { class: 'word-form__list' })
-            const empty = h('div', { class: 'field__hint' }, hintText('该来源还没有含义'))
+            const empty = h('div', { class: 'field__hint' }, termNode('emptyMeanings'))
 
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, '含义'),
+                    termNode('meanings'),
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
                             data.meanings.push({ text: '', lang: 'zh', source: meaningSource })
                             renderMeanings()
                         }
-                    }, '＋ 添加含义')
+                    }, currentTerms().addMeaning)
                 ),
                 tabs,
                 empty,
@@ -1390,7 +1414,7 @@ export default {
                             value: m.text,
                             lang: m.lang === 'en' ? 'en' : null,
                             bdiLang: lang,
-                            placeholder: '含义',
+                            placeholder: currentTerms().meaningPlaceholder,
                             onInput: (e) => {
                                 m.text = e.target.value
                                 renumber()
@@ -1433,7 +1457,7 @@ export default {
                             data.inflections.push({ group: '', label: '', form: '' })
                             renderInflections()
                         }
-                    }, '＋ 添加')
+                    }, currentTerms().add)
                 ),
                 list
             )
@@ -1446,17 +1470,17 @@ export default {
                     list.appendChild(h('div', { class: 'word-form__item word-form__item--inflection' },
                         indexCell(),
                         h('input', {
-                            class: 'input', placeholder: '分组（可选）', value: it.group || '',
+                            class: 'input', placeholder: currentTerms().inflectionGroupPlaceholder, value: it.group || '',
                             oninput: (e) => { it.group = e.target.value }
                         }),
                         h('input', {
-                            class: 'input', placeholder: '标签', value: it.label,
+                            class: 'input', placeholder: currentTerms().inflectionLabelPlaceholder, value: it.label,
                             oninput: (e) => { it.label = e.target.value }
                         }),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.form,
                             lang,
-                            placeholder: '形态',
+                            placeholder: currentTerms().inflectionFormPlaceholder,
                             onInput: (e) => {
                                 it.form = e.target.value
                                 renumber()
@@ -1481,18 +1505,18 @@ export default {
         function buildCollocationGroup() {
             const tabs = h('div', {})
             const list = h('div', { class: 'word-form__list' })
-            const empty = h('div', { class: 'field__hint' }, '该来源还没有固定搭配')
+            const empty = h('div', { class: 'field__hint' }, termNode('emptyCollocations'))
 
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, '固定搭配（可选）'),
+                    termNode('collocations', 'optionalSuffix'),
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
                             data.collocations.push({ text: '', gloss: '', source: collocationSource })
                             render()
                         }
-                    }, '＋ 添加')
+                    }, currentTerms().add)
                 ),
                 tabs,
                 empty,
@@ -1518,14 +1542,14 @@ export default {
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
                             lang,
-                            placeholder: '固定搭配原文',
+                            placeholder: currentTerms().collocationTextPlaceholder,
                             onInput: (e) => {
                                 it.text = e.target.value
                                 renumberItems(list, (i) => String(rows[i]?.it.text || '').trim() !== '')
                             }
                         })),
                         h('input', {
-                            class: 'input', placeholder: '含义', value: it.gloss,
+                            class: 'input', placeholder: currentTerms().collocationGlossPlaceholder, value: it.gloss,
                             oninput: (e) => { it.gloss = e.target.value }
                         }),
                         h('button', {
@@ -1604,17 +1628,17 @@ export default {
         function buildExampleGroup() {
             const tabs = h('div', {})
             const list = h('div', { class: 'word-form__list' })
-            const empty = h('div', { class: 'field__hint' }, '该来源还没有例句')
+            const empty = h('div', { class: 'field__hint' }, termNode('emptyExamples'))
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, '例句（可选）'),
+                    termNode('examples', 'optionalSuffix'),
                     h('button', {
                         class: 'btn btn--sm', type: 'button',
                         onclick: () => {
                             data.examples.push({ text: '', translation: '', citation: '', source: exampleSource })
                             renderExamples()
                         }
-                    }, '＋ 添加')
+                    }, currentTerms().add)
                 ),
                 tabs,
                 empty,
@@ -1644,18 +1668,18 @@ export default {
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
                             lang,
-                            placeholder: '例句原文',
+                            placeholder: currentTerms().exampleTextPlaceholder,
                             onInput: (e) => {
                                 it.text = e.target.value
                                 renumberItems(list, (i) => String(rows[i]?.it.text || '').trim() !== '')
                             }
                         })),
                         h('input', {
-                            class: 'input', placeholder: '出处', value: it.citation,
+                            class: 'input', placeholder: currentTerms().exampleCitationPlaceholder, value: it.citation,
                             oninput: (e) => { it.citation = e.target.value }
                         }),
                         h('input', {
-                            class: 'input word-form__cell--translation', placeholder: '含义', value: it.translation,
+                            class: 'input word-form__cell--translation', placeholder: currentTerms().exampleTranslationPlaceholder, value: it.translation,
                             oninput: (e) => { it.translation = e.target.value }
                         }),
                         createSelect({
@@ -1687,7 +1711,7 @@ export default {
 
             const searchField = createGhostInput({
                 lang,
-                placeholder: '搜索本语言词库（基本形态 / 词干）…',
+                placeholder: currentTerms().derivativeSearchPlaceholder,
                 onInput: () => scheduleSearch()
             })
             const searchInput = searchField.input
@@ -1748,7 +1772,7 @@ export default {
             function renderSelected() {
                 selected.replaceChildren()
                 if (!data.derivatives.length) {
-                    selected.appendChild(h('span', { class: 'field__hint' }, hintText('尚未选择派生词')))
+                    selected.appendChild(h('span', { class: 'field__hint' }, termNode('derivativeEmptyHint')))
                     return
                 }
                 for (const lemma of data.derivatives) {
@@ -1770,12 +1794,12 @@ export default {
 
             const group = h('div', { class: 'word-form__group' },
                 h('div', { class: 'word-form__group-title' },
-                    h('span', {}, '派生词（可选）')
+                    termNode('derivatives', 'optionalSuffix')
                 ),
                 h('div', { class: 'derivative-picker' },
                     selected,
-                    fieldRow('搜索词条', searchField.el, {
-                        extras: [h('span', { class: 'field__hint' }, hintText('只能选择词库中已存在的词')), hint]
+                    fieldRow(termNode('derivativeSearchLabel'), searchField.el, {
+                        extras: [h('span', { class: 'field__hint' }, termNode('derivativeSearchHint')), hint]
                     }),
                     results
                 )
@@ -1789,12 +1813,12 @@ export default {
         function buildExtrasGroup() {
             tagsInput = h('input', {
                 class: 'input',
-                placeholder: '标签，用逗号分隔（如 高频, 文献A）',
+                placeholder: currentTerms().tagsPlaceholder,
                 value: data.tags.join(', ')
             })
             const notesInput = h('textarea', {
                 class: 'textarea',
-                placeholder: '备注',
+                placeholder: currentTerms().notesPlaceholder,
                 value: data.notes
             })
             renderExtras = () => {
@@ -1803,8 +1827,9 @@ export default {
             }
 
             return h('div', { class: 'word-form__group word-form__extras' },
-                field('标签', tagsInput, '', lang),
-                field('备注', notesInput, '', lang)
+                h('div', { class: 'word-form__group-title' }, termNode('others')),
+                field(termNode('tags'), tagsInput, '', lang),
+                field(termNode('notes'), notesInput, '', lang)
             )
         }
 

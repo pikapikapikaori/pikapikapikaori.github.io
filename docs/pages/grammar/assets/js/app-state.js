@@ -7,10 +7,12 @@ export const appStore = createStore({
     user: null,
     language: null,
     route: null,
+    prevRoute: null,
+    /** 顶栏按哪个上下文导航：'user' = 语言列表 / 设置，'welcome' = 首页（从欢迎页进来的文档页） */
+    navContext: 'user',
     params: {},
     query: {},
-    settings: null,
-    ready: false
+    settings: null
 })
 
 export function setUser(user) {
@@ -26,5 +28,10 @@ export function setSettings(settings) {
 }
 
 export function setRoute(route, params, query) {
-    appStore.set({ route, params: params || {}, query: query || {} })
+    const prevRoute = appStore.get().route
+    appStore.set({ route, prevRoute, params: params || {}, query: query || {} })
+}
+
+export function setNavContext(navContext) {
+    appStore.set({ navContext: navContext === 'welcome' ? 'welcome' : 'user' })
 }

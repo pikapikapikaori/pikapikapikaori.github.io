@@ -4,7 +4,7 @@ import { openDB } from './store/db.js'
 import { getUser, listUsers } from './store/user-store.js'
 import { getSettings, saveSettings } from './store/settings-store.js'
 import { createRouter } from './router.js'
-import { appStore, setUser, setLanguage, setSettings, setRoute } from './app-state.js'
+import { appStore, setUser, setLanguage, setSettings, setRoute, setNavContext } from './app-state.js'
 import { h, replace, qs } from './utils/dom.js'
 import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
 import { enhanceSelects } from './components/select-menu.js'
@@ -42,21 +42,42 @@ function renderHeader() {
         }
     })
 
+    // 从欢迎页进来的文档页：顶栏回首页，而不是回语言列表 / 设置
+    const home = () => appStore.get().navContext === 'welcome'
+
     return h('header', { class: 'app-header' },
-        h('a', { class: 'app-header__brand', href: '#/languages' }, '生词本'),
+        h('a', {
+            class: 'app-header__brand js-header-brand',
+            href: home() ? '#/welcome' : '#/languages'
+        }, '生词本'),
         h('div', { class: 'app-header__spacer' }),
         h('div', { class: 'app-header__actions' },
             themeToggle,
             h('button', {
                 class: 'btn btn--ghost btn--icon', title: '设置',
-                onclick: () => router.navigate('/settings')
+                onclick: () => router.navigate(home() ? '/welcome' : '/settings')
             }, settingsIcon()),
             h('button', {
-                class: 'btn btn--ghost', title: '切换用户',
-                onclick: () => router.navigate('/welcome')
-            }, '用户')
+                class: 'btn btn--ghost', title: '注销当前用户',
+                onclick: () => logout()
+            }, '注销')
         )
     )
+}
+
+/** 顶栏在视图挂载后才确定上下文（数据格式页按来源决定），挂载结束后同步品牌链接 */
+function syncHeader() {
+    const brand = qs('.js-header-brand')
+    if (!brand) return
+    brand.setAttribute('href', appStore.get().navContext === 'welcome' ? '#/welcome' : '#/languages')
+}
+
+/** 注销：清掉当前用户的选择（数据留在库里），回欢迎页重新选 */
+function logout() {
+    try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
+    setUser(null)
+    appStore.set({ settings: null })
+    router.navigate('/welcome')
 }
 
 function renderShell({ withHeader, withMain }) {
@@ -146,6 +167,8 @@ async function mountView(name, ctx) {
     
     clearBreadcrumbs()
     hideVerticalPopover()
+    // 默认按「用户」上下文导航；文档页会在自己的 mount 里改成欢迎页上下文
+    setNavContext('user')
 
     const container = isFull
         ? renderShell({ withHeader: false, withMain: false })
@@ -176,6 +199,7 @@ async function mountView(name, ctx) {
             .catch((err) => console.warn('[ime] 输入助手加载失败，已跳过', err))
     }
     applyBreadcrumbs()
+    syncHeader()
 }
 
 /* ---------------- 启动 ---------------- */

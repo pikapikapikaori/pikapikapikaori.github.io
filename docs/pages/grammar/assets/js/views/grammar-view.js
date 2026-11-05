@@ -48,7 +48,7 @@ export default {
         }
 
         setBreadcrumbs([
-            { label: '语言选择', href: '#/languages' },
+            { label: '语言列表', href: '#/languages' },
             { label: language.name, href: `#/lang/${lang}/words` },
             { label: '语法速查' }
         ])
@@ -91,7 +91,7 @@ export default {
 
 function renderNoData(main, lang, language) {
     replace(main,
-        h('div', { class: 'page-head' },
+        h('div', { class: 'page-head page-head--display' },
             h('div', {},
                 h('h1', { class: 'page-head__title' },
                     bdiNode(language.native, lang), ' · ', language.name
@@ -364,7 +364,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     }
 
     replace(main,
-        h('div', { class: 'page-head' },
+        h('div', { class: 'page-head page-head--display' },
             h('div', {},
                 h('h1', { class: 'page-head__title' },
                     bdiNode(language.native, lang), ' · ', language.name

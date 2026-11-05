@@ -1,11 +1,12 @@
 /** 设置 */
 
 import { h, replace } from '../utils/dom.js'
-import { appStore, setSettings } from '../app-state.js'
+import { appStore, setSettings, setUser } from '../app-state.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
 import { exportUser, importUser } from '../services/import-export-service.js'
 import { listAll } from '../store/word-store.js'
-import { deleteUser } from '../store/user-store.js'
+import { deleteUser, saveUser } from '../store/user-store.js'
+import { clearHttpCache } from '../store/http-cache.js'
 import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import {
@@ -26,20 +27,21 @@ export default {
     async mount(main, ctx) {
         const state = appStore.get()
         const userId = state.userId
-        const user = state.user
+        let user = state.user
 
         setBreadcrumbs([
-            { label: '语言选择', href: '#/languages' },
+            { label: '语言列表', href: '#/languages' },
             { label: '设置' }
         ])
 
         let settings = await getSettings(userId)
 
         /* ---------- 头部 ---------- */
+        const headSub = h('div', { class: 'page-head__sub' }, `当前用户：${user.name}`)
         const head = h('div', { class: 'page-head page-head--display' },
             h('div', {},
                 h('h1', { class: 'page-head__title' }, '设置'),
-                h('div', { class: 'page-head__sub' }, `当前用户：${user.name}`)
+                headSub
             )
         )
 
@@ -51,6 +53,37 @@ export default {
             settings = await saveSettings(userId, patch)
             setSettings(settings)
             return settings
+        }
+
+        /* ---------- 用户名 ---------- */
+        const nameInput = h('input', {
+            class: 'input',
+            style: { width: '200px' },
+            value: user.name,
+            onkeydown: (e) => { if (e.key === 'Enter') e.currentTarget.blur() },
+            onblur: () => { commitUserName() }
+        })
+
+        /** 用户名不允许空格：去掉全部空白字符，空值退回默认名 */
+        async function commitUserName() {
+            const name = String(nameInput.value || '').replace(/\s+/g, '') || '未命名用户'
+            nameInput.value = name
+            if (name === user.name) return
+            // 先同步更新全局状态：切页保存时下一个视图的页头才不会读到旧名字
+            const prev = user
+            user = { ...user, name }
+            setUser(user)
+            headSub.textContent = `当前用户：${user.name}`
+            try {
+                user = await saveUser(user)
+                setUser(user)
+            } catch (err) {
+                user = prev
+                setUser(user)
+                headSub.textContent = `当前用户：${user.name}`
+                nameInput.value = user.name
+                toast.error(`改名失败：${err.message}`)
+            }
         }
 
         /* ---------- 外观 ---------- */
@@ -95,8 +128,9 @@ export default {
             )
         ))
 
-        /* ---------- 数据管理 ---------- */
-        container.appendChild(buildSection('数据管理',
+        /* ---------- 用户设置 ---------- */
+        container.appendChild(buildSection('用户设置',
+            row('用户名', '不可含空格；改完失焦即保存', nameInput),
             row('导出 JSON', '导出当前用户全部语言的全部词条与设置',
                 h('button', {
                     class: 'btn btn--primary', type: 'button',
@@ -298,10 +332,15 @@ export default {
                 await deleteUser(userId)
                 try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
                 appStore.set({ user: null, userId: null, settings: null })
+                // 外部源的 HTTP 响应缓存也是这份数据的一部分
+                clearHttpCache().catch((err) => console.warn('[http-cache] 清理失败', err))
                 location.hash = '#/welcome'
             } catch (err) {
                 toast.error(`清空失败：${err.message}`)
             }
         }
+
+        // 切走页面时把没失焦的用户名改动落库
+        return () => { commitUserName() }
     }
 }

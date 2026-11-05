@@ -1,7 +1,7 @@
 import { h } from '../utils/dom.js'
 import { applyBdi } from '../utils/bdi.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
-import { fieldDefsOfTemplate, fieldValues, genderOfColumn, genderOfRow } from '../models/grammar.js'
+import { fieldDefsOfTemplate, fieldValues, genderOfColumn, genderOfRow, termsOf } from '../models/grammar.js'
 import { getLanguage } from '../data/languages.js'
 import { BREVE_LANGS } from '../config/config.js'
 import { createSourceTabs } from './source-tabs.js'
@@ -170,6 +170,8 @@ export function openCardOverlay(word, opts = {}) {
 
         /* ---------- 顶部：lemma + badges ---------- */
         const langMeta = getLanguage(word.language)
+        // 分区标题跟随该语言的 terms
+        const terms = termsOf(langMeta, word.pos)
         const canPosRef = typeof onGrammarRef === 'function' && !!posGrammarRef
             && langMeta?.grammar !== false
         const badges = h('div', { class: 'card-overlay__badges' },
@@ -229,7 +231,7 @@ export function openCardOverlay(word, opts = {}) {
         const meanings = pick(word.meanings, activeSource)
         const showTabs = sources.length > 1
         if (meanings.length || showTabs) {
-            body.appendChild(ovSection('含义',
+            body.appendChild(ovSection(terms.meanings,
                 showTabs
                     ? createSourceTabs(sources, activeSource, (s) => {
                         activeSource = s
@@ -299,13 +301,13 @@ export function openCardOverlay(word, opts = {}) {
                     ))
                 ))
             }
-            body.appendChild(ovSection('补充形式', container))
+            body.appendChild(ovSection(terms.extraForms, container))
         }
 
         /* ---------- 固定搭配 ---------- */
         const cols = pick(word.collocations, activeCollocationSource)
         if (cols.length || showTabs) {
-            body.appendChild(ovSection('固定搭配',
+            body.appendChild(ovSection(terms.collocations,
                 showTabs
                     ? createSourceTabs(sources, activeCollocationSource, (s) => {
                         activeCollocationSource = s
@@ -321,7 +323,7 @@ export function openCardOverlay(word, opts = {}) {
         /* ---------- 例句 ---------- */
         const exs = pick(word.examples, activeExampleSource)
         if (exs.length || showTabs) {
-            body.appendChild(ovSection('例句',
+            body.appendChild(ovSection(terms.examples,
                 showTabs
                     ? createSourceTabs(sources, activeExampleSource, (s) => {
                         activeExampleSource = s
@@ -339,7 +341,7 @@ export function openCardOverlay(word, opts = {}) {
 
         /* ---------- 派生词 ---------- */
         if (word.derivatives && word.derivatives.length) {
-            body.appendChild(ovSection('派生词',
+            body.appendChild(ovSection(terms.derivatives,
                 h('div', { class: 'word-card__derivatives' },
                     ...word.derivatives.map((d) => {
                         const target = resolveDerivative ? resolveDerivative(d) : null
@@ -365,7 +367,7 @@ export function openCardOverlay(word, opts = {}) {
 
         /* ---------- 备注 ---------- */
         if (word.notes) {
-            body.appendChild(ovSection('备注', h('div', {}, word.notes)))
+            body.appendChild(ovSection(terms.notes, h('div', {}, word.notes)))
         }
 
         annotateRoman()

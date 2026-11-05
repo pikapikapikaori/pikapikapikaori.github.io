@@ -41,7 +41,7 @@ export default {
         }
 
         setBreadcrumbs([
-            { label: '语言选择', href: '#/languages' },
+            { label: '语言列表', href: '#/languages' },
             { label: language.name }
         ])
 

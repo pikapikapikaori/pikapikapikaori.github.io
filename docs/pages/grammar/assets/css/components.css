@@ -351,6 +351,7 @@
 /* 键帽：把「按什么键」直接画在输入框里，不另写一句提示 */
 .ghost-input__key {
     display: inline-flex;
+    font-family: var(--ff-ui);
     align-items: center;
     height: 17px;
     padding: 0 5px;
@@ -378,7 +379,7 @@
 }
 
 .ghost-input--space > .input {
-    padding-right: 44px;
+    padding-right: 34px;
 }
 
 /* 单行控件统一高度：显式 height 抵消 input 继承的 line-height 与 select 原生行高的差异 */

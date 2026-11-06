@@ -7,6 +7,7 @@ import { h, replace } from '../utils/dom.js'
 import { appStore, setNavContext } from '../app-state.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { renderMarkdown, scanHeadings } from '../utils/markdown.js'
+import { wrapScriptText } from '../utils/bdi.js'
 import { loadSchema, copyText, downloadMarkdown } from '../services/schema-service.js'
 import { createPageTools } from '../components/page-tools.js'
 import { toast } from '../components/toast.js'
@@ -160,10 +161,12 @@ function render(main, { title, docs, index, doc, anchor }) {
     if (doc.lead) {
         const lead = h('blockquote', { class: 'doc-quote doc-quote--lead' })
         lead.appendChild(renderMarkdown(doc.lead))
+        wrapScriptText(lead)
         content.appendChild(lead)
     }
     content.appendChild(body)
     body.appendChild(renderMarkdown(doc.markdown))
+    wrapScriptText(body)
 
     const headings = scanHeadings(doc.markdown)
 

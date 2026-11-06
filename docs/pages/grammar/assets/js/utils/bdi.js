@@ -66,9 +66,83 @@ export function bdiText(text, lang) {
         : document.createTextNode(run.text))))
 }
 
-/** 不判定内容，整段直接包成一个 <bdi> */
+/** 文档正文里能靠字符范围认出来的文字：命中的片段用各自的字体显示 */
+const SCRIPT_TEXT_RANGES = [
+    ['mnc', /[\u1800-\u18AF]/],
+    ['he', /[\u0590-\u05FF\uFB1D-\uFB4F]/],
+    ['sa', /[\u0900-\u097F]/],
+    ['grc', /[\u0370-\u03FF\u1F00-\u1FFF]/]
+]
+
+function scriptOf(text) {
+    for (const [lang, re] of SCRIPT_TEXT_RANGES) {
+        if (re.test(text)) return lang
+    }
+    return null
+}
+
+/** 把一段文字切成「该文字 / 其它」两种片段 */
+function splitByRange(text, re) {
+    const runs = []
+    let buf = ''
+    let current = null
+    for (const ch of text) {
+        const hit = re.test(ch)
+        if (current === null || hit === current) {
+            buf += ch
+            current = hit
+        } else {
+            runs.push({ text: buf, script: current })
+            buf = ch
+            current = hit
+        }
+    }
+    if (buf) runs.push({ text: buf, script: !!current })
+    return runs
+}
+
+/**
+ * 文档正文用：把能认出来的原文包成 <bdi lang dir>。
+ * 拉丁字母、汉字、假名认不出来（会和正文混在一起），那些由文档自己写 <bdi>。
+ * 跳过已有 bdi 与代码块 —— 代码块要按原样显示。
+ */
+export function wrapScriptText(root) {
+    if (!root || !root.querySelectorAll) return root
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+            if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT
+            const parent = node.parentNode
+            if (parent && parent.closest && parent.closest('bdi, pre, code, kbd')) return NodeFilter.FILTER_REJECT
+            return NodeFilter.FILTER_ACCEPT
+        }
+    })
+    const targets = []
+    while (walker.nextNode()) targets.push(walker.currentNode)
+
+    for (const node of targets) {
+        const text = node.nodeValue
+        const lang = scriptOf(text)
+        if (!lang) continue
+        const re = SCRIPT_TEXT_RANGES.find(([code]) => code === lang)[1]
+        const runs = splitByRange(text, re)
+        if (!runs.some((run) => run.script)) continue
+        const frag = document.createDocumentFragment()
+        for (const run of runs) {
+            frag.appendChild(run.script
+                ? h('bdi', { lang, dir: needsBdi(lang) ? bdiDir(lang) : undefined }, run.text)
+                : document.createTextNode(run.text))
+        }
+        node.parentNode.replaceChild(frag, node)
+    }
+    return root
+}
+
+/**
+ * 整段都是该语言的文字：一律带 lang（字体由 lang.css 决定，界面字体设置不影响它）。
+ * dir 只给需要隔离方向的语言。
+ */
 export function bdiNode(text, lang) {
-    return h('bdi', { lang: needsBdi(lang) ? lang : undefined, dir: needsBdi(lang) ? bdiDir(lang) : undefined },
+    return h('bdi', { lang: lang || undefined, dir: needsBdi(lang) ? bdiDir(lang) : undefined },
         String(text ?? ''))
 }
 

@@ -5,7 +5,7 @@ import { bdiText } from '../utils/bdi.js'
 import { createEditableInput } from './editable-input.js'
 
 /**
- * `spaceKey` 为真时右缘挂「空格」键帽；有补全时灰字尾部挂「Tab」。
+ * `spaceKey` 为真时右缘挂「␣」键帽；有补全时灰字尾部挂「Tab」。
  * @returns {{ el, input, refresh }}
  */
 export function createGhostInput({
@@ -22,7 +22,8 @@ export function createGhostInput({
     onInput = null
 } = {}) {
     const scriptLang = bdiLang || lang
-    const hint = h('span', { class: 'ghost-input__hint', 'aria-hidden': 'true' })
+    // 提示层是语言文字与说明的混排：带 lang 后，语言字体只接管它自己那部分字符，中文仍回落界面字体
+    const hint = h('span', { class: 'ghost-input__hint', 'aria-hidden': 'true', lang: lang || undefined })
 
     const input = createEditableInput({
         value,
@@ -44,7 +45,7 @@ export function createGhostInput({
 
     const showSpaceKey = spaceKey && !disabled
     const el = h('span', { class: showSpaceKey ? 'ghost-input ghost-input--space' : 'ghost-input' }, hint, input,
-        showSpaceKey ? h('span', { class: 'ghost-input__key', 'aria-hidden': 'true' }, '空格') : null)
+        showSpaceKey ? h('span', { class: 'ghost-input__key', 'aria-hidden': 'true' }, '␣') : null)
 
     /** 当前的推导值 */
     function ghostTarget() {

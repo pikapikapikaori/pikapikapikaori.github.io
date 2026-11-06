@@ -258,7 +258,7 @@ function leadingSpaces(line) {
 }
 
 /** 行内记号：每次调用都新建正则 —— inline() 会递归，共用同一个实例会串 lastIndex */
-const INLINE_SOURCE = '(<kbd>[^<\\n]+</kbd>)|(`[^`\\n]+`)|(\\*\\*[^*\\n]+\\*\\*)|(\\*[^*\\n]+\\*)|(\\[[^\\]\\n]+\\]\\([^)\\s]+\\))'
+const INLINE_SOURCE = '(<kbd>[^<\\n]+</kbd>)|(<bdi[^>]*>[^<\\n]*</bdi>)|(`[^`\\n]+`)|(\\*\\*[^*\\n]+\\*\\*)|(\\*[^*\\n]+\\*)|(\\[[^\\]\\n]+\\]\\([^)\\s]+\\))'
 
 function inline(text) {
     const out = []
@@ -273,6 +273,8 @@ function inline(text) {
         const token = m[0]
         if (token.startsWith('<kbd>')) {
             out.push(h('kbd', { text: token.slice(5, -6) }))
+        } else if (token.startsWith('<bdi')) {
+            out.push(bdiEl(token))
         } else if (token.startsWith('`')) {
             out.push(h('code', { class: 'doc-inline-code', text: token.slice(1, -1) }))
         } else if (token.startsWith('**')) {
@@ -286,6 +288,16 @@ function inline(text) {
     }
     if (last < source.length) out.push(source.slice(last))
     return out
+}
+
+/** `<bdi lang="sa" dir="rtl">…</bdi>`：文档里显式标出的原文片段 */
+function bdiEl(token) {
+    const m = /^<bdi([^>]*)>([\s\S]*)<\/bdi>$/u.exec(token)
+    if (!m) return document.createTextNode(token)
+    const attrs = m[1]
+    const lang = (/lang="([^"]*)"/.exec(attrs) || [])[1] || undefined
+    const dir = (/dir="([^"]*)"/.exec(attrs) || [])[1] || undefined
+    return h('bdi', { lang, dir }, m[2])
 }
 
 function linkEl(token) {
@@ -309,6 +321,7 @@ function linkEl(token) {
 function plainText(text) {
     return String(text)
         .replace(/<kbd>([^<]*)<\/kbd>/g, '$1')
+        .replace(/<bdi[^>]*>([^<]*)<\/bdi>/g, '$1')
         .replace(/`([^`]*)`/g, '$1')
         .replace(/\*\*([^*]*)\*\*/g, '$1')
         .replace(/\*([^*]*)\*/g, '$1')

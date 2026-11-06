@@ -1393,6 +1393,11 @@
     align-items: center;
 }
 
+/* 行内附加节点（如隐藏的文件框）：不参与布局，控件与其它行保持同一位置 */
+.settings-row__inline {
+    display: contents;
+}
+
 /* ---------- 语言分组 ---------- */
 .lang-group {
     margin-bottom: var(--sp-6);

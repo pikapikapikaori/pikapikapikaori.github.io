@@ -10,6 +10,7 @@ import { renderMarkdown, scanHeadings } from '../utils/markdown.js'
 import { wrapScriptText } from '../utils/bdi.js'
 import { loadSchema, copyText, downloadMarkdown } from '../services/schema-service.js'
 import { createPageTools } from '../components/page-tools.js'
+import { openSelectMenu } from '../components/select-menu.js'
 import { toast } from '../components/toast.js'
 
 const NARROW = '(max-width: 1024px)'
@@ -84,24 +85,35 @@ function render(main, { title, docs, index, doc, anchor }) {
     /* ---------------- 头部 ---------------- */
 
     const copyMain = h('button', {
-        class: 'btn btn--primary',
+        class: 'btn btn--primary split-btn__main',
         type: 'button',
         onclick: () => doCopy()
     }, '复制 Markdown')
 
-    const downloadBtn = h('button', {
-        class: 'btn',
+    const copyCaret = h('button', {
+        class: 'btn btn--primary split-btn__caret',
         type: 'button',
-        onclick: () => doDownload()
-    }, '下载 .md')
+        'aria-haspopup': 'menu',
+        'aria-expanded': 'false',
+        'aria-label': '更多导出方式',
+        onclick: (e) => openSelectMenu({
+            anchor: e.currentTarget,
+            owner: e.currentTarget,
+            items: [
+                { value: 'copy', label: '复制 Markdown' },
+                { value: 'download', label: '下载 .md' }
+            ],
+            onPick: (value) => {
+                if (value === 'download') doDownload()
+                else doCopy()
+            }
+        })
+    }, '▾')
 
     async function doCopy() {
         try {
             await copyText(doc.markdown)
             toast.success(`已复制「${doc.title}」`, 2400)
-            const label = copyMain.textContent
-            copyMain.textContent = '已复制'
-            setTimeout(() => { copyMain.textContent = label }, 1600)
         } catch (err) {
             toast.error(`复制失败：${err.message}`)
         }
@@ -122,7 +134,7 @@ function render(main, { title, docs, index, doc, anchor }) {
             h('div', { class: 'page-head__sub' }, doc.title)
         ),
         h('div', { class: 'page-head__actions' },
-            copyMain, downloadBtn
+            h('div', { class: 'split-btn' }, copyMain, copyCaret)
         )
     )
 

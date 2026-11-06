@@ -11,7 +11,7 @@ import { toast } from '../components/toast.js'
 import { confirmModal } from '../components/modal.js'
 import {
     applyFont, applyLocalFontFile, applyFontSize, FONT_MODES, FONT_SIZES,
-    getStoredFontMode, getStoredFontFamily, getStoredFontSize
+    getStoredFontMode, getStoredFontSize
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
 import { LS_KEYS, PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
@@ -211,21 +211,6 @@ export default {
             /** 下拉退回实际生效的选项：取消选择或字体加载失败时用 */
             function restoreMode() {
                 modeSelect.value = getStoredFontMode()
-                renderFamily()
-            }
-
-            /** 重新渲染「当前字体名」：本地模式下点它可以换文件 */
-            function renderFamily() {
-                familySlot.replaceChildren()
-                if (getStoredFontMode() !== 'local') return
-                const family = getStoredFontFamily()
-                if (!family) return
-                familySlot.appendChild(h('button', {
-                    class: 'badge badge--clickable',
-                    type: 'button',
-                    title: '点击更换字体文件',
-                    onclick: pickFile
-                }, family))
             }
 
             /** 打开文件框；没选文件（cancel 或老浏览器）就把下拉退回去 */
@@ -255,7 +240,6 @@ export default {
                     }
                     applyFont({ mode: v })
                     await patchSettings({ fontMode: v, fontFamily: null })
-                    renderFamily()
                 }
             )
 
@@ -274,7 +258,6 @@ export default {
                         const { name } = await applyLocalFontFile(f)
                         await patchSettings({ fontMode: 'local', fontFamily: name })
                         modeSelect.value = 'local'
-                        renderFamily()
                         toast.success(`已应用本地字体：${name}`)
                     } catch (err) {
                         toast.error(`字体加载失败：${err.message}`)
@@ -283,14 +266,7 @@ export default {
                 }
             })
 
-            const familySlot = h('span', {})
-            renderFamily()
-
-            return h('div', { style: { display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' } },
-                modeSelect,
-                fileInput,
-                familySlot
-            )
+            return h('span', { class: 'settings-row__inline' }, modeSelect, fileInput)
         }
 
         /* ---------- 数据管理实现 ---------- */

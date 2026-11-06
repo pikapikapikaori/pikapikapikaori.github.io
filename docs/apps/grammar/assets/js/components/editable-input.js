@@ -1,7 +1,7 @@
 /** 自绘的单行 contenteditable 输入框，支持 bdi 包裹与占位文字。 */
 
 import { h } from '../utils/dom.js'
-import { bdiText, splitScriptRuns } from '../utils/bdi.js'
+import { bdiNode, hasScript } from '../utils/bdi.js'
 
 /** 光标在元素内的字符偏移（bdi 里的文字按逻辑顺序计） */
 function caretOffset(el) {
@@ -79,21 +79,28 @@ export function createEditableInput({
         return (el.textContent || '').replace(/[\r\n]+/g, ' ')
     }
 
-    /** 当前 DOM 是否已经是「该文字都包在 bdi 里」的形状 */
-    function isPainted(text) {
-        const runs = splitScriptRuns(text, scriptLang)
-        const expected = runs.filter((run) => run.text)
-        const nodes = Array.from(el.childNodes).filter((node) =>
-            node.nodeType !== Node.TEXT_NODE || node.nodeValue)
-        if (nodes.length !== expected.length) return false
-        return expected.every((run, i) => {
-            const node = nodes[i]
-            return (node.nodeName === 'BDI') === run.script && (node.textContent || '') === run.text
-        })
+    /** bdi 上该带哪个语言：只有真含这门语言的文字时才标（纯转写不标） */
+    function paintLang(text) {
+        return hasScript(text, scriptLang) ? scriptLang : null
     }
 
+    /** 当前 DOM 是否已经是「整段一个 bdi」的形状 */
+    function isPainted(text) {
+        if (!text) return el.childNodes.length === 0
+        const only = Array.from(el.childNodes).filter((node) =>
+            node.nodeType !== Node.TEXT_NODE || node.nodeValue)
+        if (only.length !== 1) return false
+        const node = only[0]
+        return node.nodeName === 'BDI' && (node.textContent || '') === text
+    }
+
+    /** 整段一个 bdi：字体栈自己会回落，不必逐字符切段 */
     function paint(text) {
-        el.replaceChildren(bdiText(text, scriptLang))
+        if (!text) {
+            el.replaceChildren()
+            return
+        }
+        el.replaceChildren(bdiNode(text, paintLang(text)))
     }
 
     let lastText = null

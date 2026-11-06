@@ -1,7 +1,7 @@
 /** 自绘下拉：按钮 + 列表，用法贴近 <select>。 */
 
 import { h } from '../utils/dom.js'
-import { bdiText } from '../utils/bdi.js'
+import { bdiFragment, stripBdi } from '../utils/bdi.js'
 import { closeSelectMenu, isSelectMenuOpenFor, openSelectMenu } from './select-menu.js'
 
 function normalizeOption(option) {
@@ -50,9 +50,9 @@ export function createSelect({
     function renderValue() {
         const hit = items.find((item) => item.value === current)
         const label = hit ? (hit.display || hit.label) : ''
-        valueEl.replaceChildren(bdiText(label, lang))
+        valueEl.replaceChildren(bdiFragment(label, lang))
         // 收起态会省略长文本，鼠标停上去给全文（只在单行模式下加，免得其它下拉到处冒提示）
-        if (nowrap && label) el.title = label
+        if (nowrap && label) el.title = stripBdi(label)
         else el.removeAttribute('title')
     }
 

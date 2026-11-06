@@ -17,37 +17,37 @@
             "rows": [
               [
                 "时间",
-                "jetzt、heute、gestern、morgen、bald、immer"
+                "<bdi>jetzt、heute、gestern、morgen、bald、immer</bdi>"
               ],
               [
                 "地点",
-                "hier、dort、oben、unten、links、rechts"
+                "<bdi>hier、dort、oben、unten、links、rechts</bdi>"
               ],
               [
                 "方向",
-                "hin、her、hinauf、herunter"
+                "<bdi>hin、her、hinauf、herunter</bdi>"
               ],
               [
                 "方式",
-                "gern、schnell、so、anders、zusammen"
+                "<bdi>gern、schnell、so、anders、zusammen</bdi>"
               ],
               [
                 "程度",
-                "sehr、ziemlich、fast、ganz、nur、sogar"
+                "<bdi>sehr、ziemlich、fast、ganz、nur、sogar</bdi>"
               ],
               [
                 "情态 / 语气",
-                "doch、ja、wohl、mal、eben"
+                "<bdi>doch、ja、wohl、mal、eben</bdi>"
               ],
               [
                 "否定",
-                "nicht、nie、niemals、keineswegs"
+                "<bdi>nicht、nie、niemals、keineswegs</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "德语形容词与副词同形（schnell 既是「快的」也是「快地」），只有少数词（gern、bald）专门用作副词。"
+        "notes": "德语形容词与副词同形（<bdi>schnell 既是「快的」也是「快地」），只有少数词（gern、bald</bdi>）专门用作副词。"
       },
       {
         "id": "de-adv-comparison",
@@ -63,29 +63,29 @@
             ],
             "rows": [
               [
-                "schnell（快）",
-                "schneller",
-                "am schnellsten"
+                "<bdi>schnell</bdi>（快）",
+                "<bdi>schneller</bdi>",
+                "<bdi>am schnellsten</bdi>"
               ],
               [
-                "laut（大声）",
-                "lauter",
-                "am lautesten"
+                "<bdi>laut</bdi>（大声）",
+                "<bdi>lauter</bdi>",
+                "<bdi>am lautesten</bdi>"
               ],
               [
-                "früh（早）",
-                "früher",
-                "am frühesten"
+                "<bdi>früh</bdi>（早）",
+                "<bdi>früher</bdi>",
+                "<bdi>am frühesten</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "规则副词用 -er / am …-sten 构成比较级与最高级（与形容词同形）。下表是常用的不规则形式。"
+        "notes": "规则副词用 -<bdi>er / am …-sten</bdi> 构成比较级与最高级（与形容词同形）。下表是常用的不规则形式。"
       },
       {
         "id": "de-adv-pronominal",
-        "title": "代副词 da(r)- 与 wo(r)-",
+        "title": "代副词 <bdi>da(r)- 与 wo(r</bdi>)-",
         "tables": [
           {
             "caption": "构成与用法",
@@ -97,30 +97,30 @@
             ],
             "rows": [
               [
-                "da + 介词",
+                "<bdi>da</bdi> + 介词",
                 "代替「介词 + 事物」",
-                "damit、dafür、darüber"
+                "<bdi>damit、dafür、darüber</bdi>"
               ],
               [
-                "da + r + 元音开头介词",
-                "介词以元音开头时插入 r",
-                "darauf、daran、darum"
+                "<bdi>da + r</bdi> + 元音开头介词",
+                "介词以元音开头时插入 <bdi>r</bdi>",
+                "<bdi>darauf、daran、darum</bdi>"
               ],
               [
-                "wo + 介词",
+                "<bdi>wo</bdi> + 介词",
                 "对「介词 + 事物」提问",
-                "womit、wovon、worüber"
+                "<bdi>womit、wovon、worüber</bdi>"
               ],
               [
-                "wo + r + 元音开头介词",
+                "<bdi>wo + r</bdi> + 元音开头介词",
                 "同上",
-                "worauf、woran、worin"
+                "<bdi>worauf、woran、worin</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "人 vs 物",
+            "caption": "人 <bdi>vs</bdi> 物",
             "role": "pattern",
             "headers": [
               "所指",
@@ -131,18 +131,18 @@
               [
                 "指物",
                 "代副词",
-                "Worauf wartest du? — Auf den Bus."
+                "<bdi>Worauf wartest du? — Auf den Bus.</bdi>"
               ],
               [
                 "指人",
                 "介词 + 人称代词",
-                "Auf wen wartest du? — Auf meinen Freund."
+                "<bdi>Auf wen wartest du? — Auf meinen Freund.</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "da(r)- / wo(r)- 只用于指物；指人时要用「介词 + 人称代词」。"
+        "notes": "<bdi>da(r)- / wo(r</bdi>)- 只用于指物；指人时要用「介词 + 人称代词」。"
       }
     ]
   }

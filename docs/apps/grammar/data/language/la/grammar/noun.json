@@ -5,7 +5,7 @@
     "items": [
       {
         "id": "la-noun-1st-decl",
-        "title": "第一变格法（-a, -ae）",
+        "title": "第一变格法（-<bdi>a, -ae</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -116,51 +116,51 @@
             "rows": [
               [
                 "主格",
-                "-a",
-                "-a",
-                "-ae",
-                "-ae"
+                "<bdi>-a</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>"
               ],
               [
                 "属格",
-                "-ae",
-                "-ae",
-                "-ārum",
-                "-ārum"
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ārum</bdi>",
+                "<bdi>-ārum</bdi>"
               ],
               [
                 "与格",
-                "-ae",
-                "-ae",
-                "-īs",
-                "-īs"
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-am",
-                "-am",
-                "-ās",
-                "-ās"
+                "<bdi>-am</bdi>",
+                "<bdi>-am</bdi>",
+                "<bdi>-ās</bdi>",
+                "<bdi>-ās</bdi>"
               ],
               [
                 "夺格",
-                "-ā",
-                "-ā",
-                "-īs",
-                "-īs"
+                "<bdi>-ā</bdi>",
+                "<bdi>-ā</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
-                "-a",
-                "-a",
-                "-ae",
-                "-ae"
+                "<bdi>-a</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：aqua, aquae (f.)",
+            "caption": "示例：<bdi>aqua, aquae (f</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -172,55 +172,55 @@
             "rows": [
               [
                 "主格",
-                "aqua",
-                "aqua",
-                "aquae",
-                "aquae"
+                "<bdi>aqua</bdi>",
+                "<bdi>aqua</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>"
               ],
               [
                 "属格",
-                "aquae",
-                "aquae",
-                "aquārum",
-                "aquārum"
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquārum</bdi>",
+                "<bdi>aquārum</bdi>"
               ],
               [
                 "与格",
-                "aquae",
-                "aquae",
-                "aquīs",
-                "aquīs"
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquīs</bdi>",
+                "<bdi>aquīs</bdi>"
               ],
               [
                 "宾格",
-                "aquam",
-                "aquam",
-                "aquās",
-                "aquās"
+                "<bdi>aquam</bdi>",
+                "<bdi>aquam</bdi>",
+                "<bdi>aquās</bdi>",
+                "<bdi>aquās</bdi>"
               ],
               [
                 "夺格",
-                "aquā",
-                "aquā",
-                "aquīs",
-                "aquīs"
+                "<bdi>aquā</bdi>",
+                "<bdi>aquā</bdi>",
+                "<bdi>aquīs</bdi>",
+                "<bdi>aquīs</bdi>"
               ],
               [
                 "呼格",
-                "aqua",
-                "aqua",
-                "aquae",
-                "aquae"
+                "<bdi>aqua</bdi>",
+                "<bdi>aqua</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "多为阴性；少数阳性（nauta 水手、agricola 农民）变格完全相同。属格单数 -ae、与格复数 -īs。"
+        "notes": "多为阴性；少数阳性（<bdi>nauta 水手、agricola 农民）变格完全相同。属格单数 -ae、与格复数 -īs</bdi>。"
       },
       {
         "id": "la-noun-2nd-decl",
-        "title": "第二变格法：-us 阳性（dominus 型）",
+        "title": "第二变格法：-<bdi>us 阳性（dominus</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -305,39 +305,39 @@
             "rows": [
               [
                 "主格",
-                "-us",
-                "-ī"
+                "<bdi>-us</bdi>",
+                "<bdi>-ī</bdi>"
               ],
               [
                 "属格",
-                "-ī",
-                "-ōrum"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
               ],
               [
                 "与格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-ōs"
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
               ],
               [
                 "夺格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
-                "-e",
-                "-ī"
+                "<bdi>-e</bdi>",
+                "<bdi>-ī</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：dominus, dominī (m.)",
+            "caption": "示例：<bdi>dominus, dominī (m</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -347,43 +347,43 @@
             "rows": [
               [
                 "主格",
-                "dominus",
-                "dominī"
+                "<bdi>dominus</bdi>",
+                "<bdi>dominī</bdi>"
               ],
               [
                 "属格",
-                "dominī",
-                "dominōrum"
+                "<bdi>dominī</bdi>",
+                "<bdi>dominōrum</bdi>"
               ],
               [
                 "与格",
-                "dominō",
-                "dominīs"
+                "<bdi>dominō</bdi>",
+                "<bdi>dominīs</bdi>"
               ],
               [
                 "宾格",
-                "dominum",
-                "dominōs"
+                "<bdi>dominum</bdi>",
+                "<bdi>dominōs</bdi>"
               ],
               [
                 "夺格",
-                "dominō",
-                "dominīs"
+                "<bdi>dominō</bdi>",
+                "<bdi>dominīs</bdi>"
               ],
               [
                 "呼格",
-                "domine",
-                "dominī"
+                "<bdi>domine</bdi>",
+                "<bdi>dominī</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "呼格单数 -e（-ius 结尾的词为 -ī，如 fīlius → fīlī）。中性见 -um 型。"
+        "notes": "呼格单数 -<bdi>e（-ius 结尾的词为 -ī，如 fīlius → fīlī）。中性见 -um</bdi> 型。"
       },
       {
         "id": "la-noun-2nd-decl-f",
-        "title": "第二变格法：-us 阴性（mālus 型）",
+        "title": "第二变格法：-<bdi>us 阴性（mālus</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -468,39 +468,39 @@
             "rows": [
               [
                 "主格",
-                "-us",
-                "-ī"
+                "<bdi>-us</bdi>",
+                "<bdi>-ī</bdi>"
               ],
               [
                 "属格",
-                "-ī",
-                "-ōrum"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
               ],
               [
                 "与格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-ōs"
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
               ],
               [
                 "夺格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
-                "-e",
-                "-ī"
+                "<bdi>-e</bdi>",
+                "<bdi>-ī</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：mālus, mālī (f.)",
+            "caption": "示例：<bdi>mālus, mālī (f</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -510,43 +510,43 @@
             "rows": [
               [
                 "主格",
-                "mālus",
-                "mālī"
+                "<bdi>mālus</bdi>",
+                "<bdi>mālī</bdi>"
               ],
               [
                 "属格",
-                "mālī",
-                "mālōrum"
+                "<bdi>mālī</bdi>",
+                "<bdi>mālōrum</bdi>"
               ],
               [
                 "与格",
-                "mālō",
-                "mālīs"
+                "<bdi>mālō</bdi>",
+                "<bdi>mālīs</bdi>"
               ],
               [
                 "宾格",
-                "mālum",
-                "mālōs"
+                "<bdi>mālum</bdi>",
+                "<bdi>mālōs</bdi>"
               ],
               [
                 "夺格",
-                "mālō",
-                "mālīs"
+                "<bdi>mālō</bdi>",
+                "<bdi>mālīs</bdi>"
               ],
               [
                 "呼格",
-                "māle",
-                "mālī"
+                "<bdi>māle</bdi>",
+                "<bdi>mālī</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "词尾与阳性 -us 型完全相同，只是名词本身是阴性（如 mālus 苹果树、pīnus 松树）；变格表只显示阴性列。"
+        "notes": "词尾与阳性 -<bdi>us 型完全相同，只是名词本身是阴性（如 mālus 苹果树、pīnus</bdi> 松树）；变格表只显示阴性列。"
       },
       {
         "id": "la-noun-2nd-decl-er",
-        "title": "第二变格法：-er 阳性（ager 型，词干掉 e）",
+        "title": "第二变格法：-<bdi>er 阳性（ager 型，词干掉 e</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -668,38 +668,38 @@
               [
                 "主格",
                 "-",
-                "-ī"
+                "<bdi>-ī</bdi>"
               ],
               [
                 "属格",
-                "-ī",
-                "-ōrum"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
               ],
               [
                 "与格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-ōs"
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
               ],
               [
                 "夺格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
                 "-",
-                "-ī"
+                "<bdi>-ī</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：ager, agrī (m.)",
+            "caption": "示例：<bdi>ager, agrī (m</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -709,43 +709,43 @@
             "rows": [
               [
                 "主格",
-                "ager",
-                "agrī"
+                "<bdi>ager</bdi>",
+                "<bdi>agrī</bdi>"
               ],
               [
                 "属格",
-                "agrī",
-                "agrōrum"
+                "<bdi>agrī</bdi>",
+                "<bdi>agrōrum</bdi>"
               ],
               [
                 "与格",
-                "agrō",
-                "agrīs"
+                "<bdi>agrō</bdi>",
+                "<bdi>agrīs</bdi>"
               ],
               [
                 "宾格",
-                "agrum",
-                "agrōs"
+                "<bdi>agrum</bdi>",
+                "<bdi>agrōs</bdi>"
               ],
               [
                 "夺格",
-                "agrō",
-                "agrīs"
+                "<bdi>agrō</bdi>",
+                "<bdi>agrīs</bdi>"
               ],
               [
                 "呼格",
-                "ager",
-                "agrī"
+                "<bdi>ager</bdi>",
+                "<bdi>agrī</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "ager / agrī 型：除主格与呼格外，词干的 e 脱落。puer 型保留 e，见另一条。"
+        "notes": "<bdi>ager / agrī 型：除主格与呼格外，词干的 e 脱落。puer 型保留 e</bdi>，见另一条。"
       },
       {
         "id": "la-noun-2nd-decl-er-keep",
-        "title": "第二变格法：-er 阳性（puer 型，保留 e）",
+        "title": "第二变格法：-<bdi>er 阳性（puer 型，保留 e</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -826,38 +826,38 @@
               [
                 "主格",
                 "-",
-                "-ī"
+                "<bdi>-ī</bdi>"
               ],
               [
                 "属格",
-                "-ī",
-                "-ōrum"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
               ],
               [
                 "与格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-ōs"
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
               ],
               [
                 "夺格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
                 "-",
-                "-ī"
+                "<bdi>-ī</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：puer, puerī (m.)",
+            "caption": "示例：<bdi>puer, puerī (m</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -867,43 +867,43 @@
             "rows": [
               [
                 "主格",
-                "puer",
-                "puerī"
+                "<bdi>puer</bdi>",
+                "<bdi>puerī</bdi>"
               ],
               [
                 "属格",
-                "puerī",
-                "puerōrum"
+                "<bdi>puerī</bdi>",
+                "<bdi>puerōrum</bdi>"
               ],
               [
                 "与格",
-                "puerō",
-                "puerīs"
+                "<bdi>puerō</bdi>",
+                "<bdi>puerīs</bdi>"
               ],
               [
                 "宾格",
-                "puerum",
-                "puerōs"
+                "<bdi>puerum</bdi>",
+                "<bdi>puerōs</bdi>"
               ],
               [
                 "夺格",
-                "puerō",
-                "puerīs"
+                "<bdi>puerō</bdi>",
+                "<bdi>puerīs</bdi>"
               ],
               [
                 "呼格",
-                "puer",
-                "puerī"
+                "<bdi>puer</bdi>",
+                "<bdi>puerī</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "puer / puerī 型：词干的 e 在所有格中都保留（同类的还有 gener、socer）。"
+        "notes": "<bdi>puer / puerī 型：词干的 e 在所有格中都保留（同类的还有 gener、socer）。</bdi>"
       },
       {
         "id": "la-noun-2nd-decl-n",
-        "title": "第二变格法：-um 中性（bellum 型）",
+        "title": "第二变格法：-<bdi>um 中性（bellum</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -988,39 +988,39 @@
             "rows": [
               [
                 "主格",
-                "-um",
-                "-a"
+                "<bdi>-um</bdi>",
+                "<bdi>-a</bdi>"
               ],
               [
                 "属格",
-                "-ī",
-                "-ōrum"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
               ],
               [
                 "与格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-a"
+                "<bdi>-um</bdi>",
+                "<bdi>-a</bdi>"
               ],
               [
                 "夺格",
-                "-ō",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
-                "-um",
-                "-a"
+                "<bdi>-um</bdi>",
+                "<bdi>-a</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：bellum, bellī (n.)",
+            "caption": "示例：<bdi>bellum, bellī (n</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -1030,43 +1030,43 @@
             "rows": [
               [
                 "主格",
-                "bellum",
-                "bella"
+                "<bdi>bellum</bdi>",
+                "<bdi>bella</bdi>"
               ],
               [
                 "属格",
-                "bellī",
-                "bellōrum"
+                "<bdi>bellī</bdi>",
+                "<bdi>bellōrum</bdi>"
               ],
               [
                 "与格",
-                "bellō",
-                "bellīs"
+                "<bdi>bellō</bdi>",
+                "<bdi>bellīs</bdi>"
               ],
               [
                 "宾格",
-                "bellum",
-                "bella"
+                "<bdi>bellum</bdi>",
+                "<bdi>bella</bdi>"
               ],
               [
                 "夺格",
-                "bellō",
-                "bellīs"
+                "<bdi>bellō</bdi>",
+                "<bdi>bellīs</bdi>"
               ],
               [
                 "呼格",
-                "bellum",
-                "bella"
+                "<bdi>bellum</bdi>",
+                "<bdi>bella</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "中性主格 / 宾格 / 呼格同形，复数主格为 -a。"
+        "notes": "中性主格 / 宾格 / 呼格同形，复数主格为 -<bdi>a</bdi>。"
       },
       {
         "id": "la-noun-3rd-decl",
-        "title": "第三变格法：辅音词干（rēx 型）",
+        "title": "第三变格法：辅音词干（<bdi>rēx</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1163,38 +1163,38 @@
               [
                 "主格",
                 "-",
-                "-ēs"
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-um"
+                "<bdi>-is</bdi>",
+                "<bdi>-um</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-ēs"
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "夺格",
-                "-e",
-                "-ibus"
+                "<bdi>-e</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
                 "-",
-                "-ēs"
+                "<bdi>-ēs</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：rēx, rēgis (m.)",
+            "caption": "示例：<bdi>rēx, rēgis (m</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -1204,43 +1204,43 @@
             "rows": [
               [
                 "主格",
-                "rēx",
-                "rēgēs"
+                "<bdi>rēx</bdi>",
+                "<bdi>rēgēs</bdi>"
               ],
               [
                 "属格",
-                "rēgis",
-                "rēgum"
+                "<bdi>rēgis</bdi>",
+                "<bdi>rēgum</bdi>"
               ],
               [
                 "与格",
-                "rēgī",
-                "rēgibus"
+                "<bdi>rēgī</bdi>",
+                "<bdi>rēgibus</bdi>"
               ],
               [
                 "宾格",
-                "rēgem",
-                "rēgēs"
+                "<bdi>rēgem</bdi>",
+                "<bdi>rēgēs</bdi>"
               ],
               [
                 "夺格",
-                "rēge",
-                "rēgibus"
+                "<bdi>rēge</bdi>",
+                "<bdi>rēgibus</bdi>"
               ],
               [
                 "呼格",
-                "rēx",
-                "rēgēs"
+                "<bdi>rēx</bdi>",
+                "<bdi>rēgēs</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "词干从属格去 -is 得到（rēx → rēgis → rēg-）。主格单数由词干末辅音 + s 变来：g/k → x，b/p → ps，d/t → s。"
+        "notes": "词干从属格去 -<bdi>is 得到（rēx → rēgis → rēg-）。主格单数由词干末辅音 + s 变来：g/k → x，b/p → ps，d/t → s</bdi>。"
       },
       {
         "id": "la-noun-3rd-decl-i",
-        "title": "第三变格法：i 词干（cīvis 型）",
+        "title": "第三变格法：<bdi>i 词干（cīvis</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1351,51 +1351,51 @@
             "rows": [
               [
                 "主格",
-                "-is",
-                "-is",
-                "-ēs",
-                "-ēs"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-is",
-                "-ium",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-em",
-                "-ēs",
-                "-ēs"
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "夺格",
-                "-e",
-                "-e",
-                "-ibus",
-                "-ibus"
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
-                "-is",
-                "-is",
-                "-ēs",
-                "-ēs"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：cīvis, cīvis (m./f.)",
+            "caption": "示例：<bdi>cīvis, cīvis (m./f</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -1407,55 +1407,55 @@
             "rows": [
               [
                 "主格",
-                "cīvis",
-                "cīvis",
-                "cīvēs",
-                "cīvēs"
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvēs</bdi>",
+                "<bdi>cīvēs</bdi>"
               ],
               [
                 "属格",
-                "cīvis",
-                "cīvis",
-                "cīvium",
-                "cīvium"
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvium</bdi>",
+                "<bdi>cīvium</bdi>"
               ],
               [
                 "与格",
-                "cīvī",
-                "cīvī",
-                "cīvibus",
-                "cīvibus"
+                "<bdi>cīvī</bdi>",
+                "<bdi>cīvī</bdi>",
+                "<bdi>cīvibus</bdi>",
+                "<bdi>cīvibus</bdi>"
               ],
               [
                 "宾格",
-                "cīvem",
-                "cīvem",
-                "cīvēs",
-                "cīvēs"
+                "<bdi>cīvem</bdi>",
+                "<bdi>cīvem</bdi>",
+                "<bdi>cīvēs</bdi>",
+                "<bdi>cīvēs</bdi>"
               ],
               [
                 "夺格",
-                "cīve",
-                "cīve",
-                "cīvibus",
-                "cīvibus"
+                "<bdi>cīve</bdi>",
+                "<bdi>cīve</bdi>",
+                "<bdi>cīvibus</bdi>",
+                "<bdi>cīvibus</bdi>"
               ],
               [
                 "呼格",
-                "cīvis",
-                "cīvis",
-                "cīvēs",
-                "cīvēs"
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvēs</bdi>",
+                "<bdi>cīvēs</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "属格复数 -ium、中性复数 -ia 是 i 词干的标志；宾格单数 -em、夺格单数 -e（部分词为 -ī）。"
+        "notes": "属格复数 -<bdi>ium、中性复数 -ia 是 i 词干的标志；宾格单数 -em、夺格单数 -e（部分词为 -ī</bdi>）。"
       },
       {
         "id": "la-noun-3rd-decl-i-abli",
-        "title": "第三变格法：i 词干（turris 型，宾格 -im / 夺格 -ī）",
+        "title": "第三变格法：<bdi>i 词干（turris 型，宾格 -im / 夺格 -ī</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1540,39 +1540,39 @@
             "rows": [
               [
                 "主格",
-                "-is",
-                "-ēs"
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-im",
-                "-īs"
+                "<bdi>-im</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "夺格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
-                "-is",
-                "-ēs"
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：turris, turris (f.)",
+            "caption": "示例：<bdi>turris, turris (f</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -1582,43 +1582,43 @@
             "rows": [
               [
                 "主格",
-                "turris",
-                "turrēs"
+                "<bdi>turris</bdi>",
+                "<bdi>turrēs</bdi>"
               ],
               [
                 "属格",
-                "turris",
-                "turrium"
+                "<bdi>turris</bdi>",
+                "<bdi>turrium</bdi>"
               ],
               [
                 "与格",
-                "turrī",
-                "turribus"
+                "<bdi>turrī</bdi>",
+                "<bdi>turribus</bdi>"
               ],
               [
                 "宾格",
-                "turrim",
-                "turrīs"
+                "<bdi>turrim</bdi>",
+                "<bdi>turrīs</bdi>"
               ],
               [
                 "夺格",
-                "turrī",
-                "turribus"
+                "<bdi>turrī</bdi>",
+                "<bdi>turribus</bdi>"
               ],
               [
                 "呼格",
-                "turris",
-                "turrēs"
+                "<bdi>turris</bdi>",
+                "<bdi>turrēs</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "纯 i 词干：宾格单数 -im、夺格单数 -ī、宾格复数 -īs（也常见 -ēs）。同类有 sitis、puppis、febris、secūris。"
+        "notes": "纯 <bdi>i 词干：宾格单数 -im、夺格单数 -ī、宾格复数 -īs（也常见 -ēs）。同类有 sitis、puppis、febris、secūris</bdi>。"
       },
       {
         "id": "la-noun-3rd-decl-n",
-        "title": "第三变格法：辅音词干中性（corpus 型）",
+        "title": "第三变格法：辅音词干中性（<bdi>corpus</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1718,38 +1718,38 @@
               [
                 "主格",
                 "-",
-                "-a"
+                "<bdi>-a</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-um"
+                "<bdi>-is</bdi>",
+                "<bdi>-um</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
                 "-",
-                "-a"
+                "<bdi>-a</bdi>"
               ],
               [
                 "夺格",
-                "-e",
-                "-ibus"
+                "<bdi>-e</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
                 "-",
-                "-a"
+                "<bdi>-a</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：corpus, corporis (n.)",
+            "caption": "示例：<bdi>corpus, corporis (n</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -1759,43 +1759,43 @@
             "rows": [
               [
                 "主格",
-                "corpus",
-                "corpora"
+                "<bdi>corpus</bdi>",
+                "<bdi>corpora</bdi>"
               ],
               [
                 "属格",
-                "corporis",
-                "corporum"
+                "<bdi>corporis</bdi>",
+                "<bdi>corporum</bdi>"
               ],
               [
                 "与格",
-                "corporī",
-                "corporibus"
+                "<bdi>corporī</bdi>",
+                "<bdi>corporibus</bdi>"
               ],
               [
                 "宾格",
-                "corpus",
-                "corpora"
+                "<bdi>corpus</bdi>",
+                "<bdi>corpora</bdi>"
               ],
               [
                 "夺格",
-                "corpore",
-                "corporibus"
+                "<bdi>corpore</bdi>",
+                "<bdi>corporibus</bdi>"
               ],
               [
                 "呼格",
-                "corpus",
-                "corpora"
+                "<bdi>corpus</bdi>",
+                "<bdi>corpora</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "s 词干（corpus / corporis）与鼻音词干（nōmen / nōminis）都属这一类；中性主格 = 宾格 = 呼格，复数 -a。"
+        "notes": "<bdi>s 词干（corpus / corporis）与鼻音词干（nōmen / nōminis）都属这一类；中性主格 = 宾格 = 呼格，复数 -a。</bdi>"
       },
       {
         "id": "la-noun-3rd-decl-i-n",
-        "title": "第三变格法：i 词干中性（mare 型）",
+        "title": "第三变格法：<bdi>i 词干中性（mare</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1880,39 +1880,39 @@
             "rows": [
               [
                 "主格",
-                "-e",
-                "-ia"
+                "<bdi>-e</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-e",
-                "-ia"
+                "<bdi>-e</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "夺格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
-                "-e",
-                "-ia"
+                "<bdi>-e</bdi>",
+                "<bdi>-ia</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：mare, maris (n.)",
+            "caption": "示例：<bdi>mare, maris (n</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -1922,43 +1922,43 @@
             "rows": [
               [
                 "主格",
-                "mare",
-                "maria"
+                "<bdi>mare</bdi>",
+                "<bdi>maria</bdi>"
               ],
               [
                 "属格",
-                "maris",
-                "marium"
+                "<bdi>maris</bdi>",
+                "<bdi>marium</bdi>"
               ],
               [
                 "与格",
-                "marī",
-                "maribus"
+                "<bdi>marī</bdi>",
+                "<bdi>maribus</bdi>"
               ],
               [
                 "宾格",
-                "mare",
-                "maria"
+                "<bdi>mare</bdi>",
+                "<bdi>maria</bdi>"
               ],
               [
                 "夺格",
-                "marī",
-                "maribus"
+                "<bdi>marī</bdi>",
+                "<bdi>maribus</bdi>"
               ],
               [
                 "呼格",
-                "mare",
-                "maria"
+                "<bdi>mare</bdi>",
+                "<bdi>maria</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "夺格单数 -ī、复数 -ia / -ium；同类有 cubīle、sedīle、rete。以 -al / -ar 结尾的中性名词（animal、calcar）主格单数就是词干本身，见另一条。"
+        "notes": "夺格单数 -<bdi>ī、复数 -ia / -ium；同类有 cubīle、sedīle、rete。以 -al / -ar 结尾的中性名词（animal、calcar</bdi>）主格单数就是词干本身，见另一条。"
       },
       {
         "id": "la-noun-3rd-decl-i-n-al",
-        "title": "第三变格法：i 词干中性（animal / calcar 型）",
+        "title": "第三变格法：<bdi>i 词干中性（animal / calcar</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2039,38 +2039,38 @@
               [
                 "主格",
                 "-",
-                "-ia"
+                "<bdi>-ia</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
                 "-",
-                "-ia"
+                "<bdi>-ia</bdi>"
               ],
               [
                 "夺格",
-                "-ī",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
                 "-",
-                "-ia"
+                "<bdi>-ia</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：animāl, animālis (n.)",
+            "caption": "示例：<bdi>animāl, animālis (n</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -2080,43 +2080,43 @@
             "rows": [
               [
                 "主格",
-                "animāl",
-                "animālia"
+                "<bdi>animāl</bdi>",
+                "<bdi>animālia</bdi>"
               ],
               [
                 "属格",
-                "animālis",
-                "animālium"
+                "<bdi>animālis</bdi>",
+                "<bdi>animālium</bdi>"
               ],
               [
                 "与格",
-                "animālī",
-                "animālibus"
+                "<bdi>animālī</bdi>",
+                "<bdi>animālibus</bdi>"
               ],
               [
                 "宾格",
-                "animāl",
-                "animālia"
+                "<bdi>animāl</bdi>",
+                "<bdi>animālia</bdi>"
               ],
               [
                 "夺格",
-                "animālī",
-                "animālibus"
+                "<bdi>animālī</bdi>",
+                "<bdi>animālibus</bdi>"
               ],
               [
                 "呼格",
-                "animāl",
-                "animālia"
+                "<bdi>animāl</bdi>",
+                "<bdi>animālia</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "词尾与 mare 型完全相同，只有主格 / 宾格 / 呼格单数是词干本身（animal、calcar、exemplar），不加 -e。"
+        "notes": "词尾与 <bdi>mare 型完全相同，只有主格 / 宾格 / 呼格单数是词干本身（animal、calcar、exemplar），不加 -e</bdi>。"
       },
       {
         "id": "la-noun-4th-decl",
-        "title": "第四变格法（-us / -ūs）",
+        "title": "第四变格法（-<bdi>us / -ūs</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2227,51 +2227,51 @@
             "rows": [
               [
                 "主格",
-                "-us",
-                "-us",
-                "-ūs",
-                "-ūs"
+                "<bdi>-us</bdi>",
+                "<bdi>-us</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>"
               ],
               [
                 "属格",
-                "-ūs",
-                "-ūs",
-                "-uum",
-                "-uum"
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-uum</bdi>",
+                "<bdi>-uum</bdi>"
               ],
               [
                 "与格",
-                "-uī",
-                "-uī",
-                "-ibus",
-                "-ibus"
+                "<bdi>-uī</bdi>",
+                "<bdi>-uī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-um",
-                "-ūs",
-                "-ūs"
+                "<bdi>-um</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>"
               ],
               [
                 "夺格",
-                "-ū",
-                "-ū",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ū</bdi>",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
-                "-us",
-                "-us",
-                "-ūs",
-                "-ūs"
+                "<bdi>-us</bdi>",
+                "<bdi>-us</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：manus, manūs (f.)",
+            "caption": "示例：<bdi>manus, manūs (f</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -2283,55 +2283,55 @@
             "rows": [
               [
                 "主格",
-                "manus",
-                "manus",
-                "manūs",
-                "manūs"
+                "<bdi>manus</bdi>",
+                "<bdi>manus</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>"
               ],
               [
                 "属格",
-                "manūs",
-                "manūs",
-                "manuum",
-                "manuum"
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manuum</bdi>",
+                "<bdi>manuum</bdi>"
               ],
               [
                 "与格",
-                "manuī",
-                "manuī",
-                "manibus",
-                "manibus"
+                "<bdi>manuī</bdi>",
+                "<bdi>manuī</bdi>",
+                "<bdi>manibus</bdi>",
+                "<bdi>manibus</bdi>"
               ],
               [
                 "宾格",
-                "manum",
-                "manum",
-                "manūs",
-                "manūs"
+                "<bdi>manum</bdi>",
+                "<bdi>manum</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>"
               ],
               [
                 "夺格",
-                "manū",
-                "manū",
-                "manibus",
-                "manibus"
+                "<bdi>manū</bdi>",
+                "<bdi>manū</bdi>",
+                "<bdi>manibus</bdi>",
+                "<bdi>manibus</bdi>"
               ],
               [
                 "呼格",
-                "manus",
-                "manus",
-                "manūs",
-                "manūs"
+                "<bdi>manus</bdi>",
+                "<bdi>manus</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "以 -us 结尾的第四变格名词为阳性或阴性，变格相同；与格单数 -uī（部分词为 -ū）。中性见另一条。"
+        "notes": "以 -<bdi>us 结尾的第四变格名词为阳性或阴性，变格相同；与格单数 -uī（部分词为 -ū</bdi>）。中性见另一条。"
       },
       {
         "id": "la-noun-4th-decl-n",
-        "title": "第四变格法：中性（cornū 型）",
+        "title": "第四变格法：中性（<bdi>cornū</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2416,39 +2416,39 @@
             "rows": [
               [
                 "主格",
-                "-ū",
-                "-ua"
+                "<bdi>-ū</bdi>",
+                "<bdi>-ua</bdi>"
               ],
               [
                 "属格",
-                "-ūs",
-                "-uum"
+                "<bdi>-ūs</bdi>",
+                "<bdi>-uum</bdi>"
               ],
               [
                 "与格",
-                "-ū",
-                "-ibus"
+                "<bdi>-ū</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-ū",
-                "-ua"
+                "<bdi>-ū</bdi>",
+                "<bdi>-ua</bdi>"
               ],
               [
                 "夺格",
-                "-ū",
-                "-ibus"
+                "<bdi>-ū</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
-                "-ū",
-                "-ua"
+                "<bdi>-ū</bdi>",
+                "<bdi>-ua</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：cornū, cornūs (n.)",
+            "caption": "示例：<bdi>cornū, cornūs (n</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -2458,43 +2458,43 @@
             "rows": [
               [
                 "主格",
-                "cornū",
-                "cornua"
+                "<bdi>cornū</bdi>",
+                "<bdi>cornua</bdi>"
               ],
               [
                 "属格",
-                "cornūs",
-                "cornuum"
+                "<bdi>cornūs</bdi>",
+                "<bdi>cornuum</bdi>"
               ],
               [
                 "与格",
-                "cornū",
-                "cornibus"
+                "<bdi>cornū</bdi>",
+                "<bdi>cornibus</bdi>"
               ],
               [
                 "宾格",
-                "cornū",
-                "cornua"
+                "<bdi>cornū</bdi>",
+                "<bdi>cornua</bdi>"
               ],
               [
                 "夺格",
-                "cornū",
-                "cornibus"
+                "<bdi>cornū</bdi>",
+                "<bdi>cornibus</bdi>"
               ],
               [
                 "呼格",
-                "cornū",
-                "cornua"
+                "<bdi>cornū</bdi>",
+                "<bdi>cornua</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "中性只有少数词（cornū、genū、verū）；主格 = 宾格 = 呼格，复数 -ua。"
+        "notes": "中性只有少数词（<bdi>cornū、genū、verū）；主格 = 宾格 = 呼格，复数 -ua</bdi>。"
       },
       {
         "id": "la-noun-5th-decl",
-        "title": "第五变格法：rēs 型（属格 -eī）",
+        "title": "第五变格法：<bdi>rēs 型（属格 -eī</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2579,39 +2579,39 @@
             "rows": [
               [
                 "主格",
-                "-ēs",
-                "-ēs"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "属格",
-                "-eī",
-                "-ērum"
+                "<bdi>-eī</bdi>",
+                "<bdi>-ērum</bdi>"
               ],
               [
                 "与格",
-                "-eī",
-                "-ēbus"
+                "<bdi>-eī</bdi>",
+                "<bdi>-ēbus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-ēs"
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "夺格",
-                "-ē",
-                "-ēbus"
+                "<bdi>-ē</bdi>",
+                "<bdi>-ēbus</bdi>"
               ],
               [
                 "呼格",
-                "-ēs",
-                "-ēs"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：rēs, reī (f.)",
+            "caption": "示例：<bdi>rēs, reī (f</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -2621,43 +2621,43 @@
             "rows": [
               [
                 "主格",
-                "rēs",
-                "rēs"
+                "<bdi>rēs</bdi>",
+                "<bdi>rēs</bdi>"
               ],
               [
                 "属格",
-                "reī",
-                "rērum"
+                "<bdi>reī</bdi>",
+                "<bdi>rērum</bdi>"
               ],
               [
                 "与格",
-                "reī",
-                "rēbus"
+                "<bdi>reī</bdi>",
+                "<bdi>rēbus</bdi>"
               ],
               [
                 "宾格",
-                "rem",
-                "rēs"
+                "<bdi>rem</bdi>",
+                "<bdi>rēs</bdi>"
               ],
               [
                 "夺格",
-                "rē",
-                "rēbus"
+                "<bdi>rē</bdi>",
+                "<bdi>rēbus</bdi>"
               ],
               [
                 "呼格",
-                "rēs",
-                "rēs"
+                "<bdi>rēs</bdi>",
+                "<bdi>rēs</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "rēs 的属格与与格单数是 reī（e 短）；其他第五变格名词多为 -ēī（diēs 型）。只有 rēs 与 diēs 有完整复数。"
+        "notes": "<bdi>rēs 的属格与与格单数是 reī（e 短）；其他第五变格名词多为 -ēī（diēs 型）。只有 rēs 与 diēs</bdi> 有完整复数。"
       },
       {
         "id": "la-noun-5th-decl-dies",
-        "title": "第五变格法：diēs 型（属格 -ēī）",
+        "title": "第五变格法：<bdi>diēs 型（属格 -ēī</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2742,39 +2742,39 @@
             "rows": [
               [
                 "主格",
-                "-ēs",
-                "-ēs"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "属格",
-                "-ēī",
-                "-ērum"
+                "<bdi>-ēī</bdi>",
+                "<bdi>-ērum</bdi>"
               ],
               [
                 "与格",
-                "-ēī",
-                "-ēbus"
+                "<bdi>-ēī</bdi>",
+                "<bdi>-ēbus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-ēs"
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>"
               ],
               [
                 "夺格",
-                "-ē",
-                "-ēbus"
+                "<bdi>-ē</bdi>",
+                "<bdi>-ēbus</bdi>"
               ],
               [
                 "呼格",
-                "-ēs",
-                "-ēs"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：diēs, diēī (m.)",
+            "caption": "示例：<bdi>diēs, diēī (m</bdi>.)",
             "role": "example",
             "headers": [
               "格",
@@ -2784,39 +2784,39 @@
             "rows": [
               [
                 "主格",
-                "diēs",
-                "diēs"
+                "<bdi>diēs</bdi>",
+                "<bdi>diēs</bdi>"
               ],
               [
                 "属格",
-                "diēī",
-                "diērum"
+                "<bdi>diēī</bdi>",
+                "<bdi>diērum</bdi>"
               ],
               [
                 "与格",
-                "diēī",
-                "diēbus"
+                "<bdi>diēī</bdi>",
+                "<bdi>diēbus</bdi>"
               ],
               [
                 "宾格",
-                "diem",
-                "diēs"
+                "<bdi>diem</bdi>",
+                "<bdi>diēs</bdi>"
               ],
               [
                 "夺格",
-                "diē",
-                "diēbus"
+                "<bdi>diē</bdi>",
+                "<bdi>diēbus</bdi>"
               ],
               [
                 "呼格",
-                "diēs",
-                "diēs"
+                "<bdi>diēs</bdi>",
+                "<bdi>diēs</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "diēs 为阳性（意为「日」时），属格 -ēī；同类的还有 speciēs、fidēs。"
+        "notes": "<bdi>diēs 为阳性（意为「日」时），属格 -ēī；同类的还有 speciēs、fidēs。</bdi>"
       }
     ]
   }

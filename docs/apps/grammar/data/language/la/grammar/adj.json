@@ -5,7 +5,7 @@
     "items": [
       {
         "id": "la-adj-1st-2nd",
-        "title": "第一二变格形容词（bonus, -a, -um）",
+        "title": "第一二变格形容词（<bdi>bonus, -a, -um</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "adj",
@@ -142,63 +142,63 @@
             "rows": [
               [
                 "主格",
-                "-us",
-                "-a",
-                "-um",
-                "-ī",
-                "-ae",
-                "-a"
+                "<bdi>-us</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-a</bdi>"
               ],
               [
                 "属格",
-                "-ī",
-                "-ae",
-                "-ī",
-                "-ōrum",
-                "-ārum",
-                "-ōrum"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>",
+                "<bdi>-ārum</bdi>",
+                "<bdi>-ōrum</bdi>"
               ],
               [
                 "与格",
-                "-ō",
-                "-ae",
-                "-ō",
-                "-īs",
-                "-īs",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "宾格",
-                "-um",
-                "-am",
-                "-um",
-                "-ōs",
-                "-ās",
-                "-a"
+                "<bdi>-um</bdi>",
+                "<bdi>-am</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>",
+                "<bdi>-ās</bdi>",
+                "<bdi>-a</bdi>"
               ],
               [
                 "夺格",
-                "-ō",
-                "-ā",
-                "-ō",
-                "-īs",
-                "-īs",
-                "-īs"
+                "<bdi>-ō</bdi>",
+                "<bdi>-ā</bdi>",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
               ],
               [
                 "呼格",
-                "-e",
-                "-a",
-                "-um",
-                "-ī",
-                "-ae",
-                "-a"
+                "<bdi>-e</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-a</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：bonus, bona, bonum",
+            "caption": "示例：<bdi>bonus, bona, bonum</bdi>",
             "role": "example",
             "headers": [
               "格",
@@ -212,67 +212,67 @@
             "rows": [
               [
                 "主格",
-                "bonus",
-                "bona",
-                "bonum",
-                "bonī",
-                "bonae",
-                "bona"
+                "<bdi>bonus</bdi>",
+                "<bdi>bona</bdi>",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bona</bdi>"
               ],
               [
                 "属格",
-                "bonī",
-                "bonae",
-                "bonī",
-                "bonōrum",
-                "bonārum",
-                "bonōrum"
+                "<bdi>bonī</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonōrum</bdi>",
+                "<bdi>bonārum</bdi>",
+                "<bdi>bonōrum</bdi>"
               ],
               [
                 "与格",
-                "bonō",
-                "bonae",
-                "bonō",
-                "bonīs",
-                "bonīs",
-                "bonīs"
+                "<bdi>bonō</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bonō</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>"
               ],
               [
                 "宾格",
-                "bonum",
-                "bonam",
-                "bonum",
-                "bonōs",
-                "bonās",
-                "bona"
+                "<bdi>bonum</bdi>",
+                "<bdi>bonam</bdi>",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonōs</bdi>",
+                "<bdi>bonās</bdi>",
+                "<bdi>bona</bdi>"
               ],
               [
                 "夺格",
-                "bonō",
-                "bonā",
-                "bonō",
-                "bonīs",
-                "bonīs",
-                "bonīs"
+                "<bdi>bonō</bdi>",
+                "<bdi>bonā</bdi>",
+                "<bdi>bonō</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>"
               ],
               [
                 "呼格",
-                "bone",
-                "bona",
-                "bonum",
-                "bonī",
-                "bonae",
-                "bona"
+                "<bdi>bone</bdi>",
+                "<bdi>bona</bdi>",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bona</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "阳性 / 中性按第二变格，阴性按第一变格。属格单数为 -ī / -ae / -ī，与格单数 -ō / -ae / -ō。"
+        "notes": "阳性 / 中性按第二变格，阴性按第一变格。属格单数为 -<bdi>ī / -ae / -ī，与格单数 -ō / -ae / -ō</bdi>。"
       },
       {
         "id": "la-adj-3rd-3term",
-        "title": "第三变格形容词（三尾：ācer, ācris, ācre）",
+        "title": "第三变格形容词（三尾：<bdi>ācer, ācris, ācre</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "adj",
@@ -413,62 +413,62 @@
               [
                 "主格",
                 "-",
-                "-is",
-                "-e",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-is",
-                "-is",
-                "-ium",
-                "-ium",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-em",
-                "-e",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "夺格",
-                "-ī",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
                 "-",
-                "-is",
-                "-e",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：ācer, ācris, ācre",
+            "caption": "示例：<bdi>ācer, ācris, ācre</bdi>",
             "role": "example",
             "headers": [
               "格",
@@ -482,67 +482,67 @@
             "rows": [
               [
                 "主格",
-                "ācer",
-                "ācris",
-                "ācre",
-                "ācrēs",
-                "ācrēs",
-                "ācria"
+                "<bdi>ācer</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācre</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācria</bdi>"
               ],
               [
                 "属格",
-                "ācris",
-                "ācris",
-                "ācris",
-                "ācrium",
-                "ācrium",
-                "ācrium"
+                "<bdi>ācris</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācrium</bdi>",
+                "<bdi>ācrium</bdi>",
+                "<bdi>ācrium</bdi>"
               ],
               [
                 "与格",
-                "ācrī",
-                "ācrī",
-                "ācrī",
-                "ācribus",
-                "ācribus",
-                "ācribus"
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>"
               ],
               [
                 "宾格",
-                "ācrem",
-                "ācrem",
-                "ācre",
-                "ācrēs",
-                "ācrēs",
-                "ācria"
+                "<bdi>ācrem</bdi>",
+                "<bdi>ācrem</bdi>",
+                "<bdi>ācre</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācria</bdi>"
               ],
               [
                 "夺格",
-                "ācrī",
-                "ācrī",
-                "ācrī",
-                "ācribus",
-                "ācribus",
-                "ācribus"
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>"
               ],
               [
                 "呼格",
-                "ācer",
-                "ācris",
-                "ācre",
-                "ācrēs",
-                "ācrēs",
-                "ācria"
+                "<bdi>ācer</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācre</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācria</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "阳性主格把词干末的 r 变成 -er，阴性 -is、中性 -e；其余同二尾型。同类有 celer（词干 celer-）、pulcher（词干 pulchr-）。"
+        "notes": "阳性主格把词干末的 <bdi>r 变成 -er，阴性 -is、中性 -e；其余同二尾型。同类有 celer（词干 celer-）、pulcher（词干 pulchr</bdi>-）。"
       },
       {
         "id": "la-adj-3rd",
-        "title": "第三变格形容词（二尾：fortis, -e）",
+        "title": "第三变格形容词（二尾：<bdi>fortis, -e</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "adj",
@@ -679,63 +679,63 @@
             "rows": [
               [
                 "主格",
-                "-is",
-                "-is",
-                "-e",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-is",
-                "-is",
-                "-ium",
-                "-ium",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-em",
-                "-e",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "夺格",
-                "-ī",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
-                "-is",
-                "-is",
-                "-e",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：fortis, fortis, forte",
+            "caption": "示例：<bdi>fortis, fortis, forte</bdi>",
             "role": "example",
             "headers": [
               "格",
@@ -749,67 +749,67 @@
             "rows": [
               [
                 "主格",
-                "fortis",
-                "fortis",
-                "forte",
-                "fortēs",
-                "fortēs",
-                "fortia"
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>forte</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortia</bdi>"
               ],
               [
                 "属格",
-                "fortis",
-                "fortis",
-                "fortis",
-                "fortium",
-                "fortium",
-                "fortium"
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortium</bdi>",
+                "<bdi>fortium</bdi>",
+                "<bdi>fortium</bdi>"
               ],
               [
                 "与格",
-                "fortī",
-                "fortī",
-                "fortī",
-                "fortibus",
-                "fortibus",
-                "fortibus"
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>"
               ],
               [
                 "宾格",
-                "fortem",
-                "fortem",
-                "forte",
-                "fortēs",
-                "fortēs",
-                "fortia"
+                "<bdi>fortem</bdi>",
+                "<bdi>fortem</bdi>",
+                "<bdi>forte</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortia</bdi>"
               ],
               [
                 "夺格",
-                "fortī",
-                "fortī",
-                "fortī",
-                "fortibus",
-                "fortibus",
-                "fortibus"
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>"
               ],
               [
                 "呼格",
-                "fortis",
-                "fortis",
-                "forte",
-                "fortēs",
-                "fortēs",
-                "fortia"
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>forte</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortia</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "二尾（fortis, -e）：阳 / 阴性同形，中性 -e。三尾（ācer, ācris, ācre）与一尾（fēlīx）在此基础上替换词干。"
+        "notes": "二尾（<bdi>fortis, -e）：阳 / 阴性同形，中性 -e。三尾（ācer, ācris, ācre）与一尾（fēlīx</bdi>）在此基础上替换词干。"
       },
       {
         "id": "la-adj-3rd-1term",
-        "title": "第三变格形容词（一尾：fēlīx, fēlīcis）",
+        "title": "第三变格形容词（一尾：<bdi>fēlīx, fēlīcis</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "adj",
@@ -971,60 +971,60 @@
                 "-",
                 "-",
                 "-",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "属格",
-                "-is",
-                "-is",
-                "-is",
-                "-ium",
-                "-ium",
-                "-ium"
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
               ],
               [
                 "与格",
-                "-ī",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "宾格",
-                "-em",
-                "-em",
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
                 "-",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ],
               [
                 "夺格",
-                "-ī",
-                "-ī",
-                "-ī",
-                "-ibus",
-                "-ibus",
-                "-ibus"
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
               ],
               [
                 "呼格",
                 "-",
                 "-",
                 "-",
-                "-ēs",
-                "-ēs",
-                "-ia"
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "示例：fēlīx, fēlīx, fēlīx",
+            "caption": "示例：<bdi>fēlīx, fēlīx, fēlīx</bdi>",
             "role": "example",
             "headers": [
               "格",
@@ -1038,63 +1038,63 @@
             "rows": [
               [
                 "主格",
-                "fēlīx",
-                "fēlīx",
-                "fēlīx",
-                "fēlīcēs",
-                "fēlīcēs",
-                "fēlīcia"
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcia</bdi>"
               ],
               [
                 "属格",
-                "fēlīcis",
-                "fēlīcis",
-                "fēlīcis",
-                "fēlīcium",
-                "fēlīcium",
-                "fēlīcium"
+                "<bdi>fēlīcis</bdi>",
+                "<bdi>fēlīcis</bdi>",
+                "<bdi>fēlīcis</bdi>",
+                "<bdi>fēlīcium</bdi>",
+                "<bdi>fēlīcium</bdi>",
+                "<bdi>fēlīcium</bdi>"
               ],
               [
                 "与格",
-                "fēlīcī",
-                "fēlīcī",
-                "fēlīcī",
-                "fēlīcibus",
-                "fēlīcibus",
-                "fēlīcibus"
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>"
               ],
               [
                 "宾格",
-                "fēlīcem",
-                "fēlīcem",
-                "fēlīx",
-                "fēlīcēs",
-                "fēlīcēs",
-                "fēlīcia"
+                "<bdi>fēlīcem</bdi>",
+                "<bdi>fēlīcem</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcia</bdi>"
               ],
               [
                 "夺格",
-                "fēlīcī",
-                "fēlīcī",
-                "fēlīcī",
-                "fēlīcibus",
-                "fēlīcibus",
-                "fēlīcibus"
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>"
               ],
               [
                 "呼格",
-                "fēlīx",
-                "fēlīx",
-                "fēlīx",
-                "fēlīcēs",
-                "fēlīcēs",
-                "fēlīcia"
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcia</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "阳 / 阴 / 中性主格同形，由词干末辅音 + s 融合而成（c / g → x，t / d → s）；词干从属格去 -is 得到。同类有 audāx（audāc-）、pār（par-）。"
+        "notes": "阳 / 阴 / 中性主格同形，由词干末辅音 + <bdi>s 融合而成（c / g → x，t / d → s）；词干从属格去 -is 得到。同类有 audāx（audāc-）、pār（par</bdi>-）。"
       },
       {
         "id": "la-adj-comparison",
@@ -1112,21 +1112,21 @@
             "rows": [
               [
                 "原级",
-                "altus",
-                "alta",
-                "altum"
+                "<bdi>altus</bdi>",
+                "<bdi>alta</bdi>",
+                "<bdi>altum</bdi>"
               ],
               [
                 "比较级",
-                "altior",
-                "altior",
-                "altius"
+                "<bdi>altior</bdi>",
+                "<bdi>altior</bdi>",
+                "<bdi>altius</bdi>"
               ],
               [
                 "最高级",
-                "altissimus",
-                "altissima",
-                "altissimum"
+                "<bdi>altissimus</bdi>",
+                "<bdi>altissima</bdi>",
+                "<bdi>altissimum</bdi>"
               ]
             ]
           },
@@ -1135,51 +1135,51 @@
             "role": "pattern",
             "headers": [
               "格",
-              "单数（m/f）",
-              "单数（n）",
-              "复数（m/f）",
-              "复数（n）"
+              "单数（<bdi>m/f</bdi>）",
+              "单数（<bdi>n</bdi>）",
+              "复数（<bdi>m/f</bdi>）",
+              "复数（<bdi>n</bdi>）"
             ],
             "rows": [
               [
                 "主格",
-                "altior",
-                "altius",
-                "altiōrēs",
-                "altiōra"
+                "<bdi>altior</bdi>",
+                "<bdi>altius</bdi>",
+                "<bdi>altiōrēs</bdi>",
+                "<bdi>altiōra</bdi>"
               ],
               [
                 "属格",
-                "altiōris",
-                "altiōris",
-                "altiōrum",
-                "altiōrum"
+                "<bdi>altiōris</bdi>",
+                "<bdi>altiōris</bdi>",
+                "<bdi>altiōrum</bdi>",
+                "<bdi>altiōrum</bdi>"
               ],
               [
                 "与格",
-                "altiōrī",
-                "altiōrī",
-                "altiōribus",
-                "altiōribus"
+                "<bdi>altiōrī</bdi>",
+                "<bdi>altiōrī</bdi>",
+                "<bdi>altiōribus</bdi>",
+                "<bdi>altiōribus</bdi>"
               ],
               [
                 "宾格",
-                "altiōrem",
-                "altius",
-                "altiōrēs",
-                "altiōra"
+                "<bdi>altiōrem</bdi>",
+                "<bdi>altius</bdi>",
+                "<bdi>altiōrēs</bdi>",
+                "<bdi>altiōra</bdi>"
               ],
               [
                 "夺格",
-                "altiōre",
-                "altiōre",
-                "altiōribus",
-                "altiōribus"
+                "<bdi>altiōre</bdi>",
+                "<bdi>altiōre</bdi>",
+                "<bdi>altiōribus</bdi>",
+                "<bdi>altiōribus</bdi>"
               ]
             ]
           }
         ],
-        "notes": "比较级按第三变格变格；最高级按第一二变格变格（-us, -a, -um）。不规则：bonus → melior → optimus，malus → pēior → pessimus，magnus → maior → maximus，parvus → minor → minimus。"
+        "notes": "比较级按第三变格变格；最高级按第一二变格变格（-<bdi>us, -a, -um）。不规则：bonus → melior → optimus，malus → pēior → pessimus，magnus → maior → maximus，parvus → minor → minimus</bdi>。"
       },
       {
         "id": "la-adj-adverb",
@@ -1196,23 +1196,23 @@
             "rows": [
               [
                 "第一二变格",
-                "-ē",
-                "longus → longē"
+                "<bdi>-ē</bdi>",
+                "<bdi>longus → longē</bdi>"
               ],
               [
                 "第三变格（一般）",
-                "-iter",
-                "fortis → fortiter"
+                "<bdi>-iter</bdi>",
+                "<bdi>fortis → fortiter</bdi>"
               ],
               [
-                "词干以 -nt- 结尾",
-                "-er",
-                "sapiēns → sapienter"
+                "词干以 -<bdi>nt</bdi>- 结尾",
+                "<bdi>-er</bdi>",
+                "<bdi>sapiēns → sapienter</bdi>"
               ],
               [
                 "不规则",
                 "—",
-                "bonus → bene；malus → male；magnus → magnopere；parvus → paulum"
+                "<bdi>bonus → bene；malus → male；magnus → magnopere；parvus → paulum</bdi>"
               ]
             ]
           },
@@ -1227,45 +1227,45 @@
             ],
             "rows": [
               [
-                "longus",
-                "longē",
-                "longius",
-                "longissimē"
+                "<bdi>longus</bdi>",
+                "<bdi>longē</bdi>",
+                "<bdi>longius</bdi>",
+                "<bdi>longissimē</bdi>"
               ],
               [
-                "fortis",
-                "fortiter",
-                "fortius",
-                "fortissimē"
+                "<bdi>fortis</bdi>",
+                "<bdi>fortiter</bdi>",
+                "<bdi>fortius</bdi>",
+                "<bdi>fortissimē</bdi>"
               ],
               [
-                "sapiēns",
-                "sapienter",
-                "sapientius",
-                "sapientissimē"
+                "<bdi>sapiēns</bdi>",
+                "<bdi>sapienter</bdi>",
+                "<bdi>sapientius</bdi>",
+                "<bdi>sapientissimē</bdi>"
               ],
               [
-                "bonus",
-                "bene",
-                "melius",
-                "optimē"
+                "<bdi>bonus</bdi>",
+                "<bdi>bene</bdi>",
+                "<bdi>melius</bdi>",
+                "<bdi>optimē</bdi>"
               ],
               [
-                "malus",
-                "male",
-                "pēius",
-                "pessimē"
+                "<bdi>malus</bdi>",
+                "<bdi>male</bdi>",
+                "<bdi>pēius</bdi>",
+                "<bdi>pessimē</bdi>"
               ],
               [
-                "magnus",
-                "magnopere",
-                "magis",
-                "maximē"
+                "<bdi>magnus</bdi>",
+                "<bdi>magnopere</bdi>",
+                "<bdi>magis</bdi>",
+                "<bdi>maximē</bdi>"
               ]
             ]
           }
         ],
-        "notes": "副词没有变格；比较级用中性比较级形式，最高级用 -ē 结尾。"
+        "notes": "副词没有变格；比较级用中性比较级形式，最高级用 -<bdi>ē</bdi> 结尾。"
       }
     ]
   }

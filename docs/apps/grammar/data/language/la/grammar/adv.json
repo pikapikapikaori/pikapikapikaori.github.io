@@ -18,23 +18,23 @@
             "rows": [
               [
                 "原级",
-                "形容词词干 + -ē / -iter",
-                "longē, fortiter"
+                "形容词词干 + -<bdi>ē / -iter</bdi>",
+                "<bdi>longē, fortiter</bdi>"
               ],
               [
                 "比较级",
                 "形容词比较级中性单数宾格",
-                "longius, fortius"
+                "<bdi>longius, fortius</bdi>"
               ],
               [
                 "最高级",
-                "形容词最高级词干 + -ē",
-                "longissimē, fortissimē"
+                "形容词最高级词干 + -<bdi>ē</bdi>",
+                "<bdi>longissimē, fortissimē</bdi>"
               ],
               [
-                "（以 -ē 结尾的）",
-                "加 magis / maximē",
-                "magis longē, maximē longē"
+                "（以 -<bdi>ē</bdi> 结尾的）",
+                "加 <bdi>magis / maximē</bdi>",
+                "<bdi>magis longē, maximē longē</bdi>"
               ]
             ]
           },
@@ -48,29 +48,29 @@
             ],
             "rows": [
               [
-                "bene",
-                "melius",
-                "optimē"
+                "<bdi>bene</bdi>",
+                "<bdi>melius</bdi>",
+                "<bdi>optimē</bdi>"
               ],
               [
-                "male",
-                "pēius",
-                "pessimē"
+                "<bdi>male</bdi>",
+                "<bdi>pēius</bdi>",
+                "<bdi>pessimē</bdi>"
               ],
               [
-                "magnopere",
-                "magis",
-                "maximē"
+                "<bdi>magnopere</bdi>",
+                "<bdi>magis</bdi>",
+                "<bdi>maximē</bdi>"
               ],
               [
-                "multum",
-                "plūs",
-                "plūrimum"
+                "<bdi>multum</bdi>",
+                "<bdi>plūs</bdi>",
+                "<bdi>plūrimum</bdi>"
               ],
               [
-                "parum",
-                "minus",
-                "minimē"
+                "<bdi>parum</bdi>",
+                "<bdi>minus</bdi>",
+                "<bdi>minimē</bdi>"
               ]
             ]
           }

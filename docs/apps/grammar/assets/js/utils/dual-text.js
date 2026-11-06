@@ -20,13 +20,17 @@ export function annotateDualText(root, { range, toRoman, selector = 'td, th' } =
             const pieces = splitByScript(node.nodeValue, range)
             if (!pieces.some((piece) => piece.script)) continue
 
-            // 原文已被 applyBdi 包进 <bdi lang="mnc" dir="auto">：转写必须放在 bdi 外面，
+            // 原文已被包进 <bdi lang="mnc" dir="auto">：转写必须放在 bdi 外面，
             // 否则会继承原文的字体（[lang="mnc"] 选满文字体）与书写方向。
+            // 整个 bdi 就是这个文本节点时，直接整段转写、插在 bdi 后面
+            // （零宽连接符之类不在 scriptRange 里的字符会被切成多段，不能因此退回 bdi 内部）。
             const bdi = node.parentElement?.closest?.('bdi')
-            if (bdi && bdi.parentNode && bdi.textContent === node.nodeValue
-                && pieces.length === 1 && pieces[0].script) {
-                bdi.parentNode.insertBefore(createRomanSpan(toRoman(node.nodeValue)), bdi.nextSibling)
-                changed = true
+            if (bdi && bdi.parentNode && bdi.textContent === node.nodeValue) {
+                const roman = toRoman(node.nodeValue)
+                if (roman) {
+                    bdi.parentNode.insertBefore(createRomanSpan(roman), bdi.nextSibling)
+                    changed = true
+                }
                 continue
             }
 

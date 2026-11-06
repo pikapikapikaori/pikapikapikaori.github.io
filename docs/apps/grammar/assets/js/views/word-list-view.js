@@ -16,7 +16,7 @@ import { createGhostInput } from '../components/ghost-input.js'
 import { hasAnalyzer } from '../services/analyze-service.js'
 import { openSelectMenu } from '../components/select-menu.js'
 import { formatRelative, formatDate } from '../utils/date.js'
-import { applyBdi, bdiNode } from '../utils/bdi.js'
+import { bdiNode } from '../utils/bdi.js'
 import { createPagination } from '../components/pagination.js'
 import { confirmModal } from '../components/modal.js'
 import { toast } from '../components/toast.js'
@@ -194,6 +194,7 @@ export default {
         function doImport() {
             openImportWordsModal({
                 userId,
+                lang,
                 title: `导入生词 · ${language.name}`,
                 onDone: async (stats) => {
                     if (stats.created > 0 || stats.merged > 0) {
@@ -338,7 +339,7 @@ export default {
             if (index < 0) {
                 closeCardOverlay()
                 await refresh()
-                toast.error(`未找到派生词「${target.lemma}」`)
+                toast.error(h('span', {}, '未找到派生词「', bdiNode(target.lemma, lang), '」'))
                 return
             }
 
@@ -494,7 +495,7 @@ export default {
         async function onDelete(word) {
             const ok = await confirmModal({
                 title: '删除生词',
-                message: `确定删除「${word.lemma}」？`,
+                message: ['确定删除「', bdiNode(word.lemma, lang), '」？'],
                 confirmLabel: '删除',
                 danger: true
             })

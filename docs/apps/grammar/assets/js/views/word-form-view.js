@@ -16,7 +16,7 @@ import { createGhostInput } from '../components/ghost-input.js'
 import { createSelect } from '../components/select-field.js'
 import { meaningsOfSource, meaningRefLabel } from '../components/entry-lists.js'
 import { fieldRow } from '../components/form-field.js'
-import { bdiNode, bdiText } from '../utils/bdi.js'
+import { bdiFragment, bdiNode, stripBdi } from '../utils/bdi.js'
 import { createTabGroup } from '../components/tabs.js'
 import { generateParadigm, previewStem } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
@@ -94,7 +94,7 @@ export default {
         }
 
         /** 说明文字可能夹原文（如希伯来语词尾 ־ָה / ־ֶת），按字符范围包 bdi */
-        function hintText(text) { return bdiText(text, lang) }
+        function hintText(text) { return bdiFragment(text, lang) }
 
         /** 满文 / 天城文：输入允许写转写，失焦时归一成原文；存储与生词卡都用原文 */
         function attachScriptNormalize(input) {
@@ -347,8 +347,8 @@ export default {
                 // 换锚点要重写类型说明，否则内容不跟着变：特殊 → 清空待填；
                 // 不变 → 该语言的「不变形」；其余 → 锚点的短名
                 if (v === SPECIAL_REF) inflectionLabel.value = ''
-                else if (v === INDECL_REF) inflectionLabel.value = currentTerms().indeclinable
-                else if (opt) inflectionLabel.value = opt.short || opt.label
+                else if (v === INDECL_REF) inflectionLabel.value = stripBdi(currentTerms().indeclinable)
+                else if (opt) inflectionLabel.value = stripBdi(opt.short || opt.label)
                 autoInflectionLabel = inflectionLabel.value
                 renderExtraParts()
                 // 锚点决定词干推导规则，换锚点后推导提示要跟着重算
@@ -559,7 +559,7 @@ export default {
                             paint()
                             renderParadigmBlock()
                         }
-                    }, opt.label)
+                    }, bdiFragment(opt.label, lang))
                 }))
             }
 
@@ -794,6 +794,7 @@ export default {
                     || Object.entries(part.showWhen).every(([k, v]) => data.stems[k] === v)
                 const partField = fieldRow(part.label || part.key, input, {
                     className: 'field--part',
+                    lang,
                     extras: [part.hint ? h('span', { class: 'field__hint' }, hintText(part.hint)) : null]
                 })
                 partField.hidden = !visible
@@ -1203,7 +1204,7 @@ export default {
             rebuildRefOptions(ref)
             const current = inflectionLabel.value.trim()
             if (!current || current === autoInflectionLabel) {
-                autoInflectionLabel = inflectionType.label || currentOptionsById[ref].short || ''
+                autoInflectionLabel = stripBdi(inflectionType.label || currentOptionsById[ref].short || '')
                 inflectionLabel.value = autoInflectionLabel
             }
             renderExtraParts()
@@ -1227,7 +1228,7 @@ export default {
                     },
                     h('span', { class: 'lookup-choice__pos' }, posLabel(entry.pos)),
                     h('span', { class: 'lookup-choice__source' }, entry.sourceLabel),
-                    h('span', { class: 'lookup-choice__label' }, entry.label)
+                    h('span', { class: 'lookup-choice__label' }, bdiFragment(entry.label, lang))
                     )
                     return btn
                 })
@@ -1312,7 +1313,7 @@ export default {
                 applyEntry(picked, entries)
                 lookupStatus.textContent = `已从 ${picked.sourceLabel} 获取：${posLabel(picked.pos)}`
                 lookupStatus.style.color = 'var(--c-success)'
-                toast.success(`已从 ${picked.sourceLabel} 获取「${lemma}」`)
+                toast.success(h('span', {}, `已从 ${picked.sourceLabel} 获取「`, bdiNode(lemma, lang), '」'))
             } catch (err) {
                 console.error(err)
                 lookupStatus.textContent = `查询失败：${err.message}`
@@ -1751,7 +1752,7 @@ export default {
                             runSearch()
                         }
                     },
-                    h('span', { class: 'picker-item__lemma', lang }, w.lemma),
+                    h('span', { class: 'picker-item__lemma' }, bdiNode(w.lemma, lang)),
                     h('span', { class: 'picker-item__pos' }, posLabel(w.pos)),
                     h('span', { class: 'picker-item__gloss' },
                         (w.meanings || []).map((m) => m.text).filter(Boolean).join('；'))
@@ -1767,7 +1768,7 @@ export default {
                 }
                 for (const lemma of data.derivatives) {
                     selected.appendChild(h('span', { class: 'chip chip--active' },
-                        h('span', { lang }, lemma),
+                        bdiNode(lemma, lang),
                         h('button', {
                             class: 'chip__remove',
                             type: 'button',
@@ -1918,7 +1919,7 @@ export default {
                 } else {
                     const res = await submitWord(userId, lang, payload)
                     if (res.created) toast.success('已添加')
-                    else toast.success(`「${lemma}」已存在，记录次数 +1`)
+                    else toast.success(h('span', {}, '「', bdiNode(lemma, lang), '」已存在，记录次数 +1'))
                 }
                 location.hash = `#/lang/${lang}/words`
             } catch (err) {

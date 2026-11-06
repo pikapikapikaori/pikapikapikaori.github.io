@@ -17,25 +17,25 @@
             ],
             "rows": [
               [
-                "定冠词 / dieser / jener / alle",
+                "定冠词 / <bdi>dieser / jener / alle</bdi>",
                 "弱变化",
-                "der alte Mann"
+                "<bdi>der alte Mann</bdi>"
               ],
               [
-                "不定冠词 / kein / 物主代词",
+                "不定冠词 / <bdi>kein</bdi> / 物主代词",
                 "混合变化",
-                "ein alter Mann"
+                "<bdi>ein alter Mann</bdi>"
               ],
               [
                 "没有冠词或限定词",
                 "强变化",
-                "alter Mann"
+                "<bdi>alter Mann</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "所有形容词共用一套词尾：<strong>限定词已经显示性数格时用弱变化</strong>（-e / -en），<strong>没有限定词时用强变化</strong>（自己承担标记性数格的功能），介于两者之间用混合变化。下面三节是这三套词尾的完整表格。",
+        "notes": "所有形容词共用一套词尾：<strong>限定词已经显示性数格时用弱变化</strong><bdi>（-e / -en），</bdi><strong>没有限定词时用强变化</strong>（自己承担标记性数格的功能），介于两者之间用混合变化。下面三节是这三套词尾的完整表格。",
         "inflect": "decl",
         "derive": {
           "pos": "adj",
@@ -245,13 +245,13 @@
               "key": "cmp",
               "label": "比较级词干",
               "example": "schnell",
-              "hint": "比较级的词干（无词尾）：jung → jüng、dunkel → dunkl。留空 = 原形本身。"
+              "hint": "比较级的词干（无词尾）：<bdi>jung → jüng、dunkel → dunkl</bdi>。留空 = 原形本身。"
             },
             {
               "key": "sup",
               "label": "最高级词干",
               "example": "schnellst",
-              "hint": "最高级的词干：breit → breitest、alt → ältest。留空 = 比较级词干 + st。"
+              "hint": "最高级的词干：<bdi>breit → breitest、alt → ältest。留空 = 比较级词干 + st</bdi>。"
             }
           ]
         }
@@ -273,37 +273,37 @@
             "rows": [
               [
                 "主格",
-                "-e",
-                "-e",
-                "-e",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "属格",
-                "-en",
-                "-en",
-                "-en",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "与格",
-                "-en",
-                "-en",
-                "-en",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "宾格",
-                "-en",
-                "-e",
-                "-e",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：schnell（der schnelle Wagen）",
+            "caption": "例词：<bdi>schnell（der schnelle Wagen</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -315,37 +315,37 @@
             "rows": [
               [
                 "主格",
-                "schnelle",
-                "schnelle",
-                "schnelle",
-                "schnellen"
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "属格",
-                "schnellen",
-                "schnellen",
-                "schnellen",
-                "schnellen"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "与格",
-                "schnellen",
-                "schnellen",
-                "schnellen",
-                "schnellen"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "宾格",
-                "schnellen",
-                "schnelle",
-                "schnelle",
-                "schnellen"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnellen</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "前面的定冠词 / dieser / jener / alle 已经标出性数格，形容词只需要 -e（主格单数三种性、宾格阴性/中性）与 -en（其余）。"
+        "notes": "前面的定冠词 / <bdi>dieser / jener / alle 已经标出性数格，形容词只需要 -e（主格单数三种性、宾格阴性/中性）与 -en</bdi>（其余）。"
       },
       {
         "id": "de-adj-mixed",
@@ -364,37 +364,37 @@
             "rows": [
               [
                 "主格",
-                "-er",
-                "-e",
-                "-es",
-                "-en"
+                "<bdi>-er</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "属格",
-                "-en",
-                "-en",
-                "-en",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "与格",
-                "-en",
-                "-en",
-                "-en",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "宾格",
-                "-en",
-                "-e",
-                "-es",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：schnell（ein schneller Wagen）",
+            "caption": "例词：<bdi>schnell（ein schneller Wagen</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -406,37 +406,37 @@
             "rows": [
               [
                 "主格",
-                "schneller",
-                "schnelle",
-                "schnelles",
-                "schnellen"
+                "<bdi>schneller</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "属格",
-                "schnellen",
-                "schnellen",
-                "schnellen",
-                "schnellen"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "与格",
-                "schnellen",
-                "schnellen",
-                "schnellen",
-                "schnellen"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "宾格",
-                "schnellen",
-                "schnelle",
-                "schnelles",
-                "schnellen"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnellen</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "ein / kein / 物主代词在阳性主格、中性主格与中性宾格上没有词尾，形容词这时补上强变化的 -er / -es；其余格子仍用 -en。"
+        "notes": "<bdi>ein / kein / 物主代词在阳性主格、中性主格与中性宾格上没有词尾，形容词这时补上强变化的 -er / -es；其余格子仍用 -en。</bdi>"
       },
       {
         "id": "de-adj-strong",
@@ -455,37 +455,37 @@
             "rows": [
               [
                 "主格",
-                "-er",
-                "-e",
-                "-es",
-                "-e"
+                "<bdi>-er</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-e</bdi>"
               ],
               [
                 "属格",
-                "-en",
-                "-er",
-                "-en",
-                "-er"
+                "<bdi>-en</bdi>",
+                "<bdi>-er</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-er</bdi>"
               ],
               [
                 "与格",
-                "-em",
-                "-er",
-                "-em",
-                "-en"
+                "<bdi>-em</bdi>",
+                "<bdi>-er</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "宾格",
-                "-en",
-                "-e",
-                "-es",
-                "-e"
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-e</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：schnell（schneller Wagen）",
+            "caption": "例词：<bdi>schnell（schneller Wagen</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -497,37 +497,37 @@
             "rows": [
               [
                 "主格",
-                "schneller",
-                "schnelle",
-                "schnelles",
-                "schnelle"
+                "<bdi>schneller</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnelle</bdi>"
               ],
               [
                 "属格",
-                "schnellen",
-                "schneller",
-                "schnellen",
-                "schneller"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schneller</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schneller</bdi>"
               ],
               [
                 "与格",
-                "schnellem",
-                "schneller",
-                "schnellem",
-                "schnellen"
+                "<bdi>schnellem</bdi>",
+                "<bdi>schneller</bdi>",
+                "<bdi>schnellem</bdi>",
+                "<bdi>schnellen</bdi>"
               ],
               [
                 "宾格",
-                "schnellen",
-                "schnelle",
-                "schnelles",
-                "schnelle"
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnelle</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "前面没有任何限定词时，形容词自己承担标记性数格的功能，词尾与定冠词的派生形式一致（-er / -es / -em / -en）。"
+        "notes": "前面没有任何限定词时，形容词自己承担标记性数格的功能，词尾与定冠词的派生形式一致（-<bdi>er / -es / -em / -en</bdi>）。"
       },
       {
         "id": "de-adj-comparison",
@@ -539,23 +539,23 @@
             "headers": [
               "等级",
               "构成",
-              "例（schnell 快）"
+              "例（<bdi>schnell</bdi> 快）"
             ],
             "rows": [
               [
                 "原级",
                 "基本形式",
-                "schnell"
+                "<bdi>schnell</bdi>"
               ],
               [
                 "比较级",
-                "基本形式 + -er",
-                "schneller"
+                "基本形式 + -<bdi>er</bdi>",
+                "<bdi>schneller</bdi>"
               ],
               [
                 "最高级",
-                "基本形式 + -(e)sten（作表语 / 状语时用 am …-sten）",
-                "am schnellsten"
+                "基本形式 + -(<bdi>e)sten（作表语 / 状语时用 am …-sten</bdi>）",
+                "<bdi>am schnellsten</bdi>"
               ]
             ],
             "lang": "de"
@@ -571,34 +571,34 @@
             ],
             "rows": [
               [
-                "jung",
-                "jünger",
-                "am jüngsten",
+                "<bdi>jung</bdi>",
+                "<bdi>jünger</bdi>",
+                "<bdi>am jüngsten</bdi>",
                 "单音节形容词常变音"
               ],
               [
-                "kalt",
-                "kälter",
-                "am kältesten",
-                "变音，且词干以 t 结尾要插 -e-"
+                "<bdi>kalt</bdi>",
+                "<bdi>kälter</bdi>",
+                "<bdi>am kältesten</bdi>",
+                "变音，且词干以 <bdi>t 结尾要插 -e</bdi>-"
               ],
               [
-                "groß",
-                "größer",
-                "am größten",
+                "<bdi>groß</bdi>",
+                "<bdi>größer</bdi>",
+                "<bdi>am größten</bdi>",
                 "变音"
               ],
               [
-                "breit",
-                "breiter",
-                "am breitesten",
-                "词干以 d / t / s / ß / z 结尾时最高级插 -e-"
+                "<bdi>breit</bdi>",
+                "<bdi>breiter</bdi>",
+                "<bdi>am breitesten</bdi>",
+                "词干以 <bdi>d / t / s / ß / z 结尾时最高级插 -e</bdi>-"
               ],
               [
-                "dunkel",
-                "dunkler",
-                "am dunkelsten",
-                "-el / -er 结尾时比较级丢词干里的 e"
+                "<bdi>dunkel</bdi>",
+                "<bdi>dunkler</bdi>",
+                "<bdi>am dunkelsten</bdi>",
+                "<bdi>-el / -er 结尾时比较级丢词干里的 e</bdi>"
               ]
             ],
             "lang": "de"
@@ -613,40 +613,40 @@
             ],
             "rows": [
               [
-                "gut",
-                "besser",
-                "am besten"
+                "<bdi>gut</bdi>",
+                "<bdi>besser</bdi>",
+                "<bdi>am besten</bdi>"
               ],
               [
-                "viel",
-                "mehr",
-                "am meisten"
+                "<bdi>viel</bdi>",
+                "<bdi>mehr</bdi>",
+                "<bdi>am meisten</bdi>"
               ],
               [
-                "gern",
-                "lieber",
-                "am liebsten"
+                "<bdi>gern</bdi>",
+                "<bdi>lieber</bdi>",
+                "<bdi>am liebsten</bdi>"
               ],
               [
-                "hoch",
-                "höher",
-                "am höchsten"
+                "<bdi>hoch</bdi>",
+                "<bdi>höher</bdi>",
+                "<bdi>am höchsten</bdi>"
               ],
               [
-                "nah",
-                "näher",
-                "am nächsten"
+                "<bdi>nah</bdi>",
+                "<bdi>näher</bdi>",
+                "<bdi>am nächsten</bdi>"
               ],
               [
-                "groß",
-                "größer",
-                "am größten"
+                "<bdi>groß</bdi>",
+                "<bdi>größer</bdi>",
+                "<bdi>am größten</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "比较级、最高级都从<strong>基本形式</strong>构成：比较级加 -er，最高级用 -(e)sten。比较级与最高级作定语时<strong>按普通形容词变格</strong>（der schnellere Wagen、der schnellste Wagen），作表语或状语时保持原形、最高级用 am …-sten。不规则形式必须按词记忆（gut → besser → am besten）。"
+        "notes": "比较级、最高级都从<strong>基本形式</strong>构成：比较级加 -<bdi>er，最高级用 -(e)sten</bdi>。比较级与最高级作定语时<strong>按普通形容词变格</strong><bdi>（der schnellere Wagen、der schnellste Wagen），作表语或状语时保持原形、最高级用 am …-sten。不规则形式必须按词记忆（gut → besser → am besten）。</bdi>"
       },
       {
         "id": "de-adj-participle",
@@ -663,13 +663,13 @@
             "rows": [
               [
                 "现在分词",
-                "不定式 + -d",
-                "lesend（正在读的）、die lesende Frau"
+                "不定式 + -<bdi>d</bdi>",
+                "<bdi>lesend（正在读的）、die lesende Frau</bdi>"
               ],
               [
                 "过去分词",
-                "ge- + 词干 + -t / -en",
-                "gelesen（被读的）、das gelesene Buch"
+                "<bdi>ge- + 词干 + -t / -en</bdi>",
+                "<bdi>gelesen（被读的）、das gelesene Buch</bdi>"
               ]
             ],
             "lang": "de"
@@ -686,12 +686,12 @@
               [
                 "作定语",
                 "按三种变格变化",
-                "ein lesender Mann"
+                "<bdi>ein lesender Mann</bdi>"
               ],
               [
                 "作表语 / 状语",
                 "不变",
-                "Das Buch ist gelesen."
+                "<bdi>Das Buch ist gelesen.</bdi>"
               ]
             ],
             "lang": "de"
@@ -715,33 +715,33 @@
               [
                 "形容词原形直接作副词",
                 "不变",
-                "schnell、gut、schön"
+                "<bdi>schnell、gut、schön</bdi>"
               ],
               [
-                "-weise",
-                "名词 / 形容词 + -weise",
-                "glücklicherweise（幸运地）、teilweise"
+                "<bdi>-weise</bdi>",
+                "名词 / 形容词 + -<bdi>weise</bdi>",
+                "<bdi>glücklicherweise（幸运地）、teilweise</bdi>"
               ],
               [
-                "-lich / -ig / -bar",
+                "<bdi>-lich / -ig / -bar</bdi>",
                 "派生形容词再作副词",
-                "möglich（可能地）、freundlich"
+                "<bdi>möglich（可能地）、freundlich</bdi>"
               ],
               [
-                "-s",
-                "时间名词 + -s",
-                "morgens、abends"
+                "<bdi>-s</bdi>",
+                "时间名词 + -<bdi>s</bdi>",
+                "<bdi>morgens、abends</bdi>"
               ],
               [
                 "固定搭配",
                 "形容词 + 介词短语",
-                "auf einmal、in der Tat"
+                "<bdi>auf einmal、in der Tat</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "德语不像法语有统一的 -ment 构副词：绝大多数形容词原形就能作副词（Er läuft schnell），不需要再加词尾。"
+        "notes": "德语不像法语有统一的 -<bdi>ment 构副词：绝大多数形容词原形就能作副词（Er läuft schnell</bdi>），不需要再加词尾。"
       }
     ]
   }

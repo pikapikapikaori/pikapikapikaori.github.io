@@ -19,67 +19,67 @@
             "rows": [
               [
                 "0",
-                "zéro",
+                "<bdi>zéro</bdi>",
                 "11",
-                "onze"
+                "<bdi>onze</bdi>"
               ],
               [
                 "1",
-                "un",
+                "<bdi>un</bdi>",
                 "12",
-                "douze"
+                "<bdi>douze</bdi>"
               ],
               [
                 "2",
-                "deux",
+                "<bdi>deux</bdi>",
                 "13",
-                "treize"
+                "<bdi>treize</bdi>"
               ],
               [
                 "3",
-                "trois",
+                "<bdi>trois</bdi>",
                 "14",
-                "quatorze"
+                "<bdi>quatorze</bdi>"
               ],
               [
                 "4",
-                "quatre",
+                "<bdi>quatre</bdi>",
                 "15",
-                "quinze"
+                "<bdi>quinze</bdi>"
               ],
               [
                 "5",
-                "cinq",
+                "<bdi>cinq</bdi>",
                 "16",
-                "seize"
+                "<bdi>seize</bdi>"
               ],
               [
                 "6",
-                "six",
+                "<bdi>six</bdi>",
                 "17",
-                "dix-sept"
+                "<bdi>dix-sept</bdi>"
               ],
               [
                 "7",
-                "sept",
+                "<bdi>sept</bdi>",
                 "18",
-                "dix-huit"
+                "<bdi>dix-huit</bdi>"
               ],
               [
                 "8",
-                "huit",
+                "<bdi>huit</bdi>",
                 "19",
-                "dix-neuf"
+                "<bdi>dix-neuf</bdi>"
               ],
               [
                 "9",
-                "neuf",
+                "<bdi>neuf</bdi>",
                 "20",
-                "vingt"
+                "<bdi>vingt</bdi>"
               ],
               [
                 "10",
-                "dix",
+                "<bdi>dix</bdi>",
                 "—",
                 "—"
               ]
@@ -97,54 +97,54 @@
             "rows": [
               [
                 "21 / 31 / 41",
-                "vingt et un / trente et un / quarante et un",
-                "1 用 et，不加连字符"
+                "<bdi>vingt et un / trente et un / quarante et un</bdi>",
+                "1 用 <bdi>et</bdi>，不加连字符"
               ],
               [
                 "70",
-                "soixante-dix",
+                "<bdi>soixante-dix</bdi>",
                 "60 + 10"
               ],
               [
                 "71",
-                "soixante et onze",
+                "<bdi>soixante et onze</bdi>",
                 "—"
               ],
               [
                 "80",
-                "quatre-vingts",
-                "4 × 20；后接数词时去 s"
+                "<bdi>quatre-vingts</bdi>",
+                "<bdi>4 × 20；后接数词时去 s</bdi>"
               ],
               [
                 "81",
-                "quatre-vingt-un",
-                "不加 et"
+                "<bdi>quatre-vingt-un</bdi>",
+                "不加 <bdi>et</bdi>"
               ],
               [
                 "90",
-                "quatre-vingt-dix",
+                "<bdi>quatre-vingt-dix</bdi>",
                 "—"
               ],
               [
                 "100 / 200",
-                "cent / deux cents",
-                "整数百加 s，后接数词去 s"
+                "<bdi>cent / deux cents</bdi>",
+                "整数百加 <bdi>s，后接数词去 s</bdi>"
               ],
               [
                 "1000 / 2000",
-                "mille / deux mille",
-                "mille 不变"
+                "<bdi>mille / deux mille</bdi>",
+                "<bdi>mille</bdi> 不变"
               ],
               [
                 "百万 / 十亿",
-                "un million / un milliard",
-                "名词，后接 de"
+                "<bdi>un million / un milliard</bdi>",
+                "名词，后接 <bdi>de</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "un 有性数变化（une、uns、unes）；vingt 和 cent 在整数倍时加 s（quatre-vingts、deux cents），一旦后面还有数词就不加。"
+        "notes": "<bdi>un 有性数变化（une、uns、unes）；vingt 和 cent 在整数倍时加 s（quatre-vingts、deux cents</bdi>），一旦后面还有数词就不加。"
       },
       {
         "id": "fr-num-ordinal",
@@ -160,35 +160,35 @@
             ],
             "rows": [
               [
-                "un",
-                "premier / première",
+                "<bdi>un</bdi>",
+                "<bdi>premier / première</bdi>",
                 "唯一不规则"
               ],
               [
-                "deux",
-                "deuxième",
-                "基数 + -ième"
+                "<bdi>deux</bdi>",
+                "<bdi>deuxième</bdi>",
+                "基数 + -<bdi>ième</bdi>"
               ],
               [
-                "cinq",
-                "cinquième",
-                "加 u 避免连读"
+                "<bdi>cinq</bdi>",
+                "<bdi>cinquième</bdi>",
+                "加 <bdi>u</bdi> 避免连读"
               ],
               [
-                "neuf",
-                "neuvième",
-                "f → v"
+                "<bdi>neuf</bdi>",
+                "<bdi>neuvième</bdi>",
+                "<bdi>f → v</bdi>"
               ],
               [
-                "vingt et un",
-                "vingt et unième",
-                "只给最后一个词加 -ième"
+                "<bdi>vingt et un</bdi>",
+                "<bdi>vingt et unième</bdi>",
+                "只给最后一个词加 -<bdi>ième</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "序数词前用定冠词：le premier、la deuxième；缩写作 1er / 1re / 2e。"
+        "notes": "序数词前用定冠词：<bdi>le premier、la deuxième；缩写作 1er / 1re / 2e</bdi>。"
       },
       {
         "id": "fr-num-fraction",
@@ -205,39 +205,39 @@
             "rows": [
               [
                 "1/2",
-                "un demi / la moitié",
-                "un demi-litre、la moitié du gâteau"
+                "<bdi>un demi / la moitié</bdi>",
+                "<bdi>un demi-litre、la moitié du gâteau</bdi>"
               ],
               [
                 "1/3",
-                "un tiers",
+                "<bdi>un tiers</bdi>",
                 "—"
               ],
               [
                 "1/4",
-                "un quart",
+                "<bdi>un quart</bdi>",
                 "—"
               ],
               [
                 "3/4",
-                "trois quarts",
+                "<bdi>trois quarts</bdi>",
                 "—"
               ],
               [
                 "倍数",
-                "deux fois / le double / le triple",
-                "deux fois plus grand"
+                "<bdi>deux fois / le double / le triple</bdi>",
+                "<bdi>deux fois plus grand</bdi>"
               ],
               [
                 "约数",
-                "une dizaine / une douzaine / une centaine",
-                "une dizaine de personnes"
+                "<bdi>une dizaine / une douzaine / une centaine</bdi>",
+                "<bdi>une dizaine de personnes</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "分数读法：分子用基数、分母用序数（2/3 = deux tiers）；分母大于 1 时加 s。"
+        "notes": "分数读法：分子用基数、分母用序数（2/3 = <bdi>deux tiers）；分母大于 1 时加 s</bdi>。"
       }
     ]
   }

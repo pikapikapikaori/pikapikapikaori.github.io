@@ -203,7 +203,7 @@
           },
           {
             "key": "superlative",
-            "label": "最高级（am …-sten）"
+            "label": "最高级（<bdi>am …-sten</bdi>）"
           }
         ]
       }
@@ -306,11 +306,11 @@
         "rows": [
           {
             "key": "konj1",
-            "label": "虚拟式 I"
+            "label": "虚拟式 <bdi>I</bdi>"
           },
           {
             "key": "konj2",
-            "label": "虚拟式 II"
+            "label": "虚拟式 <bdi>II</bdi>"
           }
         ]
       },

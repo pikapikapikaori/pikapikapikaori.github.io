@@ -1,12 +1,14 @@
 import { h } from '../utils/dom.js'
+import { bdiFragment } from '../utils/bdi.js'
 import { openModal } from './modal.js'
 import { toast } from './toast.js'
 import { createJsonInput } from './json-input.js'
 import { parseWordJson, importWords, previewWords } from '../services/import-words-service.js'
 
-/** @param {object} opts userId / onDone(stats) / title */
+/** @param {object} opts userId / lang（词形包 bdi 用）/ onDone(stats) / title */
 export function openImportWordsModal({
     userId,
+    lang = null,
     onDone = null,
     title = '批量导入生词'
 } = {}) {
@@ -64,7 +66,7 @@ export function openImportWordsModal({
         previewing = true
         try {
             const stats = await previewWords(userId, words)
-            renderPreview(stats, previewEl)
+            renderPreview(stats, previewEl, lang)
             previewEl.scrollIntoView({ block: 'nearest' })
         } catch (err) {
             toast.error(`预览失败：${err.message}`, 5000)
@@ -105,7 +107,7 @@ export function openImportWordsModal({
                         try { onDone(stats) } catch (e) { console.warn(e) }
                     }
 
-                    renderResult(stats, close)
+                    renderResult(stats, close, lang)
                     return false // 保持打开，显示结果
                 }
             }
@@ -115,7 +117,7 @@ export function openImportWordsModal({
     return close
 }
 
-function renderPreview(stats, container) {
+function renderPreview(stats, container, lang = null) {
     const { created, merged, skipped, total, errors, items } = stats
 
     container.replaceChildren(
@@ -131,30 +133,30 @@ function renderPreview(stats, container) {
                     : null,
                 h('span', { class: 'badge' }, `共 ${total}`)
             ),
-            renderItemList('将新增', items.created),
-            renderItemList('将合并', items.merged),
-            renderErrors(errors)
+            renderItemList('将新增', items.created, lang),
+            renderItemList('将合并', items.merged, lang),
+            renderErrors(errors, lang)
         )
     )
     container.hidden = false
 }
 
-function renderItemList(title, items) {
+function renderItemList(title, items, lang = null) {
     if (!items || items.length === 0) return null
     return h('details', { class: 'import-list' },
         h('summary', {}, `${title}（${items.length}）`),
-        h('ul', {}, ...items.map((text) => h('li', {}, text)))
+        h('ul', {}, ...items.map((text) => h('li', {}, bdiFragment(text, lang))))
     )
 }
 
-function renderErrors(errors) {
+function renderErrors(errors, lang = null) {
     if (!errors || errors.length === 0) return null
     return h('details', { class: 'import-result__errors', open: true },
         h('summary', {}, `跳过原因（${errors.length}）`),
         h('ul', {},
             ...errors.map((err) => h('li', {},
                 h('span', { class: 'import-result__lemma' },
-                    `#${err.index + 1} ${err.lemma}`),
+                    `#${err.index + 1} `, bdiFragment(err.lemma, lang)),
                 ' — ',
                 h('span', { class: 'import-result__reason' }, err.reason)
             ))
@@ -162,7 +164,7 @@ function renderErrors(errors) {
     )
 }
 
-function renderResult(stats, closeFn) {
+function renderResult(stats, closeFn, lang = null) {
     const { created, merged, skipped, total, errors } = stats
 
     const resultEl = h('div', { class: 'import-result' },
@@ -175,7 +177,7 @@ function renderResult(stats, closeFn) {
                 : null,
             h('span', { class: 'badge' }, `共 ${total}`)
         ),
-        renderErrors(errors),
+        renderErrors(errors, lang),
         h('div', { class: 'import-result__actions' },
             h('button', {
                 class: 'btn',

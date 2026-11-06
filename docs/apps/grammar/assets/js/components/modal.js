@@ -1,4 +1,5 @@
 import { h, qs } from '../utils/dom.js'
+import { annotateBdi, bdiFragment } from '../utils/bdi.js'
 
 let activeModal = null
 
@@ -41,6 +42,8 @@ export function openModal({
     if (body instanceof Node) bodyEl.appendChild(body)
     else if (body != null) bodyEl.appendChild(document.createTextNode(String(body)))
     modal.appendChild(bodyEl)
+    // 正文里可能带 bdi（toast / modal 的调用方已包好），统一补 lang/dir
+    annotateBdi(bodyEl)
 
     if (actions.length) {
         const foot = h('div', { class: 'modal__foot' })
@@ -117,7 +120,8 @@ export function confirmModal({
         }
         openModal({
             title,
-            body: h('p', {}, message),
+            // message 可以是字符串，也可以是 [文本, bdiNode, 文本] 这样的片段数组
+            body: h('p', {}, ...(Array.isArray(message) ? message : [bdiFragment(message)])),
             actions: [
                 { label: cancelLabel, onClick: () => done(false) },
                 {

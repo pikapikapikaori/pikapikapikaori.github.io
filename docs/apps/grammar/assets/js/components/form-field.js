@@ -1,7 +1,7 @@
 /** 表单字段：标题 + 控件 + 提示。 */
 
 import { h } from '../utils/dom.js'
-import { bdiText } from '../utils/bdi.js'
+import { bdiFragment } from '../utils/bdi.js'
 
 /** 文档内自增，保证 aria-labelledby 的 id 唯一 */
 let labelSeq = 0
@@ -19,7 +19,9 @@ export function focusTargetOf(control) {
 export function fieldRow(label, control, {
     extras = [], className = '', hint = '', lang = null, target = null
 } = {}) {
-    const labelEl = label?.nodeType === 1 ? label : h('span', {}, label)
+    const labelEl = label?.nodeType === 1
+        ? label
+        : h('span', {}, bdiFragment(label, lang))
     labelEl.classList.add('field__label')
     if (!labelEl.id) labelEl.id = `field-label-${++labelSeq}`
 
@@ -34,6 +36,6 @@ export function fieldRow(label, control, {
         labelEl,
         control,
         extras,
-        hint ? h('span', { class: 'field__hint' }, bdiText(hint, lang)) : null
+        hint ? h('span', { class: 'field__hint' }, bdiFragment(hint, lang)) : null
     )
 }

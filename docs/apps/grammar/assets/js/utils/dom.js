@@ -76,8 +76,11 @@ function append(el, children) {
  */
 const HTML_TAGS = new Set([
     'STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN',
-    'UL', 'OL', 'LI', 'P'
+    'UL', 'OL', 'LI', 'P', 'BDI'
 ])
+
+/** bdi 只接受这几个属性：语言、方向、样式钩子 */
+const BDI_ATTRS = new Set(['lang', 'dir', 'class'])
 
 export function htmlFragment(text) {
     const out = document.createDocumentFragment()
@@ -109,6 +112,7 @@ function copyFlow(from, to) {
             const name = attr.name.toLowerCase()
             if (name.startsWith('on')) continue
             if (name === 'href' && /^\s*javascript:/i.test(attr.value)) continue
+            if (child.tagName === 'BDI' && !BDI_ATTRS.has(name)) continue
             el.setAttribute(attr.name, attr.value)
         }
         copyFlow(child, el)

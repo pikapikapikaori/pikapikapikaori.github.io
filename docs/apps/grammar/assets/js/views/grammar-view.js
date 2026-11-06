@@ -1,4 +1,4 @@
-import { h, replace, htmlFragment } from '../utils/dom.js'
+import { h, replace } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
 import { loadGrammarMeta, loadGrammarForChapter, loadScriptProfile } from '../services/grammar-service.js'
 import { createPageTools } from '../components/page-tools.js'
@@ -6,7 +6,7 @@ import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
 import { annotateBreves, setBreveVisible } from '../utils/breve.js'
 import { createGrammarTables } from '../components/grammar-table.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
-import { applyBdi, bdiNode } from '../utils/bdi.js'
+import { annotateBdi, bdiFragment, bdiNode } from '../utils/bdi.js'
 
 export default {
     needsUser: false,
@@ -168,7 +168,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
             chapters.appendChild(h('a', {
                 class: 'grammar-chapter' + (g.id === current ? ' grammar-chapter--active' : ''),
                 href: `#/grammar/${lang}/${g.id}`
-            }, g.title))
+            }, bdiFragment(g.title, lang)))
         }
         nav.appendChild(chapters)
     }
@@ -238,7 +238,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
                     setActiveNav(section.id)
                     afterTocJump()
                 }
-            }, section.title || section.id))
+            }, bdiFragment(section.title || section.id, lang)))
         }
 
         for (const item of section.items || []) {
@@ -255,7 +255,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
                     setActiveNav(item.id)
                     afterTocJump()
                 }
-            }, item.title || item.id))
+            }, bdiFragment(item.title || item.id, lang)))
         }
     }
     tocDetails.appendChild(toc)
@@ -267,7 +267,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     syncTocOpen()
     narrowQuery.addEventListener('change', syncTocOpen)
     // 目录里可能直接带原文（如希伯来文条目标题）
-    applyBdi(nav, lang)
+    annotateBdi(nav, lang)
 
     /** 渲染一个条目的表格与说明（懒加载时按需调用） */
     function fillItem(it, item) {
@@ -276,9 +276,10 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         const tables = createGrammarTables(item.tables || [], lang, item.title || '')
         if (tables) it.appendChild(tables)
         if (item.notes) {
-            it.appendChild(h('div', { class: 'grammar-item__notes' }, htmlFragment(item.notes)))
+            const notes = h('div', { class: 'grammar-item__notes' }, bdiFragment(item.notes, lang))
+            it.appendChild(notes)
         }
-        applyBdi(it, lang)
+        annotateBdi(it, lang)
         if (tools.isOn() && toRoman) annotateDualText(it, { range: scriptRange, toRoman })
     }
 
@@ -293,17 +294,17 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     sections.forEach((section, index) => {
         if (!section || !section.id) return
         const sec = h('section', { class: 'grammar-section', id: section.id },
-            h('h2', { class: 'grammar-section__title' }, section.title || section.id)
+            h('h2', { class: 'grammar-section__title' }, bdiFragment(section.title || section.id, lang))
         )
         if (section.notes) {
-            sec.appendChild(h('div', { class: 'grammar-section__notes' }, htmlFragment(section.notes)))
+            sec.appendChild(h('div', { class: 'grammar-section__notes' }, bdiFragment(section.notes, lang)))
         }
-        applyBdi(sec, lang)
+        annotateBdi(sec, lang)
 
         for (const item of section.items || []) {
             if (!item || !item.id) continue
             const it = h('div', { class: 'grammar-item', id: item.id },
-                h('h3', { class: 'grammar-item__title' }, item.title || item.id)
+                h('h3', { class: 'grammar-item__title' }, bdiFragment(item.title || item.id, lang))
             )
             if (anchorSectionIndex < 0 || index <= anchorSectionIndex) fillItem(it, item)
             else lazy.set(it, item)
@@ -423,7 +424,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         if (!spyFrame) spyFrame = requestAnimationFrame(syncActiveByScroll)
     }
 
-    applyBdi(content, lang)
+    annotateBdi(content, lang)
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)

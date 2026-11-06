@@ -18,13 +18,13 @@
             "rows": [
               [
                 "阳性",
-                "le livre",
-                "les livres"
+                "<bdi>le livre</bdi>",
+                "<bdi>les livres</bdi>"
               ],
               [
                 "阴性",
-                "la table",
-                "les tables"
+                "<bdi>la table</bdi>",
+                "<bdi>les tables</bdi>"
               ]
             ]
           },
@@ -39,47 +39,47 @@
             "rows": [
               [
                 "一般",
-                "+ -s",
-                "livre → livres"
+                "<bdi>+ -s</bdi>",
+                "<bdi>livre → livres</bdi>"
               ],
               [
-                "-s, -x, -z",
+                "<bdi>-s, -x, -z</bdi>",
                 "不变",
-                "voix → voix, nez → nez"
+                "<bdi>voix → voix, nez → nez</bdi>"
               ],
               [
-                "-al",
-                "-al → -aux",
-                "cheval → chevaux"
+                "<bdi>-al</bdi>",
+                "<bdi>-al → -aux</bdi>",
+                "<bdi>cheval → chevaux</bdi>"
               ],
               [
-                "-eau, -au, -eu",
-                "+ -x",
-                "beau → beaux, feu → feux"
+                "<bdi>-eau, -au, -eu</bdi>",
+                "<bdi>+ -x</bdi>",
+                "<bdi>beau → beaux, feu → feux</bdi>"
               ],
               [
-                "-ou（部分）",
-                "+ -x",
-                "bijou → bijoux, genou → genoux"
+                "-<bdi>ou</bdi>（部分）",
+                "<bdi>+ -x</bdi>",
+                "<bdi>bijou → bijoux, genou → genoux</bdi>"
               ],
               [
-                "-ail（部分）",
-                "-ail → -aux",
-                "travail → travaux"
+                "-<bdi>ail</bdi>（部分）",
+                "<bdi>-ail → -aux</bdi>",
+                "<bdi>travail → travaux</bdi>"
               ],
               [
-                "-s / -x / -z 结尾",
+                "-<bdi>s / -x / -z</bdi> 结尾",
                 "不变",
-                "fils → fils"
+                "<bdi>fils → fils</bdi>"
               ]
             ]
           }
         ],
-        "notes": "法语名词的性别需按词记忆：以 -tion / -té / -ette / -elle / -ance / -ence 结尾多为阴性，以 -ment / -age / -isme / -eau 结尾多为阳性。"
+        "notes": "法语名词的性别需按词记忆：以 -<bdi>tion / -té / -ette / -elle / -ance / -ence 结尾多为阴性，以 -ment / -age / -isme / -eau</bdi> 结尾多为阳性。"
       },
       {
         "id": "fr-noun-plural-regular",
-        "title": "一般规则（+ -s）",
+        "title": "一般规则（+ -<bdi>s</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -138,10 +138,10 @@
             "rows": [
               [
                 "一般名词",
-                "+ -s"
+                "<bdi>+ -s</bdi>"
               ],
               [
-                "-s 的读音",
+                "-<bdi>s</bdi> 的读音",
                 "不发音"
               ],
               [
@@ -160,26 +160,26 @@
             ],
             "rows": [
               [
-                "livre",
-                "livres"
+                "<bdi>livre</bdi>",
+                "<bdi>livres</bdi>"
               ],
               [
-                "table",
-                "tables"
+                "<bdi>table</bdi>",
+                "<bdi>tables</bdi>"
               ],
               [
-                "étudiant",
-                "étudiants"
+                "<bdi>étudiant</bdi>",
+                "<bdi>étudiants</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "绝大多数名词在单数形式后加 -s；-s 本身不发音。"
+        "notes": "绝大多数名词在单数形式后加 -<bdi>s；-s</bdi> 本身不发音。"
       },
       {
         "id": "fr-noun-plural-al",
-        "title": "-al → -aux",
+        "title": "<bdi>-al → -aux</bdi>",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -229,7 +229,7 @@
         },
         "tables": [
           {
-            "caption": "规则：-al → -aux",
+            "caption": "规则：-<bdi>al → -aux</bdi>",
             "role": "pattern",
             "headers": [
               "情况",
@@ -237,16 +237,16 @@
             ],
             "rows": [
               [
-                "-al 结尾",
-                "-aux"
+                "-<bdi>al</bdi> 结尾",
+                "<bdi>-aux</bdi>"
               ],
               [
                 "例外",
-                "bal / carnaval / festival / récital 等 + -s"
+                "<bdi>bal / carnaval / festival / récital 等 + -s</bdi>"
               ],
               [
                 "读音",
-                "-aux 读 [o]"
+                "<bdi>-aux 读 [o]</bdi>"
               ]
             ],
             "lang": "fr"
@@ -260,26 +260,26 @@
             ],
             "rows": [
               [
-                "cheval",
-                "chevaux"
+                "<bdi>cheval</bdi>",
+                "<bdi>chevaux</bdi>"
               ],
               [
-                "journal",
-                "journaux"
+                "<bdi>journal</bdi>",
+                "<bdi>journaux</bdi>"
               ],
               [
-                "animal",
-                "animaux"
+                "<bdi>animal</bdi>",
+                "<bdi>animaux</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "例外：bal / carnaval / festival / récital 等加 -s（bals）。"
+        "notes": "例外：<bdi>bal / carnaval / festival / récital 等加 -s（bals</bdi>）。"
       },
       {
         "id": "fr-noun-plural-eau",
-        "title": "-eau / -au / -eu → + -x",
+        "title": "<bdi>-eau / -au / -eu → + -x</bdi>",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -329,7 +329,7 @@
         },
         "tables": [
           {
-            "caption": "规则：-eau / -au / -eu → + -x",
+            "caption": "规则：-<bdi>eau / -au / -eu → + -x</bdi>",
             "role": "pattern",
             "headers": [
               "情况",
@@ -337,16 +337,16 @@
             ],
             "rows": [
               [
-                "-eau / -au / -eu 结尾",
-                "+ -x"
+                "-<bdi>eau / -au / -eu</bdi> 结尾",
+                "<bdi>+ -x</bdi>"
               ],
               [
                 "例外",
-                "pneu / landau / bleu + -s"
+                "<bdi>pneu / landau / bleu + -s</bdi>"
               ],
               [
                 "读音",
-                "-x 不发音"
+                "-<bdi>x</bdi> 不发音"
               ]
             ],
             "lang": "fr"
@@ -360,26 +360,26 @@
             ],
             "rows": [
               [
-                "bateau",
-                "bateaux"
+                "<bdi>bateau</bdi>",
+                "<bdi>bateaux</bdi>"
               ],
               [
-                "château",
-                "châteaux"
+                "<bdi>château</bdi>",
+                "<bdi>châteaux</bdi>"
               ],
               [
-                "feu",
-                "feux"
+                "<bdi>feu</bdi>",
+                "<bdi>feux</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "例外：pneu / landau / bleu 加 -s（pneus）。"
+        "notes": "例外：<bdi>pneu / landau / bleu 加 -s（pneus</bdi>）。"
       },
       {
         "id": "fr-noun-plural-invariable",
-        "title": "不变（-s / -x / -z 结尾）",
+        "title": "不变（-<bdi>s / -x / -z</bdi> 结尾）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -424,7 +424,7 @@
         },
         "tables": [
           {
-            "caption": "规则：以 -s / -x / -z 结尾",
+            "caption": "规则：以 -<bdi>s / -x / -z</bdi> 结尾",
             "role": "pattern",
             "headers": [
               "情况",
@@ -432,12 +432,12 @@
             ],
             "rows": [
               [
-                "以 -s / -x / -z 结尾",
+                "以 -<bdi>s / -x / -z</bdi> 结尾",
                 "单复数同形"
               ],
               [
                 "区分方式",
-                "靠限定词（le bras / les bras）"
+                "靠限定词（<bdi>le bras / les bras</bdi>）"
               ],
               [
                 "读音",
@@ -455,22 +455,22 @@
             ],
             "rows": [
               [
-                "voix",
-                "voix"
+                "<bdi>voix</bdi>",
+                "<bdi>voix</bdi>"
               ],
               [
-                "nez",
-                "nez"
+                "<bdi>nez</bdi>",
+                "<bdi>nez</bdi>"
               ],
               [
-                "bras",
-                "bras"
+                "<bdi>bras</bdi>",
+                "<bdi>bras</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "以 -s / -x / -z 结尾的名词复数形式不变，靠限定词区分（le bras / les bras）。"
+        "notes": "以 -<bdi>s / -x / -z 结尾的名词复数形式不变，靠限定词区分（le bras / les bras</bdi>）。"
       },
       {
         "id": "fr-noun-irregular",
@@ -486,33 +486,33 @@
             ],
             "rows": [
               [
-                "œil",
-                "yeux",
+                "<bdi>œil</bdi>",
+                "<bdi>yeux</bdi>",
                 "最常用的不规则复数"
               ],
               [
-                "ciel",
-                "cieux",
-                "「天空」；ciels 指「气候」"
+                "<bdi>ciel</bdi>",
+                "<bdi>cieux</bdi>",
+                "「天空」；<bdi>ciels</bdi> 指「气候」"
               ],
               [
-                "travail",
-                "travaux",
-                "-ail → -aux"
+                "<bdi>travail</bdi>",
+                "<bdi>travaux</bdi>",
+                "<bdi>-ail → -aux</bdi>"
               ],
               [
-                "vitrail",
-                "vitraux",
-                "-ail → -aux"
+                "<bdi>vitrail</bdi>",
+                "<bdi>vitraux</bdi>",
+                "<bdi>-ail → -aux</bdi>"
               ],
               [
-                "bijou / caillou / chou / genou / hibou / joujou / pou",
-                "…-x",
-                "以 -ou 结尾但加 -x 的七个词"
+                "<bdi>bijou / caillou / chou / genou / hibou / joujou / pou</bdi>",
+                "<bdi>…-x</bdi>",
+                "以 -<bdi>ou 结尾但加 -x</bdi> 的七个词"
               ],
               [
-                "monsieur / madame / mademoiselle",
-                "messieurs / mesdames / mesdemoiselles",
+                "<bdi>monsieur / madame / mademoiselle</bdi>",
+                "<bdi>messieurs / mesdames / mesdemoiselles</bdi>",
                 "敬称"
               ]
             ],

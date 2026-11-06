@@ -38,52 +38,52 @@
         "rows": [
           {
             "key": "mbi",
-            "label": "现在-将来时 (-ᠮᠪᡳ)",
+            "label": "现在-将来时 (-<bdi>ᠮᠪᡳ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "fut",
-            "label": "将来/未完成 (-ᡵᠠ/-ᡵᡝ/-ᡵᠣ)",
+            "label": "将来/未完成 (-<bdi>ᡵᠠ/-ᡵᡝ/-ᡵᠣ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "past",
-            "label": "过去时 (-ᡥᠠ/-ᡥᡝ/-ᡥᠣ)",
+            "label": "过去时 (-<bdi>ᡥᠠ/-ᡥᡝ/-ᡥᠣ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "mbime",
-            "label": "同时持续 (-ᠮᠪᡳᠮᡝ)",
+            "label": "同时持续 (-<bdi>ᠮᠪᡳᠮᡝ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "mbihe",
-            "label": "过去进行 (-ᠮᠪᡳᡥᡝ)",
+            "label": "过去进行 (-<bdi>ᠮᠪᡳᡥᡝ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "prog",
-            "label": "进行 (-ᠮᡝ ᠪᡳ)",
+            "label": "进行 (-<bdi>ᠮᡝ ᠪᡳ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "prog2",
-            "label": "进行/持续 (-ᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ)",
+            "label": "进行/持续 (-<bdi>ᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "perf",
-            "label": "完成/已毕 (-ᠮᠠᡥᠠᠪᡳ)",
+            "label": "完成/已毕 (-<bdi>ᠮᠠᡥᠠᠪᡳ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "perf2",
-            "label": "完成 (-ᡥᠠ ᠪᡳ)",
+            "label": "完成 (-<bdi>ᡥᠠ ᠪᡳ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "plup",
-            "label": "过去完成 (-ᡥᡝ ᠪᡳᡥᡝ)",
+            "label": "过去完成 (-<bdi>ᡥᡝ ᠪᡳᡥᡝ</bdi>)",
             "grammarRef": "mnc-verb-tense"
           }
         ]
@@ -105,27 +105,27 @@
           },
           {
             "key": "opt",
-            "label": "祈愿 (-ᡴᡳᠨᡳ)",
+            "label": "祈愿 (-<bdi>ᡴᡳᠨᡳ</bdi>)",
             "grammarRef": "mnc-verb-mood"
           },
           {
             "key": "prec",
-            "label": "祈使 (-ᠴᡳᠨᠠ)",
+            "label": "祈使 (-<bdi>ᠴᡳᠨᠠ</bdi>)",
             "grammarRef": "mnc-verb-mood"
           },
           {
             "key": "negpres",
-            "label": "现在否定 (-ᡵᠠᡴᡡ)",
+            "label": "现在否定 (-<bdi>ᡵᠠᡴᡡ</bdi>)",
             "grammarRef": "mnc-verb-negation"
           },
           {
             "key": "negpast",
-            "label": "过去否定 (-ᡥᠠᡴᡡ)",
+            "label": "过去否定 (-<bdi>ᡥᠠᡴᡡ</bdi>)",
             "grammarRef": "mnc-verb-negation"
           },
           {
             "key": "prohib",
-            "label": "禁止 (ᡠᠮᡝ + -ᡵᠠ)",
+            "label": "禁止 (<bdi>ᡠᠮᡝ + -ᡵᠠ</bdi>)",
             "grammarRef": "mnc-verb-negation"
           }
         ]
@@ -142,27 +142,27 @@
         "rows": [
           {
             "key": "cvbme",
-            "label": "同时 (-ᠮᡝ)",
+            "label": "同时 (-<bdi>ᠮᡝ</bdi>)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbfi",
-            "label": "先后完成 (-ᡶᡳ)",
+            "label": "先后完成 (-<bdi>ᡶᡳ</bdi>)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbhai",
-            "label": "持续 (-ᡥᠠᡳ/-ᡥᡝᡳ/-ᡥᠣᡳ)",
+            "label": "持续 (-<bdi>ᡥᠠᡳ/-ᡥᡝᡳ/-ᡥᠣᡳ</bdi>)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbtala",
-            "label": "直到 (-ᡨᠠᠯᠠ/-ᡨᡝᠯᡝ)",
+            "label": "直到 (-<bdi>ᡨᠠᠯᠠ/-ᡨᡝᠯᡝ</bdi>)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbnggala",
-            "label": "当…时 (-ᠩᡤᠠᠯᠠ/-ᠩᡤᡝᠯᡝ)",
+            "label": "当…时 (-<bdi>ᠩᡤᠠᠯᠠ/-ᠩᡤᡝᠯᡝ</bdi>)",
             "grammarRef": "mnc-verb-converb"
           }
         ]
@@ -179,27 +179,27 @@
         "rows": [
           {
             "key": "ptcppast",
-            "label": "已发生形动 (-ᡥᠠ)",
+            "label": "已发生形动 (-<bdi>ᡥᠠ</bdi>)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "ptcpfut",
-            "label": "未发生形动 (-ᡵᠠ)",
+            "label": "未发生形动 (-<bdi>ᡵᠠ</bdi>)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "nomn",
-            "label": "名词化 (-ᠨ)",
+            "label": "名词化 (-<bdi>ᠨ</bdi>)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "nomsi",
-            "label": "名词化 (-ᠰᡳ)",
+            "label": "名词化 (-<bdi>ᠰᡳ</bdi>)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "nomtan",
-            "label": "名词化 (-ᡨᠠᠨ)",
+            "label": "名词化 (-<bdi>ᡨᠠᠨ</bdi>)",
             "grammarRef": "mnc-verb-participle"
           }
         ]

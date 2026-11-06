@@ -151,7 +151,7 @@ export default {
 
         function buildFront(word) {
             return h('div', { class: 'review-front' },
-                h('div', { class: 'review-word', lang }, bdiNode(word.lemma, lang))
+                h('div', { class: 'review-word' }, bdiNode(word.lemma, lang))
             )
         }
 
@@ -166,7 +166,8 @@ export default {
                     h('div', { class: 'review-section__label' }, t.meanings),
                     list.length
                         ? h('ol', { class: 'review-meanings' },
-                            ...list.map((m) => h('li', { class: 'review-meaning' }, h('bdi', {}, m.text)))
+                            ...list.map((m) => h('li', { class: 'review-meaning' },
+                                bdiNode(m.text, m.lang === 'en' ? 'en' : 'zh')))
                         )
                         : h('div', { class: 'review-empty' }, t.emptyMeanings)
                 )
@@ -237,7 +238,7 @@ export default {
                                 type: 'button',
                                 onclick: () => { location.hash = `#/lang/${lang}/words/${w.id}` }
                             },
-                            h('span', { class: 'review-done__lemma', lang }, bdiNode(w.lemma, lang)),
+                            h('span', { class: 'review-done__lemma' }, bdiNode(w.lemma, lang)),
                             h('span', { class: 'review-done__pos' }, posLabel(w.pos))
                             ))
                         )

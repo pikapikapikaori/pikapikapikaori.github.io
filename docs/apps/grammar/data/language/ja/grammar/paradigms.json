@@ -61,22 +61,22 @@
         "rows": [
           {
             "key": "masu",
-            "label": "ます形（叮咛）",
+            "label": "<bdi>ます形</bdi>（叮咛）",
             "grammarRef": "ja-verb-overview"
           },
           {
             "key": "nai",
-            "label": "ない形",
+            "label": "<bdi>ない形</bdi>",
             "grammarRef": "ja-verb-overview"
           },
           {
             "key": "ta",
-            "label": "た形",
+            "label": "<bdi>た形</bdi>",
             "grammarRef": "ja-verb-overview"
           },
           {
             "key": "te",
-            "label": "て形",
+            "label": "<bdi>て形</bdi>",
             "grammarRef": "ja-verb-overview"
           },
           {
@@ -106,7 +106,7 @@
           },
           {
             "key": "kateiba",
-            "label": "仮定形＋ば",
+            "label": "仮定形＋<bdi>ば</bdi>",
             "grammarRef": "ja-verb-overview"
           }
         ]
@@ -189,27 +189,27 @@
         "rows": [
           {
             "key": "teinei",
-            "label": "叮咛形（です）",
+            "label": "叮咛形（<bdi>です</bdi>）",
             "grammarRef": "ja-adj-overview"
           },
           {
             "key": "nai",
-            "label": "ない形",
+            "label": "<bdi>ない形</bdi>",
             "grammarRef": "ja-adj-overview"
           },
           {
             "key": "ta",
-            "label": "た形",
+            "label": "<bdi>た形</bdi>",
             "grammarRef": "ja-adj-overview"
           },
           {
             "key": "te",
-            "label": "て形",
+            "label": "<bdi>て形</bdi>",
             "grammarRef": "ja-adj-overview"
           },
           {
             "key": "kateiba",
-            "label": "仮定形＋ば",
+            "label": "仮定形＋<bdi>ば</bdi>",
             "grammarRef": "ja-adj-overview"
           },
           {

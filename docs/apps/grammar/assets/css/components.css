@@ -1028,9 +1028,8 @@ button.word-card__derivative {
     background: var(--c-accent-soft);
 }
 
-/* 悉昙文列用专用字体（其余列由 base.css 的 [lang] 规则决定） */
-.grammar-table td[lang="sa-siddham"],
-.grammar-table th[lang="sa-siddham"] {
+/* 悉昙文列用专用字体（lang 现在写在单元格里的 <bdi> 上） */
+.grammar-table [lang="sa-siddham"] {
     font-family: var(--ff-siddham);
 }
 

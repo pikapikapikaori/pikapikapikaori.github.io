@@ -19,67 +19,67 @@
             "rows": [
               [
                 "0",
-                "null",
+                "<bdi>null</bdi>",
                 "11",
-                "elf"
+                "<bdi>elf</bdi>"
               ],
               [
                 "1",
-                "eins",
+                "<bdi>eins</bdi>",
                 "12",
-                "zwölf"
+                "<bdi>zwölf</bdi>"
               ],
               [
                 "2",
-                "zwei",
+                "<bdi>zwei</bdi>",
                 "13",
-                "dreizehn"
+                "<bdi>dreizehn</bdi>"
               ],
               [
                 "3",
-                "drei",
+                "<bdi>drei</bdi>",
                 "14",
-                "vierzehn"
+                "<bdi>vierzehn</bdi>"
               ],
               [
                 "4",
-                "vier",
+                "<bdi>vier</bdi>",
                 "15",
-                "fünfzehn"
+                "<bdi>fünfzehn</bdi>"
               ],
               [
                 "5",
-                "fünf",
+                "<bdi>fünf</bdi>",
                 "16",
-                "sechzehn"
+                "<bdi>sechzehn</bdi>"
               ],
               [
                 "6",
-                "sechs",
+                "<bdi>sechs</bdi>",
                 "17",
-                "siebzehn"
+                "<bdi>siebzehn</bdi>"
               ],
               [
                 "7",
-                "sieben",
+                "<bdi>sieben</bdi>",
                 "18",
-                "achtzehn"
+                "<bdi>achtzehn</bdi>"
               ],
               [
                 "8",
-                "acht",
+                "<bdi>acht</bdi>",
                 "19",
-                "neunzehn"
+                "<bdi>neunzehn</bdi>"
               ],
               [
                 "9",
-                "neun",
+                "<bdi>neun</bdi>",
                 "20",
-                "zwanzig"
+                "<bdi>zwanzig</bdi>"
               ],
               [
                 "10",
-                "zehn",
+                "<bdi>zehn</bdi>",
                 "—",
                 "—"
               ]
@@ -97,34 +97,34 @@
             "rows": [
               [
                 "21",
-                "einundzwanzig",
-                "先个位后十位，中间用 und"
+                "<bdi>einundzwanzig</bdi>",
+                "先个位后十位，中间用 <bdi>und</bdi>"
               ],
               [
                 "30 / 40",
-                "dreißig / vierzig",
-                "30 用 -ßig"
+                "<bdi>dreißig / vierzig</bdi>",
+                "30 用 -<bdi>ßig</bdi>"
               ],
               [
                 "100",
-                "(ein)hundert",
+                "<bdi>(ein)hundert</bdi>",
                 "—"
               ],
               [
                 "1000",
-                "(ein)tausend",
+                "<bdi>(ein)tausend</bdi>",
                 "—"
               ],
               [
                 "1000000",
-                "eine Million",
-                "名词，复数 Millionen"
+                "<bdi>eine Million</bdi>",
+                "名词，复数 <bdi>Millionen</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "<strong>ein 有变格：按不定冠词变格</strong>（ein / eine / eines / einem / einen），与 kein、物主代词（mein 等）完全一致；只有在强调「一个」时才重读。zwei 在口语里有时说 zwo，以免与 drei 混淆。"
+        "notes": "<strong><bdi>ein</bdi> 有变格：按不定冠词变格</strong>（<bdi>ein / eine / eines / einem / einen），与 kein、物主代词（mein 等）完全一致；只有在强调「一个」时才重读。zwei 在口语里有时说 zwo，以免与 drei</bdi> 混淆。"
       },
       {
         "id": "de-num-ordinal",
@@ -141,39 +141,39 @@
             "rows": [
               [
                 "0",
-                "nullte",
+                "<bdi>nullte</bdi>",
                 "极少用"
               ],
               [
                 "1",
-                "erste",
+                "<bdi>erste</bdi>",
                 "不规则"
               ],
               [
                 "3",
-                "dritte",
+                "<bdi>dritte</bdi>",
                 "不规则"
               ],
               [
                 "7",
-                "siebte",
+                "<bdi>siebte</bdi>",
                 "不规则"
               ],
               [
                 "4–19（除 7）",
-                "vierte / fünfte / sechste …",
-                "1–19：+ -te"
+                "<bdi>vierte / fünfte / sechste …</bdi>",
+                "<bdi>1–19：+ -te</bdi>"
               ],
               [
                 "20 以上",
-                "zwanzigste / hundertste",
-                "+ -ste"
+                "<bdi>zwanzigste / hundertste</bdi>",
+                "<bdi>+ -ste</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "序数词按形容词变格（der erste Tag / am ersten Tag）。"
+        "notes": "序数词按形容词变格（<bdi>der erste Tag / am ersten Tag</bdi>）。"
       },
       {
         "id": "de-num-other",
@@ -190,34 +190,34 @@
             "rows": [
               [
                 "1/2",
-                "die Hälfte / halb",
-                "die Hälfte des Kuchens"
+                "<bdi>die Hälfte / halb</bdi>",
+                "<bdi>die Hälfte des Kuchens</bdi>"
               ],
               [
                 "1/3",
-                "ein Drittel",
-                "ein Drittel der Zeit"
+                "<bdi>ein Drittel</bdi>",
+                "<bdi>ein Drittel der Zeit</bdi>"
               ],
               [
                 "1/4",
-                "ein Viertel",
-                "ein Viertel Liter"
+                "<bdi>ein Viertel</bdi>",
+                "<bdi>ein Viertel Liter</bdi>"
               ],
               [
                 "倍数",
-                "zweimal / doppelt",
-                "zweimal so groß"
+                "<bdi>zweimal / doppelt</bdi>",
+                "<bdi>zweimal so groß</bdi>"
               ],
               [
                 "约数",
-                "ein paar / einige / Dutzende",
-                "ein paar Leute"
+                "<bdi>ein paar / einige / Dutzende</bdi>",
+                "<bdi>ein paar Leute</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "分数词大多名词化，首字母大写（das Drittel、das Viertel）。"
+        "notes": "分数词大多名词化，首字母大写（<bdi>das Drittel、das Viertel</bdi>）。"
       },
       {
         "id": "de-num-time-date",
@@ -234,33 +234,33 @@
             "rows": [
               [
                 "14:30",
-                "vierzehn Uhr dreißig",
-                "halb drei（半点说「下一个钟点的半点」）"
+                "<bdi>vierzehn Uhr dreißig</bdi>",
+                "<bdi>halb drei</bdi>（半点说「下一个钟点的半点」）"
               ],
               [
                 "14:15",
-                "vierzehn Uhr fünfzehn",
-                "Viertel nach zwei"
+                "<bdi>vierzehn Uhr fünfzehn</bdi>",
+                "<bdi>Viertel nach zwei</bdi>"
               ],
               [
                 "14:45",
-                "vierzehn Uhr fünfundvierzig",
-                "Viertel vor drei"
+                "<bdi>vierzehn Uhr fünfundvierzig</bdi>",
+                "<bdi>Viertel vor drei</bdi>"
               ],
               [
                 "8:05",
-                "acht Uhr fünf",
-                "fünf nach acht"
+                "<bdi>acht Uhr fünf</bdi>",
+                "<bdi>fünf nach acht</bdi>"
               ],
               [
                 "8:55",
-                "acht Uhr fünfundfünfzig",
-                "fünf vor neun"
+                "<bdi>acht Uhr fünfundfünfzig</bdi>",
+                "<bdi>fünf vor neun</bdi>"
               ],
               [
                 "1:00",
-                "ein Uhr",
-                "Punkt eins"
+                "<bdi>ein Uhr</bdi>",
+                "<bdi>Punkt eins</bdi>"
               ]
             ],
             "lang": "de"
@@ -276,23 +276,23 @@
             "rows": [
               [
                 "日",
-                "序数词 + 形容词变格（am = an + dem）",
-                "am 3. Oktober / am dritten Oktober"
+                "序数词 + 形容词变格（<bdi>am = an + dem</bdi>）",
+                "<bdi>am 3. Oktober / am dritten Oktober</bdi>"
               ],
               [
                 "写法",
                 "序数词 + 点",
-                "der 3. Oktober 2026 / 03.10.2026"
+                "<bdi>der 3. Oktober 2026 / 03.10.2026</bdi>"
               ],
               [
                 "问日期",
-                "Der Wievielte ist heute?",
-                "Heute ist der 3. Oktober."
+                "<bdi>Der Wievielte ist heute?</bdi>",
+                "<bdi>Heute ist der 3. Oktober.</bdi>"
               ],
               [
                 "星期 / 月份",
                 "首字母大写",
-                "am Montag, im Januar"
+                "<bdi>am Montag, im Januar</bdi>"
               ]
             ],
             "lang": "de"
@@ -307,25 +307,25 @@
             "rows": [
               [
                 "1990",
-                "neunzehnhundertneunzig"
+                "<bdi>neunzehnhundertneunzig</bdi>"
               ],
               [
                 "2005",
-                "zweitausendfünf"
+                "<bdi>zweitausendfünf</bdi>"
               ],
               [
                 "2026",
-                "zweitausendsechsundzwanzig"
+                "<bdi>zweitausendsechsundzwanzig</bdi>"
               ],
               [
-                "in + 年份",
-                "im Jahr(e) 1990 / 1990（不加介词时用 im Jahr）"
+                "<bdi>in</bdi> + 年份",
+                "<bdi>im Jahr(e) 1990 / 1990（不加介词时用 im Jahr）</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "钟点用 24 小时制书写、12 小时制口语；半点用 halb + 下一个钟点（halb drei = 2:30）。日期中的序数词按形容词变格（am dritten Oktober），书面用数字加点（3. Oktober）。"
+        "notes": "钟点用 24 小时制书写、12 小时制口语；半点用 <bdi>halb + 下一个钟点（halb drei = 2:30）。日期中的序数词按形容词变格（am dritten Oktober），书面用数字加点（3. Oktober</bdi>）。"
       }
     ]
   }

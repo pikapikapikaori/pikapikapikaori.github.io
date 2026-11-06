@@ -1,5 +1,5 @@
 import { h } from '../utils/dom.js'
-import { applyBdi } from '../utils/bdi.js'
+import { annotateBdi, bdiFragment, bdiNode, stripBdi } from '../utils/bdi.js'
 import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
 import { fieldDefsOfTemplate, fieldValues, genderOfColumn, genderOfRow, termsOf } from '../models/grammar.js'
 import { getLanguage } from '../data/languages.js'
@@ -122,7 +122,7 @@ export function openCardOverlay(word, opts = {}) {
     }, breveBtn, romanBtn, closeBtn, head, body)
 
     overlayEl = h('div', { class: 'card-overlay' + (replacing ? ' card-overlay--instant' : '') }, backdrop, panel)
-    applyBdi(overlayEl)
+    annotateBdi(overlayEl, language)
     document.body.appendChild(overlayEl)
 
     /** 跳转前先关闭 overlay，避免弹窗留在旧页面上 */
@@ -199,14 +199,14 @@ export function openCardOverlay(word, opts = {}) {
                 onclick: clickable
                     ? (e) => { e.stopPropagation(); wrappedGrammarRef(it.grammarRef) }
                     : null
-            }, it.label))
+            }, bdiFragment(it.label, language)))
         }
         for (const t of word.tags || []) {
             badges.appendChild(h('span', { class: 'badge' }, t))
         }
 
         head.replaceChildren(
-            h('div', { class: 'card-overlay__lemma', lang: language }, word.lemma),
+            h('div', { class: 'card-overlay__lemma' }, bdiNode(word.lemma, language)),
             badges
         )
 
@@ -214,12 +214,14 @@ export function openCardOverlay(word, opts = {}) {
         if (baseStem) {
             const extra = otherStems(word)
             body.appendChild(ovSection(stemLabel,
-                h('div', { class: 'word-card__stem', lang: language }, stemDisplay(baseStem)),
+                h('div', { class: 'word-card__stem' }, bdiNode(stemDisplay(baseStem), language)),
                 extra.length
-                    ? h('div', { class: 'word-card__stem-extra', lang: language },
+                    ? h('div', { class: 'word-card__stem-extra' },
                         ...extra.map(([key, value]) => h('span', { class: 'word-card__stem-part' },
-                            partLabels?.[key] ? h('span', { class: 'word-card__stem-part-label' }, partLabels[key]) : null,
-                            stemDisplay(value)
+                            partLabels?.[key]
+                                ? h('span', { class: 'word-card__stem-part-label' }, stripBdi(partLabels[key]))
+                                : null,
+                            bdiNode(stemDisplay(value), language)
                         )))
                     : null
             ))
@@ -238,9 +240,8 @@ export function openCardOverlay(word, opts = {}) {
                 meanings.length
                     ? h('ol', { class: 'word-card__list' },
                         ...meanings.map((m) => h('li', {
-                            class: 'word-card__meaning',
-                            lang: m.lang === 'en' ? 'en' : undefined
-                        }, h('bdi', {}, m.text)))
+                            class: 'word-card__meaning'
+                        }, bdiNode(m.text, m.lang === 'en' ? 'en' : 'zh')))
                     )
                     : h('div', { class: 'field__hint' }, '该来源没有含义')
             ))
@@ -269,7 +270,8 @@ export function openCardOverlay(word, opts = {}) {
                     items: panels,
                     active: activeTable,
                     onChange: (key) => { activeTable = key },
-                    className: 'tab-bar--tables'
+                    className: 'tab-bar--tables',
+                    lang: language
                 }).el))
             }
         }
@@ -289,10 +291,7 @@ export function openCardOverlay(word, opts = {}) {
                         i.label
                             ? h('span', { class: 'word-card__inflection-label' }, i.label + '：')
                             : null,
-                        h('span', {
-                            class: 'word-card__inflection-form',
-                            lang: language
-                        }, i.form || '')
+                        bdiNode(i.form || '', language, { class: 'word-card__inflection-form' })
                     ))
                 ))
             }
@@ -341,24 +340,23 @@ export function openCardOverlay(word, opts = {}) {
                             return h('button', {
                                 class: 'badge badge--accent word-card__derivative',
                                 type: 'button',
-                                lang: language,
                                 onclick: (e) => {
                                     e.stopPropagation()
                                     wrappedDerivativeClick(target)
                                 }
-                            }, d)
+                            }, bdiNode(d, language))
                         }
                         return h('span', {
-                            class: 'badge word-card__derivative',
-                            lang: language
-                        }, d)
+                            class: 'badge word-card__derivative'
+                        }, bdiNode(d, language))
                     })
                 )
             ))
         }
 
         if (word.notes) {
-            body.appendChild(ovSection(terms.notes, h('div', {}, word.notes)))
+            const notes = h('div', {}, bdiFragment(word.notes, language))
+            body.appendChild(ovSection(terms.notes, notes))
         }
 
         annotateRoman()

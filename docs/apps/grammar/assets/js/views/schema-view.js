@@ -7,7 +7,7 @@ import { h, replace } from '../utils/dom.js'
 import { appStore, setNavContext } from '../app-state.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { renderMarkdown, scanHeadings } from '../utils/markdown.js'
-import { wrapScriptText } from '../utils/bdi.js'
+import { annotateBdi, wrapScriptText } from '../utils/bdi.js'
 import { loadSchema, copyText, downloadMarkdown } from '../services/schema-service.js'
 import { createPageTools } from '../components/page-tools.js'
 import { openSelectMenu } from '../components/select-menu.js'
@@ -173,11 +173,13 @@ function render(main, { title, docs, index, doc, anchor }) {
     if (doc.lead) {
         const lead = h('blockquote', { class: 'doc-quote doc-quote--lead' })
         lead.appendChild(renderMarkdown(doc.lead))
+        annotateBdi(lead)
         wrapScriptText(lead)
         content.appendChild(lead)
     }
     content.appendChild(body)
     body.appendChild(renderMarkdown(doc.markdown))
+    annotateBdi(body)
     wrapScriptText(body)
 
     const headings = scanHeadings(doc.markdown)

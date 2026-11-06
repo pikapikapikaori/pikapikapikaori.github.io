@@ -5,7 +5,7 @@
     "items": [
       {
         "id": "la-pron-1st-2nd",
-        "title": "一二人称代词（ego / tū）",
+        "title": "一二人称代词（<bdi>ego / tū</bdi>）",
         "inflect": "pron",
         "tables": [
           {
@@ -13,34 +13,34 @@
             "role": "pattern",
             "headers": [
               "格",
-              "ego 我",
-              "tū 你"
+              "<bdi>ego</bdi> 我",
+              "<bdi>tū</bdi> 你"
             ],
             "rows": [
               [
                 "主格",
-                "ego",
-                "tū"
+                "<bdi>ego</bdi>",
+                "<bdi>tū</bdi>"
               ],
               [
                 "属格",
-                "meī",
-                "tuī"
+                "<bdi>meī</bdi>",
+                "<bdi>tuī</bdi>"
               ],
               [
                 "与格",
-                "mihi",
-                "tibi"
+                "<bdi>mihi</bdi>",
+                "<bdi>tibi</bdi>"
               ],
               [
                 "宾格",
-                "mē",
-                "tē"
+                "<bdi>mē</bdi>",
+                "<bdi>tē</bdi>"
               ],
               [
                 "夺格",
-                "mē",
-                "tē"
+                "<bdi>mē</bdi>",
+                "<bdi>tē</bdi>"
               ]
             ]
           },
@@ -49,47 +49,47 @@
             "role": "pattern",
             "headers": [
               "格",
-              "nōs 我们",
-              "vōs 你们"
+              "<bdi>nōs</bdi> 我们",
+              "<bdi>vōs</bdi> 你们"
             ],
             "rows": [
               [
                 "主格",
-                "nōs",
-                "vōs"
+                "<bdi>nōs</bdi>",
+                "<bdi>vōs</bdi>"
               ],
               [
                 "属格",
-                "nostrum / nostrī",
-                "vestrum / vestrī"
+                "<bdi>nostrum / nostrī</bdi>",
+                "<bdi>vestrum / vestrī</bdi>"
               ],
               [
                 "与格",
-                "nōbīs",
-                "vōbīs"
+                "<bdi>nōbīs</bdi>",
+                "<bdi>vōbīs</bdi>"
               ],
               [
                 "宾格",
-                "nōs",
-                "vōs"
+                "<bdi>nōs</bdi>",
+                "<bdi>vōs</bdi>"
               ],
               [
                 "夺格",
-                "nōbīs",
-                "vōbīs"
+                "<bdi>nōbīs</bdi>",
+                "<bdi>vōbīs</bdi>"
               ]
             ]
           }
         ],
-        "notes": "第一、二人称代词没有性别区分，只有数（单 / 复）与格的变化；夺格带介词时多用 mē / tē（mēcum、tēcum 是固定的后置用法）。"
+        "notes": "第一、二人称代词没有性别区分，只有数（单 / 复）与格的变化；夺格带介词时多用 <bdi>mē / tē（mēcum、tēcum</bdi> 是固定的后置用法）。"
       },
       {
         "id": "la-pron-3rd",
-        "title": "三人称代词（is, ea, id）",
+        "title": "三人称代词（<bdi>is, ea, id</bdi>）",
         "inflect": "pron",
         "tables": [
           {
-            "caption": "第三人称（is, ea, id 他/她/它）（单数）",
+            "caption": "第三人称（<bdi>is, ea, id</bdi> 他/她/它）（单数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -100,33 +100,33 @@
             "rows": [
               [
                 "主格",
-                "is",
-                "ea",
-                "id"
+                "<bdi>is</bdi>",
+                "<bdi>ea</bdi>",
+                "<bdi>id</bdi>"
               ],
               [
                 "属格",
-                "eius",
-                "eius",
-                "eius"
+                "<bdi>eius</bdi>",
+                "<bdi>eius</bdi>",
+                "<bdi>eius</bdi>"
               ],
               [
                 "与格",
-                "eī",
-                "eī",
-                "eī"
+                "<bdi>eī</bdi>",
+                "<bdi>eī</bdi>",
+                "<bdi>eī</bdi>"
               ],
               [
                 "宾格",
-                "eum",
-                "eam",
-                "id"
+                "<bdi>eum</bdi>",
+                "<bdi>eam</bdi>",
+                "<bdi>id</bdi>"
               ],
               [
                 "夺格",
-                "eō",
-                "eā",
-                "eō"
+                "<bdi>eō</bdi>",
+                "<bdi>eā</bdi>",
+                "<bdi>eō</bdi>"
               ]
             ]
           },
@@ -142,33 +142,33 @@
             "rows": [
               [
                 "主格",
-                "eī / iī",
-                "eae",
-                "ea"
+                "<bdi>eī / iī</bdi>",
+                "<bdi>eae</bdi>",
+                "<bdi>ea</bdi>"
               ],
               [
                 "属格",
-                "eōrum",
-                "eārum",
-                "eōrum"
+                "<bdi>eōrum</bdi>",
+                "<bdi>eārum</bdi>",
+                "<bdi>eōrum</bdi>"
               ],
               [
                 "与格",
-                "eīs / iīs",
-                "eīs / iīs",
-                "eīs / iīs"
+                "<bdi>eīs / iīs</bdi>",
+                "<bdi>eīs / iīs</bdi>",
+                "<bdi>eīs / iīs</bdi>"
               ],
               [
                 "宾格",
-                "eōs",
-                "eās",
-                "ea"
+                "<bdi>eōs</bdi>",
+                "<bdi>eās</bdi>",
+                "<bdi>ea</bdi>"
               ],
               [
                 "夺格",
-                "eīs / iīs",
-                "eīs / iīs",
-                "eīs / iīs"
+                "<bdi>eīs / iīs</bdi>",
+                "<bdi>eīs / iīs</bdi>",
+                "<bdi>eīs / iīs</bdi>"
               ]
             ]
           }
@@ -177,10 +177,10 @@
       },
       {
         "id": "la-pron-reflexive",
-        "title": "反身代词 suī",
+        "title": "反身代词 <bdi>suī</bdi>",
         "tables": [
           {
-            "caption": "suī 自己（第三人称，只有斜格）",
+            "caption": "<bdi>suī</bdi> 自己（第三人称，只有斜格）",
             "role": "pattern",
             "headers": [
               "格",
@@ -195,22 +195,22 @@
               ],
               [
                 "属格",
-                "suī",
+                "<bdi>suī</bdi>",
                 "「自己的（东西）」"
               ],
               [
                 "与格",
-                "sibi",
+                "<bdi>sibi</bdi>",
                 "「给自己」"
               ],
               [
                 "宾格",
-                "sē / sēsē",
+                "<bdi>sē / sēsē</bdi>",
                 "「自己（宾格）」"
               ],
               [
                 "夺格",
-                "sē / sēsē",
+                "<bdi>sē / sēsē</bdi>",
                 "「靠/与自己」"
               ]
             ],
@@ -227,29 +227,29 @@
             "rows": [
               [
                 "属格",
-                "meī",
-                "tuī"
+                "<bdi>meī</bdi>",
+                "<bdi>tuī</bdi>"
               ],
               [
                 "与格",
-                "mihi",
-                "tibi"
+                "<bdi>mihi</bdi>",
+                "<bdi>tibi</bdi>"
               ],
               [
                 "宾格",
-                "mē",
-                "tē"
+                "<bdi>mē</bdi>",
+                "<bdi>tē</bdi>"
               ],
               [
                 "夺格",
-                "mē",
-                "tē"
+                "<bdi>mē</bdi>",
+                "<bdi>tē</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "反身代词只有第三人称有专门形式 suī / sibi / sē，且没有主格（动作不会反射到主语自身以外）；第一、二人称直接用 ego / tū 的斜格。反身代词指向主语，非反身的「他/她」用 is / ea / id 的斜格。",
+        "notes": "反身代词只有第三人称有专门形式 <bdi>suī / sibi / sē，且没有主格（动作不会反射到主语自身以外）；第一、二人称直接用 ego / tū 的斜格。反身代词指向主语，非反身的「他/她」用 is / ea / id</bdi> 的斜格。",
         "inflect": "pron"
       },
       {
@@ -268,39 +268,39 @@
             "rows": [
               [
                 "第一人称单数",
-                "meus",
-                "mea",
-                "meum"
+                "<bdi>meus</bdi>",
+                "<bdi>mea</bdi>",
+                "<bdi>meum</bdi>"
               ],
               [
                 "第二人称单数",
-                "tuus",
-                "tua",
-                "tuum"
+                "<bdi>tuus</bdi>",
+                "<bdi>tua</bdi>",
+                "<bdi>tuum</bdi>"
               ],
               [
                 "第三人称（反身）",
-                "suus",
-                "sua",
-                "suum"
+                "<bdi>suus</bdi>",
+                "<bdi>sua</bdi>",
+                "<bdi>suum</bdi>"
               ],
               [
                 "第一人称复数",
-                "noster",
-                "nostra",
-                "nostrum"
+                "<bdi>noster</bdi>",
+                "<bdi>nostra</bdi>",
+                "<bdi>nostrum</bdi>"
               ],
               [
                 "第二人称复数",
-                "vester",
-                "vestra",
-                "vestrum"
+                "<bdi>vester</bdi>",
+                "<bdi>vestra</bdi>",
+                "<bdi>vestrum</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "meus, mea, meum（单数）",
+            "caption": "<bdi>meus, mea, meum</bdi>（单数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -311,45 +311,45 @@
             "rows": [
               [
                 "主格",
-                "meus",
-                "mea",
-                "meum"
+                "<bdi>meus</bdi>",
+                "<bdi>mea</bdi>",
+                "<bdi>meum</bdi>"
               ],
               [
                 "属格",
-                "meī",
-                "meae",
-                "meī"
+                "<bdi>meī</bdi>",
+                "<bdi>meae</bdi>",
+                "<bdi>meī</bdi>"
               ],
               [
                 "与格",
-                "meō",
-                "meae",
-                "meō"
+                "<bdi>meō</bdi>",
+                "<bdi>meae</bdi>",
+                "<bdi>meō</bdi>"
               ],
               [
                 "宾格",
-                "meum",
-                "meam",
-                "meum"
+                "<bdi>meum</bdi>",
+                "<bdi>meam</bdi>",
+                "<bdi>meum</bdi>"
               ],
               [
                 "夺格",
-                "meō",
-                "meā",
-                "meō"
+                "<bdi>meō</bdi>",
+                "<bdi>meā</bdi>",
+                "<bdi>meō</bdi>"
               ],
               [
                 "呼格",
-                "mī",
-                "mea",
-                "meum"
+                "<bdi>mī</bdi>",
+                "<bdi>mea</bdi>",
+                "<bdi>meum</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "meus, mea, meum（复数）",
+            "caption": "<bdi>meus, mea, meum</bdi>（复数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -360,45 +360,45 @@
             "rows": [
               [
                 "主格",
-                "meī",
-                "meae",
-                "mea"
+                "<bdi>meī</bdi>",
+                "<bdi>meae</bdi>",
+                "<bdi>mea</bdi>"
               ],
               [
                 "属格",
-                "meōrum",
-                "meārum",
-                "meōrum"
+                "<bdi>meōrum</bdi>",
+                "<bdi>meārum</bdi>",
+                "<bdi>meōrum</bdi>"
               ],
               [
                 "与格",
-                "meīs",
-                "meīs",
-                "meīs"
+                "<bdi>meīs</bdi>",
+                "<bdi>meīs</bdi>",
+                "<bdi>meīs</bdi>"
               ],
               [
                 "宾格",
-                "meōs",
-                "meās",
-                "mea"
+                "<bdi>meōs</bdi>",
+                "<bdi>meās</bdi>",
+                "<bdi>mea</bdi>"
               ],
               [
                 "夺格",
-                "meīs",
-                "meīs",
-                "meīs"
+                "<bdi>meīs</bdi>",
+                "<bdi>meīs</bdi>",
+                "<bdi>meīs</bdi>"
               ],
               [
                 "呼格",
-                "meī",
-                "meae",
-                "mea"
+                "<bdi>meī</bdi>",
+                "<bdi>meae</bdi>",
+                "<bdi>mea</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "变格同第一二变格形容词。呼格单数阳性为 mī（只有 meus 有这个特殊形式）；noster / vester 保留词干的 -er。suus 是反身（指向主语），非反身的「他的」用 eius（属格）/ suus 以外的形式。",
+        "notes": "变格同第一二变格形容词。呼格单数阳性为 <bdi>mī（只有 meus 有这个特殊形式）；noster / vester 保留词干的 -er。suus 是反身（指向主语），非反身的「他的」用 eius（属格）/ suus</bdi> 以外的形式。",
         "inflect": "pron"
       },
       {
@@ -406,7 +406,7 @@
         "title": "指示代词",
         "tables": [
           {
-            "caption": "hic, haec, hoc 这（近指）",
+            "caption": "<bdi>hic, haec, hoc</bdi> 这（近指）",
             "role": "pattern",
             "headers": [
               "格",
@@ -417,38 +417,38 @@
             "rows": [
               [
                 "主格",
-                "hic",
-                "haec",
-                "hoc"
+                "<bdi>hic</bdi>",
+                "<bdi>haec</bdi>",
+                "<bdi>hoc</bdi>"
               ],
               [
                 "属格",
-                "huius",
-                "huius",
-                "huius"
+                "<bdi>huius</bdi>",
+                "<bdi>huius</bdi>",
+                "<bdi>huius</bdi>"
               ],
               [
                 "与格",
-                "huic",
-                "huic",
-                "huic"
+                "<bdi>huic</bdi>",
+                "<bdi>huic</bdi>",
+                "<bdi>huic</bdi>"
               ],
               [
                 "宾格",
-                "hunc",
-                "hanc",
-                "hoc"
+                "<bdi>hunc</bdi>",
+                "<bdi>hanc</bdi>",
+                "<bdi>hoc</bdi>"
               ],
               [
                 "夺格",
-                "hōc",
-                "hāc",
-                "hōc"
+                "<bdi>hōc</bdi>",
+                "<bdi>hāc</bdi>",
+                "<bdi>hōc</bdi>"
               ]
             ]
           },
           {
-            "caption": "ille, illa, illud 那（远指）",
+            "caption": "<bdi>ille, illa, illud</bdi> 那（远指）",
             "role": "pattern",
             "headers": [
               "格",
@@ -459,38 +459,38 @@
             "rows": [
               [
                 "主格",
-                "ille",
-                "illa",
-                "illud"
+                "<bdi>ille</bdi>",
+                "<bdi>illa</bdi>",
+                "<bdi>illud</bdi>"
               ],
               [
                 "属格",
-                "illīus",
-                "illīus",
-                "illīus"
+                "<bdi>illīus</bdi>",
+                "<bdi>illīus</bdi>",
+                "<bdi>illīus</bdi>"
               ],
               [
                 "与格",
-                "illī",
-                "illī",
-                "illī"
+                "<bdi>illī</bdi>",
+                "<bdi>illī</bdi>",
+                "<bdi>illī</bdi>"
               ],
               [
                 "宾格",
-                "illum",
-                "illam",
-                "illud"
+                "<bdi>illum</bdi>",
+                "<bdi>illam</bdi>",
+                "<bdi>illud</bdi>"
               ],
               [
                 "夺格",
-                "illō",
-                "illā",
-                "illō"
+                "<bdi>illō</bdi>",
+                "<bdi>illā</bdi>",
+                "<bdi>illō</bdi>"
               ]
             ]
           },
           {
-            "caption": "iste, ista, istud 那个（第二人称所指）",
+            "caption": "<bdi>iste, ista, istud</bdi> 那个（第二人称所指）",
             "role": "pattern",
             "headers": [
               "格",
@@ -501,46 +501,46 @@
             "rows": [
               [
                 "主格",
-                "iste",
-                "ista",
-                "istud"
+                "<bdi>iste</bdi>",
+                "<bdi>ista</bdi>",
+                "<bdi>istud</bdi>"
               ],
               [
                 "属格",
-                "istīus",
-                "istīus",
-                "istīus"
+                "<bdi>istīus</bdi>",
+                "<bdi>istīus</bdi>",
+                "<bdi>istīus</bdi>"
               ],
               [
                 "与格",
-                "istī",
-                "istī",
-                "istī"
+                "<bdi>istī</bdi>",
+                "<bdi>istī</bdi>",
+                "<bdi>istī</bdi>"
               ],
               [
                 "宾格",
-                "istum",
-                "istam",
-                "istud"
+                "<bdi>istum</bdi>",
+                "<bdi>istam</bdi>",
+                "<bdi>istud</bdi>"
               ],
               [
                 "夺格",
-                "istō",
-                "istā",
-                "istō"
+                "<bdi>istō</bdi>",
+                "<bdi>istā</bdi>",
+                "<bdi>istō</bdi>"
               ]
             ]
           }
         ],
-        "notes": "指示代词的属格单数一律为 -īus，与格单数一律为 -ī。",
+        "notes": "指示代词的属格单数一律为 -<bdi>īus，与格单数一律为 -ī</bdi>。",
         "inflect": "pron"
       },
       {
         "id": "la-pron-relative",
-        "title": "关系代词 quī, quae, quod",
+        "title": "关系代词 <bdi>quī, quae, quod</bdi>",
         "tables": [
           {
-            "caption": "quī, quae, quod（单数）",
+            "caption": "<bdi>quī, quae, quod</bdi>（单数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -551,38 +551,38 @@
             "rows": [
               [
                 "主格",
-                "quī",
-                "quae",
-                "quod"
+                "<bdi>quī</bdi>",
+                "<bdi>quae</bdi>",
+                "<bdi>quod</bdi>"
               ],
               [
                 "属格",
-                "cuius",
-                "cuius",
-                "cuius"
+                "<bdi>cuius</bdi>",
+                "<bdi>cuius</bdi>",
+                "<bdi>cuius</bdi>"
               ],
               [
                 "与格",
-                "cui",
-                "cui",
-                "cui"
+                "<bdi>cui</bdi>",
+                "<bdi>cui</bdi>",
+                "<bdi>cui</bdi>"
               ],
               [
                 "宾格",
-                "quem",
-                "quam",
-                "quod"
+                "<bdi>quem</bdi>",
+                "<bdi>quam</bdi>",
+                "<bdi>quod</bdi>"
               ],
               [
                 "夺格",
-                "quō",
-                "quā",
-                "quō"
+                "<bdi>quō</bdi>",
+                "<bdi>quā</bdi>",
+                "<bdi>quō</bdi>"
               ]
             ]
           },
           {
-            "caption": "quī, quae, quod（复数）",
+            "caption": "<bdi>quī, quae, quod</bdi>（复数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -593,33 +593,33 @@
             "rows": [
               [
                 "主格",
-                "quī",
-                "quae",
-                "quae"
+                "<bdi>quī</bdi>",
+                "<bdi>quae</bdi>",
+                "<bdi>quae</bdi>"
               ],
               [
                 "属格",
-                "quōrum",
-                "quārum",
-                "quōrum"
+                "<bdi>quōrum</bdi>",
+                "<bdi>quārum</bdi>",
+                "<bdi>quōrum</bdi>"
               ],
               [
                 "与格",
-                "quibus",
-                "quibus",
-                "quibus"
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>"
               ],
               [
                 "宾格",
-                "quōs",
-                "quās",
-                "quae"
+                "<bdi>quōs</bdi>",
+                "<bdi>quās</bdi>",
+                "<bdi>quae</bdi>"
               ],
               [
                 "夺格",
-                "quibus",
-                "quibus",
-                "quibus"
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>"
               ]
             ]
           }
@@ -629,10 +629,10 @@
       },
       {
         "id": "la-pron-interrogative",
-        "title": "疑问代词 quis, quid",
+        "title": "疑问代词 <bdi>quis, quid</bdi>",
         "tables": [
           {
-            "caption": "quis, quid（单数）",
+            "caption": "<bdi>quis, quid</bdi>（单数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -642,33 +642,33 @@
             "rows": [
               [
                 "主格",
-                "quis",
-                "quid"
+                "<bdi>quis</bdi>",
+                "<bdi>quid</bdi>"
               ],
               [
                 "属格",
-                "cuius",
-                "cuius"
+                "<bdi>cuius</bdi>",
+                "<bdi>cuius</bdi>"
               ],
               [
                 "与格",
-                "cui",
-                "cui"
+                "<bdi>cui</bdi>",
+                "<bdi>cui</bdi>"
               ],
               [
                 "宾格",
-                "quem",
-                "quid"
+                "<bdi>quem</bdi>",
+                "<bdi>quid</bdi>"
               ],
               [
                 "夺格",
-                "quō",
-                "quō"
+                "<bdi>quō</bdi>",
+                "<bdi>quō</bdi>"
               ]
             ]
           },
           {
-            "caption": "疑问形容词 quī, quae, quod（复数，作形容词用）",
+            "caption": "疑问形容词 <bdi>quī, quae, quod</bdi>（复数，作形容词用）",
             "role": "pattern",
             "headers": [
               "格",
@@ -679,38 +679,38 @@
             "rows": [
               [
                 "主格",
-                "quī",
-                "quae",
-                "quae"
+                "<bdi>quī</bdi>",
+                "<bdi>quae</bdi>",
+                "<bdi>quae</bdi>"
               ],
               [
                 "属格",
-                "quōrum",
-                "quārum",
-                "quōrum"
+                "<bdi>quōrum</bdi>",
+                "<bdi>quārum</bdi>",
+                "<bdi>quōrum</bdi>"
               ],
               [
                 "与格",
-                "quibus",
-                "quibus",
-                "quibus"
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>"
               ],
               [
                 "宾格",
-                "quōs",
-                "quās",
-                "quae"
+                "<bdi>quōs</bdi>",
+                "<bdi>quās</bdi>",
+                "<bdi>quae</bdi>"
               ],
               [
                 "夺格",
-                "quibus",
-                "quibus",
-                "quibus"
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>",
+                "<bdi>quibus</bdi>"
               ]
             ]
           }
         ],
-        "notes": "疑问代词与关系代词变格几乎同形，区别在主格单数（quis vs. quī）与中性主/宾格单数（quid vs. quod）。",
+        "notes": "疑问代词与关系代词变格几乎同形，区别在主格单数（<bdi>quis vs. quī）与中性主/宾格单数（quid vs. quod</bdi>）。",
         "inflect": "pron"
       },
       {
@@ -727,32 +727,32 @@
             ],
             "rows": [
               [
-                "quis（sī / nisi / nē / num / quō 之后）",
+                "<bdi>quis（sī / nisi / nē / num / quō</bdi> 之后）",
                 "某人",
                 "条件句、间接疑问"
               ],
               [
-                "aliquis",
+                "<bdi>aliquis</bdi>",
                 "某人",
                 "肯定句"
               ],
               [
-                "quispiam",
+                "<bdi>quispiam</bdi>",
                 "某人",
-                "少见，语气比 aliquis 更轻"
+                "少见，语气比 <bdi>aliquis</bdi> 更轻"
               ],
               [
-                "quisquam",
+                "<bdi>quisquam</bdi>",
                 "任何人",
                 "多与否定、虚拟连用"
               ],
               [
-                "quīdam",
+                "<bdi>quīdam</bdi>",
                 "某个（确指）",
                 "说话人心里有具体对象"
               ],
               [
-                "quīvīs / quīlibet",
+                "<bdi>quīvīs / quīlibet</bdi>",
                 "任何一个",
                 "随意挑，让步"
               ]
@@ -760,7 +760,7 @@
             "lang": "la"
           },
           {
-            "caption": "aliquis, aliqua, aliquid（单数）",
+            "caption": "<bdi>aliquis, aliqua, aliquid</bdi>（单数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -771,39 +771,39 @@
             "rows": [
               [
                 "主格",
-                "aliquis",
-                "aliqua",
-                "aliquid"
+                "<bdi>aliquis</bdi>",
+                "<bdi>aliqua</bdi>",
+                "<bdi>aliquid</bdi>"
               ],
               [
                 "属格",
-                "alicuius",
-                "alicuius",
-                "alicuius"
+                "<bdi>alicuius</bdi>",
+                "<bdi>alicuius</bdi>",
+                "<bdi>alicuius</bdi>"
               ],
               [
                 "与格",
-                "alicui",
-                "alicui",
-                "alicui"
+                "<bdi>alicui</bdi>",
+                "<bdi>alicui</bdi>",
+                "<bdi>alicui</bdi>"
               ],
               [
                 "宾格",
-                "aliquem",
-                "aliquam",
-                "aliquid"
+                "<bdi>aliquem</bdi>",
+                "<bdi>aliquam</bdi>",
+                "<bdi>aliquid</bdi>"
               ],
               [
                 "夺格",
-                "aliquō",
-                "aliquā",
-                "aliquō"
+                "<bdi>aliquō</bdi>",
+                "<bdi>aliquā</bdi>",
+                "<bdi>aliquō</bdi>"
               ]
             ],
             "lang": "la"
           },
           {
-            "caption": "quīdam, quaedam, quoddam（单数）",
+            "caption": "<bdi>quīdam, quaedam, quoddam</bdi>（单数）",
             "role": "pattern",
             "headers": [
               "格",
@@ -814,39 +814,39 @@
             "rows": [
               [
                 "主格",
-                "quīdam",
-                "quaedam",
-                "quoddam"
+                "<bdi>quīdam</bdi>",
+                "<bdi>quaedam</bdi>",
+                "<bdi>quoddam</bdi>"
               ],
               [
                 "属格",
-                "cuiusdam",
-                "cuiusdam",
-                "cuiusdam"
+                "<bdi>cuiusdam</bdi>",
+                "<bdi>cuiusdam</bdi>",
+                "<bdi>cuiusdam</bdi>"
               ],
               [
                 "与格",
-                "cuidam",
-                "cuidam",
-                "cuidam"
+                "<bdi>cuidam</bdi>",
+                "<bdi>cuidam</bdi>",
+                "<bdi>cuidam</bdi>"
               ],
               [
                 "宾格",
-                "quendam",
-                "quandam",
-                "quoddam"
+                "<bdi>quendam</bdi>",
+                "<bdi>quandam</bdi>",
+                "<bdi>quoddam</bdi>"
               ],
               [
                 "夺格",
-                "quōdam",
-                "quādam",
-                "quōdam"
+                "<bdi>quōdam</bdi>",
+                "<bdi>quādam</bdi>",
+                "<bdi>quōdam</bdi>"
               ]
             ],
             "lang": "la"
           }
         ],
-        "notes": "不定代词的属格单数一律 -ius、与格单数一律 -ī（同指示代词）；-dam 直接缀在变格形式之后（cuiusdam、quendam）。",
+        "notes": "不定代词的属格单数一律 -<bdi>ius、与格单数一律 -ī（同指示代词）；-dam 直接缀在变格形式之后（cuiusdam、quendam</bdi>）。",
         "inflect": "pron"
       }
     ]

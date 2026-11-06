@@ -1,6 +1,6 @@
-import { h, htmlFragment } from '../utils/dom.js'
+import { h } from '../utils/dom.js'
 import { createTabBar } from './tabs.js'
-import { applyBdi } from '../utils/bdi.js'
+import { annotateBdi, bdiFragment, stripBdi } from '../utils/bdi.js'
 
 const EMPTY_CELL = /^\s*(?:[—–-]|)\s*$/u
 
@@ -16,7 +16,8 @@ function cellDisabled(value) {
 
 function isEmptyCell(value) {
     if (cellDisabled(value)) return false
-    return EMPTY_CELL.test(cellText(value))
+    // 单元格里可能写得有 <bdi>；判定空/破折号只看文字
+    return EMPTY_CELL.test(stripBdi(cellText(value)))
 }
 
 /** 去掉标签、压平空白，用来比较「表名」和它周围的标题是否重复 */
@@ -68,14 +69,13 @@ export function createGrammarTable(spec) {
             + (wrapFirst ? ' grammar-table--wrap-first' : '')
             + (wide ? ' grammar-table--wide' : '')
     },
-    hideCaption ? null : h('caption', {}, htmlFragment(spec.caption)),
+    hideCaption ? null : h('caption', {}, bdiFragment(spec.caption, lang)),
     h('thead', {},
         h('tr', {},
             ...headers.map((th, index) => (keepCol[index]
                 ? h('th', {
-                    lang,
                     style: index > 0 && formWidth ? { width: formWidth } : null
-                }, htmlFragment(th))
+                }, bdiFragment(th, lang))
                 : null)).filter(Boolean)
         )
     ),
@@ -86,16 +86,16 @@ export function createGrammarTable(spec) {
                     if (!keepCol[index]) return null
                     const off = cellDisabled(cell)
                     return h('td', {
-                        lang,
                         class: off ? 'grammar-table__cell--disabled' : null
-                    }, off ? (cellText(cell) || '—') : htmlFragment(cellText(cell)))
+                    }, off ? (cellText(cell) || '—') : bdiFragment(cellText(cell), lang))
                 }).filter(Boolean)
             )
         )
     )
     )
 
-    applyBdi(table)
+    // 单元格里可能一格多语：bdiFragment 切段后统一补 lang/dir
+    annotateBdi(table, lang)
 
     // 列多时本容器横向滚动，避免整页被撑宽
     return h('div', { class: 'grammar-table-wrap' }, table)
@@ -152,7 +152,8 @@ export function createGrammarTables(tables, lang = null, ownerTitle = '') {
                 items: groups.map((g, index) => ({ key: String(index), label: g.label || `表 ${index + 1}` })),
                 active: String(groupIndex),
                 onChange: (key) => { groupIndex = Number(key); tableIndex = 0; render() },
-                className: 'tab-bar--tables'
+                className: 'tab-bar--tables',
+                lang
             }).el)
         }
 
@@ -162,7 +163,8 @@ export function createGrammarTables(tables, lang = null, ownerTitle = '') {
                 items: group.items.map((entry, index) => ({ key: String(index), label: tabLabelOf(entry.spec) })),
                 active: String(tableIndex),
                 onChange: (key) => { tableIndex = Number(key); render() },
-                className: 'tab-bar--tables'
+                className: 'tab-bar--tables',
+                lang
             }).el)
         }
 
@@ -177,6 +179,6 @@ export function createGrammarTables(tables, lang = null, ownerTitle = '') {
 function tabLabelOf(spec) {
     if (spec && spec.roleLabel) return String(spec.roleLabel)
     if (!spec || spec.role !== 'example') return '变化表'
-    return spec.exampleWord ? `示例表：${spec.exampleWord}` : '示例表'
+    return spec.exampleWord ? `示例表：${stripBdi(spec.exampleWord)}` : '示例表'
 }
 

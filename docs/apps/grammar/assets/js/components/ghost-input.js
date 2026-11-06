@@ -1,7 +1,7 @@
 /** 带灰字补全与键帽提示的输入框。 */
 
 import { h } from '../utils/dom.js'
-import { bdiText } from '../utils/bdi.js'
+import { bdiFragment } from '../utils/bdi.js'
 import { createEditableInput } from './editable-input.js'
 
 /**
@@ -22,8 +22,8 @@ export function createGhostInput({
     onInput = null
 } = {}) {
     const scriptLang = bdiLang || lang
-    // 提示层是语言文字与说明的混排：带 lang 后，语言字体只接管它自己那部分字符，中文仍回落界面字体
-    const hint = h('span', { class: 'ghost-input__hint', 'aria-hidden': 'true', lang: lang || undefined })
+    // 提示层是语言文字与说明的混排：原文包在 bdi 里，中文仍回落界面字体
+    const hint = h('span', { class: 'ghost-input__hint', 'aria-hidden': 'true' })
 
     const input = createEditableInput({
         value,
@@ -80,8 +80,8 @@ export function createGhostInput({
         if (showGhost) {
             hint.hidden = false
             hint.replaceChildren(
-                h('span', { class: 'ghost-input__typed' }, bdiText(current, scriptLang)),
-                h('span', { class: 'ghost-input__rest' }, bdiText(target.slice(current.length), scriptLang)),
+                h('span', { class: 'ghost-input__typed' }, bdiFragment(current, scriptLang)),
+                h('span', { class: 'ghost-input__rest' }, bdiFragment(target.slice(current.length), scriptLang)),
                 h('span', { class: 'ghost-input__key ghost-input__key--tab', 'aria-hidden': 'true' }, 'Tab')
             )
             return
@@ -90,7 +90,7 @@ export function createGhostInput({
         const tip = input.placeholder
         if (!current && tip) {
             hint.hidden = false
-            hint.replaceChildren(h('span', { class: 'ghost-input__rest' }, bdiText(tip, scriptLang)))
+            hint.replaceChildren(h('span', { class: 'ghost-input__rest' }, bdiFragment(tip, scriptLang)))
             return
         }
 

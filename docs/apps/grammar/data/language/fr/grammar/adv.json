@@ -17,33 +17,33 @@
             "rows": [
               [
                 "时间",
-                "maintenant、hier、aujourd'hui、toujours、déjà、bientôt"
+                "<bdi>maintenant、hier、aujourd'hui、toujours、déjà、bientôt</bdi>"
               ],
               [
                 "地点",
-                "ici、là、ailleurs、dedans、dehors、partout"
+                "<bdi>ici、là、ailleurs、dedans、dehors、partout</bdi>"
               ],
               [
                 "方式",
-                "bien、mal、ainsi、ensemble、vite（不变）"
+                "<bdi>bien、mal、ainsi、ensemble、vite</bdi>（不变）"
               ],
               [
                 "程度",
-                "très、trop、assez、beaucoup、peu、presque、tellement"
+                "<bdi>très、trop、assez、beaucoup、peu、presque、tellement</bdi>"
               ],
               [
                 "肯定 / 否定",
-                "oui、si、certainement / non、ne…pas、ne…jamais、ne…plus"
+                "<bdi>oui、si、certainement / non、ne…pas、ne…jamais、ne…plus</bdi>"
               ],
               [
                 "疑问",
-                "où、quand、comment、pourquoi、combien"
+                "<bdi>où、quand、comment、pourquoi、combien</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "vite、tout、bien 等是不规则副词（vite 不作 -ment 变化；tout 有性数变化：tout / toute / tous / toutes）。"
+        "notes": "<bdi>vite、tout、bien 等是不规则副词（vite 不作 -ment 变化；tout 有性数变化：tout / toute / tous / toutes）。</bdi>"
       },
       {
         "id": "fr-adv-comparison",
@@ -60,34 +60,34 @@
             "rows": [
               [
                 "比较级",
-                "plus / moins / aussi + 副词 + que",
-                "Il court plus vite que moi."
+                "<bdi>plus / moins / aussi + 副词 + que</bdi>",
+                "<bdi>Il court plus vite que moi.</bdi>"
               ],
               [
                 "最高级",
-                "le plus / le moins + 副词",
-                "Il court le plus vite."
+                "<bdi>le plus / le moins</bdi> + 副词",
+                "<bdi>Il court le plus vite.</bdi>"
               ],
               [
-                "不规则：bien",
-                "mieux / le mieux",
-                "Elle chante mieux."
+                "不规则：<bdi>bien</bdi>",
+                "<bdi>mieux / le mieux</bdi>",
+                "<bdi>Elle chante mieux.</bdi>"
               ],
               [
-                "不规则：mal",
-                "pis / le pis（口语用 plus mal）",
+                "不规则：<bdi>mal</bdi>",
+                "<bdi>pis / le pis（口语用 plus mal）</bdi>",
                 "—"
               ],
               [
-                "不规则：beaucoup",
-                "plus / le plus",
-                "Il travaille plus."
+                "不规则：<bdi>beaucoup</bdi>",
+                "<bdi>plus / le plus</bdi>",
+                "<bdi>Il travaille plus.</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "bon 的比较级是 meilleur（形容词），bien 的比较级是 mieux（副词），不要混用。"
+        "notes": "<bdi>bon 的比较级是 meilleur（形容词），bien 的比较级是 mieux</bdi>（副词），不要混用。"
       },
       {
         "id": "fr-adv-negation",
@@ -103,50 +103,50 @@
             ],
             "rows": [
               [
-                "ne … pas",
+                "<bdi>ne … pas</bdi>",
                 "不",
-                "Je ne sais pas."
+                "<bdi>Je ne sais pas.</bdi>"
               ],
               [
-                "ne … jamais",
+                "<bdi>ne … jamais</bdi>",
                 "从不",
-                "Il ne vient jamais."
+                "<bdi>Il ne vient jamais.</bdi>"
               ],
               [
-                "ne … plus",
+                "<bdi>ne … plus</bdi>",
                 "不再",
-                "Elle n'habite plus ici."
+                "<bdi>Elle n'habite plus ici.</bdi>"
               ],
               [
-                "ne … rien",
+                "<bdi>ne … rien</bdi>",
                 "什么都不",
-                "Je ne vois rien."
+                "<bdi>Je ne vois rien.</bdi>"
               ],
               [
-                "ne … personne",
+                "<bdi>ne … personne</bdi>",
                 "不（任何人）",
-                "Il n'aime personne."
+                "<bdi>Il n'aime personne.</bdi>"
               ],
               [
-                "ne … aucun",
+                "<bdi>ne … aucun</bdi>",
                 "一个也不",
-                "Je n'ai aucune idée."
+                "<bdi>Je n'ai aucune idée.</bdi>"
               ],
               [
-                "ne … que",
+                "<bdi>ne … que</bdi>",
                 "只（不是真否定）",
-                "Il ne reste que deux places."
+                "<bdi>Il ne reste que deux places.</bdi>"
               ],
               [
-                "ne … ni … ni",
+                "<bdi>ne … ni … ni</bdi>",
                 "既不…也不",
-                "Il ne boit ni café ni thé."
+                "<bdi>Il ne boit ni café ni thé.</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "口语中常省略 ne（Je sais pas）；书面语必须保留。"
+        "notes": "口语中常省略 <bdi>ne（Je sais pas</bdi>）；书面语必须保留。"
       }
     ]
   }

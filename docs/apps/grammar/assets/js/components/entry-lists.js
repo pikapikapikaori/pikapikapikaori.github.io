@@ -1,6 +1,7 @@
 /** 词卡里的固定搭配与例句列表，列表页与词卡详情共用。 */
 
 import { h } from '../utils/dom.js'
+import { bdiFragment, bdiNode } from '../utils/bdi.js'
 import { sourceLabel } from '../models/word.js'
 
 /** 某个来源下的含义（顺序即列表里显示的序号） */
@@ -31,7 +32,7 @@ export function meaningRefLabel(ref, meanings, activeSource = 'manual') {
 export function collocationList(items, language) {
     return h('ol', { class: 'word-card__list' },
         ...(items || []).map((c) => h('li', { class: 'word-card__collocation' },
-            h('span', { lang: language }, c.text || ''),
+            bdiNode(c.text || '', language),
             c.gloss ? h('span', { class: 'word-card__gloss' }, ` — ${c.gloss}`) : null
         ))
     )
@@ -43,7 +44,7 @@ export function exampleList(items, language, { meanings = [], activeSource = 'ma
         ...(items || []).map((e) => {
             const ref = meaningRefLabel(e.meaning, meanings, activeSource)
             return h('li', { class: 'word-card__example' },
-                h('div', { class: 'word-card__example-text', lang: language }, e.text || ''),
+                h('div', { class: 'word-card__example-text' }, bdiFragment(e.text || '', language)),
                 e.translation || ref
                     ? h('div', { class: 'word-card__example-meta' },
                         e.translation
@@ -55,7 +56,7 @@ export function exampleList(items, language, { meanings = [], activeSource = 'ma
                     )
                     : null,
                 e.citation
-                    ? h('div', { class: 'word-card__citation' }, `— ${e.citation}`)
+                    ? h('div', { class: 'word-card__citation' }, '— ', bdiNode(e.citation, language))
                     : null
             )
         })

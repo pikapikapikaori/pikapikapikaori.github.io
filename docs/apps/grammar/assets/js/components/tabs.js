@@ -1,7 +1,8 @@
 import { h } from '../utils/dom.js'
+import { bdiFragment } from '../utils/bdi.js'
 
 /** 纯标签栏，不管理面板。 */
-export function createTabBar({ items, active = null, onChange = null, className = '' } = {}) {
+export function createTabBar({ items, active = null, onChange = null, className = '', lang = null } = {}) {
     const list = (items || []).filter(Boolean)
     let current = list.some((it) => it.key === active) ? active : (list[0]?.key ?? null)
 
@@ -18,7 +19,7 @@ export function createTabBar({ items, active = null, onChange = null, className 
             'aria-selected': String(it.key === current),
             onclick: () => setActive(it.key)
         },
-        it.label
+        bdiFragment(it.label, lang)
         )))
     }
 
@@ -39,7 +40,7 @@ export function createTabBar({ items, active = null, onChange = null, className 
 }
 
 /** 胶囊标签页：面板先建好后只切 hidden，切换时输入内容与焦点都不丢。 */
-export function createTabGroup({ items, active = null, onChange = null, className = '' } = {}) {
+export function createTabGroup({ items, active = null, onChange = null, className = '', lang = null } = {}) {
     const list = (items || []).filter((it) => it && it.node)
     let current = list.some((it) => it.key === active) ? active : (list[0]?.key ?? null)
 
@@ -54,6 +55,7 @@ export function createTabGroup({ items, active = null, onChange = null, classNam
         items: list.map((it) => ({ key: it.key, label: it.label })),
         active: current,
         className,
+        lang,
         onChange: (key) => setActive(key)
     })
 

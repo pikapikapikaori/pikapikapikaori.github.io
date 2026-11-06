@@ -1,5 +1,5 @@
 import { h } from '../utils/dom.js'
-import { bdiText } from '../utils/bdi.js'
+import { bdiFragment } from '../utils/bdi.js'
 import { openModal } from './modal.js'
 import { toast } from './toast.js'
 import { createGhostInput } from './ghost-input.js'
@@ -72,13 +72,13 @@ export async function openAnalyzeModal({ langCode, langName = '' } = {}) {
         return h('div', { class: 'analyze-entry' },
             h('div', { class: 'analyze-entry__head' },
                 h('span', { class: 'lookup-choice__pos' }, entry.posLabel),
-                h('span', { class: 'analyze-entry__lemma' }, bdiText(entry.lemma, langCode)),
+                h('span', { class: 'analyze-entry__lemma' }, bdiFragment(entry.lemma, langCode)),
                 showSource ? h('span', { class: 'lookup-choice__source' }, entry.sourceLabel) : null
             ),
             entry.analysis
-                ? h('div', { class: 'analyze-entry__analysis' }, bdiText(entry.analysis, langCode))
+                ? h('div', { class: 'analyze-entry__analysis' }, bdiFragment(entry.analysis, langCode))
                 : null,
-            meta ? h('div', { class: 'field__hint' }, bdiText(meta, langCode)) : null,
+            meta ? h('div', { class: 'field__hint' }, bdiFragment(meta, langCode)) : null,
             h('button', {
                 class: 'btn btn--sm',
                 type: 'button',

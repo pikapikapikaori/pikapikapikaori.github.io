@@ -1,7 +1,7 @@
 /** 自绘下拉菜单，统一接管原生 <select>。 */
 
 import { h } from '../utils/dom.js'
-import { bdiText } from '../utils/bdi.js'
+import { bdiFragment, stripBdi } from '../utils/bdi.js'
 
 let menuEl = null
 let session = null
@@ -119,13 +119,13 @@ export function openSelectMenu({
                 + (selected ? ' select-menu__item--selected' : '')
                 + (item.disabled ? ' select-menu__item--disabled' : ''),
             role: 'option',
-            title: item.title || (nowrap ? item.label : null),
+            title: item.title || (nowrap ? stripBdi(item.label) : null),
             'aria-selected': String(selected),
             'aria-disabled': item.disabled ? 'true' : null,
             onpointerdown: (e) => e.preventDefault(),
             onclick: () => choose(index)
         },
-        h('span', { class: 'select-menu__label' }, bdiText(item.label, lang)),
+        h('span', { class: 'select-menu__label' }, bdiFragment(item.label, lang)),
         selected ? h('span', { class: 'select-menu__check' }, '✓') : null
         ))
     })

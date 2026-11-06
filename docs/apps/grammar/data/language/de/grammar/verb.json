@@ -13,38 +13,38 @@
             "headers": [
               "时态",
               "构成",
-              "例（machen）"
+              "例（<bdi>machen</bdi>）"
             ],
             "rows": [
               [
-                "现在时 (Präsens)",
+                "现在时 (<bdi>Präsens</bdi>)",
                 "变位",
-                "ich mache"
+                "<bdi>ich mache</bdi>"
               ],
               [
-                "过去时 (Präteritum)",
+                "过去时 (<bdi>Präteritum</bdi>)",
                 "变位",
-                "ich machte"
+                "<bdi>ich machte</bdi>"
               ],
               [
-                "现在完成时 (Perfekt)",
+                "现在完成时 (<bdi>Perfekt</bdi>)",
                 "复合",
-                "ich habe gemacht"
+                "<bdi>ich habe gemacht</bdi>"
               ],
               [
-                "过去完成时 (Plusquamperfekt)",
+                "过去完成时 (<bdi>Plusquamperfekt</bdi>)",
                 "复合",
-                "ich hatte gemacht"
+                "<bdi>ich hatte gemacht</bdi>"
               ],
               [
-                "将来时 I (Futur I)",
+                "将来时 <bdi>I (Futur I</bdi>)",
                 "复合",
-                "ich werde machen"
+                "<bdi>ich werde machen</bdi>"
               ],
               [
-                "将来时 II (Futur II)",
+                "将来时 <bdi>II (Futur II</bdi>)",
                 "复合",
-                "ich werde gemacht haben"
+                "<bdi>ich werde gemacht haben</bdi>"
               ]
             ],
             "lang": "de"
@@ -55,28 +55,28 @@
             "headers": [
               "语式",
               "构成",
-              "例（machen / kommen）"
+              "例（<bdi>machen / kommen</bdi>）"
             ],
             "rows": [
               [
-                "虚拟式 I（现在）",
+                "虚拟式 <bdi>I</bdi>（现在）",
                 "变位",
-                "er komme"
+                "<bdi>er komme</bdi>"
               ],
               [
-                "虚拟式 I（过去）",
+                "虚拟式 <bdi>I</bdi>（过去）",
                 "复合",
-                "er sei gekommen"
+                "<bdi>er sei gekommen</bdi>"
               ],
               [
-                "虚拟式 II（现在）",
+                "虚拟式 <bdi>II</bdi>（现在）",
                 "变位",
-                "er käme"
+                "<bdi>er käme</bdi>"
               ],
               [
-                "虚拟式 II（过去）",
+                "虚拟式 <bdi>II</bdi>（过去）",
                 "复合",
-                "er wäre gekommen"
+                "<bdi>er wäre gekommen</bdi>"
               ]
             ],
             "lang": "de"
@@ -93,12 +93,12 @@
               [
                 "现在时",
                 "变位",
-                "Mach! Macht! Machen Sie!"
+                "<bdi>Mach! Macht! Machen Sie!</bdi>"
               ],
               [
                 "过去时（完成）",
                 "复合",
-                "Hab(e) es gemacht!（罕用）"
+                "<bdi>Hab(e) es gemacht</bdi>!（罕用）"
               ]
             ],
             "lang": "de"
@@ -115,22 +115,22 @@
               [
                 "现在不定式",
                 "变位",
-                "machen"
+                "<bdi>machen</bdi>"
               ],
               [
-                "带 zu 不定式",
+                "带 <bdi>zu</bdi> 不定式",
                 "变位",
-                "zu machen"
+                "<bdi>zu machen</bdi>"
               ],
               [
                 "完成不定式",
                 "复合",
-                "gemacht haben"
+                "<bdi>gemacht haben</bdi>"
               ],
               [
                 "将来不定式",
                 "复合",
-                "machen werden"
+                "<bdi>machen werden</bdi>"
               ]
             ],
             "lang": "de"
@@ -147,18 +147,18 @@
               [
                 "现在分词",
                 "变位",
-                "machend"
+                "<bdi>machend</bdi>"
               ],
               [
                 "过去分词",
                 "变位",
-                "gemacht"
+                "<bdi>gemacht</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "<strong>词条的基本形态（lemma）一律用不定式</strong>（sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「过去分词」等词干，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt）另填「现在时 2/3 单数词干」。\n\n「构成」一列只区分两种：<strong>变位</strong>（单一动词形式，写进变位表）与<strong>复合</strong>（助动词 + 过去分词 / 不定式，不写进变位表，见「复合时态与被动语态」）。\n\n<strong>语式用法</strong>：直陈式陈述事实、提问（Er kommt morgen.）；虚拟式 I 用于间接引语（Er sagt, er komme morgen.）；虚拟式 II 表示非现实、假设、委婉（Wenn ich Zeit hätte, käme ich.），弱变化动词常用 würde + 不定式代替（Ich würde kommen.）；命令式表示命令、请求（Komm her!）。\n\n<strong>虚拟式的构成</strong>：虚拟式 I = 不定式词干 + -e / -est / -e / -en / -et / -en（er komme、du kommest），第三人称单数与直陈式现在时容易混，要注意区分；虚拟式 II = 过去时词干 + 变音 + -e（er käme、er gäbe）；过去完成虚拟 = hätte / wäre + 过去分词（er wäre gekommen）。\n\n现在分词只作形容词 / 状语；过去分词用于复合时态、被动语态，也可作形容词。"
+        "notes": "<strong>词条的基本形态（<bdi>lemma</bdi>）一律用不定式</strong>（<bdi>sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「过去分词」等词干，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt</bdi>）另填「现在时 2/3 单数词干」。\n\n「构成」一列只区分两种：<strong>变位</strong>（单一动词形式，写进变位表）与<strong>复合</strong>（助动词 + 过去分词 / 不定式，不写进变位表，见「复合时态与被动语态」）。\n\n<strong>语式用法</strong>：直陈式陈述事实、提问（<bdi>Er kommt morgen.）；虚拟式 I 用于间接引语（Er sagt, er komme morgen.）；虚拟式 II 表示非现实、假设、委婉（Wenn ich Zeit hätte, käme ich.），弱变化动词常用 würde + 不定式代替（Ich würde kommen.）；命令式表示命令、请求（Komm her</bdi>!）。\n\n<strong>虚拟式的构成</strong>：虚拟式 <bdi>I = 不定式词干 + -e / -est / -e / -en / -et / -en（er komme、du kommest），第三人称单数与直陈式现在时容易混，要注意区分；虚拟式 II = 过去时词干 + 变音 + -e（er käme、er gäbe）；过去完成虚拟 = hätte / wäre + 过去分词（er wäre gekommen</bdi>）。\n\n现在分词只作形容词 / 状语；过去分词用于复合时态、被动语态，也可作形容词。"
       },
       {
         "id": "de-verb-compound",
@@ -175,23 +175,23 @@
             "rows": [
               [
                 "现在完成时",
-                "haben / sein 的现在时 + 过去分词",
-                "ich habe gemacht、ich bin gefahren"
+                "<bdi>haben / sein</bdi> 的现在时 + 过去分词",
+                "<bdi>ich habe gemacht、ich bin gefahren</bdi>"
               ],
               [
                 "过去完成时",
-                "haben / sein 的过去时 + 过去分词",
-                "ich hatte gemacht、ich war gefahren"
+                "<bdi>haben / sein</bdi> 的过去时 + 过去分词",
+                "<bdi>ich hatte gemacht、ich war gefahren</bdi>"
               ],
               [
-                "将来时 I",
-                "werden 的现在时 + 不定式",
-                "ich werde machen"
+                "将来时 <bdi>I</bdi>",
+                "<bdi>werden</bdi> 的现在时 + 不定式",
+                "<bdi>ich werde machen</bdi>"
               ],
               [
-                "将来时 II",
-                "werden 的现在时 + 过去分词 + haben / sein",
-                "ich werde gemacht haben"
+                "将来时 <bdi>II</bdi>",
+                "<bdi>werden 的现在时 + 过去分词 + haben / sein</bdi>",
+                "<bdi>ich werde gemacht haben</bdi>"
               ]
             ],
             "lang": "de"
@@ -207,29 +207,29 @@
             "rows": [
               [
                 "现在时被动",
-                "werden + 过去分词",
-                "es wird gemacht"
+                "<bdi>werden</bdi> + 过去分词",
+                "<bdi>es wird gemacht</bdi>"
               ],
               [
                 "过去时被动",
-                "wurde + 过去分词",
-                "es wurde gemacht"
+                "<bdi>wurde</bdi> + 过去分词",
+                "<bdi>es wurde gemacht</bdi>"
               ],
               [
                 "现在完成时被动",
-                "ist + 过去分词 + worden",
-                "es ist gemacht worden"
+                "<bdi>ist + 过去分词 + worden</bdi>",
+                "<bdi>es ist gemacht worden</bdi>"
               ],
               [
                 "将来时被动",
-                "wird + 过去分词 + werden",
-                "es wird gemacht werden"
+                "<bdi>wird + 过去分词 + werden</bdi>",
+                "<bdi>es wird gemacht werden</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "复合时态与被动都是<strong>迂说法</strong>：由助动词 + 过去分词（或不定式）构成，<strong>不写进变位表</strong>。\n\n<strong>助动词的选择</strong>：多数动词用 haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。生词表单里的「完成时助动词」属性用来记录这个选择。\n\n被动由 werden + 过去分词构成（过程被动），另有 sein + 过去分词表示状态被动（Zustandspassiv，如 Die Tür ist geöffnet）。"
+        "notes": "复合时态与被动都是<strong>迂说法</strong>：由助动词 + 过去分词（或不定式）构成，<strong>不写进变位表</strong>。\n\n<strong>助动词的选择</strong>：多数动词用 <bdi>haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。生词表单里的「完成时助动词」属性用来记录这个选择。\n\n被动由 werden + 过去分词构成（过程被动），另有 sein + 过去分词表示状态被动（Zustandspassiv，如 Die Tür ist geöffnet</bdi>）。"
       },
       {
         "id": "de-verb-separable",
@@ -246,18 +246,18 @@
             "rows": [
               [
                 "可分前缀",
-                "auf-、an-、aus-、ein-、mit-、zu-、zurück-、weg-、vor-",
-                "现在时 / 过去时把前缀放到句末：Ich stehe früh auf."
+                "<bdi>auf-、an-、aus-、ein-、mit-、zu-、zurück-、weg-、vor-</bdi>",
+                "现在时 / 过去时把前缀放到句末：<bdi>Ich stehe früh auf</bdi>."
               ],
               [
                 "不可分前缀",
-                "be-、ge-、er-、ver-、zer-、ent-、emp-、miss-",
-                "前缀与动词一起：Ich verstehe das."
+                "<bdi>be-、ge-、er-、ver-、zer-、ent-、emp-、miss-</bdi>",
+                "前缀与动词一起：<bdi>Ich verstehe das</bdi>."
               ],
               [
                 "两可（重音不同）",
-                "um-、durch-、über-、unter-、wieder-",
-                "可分时重音在前缀：úmfahren（撞倒）；不可分时重音在词干：umfáhren（绕行）"
+                "<bdi>um-、durch-、über-、unter-、wieder-</bdi>",
+                "可分时重音在前缀：<bdi>úmfahren（撞倒）；不可分时重音在词干：umfáhren</bdi>（绕行）"
               ]
             ],
             "lang": "de"
@@ -273,19 +273,19 @@
             "rows": [
               [
                 "可分动词",
-                "前缀 + ge- + 词干 + -t / -en",
-                "aufgestanden、eingekauft"
+                "前缀 + <bdi>ge- + 词干 + -t / -en</bdi>",
+                "<bdi>aufgestanden、eingekauft</bdi>"
               ],
               [
                 "不可分动词",
-                "不加 ge-",
-                "verstanden、bekommen"
+                "不加 <bdi>ge</bdi>-",
+                "<bdi>verstanden、bekommen</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "可分动词在不定式里连写（aufstehen），在现在时 / 过去时主句里拆开（ich stehe auf）；从句与情态动词后仍连写。不可分前缀动词的前缀永远不分开：弱变化的（besuchen）用「弱变化：不可分前缀动词」锚点，强变化的（verstehen、bekommen）用强变化锚点并填过去分词；<code>-ieren</code> 动词（studieren）也属弱变化，过去分词不加 ge-。"
+        "notes": "可分动词在不定式里连写（<bdi>aufstehen），在现在时 / 过去时主句里拆开（ich stehe auf）；从句与情态动词后仍连写。不可分前缀动词的前缀永远不分开：弱变化的（besuchen）用「弱变化：不可分前缀动词」锚点，强变化的（verstehen、bekommen</bdi>）用强变化锚点并填过去分词；<code><bdi>-ieren</bdi></code> 动词（<bdi>studieren）也属弱变化，过去分词不加 ge</bdi>-。"
       },
       {
         "id": "de-verb-reflexive",
@@ -301,29 +301,29 @@
             ],
             "rows": [
               [
-                "sich waschen",
+                "<bdi>sich waschen</bdi>",
                 "洗澡",
-                "Ich wasche mich."
+                "<bdi>Ich wasche mich.</bdi>"
               ],
               [
-                "sich freuen (über / auf)",
+                "<bdi>sich freuen (über / auf)</bdi>",
                 "高兴",
-                "Ich freue mich auf den Urlaub."
+                "<bdi>Ich freue mich auf den Urlaub.</bdi>"
               ],
               [
-                "sich interessieren für",
+                "<bdi>sich interessieren für</bdi>",
                 "对…感兴趣",
-                "Er interessiert sich für Musik."
+                "<bdi>Er interessiert sich für Musik.</bdi>"
               ],
               [
-                "sich erinnern an",
+                "<bdi>sich erinnern an</bdi>",
                 "想起",
-                "Ich erinnere mich an ihn."
+                "<bdi>Ich erinnere mich an ihn.</bdi>"
               ],
               [
-                "sich befinden",
+                "<bdi>sich befinden</bdi>",
                 "位于",
-                "Das Museum befindet sich hier."
+                "<bdi>Das Museum befindet sich hier.</bdi>"
               ]
             ],
             "lang": "de"
@@ -338,26 +338,26 @@
             ],
             "rows": [
               [
-                "sich etwas vorstellen",
-                "Ich stelle mir das vor.",
-                "自反代词是与格（mir）"
+                "<bdi>sich etwas vorstellen</bdi>",
+                "<bdi>Ich stelle mir das vor.</bdi>",
+                "自反代词是与格（<bdi>mir</bdi>）"
               ],
               [
-                "sich etwas ansehen",
-                "Ich sehe mir den Film an.",
+                "<bdi>sich etwas ansehen</bdi>",
+                "<bdi>Ich sehe mir den Film an.</bdi>",
                 "自反代词是与格"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "反身动词在词条里通常以 sich + 动词的形式记录；反身代词本身用「反身代词」章的形式。"
+        "notes": "反身动词在词条里通常以 <bdi>sich</bdi> + 动词的形式记录；反身代词本身用「反身代词」章的形式。"
       }
     ]
   },
   {
     "id": "de-verb-weak",
-    "title": "弱变化动词（machen 型）",
+    "title": "弱变化动词（<bdi>machen</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -398,25 +398,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "mach",
-          "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gemacht",
-          "hint": "留空 = ge- + 词干 + t。以 be- / ge- / er- / ver- / ent- / zer- 开头或以 -ieren 结尾的动词不加 ge-，请改用下面的「不可分前缀」「-ieren」两个锚点。"
+          "hint": "留空 = <bdi>ge- + 词干 + t。以 be- / ge- / er- / ver- / ent- / zer- 开头或以 -ieren 结尾的动词不加 ge-，请改用下面的「不可分前缀」「-ieren</bdi>」两个锚点。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "mach",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "mach",
-          "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -619,27 +619,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-st",
-                "-t",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-st</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：machen",
+            "caption": "例词：<bdi>machen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -653,21 +653,21 @@
             "rows": [
               [
                 "现在时",
-                "mache",
-                "machst",
-                "macht",
-                "machen",
-                "macht",
-                "machen"
+                "<bdi>mache</bdi>",
+                "<bdi>machst</bdi>",
+                "<bdi>macht</bdi>",
+                "<bdi>machen</bdi>",
+                "<bdi>macht</bdi>",
+                "<bdi>machen</bdi>"
               ],
               [
                 "过去时",
-                "machte",
-                "machtest",
-                "machte",
-                "machten",
-                "machtet",
-                "machten"
+                "<bdi>machte</bdi>",
+                "<bdi>machtest</bdi>",
+                "<bdi>machte</bdi>",
+                "<bdi>machten</bdi>",
+                "<bdi>machtet</bdi>",
+                "<bdi>machten</bdi>"
               ]
             ],
             "lang": "de"
@@ -692,28 +692,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：machen",
+            "caption": "例词：<bdi>machen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -726,22 +726,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "mache",
-                "machest",
-                "mache",
-                "machen",
-                "machet",
-                "machen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>mache</bdi>",
+                "<bdi>machest</bdi>",
+                "<bdi>mache</bdi>",
+                "<bdi>machen</bdi>",
+                "<bdi>machet</bdi>",
+                "<bdi>machen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "machte",
-                "machtest",
-                "machte",
-                "machten",
-                "machtet",
-                "machten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>machte</bdi>",
+                "<bdi>machtest</bdi>",
+                "<bdi>machte</bdi>",
+                "<bdi>machten</bdi>",
+                "<bdi>machtet</bdi>",
+                "<bdi>machten</bdi>"
               ]
             ],
             "lang": "de"
@@ -768,17 +768,17 @@
               [
                 "现在时",
                 "",
-                "-e",
+                "<bdi>-e</bdi>",
                 "",
-                "-en wir",
-                "-t",
-                "-en Sie"
+                "<bdi>-en wir</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：machen",
+            "caption": "例词：<bdi>machen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -793,11 +793,11 @@
               [
                 "现在时",
                 "",
-                "mache",
+                "<bdi>mache</bdi>",
                 "",
-                "machen wir",
-                "macht",
-                "machen Sie"
+                "<bdi>machen wir</bdi>",
+                "<bdi>macht</bdi>",
+                "<bdi>machen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -818,13 +818,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：machen",
+            "caption": "例词：<bdi>machen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -833,7 +833,7 @@
             "rows": [
               [
                 "现在时",
-                "machen"
+                "<bdi>machen</bdi>"
               ]
             ],
             "lang": "de"
@@ -854,7 +854,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -864,7 +864,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：machen",
+            "caption": "例词：<bdi>machen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -873,11 +873,11 @@
             "rows": [
               [
                 "现在分词",
-                "machend"
+                "<bdi>machend</bdi>"
               ],
               [
                 "过去分词",
-                "gemacht"
+                "<bdi>gemacht</bdi>"
               ]
             ],
             "lang": "de"
@@ -885,11 +885,11 @@
         ]
       }
     ],
-    "notes": "规则变化：过去时 -te，过去分词 ge-…-t。绝大多数德语动词属此类。"
+    "notes": "规则变化：过去时 -<bdi>te，过去分词 ge-…-t</bdi>。绝大多数德语动词属此类。"
   },
   {
     "id": "de-verb-weak-ep",
-    "title": "弱变化（arbeiten / atmen 型）",
+    "title": "弱变化（<bdi>arbeiten / atmen</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -930,25 +930,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "arbeit",
-          "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gearbeitet",
-          "hint": "留空 = ge- + 词干 + et。"
+          "hint": "留空 = <bdi>ge- + 词干 + et</bdi>。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "arbeit",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "arbeit",
-          "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -1151,27 +1151,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-est",
-                "-et",
-                "-en",
-                "-et",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
-                "-ete",
-                "-etest",
-                "-ete",
-                "-eten",
-                "-etet",
-                "-eten"
+                "<bdi>-ete</bdi>",
+                "<bdi>-etest</bdi>",
+                "<bdi>-ete</bdi>",
+                "<bdi>-eten</bdi>",
+                "<bdi>-etet</bdi>",
+                "<bdi>-eten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：arbeiten",
+            "caption": "例词：<bdi>arbeiten</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1185,21 +1185,21 @@
             "rows": [
               [
                 "现在时",
-                "arbeite",
-                "arbeitest",
-                "arbeitet",
-                "arbeiten",
-                "arbeitet",
-                "arbeiten"
+                "<bdi>arbeite</bdi>",
+                "<bdi>arbeitest</bdi>",
+                "<bdi>arbeitet</bdi>",
+                "<bdi>arbeiten</bdi>",
+                "<bdi>arbeitet</bdi>",
+                "<bdi>arbeiten</bdi>"
               ],
               [
                 "过去时",
-                "arbeitete",
-                "arbeitetest",
-                "arbeitete",
-                "arbeiteten",
-                "arbeitetet",
-                "arbeiteten"
+                "<bdi>arbeitete</bdi>",
+                "<bdi>arbeitetest</bdi>",
+                "<bdi>arbeitete</bdi>",
+                "<bdi>arbeiteten</bdi>",
+                "<bdi>arbeitetet</bdi>",
+                "<bdi>arbeiteten</bdi>"
               ]
             ],
             "lang": "de"
@@ -1224,28 +1224,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
-                "-ete",
-                "-etest",
-                "-ete",
-                "-eten",
-                "-etet",
-                "-eten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>-ete</bdi>",
+                "<bdi>-etest</bdi>",
+                "<bdi>-ete</bdi>",
+                "<bdi>-eten</bdi>",
+                "<bdi>-etet</bdi>",
+                "<bdi>-eten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：arbeiten",
+            "caption": "例词：<bdi>arbeiten</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1258,22 +1258,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "arbeite",
-                "arbeitest",
-                "arbeite",
-                "arbeiten",
-                "arbeitet",
-                "arbeiten"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>arbeite</bdi>",
+                "<bdi>arbeitest</bdi>",
+                "<bdi>arbeite</bdi>",
+                "<bdi>arbeiten</bdi>",
+                "<bdi>arbeitet</bdi>",
+                "<bdi>arbeiten</bdi>"
               ],
               [
-                "虚拟式 II",
-                "arbeitete",
-                "arbeitetest",
-                "arbeitete",
-                "arbeiteten",
-                "arbeitetet",
-                "arbeiteten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>arbeitete</bdi>",
+                "<bdi>arbeitetest</bdi>",
+                "<bdi>arbeitete</bdi>",
+                "<bdi>arbeiteten</bdi>",
+                "<bdi>arbeitetet</bdi>",
+                "<bdi>arbeiteten</bdi>"
               ]
             ],
             "lang": "de"
@@ -1300,17 +1300,17 @@
               [
                 "现在时",
                 "",
-                "-e",
+                "<bdi>-e</bdi>",
                 "",
-                "-en wir",
-                "-et",
-                "-en Sie"
+                "<bdi>-en wir</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：arbeiten",
+            "caption": "例词：<bdi>arbeiten</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1325,11 +1325,11 @@
               [
                 "现在时",
                 "",
-                "arbeite",
+                "<bdi>arbeite</bdi>",
                 "",
-                "arbeiten wir",
-                "arbeitet",
-                "arbeiten Sie"
+                "<bdi>arbeiten wir</bdi>",
+                "<bdi>arbeitet</bdi>",
+                "<bdi>arbeiten Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -1350,13 +1350,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：arbeiten",
+            "caption": "例词：<bdi>arbeiten</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1365,7 +1365,7 @@
             "rows": [
               [
                 "现在时",
-                "arbeiten"
+                "<bdi>arbeiten</bdi>"
               ]
             ],
             "lang": "de"
@@ -1386,7 +1386,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -1396,7 +1396,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：arbeiten",
+            "caption": "例词：<bdi>arbeiten</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1405,11 +1405,11 @@
             "rows": [
               [
                 "现在分词",
-                "arbeitend"
+                "<bdi>arbeitend</bdi>"
               ],
               [
                 "过去分词",
-                "gearbeitet"
+                "<bdi>gearbeitet</bdi>"
               ]
             ],
             "lang": "de"
@@ -1417,11 +1417,11 @@
         ]
       }
     ],
-    "notes": "词干以 d / t 结尾，或以 m / n 前有辅音（atmen, rechnen, öffnen）时，第二、三人称单数和过去时都要插入 -e-。"
+    "notes": "词干以 <bdi>d / t 结尾，或以 m / n 前有辅音（atmen, rechnen, öffnen）时，第二、三人称单数和过去时都要插入 -e</bdi>-。"
   },
   {
     "id": "de-verb-weak-eln",
-    "title": "弱变化：-eln / -ern 动词（sammeln / ändern 型）",
+    "title": "弱变化：-<bdi>eln / -ern 动词（sammeln / ändern</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -1475,25 +1475,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "sammel",
-          "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gesammelt",
-          "hint": "留空 = ge- + 词干 + t（gesammelt / geändert）。"
+          "hint": "留空 = <bdi>ge- + 词干 + t（gesammelt / geändert</bdi>）。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "sammel",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "sammel",
-          "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -1702,27 +1702,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-st",
-                "-t",
-                "-n",
-                "-t",
-                "-n"
+                "<bdi>-e</bdi>",
+                "<bdi>-st</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n</bdi>"
               ],
               [
                 "过去时",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sammeln",
+            "caption": "例词：<bdi>sammeln</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1736,21 +1736,21 @@
             "rows": [
               [
                 "现在时",
-                "sammle",
-                "sammelst",
-                "sammelt",
-                "sammeln",
-                "sammelt",
-                "sammeln"
+                "<bdi>sammle</bdi>",
+                "<bdi>sammelst</bdi>",
+                "<bdi>sammelt</bdi>",
+                "<bdi>sammeln</bdi>",
+                "<bdi>sammelt</bdi>",
+                "<bdi>sammeln</bdi>"
               ],
               [
                 "过去时",
-                "sammelte",
-                "sammeltest",
-                "sammelte",
-                "sammelten",
-                "sammeltet",
-                "sammelten"
+                "<bdi>sammelte</bdi>",
+                "<bdi>sammeltest</bdi>",
+                "<bdi>sammelte</bdi>",
+                "<bdi>sammelten</bdi>",
+                "<bdi>sammeltet</bdi>",
+                "<bdi>sammelten</bdi>"
               ]
             ],
             "lang": "de"
@@ -1775,28 +1775,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-n",
-                "-et",
-                "-n"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-n</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-n</bdi>"
               ],
               [
-                "虚拟式 II",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sammeln",
+            "caption": "例词：<bdi>sammeln</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1809,22 +1809,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "sammele",
-                "sammelest",
-                "sammele",
-                "sammeln",
-                "sammelet",
-                "sammeln"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>sammele</bdi>",
+                "<bdi>sammelest</bdi>",
+                "<bdi>sammele</bdi>",
+                "<bdi>sammeln</bdi>",
+                "<bdi>sammelet</bdi>",
+                "<bdi>sammeln</bdi>"
               ],
               [
-                "虚拟式 II",
-                "sammelte",
-                "sammeltest",
-                "sammelte",
-                "sammelten",
-                "sammeltet",
-                "sammelten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>sammelte</bdi>",
+                "<bdi>sammeltest</bdi>",
+                "<bdi>sammelte</bdi>",
+                "<bdi>sammelten</bdi>",
+                "<bdi>sammeltet</bdi>",
+                "<bdi>sammelten</bdi>"
               ]
             ],
             "lang": "de"
@@ -1851,17 +1851,17 @@
               [
                 "现在时",
                 "",
-                "-e",
+                "<bdi>-e</bdi>",
                 "",
-                "-n wir",
-                "-t",
-                "-n Sie"
+                "<bdi>-n wir</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sammeln",
+            "caption": "例词：<bdi>sammeln</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1876,11 +1876,11 @@
               [
                 "现在时",
                 "",
-                "sammle",
+                "<bdi>sammle</bdi>",
                 "",
-                "sammeln wir",
-                "sammelt",
-                "sammeln Sie"
+                "<bdi>sammeln wir</bdi>",
+                "<bdi>sammelt</bdi>",
+                "<bdi>sammeln Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -1901,13 +1901,13 @@
             "rows": [
               [
                 "现在时",
-                "-n"
+                "<bdi>-n</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sammeln",
+            "caption": "例词：<bdi>sammeln</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1916,7 +1916,7 @@
             "rows": [
               [
                 "现在时",
-                "sammeln"
+                "<bdi>sammeln</bdi>"
               ]
             ],
             "lang": "de"
@@ -1937,7 +1937,7 @@
             "rows": [
               [
                 "现在分词",
-                "-nd"
+                "<bdi>-nd</bdi>"
               ],
               [
                 "过去分词",
@@ -1947,7 +1947,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：sammeln",
+            "caption": "例词：<bdi>sammeln</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -1956,11 +1956,11 @@
             "rows": [
               [
                 "现在分词",
-                "sammelnd"
+                "<bdi>sammelnd</bdi>"
               ],
               [
                 "过去分词",
-                "gesammelt"
+                "<bdi>gesammelt</bdi>"
               ]
             ],
             "lang": "de"
@@ -1968,11 +1968,11 @@
         ]
       }
     ],
-    "notes": "属于弱变化大类：过去时 -te、过去分词 ge-…-t，只是不定式以 -ln / -rn 结尾，词干要去掉词尾的 n（sammeln → sammel-, ändern → änder-）。另外 -eln 动词在单数第一人称和命令式单数丢 e（sammeln → ich sammle, sammle!），-ern 动词保留 e（ändern → ich ändere, ändere!）。"
+    "notes": "属于弱变化大类：过去时 -<bdi>te、过去分词 ge-…-t，只是不定式以 -ln / -rn 结尾，词干要去掉词尾的 n（sammeln → sammel-, ändern → änder-）。另外 -eln 动词在单数第一人称和命令式单数丢 e（sammeln → ich sammle, sammle!），-ern 动词保留 e（ändern → ich ändere, ändere</bdi>!）。"
   },
   {
     "id": "de-verb-weak-ieren",
-    "title": "弱变化：-ieren 动词（studieren 型）",
+    "title": "弱变化：-<bdi>ieren 动词（studieren</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -2009,25 +2009,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "studier",
-          "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "studiert",
-          "hint": "留空 = 词干 + t（-ieren 动词不加 ge-）。"
+          "hint": "留空 = 词干 + <bdi>t（-ieren 动词不加 ge</bdi>-）。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "studier",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "studier",
-          "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -2230,27 +2230,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-st",
-                "-t",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-st</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：studieren",
+            "caption": "例词：<bdi>studieren</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2264,21 +2264,21 @@
             "rows": [
               [
                 "现在时",
-                "studiere",
-                "studierst",
-                "studiert",
-                "studieren",
-                "studiert",
-                "studieren"
+                "<bdi>studiere</bdi>",
+                "<bdi>studierst</bdi>",
+                "<bdi>studiert</bdi>",
+                "<bdi>studieren</bdi>",
+                "<bdi>studiert</bdi>",
+                "<bdi>studieren</bdi>"
               ],
               [
                 "过去时",
-                "studierte",
-                "studiertest",
-                "studierte",
-                "studierten",
-                "studiertet",
-                "studierten"
+                "<bdi>studierte</bdi>",
+                "<bdi>studiertest</bdi>",
+                "<bdi>studierte</bdi>",
+                "<bdi>studierten</bdi>",
+                "<bdi>studiertet</bdi>",
+                "<bdi>studierten</bdi>"
               ]
             ],
             "lang": "de"
@@ -2303,28 +2303,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：studieren",
+            "caption": "例词：<bdi>studieren</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2337,22 +2337,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "studiere",
-                "studierest",
-                "studiere",
-                "studieren",
-                "studieret",
-                "studieren"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>studiere</bdi>",
+                "<bdi>studierest</bdi>",
+                "<bdi>studiere</bdi>",
+                "<bdi>studieren</bdi>",
+                "<bdi>studieret</bdi>",
+                "<bdi>studieren</bdi>"
               ],
               [
-                "虚拟式 II",
-                "studierte",
-                "studiertest",
-                "studierte",
-                "studierten",
-                "studiertet",
-                "studierten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>studierte</bdi>",
+                "<bdi>studiertest</bdi>",
+                "<bdi>studierte</bdi>",
+                "<bdi>studierten</bdi>",
+                "<bdi>studiertet</bdi>",
+                "<bdi>studierten</bdi>"
               ]
             ],
             "lang": "de"
@@ -2379,17 +2379,17 @@
               [
                 "现在时",
                 "",
-                "-e",
+                "<bdi>-e</bdi>",
                 "",
-                "-en wir",
-                "-t",
-                "-en Sie"
+                "<bdi>-en wir</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：studieren",
+            "caption": "例词：<bdi>studieren</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2404,11 +2404,11 @@
               [
                 "现在时",
                 "",
-                "studiere",
+                "<bdi>studiere</bdi>",
                 "",
-                "studieren wir",
-                "studiert",
-                "studieren Sie"
+                "<bdi>studieren wir</bdi>",
+                "<bdi>studiert</bdi>",
+                "<bdi>studieren Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -2429,13 +2429,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：studieren",
+            "caption": "例词：<bdi>studieren</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2444,7 +2444,7 @@
             "rows": [
               [
                 "现在时",
-                "studieren"
+                "<bdi>studieren</bdi>"
               ]
             ],
             "lang": "de"
@@ -2465,7 +2465,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -2475,7 +2475,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：studieren",
+            "caption": "例词：<bdi>studieren</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2484,11 +2484,11 @@
             "rows": [
               [
                 "现在分词",
-                "studierend"
+                "<bdi>studierend</bdi>"
               ],
               [
                 "过去分词",
-                "studiert"
+                "<bdi>studiert</bdi>"
               ]
             ],
             "lang": "de"
@@ -2496,11 +2496,11 @@
         ]
       }
     ],
-    "notes": "属于弱变化大类：过去时 -te、过去分词 -t，只是过去分词不加 ge-（studieren → studierte → studiert）。所有 -ieren 动词都是弱变化，词干本身不变化。"
+    "notes": "属于弱变化大类：过去时 -<bdi>te、过去分词 -t，只是过去分词不加 ge-（studieren → studierte → studiert）。所有 -ieren</bdi> 动词都是弱变化，词干本身不变化。"
   },
   {
     "id": "de-verb-weak-insep",
-    "title": "弱变化：不可分前缀动词（besuchen 型）",
+    "title": "弱变化：不可分前缀动词（<bdi>besuchen</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -2537,25 +2537,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "besuch",
-          "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "besucht",
-          "hint": "留空 = 词干 + t（不可分前缀动词不加 ge-）。"
+          "hint": "留空 = 词干 + <bdi>t（不可分前缀动词不加 ge</bdi>-）。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "besuch",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "besuch",
-          "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -2758,27 +2758,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-st",
-                "-t",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-st</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：besuchen",
+            "caption": "例词：<bdi>besuchen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2792,21 +2792,21 @@
             "rows": [
               [
                 "现在时",
-                "besuche",
-                "besuchst",
-                "besucht",
-                "besuchen",
-                "besucht",
-                "besuchen"
+                "<bdi>besuche</bdi>",
+                "<bdi>besuchst</bdi>",
+                "<bdi>besucht</bdi>",
+                "<bdi>besuchen</bdi>",
+                "<bdi>besucht</bdi>",
+                "<bdi>besuchen</bdi>"
               ],
               [
                 "过去时",
-                "besuchte",
-                "besuchtest",
-                "besuchte",
-                "besuchten",
-                "besuchtet",
-                "besuchten"
+                "<bdi>besuchte</bdi>",
+                "<bdi>besuchtest</bdi>",
+                "<bdi>besuchte</bdi>",
+                "<bdi>besuchten</bdi>",
+                "<bdi>besuchtet</bdi>",
+                "<bdi>besuchten</bdi>"
               ]
             ],
             "lang": "de"
@@ -2831,28 +2831,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
-                "-te",
-                "-test",
-                "-te",
-                "-ten",
-                "-tet",
-                "-ten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-test</bdi>",
+                "<bdi>-te</bdi>",
+                "<bdi>-ten</bdi>",
+                "<bdi>-tet</bdi>",
+                "<bdi>-ten</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：besuchen",
+            "caption": "例词：<bdi>besuchen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2865,22 +2865,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "besuche",
-                "besuchest",
-                "besuche",
-                "besuchen",
-                "besuchet",
-                "besuchen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>besuche</bdi>",
+                "<bdi>besuchest</bdi>",
+                "<bdi>besuche</bdi>",
+                "<bdi>besuchen</bdi>",
+                "<bdi>besuchet</bdi>",
+                "<bdi>besuchen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "besuchte",
-                "besuchtest",
-                "besuchte",
-                "besuchten",
-                "besuchtet",
-                "besuchten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>besuchte</bdi>",
+                "<bdi>besuchtest</bdi>",
+                "<bdi>besuchte</bdi>",
+                "<bdi>besuchten</bdi>",
+                "<bdi>besuchtet</bdi>",
+                "<bdi>besuchten</bdi>"
               ]
             ],
             "lang": "de"
@@ -2907,17 +2907,17 @@
               [
                 "现在时",
                 "",
-                "-e",
+                "<bdi>-e</bdi>",
                 "",
-                "-en wir",
-                "-t",
-                "-en Sie"
+                "<bdi>-en wir</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：besuchen",
+            "caption": "例词：<bdi>besuchen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2932,11 +2932,11 @@
               [
                 "现在时",
                 "",
-                "besuche",
+                "<bdi>besuche</bdi>",
                 "",
-                "besuchen wir",
-                "besucht",
-                "besuchen Sie"
+                "<bdi>besuchen wir</bdi>",
+                "<bdi>besucht</bdi>",
+                "<bdi>besuchen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -2957,13 +2957,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：besuchen",
+            "caption": "例词：<bdi>besuchen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -2972,7 +2972,7 @@
             "rows": [
               [
                 "现在时",
-                "besuchen"
+                "<bdi>besuchen</bdi>"
               ]
             ],
             "lang": "de"
@@ -2993,7 +2993,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -3003,7 +3003,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：besuchen",
+            "caption": "例词：<bdi>besuchen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3012,11 +3012,11 @@
             "rows": [
               [
                 "现在分词",
-                "besuchend"
+                "<bdi>besuchend</bdi>"
               ],
               [
                 "过去分词",
-                "besucht"
+                "<bdi>besucht</bdi>"
               ]
             ],
             "lang": "de"
@@ -3024,11 +3024,11 @@
         ]
       }
     ],
-    "notes": "属于弱变化大类：词干以 be- / ge- / er- / ver- / zer- / ent- / emp- / miss- 开头时，过去分词不加 ge-（besuchen → besuchte → besucht），前缀永远不分开。这类动词若同时是强变化（verstehen、bekommen），请改用「强变化动词」锚点并填过去分词。"
+    "notes": "属于弱变化大类：词干以 <bdi>be- / ge- / er- / ver- / zer- / ent- / emp- / miss- 开头时，过去分词不加 ge-（besuchen → besuchte → besucht），前缀永远不分开。这类动词若同时是强变化（verstehen、bekommen</bdi>），请改用「强变化动词」锚点并填过去分词。"
   },
   {
     "id": "de-verb-strong",
-    "title": "强变化动词（sprechen 型）",
+    "title": "强变化动词（<bdi>sprechen</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -3081,31 +3081,31 @@
           "key": "p23",
           "label": "现在时 2/3 单数词干",
           "example": "sprich",
-          "hint": "换音的动词填换音后的词干：sprechen → sprich、nehmen → nimm、fahren → fähr。留空 = 现在时词干。"
+          "hint": "换音的动词填换音后的词干：<bdi>sprechen → sprich、nehmen → nimm、fahren → fähr</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pret",
           "label": "过去时词干",
           "example": "sprach",
-          "hint": "过去时去掉词尾的部分：sprechen → sprach、machen → mach。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gesprochen",
-          "hint": "强变化的过去分词不规则，必须填（gesprochen / genommen / gefunden）。"
+          "hint": "强变化的过去分词不规则，必须填（<bdi>gesprochen / genommen / gefunden</bdi>）。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "sprech",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "spräch",
-          "hint": "留空 = 过去时词干变音（sprach → spräch、konnte → könnt）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
         }
       ],
       "exampleStems": {
@@ -3322,27 +3322,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-st",
-                "-t",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-st</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
                 "—",
-                "-st",
+                "<bdi>-st</bdi>",
                 "—",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sprechen",
+            "caption": "例词：<bdi>sprechen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3356,21 +3356,21 @@
             "rows": [
               [
                 "现在时",
-                "spreche",
-                "sprichst",
-                "spricht",
-                "sprechen",
-                "sprecht",
-                "sprechen"
+                "<bdi>spreche</bdi>",
+                "<bdi>sprichst</bdi>",
+                "<bdi>spricht</bdi>",
+                "<bdi>sprechen</bdi>",
+                "<bdi>sprecht</bdi>",
+                "<bdi>sprechen</bdi>"
               ],
               [
                 "过去时",
-                "sprach",
-                "sprachst",
-                "sprach",
-                "sprachen",
-                "spracht",
-                "sprachen"
+                "<bdi>sprach</bdi>",
+                "<bdi>sprachst</bdi>",
+                "<bdi>sprach</bdi>",
+                "<bdi>sprachen</bdi>",
+                "<bdi>spracht</bdi>",
+                "<bdi>sprachen</bdi>"
               ]
             ],
             "lang": "de"
@@ -3395,28 +3395,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sprechen",
+            "caption": "例词：<bdi>sprechen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3429,22 +3429,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "spreche",
-                "sprechest",
-                "spreche",
-                "sprechen",
-                "sprechet",
-                "sprechen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>spreche</bdi>",
+                "<bdi>sprechest</bdi>",
+                "<bdi>spreche</bdi>",
+                "<bdi>sprechen</bdi>",
+                "<bdi>sprechet</bdi>",
+                "<bdi>sprechen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "spräche",
-                "sprächest",
-                "spräche",
-                "sprächen",
-                "sprächet",
-                "sprächen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>spräche</bdi>",
+                "<bdi>sprächest</bdi>",
+                "<bdi>spräche</bdi>",
+                "<bdi>sprächen</bdi>",
+                "<bdi>sprächet</bdi>",
+                "<bdi>sprächen</bdi>"
               ]
             ],
             "lang": "de"
@@ -3473,15 +3473,15 @@
                 "",
                 "—",
                 "",
-                "-en wir",
-                "-t",
-                "-en Sie"
+                "<bdi>-en wir</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sprechen",
+            "caption": "例词：<bdi>sprechen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3496,11 +3496,11 @@
               [
                 "现在时",
                 "",
-                "sprich",
+                "<bdi>sprich</bdi>",
                 "",
-                "sprechen wir",
-                "sprecht",
-                "sprechen Sie"
+                "<bdi>sprechen wir</bdi>",
+                "<bdi>sprecht</bdi>",
+                "<bdi>sprechen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -3521,13 +3521,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：sprechen",
+            "caption": "例词：<bdi>sprechen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3536,7 +3536,7 @@
             "rows": [
               [
                 "现在时",
-                "sprechen"
+                "<bdi>sprechen</bdi>"
               ]
             ],
             "lang": "de"
@@ -3557,7 +3557,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -3567,7 +3567,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：sprechen",
+            "caption": "例词：<bdi>sprechen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3576,11 +3576,11 @@
             "rows": [
               [
                 "现在分词",
-                "sprechend"
+                "<bdi>sprechend</bdi>"
               ],
               [
                 "过去分词",
-                "gesprochen"
+                "<bdi>gesprochen</bdi>"
               ]
             ],
             "lang": "de"
@@ -3588,11 +3588,11 @@
         ]
       }
     ],
-    "notes": "词干元音在现在时 2/3 单数（换音）、过去时、过去分词里变化，这三处必须单独记；虚拟式 II 由过去时词干变音（sprach → spräche）。"
+    "notes": "词干元音在现在时 2/3 单数（换音）、过去时、过去分词里变化，这三处必须单独记；虚拟式 <bdi>II 由过去时词干变音（sprach → spräche</bdi>）。"
   },
   {
     "id": "de-verb-mixed",
-    "title": "混合变化动词（bringen 型）",
+    "title": "混合变化动词（<bdi>bringen</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -3641,25 +3641,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "brachte",
-          "hint": "过去时带 -te 但词干变了（brachte / dachte / kannte），填整个过去时形式。"
+          "hint": "过去时带 -<bdi>te 但词干变了（brachte / dachte / kannte</bdi>），填整个过去时形式。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gebracht",
-          "hint": "混合变化的过去分词不规则，必须填（gebracht / gedacht / gekannt）。"
+          "hint": "混合变化的过去分词不规则，必须填（<bdi>gebracht / gedacht / gekannt</bdi>）。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "bring",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "brächte",
-          "hint": "留空 = 过去时词干变音（brachte → brächte）。"
+          "hint": "留空 = 过去时词干变音（<bdi>brachte → brächte</bdi>）。"
         }
       ],
       "exampleStems": {
@@ -3866,27 +3866,27 @@
             "rows": [
               [
                 "现在时",
-                "-e",
-                "-st",
-                "-t",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-e</bdi>",
+                "<bdi>-st</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
                 "—",
-                "-st",
+                "<bdi>-st</bdi>",
                 "—",
-                "-n",
-                "-t",
-                "-n"
+                "<bdi>-n</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：bringen",
+            "caption": "例词：<bdi>bringen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3900,21 +3900,21 @@
             "rows": [
               [
                 "现在时",
-                "bringe",
-                "bringst",
-                "bringt",
-                "bringen",
-                "bringt",
-                "bringen"
+                "<bdi>bringe</bdi>",
+                "<bdi>bringst</bdi>",
+                "<bdi>bringt</bdi>",
+                "<bdi>bringen</bdi>",
+                "<bdi>bringt</bdi>",
+                "<bdi>bringen</bdi>"
               ],
               [
                 "过去时",
-                "brachte",
-                "brachtest",
-                "brachte",
-                "brachten",
-                "brachtet",
-                "brachten"
+                "<bdi>brachte</bdi>",
+                "<bdi>brachtest</bdi>",
+                "<bdi>brachte</bdi>",
+                "<bdi>brachten</bdi>",
+                "<bdi>brachtet</bdi>",
+                "<bdi>brachten</bdi>"
               ]
             ],
             "lang": "de"
@@ -3939,28 +3939,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
+                "虚拟式 <bdi>II</bdi>",
                 "—",
-                "-st",
+                "<bdi>-st</bdi>",
                 "—",
-                "-n",
-                "-t",
-                "-n"
+                "<bdi>-n</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：bringen",
+            "caption": "例词：<bdi>bringen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -3973,22 +3973,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "bringe",
-                "bringest",
-                "bringe",
-                "bringen",
-                "bringet",
-                "bringen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>bringe</bdi>",
+                "<bdi>bringest</bdi>",
+                "<bdi>bringe</bdi>",
+                "<bdi>bringen</bdi>",
+                "<bdi>bringet</bdi>",
+                "<bdi>bringen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "brächte",
-                "brächtest",
-                "brächte",
-                "brächten",
-                "brächtet",
-                "brächten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>brächte</bdi>",
+                "<bdi>brächtest</bdi>",
+                "<bdi>brächte</bdi>",
+                "<bdi>brächten</bdi>",
+                "<bdi>brächtet</bdi>",
+                "<bdi>brächten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4015,17 +4015,17 @@
               [
                 "现在时",
                 "",
-                "-e",
+                "<bdi>-e</bdi>",
                 "",
-                "-en wir",
-                "-t",
-                "-en Sie"
+                "<bdi>-en wir</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en Sie</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：bringen",
+            "caption": "例词：<bdi>bringen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4040,11 +4040,11 @@
               [
                 "现在时",
                 "",
-                "bringe",
+                "<bdi>bringe</bdi>",
                 "",
-                "bringen wir",
-                "bringt",
-                "bringen Sie"
+                "<bdi>bringen wir</bdi>",
+                "<bdi>bringt</bdi>",
+                "<bdi>bringen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -4065,13 +4065,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：bringen",
+            "caption": "例词：<bdi>bringen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4080,7 +4080,7 @@
             "rows": [
               [
                 "现在时",
-                "bringen"
+                "<bdi>bringen</bdi>"
               ]
             ],
             "lang": "de"
@@ -4101,7 +4101,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -4111,7 +4111,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：bringen",
+            "caption": "例词：<bdi>bringen</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4120,11 +4120,11 @@
             "rows": [
               [
                 "现在分词",
-                "bringend"
+                "<bdi>bringend</bdi>"
               ],
               [
                 "过去分词",
-                "gebracht"
+                "<bdi>gebracht</bdi>"
               ]
             ],
             "lang": "de"
@@ -4132,11 +4132,11 @@
         ]
       }
     ],
-    "notes": "过去时用 -te（像弱变化），但词干元音变化、过去分词词干也不同（gebracht）。同类：denken / dachte / gedacht、kennen / kannte / gekannt、nennen、rennen、wissen。"
+    "notes": "过去时用 -<bdi>te（像弱变化），但词干元音变化、过去分词词干也不同（gebracht）。同类：denken / dachte / gedacht、kennen / kannte / gekannt、nennen、rennen、wissen</bdi>。"
   },
   {
     "id": "de-verb-modal",
-    "title": "情态动词（können 型）",
+    "title": "情态动词（<bdi>können</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -4195,31 +4195,31 @@
           "key": "p1",
           "label": "现在时单数词干",
           "example": "kann",
-          "hint": "情态动词现在时第一、三人称单数同形（kann / muss / will / darf），填这个形式。"
+          "hint": "情态动词现在时第一、三人称单数同形（<bdi>kann / muss / will / darf</bdi>），填这个形式。"
         },
         {
           "key": "pret",
           "label": "过去时词干",
           "example": "konnte",
-          "hint": "如 konnte / musste / wollte。"
+          "hint": "如 <bdi>konnte / musste / wollte</bdi>。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gekonnt",
-          "hint": "如 gekonnt / gemusst / gewollt。"
+          "hint": "如 <bdi>gekonnt / gemusst / gewollt</bdi>。"
         },
         {
           "key": "k1",
-          "label": "虚拟式 I 词干",
+          "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "könn",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 + -e / -est / -e / -en / -et / -en）。"
+          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
-          "label": "虚拟式 II 词干",
+          "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "könnte",
-          "hint": "留空 = 过去时词干变音（konnte → könnte）。wollen / sollen 的虚拟式 II 与过去时同形，填 wollte / sollte。"
+          "hint": "留空 = 过去时词干变音（<bdi>konnte → könnte）。wollen / sollen 的虚拟式 II 与过去时同形，填 wollte / sollte</bdi>。"
         }
       ],
       "exampleStems": {
@@ -4414,34 +4414,34 @@
             ],
             "rows": [
               [
-                "können",
+                "<bdi>können</bdi>",
                 "能力、可能性、许可",
-                "Ich kann schwimmen. / Das kann sein."
+                "<bdi>Ich kann schwimmen. / Das kann sein.</bdi>"
               ],
               [
-                "müssen",
+                "<bdi>müssen</bdi>",
                 "义务、必要（否定表示「不必」）",
-                "Ich muss gehen. / Du musst nicht kommen."
+                "<bdi>Ich muss gehen. / Du musst nicht kommen.</bdi>"
               ],
               [
-                "dürfen",
+                "<bdi>dürfen</bdi>",
                 "许可（否定表示「不许」）",
-                "Darf ich rauchen? / Du darfst nicht rauchen."
+                "<bdi>Darf ich rauchen? / Du darfst nicht rauchen.</bdi>"
               ],
               [
-                "sollen",
+                "<bdi>sollen</bdi>",
                 "他人的要求、建议；传闻",
-                "Du sollst kommen. / Er soll krank sein."
+                "<bdi>Du sollst kommen. / Er soll krank sein.</bdi>"
               ],
               [
-                "wollen",
+                "<bdi>wollen</bdi>",
                 "意愿、打算",
-                "Ich will nach Hause."
+                "<bdi>Ich will nach Hause.</bdi>"
               ],
               [
-                "mögen",
-                "喜好；möchte 表示客气的愿望",
-                "Ich mag Kaffee. / Ich möchte einen Kaffee."
+                "<bdi>mögen</bdi>",
+                "喜好；<bdi>möchte</bdi> 表示客气的愿望",
+                "<bdi>Ich mag Kaffee. / Ich möchte einen Kaffee.</bdi>"
               ]
             ],
             "lang": "de"
@@ -4456,17 +4456,17 @@
             "rows": [
               [
                 "情态动词 + 不定式（句末）",
-                "Ich muss heute arbeiten."
+                "<bdi>Ich muss heute arbeiten.</bdi>"
               ],
               [
                 "从句中（情态动词在最后）",
-                "…, weil ich heute arbeiten muss."
+                "<bdi>…, weil ich heute arbeiten muss.</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "情态动词表达能力、许可、义务、意愿；搭配的实义动词以不定式放在句末。情态动词的现在时第一、三人称单数同形、不加 -t（ich kann / er kann），且没有命令式。"
+        "notes": "情态动词表达能力、许可、义务、意愿；搭配的实义动词以不定式放在句末。情态动词的现在时第一、三人称单数同形、不加 -<bdi>t（ich kann / er kann</bdi>），且没有命令式。"
       },
       {
         "id": "de-verb-modal-ind",
@@ -4488,26 +4488,26 @@
               [
                 "现在时",
                 "—",
-                "-st",
+                "<bdi>-st</bdi>",
                 "—",
-                "-en",
-                "-t",
-                "-en"
+                "<bdi>-en</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
                 "过去时",
                 "—",
-                "-st",
+                "<bdi>-st</bdi>",
                 "—",
-                "-n",
-                "-t",
-                "-n"
+                "<bdi>-n</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：können",
+            "caption": "例词：<bdi>können</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4521,21 +4521,21 @@
             "rows": [
               [
                 "现在时",
-                "könn",
-                "könnst",
-                "könn",
-                "können",
-                "könnt",
-                "können"
+                "<bdi>könn</bdi>",
+                "<bdi>könnst</bdi>",
+                "<bdi>könn</bdi>",
+                "<bdi>können</bdi>",
+                "<bdi>könnt</bdi>",
+                "<bdi>können</bdi>"
               ],
               [
                 "过去时",
-                "konnte",
-                "konntest",
-                "konnte",
-                "konnten",
-                "konntet",
-                "konnten"
+                "<bdi>konnte</bdi>",
+                "<bdi>konntest</bdi>",
+                "<bdi>konnte</bdi>",
+                "<bdi>konnten</bdi>",
+                "<bdi>konntet</bdi>",
+                "<bdi>konnten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4560,28 +4560,28 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "-e",
-                "-est",
-                "-e",
-                "-en",
-                "-et",
-                "-en"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-est</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-et</bdi>",
+                "<bdi>-en</bdi>"
               ],
               [
-                "虚拟式 II",
+                "虚拟式 <bdi>II</bdi>",
                 "—",
-                "-st",
+                "<bdi>-st</bdi>",
                 "—",
-                "-n",
-                "-t",
-                "-n"
+                "<bdi>-n</bdi>",
+                "<bdi>-t</bdi>",
+                "<bdi>-n</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：können",
+            "caption": "例词：<bdi>können</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4594,22 +4594,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "könne",
-                "könnest",
-                "könne",
-                "können",
-                "könnet",
-                "können"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>könne</bdi>",
+                "<bdi>könnest</bdi>",
+                "<bdi>könne</bdi>",
+                "<bdi>können</bdi>",
+                "<bdi>könnet</bdi>",
+                "<bdi>können</bdi>"
               ],
               [
-                "虚拟式 II",
-                "könnte",
-                "könntest",
-                "könnte",
-                "könnten",
-                "könntet",
-                "könnten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>könnte</bdi>",
+                "<bdi>könntest</bdi>",
+                "<bdi>könnte</bdi>",
+                "<bdi>könnten</bdi>",
+                "<bdi>könntet</bdi>",
+                "<bdi>könnten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4630,13 +4630,13 @@
             "rows": [
               [
                 "现在时",
-                "-en"
+                "<bdi>-en</bdi>"
               ]
             ],
             "lang": "de"
           },
           {
-            "caption": "例词：können",
+            "caption": "例词：<bdi>können</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4645,7 +4645,7 @@
             "rows": [
               [
                 "现在时",
-                "können"
+                "<bdi>können</bdi>"
               ]
             ],
             "lang": "de"
@@ -4666,7 +4666,7 @@
             "rows": [
               [
                 "现在分词",
-                "-end"
+                "<bdi>-end</bdi>"
               ],
               [
                 "过去分词",
@@ -4676,7 +4676,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：können",
+            "caption": "例词：<bdi>können</bdi>",
             "role": "example",
             "headers": [
               "",
@@ -4685,11 +4685,11 @@
             "rows": [
               [
                 "现在分词",
-                "könnend"
+                "<bdi>könnend</bdi>"
               ],
               [
                 "过去分词",
-                "gekonnt"
+                "<bdi>gekonnt</bdi>"
               ]
             ],
             "lang": "de"
@@ -4704,7 +4704,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "koennen",
-            "groupLabel": "können（能够）",
+            "groupLabel": "<bdi>können</bdi>（能够）",
             "headers": [
               "",
               "第一人称单数",
@@ -4717,21 +4717,21 @@
             "rows": [
               [
                 "现在时",
-                "kann",
-                "kannst",
-                "kann",
-                "können",
-                "könnt",
-                "können"
+                "<bdi>kann</bdi>",
+                "<bdi>kannst</bdi>",
+                "<bdi>kann</bdi>",
+                "<bdi>können</bdi>",
+                "<bdi>könnt</bdi>",
+                "<bdi>können</bdi>"
               ],
               [
                 "过去时",
-                "konnte",
-                "konntest",
-                "konnte",
-                "konnten",
-                "konntet",
-                "konnten"
+                "<bdi>konnte</bdi>",
+                "<bdi>konntest</bdi>",
+                "<bdi>konnte</bdi>",
+                "<bdi>konnten</bdi>",
+                "<bdi>konntet</bdi>",
+                "<bdi>konnten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4740,7 +4740,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "koennen",
-            "groupLabel": "können（能够）",
+            "groupLabel": "<bdi>können</bdi>（能够）",
             "headers": [
               "",
               "第一人称单数",
@@ -4752,22 +4752,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "könne",
-                "könnest",
-                "könne",
-                "können",
-                "könnet",
-                "können"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>könne</bdi>",
+                "<bdi>könnest</bdi>",
+                "<bdi>könne</bdi>",
+                "<bdi>können</bdi>",
+                "<bdi>könnet</bdi>",
+                "<bdi>können</bdi>"
               ],
               [
-                "虚拟式 II",
-                "könnte",
-                "könntest",
-                "könnte",
-                "könnten",
-                "könntet",
-                "könnten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>könnte</bdi>",
+                "<bdi>könntest</bdi>",
+                "<bdi>könnte</bdi>",
+                "<bdi>könnten</bdi>",
+                "<bdi>könntet</bdi>",
+                "<bdi>könnten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4776,7 +4776,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "koennen",
-            "groupLabel": "können（能够）",
+            "groupLabel": "<bdi>können</bdi>（能够）",
             "headers": [
               "",
               "形式"
@@ -4784,7 +4784,7 @@
             "rows": [
               [
                 "现在时",
-                "können"
+                "<bdi>können</bdi>"
               ]
             ],
             "lang": "de"
@@ -4793,7 +4793,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "koennen",
-            "groupLabel": "können（能够）",
+            "groupLabel": "<bdi>können</bdi>（能够）",
             "headers": [
               "",
               "形式"
@@ -4801,11 +4801,11 @@
             "rows": [
               [
                 "现在分词",
-                "könnend"
+                "<bdi>könnend</bdi>"
               ],
               [
                 "过去分词",
-                "gekonnt"
+                "<bdi>gekonnt</bdi>"
               ]
             ],
             "lang": "de"
@@ -4814,7 +4814,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "muessen",
-            "groupLabel": "müssen（必须）",
+            "groupLabel": "<bdi>müssen</bdi>（必须）",
             "headers": [
               "",
               "第一人称单数",
@@ -4827,21 +4827,21 @@
             "rows": [
               [
                 "现在时",
-                "muss",
-                "musst",
-                "muss",
-                "müssen",
-                "müsst",
-                "müssen"
+                "<bdi>muss</bdi>",
+                "<bdi>musst</bdi>",
+                "<bdi>muss</bdi>",
+                "<bdi>müssen</bdi>",
+                "<bdi>müsst</bdi>",
+                "<bdi>müssen</bdi>"
               ],
               [
                 "过去时",
-                "musste",
-                "musstest",
-                "musste",
-                "mussten",
-                "musstet",
-                "mussten"
+                "<bdi>musste</bdi>",
+                "<bdi>musstest</bdi>",
+                "<bdi>musste</bdi>",
+                "<bdi>mussten</bdi>",
+                "<bdi>musstet</bdi>",
+                "<bdi>mussten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4850,7 +4850,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "muessen",
-            "groupLabel": "müssen（必须）",
+            "groupLabel": "<bdi>müssen</bdi>（必须）",
             "headers": [
               "",
               "第一人称单数",
@@ -4862,22 +4862,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "müsse",
-                "müssest",
-                "müsse",
-                "müssen",
-                "müsset",
-                "müssen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>müsse</bdi>",
+                "<bdi>müssest</bdi>",
+                "<bdi>müsse</bdi>",
+                "<bdi>müssen</bdi>",
+                "<bdi>müsset</bdi>",
+                "<bdi>müssen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "müsste",
-                "müsstest",
-                "müsste",
-                "müssten",
-                "müsstet",
-                "müssten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>müsste</bdi>",
+                "<bdi>müsstest</bdi>",
+                "<bdi>müsste</bdi>",
+                "<bdi>müssten</bdi>",
+                "<bdi>müsstet</bdi>",
+                "<bdi>müssten</bdi>"
               ]
             ],
             "lang": "de"
@@ -4886,7 +4886,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "muessen",
-            "groupLabel": "müssen（必须）",
+            "groupLabel": "<bdi>müssen</bdi>（必须）",
             "headers": [
               "",
               "形式"
@@ -4894,7 +4894,7 @@
             "rows": [
               [
                 "现在时",
-                "müssen"
+                "<bdi>müssen</bdi>"
               ]
             ],
             "lang": "de"
@@ -4903,7 +4903,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "muessen",
-            "groupLabel": "müssen（必须）",
+            "groupLabel": "<bdi>müssen</bdi>（必须）",
             "headers": [
               "",
               "形式"
@@ -4911,11 +4911,11 @@
             "rows": [
               [
                 "现在分词",
-                "müssend"
+                "<bdi>müssend</bdi>"
               ],
               [
                 "过去分词",
-                "gemusst"
+                "<bdi>gemusst</bdi>"
               ]
             ],
             "lang": "de"
@@ -4924,7 +4924,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "duerfen",
-            "groupLabel": "dürfen（允许）",
+            "groupLabel": "<bdi>dürfen</bdi>（允许）",
             "headers": [
               "",
               "第一人称单数",
@@ -4937,21 +4937,21 @@
             "rows": [
               [
                 "现在时",
-                "darf",
-                "darfst",
-                "darf",
-                "dürfen",
-                "dürft",
-                "dürfen"
+                "<bdi>darf</bdi>",
+                "<bdi>darfst</bdi>",
+                "<bdi>darf</bdi>",
+                "<bdi>dürfen</bdi>",
+                "<bdi>dürft</bdi>",
+                "<bdi>dürfen</bdi>"
               ],
               [
                 "过去时",
-                "durfte",
-                "durftest",
-                "durfte",
-                "durften",
-                "durftet",
-                "durften"
+                "<bdi>durfte</bdi>",
+                "<bdi>durftest</bdi>",
+                "<bdi>durfte</bdi>",
+                "<bdi>durften</bdi>",
+                "<bdi>durftet</bdi>",
+                "<bdi>durften</bdi>"
               ]
             ],
             "lang": "de"
@@ -4960,7 +4960,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "duerfen",
-            "groupLabel": "dürfen（允许）",
+            "groupLabel": "<bdi>dürfen</bdi>（允许）",
             "headers": [
               "",
               "第一人称单数",
@@ -4972,22 +4972,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "dürfe",
-                "dürfest",
-                "dürfe",
-                "dürfen",
-                "dürfet",
-                "dürfen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>dürfe</bdi>",
+                "<bdi>dürfest</bdi>",
+                "<bdi>dürfe</bdi>",
+                "<bdi>dürfen</bdi>",
+                "<bdi>dürfet</bdi>",
+                "<bdi>dürfen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "dürfte",
-                "dürftest",
-                "dürfte",
-                "dürften",
-                "dürftet",
-                "dürften"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>dürfte</bdi>",
+                "<bdi>dürftest</bdi>",
+                "<bdi>dürfte</bdi>",
+                "<bdi>dürften</bdi>",
+                "<bdi>dürftet</bdi>",
+                "<bdi>dürften</bdi>"
               ]
             ],
             "lang": "de"
@@ -4996,7 +4996,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "duerfen",
-            "groupLabel": "dürfen（允许）",
+            "groupLabel": "<bdi>dürfen</bdi>（允许）",
             "headers": [
               "",
               "形式"
@@ -5004,7 +5004,7 @@
             "rows": [
               [
                 "现在时",
-                "dürfen"
+                "<bdi>dürfen</bdi>"
               ]
             ],
             "lang": "de"
@@ -5013,7 +5013,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "duerfen",
-            "groupLabel": "dürfen（允许）",
+            "groupLabel": "<bdi>dürfen</bdi>（允许）",
             "headers": [
               "",
               "形式"
@@ -5021,11 +5021,11 @@
             "rows": [
               [
                 "现在分词",
-                "dürfend"
+                "<bdi>dürfend</bdi>"
               ],
               [
                 "过去分词",
-                "gedurft"
+                "<bdi>gedurft</bdi>"
               ]
             ],
             "lang": "de"
@@ -5034,7 +5034,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "sollen",
-            "groupLabel": "sollen（应该）",
+            "groupLabel": "<bdi>sollen</bdi>（应该）",
             "headers": [
               "",
               "第一人称单数",
@@ -5047,21 +5047,21 @@
             "rows": [
               [
                 "现在时",
-                "soll",
-                "sollst",
-                "soll",
-                "sollen",
-                "sollt",
-                "sollen"
+                "<bdi>soll</bdi>",
+                "<bdi>sollst</bdi>",
+                "<bdi>soll</bdi>",
+                "<bdi>sollen</bdi>",
+                "<bdi>sollt</bdi>",
+                "<bdi>sollen</bdi>"
               ],
               [
                 "过去时",
-                "sollte",
-                "solltest",
-                "sollte",
-                "sollten",
-                "solltet",
-                "sollten"
+                "<bdi>sollte</bdi>",
+                "<bdi>solltest</bdi>",
+                "<bdi>sollte</bdi>",
+                "<bdi>sollten</bdi>",
+                "<bdi>solltet</bdi>",
+                "<bdi>sollten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5070,7 +5070,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "sollen",
-            "groupLabel": "sollen（应该）",
+            "groupLabel": "<bdi>sollen</bdi>（应该）",
             "headers": [
               "",
               "第一人称单数",
@@ -5082,22 +5082,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "solle",
-                "sollest",
-                "solle",
-                "sollen",
-                "sollet",
-                "sollen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>solle</bdi>",
+                "<bdi>sollest</bdi>",
+                "<bdi>solle</bdi>",
+                "<bdi>sollen</bdi>",
+                "<bdi>sollet</bdi>",
+                "<bdi>sollen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "sollte",
-                "solltest",
-                "sollte",
-                "sollten",
-                "solltet",
-                "sollten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>sollte</bdi>",
+                "<bdi>solltest</bdi>",
+                "<bdi>sollte</bdi>",
+                "<bdi>sollten</bdi>",
+                "<bdi>solltet</bdi>",
+                "<bdi>sollten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5106,7 +5106,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "sollen",
-            "groupLabel": "sollen（应该）",
+            "groupLabel": "<bdi>sollen</bdi>（应该）",
             "headers": [
               "",
               "形式"
@@ -5114,7 +5114,7 @@
             "rows": [
               [
                 "现在时",
-                "sollen"
+                "<bdi>sollen</bdi>"
               ]
             ],
             "lang": "de"
@@ -5123,7 +5123,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "sollen",
-            "groupLabel": "sollen（应该）",
+            "groupLabel": "<bdi>sollen</bdi>（应该）",
             "headers": [
               "",
               "形式"
@@ -5131,11 +5131,11 @@
             "rows": [
               [
                 "现在分词",
-                "sollend"
+                "<bdi>sollend</bdi>"
               ],
               [
                 "过去分词",
-                "gesollt"
+                "<bdi>gesollt</bdi>"
               ]
             ],
             "lang": "de"
@@ -5144,7 +5144,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "wollen",
-            "groupLabel": "wollen（想要）",
+            "groupLabel": "<bdi>wollen</bdi>（想要）",
             "headers": [
               "",
               "第一人称单数",
@@ -5157,21 +5157,21 @@
             "rows": [
               [
                 "现在时",
-                "will",
-                "willst",
-                "will",
-                "wollen",
-                "wollt",
-                "wollen"
+                "<bdi>will</bdi>",
+                "<bdi>willst</bdi>",
+                "<bdi>will</bdi>",
+                "<bdi>wollen</bdi>",
+                "<bdi>wollt</bdi>",
+                "<bdi>wollen</bdi>"
               ],
               [
                 "过去时",
-                "wollte",
-                "wolltest",
-                "wollte",
-                "wollten",
-                "wolltet",
-                "wollten"
+                "<bdi>wollte</bdi>",
+                "<bdi>wolltest</bdi>",
+                "<bdi>wollte</bdi>",
+                "<bdi>wollten</bdi>",
+                "<bdi>wolltet</bdi>",
+                "<bdi>wollten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5180,7 +5180,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "wollen",
-            "groupLabel": "wollen（想要）",
+            "groupLabel": "<bdi>wollen</bdi>（想要）",
             "headers": [
               "",
               "第一人称单数",
@@ -5192,22 +5192,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "wolle",
-                "wollest",
-                "wolle",
-                "wollen",
-                "wollet",
-                "wollen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>wolle</bdi>",
+                "<bdi>wollest</bdi>",
+                "<bdi>wolle</bdi>",
+                "<bdi>wollen</bdi>",
+                "<bdi>wollet</bdi>",
+                "<bdi>wollen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "wollte",
-                "wolltest",
-                "wollte",
-                "wollten",
-                "wolltet",
-                "wollten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>wollte</bdi>",
+                "<bdi>wolltest</bdi>",
+                "<bdi>wollte</bdi>",
+                "<bdi>wollten</bdi>",
+                "<bdi>wolltet</bdi>",
+                "<bdi>wollten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5216,7 +5216,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "wollen",
-            "groupLabel": "wollen（想要）",
+            "groupLabel": "<bdi>wollen</bdi>（想要）",
             "headers": [
               "",
               "形式"
@@ -5224,7 +5224,7 @@
             "rows": [
               [
                 "现在时",
-                "wollen"
+                "<bdi>wollen</bdi>"
               ]
             ],
             "lang": "de"
@@ -5233,7 +5233,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "wollen",
-            "groupLabel": "wollen（想要）",
+            "groupLabel": "<bdi>wollen</bdi>（想要）",
             "headers": [
               "",
               "形式"
@@ -5241,11 +5241,11 @@
             "rows": [
               [
                 "现在分词",
-                "wollend"
+                "<bdi>wollend</bdi>"
               ],
               [
                 "过去分词",
-                "gewollt"
+                "<bdi>gewollt</bdi>"
               ]
             ],
             "lang": "de"
@@ -5254,7 +5254,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "moegen",
-            "groupLabel": "mögen（喜欢）",
+            "groupLabel": "<bdi>mögen</bdi>（喜欢）",
             "headers": [
               "",
               "第一人称单数",
@@ -5267,21 +5267,21 @@
             "rows": [
               [
                 "现在时",
-                "mag",
-                "magst",
-                "mag",
-                "mögen",
-                "mögt",
-                "mögen"
+                "<bdi>mag</bdi>",
+                "<bdi>magst</bdi>",
+                "<bdi>mag</bdi>",
+                "<bdi>mögen</bdi>",
+                "<bdi>mögt</bdi>",
+                "<bdi>mögen</bdi>"
               ],
               [
                 "过去时",
-                "mochte",
-                "mochtest",
-                "mochte",
-                "mochten",
-                "mochtet",
-                "mochten"
+                "<bdi>mochte</bdi>",
+                "<bdi>mochtest</bdi>",
+                "<bdi>mochte</bdi>",
+                "<bdi>mochten</bdi>",
+                "<bdi>mochtet</bdi>",
+                "<bdi>mochten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5290,7 +5290,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "moegen",
-            "groupLabel": "mögen（喜欢）",
+            "groupLabel": "<bdi>mögen</bdi>（喜欢）",
             "headers": [
               "",
               "第一人称单数",
@@ -5302,22 +5302,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "möge",
-                "mögest",
-                "möge",
-                "mögen",
-                "möget",
-                "mögen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>möge</bdi>",
+                "<bdi>mögest</bdi>",
+                "<bdi>möge</bdi>",
+                "<bdi>mögen</bdi>",
+                "<bdi>möget</bdi>",
+                "<bdi>mögen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "möchte",
-                "möchtest",
-                "möchte",
-                "möchten",
-                "möchtet",
-                "möchten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>möchte</bdi>",
+                "<bdi>möchtest</bdi>",
+                "<bdi>möchte</bdi>",
+                "<bdi>möchten</bdi>",
+                "<bdi>möchtet</bdi>",
+                "<bdi>möchten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5326,7 +5326,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "moegen",
-            "groupLabel": "mögen（喜欢）",
+            "groupLabel": "<bdi>mögen</bdi>（喜欢）",
             "headers": [
               "",
               "形式"
@@ -5334,7 +5334,7 @@
             "rows": [
               [
                 "现在时",
-                "mögen"
+                "<bdi>mögen</bdi>"
               ]
             ],
             "lang": "de"
@@ -5343,7 +5343,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "moegen",
-            "groupLabel": "mögen（喜欢）",
+            "groupLabel": "<bdi>mögen</bdi>（喜欢）",
             "headers": [
               "",
               "形式"
@@ -5351,20 +5351,20 @@
             "rows": [
               [
                 "现在分词",
-                "mögend"
+                "<bdi>mögend</bdi>"
               ],
               [
                 "过去分词",
-                "gemocht"
+                "<bdi>gemocht</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "上排 tab 选词，同一词下按语式竖排。情态动词没有命令式；sollen / wollen 的虚拟式 II 与过去时同形（sollte / wollte）。"
+        "notes": "上排 <bdi>tab 选词，同一词下按语式竖排。情态动词没有命令式；sollen / wollen 的虚拟式 II 与过去时同形（sollte / wollte</bdi>）。"
       }
     ],
-    "notes": "情态动词没有命令式；现在时第一、三人称单数同形且不加 -t（ich kann / er kann），复数回到不定式词干（können / könnt）；过去时加 -te 且词干变音（konnte），虚拟式 II 在过去时词干上变音（könnte）。同类：dürfen / darf、mögen / mag、müssen / muss、sollen / soll、wollen / will。wollen / sollen 的虚拟式 II 与过去时同形（wollte / sollte），要在「虚拟式 II 词干」栏里填一次，否则会推出 wöllte / söllte。完成时里情态动词常与不定式连用（Ich habe kommen können），过去分词形式只作参考。"
+    "notes": "情态动词没有命令式；现在时第一、三人称单数同形且不加 -<bdi>t（ich kann / er kann），复数回到不定式词干（können / könnt）；过去时加 -te 且词干变音（konnte），虚拟式 II 在过去时词干上变音（könnte）。同类：dürfen / darf、mögen / mag、müssen / muss、sollen / soll、wollen / will。wollen / sollen 的虚拟式 II 与过去时同形（wollte / sollte），要在「虚拟式 II 词干」栏里填一次，否则会推出 wöllte / söllte。完成时里情态动词常与不定式连用（Ich habe kommen können</bdi>），过去分词形式只作参考。"
   },
   {
     "id": "de-verb-special",
@@ -5372,13 +5372,13 @@
     "items": [
       {
         "id": "de-verb-special-aux",
-        "title": "助动词 sein / haben / werden",
+        "title": "助动词 <bdi>sein / haben / werden</bdi>",
         "tables": [
           {
             "caption": "直陈式",
             "role": "pattern",
             "group": "sein",
-            "groupLabel": "sein（是）",
+            "groupLabel": "<bdi>sein</bdi>（是）",
             "headers": [
               "",
               "第一人称单数",
@@ -5391,21 +5391,21 @@
             "rows": [
               [
                 "现在时",
-                "bin",
-                "bist",
-                "ist",
-                "sind",
-                "seid",
-                "sind"
+                "<bdi>bin</bdi>",
+                "<bdi>bist</bdi>",
+                "<bdi>ist</bdi>",
+                "<bdi>sind</bdi>",
+                "<bdi>seid</bdi>",
+                "<bdi>sind</bdi>"
               ],
               [
                 "过去时",
-                "war",
-                "warst",
-                "war",
-                "waren",
-                "wart",
-                "waren"
+                "<bdi>war</bdi>",
+                "<bdi>warst</bdi>",
+                "<bdi>war</bdi>",
+                "<bdi>waren</bdi>",
+                "<bdi>wart</bdi>",
+                "<bdi>waren</bdi>"
               ]
             ],
             "lang": "de"
@@ -5414,7 +5414,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "sein",
-            "groupLabel": "sein（是）",
+            "groupLabel": "<bdi>sein</bdi>（是）",
             "headers": [
               "",
               "第一人称单数",
@@ -5426,22 +5426,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "sei",
-                "seist",
-                "sei",
-                "seien",
-                "seiet",
-                "seien"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>sei</bdi>",
+                "<bdi>seist</bdi>",
+                "<bdi>sei</bdi>",
+                "<bdi>seien</bdi>",
+                "<bdi>seiet</bdi>",
+                "<bdi>seien</bdi>"
               ],
               [
-                "虚拟式 II",
-                "wäre",
-                "wärst",
-                "wäre",
-                "wären",
-                "wärt",
-                "wären"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>wäre</bdi>",
+                "<bdi>wärst</bdi>",
+                "<bdi>wäre</bdi>",
+                "<bdi>wären</bdi>",
+                "<bdi>wärt</bdi>",
+                "<bdi>wären</bdi>"
               ]
             ],
             "lang": "de"
@@ -5450,19 +5450,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "sein",
-            "groupLabel": "sein（是）",
+            "groupLabel": "<bdi>sein</bdi>（是）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "sei",
-                "seid",
-                "seien Sie"
+                "<bdi>sei</bdi>",
+                "<bdi>seid</bdi>",
+                "<bdi>seien Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -5471,7 +5471,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "sein",
-            "groupLabel": "sein（是）",
+            "groupLabel": "<bdi>sein</bdi>（是）",
             "headers": [
               "",
               "形式"
@@ -5479,7 +5479,7 @@
             "rows": [
               [
                 "现在时",
-                "sein"
+                "<bdi>sein</bdi>"
               ]
             ],
             "lang": "de"
@@ -5488,7 +5488,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "sein",
-            "groupLabel": "sein（是）",
+            "groupLabel": "<bdi>sein</bdi>（是）",
             "headers": [
               "",
               "形式"
@@ -5496,11 +5496,11 @@
             "rows": [
               [
                 "现在分词",
-                "seiend"
+                "<bdi>seiend</bdi>"
               ],
               [
                 "过去分词",
-                "gewesen"
+                "<bdi>gewesen</bdi>"
               ]
             ],
             "lang": "de"
@@ -5509,7 +5509,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "haben",
-            "groupLabel": "haben（有）",
+            "groupLabel": "<bdi>haben</bdi>（有）",
             "headers": [
               "",
               "第一人称单数",
@@ -5522,21 +5522,21 @@
             "rows": [
               [
                 "现在时",
-                "habe",
-                "hast",
-                "hat",
-                "haben",
-                "habt",
-                "haben"
+                "<bdi>habe</bdi>",
+                "<bdi>hast</bdi>",
+                "<bdi>hat</bdi>",
+                "<bdi>haben</bdi>",
+                "<bdi>habt</bdi>",
+                "<bdi>haben</bdi>"
               ],
               [
                 "过去时",
-                "hatte",
-                "hattest",
-                "hatte",
-                "hatten",
-                "hattet",
-                "hatten"
+                "<bdi>hatte</bdi>",
+                "<bdi>hattest</bdi>",
+                "<bdi>hatte</bdi>",
+                "<bdi>hatten</bdi>",
+                "<bdi>hattet</bdi>",
+                "<bdi>hatten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5545,7 +5545,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "haben",
-            "groupLabel": "haben（有）",
+            "groupLabel": "<bdi>haben</bdi>（有）",
             "headers": [
               "",
               "第一人称单数",
@@ -5557,22 +5557,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "habe",
-                "habest",
-                "habe",
-                "haben",
-                "habet",
-                "haben"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>habe</bdi>",
+                "<bdi>habest</bdi>",
+                "<bdi>habe</bdi>",
+                "<bdi>haben</bdi>",
+                "<bdi>habet</bdi>",
+                "<bdi>haben</bdi>"
               ],
               [
-                "虚拟式 II",
-                "hätte",
-                "hättest",
-                "hätte",
-                "hätten",
-                "hättet",
-                "hätten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>hätte</bdi>",
+                "<bdi>hättest</bdi>",
+                "<bdi>hätte</bdi>",
+                "<bdi>hätten</bdi>",
+                "<bdi>hättet</bdi>",
+                "<bdi>hätten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5581,19 +5581,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "haben",
-            "groupLabel": "haben（有）",
+            "groupLabel": "<bdi>haben</bdi>（有）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "hab",
-                "habt",
-                "haben Sie"
+                "<bdi>hab</bdi>",
+                "<bdi>habt</bdi>",
+                "<bdi>haben Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -5602,7 +5602,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "haben",
-            "groupLabel": "haben（有）",
+            "groupLabel": "<bdi>haben</bdi>（有）",
             "headers": [
               "",
               "形式"
@@ -5610,7 +5610,7 @@
             "rows": [
               [
                 "现在时",
-                "haben"
+                "<bdi>haben</bdi>"
               ]
             ],
             "lang": "de"
@@ -5619,7 +5619,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "haben",
-            "groupLabel": "haben（有）",
+            "groupLabel": "<bdi>haben</bdi>（有）",
             "headers": [
               "",
               "形式"
@@ -5627,11 +5627,11 @@
             "rows": [
               [
                 "现在分词",
-                "habend"
+                "<bdi>habend</bdi>"
               ],
               [
                 "过去分词",
-                "gehabt"
+                "<bdi>gehabt</bdi>"
               ]
             ],
             "lang": "de"
@@ -5640,7 +5640,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "werden",
-            "groupLabel": "werden（成为 / 将来助动词 / 被动助动词）",
+            "groupLabel": "<bdi>werden</bdi>（成为 / 将来助动词 / 被动助动词）",
             "headers": [
               "",
               "第一人称单数",
@@ -5653,21 +5653,21 @@
             "rows": [
               [
                 "现在时",
-                "werde",
-                "wirst",
-                "wird",
-                "werden",
-                "werdet",
-                "werden"
+                "<bdi>werde</bdi>",
+                "<bdi>wirst</bdi>",
+                "<bdi>wird</bdi>",
+                "<bdi>werden</bdi>",
+                "<bdi>werdet</bdi>",
+                "<bdi>werden</bdi>"
               ],
               [
                 "过去时",
-                "wurde",
-                "wurdest",
-                "wurde",
-                "wurden",
-                "wurdet",
-                "wurden"
+                "<bdi>wurde</bdi>",
+                "<bdi>wurdest</bdi>",
+                "<bdi>wurde</bdi>",
+                "<bdi>wurden</bdi>",
+                "<bdi>wurdet</bdi>",
+                "<bdi>wurden</bdi>"
               ]
             ],
             "lang": "de"
@@ -5676,7 +5676,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "werden",
-            "groupLabel": "werden（成为 / 将来助动词 / 被动助动词）",
+            "groupLabel": "<bdi>werden</bdi>（成为 / 将来助动词 / 被动助动词）",
             "headers": [
               "",
               "第一人称单数",
@@ -5688,22 +5688,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "werde",
-                "werdest",
-                "werde",
-                "werden",
-                "werdet",
-                "werden"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>werde</bdi>",
+                "<bdi>werdest</bdi>",
+                "<bdi>werde</bdi>",
+                "<bdi>werden</bdi>",
+                "<bdi>werdet</bdi>",
+                "<bdi>werden</bdi>"
               ],
               [
-                "虚拟式 II",
-                "würde",
-                "würdest",
-                "würde",
-                "würden",
-                "würdet",
-                "würden"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>würde</bdi>",
+                "<bdi>würdest</bdi>",
+                "<bdi>würde</bdi>",
+                "<bdi>würden</bdi>",
+                "<bdi>würdet</bdi>",
+                "<bdi>würden</bdi>"
               ]
             ],
             "lang": "de"
@@ -5712,19 +5712,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "werden",
-            "groupLabel": "werden（成为 / 将来助动词 / 被动助动词）",
+            "groupLabel": "<bdi>werden</bdi>（成为 / 将来助动词 / 被动助动词）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "werde",
-                "werdet",
-                "werden Sie"
+                "<bdi>werde</bdi>",
+                "<bdi>werdet</bdi>",
+                "<bdi>werden Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -5733,7 +5733,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "werden",
-            "groupLabel": "werden（成为 / 将来助动词 / 被动助动词）",
+            "groupLabel": "<bdi>werden</bdi>（成为 / 将来助动词 / 被动助动词）",
             "headers": [
               "",
               "形式"
@@ -5741,7 +5741,7 @@
             "rows": [
               [
                 "现在时",
-                "werden"
+                "<bdi>werden</bdi>"
               ]
             ],
             "lang": "de"
@@ -5750,7 +5750,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "werden",
-            "groupLabel": "werden（成为 / 将来助动词 / 被动助动词）",
+            "groupLabel": "<bdi>werden</bdi>（成为 / 将来助动词 / 被动助动词）",
             "headers": [
               "",
               "形式"
@@ -5758,17 +5758,17 @@
             "rows": [
               [
                 "现在分词",
-                "werdend"
+                "<bdi>werdend</bdi>"
               ],
               [
                 "过去分词",
-                "geworden"
+                "<bdi>geworden</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "三个助动词既作实义动词，也构成复合时态与被动。它们在生词表里请选「特殊变位」。werden 的第二分词作被动助动词时用 worden（Es ist gemacht worden）。"
+        "notes": "三个助动词既作实义动词，也构成复合时态与被动。它们在生词表里请选「特殊变位」。<bdi>werden 的第二分词作被动助动词时用 worden（Es ist gemacht worden</bdi>）。"
       },
       {
         "id": "de-verb-special-common",
@@ -5778,7 +5778,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "wissen",
-            "groupLabel": "wissen（知道）",
+            "groupLabel": "<bdi>wissen</bdi>（知道）",
             "headers": [
               "",
               "第一人称单数",
@@ -5791,21 +5791,21 @@
             "rows": [
               [
                 "现在时",
-                "weiß",
-                "weißt",
-                "weiß",
-                "wissen",
-                "wisst",
-                "wissen"
+                "<bdi>weiß</bdi>",
+                "<bdi>weißt</bdi>",
+                "<bdi>weiß</bdi>",
+                "<bdi>wissen</bdi>",
+                "<bdi>wisst</bdi>",
+                "<bdi>wissen</bdi>"
               ],
               [
                 "过去时",
-                "wusste",
-                "wusstest",
-                "wusste",
-                "wussten",
-                "wusstet",
-                "wussten"
+                "<bdi>wusste</bdi>",
+                "<bdi>wusstest</bdi>",
+                "<bdi>wusste</bdi>",
+                "<bdi>wussten</bdi>",
+                "<bdi>wusstet</bdi>",
+                "<bdi>wussten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5814,7 +5814,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "wissen",
-            "groupLabel": "wissen（知道）",
+            "groupLabel": "<bdi>wissen</bdi>（知道）",
             "headers": [
               "",
               "第一人称单数",
@@ -5826,22 +5826,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "wisse",
-                "wissest",
-                "wisse",
-                "wissen",
-                "wisset",
-                "wissen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>wisse</bdi>",
+                "<bdi>wissest</bdi>",
+                "<bdi>wisse</bdi>",
+                "<bdi>wissen</bdi>",
+                "<bdi>wisset</bdi>",
+                "<bdi>wissen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "wüsste",
-                "wüsstest",
-                "wüsste",
-                "wüssten",
-                "wüsstet",
-                "wüssten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>wüsste</bdi>",
+                "<bdi>wüsstest</bdi>",
+                "<bdi>wüsste</bdi>",
+                "<bdi>wüssten</bdi>",
+                "<bdi>wüsstet</bdi>",
+                "<bdi>wüssten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5850,19 +5850,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "wissen",
-            "groupLabel": "wissen（知道）",
+            "groupLabel": "<bdi>wissen</bdi>（知道）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "wisse",
-                "wisst",
-                "wissen Sie"
+                "<bdi>wisse</bdi>",
+                "<bdi>wisst</bdi>",
+                "<bdi>wissen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -5871,7 +5871,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "wissen",
-            "groupLabel": "wissen（知道）",
+            "groupLabel": "<bdi>wissen</bdi>（知道）",
             "headers": [
               "",
               "形式"
@@ -5879,7 +5879,7 @@
             "rows": [
               [
                 "现在时",
-                "wissen"
+                "<bdi>wissen</bdi>"
               ]
             ],
             "lang": "de"
@@ -5888,7 +5888,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "wissen",
-            "groupLabel": "wissen（知道）",
+            "groupLabel": "<bdi>wissen</bdi>（知道）",
             "headers": [
               "",
               "形式"
@@ -5896,11 +5896,11 @@
             "rows": [
               [
                 "现在分词",
-                "wissend"
+                "<bdi>wissend</bdi>"
               ],
               [
                 "过去分词",
-                "gewusst"
+                "<bdi>gewusst</bdi>"
               ]
             ],
             "lang": "de"
@@ -5909,7 +5909,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "tun",
-            "groupLabel": "tun（做）",
+            "groupLabel": "<bdi>tun</bdi>（做）",
             "headers": [
               "",
               "第一人称单数",
@@ -5922,21 +5922,21 @@
             "rows": [
               [
                 "现在时",
-                "tue",
-                "tust",
-                "tut",
-                "tun",
-                "tut",
-                "tun"
+                "<bdi>tue</bdi>",
+                "<bdi>tust</bdi>",
+                "<bdi>tut</bdi>",
+                "<bdi>tun</bdi>",
+                "<bdi>tut</bdi>",
+                "<bdi>tun</bdi>"
               ],
               [
                 "过去时",
-                "tat",
-                "tatest",
-                "tat",
-                "taten",
-                "tatet",
-                "taten"
+                "<bdi>tat</bdi>",
+                "<bdi>tatest</bdi>",
+                "<bdi>tat</bdi>",
+                "<bdi>taten</bdi>",
+                "<bdi>tatet</bdi>",
+                "<bdi>taten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5945,7 +5945,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "tun",
-            "groupLabel": "tun（做）",
+            "groupLabel": "<bdi>tun</bdi>（做）",
             "headers": [
               "",
               "第一人称单数",
@@ -5957,22 +5957,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "tue",
-                "tuest",
-                "tue",
-                "tun",
-                "tuet",
-                "tun"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>tue</bdi>",
+                "<bdi>tuest</bdi>",
+                "<bdi>tue</bdi>",
+                "<bdi>tun</bdi>",
+                "<bdi>tuet</bdi>",
+                "<bdi>tun</bdi>"
               ],
               [
-                "虚拟式 II",
-                "täte",
-                "tätest",
-                "täte",
-                "täten",
-                "tätet",
-                "täten"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>täte</bdi>",
+                "<bdi>tätest</bdi>",
+                "<bdi>täte</bdi>",
+                "<bdi>täten</bdi>",
+                "<bdi>tätet</bdi>",
+                "<bdi>täten</bdi>"
               ]
             ],
             "lang": "de"
@@ -5981,19 +5981,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "tun",
-            "groupLabel": "tun（做）",
+            "groupLabel": "<bdi>tun</bdi>（做）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "tu",
-                "tut",
-                "tun Sie"
+                "<bdi>tu</bdi>",
+                "<bdi>tut</bdi>",
+                "<bdi>tun Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6002,7 +6002,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "tun",
-            "groupLabel": "tun（做）",
+            "groupLabel": "<bdi>tun</bdi>（做）",
             "headers": [
               "",
               "形式"
@@ -6010,7 +6010,7 @@
             "rows": [
               [
                 "现在时",
-                "tun"
+                "<bdi>tun</bdi>"
               ]
             ],
             "lang": "de"
@@ -6019,7 +6019,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "tun",
-            "groupLabel": "tun（做）",
+            "groupLabel": "<bdi>tun</bdi>（做）",
             "headers": [
               "",
               "形式"
@@ -6027,11 +6027,11 @@
             "rows": [
               [
                 "现在分词",
-                "tuend"
+                "<bdi>tuend</bdi>"
               ],
               [
                 "过去分词",
-                "getan"
+                "<bdi>getan</bdi>"
               ]
             ],
             "lang": "de"
@@ -6040,7 +6040,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "gehen",
-            "groupLabel": "gehen（走）",
+            "groupLabel": "<bdi>gehen</bdi>（走）",
             "headers": [
               "",
               "第一人称单数",
@@ -6053,21 +6053,21 @@
             "rows": [
               [
                 "现在时",
-                "gehe",
-                "gehst",
-                "geht",
-                "gehen",
-                "geht",
-                "gehen"
+                "<bdi>gehe</bdi>",
+                "<bdi>gehst</bdi>",
+                "<bdi>geht</bdi>",
+                "<bdi>gehen</bdi>",
+                "<bdi>geht</bdi>",
+                "<bdi>gehen</bdi>"
               ],
               [
                 "过去时",
-                "ging",
-                "gingst",
-                "ging",
-                "gingen",
-                "gingt",
-                "gingen"
+                "<bdi>ging</bdi>",
+                "<bdi>gingst</bdi>",
+                "<bdi>ging</bdi>",
+                "<bdi>gingen</bdi>",
+                "<bdi>gingt</bdi>",
+                "<bdi>gingen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6076,7 +6076,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "gehen",
-            "groupLabel": "gehen（走）",
+            "groupLabel": "<bdi>gehen</bdi>（走）",
             "headers": [
               "",
               "第一人称单数",
@@ -6088,22 +6088,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "gehe",
-                "gehest",
-                "gehe",
-                "gehen",
-                "gehet",
-                "gehen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>gehe</bdi>",
+                "<bdi>gehest</bdi>",
+                "<bdi>gehe</bdi>",
+                "<bdi>gehen</bdi>",
+                "<bdi>gehet</bdi>",
+                "<bdi>gehen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "ginge",
-                "gingest",
-                "ginge",
-                "gingen",
-                "ginget",
-                "gingen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>ginge</bdi>",
+                "<bdi>gingest</bdi>",
+                "<bdi>ginge</bdi>",
+                "<bdi>gingen</bdi>",
+                "<bdi>ginget</bdi>",
+                "<bdi>gingen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6112,19 +6112,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "gehen",
-            "groupLabel": "gehen（走）",
+            "groupLabel": "<bdi>gehen</bdi>（走）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "geh",
-                "geht",
-                "gehen Sie"
+                "<bdi>geh</bdi>",
+                "<bdi>geht</bdi>",
+                "<bdi>gehen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6133,7 +6133,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "gehen",
-            "groupLabel": "gehen（走）",
+            "groupLabel": "<bdi>gehen</bdi>（走）",
             "headers": [
               "",
               "形式"
@@ -6141,7 +6141,7 @@
             "rows": [
               [
                 "现在时",
-                "gehen"
+                "<bdi>gehen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6150,7 +6150,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "gehen",
-            "groupLabel": "gehen（走）",
+            "groupLabel": "<bdi>gehen</bdi>（走）",
             "headers": [
               "",
               "形式"
@@ -6158,11 +6158,11 @@
             "rows": [
               [
                 "现在分词",
-                "gehend"
+                "<bdi>gehend</bdi>"
               ],
               [
                 "过去分词",
-                "gegangen"
+                "<bdi>gegangen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6171,7 +6171,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "stehen",
-            "groupLabel": "stehen（站）",
+            "groupLabel": "<bdi>stehen</bdi>（站）",
             "headers": [
               "",
               "第一人称单数",
@@ -6184,21 +6184,21 @@
             "rows": [
               [
                 "现在时",
-                "stehe",
-                "stehst",
-                "steht",
-                "stehen",
-                "steht",
-                "stehen"
+                "<bdi>stehe</bdi>",
+                "<bdi>stehst</bdi>",
+                "<bdi>steht</bdi>",
+                "<bdi>stehen</bdi>",
+                "<bdi>steht</bdi>",
+                "<bdi>stehen</bdi>"
               ],
               [
                 "过去时",
-                "stand",
-                "standest",
-                "stand",
-                "standen",
-                "standet",
-                "standen"
+                "<bdi>stand</bdi>",
+                "<bdi>standest</bdi>",
+                "<bdi>stand</bdi>",
+                "<bdi>standen</bdi>",
+                "<bdi>standet</bdi>",
+                "<bdi>standen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6207,7 +6207,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "stehen",
-            "groupLabel": "stehen（站）",
+            "groupLabel": "<bdi>stehen</bdi>（站）",
             "headers": [
               "",
               "第一人称单数",
@@ -6219,22 +6219,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "stehe",
-                "stehest",
-                "stehe",
-                "stehen",
-                "stehet",
-                "stehen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>stehe</bdi>",
+                "<bdi>stehest</bdi>",
+                "<bdi>stehe</bdi>",
+                "<bdi>stehen</bdi>",
+                "<bdi>stehet</bdi>",
+                "<bdi>stehen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "stünde",
-                "stündest",
-                "stünde",
-                "stünden",
-                "stündet",
-                "stünden"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>stünde</bdi>",
+                "<bdi>stündest</bdi>",
+                "<bdi>stünde</bdi>",
+                "<bdi>stünden</bdi>",
+                "<bdi>stündet</bdi>",
+                "<bdi>stünden</bdi>"
               ]
             ],
             "lang": "de"
@@ -6243,19 +6243,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "stehen",
-            "groupLabel": "stehen（站）",
+            "groupLabel": "<bdi>stehen</bdi>（站）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "steh",
-                "steht",
-                "stehen Sie"
+                "<bdi>steh</bdi>",
+                "<bdi>steht</bdi>",
+                "<bdi>stehen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6264,7 +6264,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "stehen",
-            "groupLabel": "stehen（站）",
+            "groupLabel": "<bdi>stehen</bdi>（站）",
             "headers": [
               "",
               "形式"
@@ -6272,7 +6272,7 @@
             "rows": [
               [
                 "现在时",
-                "stehen"
+                "<bdi>stehen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6281,7 +6281,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "stehen",
-            "groupLabel": "stehen（站）",
+            "groupLabel": "<bdi>stehen</bdi>（站）",
             "headers": [
               "",
               "形式"
@@ -6289,11 +6289,11 @@
             "rows": [
               [
                 "现在分词",
-                "stehend"
+                "<bdi>stehend</bdi>"
               ],
               [
                 "过去分词",
-                "gestanden"
+                "<bdi>gestanden</bdi>"
               ]
             ],
             "lang": "de"
@@ -6302,7 +6302,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "sehen",
-            "groupLabel": "sehen（看）",
+            "groupLabel": "<bdi>sehen</bdi>（看）",
             "headers": [
               "",
               "第一人称单数",
@@ -6315,21 +6315,21 @@
             "rows": [
               [
                 "现在时",
-                "sehe",
-                "siehst",
-                "sieht",
-                "sehen",
-                "seht",
-                "sehen"
+                "<bdi>sehe</bdi>",
+                "<bdi>siehst</bdi>",
+                "<bdi>sieht</bdi>",
+                "<bdi>sehen</bdi>",
+                "<bdi>seht</bdi>",
+                "<bdi>sehen</bdi>"
               ],
               [
                 "过去时",
-                "sah",
-                "sahst",
-                "sah",
-                "sahen",
-                "saht",
-                "sahen"
+                "<bdi>sah</bdi>",
+                "<bdi>sahst</bdi>",
+                "<bdi>sah</bdi>",
+                "<bdi>sahen</bdi>",
+                "<bdi>saht</bdi>",
+                "<bdi>sahen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6338,7 +6338,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "sehen",
-            "groupLabel": "sehen（看）",
+            "groupLabel": "<bdi>sehen</bdi>（看）",
             "headers": [
               "",
               "第一人称单数",
@@ -6350,22 +6350,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "sehe",
-                "sehest",
-                "sehe",
-                "sehen",
-                "sehet",
-                "sehen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>sehe</bdi>",
+                "<bdi>sehest</bdi>",
+                "<bdi>sehe</bdi>",
+                "<bdi>sehen</bdi>",
+                "<bdi>sehet</bdi>",
+                "<bdi>sehen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "sähe",
-                "sähest",
-                "sähe",
-                "sähen",
-                "sähet",
-                "sähen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>sähe</bdi>",
+                "<bdi>sähest</bdi>",
+                "<bdi>sähe</bdi>",
+                "<bdi>sähen</bdi>",
+                "<bdi>sähet</bdi>",
+                "<bdi>sähen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6374,19 +6374,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "sehen",
-            "groupLabel": "sehen（看）",
+            "groupLabel": "<bdi>sehen</bdi>（看）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "sieh",
-                "seht",
-                "sehen Sie"
+                "<bdi>sieh</bdi>",
+                "<bdi>seht</bdi>",
+                "<bdi>sehen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6395,7 +6395,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "sehen",
-            "groupLabel": "sehen（看）",
+            "groupLabel": "<bdi>sehen</bdi>（看）",
             "headers": [
               "",
               "形式"
@@ -6403,7 +6403,7 @@
             "rows": [
               [
                 "现在时",
-                "sehen"
+                "<bdi>sehen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6412,7 +6412,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "sehen",
-            "groupLabel": "sehen（看）",
+            "groupLabel": "<bdi>sehen</bdi>（看）",
             "headers": [
               "",
               "形式"
@@ -6420,11 +6420,11 @@
             "rows": [
               [
                 "现在分词",
-                "sehend"
+                "<bdi>sehend</bdi>"
               ],
               [
                 "过去分词",
-                "gesehen"
+                "<bdi>gesehen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6433,7 +6433,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "fahren",
-            "groupLabel": "fahren（开 / 乘车）",
+            "groupLabel": "<bdi>fahren</bdi>（开 / 乘车）",
             "headers": [
               "",
               "第一人称单数",
@@ -6446,21 +6446,21 @@
             "rows": [
               [
                 "现在时",
-                "fahre",
-                "fährst",
-                "fährt",
-                "fahren",
-                "fahrt",
-                "fahren"
+                "<bdi>fahre</bdi>",
+                "<bdi>fährst</bdi>",
+                "<bdi>fährt</bdi>",
+                "<bdi>fahren</bdi>",
+                "<bdi>fahrt</bdi>",
+                "<bdi>fahren</bdi>"
               ],
               [
                 "过去时",
-                "fuhr",
-                "fuhrst",
-                "fuhr",
-                "fuhren",
-                "fuhrt",
-                "fuhren"
+                "<bdi>fuhr</bdi>",
+                "<bdi>fuhrst</bdi>",
+                "<bdi>fuhr</bdi>",
+                "<bdi>fuhren</bdi>",
+                "<bdi>fuhrt</bdi>",
+                "<bdi>fuhren</bdi>"
               ]
             ],
             "lang": "de"
@@ -6469,7 +6469,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "fahren",
-            "groupLabel": "fahren（开 / 乘车）",
+            "groupLabel": "<bdi>fahren</bdi>（开 / 乘车）",
             "headers": [
               "",
               "第一人称单数",
@@ -6481,22 +6481,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "fahre",
-                "fahrest",
-                "fahre",
-                "fahren",
-                "fahret",
-                "fahren"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>fahre</bdi>",
+                "<bdi>fahrest</bdi>",
+                "<bdi>fahre</bdi>",
+                "<bdi>fahren</bdi>",
+                "<bdi>fahret</bdi>",
+                "<bdi>fahren</bdi>"
               ],
               [
-                "虚拟式 II",
-                "führe",
-                "führest",
-                "führe",
-                "führen",
-                "führet",
-                "führen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>führe</bdi>",
+                "<bdi>führest</bdi>",
+                "<bdi>führe</bdi>",
+                "<bdi>führen</bdi>",
+                "<bdi>führet</bdi>",
+                "<bdi>führen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6505,19 +6505,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "fahren",
-            "groupLabel": "fahren（开 / 乘车）",
+            "groupLabel": "<bdi>fahren</bdi>（开 / 乘车）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "fahr",
-                "fahrt",
-                "fahren Sie"
+                "<bdi>fahr</bdi>",
+                "<bdi>fahrt</bdi>",
+                "<bdi>fahren Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6526,7 +6526,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "fahren",
-            "groupLabel": "fahren（开 / 乘车）",
+            "groupLabel": "<bdi>fahren</bdi>（开 / 乘车）",
             "headers": [
               "",
               "形式"
@@ -6534,7 +6534,7 @@
             "rows": [
               [
                 "现在时",
-                "fahren"
+                "<bdi>fahren</bdi>"
               ]
             ],
             "lang": "de"
@@ -6543,7 +6543,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "fahren",
-            "groupLabel": "fahren（开 / 乘车）",
+            "groupLabel": "<bdi>fahren</bdi>（开 / 乘车）",
             "headers": [
               "",
               "形式"
@@ -6551,11 +6551,11 @@
             "rows": [
               [
                 "现在分词",
-                "fahrend"
+                "<bdi>fahrend</bdi>"
               ],
               [
                 "过去分词",
-                "gefahren"
+                "<bdi>gefahren</bdi>"
               ]
             ],
             "lang": "de"
@@ -6564,7 +6564,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "essen",
-            "groupLabel": "essen（吃）",
+            "groupLabel": "<bdi>essen</bdi>（吃）",
             "headers": [
               "",
               "第一人称单数",
@@ -6577,21 +6577,21 @@
             "rows": [
               [
                 "现在时",
-                "esse",
-                "isst",
-                "isst",
-                "essen",
-                "esst",
-                "essen"
+                "<bdi>esse</bdi>",
+                "<bdi>isst</bdi>",
+                "<bdi>isst</bdi>",
+                "<bdi>essen</bdi>",
+                "<bdi>esst</bdi>",
+                "<bdi>essen</bdi>"
               ],
               [
                 "过去时",
-                "aß",
-                "aßest",
-                "aß",
-                "aßen",
-                "aßt",
-                "aßen"
+                "<bdi>aß</bdi>",
+                "<bdi>aßest</bdi>",
+                "<bdi>aß</bdi>",
+                "<bdi>aßen</bdi>",
+                "<bdi>aßt</bdi>",
+                "<bdi>aßen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6600,7 +6600,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "essen",
-            "groupLabel": "essen（吃）",
+            "groupLabel": "<bdi>essen</bdi>（吃）",
             "headers": [
               "",
               "第一人称单数",
@@ -6612,22 +6612,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "esse",
-                "essest",
-                "esse",
-                "essen",
-                "esset",
-                "essen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>esse</bdi>",
+                "<bdi>essest</bdi>",
+                "<bdi>esse</bdi>",
+                "<bdi>essen</bdi>",
+                "<bdi>esset</bdi>",
+                "<bdi>essen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "äße",
-                "äßest",
-                "äße",
-                "äßen",
-                "äßet",
-                "äßen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>äße</bdi>",
+                "<bdi>äßest</bdi>",
+                "<bdi>äße</bdi>",
+                "<bdi>äßen</bdi>",
+                "<bdi>äßet</bdi>",
+                "<bdi>äßen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6636,19 +6636,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "essen",
-            "groupLabel": "essen（吃）",
+            "groupLabel": "<bdi>essen</bdi>（吃）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "iss",
-                "esst",
-                "essen Sie"
+                "<bdi>iss</bdi>",
+                "<bdi>esst</bdi>",
+                "<bdi>essen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6657,7 +6657,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "essen",
-            "groupLabel": "essen（吃）",
+            "groupLabel": "<bdi>essen</bdi>（吃）",
             "headers": [
               "",
               "形式"
@@ -6665,7 +6665,7 @@
             "rows": [
               [
                 "现在时",
-                "essen"
+                "<bdi>essen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6674,7 +6674,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "essen",
-            "groupLabel": "essen（吃）",
+            "groupLabel": "<bdi>essen</bdi>（吃）",
             "headers": [
               "",
               "形式"
@@ -6682,11 +6682,11 @@
             "rows": [
               [
                 "现在分词",
-                "essend"
+                "<bdi>essend</bdi>"
               ],
               [
                 "过去分词",
-                "gegessen"
+                "<bdi>gegessen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6695,7 +6695,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "nehmen",
-            "groupLabel": "nehmen（拿）",
+            "groupLabel": "<bdi>nehmen</bdi>（拿）",
             "headers": [
               "",
               "第一人称单数",
@@ -6708,21 +6708,21 @@
             "rows": [
               [
                 "现在时",
-                "nehme",
-                "nimmst",
-                "nimmt",
-                "nehmen",
-                "nehmt",
-                "nehmen"
+                "<bdi>nehme</bdi>",
+                "<bdi>nimmst</bdi>",
+                "<bdi>nimmt</bdi>",
+                "<bdi>nehmen</bdi>",
+                "<bdi>nehmt</bdi>",
+                "<bdi>nehmen</bdi>"
               ],
               [
                 "过去时",
-                "nahm",
-                "nahmst",
-                "nahm",
-                "nahmen",
-                "nahmt",
-                "nahmen"
+                "<bdi>nahm</bdi>",
+                "<bdi>nahmst</bdi>",
+                "<bdi>nahm</bdi>",
+                "<bdi>nahmen</bdi>",
+                "<bdi>nahmt</bdi>",
+                "<bdi>nahmen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6731,7 +6731,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "nehmen",
-            "groupLabel": "nehmen（拿）",
+            "groupLabel": "<bdi>nehmen</bdi>（拿）",
             "headers": [
               "",
               "第一人称单数",
@@ -6743,22 +6743,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "nehme",
-                "nehmest",
-                "nehme",
-                "nehmen",
-                "nehmet",
-                "nehmen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>nehme</bdi>",
+                "<bdi>nehmest</bdi>",
+                "<bdi>nehme</bdi>",
+                "<bdi>nehmen</bdi>",
+                "<bdi>nehmet</bdi>",
+                "<bdi>nehmen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "nähme",
-                "nähmest",
-                "nähme",
-                "nähmen",
-                "nähmet",
-                "nähmen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>nähme</bdi>",
+                "<bdi>nähmest</bdi>",
+                "<bdi>nähme</bdi>",
+                "<bdi>nähmen</bdi>",
+                "<bdi>nähmet</bdi>",
+                "<bdi>nähmen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6767,19 +6767,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "nehmen",
-            "groupLabel": "nehmen（拿）",
+            "groupLabel": "<bdi>nehmen</bdi>（拿）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "nimm",
-                "nehmt",
-                "nehmen Sie"
+                "<bdi>nimm</bdi>",
+                "<bdi>nehmt</bdi>",
+                "<bdi>nehmen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6788,7 +6788,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "nehmen",
-            "groupLabel": "nehmen（拿）",
+            "groupLabel": "<bdi>nehmen</bdi>（拿）",
             "headers": [
               "",
               "形式"
@@ -6796,7 +6796,7 @@
             "rows": [
               [
                 "现在时",
-                "nehmen"
+                "<bdi>nehmen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6805,7 +6805,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "nehmen",
-            "groupLabel": "nehmen（拿）",
+            "groupLabel": "<bdi>nehmen</bdi>（拿）",
             "headers": [
               "",
               "形式"
@@ -6813,11 +6813,11 @@
             "rows": [
               [
                 "现在分词",
-                "nehmend"
+                "<bdi>nehmend</bdi>"
               ],
               [
                 "过去分词",
-                "genommen"
+                "<bdi>genommen</bdi>"
               ]
             ],
             "lang": "de"
@@ -6826,7 +6826,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "geben",
-            "groupLabel": "geben（给）",
+            "groupLabel": "<bdi>geben</bdi>（给）",
             "headers": [
               "",
               "第一人称单数",
@@ -6839,21 +6839,21 @@
             "rows": [
               [
                 "现在时",
-                "gebe",
-                "gibst",
-                "gibt",
-                "geben",
-                "gebt",
-                "geben"
+                "<bdi>gebe</bdi>",
+                "<bdi>gibst</bdi>",
+                "<bdi>gibt</bdi>",
+                "<bdi>geben</bdi>",
+                "<bdi>gebt</bdi>",
+                "<bdi>geben</bdi>"
               ],
               [
                 "过去时",
-                "gab",
-                "gabst",
-                "gab",
-                "gaben",
-                "gabt",
-                "gaben"
+                "<bdi>gab</bdi>",
+                "<bdi>gabst</bdi>",
+                "<bdi>gab</bdi>",
+                "<bdi>gaben</bdi>",
+                "<bdi>gabt</bdi>",
+                "<bdi>gaben</bdi>"
               ]
             ],
             "lang": "de"
@@ -6862,7 +6862,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "geben",
-            "groupLabel": "geben（给）",
+            "groupLabel": "<bdi>geben</bdi>（给）",
             "headers": [
               "",
               "第一人称单数",
@@ -6874,22 +6874,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "gebe",
-                "gebest",
-                "gebe",
-                "geben",
-                "gebet",
-                "geben"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>gebe</bdi>",
+                "<bdi>gebest</bdi>",
+                "<bdi>gebe</bdi>",
+                "<bdi>geben</bdi>",
+                "<bdi>gebet</bdi>",
+                "<bdi>geben</bdi>"
               ],
               [
-                "虚拟式 II",
-                "gäbe",
-                "gäbest",
-                "gäbe",
-                "gäben",
-                "gäbet",
-                "gäben"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>gäbe</bdi>",
+                "<bdi>gäbest</bdi>",
+                "<bdi>gäbe</bdi>",
+                "<bdi>gäben</bdi>",
+                "<bdi>gäbet</bdi>",
+                "<bdi>gäben</bdi>"
               ]
             ],
             "lang": "de"
@@ -6898,19 +6898,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "geben",
-            "groupLabel": "geben（给）",
+            "groupLabel": "<bdi>geben</bdi>（给）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "gib",
-                "gebt",
-                "geben Sie"
+                "<bdi>gib</bdi>",
+                "<bdi>gebt</bdi>",
+                "<bdi>geben Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -6919,7 +6919,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "geben",
-            "groupLabel": "geben（给）",
+            "groupLabel": "<bdi>geben</bdi>（给）",
             "headers": [
               "",
               "形式"
@@ -6927,7 +6927,7 @@
             "rows": [
               [
                 "现在时",
-                "geben"
+                "<bdi>geben</bdi>"
               ]
             ],
             "lang": "de"
@@ -6936,7 +6936,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "geben",
-            "groupLabel": "geben（给）",
+            "groupLabel": "<bdi>geben</bdi>（给）",
             "headers": [
               "",
               "形式"
@@ -6944,11 +6944,11 @@
             "rows": [
               [
                 "现在分词",
-                "gebend"
+                "<bdi>gebend</bdi>"
               ],
               [
                 "过去分词",
-                "gegeben"
+                "<bdi>gegeben</bdi>"
               ]
             ],
             "lang": "de"
@@ -6957,7 +6957,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "finden",
-            "groupLabel": "finden（找到）",
+            "groupLabel": "<bdi>finden</bdi>（找到）",
             "headers": [
               "",
               "第一人称单数",
@@ -6970,21 +6970,21 @@
             "rows": [
               [
                 "现在时",
-                "finde",
-                "findest",
-                "findet",
-                "finden",
-                "findet",
-                "finden"
+                "<bdi>finde</bdi>",
+                "<bdi>findest</bdi>",
+                "<bdi>findet</bdi>",
+                "<bdi>finden</bdi>",
+                "<bdi>findet</bdi>",
+                "<bdi>finden</bdi>"
               ],
               [
                 "过去时",
-                "fand",
-                "fandest",
-                "fand",
-                "fanden",
-                "fandet",
-                "fanden"
+                "<bdi>fand</bdi>",
+                "<bdi>fandest</bdi>",
+                "<bdi>fand</bdi>",
+                "<bdi>fanden</bdi>",
+                "<bdi>fandet</bdi>",
+                "<bdi>fanden</bdi>"
               ]
             ],
             "lang": "de"
@@ -6993,7 +6993,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "finden",
-            "groupLabel": "finden（找到）",
+            "groupLabel": "<bdi>finden</bdi>（找到）",
             "headers": [
               "",
               "第一人称单数",
@@ -7005,22 +7005,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "finde",
-                "findest",
-                "finde",
-                "finden",
-                "findet",
-                "finden"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>finde</bdi>",
+                "<bdi>findest</bdi>",
+                "<bdi>finde</bdi>",
+                "<bdi>finden</bdi>",
+                "<bdi>findet</bdi>",
+                "<bdi>finden</bdi>"
               ],
               [
-                "虚拟式 II",
-                "fände",
-                "fändest",
-                "fände",
-                "fänden",
-                "fändet",
-                "fänden"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>fände</bdi>",
+                "<bdi>fändest</bdi>",
+                "<bdi>fände</bdi>",
+                "<bdi>fänden</bdi>",
+                "<bdi>fändet</bdi>",
+                "<bdi>fänden</bdi>"
               ]
             ],
             "lang": "de"
@@ -7029,19 +7029,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "finden",
-            "groupLabel": "finden（找到）",
+            "groupLabel": "<bdi>finden</bdi>（找到）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "find",
-                "findet",
-                "finden Sie"
+                "<bdi>find</bdi>",
+                "<bdi>findet</bdi>",
+                "<bdi>finden Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -7050,7 +7050,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "finden",
-            "groupLabel": "finden（找到）",
+            "groupLabel": "<bdi>finden</bdi>（找到）",
             "headers": [
               "",
               "形式"
@@ -7058,7 +7058,7 @@
             "rows": [
               [
                 "现在时",
-                "finden"
+                "<bdi>finden</bdi>"
               ]
             ],
             "lang": "de"
@@ -7067,7 +7067,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "finden",
-            "groupLabel": "finden（找到）",
+            "groupLabel": "<bdi>finden</bdi>（找到）",
             "headers": [
               "",
               "形式"
@@ -7075,11 +7075,11 @@
             "rows": [
               [
                 "现在分词",
-                "findend"
+                "<bdi>findend</bdi>"
               ],
               [
                 "过去分词",
-                "gefunden"
+                "<bdi>gefunden</bdi>"
               ]
             ],
             "lang": "de"
@@ -7088,7 +7088,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "bleiben",
-            "groupLabel": "bleiben（停留）",
+            "groupLabel": "<bdi>bleiben</bdi>（停留）",
             "headers": [
               "",
               "第一人称单数",
@@ -7101,21 +7101,21 @@
             "rows": [
               [
                 "现在时",
-                "bleibe",
-                "bleibst",
-                "bleibt",
-                "bleiben",
-                "bleibt",
-                "bleiben"
+                "<bdi>bleibe</bdi>",
+                "<bdi>bleibst</bdi>",
+                "<bdi>bleibt</bdi>",
+                "<bdi>bleiben</bdi>",
+                "<bdi>bleibt</bdi>",
+                "<bdi>bleiben</bdi>"
               ],
               [
                 "过去时",
-                "blieb",
-                "bliebst",
-                "blieb",
-                "blieben",
-                "bliebt",
-                "blieben"
+                "<bdi>blieb</bdi>",
+                "<bdi>bliebst</bdi>",
+                "<bdi>blieb</bdi>",
+                "<bdi>blieben</bdi>",
+                "<bdi>bliebt</bdi>",
+                "<bdi>blieben</bdi>"
               ]
             ],
             "lang": "de"
@@ -7124,7 +7124,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "bleiben",
-            "groupLabel": "bleiben（停留）",
+            "groupLabel": "<bdi>bleiben</bdi>（停留）",
             "headers": [
               "",
               "第一人称单数",
@@ -7136,22 +7136,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "bleibe",
-                "bleibest",
-                "bleibe",
-                "bleiben",
-                "bleibet",
-                "bleiben"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>bleibe</bdi>",
+                "<bdi>bleibest</bdi>",
+                "<bdi>bleibe</bdi>",
+                "<bdi>bleiben</bdi>",
+                "<bdi>bleibet</bdi>",
+                "<bdi>bleiben</bdi>"
               ],
               [
-                "虚拟式 II",
-                "bliebe",
-                "bliebest",
-                "bliebe",
-                "blieben",
-                "bliebet",
-                "blieben"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>bliebe</bdi>",
+                "<bdi>bliebest</bdi>",
+                "<bdi>bliebe</bdi>",
+                "<bdi>blieben</bdi>",
+                "<bdi>bliebet</bdi>",
+                "<bdi>blieben</bdi>"
               ]
             ],
             "lang": "de"
@@ -7160,19 +7160,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "bleiben",
-            "groupLabel": "bleiben（停留）",
+            "groupLabel": "<bdi>bleiben</bdi>（停留）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "bleib",
-                "bleibt",
-                "bleiben Sie"
+                "<bdi>bleib</bdi>",
+                "<bdi>bleibt</bdi>",
+                "<bdi>bleiben Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -7181,7 +7181,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "bleiben",
-            "groupLabel": "bleiben（停留）",
+            "groupLabel": "<bdi>bleiben</bdi>（停留）",
             "headers": [
               "",
               "形式"
@@ -7189,7 +7189,7 @@
             "rows": [
               [
                 "现在时",
-                "bleiben"
+                "<bdi>bleiben</bdi>"
               ]
             ],
             "lang": "de"
@@ -7198,7 +7198,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "bleiben",
-            "groupLabel": "bleiben（停留）",
+            "groupLabel": "<bdi>bleiben</bdi>（停留）",
             "headers": [
               "",
               "形式"
@@ -7206,11 +7206,11 @@
             "rows": [
               [
                 "现在分词",
-                "bleibend"
+                "<bdi>bleibend</bdi>"
               ],
               [
                 "过去分词",
-                "geblieben"
+                "<bdi>geblieben</bdi>"
               ]
             ],
             "lang": "de"
@@ -7219,7 +7219,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "laufen",
-            "groupLabel": "laufen（跑）",
+            "groupLabel": "<bdi>laufen</bdi>（跑）",
             "headers": [
               "",
               "第一人称单数",
@@ -7232,21 +7232,21 @@
             "rows": [
               [
                 "现在时",
-                "laufe",
-                "läufst",
-                "läuft",
-                "laufen",
-                "lauft",
-                "laufen"
+                "<bdi>laufe</bdi>",
+                "<bdi>läufst</bdi>",
+                "<bdi>läuft</bdi>",
+                "<bdi>laufen</bdi>",
+                "<bdi>lauft</bdi>",
+                "<bdi>laufen</bdi>"
               ],
               [
                 "过去时",
-                "lief",
-                "liefst",
-                "lief",
-                "liefen",
-                "lieft",
-                "liefen"
+                "<bdi>lief</bdi>",
+                "<bdi>liefst</bdi>",
+                "<bdi>lief</bdi>",
+                "<bdi>liefen</bdi>",
+                "<bdi>lieft</bdi>",
+                "<bdi>liefen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7255,7 +7255,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "laufen",
-            "groupLabel": "laufen（跑）",
+            "groupLabel": "<bdi>laufen</bdi>（跑）",
             "headers": [
               "",
               "第一人称单数",
@@ -7267,22 +7267,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "laufe",
-                "laufest",
-                "laufe",
-                "laufen",
-                "laufet",
-                "laufen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>laufe</bdi>",
+                "<bdi>laufest</bdi>",
+                "<bdi>laufe</bdi>",
+                "<bdi>laufen</bdi>",
+                "<bdi>laufet</bdi>",
+                "<bdi>laufen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "liefe",
-                "liefest",
-                "liefe",
-                "liefen",
-                "liefet",
-                "liefen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>liefe</bdi>",
+                "<bdi>liefest</bdi>",
+                "<bdi>liefe</bdi>",
+                "<bdi>liefen</bdi>",
+                "<bdi>liefet</bdi>",
+                "<bdi>liefen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7291,19 +7291,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "laufen",
-            "groupLabel": "laufen（跑）",
+            "groupLabel": "<bdi>laufen</bdi>（跑）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "lauf",
-                "lauft",
-                "laufen Sie"
+                "<bdi>lauf</bdi>",
+                "<bdi>lauft</bdi>",
+                "<bdi>laufen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -7312,7 +7312,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "laufen",
-            "groupLabel": "laufen（跑）",
+            "groupLabel": "<bdi>laufen</bdi>（跑）",
             "headers": [
               "",
               "形式"
@@ -7320,7 +7320,7 @@
             "rows": [
               [
                 "现在时",
-                "laufen"
+                "<bdi>laufen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7329,7 +7329,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "laufen",
-            "groupLabel": "laufen（跑）",
+            "groupLabel": "<bdi>laufen</bdi>（跑）",
             "headers": [
               "",
               "形式"
@@ -7337,11 +7337,11 @@
             "rows": [
               [
                 "现在分词",
-                "laufend"
+                "<bdi>laufend</bdi>"
               ],
               [
                 "过去分词",
-                "gelaufen"
+                "<bdi>gelaufen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7350,7 +7350,7 @@
             "caption": "直陈式",
             "role": "pattern",
             "group": "schlafen",
-            "groupLabel": "schlafen（睡）",
+            "groupLabel": "<bdi>schlafen</bdi>（睡）",
             "headers": [
               "",
               "第一人称单数",
@@ -7363,21 +7363,21 @@
             "rows": [
               [
                 "现在时",
-                "schlafe",
-                "schläfst",
-                "schläft",
-                "schlafen",
-                "schlaft",
-                "schlafen"
+                "<bdi>schlafe</bdi>",
+                "<bdi>schläfst</bdi>",
+                "<bdi>schläft</bdi>",
+                "<bdi>schlafen</bdi>",
+                "<bdi>schlaft</bdi>",
+                "<bdi>schlafen</bdi>"
               ],
               [
                 "过去时",
-                "schlief",
-                "schliefst",
-                "schlief",
-                "schliefen",
-                "schlieft",
-                "schliefen"
+                "<bdi>schlief</bdi>",
+                "<bdi>schliefst</bdi>",
+                "<bdi>schlief</bdi>",
+                "<bdi>schliefen</bdi>",
+                "<bdi>schlieft</bdi>",
+                "<bdi>schliefen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7386,7 +7386,7 @@
             "caption": "虚拟式",
             "role": "pattern",
             "group": "schlafen",
-            "groupLabel": "schlafen（睡）",
+            "groupLabel": "<bdi>schlafen</bdi>（睡）",
             "headers": [
               "",
               "第一人称单数",
@@ -7398,22 +7398,22 @@
             ],
             "rows": [
               [
-                "虚拟式 I",
-                "schlafe",
-                "schlafest",
-                "schlafe",
-                "schlafen",
-                "schlafet",
-                "schlafen"
+                "虚拟式 <bdi>I</bdi>",
+                "<bdi>schlafe</bdi>",
+                "<bdi>schlafest</bdi>",
+                "<bdi>schlafe</bdi>",
+                "<bdi>schlafen</bdi>",
+                "<bdi>schlafet</bdi>",
+                "<bdi>schlafen</bdi>"
               ],
               [
-                "虚拟式 II",
-                "schliefe",
-                "schliefest",
-                "schliefe",
-                "schliefen",
-                "schliefet",
-                "schliefen"
+                "虚拟式 <bdi>II</bdi>",
+                "<bdi>schliefe</bdi>",
+                "<bdi>schliefest</bdi>",
+                "<bdi>schliefe</bdi>",
+                "<bdi>schliefen</bdi>",
+                "<bdi>schliefet</bdi>",
+                "<bdi>schliefen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7422,19 +7422,19 @@
             "caption": "命令式",
             "role": "pattern",
             "group": "schlafen",
-            "groupLabel": "schlafen（睡）",
+            "groupLabel": "<bdi>schlafen</bdi>（睡）",
             "headers": [
               "",
-              "单数（du）",
-              "复数（ihr）",
-              "敬称（Sie）"
+              "单数（<bdi>du</bdi>）",
+              "复数（<bdi>ihr</bdi>）",
+              "敬称（<bdi>Sie</bdi>）"
             ],
             "rows": [
               [
                 "现在时",
-                "schlaf",
-                "schlaft",
-                "schlafen Sie"
+                "<bdi>schlaf</bdi>",
+                "<bdi>schlaft</bdi>",
+                "<bdi>schlafen Sie</bdi>"
               ]
             ],
             "lang": "de"
@@ -7443,7 +7443,7 @@
             "caption": "不定式",
             "role": "pattern",
             "group": "schlafen",
-            "groupLabel": "schlafen（睡）",
+            "groupLabel": "<bdi>schlafen</bdi>（睡）",
             "headers": [
               "",
               "形式"
@@ -7451,7 +7451,7 @@
             "rows": [
               [
                 "现在时",
-                "schlafen"
+                "<bdi>schlafen</bdi>"
               ]
             ],
             "lang": "de"
@@ -7460,7 +7460,7 @@
             "caption": "分词",
             "role": "pattern",
             "group": "schlafen",
-            "groupLabel": "schlafen（睡）",
+            "groupLabel": "<bdi>schlafen</bdi>（睡）",
             "headers": [
               "",
               "形式"
@@ -7468,11 +7468,11 @@
             "rows": [
               [
                 "现在分词",
-                "schlafend"
+                "<bdi>schlafend</bdi>"
               ],
               [
                 "过去分词",
-                "geschlafen"
+                "<bdi>geschlafen</bdi>"
               ]
             ],
             "lang": "de"

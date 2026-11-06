@@ -1284,7 +1284,7 @@
       },
       {
         "key": "grdv-tavya",
-        "title": "必要动名词 -तव्य",
+        "title": "必要动名词 -<bdi>तव्य</bdi>",
         "columns": [
           {
             "key": "sg_m",
@@ -1360,7 +1360,7 @@
       },
       {
         "key": "grdv-aniya",
-        "title": "允许动名词 -अनीय",
+        "title": "允许动名词 -<bdi>अनीय</bdi>",
         "columns": [
           {
             "key": "sg_m",
@@ -1436,7 +1436,7 @@
       },
       {
         "key": "grdv-ya",
-        "title": "允许动名词 -य",
+        "title": "允许动名词 -<bdi>य</bdi>",
         "columns": [
           {
             "key": "sg_m",

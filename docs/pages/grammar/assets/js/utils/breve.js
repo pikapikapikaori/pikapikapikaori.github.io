@@ -1,9 +1,4 @@
-/**
- * 短音符（˘ / U+0306）的两个通用能力：
- * 1) `foldBreve` —— 比较用的折叠：只去掉短音符，长音符、重音、气符都保留；
- * 2) `annotateBreves` —— 显示用的注解：把短音符拆进 `<span class="breve">`，
- *    CSS 默认藏着，`html.show-breve` 打开才显示。本模块不含任何具体语言的知识。
- */
+/** 短音符的折叠（比较用）与注解（显示用）。 */
 
 export const BREVE = '\u0306'
 
@@ -21,8 +16,6 @@ export function foldBreve(text) {
 
 /**
  * 把短音符包进 span，便于用 CSS 隐藏 / 显示。可重复调用（每次先撤掉旧标记）。
- * @param {HTMLElement} root 在其内部查找要处理的节点
- * @param {{ selector?: string }} options selector 默认只处理表格单元格
  */
 export function annotateBreves(root, { selector = 'td, th' } = {}) {
     if (!root || !selector) return

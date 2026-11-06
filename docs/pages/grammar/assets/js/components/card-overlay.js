@@ -168,7 +168,6 @@ export function openCardOverlay(word, opts = {}) {
     function renderBody() {
         body.replaceChildren()
 
-        /* ---------- 顶部：lemma + badges ---------- */
         const langMeta = getLanguage(word.language)
         // 分区标题跟随该语言的 terms
         const terms = termsOf(langMeta, word.pos)
@@ -211,7 +210,6 @@ export function openCardOverlay(word, opts = {}) {
             badges
         )
 
-        /* ---------- 词干（在含义之前） ---------- */
         const baseStem = primaryStem(word)
         if (baseStem) {
             const extra = otherStems(word)
@@ -227,7 +225,6 @@ export function openCardOverlay(word, opts = {}) {
             ))
         }
 
-        /* ---------- 含义（来源 tab 收在这一段里） ---------- */
         const meanings = pick(word.meanings, activeSource)
         const showTabs = sources.length > 1
         if (meanings.length || showTabs) {
@@ -249,7 +246,6 @@ export function openCardOverlay(word, opts = {}) {
             ))
         }
 
-        /* ---------- paradigm 表格 ---------- */
         if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
             const panels = []
             const candidates = (paradigmTpl.tables || []).filter((t) => word.paradigm[t.key])
@@ -278,7 +274,6 @@ export function openCardOverlay(word, opts = {}) {
             }
         }
 
-        /* ---------- 补充形式 ---------- */
         const infs = Array.isArray(word.inflections) ? word.inflections : []
         if (infs.length) {
             const groups = groupInflections(infs)
@@ -304,7 +299,6 @@ export function openCardOverlay(word, opts = {}) {
             body.appendChild(ovSection(terms.extraForms, container))
         }
 
-        /* ---------- 固定搭配 ---------- */
         const cols = pick(word.collocations, activeCollocationSource)
         if (cols.length || showTabs) {
             body.appendChild(ovSection(terms.collocations,
@@ -320,7 +314,6 @@ export function openCardOverlay(word, opts = {}) {
             ))
         }
 
-        /* ---------- 例句 ---------- */
         const exs = pick(word.examples, activeExampleSource)
         if (exs.length || showTabs) {
             body.appendChild(ovSection(terms.examples,
@@ -339,7 +332,6 @@ export function openCardOverlay(word, opts = {}) {
             ))
         }
 
-        /* ---------- 派生词 ---------- */
         if (word.derivatives && word.derivatives.length) {
             body.appendChild(ovSection(terms.derivatives,
                 h('div', { class: 'word-card__derivatives' },
@@ -365,7 +357,6 @@ export function openCardOverlay(word, opts = {}) {
             ))
         }
 
-        /* ---------- 备注 ---------- */
         if (word.notes) {
             body.appendChild(ovSection(terms.notes, h('div', {}, word.notes)))
         }

@@ -1,11 +1,4 @@
-/**
- * 输入助手：右下角常驻按钮 + 浮动面板，两种模式（修饰符 / 键盘）＋全局的空格转写。
- *
- * - 只接管当前视图里能编辑的文本框：<input> / <textarea> / 自绘 contenteditable。
- * - 面板浮在内容上方，不挤压正文；聚焦的输入框被遮住时会滚到面板上方。
- * - 语言自己的能力来自 data/language/<code>/ime.js 与 script.js，这里只做通用逻辑。
- * - 面板内的按钮用 pointerdown 阻止默认，点符号时输入框不会失焦。
- */
+/** 输入助手：修饰符 / 键盘面板，以及全局的空格转写。 */
 
 import { h } from '../utils/dom.js'
 import { adaptField } from '../adapters/text-field.js'
@@ -369,10 +362,7 @@ function layerUpper() {
     return state.caps !== state.shift
 }
 
-/**
- * 附加符号的「样字」：语言的第一个字母（placeholderBase），跟着层级大小写。
- * 组合符单独放会因字体不同而显示成空框或错位，统一托在一个字母上最稳。
- */
+/** 组合符托的样字：单独放会因字体不同显示成空框 */
 function sampleLetter() {
     const base = state.config?.placeholderBase
     if (!base) return '\u25CC'
@@ -437,10 +427,7 @@ function groupChars(group) {
     return (group.items || []).map((it) => it.c).filter(Boolean).join('')
 }
 
-/**
- * 组按 row 分行：配置了同一个 row 的组并排放在一行，没配 row 的各自占一行。
- * 短组（下标、数字）靠这个并排，长的字形组仍然独占一行。
- */
+/** 组按 row 分行：同 row 的并排，没配 row 的各占一行 */
 function markRows(groups) {
     const keyed = new Map()
     const loose = []
@@ -457,7 +444,7 @@ function markRows(groups) {
     return rows.concat(loose)
 }
 
-/** 基字上所有组合符号（「还原」要一次清掉它们；insert 组是整字，不参与） */
+/** 基字上的全部组合符号（insert 组是整字，不参与） */
 function allMarkChars(groups) {
     return groups.filter((g) => !g.insert).map(groupChars).join('')
 }
@@ -651,7 +638,6 @@ function keyButton(slot) {
         }
     }, char || '')
     btn.style.gridColumn = `span ${slot.span || 4}`
-    // 组合符（重音、元音点、附标…）托在样字上显示，单独放会因字体不同而看不见
     if (char && isMark(char)) btn.firstChild.nodeValue = (sampleForChar(char) + char).normalize('NFC')
     // 数字这类「键面就是键名」的键不用再标一遍小字
     if (char && !latin.startsWith('aux') && char !== latin) btn.append(h('small', {}, latin))
@@ -688,10 +674,7 @@ function applyResult(next) {
     if (els && !els.panel.hidden) render()
 }
 
-/**
- * 空格转写：按空格把光标前的拉丁词换成原文。
- * 全局能力 —— 不挂在 tab 上，也不看助手开关 / 面板是否打开，只要这门语言有转换函数就生效。
- */
+/** 空格转写：按空格把光标前的拉丁词换成原文，与助手开关、面板状态无关 */
 function convertOnSpace(field, e) {
     const convert = state.config?.translit?.convert
     if (typeof convert !== 'function') return false

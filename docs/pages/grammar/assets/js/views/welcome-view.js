@@ -48,7 +48,7 @@ const welcomeView = {
 
         const panel = h('div', { class: 'welcome__panel' },
             h('h1', { class: 'welcome__title' }, '语言生词本'),
-            h('p', { class: 'welcome__sub' }, '选择已有用户，或新建 / 导入一个用户。所有数据都保存在本地浏览器。')
+            h('p', { class: 'welcome__sub' }, '所有数据都保存在本地浏览器。')
         )
 
         /* ---------- 操作按钮 ---------- */
@@ -162,8 +162,7 @@ const welcomeView = {
                 body: h('div', { class: 'import-words-body' },
                     input.el,
                     h('div', { class: 'field__hint' },
-                        '文件格式为 { version, kind: "langnotebook-user", user, settings, words }。',
-                        '导入会新建一个用户，不会覆盖已有用户。'
+                        '文件格式为 { version, kind: "langnotebook-user", user, settings, words }。'
                     )
                 ),
                 actions: [
@@ -197,7 +196,7 @@ const welcomeView = {
         async function doDeleteUser(user) {
             const ok = await confirmModal({
                 title: '删除用户',
-                message: `确定删除「${user.name}」及其全部词条？此操作不可恢复。`,
+                message: `确定删除「${user.name}」及其全部生词？此操作不可恢复。`,
                 confirmLabel: '删除',
                 danger: true
             })

@@ -55,7 +55,6 @@ export default {
             pageSize: Math.min(50, Math.max(20, Number(ctx.query.size) || (settings && settings.pageSize) || 30))
         }
 
-        /* ---------- 容器 ---------- */
         const head = h('div', { class: 'page-head page-head--display' })
         const toolbar = h('div', { class: 'toolbar' })
         const listWrap = h('div', { class: 'word-list' })
@@ -64,7 +63,6 @@ export default {
 
         replace(main, head, toolbar, emptyWrap, listWrap, pagWrap)
 
-        /* ---------- 缓存全部词条（用于派生词解析） ---------- */
         let langWordsCache = []
         let langWordsMap = new Map()
 
@@ -83,7 +81,6 @@ export default {
 
         await refreshCache()
 
-        /* ---------- 右下角浮动工具：回到顶部 + 显示转写 ---------- */
         const scriptProfile = await loadScriptProfile(lang, await loadGrammarMeta(lang))
         const toRoman = typeof scriptProfile?.toRoman === 'function'
             ? (text) => scriptProfile.toRoman(text)
@@ -139,7 +136,6 @@ export default {
             return findAnchor(grammarDoc, id) ? id : null
         }
 
-        /* ---------- 头部 ---------- */
         function renderHead() {
             replace(head,
                 h('div', {},
@@ -206,12 +202,11 @@ export default {
             })
         }
 
-        /* ---------- 工具栏 ---------- */
         function renderToolbar() {
             const searchInput = h('input', {
                 class: 'input',
                 type: 'search',
-                placeholder: '在本语言内检索…',
+                placeholder: '在本语言内搜索…',
                 value: state.q,
                 oninput: debounce((e) => {
                     state.q = e.target.value
@@ -315,7 +310,6 @@ export default {
             )
         }
 
-        /* ---------- 列表 ---------- */
         let currentPageIds = []
 
         /** 派生词跳转：清掉搜索与筛选后定位到目标词所在页 */
@@ -375,8 +369,8 @@ export default {
             if (result.items.length === 0) {
                 replace(emptyWrap, h('div', { class: 'empty' },
                     h('div', { class: 'empty__title' }, result.total === 0 && !state.q && !state.pos
-                        ? '还没有词条'
-                        : '没有匹配的词条'),
+                        ? '还没有生词'
+                        : '没有匹配的生词'),
                     h('div', { class: 'empty__desc' },
                         result.total === 0 && !state.q && !state.pos
                             ? '点击「添加生词」开始记录。'
@@ -395,7 +389,7 @@ export default {
 
             const frag = document.createDocumentFragment()
             frag.appendChild(h('div', { class: 'word-list__head' },
-                h('span', {}, '词条'),
+                h('span', {}, '生词'),
                 h('span', {}, '掌握度'),
                 h('span', {}, '添加'),
                 h('span', {})
@@ -498,7 +492,7 @@ export default {
 
         async function onDelete(word) {
             const ok = await confirmModal({
-                title: '删除词条',
+                title: '删除生词',
                 message: `确定删除「${word.lemma}」？`,
                 confirmLabel: '删除',
                 danger: true
@@ -510,7 +504,6 @@ export default {
             refresh()
         }
 
-        /* ---------- 分页 ---------- */
         function renderPagination(result) {
             replace(pagWrap, createPagination({
                 page: result.page,
@@ -525,7 +518,6 @@ export default {
             }))
         }
 
-        /* ---------- 主刷新 ---------- */
         async function refresh() {
             const result = await queryWords(userId, lang, {
                 ...state,
@@ -552,12 +544,10 @@ export default {
             }
         }
 
-        /* ---------- 首次渲染 ---------- */
         renderHead()
         renderToolbar()
         await refresh()
 
-        /* ---------- 快捷键 ---------- */
         const onKey = (e) => {
             const target = e.target
             const typing = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)

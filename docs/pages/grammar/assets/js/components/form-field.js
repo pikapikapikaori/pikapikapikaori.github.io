@@ -1,11 +1,4 @@
-/**
- * 表单字段：标题 + 控件 + 提示。
- *
- * 故意不用 <label> 包控件：<label> 会把点击转发给内部第一个 labelable 后代，
- * 而这里的控件常是 contenteditable（不是 labelable）或自绘下拉按钮（是 labelable），
- * 于是点标题会落到按钮上——「词干」那行会直接生成表格、覆盖已填的变格变位。
- * 改成点标题只把焦点交给控件。
- */
+/** 表单字段：标题 + 控件 + 提示。 */
 
 import { h } from '../utils/dom.js'
 import { bdiText } from '../utils/bdi.js'
@@ -23,16 +16,6 @@ export function focusTargetOf(control) {
     return control
 }
 
-/**
- * @param {string|HTMLElement} label 标题文本，或已经是元素（如「变格 / 变位类型」会随语言变）
- * @param {HTMLElement} control 控件
- * @param {object} [opts]
- * @param {HTMLElement[]} [opts.extras] 控件后面按顺序追加的节点（如状态行）
- * @param {string} [opts.className] 追加到 .field 上的类
- * @param {string} [opts.hint] 提示文本
- * @param {string|null} [opts.lang] 提示文本的语言（决定 bdi 方向）
- * @param {HTMLElement|null} [opts.target] 覆盖聚焦目标；控件是 .field__row 等容器时必须显式给
- */
 export function fieldRow(label, control, {
     extras = [], className = '', hint = '', lang = null, target = null
 } = {}) {
@@ -43,6 +26,7 @@ export function fieldRow(label, control, {
     const focusable = target || focusTargetOf(control)
     if (focusable && typeof focusable.focus === 'function') {
         focusable.setAttribute('aria-labelledby', labelEl.id)
+        // 不用 <label> 包控件：它会把点击转发给内部第一个按钮，点「词干」的标题就会直接生成表格
         labelEl.addEventListener('click', () => focusable.focus())
     }
 

@@ -50,7 +50,7 @@ export default {
         setBreadcrumbs([
             { label: '语言列表', href: '#/languages' },
             { label: language.name, href: `#/lang/${lang}/words` },
-            { label: '语法速查' }
+            { label: '语法' }
         ])
 
         if (language.grammar === false) {
@@ -96,7 +96,7 @@ function renderNoData(main, lang, language) {
                 h('h1', { class: 'page-head__title' },
                     bdiNode(language.native, lang), ' · ', language.name
                 ),
-                h('div', { class: 'page-head__sub' }, '语法速查')
+                h('div', { class: 'page-head__sub' }, '语法')
             )
         ),
         h('div', { class: 'empty' },
@@ -176,7 +176,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     const content = h('div', { class: 'grammar-content' })
     const allIds = new Set()
 
-    /* ---------- 右下角浮动工具：回到顶部 + 显示转写 ---------- */
     const toRoman = typeof scriptProfile?.toRoman === 'function'
         ? (text) => scriptProfile.toRoman(text)
         : null
@@ -203,7 +202,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     }
     if (tools.isBreveOn()) setBreveVisible(true)
     annotateBreves(content, { selector: 'td, th' })
-
 
     // 本页目录：一级标题即 section，窄屏收进「本页目录」浮层
     const tocCurrent = h('span', { class: 'grammar-toc__current' })
@@ -342,7 +340,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         }
     }
 
-    /* ---------- 篇尾翻页：按章节 ---------- */
     if (groups) {
         const gi = groups.findIndex((g) => g.id === current)
         const prevGroup = gi > 0 ? groups[gi - 1] : null
@@ -369,7 +366,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
                 h('h1', { class: 'page-head__title' },
                     bdiNode(language.native, lang), ' · ', language.name
                 ),
-                h('div', { class: 'page-head__sub' }, '语法速查')
+                h('div', { class: 'page-head__sub' }, '语法')
             )
         ),
         h('div', { class: 'grammar-layout' }, nav, content)

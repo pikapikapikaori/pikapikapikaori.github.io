@@ -1,8 +1,4 @@
-/**
- * 词卡里的「固定搭配」「例句」列表：列表页卡片正面与详情弹窗共用一份实现，
- * 序号与含义引用的算法只在这里写一次，两处才不会走样。
- * 原文一律交给外层 applyBdi 处理，这里只标 lang。
- */
+/** 词卡里的固定搭配与例句列表，列表页与词卡详情共用。 */
 
 import { h } from '../utils/dom.js'
 import { sourceLabel } from '../models/word.js'
@@ -12,11 +8,7 @@ export function meaningsOfSource(meanings, source) {
     return (meanings || []).filter((m) => (m.source || 'manual') === (source || 'manual'))
 }
 
-/**
- * 例句引用的含义：按「来源内序号 + 文本」显示。
- * 回查不到（含义被删 / 改名）时只给文本，宁可没有编号也不指错。
- * 引用的含义不在当前来源 tab 里时补一个来源名，序号才找得到。
- */
+/** 例句引用的含义：序号只在本来源内有效；回查不到时只给文本，指不到宁可不编号 */
 export function meaningRefLabel(ref, meanings, activeSource = 'manual') {
     const text = String(ref?.text || '').trim()
     if (!text) return ''
@@ -35,7 +27,7 @@ export function meaningRefLabel(ref, meanings, activeSource = 'manual') {
     return text
 }
 
-/** 固定搭配：有序列表，每条 `搭配 — 释义` */
+/** 固定搭配：有序列表，每条 `搭配 — 含义` */
 export function collocationList(items, language) {
     return h('ol', { class: 'word-card__list' },
         ...(items || []).map((c) => h('li', { class: 'word-card__collocation' },

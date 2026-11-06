@@ -1,13 +1,5 @@
-/**
- * 「原文 + 转写」双行显示：转写由调用方传入的 toRoman 现场算出，只给原文片段加注，
- * 中文等其它字符原样保留；本模块不含任何具体语言的知识。
- */
+/** 原文与转写的双行显示。 */
 
-/**
- * @param {HTMLElement} root 在其内部查找要加注的节点
- * @param {{ range: RegExp, toRoman: (text) => string, selector?: string }} options
- *   selector 默认只处理表格单元格；词列表标题、词卡标题这类非表格节点由调用方传 [data-dual]
- */
 export function annotateDualText(root, { range, toRoman, selector = 'td, th' } = {}) {
     if (!root || !(range instanceof RegExp) || typeof toRoman !== 'function') return
     // 默认只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读

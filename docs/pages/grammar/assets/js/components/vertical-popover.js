@@ -1,7 +1,4 @@
-/**
- * 原文预览浮层：事件委托，带 lang 且登记在 SCRIPT_POPUP_LANGS、文本确实含该语言字符的元素，
- * hover（延迟）或 click 时在鼠标附近弹出只含原文的浮层；竖写语言用竖排样式。
- */
+/** 原文预览浮层：悬停或点击含该语言文字的片段时弹出原文。 */
 
 import { h } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
@@ -16,8 +13,6 @@ let currentSourceEl = null
 let hoverTimer = null
 let hideTimer = null
 let attached = false
-
-/* ---------------- 判定 ---------------- */
 
 function isPopupLang(el) {
     if (!el || !el.getAttribute) return false
@@ -56,8 +51,6 @@ function findVerticalEl(node) {
     return null
 }
 
-/* ---------------- 定时器 ---------------- */
-
 function clearTimers() {
     if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null }
     if (hideTimer) { clearTimeout(hideTimer); hideTimer = null }
@@ -66,8 +59,6 @@ function clearTimers() {
 function cancelHide() {
     if (hideTimer) { clearTimeout(hideTimer); hideTimer = null }
 }
-
-/* ---------------- DOM ---------------- */
 
 function ensurePopover() {
     if (popoverEl) return popoverEl
@@ -89,8 +80,6 @@ function ensurePopover() {
     document.body.appendChild(popoverEl)
     return popoverEl
 }
-
-/* ---------------- 显示 / 隐藏 ---------------- */
 
 function show(sourceEl, x, y) {
     const text = textOf(sourceEl).trim()
@@ -147,8 +136,6 @@ function scheduleHide(delay = HIDE_DELAY) {
 export function hideVerticalPopover() {
     hide()
 }
-
-/* ---------------- 事件 ---------------- */
 
 function onMouseOver(e) {
     if (popoverEl && popoverEl.contains(e.target)) {
@@ -218,8 +205,6 @@ function onInput(e) {
 
 function onScroll() { hide() }
 function onResize() { hide() }
-
-/* ---------------- 注册 ---------------- */
 
 export function attachVerticalPopover() {
     if (attached) return

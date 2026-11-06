@@ -1,7 +1,4 @@
-/**
- * 自绘下拉菜单：文档级接管 <select>（选中后照常写回 value 并派发 change），
- * select-field.js 的自绘下拉复用同一套列表。列表项文字统一经 bdiText 包 <bdi>。
- */
+/** 自绘下拉菜单，统一接管原生 <select>。 */
 
 import { h } from '../utils/dom.js'
 import { bdiText } from '../utils/bdi.js'
@@ -78,11 +75,6 @@ function choose(index) {
     if (typeof onPick === 'function') onPick(item.value, item)
 }
 
-/**
- * @param {object} options anchor（定位用）/ items([{ value, label, group?, title?, disabled? }]) / value（高亮与打勾）/ lang
- *   / owner（aria 属性的载体，默认 anchor）/ activeIndex（缺省为当前值）/ nowrap（条目单行 + 省略号，菜单可加宽）
- *   / onPick(value, item) / onClose()
- */
 export function openSelectMenu({
     anchor,
     items,
@@ -145,8 +137,6 @@ export function openSelectMenu({
     placeMenu(anchor)
     highlight(activeIndex == null ? (selectedIndex < 0 ? 0 : selectedIndex) : activeIndex, { scroll: false })
 }
-
-/* ---------------- 原生 <select> 的接管 ---------------- */
 
 function itemsOf(select) {
     const out = []

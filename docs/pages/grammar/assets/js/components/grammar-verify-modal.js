@@ -1,10 +1,3 @@
-/**
- * 语法数据校验结果浮层
- *
- * 结果分两段：**结构校验**（`validateGrammarDoc`）与 **derive 自检**（`verifyGrammarDoc`）。
- * 无论有没有问题都会弹 —— 没有问题时也是一次明确确认。
- */
-
 import { h } from '../utils/dom.js'
 import { openModal } from './modal.js'
 
@@ -89,11 +82,6 @@ function buildDerive(results) {
     )
 }
 
-/**
- * @param {object} opts
- *   results  `verifyGrammarFiles()` 的返回值
- *   elapsed  用时（ms）
- */
 export function openGrammarVerifyModal({ results = [], elapsed = 0 } = {}) {
     const body = h('div', { class: 'verify' },
         h('div', { class: 'field__hint' }, `${results.length} 个语言 · 用时 ${formatMs(elapsed)}`),

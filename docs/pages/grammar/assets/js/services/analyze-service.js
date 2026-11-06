@@ -1,7 +1,4 @@
-/**
- * 形态分析服务：按语言筛源、按需加载源、并发查询并归并结果（组件只负责画）。
- * 分析源清单在 `config.js` 的 `ANALYZE_SOURCES`，一个 API 一个 `external/js/{file}.js`，加源不必改这里。
- */
+/** 形态分析：按语言筛源、按需加载、并发查询并归并结果。 */
 
 import { ANALYZE_SOURCES, EXTERNAL_BASE } from '../config/config.js'
 
@@ -37,7 +34,6 @@ export async function loadAnalyzers(langCode) {
 
 /**
  * 并发查全部源。查询失败的源不产出条目，只进 `errors`；每条 entry 都盖上 `sourceId` / `sourceLabel`。
- * @param {{ word: string, langCode: string, sources: object[] }} opts  sources 即 `loadAnalyzers()` 的返回值
  * @returns {Promise<{ entries: object[], errors: { source, error }[] }>}
  */
 export async function analyze({ word, langCode, sources = [] }) {

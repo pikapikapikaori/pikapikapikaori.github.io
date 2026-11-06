@@ -1,10 +1,4 @@
-/**
- * 输入助手的文本合成：把一个基字与若干组合符号合成一个字形。
- *
- * 希腊语这类有预组合字符的文字，`NFC` 会把「基字 + 气符 + 重音」合成一个码位（ἄ）；
- * 希伯来语的元音点是纯组合符，NFC 后仍是「辅音 + 点」，这是该文字正确的存储形态。
- * 因此三种输入模式（修饰符 / 转写 / 键盘）都只调这里的函数，结果完全一致。
- */
+/** 把基字与组合符号合成一个字形。 */
 
 /** 是否组合符（元音点、重音、气符…） */
 export const isMark = (ch) => /\p{M}/u.test(ch)
@@ -32,14 +26,9 @@ function rank(ch, order) {
 }
 
 /**
- * 给光标前的字挂一个符号：同组的旧符号先去掉，再叠上新的，最后 NFC。
- * @param {string} value  整段文本
- * @param {number} caret  光标位置
- * @param {string} groupChars 同组所有符号（用来替换）
- * @param {string} markChar 要加的符号；空串表示「去掉这一组」
- * @param {string} markOrder 所有符号按「组顺序」拼成的串。同一组合类的符号 Unicode 不重排，
- *   只能靠这个把气符排到重音前面，`α + 柔气 + 锐` 才合成得出 ἄ 而不是 ά̓。
- * @returns {{ value: string, caret: number } | null} 光标前没有基字时返回 null
+ * 给光标前的字挂一个符号：同组旧符号先去掉，叠上新的，最后 NFC。
+ * `markOrder` 决定叠加顺序 —— 同一组合类的符号 Unicode 不重排，气符不排在重音前面就合成不出 ἄ。
+ * 光标前没有基字时返回 null。
  */
 export function applyMark(value, caret, groupChars, markChar, markOrder = '') {
     const before = String(value ?? '').slice(0, caret)

@@ -19,8 +19,6 @@ import { createDevTools } from './dev/index.js'
 
 const DEFAULT_THEME = THEMES[0].value
 
-/* ---------------- Shell 渲染 ---------------- */
-
 const NO_HEADER_ROUTES = new Set(['/', '/welcome'])
 const NO_LAYOUT_ROUTES = new Set(['/', '/welcome'])
 
@@ -106,8 +104,6 @@ function renderFatal(message) {
     ))
 }
 
-/* ---------------- 视图加载 ---------------- */
-
 /** 需要输入助手的视图（其余页面没有常驻按钮） */
 const IME_VIEWS = new Set(['words', 'wordNew', 'wordEdit'])
 
@@ -131,8 +127,6 @@ async function loadView(name) {
 }
 
 /** 视图模块约定：export default { needsUser, layout: 'full' | 'shell' | 'main', async mount(ctx) } */
-
-/* ---------------- 路由 ---------------- */
 
 const router = createRouter([
     { path: '/welcome',              view: (ctx) => mountView('welcome',    ctx) },
@@ -201,8 +195,6 @@ async function mountView(name, ctx) {
     applyBreadcrumbs()
     syncHeader()
 }
-
-/* ---------------- 启动 ---------------- */
 
 function hideBootLoader() {
     const el = document.getElementById('boot-loader')

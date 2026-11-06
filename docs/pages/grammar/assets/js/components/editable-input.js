@@ -1,7 +1,4 @@
-/**
- * contenteditable 单行输入框：原生 <input> 没法把原文包进 <bdi>，这里自绘；每次输入重包 bdi 后按字符偏移恢复光标，
- * 输入法组合期间不重建 DOM。el.value / el.placeholder 读写纯文本并触发对应的 on*Change 回调。
- */
+/** 自绘的单行 contenteditable 输入框，支持 bdi 包裹与占位文字。 */
 
 import { h } from '../utils/dom.js'
 import { bdiText, splitScriptRuns } from '../utils/bdi.js'

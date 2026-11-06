@@ -1,7 +1,3 @@
-/**
- * 形态分析浮层：输入任意词形，把各分析源的候选列成卡片；加载源与并发查询在 services/analyze-service.js。
- */
-
 import { h } from '../utils/dom.js'
 import { bdiText } from '../utils/bdi.js'
 import { openModal } from './modal.js'
@@ -41,7 +37,7 @@ export async function openAnalyzeModal({ langCode, langName = '' } = {}) {
     })
 
     const sourceHint = sources.map((s) => s.label).join('、')
-        + ' · 形态分析（只做词形分析，不提供释义）'
+        + ' · 形态分析'
 
     const body = h('div', { class: 'analyze' },
         h('div', { class: 'analyze-query' },

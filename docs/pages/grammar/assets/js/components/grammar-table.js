@@ -4,10 +4,7 @@ import { applyBdi } from '../utils/bdi.js'
 
 const EMPTY_CELL = /^\s*(?:[—–-]|)\s*$/u
 
-/**
- * 单元格是否「没有内容」：空字符串或只有占位破折号。
- * 「—」表示该形式不存在（如 Piel 没有命令式），全空的行/列要整块隐藏。
- */
+/** 「—」表示该形式不存在，空串与破折号都算没有内容 */
 function cellText(value) {
     return value && typeof value === 'object' ? String(value.text ?? '') : String(value ?? '')
 }
@@ -104,12 +101,7 @@ export function createGrammarTable(spec) {
     return h('div', { class: 'grammar-table-wrap' }, table)
 }
 
-/**
- * 一个条目的多张表：多张表时按表分 tab（带 group / groupLabel 时叠成两行 tab），只有一张时直接渲染。
- *
- * @param {object[]} tables 语法 JSON 里的 `item.tables`
- * @param {string}   lang   默认单元格语言（表自己带 `lang` 时优先）
- */
+/** 一个条目的多张表：多张按表分 tab，只有一张时直接渲染。 */
 export function createGrammarTables(tables, lang = null, ownerTitle = '') {
     const entries = (tables || [])
         .map((spec) => ({
@@ -181,10 +173,7 @@ export function createGrammarTables(tables, lang = null, ownerTitle = '') {
     return h('div', { class: 'grammar-tabs' }, groupRow, tableRow, content)
 }
 
-/**
- * 表的 tab 名：示例表带上自己的例词（`示例表：דָּבָר`），其余叫「变化表」，
- * 表自己写了 `roleLabel` 时优先（如代词的后缀表）。
- */
+/** 表的 tab 名：`roleLabel` 优先，示例表带例词，其余叫「变化表」 */
 function tabLabelOf(spec) {
     if (spec && spec.roleLabel) return String(spec.roleLabel)
     if (!spec || spec.role !== 'example') return '变化表'

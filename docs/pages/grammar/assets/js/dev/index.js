@@ -1,7 +1,4 @@
-/**
- * 调试入口：把不面向界面的辅助函数挂到 `window.__ln.dev`，开发时直接在 console 里调。
- * 加新工具就写同目录下的文件，再在这里汇总 —— 不要在界面代码里留调试入口。
- */
+/** 调试入口：把辅助函数挂到 window.__ln.dev。 */
 
 import * as grammar from './grammar.js'
 import { appStore } from '../app-state.js'

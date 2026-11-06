@@ -1,5 +1,3 @@
-/** 内联 SVG 图标：不用 emoji / 特殊字符，避免不同平台字形不一致 */
-
 import { svg } from '../utils/dom.js'
 
 function icon(...children) {
@@ -15,8 +13,6 @@ function icon(...children) {
         'aria-hidden': 'true'
     }, ...children)
 }
-
-/* ---------- 主题 ---------- */
 
 export function themeAutoIcon() {
     return icon(
@@ -46,8 +42,6 @@ export const THEME_ICONS = {
     light: themeLightIcon,
     dark: themeDarkIcon
 }
-
-/* ---------- 通用 ---------- */
 
 export function settingsIcon() {
     return icon(

@@ -3,7 +3,6 @@ import { h, qs } from '../utils/dom.js'
 let activeModal = null
 
 /**
- * @param {object} opts title / body（HTMLElement 或 string）/ actions([{ label, className?, onClick? }]) / closeOnBackdrop / onClose
  * @returns {Function} close
  */
 export function openModal({

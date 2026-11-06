@@ -13,8 +13,6 @@ import { wordId } from '../utils/id.js'
 import { fieldValues } from '../models/grammar.js'
 import { nowIso } from '../utils/date.js'
 
-/* ---------------- 导出 ---------------- */
-
 export async function exportUser(user, settings, words) {
     const payload = buildExportPayload({
         user: { ...user },
@@ -75,8 +73,6 @@ function triggerDownload(url, filename) {
     a.click()
     a.remove()
 }
-
-/* ---------------- 导入 ---------------- */
 
 export async function importUser(source, options = {}) {
     const { mode = 'new', targetUserId = null } = options

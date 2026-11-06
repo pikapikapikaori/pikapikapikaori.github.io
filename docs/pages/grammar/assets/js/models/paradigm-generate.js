@@ -1,7 +1,4 @@
-/**
- * 由「词干 + 词尾」按 derive 规格生成 paradigm 表格；重音、连声等语言学后期处理由调用方传入的 `profile` 负责。
- * 本文件不 import 其它模块：界面上的校验按钮直接 import 它，没有构建步骤。
- */
+/** 按 derive 规格从词干生成形态变形表。 */
 
 /** 词尾允许写成 "-a"，读入时去掉开头的连字符 */
 function endingText(value) {
@@ -28,7 +25,6 @@ function compileRule(rule) {
     }
 }
 
-/** 按顺序套用一组 { pattern, replace, flags } 规则 */
 export function applyRuleList(text, rules) {
     let out = String(text ?? '')
     for (const rule of rules || []) {
@@ -38,10 +34,7 @@ export function applyRuleList(text, rules) {
     return out
 }
 
-/**
- * 归一化 stemForms 的一项：数组 = 直接作用于 base 的规则；
- * `{ from, rules }` = 先取另一个词干变体的结果再套规则（如完成时中动词干）。
- */
+/** `{ from, rules }` 表示先取另一个变体再套规则；给数组则直接作用于 base */
 function readStemForm(entry) {
     if (Array.isArray(entry)) return { from: null, rules: entry }
     if (entry && typeof entry === 'object') {
@@ -88,10 +81,7 @@ function resolveBase(stem, spec, parts, seen, profile) {
     return source ? applyRuleList(source, form.rules) : ''
 }
 
-/**
- * 该词干变体是否「有来源」：用户填的词干、spec 里的字面量、或能由规则（含 headword）推出。
- * 生成前用它判断整张表能否生成 —— 没有来源时不能悄悄退回 base。
- */
+/** 生成前判断整张表能否生成：没有来源的词干不能悄悄退回 base */
 function baseHasSource(stem, spec, parts, seen, profile) {
     if (String(parts.base ?? stem ?? '').trim()) return true
     if (typeof spec?.stems?.base === 'string' && spec.stems.base) return true
@@ -133,11 +123,8 @@ export function previewStem(stem, stemForm, spec, userStems, profile = null) {
     return resolveStem(stem, stemForm, spec, userStems, null, profile)
 }
 
-/**
- * 取某个词干变体的实际词干。来源优先级：用户填的词干 → spec.stems 字面量 → stemForms 规则 → base
- * （再不行才问语言档案的 deriveStems）。规则可链式，`from: 'headword'` 表示拿基本形态作输入
- * （法语 / 德语动词的不定式），让这类词干不必由用户重复填写。
- */
+/** 来源优先级：用户填的 → spec.stems → stemForms 规则 → base，最后才问语言档案。
+ *  `from: 'headword'` 让法语 / 德语的动词词干不必重复填写。 */
 export function resolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const parts = userStems && typeof userStems === 'object' ? userStems : {}
     const key = stemForm || 'base'
@@ -146,7 +133,6 @@ export function resolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const provided = parts[key]
     if (typeof provided === 'string' && provided.trim()) return provided.trim()
 
-    // 类型里直接给出的词干（无法用规则表达时使用）
     const literal = spec?.stems?.[key]
     if (typeof literal === 'string' && literal) return literal
 
@@ -167,7 +153,7 @@ export function resolveStem(stem, stemForm, spec, userStems, seen, profile) {
     return applyRuleList(source, form.rules)
 }
 
-/** 归一化「词干」入参：允许直接给字符串（仅 base）；headword = 基本形态 */
+/** 「词干」入参可以只给字符串（当作 base） */
 export function normalizeStemParts(stem, stems, headword) {
     const out = {}
     if (stems && typeof stems === 'object') {
@@ -190,11 +176,8 @@ export function normalizeStemParts(stem, stems, headword) {
 /* ---------------- 音节与重音（derive.post.accent） ---------------- */
 
 /*
- * derive.post.accent：按音节重新指派重音。词干 + 词尾纯拼接拿不到重音位置，
- * 它由音节数与音节量决定（古希腊语动词用退重音，名词 / 形容词用持续重音）。
- * 词干按基本形态里的样子写（重音照写）；重音落在词尾的类型，词尾自带重音，
- * 该格取词尾侧或词干侧后再按限制法校正。
- * 长音符（ᾱ ῑ ῡ，分解后是组合长音符 U+0304）只是元音长短标注，输出会去掉。
+ * 重音位置由音节数与音节量决定，纯拼接拿不到，只能在拼好之后重排。
+ * 长音符只是元音长短的标注，输出时去掉。
  */
 
 export const ACUTE = '\u0301'
@@ -205,7 +188,6 @@ export const ACCENT_MARKS = [ACUTE, CIRCUMFLEX, '\u0344']
 export const LENGTH_MARKS = [MACRON, BREVE]
 const COMBINING = /\p{M}/u
 
-/** 拆成「字母 + 其后的组合记号」，便于按字母运算 */
 export function toUnits(text) {
     const units = []
     for (const ch of String(text ?? '').normalize('NFD')) {
@@ -249,7 +231,6 @@ export function resolveAccentMode(spec, tableKey, rowKey, colKey) {
             if (typeof row[colKey] === 'string') return row[colKey]
             if (typeof row['*'] === 'string') return row['*']
         }
-        // 该表自己的默认档
         if (typeof value['*'] === 'string') return value['*']
         return ''
     }
@@ -294,9 +275,8 @@ function rulesInRoman(spec, script) {
 }
 
 /**
- * 按词尾规则填表，只填空格子，已有值不覆盖（`overwrite` 为真时覆盖）。
- * 入参：`{ stem | stems, headword, spec, template, existing, profile, script, overwrite }`，
- * 其中 `profile` 是语言档案（`sandhi` / `accent` 或骨架型的 `realize`），`script` 负责转写与原文互转。
+ * 按词尾规则填表，只填空格子；`overwrite` 为真时覆盖。
+ * `profile` 是语言档案，`script` 负责转写与原文互转。
  * @returns {{ paradigm, filled, skipped, skippedTables }}（另有 `variant` / `usedTables` / `noVariant`）
  */
 export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, script, overwrite = false } = {}) {

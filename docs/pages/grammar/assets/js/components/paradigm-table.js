@@ -2,13 +2,7 @@ import { h } from '../utils/dom.js'
 import { applyBdi } from '../utils/bdi.js'
 import { createEditableInput } from './editable-input.js'
 
-/**
- * 通用表格渲染。
- * @param {object} tableTpl 语法 JSON 里的表模板 { key, title, columns: [{ key, label }], rows: [{ key, label, grammarRef?, principal? }] }
- * @param {object} tableData { [rowKey]: { [colKey]: string } }
- * @param {object} options lang / mode（'view' | 'edit'，edit 渲染全部行）/ showTitle / onGrammarRef / editable（{ onChange }）/ hideColumns / hideRows / isDisabledCell
- * @returns {HTMLElement|null}
- */
+/** 通用表格渲染；模板缺列或缺行时返回 null。 */
 export function createParadigmTable(tableTpl, tableData, options = {}) {
     if (!tableTpl || !Array.isArray(tableTpl.columns) || !Array.isArray(tableTpl.rows)) {
         return null

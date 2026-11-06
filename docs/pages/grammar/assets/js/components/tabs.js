@@ -1,10 +1,6 @@
 import { h } from '../utils/dom.js'
 
-/**
- * 纯标签栏（不管理面板），和来源 tab 同一套样式。
- * @param {object} opts items([{ key, label }]) / active（缺省第一个）/ onChange(key) / className
- * @returns {{ el, setActive, getActive }}
- */
+/** 纯标签栏，不管理面板。 */
 export function createTabBar({ items, active = null, onChange = null, className = '' } = {}) {
     const list = (items || []).filter(Boolean)
     let current = list.some((it) => it.key === active) ? active : (list[0]?.key ?? null)
@@ -42,12 +38,7 @@ export function createTabBar({ items, active = null, onChange = null, className 
     }
 }
 
-/**
- * 胶囊标签页（和来源 tab 同一套样式）。所有面板先建好，切换只切 `hidden`，
- * 表单里切换时输入内容与焦点都不会丢。
- * @param {object} opts items([{ key, label, node }]) / active（缺省第一个）/ onChange(key) / className
- * @returns {{ el, setActive, getActive }}
- */
+/** 胶囊标签页：面板先建好后只切 hidden，切换时输入内容与焦点都不丢。 */
 export function createTabGroup({ items, active = null, onChange = null, className = '' } = {}) {
     const list = (items || []).filter((it) => it && it.node)
     let current = list.some((it) => it.key === active) ? active : (list[0]?.key ?? null)

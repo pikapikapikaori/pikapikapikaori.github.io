@@ -1,4 +1,4 @@
-/** Hash 路由：createRouter(routes).start()，路由项形如 { path: '/lang/:lang/words', view: (ctx) => import(...) } */
+/** Hash 路由。 */
 
 import { createEmitter } from './utils/events.js'
 

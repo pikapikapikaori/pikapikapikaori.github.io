@@ -1,6 +1,4 @@
-/**
- * 批量导入生词：解析 JSON（单对象 / 数组 / `{ words: [...] }`）、逐条校验并合并到 store。
- */
+/** 批量导入生词：解析、校验并合并到 store。 */
 
 import { LANGUAGES } from '../data/languages.js'
 import { POS_LIST } from '../config/config.js'
@@ -10,8 +8,6 @@ import { addOrMerge, findByKey } from '../store/word-store.js'
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
 /** 语言 code 集合（LANGUAGES 是启动后才填充的，所以要按需计算） */
 const langValues = () => new Set(LANGUAGES.map((l) => l.code))
-
-/* ---------------- 解析 ---------------- */
 
 export function parseWordJson(text) {
     const s = String(text || '').trim()
@@ -30,8 +26,6 @@ export function parseWordJson(text) {
     }
     return { words: [], error: '无法识别的 JSON 结构（应为对象、数组或 { words: [...] }）' }
 }
-
-/* ---------------- 校验 ---------------- */
 
 export function validateWord(raw) {
     if (!raw || typeof raw !== 'object') return '不是对象'
@@ -59,8 +53,6 @@ export function validateWord(raw) {
     }
     return null
 }
-
-/* ---------------- 导入 ---------------- */
 
 function entryLabel(raw, index) {
     const lemma = raw && raw.lemma ? String(raw.lemma).trim() : '?'

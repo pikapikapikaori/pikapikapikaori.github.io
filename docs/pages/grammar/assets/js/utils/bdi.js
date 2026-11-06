@@ -1,7 +1,4 @@
-/**
- * <bdi> 包裹：书写方向与界面不同的文字（满文竖写、希伯来文 RTL）按 Unicode 字符范围切成片段，
- * 只包命中范围的字符，同一段文本里的中文 / 拉丁转写保持原样。
- */
+/** 按字符范围把原文包进 <bdi>。 */
 
 import { h, frag } from './dom.js'
 import { getLanguage } from '../data/languages.js'

@@ -348,6 +348,39 @@
     color: transparent;
 }
 
+/* 键帽：把「按什么键」直接画在输入框里，不另写一句提示 */
+.ghost-input__key {
+    display: inline-flex;
+    align-items: center;
+    height: 17px;
+    padding: 0 5px;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    background: var(--c-bg-elev);
+    color: var(--c-fg-subtle);
+    font-size: 10.5px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.ghost-input__hint .ghost-input__key {
+    margin-inline-start: var(--sp-2);
+    flex: none;
+}
+
+.ghost-input > .ghost-input__key {
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.ghost-input--space > .input {
+    padding-right: 44px;
+}
+
 /* 单行控件统一高度：显式 height 抵消 input 继承的 line-height 与 select 原生行高的差异 */
 .input,
 .select {

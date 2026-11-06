@@ -8,7 +8,6 @@ import { appStore, setNavContext } from '../app-state.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import { renderMarkdown, scanHeadings } from '../utils/markdown.js'
 import { loadSchema, copyText, downloadMarkdown } from '../services/schema-service.js'
-import { openSelectMenu } from '../components/select-menu.js'
 import { createPageTools } from '../components/page-tools.js'
 import { toast } from '../components/toast.js'
 
@@ -84,30 +83,16 @@ function render(main, { title, docs, index, doc, anchor }) {
     /* ---------------- 头部 ---------------- */
 
     const copyMain = h('button', {
-        class: 'btn btn--primary split-btn__main',
+        class: 'btn btn--primary',
         type: 'button',
         onclick: () => doCopy()
     }, '复制 Markdown')
 
-    const copyCaret = h('button', {
-        class: 'btn btn--primary split-btn__caret',
+    const downloadBtn = h('button', {
+        class: 'btn',
         type: 'button',
-        'aria-haspopup': 'menu',
-        'aria-expanded': 'false',
-        'aria-label': '更多导出方式',
-        onclick: (e) => openSelectMenu({
-            anchor: e.currentTarget,
-            owner: e.currentTarget,
-            items: [
-                { value: 'copy', label: '复制 Markdown' },
-                { value: 'download', label: '下载 .md' }
-            ],
-            onPick: (value) => {
-                if (value === 'download') doDownload()
-                else doCopy()
-            }
-        })
-    }, '▾')
+        onclick: () => doDownload()
+    }, '下载 .md')
 
     async function doCopy() {
         try {
@@ -136,7 +121,7 @@ function render(main, { title, docs, index, doc, anchor }) {
             h('div', { class: 'page-head__sub' }, doc.title)
         ),
         h('div', { class: 'page-head__actions' },
-            h('div', { class: 'split-btn' }, copyMain, copyCaret)
+            copyMain, downloadBtn
         )
     )
 

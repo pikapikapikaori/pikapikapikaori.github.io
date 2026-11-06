@@ -32,7 +32,6 @@ export default {
             { label: '复习' }
         ])
 
-        /* ---------- 数据 ---------- */
         const grammarDoc = await loadGrammar(lang)
         const order = (settings && settings.reviewOrder) || 'mastery-asc'
         const queue = await buildQueue(userId, lang, { order })
@@ -47,15 +46,13 @@ export default {
             statEl
         )
 
-        /* ---------- 空状态 ---------- */
         if (queue.length === 0) {
             statEl.hidden = true
             replace(main,
                 headEl,
                 h('div', { class: 'review-sheet review-sheet--empty' },
                     h('div', { class: 'empty' },
-                        h('div', { class: 'empty__title' }, '暂无词条可复习'),
-                        h('div', { class: 'empty__desc' }, '先添加一些生词，再来复习吧。'),
+                        h('div', { class: 'empty__title' }, '暂无生词可复习'),
                         h('button', {
                             class: 'btn btn--primary',
                             type: 'button',
@@ -67,16 +64,13 @@ export default {
             return
         }
 
-        /* ---------- 状态 ---------- */
         const stats = createSessionStats(queue)
         const wrongWords = []
         let idx = 0
 
-        /* ---------- DOM ---------- */
         const barEl = h('div', { class: 'review-sheet__fill', style: { width: '0%' } })
         const faceWrap = h('div', { class: 'review-face', onclick: () => toggleFace(), title: '点击翻面' })
 
-        /* ---------- 右下角浮动工具：显示短音符 ---------- */
         const tools = createPageTools({
             lang,
             toRoman: null,
@@ -107,8 +101,6 @@ export default {
             ),
             hintEl
         )
-
-        /* ---------- 渲染函数 ---------- */
 
         function renderStats() {
             const left = Math.max(0, stats.total - stats.done)
@@ -264,8 +256,6 @@ export default {
             )
         }
 
-        /* ---------- 键盘 ---------- */
-
         function onKey(e) {
             const t = e.target
             if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return
@@ -291,7 +281,6 @@ export default {
         }
         document.addEventListener('keydown', onKey)
 
-        /* ---------- 首屏 ---------- */
         renderStats()
         renderActions()
         renderCard()

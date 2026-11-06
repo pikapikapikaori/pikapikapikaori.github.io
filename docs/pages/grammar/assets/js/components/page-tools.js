@@ -13,10 +13,8 @@ function findScroller(start) {
 }
 
 /**
- * 页面右下角的浮动工具：回到顶部 + 显示转写（无 toRoman 时不渲染）+ 显示短音符（只有拉丁语 / 古希腊语有）。
- * 两个开关的状态都按语言存 localStorage。
- * @param {object} options lang / toRoman（(text) => string | null）/ onChange(on) / onBreveChange(on) / anchorEl
- * @returns {{ el: HTMLElement, isOn: () => boolean, isBreveOn: () => boolean, destroy: () => void }}
+ * 右下角浮动工具：回到顶部 + 显示转写 + 显示短音符，开关状态按语言存 localStorage。
+ * @returns {{ el, isOn, isBreveOn, destroy }}
  */
 export function createPageTools({ lang, toRoman = null, onChange = null, onBreveChange = null, anchorEl = null } = {}) {
     const key = `ln.roman.${lang}`

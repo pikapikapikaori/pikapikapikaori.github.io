@@ -1,7 +1,4 @@
-/**
- * 外部请求的响应缓存（IndexedDB）：键是完整请求 URL，值形如 `{ key, url, type, body, storedAt, expiresAt }`；
- * 只做读 / 写 / 清，什么时候用由 services/http.js 决定。
- */
+/** 外部请求的响应缓存（IndexedDB）。 */
 
 import { STORE_HTTP_CACHE, get, put, withStore, clearStore } from './db.js'
 

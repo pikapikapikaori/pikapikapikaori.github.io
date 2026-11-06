@@ -101,7 +101,7 @@ export default {
             row('界面字体', '内置 / 系统 / 本地',
                 fontControl()
             ),
-            row('字号', '只影响文字，间距不变',
+            row('字号', null,
                 selectControl(
                     FONT_SIZES.map((f) => ({ value: f.value, label: f.label })),
                     getStoredFontSize(),
@@ -119,7 +119,7 @@ export default {
                     async (v) => { await patchSettings({ pageSize: Number(v) }) }
                 )
             ),
-            row('复习顺序', '影响随机卡片队列',
+            row('复习顺序', null,
                 selectControl(
                     REVIEW_ORDERS.map((r) => ({ value: r.value, label: r.label })),
                     settings.reviewOrder,
@@ -131,13 +131,13 @@ export default {
         /* ---------- 用户设置 ---------- */
         container.appendChild(buildSection('用户设置',
             row('用户名', '不可含空格；改完失焦即保存', nameInput),
-            row('导出 JSON', '导出当前用户全部语言的全部词条与设置',
+            row('导出 JSON', null,
                 h('button', {
                     class: 'btn btn--primary', type: 'button',
                     onclick: doExport
                 }, '导出')
             ),
-            row('导入 JSON', '词条按唯一键合并，不会覆盖复习记录',
+            row('导入 JSON', '按语言 + 基本形态 + 词性合并，复习记录保留',
                 h('label', { class: 'btn', style: { cursor: 'pointer' } },
                     '选择文件',
                     h('input', {
@@ -148,7 +148,7 @@ export default {
                     })
                 )
             ),
-            row('清空当前用户数据', '删除本用户全部词条与设置，用户本身也会删除，不可恢复',
+            row('清空当前用户数据', null,
                 h('button', {
                     class: 'btn btn--danger', type: 'button',
                     onclick: doClearUser
@@ -159,7 +159,7 @@ export default {
         /* ---------- 语法数据 ---------- */
         container.appendChild(buildSection('语法数据',
             row('校验语法 JSON',
-                '逐个检查全部语言：结构（字段 / 锚点 id / 跨字段引用）与 derive 规则（按词干生成表格后与 expect 比对）',
+                '检查全部语言的结构与词形生成规则',
                 h('button', {
                     class: 'btn', type: 'button',
                     onclick: (e) => doVerifyGrammar(e.currentTarget)
@@ -169,7 +169,7 @@ export default {
 
         /* ---------- 关于 ---------- */
         container.appendChild(buildSection('关于',
-            row('数据存储', '所有数据存放在浏览器本地 IndexedDB，不上传任何服务器', null),
+            row('数据存储', '只存在本机浏览器，不联网上传', null),
             row('版本', 'v1', null)
         ))
 
@@ -279,7 +279,7 @@ export default {
 
             const ok = await confirmModal({
                 title: '导入 JSON',
-                message: '词条按「语言 + 基本形态 + 词性」合并；已有复习记录不会被覆盖。继续？',
+                message: '同一语言、同一基本形态与词性的生词会合并，复习记录保留。继续？',
                 confirmLabel: '导入'
             })
             if (!ok) return
@@ -323,7 +323,7 @@ export default {
         async function doClearUser() {
             const ok = await confirmModal({
                 title: '清空当前用户数据',
-                message: `将删除「${user.name}」的全部词条与设置，用户本身也会被删除。此操作不可恢复。`,
+                message: `将删除「${user.name}」的全部生词与设置，用户也会被删除。此操作不可恢复。`,
                 confirmLabel: '清空并删除',
                 danger: true
             })

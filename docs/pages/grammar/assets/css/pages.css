@@ -485,11 +485,6 @@
     grid-template-columns: 11.5rem minmax(0, 1fr);
 }
 
-.word-form__table-hint {
-    display: block;
-    margin-top: var(--sp-2);
-}
-
 .word-form__extras > .field + .field {
     margin-top: var(--sp-3);
     padding-top: var(--sp-3);

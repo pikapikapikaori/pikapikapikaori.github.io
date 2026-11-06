@@ -1,10 +1,4 @@
-/**
- * 极简 Markdown → DOM：只覆盖文档里真正用到的子集
- * （标题 / 段落 / 有序无序列表（含嵌套）/ 表格 / 围栏代码 / 引用 / 分隔线 / 行内 code 与强调与链接）。
- *
- * 全程构造 DOM 节点，不拼 innerHTML。标题 id 按 GitHub 的 slug 规则生成，
- * 这样文档里原有的 `[文字](#锚点)` 链接不用改写就能继续用。
- */
+/** 极简 Markdown → DOM，只覆盖文档里用到的子集。 */
 
 import { h } from './dom.js'
 
@@ -51,8 +45,6 @@ export function scanHeadings(source) {
 }
 
 /**
- * @param {string} source Markdown 原文
- * @param {{ onHeading?: (info: { level: number, id: string, text: string }) => void }} options
  * @returns {DocumentFragment}
  */
 export function renderMarkdown(source, { onHeading = null } = {}) {
@@ -66,8 +58,6 @@ export function renderMarkdown(source, { onHeading = null } = {}) {
     }
     return frag
 }
-
-/* ---------------- 块级 ---------------- */
 
 function parseBlock(lines, i, parent, ctx) {
     const line = lines[i]
@@ -266,8 +256,6 @@ function leadingSpaces(line) {
     const m = /^ */.exec(line)
     return m ? m[0].length : 0
 }
-
-/* ---------------- 行内 ---------------- */
 
 /** 行内记号：每次调用都新建正则 —— inline() 会递归，共用同一个实例会串 lastIndex */
 const INLINE_SOURCE = '(<kbd>[^<\\n]+</kbd>)|(`[^`\\n]+`)|(\\*\\*[^*\\n]+\\*\\*)|(\\*[^*\\n]+\\*)|(\\[[^\\]\\n]+\\]\\([^)\\s]+\\))'

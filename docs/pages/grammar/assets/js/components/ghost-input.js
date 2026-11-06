@@ -1,15 +1,12 @@
-/**
- * 带提示层的 contenteditable 输入框：输入是推导值前缀时用灰字补齐剩余部分，否则显示 placeholder。
- * 提示层与输入框分两层，原文始终带 <bdi lang dir>。
- */
+/** 带灰字补全与键帽提示的输入框。 */
 
 import { h } from '../utils/dom.js'
 import { bdiText } from '../utils/bdi.js'
 import { createEditableInput } from './editable-input.js'
 
 /**
- * @param {object} options value / lang / bdiLang（只改 bdi 判定语言）/ dir / className / placeholder / dataset / disabled / getGhost（每次刷新时调用）/ onInput
- * @returns {{ el: HTMLElement, input: HTMLElement, refresh: () => void }}
+ * `spaceKey` 为真时右缘挂「空格」键帽；有补全时灰字尾部挂「Tab」。
+ * @returns {{ el, input, refresh }}
  */
 export function createGhostInput({
     value = '',
@@ -21,6 +18,7 @@ export function createGhostInput({
     dataset = null,
     disabled = false,
     getGhost = null,
+    spaceKey = false,
     onInput = null
 } = {}) {
     const scriptLang = bdiLang || lang
@@ -44,7 +42,9 @@ export function createGhostInput({
         }
     })
 
-    const el = h('span', { class: 'ghost-input' }, hint, input)
+    const showSpaceKey = spaceKey && !disabled
+    const el = h('span', { class: showSpaceKey ? 'ghost-input ghost-input--space' : 'ghost-input' }, hint, input,
+        showSpaceKey ? h('span', { class: 'ghost-input__key', 'aria-hidden': 'true' }, '空格') : null)
 
     /** 当前的推导值 */
     function ghostTarget() {
@@ -80,7 +80,8 @@ export function createGhostInput({
             hint.hidden = false
             hint.replaceChildren(
                 h('span', { class: 'ghost-input__typed' }, bdiText(current, scriptLang)),
-                h('span', { class: 'ghost-input__rest' }, bdiText(target.slice(current.length), scriptLang))
+                h('span', { class: 'ghost-input__rest' }, bdiText(target.slice(current.length), scriptLang)),
+                h('span', { class: 'ghost-input__key ghost-input__key--tab', 'aria-hidden': 'true' }, 'Tab')
             )
             return
         }

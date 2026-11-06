@@ -1,7 +1,4 @@
-/**
- * 调试用：语法数据的结构校验 + derive 自检，结果直接打在 console 里。
- * 只在 `__ln.dev` 下暴露，界面不引用。
- */
+/** 调试用：语法数据的结构校验与 derive 自检。 */
 
 import { GRAMMAR_FILES } from '../config/config.js'
 import {
@@ -79,8 +76,6 @@ export function clearGrammarCache(code) {
     clearProfileCache(code)
     clearScriptProfileCache(code)
 }
-
-/* ---------------- 输出 ---------------- */
 
 function printReport(items) {
     const rows = items.map((item) => ({

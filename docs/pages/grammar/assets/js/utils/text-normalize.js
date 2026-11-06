@@ -1,9 +1,4 @@
-/**
- * 文本工具：检索用「大小写 + 变音符号 / 气符不敏感」的规范化（NFD 分解 → 去组合标记 → 小写 → 词尾 sigma 归并）；
- * 唯一键、查重仍严格区分大小写与变音符号，不受本文件影响。
- */
-
-/* ---------------- 规范化 ---------------- */
+/** 搜索用的规范化：忽略大小写与附加符号；唯一键与查重仍严格比较。 */
 
 export function normalizeSearch(s) {
     return String(s ?? '')
@@ -32,8 +27,6 @@ export function normalizeSearchWithMap(s) {
     }
     return { norm, map }
 }
-
-/* ---------------- 匹配 ---------------- */
 
 /** 返回原文中的匹配区间 [[start, end], ...] */
 export function matchRangesNorm(text, query) {
@@ -77,8 +70,6 @@ export function highlight(text, query) {
     if (cursor < t.length) frag.appendChild(document.createTextNode(t.slice(cursor)))
     return frag
 }
-
-/* ---------------- 语言辅助 ---------------- */
 
 export function toStringArray(v) {
     if (Array.isArray(v)) return v.map((x) => String(x ?? '').trim()).filter(Boolean)

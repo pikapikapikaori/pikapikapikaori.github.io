@@ -52,7 +52,7 @@ export default {
                 h('div', {},
                     h('h1', { class: 'page-head__title' }, '语言列表'),
                     h('div', { class: 'page-head__sub' },
-                        `${user.name} · 共 ${all.length} 条词 · ${byLang.size} 个语言`
+                        `${user.name} · ${all.length} 个生词 · ${byLang.size} 种语言`
                     )
                 ),
                 h('div', { class: 'page-head__actions' },
@@ -149,7 +149,7 @@ export default {
                                 formatRelative(bucket.last))
                             : null
                     ]
-                    : h('span', { class: 'lang-card__stat lang-card__stat--empty' }, '暂无词条')
+                    : h('span', { class: 'lang-card__stat lang-card__stat--empty' }, '暂无生词')
             )
             )
 

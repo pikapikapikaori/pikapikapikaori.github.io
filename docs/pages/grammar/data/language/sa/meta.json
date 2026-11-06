@@ -29,30 +29,35 @@
   "vertical": false,
   "rtl": false,
   "terms": {
-    "inflectionType": "变格 / 变位类型",
-    "inflectionTypePlaceholder": "变格 / 变位类型说明（如：第一变位法）",
-    "inflectionTypeHint": "显示在词卡正面的徽章。",
-    "special": "特殊变格（自行填写）",
-    "indeclinable": "不变格",
-    "paradigmTitle": "{pos}变格表格",
-    "anchorHint": "选具体条目可跳转语法速查；选「特殊」则自行填写类型说明。",
+    "inflectionType": "变形类型",
+    "inflectionTypePlaceholder": "如：a 词干阳性",
+    "special": "特殊变形",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}变形表",
     "extraForms": "补充形式",
     "stems": {
       "label": "词干",
-      "placeholder": "词干，如 काम्、अग्नि、राज्",
-      "hint": "词干 = 不带词尾的形式（连声前的词干）：काम- 填 काम्、अग्नि- 填 अग्नि、राजन्- 填 राज्。词尾由变格类型补上，末尾的「-」只是显示用，不用填。"
+      "placeholder": "词干，如 काम्",
+      "hint": "填不带词尾的词干。"
     },
-    "extraPartsHint": "以下词干按实际情况填写；该类型没有的可以留空。",
     "byPos": {
       "verb": {
-        "special": "特殊变位（自行填写）",
+        "special": "特殊变位",
         "indeclinable": "不变位",
-        "paradigmTitle": "{pos}变位表格",
+        "paradigmTitle": "{pos}变位表",
         "stems": {
           "label": "词根",
-          "placeholder": "词根，如 √भू",
-          "hint": "填词根，不带 √，如 भू。"
-        }
+          "placeholder": "词根，如 भू"
+        },
+        "inflectionType": "变位类型",
+        "inflectionTypePlaceholder": "如：现在时主动"
+      },
+      "noun": {
+        "inflectionType": "变格类型",
+        "special": "特殊变格",
+        "indeclinable": "不变格",
+        "paradigmTitle": "{pos}变格表",
+        "inflectionTypePlaceholder": "如：a 词干阳性"
       }
     },
     "lemma": {
@@ -66,14 +71,12 @@
     "tags": "标签",
     "notes": "备注",
     "others": "其他",
-    "paradigmTable": "变格 / 变位",
+    "paradigmTable": "形态变形",
     "optionalSuffix": "（可选）",
     "add": "＋ 添加",
     "addMeaning": "＋ 添加含义",
     "posLabel": "词性",
-    "anchorLabel": "语法锚点",
-    "lemmaHint": "唯一键的一部分，同一语言下必须唯一。编辑时不可修改。",
-    "paradigmHint": "仅填写你需要的形式，空白格不渲染",
+    "anchorLabel": "语法条目",
     "meaningPlaceholder": "含义",
     "emptyMeanings": "该来源还没有含义",
     "inflectionGroupPlaceholder": "分组（可选）",
@@ -86,11 +89,10 @@
     "exampleTextPlaceholder": "例句原文",
     "exampleCitationPlaceholder": "出处",
     "exampleTranslationPlaceholder": "含义",
-    "derivativeSearchLabel": "搜索词条",
-    "derivativeSearchPlaceholder": "搜索本语言词库（基本形态 / 词干）…",
+    "derivativeSearchLabel": "搜索生词",
+    "derivativeSearchPlaceholder": "搜索基本形态或词干…",
     "derivativeEmptyHint": "尚未选择派生词",
-    "derivativeSearchHint": "只能选择词库中已存在的词",
-    "tagsPlaceholder": "标签，用逗号分隔（如 高频, 文献A）",
+    "tagsPlaceholder": "高频, 文献A",
     "notesPlaceholder": "备注"
   },
   "files": {

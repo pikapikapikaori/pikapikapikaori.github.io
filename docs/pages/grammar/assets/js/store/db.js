@@ -1,4 +1,4 @@
-/** IndexedDB 封装：库名 langnotebook，当前版本 2；store 与索引都在 upgrade() 里创建 */
+/** IndexedDB 封装：库名 langnotebook，当前版本 2。 */
 
 export const DB_NAME = 'langnotebook'
 export const DB_VERSION = 2
@@ -62,8 +62,6 @@ function upgrade(db, oldVersion) {
     }
     // 新增版本时在此追加 if (oldVersion < 3) {...}
 }
-
-/* ---------- 基础请求封装 ---------- */
 
 function reqToPromise(req) {
     return new Promise((resolve, reject) => {

@@ -1,8 +1,4 @@
-/**
- * 语法数据加载（只读）。
- * 数据位于 /data/language/{lang}/：meta.json（元信息 + 章节索引）、grammar/paradigms.json、
- * grammar/{chapter}.json（一章一个文件，文件名 = 章节 id）。
- */
+/** 语法数据加载（只读）。 */
 
 import { GRAMMAR_FILES } from '../config/config.js'
 import { isGrammarDoc, grammarFlags, validateGrammarDoc } from '../models/grammar.js'
@@ -49,7 +45,6 @@ export function loadGrammarMeta(language) {
     return p
 }
 
-/** 一章的 sections */
 export function loadChapter(language, chapterId) {
     if (!language || !chapterId) return Promise.resolve([])
     const key = `${language}/${chapterId}`
@@ -72,7 +67,6 @@ export function loadChapter(language, chapterId) {
     return p
 }
 
-/** 把 meta + paradigms + 若干章组装成运行时统一使用的 doc 形状 */
 function assemble(meta, paradigms, chapterSections) {
     const doc = {}
     for (const [key, value] of Object.entries(meta)) {
@@ -91,7 +85,6 @@ function assemble(meta, paradigms, chapterSections) {
     return doc
 }
 
-/** 把一次校验结果打给 console：errors 用 error，warnings 用 warn */
 function logReport(scope, code, { errors, warnings }) {
     for (const e of errors) console.error(`[${scope}] ${code}: ${e}`)
     for (const w of warnings) console.warn(`[${scope}] ${code}: ${w}`)
@@ -160,8 +153,6 @@ export async function loadGrammarForChapter(language, chapterId) {
     logReport('grammar', language, report)
     return report.errors.length ? null : doc
 }
-
-/* ---------- 语言档案（derive 的语言专属后期处理） ---------- */
 
 const profiles = new Map()
 const scriptProfiles = new Map()  // lang -> profile | null
@@ -245,17 +236,9 @@ export function clearCache(language) {
 }
 
 /**
- * 逐个语言跑「结构校验 + derive 自检」，供设置页的「校验语法 JSON」按钮用。
- *
- * 与 `loadGrammar()` 的区别：这里直接抓 JSON，不走缓存、也不因为有 error 就中止，
- * 坏文件同样要能报出来。每个语言之间让出一帧，避免 sa / grc 的 derive 试算（约 100ms）
- * 把界面卡住。
- *
- * @returns {Promise<Array<{
- *   code, name,
- *   structure: { errors: string[], warnings: string[] },
- *   derive: { specs, checked, errors, warnings, skipped? }
- * }>>}
+ * 逐个语言跑结构校验与 derive 自检，供设置页使用。不走缓存、出错也不中止，坏文件同样要报出来。
+ * 每个语言之间让出一帧，避免 derive 试算把界面卡住。
+ * @returns {Promise<Array<{ code, name, structure, derive }>>}
  */
 export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FILES } = {}) {
     const list = [...codes]
@@ -347,7 +330,6 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
     return out
 }
 
-/* ---------- 从 models/grammar.js re-export，方便视图层统一从 service 引入 ---------- */
 export {
     getParadigmTemplate,
     getDeriveSpec,

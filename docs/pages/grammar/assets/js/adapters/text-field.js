@@ -1,10 +1,4 @@
-/**
- * 输入框适配器：把 <input> / <textarea> / 自绘 contenteditable（editable-input）统一成
- * 「读值 / 写值 / 取光标 / 设光标」四件事，输入助手只认这一层。
- *
- * contenteditable 的偏移量按逻辑字符算（与 editable-input 的 caretOffset 同一套算法），
- * 这样希腊语、希伯来语的组合符不会把光标算错。
- */
+/** 输入框适配器：把 input / textarea / contenteditable 统一成读值、写值、取光标、设光标。 */
 
 function caretOffsetOfEditable(el) {
     const sel = window.getSelection()

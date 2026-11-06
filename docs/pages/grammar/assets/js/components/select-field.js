@@ -1,7 +1,4 @@
-/**
- * 自绘下拉：原生 <select> 收起态是浏览器画选中项的文字，没法包 <bdi>，这里换成「按钮 + 自绘列表」，
- * 展开的列表复用 select-menu.js。用法贴近 <select>：el.value / el.disabled / change 事件 / el.setOptions()。
- */
+/** 自绘下拉：按钮 + 列表，用法贴近 <select>。 */
 
 import { h } from '../utils/dom.js'
 import { bdiText } from '../utils/bdi.js'
@@ -23,9 +20,6 @@ function normalizeOption(option) {
 }
 
 /**
- * @param {object} options options（[{ value, label, group?, title?, display? }] 或字符串数组，也可以是返回它们的函数——每次展开时重算）
- *   / value / lang / className / disabled
- *   / nowrap（展开列表里条目单行，超长省略；收起态始终省略）/ onChange(value)
  * @returns {HTMLButtonElement} 触发按钮，额外挂了 value / setOptions
  */
 export function createSelect({

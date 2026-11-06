@@ -1,18 +1,9 @@
-/**
- * JSON 输入区：拖拽 / 选择文件 / 粘贴文本，下面一行识别提示。右侧可插入动作按钮。
- * 「从 JSON 导入生词」与 welcome 的「导入用户 JSON」共用它，保证两处结构一致。
- */
+/** JSON 输入区：拖拽、选文件或粘贴，右侧可放动作按钮。 */
 
 import { h, svg } from '../utils/dom.js'
 import { toast } from './toast.js'
 
 /**
- * @param {object} options
- * @param {string} options.label       左上角标题，默认「上传或粘贴 JSON」
- * @param {string} options.placeholder textarea 占位文字
- * @param {Node[]} options.actions     标题行右侧的按钮
- * @param {(text: string) => { message?: string, error?: string }} [options.validate]
- * @param {() => void} [options.onChange] 内容变化时调用（用来作废旧的预览结果）
  * @returns {{ el: HTMLElement, textarea: HTMLTextAreaElement, getValue: () => string }}
  */
 export function createJsonInput({

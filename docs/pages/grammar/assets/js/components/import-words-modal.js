@@ -1,5 +1,3 @@
-/** 批量导入生词模态框 */
-
 import { h } from '../utils/dom.js'
 import { openModal } from './modal.js'
 import { toast } from './toast.js'
@@ -12,8 +10,6 @@ export function openImportWordsModal({
     onDone = null,
     title = '批量导入生词'
 } = {}) {
-
-    /* ---------- 表单 ---------- */
 
     const previewEl = h('div', { class: 'import-preview', hidden: true })
 
@@ -43,16 +39,8 @@ export function openImportWordsModal({
 
     const body = h('div', { class: 'import-words-body' },
         input.el,
-        previewEl,
-        h('div', { class: 'field__hint' },
-            '支持「单对象 / 数组 / { words: [...] }」三种格式。',
-            '每条记录需包含 language、lemma、pos 字段。',
-            '同语言下 lemma + pos 相同的词条会自动合并，记录次数 +1。',
-            '可先点「预览」查看新增 / 合并 / 跳过三类计数。'
-        )
+        previewEl
     )
-
-    /* ---------- 打开 ---------- */
 
     let previewing = false
 
@@ -127,8 +115,6 @@ export function openImportWordsModal({
     return close
 }
 
-/* ---------------- 导入前预览 ---------------- */
-
 function renderPreview(stats, container) {
     const { created, merged, skipped, total, errors, items } = stats
 
@@ -175,8 +161,6 @@ function renderErrors(errors) {
         )
     )
 }
-
-/* ---------------- 结果面板 ---------------- */
 
 function renderResult(stats, closeFn) {
     const { created, merged, skipped, total, errors } = stats

@@ -1,7 +1,4 @@
-/**
- * 输入助手的数据加载：语言自己的 ime.js（键盘 / 符号 / 适用性）+ script.js（双向转写）。
- * 两者都在 data/language/<code>/ 下，登记在 meta.json 的 files 里；没有 ime.js 的语言就没有助手。
- */
+/** 输入助手的数据加载：ime.js 与 script.js。 */
 
 import { loadGrammarMeta, loadScriptProfile } from './grammar-service.js'
 
@@ -10,12 +7,7 @@ const pending = new Map()
 
 const LANGS_BASE = new URL('../../../data/language/', import.meta.url)
 
-/**
- * @returns {Promise<null | {
- *   code, name, placeholderBase, cased, marks, applies,
- *   keyboard, translit, toScript, toRoman, translitHint
- * }>}
- */
+/** @returns {Promise<null | object>} 该语言 ime.js 的导出对象 */
 export function loadIme(code) {
     if (!code) return Promise.resolve(null)
     if (cache.has(code)) return Promise.resolve(cache.get(code))

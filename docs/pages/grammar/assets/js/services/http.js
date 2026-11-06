@@ -1,15 +1,9 @@
-/**
- * 统一 HTTP 层：超时 / 重试 / 按 origin 节流 / IndexedDB 响应缓存，与具体数据源无关。
- * 调用方用 `requestJSON(url, { query, timeout, retries, minInterval, concurrency, cacheTtl, headers, signal })` 声明参数；
- * 节流按 origin 全局生效：不同源请求同一个站点也会排队。
- */
+/** 统一的 HTTP 层：超时、重试、按站点节流、响应缓存。 */
 
 import { readCache, writeCache } from '../store/http-cache.js'
 
 const DEFAULT_TIMEOUT = 15000
 const DEFAULT_RETRIES = 2
-
-/* ---------------- 同站点队列 ---------------- */
 
 const queues = new Map()   // origin -> OriginQueue
 
@@ -64,8 +58,6 @@ function queueFor(url) {
     if (!queues.has(origin)) queues.set(origin, new OriginQueue())
     return queues.get(origin)
 }
-
-/* ---------------- 单次请求 ---------------- */
 
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
@@ -144,8 +136,6 @@ async function request(url, { timeout, retries, headers, minInterval, concurrenc
         }
     }
 }
-
-/* ---------------- 对外接口 ---------------- */
 
 function buildUrl(url, query) {
     const u = new URL(url)

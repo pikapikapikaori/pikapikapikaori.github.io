@@ -1,16 +1,12 @@
 import { resolveDeriveSpec } from './paradigm-generate.js'
 import { POS_LIST } from '../config/config.js'
 
-/** 语法数据结构（只读）：顶层 version / language / paradigms / sections，section 下挂 items */
+/** 语法文档：version / language / paradigms / sections，section 下挂 items */
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
 
 /**
- * 结构校验：类型、必需字段、id 唯一性、跨字段引用。纯同步，不跑 derive。
- *
- * 加载时用它拦下坏文件（有 errors 就不加载）；设置页的「校验语法 JSON」也用它，
- * 与 `verifyGrammarDoc()`（derive 试算）一起构成两段式自检。
- *
+ * 结构校验：类型、必需字段、id 唯一、跨字段引用。加载时用它拦坏文件，设置页也用它。
  * @returns {{ errors: string[], warnings: string[] }}
  */
 export function validateGrammarDoc(lang, doc) {
@@ -263,21 +259,19 @@ export function getParadigmTemplate(doc, pos) {
  */
 const TERM_KEYS = [
     // 形态变形相关的界面用词
-    'inflectionType', 'inflectionTypePlaceholder', 'inflectionTypeHint',
-    'special', 'indeclinable', 'paradigmTitle', 'anchorHint', 'extraForms',
-    'extraPartsHint',
+    'inflectionType', 'inflectionTypePlaceholder',
+    'special', 'indeclinable', 'paradigmTitle', 'extraForms',
     // 分区标题（表单 / 词卡 / 复习共用）
     'meanings', 'collocations', 'examples', 'derivatives', 'tags', 'notes', 'others',
     'paradigmTable', 'optionalSuffix', 'add', 'addMeaning',
     // 生词表单的字段标签、placeholder 与提示
-    'posLabel', 'anchorLabel', 'lemmaHint', 'paradigmHint',
+    'posLabel', 'anchorLabel',
     'meaningPlaceholder', 'emptyMeanings',
     'inflectionGroupPlaceholder', 'inflectionLabelPlaceholder', 'inflectionFormPlaceholder',
     'collocationTextPlaceholder', 'collocationGlossPlaceholder', 'emptyCollocations',
     'exampleTextPlaceholder', 'exampleCitationPlaceholder', 'exampleTranslationPlaceholder',
     'emptyExamples',
     'derivativeSearchLabel', 'derivativeSearchPlaceholder', 'derivativeEmptyHint',
-    'derivativeSearchHint',
     'tagsPlaceholder', 'notesPlaceholder',
 ]
 

@@ -111,8 +111,6 @@ export default {
         function applyTerms() {
             const t = currentTerms()
             inflectionTypeLabelEl.textContent = t.inflectionType
-            inflectionTypeHintEl.replaceChildren(hintText(t.inflectionTypeHint))
-            anchorHintEl.replaceChildren(hintText(t.anchorHint))
             inflectionLabel.placeholder = t.inflectionTypePlaceholder
             refreshStemsText()
             const extra = form.querySelector('.js-extra-forms-title')
@@ -133,11 +131,12 @@ export default {
         // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写。
         // 注意第二个参数是 meta（要读 meta.files.script），不是 grammar 文档。
         const scriptProfile = await loadScriptProfile(lang, grammarMeta)
+        const hasScript = typeof scriptProfile?.toScript === 'function'
 
         const data = isEdit ? await loadForEdit(editId) : emptyData()
         if (isEdit && !data) {
             replace(main, h('div', { class: 'empty' },
-                h('div', { class: 'empty__title' }, '词条不存在'),
+                h('div', { class: 'empty__title' }, '生词不存在'),
                 h('button', {
                     class: 'btn btn--primary',
                     type: 'button',
@@ -282,6 +281,7 @@ export default {
 
         const lemmaField = createGhostInput({
             value: data.lemma,
+            spaceKey: hasScript,
             lang,
             placeholder: currentTerms().lemma.placeholder,
             disabled: isEdit,
@@ -323,7 +323,7 @@ export default {
             const has = Boolean(lemmaInput.value.trim()) && externalSources.length > 0
             lookupBtn.disabled = !has
             lookupBtn.title = has
-                ? '从所有外部来源获取语法性、变格变位类型、语法锚点、词干与含义'
+                ? '从外部来源查询'
                 : '请先填写基本形态'
         }
 
@@ -456,6 +456,7 @@ export default {
 
         const principalField = createGhostInput({
             value: data.stems.base || '',
+            spaceKey: hasScript,
             lang,
             placeholder: currentTerms().stems.placeholder,
             getGhost: () => derivedBase(),
@@ -567,13 +568,8 @@ export default {
             return group
         }
 
-        // 语法锚点下拉：特殊变格/变位 + 语法速查条目
-
         form.appendChild(h('div', { class: 'word-form__row word-form__card' },
-            fieldRow(termNode('lemma.label'), lemmaField.el, {
-                extras: [h('span', { class: 'field__hint' }, termNode('lemmaHint'))],
-                lang
-            }),
+            fieldRow(termNode('lemma.label'), lemmaField.el),
             fieldRow(termNode('posLabel'), h('div', { class: 'field__row' },
                 posSelect,
                 externalSources.length ? lookupBtn : null
@@ -581,13 +577,10 @@ export default {
         ))
 
         const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)
-        const inflectionTypeHintEl = h('span', { class: 'field__hint' }, hintText(currentTerms().inflectionTypeHint))
-        const anchorHintEl = h('span', { class: 'field__hint' }, hintText(currentTerms().anchorHint))
-        // 语法性之类的属性 + 类型 + 锚点：一行放不下时自适应换行
         const inflectionRow = h('div', { class: 'word-form__panel' },
             genderSlot,
-            fieldRow(termNode('anchorLabel'), inflectionRef, { extras: [anchorHintEl] }),
-            fieldRow(inflectionTypeLabelEl, inflectionField.el, { extras: [inflectionTypeHintEl] })
+            fieldRow(termNode('anchorLabel'), inflectionRef),
+            fieldRow(inflectionTypeLabelEl, inflectionField.el)
         )
 
         const stemsLabelEl = h('span', { class: 'field__label' }, currentTerms().stems.label)
@@ -754,9 +747,6 @@ export default {
                 return
             }
 
-            extraPartsSlot.appendChild(h('div', { class: 'field__hint' },
-                hintText(currentTerms().extraPartsHint)))
-
             for (const part of parts) {
                 const setValue = (raw) => {
                     const value = String(raw ?? '').trim()
@@ -791,6 +781,7 @@ export default {
                         return ghost
                     })(createGhostInput({
                         value: data.stems[part.key] || '',
+                        spaceKey: hasScript,
                         lang,
                         dataset: { partKey: part.key },
                         getGhost: () => derivedPart(part.key),
@@ -913,7 +904,7 @@ export default {
             const missing = missingRequiredParts(spec)
             generateBtn.disabled = !canGenerate || !hasStem || missing.length > 0
             if (!canGenerate) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
-            else if (!hasStem) generateBtn.title = '请先填写词干'
+            else if (!hasStem) generateBtn.title = '请先填写：词干'
             else if (missing.length) generateBtn.title = `请先填写：${missing.join('、')}`
             else generateBtn.title = '按词干和词尾规则自动填表（会覆盖已填内容）'
             return missing
@@ -927,7 +918,7 @@ export default {
             // 没有「词干」输入框的语言（日语）：直接用基本形态推导出的 base
             const stem = normalizeStem(principalInput.value) || derivedBase()
             if (!stem) {
-                toast.error(stemsBlock.hidden ? '请先填写基本形态' : '请先填写词干')
+                toast.error(stemsBlock.hidden ? '请先填写：基本形态' : '请先填写：词干')
                 if (!stemsBlock.hidden) principalInput.focus()
                 else lemmaInput.focus()
                 return
@@ -969,7 +960,7 @@ export default {
             })
 
             if (noVariant) {
-                toast.error('按基本形态判不出元音模式，请检查基本形态的元音点，或手动填表', 6000)
+                toast.error('判不出元音模式，请检查元音点', 6000)
                 return
             }
 
@@ -994,7 +985,7 @@ export default {
                 const detail = skippedTables
                     .map((x) => `${titleOf(x.tableKey)}（缺 ${x.missing.join('、')}）`)
                     .join('、')
-                toast.info(`已生成 ${filled.length} 格；以下表格因缺少词干，未生成并已清空：${detail}`, 8000)
+                toast.info(`已生成 ${filled.length} 格；未生成：${detail}`, 8000)
             } else {
                 toast.success(`已生成 ${filled.length} 格（已覆盖原有内容），请确认无误后保存`, 5000)
             }
@@ -1111,9 +1102,6 @@ export default {
             } else if (panels.length === 1) {
                 wrap.appendChild(panels[0].node)
             }
-
-            wrap.appendChild(h('div', { class: 'field__hint word-form__table-hint' },
-                termNode('paradigmHint')))
 
             paradigmSlot.appendChild(wrap)
         }
@@ -1245,9 +1233,8 @@ export default {
                 })
 
                 openModal({
-                    title: '选择词条',
+                    title: '选择查询结果',
                     body: h('div', {},
-                        h('div', { class: 'field__hint' }, hintText('这一页有多个词条，选一个用来回填')),
                         h('div', { class: 'lookup-choices' }, ...items)
                     ),
                     actions: [
@@ -1307,7 +1294,7 @@ export default {
                 }
 
                 if (!entries.length) {
-                    lookupStatus.textContent = '所有来源都没有找到该词条'
+                    lookupStatus.textContent = '所有来源都没有找到这个词'
                     lookupStatus.style.color = 'var(--c-fg-subtle)'
                     return
                 }
@@ -1479,6 +1466,7 @@ export default {
                         }),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.form,
+                            spaceKey: hasScript,
                             lang,
                             placeholder: currentTerms().inflectionFormPlaceholder,
                             onInput: (e) => {
@@ -1541,6 +1529,7 @@ export default {
                         indexCell(),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
+                            spaceKey: hasScript,
                             lang,
                             placeholder: currentTerms().collocationTextPlaceholder,
                             onInput: (e) => {
@@ -1667,6 +1656,7 @@ export default {
                         indexCell(),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.text,
+                            spaceKey: hasScript,
                             lang,
                             placeholder: currentTerms().exampleTextPlaceholder,
                             onInput: (e) => {
@@ -1799,7 +1789,7 @@ export default {
                 h('div', { class: 'derivative-picker' },
                     selected,
                     fieldRow(termNode('derivativeSearchLabel'), searchField.el, {
-                        extras: [h('span', { class: 'field__hint' }, termNode('derivativeSearchHint')), hint]
+                        extras: [hint]
                     }),
                     results
                 )
@@ -1934,7 +1924,7 @@ export default {
             } catch (err) {
                 console.error(err)
                 if (String(err.name) === 'ConstraintError') {
-                    toast.error('唯一键冲突：同语言下基本形态与词性已存在', 5000)
+                    toast.error('已有同一语言、同一基本形态与该词性的生词', 5000)
                 } else {
                     toast.error(`保存失败：${err.message}`, 5000)
                 }
@@ -1943,7 +1933,7 @@ export default {
 
         async function onDelete() {
             const ok = await confirmModal({
-                title: '删除词条',
+                title: '删除生词',
                 message: `确定删除「${data.lemma}」？`,
                 confirmLabel: '删除',
                 danger: true

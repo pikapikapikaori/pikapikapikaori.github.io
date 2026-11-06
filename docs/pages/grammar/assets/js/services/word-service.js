@@ -26,10 +26,7 @@ export const FILTER_EMPTY = {
     source: ''         // '' 表示全部
 }
 
-/**
- * 检索范围（三档）：all = 词形 + 含义 / 例句 / 固定搭配；forms = 词形（基本形态、词干、变格变位表、补充形式）；
- * head = 只有基本形态 + 词干
- */
+/** 搜索范围：all = 词形 + 含义 / 例句 / 固定搭配；forms = 词形；head = 基本形态 + 词干 */
 export const SEARCH_SCOPE = [
     { value: 'all',   label: '全部' },
     { value: 'forms', label: '词形' },

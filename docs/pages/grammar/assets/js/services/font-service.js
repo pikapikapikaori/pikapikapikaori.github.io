@@ -1,7 +1,4 @@
-/**
- * 字体服务：default（内置字体）/ system（系统字体栈）/ local（用户选的本地字体文件）。
- * 只持久化 fontMode 与 fontFamily；objectURL 不持久化，每次会话都要重新选本地文件。
- */
+/** 字体服务：内置 / 系统 / 本地三种模式。 */
 
 import { LS_KEYS } from '../config/config.js'
 

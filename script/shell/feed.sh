@@ -26,8 +26,10 @@ git_pathspecs=(
     ':!:docs/**/Beginning.md'
     ':!:docs/**/Sites.md'
     ':!:docs/pages/**/*.md'
+    ':!:docs/apps/**/*.md'
     ':!:docs/assets/**/*.md'
     ':!:docs/pages/*.md'
+    ':!:docs/apps/*.md'
     ':!:docs/assets/*.md'
 )
 # ============================================================

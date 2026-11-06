@@ -39,6 +39,8 @@
     --ff-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 
     --w-max: 1100px;
+    /* 输入助手面板宽度：桌面 720，窄屏自动收 */
+    --ime-w: 720px;
     --h-header: 56px;
 
     --ease: cubic-bezier(.2, .8, .2, 1);
@@ -47,6 +49,10 @@
     --z-header: 50;
     --z-fab: 60;
     --z-modal: 100;
+    /* 浮动控件（回到顶部 / 转写 / 短音符 / 输入助手）：永远浮在词卡与弹窗之上 */
+    --z-chrome: 120;
+    /* 下拉菜单要盖在浮动控件之上（它贴着控件展开） */
+    --z-menu: 150;
     --z-toast: 200;
 }
 

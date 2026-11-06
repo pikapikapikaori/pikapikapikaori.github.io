@@ -1444,45 +1444,6 @@ button.word-card__derivative {
     color: var(--c-fg);
 }
 
-/* 词卡右上角的「显示转写」开关，和关闭键并排 */
-.card-overlay-roman {
-    position: absolute;
-    top: var(--sp-3);
-    right: calc(var(--sp-3) + 40px);
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--r-control);
-    border: none;
-    background: transparent;
-    color: var(--c-fg-muted);
-    cursor: pointer;
-    font-size: var(--fs-sm);
-}
-
-.card-overlay-roman:hover {
-    background: var(--c-bg-hover);
-    color: var(--c-fg);
-}
-
-.card-overlay-roman.is-on {
-    background: var(--c-accent);
-    color: var(--c-accent-fg);
-}
-
-/* 打开态悬停：回到「未打开」的悬停配色，提示再点一下就关 */
-.card-overlay-roman.is-on:hover {
-    background: var(--c-bg-hover);
-    color: var(--c-fg);
-}
-
-/* 短音符开关排在转写开关右边 */
-.card-overlay-roman--breve {
-    right: calc(var(--sp-3) + 80px);
-}
-
 .card-overlay-body {
     flex: 1;
     min-height: 0;
@@ -1530,14 +1491,14 @@ button.word-card__derivative {
     }
 
     .card-overlay-body {
-        padding: var(--sp-4);
+        /* 右下角常驻的浮动按钮会盖住正文末尾 */
+        padding: var(--sp-4) var(--sp-4) 72px;
     }
 
     .card-overlay__head {
         flex-direction: column;
         align-items: flex-start;
         padding: var(--sp-4) var(--sp-4) var(--sp-3);
-        padding-right: 56px;
     }
 
     .card-overlay__badges {
@@ -1794,7 +1755,7 @@ button.word-card__derivative {
 /* ---------- 自定义下拉菜单（替代原生 select 弹出层） ---------- */
 .select-menu {
     position: fixed;
-    z-index: 150;
+    z-index: var(--z-menu);
     max-height: 320px;
     overflow: auto;
     padding: var(--sp-1);
@@ -1863,9 +1824,9 @@ button.word-card__derivative {
 .page-tools {
     position: fixed;
     right: var(--sp-4);
-    /* 生词表单底部有吸底的保存栏，浮动工具和输入助手按钮一起让开 */
-    bottom: calc(var(--sp-4) + var(--ime-lift, 0px));
-    z-index: var(--z-fab);
+    bottom: var(--sp-4);
+    /* 浮动控件永远在最上层：词卡 / 弹窗打开时也要能点 */
+    z-index: var(--z-chrome);
     display: flex;
     flex-direction: column;
     gap: var(--sp-2);
@@ -1873,7 +1834,12 @@ button.word-card__derivative {
 
 /* 输入助手的按钮占着右下角：工具列整列抬到它上面，三者同一列从上往下排 */
 html.has-ime-fab .page-tools {
-    bottom: calc(var(--sp-4) + var(--ime-kb, 0px) + var(--ime-lift, 0px) + 40px + var(--sp-2));
+    bottom: calc(var(--sp-4) + var(--ime-kb, 0px) + 40px + var(--sp-2));
+}
+
+/* 词卡盖住整页时「回到顶部」没有意义（它滚的是背后的页面） */
+html.card-overlay-open .page-tools__btn--top {
+    display: none;
 }
 
 .page-tools__btn {
@@ -1943,8 +1909,8 @@ html.show-dual-text .dual-text__roman {
 .ime-fab {
     position: fixed;
     right: var(--sp-4);
-    bottom: calc(var(--sp-4) + var(--ime-kb, 0px) + var(--ime-lift, 0px));
-    z-index: var(--z-fab);
+    bottom: calc(var(--sp-4) + var(--ime-kb, 0px));
+    z-index: var(--z-chrome);
     width: 40px;
     height: 40px;
     display: inline-flex;
@@ -1989,10 +1955,13 @@ html.show-dual-text .dual-text__roman {
 .ime {
     position: fixed;
     right: var(--sp-4);
-    bottom: calc(72px + var(--ime-kb, 0px) + var(--ime-lift, 0px));
-    z-index: var(--z-fab);
-    width: 560px;
-    max-height: min(70vh, 540px);
+    bottom: calc(72px + var(--ime-kb, 0px));
+    z-index: var(--z-chrome);
+    /* 修饰符页按内容收紧；键盘页需要全宽，用 :has 撑开 */
+    width: fit-content;
+    min-width: min(420px, calc(100vw - 32px));
+    max-width: min(var(--ime-w, 720px), calc(100vw - 32px));
+    max-height: min(76vh, 620px);
     display: flex;
     flex-direction: column;
     background: var(--c-bg-elev);
@@ -2002,30 +1971,37 @@ html.show-dual-text .dual-text__roman {
     overflow: hidden;
 }
 
+.ime:has(.ime__kb) {
+    width: min(var(--ime-w, 720px), calc(100vw - 32px));
+}
+
 .ime[hidden] {
     display: none;
 }
 
+/* 头部只有一个模式轨道：关闭靠常驻按钮、Esc 与失焦，不再重复一个 ✕ */
 .ime__head {
     display: flex;
     align-items: center;
     gap: var(--sp-2);
-    padding: var(--sp-2);
+    padding: var(--sp-3) var(--sp-3) var(--sp-1);
 }
 
 .ime__tabs {
     display: flex;
-    flex: 1;
-    min-width: 0;
-    gap: var(--sp-1);
+    width: fit-content;
+    gap: 2px;
+    padding: 3px;
+    border-radius: calc(var(--r-control) + 3px);
+    background: var(--c-bg-subtle);
 }
 
 .ime__tab {
     appearance: none;
-    flex: 1;
+    min-width: 96px;
     min-height: 30px;
-    padding: 0 var(--sp-2);
-    border: 1px solid transparent;
+    padding: 0 var(--sp-4);
+    border: 0;
     border-radius: var(--r-control);
     background: transparent;
     color: var(--c-fg-muted);
@@ -2037,34 +2013,20 @@ html.show-dual-text .dual-text__roman {
 }
 
 .ime__tab:hover {
-    background: var(--c-bg-hover);
     color: var(--c-fg);
 }
 
+/* 选中项抬高一个色阶，不用描边 */
 .ime__tab[aria-pressed="true"] {
-    background: var(--c-bg-subtle);
+    background: var(--c-bg-elev);
     color: var(--c-fg);
-    border-color: var(--c-border);
 }
 
-.ime__close {
-    appearance: none;
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius: var(--r-control);
-    background: transparent;
-    color: var(--c-fg-muted);
-    font-size: var(--fs-sm);
-    cursor: pointer;
-}
-
-.ime__close:hover {
-    background: var(--c-bg-hover);
-    color: var(--c-fg);
+/* 脚注：一行快捷键 */
+.ime__foot {
+    padding: var(--sp-1) var(--sp-3) var(--sp-3);
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
 }
 
 .ime__body {
@@ -2074,37 +2036,47 @@ html.show-dual-text .dual-text__roman {
     overflow: auto;
 }
 
-.ime__hint {
-    font-size: var(--fs-xs);
-    color: var(--c-fg-subtle);
-    line-height: 1.5;
-}
-
-/* 修饰符：行距 8px，格子间距 6px */
+/* 修饰符：组标题独占一行，格子从同一条左边缘开始 */
 .ime__marks {
     display: grid;
-    gap: var(--sp-2);
+    gap: var(--sp-5);
+}
+
+/* 「基字 a」读出：靠在头部右端，说明按钮显示的是合并结果 */
+.ime__base {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    padding-right: var(--sp-1);
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+    white-space: nowrap;
+}
+
+.ime__base bdi {
+    font-size: var(--fs-md);
+    color: var(--c-fg);
 }
 
 .ime__row {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: var(--sp-2) var(--sp-4);
+    align-items: flex-start;
+    gap: var(--sp-5) var(--sp-5);
 }
 
-/* 一行可以并排几组：组 = 标签 + 格子 */
+/* 一行可以并排几组：组 = 标题行 + 格子 */
 .ime__group {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: var(--sp-2);
 }
 
-.ime__label {
-    min-width: 48px;
+.ime__group-title {
     font-size: var(--fs-xs);
     color: var(--c-fg-subtle);
-    text-align: right;
+    text-align: left;
 }
 
 .ime__items {
@@ -2115,8 +2087,8 @@ html.show-dual-text .dual-text__roman {
 
 .ime__chip {
     appearance: none;
-    min-width: 38px;
-    height: 38px;
+    min-width: 44px;
+    height: 44px;
     padding: 0 6px;
     display: inline-flex;
     align-items: center;
@@ -2159,6 +2131,8 @@ html.show-dual-text .dual-text__roman {
 .ime__kb {
     display: grid;
     gap: 4px;
+    /* fit-content 下键盘需要明确的宽度，否则 60 列网格会被压扁 */
+    width: min(calc(var(--ime-w, 720px) - 32px), calc(100vw - 64px));
 }
 
 .ime__kb-row {
@@ -2167,30 +2141,43 @@ html.show-dual-text .dual-text__roman {
     gap: 4px;
 }
 
+/* 键身高 48：上半是字形（34，留出天城文下加元音的余量），下半 14 的键脚放拉丁键名 */
 .ime__key {
     appearance: none;
-    min-height: 38px;
+    position: relative;
+    min-height: 48px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0;
-    padding: 1px 2px;
+    padding: 0 2px 14px;
     border: 1px solid var(--c-border);
     border-radius: var(--r-control);
     background: var(--c-bg-elev);
     color: var(--c-fg);
-    font-size: 16px;
+    font-size: var(--fs-md);
     line-height: 1.05;
     cursor: pointer;
     transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
+/* 键脚：独占一条窄带，不再和字形抢同一块位置。
+ * 不做 overflow: hidden —— 窄屏上 1u 只有 20px，宽的天城文簇会被裁掉。 */
 .ime__key small {
-    font-size: 9px;
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 13px;
+    border-radius: 0 0 calc(var(--r-control) - 1px) calc(var(--r-control) - 1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
     color: var(--c-fg-subtle);
     line-height: 1;
     font-family: var(--ff-ui);
+    background: var(--c-bg-subtle);
+    pointer-events: none;
 }
 
 .ime__key:hover:not(:disabled) {
@@ -2204,7 +2191,13 @@ html.show-dual-text .dual-text__roman {
     border-color: var(--c-border-strong);
 }
 
+/* 按下时键面压暗一档，键脚跟着换色，否则两者同色糊在一起 */
+.ime__key.is-pressed small {
+    background: var(--c-bg-hover);
+}
+
 .ime__key--empty {
+    padding-bottom: 0;
     opacity: .3;
     cursor: default;
     background: var(--c-bg);
@@ -2212,6 +2205,7 @@ html.show-dual-text .dual-text__roman {
 }
 
 .ime__key--action {
+    padding-bottom: 0;
     font-size: var(--fs-xs);
     color: var(--c-fg-muted);
 }
@@ -2222,8 +2216,8 @@ html.show-dual-text .dual-text__roman {
 }
 
 .ime__key--follow {
-    flex-direction: row;
     gap: 5px;
+    padding-bottom: 0;
     font-size: var(--fs-xs);
     color: var(--c-fg-muted);
 }
@@ -2241,7 +2235,10 @@ html.show-dual-text .dual-text__roman {
         left: 0;
         right: 0;
         bottom: var(--ime-kb, 0px);
+        /* 抽屉铺满整宽：桌面端按内容收紧的 min/max-width 在这里全部放开 */
         width: auto;
+        min-width: 0;
+        max-width: none;
         max-height: 34vh;
         border-radius: var(--r-surface) var(--r-surface) 0 0;
         border-left: 0;
@@ -2258,13 +2255,18 @@ html.show-dual-text .dual-text__roman {
         padding: var(--sp-2) var(--sp-4) var(--sp-4);
     }
 
+    .ime__foot {
+        padding: 0 var(--sp-4) var(--sp-2);
+    }
+
     .ime__key {
-        min-height: 40px;
-        font-size: 15px;
+        min-height: 44px;
+        padding-bottom: 13px;
     }
 
     .ime__key small {
-        font-size: 8px;
+        height: 13px;
+        font-size: 10px;
     }
 
     .ime__chip {

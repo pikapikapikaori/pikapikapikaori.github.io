@@ -1,5 +1,5 @@
 /* Service Worker · 缓存应用 shell，数据仍走 IndexedDB */
-const CACHE = 'langnotebook-shell-v2'
+const CACHE = 'langnotebook-shell-v1'
 
 const SHELL = [
     './',
@@ -22,6 +22,7 @@ const SHELL = [
     './assets/js/utils/date.js',
     './assets/js/utils/events.js',
     './assets/js/utils/text-normalize.js',
+    './assets/js/utils/view-toggles.js',
     './assets/js/store/db.js',
     './assets/js/store/user-store.js',
     './assets/js/store/word-store.js',

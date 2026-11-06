@@ -1,5 +1,7 @@
 /** 原文与转写的双行显示。 */
 
+import { notifyToggles } from './view-toggles.js'
+
 export function annotateDualText(root, { range, toRoman, selector = 'td, th' } = {}) {
     if (!root || !(range instanceof RegExp) || typeof toRoman !== 'function') return
     // 默认只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读
@@ -50,6 +52,7 @@ export function annotateDualText(root, { range, toRoman, selector = 'td, th' } =
 /** 只切根节点 class，不重排 DOM */
 export function setDualTextVisible(on) {
     document.documentElement.classList.toggle('show-dual-text', !!on)
+    notifyToggles()
 }
 
 function splitByScript(text, range) {

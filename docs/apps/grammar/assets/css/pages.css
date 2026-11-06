@@ -585,9 +585,11 @@
     bottom: 0;
     z-index: 10;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
     gap: var(--sp-2);
-    padding: var(--sp-3) 0;
+    /* 右侧让出常驻浮动按钮的位置：按钮列在所有页面上都停在同一个 bottom */
+    padding: var(--sp-3) calc(48px + var(--sp-2)) var(--sp-3) 0;
     background: var(--c-bg);
     border-top: 1px solid var(--c-rule);
 }

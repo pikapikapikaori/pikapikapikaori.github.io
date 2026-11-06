@@ -25,12 +25,14 @@ export default {
     name: '古希腊语',
     placeholderBase: 'α',
     cased: true,
+    // 分音只接 ι / υ：样字固定用 ι，否则会显示成 α̈
+    samples: { '\u0308': 'ι' },
     marks: [
-        // row 相同的组并排一行；restoreRow 指定「还原」并到哪一行
+        // row 相同的组并排一行（按 row 升序从上往下）；restoreRow 是「还原」并进的行号
         {
             key: 'breath',
             label: '气符',
-            row: 0,
+            row: 1,
             items: [
                 { c: '\u0313', label: '柔气', applies: isVowelOrRho },
                 { c: '\u0314', label: '刚气', applies: isVowelOrRho }
@@ -39,7 +41,7 @@ export default {
         {
             key: 'accent',
             label: '音符',
-            row: 0,
+            row: 1,
             items: [
                 { c: '\u0301', label: '锐', applies: isVowel },
                 { c: '\u0300', label: '钝', applies: isVowel },
@@ -50,16 +52,16 @@ export default {
         {
             key: 'length',
             label: '音长',
-            row: 1,
+            row: 0,
             items: [
                 { c: '\u0304', label: '长', applies: isLengthVowel },
                 { c: '\u0306', label: '短', applies: isLengthVowel }
             ]
         },
-        { key: 'iota', label: '下标', row: 1, items: [{ c: '\u0345', label: 'iota', applies: isIotaVowel }] }
+        { key: 'iota', label: '下标', row: 0, items: [{ c: '\u0345', label: 'iota', applies: isIotaVowel }] }
     ],
-    /* 「还原」并到音长/下标那一行 */
-    restoreRow: 1,
+    /* 「还原」并到第一行（音长 / 下标那一行） */
+    restoreRow: 0,
     applies(base, group) {
         const b = String(base || '').normalize('NFD')[0]
         if (group === 'accent') return VOWELS.includes(b) || b === 'ι' || b === 'υ'

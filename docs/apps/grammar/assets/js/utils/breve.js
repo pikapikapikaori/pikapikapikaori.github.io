@@ -1,5 +1,7 @@
 /** 短音符的折叠（比较用）与注解（显示用）。 */
 
+import { notifyToggles } from './view-toggles.js'
+
 export const BREVE = '\u0306'
 
 /** 预组合的带短音符字母（ă ĕ ğ ĭ ŏ ŭ 及其大写），兜住不是 NFD 形式的文本 */
@@ -52,6 +54,7 @@ export function annotateBreves(root, { selector = 'td, th' } = {}) {
 /** 只切根节点 class，不重排 DOM */
 export function setBreveVisible(on) {
     document.documentElement.classList.toggle('show-breve', !!on)
+    notifyToggles()
 }
 
 function breveSpan() {

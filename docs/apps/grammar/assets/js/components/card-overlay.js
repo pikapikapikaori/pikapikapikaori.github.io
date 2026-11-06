@@ -8,12 +8,24 @@ import { createSourceTabs } from './source-tabs.js'
 import { createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 import { collocationList, exampleList } from './entry-lists.js'
-import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
-import { annotateBreves, setBreveVisible } from '../utils/breve.js'
+import { annotateDualText } from '../utils/dual-text.js'
+import { annotateBreves } from '../utils/breve.js'
+import { isRomanOn, isBreveOn, onToggles } from '../utils/view-toggles.js'
 import { getScriptProfile } from '../services/grammar-service.js'
 
 let overlayEl = null
 let escHandler = null
+/** 订阅「转写 / 短音符」全局开关；卡片关闭时退订 */
+let offToggles = null
+
+/** 卡片关掉后，把右下角工具列与订阅一起恢复 */
+function detachOverlay() {
+    if (offToggles) {
+        offToggles()
+        offToggles = null
+    }
+    document.documentElement.classList.remove('card-overlay-open')
+}
 
 /** 打开放大版卡片；opts 里的 language / paradigmTpl / onGrammarRef / resolveDerivative / onDerivativeClick / onClose 可选 */
 export function openCardOverlay(word, opts = {}) {
@@ -43,15 +55,7 @@ export function openCardOverlay(word, opts = {}) {
     const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
         ? scriptProfile.scriptRange
         : null
-    const romanKey = `ln.roman.${language}`
-    let romanOn = false
-    try { romanOn = localStorage.getItem(romanKey) === '1' } catch { /* 无痕模式忽略 */ }
-    if (!toRoman) romanOn = false
-
-    // 短音符（只有拉丁语 / 古希腊语有）：默认藏着，右上角这颗按钮切出来
-    const breveKey = `ln.breve.${language}`
-    let breveOn = false
-    try { breveOn = localStorage.getItem(breveKey) === '1' } catch { /* ignore */ }
+    // 转写 / 短音符由右下角工具列统一切换，词卡只订阅它的结果
     const showBreve = BREVE_LANGS.includes(language)
 
     const sources = allSources(word)
@@ -82,48 +86,21 @@ export function openCardOverlay(word, opts = {}) {
         onclick: close
     }, '✕')
 
-    const romanBtn = toRoman ? h('button', {
-        class: 'card-overlay-roman' + (romanOn ? ' is-on' : ''),
-        type: 'button',
-        title: romanOn ? '隐藏转写' : '显示转写',
-        'aria-pressed': String(romanOn),
-        onclick: () => {
-            romanOn = !romanOn
-            try { localStorage.setItem(romanKey, romanOn ? '1' : '0') } catch { /* ignore */ }
-            romanBtn.setAttribute('aria-pressed', String(romanOn))
-            romanBtn.classList.toggle('is-on', romanOn)
-            romanBtn.title = romanOn ? '隐藏转写' : '显示转写'
-            romanBtn.textContent = romanOn ? 'A' : '文'
-            setDualTextVisible(romanOn)
-            annotateRoman()
-        }
-    }, romanOn ? 'A' : '文') : null
-
-    const breveBtn = showBreve ? h('button', {
-        class: 'card-overlay-roman card-overlay-roman--breve' + (breveOn ? ' is-on' : ''),
-        type: 'button',
-        title: breveOn ? '隐藏短音符' : '显示短音符',
-        'aria-pressed': String(breveOn),
-        onclick: () => {
-            breveOn = !breveOn
-            try { localStorage.setItem(breveKey, breveOn ? '1' : '0') } catch { /* ignore */ }
-            breveBtn.setAttribute('aria-pressed', String(breveOn))
-            breveBtn.classList.toggle('is-on', breveOn)
-            breveBtn.title = breveOn ? '隐藏短音符' : '显示短音符'
-            setBreveVisible(breveOn)
-            annotateBreveText()
-        }
-    }, '\u0102') : null
-
     const panel = h('div', {
         class: 'card-overlay-panel',
         role: 'dialog',
         'aria-modal': 'true'
-    }, breveBtn, romanBtn, closeBtn, head, body)
+    }, closeBtn, head, body)
 
     overlayEl = h('div', { class: 'card-overlay' + (replacing ? ' card-overlay--instant' : '') }, backdrop, panel)
     annotateBdi(overlayEl, language)
     document.body.appendChild(overlayEl)
+    // 卡片盖住了整页：右下角工具列里的「回到顶部」这时没有意义（它滚的是背后的页面）
+    document.documentElement.classList.add('card-overlay-open')
+    offToggles = onToggles(() => {
+        annotateRoman()
+        annotateBreveText()
+    })
 
     /** 跳转前先关闭 overlay，避免弹窗留在旧页面上 */
     function wrappedGrammarRef(ref) {
@@ -366,7 +343,7 @@ export function openCardOverlay(word, opts = {}) {
     /** 把短音符包起来：默认隐藏，按钮切换显示 */
     function annotateBreveText() {
         if (!showBreve) return
-        if (breveOn) setBreveVisible(true)
+        if (!isBreveOn()) return
         annotateBreves(head, { selector: '.card-overlay__lemma' })
         annotateBreves(body, {
             selector: 'td, th, .word-card__stem, .word-card__stem-part, .word-card__example-text,'
@@ -376,8 +353,7 @@ export function openCardOverlay(word, opts = {}) {
 
     /** 在原文旁标出转写：标题、词干、变格表、例句、派生词 */
     function annotateRoman() {
-        if (!toRoman || !scriptRange || !romanOn) return
-        setDualTextVisible(true)
+        if (!toRoman || !scriptRange || !isRomanOn()) return
         annotateDualText(head, { range: scriptRange, toRoman, selector: '.card-overlay__lemma' })
         annotateDualText(body, { range: scriptRange, toRoman })
         annotateDualText(body, {
@@ -401,6 +377,7 @@ export function openCardOverlay(word, opts = {}) {
             overlayEl.parentNode.removeChild(overlayEl)
         }
         overlayEl = null
+        detachOverlay()
         if (typeof onClose === 'function') onClose()
     }
 
@@ -416,6 +393,7 @@ export function closeCardOverlay() {
         overlayEl.parentNode.removeChild(overlayEl)
     }
     overlayEl = null
+    detachOverlay()
 }
 
 /** 该区块里第一个「有内容」的来源，用来决定 tab 的初始落点 */

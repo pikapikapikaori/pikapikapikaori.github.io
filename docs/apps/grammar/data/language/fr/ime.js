@@ -9,8 +9,8 @@ export default {
     name: '法语',
     placeholderBase: 'a',
     cased: true,
-    // 软音符只接 c：样字固定用 c，不然会显示成 a̧
-    samples: { [CEDILLA]: 'c' },
+    // 软音符只接 c、分音按 ï 的写法：样字各自指定，不然会显示成 a̧ / ä
+    samples: { [CEDILLA]: 'c', [DIA]: 'i' },
     marks: [
         {
             key: 'accent',

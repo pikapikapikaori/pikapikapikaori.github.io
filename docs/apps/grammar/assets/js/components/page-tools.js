@@ -37,7 +37,7 @@ export function createPageTools({ lang, toRoman = null, onChange = null, onBreve
     }
 
     const topBtn = h('button', {
-        class: 'page-tools__btn',
+        class: 'page-tools__btn page-tools__btn--top',
         type: 'button',
         title: '回到顶部',
         'aria-label': '回到顶部',

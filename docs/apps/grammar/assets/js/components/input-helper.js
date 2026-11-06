@@ -195,6 +195,7 @@ function bindOnce() {
     window.addEventListener('pointerdown', noteModifiers, true)
     window.addEventListener('keydown', noteModifiers, true)
     window.addEventListener('keyup', noteModifiers, true)
+    window.addEventListener('keydown', onShortcutKey, true)
     window.addEventListener('keydown', onPhysicalKey, true)
     window.addEventListener('keyup', onPhysicalKeyUp, true)
 
@@ -213,8 +214,6 @@ function bindOnce() {
             if (state.mode === 'marks') render()
         }, 80)
     })
-
-    window.addEventListener('resize', syncLift)
 
     const vv = window.visualViewport
     if (vv) {
@@ -275,7 +274,8 @@ function ensureDom() {
     const panel = h('div', { class: 'ime', role: 'dialog', 'aria-label': '输入助手', hidden: true })
     const head = h('div', { class: 'ime__head' })
     const body = h('div', { class: 'ime__body' })
-    panel.append(head, body)
+    const foot = h('div', { class: 'ime__foot' })
+    panel.append(head, body, foot)
 
     // 面板里的按钮不抢焦点，否则点一下输入框就丢了光标
     panel.addEventListener('pointerdown', (e) => {
@@ -283,7 +283,7 @@ function ensureDom() {
     })
 
     document.body.append(fab, panel)
-    els = { fab, panel, head, body }
+    els = { fab, panel, head, body, foot }
     return els
 }
 
@@ -303,21 +303,15 @@ function keyboardIcon() {
     return svg
 }
 
-/** 生词表单底部有吸底的提交条，按钮和面板要让开它 */
-function syncLift() {
-    const bar = document.querySelector('.word-form__actions')
-    const lift = bar ? Math.round(bar.getBoundingClientRect().height) + 8 : 0
-    document.documentElement.style.setProperty('--ime-lift', `${lift}px`)
-}
-
 function refreshFab() {
     if (!els) return
-    syncLift()
     els.fab.hidden = !state.config
     // 浮动工具列（回到顶部 / 显示转写）要和助手按钮错开
     document.documentElement.classList.toggle('has-ime-fab', !els.fab.hidden)
     els.fab.classList.toggle('ime-fab--on', state.enabled)
-    els.fab.title = state.enabled ? '输入助手：开（点击关闭）' : '输入助手：关（点击开启）'
+    els.fab.title = state.enabled
+        ? '输入助手：开（点击或 Ctrl+Shift+` 关闭）'
+        : '输入助手：关（点击或 Ctrl+Shift+` 开启）'
 }
 
 function openForFocused() {
@@ -387,18 +381,36 @@ function scriptText(text) {
     return bdiNode(str, state.code)
 }
 
-/** 组合符托的样字：单独放会因字体不同显示成空框 */
-function sampleLetter() {
-    const base = state.config?.placeholderBase
-    if (!base) return '\u25CC'
-    return layerUpper() && state.config?.cased === true ? base.toUpperCase() : base
+/** 大写层：只有声明了 cased 的语言才把样字转大写 */
+function upperSample(sample) {
+    if (!sample) return '\u25CC'
+    return state.config?.cased === true && layerUpper() ? sample.toUpperCase() : sample
 }
 
-/** 某个符号的样字：语言可以用 `samples` 单独指定（如希伯来语的中点用 ב、ש 加点的用 ש） */
+/** 组合符托的样字：单独放会因字体不同显示成空框 */
+function sampleLetter() {
+    return upperSample(state.config?.placeholderBase)
+}
+
+/**
+ * 某个符号的样字：语言可以用 `samples` 单独指定（如希伯来语的中点用 ב、ש 加点的用 ש）。
+ * 指定值同样跟随层：Shift 层的分音托 ι 时显示 Ϊ 而不是 ϊ。
+ */
 function sampleForChar(ch) {
     const overrides = state.config?.samples
     const hit = ch && overrides ? overrides[ch] : null
-    return hit || sampleLetter()
+    return upperSample(hit || state.config?.placeholderBase)
+}
+
+/** 切换输入方式（鼠标点击与 Ctrl+Shift+数字共用） */
+function setMode(mode) {
+    if (!mode || mode === currentMode()) return
+    if (!availableModes().includes(mode)) return
+    state.mode = mode
+    state.shift = false
+    oneShotShift = false
+    if (state.config) store(LS_MODE(state.config.code), mode)
+    render()
 }
 
 function render() {
@@ -407,38 +419,32 @@ function render() {
     const mode = currentMode()
     state.mode = mode
 
+    els.base = h('span', { class: 'ime__base' })
     els.head.replaceChildren(
         h('div', { class: 'ime__tabs', role: 'group', 'aria-label': '输入方式' },
-            ...modes.map((m) => h('button', {
+            ...modes.map((m, i) => h('button', {
                 type: 'button',
                 class: 'ime__tab',
                 'aria-pressed': String(m === mode),
-                onclick: () => {
-                    state.mode = m
-                    state.shift = false
-                    oneShotShift = false
-                    store(LS_MODE(c.code), m)
-                    render()
-                }
+                'aria-keyshortcuts': `Control+Shift+${i + 1}`,
+                title: `${MODE_LABEL[m]}（Ctrl+Shift+${i + 1}）`,
+                onclick: () => setMode(m)
             }, MODE_LABEL[m]))
         ),
-        h('button', {
-            type: 'button',
-            class: 'ime__close',
-            title: '关闭输入助手',
-            'aria-label': '关闭输入助手',
-            onclick: () => {
-                state.enabled = false
-                store(LS_ENABLED, '0')
-                refreshFab()
-                closePanel()
-            }
-        }, '✕')
+        els.base
     )
 
     els.body.replaceChildren()
-    if (mode === 'marks') els.body.append(renderMarks())
-    else if (mode === 'keyboard') els.body.append(renderKeyboard())
+    if (mode === 'marks') {
+        els.body.append(renderMarks())
+    } else {
+        if (els.base) els.base.replaceChildren()
+        if (mode === 'keyboard') els.body.append(renderKeyboard())
+    }
+    // 脚注只留快捷键：操作本身一看就懂，不需要再写一句说明
+    els.foot.textContent = modes.length > 1
+        ? 'Ctrl+Shift+` / Esc 关闭 · Ctrl+Shift+1 / 2 切换'
+        : 'Ctrl+Shift+` / Esc 关闭'
 }
 
 function currentBase() {
@@ -498,12 +504,17 @@ function renderMarks() {
     const base = splitTail(before).base
     const wrap = h('div', { class: 'ime__marks' })
 
-    if (!base) wrap.append(h('div', { class: 'ime__hint' }, '把光标放到一个字母后面，按钮会显示合并后的字形。'))
+    // 当前基字：所有按钮显示的都是「基字 + 符号」的合并结果，把它写在头部右侧，规则就不再是暗知识
+    if (els && els.base) {
+        els.base.replaceChildren(...(base
+            ? ['基字 ', bdiNode(base, state.code)]
+            : ['基字 ', bdiNode(sampleLetter(), state.code), '（样字）']))
+    }
 
     // 「还原」独占一个组，但要能并进语言指定的那一行（restoreRow，默认第一行）
     const rows = markRows(c.marks).map((groups) => groups.map((group) => markGroupEl(group, base)))
     const restore = h('div', { class: 'ime__group' },
-        h('div', { class: 'ime__label' }, '还原'),
+        h('div', { class: 'ime__group-title' }, '还原'),
         h('div', { class: 'ime__items' }, renderRestore(before, c.marks))
     )
     const restoreRow = Number.isInteger(c.restoreRow) ? c.restoreRow : 0
@@ -517,7 +528,7 @@ function renderMarks() {
 
 function markGroupEl(group, base) {
     return h('div', { class: 'ime__group' },
-        h('div', { class: 'ime__label' }, group.label),
+        h('div', { class: 'ime__group-title' }, group.label),
         renderMarkItems(group, base)
     )
 }
@@ -717,6 +728,56 @@ function convertOnSpace(field, e) {
     field.el.dispatchEvent(new Event('input', { bubbles: true }))
     if (state.target === field && els && !els.panel.hidden) render()
     return true
+}
+
+/**
+ * 面板快捷键：Ctrl+Shift+1 / 2 选模式，Esc 关闭。
+ * 用 e.code 而不是 e.key：数字键上有没有 Shift 层符号都能对上。
+ */
+function onShortcutKey(e) {
+    if (!mounted || !els || !state.config) return
+    if (e.isComposing || e.keyCode === 229) return
+
+    // Ctrl+Shift+` ：面板关着也能用——对当前聚焦的输入框打开，开着就关闭。
+    // 用 e.code 而不是 e.key：这个物理键在任何键盘布局下都是 Backquote。
+    if (e.ctrlKey && e.shiftKey && !e.metaKey && !e.altKey && e.code === 'Backquote') {
+        e.preventDefault()
+        e.stopPropagation()
+        if (!els.panel.hidden) {
+            closePanel()
+            return
+        }
+        // 没有聚焦的输入框就不猜目标，免得把字打进用户没在看的地方
+        const field = adaptField(document.activeElement)
+        if (!field || !field.el.closest('#view')) return
+        if (!state.enabled) {
+            state.enabled = true
+            store(LS_ENABLED, '1')
+            refreshFab()
+        }
+        state.target = field
+        openPanel()
+        return
+    }
+
+    // 其余快捷键只在面板可见时生效
+    if (els.panel.hidden) return
+
+    if (e.key === 'Escape') {
+        e.preventDefault()
+        // 面板先关，弹窗的 Esc 留给下一次
+        e.stopPropagation()
+        closePanel()
+        return
+    }
+
+    if (!e.ctrlKey || !e.shiftKey || e.metaKey || e.altKey) return
+    const index = e.code === 'Digit1' ? 0 : e.code === 'Digit2' ? 1 : -1
+    if (index < 0) return
+    const modes = availableModes()
+    if (!modes[index]) return
+    e.preventDefault()
+    setMode(modes[index])
 }
 
 /** 物理按键：Shift / CapsLock 改层，键盘模式按映射替换（跟随开关关掉时不拦） */

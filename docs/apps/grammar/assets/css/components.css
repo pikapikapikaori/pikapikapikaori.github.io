@@ -2149,11 +2149,6 @@ html.show-dual-text .dual-text__roman {
     font-size: var(--fs-sm);
 }
 
-/* 面板底部的常驻提示（空格转写的用法） */
-.ime__hint--foot {
-    margin-top: var(--sp-3);
-}
-
 .ime__chip:focus-visible,
 .ime__key:focus-visible,
 .ime__tab:focus-visible {

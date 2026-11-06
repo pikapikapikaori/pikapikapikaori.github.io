@@ -6,6 +6,7 @@ import {
     applyMark, insertAt, deleteBefore, isMark, previewChar, splitTail, sanitizeOriginal, WORD_TAIL
 } from '../utils/ime-compose.js'
 import { loadIme } from '../services/ime-service.js'
+import { bdiNode } from '../utils/bdi.js'
 
 const LS_ENABLED = 'ln.ime.enabled'
 const LS_FOLLOW = 'ln.ime.follow'
@@ -49,6 +50,26 @@ const KEY_ROWS = [
         { action: 'follow', span: 11 }
     ]
 ]
+
+/**
+ * 物理键 → 键盘槽位。e.key 随键盘布局与 Shift 变化（Shift+5 是 %、- 与 = 在屏幕键盘上叫 aux1/aux2），
+ * 用 e.code 才能稳定对上 KEY_ROWS 的槽位名。
+ */
+const CODE_SLOT = {
+    Backquote: '`',
+    Digit1: '1', Digit2: '2', Digit3: '3', Digit4: '4', Digit5: '5',
+    Digit6: '6', Digit7: '7', Digit8: '8', Digit9: '9', Digit0: '0',
+    Minus: 'aux1', Equal: 'aux2',
+    KeyQ: 'q', KeyW: 'w', KeyE: 'e', KeyR: 'r', KeyT: 't', KeyY: 'y', KeyU: 'u',
+    KeyI: 'i', KeyO: 'o', KeyP: 'p', KeyA: 'a', KeyS: 's', KeyD: 'd', KeyF: 'f',
+    KeyG: 'g', KeyH: 'h', KeyJ: 'j', KeyK: 'k', KeyL: 'l', KeyZ: 'z', KeyX: 'x',
+    KeyC: 'c', KeyV: 'v', KeyB: 'b', KeyN: 'n', KeyM: 'm',
+    BracketLeft: '[', BracketRight: ']', Backslash: '\\',
+    Semicolon: ';', Quote: '\'', Comma: ',', Period: '.', Slash: '/',
+}
+
+/** 屏幕键面下方的小字：aux1 / aux2 表示物理键盘的 - 与 = */
+const SLOT_HINT = { aux1: '-', aux2: '=' }
 
 const state = {
     enabled: readEnabled(),
@@ -362,6 +383,13 @@ function layerUpper() {
     return state.caps !== state.shift
 }
 
+/** 语言片段：带 lang 包进 bdi，字体与方向由 lang.css 决定；纯 ASCII（数字、标点）原样输出 */
+function scriptText(text) {
+    const str = String(text ?? '')
+    if (!state.code || !str || /^[\x20-\x7E]+$/.test(str)) return str
+    return bdiNode(str, state.code)
+}
+
 /** 组合符托的样字：单独放会因字体不同显示成空框 */
 function sampleLetter() {
     const base = state.config?.placeholderBase
@@ -414,8 +442,6 @@ function render() {
     els.body.replaceChildren()
     if (mode === 'marks') els.body.append(renderMarks())
     else if (mode === 'keyboard') els.body.append(renderKeyboard())
-    // 空格转写是所有 tab 共用的能力，提示就常驻在面板底部
-    if (c.translitHint) els.body.append(h('div', { class: 'ime__hint ime__hint--foot' }, c.translitHint))
 }
 
 function currentBase() {
@@ -464,7 +490,7 @@ function renderRestore(before, groups) {
             const next = applyMark(state.target.getValue(), state.target.getCaret(), chars, '', chars)
             if (next) applyResult(next)
         }
-    }, bare || sampleLetter())
+    }, scriptText(bare || sampleLetter()))
 }
 
 function renderMarks() {
@@ -514,7 +540,7 @@ function renderMarkItems(group, base) {
                     if (!state.target) return
                     applyResult(insertAt(state.target.getValue(), state.target.getCaret(), item.c))
                 }
-            }, item.c))
+            }, scriptText(item.c)))
             continue
         }
 
@@ -536,7 +562,7 @@ function renderMarkItems(group, base) {
                 )
                 if (next) applyResult(next)
             }
-        }, label))
+        }, scriptText(label)))
     }
     return items
 }
@@ -636,11 +662,14 @@ function keyButton(slot) {
             }
             applyResult(insertAt(state.target.getValue(), state.target.getCaret(), char))
         }
-    }, char || '')
+    }, scriptText(char || ''))
     btn.style.gridColumn = `span ${slot.span || 4}`
-    if (char && isMark(char)) btn.firstChild.nodeValue = (sampleForChar(char) + char).normalize('NFC')
-    // 数字这类「键面就是键名」的键不用再标一遍小字
-    if (char && !latin.startsWith('aux') && char !== latin) btn.append(h('small', {}, latin))
+    if (char && isMark(char)) {
+        btn.replaceChildren(scriptText((sampleForChar(char) + char).normalize('NFC')))
+    }
+    // 数字这类「键面就是键名」的键不用再标一遍小字；aux1 / aux2 标物理键面上的 - 与 =
+    const hint = SLOT_HINT[latin] || (latin.startsWith('aux') ? '' : latin)
+    if (char && hint && hint !== char) btn.append(h('small', {}, hint))
     return btn
 }
 
@@ -739,7 +768,7 @@ function onPhysicalKey(e) {
         }
         if ([...e.key].length !== 1) return repaint()
         if (!state.follow) return repaint()
-        const latin = e.key.toLowerCase()
+        const latin = CODE_SLOT[e.code] || e.key.toLowerCase()
         const map = state.config.keyboard?.map || {}
         const shiftMap = state.config.keyboard?.shift || {}
         if (!map[latin] && !shiftMap[latin]) return repaint()

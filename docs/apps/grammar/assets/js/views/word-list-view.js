@@ -12,6 +12,7 @@ import { POS_LIST, PAGE_SIZE_OPTIONS } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { openCardOverlay, closeCardOverlay } from '../components/card-overlay.js'
 import { openAnalyzeModal } from '../components/analyze-modal.js'
+import { createGhostInput } from '../components/ghost-input.js'
 import { hasAnalyzer } from '../services/analyze-service.js'
 import { openSelectMenu } from '../components/select-menu.js'
 import { formatRelative, formatDate } from '../utils/date.js'
@@ -57,6 +58,7 @@ export default {
 
         const head = h('div', { class: 'page-head page-head--display' })
         const toolbar = h('div', { class: 'toolbar' })
+        let searchField = null
         const listWrap = h('div', { class: 'word-list' })
         const pagWrap = h('div', {})
         const emptyWrap = h('div', {})
@@ -203,12 +205,11 @@ export default {
         }
 
         function renderToolbar() {
-            const searchInput = h('input', {
-                class: 'input',
-                type: 'search',
-                placeholder: '在本语言内搜索…',
+            searchField = createGhostInput({
                 value: state.q,
-                oninput: debounce((e) => {
+                lang,
+                placeholder: '在本语言内搜索…',
+                onInput: debounce((e) => {
                     state.q = e.target.value
                     state.page = 1
                     refresh()
@@ -302,7 +303,7 @@ export default {
             replace(toolbar,
                 scopeSelect,
                 posSelect,
-                h('div', { class: 'toolbar__grow' }, searchInput),
+                h('div', { class: 'toolbar__grow' }, searchField.el),
                 sortSelect,
                 orderBtn,
                 sizeSelect,
@@ -554,8 +555,7 @@ export default {
 
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
                 e.preventDefault()
-                const input = toolbar.querySelector('input[type="search"]')
-                if (input) input.focus()
+                if (searchField) searchField.input.focus()
                 return
             }
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n') {

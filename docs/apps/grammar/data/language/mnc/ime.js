@@ -4,10 +4,8 @@
 export default {
     name: '满语',
     placeholderBase: 'ᠠ',
-    cased: false,
     marks: [],
     keyboard: {
-        rows: ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'],
         map: {
             a: 'ᠠ', e: 'ᡝ', i: 'ᡳ', o: 'ᠣ', u: 'ᡠ', v: 'ᡡ', n: 'ᠨ', k: 'ᡴ', g: 'ᡤ',
             h: 'ᡥ', b: 'ᠪ', p: 'ᡦ', s: 'ᠰ', t: 'ᡨ', d: 'ᡩ', m: 'ᠮ', l: 'ᠯ', r: 'ᡵ',
@@ -24,5 +22,4 @@ export default {
             aux1: 'ᡮ', aux2: 'ᡯ', aux3: 'ᡪ', aux4: 'ᡲ'
         }
     },
-    translitHint: 'ana → ᠠᠨᠠ；带点字母写 k\' g\' h\'，汉语借词 ts dz ž 等'
 }

@@ -47,12 +47,11 @@ export function loadIme(code) {
                 }
             },
             keyboard: config.keyboard || null,
-            translit: config.translit || (script && typeof script.toScript === 'function'
-                ? { hint: config.translitHint || '', convert: script.toScript }
-                : null),
+            translit: script && typeof script.toScript === 'function'
+                ? { convert: script.toScript }
+                : null,
             toScript: script && typeof script.toScript === 'function' ? script.toScript : null,
-            toRoman: script && typeof script.toRoman === 'function' ? script.toRoman : null,
-            translitHint: config.translitHint || config.translit?.hint || ''
+            toRoman: script && typeof script.toRoman === 'function' ? script.toRoman : null
         }
         // 没有可用能力的语言（例如只有一张空表）视为没有助手
         const usable = resolved.marks.some((g) => g.items?.length) || !!resolved.translit || !!resolved.keyboard

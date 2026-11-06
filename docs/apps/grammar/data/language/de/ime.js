@@ -14,5 +14,4 @@ export default {
         return true
     },
     keyboard: null,
-    translitHint: '长音与复合元音后的 ss 写成 ß（heißen、außer；短元音的 dass 不变）'
 }

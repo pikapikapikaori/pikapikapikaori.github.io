@@ -68,7 +68,6 @@ export default {
         return isVowelOrRho(base)
     },
     keyboard: {
-        rows: ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'],
         map: {
             /* 字母 */
             q: 'Ϙ', w: 'ς', e: 'ε', r: 'ρ', t: 'τ', y: 'υ', u: 'θ', i: 'ι', o: 'ο', p: 'π',
@@ -98,5 +97,4 @@ export default {
             '`': 'Ϻ', ',': ':', '.': ';', '/': 'Ϝ'
         }
     },
-    translitHint: 'h + 元音 = 粗气（ho → ὁ），词首元音默认柔气；th/ph/kh/ch/ps/ks = θ/φ/χ/χ/ψ/ξ；ē/ō = η/ω'
 }

@@ -12,5 +12,4 @@ export default {
     ],
     applies: (base, group) => group === 'length' && VOWELS.includes(String(base || '').normalize('NFD')[0]?.toLowerCase() || ''),
     keyboard: null,
-    translitHint: ''
 }

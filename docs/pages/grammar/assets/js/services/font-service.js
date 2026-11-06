@@ -77,7 +77,7 @@ function persist(mode, family) {
     } catch { /* ignore */ }
 }
 
-/** 从本地文件加载字体并应用 */
+/** 从本地文件加载字体并应用；加载不出来时撤回这次的 @font-face 并抛错 */
 export async function applyLocalFontFile(file) {
     if (!file) throw new Error('未选择字体文件')
     const name = deriveFontName(file.name)
@@ -95,22 +95,29 @@ export async function applyLocalFontFile(file) {
         style.id = STYLE_ID
         document.head.appendChild(style)
     }
+    const previousCss = style.textContent
     style.textContent = css
+
+    // 等字体真正加载出来再应用：坏文件在多数浏览器里不会抛错，只会得到空结果或 error 状态
+    const faces = await loadFace(name).catch(() => [])
+    if (!faces.length || faces.some((face) => face.status === 'error')) {
+        style.textContent = previousCss
+        try { URL.revokeObjectURL(url) } catch { /* ignore */ }
+        throw new Error('这个文件不是能用的字体')
+    }
 
     if (currentObjectUrl) {
         try { URL.revokeObjectURL(currentObjectUrl) } catch { /* ignore */ }
     }
     currentObjectUrl = url
 
-    // 等字体加载完成再应用，避免闪烁
-    try {
-        if (document.fonts && document.fonts.load) {
-            await document.fonts.load(`16px "${name}"`)
-        }
-    } catch { /* ignore */ }
-
     applyFont({ mode: 'local', family: name })
     return { name, url }
+}
+
+function loadFace(name) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve([])
+    return document.fonts.load(`16px "${name}"`)
 }
 
 function deriveFontName(filename) {

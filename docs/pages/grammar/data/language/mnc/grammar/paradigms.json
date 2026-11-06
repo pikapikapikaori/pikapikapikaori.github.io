@@ -38,52 +38,52 @@
         "rows": [
           {
             "key": "mbi",
-            "label": "现在-将来时 (-mbi)",
+            "label": "现在-将来时 (-ᠮᠪᡳ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "fut",
-            "label": "将来/未完成 (-ra/-re/-ro)",
+            "label": "将来/未完成 (-ᡵᠠ/-ᡵᡝ/-ᡵᠣ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "past",
-            "label": "过去时 (-ha/-he/-ho)",
+            "label": "过去时 (-ᡥᠠ/-ᡥᡝ/-ᡥᠣ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "mbime",
-            "label": "同时持续 (-mbime)",
+            "label": "同时持续 (-ᠮᠪᡳᠮᡝ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "mbihe",
-            "label": "过去进行 (-mbihe)",
+            "label": "过去进行 (-ᠮᠪᡳᡥᡝ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "prog",
-            "label": "进行 (-me bi)",
+            "label": "进行 (-ᠮᡝ ᠪᡳ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "prog2",
-            "label": "进行/持续 (-me ilihabi)",
+            "label": "进行/持续 (-ᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "perf",
-            "label": "完成/已毕 (-mahabi)",
+            "label": "完成/已毕 (-ᠮᠠᡥᠠᠪᡳ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "perf2",
-            "label": "完成 (-ha bi)",
+            "label": "完成 (-ᡥᠠ ᠪᡳ)",
             "grammarRef": "mnc-verb-tense"
           },
           {
             "key": "plup",
-            "label": "过去完成 (-he bihe)",
+            "label": "过去完成 (-ᡥᡝ ᠪᡳᡥᡝ)",
             "grammarRef": "mnc-verb-tense"
           }
         ]
@@ -105,27 +105,27 @@
           },
           {
             "key": "opt",
-            "label": "祈愿 (-kini)",
+            "label": "祈愿 (-ᡴᡳᠨᡳ)",
             "grammarRef": "mnc-verb-mood"
           },
           {
             "key": "prec",
-            "label": "祈使 (-cina)",
+            "label": "祈使 (-ᠴᡳᠨᠠ)",
             "grammarRef": "mnc-verb-mood"
           },
           {
             "key": "negpres",
-            "label": "现在否定 (-rakū)",
+            "label": "现在否定 (-ᡵᠠᡴᡡ)",
             "grammarRef": "mnc-verb-negation"
           },
           {
             "key": "negpast",
-            "label": "过去否定 (-hakū)",
+            "label": "过去否定 (-ᡥᠠᡴᡡ)",
             "grammarRef": "mnc-verb-negation"
           },
           {
             "key": "prohib",
-            "label": "禁止 (ume + -ra)",
+            "label": "禁止 (ᡠᠮᡝ + -ᡵᠠ)",
             "grammarRef": "mnc-verb-negation"
           }
         ]
@@ -142,27 +142,27 @@
         "rows": [
           {
             "key": "cvbme",
-            "label": "同时 (-me)",
+            "label": "同时 (-ᠮᡝ)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbfi",
-            "label": "先后完成 (-fi)",
+            "label": "先后完成 (-ᡶᡳ)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbhai",
-            "label": "持续 (-hai/-hei/-hoi)",
+            "label": "持续 (-ᡥᠠᡳ/-ᡥᡝᡳ/-ᡥᠣᡳ)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbtala",
-            "label": "直到 (-tala/-tele)",
+            "label": "直到 (-ᡨᠠᠯᠠ/-ᡨᡝᠯᡝ)",
             "grammarRef": "mnc-verb-converb"
           },
           {
             "key": "cvbnggala",
-            "label": "当…时 (-nggala/-nggele)",
+            "label": "当…时 (-ᠩᡤᠠᠯᠠ/-ᠩᡤᡝᠯᡝ)",
             "grammarRef": "mnc-verb-converb"
           }
         ]
@@ -179,27 +179,27 @@
         "rows": [
           {
             "key": "ptcppast",
-            "label": "已发生形动 (-ha)",
+            "label": "已发生形动 (-ᡥᠠ)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "ptcpfut",
-            "label": "未发生形动 (-ra)",
+            "label": "未发生形动 (-ᡵᠠ)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "nomn",
-            "label": "名词化 (-n)",
+            "label": "名词化 (-ᠨ)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "nomsi",
-            "label": "名词化 (-si)",
+            "label": "名词化 (-ᠰᡳ)",
             "grammarRef": "mnc-verb-participle"
           },
           {
             "key": "nomtan",
-            "label": "名词化 (-tan)",
+            "label": "名词化 (-ᡨᠠᠨ)",
             "grammarRef": "mnc-verb-participle"
           }
         ]

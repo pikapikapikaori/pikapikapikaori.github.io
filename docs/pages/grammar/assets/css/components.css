@@ -351,15 +351,17 @@
 /* 键帽：把「按什么键」直接画在输入框里，不另写一句提示 */
 .ghost-input__key {
     display: inline-flex;
-    font-family: var(--ff-ui);
     align-items: center;
-    height: 17px;
+    justify-content: center;
+    font-family: var(--ff-ui);
+    min-width: 26px;
+    height: 19px;
     padding: 0 5px;
     border: 1px solid var(--c-border);
     border-radius: 4px;
     background: var(--c-bg-elev);
     color: var(--c-fg-subtle);
-    font-size: 10.5px;
+    font-size: 12px;
     line-height: 1;
     letter-spacing: 0.02em;
     white-space: nowrap;
@@ -379,7 +381,7 @@
 }
 
 .ghost-input--space > .input {
-    padding-right: 34px;
+    padding-right: 62px;
 }
 
 /* 单行控件统一高度：显式 height 抵消 input 继承的 line-height 与 select 原生行高的差异 */

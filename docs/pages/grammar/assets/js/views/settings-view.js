@@ -208,20 +208,54 @@ export default {
         /* ---------- 字体 ---------- */
 
         function fontControl() {
-            const currentMode = getStoredFontMode()
-            const currentFamily = getStoredFontFamily()
+            /** 下拉退回实际生效的选项：取消选择或字体加载失败时用 */
+            function restoreMode() {
+                modeSelect.value = getStoredFontMode()
+                renderFamily()
+            }
+
+            /** 重新渲染「当前字体名」：本地模式下点它可以换文件 */
+            function renderFamily() {
+                familySlot.replaceChildren()
+                if (getStoredFontMode() !== 'local') return
+                const family = getStoredFontFamily()
+                if (!family) return
+                familySlot.appendChild(h('button', {
+                    class: 'badge badge--clickable',
+                    type: 'button',
+                    title: '点击更换字体文件',
+                    onclick: pickFile
+                }, family))
+            }
+
+            /** 打开文件框；没选文件（cancel 或老浏览器）就把下拉退回去 */
+            function pickFile() {
+                const onCancel = () => restoreMode()
+                fileInput.addEventListener('cancel', onCancel, { once: true })
+                const onFocus = () => {
+                    // 回到窗口时 onchange 可能还没跑，等一拍再判断
+                    setTimeout(() => {
+                        window.removeEventListener('focus', onFocus)
+                        fileInput.removeEventListener('cancel', onCancel)
+                        if (!fileInput.files || !fileInput.files.length) restoreMode()
+                    }, 0)
+                }
+                window.addEventListener('focus', onFocus)
+                fileInput.click()
+            }
 
             const modeSelect = selectControl(
                 FONT_MODES.map((m) => ({ value: m.value, label: m.label })),
-                currentMode,
+                getStoredFontMode(),
                 async (v) => {
                     if (v === 'local') {
-                        fileInput.click()
+                        pickFile()
                         // 文件选好前不落库：避免留下一个没有字体的本地模式
                         return
                     }
                     applyFont({ mode: v })
                     await patchSettings({ fontMode: v, fontFamily: null })
+                    renderFamily()
                 }
             )
 
@@ -232,31 +266,31 @@ export default {
                 onchange: async (e) => {
                     const f = e.target.files && e.target.files[0]
                     e.target.value = ''
-                    if (!f) return
+                    if (!f) {
+                        restoreMode()
+                        return
+                    }
                     try {
                         const { name } = await applyLocalFontFile(f)
                         await patchSettings({ fontMode: 'local', fontFamily: name })
+                        modeSelect.value = 'local'
+                        renderFamily()
                         toast.success(`已应用本地字体：${name}`)
                     } catch (err) {
                         toast.error(`字体加载失败：${err.message}`)
+                        restoreMode()
                     }
                 }
             })
 
-            const wrap = h('div', { style: { display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' } },
-                modeSelect,
-                h('button', {
-                    class: 'btn btn--sm', type: 'button',
-                    title: '选择本地字体文件',
-                    onclick: () => fileInput.click()
-                }, '选择字体文件'),
-                fileInput,
-                currentMode === 'local' && currentFamily
-                    ? h('span', { class: 'badge' }, currentFamily)
-                    : null
-            )
+            const familySlot = h('span', {})
+            renderFamily()
 
-            return wrap
+            return h('div', { style: { display: 'flex', gap: 'var(--sp-2)', alignItems: 'center' } },
+                modeSelect,
+                fileInput,
+                familySlot
+            )
         }
 
         /* ---------- 数据管理实现 ---------- */

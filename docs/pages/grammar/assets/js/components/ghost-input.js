@@ -5,7 +5,7 @@ import { bdiText } from '../utils/bdi.js'
 import { createEditableInput } from './editable-input.js'
 
 /**
- * `spaceKey` 为真时右缘挂「␣」键帽；有补全时灰字尾部挂「Tab」。
+ * `spaceKey` 为真时右缘挂空格键帽；有补全时灰字尾部挂「Tab」。
  * @returns {{ el, input, refresh }}
  */
 export function createGhostInput({
@@ -45,7 +45,7 @@ export function createGhostInput({
 
     const showSpaceKey = spaceKey && !disabled
     const el = h('span', { class: showSpaceKey ? 'ghost-input ghost-input--space' : 'ghost-input' }, hint, input,
-        showSpaceKey ? h('span', { class: 'ghost-input__key', 'aria-hidden': 'true' }, '␣') : null)
+        showSpaceKey ? h('span', { class: 'ghost-input__key', 'aria-hidden': 'true' }, 'Space') : null)
 
     /** 当前的推导值 */
     function ghostTarget() {

@@ -4,6 +4,6 @@
 > Publish date: 2022.05.17\
 > Last edited on: {docsify-last-updated}
 
-You can visit [here](en-us/writings/_media/PrivateEcard-20220517/index.html ':ignore') to view the whole page.
+You can visit [here](apps/ecard/index.html ':ignore') to view the whole page.
 
-<!-- iframe-link:height="900px" src="en-us/writings/_media/PrivateEcard-20220517/index.html" -->
+<!-- iframe-link:height="900px" src="apps/ecard/index.html" -->

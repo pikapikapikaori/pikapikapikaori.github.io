@@ -3,7 +3,7 @@
 // ============================================================
 
 // ---------- 数据源 ----------
-export const DEFAULT_DATA_URL = '../../PersonalRecordsBackup/bgm-20260906.json.zip'
+export const DEFAULT_DATA_URL = '../../../writings/_media/PersonalRecordsBackup/bgm-20260906.json.zip'
 export const CORS_PROXY = ''
 export const BANGUMI_EXPORT_URL = '../web/index.html'
 

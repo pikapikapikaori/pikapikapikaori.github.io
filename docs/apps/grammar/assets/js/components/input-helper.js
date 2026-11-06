@@ -16,9 +16,9 @@ const LS_MODE = (code) => `ln.ime.mode.${code}`
  * 键盘几何：真实键盘比例，四行都是 15 个单位。
  * 网格按 1/4 单位切 60 列，span 用「四分之一单位」计（1u = 4）。
  *
- * row1  ` 1 2 3 4 5 6 7 8 9 0         aux1 aux2  ⌫(2u)       = 1+10+1+1+2 = 15
+ * row1  ` 1 2 3 4 5 6 7 8 9 0         -    =     ⌫(2u)       = 1+10+1+1+2 = 15
  * row2  Tab(1.5u) q…p  [ ]  \(1.5u)                        = 1.5+10+1+1+1.5 = 15
- * row3  Caps(2u) a…l  ; '  aux3 aux4                      = 2+9+1+1+1+1 = 15
+ * row3  Caps(2u) a…l  ; '  aux1 aux2                      = 2+9+1+1+1+1 = 15
  * row4  Shift(2.25u) z…m  , . /  ⇧(2.75u)                 = 2.25+7+1+1+1+2.75 = 15
  */
 const KEY_ROWS = [
@@ -26,7 +26,7 @@ const KEY_ROWS = [
         { k: '`' },
         { k: '1' }, { k: '2' }, { k: '3' }, { k: '4' }, { k: '5' },
         { k: '6' }, { k: '7' }, { k: '8' }, { k: '9' }, { k: '0' },
-        { k: 'aux1' }, { k: 'aux2' },
+        { k: '-' }, { k: '=' },
         { action: 'back', span: 8, label: '⌫' }
     ],
     [
@@ -41,7 +41,7 @@ const KEY_ROWS = [
         { k: 'a' }, { k: 's' }, { k: 'd' }, { k: 'f' }, { k: 'g' },
         { k: 'h' }, { k: 'j' }, { k: 'k' }, { k: 'l' },
         { k: ';' }, { k: '\'' },
-        { k: 'aux3' }, { k: 'aux4' }
+        { k: 'aux1' }, { k: 'aux2' }
     ],
     [
         { action: 'shift', span: 9, label: 'Shift' },
@@ -52,14 +52,14 @@ const KEY_ROWS = [
 ]
 
 /**
- * 物理键 → 键盘槽位。e.key 随键盘布局与 Shift 变化（Shift+5 是 %、- 与 = 在屏幕键盘上叫 aux1/aux2），
+ * 物理键 → 键盘槽位。e.key 随键盘布局与 Shift 变化（Shift+5 是 %），
  * 用 e.code 才能稳定对上 KEY_ROWS 的槽位名。
  */
 const CODE_SLOT = {
     Backquote: '`',
     Digit1: '1', Digit2: '2', Digit3: '3', Digit4: '4', Digit5: '5',
     Digit6: '6', Digit7: '7', Digit8: '8', Digit9: '9', Digit0: '0',
-    Minus: 'aux1', Equal: 'aux2',
+    Minus: '-', Equal: '=',
     KeyQ: 'q', KeyW: 'w', KeyE: 'e', KeyR: 'r', KeyT: 't', KeyY: 'y', KeyU: 'u',
     KeyI: 'i', KeyO: 'o', KeyP: 'p', KeyA: 'a', KeyS: 's', KeyD: 'd', KeyF: 'f',
     KeyG: 'g', KeyH: 'h', KeyJ: 'j', KeyK: 'k', KeyL: 'l', KeyZ: 'z', KeyX: 'x',
@@ -67,9 +67,6 @@ const CODE_SLOT = {
     BracketLeft: '[', BracketRight: ']', Backslash: '\\',
     Semicolon: ';', Quote: '\'', Comma: ',', Period: '.', Slash: '/',
 }
-
-/** 屏幕键面下方的小字：aux1 / aux2 表示物理键盘的 - 与 = */
-const SLOT_HINT = { aux1: '-', aux2: '=' }
 
 const state = {
     enabled: readEnabled(),
@@ -667,8 +664,8 @@ function keyButton(slot) {
     if (char && isMark(char)) {
         btn.replaceChildren(scriptText((sampleForChar(char) + char).normalize('NFC')))
     }
-    // 数字这类「键面就是键名」的键不用再标一遍小字；aux1 / aux2 标物理键面上的 - 与 =
-    const hint = SLOT_HINT[latin] || (latin.startsWith('aux') ? '' : latin)
+    // 数字这类「键面就是键名」的键不用再标一遍小字；aux1 / aux2 是附加键，不露内部名
+    const hint = latin.startsWith('aux') ? '' : latin
     if (char && hint && hint !== char) btn.append(h('small', {}, hint))
     return btn
 }

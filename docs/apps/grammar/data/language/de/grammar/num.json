@@ -124,7 +124,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<strong><bdi>ein</bdi> 有变格：按不定冠词变格</strong>（<bdi>ein / eine / eines / einem / einen），与 kein、物主代词（mein 等）完全一致；只有在强调「一个」时才重读。zwei 在口语里有时说 zwo，以免与 drei</bdi> 混淆。"
+        "notes": "<strong><bdi>ein</bdi> 有变格：按不定冠词变格</strong>（<bdi>ein / eine / eines / einem / einen</bdi>），与 <bdi>kein</bdi>、物主代词（<bdi>mein</bdi> 等）完全一致；只有在强调「一个」时才重读。<bdi>zwei</bdi> 在口语里有时说 <bdi>zwo</bdi>，以免与 <bdi>drei</bdi> 混淆。"
       },
       {
         "id": "de-num-ordinal",
@@ -162,7 +162,7 @@
               [
                 "4–19（除 7）",
                 "<bdi>vierte / fünfte / sechste …</bdi>",
-                "<bdi>1–19：+ -te</bdi>"
+                "1–19：<bdi>+ -te</bdi>"
               ],
               [
                 "20 以上",
@@ -217,7 +217,7 @@
             "lang": "de"
           }
         ],
-        "notes": "分数词大多名词化，首字母大写（<bdi>das Drittel、das Viertel</bdi>）。"
+        "notes": "分数词大多名词化，首字母大写（<bdi>das Drittel</bdi>、<bdi>das Viertel</bdi>）。"
       },
       {
         "id": "de-num-time-date",
@@ -319,13 +319,13 @@
               ],
               [
                 "<bdi>in</bdi> + 年份",
-                "<bdi>im Jahr(e) 1990 / 1990（不加介词时用 im Jahr）</bdi>"
+                "<bdi>im Jahr(e) 1990 / 1990</bdi>（不加介词时用 <bdi>im Jahr</bdi>）"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "钟点用 24 小时制书写、12 小时制口语；半点用 <bdi>halb + 下一个钟点（halb drei = 2:30）。日期中的序数词按形容词变格（am dritten Oktober），书面用数字加点（3. Oktober</bdi>）。"
+        "notes": "钟点用 24 小时制书写、12 小时制口语；半点用 <bdi>halb +</bdi> 下一个钟点（<bdi>halb drei = 2:30</bdi>）。日期中的序数词按形容词变格（<bdi>am dritten Oktober</bdi>），书面用数字加点（<bdi>3. Oktober</bdi>）。"
       }
     ]
   }

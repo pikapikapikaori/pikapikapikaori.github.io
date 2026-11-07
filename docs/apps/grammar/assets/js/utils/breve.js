@@ -17,7 +17,7 @@ export function foldBreve(text) {
 }
 
 /**
- * 把短音符包进 span，便于用 CSS 隐藏 / 显示。可重复调用（每次先撤掉旧标记）。
+ * 把短音符包进 span，便于用 CSS 隐藏、显示。可重复调用（每次先撤掉旧标记）。
  */
 export function annotateBreves(root, { selector = 'td, th' } = {}) {
     if (!root || !selector) return

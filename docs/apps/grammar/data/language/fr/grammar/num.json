@@ -113,7 +113,7 @@
               [
                 "80",
                 "<bdi>quatre-vingts</bdi>",
-                "<bdi>4 × 20；后接数词时去 s</bdi>"
+                "4 × 20；后接数词时去 s"
               ],
               [
                 "81",
@@ -128,7 +128,7 @@
               [
                 "100 / 200",
                 "<bdi>cent / deux cents</bdi>",
-                "整数百加 <bdi>s，后接数词去 s</bdi>"
+                "整数百加 s，后接数词去 s"
               ],
               [
                 "1000 / 2000",
@@ -144,7 +144,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>un 有性数变化（une、uns、unes）；vingt 和 cent 在整数倍时加 s（quatre-vingts、deux cents</bdi>），一旦后面还有数词就不加。"
+        "notes": "<bdi>un</bdi> 有性数变化（<bdi>une</bdi>、<bdi>uns</bdi>、<bdi>unes</bdi>）；<bdi>vingt</bdi> 和 <bdi>cent</bdi> 在整数倍时加 s（<bdi>quatre-vingts</bdi>、<bdi>deux cents</bdi>），一旦后面还有数词就不加。"
       },
       {
         "id": "fr-num-ordinal",
@@ -188,7 +188,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "序数词前用定冠词：<bdi>le premier、la deuxième；缩写作 1er / 1re / 2e</bdi>。"
+        "notes": "序数词前用定冠词：<bdi>le premier</bdi>、<bdi>la deuxième</bdi>；缩写作 <bdi>1er / 1re / 2e</bdi>。"
       },
       {
         "id": "fr-num-fraction",
@@ -206,7 +206,7 @@
               [
                 "1/2",
                 "<bdi>un demi / la moitié</bdi>",
-                "<bdi>un demi-litre、la moitié du gâteau</bdi>"
+                "<bdi>un demi-litre</bdi>、<bdi>la moitié du gâteau</bdi>"
               ],
               [
                 "1/3",
@@ -237,7 +237,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "分数读法：分子用基数、分母用序数（2/3 = <bdi>deux tiers）；分母大于 1 时加 s</bdi>。"
+        "notes": "分数读法：分子用基数、分母用序数（2/3 = <bdi>deux tiers</bdi>）；分母大于 1 时加 s。"
       }
     ]
   }

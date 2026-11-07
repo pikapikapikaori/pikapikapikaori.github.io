@@ -40,13 +40,11 @@ export default {
             }
         }
 
-        /* ---------- DOM 容器 ---------- */
         const head = h('div', { class: 'page-head page-head--display' })
         const groupsEl = h('div', {})
 
         replace(main, head, groupsEl)
 
-        /* ---------- 头部 ---------- */
         function renderHead() {
             replace(head,
                 h('div', {},
@@ -64,7 +62,6 @@ export default {
             )
         }
 
-        /* ---------- 分组渲染 ---------- */
         function renderGroups() {
             const ordered = orderedLanguages(settings.languageOrder)
             const groupOrder = Array.isArray(settings.groupOrder) && settings.groupOrder.length
@@ -157,10 +154,8 @@ export default {
             return card
         }
 
-        /* ---------- 拖动 ---------- */
         let dragCode = null
 
-        /* ---------- 组拖动 ---------- */
         let dragGroupKey = null
 
         function attachGroupDragHandlers(header, groupKey) {
@@ -304,13 +299,10 @@ export default {
             renderGroups()
         }
 
-        /* ---------- 首次渲染 ---------- */
         renderHead()
         renderGroups()
     }
 }
-
-/* ---------------- 工具 ---------------- */
 
 /** 按 settings.languageOrder 排序，未在 order 中的按 LANGUAGES 原顺序追加 */
 function orderedLanguages(order) {

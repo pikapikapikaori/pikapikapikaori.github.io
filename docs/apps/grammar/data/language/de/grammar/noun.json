@@ -105,11 +105,11 @@
             "lang": "de"
           }
         ],
-        "notes": "德语名词首字母一律大写。性别需按词记忆，但有后缀规律：-<bdi>ung / -heit / -keit / -schaft / -tion / -tät / -ie 多为阴性；-chen / -lein / -ment / -um 多为中性；-er / -ling / -ismus</bdi> 多为阳性。"
+        "notes": "德语名词首字母一律大写。性别需按词记忆，但有后缀规律：-<bdi>ung / -heit / -keit / -schaft / -tion / -tät / -ie</bdi> 多为阴性；<bdi>-chen / -lein / -ment / -um</bdi> 多为中性；<bdi>-er / -ling / -ismus</bdi> 多为阳性。"
       },
       {
         "id": "de-noun-m-strong",
-        "title": "阳性强变化（<bdi>Tisch 型，复数 -e</bdi>）",
+        "title": "阳性强变化（<bdi>Tisch</bdi> 型，复数 -e）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -120,7 +120,7 @@
               "label": "复数词干",
               "example": "Tisch",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -193,7 +193,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：阳性强变化（<bdi>Tisch 型，复数 -e</bdi>）",
+            "caption": "词尾：阳性强变化（<bdi>Tisch</bdi> 型，复数 -e）",
             "role": "pattern",
             "headers": [
               "",
@@ -235,7 +235,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Tisch（复数 Tische</bdi>）",
+            "caption": "例词：<bdi>Tisch</bdi>（复数 <bdi>Tische</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -277,11 +277,11 @@
             "lang": "de"
           }
         ],
-        "notes": "属格单数加 -<bdi>es（Tisches），第三、四格与主格同形。以 -s / -ß / -z 结尾或外来词属格多用 -s（Autos）。复数词尾不同的阳性名词（Mann → Männer、Wald → Wälder）用「阳性强变化（Mann 型，复数 -er</bdi>）」。"
+        "notes": "属格单数加 -<bdi>es</bdi>（<bdi>Tisches</bdi>），第三、四格与主格同形。以 <bdi>-s / -ß / -z</bdi> 结尾或外来词属格多用 -s（<bdi>Autos</bdi>）。复数词尾不同的阳性名词（<bdi>Mann → Männer</bdi>、<bdi>Wald → Wälder</bdi>）用「阳性强变化（<bdi>Mann</bdi> 型，复数 <bdi>-er</bdi>）」。"
       },
       {
         "id": "de-noun-m-strong-er",
-        "title": "阳性强变化（<bdi>Mann 型，复数 -er</bdi>）",
+        "title": "阳性强变化（<bdi>Mann</bdi> 型，复数 <bdi>-er</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -292,7 +292,7 @@
               "label": "复数词干",
               "example": "Männ",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -365,7 +365,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：阳性强变化（<bdi>Mann 型，复数 -er</bdi>）",
+            "caption": "词尾：阳性强变化（<bdi>Mann</bdi> 型，复数 <bdi>-er</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -407,7 +407,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Mann（复数 Männer</bdi>）",
+            "caption": "例词：<bdi>Mann</bdi>（复数 <bdi>Männer</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -449,11 +449,11 @@
             "lang": "de"
           }
         ],
-        "notes": "单数与 <bdi>Tisch 型相同，复数加 -er，词干常变音（Mann → Männer、Wald → Wälder、Geist → Geister）。复数词干填变音后的形式（Männ），复数词尾 -er</bdi> 由类型补上。"
+        "notes": "单数与 <bdi>Tisch</bdi> 型相同，复数加 <bdi>-er</bdi>，词干常变音（<bdi>Mann → Männer</bdi>、<bdi>Wald → Wälder</bdi>、<bdi>Geist → Geister</bdi>）。复数词干填变音后的形式（<bdi>Männ</bdi>），复数词尾 <bdi>-er</bdi> 由类型补上。"
       },
       {
         "id": "de-noun-n-strong",
-        "title": "中性强变化（<bdi>Kind 型，复数 -er</bdi>）",
+        "title": "中性强变化（<bdi>Kind</bdi> 型，复数 <bdi>-er</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -464,7 +464,7 @@
               "label": "复数词干",
               "example": "Kind",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -537,7 +537,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：中性强变化（<bdi>Kind 型，复数 -er</bdi>）",
+            "caption": "词尾：中性强变化（<bdi>Kind</bdi> 型，复数 <bdi>-er</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -579,7 +579,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Kind（复数 Kinder</bdi>）",
+            "caption": "例词：<bdi>Kind</bdi>（复数 <bdi>Kinder</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -621,11 +621,11 @@
             "lang": "de"
           }
         ],
-        "notes": "单数变格与阳性强变化相同（属格 -<bdi>es）；复数加 -er，常变音（Kind → Kinder、Buch → Bücher、Haus → Häuser</bdi>）。"
+        "notes": "单数变格与阳性强变化相同（属格 -<bdi>es</bdi>）；复数加 <bdi>-er</bdi>，常变音（<bdi>Kind → Kinder</bdi>、<bdi>Buch → Bücher</bdi>、<bdi>Haus → Häuser</bdi>）。"
       },
       {
         "id": "de-noun-n-strong-e",
-        "title": "中性强变化（<bdi>Jahr 型，复数 -e</bdi>）",
+        "title": "中性强变化（<bdi>Jahr</bdi> 型，复数 -e）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -636,7 +636,7 @@
               "label": "复数词干",
               "example": "Jahr",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -709,7 +709,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：中性强变化（<bdi>Jahr 型，复数 -e</bdi>）",
+            "caption": "词尾：中性强变化（<bdi>Jahr</bdi> 型，复数 -e）",
             "role": "pattern",
             "headers": [
               "",
@@ -751,7 +751,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Jahr（复数 Jahre</bdi>）",
+            "caption": "例词：<bdi>Jahr</bdi>（复数 <bdi>Jahre</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -793,7 +793,7 @@
             "lang": "de"
           }
         ],
-        "notes": "复数加 -<bdi>e，部分词变音（Jahr → Jahre、Wort → Wörter 属例外，需填 Wört</bdi> 作复数词干）。"
+        "notes": "复数加 -e，部分词变音（<bdi>Jahr → Jahre</bdi>、<bdi>Wort → Wörter</bdi> 属例外，需填 <bdi>Wört</bdi> 作复数词干）。"
       },
       {
         "id": "de-noun-n-strong-zero",
@@ -808,7 +808,7 @@
               "label": "复数词干",
               "example": "Fenster",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -923,7 +923,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Fenster（复数 Fenster</bdi>）",
+            "caption": "例词：<bdi>Fenster</bdi>（复数 <bdi>Fenster</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -965,11 +965,11 @@
             "lang": "de"
           }
         ],
-        "notes": "复数与单数同形（<bdi>Fenster、Mädchen、Leben），属格单数加 -s，与格复数加 -n</bdi>。"
+        "notes": "复数与单数同形（<bdi>Fenster</bdi>、<bdi>Mädchen</bdi>、<bdi>Leben</bdi>），属格单数加 -s，与格复数加 -n。"
       },
       {
         "id": "de-noun-f",
-        "title": "阴性（<bdi>Frau 型，复数 -en</bdi>）",
+        "title": "阴性（<bdi>Frau</bdi> 型，复数 <bdi>-en</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -980,7 +980,7 @@
               "label": "复数词干",
               "example": "Frau",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -1055,7 +1055,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：阴性（<bdi>Frau 型，复数 -en</bdi>）",
+            "caption": "词尾：阴性（<bdi>Frau</bdi> 型，复数 <bdi>-en</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -1097,7 +1097,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Frau（复数 Frauen</bdi>）",
+            "caption": "例词：<bdi>Frau</bdi>（复数 <bdi>Frauen</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -1139,11 +1139,11 @@
             "lang": "de"
           }
         ],
-        "notes": "阴性名词单数四个格同形，没有任何词尾；复数一律 -<bdi>en（-in 结尾的加 -nen：Lehrerin → Lehrerinnen</bdi>）。"
+        "notes": "阴性名词单数四个格同形，没有任何词尾；复数一律 -<bdi>en</bdi>（<bdi>-in</bdi> 结尾的加 <bdi>-nen</bdi>：<bdi>Lehrerin → Lehrerinnen</bdi>）。"
       },
       {
         "id": "de-noun-f-e",
-        "title": "阴性（<bdi>Hand 型，复数 -e</bdi>）",
+        "title": "阴性（<bdi>Hand</bdi> 型，复数 -e）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1154,7 +1154,7 @@
               "label": "复数词干",
               "example": "Händ",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -1229,7 +1229,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：阴性（<bdi>Hand 型，复数 -e</bdi>）",
+            "caption": "词尾：阴性（<bdi>Hand</bdi> 型，复数 -e）",
             "role": "pattern",
             "headers": [
               "",
@@ -1271,7 +1271,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Hand（复数 Hände</bdi>）",
+            "caption": "例词：<bdi>Hand</bdi>（复数 <bdi>Hände</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -1313,11 +1313,11 @@
             "lang": "de"
           }
         ],
-        "notes": "单数与 <bdi>Frau 型相同；复数加 -e，通常变音（Hand → Hände、Stadt → Städte、Nacht → Nächte）。复数词干填变音后的形式（Händ</bdi>）。"
+        "notes": "单数与 <bdi>Frau</bdi> 型相同；复数加 -e，通常变音（<bdi>Hand → Hände</bdi>、<bdi>Stadt → Städte</bdi>、<bdi>Nacht → Nächte</bdi>）。复数词干填变音后的形式（<bdi>Händ</bdi>）。"
       },
       {
         "id": "de-noun-m-weak",
-        "title": "阳性弱变化（<bdi>Student 型，复数 -en</bdi>）",
+        "title": "阳性弱变化（<bdi>Student</bdi> 型，复数 <bdi>-en</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1328,7 +1328,7 @@
               "label": "复数词干",
               "example": "Student",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -1397,7 +1397,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：阳性弱变化（<bdi>Student 型，复数 -en</bdi>）",
+            "caption": "词尾：阳性弱变化（<bdi>Student</bdi> 型，复数 <bdi>-en</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -1439,7 +1439,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Student（复数 Studenten</bdi>）",
+            "caption": "例词：<bdi>Student</bdi>（复数 <bdi>Studenten</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -1481,11 +1481,11 @@
             "lang": "de"
           }
         ],
-        "notes": "只有主格单数是词干本身，其余各格一律加 -<bdi>en（-n）。同类：Junge、Herr、Mensch、Nachbar</bdi> 等。"
+        "notes": "只有主格单数是词干本身，其余各格一律加 -<bdi>en</bdi>（-n）。同类：<bdi>Junge</bdi>、<bdi>Herr</bdi>、<bdi>Mensch</bdi>、<bdi>Nachbar</bdi> 等。"
       },
       {
         "id": "de-noun-mixed",
-        "title": "混合变化（<bdi>Name 型，复数 -en</bdi>）",
+        "title": "混合变化（<bdi>Name</bdi> 型，复数 <bdi>-en</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1496,7 +1496,7 @@
               "label": "复数词干",
               "example": "Nam",
               "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch、Mann/Männer → Männ、Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
             }
           ],
           "stemForms": {
@@ -1568,7 +1568,7 @@
         },
         "tables": [
           {
-            "caption": "词尾：混合变化（<bdi>Name 型，复数 -en</bdi>）",
+            "caption": "词尾：混合变化（<bdi>Name</bdi> 型，复数 <bdi>-en</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -1610,7 +1610,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>Name（复数 Namen</bdi>）",
+            "caption": "例词：<bdi>Name</bdi>（复数 <bdi>Namen</bdi>）",
             "role": "example",
             "headers": [
               "",
@@ -1652,7 +1652,7 @@
             "lang": "de"
           }
         ],
-        "notes": "主格单数以 -<bdi>e 结尾，属格加 -ns，其余加 -n；同类：Gedanke、Glaube、Wille、Friede。词干填 -e 之前的部分（Name → Nam</bdi>）。"
+        "notes": "主格单数以 -e 结尾，属格加 <bdi>-ns</bdi>，其余加 -n；同类：<bdi>Gedanke</bdi>、<bdi>Glaube</bdi>、<bdi>Wille</bdi>、<bdi>Friede</bdi>。词干填 -e 之前的部分（<bdi>Name → Nam</bdi>）。"
       },
       {
         "id": "de-noun-special-plural",

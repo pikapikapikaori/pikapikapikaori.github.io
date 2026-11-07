@@ -81,7 +81,7 @@
             ]
           }
         ],
-        "notes": "第一、二人称代词没有性别区分，只有数（单 / 复）与格的变化；夺格带介词时多用 <bdi>mē / tē（mēcum、tēcum</bdi> 是固定的后置用法）。"
+        "notes": "第一、二人称代词没有性别区分，只有数（单 / 复）与格的变化；夺格带介词时多用 <bdi>mē / tē</bdi>（<bdi>mēcum</bdi>、<bdi>tēcum</bdi> 是固定的后置用法）。"
       },
       {
         "id": "la-pron-3rd",
@@ -249,7 +249,7 @@
             "lang": "la"
           }
         ],
-        "notes": "反身代词只有第三人称有专门形式 <bdi>suī / sibi / sē，且没有主格（动作不会反射到主语自身以外）；第一、二人称直接用 ego / tū 的斜格。反身代词指向主语，非反身的「他/她」用 is / ea / id</bdi> 的斜格。",
+        "notes": "反身代词只有第三人称有专门形式 <bdi>suī / sibi / sē</bdi>，且没有主格（动作不会反射到主语自身以外）；第一、二人称直接用 <bdi>ego / tū</bdi> 的斜格。反身代词指向主语，非反身的「他/她」用 <bdi>is / ea / id</bdi> 的斜格。",
         "inflect": "pron"
       },
       {
@@ -398,7 +398,7 @@
             "lang": "la"
           }
         ],
-        "notes": "变格同第一二变格形容词。呼格单数阳性为 <bdi>mī（只有 meus 有这个特殊形式）；noster / vester 保留词干的 -er。suus 是反身（指向主语），非反身的「他的」用 eius（属格）/ suus</bdi> 以外的形式。",
+        "notes": "变格同第一二变格形容词。呼格单数阳性为 <bdi>mī</bdi>（只有 <bdi>meus</bdi> 有这个特殊形式）；<bdi>noster / vester</bdi> 保留词干的 <bdi>-er</bdi>。<bdi>suus</bdi> 是反身（指向主语），非反身的「他的」用 <bdi>eius</bdi>（属格）<bdi>/ suus</bdi> 以外的形式。",
         "inflect": "pron"
       },
       {
@@ -532,7 +532,7 @@
             ]
           }
         ],
-        "notes": "指示代词的属格单数一律为 -<bdi>īus，与格单数一律为 -ī</bdi>。",
+        "notes": "指示代词的属格单数一律为 -<bdi>īus</bdi>，与格单数一律为 <bdi>-ī</bdi>。",
         "inflect": "pron"
       },
       {
@@ -710,7 +710,7 @@
             ]
           }
         ],
-        "notes": "疑问代词与关系代词变格几乎同形，区别在主格单数（<bdi>quis vs. quī）与中性主/宾格单数（quid vs. quod</bdi>）。",
+        "notes": "疑问代词与关系代词变格几乎同形，区别在主格单数（<bdi>quis vs. quī</bdi>）与中性主/宾格单数（<bdi>quid vs. quod</bdi>）。",
         "inflect": "pron"
       },
       {
@@ -727,7 +727,7 @@
             ],
             "rows": [
               [
-                "<bdi>quis（sī / nisi / nē / num / quō</bdi> 之后）",
+                "<bdi>quis</bdi>（<bdi>sī / nisi / nē / num / quō</bdi> 之后）",
                 "某人",
                 "条件句、间接疑问"
               ],
@@ -846,7 +846,7 @@
             "lang": "la"
           }
         ],
-        "notes": "不定代词的属格单数一律 -<bdi>ius、与格单数一律 -ī（同指示代词）；-dam 直接缀在变格形式之后（cuiusdam、quendam</bdi>）。",
+        "notes": "不定代词的属格单数一律 -<bdi>ius</bdi>、与格单数一律 <bdi>-ī</bdi>（同指示代词）；<bdi>-dam</bdi> 直接缀在变格形式之后（<bdi>cuiusdam</bdi>、<bdi>quendam</bdi>）。",
         "inflect": "pron"
       }
     ]

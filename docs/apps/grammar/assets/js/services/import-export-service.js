@@ -3,14 +3,13 @@ import {
     CURRENT_VERSION, EXPORT_KIND
 } from '../models/user.js'
 import {
-    listAll, findByKey, saveWord, bulkImport
+    findByKey, saveWord
 } from '../store/word-store.js'
 import { createUser, saveUser } from '../store/user-store.js'
-import { put as dbPut, STORE_SETTINGS, STORE_USERS } from '../store/db.js'
+import { put as dbPut, STORE_SETTINGS } from '../store/db.js'
 import { normalizeSettings } from '../store/settings-store.js'
-import { normalizeParadigm, normalizeStems, mergeStems, normalizeAttributes } from '../models/word.js'
+import { normalizeParadigm, normalizeStems, normalizeAttributes, mergeWordContent } from '../models/word.js'
 import { wordId } from '../utils/id.js'
-import { fieldValues } from '../models/grammar.js'
 import { nowIso } from '../utils/date.js'
 
 export async function exportUser(user, settings, words) {
@@ -169,28 +168,7 @@ function normalizeInflections(list) {
 }
 
 function mergePreservingProgress(existing, incoming) {
-    const merged = { ...existing }
-
-    merged.paradigm = mergeParadigmLocal(existing.paradigm, incoming.paradigm)
-
-    merged.stems = mergeStems(existing.stems, incoming.stems)
-    merged.attributes = normalizeAttributes({
-        ...(existing.attributes || {}),
-        ...(incoming.attributes || {}),
-    })
-    merged.inflections = appendUnique(existing.inflections, incoming.inflections)
-    merged.meanings    = appendUnique(existing.meanings, incoming.meanings)
-    merged.collocations= appendUnique(existing.collocations, incoming.collocations)
-    merged.examples    = appendUnique(existing.examples, incoming.examples)
-
-    merged.derivatives = uniqArray([...(existing.derivatives || []), ...(incoming.derivatives || [])])
-    merged.tags        = uniqArray([...(existing.tags || []), ...(incoming.tags || [])])
-
-    const ei = existing.inflectionType || {}
-    const ii = incoming.inflectionType || {}
-    if (!(ei.label || ei.grammarRef) && (ii.label || ii.grammarRef)) {
-        merged.inflectionType = { ...ii }
-    }
+    const merged = mergeWordContent(existing, incoming, { preferIncoming: true })
 
     merged.encounterCount = (existing.encounterCount || 0) + (incoming.encounterCount || 0)
 
@@ -199,60 +177,10 @@ function mergePreservingProgress(existing, incoming) {
     merged.wrongCount     = existing.wrongCount || 0
     merged.lastReviewedAt = existing.lastReviewedAt || null
     merged.nextReviewAt   = existing.nextReviewAt || null
+    merged.notes          = existing.notes || incoming.notes || ''
 
-    merged.notes = existing.notes || incoming.notes || ''
     merged.updatedAt = nowIso()
     return merged
-}
-
-function mergeParadigmLocal(a, b) {
-    const A = normalizeParadigm(a)
-    const B = normalizeParadigm(b)
-    const out = {}
-    const tableKeys = new Set([...Object.keys(A), ...Object.keys(B)])
-    for (const tkey of tableKeys) {
-        const ta = A[tkey] || {}
-        const tb = B[tkey] || {}
-        const rows = {}
-        const rowKeys = new Set([...Object.keys(ta), ...Object.keys(tb)])
-        for (const rkey of rowKeys) {
-            const ca = ta[rkey] || {}
-            const cb = tb[rkey] || {}
-            const merged = { ...ca }
-            for (const [ck, v] of Object.entries(cb)) {
-                const s = String(v ?? '').trim()
-                if (s) merged[ck] = s
-            }
-            if (Object.keys(merged).length) rows[rkey] = merged
-        }
-        if (Object.keys(rows).length) out[tkey] = rows
-    }
-    return out
-}
-
-function appendUnique(base = [], extra = []) {
-    const out = [...(base || [])]
-    for (const item of extra || []) {
-        if (!item) continue
-        const key = entryKey(item)
-        if (!out.some((x) => entryKey(x) === key)) out.push({ ...item })
-    }
-    return out
-}
-function entryKey(e) {
-    return [
-        e.text ?? '', e.form ?? '', e.label ?? '', e.group ?? '',
-        e.translation ?? '', e.citation ?? '', e.source ?? ''
-    ].join('\u0001')
-}
-function uniqArray(arr) {
-    const seen = new Set(); const out = []
-    for (const x of arr) {
-        const s = String(x ?? '').trim()
-        if (!s || seen.has(s)) continue
-        seen.add(s); out.push(s)
-    }
-    return out
 }
 
 export async function createEmptyUser(name) {

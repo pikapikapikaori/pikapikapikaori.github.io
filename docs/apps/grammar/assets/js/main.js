@@ -1,7 +1,7 @@
 /** 应用入口：打开 IndexedDB、注册 Service Worker、初始化主题与字体、挂载路由。 */
 
 import { openDB } from './store/db.js'
-import { getUser, listUsers } from './store/user-store.js'
+import { getUser } from './store/user-store.js'
 import { getSettings, saveSettings } from './store/settings-store.js'
 import { createRouter } from './router.js'
 import { appStore, setUser, setLanguage, setSettings, setRoute, setNavContext } from './app-state.js'
@@ -40,7 +40,7 @@ function renderHeader() {
         }
     })
 
-    // 从欢迎页进来的文档页：顶栏回首页，而不是回语言列表 / 设置
+    // 从欢迎页进来的文档页：顶栏回首页，而不是回语言列表、设置
     const home = () => appStore.get().navContext === 'welcome'
 
     return h('header', { class: 'app-header' },
@@ -184,7 +184,7 @@ async function mountView(name, ctx) {
     const unmount = await view.mount(container || getShell(), ctx)
     if (typeof unmount === 'function') currentUnmount = unmount
 
-    // 输入助手：只有「词列表 / 生词表单」需要，语言决定面板内容。
+    // 输入助手：只有「词列表、生词表单」需要，语言决定面板内容。
     // 动态加载：助手模块出问题（半更新、缓存、语法错）时只是没有助手，不会拖垮整个视图。
     if (IME_VIEWS.has(name) && ctx.params && ctx.params.lang) {
         const lang = ctx.params.lang

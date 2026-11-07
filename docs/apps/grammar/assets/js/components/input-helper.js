@@ -1,4 +1,4 @@
-/** 输入助手：修饰符 / 键盘面板，以及全局的空格转写。 */
+/** 输入助手：修饰符、键盘面板，以及全局的空格转写。 */
 
 import { h } from '../utils/dom.js'
 import { adaptField } from '../adapters/text-field.js'
@@ -87,7 +87,7 @@ let oneShotShift = false
 /** 系统 CapsLock 的最近已知状态（null = 还没从任何事件里读到过） */
 let osCapsLock = null
 
-/** 任何带修饰键状态的输入事件都顺手记一下 CapsLock，面板打开时用它对齐 */
+/** 任何带修饰键状态的输入事件都顺手记一下 CapsLock，面板打开时用它同步 */
 function noteModifiers(e) {
     if (typeof e.getModifierState !== 'function') return
     osCapsLock = e.getModifierState('CapsLock')
@@ -182,7 +182,7 @@ function bindOnce() {
         if (!mounted) return
         const field = adaptField(e.target)
         if (field) trimField(field)
-        // 焦点留在页面外 / 落到非输入框：收起面板（点面板按钮时焦点没动，不会触发）
+        // 焦点留在页面外、落到非输入框：收起面板（点面板按钮时焦点没动，不会触发）
         setTimeout(() => {
             if (!els || els.panel.hidden) return
             const active = document.activeElement
@@ -307,7 +307,7 @@ function keyboardIcon() {
 function refreshFab() {
     if (!els) return
     els.fab.hidden = !state.config
-    // 浮动工具列（回到顶部 / 显示转写）要和助手按钮错开
+    // 浮动工具列（回到顶部、显示转写）要和助手按钮错开
     document.documentElement.classList.toggle('has-ime-fab', !els.fab.hidden)
     els.fab.classList.toggle('ime-fab--on', state.enabled)
     els.fab.title = state.enabled
@@ -325,7 +325,7 @@ function openForFocused() {
 
 function openPanel() {
     if (!state.config || !els) return
-    // 面板是照物理键盘做的：打开时先跟系统的 CapsLock 对齐，
+    // 面板是照物理键盘做的：打开时先跟系统的 CapsLock 同步，
     // 否则键面显示和「跟随物理键盘」打出来的字会相反
     if (osCapsLock !== null) state.caps = osCapsLock
     els.panel.hidden = false
@@ -677,7 +677,7 @@ function keyButton(slot) {
     if (char && isMark(char)) {
         btn.replaceChildren(scriptText((sampleForChar(char) + char).normalize('NFC')))
     }
-    // 数字这类「键面就是键名」的键不用再标一遍小字；aux1 / aux2 是附加键，不露内部名
+    // 数字这类「键面就是键名」的键不用再标一遍小字；aux1、aux2 是附加键，不露内部名
     const hint = latin.startsWith('aux') ? '' : latin
     if (char && hint && hint !== char) btn.append(h('small', {}, hint))
     return btn
@@ -733,7 +733,7 @@ function convertOnSpace(field, e) {
 }
 
 /**
- * 面板快捷键：Ctrl+Shift+1 / 2 选模式，Esc 关闭。
+ * 面板快捷键：Ctrl+Shift+1、2 选模式，Esc 关闭。
  * 用 e.code 而不是 e.key：数字键上有没有 Shift 层符号都能对上。
  */
 function onShortcutKey(e) {
@@ -782,13 +782,13 @@ function onShortcutKey(e) {
     setMode(modes[index])
 }
 
-/** 物理按键：Shift / CapsLock 改层，键盘模式按映射替换（跟随开关关掉时不拦） */
+/** 物理按键：Shift、CapsLock 改层，键盘模式按映射替换（跟随开关关掉时不拦） */
 function onPhysicalKey(e) {
     if (!mounted || !state.config) return
     // 输入法组字期间的按键（空格上屏候选词）一律放行
     if (e.isComposing || e.keyCode === 229) return
 
-    // 空格转写：全局，和助手开关 / 面板是否打开无关
+    // 空格转写：全局，和助手开关、面板是否打开无关
     if (e.key === ' ' && !e.metaKey && !e.ctrlKey && !e.altKey) {
         const field = adaptField(e.target)
         if (field && convertOnSpace(field, e)) return

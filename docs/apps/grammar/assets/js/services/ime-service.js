@@ -68,7 +68,3 @@ export function loadIme(code) {
     pending.set(code, p)
     return p
 }
-
-export function clearImeCache() {
-    cache.clear()
-}

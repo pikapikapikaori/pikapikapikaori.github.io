@@ -2,44 +2,7 @@
 
 import { h } from '../utils/dom.js'
 import { bdiNode, hasScript } from '../utils/bdi.js'
-
-/** 光标在元素内的字符偏移（bdi 里的文字按逻辑顺序计） */
-function caretOffset(el) {
-    const sel = window.getSelection()
-    if (!sel || !sel.rangeCount) return null
-    const range = sel.getRangeAt(0)
-    if (range.endContainer !== el && !el.contains(range.endContainer)) return null
-    const before = document.createRange()
-    before.selectNodeContents(el)
-    before.setEnd(range.endContainer, range.endOffset)
-    return before.toString().length
-}
-
-function applyRange(range) {
-    const sel = window.getSelection()
-    if (!sel) return
-    sel.removeAllRanges()
-    sel.addRange(range)
-}
-
-function setCaret(el, offset) {
-    const range = document.createRange()
-    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
-    let remaining = Math.max(0, offset)
-    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-        const len = node.nodeValue.length
-        if (remaining <= len) {
-            range.setStart(node, remaining)
-            range.collapse(true)
-            applyRange(range)
-            return
-        }
-        remaining -= len
-    }
-    range.selectNodeContents(el)
-    range.collapse(false)
-    applyRange(range)
-}
+import { applyRange, caretOffsetIn, moveCaretTo } from '../utils/caret.js'
 
 export function createEditableInput({
     value = '',
@@ -109,10 +72,10 @@ export function createEditableInput({
     function sync() {
         const text = readText()
         if (text === lastText && isPainted(text)) return
-        const offset = caretOffset(el)
+        const offset = caretOffsetIn(el)
         paint(text)
         lastText = text
-        if (offset != null) setCaret(el, offset)
+        if (offset != null) moveCaretTo(el, offset)
     }
 
     function emitInput() {
@@ -182,7 +145,6 @@ export function createEditableInput({
             if (readText() === text) return
             paint(text)
             lastText = text
-            // 程序化赋值（如按语法锚点自动回填）也要让外层更新提示层
             if (typeof onValueChange === 'function') onValueChange()
         }
     })

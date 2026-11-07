@@ -158,7 +158,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<strong>词条的基本形态（<bdi>lemma</bdi>）一律用不定式</strong>（<bdi>sprechen / machen）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 -en），强变化与混合变化再补「过去时」「过去分词」等词干，现在时 2/3 单数换音的动词（nehmen → nimmst / nimmt</bdi>）另填「现在时 2/3 单数词干」。\n\n「构成」一列只区分两种：<strong>变位</strong>（单一动词形式，写进变位表）与<strong>复合</strong>（助动词 + 过去分词 / 不定式，不写进变位表，见「复合时态与被动语态」）。\n\n<strong>语式用法</strong>：直陈式陈述事实、提问（<bdi>Er kommt morgen.）；虚拟式 I 用于间接引语（Er sagt, er komme morgen.）；虚拟式 II 表示非现实、假设、委婉（Wenn ich Zeit hätte, käme ich.），弱变化动词常用 würde + 不定式代替（Ich würde kommen.）；命令式表示命令、请求（Komm her</bdi>!）。\n\n<strong>虚拟式的构成</strong>：虚拟式 <bdi>I = 不定式词干 + -e / -est / -e / -en / -et / -en（er komme、du kommest），第三人称单数与直陈式现在时容易混，要注意区分；虚拟式 II = 过去时词干 + 变音 + -e（er käme、er gäbe）；过去完成虚拟 = hätte / wäre + 过去分词（er wäre gekommen</bdi>）。\n\n现在分词只作形容词 / 状语；过去分词用于复合时态、被动语态，也可作形容词。"
+        "notes": "<strong>词条的基本形态（<bdi>lemma</bdi>）一律用不定式</strong>（<bdi>sprechen / machen</bdi>）；变位表由基本形态自动推出：弱变化只需要不定式（词干 = 不定式去掉 <bdi>-en</bdi>），强变化与混合变化再补「过去时」「过去分词」等词干，现在时 2/3 单数换音的动词（<bdi>nehmen → nimmst / nimmt</bdi>）另填「现在时 2/3 单数词干」。\n\n「构成」一列只区分两种：<strong>变位</strong>（单一动词形式，写进变位表）与<strong>复合</strong>（助动词 + 过去分词 / 不定式，不写进变位表，见「复合时态与被动语态」）。\n\n<strong>语式用法</strong>：直陈式陈述事实、提问（<bdi>Er kommt morgen.</bdi>）；虚拟式 I 用于间接引语（<bdi>Er sagt, er komme morgen.</bdi>）；虚拟式 <bdi>II</bdi> 表示非现实、假设、委婉（<bdi>Wenn ich Zeit hätte, käme ich.</bdi>），弱变化动词常用 <bdi>würde +</bdi> 不定式代替（<bdi>Ich würde kommen.</bdi>）；命令式表示命令、请求（<bdi>Komm her</bdi>!）。\n\n<strong>虚拟式的构成</strong>：虚拟式 I = 不定式词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>（<bdi>er komme</bdi>、<bdi>du kommest</bdi>），第三人称单数与直陈式现在时容易混，要注意区分；虚拟式 <bdi>II =</bdi> 过去时词干 + 变音 + -e（<bdi>er käme</bdi>、<bdi>er gäbe</bdi>）；过去完成虚拟 <bdi>= hätte / wäre +</bdi> 过去分词（<bdi>er wäre gekommen</bdi>）。\n\n现在分词只作形容词 / 状语；过去分词用于复合时态、被动语态，也可作形容词。"
       },
       {
         "id": "de-verb-compound",
@@ -176,12 +176,12 @@
               [
                 "现在完成时",
                 "<bdi>haben / sein</bdi> 的现在时 + 过去分词",
-                "<bdi>ich habe gemacht、ich bin gefahren</bdi>"
+                "<bdi>ich habe gemacht</bdi>、<bdi>ich bin gefahren</bdi>"
               ],
               [
                 "过去完成时",
                 "<bdi>haben / sein</bdi> 的过去时 + 过去分词",
-                "<bdi>ich hatte gemacht、ich war gefahren</bdi>"
+                "<bdi>ich hatte gemacht</bdi>、<bdi>ich war gefahren</bdi>"
               ],
               [
                 "将来时 <bdi>I</bdi>",
@@ -190,7 +190,7 @@
               ],
               [
                 "将来时 <bdi>II</bdi>",
-                "<bdi>werden 的现在时 + 过去分词 + haben / sein</bdi>",
+                "<bdi>werden</bdi> 的现在时 + 过去分词 <bdi>+ haben / sein</bdi>",
                 "<bdi>ich werde gemacht haben</bdi>"
               ]
             ],
@@ -217,19 +217,19 @@
               ],
               [
                 "现在完成时被动",
-                "<bdi>ist + 过去分词 + worden</bdi>",
+                "<bdi>ist +</bdi> 过去分词 <bdi>+ worden</bdi>",
                 "<bdi>es ist gemacht worden</bdi>"
               ],
               [
                 "将来时被动",
-                "<bdi>wird + 过去分词 + werden</bdi>",
+                "<bdi>wird +</bdi> 过去分词 <bdi>+ werden</bdi>",
                 "<bdi>es wird gemacht werden</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "复合时态与被动都是<strong>迂说法</strong>：由助动词 + 过去分词（或不定式）构成，<strong>不写进变位表</strong>。\n\n<strong>助动词的选择</strong>：多数动词用 <bdi>haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。生词表单里的「完成时助动词」属性用来记录这个选择。\n\n被动由 werden + 过去分词构成（过程被动），另有 sein + 过去分词表示状态被动（Zustandspassiv，如 Die Tür ist geöffnet</bdi>）。"
+        "notes": "复合时态与被动都是<strong>迂说法</strong>：由助动词 + 过去分词（或不定式）构成。\n\n<strong>助动词的选择</strong>：多数动词用 <bdi>haben；表示位置移动、状态变化（gehen、fahren、kommen、werden、bleiben、aufstehen…）以及 sein 本身用 sein；少数两可（如 fahren 作及物动词时用 haben）。\n\n被动由 werden + 过去分词构成（过程被动），另有 sein + 过去分词表示状态被动（Zustandspassiv，如 Die Tür ist geöffnet</bdi>）。"
       },
       {
         "id": "de-verb-separable",
@@ -246,18 +246,18 @@
             "rows": [
               [
                 "可分前缀",
-                "<bdi>auf-、an-、aus-、ein-、mit-、zu-、zurück-、weg-、vor-</bdi>",
+                "<bdi>auf-</bdi>、<bdi>an-</bdi>、<bdi>aus-</bdi>、<bdi>ein-</bdi>、<bdi>mit-</bdi>、<bdi>zu-</bdi>、<bdi>zurück-</bdi>、<bdi>weg-</bdi>、<bdi>vor-</bdi>",
                 "现在时 / 过去时把前缀放到句末：<bdi>Ich stehe früh auf</bdi>."
               ],
               [
                 "不可分前缀",
-                "<bdi>be-、ge-、er-、ver-、zer-、ent-、emp-、miss-</bdi>",
+                "<bdi>be-</bdi>、<bdi>ge-</bdi>、<bdi>er-</bdi>、<bdi>ver-</bdi>、<bdi>zer-</bdi>、<bdi>ent-</bdi>、<bdi>emp-</bdi>、<bdi>miss-</bdi>",
                 "前缀与动词一起：<bdi>Ich verstehe das</bdi>."
               ],
               [
                 "两可（重音不同）",
-                "<bdi>um-、durch-、über-、unter-、wieder-</bdi>",
-                "可分时重音在前缀：<bdi>úmfahren（撞倒）；不可分时重音在词干：umfáhren</bdi>（绕行）"
+                "<bdi>um-</bdi>、<bdi>durch-</bdi>、<bdi>über-</bdi>、<bdi>unter-</bdi>、<bdi>wieder-</bdi>",
+                "可分时重音在前缀：<bdi>úmfahren</bdi>（撞倒）；不可分时重音在词干：<bdi>umfáhren</bdi>（绕行）"
               ]
             ],
             "lang": "de"
@@ -273,19 +273,19 @@
             "rows": [
               [
                 "可分动词",
-                "前缀 + <bdi>ge- + 词干 + -t / -en</bdi>",
-                "<bdi>aufgestanden、eingekauft</bdi>"
+                "前缀 + <bdi>ge- +</bdi> 词干 <bdi>+ -t / -en</bdi>",
+                "<bdi>aufgestanden</bdi>、<bdi>eingekauft</bdi>"
               ],
               [
                 "不可分动词",
                 "不加 <bdi>ge</bdi>-",
-                "<bdi>verstanden、bekommen</bdi>"
+                "<bdi>verstanden</bdi>、<bdi>bekommen</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "可分动词在不定式里连写（<bdi>aufstehen），在现在时 / 过去时主句里拆开（ich stehe auf）；从句与情态动词后仍连写。不可分前缀动词的前缀永远不分开：弱变化的（besuchen）用「弱变化：不可分前缀动词」锚点，强变化的（verstehen、bekommen</bdi>）用强变化锚点并填过去分词；<code><bdi>-ieren</bdi></code> 动词（<bdi>studieren）也属弱变化，过去分词不加 ge</bdi>-。"
+        "notes": "可分动词在不定式里连写（<bdi>aufstehen</bdi>），在现在时 / 过去时主句里拆开（<bdi>ich stehe auf</bdi>）；从句与情态动词后仍连写。不可分前缀动词的前缀永远不分开：弱变化的（<bdi>besuchen</bdi>）用「弱变化：不可分前缀动词」锚点，强变化的（<bdi>verstehen</bdi>、<bdi>bekommen</bdi>）用强变化锚点并填过去分词；<code><bdi>-ieren</bdi></code> 动词（<bdi>studieren</bdi>）也属弱变化，过去分词不加 <bdi>ge</bdi>-。"
       },
       {
         "id": "de-verb-reflexive",
@@ -398,25 +398,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "mach",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gemacht",
-          "hint": "留空 = <bdi>ge- + 词干 + t。以 be- / ge- / er- / ver- / ent- / zer- 开头或以 -ieren 结尾的动词不加 ge-，请改用下面的「不可分前缀」「-ieren</bdi>」两个锚点。"
+          "hint": "留空 = <bdi>ge- +</bdi> 词干 + t。以 <bdi>be- / ge- / er- / ver- / ent- / zer-</bdi> 开头或以 <bdi>-ieren</bdi> 结尾的动词不加 <bdi>ge-</bdi>，请改用下面的「不可分前缀」「<bdi>-ieren</bdi>」两个锚点。"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "mach",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "mach",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -885,7 +885,7 @@
         ]
       }
     ],
-    "notes": "规则变化：过去时 -<bdi>te，过去分词 ge-…-t</bdi>。绝大多数德语动词属此类。"
+    "notes": "规则变化：过去时 -<bdi>te</bdi>，过去分词 <bdi>ge-…-t</bdi>。绝大多数德语动词属此类。"
   },
   {
     "id": "de-verb-weak-ep",
@@ -930,25 +930,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "arbeit",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gearbeitet",
-          "hint": "留空 = <bdi>ge- + 词干 + et</bdi>。"
+          "hint": "留空 = <bdi>ge- +</bdi> 词干 <bdi>+ et</bdi>。"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "arbeit",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "arbeit",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -1417,11 +1417,11 @@
         ]
       }
     ],
-    "notes": "词干以 <bdi>d / t 结尾，或以 m / n 前有辅音（atmen, rechnen, öffnen）时，第二、三人称单数和过去时都要插入 -e</bdi>-。"
+    "notes": "词干以 <bdi>d / t</bdi> 结尾，或以 <bdi>m / n</bdi> 前有辅音（<bdi>atmen, rechnen, öffnen</bdi>）时，第二、三人称单数和过去时都要插入 -e-。"
   },
   {
     "id": "de-verb-weak-eln",
-    "title": "弱变化：-<bdi>eln / -ern 动词（sammeln / ändern</bdi> 型）",
+    "title": "弱变化：-<bdi>eln / -ern</bdi> 动词（<bdi>sammeln / ändern</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -1475,25 +1475,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "sammel",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "gesammelt",
-          "hint": "留空 = <bdi>ge- + 词干 + t（gesammelt / geändert</bdi>）。"
+          "hint": "留空 = <bdi>ge- +</bdi> 词干 + t（<bdi>gesammelt / geändert</bdi>）。"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "sammel",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "sammel",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -1968,11 +1968,11 @@
         ]
       }
     ],
-    "notes": "属于弱变化大类：过去时 -<bdi>te、过去分词 ge-…-t，只是不定式以 -ln / -rn 结尾，词干要去掉词尾的 n（sammeln → sammel-, ändern → änder-）。另外 -eln 动词在单数第一人称和命令式单数丢 e（sammeln → ich sammle, sammle!），-ern 动词保留 e（ändern → ich ändere, ändere</bdi>!）。"
+    "notes": "属于弱变化大类：过去时 -<bdi>te</bdi>、过去分词 <bdi>ge-…-t</bdi>，只是不定式以 <bdi>-ln / -rn</bdi> 结尾，词干要去掉词尾的 n（<bdi>sammeln → sammel-, ändern → änder-</bdi>）。另外 <bdi>-eln</bdi> 动词在单数第一人称和命令式单数丢 e（<bdi>sammeln → ich sammle, sammle!</bdi>），<bdi>-ern</bdi> 动词保留 e（<bdi>ändern → ich ändere, ändere</bdi>!）。"
   },
   {
     "id": "de-verb-weak-ieren",
-    "title": "弱变化：-<bdi>ieren 动词（studieren</bdi> 型）",
+    "title": "弱变化：-<bdi>ieren</bdi> 动词（<bdi>studieren</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -2009,25 +2009,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "studier",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "studiert",
-          "hint": "留空 = 词干 + <bdi>t（-ieren 动词不加 ge</bdi>-）。"
+          "hint": "留空 = 词干 + t（<bdi>-ieren</bdi> 动词不加 <bdi>ge</bdi>-）。"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "studier",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "studier",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -2496,7 +2496,7 @@
         ]
       }
     ],
-    "notes": "属于弱变化大类：过去时 -<bdi>te、过去分词 -t，只是过去分词不加 ge-（studieren → studierte → studiert）。所有 -ieren</bdi> 动词都是弱变化，词干本身不变化。"
+    "notes": "属于弱变化大类：过去时 -<bdi>te</bdi>、过去分词 -t，只是过去分词不加 <bdi>ge-</bdi>（<bdi>studieren → studierte → studiert</bdi>）。所有 <bdi>-ieren</bdi> 动词都是弱变化，词干本身不变化。"
   },
   {
     "id": "de-verb-weak-insep",
@@ -2537,25 +2537,25 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "besuch",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
           "example": "besucht",
-          "hint": "留空 = 词干 + <bdi>t（不可分前缀动词不加 ge</bdi>-）。"
+          "hint": "留空 = 词干 + t（不可分前缀动词不加 <bdi>ge</bdi>-）。"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "besuch",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "besuch",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
         }
       ],
       "endings": {
@@ -3024,7 +3024,7 @@
         ]
       }
     ],
-    "notes": "属于弱变化大类：词干以 <bdi>be- / ge- / er- / ver- / zer- / ent- / emp- / miss- 开头时，过去分词不加 ge-（besuchen → besuchte → besucht），前缀永远不分开。这类动词若同时是强变化（verstehen、bekommen</bdi>），请改用「强变化动词」锚点并填过去分词。"
+    "notes": "属于弱变化大类：词干以 <bdi>be- / ge- / er- / ver- / zer- / ent- / emp- / miss-</bdi> 开头时，过去分词不加 <bdi>ge-</bdi>（<bdi>besuchen → besuchte → besucht</bdi>），前缀永远不分开。这类动词若同时是强变化（<bdi>verstehen</bdi>、<bdi>bekommen</bdi>），请改用「强变化动词」锚点并填过去分词。"
   },
   {
     "id": "de-verb-strong",
@@ -3081,13 +3081,13 @@
           "key": "p23",
           "label": "现在时 2/3 单数词干",
           "example": "sprich",
-          "hint": "换音的动词填换音后的词干：<bdi>sprechen → sprich、nehmen → nimm、fahren → fähr</bdi>。留空 = 现在时词干。"
+          "hint": "换音的动词填换音后的词干：<bdi>sprechen → sprich</bdi>、<bdi>nehmen → nimm</bdi>、<bdi>fahren → fähr</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pret",
           "label": "过去时词干",
           "example": "sprach",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach、machen → mach</bdi>。留空 = 现在时词干。"
+          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
         },
         {
           "key": "pp",
@@ -3099,13 +3099,13 @@
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "sprech",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "spräch",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch、konnte → könnt</bdi>）。"
+          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
         }
       ],
       "exampleStems": {
@@ -3588,7 +3588,7 @@
         ]
       }
     ],
-    "notes": "词干元音在现在时 2/3 单数（换音）、过去时、过去分词里变化，这三处必须单独记；虚拟式 <bdi>II 由过去时词干变音（sprach → spräche</bdi>）。"
+    "notes": "词干元音在现在时 2/3 单数（换音）、过去时、过去分词里变化，这三处必须单独记；虚拟式 <bdi>II</bdi> 由过去时词干变音（<bdi>sprach → spräche</bdi>）。"
   },
   {
     "id": "de-verb-mixed",
@@ -3641,7 +3641,7 @@
           "key": "pret",
           "label": "过去时词干",
           "example": "brachte",
-          "hint": "过去时带 -<bdi>te 但词干变了（brachte / dachte / kannte</bdi>），填整个过去时形式。"
+          "hint": "过去时带 -<bdi>te</bdi> 但词干变了（<bdi>brachte / dachte / kannte</bdi>），填整个过去时形式。"
         },
         {
           "key": "pp",
@@ -3653,7 +3653,7 @@
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "bring",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
@@ -4132,7 +4132,7 @@
         ]
       }
     ],
-    "notes": "过去时用 -<bdi>te（像弱变化），但词干元音变化、过去分词词干也不同（gebracht）。同类：denken / dachte / gedacht、kennen / kannte / gekannt、nennen、rennen、wissen</bdi>。"
+    "notes": "过去时用 -<bdi>te</bdi>（像弱变化），但词干元音变化、过去分词词干也不同（<bdi>gebracht</bdi>）。同类：<bdi>denken / dachte / gedacht</bdi>、<bdi>kennen / kannte / gekannt</bdi>、<bdi>nennen</bdi>、<bdi>rennen</bdi>、<bdi>wissen</bdi>。"
   },
   {
     "id": "de-verb-modal",
@@ -4213,13 +4213,13 @@
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
           "example": "könn",
-          "hint": "留空 = 现在时词干（虚拟式 <bdi>I = 词干 + -e / -est / -e / -en / -et / -en</bdi>）。"
+          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
           "example": "könnte",
-          "hint": "留空 = 过去时词干变音（<bdi>konnte → könnte）。wollen / sollen 的虚拟式 II 与过去时同形，填 wollte / sollte</bdi>。"
+          "hint": "留空 = 过去时词干变音（<bdi>konnte → könnte</bdi>）。<bdi>wollen / sollen</bdi> 的虚拟式 <bdi>II</bdi> 与过去时同形，填 <bdi>wollte / sollte</bdi>。"
         }
       ],
       "exampleStems": {
@@ -4466,7 +4466,7 @@
             "lang": "de"
           }
         ],
-        "notes": "情态动词表达能力、许可、义务、意愿；搭配的实义动词以不定式放在句末。情态动词的现在时第一、三人称单数同形、不加 -<bdi>t（ich kann / er kann</bdi>），且没有命令式。"
+        "notes": "情态动词表达能力、许可、义务、意愿；搭配的实义动词以不定式放在句末。情态动词的现在时第一、三人称单数同形、不加 -t（<bdi>ich kann / er kann</bdi>），且没有命令式。"
       },
       {
         "id": "de-verb-modal-ind",
@@ -5361,10 +5361,10 @@
             "lang": "de"
           }
         ],
-        "notes": "上排 <bdi>tab 选词，同一词下按语式竖排。情态动词没有命令式；sollen / wollen 的虚拟式 II 与过去时同形（sollte / wollte</bdi>）。"
+        "notes": "上排 <bdi>tab</bdi> 选词，同一词下按语式竖排。情态动词没有命令式；<bdi>sollen / wollen</bdi> 的虚拟式 <bdi>II</bdi> 与过去时同形（<bdi>sollte / wollte</bdi>）。"
       }
     ],
-    "notes": "情态动词没有命令式；现在时第一、三人称单数同形且不加 -<bdi>t（ich kann / er kann），复数回到不定式词干（können / könnt）；过去时加 -te 且词干变音（konnte），虚拟式 II 在过去时词干上变音（könnte）。同类：dürfen / darf、mögen / mag、müssen / muss、sollen / soll、wollen / will。wollen / sollen 的虚拟式 II 与过去时同形（wollte / sollte），要在「虚拟式 II 词干」栏里填一次，否则会推出 wöllte / söllte。完成时里情态动词常与不定式连用（Ich habe kommen können</bdi>），过去分词形式只作参考。"
+    "notes": "情态动词没有命令式；现在时第一、三人称单数同形且不加 -t（<bdi>ich kann / er kann</bdi>），复数回到不定式词干（<bdi>können / könnt</bdi>）；过去时加 <bdi>-te</bdi> 且词干变音（<bdi>konnte</bdi>），虚拟式 <bdi>II</bdi> 在过去时词干上变音（<bdi>könnte</bdi>）。同类：<bdi>dürfen / darf</bdi>、<bdi>mögen / mag</bdi>、<bdi>müssen / muss</bdi>、<bdi>sollen / soll</bdi>、<bdi>wollen / will</bdi>。<bdi>wollen / sollen</bdi> 的虚拟式 <bdi>II</bdi> 与过去时同形（<bdi>wollte / sollte</bdi>），要在「虚拟式 <bdi>II</bdi> 词干」栏里填一次，否则会推出 <bdi>wöllte / söllte</bdi>。完成时里情态动词常与不定式连用（<bdi>Ich habe kommen können</bdi>），过去分词形式只作参考。"
   },
   {
     "id": "de-verb-special",
@@ -5768,7 +5768,7 @@
             "lang": "de"
           }
         ],
-        "notes": "三个助动词既作实义动词，也构成复合时态与被动。它们在生词表里请选「特殊变位」。<bdi>werden 的第二分词作被动助动词时用 worden（Es ist gemacht worden</bdi>）。"
+        "notes": "三个助动词既作实义动词，也构成复合时态与被动。它们在生词表里请选「特殊变位」。<bdi>werden</bdi> 的第二分词作被动助动词时用 <bdi>worden</bdi>（<bdi>Es ist gemacht worden</bdi>）。"
       },
       {
         "id": "de-verb-special-common",

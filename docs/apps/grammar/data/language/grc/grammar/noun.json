@@ -5,7 +5,7 @@
     "items": [
       {
         "id": "grc-noun-1st-decl-e",
-        "title": "第一变格：-<bdi>η 阴性（νίκη</bdi> 型，重音在词干）",
+        "title": "第一变格：-<bdi>η</bdi> 阴性（<bdi>νίκη</bdi> 型，重音在词干）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -171,11 +171,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "例词 <bdi>νίκη（长 ι 在数据里写作 ῑ，只用来说明音节的长短）。属格复数 -ῶν</bdi> 的重音固定在词尾。"
+        "notes": "例词 <bdi>νίκη</bdi>（长 <bdi>ι</bdi> 在数据里写作 <bdi>ῑ</bdi>，只用来说明音节的长短）。属格复数 <bdi>-ῶν</bdi> 的重音固定在词尾。"
       },
       {
         "id": "grc-noun-1st-decl-a",
-        "title": "第一变格：-<bdi>ᾱ 阴性（χώρᾱ</bdi> 型，重音在词干）",
+        "title": "第一变格：-<bdi>ᾱ</bdi> 阴性（<bdi>χώρᾱ</bdi> 型，重音在词干）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -341,11 +341,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "<bdi>ᾱ 只出现在 ρ、ε、ι 之后（χώρᾱ、οἰκίᾱ、θεᾱ́），其余情况写作 -η（见 νίκη</bdi> 型）。"
+        "notes": "<bdi>ᾱ</bdi> 只出现在 <bdi>ρ</bdi>、<bdi>ε</bdi>、<bdi>ι</bdi> 之后（<bdi>χώρᾱ</bdi>、<bdi>οἰκίᾱ</bdi>、<bdi>θεᾱ́</bdi>），其余情况写作 <bdi>-η</bdi>（见 <bdi>νίκη</bdi> 型）。"
       },
       {
         "id": "grc-noun-1st-decl-e-oxytone",
-        "title": "第一变格：-<bdi>η 阴性（τιμή</bdi> 型，重音在词尾）",
+        "title": "第一变格：-<bdi>η</bdi> 阴性（<bdi>τιμή</bdi> 型，重音在词尾）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -515,7 +515,7 @@
       },
       {
         "id": "grc-noun-1st-decl-a-oxytone",
-        "title": "第一变格：-<bdi>ᾱ 阴性（ἀγορά</bdi> 型，重音在词尾）",
+        "title": "第一变格：-<bdi>ᾱ</bdi> 阴性（<bdi>ἀγορά</bdi> 型，重音在词尾）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -681,11 +681,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "<bdi>ᾱ 变格的重音在词尾时，属格与与格单数是收缩来的弯曲重音（ἀγορᾶς、ἀγορᾷ）。</bdi>"
+        "notes": "<bdi>ᾱ</bdi> 变格的重音在词尾时，属格与与格单数是收缩来的弯曲重音（<bdi>ἀγορᾶς</bdi>、<bdi>ἀγορᾷ</bdi>）。"
       },
       {
         "id": "grc-noun-1st-decl-m",
-        "title": "第一变格：阳性 -<bdi>ης / -ᾱς（πολίτης</bdi> 型）",
+        "title": "第一变格：阳性 -<bdi>ης / -ᾱς</bdi>（<bdi>πολίτης</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -851,11 +851,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "阳性第一变格除属格单数 -<bdi>ου 与呼格单数 -ᾰ 外同阴性；-ᾱς 型（νεανίᾱς）把词尾的 η 换成 ᾱ</bdi>。"
+        "notes": "阳性第一变格除属格单数 -<bdi>ου</bdi> 与呼格单数 <bdi>-ᾰ</bdi> 外同阴性；<bdi>-ᾱς</bdi> 型（<bdi>νεανίᾱς</bdi>）把词尾的 <bdi>η</bdi> 换成 <bdi>ᾱ</bdi>。"
       },
       {
         "id": "grc-noun-2nd-decl-m",
-        "title": "第二变格：-<bdi>ος 阳性（λόγος</bdi> 型，重音在词干）",
+        "title": "第二变格：-<bdi>ος</bdi> 阳性（<bdi>λόγος</bdi> 型，重音在词干）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1021,11 +1021,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "呼格单数为 -<bdi>ε；中性同 -ον</bdi> 型。"
+        "notes": "呼格单数为 -<bdi>ε</bdi>；中性同 <bdi>-ον</bdi> 型。"
       },
       {
         "id": "grc-noun-2nd-decl-m-oxytone",
-        "title": "第二变格：-<bdi>ος 阳性（θεός</bdi> 型，重音在词尾）",
+        "title": "第二变格：-<bdi>ος</bdi> 阳性（<bdi>θεός</bdi> 型，重音在词尾）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1191,11 +1191,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "重音在词尾的 -<bdi>ος 名词，属格与与格单数为弯曲重音（θεοῦ、θεῷ</bdi>）。"
+        "notes": "重音在词尾的 -<bdi>ος</bdi> 名词，属格与与格单数为弯曲重音（<bdi>θεοῦ</bdi>、<bdi>θεῷ</bdi>）。"
       },
       {
         "id": "grc-noun-2nd-decl-n",
-        "title": "第二变格：-<bdi>ον 中性（δῶρον</bdi> 型）",
+        "title": "第二变格：-<bdi>ον</bdi> 中性（<bdi>δῶρον</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1365,7 +1365,7 @@
       },
       {
         "id": "grc-noun-3rd-decl-stop",
-        "title": "第三变格：塞音 / 齿音词干（<bdi>φύλαξ、ἐλπίς</bdi> 型）",
+        "title": "第三变格：塞音 / 齿音词干（<bdi>φύλαξ</bdi>、<bdi>ἐλπίς</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1573,11 +1573,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "词干从属格去 -<bdi>ος 得到（φύλακ-、ἐλπιδ-）。主格单数由词干末辅音加 -ς 变来：κ/γ/χ → ξ，π/β/φ → ψ，τ/δ/θ 脱落。与格复数词干末辅音与 -σι</bdi> 融合。"
+        "notes": "词干从属格去 -<bdi>ος</bdi> 得到（<bdi>φύλακ-</bdi>、<bdi>ἐλπιδ-</bdi>）。主格单数由词干末辅音加 <bdi>-ς</bdi> 变来：<bdi>κ/γ/χ → ξ</bdi>，<bdi>π/β/φ → ψ</bdi>，<bdi>τ/δ/θ</bdi> 脱落。与格复数词干末辅音与 <bdi>-σι</bdi> 融合。"
       },
       {
         "id": "grc-noun-3rd-decl-liquid",
-        "title": "第三变格：流音 / 鼻音词干（<bdi>δαίμων、ῥήτωρ、πατήρ</bdi> 型）",
+        "title": "第三变格：流音 / 鼻音词干（<bdi>δαίμων</bdi>、<bdi>ῥήτωρ</bdi>、<bdi>πατήρ</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1756,11 +1756,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "主格单数 -<bdi>ων / -ωρ 由词干的 -ον / -ορ 延长而来，呼格单数保持短元音（δαῖμον、ῥῆτορ）。词组词干 πατήρ / μήτηρ</bdi> 属同一类，重音在词尾。"
+        "notes": "主格单数 -<bdi>ων / -ωρ</bdi> 由词干的 <bdi>-ον / -ορ</bdi> 延长而来，呼格单数保持短元音（<bdi>δαῖμον</bdi>、<bdi>ῥῆτορ</bdi>）。词组词干 <bdi>πατήρ / μήτηρ</bdi> 属同一类，重音在词尾。"
       },
       {
         "id": "grc-noun-3rd-decl-s",
-        "title": "第三变格：-<bdi>ος 中性（γένος 型，εσ</bdi> 词干）",
+        "title": "第三变格：-<bdi>ος</bdi> 中性（<bdi>γένος</bdi> 型，<bdi>εσ</bdi> 词干）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1968,7 +1968,7 @@
             "lang": "grc"
           }
         ],
-        "notes": "词干以 -<bdi>εσ- 结尾，变格时 εσ 与词尾收缩（-εσ-ος → -ους）。同类还有 τεῖχος、ἔθος</bdi>。"
+        "notes": "词干以 -<bdi>εσ-</bdi> 结尾，变格时 <bdi>εσ</bdi> 与词尾收缩（<bdi>-εσ-ος → -ους</bdi>）。同类还有 <bdi>τεῖχος</bdi>、<bdi>ἔθος</bdi>。"
       },
       {
         "id": "grc-noun-3rd-decl-i",
@@ -2177,11 +2177,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "i 词干的属格单数用阿提卡式 -<bdi>εως、属格复数 -εων（词末 εως / εων 按短末音节算，故 πόλεως、πόλεων 重音留在倒数第三）。单数与复数 -ει / -εις 由 ι</bdi> 延长而来。"
+        "notes": "i 词干的属格单数用阿提卡式 -<bdi>εως</bdi>、属格复数 <bdi>-εων</bdi>（词末 <bdi>εως / εων</bdi> 按短末音节算，故 <bdi>πόλεως</bdi>、<bdi>πόλεων</bdi> 重音留在倒数第三）。单数与复数 <bdi>-ει / -εις</bdi> 由 <bdi>ι</bdi> 延长而来。"
       },
       {
         "id": "grc-noun-3rd-decl-y",
-        "title": "第三变格：-<bdi>υς 词干（ἰχθύς</bdi> 型）",
+        "title": "第三变格：-<bdi>υς</bdi> 词干（<bdi>ἰχθύς</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2336,11 +2336,11 @@
             "lang": "grc"
           }
         ],
-        "notes": "<bdi>υ 词干单数不延长，与格单数写作 -ύϊ</bdi>（分音符表示不合为双元音）。"
+        "notes": "<bdi>υ</bdi> 词干单数不延长，与格单数写作 <bdi>-ύϊ</bdi>（分音符表示不合为双元音）。"
       },
       {
         "id": "grc-noun-3rd-decl-eus",
-        "title": "第三变格：-<bdi>εύς（βασιλεύς</bdi> 型）",
+        "title": "第三变格：-<bdi>εύς</bdi>（<bdi>βασιλεύς</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2495,7 +2495,7 @@
             "lang": "grc"
           }
         ],
-        "notes": "词干取自属格（<bdi>βασιλέως → βασιλ-），词尾自带重音：属格单数 -έως、与格单数 -εῖ、呼格单数 -εῦ。同类有 ἱππεύς、ἀριστεύς</bdi>。"
+        "notes": "词干取自属格（<bdi>βασιλέως → βασιλ-</bdi>），词尾自带重音：属格单数 <bdi>-έως</bdi>、与格单数 <bdi>-εῖ</bdi>、呼格单数 <bdi>-εῦ</bdi>。同类有 <bdi>ἱππεύς</bdi>、<bdi>ἀριστεύς</bdi>。"
       }
     ]
   }

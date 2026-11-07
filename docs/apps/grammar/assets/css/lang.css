@@ -2,7 +2,6 @@
  * 新增语言时改这里就够了（见「数据格式 · 语言数据手册」的「新增一个语言」）。
  * 只依赖 variables.css 里的 --ff-ui，所以必须在它之后加载。 */
 
-/* ---------- 各语言字体栈 ---------- */
 /* 语言字体只覆盖自己的 unicode-range，说明性中英文回落到 --ff-ui。 */
 
 :root {
@@ -12,7 +11,6 @@
     --ff-sa: "LN SA", var(--ff-ui);
     --ff-siddham: "LN SIDDHAM", var(--ff-ui);
     --ff-mnc: "LN MNC", var(--ff-ui);
-    --ff-ja: "LN JA", var(--ff-ui);
     --ff-zh-cls: "LN ZH-CLS", var(--ff-ui);
 
     --ff-en: var(--ff-la);
@@ -22,8 +20,6 @@
     /* 中文：LN UI 的 CJK 段（楷体） */
     --ff-zh: var(--ff-ui);
 }
-
-/* ---------- 各语言原文 ---------- */
 
 /* 拉丁语：Gentium Plus（拉丁 + 希腊 + 西里尔） */
 @font-face {
@@ -160,15 +156,6 @@
     unicode-range: U+1800-18AF, U+11660-1167F, U+200C-200D, U+202F;
 }
 
-/* 现代日语：楷体（假名 + 汉字） */
-@font-face {
-    font-family: "LN JA";
-    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.ttf");
-    font-display: swap;
-    unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+31F0-31FF,
-        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
-}
-
 /* 古汉语：楷体（汉字） */
 @font-face {
     font-family: "LN ZH-CLS";
@@ -178,7 +165,6 @@
         U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-2FA1F;
 }
 
-/* ---------- 各语言的呈现规则 ---------- */
 /* 语言内容样式：字体与展示字体都在这里定，全局生效（含语法页、词卡详情）。
  * 每个 [lang] 同时改写 --ff-display，写 font-family: var(--ff-display) 的元素自动跟着语言走。 */
 [lang="la"] {
@@ -204,7 +190,7 @@
     --ff-display: var(--ff-sa);
 }
 
-/* 悉昙文列：字体只覆盖 Siddham 区，天城文 / 拉丁自动回退 */
+/* 悉昙文列：字体只覆盖 Siddham 区，天城文、拉丁自动回退 */
 [lang="sa-siddham"] {
     font-family: var(--ff-siddham);
     --ff-display: var(--ff-siddham);

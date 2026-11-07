@@ -66,7 +66,7 @@
             "exampleWord": "גָּדוֹל"
           }
         ],
-        "notes": "最常见的形容词模式：ms 无词尾，fs 加 <bdi>ָה，复数加 ִים / וֹת</bdi>。",
+        "notes": "最常见的形容词模式：ms 无词尾，fs 加 <bdi>ָה</bdi>，复数加 <bdi>ִים / וֹת</bdi>。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -166,7 +166,7 @@
             "exampleWord": "קָטֹן"
           }
         ],
-        "notes": "复数把词干缩为 <bdi>קְטַנִּים 型（זָקֵן → זְקֵנִים</bdi> 属另一亚型）。",
+        "notes": "复数把词干缩为 <bdi>קְטַנִּים</bdi> 型（<bdi>זָקֵן → זְקֵנִים</bdi> 属另一亚型）。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -266,7 +266,7 @@
             "exampleWord": "קָדוֹשׁ"
           }
         ],
-        "notes": "复数第一音节缩为 <bdi>שְׁוָא：קְדֹשִׁים</bdi>。",
+        "notes": "复数第一音节缩为 <bdi>שְׁוָא</bdi>：<bdi>קְדֹשִׁים</bdi>。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -366,7 +366,7 @@
             "exampleWord": "קָשֶׁה"
           }
         ],
-        "notes": "fs 与 ms 同形貌但词尾为 <bdi>ָה；复数 ־ִים</bdi>。",
+        "notes": "fs 与 ms 同形貌但词尾为 <bdi>ָה</bdi>；复数 <bdi>־ִים</bdi>。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -605,7 +605,7 @@
       },
       {
         "id": "he-adj-nisba",
-        "title": "<bdi>־ִי（nisba）</bdi>",
+        "title": "<bdi>־ִי</bdi>（<bdi>nisba</bdi>）",
         "inflect": "decl",
         "tables": [
           {
@@ -666,7 +666,7 @@
             "exampleWord": "אַדְמוֹנִי"
           }
         ],
-        "notes": "关系形容词；阴性 <bdi>־ִית，复数 ־ִיִּים</bdi>。",
+        "notes": "关系形容词；阴性 <bdi>־ִית</bdi>，复数 <bdi>־ִיִּים</bdi>。",
         "derive": {
           "pos": "adj",
           "stemExample": "אַדְמוֹנ",
@@ -773,7 +773,7 @@
             "exampleWord": "אַדִּיר"
           }
         ],
-        "notes": "四辅音形容词的规则型：阴性单数保留词干里的 <bdi>י，只加 ָה。如 אַדִּיר 大能的、עָשִׁיר</bdi> 富有的。",
+        "notes": "四辅音形容词的规则型：阴性单数保留词干里的 <bdi>י</bdi>，只加 <bdi>ָה</bdi>。如 <bdi>אַדִּיר</bdi> 大能的、<bdi>עָשִׁיר</bdi> 富有的。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -873,7 +873,7 @@
             "exampleWord": "צַדִּיק"
           }
         ],
-        "notes": "四辅音形容词的弱化型：词干里的 <bdi>י 在阴性单数脱落，中根补 dagesh forte（צַדִּיק → צַדֶּקֶת）。如 צַדִּיק</bdi> 义人。",
+        "notes": "四辅音形容词的弱化型：词干里的 <bdi>י</bdi> 在阴性单数脱落，中根补 <bdi>dagesh forte</bdi>（<bdi>צַדִּיק → צַדֶּקֶת</bdi>）。如 <bdi>צַדִּיק</bdi> 义人。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -973,7 +973,7 @@
             "exampleWord": "אַכְזָר"
           }
         ],
-        "notes": "四个辅音都是词根的四辅音形容词：阴性单数加 <bdi>ָה，复数加 ִים / וֹת。如 אַכְזָר</bdi> 残忍的。喉音、叠音等更复杂的四辅音词干仍手填。",
+        "notes": "四个辅音都是词根的四辅音形容词：阴性单数加 <bdi>ָה</bdi>，复数加 <bdi>ִים / וֹת</bdi>。如 <bdi>אַכְזָר</bdi> 残忍的。喉音、叠音等更复杂的四辅音词干仍手填。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -1012,7 +1012,7 @@
       },
       {
         "id": "he-adj-quadriliteral-guttural",
-        "title": "四辅音 · 喉音叠音 · 首辅音 <bdi>שׁ（שַׁאֲנָן</bdi> 型）",
+        "title": "四辅音 · 喉音叠音 · 首辅音 <bdi>שׁ</bdi>（<bdi>שַׁאֲנָן</bdi> 型）",
         "inflect": "decl",
         "tables": [
           {
@@ -1073,7 +1073,7 @@
             "exampleWord": "שַׁאֲנָן"
           }
         ],
-        "notes": "四辅音形容词的喉音 / 叠音型：第 2 个辅音是喉音，带 <bdi>חֲטַף־פָּתַח；复数时末辅音加 dagesh forte（שַׁאֲנַנִּים）。本锚点用于首辅音是 שׁ 的词，骨架会自动补 שׁ 点。如 שַׁאֲנָן</bdi> 安逸的。",
+        "notes": "四辅音形容词的喉音 / 叠音型：第 2 个辅音是喉音，带 <bdi>חֲטַף־פָּתַח</bdi>；复数时末辅音加 <bdi>dagesh forte</bdi>（<bdi>שַׁאֲנַנִּים</bdi>）。本锚点用于首辅音是 <bdi>שׁ</bdi> 的词，骨架会自动补 <bdi>שׁ</bdi> 点。如 <bdi>שַׁאֲנָן</bdi> 安逸的。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -1112,7 +1112,7 @@
       },
       {
         "id": "he-adj-quadriliteral-guttural-plain",
-        "title": "四辅音 · 喉音叠音 · 首辅音非 <bdi>שׁ（רַעֲנָן</bdi> 型）",
+        "title": "四辅音 · 喉音叠音 · 首辅音非 <bdi>שׁ</bdi>（<bdi>רַעֲנָן</bdi> 型）",
         "inflect": "decl",
         "tables": [
           {
@@ -1173,7 +1173,7 @@
             "exampleWord": "רַעֲנָן"
           }
         ],
-        "notes": "四辅音形容词的喉音 / 叠音型，首辅音不是 <bdi>שׁ 时用本锚点（骨架不补 שׁ 点）。如 רַעֲנָן</bdi> 青翠的。",
+        "notes": "四辅音形容词的喉音 / 叠音型，首辅音不是 <bdi>שׁ</bdi> 时用本锚点（骨架不补 <bdi>שׁ</bdi> 点）。如 <bdi>רַעֲנָן</bdi> 青翠的。",
         "derive": {
           "pos": "adj",
           "mode": "skeleton",
@@ -1242,9 +1242,9 @@
             "lang": "he"
           }
         ],
-        "notes": "希伯来语没有形态上的比较级 / 最高级：比较用 <bdi>מִן，最高级用定冠词或 מִכָּל</bdi>；副词用法相同。"
+        "notes": "希伯来语没有形态上的比较级 / 最高级：比较用 <bdi>מִן</bdi>，最高级用定冠词或 <bdi>מִכָּל</bdi>；副词用法相同。"
       }
     ],
-    "notes": "骨架表里的占位符：<bdi>־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 בגדכפת 自动补 dagesh lene；词中写成条件点的槽位，代入的辅音若不是 בגדכפת</bdi> 就自动去点。"
+    "notes": "骨架表里的占位符：־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 <bdi>בגדכפת</bdi> 自动补 <bdi>dagesh lene</bdi>；词中写成条件点的槽位，代入的辅音若不是 <bdi>בגדכפת</bdi> 就自动去点。"
   }
 ]

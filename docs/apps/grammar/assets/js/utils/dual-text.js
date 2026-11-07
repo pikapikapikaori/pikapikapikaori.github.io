@@ -4,10 +4,10 @@ import { notifyToggles } from './view-toggles.js'
 
 export function annotateDualText(root, { range, toRoman, selector = 'td, th' } = {}) {
     if (!root || !(range instanceof RegExp) || typeof toRoman !== 'function') return
-    // 默认只处理表格单元格：正文（notes 里的 ul / li / code）不加转写，避免干扰阅读
+    // 默认只处理表格单元格：正文（notes 里的 ul、li、code）不加转写，避免干扰阅读
     const cells = root.querySelectorAll(selector)
     for (const cell of cells) {
-        // 带输入框的格子（变格表 / 词卡）不处理；纯文本、<bdi>、<code> 都可以
+        // 带输入框的格子（变格表、词卡）不处理；纯文本、<bdi>、<code> 都可以
         if (cell.querySelector('input, textarea, [contenteditable]')) continue
         // 内容会变的节点（表单里的「推导提示」）每次都要重算：先撤掉旧转写再加，
         // 否则提示文字换了、旧转写还挂在那儿

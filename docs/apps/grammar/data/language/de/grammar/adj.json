@@ -35,7 +35,7 @@
             "lang": "de"
           }
         ],
-        "notes": "所有形容词共用一套词尾：<strong>限定词已经显示性数格时用弱变化</strong><bdi>（-e / -en），</bdi><strong>没有限定词时用强变化</strong>（自己承担标记性数格的功能），介于两者之间用混合变化。下面三节是这三套词尾的完整表格。",
+        "notes": "所有形容词共用一套词尾：<strong>限定词已经显示性数格时用弱变化</strong>（<bdi>-e / -en</bdi>），<strong>没有限定词时用强变化</strong>（自己承担标记性数格的功能），介于两者之间用混合变化。下面三节是这三套词尾的完整表格。",
         "inflect": "decl",
         "derive": {
           "pos": "adj",
@@ -245,13 +245,13 @@
               "key": "cmp",
               "label": "比较级词干",
               "example": "schnell",
-              "hint": "比较级的词干（无词尾）：<bdi>jung → jüng、dunkel → dunkl</bdi>。留空 = 原形本身。"
+              "hint": "比较级的词干（无词尾）：<bdi>jung → jüng</bdi>、<bdi>dunkel → dunkl</bdi>。留空 = 原形本身。"
             },
             {
               "key": "sup",
               "label": "最高级词干",
               "example": "schnellst",
-              "hint": "最高级的词干：<bdi>breit → breitest、alt → ältest。留空 = 比较级词干 + st</bdi>。"
+              "hint": "最高级的词干：<bdi>breit → breitest</bdi>、<bdi>alt → ältest</bdi>。留空 = 比较级词干 <bdi>+ st</bdi>。"
             }
           ]
         }
@@ -303,7 +303,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>schnell（der schnelle Wagen</bdi>）",
+            "caption": "例词：<bdi>schnell</bdi>（<bdi>der schnelle Wagen</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -345,7 +345,7 @@
             "lang": "de"
           }
         ],
-        "notes": "前面的定冠词 / <bdi>dieser / jener / alle 已经标出性数格，形容词只需要 -e（主格单数三种性、宾格阴性/中性）与 -en</bdi>（其余）。"
+        "notes": "前面的定冠词 / <bdi>dieser / jener / alle</bdi> 已经标出性数格，形容词只需要 -e（主格单数三种性、宾格阴性/中性）与 <bdi>-en</bdi>（其余）。"
       },
       {
         "id": "de-adj-mixed",
@@ -394,7 +394,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>schnell（ein schneller Wagen</bdi>）",
+            "caption": "例词：<bdi>schnell</bdi>（<bdi>ein schneller Wagen</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -436,7 +436,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<bdi>ein / kein / 物主代词在阳性主格、中性主格与中性宾格上没有词尾，形容词这时补上强变化的 -er / -es；其余格子仍用 -en。</bdi>"
+        "notes": "<bdi>ein / kein /</bdi> 物主代词在阳性主格、中性主格与中性宾格上没有词尾，形容词这时补上强变化的 <bdi>-er / -es</bdi>；其余格子仍用 <bdi>-en</bdi>。"
       },
       {
         "id": "de-adj-strong",
@@ -485,7 +485,7 @@
             "lang": "de"
           },
           {
-            "caption": "例词：<bdi>schnell（schneller Wagen</bdi>）",
+            "caption": "例词：<bdi>schnell</bdi>（<bdi>schneller Wagen</bdi>）",
             "role": "pattern",
             "headers": [
               "",
@@ -554,7 +554,7 @@
               ],
               [
                 "最高级",
-                "基本形式 + -(<bdi>e)sten（作表语 / 状语时用 am …-sten</bdi>）",
+                "基本形式 + -(<bdi>e)sten</bdi>（作表语 / 状语时用 <bdi>am …-sten</bdi>）",
                 "<bdi>am schnellsten</bdi>"
               ]
             ],
@@ -580,7 +580,7 @@
                 "<bdi>kalt</bdi>",
                 "<bdi>kälter</bdi>",
                 "<bdi>am kältesten</bdi>",
-                "变音，且词干以 <bdi>t 结尾要插 -e</bdi>-"
+                "变音，且词干以 t 结尾要插 -e-"
               ],
               [
                 "<bdi>groß</bdi>",
@@ -592,13 +592,13 @@
                 "<bdi>breit</bdi>",
                 "<bdi>breiter</bdi>",
                 "<bdi>am breitesten</bdi>",
-                "词干以 <bdi>d / t / s / ß / z 结尾时最高级插 -e</bdi>-"
+                "词干以 <bdi>d / t / s / ß / z</bdi> 结尾时最高级插 -e-"
               ],
               [
                 "<bdi>dunkel</bdi>",
                 "<bdi>dunkler</bdi>",
                 "<bdi>am dunkelsten</bdi>",
-                "<bdi>-el / -er 结尾时比较级丢词干里的 e</bdi>"
+                "<bdi>-el / -er</bdi> 结尾时比较级丢词干里的 e"
               ]
             ],
             "lang": "de"
@@ -646,7 +646,7 @@
             "lang": "de"
           }
         ],
-        "notes": "比较级、最高级都从<strong>基本形式</strong>构成：比较级加 -<bdi>er，最高级用 -(e)sten</bdi>。比较级与最高级作定语时<strong>按普通形容词变格</strong><bdi>（der schnellere Wagen、der schnellste Wagen），作表语或状语时保持原形、最高级用 am …-sten。不规则形式必须按词记忆（gut → besser → am besten）。</bdi>"
+        "notes": "比较级、最高级都从<strong>基本形式</strong>构成：比较级加 -<bdi>er</bdi>，最高级用 <bdi>-(e)sten</bdi>。比较级与最高级作定语时<strong>按普通形容词变格</strong>（<bdi>der schnellere Wagen</bdi>、<bdi>der schnellste Wagen</bdi>），作表语或状语时保持原形、最高级用 <bdi>am …-sten</bdi>。不规则形式必须按词记忆（<bdi>gut → besser → am besten</bdi>）。"
       },
       {
         "id": "de-adj-participle",
@@ -664,12 +664,12 @@
               [
                 "现在分词",
                 "不定式 + -<bdi>d</bdi>",
-                "<bdi>lesend（正在读的）、die lesende Frau</bdi>"
+                "<bdi>lesend</bdi>（正在读的）、<bdi>die lesende Frau</bdi>"
               ],
               [
                 "过去分词",
-                "<bdi>ge- + 词干 + -t / -en</bdi>",
-                "<bdi>gelesen（被读的）、das gelesene Buch</bdi>"
+                "<bdi>ge- +</bdi> 词干 <bdi>+ -t / -en</bdi>",
+                "<bdi>gelesen</bdi>（被读的）、<bdi>das gelesene Buch</bdi>"
               ]
             ],
             "lang": "de"
@@ -715,33 +715,33 @@
               [
                 "形容词原形直接作副词",
                 "不变",
-                "<bdi>schnell、gut、schön</bdi>"
+                "<bdi>schnell</bdi>、<bdi>gut</bdi>、<bdi>schön</bdi>"
               ],
               [
                 "<bdi>-weise</bdi>",
                 "名词 / 形容词 + -<bdi>weise</bdi>",
-                "<bdi>glücklicherweise（幸运地）、teilweise</bdi>"
+                "<bdi>glücklicherweise</bdi>（幸运地）、<bdi>teilweise</bdi>"
               ],
               [
                 "<bdi>-lich / -ig / -bar</bdi>",
                 "派生形容词再作副词",
-                "<bdi>möglich（可能地）、freundlich</bdi>"
+                "<bdi>möglich</bdi>（可能地）、<bdi>freundlich</bdi>"
               ],
               [
                 "<bdi>-s</bdi>",
                 "时间名词 + -<bdi>s</bdi>",
-                "<bdi>morgens、abends</bdi>"
+                "<bdi>morgens</bdi>、<bdi>abends</bdi>"
               ],
               [
                 "固定搭配",
                 "形容词 + 介词短语",
-                "<bdi>auf einmal、in der Tat</bdi>"
+                "<bdi>auf einmal</bdi>、<bdi>in der Tat</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "德语不像法语有统一的 -<bdi>ment 构副词：绝大多数形容词原形就能作副词（Er läuft schnell</bdi>），不需要再加词尾。"
+        "notes": "德语不像法语有统一的 -<bdi>ment</bdi> 构副词：绝大多数形容词原形就能作副词（<bdi>Er läuft schnell</bdi>），不需要再加词尾。"
       }
     ]
   }

@@ -9,7 +9,7 @@ function normalizeOption(option) {
         return {
             value: String(option.value ?? ''),
             label: String(option.label ?? option.value ?? ''),
-            // group / title 只用于展开的列表：group 出分组小标题，title 给省略后的全文
+            // group、title 只用于展开的列表：group 出分组小标题，title 给省略后的全文
             group: option.group ? String(option.group) : null,
             title: option.title ? String(option.title) : null,
             // 收起态可以换一种写法（如补上来源名），展开的列表仍用 label
@@ -20,7 +20,7 @@ function normalizeOption(option) {
 }
 
 /**
- * @returns {HTMLButtonElement} 触发按钮，额外挂了 value / setOptions
+ * @returns {HTMLButtonElement} 触发按钮，额外挂了 value、setOptions
  */
 export function createSelect({
     options = [],

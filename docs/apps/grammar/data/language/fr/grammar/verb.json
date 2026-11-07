@@ -196,7 +196,7 @@
                 "<bdi>j'ai mangé</bdi>"
               ],
               [
-                "<bdi>être 本身及表示状态变化的动词（aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…）</bdi>",
+                "<bdi>être</bdi> 本身及表示状态变化的动词（<bdi>aller, venir, arriver, partir, entrer, sortir, naître, mourir, rester, tomber, monter, descendre…</bdi>）",
                 "<bdi>être</bdi>",
                 "<bdi>je suis venu</bdi>"
               ],
@@ -256,7 +256,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "复合时态不写进变位表，由「助动词的相应时态 + 过去分词」构成：\n\n· 复合过去时 = <bdi>avoir / être 的现在时 + 过去分词：j'ai parlé、je suis allé(e)\n· 愈过去时 = 助动词的未完成过去时 + 过去分词：j'avais parlé\n· 先过去时 = 助动词的简单过去时 + 过去分词：j'eus parlé（书面语）\n· 先将来时 = 助动词的简单将来时 + 过去分词：j'aurai parlé\n· 条件式过去时 = 助动词的条件式现在时 + 过去分词：j'aurais parlé\n· 虚拟式过去时 / 愈过去时 = 助动词的虚拟式现在时 / 未完成过去时 + 过去分词：que j'aie parlé、que j'eusse parlé\n· 不定式过去时 = avoir / être 的不定式 + 过去分词：avoir parlé、être allé(e)\n· 命令式过去时 = avoir / être 的命令式 + 过去分词：aie parlé、sois allé(e</bdi>)（极罕用，仅用于书面或强调「先完成」）\n\n<strong>副动词</strong>不是复合时态，但同样不单列变位表：<strong><bdi>en</bdi> + 现在分词</strong>，如 <bdi>en parlant、en finissant、en vendant</bdi>。\n\n助动词的选择与过去分词配合见上两条表；复合时态的<strong>语序</strong>与简单时态相同，代词宾语仍放在助动词前（<bdi>je l'ai vu</bdi>）。"
+        "notes": "复合时态不写进变位表，由「助动词的相应时态 + 过去分词」构成：\n\n· 复合过去时 = <bdi>avoir / être</bdi> 的现在时 + 过去分词：<bdi>j'ai parlé</bdi>、<bdi>je suis allé(e)\n·</bdi> 愈过去时 = 助动词的未完成过去时 + 过去分词：<bdi>j'avais parlé\n·</bdi> 先过去时 = 助动词的简单过去时 + 过去分词：<bdi>j'eus parlé</bdi>（书面语）\n· 先将来时 = 助动词的简单将来时 + 过去分词：<bdi>j'aurai parlé\n·</bdi> 条件式过去时 = 助动词的条件式现在时 + 过去分词：<bdi>j'aurais parlé\n·</bdi> 虚拟式过去时 / 愈过去时 = 助动词的虚拟式现在时 / 未完成过去时 + 过去分词：<bdi>que j'aie parlé</bdi>、<bdi>que j'eusse parlé\n·</bdi> 不定式过去时 <bdi>= avoir / être</bdi> 的不定式 + 过去分词：<bdi>avoir parlé</bdi>、<bdi>être allé(e)\n·</bdi> 命令式过去时 <bdi>= avoir / être</bdi> 的命令式 + 过去分词：<bdi>aie parlé</bdi>、<bdi>sois allé(e</bdi>)（极罕用，仅用于书面或强调「先完成」）\n\n<strong>副动词</strong>不是复合时态，但同样不单列变位表：<strong><bdi>en</bdi> + 现在分词</strong>，如 <bdi>en parlant</bdi>、<bdi>en finissant</bdi>、<bdi>en vendant</bdi>。\n\n助动词的选择与过去分词配合见上两条表；复合时态的<strong>语序</strong>与简单时态相同，代词宾语仍放在助动词前（<bdi>je l'ai vu</bdi>）。"
       },
       {
         "id": "fr-verb-pronominal",
@@ -279,7 +279,7 @@
               [
                 "相互",
                 "互相（主语须复数）",
-                "<bdi>se parler、s'aimer</bdi>"
+                "<bdi>se parler</bdi>、<bdi>s'aimer</bdi>"
               ],
               [
                 "被动",
@@ -289,7 +289,7 @@
               [
                 "绝对",
                 "意义与主动态不同，须整体记忆",
-                "<bdi>se souvenir de、s'en aller</bdi>"
+                "<bdi>se souvenir de</bdi>、<bdi>s'en aller</bdi>"
               ]
             ],
             "lang": "fr"
@@ -310,7 +310,7 @@
               ],
               [
                 "否定",
-                "<bdi>ne + 自反代词 + 动词 + pas</bdi>",
+                "<bdi>ne +</bdi> 自反代词 + 动词 <bdi>+ pas</bdi>",
                 "<bdi>Je ne me lève pas.</bdi>"
               ],
               [
@@ -344,33 +344,33 @@
             "rows": [
               [
                 "<bdi>-cer</bdi>",
-                "<bdi>c → ç（在 a / o</bdi> 前）",
+                "<bdi>c → ç</bdi>（在 <bdi>a / o</bdi> 前）",
                 "<bdi>commencer → commençons / commençais</bdi>"
               ],
               [
                 "<bdi>-ger</bdi>",
-                "<bdi>g → ge（在 a / o</bdi> 前）",
+                "<bdi>g → ge</bdi>（在 <bdi>a / o</bdi> 前）",
                 "<bdi>manger → mangeons / mangeais</bdi>"
               ],
               [
                 "<bdi>-oyer / -uyer</bdi>",
-                "<bdi>y → i（在哑音 e</bdi> 前）",
+                "<bdi>y → i</bdi>（在哑音 e 前）",
                 "<bdi>envoyer → envoie / enverrai</bdi>"
               ],
               [
                 "<bdi>-ayer</bdi>",
-                "<bdi>y → i 或保留 y</bdi>（两可）",
+                "<bdi>y → i</bdi> 或保留 y（两可）",
                 "<bdi>payer → paie / paye</bdi>"
               ],
               [
-                "<bdi>-e- / -é- + 辅音 + -er</bdi>",
-                "<bdi>e → è（在哑音 e</bdi> 前）",
+                "<bdi>-e- / -é- +</bdi> 辅音 <bdi>+ -er</bdi>",
+                "<bdi>e → è</bdi>（在哑音 e 前）",
                 "<bdi>lever → lève / lèverai</bdi>"
               ],
               [
                 "<bdi>-eler / -eter</bdi>",
-                "双写 <bdi>l / t 或改 è</bdi>（两套）",
-                "<bdi>appeler → appelle；acheter → achète</bdi>"
+                "双写 <bdi>l / t</bdi> 或改 <bdi>è</bdi>（两套）",
+                "<bdi>appeler → appelle</bdi>；<bdi>acheter → achète</bdi>"
               ]
             ],
             "lang": "fr"
@@ -382,7 +382,7 @@
   },
   {
     "id": "fr-verb-er",
-    "title": "-<bdi>er 动词（parler</bdi> 型）",
+    "title": "-<bdi>er</bdi> 动词（<bdi>parler</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -1018,7 +1018,7 @@
   },
   {
     "id": "fr-verb-ir",
-    "title": "<bdi>-ir 动词（finir 型，-iss-）</bdi>",
+    "title": "<bdi>-ir</bdi> 动词（<bdi>finir</bdi> 型，<bdi>-iss-</bdi>）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -1723,7 +1723,7 @@
   },
   {
     "id": "fr-verb-3rd-re",
-    "title": "-<bdi>re 动词（vendre</bdi> 型）",
+    "title": "-<bdi>re</bdi> 动词（<bdi>vendre</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -2363,7 +2363,7 @@
   },
   {
     "id": "fr-verb-3rd-oir",
-    "title": "-<bdi>oir 动词（recevoir</bdi> 型）",
+    "title": "-<bdi>oir</bdi> 动词（<bdi>recevoir</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -3034,7 +3034,7 @@
               ],
               [
                 "过去分词",
-                "<bdi>-u（recev- → reç-）</bdi>",
+                "-u（<bdi>recev- → reç-</bdi>）",
                 "<bdi>-ue</bdi>",
                 "<bdi>-us</bdi>",
                 "<bdi>-ues</bdi>"
@@ -3077,7 +3077,7 @@
   },
   {
     "id": "fr-verb-3rd-ir",
-    "title": "-<bdi>ir 不规则（partir</bdi> 型）",
+    "title": "-<bdi>ir</bdi> 不规则（<bdi>partir</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -5114,14 +5114,14 @@
             "rows": [
               [
                 "现在分词",
-                "<bdi>-ant（prend- → pren-）</bdi>",
-                "<bdi>-ant（prend- → pren-）</bdi>",
-                "<bdi>-ant（prend- → pren-）</bdi>",
-                "<bdi>-ant（prend- → pren-）</bdi>"
+                "<bdi>-ant</bdi>（<bdi>prend- → pren-</bdi>）",
+                "<bdi>-ant</bdi>（<bdi>prend- → pren-</bdi>）",
+                "<bdi>-ant</bdi>（<bdi>prend- → pren-</bdi>）",
+                "<bdi>-ant</bdi>（<bdi>prend- → pren-</bdi>）"
               ],
               [
                 "过去分词",
-                "<bdi>-is（prend- → pris-）</bdi>",
+                "<bdi>-is</bdi>（<bdi>prend- → pris-</bdi>）",
                 "<bdi>-ise</bdi>",
                 "<bdi>-is</bdi>",
                 "<bdi>-ises</bdi>"
@@ -5810,7 +5810,7 @@
               ],
               [
                 "过去分词",
-                "<bdi>-is（mett- → mis-）</bdi>",
+                "<bdi>-is</bdi>（<bdi>mett- → mis-</bdi>）",
                 "<bdi>-ise</bdi>",
                 "<bdi>-is</bdi>",
                 "<bdi>-ises</bdi>"
@@ -5853,7 +5853,7 @@
   },
   {
     "id": "fr-verb-3rd-aitre",
-    "title": "-<bdi>aître / -oître（connaître</bdi> 型）",
+    "title": "-<bdi>aître / -oître</bdi>（<bdi>connaître</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -6508,7 +6508,7 @@
               ],
               [
                 "过去分词",
-                "<bdi>-u（connaiss- → conn-）</bdi>",
+                "-u（<bdi>connaiss- → conn-</bdi>）",
                 "<bdi>-ue</bdi>",
                 "<bdi>-us</bdi>",
                 "<bdi>-ues</bdi>"
@@ -6551,7 +6551,7 @@
   },
   {
     "id": "fr-verb-3rd-uire",
-    "title": "-<bdi>uire（conduire</bdi> 型）",
+    "title": "-<bdi>uire</bdi>（<bdi>conduire</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -7155,7 +7155,7 @@
               ],
               [
                 "过去分词",
-                "<bdi>-t（conduis- → condui-）</bdi>",
+                "-t（<bdi>conduis- → condui-</bdi>）",
                 "<bdi>-te</bdi>",
                 "<bdi>-ts</bdi>",
                 "<bdi>-tes</bdi>"
@@ -7198,7 +7198,7 @@
   },
   {
     "id": "fr-verb-3rd-eindre",
-    "title": "-<bdi>eindre / -aindre / -oindre（peindre</bdi> 型）",
+    "title": "-<bdi>eindre / -aindre / -oindre</bdi>（<bdi>peindre</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -7884,14 +7884,14 @@
             "rows": [
               [
                 "现在分词",
-                "<bdi>-ant（peins- → peign-）</bdi>",
-                "<bdi>-ant（peins- → peign-）</bdi>",
-                "<bdi>-ant（peins- → peign-）</bdi>",
-                "<bdi>-ant（peins- → peign-）</bdi>"
+                "<bdi>-ant</bdi>（<bdi>peins- → peign-</bdi>）",
+                "<bdi>-ant</bdi>（<bdi>peins- → peign-</bdi>）",
+                "<bdi>-ant</bdi>（<bdi>peins- → peign-</bdi>）",
+                "<bdi>-ant</bdi>（<bdi>peins- → peign-</bdi>）"
               ],
               [
                 "过去分词",
-                "<bdi>-t（peins- → pein-）</bdi>",
+                "-t（<bdi>peins- → pein-</bdi>）",
                 "<bdi>-te</bdi>",
                 "<bdi>-ts</bdi>",
                 "<bdi>-tes</bdi>"
@@ -7934,7 +7934,7 @@
   },
   {
     "id": "fr-verb-3rd-vrir",
-    "title": "-<bdi>vrir / -frir（ouvrir</bdi> 型）",
+    "title": "-<bdi>vrir / -frir</bdi>（<bdi>ouvrir</bdi> 型）",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -12000,7 +12000,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "这些动词不能由词干规则推出，生词表里请选「特殊变位」并自行填写；同一词根派生出的词通常跟着变（<bdi>revenir 像 venir，comprendre 像 prendre</bdi>）。\n\n<strong><bdi>s'asseoir</bdi></strong> 这里采用 <bdi>j'assieds / nous asseyons 一套；另有 j'assois / nous assoyons 一套，意义相同。复合时态按约定不列入表内，见「复合时态」条目；副动词 = en + 现在分词（en étant、en ayant、en allant</bdi>…）。"
+        "notes": "这些动词不能由词干规则推出，生词表里请选「特殊变位」并自行填写；同一词根派生出的词通常跟着变（<bdi>revenir</bdi> 像 <bdi>venir</bdi>，<bdi>comprendre</bdi> 像 <bdi>prendre</bdi>）。\n\n<strong><bdi>s'asseoir</bdi></strong> 这里采用 <bdi>j'assieds / nous asseyons</bdi> 一套；另有 <bdi>j'assois / nous assoyons</bdi> 一套，意义相同。复合时态按约定不列入表内，见「复合时态」条目；副动词 <bdi>= en +</bdi> 现在分词（<bdi>en étant</bdi>、<bdi>en ayant</bdi>、<bdi>en allant</bdi>…）。"
       }
     ]
   }

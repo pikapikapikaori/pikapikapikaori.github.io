@@ -1,4 +1,4 @@
-/** Word 模型：唯一键、去重合并、序列化 */
+/** Word 模型：词条的识别方式、去重合并、序列化 */
 
 import { POS_LIST, WORD_SOURCE_OPTIONS } from '../config/config.js'
 import { wordId } from '../utils/id.js'
@@ -123,7 +123,7 @@ export function normalizeParadigm(p) {
 }
 
 /**
- * 规范化词干。词干是不变的部分，词形变化一律在其后追加词尾（la am → amō / amāre，grc λόγ → λόγος）；
+ * 规范化词干。词干是不变的部分，词形变化一律在其后追加词尾（la am → amō、amāre，grc λόγ → λόγος）；
  * 末尾的连字符只是显示约定，不写入数据
  */
 export function normalizeStem(value) {
@@ -206,6 +206,96 @@ export function sourceLabel(source) {
     return source
 }
 
-export function resolveDerivative(lemma, words) {
-    return words.find((w) => w.lemma === lemma) || null
+/** 表格按格子合并：新词条写了的格子覆盖旧值，没写的保留。 */
+export function mergeParadigm(existing, incoming) {
+    const A = normalizeParadigm(existing)
+    const B = normalizeParadigm(incoming)
+    if (isParadigmEmpty(A)) return B
+    if (isParadigmEmpty(B)) return A
+
+    const out = {}
+    for (const tkey of new Set([...Object.keys(A), ...Object.keys(B)])) {
+        const ta = A[tkey] || {}
+        const tb = B[tkey] || {}
+        const rows = {}
+        for (const rkey of new Set([...Object.keys(ta), ...Object.keys(tb)])) {
+            const cells = { ...(ta[rkey] || {}), ...(tb[rkey] || {}) }
+            for (const [ck, v] of Object.entries(cells)) {
+                if (!String(v ?? '').trim()) delete cells[ck]
+            }
+            if (Object.keys(cells).length) rows[rkey] = cells
+        }
+        if (Object.keys(rows).length) out[tkey] = rows
+    }
+    return out
+}
+
+/**
+ * 词条内容合并：表格按格子、词干按已有值优先、列表去重追加、备注只补空位。
+ *
+ * `preferIncoming`：属性字段冲突时用新值。默认保留已有值。
+ * `replaceInflectionType`：新词条写了类型就覆盖已有的。默认只在原来为空时写入。
+ */
+export function mergeWordContent(existing, incoming, {
+    preferIncoming = false,
+    replaceInflectionType = false
+} = {}) {
+    const merged = { ...existing }
+
+    const type = incoming.inflectionType
+    const oldType = existing.inflectionType || {}
+    const has = (t) => !!(t && ((t.label && t.label.trim()) || t.grammarRef))
+    if (has(type) && (replaceInflectionType || !has(oldType))) merged.inflectionType = { ...type }
+
+    merged.paradigm = mergeParadigm(existing.paradigm, incoming.paradigm)
+
+    // 词干：已有值优先保留，为空时采用新来源的值
+    merged.stems = mergeStems(existing.stems, incoming.stems)
+
+    merged.attributes = normalizeAttributes(preferIncoming
+        ? { ...(existing.attributes || {}), ...(incoming.attributes || {}) }
+        : { ...(incoming.attributes || {}), ...(existing.attributes || {}) })
+
+    for (const key of ['inflections', 'meanings', 'collocations', 'examples']) {
+        merged[key] = appendUnique(existing[key], incoming[key])
+    }
+    for (const key of ['derivatives', 'tags']) {
+        merged[key] = uniqArray([...(existing[key] || []), ...(incoming[key] || [])])
+    }
+
+    const notes = existing.notes || incoming.notes
+    if (notes) merged.notes = notes
+
+    return merged
+}
+
+/** 追加条目，按 `entryKey` 去重 */
+export function appendUnique(base = [], extra = []) {
+    const out = [...(base || [])]
+    for (const item of extra || []) {
+        if (!item) continue
+        const key = entryKey(item)
+        if (!out.some((x) => entryKey(x) === key)) out.push({ ...item })
+    }
+    return out
+}
+
+/** 条目去重用的身份：这些字段都相同就算同一条 */
+export function entryKey(e) {
+    return [
+        e.text ?? '', e.form ?? '', e.label ?? '', e.group ?? '',
+        e.translation ?? '', e.citation ?? '', e.source ?? ''
+    ].join('\u0001')
+}
+
+export function uniqArray(arr) {
+    const seen = new Set()
+    const out = []
+    for (const x of arr) {
+        const s = String(x ?? '').trim()
+        if (!s || seen.has(s)) continue
+        seen.add(s)
+        out.push(s)
+    }
+    return out
 }

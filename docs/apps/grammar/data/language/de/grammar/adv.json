@@ -17,37 +17,37 @@
             "rows": [
               [
                 "时间",
-                "<bdi>jetzt、heute、gestern、morgen、bald、immer</bdi>"
+                "<bdi>jetzt</bdi>、<bdi>heute</bdi>、<bdi>gestern</bdi>、<bdi>morgen</bdi>、<bdi>bald</bdi>、<bdi>immer</bdi>"
               ],
               [
                 "地点",
-                "<bdi>hier、dort、oben、unten、links、rechts</bdi>"
+                "<bdi>hier</bdi>、<bdi>dort</bdi>、<bdi>oben</bdi>、<bdi>unten</bdi>、<bdi>links</bdi>、<bdi>rechts</bdi>"
               ],
               [
                 "方向",
-                "<bdi>hin、her、hinauf、herunter</bdi>"
+                "<bdi>hin</bdi>、<bdi>her</bdi>、<bdi>hinauf</bdi>、<bdi>herunter</bdi>"
               ],
               [
                 "方式",
-                "<bdi>gern、schnell、so、anders、zusammen</bdi>"
+                "<bdi>gern</bdi>、<bdi>schnell</bdi>、<bdi>so</bdi>、<bdi>anders</bdi>、<bdi>zusammen</bdi>"
               ],
               [
                 "程度",
-                "<bdi>sehr、ziemlich、fast、ganz、nur、sogar</bdi>"
+                "<bdi>sehr</bdi>、<bdi>ziemlich</bdi>、<bdi>fast</bdi>、<bdi>ganz</bdi>、<bdi>nur</bdi>、<bdi>sogar</bdi>"
               ],
               [
                 "情态 / 语气",
-                "<bdi>doch、ja、wohl、mal、eben</bdi>"
+                "<bdi>doch</bdi>、<bdi>ja</bdi>、<bdi>wohl</bdi>、<bdi>mal</bdi>、<bdi>eben</bdi>"
               ],
               [
                 "否定",
-                "<bdi>nicht、nie、niemals、keineswegs</bdi>"
+                "<bdi>nicht</bdi>、<bdi>nie</bdi>、<bdi>niemals</bdi>、<bdi>keineswegs</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "德语形容词与副词同形（<bdi>schnell 既是「快的」也是「快地」），只有少数词（gern、bald</bdi>）专门用作副词。"
+        "notes": "德语形容词与副词同形（<bdi>schnell</bdi> 既是「快的」也是「快地」），只有少数词（<bdi>gern</bdi>、<bdi>bald</bdi>）专门用作副词。"
       },
       {
         "id": "de-adv-comparison",
@@ -85,7 +85,7 @@
       },
       {
         "id": "de-adv-pronominal",
-        "title": "代副词 <bdi>da(r)- 与 wo(r</bdi>)-",
+        "title": "代副词 <bdi>da(r)-</bdi> 与 <bdi>wo(r</bdi>)-",
         "tables": [
           {
             "caption": "构成与用法",
@@ -99,22 +99,22 @@
               [
                 "<bdi>da</bdi> + 介词",
                 "代替「介词 + 事物」",
-                "<bdi>damit、dafür、darüber</bdi>"
+                "<bdi>damit</bdi>、<bdi>dafür</bdi>、<bdi>darüber</bdi>"
               ],
               [
                 "<bdi>da + r</bdi> + 元音开头介词",
                 "介词以元音开头时插入 <bdi>r</bdi>",
-                "<bdi>darauf、daran、darum</bdi>"
+                "<bdi>darauf</bdi>、<bdi>daran</bdi>、<bdi>darum</bdi>"
               ],
               [
                 "<bdi>wo</bdi> + 介词",
                 "对「介词 + 事物」提问",
-                "<bdi>womit、wovon、worüber</bdi>"
+                "<bdi>womit</bdi>、<bdi>wovon</bdi>、<bdi>worüber</bdi>"
               ],
               [
                 "<bdi>wo + r</bdi> + 元音开头介词",
                 "同上",
-                "<bdi>worauf、woran、worin</bdi>"
+                "<bdi>worauf</bdi>、<bdi>woran</bdi>、<bdi>worin</bdi>"
               ]
             ],
             "lang": "de"

@@ -5,7 +5,7 @@ import { toast } from './toast.js'
 import { createJsonInput } from './json-input.js'
 import { parseWordJson, importWords, previewWords } from '../services/import-words-service.js'
 
-/** @param {object} opts userId / lang（词形包 bdi 用）/ onDone(stats) / title */
+/** @param {object} opts userId、lang（词形包 bdi 用）/ onDone(stats)、title */
 export function openImportWordsModal({
     userId,
     lang = null,

@@ -8,7 +8,7 @@
     --sp-6: 32px;
     --sp-7: 48px;
 
-    /* 圆角：只分两档——卡片 / 弹层 / 词卡用 surface，控件（输入框 / 按钮 / 表格…）用 control */
+    /* 圆角：只分两档——卡片、弹层、词卡用 surface，控件（输入框、按钮、表格…）用 control */
     --r-surface: 16px;
     --r-control: 6px;
     --r-full: 999px;
@@ -26,7 +26,6 @@
 
     --lh-tight: 1.25;
     --lh-base: 1.6;
-    --lh-loose: 1.85;
 
     /* 界面字体由 fonts.css 合成：中文楷体 + 拉丁 Gentium。设置页只改写 --ff-ui，不动各语言字体（见 lang.css）。 */
     --ff-ui: "LN UI", system-ui, -apple-system, "Segoe UI", "PingFang SC",
@@ -47,16 +46,14 @@
     --dur: .22s;
 
     --z-header: 50;
-    --z-fab: 60;
     --z-modal: 100;
-    /* 浮动控件（回到顶部 / 转写 / 短音符 / 输入助手）：永远浮在词卡与弹窗之上 */
+    /* 浮动控件（回到顶部、转写、短音符、输入助手）：永远浮在词卡与弹窗之上 */
     --z-chrome: 120;
     /* 下拉菜单要盖在浮动控件之上（它贴着控件展开） */
     --z-menu: 150;
     --z-toast: 200;
 }
 
-/* ---- 浅色（默认） ---- */
 :root,
 :root[data-theme="light"] {
     --c-bg: #fafaf7;
@@ -78,7 +75,7 @@
     --c-rule: #ecebe5;
     --c-rule-strong: #dddbd2;
 
-    /* 朱红：古抄本里用于标题与标记，这里只做「当前 / 焦点 / 链接」，不做大块填充 */
+    /* 朱红：古抄本里用于标题与标记，这里只做「当前、焦点、链接」，不做大块填充 */
     --c-accent: #9a2f2b;
     --c-accent-fg: #ffffff;
     --c-accent-soft: #f7e8e5;
@@ -88,20 +85,13 @@
     --c-action-fg: #ffffff;
 
     --c-success: #2f9e55;
-    --c-warning: #c98a12;
     --c-danger: #cf4343;
     --c-info: #3a7fd9;
 
-    --c-source-manual: #6a6a66;
-    --c-source-wiktionary: #2f7d8a;
-    --c-source-url: #8a6a2f;
-
-    --shadow-sm: 0 1px 2px rgba(20, 20, 20, .06);
     --shadow-md: 0 4px 14px rgba(20, 20, 20, .08);
     --shadow-lg: 0 10px 40px rgba(20, 20, 20, .14);
 }
 
-/* ---- 深色 ---- */
 :root[data-theme="dark"] {
     --c-bg: #0f1115;
     --c-bg-elev: #161922;
@@ -129,20 +119,13 @@
     --c-action-fg: #0f1115;
 
     --c-success: #56c47c;
-    --c-warning: #e0b34a;
     --c-danger: #ef6a6a;
     --c-info: #6aa8f0;
 
-    --c-source-manual: #a0a3ac;
-    --c-source-wiktionary: #6dc3d0;
-    --c-source-url: #e0b34a;
-
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
     --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
     --shadow-lg: 0 10px 40px rgba(0, 0, 0, .55);
 }
 
-/* ---- auto：跟随系统 ---- */
 @media (prefers-color-scheme: dark) {
     :root[data-theme="auto"] {
         --c-bg: #0f1115;
@@ -171,16 +154,10 @@
         --c-action-fg: #0f1115;
 
         --c-success: #56c47c;
-        --c-warning: #e0b34a;
-        --c-danger: #ef6a6a;
+            --c-danger: #ef6a6a;
         --c-info: #6aa8f0;
 
-        --c-source-manual: #a0a3ac;
-        --c-source-wiktionary: #6dc3d0;
-        --c-source-url: #e0b34a;
-
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
-        --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+            --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
         --shadow-lg: 0 10px 40px rgba(0, 0, 0, .55);
     }
 }

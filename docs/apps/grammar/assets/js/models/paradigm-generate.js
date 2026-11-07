@@ -46,7 +46,7 @@ function readStemForm(entry) {
     return null
 }
 
-/** 语言档案 `profile.deriveStems()` 的单个词干查询（没有档案 / 推不出时返回空串） */
+/** 语言档案 `profile.deriveStems()` 的单个词干查询（没有档案、推不出时返回空串） */
 function derivedStem(profile, key, stem, spec, parts) {
     if (!profile || typeof profile.deriveStems !== 'function' || !key || key === 'base') return ''
     try {
@@ -104,8 +104,8 @@ export function canResolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const form = readStemForm(spec?.stemForms?.[key])
     const requiredPart = Array.isArray(spec?.parts)
         && spec.parts.some((p) => p && p.key === key && p.required === true)
-    // 空规则数组 `[]` 表示「与 base 相同」（法语不变的复数 / 阴性），算有来源；
-    // 但声明成必填的词干（德语强变化的 pret / pp）即使写了空数组也不能自动推出
+    // 空规则数组 `[]` 表示「与 base 相同」（法语不变的复数、阴性），算有来源；
+    // 但声明成必填的词干（德语强变化的 pret、pp）即使写了空数组也不能自动推出
     if (!form) return key === 'base' ? baseHasSource(stem, spec, parts, visited, profile) : false
     if (!form.from && !form.rules.length && requiredPart) return false
 
@@ -124,7 +124,7 @@ export function previewStem(stem, stemForm, spec, userStems, profile = null) {
 }
 
 /** 来源优先级：用户填的 → spec.stems → stemForms 规则 → base，最后才问语言档案。
- *  `from: 'headword'` 让法语 / 德语的动词词干不必重复填写。 */
+ *  `from: 'headword'` 让法语、德语的动词词干不必重复填写。 */
 export function resolveStem(stem, stemForm, spec, userStems, seen, profile) {
     const parts = userStems && typeof userStems === 'object' ? userStems : {}
     const key = stemForm || 'base'
@@ -202,6 +202,10 @@ export function hasAccentMark(text) {
     return toUnits(text).some((unit) => unit.marks.some((mark) => ACCENT_MARKS.includes(mark)))
 }
 
+/**
+ * 把音节列表拼回文字。语言档案（grc、sa）直接 import 它，`fromUnits` 这个名字不能改，也不能删。
+ * `stripLength` 去掉长短音符，只留重音。
+ */
 export function fromUnits(units, { stripLength = false } = {}) {
     let out = ''
     for (const unit of units) {
@@ -216,7 +220,7 @@ export function fromUnits(units, { stripLength = false } = {}) {
 
 /**
  * 取该格的重音模式
- * post.accent 可写成字符串，或写成 { '*': 默认模式, 表: 模式 | { 行: 模式 } } 按表 / 行覆盖
+ * post.accent 可写成字符串，或写成 { '*': 默认模式, 表: 模式 | { 行: 模式 } } 按表、行覆盖
  */
 export function resolveAccentMode(spec, tableKey, rowKey, colKey) {
     const node = spec?.post?.accent
@@ -258,7 +262,7 @@ function resolveCell(spec, tableKey, rowKey, colKey) {
     }
 }
 
-/** 词尾规则是不是用转写写的：满文 / 梵语的 endings 是拉丁转写，古希腊语 / 希伯来语是原文 */
+/** 词尾规则是不是用转写写的：满文、梵语的 endings 是拉丁转写，古希腊语、希伯来语是原文 */
 function rulesInRoman(spec, script) {
     if (typeof script?.hasScript !== 'function') return false
     const texts = []
@@ -277,16 +281,16 @@ function rulesInRoman(spec, script) {
 /**
  * 按词尾规则填表，只填空格子；`overwrite` 为真时覆盖。
  * `profile` 是语言档案，`script` 负责转写与原文互转。
- * @returns {{ paradigm, filled, skipped, skippedTables }}（另有 `variant` / `usedTables` / `noVariant`）
+ * @returns {{ paradigm, filled, skipped, skippedTables }}（另有 `variant`、`usedTables`、`noVariant`）
  */
 export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, script, overwrite = false } = {}) {
     const result = { paradigm: {}, filled: [], skipped: [], skippedTables: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
     const parts = normalizeStemParts(stem, stems, headword)
     // 只有「词尾规则用转写写」的语言才需要先把输入转成转写（满文、梵语）；
-    // 古希腊语 / 希伯来语的词尾本身就是原文，再转一次会把重音、气符弄丢
+    // 古希腊语、希伯来语的词尾本身就是原文，再转一次会把重音、气符弄丢
     if (typeof script?.toRoman === 'function' && rulesInRoman(spec, script)) {
-        // 下拉选项（如 aorist / perfect 的类型名）是元数据，不做转写
+        // 下拉选项（如 aorist、perfect 的类型名）是元数据，不做转写
         const metaKeys = new Set((spec.parts || []).filter((p) => p && p.kind === 'select').map((p) => p.key))
         for (const key of Object.keys(parts)) {
             const value = String(parts[key] ?? '')
@@ -320,7 +324,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
         result.variant = hit.id || null
     }
 
-    // 按用户选中的词干值切换 endings（梵语：aorist / perfect 的类型）
+    // 按用户选中的词干值切换 endings（梵语：aorist、perfect 的类型）
     if (spec.variantByStem && typeof spec.variantByStem === 'object') {
         const addEndings = {}
         const addDefaults = {}
@@ -396,7 +400,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                 const part = resolveStem(base, cell.stemForm, spec, parts, null, profile)
                 const prefix = String(cell.prefix)
                 let suffix = endingText(cell.suffix)
-                // 语言档案可以按词干改写字尾（如满语的元音和谐：-hV → -ha / -he / -ho）
+                // 语言档案可以按词干改写字尾（如满语的元音和谐：-hV → -ha、-he、-ho）
                 if (suffix && typeof profile?.harmonize === 'function') {
                     suffix = profile.harmonize(part, suffix, { tableKey: table.key, rowKey: row.key, colKey: col.key })
                 }
@@ -433,7 +437,7 @@ export function generateParadigm({ stem, stems, headword, spec, template, existi
                 const accented = mode && typeof profile?.accent === 'function'
                     ? profile.accent(applied, mode, {
                         endingAccented: hasAccentMark(suffix),
-                        // 古希腊语祈愿式词尾 -οι / -αι 是长音
+                        // 古希腊语祈愿式词尾 -οι、-αι 是长音
                         finalDiphthongLong: /-opt$/.test(row.key)
                     })
                     : applied
@@ -470,7 +474,7 @@ function buildTableIndex(template) {
     return index
 }
 
-/** 校验 derive 规格，返回问题描述数组（空数组即通过）；传入 template 时同时校验 key 与模板是否对齐 */
+/** 校验 derive 规格，返回问题描述数组（空数组即通过）；传入 template 时同时检查 key 是否与模板一致 */
 export function validateDeriveSpec(spec, template, profile) {
     const problems = []
     if (!spec || typeof spec !== 'object') return ['derive 不是对象']
@@ -545,7 +549,7 @@ export function validateDeriveSpec(spec, template, profile) {
     const index = buildTableIndex(template)
     // 'base' 是内置的原样词干，不需要在 stemForms 里声明
     // 可用的词干变体：base、stems 字面量、stemForms 规则、parts 里声明由用户填写的项，
-    // 以及语言档案 deriveStems() 能算出来的词干（如梵语的 present / strong / passive）
+    // 以及语言档案 deriveStems() 能算出来的词干（如梵语的 present、strong、passive）
     const derivedNames = (() => {
         if (!profile || typeof profile.deriveStems !== 'function') return new Set()
         try {
@@ -707,7 +711,7 @@ export function validateDeriveSpec(spec, template, profile) {
 }
 
 /**
- * 用 stemExample 自检：生成结果与 expect 逐格比对。ok 只取决于 missing / mismatches，extra 是「生成了但 expect 没写」。
+ * 用 stemExample 自检：生成结果与 expect 逐格比对。ok 只取决于 missing、mismatches，extra 是「生成了但 expect 没写」。
  * @returns {{ ok: boolean, missing: object[], mismatches: object[], extra: object[] }}
  */
 export function checkDeriveExample(spec, template, options = {}) {
@@ -785,7 +789,7 @@ export function checkDeriveExample(spec, template, options = {}) {
     return out
 }
 
-/* ---------------- 全量校验（浏览器按钮 / node 脚本共用） ---------------- */
+/* ---------------- 全量校验（浏览器按钮、node 脚本共用） ---------------- */
 
 /**
  * 取锚点上的 derive 规格（item 优先，其次 section）；锚点可写 `deriveRef` 指向另一个锚点复用规格，
@@ -847,7 +851,7 @@ export function verifyGrammarDoc(lang, doc, profile, script = null) {
             out.errors.push(`${where}: ${problem}`)
         }
         if (!tpl && Object.keys(doc?.paradigms || {}).length) {
-            out.warnings.push(`${where}: 未能确定对应的 paradigm 模板，跳过 key 对齐检查`)
+            out.warnings.push(`${where}: 未能确定对应的 paradigm 模板，跳过 key 检查`)
         }
 
         const isVariantSpec = Array.isArray(spec.variants) && spec.variants.length > 0

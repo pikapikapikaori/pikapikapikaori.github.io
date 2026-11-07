@@ -1,8 +1,7 @@
 /** 生词业务逻辑：列表、筛选、排序、分页、统计 */
 
 import {
-    listByLanguage, addOrMerge, updateWord, deleteWord,
-    deleteAllInLanguage, recordReview, getWord
+    listByLanguage, addOrMerge, updateWord, recordReview, getWord
 } from '../store/word-store.js'
 import { posLabel, allSources } from '../models/word.js'
 import { normalizeSearch } from '../utils/text-normalize.js'
@@ -26,7 +25,7 @@ export const FILTER_EMPTY = {
     source: ''         // '' 表示全部
 }
 
-/** 搜索范围：all = 词形 + 含义 / 例句 / 固定搭配；forms = 词形；head = 基本形态 + 词干 */
+/** 搜索范围：all = 词形 + 含义、例句、固定搭配；forms = 词形；head = 基本形态 + 词干 */
 export const SEARCH_SCOPE = [
     { value: 'all',   label: '全部' },
     { value: 'forms', label: '词形' },
@@ -132,7 +131,7 @@ function searchMatcher(queries, normalize) {
 function applySearch(words, q, scope = 'all') {
     const s = String(q || '').trim()
     if (!s) return words
-    // 原文 / 转写两种写法都能搜到：查询串同时展开成 IAST 与天城体
+    // 原文、转写两种写法都能搜到：查询串同时展开成 IAST 与天城体
     const queries = searchVariants(s)
     if (!queries.length) return words
     const matches = searchMatcher(queries, normalizeSearch)
@@ -224,7 +223,7 @@ export function applySort(words, field, order) {
 
 /**
  * 保存前的规范化：原文类字段交给语言自己的 `canonicalize`（`data/language/<code>/paradigm.js`）。
- * 目前只有拉丁语 / 古希腊语有（单元音默认补短音符），其它语言原样返回。
+ * 目前只有拉丁语、古希腊语有（单元音默认补短音符），其它语言原样返回。
  */
 async function canonicalizePayload(language, payload) {
     if (!payload) return payload
@@ -250,7 +249,7 @@ async function canonicalizePayload(language, payload) {
         ...payload,
         lemma: fix(payload.lemma),
         stems: fixMap(payload.stems || {}),
-        // 变格 / 变位表：{ 表: { 行: { 列: '词形' } } }
+        // 变格、变位表：{ 表: { 行: { 列: '词形' } } }
         paradigm: fixMap(payload.paradigm || {}),
         // 补充形式不带来源
         inflections: fixList(payload.inflections, 'form').map(({ source, ...rest }) => rest),

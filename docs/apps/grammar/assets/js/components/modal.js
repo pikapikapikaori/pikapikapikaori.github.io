@@ -42,7 +42,7 @@ export function openModal({
     if (body instanceof Node) bodyEl.appendChild(body)
     else if (body != null) bodyEl.appendChild(document.createTextNode(String(body)))
     modal.appendChild(bodyEl)
-    // 正文里可能带 bdi（toast / modal 的调用方已包好），统一补 lang/dir
+    // 正文里可能带 bdi（toast、modal 的调用方已包好），统一补 lang/dir
     annotateBdi(bodyEl)
 
     if (actions.length) {

@@ -17,7 +17,7 @@
     user-select: none;
 }
 
-/* 禁用态不响应 hover / active：按钮可能被 <label> 包着，label 会把交互转发给它 */
+/* 禁用态不响应 hover、active：按钮可能被 <label> 包着，label 会把交互转发给它 */
 .btn:not(:disabled):hover {
     background: var(--c-bg-hover);
 }
@@ -60,17 +60,6 @@
     background: color-mix(in oklab, var(--c-danger) 12%, transparent);
 }
 
-/* 页头里的破坏性操作：不描边，不抢按钮的注意力 */
-.btn--danger-quiet {
-    border-color: transparent;
-    background: transparent;
-    color: var(--c-danger);
-}
-
-.btn--danger-quiet:not(:disabled):hover {
-    background: color-mix(in oklab, var(--c-danger) 10%, transparent);
-}
-
 .btn--icon {
     width: 36px;
     padding: 0;
@@ -110,14 +99,6 @@
 .field__hint {
     font-size: var(--fs-xs);
     color: var(--c-fg-subtle);
-}
-
-.field__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    margin-top: var(--sp-1);
-    flex-wrap: wrap;
 }
 
 .field__row {
@@ -171,7 +152,7 @@
     color: var(--c-accent-fg);
 }
 
-/* 属性多选（语法性 / 助动词 / 自他）：一行可点文字，选中的前面亮一颗朱红圆点 */
+/* 属性多选（语法性、助动词、自他）：一行可点文字，选中的前面亮一颗朱红圆点 */
 .dot-group {
     display: flex;
     flex-wrap: wrap;
@@ -296,11 +277,6 @@
     white-space: nowrap;
 }
 
-.field__error {
-    font-size: var(--fs-xs);
-    color: var(--c-danger);
-}
-
 .input,
 .textarea,
 .select {
@@ -393,7 +369,7 @@
     line-height: var(--lh-tight);
 }
 
-/* 去掉原生外观：不然 Safari 会忽略 border-radius / border；箭头自己画 */
+/* 去掉原生外观：不然 Safari 会忽略 border-radius、border；箭头自己画 */
 .select {
     appearance: none;
     -webkit-appearance: none;
@@ -468,25 +444,6 @@
     line-height: var(--lh-base);
 }
 
-.search-input {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.search-input .input {
-    padding-left: 34px;
-}
-
-.search-input__icon {
-    position: absolute;
-    left: 10px;
-    width: 16px;
-    height: 16px;
-    color: var(--c-fg-subtle);
-    pointer-events: none;
-}
-
 /* ---------- 卡片 ---------- */
 .card {
     background: var(--c-bg-elev);
@@ -517,7 +474,7 @@
     font-size: var(--fs-md);
 }
 
-/* 含义 / 固定搭配 / 例句共用一套序号列表：数字按「一条数据」读，不用等宽字体也不用花号 */
+/* 含义、固定搭配、例句共用一套序号列表：数字按「一条数据」读，不用等宽字体也不用花号 */
 .word-card__list {
     list-style: decimal;
     padding-left: 1.5em;
@@ -560,7 +517,7 @@
     margin-top: -0.4rem;
 }
 
-/* 标签 / 输入框 / 提示排成固定两列，提示固定落在输入框下方，
+/* 标签、输入框、提示排成固定两列，提示固定落在输入框下方，
    这样有没有提示都不会把输入框挤得上下错位 */
 .field--part {
     display: grid;
@@ -689,39 +646,48 @@ button.word-card__derivative {
     color: var(--c-accent-fg);
 }
 
-/* ---------- 来源切换 ---------- */
+/* ---------- 标签栏 ---------- */
+/* 单行横滑：标签多到放不下（古希腊语动词 19 张表）时也不折行。
+   滚动条用全局的细滚动条，WebKit 上是浮动条，不占高度。 */
 .source-tabs {
     display: flex;
-    gap: var(--sp-1);
-    flex-wrap: wrap;
+    gap: var(--sp-2);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 0;
     margin-bottom: var(--sp-2);
+    /* 首尾各留 1px，给焦点环让位，避免被 overflow 裁掉 */
+    padding: 1px;
+    scroll-behavior: smooth;
 }
 
+/* 描边片：1px 边框、无底色，选中只换边框与字色，不加朱红 */
 .source-tab {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 2px 8px;
-    font-size: var(--fs-xs);
-    border-radius: var(--r-full);
+    flex: none;
+    height: 28px;
+    padding: 0 10px;
     border: 1px solid var(--c-border);
-    background: var(--c-bg-subtle);
+    border-radius: var(--r-control);
+    background: none;
     color: var(--c-fg-muted);
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.source-tab:not(.source-tab--active):hover {
+    border-color: var(--c-border-strong);
+    color: var(--c-fg);
 }
 
 .source-tab--active {
-    border-color: var(--c-accent);
-    color: var(--c-accent);
-    background: var(--c-accent-soft);
-}
-
-.tab-bar--tables {
-    margin-bottom: var(--sp-2);
-}
-
-.tab-bar--tables .source-tab {
-    padding: 4px 10px;
-    font-size: var(--fs-sm);
+    border-color: var(--c-fg);
+    color: var(--c-fg);
+    font-weight: 500;
 }
 
 .tab-body {
@@ -758,18 +724,6 @@ button.word-card__derivative {
     border-color: var(--c-danger);
     color: var(--c-danger);
     background: transparent;
-}
-
-.badge--source[data-source="manual"] {
-    color: var(--c-source-manual);
-}
-
-.badge--source[data-source="wiktionary"] {
-    color: var(--c-source-wiktionary);
-}
-
-.badge--source[data-source^="url:"] {
-    color: var(--c-source-url);
 }
 
 /* ---------- 空状态 ---------- */
@@ -938,7 +892,7 @@ button.word-card__derivative {
 }
 
 /* ---------- 语法速查表格 ---------- */
-/* 一个条目的多表 tab：第一行选表（多组时），第二行选变化 / 示例 */
+/* 一个条目的多表 tab：第一行选表（多组时），第二行选变化、示例 */
 .grammar-tabs {
     display: flex;
     flex-direction: column;
@@ -1016,7 +970,7 @@ button.word-card__derivative {
     text-align: center;
 }
 
-/* 首列是「形式 / 用法」这类长文本而不是行标题时，允许它折行并占一份宽度 */
+/* 首列是「形式、用法」这类长文本而不是行标题时，允许它折行并占一份宽度 */
 .grammar-table--wrap-first tbody th,
 .grammar-table--wrap-first tbody td:first-child {
     width: auto;
@@ -1033,30 +987,9 @@ button.word-card__derivative {
     font-family: var(--ff-siddham);
 }
 
-/* ---------- 进度条 ---------- */
-.progress {
-    height: 6px;
-    background: var(--c-bg-subtle);
-    border-radius: var(--r-full);
-    overflow: hidden;
-}
-
-.progress__bar {
-    height: 100%;
-    background: var(--c-accent);
-    transition: width var(--dur) var(--ease);
-}
-
 /* ---------- 数字 ---------- */
 .num {
     font-variant-numeric: tabular-nums;
-}
-
-/* ---------- 分隔 ---------- */
-.divider {
-    height: 1px;
-    background: var(--c-border);
-    margin: var(--sp-4) 0;
 }
 
 /* ---------- Pagination ---------- */
@@ -1069,10 +1002,6 @@ button.word-card__derivative {
 .pagination__ellipsis {
     color: var(--c-fg-subtle);
     padding: 0 4px;
-}
-
-.review-card {
-    min-height: 0;
 }
 
 /* ---------- Paradigm 表格 ---------- */
@@ -1180,7 +1109,7 @@ button.word-card__derivative {
     opacity: 0.4;
 }
 
-/* 该形式不存在（行 disabled / 名词非对应性别）：灰底 + 禁用 */
+/* 该形式不存在（行 disabled、名词非对应性别）：灰底 + 禁用 */
 .paradigm-table__cell--disabled {
     background: var(--c-bg-subtle);
     opacity: 0.45;
@@ -1245,14 +1174,6 @@ button.word-card__derivative {
     font-family: var(--ff-mono);
     font-size: var(--fs-xs);
     line-height: 1.6;
-}
-
-.verify-list__item--error {
-    color: var(--c-danger);
-}
-
-.verify-list__item--warn {
-    color: var(--c-fg-muted);
 }
 
 .dropzone {
@@ -1375,12 +1296,6 @@ button.word-card__derivative {
     justify-content: flex-end;
     gap: var(--sp-2);
     margin-top: var(--sp-2);
-}
-
-/* ---------- 网格项防撑破 ---------- */
-.word-list>*,
-.grid-cards>* {
-    min-width: 0;
 }
 
 .card-overlay {
@@ -1820,12 +1735,12 @@ button.word-card__derivative {
     color: var(--c-accent);
 }
 
-/* ---------- 语法页浮动工具（回到顶部 / 显示转写） ---------- */
+/* ---------- 语法页浮动工具（回到顶部、显示转写） ---------- */
 .page-tools {
     position: fixed;
     right: var(--sp-4);
     bottom: var(--sp-4);
-    /* 浮动控件永远在最上层：词卡 / 弹窗打开时也要能点 */
+    /* 浮动控件永远在最上层：词卡、弹窗打开时也要能点 */
     z-index: var(--z-chrome);
     display: flex;
     flex-direction: column;

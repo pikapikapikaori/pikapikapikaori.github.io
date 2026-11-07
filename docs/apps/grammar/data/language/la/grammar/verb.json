@@ -40,7 +40,7 @@
                 "<bdi>-ere</bdi>",
                 "<bdi>-ō</bdi>",
                 "<bdi>-e</bdi>",
-                "<bdi>-ī（或 -sī）</bdi>",
+                "<bdi>-ī</bdi>（或 <bdi>-sī</bdi>）",
                 "<bdi>-tum</bdi>"
               ],
               [
@@ -59,14 +59,13 @@
       {
         "id": "la-verb-deponent",
         "title": "异态与半异态动词",
-        "notes": "异态动词（<bdi>deponentia）只有被动形式、主动意义，如 hortor, hortārī, hortātus sum（鼓励）。半异态动词（semideponentia）现在系统主动、完成系统被动，如 audeō, audēre, ausus sum</bdi>（敢）。两者沿用同一套变位表，只是只填被动行（异态）或完成系统填被动形式（半异态）。",
-        "tables": []
+        "notes": "异态动词（<bdi>deponentia</bdi>）只有被动形式、主动意义，如 <bdi>hortor, hortārī, hortātus sum</bdi>（鼓励）。半异态动词（<bdi>semideponentia</bdi>）现在系统主动、完成系统被动，如 <bdi>audeō, audēre, ausus sum</bdi>（敢）。两者沿用同一套变位表，只是只填被动行（异态）或完成系统填被动形式（半异态）。"
       }
     ]
   },
   {
     "id": "la-verb-1st-conj",
-    "title": "第一变位法 (-<bdi>āre)　amō, amāre, amāvī, amātum</bdi>",
+    "title": "第一变位法 (-<bdi>āre)</bdi>　<bdi>amō, amāre, amāvī, amātum</bdi>",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -1036,7 +1035,7 @@
           "key": "presptcp",
           "label": "现在时主动分词词干",
           "example": "amant",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ant-（am → amant-；主格 amant-s 补偿延长为 amāns</bdi>）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>ant-</bdi>（<bdi>am → amant-</bdi>；主格 <bdi>amant-s</bdi> 补偿延长为 <bdi>amāns</bdi>）"
         },
         {
           "key": "ppp",
@@ -1054,7 +1053,7 @@
           "key": "futpass",
           "label": "将来时被动分词词干",
           "example": "amand",
-          "hint": "规则动词 = 现在时词干 + -<bdi>and-（am → amand</bdi>-）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>and-</bdi>（<bdi>am → amand</bdi>-）"
         }
       ],
       "formRules": [
@@ -1504,7 +1503,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>amātus sum、amātus es、amātus est、amātī sumus、amātī estis、amātī sunt</bdi></li><li>虚拟式：<bdi>amātus sim、amātus sīs、amātus sit、amātī sīmus、amātī sītis、amātī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>amātus / amāta / amātum / amātī / amātae / amāta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>amātus sum</bdi>、<bdi>amātus es</bdi>、<bdi>amātus est</bdi>、<bdi>amātī sumus</bdi>、<bdi>amātī estis</bdi>、<bdi>amātī sunt</bdi></li><li>虚拟式：<bdi>amātus sim</bdi>、<bdi>amātus sīs</bdi>、<bdi>amātus sit</bdi>、<bdi>amātī sīmus</bdi>、<bdi>amātī sītis</bdi>、<bdi>amātī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>amātus / amāta / amātum / amātī / amātae / amāta</bdi>）。</p>"
       },
       {
         "id": "la-verb-1st-plup",
@@ -1577,7 +1576,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>amātus eram、amātus erās、amātus erat、amātī erāmus、amātī erātis、amātī erant</bdi></li><li>虚拟式：<bdi>amātus essem、amātus essēs、amātus esset、amātī essēmus、amātī essētis、amātī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>amātus / amāta / amātum / amātī / amātae / amāta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>amātus eram</bdi>、<bdi>amātus erās</bdi>、<bdi>amātus erat</bdi>、<bdi>amātī erāmus</bdi>、<bdi>amātī erātis</bdi>、<bdi>amātī erant</bdi></li><li>虚拟式：<bdi>amātus essem</bdi>、<bdi>amātus essēs</bdi>、<bdi>amātus esset</bdi>、<bdi>amātī essēmus</bdi>、<bdi>amātī essētis</bdi>、<bdi>amātī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>amātus / amāta / amātum / amātī / amātae / amāta</bdi>）。</p>"
       },
       {
         "id": "la-verb-1st-futp",
@@ -1632,7 +1631,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>amātus erō、amātus eris、amātus erit、amātī erimus、amātī eritis、amātī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>amātus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>amātus / amāta / amātum / amātī / amātae / amāta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>amātus erō</bdi>、<bdi>amātus eris</bdi>、<bdi>amātus erit</bdi>、<bdi>amātī erimus</bdi>、<bdi>amātī eritis</bdi>、<bdi>amātī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>amātus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>amātus / amāta / amātum / amātī / amātae / amāta</bdi>）。</p>"
       },
       {
         "id": "la-verb-1st-sigmatic",
@@ -1705,7 +1704,7 @@
             ]
           }
         ],
-        "notes": "<bdi>sigmatic 形式是古拉丁语的旧形式，只有 Plautus、Terence、Cato 及法律套语等少数早期作家使用，古典散文里已由 -erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō（faxō「我将做」、amāssō）。词干末尾的 -v- / -u- 与后缀的 -s- 缩合成 -ss-（amāv-sō → amāssō、monu-sō → monussō），词干末为 -x 时 -s- 被吞掉（rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim（faxim、ausim、amāssim），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
+        "notes": "<bdi>sigmatic</bdi> 形式是古拉丁语的旧形式，只有 <bdi>Plautus</bdi>、<bdi>Terence</bdi>、<bdi>Cato</bdi> 及法律套语等少数早期作家使用，古典散文里已由 <bdi>-erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō</bdi>（<bdi>faxō</bdi>「我将做」、<bdi>amāssō</bdi>）。词干末尾的 <bdi>-v- / -u-</bdi> 与后缀的 -s- 缩合成 <bdi>-ss-</bdi>（<bdi>amāv-sō → amāssō</bdi>、<bdi>monu-sō → monussō</bdi>），词干末为 -x 时 -s- 被吞掉（<bdi>rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim</bdi>（<bdi>faxim</bdi>、<bdi>ausim</bdi>、<bdi>amāssim</bdi>），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（<bdi>-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
       },
       {
         "id": "la-verb-1st-inf",
@@ -1756,7 +1755,7 @@
             ]
           }
         ],
-        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse），分词随主语的性、数变化（amātum / amātam / amātōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>amātum esse</bdi></li><li>将来时 主动：<bdi>amātūrum esse</bdi></li><li>将来时 被动：<bdi>amātum īrī</bdi></li><li>将来完成时 被动：<bdi>amātum fore（= amātum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential）：amātūrum fuisse</bdi></li></ul>"
+        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse</bdi>），分词随主语的性、数变化（<bdi>amātum / amātam / amātōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>amātum esse</bdi></li><li>将来时 主动：<bdi>amātūrum esse</bdi></li><li>将来时 被动：<bdi>amātum īrī</bdi></li><li>将来完成时 被动：<bdi>amātum fore</bdi>（<bdi>= amātum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential</bdi>）：<bdi>amātūrum fuisse</bdi></li></ul>"
       },
       {
         "id": "la-verb-1st-ptcp",
@@ -2331,7 +2330,7 @@
             ]
           }
         ],
-        "notes": "现在时主动分词按第三变格（<bdi>i 词干）变格，其余三种按第一二变格（-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
+        "notes": "现在时主动分词按第三变格（i 词干）变格，其余三种按第一二变格（<bdi>-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
       },
       {
         "id": "la-verb-1st-gerund",
@@ -2434,11 +2433,11 @@
         ]
       }
     ],
-    "notes": "完成时词干 = 现在时词干 + -<bdi>āv-，目的分词词干 = + -āt-（规则动词都适用；dō → dedī</bdi> 等不规则动词需手工改）。"
+    "notes": "完成时词干 = 现在时词干 + -<bdi>āv-</bdi>，目的分词词干 <bdi>= + -āt-</bdi>（规则动词都适用；<bdi>dō → dedī</bdi> 等不规则动词需手工改）。"
   },
   {
     "id": "la-verb-2nd-conj",
-    "title": "第二变位法 (-<bdi>ēre)　moneō, monēre, monuī, monitum</bdi>",
+    "title": "第二变位法 (-<bdi>ēre)</bdi>　<bdi>moneō, monēre, monuī, monitum</bdi>",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -3408,13 +3407,13 @@
           "key": "presptcp",
           "label": "现在时主动分词词干",
           "example": "monent",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ent-（mon → monent-；主格 monent-s → monēns</bdi>）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>ent-</bdi>（<bdi>mon → monent-</bdi>；主格 <bdi>monent-s → monēns</bdi>）"
         },
         {
           "key": "ppp",
           "label": "完成时被动分词词干",
           "example": "monit",
-          "hint": "规则动词 = 现在时词干 + -<bdi>it-；doceō → doctum</bdi> 这类要手填"
+          "hint": "规则动词 = 现在时词干 + -<bdi>it-</bdi>；<bdi>doceō → doctum</bdi> 这类要手填"
         },
         {
           "key": "futact",
@@ -3426,7 +3425,7 @@
           "key": "futpass",
           "label": "将来时被动分词词干",
           "example": "monend",
-          "hint": "规则动词 = 现在时词干 + -<bdi>end-（mon → monend</bdi>-）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>end-</bdi>（<bdi>mon → monend</bdi>-）"
         }
       ],
       "formRules": [
@@ -3876,7 +3875,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>monitus sum、monitus es、monitus est、monitī sumus、monitī estis、monitī sunt</bdi></li><li>虚拟式：<bdi>monitus sim、monitus sīs、monitus sit、monitī sīmus、monitī sītis、monitī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>monitus / monita / monitum / monitī / monitae / monita</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>monitus sum</bdi>、<bdi>monitus es</bdi>、<bdi>monitus est</bdi>、<bdi>monitī sumus</bdi>、<bdi>monitī estis</bdi>、<bdi>monitī sunt</bdi></li><li>虚拟式：<bdi>monitus sim</bdi>、<bdi>monitus sīs</bdi>、<bdi>monitus sit</bdi>、<bdi>monitī sīmus</bdi>、<bdi>monitī sītis</bdi>、<bdi>monitī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>monitus / monita / monitum / monitī / monitae / monita</bdi>）。</p>"
       },
       {
         "id": "la-verb-2nd-plup",
@@ -3949,7 +3948,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>monitus eram、monitus erās、monitus erat、monitī erāmus、monitī erātis、monitī erant</bdi></li><li>虚拟式：<bdi>monitus essem、monitus essēs、monitus esset、monitī essēmus、monitī essētis、monitī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>monitus / monita / monitum / monitī / monitae / monita</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>monitus eram</bdi>、<bdi>monitus erās</bdi>、<bdi>monitus erat</bdi>、<bdi>monitī erāmus</bdi>、<bdi>monitī erātis</bdi>、<bdi>monitī erant</bdi></li><li>虚拟式：<bdi>monitus essem</bdi>、<bdi>monitus essēs</bdi>、<bdi>monitus esset</bdi>、<bdi>monitī essēmus</bdi>、<bdi>monitī essētis</bdi>、<bdi>monitī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>monitus / monita / monitum / monitī / monitae / monita</bdi>）。</p>"
       },
       {
         "id": "la-verb-2nd-futp",
@@ -4004,7 +4003,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>monitus erō、monitus eris、monitus erit、monitī erimus、monitī eritis、monitī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>monitus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>monitus / monita / monitum / monitī / monitae / monita</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>monitus erō</bdi>、<bdi>monitus eris</bdi>、<bdi>monitus erit</bdi>、<bdi>monitī erimus</bdi>、<bdi>monitī eritis</bdi>、<bdi>monitī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>monitus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>monitus / monita / monitum / monitī / monitae / monita</bdi>）。</p>"
       },
       {
         "id": "la-verb-2nd-sigmatic",
@@ -4077,7 +4076,7 @@
             ]
           }
         ],
-        "notes": "<bdi>sigmatic 形式是古拉丁语的旧形式，只有 Plautus、Terence、Cato 及法律套语等少数早期作家使用，古典散文里已由 -erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō（faxō「我将做」、amāssō）。词干末尾的 -v- / -u- 与后缀的 -s- 缩合成 -ss-（amāv-sō → amāssō、monu-sō → monussō），词干末为 -x 时 -s- 被吞掉（rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim（faxim、ausim、amāssim），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
+        "notes": "<bdi>sigmatic</bdi> 形式是古拉丁语的旧形式，只有 <bdi>Plautus</bdi>、<bdi>Terence</bdi>、<bdi>Cato</bdi> 及法律套语等少数早期作家使用，古典散文里已由 <bdi>-erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō</bdi>（<bdi>faxō</bdi>「我将做」、<bdi>amāssō</bdi>）。词干末尾的 <bdi>-v- / -u-</bdi> 与后缀的 -s- 缩合成 <bdi>-ss-</bdi>（<bdi>amāv-sō → amāssō</bdi>、<bdi>monu-sō → monussō</bdi>），词干末为 -x 时 -s- 被吞掉（<bdi>rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim</bdi>（<bdi>faxim</bdi>、<bdi>ausim</bdi>、<bdi>amāssim</bdi>），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（<bdi>-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
       },
       {
         "id": "la-verb-2nd-inf",
@@ -4128,7 +4127,7 @@
             ]
           }
         ],
-        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse），分词随主语的性、数变化（monitum / monitam / monitōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>monitum esse</bdi></li><li>将来时 主动：<bdi>monitūrum esse</bdi></li><li>将来时 被动：<bdi>monitum īrī</bdi></li><li>将来完成时 被动：<bdi>monitum fore（= monitum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential）：monitūrum fuisse</bdi></li></ul>"
+        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse</bdi>），分词随主语的性、数变化（<bdi>monitum / monitam / monitōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>monitum esse</bdi></li><li>将来时 主动：<bdi>monitūrum esse</bdi></li><li>将来时 被动：<bdi>monitum īrī</bdi></li><li>将来完成时 被动：<bdi>monitum fore</bdi>（<bdi>= monitum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential</bdi>）：<bdi>monitūrum fuisse</bdi></li></ul>"
       },
       {
         "id": "la-verb-2nd-ptcp",
@@ -4703,7 +4702,7 @@
             ]
           }
         ],
-        "notes": "现在时主动分词按第三变格（<bdi>i 词干）变格，其余三种按第一二变格（-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
+        "notes": "现在时主动分词按第三变格（i 词干）变格，其余三种按第一二变格（<bdi>-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
       },
       {
         "id": "la-verb-2nd-gerund",
@@ -4806,11 +4805,11 @@
         ]
       }
     ],
-    "notes": "完成时词干 = 现在时词干 + -<bdi>u-，目的分词词干 = + -it-（habeō → habuī / habitus ✓；doceō → doctum、teneō → tentum</bdi> 等需手工改）。"
+    "notes": "完成时词干 = 现在时词干 + -u-，目的分词词干 <bdi>= + -it-</bdi>（<bdi>habeō → habuī / habitus ✓</bdi>；<bdi>doceō → doctum</bdi>、<bdi>teneō → tentum</bdi> 等需手工改）。"
   },
   {
     "id": "la-verb-3rd-conj",
-    "title": "第三变位法 (-<bdi>ere)　regō, regere, rēxī, rēctum</bdi>",
+    "title": "第三变位法 (-<bdi>ere)</bdi>　<bdi>regō, regere, rēxī, rēctum</bdi>",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -5740,7 +5739,7 @@
           "key": "presptcp",
           "label": "现在时主动分词词干",
           "example": "regent",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ent-（reg → regent-；主格 regent-s → regēns</bdi>）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>ent-</bdi>（<bdi>reg → regent-</bdi>；主格 <bdi>regent-s → regēns</bdi>）"
         },
         {
           "key": "ppp",
@@ -5758,7 +5757,7 @@
           "key": "futpass",
           "label": "将来时被动分词词干",
           "example": "regend",
-          "hint": "规则动词 = 现在时词干 + -<bdi>end-（reg → regend</bdi>-）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>end-</bdi>（<bdi>reg → regend</bdi>-）"
         }
       ],
       "stemForms": {
@@ -6320,7 +6319,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>rēctus sum、rēctus es、rēctus est、rēctī sumus、rēctī estis、rēctī sunt</bdi></li><li>虚拟式：<bdi>rēctus sim、rēctus sīs、rēctus sit、rēctī sīmus、rēctī sītis、rēctī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>rēctus / rēcta / rēctum / rēctī / rēctae / rēcta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>rēctus sum</bdi>、<bdi>rēctus es</bdi>、<bdi>rēctus est</bdi>、<bdi>rēctī sumus</bdi>、<bdi>rēctī estis</bdi>、<bdi>rēctī sunt</bdi></li><li>虚拟式：<bdi>rēctus sim</bdi>、<bdi>rēctus sīs</bdi>、<bdi>rēctus sit</bdi>、<bdi>rēctī sīmus</bdi>、<bdi>rēctī sītis</bdi>、<bdi>rēctī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>rēctus / rēcta / rēctum / rēctī / rēctae / rēcta</bdi>）。</p>"
       },
       {
         "id": "la-verb-3rd-plup",
@@ -6393,7 +6392,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>rēctus eram、rēctus erās、rēctus erat、rēctī erāmus、rēctī erātis、rēctī erant</bdi></li><li>虚拟式：<bdi>rēctus essem、rēctus essēs、rēctus esset、rēctī essēmus、rēctī essētis、rēctī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>rēctus / rēcta / rēctum / rēctī / rēctae / rēcta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>rēctus eram</bdi>、<bdi>rēctus erās</bdi>、<bdi>rēctus erat</bdi>、<bdi>rēctī erāmus</bdi>、<bdi>rēctī erātis</bdi>、<bdi>rēctī erant</bdi></li><li>虚拟式：<bdi>rēctus essem</bdi>、<bdi>rēctus essēs</bdi>、<bdi>rēctus esset</bdi>、<bdi>rēctī essēmus</bdi>、<bdi>rēctī essētis</bdi>、<bdi>rēctī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>rēctus / rēcta / rēctum / rēctī / rēctae / rēcta</bdi>）。</p>"
       },
       {
         "id": "la-verb-3rd-futp",
@@ -6448,7 +6447,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>rēctus erō、rēctus eris、rēctus erit、rēctī erimus、rēctī eritis、rēctī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>rēctus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>rēctus / rēcta / rēctum / rēctī / rēctae / rēcta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>rēctus erō</bdi>、<bdi>rēctus eris</bdi>、<bdi>rēctus erit</bdi>、<bdi>rēctī erimus</bdi>、<bdi>rēctī eritis</bdi>、<bdi>rēctī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>rēctus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>rēctus / rēcta / rēctum / rēctī / rēctae / rēcta</bdi>）。</p>"
       },
       {
         "id": "la-verb-3rd-sigmatic",
@@ -6521,7 +6520,7 @@
             ]
           }
         ],
-        "notes": "<bdi>sigmatic 形式是古拉丁语的旧形式，只有 Plautus、Terence、Cato 及法律套语等少数早期作家使用，古典散文里已由 -erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō（faxō「我将做」、amāssō）。词干末尾的 -v- / -u- 与后缀的 -s- 缩合成 -ss-（amāv-sō → amāssō、monu-sō → monussō），词干末为 -x 时 -s- 被吞掉（rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim（faxim、ausim、amāssim），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
+        "notes": "<bdi>sigmatic</bdi> 形式是古拉丁语的旧形式，只有 <bdi>Plautus</bdi>、<bdi>Terence</bdi>、<bdi>Cato</bdi> 及法律套语等少数早期作家使用，古典散文里已由 <bdi>-erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō</bdi>（<bdi>faxō</bdi>「我将做」、<bdi>amāssō</bdi>）。词干末尾的 <bdi>-v- / -u-</bdi> 与后缀的 -s- 缩合成 <bdi>-ss-</bdi>（<bdi>amāv-sō → amāssō</bdi>、<bdi>monu-sō → monussō</bdi>），词干末为 -x 时 -s- 被吞掉（<bdi>rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim</bdi>（<bdi>faxim</bdi>、<bdi>ausim</bdi>、<bdi>amāssim</bdi>），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（<bdi>-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
       },
       {
         "id": "la-verb-3rd-inf",
@@ -6572,7 +6571,7 @@
             ]
           }
         ],
-        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse），分词随主语的性、数变化（rēctum / rēctam / rēctōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>rēctum esse</bdi></li><li>将来时 主动：<bdi>rēctūrum esse</bdi></li><li>将来时 被动：<bdi>rēctum īrī</bdi></li><li>将来完成时 被动：<bdi>rēctum fore（= rēctum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential）：rēctūrum fuisse</bdi></li></ul>"
+        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse</bdi>），分词随主语的性、数变化（<bdi>rēctum / rēctam / rēctōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>rēctum esse</bdi></li><li>将来时 主动：<bdi>rēctūrum esse</bdi></li><li>将来时 被动：<bdi>rēctum īrī</bdi></li><li>将来完成时 被动：<bdi>rēctum fore</bdi>（<bdi>= rēctum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential</bdi>）：<bdi>rēctūrum fuisse</bdi></li></ul>"
       },
       {
         "id": "la-verb-3rd-ptcp",
@@ -7147,7 +7146,7 @@
             ]
           }
         ],
-        "notes": "现在时主动分词按第三变格（<bdi>i 词干）变格，其余三种按第一二变格（-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
+        "notes": "现在时主动分词按第三变格（i 词干）变格，其余三种按第一二变格（<bdi>-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
       },
       {
         "id": "la-verb-3rd-gerund",
@@ -7250,11 +7249,11 @@
         ]
       }
     ],
-    "notes": "第三变位法的完成时词干与目的分词词干多为<strong>词汇性质</strong>（<bdi>regō → rēxī / rēctum，legō → lēgī / lēctum，capiō → cēpī / captum</bdi>）。本类型给出的是「元音延长 + 塞音融合」的规则型推导，只填现在时词干也能生成，但请逐词核对；不规则时在「完成时词干 / 目的分词词干」里填上实际词干即可覆盖。第三变位法的完成时词干与目的分词词干是<strong>词汇性质</strong>的（<bdi>regō → rēxī / rēctum</bdi>），不能由现在时词干推出，所以本类型的 <code><bdi>stems</bdi></code> 只按 <bdi>regō</bdi> 给出示例值。换用其他第三变位法动词时，请手工填写完成系统与分词 / 目的动名词那几行。"
+    "notes": "第三变位法的完成时词干与目的分词词干多为<strong>词汇性质</strong>（<bdi>regō → rēxī / rēctum</bdi>，<bdi>legō → lēgī / lēctum</bdi>，<bdi>capiō → cēpī / captum</bdi>）。本类型给出的是「元音延长 + 塞音融合」的规则型推导，只填现在时词干也能生成，但请逐词核对；不规则时在「完成时词干 / 目的分词词干」里填上实际词干即可覆盖。第三变位法的完成时词干与目的分词词干是<strong>词汇性质</strong>的（<bdi>regō → rēxī / rēctum</bdi>），不能由现在时词干推出，所以本类型的 <code><bdi>stems</bdi></code> 只按 <bdi>regō</bdi> 给出示例值。换用其他第三变位法动词时，请手工填写完成系统与分词 / 目的动名词那几行。"
   },
   {
     "id": "la-verb-4th-conj",
-    "title": "第四变位法 (-<bdi>īre)　audiō, audīre, audīvī, audītum</bdi>",
+    "title": "第四变位法 (-<bdi>īre)</bdi>　<bdi>audiō, audīre, audīvī, audītum</bdi>",
     "inflect": "conj",
     "derive": {
       "pos": "verb",
@@ -8228,13 +8227,13 @@
           "key": "presptcp",
           "label": "现在时主动分词词干",
           "example": "audient",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ient-（aud → audient-；主格 audient-s → audiēns</bdi>）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>ient-</bdi>（<bdi>aud → audient-</bdi>；主格 <bdi>audient-s → audiēns</bdi>）"
         },
         {
           "key": "ppp",
           "label": "完成时被动分词词干",
           "example": "audīt",
-          "hint": "规则动词 = 现在时词干 + -<bdi>īt-；veniō → ventum</bdi> 这类要手填"
+          "hint": "规则动词 = 现在时词干 + -<bdi>īt-</bdi>；<bdi>veniō → ventum</bdi> 这类要手填"
         },
         {
           "key": "futact",
@@ -8246,7 +8245,7 @@
           "key": "futpass",
           "label": "将来时被动分词词干",
           "example": "audiend",
-          "hint": "规则动词 = 现在时词干 + -<bdi>iend-（aud → audiend</bdi>-）"
+          "hint": "规则动词 = 现在时词干 + -<bdi>iend-</bdi>（<bdi>aud → audiend</bdi>-）"
         }
       ],
       "formRules": [
@@ -8696,7 +8695,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>audītus sum、audītus es、audītus est、audītī sumus、audītī estis、audītī sunt</bdi></li><li>虚拟式：<bdi>audītus sim、audītus sīs、audītus sit、audītī sīmus、audītī sītis、audītī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>audītus / audīta / audītum / audītī / audītae / audīta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的现在时。</p><ul><li>直陈式：<bdi>audītus sum</bdi>、<bdi>audītus es</bdi>、<bdi>audītus est</bdi>、<bdi>audītī sumus</bdi>、<bdi>audītī estis</bdi>、<bdi>audītī sunt</bdi></li><li>虚拟式：<bdi>audītus sim</bdi>、<bdi>audītus sīs</bdi>、<bdi>audītus sit</bdi>、<bdi>audītī sīmus</bdi>、<bdi>audītī sītis</bdi>、<bdi>audītī sint</bdi></li></ul><p>分词随主语的性、数变化（<bdi>audītus / audīta / audītum / audītī / audītae / audīta</bdi>）。</p>"
       },
       {
         "id": "la-verb-4th-plup",
@@ -8769,7 +8768,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>audītus eram、audītus erās、audītus erat、audītī erāmus、audītī erātis、audītī erant</bdi></li><li>虚拟式：<bdi>audītus essem、audītus essēs、audītus esset、audītī essēmus、audītī essētis、audītī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>audītus / audīta / audītum / audītī / audītae / audīta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：过去完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的未完成过去时。</p><ul><li>直陈式：<bdi>audītus eram</bdi>、<bdi>audītus erās</bdi>、<bdi>audītus erat</bdi>、<bdi>audītī erāmus</bdi>、<bdi>audītī erātis</bdi>、<bdi>audītī erant</bdi></li><li>虚拟式：<bdi>audītus essem</bdi>、<bdi>audītus essēs</bdi>、<bdi>audītus esset</bdi>、<bdi>audītī essēmus</bdi>、<bdi>audītī essētis</bdi>、<bdi>audītī essent</bdi></li></ul><p>分词随主语的性、数变化（<bdi>audītus / audīta / audītum / audītī / audītae / audīta</bdi>）。</p>"
       },
       {
         "id": "la-verb-4th-futp",
@@ -8824,7 +8823,7 @@
             ]
           }
         ],
-        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>audītus erō、audītus eris、audītus erit、audītī erimus、audītī eritis、audītī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>audītus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>audītus / audīta / audītum / audītī / audītae / audīta</bdi>）。</p>"
+        "notes": "<p>被动语态用迂说式：将来完成时被动 = 完成时被动分词 + <bdi>sum</bdi> 的将来时。</p><ul><li>直陈式：<bdi>audītus erō</bdi>、<bdi>audītus eris</bdi>、<bdi>audītus erit</bdi>、<bdi>audītī erimus</bdi>、<bdi>audītī eritis</bdi>、<bdi>audītī erunt</bdi></li><li>将来完成时没有虚拟式，需要虚拟意义时用完成时虚拟（<bdi>audītus sim</bdi>）。</li></ul><p>分词随主语的性、数变化（<bdi>audītus / audīta / audītum / audītī / audītae / audīta</bdi>）。</p>"
       },
       {
         "id": "la-verb-4th-sigmatic",
@@ -8897,7 +8896,7 @@
             ]
           }
         ],
-        "notes": "<bdi>sigmatic 形式是古拉丁语的旧形式，只有 Plautus、Terence、Cato 及法律套语等少数早期作家使用，古典散文里已由 -erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō（faxō「我将做」、amāssō）。词干末尾的 -v- / -u- 与后缀的 -s- 缩合成 -ss-（amāv-sō → amāssō、monu-sō → monussō），词干末为 -x 时 -s- 被吞掉（rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim（faxim、ausim、amāssim），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
+        "notes": "<bdi>sigmatic</bdi> 形式是古拉丁语的旧形式，只有 <bdi>Plautus</bdi>、<bdi>Terence</bdi>、<bdi>Cato</bdi> 及法律套语等少数早期作家使用，古典散文里已由 <bdi>-erō / -erim</bdi> 取代。<ul><li><b><bdi>sigmatic</bdi> 将来时 直陈式 主动</b>：完成时词干 + -<bdi>sō</bdi>（<bdi>faxō</bdi>「我将做」、<bdi>amāssō</bdi>）。词干末尾的 <bdi>-v- / -u-</bdi> 与后缀的 -s- 缩合成 <bdi>-ss-</bdi>（<bdi>amāv-sō → amāssō</bdi>、<bdi>monu-sō → monussō</bdi>），词干末为 -x 时 -s- 被吞掉（<bdi>rēx-sō → rēxō</bdi>）。</li><li><b><bdi>sigmatic</bdi> 不定过去时 虚拟式 主动</b>：同一词干 + -<bdi>sim</bdi>（<bdi>faxim</bdi>、<bdi>ausim</bdi>、<bdi>amāssim</bdi>），虚拟式词尾长音只在第二人称单数、第一、二人称复数出现（<bdi>-sīs / -sīmus / -sītis</bdi>）。</li></ul>"
       },
       {
         "id": "la-verb-4th-inf",
@@ -8948,7 +8947,7 @@
             ]
           }
         ],
-        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse），分词随主语的性、数变化（audītum / audītam / audītōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>audītum esse</bdi></li><li>将来时 主动：<bdi>audītūrum esse</bdi></li><li>将来时 被动：<bdi>audītum īrī</bdi></li><li>将来完成时 被动：<bdi>audītum fore（= audītum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential）：audītūrum fuisse</bdi></li></ul>"
+        "notes": "<p>以下不定式都是迂说式（分词 + <bdi>esse / īrī / fore / fuisse</bdi>），分词随主语的性、数变化（<bdi>audītum / audītam / audītōs</bdi> …）：</p><ul><li>完成时 被动：<bdi>audītum esse</bdi></li><li>将来时 主动：<bdi>audītūrum esse</bdi></li><li>将来时 被动：<bdi>audītum īrī</bdi></li><li>将来完成时 被动：<bdi>audītum fore</bdi>（<bdi>= audītum futūrum esse</bdi>）</li><li>完成时潜能式（<bdi>perfect potential</bdi>）：<bdi>audītūrum fuisse</bdi></li></ul>"
       },
       {
         "id": "la-verb-4th-ptcp",
@@ -9523,7 +9522,7 @@
             ]
           }
         ],
-        "notes": "现在时主动分词按第三变格（<bdi>i 词干）变格，其余三种按第一二变格（-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
+        "notes": "现在时主动分词按第三变格（i 词干）变格，其余三种按第一二变格（<bdi>-us / -a / -um</bdi>）变格；分词随主语的性、数、格变化，呼格与主格同形。"
       },
       {
         "id": "la-verb-4th-gerund",
@@ -9626,6 +9625,6 @@
         ]
       }
     ],
-    "notes": "完成时词干 = 现在时词干 + -<bdi>īv-，目的分词词干 = + -īt-（audiō → audīvī / audītus ✓；veniō → vēnī / ventum</bdi> 需手工改）。"
+    "notes": "完成时词干 = 现在时词干 + -<bdi>īv-</bdi>，目的分词词干 <bdi>= + -īt-</bdi>（<bdi>audiō → audīvī / audītus ✓</bdi>；<bdi>veniō → vēnī / ventum</bdi> 需手工改）。"
   }
 ]

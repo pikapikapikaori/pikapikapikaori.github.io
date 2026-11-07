@@ -70,7 +70,7 @@ export async function preload(langs = GRAMMAR_FILES) {
     await Promise.all(langs.map((code) => loadGrammar(code)))
 }
 
-/** 清掉语法数据 / 语言档案 / 文字档案的模块级缓存（改完 JSON 不必刷新页面） */
+/** 清掉语法数据、语言档案、文字档案的模块级缓存（改完 JSON 不必刷新页面） */
 export function clearGrammarCache(code) {
     clearCache(code)
     clearProfileCache(code)

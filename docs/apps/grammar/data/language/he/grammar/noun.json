@@ -128,7 +128,7 @@
             "exampleWord": "שָׂדֶה"
           }
         ],
-        "notes": "词根末 <bdi>ה 在部分形式中保留为词尾 ה，复数多为 ־וֹת</bdi>（阳性也如此）。",
+        "notes": "词根末 <bdi>ה</bdi> 在部分形式中保留为词尾 <bdi>ה</bdi>，复数多为 <bdi>־וֹת</bdi>（阳性也如此）。",
         "deriveRef": "he-noun"
       },
       {
@@ -184,7 +184,7 @@
             "exampleWord": "כִּסֵּא"
           }
         ],
-        "notes": "<bdi>א 不发音，复数常缩为 כִּסְאוֹת。</bdi>",
+        "notes": "<bdi>א</bdi> 不发音，复数常缩为 <bdi>כִּסְאוֹת</bdi>。",
         "deriveRef": "he-noun"
       },
       {
@@ -352,7 +352,7 @@
             "exampleWord": "אֶרֶץ"
           }
         ],
-        "notes": "<bdi>א 不参与 dagesh；复数第一音节用 חֲטַף־פַּתַח。</bdi>",
+        "notes": "<bdi>א</bdi> 不参与 <bdi>dagesh</bdi>；复数第一音节用 <bdi>חֲטַף־פַּתַח</bdi>。",
         "deriveRef": "he-noun"
       },
       {
@@ -408,7 +408,7 @@
             "exampleWord": "יֶלֶד"
           }
         ],
-        "notes": "词首 <bdi>י 在屈折中脱落为 שְׁוָא（יֶלֶד → יְלָדִים</bdi>）。",
+        "notes": "词首 <bdi>י</bdi> 在屈折中脱落为 <bdi>שְׁוָא</bdi>（<bdi>יֶלֶד → יְלָדִים</bdi>）。",
         "deriveRef": "he-noun"
       },
       {
@@ -464,7 +464,7 @@
             "exampleWord": "נֶגַע"
           }
         ],
-        "notes": "词首 <bdi>נ 常被后一辅音同化（מַגָּע 来自 נ-ג-ע</bdi>）。",
+        "notes": "词首 <bdi>נ</bdi> 常被后一辅音同化（<bdi>מַגָּע</bdi> 来自 <bdi>נ-ג-ע</bdi>）。",
         "deriveRef": "he-noun"
       },
       {
@@ -679,7 +679,7 @@
             "exampleWord": "מַיִם"
           }
         ],
-        "notes": "只有双数/复数形（<bdi>מַיִם 水、עֵינַיִם</bdi> 双眼）。词条请用「特殊变格」。"
+        "notes": "只有双数/复数形（<bdi>מַיִם</bdi> 水、<bdi>עֵינַיִם</bdi> 双眼）。词条请用「特殊变格」。"
       },
       {
         "id": "he-class-plural-only",
@@ -725,7 +725,7 @@
             "exampleWord": "פָּנִים"
           }
         ],
-        "notes": "没有单数（<bdi>פָּנִים 脸、רַחֲמִים</bdi> 怜悯）。词条请用「特殊变格」。"
+        "notes": "没有单数（<bdi>פָּנִים</bdi> 脸、<bdi>רַחֲמִים</bdi> 怜悯）。词条请用「特殊变格」。"
       },
       {
         "id": "he-class-irregular",
@@ -849,10 +849,10 @@
             "exampleWord": "דֶּרֶךְ"
           }
         ],
-        "notes": "同一形式可作阳性或阴性（<bdi>דֶּרֶךְ 路、אֶבֶן</bdi> 石）。性别按词条选择，变格照常。"
+        "notes": "同一形式可作阳性或阴性（<bdi>דֶּרֶךְ</bdi> 路、<bdi>אֶבֶן</bdi> 石）。性别按词条选择，变格照常。"
       }
     ],
-    "notes": "骨架表里的占位符：<bdi>־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 בגדכפת 自动补 dagesh lene；词中写成条件点的槽位，代入的辅音若不是 בגדכפת</bdi> 就自动去点。"
+    "notes": "骨架表里的占位符：־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 <bdi>בגדכפת</bdi> 自动补 <bdi>dagesh lene</bdi>；词中写成条件点的槽位，代入的辅音若不是 <bdi>בגדכפת</bdi> 就自动去点。"
   },
   {
     "id": "he-noun",
@@ -860,7 +860,7 @@
     "items": [
       {
         "id": "he-noun-segolate",
-        "title": "<bdi>קֵטֶל / קֶטֶל（segolate）</bdi>",
+        "title": "<bdi>קֵטֶל / קֶטֶל</bdi>（<bdi>segolate</bdi>）",
         "tables": [
           {
             "caption": "变化表",
@@ -972,7 +972,7 @@
             "exampleWord": "קֹדֶשׁ"
           }
         ],
-        "notes": "复数把 <bdi>קֹטֶל 改为 קָדָשִׁים</bdi>（分拆型）。"
+        "notes": "复数把 <bdi>קֹטֶל</bdi> 改为 <bdi>קָדָשִׁים</bdi>（分拆型）。"
       },
       {
         "id": "he-noun-qetal",
@@ -1088,7 +1088,7 @@
             "exampleWord": "דַּיָּג"
           }
         ],
-        "notes": "常见的职业名词模式（<bdi>דַּיָּג 渔夫、גַּנָּב</bdi> 贼）。"
+        "notes": "常见的职业名词模式（<bdi>דַּיָּג</bdi> 渔夫、<bdi>גַּנָּב</bdi> 贼）。"
       },
       {
         "id": "he-noun-miqtal",
@@ -1146,7 +1146,7 @@
             "exampleWord": "מִקְדָּשׁ"
           }
         ],
-        "notes": "前缀 <bdi>מִ 加 קְטָל</bdi> 骨架；附属形末尾的 qamats 缩为 patah。"
+        "notes": "前缀 <bdi>מִ</bdi> 加 <bdi>קְטָל</bdi> 骨架；附属形末尾的 qamats 缩为 patah。"
       },
       {
         "id": "he-noun-qittul",
@@ -1262,7 +1262,7 @@
             "exampleWord": "שָׁלוֹם"
           }
         ],
-        "notes": "附属形第一音节缩为 <bdi>שְׁוָא（שָׁלוֹם → שְׁלוֹם</bdi>）。"
+        "notes": "附属形第一音节缩为 <bdi>שְׁוָא</bdi>（<bdi>שָׁלוֹם → שְׁלוֹם</bdi>）。"
       },
       {
         "id": "he-noun-qetala",
@@ -1320,7 +1320,7 @@
             "exampleWord": "בְּרָכָה"
           }
         ],
-        "notes": "最常见的阴性模式；附属形为 <bdi>בִּרְכַּת（元音前移 + 词尾 ַת</bdi>）。"
+        "notes": "最常见的阴性模式；附属形为 <bdi>בִּרְכַּת</bdi>（元音前移 + 词尾 <bdi>ַת</bdi>）。"
       },
       {
         "id": "he-noun-qatla",
@@ -1494,7 +1494,7 @@
             "exampleWord": "קַדַּחַת"
           }
         ],
-        "notes": "阴性词尾 <bdi>־ֶת；复数 ־וֹת</bdi> 并使中间辅音带 dagesh。"
+        "notes": "阴性词尾 <bdi>־ֶת</bdi>；复数 <bdi>־וֹת</bdi> 并使中间辅音带 dagesh。"
       },
       {
         "id": "he-noun-qetila",
@@ -1900,7 +1900,7 @@
             "exampleWord": "מַחְשֵׁב"
           }
         ],
-        "notes": "工具名词；阴性形为 <bdi>מַקְטֶלֶת（מַחְשֶׁבֶת</bdi>）。"
+        "notes": "工具名词；阴性形为 <bdi>מַקְטֶלֶת</bdi>（<bdi>מַחְשֶׁבֶת</bdi>）。"
       }
     ],
     "derive": {
@@ -1949,7 +1949,7 @@
         },
         {
           "id": "he-noun-segolate",
-          "label": "<bdi>קֵטֶל / קֶטֶל（segolate）</bdi>",
+          "label": "<bdi>קֵטֶל / קֶטֶל</bdi>（<bdi>segolate</bdi>）",
           "root": "ספר",
           "match": "־ֵ׳ֶ״",
           "headword": "סֵפֶר",
@@ -2477,6 +2477,6 @@
         }
       ]
     },
-    "notes": "骨架表里的占位符：<bdi>־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 בגדכפת 自动补 dagesh lene；词中写成条件点的槽位，代入的辅音若不是 בגדכפת</bdi> 就自动去点。"
+    "notes": "骨架表里的占位符：־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 <bdi>בגדכפת</bdi> 自动补 <bdi>dagesh lene</bdi>；词中写成条件点的槽位，代入的辅音若不是 <bdi>בגדכפת</bdi> 就自动去点。"
   }
 ]

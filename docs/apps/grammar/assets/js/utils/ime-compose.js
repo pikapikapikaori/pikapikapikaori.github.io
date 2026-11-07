@@ -48,7 +48,7 @@ export function applyMark(value, caret, groupChars, markChar, markOrder = '') {
 }
 
 /**
- * 在光标处插入文本。插入的是组合符时（希腊语的气符 / 重音、梵语的附标），
+ * 在光标处插入文本。插入的是组合符时（希腊语的气符、重音、梵语的附标），
  * 要和前一个字母合成一个码位（α + 粗气 → ἁ），所以插入后整段做一次 NFC。
  */
 export function insertAt(value, caret, text) {
@@ -75,7 +75,7 @@ export function previewChar(base, markChar, fallback = '') {
 
 /**
  * 原文输入框里的明显误输入：数字与中文标点。只在「不含中日韩文字」的输入框里清理，
- * 这样「含义 / 备注 / 标签」这类要写中文的框不会被误伤。
+ * 这样「含义、备注、标签」这类要写中文的框不会被误伤。
  */
 const ILLEGAL_IN_ORIGINAL = /[0-9０-９，。、；：""''‘’“”【】〔〕（）《》〈〉？！…—－]/g
 const CJK = /[\u3400-\u9FFF]/

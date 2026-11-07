@@ -91,7 +91,7 @@
             ]
           }
         ],
-        "notes": "一般规则：阴性 + -<bdi>e，复数 + -s，阴性复数 + -es。以 -e</bdi> 结尾的形容词阴阳同形。"
+        "notes": "一般规则：阴性 + -e，复数 + -s，阴性复数 <bdi>+ -es</bdi>。以 -e 结尾的形容词阴阳同形。"
       },
       {
         "id": "fr-adj-regular",
@@ -187,7 +187,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "阳性单数后加 -<bdi>e 得阴性、加 -s 得复数、加 -es</bdi> 得阴性复数。"
+        "notes": "阳性单数后加 -e 得阴性、加 -s 得复数、加 <bdi>-es</bdi> 得阴性复数。"
       },
       {
         "id": "fr-adj-invariable",
@@ -278,7 +278,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "以 -<bdi>e 结尾的形容词阴性不变，只在复数加 -s</bdi>；四个性数格里阴、阳两列应填同一形式。"
+        "notes": "以 -e 结尾的形容词阴性不变，只在复数加 -s；四个性数格里阴、阳两列应填同一形式。"
       },
       {
         "id": "fr-adj-f-ve",
@@ -374,7 +374,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "同类：<bdi>actif / active、sportif / sportive、vif / vive</bdi>。"
+        "notes": "同类：<bdi>actif / active</bdi>、<bdi>sportif / sportive</bdi>、<bdi>vif / vive</bdi>。"
       },
       {
         "id": "fr-adj-eux-euse",
@@ -472,7 +472,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "阳性复数不变（<bdi>heureux）；同类：curieux / curieuse、délicieux / délicieuse</bdi>。"
+        "notes": "阳性复数不变（<bdi>heureux</bdi>）；同类：<bdi>curieux / curieuse</bdi>、<bdi>délicieux / délicieuse</bdi>。"
       },
       {
         "id": "fr-adj-er-ere",
@@ -568,7 +568,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "同类：<bdi>premier / première、dernier / dernière；注意重音符号由 é 变 è</bdi>。"
+        "notes": "同类：<bdi>premier / première</bdi>、<bdi>dernier / dernière</bdi>；注意重音符号由 <bdi>é</bdi> 变 <bdi>è</bdi>。"
       },
       {
         "id": "fr-adj-doubling",
@@ -664,7 +664,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "同类：<bdi>naturel / naturelle、ancien / ancienne、muet / muette；但 complet → complète</bdi> 不双写。"
+        "notes": "同类：<bdi>naturel / naturelle</bdi>、<bdi>ancien / ancienne</bdi>、<bdi>muet / muette</bdi>；但 <bdi>complet → complète</bdi> 不双写。"
       },
       {
         "id": "fr-adj-position",
@@ -682,7 +682,7 @@
               [
                 "颜色、国籍、分词类",
                 "名词后",
-                "<bdi>une voiture rouge、un livre français</bdi>"
+                "<bdi>une voiture rouge</bdi>、<bdi>un livre français</bdi>"
               ],
               [
                 "常用短形容词（<bdi>beau, grand, petit, jeune, bon</bdi>…）",
@@ -692,18 +692,18 @@
               [
                 "数量 / 序数",
                 "名词前",
-                "<bdi>deux livres、le premier jour</bdi>"
+                "<bdi>deux livres</bdi>、<bdi>le premier jour</bdi>"
               ],
               [
                 "意义随位置变化",
                 "前后皆可，意义不同",
-                "<bdi>un grand homme（伟人）/ un homme grand</bdi>（高个子）"
+                "<bdi>un grand homme</bdi>（伟人）<bdi>/ un homme grand</bdi>（高个子）"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>BANGS 助记：Beauty、Age、Number、Goodness、Size</bdi> 类形容词前置。"
+        "notes": "<bdi>BANGS</bdi> 助记：<bdi>Beauty</bdi>、<bdi>Age</bdi>、<bdi>Number</bdi>、<bdi>Goodness</bdi>、<bdi>Size</bdi> 类形容词前置。"
       },
       {
         "id": "fr-adj-comparison",
@@ -720,17 +720,17 @@
             "rows": [
               [
                 "较高",
-                "<bdi>plus + 形容词 + que</bdi>",
+                "<bdi>plus +</bdi> 形容词 <bdi>+ que</bdi>",
                 "<bdi>plus grand que</bdi>"
               ],
               [
                 "较低",
-                "<bdi>moins + 形容词 + que</bdi>",
+                "<bdi>moins +</bdi> 形容词 <bdi>+ que</bdi>",
                 "<bdi>moins grand que</bdi>"
               ],
               [
                 "相等",
-                "<bdi>aussi + 形容词 + que</bdi>",
+                "<bdi>aussi +</bdi> 形容词 <bdi>+ que</bdi>",
                 "<bdi>aussi grand que</bdi>"
               ]
             ]
@@ -788,7 +788,7 @@
             ]
           }
         ],
-        "notes": "比较级用 <bdi>plus / moins / aussi + 形容词 + que；最高级用 le / la / les plus / moins</bdi>。"
+        "notes": "比较级用 <bdi>plus / moins / aussi +</bdi> 形容词 <bdi>+ que</bdi>；最高级用 <bdi>le / la / les plus / moins</bdi>。"
       },
       {
         "id": "fr-adj-adverb",
@@ -806,27 +806,27 @@
               [
                 "一般（阳性单数）",
                 "阳性单数 + -<bdi>ment</bdi>",
-                "<bdi>lent → lentement、heureux → heureusement</bdi>"
+                "<bdi>lent → lentement</bdi>、<bdi>heureux → heureusement</bdi>"
               ],
               [
                 "以元音结尾",
                 "阳性单数 + -<bdi>ment</bdi>",
-                "<bdi>vrai → vraiment、poli → poliment</bdi>"
+                "<bdi>vrai → vraiment</bdi>、<bdi>poli → poliment</bdi>"
               ],
               [
                 "阳性以 -<bdi>ant</bdi> 结尾",
                 "<bdi>-ant → -amment</bdi>",
-                "<bdi>courant → couramment、savant → savamment</bdi>"
+                "<bdi>courant → couramment</bdi>、<bdi>savant → savamment</bdi>"
               ],
               [
                 "阳性以 -<bdi>ent</bdi> 结尾",
                 "<bdi>-ent → -emment</bdi>",
-                "<bdi>récent → récemment、prudent → prudemment</bdi>"
+                "<bdi>récent → récemment</bdi>、<bdi>prudent → prudemment</bdi>"
               ],
               [
                 "以 -<bdi>e</bdi> 结尾",
-                "直接用 -<bdi>e 形式 + -ment</bdi>",
-                "<bdi>facile → facilement、rapide → rapidement</bdi>"
+                "直接用 -e 形式 <bdi>+ -ment</bdi>",
+                "<bdi>facile → facilement</bdi>、<bdi>rapide → rapidement</bdi>"
               ]
             ],
             "lang": "fr"
@@ -901,7 +901,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "副词性 -<bdi>ment 的读音：-amment / -emment 都读 [am</bdi>ɑ̃]。"
+        "notes": "副词性 -<bdi>ment</bdi> 的读音：<bdi>-amment / -emment</bdi> 都读 <bdi>[am</bdi>ɑ̃]。"
       },
       {
         "id": "fr-adj-irregular",
@@ -981,7 +981,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "这些形容词没有统一规则：生词表里请选「特殊变形」并自行填写四个形式。<bdi>beau / nouveau / vieux 在元音或哑音 h 前有特殊形式（bel、nouvel、vieil</bdi>）。"
+        "notes": "这些形容词没有统一规则：生词表里请选「特殊变形」并自行填写四个形式。<bdi>beau / nouveau / vieux</bdi> 在元音或哑音 h 前有特殊形式（<bdi>bel</bdi>、<bdi>nouvel</bdi>、<bdi>vieil</bdi>）。"
       }
     ]
   }

@@ -6,8 +6,8 @@ import {
     normalizeParadigm, normalizeStem, normalizeStems, sourceLabel
 } from '../models/word.js'
 import {
-    loadGrammar, loadGrammarMeta, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec, getGenderOptions,
-    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, genderOfColumn, genderOfRow, termsOf, fillTerms,
+    loadGrammar, loadGrammarMeta, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec,
+    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, hiddenGenderCells, termsOf, fillTerms,
     getDeriveParts, stemLabelOf
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
@@ -17,7 +17,7 @@ import { createSelect } from '../components/select-field.js'
 import { meaningsOfSource, meaningRefLabel } from '../components/entry-lists.js'
 import { fieldRow } from '../components/form-field.js'
 import { bdiFragment, bdiNode, stripBdi } from '../utils/bdi.js'
-import { createTabGroup } from '../components/tabs.js'
+import { createTabBar, createTabGroup } from '../components/tabs.js'
 import { generateParadigm, previewStem } from '../models/paradigm-generate.js'
 import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
@@ -59,10 +59,10 @@ export default {
         ])
 
         const grammarDoc = await loadGrammar(lang)
-        // 没有语法数据的语言（英 / 古汉语）也要能读到 meta.terms 里的文案
+        // 没有语法数据的语言（英、古汉语）也要能读到 meta.terms 里的文案
         const grammarMeta = await loadGrammarMeta(lang)
 
-        // 外部数据源：按 config 清单逐个动态 import，缺文件 / 离线时跳过
+        // 外部数据源：按 config 清单逐个动态 import，缺文件、离线时跳过
         const externalSources = (await Promise.all(EXTERNAL_SOURCES.map(async (src) => {
             try {
                 const mod = await import(new URL(`${src.file}.js`, EXTERNAL_BASE))
@@ -93,10 +93,10 @@ export default {
             return h('span', { dataset: { term: key, termSuffix: suffix } }, termText(key, suffix))
         }
 
-        /** 说明文字可能夹原文（如希伯来语词尾 ־ָה / ־ֶת），按字符范围包 bdi */
+        /** 说明文字可能夹原文（如希伯来语词尾 ־ָה 与 ־ֶת），按字符范围包 bdi */
         function hintText(text) { return bdiFragment(text, lang) }
 
-        /** 满文 / 天城文：输入允许写转写，失焦时归一成原文；存储与生词卡都用原文 */
+        /** 满文、天城文：输入允许写转写，失焦时转成原文；存储与生词卡都用原文 */
         function attachScriptNormalize(input) {
             if (typeof scriptProfile?.toScript !== 'function') return
             input.addEventListener('focusout', () => {
@@ -127,9 +127,9 @@ export default {
             renderDerivatives()
             renderExtras()
         }
-        const paradigmProfile = await loadParadigmProfile(lang, grammarDoc)
-        // 文字档案（满文 / 天城文）：生成时把结果转成原文、把用户输入的原文转回转写。
-        // 注意第二个参数是 meta（要读 meta.files.script），不是 grammar 文档。
+        // 两份档案都要读 meta.files，第二个参数一律传 meta，不传 grammarDoc
+        const paradigmProfile = await loadParadigmProfile(lang, grammarMeta)
+        // 文字档案（满文、天城文）：生成时把结果转成原文、把用户输入的原文转回转写。
         const scriptProfile = await loadScriptProfile(lang, grammarMeta)
         const hasScript = typeof scriptProfile?.toScript === 'function'
 
@@ -238,15 +238,12 @@ export default {
 
         /** 某个区块的来源 tab 条 */
         function sourceTabBar({ items, active, onPick }) {
-            return h('div', { class: 'source-tabs word-form__meaning-tabs' },
-                ...sourceIds(items).map((id) => h('button', {
-                    class: 'source-tab' + (id === active ? ' source-tab--active' : ''),
-                    type: 'button',
-                    role: 'tab',
-                    'aria-selected': String(id === active),
-                    onclick: () => { if (id !== active) onPick(id) }
-                }, sourceLabel(id)))
-            )
+            return createTabBar({
+                items: sourceIds(items).map((id) => ({ key: id, label: sourceLabel(id) })),
+                active,
+                lang,
+                onChange: onPick
+            }).el
         }
 
         /** 切换后默认落在第一个有内容的来源上 */
@@ -303,9 +300,9 @@ export default {
 
         /* ---------- 外部数据源：按一次查全部，多个词性弹窗选 ---------- */
 
-        /** 当前选中的变格 / 变位表（多表时用 tab 切换） */
+        /** 当前选中的变格、变位表（多表时用 tab 切换） */
         let paradigmTab = null
-        /** 上一次由查询自动填的「变格 / 变位类型」文案，用于切换候选时判断能否覆盖 */
+        /** 上一次由查询自动填的「变格、变位类型」文案，用于切换候选时判断能否覆盖 */
         let autoInflectionLabel = ''
         /** 正在套用查询结果时，词性变更不应触发「清空下面所有内容」 */
         let applyingLookup = false
@@ -337,7 +334,7 @@ export default {
 
         let currentOptionsById = {}
 
-        // 语法锚点：只列「变格 / 变位类型」，外加 特殊 / 不变
+        // 语法锚点：只列「变格、变位类型」，外加 特殊、不变
         // 类别名里带着原文（如希伯来语「III-ה 词根」），所以用自绘下拉，收起态也能包 bdi
         const inflectionRef = createSelect({
             lang,
@@ -364,7 +361,7 @@ export default {
             currentOptionsById = Object.fromEntries(opts.map((o) => [o.id, o]))
 
             // 该语言不启用变格变位表（paradigm: false），或该词性没有任何锚点：
-            // 这一行整块隐藏，连「特殊 / 不变」两个内置项也不提供
+            // 这一行整块隐藏，连「特殊、不变」两个内置项也不提供
             // （永远不变格变位的词性谈不上「特殊变格」，也没有「不变格」的对应关系）
             if (grammarDoc?.paradigm === false || !opts.length) {
                 inflectionRef.setOptions([])
@@ -465,7 +462,7 @@ export default {
         const principalInput = principalField.input
         attachScriptNormalize(principalInput)
 
-        // 额外的词干（由当前变位 / 变格类型的 derive.parts 决定）
+        // 额外的词干（由当前变位、变格类型的 derive.parts 决定）
         const extraPartsSlot = h('div', { class: 'field__parts' })
         // 额外词干的 ghost input 实例（刷新推导提示时用）
         let extraGhosts = []
@@ -482,17 +479,20 @@ export default {
             }
         }
 
+        /** 按钮的禁用原因只写在 title 里看不见，这里再写成一行可见的灰字 */
+        const generateHint = h('span', { class: 'field__hint word-form__generate-hint' })
         const generateBtn = h('button', {
             class: 'btn btn--sm',
             type: 'button',
             onclick: onGenerate
         }, '生成表格')
+        const generateBar = h('div', { class: 'word-form__generate' }, generateHint, generateBtn)
 
-        /* ---------- 词性自己声明的属性字段（语法性 / 自他…） ---------- */
+        /* ---------- 词性自己声明的属性字段（语法性、自他…） ---------- */
 
         const genderSlot = h('div', {})
 
-        /** 词性自己声明的属性（语法性 / 自他 / 助动词…）：多选字段用圆点组，单选字段用下拉 */
+        /** 词性自己声明的属性（语法性、自他、助动词…）：多选字段用圆点组，单选字段用下拉 */
         function renderGenderField() {
             genderSlot.replaceChildren()
             const defs = getFieldDefs(grammarDoc, posSelect.value)
@@ -501,7 +501,7 @@ export default {
             if (!defs.length) return
 
             for (const def of defs) {
-                // 必填属性（语法性 / 助动词 / 自他）至少选一个，没值时默认第一项
+                // 必填属性（语法性、助动词、自他）至少选一个，没值时默认第一项
                 const required = def.required === true || def.key === 'gender' || def.declensionCells
                 const raw = data.attributes[def.key]
                 const picked = Array.isArray(raw) ? raw.filter(Boolean) : (raw ? [raw] : [])
@@ -585,12 +585,12 @@ export default {
 
         const stemsLabelEl = h('span', { class: 'field__label' }, currentTerms().stems.label)
         const stemsHintEl = h('span', { class: 'field__hint' }, hintText(currentTerms().stems.hint))
-        const stemsRow = fieldRow(stemsLabelEl, h('div', { class: 'field__row' }, principalField.el, generateBtn), {
+        const stemsRow = fieldRow(stemsLabelEl, principalField.el, {
             extras: [stemsHintEl],
             target: principalInput
         })
 
-        // 词干 + 额外词干：放在变格 / 变位表头顶
+        // 词干 + 额外词干：放在变格、变位表头顶
         const stemsBlock = h('div', { class: 'word-form__stems' }, stemsRow, extraPartsSlot)
 
         // 字段顺序：基本形态+词性 → 属性/类型/锚点 → 含义 → 变格变位表（含词干）
@@ -695,7 +695,7 @@ export default {
 
         /* ---------- 按词干生成表格 ---------- */
 
-        /** 当前「变格 / 变位类型」对应的生成规则 */
+        /** 当前「变格、变位类型」对应的生成规则 */
         function currentDeriveSpec() {
             const ref = inflectionRef.value
             if (!ref || ref === INDECL_REF) return null
@@ -706,14 +706,14 @@ export default {
             return getDeriveSpec(grammarDoc, ref) || getDeriveSpec(grammarDoc, `${lang}-${posSelect.value}`)
         }
 
-        /** 当前锚点声明的 base 词干（可自带标题 / placeholder / 提示） */
+        /** 当前锚点声明的 base 词干（可自带标题、placeholder、提示） */
         function currentBasePart() {
             const spec = currentDeriveSpec()
             if (!spec || !Array.isArray(spec.parts)) return null
             return spec.parts.find((part) => part && part.key === 'base') || null
         }
 
-        /** 主词干的文案：锚点给 base 声明了 label / placeholder / hint 时优先用它 */
+        /** 主词干的文案：锚点给 base 声明了 label、placeholder、hint 时优先用它 */
         function refreshStemsText() {
             const t = currentTerms()
             const base = currentBasePart()
@@ -760,8 +760,8 @@ export default {
                         renderExtraParts()
                     }
                 }
-                // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben / sein / beide）。
-                // 这类字段没有空选项：没值时默认第一项并写进数据（助动词默认 haben / avoir）。
+                // kind: 'select' —— 非词干类的元数据（如德语的助动词 haben、sein、beide）。
+                // 这类字段没有空选项：没值时默认第一项并写进数据（助动词默认 haben、avoir）。
                 const selectOptions = (part.options || [])
                     .map((opt) => ({ value: String(opt), label: String(opt) }))
                 if (part.kind === 'select' && selectOptions.length && !data.stems[part.key]) {
@@ -822,7 +822,7 @@ export default {
             return out
         }
 
-        /** 生成 / 推导都在 IAST 上做；用户输入的是天城文，先转写再交给引擎 */
+        /** 生成、推导都在 IAST 上做；用户输入的是天城文，先转写再交给引擎 */
         function romanStems(stems) {
             if (typeof scriptProfile?.toRoman !== 'function') return stems
             const metaKeys = new Set(currentParts().filter((p) => p.kind === 'select').map((p) => p.key))
@@ -904,10 +904,11 @@ export default {
             const hasStem = !!normalizeStem(principalInput.value) || !!derivedBase()
             const missing = missingRequiredParts(spec)
             generateBtn.disabled = !canGenerate || !hasStem || missing.length > 0
-            if (!canGenerate) generateBtn.title = '该变格 / 变位类型还没有自动生成规则'
+            if (!canGenerate) generateBtn.title = '该变格、变位类型还没有自动生成规则'
             else if (!hasStem) generateBtn.title = '请先填写：词干'
             else if (missing.length) generateBtn.title = `请先填写：${missing.join('、')}`
             else generateBtn.title = '按词干和词尾规则自动填表（会覆盖已填内容）'
+            generateHint.textContent = generateBtn.disabled ? generateBtn.title : ''
             return missing
         }
 
@@ -965,7 +966,7 @@ export default {
                 return
             }
 
-            // 本次生成覆盖有规则的表；完全没有规则的表（如未选类型的不定过去时 / 完成时）
+            // 本次生成覆盖有规则的表；完全没有规则的表（如未选类型的不定过去时、完成时）
             // 保留手填内容，避免点一次「生成表格」就把它们清空
             const used = new Set(usedTables || [])
             const next = { ...paradigm }
@@ -994,32 +995,10 @@ export default {
 
         /* ---------- 表格块渲染 ---------- */
 
-        /** 只渲染所选「语法性」对应的格子：对不上的列 / 行都不渲染（性可能写在列上，也可能写在行上） */
-        function hiddenGenderCells(tpl) {
-            const empty = { columns: [], rows: [] }
-            const field = fieldDefsOfTemplate(tpl, data.pos).find((f) => f.declensionCells)
-            if (!field) return empty
-            const raw = data.attributes[field.key]
-            const picked = Array.isArray(raw) ? raw : (raw ? [raw] : [])
-            if (!picked.length) return empty
-            const hidden = { columns: [], rows: [] }
-            for (const table of tpl?.tables || []) {
-                for (const col of table.columns || []) {
-                    const g = genderOfColumn(col.key)
-                    if (g && !picked.includes(g)) hidden.columns.push(col.key)
-                }
-                for (const row of table.rows || []) {
-                    const g = genderOfRow(row.key)
-                    if (g && !picked.includes(g)) hidden.rows.push(row.key)
-                }
-            }
-            return hidden
-        }
-
         function renderParadigmBlock() {
             paradigmSlot.replaceChildren()
             if (grammarDoc?.paradigm === false) return
-            // 选了「不变格 / 不变形 / 不变位」：没有变化表可填，整块（词干、标题、表格、横线）都不渲染
+            // 选了「不变格、不变形、不变位」：没有变化表可填，整块（词干、标题、表格、横线）都不渲染
             if (inflectionRef.value === INDECL_REF) {
                 paradigmSlot.hidden = true
                 return
@@ -1028,16 +1007,17 @@ export default {
             const tpl = getParadigmTemplate(grammarDoc, data.pos)
             if (!tpl) return
 
-            // 锚点的 derive.skipTables：该类型没有的语式（如情态动词没有命令式）不渲染表格
+            // derive.skipTables 列出的表不渲染（字段含义见数据格式文档）
             const spec = currentDeriveSpec()
             const skip = Array.isArray(spec?.skipTables) ? spec.skipTables : []
 
             const titleRow = h('div', { class: 'word-form__group-title' },
-                h('span', {}, fillTerms(currentTerms().paradigmTitle, posLabel(data.pos)))
+                h('span', {}, fillTerms(currentTerms().paradigmTitle, posLabel(data.pos))),
+                generateBar
             )
 
-            // 表可以声明 anchors：只在该锚点被选中时显示（代词的有性 / 无性表）
-            // 模板里有表声明了 anchors 时，没选锚点（特殊 / 不变）只显示 default 的那张
+            // 表可以声明 anchors：只在该锚点被选中时显示（代词的有性、无性表）
+            // 模板里有表声明了 anchors 时，没选锚点（特殊、不变）只显示 default 的那张
             const ref = inflectionRef.value
             const anchored = (tpl.tables || []).some((t) => Array.isArray(t?.anchors))
             const noAnchor = !ref || ref === SPECIAL_REF || ref === INDECL_REF
@@ -1065,7 +1045,7 @@ export default {
                 tables.length ? titleRow : null)
 
             const panels = []
-            const hiddenGender = hiddenGenderCells(tpl)
+            const hiddenGender = hiddenGenderCells(tpl, data.pos, data)
             for (const tableTpl of tables) {
                 const tableData = data.paradigm[tableTpl.key] || {}
                 const tbl = createParadigmTable(tableTpl, tableData, {
@@ -1109,7 +1089,7 @@ export default {
 
         /* ---------- 外部数据源查询（config.EXTERNAL_SOURCES） ---------- */
 
-        /** 把查到的词条回填到表单：词性 / 属性 / 类型 / 锚点 / 词干 / 含义 */
+        /** 把查到的词条回填到表单：词性、属性、类型、锚点、词干、含义 */
         function applyEntry(entry, entries) {
             applyingLookup = true
             try {
@@ -1121,7 +1101,7 @@ export default {
 
         function fillEntry(entry, entries) {
             if (entry.pos && entry.pos !== posSelect.value) {
-                // 借 change 事件走一遍词性切换的连带刷新（属性 / 锚点 / 表格）
+                // 借 change 事件走一遍词性切换的连带刷新（属性、锚点、表格）
                 posSelect.value = entry.pos
                 posSelect.dispatchEvent(new Event('change'))
             }
@@ -1210,7 +1190,7 @@ export default {
             renderExtraParts()
         }
 
-        /** 多个候选（多词性 / 多来源）时，弹窗让用户选一个 */
+        /** 多个候选（多词性、多来源）时，弹窗让用户选一个 */
         function chooseEntry(entries, initial) {
             return new Promise((resolve) => {
                 let picked = initial
@@ -1328,7 +1308,7 @@ export default {
 
         /** 「含义」按来源分 tab：手动 + 各外部源；切换只影响这一块 */
         function buildMeaningGroup() {
-            const tabs = h('div', { class: 'source-tabs word-form__meaning-tabs' })
+            const tabs = h('div', { class: 'word-form__tabs' })
             const list = h('div', { class: 'word-form__list' })
             const empty = h('div', { class: 'field__hint' }, termNode('emptyMeanings'))
 
@@ -1359,21 +1339,17 @@ export default {
             }
 
             function renderTabs() {
-                tabs.replaceChildren(...meaningSources().map((id) => h('button', {
-                    class: 'source-tab' + (id === meaningSource ? ' source-tab--active' : ''),
-                    type: 'button',
-                    role: 'tab',
-                    'aria-selected': String(id === meaningSource),
-                    onclick: () => {
-                        if (id === meaningSource) return
+                tabs.replaceChildren(createTabBar({
+                    items: meaningSources().map((id) => ({ key: id, label: sourceLabel(id) })),
+                    active: meaningSource,
+                    lang,
+                    onChange: (id) => {
                         meaningSource = id
                         renderMeanings()
                         // 例句里的含义引用按当前来源决定是否加前缀，跟着一起刷新
                         renderExamples()
                     }
-                },
-                sourceLabel(id)
-                )))
+                }).el)
             }
 
             setMeaningSource = (id) => {
@@ -1585,7 +1561,7 @@ export default {
             return options
         }
 
-        /** 某条例句的可选含义；关联的那条后来被删 / 改名时，仍按原文本留一个条目，别悄悄改成「不关联」 */
+        /** 某条例句的可选含义；关联的那条后来被删、改名时，仍按原文本留一个条目，别悄悄改成「不关联」 */
         function meaningOptionsOf(example) {
             const options = meaningOptions()
             const value = exampleMeaningValue(example.meaning)
@@ -1864,7 +1840,7 @@ export default {
                 // 词条基本形态、词干一律存原文：用户可能直接敲了转写，没走失焦转换
                 lemma: toScriptText(lemmaInput.value.trim()),
                 pos: posSelect.value,
-                // attributes 里放词性声明的字段（语法性 / 自他 / 助动词…）
+                // attributes 里放词性声明的字段（语法性、自他、助动词…）
                 attributes: { ...data.attributes },
                 inflectionType: {
                     label: inflectionLabel.value.trim(),

@@ -1,14 +1,14 @@
 /**
  * 原文的 <bdi> 包裹：
- * - 数据（语法 JSON / 数据格式文档）里的 `<bdi>` 是真相，渲染期只补 `lang` / `dir`；
+ * - 数据（语法 JSON、数据格式文档）里的 `<bdi>` 是真相，渲染期只补 `lang` 与 `dir`；
  * - 值字段（词形、词干、单元格…）整段一个 `<bdi>`；
- * - 标题 / 说明有可能一格多语，按码位切段，中文与转写保持纯文本。
+ * - 标题、说明有可能一格多语，按码位切段，中文与转写保持纯文本。
  */
 
 import { h, frag, htmlFragment } from './dom.js'
 import { getLanguage } from '../data/languages.js'
 
-/** 每种文字自己的码位区间，与 fonts.css 的 unicode-range 对齐。
+/** 每种文字自己的码位区间，与 fonts.css 的 unicode-range 一致。
  * 注意 5 位码位必须写 `\u{11660}`：`\u11660` 只会吃掉 4 位，剩下一个「0」字面量。 */
 const SCRIPTS = [
     ['mnc', /[\u1800-\u18AF\u{11660}-\u{1167F}]/u],
@@ -140,8 +140,6 @@ export function bdiNode(text, lang = null, props = null) {
     return h('bdi', { ...props, lang: lang || undefined, dir: bdiDir(lang) }, String(text ?? ''))
 }
 
-export const bdiText = bdiFragment
-
 /**
  * 可能含 `<bdi>` 标记的显示文本：有标记就解析并补 lang/dir，没有就按码位切段。
  * 标题、说明、表格单元格这类「一格可能多语」的地方用它。
@@ -213,8 +211,8 @@ function annotateOne(bdi, ctxLang) {
 }
 
 /**
- * 给子树里所有 `<bdi>` 补齐 `lang` / `dir`；重复调用安全。
- * `ctxLang` 是上下文语言（页面语言、表格的 lang）——只用来兜底，不会覆盖已有 lang。
+ * 给子树里所有 `<bdi>` 补齐 `lang` 与 `dir`；重复调用安全。
+ * `ctxLang` 是上下文语言（页面语言、表格的 lang）——只在判不出语言时使用，不会覆盖已有 lang。
  */
 export function annotateBdi(root, ctxLang = null) {
     if (!root || !root.querySelectorAll) return root
@@ -230,9 +228,6 @@ export function annotateBdi(root, ctxLang = null) {
     return root
 }
 
-/** 兼容旧调用点：原先只处理带 lang 的容器，现在只做「补属性」 */
-export const applyBdi = annotateBdi
-
 /** 该文本里有没有这门语言的文字（输入框提示、分析浮层用） */
 export function hasScript(text, lang = null) {
     const source = String(text ?? '')
@@ -243,7 +238,7 @@ export function hasScript(text, lang = null) {
 }
 
 /**
- * 数据格式文档正文的兜底：把能靠码位认出来的原文包成 <bdi lang dir>。
+ * 数据格式文档正文的补充：把能靠码位认出来的原文包成 <bdi lang dir>。
  * 拉丁字母与汉字认不出来（会和正文混在一起），那些由文档自己写 <bdi>。
  */
 export function wrapScriptText(root) {
@@ -268,35 +263,6 @@ export function wrapScriptText(root) {
             frag(...runs.map((run) => (run.lang ? bdiNode(run.text, run.lang) : run.text))),
             node
         )
-    }
-    return root
-}
-
-/**
- * 原生 placeholder 不能带标记，所以含原文的 placeholder 用叠一层自己画的提示；
- * 输入框有内容时自动隐藏，已经包在 .ghost-input 里的（那些自己处理）跳过。
- */
-export function applyBdiPlaceholders(root, lang = null) {
-    if (!root || !root.querySelectorAll) return root
-    for (const input of root.querySelectorAll('input[placeholder], textarea[placeholder]')) {
-        const code = input.getAttribute('lang') || lang
-        const text = input.getAttribute('placeholder') || ''
-        if (!hasScript(text, code)) continue
-        if (input.closest('.ghost-input')) continue
-
-        const hint = h('span', {
-            class: 'ghost-input__hint ghost-input__hint--placeholder',
-            'aria-hidden': 'true'
-        }, bdiFragment(text, code))
-        const wrap = h('span', { class: 'ghost-input' }, hint, input)
-        input.setAttribute('placeholder', '')
-        if (input.parentNode) input.parentNode.insertBefore(wrap, input)
-        wrap.appendChild(input)
-
-        const sync = () => { hint.hidden = !!input.value }
-        input.addEventListener('input', sync)
-        input.addEventListener('change', sync)
-        sync()
     }
     return root
 }

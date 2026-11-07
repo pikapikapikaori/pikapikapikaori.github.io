@@ -60,7 +60,7 @@ function entryLabel(raw, index) {
     return pos ? `#${index + 1} ${lemma}（${pos}）` : `#${index + 1} ${lemma}`
 }
 
-/** 与 addOrMerge 的唯一键保持一致（userId + language + lemma + pos） */
+/** 与 addOrMerge 的判定方式保持一致（userId + language + lemma + pos） */
 function recordKey(userId, raw) {
     return [
         userId,
@@ -71,7 +71,7 @@ function recordKey(userId, raw) {
 }
 
 /**
- * 导入前预览：只统计「新增 / 合并 / 跳过」，不写入任何数据；同批次内重复的条目按「合并」计入，与实际导入一致
+ * 导入前预览：只统计「新增、合并、跳过」，不写入任何数据；同批次内重复的条目按「合并」计入，与实际导入一致
  * @returns {{ created, merged, skipped, total, errors, items: { created, merged } }}
  */
 export async function previewWords(userId, words) {

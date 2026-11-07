@@ -16,7 +16,7 @@ export const ANALYZE_SOURCES = [
 
 /** 能弹「原文预览浮层」的语言：值是判断元素里有没有该文字的字符范围 */
 export const SCRIPT_POPUP_LANGS = {
-    // 传统蒙古文 / 满文 / 锡伯文，U+1800 – U+18AF
+    // 传统蒙古文、满文、锡伯文，U+1800 – U+18AF
     mnc: /[\u1800-\u18AF]/
 }
 
@@ -25,14 +25,6 @@ export const BREVE_LANGS = ['la', 'grc']
 
 /** 搜索时把查询串同时展开成「原文 + 转写」的语言 */
 export const SCRIPT_SEARCH_LANGS = ['sa', 'grc', 'he', 'mnc']
-
-/** 渲染时把命中的字符包进 <bdi> 的语言；方向由 meta 的 `rtl` 决定 */
-export const BDI_LANGS = {
-    // 传统蒙古文 / 满文 / 锡伯文
-    mnc: /[\u1800-\u18AF]/,
-    // 希伯来文（含元音点与重复号）
-    he: /[\u0590-\u05FF\uFB1D-\uFB4F]/
-}
 
 export const POS_LIST = [
     { value: 'noun',      label: '名词' },

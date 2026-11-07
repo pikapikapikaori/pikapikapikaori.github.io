@@ -102,7 +102,7 @@ export function createPageTools({ lang, toRoman = null, onChange = null, onBreve
         topBtn.hidden = !show
     }
     scroller.addEventListener('scroll', onScroll, { passive: true })
-    // 兜底：容器判定不准时，任何滚动都重新算一次
+    // 容器判定不准时，任何滚动都重新算一次
     document.addEventListener('scroll', onScroll, { capture: true, passive: true })
     onScroll()
 

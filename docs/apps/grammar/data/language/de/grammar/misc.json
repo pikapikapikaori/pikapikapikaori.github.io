@@ -99,7 +99,7 @@
             "lang": "de"
           }
         ],
-        "notes": "不定冠词没有复数形式，复数用 <bdi>kein 或零冠词。否定形式 kein 变格与不定冠词相同（kein, keine, kein, keine）；物主代词（mein, dein, sein</bdi> 等）也按此变格。"
+        "notes": "不定冠词没有复数形式，复数用 <bdi>kein</bdi> 或零冠词。否定形式 <bdi>kein</bdi> 变格与不定冠词相同（<bdi>kein, keine, kein, keine</bdi>）；物主代词（<bdi>mein, dein, sein</bdi> 等）也按此变格。"
       }
     ]
   },
@@ -201,7 +201,7 @@
             "lang": "de"
           }
         ],
-        "notes": "记住口诀「<bdi>aus, bei, mit, nach, seit, von, zu — 后面永远与格」。gegenüber</bdi> 常放在名词后。"
+        "notes": "记住口诀「<bdi>aus, bei, mit, nach, seit, von, zu —</bdi> 后面永远与格」。<bdi>gegenüber</bdi> 常放在名词后。"
       },
       {
         "id": "de-prep-two-way",
@@ -265,7 +265,7 @@
             "lang": "de"
           }
         ],
-        "notes": "含缩合形式：<bdi>an + dem = am、in + dem = im、an + das = ans、in + das = ins</bdi> 等。"
+        "notes": "含缩合形式：<bdi>an + dem = am</bdi>、<bdi>in + dem = im</bdi>、<bdi>an + das = ans</bdi>、<bdi>in + das = ins</bdi> 等。"
       },
       {
         "id": "de-prep-genitive",
@@ -376,7 +376,7 @@
             "lang": "de"
           }
         ],
-        "notes": "介词与定冠词常缩合，缩合后一般不再分开写（<bdi>zum = zu dem）；需要强调冠词时用分开形式（zu dem Mann, den ich meine）。zum / zur 也用于不定式名词化前（zum Lesen</bdi>）。"
+        "notes": "介词与定冠词常缩合，缩合后一般不再分开写（<bdi>zum = zu dem</bdi>）；需要强调冠词时用分开形式（<bdi>zu dem Mann, den ich meine</bdi>）。<bdi>zum / zur</bdi> 也用于不定式名词化前（<bdi>zum Lesen</bdi>）。"
       }
     ]
   },
@@ -568,7 +568,7 @@
               ],
               [
                 "否定名词",
-                "改用 <bdi>kein（kein / keine / kein</bdi>）",
+                "改用 <bdi>kein</bdi>（<bdi>kein / keine / kein</bdi>）",
                 "<bdi>Ich habe kein Geld. / Er hat keine Zeit.</bdi>"
               ]
             ],
@@ -607,7 +607,7 @@
             "lang": "de"
           }
         ],
-        "notes": "判断 <bdi>nicht 的位置先问「否定的是什么」：否定整句就靠后（但必须在句末动词 / 过去分词 / 不定式之前），否定某个成分就紧放在它前面；名词用 kein 否定。nicht 与 kein 不叠加（✗ Ich habe nicht ein Auto → ✓ Ich habe kein Auto</bdi>）。"
+        "notes": "判断 <bdi>nicht</bdi> 的位置先问「否定的是什么」：否定整句就靠后（但必须在句末动词 / 过去分词 / 不定式之前），否定某个成分就紧放在它前面；名词用 <bdi>kein</bdi> 否定。<bdi>nicht</bdi> 与 <bdi>kein</bdi> 不叠加（<bdi>✗ Ich habe nicht ein Auto → ✓ Ich habe kein Auto</bdi>）。"
       }
     ]
   },
@@ -617,7 +617,7 @@
     "items": [
       {
         "id": "de-orthography-sharp-s",
-        "title": "<bdi>ß 与 ss</bdi>",
+        "title": "<bdi>ß</bdi> 与 <bdi>ss</bdi>",
         "tables": [
           {
             "caption": "规则",
@@ -631,23 +631,23 @@
               [
                 "长元音或双元音之后",
                 "<bdi>ß</bdi>",
-                "<bdi>Straße、groß、heißen</bdi>"
+                "<bdi>Straße</bdi>、<bdi>groß</bdi>、<bdi>heißen</bdi>"
               ],
               [
                 "短元音之后",
                 "<bdi>ss</bdi>",
-                "<bdi>Fluss、müssen、dass</bdi>"
+                "<bdi>Fluss</bdi>、<bdi>müssen</bdi>、<bdi>dass</bdi>"
               ],
               [
                 "瑞士与列支敦士登",
                 "一律用 <bdi>ss</bdi>",
-                "<bdi>Strasse、gross</bdi>"
+                "<bdi>Strasse</bdi>、<bdi>gross</bdi>"
               ]
             ],
             "lang": "de"
           }
         ],
-        "notes": "1996 年正字法改革后，<bdi>ß 只保留在长元音 / 双元音之后；短元音后一律写 ss</bdi>。"
+        "notes": "1996 年正字法改革后，<bdi>ß</bdi> 只保留在长元音 / 双元音之后；短元音后一律写 <bdi>ss</bdi>。"
       },
       {
         "id": "de-orthography-capital",
@@ -665,7 +665,7 @@
               [
                 "所有名词",
                 "要",
-                "<bdi>der Tisch、die Freiheit</bdi>"
+                "<bdi>der Tisch</bdi>、<bdi>die Freiheit</bdi>"
               ],
               [
                 "句首",
@@ -680,17 +680,17 @@
               [
                 "名词化的形容词 / 动词",
                 "要",
-                "<bdi>das Gute、das Lesen</bdi>"
+                "<bdi>das Gute</bdi>、<bdi>das Lesen</bdi>"
               ],
               [
                 "语言 / 形容词 / 副词",
                 "不要",
-                "<bdi>deutsch、schnell</bdi>"
+                "<bdi>deutsch</bdi>、<bdi>schnell</bdi>"
               ],
               [
                 "星期 / 月份",
                 "要",
-                "<bdi>Montag、Januar</bdi>"
+                "<bdi>Montag</bdi>、<bdi>Januar</bdi>"
               ]
             ],
             "lang": "de"
@@ -714,7 +714,7 @@
               [
                 "可分动词的不定式",
                 "合写",
-                "<bdi>aufstehen、einkaufen</bdi>"
+                "<bdi>aufstehen</bdi>、<bdi>einkaufen</bdi>"
               ],
               [
                 "主句中的可分动词",
@@ -724,7 +724,7 @@
               [
                 "名词 + 名词的复合词",
                 "合写",
-                "<bdi>Haustür、Kindergarten</bdi>"
+                "<bdi>Haustür</bdi>、<bdi>Kindergarten</bdi>"
               ],
               [
                 "形容词 + 动词",
@@ -773,7 +773,7 @@
               [
                 "-",
                 "连字符，前后不加空格",
-                "<bdi>David-Bowie-Straße、3-jährig</bdi>"
+                "<bdi>David-Bowie-Straße</bdi>、<bdi>3-jährig</bdi>"
               ],
               [
                 "…",
@@ -794,7 +794,7 @@
             "lang": "de"
           }
         ],
-        "notes": "德语引号方向与英语相反：开引号在下方（„），闭引号在上方（“）；替代写法是 »…«。破折号用 – （<bdi>Halbgeviertstrich）并前后空格，不用英语的 — 连写。行末拆分时 ß 不拆（旧规则的 ss 拆写已废），复合词按成分拆（Haus-tür</bdi>）。"
+        "notes": "德语引号方向与英语相反：开引号在下方（„），闭引号在上方（“）；替代写法是 »…«。破折号用 – （<bdi>Halbgeviertstrich</bdi>）并前后空格，不用英语的 — 连写。行末拆分时 <bdi>ß</bdi> 不拆（旧规则的 <bdi>ss</bdi> 拆写已废），复合词按成分拆（<bdi>Haus-tür</bdi>）。"
       }
     ]
   }

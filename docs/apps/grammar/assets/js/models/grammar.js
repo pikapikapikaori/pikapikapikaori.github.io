@@ -1,7 +1,7 @@
 import { resolveDeriveSpec } from './paradigm-generate.js'
 import { POS_LIST } from '../config/config.js'
 
-/** 语法文档：version / language / paradigms / sections，section 下挂 items */
+/** 语法文档：version、language、paradigms、sections，section 下挂 items */
 
 const POS_VALUES = new Set(POS_LIST.map((p) => p.value))
 
@@ -157,7 +157,7 @@ export function validateGrammarDoc(lang, doc) {
         warn('`paradigm: false` 却写了 `paradigms`，模板不会被用到')
     }
     if (doc.paradigm !== false && !hasParadigms) {
-        warn('没有 `paradigms`，该语言的变格 / 变位表无法生成')
+        warn('没有 `paradigms`，该语言的变格表、变位表无法生成')
     }
     if (doc.grammar === false && Array.isArray(doc.sections) && doc.sections.length) {
         warn('`grammar: false` 但 `sections` 不为空，语法页不会显示这些内容')
@@ -167,7 +167,7 @@ export function validateGrammarDoc(lang, doc) {
 }
 
 /**
- * 从 meta.json 的 `grammarFiles` 派生「有没有语法页 / 有没有变格变位表」：
+ * 从 meta.json 的 `grammarFiles` 派生「有没有语法页、有没有变格变位表」：
  * 路径写着就是有，写 `false` 就是没有。数据里不再单独存这两个布尔。
  */
 export function grammarFlags(meta) {
@@ -224,8 +224,6 @@ export function findAnchor(doc, id) {
     return null
 }
 
-/* ---------------- paradigm ---------------- */
-
 /**
  * 解析 paradigms[pos]，支持链式 extends：本层写了 tables 就用本层的，否则继承 extends 指向的词性。
  * 出现环（a→b→a）返回 null。
@@ -261,7 +259,7 @@ const TERM_KEYS = [
     // 形态变形相关的界面用词
     'inflectionType', 'inflectionTypePlaceholder',
     'special', 'indeclinable', 'paradigmTitle', 'extraForms',
-    // 分区标题（表单 / 词卡 / 复习共用）
+    // 分区标题（表单、词卡、复习共用）
     'meanings', 'collocations', 'examples', 'derivatives', 'tags', 'notes', 'others',
     'paradigmTable', 'optionalSuffix', 'add', 'addMeaning',
     // 生词表单的字段标签、placeholder 与提示
@@ -275,7 +273,7 @@ const TERM_KEYS = [
     'tagsPlaceholder', 'notesPlaceholder',
 ]
 
-/** 把 `{ label, placeholder, hint }` 这类对象归一成字符串字段 */
+/** 把 `{ label, placeholder, hint }` 这类对象统一成字符串字段 */
 function textSet(value, keys) {
     const src = value && typeof value === 'object' ? value : {}
     const out = {}
@@ -303,14 +301,14 @@ export function fillTerms(text, posLabel) {
 }
 
 /**
- * 生词表单要显示的属性字段：数据用 `paradigms[pos].fields` 声明（key / label / options / required / declensionCells）；
+ * 生词表单要显示的属性字段：数据用 `paradigms[pos].fields` 声明（key、label、options、required、declensionCells）；
  * 没声明时只有名词退回「列名或行名带 m/f/n → 语法性」的推导。
  */
 export function getFieldDefs(doc, pos) {
     return fieldDefsOfTemplate(getParadigmTemplate(doc, pos), pos)
 }
 
-/** 只看模板的版本（词卡 / 放大卡只有模板，没有整份文档） */
+/** 只看模板的版本（词卡、放大卡只有模板，没有整份文档） */
 export function fieldDefsOfTemplate(tpl, pos) {
     if (!tpl) return []
     const declared = Array.isArray(tpl.fields) ? tpl.fields : []
@@ -340,28 +338,13 @@ export function fieldValues(word, key) {
     return []
 }
 
-export function getGenderOptions(doc, pos = 'noun') {
-    const tpl = getParadigmTemplate(doc, pos)
-    const cols = new Set()
-    const rows = new Set()
-    for (const table of tpl?.tables || []) {
-        for (const col of table.columns || []) cols.add(String(col.key))
-        for (const row of table.rows || []) rows.add(String(row.key))
-    }
-    const out = []
-    for (const g of ['m', 'f', 'n']) {
-        if ([...cols].some((k) => k.endsWith('_' + g)) || rows.has(g)) out.push(g)
-    }
-    return out
-}
-
 /** 列的语法性（`sg_m` → 'm'），无性别维度时返回 '' */
 export function genderOfColumn(colKey) {
     const m = /_([mfn])$/.exec(String(colKey || ''))
     return m ? m[1] : ''
 }
 
-/** 行的语法性（行 key 直接是 `m` / `f` / `n`），无性别维度时返回 '' */
+/** 行的语法性（行 key 直接写 `m`、`f`、`n`），无性别维度时返回 '' */
 export function genderOfRow(rowKey) {
     const key = String(rowKey || '')
     return key === 'm' || key === 'f' || key === 'n' ? key : ''
@@ -382,7 +365,7 @@ function shortLabel(title) {
 }
 
 /**
- * 可作「变格 / 变位类型」的锚点：只取带 inflect 标记的 section / item。
+ * 可作「变格、变位类型」的锚点：只取带 inflect 标记的 section、item。
  * 锚点名默认不带章节前缀，只有同一词性内重名时才退回「章节 · 条目」（避免两个选项一模一样）。
  * @returns {{ id: string, label: string, short: string, kind: 'decl'|'conj' }[]}
  */
@@ -437,6 +420,30 @@ export function collectInflectAnchors(doc, lang, pos) {
  */
 export function getDeriveSpec(doc, id) {
     return resolveDeriveSpec(doc, id)
+}
+
+/**
+ * 名词只显示所选语法性的格子：性写在列上就整列不渲染，写在行上就整行不渲染。
+ * `holder` 是词条或表单数据，只需要带 `attributes`。
+ */
+export function hiddenGenderCells(tpl, pos, holder) {
+    const empty = { columns: [], rows: [] }
+    const field = fieldDefsOfTemplate(tpl, pos).find((f) => f.declensionCells)
+    if (!field) return empty
+    const picked = fieldValues(holder, field.key)
+    if (!picked.length) return empty
+    const hidden = { columns: [], rows: [] }
+    for (const table of tpl?.tables || []) {
+        for (const col of table.columns || []) {
+            const g = genderOfColumn(col.key)
+            if (g && !picked.includes(g)) hidden.columns.push(col.key)
+        }
+        for (const row of table.rows || []) {
+            const g = genderOfRow(row.key)
+            if (g && !picked.includes(g)) hidden.rows.push(row.key)
+        }
+    }
+    return hidden
 }
 
 /** 取语法锚点上声明的词干：返回 [{ key, label, hint, example }]，没有则空数组 */

@@ -63,7 +63,7 @@ export default {
 
         const doc = docs[index]
 
-        // 从首页（未登录 / 欢迎页）进来的回首页，否则回语言列表
+        // 从首页（未登录、欢迎页）进来的回首页，否则回语言列表
         const fromHome = entryFrom === 'welcome' || !appStore.get().userId
         // 顶栏也跟着回到来源：从首页进来时「生词本」「设置」都回首页
         setNavContext(fromHome ? 'welcome' : 'user')
@@ -81,8 +81,6 @@ export default {
 
 function render(main, { title, docs, index, doc, anchor }) {
     const narrowQuery = window.matchMedia(NARROW)
-
-    /* ---------------- 头部 ---------------- */
 
     const copyMain = h('button', {
         class: 'btn btn--primary split-btn__main',
@@ -138,8 +136,6 @@ function render(main, { title, docs, index, doc, anchor }) {
         )
     )
 
-    /* ---------------- 左栏：章节 + 本页目录 ---------------- */
-
     const nav = h('aside', { class: 'grammar-nav', 'aria-label': '数据格式目录' })
 
     const parts = h('div', { class: 'grammar-chapters' },
@@ -164,8 +160,6 @@ function render(main, { title, docs, index, doc, anchor }) {
     )
     tocDetails.appendChild(toc)
     nav.appendChild(tocDetails)
-
-    /* ---------------- 正文 ---------------- */
 
     const content = h('div', { class: 'grammar-content' })
     const body = h('div', { class: 'doc-body' })
@@ -200,8 +194,6 @@ function render(main, { title, docs, index, doc, anchor }) {
         toc.appendChild(link)
     }
 
-    /* ---------------- 章尾翻页 ---------------- */
-
     const prev = docs[index - 1]
     const next = docs[index + 1]
     content.appendChild(h('nav', { class: 'doc-pager', 'aria-label': '章节翻页' },
@@ -216,8 +208,6 @@ function render(main, { title, docs, index, doc, anchor }) {
                 h('span', { class: 'doc-pager__title' }, next.title))
             : null
     ))
-
-    /* ---------------- 跨章锚点 ---------------- */
 
     const anchorDocs = new Map()
     for (const item of docs) {
@@ -247,12 +237,9 @@ function render(main, { title, docs, index, doc, anchor }) {
 
     replace(main, head, h('div', { class: 'grammar-layout' }, nav, content))
 
-    /* ---------------- 右下角浮动工具：回到顶部 ---------------- */
-    // 数据格式页没有转写 / 短音符，这里只会渲染「↑」一个按钮，行为与语法页一致
+    // 数据格式页没有转写、短音符，这里只会渲染「↑」一个按钮，行为与语法页一致
     const tools = createPageTools({ anchorEl: main })
     document.body.appendChild(tools.el)
-
-    /* ---------------- 滚动与高亮 ---------------- */
 
     const targets = Array.from(content.querySelectorAll('.doc-heading'))
         .filter((el) => el.dataset.level === '2' || el.dataset.level === '3')

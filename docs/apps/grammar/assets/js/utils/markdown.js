@@ -195,7 +195,7 @@ function parseList(lines, i, parent, ctx) {
 
         const body = [m[3]]
         j += 1
-        // 续行 / 子列表：缩进比本级更深的都算这个条目里的内容
+        // 续行、子列表：缩进比本级更深的都算这个条目里的内容
         while (j < lines.length) {
             const line = lines[j]
             if (!line.trim()) {

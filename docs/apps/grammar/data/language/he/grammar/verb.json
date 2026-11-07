@@ -71,7 +71,7 @@
             "lang": "he"
           }
         ],
-        "notes": "binyan 是「同一个词根的七个语态 / 致使层级」。本页把 binyan 放在「时态」这一层：词条的语法锚点选词根类型，binyan 由表格决定。"
+        "notes": "binyan 是「同一个词根的七个语态与致使层级」。"
       },
       {
         "id": "he-verb-tenses",
@@ -99,7 +99,7 @@
               [
                 "连续式",
                 "叙事推进",
-                "连续完成式 <bdi>וְקָטַל、连续未完成式 וַיִּקְטֹל</bdi> 是圣经叙事的骨干"
+                "连续完成式 <bdi>וְקָטַל</bdi>、连续未完成式 <bdi>וַיִּקְטֹל</bdi> 是圣经叙事的骨干"
               ],
               [
                 "祈愿式 / 劝勉式",
@@ -143,7 +143,7 @@
               ],
               [
                 "词根占位符",
-                "骨架表里的占位符：<bdi>־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 בגדכפת 自动补 dagesh lene；词中写成条件点的槽位，代入的辅音若不是 בגדכפת</bdi> 就自动去点。"
+                "骨架表里的占位符：־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 <bdi>בגדכפת</bdi> 自动补 <bdi>dagesh lene</bdi>；词中写成条件点的槽位，代入的辅音若不是 <bdi>בגדכפת</bdi> 就自动去点。"
               ]
             ],
             "lang": "he"
@@ -160,7 +160,7 @@
     "items": [
       {
         "id": "he-verb-strong-qal",
-        "title": "<bdi>Qal（קַל）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>קַל</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -394,7 +394,7 @@
       },
       {
         "id": "he-verb-strong-nifal",
-        "title": "<bdi>Niphal（נִפְעַל）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>נִפְעַל</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -628,7 +628,7 @@
       },
       {
         "id": "he-verb-strong-piel",
-        "title": "<bdi>Piel（פִּעֵל）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>פִּעֵל</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -862,7 +862,7 @@
       },
       {
         "id": "he-verb-strong-pual",
-        "title": "<bdi>Pual（פֻּעַל）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>פֻּעַל</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -1096,7 +1096,7 @@
       },
       {
         "id": "he-verb-strong-hitpael",
-        "title": "<bdi>Hithpael（הִתְפַּעֵל）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>הִתְפַּעֵל</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -1330,7 +1330,7 @@
       },
       {
         "id": "he-verb-strong-hiphil",
-        "title": "<bdi>Hiphil（הִפְעִיל）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>הִפְעִיל</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -1564,7 +1564,7 @@
       },
       {
         "id": "he-verb-strong-hophal",
-        "title": "<bdi>Hophal（הָפְעַל）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>הָפְעַל</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -2030,7 +2030,7 @@
             "lang": "he"
           }
         ],
-        "notes": "分词不分「主动 / 被动」两套形式：每个 binyan 只有一种分词，语态由 binyan 本身决定 —— Qal / Piel / Hiphil 主动，Niphal / Pual / Hophal 被动，Hithpael 反身。另有一个独立的 Qal 被动分词（<bdi>קָטֻל 型，如 בָּרוּךְ「被祝福的」、אָרוּר</bdi>「被咒诅的」），偏形容词用法，弱根的变化不规则，这里只列强根形式。"
+        "notes": "分词不分「主动 / 被动」两套形式：每个 binyan 只有一种分词，语态由 binyan 本身决定 —— Qal / Piel / Hiphil 主动，Niphal / Pual / Hophal 被动，Hithpael 反身。另有一个独立的 Qal 被动分词（<bdi>קָטֻל</bdi> 型，如 <bdi>בָּרוּךְ</bdi>「被祝福的」、<bdi>אָרוּר</bdi>「被咒诅的」），偏形容词用法，弱根的变化不规则，这里只列强根形式。"
       }
     ],
     "derive": {
@@ -3214,7 +3214,7 @@
     "items": [
       {
         "id": "he-verb-guttural-qal",
-        "title": "<bdi>Qal（ש-מ-ע）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -3444,7 +3444,7 @@
       },
       {
         "id": "he-verb-guttural-nifal",
-        "title": "<bdi>Niphal（ש-מ-ע）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -3674,7 +3674,7 @@
       },
       {
         "id": "he-verb-guttural-piel",
-        "title": "<bdi>Piel（ש-מ-ע）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -3904,7 +3904,7 @@
       },
       {
         "id": "he-verb-guttural-pual",
-        "title": "<bdi>Pual（ש-מ-ע）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -4134,7 +4134,7 @@
       },
       {
         "id": "he-verb-guttural-hitpael",
-        "title": "<bdi>Hithpael（ש-מ-ע）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -4364,7 +4364,7 @@
       },
       {
         "id": "he-verb-guttural-hiphil",
-        "title": "<bdi>Hiphil（ש-מ-ע）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -4594,7 +4594,7 @@
       },
       {
         "id": "he-verb-guttural-hophal",
-        "title": "<bdi>Hophal（ש-מ-ע）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>ש-מ-ע</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -6159,7 +6159,7 @@
     "items": [
       {
         "id": "he-verb-guttural-ii-qal",
-        "title": "<bdi>Qal（ב-ח-ר）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -6385,11 +6385,11 @@
             "exampleWord": "בָּחַר"
           }
         ],
-        "notes": "词根中辅音是喉音（<bdi>ח / ע / ר），偏好 a 类元音，Piel / Hithpael 里改用 חֲטָף</bdi>。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "词根中辅音是喉音（<bdi>ח / ע / ר</bdi>），偏好 a 类元音，<bdi>Piel / Hithpael</bdi> 里改用 <bdi>חֲטָף</bdi>。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-guttural-ii-nifal",
-        "title": "<bdi>Niphal（ב-ח-ר）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -6619,7 +6619,7 @@
       },
       {
         "id": "he-verb-guttural-ii-piel",
-        "title": "<bdi>Piel（ב-ח-ר）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -6849,7 +6849,7 @@
       },
       {
         "id": "he-verb-guttural-ii-pual",
-        "title": "<bdi>Pual（ב-ח-ר）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -7079,7 +7079,7 @@
       },
       {
         "id": "he-verb-guttural-ii-hitpael",
-        "title": "<bdi>Hithpael（ב-ח-ר）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -7309,7 +7309,7 @@
       },
       {
         "id": "he-verb-guttural-ii-hiphil",
-        "title": "<bdi>Hiphil（ב-ח-ר）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -7539,7 +7539,7 @@
       },
       {
         "id": "he-verb-guttural-ii-hophal",
-        "title": "<bdi>Hophal（ב-ח-ר）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>ב-ח-ר</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -9138,16 +9138,16 @@
         }
       }
     },
-    "notes": "词中的喉音（<bdi>ח / ע / ר）不能带 dagesh forte，前面的短元音改成 חֲטָף־פַּתַח（בָּחֲרוּ）；带辅音词尾时保持 patah（בָּחַרְתָּ</bdi>）。"
+    "notes": "词中的喉音（<bdi>ח / ע / ר</bdi>）不能带 <bdi>dagesh forte</bdi>，前面的短元音改成 <bdi>חֲטָף־פַּתַח</bdi>（<bdi>בָּחֲרוּ</bdi>）；带辅音词尾时保持 <bdi>patah</bdi>（<bdi>בָּחַרְתָּ</bdi>）。"
   },
   {
     "id": "he-verb-i-alef",
-    "title": "<bdi>I-א 词根（פ־א）</bdi>",
+    "title": "<bdi>I-א</bdi> 词根（<bdi>פ־א</bdi>）",
     "inflect": "conj",
     "items": [
       {
         "id": "he-verb-i-alef-qal",
-        "title": "<bdi>Qal（א-מ-ר）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -9373,11 +9373,11 @@
             "exampleWord": "אָמַר"
           }
         ],
-        "notes": "词首 <bdi>א 不发音、不接受 dagesh；未完成式取 חֹלֶם（יֹאמַר），命令式取 חֲטַף־סֶגוֹל（אֱמֹר</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "词首 <bdi>א</bdi> 不发音、不接受 <bdi>dagesh</bdi>；未完成式取 <bdi>חֹלֶם</bdi>（<bdi>יֹאמַר</bdi>），命令式取 <bdi>חֲטַף־סֶגוֹל</bdi>（<bdi>אֱמֹר</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-i-alef-nifal",
-        "title": "<bdi>Niphal（א-מ-ר）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -9607,7 +9607,7 @@
       },
       {
         "id": "he-verb-i-alef-piel",
-        "title": "<bdi>Piel（א-מ-ר）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -9837,7 +9837,7 @@
       },
       {
         "id": "he-verb-i-alef-pual",
-        "title": "<bdi>Pual（א-מ-ר）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -10067,7 +10067,7 @@
       },
       {
         "id": "he-verb-i-alef-hitpael",
-        "title": "<bdi>Hithpael（א-מ-ר）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -10297,7 +10297,7 @@
       },
       {
         "id": "he-verb-i-alef-hiphil",
-        "title": "<bdi>Hiphil（א-מ-ר）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -10527,7 +10527,7 @@
       },
       {
         "id": "he-verb-i-alef-hophal",
-        "title": "<bdi>Hophal（א-מ-ר）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>א-מ-ר</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -12040,16 +12040,16 @@
         }
       }
     },
-    "notes": "未完成式里 <bdi>א 静默：多数人称写作字面 א + 长元音（יֹאמַר），1cs / 1cp 的 א 完全脱落（אֹמַר、נֹאמַר</bdi>）。"
+    "notes": "未完成式里 <bdi>א</bdi> 静默：多数人称写作字面 <bdi>א +</bdi> 长元音（<bdi>יֹאמַר</bdi>），<bdi>1cs / 1cp</bdi> 的 <bdi>א</bdi> 完全脱落（<bdi>אֹמַר</bdi>、<bdi>נֹאמַר</bdi>）。"
   },
   {
     "id": "he-verb-i-yod",
-    "title": "<bdi>I-י 词根（פ־י）</bdi>",
+    "title": "<bdi>I-י</bdi> 词根（<bdi>פ־י</bdi>）",
     "inflect": "conj",
     "items": [
       {
         "id": "he-verb-i-yod-qal",
-        "title": "<bdi>Qal（י-ש-ב）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -12275,11 +12275,11 @@
             "exampleWord": "יָשַׁב"
           }
         ],
-        "notes": "词首 <bdi>י 在未完成式与命令式中脱落（יָשַׁב → יֵשֵׁב / שֵׁב</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "词首 <bdi>י</bdi> 在未完成式与命令式中脱落（<bdi>יָשַׁב → יֵשֵׁב / שֵׁב</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-i-yod-nifal",
-        "title": "<bdi>Niphal（י-ש-ב）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -12509,7 +12509,7 @@
       },
       {
         "id": "he-verb-i-yod-piel",
-        "title": "<bdi>Piel（י-ש-ב）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -12739,7 +12739,7 @@
       },
       {
         "id": "he-verb-i-yod-pual",
-        "title": "<bdi>Pual（י-ש-ב）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -12969,7 +12969,7 @@
       },
       {
         "id": "he-verb-i-yod-hitpael",
-        "title": "<bdi>Hithpael（י-ש-ב）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -13199,7 +13199,7 @@
       },
       {
         "id": "he-verb-i-yod-hiphil",
-        "title": "<bdi>Hiphil（י-ש-ב）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -13429,7 +13429,7 @@
       },
       {
         "id": "he-verb-i-yod-hophal",
-        "title": "<bdi>Hophal（י-ש-ב）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>י-ש-ב</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -14941,16 +14941,16 @@
         }
       }
     },
-    "notes": "未完成式与命令式里词首 <bdi>י 脱落，词干延长为 צֵרֵי（יֵשֵׁב、שֵׁב）；Hiphil 为 הוֹשִׁיב</bdi> 型。"
+    "notes": "未完成式与命令式里词首 <bdi>י</bdi> 脱落，词干延长为 <bdi>צֵרֵי</bdi>（<bdi>יֵשֵׁב</bdi>、<bdi>שֵׁב</bdi>）；<bdi>Hiphil</bdi> 为 <bdi>הוֹשִׁיב</bdi> 型。"
   },
   {
     "id": "he-verb-i-nun",
-    "title": "<bdi>I-נ 词根（פ־נ）</bdi>",
+    "title": "<bdi>I-נ</bdi> 词根（<bdi>פ־נ</bdi>）",
     "inflect": "conj",
     "items": [
       {
         "id": "he-verb-i-nun-qal",
-        "title": "<bdi>Qal（נ-פ-ל）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -15176,11 +15176,11 @@
             "exampleWord": "נָפַל"
           }
         ],
-        "notes": "词首 <bdi>נ 在 Niphal 完成式里同化进第 2 个辅音（נִפַּל），在未完成式 / 命令式 / 不定式里重叠（יִנָּפֵל / הִנָּפֵל</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "词首 <bdi>נ</bdi> 在 <bdi>Niphal</bdi> 完成式里同化进第 2 个辅音（<bdi>נִפַּל</bdi>），在未完成式 / 命令式 / 不定式里重叠（<bdi>יִנָּפֵל / הִנָּפֵל</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-i-nun-nifal",
-        "title": "<bdi>Niphal（נ-פ-ל）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -15410,7 +15410,7 @@
       },
       {
         "id": "he-verb-i-nun-piel",
-        "title": "<bdi>Piel（נ-פ-ל）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -15640,7 +15640,7 @@
       },
       {
         "id": "he-verb-i-nun-pual",
-        "title": "<bdi>Pual（נ-פ-ל）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -15870,7 +15870,7 @@
       },
       {
         "id": "he-verb-i-nun-hitpael",
-        "title": "<bdi>Hithpael（נ-פ-ל）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -16100,7 +16100,7 @@
       },
       {
         "id": "he-verb-i-nun-hiphil",
-        "title": "<bdi>Hiphil（נ-פ-ל）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -16330,7 +16330,7 @@
       },
       {
         "id": "he-verb-i-nun-hophal",
-        "title": "<bdi>Hophal（נ-פ-ל）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>נ-פ-ל</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -17817,16 +17817,16 @@
         }
       }
     },
-    "notes": "Qal 完成式 / 不定式 / 分词保留词首 <bdi>נ；未完成式与命令式里 נ</bdi> 同化进第二个词根辅音（带 dagesh forte），这些格子用 <code><bdi>׳</bdi></code> / <code><bdi>״</bdi></code> 指定第二、三个词根辅音。"
+    "notes": "Qal 完成式 / 不定式 / 分词保留词首 <bdi>נ</bdi>；未完成式与命令式里 <bdi>נ</bdi> 同化进第二个词根辅音（带 dagesh forte），这些格子用 <code><bdi>׳</bdi></code> / <code><bdi>״</bdi></code> 指定第二、三个词根辅音。"
   },
   {
     "id": "he-verb-iii-he",
-    "title": "<bdi>III-ה 词根（ל־ה）</bdi>",
+    "title": "<bdi>III-ה</bdi> 词根（<bdi>ל־ה</bdi>）",
     "inflect": "conj",
     "items": [
       {
         "id": "he-verb-iii-he-qal",
-        "title": "<bdi>Qal（ב-נ-ה）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -18052,11 +18052,11 @@
             "exampleWord": "בָּנָה"
           }
         ],
-        "notes": "词根末 <bdi>ה 在部分形式中保留为词尾，其余取 ֶה / ֵה；按 ל\"ה 规则，不定式附属形作 ־וֹת（בְּנוֹת），绝对形作 ־ֹה（בָּנֹה</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "词根末 <bdi>ה</bdi> 在部分形式中保留为词尾，其余取 <bdi>ֶה / ֵה</bdi>；按 <bdi>ל\"ה</bdi> 规则，不定式附属形作 <bdi>־וֹת</bdi>（<bdi>בְּנוֹת</bdi>），绝对形作 <bdi>־ֹה</bdi>（<bdi>בָּנֹה</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-iii-he-nifal",
-        "title": "<bdi>Niphal（ב-נ-ה）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -18286,7 +18286,7 @@
       },
       {
         "id": "he-verb-iii-he-piel",
-        "title": "<bdi>Piel（ב-נ-ה）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -18516,7 +18516,7 @@
       },
       {
         "id": "he-verb-iii-he-pual",
-        "title": "<bdi>Pual（ב-נ-ה）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -18746,7 +18746,7 @@
       },
       {
         "id": "he-verb-iii-he-hitpael",
-        "title": "<bdi>Hithpael（ב-נ-ה）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -18976,7 +18976,7 @@
       },
       {
         "id": "he-verb-iii-he-hiphil",
-        "title": "<bdi>Hiphil（ב-נ-ה）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -19206,7 +19206,7 @@
       },
       {
         "id": "he-verb-iii-he-hophal",
-        "title": "<bdi>Hophal（ב-נ-ה）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>ב-נ-ה</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -20826,16 +20826,16 @@
         }
       }
     },
-    "notes": "词根第三个辅音是 <bdi>ה：一部分形式保留 ה（בָּנָה、יִבְנֶה），接辅音词尾时 ה 被 י / ו 取代或脱落（בָּנִיתָ、בָּנוּ），这些格子只有两个词根槽位。重音按 מִלְרַע</bdi>。"
+    "notes": "词根第三个辅音是 <bdi>ה</bdi>：一部分形式保留 <bdi>ה</bdi>（<bdi>בָּנָה</bdi>、<bdi>יִבְנֶה</bdi>），接辅音词尾时 <bdi>ה</bdi> 被 <bdi>י / ו</bdi> 取代或脱落（<bdi>בָּנִיתָ</bdi>、<bdi>בָּנוּ</bdi>），这些格子只有两个词根槽位。重音按 <bdi>מִלְרַע</bdi>。"
   },
   {
     "id": "he-verb-iii-alef",
-    "title": "<bdi>III-א 词根（ל־א）</bdi>",
+    "title": "<bdi>III-א</bdi> 词根（<bdi>ל־א</bdi>）",
     "inflect": "conj",
     "items": [
       {
         "id": "he-verb-iii-alef-qal",
-        "title": "<bdi>Qal（מ-צ-א）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -21061,11 +21061,11 @@
             "exampleWord": "מָצָא"
           }
         ],
-        "notes": "词根末 <bdi>א 在词尾不发音，前面的元音延长（מָצָא / יִמְצָא</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "词根末 <bdi>א</bdi> 在词尾不发音，前面的元音延长（<bdi>מָצָא / יִמְצָא</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-iii-alef-nifal",
-        "title": "<bdi>Niphal（מ-צ-א）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -21295,7 +21295,7 @@
       },
       {
         "id": "he-verb-iii-alef-piel",
-        "title": "<bdi>Piel（מ-צ-א）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -21525,7 +21525,7 @@
       },
       {
         "id": "he-verb-iii-alef-pual",
-        "title": "<bdi>Pual（מ-צ-א）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -21755,7 +21755,7 @@
       },
       {
         "id": "he-verb-iii-alef-hitpael",
-        "title": "<bdi>Hithpael（מ-צ-א）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -21985,7 +21985,7 @@
       },
       {
         "id": "he-verb-iii-alef-hiphil",
-        "title": "<bdi>Hiphil（מ-צ-א）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -22215,7 +22215,7 @@
       },
       {
         "id": "he-verb-iii-alef-hophal",
-        "title": "<bdi>Hophal（מ-צ-א）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>מ-צ-א</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -23680,7 +23680,7 @@
         }
       }
     },
-    "notes": "词尾 <bdi>א 静默，完成式带助元音 qamats（מָצָאתִי）；未完成式与命令式保留字面 א（יִמְצָא、מְצָא</bdi>）。"
+    "notes": "词尾 <bdi>א</bdi> 静默，完成式带助元音 <bdi>qamats</bdi>（<bdi>מָצָאתִי</bdi>）；未完成式与命令式保留字面 <bdi>א</bdi>（<bdi>יִמְצָא</bdi>、<bdi>מְצָא</bdi>）。"
   },
   {
     "id": "he-verb-hollow",
@@ -23689,7 +23689,7 @@
     "items": [
       {
         "id": "he-verb-hollow-qal",
-        "title": "<bdi>Qal（ק-ו-ם）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -23915,11 +23915,11 @@
             "exampleWord": "קָם"
           }
         ],
-        "notes": "中辅音在完成式里消失（<bdi>קָם），未完成式用 וֹ / וּ 补足（יָקוּם）；Niphal 按 כון 的 נָכוֹן 型（נָקוֹם / יִקּוֹם / הִקּוֹם</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
+        "notes": "中辅音在完成式里消失（<bdi>קָם</bdi>），未完成式用 <bdi>וֹ / וּ</bdi> 补足（<bdi>יָקוּם</bdi>）；<bdi>Niphal</bdi> 按 <bdi>כון</bdi> 的 <bdi>נָכוֹן</bdi> 型（<bdi>נָקוֹם / יִקּוֹם / הִקּוֹם</bdi>）。 7 个 binyan 的完整表格见下；「变化表」里 <code><bdi>־</bdi></code> 表示一个词根辅音。"
       },
       {
         "id": "he-verb-hollow-nifal",
-        "title": "<bdi>Niphal（ק-ו-ם）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -24149,7 +24149,7 @@
       },
       {
         "id": "he-verb-hollow-piel",
-        "title": "<bdi>Piel（ק-ו-ם）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -24379,7 +24379,7 @@
       },
       {
         "id": "he-verb-hollow-pual",
-        "title": "<bdi>Pual（ק-ו-ם）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -24609,7 +24609,7 @@
       },
       {
         "id": "he-verb-hollow-hitpael",
-        "title": "<bdi>Hithpael（ק-ו-ם）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -24839,7 +24839,7 @@
       },
       {
         "id": "he-verb-hollow-hiphil",
-        "title": "<bdi>Hiphil（ק-ו-ם）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -25069,7 +25069,7 @@
       },
       {
         "id": "he-verb-hollow-hophal",
-        "title": "<bdi>Hophal（ק-ו-ם）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>ק-ו-ם</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -26586,7 +26586,7 @@
         }
       }
     },
-    "notes": "第二词根辅音在多数形式里不出现（收缩为长元音），格子只用 <code><bdi>־</bdi></code> / <code><bdi>״</bdi></code>；需要 mater 时把 <bdi>ו / י 写成字面字符。Hiphil / Hophal 用 הֵקִים / הוּקַם</bdi> 型。"
+    "notes": "第二词根辅音在多数形式里不出现（收缩为长元音），格子只用 <code><bdi>־</bdi></code> / <code><bdi>״</bdi></code>；需要 mater 时把 <bdi>ו / י</bdi> 写成字面字符。<bdi>Hiphil / Hophal</bdi> 用 <bdi>הֵקִים / הוּקַם</bdi> 型。"
   },
   {
     "id": "he-verb-geminate",
@@ -26595,7 +26595,7 @@
     "items": [
       {
         "id": "he-verb-geminate-qal",
-        "title": "<bdi>Qal（ס-ב-ב）</bdi>",
+        "title": "<bdi>Qal</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Qal · 变化表",
@@ -26825,7 +26825,7 @@
       },
       {
         "id": "he-verb-geminate-nifal",
-        "title": "<bdi>Niphal（ס-ב-ב）</bdi>",
+        "title": "<bdi>Niphal</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Niphal · 变化表",
@@ -27055,7 +27055,7 @@
       },
       {
         "id": "he-verb-geminate-piel",
-        "title": "<bdi>Piel（ס-ב-ב）</bdi>",
+        "title": "<bdi>Piel</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Piel · 变化表",
@@ -27285,7 +27285,7 @@
       },
       {
         "id": "he-verb-geminate-pual",
-        "title": "<bdi>Pual（ס-ב-ב）</bdi>",
+        "title": "<bdi>Pual</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Pual · 变化表",
@@ -27515,7 +27515,7 @@
       },
       {
         "id": "he-verb-geminate-hitpael",
-        "title": "<bdi>Hithpael（ס-ב-ב）</bdi>",
+        "title": "<bdi>Hithpael</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Hithpael · 变化表",
@@ -27745,7 +27745,7 @@
       },
       {
         "id": "he-verb-geminate-hiphil",
-        "title": "<bdi>Hiphil（ס-ב-ב）</bdi>",
+        "title": "<bdi>Hiphil</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Hiphil · 变化表",
@@ -27975,7 +27975,7 @@
       },
       {
         "id": "he-verb-geminate-hophal",
-        "title": "<bdi>Hophal（ס-ב-ב）</bdi>",
+        "title": "<bdi>Hophal</bdi>（<bdi>ס-ב-ב</bdi>）",
         "tables": [
           {
             "caption": "Hophal · 变化表",
@@ -29574,7 +29574,7 @@
         }
       }
     },
-    "notes": "第二、三词根辅音相同：完成式两个都写（<bdi>סָבַב、סִבַּב），未完成式与命令式只写一个 + dagesh forte（יָסֹב、יְסַבֵּב）。סבב 的 Hithpael 因词首是 ס 发生换位（הִסְתַּבֵּב</bdi>）。"
+    "notes": "第二、三词根辅音相同：完成式两个都写（<bdi>סָבַב</bdi>、<bdi>סִבַּב</bdi>），未完成式与命令式只写一个 <bdi>+ dagesh forte</bdi>（<bdi>יָסֹב</bdi>、<bdi>יְסַבֵּב</bdi>）。<bdi>סבב</bdi> 的 <bdi>Hithpael</bdi> 因词首是 <bdi>ס</bdi> 发生换位（<bdi>הִסְתַּבֵּב</bdi>）。"
   },
   {
     "id": "he-verb-rare",
@@ -29583,7 +29583,7 @@
     "items": [
       {
         "id": "he-verb-rare-poel",
-        "title": "<bdi>Poel（הוֹלֵל）</bdi>",
+        "title": "<bdi>Poel</bdi>（<bdi>הוֹלֵל</bdi>）",
         "tables": [
           {
             "caption": "Poel · 式",
@@ -29661,7 +29661,7 @@
       },
       {
         "id": "he-verb-rare-polel",
-        "title": "<bdi>Polel（כּוֹנֵן）</bdi>",
+        "title": "<bdi>Polel</bdi>（<bdi>כּוֹנֵן</bdi>）",
         "tables": [
           {
             "caption": "Polel · 式",
@@ -29765,7 +29765,7 @@
       },
       {
         "id": "he-verb-rare-hithpolel",
-        "title": "<bdi>Hithpolel（הִתְכּוֹנֵן）</bdi>",
+        "title": "<bdi>Hithpolel</bdi>（<bdi>הִתְכּוֹנֵן</bdi>）",
         "tables": [
           {
             "caption": "Hithpolel · 式",
@@ -29908,7 +29908,7 @@
               [
                 "Hishtaphel",
                 "<bdi>הִשְׁתַּחֲוָה</bdi>",
-                "与其它 binyan 无关，可能借自乌加里特语，类似 Hiphil 的致使式；多用于 <bdi>חוה「俯伏 / 敬拜」。未完成式 יִשְׁתַּחֲוֶה、命令式 הִשְׁתַּחֲוִי、不定式 הִשְׁתַּחֲווֹת、分词 מִשְׁתַּחֲוֶה</bdi>"
+                "与其它 binyan 无关，可能借自乌加里特语，类似 Hiphil 的致使式；多用于 <bdi>חוה</bdi>「俯伏 / 敬拜」。未完成式 <bdi>יִשְׁתַּחֲוֶה</bdi>、命令式 <bdi>הִשְׁתַּחֲוִי</bdi>、不定式 <bdi>הִשְׁתַּחֲווֹת</bdi>、分词 <bdi>מִשְׁתַּחֲוֶה</bdi>"
               ],
               [
                 "Palel",
@@ -29929,8 +29929,7 @@
       {
         "id": "he-verb-rare-notes",
         "title": "极少见 binyan",
-        "tables": [],
-        "notes": "<ul><li><b>Pilel</b>：与 Palel 同型（叠音第 3 辅音），仅元音不同；极罕见。</li><li><b>Pealal</b>：在 Piel 基础上同时叠音第 2、3 辅音，看起来像 5 个辅音；极罕见。</li><li><b>Pulal</b>：Pual 的变体，叠音第 3 辅音（元音变化）；多见于词根 <bdi>אמל</bdi>。</li><li><b>Qal 被动</b>：简单式的被动语态。形式与 Pual / Hophal 容易混，学者间也有分歧，但不影响理解。分词为 <bdi>קָטֻל 型：קָטֻל / קְטֻלָה / קְטֻלִים / קְטֻלוֹת（如 בָּרוּךְ「被祝福的」、אָרוּר</bdi>「被咒诅的」）。</li><li><b>Tiphil</b>（又称 Tiphal / Tiphel / Taphel）：用 <bdi>ת 前缀代替 Hiphil 的 ה</bdi>，表达致使语态；极罕见。</li></ul>"
+        "notes": "<ul><li><b>Pilel</b>：与 Palel 同型（叠音第 3 辅音），仅元音不同；极罕见。</li><li><b>Pealal</b>：在 Piel 基础上同时叠音第 2、3 辅音，看起来像 5 个辅音；极罕见。</li><li><b>Pulal</b>：Pual 的变体，叠音第 3 辅音（元音变化）；多见于词根 <bdi>אמל</bdi>。</li><li><b>Qal 被动</b>：简单式的被动语态。形式与 Pual / Hophal 容易混，学者间也有分歧，但不影响理解。分词为 <bdi>קָטֻל</bdi> 型：<bdi>קָטֻל / קְטֻלָה / קְטֻלִים / קְטֻלוֹת</bdi>（如 <bdi>בָּרוּךְ</bdi>「被祝福的」、<bdi>אָרוּר</bdi>「被咒诅的」）。</li><li><b>Tiphil</b>（又称 Tiphal / Tiphel / Taphel）：用 <bdi>ת</bdi> 前缀代替 <bdi>Hiphil</bdi> 的 <bdi>ה</bdi>，表达致使语态；极罕见。</li></ul>"
       }
     ]
   }

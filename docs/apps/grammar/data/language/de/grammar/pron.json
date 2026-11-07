@@ -78,7 +78,7 @@
             "lang": "de"
           }
         ],
-        "notes": "敬称 <bdi>Sie 单复数同形，永远大写，动词按复数变位（Sie sind）。第二人称单数 du / ihr 用于亲友、熟人，其余场合用 Sie</bdi>。物主代词见「物主代词」，反身形式见「反身代词」。"
+        "notes": "敬称 <bdi>Sie</bdi> 单复数同形，永远大写，动词按复数变位（<bdi>Sie sind</bdi>）。第二人称单数 <bdi>du / ihr</bdi> 用于亲友、熟人，其余场合用 <bdi>Sie</bdi>。物主代词见「物主代词」，反身形式见「反身代词」。"
       },
       {
         "id": "de-pron-3rd",
@@ -128,7 +128,7 @@
             "lang": "de"
           }
         ],
-        "notes": "第三人称单数按语法性区分（<bdi>er / sie / es），复数一律 sie。属格形式在现代德语里很少用，多被 von</bdi> + 与格代替。"
+        "notes": "第三人称单数按语法性区分（<bdi>er / sie / es</bdi>），复数一律 <bdi>sie</bdi>。属格形式在现代德语里很少用，多被 <bdi>von</bdi> + 与格代替。"
       },
       {
         "id": "de-pron-reflexive",
@@ -170,7 +170,7 @@
             "lang": "de"
           }
         ],
-        "notes": "反身代词没有主格。只有第三人称与敬称有独立形式（<bdi>sich）；第一、二人称与相应的宾语代词同形。有些动词固定要求与格反身代词（sich etwas vorstellen</bdi>）。"
+        "notes": "反身代词没有主格。只有第三人称与敬称有独立形式（<bdi>sich</bdi>）；第一、二人称与相应的宾语代词同形。有些动词固定要求与格反身代词（<bdi>sich etwas vorstellen</bdi>）。"
       },
       {
         "id": "de-pron-possessive",
@@ -305,7 +305,7 @@
             "exampleWord": "mein"
           },
           {
-            "caption": "示例：<bdi>euer（词尾前丢 e</bdi>）",
+            "caption": "示例：<bdi>euer</bdi>（词尾前丢 e）",
             "role": "example",
             "headers": [
               "",
@@ -349,7 +349,7 @@
             "exampleWord": "euer"
           }
         ],
-        "notes": "物主词干（<bdi>mein- / dein- / sein- / unser- / euer- / ihr- / Ihr-）按后面的名词变格，词尾与不定冠词 ein</bdi> 相同。两个例外：<strong><bdi>euer</bdi></strong> 在词尾前丢 <bdi>e（euer → eure / eurem / euren</bdi>）；<strong><bdi>unser</bdi></strong> 口语可缩作 <bdi>unsre。第三人称单数的 sein 与第三人称复数的 ihr 都按所有者性别/数选择，与后面的名词无关（seine Mutter</bdi> 可以是「他的母亲」或「她的母亲」取决于所有者）。",
+        "notes": "物主词干（<bdi>mein- / dein- / sein- / unser- / euer- / ihr- / Ihr-</bdi>）按后面的名词变格，词尾与不定冠词 <bdi>ein</bdi> 相同。两个例外：<strong><bdi>euer</bdi></strong> 在词尾前丢 e（<bdi>euer → eure / eurem / euren</bdi>）；<strong><bdi>unser</bdi></strong> 口语可缩作 <bdi>unsre</bdi>。第三人称单数的 <bdi>sein</bdi> 与第三人称复数的 <bdi>ihr</bdi> 都按所有者性别/数选择，与后面的名词无关（<bdi>seine Mutter</bdi> 可以是「他的母亲」或「她的母亲」取决于所有者）。",
         "anchorLabel": "其他代词（物主代词）"
       },
       {
@@ -483,7 +483,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<bdi>dieser / jener 按定冠词变格；der / die / das 作指示代词时也按定冠词变格，但重读。derselbe / dieselbe / dasselbe 表示「同一个」，前后两部分都变格（des + selben）；solcher 通常与形容词连用（solch ein schöner Tag / solch schöne Tage</bdi>），单独使用较少。"
+        "notes": "<bdi>dieser / jener</bdi> 按定冠词变格；<bdi>der / die / das</bdi> 作指示代词时也按定冠词变格，但重读。<bdi>derselbe / dieselbe / dasselbe</bdi> 表示「同一个」，前后两部分都变格（<bdi>des + selben</bdi>）；<bdi>solcher</bdi> 通常与形容词连用（<bdi>solch ein schöner Tag / solch schöne Tage</bdi>），单独使用较少。"
       },
       {
         "id": "de-pron-relative",
@@ -606,7 +606,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<bdi>der / die / das 是最常用的关系代词，变格同定冠词（属格 dessen / deren）；welcher 系列用于避免重复。was</bdi> 没有属格与与格，只用主格与宾格。"
+        "notes": "<bdi>der / die / das</bdi> 是最常用的关系代词，变格同定冠词（属格 <bdi>dessen / deren</bdi>）；<bdi>welcher</bdi> 系列用于避免重复。<bdi>was</bdi> 没有属格与与格，只用主格与宾格。"
       },
       {
         "id": "de-pron-interrogative",
@@ -650,7 +650,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<bdi>wer 的属格 wessen 问所属；was 与介词连用时常用 wo(r)- 形式（womit、worauf）。</bdi>"
+        "notes": "<bdi>wer</bdi> 的属格 <bdi>wessen</bdi> 问所属；<bdi>was</bdi> 与介词连用时常用 <bdi>wo(r)-</bdi> 形式（<bdi>womit</bdi>、<bdi>worauf</bdi>）。"
       },
       {
         "id": "de-pron-indefinite",
@@ -709,7 +709,7 @@
             "lang": "de"
           }
         ],
-        "notes": "<bdi>man 作主语时动词用第三人称单数；jeder / alle</bdi> 等有性数格变化。"
+        "notes": "<bdi>man</bdi> 作主语时动词用第三人称单数；<bdi>jeder / alle</bdi> 等有性数格变化。"
       }
     ]
   }

@@ -75,7 +75,7 @@
             ]
           }
         ],
-        "notes": "法语名词的性别需按词记忆：以 -<bdi>tion / -té / -ette / -elle / -ance / -ence 结尾多为阴性，以 -ment / -age / -isme / -eau</bdi> 结尾多为阳性。"
+        "notes": "法语名词的性别需按词记忆：以 -<bdi>tion / -té / -ette / -elle / -ance / -ence</bdi> 结尾多为阴性，以 <bdi>-ment / -age / -isme / -eau</bdi> 结尾多为阳性。"
       },
       {
         "id": "fr-noun-plural-regular",
@@ -175,7 +175,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "绝大多数名词在单数形式后加 -<bdi>s；-s</bdi> 本身不发音。"
+        "notes": "绝大多数名词在单数形式后加 -s；-s 本身不发音。"
       },
       {
         "id": "fr-noun-plural-al",
@@ -242,11 +242,11 @@
               ],
               [
                 "例外",
-                "<bdi>bal / carnaval / festival / récital 等 + -s</bdi>"
+                "<bdi>bal / carnaval / festival / récital</bdi> 等 + -s"
               ],
               [
                 "读音",
-                "<bdi>-aux 读 [o]</bdi>"
+                "<bdi>-aux</bdi> 读 [o]"
               ]
             ],
             "lang": "fr"
@@ -275,7 +275,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "例外：<bdi>bal / carnaval / festival / récital 等加 -s（bals</bdi>）。"
+        "notes": "例外：<bdi>bal / carnaval / festival / récital</bdi> 等加 -s（<bdi>bals</bdi>）。"
       },
       {
         "id": "fr-noun-plural-eau",
@@ -375,7 +375,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "例外：<bdi>pneu / landau / bleu 加 -s（pneus</bdi>）。"
+        "notes": "例外：<bdi>pneu / landau / bleu</bdi> 加 -s（<bdi>pneus</bdi>）。"
       },
       {
         "id": "fr-noun-plural-invariable",
@@ -470,7 +470,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "以 -<bdi>s / -x / -z 结尾的名词复数形式不变，靠限定词区分（le bras / les bras</bdi>）。"
+        "notes": "以 -<bdi>s / -x / -z</bdi> 结尾的名词复数形式不变，靠限定词区分（<bdi>le bras / les bras</bdi>）。"
       },
       {
         "id": "fr-noun-irregular",
@@ -508,7 +508,7 @@
               [
                 "<bdi>bijou / caillou / chou / genou / hibou / joujou / pou</bdi>",
                 "<bdi>…-x</bdi>",
-                "以 -<bdi>ou 结尾但加 -x</bdi> 的七个词"
+                "以 -<bdi>ou</bdi> 结尾但加 -x 的七个词"
               ],
               [
                 "<bdi>monsieur / madame / mademoiselle</bdi>",

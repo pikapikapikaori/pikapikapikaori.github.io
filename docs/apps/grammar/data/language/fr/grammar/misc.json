@@ -32,7 +32,7 @@
             ]
           }
         ],
-        "notes": "<bdi>le / la / les 在元音或哑音 h 前省音（l'ami</bdi>）。与介词缩合的形式见「缩合冠词」。"
+        "notes": "<bdi>le / la / les</bdi> 在元音或哑音 h 前省音（<bdi>l'ami</bdi>）。与介词缩合的形式见「缩合冠词」。"
       },
       {
         "id": "fr-article-indefinite",
@@ -78,7 +78,7 @@
             ]
           }
         ],
-        "notes": "否定句里不定冠词与部分冠词通常变为 <bdi>de（Je n'ai pas de pain</bdi>）。"
+        "notes": "否定句里不定冠词与部分冠词通常变为 <bdi>de</bdi>（<bdi>Je n'ai pas de pain</bdi>）。"
       },
       {
         "id": "fr-article-contraction",
@@ -126,12 +126,12 @@
               [
                 "<bdi>de + un / une / des</bdi>",
                 "不缩合（不定冠词）",
-                "<bdi>de un → d'un（省音），une / des</bdi> 不变"
+                "<bdi>de un → d'un</bdi>（省音），<bdi>une / des</bdi> 不变"
               ]
             ]
           }
         ],
-        "notes": "只有阳性单数 <bdi>le 与复数 les 才与 de / à 缩合；阴性 la 与省音形式 l</bdi>' 不缩合。"
+        "notes": "只有阳性单数 <bdi>le</bdi> 与复数 <bdi>les</bdi> 才与 <bdi>de / à</bdi> 缩合；阴性 <bdi>la</bdi> 与省音形式 l' 不缩合。"
       }
     ]
   },
@@ -156,44 +156,44 @@
               [
                 "<bdi>é</bdi>",
                 "<bdi>accent aigu</bdi>（闭音符）",
-                "只出现在 <bdi>e 上，表示 [e</bdi>]",
-                "<bdi>été、parler</bdi>"
+                "只出现在 e 上，表示 [e]",
+                "<bdi>été</bdi>、<bdi>parler</bdi>"
               ],
               [
                 "<bdi>è / ê</bdi>",
                 "<bdi>accent grave / circonflexe</bdi>",
-                "表示 [ɛ]；<bdi>ê 常来自历史上消失的 s</bdi>",
-                "<bdi>père、forêt（forest）</bdi>"
+                "表示 [ɛ]；<bdi>ê</bdi> 常来自历史上消失的 s",
+                "<bdi>père</bdi>、<bdi>forêt</bdi>（<bdi>forest</bdi>）"
               ],
               [
                 "<bdi>à / ù</bdi>",
                 "<bdi>accent grave</bdi>",
                 "只用来区分同形词",
-                "<bdi>à（介词）、où</bdi>（哪里）"
+                "<bdi>à</bdi>（介词）、<bdi>où</bdi>（哪里）"
               ],
               [
                 "<bdi>â / î / ô / û</bdi>",
                 "<bdi>accent circonflexe</bdi>",
                 "标记历史上的长音或消失的字母",
-                "<bdi>âme、île、hôtel、dû</bdi>"
+                "<bdi>âme</bdi>、<bdi>île</bdi>、<bdi>hôtel</bdi>、<bdi>dû</bdi>"
               ],
               [
                 "<bdi>ë / ï / ü</bdi>",
                 "<bdi>tréma</bdi>（分音符）",
                 "表示与前一元音分开读，不构成双元音",
-                "<bdi>Noël、maïs、aiguë</bdi>"
+                "<bdi>Noël</bdi>、<bdi>maïs</bdi>、<bdi>aiguë</bdi>"
               ],
               [
                 "<bdi>ç</bdi>",
                 "<bdi>cédille</bdi>（软音符）",
-                "让 <bdi>c 在 a / o / u 前读 [s</bdi>]",
-                "<bdi>français、reçu、leçon</bdi>"
+                "让 c 在 <bdi>a / o / u</bdi> 前读 [s]",
+                "<bdi>français</bdi>、<bdi>reçu</bdi>、<bdi>leçon</bdi>"
               ],
               [
                 "<bdi>œ</bdi>",
                 "<bdi>ligature</bdi>",
                 "<bdi>o + e</bdi> 的合字",
-                "<bdi>cœur、œuf、sœur</bdi>"
+                "<bdi>cœur</bdi>、<bdi>œuf</bdi>、<bdi>sœur</bdi>"
               ]
             ],
             "lang": "fr"
@@ -209,7 +209,7 @@
             "rows": [
               [
                 "<bdi>à</bdi>（介词）",
-                "<bdi>a（avoir</bdi> 的第三人称单数）",
+                "a（<bdi>avoir</bdi> 的第三人称单数）",
                 "<bdi>Il a à faire.</bdi>"
               ],
               [
@@ -229,7 +229,7 @@
               ],
               [
                 "<bdi>du</bdi>（部分冠词）",
-                "<bdi>dû（devoir</bdi> 的过去分词）",
+                "<bdi>dû</bdi>（<bdi>devoir</bdi> 的过去分词）",
                 "<bdi>du pain / j'ai dû partir</bdi>"
               ],
               [
@@ -257,9 +257,9 @@
             ],
             "rows": [
               [
-                "<bdi>le / la + 元音或哑音 h</bdi>",
+                "<bdi>le / la +</bdi> 元音或哑音 h",
                 "<bdi>l'</bdi>",
-                "<bdi>l'ami、l'heure</bdi>"
+                "<bdi>l'ami</bdi>、<bdi>l'heure</bdi>"
               ],
               [
                 "<bdi>je</bdi> + 元音",
@@ -305,7 +305,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "哑音 <bdi>h（heure、homme、histoire）要省音；嘘音 h（héros、hasard、hibou）不省音：le héros。数字 onze / onzième 前也不省音（le onze</bdi>）。"
+        "notes": "哑音 h（<bdi>heure</bdi>、<bdi>homme</bdi>、<bdi>histoire</bdi>）要省音；嘘音 h（<bdi>héros</bdi>、<bdi>hasard</bdi>、<bdi>hibou</bdi>）不省音：<bdi>le héros</bdi>。数字 <bdi>onze / onzième</bdi> 前也不省音（<bdi>le onze</bdi>）。"
       },
       {
         "id": "fr-orthography-hyphen",
@@ -332,12 +332,12 @@
               ],
               [
                 "复合词",
-                "<bdi>grand-père、porte-monnaie、arc-en-ciel</bdi>",
+                "<bdi>grand-père</bdi>、<bdi>porte-monnaie</bdi>、<bdi>arc-en-ciel</bdi>",
                 "固定复合词"
               ],
               [
                 "数词",
-                "<bdi>dix-sept、vingt et un、quatre-vingt-un</bdi>",
+                "<bdi>dix-sept</bdi>、<bdi>vingt et un</bdi>、<bdi>quatre-vingt-un</bdi>",
                 "<bdi>et</bdi> 前后不加连字符"
               ],
               [
@@ -347,7 +347,7 @@
               ],
               [
                 "「那里 / 这里」",
-                "<bdi>là-bas、ici-là</bdi>",
+                "<bdi>là-bas</bdi>、<bdi>ici-là</bdi>",
                 ""
               ]
             ],
@@ -381,7 +381,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "1990 年正字法改革建议把很多复合词用连字符连接（如 <bdi>porte-monnaie 不变，但 vingt-et-un</bdi> 一类写法仍有争议）；写作时以词典为准。"
+        "notes": "1990 年正字法改革建议把很多复合词用连字符连接（如 <bdi>porte-monnaie</bdi> 不变，但 <bdi>vingt-et-un</bdi> 一类写法仍有争议）；写作时以词典为准。"
       },
       {
         "id": "fr-orthography-capital",
@@ -404,27 +404,27 @@
               [
                 "专有名词",
                 "要",
-                "<bdi>Marie、Paris</bdi>"
+                "<bdi>Marie</bdi>、<bdi>Paris</bdi>"
               ],
               [
                 "国名 / 地区作名词",
                 "要",
-                "<bdi>la France、la Bretagne</bdi>"
+                "<bdi>la France</bdi>、<bdi>la Bretagne</bdi>"
               ],
               [
                 "国民（人）作名词",
                 "要",
-                "<bdi>un Français、une Française</bdi>"
+                "<bdi>un Français</bdi>、<bdi>une Française</bdi>"
               ],
               [
                 "语言",
                 "不要",
-                "<bdi>le français、l'anglais</bdi>"
+                "<bdi>le français</bdi>、<bdi>l'anglais</bdi>"
               ],
               [
                 "星期 / 月份",
                 "不要",
-                "<bdi>lundi、janvier</bdi>"
+                "<bdi>lundi</bdi>、<bdi>janvier</bdi>"
               ],
               [
                 "形容词化的国名",
@@ -559,17 +559,17 @@
               [
                 "必须联诵",
                 "限定词 + 名词、代词 + 动词、形容词 + 名词、单音节副词 / 介词 + 词、数词",
-                "<bdi>les_amis、nous_avons、petit_enfant、très_important、deux_ans</bdi>"
+                "<bdi>les_amis</bdi>、<bdi>nous_avons</bdi>、<bdi>petit_enfant</bdi>、<bdi>très_important</bdi>、<bdi>deux_ans</bdi>"
               ],
               [
                 "禁止联诵",
-                "<bdi>et 之后、嘘音 h 开头的词、数字 un</bdi> 与名词之间（部分用法）、词组间停顿处",
-                "<bdi>et_#puis、les_#héros、un_#chat</bdi>（部分变体）"
+                "<bdi>et</bdi> 之后、嘘音 h 开头的词、数字 <bdi>un</bdi> 与名词之间（部分用法）、词组间停顿处",
+                "<bdi>et_#puis</bdi>、<bdi>les_#héros</bdi>、<bdi>un_#chat</bdi>（部分变体）"
               ],
               [
                 "可选联诵",
                 "名词 + 形容词、动词 + 补语、复数名词之间",
-                "<bdi>des livres_(anciens)、ils parlent_(à moi)</bdi>"
+                "<bdi>des livres_(anciens)</bdi>、<bdi>ils parlent_(à moi)</bdi>"
               ]
             ],
             "lang": "fr"
@@ -593,7 +593,7 @@
               [
                 "<bdi>-s / -x</bdi>",
                 "<bdi>[z]</bdi>",
-                "<bdi>les amis [le-za-mi]、deux ans [dø-zɑ̃]</bdi>"
+                "<bdi>les amis [le-za-mi]</bdi>、<bdi>deux ans [dø-zɑ̃]</bdi>"
               ],
               [
                 "<bdi>-d</bdi>",
@@ -608,10 +608,10 @@
               [
                 "-<bdi>n / -m</bdi>（鼻化元音）",
                 "去鼻化 + [<bdi>n</bdi>]",
-                "<bdi>bon ami [bɔ-n‿a-mi]、un homme [œ̃-nɔm]</bdi>"
+                "<bdi>bon ami [bɔ-n‿a-mi]</bdi>、<bdi>un homme [œ̃-nɔm]</bdi>"
               ],
               [
-                "-<bdi>t（在 et</bdi> 以外）",
+                "-t（在 <bdi>et</bdi> 以外）",
                 "<bdi>[t]</bdi>",
                 "<bdi>petit enfant [pə-ti-tɑ̃-fɑ̃]</bdi>"
               ],
@@ -624,7 +624,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "鼻化元音（<bdi>in / an / on）在联诵时失去鼻化，后接 [n]：un / œ̃/ → /œ-n</bdi>/。"
+        "notes": "鼻化元音（<bdi>in / an / on</bdi>）在联诵时失去鼻化，后接 [n]：<bdi>un / œ̃/ → /œ-n</bdi>/。"
       },
       {
         "id": "fr-liaison-examples",
@@ -693,7 +693,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "禁止联诵的固定组合：<bdi>et + 任何词（et_un）、les héros（嘘音 h</bdi>）、以及名词与后置形容词之间一般是可选联诵。"
+        "notes": "禁止联诵的固定组合：<bdi>et +</bdi> 任何词（<bdi>et_un</bdi>）、<bdi>les héros</bdi>（嘘音 h）、以及名词与后置形容词之间一般是可选联诵。"
       }
     ]
   }

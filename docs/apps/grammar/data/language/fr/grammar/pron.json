@@ -81,7 +81,7 @@
             ]
           }
         ],
-        "notes": "主语代词不可省略（与意大利语、西班牙语不同）。宾语代词置于动词前（肯定命令式除外：<bdi>Regarde-le !），me / te 在元音或哑音 h 前省音（m'aime、t'appelle）。重读形式用于介词后（avec moi）、强调（Moi, je…）与省略句（Qui ? — Lui</bdi>.）。"
+        "notes": "主语代词不可省略（与意大利语、西班牙语不同）。宾语代词置于动词前（肯定命令式除外：<bdi>Regarde-le !</bdi>），<bdi>me / te</bdi> 在元音或哑音 h 前省音（<bdi>m'aime</bdi>、<bdi>t'appelle</bdi>）。重读形式用于介词后（<bdi>avec moi</bdi>）、强调（<bdi>Moi, je…</bdi>）与省略句（<bdi>Qui ? — Lui</bdi>.）。"
       },
       {
         "id": "fr-pron-3rd",
@@ -137,7 +137,7 @@
             ]
           }
         ],
-        "notes": "<bdi>il 也可作无人称主语（il pleut）。直接宾语 le / la 在元音或哑音 h 前省音（l'homme）；间接宾语与自反不分性别（lui / leur / se）。重读形式用于介词后与强调（avec elle、Eux, ils savent.）。</bdi>"
+        "notes": "<bdi>il</bdi> 也可作无人称主语（<bdi>il pleut</bdi>）。直接宾语 <bdi>le / la</bdi> 在元音或哑音 h 前省音（<bdi>l'homme</bdi>）；间接宾语与自反不分性别（<bdi>lui / leur / se</bdi>）。重读形式用于介词后与强调（<bdi>avec elle</bdi>、<bdi>Eux, ils savent.</bdi>）。"
       },
       {
         "id": "fr-pron-possessive",
@@ -247,7 +247,7 @@
             ]
           }
         ],
-        "notes": "物主形容词按<strong>被限定名词</strong>的性数变化，不按所有者：<bdi>sa mère 可以是「他的母亲」或「她的母亲」。复数形式（mes / tes / ses / nos / vos / leurs</bdi>）不分性别。",
+        "notes": "物主形容词按<strong>被限定名词</strong>的性数变化，不按所有者：<bdi>sa mère</bdi> 可以是「他的母亲」或「她的母亲」。复数形式（<bdi>mes / tes / ses / nos / vos / leurs</bdi>）不分性别。",
         "inflect": "decl"
       },
       {
@@ -316,11 +316,11 @@
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>ce 在元音或哑音 h 前变 cet（cet homme）；指示代词 celui 系列常带 -ci / -là 区分远近（celui-ci / celui-là）。</bdi>"
+        "notes": "<bdi>ce</bdi> 在元音或哑音 h 前变 <bdi>cet</bdi>（<bdi>cet homme</bdi>）；指示代词 <bdi>celui</bdi> 系列常带 <bdi>-ci / -là</bdi> 区分远近（<bdi>celui-ci / celui-là</bdi>）。"
       },
       {
         "id": "fr-pron-adverbial",
-        "title": "副代词 <bdi>en 与 y</bdi>",
+        "title": "副代词 <bdi>en</bdi> 与 y",
         "tables": [
           {
             "caption": "<bdi>en / y</bdi>",
@@ -355,7 +355,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "注意：代替「<bdi>à + 人」用间接宾语代词（lui / leur），不用 y</bdi>。位置与其它宾语代词相同，置于动词前。"
+        "notes": "注意：代替「<bdi>à +</bdi> 人」用间接宾语代词（<bdi>lui / leur</bdi>），不用 y。位置与其它宾语代词相同，置于动词前。"
       },
       {
         "id": "fr-pron-relative",
@@ -408,7 +408,7 @@
             ]
           }
         ],
-        "notes": "<bdi>que 在从句中作宾语，遇元音省音（l'homme qu'il voit）；dont = de + 先行词；où</bdi> 兼指时间与地点。"
+        "notes": "<bdi>que</bdi> 在从句中作宾语，遇元音省音（<bdi>l'homme qu'il voit</bdi>）；<bdi>dont = de +</bdi> 先行词；<bdi>où</bdi> 兼指时间与地点。"
       },
       {
         "id": "fr-pron-interrogative",
@@ -452,7 +452,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>qui 作主语时动词用第三人称单数；口语常用「qui est-ce qui / qu'est-ce que</bdi>」结构。"
+        "notes": "<bdi>qui</bdi> 作主语时动词用第三人称单数；口语常用「<bdi>qui est-ce qui / qu'est-ce que</bdi>」结构。"
       },
       {
         "id": "fr-pron-indefinite",
@@ -511,7 +511,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>personne / rien / aucun 作主语时与 ne 连用；作宾语时 ne</bdi> 在动词前、代词在后。"
+        "notes": "<bdi>personne / rien / aucun</bdi> 作主语时与 <bdi>ne</bdi> 连用；作宾语时 <bdi>ne</bdi> 在动词前、代词在后。"
       }
     ]
   }

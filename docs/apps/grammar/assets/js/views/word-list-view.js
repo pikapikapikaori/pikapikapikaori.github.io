@@ -1,14 +1,13 @@
 /** 生词列表（卡片 + 分页 + 筛选 + 排序） */
 
-import { h, replace, delegate } from '../utils/dom.js'
+import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import {
-    queryWords, SORT_FIELDS, FILTER_EMPTY, SEARCH_SCOPE,
-    submitReview
+    queryWords, SORT_FIELDS, FILTER_EMPTY, SEARCH_SCOPE
 } from '../services/word-service.js'
 import { listByLanguage, deleteWord } from '../store/word-store.js'
-import { POS_LIST, PAGE_SIZE_OPTIONS } from '../config/config.js'
+import { PAGE_SIZE_OPTIONS } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { openCardOverlay, closeCardOverlay } from '../components/card-overlay.js'
 import { openAnalyzeModal } from '../components/analyze-modal.js'
@@ -117,7 +116,7 @@ export default {
             return getParadigmTemplate(grammarDoc, pos)
         }
 
-        /** 某个词的词干标签（来自它的变位 / 变格类型） */
+        /** 某个词的词干标签（来自它的变位、变格类型） */
         function partLabelsFor(word) {
             const parts = getDeriveParts(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef)
             const out = {}

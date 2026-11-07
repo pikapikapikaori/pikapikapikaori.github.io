@@ -2,10 +2,7 @@ import {
     STORE_WORDS,
     put, get, remove, getAllByIndex, getOneByIndex, removeByIndex
 } from './db.js'
-import {
-    createWord, normalizeParadigm, normalizeStems, normalizeAttributes,
-    isParadigmEmpty, mergeStems
-} from '../models/word.js'
+import { createWord, mergeWordContent, normalizeParadigm } from '../models/word.js'
 import { nowIso, nextReviewFrom, clampMastery } from '../utils/date.js'
 import { foldBreve } from '../utils/breve.js'
 
@@ -59,106 +56,10 @@ export async function addOrMerge(userId, payload) {
 }
 
 function mergeWord(existing, incoming) {
-    const merged = { ...existing }
-
-    if (incoming.inflectionType) {
-        const inc = incoming.inflectionType
-        const hasInc = (inc.label && inc.label.trim()) || inc.grammarRef
-        if (hasInc) merged.inflectionType = { ...inc }
-    }
-
-    merged.paradigm = mergeParadigm(existing.paradigm, incoming.paradigm)
-
-    // 词干：已有值优先保留，为空时采用新来源的值
-    merged.stems = mergeStems(existing.stems, incoming.stems)
-
-    // 属性字段（语法性、自他…）：已有值优先，缺的用新来源补
-    merged.attributes = normalizeAttributes({
-        ...(incoming.attributes || {}),
-        ...(existing.attributes || {}),
-    })
-
-    merged.inflections = appendUnique(existing.inflections, incoming.inflections)
-    merged.meanings    = appendUnique(existing.meanings, incoming.meanings)
-    merged.collocations= appendUnique(existing.collocations, incoming.collocations)
-    merged.examples    = appendUnique(existing.examples, incoming.examples)
-
-    merged.derivatives = uniqArray([...(existing.derivatives || []), ...(incoming.derivatives || [])])
-    merged.tags        = uniqArray([...(existing.tags || []), ...(incoming.tags || [])])
-
-    if (incoming.notes && !existing.notes) merged.notes = incoming.notes
-
+    const merged = mergeWordContent(existing, incoming, { replaceInflectionType: true })
     merged.encounterCount = (existing.encounterCount || 0) + 1
     merged.updatedAt = nowIso()
     return merged
-}
-
-/** 表格合并是格子级别的：非空格子用 incoming 覆盖 */
-export function mergeParadigm(a, b) {
-    const A = normalizeParadigm(a)
-    const B = normalizeParadigm(b)
-    if (isParadigmEmpty(A)) return B
-    if (isParadigmEmpty(B)) return A
-
-    const out = {}
-    const tableKeys = new Set([...Object.keys(A), ...Object.keys(B)])
-    for (const tkey of tableKeys) {
-        const ta = A[tkey] || {}
-        const tb = B[tkey] || {}
-        const rows = {}
-        const rowKeys = new Set([...Object.keys(ta), ...Object.keys(tb)])
-        for (const rkey of rowKeys) {
-            const ca = ta[rkey] || {}
-            const cb = tb[rkey] || {}
-            const merged = { ...ca }
-            for (const [ck, v] of Object.entries(cb)) {
-                const s = String(v ?? '').trim()
-                if (s) merged[ck] = s
-            }
-            if (Object.keys(merged).length) rows[rkey] = merged
-        }
-        if (Object.keys(rows).length) out[tkey] = rows
-    }
-    return out
-}
-
-function appendUnique(base = [], extra = []) {
-    const out = [...base]
-    for (const item of extra || []) {
-        if (!item) continue
-        const dup = out.some((x) => entryEquals(x, item))
-        if (!dup) out.push({ ...item })
-    }
-    return out
-}
-
-function entryEquals(a, b) {
-    if (!a || !b) return false
-    return entryKey(a) === entryKey(b)
-}
-
-function entryKey(e) {
-    return [
-        e.text ?? '',
-        e.form ?? '',
-        e.label ?? '',
-        e.group ?? '',
-        e.translation ?? '',
-        e.citation ?? '',
-        e.source ?? ''
-    ].join('\u0001')
-}
-
-function uniqArray(arr) {
-    const seen = new Set()
-    const out = []
-    for (const x of arr) {
-        const s = String(x ?? '').trim()
-        if (!s || seen.has(s)) continue
-        seen.add(s)
-        out.push(s)
-    }
-    return out
 }
 
 export async function saveWord(word) {

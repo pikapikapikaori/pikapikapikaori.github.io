@@ -13,7 +13,7 @@ export function hasAnalyzer(langCode) {
 }
 
 /**
- * 按清单动态 import；缺文件 / 断网 / 没有导出 `analyzeWord` 的源直接跳过（与生词表单加载外部源同样的容错）
+ * 按清单动态 import；缺文件、断网、没有导出 `analyzeWord` 的源直接跳过（与生词表单加载外部源同样的容错）
  */
 export async function loadAnalyzers(langCode) {
     const loaded = await Promise.all(sourcesFor(langCode).map(async (src) => {
@@ -33,7 +33,7 @@ export async function loadAnalyzers(langCode) {
 }
 
 /**
- * 并发查全部源。查询失败的源不产出条目，只进 `errors`；每条 entry 都盖上 `sourceId` / `sourceLabel`。
+ * 并发查全部源。查询失败的源不产出条目，只进 `errors`；每条 entry 都带上 `sourceId` 与 `sourceLabel`。
  * @returns {Promise<{ entries: object[], errors: { source, error }[] }>}
  */
 export async function analyze({ word, langCode, sources = [] }) {

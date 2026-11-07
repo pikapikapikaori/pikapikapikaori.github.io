@@ -1,4 +1,4 @@
-/** 起始页：选择已有用户 / 新建空用户 / 导入 JSON */
+/** 起始页：选择已有用户、新建空用户、导入 JSON */
 
 import { h, replace } from '../utils/dom.js'
 import { listUsers, getUser, deleteUser } from '../store/user-store.js'
@@ -51,7 +51,6 @@ const welcomeView = {
             h('p', { class: 'welcome__sub' }, '所有数据都保存在本地浏览器。')
         )
 
-        /* ---------- 操作按钮 ---------- */
         const actions = h('div', { class: 'welcome__actions' },
             h('button', {
                 class: 'btn btn--primary btn--lg',
@@ -66,7 +65,6 @@ const welcomeView = {
         )
         panel.appendChild(actions)
 
-        /* ---------- 用户列表 ---------- */
         if (users.length) {
             const list = h('div', { class: 'user-list' })
             for (const u of users) {
@@ -79,8 +77,6 @@ const welcomeView = {
         }
 
         replace(root, h('div', { class: 'welcome' }, panel))
-
-        /* ---------- 内部函数 ---------- */
 
         function renderUserItem(user) {
             const meta = h('div', { class: 'user-item__meta' },

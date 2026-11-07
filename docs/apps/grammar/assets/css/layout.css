@@ -34,7 +34,6 @@
     gap: var(--sp-1);
 }
 
-/* ---------- 页面面包屑（位于 app-main 顶部） ---------- */
 .page-breadcrumbs {
     display: flex;
     align-items: center;
@@ -158,12 +157,6 @@ h1.page-head__title {
     min-height: 38px;
 }
 
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: var(--sp-3);
-}
-
 .pagination {
     display: flex;
     align-items: center;
@@ -173,40 +166,16 @@ h1.page-head__title {
     flex-wrap: wrap;
 }
 
-.fab-root {
-    position: fixed;
-    right: var(--sp-4);
-    bottom: var(--sp-4);
-    z-index: var(--z-fab);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-    pointer-events: none;
-}
-
-.fab-root>* {
-    pointer-events: auto;
-}
-
 @media (max-width: 720px) {
     .app-header {
         padding: 0 var(--sp-4);
     }
 
-    .app-header__crumbs {
-        display: none;
-    }
-
     .app-main {
         padding: var(--sp-4) var(--sp-4) var(--sp-6);
     }
-
-    .grid-cards {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* ---------- 启动遮罩 ---------- */
 .boot-loader {
     position: fixed;
     inset: 0;

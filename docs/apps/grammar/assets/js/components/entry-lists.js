@@ -24,7 +24,7 @@ export function meaningRefLabel(ref, meanings, activeSource = 'manual') {
         const label = `${order}. ${current}`
         return source === (activeSource || 'manual') ? label : `${sourceLabel(source)} ${label}`
     }
-    // 回查不到（含义被删 / 改名）时只给文本，宁可没有编号也不指错
+    // 回查不到（含义被删、改名）时只给文本，宁可没有编号也不指错
     return text
 }
 

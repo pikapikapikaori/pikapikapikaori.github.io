@@ -36,7 +36,6 @@ export default {
 
         let settings = await getSettings(userId)
 
-        /* ---------- 头部 ---------- */
         const headSub = h('div', { class: 'page-head__sub' }, `当前用户：${user.name}`)
         const head = h('div', { class: 'page-head page-head--display' },
             h('div', {},
@@ -48,14 +47,12 @@ export default {
         const container = h('div', {})
         replace(main, head, container)
 
-        /* ---------- 通用更新函数 ---------- */
         async function patchSettings(patch) {
             settings = await saveSettings(userId, patch)
             setSettings(settings)
             return settings
         }
 
-        /* ---------- 用户名 ---------- */
         const nameInput = h('input', {
             class: 'input',
             style: { width: '200px' },
@@ -86,7 +83,6 @@ export default {
             }
         }
 
-        /* ---------- 外观 ---------- */
         container.appendChild(buildSection('外观',
             row('主题', 'auto / light / dark',
                 selectControl(
@@ -110,7 +106,6 @@ export default {
             )
         ))
 
-        /* ---------- 列表 ---------- */
         container.appendChild(buildSection('列表与复习',
             row('每页卡片数', '20 - 50',
                 selectControl(
@@ -128,7 +123,6 @@ export default {
             )
         ))
 
-        /* ---------- 用户设置 ---------- */
         container.appendChild(buildSection('用户设置',
             row('用户名', '不可含空格；改完失焦即保存', nameInput),
             row('导出 JSON', null,
@@ -156,7 +150,6 @@ export default {
             )
         ))
 
-        /* ---------- 语法数据 ---------- */
         container.appendChild(buildSection('语法数据',
             row('校验语法 JSON',
                 '检查全部语言的结构与词形生成规则',
@@ -167,13 +160,10 @@ export default {
             )
         ))
 
-        /* ---------- 关于 ---------- */
         container.appendChild(buildSection('关于',
             row('数据存储', '只存在本机浏览器，不联网上传', null),
             row('版本', 'v1', null)
         ))
-
-        /* ---------- 内部实现 ---------- */
 
         function buildSection(title, ...rows) {
             return h('section', { class: 'settings-section' },
@@ -204,8 +194,6 @@ export default {
                 selected: String(value) === String(o.value)
             }, o.label)))
         }
-
-        /* ---------- 字体 ---------- */
 
         function fontControl() {
             /** 下拉退回实际生效的选项：取消选择或字体加载失败时用 */
@@ -268,8 +256,6 @@ export default {
 
             return h('span', { class: 'settings-row__inline' }, modeSelect, fileInput)
         }
-
-        /* ---------- 数据管理实现 ---------- */
 
         async function doExport() {
             try {

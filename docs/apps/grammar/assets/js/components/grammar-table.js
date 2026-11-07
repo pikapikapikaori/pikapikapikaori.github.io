@@ -25,7 +25,7 @@ function plainText(value) {
     return String(value ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
 }
 
-/** 语法表格：caption / headers / rows / lang（单元格语言），空/— 的行与列整块隐藏 */
+/** 语法表格：caption、headers、rows、lang（单元格语言），空/— 的行与列整块隐藏 */
 export function createGrammarTable(spec) {
     if (!spec || !Array.isArray(spec.headers) || !Array.isArray(spec.rows)) {
         return null
@@ -33,7 +33,7 @@ export function createGrammarTable(spec) {
     const lang = spec.lang || null
     const headers = spec.headers.map((x) => String(x ?? ''))
 
-    // 表名与上方的条目标题 / 首列表头是同一个词时不再重复
+    // 表名与上方的条目标题、首列表头是同一个词时不再重复
     const captionText = plainText(spec.caption)
     const hideCaption = !captionText
         || captionText === plainText(spec.ownerTitle)
@@ -51,7 +51,7 @@ export function createGrammarTable(spec) {
     // 首列不是短行标题（如「形式」「用法」）时，允许它折行并占一份宽度
     const wrapFirst = rows.some((row) => plainText(cellText(row[0])).length > 10)
 
-    // 词形列平分剩余宽度：两列词形（如 ego / tū）时等分，避免短列被挤成一条缝。
+    // 词形列平分剩余宽度：两列词形（如 ego、tū）时等分，避免短列被挤成一条缝。
     // 列更多时交给浏览器按内容分配，说明类长文本才有地方，必要时整表横向滚动。
     const formIndexes = keepCol.map((keep, index) => (keep && index > 0 ? index : -1))
         .filter((index) => index > 0)

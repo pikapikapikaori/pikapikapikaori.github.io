@@ -268,7 +268,7 @@
             "lang": "la"
           }
         ],
-        "notes": "阳性 / 中性按第二变格，阴性按第一变格。属格单数为 -<bdi>ī / -ae / -ī，与格单数 -ō / -ae / -ō</bdi>。"
+        "notes": "阳性 / 中性按第二变格，阴性按第一变格。属格单数为 -<bdi>ī / -ae / -ī</bdi>，与格单数 <bdi>-ō / -ae / -ō</bdi>。"
       },
       {
         "id": "la-adj-3rd-3term",
@@ -538,7 +538,7 @@
             "lang": "la"
           }
         ],
-        "notes": "阳性主格把词干末的 <bdi>r 变成 -er，阴性 -is、中性 -e；其余同二尾型。同类有 celer（词干 celer-）、pulcher（词干 pulchr</bdi>-）。"
+        "notes": "阳性主格把词干末的 r 变成 <bdi>-er</bdi>，阴性 <bdi>-is</bdi>、中性 -e；其余同二尾型。同类有 <bdi>celer</bdi>（词干 <bdi>celer-</bdi>）、<bdi>pulcher</bdi>（词干 <bdi>pulchr</bdi>-）。"
       },
       {
         "id": "la-adj-3rd",
@@ -805,7 +805,7 @@
             "lang": "la"
           }
         ],
-        "notes": "二尾（<bdi>fortis, -e）：阳 / 阴性同形，中性 -e。三尾（ācer, ācris, ācre）与一尾（fēlīx</bdi>）在此基础上替换词干。"
+        "notes": "二尾（<bdi>fortis, -e</bdi>）：阳 / 阴性同形，中性 -e。三尾（<bdi>ācer, ācris, ācre</bdi>）与一尾（<bdi>fēlīx</bdi>）在此基础上替换词干。"
       },
       {
         "id": "la-adj-3rd-1term",
@@ -1094,7 +1094,7 @@
             "lang": "la"
           }
         ],
-        "notes": "阳 / 阴 / 中性主格同形，由词干末辅音 + <bdi>s 融合而成（c / g → x，t / d → s）；词干从属格去 -is 得到。同类有 audāx（audāc-）、pār（par</bdi>-）。"
+        "notes": "阳 / 阴 / 中性主格同形，由词干末辅音 + s 融合而成（<bdi>c / g → x</bdi>，<bdi>t / d → s</bdi>）；词干从属格去 <bdi>-is</bdi> 得到。同类有 <bdi>audāx</bdi>（<bdi>audāc-</bdi>）、<bdi>pār</bdi>（<bdi>par</bdi>-）。"
       },
       {
         "id": "la-adj-comparison",
@@ -1179,7 +1179,7 @@
             ]
           }
         ],
-        "notes": "比较级按第三变格变格；最高级按第一二变格变格（-<bdi>us, -a, -um）。不规则：bonus → melior → optimus，malus → pēior → pessimus，magnus → maior → maximus，parvus → minor → minimus</bdi>。"
+        "notes": "比较级按第三变格变格；最高级按第一二变格变格（-<bdi>us, -a, -um</bdi>）。不规则：<bdi>bonus → melior → optimus</bdi>，<bdi>malus → pēior → pessimus</bdi>，<bdi>magnus → maior → maximus</bdi>，<bdi>parvus → minor → minimus</bdi>。"
       },
       {
         "id": "la-adj-adverb",
@@ -1212,7 +1212,7 @@
               [
                 "不规则",
                 "—",
-                "<bdi>bonus → bene；malus → male；magnus → magnopere；parvus → paulum</bdi>"
+                "<bdi>bonus → bene</bdi>；<bdi>malus → male</bdi>；<bdi>magnus → magnopere</bdi>；<bdi>parvus → paulum</bdi>"
               ]
             ]
           },

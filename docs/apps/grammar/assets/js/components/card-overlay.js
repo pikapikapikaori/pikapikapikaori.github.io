@@ -1,11 +1,10 @@
 import { h } from '../utils/dom.js'
 import { annotateBdi, bdiFragment, bdiNode, stripBdi } from '../utils/bdi.js'
-import { posLabel, allSources, stemDisplay, primaryStem, otherStems } from '../models/word.js'
-import { fieldDefsOfTemplate, fieldValues, genderOfColumn, genderOfRow, termsOf } from '../models/grammar.js'
+import { posLabel, allSources, sourceLabel, stemDisplay, primaryStem, otherStems } from '../models/word.js'
+import { fieldDefsOfTemplate, fieldValues, hiddenGenderCells, termsOf } from '../models/grammar.js'
 import { getLanguage } from '../data/languages.js'
 import { BREVE_LANGS } from '../config/config.js'
-import { createSourceTabs } from './source-tabs.js'
-import { createTabGroup } from './tabs.js'
+import { createTabBar, createTabGroup } from './tabs.js'
 import { createParadigmTable } from './paradigm-table.js'
 import { collocationList, exampleList } from './entry-lists.js'
 import { annotateDualText } from '../utils/dual-text.js'
@@ -15,7 +14,7 @@ import { getScriptProfile } from '../services/grammar-service.js'
 
 let overlayEl = null
 let escHandler = null
-/** 订阅「转写 / 短音符」全局开关；卡片关闭时退订 */
+/** 订阅「转写、短音符」全局开关；卡片关闭时退订 */
 let offToggles = null
 
 /** 卡片关掉后，把右下角工具列与订阅一起恢复 */
@@ -27,7 +26,7 @@ function detachOverlay() {
     document.documentElement.classList.remove('card-overlay-open')
 }
 
-/** 打开放大版卡片；opts 里的 language / paradigmTpl / onGrammarRef / resolveDerivative / onDerivativeClick / onClose 可选 */
+/** 打开放大版卡片；opts 里的 language、paradigmTpl、onGrammarRef、resolveDerivative、onDerivativeClick、onClose 可选 */
 export function openCardOverlay(word, opts = {}) {
     // 已经有一张卡片在屏幕上 = 这是「跳到派生词」式的原地替换：不重播入场动画，
     // 否则整个弹窗会再淡入 + 放大一次，看起来像页面闪了一下
@@ -47,7 +46,7 @@ export function openCardOverlay(word, opts = {}) {
     const stayOpenOnDerivative = opts.stayOpenOnDerivative === true
     const onClose = opts.onClose || null
 
-    // 「显示转写」和语法页 / 词列表共用同一个开关：localStorage 记状态，html 上的 class 控显示
+    // 「显示转写」和语法页、词列表共用同一个开关：localStorage 记状态，html 上的 class 控显示
     const scriptProfile = opts.scriptProfile || getScriptProfile(language)
     const toRoman = typeof scriptProfile?.toRoman === 'function'
         ? (text) => scriptProfile.toRoman(text)
@@ -55,7 +54,7 @@ export function openCardOverlay(word, opts = {}) {
     const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
         ? scriptProfile.scriptRange
         : null
-    // 转写 / 短音符由右下角工具列统一切换，词卡只订阅它的结果
+    // 转写、短音符由右下角工具列统一切换，词卡只订阅它的结果
     const showBreve = BREVE_LANGS.includes(language)
 
     const sources = allSources(word)
@@ -119,27 +118,6 @@ export function openCardOverlay(word, opts = {}) {
     }
     document.addEventListener('keydown', escHandler)
 
-    /** 名词只显示所选性别的格子（性在列上就整列不渲染，在行上就整行不渲染） */
-    function hiddenGenderCells(tpl) {
-        const empty = { columns: [], rows: [] }
-        const field = fieldDefsOfTemplate(tpl, word.pos).find((f) => f.declensionCells)
-        if (!field) return empty
-        const picked = fieldValues(word, field.key)
-        if (!picked.length) return empty
-        const hidden = { columns: [], rows: [] }
-        for (const table of tpl?.tables || []) {
-            for (const col of table.columns || []) {
-                const g = genderOfColumn(col.key)
-                if (g && !picked.includes(g)) hidden.columns.push(col.key)
-            }
-            for (const row of table.rows || []) {
-                const g = genderOfRow(row.key)
-                if (g && !picked.includes(g)) hidden.rows.push(row.key)
-            }
-        }
-        return hidden
-    }
-
     renderBody()
 
     function renderBody() {
@@ -160,7 +138,7 @@ export function openCardOverlay(word, opts = {}) {
                     : null
             }, posLabel(word.pos))
         )
-        // 属性（语法性 / 自他 / 助动词…）紧跟词性，排在变位类型与标签之前
+        // 属性（语法性、自他、助动词…）紧跟词性，排在变位类型与标签之前
         for (const def of fieldDefsOfTemplate(paradigmTpl, word.pos)) {
             for (const value of fieldValues(word, def.key)) {
                 const label = (def.options.find((o) => o.value === value) || {}).label || value
@@ -209,10 +187,15 @@ export function openCardOverlay(word, opts = {}) {
         if (meanings.length || showTabs) {
             body.appendChild(ovSection(terms.meanings,
                 showTabs
-                    ? createSourceTabs(sources, activeSource, (s) => {
-                        activeSource = s
-                        renderBody()
-                    })
+                    ? createTabBar({
+                        items: sources.map((s) => ({ key: s, label: sourceLabel(s) })),
+                        active: activeSource,
+                        lang: word.language,
+                        onChange: (s) => {
+                            activeSource = s
+                            renderBody()
+                        }
+                    }).el
                     : null,
                 meanings.length
                     ? h('ol', { class: 'word-card__list' },
@@ -227,7 +210,7 @@ export function openCardOverlay(word, opts = {}) {
         if (paradigmTpl && word.paradigm && typeof word.paradigm === 'object') {
             const panels = []
             const candidates = (paradigmTpl.tables || []).filter((t) => word.paradigm[t.key])
-            const hiddenGender = hiddenGenderCells(paradigmTpl)
+            const hiddenGender = hiddenGenderCells(paradigmTpl, word.pos, word)
             for (const tableTpl of candidates) {
                 const tableData = word.paradigm[tableTpl.key]
                 const tbl = createParadigmTable(tableTpl, tableData, {
@@ -279,10 +262,15 @@ export function openCardOverlay(word, opts = {}) {
         if (cols.length || showTabs) {
             body.appendChild(ovSection(terms.collocations,
                 showTabs
-                    ? createSourceTabs(sources, activeCollocationSource, (s) => {
-                        activeCollocationSource = s
-                        renderBody()
-                    })
+                    ? createTabBar({
+                        items: sources.map((s) => ({ key: s, label: sourceLabel(s) })),
+                        active: activeCollocationSource,
+                        lang: word.language,
+                        onChange: (s) => {
+                            activeCollocationSource = s
+                            renderBody()
+                        }
+                    }).el
                     : null,
                 cols.length
                     ? collocationList(cols, language)
@@ -294,10 +282,15 @@ export function openCardOverlay(word, opts = {}) {
         if (exs.length || showTabs) {
             body.appendChild(ovSection(terms.examples,
                 showTabs
-                    ? createSourceTabs(sources, activeExampleSource, (s) => {
-                        activeExampleSource = s
-                        renderBody()
-                    })
+                    ? createTabBar({
+                        items: sources.map((s) => ({ key: s, label: sourceLabel(s) })),
+                        active: activeExampleSource,
+                        lang: word.language,
+                        onChange: (s) => {
+                            activeExampleSource = s
+                            renderBody()
+                        }
+                    }).el
                     : null,
                 exs.length
                     ? exampleList(exs, language, {

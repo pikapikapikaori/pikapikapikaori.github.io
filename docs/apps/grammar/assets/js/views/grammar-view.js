@@ -83,7 +83,7 @@ export default {
         const doc = await loadGrammarForChapter(lang, current)
         if (!doc) { renderNoData(main, lang, language); return }
 
-        // 文字档案（满文 / 天城文）：供「显示转写」把原文转成转写
+        // 文字档案（满文、天城文）：供「显示转写」把原文转成转写
         const scriptProfile = await loadScriptProfile(lang, meta)
         return renderGrammar(main, lang, language, doc, anchor, group, scriptProfile)
     }
@@ -404,7 +404,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     function syncActiveByScroll() {
         spyFrame = 0
         if (!spyTargets.length) return
-        // 判定线与锚点的 scroll-margin-top 对齐，跳转后当前条目才会立刻算作「在读」
+        // 判定线与锚点的 scroll-margin-top 保持一致，跳转后当前条目才会立刻算作「在读」
         const margin = parseFloat(getComputedStyle(spyTargets[0]).scrollMarginTop)
         const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--h-header')) || 56
         const offset = (Number.isFinite(margin) ? margin : header + 24) + 1

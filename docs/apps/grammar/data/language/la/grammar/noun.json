@@ -216,11 +216,11 @@
             "lang": "la"
           }
         ],
-        "notes": "多为阴性；少数阳性（<bdi>nauta 水手、agricola 农民）变格完全相同。属格单数 -ae、与格复数 -īs</bdi>。"
+        "notes": "多为阴性；少数阳性（<bdi>nauta</bdi> 水手、<bdi>agricola</bdi> 农民）变格完全相同。属格单数 <bdi>-ae</bdi>、与格复数 <bdi>-īs</bdi>。"
       },
       {
         "id": "la-noun-2nd-decl",
-        "title": "第二变格法：-<bdi>us 阳性（dominus</bdi> 型）",
+        "title": "第二变格法：-<bdi>us</bdi> 阳性（<bdi>dominus</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -379,11 +379,11 @@
             "lang": "la"
           }
         ],
-        "notes": "呼格单数 -<bdi>e（-ius 结尾的词为 -ī，如 fīlius → fīlī）。中性见 -um</bdi> 型。"
+        "notes": "呼格单数 -e（<bdi>-ius</bdi> 结尾的词为 <bdi>-ī</bdi>，如 <bdi>fīlius → fīlī</bdi>）。中性见 <bdi>-um</bdi> 型。"
       },
       {
         "id": "la-noun-2nd-decl-f",
-        "title": "第二变格法：-<bdi>us 阴性（mālus</bdi> 型）",
+        "title": "第二变格法：-<bdi>us</bdi> 阴性（<bdi>mālus</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -542,11 +542,11 @@
             "lang": "la"
           }
         ],
-        "notes": "词尾与阳性 -<bdi>us 型完全相同，只是名词本身是阴性（如 mālus 苹果树、pīnus</bdi> 松树）；变格表只显示阴性列。"
+        "notes": "词尾与阳性 -<bdi>us</bdi> 型完全相同，只是名词本身是阴性（如 <bdi>mālus</bdi> 苹果树、<bdi>pīnus</bdi> 松树）；变格表只显示阴性列。"
       },
       {
         "id": "la-noun-2nd-decl-er",
-        "title": "第二变格法：-<bdi>er 阳性（ager 型，词干掉 e</bdi>）",
+        "title": "第二变格法：-<bdi>er</bdi> 阳性（<bdi>ager</bdi> 型，词干掉 e）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -741,11 +741,11 @@
             "lang": "la"
           }
         ],
-        "notes": "<bdi>ager / agrī 型：除主格与呼格外，词干的 e 脱落。puer 型保留 e</bdi>，见另一条。"
+        "notes": "<bdi>ager / agrī</bdi> 型：除主格与呼格外，词干的 e 脱落。<bdi>puer</bdi> 型保留 e，见另一条。"
       },
       {
         "id": "la-noun-2nd-decl-er-keep",
-        "title": "第二变格法：-<bdi>er 阳性（puer 型，保留 e</bdi>）",
+        "title": "第二变格法：-<bdi>er</bdi> 阳性（<bdi>puer</bdi> 型，保留 e）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -899,11 +899,11 @@
             "lang": "la"
           }
         ],
-        "notes": "<bdi>puer / puerī 型：词干的 e 在所有格中都保留（同类的还有 gener、socer）。</bdi>"
+        "notes": "<bdi>puer / puerī</bdi> 型：词干的 e 在所有格中都保留（同类的还有 <bdi>gener</bdi>、<bdi>socer</bdi>）。"
       },
       {
         "id": "la-noun-2nd-decl-n",
-        "title": "第二变格法：-<bdi>um 中性（bellum</bdi> 型）",
+        "title": "第二变格法：-<bdi>um</bdi> 中性（<bdi>bellum</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1236,11 +1236,11 @@
             "lang": "la"
           }
         ],
-        "notes": "词干从属格去 -<bdi>is 得到（rēx → rēgis → rēg-）。主格单数由词干末辅音 + s 变来：g/k → x，b/p → ps，d/t → s</bdi>。"
+        "notes": "词干从属格去 -<bdi>is</bdi> 得到（<bdi>rēx → rēgis → rēg-</bdi>）。主格单数由词干末辅音 + s 变来：<bdi>g/k → x</bdi>，<bdi>b/p → ps</bdi>，<bdi>d/t → s</bdi>。"
       },
       {
         "id": "la-noun-3rd-decl-i",
-        "title": "第三变格法：<bdi>i 词干（cīvis</bdi> 型）",
+        "title": "第三变格法：i 词干（<bdi>cīvis</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1451,11 +1451,11 @@
             "lang": "la"
           }
         ],
-        "notes": "属格复数 -<bdi>ium、中性复数 -ia 是 i 词干的标志；宾格单数 -em、夺格单数 -e（部分词为 -ī</bdi>）。"
+        "notes": "属格复数 -<bdi>ium</bdi>、中性复数 <bdi>-ia</bdi> 是 i 词干的标志；宾格单数 <bdi>-em</bdi>、夺格单数 -e（部分词为 <bdi>-ī</bdi>）。"
       },
       {
         "id": "la-noun-3rd-decl-i-abli",
-        "title": "第三变格法：<bdi>i 词干（turris 型，宾格 -im / 夺格 -ī</bdi>）",
+        "title": "第三变格法：i 词干（<bdi>turris</bdi> 型，宾格 <bdi>-im /</bdi> 夺格 <bdi>-ī</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1614,7 +1614,7 @@
             "lang": "la"
           }
         ],
-        "notes": "纯 <bdi>i 词干：宾格单数 -im、夺格单数 -ī、宾格复数 -īs（也常见 -ēs）。同类有 sitis、puppis、febris、secūris</bdi>。"
+        "notes": "纯 i 词干：宾格单数 <bdi>-im</bdi>、夺格单数 <bdi>-ī</bdi>、宾格复数 <bdi>-īs</bdi>（也常见 <bdi>-ēs</bdi>）。同类有 <bdi>sitis</bdi>、<bdi>puppis</bdi>、<bdi>febris</bdi>、<bdi>secūris</bdi>。"
       },
       {
         "id": "la-noun-3rd-decl-n",
@@ -1791,11 +1791,11 @@
             "lang": "la"
           }
         ],
-        "notes": "<bdi>s 词干（corpus / corporis）与鼻音词干（nōmen / nōminis）都属这一类；中性主格 = 宾格 = 呼格，复数 -a。</bdi>"
+        "notes": "s 词干（<bdi>corpus / corporis</bdi>）与鼻音词干（<bdi>nōmen / nōminis</bdi>）都属这一类；中性主格 = 宾格 = 呼格，复数 -a。"
       },
       {
         "id": "la-noun-3rd-decl-i-n",
-        "title": "第三变格法：<bdi>i 词干中性（mare</bdi> 型）",
+        "title": "第三变格法：i 词干中性（<bdi>mare</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -1954,11 +1954,11 @@
             "lang": "la"
           }
         ],
-        "notes": "夺格单数 -<bdi>ī、复数 -ia / -ium；同类有 cubīle、sedīle、rete。以 -al / -ar 结尾的中性名词（animal、calcar</bdi>）主格单数就是词干本身，见另一条。"
+        "notes": "夺格单数 -<bdi>ī</bdi>、复数 <bdi>-ia / -ium</bdi>；同类有 <bdi>cubīle</bdi>、<bdi>sedīle</bdi>、<bdi>rete</bdi>。以 <bdi>-al / -ar</bdi> 结尾的中性名词（<bdi>animal</bdi>、<bdi>calcar</bdi>）主格单数就是词干本身，见另一条。"
       },
       {
         "id": "la-noun-3rd-decl-i-n-al",
-        "title": "第三变格法：<bdi>i 词干中性（animal / calcar</bdi> 型）",
+        "title": "第三变格法：i 词干中性（<bdi>animal / calcar</bdi> 型）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2112,7 +2112,7 @@
             "lang": "la"
           }
         ],
-        "notes": "词尾与 <bdi>mare 型完全相同，只有主格 / 宾格 / 呼格单数是词干本身（animal、calcar、exemplar），不加 -e</bdi>。"
+        "notes": "词尾与 <bdi>mare</bdi> 型完全相同，只有主格 / 宾格 / 呼格单数是词干本身（<bdi>animal</bdi>、<bdi>calcar</bdi>、<bdi>exemplar</bdi>），不加 -e。"
       },
       {
         "id": "la-noun-4th-decl",
@@ -2327,7 +2327,7 @@
             "lang": "la"
           }
         ],
-        "notes": "以 -<bdi>us 结尾的第四变格名词为阳性或阴性，变格相同；与格单数 -uī（部分词为 -ū</bdi>）。中性见另一条。"
+        "notes": "以 -<bdi>us</bdi> 结尾的第四变格名词为阳性或阴性，变格相同；与格单数 <bdi>-uī</bdi>（部分词为 <bdi>-ū</bdi>）。中性见另一条。"
       },
       {
         "id": "la-noun-4th-decl-n",
@@ -2490,11 +2490,11 @@
             "lang": "la"
           }
         ],
-        "notes": "中性只有少数词（<bdi>cornū、genū、verū）；主格 = 宾格 = 呼格，复数 -ua</bdi>。"
+        "notes": "中性只有少数词（<bdi>cornū</bdi>、<bdi>genū</bdi>、<bdi>verū</bdi>）；主格 = 宾格 = 呼格，复数 <bdi>-ua</bdi>。"
       },
       {
         "id": "la-noun-5th-decl",
-        "title": "第五变格法：<bdi>rēs 型（属格 -eī</bdi>）",
+        "title": "第五变格法：<bdi>rēs</bdi> 型（属格 <bdi>-eī</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2653,11 +2653,11 @@
             "lang": "la"
           }
         ],
-        "notes": "<bdi>rēs 的属格与与格单数是 reī（e 短）；其他第五变格名词多为 -ēī（diēs 型）。只有 rēs 与 diēs</bdi> 有完整复数。"
+        "notes": "<bdi>rēs</bdi> 的属格与与格单数是 <bdi>reī</bdi>（e 短）；其他第五变格名词多为 <bdi>-ēī</bdi>（<bdi>diēs</bdi> 型）。只有 <bdi>rēs</bdi> 与 <bdi>diēs</bdi> 有完整复数。"
       },
       {
         "id": "la-noun-5th-decl-dies",
-        "title": "第五变格法：<bdi>diēs 型（属格 -ēī</bdi>）",
+        "title": "第五变格法：<bdi>diēs</bdi> 型（属格 <bdi>-ēī</bdi>）",
         "inflect": "decl",
         "derive": {
           "pos": "noun",
@@ -2816,7 +2816,7 @@
             "lang": "la"
           }
         ],
-        "notes": "<bdi>diēs 为阳性（意为「日」时），属格 -ēī；同类的还有 speciēs、fidēs。</bdi>"
+        "notes": "<bdi>diēs</bdi> 为阳性（意为「日」时），属格 <bdi>-ēī</bdi>；同类的还有 <bdi>speciēs</bdi>、<bdi>fidēs</bdi>。"
       }
     ]
   }

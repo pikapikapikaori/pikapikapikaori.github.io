@@ -129,8 +129,7 @@
         "rows": [
           {
             "key": "pres",
-            "label": "现在时",
-            "principal": true
+            "label": "现在时"
           },
           {
             "key": "impf",

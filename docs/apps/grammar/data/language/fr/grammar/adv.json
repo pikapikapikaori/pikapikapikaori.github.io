@@ -17,33 +17,33 @@
             "rows": [
               [
                 "时间",
-                "<bdi>maintenant、hier、aujourd'hui、toujours、déjà、bientôt</bdi>"
+                "<bdi>maintenant</bdi>、<bdi>hier</bdi>、<bdi>aujourd'hui</bdi>、<bdi>toujours</bdi>、<bdi>déjà</bdi>、<bdi>bientôt</bdi>"
               ],
               [
                 "地点",
-                "<bdi>ici、là、ailleurs、dedans、dehors、partout</bdi>"
+                "<bdi>ici</bdi>、<bdi>là</bdi>、<bdi>ailleurs</bdi>、<bdi>dedans</bdi>、<bdi>dehors</bdi>、<bdi>partout</bdi>"
               ],
               [
                 "方式",
-                "<bdi>bien、mal、ainsi、ensemble、vite</bdi>（不变）"
+                "<bdi>bien</bdi>、<bdi>mal</bdi>、<bdi>ainsi</bdi>、<bdi>ensemble</bdi>、<bdi>vite</bdi>（不变）"
               ],
               [
                 "程度",
-                "<bdi>très、trop、assez、beaucoup、peu、presque、tellement</bdi>"
+                "<bdi>très</bdi>、<bdi>trop</bdi>、<bdi>assez</bdi>、<bdi>beaucoup</bdi>、<bdi>peu</bdi>、<bdi>presque</bdi>、<bdi>tellement</bdi>"
               ],
               [
                 "肯定 / 否定",
-                "<bdi>oui、si、certainement / non、ne…pas、ne…jamais、ne…plus</bdi>"
+                "<bdi>oui</bdi>、<bdi>si</bdi>、<bdi>certainement / non</bdi>、<bdi>ne…pas</bdi>、<bdi>ne…jamais</bdi>、<bdi>ne…plus</bdi>"
               ],
               [
                 "疑问",
-                "<bdi>où、quand、comment、pourquoi、combien</bdi>"
+                "<bdi>où</bdi>、<bdi>quand</bdi>、<bdi>comment</bdi>、<bdi>pourquoi</bdi>、<bdi>combien</bdi>"
               ]
             ],
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>vite、tout、bien 等是不规则副词（vite 不作 -ment 变化；tout 有性数变化：tout / toute / tous / toutes）。</bdi>"
+        "notes": "<bdi>vite</bdi>、<bdi>tout</bdi>、<bdi>bien</bdi> 等是不规则副词（<bdi>vite</bdi> 不作 <bdi>-ment</bdi> 变化；<bdi>tout</bdi> 有性数变化：<bdi>tout / toute / tous / toutes</bdi>）。"
       },
       {
         "id": "fr-adv-comparison",
@@ -60,7 +60,7 @@
             "rows": [
               [
                 "比较级",
-                "<bdi>plus / moins / aussi + 副词 + que</bdi>",
+                "<bdi>plus / moins / aussi +</bdi> 副词 <bdi>+ que</bdi>",
                 "<bdi>Il court plus vite que moi.</bdi>"
               ],
               [
@@ -75,7 +75,7 @@
               ],
               [
                 "不规则：<bdi>mal</bdi>",
-                "<bdi>pis / le pis（口语用 plus mal）</bdi>",
+                "<bdi>pis / le pis</bdi>（口语用 <bdi>plus mal</bdi>）",
                 "—"
               ],
               [
@@ -87,7 +87,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "<bdi>bon 的比较级是 meilleur（形容词），bien 的比较级是 mieux</bdi>（副词），不要混用。"
+        "notes": "<bdi>bon</bdi> 的比较级是 <bdi>meilleur</bdi>（形容词），<bdi>bien</bdi> 的比较级是 <bdi>mieux</bdi>（副词），不要混用。"
       },
       {
         "id": "fr-adv-negation",
@@ -146,7 +146,7 @@
             "lang": "fr"
           }
         ],
-        "notes": "口语中常省略 <bdi>ne（Je sais pas</bdi>）；书面语必须保留。"
+        "notes": "口语中常省略 <bdi>ne</bdi>（<bdi>Je sais pas</bdi>）；书面语必须保留。"
       }
     ]
   }

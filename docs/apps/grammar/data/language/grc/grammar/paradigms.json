@@ -363,8 +363,7 @@
         "rows": [
           {
             "key": "pres-act-ind",
-            "label": "直陈式 主动",
-            "principal": true
+            "label": "直陈式 主动"
           },
           {
             "key": "pres-midpass-ind",
@@ -502,8 +501,7 @@
         "rows": [
           {
             "key": "fut-act-ind",
-            "label": "直陈式 主动",
-            "principal": true
+            "label": "直陈式 主动"
           },
           {
             "key": "fut-mid-ind",
@@ -571,8 +569,7 @@
         "rows": [
           {
             "key": "aor-act-ind",
-            "label": "直陈式 主动",
-            "principal": true
+            "label": "直陈式 主动"
           },
           {
             "key": "aor-mid-ind",
@@ -580,8 +577,7 @@
           },
           {
             "key": "aor-pass-ind",
-            "label": "直陈式 被动",
-            "principal": true
+            "label": "直陈式 被动"
           },
           {
             "key": "aor-act-subj",
@@ -680,8 +676,7 @@
         "rows": [
           {
             "key": "perf-act-ind",
-            "label": "直陈式 主动",
-            "principal": true
+            "label": "直陈式 主动"
           },
           {
             "key": "perf-act-subj",
@@ -702,8 +697,7 @@
           },
           {
             "key": "perf-midpass-ind",
-            "label": "直陈式 中动/被动",
-            "principal": true
+            "label": "直陈式 中动/被动"
           },
           {
             "key": "perf-midpass-impr",

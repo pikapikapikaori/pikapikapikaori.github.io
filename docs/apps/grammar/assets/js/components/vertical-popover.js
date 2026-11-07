@@ -40,6 +40,7 @@ function hasVerticalScript(el, lang) {
 }
 
 function findVerticalEl(node) {
+    if (node && node.closest && node.closest('.ime')) return null
     let cur = node
     while (cur && cur !== document && cur.nodeType === 1) {
         if (cur.hasAttribute('lang')) {
@@ -138,6 +139,11 @@ export function hideVerticalPopover() {
 }
 
 function onMouseOver(e) {
+    if (e.target.closest && e.target.closest('.ime')) {
+        hide()
+        return
+    }
+
     if (popoverEl && popoverEl.contains(e.target)) {
         cancelHide()
         return

@@ -1,25 +1,15 @@
 /**
  * 满语的「转写 ⇄ 满文」档案（与 data/paradigm/ 同一套加载方式）。
- *
- * 满文的四种位置形是同一个 Unicode 码位，由字体按上下文自动选择，所以「转写 → 满文」
- * 只需要逐字母映射；双字母 / 带撇号的字母优先匹配。字母表与语法页「满文字母」一节一致
- * （基本 25 + 带点 3 + 汉语借词 9）。
+ * 字母表与语法页「文字」一章一致。
  */
 
-/* ---------------- 转写 ↔ 满文 ---------------- */
-
-/*
- * 满文的四种位置形是同一个 Unicode 码位，由字体按上下文自动选择，
- * 所以「转写 → 满文」只需要逐字母映射；双字母 / 带撇号的字母优先匹配。
- * 字母表与语法页「满文字母」一节一致（基本 25 + 带点 3 + 汉语借词 9）。
- */
 const LETTERS = [
-    // 带点字母（只出现在 e / i 前，用来区分 k g h）
-    ['k\'', '\u1863'], ['g\'', '\u186C'], ['h\'', '\u186D'],
-    // 汉语借词字母
-    ['ts\'', '\u1871'], ['dz\'', '\u1870'], ['j\'', '\u186A'], ['c\'', '\u1872'],
-    ['s\'', '\u1878'], ['f\'', '\u186B'],
-    ['ts', '\u186E'], ['dz', '\u186F'], ['ž', '\u1877'],
+    // 汉语借词字母，长串在前
+    ['ts\'i', '\u186E\u185F'], ['cy', '\u1871\u1873'],
+    ['jy', '\u1877\u1873'], ['sy', '\u1830\u185F'],
+    ['k\'', '\u183A'], ['g\'', '\u186C'], ['h\'', '\u186D'],
+    ['ts\'', '\u186E'], ['dz', '\u186F'], ['ž', '\u1870'],
+    ['c\'', '\u1871'], ['j\'', '\u1877'],
     // 基本字母
     ['ng', '\u1829'],
     ['a', '\u1820'], ['e', '\u185D'], ['i', '\u1873'], ['o', '\u1823'],
@@ -31,8 +21,12 @@ const LETTERS = [
     ['w', '\u1838'], ['y', '\u1836']
 ]
 
-const SCRIPT_TO_ROMAN = new Map(LETTERS.map(([roman, script]) => [script, roman]))
 const MAX_KEY = Math.max(...LETTERS.map(([roman]) => [...roman].length))
+
+/** ᡟ 只在「满文 → 转写」时出现（正写 y 不产生它） */
+const SCRIPT_TABLE = [...LETTERS, ['y', '\u185F']]
+    .sort((a, b) => [...b[1]].length - [...a[1]].length)
+const MAX_SCRIPT = Math.max(...SCRIPT_TABLE.map(([, script]) => [...script].length))
 
 /** 满文脚本的码位范围（竖排文字的判据也用它） */
 export const SCRIPT_RANGE = /[\u1800-\u18AF]/
@@ -84,9 +78,25 @@ export function toScript(text) {
 
 /** 满文 → 转写（表里没有的字符原样保留） */
 export function toRoman(text) {
+    const chars = [...String(text ?? '')]
     let out = ''
-    for (const ch of String(text ?? '')) {
-        out += SCRIPT_TO_ROMAN.get(ch) ?? ch
+    let i = 0
+    while (i < chars.length) {
+        let matched = false
+        for (let len = MAX_SCRIPT; len >= 1; len -= 1) {
+            const chunk = chars.slice(i, i + len).join('')
+            const hit = SCRIPT_TABLE.find(([, script]) => script === chunk)
+            if (hit) {
+                out += hit[0]
+                i += len
+                matched = true
+                break
+            }
+        }
+        if (!matched) {
+            out += chars[i]
+            i += 1
+        }
     }
     return out
 }

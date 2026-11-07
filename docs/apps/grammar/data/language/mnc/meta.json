@@ -189,8 +189,8 @@
           "mnc-script",
           "mnc-script-vowels",
           "mnc-script-consonants",
-          "mnc-script-dotted",
           "mnc-script-loan",
+          "mnc-script-variants",
           "mnc-script-rules"
         ]
       },

@@ -6,6 +6,7 @@ import {
     applyMark, insertAt, deleteBefore, isMark, previewChar, splitTail, sanitizeOriginal, WORD_TAIL
 } from '../utils/ime-compose.js'
 import { loadIme } from '../services/ime-service.js'
+import { getLanguage } from '../data/languages.js'
 import { bdiNode } from '../utils/bdi.js'
 
 const LS_ENABLED = 'ln.ime.enabled'
@@ -418,6 +419,7 @@ function render() {
     const modes = availableModes()
     const mode = currentMode()
     state.mode = mode
+    els.panel.classList.toggle('ime--vertical', getLanguage(state.code)?.vertical === true)
 
     els.base = h('span', { class: 'ime__base' })
     els.head.replaceChildren(

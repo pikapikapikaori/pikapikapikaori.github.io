@@ -2230,6 +2230,14 @@ html.show-dual-text .dual-text__roman {
     font-family: var(--ff-ui);
 }
 
+.ime--vertical .ime__key bdi,
+.ime--vertical .ime__chip bdi {
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    line-height: 1;
+    pointer-events: none;
+}
+
 @media (max-width: 720px) {
     .ime {
         left: 0;

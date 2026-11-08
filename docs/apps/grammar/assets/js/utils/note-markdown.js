@@ -2,6 +2,7 @@
 
 import { h, htmlFragment } from './dom.js'
 import { annotateBdi } from './bdi.js'
+import { checkMarkIcon } from '../components/icons.js'
 import { splitRow } from './markdown.js'
 
 const HEADING = /^(#{1,6})\s+(.*)$/
@@ -178,7 +179,7 @@ function itemNode(kind, level, label, content, { done = false } = {}) {
                 role: 'checkbox',
                 'aria-checked': done ? 'true' : 'false',
                 'aria-label': content || '待办'
-            }, done ? '✓' : ''),
+            }, done ? checkMarkIcon() : null),
             h('span', { class: 'note-item__text' }, ...inline(content))
         )
         return el

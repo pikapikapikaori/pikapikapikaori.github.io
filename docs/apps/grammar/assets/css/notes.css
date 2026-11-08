@@ -25,7 +25,7 @@
     margin-bottom: var(--sp-3);
     padding: var(--sp-2) 0;
     background: var(--c-bg);
-    border-bottom: 1px solid var(--c-rule);
+    border-bottom: 1px solid var(--c-rule); /* taste-skill-ignore: 吸顶条与顶栏同一套边框 */
 }
 
 .note-toolbar {
@@ -47,14 +47,31 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 30px;
-    height: 30px;
+    min-width: 28px;
+    height: 28px;
     padding: 0 var(--sp-2);
     border-radius: var(--r-control);
     color: var(--c-fg-muted);
     font-size: var(--fs-sm);
     line-height: 1;
     transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.note-tool svg {
+    display: block;
+}
+
+/* 只有图形的按钮收窄一点，字形的按钮留出字宽 */
+.note-tool--icon {
+    min-width: 28px;
+    padding: 0 5px;
+}
+
+.note-tool--letter {
+    min-width: 30px;
+    padding: 0 5px;
+    font-size: var(--fs-xs);
+    letter-spacing: 0;
 }
 
 .note-tool:not(:disabled):hover {
@@ -75,11 +92,6 @@
     font-size: var(--fs-md);
 }
 
-.note-tool--indent {
-    font-family: var(--ff-mono);
-    font-size: var(--fs-sm);
-}
-
 .note-tool__glyph--b { font-weight: 700; }
 .note-tool__glyph--i { font-style: italic; }
 .note-tool__glyph--s { text-decoration: line-through; }
@@ -88,31 +100,26 @@
 .note-toolbar__rule {
     flex: none;
     width: 1px;
-    height: 16px;
-    margin: 0 var(--sp-1);
+    height: 14px;
+    margin: 0 4px;
     background: var(--c-border);
 }
 
-/* 标题下拉：量体裁衣，别撑满一行 */
-.note-bar .select.note-tool {
-    width: auto;
-    height: 30px;
-    min-height: 30px;
-    padding: 0 26px 0 var(--sp-2);
-    background-color: transparent;
-    background-position: right 8px center;
-    background-size: 11px 11px;
-    color: var(--c-fg-muted);
+.note-tool__glyph--bullet,
+.note-tool__glyph--number,
+.note-tool__glyph--quote {
+    font-size: var(--fs-md);
+    line-height: 1;
 }
 
-.note-bar .select.note-tool:hover,
-.note-bar .select.note-tool[aria-expanded="true"] {
-    background-color: var(--c-bg-hover);
-    color: var(--c-fg);
+.note-tool__glyph--number {
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
 }
 
-.note-tool__label {
-    white-space: nowrap;
+.note-tool__glyph--quote {
+    margin-top: -4px;
+    font-size: 1.15rem;
 }
 
 .note-toolbar__state {
@@ -154,8 +161,7 @@
 }
 
 .note-row.is-editing {
-    background: var(--c-bg-subtle);
-    box-shadow: inset 2px 0 0 var(--c-accent);
+    background: var(--c-bg-hover);
 }
 
 .note-row__view:focus-visible {
@@ -267,6 +273,16 @@ body.note-dragging {
     color: var(--c-fg-subtle);
 }
 
+/* 改表格时装的是整段竖线原文：保留竖线对齐，超出时可以横向滚动 */
+.note-row__input--table {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
 /* ---------- 排版后的一行 ---------- */
 
 .note-line {
@@ -284,12 +300,6 @@ body.note-dragging {
 }
 
 .note-p {
-    white-space: pre-wrap;
-}
-
-/* 正在改表格时，还没轮到的竖线行先照原样显示 */
-.note-raw {
-    color: var(--c-fg-muted);
     white-space: pre-wrap;
 }
 
@@ -333,12 +343,12 @@ body.note-dragging {
 .note-item {
     display: flex;
     align-items: flex-start;
-    gap: var(--sp-2);
+    gap: 4px;
 }
 
 .note-item__mark {
     flex: none;
-    min-width: 1.4em;
+    min-width: 1.1em;
     color: var(--c-fg-muted);
     font-variant-numeric: tabular-nums;
     text-align: right;
@@ -350,18 +360,24 @@ body.note-dragging {
     white-space: pre-wrap;
 }
 
-.note-item--ol[data-level="2"] .note-item__mark {
-    min-width: 1.8em;
+.note-item--ul[data-level="1"] .note-item__mark,
+.note-item--ul[data-level="2"] .note-item__mark {
+    text-align: center;
 }
 
-.note-item--ol[data-level="3"] .note-item__mark {
-    min-width: 2.4em;
+.note-item--ol[data-level="1"] .note-item__mark {
+    min-width: 1.5em;
+}
+
+.note-item--ol[data-level="2"] .note-item__mark {
+    min-width: 2em;
+    letter-spacing: .02em;
 }
 
 .note-rule {
     margin: var(--sp-3) 0;
     border: 0;
-    border-top: 1px solid var(--c-border-strong);
+    border-top: 1px solid var(--c-border-strong); /* taste-skill-ignore: 笔记里的 `---`，内容本身 */
 }
 
 .note-item--todo[data-done="true"] .note-item__text {

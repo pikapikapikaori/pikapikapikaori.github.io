@@ -424,10 +424,12 @@
 
 .word-form .field {
     display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-columns: var(--w-form-label) minmax(0, 1fr);
     column-gap: var(--sp-4);
     row-gap: 2px;
     align-items: center;
+    /* 行按自然高度从顶部排：没有第二行提示的字段不会被拉高后居中，与同排字段错开 */
+    align-content: start;
 }
 
 .word-form .field > .field__label {
@@ -457,7 +459,7 @@
     grid-column: 1 / -1;
 }
 
-/* 额外词干：词干下方，每行最多两项（条目多时不会挤成一团） */
+/* 额外词干：两列，从表单左边开始；每项与主词干同一套栅格（标签一栏、控件一栏） */
 .word-form .field__parts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -466,16 +468,34 @@
     margin-top: var(--sp-3);
 }
 
-.word-form .field__parts > .field__hint {
-    grid-column: 1 / -1;
+.word-form .field--part {
+    display: grid;
+    grid-template-columns: var(--w-form-label) minmax(0, 1fr);
+    column-gap: var(--sp-4);
+    grid-template-areas: "label control";
+    align-items: center;
+    align-content: start;
 }
 
-.word-form .field--part {
-    grid-template-columns: 11.5rem minmax(0, 1fr);
+.word-form .field--part > .field__label {
+    grid-area: label;
+    text-align: left;
+    justify-self: stretch;
+}
+
+.word-form .field--part > .input,
+.word-form .field--part > .select,
+.word-form .field--part > .ghost-input {
+    grid-area: control;
 }
 
 .word-form__extras > .field + .field {
     margin-top: var(--sp-6);
+}
+
+/* 词干块自带标题，与后面的变形表标题隔开一个分组间距 */
+.word-form__stems + .word-form__group-title {
+    margin-top: var(--sp-5);
 }
 
 .word-form__group-title {
@@ -513,7 +533,8 @@
 
 .word-form__item {
     display: grid;
-    grid-template-columns: 1.75rem 1fr 1fr 8.25rem auto;
+    /* 序号列把「标签栏」与「列间距」的差补掉，控件仍从 --w-form-label + --sp-4 开始 */
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 8.25rem auto;
     gap: var(--sp-2);
     align-items: start;
 }
@@ -528,33 +549,34 @@
     text-align: end;
 }
 
+/* 含义：输入框加语言下拉的合计宽度，与固定搭配行的两个输入框相同 */
 .word-form__item--meaning {
-    grid-template-columns: 1.75rem 1fr 120px auto;
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 120px 8.25rem auto;
 }
 
 /* 补充形式行：分组、标签、形态、来源、删除按钮 */
 .word-form__item--inflection {
-    grid-template-columns: 1.75rem 1fr 1fr 1fr 8.25rem auto;
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 1fr 8.25rem auto;
 }
 
-/* 例句：序号、原文、出处、来源与删除按钮在第一行，译文与含义在第二行 */
+/* 例句：栅格与固定搭配行相同，原文、出处的宽度与搭配的两个输入框一致 */
 .word-form__item--example {
-    grid-template-columns: 1.75rem 1.6fr 1fr 8.25rem auto;
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 8.25rem auto;
 }
 
+/* 译文在原文下方，关联含义在出处下方，四栏等宽 */
 .word-form__item--example .word-form__cell--translation {
     grid-column: 2;
     grid-row: 2;
 }
 
-/* 含义下拉与「出处 + 来源」同宽：跨第二、第三列 */
 .word-form__item--example .word-form__cell--meaning {
-    grid-column: 3 / 5;
+    grid-column: 3;
     grid-row: 2;
 }
 
 .word-form__item--example .word-form__cell--remove {
-    grid-column: 5;
+    grid-column: 4;
     grid-row: 1;
     align-self: start;
 }
@@ -619,14 +641,10 @@
 
     .word-form .field--part {
         grid-template-columns: minmax(0, 1fr);
+        row-gap: 2px;
         grid-template-areas:
             "label"
-            "control"
-            "hint";
-    }
-
-    .word-form .field--part > .field__label {
-        text-align: left;
+            "control";
     }
 
     /* 窄屏：序号 | 内容（竖排），删除按钮绝对定位在第一行右侧，不再被挤到下一行 */
@@ -651,12 +669,9 @@
         position: absolute;
         top: 0;
         right: 0;
-        width: 32px;
+        width: 38px;
         height: 38px;
         padding: 0;
-        border-color: transparent;
-        background: transparent;
-        font-size: var(--fs-md);
     }
 
     /* 例句的译文、含义原本跨列，窄屏回到第 2 列 */

@@ -31,6 +31,7 @@
     "indeclinable": "不变形",
     "paradigmTitle": "{pos}变形表",
     "extraForms": "补充形式",
+    "stemsTitle": "词干",
     "stems": {
       "label": "词干",
       "placeholder": "词干（可留空）"

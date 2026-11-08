@@ -392,8 +392,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "parlé",
-          "hint": "留空 = 现在时词干 + <bdi>é</bdi>"
+          "example": "parlé"
         }
       ],
       "stemForms": {
@@ -1028,8 +1027,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "fini",
-          "hint": "留空 = 现在时词干 + <bdi>i</bdi>"
+          "example": "fini"
         }
       ],
       "stemForms": {
@@ -1733,8 +1731,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "vendu",
-          "hint": "留空按本类型的规则推导"
+          "example": "vendu"
         }
       ],
       "stemForms": {
@@ -2373,8 +2370,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "reçu",
-          "hint": "留空按本类型的规则推导"
+          "example": "reçu"
         }
       ],
       "stemForms": {
@@ -3087,8 +3083,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "parti",
-          "hint": "留空按本类型的规则推导"
+          "example": "parti"
         }
       ],
       "stemForms": {
@@ -3725,8 +3720,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "venu",
-          "hint": "留空按本类型的规则推导"
+          "example": "venu"
         }
       ],
       "stemForms": {
@@ -4435,8 +4429,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "pris",
-          "hint": "留空按本类型的规则推导"
+          "example": "pris"
         }
       ],
       "stemForms": {
@@ -5174,8 +5167,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "mis",
-          "hint": "留空按本类型的规则推导"
+          "example": "mis"
         }
       ],
       "stemForms": {
@@ -5863,8 +5855,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "connu",
-          "hint": "留空按本类型的规则推导"
+          "example": "connu"
         }
       ],
       "stemForms": {
@@ -6561,8 +6552,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "conduit",
-          "hint": "留空按本类型的规则推导"
+          "example": "conduit"
         }
       ],
       "stemForms": {
@@ -7208,8 +7198,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "peint",
-          "hint": "留空按本类型的规则推导"
+          "example": "peint"
         }
       ],
       "stemForms": {
@@ -7944,8 +7933,7 @@
         {
           "key": "pp",
           "label": "过去分词（不规则时填）",
-          "example": "ouvert",
-          "hint": "留空按本类型的规则推导"
+          "example": "ouvert"
         }
       ],
       "stemForms": {

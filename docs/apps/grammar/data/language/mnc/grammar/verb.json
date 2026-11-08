@@ -288,8 +288,7 @@
           "key": "base",
           "label": "词干（去掉 -<bdi>ᠮᠪᡳ</bdi>）",
           "example": "ᠠᡵᠠ",
-          "required": false,
-          "hint": "留空时由基本形态去掉 -<bdi>ᠮᠪᡳ</bdi> 自动推出。"
+          "required": false
         }
       ],
       "endings": {

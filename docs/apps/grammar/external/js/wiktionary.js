@@ -22,8 +22,17 @@ const HTTP = {
  * 希伯来语词条按纯辅音字母建页，元音点（niqqud）、重音号（te'amim）与 maqaf / paseq /
  * sof pasuq 都落在 U+0591–U+05C7，去掉这一段即可，辅音字母本身不受影响。
  */
+
+/** 拉丁语、古希腊语词条不标长短音：去掉长音符（U+0304）与短音符（U+0306），重音、送气符保留。
+ *  先拆成 NFD 再删，预组合的 ᾱ ῑ ῡ ᾰ 等也会被拆开。 */
+function stripLengthMarks(s) {
+    return s.normalize('NFD').replace(/[\u0304\u0306]/g, '').normalize('NFC')
+}
+
 const QUERY_FORM = {
-    he: (s) => s.replace(/[\u0591-\u05C7]/g, '').replace(/\s+/g, ' ').trim()
+    he: (s) => s.replace(/[\u0591-\u05C7]/g, '').replace(/\s+/g, ' ').trim(),
+    la: stripLengthMarks,
+    grc: stripLengthMarks
 }
 
 function queryFormOf(lemma, langCode) {

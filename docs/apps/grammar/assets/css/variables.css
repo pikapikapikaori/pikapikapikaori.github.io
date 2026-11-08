@@ -38,6 +38,8 @@
     --ff-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 
     --w-max: 1100px;
+    /* 生词表单的标签栏：标签、序号、组标题各占一栏，控件统一从这一栏之后开始 */
+    --w-form-label: 9rem;
     /* 输入助手面板宽度：桌面 720，窄屏自动收 */
     --ime-w: 720px;
     --h-header: 56px;

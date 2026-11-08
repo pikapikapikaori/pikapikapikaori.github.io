@@ -33,6 +33,7 @@
     "indeclinable": "不变形",
     "paradigmTitle": "{pos}变形表",
     "extraForms": "补充形式",
+    "stemsTitle": "词根",
     "stems": {
       "label": "词根（辅音）",
       "placeholder": "词根，如 כ-ת-ב",

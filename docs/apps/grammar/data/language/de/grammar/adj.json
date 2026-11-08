@@ -244,14 +244,12 @@
             {
               "key": "cmp",
               "label": "比较级词干",
-              "example": "schnell",
-              "hint": "比较级的词干（无词尾）：<bdi>jung → jüng</bdi>、<bdi>dunkel → dunkl</bdi>。留空 = 原形本身。"
+              "example": "schnell"
             },
             {
               "key": "sup",
               "label": "最高级词干",
-              "example": "schnellst",
-              "hint": "最高级的词干：<bdi>breit → breitest</bdi>、<bdi>alt → ältest</bdi>。留空 = 比较级词干 <bdi>+ st</bdi>。"
+              "example": "schnellst"
             }
           ]
         }

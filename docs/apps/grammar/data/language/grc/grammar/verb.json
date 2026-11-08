@@ -409,8 +409,7 @@
         {
           "key": "fut",
           "label": "将来时词干",
-          "example": "λῡσ",
-          "hint": "一般由现在时词干 + <bdi>σ</bdi> 推出"
+          "example": "λῡσ"
         },
         {
           "key": "aor",
@@ -419,15 +418,13 @@
         },
         {
           "key": "perf",
-          "label": "完成时（主动）词干",
-          "example": "λελῡκ",
-          "hint": "完成时的叠音与元音缩短一般可由规则推出"
+          "label": "完成时主动词干",
+          "example": "λελῡκ"
         },
         {
           "key": "perfmid",
           "label": "完成时中动词干",
-          "example": "λελυ",
-          "hint": "留空时由「完成时（主动）词干」去掉 <bdi>κ</bdi> 并缩短元音得到（<bdi>λελῡκ → λελυ</bdi>）"
+          "example": "λελυ"
         },
         {
           "key": "aorpass",
@@ -4806,8 +4803,7 @@
         {
           "key": "fut",
           "label": "将来时词干",
-          "example": "φιλησ",
-          "hint": "缩合动词延长为 -<bdi>ησ</bdi>-"
+          "example": "φιλησ"
         },
         {
           "key": "aor",
@@ -4816,14 +4812,13 @@
         },
         {
           "key": "perf",
-          "label": "完成时（主动）词干",
+          "label": "完成时主动词干",
           "example": "πεφιληκ"
         },
         {
           "key": "perfmid",
           "label": "完成时中动词干",
-          "example": "πεφιλη",
-          "hint": "留空时由「完成时（主动）词干」去掉 <bdi>κ</bdi> 得到"
+          "example": "πεφιλη"
         },
         {
           "key": "aorpass",
@@ -9196,8 +9191,7 @@
         {
           "key": "fut",
           "label": "将来时词干",
-          "example": "τιμησ",
-          "hint": "缩合动词延长为 -<bdi>ησ</bdi>-"
+          "example": "τιμησ"
         },
         {
           "key": "aor",
@@ -9206,14 +9200,13 @@
         },
         {
           "key": "perf",
-          "label": "完成时（主动）词干",
+          "label": "完成时主动词干",
           "example": "τετιμηκ"
         },
         {
           "key": "perfmid",
           "label": "完成时中动词干",
-          "example": "τετιμη",
-          "hint": "留空时由「完成时（主动）词干」去掉 <bdi>κ</bdi> 得到"
+          "example": "τετιμη"
         },
         {
           "key": "aorpass",
@@ -13586,8 +13579,7 @@
         {
           "key": "fut",
           "label": "将来时词干",
-          "example": "δηλωσ",
-          "hint": "缩合动词延长为 -<bdi>ωσ</bdi>-"
+          "example": "δηλωσ"
         },
         {
           "key": "aor",
@@ -13596,14 +13588,13 @@
         },
         {
           "key": "perf",
-          "label": "完成时（主动）词干",
+          "label": "完成时主动词干",
           "example": "δεδηλωκ"
         },
         {
           "key": "perfmid",
           "label": "完成时中动词干",
-          "example": "δεδηλω",
-          "hint": "留空时由「完成时（主动）词干」去掉 <bdi>κ</bdi> 得到"
+          "example": "δεδηλω"
         },
         {
           "key": "aorpass",
@@ -17953,8 +17944,7 @@
         {
           "key": "fut",
           "label": "将来时词干",
-          "example": "γραψ",
-          "hint": "唇音→<bdi>ψ</bdi>、喉音<bdi>→ξ</bdi>、齿音<bdi>→σ</bdi> 由规则融合"
+          "example": "γραψ"
         },
         {
           "key": "aor",
@@ -17969,14 +17959,12 @@
         {
           "key": "aorpass",
           "label": "不定过去时被动词干",
-          "example": "γραφ",
-          "hint": "齿音词干会变成 <bdi>σ</bdi>（<bdi>πείθω → ἐπείσθην</bdi>）"
+          "example": "γραφ"
         },
         {
           "key": "perfmid",
           "label": "完成时中动词干",
-          "example": "γεγραφ",
-          "hint": "叠音后的词干（同化前），如 <bdi>γεγραφ</bdi>、<bdi>πεπεισ</bdi>；留空按规则推出，规则会自动处理与 <bdi>-μαι</bdi> 的同化"
+          "example": "γεγραφ"
         }
       ],
       "stemForms": {
@@ -22488,14 +22476,12 @@
         {
           "key": "aoract",
           "label": "不定过去时主动词干",
-          "example": "δωκ",
-          "hint": "<bdi>-μι</bdi> 动词常用 <bdi>-κ-</bdi> 型不定过去时（<bdi>δίδωμι → ἔδωκα</bdi>）"
+          "example": "δωκ"
         },
         {
           "key": "aormid",
           "label": "不定过去时中动词干",
-          "example": "δο",
-          "hint": "强不定过去时，注意词干元音交替"
+          "example": "δο"
         },
         {
           "key": "aorpass",
@@ -22510,8 +22496,7 @@
         {
           "key": "perfmid",
           "label": "完成时中动词干",
-          "example": "δεδο",
-          "hint": "留空时由「完成时主动词干」去掉 <bdi>κ</bdi> 并按 <bdi>ω → ο</bdi> 交替得到"
+          "example": "δεδο"
         }
       ],
       "stemForms": {

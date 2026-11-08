@@ -397,26 +397,22 @@
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "mach",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
+          "example": "mach"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "gemacht",
-          "hint": "留空 = <bdi>ge- +</bdi> 词干 + t。以 <bdi>be- / ge- / er- / ver- / ent- / zer-</bdi> 开头或以 <bdi>-ieren</bdi> 结尾的动词不加 <bdi>ge-</bdi>，请改用下面的「不可分前缀」「<bdi>-ieren</bdi>」两个锚点。"
+          "example": "gemacht"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "mach",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "mach"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "mach",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
+          "example": "mach"
         }
       ],
       "endings": {
@@ -929,26 +925,22 @@
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "arbeit",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
+          "example": "arbeit"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "gearbeitet",
-          "hint": "留空 = <bdi>ge- +</bdi> 词干 <bdi>+ et</bdi>。"
+          "example": "gearbeitet"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "arbeit",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "arbeit"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "arbeit",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
+          "example": "arbeit"
         }
       ],
       "endings": {
@@ -1474,26 +1466,22 @@
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "sammel",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
+          "example": "sammel"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "gesammelt",
-          "hint": "留空 = <bdi>ge- +</bdi> 词干 + t（<bdi>gesammelt / geändert</bdi>）。"
+          "example": "gesammelt"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "sammel",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "sammel"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "sammel",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
+          "example": "sammel"
         }
       ],
       "endings": {
@@ -2008,26 +1996,22 @@
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "studier",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
+          "example": "studier"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "studiert",
-          "hint": "留空 = 词干 + t（<bdi>-ieren</bdi> 动词不加 <bdi>ge</bdi>-）。"
+          "example": "studiert"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "studier",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "studier"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "studier",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
+          "example": "studier"
         }
       ],
       "endings": {
@@ -2536,26 +2520,22 @@
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "besuch",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
+          "example": "besuch"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "besucht",
-          "hint": "留空 = 词干 + t（不可分前缀动词不加 <bdi>ge</bdi>-）。"
+          "example": "besucht"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "besuch",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "besuch"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "besuch",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
+          "example": "besuch"
         }
       ],
       "endings": {
@@ -3080,32 +3060,27 @@
         {
           "key": "p23",
           "label": "现在时 2/3 单数词干",
-          "example": "sprich",
-          "hint": "换音的动词填换音后的词干：<bdi>sprechen → sprich</bdi>、<bdi>nehmen → nimm</bdi>、<bdi>fahren → fähr</bdi>。留空 = 现在时词干。"
+          "example": "sprich"
         },
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "sprach",
-          "hint": "过去时去掉词尾的部分：<bdi>sprechen → sprach</bdi>、<bdi>machen → mach</bdi>。留空 = 现在时词干。"
+          "example": "sprach"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "gesprochen",
-          "hint": "强变化的过去分词不规则，必须填（<bdi>gesprochen / genommen / gefunden</bdi>）。"
+          "example": "gesprochen"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "sprech",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "sprech"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "spräch",
-          "hint": "留空 = 过去时词干变音（<bdi>sprach → spräch</bdi>、<bdi>konnte → könnt</bdi>）。"
+          "example": "spräch"
         }
       ],
       "exampleStems": {
@@ -3640,26 +3615,22 @@
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "brachte",
-          "hint": "过去时带 -<bdi>te</bdi> 但词干变了（<bdi>brachte / dachte / kannte</bdi>），填整个过去时形式。"
+          "example": "brachte"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "gebracht",
-          "hint": "混合变化的过去分词不规则，必须填（<bdi>gebracht / gedacht / gekannt</bdi>）。"
+          "example": "gebracht"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "bring",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "bring"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "brächte",
-          "hint": "留空 = 过去时词干变音（<bdi>brachte → brächte</bdi>）。"
+          "example": "brächte"
         }
       ],
       "exampleStems": {
@@ -4194,32 +4165,27 @@
         {
           "key": "p1",
           "label": "现在时单数词干",
-          "example": "kann",
-          "hint": "情态动词现在时第一、三人称单数同形（<bdi>kann / muss / will / darf</bdi>），填这个形式。"
+          "example": "kann"
         },
         {
           "key": "pret",
           "label": "过去时词干",
-          "example": "konnte",
-          "hint": "如 <bdi>konnte / musste / wollte</bdi>。"
+          "example": "konnte"
         },
         {
           "key": "pp",
           "label": "过去分词词干",
-          "example": "gekonnt",
-          "hint": "如 <bdi>gekonnt / gemusst / gewollt</bdi>。"
+          "example": "gekonnt"
         },
         {
           "key": "k1",
           "label": "虚拟式 <bdi>I</bdi> 词干",
-          "example": "könn",
-          "hint": "留空 = 现在时词干（虚拟式 I = 词干 <bdi>+ -e / -est / -e / -en / -et / -en</bdi>）。"
+          "example": "könn"
         },
         {
           "key": "k2",
           "label": "虚拟式 <bdi>II</bdi> 词干",
-          "example": "könnte",
-          "hint": "留空 = 过去时词干变音（<bdi>konnte → könnte</bdi>）。<bdi>wollen / sollen</bdi> 的虚拟式 <bdi>II</bdi> 与过去时同形，填 <bdi>wollte / sollte</bdi>。"
+          "example": "könnte"
         }
       ],
       "exampleStems": {

@@ -1028,32 +1028,27 @@
         {
           "key": "perf",
           "label": "完成时词干",
-          "example": "amāv",
-          "hint": "规则动词 = 现在时词干 + -<bdi>āv</bdi>-"
+          "example": "amāv"
         },
         {
           "key": "presptcp",
           "label": "现在时主动分词词干",
-          "example": "amant",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ant-</bdi>（<bdi>am → amant-</bdi>；主格 <bdi>amant-s</bdi> 补偿延长为 <bdi>amāns</bdi>）"
+          "example": "amant"
         },
         {
           "key": "ppp",
           "label": "完成时被动分词词干",
-          "example": "amāt",
-          "hint": "规则动词 = 现在时词干 + -<bdi>āt</bdi>-"
+          "example": "amāt"
         },
         {
           "key": "futact",
           "label": "将来时主动分词词干",
-          "example": "amātūr",
-          "hint": "规则动词 = 完成时被动分词词干 + -<bdi>ūr</bdi>-"
+          "example": "amātūr"
         },
         {
           "key": "futpass",
           "label": "将来时被动分词词干",
-          "example": "amand",
-          "hint": "规则动词 = 现在时词干 + -<bdi>and-</bdi>（<bdi>am → amand</bdi>-）"
+          "example": "amand"
         }
       ],
       "formRules": [
@@ -3400,32 +3395,27 @@
         {
           "key": "perf",
           "label": "完成时词干",
-          "example": "monu",
-          "hint": "规则动词 = 现在时词干 + -<bdi>u</bdi>-"
+          "example": "monu"
         },
         {
           "key": "presptcp",
           "label": "现在时主动分词词干",
-          "example": "monent",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ent-</bdi>（<bdi>mon → monent-</bdi>；主格 <bdi>monent-s → monēns</bdi>）"
+          "example": "monent"
         },
         {
           "key": "ppp",
           "label": "完成时被动分词词干",
-          "example": "monit",
-          "hint": "规则动词 = 现在时词干 + -<bdi>it-</bdi>；<bdi>doceō → doctum</bdi> 这类要手填"
+          "example": "monit"
         },
         {
           "key": "futact",
           "label": "将来时主动分词词干",
-          "example": "monitūr",
-          "hint": "规则动词 = 完成时被动分词词干 + -<bdi>ūr</bdi>-"
+          "example": "monitūr"
         },
         {
           "key": "futpass",
           "label": "将来时被动分词词干",
-          "example": "monend",
-          "hint": "规则动词 = 现在时词干 + -<bdi>end-</bdi>（<bdi>mon → monend</bdi>-）"
+          "example": "monend"
         }
       ],
       "formRules": [
@@ -5732,32 +5722,27 @@
         {
           "key": "perf",
           "label": "完成时词干",
-          "example": "rēx",
-          "hint": "第三变位法的完成时多不规则，请以词典为准"
+          "example": "rēx"
         },
         {
           "key": "presptcp",
           "label": "现在时主动分词词干",
-          "example": "regent",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ent-</bdi>（<bdi>reg → regent-</bdi>；主格 <bdi>regent-s → regēns</bdi>）"
+          "example": "regent"
         },
         {
           "key": "ppp",
           "label": "完成时被动分词词干",
-          "example": "rēct",
-          "hint": "规则型 = 元音延长 + -<bdi>ct- / -pt- / -s</bdi>-；请以词典为准"
+          "example": "rēct"
         },
         {
           "key": "futact",
           "label": "将来时主动分词词干",
-          "example": "rēctūr",
-          "hint": "规则动词 = 完成时被动分词词干 + -<bdi>ūr</bdi>-"
+          "example": "rēctūr"
         },
         {
           "key": "futpass",
           "label": "将来时被动分词词干",
-          "example": "regend",
-          "hint": "规则动词 = 现在时词干 + -<bdi>end-</bdi>（<bdi>reg → regend</bdi>-）"
+          "example": "regend"
         }
       ],
       "stemForms": {
@@ -8220,32 +8205,27 @@
         {
           "key": "perf",
           "label": "完成时词干",
-          "example": "audīv",
-          "hint": "规则动词 = 现在时词干 + -<bdi>īv</bdi>-"
+          "example": "audīv"
         },
         {
           "key": "presptcp",
           "label": "现在时主动分词词干",
-          "example": "audient",
-          "hint": "规则动词 = 现在时词干 + -<bdi>ient-</bdi>（<bdi>aud → audient-</bdi>；主格 <bdi>audient-s → audiēns</bdi>）"
+          "example": "audient"
         },
         {
           "key": "ppp",
           "label": "完成时被动分词词干",
-          "example": "audīt",
-          "hint": "规则动词 = 现在时词干 + -<bdi>īt-</bdi>；<bdi>veniō → ventum</bdi> 这类要手填"
+          "example": "audīt"
         },
         {
           "key": "futact",
           "label": "将来时主动分词词干",
-          "example": "audītūr",
-          "hint": "规则动词 = 完成时被动分词词干 + -<bdi>ūr</bdi>-"
+          "example": "audītūr"
         },
         {
           "key": "futpass",
           "label": "将来时被动分词词干",
-          "example": "audiend",
-          "hint": "规则动词 = 现在时词干 + -<bdi>iend-</bdi>（<bdi>aud → audiend</bdi>-）"
+          "example": "audiend"
         }
       ],
       "formRules": [

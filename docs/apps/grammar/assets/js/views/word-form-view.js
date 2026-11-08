@@ -590,8 +590,12 @@ export default {
             target: principalInput
         })
 
-        // 词干 + 额外词干：放在变格、变位表头顶
-        const stemsBlock = h('div', { class: 'word-form__stems' }, stemsRow, extraPartsSlot)
+        // 词干 + 额外词干：放在变格、变位表头顶，自带标题，不挂在「含义」下
+        const stemsBlock = h('div', { class: 'word-form__stems' },
+            h('div', { class: 'word-form__group-title' }, termNode('stemsTitle')),
+            stemsRow,
+            extraPartsSlot
+        )
 
         // 字段顺序：基本形态+词性 → 属性/类型/锚点 → 含义 → 变格变位表（含词干）
         form.appendChild(inflectionRow)

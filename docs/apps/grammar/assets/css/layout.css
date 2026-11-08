@@ -211,9 +211,3 @@ h1.page-head__title {
 @keyframes boot-spin {
     to { transform: rotate(360deg); }
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .boot-loader__spinner {
-        animation-duration: 2.4s;
-    }
-}

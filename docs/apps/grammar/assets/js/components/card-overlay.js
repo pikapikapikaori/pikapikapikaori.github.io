@@ -308,7 +308,7 @@ export function openCardOverlay(word, opts = {}) {
                         const target = resolveDerivative ? resolveDerivative(d) : null
                         if (target && onDerivativeClick) {
                             return h('button', {
-                                class: 'badge badge--accent word-card__derivative',
+                                class: 'badge badge--accent badge--clickable word-card__derivative',
                                 type: 'button',
                                 onclick: (e) => {
                                     e.stopPropagation()

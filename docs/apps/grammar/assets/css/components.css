@@ -517,37 +517,6 @@
     margin-top: -0.4rem;
 }
 
-/* 标签、输入框、提示排成固定两列，提示固定落在输入框下方，
-   这样有没有提示都不会把输入框挤得上下错位 */
-.field--part {
-    display: grid;
-    grid-template-columns: 11.5rem minmax(0, 1fr);
-    grid-template-areas:
-        "label control"
-        ".     hint";
-    align-items: center;
-    align-content: start;
-    column-gap: var(--sp-2);
-    row-gap: 2px;
-}
-
-.field--part > .field__label {
-    grid-area: label;
-    text-align: left;
-    justify-self: stretch;
-}
-
-.field--part > .input,
-.field--part > .select,
-.field--part > .ghost-input {
-    grid-area: control;
-}
-
-.field--part .field__hint {
-    grid-area: hint;
-    align-self: start;
-}
-
 .word-card__inflections {
     display: flex;
     flex-direction: column;
@@ -639,10 +608,12 @@ button.word-card__derivative {
 
 .badge--clickable {
     cursor: pointer;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
 .badge--clickable:hover {
     background: var(--c-accent);
+    border-color: var(--c-accent);
     color: var(--c-accent-fg);
 }
 

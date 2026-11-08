@@ -258,7 +258,7 @@ export function getParadigmTemplate(doc, pos) {
 const TERM_KEYS = [
     // 形态变形相关的界面用词
     'inflectionType', 'inflectionTypePlaceholder',
-    'special', 'indeclinable', 'paradigmTitle', 'extraForms',
+    'special', 'indeclinable', 'paradigmTitle', 'extraForms', 'stemsTitle',
     // 分区标题（表单、词卡、复习共用）
     'meanings', 'collocations', 'examples', 'derivatives', 'tags', 'notes', 'others',
     'paradigmTable', 'optionalSuffix', 'add', 'addMeaning',

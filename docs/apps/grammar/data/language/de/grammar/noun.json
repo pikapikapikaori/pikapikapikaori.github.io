@@ -119,8 +119,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Tisch",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -291,8 +290,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Männ",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -463,8 +461,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Kind",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -635,8 +632,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Jahr",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -807,8 +803,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Fenster",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -979,8 +974,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Frau",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -1153,8 +1147,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Händ",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -1327,8 +1320,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Student",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {
@@ -1495,8 +1487,7 @@
               "key": "pl",
               "label": "复数词干",
               "example": "Nam",
-              "required": true,
-              "hint": "复数各格共有的部分，不含复数词尾：<bdi>Tisch(e) → Tisch</bdi>、<bdi>Mann/Männer → Männ</bdi>、<bdi>Hand/Hände → Händ</bdi>。词尾用本类型的复数词尾补上。"
+              "required": true
             }
           ],
           "stemForms": {

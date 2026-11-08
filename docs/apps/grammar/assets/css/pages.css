@@ -73,7 +73,7 @@
 
 .user-item__actions {
     display: flex;
-    gap: var(--sp-1);
+    gap: var(--sp-2);
 }
 
 /* ---------- Language select（书目式索引） ---------- */
@@ -463,7 +463,7 @@
 .word-form .field__parts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--sp-5);
+    column-gap: var(--sp-3);
     row-gap: var(--sp-3);
     margin-top: var(--sp-3);
 }
@@ -491,6 +491,13 @@
 
 .word-form__extras > .field + .field {
     margin-top: var(--sp-6);
+}
+
+/* 长输入框右侧让出删除按钮那一栏，右缘与含义、例句、固定搭配三行齐平 */
+.word-form__stems > .field,
+.word-form__extras > .field,
+.derivative-picker > .field {
+    padding-right: var(--w-form-tail);
 }
 
 /* 词干块自带标题，与后面的变形表标题隔开一个分组间距 */
@@ -549,9 +556,9 @@
     text-align: end;
 }
 
-/* 含义：输入框加语言下拉的合计宽度，与固定搭配行的两个输入框相同 */
+/* 含义：输入框与语言下拉 7:3，右缘与例句、固定搭配三行齐平 */
 .word-form__item--meaning {
-    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 120px 8.25rem auto;
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 7fr 3fr 8.25rem auto;
 }
 
 /* 补充形式行：分组、标签、形态、来源、删除按钮 */
@@ -559,12 +566,12 @@
     grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 1fr 8.25rem auto;
 }
 
-/* 例句：栅格与固定搭配行相同，原文、出处的宽度与搭配的两个输入框一致 */
+/* 例句：原文与出处、译文与关联含义都是 7:3，右缘与含义、固定搭配三行齐平 */
 .word-form__item--example {
-    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 8.25rem auto;
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 7fr 3fr 8.25rem auto;
 }
 
-/* 译文在原文下方，关联含义在出处下方，四栏等宽 */
+/* 译文在原文下方，关联含义在出处下方 */
 .word-form__item--example .word-form__cell--translation {
     grid-column: 2;
     grid-row: 2;
@@ -635,6 +642,12 @@
         grid-column: 1;
     }
 
+    .word-form__stems > .field,
+    .word-form__extras > .field,
+    .derivative-picker > .field {
+        padding-right: 0;
+    }
+
     .word-form .field__parts {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -657,7 +670,7 @@
         align-items: start;
         column-gap: var(--sp-2);
         row-gap: var(--sp-2);
-        padding-right: 40px;
+        padding-right: 46px;
     }
 
     .word-form__item > *:not(.word-form__index):not(.word-form__cell--remove) {

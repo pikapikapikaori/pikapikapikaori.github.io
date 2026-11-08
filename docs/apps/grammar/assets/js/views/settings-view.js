@@ -55,7 +55,7 @@ export default {
 
         const nameInput = h('input', {
             class: 'input',
-            style: { width: '200px' },
+            style: { width: '142px' },
             value: user.name,
             onkeydown: (e) => { if (e.key === 'Enter') e.currentTarget.blur() },
             onblur: () => { commitUserName() }
@@ -160,11 +160,6 @@ export default {
             )
         ))
 
-        container.appendChild(buildSection('关于',
-            row('数据存储', '只存在本机浏览器，不联网上传', null),
-            row('版本', 'v1', null)
-        ))
-
         function buildSection(title, ...rows) {
             return h('section', { class: 'settings-section' },
                 h('div', { class: 'settings-section__title' }, title),
@@ -187,7 +182,7 @@ export default {
         function selectControl(options, value, onChange) {
             return h('select', {
                 class: 'select',
-                style: { minWidth: '140px' },
+                style: { width: '142px' },
                 onchange: (e) => onChange(e.target.value)
             }, ...options.map((o) => h('option', {
                 value: o.value,

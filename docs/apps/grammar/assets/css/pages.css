@@ -530,6 +530,8 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-3);
+    /* 标题与右侧动作区放不下时换行，窄屏的长状态文字不会撑出横向滚动 */
+    flex-wrap: wrap;
     font-size: var(--fs-md);
     font-weight: 600;
     color: var(--c-fg);
@@ -537,18 +539,19 @@
 }
 
 /* 标题行右侧：禁用原因在前，按钮在后，两者同行居中 */
-.word-form__generate {
+/* 分区标题行右侧的动作区：禁用原因之类的灰字在前，按钮在后 */
+.word-form__title-actions {
     display: flex;
     align-items: center;
     gap: var(--sp-2);
     flex: none;
 }
 
-.word-form__generate-hint {
+.word-form__title-hint {
     font-weight: 400;
 }
 
-.word-form__generate-hint:empty {
+.word-form__title-hint:empty {
     display: none;
 }
 

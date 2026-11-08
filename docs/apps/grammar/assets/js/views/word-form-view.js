@@ -482,13 +482,13 @@ export default {
         }
 
         /** 按钮的禁用原因只写在 title 里看不见，这里再写成一行可见的灰字 */
-        const generateHint = h('span', { class: 'field__hint word-form__generate-hint' })
+        const generateHint = h('span', { class: 'field__hint word-form__title-hint' })
         const generateBtn = h('button', {
             class: 'btn btn--sm',
             type: 'button',
             onclick: onGenerate
         }, '生成表格')
-        const generateBar = h('div', { class: 'word-form__generate' }, generateHint, generateBtn)
+        const generateBar = h('div', { class: 'word-form__title-actions' }, generateHint, generateBtn)
 
         /* ---------- 词性自己声明的属性字段（语法性、自他…） ---------- */
 
@@ -570,11 +570,17 @@ export default {
             return group
         }
 
-        form.appendChild(h('div', { class: 'word-form__row word-form__card' },
-            fieldRow(termNode('lemma.label'), lemmaField.el),
-            fieldRow(termNode('posLabel'), posSelect, { extras: [lookupStatus], target: posSelect }),
-            // 查询按钮单独占第一行最右一格，与「生成表格」「添加含义」同一条竖线
-            externalSources.length ? lookupBtn : null
+        // 基本形态：标题与词条行同属一组，标题下方的间距与其他分区一致
+        const lookupBar = h('div', { class: 'word-form__title-actions' }, lookupStatus, lookupBtn)
+        form.appendChild(h('div', {},
+            h('div', { class: 'word-form__group-title' },
+                termNode('basicTitle'),
+                externalSources.length ? lookupBar : null
+            ),
+            h('div', { class: 'word-form__row word-form__card' },
+                fieldRow(termNode('lemma.label'), lemmaField.el),
+                fieldRow(termNode('posLabel'), posSelect, { target: posSelect })
+            )
         ))
 
         const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)
@@ -1060,9 +1066,6 @@ export default {
                     showTitle: false,
                     hideColumns: hiddenGender.columns,
                     hideRows: hiddenGender.rows,
-                    onGrammarRef: (ref) => {
-                        location.hash = `#/grammar/${lang}#${ref}`
-                    },
                     editable: {
                         onChange: (rowKey, colKey, value) => {
                             if (!data.paradigm[tableTpl.key]) data.paradigm[tableTpl.key] = {}

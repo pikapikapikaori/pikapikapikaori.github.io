@@ -216,7 +216,6 @@ export function openCardOverlay(word, opts = {}) {
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang: language,
                     mode: 'view',
-                    onGrammarRef: wrappedGrammarRef,
                     // 只有一张表时保留表自己的标题；多张时用 tab 名
                     showTitle: candidates.length <= 1,
                     hideColumns: hiddenGender.columns,

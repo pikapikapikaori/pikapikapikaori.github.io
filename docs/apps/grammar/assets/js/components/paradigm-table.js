@@ -12,7 +12,6 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
         lang = null,
         mode = 'view',
         showTitle = true,
-        onGrammarRef = null,
         editable = null,
         hideColumns = [],
         hideRows = [],
@@ -75,28 +74,11 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
     for (const row of rows) {
         const cells = data[row.key] || {}
 
-        const rowHeadChildren = [
-            h('span', { class: 'paradigm-table__row-label' }, bdiFragment(row.label, lang))
-        ]
-        if (row.grammarRef && onGrammarRef) {
-            rowHeadChildren.push(
-                h('button', {
-                    class: 'paradigm-table__ref',
-                    type: 'button',
-                    title: '查看语法',
-                    onclick: (e) => {
-                        e.stopPropagation()
-                        onGrammarRef(row.grammarRef)
-                    }
-                }, '语法')
-            )
-        }
-
         const tr = h('tr', { dataset: { row: row.key } },
             h('th', {
                 class: 'paradigm-table__row-head',
                 scope: 'row'
-            }, ...rowHeadChildren)
+            }, h('span', { class: 'paradigm-table__row-label' }, bdiFragment(row.label, lang)))
         )
 
         for (const col of columns) {

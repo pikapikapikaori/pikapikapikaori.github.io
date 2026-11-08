@@ -1051,24 +1051,6 @@ button.word-card__derivative {
     vertical-align: middle;
 }
 
-.paradigm-table__ref {
-    display: inline-block;
-    margin-left: 6px;
-    padding: 0 6px;
-    font-size: var(--fs-xs);
-    color: var(--c-accent);
-    background: var(--c-accent-soft);
-    border-radius: var(--r-full);
-    cursor: pointer;
-    border: none;
-    line-height: 1.6;
-}
-
-.paradigm-table__ref:hover {
-    background: var(--c-accent);
-    color: var(--c-accent-fg);
-}
-
 .paradigm-table__cell {
     text-align: center;
     white-space: nowrap;

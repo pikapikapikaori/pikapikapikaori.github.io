@@ -286,7 +286,7 @@
       "parts": [
         {
           "key": "base",
-          "label": "词干（去掉 -<bdi>ᠮᠪᡳ</bdi>）",
+          "label": "词干",
           "example": "ᠠᡵᠠ",
           "required": false
         }

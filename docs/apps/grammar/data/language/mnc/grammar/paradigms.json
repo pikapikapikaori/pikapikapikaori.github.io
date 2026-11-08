@@ -166,15 +166,15 @@
           },
           {
             "key": "nomn",
-            "label": "名词化"
+            "label": "名词化（-n 型）"
           },
           {
             "key": "nomsi",
-            "label": "名词化"
+            "label": "名词化（-si 型）"
           },
           {
             "key": "nomtan",
-            "label": "名词化"
+            "label": "名词化（-tVn 型）"
           }
         ]
       }

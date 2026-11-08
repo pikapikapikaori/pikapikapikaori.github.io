@@ -218,7 +218,6 @@
         "key": "aux",
         "label": "完成时助动词",
         "required": true,
-        "hint": "完成时用 haben 还是 sein：多数动词用 haben，表位移动 / 状态变化的动词（gehen, fahren, bleiben, werden）用 sein，两者都用时两个都选（如 fahren 及物时用 haben、不及物时用 sein）。",
         "options": [
           {
             "value": "haben",

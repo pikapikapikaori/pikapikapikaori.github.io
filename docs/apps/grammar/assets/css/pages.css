@@ -409,10 +409,22 @@
     min-width: 0;
 }
 
+/* 第一行：左栏与固定搭配原文同宽，词性一格与固定搭配含义同宽，最右一格放查询按钮 */
 .word-form__row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        /* 左栏右缘 = 固定搭配原文输入框右缘 */
+        calc(160px + (100% - 316px) / 2)
+        /* 词性一格右缘 = 固定搭配含义输入框右缘 */
+        calc((100% - 316px) / 2 - 4px)
+        1fr;
     gap: var(--sp-3);
+}
+
+/* 最右一格里的按钮贴右、与词性下拉顶端齐平 */
+.word-form__row > .btn {
+    justify-self: end;
+    align-self: start;
 }
 
 /* 表单不用卡片：靠留白和分组标题分层 */
@@ -442,12 +454,16 @@
     grid-column: 2;
 }
 
-/* 属性（语法性、自他…）+ 锚点 + 变格变位类型：同一块，窄屏自动换行 */
+/* 属性（语法性、自他…）+ 锚点 + 变格变位类型：同一块，两栏与固定搭配同宽 */
 .word-form__panel {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--sp-3) var(--sp-5);
+    grid-template-columns:
+        /* 左栏右缘 = 固定搭配原文输入框右缘，右栏右缘 = 固定搭配含义输入框右缘 */
+        calc(160px + (100% - 168px) / 2)
+        calc((100% - 176px) / 2);
+    gap: var(--sp-3) var(--sp-3);
     align-items: start;
+    padding-right: var(--w-form-tail);
 }
 
 .word-form__panel > * {
@@ -459,13 +475,17 @@
     grid-column: 1 / -1;
 }
 
-/* 额外词干：两列，从表单左边开始；每项与主词干同一套栅格（标签一栏、控件一栏） */
+/* 额外词干：两栏与固定搭配同宽，每项与主词干同一套栅格（标签一栏、控件一栏） */
 .word-form .field__parts {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+        /* 左栏右缘 = 固定搭配原文输入框右缘，右栏右缘 = 固定搭配含义输入框右缘 */
+        calc(160px + (100% - 168px) / 2)
+        calc((100% - 176px) / 2);
     column-gap: var(--sp-3);
     row-gap: var(--sp-3);
     margin-top: var(--sp-3);
+    padding-right: var(--w-form-tail);
 }
 
 .word-form .field--part {
@@ -642,6 +662,9 @@
         grid-column: 1;
     }
 
+    .word-form__row,
+    .word-form__panel,
+    .word-form .field__parts,
     .word-form__stems > .field,
     .word-form__extras > .field,
     .derivative-picker > .field {

@@ -339,6 +339,8 @@ export default {
         const inflectionRef = createSelect({
             lang,
             className: 'select',
+            // 收起态会被省略号截断，鼠标停上去给全文
+            nowrap: true,
             onChange: (v) => {
                 const opt = currentOptionsById[v]
                 // 换锚点要重写类型说明，否则内容不跟着变：特殊 → 清空待填；
@@ -570,10 +572,9 @@ export default {
 
         form.appendChild(h('div', { class: 'word-form__row word-form__card' },
             fieldRow(termNode('lemma.label'), lemmaField.el),
-            fieldRow(termNode('posLabel'), h('div', { class: 'field__row' },
-                posSelect,
-                externalSources.length ? lookupBtn : null
-            ), { extras: [lookupStatus], target: posSelect })
+            fieldRow(termNode('posLabel'), posSelect, { extras: [lookupStatus], target: posSelect }),
+            // 查询按钮单独占第一行最右一格，与「生成表格」「添加含义」同一条竖线
+            externalSources.length ? lookupBtn : null
         ))
 
         const inflectionTypeLabelEl = h('span', { class: 'field__label' }, currentTerms().inflectionType)

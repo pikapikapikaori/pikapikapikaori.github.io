@@ -118,9 +118,12 @@ export function canResolveStem(stem, stemForm, spec, userStems, seen, profile) {
 }
 
 /** 词干输入框的「推导预览」：能推出来就给值，推不出给空串 */
-export function previewStem(stem, stemForm, spec, userStems, profile = null) {
-    if (!spec || !canResolveStem(stem, stemForm, spec, userStems, null, profile)) return ''
-    return resolveStem(stem, stemForm, spec, userStems, null, profile)
+export function previewStem(stem, stemForm, spec, userStems, profile = null, script = null) {
+    if (!spec) return ''
+    const parts = romanizeParts(normalizeStemParts(stem, userStems, userStems?.headword), spec, script)
+    const base = parts.base || stem
+    if (!canResolveStem(base, stemForm, spec, parts, null, profile)) return ''
+    return resolveStem(base, stemForm, spec, parts, null, profile)
 }
 
 /** 来源优先级：用户填的 → spec.stems → stemForms 规则 → base，最后才问语言档案。
@@ -279,6 +282,22 @@ function rulesInRoman(spec, script) {
 }
 
 /**
+ * 词尾规则用转写写时，先把词干转成转写；古希腊语、希伯来语的词尾本身就是原文，
+ * 再转一次会把重音、气符弄丢，所以只对满文、梵语这类生效。
+ */
+function romanizeParts(parts, spec, script) {
+    if (typeof script?.toRoman !== 'function' || !rulesInRoman(spec, script)) return parts
+    // 下拉选项（如 aorist、perfect 的类型名）是元数据，不做转写
+    const metaKeys = new Set((spec.parts || []).filter((p) => p && p.kind === 'select').map((p) => p.key))
+    const out = { ...parts }
+    for (const key of Object.keys(out)) {
+        const value = String(out[key] ?? '')
+        if (value && !metaKeys.has(key)) out[key] = script.toRoman(value)
+    }
+    return out
+}
+
+/**
  * 按词尾规则填表，只填空格子；`overwrite` 为真时覆盖。
  * `profile` 是语言档案，`script` 负责转写与原文互转。
  * @returns {{ paradigm, filled, skipped, skippedTables }}（另有 `variant`、`usedTables`、`noVariant`）
@@ -286,17 +305,7 @@ function rulesInRoman(spec, script) {
 export function generateParadigm({ stem, stems, headword, spec, template, existing, profile, script, overwrite = false } = {}) {
     const result = { paradigm: {}, filled: [], skipped: [], skippedTables: [] }
     if (!spec || !template || !Array.isArray(template.tables)) return result
-    const parts = normalizeStemParts(stem, stems, headword)
-    // 只有「词尾规则用转写写」的语言才需要先把输入转成转写（满文、梵语）；
-    // 古希腊语、希伯来语的词尾本身就是原文，再转一次会把重音、气符弄丢
-    if (typeof script?.toRoman === 'function' && rulesInRoman(spec, script)) {
-        // 下拉选项（如 aorist、perfect 的类型名）是元数据，不做转写
-        const metaKeys = new Set((spec.parts || []).filter((p) => p && p.kind === 'select').map((p) => p.key))
-        for (const key of Object.keys(parts)) {
-            const value = String(parts[key] ?? '')
-            if (value && !metaKeys.has(key)) parts[key] = script.toRoman(value)
-        }
-    }
+    const parts = romanizeParts(normalizeStemParts(stem, stems, headword), spec, script)
     // 是否要把结果转成文字（满文）
     const useScript = typeof script?.toScript === 'function'
     const base = parts.base || ''

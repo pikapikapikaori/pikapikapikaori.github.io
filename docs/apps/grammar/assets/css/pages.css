@@ -576,7 +576,7 @@
     font-size: var(--fs-sm);
     font-variant-numeric: tabular-nums;
     color: var(--c-fg-subtle);
-    text-align: end;
+    text-align: start;
 }
 
 /* 含义：输入框与语言下拉 7:3，右缘与例句、固定搭配三行齐平 */

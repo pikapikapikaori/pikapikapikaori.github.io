@@ -853,7 +853,7 @@ export default {
             const stems = collectStems()
             delete stems.base
             const headword = normalizeStem(lemmaInput.value)
-            return toScriptText(previewStem('', 'base', spec, { ...romanStems(stems), headword }, paradigmProfile))
+            return toScriptText(previewStem('', 'base', spec, { ...romanStems(stems), headword }, paradigmProfile, scriptProfile))
         }
 
         /** 某个补充词干的推导值（忽略该框自己已填的内容） */
@@ -864,7 +864,7 @@ export default {
             delete stems[key]
             const headword = normalizeStem(lemmaInput.value)
             const roman = romanStems(stems)
-            return toScriptText(previewStem(roman.base || '', key, spec, { ...roman, headword }, paradigmProfile))
+            return toScriptText(previewStem(roman.base || '', key, spec, { ...roman, headword }, paradigmProfile, scriptProfile))
         }
 
         /** 刷新所有词干输入框上的「推导提示」 */
@@ -951,7 +951,7 @@ export default {
                     if (String(data.stems[part.key] ?? '').trim()) continue
                     const roman = romanStems(currentStems)
                     const value = previewStem(roman.base || '', part.key, spec,
-                        { ...roman, headword }, paradigmProfile)
+                        { ...roman, headword }, paradigmProfile, scriptProfile)
                     if (!value) continue
                     data.stems[part.key] = toScriptText(value)
                     filledParts.push(part.key)

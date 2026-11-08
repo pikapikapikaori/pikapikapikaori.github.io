@@ -167,7 +167,8 @@ function parseTable(lines, i, parent) {
     return j
 }
 
-function splitRow(line) {
+/** 表格一行按竖线切成单元格；笔记的表格渲染也用它 */
+export function splitRow(line) {
     let text = line.trim()
     if (text.startsWith('|')) text = text.slice(1)
     if (text.endsWith('|') && !text.endsWith('\\|')) text = text.slice(0, -1)

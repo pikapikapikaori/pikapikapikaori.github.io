@@ -76,7 +76,8 @@ function append(el, children) {
  */
 const HTML_TAGS = new Set([
     'STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN',
-    'UL', 'OL', 'LI', 'P', 'BDI'
+    'UL', 'OL', 'LI', 'P', 'BDI',
+    'U', 'S', 'DEL', 'INS', 'MARK', 'DETAILS', 'SUMMARY'
 ])
 
 /** bdi 只接受这几个属性：语言、方向、样式钩子 */

@@ -234,6 +234,8 @@ function isInsidePanel(el) {
 
 /** 失焦去首尾空白 */
 function trimField(field) {
+    // 笔记的缩进与空行都是内容，不能裁
+    if (field.el.dataset && field.el.dataset.imeRaw === 'true') return
     const value = field.getValue()
     const trimmed = value.trim()
     if (value === trimmed) return
@@ -246,6 +248,8 @@ function trimField(field) {
 /** 原文类输入框吞掉数字与中文标点（含中日韩文字的框不动） */
 function sanitizeTarget() {
     if (!state.target) return
+    // 笔记要写 # 标题、1. 编号、数字，不能按「原文词」的规则清理
+    if (state.target.el.dataset && state.target.el.dataset.imeRaw === 'true') return
     const value = state.target.getValue()
     const clean = sanitizeOriginal(value)
     if (clean === value) return

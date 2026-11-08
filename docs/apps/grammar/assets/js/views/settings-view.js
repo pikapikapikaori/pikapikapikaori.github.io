@@ -4,6 +4,7 @@ import { h, replace } from '../utils/dom.js'
 import { appStore, setSettings, setUser } from '../app-state.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
 import { exportUser, importUser } from '../services/import-export-service.js'
+import { listNotes } from '../store/note-store.js'
 import { listAll } from '../store/word-store.js'
 import { deleteUser, saveUser } from '../store/user-store.js'
 import { clearHttpCache } from '../store/http-cache.js'
@@ -131,7 +132,7 @@ export default {
                     onclick: doExport
                 }, '导出')
             ),
-            row('导入 JSON', '按语言 + 基本形态 + 词性合并，复习记录保留',
+            row('导入 JSON', '词按语言 + 基本形态 + 词性合并，复习记录保留；笔记按语言整份覆盖',
                 h('label', { class: 'btn', style: { cursor: 'pointer' } },
                     '选择文件',
                     h('input', {
@@ -256,7 +257,8 @@ export default {
             try {
                 const words = await listAll(userId)
                 const s = await getSettings(userId)
-                const name = await exportUser(user, s, words)
+                const notes = await listNotes(userId)
+                const name = await exportUser(user, s, words, notes)
                 toast.success(`已导出 ${name}`, 3600)
             } catch (err) {
                 toast.error(`导出失败：${err.message}`)
@@ -270,7 +272,7 @@ export default {
 
             const ok = await confirmModal({
                 title: '导入 JSON',
-                message: '同一语言、同一基本形态与词性的生词会合并，复习记录保留。继续？',
+                message: '同一语言、同一基本形态与词性的生词会合并，复习记录保留；笔记会按语言整份覆盖。继续？',
                 confirmLabel: '导入'
             })
             if (!ok) return
@@ -281,7 +283,8 @@ export default {
                     targetUserId: userId
                 })
                 toast.success(
-                    `导入完成：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`,
+                    `导入完成：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`
+                    + (stats.notes ? ` · 笔记 ${stats.notes}` : ''),
                     5000
                 )
             } catch (err) {

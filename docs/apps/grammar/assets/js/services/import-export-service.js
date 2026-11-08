@@ -11,12 +11,14 @@ import { normalizeSettings } from '../store/settings-store.js'
 import { normalizeParadigm, normalizeStems, normalizeAttributes, mergeWordContent } from '../models/word.js'
 import { wordId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
+import { saveNote } from '../store/note-store.js'
 
-export async function exportUser(user, settings, words) {
+export async function exportUser(user, settings, words, notes) {
     const payload = buildExportPayload({
         user: { ...user },
         settings: normalizeSettings(settings),
-        words: words.map(cleanWordForExport)
+        words: words.map(cleanWordForExport),
+        notes: (Array.isArray(notes) ? notes : []).map(cleanNoteForExport)
     })
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -52,6 +54,13 @@ function cleanWordForExport(w) {
         notes: w.notes || '',
         addedAt: w.addedAt,
         updatedAt: w.updatedAt
+    }
+}
+
+function cleanNoteForExport(row) {
+    return {
+        language: row.language,
+        lines: Array.isArray(row.lines) ? row.lines.map((line) => String(line ?? '')) : []
     }
 }
 
@@ -105,7 +114,7 @@ export async function importUser(source, options = {}) {
         await saveUser(finalUser)
     }
 
-    const stats = { created: 0, merged: 0, skipped: 0, total: words.length }
+    const stats = { created: 0, merged: 0, skipped: 0, total: words.length, notes: 0 }
 
     for (const raw of words) {
         const w = normalizeImportedWord(raw, finalUser.id)
@@ -124,6 +133,13 @@ export async function importUser(source, options = {}) {
 
     const st = normalizeSettings({ ...settings })
     await dbPut(STORE_SETTINGS, { userId: finalUser.id, ...st })
+
+    for (const raw of Array.isArray(payload.notes) ? payload.notes : []) {
+        const language = String((raw && raw.language) || '').trim()
+        if (!language || !Array.isArray(raw.lines)) continue
+        await saveNote(finalUser.id, language, raw.lines)
+        stats.notes += 1
+    }
 
     return { user: finalUser, stats }
 }

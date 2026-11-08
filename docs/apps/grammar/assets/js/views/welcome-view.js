@@ -158,7 +158,7 @@ const welcomeView = {
                 body: h('div', { class: 'import-words-body' },
                     input.el,
                     h('div', { class: 'field__hint' },
-                        '文件格式为 { version, kind: "langnotebook-user", user, settings, words }。'
+                        '文件格式为 { version, kind: "langnotebook-user", user, settings, words, notes }。'
                     )
                 ),
                 actions: [
@@ -175,7 +175,8 @@ const welcomeView = {
                             try {
                                 const { user, stats } = await importUser(text, { mode: 'new' })
                                 toast.success(
-                                    `已导入「${user.name}」：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`,
+                                    `已导入「${user.name}」：新增 ${stats.created} · 合并 ${stats.merged} · 跳过 ${stats.skipped}`
+                                    + (stats.notes ? ` · 笔记 ${stats.notes}` : ''),
                                     5000
                                 )
                                 await enterUser(user.id)

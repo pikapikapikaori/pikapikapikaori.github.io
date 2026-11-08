@@ -1,12 +1,13 @@
-/** IndexedDB 封装：库名 langnotebook，当前版本 2。 */
+/** IndexedDB 封装：库名 langnotebook，当前版本 1。 */
 
 export const DB_NAME = 'langnotebook'
-export const DB_VERSION = 2
+export const DB_VERSION = 1
 
 export const STORE_USERS = 'users'
 export const STORE_WORDS = 'words'
 export const STORE_SETTINGS = 'settings'
 export const STORE_HTTP_CACHE = 'httpCache'
+export const STORE_NOTES = 'notes'
 
 let _dbPromise = null
 
@@ -53,14 +54,16 @@ function upgrade(db, oldVersion) {
         if (!db.objectStoreNames.contains(STORE_SETTINGS)) {
             db.createObjectStore(STORE_SETTINGS, { keyPath: 'userId' })
         }
-    }
-    if (oldVersion < 2) {
         if (!db.objectStoreNames.contains(STORE_HTTP_CACHE)) {
             const s = db.createObjectStore(STORE_HTTP_CACHE, { keyPath: 'key' })
             s.createIndex('storedAt', 'storedAt', { unique: false })
         }
+        if (!db.objectStoreNames.contains(STORE_NOTES)) {
+            const s = db.createObjectStore(STORE_NOTES, { keyPath: 'id' })
+            s.createIndex('userId', 'userId', { unique: false })
+        }
     }
-    // 新增版本时在此追加 if (oldVersion < 3) {...}
+    // 新增版本时在此追加 if (oldVersion < 2) {...}
 }
 
 function reqToPromise(req) {

@@ -105,7 +105,7 @@ function renderFatal(message) {
 }
 
 /** 需要输入助手的视图（其余页面没有常驻按钮） */
-const IME_VIEWS = new Set(['words', 'wordNew', 'wordEdit'])
+const IME_VIEWS = new Set(['words', 'wordNew', 'wordEdit', 'notes'])
 
 const VIEW_MODULES = {
     welcome: () => import('./views/welcome-view.js'),
@@ -114,6 +114,7 @@ const VIEW_MODULES = {
     wordNew: () => import('./views/word-form-view.js'),
     wordEdit: () => import('./views/word-form-view.js'),
     review: () => import('./views/review-view.js'),
+    notes: () => import('./views/notes-view.js'),
     grammar: () => import('./views/grammar-view.js'),
     schema: () => import('./views/schema-view.js'),
     settings: () => import('./views/settings-view.js')
@@ -135,6 +136,7 @@ const router = createRouter([
     { path: '/lang/:lang/words/new', view: (ctx) => mountView('wordNew',    ctx) },
     { path: '/lang/:lang/words/:id', view: (ctx) => mountView('wordEdit',   ctx) },
     { path: '/lang/:lang/review',    view: (ctx) => mountView('review',     ctx) },
+    { path: '/lang/:lang/notes',     view: (ctx) => mountView('notes',      ctx) },
     { path: '/grammar',              view: () => router.navigate('/languages', { replace: true }) },
     { path: '/grammar/:lang/:group',  view: (ctx) => mountView('grammar',    ctx) },
     { path: '/grammar/:lang',        view: (ctx) => mountView('grammar',    ctx) },

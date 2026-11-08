@@ -14,13 +14,14 @@ export function isUserShape(obj) {
     && typeof obj.name === 'string'
 }
 
-export function buildExportPayload({ user, settings, words }) {
+export function buildExportPayload({ user, settings, words, notes }) {
     return {
         version: CURRENT_VERSION,
         kind: EXPORT_KIND,
         user: { ...user },
         settings: normalizeSettings(settings || DEFAULT_SETTINGS),
-        words: Array.isArray(words) ? words : []
+        words: Array.isArray(words) ? words : [],
+        notes: Array.isArray(notes) ? notes : []
     }
 }
 
@@ -43,6 +44,10 @@ export function validateExportPayload(payload) {
     }
     if (!Array.isArray(payload.words)) {
         errors.push('words 应为数组')
+    }
+    // notes 是后来加的：旧文件没有这一段，照样能导入
+    if (payload.notes != null && !Array.isArray(payload.notes)) {
+        errors.push('notes 应为数组')
     }
     return { ok: errors.length === 0, errors }
 }

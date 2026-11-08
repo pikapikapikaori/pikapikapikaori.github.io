@@ -161,6 +161,10 @@ export default {
                         class: 'btn', type: 'button',
                         onclick: () => location.hash = `#/lang/${lang}/review`
                     }, '复习'),
+                    h('button', {
+                        class: 'btn', type: 'button',
+                        onclick: () => location.hash = `#/lang/${lang}/notes`
+                    }, '笔记'),
                     h('div', { class: 'split-btn' },
                         h('button', {
                             class: 'btn btn--primary split-btn__main', type: 'button',

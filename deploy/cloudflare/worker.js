@@ -5,11 +5,10 @@ const HOST_PREFIX = {
     'home.pikapikapi.com': 'pages/mondrian/',
     'index.pikapikapi.com': 'pages/indexpage/',
     'photo.pikapikapi.com': 'pages/animepage/',
-    'bgmtv.pikapikapi.com': 'writings/_media/BangumiBackup-20260915/web/',
+    'bgmtv.pikapikapi.com': 'apps/bangumi-takeout/web/',
 }
 
 // 需要自动补 index.html 的目录路径（含默认域名和子域名下的相对路径）
-// 只对表里出现的路径生效，不做尾斜杠兜底
 const DIR_INDEX_PATHS = new Set([
     'pages/light/',
 ])
@@ -33,7 +32,6 @@ function rewriteHost(host, filePath) {
         return prefix + 'index.html'
     }
 
-    // 子域名下也走同一份白名单（这里用「相对该 host 前缀」的 key 匹配）
     if (DIR_INDEX_PATHS.has(filePath)) {
         return prefix + filePath + 'index.html'
     }
@@ -94,38 +92,30 @@ function rewriteContent(filePath, text) {
         // ---- indexpage ----
         case 'pages/indexpage/apps.json':
             return text
-                .replaceAll('"../mondrian/index.html"', '"https://home.pikapikapi.com/"')
+                .replaceAll('"../mondrian/index.html"', '"https://home.pikapikapi.com/?lang=zh-Hant"')
                 .replaceAll('"../../#/"', '"https://www.pikapikapi.com/#/"')
-                .replaceAll('"../animepage/index.html"', '"https://photo.pikapikapi.com/"')
-
-        // ---- mondrian ----
-        case 'pages/mondrian/index.html':
-            return text
-                .replaceAll('href="../../#/"', 'href="https://www.pikapikapi.com/#/"')
-                .replaceAll('href="../animepage/index.html"', 'href="https://photo.pikapikapi.com/"')
-
-        case 'pages/mondrian/i18n/en-us.html':
-            return text
-                .replaceAll('href="../../../#/en-us/"', 'href="https://www.pikapikapi.com/#/en-us/"')
-                .replaceAll('href="../../animepage/i18n/en-us.html"', 'href="https://photo.pikapikapi.com/i18n/en-us.html"')
-
-        case 'pages/mondrian/i18n/jp.html':
-            return text
-                .replaceAll('href="../../../#/jp/"', 'href="https://www.pikapikapi.com/#/jp/"')
-                .replaceAll('href="../../animepage/i18n/jp.html"', 'href="https://photo.pikapikapi.com/i18n/jp.html"')
+                .replaceAll('"../animepage/index.html"', '"https://photo.pikapikapi.com/?lang=zh-Hant"')
 
         // ---- animepage ----
         case 'pages/animepage/index.html':
             return text
                 .replaceAll('href="../../#/', 'href="https://www.pikapikapi.com/#/')
 
-        case 'pages/animepage/i18n/en-us.html':
+        case 'pages/animepage/assets/js/i18n.js':
             return text
-                .replaceAll('href="../../../#/', 'href="https://www.pikapikapi.com/#/')
+                .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
 
-        case 'pages/animepage/i18n/jp.html':
+        // ---- homepage ----
+        case 'pages/homepage/utils/i18n.js':
             return text
-                .replaceAll('href="../../../#/', 'href="https://www.pikapikapi.com/#/')
+                .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
+                .replaceAll("'../animepage/index.html?lang=", "'https://photo.pikapikapi.com/?lang=")
+
+        // ---- mondrian ----
+        case 'pages/mondrian/assets/js/i18n.js':
+            return text
+                .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
+                .replaceAll("'../animepage/index.html?lang=", "'https://photo.pikapikapi.com/?lang=")
 
         default:
             return text
@@ -135,12 +125,10 @@ function rewriteContent(filePath, text) {
 // 需要做内容替换的文件清单
 const REWRITE_PATHS = new Set([
     'pages/indexpage/apps.json',
-    'pages/mondrian/index.html',
-    'pages/mondrian/i18n/en-us.html',
-    'pages/mondrian/i18n/jp.html',
     'pages/animepage/index.html',
-    'pages/animepage/i18n/en-us.html',
-    'pages/animepage/i18n/jp.html',
+    'pages/animepage/assets/js/i18n.js',
+    'pages/homepage/utils/i18n.js',
+    'pages/mondrian/assets/js/i18n.js',
 ])
 
 // ========== 4. 生成 etag ==========

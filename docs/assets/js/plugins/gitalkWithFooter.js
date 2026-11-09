@@ -44,6 +44,7 @@ function plugin(hook, vm) {
     let gitalkScheduled = false
     let lastInputWasKeyboard = false
     let lastPopupOpen = false
+    let lastPopupSnapshot = null
     let pointerOverTrigger = false
 
     document.addEventListener('keydown', function () {
@@ -82,10 +83,19 @@ function plugin(hook, vm) {
         ring.classList.toggle('is-keyboard', focused && lastInputWasKeyboard)
     }
 
+    function capturePopupSnapshot(container) {
+        const popup = container.querySelector('.gt-popup:not(.is-leaving)')
+        if (!popup || !popup.querySelector('.gt-action')) return
+        lastPopupSnapshot = popup.cloneNode(true)
+    }
+
     function spawnPopupGhost(node, parent) {
         if (!parent || !parent.isConnected) return
 
-        const ghost = node.cloneNode(true)
+        const source = lastPopupSnapshot && lastPopupSnapshot.querySelector('.gt-action')
+            ? lastPopupSnapshot
+            : node
+        const ghost = source.cloneNode(true)
         ghost.classList.add('is-leaving')
         ghost.setAttribute('aria-hidden', 'true')
         ghost.setAttribute('inert', '')
@@ -158,6 +168,7 @@ function plugin(hook, vm) {
         syncHover(container)
         syncPopupState(container)
         syncRing(container)
+        capturePopupSnapshot(container)
     }
 
     function enhanceGitalk(container) {
@@ -309,6 +320,7 @@ function plugin(hook, vm) {
         })
         gitalk.render('gitalk-container')
         enhanceGitalk(gitalkContainer)
+        capturePopupSnapshot(gitalkContainer)
     })
 }
 

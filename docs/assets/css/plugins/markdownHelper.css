@@ -200,7 +200,7 @@ section.cover img.ignore-view-full-image-img {
 
 .search input {
     border: 0;
-    box-shadow: 0 0 0;
+    box-shadow: none;
     font-family: inherit;
 }
 

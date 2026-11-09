@@ -6,7 +6,6 @@
     var U = App.utils
     var CFG = App.config
 
-    var REDUCE = U.prefersReducedMotion()
     var registry = []
 
     /**
@@ -69,7 +68,7 @@
             readTarget()
             var diff = target - current
 
-            if (REDUCE || Math.abs(diff) < 0.0002) {
+            if (Math.abs(diff) < 0.0002) {
                 current = target
             } else {
                 /* 每帧重新询问当前应使用的阻尼系数 */

@@ -8,8 +8,6 @@
     var F = App.feed
     var CFG = App.config
 
-    var REDUCE = U.prefersReducedMotion()
-
     var FOLLOW = CFG.motion.follow
     var FOLLOW_END = CFG.blog.followEnd
     var RAMP_START = CFG.blog.followRampStart
@@ -122,7 +120,7 @@
                     Math.abs(np - (parseFloat(section.dataset.p) || 0)) > 0.01) {
                     window.scrollTo({
                         top: section.offsetTop + np * maxX,
-                        behavior: REDUCE ? 'auto' : 'smooth'
+                        behavior: 'smooth'
                     })
                 }
             })

@@ -5,6 +5,15 @@
     font-family: 'KakuGyoStd';
     src: url('../webfonts/fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
 }
+
+:root {
+    --border-color: rgba(255, 255, 255, .5);
+}
+
+.panel .content a.is-current {
+    border-bottom: solid 1px;
+    color: #ffe4b4;
+}
 /*
 	Ethereal by HTML5 UP
 	html5up.net | @ajlkn

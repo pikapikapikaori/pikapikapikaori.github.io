@@ -51,7 +51,7 @@ body{
 }
 
 :root{
-	module-spacing: 3vh;
+	--module-spacing: 3vh;
 }
 
 /* TEXT STYLES */

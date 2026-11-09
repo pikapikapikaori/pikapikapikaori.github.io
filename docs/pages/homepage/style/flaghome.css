@@ -9,8 +9,8 @@
 }
 
 :root {
-    --global-font-color: #fff;
-    --global-border-color: var(--global-border-color, rgba(255, 255, 255, .5));
+    --text-color: #fff;
+    --border-color: rgba(255, 255, 255, .5);
 }
 
 * {
@@ -23,7 +23,7 @@ body,
 html {
     font-family: "KakuGyoStd", cursive;
     -webkit-font-smoothing: antialiased;
-    color: var(--global-font-color, #fff);
+    color: var(--text-color);
     line-height: 1.5;
     min-width: 70%;
     background-color: #212121;
@@ -92,7 +92,7 @@ nav a.clip {
 nav a {
     display: inline-block;
     font-size: 13px;
-    color: var(--global-font-color, #fff);
+    color: var(--text-color);
     text-decoration: none;
     margin: 0 10px;
     opacity: .4;
@@ -104,7 +104,7 @@ nav a.time {
     opacity: 1;
 }
 
-nav a.active,
+nav a.is-current,
 nav a:hover {
     opacity: 1;
 }
@@ -122,11 +122,11 @@ nav a:hover {
     padding-bottom: 30px;
     font-size: 26px;
     letter-spacing: .2em;
-    color: var(--global-border-color, rgba(255, 255, 255, .5));
+    color: var(--border-color);
 }
 
 .ch h2.chtitle span {
-    color: var(--global-font-color, #fff);
+    color: var(--text-color);
 }
 
 .ch h2.chtitle:after {
@@ -134,7 +134,7 @@ nav a:hover {
     display: block;
     width: 10%;
     height: 5px;
-    background-color: var(--global-border-color, rgba(255, 255, 255, .5));
+    background-color: var(--border-color);
     margin-top: 30px;
 }
 
@@ -195,7 +195,7 @@ nav a:hover {
 }
 
 .intro {
-    color: var(--global-font-color, #fff);
+    color: var(--text-color);
     height: 100vh;
     padding: 0;
 }
@@ -244,12 +244,12 @@ nav a:hover {
 
 .about .introduct blockquote {
     padding-left: 1em;
-    border-left: 4px solid var(--global-border-color, rgba(255, 255, 255, .5));
-    color: var(--global-border-color, rgba(255, 255, 255, .5));
+    border-left: 4px solid var(--border-color);
+    color: var(--border-color);
 }
 
 .links a {
-    color: var(--global-font-color, #fff);
+    color: var(--text-color);
     text-decoration: none;
 }
 

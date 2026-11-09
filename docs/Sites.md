@@ -7,7 +7,7 @@
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/mondrian/index.html -->
+<!-- toc-card-href:./pages/mondrian/index.html?lang=zh-Hant -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-mondrian.png -->
 <!-- toc-card-title:主页 -->
 <!-- toc-card-description:贰号个人主页 -->
@@ -21,7 +21,7 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/animepage/index.html -->
+<!-- toc-card-href:./pages/animepage/index.html?lang=zh-Hant -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-photopage.png -->
 <!-- toc-card-title:摄影页 -->
 <!-- toc-card-description:摄影主页 -->
@@ -55,7 +55,7 @@
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/homepage/index.html -->
+<!-- toc-card-href:./pages/homepage/index.html?lang=zh-Hant -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-homepage.png -->
 <!-- toc-card-title:主页 -->
 <!-- toc-card-description:壹号个人主页 -->

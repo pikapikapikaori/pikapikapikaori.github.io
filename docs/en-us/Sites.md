@@ -7,7 +7,7 @@
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/mondrian/i18n/en-us.html -->
+<!-- toc-card-href:./pages/mondrian/index.html?lang=en -->
 <!-- toc-card-img:./en-us/_media/Sites/pikapikapi-mondrian.png -->
 <!-- toc-card-title:Homepage -->
 <!-- toc-card-description:No.2 Personal Homepage -->
@@ -21,7 +21,7 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/animepage/i18n/en-us.html -->
+<!-- toc-card-href:./pages/animepage/index.html?lang=en -->
 <!-- toc-card-img:./en-us/_media/Sites/pikapikapi-photopage.png -->
 <!-- toc-card-title:Photography -->
 <!-- toc-card-description:Photography Page -->
@@ -48,7 +48,7 @@
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/homepage/i18n/en-us.html -->
+<!-- toc-card-href:./pages/homepage/index.html?lang=en -->
 <!-- toc-card-img:./en-us/_media/Sites/pikapikapi-homepage.png -->
 <!-- toc-card-title:Homepage -->
 <!-- toc-card-description:No.1 Personal Homepage -->

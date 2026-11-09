@@ -182,7 +182,7 @@ const inlineTagConfigMap = new Map([
     ],
     [
         'iframe-video-link',
-        (payload) => `<iframe style="aspect-ratio: var(--global-aspect-ratio-tv);" src="${payload}" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>`
+        (payload) => `<iframe src="${payload}" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>`
     ]
 ])
 

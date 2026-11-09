@@ -174,6 +174,7 @@
             var on = el.dataset.lang === current
 
             el.textContent = LABELS[el.dataset.lang] || el.dataset.lang
+            el.setAttribute('href', '?lang=' + el.dataset.lang)
             el.classList.toggle('is-current', on)
             if (on) el.setAttribute('aria-current', 'true')
             else el.removeAttribute('aria-current')

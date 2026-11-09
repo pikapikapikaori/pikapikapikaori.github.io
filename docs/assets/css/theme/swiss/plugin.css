@@ -734,7 +734,7 @@ html .read-progress:hover>svg {
 
 html .markdown-section .toc-page-div {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--tocpage-columns), minmax(0, 1fr));
     row-gap: 0;
     column-gap: 3rem;
     margin: var(--sw-gap-block) 0 0;
@@ -743,8 +743,7 @@ html .markdown-section .toc-page-div {
 
 @media screen and (max-width: 1000px) {
     html .markdown-section .toc-page-div {
-        grid-template-columns: 1fr;
-        column-gap: 0;
+        grid-template-columns: repeat(var(--tocpage-narrow-columns), minmax(0, 1fr));
     }
 }
 

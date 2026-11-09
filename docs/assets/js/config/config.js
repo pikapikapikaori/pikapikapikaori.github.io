@@ -192,6 +192,8 @@
         // 添加目录页
         tocPage: {
             recentAmount: 8,
+            columns: 2,
+            narrowColumns: 1,
             defaultImg: './assets/resources/img/default/picture-2.gif',
             coverPath: i18nLocalePrefixes
         },

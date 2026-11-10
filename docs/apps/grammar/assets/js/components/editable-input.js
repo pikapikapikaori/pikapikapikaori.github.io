@@ -3,6 +3,7 @@
 import { h } from '../utils/dom.js'
 import { bdiNode, hasScript } from '../utils/bdi.js'
 import { applyRange, caretOffsetIn, moveCaretTo } from '../utils/caret.js'
+import { cleanSpace, filterTyping } from '../utils/space-filter.js'
 
 export function createEditableInput({
     value = '',
@@ -68,14 +69,16 @@ export function createEditableInput({
 
     let lastText = null
 
-    /** 把内容重新包好 bdi，并尽量把光标留在原处 */
+    /** 把内容重新包好 bdi，并尽量把光标留在原处；带空白规则的输入框在这里一并收掉多余空白 */
     function sync() {
-        const text = readText()
+        const caret = caretOffsetIn(el)
+        const mode = el.dataset ? el.dataset.space : null
+        const raw = readText()
+        const { text, caret: nextCaret } = mode ? filterTyping(raw, mode, caret) : { text: raw, caret }
         if (text === lastText && isPainted(text)) return
-        const offset = caretOffsetIn(el)
         paint(text)
         lastText = text
-        if (offset != null) moveCaretTo(el, offset)
+        if (nextCaret != null) moveCaretTo(el, nextCaret)
     }
 
     function emitInput() {
@@ -116,12 +119,30 @@ export function createEditableInput({
         if (!composing && !e.isComposing) sync()
         emitInput()
     })
+    el.addEventListener('focusout', () => {
+        const mode = el.dataset ? el.dataset.space : null
+        if (!mode) return
+        const text = cleanSpace(readText(), mode)
+        if (text === readText()) return
+        paint(text)
+        lastText = text
+        emitInput()
+    })
     el.addEventListener('paste', (e) => {
         const text = e.clipboardData ? e.clipboardData.getData('text/plain') : ''
         if (!text) return
         e.preventDefault()
         insertText(text.replace(/[\r\n]+/g, ' '))
         sync()
+        emitInput()
+        const mode = el.dataset ? el.dataset.space : null
+        if (!mode) return
+        // 粘贴的整段文本两端也要收掉；输入时只收开头，词中的空格留着
+        const clean = cleanSpace(readText(), mode)
+        if (clean === readText()) return
+        paint(clean)
+        lastText = clean
+        moveCaretTo(el, clean.length)
         emitInput()
     })
     el.addEventListener('keydown', (e) => {

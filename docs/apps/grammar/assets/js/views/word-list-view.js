@@ -12,6 +12,7 @@ import { posOptions } from '../utils/pos.js'
 import { openCardOverlay, closeCardOverlay } from '../components/card-overlay.js'
 import { openAnalyzeModal } from '../components/analyze-modal.js'
 import { createGhostInput } from '../components/ghost-input.js'
+import { EDGE_SPACE } from '../utils/space-filter.js'
 import { hasAnalyzer } from '../services/analyze-service.js'
 import { openSelectMenu } from '../components/select-menu.js'
 import { formatRelative, formatDate } from '../utils/date.js'
@@ -212,6 +213,7 @@ export default {
             searchField = createGhostInput({
                 value: state.q,
                 lang,
+                dataset: { space: EDGE_SPACE },
                 placeholder: '在本语言内搜索…',
                 onInput: debounce((e) => {
                     state.q = e.target.value

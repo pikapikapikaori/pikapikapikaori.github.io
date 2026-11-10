@@ -149,10 +149,9 @@
 }
 
 .note-row {
-    display: grid;
-    grid-template-columns: 26px minmax(0, 1fr);
-    align-items: start;
-    border-radius: var(--r-control);
+    display: block;
+    position: relative;
+    padding-left: 26px;
     transition: background var(--dur) var(--ease);
 }
 
@@ -160,30 +159,50 @@
     background: var(--c-bg-subtle);
 }
 
+/* 编辑中的这一行抬成一层纸，页边一枚朱红方块。方块与引用的长竖线形状不同，两种状态不会看混 */
 .note-row.is-editing {
-    background: var(--c-bg-hover);
+    background: var(--c-bg-elev);
+}
+
+.note-row.is-editing::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    background: var(--c-accent);
 }
 
 .note-row__view:focus-visible {
     outline: 2px solid var(--c-accent);
     outline-offset: -2px;
-    border-radius: var(--r-control);
 }
 
 .note-row.is-drag-source {
     opacity: .4;
 }
 
-/* 鼠标拖动选中的行：整块亮起 */
+/* 鼠标拖动选中的行：沙色纸带。每行不单独圆角，多行才连成一整片 */
 .note-row.is-selected {
-    background: var(--c-accent-soft);
+    background: var(--c-mark-bg);
+}
+
+/* 选中已经由纸带表示，块内的文字不再叠一层浏览器自带的选中色 */
+.note-row.is-selected .note-row__view::selection,
+.note-row.is-selected .note-row__view *::selection {
+    background: transparent;
 }
 
 .note-grip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    height: 100%;
     padding-top: 6px;
     color: var(--c-fg-subtle);
     font-size: 13px;
@@ -196,9 +215,13 @@
     transition: opacity var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
-.note-row:hover .note-grip,
-.note-row.is-editing .note-grip {
+.note-row:hover .note-grip {
     opacity: 1;
+}
+
+/* 编辑中的行不用拖：抓手让位给页边的方块 */
+.note-row.is-editing .note-grip {
+    opacity: 0;
 }
 
 .note-grip:hover {
@@ -213,26 +236,20 @@
     .note-grip { opacity: 1; }
 }
 
-/* 一整段引用：左边一条贯通整段的竖线 */
+/* 一整段引用：左边一条竖线，与数据格式页的结论条同一套写法 */
 .note-row-group {
     position: relative;
 }
 
-.note-quote-group::before {
-    content: '';
-    position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: 32px;
-    width: 3px;
-    border-radius: 2px;
-    background: var(--c-border-strong);
-    pointer-events: none;
+/* 相邻两个引用块之间留一道缝，两条竖线才断得开；块内自己折行仍是一条 */
+.note-row-group + .note-row-group {
+    margin-top: 6px;
 }
 
 .note-quote-group .note-row__view,
 .note-quote-group .note-row__input {
-    padding-left: calc(var(--sp-2) + 22px);
+    padding-left: var(--sp-4);
+    border-left: 3px solid var(--c-accent);
 }
 
 /* 拖动时的落点：一条实色块，不画细线 */
@@ -264,14 +281,18 @@ body.note-dragging {
 .note-row__input {
     display: block;
     width: 100%;
+    min-height: calc(1.6em + 6px);
     border: 0;
     background: transparent;
     color: var(--c-fg);
+    caret-color: var(--c-accent);
     font: inherit;
     line-height: var(--lh-base);
     resize: none;
     overflow: hidden;
     outline: none;
+    /* 全局的 :focus-visible 会给聚焦元素加圆角，编辑框要保持直角 */
+    border-radius: 0;
 }
 
 .note-row__input::placeholder {
@@ -339,9 +360,7 @@ body.note-dragging {
 }
 
 .note-quote {
-    padding-left: var(--sp-3);
-    border-left: 3px solid var(--c-border-strong);
-    color: var(--c-fg-muted);
+    color: var(--c-fg);
 }
 
 /* 列表项：记号占一栏，正文左缘始终对齐 */
@@ -492,15 +511,15 @@ body.note-dragging {
     }
 
     .note-row {
-        grid-template-columns: 20px minmax(0, 1fr);
+        padding-left: 20px;
+    }
+
+    .note-grip {
+        width: 20px;
     }
 
     .note-drop {
         margin-left: 20px;
-    }
-
-    .note-quote-group::before {
-        left: 26px;
     }
 
     .note-toolbar__state {

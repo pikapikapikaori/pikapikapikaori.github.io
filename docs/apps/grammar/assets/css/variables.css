@@ -84,6 +84,9 @@
     --c-accent-fg: #ffffff;
     --c-accent-soft: #f7e8e5;
 
+    /* 笔记里被选中的一行：旧纸的沙色，比朱红淡，不抢引用线的位置 */
+    --c-mark-bg: #f1ead7;
+
     /* 实心主按钮用墨色，避免红按钮被读成危险操作 */
     --c-action: #1a1a1a;
     --c-action-fg: #ffffff;
@@ -119,6 +122,9 @@
     --c-accent-fg: #0f1115;
     --c-accent-soft: #2b1c1c;
 
+    /* 深色下沙色会发褐，改为在抬高一层的底上混一点朱色 */
+    --c-mark-bg: color-mix(in oklab, var(--c-accent) 7%, #1b1d24);
+
     --c-action: #e8e9ec;
     --c-action-fg: #0f1115;
 
@@ -153,6 +159,8 @@
         --c-accent: #e08a86;
         --c-accent-fg: #0f1115;
         --c-accent-soft: #2b1c1c;
+
+        --c-mark-bg: color-mix(in oklab, var(--c-accent) 7%, #1b1d24);
 
         --c-action: #e8e9ec;
         --c-action-fg: #0f1115;

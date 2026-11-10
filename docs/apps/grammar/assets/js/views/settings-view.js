@@ -20,6 +20,7 @@ import { verifyGrammarFiles } from '../services/grammar-service.js'
 import { openGrammarVerifyModal } from '../components/grammar-verify-modal.js'
 import { applyTheme, currentTheme } from '../components/theme-toggle.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
+import { NO_SPACE, watchSpaceFields } from '../utils/space-filter.js'
 
 export default {
     needsUser: true,
@@ -47,6 +48,7 @@ export default {
 
         const container = h('div', {})
         replace(main, head, container)
+        watchSpaceFields(container)
 
         async function patchSettings(patch) {
             settings = await saveSettings(userId, patch)
@@ -57,6 +59,7 @@ export default {
         const nameInput = h('input', {
             class: 'input',
             style: { width: '142px' },
+            dataset: { space: NO_SPACE },
             value: user.name,
             onkeydown: (e) => { if (e.key === 'Enter') e.currentTarget.blur() },
             onblur: () => { commitUserName() }

@@ -1,5 +1,6 @@
 import { h } from '../utils/dom.js'
 import { bdiFragment, bdiNode } from '../utils/bdi.js'
+import { EDGE_SPACE } from '../utils/space-filter.js'
 import { createEditableInput } from './editable-input.js'
 
 /** 通用表格渲染；模板缺列或缺行时返回 null。 */
@@ -92,6 +93,7 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
                     value,
                     lang,
                     className: 'input input--cell',
+                    dataset: { space: EDGE_SPACE },
                     onInput: (e) => {
                         if (editable && typeof editable.onChange === 'function') {
                             editable.onChange(row.key, col.key, e.target.value)

@@ -26,6 +26,7 @@ import {
     EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST
 } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
+import { NO_SPACE, EDGE_SPACE, watchSpaceFields } from '../utils/space-filter.js'
 import { takePendingLookup } from '../store/pending-lookup.js'
 import { createPageTools } from '../components/page-tools.js'
 import { annotateDualText, setDualTextVisible } from '../utils/dual-text.js'
@@ -208,6 +209,7 @@ export default {
             class: 'word-form',
             onsubmit: (e) => { e.preventDefault(); onSubmit() }
         })
+        watchSpaceFields(form)
 
         /* ---------- 渲染函数（先声明，后赋值） ---------- */
         let renderMeanings = () => {}
@@ -280,6 +282,7 @@ export default {
             value: data.lemma,
             spaceKey: hasScript,
             lang,
+            dataset: { space: NO_SPACE },
             placeholder: currentTerms().lemma.placeholder,
             disabled: isEdit,
             // 基本形态可以推出词干（stemForms.base.from = 'headword'）时影响 placeholder 预览
@@ -449,6 +452,7 @@ export default {
         const inflectionField = createGhostInput({
             value: data.inflectionType.label,
             lang,
+            dataset: { space: EDGE_SPACE },
             placeholder: currentTerms().inflectionTypePlaceholder
         })
         const inflectionLabel = inflectionField.input
@@ -457,6 +461,7 @@ export default {
             value: data.stems.base || '',
             spaceKey: hasScript,
             lang,
+            dataset: { space: NO_SPACE },
             placeholder: currentTerms().stems.placeholder,
             getGhost: () => derivedBase(),
             onInput: () => { refreshStemGhosts(); refreshGenerateBtn() }
@@ -794,7 +799,7 @@ export default {
                         value: data.stems[part.key] || '',
                         spaceKey: hasScript,
                         lang,
-                        dataset: { partKey: part.key },
+                        dataset: { partKey: part.key, space: NO_SPACE },
                         getGhost: () => derivedPart(part.key),
                         onInput: (e) => {
                             setValue(normalizeStem(e.target.value))
@@ -1386,6 +1391,7 @@ export default {
                             value: m.text,
                             lang: m.lang === 'en' ? 'en' : null,
                             bdiLang: lang,
+                            dataset: { space: EDGE_SPACE },
                             placeholder: currentTerms().meaningPlaceholder,
                             onInput: (e) => {
                                 m.text = e.target.value
@@ -1443,16 +1449,19 @@ export default {
                         indexCell(),
                         h('input', {
                             class: 'input', placeholder: currentTerms().inflectionGroupPlaceholder, value: it.group || '',
+                            dataset: { space: EDGE_SPACE },
                             oninput: (e) => { it.group = e.target.value }
                         }),
                         h('input', {
                             class: 'input', placeholder: currentTerms().inflectionLabelPlaceholder, value: it.label,
+                            dataset: { space: EDGE_SPACE },
                             oninput: (e) => { it.label = e.target.value }
                         }),
                         ((f) => { attachScriptNormalize(f.input); return f.el })(createGhostInput({
                             value: it.form,
                             spaceKey: hasScript,
                             lang,
+                            dataset: { space: EDGE_SPACE },
                             placeholder: currentTerms().inflectionFormPlaceholder,
                             onInput: (e) => {
                                 it.form = e.target.value
@@ -1516,6 +1525,7 @@ export default {
                             value: it.text,
                             spaceKey: hasScript,
                             lang,
+                            dataset: { space: EDGE_SPACE },
                             placeholder: currentTerms().collocationTextPlaceholder,
                             onInput: (e) => {
                                 it.text = e.target.value
@@ -1524,6 +1534,7 @@ export default {
                         })),
                         h('input', {
                             class: 'input', placeholder: currentTerms().collocationGlossPlaceholder, value: it.gloss,
+                            dataset: { space: EDGE_SPACE },
                             oninput: (e) => { it.gloss = e.target.value }
                         }),
                         h('button', {
@@ -1643,6 +1654,7 @@ export default {
                             value: it.text,
                             spaceKey: hasScript,
                             lang,
+                            dataset: { space: EDGE_SPACE },
                             placeholder: currentTerms().exampleTextPlaceholder,
                             onInput: (e) => {
                                 it.text = e.target.value
@@ -1651,10 +1663,12 @@ export default {
                         })),
                         h('input', {
                             class: 'input', placeholder: currentTerms().exampleCitationPlaceholder, value: it.citation,
+                            dataset: { space: EDGE_SPACE },
                             oninput: (e) => { it.citation = e.target.value }
                         }),
                         h('input', {
                             class: 'input word-form__cell--translation', placeholder: currentTerms().exampleTranslationPlaceholder, value: it.translation,
+                            dataset: { space: EDGE_SPACE },
                             oninput: (e) => { it.translation = e.target.value }
                         }),
                         createSelect({
@@ -1686,6 +1700,7 @@ export default {
 
             const searchField = createGhostInput({
                 lang,
+                dataset: { space: EDGE_SPACE },
                 placeholder: currentTerms().derivativeSearchPlaceholder,
                 onInput: () => scheduleSearch()
             })
@@ -1789,11 +1804,13 @@ export default {
             tagsInput = h('input', {
                 class: 'input',
                 placeholder: currentTerms().tagsPlaceholder,
+                dataset: { space: EDGE_SPACE },
                 value: data.tags.join(', ')
             })
             const notesInput = h('textarea', {
                 class: 'textarea',
                 placeholder: currentTerms().notesPlaceholder,
+                dataset: { space: EDGE_SPACE },
                 value: data.notes
             })
             renderExtras = () => {

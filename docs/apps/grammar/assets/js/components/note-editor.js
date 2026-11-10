@@ -72,7 +72,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         }
         replace(el, frag)
 
-        for (const area of el.querySelectorAll('.note-row__input')) grow(area)
+        fitAll()
 
         if (editingId) {
             const ta = findInput(editingId)
@@ -85,6 +85,24 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             }
         }
         emitState()
+    }
+
+    function fitAll() {
+        for (const area of el.querySelectorAll('.note-row__input')) fitInput(area)
+        guardRows()
+    }
+
+    /** 兜底：万一某一行没跟着内容长高，后面的行就会与它重叠，这里补上差的那一段 */
+    function guardRows() {
+        const rows = [...el.querySelectorAll('.note-row')]
+        for (const row of rows) row.style.minHeight = ''
+        for (const row of rows) {
+            const paint = row.querySelector('.note-row__input') || row.querySelector('.note-row__view')
+            if (!paint) continue
+            const rect = row.getBoundingClientRect()
+            const need = paint.getBoundingClientRect().bottom - rect.top
+            if (need - rect.height > 0.5) row.style.minHeight = `${Math.ceil(need)}px`
+        }
     }
 
     /** 每一块各自成行：表格、引用、普通行只看这一块自己 */
@@ -192,6 +210,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const level = table ? 0 : indentLevel(block.source)
         return h('textarea', {
             class: 'note-row__input' + (table ? ' note-row__input--table' : ''),
+            // 不给 rows 时浏览器按两行留高度，一行字下面会多出空行
             rows: table ? String(Math.max(3, block.source.split('\n').length)) : '1',
             style: level ? { paddingLeft: `calc(var(--sp-2) + ${level} * 1.1em)` } : null,
             spellcheck: 'false',
@@ -246,7 +265,9 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             return
         }
 
+        // 换到这一行时，末尾别的空块顺手去掉；刚点中的这块自己不受影响
         editingId = id
+        trimTrailingEmpty()
         render(offset == null ? {} : { caret: offset, end: offset })
     }
 
@@ -272,7 +293,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         if (!block) return
         ta.value = value
         block.source = value
-        grow(ta)
+        fitInput(ta)
         ta.setSelectionRange(start, stop)
         rememberCaret(ta)
         emitState()
@@ -296,26 +317,29 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         if (typeof onSave === 'function') onSave(savedSources())
     }
 
-    /** 双击空白处临时加的空行没写东西就不存；末尾连续空行只留一个 */
+    /** 双击空白处临时加的空行没写东西就不存；末尾只含空白的行整段丢弃 */
     function savedSources() {
         const lines = items
             .filter((block) => !(block.draft && !block.source))
             .map((block) => block.source)
-        while (lines.length > 1 && !lines[lines.length - 1].trim() && !lines[lines.length - 2].trim()) {
+        while (lines.length && !lines[lines.length - 1].trim()) {
             lines.pop()
         }
         return lines
     }
 
-    /** 末尾连续的空块只留一个，正在编辑的那块优先留下 */
+    /** 末尾只含空白与换行的块整段去掉，正在编辑的那块例外 */
     function trimTrailingEmpty() {
-        if (!items.length || items[items.length - 1].source.trim()) return
-        let first = items.length - 1
-        while (first > 0 && !items[first - 1].source.trim()) first -= 1
-        if (items.length - first <= 1) return
-        const run = items.slice(first)
-        const keep = run.find((block) => block.id === editingId) || run[run.length - 1]
-        items.splice(first, run.length, keep)
+        if (!items.length) {
+            items = toBlocks([])
+            return
+        }
+        let cut = items.length
+        while (cut > 0 && !items[cut - 1].source.trim() && items[cut - 1].id !== editingId) cut -= 1
+        if (cut === items.length) return
+        items.splice(cut)
+        // 删空之后仍要留一处可写
+        if (!items.length) items = toBlocks([])
     }
 
     /* ---------------- 键盘 ---------------- */
@@ -784,7 +808,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         if (!block) return
         block.source = ta.value
         if (block.draft) delete block.draft
-        grow(ta)
+        fitInput(ta)
         rememberCaret(ta)
         scheduleSave()
         emitState()
@@ -795,7 +819,11 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     })
 
     el.addEventListener('keyup', (e) => {
-        if (e.target.classList && e.target.classList.contains('note-row__input')) rememberCaret(e.target)
+        const ta = e.target
+        if (!ta.classList || !ta.classList.contains('note-row__input')) return
+        rememberCaret(ta)
+        // 按键落定后再量一次：这一下与 input 不是同一个时机，Safari 里能补上第一次读到旧排版的情形
+        if (!e.isComposing) fitInput(ta)
     })
 
     el.addEventListener('keydown', (e) => {
@@ -863,6 +891,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     el.addEventListener('focusout', (e) => {
         const ta = e.target
         if (!ta.classList || !ta.classList.contains('note-row__input')) return
+        const leftId = ta.dataset.id
         rememberCaret(ta)
         setTimeout(() => {
             if (destroyed) return
@@ -870,14 +899,14 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             if (activeInput()) return
             const active = document.activeElement
             if (active && active.closest && active.closest('.note-toolbar')) return
-            if (!editingId) return
-            const leaving = getBlock(editingId)
+            // 焦点已经落到另一行：那算换行继续写，别把新行也关掉
+            const movedWithin = !!editingId && editingId !== leftId
+            const leaving = getBlock(leftId)
             if (leaving && leaving.draft && !leaving.source) {
                 items = items.filter((block) => block !== leaving)
-                if (!items.length) items = toBlocks([])
             }
+            if (!movedWithin) editingId = null
             trimTrailingEmpty()
-            editingId = null
             flushSave()
             render()
         }, 0)
@@ -975,6 +1004,31 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     document.addEventListener('selectionchange', onSelectionChange)
     document.addEventListener('keydown', onDocumentKeydown)
 
+    // 宽度一变，折行位置就变，得重算高度。只比较宽度，高度写入不会反过来触发这里；
+    // 计算放到下一帧，避免在观察回调里改动布局（否则 WebKit 会报 ResizeObserver loop）
+    let lastWidth = 0
+    let fitFrame = 0
+    const refit = () => {
+        if (fitFrame) return
+        fitFrame = requestAnimationFrame(() => {
+            fitFrame = 0
+            if (!destroyed) fitAll()
+        })
+    }
+    const widthWatcher = typeof ResizeObserver === 'function'
+        ? new ResizeObserver((entries) => {
+            const box = entries[0] && entries[0].contentRect
+            if (!box || Math.abs(box.width - lastWidth) < 1) return
+            lastWidth = box.width
+            refit()
+        })
+        : null
+    if (widthWatcher) widthWatcher.observe(el)
+    else window.addEventListener('resize', refit)
+
+    // 字体晚一步换上来时字宽和行高都会变，先前算好的高度就短了
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll).catch(() => null)
+
     render()
 
     return {
@@ -1003,6 +1057,9 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             clearTimeout(saveTimer)
             if (drag && drag.timer) clearTimeout(drag.timer)
             if (drag && drag.raf) cancelAnimationFrame(drag.raf)
+            if (widthWatcher) widthWatcher.disconnect()
+            else window.removeEventListener('resize', refit)
+            if (fitFrame) cancelAnimationFrame(fitFrame)
             document.removeEventListener('selectionchange', onSelectionChange)
             document.removeEventListener('keydown', onDocumentKeydown)
             window.removeEventListener('pointermove', onDragMove)
@@ -1016,17 +1073,21 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 function toBlocks(lines) {
     const list = Array.isArray(lines) ? lines : []
     const blocks = list.map((source) => ({ id: uid('n'), source: String(source ?? '') }))
+    // 末尾只含空白的行不带进界面；整份为空时留一处可写
+    while (blocks.length && !blocks[blocks.length - 1].source.trim()) blocks.pop()
     if (!blocks.length) blocks.push({ id: uid('n'), source: '' })
-    // 笔记末尾最多留一个空块
-    while (blocks.length > 1 && !blocks[blocks.length - 1].source.trim() && !blocks[blocks.length - 2].source.trim()) {
-        blocks.pop()
-    }
     return blocks
 }
 
-function grow(ta) {
+/* 高度按内容算。Safari 在宽度变化后，同一帧里可能还读到旧的排版结果，
+ * 所以写完再看一眼：内容仍比显示的高就补，最多三次 */
+function fitInput(ta, attempt = 0) {
     ta.style.height = 'auto'
     ta.style.height = `${ta.scrollHeight}px`
+    if (attempt >= 3 || ta.scrollHeight <= ta.clientHeight) return
+    requestAnimationFrame(() => {
+        if (ta.isConnected) fitInput(ta, attempt + 1)
+    })
 }
 
 function clamp(value, min, max) {

@@ -1,5 +1,7 @@
 # Sites
 
+## Pages
+
 <!-- tabs:start -->
 
 #### **Sites**
@@ -64,3 +66,8 @@
 <!-- toc-card-wrap:end -->
 
 <!-- tabs:end -->
+
+## Applications
+
+- [`Brainfuck` Interpreter](apps/terminal/terminal.html ':ignore')
+- [Personal E-card](apps/ecard/index.html ':ignore')

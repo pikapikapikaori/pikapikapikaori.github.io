@@ -5,7 +5,7 @@ import { uid } from '../utils/id.js'
 import { gripIcon } from './icons.js'
 import {
     renderNoteLine, renderNoteTable, renderNoteQuote,
-    isPipeLine, isTableSeparator, isQuoteLine, lineInfo, leadingIndent,
+    isTableBlock, isQuoteLine, lineInfo, leadingIndent,
     indentLevel, INDENT_WIDTH
 } from '../utils/note-markdown.js'
 
@@ -67,7 +67,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 
         for (const group of layoutGroups()) {
             if (group.kind === 'table') frag.appendChild(tableRow(group))
-            else if (group.kind === 'table-edit') frag.appendChild(tableEditRow(group))
             else if (group.kind === 'quote') frag.appendChild(quoteGroup(group))
             else frag.appendChild(lineRow(group.blocks[0], markers.get(group.blocks[0].id)))
         }
@@ -88,43 +87,13 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         emitState()
     }
 
-    /** 相邻的竖线行是一张表，相邻的引用行是一段引用；其余各自成行 */
+    /** 每一块各自成行：表格、引用、普通行只看这一块自己 */
     function layoutGroups() {
-        const out = []
-        let i = 0
-        while (i < items.length) {
-            const block = items[i]
-
-            if (isPipeLine(block.source)) {
-                let j = i
-                while (j < items.length && isPipeLine(items[j].source)) j += 1
-                const run = items.slice(i, j)
-                const isTable = run.length >= 3 && isTableSeparator(run[1].source)
-                const editing = run.some((row) => row.id === editingId)
-                if (isTable && editing) {
-                    // 表格整块编辑：一个输入框里放全部竖线行，Shift + Enter 换行
-                    out.push({ kind: 'table-edit', blocks: run })
-                } else if (isTable) {
-                    out.push({ kind: 'table', blocks: run })
-                } else {
-                    for (const row of run) out.push({ kind: 'line', blocks: [row] })
-                }
-                i = j
-                continue
-            }
-
-            if (isQuoteLine(block.source)) {
-                let j = i
-                while (j < items.length && isQuoteLine(items[j].source)) j += 1
-                out.push({ kind: 'quote', blocks: items.slice(i, j) })
-                i = j
-                continue
-            }
-
-            out.push({ kind: 'line', blocks: [block] })
-            i += 1
-        }
-        return out
+        return items.map((block) => {
+            if (isTableBlock(block.source)) return { kind: 'table', blocks: [block] }
+            if (isQuoteLine(block.source)) return { kind: 'quote', blocks: [block] }
+            return { kind: 'line', blocks: [block] }
+        })
     }
 
     /** 有序列表的序号按层级算：一级 1. 二级 1) 三级 i */
@@ -162,78 +131,37 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     }
 
     function tableRow(group) {
+        const block = group.blocks[0]
+        const isEditing = block.id === editingId
         const row = h('div', {
-            class: 'note-row note-row--table',
-            dataset: { run: group.blocks[0].id }
+            class: 'note-row note-row--table' + (isEditing ? ' is-editing' : ''),
+            dataset: { id: block.id }
         })
-        row.appendChild(grip(group.blocks.map((block) => block.id)))
-        row.appendChild(viewBox(
-            renderNoteTable(group.blocks, { lang }),
-            group.blocks[0].id,
-            group.blocks[0].source
-        ))
-        return row
-    }
-
-    /** 正在改的表格：一个输入框装全部竖线行 */
-    function tableEditRow(group) {
-        const ids = group.blocks.map((block) => block.id)
-        const row = h('div', {
-            class: 'note-row note-row--table is-editing',
-            dataset: { run: ids[0] }
-        })
-        row.appendChild(grip(ids))
-
-        const ta = h('textarea', {
-            class: 'note-row__input note-row__input--table',
-            rows: String(Math.max(3, ids.length)),
-            spellcheck: 'false',
-            autocapitalize: 'off',
-            autocomplete: 'off',
-            lang,
-            dir: 'auto',
-            value: group.blocks.map((block) => block.source).join('\n'),
-            dataset: { id: ids[0], imeRaw: 'true', table: 'true' }
-        })
-        // 这些行当前属于这张表；输入时按这个顺序写回 items
-        ta.tableIds = ids
-        row.appendChild(ta)
+        row.appendChild(grip([block.id]))
+        row.appendChild(isEditing
+            ? inputFor(block, { table: true })
+            : viewBox(renderNoteTable(block.source, { lang }), block.id, block.source))
         return row
     }
 
     /**
-     * 一段引用：左边一条贯通整段的竖线。
-     * 不编辑时行尾的 `\` 会把下一行接成同一段；编辑时逐行显示，竖线仍不断开。
+     * 一段引用：左边一条竖线贯穿这一块。
+     * 块内的换行仍是一条线；回车分开的块各画各的线。
      */
     function quoteGroup(group) {
         const ids = group.blocks.map((block) => block.id)
+        const block = group.blocks[0]
+        const isEditing = block.id === editingId
         const wrap = h('div', { class: 'note-row-group note-quote-group', dataset: { run: ids[0] } })
-        const editing = group.blocks.some((block) => block.id === editingId)
-
-        if (editing) {
-            for (const block of group.blocks) {
-                const isEditing = block.id === editingId
-                const row = h('div', {
-                    class: 'note-row' + (isEditing ? ' is-editing' : ''),
-                    dataset: { id: block.id }
-                })
-                row.appendChild(grip(ids))
-                row.appendChild(isEditing
-                    ? inputFor(block)
-                    : viewBox(renderNoteLine(quoteBody(block.source), { lang }), block.id, block.source))
-                wrap.appendChild(row)
-            }
-            return wrap
-        }
-
-        const owners = quoteOwners(group.blocks)
-        const paragraphs = renderNoteQuote(group.blocks.map((block) => block.source))
-        paragraphs.forEach((text, i) => {
-            const row = h('div', { class: 'note-row', dataset: { id: owners[i] || ids[0] } })
-            row.appendChild(grip(ids))
-            row.appendChild(viewBox(renderNoteLine(text, { lang }), owners[i] || ids[0], text))
-            wrap.appendChild(row)
+        const row = h('div', {
+            class: 'note-row' + (isEditing ? ' is-editing' : ''),
+            dataset: { id: block.id }
         })
+        row.appendChild(grip(ids))
+        row.appendChild(isEditing
+            ? inputFor(block)
+            : viewBox(renderNoteLine(renderNoteQuote(block.source), { lang }), block.id, block.source))
+        wrap.appendChild(row)
         return wrap
     }
 
@@ -259,12 +187,12 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return view
     }
 
-    function inputFor(block) {
+    function inputFor(block, { table = false } = {}) {
         // 制表符与空格在文本框里只有半个字宽，补上差的那一段，编辑态才和渲染态对齐
-        const level = indentLevel(block.source)
+        const level = table ? 0 : indentLevel(block.source)
         return h('textarea', {
-            class: 'note-row__input',
-            rows: '1',
+            class: 'note-row__input' + (table ? ' note-row__input--table' : ''),
+            rows: table ? String(Math.max(3, block.source.split('\n').length)) : '1',
             style: level ? { paddingLeft: `calc(var(--sp-2) + ${level} * 1.1em)` } : null,
             spellcheck: 'false',
             autocapitalize: 'off',
@@ -273,7 +201,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             dir: 'auto',
             placeholder: PLACEHOLDER,
             value: block.source,
-            dataset: { id: block.id, imeRaw: 'true' }
+            dataset: { id: block.id, imeRaw: 'true', table: table ? 'true' : null }
         })
     }
 
@@ -306,45 +234,20 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const block = getBlock(id)
         if (!block) return
 
-        // 表格是一块：光标要换算成整段文本里的偏移，落在点中的那一行
-        const table = tableGroupOf(id)
-        const target = table ? table.ids[0] : id
-        const offset = table
-            ? table.offset + (range ? range.start : block.source.length)
-            : (range ? range.start : null)
+        const offset = range ? range.start : null
+        const stop = range && range.end != null ? range.end : offset
 
-        if (editingId === target) {
-            const ta = activeInput() || findInput(target)
+        if (editingId === id) {
+            const ta = activeInput() || findInput(id)
             if (ta) {
                 ta.focus()
-                if (offset != null) ta.setSelectionRange(offset, range && !table ? range.end : offset)
+                if (offset != null) ta.setSelectionRange(offset, stop)
             }
             return
         }
 
-        editingId = target
+        editingId = id
         render(offset == null ? {} : { caret: offset, end: offset })
-    }
-
-    /** 这一块所在的表格分组；不在表里返回 null */
-    function tableGroupOf(id) {
-        const index = items.findIndex((block) => block.id === id)
-        if (index < 0 || !isPipeLine(items[index].source)) return null
-
-        let start = index
-        while (start > 0 && isPipeLine(items[start - 1].source)) start -= 1
-        let stop = index
-        while (stop < items.length - 1 && isPipeLine(items[stop + 1].source)) stop += 1
-
-        const run = items.slice(start, stop + 1)
-        if (run.length < 3 || !isTableSeparator(run[1].source)) return null
-
-        let offset = 0
-        for (const block of run) {
-            if (block.id === id) break
-            offset += block.source.length + 1
-        }
-        return { ids: run.map((block) => block.id), offset }
     }
 
     /** 没有输入框聚焦时（刚离开某行），恢复到上次的位置再执行命令 */
@@ -390,73 +293,17 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     function flushSave() {
         clearTimeout(saveTimer)
         saveTimer = 0
-        if (typeof onSave === 'function') onSave(items.map((block) => block.source))
+        if (typeof onSave === 'function') onSave(savedSources())
+    }
+
+    /** 双击空白处临时加的空行没写东西就不存 */
+    function savedSources() {
+        return items
+            .filter((block) => !(block.draft && !block.source))
+            .map((block) => block.source)
     }
 
     /* ---------------- 键盘 ---------------- */
-
-    /**
-     * 把一组竖线行按新行数写回 items：够用的复用原 id，多出来的行补新块，
-     * 少掉的行从 items 里删掉。块的顺序不变。
-     */
-    function writeTableLines(ids, lines) {
-        const indexes = ids.map((id) => items.findIndex((block) => block.id === id)).filter((i) => i >= 0)
-        if (!indexes.length) return []
-
-        // 整组原位替换：行数增减都保持顺序，新加的行不会跑到组的前面
-        const out = lines.map((line, i) => {
-            const block = ids[i] ? getBlock(ids[i]) : null
-            if (!block) return { id: uid('n'), source: line }
-            block.source = line
-            return block
-        })
-
-        const first = Math.min(...indexes)
-        const last = Math.max(...indexes)
-        items = [...items.slice(0, first), ...out, ...items.slice(last + 1)]
-        return out
-    }
-
-    /** 表格里按回车：表格到此结束，光标之后的内容另起一行 */
-    function endTable(ta) {
-        const value = ta.value
-        const pos = ta.selectionStart
-        const ids = (ta.tableIds || [ta.dataset.id]).slice()
-
-        const before = value.slice(0, pos)
-        const lineIndex = before.split('\n').length - 1
-        const col = pos - (before.lastIndexOf('\n') + 1)
-        const lines = value.split('\n')
-        const anchor = getBlock(ids[0])
-        if (!anchor) return
-
-        // 表格开头按回车：在表格上方插一行空行，表格本身不动
-        if (lineIndex === 0 && col === 0) {
-            const blank = { id: uid('n'), source: '' }
-            items.splice(items.indexOf(anchor), 0, blank)
-            editingId = blank.id
-            flushSave()
-            render({ caret: 0 })
-            return
-        }
-
-        // 光标停在行尾时整行留在表里；停在行中时，光标之后的部分另起一行
-        const atLineEnd = col === lines[lineIndex].length
-        const head = lines.slice(0, lineIndex + (atLineEnd ? 1 : 0))
-        const tail = atLineEnd
-            ? lines.slice(lineIndex + 1)
-            : [lines[lineIndex].slice(col), ...lines.slice(lineIndex + 1)]
-
-        writeTableLines(ids, head)
-        const last = getBlock(head.length ? ids[head.length - 1] : ids[0])
-        const at = last ? items.indexOf(last) : -1
-        const added = (tail.length ? tail : ['']).map((line) => ({ id: uid('n'), source: line }))
-        items.splice(at + 1, 0, ...added)
-
-        editingId = added[0].id
-        flushSave()
-        render({ caret: 0 })
-    }
 
     function splitBlock(ta) {
         const block = getBlock(ta.dataset.id)
@@ -536,7 +383,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         })
     }
 
-    /** 上下移动一块；表格与引用整段一起走 */
+    /** 上下移动一块 */
     function moveBlock(ids, dir) {
         const list = Array.isArray(ids) ? ids : [ids]
         const active = activeInput()
@@ -899,7 +746,8 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             const block = getBlock(id)
             if (!block) return
             e.preventDefault()
-            const at = block.source.length
+            const hit = target.closest('[data-offset]')
+            const at = hit ? Number(hit.dataset.offset) : block.source.length
             startEditing(id, { start: at, end: at })
             return
         }
@@ -910,19 +758,10 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const ta = e.target
         if (!ta.classList || !ta.classList.contains('note-row__input')) return
 
-        if (ta.dataset.table === 'true') {
-            // 表格的输入框装的是好几行，按行写回各自的块
-            const blocks = writeTableLines(ta.tableIds || [ta.dataset.id], ta.value.split('\n'))
-            ta.tableIds = blocks.map((block) => block.id)
-            ta.dataset.id = ta.tableIds[0]
-            grow(ta)
-            scheduleSave()
-            return
-        }
-
         const block = getBlock(ta.dataset.id)
         if (!block) return
         block.source = ta.value
+        if (block.draft) delete block.draft
         grow(ta)
         rememberCaret(ta)
         scheduleSave()
@@ -962,14 +801,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             return
         }
 
-        if (e.key === 'Enter' && inTable) {
-            // 表格里 Shift + Enter 换行，直接回车结束表格
-            if (e.shiftKey) return
-            e.preventDefault()
-            endTable(ta)
-            return
-        }
-
         if (e.key === 'Enter' && !e.shiftKey && !e.altKey && !e.metaKey && !e.ctrlKey) {
             e.preventDefault()
             splitBlock(ta)
@@ -984,8 +815,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 
         if (e.shiftKey && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
             e.preventDefault()
-            const ids = ta.dataset.table === 'true' ? (ta.tableIds || [ta.dataset.id]) : [ta.dataset.id]
-            moveBlock(ids, e.key === 'ArrowUp' ? -1 : 1)
+            moveBlock([ta.dataset.id], e.key === 'ArrowUp' ? -1 : 1)
             return
         }
 
@@ -1019,6 +849,11 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             const active = document.activeElement
             if (active && active.closest && active.closest('.note-toolbar')) return
             if (!editingId) return
+            const leaving = getBlock(editingId)
+            if (leaving && leaving.draft && !leaving.source) {
+                items = items.filter((block) => block !== leaving)
+                if (!items.length) items = toBlocks([])
+            }
             editingId = null
             flushSave()
             render()
@@ -1084,6 +919,18 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         /** 空笔记进来就直接写：元素插进页面之后才能聚焦 */
         focusFirst() {
             startEditing(items[0].id, { start: 0, end: 0 })
+        },
+        /** 页面空白处双击：在最下方接着写。新建的空行先不存，等真的输入 */
+        focusLast() {
+            const last = items[items.length - 1]
+            if (!last) return
+            if (last.source.trim()) {
+                const draft = { id: uid('n'), source: '', draft: true }
+                items.push(draft)
+                startEditing(draft.id, { start: 0, end: 0 })
+                return
+            }
+            startEditing(last.id, { start: last.source.length, end: last.source.length })
         },
         getState: readState,
         destroy() {
@@ -1155,18 +1002,6 @@ function quoteBody(source) {
     return String(source ?? '')
         .replace(/^[ \t]*>\s?/, '')
         .replace(/\\\s*$/, '')
-}
-
-/** 合并后的每个段落以哪一行的 id 为准 */
-function quoteOwners(blocks) {
-    const owners = []
-    let open = false
-    for (const block of blocks) {
-        const body = String(block.source ?? '').replace(/^[ \t]*>\s?/, '')
-        if (!open || !owners.length) owners.push(block.id)
-        open = /\\\s*$/.test(body)
-    }
-    return owners
 }
 
 /** 回车后新的一行沿用上一行的记号，序号加一 */

@@ -82,10 +82,20 @@ export default {
         // 空笔记（没有行，或只有空行）直接把光标放进第一行
         if (!lines.length || lines.every((line) => !String(line).trim())) editor.focusFirst()
 
+        // 双击页面空白处：在最下方接着写
+        const onBlankDoubleClick = (e) => {
+            const target = e.target instanceof Element ? e.target : null
+            if (!target) return
+            if (target.closest('.note-row, .note-bar, .page-head, .page-breadcrumbs, button, a, input, textarea, select, label')) return
+            editor.focusLast()
+        }
+        main.addEventListener('dblclick', onBlankDoubleClick)
+
         const onHide = () => editor.flushSave()
         window.addEventListener('pagehide', onHide)
 
         return () => {
+            main.removeEventListener('dblclick', onBlankDoubleClick)
             window.removeEventListener('pagehide', onHide)
             editor.flushSave()
             editor.destroy()

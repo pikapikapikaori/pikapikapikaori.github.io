@@ -1,4 +1,4 @@
-/** 笔记的单行 Markdown 与少量 HTML。块就是行；表格与引用由相邻几行组合。 */
+/** 笔记的单行 Markdown 与少量 HTML。块就是行；表格与引用都在一个块内按换行书写。 */
 
 import { h, htmlFragment } from './dom.js'
 import { annotateBdi } from './bdi.js'
@@ -51,8 +51,30 @@ export function isTableSeparator(source) {
     return text.startsWith('|') && TABLE_SEP.test(text)
 }
 
+/** 表格是一个块：块内按换行写各行，第一行是表头，第二行是分隔行 */
+export function isTableBlock(source) {
+    const rows = tableLines(source)
+    return rows.length >= 3
+        && rows.every((row) => isPipeLine(row.text))
+        && isTableSeparator(rows[1].text)
+}
+
+/** 拆出一个块里的表格行，顺带记下每行在整段原文里的偏移 */
+function tableLines(source) {
+    const parts = String(source ?? '').replace(/\r\n?/g, '\n').split('\n')
+    const rows = []
+    let offset = 0
+    for (const text of parts) {
+        if (text.trim()) rows.push({ text, offset })
+        offset += text.length + 1
+    }
+    return rows
+}
+
+/** 一个块里用 Shift + 回车换行时也是引用，只看块的第一行 */
 export function isQuoteLine(source) {
-    return QUOTE.test(String(source ?? '').replace(/^[ \t]+/, ''))
+    const first = String(source ?? '').split('\n', 1)[0].replace(/^[ \t]+/, '')
+    return QUOTE.test(first)
 }
 
 /** 只放行能安全显示的地址：网页、内嵌图片、相对路径。其它协议一律当作普通文字 */
@@ -193,32 +215,27 @@ function itemNode(kind, level, label, content, { done = false } = {}) {
 }
 
 /**
- * 把连续的引用行合成段落：行尾写 `\` 表示下一行接着这一行。
- * @returns {string[]}
+ * 一个块的引用正文：块内的换行各占一行。
+ * 行尾的 `\` 只在还有下一行时才算续行记号；块的最后一行没有下一行，`\` 原样留下。
+ * @param {string} source 一个块的原文
+ * @returns {string}
  */
-export function renderNoteQuote(lines) {
-    const out = []
-    let open = false
-    for (const line of lines) {
-        const body = String(line ?? '').replace(/^[ \t]*>\s?/, '')
-        const joined = /\\\s*$/.test(body)
-        const clean = body.replace(/\\\s*$/, '')
-        if (open && out.length) out[out.length - 1] += `\n${clean}`
-        else out.push(clean)
-        open = joined
-    }
-    return out
+export function renderNoteQuote(source) {
+    const lines = String(source ?? '').replace(/\r\n?/g, '\n').split('\n')
+    return lines.map((line, i) => {
+        const text = line.replace(/^[ \t]*>\s?/, '')
+        return i < lines.length - 1 ? text.replace(/\\\s*$/, '') : text
+    }).join('\n')
 }
 
 /**
- * 把连续的竖线行合成一张表。第一行是表头，第二行是对齐行。
- * @param {Array<{ id: string, source: string }>} blocks
+ * 把一块里的竖线行排成一张表。第一行是表头，第二行是对齐行。
+ * @param {string} source 一个块的原文
  */
-export function renderNoteTable(blocks, { lang = null } = {}) {
-    const lines = blocks.map((block) => String(block.source ?? ''))
-    const ids = blocks.map((block) => block.id || '')
-    const header = splitRow(lines[0] || '')
-    const aligns = splitRow(lines[1] || '').map((cell) => {
+export function renderNoteTable(source, { lang = null } = {}) {
+    const rows = tableLines(source)
+    const header = splitRow(rows[0] ? rows[0].text : '')
+    const aligns = splitRow(rows[1] ? rows[1].text : '').map((cell) => {
         const left = cell.startsWith(':')
         const right = cell.endsWith(':')
         if (left && right) return 'center'
@@ -228,16 +245,16 @@ export function renderNoteTable(blocks, { lang = null } = {}) {
     })
 
     const table = h('table', { class: 'note-table doc-table' })
-    const headRow = h('tr', { dataset: { id: ids[0] } })
+    const headRow = h('tr', { dataset: { offset: String(rows[0] ? rows[0].offset : 0) } })
     header.forEach((cell, i) => {
         headRow.appendChild(h('th', { class: alignClass(aligns[i]) }, ...inline(cell)))
     })
     table.appendChild(h('thead', {}, headRow))
 
     const tbody = h('tbody')
-    for (let i = 2; i < lines.length; i++) {
-        const cells = splitRow(lines[i])
-        const tr = h('tr', { dataset: { id: ids[i] } })
+    for (let i = 2; i < rows.length; i++) {
+        const cells = splitRow(rows[i].text)
+        const tr = h('tr', { dataset: { offset: String(rows[i].offset) } })
         header.forEach((_, c) => {
             tr.appendChild(h('td', { class: alignClass(aligns[c]) }, ...inline(cells[c] ?? '')))
         })

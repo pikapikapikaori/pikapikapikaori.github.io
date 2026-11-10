@@ -296,11 +296,26 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         if (typeof onSave === 'function') onSave(savedSources())
     }
 
-    /** 双击空白处临时加的空行没写东西就不存 */
+    /** 双击空白处临时加的空行没写东西就不存；末尾连续空行只留一个 */
     function savedSources() {
-        return items
+        const lines = items
             .filter((block) => !(block.draft && !block.source))
             .map((block) => block.source)
+        while (lines.length > 1 && !lines[lines.length - 1].trim() && !lines[lines.length - 2].trim()) {
+            lines.pop()
+        }
+        return lines
+    }
+
+    /** 末尾连续的空块只留一个，正在编辑的那块优先留下 */
+    function trimTrailingEmpty() {
+        if (!items.length || items[items.length - 1].source.trim()) return
+        let first = items.length - 1
+        while (first > 0 && !items[first - 1].source.trim()) first -= 1
+        if (items.length - first <= 1) return
+        const run = items.slice(first)
+        const keep = run.find((block) => block.id === editingId) || run[run.length - 1]
+        items.splice(first, run.length, keep)
     }
 
     /* ---------------- 键盘 ---------------- */
@@ -323,10 +338,13 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 
         const left = value.slice(0, start)
         const right = value.slice(stop)
+        // 末尾已经有一个空块时，回车不再多出一块
+        if (!value.trim() && items.indexOf(block) === items.length - 1) return
         block.source = left
         const next = { id: uid('n'), source: prefixFor(left) + right }
         items.splice(items.indexOf(block) + 1, 0, next)
         editingId = next.id
+        trimTrailingEmpty()
         flushSave()
         render({ caret: next.source.length - right.length })
     }
@@ -341,6 +359,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             const target = items[index - 1] || items[index + 1]
             items.splice(index, 1)
             editingId = target.id
+            trimTrailingEmpty()
             flushSave()
             render({ caret: target.source.length })
             return
@@ -363,6 +382,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         prev.source += body
         items.splice(index, 1)
         editingId = prev.id
+        trimTrailingEmpty()
         flushSave()
         render({ caret })
     }
@@ -401,6 +421,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const at = rest.indexOf(target)
         rest.splice(dir < 0 ? at : at + 1, 0, ...moved)
         items = rest
+        trimTrailingEmpty()
         flushSave()
         render({ caret })
     }
@@ -713,6 +734,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         }
         items.splice(index, 0, ...blocks)
         if (!items.length) items = toBlocks([])
+        trimTrailingEmpty()
         flushSave()
         render()
     }
@@ -854,6 +876,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
                 items = items.filter((block) => block !== leaving)
                 if (!items.length) items = toBlocks([])
             }
+            trimTrailingEmpty()
             editingId = null
             flushSave()
             render()
@@ -887,6 +910,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 
         const last = added[added.length - 1]
         editingId = last.id
+        trimTrailingEmpty()
         flushSave()
         render({
             caret: last.source.length - value.slice(stop).length,
@@ -903,12 +927,53 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         render()
     }
 
+    /** 鼠标拖动选中的排版块；焦点在输入框里或选区不在笔记里时返回空 */
+    function selectedRows() {
+        const sel = document.getSelection()
+        if (!sel || sel.isCollapsed || !sel.rangeCount) return []
+        const active = document.activeElement
+        if (active && (active.tagName === 'TEXTAREA' || active.tagName === 'INPUT' || active.isContentEditable)) return []
+        const range = sel.getRangeAt(0)
+        if (!el.contains(range.commonAncestorContainer)) return []
+        return [...el.querySelectorAll('.note-row')].filter((row) => range.intersectsNode(row))
+    }
+
+    function paintSelection() {
+        const rows = new Set(selectedRows())
+        for (const row of el.querySelectorAll('.note-row')) {
+            row.classList.toggle('is-selected', rows.has(row))
+        }
+    }
+
+    function deleteSelectedRows() {
+        const rows = selectedRows()
+        if (!rows.length) return false
+        const ids = new Set(rows.map((row) => row.dataset.id))
+        items = items.filter((block) => !ids.has(block.id))
+        if (!items.length) items = toBlocks([])
+        trimTrailingEmpty()
+        editingId = null
+        lastTap = { id: null, time: 0 }
+        const sel = document.getSelection()
+        if (sel) sel.removeAllRanges()
+        flushSave()
+        render()
+        return true
+    }
+
     function onSelectionChange() {
-        if (!activeInput()) return
-        emitState()
+        paintSelection()
+        if (activeInput()) emitState()
+    }
+
+    function onDocumentKeydown(e) {
+        if (e.key !== 'Backspace' || e.isComposing || e.keyCode === 229) return
+        if (!deleteSelectedRows()) return
+        e.preventDefault()
     }
 
     document.addEventListener('selectionchange', onSelectionChange)
+    document.addEventListener('keydown', onDocumentKeydown)
 
     render()
 
@@ -939,6 +1004,7 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             if (drag && drag.timer) clearTimeout(drag.timer)
             if (drag && drag.raf) cancelAnimationFrame(drag.raf)
             document.removeEventListener('selectionchange', onSelectionChange)
+            document.removeEventListener('keydown', onDocumentKeydown)
             window.removeEventListener('pointermove', onDragMove)
             window.removeEventListener('pointerup', onDragEnd)
             window.removeEventListener('pointercancel', onDragEnd)
@@ -951,6 +1017,10 @@ function toBlocks(lines) {
     const list = Array.isArray(lines) ? lines : []
     const blocks = list.map((source) => ({ id: uid('n'), source: String(source ?? '') }))
     if (!blocks.length) blocks.push({ id: uid('n'), source: '' })
+    // 笔记末尾最多留一个空块
+    while (blocks.length > 1 && !blocks[blocks.length - 1].source.trim() && !blocks[blocks.length - 2].source.trim()) {
+        blocks.pop()
+    }
     return blocks
 }
 

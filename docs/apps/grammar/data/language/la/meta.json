@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "language": "la",
+  "name": "拉丁语",
+  "native": "Latina",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 1,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "participle",
+    "adv",
+    "pron",
+    "prep",
+    "postp",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "terms": {
+    "inflectionType": "变形类型",
+    "inflectionTypePlaceholder": "如：第一变格法",
+    "special": "特殊变形",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}变形表",
+    "extraForms": "补充形式",
+    "basicTitle": "基本",
+    "stemsTitle": "词干",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 am"
+    },
+    "byPos": {
+      "verb": {
+        "special": "特殊变位",
+        "indeclinable": "不变位",
+        "paradigmTitle": "{pos}变位表",
+        "inflectionType": "变位类型",
+        "inflectionTypePlaceholder": "如：第一变位法"
+      },
+      "noun": {
+        "inflectionType": "变格类型",
+        "special": "特殊变格",
+        "indeclinable": "不变格",
+        "paradigmTitle": "{pos}变格表",
+        "inflectionTypePlaceholder": "如：第一变格法"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 aqua"
+    },
+    "meanings": "含义",
+    "collocations": "固定搭配",
+    "examples": "例句",
+    "derivatives": "派生词",
+    "tags": "标签",
+    "notes": "备注",
+    "others": "其他",
+    "paradigmTable": "形态变形",
+    "optionalSuffix": "（可选）",
+    "add": "＋ 添加",
+    "addMeaning": "＋ 添加含义",
+    "posLabel": "词性",
+    "anchorLabel": "语法条目",
+    "meaningPlaceholder": "含义",
+    "emptyMeanings": "该来源还没有含义",
+    "inflectionGroupPlaceholder": "分组（可选）",
+    "inflectionLabelPlaceholder": "标签",
+    "inflectionFormPlaceholder": "形态",
+    "emptyCollocations": "该来源还没有固定搭配",
+    "collocationTextPlaceholder": "固定搭配原文",
+    "collocationGlossPlaceholder": "含义",
+    "emptyExamples": "该来源还没有例句",
+    "exampleTextPlaceholder": "例句原文",
+    "exampleCitationPlaceholder": "出处",
+    "exampleTranslationPlaceholder": "含义",
+    "derivativeSearchLabel": "搜索生词",
+    "derivativeSearchPlaceholder": "搜索基本形态或词干…",
+    "derivativeEmptyHint": "尚未选择派生词",
+    "tagsPlaceholder": "高频, 文献A",
+    "notesPlaceholder": "备注"
+  },
+  "files": {
+    "paradigm": "paradigm.js",
+    "ime": "ime.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "la-pron",
+          "la-pron-1st-2nd",
+          "la-pron-3rd",
+          "la-pron-reflexive",
+          "la-pron-possessive",
+          "la-pron-demonstrative",
+          "la-pron-relative",
+          "la-pron-interrogative",
+          "la-pron-indefinite"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "la-noun",
+          "la-noun-1st-decl",
+          "la-noun-2nd-decl",
+          "la-noun-2nd-decl-f",
+          "la-noun-2nd-decl-er",
+          "la-noun-2nd-decl-er-keep",
+          "la-noun-2nd-decl-n",
+          "la-noun-3rd-decl",
+          "la-noun-3rd-decl-i",
+          "la-noun-3rd-decl-i-abli",
+          "la-noun-3rd-decl-n",
+          "la-noun-3rd-decl-i-n",
+          "la-noun-3rd-decl-i-n-al",
+          "la-noun-4th-decl",
+          "la-noun-4th-decl-n",
+          "la-noun-5th-decl",
+          "la-noun-5th-decl-dies"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "la-adj",
+          "la-adj-1st-2nd",
+          "la-adj-3rd-3term",
+          "la-adj-3rd",
+          "la-adj-3rd-1term",
+          "la-adj-comparison",
+          "la-adj-adverb"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "la-adv",
+          "la-adv-comparison"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "la-verb",
+          "la-verb-overview",
+          "la-verb-deponent",
+          "la-verb-1st-conj",
+          "la-verb-1st-pres",
+          "la-verb-1st-impf",
+          "la-verb-1st-fut",
+          "la-verb-1st-perf",
+          "la-verb-1st-plup",
+          "la-verb-1st-futp",
+          "la-verb-1st-sigmatic",
+          "la-verb-1st-inf",
+          "la-verb-1st-ptcp",
+          "la-verb-1st-gerund",
+          "la-verb-1st-supine",
+          "la-verb-2nd-conj",
+          "la-verb-2nd-pres",
+          "la-verb-2nd-impf",
+          "la-verb-2nd-fut",
+          "la-verb-2nd-perf",
+          "la-verb-2nd-plup",
+          "la-verb-2nd-futp",
+          "la-verb-2nd-sigmatic",
+          "la-verb-2nd-inf",
+          "la-verb-2nd-ptcp",
+          "la-verb-2nd-gerund",
+          "la-verb-2nd-supine",
+          "la-verb-3rd-conj",
+          "la-verb-3rd-pres",
+          "la-verb-3rd-impf",
+          "la-verb-3rd-fut",
+          "la-verb-3rd-perf",
+          "la-verb-3rd-plup",
+          "la-verb-3rd-futp",
+          "la-verb-3rd-sigmatic",
+          "la-verb-3rd-inf",
+          "la-verb-3rd-ptcp",
+          "la-verb-3rd-gerund",
+          "la-verb-3rd-supine",
+          "la-verb-4th-conj",
+          "la-verb-4th-pres",
+          "la-verb-4th-impf",
+          "la-verb-4th-fut",
+          "la-verb-4th-perf",
+          "la-verb-4th-plup",
+          "la-verb-4th-futp",
+          "la-verb-4th-sigmatic",
+          "la-verb-4th-inf",
+          "la-verb-4th-ptcp",
+          "la-verb-4th-gerund",
+          "la-verb-4th-supine"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "la-num",
+          "la-num-1-20",
+          "la-num-tens",
+          "la-num-hundreds"
+        ]
+      }
+    ]
+  }
+}

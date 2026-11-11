@@ -1,11 +1,16 @@
 (function () {
+    const App = window.App
     const flipCards = document.querySelectorAll('.flip-card[data-flip]')
+
+    function flipLabel(card) {
+        return App.i18n.t(card.classList.contains('flipped') ? 'flip.close' : 'flip.open')
+    }
 
     function toggleFlip(card) {
         card.classList.toggle('flipped')
         const isFlipped = card.classList.contains('flipped')
         card.setAttribute('aria-pressed', isFlipped ? 'true' : 'false')
-        card.setAttribute('aria-label', isFlipped ? '点击收起详情' : '点击翻转查看详情')
+        card.setAttribute('aria-label', flipLabel(card))
     }
 
     flipCards.forEach(card => {
@@ -23,7 +28,7 @@
             if (e.key === 'Escape' && this.classList.contains('flipped')) {
                 this.classList.remove('flipped')
                 this.setAttribute('aria-pressed', 'false')
-                this.setAttribute('aria-label', '点击翻转查看详情')
+                this.setAttribute('aria-label', flipLabel(this))
             }
         })
     })
@@ -34,7 +39,7 @@
                 if (card.classList.contains('flipped')) {
                     card.classList.remove('flipped')
                     card.setAttribute('aria-pressed', 'false')
-                    card.setAttribute('aria-label', '点击翻转查看详情')
+                    card.setAttribute('aria-label', flipLabel(card))
                 }
             })
         }
@@ -51,24 +56,12 @@
         }, { passive: false })
     })
 
-    document.querySelectorAll('.link-cell, .link-cell-same').forEach(link => {
-        const title = link.querySelector('.cell-title')
-        if (title) {
-            const text = title.textContent.trim()
-            link.setAttribute('aria-label', `访问${text}`)
-        }
-    })
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const year = new Date().getFullYear()
-        const path = location.pathname
-        const langMap = {
-            '/en-us': 'Yi-Yang Li',
-            '/jp': '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
-        }
-        const lang = Object.keys(langMap).find(key => path.includes(key))
-        const title = langMap[lang] || '李亦楊'
-        document.getElementById('copyright-script-generated').innerHTML =
-            `&copy; 2023 - ${year} ${title} - All Rights Reserved.`
+    /* 语言切换后，已展开的卡片需要换成新语言的提示语 */
+    App.i18n.onChange(function () {
+        flipCards.forEach(card => {
+            if (card.classList.contains('flipped')) {
+                card.setAttribute('aria-label', flipLabel(card))
+            }
+        })
     })
 })()

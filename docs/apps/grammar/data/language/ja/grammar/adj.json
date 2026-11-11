@@ -1,0 +1,268 @@
+[
+  {
+    "id": "ja-adj",
+    "title": "形容词",
+    "items": [
+      {
+        "id": "ja-adj-overview",
+        "title": "两类形容词与活用形体系",
+        "tables": [
+          {
+            "caption": "两类形容词",
+            "role": "pattern",
+            "headers": [
+              "类别",
+              "辞书形",
+              "特点"
+            ],
+            "rows": [
+              [
+                "形容詞（<bdi>イ形容词</bdi>）",
+                "<bdi>高い（たかい）</bdi>",
+                "以 -<bdi>い</bdi> 结尾，自身活用"
+              ],
+              [
+                "形容動詞（<bdi>ナ形容词</bdi>）",
+                "<bdi>静かだ（しずかだ）</bdi>",
+                "词干 + <bdi>だ / な / に</bdi>，活用像名词 + 断定"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "notes": "两者的活用形名称相同（<bdi>未然・連用・終止・連体・已然</bdi>），但<strong>終止形与連体形</strong>在形容动词里不同（<bdi>静か</bdi><strong><bdi>だ</bdi></strong><bdi> / 静か</bdi><strong><bdi>な</bdi></strong>）。"
+      },
+      {
+        "id": "ja-adj-i",
+        "title": "形容詞（<bdi>イ形容词・高い型</bdi>）",
+        "inflect": "conj",
+        "tables": [
+          {
+            "caption": "活用形",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "词形",
+              "主要接续"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "<bdi>高かろ</bdi>",
+                "<bdi>う</bdi>（推量）"
+              ],
+              [
+                "連用形1",
+                "<bdi>高く</bdi>",
+                "<bdi>ない・なる・て</bdi>"
+              ],
+              [
+                "連用形2",
+                "<bdi>高かっ</bdi>",
+                "<bdi>た</bdi>"
+              ],
+              [
+                "終止形（辞書形）",
+                "<bdi>高い</bdi>",
+                "结句"
+              ],
+              [
+                "連体形",
+                "<bdi>高い</bdi>",
+                "修饰名词"
+              ],
+              [
+                "已然形（仮定）",
+                "<bdi>高けれ</bdi>",
+                "<bdi>ば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          },
+          {
+            "caption": "合成形式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "词形",
+              "基于"
+            ],
+            "rows": [
+              [
+                "叮咛形",
+                "<bdi>高いです</bdi>",
+                "終止形 + <bdi>です</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "<bdi>高くない</bdi>",
+                "連用形1 + <bdi>ない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "<bdi>高かった</bdi>",
+                "連用形2 + <bdi>た</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "<bdi>高くて</bdi>",
+                "連用形1 + <bdi>て</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "<bdi>高ければ</bdi>",
+                "已然形 + <bdi>ば</bdi>"
+              ],
+              [
+                "连用（副词）用法",
+                "<bdi>高く＋なる</bdi>",
+                "連用形1"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "derive": {
+          "pos": "adj",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            },
+            "stem": {
+              "from": "base",
+              "rules": [
+                {
+                  "pattern": "い$",
+                  "replace": ""
+                }
+              ]
+            }
+          },
+          "stemExample": "高い",
+          "headwordExample": "高い",
+          "parts": [],
+          "endings": {
+            "forms": {
+              "mizen": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "かろ"
+                }
+              },
+              "renyo1": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "く"
+                }
+              },
+              "renyo2": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "かっ"
+                }
+              },
+              "shusi": {
+                "form": {
+                  "stemOnly": true
+                }
+              },
+              "rentai": {
+                "form": {
+                  "stemOnly": true
+                }
+              },
+              "katei": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "けれ"
+                }
+              }
+            },
+            "compound": {
+              "teinei": {
+                "form": {
+                  "suffix": "です"
+                }
+              },
+              "nai": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "くない"
+                }
+              },
+              "ta": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "かった"
+                }
+              },
+              "te": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "くて"
+                }
+              },
+              "kateiba": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "ければ"
+                }
+              },
+              "renyo": {
+                "form": {
+                  "stemForm": "stem",
+                  "suffix": "く"
+                }
+              }
+            }
+          },
+          "note": "以辞书形（-い）为输入：去掉 -い 得到词干，再接各活用词尾。「いい / よい」是不规则（よかっ・よく），请直接填表。",
+          "expect": {
+            "forms": {
+              "mizen": {
+                "form": "高かろ"
+              },
+              "renyo1": {
+                "form": "高く"
+              },
+              "renyo2": {
+                "form": "高かっ"
+              },
+              "shusi": {
+                "form": "高い"
+              },
+              "rentai": {
+                "form": "高い"
+              },
+              "katei": {
+                "form": "高けれ"
+              }
+            },
+            "compound": {
+              "teinei": {
+                "form": "高いです"
+              },
+              "nai": {
+                "form": "高くない"
+              },
+              "ta": {
+                "form": "高かった"
+              },
+              "te": {
+                "form": "高くて"
+              },
+              "kateiba": {
+                "form": "高ければ"
+              },
+              "renyo": {
+                "form": "高く"
+              }
+            }
+          }
+        },
+        "anchorLabel": "形容词"
+      }
+    ]
+  }
+]

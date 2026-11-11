@@ -1,0 +1,796 @@
+[
+  {
+    "id": "mnc-verb",
+    "title": "动词",
+    "items": [
+      {
+        "id": "mnc-verb-general",
+        "title": "动词总论：-mbi 形式与词干",
+        "tables": [
+          {
+            "caption": "动词的基本形态",
+            "role": "pattern",
+            "headers": [
+              "项目",
+              "形式",
+              "说明"
+            ],
+            "rows": [
+              [
+                "词典形",
+                "<bdi>ᠠᡵᠠᠮᠪᡳ</bdi>",
+                "以 -<bdi>ᠮᠪᡳ</bdi> 结尾，兼表现在-将来时，也是词条的基本形态"
+              ],
+              [
+                "词干",
+                "<bdi>ᠠᡵᠠ-</bdi>",
+                "去掉 -<bdi>ᠮᠪᡳ</bdi>；所有后缀都接在词干上（生词表单的「词干」）"
+              ],
+              [
+                "否定",
+                "<bdi>ᠠᡵᠠᡵᠠᡴᡡ</bdi>",
+                "-<bdi>ᡵᠠ + -ᡴᡡ</bdi>，元音随词干和谐"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "满语动词只接后缀，不随人称变化（没有人称词尾）；后缀元音与<strong>词干最后一个元音</strong>和谐。"
+      },
+      {
+        "id": "mnc-verb-tense",
+        "title": "时制与体",
+        "tables": [
+          {
+            "caption": "时制与体后缀（例：<bdi>ᠠᡵᠠᠮᠪᡳ</bdi> 写）",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "现在-将来",
+                "<bdi>-ᠮᠪᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᠪᡳ</bdi> 写 / 将写"
+              ],
+              [
+                "将来 / 未完成",
+                "<bdi>-ᡵᠠ / -ᡵᡝ / -ᡵᠣ</bdi>",
+                "<bdi>ᠠᡵᠠᡵᠠ</bdi> 将要写"
+              ],
+              [
+                "过去",
+                "<bdi>-ᡥᠠ / -ᡥᡝ / -ᡥᠣ</bdi>",
+                "<bdi>ᠠᡵᠠᡥᠠ</bdi> 写了"
+              ],
+              [
+                "同时持续",
+                "<bdi>-ᠮᠪᡳᠮᡝ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᠪᡳᠮᡝ</bdi> 一边写"
+              ],
+              [
+                "过去进行",
+                "<bdi>-ᠮᠪᡳᡥᡝ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᠪᡳᡥᡝ</bdi> 当时正在写"
+              ],
+              [
+                "进行",
+                "<bdi>-ᠮᡝ ᠪᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᡝ ᠪᡳ</bdi> 正在写"
+              ],
+              [
+                "进行/持续",
+                "<bdi>-ᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ</bdi> 保持着写的状态"
+              ],
+              [
+                "完成/已毕",
+                "<bdi>-ᠮᠠᡥᠠᠪᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᠠᡥᠠᠪᡳ</bdi> 已经写了"
+              ],
+              [
+                "完成",
+                "<bdi>-ᡥᠠ ᠪᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᡥᠠ ᠪᡳ</bdi> 已经写了"
+              ],
+              [
+                "过去完成",
+                "<bdi>-ᡥᡝ ᠪᡳᡥᡝ</bdi>",
+                "<bdi>ᠠᡵᠠᡥᡝ ᠪᡳᡥᡝ</bdi> 早已写了"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "<code><bdi>-ᡥᠠ ᠪᡳ</bdi></code> / <code><bdi>-ᡥᡝ ᠪᡳᡥᡝ</bdi></code> / <code><bdi>-ᠮᡝ ᠪᡳ</bdi></code> 这类是「后缀 + <bdi>ᠪᡳ / ᠪᡳᡥᡝ</bdi>」的复合形式，书写时中间有空格。"
+      },
+      {
+        "id": "mnc-verb-mood",
+        "title": "式：命令、祈愿、祈使",
+        "tables": [
+          {
+            "caption": "式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "命令（第二人称）",
+                "词干本身",
+                "<bdi>ᠠᡵᠠ</bdi> 写！"
+              ],
+              [
+                "祈愿（第三人称）",
+                "<bdi>-ᡴᡳᠨᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᡴᡳᠨᡳ</bdi> 愿他写"
+              ],
+              [
+                "祈使（第一人称）",
+                "<bdi>-ᠴᡳᠨᠠ</bdi>",
+                "<bdi>ᠠᡵᠠᠴᡳᠨᠠ</bdi> 让我写吧"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "<bdi>-ᡴᡳᠨᡳ / -ᠴᡳᠨᠠ</bdi> 不随元音和谐变化；命令式的否定见「否定」一节的 <bdi>ᡠᠮᡝ</bdi>。"
+      },
+      {
+        "id": "mnc-verb-negation",
+        "title": "否定与禁止",
+        "tables": [
+          {
+            "caption": "否定",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀 / 结构",
+              "例"
+            ],
+            "rows": [
+              [
+                "现在-将来否定",
+                "<bdi>-ᡵᠠᡴᡡ / -ᡵᡝᡴᡡ / -ᡵᠣᡴᡡ</bdi>",
+                "<bdi>ᠠᡵᠠᡵᠠᡴᡡ</bdi> 不写"
+              ],
+              [
+                "过去否定",
+                "<bdi>-ᡥᠠᡴᡡ / -ᡥᡝᡴᡡ / -ᡥᠣᡴᡡ</bdi>",
+                "<bdi>ᠠᡵᠠᡥᠠᡴᡡ</bdi> 没写"
+              ],
+              [
+                "禁止",
+                "<bdi>ᡠᠮᡝ + -ᡵᠠ / -ᡵᡝ / -ᡵᠣ</bdi>",
+                "<bdi>ᡠᠮᡝ ᠠᡵᠠᡵᠠ</bdi> 别写"
+              ],
+              [
+                "名词性否定",
+                "<bdi>ᠠᡴᡡ / ᠸᠠᡴᠠ</bdi>",
+                "<bdi>ᠠᡴᡡ</bdi> 没有；<bdi>ᠸᠠᡴᠠ</bdi> 不是"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "否定后缀的元音同样随词干和谐；判断句否定用 <bdi>ᠸᠠᡴᠠ</bdi>，存在/拥有否定用 <bdi>ᠠᡴᡡ</bdi>。"
+      },
+      {
+        "id": "mnc-verb-converb",
+        "title": "副动形式（converb）",
+        "tables": [
+          {
+            "caption": "副动后缀",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "同时",
+                "<bdi>-ᠮᡝ</bdi>",
+                "<bdi>ᠠᡵᠠᠮᡝ</bdi> 一边写"
+              ],
+              [
+                "先后完成",
+                "<bdi>-ᡶᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᡶᡳ</bdi> 写完之后"
+              ],
+              [
+                "持续",
+                "<bdi>-ᡥᠠᡳ / -ᡥᡝᡳ / -ᡥᠣᡳ</bdi>",
+                "<bdi>ᠠᡵᠠᡥᠠᡳ</bdi> 一直写着"
+              ],
+              [
+                "直到",
+                "<bdi>-ᡨᠠᠯᠠ / -ᡨᡝᠯᡝ</bdi>",
+                "<bdi>ᠠᡵᠠᡨᠠᠯᠠ</bdi> 写到…为止"
+              ],
+              [
+                "当…时",
+                "<bdi>-ᠩᡤᠠᠯᠠ / -ᠩᡤᡝᠯᡝ</bdi>",
+                "<bdi>ᠠᡵᠠᠩᡤᠠᠯᠠ</bdi> 正要写的时候"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "副动形式不能单独作谓语，只能连接另一个动词或表示伴随状况。"
+      },
+      {
+        "id": "mnc-verb-participle",
+        "title": "形动形式与名词化",
+        "tables": [
+          {
+            "caption": "形动与名词化",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "已发生（形动）",
+                "<bdi>-ᡥᠠ / -ᡥᡝ / -ᡥᠣ</bdi>",
+                "<bdi>ᠠᡵᠠᡥᠠ ᠨᡳᠶᠠᠯᠮᠠ</bdi> 写了的人"
+              ],
+              [
+                "未发生（形动）",
+                "<bdi>-ᡵᠠ / -ᡵᡝ / -ᡵᠣ</bdi>",
+                "<bdi>ᠠᡵᠠᡵᠠ ᠨᡳᠶᠠᠯᠮᠠ</bdi> 要写的人"
+              ],
+              [
+                "名词化 -<bdi>ᠨ</bdi>",
+                "<bdi>-ᠨ</bdi>",
+                "<bdi>ᠠᡵᠠᠨ</bdi> 写的这件事 / 情形"
+              ],
+              [
+                "名词化 -<bdi>ᠰᡳ</bdi>",
+                "<bdi>-ᠰᡳ</bdi>",
+                "少数动词"
+              ],
+              [
+                "名词化 -<bdi>ᡨᠠᠨ / -ᡨᡝᠨ</bdi>",
+                "<bdi>-ᡨᠠᠨ / -ᡨᡝᠨ</bdi>",
+                "少数动词"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "形动可直接修饰名词，也可作名词用；-<bdi>ᠨ / -ᠰᡳ / -ᡨᠠᠨ</bdi> 不太能产。"
+      }
+    ],
+    "derive": {
+      "pos": "verb",
+      "stemForms": {
+        "base": {
+          "from": "headword",
+          "rules": [
+            {
+              "pattern": "mbi$",
+              "replace": ""
+            }
+          ]
+        }
+      },
+      "stemExample": "ara",
+      "headwordExample": "arambi",
+      "parts": [
+        {
+          "key": "base",
+          "label": "词干",
+          "example": "ᠠᡵᠠ",
+          "required": false
+        }
+      ],
+      "endings": {
+        "tense": {
+          "mbi": {
+            "form": {
+              "suffix": "-mbi"
+            }
+          },
+          "fut": {
+            "form": {
+              "suffix": "-rV"
+            }
+          },
+          "past": {
+            "form": {
+              "suffix": "-hV"
+            }
+          },
+          "mbime": {
+            "form": {
+              "suffix": "-mbime"
+            }
+          },
+          "mbihe": {
+            "form": {
+              "suffix": "-mbihe"
+            }
+          },
+          "prog": {
+            "form": {
+              "suffix": "-me bi"
+            }
+          },
+          "prog2": {
+            "form": {
+              "suffix": "-me ilihabi"
+            }
+          },
+          "perf": {
+            "form": {
+              "suffix": "-mahabi"
+            }
+          },
+          "perf2": {
+            "form": {
+              "suffix": "-hV bi"
+            }
+          },
+          "plup": {
+            "form": {
+              "suffix": "-hV bihe"
+            }
+          }
+        },
+        "mood": {
+          "impv": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "opt": {
+            "form": {
+              "suffix": "-kini"
+            }
+          },
+          "prec": {
+            "form": {
+              "suffix": "-cina"
+            }
+          },
+          "negpres": {
+            "form": {
+              "suffix": "-rVkū"
+            }
+          },
+          "negpast": {
+            "form": {
+              "suffix": "-hVkū"
+            }
+          },
+          "prohib": {
+            "form": {
+              "prefix": "ume ",
+              "suffix": "-rV"
+            }
+          }
+        },
+        "converb": {
+          "cvbme": {
+            "form": {
+              "suffix": "-me"
+            }
+          },
+          "cvbfi": {
+            "form": {
+              "suffix": "-fi"
+            }
+          },
+          "cvbhai": {
+            "form": {
+              "suffix": "-hVi"
+            }
+          },
+          "cvbtala": {
+            "form": {
+              "suffix": "-tVlV"
+            }
+          },
+          "cvbnggala": {
+            "form": {
+              "suffix": "-nggVlV"
+            }
+          }
+        },
+        "nominal": {
+          "ptcppast": {
+            "form": {
+              "suffix": "-hV"
+            }
+          },
+          "ptcpfut": {
+            "form": {
+              "suffix": "-rV"
+            }
+          },
+          "nomn": {
+            "form": {
+              "suffix": "-n"
+            }
+          },
+          "nomsi": {
+            "form": {
+              "suffix": "-si"
+            }
+          },
+          "nomtan": {
+            "form": {
+              "suffix": "-tVn"
+            }
+          }
+        }
+      },
+      "note": "满语动词只接后缀、不随人称变化；后缀里的元音按词干最后一个元音变化（-ᡥᠠ / -ᡥᡝ / -ᡥᠣ）。",
+      "expect": {
+        "tense": {
+          "mbi": {
+            "form": "ᠠᡵᠠᠮᠪᡳ"
+          },
+          "fut": {
+            "form": "ᠠᡵᠠᡵᠠ"
+          },
+          "past": {
+            "form": "ᠠᡵᠠᡥᠠ"
+          },
+          "mbime": {
+            "form": "ᠠᡵᠠᠮᠪᡳᠮᡝ"
+          },
+          "mbihe": {
+            "form": "ᠠᡵᠠᠮᠪᡳᡥᡝ"
+          },
+          "prog": {
+            "form": "ᠠᡵᠠᠮᡝ ᠪᡳ"
+          },
+          "prog2": {
+            "form": "ᠠᡵᠠᠮᡝ ᡳᠯᡳᡥᠠᠪᡳ"
+          },
+          "perf": {
+            "form": "ᠠᡵᠠᠮᠠᡥᠠᠪᡳ"
+          },
+          "perf2": {
+            "form": "ᠠᡵᠠᡥᠠ ᠪᡳ"
+          },
+          "plup": {
+            "form": "ᠠᡵᠠᡥᠠ ᠪᡳᡥᡝ"
+          }
+        },
+        "mood": {
+          "impv": {
+            "form": "ᠠᡵᠠ"
+          },
+          "opt": {
+            "form": "ᠠᡵᠠᡴᡳᠨᡳ"
+          },
+          "prec": {
+            "form": "ᠠᡵᠠᠴᡳᠨᠠ"
+          },
+          "negpres": {
+            "form": "ᠠᡵᠠᡵᠠᡴᡡ"
+          },
+          "negpast": {
+            "form": "ᠠᡵᠠᡥᠠᡴᡡ"
+          },
+          "prohib": {
+            "form": "ᡠᠮᡝ ᠠᡵᠠᡵᠠ"
+          }
+        },
+        "converb": {
+          "cvbme": {
+            "form": "ᠠᡵᠠᠮᡝ"
+          },
+          "cvbfi": {
+            "form": "ᠠᡵᠠᡶᡳ"
+          },
+          "cvbhai": {
+            "form": "ᠠᡵᠠᡥᠠᡳ"
+          },
+          "cvbtala": {
+            "form": "ᠠᡵᠠᡨᠠᠯᠠ"
+          },
+          "cvbnggala": {
+            "form": "ᠠᡵᠠᠩᡤᠠᠯᠠ"
+          }
+        },
+        "nominal": {
+          "ptcppast": {
+            "form": "ᠠᡵᠠᡥᠠ"
+          },
+          "ptcpfut": {
+            "form": "ᠠᡵᠠᡵᠠ"
+          },
+          "nomn": {
+            "form": "ᠠᡵᠠᠨ"
+          },
+          "nomsi": {
+            "form": "ᠠᡵᠠᠰᡳ"
+          },
+          "nomtan": {
+            "form": "ᠠᡵᠠᡨᠠᠨ"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "mnc-verb-secondary",
+    "title": "派生动词",
+    "items": [
+      {
+        "id": "mnc-verb-voice-overview",
+        "title": "四类语态概览",
+        "tables": [
+          {
+            "caption": "语态",
+            "role": "pattern",
+            "headers": [
+              "语态",
+              "后缀",
+              "例"
+            ],
+            "rows": [
+              [
+                "主动",
+                "无",
+                "<bdi>ᠠᡵᠠᠮᠪᡳ</bdi> 写"
+              ],
+              [
+                "被动 / 使役",
+                "<bdi>-ᠪᡠ</bdi>",
+                "<bdi>ᠠᡵᠠᠪᡠᠮᠪᡳ</bdi> 被写 / 使写"
+              ],
+              [
+                "相互",
+                "<bdi>-ᠨᡠ / -ᠨᡩᡠ</bdi>",
+                "<bdi>ᠠᡳᠰᡳᠯᠠᠨᡩᡠᠮᠪᡳ</bdi> 互相帮助"
+              ],
+              [
+                "协同",
+                "<bdi>-ᠴᠠ / -ᠴᡝ</bdi>",
+                "<bdi>ᠵᠠᡶᠠᠴᠠᠮᠪᡳ</bdi> 一起抓"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "主动式没有专门后缀；其余三类都用后缀派生<strong>新词</strong>（词干改变），不是同一个词的形式变化。"
+      },
+      {
+        "id": "mnc-verb-voice-bu",
+        "title": "使役 / 被动（-bu）",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "要素",
+              "形式"
+            ],
+            "rows": [
+              [
+                "词干",
+                "原词干 + -<bdi>ᠪᡠ-</bdi>（<bdi>ᠠᡵᠠᠮᠪᡳ → ᠠᡵᠠᠮᠪᡠ</bdi>-）"
+              ],
+              [
+                "词义",
+                "「使…做」或「被…做」—— 同形，靠上下文区分"
+              ],
+              [
+                "变位",
+                "完全按普通动词接后缀（-<bdi>ᠮᠪᡳ / -ᡥᠠ / -ᡵᠠ / -ᡵᡝ / -ᡵᠣ / -ᠮᡝ</bdi>…）"
+              ],
+              [
+                "示例",
+                "<bdi>ᠠᡵᠠᠮᠪᡳ</bdi> 写 <bdi>→ ᠠᡵᠠᠮᠪᡠᠮᠪᡳ</bdi> 被写 / 使写"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "派生后的词干照常参与元音和谐：<bdi>ᠠᡵᠠᠮᠪᡠ-</bdi> 是后元音 <bdi>→ ᠠᡵᠠᠮᠪᡠᡥᠠ</bdi>；<bdi>ᡤᡝᠨᡝᠪᡠ-</bdi> 是前元音 <bdi>→ ᡤᡝᠨᡝᠪᡠᡥᡝ</bdi>。"
+      },
+      {
+        "id": "mnc-verb-voice-nu",
+        "title": "相互（-nu / -ndu）",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "要素",
+              "形式"
+            ],
+            "rows": [
+              [
+                "词干",
+                "原词干 + -<bdi>ᠨᡠ- / -ᠨᡩᡠ</bdi>-"
+              ],
+              [
+                "词义",
+                "「互相…」"
+              ],
+              [
+                "变位",
+                "同普通动词"
+              ],
+              [
+                "示例",
+                "<bdi>ᠠᡳᠰᡳᠯᠠᠮᠪᡳ</bdi> 帮助 <bdi>→ ᠠᡳᠰᡳᠯᠠᠨᡩᡠᠮᠪᡳ</bdi> 互相帮助"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "-<bdi>ᠨᡩᡠ</bdi> 多接在以 <bdi>-ᠨ</bdi> 结尾的词干后（<bdi>ᠠᡳᠰᡳᠯᠠ- → ᠠᡳᠰᡳᠯᠠᠨᡩᡠ</bdi>-）；同样按派生后的词干继续和谐。"
+      },
+      {
+        "id": "mnc-verb-voice-ca",
+        "title": "协同（-ca / -ce）",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "要素",
+              "形式"
+            ],
+            "rows": [
+              [
+                "词干",
+                "原词干 + -<bdi>ᠴᠠ- / -ᠴᡝ</bdi>-（随词干和谐）"
+              ],
+              [
+                "词义",
+                "「一起…」"
+              ],
+              [
+                "变位",
+                "同普通动词"
+              ],
+              [
+                "示例",
+                "<bdi>ᠵᠠᡶᠠᠮᠪᡳ</bdi> 抓 <bdi>→ ᠵᠠᡶᠠᠴᠠᠮᠪᡳ</bdi> 一起抓"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ],
+        "notes": "元音随词干和谐：后元音 -<bdi>ᠴᠠ</bdi>、前元音 <bdi>-ᠴᡝ</bdi>。"
+      }
+    ],
+    "notes": "派生词仍是<strong>普通动词</strong>，接 -<bdi>ᠮᠪᡳ / -ᡥᠠ / -ᡵᠠ / -ᡵᡝ / -ᡵᠣ / -ᠮᡝ / -ᡶᡳ / -ᡴᡳᠨᡳ</bdi>… 全部同一套后缀；<strong>元音和谐按派生后的词干算</strong>（<bdi>ᠠᡵᠠᠮᠪᡠ- 是后元音 → ᠠᡵᠠᠮᠪᡠᡥᠠ；ᡤᡝᠨᡝᠪᡠ- 是前元音 → ᡤᡝᠨᡝᠪᡠᡥᡝ</bdi>）。这三个后缀产生的是新词。"
+  },
+  {
+    "id": "mnc-verb-harmony-back",
+    "title": "后元音词干（a / ū）",
+    "items": [
+      {
+        "id": "mnc-verb-harmony-back-table",
+        "title": "该类的后缀变体",
+        "tables": [
+          {
+            "caption": "后缀变体",
+            "role": "pattern",
+            "headers": [
+              "词干",
+              "过去",
+              "将来",
+              "否定",
+              "副动"
+            ],
+            "rows": [
+              [
+                "<bdi>ᠠᡵᠠ-</bdi>",
+                "<bdi>-ᡥᠠ</bdi>",
+                "<bdi>-ᡵᠠ</bdi>",
+                "<bdi>-ᡵᠠᡴᡡ</bdi>",
+                "<bdi>-ᡥᠠᡳ</bdi>"
+              ],
+              [
+                "<bdi>ᠰᠠᠪᡠ-</bdi>",
+                "<bdi>-ᡥᠠ</bdi>",
+                "<bdi>-ᡵᠠ</bdi>",
+                "<bdi>-ᡵᠠᡴᡡ</bdi>",
+                "<bdi>-ᡥᠠᡳ</bdi>"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ]
+      }
+    ],
+    "inflect": "conj",
+    "notes": "词干最后一个元音是 <bdi>ᠠ</bdi> 或 <bdi>ᡡ</bdi>：过去 <bdi>-ᡥᠠ</bdi>、将来 <bdi>-ᡵᠠ</bdi>、否定 <bdi>-ᡵᠠᡴᡡ</bdi>、副动 <bdi>-ᡥᠠᡳ</bdi>。",
+    "deriveRef": "mnc-verb"
+  },
+  {
+    "id": "mnc-verb-harmony-front",
+    "title": "前元音词干（e / u）",
+    "items": [
+      {
+        "id": "mnc-verb-harmony-front-table",
+        "title": "该类的后缀变体",
+        "tables": [
+          {
+            "caption": "后缀变体",
+            "role": "pattern",
+            "headers": [
+              "词干",
+              "过去",
+              "将来",
+              "否定",
+              "副动"
+            ],
+            "rows": [
+              [
+                "<bdi>ᡤᡝᠨᡝ-</bdi>",
+                "<bdi>-ᡥᡝ</bdi>",
+                "<bdi>-ᡵᡝ</bdi>",
+                "<bdi>-ᡵᡝᡴᡡ</bdi>",
+                "<bdi>-ᡥᡝᡳ</bdi>"
+              ],
+              [
+                "<bdi>ᠪᡠ-</bdi>",
+                "<bdi>-ᡥᡝ</bdi>",
+                "<bdi>-ᡵᡝ</bdi>",
+                "<bdi>-ᡵᡝᡴᡡ</bdi>",
+                "<bdi>-ᡥᡝᡳ</bdi>"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ]
+      }
+    ],
+    "inflect": "conj",
+    "notes": "词干最后一个元音是 <bdi>ᡝ</bdi> 或 <bdi>ᡠ</bdi>：过去 <bdi>-ᡥᡝ</bdi>、将来 <bdi>-ᡵᡝ</bdi>、否定 <bdi>-ᡵᡝᡴᡡ</bdi>、副动 <bdi>-ᡥᡝᡳ</bdi>。",
+    "deriveRef": "mnc-verb"
+  },
+  {
+    "id": "mnc-verb-harmony-round",
+    "title": "圆唇词干（o）",
+    "items": [
+      {
+        "id": "mnc-verb-harmony-round-table",
+        "title": "该类的后缀变体",
+        "tables": [
+          {
+            "caption": "后缀变体",
+            "role": "pattern",
+            "headers": [
+              "词干",
+              "过去",
+              "将来",
+              "否定",
+              "副动"
+            ],
+            "rows": [
+              [
+                "<bdi>ᠰᠣᠩᡤᠣ-</bdi>",
+                "<bdi>-ᡥᠣ</bdi>",
+                "<bdi>-ᡵᠣ</bdi>",
+                "<bdi>-ᡵᠣᡴᡡ</bdi>",
+                "<bdi>-ᡥᠣᡳ</bdi>"
+              ]
+            ],
+            "lang": "mnc"
+          }
+        ]
+      }
+    ],
+    "inflect": "conj",
+    "notes": "词干最后一个元音是 <bdi>ᠣ</bdi>：过去 <bdi>-ᡥᠣ</bdi>、将来 <bdi>-ᡵᠣ</bdi>、否定 <bdi>-ᡵᠣᡴᡡ</bdi>、副动 <bdi>-ᡥᠣᡳ</bdi>。",
+    "deriveRef": "mnc-verb"
+  }
+]

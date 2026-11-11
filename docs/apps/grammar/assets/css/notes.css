@@ -1,0 +1,529 @@
+/* 笔记页：一行一块的文稿。正文、页头、工具条共用一条左边线。 */
+
+.notes-page {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+/* 面包屑由挂载框架插在 .app-main 里，跟着文稿一起收窄 */
+.app-main:has(> .notes-page) > .page-breadcrumbs {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------- 工具条 ---------- */
+
+/* 工具条吸顶；按钮区可以横向滚动，保存状态留在右边不动 */
+.note-bar {
+    position: sticky;
+    top: var(--h-header);
+    z-index: calc(var(--z-header) - 1);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-3);
+    padding: var(--sp-2) 0;
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-rule); /* taste-skill-ignore: 吸顶条与顶栏同一套边框 */
+}
+
+.note-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.note-toolbar::-webkit-scrollbar {
+    display: none;
+}
+
+.note-tool {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 var(--sp-2);
+    border-radius: var(--r-control);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    line-height: 1;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.note-tool svg {
+    display: block;
+}
+
+/* 只有图形的按钮收窄一点，字形的按钮留出字宽 */
+.note-tool--icon {
+    min-width: 28px;
+    padding: 0 5px;
+}
+
+.note-tool--letter {
+    min-width: 30px;
+    padding: 0 5px;
+    font-size: var(--fs-xs);
+    letter-spacing: 0;
+}
+
+.note-tool:not(:disabled):hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+.note-tool:not(:disabled):active {
+    transform: translateY(1px);
+}
+
+.note-tool[aria-pressed="true"] {
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+}
+
+.note-tool__glyph {
+    font-size: var(--fs-md);
+}
+
+.note-tool__glyph--b { font-weight: 700; }
+.note-tool__glyph--i { font-style: italic; }
+.note-tool__glyph--s { text-decoration: line-through; }
+.note-tool__glyph--u { text-decoration: underline; }
+
+.note-toolbar__rule {
+    flex: none;
+    width: 1px;
+    height: 14px;
+    margin: 0 4px;
+    background: var(--c-border);
+}
+
+.note-tool__glyph--bullet,
+.note-tool__glyph--number,
+.note-tool__glyph--quote {
+    font-size: var(--fs-md);
+    line-height: 1;
+}
+
+.note-tool__glyph--number {
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+}
+
+.note-tool__glyph--quote {
+    margin-top: -4px;
+    font-size: 1.15rem;
+}
+
+.note-toolbar__state {
+    flex: none;
+    min-width: 3.4em;
+    text-align: right;
+    font-size: var(--fs-xs);
+    color: var(--c-fg-subtle);
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+}
+
+.note-toolbar__state.is-on {
+    opacity: 1;
+}
+
+.note-toolbar__state.is-failed {
+    color: var(--c-danger);
+}
+
+/* ---------- 行 ---------- */
+
+/* 块与块的间距只在这里给一次：引用块的竖线因此自然断开，块内折行仍在同一个框里 */
+.note-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: var(--sp-7);
+}
+
+.note-row {
+    display: block;
+    position: relative;
+    padding-left: 26px;
+    /* 底纸比行多出上下各 3px，正好铺满块之间的缝，多行选中才连成一整片 */
+    --band: transparent;
+    background: var(--band);
+    box-shadow: 0 -3px 0 var(--band), 0 3px 0 var(--band);
+    transition: background-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.note-row:hover {
+    --band: var(--c-bg-subtle);
+}
+
+/* 编辑中的这一行抬成一层纸，页边一枚朱红方块。方块与引用的长竖线形状不同，两种状态不会看混 */
+.note-row.is-editing {
+    --band: var(--c-bg-elev);
+}
+
+.note-row.is-editing::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--c-accent);
+}
+
+.note-row__view:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: -2px;
+}
+
+.note-row.is-drag-source {
+    opacity: .4;
+}
+
+/* 鼠标拖动选中的行：沙色纸带。每行不单独圆角，多行才连成一整片 */
+.note-row.is-selected {
+    --band: var(--c-mark-bg);
+}
+
+/* 选中已经由纸带表示，块内的文字不再叠一层浏览器自带的选中色 */
+.note-row.is-selected .note-row__view::selection,
+.note-row.is-selected .note-row__view *::selection {
+    background: transparent;
+}
+
+.note-grip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3px;
+    color: var(--c-fg-subtle);
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: -1px;
+    opacity: 0;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: opacity var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.note-row:hover .note-grip {
+    opacity: 1;
+}
+
+/* 编辑中的行不用拖：抓手让位给页边的方块 */
+.note-row.is-editing .note-grip {
+    opacity: 0;
+}
+
+.note-grip:hover {
+    color: var(--c-fg);
+}
+
+.note-grip:active {
+    cursor: grabbing;
+}
+
+@media (hover: none) {
+    .note-grip { opacity: 1; }
+}
+
+/* 一整段引用：左边一条竖线，与数据格式页的结论条同一套写法 */
+.note-row-group {
+    position: relative;
+}
+
+.note-quote-group .note-row__view,
+.note-quote-group .note-row__input {
+    padding-left: var(--sp-4);
+    border-left: 3px solid var(--c-accent);
+}
+
+/* 拖动时的落点：一条实色块，不画细线 */
+.note-drop {
+    height: 3px;
+    margin: 0 0 0 26px;
+    border-radius: var(--r-full);
+    background: var(--c-accent);
+}
+
+body.note-dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+/* 输入框与排版行必须有同一套字号与内边距，切换时才不跳；上下留白交给块间距，底纸靠行自己外扩 3px */
+.note-row__view,
+.note-row__input {
+    min-width: 0;
+    padding: 0 var(--sp-2);
+    font-size: var(--fs-md);
+    line-height: var(--lh-base);
+}
+
+.note-row__view {
+    min-height: 1.6em;
+}
+
+.note-row__input {
+    display: block;
+    width: 100%;
+    min-height: 1.6em;
+    border: 0;
+    background: transparent;
+    color: var(--c-fg);
+    caret-color: var(--c-accent);
+    font: inherit;
+    line-height: var(--lh-base);
+    resize: none;
+    overflow: hidden;
+    outline: none;
+    /* 全局的 :focus-visible 会给聚焦元素加圆角，编辑框要保持直角 */
+    border-radius: 0;
+}
+
+.note-row__input::placeholder {
+    color: var(--c-fg-subtle);
+}
+
+/* 改表格时装的是整段竖线原文：保留竖线对齐，超出时可以横向滚动 */
+.note-row__input--table {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+/* ---------- 排版后的一行 ---------- */
+
+.note-line {
+    margin: 0;
+    max-width: 46em;
+}
+
+.note-line--blank {
+    min-height: 1.6em;
+}
+
+.note-line__hint {
+    color: var(--c-fg-subtle);
+    user-select: none;
+}
+
+.note-p {
+    white-space: pre-wrap;
+}
+
+.note-h {
+    font-weight: 700;
+    letter-spacing: -.01em;
+}
+
+.note-h[data-level="1"] {
+    font-size: 1.5em;
+    line-height: 1.3;
+    margin: 6px 0 2px;
+}
+
+.note-h[data-level="2"] {
+    font-size: 1.25em;
+    line-height: 1.35;
+    margin: 6px 0 2px;
+}
+
+.note-h[data-level="3"] {
+    font-size: 1.125em;
+    line-height: 1.4;
+    margin: 4px 0 2px;
+}
+
+.note-h[data-level="4"],
+.note-h[data-level="5"],
+.note-h[data-level="6"] {
+    font-size: 1em;
+    margin: 2px 0;
+}
+
+.note-quote {
+    color: var(--c-fg);
+}
+
+/* 列表项：记号占一栏，正文左缘始终对齐 */
+.note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.note-item__mark {
+    flex: none;
+    min-width: 1.1em;
+    color: var(--c-fg-muted);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    user-select: none;
+}
+
+.note-item__text {
+    min-width: 0;
+    white-space: pre-wrap;
+}
+
+.note-item--ul[data-level="1"] .note-item__mark,
+.note-item--ul[data-level="2"] .note-item__mark {
+    text-align: center;
+}
+
+.note-item--ol[data-level="1"] .note-item__mark {
+    min-width: 1.5em;
+}
+
+.note-item--ol[data-level="2"] .note-item__mark {
+    min-width: 2em;
+    letter-spacing: .02em;
+}
+
+.note-rule {
+    margin: var(--sp-3) 0;
+    border: 0;
+    border-top: 1px solid var(--c-border-strong); /* taste-skill-ignore: 笔记里的 `---`，内容本身 */
+}
+
+.note-item--todo[data-done="true"] .note-item__text {
+    color: var(--c-fg-muted);
+    text-decoration: line-through;
+}
+
+.note-check {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    border: 1.5px solid var(--c-border-strong);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--c-accent-fg);
+    font-size: 11px;
+    line-height: 1;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.note-check:hover {
+    border-color: var(--c-accent);
+}
+
+.note-check[aria-checked="true"] {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+}
+
+.note-figure {
+    margin: var(--sp-2) 0;
+}
+
+.note-figure img {
+    max-width: 100%;
+    border-radius: var(--r-control);
+}
+
+.note-figure figcaption {
+    margin-top: var(--sp-1);
+    font-size: var(--fs-sm);
+    color: var(--c-fg-muted);
+}
+
+.note-img {
+    max-width: 100%;
+    max-height: 8em;
+    border-radius: var(--r-control);
+    vertical-align: middle;
+}
+
+.note-details {
+    margin: var(--sp-1) 0;
+}
+
+.note-details summary {
+    cursor: pointer;
+    color: var(--c-fg-muted);
+}
+
+.note-details[open] summary,
+.note-details summary:hover {
+    color: var(--c-fg);
+}
+
+.note-code {
+    padding: 0 .3em;
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    font-family: var(--ff-mono);
+    font-size: .92em;
+}
+
+.note-link {
+    color: var(--c-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.note-link--plain {
+    color: inherit;
+    text-decoration: none;
+}
+
+.note-row__view u { text-decoration: underline; }
+
+.note-row__view mark {
+    padding: 0 .15em;
+    border-radius: 3px;
+    background: color-mix(in oklab, var(--c-accent) 22%, transparent);
+    color: inherit;
+}
+
+.note-table {
+    width: 100%;
+    margin: 0;
+    font-size: var(--fs-sm);
+}
+
+@media (max-width: 720px) {
+    .notes-page {
+        max-width: none;
+    }
+
+    .note-row {
+        padding-left: 20px;
+    }
+
+    .note-grip {
+        width: 20px;
+    }
+
+    .note-drop {
+        margin-left: 20px;
+    }
+
+    .note-toolbar__state {
+        min-width: 0;
+    }
+}

@@ -1,0 +1,801 @@
+[
+  {
+    "id": "de-article",
+    "title": "冠词与限定词",
+    "items": [
+      {
+        "id": "de-article-definite",
+        "title": "定冠词",
+        "tables": [
+          {
+            "caption": "定冠词变格",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>der</bdi>",
+                "<bdi>die</bdi>",
+                "<bdi>das</bdi>",
+                "<bdi>die</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>des</bdi>",
+                "<bdi>der</bdi>",
+                "<bdi>des</bdi>",
+                "<bdi>der</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>dem</bdi>",
+                "<bdi>der</bdi>",
+                "<bdi>dem</bdi>",
+                "<bdi>den</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>den</bdi>",
+                "<bdi>die</bdi>",
+                "<bdi>das</bdi>",
+                "<bdi>die</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "定冠词也用作关系代词和指示代词的词干。"
+      },
+      {
+        "id": "de-article-indefinite",
+        "title": "不定冠词",
+        "tables": [
+          {
+            "caption": "不定冠词变格",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>ein</bdi>",
+                "<bdi>eine</bdi>",
+                "<bdi>ein</bdi>",
+                "—"
+              ],
+              [
+                "属格",
+                "<bdi>eines</bdi>",
+                "<bdi>einer</bdi>",
+                "<bdi>eines</bdi>",
+                "—"
+              ],
+              [
+                "与格",
+                "<bdi>einem</bdi>",
+                "<bdi>einer</bdi>",
+                "<bdi>einem</bdi>",
+                "—"
+              ],
+              [
+                "宾格",
+                "<bdi>einen</bdi>",
+                "<bdi>eine</bdi>",
+                "<bdi>ein</bdi>",
+                "—"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "不定冠词没有复数形式，复数用 <bdi>kein</bdi> 或零冠词。否定形式 <bdi>kein</bdi> 变格与不定冠词相同（<bdi>kein, keine, kein, keine</bdi>）；物主代词（<bdi>mein, dein, sein</bdi> 等）也按此变格。"
+      }
+    ]
+  },
+  {
+    "id": "de-prep",
+    "title": "介词与格支配",
+    "items": [
+      {
+        "id": "de-prep-accusative",
+        "title": "只带宾格的介词",
+        "tables": [
+          {
+            "caption": "<bdi>Akkusativ</bdi>",
+            "role": "pattern",
+            "headers": [
+              "介词",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>durch</bdi>",
+                "<bdi>durch den Park</bdi>"
+              ],
+              [
+                "<bdi>für</bdi>",
+                "<bdi>für dich</bdi>"
+              ],
+              [
+                "<bdi>gegen</bdi>",
+                "<bdi>gegen die Wand</bdi>"
+              ],
+              [
+                "<bdi>ohne</bdi>",
+                "<bdi>ohne mich</bdi>"
+              ],
+              [
+                "<bdi>um</bdi>",
+                "<bdi>um den Tisch</bdi>"
+              ],
+              [
+                "<bdi>bis</bdi>",
+                "<bdi>bis nächste Woche</bdi>"
+              ],
+              [
+                "<bdi>entlang</bdi>",
+                "<bdi>die Straße entlang</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "这七个是最常用的「只带宾格」介词。"
+      },
+      {
+        "id": "de-prep-dative",
+        "title": "只带与格的介词",
+        "tables": [
+          {
+            "caption": "<bdi>Dativ</bdi>",
+            "role": "pattern",
+            "headers": [
+              "介词",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>aus</bdi>",
+                "<bdi>aus dem Haus</bdi>"
+              ],
+              [
+                "<bdi>bei</bdi>",
+                "<bdi>bei mir</bdi>"
+              ],
+              [
+                "<bdi>mit</bdi>",
+                "<bdi>mit dem Freund</bdi>"
+              ],
+              [
+                "<bdi>nach</bdi>",
+                "<bdi>nach der Schule</bdi>"
+              ],
+              [
+                "<bdi>seit</bdi>",
+                "<bdi>seit einem Jahr</bdi>"
+              ],
+              [
+                "<bdi>von</bdi>",
+                "<bdi>von der Arbeit</bdi>"
+              ],
+              [
+                "<bdi>zu</bdi>",
+                "<bdi>zum Bahnhof</bdi>"
+              ],
+              [
+                "<bdi>gegenüber</bdi>",
+                "<bdi>gegenüber dem Bahnhof</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "记住口诀「<bdi>aus, bei, mit, nach, seit, von, zu —</bdi> 后面永远与格」。<bdi>gegenüber</bdi> 常放在名词后。"
+      },
+      {
+        "id": "de-prep-two-way",
+        "title": "两可介词（<bdi>Wechselpräpositionen</bdi>）",
+        "tables": [
+          {
+            "caption": "方向用宾格，位置用与格",
+            "role": "pattern",
+            "headers": [
+              "介词",
+              "方向（<bdi>Wohin? → Akk</bdi>.）",
+              "位置（<bdi>Wo? → Dat</bdi>.）"
+            ],
+            "rows": [
+              [
+                "<bdi>an</bdi>",
+                "<bdi>an die Wand</bdi>",
+                "<bdi>an der Wand</bdi>"
+              ],
+              [
+                "<bdi>auf</bdi>",
+                "<bdi>auf den Tisch</bdi>",
+                "<bdi>auf dem Tisch</bdi>"
+              ],
+              [
+                "<bdi>hinter</bdi>",
+                "<bdi>hinter das Haus</bdi>",
+                "<bdi>hinter dem Haus</bdi>"
+              ],
+              [
+                "<bdi>in</bdi>",
+                "<bdi>in die Schule</bdi>",
+                "<bdi>in der Schule</bdi>"
+              ],
+              [
+                "<bdi>neben</bdi>",
+                "<bdi>neben den Tisch</bdi>",
+                "<bdi>neben dem Tisch</bdi>"
+              ],
+              [
+                "<bdi>über</bdi>",
+                "<bdi>über den See</bdi>",
+                "<bdi>über dem See</bdi>"
+              ],
+              [
+                "<bdi>unter</bdi>",
+                "<bdi>unter den Tisch</bdi>",
+                "<bdi>unter dem Tisch</bdi>"
+              ],
+              [
+                "<bdi>vor</bdi>",
+                "<bdi>vor das Haus</bdi>",
+                "<bdi>vor dem Haus</bdi>"
+              ],
+              [
+                "<bdi>zwischen</bdi>",
+                "<bdi>zwischen die Häuser</bdi>",
+                "<bdi>zwischen den Häusern</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "含缩合形式：<bdi>an + dem = am</bdi>、<bdi>in + dem = im</bdi>、<bdi>an + das = ans</bdi>、<bdi>in + das = ins</bdi> 等。"
+      },
+      {
+        "id": "de-prep-genitive",
+        "title": "带属格的介词",
+        "tables": [
+          {
+            "caption": "<bdi>Genitiv</bdi>",
+            "role": "pattern",
+            "headers": [
+              "介词",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>wegen</bdi>",
+                "<bdi>wegen des Regens</bdi>"
+              ],
+              [
+                "<bdi>trotz</bdi>",
+                "<bdi>trotz des Verbots</bdi>"
+              ],
+              [
+                "<bdi>während</bdi>",
+                "<bdi>während des Unterrichts</bdi>"
+              ],
+              [
+                "<bdi>statt / anstatt</bdi>",
+                "<bdi>statt des Buches</bdi>"
+              ],
+              [
+                "<bdi>außerhalb</bdi>",
+                "<bdi>außerhalb der Stadt</bdi>"
+              ],
+              [
+                "<bdi>innerhalb</bdi>",
+                "<bdi>innerhalb eines Jahres</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "口语中这些介词后面也常出现与格（<bdi>wegen dem Regen</bdi>），书面语用属格。"
+      },
+      {
+        "id": "de-prep-contraction",
+        "title": "介词与冠词的缩合",
+        "tables": [
+          {
+            "caption": "常见缩合形式",
+            "role": "pattern",
+            "headers": [
+              "缩合",
+              "原形",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>am</bdi>",
+                "<bdi>an + dem</bdi>",
+                "<bdi>am Bahnhof</bdi>"
+              ],
+              [
+                "<bdi>ans</bdi>",
+                "<bdi>an + das</bdi>",
+                "<bdi>ans Fenster gehen</bdi>"
+              ],
+              [
+                "<bdi>im</bdi>",
+                "<bdi>in + dem</bdi>",
+                "<bdi>im Haus</bdi>"
+              ],
+              [
+                "<bdi>ins</bdi>",
+                "<bdi>in + das</bdi>",
+                "<bdi>ins Kino gehen</bdi>"
+              ],
+              [
+                "<bdi>aufs</bdi>",
+                "<bdi>auf + das</bdi>",
+                "<bdi>aufs Land fahren</bdi>"
+              ],
+              [
+                "<bdi>beim</bdi>",
+                "<bdi>bei + dem</bdi>",
+                "<bdi>beim Arzt</bdi>"
+              ],
+              [
+                "<bdi>vom</bdi>",
+                "<bdi>von + dem</bdi>",
+                "<bdi>vom Bahnhof</bdi>"
+              ],
+              [
+                "<bdi>zum</bdi>",
+                "<bdi>zu + dem</bdi>",
+                "<bdi>zum Bahnhof</bdi>"
+              ],
+              [
+                "<bdi>zur</bdi>",
+                "<bdi>zu + der</bdi>",
+                "<bdi>zur Schule</bdi>"
+              ],
+              [
+                "<bdi>durchs / fürs / ums</bdi>",
+                "<bdi>durch + das / für + das / um + das</bdi>",
+                "<bdi>ums Haus gehen</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "介词与定冠词常缩合，缩合后一般不再分开写（<bdi>zum = zu dem</bdi>）；需要强调冠词时用分开形式（<bdi>zu dem Mann, den ich meine</bdi>）。<bdi>zum / zur</bdi> 也用于不定式名词化前（<bdi>zum Lesen</bdi>）。"
+      }
+    ]
+  },
+  {
+    "id": "de-order",
+    "title": "语序",
+    "items": [
+      {
+        "id": "de-order-main",
+        "title": "主句：动词第二位",
+        "tables": [
+          {
+            "caption": "基本规则",
+            "role": "pattern",
+            "headers": [
+              "成分位置",
+              "规则",
+              "例"
+            ],
+            "rows": [
+              [
+                "第 1 位",
+                "主语 / 时间 / 其他成分（只能有一个）",
+                "<bdi>Ich fahre morgen nach Berlin.</bdi>"
+              ],
+              [
+                "第 2 位",
+                "<strong>变位动词</strong>",
+                "<bdi>Morgen fahre ich nach Berlin.</bdi>"
+              ],
+              [
+                "句末",
+                "不定式 / 过去分词 / 可分前缀",
+                "<bdi>Ich muss heute arbeiten. / Ich stehe früh auf.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "主句只有「变位动词固定在第二位」这一条硬规则；第 1 位放什么由强调决定。"
+      },
+      {
+        "id": "de-order-sub",
+        "title": "从句：动词末位",
+        "tables": [
+          {
+            "caption": "连词与语序",
+            "role": "pattern",
+            "headers": [
+              "连词类型",
+              "语序",
+              "例"
+            ],
+            "rows": [
+              [
+                "并列连词（<bdi>und, aber, oder, denn, sondern</bdi>）",
+                "正常语序",
+                "<bdi>Ich bleibe hier, aber er geht.</bdi>"
+              ],
+              [
+                "从属连词（<bdi>weil, dass, wenn, ob, als, obwohl</bdi>…）",
+                "变位动词到句末",
+                "<bdi>Ich bleibe hier, weil es regnet.</bdi>"
+              ],
+              [
+                "关系代词",
+                "动词到句末",
+                "<bdi>Der Mann, den ich kenne, …</bdi>"
+              ],
+              [
+                "间接疑问",
+                "动词到句末",
+                "<bdi>Ich weiß nicht, ob er kommt.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "从句里助动词 / 情态动词在最后，实义动词在它前面：…, <bdi>weil ich heute arbeiten muss</bdi>。"
+      },
+      {
+        "id": "de-order-frame",
+        "title": "框型结构与成分顺序",
+        "tables": [
+          {
+            "caption": "框型结构（<bdi>Satzklammer</bdi>）",
+            "role": "pattern",
+            "headers": [
+              "结构",
+              "框的前半",
+              "框的后半"
+            ],
+            "rows": [
+              [
+                "情态动词 + 不定式",
+                "<bdi>muss</bdi>",
+                "<bdi>arbeiten</bdi>"
+              ],
+              [
+                "完成时",
+                "<bdi>habe</bdi>",
+                "<bdi>gemacht</bdi>"
+              ],
+              [
+                "可分动词",
+                "<bdi>stehe</bdi>",
+                "<bdi>auf</bdi>"
+              ],
+              [
+                "被动",
+                "<bdi>wird</bdi>",
+                "<bdi>gemacht</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "多个状语时的顺序（<bdi>TeKaMoLo</bdi>）",
+            "role": "pattern",
+            "headers": [
+              "顺序",
+              "类别",
+              "例"
+            ],
+            "rows": [
+              [
+                "1",
+                "<bdi>Temporal</bdi>（时间）",
+                "<bdi>heute</bdi>"
+              ],
+              [
+                "2",
+                "<bdi>Kausal</bdi>（原因）",
+                "<bdi>wegen des Regens</bdi>"
+              ],
+              [
+                "3",
+                "<bdi>Modal</bdi>（方式）",
+                "<bdi>mit dem Bus</bdi>"
+              ],
+              [
+                "4",
+                "<bdi>Lokal</bdi>（地点）",
+                "<bdi>nach Berlin</bdi>"
+              ],
+              [
+                "完整例句",
+                "—",
+                "<bdi>Ich fahre heute wegen des Regens mit dem Bus nach Berlin.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<bdi>TeKaMoLo</bdi> 只是默认顺序，强调时可前置到句首（此时主语后移到动词后）。"
+      },
+      {
+        "id": "de-order-negation",
+        "title": "否定与 <bdi>nicht</bdi> 的位置",
+        "tables": [
+          {
+            "caption": "<bdi>nicht</bdi> 的位置",
+            "role": "pattern",
+            "headers": [
+              "否定对象",
+              "位置",
+              "例"
+            ],
+            "rows": [
+              [
+                "整句否定",
+                "尽量靠句末，但在句末的动词部分之前",
+                "<bdi>Ich kenne ihn nicht. / Ich habe ihn nicht gesehen.</bdi>"
+              ],
+              [
+                "情态动词 / 可分动词句",
+                "在不定式或可分前缀之前",
+                "<bdi>Ich kann heute nicht kommen. / Er steht nicht auf.</bdi>"
+              ],
+              [
+                "否定某个成分",
+                "紧放在该成分前",
+                "<bdi>Ich fahre nicht morgen, sondern übermorgen.</bdi>"
+              ],
+              [
+                "否定介词短语",
+                "在介词短语前",
+                "<bdi>Er wohnt nicht in Berlin.</bdi>"
+              ],
+              [
+                "否定名词",
+                "改用 <bdi>kein</bdi>（<bdi>kein / keine / kein</bdi>）",
+                "<bdi>Ich habe kein Geld. / Er hat keine Zeit.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "其他否定词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "含义",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>nie / niemals</bdi>",
+                "从不",
+                "<bdi>Er kommt nie zu spät.</bdi>"
+              ],
+              [
+                "<bdi>nichts / niemand</bdi>",
+                "没有东西 / 没有人",
+                "<bdi>Ich sehe nichts.</bdi>"
+              ],
+              [
+                "<bdi>nicht mehr</bdi>",
+                "不再",
+                "<bdi>Er wohnt nicht mehr hier.</bdi>"
+              ],
+              [
+                "<bdi>noch nicht</bdi>",
+                "还没",
+                "<bdi>Ich bin noch nicht fertig.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "判断 <bdi>nicht</bdi> 的位置先问「否定的是什么」：否定整句就靠后（但必须在句末动词 / 过去分词 / 不定式之前），否定某个成分就紧放在它前面；名词用 <bdi>kein</bdi> 否定。<bdi>nicht</bdi> 与 <bdi>kein</bdi> 不叠加（<bdi>✗ Ich habe nicht ein Auto → ✓ Ich habe kein Auto</bdi>）。"
+      }
+    ]
+  },
+  {
+    "id": "de-orthography",
+    "title": "正字法",
+    "items": [
+      {
+        "id": "de-orthography-sharp-s",
+        "title": "<bdi>ß</bdi> 与 <bdi>ss</bdi>",
+        "tables": [
+          {
+            "caption": "规则",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "写法",
+              "例"
+            ],
+            "rows": [
+              [
+                "长元音或双元音之后",
+                "<bdi>ß</bdi>",
+                "<bdi>Straße</bdi>、<bdi>groß</bdi>、<bdi>heißen</bdi>"
+              ],
+              [
+                "短元音之后",
+                "<bdi>ss</bdi>",
+                "<bdi>Fluss</bdi>、<bdi>müssen</bdi>、<bdi>dass</bdi>"
+              ],
+              [
+                "瑞士与列支敦士登",
+                "一律用 <bdi>ss</bdi>",
+                "<bdi>Strasse</bdi>、<bdi>gross</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "1996 年正字法改革后，<bdi>ß</bdi> 只保留在长元音 / 双元音之后；短元音后一律写 <bdi>ss</bdi>。"
+      },
+      {
+        "id": "de-orthography-capital",
+        "title": "名词大写",
+        "tables": [
+          {
+            "caption": "大写规则",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "大写",
+              "例"
+            ],
+            "rows": [
+              [
+                "所有名词",
+                "要",
+                "<bdi>der Tisch</bdi>、<bdi>die Freiheit</bdi>"
+              ],
+              [
+                "句首",
+                "要",
+                "<bdi>Heute ist es kalt.</bdi>"
+              ],
+              [
+                "尊称 <bdi>Sie / Ihr</bdi>",
+                "要",
+                "<bdi>Kommen Sie?</bdi>"
+              ],
+              [
+                "名词化的形容词 / 动词",
+                "要",
+                "<bdi>das Gute</bdi>、<bdi>das Lesen</bdi>"
+              ],
+              [
+                "语言 / 形容词 / 副词",
+                "不要",
+                "<bdi>deutsch</bdi>、<bdi>schnell</bdi>"
+              ],
+              [
+                "星期 / 月份",
+                "要",
+                "<bdi>Montag</bdi>、<bdi>Januar</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "与法语相反：德语名词、星期、月份都大写，而语言名与形容词小写（但作名词时大写：<bdi>das Deutsche</bdi>）。"
+      },
+      {
+        "id": "de-orthography-separate",
+        "title": "分写与合写",
+        "tables": [
+          {
+            "caption": "常见情况",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "写法",
+              "例"
+            ],
+            "rows": [
+              [
+                "可分动词的不定式",
+                "合写",
+                "<bdi>aufstehen</bdi>、<bdi>einkaufen</bdi>"
+              ],
+              [
+                "主句中的可分动词",
+                "分写",
+                "<bdi>Ich stehe früh auf.</bdi>"
+              ],
+              [
+                "名词 + 名词的复合词",
+                "合写",
+                "<bdi>Haustür</bdi>、<bdi>Kindergarten</bdi>"
+              ],
+              [
+                "形容词 + 动词",
+                "通常分写",
+                "<bdi>schnell laufen</bdi>"
+              ],
+              [
+                "动词 + 动词",
+                "可分前缀合写，其余分写",
+                "<bdi>kennenlernen / spazieren gehen</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "复合词合写时，性由最后一个词决定（<bdi>die Haus + die Tür → die Haustür</bdi>）。"
+      },
+      {
+        "id": "de-orthography-punctuation",
+        "title": "标点与引号",
+        "tables": [
+          {
+            "caption": "标点与符号",
+            "role": "pattern",
+            "headers": [
+              "符号",
+              "用法",
+              "例"
+            ],
+            "rows": [
+              [
+                "„…“",
+                "主引号（先下后上），书籍与媒体也用 »…«",
+                "<bdi>Er sagte: „Ich komme morgen.“</bdi>"
+              ],
+              [
+                "‚…‘",
+                "引号内的引号",
+                "<bdi>Sie sagte: „Er meinte ‚vielleicht‘.“</bdi>"
+              ],
+              [
+                "–",
+                "破折号（<bdi>Gedankenstrich</bdi>），前后各一个空格",
+                "<bdi>Ich komme – wenn ich Zeit habe.</bdi>"
+              ],
+              [
+                "-",
+                "连字符，前后不加空格",
+                "<bdi>David-Bowie-Straße</bdi>、<bdi>3-jährig</bdi>"
+              ],
+              [
+                "…",
+                "省略号（一个字符）",
+                "<bdi>Ich wollte sagen, dass …</bdi>"
+              ],
+              [
+                "'",
+                "省音撇号：省略 <bdi>e</bdi>",
+                "<bdi>Wie geht's? / Ich hab' keine Zeit.</bdi>"
+              ],
+              [
+                ":",
+                "冒号后小写（除非是整句或名词）",
+                "<bdi>Er sagte nur eines: nein.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "德语引号方向与英语相反：开引号在下方（„），闭引号在上方（“）；替代写法是 »…«。破折号用 – （<bdi>Halbgeviertstrich</bdi>）并前后空格，不用英语的 — 连写。行末拆分时 <bdi>ß</bdi> 不拆（旧规则的 <bdi>ss</bdi> 拆写已废），复合词按成分拆（<bdi>Haus-tür</bdi>）。"
+      }
+    ]
+  }
+]

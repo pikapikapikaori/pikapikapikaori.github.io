@@ -30,4 +30,4 @@ Deprecated projects:
 
 ### Brainfuck Interpreter
 
-<!-- iframe-link:height="400px" src="en-us/archive/ITtech/_media/README/terminal.html" -->
+<!-- iframe-link:height="400px" src="apps/terminal/terminal.html" -->

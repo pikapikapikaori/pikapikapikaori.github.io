@@ -1,0 +1,716 @@
+[
+  {
+    "id": "de-pron",
+    "title": "代词",
+    "items": [
+      {
+        "id": "de-pron-1st-2nd",
+        "title": "第一二人称代词",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "第一人称",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>ich</bdi>",
+                "<bdi>wir</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>meiner</bdi>",
+                "<bdi>unser</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>mir</bdi>",
+                "<bdi>uns</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>mich</bdi>",
+                "<bdi>uns</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "第二人称",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数",
+              "敬称"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>du</bdi>",
+                "<bdi>ihr</bdi>",
+                "<bdi>Sie</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>deiner</bdi>",
+                "<bdi>euer</bdi>",
+                "<bdi>Ihrer</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>dir</bdi>",
+                "<bdi>euch</bdi>",
+                "<bdi>Ihnen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>dich</bdi>",
+                "<bdi>euch</bdi>",
+                "<bdi>Sie</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "敬称 <bdi>Sie</bdi> 单复数同形，永远大写，动词按复数变位（<bdi>Sie sind</bdi>）。第二人称单数 <bdi>du / ihr</bdi> 用于亲友、熟人，其余场合用 <bdi>Sie</bdi>。物主代词见「物主代词」，反身形式见「反身代词」。"
+      },
+      {
+        "id": "de-pron-3rd",
+        "title": "第三人称代词",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "第三人称",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>er</bdi>",
+                "<bdi>sie</bdi>",
+                "<bdi>es</bdi>",
+                "<bdi>sie</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>seiner</bdi>",
+                "<bdi>ihrer</bdi>",
+                "<bdi>seiner</bdi>",
+                "<bdi>ihrer</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>ihm</bdi>",
+                "<bdi>ihr</bdi>",
+                "<bdi>ihm</bdi>",
+                "<bdi>ihnen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>ihn</bdi>",
+                "<bdi>sie</bdi>",
+                "<bdi>es</bdi>",
+                "<bdi>sie</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "第三人称单数按语法性区分（<bdi>er / sie / es</bdi>），复数一律 <bdi>sie</bdi>。属格形式在现代德语里很少用，多被 <bdi>von</bdi> + 与格代替。"
+      },
+      {
+        "id": "de-pron-reflexive",
+        "title": "反身代词",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "反身代词",
+            "role": "pattern",
+            "headers": [
+              "",
+              "第一人称单数",
+              "第二人称单数",
+              "第三人称单数",
+              "第一人称复数",
+              "第二人称复数",
+              "第三人称复数"
+            ],
+            "rows": [
+              [
+                "与格",
+                "<bdi>mir</bdi>",
+                "<bdi>dir</bdi>",
+                "<bdi>sich</bdi>",
+                "<bdi>uns</bdi>",
+                "<bdi>euch</bdi>",
+                "<bdi>sich</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>mich</bdi>",
+                "<bdi>dich</bdi>",
+                "<bdi>sich</bdi>",
+                "<bdi>uns</bdi>",
+                "<bdi>euch</bdi>",
+                "<bdi>sich</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "反身代词没有主格。只有第三人称与敬称有独立形式（<bdi>sich</bdi>）；第一、二人称与相应的宾语代词同形。有些动词固定要求与格反身代词（<bdi>sich etwas vorstellen</bdi>）。"
+      },
+      {
+        "id": "de-pron-possessive",
+        "title": "物主代词",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "物主代词词干",
+            "role": "pattern",
+            "headers": [
+              "人称",
+              "词干"
+            ],
+            "rows": [
+              [
+                "第一人称单数",
+                "<bdi>mein</bdi>"
+              ],
+              [
+                "第二人称单数",
+                "<bdi>dein</bdi>"
+              ],
+              [
+                "第三人称单数",
+                "<bdi>sein</bdi>"
+              ],
+              [
+                "第一人称复数",
+                "<bdi>unser</bdi>"
+              ],
+              [
+                "第二人称复数",
+                "<bdi>euer</bdi>"
+              ],
+              [
+                "第三人称复数",
+                "<bdi>ihr</bdi>"
+              ],
+              [
+                "敬称",
+                "<bdi>Ihr</bdi>"
+              ]
+            ],
+            "lang": "de",
+            "roleLabel": "词干"
+          },
+          {
+            "caption": "变格词尾",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "—",
+                "<bdi>-e</bdi>",
+                "—",
+                "<bdi>-e</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-es</bdi>",
+                "<bdi>-er</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-er</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-em</bdi>",
+                "<bdi>-er</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "—",
+                "<bdi>-e</bdi>"
+              ]
+            ],
+            "lang": "de",
+            "roleLabel": "词尾"
+          },
+          {
+            "caption": "示例：<bdi>mein</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>mein</bdi>",
+                "<bdi>meine</bdi>",
+                "<bdi>mein</bdi>",
+                "<bdi>meine</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>meines</bdi>",
+                "<bdi>meiner</bdi>",
+                "<bdi>meines</bdi>",
+                "<bdi>meiner</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>meinem</bdi>",
+                "<bdi>meiner</bdi>",
+                "<bdi>meinem</bdi>",
+                "<bdi>meinen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>meinen</bdi>",
+                "<bdi>meine</bdi>",
+                "<bdi>mein</bdi>",
+                "<bdi>meine</bdi>"
+              ]
+            ],
+            "lang": "de",
+            "roleLabel": "示例：<bdi>mein</bdi>",
+            "exampleWord": "mein"
+          },
+          {
+            "caption": "示例：<bdi>euer</bdi>（词尾前丢 e）",
+            "role": "example",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>euer</bdi>",
+                "<bdi>eure</bdi>",
+                "<bdi>euer</bdi>",
+                "<bdi>eure</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>eures</bdi>",
+                "<bdi>eurer</bdi>",
+                "<bdi>eures</bdi>",
+                "<bdi>eurer</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>eurem</bdi>",
+                "<bdi>eurer</bdi>",
+                "<bdi>eurem</bdi>",
+                "<bdi>euren</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>euren</bdi>",
+                "<bdi>eure</bdi>",
+                "<bdi>euer</bdi>",
+                "<bdi>eure</bdi>"
+              ]
+            ],
+            "lang": "de",
+            "roleLabel": "示例：<bdi>euer</bdi>",
+            "exampleWord": "euer"
+          }
+        ],
+        "notes": "物主词干（<bdi>mein- / dein- / sein- / unser- / euer- / ihr- / Ihr-</bdi>）按后面的名词变格，词尾与不定冠词 <bdi>ein</bdi> 相同。两个例外：<strong><bdi>euer</bdi></strong> 在词尾前丢 e（<bdi>euer → eure / eurem / euren</bdi>）；<strong><bdi>unser</bdi></strong> 口语可缩作 <bdi>unsre</bdi>。第三人称单数的 <bdi>sein</bdi> 与第三人称复数的 <bdi>ihr</bdi> 都按所有者性别/数选择，与后面的名词无关（<bdi>seine Mutter</bdi> 可以是「他的母亲」或「她的母亲」取决于所有者）。",
+        "anchorLabel": "其他代词（物主代词）"
+      },
+      {
+        "id": "de-pron-demonstrative",
+        "title": "指示代词",
+        "tables": [
+          {
+            "caption": "<bdi>dieser / jener</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>dieser</bdi>",
+                "<bdi>diese</bdi>",
+                "<bdi>dieses</bdi>",
+                "<bdi>diese</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>dieses</bdi>",
+                "<bdi>dieser</bdi>",
+                "<bdi>dieses</bdi>",
+                "<bdi>dieser</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>diesem</bdi>",
+                "<bdi>dieser</bdi>",
+                "<bdi>diesem</bdi>",
+                "<bdi>diesen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>diesen</bdi>",
+                "<bdi>diese</bdi>",
+                "<bdi>dieses</bdi>",
+                "<bdi>diese</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "<bdi>derselbe / dieselbe / dasselbe</bdi>（前后两部分都变格）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>derselbe</bdi>",
+                "<bdi>dieselbe</bdi>",
+                "<bdi>dasselbe</bdi>",
+                "<bdi>dieselben</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>desselben</bdi>",
+                "<bdi>derselben</bdi>",
+                "<bdi>desselben</bdi>",
+                "<bdi>derselben</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>demselben</bdi>",
+                "<bdi>derselben</bdi>",
+                "<bdi>demselben</bdi>",
+                "<bdi>denselben</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>denselben</bdi>",
+                "<bdi>dieselbe</bdi>",
+                "<bdi>dasselbe</bdi>",
+                "<bdi>dieselben</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "<bdi>solcher</bdi>（多用来修饰名词）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>solcher</bdi>",
+                "<bdi>solche</bdi>",
+                "<bdi>solches</bdi>",
+                "<bdi>solche</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>solchen</bdi>",
+                "<bdi>solcher</bdi>",
+                "<bdi>solchen</bdi>",
+                "<bdi>solcher</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>solchem</bdi>",
+                "<bdi>solcher</bdi>",
+                "<bdi>solchem</bdi>",
+                "<bdi>solchen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>solchen</bdi>",
+                "<bdi>solche</bdi>",
+                "<bdi>solches</bdi>",
+                "<bdi>solche</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<bdi>dieser / jener</bdi> 按定冠词变格；<bdi>der / die / das</bdi> 作指示代词时也按定冠词变格，但重读。<bdi>derselbe / dieselbe / dasselbe</bdi> 表示「同一个」，前后两部分都变格（<bdi>des + selben</bdi>）；<bdi>solcher</bdi> 通常与形容词连用（<bdi>solch ein schöner Tag / solch schöne Tage</bdi>），单独使用较少。"
+      },
+      {
+        "id": "de-pron-relative",
+        "title": "关系代词",
+        "tables": [
+          {
+            "caption": "<bdi>der / die / das</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>der</bdi>",
+                "<bdi>die</bdi>",
+                "<bdi>das</bdi>",
+                "<bdi>die</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>dessen</bdi>",
+                "<bdi>deren</bdi>",
+                "<bdi>dessen</bdi>",
+                "<bdi>deren</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>dem</bdi>",
+                "<bdi>der</bdi>",
+                "<bdi>dem</bdi>",
+                "<bdi>denen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>den</bdi>",
+                "<bdi>die</bdi>",
+                "<bdi>das</bdi>",
+                "<bdi>die</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "<bdi>welcher / welche / welches</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>welcher</bdi>",
+                "<bdi>welche</bdi>",
+                "<bdi>welches</bdi>",
+                "<bdi>welche</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>welches</bdi>",
+                "<bdi>welcher</bdi>",
+                "<bdi>welches</bdi>",
+                "<bdi>welcher</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>welchem</bdi>",
+                "<bdi>welcher</bdi>",
+                "<bdi>welchem</bdi>",
+                "<bdi>welchen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>welchen</bdi>",
+                "<bdi>welche</bdi>",
+                "<bdi>welches</bdi>",
+                "<bdi>welche</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "<bdi>wer / was</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "<bdi>wer</bdi>（人）",
+              "<bdi>was</bdi>（物）"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>wer</bdi>",
+                "<bdi>was</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>wessen</bdi>",
+                "—"
+              ],
+              [
+                "与格",
+                "<bdi>wem</bdi>",
+                "—"
+              ],
+              [
+                "宾格",
+                "<bdi>wen</bdi>",
+                "<bdi>was</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<bdi>der / die / das</bdi> 是最常用的关系代词，变格同定冠词（属格 <bdi>dessen / deren</bdi>）；<bdi>welcher</bdi> 系列用于避免重复。<bdi>was</bdi> 没有属格与与格，只用主格与宾格。"
+      },
+      {
+        "id": "de-pron-interrogative",
+        "title": "疑问代词",
+        "tables": [
+          {
+            "caption": "疑问代词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "指人 / 指物",
+              "变格",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>wer</bdi>",
+                "只指人",
+                "<bdi>wer / wessen / wem / wen</bdi>",
+                "<bdi>Wer kommt?</bdi>"
+              ],
+              [
+                "<bdi>was</bdi>",
+                "只指物",
+                "不变格（<bdi>was</bdi>）",
+                "<bdi>Was ist das?</bdi>"
+              ],
+              [
+                "<bdi>welcher</bdi>",
+                "有限选择（人 / 物）",
+                "按定冠词变格",
+                "<bdi>Welchen Film siehst du?</bdi>"
+              ],
+              [
+                "<bdi>was für ein</bdi>",
+                "问种类",
+                "<bdi>ein</bdi> 部分变格",
+                "<bdi>Was für ein Buch?</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<bdi>wer</bdi> 的属格 <bdi>wessen</bdi> 问所属；<bdi>was</bdi> 与介词连用时常用 <bdi>wo(r)-</bdi> 形式（<bdi>womit</bdi>、<bdi>worauf</bdi>）。"
+      },
+      {
+        "id": "de-pron-indefinite",
+        "title": "不定代词",
+        "tables": [
+          {
+            "caption": "常用不定代词",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "含义",
+              "用法"
+            ],
+            "rows": [
+              [
+                "<bdi>man</bdi>",
+                "人们（只有主格）",
+                "<bdi>Man sagt, dass …</bdi>"
+              ],
+              [
+                "<bdi>jemand / niemand</bdi>",
+                "某人 / 没人",
+                "<bdi>Ist jemand da?</bdi>"
+              ],
+              [
+                "<bdi>etwas / nichts</bdi>",
+                "某事 / 没什么",
+                "<bdi>Ich habe etwas.</bdi>"
+              ],
+              [
+                "<bdi>alle</bdi>",
+                "所有人 / 全部",
+                "<bdi>Alle sind gekommen.</bdi>"
+              ],
+              [
+                "<bdi>viele / wenige</bdi>",
+                "许多 / 少数",
+                "<bdi>Viele Leute</bdi>"
+              ],
+              [
+                "<bdi>jeder</bdi>",
+                "每一个（按定冠词变格）",
+                "<bdi>Jeder Mensch</bdi>"
+              ],
+              [
+                "<bdi>einige</bdi>",
+                "一些（复数）",
+                "<bdi>Einige Studenten</bdi>"
+              ],
+              [
+                "<bdi>kein</bdi>",
+                "没有（否定冠词）",
+                "<bdi>Ich habe kein Geld.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<bdi>man</bdi> 作主语时动词用第三人称单数；<bdi>jeder / alle</bdi> 等有性数格变化。"
+      }
+    ]
+  }
+]

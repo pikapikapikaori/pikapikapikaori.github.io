@@ -1,0 +1,1272 @@
+[
+  {
+    "id": "la-adj",
+    "title": "形容词",
+    "items": [
+      {
+        "id": "la-adj-1st-2nd",
+        "title": "第一二变格形容词（<bdi>bonus, -a, -um</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "bon",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-us",
+                "sg_f": "-a",
+                "sg_n": "-um",
+                "pl_m": "-ī",
+                "pl_f": "-ae",
+                "pl_n": "-a"
+              },
+              "gen": {
+                "sg_m": "-ī",
+                "sg_f": "-ae",
+                "sg_n": "-ī",
+                "pl_m": "-ōrum",
+                "pl_f": "-ārum",
+                "pl_n": "-ōrum"
+              },
+              "dat": {
+                "sg_m": "-ō",
+                "sg_f": "-ae",
+                "sg_n": "-ō",
+                "pl_m": "-īs",
+                "pl_f": "-īs",
+                "pl_n": "-īs"
+              },
+              "acc": {
+                "sg_m": "-um",
+                "sg_f": "-am",
+                "sg_n": "-um",
+                "pl_m": "-ōs",
+                "pl_f": "-ās",
+                "pl_n": "-a"
+              },
+              "abl": {
+                "sg_m": "-ō",
+                "sg_f": "-ā",
+                "sg_n": "-ō",
+                "pl_m": "-īs",
+                "pl_f": "-īs",
+                "pl_n": "-īs"
+              },
+              "voc": {
+                "sg_m": "-e",
+                "sg_f": "-a",
+                "sg_n": "-um",
+                "pl_m": "-ī",
+                "pl_f": "-ae",
+                "pl_n": "-a"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "bonus",
+                "sg_f": "bona",
+                "sg_n": "bonum",
+                "pl_m": "bonī",
+                "pl_f": "bonae",
+                "pl_n": "bona"
+              },
+              "gen": {
+                "sg_m": "bonī",
+                "sg_f": "bonae",
+                "sg_n": "bonī",
+                "pl_m": "bonōrum",
+                "pl_f": "bonārum",
+                "pl_n": "bonōrum"
+              },
+              "dat": {
+                "sg_m": "bonō",
+                "sg_f": "bonae",
+                "sg_n": "bonō",
+                "pl_m": "bonīs",
+                "pl_f": "bonīs",
+                "pl_n": "bonīs"
+              },
+              "acc": {
+                "sg_m": "bonum",
+                "sg_f": "bonam",
+                "sg_n": "bonum",
+                "pl_m": "bonōs",
+                "pl_f": "bonās",
+                "pl_n": "bona"
+              },
+              "abl": {
+                "sg_m": "bonō",
+                "sg_f": "bonā",
+                "sg_n": "bonō",
+                "pl_m": "bonīs",
+                "pl_f": "bonīs",
+                "pl_n": "bonīs"
+              },
+              "voc": {
+                "sg_m": "bone",
+                "sg_f": "bona",
+                "sg_n": "bonum",
+                "pl_m": "bonī",
+                "pl_f": "bonae",
+                "pl_n": "bona"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "us$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-us</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-a</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>",
+                "<bdi>-ārum</bdi>",
+                "<bdi>-ōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-am</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>",
+                "<bdi>-ās</bdi>",
+                "<bdi>-a</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-ā</bdi>",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-e</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-a</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>bonus, bona, bonum</bdi>",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>bonus</bdi>",
+                "<bdi>bona</bdi>",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bona</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonōrum</bdi>",
+                "<bdi>bonārum</bdi>",
+                "<bdi>bonōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>bonō</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bonō</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonam</bdi>",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonōs</bdi>",
+                "<bdi>bonās</bdi>",
+                "<bdi>bona</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>bonō</bdi>",
+                "<bdi>bonā</bdi>",
+                "<bdi>bonō</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>",
+                "<bdi>bonīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>bone</bdi>",
+                "<bdi>bona</bdi>",
+                "<bdi>bonum</bdi>",
+                "<bdi>bonī</bdi>",
+                "<bdi>bonae</bdi>",
+                "<bdi>bona</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "阳性 / 中性按第二变格，阴性按第一变格。属格单数为 -<bdi>ī / -ae / -ī</bdi>，与格单数 <bdi>-ō / -ae / -ō</bdi>。"
+      },
+      {
+        "id": "la-adj-3rd-3term",
+        "title": "第三变格形容词（三尾：<bdi>ācer, ācris, ācre</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "ācr",
+          "stemForms": {
+            "masc": [
+              {
+                "pattern": "r$",
+                "replace": "er"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "masc"
+                },
+                "sg_f": "-is",
+                "sg_n": "-e",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              },
+              "gen": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "sg_n": "-is",
+                "pl_m": "-ium",
+                "pl_f": "-ium",
+                "pl_n": "-ium"
+              },
+              "dat": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "sg_n": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_m": "-em",
+                "sg_f": "-em",
+                "sg_n": "-e",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              },
+              "abl": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "sg_n": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "masc"
+                },
+                "sg_f": "-is",
+                "sg_n": "-e",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "ācer",
+                "sg_f": "ācris",
+                "sg_n": "ācre",
+                "pl_m": "ācrēs",
+                "pl_f": "ācrēs",
+                "pl_n": "ācria"
+              },
+              "gen": {
+                "sg_m": "ācris",
+                "pl_m": "ācrium",
+                "sg_f": "ācris",
+                "sg_n": "ācris",
+                "pl_f": "ācrium",
+                "pl_n": "ācrium"
+              },
+              "dat": {
+                "sg_m": "ācrī",
+                "pl_m": "ācribus",
+                "sg_f": "ācrī",
+                "sg_n": "ācrī",
+                "pl_f": "ācribus",
+                "pl_n": "ācribus"
+              },
+              "acc": {
+                "sg_m": "ācrem",
+                "sg_n": "ācre",
+                "pl_m": "ācrēs",
+                "pl_n": "ācria",
+                "sg_f": "ācrem",
+                "pl_f": "ācrēs"
+              },
+              "abl": {
+                "sg_m": "ācrī",
+                "pl_m": "ācribus",
+                "sg_f": "ācrī",
+                "sg_n": "ācrī",
+                "pl_f": "ācribus",
+                "pl_n": "ācribus"
+              },
+              "voc": {
+                "sg_m": "ācer",
+                "sg_f": "ācris",
+                "sg_n": "ācre",
+                "pl_m": "ācrēs",
+                "pl_n": "ācria",
+                "pl_f": "ācrēs"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>ācer, ācris, ācre</bdi>",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>ācer</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācre</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācria</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācrium</bdi>",
+                "<bdi>ācrium</bdi>",
+                "<bdi>ācrium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>ācrem</bdi>",
+                "<bdi>ācrem</bdi>",
+                "<bdi>ācre</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācria</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācrī</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>",
+                "<bdi>ācribus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>ācer</bdi>",
+                "<bdi>ācris</bdi>",
+                "<bdi>ācre</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācrēs</bdi>",
+                "<bdi>ācria</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "阳性主格把词干末的 r 变成 <bdi>-er</bdi>，阴性 <bdi>-is</bdi>、中性 -e；其余同二尾型。同类有 <bdi>celer</bdi>（词干 <bdi>celer-</bdi>）、<bdi>pulcher</bdi>（词干 <bdi>pulchr</bdi>-）。"
+      },
+      {
+        "id": "la-adj-3rd",
+        "title": "第三变格形容词（二尾：<bdi>fortis, -e</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "fort",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "sg_n": "-e",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              },
+              "gen": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "sg_n": "-is",
+                "pl_m": "-ium",
+                "pl_f": "-ium",
+                "pl_n": "-ium"
+              },
+              "dat": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "sg_n": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_m": "-em",
+                "sg_f": "-em",
+                "sg_n": "-e",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              },
+              "abl": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "sg_n": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "sg_n": "-e",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "fortis",
+                "sg_n": "forte",
+                "pl_m": "fortēs",
+                "pl_n": "fortia",
+                "sg_f": "fortis",
+                "pl_f": "fortēs"
+              },
+              "gen": {
+                "sg_m": "fortis",
+                "pl_m": "fortium",
+                "sg_f": "fortis",
+                "sg_n": "fortis",
+                "pl_f": "fortium",
+                "pl_n": "fortium"
+              },
+              "dat": {
+                "sg_m": "fortī",
+                "pl_m": "fortibus",
+                "sg_f": "fortī",
+                "sg_n": "fortī",
+                "pl_f": "fortibus",
+                "pl_n": "fortibus"
+              },
+              "acc": {
+                "sg_m": "fortem",
+                "sg_n": "forte",
+                "pl_m": "fortēs",
+                "pl_n": "fortia",
+                "sg_f": "fortem",
+                "pl_f": "fortēs"
+              },
+              "abl": {
+                "sg_m": "fortī",
+                "pl_m": "fortibus",
+                "sg_f": "fortī",
+                "sg_n": "fortī",
+                "pl_f": "fortibus",
+                "pl_n": "fortibus"
+              },
+              "voc": {
+                "sg_m": "fortis",
+                "sg_n": "forte",
+                "pl_m": "fortēs",
+                "pl_n": "fortia",
+                "sg_f": "fortis",
+                "pl_f": "fortēs"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "is$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>fortis, fortis, forte</bdi>",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>forte</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortium</bdi>",
+                "<bdi>fortium</bdi>",
+                "<bdi>fortium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>fortem</bdi>",
+                "<bdi>fortem</bdi>",
+                "<bdi>forte</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortī</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>",
+                "<bdi>fortibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>fortis</bdi>",
+                "<bdi>fortis</bdi>",
+                "<bdi>forte</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortēs</bdi>",
+                "<bdi>fortia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "二尾（<bdi>fortis, -e</bdi>）：阳 / 阴性同形，中性 -e。三尾（<bdi>ācer, ācris, ācre</bdi>）与一尾（<bdi>fēlīx</bdi>）在此基础上替换词干。"
+      },
+      {
+        "id": "la-adj-3rd-1term",
+        "title": "第三变格形容词（一尾：<bdi>fēlīx, fēlīcis</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "fēlīc",
+          "stemForms": {
+            "nom": [
+              {
+                "pattern": "[cg]$",
+                "replace": "x"
+              },
+              {
+                "pattern": "[dt]$",
+                "replace": "s"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "sg_f": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "sg_n": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              },
+              "gen": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "sg_n": "-is",
+                "pl_m": "-ium",
+                "pl_f": "-ium",
+                "pl_n": "-ium"
+              },
+              "dat": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "sg_n": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_m": "-em",
+                "sg_f": "-em",
+                "sg_n": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              },
+              "abl": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "sg_n": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "sg_f": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "sg_n": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_m": "-ēs",
+                "pl_f": "-ēs",
+                "pl_n": "-ia"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "fēlīx",
+                "sg_f": "fēlīx",
+                "sg_n": "fēlīx",
+                "pl_m": "fēlīcēs",
+                "pl_f": "fēlīcēs",
+                "pl_n": "fēlīcia"
+              },
+              "gen": {
+                "sg_m": "fēlīcis",
+                "pl_m": "fēlīcium",
+                "sg_f": "fēlīcis",
+                "sg_n": "fēlīcis",
+                "pl_f": "fēlīcium",
+                "pl_n": "fēlīcium"
+              },
+              "dat": {
+                "sg_m": "fēlīcī",
+                "pl_m": "fēlīcibus",
+                "sg_f": "fēlīcī",
+                "sg_n": "fēlīcī",
+                "pl_f": "fēlīcibus",
+                "pl_n": "fēlīcibus"
+              },
+              "acc": {
+                "sg_m": "fēlīcem",
+                "sg_n": "fēlīx",
+                "pl_m": "fēlīcēs",
+                "pl_n": "fēlīcia",
+                "sg_f": "fēlīcem",
+                "pl_f": "fēlīcēs"
+              },
+              "abl": {
+                "sg_m": "fēlīcī",
+                "pl_m": "fēlīcibus",
+                "sg_f": "fēlīcī",
+                "sg_n": "fēlīcī",
+                "pl_f": "fēlīcibus",
+                "pl_n": "fēlīcibus"
+              },
+              "voc": {
+                "sg_m": "fēlīx",
+                "sg_f": "fēlīx",
+                "sg_n": "fēlīx",
+                "pl_m": "fēlīcēs",
+                "pl_n": "fēlīcia",
+                "pl_f": "fēlīcēs"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "-",
+                "-",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "-",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "-",
+                "-",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>fēlīx, fēlīx, fēlīx</bdi>",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数阳性",
+              "复数阴性",
+              "复数中性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>fēlīcis</bdi>",
+                "<bdi>fēlīcis</bdi>",
+                "<bdi>fēlīcis</bdi>",
+                "<bdi>fēlīcium</bdi>",
+                "<bdi>fēlīcium</bdi>",
+                "<bdi>fēlīcium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>fēlīcem</bdi>",
+                "<bdi>fēlīcem</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcī</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>",
+                "<bdi>fēlīcibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīx</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcēs</bdi>",
+                "<bdi>fēlīcia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "阳 / 阴 / 中性主格同形，由词干末辅音 + s 融合而成（<bdi>c / g → x</bdi>，<bdi>t / d → s</bdi>）；词干从属格去 <bdi>-is</bdi> 得到。同类有 <bdi>audāx</bdi>（<bdi>audāc-</bdi>）、<bdi>pār</bdi>（<bdi>par</bdi>-）。"
+      },
+      {
+        "id": "la-adj-comparison",
+        "title": "比较级与最高级",
+        "tables": [
+          {
+            "caption": "比较等级（规则）",
+            "role": "pattern",
+            "headers": [
+              "等级",
+              "阳性",
+              "阴性",
+              "中性"
+            ],
+            "rows": [
+              [
+                "原级",
+                "<bdi>altus</bdi>",
+                "<bdi>alta</bdi>",
+                "<bdi>altum</bdi>"
+              ],
+              [
+                "比较级",
+                "<bdi>altior</bdi>",
+                "<bdi>altior</bdi>",
+                "<bdi>altius</bdi>"
+              ],
+              [
+                "最高级",
+                "<bdi>altissimus</bdi>",
+                "<bdi>altissima</bdi>",
+                "<bdi>altissimum</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "比较级 / 最高级的变格",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数（<bdi>m/f</bdi>）",
+              "单数（<bdi>n</bdi>）",
+              "复数（<bdi>m/f</bdi>）",
+              "复数（<bdi>n</bdi>）"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>altior</bdi>",
+                "<bdi>altius</bdi>",
+                "<bdi>altiōrēs</bdi>",
+                "<bdi>altiōra</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>altiōris</bdi>",
+                "<bdi>altiōris</bdi>",
+                "<bdi>altiōrum</bdi>",
+                "<bdi>altiōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>altiōrī</bdi>",
+                "<bdi>altiōrī</bdi>",
+                "<bdi>altiōribus</bdi>",
+                "<bdi>altiōribus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>altiōrem</bdi>",
+                "<bdi>altius</bdi>",
+                "<bdi>altiōrēs</bdi>",
+                "<bdi>altiōra</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>altiōre</bdi>",
+                "<bdi>altiōre</bdi>",
+                "<bdi>altiōribus</bdi>",
+                "<bdi>altiōribus</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "比较级按第三变格变格；最高级按第一二变格变格（-<bdi>us, -a, -um</bdi>）。不规则：<bdi>bonus → melior → optimus</bdi>，<bdi>malus → pēior → pessimus</bdi>，<bdi>magnus → maior → maximus</bdi>，<bdi>parvus → minor → minimus</bdi>。"
+      },
+      {
+        "id": "la-adj-adverb",
+        "title": "形容词构造副词",
+        "tables": [
+          {
+            "caption": "构成规则",
+            "role": "pattern",
+            "headers": [
+              "形容词类型",
+              "词尾",
+              "例"
+            ],
+            "rows": [
+              [
+                "第一二变格",
+                "<bdi>-ē</bdi>",
+                "<bdi>longus → longē</bdi>"
+              ],
+              [
+                "第三变格（一般）",
+                "<bdi>-iter</bdi>",
+                "<bdi>fortis → fortiter</bdi>"
+              ],
+              [
+                "词干以 -<bdi>nt</bdi>- 结尾",
+                "<bdi>-er</bdi>",
+                "<bdi>sapiēns → sapienter</bdi>"
+              ],
+              [
+                "不规则",
+                "—",
+                "<bdi>bonus → bene</bdi>；<bdi>malus → male</bdi>；<bdi>magnus → magnopere</bdi>；<bdi>parvus → paulum</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "对照",
+            "role": "pattern",
+            "headers": [
+              "形容词",
+              "副词",
+              "比较级",
+              "最高级"
+            ],
+            "rows": [
+              [
+                "<bdi>longus</bdi>",
+                "<bdi>longē</bdi>",
+                "<bdi>longius</bdi>",
+                "<bdi>longissimē</bdi>"
+              ],
+              [
+                "<bdi>fortis</bdi>",
+                "<bdi>fortiter</bdi>",
+                "<bdi>fortius</bdi>",
+                "<bdi>fortissimē</bdi>"
+              ],
+              [
+                "<bdi>sapiēns</bdi>",
+                "<bdi>sapienter</bdi>",
+                "<bdi>sapientius</bdi>",
+                "<bdi>sapientissimē</bdi>"
+              ],
+              [
+                "<bdi>bonus</bdi>",
+                "<bdi>bene</bdi>",
+                "<bdi>melius</bdi>",
+                "<bdi>optimē</bdi>"
+              ],
+              [
+                "<bdi>malus</bdi>",
+                "<bdi>male</bdi>",
+                "<bdi>pēius</bdi>",
+                "<bdi>pessimē</bdi>"
+              ],
+              [
+                "<bdi>magnus</bdi>",
+                "<bdi>magnopere</bdi>",
+                "<bdi>magis</bdi>",
+                "<bdi>maximē</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "副词没有变格；比较级用中性比较级形式，最高级用 -<bdi>ē</bdi> 结尾。"
+      }
+    ]
+  }
+]

@@ -95,21 +95,14 @@ function changeStar() {
         rotateCanvas(random(1, 100))
     }
 }
-function getMsg() {
-    var t = [
-            'Don\'t worry<br>Be happy',
-            '悲しみが終わらないのは<br>私達の力が足りないから',
-            '憎しみが消えないのは<br>私達の愛がまだ足りないから',
-            '古来聖賢皆寂寞<br>惟有飮者留其名',
-            '歸去來兮<br>田園将蕪胡不歸',
-            '世事漫隨流水<br>算來夢裏浮生<br>醉鄕路穩宜頻到<br>此外不堪行',
-            '唯願當歌對酒時<br>月光長照金樽裏',
-            '東船西舫悄無言<br>唯見江心秋月白',
-            '酒旗戲鼓甚處市<br>想依稀<br>王謝鄰里',
-            '問君何能爾<br>心遠地自偏',
-        ],
-        a = random(0, t.length - 1)
-    $('#slogan').html(t[a])
+function pickSlogan() {
+    var list = window.App.i18n.list('hero.slogans')
+
+    if (!list || !list.length) return
+
+    var slogan = document.getElementById('slogan')
+
+    if (slogan) slogan.innerHTML = list[Math.floor(Math.random() * list.length)]
 }
 function random(t, a) {
     var e = a - t,
@@ -118,9 +111,7 @@ function random(t, a) {
 }
 ctx.translate(x, y),
 fireAnimate(),
-$(function () {
-    getMsg()
-}),
+window.App.i18n.onChange(pickSlogan),
 (window.onscroll = function () {
     $(window).scrollTop() > 0.6 * $(window).height()
         ? $('.background').addClass('fixed')

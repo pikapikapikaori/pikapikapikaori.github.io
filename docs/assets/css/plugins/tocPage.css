@@ -1,6 +1,8 @@
 @import url("../nonstandard/plugins/tocPage.css");
 
 :root {
+    --tocpage-columns: 2;
+    --tocpage-narrow-columns: 1;
     --tocpage-display-height: 18.75rem;
     --tocpage-display-img-height: 12.5rem;
     --tocpage-button-size: 1.75rem;
@@ -9,13 +11,13 @@
 
 .toc-page-div {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--tocpage-columns), minmax(0, 1fr));
     gap: 1.25rem;
 }
 
 @media screen and (max-width: 768px) {
     .toc-page-div {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(var(--tocpage-narrow-columns), minmax(0, 1fr));
         gap: 1rem;
     }
 }

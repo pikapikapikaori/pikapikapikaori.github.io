@@ -10,6 +10,6 @@
 
 <!-- div:right-panel -->
 
-<!-- iframe-link:height="250px" src="archive/_media/ArchiveTools/ganZhi.html" -->
+<!-- iframe-link:height="250px" src="apps/ganzhi/index.html" -->
 
 <!-- panels:end -->

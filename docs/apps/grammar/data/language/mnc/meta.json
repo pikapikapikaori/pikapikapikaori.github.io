@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "language": "mnc",
+  "name": "满语",
+  "native": "ᠮᠠᠨᠵᡠ",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 5,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "adv",
+    "pron",
+    "postp",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": true,
+  "rtl": false,
+  "terms": {
+    "inflectionType": "变形类型",
+    "inflectionTypePlaceholder": "如：-sa 型复数",
+    "special": "特殊变形",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}变形表",
+    "extraForms": "补充形式",
+    "basicTitle": "基本",
+    "stemsTitle": "词干",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 ᠠᡵᠠ"
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 ᠨᡳᠶᠠᠯᠮᠠ"
+    },
+    "meanings": "含义",
+    "collocations": "固定搭配",
+    "examples": "例句",
+    "derivatives": "派生词",
+    "tags": "标签",
+    "notes": "备注",
+    "others": "其他",
+    "paradigmTable": "形态变形",
+    "optionalSuffix": "（可选）",
+    "add": "＋ 添加",
+    "addMeaning": "＋ 添加含义",
+    "posLabel": "词性",
+    "anchorLabel": "语法条目",
+    "meaningPlaceholder": "含义",
+    "emptyMeanings": "该来源还没有含义",
+    "inflectionGroupPlaceholder": "分组（可选）",
+    "inflectionLabelPlaceholder": "标签",
+    "inflectionFormPlaceholder": "形态",
+    "emptyCollocations": "该来源还没有固定搭配",
+    "collocationTextPlaceholder": "固定搭配原文",
+    "collocationGlossPlaceholder": "含义",
+    "emptyExamples": "该来源还没有例句",
+    "exampleTextPlaceholder": "例句原文",
+    "exampleCitationPlaceholder": "出处",
+    "exampleTranslationPlaceholder": "含义",
+    "derivativeSearchLabel": "搜索生词",
+    "derivativeSearchPlaceholder": "搜索基本形态或词干…",
+    "derivativeEmptyHint": "尚未选择派生词",
+    "tagsPlaceholder": "高频, 文献A",
+    "notesPlaceholder": "备注"
+  },
+  "files": {
+    "paradigm": "paradigm.js",
+    "script": "script.js",
+    "ime": "ime.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "mnc-pron",
+          "mnc-pron-personal",
+          "mnc-pron-case-fusion",
+          "mnc-pron-demonstrative"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "mnc-noun",
+          "mnc-noun-pl-zero",
+          "mnc-noun-pl-sa",
+          "mnc-noun-pl-ta",
+          "mnc-noun-pl-si",
+          "mnc-noun-pl-ri",
+          "mnc-noun-cases",
+          "mnc-noun-possessive"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "mnc-adj",
+          "mnc-adj-invariable",
+          "mnc-adj-comparison",
+          "mnc-adj-adverb"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "mnc-verb",
+          "mnc-verb-general",
+          "mnc-verb-tense",
+          "mnc-verb-mood",
+          "mnc-verb-negation",
+          "mnc-verb-converb",
+          "mnc-verb-participle",
+          "mnc-verb-secondary",
+          "mnc-verb-voice-overview",
+          "mnc-verb-voice-bu",
+          "mnc-verb-voice-nu",
+          "mnc-verb-voice-ca",
+          "mnc-verb-harmony-back",
+          "mnc-verb-harmony-back-table",
+          "mnc-verb-harmony-front",
+          "mnc-verb-harmony-front-table",
+          "mnc-verb-harmony-round",
+          "mnc-verb-harmony-round-table"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "mnc-num",
+          "mnc-num-cardinal",
+          "mnc-num-ordinal"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "mnc-adv",
+          "mnc-adv-kinds",
+          "mnc-adv-order"
+        ]
+      },
+      {
+        "id": "postp",
+        "title": "后置词",
+        "file": "grammar/postp.json",
+        "anchors": [
+          "mnc-postp",
+          "mnc-postp-common",
+          "mnc-postp-vs-case"
+        ]
+      },
+      {
+        "id": "sound",
+        "title": "语音与元音和谐",
+        "file": "grammar/sound.json",
+        "anchors": [
+          "mnc-sound",
+          "mnc-sound-vowels",
+          "mnc-sound-harmony"
+        ]
+      },
+      {
+        "id": "script",
+        "title": "文字",
+        "file": "grammar/script.json",
+        "anchors": [
+          "mnc-script",
+          "mnc-script-vowels",
+          "mnc-script-consonants",
+          "mnc-script-loan",
+          "mnc-script-variants",
+          "mnc-script-rules"
+        ]
+      },
+      {
+        "id": "syntax",
+        "title": "句法",
+        "file": "grammar/syntax.json",
+        "anchors": [
+          "mnc-syntax",
+          "mnc-syntax-order",
+          "mnc-syntax-copula",
+          "mnc-syntax-negation"
+        ]
+      }
+    ]
+  }
+}

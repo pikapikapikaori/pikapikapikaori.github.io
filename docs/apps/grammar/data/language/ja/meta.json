@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "language": "ja",
+  "name": "现代日语",
+  "native": "日本語",
+  "classical": false,
+  "group": {
+    "id": "modern",
+    "title": "现代语言",
+    "order": 2
+  },
+  "order": 1,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "adv",
+    "pron",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "terms": {
+    "inflectionType": "变形类型",
+    "inflectionTypePlaceholder": "如：イ形容词",
+    "special": "特殊变形",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}变形表",
+    "extraForms": "补充形式",
+    "basicTitle": "基本",
+    "stemsTitle": "词干",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干（可留空）"
+    },
+    "byPos": {
+      "verb": {
+        "inflectionType": "活用类型",
+        "special": "特殊活用",
+        "indeclinable": "无活用",
+        "paradigmTitle": "{pos}活用表",
+        "inflectionTypePlaceholder": "如：五段活用"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 食べる"
+    },
+    "meanings": "含义",
+    "collocations": "固定搭配",
+    "examples": "例句",
+    "derivatives": "派生词",
+    "tags": "标签",
+    "notes": "备注",
+    "others": "其他",
+    "paradigmTable": "形态变形",
+    "optionalSuffix": "（可选）",
+    "add": "＋ 添加",
+    "addMeaning": "＋ 添加含义",
+    "posLabel": "词性",
+    "anchorLabel": "语法条目",
+    "meaningPlaceholder": "含义",
+    "emptyMeanings": "该来源还没有含义",
+    "inflectionGroupPlaceholder": "分组（可选）",
+    "inflectionLabelPlaceholder": "标签",
+    "inflectionFormPlaceholder": "形态",
+    "emptyCollocations": "该来源还没有固定搭配",
+    "collocationTextPlaceholder": "固定搭配原文",
+    "collocationGlossPlaceholder": "含义",
+    "emptyExamples": "该来源还没有例句",
+    "exampleTextPlaceholder": "例句原文",
+    "exampleCitationPlaceholder": "出处",
+    "exampleTranslationPlaceholder": "含义",
+    "derivativeSearchLabel": "搜索生词",
+    "derivativeSearchPlaceholder": "搜索基本形态或词干…",
+    "derivativeEmptyHint": "尚未选择派生词",
+    "tagsPlaceholder": "高频, 文献A",
+    "notesPlaceholder": "备注"
+  },
+  "files": {},
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "taigen",
+        "title": "体言",
+        "file": "grammar/taigen.json",
+        "anchors": [
+          "ja-taigen",
+          "ja-noun-invariable",
+          "ja-adj-na-section",
+          "ja-adj-na"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "用言·形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "ja-adj",
+          "ja-adj-overview",
+          "ja-adj-i"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "用言·动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "ja-verb",
+          "ja-verb-overview",
+          "ja-verb-compound",
+          "ja-verb-godan",
+          "ja-verb-godan-forms",
+          "ja-verb-godan-compound",
+          "ja-verb-ichidan",
+          "ja-verb-ichidan-forms",
+          "ja-verb-ichidan-compound",
+          "ja-verb-suru",
+          "ja-verb-suru-forms",
+          "ja-verb-suru-compound",
+          "ja-verb-karu",
+          "ja-verb-karu-forms",
+          "ja-verb-karu-compound",
+          "ja-verb-secondary",
+          "ja-verb-transitivity",
+          "ja-verb-keigo"
+        ]
+      },
+      {
+        "id": "particle",
+        "title": "助词",
+        "file": "grammar/particle.json",
+        "anchors": [
+          "ja-particle",
+          "ja-particle-case",
+          "ja-particle-topic",
+          "ja-particle-final"
+        ]
+      },
+      {
+        "id": "honorific",
+        "title": "敬语",
+        "file": "grammar/honorific.json",
+        "anchors": [
+          "ja-honorific",
+          "ja-honorific-overview",
+          "ja-honorific-pattern",
+          "ja-honorific-teinei"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "ja-num",
+          "ja-num-cardinal",
+          "ja-num-date",
+          "ja-num-counter"
+        ]
+      },
+      {
+        "id": "syntax",
+        "title": "句法",
+        "file": "grammar/syntax.json",
+        "anchors": [
+          "ja-syntax",
+          "ja-syntax-order",
+          "ja-syntax-copula",
+          "ja-syntax-question"
+        ]
+      }
+    ]
+  }
+}

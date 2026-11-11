@@ -1,0 +1,415 @@
+[
+  {
+    "id": "la-num",
+    "title": "数词",
+    "items": [
+      {
+        "id": "la-num-1-20",
+        "title": "1–20",
+        "tables": [
+          {
+            "caption": "基数词 · 序数词 · 分配数词 · 数词副词 · 序数副词",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "基数词",
+              "序数词",
+              "分配数词",
+              "数词副词",
+              "序数副词"
+            ],
+            "rows": [
+              [
+                "1",
+                "<bdi>ūnus, -a, -um</bdi>",
+                "<bdi>prīmus</bdi>",
+                "<bdi>singulī</bdi>",
+                "<bdi>semel</bdi>",
+                "<bdi>prīmum / prīmō</bdi>"
+              ],
+              [
+                "2",
+                "<bdi>duo, duae, duo</bdi>",
+                "<bdi>secundus</bdi>",
+                "<bdi>bīnī</bdi>",
+                "<bdi>bis</bdi>",
+                "<bdi>secundō</bdi>"
+              ],
+              [
+                "3",
+                "<bdi>trēs, tria</bdi>",
+                "<bdi>tertius</bdi>",
+                "<bdi>ternī</bdi>",
+                "<bdi>ter</bdi>",
+                "<bdi>tertiō</bdi>"
+              ],
+              [
+                "4",
+                "<bdi>quattuor</bdi>",
+                "<bdi>quārtus</bdi>",
+                "<bdi>quaternī</bdi>",
+                "<bdi>quater</bdi>",
+                "<bdi>quārtō</bdi>"
+              ],
+              [
+                "5",
+                "<bdi>quīnque</bdi>",
+                "<bdi>quīntus</bdi>",
+                "<bdi>quīnī</bdi>",
+                "<bdi>quīnquiēs</bdi>",
+                "<bdi>quīntō</bdi>"
+              ],
+              [
+                "6",
+                "<bdi>sex</bdi>",
+                "<bdi>sextus</bdi>",
+                "<bdi>sēnī</bdi>",
+                "<bdi>sexie(n)s</bdi>",
+                "<bdi>sextō</bdi>"
+              ],
+              [
+                "7",
+                "<bdi>septem</bdi>",
+                "<bdi>septimus</bdi>",
+                "<bdi>septēnī</bdi>",
+                "<bdi>septie(n)s</bdi>",
+                "<bdi>septimō</bdi>"
+              ],
+              [
+                "8",
+                "<bdi>octō</bdi>",
+                "<bdi>octāvus</bdi>",
+                "<bdi>octōnī</bdi>",
+                "<bdi>octie(n)s</bdi>",
+                "<bdi>octāvō</bdi>"
+              ],
+              [
+                "9",
+                "<bdi>novem</bdi>",
+                "<bdi>nōnus</bdi>",
+                "<bdi>novēnī</bdi>",
+                "<bdi>novie(n)s</bdi>",
+                "<bdi>nōnō</bdi>"
+              ],
+              [
+                "10",
+                "<bdi>decem</bdi>",
+                "<bdi>decimus</bdi>",
+                "<bdi>dēnī</bdi>",
+                "<bdi>decie(n)s</bdi>",
+                "<bdi>decimō</bdi>"
+              ],
+              [
+                "11",
+                "<bdi>ūndecim</bdi>",
+                "<bdi>ūndecimus</bdi>",
+                "<bdi>ūndēnī</bdi>",
+                "<bdi>ūndeciēs</bdi>",
+                "<bdi>ūndecimō</bdi>"
+              ],
+              [
+                "12",
+                "<bdi>duodecim</bdi>",
+                "<bdi>duodecimus</bdi>",
+                "<bdi>duodēnī</bdi>",
+                "<bdi>duodeciēs</bdi>",
+                "<bdi>duodecimō</bdi>"
+              ],
+              [
+                "13",
+                "<bdi>tredecim</bdi>",
+                "<bdi>tertius decimus</bdi>",
+                "<bdi>ternī dēnī</bdi>",
+                "<bdi>terdeciēs</bdi>",
+                "<bdi>tertiō decimō</bdi>"
+              ],
+              [
+                "14",
+                "<bdi>quattuordecim</bdi>",
+                "<bdi>quārtus decimus</bdi>",
+                "<bdi>quaternī dēnī</bdi>",
+                "<bdi>quattuordeciēs</bdi>",
+                "<bdi>quārtō decimō</bdi>"
+              ],
+              [
+                "15",
+                "<bdi>quīndecim</bdi>",
+                "<bdi>quīntus decimus</bdi>",
+                "<bdi>quīnī dēnī</bdi>",
+                "<bdi>quīndeciēs</bdi>",
+                "<bdi>quīntō decimō</bdi>"
+              ],
+              [
+                "16",
+                "<bdi>sēdecim</bdi>",
+                "<bdi>sextus decimus</bdi>",
+                "<bdi>sēnī dēnī</bdi>",
+                "<bdi>sēdeciēs</bdi>",
+                "<bdi>sextō decimō</bdi>"
+              ],
+              [
+                "17",
+                "<bdi>septendecim</bdi>",
+                "<bdi>septimus decimus</bdi>",
+                "<bdi>septēnī dēnī</bdi>",
+                "<bdi>septendeciēs</bdi>",
+                "<bdi>septimō decimō</bdi>"
+              ],
+              [
+                "18",
+                "<bdi>duodēvīgintī</bdi>",
+                "<bdi>duodēvīcēsimus</bdi>",
+                "<bdi>duodēvīcēnī</bdi>",
+                "<bdi>duodēvīciēs</bdi>",
+                "<bdi>duodēvīcēsimō</bdi>"
+              ],
+              [
+                "19",
+                "<bdi>ūndēvīgintī</bdi>",
+                "<bdi>ūndēvīcēsimus</bdi>",
+                "<bdi>ūndēvīcēnī</bdi>",
+                "<bdi>ūndēvīciēs</bdi>",
+                "<bdi>ūndēvīcēsimō</bdi>"
+              ],
+              [
+                "20",
+                "<bdi>vīgintī</bdi>",
+                "<bdi>vīcēsimus</bdi>",
+                "<bdi>vīcēnī</bdi>",
+                "<bdi>vīciēs</bdi>",
+                "<bdi>vīcēsimō</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "倍数 · 比例 · 分数",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "倍数词",
+              "比例数词",
+              "分数词"
+            ],
+            "rows": [
+              [
+                "1",
+                "<bdi>simplex</bdi>",
+                "<bdi>simplus</bdi>",
+                "—"
+              ],
+              [
+                "2",
+                "<bdi>duplex</bdi>",
+                "<bdi>duplus</bdi>",
+                "<bdi>dimidium</bdi>"
+              ],
+              [
+                "3",
+                "<bdi>triplex</bdi>",
+                "<bdi>triplus</bdi>",
+                "<bdi>triēns</bdi>"
+              ],
+              [
+                "4",
+                "<bdi>quadruplex</bdi>",
+                "<bdi>quadruplus</bdi>",
+                "<bdi>quādrans</bdi>"
+              ],
+              [
+                "5",
+                "<bdi>quīnquiplex</bdi>",
+                "<bdi>quīnquiplex</bdi>",
+                "<bdi>quīnciālis</bdi>"
+              ],
+              [
+                "以后",
+                "—",
+                "—",
+                "—"
+              ]
+            ]
+          }
+        ],
+        "notes": "1–3 有完整变格：<bdi>ūnus</bdi> 按第一二变格（<bdi>-īus</bdi> 属格、<bdi>-ī</bdi> 与格），<bdi>duo/trēs</bdi> 按第三变格（<bdi>irregular</bdi>）。4 以上不变格。<bdi>mīlle</bdi> 单数不变格，复数 <bdi>mīlia</bdi> 按第三变格中性。数词的多种形式属于派生词，不作为同一词条的变格表。"
+      },
+      {
+        "id": "la-num-tens",
+        "title": "十位",
+        "tables": [
+          {
+            "caption": "十位",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "基数词",
+              "序数词",
+              "分配数词",
+              "数词副词",
+              "序数副词"
+            ],
+            "rows": [
+              [
+                "30",
+                "<bdi>trīgintā</bdi>",
+                "<bdi>trīcēsimus</bdi>",
+                "<bdi>trīcēnī</bdi>",
+                "<bdi>trīciēs</bdi>",
+                "<bdi>trīcēsimō</bdi>"
+              ],
+              [
+                "40",
+                "<bdi>quadrāgintā</bdi>",
+                "<bdi>quadrāgēsimus</bdi>",
+                "<bdi>quadrāgēnī</bdi>",
+                "<bdi>quadrāgiēs</bdi>",
+                "<bdi>quadrāgēsimō</bdi>"
+              ],
+              [
+                "50",
+                "<bdi>quīnquāgintā</bdi>",
+                "<bdi>quīnquāgēsimus</bdi>",
+                "<bdi>quīnquāgēnī</bdi>",
+                "<bdi>quīnquāgiēs</bdi>",
+                "<bdi>quīnquāgēsimō</bdi>"
+              ],
+              [
+                "60",
+                "<bdi>sexāgintā</bdi>",
+                "<bdi>sexāgēsimus</bdi>",
+                "<bdi>sexāgēnī</bdi>",
+                "<bdi>sexāgiēs</bdi>",
+                "<bdi>sexāgēsimō</bdi>"
+              ],
+              [
+                "70",
+                "<bdi>septuāgintā</bdi>",
+                "<bdi>septuāgēsimus</bdi>",
+                "<bdi>septuāgēnī</bdi>",
+                "<bdi>septuāgiēs</bdi>",
+                "<bdi>septuāgēsimō</bdi>"
+              ],
+              [
+                "80",
+                "<bdi>octōgintā</bdi>",
+                "<bdi>octōgēsimus</bdi>",
+                "<bdi>octōgēnī</bdi>",
+                "<bdi>octōgiēs</bdi>",
+                "<bdi>octōgēsimō</bdi>"
+              ],
+              [
+                "90",
+                "<bdi>nōnāgintā</bdi>",
+                "<bdi>nōnāgēsimus</bdi>",
+                "<bdi>nōnāgēnī</bdi>",
+                "<bdi>nōnāgiēs</bdi>",
+                "<bdi>nōnāgēsimō</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "十位以上不变格。"
+      },
+      {
+        "id": "la-num-hundreds",
+        "title": "百位与千位",
+        "tables": [
+          {
+            "caption": "百位",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "基数词",
+              "序数词",
+              "分配数词",
+              "数词副词",
+              "序数副词"
+            ],
+            "rows": [
+              [
+                "100",
+                "<bdi>centum</bdi>",
+                "<bdi>centēsimus</bdi>",
+                "<bdi>centēnī</bdi>",
+                "<bdi>centiēs</bdi>",
+                "<bdi>centēsimō</bdi>"
+              ],
+              [
+                "200",
+                "<bdi>ducentī</bdi>",
+                "<bdi>ducentēsimus</bdi>",
+                "<bdi>ducēnī</bdi>",
+                "<bdi>ducentiēs</bdi>",
+                "<bdi>ducentēsimō</bdi>"
+              ],
+              [
+                "300",
+                "<bdi>trecentī</bdi>",
+                "<bdi>trecentēsimus</bdi>",
+                "<bdi>trecēnī</bdi>",
+                "<bdi>trecentiēs</bdi>",
+                "<bdi>trecentēsimō</bdi>"
+              ],
+              [
+                "400",
+                "<bdi>quadringentī</bdi>",
+                "<bdi>quadringentēsimus</bdi>",
+                "<bdi>quadringēnī</bdi>",
+                "<bdi>quadringentiēs</bdi>",
+                "<bdi>quadringentēsimō</bdi>"
+              ],
+              [
+                "500",
+                "<bdi>quīngentī</bdi>",
+                "<bdi>quīngentēsimus</bdi>",
+                "<bdi>quīngēnī</bdi>",
+                "<bdi>quīngentiēs</bdi>",
+                "<bdi>quīngentēsimō</bdi>"
+              ],
+              [
+                "600",
+                "<bdi>sescentī</bdi>",
+                "<bdi>sescentēsimus</bdi>",
+                "<bdi>sescēnī</bdi>",
+                "<bdi>sescentiēs</bdi>",
+                "<bdi>sescentēsimō</bdi>"
+              ],
+              [
+                "700",
+                "<bdi>septingentī</bdi>",
+                "<bdi>septingentēsimus</bdi>",
+                "<bdi>septingēnī</bdi>",
+                "<bdi>septingentiēs</bdi>",
+                "<bdi>septingentēsimō</bdi>"
+              ],
+              [
+                "800",
+                "<bdi>octingentī</bdi>",
+                "<bdi>octingentēsimus</bdi>",
+                "<bdi>octingēnī</bdi>",
+                "<bdi>octingentiēs</bdi>",
+                "<bdi>octingentēsimō</bdi>"
+              ],
+              [
+                "900",
+                "<bdi>nōngentī</bdi>",
+                "<bdi>nōngentēsimus</bdi>",
+                "<bdi>nōngēnī</bdi>",
+                "<bdi>nōngentiēs</bdi>",
+                "<bdi>nōngentēsimō</bdi>"
+              ],
+              [
+                "1000",
+                "<bdi>mīlle</bdi>",
+                "<bdi>mīllēsimus</bdi>",
+                "<bdi>mīllēnī</bdi>",
+                "<bdi>mīliēs</bdi>",
+                "<bdi>mīllēsimō</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "<bdi>centum</bdi> 不变格；<bdi>ducentī</bdi> 起按第一二变格复数变化。<bdi>mīlle</bdi>（1000）单数不变格，复数 <bdi>mīlia</bdi> 为第三变格中性名词。"
+      }
+    ]
+  }
+]

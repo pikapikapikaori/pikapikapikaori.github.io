@@ -1,0 +1,1764 @@
+[
+  {
+    "id": "ja-verb",
+    "title": "动词总论",
+    "items": [
+      {
+        "id": "ja-verb-overview",
+        "title": "活用形体系与四类动词",
+        "tables": [
+          {
+            "caption": "活用形（学校文法）",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "作用",
+              "五段 <bdi>書く</bdi>",
+              "一段 <bdi>食べる</bdi>",
+              "<bdi>する</bdi>",
+              "<bdi>来る</bdi>"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "接 <bdi>ない・う/よう・れる・せる</bdi>",
+                "<bdi>書か</bdi>",
+                "<bdi>食べ</bdi>",
+                "<bdi>し / せ / さ</bdi>",
+                "<bdi>こ</bdi>"
+              ],
+              [
+                "連用形1",
+                "接 <bdi>ます・たい・ながら</bdi>",
+                "<bdi>書き</bdi>",
+                "<bdi>食べ</bdi>",
+                "<bdi>し</bdi>",
+                "<bdi>き</bdi>"
+              ],
+              [
+                "連用形2（音便）",
+                "接 <bdi>て・た</bdi>",
+                "<bdi>書い</bdi>",
+                "<bdi>食べ</bdi>",
+                "<bdi>し</bdi>",
+                "<bdi>き</bdi>"
+              ],
+              [
+                "終止形（辞書形）",
+                "结句",
+                "<bdi>書く</bdi>",
+                "<bdi>食べる</bdi>",
+                "<bdi>する</bdi>",
+                "<bdi>くる</bdi>"
+              ],
+              [
+                "連体形",
+                "修饰名词",
+                "<bdi>書く</bdi>",
+                "<bdi>食べる</bdi>",
+                "<bdi>する</bdi>",
+                "<bdi>くる</bdi>"
+              ],
+              [
+                "已然形（仮定）",
+                "接 <bdi>ば</bdi>",
+                "<bdi>書け</bdi>",
+                "<bdi>食べれ</bdi>",
+                "<bdi>すれ</bdi>",
+                "<bdi>くれ</bdi>"
+              ],
+              [
+                "命令形",
+                "命令",
+                "<bdi>書け</bdi>",
+                "<bdi>食べろ</bdi>",
+                "<bdi>しろ / せよ</bdi>",
+                "<bdi>こい</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "notes": "动词按活用方式分<strong>四类</strong>：<bdi>五段・一段・サ変（する）・カ変（来る）。連用形2（音便）只在五段与 て/た 结合时才有独立形状（書い / 書いて</bdi>），其余三类与連用形1 同形。"
+      },
+      {
+        "id": "ja-verb-compound",
+        "title": "合成形式的构成",
+        "tables": [
+          {
+            "caption": "形式与活用形的对应",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "构成",
+              "例（<bdi>書く</bdi>）"
+            ],
+            "rows": [
+              [
+                "<bdi>ます形</bdi>（叮咛）",
+                "連用形1 + <bdi>ます</bdi>",
+                "<bdi>書きます</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "未然形 + <bdi>ない</bdi>",
+                "<bdi>書かない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "連用形2 + <bdi>た</bdi>",
+                "<bdi>書いた</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "連用形2 + <bdi>て</bdi>",
+                "<bdi>書いて</bdi>"
+              ],
+              [
+                "意志形",
+                "未然形 + <bdi>う / よう</bdi>",
+                "<bdi>書こう</bdi>"
+              ],
+              [
+                "可能形",
+                "五段：已然形 + <bdi>る；一段等：未然形 + られる</bdi>",
+                "<bdi>書ける / 食べられる</bdi>"
+              ],
+              [
+                "受身形",
+                "未然形 + <bdi>れる / られる</bdi>",
+                "<bdi>書かれる</bdi>"
+              ],
+              [
+                "使役形",
+                "未然形 + <bdi>せる / させる</bdi>",
+                "<bdi>書かせる</bdi>"
+              ],
+              [
+                "使役受身形",
+                "未然形 + <bdi>せられる / させられる</bdi>",
+                "<bdi>書かせられる</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "已然形 + <bdi>ば</bdi>",
+                "<bdi>書けば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "notes": "口语里可能形与使役受身形有缩约形：<bdi>食べられる → 食べれる、書かせられる → 書かされる</bdi>。"
+      }
+    ]
+  },
+  {
+    "id": "ja-verb-godan",
+    "title": "五段活用（<bdi>書く型</bdi>）",
+    "inflect": "conj",
+    "items": [
+      {
+        "id": "ja-verb-godan-forms",
+        "title": "活用形",
+        "tables": [
+          {
+            "caption": "活用形",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "词形",
+              "主要接续"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "<bdi>書か</bdi>",
+                "<bdi>ない・う・れる・せる</bdi>"
+              ],
+              [
+                "連用形1",
+                "<bdi>書き</bdi>",
+                "<bdi>ます・たい・ながら</bdi>"
+              ],
+              [
+                "連用形2（音便）",
+                "<bdi>書い</bdi>",
+                "<bdi>て・た</bdi>"
+              ],
+              [
+                "終止形（辞書形）",
+                "<bdi>書く</bdi>",
+                "结句"
+              ],
+              [
+                "連体形",
+                "<bdi>書く</bdi>",
+                "修饰名词"
+              ],
+              [
+                "已然形（仮定）",
+                "<bdi>書け</bdi>",
+                "<bdi>ば</bdi>"
+              ],
+              [
+                "命令形",
+                "<bdi>書け</bdi>",
+                "命令"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      },
+      {
+        "id": "ja-verb-godan-compound",
+        "title": "合成形式",
+        "tables": [
+          {
+            "caption": "合成形式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "词形",
+              "基于"
+            ],
+            "rows": [
+              [
+                "<bdi>ます形</bdi>（叮咛）",
+                "<bdi>書きます</bdi>",
+                "連用形1 + <bdi>ます</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "<bdi>書かない</bdi>",
+                "未然形 + <bdi>ない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "<bdi>書いた</bdi>",
+                "連用形2 + <bdi>た</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "<bdi>書いて</bdi>",
+                "連用形2 + <bdi>て</bdi>"
+              ],
+              [
+                "意志形",
+                "<bdi>書こう</bdi>",
+                "未然形 + <bdi>う</bdi>"
+              ],
+              [
+                "可能形",
+                "<bdi>書ける</bdi>",
+                "已然形 + <bdi>る</bdi>"
+              ],
+              [
+                "受身形",
+                "<bdi>書かれる</bdi>",
+                "未然形 + <bdi>れる</bdi>"
+              ],
+              [
+                "使役形",
+                "<bdi>書かせる</bdi>",
+                "未然形 + <bdi>せる</bdi>"
+              ],
+              [
+                "使役受身形",
+                "<bdi>書かせられる（口语 書かされる）</bdi>",
+                "未然形 + <bdi>せられる</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "<bdi>書けば</bdi>",
+                "已然形 + <bdi>ば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      }
+    ],
+    "notes": "词尾在<strong><bdi>ア・イ・ウ・エ・オ</bdi></strong>五段上变化（<bdi>書か・書き・書く・書け・書こ），故称五段。以 -る 结尾但前一个音不是 イ / エ 段的动词也属五段（取る・帰る</bdi>）。",
+    "derive": {
+      "pos": "verb",
+      "stemExample": "書く",
+      "headwordExample": "書く",
+      "parts": [],
+      "note": "",
+      "stemForms": {
+        "base": {
+          "from": "headword",
+          "rules": []
+        },
+        "mizen": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "く$",
+              "replace": "か"
+            },
+            {
+              "pattern": "ぐ$",
+              "replace": "が"
+            },
+            {
+              "pattern": "す$",
+              "replace": "さ"
+            },
+            {
+              "pattern": "つ$",
+              "replace": "た"
+            },
+            {
+              "pattern": "ぬ$",
+              "replace": "な"
+            },
+            {
+              "pattern": "ぶ$",
+              "replace": "ば"
+            },
+            {
+              "pattern": "む$",
+              "replace": "ま"
+            },
+            {
+              "pattern": "る$",
+              "replace": "ら"
+            },
+            {
+              "pattern": "う$",
+              "replace": "わ"
+            }
+          ]
+        },
+        "renyo1": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "く$",
+              "replace": "き"
+            },
+            {
+              "pattern": "ぐ$",
+              "replace": "ぎ"
+            },
+            {
+              "pattern": "す$",
+              "replace": "し"
+            },
+            {
+              "pattern": "つ$",
+              "replace": "ち"
+            },
+            {
+              "pattern": "ぬ$",
+              "replace": "に"
+            },
+            {
+              "pattern": "ぶ$",
+              "replace": "び"
+            },
+            {
+              "pattern": "む$",
+              "replace": "み"
+            },
+            {
+              "pattern": "る$",
+              "replace": "り"
+            },
+            {
+              "pattern": "う$",
+              "replace": "い"
+            }
+          ]
+        },
+        "renyo2": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "く$",
+              "replace": "い"
+            },
+            {
+              "pattern": "ぐ$",
+              "replace": "い"
+            },
+            {
+              "pattern": "す$",
+              "replace": "し"
+            },
+            {
+              "pattern": "つ$",
+              "replace": "っ"
+            },
+            {
+              "pattern": "ぬ$",
+              "replace": "ん"
+            },
+            {
+              "pattern": "ぶ$",
+              "replace": "ん"
+            },
+            {
+              "pattern": "む$",
+              "replace": "ん"
+            },
+            {
+              "pattern": "る$",
+              "replace": "っ"
+            },
+            {
+              "pattern": "う$",
+              "replace": "っ"
+            }
+          ]
+        },
+        "katei": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "く$",
+              "replace": "け"
+            },
+            {
+              "pattern": "ぐ$",
+              "replace": "げ"
+            },
+            {
+              "pattern": "す$",
+              "replace": "せ"
+            },
+            {
+              "pattern": "つ$",
+              "replace": "て"
+            },
+            {
+              "pattern": "ぬ$",
+              "replace": "ね"
+            },
+            {
+              "pattern": "ぶ$",
+              "replace": "べ"
+            },
+            {
+              "pattern": "む$",
+              "replace": "め"
+            },
+            {
+              "pattern": "る$",
+              "replace": "れ"
+            },
+            {
+              "pattern": "う$",
+              "replace": "え"
+            }
+          ]
+        },
+        "ishi": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "く$",
+              "replace": "こ"
+            },
+            {
+              "pattern": "ぐ$",
+              "replace": "ご"
+            },
+            {
+              "pattern": "す$",
+              "replace": "そ"
+            },
+            {
+              "pattern": "つ$",
+              "replace": "と"
+            },
+            {
+              "pattern": "ぬ$",
+              "replace": "の"
+            },
+            {
+              "pattern": "ぶ$",
+              "replace": "ぼ"
+            },
+            {
+              "pattern": "む$",
+              "replace": "も"
+            },
+            {
+              "pattern": "る$",
+              "replace": "ろ"
+            },
+            {
+              "pattern": "う$",
+              "replace": "お"
+            }
+          ]
+        }
+      },
+      "endings": {
+        "forms": {
+          "mizen": {
+            "form": {
+              "stemForm": "mizen",
+              "stemOnly": true
+            }
+          },
+          "renyo1": {
+            "form": {
+              "stemForm": "renyo1",
+              "stemOnly": true
+            }
+          },
+          "renyo2": {
+            "form": {
+              "stemForm": "renyo2",
+              "stemOnly": true
+            }
+          },
+          "shusi": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "rentai": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "katei": {
+            "form": {
+              "stemForm": "katei",
+              "stemOnly": true
+            }
+          },
+          "meirei": {
+            "form": {
+              "stemForm": "katei",
+              "stemOnly": true
+            }
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": {
+              "stemForm": "renyo1",
+              "suffix": "ます"
+            }
+          },
+          "nai": {
+            "form": {
+              "stemForm": "mizen",
+              "suffix": "ない"
+            }
+          },
+          "ta": {
+            "form": {
+              "stemForm": "renyo2",
+              "suffix": "た"
+            }
+          },
+          "te": {
+            "form": {
+              "stemForm": "renyo2",
+              "suffix": "て"
+            }
+          },
+          "ishi": {
+            "form": {
+              "stemForm": "ishi",
+              "suffix": "う"
+            }
+          },
+          "kano": {
+            "form": {
+              "stemForm": "katei",
+              "suffix": "る"
+            }
+          },
+          "ukemi": {
+            "form": {
+              "stemForm": "mizen",
+              "suffix": "れる"
+            }
+          },
+          "shieki": {
+            "form": {
+              "stemForm": "mizen",
+              "suffix": "せる"
+            }
+          },
+          "shiekiukemi": {
+            "form": {
+              "stemForm": "mizen",
+              "suffix": "せられる"
+            }
+          },
+          "kateiba": {
+            "form": {
+              "stemForm": "katei",
+              "suffix": "ば"
+            }
+          }
+        }
+      },
+      "expect": {
+        "forms": {
+          "mizen": {
+            "form": "書か"
+          },
+          "renyo1": {
+            "form": "書き"
+          },
+          "renyo2": {
+            "form": "書い"
+          },
+          "shusi": {
+            "form": "書く"
+          },
+          "rentai": {
+            "form": "書く"
+          },
+          "katei": {
+            "form": "書け"
+          },
+          "meirei": {
+            "form": "書け"
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": "書きます"
+          },
+          "nai": {
+            "form": "書かない"
+          },
+          "ta": {
+            "form": "書いた"
+          },
+          "te": {
+            "form": "書いて"
+          },
+          "ishi": {
+            "form": "書こう"
+          },
+          "kano": {
+            "form": "書ける"
+          },
+          "ukemi": {
+            "form": "書かれる"
+          },
+          "shieki": {
+            "form": "書かせる"
+          },
+          "shiekiukemi": {
+            "form": "書かせられる"
+          },
+          "kateiba": {
+            "form": "書けば"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "ja-verb-ichidan",
+    "title": "一段活用（<bdi>食べる型</bdi>）",
+    "inflect": "conj",
+    "items": [
+      {
+        "id": "ja-verb-ichidan-forms",
+        "title": "活用形",
+        "tables": [
+          {
+            "caption": "活用形",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "词形",
+              "主要接续"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "<bdi>食べ</bdi>",
+                "<bdi>ない・よう・られる・させる</bdi>"
+              ],
+              [
+                "連用形1",
+                "<bdi>食べ</bdi>",
+                "<bdi>ます・たい・ながら</bdi>"
+              ],
+              [
+                "連用形2（音便）",
+                "<bdi>食べ</bdi>",
+                "<bdi>て・た</bdi>（与連用形1 同形）"
+              ],
+              [
+                "終止形（辞書形）",
+                "<bdi>食べる</bdi>",
+                "结句"
+              ],
+              [
+                "連体形",
+                "<bdi>食べる</bdi>",
+                "修饰名词"
+              ],
+              [
+                "已然形（仮定）",
+                "<bdi>食べれ</bdi>",
+                "<bdi>ば</bdi>"
+              ],
+              [
+                "命令形",
+                "<bdi>食べろ</bdi>",
+                "命令（书面 <bdi>食べよ</bdi>）"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      },
+      {
+        "id": "ja-verb-ichidan-compound",
+        "title": "合成形式",
+        "tables": [
+          {
+            "caption": "合成形式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "词形",
+              "基于"
+            ],
+            "rows": [
+              [
+                "<bdi>ます形</bdi>（叮咛）",
+                "<bdi>食べます</bdi>",
+                "連用形1 + <bdi>ます</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "<bdi>食べない</bdi>",
+                "未然形 + <bdi>ない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "<bdi>食べた</bdi>",
+                "連用形2 + <bdi>た</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "<bdi>食べて</bdi>",
+                "連用形2 + <bdi>て</bdi>"
+              ],
+              [
+                "意志形",
+                "<bdi>食べよう</bdi>",
+                "未然形 + <bdi>よう</bdi>"
+              ],
+              [
+                "可能形",
+                "<bdi>食べられる（口语 食べれる）</bdi>",
+                "未然形 + <bdi>られる</bdi>"
+              ],
+              [
+                "受身形",
+                "<bdi>食べられる</bdi>",
+                "未然形 + <bdi>られる</bdi>"
+              ],
+              [
+                "使役形",
+                "<bdi>食べさせる</bdi>",
+                "未然形 + <bdi>させる</bdi>"
+              ],
+              [
+                "使役受身形",
+                "<bdi>食べさせられる</bdi>",
+                "未然形 + <bdi>させられる</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "<bdi>食べれば</bdi>",
+                "已然形 + <bdi>ば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      }
+    ],
+    "notes": "词干不变，只换词尾（<bdi>食べ・食べる・食べれ・食べろ）。上一段（見る）与下一段（食べる</bdi>）在现代日语中活用相同。",
+    "derive": {
+      "pos": "verb",
+      "stemExample": "食べる",
+      "headwordExample": "食べる",
+      "parts": [],
+      "note": "",
+      "stemForms": {
+        "base": {
+          "from": "headword",
+          "rules": []
+        },
+        "stem": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "る$",
+              "replace": ""
+            }
+          ]
+        },
+        "katei": {
+          "from": "stem",
+          "rules": [
+            {
+              "pattern": "$",
+              "replace": "れ"
+            }
+          ]
+        }
+      },
+      "endings": {
+        "forms": {
+          "mizen": {
+            "form": {
+              "stemForm": "stem",
+              "stemOnly": true
+            }
+          },
+          "renyo1": {
+            "form": {
+              "stemForm": "stem",
+              "stemOnly": true
+            }
+          },
+          "renyo2": {
+            "form": {
+              "stemForm": "stem",
+              "stemOnly": true
+            }
+          },
+          "shusi": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "rentai": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "katei": {
+            "form": {
+              "stemForm": "katei",
+              "stemOnly": true
+            }
+          },
+          "meirei": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "ろ"
+            }
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "ます"
+            }
+          },
+          "nai": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "ない"
+            }
+          },
+          "ta": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "た"
+            }
+          },
+          "te": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "て"
+            }
+          },
+          "ishi": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "よう"
+            }
+          },
+          "kano": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "られる"
+            }
+          },
+          "ukemi": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "られる"
+            }
+          },
+          "shieki": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "させる"
+            }
+          },
+          "shiekiukemi": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "させられる"
+            }
+          },
+          "kateiba": {
+            "form": {
+              "stemForm": "katei",
+              "suffix": "ば"
+            }
+          }
+        }
+      },
+      "expect": {
+        "forms": {
+          "mizen": {
+            "form": "食べ"
+          },
+          "renyo1": {
+            "form": "食べ"
+          },
+          "renyo2": {
+            "form": "食べ"
+          },
+          "shusi": {
+            "form": "食べる"
+          },
+          "rentai": {
+            "form": "食べる"
+          },
+          "katei": {
+            "form": "食べれ"
+          },
+          "meirei": {
+            "form": "食べろ"
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": "食べます"
+          },
+          "nai": {
+            "form": "食べない"
+          },
+          "ta": {
+            "form": "食べた"
+          },
+          "te": {
+            "form": "食べて"
+          },
+          "ishi": {
+            "form": "食べよう"
+          },
+          "kano": {
+            "form": "食べられる"
+          },
+          "ukemi": {
+            "form": "食べられる"
+          },
+          "shieki": {
+            "form": "食べさせる"
+          },
+          "shiekiukemi": {
+            "form": "食べさせられる"
+          },
+          "kateiba": {
+            "form": "食べれば"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "ja-verb-suru",
+    "title": "<bdi>サ変（する）</bdi>",
+    "inflect": "conj",
+    "items": [
+      {
+        "id": "ja-verb-suru-forms",
+        "title": "活用形",
+        "tables": [
+          {
+            "caption": "活用形",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "词形",
+              "主要接续"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "<bdi>し / せ / さ</bdi>",
+                "<bdi>ない・よう・れる・せる</bdi>"
+              ],
+              [
+                "連用形1",
+                "<bdi>し</bdi>",
+                "<bdi>ます・たい</bdi>"
+              ],
+              [
+                "連用形2（音便）",
+                "<bdi>し</bdi>",
+                "<bdi>て・た</bdi>（与連用形1 同形）"
+              ],
+              [
+                "終止形（辞書形）",
+                "<bdi>する</bdi>",
+                "结句"
+              ],
+              [
+                "連体形",
+                "<bdi>する</bdi>",
+                "修饰名词"
+              ],
+              [
+                "已然形（仮定）",
+                "<bdi>すれ</bdi>",
+                "<bdi>ば</bdi>"
+              ],
+              [
+                "命令形",
+                "<bdi>しろ / せよ</bdi>",
+                "命令"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      },
+      {
+        "id": "ja-verb-suru-compound",
+        "title": "合成形式",
+        "tables": [
+          {
+            "caption": "合成形式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "词形",
+              "基于"
+            ],
+            "rows": [
+              [
+                "<bdi>ます形</bdi>（叮咛）",
+                "<bdi>します</bdi>",
+                "連用形1 + <bdi>ます</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "<bdi>しない（书面 せぬ・せず）</bdi>",
+                "未然形 + <bdi>ない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "<bdi>した</bdi>",
+                "連用形2 + <bdi>た</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "<bdi>して</bdi>",
+                "連用形2 + <bdi>て</bdi>"
+              ],
+              [
+                "意志形",
+                "<bdi>しよう</bdi>",
+                "未然形 + <bdi>よう</bdi>"
+              ],
+              [
+                "可能形",
+                "<bdi>できる</bdi>",
+                "换用 <bdi>できる</bdi>"
+              ],
+              [
+                "受身形",
+                "<bdi>される</bdi>",
+                "未然形（<bdi>さ）+ れる</bdi>"
+              ],
+              [
+                "使役形",
+                "<bdi>させる</bdi>",
+                "未然形（<bdi>さ）+ せる</bdi>"
+              ],
+              [
+                "使役受身形",
+                "<bdi>させられる</bdi>",
+                "未然形（<bdi>さ）+ せられる</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "<bdi>すれば</bdi>",
+                "已然形 + <bdi>ば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      }
+    ],
+    "notes": "<bdi>する 既是独立动词，也接在汉字名词后构成サ変动词（勉強する・運動する）。未然形有 し / せ / さ 三种：しない・せぬ（せず）・させる（される）；命令形有 しろ / せよ</bdi> 两种。",
+    "derive": {
+      "pos": "verb",
+      "stemExample": "する",
+      "headwordExample": "する",
+      "parts": [],
+      "note": "",
+      "stemForms": {
+        "base": {
+          "from": "headword",
+          "rules": []
+        }
+      },
+      "stems": {
+        "shi": "し",
+        "sa": "さ",
+        "sure": "すれ",
+        "dekiru": "できる"
+      },
+      "endings": {
+        "forms": {
+          "mizen": {
+            "form": {
+              "stemForm": "shi",
+              "stemOnly": true
+            }
+          },
+          "renyo1": {
+            "form": {
+              "stemForm": "shi",
+              "stemOnly": true
+            }
+          },
+          "renyo2": {
+            "form": {
+              "stemForm": "shi",
+              "stemOnly": true
+            }
+          },
+          "shusi": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "rentai": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "katei": {
+            "form": {
+              "stemForm": "sure",
+              "stemOnly": true
+            }
+          },
+          "meirei": {
+            "form": {
+              "stemForm": "shi",
+              "suffix": "ろ"
+            }
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": {
+              "stemForm": "shi",
+              "suffix": "ます"
+            }
+          },
+          "nai": {
+            "form": {
+              "stemForm": "shi",
+              "suffix": "ない"
+            }
+          },
+          "ta": {
+            "form": {
+              "stemForm": "shi",
+              "suffix": "た"
+            }
+          },
+          "te": {
+            "form": {
+              "stemForm": "shi",
+              "suffix": "て"
+            }
+          },
+          "ishi": {
+            "form": {
+              "stemForm": "shi",
+              "suffix": "よう"
+            }
+          },
+          "kano": {
+            "form": {
+              "stemForm": "dekiru",
+              "stemOnly": true
+            }
+          },
+          "ukemi": {
+            "form": {
+              "stemForm": "sa",
+              "suffix": "れる"
+            }
+          },
+          "shieki": {
+            "form": {
+              "stemForm": "sa",
+              "suffix": "せる"
+            }
+          },
+          "shiekiukemi": {
+            "form": {
+              "stemForm": "sa",
+              "suffix": "せられる"
+            }
+          },
+          "kateiba": {
+            "form": {
+              "stemForm": "sure",
+              "suffix": "ば"
+            }
+          }
+        }
+      },
+      "expect": {
+        "forms": {
+          "mizen": {
+            "form": "し"
+          },
+          "renyo1": {
+            "form": "し"
+          },
+          "renyo2": {
+            "form": "し"
+          },
+          "shusi": {
+            "form": "する"
+          },
+          "rentai": {
+            "form": "する"
+          },
+          "katei": {
+            "form": "すれ"
+          },
+          "meirei": {
+            "form": "しろ"
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": "します"
+          },
+          "nai": {
+            "form": "しない"
+          },
+          "ta": {
+            "form": "した"
+          },
+          "te": {
+            "form": "して"
+          },
+          "ishi": {
+            "form": "しよう"
+          },
+          "kano": {
+            "form": "できる"
+          },
+          "ukemi": {
+            "form": "される"
+          },
+          "shieki": {
+            "form": "させる"
+          },
+          "shiekiukemi": {
+            "form": "させられる"
+          },
+          "kateiba": {
+            "form": "すれば"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "ja-verb-karu",
+    "title": "<bdi>カ変（来る）</bdi>",
+    "inflect": "conj",
+    "items": [
+      {
+        "id": "ja-verb-karu-forms",
+        "title": "活用形",
+        "tables": [
+          {
+            "caption": "活用形",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "词形",
+              "主要接续"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "来（<bdi>こ</bdi>）",
+                "<bdi>ない・よう・られる・させる</bdi>"
+              ],
+              [
+                "連用形1",
+                "来（<bdi>き</bdi>）",
+                "<bdi>ます・たい</bdi>"
+              ],
+              [
+                "連用形2（音便）",
+                "来（<bdi>き</bdi>）",
+                "<bdi>て・た</bdi>（与連用形1 同形）"
+              ],
+              [
+                "終止形（辞書形）",
+                "<bdi>来る（くる）</bdi>",
+                "结句"
+              ],
+              [
+                "連体形",
+                "<bdi>来る（くる）</bdi>",
+                "修饰名词"
+              ],
+              [
+                "已然形（仮定）",
+                "<bdi>来れ（くれ）</bdi>",
+                "<bdi>ば</bdi>"
+              ],
+              [
+                "命令形",
+                "<bdi>来い（こい）</bdi>",
+                "命令"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      },
+      {
+        "id": "ja-verb-karu-compound",
+        "title": "合成形式",
+        "tables": [
+          {
+            "caption": "合成形式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "词形",
+              "基于"
+            ],
+            "rows": [
+              [
+                "<bdi>ます形</bdi>（叮咛）",
+                "<bdi>来ます（きます）</bdi>",
+                "連用形1 + <bdi>ます</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "<bdi>来ない（こない）</bdi>",
+                "未然形 + <bdi>ない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "<bdi>来た（きた）</bdi>",
+                "連用形2 + <bdi>た</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "<bdi>来て（きて）</bdi>",
+                "連用形2 + <bdi>て</bdi>"
+              ],
+              [
+                "意志形",
+                "<bdi>来よう（こよう）</bdi>",
+                "未然形 + <bdi>よう</bdi>"
+              ],
+              [
+                "可能形",
+                "<bdi>来られる（口语 来れる）</bdi>",
+                "未然形 + <bdi>られる</bdi>"
+              ],
+              [
+                "受身形",
+                "<bdi>来られる（こられる）</bdi>",
+                "未然形 + <bdi>られる</bdi>"
+              ],
+              [
+                "使役形",
+                "<bdi>来させる（こさせる）</bdi>",
+                "未然形 + <bdi>させる</bdi>"
+              ],
+              [
+                "使役受身形",
+                "<bdi>来させられる（こさせられる）</bdi>",
+                "未然形 + <bdi>させられる</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "<bdi>来れば（くれば）</bdi>",
+                "已然形 + <bdi>ば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ]
+      }
+    ],
+    "notes": "汉字写作「来」、读音随活用形变化：<bdi>来ます（きます）・来ない（こない）・来れば（くれば）・来い（こい）。这里按汉字写法生成；若以假名书写（くる</bdi>），读音不规则，请直接填表。",
+    "derive": {
+      "pos": "verb",
+      "stemExample": "来る",
+      "headwordExample": "来る",
+      "parts": [],
+      "note": "",
+      "stemForms": {
+        "base": {
+          "from": "headword",
+          "rules": []
+        },
+        "stem": {
+          "from": "base",
+          "rules": [
+            {
+              "pattern": "る$",
+              "replace": ""
+            }
+          ]
+        },
+        "katei": {
+          "from": "stem",
+          "rules": [
+            {
+              "pattern": "$",
+              "replace": "れ"
+            }
+          ]
+        }
+      },
+      "endings": {
+        "forms": {
+          "mizen": {
+            "form": {
+              "stemForm": "stem",
+              "stemOnly": true
+            }
+          },
+          "renyo1": {
+            "form": {
+              "stemForm": "stem",
+              "stemOnly": true
+            }
+          },
+          "renyo2": {
+            "form": {
+              "stemForm": "stem",
+              "stemOnly": true
+            }
+          },
+          "shusi": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "rentai": {
+            "form": {
+              "stemOnly": true
+            }
+          },
+          "katei": {
+            "form": {
+              "stemForm": "katei",
+              "stemOnly": true
+            }
+          },
+          "meirei": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "い"
+            }
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "ます"
+            }
+          },
+          "nai": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "ない"
+            }
+          },
+          "ta": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "た"
+            }
+          },
+          "te": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "て"
+            }
+          },
+          "ishi": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "よう"
+            }
+          },
+          "kano": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "られる"
+            }
+          },
+          "ukemi": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "られる"
+            }
+          },
+          "shieki": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "させる"
+            }
+          },
+          "shiekiukemi": {
+            "form": {
+              "stemForm": "stem",
+              "suffix": "させられる"
+            }
+          },
+          "kateiba": {
+            "form": {
+              "stemForm": "katei",
+              "suffix": "ば"
+            }
+          }
+        }
+      },
+      "expect": {
+        "forms": {
+          "mizen": {
+            "form": "来"
+          },
+          "renyo1": {
+            "form": "来"
+          },
+          "renyo2": {
+            "form": "来"
+          },
+          "shusi": {
+            "form": "来る"
+          },
+          "rentai": {
+            "form": "来る"
+          },
+          "katei": {
+            "form": "来れ"
+          },
+          "meirei": {
+            "form": "来い"
+          }
+        },
+        "compound": {
+          "masu": {
+            "form": "来ます"
+          },
+          "nai": {
+            "form": "来ない"
+          },
+          "ta": {
+            "form": "来た"
+          },
+          "te": {
+            "form": "来て"
+          },
+          "ishi": {
+            "form": "来よう"
+          },
+          "kano": {
+            "form": "来られる"
+          },
+          "ukemi": {
+            "form": "来られる"
+          },
+          "shieki": {
+            "form": "来させる"
+          },
+          "shiekiukemi": {
+            "form": "来させられる"
+          },
+          "kateiba": {
+            "form": "来れば"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "ja-verb-secondary",
+    "title": "派生动词",
+    "items": [
+      {
+        "id": "ja-verb-transitivity",
+        "title": "自他动词对应",
+        "tables": [
+          {
+            "caption": "常见的自他对应模式",
+            "role": "pattern",
+            "headers": [
+              "模式",
+              "自动词",
+              "他动词",
+              "说明"
+            ],
+            "rows": [
+              [
+                "<bdi>-ある / -える</bdi>",
+                "<bdi>上がる（あがる）</bdi>",
+                "<bdi>上げる（あげる）</bdi>",
+                "自动词 -<bdi>ある、他动词 -える</bdi>，最常见"
+              ],
+              [
+                "<bdi>-る / -す</bdi>",
+                "<bdi>流れる（ながれる）</bdi>",
+                "<bdi>流す（ながす）</bdi>",
+                "自动词 -<bdi>える / -る、他动词 -す</bdi>"
+              ],
+              [
+                "<bdi>-れる / -す</bdi>",
+                "<bdi>倒れる（たおれる）</bdi>",
+                "<bdi>倒す（たおす）</bdi>",
+                "同上"
+              ],
+              [
+                "<bdi>-く / -ける</bdi>",
+                "<bdi>届く（とどく）</bdi>",
+                "<bdi>届ける（とどける）</bdi>",
+                "自动词 -<bdi>く、他动词 -ける</bdi>"
+              ],
+              [
+                "<bdi>-える / -やす</bdi>",
+                "<bdi>増える（ふえる）</bdi>",
+                "<bdi>増やす（ふやす）</bdi>",
+                "自动词 -<bdi>える、他动词 -やす</bdi>"
+              ],
+              [
+                "同形",
+                "<bdi>開く（ひらく）</bdi>",
+                "<bdi>開く（ひらく）</bdi>",
+                "自他同形，靠助词与上下文区分"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "notes": "自他动词是<strong>两个不同的词</strong>，不是同一个词的活用。"
+      },
+      {
+        "id": "ja-verb-keigo",
+        "title": "敬语动词（<bdi>自谦・尊他</bdi>）",
+        "notes": "自谦语降低自己一方的动作，尊他语抬高对方或第三者的动作；没有专用敬语动词的形式用「-」表示，改用「<bdi>お / ご + 动词词干 + する / になる</bdi>」等句式。",
+        "tables": [
+          {
+            "caption": "常见的敬语动词",
+            "role": "pattern",
+            "headers": [
+              "普通动词",
+              "自谦语",
+              "尊他语"
+            ],
+            "rows": [
+              [
+                "<bdi>行く・来る・いる</bdi>",
+                "<bdi>参る（まいる）・伺う（うかがう）・おる</bdi>",
+                "<bdi>いらっしゃる</bdi>"
+              ],
+              [
+                "<bdi>言う</bdi>",
+                "<bdi>申す（もうす）・申し上げる</bdi>",
+                "<bdi>おっしゃる</bdi>"
+              ],
+              [
+                "<bdi>見る</bdi>",
+                "<bdi>拝見する（はいけんする）</bdi>",
+                "<bdi>ご覧になる（ごらんになる）</bdi>"
+              ],
+              [
+                "<bdi>食べる・飲む</bdi>",
+                "<bdi>いただく</bdi>",
+                "<bdi>召し上がる（めしあがる）</bdi>"
+              ],
+              [
+                "<bdi>する</bdi>",
+                "<bdi>いたす</bdi>",
+                "<bdi>なさる</bdi>"
+              ],
+              [
+                "<bdi>知る・知っている</bdi>",
+                "<bdi>存じる（ぞんじる）</bdi>",
+                "<bdi>ご存じだ（ごぞんじだ）</bdi>"
+              ],
+              [
+                "<bdi>会う</bdi>",
+                "<bdi>お目にかかる</bdi>",
+                {
+                  "text": "-",
+                  "disabled": true
+                }
+              ],
+              [
+                "<bdi>聞く</bdi>",
+                "<bdi>伺う（うかがう）</bdi>",
+                {
+                  "text": "-",
+                  "disabled": true
+                }
+              ],
+              [
+                "<bdi>くれる</bdi>",
+                {
+                  "text": "-",
+                  "disabled": true
+                },
+                "<bdi>くださる</bdi>"
+              ],
+              [
+                "<bdi>寝る</bdi>",
+                {
+                  "text": "-",
+                  "disabled": true
+                },
+                "<bdi>お休みになる</bdi>"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

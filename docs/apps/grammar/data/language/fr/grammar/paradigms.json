@@ -1,0 +1,503 @@
+{
+  "noun": {
+    "fields": [
+      {
+        "key": "gender",
+        "label": "语法性",
+        "multi": true,
+        "declensionCells": true,
+        "options": [
+          {
+            "value": "m",
+            "label": "阳性"
+          },
+          {
+            "value": "f",
+            "label": "阴性"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "key": "main",
+        "title": "数与性",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "m",
+            "label": "阳性"
+          },
+          {
+            "key": "f",
+            "label": "阴性"
+          }
+        ]
+      }
+    ]
+  },
+  "adj": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "性数变化",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "m",
+            "label": "阳性"
+          },
+          {
+            "key": "f",
+            "label": "阴性"
+          }
+        ]
+      }
+    ]
+  },
+  "participle": {
+    "extends": "adj"
+  },
+  "verb": {
+    "fields": [
+      {
+        "key": "aux",
+        "label": "复合时态助动词",
+        "required": true,
+        "options": [
+          {
+            "value": "avoir",
+            "label": "avoir"
+          },
+          {
+            "value": "être",
+            "label": "être"
+          }
+        ],
+        "multi": true
+      }
+    ],
+    "tables": [
+      {
+        "key": "ind",
+        "title": "直陈式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时"
+          },
+          {
+            "key": "impf",
+            "label": "未完成过去时"
+          },
+          {
+            "key": "psimple",
+            "label": "简单过去时"
+          },
+          {
+            "key": "fut",
+            "label": "简单将来时"
+          }
+        ]
+      },
+      {
+        "key": "subj",
+        "title": "虚拟式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时"
+          },
+          {
+            "key": "impf",
+            "label": "未完成过去时"
+          }
+        ]
+      },
+      {
+        "key": "cond",
+        "title": "条件式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时"
+          }
+        ]
+      },
+      {
+        "key": "impr",
+        "title": "命令式",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时",
+            "disabled": [
+              "1sg",
+              "3sg",
+              "3pl"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "inf",
+        "title": "不定式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在时"
+          }
+        ]
+      },
+      {
+        "key": "ptcp",
+        "title": "分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres",
+            "label": "现在分词"
+          },
+          {
+            "key": "passe",
+            "label": "过去分词"
+          }
+        ]
+      }
+    ]
+  },
+  "pron": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "p12",
+        "title": "第一二人称",
+        "anchors": [
+          "fr-pron-1st-2nd"
+        ],
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "subj",
+            "label": "主语"
+          },
+          {
+            "key": "do",
+            "label": "直接宾语"
+          },
+          {
+            "key": "io",
+            "label": "间接宾语"
+          },
+          {
+            "key": "refl",
+            "label": "自反"
+          },
+          {
+            "key": "stressed",
+            "label": "重读"
+          }
+        ]
+      },
+      {
+        "key": "p3",
+        "title": "第三人称",
+        "anchors": [
+          "fr-pron-3rd"
+        ],
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "subj",
+            "label": "主语"
+          },
+          {
+            "key": "do",
+            "label": "直接宾语"
+          },
+          {
+            "key": "io",
+            "label": "间接宾语"
+          },
+          {
+            "key": "refl",
+            "label": "自反"
+          },
+          {
+            "key": "stressed",
+            "label": "重读"
+          }
+        ]
+      },
+      {
+        "key": "poss",
+        "title": "物主（限定词）",
+        "anchors": [
+          "fr-pron-possessive"
+        ],
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "p1s",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "p2s",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "p3s",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "p1p",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "p2p",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "p3p",
+            "label": "第三人称复数"
+          }
+        ]
+      },
+      {
+        "key": "poss_free",
+        "title": "物主（独立使用）",
+        "anchors": [
+          "fr-pron-possessive"
+        ],
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "p1s",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "p2s",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "p3s",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "p1p",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "p2p",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "p3p",
+            "label": "第三人称复数"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1583 @@
+[
+  {
+    "id": "sa-sandhi",
+    "title": "连声",
+    "items": [
+      {
+        "id": "sa-sandhi-types",
+        "title": "内部连声与外部连声",
+        "tables": [
+          {
+            "caption": "两类连声",
+            "role": "pattern",
+            "headers": [
+              "类别",
+              "范围",
+              "例"
+            ],
+            "rows": [
+              [
+                "内部连声（内部）",
+                "词干 + 词尾、前缀 + 词根",
+                "<bdi>काम + इन → कामेन</bdi>"
+              ],
+              [
+                "外部连声（外部）",
+                "词与词之间",
+                "<bdi>तत् + अपि → तद् अपि</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "说明",
+            "role": "pattern",
+            "headers": [
+              "要点"
+            ],
+            "rows": [
+              [
+                "本工具只处理词内连声（生成变格变位表时的词干与词尾接合）。词间连声见例句朗读需要，暂不自动处理。"
+              ]
+            ]
+          }
+        ],
+        "notes": "<strong>内部连声</strong>发生在词内部（词干 + 词尾、前缀 + 词根），<strong>外部连声</strong>发生在词与词之间。两者规则基本相同，只是外部连声还会先做词尾连声（padasandhi）。"
+      },
+      {
+        "id": "sa-sandhi-pada",
+        "title": "词尾连声（padasandhi）",
+        "tables": [
+          {
+            "caption": "允许的词尾辅音",
+            "role": "pattern",
+            "headers": [
+              "允许",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>क् ट् त् प् ञ् ण् न् म् ल् ः</bdi>",
+                "<bdi>राट्</bdi>、<bdi>भवत्</bdi>、<bdi>फलम्</bdi>、<bdi>पुनः</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "浊塞音清化",
+            "role": "pattern",
+            "headers": [
+              "词尾",
+              "变为",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>द्</bdi>",
+                "<bdi>त्</bdi>",
+                "<bdi>पाद् → पात्</bdi>"
+              ],
+              [
+                "<bdi>च्</bdi>",
+                "<bdi>क्</bdi>",
+                "<bdi>त्वच् → त्वक्</bdi>"
+              ],
+              [
+                "<bdi>ज्</bdi>",
+                "<bdi>क्</bdi>",
+                "<bdi>वणिज् → वणिक्</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "词尾辅音对应表",
+            "role": "pattern",
+            "headers": [
+              "原词尾",
+              "停顿式",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>क् / ख् / ग् / घ्</bdi>",
+                "<bdi>क्</bdi>",
+                "<bdi>राज् → राट्</bdi>（<bdi>ज् → ट्</bdi>）"
+              ],
+              [
+                "<bdi>च् / छ् / ज् / झ्</bdi>",
+                "<bdi>क्</bdi>（部分为 <bdi>ट्</bdi>）",
+                "<bdi>त्वच् → त्वक्</bdi>"
+              ],
+              [
+                "<bdi>ट् / ठ् / ड् / ढ्</bdi>",
+                "<bdi>ट्</bdi>",
+                "—"
+              ],
+              [
+                "<bdi>त् / थ् / द् / ध्</bdi>",
+                "<bdi>त्</bdi>",
+                "<bdi>भवत् → भवत्</bdi>"
+              ],
+              [
+                "<bdi>प् / फ् / ब् / भ्</bdi>",
+                "<bdi>प्</bdi>",
+                "—"
+              ],
+              [
+                "<bdi>श् / ष् / स् / र्</bdi>",
+                "<bdi>ः</bdi>",
+                "<bdi>मनस् → मनः</bdi>、<bdi>पुनर् → पुनः</bdi>"
+              ],
+              [
+                "<bdi>म्</bdi>",
+                "<bdi>ं</bdi>",
+                "<bdi>फलम् → फलं</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          }
+        ],
+        "notes": "词尾连声（padasandhi）处理「一个词单独念」时的词尾变化：只有上表那几个辅音能出现在词尾，其余一律按对应表改写。这一层与元音连声 / 辅音连声是叠加的：先做词尾连声，再与下一词连声。"
+      },
+      {
+        "id": "sa-sandhi-vowel",
+        "title": "元音连声（<bdi>अच्</bdi> 连声）",
+        "tables": [
+          {
+            "caption": "同类元音",
+            "role": "pattern",
+            "headers": [
+              "前",
+              "后",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>अ / आ</bdi>",
+                "<bdi>आ</bdi>",
+                "<bdi>न + अपि → नापि</bdi>"
+              ],
+              [
+                "<bdi>इ / ई</bdi>",
+                "<bdi>इ / ई</bdi>",
+                "<bdi>ई</bdi>",
+                "<bdi>हि + इति → हीति</bdi>"
+              ],
+              [
+                "<bdi>उ / ऊ</bdi>",
+                "<bdi>उ / ऊ</bdi>",
+                "<bdi>ऊ</bdi>",
+                "<bdi>साधु + उक्तम् → साधूक्तम्</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "异类元音：二合元音",
+            "role": "pattern",
+            "headers": [
+              "前",
+              "后",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>इ / ई</bdi>",
+                "<bdi>ए</bdi>",
+                "<bdi>च + इह → चेह</bdi>"
+              ],
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>उ / ऊ</bdi>",
+                "<bdi>ओ</bdi>",
+                "<bdi>च + उक्तम् → चोक्तम्</bdi>"
+              ],
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>ऋ</bdi>",
+                "<bdi>अर्</bdi>",
+                "<bdi>च + ऋषि → चार्षि</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "双元音前：三合元音",
+            "role": "pattern",
+            "headers": [
+              "前",
+              "后",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>ए / ऐ</bdi>",
+                "<bdi>ऐ</bdi>",
+                "<bdi>च + एति → चैति</bdi>"
+              ],
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>ओ / औ</bdi>",
+                "<bdi>औ</bdi>",
+                "<bdi>सा + ओषधिः → सौषधिः</bdi>"
+              ],
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>ऐ</bdi>（第一元音为 <bdi>आ</bdi>）",
+                "<bdi>ऐ</bdi>",
+                "<bdi>सेना + ऐश्वर्यम् → सेनैश्वर्यम्</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "半元音化",
+            "role": "pattern",
+            "headers": [
+              "前",
+              "后",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>इ / ई</bdi>",
+                "其它元音",
+                "<bdi>य्</bdi>",
+                "<bdi>यदि + अपि → यद्यपि</bdi>"
+              ],
+              [
+                "<bdi>उ / ऊ</bdi>",
+                "其它元音",
+                "<bdi>व्</bdi>",
+                "<bdi>भवतु + एवम् → भवत्वेवम्</bdi>"
+              ],
+              [
+                "<bdi>ऋ</bdi>",
+                "其它元音",
+                "<bdi>र्</bdi>",
+                "<bdi>होतृ + ओषधिः → होत्रोषधिः</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "<bdi>अवग्रह</bdi>（<bdi>ऽ</bdi>）与 pragṛhya",
+            "role": "pattern",
+            "headers": [
+              "前",
+              "后",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>ए / ओ</bdi>",
+                "<bdi>अ</bdi>",
+                "<bdi>ए / ओ + ऽ</bdi>",
+                "<bdi>वने + अपि → वनेऽपि</bdi>；<bdi>सो + अपि → सोऽपि</bdi>"
+              ],
+              [
+                "<bdi>ए / ओ</bdi>",
+                "其它元音",
+                "短化为 <bdi>अ</bdi>（保留元音间隔）",
+                "<bdi>प्रभो + एहि → प्रभ एहि</bdi>"
+              ],
+              [
+                "<bdi>ऐ</bdi>",
+                "任何元音",
+                "<bdi>आ</bdi>（保留元音间隔）",
+                "<bdi>कस्मै + अपि → कस्मा अपि</bdi>"
+              ],
+              [
+                "<bdi>औ</bdi>",
+                "任何元音",
+                "<bdi>आव्</bdi>",
+                "<bdi>देवौ + अपि → देवावपि</bdi>"
+              ],
+              [
+                "pragṛhya（双数词尾 <bdi>ई / ऊ / ए</bdi>、感叹词）",
+                "任何元音",
+                "不变",
+                "<bdi>हे + अश्व → हे अश्व</bdi>；<bdi>फले + अपि → फले अपि</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          }
+        ],
+        "notes": "元音连声只看「前一词的末元音 + 后一词的首元音」。<bdi>अ / आ</bdi> 之后接异类元音时给二合元音（<bdi>ए / ओ / अर्</bdi>），接双元音时给 三合元音（<bdi>ऐ / औ</bdi>）；<bdi>इ / उ / ऋ</bdi> 之后接异类元音时先变成半元音 <bdi>य् / व् / र्</bdi>。"
+      },
+      {
+        "id": "sa-sandhi-visarga",
+        "title": "止声连声（visarga）",
+        "tables": [
+          {
+            "caption": "-<bdi>अः</bdi> 之后",
+            "role": "pattern",
+            "headers": [
+              "后接",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "浊辅音（含 <bdi>ह</bdi>）",
+                "<bdi>ओ</bdi>",
+                "<bdi>देवः + गच्छति → देवो गच्छति</bdi>"
+              ],
+              [
+                "<bdi>अ</bdi>",
+                "<bdi>ओ + ऽ</bdi>",
+                "<bdi>देवः + अत्र → देवोऽत्र</bdi>"
+              ],
+              [
+                "其它元音 / 双元音",
+                "去掉 <bdi>ः</bdi>",
+                "<bdi>देवः + एव → देव एव</bdi>"
+              ],
+              [
+                "清辅音（<bdi>क ख प फ श ष स</bdi>）",
+                "不变",
+                "<bdi>देवः + कुत्र → देवः कुत्र</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "-<bdi>आः</bdi> 之后",
+            "role": "pattern",
+            "headers": [
+              "后接",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "元音 / 双元音 / 浊辅音",
+                "去掉 <bdi>ः</bdi>",
+                "<bdi>देवाः + विशन्ति → देवा विशन्ति</bdi>；<bdi>देवाः + अपि → देवा अपि</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "词尾 -<bdi>स् / -र्</bdi>",
+            "role": "pattern",
+            "headers": [
+              "后接",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "清辅音（<bdi>क ख प फ श ष स</bdi>）或停顿",
+                "<bdi>ः</bdi>",
+                "<bdi>पुनर् + कुत्र → पुनः कुत्र</bdi>"
+              ],
+              [
+                "<bdi>च छ ट ठ त थ</bdi>",
+                "同部位咝音（<bdi>श् / ष् / स्</bdi>）",
+                "<bdi>नृपः + चरति → नृपश्चरति</bdi>；<bdi>नृपः + तिष्ठति → नृपस्तीष्ठति</bdi>"
+              ],
+              [
+                "<bdi>अ / आ</bdi> 以外的元音之后的 <bdi>स् / र्</bdi> + 元音 / 浊辅音",
+                "<bdi>र्</bdi>",
+                "<bdi>पुत्रयोः + हि → पुत्रयोर्हि</bdi>；<bdi>गच्छेः + अपि → गच्छेरपि</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          }
+        ],
+        "notes": "止声（visarga, ः）来自原来的 <bdi>-s / -r</bdi>。它在清辅音前与停顿处保留，在浊音前变成 <bdi>ओ</bdi> 或直接消失。"
+      },
+      {
+        "id": "sa-sandhi-consonant",
+        "title": "辅音连声",
+        "tables": [
+          {
+            "caption": "词尾 -<bdi>त्</bdi>",
+            "role": "pattern",
+            "headers": [
+              "后接",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "浊音（元音 / 浊辅音 / <bdi>ह</bdi>）",
+                "<bdi>द्</bdi>（<bdi>ह → ध्</bdi>）",
+                "<bdi>एतत् + हि → एतद्धि</bdi>；<bdi>अदत् + एव → अददेव</bdi>"
+              ],
+              [
+                "<bdi>च छ श</bdi>",
+                "<bdi>च्</bdi>（<bdi>श → च्छ</bdi>）",
+                "<bdi>तस्मात् + च → तस्माच्च</bdi>；<bdi>नृपात् + शमः → नृपाच्छमः</bdi>"
+              ],
+              [
+                "<bdi>ज</bdi>",
+                "<bdi>ज्</bdi>",
+                "<bdi>तस्मात् + जयति → तस्माज्जयति</bdi>"
+              ],
+              [
+                "鼻音",
+                "<bdi>न्</bdi>",
+                "<bdi>तस्मात् + न → तस्मान्न</bdi>"
+              ],
+              [
+                "<bdi>ल</bdi>",
+                "<bdi>ल्</bdi>",
+                "<bdi>तस्मात् + लोकः → तस्माल्लोकः</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "词尾 -<bdi>न्</bdi>",
+            "role": "pattern",
+            "headers": [
+              "后接",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>ज / श</bdi>",
+                "<bdi>ञ्</bdi>（<bdi>श → च्छ</bdi>）",
+                "<bdi>देवान् + जयति → देवाञ्जयति</bdi>；<bdi>सर्वान् + शूद्रान् → सर्वाञ्छूद्रान्</bdi>"
+              ],
+              [
+                "<bdi>च छ त थ</bdi>",
+                "<bdi>अनुस्वारं</bdi> + 同部位咝音",
+                "<bdi>देवान् + च → देवांश्च</bdi>；<bdi>नृपान् + तत्र → नृपांस्तत्र</bdi>"
+              ],
+              [
+                "元音（短元音之后）",
+                "双写 <bdi>न्न्</bdi>",
+                "<bdi>तिष्ठन् + अत्र → तिष्ठन्नत्र</bdi>"
+              ],
+              [
+                "<bdi>ल</bdi>",
+                "<bdi>ंल्</bdi>（或 <bdi>ंल्</bdi>）",
+                "<bdi>तान् + लोकान् → तांल्लोकान्</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "<bdi>णत्व</bdi> 与 <bdi>षत्व</bdi>",
+            "role": "pattern",
+            "headers": [
+              "条件",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>ऋ ॠ र ष</bdi> 之后的 <bdi>न</bdi>（同词内，后接元音或 <bdi>न म त व</bdi>，且中间没有腭音 / 卷舌音 / 齿音）",
+                "<bdi>ण</bdi>",
+                "grāmeṇa、śūdrāṇām、manuṣyāṇām（但 rathena）"
+              ],
+              [
+                "<bdi>अ / आ</bdi> 以外的元音或 <bdi>क र</bdi> 之后的 <bdi>स</bdi>（非词末、后面不是 <bdi>र</bdi>）",
+                "<bdi>ष</bdi>",
+                "deveṣu、tiṣṭhati（但 senāsu）"
+              ]
+            ],
+            "lang": "sa"
+          }
+        ],
+        "notes": "连声里 <bdi>छ</bdi> 不能直接跟在元音后，一律写成 <bdi>च्छ</bdi>（如 tacchīla）。"
+      },
+      {
+        "id": "sa-sandhi-special",
+        "title": "特殊规则",
+        "tables": [
+          {
+            "caption": "<bdi>सः</bdi> 与增音",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "代词 <bdi>सः</bdi>（阳性单数主格）在辅音前",
+                "去掉 <bdi>ः</bdi>",
+                "<bdi>सः गच्छति → स गच्छति</bdi>"
+              ],
+              [
+                "代词 <bdi>सः</bdi> 在元音前",
+                "照常连声",
+                "<bdi>सः अगच्छत् → सोऽगच्छत्</bdi>"
+              ],
+              [
+                "增音 <bdi>अ-</bdi> 加在 <bdi>इ / उ / ऋ</bdi> 开头的词根前",
+                "三合元音（<bdi>ऐ / औ / आर्</bdi>）",
+                "<bdi>इच्छति → ऐच्छत्</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "送气音（Grassmann 定律）",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "两个送气音同处一个音节",
+                "第一个失去送气",
+                "<bdi>बुध् + त → बुद्ध</bdi>；<bdi>लभ् + त → लब्ध</bdi>"
+              ],
+              [
+                "后接咝音",
+                "第二个的送气先「让」给第一个",
+                "duh + si → dhokṣi（但 duh + tha → dugdha）"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "词尾 -<bdi>क् / -ट्</bdi>",
+            "role": "pattern",
+            "headers": [
+              "后接",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "鼻音",
+                "<bdi>ट् → ण्</bdi>，<bdi>क् → ञ्</bdi>",
+                "<bdi>विराट् + न → विराण्न</bdi>；<bdi>वाक् + मे → वाञ्मे</bdi>"
+              ],
+              [
+                "浊音",
+                "<bdi>ट् → ड्</bdi>，<bdi>क् → ग्</bdi>",
+                "<bdi>वणिक् + ददाति → वणिग्ददाति</bdi>；<bdi>हव्यवाट् + आगच्छति → हव्यवाडागच्छति</bdi>"
+              ],
+              [
+                "<bdi>ह</bdi>",
+                "<bdi>ड्ढ् / ग्घ्</bdi>",
+                "<bdi>प्रावृट् + हि → प्रावृड्ढि</bdi>；<bdi>वणिक् + हि → वणिग्घि</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "齿音卷舌",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "结果",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>ष्</bdi> 后紧跟 <bdi>त</bdi>",
+                "<bdi>ट</bdi>",
+                "<bdi>द्विष् + त → द्विष्ट</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          }
+        ],
+        "notes": "这些规则在词干接词尾、词与词之间都会用到；生成变格变位表时由连声引擎自动套用。"
+      },
+      {
+        "id": "sa-sandhi-chart",
+        "title": "连声速查表",
+        "tables": [
+          {
+            "caption": "元音连声矩阵（前词末 × 后词首）",
+            "role": "pattern",
+            "headers": [
+              "前 \\ 后",
+              "<bdi>अ</bdi>",
+              "<bdi>आ</bdi>",
+              "<bdi>इ</bdi>",
+              "<bdi>ई</bdi>",
+              "<bdi>उ</bdi>",
+              "<bdi>ऊ</bdi>",
+              "<bdi>ऋ</bdi>",
+              "<bdi>ए</bdi>",
+              "<bdi>ऐ</bdi>",
+              "<bdi>ओ</bdi>",
+              "<bdi>औ</bdi>"
+            ],
+            "rows": [
+              [
+                "<bdi>अ</bdi>",
+                "<bdi>आ</bdi>",
+                "<bdi>आ</bdi>",
+                "<bdi>ए</bdi>",
+                "<bdi>ए</bdi>",
+                "<bdi>ओ</bdi>",
+                "<bdi>ओ</bdi>",
+                "<bdi>अर्</bdi>",
+                "<bdi>ऐ</bdi>",
+                "<bdi>ऐ</bdi>",
+                "<bdi>औ</bdi>",
+                "<bdi>औ</bdi>"
+              ],
+              [
+                "<bdi>आ</bdi>",
+                "<bdi>आ</bdi>",
+                "<bdi>आ</bdi>",
+                "<bdi>ए</bdi>",
+                "<bdi>ए</bdi>",
+                "<bdi>ओ</bdi>",
+                "<bdi>ओ</bdi>",
+                "<bdi>अर्</bdi>",
+                "<bdi>ऐ</bdi>",
+                "<bdi>ऐ</bdi>",
+                "<bdi>औ</bdi>",
+                "<bdi>औ</bdi>"
+              ],
+              [
+                "<bdi>इ</bdi>",
+                "<bdi>य् अ</bdi>",
+                "<bdi>य् आ</bdi>",
+                "<bdi>ई</bdi>",
+                "<bdi>ई</bdi>",
+                "<bdi>य् उ</bdi>",
+                "<bdi>य् ऊ</bdi>",
+                "<bdi>य् ऋ</bdi>",
+                "<bdi>य् ए</bdi>",
+                "<bdi>य् ऐ</bdi>",
+                "<bdi>य् ओ</bdi>",
+                "<bdi>य् औ</bdi>"
+              ],
+              [
+                "<bdi>ई</bdi>",
+                "<bdi>य् अ</bdi>",
+                "<bdi>य् आ</bdi>",
+                "<bdi>ई</bdi>",
+                "<bdi>ई</bdi>",
+                "<bdi>य् उ</bdi>",
+                "<bdi>य् ऊ</bdi>",
+                "<bdi>य् ऋ</bdi>",
+                "<bdi>य् ए</bdi>",
+                "<bdi>य् ऐ</bdi>",
+                "<bdi>य् ओ</bdi>",
+                "<bdi>य् औ</bdi>"
+              ],
+              [
+                "<bdi>उ</bdi>",
+                "<bdi>व् अ</bdi>",
+                "<bdi>व् आ</bdi>",
+                "<bdi>व् इ</bdi>",
+                "<bdi>व् ई</bdi>",
+                "<bdi>ऊ</bdi>",
+                "<bdi>ऊ</bdi>",
+                "<bdi>व् ऋ</bdi>",
+                "<bdi>व् ए</bdi>",
+                "<bdi>व् ऐ</bdi>",
+                "<bdi>व् ओ</bdi>",
+                "<bdi>व् औ</bdi>"
+              ],
+              [
+                "<bdi>ऊ</bdi>",
+                "<bdi>व् अ</bdi>",
+                "<bdi>व् आ</bdi>",
+                "<bdi>व् इ</bdi>",
+                "<bdi>व् ई</bdi>",
+                "<bdi>ऊ</bdi>",
+                "<bdi>ऊ</bdi>",
+                "<bdi>व् ऋ</bdi>",
+                "<bdi>व् ए</bdi>",
+                "<bdi>व् ऐ</bdi>",
+                "<bdi>व् ओ</bdi>",
+                "<bdi>व् औ</bdi>"
+              ],
+              [
+                "<bdi>ऋ</bdi>",
+                "<bdi>र् अ</bdi>",
+                "<bdi>र् आ</bdi>",
+                "<bdi>र् इ</bdi>",
+                "<bdi>र् ई</bdi>",
+                "<bdi>र् उ</bdi>",
+                "<bdi>र् ऊ</bdi>",
+                "<bdi>ॠ</bdi>",
+                "<bdi>र् ए</bdi>",
+                "<bdi>र् ऐ</bdi>",
+                "<bdi>र् ओ</bdi>",
+                "<bdi>र् औ</bdi>"
+              ],
+              [
+                "<bdi>ए</bdi>",
+                "<bdi>एऽ</bdi>",
+                "<bdi>ए आ</bdi>",
+                "<bdi>ए इ</bdi>",
+                "<bdi>ए ई</bdi>",
+                "<bdi>ए उ</bdi>",
+                "<bdi>ए ऊ</bdi>",
+                "<bdi>ए ऋ</bdi>",
+                "<bdi>ए ए</bdi>",
+                "<bdi>ए ऐ</bdi>",
+                "<bdi>ए ओ</bdi>",
+                "<bdi>ए औ</bdi>"
+              ],
+              [
+                "<bdi>ओ</bdi>",
+                "<bdi>ओऽ</bdi>",
+                "<bdi>ओ आ</bdi>",
+                "<bdi>ओ इ</bdi>",
+                "<bdi>ओ ई</bdi>",
+                "<bdi>ओ उ</bdi>",
+                "<bdi>ओ ऊ</bdi>",
+                "<bdi>ओ ऋ</bdi>",
+                "<bdi>ओ ए</bdi>",
+                "<bdi>ओ ऐ</bdi>",
+                "<bdi>ओ ओ</bdi>",
+                "<bdi>ओ औ</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          },
+          {
+            "caption": "辅音连声速查（按连声部位）",
+            "role": "pattern",
+            "headers": [
+              "前词末",
+              "后词首",
+              "结果"
+            ],
+            "rows": [
+              [
+                "<bdi>अ / आ</bdi> 以外的元音 + ः",
+                "元音 / 浊辅音",
+                "<bdi>र्</bdi>"
+              ],
+              [
+                "<bdi>अ / आ + ः</bdi>",
+                "浊辅音",
+                "<bdi>ओ</bdi>"
+              ],
+              [
+                "<bdi>ः</bdi>",
+                "清辅音",
+                "<bdi>ः</bdi>（不变）"
+              ],
+              [
+                "<bdi>त्</bdi>",
+                "浊音",
+                "<bdi>द्</bdi>"
+              ],
+              [
+                "<bdi>त्</bdi>",
+                "<bdi>च छ</bdi>",
+                "<bdi>च् / च्छ</bdi>"
+              ],
+              [
+                "<bdi>न्</bdi>",
+                "<bdi>ज / श</bdi>",
+                "<bdi>ञ् / ञ्छ्</bdi>"
+              ],
+              [
+                "<bdi>न्</bdi>",
+                "<bdi>च / त</bdi>",
+                "<bdi>ंश् / ंस्</bdi>"
+              ],
+              [
+                "<bdi>क्</bdi>",
+                "鼻音 / 浊音 / <bdi>ह</bdi>",
+                "<bdi>ङ् / ग् / ग्घ्</bdi>"
+              ],
+              [
+                "<bdi>ट्</bdi>",
+                "鼻音 / 浊音 / <bdi>ह</bdi>",
+                "<bdi>ण् / ड् / ड्ढ्</bdi>"
+              ]
+            ],
+            "lang": "sa"
+          }
+        ],
+        "notes": "速查表按「前一词的末尾 × 后一词的开头」查；详细的规则与例外见前面各节。"
+      }
+    ]
+  },
+  {
+    "id": "sa-vowel-grades",
+    "title": "元音交替",
+    "items": [
+      {
+        "id": "sa-vowel-grades-table",
+        "title": "二合元音 与 三合元音 对照",
+        "tables": [
+          {
+            "caption": "元音升降",
+            "role": "pattern",
+            "headers": [
+              "元音",
+              "二合元音",
+              "三合元音"
+            ],
+            "rows": [
+              [
+                "<bdi>अ / आ</bdi>",
+                "<bdi>अ</bdi>",
+                "<bdi>आ</bdi>"
+              ],
+              [
+                "<bdi>इ / ई</bdi>",
+                "<bdi>ए</bdi>",
+                "<bdi>ऐ</bdi>"
+              ],
+              [
+                "<bdi>उ / ऊ</bdi>",
+                "<bdi>ओ</bdi>",
+                "<bdi>औ</bdi>"
+              ],
+              [
+                "<bdi>ऋ</bdi>",
+                "<bdi>अर्</bdi>",
+                "<bdi>आर्</bdi>"
+              ],
+              [
+                "<bdi>ऌ</bdi>",
+                "<bdi>अल्</bdi>",
+                "<bdi>आल्</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "应用",
+            "role": "pattern",
+            "headers": [
+              "场景",
+              "例"
+            ],
+            "rows": [
+              [
+                "名词强词干",
+                "<bdi>अग्नि- → अग्ने</bdi>（呼格单数）"
+              ],
+              [
+                "动词词干",
+                "√<bdi>भू → भो</bdi>-（第八类）"
+              ],
+              [
+                "使役动词",
+                "<bdi>√कृ → कारयति</bdi>（三合元音 <bdi>+ अय</bdi>）"
+              ],
+              [
+                "将来词干",
+                "<bdi>√भू → भोष्य-</bdi>"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sa-vowel-grades-use",
+        "title": "强、弱词干与元音交替",
+        "tables": [
+          {
+            "caption": "三种词干",
+            "role": "pattern",
+            "headers": [
+              "名称",
+              "用法",
+              "例"
+            ],
+            "rows": [
+              [
+                "强词干（strong）",
+                "主格 / 宾格 单数、部分双数复数",
+                "<bdi>राजान्-</bdi>（<bdi>राजा</bdi>）"
+              ],
+              [
+                "中词干（middle）",
+                "部分格",
+                "<bdi>राजन्-</bdi>"
+              ],
+              [
+                "弱词干（weak）",
+                "其余格",
+                "<bdi>राज्ञ्-</bdi>（<bdi>राज्ञः</bdi>）"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sa-script",
+    "title": "文字与转写",
+    "items": [
+      {
+        "id": "sa-script-siddham",
+        "title": "文字对照",
+        "tables": [
+          {
+            "caption": "元音（独立 / 附标）",
+            "role": "pattern",
+            "lang": "sa-siddham",
+            "headers": [
+              "天城文",
+              "天城文附标示例",
+              "悉昙文·独立",
+              "悉昙文·附标（合写）",
+              "附标示例",
+              "IAST",
+              "备注"
+            ],
+            "rows": [
+              [
+                "<bdi>अ</bdi>",
+                "<bdi>क</bdi>",
+                "<bdi>𑖀</bdi>",
+                "—",
+                "<bdi>𑖎</bdi>",
+                "a",
+                ""
+              ],
+              [
+                "<bdi>आ</bdi>",
+                "<bdi>का</bdi>",
+                "<bdi>𑖁</bdi>",
+                "<bdi>𑖯</bdi>",
+                "<bdi>𑖎𑖯</bdi>",
+                "ā",
+                ""
+              ],
+              [
+                "<bdi>इ</bdi>",
+                "<bdi>कि</bdi>",
+                "<bdi>𑖂</bdi>",
+                "<bdi>𑖰</bdi>",
+                "<bdi>𑖎𑖰</bdi>",
+                "i",
+                ""
+              ],
+              [
+                "<bdi>ई</bdi>",
+                "<bdi>की</bdi>",
+                "<bdi>𑖃</bdi>",
+                "<bdi>𑖱</bdi>",
+                "<bdi>𑖎𑖱</bdi>",
+                "ī",
+                ""
+              ],
+              [
+                "<bdi>उ</bdi>",
+                "<bdi>कु</bdi>",
+                "<bdi>𑖄</bdi>",
+                "<bdi>𑖲</bdi>",
+                "<bdi>𑖎𑖲</bdi>",
+                "u",
+                ""
+              ],
+              [
+                "<bdi>ऊ</bdi>",
+                "<bdi>कू</bdi>",
+                "<bdi>𑖅</bdi>",
+                "<bdi>𑖳</bdi>",
+                "<bdi>𑖎𑖳</bdi>",
+                "ū",
+                ""
+              ],
+              [
+                "<bdi>ऋ</bdi>",
+                "<bdi>कृ</bdi>",
+                "<bdi>𑖆</bdi>",
+                "<bdi>𑖴</bdi>",
+                "<bdi>𑖎𑖴</bdi>",
+                "ṛ",
+                ""
+              ],
+              [
+                "<bdi>ॠ</bdi>",
+                "<bdi>कॄ</bdi>",
+                "<bdi>𑖇</bdi>",
+                "<bdi>𑖵</bdi>",
+                "<bdi>𑖎𑖵</bdi>",
+                "ṝ",
+                "吠陀及少数词"
+              ],
+              [
+                "<bdi>ए</bdi>",
+                "<bdi>के</bdi>",
+                "<bdi>𑖈</bdi>",
+                "<bdi>𑖸</bdi>",
+                "<bdi>𑖎𑖸</bdi>",
+                "e",
+                ""
+              ],
+              [
+                "<bdi>ऐ</bdi>",
+                "<bdi>कै</bdi>",
+                "<bdi>𑖉</bdi>",
+                "<bdi>𑖹</bdi>",
+                "<bdi>𑖎𑖹</bdi>",
+                "ai",
+                ""
+              ],
+              [
+                "<bdi>ओ</bdi>",
+                "<bdi>को</bdi>",
+                "<bdi>𑖊</bdi>",
+                "<bdi>𑖺</bdi>",
+                "<bdi>𑖎𑖺</bdi>",
+                "o",
+                ""
+              ],
+              [
+                "<bdi>औ</bdi>",
+                "<bdi>कौ</bdi>",
+                "<bdi>𑖋</bdi>",
+                "<bdi>𑖻</bdi>",
+                "<bdi>𑖎𑖻</bdi>",
+                "au",
+                ""
+              ],
+              [
+                "<bdi>ऌ</bdi>",
+                "<bdi>कॢ</bdi>",
+                "<bdi>𑖌</bdi>",
+                "—",
+                "<bdi>𑖎</bdi>",
+                "ḷ",
+                "吠陀与语法书中出现"
+              ],
+              [
+                "<bdi>ॡ</bdi>",
+                "<bdi>कॣ</bdi>",
+                "<bdi>𑖍</bdi>",
+                "—",
+                "<bdi>𑖎</bdi>",
+                "ḹ",
+                "吠陀专用（仅见《梨俱吠陀》与语法书）"
+              ]
+            ]
+          },
+          {
+            "caption": "辅音（独立 / 合写上 / 合写下）",
+            "role": "pattern",
+            "lang": "sa-siddham",
+            "headers": [
+              "天城文",
+              "悉昙文·独立",
+              "悉昙文·合写上（本字在上，ka 在下）",
+              "悉昙文·合写下（本字在下，ka 在上）",
+              "IAST"
+            ],
+            "rows": [
+              [
+                "<bdi>क</bdi>",
+                "<bdi>𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖎</bdi>",
+                "ka"
+              ],
+              [
+                "<bdi>ख</bdi>",
+                "<bdi>𑖏</bdi>",
+                "<bdi>𑖏𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖏</bdi>",
+                "kha"
+              ],
+              [
+                "<bdi>ग</bdi>",
+                "<bdi>𑖐</bdi>",
+                "<bdi>𑖐𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖐</bdi>",
+                "ga"
+              ],
+              [
+                "<bdi>घ</bdi>",
+                "<bdi>𑖑</bdi>",
+                "<bdi>𑖑𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖑</bdi>",
+                "gha"
+              ],
+              [
+                "<bdi>ङ</bdi>",
+                "<bdi>𑖒</bdi>",
+                "<bdi>𑖒𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖒</bdi>",
+                "ṅa"
+              ],
+              [
+                "<bdi>च</bdi>",
+                "<bdi>𑖓</bdi>",
+                "<bdi>𑖓𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖓</bdi>",
+                "ca"
+              ],
+              [
+                "<bdi>छ</bdi>",
+                "<bdi>𑖔</bdi>",
+                "<bdi>𑖔𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖔</bdi>",
+                "cha"
+              ],
+              [
+                "<bdi>ज</bdi>",
+                "<bdi>𑖕</bdi>",
+                "<bdi>𑖕𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖕</bdi>",
+                "ja"
+              ],
+              [
+                "<bdi>झ</bdi>",
+                "<bdi>𑖖</bdi>",
+                "<bdi>𑖖𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖖</bdi>",
+                "jha"
+              ],
+              [
+                "<bdi>ञ</bdi>",
+                "<bdi>𑖗</bdi>",
+                "<bdi>𑖗𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖗</bdi>",
+                "ña"
+              ],
+              [
+                "<bdi>ट</bdi>",
+                "<bdi>𑖘</bdi>",
+                "<bdi>𑖘𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖘</bdi>",
+                "ṭa"
+              ],
+              [
+                "<bdi>ठ</bdi>",
+                "<bdi>𑖙</bdi>",
+                "<bdi>𑖙𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖙</bdi>",
+                "ṭha"
+              ],
+              [
+                "<bdi>ड</bdi>",
+                "<bdi>𑖚</bdi>",
+                "<bdi>𑖚𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖚</bdi>",
+                "ḍa"
+              ],
+              [
+                "<bdi>ढ</bdi>",
+                "<bdi>𑖛</bdi>",
+                "<bdi>𑖛𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖛</bdi>",
+                "ḍha"
+              ],
+              [
+                "<bdi>ण</bdi>",
+                "<bdi>𑖜</bdi>",
+                "<bdi>𑖜𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖜</bdi>",
+                "ṇa"
+              ],
+              [
+                "<bdi>त</bdi>",
+                "<bdi>𑖝</bdi>",
+                "<bdi>𑖝𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖝</bdi>",
+                "ta"
+              ],
+              [
+                "<bdi>थ</bdi>",
+                "<bdi>𑖞</bdi>",
+                "<bdi>𑖞𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖞</bdi>",
+                "tha"
+              ],
+              [
+                "<bdi>द</bdi>",
+                "<bdi>𑖟</bdi>",
+                "<bdi>𑖟𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖟</bdi>",
+                "da"
+              ],
+              [
+                "<bdi>ध</bdi>",
+                "<bdi>𑖠</bdi>",
+                "<bdi>𑖠𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖠</bdi>",
+                "dha"
+              ],
+              [
+                "<bdi>न</bdi>",
+                "<bdi>𑖡</bdi>",
+                "<bdi>𑖡𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖡</bdi>",
+                "na"
+              ],
+              [
+                "<bdi>प</bdi>",
+                "<bdi>𑖢</bdi>",
+                "<bdi>𑖢𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖢</bdi>",
+                "pa"
+              ],
+              [
+                "<bdi>फ</bdi>",
+                "<bdi>𑖣</bdi>",
+                "<bdi>𑖣𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖣</bdi>",
+                "pha"
+              ],
+              [
+                "<bdi>ब</bdi>",
+                "<bdi>𑖤</bdi>",
+                "<bdi>𑖤𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖤</bdi>",
+                "ba"
+              ],
+              [
+                "<bdi>भ</bdi>",
+                "<bdi>𑖥</bdi>",
+                "<bdi>𑖥𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖥</bdi>",
+                "bha"
+              ],
+              [
+                "<bdi>म</bdi>",
+                "<bdi>𑖦</bdi>",
+                "<bdi>𑖦𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖦</bdi>",
+                "ma"
+              ],
+              [
+                "<bdi>य</bdi>",
+                "<bdi>𑖧</bdi>",
+                "<bdi>𑖧𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖧</bdi>",
+                "ya"
+              ],
+              [
+                "<bdi>र</bdi>",
+                "<bdi>𑖨</bdi>",
+                "<bdi>𑖨𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖨</bdi>",
+                "ra"
+              ],
+              [
+                "<bdi>ल</bdi>",
+                "<bdi>𑖩</bdi>",
+                "<bdi>𑖩𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖩</bdi>",
+                "la"
+              ],
+              [
+                "<bdi>व</bdi>",
+                "<bdi>𑖪</bdi>",
+                "<bdi>𑖪𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖪</bdi>",
+                "va"
+              ],
+              [
+                "<bdi>श</bdi>",
+                "<bdi>𑖫</bdi>",
+                "<bdi>𑖫𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖫</bdi>",
+                "śa"
+              ],
+              [
+                "<bdi>ष</bdi>",
+                "<bdi>𑖬</bdi>",
+                "<bdi>𑖬𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖬</bdi>",
+                "ṣa"
+              ],
+              [
+                "<bdi>स</bdi>",
+                "<bdi>𑖭</bdi>",
+                "<bdi>𑖭𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖭</bdi>",
+                "sa"
+              ],
+              [
+                "<bdi>ह</bdi>",
+                "<bdi>𑖮</bdi>",
+                "<bdi>𑖮𑖿𑖎</bdi>",
+                "<bdi>𑖎𑖿𑖮</bdi>",
+                "ha"
+              ]
+            ]
+          },
+          {
+            "caption": "特殊合写（连字）",
+            "role": "pattern",
+            "lang": "sa-siddham",
+            "headers": [
+              "天城文",
+              "悉昙文",
+              "IAST",
+              "构成",
+              "说明"
+            ],
+            "rows": [
+              [
+                "<bdi>क्ष</bdi>",
+                "<bdi>𑖎𑖿𑖬</bdi>",
+                "kṣa",
+                "ka + ṣa",
+                "天城文为专用连字（一笔写就）"
+              ],
+              [
+                "<bdi>ज्ञ</bdi>",
+                "<bdi>𑖕𑖿𑖗</bdi>",
+                "jña",
+                "ja + ña",
+                "天城文为专用连字"
+              ],
+              [
+                "<bdi>त्र</bdi>",
+                "<bdi>𑖝𑖿𑖨</bdi>",
+                "tra",
+                "ta + ra",
+                "天城文为专用连字"
+              ],
+              [
+                "<bdi>श्र</bdi>",
+                "<bdi>𑖫𑖿𑖨</bdi>",
+                "śra",
+                "śa + ra",
+                "天城文为专用连字"
+              ],
+              [
+                "<bdi>क्र</bdi>",
+                "<bdi>𑖎𑖿𑖨</bdi>",
+                "kra",
+                "ka + ra",
+                ""
+              ],
+              [
+                "<bdi>क्त</bdi>",
+                "<bdi>𑖎𑖿𑖝</bdi>",
+                "kta",
+                "ka + ta",
+                ""
+              ],
+              [
+                "<bdi>द्य</bdi>",
+                "<bdi>𑖟𑖿𑖧</bdi>",
+                "dya",
+                "da + ya",
+                ""
+              ],
+              [
+                "<bdi>द्व</bdi>",
+                "<bdi>𑖟𑖿𑖪</bdi>",
+                "dva",
+                "da + va",
+                ""
+              ],
+              [
+                "<bdi>द्ध</bdi>",
+                "<bdi>𑖟𑖿𑖠</bdi>",
+                "ddha",
+                "da + dha",
+                ""
+              ],
+              [
+                "<bdi>ट्ट</bdi>",
+                "<bdi>𑖘𑖿𑖘</bdi>",
+                "ṭṭa",
+                "ṭa + ṭa",
+                ""
+              ],
+              [
+                "<bdi>ञ्ज</bdi>",
+                "<bdi>𑖗𑖿𑖕</bdi>",
+                "ñja",
+                "ña + ja",
+                ""
+              ],
+              [
+                "<bdi>ण्ड</bdi>",
+                "<bdi>𑖜𑖿𑖚</bdi>",
+                "ṇḍa",
+                "ṇa + ḍa",
+                ""
+              ],
+              [
+                "<bdi>म्ब</bdi>",
+                "<bdi>𑖦𑖿𑖤</bdi>",
+                "mba",
+                "ma + ba",
+                ""
+              ],
+              [
+                "<bdi>स्थ</bdi>",
+                "<bdi>𑖭𑖿𑖞</bdi>",
+                "stha",
+                "sa + tha",
+                ""
+              ],
+              [
+                "<bdi>ह्म</bdi>",
+                "<bdi>𑖮𑖿𑖦</bdi>",
+                "hma",
+                "ha + ma",
+                ""
+              ]
+            ]
+          },
+          {
+            "caption": "符号",
+            "role": "pattern",
+            "lang": "sa-siddham",
+            "headers": [
+              "天城文",
+              "悉昙文",
+              "码位",
+              "IAST",
+              "义"
+            ],
+            "rows": [
+              [
+                "<bdi>ँ</bdi>",
+                "<bdi>𑖼</bdi>",
+                "U+115BC",
+                "candrabindu",
+                "鼻化"
+              ],
+              [
+                "<bdi>ं</bdi>",
+                "<bdi>𑖽</bdi>",
+                "U+115BD",
+                "anusvāra",
+                "随韵"
+              ],
+              [
+                "<bdi>ः</bdi>",
+                "<bdi>𑖾</bdi>",
+                "U+115BE",
+                "visarga",
+                "止声"
+              ],
+              [
+                "<bdi>्</bdi>",
+                "<bdi>𑖿</bdi>",
+                "U+115BF",
+                "virāma",
+                "辅音不带元音（合写下用）"
+              ],
+              [
+                "<bdi>़</bdi>",
+                "<bdi>𑗀</bdi>",
+                "U+115C0",
+                "nukta",
+                "下加点"
+              ],
+              [
+                "<bdi>ॐ</bdi>",
+                "—",
+                "U+0950",
+                "oṃ",
+                "神圣音节；悉昙区块无对应码位"
+              ]
+            ]
+          }
+        ],
+        "notes": "悉昙文（Siddham）是隋唐时期传入东亚的梵文书写体，真言宗等密教文献多用。Unicode 的悉昙区块没有单独的「上标 / 下标」码位，合写靠「辅音 + virama（<bdi>𑖿, U+115BF</bdi>）+ 辅音」实现；本表统一用 <bdi>ka</bdi>（<bdi>𑖎</bdi>）作搭配字：合写上＝本字 <bdi>+ 𑖿 + ka</bdi>（本字在上），合写下＝<bdi>ka + 𑖿</bdi> + 本字（本字在下）。实际叠合效果取决于字体，当前打包的 Noto Sans Siddham 不做叠合。 天城文有若干专用连字（<bdi>क्ष / ज्ञ / त्र / श्र</bdi> 等），悉昙文在 Unicode 中一律用「辅音 + virama + 辅音」表示，不设独立连字码位。吠陀专用字符（ḷ / ḹ 及 ṝ 的部分用法）已在元音表「备注」列标出。"
+      },
+      {
+        "id": "sa-script-special",
+        "title": "特殊符号与数字",
+        "tables": [
+          {
+            "caption": "符号",
+            "role": "pattern",
+            "headers": [
+              "符号",
+              "名称",
+              "用法"
+            ],
+            "rows": [
+              [
+                "<bdi>्</bdi>",
+                "virāma",
+                "标示辅音不带元音"
+              ],
+              [
+                "<bdi>ं</bdi>",
+                "anusvāra",
+                "鼻化（ṃ）"
+              ],
+              [
+                "<bdi>ः</bdi>",
+                "visarga",
+                "气声（ḥ）"
+              ],
+              [
+                "<bdi>ऽ</bdi>",
+                "avagraha",
+                "元音省略（eṣo 'pi）"
+              ],
+              [
+                "<bdi>ॐ</bdi>",
+                "oṃ",
+                "神圣音节"
+              ]
+            ]
+          },
+          {
+            "caption": "数字",
+            "role": "pattern",
+            "headers": [
+              "天城文",
+              "阿拉伯"
+            ],
+            "rows": [
+              [
+                "<bdi>०</bdi>",
+                "0"
+              ],
+              [
+                "<bdi>१</bdi>",
+                "1"
+              ],
+              [
+                "<bdi>२</bdi>",
+                "2"
+              ],
+              [
+                "<bdi>३</bdi>",
+                "3"
+              ],
+              [
+                "<bdi>४</bdi>",
+                "4"
+              ],
+              [
+                "<bdi>५</bdi>",
+                "5"
+              ],
+              [
+                "<bdi>६</bdi>",
+                "6"
+              ],
+              [
+                "<bdi>७</bdi>",
+                "7"
+              ],
+              [
+                "<bdi>८</bdi>",
+                "8"
+              ],
+              [
+                "<bdi>९</bdi>",
+                "9"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

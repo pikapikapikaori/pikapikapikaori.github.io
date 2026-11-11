@@ -1,0 +1,1738 @@
+/* ---------- Welcome ---------- */
+.welcome {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: var(--sp-5);
+    background: var(--c-bg);
+}
+
+.welcome__panel {
+    width: min(560px, 100%);
+}
+
+.welcome__title {
+    font-family: var(--ff-display);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin-bottom: var(--sp-2);
+}
+
+.welcome__sub {
+    color: var(--c-fg-muted);
+    margin-bottom: var(--sp-5);
+}
+
+.welcome__actions {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+    margin-top: var(--sp-4);
+}
+
+.welcome__users {
+    margin-top: var(--sp-6);
+}
+
+.welcome__users h3 {
+    margin-bottom: var(--sp-3);
+    color: var(--c-fg-muted);
+    font-weight: 600;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--c-rule);
+}
+
+.user-item:last-child {
+    border-bottom: 0;
+}
+
+.user-item__name {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    line-height: 1.2;
+}
+
+.user-item__meta {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-muted);
+}
+
+.user-item__actions {
+    display: flex;
+    gap: var(--sp-2);
+}
+
+/* ---------- Language select（书目式索引） ---------- */
+.lang-grid {
+    display: block;
+}
+
+/* 一行一种语言：原生名（衬线大字）· 中文名 · 右对齐的用量 */
+.lang-card {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-5);
+    min-height: 64px;
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--r-control);
+    cursor: pointer;
+    transition: background var(--dur) var(--ease);
+}
+
+.lang-card:hover {
+    background: var(--c-bg-hover);
+}
+
+.lang-card:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: -2px;
+}
+
+.lang-card__title {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.lang-card__native {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+}
+
+.lang-card__name {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+}
+
+.lang-card__stats {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    flex: none;
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    font-variant-numeric: oldstyle-nums tabular-nums;
+    white-space: nowrap;
+}
+
+.lang-card__stat {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+}
+
+.lang-card__stat--extra::before {
+    content: "·";
+    margin: 0 var(--sp-2);
+    color: var(--c-fg-subtle);
+}
+
+.lang-card__stat .num {
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+@media (max-width: 560px) {
+    .lang-card {
+        flex-wrap: wrap;
+        row-gap: 2px;
+        min-height: 60px;
+        padding: var(--sp-2);
+    }
+
+    .lang-card__title {
+        gap: var(--sp-2);
+    }
+
+    .lang-card__native {
+        font-size: var(--fs-xl);
+    }
+
+    .lang-card__stats {
+        flex-basis: 100%;
+    }
+
+    /* 窄屏上「暂无词条」重复十次只是噪音 */
+    .lang-card__stat--empty {
+        display: none;
+    }
+
+    .lang-card__stat--extra:nth-of-type(2) {
+        display: none;
+    }
+}
+
+/* ---------- Word list（账本行） ---------- */
+.word-list {
+    display: block;
+}
+
+.word-list__head {
+    display: grid;
+    grid-template-columns: minmax(0, 420px) 80px 92px minmax(0, 1fr);
+    gap: var(--sp-4);
+    padding: 0 var(--sp-3) var(--sp-2);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-xs);
+}
+
+.word-row {
+    display: grid;
+    grid-template-columns: minmax(0, 420px) 80px 92px minmax(0, 1fr);
+    align-items: center;
+    gap: var(--sp-4);
+    min-height: 56px;
+    padding: 0 var(--sp-3);
+    border-bottom: 1px solid var(--c-rule);
+    cursor: pointer;
+    transition: background var(--dur) var(--ease);
+}
+
+.word-row:hover {
+    background: var(--c-bg-hover);
+}
+
+.word-row:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: -2px;
+}
+
+/* 词形是这一行唯一的内容：列表只负责让你想起它 */
+.word-row__main {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    min-width: 0;
+}
+
+.word-row__lemma {
+    font-family: var(--ff-display);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 0 1 auto;
+}
+
+.word-row__tags {
+    display: flex;
+    gap: var(--sp-1);
+    flex: none;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.word-row__tag {
+    padding: 1px 7px;
+    border-radius: var(--r-full);
+    background: var(--c-bg-subtle);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.word-row__tag--more {
+    background: transparent;
+    border: 1px solid var(--c-rule-strong);
+}
+
+.word-row__date {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 掌握度：五格刻度，页面上唯一的数据着色 */
+.word-row__mastery {
+    display: flex;
+    gap: 2px;
+}
+
+.word-row__tick {
+    width: 10px;
+    height: 4px;
+    border-radius: var(--r-full);
+    background: var(--c-rule-strong);
+}
+
+.word-row__tick--on {
+    background: var(--c-fg);
+}
+
+.word-row__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--sp-1);
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+}
+
+.word-row:hover .word-row__actions,
+.word-row:focus-within .word-row__actions {
+    opacity: 1;
+}
+
+.word-row__delete {
+    color: var(--c-danger);
+}
+
+/* 行 hover 时整行底色已经变了，ghost 按钮再 hover 同一色阶看不出反馈：
+ * 让按钮自己升一格到 --c-bg-elev（白）并补一圈边，行 hover 的底色就退到按钮后面 */
+.word-row__actions .btn {
+    color: var(--c-fg-muted);
+    border-color: transparent;
+    background: transparent;
+}
+
+.word-row__actions .btn:not(:disabled):hover {
+    color: var(--c-fg);
+    background: var(--c-bg-elev);
+    border-color: var(--c-border);
+}
+
+.word-row__actions .word-row__delete:not(:disabled):hover {
+    color: var(--c-danger);
+}
+
+.word-row__actions .btn:focus-visible {
+    background: var(--c-bg-elev);
+    border-color: var(--c-border-strong);
+    outline: 2px solid var(--c-accent);
+    outline-offset: 1px;
+}
+
+.split-btn {
+    display: inline-flex;
+}
+
+.split-btn .btn:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.split-btn .btn:last-child {
+    min-width: 34px;
+    padding: 0 var(--sp-2);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 1px solid color-mix(in oklab, var(--c-action-fg) 28%, transparent);
+}
+
+@media (max-width: 720px) {
+    .word-list__head {
+        grid-template-columns: minmax(0, 1fr) 92px;
+    }
+
+    .word-list__head > span:nth-child(2),
+    .word-list__head > span:nth-child(4),
+    .word-row__mastery {
+        display: none;
+    }
+
+    /* 手机上：词形 + 日期在左，编辑、删除常显在右；行内操作不再靠 hover 才出现 */
+    .word-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--sp-3);
+        min-height: 56px;
+        padding-top: var(--sp-2);
+        padding-bottom: var(--sp-2);
+    }
+
+    .word-row__main {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .word-row__date {
+        grid-column: 1;
+        grid-row: 2;
+        display: block;
+        padding-top: 2px;
+        font-size: var(--fs-xs);
+        color: var(--c-fg-subtle);
+        white-space: nowrap;
+    }
+
+    .word-row__actions {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: center;
+        opacity: 1;
+        gap: var(--sp-1);
+    }
+
+    .word-row__actions .btn {
+        min-height: 32px;
+        padding: 0 var(--sp-2);
+    }
+
+    .word-row__lemma {
+        font-size: var(--fs-lg);
+    }
+}
+
+/* ---------- Word form ---------- */
+.word-form {
+    display: grid;
+    gap: var(--sp-6);
+    padding-bottom: var(--sp-4);
+}
+
+.word-form > * {
+    min-width: 0;
+}
+
+/* 第一行：左栏与固定搭配原文同宽，词性一格与固定搭配含义同宽，最右一格放查询按钮 */
+.word-form__row {
+    display: grid;
+    grid-template-columns:
+        /* 左栏右缘 = 固定搭配原文输入框右缘 */
+        calc(160px + (100% - 316px) / 2)
+        /* 词性一格右缘 = 固定搭配含义输入框右缘 */
+        calc((100% - 316px) / 2 - 4px)
+        1fr;
+    gap: var(--sp-3);
+}
+
+/* 最右一格里的按钮贴右、与词性下拉顶端齐平 */
+.word-form__row > .btn {
+    justify-self: end;
+    align-self: start;
+}
+
+/* 表单不用卡片：靠留白和分组标题分层 */
+.word-form__card,
+.word-form__group,
+.word-form__panel {
+    min-width: 0;
+}
+
+.word-form .field {
+    display: grid;
+    grid-template-columns: var(--w-form-label) minmax(0, 1fr);
+    column-gap: var(--sp-4);
+    row-gap: 2px;
+    align-items: center;
+    /* 行按自然高度从顶部排：没有第二行提示的字段不会被拉高后居中，与同排字段错开 */
+    align-content: start;
+}
+
+.word-form .field > .field__label {
+    grid-column: 1;
+    align-self: center;
+}
+
+/* 控件跟着标签自动排在第二列，只有提示文案需要显式落位 */
+.word-form .field > .field__hint {
+    grid-column: 2;
+}
+
+/* 属性（语法性、自他…）+ 锚点 + 变格变位类型：同一块，两栏与固定搭配同宽 */
+.word-form__panel {
+    display: grid;
+    grid-template-columns:
+        /* 左栏右缘 = 固定搭配原文输入框右缘，右栏右缘 = 固定搭配含义输入框右缘 */
+        calc(160px + (100% - 168px) / 2)
+        calc((100% - 176px) / 2);
+    gap: var(--sp-3) var(--sp-3);
+    align-items: start;
+    padding-right: var(--w-form-tail);
+}
+
+.word-form__panel > * {
+    min-width: 0;
+}
+
+/* 属性、锚点占两列后剩下的一格整行收尾，避免右侧空一块 */
+.word-form__panel > .field:last-child {
+    grid-column: 1 / -1;
+}
+
+/* 额外词干：两栏与固定搭配同宽，每项与主词干同一套栅格（标签一栏、控件一栏） */
+.word-form .field__parts {
+    display: grid;
+    grid-template-columns:
+        /* 左栏右缘 = 固定搭配原文输入框右缘，右栏右缘 = 固定搭配含义输入框右缘 */
+        calc(160px + (100% - 168px) / 2)
+        calc((100% - 176px) / 2);
+    column-gap: var(--sp-3);
+    row-gap: var(--sp-3);
+    margin-top: var(--sp-3);
+    padding-right: var(--w-form-tail);
+}
+
+.word-form .field--part {
+    display: grid;
+    grid-template-columns: var(--w-form-label) minmax(0, 1fr);
+    column-gap: var(--sp-4);
+    grid-template-areas: "label control";
+    align-items: center;
+    align-content: start;
+}
+
+.word-form .field--part > .field__label {
+    grid-area: label;
+    text-align: left;
+    justify-self: stretch;
+}
+
+.word-form .field--part > .input,
+.word-form .field--part > .select,
+.word-form .field--part > .ghost-input {
+    grid-area: control;
+}
+
+.word-form__extras > .field + .field {
+    margin-top: var(--sp-6);
+}
+
+/* 长输入框右侧让出删除按钮那一栏，右缘与含义、例句、固定搭配三行齐平 */
+.word-form__stems > .field,
+.word-form__extras > .field,
+.derivative-picker > .field {
+    padding-right: var(--w-form-tail);
+}
+
+/* 词干块自带标题，与后面的变形表标题隔开一个分组间距 */
+.word-form__stems + .word-form__group-title {
+    margin-top: var(--sp-5);
+}
+
+.word-form__group-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    /* 标题与右侧动作区放不下时换行，窄屏的长状态文字不会撑出横向滚动 */
+    flex-wrap: wrap;
+    font-size: var(--fs-md);
+    font-weight: 600;
+    color: var(--c-fg);
+    margin-bottom: var(--sp-3);
+}
+
+/* 标题行右侧：禁用原因在前，按钮在后，两者同行居中 */
+/* 分区标题行右侧的动作区：禁用原因之类的灰字在前，按钮在后 */
+.word-form__title-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex: none;
+}
+
+.word-form__title-hint {
+    font-weight: 400;
+}
+
+.word-form__title-hint:empty {
+    display: none;
+}
+
+.word-form__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
+.word-form__item {
+    display: grid;
+    /* 序号列把「标签栏」与「列间距」的差补掉，控件仍从 --w-form-label + --sp-4 开始 */
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 8.25rem auto;
+    gap: var(--sp-2);
+    align-items: start;
+}
+
+/* 行首序号：只用于定位，不参与拉伸；高度对齐第一行的控件 */
+.word-form__index {
+    height: 38px;
+    line-height: 38px;
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-fg-subtle);
+    text-align: start;
+}
+
+/* 含义：输入框与语言下拉 7:3，右缘与例句、固定搭配三行齐平 */
+.word-form__item--meaning {
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 7fr 3fr 8.25rem auto;
+}
+
+/* 补充形式行：分组、标签、形态、来源、删除按钮 */
+.word-form__item--inflection {
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 1fr 1fr 1fr 8.25rem auto;
+}
+
+/* 例句：原文与出处、译文与关联含义都是 7:3，右缘与含义、固定搭配三行齐平 */
+.word-form__item--example {
+    grid-template-columns: calc(var(--w-form-label) + var(--sp-2)) 7fr 3fr 8.25rem auto;
+}
+
+/* 译文在原文下方，关联含义在出处下方 */
+.word-form__item--example .word-form__cell--translation {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.word-form__item--example .word-form__cell--meaning {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.word-form__item--example .word-form__cell--remove {
+    grid-column: 4;
+    grid-row: 1;
+    align-self: start;
+}
+
+/* 删除按钮不参与拉伸，且是正方形；按钮尺寸不变，只把 ✕ 字号放大 */
+.word-form__cell--remove {
+    justify-self: end;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    font-size: var(--fs-lg);
+    line-height: 1;
+}
+
+.word-form__list > * + * {
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--c-border);
+}
+
+.word-form .btn {
+    height: 38px;
+    min-height: 38px;
+}
+
+/* 保存栏吸在视口底部，长表单也能随时保存 */
+.word-form__actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--sp-2);
+    /* 右侧让出常驻浮动按钮的位置：按钮列在所有页面上都停在同一个 bottom */
+    padding: var(--sp-3) calc(48px + var(--sp-2)) var(--sp-3) 0;
+    background: var(--c-bg);
+    border-top: 1px solid var(--c-rule);
+}
+
+@media (max-width: 720px) {
+
+    .word-form__row,
+    .word-form__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .word-form .field {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .word-form__panel > .field:last-child {
+        grid-column: auto;
+    }
+
+    .word-form .field > .field__label,
+    .word-form .field > .field__hint {
+        grid-column: 1;
+    }
+
+    .word-form__row,
+    .word-form__panel,
+    .word-form .field__parts,
+    .word-form__stems > .field,
+    .word-form__extras > .field,
+    .derivative-picker > .field {
+        padding-right: 0;
+    }
+
+    .word-form .field__parts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .word-form .field--part {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 2px;
+        grid-template-areas:
+            "label"
+            "control";
+    }
+
+    /* 窄屏：序号 | 内容（竖排），删除按钮绝对定位在第一行右侧，不再被挤到下一行 */
+    .word-form__item,
+    .word-form__item--meaning,
+    .word-form__item--inflection,
+    .word-form__item--example {
+        position: relative;
+        grid-template-columns: 1.75rem minmax(0, 1fr);
+        align-items: start;
+        column-gap: var(--sp-2);
+        row-gap: var(--sp-2);
+        padding-right: 46px;
+    }
+
+    .word-form__item > *:not(.word-form__index):not(.word-form__cell--remove) {
+        grid-column: 2;
+        grid-row: auto;
+    }
+
+    .word-form__item .word-form__cell--remove {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+    }
+
+    /* 例句的译文、含义原本跨列，窄屏回到第 2 列 */
+    .word-form__item--example .word-form__cell--translation,
+    .word-form__item--example .word-form__cell--meaning {
+        grid-column: 2;
+        grid-row: auto;
+    }
+}
+
+/* ---------- Review：一张纸 ---------- */
+.review-counts {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    white-space: nowrap;
+}
+
+.review-counts b {
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+.review-counts[hidden] {
+    display: none;
+}
+
+.review-sheet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* 顶边即进度 */
+.review-sheet__bar {
+    height: 3px;
+    background: var(--c-rule);
+    flex: none;
+}
+
+.review-sheet__fill {
+    height: 100%;
+    background: var(--c-accent);
+    transition: width .3s var(--ease);
+}
+
+.review-sheet--empty {
+    padding: var(--sp-7) var(--sp-5);
+}
+
+/* 问答面：没有卡片，只有一张纸 */
+.review-face {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: min(42vh, 360px);
+    padding: var(--sp-7) var(--sp-4);
+    cursor: pointer;
+}
+
+.review-face--done {
+    cursor: default;
+}
+
+@keyframes review-face-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.review-face--in {
+    animation: review-face-in .3s var(--ease) both;
+}
+
+.review-front {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.review-word {
+    font-family: var(--ff-display);
+    font-size: 6rem;
+    line-height: 1.05;
+    letter-spacing: -.03em;
+    word-break: break-word;
+}
+
+.review-back {
+    margin: auto;
+    width: 100%;
+    max-width: 720px;
+}
+
+.review-section+.review-section {
+    margin-top: var(--sp-6);
+}
+
+.review-section__label {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--sp-2);
+}
+
+/* 有序列表：序号自己画小一号、弱化，正文的字号与字重保持不变 */
+.review-meanings {
+    list-style: decimal outside;
+    padding-inline-start: 1.6em;
+}
+
+.review-meanings ::marker {
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    color: var(--c-fg-subtle);
+    font-variant-numeric: tabular-nums;
+}
+
+.review-meaning {
+    font-size: 2.125rem;
+    line-height: 1.45;
+}
+
+.review-meaning+.review-meaning {
+    margin-top: var(--sp-1);
+}
+
+.review-empty {
+    color: var(--c-fg-subtle);
+    font-size: var(--fs-sm);
+}
+
+.review-section--table {
+    overflow-x: auto;
+}
+
+.review-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--c-rule);
+    flex: none;
+}
+
+.review-actions .btn {
+    min-height: 56px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--c-fg);
+    font-size: var(--fs-md);
+    font-weight: 500;
+}
+
+.review-actions .btn:first-child {
+    border-right: 1px solid var(--c-rule);
+}
+
+.review-actions .btn:not(:disabled):hover {
+    background: var(--c-bg-hover);
+}
+
+.review-actions .btn--primary {
+    background: var(--c-action);
+    color: var(--c-action-fg);
+}
+
+.review-actions .btn--primary:not(:disabled):hover {
+    background: color-mix(in oklab, var(--c-action) 86%, var(--c-fg-invert));
+}
+
+.review-hint {
+    margin-top: var(--sp-4);
+    text-align: center;
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+}
+
+.review-hint[hidden] {
+    display: none;
+}
+
+.review-hint__sep {
+    margin: 0 var(--sp-2);
+    color: var(--c-fg-subtle);
+}
+
+.review-hint kbd {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 1px 5px;
+    margin: 0 2px;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    background: var(--c-bg-subtle);
+    color: var(--c-fg-muted);
+}
+
+/* 结束态：同一张纸 */
+.review-done {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+    text-align: center;
+}
+
+.review-done__title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-3xl);
+    line-height: 1.1;
+}
+
+.review-done__stats {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+}
+
+.review-done__wrong {
+    margin-top: var(--sp-4);
+    width: min(100%, 360px);
+    border-top: 1px solid var(--c-rule);
+    padding-top: var(--sp-3);
+    text-align: left;
+}
+
+.review-done__wrong-title {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--sp-1);
+}
+
+.review-done__word {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    width: 100%;
+    padding: var(--sp-1) var(--sp-2);
+    border: 0;
+    border-radius: var(--r-control);
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.review-done__word:hover {
+    background: var(--c-bg-hover);
+}
+
+.review-done__lemma {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+}
+
+.review-done__pos {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-xs);
+}
+
+@media (max-width: 720px) {
+    .review-face {
+        min-height: min(44vh, 320px);
+        padding: var(--sp-6) var(--sp-4);
+    }
+
+    .review-word {
+        font-size: 3.5rem;
+    }
+
+    .review-meaning {
+        font-size: 1.5rem;
+    }
+
+    .review-actions .btn {
+        min-height: 52px;
+        font-size: var(--fs-sm);
+    }
+}
+
+/* ---------- Grammar ---------- */
+.grammar-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: var(--sp-6);
+    align-items: start;
+}
+
+.grammar-nav {
+    position: sticky;
+    top: calc(var(--h-header) + var(--sp-4));
+    max-height: calc(100dvh - var(--h-header) - var(--sp-6));
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding-right: var(--sp-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+}
+
+/* 章节切换（一级分页） */
+.grammar-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.grammar-chapter {
+    position: relative;
+    display: block;
+    padding: 6px 10px 6px 18px;
+    border-radius: var(--r-control);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+/* 当前章只留一道朱红短线，不做整行填充 */
+.grammar-chapter::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: var(--r-full);
+    background: var(--c-accent);
+    transform: translateY(-50%);
+    transition: height var(--dur) var(--ease);
+}
+
+.grammar-chapter:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+.grammar-chapter--active {
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+.grammar-chapter--active::before {
+    height: 16px;
+}
+
+.grammar-nav__group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.grammar-toc__summary {
+    display: none;
+}
+
+.grammar-nav__title {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-fg-muted);
+    margin-bottom: var(--sp-2);
+}
+
+.grammar-nav__link {
+    display: block;
+    padding: 4px 10px 4px 20px;
+    border-radius: var(--r-control);
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.45;
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.grammar-nav__link--section {
+    margin-top: var(--sp-3);
+    padding-left: 10px;
+    font-weight: 600;
+    color: var(--c-fg);
+}
+
+.grammar-nav__group>.grammar-nav__link--section:first-of-type {
+    margin-top: 0;
+}
+
+.grammar-nav__link:hover {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+/* 当前条目：中性底色 + 墨色，和「当前章」的朱红短线区分开 */
+.grammar-nav__link--active {
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+.grammar-content {
+    min-width: 0;
+}
+
+.grammar-section {
+    margin-bottom: var(--sp-7);
+    scroll-margin-top: calc(var(--h-header) + var(--sp-4));
+}
+
+.grammar-section__title {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin: 0 0 var(--sp-4);
+    scroll-margin-top: calc(var(--h-header) + var(--sp-4));
+}
+
+.grammar-item {
+    margin-bottom: var(--sp-6);
+    scroll-margin-top: calc(var(--h-header) + var(--sp-4));
+}
+
+.grammar-item__title {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    margin: var(--sp-5) 0 var(--sp-3);
+}
+
+/* 行标题列不折行（「连续未完成式」这类标签） */
+.grammar-table tbody th,
+.grammar-table tbody td:first-child {
+    white-space: nowrap;
+}
+
+.grammar-section__notes,
+.grammar-item__notes {
+    color: var(--c-fg);
+    font-size: var(--fs-md);
+    line-height: var(--lh-base);
+    margin: var(--sp-3) 0 var(--sp-5);
+    white-space: pre-wrap;
+}
+
+.grammar-section__notes {
+    margin-top: 0;
+}
+
+.grammar-item__notes strong,
+.grammar-section__notes strong,
+.grammar-table strong {
+    color: var(--c-fg);
+    font-weight: 600;
+}
+
+/* 说明里的列表（迂说式等）：reset.css 清掉了默认符号，这里补回来 */
+.grammar-section__notes ul,
+.grammar-item__notes ul,
+.grammar-section__notes ol,
+.grammar-item__notes ol {
+    margin: var(--sp-2) 0;
+    padding-left: 1.5em;
+    list-style: disc;
+}
+
+.grammar-section__notes ol,
+.grammar-item__notes ol {
+    list-style: decimal;
+}
+
+.grammar-section__notes li,
+.grammar-item__notes li {
+    margin: 2px 0;
+}
+
+.grammar-section__notes p,
+.grammar-item__notes p {
+    margin: var(--sp-1) 0;
+}
+
+.grammar-item__notes code,
+.grammar-section__notes code,
+.grammar-table code {
+    font-family: var(--ff-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: .92em;
+    padding: 0 3px;
+    border-radius: var(--r-control);
+    background: var(--c-bg-hover);
+    color: var(--c-fg);
+}
+
+.grammar-item:target,
+.grammar-section:target {
+    animation: highlight 1.6s var(--ease);
+    border-radius: var(--r-surface);
+}
+
+@keyframes highlight {
+    0% {
+        background: var(--c-accent-soft);
+    }
+
+    100% {
+        background: transparent;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grammar-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--sp-4);
+    }
+
+    /* 窄屏：章变成一条横向标签栏，吸在顶栏下面；条目收进「本页目录」浮层 */
+    .grammar-nav {
+        position: sticky;
+        top: var(--h-header);
+        z-index: 40;
+        display: block;
+        max-height: none;
+        overflow: visible;
+        margin: 0 calc(-1 * var(--sp-4));
+        padding: var(--sp-2) var(--sp-4);
+        background: var(--c-bg);
+        border-bottom: 1px solid var(--c-rule);
+    }
+
+    .grammar-chapters {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--sp-4);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .grammar-chapters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .grammar-chapters .grammar-nav__title {
+        display: none;
+    }
+
+    .grammar-chapter {
+        flex: none;
+        padding: 6px 0;
+        border-radius: 0;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+    }
+
+    .grammar-chapter::before {
+        display: none;
+    }
+
+    .grammar-chapter:hover {
+        background: transparent;
+        color: var(--c-fg);
+    }
+
+    .grammar-chapter--active {
+        border-bottom-color: var(--c-accent);
+    }
+
+    .grammar-toc {
+        position: relative;
+        margin-top: var(--sp-2);
+        border-top: 1px solid var(--c-rule);
+    }
+
+    .grammar-toc__summary {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        padding: var(--sp-2) 0;
+        font-size: var(--fs-sm);
+        color: var(--c-fg-muted);
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .grammar-toc__summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .grammar-toc__summary::after {
+        content: "▾";
+        flex: none;
+        font-size: var(--fs-sm);
+        line-height: 1;
+        color: var(--c-fg-muted);
+        transition: transform var(--dur) var(--ease);
+    }
+
+    .grammar-toc[open] .grammar-toc__summary::after {
+        transform: rotate(180deg);
+    }
+
+    .grammar-toc__current {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: right;
+        color: var(--c-fg);
+    }
+
+    .grammar-toc .grammar-nav__title {
+        display: none;
+    }
+
+    .grammar-toc .grammar-nav__group {
+        position: absolute;
+        top: 100%;
+        left: calc(-1 * var(--sp-4));
+        right: calc(-1 * var(--sp-4));
+        z-index: 30;
+        max-height: 60vh;
+        overflow: auto;
+        padding: var(--sp-3) var(--sp-4) var(--sp-4);
+        background: var(--c-bg-elev);
+        border-bottom: 1px solid var(--c-border);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .grammar-nav__link {
+        padding: 8px 10px;
+    }
+
+    /* 窄屏把行标题列右侧的留白收紧，避免挤掉词形列 */
+    .grammar-table tbody th,
+    .grammar-table tbody td:first-child {
+        padding-right: var(--sp-4);
+    }
+
+    /* 四列以上的表宁可横向滚动，也不把说明列压成一条缝 */
+    .grammar-table--wide {
+        min-width: 520px;
+    }
+
+    .grammar-section,
+    .grammar-item,
+    .grammar-section__title {
+        scroll-margin-top: calc(var(--h-header) + 84px);
+    }
+
+    .grammar-section__title {
+        font-size: var(--fs-lg);
+    }
+}
+
+/* ---------- Settings ---------- */
+.settings-section {
+    margin-bottom: var(--sp-7);
+}
+
+.settings-section__title {
+    font-size: var(--fs-md);
+    font-weight: 600;
+    margin-bottom: var(--sp-2);
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding: var(--sp-3) 0;
+    flex-wrap: wrap;
+}
+
+.settings-row__label {
+    font-size: var(--fs-sm);
+}
+
+.settings-row__desc {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-muted);
+    margin-top: 2px;
+}
+
+.settings-row__control {
+    display: flex;
+    gap: var(--sp-2);
+    align-items: center;
+}
+
+/* 行内附加节点（如隐藏的文件框）：不参与布局，控件与其它行保持同一位置 */
+.settings-row__inline {
+    display: contents;
+}
+
+/* ---------- 语言分组 ---------- */
+.lang-group {
+    margin-bottom: var(--sp-6);
+}
+
+.lang-group__title {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    margin: var(--sp-6) 0 var(--sp-1);
+    padding: 0 var(--sp-3);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--c-fg-muted);
+}
+
+.lang-group:first-child .lang-group__title {
+    margin-top: 0;
+}
+
+.lang-group__title[draggable="true"] {
+    cursor: grab;
+    user-select: none;
+}
+
+.lang-group__title[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+/* 拖动把手只在指针移上来时出现，平时不占视觉重量 */
+.lang-group__handle {
+    margin-left: auto;
+    font-size: var(--fs-sm);
+    letter-spacing: -2px;
+    color: var(--c-fg-subtle);
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+}
+
+.lang-group__title:hover .lang-group__handle,
+.lang-group__title:focus-visible .lang-group__handle {
+    opacity: 1;
+}
+
+.lang-group__label {
+    font-weight: 500;
+}
+
+.lang-group__title--dragging {
+    opacity: 0.4;
+}
+
+.lang-group__title--drop-target {
+    background: var(--c-accent-soft);
+    border-radius: var(--r-control);
+}
+
+.lang-group__count {
+    font-size: var(--fs-sm);
+    color: var(--c-fg-subtle);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 拖动状态：行本身的主操作是「打开」，所以平时是 pointer，拖起来才变 grabbing */
+.lang-card[draggable="true"] {
+    cursor: pointer;
+}
+
+.lang-card[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.lang-card--dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+}
+
+.lang-card--drop-target {
+    background: var(--c-accent-soft);
+}
+
+/* ---------- 数据格式（/schema，结构与语法页共用 .grammar-*） ---------- */
+.doc-body {
+    font-size: var(--fs-md);
+    line-height: var(--lh-base);
+    color: var(--c-fg);
+}
+
+.doc-heading {
+    max-width: 42em;
+    scroll-margin-top: calc(var(--h-header) + var(--sp-4));
+}
+
+.doc-body .doc-heading[data-level="2"] {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: -.005em;
+    margin: var(--sp-6) 0 var(--sp-3);
+}
+
+.doc-body .doc-heading[data-level="3"] {
+    font-size: var(--fs-md);
+    font-weight: 600;
+    margin: var(--sp-5) 0 var(--sp-2);
+}
+
+.doc-body .doc-heading[data-level="4"],
+.doc-body .doc-heading[data-level="5"] {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-fg-muted);
+    margin: var(--sp-4) 0 var(--sp-2);
+}
+
+.doc-body > .doc-heading:first-child {
+    margin-top: 0;
+}
+
+.doc-p {
+    max-width: 42em;
+    margin: var(--sp-3) 0;
+}
+
+.doc-list {
+    max-width: 42em;
+    margin: var(--sp-3) 0;
+    padding-left: 1.5em;
+}
+
+/* 全局 reset 去掉了列表标记，文档里显式加回来 */
+ul.doc-list {
+    list-style: disc;
+}
+
+ul.doc-list ul.doc-list {
+    list-style: circle;
+}
+
+ol.doc-list {
+    list-style: decimal;
+}
+
+.doc-list > li {
+    margin: var(--sp-1) 0;
+}
+
+.doc-list > li > .doc-list {
+    margin: var(--sp-1) 0;
+}
+
+/* 结论条：全篇只有这一处朱红，和「当前篇」的标记呼应 */
+.doc-quote {
+    max-width: 42em;
+    margin: var(--sp-5) 0;
+    padding-left: var(--sp-4);
+    border-left: 3px solid var(--c-accent);
+    color: var(--c-fg);
+}
+
+.doc-quote > p {
+    margin: 0;
+}
+
+.doc-quote--lead {
+    max-width: none;
+    margin: 0 0 var(--sp-5);
+}
+
+.doc-quote--lead > p {
+    max-width: 42em;
+}
+
+.doc-code {
+    margin: var(--sp-4) 0;
+    padding: var(--sp-3) var(--sp-4);
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    overflow-x: auto;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+}
+
+.doc-code > code {
+    font: inherit;
+    white-space: pre;
+}
+
+.doc-inline-code {
+    padding: 0 .3em;
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    font-family: var(--ff-mono);
+    font-size: .92em;
+}
+
+/* 键盘按键：空格、Tab 这类（文档里的 <kbd>） */
+.doc-body kbd {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 0 .35em;
+    border: 1px solid var(--c-border);
+    border-bottom-width: 2px;
+    border-radius: var(--r-control);
+    background: var(--c-bg-subtle);
+    color: var(--c-fg);
+    font-family: var(--ff-mono);
+    font-size: .85em;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.doc-table-wrap {
+    margin: var(--sp-4) 0;
+    overflow-x: auto;
+}
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+}
+
+.doc-table th {
+    padding: var(--sp-2) var(--sp-4) var(--sp-2) 0;
+    border-bottom: 1px solid var(--c-border);
+    color: var(--c-fg-muted);
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.doc-table td {
+    padding: var(--sp-2) var(--sp-4) var(--sp-2) 0;
+    border-bottom: 1px solid var(--c-rule);
+    vertical-align: top;
+}
+
+.doc-table th:last-child,
+.doc-table td:last-child {
+    padding-right: 0;
+}
+
+.doc-cell--right {
+    text-align: right;
+}
+
+.doc-cell--center {
+    text-align: center;
+}
+
+.doc-link {
+    color: var(--c-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.doc-link--plain {
+    color: inherit;
+    text-decoration: none;
+}
+
+.doc-rule {
+    margin: var(--sp-5) 0;
+    border: 0;
+    border-top: 1px solid var(--c-rule);
+}
+
+.doc-pager {
+    display: flex;
+    max-width: 42em;
+    gap: var(--sp-4);
+    margin: var(--sp-7) 0 var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--c-border);
+}
+
+.doc-pager__link {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    color: var(--c-fg);
+    text-decoration: none;
+}
+
+.doc-pager__link--next {
+    margin-left: auto;
+    text-align: right;
+}
+
+.doc-pager__dir {
+    font-size: var(--fs-xs);
+    color: var(--c-fg-muted);
+}
+
+.doc-pager__title {
+    font-weight: 600;
+}
+
+.doc-pager__link:hover .doc-pager__title,
+.doc-pager__link:focus-visible .doc-pager__title {
+    color: var(--c-accent);
+}
+
+/* 窄屏：长代码换行，而不是横向滚动 */
+@media (max-width: 720px) {
+    .schema-head h1.page-head__title {
+        font-size: var(--fs-xl);
+    }
+
+    .doc-code > code {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 1024px) {
+    .doc-heading {
+        scroll-margin-top: calc(var(--h-header) + 84px);
+    }
+
+    .doc-body .doc-heading[data-level="2"] {
+        font-size: var(--fs-md);
+    }
+}

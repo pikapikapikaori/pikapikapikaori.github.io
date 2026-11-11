@@ -1,0 +1,988 @@
+[
+  {
+    "id": "fr-adj",
+    "title": "形容词",
+    "items": [
+      {
+        "id": "fr-adj-rules",
+        "title": "性数变化总表",
+        "tables": [
+          {
+            "caption": "形容词的性数变化",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "一般",
+                "<bdi>grand</bdi>",
+                "<bdi>grande</bdi>",
+                "<bdi>grands</bdi>",
+                "<bdi>grandes</bdi>"
+              ],
+              [
+                "-<bdi>e</bdi> 结尾",
+                "<bdi>rouge</bdi>",
+                "<bdi>rouge</bdi>",
+                "<bdi>rouges</bdi>",
+                "<bdi>rouges</bdi>"
+              ],
+              [
+                "<bdi>-f → -ve</bdi>",
+                "<bdi>actif</bdi>",
+                "<bdi>active</bdi>",
+                "<bdi>actifs</bdi>",
+                "<bdi>actives</bdi>"
+              ],
+              [
+                "<bdi>-x → -se</bdi>",
+                "<bdi>heureux</bdi>",
+                "<bdi>heureuse</bdi>",
+                "<bdi>heureux</bdi>",
+                "<bdi>heureuses</bdi>"
+              ],
+              [
+                "<bdi>-er → -ère</bdi>",
+                "<bdi>premier</bdi>",
+                "<bdi>première</bdi>",
+                "<bdi>premiers</bdi>",
+                "<bdi>premières</bdi>"
+              ],
+              [
+                "<bdi>-ien → -ienne</bdi>",
+                "<bdi>ancien</bdi>",
+                "<bdi>ancienne</bdi>",
+                "<bdi>anciens</bdi>",
+                "<bdi>anciennes</bdi>"
+              ],
+              [
+                "<bdi>-on → -onne</bdi>",
+                "<bdi>bon</bdi>",
+                "<bdi>bonne</bdi>",
+                "<bdi>bons</bdi>",
+                "<bdi>bonnes</bdi>"
+              ],
+              [
+                "<bdi>-el → -elle</bdi>",
+                "<bdi>cruel</bdi>",
+                "<bdi>cruelle</bdi>",
+                "<bdi>cruels</bdi>",
+                "<bdi>cruelles</bdi>"
+              ],
+              [
+                "<bdi>-eil → -eille</bdi>",
+                "<bdi>pareil</bdi>",
+                "<bdi>pareille</bdi>",
+                "<bdi>pareils</bdi>",
+                "<bdi>pareilles</bdi>"
+              ],
+              [
+                "-<bdi>s</bdi>（不变）",
+                "<bdi>gras</bdi>",
+                "<bdi>grasse</bdi>",
+                "<bdi>gras</bdi>",
+                "<bdi>grasses</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "一般规则：阴性 + -e，复数 + -s，阴性复数 <bdi>+ -es</bdi>。以 -e 结尾的形容词阴阳同形。"
+      },
+      {
+        "id": "fr-adj-regular",
+        "title": "规则变化（+ -<bdi>e / + -s</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "grand",
+          "stemForms": {
+            "f": [
+              {
+                "pattern": "$",
+                "replace": "e"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": "-s"
+              },
+              "f": {
+                "sg": {
+                  "stemForm": "f",
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemForm": "f",
+                  "suffix": "-s"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "grand",
+                "pl": "grands"
+              },
+              "f": {
+                "sg": "grande",
+                "pl": "grandes"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：规则变化",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "—",
+                "<bdi>+ -s</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>+ -e</bdi>",
+                "<bdi>+ -es</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词 <bdi>grand</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>grand</bdi>",
+                "<bdi>grands</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>grande</bdi>",
+                "<bdi>grandes</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "阳性单数后加 -e 得阴性、加 -s 得复数、加 <bdi>-es</bdi> 得阴性复数。"
+      },
+      {
+        "id": "fr-adj-invariable",
+        "title": "阴阳同形（以 -<bdi>e</bdi> 结尾）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "rouge",
+          "stemForms": {
+            "f": []
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": "-s"
+              },
+              "f": {
+                "sg": {
+                  "stemForm": "f",
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemForm": "f",
+                  "suffix": "-s"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "rouge",
+                "pl": "rouges"
+              },
+              "f": {
+                "sg": "rouge",
+                "pl": "rouges"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：阴阳同形",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "—",
+                "<bdi>+ -s</bdi>"
+              ],
+              [
+                "阴性",
+                "—",
+                "<bdi>+ -s</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词 <bdi>rouge</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>rouge</bdi>",
+                "<bdi>rouges</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>rouge</bdi>",
+                "<bdi>rouges</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "以 -e 结尾的形容词阴性不变，只在复数加 -s；四个性数格里阴、阳两列应填同一形式。"
+      },
+      {
+        "id": "fr-adj-f-ve",
+        "title": "<bdi>-f → -ve</bdi>",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "neuf",
+          "stemForms": {
+            "f": [
+              {
+                "pattern": "f$",
+                "replace": "ve"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": "-s"
+              },
+              "f": {
+                "sg": {
+                  "stemForm": "f",
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemForm": "f",
+                  "suffix": "-s"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "neuf",
+                "pl": "neufs"
+              },
+              "f": {
+                "sg": "neuve",
+                "pl": "neuves"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：-<bdi>f → -ve</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>-f</bdi>",
+                "<bdi>-fs</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>-ve</bdi>",
+                "<bdi>-ves</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词 <bdi>neuf</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>neuf</bdi>",
+                "<bdi>neufs</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>neuve</bdi>",
+                "<bdi>neuves</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "同类：<bdi>actif / active</bdi>、<bdi>sportif / sportive</bdi>、<bdi>vif / vive</bdi>。"
+      },
+      {
+        "id": "fr-adj-eux-euse",
+        "title": "<bdi>-eux → -euse</bdi>",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "heureux",
+          "stemForms": {
+            "f": [
+              {
+                "pattern": "eux$",
+                "replace": "euse"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemForm": "f",
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemForm": "f",
+                  "suffix": "-s"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "heureux",
+                "pl": "heureux"
+              },
+              "f": {
+                "sg": "heureuse",
+                "pl": "heureuses"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：-<bdi>eux → -euse</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>-eux</bdi>",
+                "<bdi>-eux</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>-euse</bdi>",
+                "<bdi>-euses</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词 <bdi>heureux</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>heureux</bdi>",
+                "<bdi>heureux</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>heureuse</bdi>",
+                "<bdi>heureuses</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "阳性复数不变（<bdi>heureux</bdi>）；同类：<bdi>curieux / curieuse</bdi>、<bdi>délicieux / délicieuse</bdi>。"
+      },
+      {
+        "id": "fr-adj-er-ere",
+        "title": "<bdi>-er → -ère</bdi>",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "léger",
+          "stemForms": {
+            "f": [
+              {
+                "pattern": "er$",
+                "replace": "ère"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": "-s"
+              },
+              "f": {
+                "sg": {
+                  "stemForm": "f",
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemForm": "f",
+                  "suffix": "-s"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "léger",
+                "pl": "légers"
+              },
+              "f": {
+                "sg": "légère",
+                "pl": "légères"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：-<bdi>er → -ère</bdi>",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>-er</bdi>",
+                "<bdi>-ers</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>-ère</bdi>",
+                "<bdi>-ères</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词 <bdi>léger</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>léger</bdi>",
+                "<bdi>légers</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>légère</bdi>",
+                "<bdi>légères</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "同类：<bdi>premier / première</bdi>、<bdi>dernier / dernière</bdi>；注意重音符号由 <bdi>é</bdi> 变 <bdi>è</bdi>。"
+      },
+      {
+        "id": "fr-adj-doubling",
+        "title": "双写结尾辅音（-<bdi>el / -en / -on / -et</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "stemExample": "bon",
+          "stemForms": {
+            "f": [
+              {
+                "pattern": "$",
+                "replace": "ne"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": "-s"
+              },
+              "f": {
+                "sg": {
+                  "stemForm": "f",
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemForm": "f",
+                  "suffix": "-s"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "bon",
+                "pl": "bons"
+              },
+              "f": {
+                "sg": "bonne",
+                "pl": "bonnes"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "词尾：双写结尾辅音",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>-on</bdi>",
+                "<bdi>-ons</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>-onne</bdi>",
+                "<bdi>-onnes</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词 <bdi>bon</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>bon</bdi>",
+                "<bdi>bons</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>bonne</bdi>",
+                "<bdi>bonnes</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "同类：<bdi>naturel / naturelle</bdi>、<bdi>ancien / ancienne</bdi>、<bdi>muet / muette</bdi>；但 <bdi>complet → complète</bdi> 不双写。"
+      },
+      {
+        "id": "fr-adj-position",
+        "title": "位置与意义变化",
+        "tables": [
+          {
+            "caption": "位置规则",
+            "role": "pattern",
+            "headers": [
+              "类型",
+              "位置",
+              "例"
+            ],
+            "rows": [
+              [
+                "颜色、国籍、分词类",
+                "名词后",
+                "<bdi>une voiture rouge</bdi>、<bdi>un livre français</bdi>"
+              ],
+              [
+                "常用短形容词（<bdi>beau, grand, petit, jeune, bon</bdi>…）",
+                "名词前",
+                "<bdi>un beau jardin</bdi>"
+              ],
+              [
+                "数量 / 序数",
+                "名词前",
+                "<bdi>deux livres</bdi>、<bdi>le premier jour</bdi>"
+              ],
+              [
+                "意义随位置变化",
+                "前后皆可，意义不同",
+                "<bdi>un grand homme</bdi>（伟人）<bdi>/ un homme grand</bdi>（高个子）"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "<bdi>BANGS</bdi> 助记：<bdi>Beauty</bdi>、<bdi>Age</bdi>、<bdi>Number</bdi>、<bdi>Goodness</bdi>、<bdi>Size</bdi> 类形容词前置。"
+      },
+      {
+        "id": "fr-adj-comparison",
+        "title": "比较级与最高级",
+        "tables": [
+          {
+            "caption": "比较级",
+            "role": "pattern",
+            "headers": [
+              "类型",
+              "构成",
+              "例"
+            ],
+            "rows": [
+              [
+                "较高",
+                "<bdi>plus +</bdi> 形容词 <bdi>+ que</bdi>",
+                "<bdi>plus grand que</bdi>"
+              ],
+              [
+                "较低",
+                "<bdi>moins +</bdi> 形容词 <bdi>+ que</bdi>",
+                "<bdi>moins grand que</bdi>"
+              ],
+              [
+                "相等",
+                "<bdi>aussi +</bdi> 形容词 <bdi>+ que</bdi>",
+                "<bdi>aussi grand que</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "最高级",
+            "role": "pattern",
+            "headers": [
+              "类型",
+              "构成",
+              "例"
+            ],
+            "rows": [
+              [
+                "最高（相对）",
+                "<bdi>le / la / les plus</bdi> + 形容词",
+                "<bdi>le plus grand</bdi>"
+              ],
+              [
+                "最低（相对）",
+                "<bdi>le / la / les moins</bdi> + 形容词",
+                "<bdi>le moins grand</bdi>"
+              ],
+              [
+                "绝对最高",
+                "<bdi>très / extrêmement</bdi> + 形容词",
+                "<bdi>très grand</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "不规则比较级",
+            "role": "pattern",
+            "headers": [
+              "原级",
+              "比较级",
+              "最高级"
+            ],
+            "rows": [
+              [
+                "<bdi>bon</bdi>",
+                "<bdi>meilleur</bdi>",
+                "<bdi>le meilleur</bdi>"
+              ],
+              [
+                "<bdi>mauvais</bdi>",
+                "<bdi>pire / plus mauvais</bdi>",
+                "<bdi>le pire / le plus mauvais</bdi>"
+              ],
+              [
+                "<bdi>petit</bdi>",
+                "<bdi>moindre / plus petit</bdi>",
+                "<bdi>le moindre / le plus petit</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "比较级用 <bdi>plus / moins / aussi +</bdi> 形容词 <bdi>+ que</bdi>；最高级用 <bdi>le / la / les plus / moins</bdi>。"
+      },
+      {
+        "id": "fr-adj-adverb",
+        "title": "形容词构造副词（-<bdi>ment</bdi>）",
+        "tables": [
+          {
+            "caption": "构成规则",
+            "role": "pattern",
+            "headers": [
+              "形容词结尾",
+              "构成",
+              "例"
+            ],
+            "rows": [
+              [
+                "一般（阳性单数）",
+                "阳性单数 + -<bdi>ment</bdi>",
+                "<bdi>lent → lentement</bdi>、<bdi>heureux → heureusement</bdi>"
+              ],
+              [
+                "以元音结尾",
+                "阳性单数 + -<bdi>ment</bdi>",
+                "<bdi>vrai → vraiment</bdi>、<bdi>poli → poliment</bdi>"
+              ],
+              [
+                "阳性以 -<bdi>ant</bdi> 结尾",
+                "<bdi>-ant → -amment</bdi>",
+                "<bdi>courant → couramment</bdi>、<bdi>savant → savamment</bdi>"
+              ],
+              [
+                "阳性以 -<bdi>ent</bdi> 结尾",
+                "<bdi>-ent → -emment</bdi>",
+                "<bdi>récent → récemment</bdi>、<bdi>prudent → prudemment</bdi>"
+              ],
+              [
+                "以 -<bdi>e</bdi> 结尾",
+                "直接用 -e 形式 <bdi>+ -ment</bdi>",
+                "<bdi>facile → facilement</bdi>、<bdi>rapide → rapidement</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "不规则与例外",
+            "role": "pattern",
+            "headers": [
+              "形容词",
+              "副词",
+              "说明"
+            ],
+            "rows": [
+              [
+                "<bdi>bon</bdi>",
+                "<bdi>bien</bdi>",
+                "规则外的替换"
+              ],
+              [
+                "<bdi>mauvais</bdi>",
+                "<bdi>mal</bdi>",
+                "规则外的替换"
+              ],
+              [
+                "<bdi>bref</bdi>",
+                "<bdi>brièvement</bdi>",
+                "<bdi>-f → -ve + ment</bdi>"
+              ],
+              [
+                "<bdi>gentil</bdi>",
+                "<bdi>gentiment</bdi>",
+                "拼写变化"
+              ],
+              [
+                "<bdi>énorme / immense</bdi>",
+                "<bdi>énormément / immensément</bdi>",
+                "口语中也常见 -<bdi>ment</bdi>"
+              ],
+              [
+                "<bdi>précipité</bdi>",
+                "<bdi>précipitamment</bdi>",
+                "保留 -<bdi>amment</bdi> 型"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "对照表",
+            "role": "pattern",
+            "headers": [
+              "形容词（阳）",
+              "副词",
+              "例句"
+            ],
+            "rows": [
+              [
+                "<bdi>lent</bdi>",
+                "<bdi>lentement</bdi>",
+                "<bdi>Il marche lentement.</bdi>"
+              ],
+              [
+                "<bdi>facile</bdi>",
+                "<bdi>facilement</bdi>",
+                "<bdi>C'est facilement fait.</bdi>"
+              ],
+              [
+                "<bdi>courant</bdi>",
+                "<bdi>couramment</bdi>",
+                "<bdi>Elle parle couramment anglais.</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "副词性 -<bdi>ment</bdi> 的读音：<bdi>-amment / -emment</bdi> 都读 <bdi>[am</bdi>ɑ̃]。"
+      },
+      {
+        "id": "fr-adj-irregular",
+        "title": "不规则形容词（参考）",
+        "tables": [
+          {
+            "caption": "常见不规则",
+            "role": "pattern",
+            "headers": [
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "<bdi>beau</bdi>",
+                "<bdi>belle</bdi>",
+                "<bdi>beaux</bdi>",
+                "<bdi>belles</bdi>"
+              ],
+              [
+                "<bdi>nouveau</bdi>",
+                "<bdi>nouvelle</bdi>",
+                "<bdi>nouveaux</bdi>",
+                "<bdi>nouvelles</bdi>"
+              ],
+              [
+                "<bdi>vieux</bdi>",
+                "<bdi>vieille</bdi>",
+                "<bdi>vieux</bdi>",
+                "<bdi>vieilles</bdi>"
+              ],
+              [
+                "<bdi>blanc</bdi>",
+                "<bdi>blanche</bdi>",
+                "<bdi>blancs</bdi>",
+                "<bdi>blanches</bdi>"
+              ],
+              [
+                "<bdi>frais</bdi>",
+                "<bdi>fraîche</bdi>",
+                "<bdi>frais</bdi>",
+                "<bdi>fraîches</bdi>"
+              ],
+              [
+                "<bdi>long</bdi>",
+                "<bdi>longue</bdi>",
+                "<bdi>longs</bdi>",
+                "<bdi>longues</bdi>"
+              ],
+              [
+                "<bdi>doux</bdi>",
+                "<bdi>douce</bdi>",
+                "<bdi>doux</bdi>",
+                "<bdi>douces</bdi>"
+              ],
+              [
+                "<bdi>faux</bdi>",
+                "<bdi>fausse</bdi>",
+                "<bdi>faux</bdi>",
+                "<bdi>fausses</bdi>"
+              ],
+              [
+                "<bdi>gentil</bdi>",
+                "<bdi>gentille</bdi>",
+                "<bdi>gentils</bdi>",
+                "<bdi>gentilles</bdi>"
+              ],
+              [
+                "<bdi>public</bdi>",
+                "<bdi>publique</bdi>",
+                "<bdi>publics</bdi>",
+                "<bdi>publiques</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "这些形容词没有统一规则：生词表里请选「特殊变形」并自行填写四个形式。<bdi>beau / nouveau / vieux</bdi> 在元音或哑音 h 前有特殊形式（<bdi>bel</bdi>、<bdi>nouvel</bdi>、<bdi>vieil</bdi>）。"
+      }
+    ]
+  }
+]

@@ -1,0 +1,526 @@
+[
+  {
+    "id": "fr-noun",
+    "title": "名词",
+    "items": [
+      {
+        "id": "fr-noun-gender",
+        "title": "性与数",
+        "tables": [
+          {
+            "caption": "名词的性与数",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "阳性",
+                "<bdi>le livre</bdi>",
+                "<bdi>les livres</bdi>"
+              ],
+              [
+                "阴性",
+                "<bdi>la table</bdi>",
+                "<bdi>les tables</bdi>"
+              ]
+            ]
+          },
+          {
+            "caption": "常见复数规则",
+            "role": "pattern",
+            "headers": [
+              "单数结尾",
+              "复数规则",
+              "例"
+            ],
+            "rows": [
+              [
+                "一般",
+                "<bdi>+ -s</bdi>",
+                "<bdi>livre → livres</bdi>"
+              ],
+              [
+                "<bdi>-s, -x, -z</bdi>",
+                "不变",
+                "<bdi>voix → voix, nez → nez</bdi>"
+              ],
+              [
+                "<bdi>-al</bdi>",
+                "<bdi>-al → -aux</bdi>",
+                "<bdi>cheval → chevaux</bdi>"
+              ],
+              [
+                "<bdi>-eau, -au, -eu</bdi>",
+                "<bdi>+ -x</bdi>",
+                "<bdi>beau → beaux, feu → feux</bdi>"
+              ],
+              [
+                "-<bdi>ou</bdi>（部分）",
+                "<bdi>+ -x</bdi>",
+                "<bdi>bijou → bijoux, genou → genoux</bdi>"
+              ],
+              [
+                "-<bdi>ail</bdi>（部分）",
+                "<bdi>-ail → -aux</bdi>",
+                "<bdi>travail → travaux</bdi>"
+              ],
+              [
+                "-<bdi>s / -x / -z</bdi> 结尾",
+                "不变",
+                "<bdi>fils → fils</bdi>"
+              ]
+            ]
+          }
+        ],
+        "notes": "法语名词的性别需按词记忆：以 -<bdi>tion / -té / -ette / -elle / -ance / -ence</bdi> 结尾多为阴性，以 <bdi>-ment / -age / -isme / -eau</bdi> 结尾多为阳性。"
+      },
+      {
+        "id": "fr-noun-plural-regular",
+        "title": "一般规则（+ -<bdi>s</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "livre",
+          "stemForms": {
+            "pl": [
+              {
+                "pattern": "$",
+                "replace": "s"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "livre",
+                "pl": "livres"
+              },
+              "f": {
+                "sg": "livre",
+                "pl": "livres"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：一般名词",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "一般名词",
+                "<bdi>+ -s</bdi>"
+              ],
+              [
+                "-<bdi>s</bdi> 的读音",
+                "不发音"
+              ],
+              [
+                "单复数区分",
+                "靠限定词"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "<bdi>livre</bdi>",
+                "<bdi>livres</bdi>"
+              ],
+              [
+                "<bdi>table</bdi>",
+                "<bdi>tables</bdi>"
+              ],
+              [
+                "<bdi>étudiant</bdi>",
+                "<bdi>étudiants</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "绝大多数名词在单数形式后加 -s；-s 本身不发音。"
+      },
+      {
+        "id": "fr-noun-plural-al",
+        "title": "<bdi>-al → -aux</bdi>",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "cheval",
+          "stemForms": {
+            "pl": [
+              {
+                "pattern": "al$",
+                "replace": "aux"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "cheval",
+                "pl": "chevaux"
+              },
+              "f": {
+                "sg": "cheval",
+                "pl": "chevaux"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：-<bdi>al → -aux</bdi>",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "-<bdi>al</bdi> 结尾",
+                "<bdi>-aux</bdi>"
+              ],
+              [
+                "例外",
+                "<bdi>bal / carnaval / festival / récital</bdi> 等 + -s"
+              ],
+              [
+                "读音",
+                "<bdi>-aux</bdi> 读 [o]"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "<bdi>cheval</bdi>",
+                "<bdi>chevaux</bdi>"
+              ],
+              [
+                "<bdi>journal</bdi>",
+                "<bdi>journaux</bdi>"
+              ],
+              [
+                "<bdi>animal</bdi>",
+                "<bdi>animaux</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "例外：<bdi>bal / carnaval / festival / récital</bdi> 等加 -s（<bdi>bals</bdi>）。"
+      },
+      {
+        "id": "fr-noun-plural-eau",
+        "title": "<bdi>-eau / -au / -eu → + -x</bdi>",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "bateau",
+          "stemForms": {
+            "pl": [
+              {
+                "pattern": "$",
+                "replace": "x"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "bateau",
+                "pl": "bateaux"
+              },
+              "f": {
+                "sg": "bateau",
+                "pl": "bateaux"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：-<bdi>eau / -au / -eu → + -x</bdi>",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "-<bdi>eau / -au / -eu</bdi> 结尾",
+                "<bdi>+ -x</bdi>"
+              ],
+              [
+                "例外",
+                "<bdi>pneu / landau / bleu + -s</bdi>"
+              ],
+              [
+                "读音",
+                "-<bdi>x</bdi> 不发音"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "<bdi>bateau</bdi>",
+                "<bdi>bateaux</bdi>"
+              ],
+              [
+                "<bdi>château</bdi>",
+                "<bdi>châteaux</bdi>"
+              ],
+              [
+                "<bdi>feu</bdi>",
+                "<bdi>feux</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "例外：<bdi>pneu / landau / bleu</bdi> 加 -s（<bdi>pneus</bdi>）。"
+      },
+      {
+        "id": "fr-noun-plural-invariable",
+        "title": "不变（-<bdi>s / -x / -z</bdi> 结尾）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "voix",
+          "stemForms": {
+            "pl": []
+          },
+          "endings": {
+            "main": {
+              "m": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              },
+              "f": {
+                "sg": {
+                  "stemOnly": true
+                },
+                "pl": {
+                  "stemOnly": true,
+                  "stemForm": "pl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "m": {
+                "sg": "voix",
+                "pl": "voix"
+              },
+              "f": {
+                "sg": "voix",
+                "pl": "voix"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "规则：以 -<bdi>s / -x / -z</bdi> 结尾",
+            "role": "pattern",
+            "headers": [
+              "情况",
+              "说明"
+            ],
+            "rows": [
+              [
+                "以 -<bdi>s / -x / -z</bdi> 结尾",
+                "单复数同形"
+              ],
+              [
+                "区分方式",
+                "靠限定词（<bdi>le bras / les bras</bdi>）"
+              ],
+              [
+                "读音",
+                "词尾辅音不发音"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "例词",
+            "role": "example",
+            "headers": [
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "<bdi>voix</bdi>",
+                "<bdi>voix</bdi>"
+              ],
+              [
+                "<bdi>nez</bdi>",
+                "<bdi>nez</bdi>"
+              ],
+              [
+                "<bdi>bras</bdi>",
+                "<bdi>bras</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "以 -<bdi>s / -x / -z</bdi> 结尾的名词复数形式不变，靠限定词区分（<bdi>le bras / les bras</bdi>）。"
+      },
+      {
+        "id": "fr-noun-irregular",
+        "title": "不规则复数（参考）",
+        "tables": [
+          {
+            "caption": "常见不规则复数",
+            "role": "pattern",
+            "headers": [
+              "单数",
+              "复数",
+              "说明"
+            ],
+            "rows": [
+              [
+                "<bdi>œil</bdi>",
+                "<bdi>yeux</bdi>",
+                "最常用的不规则复数"
+              ],
+              [
+                "<bdi>ciel</bdi>",
+                "<bdi>cieux</bdi>",
+                "「天空」；<bdi>ciels</bdi> 指「气候」"
+              ],
+              [
+                "<bdi>travail</bdi>",
+                "<bdi>travaux</bdi>",
+                "<bdi>-ail → -aux</bdi>"
+              ],
+              [
+                "<bdi>vitrail</bdi>",
+                "<bdi>vitraux</bdi>",
+                "<bdi>-ail → -aux</bdi>"
+              ],
+              [
+                "<bdi>bijou / caillou / chou / genou / hibou / joujou / pou</bdi>",
+                "<bdi>…-x</bdi>",
+                "以 -<bdi>ou</bdi> 结尾但加 -x 的七个词"
+              ],
+              [
+                "<bdi>monsieur / madame / mademoiselle</bdi>",
+                "<bdi>messieurs / mesdames / mesdemoiselles</bdi>",
+                "敬称"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "这些词没有统一规则，需要按词记忆；生词表里可直接选「特殊变形」并自行填写复数。"
+      }
+    ]
+  }
+]

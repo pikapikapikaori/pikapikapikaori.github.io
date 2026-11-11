@@ -220,7 +220,6 @@
 }
 
 .main-page-about-me-avatar {
-    max-width: var(--global-icon-size-large);
     margin-top: 1.25rem;
     overflow: hidden;
 }
@@ -259,11 +258,6 @@
 
 .main-page-about-me-image-links p:last-child {
     margin-bottom: 0;
-}
-
-/* Poem Container */
-.poem-div {
-    font-family: var(--global-poem-font);
 }
 
 /* Writing Direction Vertical Container */

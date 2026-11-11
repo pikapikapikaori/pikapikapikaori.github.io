@@ -1,0 +1,26 @@
+/* 界面字体声明：字体文件放在 assets/resources/fonts/ 下；各语言原文的字体与 [lang] 规则见 lang.css。
+ * 每个 family 只声明自己那种文字的 unicode-range，范围外的说明性中英文回落到 var(--ff-ui)；
+ * 界面字体 LN UI 由「拉丁 Gentium + 中文楷体」两段合成，范围不重叠；只声明实际拥有的字重。 */
+
+@font-face {
+    font-family: "LN UI";
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    /* 拉丁、希腊、标点、数字、数学符号 */
+    unicode-range: U+0000-2E7F, U+1D00-1DBF, U+1E00-1EFF, U+2000-2BFF,
+        U+A000-A4CF, U+FB00-FB06, U+FE20-FE2F, U+FF60-FF9F;
+}
+
+@font-face {
+    font-family: "LN UI";
+    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    /* CJK 与全角标点 */
+    unicode-range: U+2E80-303F, U+3100-312F, U+31C0-31EF, U+3200-33FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F,
+        U+FF00-FFEF, U+20000-2FA1F;
+}

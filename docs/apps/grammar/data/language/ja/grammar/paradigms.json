@@ -1,0 +1,194 @@
+{
+  "verb": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "forms",
+        "title": "活用形",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "mizen",
+            "label": "未然形"
+          },
+          {
+            "key": "renyo1",
+            "label": "連用形1"
+          },
+          {
+            "key": "renyo2",
+            "label": "連用形2（音便）"
+          },
+          {
+            "key": "shusi",
+            "label": "終止形（辞書形）"
+          },
+          {
+            "key": "rentai",
+            "label": "連体形"
+          },
+          {
+            "key": "katei",
+            "label": "已然形（仮定）"
+          },
+          {
+            "key": "meirei",
+            "label": "命令形"
+          }
+        ]
+      },
+      {
+        "key": "compound",
+        "title": "合成形式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "masu",
+            "label": "<bdi>ます形</bdi>（叮咛）"
+          },
+          {
+            "key": "nai",
+            "label": "<bdi>ない形</bdi>"
+          },
+          {
+            "key": "ta",
+            "label": "<bdi>た形</bdi>"
+          },
+          {
+            "key": "te",
+            "label": "<bdi>て形</bdi>"
+          },
+          {
+            "key": "ishi",
+            "label": "意志形"
+          },
+          {
+            "key": "kano",
+            "label": "可能形"
+          },
+          {
+            "key": "ukemi",
+            "label": "受身形"
+          },
+          {
+            "key": "shieki",
+            "label": "使役形"
+          },
+          {
+            "key": "shiekiukemi",
+            "label": "使役受身形"
+          },
+          {
+            "key": "kateiba",
+            "label": "仮定形＋<bdi>ば</bdi>"
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "key": "transitivity",
+        "label": "自他",
+        "options": [
+          {
+            "value": "trans",
+            "label": "他动词"
+          },
+          {
+            "value": "intrans",
+            "label": "自动词"
+          }
+        ],
+        "required": true,
+        "multi": true
+      }
+    ]
+  },
+  "adj": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "forms",
+        "title": "活用形",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "mizen",
+            "label": "未然形"
+          },
+          {
+            "key": "renyo1",
+            "label": "連用形1"
+          },
+          {
+            "key": "renyo2",
+            "label": "連用形2（音便）"
+          },
+          {
+            "key": "shusi",
+            "label": "終止形（辞書形）"
+          },
+          {
+            "key": "rentai",
+            "label": "連体形"
+          },
+          {
+            "key": "katei",
+            "label": "已然形（仮定）"
+          }
+        ]
+      },
+      {
+        "key": "compound",
+        "title": "合成形式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "teinei",
+            "label": "叮咛形（<bdi>です</bdi>）"
+          },
+          {
+            "key": "nai",
+            "label": "<bdi>ない形</bdi>"
+          },
+          {
+            "key": "ta",
+            "label": "<bdi>た形</bdi>"
+          },
+          {
+            "key": "te",
+            "label": "<bdi>て形</bdi>"
+          },
+          {
+            "key": "kateiba",
+            "label": "仮定形＋<bdi>ば</bdi>"
+          },
+          {
+            "key": "renyo",
+            "label": "连用（副词）用法"
+          }
+        ]
+      }
+    ]
+  }
+}

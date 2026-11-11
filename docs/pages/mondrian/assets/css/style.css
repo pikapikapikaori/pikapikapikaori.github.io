@@ -396,6 +396,10 @@ body {
     transition: opacity 0.3s ease;
 }
 
+.flip-card .flip-hint::before {
+    content: "↻";
+}
+
 .flip-card:hover .flip-hint {
     opacity: 0.8;
 }
@@ -418,6 +422,10 @@ body {
     z-index: 5;
     transition: opacity 0.3s ease;
     line-height: 1;
+}
+
+.translate-icon::before {
+    content: "🌐︎";
 }
 
 .flip-back .translate-icon {
@@ -476,11 +484,11 @@ body {
     transform: translate(2px, -2px);
 }
 
-.link-cell .arrow-indicator {
+.link-cell .arrow-indicator::before {
     content: "↗";
 }
 
-.link-cell-same .arrow-indicator {
+.link-cell-same .arrow-indicator::before {
     content: "→";
 }
 
@@ -508,6 +516,11 @@ body {
 
 .flip-back-text a:hover {
     color: var(--mondrian-blue);
+}
+
+.flip-back-text a.is-current {
+    font-weight: 700;
+    text-decoration-thickness: 3px;
 }
 
 @media (max-width: 480px) {
@@ -596,19 +609,5 @@ body {
 @media (max-aspect-ratio: 1/2) {
     :root {
         --square-size: 88vw;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .mondrian-wrapper {
-        animation: none;
     }
 }

@@ -44,12 +44,6 @@
         return 1 - Math.pow(1 - t, 5)
     }
 
-    /* ---------- 环境 ---------- */
-
-    U.prefersReducedMotion = function () {
-        return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    }
-
     /* 
      * ---------- 磁吸 ----------
      * 把 0–1 的连续输入吸附到 n 个等距静止点。

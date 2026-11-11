@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "language": "de",
+  "name": "德语",
+  "native": "Deutsch",
+  "classical": false,
+  "group": {
+    "id": "modern",
+    "title": "现代语言",
+    "order": 2
+  },
+  "order": 4,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "participle",
+    "adv",
+    "pron",
+    "prep",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "terms": {
+    "inflectionType": "变形类型",
+    "inflectionTypePlaceholder": "如：强变化",
+    "special": "特殊变形",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}变形表",
+    "extraForms": "补充形式",
+    "basicTitle": "基本",
+    "stemsTitle": "词干",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 Tisch"
+    },
+    "byPos": {
+      "verb": {
+        "special": "特殊变位",
+        "indeclinable": "不变位",
+        "paradigmTitle": "{pos}变位表",
+        "inflectionType": "变位类型",
+        "inflectionTypePlaceholder": "如：强变化动词"
+      },
+      "noun": {
+        "inflectionType": "变格类型",
+        "special": "特殊变格",
+        "indeclinable": "不变格",
+        "paradigmTitle": "{pos}变格表",
+        "inflectionTypePlaceholder": "如：强变化"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 Tisch"
+    },
+    "meanings": "含义",
+    "collocations": "固定搭配",
+    "examples": "例句",
+    "derivatives": "派生词",
+    "tags": "标签",
+    "notes": "备注",
+    "others": "其他",
+    "paradigmTable": "形态变形",
+    "optionalSuffix": "（可选）",
+    "add": "＋ 添加",
+    "addMeaning": "＋ 添加含义",
+    "posLabel": "词性",
+    "anchorLabel": "语法条目",
+    "meaningPlaceholder": "含义",
+    "emptyMeanings": "该来源还没有含义",
+    "inflectionGroupPlaceholder": "分组（可选）",
+    "inflectionLabelPlaceholder": "标签",
+    "inflectionFormPlaceholder": "形态",
+    "emptyCollocations": "该来源还没有固定搭配",
+    "collocationTextPlaceholder": "固定搭配原文",
+    "collocationGlossPlaceholder": "含义",
+    "emptyExamples": "该来源还没有例句",
+    "exampleTextPlaceholder": "例句原文",
+    "exampleCitationPlaceholder": "出处",
+    "exampleTranslationPlaceholder": "含义",
+    "derivativeSearchLabel": "搜索生词",
+    "derivativeSearchPlaceholder": "搜索基本形态或词干…",
+    "derivativeEmptyHint": "尚未选择派生词",
+    "tagsPlaceholder": "高频, 文献A",
+    "notesPlaceholder": "备注"
+  },
+  "files": {
+    "ime": "ime.js",
+    "script": "script.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "de-pron",
+          "de-pron-1st-2nd",
+          "de-pron-3rd",
+          "de-pron-reflexive",
+          "de-pron-possessive",
+          "de-pron-demonstrative",
+          "de-pron-relative",
+          "de-pron-interrogative",
+          "de-pron-indefinite"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "de-noun",
+          "de-noun-gender",
+          "de-noun-m-strong",
+          "de-noun-m-strong-er",
+          "de-noun-n-strong",
+          "de-noun-n-strong-e",
+          "de-noun-n-strong-zero",
+          "de-noun-f",
+          "de-noun-f-e",
+          "de-noun-m-weak",
+          "de-noun-mixed",
+          "de-noun-special-plural"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "de-adj",
+          "de-adj-overview",
+          "de-adj-weak",
+          "de-adj-mixed",
+          "de-adj-strong",
+          "de-adj-comparison",
+          "de-adj-participle",
+          "de-adj-adverb"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "de-adv",
+          "de-adv-kinds",
+          "de-adv-comparison",
+          "de-adv-pronominal"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "de-verb",
+          "de-verb-overview",
+          "de-verb-compound",
+          "de-verb-separable",
+          "de-verb-reflexive",
+          "de-verb-weak",
+          "de-verb-weak-ind",
+          "de-verb-weak-konj",
+          "de-verb-weak-impr",
+          "de-verb-weak-inf",
+          "de-verb-weak-ptcp",
+          "de-verb-weak-ep",
+          "de-verb-weak-ep-ind",
+          "de-verb-weak-ep-konj",
+          "de-verb-weak-ep-impr",
+          "de-verb-weak-ep-inf",
+          "de-verb-weak-ep-ptcp",
+          "de-verb-weak-eln",
+          "de-verb-weak-eln-ind",
+          "de-verb-weak-eln-konj",
+          "de-verb-weak-eln-impr",
+          "de-verb-weak-eln-inf",
+          "de-verb-weak-eln-ptcp",
+          "de-verb-weak-ieren",
+          "de-verb-weak-ieren-ind",
+          "de-verb-weak-ieren-konj",
+          "de-verb-weak-ieren-impr",
+          "de-verb-weak-ieren-inf",
+          "de-verb-weak-ieren-ptcp",
+          "de-verb-weak-insep",
+          "de-verb-weak-insep-ind",
+          "de-verb-weak-insep-konj",
+          "de-verb-weak-insep-impr",
+          "de-verb-weak-insep-inf",
+          "de-verb-weak-insep-ptcp",
+          "de-verb-strong",
+          "de-verb-strong-ind",
+          "de-verb-strong-konj",
+          "de-verb-strong-impr",
+          "de-verb-strong-inf",
+          "de-verb-strong-ptcp",
+          "de-verb-mixed",
+          "de-verb-mixed-ind",
+          "de-verb-mixed-konj",
+          "de-verb-mixed-impr",
+          "de-verb-mixed-inf",
+          "de-verb-mixed-ptcp",
+          "de-verb-modal",
+          "de-verb-modal-usage",
+          "de-verb-modal-ind",
+          "de-verb-modal-konj",
+          "de-verb-modal-inf",
+          "de-verb-modal-ptcp",
+          "de-verb-modal-conj",
+          "de-verb-special",
+          "de-verb-special-aux",
+          "de-verb-special-common"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "de-num",
+          "de-num-cardinal",
+          "de-num-ordinal",
+          "de-num-other",
+          "de-num-time-date"
+        ]
+      },
+      {
+        "id": "misc",
+        "title": "句法与正字（冠词、介词、语序、正字法）",
+        "file": "grammar/misc.json",
+        "anchors": [
+          "de-article",
+          "de-article-definite",
+          "de-article-indefinite",
+          "de-prep",
+          "de-prep-accusative",
+          "de-prep-dative",
+          "de-prep-two-way",
+          "de-prep-genitive",
+          "de-prep-contraction",
+          "de-order",
+          "de-order-main",
+          "de-order-sub",
+          "de-order-frame",
+          "de-order-negation",
+          "de-orthography",
+          "de-orthography-sharp-s",
+          "de-orthography-capital",
+          "de-orthography-separate",
+          "de-orthography-punctuation"
+        ]
+      }
+    ]
+  }
+}

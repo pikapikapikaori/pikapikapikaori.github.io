@@ -1,0 +1,2502 @@
+[
+  {
+    "id": "grc-noun",
+    "title": "名词变格",
+    "items": [
+      {
+        "id": "grc-noun-1st-decl-e",
+        "title": "第一变格：-<bdi>η</bdi> 阴性（<bdi>νίκη</bdi> 型，重音在词干）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "νῑ́κ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-η",
+                "du_f": "-α",
+                "pl_f": "-αι"
+              },
+              "gen": {
+                "sg_f": "-ης",
+                "du_f": "-αιν",
+                "pl_f": "-ῶν"
+              },
+              "dat": {
+                "sg_f": "-ῃ",
+                "du_f": "-αιν",
+                "pl_f": "-αις"
+              },
+              "acc": {
+                "sg_f": "-ην",
+                "du_f": "-α",
+                "pl_f": "-ᾱς"
+              },
+              "voc": {
+                "sg_f": "-η",
+                "du_f": "-α",
+                "pl_f": "-αι"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "νίκη",
+                "du_f": "νῖκα",
+                "pl_f": "νῖκαι"
+              },
+              "gen": {
+                "sg_f": "νίκης",
+                "du_f": "νίκαιν",
+                "pl_f": "νικῶν"
+              },
+              "dat": {
+                "sg_f": "νίκῃ",
+                "du_f": "νίκαιν",
+                "pl_f": "νίκαις"
+              },
+              "acc": {
+                "sg_f": "νίκην",
+                "du_f": "νῖκα",
+                "pl_f": "νίκας"
+              },
+              "voc": {
+                "sg_f": "νίκη",
+                "du_f": "νῖκα",
+                "pl_f": "νῖκαι"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[ηή]$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-η</bdi>",
+                "<bdi>-α</bdi>",
+                "<bdi>-αι</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ης</bdi>",
+                "<bdi>-αιν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ῃ</bdi>",
+                "<bdi>-αιν</bdi>",
+                "<bdi>-αις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ην</bdi>",
+                "<bdi>-α</bdi>",
+                "<bdi>-ᾱς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-η</bdi>",
+                "<bdi>-α</bdi>",
+                "<bdi>-αι</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>νῑ́κη, νῑ́κης</bdi> (f.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>νῑ́κη</bdi>",
+                "<bdi>νῑ́κα</bdi>",
+                "<bdi>νῑ́και</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>νῑ́κης</bdi>",
+                "<bdi>νῑ́καιν</bdi>",
+                "<bdi>νῑ́κῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>νῑ́κῃ</bdi>",
+                "<bdi>νῑ́καιν</bdi>",
+                "<bdi>νῑ́καις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>νῑ́κην</bdi>",
+                "<bdi>νῑ́κα</bdi>",
+                "<bdi>νῑ́κᾱς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>νῑ́κη</bdi>",
+                "<bdi>νῑ́κα</bdi>",
+                "<bdi>νῑ́και</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "例词 <bdi>νίκη</bdi>（长 <bdi>ι</bdi> 在数据里写作 <bdi>ῑ</bdi>，只用来说明音节的长短）。属格复数 <bdi>-ῶν</bdi> 的重音固定在词尾。"
+      },
+      {
+        "id": "grc-noun-1st-decl-a",
+        "title": "第一变格：-<bdi>ᾱ</bdi> 阴性（<bdi>χώρᾱ</bdi> 型，重音在词干）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "χώρ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-ᾱ",
+                "du_f": "-ᾱ",
+                "pl_f": "-αι"
+              },
+              "gen": {
+                "sg_f": "-ᾱς",
+                "du_f": "-αιν",
+                "pl_f": "-ῶν"
+              },
+              "dat": {
+                "sg_f": "-ᾳ",
+                "du_f": "-αιν",
+                "pl_f": "-αις"
+              },
+              "acc": {
+                "sg_f": "-ᾱν",
+                "du_f": "-ᾱ",
+                "pl_f": "-ᾱς"
+              },
+              "voc": {
+                "sg_f": "-ᾱ",
+                "du_f": "-ᾱ",
+                "pl_f": "-αι"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "χώρα",
+                "du_f": "χώρα",
+                "pl_f": "χῶραι"
+              },
+              "gen": {
+                "sg_f": "χώρας",
+                "du_f": "χώραιν",
+                "pl_f": "χωρῶν"
+              },
+              "dat": {
+                "sg_f": "χώρᾳ",
+                "du_f": "χώραιν",
+                "pl_f": "χώραις"
+              },
+              "acc": {
+                "sg_f": "χώραν",
+                "du_f": "χώρα",
+                "pl_f": "χώρας"
+              },
+              "voc": {
+                "sg_f": "χώρα",
+                "du_f": "χώρα",
+                "pl_f": "χῶραι"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[αᾱά]$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-αι</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ᾱς</bdi>",
+                "<bdi>-αιν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ᾳ</bdi>",
+                "<bdi>-αιν</bdi>",
+                "<bdi>-αις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ᾱν</bdi>",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-ᾱς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-αι</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>χώρᾱ, χώρᾱς</bdi> (f.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>χώρᾱ</bdi>",
+                "<bdi>χώρᾱ</bdi>",
+                "<bdi>χώραι</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>χώρᾱς</bdi>",
+                "<bdi>χώραιν</bdi>",
+                "<bdi>χώρῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>χώρᾳ</bdi>",
+                "<bdi>χώραιν</bdi>",
+                "<bdi>χώραις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>χώρᾱν</bdi>",
+                "<bdi>χώρᾱ</bdi>",
+                "<bdi>χώρᾱς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>χώρᾱ</bdi>",
+                "<bdi>χώρᾱ</bdi>",
+                "<bdi>χώραι</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "<bdi>ᾱ</bdi> 只出现在 <bdi>ρ</bdi>、<bdi>ε</bdi>、<bdi>ι</bdi> 之后（<bdi>χώρᾱ</bdi>、<bdi>οἰκίᾱ</bdi>、<bdi>θεᾱ́</bdi>），其余情况写作 <bdi>-η</bdi>（见 <bdi>νίκη</bdi> 型）。"
+      },
+      {
+        "id": "grc-noun-1st-decl-e-oxytone",
+        "title": "第一变格：-<bdi>η</bdi> 阴性（<bdi>τιμή</bdi> 型，重音在词尾）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "τιμ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-ή",
+                "du_f": "-ά",
+                "pl_f": "-αί"
+              },
+              "gen": {
+                "sg_f": "-ῆς",
+                "du_f": "-αῖν",
+                "pl_f": "-ῶν"
+              },
+              "dat": {
+                "sg_f": "-ῇ",
+                "du_f": "-αῖν",
+                "pl_f": "-αῖς"
+              },
+              "acc": {
+                "sg_f": "-ήν",
+                "du_f": "-ά",
+                "pl_f": "-άς"
+              },
+              "voc": {
+                "sg_f": "-ή",
+                "du_f": "-ά",
+                "pl_f": "-αί"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "τιμή",
+                "du_f": "τιμά",
+                "pl_f": "τιμαί"
+              },
+              "gen": {
+                "sg_f": "τιμῆς",
+                "du_f": "τιμαῖν",
+                "pl_f": "τιμῶν"
+              },
+              "dat": {
+                "sg_f": "τιμῇ",
+                "du_f": "τιμαῖν",
+                "pl_f": "τιμαῖς"
+              },
+              "acc": {
+                "sg_f": "τιμήν",
+                "du_f": "τιμά",
+                "pl_f": "τιμάς"
+              },
+              "voc": {
+                "sg_f": "τιμή",
+                "du_f": "τιμά",
+                "pl_f": "τιμαί"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[ηή]$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ή</bdi>",
+                "<bdi>-ά</bdi>",
+                "<bdi>-αί</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ῆς</bdi>",
+                "<bdi>-αῖν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ῇ</bdi>",
+                "<bdi>-αῖν</bdi>",
+                "<bdi>-αῖς</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ήν</bdi>",
+                "<bdi>-ά</bdi>",
+                "<bdi>-άς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ή</bdi>",
+                "<bdi>-ά</bdi>",
+                "<bdi>-αί</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>τιμή, τιμῆς</bdi> (f.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>τιμή</bdi>",
+                "<bdi>τιμά</bdi>",
+                "<bdi>τιμαί</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>τιμῆς</bdi>",
+                "<bdi>τιμαῖν</bdi>",
+                "<bdi>τιμῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>τιμῇ</bdi>",
+                "<bdi>τιμαῖν</bdi>",
+                "<bdi>τιμαῖς</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>τιμήν</bdi>",
+                "<bdi>τιμά</bdi>",
+                "<bdi>τιμάς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>τιμή</bdi>",
+                "<bdi>τιμά</bdi>",
+                "<bdi>τιμαί</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "重音在词尾时词尾自带重音，词干不写重音。"
+      },
+      {
+        "id": "grc-noun-1st-decl-a-oxytone",
+        "title": "第一变格：-<bdi>ᾱ</bdi> 阴性（<bdi>ἀγορά</bdi> 型，重音在词尾）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "ἀγορ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-ά",
+                "du_f": "-ά",
+                "pl_f": "-αί"
+              },
+              "gen": {
+                "sg_f": "-ᾶς",
+                "du_f": "-αῖν",
+                "pl_f": "-ῶν"
+              },
+              "dat": {
+                "sg_f": "-ᾷ",
+                "du_f": "-αῖν",
+                "pl_f": "-αῖς"
+              },
+              "acc": {
+                "sg_f": "-άν",
+                "du_f": "-ά",
+                "pl_f": "-άς"
+              },
+              "voc": {
+                "sg_f": "-ά",
+                "du_f": "-ά",
+                "pl_f": "-αί"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "ἀγορά",
+                "du_f": "ἀγορά",
+                "pl_f": "ἀγοραί"
+              },
+              "gen": {
+                "sg_f": "ἀγορᾶς",
+                "du_f": "ἀγοραῖν",
+                "pl_f": "ἀγορῶν"
+              },
+              "dat": {
+                "sg_f": "ἀγορᾷ",
+                "du_f": "ἀγοραῖν",
+                "pl_f": "ἀγοραῖς"
+              },
+              "acc": {
+                "sg_f": "ἀγοράν",
+                "du_f": "ἀγορά",
+                "pl_f": "ἀγοράς"
+              },
+              "voc": {
+                "sg_f": "ἀγορά",
+                "du_f": "ἀγορά",
+                "pl_f": "ἀγοραί"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[αᾱά]$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ά</bdi>",
+                "<bdi>-ά</bdi>",
+                "<bdi>-αί</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ᾶς</bdi>",
+                "<bdi>-αῖν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ᾷ</bdi>",
+                "<bdi>-αῖν</bdi>",
+                "<bdi>-αῖς</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-άν</bdi>",
+                "<bdi>-ά</bdi>",
+                "<bdi>-άς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ά</bdi>",
+                "<bdi>-ά</bdi>",
+                "<bdi>-αί</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>ἀγορά, ἀγορᾶς</bdi> (f.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>ἀγορά</bdi>",
+                "<bdi>ἀγορά</bdi>",
+                "<bdi>ἀγοραί</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>ἀγορᾶς</bdi>",
+                "<bdi>ἀγοραῖν</bdi>",
+                "<bdi>ἀγορῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>ἀγορᾷ</bdi>",
+                "<bdi>ἀγοραῖν</bdi>",
+                "<bdi>ἀγοραῖς</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>ἀγοράν</bdi>",
+                "<bdi>ἀγορά</bdi>",
+                "<bdi>ἀγοράς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>ἀγορά</bdi>",
+                "<bdi>ἀγορά</bdi>",
+                "<bdi>ἀγοραί</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "<bdi>ᾱ</bdi> 变格的重音在词尾时，属格与与格单数是收缩来的弯曲重音（<bdi>ἀγορᾶς</bdi>、<bdi>ἀγορᾷ</bdi>）。"
+      },
+      {
+        "id": "grc-noun-1st-decl-m",
+        "title": "第一变格：阳性 -<bdi>ης / -ᾱς</bdi>（<bdi>πολίτης</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "πολῑ́τ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-ης",
+                "du_m": "-ᾱ",
+                "pl_m": "-αι"
+              },
+              "gen": {
+                "sg_m": "-ου",
+                "du_m": "-αιν",
+                "pl_m": "-ῶν"
+              },
+              "dat": {
+                "sg_m": "-ῃ",
+                "du_m": "-αιν",
+                "pl_m": "-αις"
+              },
+              "acc": {
+                "sg_m": "-ην",
+                "du_m": "-ᾱ",
+                "pl_m": "-ᾱς"
+              },
+              "voc": {
+                "sg_m": "-ᾰ",
+                "du_m": "-ᾱ",
+                "pl_m": "-αι"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "πολίτης",
+                "du_m": "πολίτα",
+                "pl_m": "πολῖται"
+              },
+              "gen": {
+                "sg_m": "πολίτου",
+                "du_m": "πολίταιν",
+                "pl_m": "πολιτῶν"
+              },
+              "dat": {
+                "sg_m": "πολίτῃ",
+                "du_m": "πολίταιν",
+                "pl_m": "πολίταις"
+              },
+              "acc": {
+                "sg_m": "πολίτην",
+                "du_m": "πολίτα",
+                "pl_m": "πολίτας"
+              },
+              "voc": {
+                "sg_m": "πολῖτα",
+                "du_m": "πολίτα",
+                "pl_m": "πολῖται"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[ηήαάᾱ]ς$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ης</bdi>",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-αι</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ου</bdi>",
+                "<bdi>-αιν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ῃ</bdi>",
+                "<bdi>-αιν</bdi>",
+                "<bdi>-αις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ην</bdi>",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-ᾱς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ᾰ</bdi>",
+                "<bdi>-ᾱ</bdi>",
+                "<bdi>-αι</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>πολῑ́της, πολῑ́του</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>πολῑ́της</bdi>",
+                "<bdi>πολῑ́τᾱ</bdi>",
+                "<bdi>πολῑ́ται</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>πολῑ́του</bdi>",
+                "<bdi>πολῑ́ταιν</bdi>",
+                "<bdi>πολῑ́τῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>πολῑ́τῃ</bdi>",
+                "<bdi>πολῑ́ταιν</bdi>",
+                "<bdi>πολῑ́ταις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>πολῑ́την</bdi>",
+                "<bdi>πολῑ́τᾱ</bdi>",
+                "<bdi>πολῑ́τᾱς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>πολῑ́τᾰ</bdi>",
+                "<bdi>πολῑ́τᾱ</bdi>",
+                "<bdi>πολῑ́ται</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "阳性第一变格除属格单数 -<bdi>ου</bdi> 与呼格单数 <bdi>-ᾰ</bdi> 外同阴性；<bdi>-ᾱς</bdi> 型（<bdi>νεανίᾱς</bdi>）把词尾的 <bdi>η</bdi> 换成 <bdi>ᾱ</bdi>。"
+      },
+      {
+        "id": "grc-noun-2nd-decl-m",
+        "title": "第二变格：-<bdi>ος</bdi> 阳性（<bdi>λόγος</bdi> 型，重音在词干）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "λόγ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-ος",
+                "du_m": "-ω",
+                "pl_m": "-οι"
+              },
+              "gen": {
+                "sg_m": "-ου",
+                "du_m": "-οιν",
+                "pl_m": "-ων"
+              },
+              "dat": {
+                "sg_m": "-ῳ",
+                "du_m": "-οιν",
+                "pl_m": "-οις"
+              },
+              "acc": {
+                "sg_m": "-ον",
+                "du_m": "-ω",
+                "pl_m": "-ους"
+              },
+              "voc": {
+                "sg_m": "-ε",
+                "du_m": "-ω",
+                "pl_m": "-οι"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "λόγος",
+                "du_m": "λόγω",
+                "pl_m": "λόγοι"
+              },
+              "gen": {
+                "sg_m": "λόγου",
+                "du_m": "λόγοιν",
+                "pl_m": "λόγων"
+              },
+              "dat": {
+                "sg_m": "λόγῳ",
+                "du_m": "λόγοιν",
+                "pl_m": "λόγοις"
+              },
+              "acc": {
+                "sg_m": "λόγον",
+                "du_m": "λόγω",
+                "pl_m": "λόγους"
+              },
+              "voc": {
+                "sg_m": "λόγε",
+                "du_m": "λόγω",
+                "pl_m": "λόγοι"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[οό]ς$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-ω</bdi>",
+                "<bdi>-οι</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ου</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ῳ</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-οις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ον</bdi>",
+                "<bdi>-ω</bdi>",
+                "<bdi>-ους</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ω</bdi>",
+                "<bdi>-οι</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>λόγος, λόγου</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>λόγος</bdi>",
+                "<bdi>λόγω</bdi>",
+                "<bdi>λόγοι</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>λόγου</bdi>",
+                "<bdi>λόγοιν</bdi>",
+                "<bdi>λόγων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>λόγῳ</bdi>",
+                "<bdi>λόγοιν</bdi>",
+                "<bdi>λόγοις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>λόγον</bdi>",
+                "<bdi>λόγω</bdi>",
+                "<bdi>λόγους</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>λόγε</bdi>",
+                "<bdi>λόγω</bdi>",
+                "<bdi>λόγοι</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "呼格单数为 -<bdi>ε</bdi>；中性同 <bdi>-ον</bdi> 型。"
+      },
+      {
+        "id": "grc-noun-2nd-decl-m-oxytone",
+        "title": "第二变格：-<bdi>ος</bdi> 阳性（<bdi>θεός</bdi> 型，重音在词尾）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "θε",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-ός",
+                "du_m": "-ώ",
+                "pl_m": "-οί"
+              },
+              "gen": {
+                "sg_m": "-οῦ",
+                "du_m": "-οῖν",
+                "pl_m": "-ῶν"
+              },
+              "dat": {
+                "sg_m": "-ῷ",
+                "du_m": "-οῖν",
+                "pl_m": "-οῖς"
+              },
+              "acc": {
+                "sg_m": "-όν",
+                "du_m": "-ώ",
+                "pl_m": "-ούς"
+              },
+              "voc": {
+                "sg_m": "-έ",
+                "du_m": "-ώ",
+                "pl_m": "-οί"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "θεός",
+                "du_m": "θεώ",
+                "pl_m": "θεοί"
+              },
+              "gen": {
+                "sg_m": "θεοῦ",
+                "du_m": "θεοῖν",
+                "pl_m": "θεῶν"
+              },
+              "dat": {
+                "sg_m": "θεῷ",
+                "du_m": "θεοῖν",
+                "pl_m": "θεοῖς"
+              },
+              "acc": {
+                "sg_m": "θεόν",
+                "du_m": "θεώ",
+                "pl_m": "θεούς"
+              },
+              "voc": {
+                "sg_m": "θεέ",
+                "du_m": "θεώ",
+                "pl_m": "θεοί"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[οό]ς$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ός</bdi>",
+                "<bdi>-ώ</bdi>",
+                "<bdi>-οί</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-οῦ</bdi>",
+                "<bdi>-οῖν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ῷ</bdi>",
+                "<bdi>-οῖν</bdi>",
+                "<bdi>-οῖς</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-όν</bdi>",
+                "<bdi>-ώ</bdi>",
+                "<bdi>-ούς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-έ</bdi>",
+                "<bdi>-ώ</bdi>",
+                "<bdi>-οί</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>θεός, θεοῦ</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>θεός</bdi>",
+                "<bdi>θεώ</bdi>",
+                "<bdi>θεοί</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>θεοῦ</bdi>",
+                "<bdi>θεοῖν</bdi>",
+                "<bdi>θεῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>θεῷ</bdi>",
+                "<bdi>θεοῖν</bdi>",
+                "<bdi>θεοῖς</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>θεόν</bdi>",
+                "<bdi>θεώ</bdi>",
+                "<bdi>θεούς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>θεέ</bdi>",
+                "<bdi>θεώ</bdi>",
+                "<bdi>θεοί</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "重音在词尾的 -<bdi>ος</bdi> 名词，属格与与格单数为弯曲重音（<bdi>θεοῦ</bdi>、<bdi>θεῷ</bdi>）。"
+      },
+      {
+        "id": "grc-noun-2nd-decl-n",
+        "title": "第二变格：-<bdi>ον</bdi> 中性（<bdi>δῶρον</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "δῶρ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": "-ον",
+                "du_n": "-ω",
+                "pl_n": "-α"
+              },
+              "gen": {
+                "sg_n": "-ου",
+                "du_n": "-οιν",
+                "pl_n": "-ων"
+              },
+              "dat": {
+                "sg_n": "-ῳ",
+                "du_n": "-οιν",
+                "pl_n": "-οις"
+              },
+              "acc": {
+                "sg_n": "-ον",
+                "du_n": "-ω",
+                "pl_n": "-α"
+              },
+              "voc": {
+                "sg_n": "-ον",
+                "du_n": "-ω",
+                "pl_n": "-α"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "δῶρον",
+                "du_n": "δώρω",
+                "pl_n": "δῶρα"
+              },
+              "gen": {
+                "sg_n": "δώρου",
+                "du_n": "δώροιν",
+                "pl_n": "δώρων"
+              },
+              "dat": {
+                "sg_n": "δώρῳ",
+                "du_n": "δώροιν",
+                "pl_n": "δώροις"
+              },
+              "acc": {
+                "sg_n": "δῶρον",
+                "du_n": "δώρω",
+                "pl_n": "δῶρα"
+              },
+              "voc": {
+                "sg_n": "δῶρον",
+                "du_n": "δώρω",
+                "pl_n": "δῶρα"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "[οό]ν$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ον</bdi>",
+                "<bdi>-ω</bdi>",
+                "<bdi>-α</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ου</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ῳ</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-οις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ον</bdi>",
+                "<bdi>-ω</bdi>",
+                "<bdi>-α</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ον</bdi>",
+                "<bdi>-ω</bdi>",
+                "<bdi>-α</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>δῶρον, δῶρου</bdi> (n.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>δῶρον</bdi>",
+                "<bdi>δῶρω</bdi>",
+                "<bdi>δῶρα</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>δῶρου</bdi>",
+                "<bdi>δῶροιν</bdi>",
+                "<bdi>δῶρων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>δῶρῳ</bdi>",
+                "<bdi>δῶροιν</bdi>",
+                "<bdi>δῶροις</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>δῶρον</bdi>",
+                "<bdi>δῶρω</bdi>",
+                "<bdi>δῶρα</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>δῶρον</bdi>",
+                "<bdi>δῶρω</bdi>",
+                "<bdi>δῶρα</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "中性主格 / 宾格 / 呼格同形；复数 -<bdi>α</bdi> 为短音。"
+      },
+      {
+        "id": "grc-noun-3rd-decl-stop",
+        "title": "第三变格：塞音 / 齿音词干（<bdi>φύλαξ</bdi>、<bdi>ἐλπίς</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "φύλακ",
+          "post": {
+            "accent": "persistent"
+          },
+          "stemForms": {
+            "nom": [
+              {
+                "pattern": "[κγχ]$",
+                "replace": "ξ"
+              },
+              {
+                "pattern": "[πβφ]$",
+                "replace": "ψ"
+              },
+              {
+                "pattern": "[τδθ]$",
+                "replace": "ς"
+              }
+            ],
+            "voc": [
+              {
+                "pattern": "[κγχ]$",
+                "replace": "ξ"
+              },
+              {
+                "pattern": "[πβφ]$",
+                "replace": "ψ"
+              },
+              {
+                "pattern": "[τδθ]$",
+                "replace": ""
+              }
+            ],
+            "datpl": [
+              {
+                "pattern": "[κγχ]$",
+                "replace": "ξ"
+              },
+              {
+                "pattern": "[πβφ]$",
+                "replace": "ψ"
+              },
+              {
+                "pattern": "[τδθ]$",
+                "replace": "σ"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "du_m": "-ε",
+                "pl_m": "-ες"
+              },
+              "gen": {
+                "sg_m": "-ος",
+                "du_m": "-οιν",
+                "pl_m": "-ων"
+              },
+              "dat": {
+                "sg_m": "-ι",
+                "du_m": "-οιν",
+                "pl_m": {
+                  "suffix": "-ι(ν)",
+                  "stemForm": "datpl"
+                }
+              },
+              "acc": {
+                "sg_m": "-α",
+                "du_m": "-ε",
+                "pl_m": "-ᾰς"
+              },
+              "voc": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "voc"
+                },
+                "du_m": "-ε",
+                "pl_m": "-ες"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "φύλαξ",
+                "du_m": "φύλακε",
+                "pl_m": "φύλακες"
+              },
+              "gen": {
+                "sg_m": "φύλακος",
+                "du_m": "φυλάκοιν",
+                "pl_m": "φυλάκων"
+              },
+              "dat": {
+                "sg_m": "φύλακι",
+                "du_m": "φυλάκοιν",
+                "pl_m": "φύλαξι(ν)"
+              },
+              "acc": {
+                "sg_m": "φύλακα",
+                "du_m": "φύλακε",
+                "pl_m": "φύλακας"
+              },
+              "voc": {
+                "sg_m": "φύλαξ",
+                "du_m": "φύλακε",
+                "pl_m": "φύλακες"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ες</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ι</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-α</bdi>",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ᾰς</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ες</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>φύλαξ, φύλακος</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>φύλαξ</bdi>",
+                "<bdi>φύλακε</bdi>",
+                "<bdi>φύλακες</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>φύλακος</bdi>",
+                "<bdi>φύλακοιν</bdi>",
+                "<bdi>φύλακων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>φύλακι</bdi>",
+                "<bdi>φύλακοιν</bdi>",
+                "<bdi>φύλαξι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>φύλακα</bdi>",
+                "<bdi>φύλακε</bdi>",
+                "<bdi>φύλακᾰς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>φύλαξ</bdi>",
+                "<bdi>φύλακε</bdi>",
+                "<bdi>φύλακες</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "词干从属格去 -<bdi>ος</bdi> 得到（<bdi>φύλακ-</bdi>、<bdi>ἐλπιδ-</bdi>）。主格单数由词干末辅音加 <bdi>-ς</bdi> 变来：<bdi>κ/γ/χ → ξ</bdi>，<bdi>π/β/φ → ψ</bdi>，<bdi>τ/δ/θ</bdi> 脱落。与格复数词干末辅音与 <bdi>-σι</bdi> 融合。"
+      },
+      {
+        "id": "grc-noun-3rd-decl-liquid",
+        "title": "第三变格：流音 / 鼻音词干（<bdi>δαίμων</bdi>、<bdi>ῥήτωρ</bdi>、<bdi>πατήρ</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "δαίμον",
+          "post": {
+            "accent": "persistent"
+          },
+          "stemForms": {
+            "nom": [
+              {
+                "pattern": "ον$",
+                "replace": "ων"
+              },
+              {
+                "pattern": "ορ$",
+                "replace": "ωρ"
+              }
+            ],
+            "datpl": [
+              {
+                "pattern": "ν$",
+                "replace": ""
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "du_m": "-ε",
+                "pl_m": "-ες"
+              },
+              "gen": {
+                "sg_m": "-ος",
+                "du_m": "-οιν",
+                "pl_m": "-ων"
+              },
+              "dat": {
+                "sg_m": "-ι",
+                "du_m": "-οιν",
+                "pl_m": {
+                  "suffix": "-σι(ν)",
+                  "stemForm": "datpl"
+                }
+              },
+              "acc": {
+                "sg_m": "-α",
+                "du_m": "-ε",
+                "pl_m": "-ᾰς"
+              },
+              "voc": {
+                "sg_m": "-",
+                "du_m": "-ε",
+                "pl_m": "-ες"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "δαίμων",
+                "du_m": "δαίμονε",
+                "pl_m": "δαίμονες"
+              },
+              "gen": {
+                "sg_m": "δαίμονος",
+                "du_m": "δαιμόνοιν",
+                "pl_m": "δαιμόνων"
+              },
+              "dat": {
+                "sg_m": "δαίμονι",
+                "du_m": "δαιμόνοιν",
+                "pl_m": "δαίμοσι(ν)"
+              },
+              "acc": {
+                "sg_m": "δαίμονα",
+                "du_m": "δαίμονε",
+                "pl_m": "δαίμονας"
+              },
+              "voc": {
+                "sg_m": "δαῖμον",
+                "du_m": "δαίμονε",
+                "pl_m": "δαίμονες"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ες</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ι</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-σι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-α</bdi>",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ᾰς</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ες</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>δαίμων, δαίμονος</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>δαίμων</bdi>",
+                "<bdi>δαίμονε</bdi>",
+                "<bdi>δαίμονες</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>δαίμονος</bdi>",
+                "<bdi>δαίμονοιν</bdi>",
+                "<bdi>δαίμονων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>δαίμονι</bdi>",
+                "<bdi>δαίμονοιν</bdi>",
+                "<bdi>δαίμοσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>δαίμονα</bdi>",
+                "<bdi>δαίμονε</bdi>",
+                "<bdi>δαίμονᾰς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>δαίμον</bdi>",
+                "<bdi>δαίμονε</bdi>",
+                "<bdi>δαίμονες</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "主格单数 -<bdi>ων / -ωρ</bdi> 由词干的 <bdi>-ον / -ορ</bdi> 延长而来，呼格单数保持短元音（<bdi>δαῖμον</bdi>、<bdi>ῥῆτορ</bdi>）。词组词干 <bdi>πατήρ / μήτηρ</bdi> 属同一类，重音在词尾。"
+      },
+      {
+        "id": "grc-noun-3rd-decl-s",
+        "title": "第三变格：-<bdi>ος</bdi> 中性（<bdi>γένος</bdi> 型，<bdi>εσ</bdi> 词干）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "γένεσ",
+          "post": {
+            "accent": "persistent"
+          },
+          "stemForms": {
+            "theme": [
+              {
+                "pattern": "εσ$",
+                "replace": ""
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": {
+                  "suffix": "-ος",
+                  "stemForm": "theme"
+                },
+                "du_n": {
+                  "suffix": "-ει",
+                  "stemForm": "theme"
+                },
+                "pl_n": {
+                  "suffix": "-η",
+                  "stemForm": "theme"
+                }
+              },
+              "gen": {
+                "sg_n": {
+                  "suffix": "-ους",
+                  "stemForm": "theme"
+                },
+                "du_n": {
+                  "suffix": "-οιν",
+                  "stemForm": "theme"
+                },
+                "pl_n": {
+                  "suffix": "-ῶν",
+                  "stemForm": "theme"
+                }
+              },
+              "dat": {
+                "sg_n": {
+                  "suffix": "-ει",
+                  "stemForm": "theme"
+                },
+                "du_n": {
+                  "suffix": "-οιν",
+                  "stemForm": "theme"
+                },
+                "pl_n": {
+                  "suffix": "-εσι(ν)",
+                  "stemForm": "theme"
+                }
+              },
+              "acc": {
+                "sg_n": {
+                  "suffix": "-ος",
+                  "stemForm": "theme"
+                },
+                "du_n": {
+                  "suffix": "-ει",
+                  "stemForm": "theme"
+                },
+                "pl_n": {
+                  "suffix": "-η",
+                  "stemForm": "theme"
+                }
+              },
+              "voc": {
+                "sg_n": {
+                  "suffix": "-ος",
+                  "stemForm": "theme"
+                },
+                "du_n": {
+                  "suffix": "-ει",
+                  "stemForm": "theme"
+                },
+                "pl_n": {
+                  "suffix": "-η",
+                  "stemForm": "theme"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "γένος",
+                "du_n": "γένει",
+                "pl_n": "γένη"
+              },
+              "gen": {
+                "sg_n": "γένους",
+                "du_n": "γένοιν",
+                "pl_n": "γενῶν"
+              },
+              "dat": {
+                "sg_n": "γένει",
+                "du_n": "γένοιν",
+                "pl_n": "γένεσι(ν)"
+              },
+              "acc": {
+                "sg_n": "γένος",
+                "du_n": "γένει",
+                "pl_n": "γένη"
+              },
+              "voc": {
+                "sg_n": "γένος",
+                "du_n": "γένει",
+                "pl_n": "γένη"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-ει</bdi>",
+                "<bdi>-η</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ους</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ει</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-εσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-ει</bdi>",
+                "<bdi>-η</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-ει</bdi>",
+                "<bdi>-η</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>γένος, γένους</bdi> (n.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>γένος</bdi>",
+                "<bdi>γένει</bdi>",
+                "<bdi>γένη</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>γένους</bdi>",
+                "<bdi>γένοιν</bdi>",
+                "<bdi>γένῶν</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>γένει</bdi>",
+                "<bdi>γένοιν</bdi>",
+                "<bdi>γένεσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>γένος</bdi>",
+                "<bdi>γένει</bdi>",
+                "<bdi>γένη</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>γένος</bdi>",
+                "<bdi>γένει</bdi>",
+                "<bdi>γένη</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "词干以 -<bdi>εσ-</bdi> 结尾，变格时 <bdi>εσ</bdi> 与词尾收缩（<bdi>-εσ-ος → -ους</bdi>）。同类还有 <bdi>τεῖχος</bdi>、<bdi>ἔθος</bdi>。"
+      },
+      {
+        "id": "grc-noun-3rd-decl-i",
+        "title": "第三变格：i 词干（<bdi>πόλις</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "πόλι",
+          "post": {
+            "accent": "persistent"
+          },
+          "stemForms": {
+            "lengthened": [
+              {
+                "pattern": "ι$",
+                "replace": "ει"
+              }
+            ],
+            "genstem": [
+              {
+                "pattern": "ι$",
+                "replace": "ε"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-ς",
+                "du_f": {
+                  "suffix": "-",
+                  "stemForm": "lengthened"
+                },
+                "pl_f": {
+                  "suffix": "-ς",
+                  "stemForm": "lengthened"
+                }
+              },
+              "gen": {
+                "sg_f": {
+                  "suffix": "-ως",
+                  "stemForm": "genstem"
+                },
+                "du_f": {
+                  "suffix": "-οιν",
+                  "stemForm": "genstem"
+                },
+                "pl_f": {
+                  "suffix": "-ων",
+                  "stemForm": "genstem"
+                }
+              },
+              "dat": {
+                "sg_f": {
+                  "suffix": "-",
+                  "stemForm": "lengthened"
+                },
+                "du_f": {
+                  "suffix": "-οιν",
+                  "stemForm": "genstem"
+                },
+                "pl_f": {
+                  "suffix": "-σι(ν)",
+                  "stemForm": "genstem"
+                }
+              },
+              "acc": {
+                "sg_f": "-ν",
+                "du_f": {
+                  "suffix": "-",
+                  "stemForm": "lengthened"
+                },
+                "pl_f": {
+                  "suffix": "-ς",
+                  "stemForm": "lengthened"
+                }
+              },
+              "voc": {
+                "sg_f": "-",
+                "du_f": {
+                  "suffix": "-",
+                  "stemForm": "lengthened"
+                },
+                "pl_f": {
+                  "suffix": "-ς",
+                  "stemForm": "lengthened"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "πόλις",
+                "du_f": "πόλει",
+                "pl_f": "πόλεις"
+              },
+              "gen": {
+                "sg_f": "πόλεως",
+                "du_f": "πολέοιν",
+                "pl_f": "πόλεων"
+              },
+              "dat": {
+                "sg_f": "πόλει",
+                "du_f": "πολέοιν",
+                "pl_f": "πόλεσι(ν)"
+              },
+              "acc": {
+                "sg_f": "πόλιν",
+                "du_f": "πόλει",
+                "pl_f": "πόλεις"
+              },
+              "voc": {
+                "sg_f": "πόλι",
+                "du_f": "πόλει",
+                "pl_f": "πόλεις"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ς</bdi>",
+                "-",
+                "<bdi>-ς</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ως</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ων</bdi>"
+              ],
+              [
+                "与格",
+                "-",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-σι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ν</bdi>",
+                "-",
+                "<bdi>-ς</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "-",
+                "<bdi>-ς</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>πόλις, πόλεως</bdi> (f.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>πόλις</bdi>",
+                "<bdi>πόλει</bdi>",
+                "<bdi>πόλεις</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>πόλεως</bdi>",
+                "<bdi>πόλεοιν</bdi>",
+                "<bdi>πόλεων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>πόλει</bdi>",
+                "<bdi>πόλεοιν</bdi>",
+                "<bdi>πόλεσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>πόλιν</bdi>",
+                "<bdi>πόλει</bdi>",
+                "<bdi>πόλεις</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>πόλι</bdi>",
+                "<bdi>πόλει</bdi>",
+                "<bdi>πόλεις</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "i 词干的属格单数用阿提卡式 -<bdi>εως</bdi>、属格复数 <bdi>-εων</bdi>（词末 <bdi>εως / εων</bdi> 按短末音节算，故 <bdi>πόλεως</bdi>、<bdi>πόλεων</bdi> 重音留在倒数第三）。单数与复数 <bdi>-ει / -εις</bdi> 由 <bdi>ι</bdi> 延长而来。"
+      },
+      {
+        "id": "grc-noun-3rd-decl-y",
+        "title": "第三变格：-<bdi>υς</bdi> 词干（<bdi>ἰχθύς</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "ἰχθύ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-ς",
+                "du_m": "-ε",
+                "pl_m": "-ες"
+              },
+              "gen": {
+                "sg_m": "-ος",
+                "du_m": "-οιν",
+                "pl_m": "-ων"
+              },
+              "dat": {
+                "sg_m": "-ϊ",
+                "du_m": "-οιν",
+                "pl_m": "-σι(ν)"
+              },
+              "acc": {
+                "sg_m": "-ν",
+                "du_m": "-ε",
+                "pl_m": "-ᾰς"
+              },
+              "voc": {
+                "sg_m": "-",
+                "du_m": "-ε",
+                "pl_m": "-ες"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "ἰχθύς",
+                "du_m": "ἰχθύε",
+                "pl_m": "ἰχθύες"
+              },
+              "gen": {
+                "sg_m": "ἰχθύος",
+                "du_m": "ἰχθύοιν",
+                "pl_m": "ἰχθύων"
+              },
+              "dat": {
+                "sg_m": "ἰχθύϊ",
+                "du_m": "ἰχθύοιν",
+                "pl_m": "ἰχθύσι(ν)"
+              },
+              "acc": {
+                "sg_m": "ἰχθύν",
+                "du_m": "ἰχθύε",
+                "pl_m": "ἰχθύας"
+              },
+              "voc": {
+                "sg_m": "ἰχθύ",
+                "du_m": "ἰχθύε",
+                "pl_m": "ἰχθύες"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ς</bdi>",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ες</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ος</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-ων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ϊ</bdi>",
+                "<bdi>-οιν</bdi>",
+                "<bdi>-σι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ν</bdi>",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ᾰς</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ε</bdi>",
+                "<bdi>-ες</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>ἰχθύς, ἰχθύος</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>ἰχθύς</bdi>",
+                "<bdi>ἰχθύε</bdi>",
+                "<bdi>ἰχθύες</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>ἰχθύος</bdi>",
+                "<bdi>ἰχθύοιν</bdi>",
+                "<bdi>ἰχθύων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>ἰχθύϊ</bdi>",
+                "<bdi>ἰχθύοιν</bdi>",
+                "<bdi>ἰχθύσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>ἰχθύν</bdi>",
+                "<bdi>ἰχθύε</bdi>",
+                "<bdi>ἰχθύᾰς</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>ἰχθύ</bdi>",
+                "<bdi>ἰχθύε</bdi>",
+                "<bdi>ἰχθύες</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "<bdi>υ</bdi> 词干单数不延长，与格单数写作 <bdi>-ύϊ</bdi>（分音符表示不合为双元音）。"
+      },
+      {
+        "id": "grc-noun-3rd-decl-eus",
+        "title": "第三变格：-<bdi>εύς</bdi>（<bdi>βασιλεύς</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "βασιλ",
+          "post": {
+            "accent": "persistent"
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-εύς",
+                "du_m": "-ῆ",
+                "pl_m": "-εῖς"
+              },
+              "gen": {
+                "sg_m": "-έως",
+                "du_m": "-έοιν",
+                "pl_m": "-έων"
+              },
+              "dat": {
+                "sg_m": "-εῖ",
+                "du_m": "-έοιν",
+                "pl_m": "-εῦσι(ν)"
+              },
+              "acc": {
+                "sg_m": "-έα",
+                "du_m": "-ῆ",
+                "pl_m": "-έας"
+              },
+              "voc": {
+                "sg_m": "-εῦ",
+                "du_m": "-ῆ",
+                "pl_m": "-εῖς"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "βασιλεύς",
+                "du_m": "βασιλῆ",
+                "pl_m": "βασιλεῖς"
+              },
+              "gen": {
+                "sg_m": "βασιλέως",
+                "du_m": "βασιλέοιν",
+                "pl_m": "βασιλέων"
+              },
+              "dat": {
+                "sg_m": "βασιλεῖ",
+                "du_m": "βασιλέοιν",
+                "pl_m": "βασιλεῦσι(ν)"
+              },
+              "acc": {
+                "sg_m": "βασιλέα",
+                "du_m": "βασιλῆ",
+                "pl_m": "βασιλέας"
+              },
+              "voc": {
+                "sg_m": "βασιλεῦ",
+                "du_m": "βασιλῆ",
+                "pl_m": "βασιλεῖς"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-εύς</bdi>",
+                "<bdi>-ῆ</bdi>",
+                "<bdi>-εῖς</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-έως</bdi>",
+                "<bdi>-έοιν</bdi>",
+                "<bdi>-έων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-εῖ</bdi>",
+                "<bdi>-έοιν</bdi>",
+                "<bdi>-εῦσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-έα</bdi>",
+                "<bdi>-ῆ</bdi>",
+                "<bdi>-έας</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-εῦ</bdi>",
+                "<bdi>-ῆ</bdi>",
+                "<bdi>-εῖς</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          },
+          {
+            "caption": "示例：<bdi>βασιλεύς, βασιλέως</bdi> (m.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>βασιλεύς</bdi>",
+                "<bdi>βασιλῆ</bdi>",
+                "<bdi>βασιλεῖς</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>βασιλέως</bdi>",
+                "<bdi>βασιλέοιν</bdi>",
+                "<bdi>βασιλέων</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>βασιλεῖ</bdi>",
+                "<bdi>βασιλέοιν</bdi>",
+                "<bdi>βασιλεῦσι(ν)</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>βασιλέα</bdi>",
+                "<bdi>βασιλῆ</bdi>",
+                "<bdi>βασιλέας</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>βασιλεῦ</bdi>",
+                "<bdi>βασιλῆ</bdi>",
+                "<bdi>βασιλεῖς</bdi>"
+              ]
+            ],
+            "lang": "grc"
+          }
+        ],
+        "notes": "词干取自属格（<bdi>βασιλέως → βασιλ-</bdi>），词尾自带重音：属格单数 <bdi>-έως</bdi>、与格单数 <bdi>-εῖ</bdi>、呼格单数 <bdi>-εῦ</bdi>。同类有 <bdi>ἱππεύς</bdi>、<bdi>ἀριστεύς</bdi>。"
+      }
+    ]
+  }
+]

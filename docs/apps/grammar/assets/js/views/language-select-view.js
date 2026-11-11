@@ -1,0 +1,334 @@
+/** 语言列表：按 classical 分组，组内可拖动排序（顺序存 settings.languageOrder） */
+
+import { h, replace } from '../utils/dom.js'
+import { bdiNode } from '../utils/bdi.js'
+import { appStore } from '../app-state.js'
+import { listAll } from '../store/word-store.js'
+import { getSettings, saveSettings } from '../store/settings-store.js'
+import { LANGUAGES, LANGUAGE_MAP } from '../data/languages.js'
+import { formatRelative } from '../utils/date.js'
+
+const GROUP_DEFS = {
+    classical: { key: 'classical', title: '古典语言', match: (l) => !!l.classical },
+    modern: { key: 'modern',    title: '现代语言', match: (l) => !l.classical }
+}
+const DEFAULT_GROUP_ORDER = ['classical', 'modern']
+
+export default {
+    needsUser: true,
+    layout: 'shell',
+
+    async mount(main, ctx) {
+        const state = appStore.get()
+        const { userId, user } = state
+        if (!userId || !user) return
+
+        let settings = await getSettings(userId)
+
+        const all = await listAll(userId)
+        const byLang = new Map()
+        for (const w of all) {
+            let bucket = byLang.get(w.language)
+            if (!bucket) {
+                bucket = { count: 0, encounters: 0, last: null }
+                byLang.set(w.language, bucket)
+            }
+            bucket.count += 1
+            bucket.encounters += w.encounterCount || 0
+            if (!bucket.last || String(w.addedAt) > String(bucket.last)) {
+                bucket.last = w.addedAt
+            }
+        }
+
+        const head = h('div', { class: 'page-head page-head--display' })
+        const groupsEl = h('div', {})
+
+        replace(main, head, groupsEl)
+
+        function renderHead() {
+            replace(head,
+                h('div', {},
+                    h('h1', { class: 'page-head__title' }, '语言列表'),
+                    h('div', { class: 'page-head__sub' },
+                        `${user.name} · ${all.length} 个生词 · ${byLang.size} 种语言`
+                    )
+                ),
+                h('div', { class: 'page-head__actions' },
+                    h('button', {
+                        class: 'btn', type: 'button',
+                        onclick: () => { location.hash = '#/schema' }
+                    }, '数据格式')
+                )
+            )
+        }
+
+        function renderGroups() {
+            const ordered = orderedLanguages(settings.languageOrder)
+            const groupOrder = Array.isArray(settings.groupOrder) && settings.groupOrder.length
+                ? settings.groupOrder
+                : DEFAULT_GROUP_ORDER
+
+            const sections = []
+            for (const key of groupOrder) {
+                const def = GROUP_DEFS[key]
+                if (!def) continue
+                const list = ordered.filter(def.match)
+                const section = buildGroup(def.title, list, key)
+                if (section) sections.push(section)
+            }
+            replace(groupsEl, ...sections)
+        }
+
+        function buildGroup(title, list, groupKey) {
+            if (list.length === 0) return null
+
+            const grid = h('div', { class: 'lang-grid' })
+            for (const lang of list) {
+                grid.appendChild(renderLangCard(lang, groupKey))
+            }
+
+            const header = h('div', {
+                class: 'lang-group__title',
+                draggable: 'true',
+                dataset: { groupKey },
+                title: '拖动调整组的顺序'
+            },
+            h('span', { class: 'lang-group__label' }, title),
+            h('span', { class: 'lang-group__count' }, `${list.length}`),
+            h('span', { class: 'lang-group__handle', 'aria-hidden': 'true' }, '⋮⋮')
+            )
+
+            attachGroupDragHandlers(header, groupKey)
+
+            return h('section', {
+                class: 'lang-group',
+                dataset: { group: groupKey }
+            }, header, grid)
+        }
+
+        function renderLangCard(lang, groupKey) {
+            const bucket = byLang.get(lang.code) || { count: 0, encounters: 0, last: null }
+            const isRtlNative = lang.rtl
+
+            const card = h('div', {
+                class: 'lang-card',
+                role: 'button',
+                tabindex: '0',
+                draggable: 'true',
+                dataset: { code: lang.code, group: groupKey },
+                onclick: () => {
+                    location.hash = `#/lang/${lang.code}/words`
+                },
+                onkeydown: (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        location.hash = `#/lang/${lang.code}/words`
+                    }
+                }
+            },
+            h('div', { class: 'lang-card__title' },
+                h('span', {
+                    class: 'lang-card__native',
+                    lang: lang.code,
+                    style: isRtlNative ? { direction: 'rtl' } : {}
+                }, bdiNode(lang.native, lang.code)),
+                h('span', { class: 'lang-card__name' }, lang.name)
+            ),
+            h('div', { class: 'lang-card__stats' },
+                bucket.count
+                    ? [
+                        h('span', { class: 'lang-card__stat' },
+                            h('span', { class: 'num' }, String(bucket.count)), ' 词'),
+                        h('span', { class: 'lang-card__stat lang-card__stat--extra' },
+                            '累计 ', h('span', { class: 'num' }, String(bucket.encounters))),
+                        bucket.last
+                            ? h('span', { class: 'lang-card__stat lang-card__stat--extra' },
+                                formatRelative(bucket.last))
+                            : null
+                    ]
+                    : h('span', { class: 'lang-card__stat lang-card__stat--empty' }, '暂无生词')
+            )
+            )
+
+            attachDragHandlers(card, lang, groupKey)
+            return card
+        }
+
+        let dragCode = null
+
+        let dragGroupKey = null
+
+        function attachGroupDragHandlers(header, groupKey) {
+            header.addEventListener('dragstart', (e) => {
+                dragGroupKey = groupKey
+                e.dataTransfer.effectAllowed = 'move'
+                e.dataTransfer.setData('text/plain', groupKey)
+                header.classList.add('lang-group__title--dragging')
+            })
+
+            header.addEventListener('dragend', () => {
+                dragGroupKey = null
+                clearGroupDragClasses()
+            })
+
+            header.addEventListener('dragover', (e) => {
+                if (!dragGroupKey || dragGroupKey === groupKey) return
+                e.preventDefault()
+                e.dataTransfer.dropEffect = 'move'
+                clearGroupDropTargets()
+                header.classList.add('lang-group__title--drop-target')
+            })
+
+            header.addEventListener('dragleave', () => {
+                header.classList.remove('lang-group__title--drop-target')
+            })
+
+            header.addEventListener('drop', async (e) => {
+                e.preventDefault()
+                header.classList.remove('lang-group__title--drop-target')
+                if (!dragGroupKey || dragGroupKey === groupKey) return
+                await reorderGroup(dragGroupKey, groupKey)
+                dragGroupKey = null
+            })
+        }
+
+        function clearGroupDragClasses() {
+            document.querySelectorAll('.lang-group__title--dragging').forEach((el) => {
+                el.classList.remove('lang-group__title--dragging')
+            })
+            clearGroupDropTargets()
+        }
+
+        function clearGroupDropTargets() {
+            document.querySelectorAll('.lang-group__title--drop-target').forEach((el) => {
+                el.classList.remove('lang-group__title--drop-target')
+            })
+        }
+
+        async function reorderGroup(fromKey, toKey) {
+            const cur = Array.isArray(settings.groupOrder) && settings.groupOrder.length
+                ? [...settings.groupOrder]
+                : [...DEFAULT_GROUP_ORDER]
+
+            const fromIdx = cur.indexOf(fromKey)
+            const toIdx = cur.indexOf(toKey)
+            if (fromIdx === -1 || toIdx === -1) return
+
+            cur.splice(fromIdx, 1)
+            const newToIdx = cur.indexOf(toKey)
+            cur.splice(newToIdx, 0, fromKey)
+
+            settings = await saveSettings(userId, { groupOrder: cur })
+            appStore.set({ settings })
+            renderGroups()
+        }
+
+        function attachDragHandlers(card, lang, groupKey) {
+            card.addEventListener('dragstart', (e) => {
+                dragCode = lang.code
+                e.dataTransfer.effectAllowed = 'move'
+                e.dataTransfer.setData('text/plain', lang.code)
+                card.classList.add('lang-card--dragging')
+            })
+
+            card.addEventListener('dragend', () => {
+                dragCode = null
+                clearDragClasses()
+            })
+
+            card.addEventListener('dragover', (e) => {
+                if (dragGroupKey) return   
+                if (!dragCode || dragCode === lang.code) return
+                const dragMeta = LANGUAGE_MAP[dragCode]
+                if (!dragMeta) return
+                if (Boolean(dragMeta.classical) !== Boolean(lang.classical)) {
+                    e.dataTransfer.dropEffect = 'none'
+                    return
+                }
+                e.preventDefault()
+                e.dataTransfer.dropEffect = 'move'
+                clearDropTargets()
+                card.classList.add('lang-card--drop-target')
+            })
+
+            card.addEventListener('dragleave', () => {
+                card.classList.remove('lang-card--drop-target')
+            })
+
+            card.addEventListener('drop', async (e) => {
+                e.preventDefault()
+                card.classList.remove('lang-card--drop-target')
+                if (dragGroupKey) return 
+                if (!dragCode || dragCode === lang.code) return
+
+                const dragMeta = LANGUAGE_MAP[dragCode]
+                if (!dragMeta) return
+                if (Boolean(dragMeta.classical) !== Boolean(lang.classical)) return
+
+                await reorderLanguage(dragCode, lang.code)
+                dragCode = null
+            })
+        }
+
+        function clearDragClasses() {
+            document.querySelectorAll('.lang-card--dragging').forEach((el) => {
+                el.classList.remove('lang-card--dragging')
+            })
+            clearDropTargets()
+        }
+
+        function clearDropTargets() {
+            document.querySelectorAll('.lang-card--drop-target').forEach((el) => {
+                el.classList.remove('lang-card--drop-target')
+            })
+        }
+
+        async function reorderLanguage(fromCode, toCode) {
+            const order = buildFullOrder(settings.languageOrder)
+
+            const fromIdx = order.indexOf(fromCode)
+            const toIdx = order.indexOf(toCode)
+            if (fromIdx === -1 || toIdx === -1) return
+
+            order.splice(fromIdx, 1)
+            const newToIdx = order.indexOf(toCode)
+            order.splice(newToIdx, 0, fromCode)
+
+            settings = await saveSettings(userId, { languageOrder: order })
+            appStore.set({ settings })
+            renderGroups()
+        }
+
+        renderHead()
+        renderGroups()
+    }
+}
+
+/** 按 settings.languageOrder 排序，未在 order 中的按 LANGUAGES 原顺序追加 */
+function orderedLanguages(order) {
+    const arr = Array.isArray(order) ? order : []
+    const posMap = new Map(arr.map((c, i) => [c, i]))
+
+    return [...LANGUAGES].sort((a, b) => {
+        const ai = posMap.has(a.code) ? posMap.get(a.code) : Infinity
+        const bi = posMap.has(b.code) ? posMap.get(b.code) : Infinity
+        if (ai !== bi) return ai - bi
+        return LANGUAGES.indexOf(a) - LANGUAGES.indexOf(b)
+    })
+}
+
+/**
+ * 补齐所有语言 code，返回完整顺序数组。
+ * 保证 reorder 时拿到的是全量列表，不受 settings 里存的子集影响。
+ */
+function buildFullOrder(order) {
+    const arr = Array.isArray(order) ? [...order] : []
+    const seen = new Set(arr)
+    for (const l of LANGUAGES) {
+        if (!seen.has(l.code)) {
+            arr.push(l.code)
+            seen.add(l.code)
+        }
+    }
+    return arr
+}

@@ -1,0 +1,2823 @@
+[
+  {
+    "id": "la-noun",
+    "title": "名词变格",
+    "items": [
+      {
+        "id": "la-noun-1st-decl",
+        "title": "第一变格法（-<bdi>a, -ae</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "aqu",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-a",
+                "sg_f": "-a",
+                "pl_m": "-ae",
+                "pl_f": "-ae"
+              },
+              "gen": {
+                "sg_m": "-ae",
+                "sg_f": "-ae",
+                "pl_m": "-ārum",
+                "pl_f": "-ārum"
+              },
+              "dat": {
+                "sg_m": "-ae",
+                "sg_f": "-ae",
+                "pl_m": "-īs",
+                "pl_f": "-īs"
+              },
+              "acc": {
+                "sg_m": "-am",
+                "sg_f": "-am",
+                "pl_m": "-ās",
+                "pl_f": "-ās"
+              },
+              "abl": {
+                "sg_m": "-ā",
+                "sg_f": "-ā",
+                "pl_m": "-īs",
+                "pl_f": "-īs"
+              },
+              "voc": {
+                "sg_m": "-a",
+                "sg_f": "-a",
+                "pl_m": "-ae",
+                "pl_f": "-ae"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "aqua",
+                "pl_f": "aquae",
+                "sg_m": "aqua",
+                "pl_m": "aquae"
+              },
+              "gen": {
+                "sg_f": "aquae",
+                "pl_f": "aquārum",
+                "sg_m": "aquae",
+                "pl_m": "aquārum"
+              },
+              "dat": {
+                "sg_f": "aquae",
+                "pl_f": "aquīs",
+                "sg_m": "aquae",
+                "pl_m": "aquīs"
+              },
+              "acc": {
+                "sg_f": "aquam",
+                "pl_f": "aquās",
+                "sg_m": "aquam",
+                "pl_m": "aquās"
+              },
+              "abl": {
+                "sg_f": "aquā",
+                "pl_f": "aquīs",
+                "sg_m": "aquā",
+                "pl_m": "aquīs"
+              },
+              "voc": {
+                "sg_f": "aqua",
+                "pl_f": "aquae",
+                "sg_m": "aqua",
+                "pl_m": "aquae"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "a$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-a</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ārum</bdi>",
+                "<bdi>-ārum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-am</bdi>",
+                "<bdi>-am</bdi>",
+                "<bdi>-ās</bdi>",
+                "<bdi>-ās</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ā</bdi>",
+                "<bdi>-ā</bdi>",
+                "<bdi>-īs</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-a</bdi>",
+                "<bdi>-a</bdi>",
+                "<bdi>-ae</bdi>",
+                "<bdi>-ae</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>aqua, aquae (f</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>aqua</bdi>",
+                "<bdi>aqua</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquārum</bdi>",
+                "<bdi>aquārum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquīs</bdi>",
+                "<bdi>aquīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>aquam</bdi>",
+                "<bdi>aquam</bdi>",
+                "<bdi>aquās</bdi>",
+                "<bdi>aquās</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>aquā</bdi>",
+                "<bdi>aquā</bdi>",
+                "<bdi>aquīs</bdi>",
+                "<bdi>aquīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>aqua</bdi>",
+                "<bdi>aqua</bdi>",
+                "<bdi>aquae</bdi>",
+                "<bdi>aquae</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "多为阴性；少数阳性（<bdi>nauta</bdi> 水手、<bdi>agricola</bdi> 农民）变格完全相同。属格单数 <bdi>-ae</bdi>、与格复数 <bdi>-īs</bdi>。"
+      },
+      {
+        "id": "la-noun-2nd-decl",
+        "title": "第二变格法：-<bdi>us</bdi> 阳性（<bdi>dominus</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "domin",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-us",
+                "pl_m": "-ī"
+              },
+              "gen": {
+                "sg_m": "-ī",
+                "pl_m": "-ōrum"
+              },
+              "dat": {
+                "sg_m": "-ō",
+                "pl_m": "-īs"
+              },
+              "acc": {
+                "sg_m": "-um",
+                "pl_m": "-ōs"
+              },
+              "abl": {
+                "sg_m": "-ō",
+                "pl_m": "-īs"
+              },
+              "voc": {
+                "sg_m": "-e",
+                "pl_m": "-ī"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "dominus",
+                "pl_m": "dominī"
+              },
+              "gen": {
+                "sg_m": "dominī",
+                "pl_m": "dominōrum"
+              },
+              "dat": {
+                "sg_m": "dominō",
+                "pl_m": "dominīs"
+              },
+              "acc": {
+                "sg_m": "dominum",
+                "pl_m": "dominōs"
+              },
+              "abl": {
+                "sg_m": "dominō",
+                "pl_m": "dominīs"
+              },
+              "voc": {
+                "sg_m": "domine",
+                "pl_m": "dominī"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "us$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-us</bdi>",
+                "<bdi>-ī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>dominus, dominī (m</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>dominus</bdi>",
+                "<bdi>dominī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>dominī</bdi>",
+                "<bdi>dominōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>dominō</bdi>",
+                "<bdi>dominīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>dominum</bdi>",
+                "<bdi>dominōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>dominō</bdi>",
+                "<bdi>dominīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>domine</bdi>",
+                "<bdi>dominī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "呼格单数 -e（<bdi>-ius</bdi> 结尾的词为 <bdi>-ī</bdi>，如 <bdi>fīlius → fīlī</bdi>）。中性见 <bdi>-um</bdi> 型。"
+      },
+      {
+        "id": "la-noun-2nd-decl-f",
+        "title": "第二变格法：-<bdi>us</bdi> 阴性（<bdi>mālus</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "māl",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-us",
+                "pl_f": "-ī"
+              },
+              "gen": {
+                "sg_f": "-ī",
+                "pl_f": "-ōrum"
+              },
+              "dat": {
+                "sg_f": "-ō",
+                "pl_f": "-īs"
+              },
+              "acc": {
+                "sg_f": "-um",
+                "pl_f": "-ōs"
+              },
+              "abl": {
+                "sg_f": "-ō",
+                "pl_f": "-īs"
+              },
+              "voc": {
+                "sg_f": "-e",
+                "pl_f": "-ī"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "mālus",
+                "pl_f": "mālī"
+              },
+              "gen": {
+                "sg_f": "mālī",
+                "pl_f": "mālōrum"
+              },
+              "dat": {
+                "sg_f": "mālō",
+                "pl_f": "mālīs"
+              },
+              "acc": {
+                "sg_f": "mālum",
+                "pl_f": "mālōs"
+              },
+              "abl": {
+                "sg_f": "mālō",
+                "pl_f": "mālīs"
+              },
+              "voc": {
+                "sg_f": "māle",
+                "pl_f": "mālī"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "us$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-us</bdi>",
+                "<bdi>-ī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>mālus, mālī (f</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>mālus</bdi>",
+                "<bdi>mālī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>mālī</bdi>",
+                "<bdi>mālōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>mālō</bdi>",
+                "<bdi>mālīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>mālum</bdi>",
+                "<bdi>mālōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>mālō</bdi>",
+                "<bdi>mālīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>māle</bdi>",
+                "<bdi>mālī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "词尾与阳性 -<bdi>us</bdi> 型完全相同，只是名词本身是阴性（如 <bdi>mālus</bdi> 苹果树、<bdi>pīnus</bdi> 松树）；变格表只显示阴性列。"
+      },
+      {
+        "id": "la-noun-2nd-decl-er",
+        "title": "第二变格法：-<bdi>er</bdi> 阳性（<bdi>ager</bdi> 型，词干掉 e）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "ager",
+          "stemForms": {
+            "obl": [
+              {
+                "pattern": "er$",
+                "replace": "r"
+              }
+            ],
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "er$",
+                  "replace": "r"
+                }
+              ]
+            }
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-",
+                "pl_m": {
+                  "suffix": "-ī",
+                  "stemForm": "obl"
+                }
+              },
+              "gen": {
+                "sg_m": {
+                  "suffix": "-ī",
+                  "stemForm": "obl"
+                },
+                "pl_m": {
+                  "suffix": "-ōrum",
+                  "stemForm": "obl"
+                }
+              },
+              "dat": {
+                "sg_m": {
+                  "suffix": "-ō",
+                  "stemForm": "obl"
+                },
+                "pl_m": {
+                  "suffix": "-īs",
+                  "stemForm": "obl"
+                }
+              },
+              "acc": {
+                "sg_m": {
+                  "suffix": "-um",
+                  "stemForm": "obl"
+                },
+                "pl_m": {
+                  "suffix": "-ōs",
+                  "stemForm": "obl"
+                }
+              },
+              "abl": {
+                "sg_m": {
+                  "suffix": "-ō",
+                  "stemForm": "obl"
+                },
+                "pl_m": {
+                  "suffix": "-īs",
+                  "stemForm": "obl"
+                }
+              },
+              "voc": {
+                "sg_m": "-",
+                "pl_m": {
+                  "suffix": "-ī",
+                  "stemForm": "obl"
+                }
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "ager",
+                "pl_m": "agrī"
+              },
+              "gen": {
+                "sg_m": "agrī",
+                "pl_m": "agrōrum"
+              },
+              "dat": {
+                "sg_m": "agrō",
+                "pl_m": "agrīs"
+              },
+              "acc": {
+                "sg_m": "agrum",
+                "pl_m": "agrōs"
+              },
+              "abl": {
+                "sg_m": "agrō",
+                "pl_m": "agrīs"
+              },
+              "voc": {
+                "sg_m": "ager",
+                "pl_m": "agrī"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-ī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>ager, agrī (m</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>ager</bdi>",
+                "<bdi>agrī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>agrī</bdi>",
+                "<bdi>agrōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>agrō</bdi>",
+                "<bdi>agrīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>agrum</bdi>",
+                "<bdi>agrōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>agrō</bdi>",
+                "<bdi>agrīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>ager</bdi>",
+                "<bdi>agrī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "<bdi>ager / agrī</bdi> 型：除主格与呼格外，词干的 e 脱落。<bdi>puer</bdi> 型保留 e，见另一条。"
+      },
+      {
+        "id": "la-noun-2nd-decl-er-keep",
+        "title": "第二变格法：-<bdi>er</bdi> 阳性（<bdi>puer</bdi> 型，保留 e）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "puer",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-",
+                "pl_m": "-ī"
+              },
+              "gen": {
+                "sg_m": "-ī",
+                "pl_m": "-ōrum"
+              },
+              "dat": {
+                "sg_m": "-ō",
+                "pl_m": "-īs"
+              },
+              "acc": {
+                "sg_m": "-um",
+                "pl_m": "-ōs"
+              },
+              "abl": {
+                "sg_m": "-ō",
+                "pl_m": "-īs"
+              },
+              "voc": {
+                "sg_m": "-",
+                "pl_m": "-ī"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "puer",
+                "pl_m": "puerī"
+              },
+              "gen": {
+                "sg_m": "puerī",
+                "pl_m": "puerōrum"
+              },
+              "dat": {
+                "sg_m": "puerō",
+                "pl_m": "puerīs"
+              },
+              "acc": {
+                "sg_m": "puerum",
+                "pl_m": "puerōs"
+              },
+              "abl": {
+                "sg_m": "puerō",
+                "pl_m": "puerīs"
+              },
+              "voc": {
+                "sg_m": "puer",
+                "pl_m": "puerī"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-ī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-ōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>puer, puerī (m</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>puer</bdi>",
+                "<bdi>puerī</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>puerī</bdi>",
+                "<bdi>puerōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>puerō</bdi>",
+                "<bdi>puerīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>puerum</bdi>",
+                "<bdi>puerōs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>puerō</bdi>",
+                "<bdi>puerīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>puer</bdi>",
+                "<bdi>puerī</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "<bdi>puer / puerī</bdi> 型：词干的 e 在所有格中都保留（同类的还有 <bdi>gener</bdi>、<bdi>socer</bdi>）。"
+      },
+      {
+        "id": "la-noun-2nd-decl-n",
+        "title": "第二变格法：-<bdi>um</bdi> 中性（<bdi>bellum</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "bell",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": "-um",
+                "pl_n": "-a"
+              },
+              "gen": {
+                "sg_n": "-ī",
+                "pl_n": "-ōrum"
+              },
+              "dat": {
+                "sg_n": "-ō",
+                "pl_n": "-īs"
+              },
+              "acc": {
+                "sg_n": "-um",
+                "pl_n": "-a"
+              },
+              "abl": {
+                "sg_n": "-ō",
+                "pl_n": "-īs"
+              },
+              "voc": {
+                "sg_n": "-um",
+                "pl_n": "-a"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "bellum",
+                "pl_n": "bella"
+              },
+              "gen": {
+                "sg_n": "bellī",
+                "pl_n": "bellōrum"
+              },
+              "dat": {
+                "sg_n": "bellō",
+                "pl_n": "bellīs"
+              },
+              "acc": {
+                "sg_n": "bellum",
+                "pl_n": "bella"
+              },
+              "abl": {
+                "sg_n": "bellō",
+                "pl_n": "bellīs"
+              },
+              "voc": {
+                "sg_n": "bellum",
+                "pl_n": "bella"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "um$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-um</bdi>",
+                "<bdi>-a</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-a</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ō</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-um</bdi>",
+                "<bdi>-a</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>bellum, bellī (n</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>bellum</bdi>",
+                "<bdi>bella</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>bellī</bdi>",
+                "<bdi>bellōrum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>bellō</bdi>",
+                "<bdi>bellīs</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>bellum</bdi>",
+                "<bdi>bella</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>bellō</bdi>",
+                "<bdi>bellīs</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>bellum</bdi>",
+                "<bdi>bella</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "中性主格 / 宾格 / 呼格同形，复数主格为 -<bdi>a</bdi>。"
+      },
+      {
+        "id": "la-noun-3rd-decl",
+        "title": "第三变格法：辅音词干（<bdi>rēx</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "rēg",
+          "stemForms": {
+            "nom": [
+              {
+                "pattern": "[gk]$",
+                "replace": "x"
+              },
+              {
+                "pattern": "[bp]$",
+                "replace": "ps"
+              },
+              {
+                "pattern": "[dt]$",
+                "replace": "s"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_m": "-ēs"
+              },
+              "gen": {
+                "sg_m": "-is",
+                "pl_m": "-um"
+              },
+              "dat": {
+                "sg_m": "-ī",
+                "pl_m": "-ibus"
+              },
+              "acc": {
+                "sg_m": "-em",
+                "pl_m": "-ēs"
+              },
+              "abl": {
+                "sg_m": "-e",
+                "pl_m": "-ibus"
+              },
+              "voc": {
+                "sg_m": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_m": "-ēs"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "rēx",
+                "pl_m": "rēgēs"
+              },
+              "gen": {
+                "sg_m": "rēgis",
+                "pl_m": "rēgum"
+              },
+              "dat": {
+                "sg_m": "rēgī",
+                "pl_m": "rēgibus"
+              },
+              "acc": {
+                "sg_m": "rēgem",
+                "pl_m": "rēgēs"
+              },
+              "abl": {
+                "sg_m": "rēge",
+                "pl_m": "rēgibus"
+              },
+              "voc": {
+                "sg_m": "rēx",
+                "pl_m": "rēgēs"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-um</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>rēx, rēgis (m</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>rēx</bdi>",
+                "<bdi>rēgēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>rēgis</bdi>",
+                "<bdi>rēgum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>rēgī</bdi>",
+                "<bdi>rēgibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>rēgem</bdi>",
+                "<bdi>rēgēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>rēge</bdi>",
+                "<bdi>rēgibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>rēx</bdi>",
+                "<bdi>rēgēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "词干从属格去 -<bdi>is</bdi> 得到（<bdi>rēx → rēgis → rēg-</bdi>）。主格单数由词干末辅音 + s 变来：<bdi>g/k → x</bdi>，<bdi>b/p → ps</bdi>，<bdi>d/t → s</bdi>。"
+      },
+      {
+        "id": "la-noun-3rd-decl-i",
+        "title": "第三变格法：i 词干（<bdi>cīvis</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "cīv",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs"
+              },
+              "gen": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "pl_m": "-ium",
+                "pl_f": "-ium"
+              },
+              "dat": {
+                "sg_m": "-ī",
+                "sg_f": "-ī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus"
+              },
+              "acc": {
+                "sg_m": "-em",
+                "sg_f": "-em",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs"
+              },
+              "abl": {
+                "sg_m": "-e",
+                "sg_f": "-e",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus"
+              },
+              "voc": {
+                "sg_m": "-is",
+                "sg_f": "-is",
+                "pl_m": "-ēs",
+                "pl_f": "-ēs"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "cīvis",
+                "pl_m": "cīvēs",
+                "sg_f": "cīvis",
+                "pl_f": "cīvēs"
+              },
+              "gen": {
+                "sg_m": "cīvis",
+                "pl_m": "cīvium",
+                "sg_f": "cīvis",
+                "pl_f": "cīvium"
+              },
+              "dat": {
+                "sg_m": "cīvī",
+                "pl_m": "cīvibus",
+                "sg_f": "cīvī",
+                "pl_f": "cīvibus"
+              },
+              "acc": {
+                "sg_m": "cīvem",
+                "pl_m": "cīvēs",
+                "sg_f": "cīvem",
+                "pl_f": "cīvēs"
+              },
+              "abl": {
+                "sg_m": "cīve",
+                "pl_m": "cīvibus",
+                "sg_f": "cīve",
+                "pl_f": "cīvibus"
+              },
+              "voc": {
+                "sg_m": "cīvis",
+                "pl_m": "cīvēs",
+                "sg_f": "cīvis",
+                "pl_f": "cīvēs"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "is$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-is</bdi>",
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>cīvis, cīvis (m./f</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvēs</bdi>",
+                "<bdi>cīvēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvium</bdi>",
+                "<bdi>cīvium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>cīvī</bdi>",
+                "<bdi>cīvī</bdi>",
+                "<bdi>cīvibus</bdi>",
+                "<bdi>cīvibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>cīvem</bdi>",
+                "<bdi>cīvem</bdi>",
+                "<bdi>cīvēs</bdi>",
+                "<bdi>cīvēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>cīve</bdi>",
+                "<bdi>cīve</bdi>",
+                "<bdi>cīvibus</bdi>",
+                "<bdi>cīvibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvis</bdi>",
+                "<bdi>cīvēs</bdi>",
+                "<bdi>cīvēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "属格复数 -<bdi>ium</bdi>、中性复数 <bdi>-ia</bdi> 是 i 词干的标志；宾格单数 <bdi>-em</bdi>、夺格单数 -e（部分词为 <bdi>-ī</bdi>）。"
+      },
+      {
+        "id": "la-noun-3rd-decl-i-abli",
+        "title": "第三变格法：i 词干（<bdi>turris</bdi> 型，宾格 <bdi>-im /</bdi> 夺格 <bdi>-ī</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "turr",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-is",
+                "pl_f": "-ēs"
+              },
+              "gen": {
+                "sg_f": "-is",
+                "pl_f": "-ium"
+              },
+              "dat": {
+                "sg_f": "-ī",
+                "pl_f": "-ibus"
+              },
+              "acc": {
+                "sg_f": "-im",
+                "pl_f": "-īs"
+              },
+              "abl": {
+                "sg_f": "-ī",
+                "pl_f": "-ibus"
+              },
+              "voc": {
+                "sg_f": "-is",
+                "pl_f": "-ēs"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "turris",
+                "pl_f": "turrēs"
+              },
+              "gen": {
+                "sg_f": "turris",
+                "pl_f": "turrium"
+              },
+              "dat": {
+                "sg_f": "turrī",
+                "pl_f": "turribus"
+              },
+              "acc": {
+                "sg_f": "turrim",
+                "pl_f": "turrīs"
+              },
+              "abl": {
+                "sg_f": "turrī",
+                "pl_f": "turribus"
+              },
+              "voc": {
+                "sg_f": "turris",
+                "pl_f": "turrēs"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "is$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-im</bdi>",
+                "<bdi>-īs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-is</bdi>",
+                "<bdi>-ēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>turris, turris (f</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>turris</bdi>",
+                "<bdi>turrēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>turris</bdi>",
+                "<bdi>turrium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>turrī</bdi>",
+                "<bdi>turribus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>turrim</bdi>",
+                "<bdi>turrīs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>turrī</bdi>",
+                "<bdi>turribus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>turris</bdi>",
+                "<bdi>turrēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "纯 i 词干：宾格单数 <bdi>-im</bdi>、夺格单数 <bdi>-ī</bdi>、宾格复数 <bdi>-īs</bdi>（也常见 <bdi>-ēs</bdi>）。同类有 <bdi>sitis</bdi>、<bdi>puppis</bdi>、<bdi>febris</bdi>、<bdi>secūris</bdi>。"
+      },
+      {
+        "id": "la-noun-3rd-decl-n",
+        "title": "第三变格法：辅音词干中性（<bdi>corpus</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "corpor",
+          "stemForms": {
+            "nom": [
+              {
+                "pattern": "or$",
+                "replace": "us"
+              },
+              {
+                "pattern": "er$",
+                "replace": "us"
+              },
+              {
+                "pattern": "in$",
+                "replace": "en"
+              }
+            ]
+          },
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_n": "-a"
+              },
+              "gen": {
+                "sg_n": "-is",
+                "pl_n": "-um"
+              },
+              "dat": {
+                "sg_n": "-ī",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_n": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_n": "-a"
+              },
+              "abl": {
+                "sg_n": "-e",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_n": {
+                  "suffix": "-",
+                  "stemForm": "nom"
+                },
+                "pl_n": "-a"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "corpus",
+                "pl_n": "corpora"
+              },
+              "gen": {
+                "sg_n": "corporis",
+                "pl_n": "corporum"
+              },
+              "dat": {
+                "sg_n": "corporī",
+                "pl_n": "corporibus"
+              },
+              "acc": {
+                "sg_n": "corpus",
+                "pl_n": "corpora"
+              },
+              "abl": {
+                "sg_n": "corpore",
+                "pl_n": "corporibus"
+              },
+              "voc": {
+                "sg_n": "corpus",
+                "pl_n": "corpora"
+              }
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-a</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-um</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "-",
+                "<bdi>-a</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-a</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>corpus, corporis (n</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>corpus</bdi>",
+                "<bdi>corpora</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>corporis</bdi>",
+                "<bdi>corporum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>corporī</bdi>",
+                "<bdi>corporibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>corpus</bdi>",
+                "<bdi>corpora</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>corpore</bdi>",
+                "<bdi>corporibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>corpus</bdi>",
+                "<bdi>corpora</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "s 词干（<bdi>corpus / corporis</bdi>）与鼻音词干（<bdi>nōmen / nōminis</bdi>）都属这一类；中性主格 = 宾格 = 呼格，复数 -a。"
+      },
+      {
+        "id": "la-noun-3rd-decl-i-n",
+        "title": "第三变格法：i 词干中性（<bdi>mare</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "mar",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": "-e",
+                "pl_n": "-ia"
+              },
+              "gen": {
+                "sg_n": "-is",
+                "pl_n": "-ium"
+              },
+              "dat": {
+                "sg_n": "-ī",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_n": "-e",
+                "pl_n": "-ia"
+              },
+              "abl": {
+                "sg_n": "-ī",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_n": "-e",
+                "pl_n": "-ia"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "mare",
+                "pl_n": "maria"
+              },
+              "gen": {
+                "sg_n": "maris",
+                "pl_n": "marium"
+              },
+              "dat": {
+                "sg_n": "marī",
+                "pl_n": "maribus"
+              },
+              "acc": {
+                "sg_n": "mare",
+                "pl_n": "maria"
+              },
+              "abl": {
+                "sg_n": "marī",
+                "pl_n": "maribus"
+              },
+              "voc": {
+                "sg_n": "mare",
+                "pl_n": "maria"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "e$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-e</bdi>",
+                "<bdi>-ia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>mare, maris (n</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>mare</bdi>",
+                "<bdi>maria</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>maris</bdi>",
+                "<bdi>marium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>marī</bdi>",
+                "<bdi>maribus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>mare</bdi>",
+                "<bdi>maria</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>marī</bdi>",
+                "<bdi>maribus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>mare</bdi>",
+                "<bdi>maria</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "夺格单数 -<bdi>ī</bdi>、复数 <bdi>-ia / -ium</bdi>；同类有 <bdi>cubīle</bdi>、<bdi>sedīle</bdi>、<bdi>rete</bdi>。以 <bdi>-al / -ar</bdi> 结尾的中性名词（<bdi>animal</bdi>、<bdi>calcar</bdi>）主格单数就是词干本身，见另一条。"
+      },
+      {
+        "id": "la-noun-3rd-decl-i-n-al",
+        "title": "第三变格法：i 词干中性（<bdi>animal / calcar</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "animāl",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": "-",
+                "pl_n": "-ia"
+              },
+              "gen": {
+                "sg_n": "-is",
+                "pl_n": "-ium"
+              },
+              "dat": {
+                "sg_n": "-ī",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_n": "-",
+                "pl_n": "-ia"
+              },
+              "abl": {
+                "sg_n": "-ī",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_n": "-",
+                "pl_n": "-ia"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "animāl",
+                "pl_n": "animālia"
+              },
+              "gen": {
+                "sg_n": "animālis",
+                "pl_n": "animālium"
+              },
+              "dat": {
+                "sg_n": "animālī",
+                "pl_n": "animālibus"
+              },
+              "acc": {
+                "sg_n": "animāl",
+                "pl_n": "animālia"
+              },
+              "abl": {
+                "sg_n": "animālī",
+                "pl_n": "animālibus"
+              },
+              "voc": {
+                "sg_n": "animāl",
+                "pl_n": "animālia"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "-",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-is</bdi>",
+                "<bdi>-ium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "-",
+                "<bdi>-ia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ī</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "-",
+                "<bdi>-ia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>animāl, animālis (n</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>animāl</bdi>",
+                "<bdi>animālia</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>animālis</bdi>",
+                "<bdi>animālium</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>animālī</bdi>",
+                "<bdi>animālibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>animāl</bdi>",
+                "<bdi>animālia</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>animālī</bdi>",
+                "<bdi>animālibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>animāl</bdi>",
+                "<bdi>animālia</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "词尾与 <bdi>mare</bdi> 型完全相同，只有主格 / 宾格 / 呼格单数是词干本身（<bdi>animal</bdi>、<bdi>calcar</bdi>、<bdi>exemplar</bdi>），不加 -e。"
+      },
+      {
+        "id": "la-noun-4th-decl",
+        "title": "第四变格法（-<bdi>us / -ūs</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "man",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-us",
+                "sg_f": "-us",
+                "pl_m": "-ūs",
+                "pl_f": "-ūs"
+              },
+              "gen": {
+                "sg_m": "-ūs",
+                "sg_f": "-ūs",
+                "pl_m": "-uum",
+                "pl_f": "-uum"
+              },
+              "dat": {
+                "sg_m": "-uī",
+                "sg_f": "-uī",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus"
+              },
+              "acc": {
+                "sg_m": "-um",
+                "sg_f": "-um",
+                "pl_m": "-ūs",
+                "pl_f": "-ūs"
+              },
+              "abl": {
+                "sg_m": "-ū",
+                "sg_f": "-ū",
+                "pl_m": "-ibus",
+                "pl_f": "-ibus"
+              },
+              "voc": {
+                "sg_m": "-us",
+                "sg_f": "-us",
+                "pl_m": "-ūs",
+                "pl_f": "-ūs"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "manus",
+                "pl_f": "manūs",
+                "sg_m": "manus",
+                "pl_m": "manūs"
+              },
+              "gen": {
+                "sg_f": "manūs",
+                "pl_f": "manuum",
+                "sg_m": "manūs",
+                "pl_m": "manuum"
+              },
+              "dat": {
+                "sg_f": "manuī",
+                "pl_f": "manibus",
+                "sg_m": "manuī",
+                "pl_m": "manibus"
+              },
+              "acc": {
+                "sg_f": "manum",
+                "pl_f": "manūs",
+                "sg_m": "manum",
+                "pl_m": "manūs"
+              },
+              "abl": {
+                "sg_f": "manū",
+                "pl_f": "manibus",
+                "sg_m": "manū",
+                "pl_m": "manibus"
+              },
+              "voc": {
+                "sg_f": "manus",
+                "pl_f": "manūs",
+                "sg_m": "manus",
+                "pl_m": "manūs"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "us$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-us</bdi>",
+                "<bdi>-us</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-uum</bdi>",
+                "<bdi>-uum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-uī</bdi>",
+                "<bdi>-uī</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-um</bdi>",
+                "<bdi>-um</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ibus</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-us</bdi>",
+                "<bdi>-us</bdi>",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-ūs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>manus, manūs (f</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数阳性",
+              "单数阴性",
+              "复数阳性",
+              "复数阴性"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>manus</bdi>",
+                "<bdi>manus</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manuum</bdi>",
+                "<bdi>manuum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>manuī</bdi>",
+                "<bdi>manuī</bdi>",
+                "<bdi>manibus</bdi>",
+                "<bdi>manibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>manum</bdi>",
+                "<bdi>manum</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>manū</bdi>",
+                "<bdi>manū</bdi>",
+                "<bdi>manibus</bdi>",
+                "<bdi>manibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>manus</bdi>",
+                "<bdi>manus</bdi>",
+                "<bdi>manūs</bdi>",
+                "<bdi>manūs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "以 -<bdi>us</bdi> 结尾的第四变格名词为阳性或阴性，变格相同；与格单数 <bdi>-uī</bdi>（部分词为 <bdi>-ū</bdi>）。中性见另一条。"
+      },
+      {
+        "id": "la-noun-4th-decl-n",
+        "title": "第四变格法：中性（<bdi>cornū</bdi> 型）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "corn",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_n": "-ū",
+                "pl_n": "-ua"
+              },
+              "gen": {
+                "sg_n": "-ūs",
+                "pl_n": "-uum"
+              },
+              "dat": {
+                "sg_n": "-ū",
+                "pl_n": "-ibus"
+              },
+              "acc": {
+                "sg_n": "-ū",
+                "pl_n": "-ua"
+              },
+              "abl": {
+                "sg_n": "-ū",
+                "pl_n": "-ibus"
+              },
+              "voc": {
+                "sg_n": "-ū",
+                "pl_n": "-ua"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_n": "cornū",
+                "pl_n": "cornua"
+              },
+              "gen": {
+                "sg_n": "cornūs",
+                "pl_n": "cornuum"
+              },
+              "dat": {
+                "sg_n": "cornū",
+                "pl_n": "cornibus"
+              },
+              "acc": {
+                "sg_n": "cornū",
+                "pl_n": "cornua"
+              },
+              "abl": {
+                "sg_n": "cornū",
+                "pl_n": "cornibus"
+              },
+              "voc": {
+                "sg_n": "cornū",
+                "pl_n": "cornua"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "ū$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ua</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ūs</bdi>",
+                "<bdi>-uum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ua</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ū</bdi>",
+                "<bdi>-ua</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>cornū, cornūs (n</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>cornū</bdi>",
+                "<bdi>cornua</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>cornūs</bdi>",
+                "<bdi>cornuum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>cornū</bdi>",
+                "<bdi>cornibus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>cornū</bdi>",
+                "<bdi>cornua</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>cornū</bdi>",
+                "<bdi>cornibus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>cornū</bdi>",
+                "<bdi>cornua</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "中性只有少数词（<bdi>cornū</bdi>、<bdi>genū</bdi>、<bdi>verū</bdi>）；主格 = 宾格 = 呼格，复数 <bdi>-ua</bdi>。"
+      },
+      {
+        "id": "la-noun-5th-decl",
+        "title": "第五变格法：<bdi>rēs</bdi> 型（属格 <bdi>-eī</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "r",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_f": "-ēs",
+                "pl_f": "-ēs"
+              },
+              "gen": {
+                "sg_f": "-eī",
+                "pl_f": "-ērum"
+              },
+              "dat": {
+                "sg_f": "-eī",
+                "pl_f": "-ēbus"
+              },
+              "acc": {
+                "sg_f": "-em",
+                "pl_f": "-ēs"
+              },
+              "abl": {
+                "sg_f": "-ē",
+                "pl_f": "-ēbus"
+              },
+              "voc": {
+                "sg_f": "-ēs",
+                "pl_f": "-ēs"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_f": "rēs",
+                "pl_f": "rēs"
+              },
+              "gen": {
+                "sg_f": "reī",
+                "pl_f": "rērum"
+              },
+              "dat": {
+                "sg_f": "reī",
+                "pl_f": "rēbus"
+              },
+              "acc": {
+                "sg_f": "rem",
+                "pl_f": "rēs"
+              },
+              "abl": {
+                "sg_f": "rē",
+                "pl_f": "rēbus"
+              },
+              "voc": {
+                "sg_f": "rēs",
+                "pl_f": "rēs"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "ēs$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-eī</bdi>",
+                "<bdi>-ērum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-eī</bdi>",
+                "<bdi>-ēbus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ē</bdi>",
+                "<bdi>-ēbus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>rēs, reī (f</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>rēs</bdi>",
+                "<bdi>rēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>reī</bdi>",
+                "<bdi>rērum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>reī</bdi>",
+                "<bdi>rēbus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>rem</bdi>",
+                "<bdi>rēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>rē</bdi>",
+                "<bdi>rēbus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>rēs</bdi>",
+                "<bdi>rēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "<bdi>rēs</bdi> 的属格与与格单数是 <bdi>reī</bdi>（e 短）；其他第五变格名词多为 <bdi>-ēī</bdi>（<bdi>diēs</bdi> 型）。只有 <bdi>rēs</bdi> 与 <bdi>diēs</bdi> 有完整复数。"
+      },
+      {
+        "id": "la-noun-5th-decl-dies",
+        "title": "第五变格法：<bdi>diēs</bdi> 型（属格 <bdi>-ēī</bdi>）",
+        "inflect": "decl",
+        "derive": {
+          "pos": "noun",
+          "stemExample": "di",
+          "endings": {
+            "main": {
+              "nom": {
+                "sg_m": "-ēs",
+                "pl_m": "-ēs"
+              },
+              "gen": {
+                "sg_m": "-ēī",
+                "pl_m": "-ērum"
+              },
+              "dat": {
+                "sg_m": "-ēī",
+                "pl_m": "-ēbus"
+              },
+              "acc": {
+                "sg_m": "-em",
+                "pl_m": "-ēs"
+              },
+              "abl": {
+                "sg_m": "-ē",
+                "pl_m": "-ēbus"
+              },
+              "voc": {
+                "sg_m": "-ēs",
+                "pl_m": "-ēs"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "nom": {
+                "sg_m": "diēs",
+                "pl_m": "diēs"
+              },
+              "gen": {
+                "sg_m": "diēī",
+                "pl_m": "diērum"
+              },
+              "dat": {
+                "sg_m": "diēī",
+                "pl_m": "diēbus"
+              },
+              "acc": {
+                "sg_m": "diem",
+                "pl_m": "diēs"
+              },
+              "abl": {
+                "sg_m": "diē",
+                "pl_m": "diēbus"
+              },
+              "voc": {
+                "sg_m": "diēs",
+                "pl_m": "diēs"
+              }
+            }
+          },
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": [
+                {
+                  "pattern": "ēs$",
+                  "replace": ""
+                }
+              ]
+            }
+          }
+        },
+        "tables": [
+          {
+            "caption": "屈折词尾",
+            "role": "pattern",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-ēī</bdi>",
+                "<bdi>-ērum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-ēī</bdi>",
+                "<bdi>-ēbus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-em</bdi>",
+                "<bdi>-ēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>-ē</bdi>",
+                "<bdi>-ēbus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>-ēs</bdi>",
+                "<bdi>-ēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          },
+          {
+            "caption": "示例：<bdi>diēs, diēī (m</bdi>.)",
+            "role": "example",
+            "headers": [
+              "格",
+              "单数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>diēs</bdi>",
+                "<bdi>diēs</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>diēī</bdi>",
+                "<bdi>diērum</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>diēī</bdi>",
+                "<bdi>diēbus</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>diem</bdi>",
+                "<bdi>diēs</bdi>"
+              ],
+              [
+                "夺格",
+                "<bdi>diē</bdi>",
+                "<bdi>diēbus</bdi>"
+              ],
+              [
+                "呼格",
+                "<bdi>diēs</bdi>",
+                "<bdi>diēs</bdi>"
+              ]
+            ],
+            "lang": "la"
+          }
+        ],
+        "notes": "<bdi>diēs</bdi> 为阳性（意为「日」时），属格 <bdi>-ēī</bdi>；同类的还有 <bdi>speciēs</bdi>、<bdi>fidēs</bdi>。"
+      }
+    ]
+  }
+]

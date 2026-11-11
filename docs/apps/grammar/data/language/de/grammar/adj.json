@@ -1,0 +1,746 @@
+[
+  {
+    "id": "de-adj",
+    "title": "形容词",
+    "items": [
+      {
+        "id": "de-adj-overview",
+        "title": "形容词通用变格",
+        "tables": [
+          {
+            "caption": "按前面的词选择变格",
+            "role": "pattern",
+            "headers": [
+              "前面是什么",
+              "变格类型",
+              "例"
+            ],
+            "rows": [
+              [
+                "定冠词 / <bdi>dieser / jener / alle</bdi>",
+                "弱变化",
+                "<bdi>der alte Mann</bdi>"
+              ],
+              [
+                "不定冠词 / <bdi>kein</bdi> / 物主代词",
+                "混合变化",
+                "<bdi>ein alter Mann</bdi>"
+              ],
+              [
+                "没有冠词或限定词",
+                "强变化",
+                "<bdi>alter Mann</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "所有形容词共用一套词尾：<strong>限定词已经显示性数格时用弱变化</strong>（<bdi>-e / -en</bdi>），<strong>没有限定词时用强变化</strong>（自己承担标记性数格的功能），介于两者之间用混合变化。下面三节是这三套词尾的完整表格。",
+        "inflect": "decl",
+        "derive": {
+          "pos": "adj",
+          "headwordExample": "schnell",
+          "stemExample": "schnell",
+          "stemForms": {
+            "base": {
+              "from": "headword",
+              "rules": []
+            },
+            "cmp": [],
+            "sup": {
+              "from": "cmp",
+              "rules": [
+                {
+                  "pattern": "$",
+                  "replace": "st"
+                }
+              ]
+            }
+          },
+          "endings": {
+            "weak": {
+              "nom": {
+                "m_sg": "-e",
+                "f_sg": "-e",
+                "n_sg": "-e",
+                "pl": "-en"
+              },
+              "gen": {
+                "m_sg": "-en",
+                "f_sg": "-en",
+                "n_sg": "-en",
+                "pl": "-en"
+              },
+              "dat": {
+                "m_sg": "-en",
+                "f_sg": "-en",
+                "n_sg": "-en",
+                "pl": "-en"
+              },
+              "acc": {
+                "m_sg": "-en",
+                "f_sg": "-e",
+                "n_sg": "-e",
+                "pl": "-en"
+              }
+            },
+            "mixed": {
+              "nom": {
+                "m_sg": "-er",
+                "f_sg": "-e",
+                "n_sg": "-es",
+                "pl": "-en"
+              },
+              "gen": {
+                "m_sg": "-en",
+                "f_sg": "-en",
+                "n_sg": "-en",
+                "pl": "-en"
+              },
+              "dat": {
+                "m_sg": "-en",
+                "f_sg": "-en",
+                "n_sg": "-en",
+                "pl": "-en"
+              },
+              "acc": {
+                "m_sg": "-en",
+                "f_sg": "-e",
+                "n_sg": "-es",
+                "pl": "-en"
+              }
+            },
+            "strong": {
+              "nom": {
+                "m_sg": "-er",
+                "f_sg": "-e",
+                "n_sg": "-es",
+                "pl": "-e"
+              },
+              "gen": {
+                "m_sg": "-en",
+                "f_sg": "-er",
+                "n_sg": "-en",
+                "pl": "-er"
+              },
+              "dat": {
+                "m_sg": "-em",
+                "f_sg": "-er",
+                "n_sg": "-em",
+                "pl": "-en"
+              },
+              "acc": {
+                "m_sg": "-en",
+                "f_sg": "-e",
+                "n_sg": "-es",
+                "pl": "-e"
+              }
+            },
+            "comparison": {
+              "comparative": {
+                "form": {
+                  "suffix": "-er",
+                  "stemForm": "cmp"
+                }
+              },
+              "superlative": {
+                "form": {
+                  "prefix": "am ",
+                  "suffix": "-en",
+                  "stemForm": "sup"
+                }
+              }
+            }
+          },
+          "expect": {
+            "weak": {
+              "nom": {
+                "m_sg": "schnelle",
+                "f_sg": "schnelle",
+                "n_sg": "schnelle",
+                "pl": "schnellen"
+              },
+              "gen": {
+                "m_sg": "schnellen",
+                "f_sg": "schnellen",
+                "n_sg": "schnellen",
+                "pl": "schnellen"
+              },
+              "dat": {
+                "m_sg": "schnellen",
+                "f_sg": "schnellen",
+                "n_sg": "schnellen",
+                "pl": "schnellen"
+              },
+              "acc": {
+                "m_sg": "schnellen",
+                "f_sg": "schnelle",
+                "n_sg": "schnelle",
+                "pl": "schnellen"
+              }
+            },
+            "mixed": {
+              "nom": {
+                "m_sg": "schneller",
+                "f_sg": "schnelle",
+                "n_sg": "schnelles",
+                "pl": "schnellen"
+              },
+              "gen": {
+                "m_sg": "schnellen",
+                "f_sg": "schnellen",
+                "n_sg": "schnellen",
+                "pl": "schnellen"
+              },
+              "dat": {
+                "m_sg": "schnellen",
+                "f_sg": "schnellen",
+                "n_sg": "schnellen",
+                "pl": "schnellen"
+              },
+              "acc": {
+                "m_sg": "schnellen",
+                "f_sg": "schnelle",
+                "n_sg": "schnelles",
+                "pl": "schnellen"
+              }
+            },
+            "strong": {
+              "nom": {
+                "m_sg": "schneller",
+                "f_sg": "schnelle",
+                "n_sg": "schnelles",
+                "pl": "schnelle"
+              },
+              "gen": {
+                "m_sg": "schnellen",
+                "f_sg": "schneller",
+                "n_sg": "schnellen",
+                "pl": "schneller"
+              },
+              "dat": {
+                "m_sg": "schnellem",
+                "f_sg": "schneller",
+                "n_sg": "schnellem",
+                "pl": "schnellen"
+              },
+              "acc": {
+                "m_sg": "schnellen",
+                "f_sg": "schnelle",
+                "n_sg": "schnelles",
+                "pl": "schnelle"
+              }
+            },
+            "comparison": {
+              "comparative": {
+                "form": "schneller"
+              },
+              "superlative": {
+                "form": "am schnellsten"
+              }
+            }
+          },
+          "parts": [
+            {
+              "key": "cmp",
+              "label": "比较级词干",
+              "example": "schnell"
+            },
+            {
+              "key": "sup",
+              "label": "最高级词干",
+              "example": "schnellst"
+            }
+          ]
+        }
+      },
+      {
+        "id": "de-adj-weak",
+        "title": "弱变化（定冠词后）",
+        "tables": [
+          {
+            "caption": "词尾",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-en</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：<bdi>schnell</bdi>（<bdi>der schnelle Wagen</bdi>）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnellen</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "前面的定冠词 / <bdi>dieser / jener / alle</bdi> 已经标出性数格，形容词只需要 -e（主格单数三种性、宾格阴性/中性）与 <bdi>-en</bdi>（其余）。"
+      },
+      {
+        "id": "de-adj-mixed",
+        "title": "混合变化（不定冠词后）",
+        "tables": [
+          {
+            "caption": "词尾",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-er</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-en</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：<bdi>schnell</bdi>（<bdi>ein schneller Wagen</bdi>）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>schneller</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnellen</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "<bdi>ein / kein /</bdi> 物主代词在阳性主格、中性主格与中性宾格上没有词尾，形容词这时补上强变化的 <bdi>-er / -es</bdi>；其余格子仍用 <bdi>-en</bdi>。"
+      },
+      {
+        "id": "de-adj-strong",
+        "title": "强变化（无冠词）",
+        "tables": [
+          {
+            "caption": "词尾",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>-er</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-e</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>-en</bdi>",
+                "<bdi>-er</bdi>",
+                "<bdi>-en</bdi>",
+                "<bdi>-er</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>-em</bdi>",
+                "<bdi>-er</bdi>",
+                "<bdi>-em</bdi>",
+                "<bdi>-en</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>-en</bdi>",
+                "<bdi>-e</bdi>",
+                "<bdi>-es</bdi>",
+                "<bdi>-e</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "例词：<bdi>schnell</bdi>（<bdi>schneller Wagen</bdi>）",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数阳性",
+              "单数阴性",
+              "单数中性",
+              "复数"
+            ],
+            "rows": [
+              [
+                "主格",
+                "<bdi>schneller</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnelle</bdi>"
+              ],
+              [
+                "属格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schneller</bdi>",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schneller</bdi>"
+              ],
+              [
+                "与格",
+                "<bdi>schnellem</bdi>",
+                "<bdi>schneller</bdi>",
+                "<bdi>schnellem</bdi>",
+                "<bdi>schnellen</bdi>"
+              ],
+              [
+                "宾格",
+                "<bdi>schnellen</bdi>",
+                "<bdi>schnelle</bdi>",
+                "<bdi>schnelles</bdi>",
+                "<bdi>schnelle</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "前面没有任何限定词时，形容词自己承担标记性数格的功能，词尾与定冠词的派生形式一致（-<bdi>er / -es / -em / -en</bdi>）。"
+      },
+      {
+        "id": "de-adj-comparison",
+        "title": "比较等级",
+        "tables": [
+          {
+            "caption": "规则变化",
+            "role": "pattern",
+            "headers": [
+              "等级",
+              "构成",
+              "例（<bdi>schnell</bdi> 快）"
+            ],
+            "rows": [
+              [
+                "原级",
+                "基本形式",
+                "<bdi>schnell</bdi>"
+              ],
+              [
+                "比较级",
+                "基本形式 + -<bdi>er</bdi>",
+                "<bdi>schneller</bdi>"
+              ],
+              [
+                "最高级",
+                "基本形式 + -(<bdi>e)sten</bdi>（作表语 / 状语时用 <bdi>am …-sten</bdi>）",
+                "<bdi>am schnellsten</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "词干变音与特殊词尾",
+            "role": "pattern",
+            "headers": [
+              "原级",
+              "比较级",
+              "最高级",
+              "说明"
+            ],
+            "rows": [
+              [
+                "<bdi>jung</bdi>",
+                "<bdi>jünger</bdi>",
+                "<bdi>am jüngsten</bdi>",
+                "单音节形容词常变音"
+              ],
+              [
+                "<bdi>kalt</bdi>",
+                "<bdi>kälter</bdi>",
+                "<bdi>am kältesten</bdi>",
+                "变音，且词干以 t 结尾要插 -e-"
+              ],
+              [
+                "<bdi>groß</bdi>",
+                "<bdi>größer</bdi>",
+                "<bdi>am größten</bdi>",
+                "变音"
+              ],
+              [
+                "<bdi>breit</bdi>",
+                "<bdi>breiter</bdi>",
+                "<bdi>am breitesten</bdi>",
+                "词干以 <bdi>d / t / s / ß / z</bdi> 结尾时最高级插 -e-"
+              ],
+              [
+                "<bdi>dunkel</bdi>",
+                "<bdi>dunkler</bdi>",
+                "<bdi>am dunkelsten</bdi>",
+                "<bdi>-el / -er</bdi> 结尾时比较级丢词干里的 e"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "不规则变化",
+            "role": "pattern",
+            "headers": [
+              "原级",
+              "比较级",
+              "最高级"
+            ],
+            "rows": [
+              [
+                "<bdi>gut</bdi>",
+                "<bdi>besser</bdi>",
+                "<bdi>am besten</bdi>"
+              ],
+              [
+                "<bdi>viel</bdi>",
+                "<bdi>mehr</bdi>",
+                "<bdi>am meisten</bdi>"
+              ],
+              [
+                "<bdi>gern</bdi>",
+                "<bdi>lieber</bdi>",
+                "<bdi>am liebsten</bdi>"
+              ],
+              [
+                "<bdi>hoch</bdi>",
+                "<bdi>höher</bdi>",
+                "<bdi>am höchsten</bdi>"
+              ],
+              [
+                "<bdi>nah</bdi>",
+                "<bdi>näher</bdi>",
+                "<bdi>am nächsten</bdi>"
+              ],
+              [
+                "<bdi>groß</bdi>",
+                "<bdi>größer</bdi>",
+                "<bdi>am größten</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "比较级、最高级都从<strong>基本形式</strong>构成：比较级加 -<bdi>er</bdi>，最高级用 <bdi>-(e)sten</bdi>。比较级与最高级作定语时<strong>按普通形容词变格</strong>（<bdi>der schnellere Wagen</bdi>、<bdi>der schnellste Wagen</bdi>），作表语或状语时保持原形、最高级用 <bdi>am …-sten</bdi>。不规则形式必须按词记忆（<bdi>gut → besser → am besten</bdi>）。"
+      },
+      {
+        "id": "de-adj-participle",
+        "title": "分词作形容词",
+        "tables": [
+          {
+            "caption": "两种分词",
+            "role": "pattern",
+            "headers": [
+              "分词",
+              "构成",
+              "例"
+            ],
+            "rows": [
+              [
+                "现在分词",
+                "不定式 + -<bdi>d</bdi>",
+                "<bdi>lesend</bdi>（正在读的）、<bdi>die lesende Frau</bdi>"
+              ],
+              [
+                "过去分词",
+                "<bdi>ge- +</bdi> 词干 <bdi>+ -t / -en</bdi>",
+                "<bdi>gelesen</bdi>（被读的）、<bdi>das gelesene Buch</bdi>"
+              ]
+            ],
+            "lang": "de"
+          },
+          {
+            "caption": "作形容词时的变化",
+            "role": "pattern",
+            "headers": [
+              "用法",
+              "变化",
+              "例"
+            ],
+            "rows": [
+              [
+                "作定语",
+                "按三种变格变化",
+                "<bdi>ein lesender Mann</bdi>"
+              ],
+              [
+                "作表语 / 状语",
+                "不变",
+                "<bdi>Das Buch ist gelesen.</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "分词作定语时按形容词变格；作表语或状语时保持原形。"
+      },
+      {
+        "id": "de-adj-adverb",
+        "title": "形容词构副词",
+        "tables": [
+          {
+            "caption": "常见构成方式",
+            "role": "pattern",
+            "headers": [
+              "方式",
+              "构成",
+              "例"
+            ],
+            "rows": [
+              [
+                "形容词原形直接作副词",
+                "不变",
+                "<bdi>schnell</bdi>、<bdi>gut</bdi>、<bdi>schön</bdi>"
+              ],
+              [
+                "<bdi>-weise</bdi>",
+                "名词 / 形容词 + -<bdi>weise</bdi>",
+                "<bdi>glücklicherweise</bdi>（幸运地）、<bdi>teilweise</bdi>"
+              ],
+              [
+                "<bdi>-lich / -ig / -bar</bdi>",
+                "派生形容词再作副词",
+                "<bdi>möglich</bdi>（可能地）、<bdi>freundlich</bdi>"
+              ],
+              [
+                "<bdi>-s</bdi>",
+                "时间名词 + -<bdi>s</bdi>",
+                "<bdi>morgens</bdi>、<bdi>abends</bdi>"
+              ],
+              [
+                "固定搭配",
+                "形容词 + 介词短语",
+                "<bdi>auf einmal</bdi>、<bdi>in der Tat</bdi>"
+              ]
+            ],
+            "lang": "de"
+          }
+        ],
+        "notes": "德语不像法语有统一的 -<bdi>ment</bdi> 构副词：绝大多数形容词原形就能作副词（<bdi>Er läuft schnell</bdi>），不需要再加词尾。"
+      }
+    ]
+  }
+]

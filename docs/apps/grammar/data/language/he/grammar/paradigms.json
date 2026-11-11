@@ -1,0 +1,1075 @@
+{
+  "noun": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "du",
+            "label": "双数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "abs",
+            "label": "绝对形"
+          },
+          {
+            "key": "cst",
+            "label": "附属形"
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "key": "gender",
+        "label": "语法性",
+        "hint": "希伯来语名词分阳性、阴性；词尾 ־ָה / ־ֶת 多为阴性。兼类的词两个都选。",
+        "multi": true,
+        "options": [
+          {
+            "value": "m",
+            "label": "阳性"
+          },
+          {
+            "value": "f",
+            "label": "阴性"
+          }
+        ]
+      }
+    ]
+  },
+  "adj": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "ms",
+            "label": "阳性单数"
+          },
+          {
+            "key": "fs",
+            "label": "阴性单数"
+          },
+          {
+            "key": "mp",
+            "label": "阳性复数"
+          },
+          {
+            "key": "fp",
+            "label": "阴性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "abs",
+            "label": "绝对形"
+          },
+          {
+            "key": "cst",
+            "label": "附属形"
+          }
+        ]
+      }
+    ]
+  },
+  "pron": {
+    "tables": [
+      {
+        "key": "decl",
+        "title": "变格（自行填写）",
+        "columns": [
+          {
+            "key": "ms",
+            "label": "阳性单数"
+          },
+          {
+            "key": "fs",
+            "label": "阴性单数"
+          },
+          {
+            "key": "mp",
+            "label": "阳性复数"
+          },
+          {
+            "key": "fp",
+            "label": "阴性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "abs",
+            "label": "绝对形"
+          },
+          {
+            "key": "cst",
+            "label": "附属形"
+          }
+        ],
+        "anchors": [],
+        "default": true
+      },
+      {
+        "key": "pers",
+        "title": "独立人称代词",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "1",
+            "label": "第一人称"
+          },
+          {
+            "key": "2m",
+            "label": "第二人称阳性"
+          },
+          {
+            "key": "2f",
+            "label": "第二人称阴性"
+          },
+          {
+            "key": "3m",
+            "label": "第三人称阳性"
+          },
+          {
+            "key": "3f",
+            "label": "第三人称阴性"
+          }
+        ],
+        "anchors": [
+          "he-pron-personal"
+        ]
+      },
+      {
+        "key": "noun-suffix",
+        "title": "名词、介词上的代词后缀",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "1",
+            "label": "第一人称"
+          },
+          {
+            "key": "2m",
+            "label": "第二人称阳性"
+          },
+          {
+            "key": "2f",
+            "label": "第二人称阴性"
+          },
+          {
+            "key": "3m",
+            "label": "第三人称阳性"
+          },
+          {
+            "key": "3f",
+            "label": "第三人称阴性"
+          }
+        ],
+        "anchors": [
+          "he-pron-personal"
+        ]
+      },
+      {
+        "key": "verb-suffix-perf",
+        "title": "动词上的宾语后缀：完成式",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "1",
+            "label": "第一人称"
+          },
+          {
+            "key": "2m",
+            "label": "第二人称阳性"
+          },
+          {
+            "key": "2f",
+            "label": "第二人称阴性"
+          },
+          {
+            "key": "3m",
+            "label": "第三人称阳性"
+          },
+          {
+            "key": "3f",
+            "label": "第三人称阴性"
+          }
+        ],
+        "anchors": [
+          "he-pron-personal"
+        ]
+      },
+      {
+        "key": "verb-suffix-impf",
+        "title": "动词上的宾语后缀：未完成式",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "1",
+            "label": "第一人称"
+          },
+          {
+            "key": "2m",
+            "label": "第二人称阳性"
+          },
+          {
+            "key": "2f",
+            "label": "第二人称阴性"
+          },
+          {
+            "key": "3m",
+            "label": "第三人称阳性"
+          },
+          {
+            "key": "3f",
+            "label": "第三人称阴性"
+          }
+        ],
+        "anchors": [
+          "he-pron-personal"
+        ]
+      },
+      {
+        "key": "dem",
+        "title": "指示 / 疑问 / 关系代词",
+        "columns": [
+          {
+            "key": "m",
+            "label": "阳性"
+          },
+          {
+            "key": "f",
+            "label": "阴性"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "dem",
+            "label": "指示"
+          },
+          {
+            "key": "q",
+            "label": "疑问"
+          },
+          {
+            "key": "rel",
+            "label": "关系"
+          }
+        ],
+        "anchors": [
+          "he-pron-demonstrative"
+        ]
+      }
+    ]
+  },
+  "verb": {
+    "tables": [
+      {
+        "key": "qal",
+        "title": "Qal",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "nifal",
+        "title": "Niphal",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "piel",
+        "title": "Piel",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pual",
+        "title": "Pual",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "hitpael",
+        "title": "Hithpael",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "hiphil",
+        "title": "Hiphil",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "hophal",
+        "title": "Hophal",
+        "columns": [
+          {
+            "key": "1cs",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2fs",
+            "label": "第二人称阴性单数"
+          },
+          {
+            "key": "2ms",
+            "label": "第二人称阳性单数"
+          },
+          {
+            "key": "3fs",
+            "label": "第三人称阴性单数"
+          },
+          {
+            "key": "3ms",
+            "label": "第三人称阳性单数"
+          },
+          {
+            "key": "1cp",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2fp",
+            "label": "第二人称阴性复数"
+          },
+          {
+            "key": "2mp",
+            "label": "第二人称阳性复数"
+          },
+          {
+            "key": "3fp",
+            "label": "第三人称阴性复数"
+          },
+          {
+            "key": "3mp",
+            "label": "第三人称阳性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf",
+            "label": "完成式"
+          },
+          {
+            "key": "perf-waw",
+            "label": "连续完成式"
+          },
+          {
+            "key": "impf",
+            "label": "未完成式"
+          },
+          {
+            "key": "impf-waw",
+            "label": "连续未完成式"
+          },
+          {
+            "key": "juss",
+            "label": "祈愿式"
+          },
+          {
+            "key": "cohort",
+            "label": "劝勉式",
+            "disabled": [
+              "2fs",
+              "2ms",
+              "3fs",
+              "3ms",
+              "2fp",
+              "2mp",
+              "3fp",
+              "3mp"
+            ]
+          },
+          {
+            "key": "impv",
+            "label": "命令式",
+            "disabled": [
+              "1cs",
+              "3fs",
+              "3ms",
+              "1cp",
+              "3fp",
+              "3mp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "inf",
+        "title": "不定式",
+        "columns": [
+          {
+            "key": "cst",
+            "label": "附属形"
+          },
+          {
+            "key": "abs",
+            "label": "绝对形"
+          }
+        ],
+        "rows": [
+          {
+            "key": "qal",
+            "label": "Qal"
+          },
+          {
+            "key": "nifal",
+            "label": "Niphal"
+          },
+          {
+            "key": "piel",
+            "label": "Piel"
+          },
+          {
+            "key": "pual",
+            "label": "Pual"
+          },
+          {
+            "key": "hitpael",
+            "label": "Hithpael"
+          },
+          {
+            "key": "hiphil",
+            "label": "Hiphil"
+          },
+          {
+            "key": "hophal",
+            "label": "Hophal"
+          }
+        ]
+      },
+      {
+        "key": "ptcp",
+        "title": "分词",
+        "columns": [
+          {
+            "key": "ms",
+            "label": "阳性单数"
+          },
+          {
+            "key": "fs",
+            "label": "阴性单数"
+          },
+          {
+            "key": "mp",
+            "label": "阳性复数"
+          },
+          {
+            "key": "fp",
+            "label": "阴性复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "qal-act",
+            "label": "Qal"
+          },
+          {
+            "key": "nifal",
+            "label": "Niphal"
+          },
+          {
+            "key": "piel",
+            "label": "Piel"
+          },
+          {
+            "key": "pual",
+            "label": "Pual"
+          },
+          {
+            "key": "hitpael",
+            "label": "Hithpael"
+          },
+          {
+            "key": "hiphil",
+            "label": "Hiphil"
+          },
+          {
+            "key": "hophal",
+            "label": "Hophal"
+          }
+        ]
+      }
+    ]
+  }
+}

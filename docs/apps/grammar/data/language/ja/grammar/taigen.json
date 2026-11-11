@@ -1,0 +1,152 @@
+[
+  {
+    "id": "ja-taigen",
+    "title": "体言",
+    "items": [
+      {
+        "id": "ja-noun-invariable",
+        "title": "名词没有活用",
+        "tables": [
+          {
+            "caption": "名词的用法",
+            "role": "pattern",
+            "headers": [
+              "用法",
+              "例",
+              "说明"
+            ],
+            "rows": [
+              [
+                "作主语",
+                "<bdi>学生が 来た（がくせいが きた）</bdi>",
+                "格助词 <bdi>が</bdi> 表示主语"
+              ],
+              [
+                "作宾语",
+                "<bdi>本を 読む（ほんを よむ）</bdi>",
+                "格助词 <bdi>を</bdi> 表示宾语"
+              ],
+              [
+                "作谓语（名词句）",
+                "<bdi>これは 本だ（ほんだ）</bdi>",
+                "名词 + <bdi>だ / です</bdi>"
+              ],
+              [
+                "修饰名词",
+                "<bdi>学生の 本（がくせいの ほん）</bdi>",
+                "名词 + <bdi>の</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "notes": "日语名词没有性、数、格的变化，也不随单复数变形（「们」的意思靠数量词或上下文）；格关系由<strong>助词</strong>表示。"
+      }
+    ]
+  },
+  {
+    "id": "ja-adj-na-section",
+    "title": "形容动词",
+    "items": [
+      {
+        "id": "ja-adj-na",
+        "title": "形容動詞（<bdi>ナ形容词・静か型</bdi>）",
+        "inflect": "conj",
+        "tables": [
+          {
+            "caption": "活用形",
+            "role": "pattern",
+            "headers": [
+              "活用形",
+              "词形",
+              "主要接续"
+            ],
+            "rows": [
+              [
+                "未然形",
+                "<bdi>静かだろ</bdi>",
+                "<bdi>う</bdi>（推量）"
+              ],
+              [
+                "連用形1",
+                "<bdi>静かに</bdi>",
+                "<bdi>なる・する</bdi>"
+              ],
+              [
+                "連用形2",
+                "<bdi>静かだっ</bdi>",
+                "<bdi>た</bdi>"
+              ],
+              [
+                "終止形（辞书形）",
+                "<bdi>静かだ</bdi>",
+                "结句"
+              ],
+              [
+                "連体形",
+                "<bdi>静かな</bdi>",
+                "修饰名词"
+              ],
+              [
+                "已然形（仮定）",
+                "<bdi>静かなら</bdi>",
+                "<bdi>ば</bdi>"
+              ]
+            ],
+            "lang": "ja"
+          },
+          {
+            "caption": "合成形式",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "词形",
+              "基于"
+            ],
+            "rows": [
+              [
+                "叮咛形",
+                "<bdi>静かです</bdi>",
+                "词干 + <bdi>です</bdi>"
+              ],
+              [
+                "<bdi>ない形</bdi>",
+                "<bdi>静かではない</bdi>",
+                "词干 + <bdi>ではない</bdi>"
+              ],
+              [
+                "<bdi>た形</bdi>",
+                "<bdi>静かだった</bdi>",
+                "連用形2 + <bdi>た</bdi>"
+              ],
+              [
+                "<bdi>て形</bdi>",
+                "<bdi>静かで</bdi>",
+                "词干 + <bdi>で</bdi>"
+              ],
+              [
+                "仮定形＋<bdi>ば</bdi>",
+                "<bdi>静かならば</bdi>",
+                "已然形 + <bdi>ば</bdi>"
+              ],
+              [
+                "连用（副词）用法",
+                "<bdi>静かに＋なる</bdi>",
+                "連用形1"
+              ]
+            ],
+            "lang": "ja"
+          }
+        ],
+        "derive": {
+          "partsOnly": true,
+          "skipTables": [
+            "forms",
+            "compound"
+          ]
+        },
+        "anchorLabel": "形容动词"
+      }
+    ]
+  }
+]

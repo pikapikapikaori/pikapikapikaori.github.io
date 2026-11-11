@@ -1,0 +1,2482 @@
+[
+  {
+    "id": "he-noun-class",
+    "title": "名词变形",
+    "items": [
+      {
+        "id": "he-class-general",
+        "title": "通用",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ָּ׳ָ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ְּ׳ַ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְּ׳ָ״ִים</bdi>"
+              ],
+              [
+                "复数附属形",
+                "<bdi>־ִּ׳ְ״ֵי</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>דָּבָר</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>דָּבָר</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>דְּבַר</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>דְּבָרִים</bdi>"
+              ],
+              [
+                "复数附属形",
+                "<bdi>דִּבְרֵי</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "דָּבָר"
+          }
+        ],
+        "notes": "词根无弱化、无喉音；一切按元音模式走。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-iii-he",
+        "title": "III-<bdi>ה</bdi> 词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ָׂ׳ֶ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ְׂ׳ֵ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ָׂ׳וֹת</bdi>"
+              ],
+              [
+                "复数附属形",
+                "<bdi>־ְׂ׳וֹת</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>שָׂדֶה</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>שָׂדֶה</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>שְׂדֵה</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>שָׂדוֹת</bdi>"
+              ],
+              [
+                "复数附属形",
+                "<bdi>שְׂדוֹת</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "שָׂדֶה"
+          }
+        ],
+        "notes": "词根末 <bdi>ה</bdi> 在部分形式中保留为词尾 <bdi>ה</bdi>，复数多为 <bdi>־וֹת</bdi>（阳性也如此）。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-iii-alef",
+        "title": "III-<bdi>א</bdi> 词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ִּ׳ֵּ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ִּ׳ֵּ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ִּ׳ְ״וֹת</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>כִּסֵּא</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>כִּסֵּא</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>כִּסֵּא</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>כִּסְאוֹת</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "כִּסֵּא"
+          }
+        ],
+        "notes": "<bdi>א</bdi> 不发音，复数常缩为 <bdi>כִּסְאוֹת</bdi>。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-final-guttural",
+        "title": "末喉音词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ֶ׳ַ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ֶ׳ַ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְ׳ָ״ִים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מֶלַח</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>מֶלַח</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>מֶלַח</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>מְלָחִים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מֶלַח"
+          }
+        ],
+        "notes": "末喉音不能带 dagesh，复数用 <bdi>־ִים</bdi> 并补偿元音。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-middle-guttural",
+        "title": "中喉音词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ַ׳ַ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ַ׳ַ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְ׳ָ״ִים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>נַעַר</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>נַעַר</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>נַעַר</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>נְעָרִים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "נַעַר"
+          }
+        ],
+        "notes": "中喉音偏好 a 类元音，常出现 <bdi>חֲטָף</bdi>。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-i-alef",
+        "title": "I-<bdi>א</bdi> 词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ֶ׳ֶ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ֶ׳ֶ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ֲ׳ָצוֹת</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>אֶרֶץ</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>אֶרֶץ</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>אֶרֶץ</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>אֲרָצוֹת</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "אֶרֶץ"
+          }
+        ],
+        "notes": "<bdi>א</bdi> 不参与 <bdi>dagesh</bdi>；复数第一音节用 <bdi>חֲטַף־פַּתַח</bdi>。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-i-yod",
+        "title": "I-<bdi>י</bdi> 词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ֶ׳ֶ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ֶ׳ֶ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְ׳ָ״ִים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>יֶלֶד</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>יֶלֶד</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>יֶלֶד</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>יְלָדִים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "יֶלֶד"
+          }
+        ],
+        "notes": "词首 <bdi>י</bdi> 在屈折中脱落为 <bdi>שְׁוָא</bdi>（<bdi>יֶלֶד → יְלָדִים</bdi>）。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-i-nun",
+        "title": "I-<bdi>נ</bdi> 词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ֶ׳ַ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ֶ׳ַ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְ׳ָ״ִים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>נֶגַע</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>נֶגַע</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>נֶגַע</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>נְגָעִים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "נֶגַע"
+          }
+        ],
+        "notes": "词首 <bdi>נ</bdi> 常被后一辅音同化（<bdi>מַגָּע</bdi> 来自 <bdi>נ-ג-ע</bdi>）。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-hollow",
+        "title": "中空词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ׁ׳ֹ״</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ׁ׳ֹ״</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְׁ׳ָ״ִים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>שׁוֹר</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>שׁוֹר</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>שׁוֹר</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>שְׁוָרִים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "שׁוֹר"
+          }
+        ],
+        "notes": "中间弱根在屈折时消失，用 <bdi>וֹ / וּ</bdi> 标出。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-geminate",
+        "title": "叠音词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ַם</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ַם</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ַ׳ִּי״</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>עַם</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>עַם</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>עַם</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>עַמִּים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "עַם"
+          }
+        ],
+        "notes": "第二、三辅音相同，绝对形常只写一个并带 dagesh。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-quadriliteral",
+        "title": "四辅音词根",
+        "inflect": "decl",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ַ׳ְ״ָ׀</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>־ַ׳ְ״ָ׀</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ַ׳ְ״ַ׀ִּים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>עַקְרָב</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>עַקְרָב</bdi>"
+              ],
+              [
+                "单数附属形",
+                "<bdi>עַקְרָב</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>עַקְרַבִּים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "עַקְרָב"
+          }
+        ],
+        "notes": "四辅音名词（<bdi>עַקְרָב</bdi> 蝎子）；复数在第三辅音后加 dagesh。",
+        "deriveRef": "he-noun"
+      },
+      {
+        "id": "he-class-dual",
+        "title": "双数类",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "双数 / 复数",
+                "<bdi>־ַ־ִ־</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ֵ־</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מַיִם</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "双数 / 复数",
+                "<bdi>מַיִם</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מֵי</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מַיִם"
+          }
+        ],
+        "notes": "只有双数/复数形（<bdi>מַיִם</bdi> 水、<bdi>עֵינַיִם</bdi> 双眼）。词条请用「特殊变格」。"
+      },
+      {
+        "id": "he-class-plural-only",
+        "title": "唯复数",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "复数绝对形",
+                "<bdi>־ָּ־ִ־־</bdi>"
+              ],
+              [
+                "复数附属形",
+                "<bdi>־ְּ־ֵ־</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>פָּנִים</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "复数绝对形",
+                "<bdi>פָּנִים</bdi>"
+              ],
+              [
+                "复数附属形",
+                "<bdi>פְּנֵי</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "פָּנִים"
+          }
+        ],
+        "notes": "没有单数（<bdi>פָּנִים</bdi> 脸、<bdi>רַחֲמִים</bdi> 怜悯）。词条请用「特殊变格」。"
+      },
+      {
+        "id": "he-class-irregular",
+        "title": "不规则",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "<bdi>אִשָּׁה</bdi> 女人",
+                "<bdi>־ִ־ָּׁ־</bdi>"
+              ],
+              [
+                "→ 复数 <bdi>אשה</bdi>",
+                "—"
+              ],
+              [
+                "<bdi>בַּיִת</bdi> 房子",
+                "<bdi>־ַּ־ִ־</bdi>"
+              ],
+              [
+                "→ 复数 <bdi>בית</bdi>",
+                "<bdi>־ָּתִּ־ם</bdi>"
+              ],
+              [
+                "<bdi>אָב</bdi> 父亲",
+                "<bdi>־ָ־</bdi>"
+              ],
+              [
+                "→ 复数 <bdi>אב</bdi>",
+                "<bdi>־ָ־וֹת</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>אִשָּׁה</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "<bdi>אִשָּׁה</bdi> 女人",
+                "<bdi>אִשָּׁה</bdi>"
+              ],
+              [
+                "→ 复数 <bdi>אשה</bdi>",
+                "<bdi>נָשִׁים</bdi>"
+              ],
+              [
+                "<bdi>בַּיִת</bdi> 房子",
+                "<bdi>בַּיִת</bdi>"
+              ],
+              [
+                "→ 复数 <bdi>בית</bdi>",
+                "<bdi>בָּתִּים</bdi>"
+              ],
+              [
+                "<bdi>אָב</bdi> 父亲",
+                "<bdi>אָב</bdi>"
+              ],
+              [
+                "→ 复数 <bdi>אב</bdi>",
+                "<bdi>אָבוֹת</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "אִשָּׁה"
+          }
+        ],
+        "notes": "复数与单数不同根或形态突变。词条请用「特殊变格」，表格自行填写。"
+      },
+      {
+        "id": "he-class-common-gender",
+        "title": "阴阳同形",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "骨架"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>־ֶּ־ֶ־ְ</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>־ְּ־ָכִים</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>דֶּרֶךְ</bdi>",
+            "role": "example",
+            "headers": [
+              "形式",
+              "示例"
+            ],
+            "rows": [
+              [
+                "单数绝对形",
+                "<bdi>דֶּרֶךְ</bdi>"
+              ],
+              [
+                "复数绝对形",
+                "<bdi>דְּרָכִים</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "דֶּרֶךְ"
+          }
+        ],
+        "notes": "同一形式可作阳性或阴性（<bdi>דֶּרֶךְ</bdi> 路、<bdi>אֶבֶן</bdi> 石）。性别按词条选择，变格照常。"
+      }
+    ],
+    "notes": "骨架表里的占位符：־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 <bdi>בגדכפת</bdi> 自动补 <bdi>dagesh lene</bdi>；词中写成条件点的槽位，代入的辅音若不是 <bdi>בגדכפת</bdi> 就自动去点。"
+  },
+  {
+    "id": "he-noun",
+    "title": "名词附属形规律",
+    "items": [
+      {
+        "id": "he-noun-segolate",
+        "title": "<bdi>קֵטֶל / קֶטֶל</bdi>（<bdi>segolate</bdi>）",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ֵ׳ֶ״</bdi>",
+                "—",
+                "<bdi>־ְ׳ָ״ִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ֵ׳ֶ״</bdi>",
+                "—",
+                "<bdi>־ִ׳ְ״ֵי</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>סֵפֶר</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>סֵפֶר</bdi>",
+                "—",
+                "<bdi>סְפָרִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>סֵפֶר</bdi>",
+                "—",
+                "<bdi>סִפְרֵי</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "סֵפֶר"
+          }
+        ],
+        "notes": "重音在倒数第二音节；复数第一音节缩为 <bdi>שְׁוָא</bdi>。"
+      },
+      {
+        "id": "he-noun-qotel",
+        "title": "<bdi>קֹטֶל</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ֹ׳ֶ״ׁ</bdi>",
+                "—",
+                "<bdi>־ָ׳ָ״ִׁים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ֹ׳ֶ״ׁ</bdi>",
+                "—",
+                "<bdi>־ָ׳ְ״ֵׁי</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>קֹדֶשׁ</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>קֹדֶשׁ</bdi>",
+                "—",
+                "<bdi>קָדָשִׁים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>קֹדֶשׁ</bdi>",
+                "—",
+                "<bdi>קָדְשֵׁי</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "קֹדֶשׁ"
+          }
+        ],
+        "notes": "复数把 <bdi>קֹטֶל</bdi> 改为 <bdi>קָדָשִׁים</bdi>（分拆型）。"
+      },
+      {
+        "id": "he-noun-qetal",
+        "title": "<bdi>קְטָל</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ְ׳ַ״</bdi>",
+                "—",
+                "<bdi>־ְ׳ַנִּים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ְ׳ַ״</bdi>",
+                "—",
+                "<bdi>־ְ׳ַנֵּי</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>זְמַן</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>זְמַן</bdi>",
+                "—",
+                "<bdi>זְמַנִּים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>זְמַן</bdi>",
+                "—",
+                "<bdi>זְמַנֵּי</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "זְמַן"
+          }
+        ],
+        "notes": "附加词尾时末尾辅音叠音（dagesh forte）。"
+      },
+      {
+        "id": "he-noun-qattal",
+        "title": "<bdi>קַטָּל</bdi>（施事 / 职业）",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ַּ׳ָּ״</bdi>",
+                "—",
+                "<bdi>־ַּ׳ָּ״ִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ַּ׳ָּ״</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>דַּיָּג</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>דַּיָּג</bdi>",
+                "—",
+                "<bdi>דַּיָּגִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>דַּיָּג</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "דַּיָּג"
+          }
+        ],
+        "notes": "常见的职业名词模式（<bdi>דַּיָּג</bdi> 渔夫、<bdi>גַּנָּב</bdi> 贼）。"
+      },
+      {
+        "id": "he-noun-miqtal",
+        "title": "<bdi>מִקְטָל</bdi>（工具 / 场所）",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מִ־ְ׳ָּ״ׁ</bdi>",
+                "—",
+                "<bdi>מִ־ְ׳ָּ״ִׁים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מִ־ְ׳ַּ״ׁ</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מִקְדָּשׁ</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מִקְדָּשׁ</bdi>",
+                "—",
+                "<bdi>מִקְדָּשִׁים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מִקְדַּשׁ</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מִקְדָּשׁ"
+          }
+        ],
+        "notes": "前缀 <bdi>מִ</bdi> 加 <bdi>קְטָל</bdi> 骨架；附属形末尾的 qamats 缩为 patah。"
+      },
+      {
+        "id": "he-noun-qittul",
+        "title": "<bdi>קִטּוּל</bdi>（动作名词）",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ִ׳ּוּ״</bdi>",
+                "—",
+                "<bdi>־ִ׳ּוּ״ִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ִ׳ּוּ״</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>סִפּוּר</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>סִפּוּר</bdi>",
+                "—",
+                "<bdi>סִפּוּרִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>סִפּוּר</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "סִפּוּר"
+          }
+        ],
+        "notes": "Piel 的动作名词；与不定式附属形同骨架。"
+      },
+      {
+        "id": "he-noun-qatol",
+        "title": "<bdi>קָטוֹל</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ָׁ׳וֹ״</bdi>",
+                "—",
+                "<bdi>־ְׁ׳וֹמִי״</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ְׁ׳וֹ״</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>שָׁלוֹם</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>שָׁלוֹם</bdi>",
+                "—",
+                "<bdi>שְׁלוֹמִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>שְׁלוֹם</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "שָׁלוֹם"
+          }
+        ],
+        "notes": "附属形第一音节缩为 <bdi>שְׁוָא</bdi>（<bdi>שָׁלוֹם → שְׁלוֹם</bdi>）。"
+      },
+      {
+        "id": "he-noun-qetala",
+        "title": "<bdi>קְטָלָה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ְּ׳ָכָה</bdi>",
+                "—",
+                "<bdi>־ְּ׳ָכוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ִּ׳ְכַּת</bdi>",
+                "—",
+                "<bdi>־ְּ׳ָכוֹת</bdi>"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>בְּרָכָה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>בְּרָכָה</bdi>",
+                "—",
+                "<bdi>בְּרָכוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>בִּרְכַּת</bdi>",
+                "—",
+                "<bdi>בְּרָכוֹת</bdi>"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "בְּרָכָה"
+          }
+        ],
+        "notes": "最常见的阴性模式；附属形为 <bdi>בִּרְכַּת</bdi>（元音前移 + 词尾 <bdi>ַת</bdi>）。"
+      },
+      {
+        "id": "he-noun-qatla",
+        "title": "<bdi>קַטְלָה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ַ׳ְ״ָּה</bdi>",
+                "—",
+                "<bdi>־ְ׳ָ״וֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ַ׳ְ״ַּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מַלְכָּה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מַלְכָּה</bdi>",
+                "—",
+                "<bdi>מְלָכוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מַלְכַּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מַלְכָּה"
+          }
+        ],
+        "notes": "复数改成分拆型 <bdi>מְלָכוֹת</bdi>。"
+      },
+      {
+        "id": "he-noun-qitla",
+        "title": "<bdi>קִטְלָה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ִ׳ְ״ָה</bdi>",
+                "—",
+                "<bdi>־ְ׳ָ״וֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ִ׳ְ״ַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>סִפְרָה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>סִפְרָה</bdi>",
+                "—",
+                "<bdi>סְפָרוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>סִפְרַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "סִפְרָה"
+          }
+        ],
+        "notes": "复数分拆为 <bdi>סְפָרוֹת</bdi>。"
+      },
+      {
+        "id": "he-noun-qatteleth",
+        "title": "<bdi>קַטֶּלֶת</bdi>（疾病 / 状态）",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ַ׳ַּ״ַת</bdi>",
+                "—",
+                "<bdi>־ַ׳ָּ״וֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ַ׳ַּ״ַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>קַדַּחַת</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>קַדַּחַת</bdi>",
+                "—",
+                "<bdi>קַדָּחוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>קַדַּחַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "קַדַּחַת"
+          }
+        ],
+        "notes": "阴性词尾 <bdi>־ֶת</bdi>；复数 <bdi>־וֹת</bdi> 并使中间辅音带 dagesh。"
+      },
+      {
+        "id": "he-noun-qetila",
+        "title": "<bdi>קְטִילָה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ְּ׳ִי״ָה</bdi>",
+                "—",
+                "<bdi>־ְּ׳ִי״וֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ְּ׳ִי״ַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>פְּקִידָה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>פְּקִידָה</bdi>",
+                "—",
+                "<bdi>פְּקִידוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>פְּקִידַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "פְּקִידָה"
+          }
+        ],
+        "notes": "带 <bdi>י</bdi> 的动作名词（与 Piel / Hiphil 动作名词相通）。"
+      },
+      {
+        "id": "he-noun-haqtala",
+        "title": "<bdi>הַקְטָלָה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>הַ־ְ׳ָ״ָה</bdi>",
+                "—",
+                "<bdi>הַ־ְ׳ָ״וֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>הַ־ְ׳ָ״ַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>הַצְלָחָה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>הַצְלָחָה</bdi>",
+                "—",
+                "<bdi>הַצְלָחוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>הַצְלָחַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "הַצְלָחָה"
+          }
+        ],
+        "notes": "Hiphil 的动作名词。"
+      },
+      {
+        "id": "he-noun-hitqattelut",
+        "title": "<bdi>הִתְקַטְּלוּת</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>הִתְ־ַּ׳ְּ״וּת</bdi>",
+                "—",
+                "—"
+              ],
+              [
+                "附属形",
+                "<bdi>הִתְ־ַּ׳ְּ״וּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>הִתְפַּתְּחוּת</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>הִתְפַּתְּחוּת</bdi>",
+                "—",
+                "—"
+              ],
+              [
+                "附属形",
+                "<bdi>הִתְפַּתְּחוּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "הִתְפַּתְּחוּת"
+          }
+        ],
+        "notes": "Hithpael 的动作名词，通常无复数。"
+      },
+      {
+        "id": "he-noun-qatlut",
+        "title": "<bdi>קַטְלוּת</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ַ׳ְ״וּת</bdi>",
+                "—",
+                "<bdi>־ַ׳ְ״ֻיּוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ַ׳ְ״וּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מַלְכוּת</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מַלְכוּת</bdi>",
+                "—",
+                "<bdi>מַלְכֻיּוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מַלְכוּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מַלְכוּת"
+          }
+        ],
+        "notes": "抽象名词；复数少见，形如 <bdi>מַלְכֻיּוֹת</bdi>。"
+      },
+      {
+        "id": "he-noun-qetulla",
+        "title": "<bdi>קְטֻלָּה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>־ְּ׳ֻ״ָּה</bdi>",
+                "—",
+                "<bdi>־ְּ׳ֻ״ּוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>־ְּ׳ֻ״ַּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>גְּאֻלָּה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>גְּאֻלָּה</bdi>",
+                "—",
+                "<bdi>גְּאֻלּוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>גְּאֻלַּת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "גְּאֻלָּה"
+          }
+        ],
+        "notes": "被动色彩的名词（“被……的状态”）。"
+      },
+      {
+        "id": "he-noun-miqatala",
+        "title": "<bdi>מִקְטָלָה</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מִ־ְׁ׳ָּ״ָה</bdi>",
+                "—",
+                "<bdi>מִ־ְׁ׳ָּ״וֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מִ־ְׁ׳ַּ״ַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מִשְׁפָּחָה</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מִשְׁפָּחָה</bdi>",
+                "—",
+                "<bdi>מִשְׁפָּחוֹת</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מִשְׁפַּחַת</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מִשְׁפָּחָה"
+          }
+        ],
+        "notes": "<bdi>מִקְטָל</bdi> 的阴性形式。"
+      },
+      {
+        "id": "he-noun-maqtel",
+        "title": "<bdi>מַקְטֵל / מַקְטֶלֶת</bdi>",
+        "tables": [
+          {
+            "caption": "变化表",
+            "role": "pattern",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מַ־ְ׳ֵׁ״</bdi>",
+                "—",
+                "<bdi>מַ־ְ׳ֵׁ״ִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מַ־ְ׳ֵׁ״</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he"
+          },
+          {
+            "caption": "示例表：<bdi>מַחְשֵׁב</bdi>",
+            "role": "example",
+            "headers": [
+              "",
+              "单数",
+              "双数",
+              "复数"
+            ],
+            "rows": [
+              [
+                "绝对形",
+                "<bdi>מַחְשֵׁב</bdi>",
+                "—",
+                "<bdi>מַחְשֵׁבִים</bdi>"
+              ],
+              [
+                "附属形",
+                "<bdi>מַחְשֵׁב</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "he",
+            "exampleWord": "מַחְשֵׁב"
+          }
+        ],
+        "notes": "工具名词；阴性形为 <bdi>מַקְטֶלֶת</bdi>（<bdi>מַחְשֶׁבֶת</bdi>）。"
+      }
+    ],
+    "derive": {
+      "pos": "noun",
+      "mode": "skeleton",
+      "parts": [
+        {
+          "key": "base",
+          "label": "词根（辅音）",
+          "example": "דבר",
+          "required": true
+        }
+      ],
+      "note": "元音模式不单独选：按基本形态（单数绝对形）的骨架在 18 个模式变体里匹配，匹配后按该模式的骨架生成全部形式。dagesh 等附加点不参与匹配。",
+      "variants": [
+        {
+          "id": "he-noun-qatal",
+          "label": "<bdi>קָטָל</bdi>（通用）",
+          "root": "דבר",
+          "match": "־ָּ׳ָ״",
+          "headword": "דָּבָר",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ָּ׳ָ״",
+                "pl": "־ְּ׳ָ״ִים"
+              },
+              "cst": {
+                "sg": "־ְּ׳ַ״",
+                "pl": "־ִּ׳ְ״ֵי"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "דָּבָר",
+                "pl": "דְּבָרִים"
+              },
+              "cst": {
+                "sg": "דְּבַר",
+                "pl": "דִּבְרֵי"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-segolate",
+          "label": "<bdi>קֵטֶל / קֶטֶל</bdi>（<bdi>segolate</bdi>）",
+          "root": "ספר",
+          "match": "־ֵ׳ֶ״",
+          "headword": "סֵפֶר",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ֵ׳ֶ״",
+                "pl": "־ְ׳ָ״ִים"
+              },
+              "cst": {
+                "sg": "־ֵ׳ֶ״",
+                "pl": "־ִ׳ְ״ֵי"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "סֵפֶר",
+                "pl": "סְפָרִים"
+              },
+              "cst": {
+                "sg": "סֵפֶר",
+                "pl": "סִפְרֵי"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qotel",
+          "label": "<bdi>קֹטֶל</bdi>",
+          "root": "קדש",
+          "match": "־ֹ׳ֶ״ׁ",
+          "headword": "קֹדֶשׁ",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ֹ׳ֶ״ׁ",
+                "pl": "־ָ׳ָ״ִׁים"
+              },
+              "cst": {
+                "sg": "־ֹ׳ֶ״ׁ",
+                "pl": "־ָ׳ְ״ֵׁי"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "קֹדֶשׁ",
+                "pl": "קָדָשִׁים"
+              },
+              "cst": {
+                "sg": "קֹדֶשׁ",
+                "pl": "קָדְשֵׁי"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qetal",
+          "label": "<bdi>קְטָל</bdi>",
+          "root": "זמן",
+          "match": "־ְ׳ַ״",
+          "headword": "זְמַן",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ְ׳ַ״",
+                "pl": "־ְ׳ַנִּים"
+              },
+              "cst": {
+                "sg": "־ְ׳ַ״",
+                "pl": "־ְ׳ַנֵּי"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "זְמַן",
+                "pl": "זְמַנִּים"
+              },
+              "cst": {
+                "sg": "זְמַן",
+                "pl": "זְמַנֵּי"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qattal",
+          "label": "<bdi>קַטָּל</bdi>（施事 / 职业）",
+          "root": "דיג",
+          "match": "־ַּ׳ָּ״",
+          "headword": "דַּיָּג",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ַּ׳ָּ״",
+                "pl": "־ַּ׳ָּ״ִים"
+              },
+              "cst": {
+                "sg": "־ַּ׳ָּ״"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "דַּיָּג",
+                "pl": "דַּיָּגִים"
+              },
+              "cst": {
+                "sg": "דַּיָּג"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-miqtal",
+          "label": "<bdi>מִקְטָל</bdi>（工具 / 场所）",
+          "root": "קדש",
+          "match": "מִ־ְ׳ָּ״ׁ",
+          "headword": "מִקְדָּשׁ",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "מִ־ְ׳ָּ״ׁ",
+                "pl": "מִ־ְ׳ָּ״ִׁים"
+              },
+              "cst": {
+                "sg": "מִ־ְ׳ַּ״ׁ"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "מִקְדָּשׁ",
+                "pl": "מִקְדָּשִׁים"
+              },
+              "cst": {
+                "sg": "מִקְדַּשׁ"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qittul",
+          "label": "<bdi>קִטּוּל</bdi>（动作名词）",
+          "root": "ספר",
+          "match": "־ִ׳ּוּ״",
+          "headword": "סִפּוּר",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ִ׳ּוּ״",
+                "pl": "־ִ׳ּוּ״ִים"
+              },
+              "cst": {
+                "sg": "־ִ׳ּוּ״"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "סִפּוּר",
+                "pl": "סִפּוּרִים"
+              },
+              "cst": {
+                "sg": "סִפּוּר"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qatol",
+          "label": "<bdi>קָטוֹל</bdi>",
+          "root": "שלם",
+          "match": "־ָׁ׳וֹ״",
+          "headword": "שָׁלוֹם",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ָׁ׳וֹ״",
+                "pl": "־ְׁ׳וֹמִי״"
+              },
+              "cst": {
+                "sg": "־ְׁ׳וֹ״"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "שָׁלוֹם",
+                "pl": "שְׁלוֹמִים"
+              },
+              "cst": {
+                "sg": "שְׁלוֹם"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qetala",
+          "label": "<bdi>קְטָלָה</bdi>",
+          "root": "ברך",
+          "match": "־ְּ׳ָכָה",
+          "headword": "בְּרָכָה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ְּ׳ָכָה",
+                "pl": "־ְּ׳ָכוֹת"
+              },
+              "cst": {
+                "sg": "־ִּ׳ְכַּת",
+                "pl": "־ְּ׳ָכוֹת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "בְּרָכָה",
+                "pl": "בְּרָכוֹת"
+              },
+              "cst": {
+                "sg": "בִּרְכַּת",
+                "pl": "בְּרָכוֹת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qatla",
+          "label": "<bdi>קַטְלָה</bdi>",
+          "root": "מלכ",
+          "match": "־ַ׳ְ״ָּה",
+          "headword": "מַלְכָּה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ַ׳ְ״ָּה",
+                "pl": "־ְ׳ָ״וֹת"
+              },
+              "cst": {
+                "sg": "־ַ׳ְ״ַּת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "מַלְכָּה",
+                "pl": "מְלָכוֹת"
+              },
+              "cst": {
+                "sg": "מַלְכַּת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qitla",
+          "label": "<bdi>קִטְלָה</bdi>",
+          "root": "ספר",
+          "match": "־ִ׳ְ״ָה",
+          "headword": "סִפְרָה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ִ׳ְ״ָה",
+                "pl": "־ְ׳ָ״וֹת"
+              },
+              "cst": {
+                "sg": "־ִ׳ְ״ַת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "סִפְרָה",
+                "pl": "סְפָרוֹת"
+              },
+              "cst": {
+                "sg": "סִפְרַת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qatteleth",
+          "label": "<bdi>קַטֶּלֶת</bdi>（疾病 / 状态）",
+          "root": "קדח",
+          "match": "־ַ׳ַּ״ַת",
+          "headword": "קַדַּחַת",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ַ׳ַּ״ַת",
+                "pl": "־ַ׳ָּ״וֹת"
+              },
+              "cst": {
+                "sg": "־ַ׳ַּ״ַת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "קַדַּחַת",
+                "pl": "קַדָּחוֹת"
+              },
+              "cst": {
+                "sg": "קַדַּחַת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qetila",
+          "label": "<bdi>קְטִילָה</bdi>",
+          "root": "פקד",
+          "match": "־ְּ׳ִי״ָה",
+          "headword": "פְּקִידָה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ְּ׳ִי״ָה",
+                "pl": "־ְּ׳ִי״וֹת"
+              },
+              "cst": {
+                "sg": "־ְּ׳ִי״ַת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "פְּקִידָה",
+                "pl": "פְּקִידוֹת"
+              },
+              "cst": {
+                "sg": "פְּקִידַת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-haqtala",
+          "label": "<bdi>הַקְטָלָה</bdi>",
+          "root": "צלח",
+          "match": "הַ־ְ׳ָ״ָה",
+          "headword": "הַצְלָחָה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "הַ־ְ׳ָ״ָה",
+                "pl": "הַ־ְ׳ָ״וֹת"
+              },
+              "cst": {
+                "sg": "הַ־ְ׳ָ״ַת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "הַצְלָחָה",
+                "pl": "הַצְלָחוֹת"
+              },
+              "cst": {
+                "sg": "הַצְלָחַת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-hitqattelut",
+          "label": "<bdi>הִתְקַטְּלוּת</bdi>",
+          "root": "פתח",
+          "match": "הִתְ־ַּ׳ְּ״וּת",
+          "headword": "הִתְפַּתְּחוּת",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "הִתְ־ַּ׳ְּ״וּת"
+              },
+              "cst": {
+                "sg": "הִתְ־ַּ׳ְּ״וּת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "הִתְפַּתְּחוּת"
+              },
+              "cst": {
+                "sg": "הִתְפַּתְּחוּת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qatlut",
+          "label": "<bdi>קַטְלוּת</bdi>",
+          "root": "מלכ",
+          "match": "־ַ׳ְ״וּת",
+          "headword": "מַלְכוּת",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ַ׳ְ״וּת",
+                "pl": "־ַ׳ְ״ֻיּוֹת"
+              },
+              "cst": {
+                "sg": "־ַ׳ְ״וּת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "מַלְכוּת",
+                "pl": "מַלְכֻיּוֹת"
+              },
+              "cst": {
+                "sg": "מַלְכוּת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-qetulla",
+          "label": "<bdi>קְטֻלָּה</bdi>",
+          "root": "גאל",
+          "match": "־ְּ׳ֻ״ָּה",
+          "headword": "גְּאֻלָּה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "־ְּ׳ֻ״ָּה",
+                "pl": "־ְּ׳ֻ״ּוֹת"
+              },
+              "cst": {
+                "sg": "־ְּ׳ֻ״ַּת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "גְּאֻלָּה",
+                "pl": "גְּאֻלּוֹת"
+              },
+              "cst": {
+                "sg": "גְּאֻלַּת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-miqatala",
+          "label": "<bdi>מִקְטָלָה</bdi>",
+          "root": "שפח",
+          "match": "מִ־ְׁ׳ָּ״ָה",
+          "headword": "מִשְׁפָּחָה",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "מִ־ְׁ׳ָּ״ָה",
+                "pl": "מִ־ְׁ׳ָּ״וֹת"
+              },
+              "cst": {
+                "sg": "מִ־ְׁ׳ַּ״ַת"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "מִשְׁפָּחָה",
+                "pl": "מִשְׁפָּחוֹת"
+              },
+              "cst": {
+                "sg": "מִשְׁפַּחַת"
+              }
+            }
+          }
+        },
+        {
+          "id": "he-noun-maqtel",
+          "label": "<bdi>מַקְטֵל / מַקְטֶלֶת</bdi>",
+          "root": "חשב",
+          "match": "מַ־ְ׳ֵׁ״",
+          "headword": "מַחְשֵׁב",
+          "endings": {
+            "main": {
+              "abs": {
+                "sg": "מַ־ְ׳ֵׁ״",
+                "pl": "מַ־ְ׳ֵׁ״ִים"
+              },
+              "cst": {
+                "sg": "מַ־ְ׳ֵׁ״"
+              }
+            }
+          },
+          "expect": {
+            "main": {
+              "abs": {
+                "sg": "מַחְשֵׁב",
+                "pl": "מַחְשֵׁבִים"
+              },
+              "cst": {
+                "sg": "מַחְשֵׁב"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "notes": "骨架表里的占位符：־ = 第 1 个词根辅音，׳ = 第 2 个，״ = 第 3 个，׀ = 第 4 个（四辅音词根）。词首的 <bdi>בגדכפת</bdi> 自动补 <bdi>dagesh lene</bdi>；词中写成条件点的槽位，代入的辅音若不是 <bdi>בגדכפת</bdi> 就自动去点。"
+  }
+]

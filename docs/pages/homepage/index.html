@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-Hant">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,19 +7,19 @@
     <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./source/favicon.ico">
     <meta name="referrer" content="never">
-    <title>ピカピカピ</title>
-    <meta name="description" content="李亦楊的個人網站">
-    <meta name="keywords" content="李亦楊,個人網站,博客">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
 </head>
 
 <body>
     <link href="./style/flaghome.css" rel="stylesheet">
     <nav>
-        <a href="./index.html" class="active">中文</a>
+        <a data-lang="zh-Hant"></a>
         <a class="clip"></a>
-        <a href="./i18n/en-us.html">English</a>
+        <a data-lang="en"></a>
         <a class="clip"></a>
-        <a href="./i18n/jp.html">日本語</a>
+        <a data-lang="ja"></a>
     </nav>
     <div class="background">
         <canvas id="startrack" width="1536" height="1039"></canvas>
@@ -29,105 +29,92 @@
         <div class="ch intro">
             <div class="container">
                 <div class="hello">
-                    <h1 id="slogan">
-                        Don't worry, be happy.
-                        <h2>
-                            李亦楊
-                        </h2>
+                    <h1 id="slogan" data-i18n-html="hero.slogan"></h1>
+                    <h2 data-i18n-html="hero.name"></h2>
                 </div>
             </div>
         </div>
         <div class="ch about">
             <div class="container">
-                <h2 class="chtitle">
-                    關於
-                    <span>我</span>
-                </h2>
+                <h2 class="chtitle" data-i18n-html="about.title"></h2>
                 <div class="clear">
                     <div class="introduct">
                         <img class="avatar" src="./source/logo.jpg">
-                        <blockquote>
-                            <p>式微，式微，胡不歸？微君之故，胡爲乎中露？</p>
-                            <p>式微，式微，胡不歸？微君之躬，胡爲乎泥中？</p>
-                            <p>—— 《詩經·式微》</p>
-                        </blockquote>
+                        <blockquote data-i18n-html="about.quote"></blockquote>
                         <br>
-                        <p style="padding-bottom:1em">歡迎訪問我的個人主頁。</p>
-                        <p>
-
-                            想成為一個愛智慧、愛美的人。
-                        </p>
+                        <p style="padding-bottom:1em" data-i18n="about.p1"></p>
+                        <p data-i18n="about.p2"></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="container">
-                <h3>ピカピカピ</h3>
+                <h3 data-i18n="site.name"></h3>
                 <div class="icon">
-                    <a href="../../#/" target="_blank" rel="noopener">
+                    <a data-i18n-attr="href:link.blog" target="_blank" rel="noopener">
                         <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            color="var(--global-border-color, rgba(255, 255, 255, .5))">
+                            color="var(--border-color)">
                             <path
                                 d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5"
+                                stroke="var(--border-color)" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round">
                             </path>
                             <path
                                 d="M4.271 18.3457C4.271 18.3457 6.50002 15.5 12 15.5C17.5 15.5 19.7291 18.3457 19.7291 18.3457"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5"
+                                stroke="var(--border-color)" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round">
                             </path>
                             <path
                                 d="M12 12C13.6569 12 15 10.6569 15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12Z"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5"
+                                stroke="var(--border-color)" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round">
                             </path>
                         </svg>
                     </a>
-                    <a href="../animepage/index.html" target="_blank" rel="noopener">
+                    <a data-i18n-attr="href:link.photo" target="_blank" rel="noopener">
                         <?xml version="1.0" encoding="UTF-8"?><svg width="20px" height="20px" stroke-width="1.5"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--global-border-color, rgba(255, 255, 255, .5))">
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="var(--border-color)">
                             <path
                                 d="M2 19V9C2 7.89543 2.89543 7 4 7H4.5C5.12951 7 5.72229 6.70361 6.1 6.2L8.32 3.24C8.43331 3.08892 8.61115 3 8.8 3H15.2C15.3889 3 15.5667 3.08892 15.68 3.24L17.9 6.2C18.2777 6.70361 18.8705 7 19.5 7H20C21.1046 7 22 7.89543 22 9V19C22 20.1046 21.1046 21 20 21H4C2.89543 21 2 20.1046 2 19Z"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                stroke="var(--border-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             </path>
                             <path
                                 d="M12 17C14.2091 17 16 15.2091 16 13C16 10.7909 14.2091 9 12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17Z"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                stroke="var(--border-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             </path>
                         </svg>
                     </a>
                     <a href="mailto:Lyy8759@outlook.com" target="_blank" rel="noopener">
                         <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            color="var(--global-border-color, rgba(255, 255, 255, .5))">
-                            <path d="M7 9l5 3.5L17 9" stroke="var(--global-border-color, rgba(255, 255, 255, .5))"
+                            color="var(--border-color)">
+                            <path d="M7 9l5 3.5L17 9" stroke="var(--border-color)"
                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M2 17V7a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5"></path>
+                                stroke="var(--border-color)" stroke-width="1.5"></path>
                         </svg>
                     </a>
                     <a href="https://github.com/pikapikapikaori/" target="_blank" rel="noopener">
                         <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            color="var(--global-border-color, rgba(255, 255, 255, .5))">
+                            color="var(--border-color)">
                             <path
                                 d="M16 22.027v-2.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7a5.44 5.44 0 00-1.5-3.75 5.07 5.07 0 00-.09-3.77s-1.18-.35-3.91 1.48a13.38 13.38 0 00-7 0c-2.73-1.83-3.91-1.48-3.91-1.48A5.07 5.07 0 005 5.797a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 00-.94 2.58v2.87M9 20.027c-3 .973-5.5 0-7-3"
-                                stroke="var(--global-border-color, rgba(255, 255, 255, .5))" stroke-width="1.5"
+                                stroke="var(--border-color)" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </a>
                 </div>
-                <p id="copyright-script-generated"></p>
+                <p id="copyright-script-generated" data-i18n-html="footer.copyright"></p>
             </div>
         </div>
     </div>
 
     <script src="./utils/jquery-1.9.1.min.js"></script>
+    <script src="./utils/i18n.js"></script>
     <script src="./utils/page.js"></script>
-    <script src="./utils/copyright.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,213 @@
+.app {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    height: var(--h-header);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: 0 var(--sp-4);
+    background: color-mix(in oklab, var(--c-bg-elev) 92%, transparent);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--c-border);
+}
+
+.app-header__brand {
+    font-weight: 700;
+    font-size: var(--fs-md);
+    white-space: nowrap;
+}
+
+.app-header__spacer {
+    flex: 1;
+}
+
+.app-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+
+.page-breadcrumbs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--c-fg-muted);
+    margin-bottom: var(--sp-4);
+}
+
+.page-breadcrumbs__trail {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    min-width: 0;
+}
+
+.crumb-link {
+    color: var(--c-fg-muted);
+    white-space: nowrap;
+    transition: color var(--dur) var(--ease);
+}
+
+.crumb-link:hover {
+    color: var(--c-fg);
+    text-decoration: underline;
+}
+
+.crumb-current {
+    color: var(--c-fg);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.crumb-sep {
+    color: var(--c-fg-subtle);
+    user-select: none;
+}
+
+.app-main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--w-max);
+    margin: 0 auto;
+    padding: var(--sp-5) var(--sp-4) var(--sp-7);
+}
+
+.page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+    flex-wrap: wrap;
+}
+
+.page-head__title {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+}
+
+/* 语法页把标题做成 h1：一页一个，字号提到 --fs-2xl */
+h1.page-head__title {
+    font-size: var(--fs-2xl);
+    letter-spacing: -.02em;
+    line-height: var(--lh-tight);
+    margin: 0;
+}
+
+/* 书目式页头：语言索引这类整页标题用衬线大字。
+ * app 屏幕的标题上限是 32px（手机上 24px），所以不用 --fs-3xl。 */
+.page-head--display .page-head__title {
+    font-family: var(--ff-display);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin: 0;
+}
+
+@media (max-width: 720px) {
+    .page-head--display .page-head__title {
+        font-size: 1.5rem;
+    }
+}
+
+.page-head__sub {
+    color: var(--c-fg-muted);
+    font-size: var(--fs-sm);
+    margin-top: var(--sp-1);
+}
+
+.page-head__actions {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+}
+
+.toolbar {
+    display: flex;
+    gap: var(--sp-2);
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--sp-4);
+    padding: var(--sp-2);
+    background: var(--c-bg-elev);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-surface);
+}
+
+.toolbar__grow {
+    flex: 1;
+    min-width: 160px;
+}
+
+.toolbar .btn,
+.toolbar .input,
+.toolbar .select {
+    height: 38px;
+    min-height: 38px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-5);
+    flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+    .app-header {
+        padding: 0 var(--sp-4);
+    }
+
+    .app-main {
+        padding: var(--sp-4) var(--sp-4) var(--sp-6);
+    }
+}
+
+.boot-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-4);
+    background: var(--c-bg);
+    color: var(--c-fg-muted);
+    transition: opacity .25s var(--ease);
+}
+
+.boot-loader--hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.boot-loader__spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--c-border);
+    border-top-color: var(--c-accent);
+    border-radius: 50%;
+    animation: boot-spin .8s linear infinite;
+}
+
+.boot-loader__text {
+    font-size: var(--fs-sm);
+}
+
+@keyframes boot-spin {
+    to { transform: rotate(360deg); }
+}

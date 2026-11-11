@@ -1,0 +1,300 @@
+/** 应用入口：打开 IndexedDB、注册 Service Worker、初始化主题与字体、挂载路由。 */
+
+import { openDB } from './store/db.js'
+import { getUser } from './store/user-store.js'
+import { getSettings, saveSettings } from './store/settings-store.js'
+import { createRouter } from './router.js'
+import { appStore, setUser, setLanguage, setSettings, setRoute, setNavContext } from './app-state.js'
+import { h, replace, qs } from './utils/dom.js'
+import { attachVerticalPopover, hideVerticalPopover } from './components/vertical-popover.js'
+import { enhanceSelects } from './components/select-menu.js'
+import { createThemeToggle, applyTheme } from './components/theme-toggle.js'
+import { initFont, applyFontSize, getStoredFontSize } from './services/font-service.js'
+import { settingsIcon } from './components/icons.js'
+import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
+import { loadLanguages } from './data/languages.js'
+import { LS_KEYS, THEMES, SCRIPT_SEARCH_LANGS } from './config/config.js'
+import { preloadScriptProfiles } from './services/grammar-service.js'
+import { createDevTools } from './dev/index.js'
+
+const DEFAULT_THEME = THEMES[0].value
+
+const NO_HEADER_ROUTES = new Set(['/', '/welcome'])
+const NO_LAYOUT_ROUTES = new Set(['/', '/welcome'])
+
+function getShell() {
+    return qs('#app')
+}
+
+function renderHeader() {
+    const themeToggle = createThemeToggle({
+        onChange: async (t) => {
+            const { userId } = appStore.get()
+            if (!userId) return
+            try {
+                const s = await saveSettings(userId, { theme: t })
+                setSettings(s)
+            } catch (err) {
+                console.warn('[theme] 保存失败', err)
+            }
+        }
+    })
+
+    // 从欢迎页进来的文档页：顶栏回首页，而不是回语言列表、设置
+    const home = () => appStore.get().navContext === 'welcome'
+
+    return h('header', { class: 'app-header' },
+        h('a', {
+            class: 'app-header__brand js-header-brand',
+            href: home() ? '#/welcome' : '#/languages'
+        }, '生词本'),
+        h('div', { class: 'app-header__spacer' }),
+        h('div', { class: 'app-header__actions' },
+            themeToggle,
+            h('button', {
+                class: 'btn btn--ghost btn--icon', title: '设置',
+                onclick: () => router.navigate(home() ? '/welcome' : '/settings')
+            }, settingsIcon()),
+            h('button', {
+                class: 'btn btn--ghost', title: '注销当前用户',
+                onclick: () => logout()
+            }, '注销')
+        )
+    )
+}
+
+/** 顶栏在视图挂载后才确定上下文（数据格式页按来源决定），挂载结束后同步品牌链接 */
+function syncHeader() {
+    const brand = qs('.js-header-brand')
+    if (!brand) return
+    brand.setAttribute('href', appStore.get().navContext === 'welcome' ? '#/welcome' : '#/languages')
+}
+
+/** 注销：清掉当前用户的选择（数据留在库里），回欢迎页重新选 */
+function logout() {
+    try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
+    setUser(null)
+    appStore.set({ settings: null })
+    router.navigate('/welcome')
+}
+
+function renderShell({ withHeader, withMain }) {
+    const root = getShell()
+    root.className = 'app'
+
+    if (!withMain) {
+        replace(root)
+        return root
+    }
+
+    replace(root)
+    if (withHeader) root.appendChild(renderHeader())
+    const main = h('main', { class: 'app-main', id: 'view' })
+    root.appendChild(main)
+    return main
+}
+
+function renderFatal(message) {
+    const root = getShell()
+    replace(root, h('div', { class: 'welcome' },
+        h('div', { class: 'welcome__panel' },
+            h('h1', { class: 'welcome__title' }, '无法启动'),
+            h('p', { class: 'welcome__sub' }, message)
+        )
+    ))
+}
+
+/** 需要输入助手的视图（其余页面没有常驻按钮） */
+const IME_VIEWS = new Set(['words', 'wordNew', 'wordEdit', 'notes'])
+
+const VIEW_MODULES = {
+    welcome: () => import('./views/welcome-view.js'),
+    languages: () => import('./views/language-select-view.js'),
+    words: () => import('./views/word-list-view.js'),
+    wordNew: () => import('./views/word-form-view.js'),
+    wordEdit: () => import('./views/word-form-view.js'),
+    review: () => import('./views/review-view.js'),
+    notes: () => import('./views/notes-view.js'),
+    grammar: () => import('./views/grammar-view.js'),
+    schema: () => import('./views/schema-view.js'),
+    settings: () => import('./views/settings-view.js')
+}
+
+async function loadView(name) {
+    const loader = VIEW_MODULES[name]
+    if (!loader) throw new Error(`未知视图：${name}`)
+    const mod = await loader()
+    return mod.default || mod
+}
+
+/** 视图模块约定：export default { needsUser, layout: 'full' | 'shell' | 'main', async mount(ctx) } */
+
+const router = createRouter([
+    { path: '/welcome',              view: (ctx) => mountView('welcome',    ctx) },
+    { path: '/languages',            view: (ctx) => mountView('languages',  ctx) },
+    { path: '/lang/:lang/words',     view: (ctx) => mountView('words',      ctx) },
+    { path: '/lang/:lang/words/new', view: (ctx) => mountView('wordNew',    ctx) },
+    { path: '/lang/:lang/words/:id', view: (ctx) => mountView('wordEdit',   ctx) },
+    { path: '/lang/:lang/review',    view: (ctx) => mountView('review',     ctx) },
+    { path: '/lang/:lang/notes',     view: (ctx) => mountView('notes',      ctx) },
+    { path: '/grammar',              view: () => router.navigate('/languages', { replace: true }) },
+    { path: '/grammar/:lang/:group',  view: (ctx) => mountView('grammar',    ctx) },
+    { path: '/grammar/:lang',        view: (ctx) => mountView('grammar',    ctx) },
+    { path: '/schema',               view: (ctx) => mountView('schema',     ctx) },
+    { path: '/schema/:doc',          view: (ctx) => mountView('schema',     ctx) },
+    { path: '/settings',             view: (ctx) => mountView('settings',   ctx) },
+    { path: '/',                     view: () => router.navigate('/welcome', { replace: true }) }
+])
+
+let currentUnmount = null
+
+async function mountView(name, ctx) {
+    const view = await loadView(name)
+    const isFull = view.layout === 'full'
+    || NO_LAYOUT_ROUTES.has(ctx.path)
+
+    if (typeof currentUnmount === 'function') {
+        try { currentUnmount() } catch (err) { console.warn('[view] unmount error', err) }
+        currentUnmount = null
+    }
+    import('./components/input-helper.js')
+        .then((mod) => mod.unmountInputHelper())
+        .catch(() => { /* 助手没加载成功时不需要卸载 */ })
+    
+    clearBreadcrumbs()
+    hideVerticalPopover()
+    // 默认按「用户」上下文导航；文档页会在自己的 mount 里改成欢迎页上下文
+    setNavContext('user')
+
+    const container = isFull
+        ? renderShell({ withHeader: false, withMain: false })
+        : renderShell({
+            withHeader: view.layout !== 'none' && !NO_HEADER_ROUTES.has(ctx.path),
+            withMain: true
+        })
+
+    if (view.needsUser && !appStore.get().userId) {
+        router.navigate('/welcome', { replace: true })
+        return
+    }
+
+    if (ctx.params && ctx.params.lang) {
+        setLanguage(ctx.params.lang)
+    }
+
+    setRoute(name, ctx.params, ctx.query)
+    const unmount = await view.mount(container || getShell(), ctx)
+    if (typeof unmount === 'function') currentUnmount = unmount
+
+    // 输入助手：只有「词列表、生词表单」需要，语言决定面板内容。
+    // 动态加载：助手模块出问题（半更新、缓存、语法错）时只是没有助手，不会拖垮整个视图。
+    if (IME_VIEWS.has(name) && ctx.params && ctx.params.lang) {
+        const lang = ctx.params.lang
+        import('./components/input-helper.js')
+            .then((mod) => mod.mountInputHelper({ lang }))
+            .catch((err) => console.warn('[ime] 输入助手加载失败，已跳过', err))
+    }
+    applyBreadcrumbs()
+    syncHeader()
+}
+
+function hideBootLoader() {
+    const el = document.getElementById('boot-loader')
+    if (!el) return
+    el.classList.add('boot-loader--hidden')
+    setTimeout(() => el.remove(), 400)
+}
+
+function setBootLoaderText(text) {
+    const el = document.querySelector('#boot-loader .boot-loader__text')
+    if (el) el.textContent = text
+}
+
+async function bootstrap() {
+    try {
+        await openDB()
+    } catch (err) {
+        renderFatal(`IndexedDB 初始化失败：${err.message}`)
+        hideBootLoader()
+        return
+    }
+
+    let theme = DEFAULT_THEME
+    try { theme = localStorage.getItem(LS_KEYS.theme) || DEFAULT_THEME } catch { /* ignore */ }
+    applyTheme(theme)
+
+    // 字体与字号存在 localStorage，启动时须应用，否则界面与设置页显示不一致。
+    initFont()
+    applyFontSize(getStoredFontSize())
+
+    setBootLoaderText('正在加载语言数据…')
+    try {
+        await loadLanguages()
+    } catch (err) {
+        console.warn('[bootstrap] 语言元信息加载失败', err)
+    }
+
+    // 检索同步需要「转写 ⇄ 原文」转换，先加载这些语言的文字档案
+    await preloadScriptProfiles(SCRIPT_SEARCH_LANGS)
+
+    let cur = null
+    let uid = null
+    try { uid = localStorage.getItem(LS_KEYS.user) } catch { /* ignore */ }
+    if (uid) {
+        cur = await getUser(uid)
+        if (!cur) {
+            try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
+        }
+    }
+    if (cur) {
+        setUser(cur)
+        const s = await getSettings(cur.id)
+        setSettings(s)
+        applyTheme(s.theme || theme)
+    }
+
+    enhanceSelects()
+    router.start()
+
+    // 首帧渲染完成后再撤下遮罩（用 timeout 而不是 rAF：后台标签页里 rAF 不触发）
+    setTimeout(hideBootLoader, 30)
+
+    router.onNotFound(() => {
+        router.navigate('/welcome', { replace: true })
+    })
+
+    router.onError(({ error }) => {
+        console.error(error)
+        const main = document.getElementById('view')
+        if (main) {
+            replace(main,
+                h('div', { class: 'empty' },
+                    h('div', { class: 'empty__title' }, '页面加载失败'),
+                    h('div', { class: 'empty__desc' }, String(error && error.message || error))
+                )
+            )
+        }
+    })
+
+    window.__ln = { router, appStore, dev: createDevTools() }
+
+    setupServiceWorker()
+    attachVerticalPopover()
+}
+
+function setupServiceWorker() {
+    if (!('serviceWorker' in navigator)) return
+    if (location.protocol !== 'https:') return
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => {
+            console.warn('[sw] 注册失败', err)
+        })
+    })
+}
+
+bootstrap().catch((err) => {
+    console.error(err)
+    setBootLoaderText('启动失败')
+    renderFatal(String(err && err.message || err))
+    hideBootLoader()
+})

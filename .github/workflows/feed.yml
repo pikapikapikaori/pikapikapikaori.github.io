@@ -10,6 +10,7 @@ on:
       - "script/shell/feed.sh"
       - "!docs/assets/**"
       - "!docs/pages/**"
+      - "!docs/apps/**"
 
 permissions:
   contents: write

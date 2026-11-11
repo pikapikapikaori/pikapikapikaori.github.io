@@ -1,0 +1,183 @@
+{
+  "noun": {
+    "stems": false,
+    "tables": [
+      {
+        "key": "number",
+        "title": "数",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "abs",
+            "label": "绝对形"
+          }
+        ]
+      }
+    ]
+  },
+  "verb": {
+    "tables": [
+      {
+        "key": "tense",
+        "title": "时制与体",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "mbi",
+            "label": "现在-将来时"
+          },
+          {
+            "key": "fut",
+            "label": "将来/未完成"
+          },
+          {
+            "key": "past",
+            "label": "过去时"
+          },
+          {
+            "key": "mbime",
+            "label": "同时持续"
+          },
+          {
+            "key": "mbihe",
+            "label": "过去进行"
+          },
+          {
+            "key": "prog",
+            "label": "进行"
+          },
+          {
+            "key": "prog2",
+            "label": "进行/持续"
+          },
+          {
+            "key": "perf",
+            "label": "完成/已毕"
+          },
+          {
+            "key": "perf2",
+            "label": "完成"
+          },
+          {
+            "key": "plup",
+            "label": "过去完成"
+          }
+        ]
+      },
+      {
+        "key": "mood",
+        "title": "式与否定",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "impv",
+            "label": "命令式"
+          },
+          {
+            "key": "opt",
+            "label": "祈愿"
+          },
+          {
+            "key": "prec",
+            "label": "祈使"
+          },
+          {
+            "key": "negpres",
+            "label": "现在否定"
+          },
+          {
+            "key": "negpast",
+            "label": "过去否定"
+          },
+          {
+            "key": "prohib",
+            "label": "禁止"
+          }
+        ]
+      },
+      {
+        "key": "converb",
+        "title": "副动形式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "cvbme",
+            "label": "同时"
+          },
+          {
+            "key": "cvbfi",
+            "label": "先后完成"
+          },
+          {
+            "key": "cvbhai",
+            "label": "持续"
+          },
+          {
+            "key": "cvbtala",
+            "label": "直到"
+          },
+          {
+            "key": "cvbnggala",
+            "label": "当…时"
+          }
+        ]
+      },
+      {
+        "key": "nominal",
+        "title": "形动与名词化",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "ptcppast",
+            "label": "已发生形动"
+          },
+          {
+            "key": "ptcpfut",
+            "label": "未发生形动"
+          },
+          {
+            "key": "nomn",
+            "label": "名词化（-n 型）"
+          },
+          {
+            "key": "nomsi",
+            "label": "名词化（-si 型）"
+          },
+          {
+            "key": "nomtan",
+            "label": "名词化（-tVn 型）"
+          }
+        ]
+      }
+    ]
+  }
+}

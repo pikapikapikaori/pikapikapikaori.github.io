@@ -1,0 +1,244 @@
+[
+  {
+    "id": "fr-num",
+    "title": "数词",
+    "items": [
+      {
+        "id": "fr-num-cardinal",
+        "title": "基数词",
+        "tables": [
+          {
+            "caption": "0–20",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "写法",
+              "数",
+              "写法"
+            ],
+            "rows": [
+              [
+                "0",
+                "<bdi>zéro</bdi>",
+                "11",
+                "<bdi>onze</bdi>"
+              ],
+              [
+                "1",
+                "<bdi>un</bdi>",
+                "12",
+                "<bdi>douze</bdi>"
+              ],
+              [
+                "2",
+                "<bdi>deux</bdi>",
+                "13",
+                "<bdi>treize</bdi>"
+              ],
+              [
+                "3",
+                "<bdi>trois</bdi>",
+                "14",
+                "<bdi>quatorze</bdi>"
+              ],
+              [
+                "4",
+                "<bdi>quatre</bdi>",
+                "15",
+                "<bdi>quinze</bdi>"
+              ],
+              [
+                "5",
+                "<bdi>cinq</bdi>",
+                "16",
+                "<bdi>seize</bdi>"
+              ],
+              [
+                "6",
+                "<bdi>six</bdi>",
+                "17",
+                "<bdi>dix-sept</bdi>"
+              ],
+              [
+                "7",
+                "<bdi>sept</bdi>",
+                "18",
+                "<bdi>dix-huit</bdi>"
+              ],
+              [
+                "8",
+                "<bdi>huit</bdi>",
+                "19",
+                "<bdi>dix-neuf</bdi>"
+              ],
+              [
+                "9",
+                "<bdi>neuf</bdi>",
+                "20",
+                "<bdi>vingt</bdi>"
+              ],
+              [
+                "10",
+                "<bdi>dix</bdi>",
+                "—",
+                "—"
+              ]
+            ],
+            "lang": "fr"
+          },
+          {
+            "caption": "十位以上",
+            "role": "pattern",
+            "headers": [
+              "数",
+              "写法",
+              "说明"
+            ],
+            "rows": [
+              [
+                "21 / 31 / 41",
+                "<bdi>vingt et un / trente et un / quarante et un</bdi>",
+                "1 用 <bdi>et</bdi>，不加连字符"
+              ],
+              [
+                "70",
+                "<bdi>soixante-dix</bdi>",
+                "60 + 10"
+              ],
+              [
+                "71",
+                "<bdi>soixante et onze</bdi>",
+                "—"
+              ],
+              [
+                "80",
+                "<bdi>quatre-vingts</bdi>",
+                "4 × 20；后接数词时去 s"
+              ],
+              [
+                "81",
+                "<bdi>quatre-vingt-un</bdi>",
+                "不加 <bdi>et</bdi>"
+              ],
+              [
+                "90",
+                "<bdi>quatre-vingt-dix</bdi>",
+                "—"
+              ],
+              [
+                "100 / 200",
+                "<bdi>cent / deux cents</bdi>",
+                "整数百加 s，后接数词去 s"
+              ],
+              [
+                "1000 / 2000",
+                "<bdi>mille / deux mille</bdi>",
+                "<bdi>mille</bdi> 不变"
+              ],
+              [
+                "百万 / 十亿",
+                "<bdi>un million / un milliard</bdi>",
+                "名词，后接 <bdi>de</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "<bdi>un</bdi> 有性数变化（<bdi>une</bdi>、<bdi>uns</bdi>、<bdi>unes</bdi>）；<bdi>vingt</bdi> 和 <bdi>cent</bdi> 在整数倍时加 s（<bdi>quatre-vingts</bdi>、<bdi>deux cents</bdi>），一旦后面还有数词就不加。"
+      },
+      {
+        "id": "fr-num-ordinal",
+        "title": "序数词",
+        "tables": [
+          {
+            "caption": "构成",
+            "role": "pattern",
+            "headers": [
+              "基数",
+              "序数",
+              "说明"
+            ],
+            "rows": [
+              [
+                "<bdi>un</bdi>",
+                "<bdi>premier / première</bdi>",
+                "唯一不规则"
+              ],
+              [
+                "<bdi>deux</bdi>",
+                "<bdi>deuxième</bdi>",
+                "基数 + -<bdi>ième</bdi>"
+              ],
+              [
+                "<bdi>cinq</bdi>",
+                "<bdi>cinquième</bdi>",
+                "加 <bdi>u</bdi> 避免连读"
+              ],
+              [
+                "<bdi>neuf</bdi>",
+                "<bdi>neuvième</bdi>",
+                "<bdi>f → v</bdi>"
+              ],
+              [
+                "<bdi>vingt et un</bdi>",
+                "<bdi>vingt et unième</bdi>",
+                "只给最后一个词加 -<bdi>ième</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "序数词前用定冠词：<bdi>le premier</bdi>、<bdi>la deuxième</bdi>；缩写作 <bdi>1er / 1re / 2e</bdi>。"
+      },
+      {
+        "id": "fr-num-fraction",
+        "title": "分数、倍数与约数",
+        "tables": [
+          {
+            "caption": "分数与倍数",
+            "role": "pattern",
+            "headers": [
+              "形式",
+              "写法",
+              "例"
+            ],
+            "rows": [
+              [
+                "1/2",
+                "<bdi>un demi / la moitié</bdi>",
+                "<bdi>un demi-litre</bdi>、<bdi>la moitié du gâteau</bdi>"
+              ],
+              [
+                "1/3",
+                "<bdi>un tiers</bdi>",
+                "—"
+              ],
+              [
+                "1/4",
+                "<bdi>un quart</bdi>",
+                "—"
+              ],
+              [
+                "3/4",
+                "<bdi>trois quarts</bdi>",
+                "—"
+              ],
+              [
+                "倍数",
+                "<bdi>deux fois / le double / le triple</bdi>",
+                "<bdi>deux fois plus grand</bdi>"
+              ],
+              [
+                "约数",
+                "<bdi>une dizaine / une douzaine / une centaine</bdi>",
+                "<bdi>une dizaine de personnes</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "分数读法：分子用基数、分母用序数（2/3 = <bdi>deux tiers</bdi>）；分母大于 1 时加 s。"
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "title": "数据格式",
+  "docs": [
+    {
+      "id": "word",
+      "order": 1,
+      "title": "词条格式",
+      "file": "word.json"
+    },
+    {
+      "id": "language",
+      "order": 2,
+      "title": "语言格式",
+      "file": "language.json"
+    },
+    {
+      "id": "user",
+      "order": 3,
+      "title": "用户格式",
+      "file": "user.json"
+    },
+    {
+      "id": "source",
+      "order": 4,
+      "title": "外部源格式",
+      "file": "source.json"
+    },
+    {
+      "id": "per-languages",
+      "order": 5,
+      "title": "各语言取值",
+      "file": "per-languages.json"
+    }
+  ]
+}

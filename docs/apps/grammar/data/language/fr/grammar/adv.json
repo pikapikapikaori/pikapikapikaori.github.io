@@ -1,0 +1,153 @@
+[
+  {
+    "id": "fr-adv",
+    "title": "副词",
+    "items": [
+      {
+        "id": "fr-adv-kinds",
+        "title": "常见副词分类",
+        "tables": [
+          {
+            "caption": "按意义分类",
+            "role": "pattern",
+            "headers": [
+              "类别",
+              "例"
+            ],
+            "rows": [
+              [
+                "时间",
+                "<bdi>maintenant</bdi>、<bdi>hier</bdi>、<bdi>aujourd'hui</bdi>、<bdi>toujours</bdi>、<bdi>déjà</bdi>、<bdi>bientôt</bdi>"
+              ],
+              [
+                "地点",
+                "<bdi>ici</bdi>、<bdi>là</bdi>、<bdi>ailleurs</bdi>、<bdi>dedans</bdi>、<bdi>dehors</bdi>、<bdi>partout</bdi>"
+              ],
+              [
+                "方式",
+                "<bdi>bien</bdi>、<bdi>mal</bdi>、<bdi>ainsi</bdi>、<bdi>ensemble</bdi>、<bdi>vite</bdi>（不变）"
+              ],
+              [
+                "程度",
+                "<bdi>très</bdi>、<bdi>trop</bdi>、<bdi>assez</bdi>、<bdi>beaucoup</bdi>、<bdi>peu</bdi>、<bdi>presque</bdi>、<bdi>tellement</bdi>"
+              ],
+              [
+                "肯定 / 否定",
+                "<bdi>oui</bdi>、<bdi>si</bdi>、<bdi>certainement / non</bdi>、<bdi>ne…pas</bdi>、<bdi>ne…jamais</bdi>、<bdi>ne…plus</bdi>"
+              ],
+              [
+                "疑问",
+                "<bdi>où</bdi>、<bdi>quand</bdi>、<bdi>comment</bdi>、<bdi>pourquoi</bdi>、<bdi>combien</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "<bdi>vite</bdi>、<bdi>tout</bdi>、<bdi>bien</bdi> 等是不规则副词（<bdi>vite</bdi> 不作 <bdi>-ment</bdi> 变化；<bdi>tout</bdi> 有性数变化：<bdi>tout / toute / tous / toutes</bdi>）。"
+      },
+      {
+        "id": "fr-adv-comparison",
+        "title": "副词比较等级",
+        "tables": [
+          {
+            "caption": "比较级与最高级",
+            "role": "pattern",
+            "headers": [
+              "级别",
+              "构成",
+              "例"
+            ],
+            "rows": [
+              [
+                "比较级",
+                "<bdi>plus / moins / aussi +</bdi> 副词 <bdi>+ que</bdi>",
+                "<bdi>Il court plus vite que moi.</bdi>"
+              ],
+              [
+                "最高级",
+                "<bdi>le plus / le moins</bdi> + 副词",
+                "<bdi>Il court le plus vite.</bdi>"
+              ],
+              [
+                "不规则：<bdi>bien</bdi>",
+                "<bdi>mieux / le mieux</bdi>",
+                "<bdi>Elle chante mieux.</bdi>"
+              ],
+              [
+                "不规则：<bdi>mal</bdi>",
+                "<bdi>pis / le pis</bdi>（口语用 <bdi>plus mal</bdi>）",
+                "—"
+              ],
+              [
+                "不规则：<bdi>beaucoup</bdi>",
+                "<bdi>plus / le plus</bdi>",
+                "<bdi>Il travaille plus.</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "<bdi>bon</bdi> 的比较级是 <bdi>meilleur</bdi>（形容词），<bdi>bien</bdi> 的比较级是 <bdi>mieux</bdi>（副词），不要混用。"
+      },
+      {
+        "id": "fr-adv-negation",
+        "title": "否定结构",
+        "tables": [
+          {
+            "caption": "常见否定",
+            "role": "pattern",
+            "headers": [
+              "结构",
+              "含义",
+              "例"
+            ],
+            "rows": [
+              [
+                "<bdi>ne … pas</bdi>",
+                "不",
+                "<bdi>Je ne sais pas.</bdi>"
+              ],
+              [
+                "<bdi>ne … jamais</bdi>",
+                "从不",
+                "<bdi>Il ne vient jamais.</bdi>"
+              ],
+              [
+                "<bdi>ne … plus</bdi>",
+                "不再",
+                "<bdi>Elle n'habite plus ici.</bdi>"
+              ],
+              [
+                "<bdi>ne … rien</bdi>",
+                "什么都不",
+                "<bdi>Je ne vois rien.</bdi>"
+              ],
+              [
+                "<bdi>ne … personne</bdi>",
+                "不（任何人）",
+                "<bdi>Il n'aime personne.</bdi>"
+              ],
+              [
+                "<bdi>ne … aucun</bdi>",
+                "一个也不",
+                "<bdi>Je n'ai aucune idée.</bdi>"
+              ],
+              [
+                "<bdi>ne … que</bdi>",
+                "只（不是真否定）",
+                "<bdi>Il ne reste que deux places.</bdi>"
+              ],
+              [
+                "<bdi>ne … ni … ni</bdi>",
+                "既不…也不",
+                "<bdi>Il ne boit ni café ni thé.</bdi>"
+              ]
+            ],
+            "lang": "fr"
+          }
+        ],
+        "notes": "口语中常省略 <bdi>ne</bdi>（<bdi>Je sais pas</bdi>）；书面语必须保留。"
+      }
+    ]
+  }
+]

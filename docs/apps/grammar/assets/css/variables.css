@@ -1,0 +1,179 @@
+
+:root {
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 24px;
+    --sp-6: 32px;
+    --sp-7: 48px;
+
+    /* 圆角：只分两档——卡片、弹层、词卡用 surface，控件（输入框、按钮、表格…）用 control */
+    --r-surface: 16px;
+    --r-control: 6px;
+    --r-full: 999px;
+
+    /* 字号：只有一个旋钮 --fs-base（正文 1rem），其余按它等比缩放。
+     * 设置页的「字号」只改 --fs-base；间距仍是 px，不会被拉大。 */
+    --fs-base: 16px;
+    --fs-xs: 0.8125rem;
+    --fs-sm: 0.875rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.1875rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 1.875rem;
+    --fs-3xl: 2.25rem;
+
+    --lh-tight: 1.25;
+    --lh-base: 1.6;
+
+    /* 界面字体由 fonts.css 合成：中文楷体 + 拉丁 Gentium。设置页只改写 --ff-ui，不动各语言字体（见 lang.css）。 */
+    --ff-ui: "LN UI", system-ui, -apple-system, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", "Hiragino Sans GB", serif;
+
+    /* 展示字体：没有 lang 的标题/数字用它，跟随界面字体；
+     * 有 lang 的元素在 lang.css 里各自改写这个变量（见 [lang] 规则）。 */
+    --ff-display: var(--ff-ui);
+
+    --ff-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+    --w-max: 1100px;
+    /* 生词表单的标签栏：标签、序号、组标题各占一栏，控件统一从这一栏之后开始 */
+    --w-form-label: 9rem;
+    /* 带序号的表单项右侧那一栏（列间距 + 删除按钮），长输入框让出这一段才能与它们右缘齐平 */
+    --w-form-tail: calc(var(--sp-2) * 2 + 8.25rem);
+    /* 输入助手面板宽度：桌面 720，窄屏自动收 */
+    --ime-w: 720px;
+    --h-header: 56px;
+
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    --dur: .22s;
+
+    --z-header: 50;
+    --z-modal: 100;
+    /* 浮动控件（回到顶部、转写、短音符、输入助手）：永远浮在词卡与弹窗之上 */
+    --z-chrome: 120;
+    /* 下拉菜单要盖在浮动控件之上（它贴着控件展开） */
+    --z-menu: 150;
+    --z-toast: 200;
+}
+
+:root,
+:root[data-theme="light"] {
+    --c-bg: #fafaf7;
+    --c-bg-elev: #ffffff;
+    --c-bg-subtle: #f2f1ec;
+    --c-bg-hover: #ecebe4;
+
+    --c-fg: #1a1a1a;
+    --c-fg-muted: #5b5b58;
+    --c-fg-subtle: #6b6b66;
+    --c-fg-invert: #ffffff;
+
+    --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%235b5b58' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+    --c-border: #e3e2db;
+    --c-border-strong: #cfcec6;
+
+    /* 表格内部的分隔线：比表面深 3–7%，弱于 --c-border */
+    --c-rule: #ecebe5;
+    --c-rule-strong: #dddbd2;
+
+    /* 朱红：古抄本里用于标题与标记，这里只做「当前、焦点、链接」，不做大块填充 */
+    --c-accent: #9a2f2b;
+    --c-accent-fg: #ffffff;
+    --c-accent-soft: #f7e8e5;
+
+    /* 笔记里被选中的一行：旧纸的沙色，比朱红淡，不抢引用线的位置 */
+    --c-mark-bg: #f1ead7;
+
+    /* 实心主按钮用墨色，避免红按钮被读成危险操作 */
+    --c-action: #1a1a1a;
+    --c-action-fg: #ffffff;
+
+    --c-success: #2f9e55;
+    --c-danger: #cf4343;
+    --c-info: #3a7fd9;
+
+    --shadow-md: 0 4px 14px rgba(20, 20, 20, .08);
+    --shadow-lg: 0 10px 40px rgba(20, 20, 20, .14);
+}
+
+:root[data-theme="dark"] {
+    --c-bg: #0f1115;
+    --c-bg-elev: #161922;
+    --c-bg-subtle: #1c2029;
+    --c-bg-hover: #232833;
+
+    --c-fg: #e8e9ec;
+    --c-fg-muted: #a0a3ac;
+    --c-fg-subtle: #8f929c;
+    --c-fg-invert: #0f1115;
+
+    --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23a0a3ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+    --c-border: #262b36;
+    --c-border-strong: #3a4150;
+
+    --c-rule: #20242d;
+    --c-rule-strong: #2d3340;
+
+    --c-accent: #e08a86;
+    --c-accent-fg: #0f1115;
+    --c-accent-soft: #2b1c1c;
+
+    /* 深色下沙色会发褐，改为在抬高一层的底上混一点朱色 */
+    --c-mark-bg: color-mix(in oklab, var(--c-accent) 7%, #1b1d24);
+
+    --c-action: #e8e9ec;
+    --c-action-fg: #0f1115;
+
+    --c-success: #56c47c;
+    --c-danger: #ef6a6a;
+    --c-info: #6aa8f0;
+
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, .55);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] {
+        --c-bg: #0f1115;
+        --c-bg-elev: #161922;
+        --c-bg-subtle: #1c2029;
+        --c-bg-hover: #232833;
+
+        --c-fg: #e8e9ec;
+        --c-fg-muted: #a0a3ac;
+        --c-fg-subtle: #8f929c;
+        --c-fg-invert: #0f1115;
+
+        --img-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23a0a3ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+        --c-border: #262b36;
+        --c-border-strong: #3a4150;
+
+        --c-rule: #20242d;
+        --c-rule-strong: #2d3340;
+
+        --c-accent: #e08a86;
+        --c-accent-fg: #0f1115;
+        --c-accent-soft: #2b1c1c;
+
+        --c-mark-bg: color-mix(in oklab, var(--c-accent) 7%, #1b1d24);
+
+        --c-action: #e8e9ec;
+        --c-action-fg: #0f1115;
+
+        --c-success: #56c47c;
+            --c-danger: #ef6a6a;
+        --c-info: #6aa8f0;
+
+            --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, .55);
+    }
+}
+
+/* ---- 用户自定义字体注入点：由 font-service.js 写入 ----
+   例：html[data-font-mode="local"] { --ff-ui: "UserLocal", system-ui, sans-serif; }
+*/

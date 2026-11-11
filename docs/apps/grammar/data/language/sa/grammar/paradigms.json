@@ -1,0 +1,1515 @@
+{
+  "pron": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "有性代词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ],
+        "anchors": [
+          "sa-pron-declension"
+        ],
+        "default": true
+      },
+      {
+        "key": "common",
+        "title": "无性代词",
+        "columns": [
+          {
+            "key": "sg",
+            "label": "单数"
+          },
+          {
+            "key": "du",
+            "label": "双数"
+          },
+          {
+            "key": "pl",
+            "label": "复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          }
+        ],
+        "default": true,
+        "anchors": []
+      }
+    ]
+  },
+  "noun": {
+    "fields": [
+      {
+        "key": "gender",
+        "label": "语法性",
+        "multi": true,
+        "declensionCells": true,
+        "options": [
+          {
+            "value": "m",
+            "label": "阳性"
+          },
+          {
+            "value": "f",
+            "label": "阴性"
+          },
+          {
+            "value": "n",
+            "label": "中性"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      }
+    ]
+  },
+  "adj": {
+    "tables": [
+      {
+        "key": "main",
+        "title": "变格",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "comparison",
+        "title": "比较等级",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "comparative",
+            "label": "比较级词干"
+          },
+          {
+            "key": "superlative",
+            "label": "最高级词干"
+          }
+        ]
+      }
+    ]
+  },
+  "participle": {
+    "extends": "adj"
+  },
+  "adv": {
+    "tables": [
+      {
+        "key": "comparison",
+        "title": "比较等级",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "comparative",
+            "label": "比较级词干"
+          },
+          {
+            "key": "superlative",
+            "label": "最高级词干"
+          }
+        ]
+      }
+    ]
+  },
+  "verb": {
+    "tables": [
+      {
+        "key": "pres",
+        "title": "现在时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "pres-p-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "pres-a-ind",
+            "label": "直陈式 中动"
+          },
+          {
+            "key": "pres-pass",
+            "label": "直陈式 被动"
+          },
+          {
+            "key": "pres-impv-p",
+            "label": "命令式 主动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          },
+          {
+            "key": "pres-impv-a",
+            "label": "命令式 中动",
+            "disabled": [
+              "1sg",
+              "1du",
+              "1pl"
+            ]
+          },
+          {
+            "key": "pres-opt-p",
+            "label": "祈愿式 主动"
+          },
+          {
+            "key": "pres-opt-a",
+            "label": "祈愿式 中动"
+          },
+          {
+            "key": "pres-cond-p",
+            "label": "条件式 主动"
+          },
+          {
+            "key": "pres-cond-a",
+            "label": "条件式 中动"
+          },
+          {
+            "key": "pres-ben-p",
+            "label": "祝愿式 主动"
+          },
+          {
+            "key": "pres-ben-a",
+            "label": "祝愿式 中动"
+          }
+        ]
+      },
+      {
+        "key": "impf",
+        "title": "未完成时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "impf-p-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "impf-a-ind",
+            "label": "直陈式 中动"
+          },
+          {
+            "key": "impf-pass",
+            "label": "直陈式 被动"
+          }
+        ]
+      },
+      {
+        "key": "aor",
+        "title": "不定过去时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "aor-p-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "aor-a-ind",
+            "label": "直陈式 中动 / 被动"
+          }
+        ]
+      },
+      {
+        "key": "perf",
+        "title": "完成时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "perf-p-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "perf-a-ind",
+            "label": "直陈式 中动 / 被动"
+          }
+        ]
+      },
+      {
+        "key": "fut",
+        "title": "将来时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "fut-p-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "fut-a-ind",
+            "label": "直陈式 中动 / 被动"
+          }
+        ]
+      },
+      {
+        "key": "peri",
+        "title": "迂说将来时",
+        "columns": [
+          {
+            "key": "1sg",
+            "label": "第一人称单数"
+          },
+          {
+            "key": "2sg",
+            "label": "第二人称单数"
+          },
+          {
+            "key": "3sg",
+            "label": "第三人称单数"
+          },
+          {
+            "key": "1du",
+            "label": "第一人称双数"
+          },
+          {
+            "key": "2du",
+            "label": "第二人称双数"
+          },
+          {
+            "key": "3du",
+            "label": "第三人称双数"
+          },
+          {
+            "key": "1pl",
+            "label": "第一人称复数"
+          },
+          {
+            "key": "2pl",
+            "label": "第二人称复数"
+          },
+          {
+            "key": "3pl",
+            "label": "第三人称复数"
+          }
+        ],
+        "rows": [
+          {
+            "key": "peri-p-ind",
+            "label": "直陈式 主动"
+          },
+          {
+            "key": "peri-a-ind",
+            "label": "直陈式 中动 / 被动"
+          }
+        ]
+      },
+      {
+        "key": "inf",
+        "title": "不定式",
+        "columns": [
+          {
+            "key": "form",
+            "label": "形式"
+          }
+        ],
+        "rows": [
+          {
+            "key": "inf",
+            "label": "现在时不定式"
+          },
+          {
+            "key": "inf-perf",
+            "label": "完成时不定式"
+          },
+          {
+            "key": "inf-fut",
+            "label": "迂说将来时不定式"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-pres-act",
+        "title": "现在时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-pres-pass",
+        "title": "现在时被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-perf-act",
+        "title": "完成时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-perf-pass",
+        "title": "完成时被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-fut-act",
+        "title": "将来时主动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-fut-pass",
+        "title": "将来时被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "ptcp-past-pass",
+        "title": "过去被动分词",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "grdv-tavya",
+        "title": "必要动名词 -<bdi>तव्य</bdi>",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "grdv-aniya",
+        "title": "允许动名词 -<bdi>अनीय</bdi>",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      },
+      {
+        "key": "grdv-ya",
+        "title": "允许动名词 -<bdi>य</bdi>",
+        "columns": [
+          {
+            "key": "sg_m",
+            "label": "单数阳性"
+          },
+          {
+            "key": "sg_f",
+            "label": "单数阴性"
+          },
+          {
+            "key": "sg_n",
+            "label": "单数中性"
+          },
+          {
+            "key": "du_m",
+            "label": "双数阳性"
+          },
+          {
+            "key": "du_f",
+            "label": "双数阴性"
+          },
+          {
+            "key": "du_n",
+            "label": "双数中性"
+          },
+          {
+            "key": "pl_m",
+            "label": "复数阳性"
+          },
+          {
+            "key": "pl_f",
+            "label": "复数阴性"
+          },
+          {
+            "key": "pl_n",
+            "label": "复数中性"
+          }
+        ],
+        "rows": [
+          {
+            "key": "nom",
+            "label": "主格（体）"
+          },
+          {
+            "key": "acc",
+            "label": "宾格（业）"
+          },
+          {
+            "key": "ins",
+            "label": "工具格（具）"
+          },
+          {
+            "key": "dat",
+            "label": "与格（为）"
+          },
+          {
+            "key": "abl",
+            "label": "离格（从）"
+          },
+          {
+            "key": "gen",
+            "label": "属格"
+          },
+          {
+            "key": "loc",
+            "label": "位格（依）"
+          },
+          {
+            "key": "voc",
+            "label": "呼格"
+          }
+        ]
+      }
+    ]
+  }
+}

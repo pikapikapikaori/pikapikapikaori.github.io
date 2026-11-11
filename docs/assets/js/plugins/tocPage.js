@@ -4,12 +4,20 @@ import { bindShortcuts } from '../utils/shortcut.js'
 
 let tocPageOptions = {
     recentAmount: 8,
+    columns: 2,
+    narrowColumns: 1,
     defaultImg: './assets/resources/img/default/picture-2.gif',
     coverPath: [
         '/', 
         '/en-us/', 
         '/jp/'
     ]
+}
+
+function toColumnCount(value, fallback) {
+    const count = Math.floor(Number(value))
+
+    return count >= 1 ? count : fallback
 }
 
 function plugin(hook, vm) {
@@ -21,6 +29,9 @@ function plugin(hook, vm) {
     const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
 
     const recentAmount = tocPageOptions.recentAmount
+
+    const columns = toColumnCount(tocPageOptions.columns, 2)
+    const narrowColumns = toColumnCount(tocPageOptions.narrowColumns, 1)
 
     let hasTocs = false
 
@@ -230,6 +241,10 @@ function plugin(hook, vm) {
     }
 
     hook.mounted(function () {
+        const rootStyle = document.documentElement.style
+        rootStyle.setProperty('--tocpage-columns', columns)
+        rootStyle.setProperty('--tocpage-narrow-columns', narrowColumns)
+
         narrowMql.addEventListener('change', onScreenWidthChange)
 
         bindSidebarA11y()

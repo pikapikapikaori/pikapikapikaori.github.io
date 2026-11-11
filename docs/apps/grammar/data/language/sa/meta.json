@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "language": "sa",
+  "name": "梵语",
+  "native": "संस्कृतम्",
+  "classical": true,
+  "group": {
+    "id": "classical",
+    "title": "古典语言",
+    "order": 1
+  },
+  "order": 4,
+  "pos": [
+    "noun",
+    "verb",
+    "adj",
+    "participle",
+    "adv",
+    "pron",
+    "prep",
+    "postp",
+    "ambip",
+    "conj",
+    "particle",
+    "interj",
+    "num",
+    "other"
+  ],
+  "vertical": false,
+  "rtl": false,
+  "terms": {
+    "inflectionType": "变形类型",
+    "inflectionTypePlaceholder": "如：a 词干阳性",
+    "special": "特殊变形",
+    "indeclinable": "不变形",
+    "paradigmTitle": "{pos}变形表",
+    "extraForms": "补充形式",
+    "basicTitle": "基本",
+    "stemsTitle": "词干",
+    "stems": {
+      "label": "词干",
+      "placeholder": "词干，如 काम्",
+      "hint": "填不带词尾的词干。"
+    },
+    "byPos": {
+      "verb": {
+        "special": "特殊变位",
+        "indeclinable": "不变位",
+        "paradigmTitle": "{pos}变位表",
+        "stems": {
+          "label": "词根",
+          "placeholder": "词根，如 भू"
+        },
+        "inflectionType": "变位类型",
+        "inflectionTypePlaceholder": "如：现在时主动"
+      },
+      "noun": {
+        "inflectionType": "变格类型",
+        "special": "特殊变格",
+        "indeclinable": "不变格",
+        "paradigmTitle": "{pos}变格表",
+        "inflectionTypePlaceholder": "如：a 词干阳性"
+      }
+    },
+    "lemma": {
+      "label": "基本形态",
+      "placeholder": "基本形态，如 देवः"
+    },
+    "meanings": "含义",
+    "collocations": "固定搭配",
+    "examples": "例句",
+    "derivatives": "派生词",
+    "tags": "标签",
+    "notes": "备注",
+    "others": "其他",
+    "paradigmTable": "形态变形",
+    "optionalSuffix": "（可选）",
+    "add": "＋ 添加",
+    "addMeaning": "＋ 添加含义",
+    "posLabel": "词性",
+    "anchorLabel": "语法条目",
+    "meaningPlaceholder": "含义",
+    "emptyMeanings": "该来源还没有含义",
+    "inflectionGroupPlaceholder": "分组（可选）",
+    "inflectionLabelPlaceholder": "标签",
+    "inflectionFormPlaceholder": "形态",
+    "emptyCollocations": "该来源还没有固定搭配",
+    "collocationTextPlaceholder": "固定搭配原文",
+    "collocationGlossPlaceholder": "含义",
+    "emptyExamples": "该来源还没有例句",
+    "exampleTextPlaceholder": "例句原文",
+    "exampleCitationPlaceholder": "出处",
+    "exampleTranslationPlaceholder": "含义",
+    "derivativeSearchLabel": "搜索生词",
+    "derivativeSearchPlaceholder": "搜索基本形态或词干…",
+    "derivativeEmptyHint": "尚未选择派生词",
+    "tagsPlaceholder": "高频, 文献A",
+    "notesPlaceholder": "备注"
+  },
+  "files": {
+    "paradigm": "paradigm.js",
+    "script": "script.js",
+    "ime": "ime.js"
+  },
+  "grammarFiles": {
+    "paradigms": "grammar/paradigms.json",
+    "chapters": [
+      {
+        "id": "pron",
+        "title": "代词",
+        "file": "grammar/pron.json",
+        "anchors": [
+          "sa-pron",
+          "sa-pron-declension",
+          "sa-pron-other",
+          "sa-pron-personal",
+          "sa-pron-reflexive"
+        ]
+      },
+      {
+        "id": "noun",
+        "title": "名词",
+        "file": "grammar/noun.json",
+        "anchors": [
+          "sa-noun",
+          "sa-noun-a",
+          "sa-noun-aa",
+          "sa-noun-i",
+          "sa-noun-ii",
+          "sa-noun-u",
+          "sa-noun-uu",
+          "sa-noun-r",
+          "sa-noun-endings-cons",
+          "sa-noun-ant",
+          "sa-noun-in",
+          "sa-noun-as",
+          "sa-noun-vas",
+          "sa-noun-cons"
+        ]
+      },
+      {
+        "id": "adj",
+        "title": "形容词",
+        "file": "grammar/adj.json",
+        "anchors": [
+          "sa-adj",
+          "sa-adj-a",
+          "sa-adj-i-u",
+          "sa-adj-r",
+          "sa-adj-endings-cons",
+          "sa-adj-ant",
+          "sa-adj-comparison"
+        ]
+      },
+      {
+        "id": "adv",
+        "title": "副词",
+        "file": "grammar/adv.json",
+        "anchors": [
+          "sa-adv",
+          "sa-adv-formation",
+          "sa-adv-comparison",
+          "sa-adv-kinds"
+        ]
+      },
+      {
+        "id": "verb",
+        "title": "动词",
+        "file": "grammar/verb.json",
+        "anchors": [
+          "sa-verb",
+          "sa-verb-endings",
+          "sa-verb-systems",
+          "sa-verb-voice",
+          "sa-verb-reduplication",
+          "sa-verb-class1",
+          "sa-verb-class1-pres",
+          "sa-verb-class2",
+          "sa-verb-class2-pres",
+          "sa-verb-class3",
+          "sa-verb-class3-pres",
+          "sa-verb-class4",
+          "sa-verb-class4-pres",
+          "sa-verb-class5",
+          "sa-verb-class5-pres",
+          "sa-verb-class6",
+          "sa-verb-class6-pres",
+          "sa-verb-class7",
+          "sa-verb-class7-pres",
+          "sa-verb-class8",
+          "sa-verb-class8-pres",
+          "sa-verb-class9",
+          "sa-verb-class9-pres",
+          "sa-verb-class10",
+          "sa-verb-class10-pres",
+          "sa-verb-passive",
+          "sa-verb-passive-present",
+          "sa-verb-passive-other",
+          "sa-verb-future",
+          "sa-verb-future-tenses",
+          "sa-verb-aorist",
+          "sa-verb-aorist-overview",
+          "sa-verb-perfect",
+          "sa-verb-perfect-endings",
+          "sa-verb-perfect-overview",
+          "sa-verb-nonfinite",
+          "sa-verb-infinitive",
+          "sa-verb-participle",
+          "sa-verb-secondary",
+          "sa-verb-secondary-overview"
+        ]
+      },
+      {
+        "id": "num",
+        "title": "数词",
+        "file": "grammar/num.json",
+        "anchors": [
+          "sa-num",
+          "sa-num-cardinal",
+          "sa-num-ordinal"
+        ]
+      },
+      {
+        "id": "sound",
+        "title": "语音与文字（连声、元音交替、文字与转写）",
+        "file": "grammar/sound.json",
+        "anchors": [
+          "sa-sandhi",
+          "sa-sandhi-types",
+          "sa-sandhi-pada",
+          "sa-sandhi-vowel",
+          "sa-sandhi-visarga",
+          "sa-sandhi-consonant",
+          "sa-sandhi-special",
+          "sa-sandhi-chart",
+          "sa-vowel-grades",
+          "sa-vowel-grades-table",
+          "sa-vowel-grades-use",
+          "sa-script",
+          "sa-script-siddham",
+          "sa-script-special"
+        ]
+      }
+    ]
+  }
+}

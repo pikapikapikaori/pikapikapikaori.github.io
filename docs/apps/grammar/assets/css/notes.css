@@ -142,9 +142,11 @@
 
 /* ---------- 行 ---------- */
 
+/* 块与块的间距只在这里给一次：引用块的竖线因此自然断开，块内折行仍在同一个框里 */
 .note-list {
     display: flex;
     flex-direction: column;
+    gap: 6px;
     padding-bottom: var(--sp-7);
 }
 
@@ -152,23 +154,27 @@
     display: block;
     position: relative;
     padding-left: 26px;
-    transition: background var(--dur) var(--ease);
+    /* 底纸比行多出上下各 3px，正好铺满块之间的缝，多行选中才连成一整片 */
+    --band: transparent;
+    background: var(--band);
+    box-shadow: 0 -3px 0 var(--band), 0 3px 0 var(--band);
+    transition: background-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .note-row:hover {
-    background: var(--c-bg-subtle);
+    --band: var(--c-bg-subtle);
 }
 
 /* 编辑中的这一行抬成一层纸，页边一枚朱红方块。方块与引用的长竖线形状不同，两种状态不会看混 */
 .note-row.is-editing {
-    background: var(--c-bg-elev);
+    --band: var(--c-bg-elev);
 }
 
 .note-row.is-editing::before {
     content: '';
     position: absolute;
     left: 8px;
-    top: 11px;
+    top: 8px;
     width: 6px;
     height: 6px;
     background: var(--c-accent);
@@ -185,7 +191,7 @@
 
 /* 鼠标拖动选中的行：沙色纸带。每行不单独圆角，多行才连成一整片 */
 .note-row.is-selected {
-    background: var(--c-mark-bg);
+    --band: var(--c-mark-bg);
 }
 
 /* 选中已经由纸带表示，块内的文字不再叠一层浏览器自带的选中色 */
@@ -203,7 +209,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 6px;
+    padding-top: 3px;
     color: var(--c-fg-subtle);
     font-size: 13px;
     line-height: 1;
@@ -241,11 +247,6 @@
     position: relative;
 }
 
-/* 相邻两个引用块之间留一道缝，两条竖线才断得开；块内自己折行仍是一条 */
-.note-row-group + .note-row-group {
-    margin-top: 6px;
-}
-
 .note-quote-group .note-row__view,
 .note-quote-group .note-row__input {
     padding-left: var(--sp-4);
@@ -255,7 +256,7 @@
 /* 拖动时的落点：一条实色块，不画细线 */
 .note-drop {
     height: 3px;
-    margin: 3px 0 3px 26px;
+    margin: 0 0 0 26px;
     border-radius: var(--r-full);
     background: var(--c-accent);
 }
@@ -265,23 +266,23 @@ body.note-dragging {
     user-select: none;
 }
 
-/* 输入框与排版行必须有同一套字号与内边距，切换时才不跳 */
+/* 输入框与排版行必须有同一套字号与内边距，切换时才不跳；上下留白交给块间距，底纸靠行自己外扩 3px */
 .note-row__view,
 .note-row__input {
     min-width: 0;
-    padding: 3px var(--sp-2);
+    padding: 0 var(--sp-2);
     font-size: var(--fs-md);
     line-height: var(--lh-base);
 }
 
 .note-row__view {
-    min-height: calc(1.6em + 6px);
+    min-height: 1.6em;
 }
 
 .note-row__input {
     display: block;
     width: 100%;
-    min-height: calc(1.6em + 6px);
+    min-height: 1.6em;
     border: 0;
     background: transparent;
     color: var(--c-fg);

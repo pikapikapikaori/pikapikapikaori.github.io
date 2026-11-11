@@ -3,7 +3,6 @@
 
 # agents
 .agents/
-**/skills-lock.json
 
 # editor directories and files
 .idea/

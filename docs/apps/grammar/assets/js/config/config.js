@@ -8,7 +8,13 @@ export const EXTERNAL_SOURCES = [
     { id: 'wiktionary', label: 'Wiktionary', file: 'wiktionary' },
 ]
 
-export const EXTERNAL_BASE = new URL('../../../external/js/', import.meta.url)
+export const EXTERNAL_BASE = new URL('../../external/js/', import.meta.url)
+
+/** 起始页的默认数据源：随站点一起发布的用户 JSON */
+export const DEFAULT_DATA_SOURCE = {
+    file: 'pikapikapi-20261111-1101.json',
+    base: new URL('../../../data/user/', import.meta.url)
+}
 
 export const ANALYZE_SOURCES = [
     { id: 'perseus', label: 'Perseus', file: 'perseus', langs: ['grc', 'la'] },
@@ -62,6 +68,7 @@ export const LS_KEYS = {
     font: 'ln.font.mode',
     fontFamily: 'ln.font.family',
     fontSize: 'ln.font.size',
+    defaultSourceUser: 'ln.defaultSourceUser',
 }
 
 export const DEFAULT_SETTINGS = {

@@ -4,7 +4,7 @@
  * 判不出来的词干与语法锚点一律留空：错填比不填更贵，它会静默生成一张错的变格表。
  */
 
-import { requestJSON } from '../../assets/js/services/http.js'
+import { requestJSON } from '../../js/services/http.js'
 
 const API = 'https://morph.perseids.org/analysis/word'
 

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "kind": "langnotebook-user",
+  "user": {
+    "id": "u_v2u5y5fn2i",
+    "name": "皮卡皮卡皮",
+    "createdAt": "2026-11-10T06:10:48.013Z",
+    "updatedAt": "2026-11-10T06:10:58.405Z"
+  },
+  "settings": {
+    "theme": "auto",
+    "fontMode": "default",
+    "fontFamily": null,
+    "fontUrl": null,
+    "pageSize": 30,
+    "reviewOrder": "mastery-asc",
+    "defaultSource": "manual",
+    "sortField": "addedAt",
+    "sortOrder": "desc",
+    "languageOrder": [],
+    "groupOrder": [
+      "classical",
+      "modern"
+    ],
+    "userId": "u_v2u5y5fn2i"
+  },
+  "words": [],
+  "notes": [
+    {
+      "language": "la",
+      "lines": [
+        "> <bdi>Dies hic hodiernus quem frustra vixi crastinus ille est dies quem certe qui heri periit vivere volebat.</bdi>",
+        "我白白虚度的今天，就是昨天死去的人所渴望活着度过的明天。"
+      ]
+    },
+    {
+      "language": "sa",
+      "lines": [
+        "> <bdi>यत्ते॑ य॒मं वै॑वस्व॒तं मनो॑ ज॒गाम॑ दूर॒कम् ।\n> तत्त॒ आ व॑र्तयामसी॒ह क्षया॑य जी॒वसे॑ ॥ १०.५८.१\n> यत्ते॒ दिवं॒ यत्पृ॑थि॒वीं मनो॑ ज॒गाम॑ दूर॒कम् ।\n> तत्त॒ आ व॑र्तयामसी॒ह क्षया॑य जी॒वसे॑ ॥ १०.५८.२</bdi>",
+        "你那远行至阎摩（维瓦斯瓦特之子）处的思维，\n我们将之唤回——愿你在此久住、生存。\n你那远行至天界或大地的思维，\n我们将之唤回——愿你在此久住、生存。"
+      ]
+    }
+  ]
+}

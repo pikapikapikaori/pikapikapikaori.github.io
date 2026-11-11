@@ -81,7 +81,7 @@ self.addEventListener('fetch', (e) => {
     // 语法 JSON / 语言档案 / 默认数据源 / 字体：stale-while-revalidate
     if (url.pathname.includes('/data/language/')
         || url.pathname.includes('/data/schema/')
-        || url.pathname.includes('/resources/data/')
+        || url.pathname.includes('/data/user/')
         || url.pathname.includes('/resources/fonts/')) {
         e.respondWith(swr(req))
         return

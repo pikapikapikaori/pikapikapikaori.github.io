@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: "LN UI";
-    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.ttf");
+    src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -15,7 +15,7 @@
 
 @font-face {
     font-family: "LN UI";
-    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.ttf");
+    src: url("../resources/fonts/HYKaiTi/HYKaiTiS.woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;

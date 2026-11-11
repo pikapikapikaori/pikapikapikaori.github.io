@@ -2,7 +2,7 @@
  * Wiktionary 查询服务
  */
 
-import { requestJSON } from '../../assets/js/services/http.js'
+import { requestJSON } from '../../js/services/http.js'
 
 const API = 'https://en.wiktionary.org/w/api.php'
 

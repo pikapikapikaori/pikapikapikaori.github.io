@@ -13,9 +13,7 @@
 /* Wrapper */
 
 	body.is-preload #wrapper {
-		-moz-transform: none;
 		-webkit-transform: none;
-		-ms-transform: none;
 		transform: none;
 		opacity: 1;
 	}

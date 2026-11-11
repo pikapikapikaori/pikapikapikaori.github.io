@@ -1,14 +1,3 @@
-/* 
- * Nonstandard CSS
- * 
- * This file contains nonstandard CSS properties that are not part of the official CSS specification.
- * These properties are used to enhance the appearance and behavior of the website in specific browsers.
- * 
- * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
- */
-
-/* Webkit-specific properties */
-
 /* Brief Comments */
 .brief-comments-in-blog-title-year>summary::-webkit-details-marker {
     display: none;
@@ -21,11 +10,4 @@
 /* About Page */
 .main-page-about-me-links>a>svg:hover {
     -webkit-transform: scale(var(--global-transform-ratio-big));
-}
-
-/* Microsoft Edge-specific properties */
-
-/* About Page */
-.main-page-about-me-links>a>svg:hover {
-    -ms-transform: scale(var(--global-transform-ratio-big));
 }

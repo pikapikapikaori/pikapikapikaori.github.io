@@ -5,20 +5,16 @@
 
     function boot() {
 
-        /* 1. i18n 最先跑，让所有 [data-i18n] 立刻有内容 */
         App.i18n.init()
 
-        /* 2. 主题尽早初始化，避免暗色模式下闪白 */
         App.theme.init()
 
-        /* 3. 站点信息：品牌名与邮箱来自 config */
         var brandLink = document.getElementById('brandLink')
         if (brandLink) brandLink.textContent = App.config.siteName
 
         var emailLink = document.getElementById('emailLink')
         if (emailLink) emailLink.href = 'mailto:' + App.config.email
 
-        /* 4. 内容加载 */
         var blogRail = document.getElementById('blogRail')
         var blogInstance = null
         if (blogRail) blogInstance = App.blogRail.load(blogRail)
@@ -27,7 +23,6 @@
         var photoInstance = null
         if (photoStack) photoInstance = App.photoStack.load(photoStack)
 
-        /* 5. 语言切换：滚回顶部 + 重载博客 / 摄影 + 重测所有 pin */
         App.i18n.onChange(function (newLang) {
             scrollToTopInstant()
 
@@ -37,7 +32,6 @@
             requestAnimationFrame(App.pin.remeasureAll)
         })
 
-        /* 6. Reveal 动画 */
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
                 if (e.isIntersecting) {
@@ -50,7 +44,6 @@
             io.observe(el)
         })
 
-        /* 7. 顶部页面进度条 + 顶栏描边 */
         var bar = document.getElementById('progressBar')
         var topbar = document.getElementById('topbar')
         function onScroll() {
@@ -63,7 +56,6 @@
         window.addEventListener('scroll', onScroll, { passive: true })
         onScroll()
 
-        /* 8. 时钟 */
         var clock = document.getElementById('clock')
         function tick() {
             if (!clock) return
@@ -75,7 +67,6 @@
         tick()
         setInterval(tick, 15000)
 
-        /* 9. 版权年份 */
         var startYear = App.config.startYear || 2026
         var nowYear = new Date().getFullYear()
         var yearsText = nowYear > startYear
@@ -85,7 +76,6 @@
         var yearsEl = document.getElementById('copyrightYears')
         if (yearsEl) yearsEl.textContent = yearsText
 
-        /* 10. 揭开首屏遮罩 */
         revealBoot()
     }
 

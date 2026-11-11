@@ -64,7 +64,6 @@
             })
         }
 
-        /* ---------- 按阶段区分阻尼 ---------- */
         var GLOBAL_FOLLOW = CFG.motion.follow
         var PHASE_C_FOLLOW = P.followPhaseC
         var BLEND_RANGE = P.followBlendRange
@@ -76,7 +75,6 @@
             return U.lerp(GLOBAL_FOLLOW, PHASE_C_FOLLOW, blend)
         }
 
-        /* ---------- 尺寸 ---------- */
         function sizeFn() {
             baseH = cards.length ? (cards[0].offsetHeight || 300) : 300
 
@@ -85,7 +83,6 @@
             return { total: total, height: vh + total }
         }
 
-        /* ---------- 应用到 DOM ---------- */
         function apply(p) {
             var endA = P.phases.flyIn
             var endB = P.phases.zoom
@@ -147,7 +144,6 @@
             section.dataset.p = p
         }
 
-        /* ---------- 渲染（首次和 reload 都走这里） ---------- */
         function doRender(lang) {
             /* 隐藏，避免重建过程中的位置跳变被看到 */
             stack.classList.remove('ready')

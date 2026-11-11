@@ -25,7 +25,6 @@
     var KEY = 'pikapikapi:lang'
 
     /* 
-     * ---------- 语言清单 ----------
      * key      —— 内部标识，同时用作 DICT 的键、data-lang 的值、存储值、?lang= 的值
      * htmlLang —— 写到 <html lang> 上的值（BCP 47）
      * label    —— 在菜单里显示的名字，始终用该语言自身的写法 
@@ -46,7 +45,6 @@
         LABELS[l.key] = l.label
     })
 
-    /* ---------- 翻译表 ---------- */
     var DICT = {
         'zh-Hans': {
             'nav.blog': '博客',
@@ -148,7 +146,6 @@
     var current = null
     var listeners = []
 
-    /* ---------- 存储与推断 ---------- */
 
     function readSaved() {
         try { return localStorage.getItem(KEY) } catch (e) { return null }
@@ -163,7 +160,6 @@
         return 'en'
     }
 
-    /* ---------- URL ---------- */
 
     /* 从 ?lang= 读取，无效或缺失返回 null */
     function readUrlLang() {
@@ -194,7 +190,6 @@
         return readSaved() || guess()
     }
 
-    /* ---------- 应用语言 ---------- */
 
     function apply(lang) {
         if (SUPPORTED.indexOf(lang) === -1) lang = 'en'
@@ -236,7 +231,6 @@
         })
     }
 
-    /* ---------- 语言选择器 ---------- */
 
     var picker, trigger, menu, options = []
 
@@ -355,7 +349,6 @@
         })
     }
 
-    /* ---------- 对外接口 ---------- */
 
     I.init = function () {
         initPicker()

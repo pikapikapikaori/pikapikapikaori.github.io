@@ -47,7 +47,6 @@
         var maxX = 0
         var pin = null
 
-        /* ---------- 尺寸测量 ---------- */
         function sizeFn() {
             var last = rail.lastElementChild
 
@@ -74,7 +73,6 @@
             }
         }
 
-        /* ---------- 应用到 DOM ---------- */
         function apply(p) {
             var x = p * maxX
             rail.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0)'
@@ -84,7 +82,6 @@
             section.dataset.p = p
         }
 
-        /* ---------- 箭头 / 键盘焦点 ---------- */
         function attachControls() {
             function cardStep() {
                 var card = rail.firstElementChild
@@ -132,7 +129,6 @@
             }
         }
 
-        /* ---------- 内部：加载并渲染 ---------- */
         function doLoad(lang) {
             return F.loadPosts(lang).then(function (posts) {
                 rail.innerHTML = posts.map(renderPost).join('')

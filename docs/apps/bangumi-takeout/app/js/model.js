@@ -2,7 +2,6 @@ import {
     STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE, STATUS_ORDER, STATUS_LABELS, COMMON_STATUS_LABELS,
 } from './config.js'
 
-// ---------- 入口：把原始 JSON 变成内部结构 ----------
 export function normalize(raw) {
     if (!raw || typeof raw !== 'object') throw new Error('数据格式错误')
     const meta = raw.meta || {}
@@ -87,7 +86,6 @@ function normalizeItem(e) {
     }
 }
 
-// ---------- 排序 ----------
 function cmpStr(a, b) { return (a || '').localeCompare(b || '') }
 
 export function sortItems(items, sortKey) {
@@ -103,7 +101,6 @@ export function sortItems(items, sortKey) {
     return arr
 }
 
-// ---------- 筛选（按评分精确匹配） ----------
 export function filterByRate(items, key) {
     if (!key || key === 'all') return items
     if (key === 'unrated') return items.filter(i => i.rate === 0)
@@ -111,7 +108,6 @@ export function filterByRate(items, key) {
     return items.filter(i => i.rate === n)
 }
 
-// ---------- 筛选（按标签精确匹配） ----------
 export function filterByTag(items, tag) {
     const keyword = String(tag ?? '').trim()
     if (!keyword) return items
@@ -122,7 +118,6 @@ export function filterByTag(items, tag) {
     })
 }
 
-// ---------- 搜索 ----------
 export function matchQuery(item, q) {
     if (!q) return true
     const n = q.toLowerCase()
@@ -133,7 +128,6 @@ export function matchQuery(item, q) {
     )
 }
 
-// ---------- 统计 ----------
 export function countByCategory(items) {
     const out = {}
     for (const it of items) {
@@ -144,7 +138,6 @@ export function countByCategory(items) {
     return out
 }
 
-// ---------- 二级 tab 完整列表 ----------
 export function statusesFor(cat) {
     return STATUS_ORDER.map(k => ({
         key: k,

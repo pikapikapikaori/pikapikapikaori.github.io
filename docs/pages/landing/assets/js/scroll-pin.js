@@ -34,7 +34,6 @@
             ? followFn
             : function () { return baseFollow }
 
-        /* ---------- 测量 ---------- */
         function doMeasure() {
             var r = sizeFn()
             total = r.total
@@ -53,14 +52,12 @@
             }
         }
 
-        /* ---------- 目标进度 ---------- */
         function readTarget() {
             if (total <= 1) { target = 0; return }
             var top = section.getBoundingClientRect().top
             target = U.clamp01(-top / total)
         }
 
-        /* ---------- 每帧循环 ---------- */
         function loop() {
             if (!running) return
             rafId = requestAnimationFrame(loop)
@@ -99,7 +96,6 @@
             })
         }, { rootMargin: CFG.motion.rootMargin }).observe(section)
 
-        /* ---------- 尺寸变化 ---------- */
         var scheduleMeasure = U.debounceRaf(doMeasure)
         window.addEventListener('resize', scheduleMeasure)
         window.addEventListener('orientationchange', scheduleMeasure)

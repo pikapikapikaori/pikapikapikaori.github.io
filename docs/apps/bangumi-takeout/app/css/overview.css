@@ -116,7 +116,6 @@
     color: var(--color-text-faint);
 }
 
-/* ---------- Pagination ---------- */
 .pager {
     display: flex;
     align-items: center;

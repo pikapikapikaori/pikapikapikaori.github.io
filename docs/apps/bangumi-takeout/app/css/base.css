@@ -45,7 +45,6 @@ button {
     color: inherit;
 }
 
-/* ---------- Header ---------- */
 .site-header {
     position: sticky;
     top: 0;
@@ -206,7 +205,6 @@ button {
     background: var(--color-surface-2);
 }
 
-/* ---------- User menu ---------- */
 .user-menu {
     position: relative;
 }
@@ -346,7 +344,6 @@ button {
     background: var(--color-surface-2);
 }
 
-/* ---------- Main / Footer ---------- */
 .site-main {
     flex: 1;
     max-width: var(--content-max);
@@ -425,6 +422,5 @@ button {
 }
 
 .pager-input[type="number"] {
-    -moz-appearance: textfield;
     appearance: textfield;
 }

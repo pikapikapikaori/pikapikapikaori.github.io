@@ -84,7 +84,6 @@
         }
     }
 
-    /* ---------- 解析 Atom ---------- */
 
     function parseAtom(xml) {
         var doc = new DOMParser().parseFromString(xml, 'application/xml')
@@ -118,7 +117,6 @@
         }).filter(function (p) { return p.title })
     }
 
-    /* ---------- 兜底 ---------- */
 
     function getFallback(lang) {
         var map = CFG.fallbackPosts || {}

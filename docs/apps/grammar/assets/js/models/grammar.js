@@ -256,13 +256,10 @@ export function getParadigmTemplate(doc, pos) {
  * 未声明的键返回空串（代码里不留默认文案，文案由语言数据自己写）。
  */
 const TERM_KEYS = [
-    // 形态变形相关的界面用词
     'inflectionType', 'inflectionTypePlaceholder',
     'basicTitle', 'special', 'indeclinable', 'paradigmTitle', 'extraForms', 'stemsTitle',
-    // 分区标题（表单、词卡、复习共用）
     'meanings', 'collocations', 'examples', 'derivatives', 'tags', 'notes', 'others',
     'paradigmTable', 'optionalSuffix', 'add', 'addMeaning',
-    // 生词表单的字段标签、placeholder 与提示
     'posLabel', 'anchorLabel',
     'meaningPlaceholder', 'emptyMeanings',
     'inflectionGroupPlaceholder', 'inflectionLabelPlaceholder', 'inflectionFormPlaceholder',

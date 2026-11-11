@@ -1,14 +1,3 @@
-/* 
- * Nonstandard CSS
- * 
- * This file contains nonstandard CSS properties that are not part of the official CSS specification.
- * These properties are used to enhance the appearance and behavior of the website in specific browsers.
- * 
- * Note: Nonstandard CSS properties may not be supported in all browsers and may be deprecated in the future.
- */
-
-/* Webkit-specific properties */
-
 * {
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -61,19 +50,4 @@ body {
 
 code .token {
     -webkit-font-smoothing: initial;
-}
-
-/* Mozilla-specific properties */
-
-body {
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.markdown-section output:after,
-.markdown-section pre>code {
-    -moz-osx-font-smoothing: initial;
-}
-
-code .token {
-    -moz-osx-font-smoothing: initial;
 }

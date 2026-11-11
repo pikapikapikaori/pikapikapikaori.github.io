@@ -42,7 +42,6 @@ body {
     gap: 16px;
     padding: 16px;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
     user-select: none;
     -webkit-tap-highlight-color: transparent;

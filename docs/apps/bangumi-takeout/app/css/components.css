@@ -1,4 +1,3 @@
-/* ---------- Button ---------- */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -35,7 +34,6 @@
     cursor: not-allowed;
 }
 
-/* ---------- Tabs ---------- */
 .tabs {
     display: flex;
     gap: var(--space-4);
@@ -81,7 +79,6 @@
     font-weight: 400;
 }
 
-/* ---------- Card (overview) ---------- */
 .card {
     display: flex;
     flex-direction: column;
@@ -140,7 +137,6 @@
     color: var(--color-text-dim);
 }
 
-/* ---------- Star rating ---------- */
 .stars {
     display: inline-flex;
     gap: 1px;
@@ -173,7 +169,6 @@
     }
 }
 
-/* ---------- Tag ---------- */
 .tag {
     display: inline-block;
     padding: 1px 8px;
@@ -190,7 +185,6 @@
     gap: var(--space-1);
 }
 
-/* ---------- Loading spinner ---------- */
 .loading {
     display: flex;
     flex-direction: column;
@@ -216,7 +210,6 @@
     }
 }
 
-/* ---------- Empty state ---------- */
 .empty {
     padding: var(--space-6);
     text-align: center;
@@ -224,7 +217,6 @@
     font-size: var(--fs-sm);
 }
 
-/* ---------- Utilities ---------- */
 .dim {
     color: var(--color-text-dim);
 }

@@ -132,7 +132,8 @@ export async function importUser(source, options = {}) {
     }
 
     const st = normalizeSettings({ ...settings })
-    await dbPut(STORE_SETTINGS, { userId: finalUser.id, ...st })
+    // 文件里的 settings.userId 是导出时的用户：记录键必须跟随实际用户
+    await dbPut(STORE_SETTINGS, { ...st, userId: finalUser.id })
 
     for (const raw of Array.isArray(payload.notes) ? payload.notes : []) {
         const language = String((raw && raw.language) || '').trim()

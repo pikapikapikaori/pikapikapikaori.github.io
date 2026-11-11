@@ -224,12 +224,6 @@
     font-size: var(--fs-sm);
 }
 
-/* ---------- Error ---------- */
-.error-msg {
-    color: var(--color-error);
-    font-size: var(--fs-sm);
-}
-
 /* ---------- Utilities ---------- */
 .dim {
     color: var(--color-text-dim);
@@ -237,10 +231,4 @@
 
 .faint {
     color: var(--color-text-faint);
-}
-
-.nowrap {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

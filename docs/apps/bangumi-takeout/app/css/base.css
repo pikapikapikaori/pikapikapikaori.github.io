@@ -391,15 +391,6 @@ button {
     }
 }
 
-.pager {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: var(--space-5);
-}
-
 .pager-jump {
     display: inline-flex;
     align-items: center;

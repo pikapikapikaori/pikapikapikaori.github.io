@@ -80,7 +80,6 @@ let abortCtrl = null
 // ============================================================
 // 基础工具
 // ============================================================
-const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 function log(msg, type = 'info') {
     const el = document.getElementById('log')

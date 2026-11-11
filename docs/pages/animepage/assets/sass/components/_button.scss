@@ -78,22 +78,6 @@
 					margin: 0;
 					text-indent: 0;
 				}
-
-				&.fa-angle-left {
-					&:before {
-						position: relative;
-						left: -0.1rem;
-						font-size: 1.75rem;
-					}
-				}
-
-				&.fa-angle-right {
-					&:before {
-						position: relative;
-						left: 0.1rem;
-						font-size: 1.75rem;
-					}
-				}
 			}
 		}
 

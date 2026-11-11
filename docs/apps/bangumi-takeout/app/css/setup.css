@@ -196,7 +196,7 @@
     margin: 0 0.15em;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.9em;
-    color: var(--text);
+    color: var(--color-text);
     background: var(--bg-soft, rgba(127, 127, 127, 0.15));
     border-radius: 4px;
 }

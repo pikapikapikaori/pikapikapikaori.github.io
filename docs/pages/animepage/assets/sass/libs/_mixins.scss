@@ -1,4 +1,4 @@
-/// Makes an element's :before pseudoelement a FontAwesome icon.
+/// Makes an element's :before pseudoelement an icon.
 /// @param {string} $content Optional content value to use.
 /// @param {string} $category Optional category to use.
 /// @param {string} $where Optional pseudoelement to target (before or after).
@@ -21,15 +21,10 @@
 		line-height: 1;
 		text-transform: none !important;
 
-		@if ($category == brands) {
-			font-family: 'Font Awesome 5 Brands';
-		}
-		@elseif ($category == solid) {
-			font-family: 'Font Awesome 5 Free';
+		@if ($category == solid) {
 			font-weight: 900;
 		}
-		@else {
-			font-family: 'Font Awesome 5 Free';
+		@elseif ($category != brands) {
 			font-weight: 400;
 		}
 

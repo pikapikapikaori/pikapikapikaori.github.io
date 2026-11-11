@@ -17,7 +17,7 @@ export function renderDetail() {
         return
     }
 
-    const catLabel = CATEGORIES[item.cat] || item.cat
+    const catLabel = CATEGORIES.find(c => c.key === item.cat)?.label || item.cat
     const statusLabel = item.status === 'onhold' ? '搁置'
         : item.status === 'dropped' ? '抛弃'
             : STATUS_LABELS[item.cat]?.[item.status] || item.status

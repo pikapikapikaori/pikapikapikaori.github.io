@@ -1,5 +1,5 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
-import { protectCodeBlocks } from '../utils/common.js'
+import { protectCodeBlocks, isEnabled } from '../utils/common.js'
 
 let htmlReplaceOptions = {
     links: {
@@ -127,7 +127,7 @@ function plugin(hook, vm) {
         let match
         while (true) {
             match = commentReplaceMarkup.exec(html)
-            if (match === null) break
+            if (!isEnabled(match)) break
 
             const fullComment = match[0]
             const realHtml = match[1] || ''

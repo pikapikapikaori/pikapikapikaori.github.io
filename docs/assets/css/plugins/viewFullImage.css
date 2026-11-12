@@ -90,15 +90,15 @@ img:not(.ignore-view-full-image-img):not(.emoji) {
 }
 
 /* Gitalk */
-#gitalk-container .gt-container .gt-comment-avatar>img {
+#comment-container .gt-container .gt-comment-avatar>img {
     cursor: default;
 }
 
-#gitalk-container .gt-container .gt-header-avatar>img {
+#comment-container .gt-container .gt-header-avatar>img {
     cursor: default;
 }
 
-#gitalk-container .gt-container .gt-avatar img:hover, 
-#gitalk-container .gt-container .gt-comment-avatar img:hover {
+#comment-container .gt-container .gt-avatar img:hover, 
+#comment-container .gt-container .gt-comment-avatar img:hover {
     filter: none;
 }

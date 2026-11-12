@@ -1,4 +1,5 @@
 import pathNameData from '../config/breadcrumbData.json.js'
+import { isEnabled } from '../utils/common.js'
 
 let breadcrumbOptions = {
     localization: [
@@ -29,7 +30,7 @@ function plugin(hook, vm) {
             }
         }
 
-        if (parts[parts.length - 1] === '') {
+        if (!isEnabled(parts[parts.length - 1])) {
             parts = parts.slice(0, -1)
             isReadme = true
         }

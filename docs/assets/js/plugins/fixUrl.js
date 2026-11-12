@@ -1,20 +1,19 @@
-// Docsify plugin functions
+let fixUrlOptions = {
+    prefix: './'
+}
+
 function plugin(hook, vm) {
     const query = 'a,img,iframe'
 
-    function fixRelativeUrls(el, prefix = '../../') {
-        // 支持传字符串选择器或 DOM 元素
-        if (typeof el === 'string') {
-            el = document.querySelector(el)
-        }
+    const prefix = fixUrlOptions.prefix
+
+    function fixRelativeUrls(el) {
         if (!el || el.nodeType !== 1) {
-            console.warn('fixRelativeUrls: 传入的不是有效 DOM 元素', el)
             return el
         }
 
         const protocolRe = /^(?:[a-zA-Z][a-zA-Z0-9+.\-]*:|\/\/|#)/
 
-        // 处理元素自身 + 所有后代
         const nodes = [el, ...el.querySelectorAll('[src], [href]')]
 
         nodes.forEach(node => {
@@ -39,4 +38,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['fixUrl'] = Object.assign(
+    fixUrlOptions,
+    window.$docsify['fixUrl']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

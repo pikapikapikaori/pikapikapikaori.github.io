@@ -1,4 +1,5 @@
 import { bindShortcuts } from '../utils/shortcut.js'
+import { isEnabled } from '../utils/common.js'
 
 function plugin(hook, vm) {
 
@@ -354,7 +355,7 @@ function plugin(hook, vm) {
         }
 
         async function closeViewer() {
-            if (curImg === undefined) return
+            if (!isEnabled(curImg)) return
 
             createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, false)
             await new Promise(r => setTimeout(r, openCloseKeyframeDuration))

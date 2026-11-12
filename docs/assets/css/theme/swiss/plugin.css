@@ -201,7 +201,7 @@ html section.cover .cover-page-scroll-down-chevron-div {
     display: none;
 }
 
-html #gitalk-container {
+html #comment-container {
     width: auto;
     margin: var(--sw-gap-sec) auto 0;
     padding: 0 var(--sw-gutter);
@@ -209,60 +209,60 @@ html #gitalk-container {
     border: 0;
 }
 
-html #gitalk-container .gt-container {
+html #comment-container .gt-container {
     font-size: var(--sw-fs-small);
     line-height: 1.7;
 }
 
-html #gitalk-container .gt-container .gt-meta {
+html #comment-container .gt-container .gt-meta {
     border-bottom: var(--sw-border-mid);
 }
 
-html #gitalk-container .gt-container .gt-svg svg,
-html #gitalk-container .gt-container .gt-ico {
+html #comment-container .gt-container .gt-svg svg,
+html #comment-container .gt-container .gt-ico {
     fill: currentColor;
     color: var(--sw-on-rest);
 }
 
-html #gitalk-container .gt-container .gt-ico-github .gt-svg svg {
+html #comment-container .gt-container .gt-ico-github .gt-svg svg {
     fill: var(--sw-on-rest);
 }
 
-html #gitalk-container .gt-header {
+html #comment-container .gt-header {
     margin-top: 2rem;
     padding-top: 0.75rem;
 }
 
-html #gitalk-container .gt-header p {
+html #comment-container .gt-header p {
     padding: 0.5rem 0 0;
 }
 
-html #gitalk-container .gt-header-controls-tip {
+html #comment-container .gt-header-controls-tip {
     color: var(--sw-ink-muted);
     font-size: var(--sw-fs-small);
 }
 
-html #gitalk-container .gt-container .gt-link {
+html #comment-container .gt-container .gt-link {
     color: var(--sw-on-rest);
     transition: var(--global-transition-color-fast);
 }
 
-html #gitalk-container .gt-container a:hover,
-html #gitalk-container .gt-user-name:hover,
-html #gitalk-container .gt-popup .gt-action:hover {
+html #comment-container .gt-container a:hover,
+html #comment-container .gt-user-name:hover,
+html #comment-container .gt-popup .gt-action:hover {
     text-decoration-color: var(--sw-link-hover);
 }
 
-html #gitalk-container .gt-meta.is-hover .gt-user-name,
-html #gitalk-container .gt-meta.is-popup-open .gt-user-name,
-html #gitalk-container .gt-popup .gt-action.is--active,
-html #gitalk-container .gt-popup .gt-action.is--active:hover {
+html #comment-container .gt-meta.is-hover .gt-user-name,
+html #comment-container .gt-meta.is-popup-open .gt-user-name,
+html #comment-container .gt-popup .gt-action.is--active,
+html #comment-container .gt-popup .gt-action.is--active:hover {
     text-decoration-color: var(--sw-link-hover);
 }
 
-html #gitalk-container .gt-user-inner.is-popup-open .gt-user-name,
-html #gitalk-container .gt-popup .gt-action.is--active,
-html #gitalk-container .gt-popup .gt-action.is--active:hover {
+html #comment-container .gt-user-inner.is-popup-open .gt-user-name,
+html #comment-container .gt-popup .gt-action.is--active,
+html #comment-container .gt-popup .gt-action.is--active:hover {
     color: inherit;
 }
 
@@ -290,16 +290,16 @@ html #gitalk-container .gt-popup .gt-action.is--active:hover {
     }
 }
 
-html #gitalk-container .gt-container .gt-popup {
+html #comment-container .gt-container .gt-popup {
     animation: sw-gt-popup-in var(--global-transition-duration-normal) var(--global-transition-ease);
 }
 
-html #gitalk-container .gt-container .gt-popup.is-leaving {
+html #comment-container .gt-container .gt-popup.is-leaving {
     animation: sw-gt-popup-out var(--global-transition-duration-normal) var(--global-transition-ease);
 }
 
-html #gitalk-container .gt-container .gt-header-textarea,
-html #gitalk-container .gt-container .gt-comment-content {
+html #comment-container .gt-container .gt-header-textarea,
+html #comment-container .gt-container .gt-comment-content {
     padding: 0.75rem;
     border: var(--sw-border-mid);
     border-color: var(--sw-line-rest);
@@ -308,110 +308,110 @@ html #gitalk-container .gt-container .gt-comment-content {
     transition: var(--global-transition-color-fast);
 }
 
-html #gitalk-container .gt-container .gt-comment-content {
+html #comment-container .gt-container .gt-comment-content {
     background: var(--sw-fill-rest);
 }
 
-html #gitalk-container .gt-container .gt-comment-admin .gt-comment-content {
+html #comment-container .gt-container .gt-comment-admin .gt-comment-content {
     background: var(--sw-tone);
 }
 
-html #gitalk-container .gt-container .gt-header-textarea {
+html #comment-container .gt-container .gt-header-textarea {
     background: var(--sw-tone);
 }
 
-html #gitalk-container .gt-container .gt-header-textarea:hover,
-html #gitalk-container .gt-container .gt-header-textarea:focus {
+html #comment-container .gt-container .gt-header-textarea:hover,
+html #comment-container .gt-container .gt-header-textarea:focus {
     background: var(--sw-tone);
     border-color: var(--sw-line-hover);
 }
 
-html #gitalk-container .gt-container .gt-header-preview {
+html #comment-container .gt-container .gt-header-preview {
     background: var(--sw-tone);
     border: var(--sw-border-mid);
     border-color: var(--sw-line-rest);
 }
 
-html #gitalk-container .gt-container .gt-btn {
+html #comment-container .gt-container .gt-btn {
     padding: 0.5rem 1rem;
     border: var(--sw-border-mid);
     font-size: var(--sw-fs-small);
     font-weight: var(--global-font-weight-extra-bold);
 }
 
-html #gitalk-container .gt-container .gt-btn-preview {
+html #comment-container .gt-container .gt-btn-preview {
     background: var(--sw-fill-rest);
     color: var(--sw-on-rest);
     border-color: var(--sw-line-rest);
 }
 
-html #gitalk-container .gt-container .gt-btn-preview:hover,
-html #gitalk-container .gt-container .gt-btn-preview:active {
+html #comment-container .gt-container .gt-btn-preview:hover,
+html #comment-container .gt-container .gt-btn-preview:active {
     background: var(--sw-fill-hover);
     color: var(--sw-on-fill);
     border-color: var(--sw-line-hover);
 }
 
-html #gitalk-container .gt-header:has(.gt-header-textarea.hide) .gt-btn-preview {
+html #comment-container .gt-header:has(.gt-header-textarea.hide) .gt-btn-preview {
     background: var(--sw-fill-hover);
     color: var(--sw-on-fill);
     border-color: var(--sw-line-hover);
 }
 
-html #gitalk-container .gt-header:has(.gt-header-textarea.hide) .gt-btn-preview:hover,
-html #gitalk-container .gt-header:has(.gt-header-textarea.hide) .gt-btn-preview:active {
+html #comment-container .gt-header:has(.gt-header-textarea.hide) .gt-btn-preview:hover,
+html #comment-container .gt-header:has(.gt-header-textarea.hide) .gt-btn-preview:active {
     background: var(--sw-fill-rest);
     color: var(--sw-ink-strong);
     border-color: var(--sw-line-hover);
 }
 
-html #gitalk-container .gt-container .gt-btn-login,
-html #gitalk-container .gt-container .gt-btn-public {
+html #comment-container .gt-container .gt-btn-login,
+html #comment-container .gt-container .gt-btn-public {
     background: var(--sw-fill-inverse);
     border-color: var(--sw-line-hover);
     color: var(--sw-on-fill);
 }
 
-html #gitalk-container .gt-container .gt-btn-login:hover,
-html #gitalk-container .gt-container .gt-btn-public:hover,
-html #gitalk-container .gt-container .gt-btn-login:active,
-html #gitalk-container .gt-container .gt-btn-public:active {
+html #comment-container .gt-container .gt-btn-login:hover,
+html #comment-container .gt-container .gt-btn-public:hover,
+html #comment-container .gt-container .gt-btn-login:active,
+html #comment-container .gt-container .gt-btn-public:active {
     background: var(--sw-fill-rest);
     border-color: var(--sw-line-hover);
     color: var(--sw-ink-strong);
     box-shadow: none;
 }
 
-html #gitalk-container .gt-popup .gt-action.is--active:before {
+html #comment-container .gt-popup .gt-action.is--active:before {
     content: none;
 }
 
-html #gitalk-container .gt-comment-body,
-html #gitalk-container .gt-comment-text,
-html #gitalk-container .gt-comment-body * {
+html #comment-container .gt-comment-body,
+html #comment-container .gt-comment-text,
+html #comment-container .gt-comment-body * {
     font-size: var(--sw-fs-body);
     line-height: var(--sw-lh-body);
 }
 
-html #gitalk-container .gt-comment-username {
+html #comment-container .gt-comment-username {
     color: var(--sw-ink-strong);
     font-weight: var(--global-font-weight-extra-bold);
 }
 
-html #gitalk-container .gt-comment-date,
-html #gitalk-container .gt-counts,
-html #gitalk-container .gt-ico-text {
+html #comment-container .gt-comment-date,
+html #comment-container .gt-counts,
+html #comment-container .gt-ico-text {
     font-size: var(--sw-fs-small);
     color: var(--sw-ink-muted);
 }
 
-html #gitalk-container .gt-container a {
+html #comment-container .gt-container a {
     transition: var(--global-transition-color-fast);
 }
 
-html #gitalk-container .gt-container a.gt-comment-like,
-html #gitalk-container .gt-container a.gt-comment-reply,
-html #gitalk-container .gt-container a.gt-comment-edit {
+html #comment-container .gt-container a.gt-comment-like,
+html #comment-container .gt-container a.gt-comment-reply,
+html #comment-container .gt-container a.gt-comment-edit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -426,54 +426,54 @@ html #gitalk-container .gt-container a.gt-comment-edit {
     transition: var(--global-transition-color-fast);
 }
 
-html #gitalk-container .gt-container a.gt-comment-like:hover,
-html #gitalk-container .gt-container a.gt-comment-like:active,
-html #gitalk-container .gt-container a.gt-comment-reply:hover,
-html #gitalk-container .gt-container a.gt-comment-reply:active,
-html #gitalk-container .gt-container a.gt-comment-edit:hover,
-html #gitalk-container .gt-container a.gt-comment-edit:active {
+html #comment-container .gt-container a.gt-comment-like:hover,
+html #comment-container .gt-container a.gt-comment-like:active,
+html #comment-container .gt-container a.gt-comment-reply:hover,
+html #comment-container .gt-container a.gt-comment-reply:active,
+html #comment-container .gt-container a.gt-comment-edit:hover,
+html #comment-container .gt-container a.gt-comment-edit:active {
     background: var(--sw-fill-hover);
     border-color: var(--sw-line-hover);
     color: var(--sw-on-fill);
 }
 
-html #gitalk-container .gt-container a.gt-comment-like .gt-ico,
-html #gitalk-container .gt-container a.gt-comment-reply .gt-ico,
-html #gitalk-container .gt-container a.gt-comment-edit .gt-ico {
+html #comment-container .gt-container a.gt-comment-like .gt-ico,
+html #comment-container .gt-container a.gt-comment-reply .gt-ico,
+html #comment-container .gt-container a.gt-comment-edit .gt-ico {
     color: inherit;
 }
 
-html #gitalk-container .gt-container a.gt-comment-like svg,
-html #gitalk-container .gt-container a.gt-comment-reply svg,
-html #gitalk-container .gt-container a.gt-comment-edit svg {
+html #comment-container .gt-container a.gt-comment-like svg,
+html #comment-container .gt-container a.gt-comment-reply svg,
+html #comment-container .gt-container a.gt-comment-edit svg {
     color: inherit;
     transform: none;
 }
 
-html #gitalk-container .gt-container a.gt-comment-like {
+html #comment-container .gt-container a.gt-comment-like {
     right: 2rem;
 }
 
-html #gitalk-container .gt-container a.gt-comment-reply,
-html #gitalk-container .gt-container a.gt-comment-edit {
+html #comment-container .gt-container a.gt-comment-reply,
+html #comment-container .gt-container a.gt-comment-edit {
     right: 0;
 }
 
-html #gitalk-container .gt-container .gt-comment-header {
+html #comment-container .gt-container .gt-comment-header {
     padding-right: 4.25rem;
 }
 
-html #gitalk-container .gt-comment-like .gt-ico-text {
+html #comment-container .gt-comment-like .gt-ico-text {
     color: inherit;
 }
 
-html footer:has(#footer-under-gitalk) {
+html footer:has(#footer-under-comment) {
     margin-top: var(--sw-gap-sec);
     background: var(--sw-fill-inverse);
     color: var(--sw-on-fill);
 }
 
-html #footer-under-gitalk {
+html #footer-under-comment {
     width: auto;
     max-width: none;
     margin: 0;
@@ -485,19 +485,19 @@ html #footer-under-gitalk {
     color: var(--sw-on-fill);
 }
 
-html #footer-under-gitalk>div {
+html #footer-under-comment>div {
     padding-top: 0;
     border-top: 0;
 }
 
-html #footer-under-gitalk small {
+html #footer-under-comment small {
     font-size: var(--sw-fs-small);
     line-height: 1.6;
     color: var(--sw-on-fill);
 }
 
 @media screen and (max-width: 768px) {
-    html footer:has(#footer-under-gitalk) {
+    html footer:has(#footer-under-comment) {
         margin-bottom: 0;
     }
 }

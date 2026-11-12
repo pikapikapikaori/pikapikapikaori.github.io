@@ -1,0 +1,33 @@
+:root {
+    --theme-color: #c7a2ec;
+
+    --global-border-color: var(--border-color);
+    --global-border-extra-strong: 3px solid;
+    --global-border-normal: 1px solid;
+    --global-border-strong: 2px solid;
+    --global-classic-font: var(--font-family);
+    --global-content-width: min(var(--content-max-width), 100%);
+    --global-control-border-active: var(--theme-color);
+    --global-control-border-hover: var(--theme-color-3);
+    --global-control-border-radius: var(--border-radius);
+    --global-minority-lang-font: var(--font-family);
+    --global-muted-color: var(--blockquote-color);
+    --global-poem-font: var(--font-family);
+    --global-sidenote-width: 25rem;
+    --global-surface-hollow-border-hover: var(--theme-color-3);
+    --global-surface-hollow-border-press: var(--theme-color-4);
+    --global-surface-hollow-border-rest: var(--border-color);
+    --global-surface-hollow-hover: var(--theme-color-1);
+    --global-surface-hollow-press: var(--theme-color-2);
+    --global-surface-hollow-text-hover: var(--color-text);
+    --global-surface-hollow-text-press: var(--color-text);
+    --global-surface-hollow-text-rest: var(--color-text);
+    --global-theme-color-normal: var(--theme-color);
+    --global-theme-color-very-weak: var(--theme-color-1);
+    --global-transition-color: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease, border-color var(--duration-fast) ease, outline-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease, background-color var(--duration-fast) ease;
+    --global-widget-border-radius: var(--border-radius);
+    --global-widget-size-very-small: var(--font-size-s);
+    --global-writing-container-height: 18.75rem;
+    --global-zebra-bg: var(--table-row-alt-bg);
+}
+

@@ -1,0 +1,24 @@
+#footer-under-comment {
+    text-align: center;
+    max-width: var(--global-content-width);
+    width: var(--global-content-width);
+    align-self: center;
+    padding: 2.5rem 0.9375rem 2.5rem;
+    margin: 1.5rem auto 0
+}
+
+#footer-under-comment>div {
+    padding-top: 2.5rem;
+    border-top: var(--global-border-normal) var(--global-border-color);
+}
+
+#comment-container {
+    max-width: var(--global-content-width);
+    width: var(--global-content-width);
+    margin: 0.5rem auto 1.25rem;
+    padding: 0 0.9375rem;
+}
+
+#comment-container:empty {
+    display: none;
+}

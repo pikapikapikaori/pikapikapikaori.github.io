@@ -15,6 +15,50 @@
     gap: 1.25rem;
 }
 
+.toc-page-div.toc-page-list {
+    display: block;
+    margin: 1.2rem 0;
+}
+
+.toc-page-div.toc-page-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-page-div.toc-page-list li.toc-year-group {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    color: var(--global-theme-color-normal);
+}
+
+.toc-page-div.toc-page-list li.toc-post-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+}
+
+.toc-page-div.toc-page-list .toc-post-date {
+    width: 6.5rem;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: var(--global-muted-color);
+}
+
+.toc-page-div.toc-page-list .toc-post-link {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.toc-page-div.toc-page-list .toc-post-link:hover {
+    color: var(--global-theme-color-normal);
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
     .toc-page-div {
         grid-template-columns: repeat(var(--tocpage-narrow-columns), minmax(0, 1fr));

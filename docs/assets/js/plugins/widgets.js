@@ -1,4 +1,4 @@
-import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex, makeButtonLike } from '../utils/common.js'
+import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex, makeButtonLike, isEnabled } from '../utils/common.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 
 let widgetsOptions = {
@@ -194,7 +194,7 @@ function plugin(hook, vm) {
     let syncColorPickerActiveBtn = function (hue) {
         let btns = Array.from(document.getElementsByClassName('color-picker-preset-color-btn-div'))
 
-        if (!btns.length || hue === undefined || hue === null || isNaN(hue)) {
+        if (!btns.length || !isEnabled(hue) || isNaN(hue)) {
             btns.forEach(btn => btn.classList.remove('is-active'))
             return
         }
@@ -215,14 +215,12 @@ function plugin(hook, vm) {
         syncColorPickerActiveBtn(hue)
     }
 
-    const isThemeValue = value => Boolean(value)
-
     let getThemeGroup = function () {
         return themeState.groups[themeState.themeIndex]
     }
 
     let getSideAsset = function (group, isDark, ext) {
-        if (!isThemeValue(group[ext])) return null
+        if (!isEnabled(group[ext])) return null
 
         return group[ext] + '/' + (isDark ? themeState.darkFile : themeState.lightFile) + '.' + ext
     }
@@ -257,7 +255,7 @@ function plugin(hook, vm) {
     }
 
     let syncThemeColorMeta = function (bgColor) {
-        if (!isThemeValue(bgColor)) return
+        if (!isEnabled(bgColor)) return
 
         let meta = document.querySelector('meta[name="theme-color"]')
         if (!meta) return
@@ -325,7 +323,7 @@ function plugin(hook, vm) {
 
         let waits = Promise.resolve()
 
-        if (isThemeValue(cssPath)) {
+        if (isEnabled(cssPath)) {
             colorTheme.disabled = false
             if (colorTheme.getAttribute('href') !== cssPath) {
                 colorTheme.href = cssPath
@@ -337,11 +335,11 @@ function plugin(hook, vm) {
         }
 
         return waits.then(function () {
-            const applied = readAppliedThemeColors(colorTheme, isThemeValue(cssPath))
+            const applied = readAppliedThemeColors(colorTheme, isEnabled(cssPath))
             themeState.themeColor = applied.themeColor
             themeState.bgColor = applied.bgColor
 
-            if (isThemeValue(applied.themeColor)) {
+            if (isEnabled(applied.themeColor)) {
                 applyThemeColorCss(applied.themeColor)
                 updateColorPickerSlider(applied.themeColor)
             }
@@ -518,7 +516,7 @@ function plugin(hook, vm) {
         const isDark = resolveIsDark()
         const jsPath = getSideAsset(group, isDark, 'js')
 
-        if (!isThemeValue(jsPath)) return
+        if (!isEnabled(jsPath)) return
 
         let themeModule
 
@@ -808,7 +806,7 @@ function plugin(hook, vm) {
         scrollToCommentSpan.innerHTML = icons.commentScroller
 
         scrollToCommentSpan.onclick = function () {
-            const gitalk = document.getElementById('gitalk-container')
+            const gitalk = document.getElementById('comment-container')
             if (!gitalk) return
 
             gitalk.scrollIntoView({ behavior: 'smooth' })

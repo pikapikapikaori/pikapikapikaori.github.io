@@ -1,4 +1,4 @@
 .blocked-media {
-    color: var(--blockquote-color);
+    color: var(--global-muted-color);
     font-size: 0.85rem;
 }

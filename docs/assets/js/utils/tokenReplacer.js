@@ -19,7 +19,7 @@
  * 用法示例：
  *   const replacer = new TokenReplacer({
  *     date: new Date('2000-11-11'),
- *     prefix: 'gitalk_footer',
+ *     prefix: 'comment_footer',
  *     tokens: {
  *       aa: () => 'AA',
  *       bb: 'BB',

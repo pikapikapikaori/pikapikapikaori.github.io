@@ -1,4 +1,14 @@
 /**
+ * 判断值是否启用
+ *
+ * @param {*} value 待判断的值
+ * @returns {boolean}
+ */
+export function isEnabled(value) {
+    return Boolean(value)
+}
+
+/**
  *   代码块保护工具（通用）。
  *   通过第三个参数 mode 区分“保护”和“还原”两个动作。
  *

@@ -14,8 +14,8 @@
             minute: 'min',
             toc: 'Contents',
             articles: 'Articles',
-            gitalkInfo: 'Yi-Yang Li',
-            gitalkCopy: 'All Rights Reserved.',
+            commentInfo: 'Yi-Yang Li',
+            commentCopy: 'All Rights Reserved.',
             divider: ' · ',
             htmlLang: 'en',
             nameLink: '#/en-us/'
@@ -32,8 +32,8 @@
             minute: '分',
             toc: '目次',
             articles: '文章一覧',
-            gitalkInfo: '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
-            gitalkCopy: '無断転載を禁じます',
+            commentInfo: '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
+            commentCopy: '無断転載を禁じます',
             divider: ' ・ ',
             htmlLang: 'ja',
             nameLink: '#/jp/'
@@ -50,8 +50,8 @@
             minute: '分钟',
             toc: '目录',
             articles: '文章列表',
-            gitalkInfo: '李亦杨',
-            gitalkCopy: '版权所有',
+            commentInfo: '李亦杨',
+            commentCopy: '版权所有',
             divider: ' · ',
             htmlLang: 'zh-Hans',
             nameLink: '#/'
@@ -158,12 +158,13 @@
 
 
         // 自用插件
-        // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
-        gitalkWithFooter: {
-            footerInnerHtml: '<small>&copy; 2023 - {gitalk_footer-yyyy}{gitalk_footer-divider}{gitalk_footer-info}{gitalk_footer-divider}{gitalk_footer-copy}</small>',
+        // 添加评论与页脚插件
+        commentWithFooter: {
+            use: 'gitalk',
+            footerInnerHtml: '<small>&copy; 2023 - {comment_footer-yyyy}{comment_footer-divider}{comment_footer-info}{comment_footer-divider}{comment_footer-copy}</small>',
             localization: {
-                info: cali18nText('gitalkInfo'),
-                copy: cali18nText('gitalkCopy'),
+                info: cali18nText('commentInfo'),
+                copy: cali18nText('commentCopy'),
                 divider: cali18nText('divider')
             },
             gitalkConfig: {
@@ -192,9 +193,13 @@
         // 添加目录页
         tocPage: {
             recentAmount: 8,
+            renderStyle: 'card',
+            dateFormat: null,
             columns: 2,
+
             narrowColumns: 1,
             defaultImg: './assets/resources/img/default/picture-2.gif',
+            localPath: i18nLocales,
             coverPath: i18nLocalePrefixes
         },
 

@@ -40,10 +40,6 @@
             : 1 - Math.pow(-2 * t + 2, 3) / 2
     }
 
-    U.easeOutQuint = function (t) {
-        return 1 - Math.pow(1 - t, 5)
-    }
-
     /* 
      * ---------- 磁吸 ----------
      * 把 0–1 的连续输入吸附到 n 个等距静止点。

@@ -79,7 +79,6 @@
     }
 
     var current = null
-    var listeners = []
 
     function readSaved() {
         try { return localStorage.getItem(STORAGE_KEY) } catch (e) { return null }
@@ -210,10 +209,6 @@
         syncUrl(lang)
         syncEntries()
         writeSaved(lang)
-
-        listeners.forEach(function (fn) {
-            try { fn(lang) } catch (e) { /* 忽略单个监听器的错误 */ }
-        })
     }
 
     function bindEntries() {
@@ -229,17 +224,6 @@
     }
 
     App.i18n = {
-        set: apply,
-        get: function () { return current },
-        onChange: function (fn) { listeners.push(fn) },
-        t: function (key) {
-            return DICT[current] ? text(DICT[current], key) : undefined
-        },
-        list: function (key) {
-            var value = DICT[current] ? DICT[current][key] : null
-
-            return Array.isArray(value) ? value : null
-        },
         init: function () {
             bindEntries()
             apply(resolveLang())

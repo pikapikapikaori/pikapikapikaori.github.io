@@ -268,8 +268,6 @@
     }
 
     App.i18n = {
-        set: apply,
-        get: function () { return current },
         onChange: function (fn) { listeners.push(fn) },
         t: function (key) {
             return DICT[current] ? text(DICT[current], key) : undefined

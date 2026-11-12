@@ -12,13 +12,13 @@ function looksLikeZip(buf) {
     return b[0] === 0x50 && b[1] === 0x4B
 }
 
-export async function fetchBinary(url) {
+async function fetchBinary(url) {
     const res = await fetch(proxy(url), { credentials: 'omit', redirect: 'follow' })
     if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`)
     return res.arrayBuffer()
 }
 
-export async function parseBinary(buf) {
+async function parseBinary(buf) {
     let jsonBytes
     if (looksLikeZip(buf)) {
         const files = await unzip(buf)

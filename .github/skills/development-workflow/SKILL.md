@@ -6,7 +6,7 @@ description: >-
 
 # Development Workflow
 
-The Orchestrator must follow this workflow for development tasks. Scale depth to task size; do not force unnecessary phases for trivial questions, but never skip acceptance criteria or honest validation.
+The Orchestrator must follow this workflow for development tasks. Scale depth to task size; scale detail for trivial questions while still involving Documentation, but never skip acceptance criteria or honest validation.
 
 ## 1. Understand and clarify
 - Restate the intended outcome concretely.
@@ -16,7 +16,7 @@ The Orchestrator must follow this workflow for development tasks. Scale depth to
 - Define observable acceptance criteria before implementation.
 
 ## 2. Assess and plan
-Use light task routing: L1 simple/low-risk tasks can stay with Orchestrator; L2 ordinary changes use only necessary specialists; L3 complex or high-risk changes may involve several specialists. Security or API risk can justify review even for small changes. Never treat tiers as fixed agent rosters.
+Use L1/L2/L3 only to scale task depth. Documentation participates in every workflow. Formal development always involves Developer, Tester, Reviewer, Documentation. Page layout changes additionally require UI/UX. Never skip a mandatory role due to task size.
 
 - Decide whether to work directly or delegate.
 - Consider complexity, expertise, context isolation, cost, and coordination overhead.
@@ -52,10 +52,10 @@ Every delegated task states role/goal, relevant context and files, approved requ
 - Developer's completion statement is not acceptance.
 
 ## 7. Test independently
-Use Tester when risk, complexity, user instruction, or acceptance criteria warrant independent validation. Tester inspects actual code and criteria, runs relevant checks, records exact commands and results, distinguishes PASSED/FAILED/SKIPPED/NOT RUN, and reports blockers and coverage gaps. A suggested command, existing test file, or Developer claim is not evidence of a pass.
+For every formal development batch, invoke Tester for independent validation. Tester inspects actual code and criteria, runs relevant checks, records exact commands and results, distinguishes PASSED/FAILED/SKIPPED/NOT RUN, and reports blockers and coverage gaps. A suggested command, existing test file, or Developer claim is not evidence of a pass.
 
 ## 8. Review independently
-Use Reviewer when risk, complexity, public API impact, security sensitivity, or user instruction warrants it. Reviewer is read-only and reports concrete findings with file/line, impact, severity, and correction direction. Review does not replace tests, and tests do not replace review.
+For every formal development batch, invoke Reviewer for independent review. Reviewer is read-only and reports concrete findings with file/line, impact, severity, and correction direction. Review does not replace tests, and tests do not replace review.
 
 ## 9. Repair and retest
 When Tester reports failures or Reviewer finds actionable defects:
@@ -71,7 +71,7 @@ Do not mark complete while required checks remain failed or unverified.
 Parallelize independent research or read-only reviews. Do not parallelize edits to the same or tightly coupled files. Before parallel implementation, assign disjoint file ownership and an integration owner. If overlap appears, stop and serialize conflicting work. Researcher and Reviewer are read-only by default; Tester owns scoped test files, not production code; Documentation owns delegated documentation files.
 
 ## Documentation updates
-Use Documentation selectively when changes affect public APIs, installation/configuration, architecture, deployment, user-facing behavior, or documentation is explicitly requested. Existing project documentation may be updated even with no `document_root`; workflow records may only be created with an explicit root or explicit user request. Verify docs against actual code and configuration. Check YAML frontmatter syntax in Skill files touched during a task, without requiring a separate validator script.
+Documentation MUST participate in every workflow and consolidate each participating agent’s individual delivery record. Each specialist must supply a concise work/documentation record with actions, changed/inspected files, evidence, risks and open items. Documentation edits a unified synthesis and must not invent facts. Existing project documentation may be updated even with no `document_root`; workflow records may only be created with an explicit root or explicit user request. Verify docs against actual code and configuration. Check YAML frontmatter syntax in Skill files touched during a task, without requiring a separate validator script.
 
 ## 11. Final acceptance
 The Orchestrator owns acceptance. Inspect changed files/diff, compare with requirements, inspect actual test evidence and relevant review findings, and confirm useful records are updated. Clearly list remaining risks, skipped checks, and unverified behavior.
@@ -87,8 +87,21 @@ Never report ACCEPTED if required tests failed or were not run.
 When resuming after interruption, compaction, or model change, reread progress and relevant requirements/design/decisions, inspect actual repository state, reconcile records with files and test evidence, and continue from verified state.
 
 ## UI/UX prototype-first checkpoint
-For UI/UX tasks, use the dedicated UI/UX Agent if delegation is appropriate and its model is explicitly configured. The agent must use `design-taste-frontend` and rapidly produce a minimal inspectable prototype. Present the prototype and solicit user feedback before substantial design polish or implementation expansion, unless the user expressly asks to skip the checkpoint. `impeccable` is an optional polish/audit Skill, not a replacement for taste-skill.
+For any page layout change, the dedicated UI/UX Agent is mandatory and its model must be explicitly configured. The agent must use `design-taste-frontend` and rapidly produce a minimal inspectable prototype. Present the prototype and solicit user feedback before substantial design polish or implementation expansion, unless the user expressly asks to skip the checkpoint. `impeccable` is an optional polish/audit Skill, not a replacement for taste-skill.
 
 ## Megacave token-efficient punctuation policy
 
-For ALL natural-language communication (user-facing and between any agents), apply the installed `/megacave` response Skill and prefer concise classical Chinese. Minimize total tokens. Omit punctuation whenever meaning remains clear; retain punctuation where needed to prevent ambiguity. Do NOT add spaces or line breaks merely to replace omitted punctuation. Do not sacrifice meaning or precision to eliminate punctuation. Preserve exact syntax in code, commands, file paths, URLs, identifiers, JSON, YAML, regular expressions, logs, and other machine-readable content. This is a communication style rule, not a reason to alter code or structured handoff fields.
+For ALL natural-language messages to users or other agents, apply the installed `/megacave` response Skill. In ordinary prose use concise classical Chinese with ZERO spaces (ASCII or full-width) and ZERO punctuation (Chinese or ASCII). Do not insert line breaks to compensate for removed spaces or punctuation. Compose sentences so their meaning remains clear without punctuation. If unambiguous expression is impossible, rewrite rather than add punctuation; for unavoidable safety-critical ambiguity, clarity takes priority. This restriction applies to ordinary prose, including status messages, explanations and handoffs. Exceptions: preserve exact code, CLI commands, file paths, URLs, identifiers, quoted raw logs and machine-readable structures such as JSON/YAML, Markdown syntax necessary for formatting, and content explicitly requested by the user in another format. Do not alter technical artifacts to satisfy the prose style. When a native slash invocation is unavailable, read and apply the megacave Skill directly rather than outputting a literal slash command.
+
+## Batch snapshots and git permission
+
+Read `version_control` from the active preset/session. Default: snapshots only, no agent git commit or push. Before the first change in each batch, Orchestrator captures scoped originals with `node .github/skills/development-workflow/scripts/snapshot-batch.mjs before <batch-id> <paths...>`; after implementation, Tester evidence, Reviewer findings and Documentation synthesis, capture `after`. Use `--directory <path>` for the session-configured snapshot root. For newly discovered files, record before prior to mutation. Preserve manifest and raw files for VS Code diff. If before snapshot fails, do not modify files. Never include the snapshot directory within itself. Explicit authorization is required to switch to git commit; git push remains forbidden unless separately authorized.
+
+## Mandatory delivery records
+
+Every specialist must return `status`, `summary`, `files_changed` or inspected, `verification` with actual results or NOT RUN, `issues`, and `documentation_notes` for Documentation. Documentation consolidates these into one accurate final handoff. If no document root is configured, the synthesis remains in the conversation, not an invented folder.
+
+
+## Configurable snapshot script location
+
+Resolve the snapshot CLI from the active `skill_paths.template` as `<template_skill_root>/development-workflow/scripts/snapshot-batch.mjs`. The literal `.github/skills/development-workflow/scripts/snapshot-batch.mjs` is only the bundled preset path. If the template root changes, invoke the script from the configured root and do not assume the default location.

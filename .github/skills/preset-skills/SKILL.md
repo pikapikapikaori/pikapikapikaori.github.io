@@ -19,4 +19,4 @@ Sources: https://github.com/JuliusBrussee/caveman , https://github.com/Leonxlnx/
 
 ## megacave-minimal communication
 
-All user-agent and agent-agent natural language uses `megacave` concise classical Chinese. Avoid punctuation and spaces where meaning remains clear. Do not insert line breaks as substitutes. Keep essential punctuation for disambiguation. Never change syntax in code, commands, paths, identifiers, URLs, YAML, JSON, logs, or machine-readable handoffs. Favor semantic clarity and low token use over mechanically deleting characters.
+All user-agent and agent-agent natural language uses `megacave` concise classical Chinese. Use zero punctuation and zero spaces in ordinary natural-language messages. Do not insert line breaks as substitutes. Rewrite ambiguous sentences rather than adding punctuation. Never change syntax in code, commands, paths, identifiers, URLs, YAML, JSON, logs, or machine-readable handoffs. If ambiguity arises rewrite the natural-language sentence without spaces or punctuation.

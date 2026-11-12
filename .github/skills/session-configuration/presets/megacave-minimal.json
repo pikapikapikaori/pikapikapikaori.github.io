@@ -1,27 +1,40 @@
 {
-  "schema_version": 1,
-  "preset": "megacave-minimal",
-  "presets": {
-    "megacave-minimal": {
-      "communication": {
-        "style": "megacave",
-        "punctuation": "minimal",
-        "spaces": "minimal",
-        "apply_to": "all"
-      },
-      "skill_paths": {
-        "template": ".github/skills",
-        "external": ".agents/skills"
-      },
-      "preset_skills": {
-        "install_on_start": true,
-        "activate_after_install": true,
-        "names": [
-          "megacave",
-          "design-taste-frontend",
-          "impeccable"
-        ]
-      }
+    "schema_version": 1,
+    "preset": "megacave-minimal",
+    "presets": {
+        "megacave-minimal": {
+            "communication": {
+                "style": "megacave",
+                "punctuation": "none",
+                "spaces": "none",
+                "apply_to": "all",
+                "line_breaks": "only_when_structurally_required"
+            },
+            "skill_paths": {
+                "template": ".github/skills",
+                "external": ".agents/skills"
+            },
+            "preset_skills": {
+                "install_on_start": true,
+                "activate_after_install": true,
+                "names": [
+                    "megacave",
+                    "design-taste-frontend",
+                    "impeccable"
+                ]
+            },
+            "version_control": {
+                "mode": "snapshots",
+                "git": {
+                    "agent_commit_allowed": false,
+                    "agent_push_allowed": false
+                },
+                "snapshots": {
+                    "directory": "lib",
+                    "capture": "before_and_after",
+                    "batch_policy": "per_batch"
+                }
+            }
+        }
     }
-  }
 }

@@ -11,7 +11,7 @@ Use at the beginning of every new Orchestrator session and whenever the user cha
 
 Read `.github/skills/session-configuration/presets/megacave-minimal.json` first. It is this template's configuration file, not a VS Code-native schema. The only supplied preset is `megacave-minimal`.
 
-The preset configures `communication.style`, `communication.punctuation`, `communication.spaces`, `skill_paths.template`, `skill_paths.external`, and `preset_skills.install_on_start` / `activate_after_install`.
+The preset configures `communication.style`, `communication.punctuation`, `communication.spaces`, `skill_paths.template`, `skill_paths.external`, and `preset_skills.install_on_start` / `activate_after_install`, plus `version_control` settings.
 
 Both Skill roots are independently configurable via the preset file or explicit session instructions. Template Skills (`development-workflow`, `session-configuration`, `preset-skills`) belong in the template root; external Skills belong in the external root. Resolve paths from the workspace root. User instruction > explicit session config > selected preset. Check for missing directories and name conflicts. Do not claim an edit to the path config physically moves installed Skills. Because the bootstrap Skill must be found before session configuration is read, moving the template root requires relocating its files and updating agent references manually.
 
@@ -28,6 +28,11 @@ The user may provide configuration through natural language, a YAML-like block, 
 - `skill_paths.template`: workspace-relative template Skill root.
 - `skill_paths.external`: workspace-relative external Skill root.
 - `document_root`: optional workflow-document directory.
+- `version_control.mode`: `snapshots` or `git`, default `snapshots`.
+- `version_control.git.agent_commit_allowed`: default false; explicit approval needed to enable.
+- `version_control.git.agent_push_allowed`: default false and independent of commit permission.
+- `version_control.snapshots.directory`: configurable workspace-relative location, default `.workflow-snapshots`.
+- `version_control.snapshots.capture`: `before_and_after`, per batch.
 - `conventions`: project convention files/paths.
 - `main_required_skills`: additional Skills the main agent must apply.
 - `main_available_skills`: Skills the main agent may select.
@@ -176,4 +181,17 @@ Run the `preset-skills` startup installation/check before ordinary session confi
 
 ## Megacave token-efficient punctuation policy
 
-For ALL natural-language communication (user-facing and between any agents), apply the installed `/megacave` response Skill and prefer concise classical Chinese. Minimize total tokens. Omit punctuation whenever meaning remains clear; retain punctuation where needed to prevent ambiguity. Do NOT add spaces or line breaks merely to replace omitted punctuation. Do not sacrifice meaning or precision to eliminate punctuation. Preserve exact syntax in code, commands, file paths, URLs, identifiers, JSON, YAML, regular expressions, logs, and other machine-readable content. This is a communication style rule, not a reason to alter code or structured handoff fields.
+For ALL natural-language messages to users or other agents, apply the installed `/megacave` response Skill. In ordinary prose use concise classical Chinese with ZERO spaces (ASCII or full-width) and ZERO punctuation (Chinese or ASCII). Do not insert line breaks to compensate for removed spaces or punctuation. Compose sentences so their meaning remains clear without punctuation. If unambiguous expression is impossible, rewrite rather than add punctuation; for unavoidable safety-critical ambiguity, clarity takes priority. This restriction applies to ordinary prose, including status messages, explanations and handoffs. Exceptions: preserve exact code, CLI commands, file paths, URLs, identifiers, quoted raw logs and machine-readable structures such as JSON/YAML, Markdown syntax necessary for formatting, and content explicitly requested by the user in another format. Do not alter technical artifacts to satisfy the prose style. When a native slash invocation is unavailable, read and apply the megacave Skill directly rather than outputting a literal slash command.
+
+## Version-control initialization
+
+Read `version_control` from the selected preset, then apply explicit user/session overrides. Do not ask to enable commit by default. Confirm the snapshot directory is within the workspace, is not a source path to be snapshotted, and can be created. Use `node .github/skills/development-workflow/scripts/snapshot-batch.mjs` for before/after capture. No commit or push unless the corresponding flag is explicitly authorized. A preset's disabled flags are not permission to commit. Never mutate `.gitignore` without user approval; recommend ignoring the snapshot directory.
+
+## Mandatory roles
+
+All workflows require Documentation. Formal development requires Developer, Tester, Reviewer and Documentation. Layout changes additionally require UI/UX. Request missing models only when the relevant role is needed. If mandatory delegation is blocked, report it rather than marking the workflow accepted.
+
+
+## Configurable snapshot script location
+
+Resolve the snapshot CLI from the active `skill_paths.template` as `<template_skill_root>/development-workflow/scripts/snapshot-batch.mjs`. The literal `.github/skills/development-workflow/scripts/snapshot-batch.mjs` is only the bundled preset path. If the template root changes, invoke the script from the configured root and do not assume the default location.

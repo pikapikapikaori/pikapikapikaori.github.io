@@ -88,17 +88,3 @@ img:not(.ignore-view-full-image-img):not(.emoji):hover {
 img:not(.ignore-view-full-image-img):not(.emoji) {
     transition: var(--global-transition-filter);
 }
-
-/* Gitalk */
-#comment-container .gt-container .gt-comment-avatar>img {
-    cursor: default;
-}
-
-#comment-container .gt-container .gt-header-avatar>img {
-    cursor: default;
-}
-
-#comment-container .gt-container .gt-avatar img:hover, 
-#comment-container .gt-container .gt-comment-avatar img:hover {
-    filter: none;
-}

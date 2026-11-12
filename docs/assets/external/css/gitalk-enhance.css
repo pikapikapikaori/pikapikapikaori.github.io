@@ -325,3 +325,15 @@
     border-color: var(--global-control-border-active);
 }
 
+#comment-container .gt-container .gt-comment-avatar>img {
+    cursor: default;
+}
+
+#comment-container .gt-container .gt-header-avatar>img {
+    cursor: default;
+}
+
+#comment-container .gt-container .gt-avatar img:hover, 
+#comment-container .gt-container .gt-comment-avatar img:hover {
+    filter: none;
+}

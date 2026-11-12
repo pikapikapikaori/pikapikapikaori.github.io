@@ -5,6 +5,30 @@ function plugin(hook, vm) {
         return el.scrollHeight > el.clientHeight + 1
     }
 
+    function containerEdgeState(container) {
+        if (isSelfScrollable(container)) {
+            const max = container.scrollHeight - container.clientHeight
+            return {
+                atTop: container.scrollTop <= 1,
+                atBottom: container.scrollTop >= max - 1
+            }
+        }
+
+        const cRect = container.getBoundingClientRect()
+        let contentBottom = cRect.bottom
+
+        for (const child of container.children) {
+            if (child.classList.contains('fade-edge')) continue
+            const r = child.getBoundingClientRect()
+            if (r.bottom > contentBottom) contentBottom = r.bottom
+        }
+
+        return {
+            atTop: cRect.top >= -1,
+            atBottom: contentBottom <= window.innerHeight + 1
+        }
+    }
+
     function attachSidebarFadeEdge(container) {
         if (!container) return
         if (container.querySelector('.fade-edge')) return
@@ -17,25 +41,7 @@ function plugin(hook, vm) {
         container.append(bottom)
 
         const update = () => {
-            let atTop, atBottom
-
-            if (isSelfScrollable(container)) {
-                const max = container.scrollHeight - container.clientHeight
-                atTop = container.scrollTop <= 1
-                atBottom = container.scrollTop >= max - 1
-            } else {
-                const cRect = container.getBoundingClientRect()
-                let contentBottom = cRect.bottom
-
-                for (const child of container.children) {
-                    if (child.classList.contains('fade-edge')) continue
-                    const r = child.getBoundingClientRect()
-                    if (r.bottom > contentBottom) contentBottom = r.bottom
-                }
-
-                atTop = cRect.top >= -1
-                atBottom = contentBottom <= window.innerHeight + 1
-            }
+            const { atTop, atBottom } = containerEdgeState(container)
 
             top.classList.toggle('show', !atTop)
             bottom.classList.toggle('show', !atBottom)
@@ -73,22 +79,10 @@ function plugin(hook, vm) {
                 const max = document.scrollingElement.scrollHeight - window.innerHeight
                 atTop = scrollTop <= 1
                 atBottom = scrollTop >= max - 1
-            } else if (isSelfScrollable(container)) {
-                const max = container.scrollHeight - container.clientHeight
-                atTop = container.scrollTop <= 1
-                atBottom = container.scrollTop >= max - 1
             } else {
-                const cRect = container.getBoundingClientRect()
-                let contentBottom = cRect.bottom
-
-                for (const child of container.children) {
-                    if (child.classList.contains('fade-edge')) continue
-                    const r = child.getBoundingClientRect()
-                    if (r.bottom > contentBottom) contentBottom = r.bottom
-                }
-
-                atTop = cRect.top >= -1
-                atBottom = contentBottom <= window.innerHeight + 1
+                const state = containerEdgeState(container)
+                atTop = state.atTop
+                atBottom = state.atBottom
             }
 
             top.classList.toggle('show', !atTop)

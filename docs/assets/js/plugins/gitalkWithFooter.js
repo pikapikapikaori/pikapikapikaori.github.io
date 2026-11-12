@@ -307,7 +307,6 @@ function plugin(hook, vm) {
             if (!gitalkContainer) return
         }
 
-        // render gitalk
         gitalkContainer.innerHTML = ''
         let gitalk = new Gitalk({
             clientID: gitalkWithFooterOptions.gitalkConfig.clientID,

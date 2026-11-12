@@ -302,10 +302,8 @@ function plugin(hook, vm) {
             })
         }
 
-        // fix auto2top
         document.scrollingElement.scrollTop = 0
 
-        // fix autoHeader
         let path = vm.route.path
         // for default title '- ピカピカピ'
         if (!coverPath.includes(path)) {

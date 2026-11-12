@@ -10,8 +10,8 @@ function plugin(hook, vm) {
     const backgrounds = dynamicCoverOptions.backgrounds
 
     const numberOfImages = backgrounds.length
-    const fadeMultiplier = 3   // 淡入淡出 = 3 个基准单位
-    const intervalMultiplier = 8   // 轮播间隔 = 8 个基准单位
+    const fadeMultiplier = 3
+    const intervalMultiplier = 8
 
     function getDurationMs(varName, fallbackMs) {
         const raw = getComputedStyle(document.documentElement)
@@ -50,7 +50,6 @@ function plugin(hook, vm) {
         const mask = cover.getElementsByClassName('mask')[0]
         if (mask) mask.style.opacity = .6
 
-        // 预加载图片
         const coverBackgrounds = backgrounds.map(src => {
             const img = new Image()
             img.src = src

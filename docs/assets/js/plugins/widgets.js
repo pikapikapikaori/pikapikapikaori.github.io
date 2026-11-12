@@ -76,7 +76,6 @@ function plugin(hook, vm) {
         topScroller: '<?xml version="1.0" encoding="UTF-8"?><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
     }
 
-    // 黑暗模式切换、主题切换
     const THEME_SHEET_WAIT_MS = 3000
     const THEME_SHEET_POLL_MS = 16
 
@@ -99,18 +98,15 @@ function plugin(hook, vm) {
         groups: themeGroups
     }
 
-    // 主题切换
     let isthemePickerOpen = false
 
     // 页面主题色
     let iscolorPickerPopupOpen = false
 
-    // 字号切换
     let isfontPickerOpen = false
     const fontSizeLevels = [14, 16, 18, 20, 22]
     let fontSizeLevelIndex = 1
 
-    // 进度条
     const doc = document.documentElement
     let ticking = false
 
@@ -187,7 +183,6 @@ function plugin(hook, vm) {
         popup.addEventListener('focusout', onFocusOut)
     }
 
-    // 黑暗模式切换、主题切换
     let resolveIsDark = function () {
         const mode = themeState.modes[themeState.modeIndex]
         if (mode === 'auto') {
@@ -575,7 +570,6 @@ function plugin(hook, vm) {
         })
     }
 
-    // 字号切换
     let syncFontPickerActiveBtn = function () {
         let btns = document.getElementsByClassName('font-picker-preset-size-btn-div')
         Array.from(btns).forEach(btn => {
@@ -588,7 +582,6 @@ function plugin(hook, vm) {
         syncFontPickerActiveBtn()
     }
 
-    // 进度条
     function render() {
         ticking = false
         const max = doc.scrollHeight - window.innerHeight
@@ -601,13 +594,11 @@ function plugin(hook, vm) {
         if (n) n.textContent = text
     }
 
-    // 回顶部
     let isScrollToTopVisible = function () {
         let offset = window.document.documentElement.scrollTop
         return offset >= widgetsOptions.topOffset
     }
 
-    // 黑暗模式切换
     let initSwitchMode = function () {
         switchSpan = createWidget('switch-mode-span')
 
@@ -645,7 +636,6 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(switchSpan)
     }
 
-    // 主题切换
     let initSwitchTheme = function () {
         themeSpan = createWidget('switch-theme-span')
         themeSpan.innerHTML = icons.themeSwitcher
@@ -767,7 +757,6 @@ function plugin(hook, vm) {
         )
     }
 
-    // 字号切换
     let initFontPicker = function () {
         fontPickerSpan = createWidget('font-picker-span')
         fontPickerSpan.innerHTML = icons.fontSize
@@ -828,7 +817,6 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(scrollToCommentSpan)
     }
 
-    // 樱花雨特效
     let initSakuraRain = function () {
         let sakura = new Sakura('body')
 
@@ -853,7 +841,6 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(showSakuraSpan)
     }
 
-    // Live2d 小人
     let initLive2d = function () {
         showLive2dSpan = createWidget('show-live2d-span')
         showLive2dSpan.innerHTML = icons.live2d
@@ -872,7 +859,6 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(showLive2dSpan)
     }
 
-    // 隐藏显示小组件
     let initShowWidgets = function () {
         showWidgetsSpan = createWidget('show-widgets-span')
         showWidgetsSpan.innerHTML = icons.showWidgets
@@ -907,7 +893,6 @@ function plugin(hook, vm) {
         widgetsContainer.appendChild(showWidgetsSpan)
     }
 
-    // 进度条
     let initProgress = function () {
         progressSpan = createWidget('progress-span')
         progressSpan.classList.add('read-progress')
@@ -935,7 +920,6 @@ function plugin(hook, vm) {
         render()
     }
 
-    // 回顶部
     let initScrollToTop = function () {
         scrollToTopSpan = createWidget('scroll-to-top-span')
         scrollToTopSpan.innerHTML = icons.topScroller

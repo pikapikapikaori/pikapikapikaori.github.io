@@ -301,7 +301,6 @@ function plugin(hook, vm) {
 
         document.body.appendChild(viewFullImageSpan)
 
-        // true for left button
         function collectImages() {
             return Array.from(document.getElementsByTagName('img')).filter(img => {
                 const shouldIgnore =

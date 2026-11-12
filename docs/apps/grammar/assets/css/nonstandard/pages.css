@@ -1,0 +1,9 @@
+@media (max-width: 1024px) {
+    .grammar-chapters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .grammar-toc__summary::-webkit-details-marker {
+        display: none;
+    }
+}

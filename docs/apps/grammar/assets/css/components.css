@@ -1,3 +1,5 @@
+@import url('./nonstandard/components.css');
+
 /* ---------- 按钮 ---------- */
 .btn {
     display: inline-flex;
@@ -360,7 +362,6 @@
 /* 去掉原生外观：不然 Safari 会忽略 border-radius、border；箭头自己画 */
 .select {
     appearance: none;
-    -webkit-appearance: none;
     text-align: start;
     padding-right: 32px;
     background-image: var(--img-chevron);
@@ -386,10 +387,6 @@
     overflow-y: hidden;
     scrollbar-width: none;
     cursor: text;
-}
-
-.input--editable::-webkit-scrollbar {
-    display: none;
 }
 
 .input--editable[contenteditable="false"] {
@@ -868,7 +865,6 @@ button.word-card__derivative {
 .grammar-table-wrap {
     max-width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 .grammar-table {
@@ -970,7 +966,6 @@ button.word-card__derivative {
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 
 .paradigm-block__title {
@@ -1379,7 +1374,6 @@ button.word-card__derivative {
     max-height: 70vh;
     overflow: auto;
     user-select: text;
-    -webkit-user-select: text;
     cursor: text;
 }
 

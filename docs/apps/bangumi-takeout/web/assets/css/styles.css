@@ -1,3 +1,5 @@
+@import url('./nonstandard/styles.css');
+
 :root {
     --bg: #f5f5f7;
     --fg: #1d1d1f;
@@ -362,10 +364,6 @@ button:disabled {
     list-style: none;
     padding: 4px 0;
     user-select: none;
-}
-
-.guide summary::-webkit-details-marker {
-    display: none;
 }
 
 .guide summary::before {

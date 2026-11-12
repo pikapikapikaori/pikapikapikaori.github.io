@@ -1,3 +1,5 @@
+@import url('./nonstandard/tokens.css');
+
 @font-face {
     font-family: 'SortsMillGoudy';
     src: url('../resources/fonts/SortsMillGoudy-Regular.woff2') format('woff2');
@@ -88,7 +90,6 @@ body {
     font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.85;
-    -webkit-font-smoothing: antialiased;
     transition: background .5s var(--ease), color .5s var(--ease);
     overflow-x: hidden;
 }

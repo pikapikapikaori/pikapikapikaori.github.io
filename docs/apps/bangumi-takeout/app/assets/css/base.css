@@ -1,3 +1,5 @@
+@import url('./nonstandard/base.css');
+
 [hidden] {
     display: none !important;
 }
@@ -17,7 +19,6 @@ body {
     font-family: var(--font-sans);
     font-size: var(--fs-base);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -412,13 +413,6 @@ button {
 .pager-input:focus {
     border-color: var(--color-primary);
     background: var(--color-surface);
-}
-
-/* 去掉 number 输入框的上下箭头 */
-.pager-input::-webkit-outer-spin-button,
-.pager-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 .pager-input[type="number"] {

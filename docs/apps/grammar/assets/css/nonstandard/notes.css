@@ -1,0 +1,3 @@
+.note-toolbar::-webkit-scrollbar {
+    display: none;
+}

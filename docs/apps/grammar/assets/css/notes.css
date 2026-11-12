@@ -1,3 +1,5 @@
+@import url('./nonstandard/notes.css');
+
 /* 笔记页：一行一块的文稿。正文、页头、工具条共用一条左边线。 */
 
 .notes-page {
@@ -36,10 +38,6 @@
     min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
-}
-
-.note-toolbar::-webkit-scrollbar {
-    display: none;
 }
 
 .note-tool {

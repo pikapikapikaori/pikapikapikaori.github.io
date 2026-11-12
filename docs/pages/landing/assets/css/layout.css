@@ -1,3 +1,5 @@
+@import url('./nonstandard/layout.css');
+
 .grain {
     position: fixed;
     inset: 0;
@@ -162,7 +164,6 @@ html[data-theme="dark"] .grain {
     list-style: none;
     background: color-mix(in srgb, var(--bg) 96%, transparent);
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 18px 40px -26px rgba(28, 26, 23, .5);

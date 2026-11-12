@@ -1,3 +1,5 @@
+@import url('./nonstandard/pages.css');
+
 /* ---------- Welcome ---------- */
 .welcome {
     min-height: 100dvh;
@@ -1250,10 +1252,6 @@
         scrollbar-width: none;
     }
 
-    .grammar-chapters::-webkit-scrollbar {
-        display: none;
-    }
-
     .grammar-chapters .grammar-nav__title {
         display: none;
     }
@@ -1294,10 +1292,6 @@
         color: var(--c-fg-muted);
         cursor: pointer;
         list-style: none;
-    }
-
-    .grammar-toc__summary::-webkit-details-marker {
-        display: none;
     }
 
     .grammar-toc__summary::after {

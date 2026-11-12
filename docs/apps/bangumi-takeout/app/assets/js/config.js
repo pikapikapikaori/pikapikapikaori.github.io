@@ -3,9 +3,21 @@
 // ============================================================
 
 // ---------- 数据源 ----------
-export const DEFAULT_DATA_URL = '../../../writings/_media/PersonalRecordsBackup/bgm-20260906.json.zip'
+// 子页面在 assets/html/ 下，比根页面深两层，相对地址需按当前页面深度选择
+export const inSubPage = location.pathname.includes('/assets/html/')
+export const DEFAULT_DATA_URL = (inSubPage ? '../../../../../' : '../../../')
+    + 'writings/_media/PersonalRecordsBackup/bgm-20260906.json.zip'
 export const CORS_PROXY = ''
-export const BANGUMI_EXPORT_URL = '../web/index.html'
+export const BANGUMI_EXPORT_URL = inSubPage
+    ? '../../../web/index.html'
+    : '../web/index.html'
+
+// ---------- 页面地址 ----------
+export const href = {
+    index: inSubPage ? '../../index.html' : './index.html',
+    about: inSubPage ? './about.html' : './assets/html/about.html',
+    detail: inSubPage ? './detail.html' : './assets/html/detail.html',
+}
 
 // ---------- 缓存 ----------
 export const DB_NAME = 'bgm-viewer'

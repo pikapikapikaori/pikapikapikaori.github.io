@@ -2,6 +2,7 @@ import { state } from '../app.js'
 import {
     CATEGORIES, 
     STATUS_LABELS, 
+    href,
 } from '../config.js'
 
 export function renderDetail() {
@@ -9,11 +10,11 @@ export function renderDetail() {
     if (!state.data) return
 
     const id = Number(new URLSearchParams(location.search).get('id'))
-    if (!id) { location.replace('./index.html'); return }
+    if (!id) { location.replace(href.index); return }
 
     const item = state.data.items.find(it => it.id === id)
     if (!item) {
-        main.innerHTML = '<div class="empty">未找到该条目。<a href="./index.html">返回总览</a></div>'
+        main.innerHTML = `<div class="empty">未找到该条目。<a href="${href.index}">返回总览</a></div>`
         return
     }
 
@@ -23,7 +24,7 @@ export function renderDetail() {
             : STATUS_LABELS[item.cat]?.[item.status] || item.status
 
     main.innerHTML = `
-        <a class="back-link" href="./index.html">← 返回总览</a>
+        <a class="back-link" href="${href.index}">← 返回总览</a>
         <div class="detail">
             <aside>
                 <div class="detail-cover">

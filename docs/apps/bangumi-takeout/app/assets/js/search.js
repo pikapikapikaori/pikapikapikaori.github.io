@@ -1,5 +1,6 @@
 import { state } from './app.js'
 import { matchQuery } from './model.js'
+import { href } from './config.js'
 
 let _inited = false
 
@@ -30,7 +31,7 @@ export function initSearch() {
         }
         panel.hidden = false
         panel.innerHTML = hits.map(it => `
-            <a class="search-hit" href="./detail.html?id=${it.id}">
+            <a class="search-hit" href="${href.detail}?id=${it.id}">
                 <img src="${it.images?.grid || it.images?.small || ''}" alt="">
                 <div class="search-hit-body">
                 <div class="search-hit-name">${escapeHtml(it.nameCn || it.name)}</div>

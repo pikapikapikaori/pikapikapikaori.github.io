@@ -5,6 +5,7 @@ import {
     THEME_LABELS, THEME_MODES, THEME_ICONS,
     CATEGORIES,
     CURRENT_USER_KEY,
+    href,
 } from './config.js'
 import { forceBootstrap, notifyDataChanged } from './bootstrap.js'
 import { initSearch } from './search.js'
@@ -15,12 +16,12 @@ function buildHeader() {
     const el = document.getElementById('site-header')
     el.innerHTML = `
         <div class="header-inner">
-            <a class="brand" href="./index.html">收藏</a>
+            <a class="brand" href="${href.index}">收藏</a>
             <nav class="main-nav">
                 ${CATEGORIES.map(c => `
-                <a href="./index.html#${c.key}" data-cat="${c.key}">${c.label}</a>
+                <a href="${href.index}#${c.key}" data-cat="${c.key}">${c.label}</a>
                 `).join('')}
-                <a href="./about.html">关于</a>
+                <a href="${href.about}">关于</a>
             </nav>
             <div class="header-search">
                 <input type="search" id="global-search" placeholder="搜索" autocomplete="off">
@@ -96,7 +97,7 @@ async function renderUserPanel() {
         state.data = null
         localStorage.removeItem(CURRENT_USER_KEY)
         forceBootstrap()
-        location.href = './index.html'
+        location.href = href.index
     })
 
     // 全局清缓存：清掉所有用户的全部缓存，然后回引导界面
@@ -106,7 +107,7 @@ async function renderUserPanel() {
         localStorage.removeItem(CURRENT_USER_KEY)
         state.data = null
         forceBootstrap()
-        location.href = './index.html'
+        location.href = href.index
     })
 }
 

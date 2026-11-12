@@ -1,0 +1,30 @@
+body,
+html {
+    -webkit-font-smoothing: antialiased;
+}
+
+.ch {
+    -webkit-animation: fadedown 1s cubic-bezier(.19, 1, .22, 1);
+}
+
+@-webkit-keyframes fadedown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.intro .container {
+    -webkit-animation: fadedown 3.5s cubic-bezier(.19, 1, .22, 1);
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        background: -webkit-linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .8));
+    }
+}

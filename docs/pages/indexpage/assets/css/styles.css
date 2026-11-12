@@ -1,23 +1,23 @@
 @font-face {
     font-family: 'MoonStarsKaiT';
-    src: url('./fonts/MoonStarsKaiT-Regular.woff2') format('woff2');
+    src: url('../resources/fonts/MoonStarsKaiT-Regular.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'MoonStarsKaiT';
-    src: url('./fonts/MoonStarsKaiT-Light.woff2') format('woff2');
+    src: url('../resources/fonts/MoonStarsKaiT-Light.woff2') format('woff2');
     font-weight: 300;
 }
 
 @font-face {
     font-family: 'MoonStarsKaiT';
-    src: url('./fonts/MoonStarsKaiT-Bold.woff2') format('woff2');
+    src: url('../resources/fonts/MoonStarsKaiT-Bold.woff2') format('woff2');
     font-weight: bold;
 }
 
 @font-face {
     font-family: 'KakuGyoStd';
-    src: url('./fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
+    src: url('../resources/fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
 }
 
 html{

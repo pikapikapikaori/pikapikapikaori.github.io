@@ -1,11 +1,13 @@
+@import url('./nonstandard/flaghome.css');
+
 @font-face {
     font-family: 'HYQuanTangShiJF';
-    src: url('./fonts/HYQuanTangShiJF.woff2') format('woff2');
+    src: url('../resources/fonts/HYQuanTangShiJF.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'KakuGyoStd';
-    src: url('./fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
+    src: url('../resources/fonts/A-OTF-KakuGyoStd-Light.woff2') format('woff2');
 }
 
 :root {
@@ -22,7 +24,6 @@
 body,
 html {
     font-family: "KakuGyoStd", cursive;
-    -webkit-font-smoothing: antialiased;
     color: var(--text-color);
     line-height: 1.5;
     min-width: 70%;
@@ -113,7 +114,6 @@ nav a:hover {
     width: 100%;
     padding: 80px 0;
     animation: fadedown 1s cubic-bezier(.19, 1, .22, 1);
-    -webkit-animation: fadedown 1s cubic-bezier(.19, 1, .22, 1);
 }
 
 .ch h2.chtitle {
@@ -148,18 +148,6 @@ nav a:hover {
     }
 }
 
-@-webkit-keyframes fadedown {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .container {
     position: relative;
     width: 70%;
@@ -176,7 +164,6 @@ nav a:hover {
 
 .intro .container {
     animation: fadedown 3.5s cubic-bezier(.19, 1, .22, 1);
-    -webkit-animation: fadedown 3.5s cubic-bezier(.19, 1, .22, 1);
 }
 
 .hello {
@@ -300,7 +287,6 @@ nav a:hover {
         transform-origin: 0 100%;
         white-space: nowrap;
         width: 90%;
-        background: -webkit-linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .8));
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .8));
     }
 

@@ -4,7 +4,7 @@ import {
     RATE_FILTER_OPTIONS, DEFAULT_RATE_FILTER, DEFAULT_TAG_FILTER,
     STATUS_LABELS, COMMON_STATUS_LABELS,
     PAGE_SIZE_OPTIONS, DEFAULT_PAGE_SIZE,
-    STATE_KEY,
+    STATE_KEY, href,
 } from '../config.js'
 import { sortItems, filterByRate, filterByTag, countByCategory } from '../model.js'
 
@@ -199,7 +199,7 @@ function renderGrid() {
         ${slice.map(it => {
             const cover = it.images?.common || it.images?.medium || it.images?.grid || ''
             return `
-                <a class="card" href="./detail.html?id=${it.id}">
+                <a class="card" href="${href.detail}?id=${it.id}">
                     <div class="card-cover">
                         ${cover ? `<img loading="lazy" src="${cover}" alt="">` : ''}
                     </div>

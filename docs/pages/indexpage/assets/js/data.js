@@ -1,5 +1,5 @@
 function fetchAndRender (name) {
-    fetch(name + '.json')
+    fetch('data/' + name + '.json')
         .then(response => response.json())
         .then(data => {
             const mysource = document.getElementById(name + '-template').innerHTML

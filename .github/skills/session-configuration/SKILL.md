@@ -7,12 +7,26 @@ description: Initializes the Orchestrator's Copilot session by parsing user-prov
 
 Use at the beginning of every new Orchestrator session and whenever the user changes configuration.
 
+## 0. Preset and configurable paths
+
+Read `.github/skills/session-configuration/presets/megacave-minimal.json` first. It is this template's configuration file, not a VS Code-native schema. The only supplied preset is `megacave-minimal`.
+
+The preset configures `communication.style`, `communication.punctuation`, `communication.spaces`, `skill_paths.template`, `skill_paths.external`, and `preset_skills.install_on_start` / `activate_after_install`.
+
+Both Skill roots are independently configurable via the preset file or explicit session instructions. Template Skills (`development-workflow`, `session-configuration`, `preset-skills`) belong in the template root; external Skills belong in the external root. Resolve paths from the workspace root. User instruction > explicit session config > selected preset. Check for missing directories and name conflicts. Do not claim an edit to the path config physically moves installed Skills. Because the bootstrap Skill must be found before session configuration is read, moving the template root requires relocating its files and updating agent references manually.
+
+When invoking the installer, pass `--external-root` / `--template-root` for session-only path overrides. When a custom external root is outside the VS Code auto-discovery locations, the files can be read explicitly but native Skill discovery may need additional host configuration.
+
 ## 1. Sources
 The user may provide configuration through natural language, a YAML-like block, a Skill explicitly designated as a configuration source, or referenced project files. Do not treat an arbitrary Skill as a configuration source unless the user identifies it or its purpose clearly establishes that role.
 
 ## 2. Categories
 
 ### Session-level
+- `preset`: currently `megacave-minimal` only.
+- `communication`: style and punctuation/spacing policy, configurable.
+- `skill_paths.template`: workspace-relative template Skill root.
+- `skill_paths.external`: workspace-relative external Skill root.
 - `document_root`: optional workflow-document directory.
 - `conventions`: project convention files/paths.
 - `main_required_skills`: additional Skills the main agent must apply.
@@ -57,8 +71,8 @@ Skill assignment does not create an agent and does not select a model.
 ## 5. Resolve and validate Skills
 For each Skill:
 1. Determine whether the user supplied a name, a direct `SKILL.md` path, or a configuration Skill.
-2. For a named custom/project Skill, first check `.github/skills/<name>/SKILL.md`, then fall back to `.agents/skills/<name>/SKILL.md`. For downloaded/third-party Skills, reverse that order. Check other Copilot locations only when both workspace locations are absent and the user authorizes using them.
-3. If both workspace locations contain the same Skill name, report the conflict and select the category-preferred path; do not overwrite. If the preferred directory exists but is incomplete, report it rather than silently bypass it. An explicitly supplied `SKILL.md` path takes precedence after validation.
+2. For a name, search the configured `skill_paths.template` and `skill_paths.external` roots first, then other available Copilot Skill locations.
+3. If multiple matches exist, report ambiguity and ask which to use.
 4. Read the actual `SKILL.md`; do not rely on the name/description alone.
 5. Check relevance to the assigned role.
 6. If a required Skill is missing/unreadable, do not claim it was loaded; stop the affected task and ask.
@@ -153,7 +167,7 @@ Omit unused roles and fields. The same information may be provided in natural la
 ## Caveman configuration and workspace-only Skills
 - Only discuss `caveman_cli` if explicitly requested. Options: `install-local` (project-local `@caveman-ai/cli@latest` development dependency) and `skills-only` (no CLI dependency). Never install CLI globally.
 - Do not run `caveman setup --install` automatically: it may write to the user directory and requires separate explicit approval.
-- New downloads of preset Skills `megacave`, `design-taste-frontend`, and `impeccable` go to `.agents/skills/` under the current workspace. Resolve with `.agents/skills/` first and `.github/skills/` fallback; never write user/global scope.
+- Preset Skills `megacave`, `design-taste-frontend`, and `impeccable` belong exclusively in `.agents/skills/` under the current workspace.
 - All specialist models, including UI/UX Agent and Documentation, are unset until explicitly assigned. Ask only when the role is needed.
 - All user-facing and inter-agent messages use `megacave`, subject to installed Skills and actual host behavior.
 

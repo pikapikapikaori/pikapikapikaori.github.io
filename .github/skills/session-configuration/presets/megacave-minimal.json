@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "preset": "megacave-minimal",
+  "presets": {
+    "megacave-minimal": {
+      "communication": {
+        "style": "megacave",
+        "punctuation": "minimal",
+        "spaces": "minimal",
+        "apply_to": "all"
+      },
+      "skill_paths": {
+        "template": ".github/skills",
+        "external": ".agents/skills"
+      },
+      "preset_skills": {
+        "install_on_start": true,
+        "activate_after_install": true,
+        "names": [
+          "megacave",
+          "design-taste-frontend",
+          "impeccable"
+        ]
+      }
+    }
+  }
+}

@@ -1,28 +1,22 @@
 ---
 name: preset-skills
 description: >-
-  Bootstrap and verify approved preset Skills in the current workspace at session startup.
+  Install approved external Skills at startup using the session-configured workspace paths and apply them after verification.
 ---
 
-# Preset Skills — startup bootstrap
+# Preset Skills
 
-At the START of every Orchestrator session, before normal task execution:
-1. Check `<workspace>/.agents/skills/` for each preset; if absent, fall back to `<workspace>/.github/skills/`. If both exist, prefer `.agents/skills/` and warn about the duplicate. An incomplete preferred directory is an error.
-2. Immediately install a preset Skill only if absent from both workspace locations using `node .github/skills/preset-skills/scripts/install-preset-skills.mjs --install` from the workspace root. The user has authorized this startup behavior in the workflow specification; obey any additional runtime approval prompts or execution policies. Never install to user/global scope.
-3. Preserve already installed directories; never overwrite incomplete or conflicting directories silently.
-4. Verify the resolved `SKILL.md` exists and is readable. Read the resolved `megacave/SKILL.md` immediately and apply it to ALL subsequent user-facing and inter-agent communication in this session. If the runtime supports a native slash invocation, invoke `/megacave` as well; a textual mention alone is not an actual slash command.
-5. Before UI/UX tasks, read `design-taste-frontend/SKILL.md`; `impeccable` is available for optional polishing and its scripts/references must remain intact.
-6. If download, validation, or activation fails, report the precise failure and do not claim the Skill is active.
+At session startup read `.github/skills/session-configuration/presets/megacave-minimal.json` and apply the chosen preset plus any explicit session overrides.
 
-Sources:
-- `megacave`: https://github.com/JuliusBrussee/caveman
-- `design-taste-frontend`: https://github.com/Leonxlnx/taste-skill
-- `impeccable`: https://github.com/pbakaus/impeccable
+- `skill_paths.template` locates the three template Skills; `skill_paths.external` locates downloaded third-party Skills. Both are user-configurable workspace-relative paths. Do not confuse the two.
+- The bootstrap default configuration is in `.github/skills/session-configuration/presets/megacave-minimal.json`; changing `skill_paths.template` requires moving the three existing Skill directories first, and updating references or native agent bindings as needed. A JSON edit alone does not relocate them.
+- Check `megacave`, `design-taste-frontend`, `impeccable` in the configured external path on every new session. Run `node <template_skill_root>/preset-skills/scripts/install-preset-skills.mjs --install` from workspace root, with `--config` if needed. Use `--external-root` and `--template-root` for session overrides (they override file values for the installer only). Never install user/global scope.
+- Check actual `SKILL.md` files after installation. Immediately read and apply `megacave` to all subsequent natural-language communication; if native `/megacave` invocation is available, use it too. A slash command typed as prose does not activate a native command. Freshly installed Skills may require VS Code reload or a new chat for native discovery.
+- Before UI work read `design-taste-frontend`; optionally use `impeccable` including its scripts and references. Keep complete directories.
+- If installation or activation fails, report it; do not claim success. Do not execute `caveman setup --install` or install `@caveman-ai/cli` automatically.
 
-The installer stages full Skill directories in an isolated temporary directory and copies newly installed Skills to `<workspace>/.agents/skills/`. Existing Skills in `.github/skills/` are accepted as fallback, not moved. No global installation, no symlinks, no `caveman setup --install`.
+Sources: https://github.com/JuliusBrussee/caveman , https://github.com/Leonxlnx/taste-skill , https://github.com/pbakaus/impeccable
 
-`@caveman-ai/cli` is separate from the response Skill and is NOT needed to apply `megacave`. Do not delay Skill startup for CLI configuration. The optional CLI package can be discussed only when specifically needed.
+## megacave-minimal communication
 
-## Megacave token-efficient punctuation policy
-
-For ALL natural-language communication (user-facing and between any agents), apply the installed `/megacave` response Skill and prefer concise classical Chinese. Minimize total tokens. Omit punctuation whenever meaning remains clear; retain punctuation where needed to prevent ambiguity. Do NOT add spaces or line breaks merely to replace omitted punctuation. Do not sacrifice meaning or precision to eliminate punctuation. Preserve exact syntax in code, commands, file paths, URLs, identifiers, JSON, YAML, regular expressions, logs, and other machine-readable content. This is a communication style rule, not a reason to alter code or structured handoff fields.
+All user-agent and agent-agent natural language uses `megacave` concise classical Chinese. Avoid punctuation and spaces where meaning remains clear. Do not insert line breaks as substitutes. Keep essential punctuation for disambiguation. Never change syntax in code, commands, paths, identifiers, URLs, YAML, JSON, logs, or machine-readable handoffs. Favor semantic clarity and low token use over mechanically deleting characters.

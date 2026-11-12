@@ -90,7 +90,7 @@ function applyCacheControl(headers, filePath) {
 function rewriteContent(filePath, text) {
     switch (filePath) {
         // ---- indexpage ----
-        case 'pages/indexpage/apps.json':
+        case 'pages/indexpage/data/apps.json':
             return text
                 .replaceAll('"../mondrian/index.html"', '"https://home.pikapikapi.com/?lang=zh-Hant"')
                 .replaceAll('"../../#/"', '"https://www.pikapikapi.com/#/"')
@@ -106,7 +106,7 @@ function rewriteContent(filePath, text) {
                 .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
 
         // ---- homepage ----
-        case 'pages/homepage/utils/i18n.js':
+        case 'pages/homepage/assets/js/i18n.js':
             return text
                 .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
                 .replaceAll("'../animepage/index.html?lang=", "'https://photo.pikapikapi.com/?lang=")
@@ -124,10 +124,10 @@ function rewriteContent(filePath, text) {
 
 // 需要做内容替换的文件清单
 const REWRITE_PATHS = new Set([
-    'pages/indexpage/apps.json',
+    'pages/indexpage/data/apps.json',
     'pages/animepage/index.html',
     'pages/animepage/assets/js/i18n.js',
-    'pages/homepage/utils/i18n.js',
+    'pages/homepage/assets/js/i18n.js',
     'pages/mondrian/assets/js/i18n.js',
 ])
 

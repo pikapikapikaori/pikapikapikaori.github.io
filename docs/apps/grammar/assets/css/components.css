@@ -101,18 +101,6 @@
     color: var(--c-fg-subtle);
 }
 
-.field__row {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-}
-
-.field__row > .input,
-.field__row > .select {
-    flex: 1;
-    min-width: 0;
-}
-
 .chip-group {
     display: flex;
     flex-wrap: wrap;

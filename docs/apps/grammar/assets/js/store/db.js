@@ -1,5 +1,3 @@
-/** IndexedDB 封装：库名 langnotebook，当前版本 1。 */
-
 export const DB_NAME = 'langnotebook'
 export const DB_VERSION = 1
 

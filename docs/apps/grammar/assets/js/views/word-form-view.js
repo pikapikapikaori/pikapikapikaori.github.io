@@ -3,11 +3,11 @@ import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'
 import { submitWord, editWord, fetchWord, queryWords } from '../services/word-service.js'
 import {
-    normalizeParadigm, normalizeStem, normalizeStems, sourceLabel
+    normalizeParadigm, normalizeStem, normalizeStems, sourceLabel, posLabel
 } from '../models/word.js'
 import {
     loadGrammar, loadGrammarMeta, loadParadigmProfile, loadScriptProfile, getParadigmTemplate, getDeriveSpec,
-    getFieldDefs, fieldDefsOfTemplate, collectInflectAnchors, hiddenGenderCells, termsOf, fillTerms,
+    getFieldDefs, collectInflectAnchors, hiddenGenderCells, termsOf, fillTerms,
     getDeriveParts, stemLabelOf
 } from '../services/grammar-service.js'
 import { createParadigmTable } from '../components/paradigm-table.js'
@@ -23,7 +23,7 @@ import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
 import {
-    EXTERNAL_BASE, EXTERNAL_SOURCES, POS_LIST
+    EXTERNAL_BASE, EXTERNAL_SOURCES
 } from '../config/config.js'
 import { posOptions } from '../utils/pos.js'
 import { NO_SPACE, EDGE_SPACE, watchSpaceFields } from '../utils/space-filter.js'
@@ -1873,7 +1873,6 @@ export default {
                 },
                 paradigm: normalizeParadigm(data.paradigm),
                 stems: collectStems(),
-                // 补充形式属于词条本身，不区分来源
                 inflections: cleanList(data.inflections, ['form']).map(({ source, ...rest }) => rest),
                 meanings: cleanList(data.meanings, ['text']),
                 collocations: cleanList(data.collocations, ['text']),
@@ -1982,9 +1981,3 @@ function cleanExampleMeaning(example) {
     }
     return { ...example, meaning: { text, source: example.meaning.source || 'manual' } }
 }
-
-function posLabel(pos) {
-    const hit = POS_LIST.find((p) => p.value === pos)
-    return hit ? hit.label : pos
-}
-

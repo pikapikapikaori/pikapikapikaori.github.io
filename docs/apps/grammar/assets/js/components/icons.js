@@ -59,8 +59,6 @@ export function settingsIcon() {
     )
 }
 
-/* ---------- 笔记工具条 ---------- */
-
 /** 工具条图标：15px、1.5px 描边，与按钮同一套线条重量 */
 function noteIcon(...children) {
     return svg('svg', {

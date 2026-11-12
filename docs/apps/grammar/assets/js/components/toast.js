@@ -1,6 +1,5 @@
 import { h, qs } from '../utils/dom.js'
 
-/** 轻提示 @param {string|Node} message @param {object} opts type（'info' | 'success' | 'danger'）/ duration（毫秒） */
 export function showToast(message, { type = 'info', duration = 2400 } = {}) {
     const root = qs('#toast-root')
     if (!root) return

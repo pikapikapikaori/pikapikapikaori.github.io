@@ -136,12 +136,3 @@ export function replace(container, ...children) {
     append(container, children)
     return container
 }
-
-export function delegate(root, selector, type, handler) {
-    const listener = (e) => {
-        const target = e.target.closest(selector)
-        if (target && root.contains(target)) handler.call(target, e, target)
-    }
-    root.addEventListener(type, listener)
-    return () => root.removeEventListener(type, listener)
-}

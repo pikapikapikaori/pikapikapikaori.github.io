@@ -77,7 +77,6 @@ export function openModal({
 
     if (closeOnBackdrop) backdrop.addEventListener('click', close)
 
-    // 关闭后把焦点还给打开前的元素
     const prevFocus = document.activeElement
 
     setTimeout(() => {

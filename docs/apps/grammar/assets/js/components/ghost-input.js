@@ -47,7 +47,6 @@ export function createGhostInput({
     const el = h('span', { class: showSpaceKey ? 'ghost-input ghost-input--space' : 'ghost-input' }, hint, input,
         showSpaceKey ? h('span', { class: 'ghost-input__key', 'aria-hidden': 'true' }, 'Space') : null)
 
-    /** 当前的推导值 */
     function ghostTarget() {
         return typeof getGhost === 'function' ? String(getGhost() || '') : ''
     }

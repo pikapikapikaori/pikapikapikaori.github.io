@@ -1,6 +1,6 @@
 import {
     STORE_WORDS,
-    put, get, remove, getAllByIndex, getOneByIndex, removeByIndex
+    put, get, remove, getAllByIndex, getOneByIndex
 } from './db.js'
 import { createWord, mergeWordContent, normalizeParadigm } from '../models/word.js'
 import { nowIso, nextReviewFrom, clampMastery } from '../utils/date.js'
@@ -86,10 +86,6 @@ export async function deleteWord(id) {
     await remove(STORE_WORDS, id)
 }
 
-export async function deleteAllInLanguage(userId, language) {
-    await removeByIndex(STORE_WORDS, 'userId_language', [userId, language])
-}
-
 export async function recordReview(id, { correct }) {
     const cur = await getWord(id)
     if (!cur) return null
@@ -107,11 +103,4 @@ export async function recordReview(id, { correct }) {
     }
     await put(STORE_WORDS, next)
     return next
-}
-
-export async function bulkImport(words) {
-    for (const w of words) {
-        await put(STORE_WORDS, w)
-    }
-    return words.length
 }

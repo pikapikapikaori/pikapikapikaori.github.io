@@ -337,8 +337,6 @@ export {
     fillTerms,
     fieldDefsOfTemplate,
     hiddenGenderCells,
-    genderOfColumn,
-    genderOfRow,
     collectInflectAnchors,
     stemLabelOf
 } from '../models/grammar.js'

@@ -74,7 +74,6 @@ function normalizeSourceList(list, kind) {
             continue
         }
         const entry = { ...item }
-        // 补充形式属于词条本身，不区分来源
         if (kind === 'inflections') delete entry.source
         else entry.source = entry.source || 'manual'
         if (typeof entry.text === 'string') entry.text = entry.text.trim()
@@ -171,7 +170,6 @@ export function mergeStems(existing, incoming) {
     return merged
 }
 
-/** 判断 paradigm 是否为空 */
 export function isParadigmEmpty(p) {
     if (!p || typeof p !== 'object') return true
     for (const table of Object.values(p)) {

@@ -51,7 +51,6 @@ export function annotateBreves(root, { selector = 'td, th' } = {}) {
     }
 }
 
-/** 只切根节点 class，不重排 DOM */
 export function setBreveVisible(on) {
     document.documentElement.classList.toggle('show-breve', !!on)
     notifyToggles()

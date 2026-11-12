@@ -1,6 +1,6 @@
 /** 笔记：一份用户 + 语言对应一条记录，行序即数组顺序。 */
 
-import { STORE_NOTES, get, put, getAllByIndex, removeByIndex } from './db.js'
+import { STORE_NOTES, get, put, getAllByIndex } from './db.js'
 import { nowIso } from '../utils/date.js'
 
 export function noteKey(userId, language) {
@@ -31,9 +31,4 @@ export async function saveNote(userId, language, lines) {
 export async function listNotes(userId) {
     if (!userId) return []
     return (await getAllByIndex(STORE_NOTES, 'userId', userId)) || []
-}
-
-export async function deleteNotes(userId) {
-    if (!userId) return 0
-    return removeByIndex(STORE_NOTES, 'userId', userId)
 }

@@ -453,11 +453,6 @@ function render() {
         : 'Ctrl+Shift+` / Esc 关闭'
 }
 
-function currentBase() {
-    if (!state.target) return ''
-    return splitTail(state.target.getValue().slice(0, state.target.getCaret())).base
-}
-
 function groupChars(group) {
     return (group.items || []).map((it) => it.c).filter(Boolean).join('')
 }

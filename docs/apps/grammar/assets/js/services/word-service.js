@@ -1,9 +1,9 @@
 /** 生词业务逻辑：列表、筛选、排序、分页、统计 */
 
 import {
-    listByLanguage, addOrMerge, updateWord, recordReview, getWord
+    listByLanguage, addOrMerge, updateWord, getWord
 } from '../store/word-store.js'
-import { posLabel, allSources } from '../models/word.js'
+import { allSources } from '../models/word.js'
 import { normalizeSearch } from '../utils/text-normalize.js'
 import { foldBreve } from '../utils/breve.js'
 import { getScriptProfile, loadGrammarMeta, loadParadigmProfile } from './grammar-service.js'
@@ -276,14 +276,11 @@ export async function editWord(id, patch) {
     return updateWord(id, normalized)
 }
 
-export async function submitReview(id, correct) {
-    return recordReview(id, { correct })
-}
-
 export async function fetchWord(id) {
     return getWord(id)
 }
 
+/** 聚合所有语言统计（用于语言列表页） */
 export async function languageStats(userId, language) {
     const all = await listByLanguage(userId, language)
     const total = all.length
@@ -305,6 +302,3 @@ export async function languageStats(userId, language) {
             : null
     }
 }
-
-/** 聚合所有语言统计（用于语言列表页） */
-export { posLabel }

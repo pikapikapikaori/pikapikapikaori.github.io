@@ -687,7 +687,6 @@ async function tryFillFromBgmData(items) {
     } else {
         log('本地 BGM 数据未命中任何条目', 'info')
     }
-    // 返回值语义改为"至少命中一条的条目数"意义不大，改为返回总数仅供调用者参考
     return subjectHit + epHit
 }
 

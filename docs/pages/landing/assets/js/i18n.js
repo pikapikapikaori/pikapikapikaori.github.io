@@ -220,7 +220,6 @@
         var md = document.querySelector('meta[name="description"]')
         if (md) md.setAttribute('content', d['meta.desc'])
 
-        /* URL 始终反映当前语言 */
         syncUrl(lang)
 
         syncPicker()
@@ -358,7 +357,4 @@
     I.set = apply
     I.get = function () { return current }
     I.onChange = function (fn) { listeners.push(fn) }
-
-    /* 暴露语言清单，方便外部（比如未来的 hreflang 生成）使用 */
-    I.languages = LANGUAGES
 })()

@@ -19,9 +19,10 @@
             langSampleLength: 400,
             /* 每次最多解析多少条 entry，再按语言过滤，再取前 postLimit 条 */
             scanLimit: 60,
-            /* 结尾阻尼：进度超过 followRampStart 后，follow 从 motion.follow
-               线性升到 followEnd，让 rail 在解除吸附前精确停在末尾，
-               避免「页面已经下滑、rail 仍在横移」 */
+            /** 结尾阻尼：进度超过 followRampStart 后，follow 从 motion.follow
+             *  线性升到 followEnd，让 rail 在解除吸附前精确停在末尾，
+             *  避免「页面已经下滑、rail 仍在横移」 
+             */
             followRampStart: 0.62,
             followEnd: 0.95
         },
@@ -60,41 +61,37 @@
 
         /* ---------------- 摄影照片 ---------------- */
         photos: {
-
-            /* ============ 中文 ============ */
             'zh-Hans': [
-                { src: '../../_media/Photograph/scenery-6.jpg', caption: '京都 / 2024',   g: '', ratio: '3/2' },
-                { src: '../../_media/Photograph/scenery-3.jpg', caption: '檐下 / 2024', g: '', ratio: '3/2'  },
-                { src: '../../_media/Photograph/scenery-5.jpg', caption: '樱 / 2024',   g: '', ratio: '3/2' },
-                { src: '../../_media/Photograph/figure-1.jpg', caption: '美希 / 2024', g: '', ratio: '3/2' },
-                { src: '../../_media/Photograph/figure-2.jpg', caption: '春香 / 2024', g: '', ratio: '3/2' },
-                { src: '../../_media/Photograph/figure-7.jpg', caption: '美希 / 2024', g: '', ratio: '3/2'  },
-                { src: '../../_media/Photograph/figure-9.jpg', caption: '美希 / 2024',   g: '', ratio: '3/2' },
-                { src: '../../_media/Photograph/figure-12.jpg', caption: '美希 / 2024',   g: '', ratio: '3/2' }
+                { src: '../../_media/Photograph/scenery-6.jpg', caption: '京都 / 2024', ratio: '3/2' },
+                { src: '../../_media/Photograph/scenery-3.jpg', caption: '檐下 / 2024', ratio: '3/2'  },
+                { src: '../../_media/Photograph/scenery-5.jpg', caption: '樱 / 2024', ratio: '3/2' },
+                { src: '../../_media/Photograph/figure-1.jpg', caption: '美希 / 2024', ratio: '3/2' },
+                { src: '../../_media/Photograph/figure-2.jpg', caption: '春香 / 2024', ratio: '3/2' },
+                { src: '../../_media/Photograph/figure-7.jpg', caption: '美希 / 2024', ratio: '3/2'  },
+                { src: '../../_media/Photograph/figure-9.jpg', caption: '美希 / 2024', ratio: '3/2' },
+                { src: '../../_media/Photograph/figure-12.jpg', caption: '美希 / 2024', ratio: '3/2' }
             ],
 
-            /* ============ 英语 ============ */
             'en': [
-                { src: '../../en-us/_media/Photograph/scenery-6.jpg', caption: 'Kyoto / 2024',   g: '', ratio: '3/2' },
-                { src: '../../en-us/_media/Photograph/scenery-3.jpg', caption: 'Under the Eaves / 2024', g: '', ratio: '3/2'  },
-                { src: '../../en-us/_media/Photograph/scenery-5.jpg', caption: 'Cherry Blossoms / 2024',   g: '', ratio: '3/2' },
-                { src: '../../en-us/_media/Photograph/figure-1.jpg', caption: 'Miki / 2024', g: '', ratio: '3/2' },
-                { src: '../../en-us/_media/Photograph/figure-2.jpg', caption: 'Haruka / 2024', g: '', ratio: '3/2' },
-                { src: '../../en-us/_media/Photograph/figure-7.jpg', caption: 'Miki / 2024', g: '', ratio: '3/2'  },
-                { src: '../../en-us/_media/Photograph/figure-9.jpg', caption: 'Miki / 2024',   g: '', ratio: '3/2' },
-                { src: '../../en-us/_media/Photograph/figure-12.jpg', caption: 'Miki / 2024',   g: '', ratio: '3/2' }
+                { src: '../../en-us/_media/Photograph/scenery-6.jpg', caption: 'Kyoto / 2024', ratio: '3/2' },
+                { src: '../../en-us/_media/Photograph/scenery-3.jpg', caption: 'Under the Eaves / 2024', ratio: '3/2'  },
+                { src: '../../en-us/_media/Photograph/scenery-5.jpg', caption: 'Cherry Blossoms / 2024', ratio: '3/2' },
+                { src: '../../en-us/_media/Photograph/figure-1.jpg', caption: 'Miki / 2024', ratio: '3/2' },
+                { src: '../../en-us/_media/Photograph/figure-2.jpg', caption: 'Haruka / 2024', ratio: '3/2' },
+                { src: '../../en-us/_media/Photograph/figure-7.jpg', caption: 'Miki / 2024', ratio: '3/2'  },
+                { src: '../../en-us/_media/Photograph/figure-9.jpg', caption: 'Miki / 2024', ratio: '3/2' },
+                { src: '../../en-us/_media/Photograph/figure-12.jpg', caption: 'Miki / 2024', ratio: '3/2' }
             ],
 
-            /* ============ 日语 ============ */
             'ja': [
-                { src: '../../jp/_media/Photograph/scenery-6.jpg', caption: '京都 / 2024',   g: '', ratio: '3/2' },
-                { src: '../../jp/_media/Photograph/scenery-3.jpg', caption: '軒下 / 2024', g: '', ratio: '3/2'  },
-                { src: '../../jp/_media/Photograph/scenery-5.jpg', caption: '桜 / 2024',   g: '', ratio: '3/2' },
-                { src: '../../jp/_media/Photograph/figure-1.jpg', caption: 'みき / 2024', g: '', ratio: '3/2' },
-                { src: '../../jp/_media/Photograph/figure-2.jpg', caption: '春香 / 2024', g: '', ratio: '3/2' },
-                { src: '../../jp/_media/Photograph/figure-7.jpg', caption: 'みき / 2024', g: '', ratio: '3/2'  },
-                { src: '../../jp/_media/Photograph/figure-9.jpg', caption: 'みき / 2024',   g: '', ratio: '3/2' },
-                { src: '../../jp/_media/Photograph/figure-12.jpg', caption: 'みき / 2024',   g: '', ratio: '3/2' }
+                { src: '../../jp/_media/Photograph/scenery-6.jpg', caption: '京都 / 2024', ratio: '3/2' },
+                { src: '../../jp/_media/Photograph/scenery-3.jpg', caption: '軒下 / 2024', ratio: '3/2'  },
+                { src: '../../jp/_media/Photograph/scenery-5.jpg', caption: '桜 / 2024', ratio: '3/2' },
+                { src: '../../jp/_media/Photograph/figure-1.jpg', caption: 'みき / 2024', ratio: '3/2' },
+                { src: '../../jp/_media/Photograph/figure-2.jpg', caption: '春香 / 2024', ratio: '3/2' },
+                { src: '../../jp/_media/Photograph/figure-7.jpg', caption: 'みき / 2024', ratio: '3/2'  },
+                { src: '../../jp/_media/Photograph/figure-9.jpg', caption: 'みき / 2024', ratio: '3/2' },
+                { src: '../../jp/_media/Photograph/figure-12.jpg', caption: 'みき / 2024', ratio: '3/2' }
             ]
         },
 
@@ -104,11 +101,8 @@
             rootMargin: '400px 0px'
         },
 
-        /* ---------------- 拉取失败 / 无对应语言文章时的兜底数据 ----------------
-           按语言分组。当前 UI 语言在组里找不到，会回退到 'zh-Hans' 组。 */
+        /* ---------------- 拉取失败 / 无对应语言文章时的默认数据 ---------------- */
         fallbackPosts: {
-
-            /* ============ 中文 ============ */
             'zh-Hans': [
                 {
                     title: '2020 年度印象最深刻动画',
@@ -154,7 +148,6 @@
                 }
             ],
 
-            /* ============ 英语 ============ */
             'en': [
                 {
                     title: 'Birthday E-card for GF',
@@ -165,7 +158,6 @@
                 }
             ],
 
-            /* ============ 日语 ============ */
             'ja': [
                 {
                     title: 'ノート：アルバム　令和 5 年 12 月 2 日',

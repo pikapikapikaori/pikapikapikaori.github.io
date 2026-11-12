@@ -30,7 +30,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 6px;
-    background: var(--g, linear-gradient(140deg, #c9b79c, #7a6a55));
+    background: linear-gradient(140deg, #c9b79c, #7a6a55);
     box-shadow: 0 26px 70px -34px rgba(28, 26, 23, .65);
     will-change: transform;
     transform-origin: center center;

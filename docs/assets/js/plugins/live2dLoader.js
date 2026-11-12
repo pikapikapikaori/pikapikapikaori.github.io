@@ -40,7 +40,6 @@ class Live2dLoader {
 
     isMobile() {
         var WIN = window
-        var LOC = WIN['location']
         var NA = WIN.navigator
         var UA = NA.userAgent.toLowerCase()
 

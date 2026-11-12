@@ -20,10 +20,3 @@ export function getTheme() {
     const saved = localStorage.getItem(THEME_STORAGE_KEY)
     return THEME_MODES.includes(saved) ? saved : 'auto'
 }
-
-export function initTheme() {
-    applyTheme(getTheme())
-    mq.addEventListener('change', () => {
-        if (getTheme() === 'auto') applyTheme('auto')
-    })
-}

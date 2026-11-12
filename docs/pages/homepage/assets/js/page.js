@@ -85,16 +85,6 @@ var x = centerX,
 function fireAnimate() {
     requestAnimFrame(fireAnimate), loop()
 }
-function changeStar() {
-    loop = function () {
-        drawfromCache(),
-        ++drawTimes > 150 &&
-            drawTimes % 8 == 0 &&
-            ((ctx.fillStyle = 'rgba(0,0,0,.04)'),
-            ctx.fillRect(-3 * longside, -3 * longside, 6 * longside, 6 * longside)),
-        rotateCanvas(random(1, 100))
-    }
-}
 function pickSlogan() {
     var list = window.App.i18n.list('hero.slogans')
 
@@ -104,11 +94,6 @@ function pickSlogan() {
 
     if (slogan) slogan.innerHTML = list[Math.floor(Math.random() * list.length)]
 }
-function random(t, a) {
-    var e = a - t,
-        n = Math.random()
-    return t + Math.round(n * e)
-}
 ctx.translate(x, y),
 fireAnimate(),
 window.App.i18n.onChange(pickSlogan),
@@ -116,8 +101,4 @@ window.App.i18n.onChange(pickSlogan),
     $(window).scrollTop() > 0.6 * $(window).height()
         ? $('.background').addClass('fixed')
         : $('.background').removeClass('fixed')
-}),
-$(function () {
-
-}
-)
+})

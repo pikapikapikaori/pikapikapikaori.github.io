@@ -167,7 +167,6 @@
         return readSaved() || guess()
     }
 
-    /* 先查当前语言词典，再查共用表 */
     function text(dict, key) {
         if (dict[key] != null) return dict[key]
 
@@ -271,11 +270,6 @@
         onChange: function (fn) { listeners.push(fn) },
         t: function (key) {
             return DICT[current] ? text(DICT[current], key) : undefined
-        },
-        list: function (key) {
-            var value = DICT[current] ? DICT[current][key] : null
-
-            return Array.isArray(value) ? value : null
         },
         init: function () {
             bindEntries()

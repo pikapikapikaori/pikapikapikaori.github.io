@@ -1,5 +1,3 @@
-var sindex = 0
-var cycle = false
 var sengine = 'https://www.google.com/search?q=' // Default search engine
 
 function getParameterByName(name) {
@@ -25,39 +23,12 @@ function start() {
 function handleKeyPress(e) {
     var key = e.keyCode || e.which
     var text = document.getElementById('keywords').value.replaceAll('+', '%2B')
-    var option = text.substr(1, text.indexOf(' ') - 1) || text.substr(1)
-    var subtext = text.substr(2 + option.length)
-    if (key == 13) { // Search functions
+    if (key == 13) {
         search(text)
     }
-    if (key == 9) { // Tab Completion Functions
-        e.preventDefault()
-        e.stopPropagation()
-        if (text[0] === ';') {
-            switch (option) {
-                case 't':
-                    var streamers = ['admiralbahroo', 'moonmoon_ow', 'witwix']
-                    if (!subtext || cycle) {
-                        cycle = true
-                        if (sindex > streamers.length - 1) sindex = 0
-                        document.getElementById('keywords').value = ';t ' + streamers[sindex++]
-                        return
-                    }
-                    for (var streamer of streamers) {
-                        if (subtext === streamer.substr(0, subtext.length)) {
-                            document.getElementById('keywords').value = ';t ' + streamer
-                            return
-                        }
-                    }
-                    break
-            }
-        }
-    }
-    if (key == 32) { // Space to go to search
+    if (key == 32) {
         document.getElementById('keywords').focus()
     }
-    sindex = 0
-    cycle = false
 }
 
 function search(text) {
@@ -65,9 +36,7 @@ function search(text) {
     var subtext = text.substr(2 + option.length)
     if (text[0] === '/') {
         if (text.indexOf(' ') > -1) {
-            // ============ 带搜索词 ============
             switch (option) {
-                // ---- 搜索引擎 ----
                 case 'sego':
                     window.location = 'https://www.google.com/search?q=' + subtext
                     break
@@ -80,7 +49,6 @@ function search(text) {
                 case 'sebd':
                     window.location = 'https://www.baidu.com/s?wd=' + subtext
                     break
-                // ---- 影视与剧集 ----
                 case 'tvim':
                     window.location = 'https://www.imdb.com/find?q=' + subtext
                     break
@@ -96,7 +64,6 @@ function search(text) {
                 case 'tvdb':
                     window.location = 'https://www.douban.com/search?q=' + subtext
                     break
-                // ---- 音乐 ----
                 case 'muam':
                     window.location = 'https://www.allmusic.com/search/all/' + subtext
                     break
@@ -109,7 +76,6 @@ function search(text) {
                 case 'musp':
                     window.location = 'https://open.spotify.com/search/results/' + subtext
                     break
-                // ---- 社区与视频 ----
                 case 'cord':
                     window.location = 'https://www.reddit.com/search?q=' + subtext
                     break
@@ -119,15 +85,12 @@ function search(text) {
                 case 'cobgm':
                     window.location = 'https://bgm.tv/subject_search/' + subtext + '?cat=all'
                     break
-                // ---- 开发 ----
                 case 'degh':
                     window.location = 'https://github.com/search?q=' + subtext + '&type=repositories'
                     break
             }
         } else {
-            // ============ 无搜索词，跳首页 ============
             switch (option) {
-                // ---- 搜索引擎 ----
                 case 'sego':
                     window.location = 'https://www.google.com'
                     break
@@ -140,7 +103,6 @@ function search(text) {
                 case 'sebd':
                     window.location = 'https://www.baidu.com'
                     break
-                // ---- 影视与剧集 ----
                 case 'tvim':
                     window.location = 'https://www.imdb.com'
                     break
@@ -156,7 +118,6 @@ function search(text) {
                 case 'tvdb':
                     window.location = 'https://www.douban.com'
                     break
-                // ---- 音乐 ----
                 case 'muam':
                     window.location = 'https://www.allmusic.com'
                     break
@@ -169,7 +130,6 @@ function search(text) {
                 case 'musp':
                     window.location = 'https://open.spotify.com'
                     break
-                // ---- 社区与视频 ----
                 case 'cord':
                     window.location = 'https://www.reddit.com'
                     break
@@ -179,7 +139,6 @@ function search(text) {
                 case 'cobgm':
                     window.location = 'https://bgm.tv'
                     break
-                // ---- 开发 ----
                 case 'degh':
                     window.location = 'https://github.com'
                     break
@@ -209,11 +168,6 @@ function validURL(str) {
 function containsProtocol(str) {
     var pattern = new RegExp('^(https?:\\/\\/){1}.*', 'i')
     return !!pattern.test(str)
-}
-
-String.prototype.replaceAll = function (search, replacement) {
-    var target = this
-    return target.split(search).join(replacement)
 }
 
 window.addEventListener('DOMContentLoaded', start)

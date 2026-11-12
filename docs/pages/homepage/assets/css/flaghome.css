@@ -101,10 +101,6 @@ nav a {
     vertical-align: middle;
 }
 
-nav a.time {
-    opacity: 1;
-}
-
 nav a.is-current,
 nav a:hover {
     opacity: 1;
@@ -207,11 +203,6 @@ nav a:hover {
     color: var(--border-color);
 }
 
-.links a {
-    color: var(--text-color);
-    text-decoration: none;
-}
-
 .footer {
     text-align: center;
 }
@@ -238,11 +229,6 @@ nav a:hover {
     opacity: .3;
 }
 
-.footer p.c {
-    margin-top: 20px;
-    letter-spacing: .1em;
-}
-
 .footer .icon a {
     padding: 5px 10px;
     text-decoration: none;
@@ -264,16 +250,6 @@ nav a:hover {
     .container {
         width: auto;
         margin: 0 5%;
-    }
-
-    div.el span {
-        display: block;
-        width: 60%;
-        left: 0;
-        top: 75px;
-        margin-left: 0;
-        margin: 0 auto;
-        margin-top: -40%;
     }
 
     nav {

@@ -149,7 +149,6 @@
         return readSaved() || guess()
     }
 
-    /* 先查当前语言词典，再查共用表 */
     function text(dict, key) {
         if (dict[key] != null) return dict[key]
 

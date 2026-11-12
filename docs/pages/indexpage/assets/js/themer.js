@@ -1,21 +1,18 @@
 const setValue = (property, value) => {
     if (value) {
         document.documentElement.style.setProperty(`--${property}`, value)
-
-        const input = document.querySelector(`#${property}`)
-        if (input) {
-            value = value.replace('px', '')
-            input.value = value
-        }
     }
 }
 
 const setValueFromLocalStorage = property => {
     let value = localStorage.getItem(property)
     if (!value) {
-        localStorage.setItem('color-background', '#F8F6F1')
-        localStorage.setItem('color-text-pri', '#4C432E')
-        localStorage.setItem('color-text-acc', '#AA9A73')
+        value = {
+            'color-background': '#F8F6F1',
+            'color-text-pri': '#4C432E',
+            'color-text-acc': '#AA9A73'
+        }[property]
+        localStorage.setItem(property, value)
     }
     setValue(property, value)
 }
@@ -88,14 +85,6 @@ for (let i = 0; i < dataThemeButtons.length; i++) {
                     'color-background': '#263238',
                     'color-text-pri': '#AABBC3',
                     'color-text-acc': '#aeea00'
-                })
-                return
-
-            case 'white':
-                setTheme({
-                    'color-background': '#ffffff',
-                    'color-text-pri': '#222222',
-                    'color-text-acc': '#dddddd'
                 })
                 return
 

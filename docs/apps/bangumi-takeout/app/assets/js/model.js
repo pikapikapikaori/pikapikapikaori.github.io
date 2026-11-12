@@ -1,5 +1,5 @@
 import {
-    STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE, STATUS_ORDER, STATUS_LABELS, COMMON_STATUS_LABELS,
+    STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE,
 } from './config.js'
 
 export function normalize(raw) {
@@ -36,12 +36,10 @@ function normalizeItem(e) {
     )
 
     return {
-        // 身份
         id: s.id,
         cat: CATEGORY_BY_SUBJECT_TYPE[s.type] || 'other',
         subjectType: s.type,
 
-        // 显示
         name: s.name || '',
         nameCn: s.name_cn || '',
         summary: sd.summary || s.short_summary || '',
@@ -60,7 +58,6 @@ function normalizeItem(e) {
         nsfw: !!sd.nsfw,
         infobox: sd.infobox || '',
 
-        // 我的收藏
         status: STATUS_BY_TYPE[e.type] || 'unknown',
         rate: typeof e.rate === 'number' ? e.rate : 0,
         volStatus: e.vol_status || 0,
@@ -69,7 +66,6 @@ function normalizeItem(e) {
         myTags: Array.isArray(e.tags) ? e.tags : [],
         updatedAt: e.updated_at || '',
 
-        // 剧集
         episodes: mainEps
             .slice()
             .sort((a, b) => (a.sort || 0) - (b.sort || 0))
@@ -136,11 +132,4 @@ export function countByCategory(items) {
         bucket.byStatus[it.status] = (bucket.byStatus[it.status] || 0) + 1
     }
     return out
-}
-
-export function statusesFor(cat) {
-    return STATUS_ORDER.map(k => ({
-        key: k,
-        label: STATUS_LABELS[cat]?.[k] || COMMON_STATUS_LABELS[k] || k,
-    }))
 }

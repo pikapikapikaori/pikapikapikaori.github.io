@@ -60,24 +60,20 @@
         </div>
     </div>
     <script>
-        if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-            module.exports = Lunar
-        }
         function Lunar(date) {
-            this.year = this.getDateData().year       //公历年份
-            this.month = this.getDateData().month     //公历月份
-            this.day = this.getDateData().day         //公历日期
-            this.ylYear = 0                           //农历年份
-            this.ylMonth = 0                          //农历月份
-            this.ylDay = 0                            //农历日期
+            this.year = this.getDateData().year
+            this.month = this.getDateData().month
+            this.day = this.getDateData().day
+            this.ylYear = 0
+            this.ylMonth = 0
+            this.ylDay = 0
             this._date = date ? date : null
             this._error = "无"
-            this._ylDate = 0                          //当前日期是农历年的第多少天
-            this._leap = 0                            //代表农历闰几月
-            this._leapDays = 0                        //代表农历闰月的天数
-            this._difmonth = 0                        //当前时间距离参考时间相差多少月
-            this._difDay = 0                          //当前时间距离参考时间相差多少天
-            this._leapMonth = false                   //当前农历月份是否为闰月
+            this._leap = 0
+            this._leapDays = 0
+            this._difmonth = 0
+            this._difDay = 0
+            this._leapMonth = false
 
             this.checkDate()                          //检查传入的日期是否正确，正确的话修改this中的年月日。不正确的话用当前日期计算
             this.init()                               //初始化
@@ -85,20 +81,16 @@
         //天干地支算法参数
         Lunar.prototype.D = 0.2422
 
-        //天干地支算法参数
         Lunar.prototype.C = [
             3.87, 18.73, 5.63, 20.646, 4.81, 20.1, 5.52, 21.04,
             5.678, 21.37, 7.108, 22.83, 7.5, 23.13, 7.646, 23.042,
             8.318, 23.438, 7.438, 22.36, 7.18, 21.94, 5.4055, 20.12
         ]
 
-        //天干数组
         Lunar.prototype.tianGan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
 
-        //年份相关地支数组
         Lunar.prototype.yearDiZhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
 
-        //月份相关地支数组
         Lunar.prototype.monthDiZhi = ["寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥", "子", "丑"]
 
         //1900年-2100年每年的农历月份信息。第一位表示闰月是大月（1）还是小月（0）。第二三四位转换成二进制表示每个月份是大月（1）还是小月（0）。最后一位表示闰月在第几月，为0表示没有闰月。
@@ -164,10 +156,9 @@
             let temp = 0
             let i = 1900
             for (i = 1900; i <= 2100 && offset > 0; i++) {
-                temp = this.getYearDays(i)//计算i年有多少天
+                temp = this.getYearDays(i)
                 offset -= temp
                 this._difmonth += 12
-                //判断该年否存在闰月
                 if (this.leapMonth(i) > 0) {
                     this._difmonth += 1
                 }
@@ -180,8 +171,6 @@
             if (this.leapMonth(i) > 0) {
                 this._difmonth -= 1
             }
-            this._ylDays = offset
-            //此时offset代表是农历该年的第多少天
             this.ylYear = i//农历哪一年
             //计算月份，依次减去1~12月份的天数，直到offset小于下个月的天数
             let curMonthDays = this.monthDays(this.ylYear, 1)
@@ -219,7 +208,6 @@
             for (let i = 0x8000; i >= 0x10; i >>= 1) {
                 sum += (this.dateInfo[year - 1900] & i) ? 1 : 0;
             }
-            // console.log(this.leapMonth())
             let result = sum + this.leapDays(year)
             return result
         }
@@ -247,12 +235,12 @@
         //获取阳历对应的阴历文本格式（例：二月初一）
         Lunar.prototype.getLunarTime = function () {
             let dateStr = ""
-            if (this._leapMonth) { //是闰月
+            if (this._leapMonth) {
                 dateStr += "闰"
             }
             tmp = ["初", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "廿"]
             if (this.ylMonth > 10) {
-                let m2 = parseInt(this.ylMonth - 10)//十位
+                let m2 = parseInt(this.ylMonth - 10)
                 if (m2 === 1) {
                     dateStr += "冬月"
                 }
@@ -545,7 +533,7 @@
         calculatorOutputDay.innerHTML = currentLunar.getDayGanZhi()
         calculatorLunarOutput.innerHTML = '农历' + currentLunar.getLunarTime()
 
-        function calculate(e) {
+        function calculate() {
             let lunar = new Lunar(calculatorInput.value)
             calculatorOutputYear.innerHTML = lunar.getYearGanZhi()
             calculatorOutputMonth.innerHTML = lunar.getMonthGanZhi() + '月'

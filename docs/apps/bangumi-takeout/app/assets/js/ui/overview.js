@@ -225,12 +225,10 @@ function renderGrid() {
         container.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
 
-    // 原来的页码 / 上一页 / 下一页按钮
     pager.querySelectorAll('[data-page]').forEach(btn => {
         btn.addEventListener('click', () => goToPage(Number(btn.dataset.page)))
     })
 
-    // 新增：跳页输入框
     const jump = pager.querySelector('.pager-input')
     if (jump) {
         jump.addEventListener('keydown', e => {

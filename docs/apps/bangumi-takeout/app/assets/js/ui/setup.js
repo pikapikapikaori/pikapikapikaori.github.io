@@ -11,7 +11,6 @@ export async function renderSetup(container, onReady) {
         </div>
     `
 
-    // 1. 先查缓存，拿到所有已缓存用户
     let cachedUsers = []
     try {
         const all = await cache.listAll()
@@ -22,9 +21,7 @@ export async function renderSetup(container, onReady) {
     } catch (err) {
         console.error('[setup] 读取缓存失败：', err)
     }
-    console.log('[setup] 缓存中的账号数：', cachedUsers.length, cachedUsers)
 
-    // 2. 根据是否有缓存，一次性生成完整 HTML
     container.innerHTML = `
         <div class="setup-card">
             <div class="setup-brand">
@@ -84,7 +81,6 @@ export async function renderSetup(container, onReady) {
         </div>
     `
 
-    // 3. 填充缓存账号列表
     if (cachedUsers.length > 0) {
         const list = container.querySelector('#setup-cached-list')
         list.innerHTML = cachedUsers.map(v => `
@@ -111,10 +107,8 @@ export async function renderSetup(container, onReady) {
         })
     }
 
-    // 4. 渲染底部版权
     buildFooter('setup-site-footer')
 
-    // 5. 其余交互
     const statusEl = container.querySelector('#setup-status')
     const overlay = container.querySelector('#setup-overlay')
     const overlayText = container.querySelector('#setup-overlay-text')

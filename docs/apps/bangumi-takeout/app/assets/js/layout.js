@@ -11,7 +11,6 @@ import { forceBootstrap, notifyDataChanged } from './bootstrap.js'
 import { initSearch } from './search.js'
 import { buildFooter } from './footer.js'
 
-// ---------- Header ----------
 function buildHeader() {
     const el = document.getElementById('site-header')
     el.innerHTML = `
@@ -153,7 +152,6 @@ function bindThemeButton() {
     })
 }
 
-// ---------- 入口 ----------
 export function renderLayout() {
     buildHeader()
     buildFooter()

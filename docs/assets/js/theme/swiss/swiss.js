@@ -1,9 +1,5 @@
 /**
- *   1. 把 h1 / 面包屑 / 版记 / 字数 拼成报头行
- *   2. 按 h2 切节，按块级媒体切段，每段正文自己是一个双栏块（不用 column-span）
- *   3. 栏数切换（1 / 2），存 localStorage
- *   4. 入场动效（IntersectionObserver）
- *   5. 进度条兼作回顶：插件的 #scroll-to-top-span 由 CSS 隐掉，箭头画进进度条
+ *   进度条兼作回顶：插件的 #scroll-to-top-span 由 CSS 隐掉，箭头画进进度条
  *
  *   结构性改动都发生在 renderTheme 内，会被 widgets 的 DOM journal 记录并回滚；
  *   异步加的类名一律挂在 html.sw-active 之下，切主题后自然失效。
@@ -37,8 +33,6 @@ const COLS_ICONS = {
     1: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="17" height="3"></rect><rect x="3.5" y="10.5" width="17" height="3"></rect><rect x="3.5" y="15" width="11" height="3"></rect></svg>',
     2: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="7" height="3"></rect><rect x="3.5" y="10.5" width="7" height="3"></rect><rect x="3.5" y="15" width="7" height="3"></rect><rect x="13.5" y="6" width="7" height="3"></rect><rect x="13.5" y="10.5" width="7" height="3"></rect><rect x="13.5" y="15" width="7" height="3"></rect></svg>'
 }
-
-/* ---------- 结构判定 ---------- */
 
 function isBlankText(node) {
     return node.nodeType === 3 && !node.textContent.trim()
@@ -105,8 +99,6 @@ function joinQuoteLines(el) {
     return clone.innerHTML.trim()
 }
 
-/* ---------- 拼装 ---------- */
-
 function plateFor(el) {
     const figure = makeEl(isImageParagraph(el) ? 'figure' : 'div', 'sw-plate')
     figure.appendChild(el)
@@ -138,8 +130,6 @@ function buildColsControl(root) {
 
     return wrap
 }
-
-/* ---------- 主流程 ---------- */
 
 function demoteSidebarTitle() {
     const el = document.querySelector('.sidebar > h1.app-name')
@@ -302,13 +292,13 @@ function setupMotion(root) {
     const targets = []
 
     const title = root.querySelector('.sw-mast > h1')
-    if (title) targets.push({ el: title, delay: 0 })
+    if (title) targets.push({ el: title })
 
     Array.prototype.forEach.call(root.querySelectorAll('.sw-sec'), function (section) {
         Array.prototype.forEach.call(section.children, function (el, index) {
             if (!el.matches('.sw-sec-head, .sw-run, .sw-plate')) return
             el.style.setProperty('--sw-delay', Math.min(index, 3) * 70 + 'ms')
-            targets.push({ el: el, delay: 0 })
+            targets.push({ el: el })
         })
     })
 

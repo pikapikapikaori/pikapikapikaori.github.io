@@ -120,5 +120,4 @@ export const THEME_ICONS = {
 }
 
 // ---------- 引导界面 ----------
-export const ACCEPT_FILE_TYPES = '.json,.zip,application/json,application/zip'
 export const MAX_FILE_SIZE = 200 * 1024 * 1024

@@ -329,16 +329,6 @@ table a{
     justify-content: space-between;
 }
 
-#modal-footer{
-    display:flex;
-    font-size:2em;
-    justify-content: flex-start;
-}
-
-#modal-footer a{
-    margin-right:0.25em;
-}
-
 .modal-close{
 	color: #000000;
 	font-size: 1.5em;

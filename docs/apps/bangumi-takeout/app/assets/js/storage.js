@@ -5,18 +5,14 @@ let _dbPromise = null
 function openDB() {
     if (_dbPromise) return _dbPromise
     _dbPromise = new Promise((resolve, reject) => {
-        console.log('[idb] opening', DB_NAME, 'v' + DB_VERSION)
         const req = indexedDB.open(DB_NAME, DB_VERSION)
         req.onupgradeneeded = () => {
-            console.log('[idb] onupgradeneeded')
             const db = req.result
             if (!db.objectStoreNames.contains(STORE_NAME)) {
                 db.createObjectStore(STORE_NAME)
-                console.log('[idb] created store', STORE_NAME)
             }
         }
         req.onsuccess = () => {
-            console.log('[idb] opened, stores =', [...req.result.objectStoreNames])
             resolve(req.result)
         }
         req.onerror = () => { console.error('[idb] open error', req.error); reject(req.error) }
@@ -35,7 +31,6 @@ function tx(mode, fn) {
             reject(e); return
         }
         t.oncomplete = () => {
-            console.log('[idb] tx complete', mode, '->', result && result.result)
             resolve(result && result.result)
         }
         t.onerror = () => { console.error('[idb] tx error', t.error); reject(t.error) }
@@ -46,16 +41,11 @@ function tx(mode, fn) {
 export const cache = {
     set(userId, payload) {
         const key = CACHE_KEY_PREFIX + userId
-        console.log('[idb] set', key, 'items=', payload?.items?.length)
         return tx('readwrite', s => s.put(payload, key))
     },
 
     get(userId) {
         return tx('readonly', s => s.get(CACHE_KEY_PREFIX + userId))
-    },
-
-    remove(userId) {
-        return tx('readwrite', s => s.delete(CACHE_KEY_PREFIX + userId))
     },
 
     listAll() {
@@ -67,7 +57,6 @@ export const cache = {
             t.oncomplete = () => {
                 const keys = keysReq.result || []
                 const vals = valsReq.result || []
-                console.log('[idb] listAll', keys.length, 'records')
                 resolve(keys.map((k, i) => ({ key: k, value: vals[i] })))
             }
             t.onerror = () => { console.error('[idb] listAll error', t.error); reject(t.error) }
@@ -83,7 +72,6 @@ export const cache = {
     },
 
     clearAll() {
-        console.log('[idb] clearAll')
         return tx('readwrite', s => s.clear())
     },
 }

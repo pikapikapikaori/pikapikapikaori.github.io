@@ -1,6 +1,12 @@
 import { bindShortcuts } from '../utils/shortcut.js'
 import { isEnabled } from '../utils/common.js'
 
+function isIgnoredImage(img) {
+    return img.classList.contains('ignore-view-full-image-img') ||
+        img.className.includes('emoji') ||
+        img.src.includes('avatars.githubusercontent')
+}
+
 function plugin(hook, vm) {
 
     let curImg = undefined
@@ -303,14 +309,7 @@ function plugin(hook, vm) {
         document.body.appendChild(viewFullImageSpan)
 
         function collectImages() {
-            return Array.from(document.getElementsByTagName('img')).filter(img => {
-                const shouldIgnore =
-                    img.classList.contains('ignore-view-full-image-img') ||
-                    img.className.includes('emoji') ||
-                    img.src.includes('avatars.githubusercontent')
-
-                return !shouldIgnore
-            })
+            return Array.from(document.getElementsByTagName('img')).filter(img => !isIgnoredImage(img))
         }
 
         function currentImageIndex(imgArray) {
@@ -401,14 +400,7 @@ function plugin(hook, vm) {
     })
 
     hook.doneEach(function () {
-        Array.from(document.getElementsByTagName('img')).filter(img => {
-            const shouldIgnore =
-                img.classList.contains('ignore-view-full-image-img') ||
-                img.className.includes('emoji') ||
-                img.src.includes('avatars.githubusercontent')
-
-            return !shouldIgnore
-        }).forEach((img, index, arr) => {
+        Array.from(document.getElementsByTagName('img')).filter(img => !isIgnoredImage(img)).forEach((img, index, arr) => {
             if (img.dataset.viewFullImageBound === '1') return
             img.dataset.viewFullImageBound = '1'
 

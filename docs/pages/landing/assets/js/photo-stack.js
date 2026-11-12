@@ -16,7 +16,7 @@
             : ''
         return '<figure class="photo-card" ' +
             'data-ratio="' + esc(ratio) + '" ' +
-            'style="--g:' + ph.g + ';z-index:' + i  + ';aspect-ratio:' + esc(ratio) + '">' +
+            'style="z-index:' + i + ';aspect-ratio:' + esc(ratio) + '">' +
             img +
             '<figcaption>' + esc(ph.caption) + '</figcaption>' +
             '</figure>'

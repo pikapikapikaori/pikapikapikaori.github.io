@@ -127,7 +127,6 @@
         return readSaved() || guess()
     }
 
-    /* 先查当前语言词典，再查共用表 */
     function text(dict, key) {
         if (dict[key] != null) return dict[key]
 
@@ -189,22 +188,6 @@
         var title = text(dict, 'meta.title')
 
         if (title) document.title = title
-
-        var description = text(dict, 'meta.description')
-
-        if (description) {
-            var metaDescription = document.querySelector('meta[name="description"]')
-
-            if (metaDescription) metaDescription.setAttribute('content', description)
-        }
-
-        var keywords = text(dict, 'meta.keywords')
-
-        if (keywords) {
-            var metaKeywords = document.querySelector('meta[name="keywords"]')
-
-            if (metaKeywords) metaKeywords.setAttribute('content', keywords)
-        }
 
         syncUrl(lang)
         syncEntries()

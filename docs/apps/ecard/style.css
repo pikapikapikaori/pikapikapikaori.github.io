@@ -92,13 +92,6 @@ body
     line-height: 1em;
 }
 
-.card .details .content span
-{
-    text-align: right;
-    font-weight: 700;
-    line-height: 1em;
-}
-
 .card .details .end
 {
     position: absolute;

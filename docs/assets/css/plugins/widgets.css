@@ -569,7 +569,7 @@
     --d-soft: #eca2a866;
 }
 
-/* 页面主题色：预设，兜底 */
+/* 页面主题色：预设 */
 .color-picker-preset-color-btn-div[data-hue="0"] {
     --widgets-hsl-h: 0deg;
 }

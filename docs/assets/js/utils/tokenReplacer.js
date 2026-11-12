@@ -1,5 +1,4 @@
 /**
- * TokenReplacer
  * 模板替换工具：识别字符串里被 {} 包裹的内容，按 - 分隔后逐段替换。
  *
  * 字符规则：
@@ -15,17 +14,6 @@
  * - 否则：
  *     只替换日期 token，其他原样保留
  * - 连续 -- 之间的空段忽略
- *
- * 用法示例：
- *   const replacer = new TokenReplacer({
- *     date: new Date('2000-11-11'),
- *     prefix: 'comment_footer',
- *     tokens: {
- *       aa: () => 'AA',
- *       bb: 'BB',
- *       cc: () => 'CC',
- *     },
- *   })
  */
 class TokenReplacer {
     /**
@@ -57,9 +45,6 @@ class TokenReplacer {
         }
     }
 
-    /**
-     * 注册内置日期 token：yyyy / mm / dd
-     */
     registerBuiltinDateTokens() {
         const date = this.date
         const pad = n => String(n).padStart(2, '0')
@@ -99,11 +84,6 @@ class TokenReplacer {
         return this
     }
 
-    /**
-     * 校验 token / prefix 名
-     * @param {string} name
-     * @param {string} type 'prefix' | 'token'
-     */
     validateName(name, type) {
         if (typeof name !== 'string' || !/^[a-zA-Z0-9_]+$/.test(name)) {
             throw new Error(
@@ -113,33 +93,17 @@ class TokenReplacer {
         }
     }
 
-    /**
-     * 解析一个 token 对应的替换值
-     * @param {string} name
-     * @returns {string}
-     */
     resolve(name) {
         const value = this.tokens.get(name)
         return typeof value === 'function' ? String(value()) : String(value)
     }
 
-    /**
-     * 刷新日期 token 使用的日期
-     * 会重新注册 yyyy / mm / dd，使它们指向新的日期
-     * @param {Date} [date] 新的日期，默认 new Date()
-     * @returns {this}
-     */
     refreshDate(date = new Date()) {
         this.date = date instanceof Date ? date : new Date()
         this.registerBuiltinDateTokens()
         return this
     }
 
-    /**
-     * 替换入口
-     * @param {string} input
-     * @returns {string}
-     */
     replace(input) {
         if (typeof input !== 'string') return input
 
@@ -148,11 +112,6 @@ class TokenReplacer {
         })
     }
 
-    /**
-     * 处理 {} 里的表达式
-     * @param {string} expr
-     * @returns {string}
-     */
     processExpr(expr) {
         let rest = expr
         let allowedTokens
@@ -173,13 +132,6 @@ class TokenReplacer {
         return processed.join('-')
     }
 
-    /**
-     * 在单个段里替换 token
-     * 一次性匹配所有 token 并替换，避免替换结果被二次替换
-     * @param {string} segment
-     * @param {Set<string>} allowedTokens
-     * @returns {string}
-     */
     replaceInSegment(segment, allowedTokens) {
         const names = Array.from(allowedTokens).sort(
             (a, b) => b.length - a.length
@@ -200,5 +152,4 @@ class TokenReplacer {
     }
 }
 
-export default TokenReplacer
 export { TokenReplacer }

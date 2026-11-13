@@ -2,6 +2,48 @@
 
 [English](./Standard.md) | 简体中文
 
+> 本文档中的「支持性说明」与「项目结构」对根项目及所有子项目同样适用。
+
+## 支持性
+
+- 支持 **Chrome** 与 **Safari**。
+- 不支持「减少动效」（`prefers-reduced-motion`）相关设置。
+
+## 项目结构
+
+```text
+<项目>/
+├── index.html              主页面留在项目根
+├── sw.js
+├── manifest.json
+├── data/
+└── assets/
+    ├── css/
+    │   ├── nonstandard/    存放非标准属性 css 文件（webkit 相关 css 代码）；内部文件结构与 css/ 下目录结构一致，对应同名文件头 @import 本目录内的文件
+    │   └── ...
+    ├── js/
+    ├── html/               子页面
+    ├── sass/
+    ├── sources/            第三方库
+    ├── external/           针对外部库/资源的代码
+    │   ├── css/
+    │   │   └── nonstandard/
+    │   └── js/
+    ├── layout/             不同布局模版
+    │   └── <布局名称>/      布局文件夹
+    │       ├── css/
+    │       │   └── nonstandard/
+    │       ├── js/
+    │       └── html/
+    └── resources/          资源文件，共享
+        ├── fonts/
+        ├── img/
+        ├── live2d/
+        ├── icon/
+        ├── meta/           feed、sitemap 之类的东西，也可以放 manifest
+        └── logo/
+```
+
 ## 分支命名 & 提交信息
 
 - **新文章：**article/[title]-[yy|yymm|yymmdd] | atic:
@@ -50,7 +92,7 @@ bash script/blog.sh help
         "cover": "",
         "href": "",
         "baseUrl": ""
-    },
+    }
     ```
 
     其中 `editedTime`、`href` 与 `baseUrl` 为必填字段，后两者的路径基于 `index.html` 的路径（`docs`）。这些字段用于封面页的文章列表展示：

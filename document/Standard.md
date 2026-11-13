@@ -2,6 +2,48 @@
 
 English | [简体中文](./Standard_zh-cn.md)
 
+> The "Support" and "Project Structure" sections in this document apply equally to the root project and all sub-projects.
+
+## Support
+
+- Supports **Chrome** and **Safari**.
+- Does not support the "reduce motion" (`prefers-reduced-motion`) setting.
+
+## Project Structure
+
+```text
+<project>/
+├── index.html              Main page stays at the project root
+├── sw.js
+├── manifest.json
+├── data/
+└── assets/
+    ├── css/
+    │   ├── nonstandard/    Non-standard property CSS files (webkit-related CSS code); internal file structure matches that under css/, and the corresponding same-named file @imports the files in this directory at its head
+    │   └── ...
+    ├── js/
+    ├── html/               Sub-pages
+    ├── sass/
+    ├── sources/            Third-party libraries
+    ├── external/           Code for external libraries/resources
+    │   ├── css/
+    │   │   └── nonstandard/
+    │   └── js/
+    ├── layout/             Different layout templates
+    │   └── <layout name>/      Layout folder
+    │       ├── css/
+    │       │   └── nonstandard/
+    │       ├── js/
+    │       └── html/
+    └── resources/          Resource files, shared
+        ├── fonts/
+        ├── img/
+        ├── live2d/
+        ├── icon/
+        ├── meta/           Things like feed, sitemap; manifest can also go here
+        └── logo/
+```
+
 ## Branch Naming & Commit Message
 
 - **New article:** article/[title]-[yy|yymm|yymmdd] | atic:

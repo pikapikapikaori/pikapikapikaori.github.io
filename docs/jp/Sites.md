@@ -9,24 +9,10 @@
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/mondrian/index.html?lang=ja -->
-<!-- toc-card-img:./jp/_media/Sites/pikapikapi-mondrian.png -->
+<!-- toc-card-href:./pages/homepage/index.html?lang=ja -->
+<!-- toc-card-img:./jp/_media/Sites/pikapikapi-homepage.png -->
 <!-- toc-card-title:ホームページ -->
-<!-- toc-card-description:弐号個人ページ -->
-<!-- toc-card:end -->
-
-<!-- toc-card:start -->
-<!-- toc-card-href:./pages/landing/index.html?lang=ja -->
-<!-- toc-card-img:./jp/_media/Sites/pikapikapi-landing.png -->
-<!-- toc-card-title:ホームページ -->
-<!-- toc-card-description:参号個人ページ -->
-<!-- toc-card:end -->
-
-<!-- toc-card:start -->
-<!-- toc-card-href:./pages/animepage/index.html?lang=ja -->
-<!-- toc-card-img:./jp/_media/Sites/pikapikapi-photopage.png -->
-<!-- toc-card-title:写真ページ -->
-<!-- toc-card-description:写真ページ -->
+<!-- toc-card-description:個人ページ -->
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
@@ -48,13 +34,6 @@
 #### **アーカイブ**
 
 <!-- toc-card-wrap:start -->
-
-<!-- toc-card:start -->
-<!-- toc-card-href:./pages/homepage/index.html?lang=ja -->
-<!-- toc-card-img:./jp/_media/Sites/pikapikapi-homepage.png -->
-<!-- toc-card-title:ホームページ -->
-<!-- toc-card-description:壱号個人ページ -->
-<!-- toc-card:end -->
 
 <!-- toc-card:start -->
 <!-- toc-card-href:./pages/hexo/public/index.html -->

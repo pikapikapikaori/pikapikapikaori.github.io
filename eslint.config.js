@@ -43,7 +43,7 @@ const baseGlobals = {
     ...globals.es2021,
 };
 
-// docs/utils/** 里额外认识的
+// docs/assets/js/** 里额外认识的
 const jsGlobals = {
     Docsify: "readonly",
     Gitalk: "readonly",
@@ -55,19 +55,6 @@ const jsGlobals = {
 
 // docs/pages/** 里额外认识的
 const pagesGlobals = {
-    animepage: {
-        breakpoints: "readonly",
-        browser: "readonly",
-        $: "readonly",
-        jQuery: "readonly",
-    },
-    homepage: {
-        $: "readonly",
-        jQuery: "readonly",
-        cw: "readonly",
-        ch: "readonly",
-        requestAnimFrame: "readonly",
-    },
     indexpage: {
         Handlebars: "readonly",
         date: "readonly",
@@ -110,25 +97,6 @@ module.exports = defineConfig([
         ],
         languageOptions: {
             globals: jsGlobals,
-        },
-    },
-    {
-        files: [
-            "docs/pages/animepage/**/*.js"
-        ],
-        languageOptions: {
-            globals: pagesGlobals.animepage,
-        },
-        rules: {
-            "no-cond-assign": ["warn", "except-parens"],
-        },
-    },
-    {
-        files: [
-            "docs/pages/homepage/**/*.js"
-        ],
-        languageOptions: {
-            globals: pagesGlobals.homepage,
         },
     },
     {

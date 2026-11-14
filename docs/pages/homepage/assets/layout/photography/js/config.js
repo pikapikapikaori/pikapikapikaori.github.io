@@ -7,6 +7,9 @@
 export const baseUnit = 10
 export const maxHeightUnits = 5.625
 
+/* 窄屏每列最宽 6 个单位；间隔只补在单位之间，故 6 个单位含 5 个间隔。 */
+export const narrowUnitLimit = 6
+
 /* 开发者开关：静止图片叠加原 animepage 的做旧渐变；悬停、拖动与灯箱打开时不叠加。 */
 export const agedFilter = true
 
@@ -37,6 +40,42 @@ export const columns = [
             ],
             [
                 { id: 'figure-9', width: 3, height: 2.8125 },
+                { id: 'figure-12', width: 6, height: 2.8125, position: '50% 32%' }
+            ]
+        ]
+    }
+]
+
+/* 窄屏按照片顺序分三组，每组直接纵向排，不再按列高切列。 */
+export const narrowColumns = [
+    {
+        rows: [
+            [
+                { id: 'scenery-6', width: 6, height: 2.8125, position: '50% 48%' }
+            ],
+            [
+                { id: 'figure-1', width: 3, height: 2.8125 },
+                { id: 'scenery-3', width: 3, height: 2.8125 }
+            ]
+        ]
+    },
+    {
+        rows: [
+            [
+                { id: 'scenery-5', width: 6, height: 5 }
+            ]
+        ]
+    },
+    {
+        rows: [
+            [
+                { id: 'figure-2', width: 6, height: 2.8125 }
+            ],
+            [
+                { id: 'figure-7', width: 3, height: 2.8125 },
+                { id: 'figure-9', width: 3, height: 2.8125 }
+            ],
+            [
                 { id: 'figure-12', width: 6, height: 2.8125, position: '50% 32%' }
             ]
         ]

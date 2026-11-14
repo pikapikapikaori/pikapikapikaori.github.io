@@ -2,6 +2,8 @@ export default {
     mount(root) {
         const App = window.App
         const canvas = root.querySelector('.star-canvas')
+        const sky = root.querySelector('.star-sky')
+        const content = root.querySelector('.star-content')
         const slogan = root.querySelector('.star-slogan')
         const ctx = canvas ? canvas.getContext('2d') : null
 
@@ -13,6 +15,7 @@ export default {
         const MIN_GAP = 12
         const NEAR_RADIUS = 34
         const MAX_DPR = 2
+        const NARROW_MAX = 768
 
         /* 暗 C：星点为主，短弧贴高处圆心。亮 B：暖金、浅粉、淡蓝三束光带。
            两案共用弧角上限、角隙与覆盖上限的计算。 */
@@ -74,6 +77,7 @@ export default {
         let disposed = false
         let visible = !document.hidden
         let resizeTimer = 0
+        let scrollRaf = 0
         let sceneTheme = 'dark'
         let textSafe = null
 
@@ -145,13 +149,46 @@ export default {
             if (!rects.length) return null
 
             const pad = 10
+            const scrolled = window.scrollY + contentOffset()
 
             return {
                 left: Math.min.apply(null, rects.map(function (r) { return r.left })) - pad,
-                top: Math.min.apply(null, rects.map(function (r) { return r.top + window.scrollY })) - pad,
+                top: Math.min.apply(null, rects.map(function (r) { return r.top + scrolled })) - pad,
                 right: Math.max.apply(null, rects.map(function (r) { return r.right })) + pad,
-                bottom: Math.max.apply(null, rects.map(function (r) { return r.bottom + window.scrollY })) + pad
+                bottom: Math.max.apply(null, rects.map(function (r) { return r.bottom + scrolled })) + pad
             }
+        }
+
+        function isNarrow() {
+            return window.innerWidth <= NARROW_MAX
+        }
+
+        function contentOffset() {
+            return isNarrow() && content ? content.scrollTop : 0
+        }
+
+        function syncContentFocus() {
+            if (!content) return
+
+            if (isNarrow()) content.setAttribute('tabindex', '0')
+            else content.removeAttribute('tabindex')
+        }
+
+        /* 窄屏天空层固定在布局顶端，正文滚动时需要同步上移，
+           否则首屏画布会一直压在关于与页脚文字下方。 */
+        function applySkyScroll() {
+            scrollRaf = 0
+            if (disposed) return
+
+            const offset = contentOffset()
+            const transform = offset ? 'translate3d(0,' + (-offset) + 'px,0)' : ''
+
+            canvas.style.transform = transform
+            if (sky) sky.style.transform = transform
+        }
+
+        function onContentScroll() {
+            if (!scrollRaf) scrollRaf = requestAnimationFrame(applySkyScroll)
         }
 
         function inTextSafe(x, y) {
@@ -544,11 +581,20 @@ export default {
             angle = 0
             render(performance.now() / 1000)
 
+            if (scrollRaf) {
+                cancelAnimationFrame(scrollRaf)
+                scrollRaf = 0
+            }
+
+            syncContentFocus()
+            applySkyScroll()
             canvas.__starTrailMetrics = metrics
             syncMotion()
         }
 
         function onResize() {
+            syncContentFocus()
+            applySkyScroll()
             clearTimeout(resizeTimer)
             resizeTimer = setTimeout(rebuild, 150)
         }
@@ -580,6 +626,7 @@ export default {
         window.addEventListener('resize', onResize)
         window.addEventListener('orientationchange', onResize)
         document.addEventListener('visibilitychange', onVisibility)
+        if (content) content.addEventListener('scroll', onContentScroll, { passive: true })
 
         /* 调试钩子：当前旋转角（弧度），供外部采样方向与转速。 */
         Object.defineProperty(canvas, '__starTrailAngle', {
@@ -596,12 +643,21 @@ export default {
                 stop()
                 clearTimeout(resizeTimer)
                 resizeTimer = 0
+                if (scrollRaf) cancelAnimationFrame(scrollRaf)
+                scrollRaf = 0
 
                 unsubscribeTheme()
                 unsubscribeI18n()
                 window.removeEventListener('resize', onResize)
                 window.removeEventListener('orientationchange', onResize)
                 document.removeEventListener('visibilitychange', onVisibility)
+                if (content) {
+                    content.removeEventListener('scroll', onContentScroll)
+                    content.removeAttribute('tabindex')
+                }
+
+                canvas.style.transform = ''
+                if (sky) sky.style.transform = ''
 
                 cache.width = 0
                 cache.height = 0

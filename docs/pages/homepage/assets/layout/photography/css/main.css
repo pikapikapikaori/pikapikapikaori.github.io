@@ -41,7 +41,8 @@ html[data-layout="photography"][data-theme="dark"] {
 }
 
 html[data-layout="photography"] body {
-    overflow-x: hidden;
+    /* clip 不生成滚动容器，窄屏粘顶页头才不会被 body 的滚动盒截断。 */
+    overflow-x: clip;
     background: var(--pg-paper);
     color: var(--pg-ink);
     font-family: var(--app-font-body);
@@ -73,6 +74,10 @@ html[data-layout="photography"][data-theme="dark"] .photography-layout {
 html[data-layout="photography"] .pg-head {
     position: relative;
     z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: var(--pg-gap);
     padding: clamp(1.1rem, 2.8vw, 2.2rem) var(--pg-pad) clamp(.8rem, 1.7vw, 1.35rem);
     border-bottom: 1px solid var(--pg-line);
 }
@@ -186,24 +191,37 @@ html[data-layout="photography"] .pg-cell {
 
 html[data-layout="photography"] .pg-captions {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: baseline;
     width: 0;
     min-width: 100%;
     box-sizing: border-box;
-    gap: .16rem;
+    gap: .12rem .15rem;
+    /* 四行 caption、三处行距与上内边距之和，超出即裁切。 */
+    max-height: calc(5.4em + .91rem);
     padding: .55rem .12rem 0;
+    font-size: clamp(.62rem, .74vw, .73rem);
+    line-height: 1.35;
+    overflow: hidden;
 }
 
 html[data-layout="photography"] .pg-caption {
-    display: flex;
+    display: inline-flex;
     align-items: baseline;
     gap: .5rem;
+    max-width: 100%;
     min-width: 0;
     margin: 0;
     color: var(--pg-muted);
-    font-size: clamp(.62rem, .74vw, .73rem);
     letter-spacing: .14em;
-    line-height: 1.35;
+}
+
+html[data-layout="photography"] .pg-caption:not(:last-child)::after {
+    content: '·';
+    flex: 0 0 auto;
+    margin-left: .3em;
+    color: var(--pg-accent);
+    opacity: .55;
 }
 
 html[data-layout="photography"] .pg-caption::before {
@@ -266,6 +284,7 @@ html[data-layout="photography"] .pg-track.is-aged .pg-shot::after {
         rgba(255, 228, 180, .25));
     pointer-events: none;
     opacity: 1;
+    transition: opacity .35s var(--app-ease);
 }
 
 html[data-layout="photography"] .pg-track.is-aged .pg-shot:hover::after,
@@ -283,7 +302,7 @@ html[data-layout="photography"] .pg-foot {
     position: relative;
     z-index: 3;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     gap: .75rem clamp(1rem, 2.4vw, 1.8rem);
     /* 上边框占 1px，下内边距同步减 1px，图片舞台高度与加边框前一致。 */
@@ -342,12 +361,16 @@ html[data-layout="photography"] .pg-copyright {
     font-size: .64rem;
     letter-spacing: .1em;
     line-height: 1.5;
+    text-align: right;
     overflow-wrap: anywhere;
 }
 
 html[data-layout="photography"] .pg-controls {
-    flex: 0 0 auto;
-    margin-left: auto;
+    position: relative;
+    top: .4rem;
+    min-width: 0;
+    align-self: end;
+    justify-self: end;
 }
 
 /* 摄影布局只保留文字与图标，不画控件边框；内边距补回边框让出的可点面积。 */
@@ -364,8 +387,6 @@ html[data-layout="photography"] .pg-controls .app-control:not([data-kind="theme"
 }
 
 html[data-layout="photography"] .pg-controls .app-control-menu {
-    top: auto;
-    bottom: calc(100% + .4rem);
     --control-menu-radius: 4px;
 }
 
@@ -489,12 +510,26 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
     }
 
     html[data-layout="photography"] .pg-head {
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        column-gap: .6rem;
         padding-top: clamp(1rem, 4vw, 1.5rem);
         padding-bottom: .8rem;
+        background: var(--pg-paper);
+    }
+
+    html[data-layout="photography"] .pg-controls .app-controls {
+        gap: .22rem;
+    }
+
+    html[data-layout="photography"] .pg-controls .app-control:not([data-kind="theme"]) .app-control-trigger {
+        padding: 0 .42rem;
+        gap: .28rem;
     }
 
     html[data-layout="photography"] .pg-title {
-        font-size: clamp(1.85rem, 9vw, 2.6rem);
+        font-size: clamp(1.7rem, 7.4vw, 2rem);
     }
 
     html[data-layout="photography"] .pg-stage {
@@ -512,7 +547,6 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
         padding: 0 var(--pg-pad) .35rem;
         cursor: default;
         touch-action: pan-y;
-        overscroll-behavior-x: auto;
     }
 
     html[data-layout="photography"] .pg-track.is-dragging {
@@ -523,7 +557,7 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
         width: 100%;
         min-width: 0;
         max-width: calc(var(--pg-unit) * 6 + var(--pg-tile-gap) * 5);
-        margin: 0 auto;
+        margin: 0;
     }
 
     html[data-layout="photography"] .pg-col-media {
@@ -539,6 +573,12 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
     html[data-layout="photography"] .pg-captions {
         width: 100%;
         min-width: 0;
+        column-gap: .55rem;
+        text-align: left;
+    }
+
+    html[data-layout="photography"] .pg-caption:not(:last-child)::after {
+        content: none;
     }
 
     html[data-layout="photography"] .pg-foot {
@@ -549,7 +589,8 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
 
     html[data-layout="photography"] .pg-links {
         order: 1;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     html[data-layout="photography"] .pg-progress {
@@ -558,13 +599,11 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
 
     html[data-layout="photography"] .pg-copyright {
         order: 3;
-        text-align: left;
+        text-align: center;
     }
 
     html[data-layout="photography"] .pg-controls {
-        order: 2;
-        width: 100%;
-        margin-left: 0;
+        justify-self: end;
     }
 
     html[data-layout="photography"] .pg-controls .app-controls {

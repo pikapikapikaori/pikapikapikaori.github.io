@@ -374,14 +374,108 @@ html[lang="ja"] .star-slogan {
 }
 
 @media (max-width: 768px) {
-    .star-content {
-        width: auto;
-        margin: 0 5%;
+    /* 窄屏把整页收进一屏：工具条独占底部一行，正文在容器内滚动。 */
+    .star-layout {
+        --star-toolbar-h: 46px;
+        display: flex;
+        flex-direction: column;
+        height: 100svh;
+        min-height: 100svh;
+        overflow: hidden;
     }
 
-    /* 首屏至少一整屏，正文标题不跨到天空与纯色的交界处。 */
+    .star-content {
+        order: 1;
+        flex: 1 1 auto;
+        width: auto;
+        min-height: 0;
+        margin: 0 5%;
+        padding-bottom: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .star-content:focus-visible {
+        outline: 2px solid var(--star-ink);
+        outline-offset: -2px;
+    }
+
+    /* 三等分工具条只铺天空末段的纯色，不另设底色。 */
+    .star-controls {
+        position: static;
+        order: 2;
+        flex: 0 0 auto;
+        height: calc(var(--star-toolbar-h) + env(safe-area-inset-bottom));
+        padding: 0 0 env(safe-area-inset-bottom);
+        border: 0;
+        background-color: var(--star-sky-end);
+    }
+
+    .star-controls .app-controls {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        height: 100%;
+        gap: 0;
+    }
+
+    .star-controls .app-control {
+        position: static;
+        min-width: 0;
+        justify-content: center;
+    }
+
+    .star-controls .app-control-trigger {
+        width: 100%;
+        height: var(--star-toolbar-h);
+        padding: 0 .6rem;
+        border: 0;
+        border-radius: 0;
+        justify-content: center;
+        gap: .4rem;
+        font-size: .76rem;
+        letter-spacing: .08em;
+        opacity: 1;
+    }
+
+    .star-controls .app-control-label {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .star-controls .app-control-trigger::after {
+        flex: 0 0 auto;
+        width: .3rem;
+        height: .3rem;
+    }
+
+    .star-controls .app-control[data-kind="theme"] .app-control-trigger {
+        width: 100%;
+        height: var(--star-toolbar-h);
+        border-radius: 0;
+    }
+
+    /* 菜单以整条工具条为参照向上开，左右各留 12px；390 宽的视口仍完整可见。 */
+    .star-controls .app-control-menu {
+        top: auto;
+        right: 12px;
+        bottom: calc(var(--star-toolbar-h) + .5rem);
+        left: 12px;
+        width: auto;
+        min-width: 0;
+        max-height: calc(100svh - var(--star-toolbar-h) - env(safe-area-inset-bottom) - 1.5rem);
+        overflow-y: auto;
+        transform: translateY(4px);
+    }
+
+    .star-controls .app-control-menu.open {
+        transform: translateY(0);
+    }
+
+    /* 首屏高度扣掉工具条与安全区，标题不落到工具条后面。 */
     .star-hero {
-        min-height: 100svh;
+        min-height: calc(100svh - var(--star-toolbar-h) - env(safe-area-inset-bottom));
         padding: 7rem 0 10vh;
         text-align: center;
     }
@@ -409,9 +503,9 @@ html[lang="ja"] .star-slogan {
         font-size: .85rem;
     }
 
-    /* 右下控件固定贴底，版权文字上移避开。 */
+    /* 工具条已占独立一行，页脚只留视觉留白，不再额外避让控件。 */
     .star-footer {
-        padding-bottom: 2.75rem;
+        padding-bottom: 1.4rem;
     }
 
     .star-footer h3 {

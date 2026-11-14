@@ -1,7 +1,6 @@
-import { agedFilter, baseUnit, columns, maxHeightUnits } from './config.js'
-
-/* 窄屏每列最宽 6 个单位；间隔只补在单位之间，故 6 个单位含 5 个间隔。 */
-const NARROW_UNIT_LIMIT = 6
+import {
+    agedFilter, baseUnit, columns, maxHeightUnits, narrowColumns, narrowUnitLimit
+} from './config.js'
 
 function captionOf(App, id) {
     var table = App.photoCaptions && App.photoCaptions[App.i18n.get()]
@@ -178,8 +177,11 @@ function createColumn(App, rows, map) {
 function renderTrack(ctx) {
     var map = photoMap(ctx.App)
     var fragment = document.createDocumentFragment()
+    var groups = ctx.narrow
+        ? narrowColumns.map(function (column) { return column.rows })
+        : splitColumns()
 
-    splitColumns().forEach(function (rows) {
+    groups.forEach(function (rows) {
         var node = createColumn(ctx.App, rows, map)
         if (node) fragment.appendChild(node)
     })
@@ -244,9 +246,9 @@ export default {
 
         track.classList.toggle('is-aged', agedFilter)
 
-        const ctx = { App: App, track: track }
         const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
         const narrow = window.matchMedia('(max-width: 720px)')
+        const ctx = { App: App, track: track, narrow: narrow.matches }
 
         let momentumRaf = 0
         let dragging = false
@@ -306,8 +308,8 @@ export default {
                 var padded = parseFloat(narrowTrackStyle.paddingLeft) +
                     parseFloat(narrowTrackStyle.paddingRight)
                 var available = track.clientWidth - padded
-                var unit = (available - tileGap * (NARROW_UNIT_LIMIT - 1)) /
-                    NARROW_UNIT_LIMIT
+                var unit = (available - tileGap * (narrowUnitLimit - 1)) /
+                    narrowUnitLimit
 
                 if (isFinite(unit) && unit > 0) {
                     var fitted = Math.max(1, Math.min(basePx, unit))
@@ -320,31 +322,54 @@ export default {
                 return
             }
 
-            var stageStyle = getComputedStyle(stage)
-            var trackStyle = getComputedStyle(track)
-            var available = stage.clientHeight -
-                parseFloat(stageStyle.paddingTop) -
-                parseFloat(stageStyle.paddingBottom) -
-                parseFloat(trackStyle.paddingTop) -
-                parseFloat(trackStyle.paddingBottom)
+            function measureLimit(currentUnit) {
+                var stageStyle = getComputedStyle(stage)
+                var trackStyle = getComputedStyle(track)
+                var available = stage.clientHeight -
+                    parseFloat(stageStyle.paddingTop) -
+                    parseFloat(stageStyle.paddingBottom) -
+                    parseFloat(trackStyle.paddingTop) -
+                    parseFloat(trackStyle.paddingBottom)
+
+                /* 矮视口空间不足，把底部留白让给照片，避免说明被裁掉。 */
+                if (stage.clientHeight < 300) {
+                    available = stage.clientHeight -
+                        parseFloat(stageStyle.paddingTop) - 2
+                }
+
+                var next = basePx
+
+                track.querySelectorAll('.pg-col').forEach(function (column) {
+                    var media = column.querySelector('.pg-col-media')
+                    if (!media) return
+
+                    var rows = media.querySelectorAll('.pg-row')
+                    var rowGap = parseFloat(getComputedStyle(media).rowGap) || 0
+                    var gapTotal = rowGap * Math.max(0, rows.length - 1)
+                    var scal = media.offsetHeight - gapTotal
+                    var fixed = column.offsetHeight - media.offsetHeight + gapTotal
+
+                    if (scal > 0 && available > fixed) {
+                        next = Math.min(next,
+                            currentUnit * (available - fixed) / scal)
+                    }
+                })
+
+                return Math.max(1, Math.min(basePx, next))
+            }
+
             var limit = basePx
 
-            track.querySelectorAll('.pg-col').forEach(function (column) {
-                var media = column.querySelector('.pg-col-media')
-                if (!media) return
+            /* 缩小单位后 caption 可能换行并增高，需要按新宽度再量一次。 */
+            for (var pass = 0; pass < 4; pass += 1) {
+                track.style.setProperty('--pg-unit', limit + 'px')
+                fitCaptions()
 
-                var rows = media.querySelectorAll('.pg-row')
-                var rowGap = parseFloat(getComputedStyle(media).rowGap) || 0
-                var gapTotal = rowGap * Math.max(0, rows.length - 1)
-                var scal = media.offsetHeight - gapTotal
-                var fixed = column.offsetHeight - media.offsetHeight + gapTotal
+                var next = measureLimit(limit)
+                if (next >= limit - .05) break
+                limit = next
+            }
 
-                if (scal > 0 && available > fixed) {
-                    limit = Math.min(limit, basePx * (available - fixed) / scal)
-                }
-            })
-
-            limit = Math.max(1, Math.min(basePx, limit))
             track.style.setProperty('--pg-unit', limit + 'px')
             fitCaptions()
             updateProgress()
@@ -500,13 +525,16 @@ export default {
         function onTrackKey(event) {
             var step = Math.max(240, track.clientWidth * 0.8)
             var shot = event.target.closest('.pg-shot')
+            var opens = shot && (event.key === 'Enter' || event.key === ' ')
 
-            if (shot && !shot.hasAttribute('href') &&
-                (event.key === 'Enter' || event.key === ' ')) {
+            if (opens && (ctx.narrow || !shot.hasAttribute('href'))) {
                 event.preventDefault()
                 openLightbox(shot)
                 return
             }
+
+            /* 窄屏只有纵向滚动，方向键与 Home、End 交还页面。 */
+            if (ctx.narrow) return
 
             if (event.key === 'ArrowRight') {
                 event.preventDefault()
@@ -608,12 +636,43 @@ export default {
             dragPointer = null
         }
 
+        function resetDrag() {
+            if (captured && dragPointer != null && track.hasPointerCapture &&
+                track.hasPointerCapture(dragPointer)) {
+                track.releasePointerCapture(dragPointer)
+            }
+
+            dragging = false
+            captured = false
+            dragPointer = null
+            track.classList.remove('is-dragging')
+        }
+
         function rebuild() {
             var left = track.scrollLeft
 
             renderTrack(ctx)
             fitUnit()
             track.scrollLeft = left
+            updateProgress()
+            syncLabels()
+            syncOpenLightbox()
+        }
+
+        /* 跨过 720px 时行组与单位上限都要重算，不能只改样式。 */
+        function onNarrowChange() {
+            if (ctx.narrow === narrow.matches) return
+
+            cancelMomentum()
+            resetDrag()
+
+            if (fitRaf) cancelAnimationFrame(fitRaf)
+            fitRaf = 0
+
+            ctx.narrow = narrow.matches
+            track.scrollLeft = 0
+            renderTrack(ctx)
+            fitUnit()
             updateProgress()
             syncLabels()
             syncOpenLightbox()
@@ -638,6 +697,8 @@ export default {
         track.addEventListener('pointerup', onPointerUp)
         track.addEventListener('pointercancel', onPointerUp)
         stage.addEventListener('wheel', onWheel, { passive: false })
+        narrow.addEventListener('change', onNarrowChange)
+        window.addEventListener('resize', onNarrowChange)
         window.addEventListener('resize', scheduleProgress)
         window.addEventListener('resize', scheduleFit)
 
@@ -661,11 +722,9 @@ export default {
                 }
 
                 unsubscribeLang()
-
-                if (captured && dragPointer != null &&
-                    track.hasPointerCapture && track.hasPointerCapture(dragPointer)) {
-                    track.releasePointerCapture(dragPointer)
-                }
+                narrow.removeEventListener('change', onNarrowChange)
+                window.removeEventListener('resize', onNarrowChange)
+                resetDrag()
 
                 track.removeEventListener('click', onTrackClick)
                 track.removeEventListener('dragstart', onDragStart)

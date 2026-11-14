@@ -1,0 +1,574 @@
+html[data-layout="photography"] {
+    --pg-paper: #F3EFE6;
+    --pg-paper-soft: #E9E3D7;
+    --pg-ink: #1A1917;
+    --pg-muted: rgba(26, 25, 23, .62);
+    --pg-line: rgba(26, 25, 23, .16);
+    --pg-accent: #9A4A30;
+    --pg-shot-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .5),
+        0 1px 2px rgba(45, 38, 28, .16),
+        0 22px 48px -30px rgba(45, 38, 28, .5);
+    --pg-gap: clamp(1rem, 2vw, 2.1rem);
+    --pg-pad: clamp(1.1rem, 5vw, 5.5rem);
+    --pg-unit: 10rem;
+    --pg-tile-gap: clamp(3px, .42vw, 6px);
+    --page-bg: var(--pg-paper);
+    --control-ink: var(--pg-ink);
+    --control-paper: rgba(249, 246, 239, .96);
+    --control-line: rgba(26, 25, 23, .24);
+    --control-hover: rgba(26, 25, 23, .07);
+    color-scheme: light;
+}
+
+html[data-layout="photography"][data-theme="dark"] {
+    --pg-paper: #101113;
+    --pg-paper-soft: #191B1E;
+    --pg-ink: #EDE8DE;
+    --pg-muted: rgba(237, 232, 222, .6);
+    --pg-line: rgba(237, 232, 222, .16);
+    --pg-accent: #D98A68;
+    --pg-shot-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        0 1px 2px rgba(0, 0, 0, .5),
+        0 26px 54px -30px rgba(0, 0, 0, .9);
+    --page-bg: var(--pg-paper);
+    --control-ink: var(--pg-ink);
+    --control-paper: rgba(20, 22, 24, .96);
+    --control-line: rgba(237, 232, 222, .26);
+    --control-hover: rgba(237, 232, 222, .09);
+    color-scheme: dark;
+}
+
+html[data-layout="photography"] body {
+    overflow-x: hidden;
+    background: var(--pg-paper);
+    color: var(--pg-ink);
+    font-family: var(--app-font-body);
+    transition: background-color .45s var(--app-ease), color .45s var(--app-ease);
+}
+
+html[data-layout="photography"] .photography-layout {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: 100svh;
+    min-height: 100svh;
+    overflow: hidden;
+    background:
+        radial-gradient(116% 62% at 50% -6%, rgba(255, 255, 255, .68), transparent 68%),
+        linear-gradient(180deg, rgba(255, 255, 255, .16), transparent 34%),
+        var(--pg-paper);
+    color: var(--pg-ink);
+}
+
+html[data-layout="photography"][data-theme="dark"] .photography-layout {
+    background:
+        radial-gradient(116% 62% at 50% -6%, rgba(255, 255, 255, .055), transparent 68%),
+        linear-gradient(180deg, rgba(255, 255, 255, .02), transparent 34%),
+        var(--pg-paper);
+}
+
+html[data-layout="photography"] .pg-head {
+    position: relative;
+    z-index: 2;
+    padding: clamp(1.1rem, 2.8vw, 2.2rem) var(--pg-pad) clamp(.8rem, 1.7vw, 1.35rem);
+    border-bottom: 1px solid var(--pg-line);
+}
+
+html[data-layout="photography"] .pg-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .28rem;
+    min-width: 0;
+}
+
+html[data-layout="photography"] .pg-kicker {
+    margin: 0;
+    color: var(--pg-muted);
+    font-size: .66rem;
+    letter-spacing: .34em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+html[data-layout="photography"] .pg-title {
+    margin: 0;
+    font-size: clamp(1.9rem, 4.4vw, 3.9rem);
+    font-weight: 400;
+    letter-spacing: -.012em;
+    line-height: .96;
+}
+
+html[data-layout="photography"] .pg-intro {
+    max-width: 42ch;
+    margin: .14rem 0 0;
+    color: var(--pg-muted);
+    font-size: clamp(.8rem, 1.1vw, .96rem);
+    letter-spacing: .015em;
+    line-height: 1.5;
+}
+
+html[data-layout="photography"] .pg-stage {
+    position: relative;
+    z-index: 1;
+    min-height: 0;
+    padding: clamp(.8rem, 1.8vw, 1.5rem) 0 clamp(.5rem, 1vw, .9rem);
+    overflow: hidden;
+}
+
+html[data-layout="photography"] .pg-track {
+    counter-reset: pg-cell;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--pg-gap);
+    height: 100%;
+    margin: 0;
+    padding: 0 var(--pg-pad) .35rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: var(--pg-pad);
+    scrollbar-width: none;
+    cursor: grab;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+}
+
+html[data-layout="photography"] .pg-track::-webkit-scrollbar {
+    display: none;
+}
+
+html[data-layout="photography"] .pg-track.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+html[data-layout="photography"] .pg-track:focus-visible {
+    outline: 2px solid var(--pg-accent);
+    outline-offset: -2px;
+}
+
+html[data-layout="photography"] .pg-col {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    min-width: 0;
+    margin: 0;
+}
+
+html[data-layout="photography"] .pg-col-media {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    gap: var(--pg-tile-gap);
+}
+
+html[data-layout="photography"] .pg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--pg-tile-gap);
+}
+
+/* 槽位宽高按单位换算；N 个单位含 N−1 个间隔，行与列因此自然对齐。 */
+html[data-layout="photography"] .pg-cell {
+    flex: 0 0 auto;
+    width: calc(var(--pg-unit) * var(--pg-w) + var(--pg-tile-gap) * var(--pg-w) - var(--pg-tile-gap));
+    height: calc(var(--pg-unit) * var(--pg-h) + var(--pg-tile-gap) * var(--pg-h) - var(--pg-tile-gap));
+    margin: 0;
+    overflow: hidden;
+    background: var(--pg-paper-soft);
+    box-shadow: var(--pg-shot-shadow);
+}
+
+html[data-layout="photography"] .pg-captions {
+    display: flex;
+    flex-direction: column;
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+    gap: .16rem;
+    padding: .55rem .12rem 0;
+}
+
+html[data-layout="photography"] .pg-caption {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    min-width: 0;
+    margin: 0;
+    color: var(--pg-muted);
+    font-size: clamp(.62rem, .74vw, .73rem);
+    letter-spacing: .14em;
+    line-height: 1.35;
+}
+
+html[data-layout="photography"] .pg-caption::before {
+    counter-increment: pg-cell;
+    content: counter(pg-cell, decimal-leading-zero);
+    flex: 0 0 auto;
+    color: var(--pg-accent);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .08em;
+}
+
+/* 短说明保持单行原样；超过三行才分到三栏，每栏三行，第三栏之后裁切。 */
+html[data-layout="photography"] .pg-caption-text {
+    display: block;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+html[data-layout="photography"] .pg-caption-text.is-multicol {
+    columns: 3;
+    column-gap: .9rem;
+    column-fill: auto;
+    max-height: calc(1.35em * 3);
+    overflow: hidden;
+}
+
+html[data-layout="photography"] .pg-shot {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    background: var(--pg-paper-soft);
+}
+
+html[data-layout="photography"] .pg-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.001);
+    transition: transform .8s var(--app-ease), filter .5s var(--app-ease);
+}
+
+html[data-layout="photography"] .pg-shot:hover img {
+    transform: scale(1.035);
+}
+
+/* 原 animepage 的做旧效果是叠层，不是 CSS filter。此处沿用其 45deg 渐变与 25% 色值。 */
+html[data-layout="photography"] .pg-track.is-aged .pg-shot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: linear-gradient(45deg,
+        rgba(114, 97, 147, .25) 25%,
+        rgba(227, 123, 124, .25) 50%,
+        rgba(255, 228, 180, .25));
+    pointer-events: none;
+    opacity: 1;
+}
+
+html[data-layout="photography"] .pg-track.is-aged .pg-shot:hover::after,
+html[data-layout="photography"] .pg-track.is-aged.is-dragging .pg-shot::after,
+html[data-layout="photography"].pg-lightbox-open .pg-track.is-aged .pg-shot::after {
+    opacity: 0;
+}
+
+html[data-layout="photography"] .pg-shot:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--pg-accent);
+}
+
+html[data-layout="photography"] .pg-foot {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem clamp(1rem, 2.4vw, 1.8rem);
+    /* 上边框占 1px，下内边距同步减 1px，图片舞台高度与加边框前一致。 */
+    padding: clamp(.7rem, 1.4vw, 1rem) var(--pg-pad) calc(clamp(.8rem, 1.8vw, 1.3rem) - 1px);
+    border-top: 1px solid var(--pg-line);
+}
+
+html[data-layout="photography"] .pg-links {
+    flex: 0 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .2rem .95rem;
+}
+
+html[data-layout="photography"] .pg-links a {
+    color: var(--pg-ink);
+    font-size: .68rem;
+    letter-spacing: .14em;
+    line-height: 1.5;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+html[data-layout="photography"] .pg-links a:hover,
+html[data-layout="photography"] .pg-links a:focus-visible {
+    color: var(--pg-accent);
+    text-decoration: underline;
+    text-underline-offset: .24em;
+}
+
+html[data-layout="photography"] .pg-progress {
+    position: relative;
+    flex: 1 1 6rem;
+    min-width: 3rem;
+    height: 1px;
+    overflow: hidden;
+    background: var(--pg-line);
+}
+
+html[data-layout="photography"] .pg-progress-bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--pg-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .18s linear;
+}
+
+html[data-layout="photography"] .pg-copyright {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin: 0;
+    color: var(--pg-muted);
+    font-size: .64rem;
+    letter-spacing: .1em;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+html[data-layout="photography"] .pg-controls {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+/* 摄影布局只保留文字与图标，不画控件边框；内边距补回边框让出的可点面积。 */
+html[data-layout="photography"] .pg-controls .app-control-trigger {
+    border: 0;
+}
+
+html[data-layout="photography"] .pg-controls .app-control:not([data-kind="theme"]) .app-control-trigger {
+    height: 32px;
+    padding: 0 calc(.58rem + 1px);
+    border-radius: 2px;
+    font-size: .66rem;
+    letter-spacing: .09em;
+}
+
+html[data-layout="photography"] .pg-controls .app-control-menu {
+    top: auto;
+    bottom: calc(100% + .4rem);
+    --control-menu-radius: 4px;
+}
+
+html[data-layout="photography"] .pg-controls .app-control-option {
+    font-size: .68rem;
+    letter-spacing: .08em;
+}
+
+html[data-layout="photography"].pg-lightbox-open,
+html[data-layout="photography"].pg-lightbox-open body {
+    overflow: hidden;
+}
+
+html[data-layout="photography"] .pg-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 3vw, 2.4rem);
+    color: #F6F1E7;
+}
+
+html[data-layout="photography"] .pg-lightbox[hidden] {
+    display: none;
+}
+
+html[data-layout="photography"] .pg-lb-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(9, 10, 12, .93);
+    backdrop-filter: blur(9px);
+}
+
+html[data-layout="photography"] .pg-lb-frame {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .9rem;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+}
+
+html[data-layout="photography"] .pg-lb-img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(88vw, 1240px);
+    max-height: calc(100svh - 11rem);
+    object-fit: contain;
+    background: #08090A;
+    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .95);
+}
+
+html[data-layout="photography"] .pg-lb-caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .35rem 1.2rem;
+    width: min(88vw, 1240px);
+    color: rgba(246, 241, 231, .78);
+    font-size: clamp(.72rem, .85vw, .82rem);
+    letter-spacing: .14em;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+html[data-layout="photography"] .pg-lb-text {
+    min-width: 0;
+}
+
+html[data-layout="photography"] .pg-lb-source {
+    flex: 0 0 auto;
+    color: #F6F1E7;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .24em;
+}
+
+html[data-layout="photography"] .pg-lb-close {
+    position: fixed;
+    top: clamp(1rem, 2.4vw, 1.8rem);
+    right: clamp(1rem, 2.4vw, 1.8rem);
+    z-index: 2;
+    height: 34px;
+    padding: 0 .85rem;
+    border: 0;
+    border-radius: 2px;
+    background: transparent;
+    color: #F6F1E7;
+    box-shadow: none;
+    font: inherit;
+    font-size: .68rem;
+    letter-spacing: .16em;
+    cursor: pointer;
+    transition: background-color .2s var(--app-ease), box-shadow .2s var(--app-ease);
+}
+
+html[data-layout="photography"] .pg-lb-close:hover,
+html[data-layout="photography"] .pg-lb-close:focus-visible {
+    background: var(--control-hover);
+    box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 1);
+}
+
+html[data-layout="photography"] .pg-lb-close:focus-visible,
+html[data-layout="photography"] .pg-lb-source:focus-visible {
+    outline: 2px solid #F6F1E7;
+    outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+    /* 窄屏改为页面纵向滚动：一次看一列，列内按行换行，不再横向拖动。 */
+    html[data-layout="photography"] .photography-layout {
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
+    }
+
+    html[data-layout="photography"] .pg-head {
+        padding-top: clamp(1rem, 4vw, 1.5rem);
+        padding-bottom: .8rem;
+    }
+
+    html[data-layout="photography"] .pg-title {
+        font-size: clamp(1.85rem, 9vw, 2.6rem);
+    }
+
+    html[data-layout="photography"] .pg-stage {
+        width: 100%;
+        min-width: 0;
+        overflow: visible;
+    }
+
+    html[data-layout="photography"] .pg-track {
+        flex-direction: column;
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        overflow: visible;
+        padding: 0 var(--pg-pad) .35rem;
+        cursor: default;
+        touch-action: pan-y;
+        overscroll-behavior-x: auto;
+    }
+
+    html[data-layout="photography"] .pg-track.is-dragging {
+        cursor: default;
+    }
+
+    html[data-layout="photography"] .pg-col {
+        width: 100%;
+        min-width: 0;
+        max-width: calc(var(--pg-unit) * 6 + var(--pg-tile-gap) * 5);
+        margin: 0 auto;
+    }
+
+    html[data-layout="photography"] .pg-col-media {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    html[data-layout="photography"] .pg-row {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    html[data-layout="photography"] .pg-captions {
+        width: 100%;
+        min-width: 0;
+    }
+
+    html[data-layout="photography"] .pg-foot {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .55rem;
+    }
+
+    html[data-layout="photography"] .pg-links {
+        order: 1;
+        flex-wrap: nowrap;
+    }
+
+    html[data-layout="photography"] .pg-progress {
+        display: none;
+    }
+
+    html[data-layout="photography"] .pg-copyright {
+        order: 3;
+        text-align: left;
+    }
+
+    html[data-layout="photography"] .pg-controls {
+        order: 2;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    html[data-layout="photography"] .pg-controls .app-controls {
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+    }
+}

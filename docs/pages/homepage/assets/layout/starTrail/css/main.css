@@ -1,0 +1,420 @@
+html[data-layout="starTrail"] {
+    --star-sky-end: #151515;
+    /* 封面底部收口高度：与首屏正文下缘错开，只让背景元素淡出。 */
+    --star-fade: clamp(72px, 10svh, 160px);
+    --page-bg: var(--star-sky-end);
+    --control-ink: #ECE5D8;
+    --control-paper: rgba(15, 18, 26, .9);
+    --star-menu-bg: #0F121A;
+    --control-line: rgba(236, 229, 216, .28);
+    --control-hover: rgba(236, 229, 216, .09);
+    --star-ink: #FFFFFF;
+    --star-dim: rgba(255, 255, 255, .62);
+    --star-line: rgba(255, 255, 255, .3);
+}
+
+html[data-layout="starTrail"][data-theme="light"] {
+    --star-sky-end: #CFE3F7;
+    --page-bg: var(--star-sky-end);
+    --control-ink: #22303C;
+    --control-paper: rgba(255, 255, 255, .88);
+    --star-menu-bg: #FFFFFF;
+    --control-line: rgba(34, 48, 60, .24);
+    --control-hover: rgba(34, 48, 60, .07);
+    --star-ink: #22303C;
+    --star-dim: rgba(34, 48, 60, .66);
+    --star-line: rgba(34, 48, 60, .24);
+}
+
+/* 观测台本：右下裸字，非右上悬浮，与展签异其语言。 */
+.star-controls {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    padding: 0 5% 1.2rem;
+}
+
+.star-controls .app-control-trigger {
+    border: none;
+    background: transparent;
+    border-radius: 2px;
+    padding: .28rem .4rem;
+    font-size: .64rem;
+    letter-spacing: .2em;
+    opacity: .78;
+}
+
+.star-controls .app-control-trigger:hover,
+.star-controls .app-control-trigger[aria-expanded="true"] {
+    background: var(--control-hover);
+    opacity: 1;
+}
+
+/* 台本在页底，菜单向上开；深色为夜间玻璃，亮色为浅空玻璃。 */
+.star-controls .app-control-menu {
+    top: auto;
+    bottom: calc(100% + .45rem);
+    min-width: 11rem;
+    padding: .4rem;
+    border: 1px solid var(--control-line);
+    --control-menu-radius: 2px;
+    background: var(--star-menu-bg);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .16),
+        0 22px 48px -32px rgba(0, 0, 0, .78);
+    backdrop-filter: none;
+}
+
+.star-controls .app-control-option {
+    font-size: .7rem;
+    letter-spacing: .12em;
+}
+
+.star-controls .app-control-option[aria-selected="true"] {
+    color: var(--star-ink);
+}
+
+.star-controls .app-control-option[aria-selected="true"]::after {
+    border-color: currentColor;
+}
+
+.star-layout {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    font-family: var(--app-font-body);
+    background-color: var(--star-sky-end);
+    background-image:
+        radial-gradient(52% 36% at 56% 10%, rgba(30, 58, 110, .3) 0%, rgba(30, 58, 110, .08) 44%, transparent 66%),
+        linear-gradient(180deg,
+            #0B0E17 0%,
+            #10131D 54%,
+            var(--star-sky-end) calc(100% - var(--star-fade)),
+            var(--star-sky-end) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100svh;
+    color: var(--star-ink);
+    transition: color .6s var(--app-ease);
+}
+
+/* 亮色天空只铺满第一屏：star-layout 纵贯整页，渐变若按元素全高分布，
+   首屏只能看到最蓝之前的浅色段，看起来就不像天空。
+   末段纯色直接落到 --star-sky-end，与正文底色相接。 */
+html[data-layout="starTrail"][data-theme="light"] .star-layout {
+    background-color: var(--star-sky-end);
+    background-image:
+        linear-gradient(180deg,
+            rgba(207, 227, 247, 0) calc(100% - var(--star-fade)),
+            var(--star-sky-end) 100%),
+        linear-gradient(148deg, #F7E7C8 0%, #F0D6D8 38%, #CFDCEF 72%, #A9C4E3 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-size: 100% 100svh;
+}
+
+/* 画布只覆盖首屏，随页面滚走，正文落在纯色底色上。 */
+.star-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100svh;
+    pointer-events: none;
+    /* 四周与底部的淡出在画布内绘制，避免硬切。 */
+}
+
+/* 天空层只在首屏：与画布一起随页面滚走，滚动后不覆盖正文。 */
+.star-sky {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 100svh;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+    clip-path: inset(0 0 0 0);
+    /* 光带与天空元素共用画布的同一条收口曲线。 */
+    mask-image: linear-gradient(to bottom,
+        #000 calc(100% - var(--star-fade)),
+        transparent 100%);
+}
+
+/* 亮 B：暖金、浅粉、淡蓝三束斜向光带。边界靠矩形上下缘与横向渐变保持清楚，不做模糊。 */
+.star-band {
+    position: absolute;
+    left: -35%;
+    width: 170%;
+    transform: rotate(-21deg);
+    transform-origin: center;
+    display: none;
+}
+
+html[data-theme="light"] .star-band {
+    display: block;
+    animation: star-band-drift 28s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* 光带从左上向右下缓慢漂移，位移幅度接近一个光带宽度。 */
+@keyframes star-band-drift {
+    from {
+        transform: translate3d(-5vmax, -3vmax, 0) rotate(-21deg);
+    }
+
+    to {
+        transform: translate3d(7vmax, 4vmax, 0) rotate(-21deg);
+    }
+}
+
+html[data-theme="light"] .band-gold {
+    top: 2%;
+    height: 16vh;
+    opacity: .52;
+    animation-duration: 18s;
+    animation-delay: -3s;
+    background: linear-gradient(90deg,
+            rgba(240, 192, 112, 0) 0%,
+            rgba(246, 217, 160, .72) 42%,
+            rgba(240, 192, 112, 0) 100%);
+}
+
+html[data-theme="light"] .band-rose {
+    top: 27%;
+    height: 13vh;
+    opacity: .4;
+    animation-duration: 21s;
+    animation-delay: -6s;
+    background: linear-gradient(90deg,
+            rgba(233, 167, 180, 0) 0%,
+            rgba(243, 197, 206, .68) 46%,
+            rgba(233, 167, 180, 0) 100%);
+}
+
+html[data-theme="light"] .band-blue {
+    top: 50%;
+    height: 20vh;
+    opacity: .38;
+    animation-duration: 19s;
+    animation-delay: -5s;
+    background: linear-gradient(90deg,
+            rgba(156, 196, 232, 0) 0%,
+            rgba(196, 221, 243, .7) 44%,
+            rgba(156, 196, 232, 0) 100%);
+}
+
+.star-content {
+    position: relative;
+    z-index: 2;
+    width: 70%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 1.5rem;
+}
+
+.star-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100svh;
+    padding: 8rem 0 12vh;
+}
+
+.star-kicker {
+    margin: 0 0 1.4rem;
+    color: var(--star-dim);
+    font-family: var(--app-font-ui);
+    font-size: .7rem;
+    letter-spacing: .28em;
+}
+
+.star-slogan {
+    max-width: 100%;
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3.4vw, 2.7rem);
+    line-height: 1.65;
+    letter-spacing: .22em;
+}
+
+html[lang="ja"] .star-slogan {
+    letter-spacing: .1em;
+    line-height: 1.75;
+}
+
+.star-name {
+    margin: 1.1rem 0 0;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    line-height: 1.6;
+    letter-spacing: .18em;
+    color: var(--star-dim);
+}
+
+.star-tagline {
+    margin: .8rem 0 0;
+    color: var(--star-dim);
+    font-family: var(--app-font-ui);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    opacity: .8;
+}
+
+.star-about {
+    padding: 5rem 0 4rem;
+}
+
+.star-section-title {
+    margin: 0;
+    padding-bottom: 1.5rem;
+    color: var(--star-dim);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+    letter-spacing: .16em;
+}
+
+.star-section-title span {
+    color: var(--star-ink);
+}
+
+.star-section-title::after {
+    content: "";
+    display: block;
+    width: 10%;
+    height: 3px;
+    margin-top: 1.4rem;
+    background: var(--star-line);
+}
+
+.star-about-body {
+    font-size: .95rem;
+    line-height: 2;
+}
+
+.star-avatar {
+    float: right;
+    width: 140px;
+    margin: .4rem 1.4rem 1rem 2.4rem;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.star-about-body blockquote {
+    margin: 0 0 1.2rem;
+    padding-left: 1em;
+    border-left: 3px solid var(--star-line);
+    color: var(--star-dim);
+}
+
+.star-about-body blockquote p {
+    margin: 0;
+}
+
+.star-about-body blockquote cite {
+    display: block;
+    margin-top: .65em;
+    color: var(--star-ink);
+    font-size: .84rem;
+    font-style: normal;
+    letter-spacing: .16em;
+}
+
+.star-about-body blockquote cite::before {
+    content: "\2014 ";
+    color: var(--star-dim);
+}
+
+.star-about-body > p {
+    margin: .7rem 0 0;
+}
+
+.star-footer {
+    padding: 3.4rem 0 0;
+    text-align: center;
+}
+
+.star-footer h3 {
+    margin: 0 0 .7rem;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: .6em;
+}
+
+.star-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem 1.4rem;
+    font-family: var(--app-font-ui);
+    font-size: .75rem;
+    letter-spacing: .1em;
+}
+
+.star-links a {
+    padding: 5px 10px;
+    color: inherit;
+    text-decoration: none;
+    opacity: .66;
+    transition: opacity .25s var(--app-ease);
+}
+
+.star-links a:hover,
+.star-links a:focus-visible {
+    opacity: 1;
+}
+
+.star-copyright {
+    margin: 1.4rem 0 0;
+    color: var(--star-dim);
+    font-family: var(--app-font-ui);
+    font-size: .62rem;
+    letter-spacing: .08em;
+    opacity: .6;
+}
+
+@media (max-width: 768px) {
+    .star-content {
+        width: auto;
+        margin: 0 5%;
+    }
+
+    /* 首屏至少一整屏，正文标题不跨到天空与纯色的交界处。 */
+    .star-hero {
+        min-height: 100svh;
+        padding: 7rem 0 10vh;
+        text-align: center;
+    }
+
+    .star-slogan {
+        font-size: clamp(1.35rem, 6vw, 1.9rem);
+        letter-spacing: .14em;
+    }
+
+    .star-name {
+        font-size: .9rem;
+    }
+
+    .star-about {
+        padding-top: 3rem;
+    }
+
+    .star-avatar {
+        float: none;
+        width: 100px;
+        margin: 0 0 1.2rem;
+    }
+
+    .star-about-body {
+        font-size: .85rem;
+    }
+
+    /* 右下控件固定贴底，版权文字上移避开。 */
+    .star-footer {
+        padding-bottom: 2.75rem;
+    }
+
+    .star-footer h3 {
+        letter-spacing: .3em;
+    }
+}

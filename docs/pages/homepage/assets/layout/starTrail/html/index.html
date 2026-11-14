@@ -1,0 +1,45 @@
+<div class="star-layout">
+    <canvas class="star-canvas" aria-hidden="true"></canvas>
+    <div class="star-sky" aria-hidden="true">
+        <span class="star-band band-gold"></span>
+        <span class="star-band band-rose"></span>
+        <span class="star-band band-blue"></span>
+    </div>
+
+    <div class="star-controls" data-slot="controls"></div>
+
+    <main class="star-content">
+        <section class="star-hero">
+            <p class="star-kicker" data-i18n="common.kicker"></p>
+            <h1 class="star-slogan"></h1>
+            <h2 class="star-name" data-i18n-html="common.name"></h2>
+            <p class="star-tagline" data-i18n="common.tagline"></p>
+        </section>
+
+        <section class="star-about">
+            <h2 class="star-section-title"><span data-i18n-html="common.aboutTitle"></span></h2>
+            <div class="star-about-body">
+                <img class="star-avatar" data-logo
+                    data-i18n-attr="alt:common.avatarAlt">
+                <blockquote>
+                    <p data-i18n-html="common.quote.text"></p>
+                    <cite data-i18n="common.quote.title"></cite>
+                </blockquote>
+                <p data-i18n="common.about.p1"></p>
+                <p data-i18n="common.about.p2"></p>
+            </div>
+        </section>
+
+        <footer class="star-footer">
+            <h3 data-i18n="common.kicker"></h3>
+            <div class="star-links">
+                <a data-i18n="common.blog.label"
+                    data-i18n-attr-href="common.blog.href" target="_blank" rel="noopener"></a>
+                <a data-i18n="common.feed.label"
+                    data-i18n-attr-href="common.feed.href" target="_blank" rel="noopener"></a>
+                <a data-link="email" data-i18n="common.email.label"></a>
+            </div>
+            <p class="star-copyright" data-i18n-html="common.footer.copyright"></p>
+        </footer>
+    </main>
+</div>

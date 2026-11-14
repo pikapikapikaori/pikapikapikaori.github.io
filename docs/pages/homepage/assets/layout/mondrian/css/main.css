@@ -1,0 +1,782 @@
+html[data-layout="mondrian"] {
+    --page-bg: #F2EDE4;
+    --control-ink: #1A1A1A;
+    --control-paper: rgba(248, 245, 240, .96);
+    --control-line: rgba(26, 26, 26, .24);
+    --control-hover: rgba(26, 26, 26, .07);
+    /* 正文字体统一读公共变量，字体文件已并入公共 resources/fonts。 */
+    --m-serif: var(--app-font-body);
+    --m-wall-glow: rgba(255, 255, 255, .52);
+    --m-plate-bg: #FBF8F2;
+    --m-plate-ink: #24211C;
+    --m-plate-sub: rgba(36, 33, 28, .58);
+    --m-plate-border: rgba(38, 32, 25, .16);
+    --m-plate-rule: rgba(38, 32, 25, .14);
+    --m-plate-highlight: rgba(255, 255, 255, .9);
+    --m-plate-shadow:
+        0 8px 18px -8px rgba(35, 30, 24, .22),
+        0 22px 36px -24px rgba(35, 30, 24, .2);
+    --m-frame: #1A1A18;
+    --m-frame-inner: rgba(255, 255, 255, .16);
+    --m-frame-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .28),
+        0 -1px 0 rgba(255, 255, 255, .14),
+        0 10px 22px -10px rgba(30, 25, 18, .36),
+        0 34px 58px -34px rgba(30, 25, 18, .32);
+}
+
+html[data-layout="mondrian"][data-theme="dark"] {
+    --page-bg: #101214;
+    --control-ink: #ECE5D8;
+    --control-paper: rgba(22, 24, 26, .96);
+    --control-line: rgba(236, 229, 216, .28);
+    --control-hover: rgba(236, 229, 216, .09);
+    --m-wall-glow: rgba(255, 255, 255, .075);
+    --m-plate-bg: #1B1E21;
+    --m-plate-ink: #E9E5DC;
+    --m-plate-sub: rgba(233, 229, 220, .6);
+    --m-plate-border: rgba(255, 255, 255, .14);
+    --m-plate-rule: rgba(255, 255, 255, .12);
+    --m-plate-highlight: rgba(255, 255, 255, .12);
+    --m-plate-shadow:
+        inset 0 1px 0 var(--m-plate-highlight),
+        0 14px 30px -16px rgba(0, 0, 0, .9);
+    --m-frame: #2C3034;
+    --m-frame-inner: rgba(255, 255, 255, .09);
+    --m-frame-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .16),
+        0 -1px 0 rgba(255, 255, 255, .09),
+        0 12px 26px -12px rgba(0, 0, 0, .86),
+        0 38px 64px -36px rgba(0, 0, 0, .9);
+}
+
+.mondrian-layout {
+    --m-red: #C41E3A;
+    --m-blue: #1A3C8B;
+    --m-yellow: #F5C518;
+    --m-white: #F8F5F0;
+    --m-black: #1A1A1A;
+    --m-line: 4px;
+    --m-size: min(calc(100svh - 220px), 700px, 86vw);
+    --m-shadow-hover: 0 8px 24px rgba(0, 0, 0, .18);
+    --m-shadow-flip: 0 12px 32px rgba(0, 0, 0, .22);
+
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    min-height: 100svh;
+    padding: clamp(.75rem, 2.4vw, 1.25rem);
+    padding-bottom: 3.2rem;
+    overflow: hidden;
+    background: var(--page-bg);
+    color: var(--m-black);
+    font-family: var(--m-serif);
+    transition: background-color .45s var(--app-ease);
+}
+
+/* 墙面只留一道很淡的顶部光晕，不设纹理。 */
+.mondrian-layout::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse 72% 44% at 50% 0%, var(--m-wall-glow), transparent 70%);
+    pointer-events: none;
+}
+
+.mondrian-layout > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 展签左右两栏都取内容宽度，分割线与语言键之间只留 10px。 */
+.mondrian-plate {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+    column-gap: 10px;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: clamp(2.5rem, 4.5vh, 3.25rem);
+    min-height: 108px;
+    padding: 0 clamp(.8rem, 1.8vw, 1.4rem);
+    border: 1px solid var(--m-plate-border);
+    border-radius: 2px;
+    background: var(--m-plate-bg);
+    color: var(--m-plate-ink);
+    box-shadow:
+        inset 0 1px 0 var(--m-plate-highlight),
+        var(--m-plate-shadow);
+}
+
+.m-plate-left {
+    display: grid;
+    align-content: center;
+    gap: .15rem;
+    min-width: 0;
+    height: 100%;
+    padding-right: clamp(.7rem, 1.6vw, 1.2rem);
+    border-right: 1px solid var(--m-plate-rule);
+}
+
+/* 日文名带注音，行高留给 ruby，不裁切。 */
+.m-plate-name {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+
+.m-plate-tagline {
+    overflow: hidden;
+    color: var(--m-plate-sub);
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: .02em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.m-plate-controls {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 0;
+}
+
+/* 三键一行，不换行也不截断；宽度按内容自然增长。 */
+.m-plate-controls .app-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .35rem;
+    width: auto;
+}
+
+.m-plate-controls .app-control {
+    display: flex;
+    min-width: 0;
+}
+
+.m-plate-controls .app-control-trigger {
+    gap: .15rem;
+    width: auto;
+    min-width: 0;
+    height: 36px;
+    padding: 0 .55rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: .68rem;
+    letter-spacing: .02em;
+    text-transform: none;
+    opacity: .9;
+}
+
+.m-plate-controls .app-control-trigger::after {
+    width: .24rem;
+    height: .24rem;
+}
+
+.m-plate-controls .app-control-trigger:hover,
+.m-plate-controls .app-control-trigger[aria-expanded="true"] {
+    background: var(--control-hover);
+    border-color: transparent;
+    opacity: 1;
+}
+
+.m-plate-controls .app-control-label {
+    overflow: visible;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+/* 主题键与无边框触发器同一外观，只留悬停与焦点反馈。 */
+.m-plate-controls .app-control[data-kind="theme"] .app-control-trigger {
+    width: 36px;
+    border: 0;
+    border-radius: 50%;
+}
+
+/* 展签在画作下方，菜单向下展开；高度过紧凑，始终落在视口内。 */
+.m-plate-controls .app-control-menu {
+    top: calc(100% + .4rem);
+    right: 0;
+    bottom: auto;
+    min-width: 10.5rem;
+    padding: .22rem .3rem;
+    border: 1px solid var(--m-plate-border);
+    border-top: 3px solid var(--m-red);
+    --control-menu-radius: 2px;
+    background: var(--m-plate-bg);
+    box-shadow: var(--m-plate-shadow);
+    backdrop-filter: none;
+}
+
+.m-plate-controls .app-control-option {
+    justify-content: center;
+    min-height: 1.55rem;
+    padding: .2rem 1.35rem;
+    color: var(--m-plate-ink);
+    font-size: .68rem;
+    letter-spacing: .06em;
+}
+
+.m-plate-controls .app-control-option:hover {
+    background: var(--control-hover);
+}
+
+.m-plate-controls .app-control-option[aria-selected="true"] {
+    color: var(--m-red);
+}
+
+.m-plate-controls .app-control-option[aria-selected="true"]::after {
+    right: .45rem;
+    border-color: currentColor;
+}
+
+.mondrian-stage {
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.mondrian-frame {
+    position: relative;
+    width: var(--m-size);
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 6px;
+    border-radius: 2px;
+    background: var(--m-frame);
+    box-shadow: var(--m-frame-shadow);
+    animation: m-frame-in .8s cubic-bezier(.22, .61, .36, 1) both;
+}
+
+/* 6px 外框加 2px 内线。 */
+.mondrian-frame::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    z-index: 2;
+    border: 2px solid var(--m-frame-inner);
+    pointer-events: none;
+}
+
+@keyframes m-frame-in {
+    from {
+        opacity: 0;
+        transform: scale(.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* 排布由 main.js 在挂载时按本布局配置写入同名变量。 */
+.mondrian-grid {
+    --m-grid-columns: 10;
+    --m-grid-rows: 10;
+    --m-grid-areas:
+        "white-left white-left red red red red red red red red"
+        "white-left white-left red red red red red red red red"
+        "white-left white-left red red red red red red red red"
+        "white-left white-left red red red red red red red red"
+        "white-2 white-2 red red red red red red red red"
+        "white-2 white-2 red red red red red red red red"
+        "white-2 white-2 red red red red red red red red"
+        "white-2 white-2 red red red red red red red red"
+        "blue blue white-main white-main white-main white-main white-main white-main white-main white-small"
+        "blue blue white-main white-main white-main white-main white-main white-main white-main yellow";
+    display: grid;
+    grid-template-columns: repeat(var(--m-grid-columns), 1fr);
+    grid-template-rows: repeat(var(--m-grid-rows), 1fr);
+    grid-template-areas: var(--m-grid-areas);
+    gap: var(--m-line);
+    width: 100%;
+    height: 100%;
+}
+
+.area-red {
+    grid-area: red;
+}
+
+.m-cell.area-blue {
+    grid-area: blue;
+}
+
+.area-yellow {
+    grid-area: yellow;
+}
+
+.area-yellow .m-title {
+    font-size: clamp(.5rem, .9vw, .8rem);
+}
+
+.area-yellow .m-subtitle {
+    font-size: clamp(.35rem, .6vw, .6rem);
+}
+
+.area-white-left {
+    grid-area: white-left;
+}
+
+.area-white-2 {
+    grid-area: white-2;
+}
+
+.area-white-main {
+    grid-area: white-main;
+}
+
+.area-white-small {
+    grid-area: white-small;
+}
+
+.m-cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .22em;
+    min-width: 0;
+    min-height: 0;
+    padding: 6px;
+    overflow: hidden;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.m-red {
+    --m-cell-bg: var(--m-red);
+    --m-cell-ink: #fff;
+    background: var(--m-cell-bg);
+    color: var(--m-cell-ink);
+}
+
+.m-blue {
+    --m-cell-bg: var(--m-blue);
+    --m-cell-ink: #fff;
+    background: var(--m-cell-bg);
+    color: var(--m-cell-ink);
+}
+
+.m-yellow {
+    --m-cell-bg: var(--m-yellow);
+    --m-cell-ink: var(--m-black);
+    background: var(--m-cell-bg);
+    color: var(--m-cell-ink);
+}
+
+.m-white {
+    --m-cell-bg: var(--m-white);
+    --m-cell-ink: var(--m-black);
+    background: var(--m-cell-bg);
+    color: var(--m-cell-ink);
+}
+
+.m-title {
+    max-width: 100%;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: .06em;
+    word-break: break-word;
+}
+
+.m-subtitle {
+    max-width: 100%;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: .08em;
+    opacity: .8;
+    word-break: break-word;
+}
+
+.m-text {
+    max-width: 100%;
+    font-size: clamp(.42rem, 1.2vw, .72rem);
+    line-height: 1.55;
+    letter-spacing: .03em;
+    word-break: break-word;
+    opacity: .84;
+}
+
+.area-red .m-title {
+    font-size: clamp(1.2rem, 4.4vw, 3rem);
+}
+
+.area-blue .m-title,
+.area-white-2 .m-title,
+.area-white-main .m-title {
+    font-size: clamp(.9rem, 1.8vw, 1.2rem);
+}
+
+/* 左上格固定拉丁文展签：竖排拉丁字侧转不直立。 */
+.m-slogan-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    max-height: 100%;
+    font-size: clamp(.55rem, 1.15vw, .82rem);
+    line-height: 2;
+    letter-spacing: .22em;
+    opacity: .85;
+}
+
+/* 竖排拉丁字保持原书写方向，字符朝左。 */
+.area-white-left .m-slogan-text {
+    transform: none;
+}
+
+/* 红块正面标语横排，字号、字重、颜色与行高沿用原站名标题。 */
+.m-slogan-line {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    max-height: none;
+    color: var(--m-cell-ink);
+    font-size: clamp(1.2rem, 4.4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: .06em;
+    opacity: 1;
+}
+
+/* 底部长格引诗：原 area-white-main 内容原样迁入。 */
+.area-white-main .m-quote-text {
+    font-size: clamp(.42rem, .95vw, .66rem);
+    line-height: 1.7;
+    word-break: break-word;
+    opacity: .82;
+}
+
+.area-white-small .m-logo {
+    display: block;
+    width: 72%;
+    max-width: 72%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 50%;
+    pointer-events: none;
+    user-select: none;
+}
+
+.m-link {
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        filter .3s var(--app-ease),
+        transform .3s var(--app-ease),
+        box-shadow .45s var(--app-ease);
+}
+
+.m-link:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+    box-shadow: var(--m-shadow-hover);
+}
+
+.m-link:active {
+    transform: translateY(0) scale(.985);
+}
+
+.m-arrow {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: clamp(.5rem, 1vw, .7rem);
+    opacity: .45;
+    transition: opacity .3s var(--app-ease), transform .3s var(--app-ease);
+    pointer-events: none;
+}
+
+/* 原页 contact 格箭头为 →，其余外链格为 ↗，字符自 content 而来。 */
+.m-arrow::before {
+    content: "↗";
+}
+
+.m-arrow-same::before {
+    content: "→";
+}
+
+.m-link:hover .m-arrow {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
+.m-flip {
+    padding: 0;
+    background: transparent !important;
+    perspective: 900px;
+    cursor: pointer;
+    overflow: visible;
+    transition:
+        box-shadow .45s var(--app-ease),
+        transform .45s var(--app-ease);
+}
+
+.m-flip:hover {
+    box-shadow: var(--m-shadow-flip);
+    transform: translateY(-3px);
+}
+
+.m-flip.flipped {
+    box-shadow: var(--m-shadow-flip);
+    z-index: 3;
+}
+
+.m-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+}
+
+.m-flip.flipped .m-flip-inner,
+.m-flip:hover .m-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.m-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .22em;
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 2px;
+    backface-visibility: hidden;
+}
+
+/* 面片颜色继承所在格子的组合类，红蓝白黄都可翻转。 */
+.m-flip .m-front,
+.m-flip .m-back {
+    background: var(--m-cell-bg);
+    color: var(--m-cell-ink);
+}
+
+.m-flip .m-back {
+    transform: rotateY(180deg);
+}
+
+.m-back .m-title {
+    font-size: clamp(.8rem, 3.4vw, 2rem);
+    margin-bottom: .25em;
+}
+
+.m-back .m-text {
+    font-size: clamp(.4rem, 1.5vw, .92rem);
+    line-height: 1.55;
+}
+
+.m-hint {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    font-size: clamp(.45rem, .9vw, .62rem);
+    opacity: .4;
+    pointer-events: none;
+    transition: opacity .3s var(--app-ease);
+}
+
+.m-hint::before {
+    content: "↻";
+}
+
+.m-flip:hover .m-hint {
+    opacity: .8;
+}
+
+.m-hint-back {
+    top: 6px;
+    right: 8px;
+    bottom: auto;
+    transform: rotateY(180deg);
+}
+
+.m-cell:focus-visible,
+.m-link:focus-visible,
+.m-flip:focus-visible {
+    outline: 3px solid #FF6B6B;
+    outline-offset: 2px;
+    z-index: 10;
+}
+
+.mondrian-footer {
+    position: absolute;
+    right: 0;
+    bottom: 24px;
+    left: 0;
+    margin-top: 0;
+    padding-bottom: .2rem;
+    color: var(--control-ink);
+    font-family: var(--app-font-ui);
+    font-size: clamp(.52rem, 1.4vw, .68rem);
+    line-height: 1.5;
+    letter-spacing: .05em;
+    text-align: center;
+    opacity: .48;
+}
+
+@media (max-width: 720px) {
+    .mondrian-layout {
+        --m-size: 92vw;
+        --m-line: 3px;
+        padding: .55rem;
+        padding-bottom: 3.2rem;
+    }
+
+    /* 窄屏保留堆叠间距；三键保持一行，不换行截断。 */
+    .mondrian-plate {
+        margin-top: clamp(2.5rem, 4.5vh, 3.25rem);
+        min-height: 74px;
+        padding: .35rem .6rem;
+    }
+
+    .m-plate-left {
+        padding-right: .6rem;
+    }
+
+    .m-plate-name {
+        font-size: 16px;
+    }
+
+    .m-plate-tagline {
+        font-size: 10px;
+    }
+
+    .m-plate-controls .app-controls {
+        flex-wrap: nowrap;
+        gap: .2rem;
+    }
+
+    .m-plate-controls .app-control-trigger {
+        height: 36px;
+        font-size: .6rem;
+        padding: 0 .3rem;
+    }
+
+    .area-red .m-title {
+        font-size: clamp(.9rem, 4vw, 1.4rem);
+    }
+
+    .area-blue .m-title,
+    .area-white-2 .m-title,
+    .area-white-main .m-title {
+        font-size: clamp(.5rem, 2.4vw, .7rem);
+    }
+
+    .area-white-main {
+        padding: 3px;
+    }
+
+    .area-white-main .m-quote-text {
+        font-size: .5rem;
+        line-height: 1.15;
+    }
+
+    .area-yellow .m-title {
+        font-size: clamp(.5rem, 2vw, .6rem);
+    }
+
+    .m-slogan-text {
+        font-size: clamp(.5rem, 2vw, .72rem);
+        letter-spacing: .16em;
+    }
+
+    .m-slogan-line {
+        font-size: clamp(.9rem, 4vw, 1.4rem);
+    }
+
+    .m-text,
+    .m-back .m-text {
+        font-size: .625rem;
+        line-height: 1.4;
+    }
+
+    .m-arrow,
+    .m-hint {
+        display: none;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .mondrian-layout {
+        --m-line: 4px;
+        --m-size: 85vw;
+    }
+}
+
+@media (max-width: 460px) {
+    /* 极窄屏再增加一点间距。 */
+    .mondrian-plate {
+        margin-top: clamp(2.5rem, 6vh, 3.4rem);
+    }
+}
+
+@media (min-width: 1500px) {
+    .mondrian-layout {
+        --m-size: min(84vh, 860px);
+
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "stage plate"
+            "footer footer";
+        align-content: stretch;
+        justify-content: center;
+        align-items: center;
+        column-gap: clamp(1.5rem, 3vw, 3rem);
+        row-gap: clamp(.6rem, 1.4vw, 1rem);
+        padding-bottom: 24px;
+    }
+
+    .mondrian-stage {
+        grid-area: stage;
+        width: auto;
+    }
+
+    .mondrian-plate {
+        grid-area: plate;
+        /* 宽屏与画作同轴居中后，把铭牌下缘对到红色块下缘。
+           红块下缘在画框内为 0.8 × --m-size - 4.4px（6px 内边距 + 8 行 10 列 + 4px 间隙），
+           画作与铭牌同在一行且各自居中，故相对中心下移 0.3 × --m-size - 4.4px，
+           再以 -50% 抵掉自身高度的一半，铭牌高度随语言变化也不影响对齐。 */
+        align-self: center;
+        margin-top: 0;
+        transform: translateY(calc(var(--m-size) * .3 - 4.4px)) translateY(-50%);
+    }
+
+    .mondrian-footer {
+        position: static;
+        grid-area: footer;
+    }
+}
+
+@media (min-aspect-ratio: 3/1) {
+    .mondrian-layout {
+        --m-size: min(60vh, 600px);
+    }
+}
+
+@media (max-aspect-ratio: 1/2) {
+    .mondrian-layout {
+        --m-size: 88vw;
+    }
+}
+
+@media (max-height: 620px) {
+    .mondrian-layout {
+        --m-size: min(80vw, 64vh);
+    }
+}

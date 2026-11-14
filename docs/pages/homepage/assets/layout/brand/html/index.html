@@ -1,0 +1,93 @@
+<div class="brand-layout">
+    <div class="boot" aria-hidden="true">
+        <span class="boot-dot"></span>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"><span class="progress-bar"></span></div>
+
+    <header class="topbar">
+        <a class="brand-name" href="#top" data-i18n="common.kicker"></a>
+        <nav class="topnav">
+            <a href="#blog" data-i18n="common.blog.label"></a>
+            <a href="#photo" data-i18n="common.photo.label"></a>
+            <a href="#about" data-i18n-html="common.aboutTitle"></a>
+        </nav>
+        <div class="tools" data-slot="controls"></div>
+    </header>
+
+    <main>
+        <section class="hero" id="top">
+            <p class="hero-kicker" data-i18n="common.kicker"></p>
+            <h1 class="hero-name" data-i18n-html="common.name"></h1>
+            <p class="hero-tagline" data-slogan></p>
+            <p class="hero-meta" data-i18n="common.tagline"></p>
+            <a class="scroll-hint" href="#quote">
+                <i aria-hidden="true"></i>
+                <span data-i18n="common.scroll"></span>
+            </a>
+        </section>
+
+        <section class="quote reveal" id="quote">
+            <blockquote>
+                <p data-i18n-html="common.quote.text"></p>
+                <cite data-i18n="common.quote.title"></cite>
+            </blockquote>
+        </section>
+
+        <section class="shelf" id="blog">
+            <div class="shelf-sticky">
+                <div class="shelf-head reveal">
+                    <div>
+                        <h2 data-i18n="common.blog.label"></h2>
+                        <p class="hint" data-i18n="common.blog.hint"></p>
+                    </div>
+                    <div class="rail-btns">
+                        <button class="rail-btn" type="button" data-dir="-1"
+                            data-i18n-attr="aria-label:common.carousel.prev"><span aria-hidden="true">←</span></button>
+                        <button class="rail-btn" type="button" data-dir="1"
+                            data-i18n-attr="aria-label:common.carousel.next"><span aria-hidden="true">→</span></button>
+                    </div>
+                </div>
+                <div class="rail-wrap">
+                    <div class="rail" data-i18n-attr="aria-label:common.carousel.label"></div>
+                </div>
+                <div class="rail-progress"><span></span></div>
+            </div>
+        </section>
+
+        <section class="shelf shelf-photo" id="photo">
+            <div class="shelf-sticky">
+                <div class="photo-stage">
+                    <div class="photo-stack"></div>
+                </div>
+                <div class="shelf-head reveal">
+                    <div>
+                        <h2 data-i18n="common.photo.label"></h2>
+                        <p class="hint" data-i18n="common.photo.hint"></p>
+                    </div>
+                </div>
+                <div class="rail-progress"><span></span></div>
+            </div>
+        </section>
+
+        <section class="about reveal" id="about">
+            <h2 data-i18n-html="common.aboutTitle"></h2>
+            <div class="about-body">
+                <p data-i18n="common.about.p1"></p>
+                <p data-i18n="common.about.p2"></p>
+                <p class="about-now" data-i18n="common.motto"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a class="blog-link" data-i18n="common.blog.label"
+            data-i18n-attr-href="common.blog.href"></a>
+        <a class="feed-link" data-i18n="common.feed.label"
+            data-i18n-attr-href="common.feed.href"></a>
+        <a class="email-link" data-link="email" data-i18n="common.email.label"></a>
+        <span class="spacer"></span>
+        <span class="copyright" data-i18n-html="common.footer.copyright"></span>
+    </footer>
+</div>

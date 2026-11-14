@@ -13,7 +13,7 @@ import { createPageTools } from '../components/page-tools.js'
 import { openSelectMenu } from '../components/select-menu.js'
 import { toast } from '../components/toast.js'
 
-const NARROW = '(max-width: 1024px)'
+const NARROW = 'screen and (max-width: 768px)'
 
 /* 从哪个路由进的数据格式：本页切换文档会再走一次 schema → schema，不能让它冲掉来源 */
 let entryFrom = null

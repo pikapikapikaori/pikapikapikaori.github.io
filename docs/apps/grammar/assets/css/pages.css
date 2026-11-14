@@ -154,7 +154,7 @@
     font-weight: 600;
 }
 
-@media (max-width: 560px) {
+@media screen and (max-width: 768px) {
     .lang-card {
         flex-wrap: wrap;
         row-gap: 2px;
@@ -343,7 +343,7 @@
     border-left: 1px solid color-mix(in oklab, var(--c-action-fg) 28%, transparent);
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .word-list__head {
         grid-template-columns: minmax(0, 1fr) 92px;
     }
@@ -647,7 +647,39 @@
     border-top: 1px solid var(--c-rule);
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 1000px) {
+    .word-form__row,
+    .word-form__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .word-form .field {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .word-form__panel > .field:last-child {
+        grid-column: auto;
+    }
+
+    .word-form .field > .field__label,
+    .word-form .field > .field__hint {
+        grid-column: 1;
+    }
+
+    .word-form .field__parts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .word-form .field--part {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 2px;
+        grid-template-areas:
+            "label"
+            "control";
+    }
+}
+
+@media screen and (max-width: 768px) {
 
     .word-form__row,
     .word-form__panel {
@@ -980,7 +1012,7 @@
     font-size: var(--fs-xs);
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .review-face {
         min-height: min(44vh, 320px);
         padding: var(--sp-6) var(--sp-4);
@@ -1224,7 +1256,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .grammar-layout {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--sp-4);
@@ -1710,7 +1742,7 @@ ol.doc-list {
 }
 
 /* 窄屏：长代码换行，而不是横向滚动 */
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .schema-head h1.page-head__title {
         font-size: var(--fs-xl);
     }
@@ -1721,7 +1753,7 @@ ol.doc-list {
     }
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .doc-heading {
         scroll-margin-top: calc(var(--h-header) + 84px);
     }

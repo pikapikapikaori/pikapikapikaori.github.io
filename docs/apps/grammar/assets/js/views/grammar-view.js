@@ -218,7 +218,7 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     // 只有一章一节、且节名与章名相同时，目录里不再重复这一条
     const skipSectionLink = sections.length === 1 && currentGroup
         && (sections[0].title || sections[0].id) === currentGroup.title
-    const narrowQuery = window.matchMedia('(max-width: 1024px)')
+    const narrowQuery = window.matchMedia('screen and (max-width: 768px)')
     function afterTocJump() {
         if (narrowQuery.matches) tocDetails.open = false
     }

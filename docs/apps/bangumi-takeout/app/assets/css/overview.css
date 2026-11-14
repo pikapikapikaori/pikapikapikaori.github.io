@@ -100,7 +100,7 @@
     gap: var(--space-4);
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 400px) {
     .grid {
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
         gap: var(--space-3);
@@ -166,7 +166,7 @@
     color: var(--color-text-faint);
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 400px) {
     .pager-info {
         flex-basis: 100%;
         text-align: center;

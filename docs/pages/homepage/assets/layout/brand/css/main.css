@@ -587,27 +587,21 @@ html[data-layout="brand"] .tools .app-control-option[aria-selected="true"]::afte
     backface-visibility: hidden;
 }
 
-@media (max-width: 1280px) {
+@media screen and (max-width: 1000px) {
     .rail {
-        --cols: 3.2;
+        --cols: 2.5;
     }
 }
 
-@media (max-width: 980px) {
+@media screen and (max-width: 768px) {
     .rail {
-        --cols: 2.4;
+        --cols: 1.7;
     }
 }
 
-@media (max-width: 700px) {
+@media screen and (max-width: 400px) {
     .rail {
-        --cols: 1.5;
-    }
-}
-
-@media (max-width: 480px) {
-    .rail {
-        --cols: 1.15;
+        --cols: 1.1;
     }
 }
 
@@ -823,7 +817,7 @@ html.booted .boot {
     }
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .topnav {
         display: none;
     }

@@ -247,7 +247,7 @@ export default {
         track.classList.toggle('is-aged', agedFilter)
 
         const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
-        const narrow = window.matchMedia('(max-width: 720px)')
+        const narrow = window.matchMedia('screen and (max-width: 768px)')
         const ctx = { App: App, track: track, narrow: narrow.matches }
 
         let momentumRaf = 0
@@ -659,7 +659,7 @@ export default {
             syncOpenLightbox()
         }
 
-        /* 跨过 720px 时行组与单位上限都要重算，不能只改样式。 */
+        /* 跨过 768px 时行组与单位上限都要重算，不能只改样式。 */
         function onNarrowChange() {
             if (ctx.narrow === narrow.matches) return
 

@@ -373,7 +373,7 @@ html[lang="ja"] .star-slogan {
     opacity: .6;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     /* 窄屏把整页收进一屏：工具条独占底部一行，正文在容器内滚动。 */
     .star-layout {
         --star-toolbar-h: 46px;

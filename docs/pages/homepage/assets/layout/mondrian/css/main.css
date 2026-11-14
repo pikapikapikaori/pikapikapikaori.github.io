@@ -616,7 +616,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
     opacity: .48;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .mondrian-layout {
         --m-size: 92vw;
         --m-line: 3px;
@@ -698,23 +698,29 @@ html[data-layout="mondrian"][data-theme="dark"] {
     }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 401px) and (max-width: 768px) {
     .mondrian-layout {
         --m-line: 4px;
         --m-size: 85vw;
     }
 }
 
-@media (max-width: 460px) {
+@media screen and (max-width: 400px) {
     /* 极窄屏再增加一点间距。 */
     .mondrian-plate {
         margin-top: clamp(2.5rem, 6vh, 3.4rem);
     }
 }
 
-@media (min-width: 1500px) {
+@media screen and (max-aspect-ratio: 1/2) {
     .mondrian-layout {
-        --m-size: min(84vh, 860px);
+        --m-size: 88vw;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .mondrian-layout {
+        --m-size: min(84vh, 52vw, 860px);
 
         display: grid;
         grid-template-columns: auto auto;
@@ -752,19 +758,13 @@ html[data-layout="mondrian"][data-theme="dark"] {
     }
 }
 
-@media (min-aspect-ratio: 3/1) {
+@media screen and (min-aspect-ratio: 3/1) {
     .mondrian-layout {
         --m-size: min(60vh, 600px);
     }
 }
 
-@media (max-aspect-ratio: 1/2) {
-    .mondrian-layout {
-        --m-size: 88vw;
-    }
-}
-
-@media (max-height: 620px) {
+@media screen and (max-height: 620px) {
     .mondrian-layout {
         --m-size: min(80vw, 64vh);
     }

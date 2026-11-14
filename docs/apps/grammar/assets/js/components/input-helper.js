@@ -349,7 +349,7 @@ function keepTargetVisible() {
     if (!els || !state.target) return
     const panelRect = els.panel.getBoundingClientRect()
     const fieldRect = state.target.el.getBoundingClientRect()
-    const narrow = window.matchMedia('(max-width: 720px)').matches
+    const narrow = window.matchMedia('screen and (max-width: 768px)').matches
     const visibleBottom = narrow ? panelRect.top - 12 : Math.min(panelRect.top - 12, window.innerHeight - 12)
     const overlap = fieldRect.bottom - visibleBottom
     if (overlap > 0) window.scrollBy({ top: overlap + 12, behavior: 'smooth' })

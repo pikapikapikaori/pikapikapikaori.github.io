@@ -501,7 +501,7 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
     outline-offset: 3px;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     /* 窄屏改为页面纵向滚动：一次看一列，列内按行换行，不再横向拖动。 */
     html[data-layout="photography"] .photography-layout {
         height: auto;

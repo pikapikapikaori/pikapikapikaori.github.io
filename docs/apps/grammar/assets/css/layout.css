@@ -115,7 +115,7 @@ h1.page-head__title {
     margin: 0;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .page-head--display .page-head__title {
         font-size: 1.5rem;
     }
@@ -166,7 +166,7 @@ h1.page-head__title {
     flex-wrap: wrap;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .app-header {
         padding: 0 var(--sp-4);
     }

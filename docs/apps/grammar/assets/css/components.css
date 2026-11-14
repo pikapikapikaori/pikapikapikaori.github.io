@@ -1333,7 +1333,7 @@ button.word-card__derivative {
     margin-left: var(--sp-2);
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .card-overlay-panel {
         width: 100vw;
         height: 100dvh;
@@ -2088,7 +2088,7 @@ html.show-dual-text .dual-text__roman {
     pointer-events: none;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .ime {
         left: 0;
         right: 0;

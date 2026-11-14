@@ -155,7 +155,7 @@
     gap: 2px;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .stars-lg {
         display: inline-grid;
         grid-template-columns: repeat(5, auto);

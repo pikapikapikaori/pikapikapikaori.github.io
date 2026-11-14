@@ -1,4 +1,4 @@
-@media (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .grammar-chapters::-webkit-scrollbar {
         display: none;
     }

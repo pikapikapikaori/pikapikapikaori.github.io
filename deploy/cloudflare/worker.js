@@ -2,9 +2,8 @@
 
 // host -> R2 前缀（默认域名不在这里，走 DIR_INDEX_PATHS）
 const HOST_PREFIX = {
-    'home.pikapikapi.com': 'pages/mondrian/',
+    'home.pikapikapi.com': 'pages/homepage/',
     'index.pikapikapi.com': 'pages/indexpage/',
-    'photo.pikapikapi.com': 'pages/animepage/',
     'bgmtv.pikapikapi.com': 'apps/bangumi-takeout/web/',
 }
 
@@ -92,30 +91,15 @@ function rewriteContent(filePath, text) {
         // ---- indexpage ----
         case 'pages/indexpage/data/apps.json':
             return text
-                .replaceAll('"../mondrian/index.html"', '"https://home.pikapikapi.com/?lang=zh-Hant"')
-                .replaceAll('"../../#/"', '"https://www.pikapikapi.com/#/"')
-                .replaceAll('"../animepage/index.html"', '"https://photo.pikapikapi.com/?lang=zh-Hant"')
-
-        // ---- animepage ----
-        case 'pages/animepage/index.html':
-            return text
-                .replaceAll('href="../../#/', 'href="https://www.pikapikapi.com/#/')
-
-        case 'pages/animepage/assets/js/i18n.js':
-            return text
-                .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
+                .replaceAll('"../homepage/index.html?lang=zh-Hans"', '"https://home.pikapikapi.com/?lang=zh-Hans"')
+                .replaceAll('"../../#/"', '"https://pikapikapi.com/#/"')
 
         // ---- homepage ----
-        case 'pages/homepage/assets/js/i18n.js':
-            return text
-                .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
-                .replaceAll("'../animepage/index.html?lang=", "'https://photo.pikapikapi.com/?lang=")
+        case 'pages/homepage/assets/js/config.js':
+            return text.replaceAll("'../../", "'https://pikapikapi.com/")
 
-        // ---- mondrian ----
-        case 'pages/mondrian/assets/js/i18n.js':
-            return text
-                .replaceAll("'../../#", "'https://www.pikapikapi.com/#")
-                .replaceAll("'../animepage/index.html?lang=", "'https://photo.pikapikapi.com/?lang=")
+        case 'pages/homepage/assets/js/i18n.js':
+            return text.replaceAll("'../../", "'https://pikapikapi.com/")
 
         default:
             return text
@@ -125,10 +109,8 @@ function rewriteContent(filePath, text) {
 // 需要做内容替换的文件清单
 const REWRITE_PATHS = new Set([
     'pages/indexpage/data/apps.json',
-    'pages/animepage/index.html',
-    'pages/animepage/assets/js/i18n.js',
+    'pages/homepage/assets/js/config.js',
     'pages/homepage/assets/js/i18n.js',
-    'pages/mondrian/assets/js/i18n.js',
 ])
 
 // ========== 4. 生成 etag ==========

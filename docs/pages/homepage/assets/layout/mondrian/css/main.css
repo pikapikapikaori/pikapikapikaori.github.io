@@ -4,7 +4,7 @@ html[data-layout="mondrian"] {
     --control-paper: rgba(248, 245, 240, .96);
     --control-line: rgba(26, 26, 26, .24);
     --control-hover: rgba(26, 26, 26, .07);
-    /* 正文字体统一读公共变量，字体文件已并入公共 resources/fonts。 */
+    /* 正文字体统一读公共变量。 */
     --m-serif: var(--app-font-body);
     --m-wall-glow: rgba(255, 255, 255, .52);
     --m-plate-bg: #FBF8F2;
@@ -319,10 +319,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     font-size: clamp(.5rem, .9vw, .8rem);
 }
 
-.area-yellow .m-subtitle {
-    font-size: clamp(.35rem, .6vw, .6rem);
-}
-
 .area-white-left {
     grid-area: white-left;
 }
@@ -390,15 +386,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     word-break: break-word;
 }
 
-.m-subtitle {
-    max-width: 100%;
-    font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: .08em;
-    opacity: .8;
-    word-break: break-word;
-}
-
 .m-text {
     max-width: 100%;
     font-size: clamp(.42rem, 1.2vw, .72rem);
@@ -434,7 +421,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
     transform: none;
 }
 
-/* 红块正面标语横排，字号、字重、颜色与行高沿用原站名标题。 */
+/* 红块正面标语横排，保持标题的字号与颜色。 */
 .m-slogan-line {
     writing-mode: horizontal-tb;
     text-orientation: initial;
@@ -447,7 +434,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
     opacity: 1;
 }
 
-/* 底部长格引诗：原 area-white-main 内容原样迁入。 */
+/* 底部长格引诗，文字按容器宽度换行。 */
 .area-white-main .m-quote-text {
     font-size: clamp(.42rem, .95vw, .66rem);
     line-height: 1.7;
@@ -495,7 +482,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
     pointer-events: none;
 }
 
-/* 原页 contact 格箭头为 →，其余外链格为 ↗，字符自 content 而来。 */
+/* contact 格箭头为 →，其余外链格为 ↗。 */
 .m-arrow::before {
     content: "↗";
 }

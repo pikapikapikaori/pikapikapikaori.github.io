@@ -1,5 +1,5 @@
 /*
- * Atom 订阅读取，与原 landing 页 feed.js 同源。
+ * Atom 订阅读取。
  * feedUrl 在 config.js，fallbackPosts 也在 config.js。
  */
 (function () {

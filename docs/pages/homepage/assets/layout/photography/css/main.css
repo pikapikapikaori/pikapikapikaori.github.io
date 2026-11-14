@@ -233,7 +233,7 @@ html[data-layout="photography"] .pg-caption::before {
     letter-spacing: .08em;
 }
 
-/* 短说明保持单行原样；超过三行才分到三栏，每栏三行，第三栏之后裁切。 */
+/* 短说明保持单行；超过三行时分到三栏，整体高度由上方上限裁切。 */
 html[data-layout="photography"] .pg-caption-text {
     display: block;
     min-width: 0;
@@ -272,7 +272,7 @@ html[data-layout="photography"] .pg-shot:hover img {
     transform: scale(1.035);
 }
 
-/* 原 animepage 的做旧效果是叠层，不是 CSS filter。此处沿用其 45deg 渐变与 25% 色值。 */
+/* 做旧效果是叠层，不是 CSS filter；沿用 45deg 渐变与 25% 色值。 */
 html[data-layout="photography"] .pg-track.is-aged .pg-shot::after {
     content: '';
     position: absolute;

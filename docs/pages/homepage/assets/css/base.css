@@ -18,12 +18,7 @@
 }
 
 :root {
-    --app-font-latin: 'SortsMillGoudy', Georgia, serif;
-    --app-font-cjk: 'HYKaiTiS', serif;
     --app-font-body: 'SortsMillGoudy', 'HYKaiTiS', serif;
-    --font-latin: var(--app-font-latin);
-    --font-cjk: var(--app-font-cjk);
-    --font-body: var(--app-font-body);
     --app-font-ui: var(--app-font-body);
     --control-ink: #1a1a1a;
     --control-paper: rgba(248, 245, 240, .94);

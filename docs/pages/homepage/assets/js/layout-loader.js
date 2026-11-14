@@ -110,10 +110,7 @@
         App.i18n.refresh()
         App.site.apply(root)
 
-        var handle = instance.mount(root, {
-            lang: App.i18n.get(),
-            theme: App.theme.effective()
-        })
+        var handle = instance.mount(root)
 
         if (!handle || typeof handle.unmount !== 'function') {
             throw new Error('Layout mount() returned no handle: ' + id)

@@ -8,15 +8,7 @@ const U = window.App.utils
 const FOLLOW = 0.16
 const ROOT_MARGIN = '400px 0px'
 
-/*
- * @param {HTMLElement} section 需要被撑高的 <section>
- * @param {function(number)} applyFn p ∈ [0,1]，把状态画出来
- * @param {function():{total:number,height:number}} sizeFn
- *        total = 走完全程需要多少像素纵向滚动
- *        height = section 应被撑到多高
- * @param {function(number):number} [followFn]
- *        给定目标进度返回这一帧的 follow 系数，不传则用 FOLLOW
- */
+/* followFn 缺省时使用 FOLLOW 阻尼系数。 */
 export function createPin(section, applyFn, sizeFn, followFn) {
     let total = 0
     let target = 0

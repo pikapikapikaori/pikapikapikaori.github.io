@@ -10,7 +10,7 @@ export const maxHeightUnits = 5.625
 /* 窄屏每列最宽 6 个单位；间隔只补在单位之间，故 6 个单位含 5 个间隔。 */
 export const narrowUnitLimit = 6
 
-/* 开发者开关：静止图片叠加原 animepage 的做旧渐变；悬停、拖动与灯箱打开时不叠加。 */
+/* 开发者开关：静止图片叠加做旧渐变；悬停、拖动与灯箱打开时不叠加。 */
 export const agedFilter = true
 
 export const columns = [

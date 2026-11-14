@@ -21,7 +21,7 @@ export default {
 
         const unsubscribeLang = App.i18n.onChange(function (newLang) {
             if (railInstance) railInstance.reload(newLang)
-            if (photoInstance) photoInstance.reload(newLang)
+            if (photoInstance) photoInstance.reload()
             pickSlogan()
             requestAnimationFrame(measurePins)
         })

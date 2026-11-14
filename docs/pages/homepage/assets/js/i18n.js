@@ -3,7 +3,7 @@
  *
  * 初始语言顺序：?lang= → 本地存储 → 浏览器语言。
  * 合并后的页面中文统一用简体，旧链接的 zh-Hant 参数按 zh-Hans 处理。
- * 文字只写在词典里，页面用 data-i18n、data-i18n-html、data-i18n-attr 标记。
+ * 界面文字写在词典里，照片说明由 photo-captions.js 提供。
  */
 (function () {
     'use strict'
@@ -48,7 +48,9 @@
         'zh-Hans': {
             'meta.description': 'Don\'t worry, be happy.',
             'control.language': '语言',
+            'control.language.unselected': '未选择语言',
             'control.layout': '布局',
+            'layout.unselected': '未选择布局',
             'control.theme': '主题',
             'theme.light': '亮色',
             'theme.dark': '暗色',
@@ -99,7 +101,9 @@
         en: {
             'meta.description': 'Don\'t worry, be happy.',
             'control.language': 'Language',
+            'control.language.unselected': 'No language selected',
             'control.layout': 'Layout',
+            'layout.unselected': 'No layout selected',
             'control.theme': 'Theme',
             'theme.light': 'Light',
             'theme.dark': 'Dark',
@@ -144,7 +148,9 @@
         ja: {
             'meta.description': 'Don\'t worry, be happy.',
             'control.language': '言語',
+            'control.language.unselected': '言語未選択',
             'control.layout': 'レイアウト',
+            'layout.unselected': 'レイアウト未選択',
             'control.theme': 'テーマ',
             'theme.light': '明るい',
             'theme.dark': '暗い',

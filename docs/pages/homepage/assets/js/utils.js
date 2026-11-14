@@ -1,5 +1,4 @@
 /*
- * 公用工具，与原 landing 页 utils.js 同源。
  * 布局脚本只经 window.App.utils 读取，不在布局目录内再写一份。
  */
 (function () {

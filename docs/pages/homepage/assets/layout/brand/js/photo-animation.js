@@ -53,7 +53,6 @@ function renderPhoto(ph, i) {
         'loading="lazy" decoding="async" onerror="this.remove()">'
         : ''
     return '<figure class="photo-card" ' +
-        'data-ratio="' + esc(ratio) + '" ' +
         'style="z-index:' + i + ';aspect-ratio:' + esc(ratio) + '">' +
         img +
         '<figcaption>' + esc(caption) + '</figcaption>' +
@@ -169,10 +168,9 @@ export function createPhotoStack(options) {
         }
 
         if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'
-        section.dataset.p = p
     }
 
-    function doRender(lang) {
+    function doRender() {
         /* 隐藏，避免重建过程中的位置跳变被看到 */
         stack.classList.remove('ready')
 
@@ -200,11 +198,11 @@ export function createPhotoStack(options) {
         stack.classList.add('ready')
     }
 
-    doRender(App.i18n.get())
+    doRender()
 
     return {
-        reload: function (lang) {
-            doRender(lang)
+        reload: function () {
+            doRender()
         },
         destroy: function () {
             if (resizeObserver) resizeObserver.disconnect()

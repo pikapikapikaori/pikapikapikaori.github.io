@@ -11,12 +11,6 @@
         theme: 'control.theme'
     }
 
-    /* 词典无键时的回退名称，三语各一，避免控件出现 null 或空白。 */
-    var UNSELECTED_LABELS = {
-        lang: { 'zh-Hans': '未选择语言', en: 'No language selected', ja: '言語未選択' },
-        layout: { 'zh-Hans': '未选择布局', en: 'No layout selected', ja: 'レイアウト未選択' }
-    }
-
     var rootEl = null
     var defs = []
     var closeCurrent = null
@@ -29,10 +23,9 @@
     }
 
     function unselectedLabel(kind) {
-        var table = UNSELECTED_LABELS[kind] || UNSELECTED_LABELS.layout
         var key = kind === 'lang' ? 'control.language.unselected' : 'layout.unselected'
 
-        return App.i18n.t(key) || table[App.i18n.get()] || table.en
+        return App.i18n.t(key) || ''
     }
 
     function optionList(kind) {

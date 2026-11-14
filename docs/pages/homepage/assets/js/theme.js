@@ -88,20 +88,16 @@
         }
     }
 
-    /* 三态清单，控件菜单与循环从这里取。 */
     T.modes = function () { return ORDER.slice() }
 
-    /* 三态模式名：light、dark、system。控件循环与 popup 用这个。 */
     T.mode = function () { return mode }
 
-    /* 当前实值亮或暗，布局取色与活动判断用这个。 */
     T.effective = function () { return effective() }
 
     T.set = function (nextMode) {
         apply(nextMode)
     }
 
-    /* 三态循环：light → dark → system → light。 */
     T.cycle = function () {
         var i = ORDER.indexOf(mode)
         apply(ORDER[(i + 1) % ORDER.length])

@@ -95,6 +95,8 @@ html[data-layout="mondrian"][data-theme="dark"] {
 
 /* 展签左右两栏都取内容宽度，分割线与语言键之间只留 10px。 */
 .mondrian-plate {
+    /* 高于页脚，popup 向下展开时才不会被页脚文字盖住。 */
+    z-index: 2;
     display: grid;
     grid-template-columns: max-content max-content;
     align-items: center;

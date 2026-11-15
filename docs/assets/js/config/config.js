@@ -114,7 +114,7 @@
             '/': '404/_404.md'
         },
 
-        // tab 插件设置
+        // tab
         tabs: {
             persist: false,
             sync: false,
@@ -123,10 +123,10 @@
             tabHeadings: true
         },
 
-        // 脚注插件设置
+        // 脚注
         loadFooter: true,
 
-        // 全局搜索插件设置
+        // 全局搜索
         search: {
             paths: 'auto',
             depth: 4,
@@ -136,7 +136,7 @@
             pathNamespaces: i18nPathNamespaces,
         },
 
-        // 翻页插件设置
+        // 翻页
         pagination: {
             previousText: cali18nText('previous'),
             nextText: cali18nText('next'),
@@ -144,22 +144,23 @@
             crossChapterText: false,
         },
 
-        // 复制代码插件设置
+        // 复制代码
         copyCode: {
             buttonText: cali18nText('copyButton'),
             errorText: cali18nText('copyError'),
             successText: cali18nText('copySuccess')
         },
 
-        // 支持 mermaid 插件设置
+        // 支持 mermaid
         mermaidConfig: {
             querySelector: '.mermaid',
         },
 
 
         // 自用插件
-        // 添加评论与页脚插件
+        // 添加评论与页脚
         commentWithFooter: {
+            enable: true,
             use: 'gitalk',
             footerInnerHtml: '<small>&copy; 2023 - {comment_footer-yyyy}{comment_footer-divider}{comment_footer-info}{comment_footer-divider}{comment_footer-copy}</small>',
             localization: {
@@ -179,6 +180,7 @@
 
         // 添加字数统计，并能够 i18n 国际化
         countWords: {
+            enable: true,
             countable: true,
             position: 'top',
             float: 'right',
@@ -192,6 +194,7 @@
 
         // 添加目录页
         tocPage: {
+            enable: true,
             recentAmount: 8,
             renderStyle: 'card',
             dateFormat: null,
@@ -205,6 +208,7 @@
 
         // 添加动态封面
         dynamicCover: {
+            enable: true,
             backgrounds: [
                 './assets/resources/img/cover/cover-1.jpg',
                 './assets/resources/img/cover/cover-2.jpg',
@@ -214,16 +218,19 @@
 
         // 添加 breadcrumb 头
         breadcrumb: {
+            enable: true,
             localization: i18nLocales
         },
 
         // 修改 docsify 与插件原生样式
         markdownHelper: {
+            enable: true,
             highlightNavMenuCurrent: false,
         },
 
         // 更改 html lang 信息
         htmlLang: {
+            enable: true,
             localization: {
                 lang: cali18nText('htmlLang')
             }
@@ -231,10 +238,27 @@
 
         // 添加小组件
         widgets: {
+            enable: true,
             useSwitchMode: true,
             top: 20,
             topOffset: 500,
             defaultTheme: 'swiss',
+            storage: 'local',
+            live2d: [
+                {
+                    width: 300,
+                    height: 300,
+                    right: '50px',
+                    bottom: '0px',
+                    offsetX: -60,
+                    offsetY: 0,
+                    role: './assets/resources/live2d/rice_pro_en/runtime/rice_pro_t03.model3.json',
+                    background: '',
+                    opacity: 1,
+                    draggable: false,
+                    hitArea: { x: 190, y: 30, w: 110, h: 270 }
+                }
+            ],
             themes: [
                 {
                     name: 'default',
@@ -302,6 +326,7 @@
 
         // 目录、文章列表切换
         tocSwitcher: {
+            enable: true,
             localization: {
                 toc: cali18nText('toc'),
                 list: cali18nText('articles'),
@@ -310,6 +335,7 @@
 
         // 添加替换 Markdown 中的 Html 注释
         htmlReplace: {
+            enable: true,
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
@@ -580,6 +606,31 @@
                     endHtml: '" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>'
                 }
             ]
+        },
+
+        // 添加查看大图
+        viewFullImage: {
+            enable: true
+        },
+
+        // 添加最后编辑时间
+        lastUpdatedTime: {
+            enable: true
+        },
+
+        // 添加链接标记样式
+        addSvgToLinks: {
+            enable: true
+        },
+
+        // 上下边缘内容渐隐
+        fadeEdge: {
+            enable: true
+        },
+
+        // 添加代码内颜色色块
+        colorSwatch: {
+            enable: true
         },
     }
 })()

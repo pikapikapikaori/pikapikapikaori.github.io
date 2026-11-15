@@ -1,0 +1,8 @@
+.markdown-section a[data-link-icon='internal']>svg,
+.markdown-section a[data-link-icon='external']>svg {
+    width: 0.9em;
+    height: 0.9em;
+    vertical-align: middle;
+    margin-left: 0.15em;
+    margin-right: 0.15em;
+}

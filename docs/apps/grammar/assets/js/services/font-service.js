@@ -1,10 +1,12 @@
 /** 字体服务：内置、系统、本地三种模式。 */
 
-import { LS_KEYS } from '../config/config.js'
+import { LS_KEYS, getEnum, getString, setString, remove } from '../store/local-storage.js'
 
 const LS_FONT_MODE = LS_KEYS.font
 const LS_FONT_FAMILY = LS_KEYS.fontFamily
 const LS_FONT_SIZE = LS_KEYS.fontSize
+
+const FONT_MODE_VALUES = ['default', 'system', 'local']
 
 const STYLE_ID = 'ln-user-font'
 
@@ -13,13 +15,11 @@ const SYSTEM_STACK = 'system-ui, -apple-system, "Segoe UI", "PingFang SC", "Micr
 let currentObjectUrl = null
 
 export function getStoredFontMode() {
-    try { return localStorage.getItem(LS_FONT_MODE) || 'default' }
-    catch { return 'default' }
+    return getEnum(LS_FONT_MODE, FONT_MODE_VALUES, 'default')
 }
 
 export function getStoredFontFamily() {
-    try { return localStorage.getItem(LS_FONT_FAMILY) || '' }
-    catch { return '' }
+    return getString(LS_FONT_FAMILY, '')
 }
 
 /** 字号档位：只改 --fs-base，其余字号都是相对它的 rem */
@@ -30,16 +30,16 @@ export const FONT_SIZES = [
     { value: '20', label: '特大' }
 ]
 
+const FONT_SIZE_VALUES = FONT_SIZES.map((f) => f.value)
+
 export function getStoredFontSize() {
-    try { return localStorage.getItem(LS_FONT_SIZE) || '16' }
-    catch { return '16' }
+    return getEnum(LS_FONT_SIZE, FONT_SIZE_VALUES, '16')
 }
 
 export function applyFontSize(size) {
     const px = FONT_SIZES.some((f) => f.value === String(size)) ? String(size) : '16'
     document.documentElement.style.setProperty('--fs-base', `${px}px`)
-    try { localStorage.setItem(LS_FONT_SIZE, px) }
-    catch { /* ignore */ }
+    setString(LS_FONT_SIZE, px)
 }
 
 /** 应用字体设置；mode 为 'default' | 'system' | 'local'（local 时 family 必填） */
@@ -70,11 +70,9 @@ export function applyFont({ mode = 'default', family = '' } = {}) {
 }
 
 function persist(mode, family) {
-    try {
-        localStorage.setItem(LS_FONT_MODE, mode)
-        if (family) localStorage.setItem(LS_FONT_FAMILY, family)
-        else localStorage.removeItem(LS_FONT_FAMILY)
-    } catch { /* ignore */ }
+    setString(LS_FONT_MODE, mode)
+    if (family) setString(LS_FONT_FAMILY, family)
+    else remove(LS_FONT_FAMILY)
 }
 
 /** 从本地文件加载字体并应用；加载不出来时撤回这次的 @font-face 并抛错 */

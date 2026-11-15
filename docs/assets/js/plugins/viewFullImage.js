@@ -1,13 +1,39 @@
 import { bindShortcuts } from '../utils/shortcut.js'
 import { isEnabled } from '../utils/common.js'
+import { docsifyClasses } from '../utils/constants.js'
+import { viewFullImageIcons } from '../utils/icons.js'
+import {
+    tags,
+    eventNames,
+    on,
+    off,
+    addClass,
+    removeClass,
+    hasClass,
+    createElement,
+    queryAll,
+    byId,
+    byClass,
+    getData,
+    setData
+} from '../utils/dom.js'
+
+let viewFullImageOptions = {
+    enable: false
+}
+
+export const ignoreViewFullImageClass = 'ignore-view-full-image-img'
+
+export const imageViewerOpenClass = 'image-viewer-open'
 
 function isIgnoredImage(img) {
-    return img.classList.contains('ignore-view-full-image-img') ||
+    return hasClass(img, ignoreViewFullImageClass) ||
         img.className.includes('emoji') ||
         img.src.includes('avatars.githubusercontent')
 }
 
 function plugin(hook, vm) {
+    if (!viewFullImageOptions.enable) return
 
     let curImg = undefined
 
@@ -30,7 +56,6 @@ function plugin(hook, vm) {
     let closeFullImage = null
     let unbindViewerShortcuts = null
 
-    // 滚轮节流锁
     let wheelSwitchCooldown = false
     let wheelSwitchAccumulated = 0
     const wheelSwitchCooldownMs = 900
@@ -86,14 +111,14 @@ function plugin(hook, vm) {
     function lockScroll() {
         if (scrollLocked) return
 
-        const content = document.querySelector('.content')
+        const content = byClass(docsifyClasses.content)
         lockWindowY = window.scrollY || document.documentElement.scrollTop || 0
         lockContentY = content ? content.scrollTop : 0
         scrollLocked = true
 
-        window.addEventListener('wheel', preventWheel, { passive: false })
-        window.addEventListener('touchmove', preventTouchMove, { passive: false })
-        window.addEventListener('keydown', preventKeyScroll)
+        on(window, 'wheel', preventWheel, { passive: false })
+        on(window, 'touchmove', preventTouchMove, { passive: false })
+        on(window, eventNames.keydown, preventKeyScroll)
 
         unbindViewerShortcuts = bindShortcuts({
             ArrowLeft: { handler: () => switchImageDirection(true), repeat: true, allowInInput: true },
@@ -102,27 +127,27 @@ function plugin(hook, vm) {
         }, { when: () => scrollLocked })
 
         // 只加状态类，不动任何布局样式
-        document.body.classList.add('image-viewer-open')
+        addClass(document.body, imageViewerOpenClass)
     }
 
     function unlockScroll() {
         if (!scrollLocked) return
         scrollLocked = false
 
-        window.removeEventListener('wheel', preventWheel)
-        window.removeEventListener('touchmove', preventTouchMove)
-        window.removeEventListener('keydown', preventKeyScroll)
+        off(window, 'wheel', preventWheel)
+        off(window, 'touchmove', preventTouchMove)
+        off(window, eventNames.keydown, preventKeyScroll)
 
         if (unbindViewerShortcuts) {
             unbindViewerShortcuts()
             unbindViewerShortcuts = null
         }
 
-        const content = document.querySelector('.content')
+        const content = byClass(docsifyClasses.content)
         if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
         if (content && content.scrollTop !== lockContentY) content.scrollTop = lockContentY
 
-        document.body.classList.remove('image-viewer-open')
+        removeClass(document.body, imageViewerOpenClass)
     }
 
     function createImageOpenCloseKeyframe(tarImg, tarEl, isOpen) {
@@ -281,23 +306,23 @@ function plugin(hook, vm) {
     }
 
     hook.mounted(function () {
-        const viewFullImageSpan = document.createElement('span')
+        const viewFullImageSpan = createElement(tags.span)
 
         viewFullImageSpan.id = 'view-full-image-span'
 
-        const viewFullImageSpanInnerLeftDiv = document.createElement('div')
-        const viewFullImageSpanInnerRightDiv = document.createElement('div')
+        const viewFullImageSpanInnerLeftDiv = createElement(tags.div)
+        const viewFullImageSpanInnerRightDiv = createElement(tags.div)
 
         viewFullImageSpanInnerLeftDiv.id = 'view-full-image-span-inner-left-div'
         viewFullImageSpanInnerRightDiv.id = 'view-full-image-span-inner-right-div'
-        viewFullImageSpanInnerLeftDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-        viewFullImageSpanInnerRightDiv.innerHTML = '<?xml version="1.0" encoding="UTF-8"?><svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+        viewFullImageSpanInnerLeftDiv.innerHTML = viewFullImageIcons.prevArrow
+        viewFullImageSpanInnerRightDiv.innerHTML = viewFullImageIcons.nextArrow
 
-        const viewFullImageSpanInnerImgDiv = document.createElement('div')
+        const viewFullImageSpanInnerImgDiv = createElement(tags.div)
 
         viewFullImageSpanInnerImgDiv.id = 'view-full-image-span-inner-img-div'
 
-        const viewFullImageSpanInnerTextDiv = document.createElement('div')
+        const viewFullImageSpanInnerTextDiv = createElement(tags.div)
 
         viewFullImageSpanInnerTextDiv.id = 'view-full-image-span-inner-text-div'
 
@@ -309,11 +334,11 @@ function plugin(hook, vm) {
         document.body.appendChild(viewFullImageSpan)
 
         function collectImages() {
-            return Array.from(document.getElementsByTagName('img')).filter(img => !isIgnoredImage(img))
+            return queryAll(tags.img).filter(img => !isIgnoredImage(img))
         }
 
         function currentImageIndex(imgArray) {
-            const imgEl = document.getElementById('view-full-image-span-inner-img-div')
+            const imgEl = byId('view-full-image-span-inner-img-div')
 
             for (let i = 0; i < imgArray.length; i++) {
                 if (imgEl.style.backgroundImage.indexOf(imgArray[i].src) > -1) return i
@@ -327,8 +352,8 @@ function plugin(hook, vm) {
         }
 
         function showImage(imgArray, index, direction) {
-            const imgEl = document.getElementById('view-full-image-span-inner-img-div')
-            const textEl = document.getElementById('view-full-image-span-inner-text-div')
+            const imgEl = byId('view-full-image-span-inner-img-div')
+            const textEl = byId('view-full-image-span-inner-text-div')
 
             const oldBackground = imgEl.style.backgroundImage
             const newBackground = 'url(' + imgArray[index].src + ')'
@@ -369,18 +394,18 @@ function plugin(hook, vm) {
 
         const notPreventParentOnClickEventElementId = [viewFullImageSpanInnerImgDiv.id, viewFullImageSpan.id, viewFullImageSpanInnerTextDiv.id]
 
-        viewFullImageSpan.onclick = function (e) {
+        on(viewFullImageSpan, eventNames.click, function (e) {
             if (notPreventParentOnClickEventElementId.indexOf(e.target.id) === -1) return
             closeViewer()
-        }
+        })
 
         let touchStartX, touchEndX
 
-        viewFullImageSpan.ontouchstart = function (e) {
+        on(viewFullImageSpan, eventNames.touchstart, function (e) {
             touchStartX = e.targetTouches[0].pageX
-        }
+        })
 
-        viewFullImageSpan.ontouchend = function (e) {
+        on(viewFullImageSpan, eventNames.touchend, function (e) {
             touchEndX = e.changedTouches[0].pageX
 
             if (touchEndX - touchStartX > 40) {
@@ -389,26 +414,26 @@ function plugin(hook, vm) {
             else if (touchEndX - touchStartX < -40) {
                 buttonLeftRightOnClick(false)
             }
-        }
+        })
 
-        viewFullImageSpanInnerLeftDiv.onclick = function (e) {
+        on(viewFullImageSpanInnerLeftDiv, eventNames.click, function () {
             buttonLeftRightOnClick(true)
-        }
-        viewFullImageSpanInnerRightDiv.onclick = function (e) {
+        })
+        on(viewFullImageSpanInnerRightDiv, eventNames.click, function () {
             buttonLeftRightOnClick(false)
-        }
+        })
     })
 
     hook.doneEach(function () {
-        Array.from(document.getElementsByTagName('img')).filter(img => !isIgnoredImage(img)).forEach((img, index, arr) => {
-            if (img.dataset.viewFullImageBound === '1') return
-            img.dataset.viewFullImageBound = '1'
+        queryAll(tags.img).filter(img => !isIgnoredImage(img)).forEach((img, index, arr) => {
+            if (getData(img, 'viewFullImageBound') === '1') return
+            setData(img, 'viewFullImageBound', '1')
 
-            const viewFullImageSpan = document.getElementById('view-full-image-span')
-            const viewFullImageSpanInnerImgDiv = document.getElementById('view-full-image-span-inner-img-div')
-            const viewFullImageSpanInnerTextDiv = document.getElementById('view-full-image-span-inner-text-div')
+            const viewFullImageSpan = byId('view-full-image-span')
+            const viewFullImageSpanInnerImgDiv = byId('view-full-image-span-inner-img-div')
+            const viewFullImageSpanInnerTextDiv = byId('view-full-image-span-inner-text-div')
 
-            img.addEventListener('click', function () {
+            on(img, eventNames.click, function () {
                 curImg = img
 
                 viewFullImageSpanInnerImgDiv.style.backgroundImage = 'url(' + img.src + ')'
@@ -423,4 +448,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['viewFullImage'] = Object.assign(
+    viewFullImageOptions,
+    window.$docsify['viewFullImage']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

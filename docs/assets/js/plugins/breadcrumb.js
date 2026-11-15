@@ -1,7 +1,10 @@
 import pathNameData from '../config/breadcrumbData.json.js'
 import { isEnabled } from '../utils/common.js'
+import { docsifyClasses, docsifyIds } from '../utils/constants.js'
+import { tags, createElement, query, byId, byClass } from '../utils/dom.js'
 
 let breadcrumbOptions = {
+    enable: false,
     localization: [
         'en-us', 
         'jp',
@@ -9,6 +12,8 @@ let breadcrumbOptions = {
 }
 
 function plugin(hook, vm) {
+    if (!breadcrumbOptions.enable) return
+
     let isReadme = false
 
     hook.afterEach(function (html, next) {
@@ -23,7 +28,7 @@ function plugin(hook, vm) {
 
         if (!i18nPathList.includes(parts[0])) {
             if (parts.length == 1 && parts[0] == '') {
-                breadcrumb += '<li class=\'active\'>首页</li>'
+                breadcrumb += `<li class='${docsifyClasses.active}'>首页</li>`
             }
             else {
                 breadcrumb += '<li><a href=\'' + '#' + curPath + '\'>首页</a></li>'
@@ -51,7 +56,7 @@ function plugin(hook, vm) {
             if (index < parts.length - 1) {
                 breadcrumb += '<li><a href=\'' + curHrefPath + '\'>' + displayText + '</a></li>'
             } else {
-                breadcrumb += '<li class=\'active\'>' + displayText + '</li>'
+                breadcrumb += `<li class='${docsifyClasses.active}'>` + displayText + '</li>'
             }
         })
 
@@ -62,26 +67,31 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         if (!isReadme) {
-            const mainEl = document.getElementById('main')
-            const h1El = mainEl && mainEl.querySelector('h1')
+            const mainEl = byId(docsifyIds.main)
+            const h1El = query('h1', mainEl)
             let pageTitle = h1El ? h1El.textContent.trim() : ''
 
-            let breadcrumb = document.getElementsByClassName('breadcrumb')[0]
+            let breadcrumb = byClass('breadcrumb')
+            if (!breadcrumb) return
 
             if (pageTitle === '404') {
-                let homePageLi = breadcrumb.querySelector('li:first-child')
+                let homePageLi = query('li:first-child', breadcrumb)
 
                 breadcrumb.innerHTML = ''
 
                 breadcrumb.appendChild(homePageLi.cloneNode(true))
 
-                let notFoundLi = document.createElement('li')
-                notFoundLi.className = 'active'
-                notFoundLi.textContent = pageTitle
+                let notFoundLi = createElement(tags.li, {
+                    className: docsifyClasses.active,
+                    text: pageTitle
+                })
                 breadcrumb.appendChild(notFoundLi)
             }
             else {
-                breadcrumb.getElementsByClassName('active')[0].innerHTML = pageTitle
+                const activeEl = byClass(docsifyClasses.active, breadcrumb)
+                if (!activeEl) return
+
+                activeEl.innerHTML = pageTitle
             }
         }
     })

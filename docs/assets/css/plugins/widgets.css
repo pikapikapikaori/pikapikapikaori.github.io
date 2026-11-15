@@ -1,4 +1,5 @@
 @import url("../nonstandard/plugins/widgets.css");
+@import url("../components/sakuraRain.css");
 
 :root {
     --widgets-size: var(--global-widget-size-normal);

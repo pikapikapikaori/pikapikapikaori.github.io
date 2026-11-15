@@ -15,7 +15,8 @@ import {
     getStoredFontMode, getStoredFontSize
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
-import { LS_KEYS, PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
+import { PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
+import { LS_KEYS, remove } from '../store/local-storage.js'
 import { verifyGrammarFiles } from '../services/grammar-service.js'
 import { openGrammarVerifyModal } from '../components/grammar-verify-modal.js'
 import { applyTheme, currentTheme } from '../components/theme-toggle.js'
@@ -327,7 +328,7 @@ export default {
             if (!ok) return
             try {
                 await deleteUser(userId)
-                try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
+                remove(LS_KEYS.user)
                 appStore.set({ user: null, userId: null, settings: null })
                 // 外部源的 HTTP 响应缓存也是这份数据的一部分
                 clearHttpCache().catch((err) => console.warn('[http-cache] 清理失败', err))

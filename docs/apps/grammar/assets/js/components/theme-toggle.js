@@ -1,22 +1,20 @@
 import { h, replace } from '../utils/dom.js'
 import { THEME_ICONS } from './icons.js'
-import { LS_KEYS, THEMES } from '../config/config.js'
+import { LS_KEYS, getEnum, setEnum } from '../store/local-storage.js'
+import { THEMES } from '../config/config.js'
 
 const KEY = LS_KEYS.theme
 const CYCLE = THEMES.map((t) => t.value)
 const LABELS = Object.fromEntries(THEMES.map((t) => [t.value, t.label]))
 
 export function currentTheme() {
-    try {
-        const t = localStorage.getItem(KEY)
-        return CYCLE.includes(t) ? t : 'auto'
-    } catch { return 'auto' }
+    return getEnum(KEY, CYCLE, 'auto')
 }
 
 export function applyTheme(theme) {
     const v = CYCLE.includes(theme) ? theme : 'auto'
     document.documentElement.setAttribute('data-theme', v)
-    try { localStorage.setItem(KEY, v) } catch { /* ignore */ }
+    setEnum(KEY, CYCLE, v)
     return v
 }
 

@@ -1,5 +1,6 @@
 import { h } from '../utils/dom.js'
 import { BREVE_LANGS } from '../config/config.js'
+import { romanKey, breveKey, getBool, setBool } from '../store/local-storage.js'
 
 /** 从挂载点往上找真正在滚的容器；找不到就用 window */
 function findScroller(start) {
@@ -17,13 +18,12 @@ function findScroller(start) {
  * @returns {{ el, isOn, isBreveOn, destroy }}
  */
 export function createPageTools({ lang, toRoman = null, onChange = null, onBreveChange = null, anchorEl = null } = {}) {
-    const key = `ln.roman.${lang}`
-    let romanOn = false
-    try { romanOn = localStorage.getItem(key) === '1' } catch { /* ignore */ }
+    // Schema pages mount without a language, so there is no per-language key to read.
+    const key = romanKey(lang)
+    let romanOn = key ? getBool(key, false) : false
 
-    const breveKey = `ln.breve.${lang}`
-    let breveOn = false
-    try { breveOn = localStorage.getItem(breveKey) === '1' } catch { /* ignore */ }
+    const breveStorageKey = breveKey(lang)
+    let breveOn = breveStorageKey ? getBool(breveStorageKey, false) : false
 
     const scroller = findScroller(anchorEl)
 
@@ -60,7 +60,7 @@ export function createPageTools({ lang, toRoman = null, onChange = null, onBreve
         onclick: () => {
             if (!toRoman) return
             romanOn = !romanOn
-            try { localStorage.setItem(key, romanOn ? '1' : '0') } catch { /* ignore */ }
+            if (key) setBool(key, romanOn)
             sync()
             if (typeof onChange === 'function') onChange(romanOn)
         }
@@ -74,7 +74,7 @@ export function createPageTools({ lang, toRoman = null, onChange = null, onBreve
             'aria-pressed': breveOn ? 'true' : 'false',
             onclick: () => {
                 breveOn = !breveOn
-                try { localStorage.setItem(breveKey, breveOn ? '1' : '0') } catch { /* ignore */ }
+                if (breveStorageKey) setBool(breveStorageKey, breveOn)
                 syncBreve()
                 if (typeof onBreveChange === 'function') onBreveChange(breveOn)
             }

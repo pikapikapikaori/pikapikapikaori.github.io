@@ -1,4 +1,13 @@
+import { docsifyClasses } from '../utils/constants.js'
+import { tags, eventNames, on, toggleClass, hasClass, createElement, query, byClass } from '../utils/dom.js'
+
+let fadeEdgeOptions = {
+    enable: false
+}
+
 function plugin(hook, vm) {
+    if (!fadeEdgeOptions.enable) return
+
     function isSelfScrollable(el) {
         const oy = getComputedStyle(el).overflowY
         if (oy !== 'auto' && oy !== 'scroll' && oy !== 'overlay') return false
@@ -18,7 +27,7 @@ function plugin(hook, vm) {
         let contentBottom = cRect.bottom
 
         for (const child of container.children) {
-            if (child.classList.contains('fade-edge')) continue
+            if (hasClass(child, 'fade-edge')) continue
             const r = child.getBoundingClientRect()
             if (r.bottom > contentBottom) contentBottom = r.bottom
         }
@@ -31,25 +40,23 @@ function plugin(hook, vm) {
 
     function attachSidebarFadeEdge(container) {
         if (!container) return
-        if (container.querySelector('.fade-edge')) return
+        if (query('.fade-edge', container)) return
 
-        const top = document.createElement('div')
-        top.className = 'fade-edge top'
-        const bottom = document.createElement('div')
-        bottom.className = 'fade-edge bottom'
+        const top = createElement(tags.div, { className: 'fade-edge top' })
+        const bottom = createElement(tags.div, { className: 'fade-edge bottom' })
         container.prepend(top)
         container.append(bottom)
 
         const update = () => {
             const { atTop, atBottom } = containerEdgeState(container)
 
-            top.classList.toggle('show', !atTop)
-            bottom.classList.toggle('show', !atBottom)
+            toggleClass(top, docsifyClasses.show, !atTop)
+            toggleClass(bottom, docsifyClasses.show, !atBottom)
         }
 
-        container.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('resize', update, { passive: true })
+        on(container, eventNames.scroll, update, { passive: true })
+        on(window, eventNames.scroll, update, { passive: true })
+        on(window, eventNames.resize, update, { passive: true })
         new ResizeObserver(update).observe(container)
         update()
     }
@@ -57,13 +64,11 @@ function plugin(hook, vm) {
     function attachContentFadeEdge(container) {
         if (!container) return
 
-        if (document.body.querySelector('.content-fade-edge')) return
+        if (query('.content-fade-edge', document.body)) return
 
-        const top = document.createElement('div')
-        top.className = 'fade-edge content-fade-edge top'
+        const top = createElement(tags.div, { className: 'fade-edge content-fade-edge top' })
 
-        const bottom = document.createElement('div')
-        bottom.className = 'fade-edge content-fade-edge bottom'
+        const bottom = createElement(tags.div, { className: 'fade-edge content-fade-edge bottom' })
 
         document.body.prepend(top)
         document.body.append(bottom)
@@ -71,7 +76,7 @@ function plugin(hook, vm) {
         const update = () => {
             let atTop, atBottom
 
-            const cover = document.querySelector('section.cover.show')
+            const cover = query(`section.cover.${docsifyClasses.show}`)
 
             if (cover) {
                 // cover 页：用页面滚动判断
@@ -85,20 +90,20 @@ function plugin(hook, vm) {
                 atBottom = state.atBottom
             }
 
-            top.classList.toggle('show', !atTop)
-            bottom.classList.toggle('show', !atBottom)
+            toggleClass(top, docsifyClasses.show, !atTop)
+            toggleClass(bottom, docsifyClasses.show, !atBottom)
         }
 
-        container.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('resize', update, { passive: true })
+        on(container, eventNames.scroll, update, { passive: true })
+        on(window, eventNames.scroll, update, { passive: true })
+        on(window, eventNames.resize, update, { passive: true })
         new ResizeObserver(update).observe(container)
         update()
     }
 
     function initFadeEdges() {
-        attachContentFadeEdge(document.querySelector('.content'))
-        attachSidebarFadeEdge(document.querySelector('.sidebar'))
+        attachContentFadeEdge(byClass(docsifyClasses.content))
+        attachSidebarFadeEdge(byClass(docsifyClasses.sidebar))
     }
 
     hook.doneEach(function () {
@@ -106,4 +111,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['fadeEdge'] = Object.assign(
+    fadeEdgeOptions,
+    window.$docsify['fadeEdge']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

@@ -4,7 +4,14 @@
     var App = window.App = window.App || {}
     var L = App.layouts = {}
 
-    var STORAGE_KEY = 'pikapikapi:layout:homepage'
+    var STORAGE = App.storage
+    var LAYOUT_NAME = STORAGE.NAMES.layout
+    var ROOT_ID = 'layoutRoot'
+    var FILES = {
+        html: 'html/index.html',
+        css: 'css/main.css',
+        js: 'js/main.js'
+    }
     var current = null
     var requestSeq = 0
     var listeners = []
@@ -13,18 +20,6 @@
 
     function normalize(id) {
         return App.config.layouts.indexOf(id) === -1 ? null : id
-    }
-
-    function readSaved() {
-        try {
-            return normalize(localStorage.getItem(STORAGE_KEY))
-        } catch (e) {
-            return null
-        }
-    }
-
-    function writeSaved(id) {
-        try { localStorage.setItem(STORAGE_KEY, id) } catch (e) { /* 忽略：隐私模式下不可写 */ }
     }
 
     function layoutUrl(id, file) {
@@ -59,7 +54,7 @@
     }
 
     L.initId = function () {
-        return readSaved() || normalize(App.config.defaultLayout) || App.config.layouts[0]
+        return normalize(STORAGE.get(LAYOUT_NAME)) || normalize(App.config.defaultLayout) || App.config.layouts[0]
     }
 
     L.currentId = function () {
@@ -78,7 +73,7 @@
 
     function notify() {
         listeners.slice().forEach(function (fn) {
-            try { fn(L.currentId()) } catch (e) { /* 忽略单个监听器的错误 */ }
+            try { fn(L.currentId()) } catch (e) {}
         })
     }
 
@@ -134,7 +129,7 @@
             return Promise.resolve({ id: id, ok: true, same: true })
         }
 
-        var root = document.getElementById('layoutRoot')
+        var root = document.getElementById(ROOT_ID)
 
         if (!root) {
             return Promise.resolve({ id: L.currentId(), ok: false })
@@ -143,7 +138,7 @@
         var request = ++requestSeq
         var cancelled = false
         var newLink = null
-        var jsUrl = layoutUrl(id, 'js/main.js')
+        var jsUrl = layoutUrl(id, FILES.js)
 
         if (retryImports[id]) jsUrl += '?retry=' + retryImports[id]
 
@@ -154,8 +149,8 @@
         }
 
         return Promise.all([
-            fetchHtml(layoutUrl(id, 'html/index.html')),
-            loadCss(layoutUrl(id, 'css/main.css')).then(function (link) {
+            fetchHtml(layoutUrl(id, FILES.html)),
+            loadCss(layoutUrl(id, FILES.css)).then(function (link) {
                 newLink = link
                 if (cancelled) removeLink(link)
                 return link
@@ -196,7 +191,7 @@
                 retryImports[id] = (retryImports[id] || 0) + 1
 
                 if (handle && typeof handle.unmount === 'function') {
-                    try { handle.unmount() } catch (e) { /* 忽略回滚中的二次错误 */ }
+                    try { handle.unmount() } catch (e) {}
                 }
 
                 releaseNewLink()
@@ -223,7 +218,7 @@
             if (previous) removeLink(previous.link)
 
             current = { id: id, link: link, instance: instance, handle: handle }
-            /* current 与 data-layout 已提交且控件已挂到新布局，此处刷新才能与当前布局一致。 */
+            /* 切换提交后刷新，控件名称才与当前布局一致。 */
             App.controls.refresh()
             /* 仅切换成功回页顶；失败回滚路径不调用，与语言切换共用同一实现。 */
             if (previous) App.utils.scrollToTopInstant()
@@ -246,7 +241,7 @@
 
     L.select = function (id) {
         return L.load(id).then(function (result) {
-            if (result.ok) writeSaved(result.id)
+            if (result.ok) STORAGE.set(LAYOUT_NAME, result.id)
             return result
         })
     }

@@ -8,10 +8,9 @@ import {
 import { loadIme } from '../services/ime-service.js'
 import { getLanguage } from '../data/languages.js'
 import { bdiNode } from '../utils/bdi.js'
-
-const LS_ENABLED = 'ln.ime.enabled'
-const LS_FOLLOW = 'ln.ime.follow'
-const LS_MODE = (code) => `ln.ime.mode.${code}`
+import {
+    getBool, setBool, getString, setString, imeModeKey, imeEnabledKey, imeFollowKey
+} from '../store/local-storage.js'
 
 /**
  * 键盘几何：真实键盘比例，四行都是 15 个单位。
@@ -100,23 +99,12 @@ function noteModifiers(e) {
     render()
 }
 
-function stored(key, fallback) {
-    try {
-        const value = localStorage.getItem(key)
-        return value === null ? fallback : value
-    } catch { return fallback }
-}
-
-function store(key, value) {
-    try { localStorage.setItem(key, value) } catch { /* 无痕模式下写不进去，忽略 */ }
-}
-
 function readEnabled() {
-    return stored(LS_ENABLED, '1') !== '0'
+    return getBool(imeEnabledKey, true)
 }
 
 function readFollow() {
-    return stored(LS_FOLLOW, '1') !== '0'
+    return getBool(imeFollowKey, true)
 }
 
 /* ---------------- 生命周期 ---------------- */
@@ -134,7 +122,7 @@ export async function mountInputHelper({ lang } = {}) {
     if (!state.config) return unmountInputHelper()
     ensureDom()
     // tab 按语言各记各的：换语言时不能沿用上一个语言选的 tab（满语只有键盘）
-    state.mode = stored(LS_MODE(lang), null)
+    state.mode = getString(imeModeKey(lang), null)
     state.shift = false
     state.caps = false
     oneShotShift = false
@@ -269,7 +257,7 @@ function ensureDom() {
         'aria-label': '输入助手',
         onclick: () => {
             state.enabled = !state.enabled
-            store(LS_ENABLED, state.enabled ? '1' : '0')
+            setBool(imeEnabledKey, state.enabled)
             refreshFab()
             if (state.enabled) openForFocused()
             else closePanel()
@@ -414,7 +402,7 @@ function setMode(mode) {
     state.mode = mode
     state.shift = false
     oneShotShift = false
-    if (state.config) store(LS_MODE(state.config.code), mode)
+    if (state.config) setString(imeModeKey(state.config.code), mode)
     render()
 }
 
@@ -645,7 +633,7 @@ function followButton(slot) {
         title: state.follow ? '跟随物理键盘：开（点一下只响应屏幕点击）' : '跟随物理键盘：关（点一下恢复）',
         onclick: () => {
             state.follow = !state.follow
-            store(LS_FOLLOW, state.follow ? '1' : '0')
+            setBool(imeFollowKey, state.follow)
             render()
         }
     }, keyboardIcon(), h('span', { class: 'ime__key__text' }, '跟随'))
@@ -753,7 +741,7 @@ function onShortcutKey(e) {
         if (!field || !field.el.closest('#view')) return
         if (!state.enabled) {
             state.enabled = true
-            store(LS_ENABLED, '1')
+            setBool(imeEnabledKey, true)
             refreshFab()
         }
         state.target = field
@@ -801,7 +789,7 @@ function onPhysicalKey(e) {
             // 只有左 Shift 是 Shift 层；右 Shift 是「跟随物理键盘」的开关
             if (e.code === 'ShiftRight') {
                 state.follow = !state.follow
-                store(LS_FOLLOW, state.follow ? '1' : '0')
+                setBool(imeFollowKey, state.follow)
                 render()
                 return
             }

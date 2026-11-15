@@ -1,18 +1,27 @@
-// 判断值是否启用
+import { addClass, eventNames, on, removeClass } from './dom.js'
+
 export function isEnabled(value) {
     return Boolean(value)
 }
 
-// 代码块保护工具
+export function isNil(value) {
+    return value === null || value === undefined
+}
+
 const codeBlockStore = new Map()
 
-const CODE_MARKUP = /(```[\s\S]*?```)/gm
+const codeMarkup = /(```[\s\S]*?```)/gm
 
-export function protectCodeBlocks(content, prefix = 'codeblock', mode = 'protect') {
-    if (mode === 'protect') {
+export const codeBlockModes = {
+    protect: 'protect',
+    restore: 'restore'
+}
+
+export function protectCodeBlocks(content, prefix = 'codeblock', mode = codeBlockModes.protect) {
+    if (mode === codeBlockModes.protect) {
         const blocks = []
 
-        const protectedContent = content.replace(CODE_MARKUP, block => {
+        const protectedContent = content.replace(codeMarkup, block => {
             const marker = `<!-- ${prefix}-${blocks.length} -->`
             blocks.push(block)
             return marker
@@ -22,7 +31,7 @@ export function protectCodeBlocks(content, prefix = 'codeblock', mode = 'protect
         return protectedContent
     }
 
-    if (mode === 'restore') {
+    if (mode === codeBlockModes.restore) {
         const blocks = codeBlockStore.get(prefix) || []
 
         const restoredContent = blocks.reduce((acc, block, i) => {
@@ -34,13 +43,10 @@ export function protectCodeBlocks(content, prefix = 'codeblock', mode = 'protect
         return restoredContent
     }
 
-    console.warn(`[protectCodeBlocks] Unknown mode: ${mode}`)
     return content
 }
 
-// 统计各脚本词/字数，并估算阅读时间（分钟）。
-const COUNT_RULES = [
-    // —— 按“词”统计 ——
+const countRules = [
     { name: 'latin',      type: 'word', pattern: String.raw`\p{Script_Extensions=Latin}+`,      speed: 250 },
     { name: 'greek',      type: 'word', pattern: String.raw`\p{Script_Extensions=Greek}+`,      speed: 150 },
     { name: 'cyrillic',   type: 'word', pattern: String.raw`\p{Script_Extensions=Cyrillic}+`,   speed: 200 },
@@ -62,7 +68,7 @@ export function countText(content, options = {}) {
     const word  = { count: 0, time: 0 }
     const char  = { count: 0, time: 0 }
 
-    for (const rule of COUNT_RULES) {
+    for (const rule of countRules) {
         const re = new RegExp(rule.pattern, 'gu')
         const matches = src.match(re)
         const count = matches ? matches.length : 0
@@ -85,12 +91,13 @@ export function countText(content, options = {}) {
     }
 }
 
-// 临时禁用页面过渡
+export const noTransitionClass = 'no-transition'
+
 let noTransitionDepth = 0
 
 export function lockNoTransition() {
     noTransitionDepth++
-    document.body.classList.add('no-transition')
+    addClass(document.body, noTransitionClass)
 }
 
 export function unlockNoTransition() {
@@ -101,37 +108,7 @@ export function unlockNoTransition() {
     if (noTransitionDepth > 0) return
 
     void document.body.offsetHeight
-    document.body.classList.remove('no-transition')
-}
-
-// 判断当前设备是否属于移动端
-export function isMobile() {
-    let WIN = window
-    let NA = WIN.navigator
-    let UA = NA.userAgent.toLowerCase()
-
-    function test(needle) {
-        return needle.test(UA)
-    }
-
-    let IsAndroid = test(/android|htc/) || /linux/i.test(NA.platform + '')
-    let IsIPhone = !IsAndroid && test(/ipod|iphone/)
-    let IsWinPhone = test(/windows phone/)
-
-    let device = {
-        IsAndroid: IsAndroid,
-        IsIPhone: IsIPhone,
-        IsWinPhone: IsWinPhone,
-    }
-
-    let documentElement = WIN.document.documentElement
-    for (var i in device) {
-        if (device[i]) {
-            documentElement.className += ' ' + i.replace('Is', '').toLowerCase()
-        }
-    }
-
-    return device.IsAndroid || device.IsIPhone || device.IsWinPhone
+    removeClass(document.body, noTransitionClass)
 }
 
 // #rgb / #rrggbb / #rrggbbaa → [h, s, l]
@@ -190,7 +167,6 @@ export function hslToHex(h, s, l) {
     return `#${f(0)}${f(8)}${f(4)}`
 }
 
-// 让原本只能点击的元素可键盘操作
 const buttonLikeElements = new WeakSet()
 
 export function makeButtonLike(el) {
@@ -198,10 +174,18 @@ export function makeButtonLike(el) {
     buttonLikeElements.add(el)
 
     el.tabIndex = 0
-    el.addEventListener('keydown', event => {
+    on(el, eventNames.keydown, event => {
         if (event.key !== 'Enter' && event.key !== ' ') return
         if (event.key === ' ') event.preventDefault()
         if (event.repeat) return
         el.click()
     })
+}
+
+export function clamp(value, min, max) {
+    return Math.min(Math.max(Number(value) || min, min), max)
+}
+
+export function toDate(timeStr) {
+    return new Date(timeStr.replace(/\./g, '-'))
 }

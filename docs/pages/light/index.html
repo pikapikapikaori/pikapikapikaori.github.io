@@ -85,6 +85,7 @@
 
             // 自用插件
             tocPage: {
+                enable: true,
                 recentAmount: 16,
                 renderStyle: 'list',
                 localPath: lightLocales,
@@ -97,10 +98,16 @@
             },
 
             fixUrl: {
+                enable: true,
                 prefix: '../../'
             },
 
+            interceptImg: {
+                enable: true
+            },
+
             commentWithFooter: {
+                enable: true,
                 use: null,
                 footerInnerHtml: '<small>&copy; 2023 - {comment_footer-yyyy}{comment_footer-divider}{comment_footer-info}{comment_footer-divider}{comment_footer-copy}</small>',
                 localization: {
@@ -123,6 +130,7 @@
             },
 
             htmlReplace: {
+                enable: true,
                 links: {
                     github: 'https://github.com/pikapikapikaori/',
                     email: 'mailto:Lyy8759@outlook.com',
@@ -217,10 +225,10 @@
     <link rel="stylesheet" href="../../assets/css/plugins/replaceHtmlAnnotation.css">
     <script type="module" src="../../assets/js/plugins/replaceHtmlAnnotation.js"></script>
 
+    <script type="module" src="../../assets/js/plugins/fixUrl.js"></script>
+
     <link rel="stylesheet" href="../../assets/css/plugins/tocPage.css">
     <script type="module" src="../../assets/js/plugins/tocPage.js"></script>
-
-    <script src="../../assets/js/plugins/fixUrl.js"></script>
 </body>
 
 </html>

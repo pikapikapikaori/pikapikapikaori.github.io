@@ -95,34 +95,6 @@
     <script src="./assets/sources/npm/@sy-records/docsify-loading/lib/index.min.js"></script>
 
 
-    <!-- Live2D 模型 Cubism 4 -->
-    <script src="./assets/sources/cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
-    <script src="./assets/sources/npm/pixi.js@5.2.1/dist/pixi.min.js"></script>
-    <script src="./assets/sources/npm/pixi-live2d-display/dist/cubism4.min.js"></script>
-    <script src="./assets/js/plugins/live2dLoader.js"></script>
-    <script>
-        addEventListener("DOMContentLoaded", function () {
-            let models = [
-                {
-                    width: 300,
-                    height: 300,
-                    right: "50px",
-                    bottom: "0px",
-                    offsetX: -60,
-                    offsetY: 0,
-                    role: "./assets/resources/live2d/rice_pro_en/runtime/rice_pro_t03.model3.json",
-                    background: "",
-                    opacity: 1,
-                    mobile: true,
-                    draggable: false,
-                    hitArea: { x: 190, y: 30, w: 110, h: 270 },
-                },
-            ];
-            new Live2dLoader(models);
-        });
-    </script>
-
-
     <!-- 自用插件 -->
     <!-- 添加评论与页脚插件 -->
     <link rel="stylesheet" href="./assets/css/plugins/commentWithFooter.css">
@@ -132,11 +104,10 @@
     <link rel="stylesheet" href="./assets/css/plugins/countWords.css">
     <script type="module" src="./assets/js/plugins/countWords.js"></script>
 
-    <!-- 添加樱花特效 -->
-    <link rel="stylesheet" href="./assets/css/plugins/sakuraRain.css">
-    <script src="./assets/js/plugins/sakuraRain.js"></script>
-
     <!-- 添加小组件 -->
+    <script src="./assets/sources/cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="./assets/sources/npm/pixi.js@5.2.1/dist/pixi.min.js"></script>
+    <script src="./assets/sources/npm/pixi-live2d-display/dist/cubism4.min.js"></script>
     <link rel="stylesheet" href="./assets/css/plugins/widgets.css">
     <script type="module" src="./assets/js/plugins/widgets.js"></script>
 
@@ -158,6 +129,7 @@
     <script type="module" src="./assets/js/plugins/tocPage.js"></script>
 
     <!-- 添加链接标记样式 -->
+    <link rel="stylesheet" href="./assets/css/plugins/addSvgToLinks.css">
     <script type="module" src="./assets/js/plugins/addSvgToLinks.js"></script>
 
     <!-- 添加 breadcrumb 头 -->

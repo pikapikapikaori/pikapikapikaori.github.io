@@ -13,11 +13,13 @@ import { initFont, applyFontSize, getStoredFontSize } from './services/font-serv
 import { settingsIcon } from './components/icons.js'
 import { clearBreadcrumbs, applyBreadcrumbs } from './utils/breadcrumbs.js'
 import { loadLanguages } from './data/languages.js'
-import { LS_KEYS, THEMES, SCRIPT_SEARCH_LANGS } from './config/config.js'
+import { LS_KEYS, getEnum, getString, remove } from './store/local-storage.js'
+import { THEMES, SCRIPT_SEARCH_LANGS } from './config/config.js'
 import { preloadScriptProfiles } from './services/grammar-service.js'
 import { createDevTools } from './dev/index.js'
 
 const DEFAULT_THEME = THEMES[0].value
+const THEME_VALUES = THEMES.map((t) => t.value)
 
 const NO_HEADER_ROUTES = new Set(['/', '/welcome'])
 const NO_LAYOUT_ROUTES = new Set(['/', '/welcome'])
@@ -72,7 +74,7 @@ function syncHeader() {
 
 /** 注销：清掉当前用户的选择（数据留在库里），回欢迎页重新选 */
 function logout() {
-    try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
+    remove(LS_KEYS.user)
     setUser(null)
     appStore.set({ settings: null })
     router.navigate('/welcome')
@@ -219,8 +221,7 @@ async function bootstrap() {
         return
     }
 
-    let theme = DEFAULT_THEME
-    try { theme = localStorage.getItem(LS_KEYS.theme) || DEFAULT_THEME } catch { /* ignore */ }
+    const theme = getEnum(LS_KEYS.theme, THEME_VALUES, DEFAULT_THEME)
     applyTheme(theme)
 
     // 字体与字号存在 localStorage，启动时须应用，否则界面与设置页显示不一致。
@@ -238,13 +239,10 @@ async function bootstrap() {
     await preloadScriptProfiles(SCRIPT_SEARCH_LANGS)
 
     let cur = null
-    let uid = null
-    try { uid = localStorage.getItem(LS_KEYS.user) } catch { /* ignore */ }
+    const uid = getString(LS_KEYS.user, null)
     if (uid) {
         cur = await getUser(uid)
-        if (!cur) {
-            try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
-        }
+        if (!cur) remove(LS_KEYS.user)
     }
     if (cur) {
         setUser(cur)

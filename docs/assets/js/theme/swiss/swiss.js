@@ -6,13 +6,32 @@
  */
 
 import { takeSlots, setupPlugin } from './plugin.js'
-import { makeEl } from './util.js'
+import { createStorage } from '../../utils/storage.js'
+import { docsifyClasses } from '../../utils/constants.js'
+import { swissIcons } from '../../utils/icons.js'
+import {
+    tags,
+    eventNames,
+    on,
+    addClass,
+    removeClass,
+    toggleClass,
+    hasClass,
+    createElement,
+    query,
+    queryAll,
+    byClass,
+    setCssVar,
+    getData,
+    setData
+} from '../../utils/dom.js'
 
-const COLS_KEY = 'swiss-cols'
-const DATE_RE = /\d{4}\s*[.\-/]\s*\d{1,2}\s*(?:[.\-/]\s*\d{1,2})?/
+const colsKey = 'swiss-cols'
+const colsStorage = createStorage('local')
+const dateRe = /\d{4}\s*[.\-/]\s*\d{1,2}\s*(?:[.\-/]\s*\d{1,2})?/
 
 /** 块级媒体：不进栏，独占整幅 */
-const PLATE_SELECTOR = [
+const plateSelector = [
     'iframe',
     'video',
     'pre',
@@ -29,9 +48,9 @@ const PLATE_SELECTOR = [
     '.brief-comments-container'
 ].join(',')
 
-const COLS_ICONS = {
-    1: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="17" height="3"></rect><rect x="3.5" y="10.5" width="17" height="3"></rect><rect x="3.5" y="15" width="11" height="3"></rect></svg>',
-    2: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="6" width="7" height="3"></rect><rect x="3.5" y="10.5" width="7" height="3"></rect><rect x="3.5" y="15" width="7" height="3"></rect><rect x="13.5" y="6" width="7" height="3"></rect><rect x="13.5" y="10.5" width="7" height="3"></rect><rect x="13.5" y="15" width="7" height="3"></rect></svg>'
+const colsIcons = {
+    1: swissIcons.colsOne,
+    2: swissIcons.colsTwo
 }
 
 function isBlankText(node) {
@@ -42,14 +61,14 @@ function imgIn(el) {
     if (!el || el.nodeType !== 1) return null
     if (el.tagName === 'IMG') return el
     if (el.tagName === 'CENTER' || el.tagName === 'A' || el.tagName === 'PICTURE') {
-        return el.querySelector('img')
+        return query('img', el)
     }
     return null
 }
 
 function isImageParagraph(el) {
     if (!el || el.tagName !== 'P') return false
-    const kids = Array.prototype.filter.call(el.childNodes, function (n) { return !isBlankText(n) })
+    const kids = Array.from(el.childNodes).filter(node => !isBlankText(node))
     if (kids.length !== 1) return false
     const only = kids[0]
     if (imgIn(only)) return !only.textContent.trim()
@@ -59,20 +78,18 @@ function isImageParagraph(el) {
 function isPlate(el) {
     if (!el || el.nodeType !== 1) return false
     if (isImageParagraph(el)) return true
-    return el.matches(PLATE_SELECTOR)
+    return el.matches(plateSelector)
 }
 
 function quoteLines(el) {
-    const box = el.querySelector('p') || el
+    const box = query('p', el) || el
     const clone = box.cloneNode(true)
-    Array.prototype.forEach.call(clone.querySelectorAll('br'), function (br) {
-        br.replaceWith('\n')
-    })
-    return clone.textContent.split('\n').map(function (s) { return s.trim() }).filter(Boolean)
+    for (const br of queryAll('br', clone)) br.replaceWith('\n')
+    return clone.textContent.split('\n').map(line => line.trim()).filter(Boolean)
 }
 
 function datedLineCount(lines) {
-    return lines.filter(function (line) { return DATE_RE.test(line) }).length
+    return lines.filter(line => dateRe.test(line)).length
 }
 
 function isBylineQuote(el) {
@@ -91,40 +108,45 @@ function isDatelineQuote(el) {
 }
 
 function joinQuoteLines(el) {
-    const box = el.querySelector('p') || el
+    const box = query('p', el) || el
     const clone = box.cloneNode(true)
-    Array.prototype.forEach.call(clone.querySelectorAll('br'), function (br) {
-        br.replaceWith(' · ')
-    })
+    for (const br of queryAll('br', clone)) br.replaceWith(' · ')
     return clone.innerHTML.trim()
 }
 
 function plateFor(el) {
-    const figure = makeEl(isImageParagraph(el) ? 'figure' : 'div', 'sw-plate')
+    const figure = createElement(isImageParagraph(el) ? 'figure' : tags.div, { className: 'sw-plate' })
     figure.appendChild(el)
     return figure
 }
 
 function readCols() {
-    const saved = Number(localStorage.getItem(COLS_KEY))
-    return saved === 1 ? 1 : 2
+    return colsStorage.getItem(colsKey) === '1' ? 1 : 2
 }
 
-function writeCols(root, cols) {
-    root.dataset.swCols = String(cols)
-    localStorage.setItem(COLS_KEY, String(cols))
-    Array.prototype.forEach.call(root.querySelectorAll('.sw-cols button'), function (btn) {
-        btn.classList.toggle('is-active', cols === 2)
-        btn.innerHTML = COLS_ICONS[cols]
-    })
+function applyCols(root, cols) {
+    if (!root) return
+    setData(root, 'swCols', cols)
+    for (const btn of queryAll('.sw-cols button', root)) {
+        toggleClass(btn, 'is-active', cols === 2)
+        btn.innerHTML = colsIcons[cols]
+    }
+}
+
+function persistCols(cols) {
+    colsStorage.setItem(colsKey, String(cols))
+}
+
+function setCols(root, cols) {
+    applyCols(root, cols)
+    persistCols(cols)
 }
 
 function buildColsControl(root) {
-    const wrap = makeEl('div', 'sw-cols')
-    const btn = makeEl('button')
-    btn.type = 'button'
-    btn.addEventListener('click', function () {
-        writeCols(root, Number(root.dataset.swCols) === 1 ? 2 : 1)
+    const wrap = createElement(tags.div, { className: 'sw-cols' })
+    const btn = createElement(tags.button, { attrs: { type: 'button' } })
+    on(btn, eventNames.click, () => {
+        setCols(root, Number(getData(root, 'swCols')) === 1 ? 2 : 1)
     })
     wrap.appendChild(btn)
 
@@ -132,40 +154,38 @@ function buildColsControl(root) {
 }
 
 function demoteSidebarTitle() {
-    const el = document.querySelector('.sidebar > h1.app-name')
+    const el = query(`.${docsifyClasses.sidebar} > h1.${docsifyClasses.appName}`)
     if (!el) return
 
-    const box = makeEl('div', 'app-name')
+    const box = createElement(tags.div, { className: docsifyClasses.appName })
     while (el.firstChild) box.appendChild(el.firstChild)
     el.replaceWith(box)
 }
 
 function buildNavWordmark() {
-    const nav = document.querySelector('.app-nav')
+    const nav = byClass(docsifyClasses.appNav)
     if (!nav) return
-    if (nav.querySelector('.sw-wordmark')) return
+    if (query('.sw-wordmark', nav)) return
 
-    const side = document.querySelector('.sidebar .app-name a')
+    const side = query(`.${docsifyClasses.sidebar} .${docsifyClasses.appName} a`)
     const name = (side ? side.textContent : document.title || '').trim()
     if (!name) return
 
-    const link = makeEl('a', 'sw-wordmark')
+    const link = createElement(tags.a, { className: 'sw-wordmark' })
     link.href = '#/'
     link.textContent = name
     nav.insertBefore(link, nav.firstChild)
 }
 
 function buildMast(root, slots) {
-    const h1 = root.querySelector(':scope > h1')
+    const h1 = query(':scope > h1', root)
 
-    const slotsAt = function (at) {
-        return (slots || []).reduce(function (out, slot) {
-            if (slot.at !== at) return out
-            const el = slot.take()
-            if (el) out.push(el)
-            return out
-        }, [])
-    }
+    const slotsAt = at => (slots || []).reduce((out, slot) => {
+        if (slot.at !== at) return out
+        const el = slot.take()
+        if (el) out.push(el)
+        return out
+    }, [])
 
     let coverParagraph = null
     let bylineQuote = null
@@ -186,20 +206,20 @@ function buildMast(root, slots) {
         }
     }
 
-    const mast = makeEl('div', 'sw-mast')
+    const mast = createElement(tags.div, { className: 'sw-mast' })
     if (h1) mast.appendChild(h1)
 
-    const line = makeEl('div', 'sw-mastline')
-    slotsAt('line').forEach(function (el) { line.appendChild(el) })
+    const line = createElement(tags.div, { className: 'sw-mastline' })
+    slotsAt('line').forEach(el => line.appendChild(el))
 
-    const meta = makeEl('div', 'sw-meta')
-    slotsAt('meta').forEach(function (el) { meta.appendChild(el) })
+    const meta = createElement(tags.div, { className: 'sw-meta' })
+    slotsAt('meta').forEach(el => meta.appendChild(el))
 
     meta.appendChild(buildColsControl(root))
     line.appendChild(meta)
 
     if (bylineQuote) {
-        const byline = makeEl('p', 'sw-byline')
+        const byline = createElement('p', { className: 'sw-byline' })
         byline.innerHTML = joinQuoteLines(bylineQuote)
         line.appendChild(byline)
         bylineQuote.remove()
@@ -211,15 +231,14 @@ function buildMast(root, slots) {
 
     if (coverParagraph) {
         const cover = plateFor(coverParagraph)
-        cover.classList.add('sw-cover')
+        addClass(cover, 'sw-cover')
         mast.after(cover)
     }
 }
 
 function buildSections(root) {
-    const content = Array.prototype.filter.call(root.children, function (el) {
-        return !el.classList.contains('sw-mast') && !el.classList.contains('sw-cover')
-    })
+    const content = Array.from(root.children)
+        .filter(el => !hasClass(el, 'sw-mast') && !hasClass(el, 'sw-cover'))
 
     if (!content.length) return
 
@@ -229,13 +248,13 @@ function buildSections(root) {
     let justOpened = false
 
     function openSection(heading) {
-        section = makeEl('section', 'sw-sec')
-        section.style.setProperty('--sw-delay', '0ms')
+        section = createElement('section', { className: 'sw-sec' })
+        setCssVar('--sw-delay', '0ms', section)
         run = null
         justOpened = Boolean(heading)
 
         if (heading) {
-            const head = makeEl('div', 'sw-sec-head')
+            const head = createElement(tags.div, { className: 'sw-sec-head' })
             head.appendChild(heading)
             section.appendChild(head)
         }
@@ -244,102 +263,100 @@ function buildSections(root) {
     }
 
     function openRun() {
-        run = makeEl('div', 'sw-run')
+        run = createElement(tags.div, { className: 'sw-run' })
         section.appendChild(run)
         return run
     }
 
-    content.forEach(function (el) {
+    for (const el of content) {
         if (el.tagName === 'H2') {
             openSection(el)
-            return
+            continue
         }
 
         if (!section) openSection(null)
 
         if (justOpened && isDatelineQuote(el)) {
-            el.classList.add('sw-dateline')
-            section.querySelector('.sw-sec-head').appendChild(el)
+            addClass(el, 'sw-dateline')
+            query('.sw-sec-head', section).appendChild(el)
             justOpened = false
-            return
+            continue
         }
         justOpened = false
 
         if (isPlate(el)) {
             run = null
             section.appendChild(plateFor(el))
-            return
+            continue
         }
 
         if (!run) openRun()
         run.appendChild(el)
-    })
+    }
 
-    Array.prototype.forEach.call(fragment.querySelectorAll('.sw-run'), function (run) {
-        if (!run.children.length) return
-        const onlyHeads = Array.prototype.every.call(run.children, function (el) {
-            return /^H[3-6]$/.test(el.tagName)
-        })
-        if (onlyHeads) run.classList.add('sw-run--head')
-    })
+    for (const group of queryAll('.sw-run', fragment)) {
+        if (!group.children.length) continue
+        const onlyHeads = Array.from(group.children).every(el => /^H[3-6]$/.test(el.tagName))
+        if (onlyHeads) addClass(group, 'sw-run--head')
+    }
 
     root.appendChild(fragment)
 }
 
 function setupMotion(root) {
-    document.documentElement.classList.add('sw-motion')
+    addClass(document.documentElement, 'sw-motion')
 
     const targets = []
 
-    const title = root.querySelector('.sw-mast > h1')
-    if (title) targets.push({ el: title })
+    const title = query('.sw-mast > h1', root)
+    if (title) targets.push(title)
 
-    Array.prototype.forEach.call(root.querySelectorAll('.sw-sec'), function (section) {
-        Array.prototype.forEach.call(section.children, function (el, index) {
-            if (!el.matches('.sw-sec-head, .sw-run, .sw-plate')) return
-            el.style.setProperty('--sw-delay', Math.min(index, 3) * 70 + 'ms')
-            targets.push({ el: el })
-        })
-    })
+    for (const section of queryAll('.sw-sec', root)) {
+        for (const [index, el] of Array.from(section.children).entries()) {
+            if (!el.matches('.sw-sec-head, .sw-run, .sw-plate')) continue
+            setCssVar('--sw-delay', Math.min(index, 3) * 70 + 'ms', el)
+            targets.push(el)
+        }
+    }
 
     if (!targets.length) return
 
-    const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return
-            requestAnimationFrame(function () {
-                entry.target.classList.add('sw-in')
+    const observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+            if (!entry.isIntersecting) continue
+            requestAnimationFrame(() => {
+                addClass(entry.target, 'sw-in')
             })
             observer.unobserve(entry.target)
-        })
+        }
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 })
 
-    targets.forEach(function (item) {
-        item.el.setAttribute('data-sw-in', '')
-        observer.observe(item.el)
-    })
+    for (const el of targets) {
+        setData(el, 'swIn', '')
+        observer.observe(el)
+    }
 
     return observer
 }
 
 export function renderTheme(options) {
     const onCleanup = options && options.onCleanup
-    const root = document.querySelector('.markdown-section')
+    const root = byClass(docsifyClasses.markdownSection)
     let observer = null
     let titleTimer = 0
 
-    if (root && root.dataset.swOn !== '1') {
-        root.dataset.swOn = '1'
+    if (root && getData(root, 'swOn') !== '1') {
+        setData(root, 'swOn', '1')
         demoteSidebarTitle()
         buildNavWordmark()
         buildMast(root, takeSlots(root))
         buildSections(root)
-        writeCols(root, readCols())
-        document.documentElement.classList.add('sw-active')
+        applyCols(root, readCols())
+        addClass(document.documentElement, 'sw-active')
         observer = setupMotion(root)
 
-        const title = root.querySelector('.sw-mast > h1')
-        if (title) titleTimer = window.setTimeout(function () { title.classList.add('sw-in') }, 60)
+        const title = query('.sw-mast > h1', root)
+        if (title) titleTimer = window.setTimeout(() => addClass(title, 'sw-in'), 60)
     }
 
     const stopPlugin = setupPlugin(root)
@@ -349,10 +366,10 @@ export function renderTheme(options) {
         return
     }
 
-    onCleanup(function () {
+    onCleanup(() => {
         window.clearTimeout(titleTimer)
         if (observer) observer.disconnect()
         stopPlugin()
-        document.documentElement.classList.remove('sw-active', 'sw-motion')
+        removeClass(document.documentElement, 'sw-active sw-motion')
     })
 }

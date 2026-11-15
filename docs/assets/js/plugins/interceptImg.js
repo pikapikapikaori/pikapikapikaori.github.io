@@ -1,6 +1,8 @@
 import { calLocalized } from '../utils/localization.js'
+import { tags, createElement, queryAll, setData } from '../utils/dom.js'
 
 let interceptImgOptions = {
+    enable: false,
     localization: {
         separator: {
             default: '：',
@@ -36,6 +38,7 @@ let interceptImgOptions = {
 }
 
 function plugin(hook, vm) {
+    if (!interceptImgOptions.enable) return
 
     function formatMediaPlaceholder(tag, el, localizedNames) {
         const name = localizedNames[tag]
@@ -49,27 +52,27 @@ function plugin(hook, vm) {
     }
 
     hook.afterEach(function (html) {
-        const template = document.createElement('template')
+        const template = createElement(tags.template)
         template.innerHTML = html
 
         const routePath = vm.route.path
         const localizedNames = calLocalized(interceptImgOptions.localization)
 
-        template.content
-            .querySelectorAll('img, video, audio, iframe, source')
+        queryAll('img, video, audio, iframe, source', template.content)
             .forEach(el => {
                 const tag = el.tagName.toLowerCase()
                 const text = formatMediaPlaceholder(tag, el, localizedNames)
 
-                const ph = document.createElement('span')
-                ph.className = 'blocked-media'
-                ph.dataset.blockedTag = tag
-                ph.textContent = text
+                const ph = createElement(tags.span, {
+                    className: 'blocked-media',
+                    text: text,
+                    data: { blockedTag: tag }
+                })
 
                 for (const attr of el.attributes) {
                     if (attr.name === 'class' || attr.name === 'style') continue
                     const camel = attr.name.replace(/(^|-)(\w)/g, (_, __, c) => c.toUpperCase())
-                    ph.dataset['original' + camel] = attr.value
+                    setData(ph, 'original' + camel, attr.value)
                 }
 
                 el.replaceWith(ph)

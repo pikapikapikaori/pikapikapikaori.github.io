@@ -1,17 +1,11 @@
-/*
- * 多语言
- *
- * 初始语言顺序：?lang= → 本地存储 → 浏览器语言。
- * 合并后的页面中文统一用简体，旧链接的 zh-Hant 参数按 zh-Hans 处理。
- * 界面文字写在词典里，照片说明由 photo-captions.js 提供。
- */
 (function () {
     'use strict'
 
     var App = window.App = window.App || {}
     var I = App.i18n = {}
 
-    var STORAGE_KEY = 'pikapikapi:lang:homepage'
+    var STORAGE = App.storage
+    var LANG_NAME = STORAGE.NAMES.lang
 
     var LANGUAGES = [
         { key: 'zh-Hans', htmlLang: 'zh-Hans', label: '中文' },
@@ -202,14 +196,6 @@
         return SUPPORTED.indexOf(lang) === -1 ? null : lang
     }
 
-    function readSaved() {
-        try { return normalize(localStorage.getItem(STORAGE_KEY)) } catch (e) { return null }
-    }
-
-    function writeSaved(value) {
-        try { localStorage.setItem(STORAGE_KEY, value) } catch (e) { /* 忽略：隐私模式下不可写 */ }
-    }
-
     function guess() {
         var nav = (navigator.language || 'en').toLowerCase()
 
@@ -223,7 +209,7 @@
         try {
             var value = new URLSearchParams(window.location.search).get('lang')
             return normalize(value)
-        } catch (e) { /* 忽略 */ }
+        } catch (e) {}
 
         return null
     }
@@ -240,11 +226,11 @@
         var fromUrl = readUrlLang()
 
         if (fromUrl) {
-            writeSaved(fromUrl)
+            STORAGE.set(LANG_NAME, fromUrl)
             return fromUrl
         }
 
-        return readSaved() || guess()
+        return normalize(STORAGE.get(LANG_NAME)) || guess()
     }
 
     function text(dict, key) {
@@ -334,12 +320,12 @@
 
         render()
         syncUrl(current)
-        writeSaved(current)
+        STORAGE.set(LANG_NAME, current)
 
         if (!initial) App.utils.scrollToTopInstant()
 
         listeners.slice().forEach(function (fn) {
-            try { fn(current) } catch (e) { /* 忽略单个监听器的错误 */ }
+            try { fn(current) } catch (e) {}
         })
     }
 

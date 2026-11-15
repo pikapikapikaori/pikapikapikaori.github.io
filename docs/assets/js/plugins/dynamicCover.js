@@ -1,4 +1,8 @@
+import { docsifyClasses } from '../utils/constants.js'
+import { tags, on, off, addClass, createElement, queryAll, byClass } from '../utils/dom.js'
+
 let dynamicCoverOptions = {
+    enable: false,
     backgrounds: [
         './assets/resources/img/cover/cover-1.jpg',
         './assets/resources/img/cover/cover-2.jpg',
@@ -7,6 +11,8 @@ let dynamicCoverOptions = {
 }
 
 function plugin(hook, vm) {
+    if (!dynamicCoverOptions.enable) return
+
     const backgrounds = dynamicCoverOptions.backgrounds
 
     const numberOfImages = backgrounds.length
@@ -38,16 +44,16 @@ function plugin(hook, vm) {
             coverTimer = null
         }
 
-        const cover = document.getElementsByClassName('cover')[0]
+        const cover = byClass(docsifyClasses.cover)
         if (!cover) return
 
         const baseMs = getDurationMs('--global-transition-duration-slow', 1000)
         const fadeDurationMs = fadeMultiplier * baseMs
         const intervalMs = intervalMultiplier * baseMs
 
-        cover.classList.add('dynamic-cover')
+        addClass(cover, 'dynamic-cover')
 
-        const mask = cover.getElementsByClassName('mask')[0]
+        const mask = byClass('mask', cover)
         if (mask) mask.style.opacity = .6
 
         const coverBackgrounds = backgrounds.map(src => {
@@ -63,13 +69,13 @@ function plugin(hook, vm) {
         }
         cover.style.isolation = 'isolate'
 
-        cover.querySelectorAll('.cover-fade-layer').forEach(el => el.remove())
+        queryAll('.cover-fade-layer', cover).forEach(el => el.remove())
 
-        const layerA = document.createElement('div')
-        const layerB = document.createElement('div')
+        const layerA = createElement(tags.div)
+        const layerB = createElement(tags.div)
 
         for (const layer of [layerA, layerB]) {
-            layer.className = 'cover-fade-layer'
+            addClass(layer, 'cover-fade-layer')
             Object.assign(layer.style, {
                 position: 'absolute',
                 top: '0',
@@ -137,7 +143,7 @@ function plugin(hook, vm) {
             sync()
         }
 
-        document.addEventListener('visibilitychange', onVisibilityChange)
+        on(document, 'visibilitychange', onVisibilityChange)
 
         let observer = null
         if ('IntersectionObserver' in window) {
@@ -156,7 +162,7 @@ function plugin(hook, vm) {
 
         coverCleanup = function () {
             stopTimer()
-            document.removeEventListener('visibilitychange', onVisibilityChange)
+            off(document, 'visibilitychange', onVisibilityChange)
             if (observer) observer.disconnect()
         }
     })

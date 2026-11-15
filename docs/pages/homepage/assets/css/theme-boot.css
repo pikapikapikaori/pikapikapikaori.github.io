@@ -1,0 +1,7 @@
+html[data-theme="light"] {
+    --page-bg: #F2EDE4;
+}
+
+html[data-theme="dark"] {
+    --page-bg: #101214;
+}

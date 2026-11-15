@@ -1,7 +1,10 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
 import { calLocalized } from '../utils/localization.js'
+import { docsifyIds } from '../utils/constants.js'
+import { tags, createElement, byId, queryAll } from '../utils/dom.js'
 
 let commentWithFooterOptions = {
+    enable: false,
     use: 'gitalk',
     footerInnerHtml: '',
     localization: {
@@ -65,6 +68,8 @@ function loadProvider(name) {
 }
 
 function plugin(hook, vm) {
+    if (!commentWithFooterOptions.enable) return
+
     const pluginIdentifier = 'comment_footer'
 
     const replacer = new TokenReplacer({
@@ -77,15 +82,14 @@ function plugin(hook, vm) {
     let activeProvider = null
 
     function ensureLayout() {
-        const main = document.getElementById('main')
+        const main = byId(docsifyIds.main)
         if (!main || !main.parentNode) return null
 
         if (!footerDiv || !footerDiv.isConnected) {
-            footerDiv = document.getElementById(footerId)
+            footerDiv = byId(footerId)
             if (!footerDiv) {
-                const footer = document.createElement('footer')
-                footerDiv = document.createElement('div')
-                footerDiv.id = footerId
+                const footer = createElement(tags.footer)
+                footerDiv = createElement(tags.div, { attrs: { id: footerId } })
                 footer.appendChild(footerDiv)
                 main.parentNode.appendChild(footer)
             }
@@ -97,7 +101,7 @@ function plugin(hook, vm) {
         }
 
         if (!commentContainer || !commentContainer.isConnected) {
-            const containers = document.querySelectorAll('#' + commentContainerId)
+            const containers = queryAll('#' + commentContainerId)
             commentContainer = containers[0] || null
 
             for (let i = 1; i < containers.length; i++) {
@@ -105,8 +109,7 @@ function plugin(hook, vm) {
             }
 
             if (!commentContainer) {
-                commentContainer = document.createElement('div')
-                commentContainer.id = commentContainerId
+                commentContainer = createElement(tags.div, { attrs: { id: commentContainerId } })
             }
         }
 

@@ -23,6 +23,7 @@ const SHELL = [
     './assets/js/router.js',
     './assets/js/app-state.js',
     './assets/js/config/config.js',
+    './assets/js/store/local-storage.js',
     './assets/js/utils/dom.js',
     './assets/js/utils/id.js',
     './assets/js/utils/date.js',

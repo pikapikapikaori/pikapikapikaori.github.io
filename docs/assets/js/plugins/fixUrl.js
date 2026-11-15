@@ -1,9 +1,14 @@
+import { queryAll, setAttrs } from '../utils/dom.js'
+
 let fixUrlOptions = {
+    enable: false,
     prefix: './'
 }
 
-function plugin(hook, vm) {
-    const query = 'a,img,iframe'
+function plugin(hook) {
+    if (!fixUrlOptions.enable) return
+
+    const selector = 'a,img,iframe'
 
     const prefix = fixUrlOptions.prefix
 
@@ -14,9 +19,11 @@ function plugin(hook, vm) {
 
         const protocolRe = /^(?:[a-zA-Z][a-zA-Z0-9+.\-]*:|\/\/|#)/
 
-        const nodes = [el, ...el.querySelectorAll('[src], [href]')]
+        const nodes = [el, ...queryAll('[src], [href]', el)]
 
         nodes.forEach(node => {
+            const attrs = {}
+
             for (const attr of ['src', 'href']) {
                 if (!node.hasAttribute(attr)) continue
                 const v = node.getAttribute(attr)
@@ -24,15 +31,17 @@ function plugin(hook, vm) {
                 if (!stripped) continue
                 if (protocolRe.test(stripped)) continue
                 if (stripped.startsWith(prefix)) continue
-                node.setAttribute(attr, prefix + v)
+                attrs[attr] = prefix + v
             }
+
+            setAttrs(node, attrs)
         })
 
         return el
     }
 
     hook.doneEach(() => {
-        Array.from(document.querySelectorAll(query)).forEach(el => {
+        queryAll(selector).forEach(el => {
             fixRelativeUrls(el)
         })
     })

@@ -238,9 +238,9 @@
             if (this._leapMonth) {
                 dateStr += "闰"
             }
-            tmp = ["初", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "廿"]
+            const tmp = ["初", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "廿"]
             if (this.ylMonth > 10) {
-                let m2 = parseInt(this.ylMonth - 10)
+                const m2 = parseInt(this.ylMonth - 10)
                 if (m2 === 1) {
                     dateStr += "冬月"
                 }
@@ -264,7 +264,7 @@
                 let m1 = parseInt(this.ylDay / 10)
                 if (m1 != 3) {
                     dateStr += (m1 == 1) ? "十" : "廿"
-                    m2 = this.ylDay % 10
+                    const m2 = this.ylDay % 10
                     if (m2 == 0) {
                         dateStr += "十"
                     } else {
@@ -279,34 +279,34 @@
 
         //获取该年对应的天干地支年
         Lunar.prototype.getYearGanZhi = function (ylYear) {
-            year = ylYear ? ylYear : this.ylYear
-            return this.getYearTianGan(year) + this.getYearDiZhi(year) + "年"
+            ylYear = ylYear ? ylYear : this.ylYear
+            return this.getYearTianGan(ylYear) + this.getYearDiZhi(ylYear) + "年"
         }
 
         //获取该年对应的年天干
         Lunar.prototype.getYearTianGan = function (ylYear) {
-            year = ylYear ? ylYear : this.ylYear
-            return this.tianGan[(year - 4) % 10]
+            ylYear = ylYear ? ylYear : this.ylYear
+            return this.tianGan[(ylYear - 4) % 10]
         }
 
         //获取该年对应的年地支
         Lunar.prototype.getYearDiZhi = function (ylYear) {
-            year = ylYear ? ylYear : this.ylYear
-            return this.yearDiZhi[(year - 4) % 12]
+            ylYear = ylYear ? ylYear : this.ylYear
+            return this.yearDiZhi[(ylYear - 4) % 12]
         }
 
         //获取该年对应的天干地支月
         Lunar.prototype.getMonthGanZhi = function (ylYear, ylMonth) {
-            year = ylYear ? ylYear : this.ylYear
-            month = ylMonth ? ylMonth : this.ylMonth
-            return this.getMonthTianGan(year) + this.getMonthDiZhi(month)
+            ylYear = ylYear ? ylYear : this.ylYear
+            ylMonth = ylMonth ? ylMonth : this.ylMonth
+            return this.getMonthTianGan(ylYear) + this.getMonthDiZhi(ylMonth)
         }
 
         //获取该年对应的月天干
         Lunar.prototype.getMonthTianGan = function (ylYear) {
-            year = ylYear ? ylYear : this.ylYear
+            ylYear = ylYear ? ylYear : this.ylYear
             let jieQi = []
-            let yearTianGan = this.getYearTianGan(year)
+            let yearTianGan = this.getYearTianGan(ylYear)
             let monthFirstTianGan = "", monthTianGan = ""
             let offset = 0
             switch (yearTianGan) {
@@ -473,8 +473,8 @@
 
         //获取两个日期相差的天数
         Lunar.prototype.getDaysByDateString = function (dt1, dt2) {
-            dt1array = dt1.replace("/-/g", "/").split('-')
-            dt2array = dt2.replace("/-/g", "/").split('-')
+            const dt1array = dt1.replace("/-/g", "/").split('-')
+            const dt2array = dt2.replace("/-/g", "/").split('-')
             let startDate = new Date(dt1array[2], dt1array[0], dt1array[1])
             let endDate = new Date(dt2array[2], dt2array[0], dt2array[1])
             let diffDate = Math.abs(endDate - startDate)

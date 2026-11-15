@@ -1,3 +1,10 @@
+import { docsifyClasses } from '../utils/constants.js'
+import { tags, createElement, byClass, queryAll } from '../utils/dom.js'
+
+let colorSwatchOptions = {
+    enable: false
+}
+
 const hexRegex = /#[a-f\d]{3}(?:[a-f\d]?|(?:[a-f\d]{3}(?:[a-f\d]{2})?)?)\b/gim
 const hslRegex = /\bhsla?\((?:(-?\d+(?:deg|g?rad|turn)?),\s*((?:\d{1,2}|100)%),\s*((?:\d{1,2}|100)%)(?:,\s*((?:\d{1,2}|100)%|0(?:\.\d+)?|1))?|(-?\d+(?:deg|g?rad|turn)?)\s+((?:\d{1,2}|100)%)\s+((?:\d{1,2}|100)%)(?:\s+((?:\d{1,2}|100)%|0(?:\.\d+)?|1))?)\)/gim
 const rgbRegex = /\brgba?\((?:(25[0-5]|2[0-4]\d|1?\d{1,2}|(?:\d{1,2}|100)%),\s*(25[0-5]|2[0-4]\d|1?\d{1,2}|(?:\d{1,2}|100)%),\s*(25[0-5]|2[0-4]\d|1?\d{1,2}|(?:\d{1,2}|100)%)(?:,\s*((?:\d{1,2}|100)%|0(?:\.\d+)?|1))?|(25[0-5]|2[0-4]\d|1?\d{1,2}|(?:\d{1,2}|100)%)\s+(25[0-5]|2[0-4]\d|1?\d{1,2}|(?:\d{1,2}|100)%)\s+(25[0-5]|2[0-4]\d|1?\d{1,2}|(?:\d{1,2}|100)%)(?:\s+((?:\d{1,2}|100)%|0(?:\.\d+)?|1))?)\)/gim
@@ -50,8 +57,7 @@ function locate(nodes, index) {
 }
 
 function insertSwatchBefore(node, offset, color) {
-    const swatch = document.createElement('span')
-    swatch.className = swatchClass
+    const swatch = createElement(tags.span, { className: swatchClass })
     swatch.style.backgroundColor = color
 
     const anchor = offset === 0 ? node : node.splitText(offset)
@@ -77,12 +83,18 @@ function decorateCodeElement(codeElement) {
 }
 
 function plugin(hook, vm) {
+    if (!colorSwatchOptions.enable) return
+
     hook.doneEach(function () {
-        const section = document.querySelector('.markdown-section')
+        const section = byClass(docsifyClasses.markdownSection)
         if (!section) return
 
-        section.querySelectorAll('code').forEach(decorateCodeElement)
+        queryAll('code', section).forEach(decorateCodeElement)
     })
 }
 
+window.$docsify['colorSwatch'] = Object.assign(
+    colorSwatchOptions,
+    window.$docsify['colorSwatch']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

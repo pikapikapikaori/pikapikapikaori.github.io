@@ -22,8 +22,8 @@ English | [简体中文](./Standard_zh-cn.md)
     │   ├── nonstandard/    Non-standard property CSS files (webkit-related CSS code); internal file structure matches that under css/, and the corresponding same-named file @imports the files in this directory at its head
     │   └── ...
     ├── js/
+    │   └── ...
     ├── html/               Sub-pages
-    ├── sass/
     ├── sources/            Third-party libraries
     ├── external/           Code for external libraries/resources
     │   ├── css/

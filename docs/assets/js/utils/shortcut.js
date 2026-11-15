@@ -1,4 +1,4 @@
-import { eventNames, on } from './dom.js'
+import { onListen } from './dom.js'
 
 /**
  *   快捷键注册表。
@@ -66,9 +66,9 @@ function listen() {
     if (listening) return
     listening = true
 
-    on(document, eventNames.keydown, onKeyDown, true)
-    on(document, eventNames.keyup, onKeyUp, true)
-    on(window, eventNames.blur, resetLeader)
+    onListen(document, 'keydown', onKeyDown, true)
+    onListen(document, 'keyup', onKeyUp, true)
+    onListen(window, 'blur', resetLeader)
 }
 
 function resetLeader() {

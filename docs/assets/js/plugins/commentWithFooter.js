@@ -1,7 +1,7 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
 import { calLocalized } from '../utils/localization.js'
 import { docsifyIds } from '../utils/constants.js'
-import { tags, createElement, byId, queryAll } from '../utils/dom.js'
+import { createEl, getElById, getAllEls } from '../utils/dom.js'
 
 let commentWithFooterOptions = {
     enable: false,
@@ -82,14 +82,14 @@ function plugin(hook, vm) {
     let activeProvider = null
 
     function ensureLayout() {
-        const main = byId(docsifyIds.main)
+        const main = getElById(docsifyIds.main)
         if (!main || !main.parentNode) return null
 
         if (!footerDiv || !footerDiv.isConnected) {
-            footerDiv = byId(footerId)
+            footerDiv = getElById(footerId)
             if (!footerDiv) {
-                const footer = createElement(tags.footer)
-                footerDiv = createElement(tags.div, { attrs: { id: footerId } })
+                const footer = createEl('footer')
+                footerDiv = createEl('div', { attrs: { id: footerId } })
                 footer.appendChild(footerDiv)
                 main.parentNode.appendChild(footer)
             }
@@ -101,7 +101,7 @@ function plugin(hook, vm) {
         }
 
         if (!commentContainer || !commentContainer.isConnected) {
-            const containers = queryAll('#' + commentContainerId)
+            const containers = getAllEls('#' + commentContainerId)
             commentContainer = containers[0] || null
 
             for (let i = 1; i < containers.length; i++) {
@@ -109,7 +109,7 @@ function plugin(hook, vm) {
             }
 
             if (!commentContainer) {
-                commentContainer = createElement(tags.div, { attrs: { id: commentContainerId } })
+                commentContainer = createEl('div', { attrs: { id: commentContainerId } })
             }
         }
 

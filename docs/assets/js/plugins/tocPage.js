@@ -9,13 +9,26 @@ import {
     clamp,
     toDate
 } from '../utils/common.js'
-import { mediaQueries, docsifyClasses } from '../utils/constants.js'
-import { tags, query, queryAll, byClass, on, toggleClass, hasClass, setCssVar } from '../utils/dom.js'
-import { tocPageIcons } from '../utils/icons.js'
+import { mediaQueries, docsifyClasses, elementStatus } from '../utils/constants.js'
+import { getEl, getAllEls, getElByClass, onListen, toggleClass, hasClass, setCssVar } from '../utils/dom.js'
+import { arrow } from '../utils/icons.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 import { ignoreViewFullImageClass } from './viewFullImage.js'
 
 export const hasTocClass = 'has-toc'
+export const tocPageDivClass = 'toc-page-div'
+
+let tocPageOptions = {
+    enable: false,
+    recentAmount: 8,
+    renderStyle: 'card',
+    dateFormat: null,
+    columns: 2,
+    narrowColumns: 1,
+    defaultImg: './assets/resources/img/default/picture-2.gif',
+    localPath: [],
+    coverPath: ['/']
+}
 
 const tocRenderStyles = {
     card: { name: 'card', render: renderCardPage },
@@ -39,18 +52,6 @@ function resolveFilter(value) {
     if (!isEnabled(value)) return tocFilters.none
 
     return shouldUseTableKey(tocFilters, value) ? tocFilters[value] : tocFilters.none
-}
-
-let tocPageOptions = {
-    enable: false,
-    recentAmount: 8,
-    renderStyle: tocRenderStyles.card.name,
-    dateFormat: null,
-    columns: 2,
-    narrowColumns: 1,
-    defaultImg: './assets/resources/img/default/picture-2.gif',
-    localPath: [],
-    coverPath: ['/']
 }
 
 function toColumnCount(value, fallback) {
@@ -179,7 +180,7 @@ function paginate(totalCount, pageSize, pageIndex) {
 }
 
 function getPaginatorInput() {
-    return query(tags.input, byClass('toc-paginator-input'))
+    return getEl('input', getElByClass('toc-paginator-input'))
 }
 
 function plugin(hook, vm) {
@@ -193,11 +194,11 @@ function plugin(hook, vm) {
     const localPath = tocPageOptions.localPath
     const languagePrefixes = localPath.map(locale => '/' + locale + '/')
 
-    const tocPaginatorDiv = `<div class='toc-paginator-div'><div class='tocPaginatorLeftButtonDiv toc-paginator-button-div'><span class="toc-paginator-button-span">${tocPageIcons.prevArrow}</span></div><div class='toc-paginator-input'></div><div class='tocPaginatorRightButtonDiv toc-paginator-button-div'><span class="toc-paginator-button-span">${tocPageIcons.nextArrow}</span></div></div>`
+    const tocPaginatorDiv = `<div class='toc-paginator-div'><div class='tocPaginatorLeftButtonDiv toc-paginator-button-div'><span class="toc-paginator-button-span">${arrow.prev}</span></div><div class='toc-paginator-input'></div><div class='tocPaginatorRightButtonDiv toc-paginator-button-div'><span class="toc-paginator-button-span">${arrow.next}</span></div></div>`
 
     const tocDiv = renderStyle.name === tocRenderStyles.list.name
-        ? `<div class='toc-page-div toc-page-list'><ul></ul></div>${tocPaginatorDiv}`
-        : `<div class='toc-page-div toc-page-card'></div>${tocPaginatorDiv}`
+        ? `<div class='${tocPageDivClass} toc-page-list'><ul></ul></div>${tocPaginatorDiv}`
+        : `<div class='${tocPageDivClass} toc-page-card'></div>${tocPaginatorDiv}`
 
     const recentAmount = tocPageOptions.recentAmount
 
@@ -226,7 +227,7 @@ function plugin(hook, vm) {
         const body = document.body
 
         if (willBeToc && !hasTocs) {
-            savedCloseState = hasClass(body, docsifyClasses.close)
+            savedCloseState = hasClass(body, elementStatus.close)
             pendingCloseToggle = !narrowMql.matches
         } else if (!willBeToc && hasTocs) {
             if (savedCloseState !== null) {
@@ -242,15 +243,15 @@ function plugin(hook, vm) {
 
     function syncSidebarA11y() {
         const body = document.body
-        const closed = hasClass(body, docsifyClasses.close)
+        const closed = hasClass(body, elementStatus.close)
 
-        const sidebar = byClass(docsifyClasses.sidebar)
+        const sidebar = getElByClass(docsifyClasses.sidebar)
         if (sidebar) {
             const sidebarHidden = narrowMql.matches ? !closed : closed
             if (sidebar.inert !== sidebarHidden) sidebar.inert = sidebarHidden
         }
 
-        const toggle = byClass(docsifyClasses.sidebarToggle)
+        const toggle = getElByClass(docsifyClasses.sidebarToggle)
         if (toggle) {
             const toggleHidden = hasClass(body, hasTocClass)
             if (toggle.inert !== toggleHidden) toggle.inert = toggleHidden
@@ -261,7 +262,7 @@ function plugin(hook, vm) {
         if (window.__tocPageSidebarA11yBound) return
         window.__tocPageSidebarA11yBound = true
 
-        on(narrowMql, 'change', syncSidebarA11y)
+        onListen(narrowMql, 'change', syncSidebarA11y)
         new MutationObserver(syncSidebarA11y).observe(document.body, {
             attributes: true,
             attributeFilter: ['class']
@@ -342,7 +343,7 @@ function plugin(hook, vm) {
     }
 
     function renderTocPageUnderPaginator() {
-        const tocPageDiv = byClass('toc-page-div')
+        const tocPageDiv = getElByClass(tocPageDivClass)
 
         if (!tocPageDiv) return
 
@@ -375,9 +376,9 @@ function plugin(hook, vm) {
     }
 
     function renderTocPaginator() {
-        const tocPaginatorInputDiv = byClass('toc-paginator-input')
-        const tocPaginatorLeftButtonDiv = byClass('tocPaginatorLeftButtonDiv')
-        const tocPaginatorRightButtonDiv = byClass('tocPaginatorRightButtonDiv')
+        const tocPaginatorInputDiv = getElByClass('toc-paginator-input')
+        const tocPaginatorLeftButtonDiv = getElByClass('tocPaginatorLeftButtonDiv')
+        const tocPaginatorRightButtonDiv = getElByClass('tocPaginatorRightButtonDiv')
 
         if (!tocPaginatorInputDiv || !tocPaginatorLeftButtonDiv || !tocPaginatorRightButtonDiv) {
             return
@@ -395,7 +396,7 @@ function plugin(hook, vm) {
 
         tocPaginatorInputDiv.innerHTML = `<input class='toc-paginator-input-box' type='number' value='${curPageIndex}' min='1' max='${maxPageIndex}'></input><span>/</span><span>${maxPageIndex}</span>`
 
-        const tocPaginatorInput = query(tags.input, tocPaginatorInputDiv)
+        const tocPaginatorInput = getEl('input', tocPaginatorInputDiv)
 
         tocPaginatorInput.onchange = function () {
             gotoPage(this.value)
@@ -411,9 +412,9 @@ function plugin(hook, vm) {
             return matchedPage.title
         }
 
-        const h1 = query(`.${docsifyClasses.markdownSection} h1`)
+        const h1 = getEl(`.${docsifyClasses.markdownSection} h1`)
         if (h1?.innerText) return h1.innerText
-        const link = queryAll(`.${docsifyClasses.sidebarNav} a`)
+        const link = getAllEls(`.${docsifyClasses.sidebarNav} a`)
             .find(a => a.hash.slice(1) === path)
 
         return link?.textContent
@@ -423,7 +424,7 @@ function plugin(hook, vm) {
         setCssVar('--tocpage-columns', columns)
         setCssVar('--tocpage-narrow-columns', narrowColumns)
 
-        on(narrowMql, 'change', onScreenWidthChange)
+        onListen(narrowMql, 'change', onScreenWidthChange)
 
         bindSidebarA11y()
 
@@ -451,7 +452,7 @@ function plugin(hook, vm) {
         function onScreenWidthChange(e) {
             if (!hasTocs) return
             lockNoTransition()
-            toggleClass(document.body, docsifyClasses.close, !e.matches)
+            toggleClass(document.body, elementStatus.close, !e.matches)
             unlockNoTransition()
         }
     })
@@ -477,7 +478,7 @@ function plugin(hook, vm) {
 
             requestAnimationFrame(() => {
                 void document.body.offsetHeight
-                toggleClass(document.body, docsifyClasses.close, targetClose)
+                toggleClass(document.body, elementStatus.close, targetClose)
             })
         }
 

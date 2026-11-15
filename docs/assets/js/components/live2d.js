@@ -1,12 +1,10 @@
 import {
     addClass,
-    byId,
-    createElement,
-    eventNames,
+    getElById,
+    createEl,
     hasClass,
-    on,
-    removeClass,
-    tags,
+    onListen,
+    removeClass
 } from '../utils/dom.js'
 
 const canvasId = 'canvas'
@@ -96,7 +94,7 @@ function createController(models) {
     }
 
     function listen(target, type, handler, options) {
-        cleanups.push(on(target, type, handler, options))
+        cleanups.push(onListen(target, type, handler, options))
     }
 
     function setRunning(running) {
@@ -145,7 +143,7 @@ function createController(models) {
     }
 
     function createCanvas() {
-        canvas = createElement(tags.canvas, { attrs: { id: canvasId } })
+        canvas = createEl('canvas', { attrs: { id: canvasId } })
         document.body.appendChild(canvas)
 
         canvas.style.position = 'fixed'
@@ -206,7 +204,7 @@ function createController(models) {
 
         area.style.cursor = 'grab'
 
-        listen(area, eventNames.pointerdown, (event) => {
+        listen(area, 'pointerdown', (event) => {
             if (event.button !== 0) return
 
             const rect = canvas.getBoundingClientRect()
@@ -261,14 +259,14 @@ function createController(models) {
             suppressTap = moved
         }
 
-        listen(area, eventNames.pointerup, stopDrag)
-        listen(area, eventNames.pointercancel, stopDrag)
+        listen(area, 'pointerup', stopDrag)
+        listen(area, 'pointercancel', stopDrag)
     }
 
     function createHitArea() {
         if (!config.hitArea) return
 
-        const area = createElement(tags.div, { attrs: { id: hitAreaId } })
+        const area = createEl('div', { attrs: { id: hitAreaId } })
 
         Object.assign(area.style, {
             position: 'fixed',
@@ -283,7 +281,7 @@ function createController(models) {
         hitArea = area
         syncHitArea()
 
-        listen(window, eventNames.resize, syncHitArea)
+        listen(window, 'resize', syncHitArea)
 
         const mutationObserver = new MutationObserver(() => syncHitArea())
 
@@ -294,7 +292,7 @@ function createController(models) {
 
         if (config.draggable === true) enableDrag(area)
 
-        listen(area, eventNames.click, (event) => {
+        listen(area, 'click', (event) => {
             if (suppressTap) {
                 suppressTap = false
                 return
@@ -327,7 +325,7 @@ function createController(models) {
     function addListener() {
         if (config.hitArea) return
 
-        listen(document, eventNames.click, (event) => {
+        listen(document, 'click', (event) => {
             const rect = app.view.getBoundingClientRect()
 
             tap(event.clientX - rect.left, event.clientY - rect.top)
@@ -447,7 +445,7 @@ function createController(models) {
         const live2d = PIXI.live2d
 
         app = new PIXI.Application({
-            view: byId(canvasId),
+            view: getElById(canvasId),
             width: config.width || 800,
             height: config.height || 600,
             transparent: true,

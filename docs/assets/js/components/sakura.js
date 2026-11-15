@@ -1,12 +1,11 @@
 import {
     addClass,
-    createElement,
+    createEl,
     getData,
-    on,
-    query,
-    queryAll,
-    setData,
-    tags,
+    onListen,
+    getEl,
+    getAllEls,
+    setData
 } from '../utils/dom.js'
 
 let controller = null
@@ -27,7 +26,7 @@ export function Sakura(selector, options = {}) {
         throw new Error('No selector present. Define an element.')
     }
 
-    this.el = query(selector)
+    this.el = getEl(selector)
 
     let defaults = {
         className: 'sakura',
@@ -82,7 +81,7 @@ export function Sakura(selector, options = {}) {
                 animType = type.toLowerCase()
             }
 
-            on(element, prefixes[p] + animType, callback, false)
+            onListen(element, prefixes[p] + animType, callback, false)
         }
     }
 
@@ -111,7 +110,7 @@ export function Sakura(selector, options = {}) {
         let animationsArr = ['fall '.concat(fallTime, 's linear 0s 1'), ''.concat(blowAnimation, ' ').concat((fallTime > 30 ? fallTime : 30) - 20 + randomInt(0, 20), 's linear 0s infinite'), ''.concat(swayAnimation, ' ').concat(randomInt(2, 4), 's linear 0s infinite'),]
         let animations = animationsArr.join(', ')
 
-        let petal = createElement(tags.div)
+        let petal = createEl('div')
 
         addClass(petal, _this.settings.className)
 
@@ -201,7 +200,7 @@ Sakura.prototype.stop = function () {
         this.cleanupTimeout = window.setTimeout(function () {
             _this2.cleanupTimeout = null
 
-            queryAll(petalSelector(_this2.settings.className)).forEach(petal => petal.remove())
+            getAllEls(petalSelector(_this2.settings.className)).forEach(petal => petal.remove())
         }, this.settings.delay + 50)
     }
 }
@@ -243,7 +242,7 @@ Sakura.prototype.destroy = function () {
 
     setData(this.el, 'sakuraAnimId', '')
 
-    queryAll(petalSelector(this.settings.className), this.el).forEach(petal => petal.remove())
+    getAllEls(petalSelector(this.settings.className), this.el).forEach(petal => petal.remove())
 }
 
 export function createSakura(options = {}) {

@@ -6,51 +6,52 @@ import {
     widgetHiddenClass,
     progressWidgetId
 } from '../../plugins/widgets.js'
-import { docsifyClasses } from '../../utils/constants.js'
-import { swissIcons } from '../../utils/icons.js'
+import { tocPageDivClass } from '../../plugins/tocPage.js'
+import { breadcrumbClass } from '../../plugins/breadcrumb.js'
+import { countWordsBlockId } from '../../plugins/countWords.js'
+import { docsifyClasses, elementStatus } from '../../utils/constants.js'
+import { arrow } from '../../utils/icons.js'
 import {
-    tags,
-    eventNames,
-    on,
+    onListen,
     addClass,
     toggleClass,
     hasClass,
-    createElement,
-    query,
-    queryAll,
-    byId,
-    byClass
+    createEl,
+    getEl,
+    getAllEls,
+    getElById,
+    getElByClass
 } from '../../utils/dom.js'
 
-const topArrow = swissIcons.topArrow
+const doubleUpArrow = arrow.doubleUpArrow
 
 function eagerTocPageImages(root) {
-    queryAll('.toc-page-div img', root).forEach((img, index) => {
+    getAllEls(`.${tocPageDivClass} img`, root).forEach((img, index) => {
         if (index < 6) img.loading = 'eager'
     })
 }
 
 function setupWidgetsRow() {
-    const container = byId(widgetsContainerId)
+    const container = getElById(widgetsContainerId)
     if (!container) return null
 
     const rowSelector = `:scope > .${widgetsRowClass}`
     const hiddenSelector = `.${widgetHiddenClass}`
 
-    let row = query(rowSelector, container)
+    let row = getEl(rowSelector, container)
     if (!row) {
-        row = createElement(tags.div, { className: widgetsRowClass })
+        row = createEl('div', { className: widgetsRowClass })
         container.insertBefore(row, container.firstChild)
     }
 
-    for (const el of queryAll(`:scope > .${widgetItemClass}, :scope > .${widgetPopupClass}`, container)) {
+    for (const el of getAllEls(`:scope > .${widgetItemClass}, :scope > .${widgetPopupClass}`, container)) {
         row.appendChild(el)
     }
 
-    let hidden = queryAll(hiddenSelector, row).length
+    let hidden = getAllEls(hiddenSelector, row).length
 
     const anchor = new MutationObserver(() => {
-        const now = queryAll(hiddenSelector, row).length
+        const now = getAllEls(hiddenSelector, row).length
         const wasHidden = hidden > 0
         hidden = now
         if (!wasHidden || now > 0) return
@@ -66,13 +67,13 @@ function setupWidgetsRow() {
 }
 
 function setupReadProgress() {
-    const el = byId(progressWidgetId)
+    const el = getElById(progressWidgetId)
     if (!el) return null
 
-    let icon = query('.sw-top-arrow', el)
+    let icon = getEl('.sw-top-arrow', el)
     if (!icon) {
-        const holder = createElement(tags.span)
-        holder.innerHTML = topArrow
+        const holder = createEl('span')
+        holder.innerHTML = doubleUpArrow
         icon = holder.firstElementChild
         addClass(icon, 'sw-top-arrow')
         el.appendChild(icon)
@@ -82,7 +83,7 @@ function setupReadProgress() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
-    const stopClick = on(el, eventNames.click, onClick)
+    const stopClick = onListen(el, 'click', onClick)
 
     return function stop() {
         stopClick()
@@ -91,7 +92,7 @@ function setupReadProgress() {
 }
 
 function setupTocSpy() {
-    const nav = byClass(docsifyClasses.sidebarNav)
+    const nav = getElByClass(docsifyClasses.sidebarNav)
     if (!nav) return null
 
     let items = []
@@ -102,14 +103,14 @@ function setupTocSpy() {
         const heads = []
         const scope = `.${docsifyClasses.markdownSection}`
 
-        for (const h of queryAll(`${scope} h1, ${scope} h2, ${scope} h3, ${scope} h4`)) {
-            const span = query('span', h)
+        for (const h of getAllEls(`${scope} h1, ${scope} h2, ${scope} h3, ${scope} h4`)) {
+            const span = getEl('span', h)
             const text = (span ? span.textContent : h.textContent).trim()
             if (text) heads.push({ el: h, text: text })
         }
 
         const found = []
-        for (const a of queryAll('a', nav)) {
+        for (const a of getAllEls('a', nav)) {
             const title = (a.getAttribute('title') || a.textContent || '').trim()
             if (!title) continue
             const match = heads.find(item => item.text === title)
@@ -141,10 +142,10 @@ function setupTocSpy() {
             current = items[items.length - 1]
         }
 
-        const marked = items.filter(item => hasClass(item.li, docsifyClasses.active))
+        const marked = items.filter(item => hasClass(item.li, elementStatus.active))
         if (marked.length === 1 && marked[0] === current) return
 
-        for (const item of items) toggleClass(item.li, docsifyClasses.active, item === current)
+        for (const item of items) toggleClass(item.li, elementStatus.active, item === current)
     }
 
     const onScroll = () => {
@@ -159,8 +160,8 @@ function setupTocSpy() {
     const fixer = new MutationObserver(() => apply())
     fixer.observe(nav, { subtree: true, attributes: true, attributeFilter: ['class'] })
 
-    const stopScroll = on(document, eventNames.scroll, onScroll, { capture: true, passive: true })
-    const stopResize = on(window, eventNames.resize, onScroll)
+    const stopScroll = onListen(document, 'scroll', onScroll, { capture: true, passive: true })
+    const stopResize = onListen(window, 'resize', onScroll)
 
     ticking = true
     frame = requestAnimationFrame(() => {
@@ -182,11 +183,11 @@ export function takeSlots(root) {
     return [
         {
             at: 'line',
-            take: () => query(':scope > ul.breadcrumb', root)
+            take: () => getEl(`:scope > ul.${breadcrumbClass}`, root)
         },
         {
             at: 'meta',
-            take: () => query(':scope > #count-words-block-span-div', root)
+            take: () => getEl(`:scope > #${countWordsBlockId}`, root)
         }
     ]
 }

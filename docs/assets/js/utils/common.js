@@ -1,4 +1,4 @@
-import { addClass, eventNames, on, removeClass } from './dom.js'
+import { addClass, onListen, removeClass } from './dom.js'
 
 export function isEnabled(value) {
     return Boolean(value)
@@ -174,7 +174,7 @@ export function makeButtonLike(el) {
     buttonLikeElements.add(el)
 
     el.tabIndex = 0
-    on(el, eventNames.keydown, event => {
+    onListen(el, 'keydown', event => {
         if (event.key !== 'Enter' && event.key !== ' ') return
         if (event.key === ' ') event.preventDefault()
         if (event.repeat) return

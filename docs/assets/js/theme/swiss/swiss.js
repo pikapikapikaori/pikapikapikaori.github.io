@@ -6,21 +6,20 @@
  */
 
 import { takeSlots, setupPlugin } from './plugin.js'
+import { tocPageDivClass } from '../../plugins/tocPage.js'
 import { createStorage } from '../../utils/storage.js'
-import { docsifyClasses } from '../../utils/constants.js'
-import { swissIcons } from '../../utils/icons.js'
+import { docsifyClasses, elementStatus } from '../../utils/constants.js'
+import { article } from '../../utils/icons.js'
 import {
-    tags,
-    eventNames,
-    on,
+    onListen,
     addClass,
     removeClass,
     toggleClass,
     hasClass,
-    createElement,
-    query,
-    queryAll,
-    byClass,
+    createEl,
+    getEl,
+    getAllEls,
+    getElByClass,
     setCssVar,
     getData,
     setData
@@ -40,7 +39,7 @@ const plateSelector = [
     'hr',
     'footer',
     '.docsify-tabs',
-    '.toc-page-div',
+    `.${tocPageDivClass}`,
     '.toc-paginator-div',
     '.docsify-pagination-container',
     '.docsify-example-panels',
@@ -49,8 +48,8 @@ const plateSelector = [
 ].join(',')
 
 const colsIcons = {
-    1: swissIcons.colsOne,
-    2: swissIcons.colsTwo
+    1: article.colsOne,
+    2: article.colsTwo
 }
 
 function isBlankText(node) {
@@ -61,7 +60,7 @@ function imgIn(el) {
     if (!el || el.nodeType !== 1) return null
     if (el.tagName === 'IMG') return el
     if (el.tagName === 'CENTER' || el.tagName === 'A' || el.tagName === 'PICTURE') {
-        return query('img', el)
+        return getEl('img', el)
     }
     return null
 }
@@ -82,9 +81,9 @@ function isPlate(el) {
 }
 
 function quoteLines(el) {
-    const box = query('p', el) || el
+    const box = getEl('p', el) || el
     const clone = box.cloneNode(true)
-    for (const br of queryAll('br', clone)) br.replaceWith('\n')
+    for (const br of getAllEls('br', clone)) br.replaceWith('\n')
     return clone.textContent.split('\n').map(line => line.trim()).filter(Boolean)
 }
 
@@ -108,14 +107,14 @@ function isDatelineQuote(el) {
 }
 
 function joinQuoteLines(el) {
-    const box = query('p', el) || el
+    const box = getEl('p', el) || el
     const clone = box.cloneNode(true)
-    for (const br of queryAll('br', clone)) br.replaceWith(' · ')
+    for (const br of getAllEls('br', clone)) br.replaceWith(' · ')
     return clone.innerHTML.trim()
 }
 
 function plateFor(el) {
-    const figure = createElement(isImageParagraph(el) ? 'figure' : tags.div, { className: 'sw-plate' })
+    const figure = createEl(isImageParagraph(el) ? 'figure' : 'div', { className: 'sw-plate' })
     figure.appendChild(el)
     return figure
 }
@@ -127,8 +126,8 @@ function readCols() {
 function applyCols(root, cols) {
     if (!root) return
     setData(root, 'swCols', cols)
-    for (const btn of queryAll('.sw-cols button', root)) {
-        toggleClass(btn, 'is-active', cols === 2)
+    for (const btn of getAllEls('.sw-cols button', root)) {
+        toggleClass(btn, elementStatus.isActive, cols === 2)
         btn.innerHTML = colsIcons[cols]
     }
 }
@@ -143,9 +142,9 @@ function setCols(root, cols) {
 }
 
 function buildColsControl(root) {
-    const wrap = createElement(tags.div, { className: 'sw-cols' })
-    const btn = createElement(tags.button, { attrs: { type: 'button' } })
-    on(btn, eventNames.click, () => {
+    const wrap = createEl('div', { className: 'sw-cols' })
+    const btn = createEl('button', { attrs: { type: 'button' } })
+    onListen(btn, 'click', () => {
         setCols(root, Number(getData(root, 'swCols')) === 1 ? 2 : 1)
     })
     wrap.appendChild(btn)
@@ -154,31 +153,31 @@ function buildColsControl(root) {
 }
 
 function demoteSidebarTitle() {
-    const el = query(`.${docsifyClasses.sidebar} > h1.${docsifyClasses.appName}`)
+    const el = getEl(`.${docsifyClasses.sidebar} > h1.${docsifyClasses.appName}`)
     if (!el) return
 
-    const box = createElement(tags.div, { className: docsifyClasses.appName })
+    const box = createEl('div', { className: docsifyClasses.appName })
     while (el.firstChild) box.appendChild(el.firstChild)
     el.replaceWith(box)
 }
 
 function buildNavWordmark() {
-    const nav = byClass(docsifyClasses.appNav)
+    const nav = getElByClass(docsifyClasses.appNav)
     if (!nav) return
-    if (query('.sw-wordmark', nav)) return
+    if (getEl('.sw-wordmark', nav)) return
 
-    const side = query(`.${docsifyClasses.sidebar} .${docsifyClasses.appName} a`)
+    const side = getEl(`.${docsifyClasses.sidebar} .${docsifyClasses.appName} a`)
     const name = (side ? side.textContent : document.title || '').trim()
     if (!name) return
 
-    const link = createElement(tags.a, { className: 'sw-wordmark' })
+    const link = createEl('a', { className: 'sw-wordmark' })
     link.href = '#/'
     link.textContent = name
     nav.insertBefore(link, nav.firstChild)
 }
 
 function buildMast(root, slots) {
-    const h1 = query(':scope > h1', root)
+    const h1 = getEl(':scope > h1', root)
 
     const slotsAt = at => (slots || []).reduce((out, slot) => {
         if (slot.at !== at) return out
@@ -206,20 +205,20 @@ function buildMast(root, slots) {
         }
     }
 
-    const mast = createElement(tags.div, { className: 'sw-mast' })
+    const mast = createEl('div', { className: 'sw-mast' })
     if (h1) mast.appendChild(h1)
 
-    const line = createElement(tags.div, { className: 'sw-mastline' })
+    const line = createEl('div', { className: 'sw-mastline' })
     slotsAt('line').forEach(el => line.appendChild(el))
 
-    const meta = createElement(tags.div, { className: 'sw-meta' })
+    const meta = createEl('div', { className: 'sw-meta' })
     slotsAt('meta').forEach(el => meta.appendChild(el))
 
     meta.appendChild(buildColsControl(root))
     line.appendChild(meta)
 
     if (bylineQuote) {
-        const byline = createElement('p', { className: 'sw-byline' })
+        const byline = createEl('p', { className: 'sw-byline' })
         byline.innerHTML = joinQuoteLines(bylineQuote)
         line.appendChild(byline)
         bylineQuote.remove()
@@ -248,13 +247,13 @@ function buildSections(root) {
     let justOpened = false
 
     function openSection(heading) {
-        section = createElement('section', { className: 'sw-sec' })
+        section = createEl('section', { className: 'sw-sec' })
         setCssVar('--sw-delay', '0ms', section)
         run = null
         justOpened = Boolean(heading)
 
         if (heading) {
-            const head = createElement(tags.div, { className: 'sw-sec-head' })
+            const head = createEl('div', { className: 'sw-sec-head' })
             head.appendChild(heading)
             section.appendChild(head)
         }
@@ -263,7 +262,7 @@ function buildSections(root) {
     }
 
     function openRun() {
-        run = createElement(tags.div, { className: 'sw-run' })
+        run = createEl('div', { className: 'sw-run' })
         section.appendChild(run)
         return run
     }
@@ -278,7 +277,7 @@ function buildSections(root) {
 
         if (justOpened && isDatelineQuote(el)) {
             addClass(el, 'sw-dateline')
-            query('.sw-sec-head', section).appendChild(el)
+            getEl('.sw-sec-head', section).appendChild(el)
             justOpened = false
             continue
         }
@@ -294,7 +293,7 @@ function buildSections(root) {
         run.appendChild(el)
     }
 
-    for (const group of queryAll('.sw-run', fragment)) {
+    for (const group of getAllEls('.sw-run', fragment)) {
         if (!group.children.length) continue
         const onlyHeads = Array.from(group.children).every(el => /^H[3-6]$/.test(el.tagName))
         if (onlyHeads) addClass(group, 'sw-run--head')
@@ -308,10 +307,10 @@ function setupMotion(root) {
 
     const targets = []
 
-    const title = query('.sw-mast > h1', root)
+    const title = getEl('.sw-mast > h1', root)
     if (title) targets.push(title)
 
-    for (const section of queryAll('.sw-sec', root)) {
+    for (const section of getAllEls('.sw-sec', root)) {
         for (const [index, el] of Array.from(section.children).entries()) {
             if (!el.matches('.sw-sec-head, .sw-run, .sw-plate')) continue
             setCssVar('--sw-delay', Math.min(index, 3) * 70 + 'ms', el)
@@ -341,7 +340,7 @@ function setupMotion(root) {
 
 export function renderTheme(options) {
     const onCleanup = options && options.onCleanup
-    const root = byClass(docsifyClasses.markdownSection)
+    const root = getElByClass(docsifyClasses.markdownSection)
     let observer = null
     let titleTimer = 0
 
@@ -355,7 +354,7 @@ export function renderTheme(options) {
         addClass(document.documentElement, 'sw-active')
         observer = setupMotion(root)
 
-        const title = query('.sw-mast > h1', root)
+        const title = getEl('.sw-mast > h1', root)
         if (title) titleTimer = window.setTimeout(() => addClass(title, 'sw-in'), 60)
     }
 

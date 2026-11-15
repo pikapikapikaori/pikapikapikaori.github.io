@@ -1,22 +1,20 @@
 import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex, makeButtonLike, isEnabled } from '../utils/common.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 import { createStorage } from '../utils/storage.js'
-import { mediaQueries } from '../utils/constants.js'
-import { widgetIcons } from '../utils/icons.js'
+import { mediaQueries, elementStatus } from '../utils/constants.js'
+import { arrow, nature, article, object, person } from '../utils/icons.js'
 import {
-    tags,
-    eventNames,
-    on,
-    off,
+    onListen,
+    offListen,
     addClass,
     removeClass,
     toggleClass,
     hasClass,
-    createElement,
-    query,
-    queryAll,
-    byId,
-    byClass,
+    createEl,
+    getEl,
+    getAllEls,
+    getElById,
+    getElByClass,
     setCssVar,
     setStyleProperty,
     removeStyleProperty,
@@ -70,8 +68,6 @@ let widgetsOptions = {
     ]
 }
 
-const widgetActiveClass = 'is-active'
-const widgetDisabledClass = 'is-disabled'
 const popupHiddenClass = 'page-right-popups-disappear'
 const popupPanelClass = 'page-right-popups-div'
 const modes = ['auto', 'light', 'dark']
@@ -107,17 +103,17 @@ class Widget {
 
     mount(container) {
         if (!this.element) {
-            const element = createElement(tags.span, {
+            const element = createEl('span', {
                 className: widgetItemClass,
                 attrs: { id: this.id },
                 html: this.icon || undefined
             })
 
             addClass(element, this.className)
-            if (this.active) addClass(element, widgetActiveClass)
+            if (this.active) addClass(element, elementStatus.isActive)
 
             // Bound once at creation so repeated mounts cannot stack activation handlers.
-            this.unbindClick = on(element, eventNames.click, event => {
+            this.unbindClick = onListen(element, 'click', event => {
                 if (!this.activateHandler) return
 
                 this.activateHandler(event)
@@ -141,7 +137,7 @@ class Widget {
     setActive(value) {
         if (!this.element) return
 
-        toggleClass(this.element, widgetActiveClass, Boolean(value))
+        toggleClass(this.element, elementStatus.isActive, Boolean(value))
     }
 
     setHidden(value) {
@@ -154,7 +150,7 @@ class Widget {
     setDisabled(value) {
         if (!this.element) return
 
-        toggleClass(this.element, widgetDisabledClass, Boolean(value))
+        toggleClass(this.element, elementStatus.isDisabled, Boolean(value))
         setAttrs(this.element, { 'aria-disabled': String(Boolean(value)) })
     }
 
@@ -196,10 +192,10 @@ class WidgetPopup {
 
     mount(container) {
         if (!this.element) {
-            const element = createElement(tags.span, { className: widgetPopupClass, attrs: { id: this.id } })
+            const element = createEl('span', { className: widgetPopupClass, attrs: { id: this.id } })
             addClass(element, this.className)
 
-            const panel = createElement(tags.div, { className: popupPanelClass, attrs: { id: this.panelId } })
+            const panel = createEl('div', { className: popupPanelClass, attrs: { id: this.panelId } })
             addClass(panel, this.panelClassName)
 
             if (this.render) this.render(panel, this)
@@ -339,8 +335,8 @@ class PopupManager {
             popup.close()
         }
 
-        this.listeners.push(on(trigger.element, eventNames.focusout, onFocusOut))
-        this.listeners.push(on(popup.element, eventNames.focusout, onFocusOut))
+        this.listeners.push(onListen(trigger.element, 'focusout', onFocusOut))
+        this.listeners.push(onListen(popup.element, 'focusout', onFocusOut))
     }
 
     bindOutsideClick() {
@@ -353,7 +349,7 @@ class PopupManager {
             this.closeAll()
         }
 
-        this.listeners.push(on(document, eventNames.click, onClick))
+        this.listeners.push(onListen(document, 'click', onClick))
     }
 
     bindEscape() {
@@ -369,7 +365,7 @@ class PopupManager {
             if (popup.owner && popup.owner.element) popup.owner.element.focus()
         }
 
-        this.listeners.push(on(document, eventNames.keydown, onKeyDown))
+        this.listeners.push(onListen(document, 'keydown', onKeyDown))
     }
 
     destroy() {
@@ -416,7 +412,8 @@ class WidgetRegistry {
     }
 
     updateIndexes() {
-        this.slotItems().forEach((item, index) => item.setIndex(index))
+        // Every widget gets an index so slot-less widgets (scroll-to-top) sit below the slots instead of overlapping them.
+        this.items.forEach((item, index) => item.setIndex(index))
     }
 
     destroy() {
@@ -739,9 +736,9 @@ function plugin(hook, vm) {
     const storage = createStorage(widgetsOptions.storage)
 
     const modeIcons = {
-        light: widgetIcons.lightMode,
-        dark: widgetIcons.darkMode,
-        auto: widgetIcons.autoMode
+        light: nature.sun,
+        dark: nature.moon,
+        auto: nature.sunOnSea
     }
 
     let resolveIsDark = function () {
@@ -758,10 +755,10 @@ function plugin(hook, vm) {
     }
 
     let syncColorPickerActiveBtn = function (hue) {
-        let btns = queryAll('.color-picker-preset-color-btn-div')
+        let btns = getAllEls('.color-picker-preset-color-btn-div')
 
         if (!btns.length || !isFiniteHue(hue)) {
-            btns.forEach(btn => removeClass(btn, widgetActiveClass))
+            btns.forEach(btn => removeClass(btn, elementStatus.isActive))
             return
         }
 
@@ -770,11 +767,11 @@ function plugin(hook, vm) {
         if (snapped >= 360) snapped -= 360
 
         let matched = btns.find(btn => Number(getData(btn, 'hue')) === snapped)
-        btns.forEach(btn => toggleClass(btn, widgetActiveClass, btn === matched))
+        btns.forEach(btn => toggleClass(btn, elementStatus.isActive, btn === matched))
     }
 
     let syncColorPicker = function (hue) {
-        let colorPickerSlider = byClass('color-picker-slider')
+        let colorPickerSlider = getElByClass('color-picker-slider')
 
         if (colorPickerSlider && isFiniteHue(hue)) colorPickerSlider.value = hue
 
@@ -782,8 +779,8 @@ function plugin(hook, vm) {
     }
 
     let syncThemePickerActiveBtn = function () {
-        queryAll('.theme-picker-preset-color-btn-div').forEach(btn => {
-            toggleClass(btn, widgetActiveClass, Number(getData(btn, 'themeIndex')) === themeController.themeIndex)
+        getAllEls('.theme-picker-preset-color-btn-div').forEach(btn => {
+            toggleClass(btn, elementStatus.isActive, Number(getData(btn, 'themeIndex')) === themeController.themeIndex)
         })
     }
 
@@ -811,7 +808,7 @@ function plugin(hook, vm) {
 
         if (!popup || !popup.element) return
 
-        const buttons = queryAll('.theme-picker-preset-color-btn-div, .color-picker-preset-color-btn-div, .font-picker-preset-size-btn-div', popup.element)
+        const buttons = getAllEls('.theme-picker-preset-color-btn-div, .color-picker-preset-color-btn-div, .font-picker-preset-size-btn-div', popup.element)
 
         if (!buttons[index]) return
 
@@ -850,7 +847,7 @@ function plugin(hook, vm) {
     let syncThemeColorMeta = function (bgColor) {
         if (!isEnabled(bgColor)) return
 
-        let meta = query('meta[name="theme-color"]')
+        let meta = getEl('meta[name="theme-color"]')
         if (!meta) return
 
         meta.content = bgColor
@@ -893,8 +890,8 @@ function plugin(hook, vm) {
             const finish = function (ok) {
                 if (isDone) return
                 isDone = true
-                off(link, eventNames.load, check)
-                off(link, eventNames.error, fail)
+                offListen(link, 'load', check)
+                offListen(link, 'error', fail)
                 if (timer) clearTimeout(timer)
                 resolve(ok)
             }
@@ -917,8 +914,8 @@ function plugin(hook, vm) {
             }
 
             deadline = Date.now() + themeSheetWaitMs
-            on(link, eventNames.load, check)
-            on(link, eventNames.error, fail)
+            onListen(link, 'load', check)
+            onListen(link, 'error', fail)
             check()
         })
     }
@@ -929,7 +926,7 @@ function plugin(hook, vm) {
         const group = getThemeGroup()
         const isDark = resolveIsDark()
         const cssPath = getSideAsset(group, isDark, 'css')
-        const colorTheme = byId('theme-color')
+        const colorTheme = getElById('theme-color')
 
         let waits = Promise.resolve()
 
@@ -1079,9 +1076,9 @@ function plugin(hook, vm) {
     function restoreStyleDelta(element, oldValue, afterValue) {
         if (!element.isConnected || !afterValue) return
 
-        const oldStyle = createElement(tags.div).style
+        const oldStyle = createEl('div').style
         oldStyle.cssText = oldValue || ''
-        const afterStyle = createElement(tags.div).style
+        const afterStyle = createEl('div').style
         afterStyle.cssText = afterValue
 
         Array.from(afterStyle).forEach(function (name) {
@@ -1239,8 +1236,8 @@ function plugin(hook, vm) {
     let syncFontPickerActiveBtn = function (px) {
         const index = fontSizeLevels.indexOf(px)
 
-        queryAll('.font-picker-preset-size-btn-div').forEach(btn => {
-            toggleClass(btn, widgetActiveClass, Number(getData(btn, 'sizeIndex')) === index)
+        getAllEls('.font-picker-preset-size-btn-div').forEach(btn => {
+            toggleClass(btn, elementStatus.isActive, Number(getData(btn, 'sizeIndex')) === index)
         })
     }
 
@@ -1261,7 +1258,7 @@ function plugin(hook, vm) {
         if (!progress || !progress.element) return
 
         setCssVar('--p', p, progress.element)
-        const n = query('.num', progress.element)
+        const n = getEl('.num', progress.element)
         if (n) n.textContent = text
     }
 
@@ -1271,7 +1268,7 @@ function plugin(hook, vm) {
     }
 
     let initSwitchMode = function () {
-        const widget = new Widget({ id: 'switch-mode-span', icon: widgetIcons.autoMode, collapsible: true })
+        const widget = new Widget({ id: 'switch-mode-span', icon: nature.sunOnSea, collapsible: true })
 
         widget.onActivate(function () {
             themeController.cycleMode()
@@ -1281,7 +1278,7 @@ function plugin(hook, vm) {
     }
 
     let initSwitchTheme = function () {
-        const widget = new Widget({ id: 'switch-theme-span', icon: widgetIcons.themeSwitcher, collapsible: true })
+        const widget = new Widget({ id: 'switch-theme-span', icon: object.shirt, collapsible: true })
 
         const popup = new WidgetPopup({
             name: 'theme',
@@ -1291,10 +1288,10 @@ function plugin(hook, vm) {
             panelClassName: 'theme-picker-popup-div',
             owner: widget,
             render: function (panel) {
-                const presetListDiv = createElement(tags.div, { className: 'theme-picker-preset-color-list-div' })
+                const presetListDiv = createEl('div', { className: 'theme-picker-preset-color-list-div' })
 
                 widgetsOptions.themes.forEach(function (group, index) {
-                    let btnDiv = createElement(tags.div, { className: 'theme-picker-preset-color-btn-div' })
+                    let btnDiv = createEl('div', { className: 'theme-picker-preset-color-btn-div' })
                     setData(btnDiv, 'theme', group.name)
                     setData(btnDiv, 'themeIndex', String(index))
 
@@ -1311,7 +1308,7 @@ function plugin(hook, vm) {
 
                     makeButtonLike(btnDiv)
 
-                    on(btnDiv, eventNames.click, function () {
+                    onListen(btnDiv, 'click', function () {
                         themeController.selectTheme(group.name)
                     })
 
@@ -1332,7 +1329,7 @@ function plugin(hook, vm) {
     }
 
     let initColorPicker = function () {
-        const widget = new Widget({ id: 'color-picker-span', icon: widgetIcons.colorPicker, collapsible: true })
+        const widget = new Widget({ id: 'color-picker-span', icon: object.palette, collapsible: true })
 
         const popup = new WidgetPopup({
             name: 'color',
@@ -1344,7 +1341,7 @@ function plugin(hook, vm) {
             render: function (panel) {
                 panel.innerHTML = '<div class="color-picker-preset-color-list-div"><div class="color-picker-preset-color-btn-div" data-hue="0"></div><div class="color-picker-preset-color-btn-div" data-hue="30"></div><div class="color-picker-preset-color-btn-div" data-hue="60"></div><div class="color-picker-preset-color-btn-div" data-hue="90"></div><div class="color-picker-preset-color-btn-div" data-hue="180"></div><div class="color-picker-preset-color-btn-div" data-hue="250"></div><div class="color-picker-preset-color-btn-div" data-hue="270"></div><div class="color-picker-preset-color-btn-div" data-hue="300"></div><div class="color-picker-preset-color-btn-div" data-hue="330"></div><div class="color-picker-preset-color-btn-div" data-hue="345"></div></div><input type="range" min="0" max="360" value="270" class="color-picker-slider" id="color-picker-slider" step="5">'
 
-                let colorPickerSlider = byClass('color-picker-slider', panel)
+                let colorPickerSlider = getElByClass('color-picker-slider', panel)
                 let isDraggingColorPicker = false
 
                 let endColorPickerDrag = function () {
@@ -1354,24 +1351,24 @@ function plugin(hook, vm) {
                     unlockNoTransition()
                 }
 
-                on(colorPickerSlider, eventNames.pointerdown, function () {
+                onListen(colorPickerSlider, 'pointerdown', function () {
                     if (isDraggingColorPicker) return
 
                     isDraggingColorPicker = true
                     lockNoTransition()
                 })
-                on(window, eventNames.pointerup, endColorPickerDrag)
-                on(window, eventNames.pointercancel, endColorPickerDrag)
-                on(colorPickerSlider, eventNames.change, endColorPickerDrag)
+                onListen(window, 'pointerup', endColorPickerDrag)
+                onListen(window, 'pointercancel', endColorPickerDrag)
+                onListen(colorPickerSlider, 'change', endColorPickerDrag)
 
-                on(colorPickerSlider, eventNames.input, function () {
+                onListen(colorPickerSlider, 'input', function () {
                     themeController.setColorHue(Number(colorPickerSlider.value))
                 })
 
-                queryAll('.color-picker-preset-color-btn-div', panel).forEach(colorPickerPresetColorBtn => {
+                getAllEls('.color-picker-preset-color-btn-div', panel).forEach(colorPickerPresetColorBtn => {
                     makeButtonLike(colorPickerPresetColorBtn)
 
-                    on(colorPickerPresetColorBtn, eventNames.click, function () {
+                    onListen(colorPickerPresetColorBtn, 'click', function () {
                         themeController.setColorHue(Number(getData(colorPickerPresetColorBtn, 'hue')))
                     })
                 })
@@ -1388,7 +1385,7 @@ function plugin(hook, vm) {
     }
 
     let initFontPicker = function () {
-        const widget = new Widget({ id: 'font-picker-span', icon: widgetIcons.fontSize, collapsible: true })
+        const widget = new Widget({ id: 'font-picker-span', icon: article.font, collapsible: true })
 
         const popup = new WidgetPopup({
             name: 'font',
@@ -1398,15 +1395,15 @@ function plugin(hook, vm) {
             panelClassName: 'font-picker-popup-div',
             owner: widget,
             render: function (panel) {
-                const presetListDiv = createElement(tags.div, { className: 'font-picker-preset-size-list-div' })
+                const presetListDiv = createEl('div', { className: 'font-picker-preset-size-list-div' })
 
                 fontSizeLevels.forEach(function (px, index) {
-                    let btnDiv = createElement(tags.div, { className: 'font-picker-preset-size-btn-div', text: 'A' })
+                    let btnDiv = createEl('div', { className: 'font-picker-preset-size-btn-div', text: 'A' })
                     setData(btnDiv, 'sizeIndex', index)
 
                     makeButtonLike(btnDiv)
 
-                    on(btnDiv, eventNames.click, function () {
+                    onListen(btnDiv, 'click', function () {
                         themeController.setFontSize(px)
                     })
 
@@ -1427,10 +1424,10 @@ function plugin(hook, vm) {
     }
 
     let initCommentScroll = function () {
-        const widget = new Widget({ id: 'scroll-to-comment-span', icon: widgetIcons.commentScroller, collapsible: true })
+        const widget = new Widget({ id: 'scroll-to-comment-span', icon: article.dialogue, collapsible: true })
 
         widget.onActivate(function () {
-            const gitalk = byId('comment-container')
+            const gitalk = getElById('comment-container')
             if (!gitalk) return
 
             gitalk.scrollIntoView({ behavior: 'smooth' })
@@ -1440,7 +1437,7 @@ function plugin(hook, vm) {
     }
 
     let initSakuraRain = function () {
-        const widget = new Widget({ id: 'show-sakura-span', icon: widgetIcons.showSakura, collapsible: true })
+        const widget = new Widget({ id: 'show-sakura-span', icon: nature.flower, collapsible: true })
 
         sakuraController = createSakura({ autoStart: false })
 
@@ -1452,7 +1449,7 @@ function plugin(hook, vm) {
     }
 
     let initLive2d = function () {
-        const widget = new Widget({ id: 'show-live2d-span', icon: widgetIcons.live2d, collapsible: true })
+        const widget = new Widget({ id: 'show-live2d-span', icon: person.girl, collapsible: true })
 
         live2dController = createLive2d(widgetsOptions.live2d || [])
 
@@ -1464,7 +1461,7 @@ function plugin(hook, vm) {
     }
 
     let initShowWidgets = function () {
-        const widget = new Widget({ id: 'show-widgets-span', icon: widgetIcons.showWidgets, active: isWidgetsOpen })
+        const widget = new Widget({ id: 'show-widgets-span', icon: object.pokeball, active: isWidgetsOpen })
 
         widget.onActivate(function () {
             isWidgetsOpen = !isWidgetsOpen
@@ -1486,7 +1483,7 @@ function plugin(hook, vm) {
         })
 
         widget.onActivate(function () {
-            const n = query('.num', widget.element)
+            const n = getEl('.num', widget.element)
             if (n) toggleClass(n, 'progress-num-hide')
         })
 
@@ -1498,13 +1495,13 @@ function plugin(hook, vm) {
             requestAnimationFrame(render)
         }
 
-        on(window, eventNames.scroll, schedule, { passive: true })
-        on(window, eventNames.resize, schedule)
+        onListen(window, 'scroll', schedule, { passive: true })
+        onListen(window, 'resize', schedule)
         if (window.ResizeObserver) new ResizeObserver(schedule).observe(document.body)
     }
 
     let initScrollToTop = function () {
-        const widget = new Widget({ id: 'scroll-to-top-span', icon: widgetIcons.topScroller, occupiesSlot: false })
+        const widget = new Widget({ id: 'scroll-to-top-span', icon: arrow.doubleUpArrow, occupiesSlot: false })
 
         widget.onActivate(function (event) {
             event.stopPropagation()
@@ -1521,13 +1518,13 @@ function plugin(hook, vm) {
         registry.register(widget)
 
         let onScroll = function () {
-            if (widget.element) toggleClass(widget.element, 'is-visible', isScrollToTopVisible())
+            if (widget.element) toggleClass(widget.element, elementStatus.isVisible, isScrollToTopVisible())
         }
-        on(window, eventNames.scroll, onScroll)
+        onListen(window, 'scroll', onScroll)
     }
 
     hook.mounted(function () {
-        widgetsContainer = createElement(tags.div, { className: widgetsContainerId, attrs: { id: widgetsContainerId } })
+        widgetsContainer = createEl('div', { className: widgetsContainerId, attrs: { id: widgetsContainerId } })
         document.body.appendChild(widgetsContainer)
 
         initSwitchMode()
@@ -1550,7 +1547,7 @@ function plugin(hook, vm) {
 
         const scrollToTop = registry.get('scroll-to-top-span')
         if (scrollToTop && scrollToTop.element) {
-            toggleClass(scrollToTop.element, 'is-visible', isScrollToTopVisible())
+            toggleClass(scrollToTop.element, elementStatus.isVisible, isScrollToTopVisible())
         }
 
         themeController = new ThemeController({
@@ -1613,7 +1610,7 @@ function plugin(hook, vm) {
         popupManager.bindOutsideClick()
         popupManager.bindEscape()
 
-        on(window.matchMedia(mediaQueries.dark), eventNames.change, function () {
+        onListen(window.matchMedia(mediaQueries.dark), 'change', function () {
             themeController.onSystemModeChange()
         })
 

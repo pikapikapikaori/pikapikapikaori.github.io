@@ -1,5 +1,5 @@
 import { docsifyClasses } from '../utils/constants.js'
-import { tags, createElement, byClass, queryAll } from '../utils/dom.js'
+import { createEl, getElByClass, getAllEls } from '../utils/dom.js'
 
 let colorSwatchOptions = {
     enable: false
@@ -57,7 +57,7 @@ function locate(nodes, index) {
 }
 
 function insertSwatchBefore(node, offset, color) {
-    const swatch = createElement(tags.span, { className: swatchClass })
+    const swatch = createEl('span', { className: swatchClass })
     swatch.style.backgroundColor = color
 
     const anchor = offset === 0 ? node : node.splitText(offset)
@@ -86,10 +86,10 @@ function plugin(hook, vm) {
     if (!colorSwatchOptions.enable) return
 
     hook.doneEach(function () {
-        const section = byClass(docsifyClasses.markdownSection)
+        const section = getElByClass(docsifyClasses.markdownSection)
         if (!section) return
 
-        queryAll('code', section).forEach(decorateCodeElement)
+        getAllEls('code', section).forEach(decorateCodeElement)
     })
 }
 

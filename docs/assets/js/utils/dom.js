@@ -1,50 +1,16 @@
-export const tags = {
-    div: 'div',
-    span: 'span',
-    input: 'input',
-    button: 'button',
-    img: 'img',
-    template: 'template',
-    canvas: 'canvas',
-    footer: 'footer',
-    li: 'li',
-    a: 'a'
-}
-
-export const eventNames = {
-    click: 'click',
-    keydown: 'keydown',
-    keyup: 'keyup',
-    pointerdown: 'pointerdown',
-    pointerup: 'pointerup',
-    pointercancel: 'pointercancel',
-    touchstart: 'touchstart',
-    touchend: 'touchend',
-    scroll: 'scroll',
-    resize: 'resize',
-    change: 'change',
-    input: 'input',
-    focusout: 'focusout',
-    blur: 'blur',
-    load: 'load',
-    error: 'error',
-    mouseover: 'mouseover',
-    animationend: 'animationend'
-}
-
 function splitNames(value) {
     return String(value ?? '').split(/\s+/).filter(Boolean)
 }
 
-export function on(target, type, handler, options) {
+export function onListen(target, type, handler, options) {
     if (!target || typeof target.addEventListener !== 'function') return () => {}
 
     target.addEventListener(type, handler, options)
 
-    return () => off(target, type, handler, options)
+    return () => offListen(target, type, handler, options)
 }
 
-export function off(target, type, handler, options) {
+export function offListen(target, type, handler, options) {
     if (!target || typeof target.removeEventListener !== 'function') return
 
     target.removeEventListener(type, handler, options)
@@ -91,7 +57,7 @@ export function hasClass(el, value) {
     return names.every(name => el.classList.contains(name))
 }
 
-export function createElement(tag, options = {}) {
+export function createEl(tag, options = {}) {
     const el = document.createElement(tag)
 
     if (options.className) addClass(el, options.className)
@@ -103,7 +69,7 @@ export function createElement(tag, options = {}) {
     return el
 }
 
-export function query(selector, root = document) {
+export function getEl(selector, root = document) {
     if (!selector || !root || typeof root.querySelector !== 'function') return null
 
     try {
@@ -114,7 +80,7 @@ export function query(selector, root = document) {
     }
 }
 
-export function queryAll(selector, root = document) {
+export function getAllEls(selector, root = document) {
     if (!selector || !root || typeof root.querySelectorAll !== 'function') return []
 
     try {
@@ -125,17 +91,17 @@ export function queryAll(selector, root = document) {
     }
 }
 
-export function byId(id, root = document) {
+export function getElById(id, root = document) {
     if (!id || !root || typeof root.getElementById !== 'function') return null
 
     return root.getElementById(id) || null
 }
 
-export function byClass(className, root = document) {
+export function getElByClass(className, root = document) {
     const name = String(className ?? '').trim()
     if (!name) return null
 
-    return query(`.${name}`, root)
+    return getEl(`.${name}`, root)
 }
 
 export function setCssVar(name, value, root = document.documentElement) {

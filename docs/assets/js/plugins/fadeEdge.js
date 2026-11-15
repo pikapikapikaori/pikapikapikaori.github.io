@@ -1,5 +1,5 @@
-import { docsifyClasses } from '../utils/constants.js'
-import { tags, eventNames, on, toggleClass, hasClass, createElement, query, byClass } from '../utils/dom.js'
+import { docsifyClasses, elementStatus } from '../utils/constants.js'
+import { onListen, toggleClass, hasClass, createEl, getEl, getElByClass } from '../utils/dom.js'
 
 let fadeEdgeOptions = {
     enable: false
@@ -40,23 +40,23 @@ function plugin(hook, vm) {
 
     function attachSidebarFadeEdge(container) {
         if (!container) return
-        if (query('.fade-edge', container)) return
+        if (getEl('.fade-edge', container)) return
 
-        const top = createElement(tags.div, { className: 'fade-edge top' })
-        const bottom = createElement(tags.div, { className: 'fade-edge bottom' })
+        const top = createEl('div', { className: 'fade-edge top' })
+        const bottom = createEl('div', { className: 'fade-edge bottom' })
         container.prepend(top)
         container.append(bottom)
 
         const update = () => {
             const { atTop, atBottom } = containerEdgeState(container)
 
-            toggleClass(top, docsifyClasses.show, !atTop)
-            toggleClass(bottom, docsifyClasses.show, !atBottom)
+            toggleClass(top, elementStatus.show, !atTop)
+            toggleClass(bottom, elementStatus.show, !atBottom)
         }
 
-        on(container, eventNames.scroll, update, { passive: true })
-        on(window, eventNames.scroll, update, { passive: true })
-        on(window, eventNames.resize, update, { passive: true })
+        onListen(container, 'scroll', update, { passive: true })
+        onListen(window, 'scroll', update, { passive: true })
+        onListen(window, 'resize', update, { passive: true })
         new ResizeObserver(update).observe(container)
         update()
     }
@@ -64,11 +64,11 @@ function plugin(hook, vm) {
     function attachContentFadeEdge(container) {
         if (!container) return
 
-        if (query('.content-fade-edge', document.body)) return
+        if (getEl('.content-fade-edge', document.body)) return
 
-        const top = createElement(tags.div, { className: 'fade-edge content-fade-edge top' })
+        const top = createEl('div', { className: 'fade-edge content-fade-edge top' })
 
-        const bottom = createElement(tags.div, { className: 'fade-edge content-fade-edge bottom' })
+        const bottom = createEl('div', { className: 'fade-edge content-fade-edge bottom' })
 
         document.body.prepend(top)
         document.body.append(bottom)
@@ -76,7 +76,7 @@ function plugin(hook, vm) {
         const update = () => {
             let atTop, atBottom
 
-            const cover = query(`section.cover.${docsifyClasses.show}`)
+            const cover = getEl(`section.${docsifyClasses.cover}.${elementStatus.show}`)
 
             if (cover) {
                 // cover 页：用页面滚动判断
@@ -90,20 +90,20 @@ function plugin(hook, vm) {
                 atBottom = state.atBottom
             }
 
-            toggleClass(top, docsifyClasses.show, !atTop)
-            toggleClass(bottom, docsifyClasses.show, !atBottom)
+            toggleClass(top, elementStatus.show, !atTop)
+            toggleClass(bottom, elementStatus.show, !atBottom)
         }
 
-        on(container, eventNames.scroll, update, { passive: true })
-        on(window, eventNames.scroll, update, { passive: true })
-        on(window, eventNames.resize, update, { passive: true })
+        onListen(container, 'scroll', update, { passive: true })
+        onListen(window, 'scroll', update, { passive: true })
+        onListen(window, 'resize', update, { passive: true })
         new ResizeObserver(update).observe(container)
         update()
     }
 
     function initFadeEdges() {
-        attachContentFadeEdge(byClass(docsifyClasses.content))
-        attachSidebarFadeEdge(byClass(docsifyClasses.sidebar))
+        attachContentFadeEdge(getElByClass(docsifyClasses.content))
+        attachSidebarFadeEdge(getElByClass(docsifyClasses.sidebar))
     }
 
     hook.doneEach(function () {

@@ -1,6 +1,8 @@
 import { calLocalized } from '../utils/localization.js'
 import { countText } from '../utils/common.js'
-import { byId } from '../utils/dom.js'
+import { getElById } from '../utils/dom.js'
+
+export const countWordsBlockId = 'count-words-block-span-div'
 
 let countWordsOptions = {
     enable: false,
@@ -35,7 +37,7 @@ function plugin(hook, vm) {
         let str = wordsCount + ' ' + tempLocalization.words
         let readTime = roughTime + ' ' + tempLocalization.minute
 
-        const countWordsEl = byId('count-words-block-span')
+        const countWordsEl = getElById('count-words-block-span')
         if (!countWordsEl) return
 
         countWordsEl.innerText = str.concat(' | ').concat(countWordsOptions.isExpected ? readTime : '')
@@ -44,7 +46,7 @@ function plugin(hook, vm) {
         next(
             `
         ${countWordsOptions.position === 'bottom' ? html : ''}
-        <div id="count-words-block-span-div" style="
+        <div id="${countWordsBlockId}" style="
             --count-words-float: ${countWordsOptions.float === 'right' ? 'right' : 'left'};
             --count-words-font-size: ${countWordsOptions.fontsize};">
             <span id="count-words-block-span"></span>

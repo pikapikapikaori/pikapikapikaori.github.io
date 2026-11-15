@@ -1,7 +1,9 @@
 import pathNameData from '../config/breadcrumbData.json.js'
 import { isEnabled } from '../utils/common.js'
-import { docsifyClasses, docsifyIds } from '../utils/constants.js'
-import { tags, createElement, query, byId, byClass } from '../utils/dom.js'
+import { elementStatus, docsifyIds } from '../utils/constants.js'
+import { createEl, getEl, getElById, getElByClass } from '../utils/dom.js'
+
+export const breadcrumbClass = 'breadcrumb'
 
 let breadcrumbOptions = {
     enable: false,
@@ -23,12 +25,12 @@ function plugin(hook, vm) {
         const i18nPathList = breadcrumbOptions.localization
 
         let parts = vm.route.path.split('/').slice(1)
-        let breadcrumb = '<ul class=\'breadcrumb\'>'
+        let breadcrumb = `<ul class='${breadcrumbClass}'>`
         let curPath = '/'
 
         if (!i18nPathList.includes(parts[0])) {
             if (parts.length == 1 && parts[0] == '') {
-                breadcrumb += `<li class='${docsifyClasses.active}'>首页</li>`
+                breadcrumb += `<li class='${elementStatus.active}'>首页</li>`
             }
             else {
                 breadcrumb += '<li><a href=\'' + '#' + curPath + '\'>首页</a></li>'
@@ -56,7 +58,7 @@ function plugin(hook, vm) {
             if (index < parts.length - 1) {
                 breadcrumb += '<li><a href=\'' + curHrefPath + '\'>' + displayText + '</a></li>'
             } else {
-                breadcrumb += `<li class='${docsifyClasses.active}'>` + displayText + '</li>'
+                breadcrumb += `<li class='${elementStatus.active}'>` + displayText + '</li>'
             }
         })
 
@@ -67,28 +69,28 @@ function plugin(hook, vm) {
 
     hook.doneEach(function () {
         if (!isReadme) {
-            const mainEl = byId(docsifyIds.main)
-            const h1El = query('h1', mainEl)
+            const mainEl = getElById(docsifyIds.main)
+            const h1El = getEl('h1', mainEl)
             let pageTitle = h1El ? h1El.textContent.trim() : ''
 
-            let breadcrumb = byClass('breadcrumb')
+            let breadcrumb = getElByClass(breadcrumbClass)
             if (!breadcrumb) return
 
             if (pageTitle === '404') {
-                let homePageLi = query('li:first-child', breadcrumb)
+                let homePageLi = getEl('li:first-child', breadcrumb)
 
                 breadcrumb.innerHTML = ''
 
                 breadcrumb.appendChild(homePageLi.cloneNode(true))
 
-                let notFoundLi = createElement(tags.li, {
-                    className: docsifyClasses.active,
+                let notFoundLi = createEl('li', {
+                    className: elementStatus.active,
                     text: pageTitle
                 })
                 breadcrumb.appendChild(notFoundLi)
             }
             else {
-                const activeEl = byClass(docsifyClasses.active, breadcrumb)
+                const activeEl = getElByClass(elementStatus.active, breadcrumb)
                 if (!activeEl) return
 
                 activeEl.innerHTML = pageTitle

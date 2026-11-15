@@ -1,16 +1,14 @@
 import { calLocalized } from '../utils/localization.js'
-import { docsifyClasses } from '../utils/constants.js'
+import { docsifyClasses, elementStatus } from '../utils/constants.js'
 import {
-    tags,
-    eventNames,
-    on,
-    off,
+    onListen,
+    offListen,
     addClass,
     removeClass,
-    createElement,
-    query,
-    queryAll,
-    byClass
+    createEl,
+    getEl,
+    getAllEls,
+    getElByClass
 } from '../utils/dom.js'
 
 let tocSwitcherOptions = {
@@ -30,28 +28,28 @@ function plugin(hook, vm) {
     hook.doneEach(function () {
         let tempLocalization = calLocalized(tocSwitcherOptions.localization, undefined)
 
-        const sidebarNav = byClass(docsifyClasses.sidebarNav)
+        const sidebarNav = getElByClass(docsifyClasses.sidebarNav)
         if (!sidebarNav) return
 
-        let switchWrap = byClass('switch-toc-wrap-div') || createElement(tags.div)
+        let switchWrap = getElByClass('switch-toc-wrap-div') || createEl('div')
 
         addClass(switchWrap, 'switch-toc-wrap-div')
         switchWrap.innerHTML = `<button class="toc-btn active-btn">${tempLocalization.toc}</button><button class="default-btn">${tempLocalization.list}</button>`
 
         sidebarNav.before(switchWrap)
 
-        const tocBtn = query('.toc-btn', switchWrap)
-        const defaultBtn = query('.default-btn', switchWrap)
+        const tocBtn = getEl('.toc-btn', switchWrap)
+        const defaultBtn = getEl('.default-btn', switchWrap)
 
         const activeBtnClass = 'active-btn'
 
-        on(tocBtn, eventNames.click, e => {
+        onListen(tocBtn, 'click', e => {
             e.stopPropagation()
             addClass(tocBtn, activeBtnClass)
             removeClass(defaultBtn, activeBtnClass)
         })
 
-        on(defaultBtn, eventNames.click, e => {
+        onListen(defaultBtn, 'click', e => {
             e.stopPropagation()
             addClass(defaultBtn, activeBtnClass)
             removeClass(tocBtn, activeBtnClass)
@@ -59,15 +57,15 @@ function plugin(hook, vm) {
 
         // 修复滚动高亮
         const headingList = []
-        queryAll('h1, h2, h3, h4, h5, h6').forEach(h => {
-            const span = query('span', h)
+        getAllEls('h1, h2, h3, h4, h5, h6').forEach(h => {
+            const span = getEl('span', h)
             const text = (span ? span.textContent : h.textContent).trim()
             if (text) headingList.push({ heading: h, text })
         })
 
 
         const items = []
-        queryAll(`.${docsifyClasses.sidebarNav} a`).forEach(a => {
+        getAllEls(`.${docsifyClasses.sidebarNav} a`).forEach(a => {
             const title = (a.getAttribute('title') || a.textContent || '').trim()
             if (!title) return
 
@@ -81,7 +79,7 @@ function plugin(hook, vm) {
         })
 
         if (tocSwitcherOnScroll) {
-            off(window, eventNames.scroll, tocSwitcherOnScroll)
+            offListen(window, 'scroll', tocSwitcherOnScroll)
             tocSwitcherOnScroll = null
         }
 
@@ -104,8 +102,8 @@ function plugin(hook, vm) {
                 }
             }
 
-            items.forEach(it => removeClass(it.li, docsifyClasses.active))
-            if (current) addClass(current.li, docsifyClasses.active)
+            items.forEach(it => removeClass(it.li, elementStatus.active))
+            if (current) addClass(current.li, elementStatus.active)
         }
 
         tocSwitcherOnScroll = () => {
@@ -117,7 +115,7 @@ function plugin(hook, vm) {
             })
         }
 
-        on(window, eventNames.scroll, tocSwitcherOnScroll)
+        onListen(window, 'scroll', tocSwitcherOnScroll)
         updateActive()
     })
 }

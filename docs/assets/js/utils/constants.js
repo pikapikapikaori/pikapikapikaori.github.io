@@ -3,8 +3,22 @@ export const mediaQueries = {
     dark: '(prefers-color-scheme: dark)'
 }
 
-export const docsifyClasses = {
+export const elementStatus = {
     close: 'close',
+    show: 'show',
+    active: 'active',
+    isActive: 'is-active',
+    isDisabled: 'is-disabled',
+    isOpen: 'is-open',
+    isCurrent: 'is-current',
+    isVisible: 'is-visible',
+    isOffscreen: 'is-offscreen',
+    isGroupHover: 'is-group-hover',
+    isRowHover: 'is-row-hover',
+    sticky: 'sticky'
+}
+
+export const docsifyClasses = {
     sidebar: 'sidebar',
     sidebarToggle: 'sidebar-toggle',
     sidebarNav: 'sidebar-nav',
@@ -14,8 +28,7 @@ export const docsifyClasses = {
     appName: 'app-name',
     search: 'search',
     cover: 'cover',
-    show: 'show',
-    active: 'active'
+    clearButton: 'clear-button'
 }
 
 export const docsifyIds = {

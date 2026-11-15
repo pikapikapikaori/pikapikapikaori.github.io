@@ -1,19 +1,17 @@
 import { bindShortcuts } from '../utils/shortcut.js'
 import { isEnabled } from '../utils/common.js'
 import { docsifyClasses } from '../utils/constants.js'
-import { viewFullImageIcons } from '../utils/icons.js'
+import { arrow } from '../utils/icons.js'
 import {
-    tags,
-    eventNames,
-    on,
-    off,
+    onListen,
+    offListen,
     addClass,
     removeClass,
     hasClass,
-    createElement,
-    queryAll,
-    byId,
-    byClass,
+    createEl,
+    getAllEls,
+    getElById,
+    getElByClass,
     getData,
     setData
 } from '../utils/dom.js'
@@ -111,14 +109,14 @@ function plugin(hook, vm) {
     function lockScroll() {
         if (scrollLocked) return
 
-        const content = byClass(docsifyClasses.content)
+        const content = getElByClass(docsifyClasses.content)
         lockWindowY = window.scrollY || document.documentElement.scrollTop || 0
         lockContentY = content ? content.scrollTop : 0
         scrollLocked = true
 
-        on(window, 'wheel', preventWheel, { passive: false })
-        on(window, 'touchmove', preventTouchMove, { passive: false })
-        on(window, eventNames.keydown, preventKeyScroll)
+        onListen(window, 'wheel', preventWheel, { passive: false })
+        onListen(window, 'touchmove', preventTouchMove, { passive: false })
+        onListen(window, 'keydown', preventKeyScroll)
 
         unbindViewerShortcuts = bindShortcuts({
             ArrowLeft: { handler: () => switchImageDirection(true), repeat: true, allowInInput: true },
@@ -134,16 +132,16 @@ function plugin(hook, vm) {
         if (!scrollLocked) return
         scrollLocked = false
 
-        off(window, 'wheel', preventWheel)
-        off(window, 'touchmove', preventTouchMove)
-        off(window, eventNames.keydown, preventKeyScroll)
+        offListen(window, 'wheel', preventWheel)
+        offListen(window, 'touchmove', preventTouchMove)
+        offListen(window, 'keydown', preventKeyScroll)
 
         if (unbindViewerShortcuts) {
             unbindViewerShortcuts()
             unbindViewerShortcuts = null
         }
 
-        const content = byClass(docsifyClasses.content)
+        const content = getElByClass(docsifyClasses.content)
         if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
         if (content && content.scrollTop !== lockContentY) content.scrollTop = lockContentY
 
@@ -306,23 +304,23 @@ function plugin(hook, vm) {
     }
 
     hook.mounted(function () {
-        const viewFullImageSpan = createElement(tags.span)
+        const viewFullImageSpan = createEl('span')
 
         viewFullImageSpan.id = 'view-full-image-span'
 
-        const viewFullImageSpanInnerLeftDiv = createElement(tags.div)
-        const viewFullImageSpanInnerRightDiv = createElement(tags.div)
+        const viewFullImageSpanInnerLeftDiv = createEl('div')
+        const viewFullImageSpanInnerRightDiv = createEl('div')
 
         viewFullImageSpanInnerLeftDiv.id = 'view-full-image-span-inner-left-div'
         viewFullImageSpanInnerRightDiv.id = 'view-full-image-span-inner-right-div'
-        viewFullImageSpanInnerLeftDiv.innerHTML = viewFullImageIcons.prevArrow
-        viewFullImageSpanInnerRightDiv.innerHTML = viewFullImageIcons.nextArrow
+        viewFullImageSpanInnerLeftDiv.innerHTML = arrow.prev
+        viewFullImageSpanInnerRightDiv.innerHTML = arrow.next
 
-        const viewFullImageSpanInnerImgDiv = createElement(tags.div)
+        const viewFullImageSpanInnerImgDiv = createEl('div')
 
         viewFullImageSpanInnerImgDiv.id = 'view-full-image-span-inner-img-div'
 
-        const viewFullImageSpanInnerTextDiv = createElement(tags.div)
+        const viewFullImageSpanInnerTextDiv = createEl('div')
 
         viewFullImageSpanInnerTextDiv.id = 'view-full-image-span-inner-text-div'
 
@@ -334,11 +332,11 @@ function plugin(hook, vm) {
         document.body.appendChild(viewFullImageSpan)
 
         function collectImages() {
-            return queryAll(tags.img).filter(img => !isIgnoredImage(img))
+            return getAllEls('img').filter(img => !isIgnoredImage(img))
         }
 
         function currentImageIndex(imgArray) {
-            const imgEl = byId('view-full-image-span-inner-img-div')
+            const imgEl = getElById('view-full-image-span-inner-img-div')
 
             for (let i = 0; i < imgArray.length; i++) {
                 if (imgEl.style.backgroundImage.indexOf(imgArray[i].src) > -1) return i
@@ -352,8 +350,8 @@ function plugin(hook, vm) {
         }
 
         function showImage(imgArray, index, direction) {
-            const imgEl = byId('view-full-image-span-inner-img-div')
-            const textEl = byId('view-full-image-span-inner-text-div')
+            const imgEl = getElById('view-full-image-span-inner-img-div')
+            const textEl = getElById('view-full-image-span-inner-text-div')
 
             const oldBackground = imgEl.style.backgroundImage
             const newBackground = 'url(' + imgArray[index].src + ')'
@@ -394,18 +392,18 @@ function plugin(hook, vm) {
 
         const notPreventParentOnClickEventElementId = [viewFullImageSpanInnerImgDiv.id, viewFullImageSpan.id, viewFullImageSpanInnerTextDiv.id]
 
-        on(viewFullImageSpan, eventNames.click, function (e) {
+        onListen(viewFullImageSpan, 'click', function (e) {
             if (notPreventParentOnClickEventElementId.indexOf(e.target.id) === -1) return
             closeViewer()
         })
 
         let touchStartX, touchEndX
 
-        on(viewFullImageSpan, eventNames.touchstart, function (e) {
+        onListen(viewFullImageSpan, 'touchstart', function (e) {
             touchStartX = e.targetTouches[0].pageX
         })
 
-        on(viewFullImageSpan, eventNames.touchend, function (e) {
+        onListen(viewFullImageSpan, 'touchend', function (e) {
             touchEndX = e.changedTouches[0].pageX
 
             if (touchEndX - touchStartX > 40) {
@@ -416,24 +414,24 @@ function plugin(hook, vm) {
             }
         })
 
-        on(viewFullImageSpanInnerLeftDiv, eventNames.click, function () {
+        onListen(viewFullImageSpanInnerLeftDiv, 'click', function () {
             buttonLeftRightOnClick(true)
         })
-        on(viewFullImageSpanInnerRightDiv, eventNames.click, function () {
+        onListen(viewFullImageSpanInnerRightDiv, 'click', function () {
             buttonLeftRightOnClick(false)
         })
     })
 
     hook.doneEach(function () {
-        queryAll(tags.img).filter(img => !isIgnoredImage(img)).forEach((img, index, arr) => {
+        getAllEls('img').filter(img => !isIgnoredImage(img)).forEach((img, index, arr) => {
             if (getData(img, 'viewFullImageBound') === '1') return
             setData(img, 'viewFullImageBound', '1')
 
-            const viewFullImageSpan = byId('view-full-image-span')
-            const viewFullImageSpanInnerImgDiv = byId('view-full-image-span-inner-img-div')
-            const viewFullImageSpanInnerTextDiv = byId('view-full-image-span-inner-text-div')
+            const viewFullImageSpan = getElById('view-full-image-span')
+            const viewFullImageSpanInnerImgDiv = getElById('view-full-image-span-inner-img-div')
+            const viewFullImageSpanInnerTextDiv = getElById('view-full-image-span-inner-text-div')
 
-            on(img, eventNames.click, function () {
+            onListen(img, 'click', function () {
                 curImg = img
 
                 viewFullImageSpanInnerImgDiv.style.backgroundImage = 'url(' + img.src + ')'

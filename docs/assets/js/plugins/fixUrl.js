@@ -1,4 +1,4 @@
-import { queryAll, setAttrs } from '../utils/dom.js'
+import { getAllEls, setAttrs } from '../utils/dom.js'
 
 let fixUrlOptions = {
     enable: false,
@@ -19,7 +19,7 @@ function plugin(hook) {
 
         const protocolRe = /^(?:[a-zA-Z][a-zA-Z0-9+.\-]*:|\/\/|#)/
 
-        const nodes = [el, ...queryAll('[src], [href]', el)]
+        const nodes = [el, ...getAllEls('[src], [href]', el)]
 
         nodes.forEach(node => {
             const attrs = {}
@@ -41,7 +41,7 @@ function plugin(hook) {
     }
 
     hook.doneEach(() => {
-        queryAll(selector).forEach(el => {
+        getAllEls(selector).forEach(el => {
             fixRelativeUrls(el)
         })
     })

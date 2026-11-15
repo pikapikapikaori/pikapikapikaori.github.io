@@ -1,5 +1,5 @@
 import { calLocalized } from '../utils/localization.js'
-import { tags, createElement, queryAll, setData } from '../utils/dom.js'
+import { createEl, getAllEls, setData } from '../utils/dom.js'
 
 let interceptImgOptions = {
     enable: false,
@@ -52,18 +52,18 @@ function plugin(hook, vm) {
     }
 
     hook.afterEach(function (html) {
-        const template = createElement(tags.template)
+        const template = createEl('template')
         template.innerHTML = html
 
         const routePath = vm.route.path
         const localizedNames = calLocalized(interceptImgOptions.localization)
 
-        queryAll('img, video, audio, iframe, source', template.content)
+        getAllEls('img, video, audio, iframe, source', template.content)
             .forEach(el => {
                 const tag = el.tagName.toLowerCase()
                 const text = formatMediaPlaceholder(tag, el, localizedNames)
 
-                const ph = createElement(tags.span, {
+                const ph = createEl('span', {
                     className: 'blocked-media',
                     text: text,
                     data: { blockedTag: tag }

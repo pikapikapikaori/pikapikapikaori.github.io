@@ -1,5 +1,5 @@
 import { docsifyClasses } from '../utils/constants.js'
-import { tags, on, off, addClass, createElement, queryAll, byClass } from '../utils/dom.js'
+import { onListen, offListen, addClass, createEl, getAllEls, getElByClass } from '../utils/dom.js'
 
 let dynamicCoverOptions = {
     enable: false,
@@ -44,7 +44,7 @@ function plugin(hook, vm) {
             coverTimer = null
         }
 
-        const cover = byClass(docsifyClasses.cover)
+        const cover = getElByClass(docsifyClasses.cover)
         if (!cover) return
 
         const baseMs = getDurationMs('--global-transition-duration-slow', 1000)
@@ -53,7 +53,7 @@ function plugin(hook, vm) {
 
         addClass(cover, 'dynamic-cover')
 
-        const mask = byClass('mask', cover)
+        const mask = getElByClass('mask', cover)
         if (mask) mask.style.opacity = .6
 
         const coverBackgrounds = backgrounds.map(src => {
@@ -69,10 +69,10 @@ function plugin(hook, vm) {
         }
         cover.style.isolation = 'isolate'
 
-        queryAll('.cover-fade-layer', cover).forEach(el => el.remove())
+        getAllEls('.cover-fade-layer', cover).forEach(el => el.remove())
 
-        const layerA = createElement(tags.div)
-        const layerB = createElement(tags.div)
+        const layerA = createEl('div')
+        const layerB = createEl('div')
 
         for (const layer of [layerA, layerB]) {
             addClass(layer, 'cover-fade-layer')
@@ -143,7 +143,7 @@ function plugin(hook, vm) {
             sync()
         }
 
-        on(document, 'visibilitychange', onVisibilityChange)
+        onListen(document, 'visibilitychange', onVisibilityChange)
 
         let observer = null
         if ('IntersectionObserver' in window) {
@@ -162,7 +162,7 @@ function plugin(hook, vm) {
 
         coverCleanup = function () {
             stopTimer()
-            off(document, 'visibilitychange', onVisibilityChange)
+            offListen(document, 'visibilitychange', onVisibilityChange)
             if (observer) observer.disconnect()
         }
     })

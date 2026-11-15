@@ -1,7 +1,7 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
 import { protectCodeBlocks, isEnabled, codeBlockModes } from '../utils/common.js'
-import { annotationIcons } from '../utils/icons.js'
-import { query } from '../utils/dom.js'
+import { link } from '../utils/icons.js'
+import { getEl } from '../utils/dom.js'
 
 let htmlReplaceOptions = {
     enable: false,
@@ -12,6 +12,8 @@ let htmlReplaceOptions = {
     },
     tags: []
 }
+
+const iconLinkKeys = ['github', 'email', 'feed']
 
 function plugin(hook, vm) {
     if (!htmlReplaceOptions.enable) return
@@ -36,8 +38,8 @@ function plugin(hook, vm) {
             replacer.registerToken(`link_${key}`, htmlReplaceOptions.links[key])
         })
 
-        Object.keys(annotationIcons).forEach(key => {
-            replacer.registerToken(`icon_${key}`, annotationIcons[key])
+        iconLinkKeys.forEach(key => {
+            replacer.registerToken(`icon_${key}`, link[key])
         })
     }
 
@@ -176,7 +178,7 @@ function plugin(hook, vm) {
     })
 
     hook.doneEach(function () {
-        const firstBriefNote = query('.brief-comments-container details:first-of-type')
+        const firstBriefNote = getEl('.brief-comments-container details:first-of-type')
         if (firstBriefNote) {
             firstBriefNote.open = true
         }

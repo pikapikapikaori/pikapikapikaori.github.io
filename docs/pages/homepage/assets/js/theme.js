@@ -1,21 +1,21 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var T = App.theme = {}
+    const App = window.App = window.App || {}
+    const T = App.theme = {}
 
-    var STORAGE = App.storage
-    var THEME_NAME = STORAGE.NAMES.theme
-    var MODES = {
+    const STORAGE = App.storage
+    const THEME_NAME = STORAGE.NAMES.theme
+    const MODES = {
         light: 'light',
         dark: 'dark',
         system: 'system'
     }
-    var ORDER = [MODES.light, MODES.dark, MODES.system]
-    var MEDIA_DARK = '(prefers-color-scheme: dark)'
-    var listeners = []
-    var mode = MODES.system
-    var systemMedia = null
+    const ORDER = [MODES.light, MODES.dark, MODES.system]
+    const MEDIA_DARK = '(prefers-color-scheme: dark)'
+    const listeners = []
+    let mode = MODES.system
+    let systemMedia = null
 
     function isMode(value) {
         return ORDER.indexOf(value) !== -1
@@ -83,7 +83,7 @@
     }
 
     T.cycle = function () {
-        var i = ORDER.indexOf(mode)
+        const i = ORDER.indexOf(mode)
         apply(ORDER[(i + 1) % ORDER.length])
     }
 
@@ -91,7 +91,7 @@
         listeners.push(fn)
 
         return function () {
-            var i = listeners.indexOf(fn)
+            const i = listeners.indexOf(fn)
             if (i !== -1) listeners.splice(i, 1)
         }
     }

@@ -15,9 +15,6 @@ import { arrow } from '../utils/icons.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 import { ignoreViewFullImageClass } from './viewFullImage.js'
 
-export const hasTocClass = 'has-toc'
-export const tocPageDivClass = 'toc-page-div'
-
 let tocPageOptions = {
     enable: false,
     recentAmount: 8,
@@ -29,6 +26,9 @@ let tocPageOptions = {
     localPath: [],
     coverPath: ['/']
 }
+
+export const hasTocClass = 'has-toc'
+export const tocPageDivClass = 'toc-page-div'
 
 const tocRenderStyles = {
     card: { name: 'card', render: renderCardPage },

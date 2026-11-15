@@ -5,9 +5,9 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var F = App.feed = {}
-    var CFG = App.config
+    const App = window.App = window.App || {}
+    const F = App.feed = {}
+    const CFG = App.config
 
     /*
      * 语言检测
@@ -15,15 +15,15 @@
      * 判定看假名占 CJK 的比例而非占全部字符的比例，
      * 中文里夹少量日语引用不会被误判成日语。
      */
-    var KANA_MIN = 3
-    var KANA_RATIO = 0.15
+    const KANA_MIN = 3
+    const KANA_RATIO = 0.15
 
     function detectLang(text, sampleLen) {
-        var sample = String(text || '').slice(0, sampleLen)
+        const sample = String(text || '').slice(0, sampleLen)
 
-        var kana = (sample.match(/[\u3040-\u30FF\uFF65-\uFF9F]/g) || []).length
-        var han = (sample.match(/[\u4E00-\u9FFF]/g) || []).length
-        var latin = (sample.match(/[A-Za-z]/g) || []).length
+        const kana = (sample.match(/[\u3040-\u30FF\uFF65-\uFF9F]/g) || []).length
+        const han = (sample.match(/[\u4E00-\u9FFF]/g) || []).length
+        const latin = (sample.match(/[A-Za-z]/g) || []).length
 
         if (kana + han === 0) {
             return latin > 0 ? 'en' : null
@@ -39,14 +39,14 @@
     }
 
     /* 各语言的"本文首发"一类标记，抽取正文时整块去掉 */
-    var BOILERPLATE_RE = /本文首发|最后编辑于|first published|Last edited|最初に公開|最終編集/i
+    const BOILERPLATE_RE = /本文首发|最后编辑于|first published|Last edited|最初に公開|最終編集/i
 
     function extractContent(html, excerptLen) {
         try {
-            var doc = new DOMParser().parseFromString(html, 'text/html')
+            const doc = new DOMParser().parseFromString(html, 'text/html')
 
-            var imgEl = doc.querySelector('figure img, img')
-            var cover = imgEl ? (imgEl.getAttribute('src') || '') : ''
+            const imgEl = doc.querySelector('figure img, img')
+            const cover = imgEl ? (imgEl.getAttribute('src') || '') : ''
 
             doc.querySelectorAll('h1, figure, script, style').forEach(function (el) {
                 el.remove()
@@ -55,7 +55,7 @@
                 if (BOILERPLATE_RE.test(el.textContent)) el.remove()
             })
 
-            var fullText = (doc.body.textContent || '')
+            const fullText = (doc.body.textContent || '')
                 .replace(/\{docsify-[a-z-]+\}/gi, '')
                 .replace(/\s+/g, ' ')
                 .trim()
@@ -71,25 +71,25 @@
     }
 
     function parseAtom(xml) {
-        var doc = new DOMParser().parseFromString(xml, 'application/xml')
+        const doc = new DOMParser().parseFromString(xml, 'application/xml')
         if (doc.querySelector('parsererror')) throw new Error('XML parse error')
 
-        var entries = [].slice.call(doc.querySelectorAll('entry'))
+        const entries = [].slice.call(doc.querySelectorAll('entry'))
             .slice(0, CFG.blog.scanLimit)
 
         return entries.map(function (en) {
-            var titleEl = en.querySelector('title')
-            var linkEl = en.querySelector('link')
-            var cEl = en.querySelector('content')
-            var uEl = en.querySelector('updated')
+            const titleEl = en.querySelector('title')
+            const linkEl = en.querySelector('link')
+            const cEl = en.querySelector('content')
+            const uEl = en.querySelector('updated')
 
-            var title = titleEl ? titleEl.textContent.trim() : ''
-            var link = linkEl ? linkEl.getAttribute('href') : '#'
-            var raw = cEl ? cEl.textContent : ''
-            var upd = uEl ? uEl.textContent : ''
+            const title = titleEl ? titleEl.textContent.trim() : ''
+            const link = linkEl ? linkEl.getAttribute('href') : '#'
+            const raw = cEl ? cEl.textContent : ''
+            const upd = uEl ? uEl.textContent : ''
 
-            var info = extractContent(raw, CFG.blog.excerptLength)
-            var lang = detectLang(info.fullText, CFG.blog.langSampleLength)
+            const info = extractContent(raw, CFG.blog.excerptLength)
+            const lang = detectLang(info.fullText, CFG.blog.langSampleLength)
 
             return {
                 title: title,
@@ -103,7 +103,7 @@
     }
 
     function getFallback(lang) {
-        var map = CFG.fallbackPosts || {}
+        const map = CFG.fallbackPosts || {}
         return map[lang] || map['zh-Hans'] || []
     }
 
@@ -116,7 +116,7 @@
                 return res.text()
             })
             .then(function (text) {
-                var filtered = parseAtom(text).filter(function (p) {
+                const filtered = parseAtom(text).filter(function (p) {
                     return p.lang === lang
                 })
 

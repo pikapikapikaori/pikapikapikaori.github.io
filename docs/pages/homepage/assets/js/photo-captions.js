@@ -5,7 +5,7 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
+    const App = window.App = window.App || {}
 
     App.photoCaptions = {
         'zh-Hans': {

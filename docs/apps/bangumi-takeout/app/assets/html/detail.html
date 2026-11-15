@@ -16,8 +16,8 @@
     <script>
         (function () {
             try {
-                var m = localStorage.getItem('bgm-viewer:theme') || 'auto';
-                var real = m === 'dark' ? 'dark'
+                const m = localStorage.getItem('bgm-viewer:theme') || 'auto';
+                const real = m === 'dark' ? 'dark'
                     : m === 'light' ? 'light'
                         : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                 document.documentElement.dataset.theme = real;

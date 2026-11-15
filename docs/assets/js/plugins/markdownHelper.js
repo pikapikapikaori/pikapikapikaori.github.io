@@ -14,14 +14,14 @@ import {
 } from '../utils/dom.js'
 import { hasTocClass } from './tocPage.js'
 
-const appNavToggleClass = 'app-nav-toggle'
-const appNavToggleInnerClass = 'app-nav-toggle-inner'
-const appNavToggleGhostClass = 'app-nav-toggle-ghost'
-
 let markdownHelperOptions = {
     enable: false,
     highlightNavMenuCurrent: false
 }
+
+const appNavToggleClass = 'app-nav-toggle'
+const appNavToggleInnerClass = 'app-nav-toggle-inner'
+const appNavToggleGhostClass = 'app-nav-toggle-ghost'
 
 function plugin(hook, vm) {
     if (!markdownHelperOptions.enable) return

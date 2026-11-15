@@ -1,26 +1,26 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
+    const App = window.App = window.App || {}
 
-    var THEMES = {
+    const THEMES = {
         light: 'light',
         dark: 'dark'
     }
-    var PAGE_COLORS = {
+    const PAGE_COLORS = {
         light: '#F2EDE4',
         dark: '#101214'
     }
-    var MEDIA_DARK = '(prefers-color-scheme: dark)'
+    const MEDIA_DARK = '(prefers-color-scheme: dark)'
 
     function systemTheme() {
-        var dark = window.matchMedia && window.matchMedia(MEDIA_DARK).matches
+        const dark = window.matchMedia && window.matchMedia(MEDIA_DARK).matches
 
         return dark ? THEMES.dark : THEMES.light
     }
 
-    var storage = App.storage
-    var theme = storage
+    const storage = App.storage
+    let theme = storage
         ? storage.getEnum(storage.NAMES.theme, [THEMES.light, THEMES.dark], null)
         : null
 
@@ -28,7 +28,7 @@
 
     document.documentElement.dataset.theme = theme
 
-    var meta = document.querySelector('meta[name="theme-color"]')
+    const meta = document.querySelector('meta[name="theme-color"]')
 
     if (meta) meta.setAttribute('content', PAGE_COLORS[theme])
 })()

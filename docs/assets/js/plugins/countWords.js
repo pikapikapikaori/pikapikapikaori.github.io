@@ -2,8 +2,6 @@ import { calLocalized } from '../utils/localization.js'
 import { countText } from '../utils/common.js'
 import { getElById } from '../utils/dom.js'
 
-export const countWordsBlockId = 'count-words-block-span-div'
-
 let countWordsOptions = {
     enable: false,
     countable: true,
@@ -16,6 +14,8 @@ let countWordsOptions = {
     },
     isExpected: true,
 }
+
+export const countWordsBlockId = 'count-words-block-span-div'
 
 function plugin(hook, vm) {
     if (!countWordsOptions.enable) return

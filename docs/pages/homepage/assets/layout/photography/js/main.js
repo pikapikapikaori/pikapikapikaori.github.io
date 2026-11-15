@@ -3,14 +3,14 @@ import {
 } from './config.js'
 
 function captionOf(App, id) {
-    var table = App.photoCaptions && App.photoCaptions[App.i18n.get()]
-    var caption = table && table[id]
+    const table = App.photoCaptions && App.photoCaptions[App.i18n.get()]
+    const caption = table && table[id]
 
     return caption || App.i18n.t('common.untitled') || ''
 }
 
 function photoMap(App) {
-    var map = Object.create(null)
+    const map = Object.create(null)
 
     App.photos.all().forEach(function (photo) {
         if (photo && photo.id) map[photo.id] = photo
@@ -29,9 +29,9 @@ function unitValue(value) {
 }
 
 function findShot(track, id) {
-    var shots = track.querySelectorAll('.pg-shot')
+    const shots = track.querySelectorAll('.pg-shot')
 
-    for (var i = 0; i < shots.length; i++) {
+    for (let i = 0; i < shots.length; i++) {
         if (shots[i].dataset.photoId === id) return shots[i]
     }
 
@@ -39,8 +39,8 @@ function findShot(track, id) {
 }
 
 function createShot(App, spec, photo) {
-    var caption = captionOf(App, photo.id)
-    var link = document.createElement('a')
+    const caption = captionOf(App, photo.id)
+    const link = document.createElement('a')
     link.className = 'pg-shot'
     link.draggable = false
     link.dataset.photoId = photo.id
@@ -56,14 +56,14 @@ function createShot(App, spec, photo) {
         link.setAttribute('role', 'button')
     }
 
-    var img = document.createElement('img')
+    const img = document.createElement('img')
     img.src = photo.src
     img.alt = caption
     img.loading = 'lazy'
     img.decoding = 'async'
     img.draggable = false
 
-    var position = safePosition(spec.position)
+    const position = safePosition(spec.position)
     if (position) img.style.objectPosition = position
 
     link.appendChild(img)
@@ -71,8 +71,8 @@ function createShot(App, spec, photo) {
 }
 
 function createCaption(App, id) {
-    var caption = document.createElement('p')
-    var text = document.createElement('span')
+    const caption = document.createElement('p')
+    const text = document.createElement('span')
 
     caption.className = 'pg-caption'
     text.className = 'pg-caption-text'
@@ -83,9 +83,9 @@ function createCaption(App, id) {
 }
 
 function createCell(App, spec, photo) {
-    var cell = document.createElement('figure')
-    var width = unitValue(spec.width)
-    var height = unitValue(spec.height)
+    const cell = document.createElement('figure')
+    const width = unitValue(spec.width)
+    const height = unitValue(spec.height)
 
     if (!width || !height) return null
 
@@ -105,19 +105,19 @@ function rowHeightUnits(row) {
 
 /* 每列按行从上往下排；超过最大高度时把余下各行接到新列。 */
 function splitColumns() {
-    var result = []
+    const result = []
 
     columns.forEach(function (column) {
-        var rows = []
-        var used = 0
-        var previous = []
+        let rows = []
+        let used = 0
+        const previous = []
 
         ;(column.rows || []).forEach(function (row) {
-            var items = Array.isArray(row) ? row : []
+            const items = Array.isArray(row) ? row : []
 
             if (!items.length) return
 
-            var height = rowHeightUnits(items)
+            const height = rowHeightUnits(items)
 
             if (rows.length && used + height > maxHeightUnits + 1e-6) {
                 previous.push(rows)
@@ -139,24 +139,24 @@ function splitColumns() {
 }
 
 function createColumn(App, rows, map) {
-    var column = document.createElement('div')
-    var media = document.createElement('div')
-    var captions = document.createElement('div')
+    const column = document.createElement('div')
+    const media = document.createElement('div')
+    const captions = document.createElement('div')
 
     column.className = 'pg-col'
     media.className = 'pg-col-media'
     captions.className = 'pg-captions'
 
     rows.forEach(function (row) {
-        var rowEl = document.createElement('div')
+        const rowEl = document.createElement('div')
 
         rowEl.className = 'pg-row'
 
         row.forEach(function (spec) {
-            var photo = map[spec.id]
+            const photo = map[spec.id]
             if (!photo || !photo.src) return
 
-            var cell = createCell(App, spec, photo)
+            const cell = createCell(App, spec, photo)
             if (!cell) return
 
             rowEl.appendChild(cell)
@@ -175,14 +175,14 @@ function createColumn(App, rows, map) {
 }
 
 function renderTrack(ctx) {
-    var map = photoMap(ctx.App)
-    var fragment = document.createDocumentFragment()
-    var groups = ctx.narrow
+    const map = photoMap(ctx.App)
+    const fragment = document.createDocumentFragment()
+    const groups = ctx.narrow
         ? narrowColumns.map(function (column) { return column.rows })
         : splitColumns()
 
     groups.forEach(function (rows) {
-        var node = createColumn(ctx.App, rows, map)
+        const node = createColumn(ctx.App, rows, map)
         if (node) fragment.appendChild(node)
     })
 
@@ -190,36 +190,36 @@ function renderTrack(ctx) {
 }
 
 function buildLightbox() {
-    var el = document.createElement('div')
+    const el = document.createElement('div')
     el.className = 'pg-lightbox'
     el.hidden = true
     el.setAttribute('role', 'dialog')
     el.setAttribute('aria-modal', 'true')
 
-    var scrim = document.createElement('div')
+    const scrim = document.createElement('div')
     scrim.className = 'pg-lb-scrim'
     scrim.dataset.lbClose = ''
 
-    var frame = document.createElement('figure')
+    const frame = document.createElement('figure')
     frame.className = 'pg-lb-frame'
 
-    var img = document.createElement('img')
+    const img = document.createElement('img')
     img.className = 'pg-lb-img'
     img.alt = ''
 
-    var caption = document.createElement('figcaption')
+    const caption = document.createElement('figcaption')
     caption.className = 'pg-lb-caption'
 
-    var text = document.createElement('span')
+    const text = document.createElement('span')
     text.className = 'pg-lb-text'
 
-    var source = document.createElement('a')
+    const source = document.createElement('a')
     source.className = 'pg-lb-source'
     source.target = '_blank'
     source.rel = 'noopener noreferrer'
     source.hidden = true
 
-    var close = document.createElement('button')
+    const close = document.createElement('button')
     close.type = 'button'
     close.className = 'pg-lb-close'
     close.dataset.lbClose = ''
@@ -269,8 +269,8 @@ export default {
         function updateProgress() {
             if (!progressBar) return
 
-            var max = track.scrollWidth - track.clientWidth
-            var ratio = max > 0 ? track.scrollLeft / max : 0
+            const max = track.scrollWidth - track.clientWidth
+            const ratio = max > 0 ? track.scrollLeft / max : 0
             progressBar.style.transform = 'scaleX(' + ratio + ')'
         }
 
@@ -283,7 +283,7 @@ export default {
             track.querySelectorAll('.pg-caption-text').forEach(function (text) {
                 text.classList.remove('is-multicol')
 
-                var lineHeight = parseFloat(getComputedStyle(text).lineHeight) || 0
+                const lineHeight = parseFloat(getComputedStyle(text).lineHeight) || 0
                 if (lineHeight && text.scrollHeight > lineHeight * 3 + 1) {
                     text.classList.add('is-multicol')
                 }
@@ -294,25 +294,25 @@ export default {
         function fitUnit() {
             if (disposed) return
 
-            var rootSize = parseFloat(
+            const rootSize = parseFloat(
                 getComputedStyle(document.documentElement).fontSize
             ) || 16
-            var basePx = baseUnit * rootSize
+            const basePx = baseUnit * rootSize
 
             track.style.setProperty('--pg-unit', basePx + 'px')
 
             if (narrow.matches) {
-                var narrowTrackStyle = getComputedStyle(track)
-                var row = track.querySelector('.pg-row')
-                var tileGap = row ? parseFloat(getComputedStyle(row).columnGap) || 0 : 0
-                var padded = parseFloat(narrowTrackStyle.paddingLeft) +
+                const narrowTrackStyle = getComputedStyle(track)
+                const row = track.querySelector('.pg-row')
+                const tileGap = row ? parseFloat(getComputedStyle(row).columnGap) || 0 : 0
+                const padded = parseFloat(narrowTrackStyle.paddingLeft) +
                     parseFloat(narrowTrackStyle.paddingRight)
-                var available = track.clientWidth - padded
-                var unit = (available - tileGap * (narrowUnitLimit - 1)) /
+                const available = track.clientWidth - padded
+                const unit = (available - tileGap * (narrowUnitLimit - 1)) /
                     narrowUnitLimit
 
                 if (isFinite(unit) && unit > 0) {
-                    var fitted = Math.max(1, Math.min(basePx, unit))
+                    const fitted = Math.max(1, Math.min(basePx, unit))
                     track.style.setProperty('--pg-unit',
                         (Math.floor(fitted * 100) / 100) + 'px')
                 }
@@ -323,9 +323,9 @@ export default {
             }
 
             function measureLimit(currentUnit) {
-                var stageStyle = getComputedStyle(stage)
-                var trackStyle = getComputedStyle(track)
-                var available = stage.clientHeight -
+                const stageStyle = getComputedStyle(stage)
+                const trackStyle = getComputedStyle(track)
+                let available = stage.clientHeight -
                     parseFloat(stageStyle.paddingTop) -
                     parseFloat(stageStyle.paddingBottom) -
                     parseFloat(trackStyle.paddingTop) -
@@ -337,17 +337,17 @@ export default {
                         parseFloat(stageStyle.paddingTop) - 2
                 }
 
-                var next = basePx
+                let next = basePx
 
                 track.querySelectorAll('.pg-col').forEach(function (column) {
-                    var media = column.querySelector('.pg-col-media')
+                    const media = column.querySelector('.pg-col-media')
                     if (!media) return
 
-                    var rows = media.querySelectorAll('.pg-row')
-                    var rowGap = parseFloat(getComputedStyle(media).rowGap) || 0
-                    var gapTotal = rowGap * Math.max(0, rows.length - 1)
-                    var scal = media.offsetHeight - gapTotal
-                    var fixed = column.offsetHeight - media.offsetHeight + gapTotal
+                    const rows = media.querySelectorAll('.pg-row')
+                    const rowGap = parseFloat(getComputedStyle(media).rowGap) || 0
+                    const gapTotal = rowGap * Math.max(0, rows.length - 1)
+                    const scal = media.offsetHeight - gapTotal
+                    const fixed = column.offsetHeight - media.offsetHeight + gapTotal
 
                     if (scal > 0 && available > fixed) {
                         next = Math.min(next,
@@ -358,14 +358,14 @@ export default {
                 return Math.max(1, Math.min(basePx, next))
             }
 
-            var limit = basePx
+            let limit = basePx
 
             /* 缩小单位后 caption 可能换行并增高，需要按新宽度再量一次。 */
-            for (var pass = 0; pass < 4; pass += 1) {
+            for (let pass = 0; pass < 4; pass += 1) {
                 track.style.setProperty('--pg-unit', limit + 'px')
                 fitCaptions()
 
-                var next = measureLimit(limit)
+                const next = measureLimit(limit)
                 if (next >= limit - .05) break
                 limit = next
             }
@@ -385,8 +385,8 @@ export default {
         }
 
         function syncLabels() {
-            var closeText = App.i18n.t('common.lightbox.close') || ''
-            var dialogText = App.i18n.t('common.lightbox.aria') || ''
+            const closeText = App.i18n.t('common.lightbox.close') || ''
+            const dialogText = App.i18n.t('common.lightbox.aria') || ''
 
             lightbox.close.textContent = closeText
             lightbox.close.setAttribute('aria-label', closeText)
@@ -409,10 +409,10 @@ export default {
         function syncOpenLightbox() {
             if (lightbox.el.hidden || !currentPhotoId) return
 
-            var trigger = findShot(track, currentPhotoId)
+            const trigger = findShot(track, currentPhotoId)
             if (!trigger) return
 
-            var img = trigger.querySelector('img')
+            const img = trigger.querySelector('img')
             if (img) {
                 lightbox.img.src = img.currentSrc || img.src
                 lightbox.img.alt = img.alt
@@ -425,7 +425,7 @@ export default {
         function openLightbox(trigger) {
             if (!lightbox.el.hidden) return
 
-            var img = trigger.querySelector('img')
+            const img = trigger.querySelector('img')
             if (!img) return
 
             currentPhotoId = trigger.dataset.photoId || ''
@@ -444,8 +444,8 @@ export default {
         function closeLightbox() {
             if (lightbox.el.hidden) return
 
-            var trigger = lastTrigger
-            var id = currentPhotoId
+            const trigger = lastTrigger
+            const id = currentPhotoId
 
             lightbox.el.hidden = true
             lightbox.img.removeAttribute('src')
@@ -457,7 +457,7 @@ export default {
             if (trigger && document.contains(trigger)) {
                 trigger.focus()
             } else if (id) {
-                var target = findShot(track, id) || track
+                const target = findShot(track, id) || track
                 target.focus()
             } else {
                 track.focus()
@@ -482,11 +482,11 @@ export default {
 
             if (event.key !== 'Tab') return
 
-            var items = [lightbox.close]
+            const items = [lightbox.close]
             if (!lightbox.source.hidden) items.push(lightbox.source)
 
-            var first = items[0]
-            var last = items[items.length - 1]
+            const first = items[0]
+            const last = items[items.length - 1]
 
             if (event.shiftKey && document.activeElement === first) {
                 event.preventDefault()
@@ -505,7 +505,7 @@ export default {
 
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
 
-            var shot = event.target.closest('.pg-shot')
+            const shot = event.target.closest('.pg-shot')
             if (!shot || !track.contains(shot)) return
 
             event.preventDefault()
@@ -523,9 +523,9 @@ export default {
         }
 
         function onTrackKey(event) {
-            var step = Math.max(240, track.clientWidth * 0.8)
-            var shot = event.target.closest('.pg-shot')
-            var opens = shot && (event.key === 'Enter' || event.key === ' ')
+            const step = Math.max(240, track.clientWidth * 0.8)
+            const shot = event.target.closest('.pg-shot')
+            const opens = shot && (event.key === 'Enter' || event.key === ' ')
 
             if (opens && (ctx.narrow || !shot.hasAttribute('href'))) {
                 event.preventDefault()
@@ -559,7 +559,7 @@ export default {
         function startMomentum(value) {
             cancelMomentum()
 
-            var v = Math.max(-48, Math.min(48, value))
+            let v = Math.max(-48, Math.min(48, value))
             if (Math.abs(v) < 0.4) return
 
             function step() {
@@ -600,7 +600,7 @@ export default {
         function onPointerMove(event) {
             if (!dragging || event.pointerId !== dragPointer) return
 
-            var dx = event.clientX - lastX
+            const dx = event.clientX - lastX
             lastX = event.clientX
             dragMoved += Math.abs(dx)
             velocity = -dx
@@ -649,7 +649,7 @@ export default {
         }
 
         function rebuild() {
-            var left = track.scrollLeft
+            const left = track.scrollLeft
 
             renderTrack(ctx)
             fitUnit()

@@ -4,8 +4,8 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var U = App.utils = {}
+    const App = window.App = window.App || {}
+    const U = App.utils = {}
 
     U.escapeHtml = function (s) {
         return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -25,7 +25,7 @@
 
     /* 立即回到页顶，绕过布局的平滑滚动；语言切换与布局切换共用。 */
     U.scrollToTopInstant = function () {
-        var html = document.documentElement
+        const html = document.documentElement
         html.style.scrollBehavior = 'auto'
         /* 读取布局属性强制一次样式重算，确保滚动执行时已应用 auto 而非 CSS 的 smooth。 */
         void html.offsetHeight
@@ -57,22 +57,22 @@
         if (n <= 1) return t
         flat = flat == null ? 0.3 : flat
 
-        var step = 1 / (n - 1)
-        var x = t / step
-        var i = Math.floor(x)
-        var f = x - i
+        const step = 1 / (n - 1)
+        const x = t / step
+        const i = Math.floor(x)
+        const f = x - i
 
-        var a = flat
-        var b = 1 - flat
-        var u = U.clamp01((f - a) / (b - a))
-        var s = U.easeInOutCubic(u)
+        const a = flat
+        const b = 1 - flat
+        const u = U.clamp01((f - a) / (b - a))
+        const s = U.easeInOutCubic(u)
 
         return Math.min(1, (i + s) * step)
     }
 
     /* rAF 节流。返回的函数可直接调用，另带 cancel() 取消尚未执行的一次。 */
     U.debounceRaf = function (fn) {
-        var raf = 0
+        let raf = 0
 
         function run() {
             raf = 0

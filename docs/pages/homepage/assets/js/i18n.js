@@ -1,34 +1,34 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var I = App.i18n = {}
+    const App = window.App = window.App || {}
+    const I = App.i18n = {}
 
-    var STORAGE = App.storage
-    var LANG_NAME = STORAGE.NAMES.lang
+    const STORAGE = App.storage
+    const LANG_NAME = STORAGE.NAMES.lang
 
-    var LANGUAGES = [
+    const LANGUAGES = [
         { key: 'zh-Hans', htmlLang: 'zh-Hans', label: '中文' },
         { key: 'en', htmlLang: 'en', label: 'English' },
         { key: 'ja', htmlLang: 'ja', label: '日本語' }
     ]
 
-    var ALIASES = {
+    const ALIASES = {
         'zh-Hant': 'zh-Hans'
     }
 
-    var PHOTO_CAPTION_PREFIX = 'photo.caption.'
+    const PHOTO_CAPTION_PREFIX = 'photo.caption.'
 
-    var SUPPORTED = LANGUAGES.map(function (lang) { return lang.key })
-    var HTML_LANG = {}
-    var LABELS = {}
+    const SUPPORTED = LANGUAGES.map(function (lang) { return lang.key })
+    const HTML_LANG = {}
+    const LABELS = {}
 
     LANGUAGES.forEach(function (lang) {
         HTML_LANG[lang.key] = lang.htmlLang || lang.key
         LABELS[lang.key] = lang.label
     })
 
-    var COMMON = {
+    const COMMON = {
         'meta.title': 'ピカピカピ',
         'common.motto': 'Mihi vivam quod superest aevi, si quid superesse volunt di.',
         'common.layout.brand': 'Brand',
@@ -38,7 +38,7 @@
         'common.feed.href': '../../assets/resources/meta/feed.atom'
     }
 
-    var DICT = {
+    const DICT = {
         'zh-Hans': {
             'meta.description': 'Don\'t worry, be happy.',
             'control.language': '语言',
@@ -188,8 +188,8 @@
         }
     }
 
-    var current = null
-    var listeners = []
+    let current = null
+    const listeners = []
 
     function normalize(lang) {
         if (ALIASES[lang]) return ALIASES[lang]
@@ -197,7 +197,7 @@
     }
 
     function guess() {
-        var nav = (navigator.language || 'en').toLowerCase()
+        const nav = (navigator.language || 'en').toLowerCase()
 
         if (nav.indexOf('zh') === 0) return 'zh-Hans'
         if (nav.indexOf('ja') === 0) return 'ja'
@@ -207,7 +207,7 @@
 
     function readUrlLang() {
         try {
-            var value = new URLSearchParams(window.location.search).get('lang')
+            const value = new URLSearchParams(window.location.search).get('lang')
             return normalize(value)
         } catch (e) {}
 
@@ -216,14 +216,14 @@
 
     function syncUrl(lang) {
         try {
-            var url = new URL(window.location.href)
+            const url = new URL(window.location.href)
             url.searchParams.set('lang', lang)
             window.history.replaceState(null, '', url.toString())
         } catch (e) { /* 忽略：file:// 下会抛错 */ }
     }
 
     function resolveLang() {
-        var fromUrl = readUrlLang()
+        const fromUrl = readUrlLang()
 
         if (fromUrl) {
             STORAGE.set(LANG_NAME, fromUrl)
@@ -239,8 +239,8 @@
     }
 
     function copyrightYears() {
-        var now = new Date().getFullYear()
-        var start = Number(App.config && App.config.startYear)
+        const now = new Date().getFullYear()
+        const start = Number(App.config && App.config.startYear)
 
         if (!isFinite(start) || start <= 0 || start > now) return String(now)
         return now > start ? start + '-' + now : String(start)
@@ -254,8 +254,8 @@
 
     function fillAttrs(el, dict) {
         el.dataset.i18nAttr.split(',').forEach(function (pair) {
-            var parts = pair.split(':')
-            var value = text(dict, parts[1].trim())
+            const parts = pair.split(':')
+            const value = text(dict, parts[1].trim())
 
             if (value != null && !Array.isArray(value)) {
                 el.setAttribute(parts[0].trim(), withYear(value))
@@ -265,7 +265,7 @@
 
     /* 图标链接没有文字，href 也走词典；与 data-i18n-attr 分开避免空属性残留。 */
     function fillHref(el, dict) {
-        var value = text(dict, el.dataset.i18nAttrHref)
+        const value = text(dict, el.dataset.i18nAttrHref)
 
         if (value != null && !Array.isArray(value)) {
             el.setAttribute('href', value)
@@ -275,14 +275,14 @@
     function render() {
         if (!current) return
 
-        var dict = DICT[current]
-        var root = document.documentElement
+        const dict = DICT[current]
+        const root = document.documentElement
 
         root.lang = HTML_LANG[current] || current
         root.setAttribute('data-lang', current)
 
         document.querySelectorAll('[data-i18n]').forEach(function (el) {
-            var value = text(dict, el.dataset.i18n)
+            const value = text(dict, el.dataset.i18n)
 
             if (value != null && !Array.isArray(value)) {
                 el.textContent = withYear(value)
@@ -290,7 +290,7 @@
         })
 
         document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-            var value = text(dict, el.dataset.i18nHtml)
+            const value = text(dict, el.dataset.i18nHtml)
 
             if (value != null && !Array.isArray(value)) {
                 el.innerHTML = withYear(value)
@@ -305,12 +305,12 @@
             fillHref(el, dict)
         })
 
-        var title = text(dict, 'meta.title')
+        const title = text(dict, 'meta.title')
         if (title) document.title = title
 
-        var description = text(dict, 'meta.description')
+        const description = text(dict, 'meta.description')
         if (description) {
-            var metaDescription = document.querySelector('meta[name="description"]')
+            const metaDescription = document.querySelector('meta[name="description"]')
             if (metaDescription) metaDescription.setAttribute('content', description)
         }
     }
@@ -337,12 +337,12 @@
     I.get = function () { return current }
     I.refresh = render
     I.t = function (key) {
-        var value = DICT[current] ? text(DICT[current], key) : undefined
+        const value = DICT[current] ? text(DICT[current], key) : undefined
 
         if (value != null) return value
 
         /* brand 仍按 photo.caption.<id> 读取，数据已移到单独对象。 */
-        var table = App.photoCaptions && App.photoCaptions[current]
+        const table = App.photoCaptions && App.photoCaptions[current]
         if (table && key.indexOf(PHOTO_CAPTION_PREFIX) === 0) {
             return table[key.slice(PHOTO_CAPTION_PREFIX.length)]
         }
@@ -350,7 +350,7 @@
         return value
     }
     I.list = function (key) {
-        var value = DICT[current] ? DICT[current][key] : null
+        const value = DICT[current] ? DICT[current][key] : null
         return Array.isArray(value) ? value : null
     }
     I.languages = SUPPORTED.slice()
@@ -359,7 +359,7 @@
         listeners.push(fn)
 
         return function () {
-            var i = listeners.indexOf(fn)
+            const i = listeners.indexOf(fn)
             if (i !== -1) listeners.splice(i, 1)
         }
     }

@@ -3,8 +3,6 @@ import { isEnabled } from '../utils/common.js'
 import { elementStatus, docsifyIds } from '../utils/constants.js'
 import { createEl, getEl, getElById, getElByClass } from '../utils/dom.js'
 
-export const breadcrumbClass = 'breadcrumb'
-
 let breadcrumbOptions = {
     enable: false,
     localization: [
@@ -12,6 +10,8 @@ let breadcrumbOptions = {
         'jp',
     ]
 }
+
+export const breadcrumbClass = 'breadcrumb'
 
 function plugin(hook, vm) {
     if (!breadcrumbOptions.enable) return

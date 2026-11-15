@@ -1,22 +1,22 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var L = App.layouts = {}
+    const App = window.App = window.App || {}
+    const L = App.layouts = {}
 
-    var STORAGE = App.storage
-    var LAYOUT_NAME = STORAGE.NAMES.layout
-    var ROOT_ID = 'layoutRoot'
-    var FILES = {
+    const STORAGE = App.storage
+    const LAYOUT_NAME = STORAGE.NAMES.layout
+    const ROOT_ID = 'layoutRoot'
+    const FILES = {
         html: 'html/index.html',
         css: 'css/main.css',
         js: 'js/main.js'
     }
-    var current = null
-    var requestSeq = 0
-    var listeners = []
+    let current = null
+    let requestSeq = 0
+    const listeners = []
     /* 动态 import 失败后浏览器会记住失败结果，重试时换一个地址才能重新拉取。 */
-    var retryImports = Object.create(null)
+    const retryImports = Object.create(null)
 
     function normalize(id) {
         return App.config.layouts.indexOf(id) === -1 ? null : id
@@ -36,7 +36,7 @@
     /* 先以 media="not all" 预载，避免新布局样式在切换完成前生效。 */
     function loadCss(url) {
         return new Promise(function (resolve, reject) {
-            var link = document.createElement('link')
+            const link = document.createElement('link')
             link.rel = 'stylesheet'
             link.href = url
             link.media = 'not all'
@@ -66,7 +66,7 @@
         listeners.push(fn)
 
         return function () {
-            var i = listeners.indexOf(fn)
+            const i = listeners.indexOf(fn)
             if (i !== -1) listeners.splice(i, 1)
         }
     }
@@ -105,7 +105,7 @@
         App.i18n.refresh()
         App.site.apply(root)
 
-        var handle = instance.mount(root)
+        const handle = instance.mount(root)
 
         if (!handle || typeof handle.unmount !== 'function') {
             throw new Error('Layout mount() returned no handle: ' + id)
@@ -129,16 +129,16 @@
             return Promise.resolve({ id: id, ok: true, same: true })
         }
 
-        var root = document.getElementById(ROOT_ID)
+        const root = document.getElementById(ROOT_ID)
 
         if (!root) {
             return Promise.resolve({ id: L.currentId(), ok: false })
         }
 
-        var request = ++requestSeq
-        var cancelled = false
-        var newLink = null
-        var jsUrl = layoutUrl(id, FILES.js)
+        const request = ++requestSeq
+        let cancelled = false
+        let newLink = null
+        let jsUrl = layoutUrl(id, FILES.js)
 
         if (retryImports[id]) jsUrl += '?retry=' + retryImports[id]
 
@@ -157,10 +157,10 @@
             }),
             import(jsUrl)
         ]).then(function (values) {
-            var html = values[0]
-            var link = values[1]
-            var module = values[2]
-            var instance = module && module.default ? module.default : module
+            const html = values[0]
+            const link = values[1]
+            const module = values[2]
+            const instance = module && module.default ? module.default : module
 
             if (request !== requestSeq) {
                 releaseNewLink()
@@ -173,10 +173,10 @@
             }
 
             /* 旧 DOM 与旧 link 在挂载成功前保留，失败时回插并重新挂载旧布局。 */
-            var previous = current
-            var previousNodes = Array.prototype.slice.call(root.childNodes)
-            var previousLayout = document.documentElement.dataset.layout || ''
-            var handle = null
+            const previous = current
+            const previousNodes = Array.prototype.slice.call(root.childNodes)
+            const previousLayout = document.documentElement.dataset.layout || ''
+            let handle = null
 
             try {
                 if (previous && previous.handle &&

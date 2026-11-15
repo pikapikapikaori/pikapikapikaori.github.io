@@ -27,7 +27,7 @@
         // 提前应用主题，避免首屏闪烁。设置页会同步写入 localStorage。
         (function () {
             try {
-                var t = localStorage.getItem('ln.theme') || 'auto';
+                let t = localStorage.getItem('ln.theme') || 'auto';
                 if (t !== 'auto' && t !== 'light' && t !== 'dark') t = 'auto';
                 document.documentElement.setAttribute('data-theme', t);
             } catch (e) { /* ignore */ }

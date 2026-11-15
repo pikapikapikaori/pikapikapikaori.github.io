@@ -1,11 +1,11 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var S = App.storage = {}
+    const App = window.App = window.App || {}
+    const S = App.storage = {}
 
-    var PREFIX = 'pikapikapi:'
-    var SUFFIX = ':homepage'
+    const PREFIX = 'pikapikapi:'
+    const SUFFIX = ':homepage'
 
     S.NAMES = {
         theme: 'theme',
@@ -51,7 +51,7 @@
 
     S.getEnum = function (name, allowed, fallback) {
         try {
-            var value = S.get(name)
+            const value = S.get(name)
             return allowed.indexOf(value) === -1 ? fallback : value
         } catch (e) {
             return fallback
@@ -60,7 +60,7 @@
 
     S.getBool = function (name, fallback) {
         try {
-            var value = S.get(name)
+            const value = S.get(name)
 
             if (value === 'true' || value === '1') return true
             if (value === 'false' || value === '0') return false
@@ -77,7 +77,7 @@
 
     S.getJSON = function (name, fallback) {
         try {
-            var raw = S.get(name)
+            const raw = S.get(name)
 
             return raw === null ? fallback : JSON.parse(raw)
         } catch (e) {

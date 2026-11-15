@@ -10,7 +10,7 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
+    const App = window.App = window.App || {}
 
     App.config = {
         layouts: ['brand', 'mondrian', 'starTrail', 'photography'],

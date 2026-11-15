@@ -1,4 +1,4 @@
-var sengine = 'https://www.google.com/search?q=' // Default search engine
+const sengine = 'https://www.google.com/search?q=' // Default search engine
 
 function getParameterByName(name) {
     return new URLSearchParams(window.location.search).get(name)
@@ -10,7 +10,7 @@ function updatetime() {
 }
 
 function start() {
-    var query = getParameterByName('q')
+    const query = getParameterByName('q')
     if (query) search(query.replaceAll('+', '%2B'))
 
     document.getElementById('keywords').focus()
@@ -21,8 +21,8 @@ function start() {
 }
 
 function handleKeyPress(e) {
-    var key = e.keyCode || e.which
-    var text = document.getElementById('keywords').value.replaceAll('+', '%2B')
+    const key = e.keyCode || e.which
+    const text = document.getElementById('keywords').value.replaceAll('+', '%2B')
     if (key == 13) {
         search(text)
     }
@@ -32,8 +32,8 @@ function handleKeyPress(e) {
 }
 
 function search(text) {
-    var option = text.substr(1, text.indexOf(' ') - 1) || text.substr(1)
-    var subtext = text.substr(2 + option.length)
+    const option = text.substr(1, text.indexOf(' ') - 1) || text.substr(1)
+    const subtext = text.substr(2 + option.length)
     if (text[0] === '/') {
         if (text.indexOf(' ') > -1) {
             switch (option) {
@@ -156,7 +156,7 @@ function search(text) {
 
 // Source: https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
 function validURL(str) {
-    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+    const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
         '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
         '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
@@ -166,7 +166,7 @@ function validURL(str) {
 }
 
 function containsProtocol(str) {
-    var pattern = new RegExp('^(https?:\\/\\/){1}.*', 'i')
+    const pattern = new RegExp('^(https?:\\/\\/){1}.*', 'i')
     return !!pattern.test(str)
 }
 

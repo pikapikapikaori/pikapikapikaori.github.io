@@ -1,15 +1,15 @@
 (function () {
     'use strict'
 
-    var App = window.App
+    const App = window.App
 
     function syncMeta() {
-        var id = App.layouts.currentId() || App.layouts.initId()
-        var theme = App.theme.effective()
-        var colors = App.config.metaColors || {}
-        var color = colors[id] ? colors[id][theme] : null
+        const id = App.layouts.currentId() || App.layouts.initId()
+        const theme = App.theme.effective()
+        const colors = App.config.metaColors || {}
+        const color = colors[id] ? colors[id][theme] : null
 
-        var meta = document.getElementById('themeColorMeta')
+        const meta = document.getElementById('themeColorMeta')
         if (meta && color) meta.setAttribute('content', color)
     }
 

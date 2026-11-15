@@ -5,10 +5,10 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var Photos = App.photos = {}
+    const App = window.App = window.App || {}
+    const Photos = App.photos = {}
 
-    var warmed = {}
+    const warmed = {}
 
     /* 全部照片，不截取，供不受 photoLimit 约束的布局读取。 */
     Photos.all = function () {
@@ -17,8 +17,8 @@
 
     /* 照片不足 photoLimit 时全部返回，超过才截取前 photoLimit 张。 */
     Photos.list = function () {
-        var limit = App.config.photoLimit
-        var list = Photos.all()
+        const limit = App.config.photoLimit
+        const list = Photos.all()
 
         return limit > 0 && list.length > limit ? list.slice(0, limit) : list
     }
@@ -29,7 +29,7 @@
             if (!photo.src || warmed[photo.src]) return
 
             warmed[photo.src] = true
-            var img = new Image()
+            const img = new Image()
             img.decoding = 'async'
             img.src = photo.src
         })

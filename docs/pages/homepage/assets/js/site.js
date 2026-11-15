@@ -5,9 +5,9 @@
 (function () {
     'use strict'
 
-    var App = window.App = window.App || {}
-    var S = App.site = {}
-    var CFG = App.config
+    const App = window.App = window.App || {}
+    const S = App.site = {}
+    const CFG = App.config
 
     S.apply = function (root) {
         if (!root) return

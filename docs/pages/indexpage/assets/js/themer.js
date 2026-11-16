@@ -1,6 +1,11 @@
 const setValue = (property, value) => {
     if (value) {
         document.documentElement.style.setProperty(`--${property}`, value)
+
+        if (property === 'color-background') {
+            const meta = document.querySelector('meta[name="theme-color"]')
+            if (meta) meta.setAttribute('content', value)
+        }
     }
 }
 

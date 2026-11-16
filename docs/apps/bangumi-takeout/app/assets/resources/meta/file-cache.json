@@ -1,6 +1,6 @@
 {
     "version": "1.1.0",
-    "hash": "098f228ce831dc1b",
+    "hash": "ad748d8ef70c65e4",
     "files": [
         {
             "path": "assets/css/about.css",
@@ -40,11 +40,11 @@
         },
         {
             "path": "assets/html/about.html",
-            "hash": "00fddf80926120d4"
+            "hash": "cb0b4e18832473c1"
         },
         {
             "path": "assets/html/detail.html",
-            "hash": "ee28fb67aecc1ba7"
+            "hash": "9620517a09c79a50"
         },
         {
             "path": "assets/js/app.js",
@@ -56,7 +56,7 @@
         },
         {
             "path": "assets/js/config.js",
-            "hash": "6b216ccf90e09811"
+            "hash": "d13d121691ff69a7"
         },
         {
             "path": "assets/js/footer.js",
@@ -116,7 +116,7 @@
         },
         {
             "path": "assets/js/worker/startup.js",
-            "hash": "e0b2458099128411"
+            "hash": "498e0bba40501a15"
         },
         {
             "path": "assets/js/zip.js",
@@ -140,11 +140,11 @@
         },
         {
             "path": "assets/resources/meta/manifest.json",
-            "hash": "e8d56d6e857bf5ed"
+            "hash": "bbfeb152cde41332"
         },
         {
             "path": "index.html",
-            "hash": "fde30bdfb84417b8"
+            "hash": "dfe04f38fe4e9548"
         }
     ]
 }

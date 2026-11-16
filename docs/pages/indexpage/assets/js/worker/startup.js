@@ -1,6 +1,23 @@
 (function () {
     'use strict'
 
+    const THEME_COLOR_KEY = 'pikapikapi:indexpage:color-background'
+    const DEFAULT_THEME_COLOR = '#F8F6F1'
+
+    function applyThemeColor(color) {
+        const meta = document.querySelector('meta[name="theme-color"]')
+        if (meta) meta.setAttribute('content', color)
+    }
+
+    let storedColor = null
+    try {
+        storedColor = window.localStorage.getItem(THEME_COLOR_KEY)
+    } catch (error) {
+        storedColor = null
+    }
+
+    applyThemeColor(storedColor || DEFAULT_THEME_COLOR)
+
     const SCRIPT_SRC = (document.currentScript || document.scripts[document.scripts.length - 1]).src
     const SW_URL = new URL('../../../sw.js', SCRIPT_SRC).href
 

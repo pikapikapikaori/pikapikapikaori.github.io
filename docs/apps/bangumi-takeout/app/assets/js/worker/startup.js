@@ -1,14 +1,46 @@
 (function () {
     'use strict'
 
+    const COLOR_LIGHT = '#f6f7f9'
+    const COLOR_DARK = '#131418'
+
+    function applyThemeColor() {
+        const meta = document.querySelector('meta[name="theme-color"]')
+        if (!meta) return
+        const dark = document.documentElement.dataset.theme === 'dark'
+        meta.setAttribute('content', dark ? COLOR_DARK : COLOR_LIGHT)
+    }
+
+    const MEDIA_DARK = '(prefers-color-scheme: dark)'
+
+    let mode = 'auto'
     try {
-        const mode = localStorage.getItem('bangumi-takeout:theme') || 'auto'
-        const real = mode === 'dark' ? 'dark'
-            : mode === 'light' ? 'light'
-                : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-        document.documentElement.dataset.theme = real
-        document.documentElement.dataset.themeMode = mode
+        mode = localStorage.getItem('bangumi-takeout:theme') || 'auto'
     } catch (e) { /* localStorage 不可用时保持默认 auto */ }
+    if (mode !== 'auto' && mode !== 'light' && mode !== 'dark') mode = 'auto'
+
+    const darkQuery = matchMedia(MEDIA_DARK)
+    const real = mode === 'dark' ? 'dark'
+        : mode === 'light' ? 'light'
+            : (darkQuery.matches ? 'dark' : 'light')
+    document.documentElement.dataset.theme = real
+    document.documentElement.dataset.themeMode = mode
+
+    function onDarkQueryChange(event) {
+        if (document.documentElement.dataset.themeMode !== 'auto') return
+        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light'
+    }
+
+    if (typeof darkQuery.addEventListener === 'function') {
+        darkQuery.addEventListener('change', onDarkQueryChange)
+    } else {
+        darkQuery.addListener(onDarkQueryChange)
+    }
+
+    applyThemeColor()
+
+    const observer = new MutationObserver(applyThemeColor)
+    observer.observe(document.documentElement, { attributeFilter: ['data-theme'] })
 
     const SCRIPT_SRC = (document.currentScript || document.scripts[document.scripts.length - 1]).src
     const SW_URL = new URL('../../../sw.js', SCRIPT_SRC).href

@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "0b14ed19cb385fb5",
+    "hash": "e081480a05502e7a",
     "files": [
         {
             "path": "assets/css/base.css",
@@ -56,7 +56,7 @@
         },
         {
             "path": "assets/js/worker/startup.js",
-            "hash": "1f023b29438e750b"
+            "hash": "7fd03f9e94d625b8"
         },
         {
             "path": "assets/layout/brand/css/main.css",

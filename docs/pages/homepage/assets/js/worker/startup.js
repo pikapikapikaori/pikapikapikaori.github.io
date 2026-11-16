@@ -24,6 +24,8 @@
         ? storage.getEnum(storage.NAMES.theme, [THEMES.light, THEMES.dark], null)
         : null
 
+    const followsSystem = !theme
+
     if (!theme) theme = systemTheme()
 
     document.documentElement.dataset.theme = theme
@@ -31,6 +33,27 @@
     const meta = document.querySelector('meta[name="theme-color"]')
 
     if (meta) meta.setAttribute('content', PAGE_COLORS[theme])
+
+    if (followsSystem && window.matchMedia) {
+        const darkQuery = window.matchMedia(MEDIA_DARK)
+        const onDarkQueryChange = function (event) {
+            const saved = storage
+                ? storage.getEnum(storage.NAMES.theme, [THEMES.light, THEMES.dark], null)
+                : null
+
+            if (saved) return
+
+            const nextTheme = event.matches ? THEMES.dark : THEMES.light
+            document.documentElement.dataset.theme = nextTheme
+            if (meta) meta.setAttribute('content', PAGE_COLORS[nextTheme])
+        }
+
+        if (typeof darkQuery.addEventListener === 'function') {
+            darkQuery.addEventListener('change', onDarkQueryChange)
+        } else {
+            darkQuery.addListener(onDarkQueryChange)
+        }
+    }
 
     const SCRIPT_SRC = (document.currentScript || document.scripts[document.scripts.length - 1]).src
     const SW_URL = new URL('../../../sw.js', SCRIPT_SRC).href

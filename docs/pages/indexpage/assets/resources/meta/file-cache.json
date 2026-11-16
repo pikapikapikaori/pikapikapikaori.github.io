@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "7683ec1b9a237bd0",
+    "hash": "a909c60fa5f086d7",
     "files": [
         {
             "path": "assets/css/styles.css",
@@ -20,11 +20,11 @@
         },
         {
             "path": "assets/js/themer.js",
-            "hash": "37f2842f6800fe13"
+            "hash": "5eefbb11da552f89"
         },
         {
             "path": "assets/js/worker/startup.js",
-            "hash": "d578e20655c28ba4"
+            "hash": "ef2d25370c59a599"
         },
         {
             "path": "assets/resources/fonts/A-OTF-KakuGyoStd-Light.woff2",
@@ -84,7 +84,7 @@
         },
         {
             "path": "index.html",
-            "hash": "049682fdfe4158a7"
+            "hash": "a08ee4dabc762780"
         }
     ]
 }

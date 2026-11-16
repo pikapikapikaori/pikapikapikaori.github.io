@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "hash": "b85e274a2ab5bc70",
+    "hash": "b368c3302157078a",
     "files": [
         {
             "path": "assets/css/base.css",
@@ -384,7 +384,7 @@
         },
         {
             "path": "assets/js/worker/startup.js",
-            "hash": "efa35b7613248470"
+            "hash": "1a2acaeb40fa0797"
         },
         {
             "path": "assets/resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.woff2",
@@ -456,7 +456,7 @@
         },
         {
             "path": "assets/resources/meta/manifest.json",
-            "hash": "e19c4dff5d01aa9f"
+            "hash": "415b0625aa16b6aa"
         },
         {
             "path": "data/language/de/grammar/adj.json",
@@ -864,7 +864,7 @@
         },
         {
             "path": "index.html",
-            "hash": "bab1106b64590e82"
+            "hash": "c28e2383761cef52"
         }
     ]
 }

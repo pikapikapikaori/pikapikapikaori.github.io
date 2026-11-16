@@ -2,7 +2,7 @@
 
 English | [简体中文](./Standard_zh-cn.md)
 
-> The "Support" and "Project Structure" sections in this document apply equally to the root project and all sub-projects.
+> The "Support", "Project Structure" and "PWA Cache & Storage Naming" sections in this document apply equally to the root project and all sub-projects.
 
 ## Support
 
@@ -43,6 +43,12 @@ English | [简体中文](./Standard_zh-cn.md)
         ├── meta/           Things like feed, sitemap; manifest can also go here
         └── logo/
 ```
+
+## PWA Cache & Storage Naming
+
+- Each project owns one cache prefix, and the `id` in `manifest.json` equals that prefix and stays stable. Own `localStorage` / `sessionStorage` keys and IndexedDB database names carry the same project prefix.
+- A service worker cache name is `<prefix>:static:<version>:<hash>`; `hash` is the first 16 hex characters of the SHA-256 of `file-cache.json`.
+
 
 ## Branch Naming & Commit Message
 

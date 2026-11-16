@@ -2,7 +2,7 @@
 
 [English](./Standard.md) | 简体中文
 
-> 本文档中的「支持性说明」与「项目结构」对根项目及所有子项目同样适用。
+> 本文档中的「支持性说明」「项目结构」与「PWA 缓存与存储命名」对根项目及所有子项目同样适用。
 
 ## 支持性
 
@@ -43,6 +43,12 @@
         ├── meta/           feed、sitemap 之类的东西，也可以放 manifest
         └── logo/
 ```
+
+## PWA 缓存与存储命名
+
+- 每个项目一个缓存前缀，`manifest.json` 的 `id` 与前缀一致且保持稳定。自有 `localStorage`、`sessionStorage` 键与 IndexedDB 库名带同一项目前缀。
+- Service Worker 缓存名为 `<前缀>:static:<版本>:<hash>`，`hash` 取 `file-cache.json` 的 SHA-256 前 16 位十六进制。
+
 
 ## 分支命名 & 提交信息
 

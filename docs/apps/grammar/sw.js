@@ -125,6 +125,14 @@ function ensureState () {
     return statePromise
 }
 
+async function networkOrFail (request) {
+    try {
+        return await fetch(request)
+    } catch (error) {
+        return new Response('', { status: 504, statusText: 'Gateway Timeout' })
+    }
+}
+
 async function serve (pathname, request) {
     const url = new URL(pathname, SCOPE_URL).href
     for (let i = 0; i < serving.length; i++) {
@@ -133,7 +141,7 @@ async function serve (pathname, request) {
         const hit = await item.cache.match(url)
         if (hit) return hit
     }
-    return fetch(request)
+    return networkOrFail(request)
 }
 
 /** 只有作用域根目录才回退到 index.html。其它路径可能属于兄弟项目，
@@ -157,7 +165,6 @@ async function download (ctx, url) {
     }
 }
 
-/* 边搬边删，迁移期间新旧缓存不会同时保存全量文件。 */
 async function moveFromSource (ctx, url, entry) {
     if (!ctx.source || !ctx.source.record) return false
     if (ctx.source.record.files[entry.path] !== entry.hash) return false
@@ -296,7 +303,7 @@ async function handleNavigation (request) {
     const pathname = new URL(request.url).pathname
     await ensureState()
     const key = serveKey(pathname)
-    if (!key) return fetch(request)
+    if (!key) return networkOrFail(request)
     return serve(key, request)
 }
 

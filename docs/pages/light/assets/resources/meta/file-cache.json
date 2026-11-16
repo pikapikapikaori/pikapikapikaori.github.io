@@ -1,6 +1,6 @@
 {
     "version": "1.1.1",
-    "hash": "876bcc6de673d9f2",
+    "hash": "f9f78dde6d6c2156",
     "files": [
         {
             "path": "../../404/_404.md",
@@ -5393,10 +5393,6 @@
         {
             "path": "../../en-us/writings/_sidebar.md",
             "hash": "aac60ecfe5ea33a9"
-        },
-        {
-            "path": "../../index.html",
-            "hash": "10c21240a739aea5"
         },
         {
             "path": "../../jp/404/_404.md",

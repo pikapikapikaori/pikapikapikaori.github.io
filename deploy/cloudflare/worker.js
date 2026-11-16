@@ -40,6 +40,14 @@ function rewriteHost(host, filePath) {
 
 // ========== 2. 浏览器缓存策略 ==========
 function applyCacheControl(headers, filePath) {
+    const file = filePath.split('/').pop()?.toLowerCase() || ''
+
+    // SW 脚本与缓存清单文件不进 HTTP 缓存，保证更新检查总能拿到最新
+    if (file === 'sw.js' || file === 'file-cache.json') {
+        headers.set('Cache-Control', 'no-store')
+        return
+    }
+
     const ext = filePath.split('.').pop()?.toLowerCase() || ''
 
     switch (ext) {
@@ -52,36 +60,18 @@ function applyCacheControl(headers, filePath) {
             headers.set('Cache-Control', 'public, max-age=31536000, immutable')
             break
 
-        // HTML / Markdown: No cache
-        case 'html':
+        // MD / HTML / CSS / JS: 3 hours
         case 'md':
-            headers.set('Cache-Control', 'no-store')
-            break
-
-        // Pic: 15 days
-        case 'png':
-        case 'jpg':
-        case 'jpeg':
-        case 'gif':
-        case 'webp':
-        case 'avif':
-        case 'svg':
-        case 'ico':
-            headers.set('Cache-Control', 'public, max-age=1296000')
-            break
-
-        // JS / CSS / JSON / Source Map: 4 hours
+        case 'html':
+        case 'css':
         case 'js':
         case 'mjs':
-        case 'css':
-        case 'json':
-        case 'map':
-            headers.set('Cache-Control', 'public, max-age=14400')
+            headers.set('Cache-Control', 'public, max-age=10800')
             break
 
-        // Other: 1 hour
+        // Other: 1 day
         default:
-            headers.set('Cache-Control', 'public, max-age=3600')
+            headers.set('Cache-Control', 'public, max-age=86400')
     }
 }
 

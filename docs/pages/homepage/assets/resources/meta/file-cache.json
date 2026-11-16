@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "e081480a05502e7a",
+    "hash": "3ec1bd0fa9f8d824",
     "files": [
         {
             "path": "assets/css/base.css",
@@ -160,7 +160,7 @@
         },
         {
             "path": "index.html",
-            "hash": "e5da5996462c6825"
+            "hash": "0a4cf1a436facdad"
         }
     ]
 }

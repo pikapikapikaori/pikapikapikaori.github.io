@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "5d7c9d1b3417a408",
+    "hash": "41414c05f85e9d23",
     "files": [
         {
             "path": "404/_404.md",
@@ -192,11 +192,11 @@
         },
         {
             "path": "apps/bangumi-takeout/app/assets/html/about.html",
-            "hash": "cb0b4e18832473c1"
+            "hash": "abd9b0f056c95df7"
         },
         {
             "path": "apps/bangumi-takeout/app/assets/html/detail.html",
-            "hash": "9620517a09c79a50"
+            "hash": "838f954de2da1072"
         },
         {
             "path": "apps/bangumi-takeout/app/assets/js/app.js",
@@ -296,7 +296,7 @@
         },
         {
             "path": "apps/bangumi-takeout/app/index.html",
-            "hash": "dfe04f38fe4e9548"
+            "hash": "51498e58072db96d"
         },
         {
             "path": "apps/bangumi-takeout/web/assets/css/nonstandard/styles.css",
@@ -1232,7 +1232,7 @@
         },
         {
             "path": "apps/grammar/index.html",
-            "hash": "c28e2383761cef52"
+            "hash": "d84c040d483d88b9"
         },
         {
             "path": "apps/terminal/assets/css/terminal.css",
@@ -8964,7 +8964,7 @@
         },
         {
             "path": "index.html",
-            "hash": "10c21240a739aea5"
+            "hash": "cdf610fa45051b60"
         },
         {
             "path": "jp/404/_404.md",
@@ -13792,7 +13792,7 @@
         },
         {
             "path": "pages/homepage/index.html",
-            "hash": "e5da5996462c6825"
+            "hash": "0a4cf1a436facdad"
         },
         {
             "path": "pages/indexpage/assets/css/styles.css",
@@ -13876,7 +13876,7 @@
         },
         {
             "path": "pages/indexpage/index.html",
-            "hash": "a08ee4dabc762780"
+            "hash": "c6b11a8b8ffd62c3"
         },
         {
             "path": "pages/light/assets/css/plus.css",
@@ -14404,7 +14404,7 @@
         },
         {
             "path": "pages/light/index.html",
-            "hash": "3d16328a2e1cdb15"
+            "hash": "09a85dc5f7f17748"
         },
         {
             "path": "writings/10TenBest-20200105.md",

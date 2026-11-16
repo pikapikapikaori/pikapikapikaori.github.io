@@ -1,6 +1,6 @@
 {
     "version": "1.1.0",
-    "hash": "ad748d8ef70c65e4",
+    "hash": "865ab087f0370a1d",
     "files": [
         {
             "path": "assets/css/about.css",
@@ -40,11 +40,11 @@
         },
         {
             "path": "assets/html/about.html",
-            "hash": "cb0b4e18832473c1"
+            "hash": "abd9b0f056c95df7"
         },
         {
             "path": "assets/html/detail.html",
-            "hash": "9620517a09c79a50"
+            "hash": "838f954de2da1072"
         },
         {
             "path": "assets/js/app.js",
@@ -144,7 +144,7 @@
         },
         {
             "path": "index.html",
-            "hash": "dfe04f38fe4e9548"
+            "hash": "51498e58072db96d"
         }
     ]
 }

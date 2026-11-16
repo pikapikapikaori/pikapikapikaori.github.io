@@ -5,14 +5,14 @@ const setValue = (property, value) => {
 }
 
 const setValueFromLocalStorage = property => {
-    let value = localStorage.getItem(property)
+    let value = localStorage.getItem('pikapikapi:indexpage:' + property)
     if (!value) {
         value = {
             'color-background': '#F8F6F1',
             'color-text-pri': '#4C432E',
             'color-text-acc': '#AA9A73'
         }[property]
-        localStorage.setItem(property, value)
+        localStorage.setItem('pikapikapi:indexpage:' + property, value)
     }
     setValue(property, value)
 }
@@ -23,7 +23,7 @@ const setTheme = options => {
         const value = options[option]
 
         setValue(property, value)
-        localStorage.setItem(property, value)
+        localStorage.setItem('pikapikapi:indexpage:' + property, value)
     }
 }
 

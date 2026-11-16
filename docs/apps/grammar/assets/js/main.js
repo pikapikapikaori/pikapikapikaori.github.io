@@ -276,18 +276,7 @@ async function bootstrap() {
 
     window.__ln = { router, appStore, dev: createDevTools() }
 
-    setupServiceWorker()
     attachVerticalPopover()
-}
-
-function setupServiceWorker() {
-    if (!('serviceWorker' in navigator)) return
-    if (location.protocol !== 'https:') return
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch((err) => {
-            console.warn('[sw] 注册失败', err)
-        })
-    })
 }
 
 bootstrap().catch((err) => {

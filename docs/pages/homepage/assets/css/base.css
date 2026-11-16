@@ -32,7 +32,12 @@
     color-scheme: light;
 }
 
+html[data-theme="light"] {
+    --page-bg: #F2EDE4;
+}
+
 html[data-theme="dark"] {
+    --page-bg: #101214;
     --control-ink: #ece5d8;
     --control-paper: rgba(18, 20, 22, .94);
     --control-line: rgba(236, 229, 216, .3);

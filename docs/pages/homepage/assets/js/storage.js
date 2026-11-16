@@ -4,8 +4,7 @@
     const App = window.App = window.App || {}
     const S = App.storage = {}
 
-    const PREFIX = 'pikapikapi:'
-    const SUFFIX = ':homepage'
+    const PREFIX = 'pikapikapi:homepage:'
 
     S.NAMES = {
         theme: 'theme',
@@ -14,13 +13,13 @@
     }
 
     S.KEYS = {
-        theme: 'pikapikapi:theme:homepage',
-        lang: 'pikapikapi:lang:homepage',
-        layout: 'pikapikapi:layout:homepage'
+        theme: 'pikapikapi:homepage:theme',
+        lang: 'pikapikapi:homepage:lang',
+        layout: 'pikapikapi:homepage:layout'
     }
 
     function keyOf(name) {
-        return S.KEYS[name] || PREFIX + name + SUFFIX
+        return S.KEYS[name] || PREFIX + name
     }
 
     S.get = function (name) {

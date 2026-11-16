@@ -1,4 +1,4 @@
-export const DB_NAME = 'langnotebook'
+export const DB_NAME = 'grammar:data'
 export const DB_VERSION = 1
 
 export const STORE_USERS = 'users'

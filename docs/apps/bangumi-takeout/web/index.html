@@ -79,7 +79,7 @@
                     OAuth 登录 <span class="badge badge-required">必填</span>
                 </button>
                 <button class="btn-secondary lockable" id="btnPaste">粘贴 Token</button>
-                <button class="btn-secondary lockable" id="btnLogout" style="display:none">退出</button>
+                <button class="btn-secondary lockable is-hidden" id="btnLogout">退出</button>
             </div>
             <p class="token-status" id="tokenStatus">未登录</p>
         </div>
@@ -154,12 +154,7 @@
             <div class="log" id="log"></div>
         </div>
     </div>
-    <footer class="copyright" id="copyright-script-generated" style="text-align: center; margin: 4em 0 0; font-size: 0.6em;"></footer>
-    <script>
-        const year = new Date().getFullYear()
-        document.getElementById('copyright-script-generated').innerHTML =
-            `&copy; 2026 - ${year} 李亦杨 - All Rights Reserved.`
-    </script>
+    <footer class="copyright" id="copyright-script-generated"></footer>
     <script src="assets/js/app.js"></script>
 </body>
 

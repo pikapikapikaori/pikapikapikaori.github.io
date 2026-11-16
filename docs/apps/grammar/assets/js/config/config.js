@@ -63,12 +63,12 @@ export const THEMES = [
 export const PAGE_SIZE_OPTIONS = [20, 30, 40, 50]
 
 export const LS_KEYS = {
-    user: 'ln.currentUser',
-    theme: 'ln.theme',
-    font: 'ln.font.mode',
-    fontFamily: 'ln.font.family',
-    fontSize: 'ln.font.size',
-    defaultSourceUser: 'ln.defaultSourceUser',
+    user: 'grammar:user',
+    theme: 'grammar:theme',
+    font: 'grammar:font:mode',
+    fontFamily: 'grammar:font:family',
+    fontSize: 'grammar:font:size',
+    defaultSourceUser: 'grammar:default-source-user',
 }
 
 export const DEFAULT_SETTINGS = {

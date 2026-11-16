@@ -15,7 +15,6 @@ English | [简体中文](./Standard_zh-cn.md)
 <project>/
 ├── index.html              Main page stays at the project root
 ├── sw.js
-├── manifest.json
 ├── data/
 └── assets/
     ├── css/
@@ -40,15 +39,14 @@ English | [简体中文](./Standard_zh-cn.md)
         ├── img/
         ├── live2d/
         ├── icon/
-        ├── meta/           Things like feed, sitemap; manifest can also go here
+        ├── meta/           Feed, sitemap, manifest.json and file-cache.json
         └── logo/
 ```
 
 ## PWA Cache & Storage Naming
 
 - Each project owns one cache prefix, and the `id` in `manifest.json` equals that prefix and stays stable. Own `localStorage` / `sessionStorage` keys and IndexedDB database names carry the same project prefix.
-- A service worker cache name is `<prefix>:static:<version>:<hash>`; `hash` is the first 16 hex characters of the SHA-256 of `file-cache.json`.
-
+- A service worker cache name is `<prefix>:static:<version>:<hash>`. `hash`: join the sorted entries as `path:file hash` with no separator, then take the first 16 hex characters of the SHA-256, each file hash is the first 16 hex characters of the SHA-256 of that file.
 
 ## Branch Naming & Commit Message
 

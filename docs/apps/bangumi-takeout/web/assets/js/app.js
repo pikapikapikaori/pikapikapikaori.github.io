@@ -23,7 +23,7 @@ const CONFIG = {
     FLUSH_INTERVAL_MS: 30000,
     RETRY_WAIT_MS: 5000,
 
-    DB_NAME: 'bangumi-takeout',
+    DB_NAME: 'bangumi-takeout:backup',
     DB_VERSION: 4,
     STORE: 'items',
     COLLECTIONS_STORE: 'collections',
@@ -126,12 +126,14 @@ async function sha256(text) {
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
 }
 
+const STORAGE_PREFIX = 'bangumi-takeout:'
+
 function loadSetting(key, dflt) {
-    const v = localStorage.getItem('bgm_' + key)
+    const v = localStorage.getItem(STORAGE_PREFIX + key)
     return v != null ? v : dflt
 }
 function saveSetting(key, value) {
-    localStorage.setItem('bgm_' + key, String(value))
+    localStorage.setItem(STORAGE_PREFIX + key, String(value))
 }
 
 function formatDuration(ms) {
@@ -816,14 +818,14 @@ class BangumiApiService {
 async function resolveUserMeta(service, username) {
     if (currentUser && currentUser.username === username) return currentUser
 
-    const stored = localStorage.getItem(`meta_user_${username}`)
+    const stored = localStorage.getItem(`bangumi-takeout:user-meta:${username}`)
     if (stored) { try { return JSON.parse(stored) } catch (e) { } }
 
     if (service) {
         try {
             const info = await service.getUserInfo(username)
             if (info && info.username) {
-                try { localStorage.setItem(`meta_user_${username}`, JSON.stringify(info)) } catch (e) { }
+                try { localStorage.setItem(`bangumi-takeout:user-meta:${username}`, JSON.stringify(info)) } catch (e) { }
                 return info
             }
         } catch (e) {
@@ -1067,8 +1069,8 @@ async function startAuth() {
     const verifier = randStr(64)
     const challenge = b64url(await sha256(verifier))
     const state = randStr(16)
-    sessionStorage.setItem('oauth_verifier', verifier)
-    sessionStorage.setItem('oauth_state', state)
+    sessionStorage.setItem(STORAGE_PREFIX + 'oauth-verifier', verifier)
+    sessionStorage.setItem(STORAGE_PREFIX + 'oauth-state', state)
 
     const params = new URLSearchParams({
         client_id: CONFIG.CLIENT_ID,
@@ -1094,8 +1096,8 @@ async function handleCallback() {
     }
     if (!code) return
 
-    const savedState = sessionStorage.getItem('oauth_state')
-    const verifier = sessionStorage.getItem('oauth_verifier')
+    const savedState = sessionStorage.getItem(STORAGE_PREFIX + 'oauth-state')
+    const verifier = sessionStorage.getItem(STORAGE_PREFIX + 'oauth-verifier')
 
     if (state !== savedState) {
         log('State 校验失败（CSRF 风险）', 'error')
@@ -1127,8 +1129,8 @@ async function handleCallback() {
             throw new Error(`HTTP ${resp.status}: ${t.slice(0, 200)}`)
         }
         saveTokens(await resp.json())
-        sessionStorage.removeItem('oauth_verifier')
-        sessionStorage.removeItem('oauth_state')
+        sessionStorage.removeItem(STORAGE_PREFIX + 'oauth-verifier')
+        sessionStorage.removeItem(STORAGE_PREFIX + 'oauth-state')
         log('OAuth 登录成功', 'success')
         setStatus('登录成功', 'success')
         await refreshCurrentUser()
@@ -1143,15 +1145,15 @@ function saveTokens(data) {
     accessToken = data.access_token
     refreshToken = data.refresh_token || null
     tokenExpiresAt = Date.now() + (data.expires_in || 604800) * 1000
-    sessionStorage.setItem('access_token', accessToken)
-    sessionStorage.setItem('token_expires', String(tokenExpiresAt))
-    if (refreshToken) localStorage.setItem('refresh_token', refreshToken)
+    sessionStorage.setItem(STORAGE_PREFIX + 'access-token', accessToken)
+    sessionStorage.setItem(STORAGE_PREFIX + 'token-expires', String(tokenExpiresAt))
+    if (refreshToken) localStorage.setItem(STORAGE_PREFIX + 'refresh-token', refreshToken)
 }
 
 function loadTokens() {
-    accessToken = sessionStorage.getItem('access_token') || null
-    tokenExpiresAt = parseInt(sessionStorage.getItem('token_expires') || '0', 10)
-    refreshToken = localStorage.getItem('refresh_token') || null
+    accessToken = sessionStorage.getItem(STORAGE_PREFIX + 'access-token') || null
+    tokenExpiresAt = parseInt(sessionStorage.getItem(STORAGE_PREFIX + 'token-expires') || '0', 10)
+    refreshToken = localStorage.getItem(STORAGE_PREFIX + 'refresh-token') || null
 }
 
 async function ensureFreshToken() {
@@ -1202,9 +1204,9 @@ function logout() {
     refreshToken = null
     tokenExpiresAt = 0
     currentUser = null
-    sessionStorage.removeItem('access_token')
-    sessionStorage.removeItem('token_expires')
-    localStorage.removeItem('refresh_token')
+    sessionStorage.removeItem(STORAGE_PREFIX + 'access-token')
+    sessionStorage.removeItem(STORAGE_PREFIX + 'token-expires')
+    localStorage.removeItem(STORAGE_PREFIX + 'refresh-token')
     log('已退出登录')
     updateAuthUI()
 }
@@ -1219,11 +1221,11 @@ function updateAuthUI() {
         const exp = tokenExpiresAt ? new Date(tokenExpiresAt).toLocaleString() : '未知'
         status.textContent = `已登录: ${name} · Token 过期: ${exp}`
         status.className = 'token-status valid'
-        btnLogout.style.display = ''
+        btnLogout.classList.remove('is-hidden')
     } else {
         status.textContent = '未登录'
         status.className = 'token-status'
-        btnLogout.style.display = 'none'
+        btnLogout.classList.add('is-hidden')
     }
 
     if (!isRunning) btnFetch.disabled = !accessToken
@@ -1234,8 +1236,8 @@ function pasteToken() {
     if (!t) return
     accessToken = t.trim()
     tokenExpiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
-    sessionStorage.setItem('access_token', accessToken)
-    sessionStorage.setItem('token_expires', String(tokenExpiresAt))
+    sessionStorage.setItem(STORAGE_PREFIX + 'access-token', accessToken)
+    sessionStorage.setItem(STORAGE_PREFIX + 'token-expires', String(tokenExpiresAt))
     log('Token 已保存', 'success')
     refreshCurrentUser()
 }
@@ -1304,7 +1306,7 @@ async function handleFileUpload(file) {
             await dbBulkPut(toWrite.slice(i, i + 100))
         }
 
-        try { localStorage.setItem(`meta_user_${owner}`, JSON.stringify(data.meta.user)) } catch (e) { }
+        try { localStorage.setItem(`bangumi-takeout:user-meta:${owner}`, JSON.stringify(data.meta.user)) } catch (e) { }
 
         const ttlDays = Math.round(ttl / 86400000)
         log(`导入 ${toWrite.length} 条（${owner}，有效期 ${ttlDays} 天）`, 'success')
@@ -1414,7 +1416,7 @@ async function runBackup() {
         // 7. 解析并缓存 meta.user
         setStage('导出文件', 1)
         const userMeta = await resolveUserMeta(service, username)
-        try { localStorage.setItem(`meta_user_${username}`, JSON.stringify(userMeta)) } catch (e) { }
+        try { localStorage.setItem(`bangumi-takeout:user-meta:${username}`, JSON.stringify(userMeta)) } catch (e) { }
 
         // 8. 导出
         const blob = buildTakeoutBlob(userMeta, items)
@@ -1480,7 +1482,7 @@ async function exportFromCache() {
         : (currentUser && currentUser.username === username)
             ? currentUser
             : (() => {
-                const s = localStorage.getItem(`meta_user_${username}`)
+                const s = localStorage.getItem(`bangumi-takeout:user-meta:${username}`)
                 if (s) { try { return JSON.parse(s) } catch (e) { } }
                 return { username }
             })()
@@ -1544,7 +1546,15 @@ document.getElementById('username').addEventListener('change', e => {
 
 window.addEventListener('beforeunload', e => {
     if (isRunning) { e.preventDefault(); e.returnValue = '' }
-});
+})
+
+function writeCopyrightYear() {
+    const year = new Date().getFullYear()
+    document.getElementById('copyright-script-generated').innerHTML =
+        `&copy; 2026 - ${year} 李亦杨 - All Rights Reserved.`
+}
+
+writeCopyrightYear();
 
 (async function init() {
     // 填充配置相关 UI

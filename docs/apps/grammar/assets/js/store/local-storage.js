@@ -5,20 +5,20 @@ import { LS_KEYS } from '../config/config.js'
 export { LS_KEYS }
 
 /** Fixed input helper keys. They take no argument and are always available. */
-export const imeEnabledKey = 'ln.ime.enabled'
-export const imeFollowKey = 'ln.ime.follow'
+export const imeEnabledKey = 'grammar:ime:enabled'
+export const imeFollowKey = 'grammar:ime:follow'
 
 /** Keys that hold a language or an input method code. No argument means no key. */
 export function romanKey(lang) {
-    return lang ? `ln.roman.${lang}` : null
+    return lang ? `grammar:roman:${lang}` : null
 }
 
 export function breveKey(lang) {
-    return lang ? `ln.breve.${lang}` : null
+    return lang ? `grammar:breve:${lang}` : null
 }
 
 export function imeModeKey(code) {
-    return code ? `ln.ime.mode.${code}` : null
+    return code ? `grammar:ime:mode:${code}` : null
 }
 
 export function getString(key, fallback = '') {

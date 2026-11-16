@@ -1,0 +1,90 @@
+{
+    "version": "4.7.5",
+    "hash": "7683ec1b9a237bd0",
+    "files": [
+        {
+            "path": "assets/css/styles.css",
+            "hash": "34e4aeb887bd16fe"
+        },
+        {
+            "path": "assets/js/data.js",
+            "hash": "f0623033c40a9c92"
+        },
+        {
+            "path": "assets/js/script.js",
+            "hash": "4213c39cebf0f12f"
+        },
+        {
+            "path": "assets/js/search.js",
+            "hash": "0e6928cc9ce85692"
+        },
+        {
+            "path": "assets/js/themer.js",
+            "hash": "37f2842f6800fe13"
+        },
+        {
+            "path": "assets/js/worker/startup.js",
+            "hash": "d578e20655c28ba4"
+        },
+        {
+            "path": "assets/resources/fonts/A-OTF-KakuGyoStd-Light.woff2",
+            "hash": "0297ab82fa841d57"
+        },
+        {
+            "path": "assets/resources/fonts/MoonStarsKaiT-Bold.woff2",
+            "hash": "3ccf0802cdd2aca6"
+        },
+        {
+            "path": "assets/resources/fonts/MoonStarsKaiT-Light.woff2",
+            "hash": "4bf7c7f56bb9ffe3"
+        },
+        {
+            "path": "assets/resources/fonts/MoonStarsKaiT-Regular.woff2",
+            "hash": "0d4c765a88ea1c8d"
+        },
+        {
+            "path": "assets/resources/logo/favicon.ico",
+            "hash": "dc40522b02c04a5a"
+        },
+        {
+            "path": "assets/resources/logo/logo-180.png",
+            "hash": "0fc2d5c87808cd86"
+        },
+        {
+            "path": "assets/resources/logo/logo-192.png",
+            "hash": "9b7435bd19196311"
+        },
+        {
+            "path": "assets/resources/logo/logo-512.png",
+            "hash": "c6efd8ff752d95db"
+        },
+        {
+            "path": "assets/resources/meta/manifest.json",
+            "hash": "73439b70a6b7adf4"
+        },
+        {
+            "path": "assets/sources/handlebars.min.js",
+            "hash": "81e1784331e908c6"
+        },
+        {
+            "path": "assets/sources/iconify.min.js",
+            "hash": "3e9ba009146d114e"
+        },
+        {
+            "path": "data/apps.json",
+            "hash": "0b225e170e8cddae"
+        },
+        {
+            "path": "data/links.json",
+            "hash": "67da69f4c848fa9b"
+        },
+        {
+            "path": "data/providers.json",
+            "hash": "0097c3f5311f3e8d"
+        },
+        {
+            "path": "index.html",
+            "hash": "049682fdfe4158a7"
+        }
+    ]
+}

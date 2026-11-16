@@ -1,7 +1,9 @@
 import { tryCache, commitRaw, state } from './app.js'
 import { renderSetup } from './ui/setup.js'
 
-const NEED_FLAG = 'bgm-viewer:need-bootstrap'
+import { STORAGE_PREFIX } from './config.js'
+
+const NEED_FLAG = STORAGE_PREFIX + 'need-bootstrap'
 
 export function forceBootstrap() { sessionStorage.setItem(NEED_FLAG, '1') }
 export function clearBootstrapFlag() { sessionStorage.removeItem(NEED_FLAG) }

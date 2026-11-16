@@ -19,11 +19,13 @@ export const href = {
     detail: inSubPage ? './detail.html' : './assets/html/detail.html',
 }
 
-// ---------- 缓存 ----------
-export const DB_NAME = 'bgm-viewer'
+// ---------- 存储 ----------
+export const DB_NAME = 'bangumi-takeout:view'
 export const DB_VERSION = 1
 export const STORE_NAME = 'collections'
 export const CACHE_KEY_PREFIX = 'user:'
+
+export const STORAGE_PREFIX = 'bangumi-takeout:'
 
 // ---------- 版权 ----------
 export const COPYRIGHT_START_YEAR = 2026
@@ -103,11 +105,11 @@ export const PAGE_SIZE_OPTIONS = [30, 50, 100, 200]
 export const DEFAULT_PAGE_SIZE = 50
 
 // ---------- 当前用户 ----------
-export const CURRENT_USER_KEY = 'bgm-current-user'
-export const STATE_KEY = 'bgm-overview-state'
+export const CURRENT_USER_KEY = STORAGE_PREFIX + 'current-user'
+export const STATE_KEY = STORAGE_PREFIX + 'overview-state'
 
 // ---------- 主题 ----------
-export const THEME_STORAGE_KEY = 'bgm-viewer:theme'
+export const THEME_STORAGE_KEY = STORAGE_PREFIX + 'theme'
 export const THEME_MODES = ['auto', 'light', 'dark']
 export const THEME_LABELS = { auto: '自动', light: '明亮', dark: '黑暗' }
 

@@ -4,27 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bangumi Takeout Web UI</title>
+    <title>Bangumi Takeout Web</title>
     <link rel="icon" type="image/x-icon" href="./assets/resources/logo/favicon.ico">
-    <meta name="description" content="Tool website that can display data of Bangumi (bgm.tv) in json / zip files.">
+    <meta name="description" content="在本地备份与浏览 Bangumi 收藏数据。">
+
+    <link rel="manifest" href="./assets/resources/meta/manifest.json">
+
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1c1e25" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="./assets/resources/logo/logo-180.png">
 
     <link rel="stylesheet" href="./assets/css/variables.css">
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/components.css">
     <link rel="stylesheet" href="./assets/css/setup.css">
     <link rel="stylesheet" href="./assets/css/overview.css">
-    <script>
-        (function () {
-            try {
-                const m = localStorage.getItem('bgm-viewer:theme') || 'auto';
-                const real = m === 'dark' ? 'dark'
-                    : m === 'light' ? 'light'
-                        : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                document.documentElement.dataset.theme = real;
-                document.documentElement.dataset.themeMode = m;
-            } catch (e) { }
-        })();
-    </script>
+    <script src="./assets/js/worker/startup.js"></script>
 </head>
 
 <body>

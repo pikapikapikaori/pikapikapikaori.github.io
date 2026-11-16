@@ -1,0 +1,14 @@
+.xterm {
+    width: 720px;
+    margin: 0 30px;
+}
+
+body {
+    background: #F3F5F6;
+}
+
+#terminal {
+    width: 780px;
+    padding: 10px 0;
+    background: #F3F5F6;
+}

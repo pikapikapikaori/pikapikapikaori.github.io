@@ -16,7 +16,7 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/light/#/en-us/ -->
+<!-- toc-card-href:./pages/light/index.html#/en-us/ -->
 <!-- toc-card-img:./en-us/_media/Sites/pikapikapi-light.png -->
 <!-- toc-card-title:Blog -->
 <!-- toc-card-description:Express Lite Version -->
@@ -48,5 +48,5 @@
 
 ## Applications
 
-- [`Brainfuck` Interpreter](apps/terminal/terminal.html ':ignore')
+- [`Brainfuck` Interpreter](apps/terminal/index.html ':ignore')
 - [Personal E-card](apps/ecard/index.html ':ignore')

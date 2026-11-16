@@ -1,0 +1,38 @@
+@import url('nonstandard/ganzhi.css');
+
+.calculatorContainer {
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+
+    input[type=date] {
+        margin: 0.5rem;
+        width: 8rem;
+        height: 2rem;
+        font-family: 'Roboto Mono', Monaco, courier, monospace;
+        text-align: center;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        padding: 0 0.4rem;
+    }
+}
+
+.calculatorLunarOutput {
+    padding: 0.5rem;
+}
+
+.calculatorOutput {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5rem;
+
+    div {
+        padding: 0.2rem 0.3rem;
+        width: 3rem;
+    }
+}
+
+body {
+    background: #F3F5F6;
+}

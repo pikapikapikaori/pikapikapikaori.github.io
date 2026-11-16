@@ -23,7 +23,7 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/light/#/ -->
+<!-- toc-card-href:./pages/light/index.html#/ -->
 <!-- toc-card-img:./_media/Sites/pikapikapi-light.png -->
 <!-- toc-card-title:博客 -->
 <!-- toc-card-description:极速轻量版 -->
@@ -55,7 +55,7 @@
 
 ## 应用
 
-- [`Brainfuck` 语言解释器](apps/terminal/terminal.html ':ignore')
+- [`Brainfuck` 语言解释器](apps/terminal/index.html ':ignore')
 - [干支年号转换器](apps/ganzhi/index.html ':ignore')
 - [语言学习](apps/grammar/index.html ':ignore')：主要面向古典语言学习者，支持多种古典语言（如古希腊语、梵语、圣经希伯来语）与现代语言。提供输入助手、形态变形推测、形态变形语法速览等便捷功能。
 - Bangumi Takeout Web：[Bangumi](https://bgm.tv/) 数据导出工具，受 [Bangumi Takeout](https://github.com/jerrylususu/bangumi-takeout-py) 启发。提供[导出工具](apps/bangumi-takeout/web/index.html ':ignore')与[数据展示页面](apps/bangumi-takeout/app/index.html ':ignore')。

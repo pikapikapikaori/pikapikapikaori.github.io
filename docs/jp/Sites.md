@@ -16,7 +16,7 @@
 <!-- toc-card:end -->
 
 <!-- toc-card:start -->
-<!-- toc-card-href:./pages/light/#/jp/ -->
+<!-- toc-card-href:./pages/light/index.html#/jp/ -->
 <!-- toc-card-img:./jp/_media/Sites/pikapikapi-light.png -->
 <!-- toc-card-title:ブログ -->
 <!-- toc-card-description:高速ライト版 -->
@@ -48,4 +48,4 @@
 
 ## アプリ
 
-- [`Brainfuck` インタプリタインタプリタ](apps/terminal/terminal.html ':ignore')
+- [`Brainfuck` インタプリタインタプリタ](apps/terminal/index.html ':ignore')

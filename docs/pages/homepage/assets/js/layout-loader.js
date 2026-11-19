@@ -61,7 +61,6 @@
         return current ? current.id : null
     }
 
-    /* 布局切换完成后通知监听者，地址栏主题色据此重算。 */
     L.onChange = function (fn) {
         listeners.push(fn)
 
@@ -220,7 +219,6 @@
             current = { id: id, link: link, instance: instance, handle: handle }
             /* 切换提交后刷新，控件名称才与当前布局一致。 */
             App.controls.refresh()
-            /* 仅切换成功回页顶；失败回滚路径不调用，与语言切换共用同一实现。 */
             if (previous) App.utils.scrollToTopInstant()
             notify()
 

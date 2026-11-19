@@ -1,8 +1,3 @@
-/*
- * 博客横向 rail。动画属品牌长页，文章解析仍走公共 App.feed；
- * 样式类沿用品牌布局的 .post-card 一族。
- */
-
 import { createPin } from './scroll-pin.js'
 
 const App = window.App
@@ -38,7 +33,6 @@ function renderPost(p) {
         '</article>'
 }
 
-/* section 需含 .rail、.rail-wrap 与 .shelf-sticky；卡片封面为装饰图，alt 留空。 */
 export function createBlogRail(options) {
     const section = options.section
     const railBtns = options.railBtns || []

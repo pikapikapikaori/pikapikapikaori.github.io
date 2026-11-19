@@ -1,12 +1,3 @@
-/*
- * 公用配置。布局标识清单与默认布局在这里登记，不自动扫描目录；
- * 新增布局只在该布局自己的目录内加文件，并在此登记标识。
- * feedUrl 与照片地址以入口 index.html 为基准解析。
- * 照片清单以这里为唯一来源；每项含 id、src、link、ratio，id 对应 photo-captions.js 的键。
- * 三种语言共用同一组照片，图片文件相同；link 为公共跳转地址，可为空。
- * 布局不写跳转地址，统一读取 photo.link；不限数量的布局用 Photos.all。
- */
-
 (function () {
     'use strict'
 

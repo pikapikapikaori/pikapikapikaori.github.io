@@ -1,7 +1,3 @@
-/*
- * 照片读取、切片与预加载。清单、地址与数量在 config.js，三种语言共用同一组。
- * 路径以入口 index.html 为基准解析。
- */
 (function () {
     'use strict'
 
@@ -10,12 +6,10 @@
 
     const warmed = {}
 
-    /* 全部照片，不截取，供不受 photoLimit 约束的布局读取。 */
     Photos.all = function () {
         return App.config.photos || []
     }
 
-    /* 照片不足 photoLimit 时全部返回，超过才截取前 photoLimit 张。 */
     Photos.list = function () {
         const limit = App.config.photoLimit
         const list = Photos.all()

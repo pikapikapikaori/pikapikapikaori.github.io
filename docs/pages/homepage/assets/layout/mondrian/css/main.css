@@ -4,7 +4,6 @@ html[data-layout="mondrian"] {
     --control-paper: rgba(248, 245, 240, .96);
     --control-line: rgba(26, 26, 26, .24);
     --control-hover: rgba(26, 26, 26, .07);
-    /* 正文字体统一读公共变量。 */
     --m-serif: var(--app-font-body);
     --m-wall-glow: rgba(255, 255, 255, .52);
     --m-plate-bg: #FBF8F2;
@@ -78,7 +77,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     transition: background-color .45s var(--app-ease);
 }
 
-/* 墙面只留一道很淡的顶部光晕，不设纹理。 */
 .mondrian-layout::before {
     content: "";
     position: absolute;
@@ -281,7 +279,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     }
 }
 
-/* 排布由 main.js 在挂载时按本布局配置写入同名变量。 */
 .mondrian-grid {
     --m-grid-columns: 10;
     --m-grid-rows: 10;
@@ -407,7 +404,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     font-size: clamp(.9rem, 1.8vw, 1.2rem);
 }
 
-/* 左上格固定拉丁文展签：竖排拉丁字侧转不直立。 */
 .m-slogan-text {
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -418,12 +414,10 @@ html[data-layout="mondrian"][data-theme="dark"] {
     opacity: .85;
 }
 
-/* 竖排拉丁字保持原书写方向，字符朝左。 */
 .area-white-left .m-slogan-text {
     transform: none;
 }
 
-/* 红块正面标语横排，保持标题的字号与颜色。 */
 .m-slogan-line {
     writing-mode: horizontal-tb;
     text-orientation: initial;
@@ -436,7 +430,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     opacity: 1;
 }
 
-/* 底部长格引诗，文字按容器宽度换行。 */
 .area-white-main .m-quote-text {
     font-size: clamp(.42rem, .95vw, .66rem);
     line-height: 1.7;
@@ -484,7 +477,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     pointer-events: none;
 }
 
-/* contact 格箭头为 →，其余外链格为 ↗。 */
 .m-arrow::before {
     content: "↗";
 }
@@ -618,7 +610,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
 
 @media screen and (max-width: 768px) {
     .mondrian-layout {
-        --m-size: 92vw;
+        --m-size: min(80vw, 64vh);;
         --m-line: 3px;
         padding: .55rem;
         padding-bottom: 3.2rem;
@@ -761,11 +753,5 @@ html[data-layout="mondrian"][data-theme="dark"] {
 @media screen and (min-aspect-ratio: 3/1) {
     .mondrian-layout {
         --m-size: min(60vh, 600px);
-    }
-}
-
-@media screen and (max-height: 620px) {
-    .mondrian-layout {
-        --m-size: min(80vw, 64vh);
     }
 }

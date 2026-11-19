@@ -1,7 +1,10 @@
+@import url('./nonstandard/base.css');
+
 @font-face {
     font-family: 'HYKaiTiS';
     src: url('../resources/fonts/HYKaiTiS.woff2') format('woff2');
     font-display: swap;
+    size-adjust: 115%;
 }
 
 @font-face {
@@ -26,7 +29,6 @@
     --control-hover: rgba(26, 26, 26, .08);
     --control-accent: #c41e3a;
     --control-radius: 999px;
-    /* popup 与其中选项共用同一圆角，选项背景不再是独立胶囊。 */
     --control-menu-radius: 16px;
     --app-ease: cubic-bezier(.22, 1, .36, 1);
     color-scheme: light;
@@ -61,13 +63,7 @@ body {
     background: var(--page-bg, #101214);
     color: var(--control-ink);
     font-family: var(--app-font-body);
-    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-}
-
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
 }
 
 #app,
@@ -161,12 +157,10 @@ html[data-theme="dark"] .layout-fallback {
     outline-offset: 2px;
 }
 
-/* 主题循环键是图标按钮，不带下拉箭头。 */
 .app-control[data-kind="theme"] .app-control-trigger::after {
     display: none;
 }
 
-/* 主题键为 36px 圆形图标按钮，只改面色，不旋转。 */
 .app-control[data-kind="theme"] .app-control-trigger {
     width: 36px;
     height: 36px;
@@ -269,7 +263,6 @@ html[data-theme="dark"] .layout-fallback {
     justify-content: center;
     min-height: 2rem;
     padding: .35rem 1.7rem;
-    /* 与 popup 容器同圆角：hover 与选中背景不再自成胶囊。 */
     border-radius: var(--control-menu-radius);
     color: var(--control-ink);
     font-size: .74rem;

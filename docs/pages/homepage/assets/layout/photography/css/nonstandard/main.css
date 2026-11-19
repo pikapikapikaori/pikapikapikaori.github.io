@@ -1,0 +1,7 @@
+html[data-layout="photography"] .pg-track {
+    -webkit-overflow-scrolling: touch;
+}
+
+html[data-layout="photography"] .pg-track::-webkit-scrollbar {
+    display: none;
+}

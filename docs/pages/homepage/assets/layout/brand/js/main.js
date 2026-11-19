@@ -1,7 +1,3 @@
-/* 品牌长页布局脚本：博客 rail、摄影堆叠、滚动进度与入场，
- * 数据走公共 App 接口，动画模块在本布局目录内，文案由公用 i18n 填充。
- */
-
 import { createBlogRail } from './blog-rail.js'
 import { createPhotoStack } from './photo-animation.js'
 

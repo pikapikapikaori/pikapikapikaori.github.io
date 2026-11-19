@@ -1,8 +1,3 @@
-/*
- * 滚动吸附段。只服务品牌长页的横向文章与照片堆叠，随动画放在布局目录内。
- * 每段由使用方保存句柄，离开布局时调用 destroy()。
- */
-
 const U = window.App.utils
 
 const FOLLOW = 0.16

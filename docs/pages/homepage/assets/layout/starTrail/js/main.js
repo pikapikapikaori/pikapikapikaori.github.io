@@ -17,8 +17,6 @@ export default {
         const MAX_DPR = 2
         const NARROW_MAX = 768
 
-        /* 暗 C：星点为主，短弧贴高处圆心。亮 B：暖金、浅粉、淡蓝三束光带。
-           两案共用弧角上限、角隙与覆盖上限的计算。 */
         const SKY = {
             dark: {
                 seed: 37,

@@ -1,7 +1,3 @@
-/*
- * Atom 订阅读取。
- * feedUrl 在 config.js，fallbackPosts 也在 config.js。
- */
 (function () {
     'use strict'
 

@@ -1,8 +1,3 @@
-/*
- * 摄影照片堆叠动画。照片清单、数量与预加载来自公共 App.photos，
- * caption 按照片 id 从词典读取；动画参数属品牌长页，样式类沿用 .photo-card 一族。
- */
-
 import { createPin } from './scroll-pin.js'
 
 const App = window.App

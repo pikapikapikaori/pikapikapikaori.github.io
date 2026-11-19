@@ -4,7 +4,6 @@
     const App = window.App = window.App || {}
     const C = App.controls = {}
 
-    /* 控件键与词典键不同名：语言控件的词典键是 control.language。 */
     const LABEL_KEYS = {
         lang: 'control.language',
         layout: 'control.layout',

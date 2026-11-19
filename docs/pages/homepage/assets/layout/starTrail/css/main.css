@@ -26,7 +26,6 @@ html[data-layout="starTrail"][data-theme="light"] {
     --star-line: rgba(34, 48, 60, .24);
 }
 
-/* 观测台本：右下裸字，非右上悬浮，与展签异其语言。 */
 .star-controls {
     position: fixed;
     right: 0;
@@ -51,7 +50,6 @@ html[data-layout="starTrail"][data-theme="light"] {
     opacity: 1;
 }
 
-/* 台本在页底，菜单向上开；深色为夜间玻璃，亮色为浅空玻璃。 */
 .star-controls .app-control-menu {
     top: auto;
     bottom: calc(100% + .45rem);
@@ -98,9 +96,6 @@ html[data-layout="starTrail"][data-theme="light"] {
     transition: color .6s var(--app-ease);
 }
 
-/* 亮色天空只铺满第一屏：star-layout 纵贯整页，渐变若按元素全高分布，
-   首屏只能看到最蓝之前的浅色段，看起来就不像天空。
-   末段纯色直接落到 --star-sky-end，与正文底色相接。 */
 html[data-layout="starTrail"][data-theme="light"] .star-layout {
     background-color: var(--star-sky-end);
     background-image:
@@ -125,7 +120,6 @@ html[data-layout="starTrail"][data-theme="light"] .star-layout {
     /* 四周与底部的淡出在画布内绘制，避免硬切。 */
 }
 
-/* 天空层只在首屏：与画布一起随页面滚走，滚动后不覆盖正文。 */
 .star-sky {
     position: absolute;
     inset: 0 0 auto 0;
@@ -134,13 +128,11 @@ html[data-layout="starTrail"][data-theme="light"] .star-layout {
     overflow: hidden;
     pointer-events: none;
     clip-path: inset(0 0 0 0);
-    /* 光带与天空元素共用画布的同一条收口曲线。 */
     mask-image: linear-gradient(to bottom,
         #000 calc(100% - var(--star-fade)),
         transparent 100%);
 }
 
-/* 亮 B：暖金、浅粉、淡蓝三束斜向光带。边界靠矩形上下缘与横向渐变保持清楚，不做模糊。 */
 .star-band {
     position: absolute;
     left: -35%;
@@ -400,7 +392,6 @@ html[lang="ja"] .star-slogan {
         outline-offset: -2px;
     }
 
-    /* 三等分工具条只铺天空末段的纯色，不另设底色。 */
     .star-controls {
         position: static;
         order: 2;

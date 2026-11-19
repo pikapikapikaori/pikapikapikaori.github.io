@@ -1,3 +1,5 @@
+@import url('./nonstandard/main.css');
+
 html[data-layout="photography"] {
     --pg-paper: #F3EFE6;
     --pg-paper-soft: #E9E3D7;
@@ -139,11 +141,6 @@ html[data-layout="photography"] .pg-track {
     scrollbar-width: none;
     cursor: grab;
     touch-action: pan-x;
-    -webkit-overflow-scrolling: touch;
-}
-
-html[data-layout="photography"] .pg-track::-webkit-scrollbar {
-    display: none;
 }
 
 html[data-layout="photography"] .pg-track.is-dragging {
@@ -197,7 +194,6 @@ html[data-layout="photography"] .pg-captions {
     min-width: 100%;
     box-sizing: border-box;
     gap: .12rem .15rem;
-    /* 四行 caption、三处行距与上内边距之和，超出即裁切。 */
     max-height: calc(5.4em + .91rem);
     padding: .55rem .12rem 0;
     font-size: clamp(.62rem, .74vw, .73rem);

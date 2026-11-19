@@ -3,7 +3,6 @@
  * 翻转卡点击与 Enter、空格翻转，Escape 收起，点画外收起全部，
  * 移动端双击防误触，语言切换后已展开的提示语立即更新。
  */
-/* 格子排布属于本布局：列数、行数与区域定义在挂载时写入 CSS 变量。 */
 const GRID = {
     columns: 10,
     rows: 10,
@@ -105,7 +104,6 @@ export default {
         function pickSlogan() {
             if (!slogan) return
 
-            /* 与星轨封面同池。红块横排，长条也可容纳。 */
             const list = App.i18n.list('common.slogans')
 
             if (!list || !list.length) return

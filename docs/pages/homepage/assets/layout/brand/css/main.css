@@ -1,11 +1,3 @@
-/* 公共 base.css 已声明拉丁与中文两族；品牌按 115% 放中文，字面与拉丁行高匹配，故保留这一处覆盖。 */
-@font-face {
-    font-family: 'HYKaiTiS';
-    src: url('../../../resources/fonts/HYKaiTiS.woff2') format('woff2');
-    font-display: swap;
-    size-adjust: 115%;
-}
-
 html[data-layout="brand"] {
     --font-default: "SortsMillGoudy", "HYKaiTiS", serif;
     --font-en: var(--font-default);
@@ -170,7 +162,6 @@ html[data-theme="dark"] .grain {
     margin-left: 1rem;
 }
 
-/* 工具区的 popup 是一张薄纸卡片：方角、细线、顶端一道强调色。 */
 html[data-layout="brand"] .tools .app-control-menu {
     top: calc(100% + .5rem);
     min-width: 11rem;

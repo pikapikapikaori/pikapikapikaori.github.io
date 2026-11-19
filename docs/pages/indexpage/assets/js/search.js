@@ -125,7 +125,6 @@ export function setupSearch (state, elements, selectGroup) {
     let selectionSource = ''
     let solo = false
     let hintAnnounced = false
-    let emptyAnnounced = false
 
     function isOpen () {
         return !panel.hidden
@@ -153,7 +152,10 @@ export function setupSearch (state, elements, selectGroup) {
         selected = -1
         selectionSource = ''
         hintAnnounced = false
-        emptyAnnounced = false
+        solo = false
+        rows = []
+        list.innerHTML = ''
+        note.innerHTML = ''
         document.body.classList.remove('is-searching')
         if (elements.main) elements.main.inert = false
         if (elements.headUnder) elements.headUnder.inert = false
@@ -212,10 +214,6 @@ export function setupSearch (state, elements, selectGroup) {
             '</div>'
     }
 
-    function renderEmpty () {
-        return '<p class="result-empty" id="search-empty">' + escapeHtml(texts.emptyResults) + '</p>'
-    }
-
     /* 显示与打开共用这一处拼装；显示传原文关键词，打开传编码后的值。 */
     function providerAddress (provider, keyword) {
         return keyword ? provider.query + keyword : provider.url
@@ -232,6 +230,25 @@ export function setupSearch (state, elements, selectGroup) {
             '<span class="result-sub">' + escapeHtml(texts.commandAddress) + escapeHtml(display) + '</span>' +
             '</span>' +
             '<span class="result-meta">' + escapeHtml(command.provider.category) + '</span>' +
+            '</div>'
+    }
+
+    /* 普通文字与无匹配的斜杠输入共用这一行：搜索词保留原文（含斜杠），
+       显示原文，打开时整段编码。 */
+    function googleAddress (keyword) {
+        return texts.googleSearchUrl + keyword
+    }
+
+    function renderGoogleRow (keyword, index) {
+        const display = googleAddress(keyword).replace(/^https?:\/\//, '')
+        return '<div class="result-row" role="option" id="search-option-' + index + '" data-index="' + index + '" aria-selected="false">' +
+            '<span class="result-no" aria-hidden="true"></span>' +
+            '<span class="result-main">' +
+            '<span class="result-title"><span class="command-lead">' + escapeHtml(texts.googleSearchLead) + '</span>' +
+            '<span class="command-name">' + escapeHtml(texts.googleSearchName) + '</span>' +
+            '<span class="command-lead">' + escapeHtml(texts.googleSearchJoin) + '</span>' + highlight(keyword, keyword) + '</span>' +
+            '<span class="result-sub">' + escapeHtml(texts.commandAddress) + escapeHtml(display) + '</span>' +
+            '</span>' +
             '</div>'
     }
 
@@ -290,19 +307,19 @@ export function setupSearch (state, elements, selectGroup) {
     function update () {
         input.removeAttribute('aria-describedby')
         const value = String(input.value).trimStart()
-        if (value.charAt(0) !== '/') {
+        const slashed = value.charAt(0) === '/'
+        const query = slashed ? value.slice(1).trim() : value.trim()
+
+        if (!query) {
             rows = []
             solo = false
             hintAnnounced = false
             closePanel()
             return
         }
-        const query = value.slice(1).trim()
-        if (!query) {
-            rows = []
-            solo = false
-            hintAnnounced = false
-            closePanel()
+
+        if (!slashed) {
+            showGoogleRow(value.trim())
             return
         }
 
@@ -313,7 +330,6 @@ export function setupSearch (state, elements, selectGroup) {
             selectionSource = ''
             solo = true
             hintAnnounced = false
-            emptyAnnounced = false
             list.innerHTML = section(texts.sectionAction, renderCommandRow(command, 0), 1)
             note.innerHTML = ''
             invalidateStatusIndex()
@@ -331,21 +347,12 @@ export function setupSearch (state, elements, selectGroup) {
             selectionSource = ''
             solo = false
             list.innerHTML = ''
-            note.innerHTML = item ? renderProviderHint(item, query) : renderEmpty()
+            note.innerHTML = renderProviderHint(item, query)
             invalidateStatusIndex()
-            if (item) {
-                emptyAnnounced = false
-                input.setAttribute('aria-describedby', 'search-hint')
-                if (!hintAnnounced) {
-                    hintAnnounced = true
-                    announce(texts.providerHint)
-                }
-            } else {
-                input.setAttribute('aria-describedby', 'search-empty')
-                if (!emptyAnnounced) {
-                    emptyAnnounced = true
-                    announce(texts.emptyResults)
-                }
+            input.setAttribute('aria-describedby', 'search-hint')
+            if (!hintAnnounced) {
+                hintAnnounced = true
+                announce(texts.providerHint)
             }
             openPanel()
             updateSelection()
@@ -382,16 +389,24 @@ export function setupSearch (state, elements, selectGroup) {
         }
 
         list.innerHTML = html
-        note.innerHTML = html ? '' : renderEmpty()
+        note.innerHTML = ''
         if (!html) {
-            input.setAttribute('aria-describedby', 'search-empty')
-            if (!emptyAnnounced) {
-                emptyAnnounced = true
-                announce(texts.emptyResults)
-            }
-        } else {
-            emptyAnnounced = false
+            showGoogleRow(value.trim())
+            return
         }
+        invalidateStatusIndex()
+        openPanel()
+        updateSelection()
+    }
+
+    function showGoogleRow (keyword) {
+        rows = [{ kind: 'search', keyword: keyword }]
+        selected = -1
+        selectionSource = ''
+        solo = true
+        hintAnnounced = false
+        list.innerHTML = renderGoogleRow(keyword, 0)
+        note.innerHTML = ''
         invalidateStatusIndex()
         openPanel()
         updateSelection()
@@ -424,21 +439,8 @@ export function setupSearch (state, elements, selectGroup) {
         if (openUrl(providerAddress(command.provider, keyword), texts.invalidLink)) clearSearch()
     }
 
-    function findProviderByName (name) {
-        const wanted = String(name).toLowerCase()
-        for (let index = 0; index < state.providers.length; index++) {
-            if (String(state.providers[index].name).toLowerCase() === wanted) return state.providers[index]
-        }
-        return null
-    }
-
     function runGoogle (text) {
-        const google = findProviderByName('Google')
-        if (!google || !google.query) {
-            announce(texts.googleMissing)
-            return
-        }
-        if (openUrl(google.query + encodeURIComponent(text), texts.invalidLink)) clearSearch()
+        if (openUrl(googleAddress(encodeURIComponent(text)), texts.invalidLink)) clearSearch()
     }
 
     function activate () {
@@ -452,6 +454,10 @@ export function setupSearch (state, elements, selectGroup) {
         }
         if (row.kind === 'command') {
             runProvider({ provider: row.provider, keyword: row.keyword })
+            return
+        }
+        if (row.kind === 'search') {
+            runGoogle(row.keyword)
             return
         }
         if (row.kind === 'provider') {
@@ -488,6 +494,12 @@ export function setupSearch (state, elements, selectGroup) {
             const row = selected >= 0 ? rows[selected] : null
             if (row && selectionSource === 'keyboard') {
                 event.preventDefault()
+                activate()
+                return
+            }
+            if (selectionSource !== 'pointer' && rows.length === 1 && (rows[0].kind === 'search' || rows[0].kind === 'command')) {
+                event.preventDefault()
+                selected = 0
                 activate()
                 return
             }
@@ -542,7 +554,7 @@ export function setupSearch (state, elements, selectGroup) {
         update()
     })
     input.addEventListener('focus', function () {
-        if (input.value.charAt(0) === '/') {
+        if (input.value) {
             selected = -1
             selectionSource = ''
             update()

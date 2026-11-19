@@ -13,9 +13,8 @@ const stages = ['critical', 'fonts', 'rest']
 const rootPaths = [scopePath]
 
 let pathHash = null
-let serving = []
+let serving = null
 let statePromise = null
-let stateGeneration = 0
 let runPromise = null
 let paused = false
 
@@ -66,52 +65,28 @@ function readRecord (cache) {
     return readJson(cache, recordUrl)
 }
 
-function readSnapshot (cache) {
-    return readJson(cache, manifestUrl)
-}
-
 function saveRecord (cache, record) {
     return cache.put(recordUrl, new Response(JSON.stringify(record), {
         headers: { 'content-type': 'application/json' }
     }))
 }
 
-/* 旧缓存只在文件内容与当前清单一致时才服务，避免迁移期间新旧版本混用。 */
-function allowOf (record, hashes) {
-    const allow = {}
-    if (!record || !record.files) return allow
-    for (const path in record.files) {
-        const pathname = new URL(path, scopeUrl).pathname
-        if (hashes[pathname] === record.files[path]) allow[pathname] = true
-    }
-    return allow
-}
-
-/* worker 空闲回收后 activate 不会再来，状态必须能从缓存恢复。 */
+/* worker 空闲回收后 activate 不会再来，状态必须能从缓存恢复：
+   进度取自记录，路径哈希取自已缓存的清单。 */
 async function loadState () {
-    const generation = ++stateGeneration
     const names = await ownCacheNames()
-    const list = []
+    let target = null
     let manifest = null
     for (const name of names) {
         const cache = await caches.open(name)
-        const record = await readRecord(cache)
-        list.push({ cache: cache, record: record })
-        if (!manifest) manifest = await readSnapshot(cache)
+        if (!await readRecord(cache)) continue
+        const snapshot = await readJson(cache, manifestUrl)
+        if (!snapshot) continue
+        target = cache
+        manifest = snapshot
     }
-    const hashes = manifest ? pathHashOf(manifest) : {}
-    /* 未完成的缓存排前面，迁移期间优先取新内容 */
-    list.sort(function (a, b) {
-        const rankA = a.record && a.record.stage === 'done' ? 1 : 0
-        const rankB = b.record && b.record.stage === 'done' ? 1 : 0
-        return rankA - rankB
-    })
-    if (generation !== stateGeneration) return
-    pathHash = hashes
-    serving = list.map(function (item) {
-        const done = item.record && item.record.stage === 'done'
-        return { cache: item.cache, allow: done ? null : allowOf(item.record, hashes) }
-    })
+    pathHash = manifest ? pathHashOf(manifest) : {}
+    serving = target
 }
 
 function ensureState () {
@@ -119,7 +94,7 @@ function ensureState () {
         statePromise = loadState().catch(function () {
             statePromise = null
             pathHash = null
-            serving = []
+            serving = null
         })
     }
     return statePromise
@@ -134,14 +109,9 @@ async function networkOrFail (request) {
 }
 
 async function serve (pathname, request) {
-    const url = new URL(pathname, scopeUrl).href
-    for (let i = 0; i < serving.length; i++) {
-        const item = serving[i]
-        if (item.allow && !item.allow[pathname]) continue
-        const hit = await item.cache.match(url)
-        if (hit) return hit
-    }
-    return networkOrFail(request)
+    if (!serving) return networkOrFail(request)
+    const hit = await serving.match(new URL(pathname, scopeUrl).href)
+    return hit || networkOrFail(request)
 }
 
 /** 只有作用域根目录才回退到 index.html。其它路径可能属于兄弟项目，
@@ -165,25 +135,6 @@ async function download (ctx, url) {
     }
 }
 
-async function moveFromSource (ctx, url, entry) {
-    if (!ctx.source || !ctx.source.record) return false
-    if (ctx.source.record.files[entry.path] !== entry.hash) return false
-    try {
-        const hit = await ctx.source.cache.match(url)
-        if (!hit) return false
-        await ctx.cache.put(url, hit)
-        await ctx.source.cache.delete(url)
-        return true
-    } catch (error) {
-        return false
-    }
-}
-
-async function acquire (ctx, url, entry) {
-    if (await moveFromSource(ctx, url, entry)) return true
-    return download(ctx, url)
-}
-
 async function runGroup (ctx, list) {
     let sinceSave = 0
     let failed = 0
@@ -192,7 +143,7 @@ async function runGroup (ctx, list) {
         const entry = list[i]
         if (ctx.record.files[entry.path] === entry.hash) continue
         const url = new URL(entry.path, scopeUrl).href
-        if (!await acquire(ctx, url, entry)) {
+        if (!await download(ctx, url)) {
             failed++
             continue
         }
@@ -225,25 +176,6 @@ function fetchManifest () {
     })
 }
 
-function pickSource (others) {
-    for (let i = 0; i < others.length; i++) {
-        if (others[i].record) return others[i]
-    }
-    return null
-}
-
-async function collectOthers (targetName, hashes) {
-    const names = await ownCacheNames()
-    const others = []
-    for (const name of names) {
-        if (name === targetName) continue
-        const cache = await caches.open(name)
-        const record = await readRecord(cache)
-        others.push({ cache: cache, record: record, allow: allowOf(record, hashes) })
-    }
-    return others
-}
-
 async function pruneOthers (keep) {
     const names = await ownCacheNames()
     for (const name of names) {
@@ -262,21 +194,18 @@ async function run () {
     }
 
     const hashes = pathHashOf(manifest)
-    stateGeneration++
     pathHash = hashes
     const targetName = cachePrefix + manifest.version + ':' + manifest.hash
     const target = await caches.open(targetName)
     const record = (await readRecord(target)) || { stage: 'critical', files: {} }
-    const others = await collectOthers(targetName, hashes)
-    serving = [{ cache: target, allow: null }].concat(others)
+    serving = target
 
     if (record.stage === 'done') {
-        serving = [{ cache: target, allow: null }]
         await pruneOthers(targetName)
         return
     }
 
-    const ctx = { cache: target, record: record, source: pickSource(others) }
+    const ctx = { cache: target, record: record }
     const groups = splitStages(manifest.files || [])
     const index = Math.max(0, stages.indexOf(record.stage))
     if (!await runGroups(ctx, groups, index)) return
@@ -286,7 +215,6 @@ async function run () {
     }))
     record.stage = 'done'
     await saveRecord(target, record)
-    serving = [{ cache: target, allow: null }]
     await pruneOthers(targetName)
 }
 

@@ -366,9 +366,10 @@ body.is-searching .head-under .rail-count {
     color: var(--ink);
     font-weight: 600;
     letter-spacing: 0.04em;
+    cursor: grab;
 }
 
-.rail button:hover {
+.rail button:not([aria-pressed="true"]):hover {
     color: var(--accent);
 }
 
@@ -523,12 +524,6 @@ body.is-searching .head-under .rail-count {
 .result-row.is-selected .result-meta,
 .result-row.is-selected .command-lead {
     color: var(--accent);
-}
-
-.result-empty {
-    padding: 14px 0 4px;
-    color: var(--muted);
-    font-size: 14px;
 }
 
 .result-status {

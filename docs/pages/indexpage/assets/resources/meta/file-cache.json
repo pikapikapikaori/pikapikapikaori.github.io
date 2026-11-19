@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "2b3fd195bd61811e",
+    "hash": "912a329022c5b2bb",
     "files": [
         {
             "path": "assets/css/fonts.css",
@@ -12,7 +12,7 @@
         },
         {
             "path": "assets/css/styles.css",
-            "hash": "19c7eb76333522bb"
+            "hash": "133976bdd604f749"
         },
         {
             "path": "assets/css/tokens.css",
@@ -24,7 +24,7 @@
         },
         {
             "path": "assets/js/config.js",
-            "hash": "4cffd8e30cb9de10"
+            "hash": "00ee5e1b87402a1a"
         },
         {
             "path": "assets/js/dom.js",
@@ -36,7 +36,7 @@
         },
         {
             "path": "assets/js/search.js",
-            "hash": "b934a0fa59433461"
+            "hash": "ff071a820ddcd46d"
         },
         {
             "path": "assets/js/status.js",

@@ -1,0 +1,38 @@
+:root {
+    --paper: #f7f3ea;
+    --note: #fdfaf3;
+    --note-shadow: 0 20px 28px -22px rgba(34, 31, 25, 0.34);
+    --note-halo: rgba(34, 31, 25, 0.045);
+    --note-edge: rgba(34, 31, 25, 0.14);
+    --note-dot: rgba(107, 99, 87, 0.07);
+    --ink: #221f19;
+    --muted: #6b6357;
+    --accent: #8f4527;
+    --mark: rgba(143, 69, 39, 0.16);
+    --hairline: #d9c6ad;
+    --fast: #2c6844;
+    --medium: #8a5f0a;
+    --slow: #a33a30;
+    --unknown: #6f6658;
+    --font: "Sorts Mill Goudy", "HYKaiTiS", serif;
+    color-scheme: light;
+}
+
+html[data-theme="dark"] {
+    --paper: #15130f;
+    --note: #221e18;
+    --note-shadow: 0 20px 28px -22px rgba(0, 0, 0, 0.80);
+    --note-halo: rgba(0, 0, 0, 0.22);
+    --note-edge: rgba(0, 0, 0, 0.55);
+    --note-dot: rgba(240, 232, 217, 0.05);
+    --ink: #f0e8d9;
+    --muted: #a99d8a;
+    --accent: #cf9668;
+    --mark: rgba(207, 150, 104, 0.22);
+    --hairline: rgba(207, 150, 104, 0.26);
+    --fast: #7dc394;
+    --medium: #d8b15d;
+    --slow: #dc8e83;
+    --unknown: #9c917f;
+    color-scheme: dark;
+}

@@ -6,22 +6,20 @@
                 {
                     "name": "Google",
                     "url": "https://www.google.com/",
+                    "query": "https://www.google.com/search?q=",
                     "prefix": "/sego"
                 },
                 {
                     "name": "Duck Duck Go",
                     "url": "https://duckduckgo.com/",
+                    "query": "https://duckduckgo.com/?q=",
                     "prefix": "/sedd"
                 },
                 {
-                    "name": "Qwant",
-                    "url": "https://www.qwant.com/",
-                    "prefix": "/seqw"
-                },
-                {
-                    "name": "百度",
-                    "url": "https://www.baidu.com/",
-                    "prefix": "/sebd"
+                    "name": "Bing",
+                    "url": "https://www.bing.com/",
+                    "query": "https://www.bing.com/search?q=",
+                    "prefix": "/sebi"
                 }
             ]
         },
@@ -31,27 +29,44 @@
                 {
                     "name": "IMDB",
                     "url": "https://www.imdb.com/",
-                    "prefix": "/tvim"
+                    "query": "https://www.imdb.com/find?q=",
+                    "prefix": "/fmim"
                 },
                 {
                     "name": "TheMovieDB",
                     "url": "https://www.themoviedb.org/",
-                    "prefix": "/tvtmdb"
+                    "query": "https://www.themoviedb.org/search?query=",
+                    "prefix": "/fmtmdb"
                 },
                 {
                     "name": "TheTVDB",
                     "url": "https://www.thetvdb.com/",
-                    "prefix": "/tvtvdb"
+                    "query": "https://www.thetvdb.com/search?query=",
+                    "prefix": "/fmtvdb"
                 },
                 {
                     "name": "Trakt",
                     "url": "https://trakt.tv/",
-                    "prefix": "/tvtr"
+                    "query": "https://trakt.tv/search?query=",
+                    "prefix": "/fmtr"
                 },
                 {
                     "name": "豆瓣",
                     "url": "https://www.douban.com/",
-                    "prefix": "/tvdb"
+                    "query": "https://www.douban.com/search?q=",
+                    "prefix": "/fmdb"
+                },
+                {
+                    "name": "Bangumi",
+                    "url": "https://bgm.tv/",
+                    "query": "https://bgm.tv/subject_search/",
+                    "prefix": "/fmbgm"
+                },
+                {
+                    "name": "YouTube",
+                    "url": "https://www.youtube.com/",
+                    "query": "https://www.youtube.com/results?search_query=",
+                    "prefix": "/fmyt"
                 }
             ]
         },
@@ -61,42 +76,14 @@
                 {
                     "name": "Allmusic",
                     "url": "https://www.allmusic.com/",
+                    "query": "https://www.allmusic.com/search/all/",
                     "prefix": "/muam"
                 },
                 {
                     "name": "Discogs",
                     "url": "https://www.discogs.com/",
+                    "query": "https://www.discogs.com/search/?q=",
                     "prefix": "/mudi"
-                },
-                {
-                    "name": "Soundcloud",
-                    "url": "https://soundcloud.com/",
-                    "prefix": "/musc"
-                },
-                {
-                    "name": "Spotify",
-                    "url": "https://open.spotify.com/",
-                    "prefix": "/musp"
-                }
-            ]
-        },
-        {
-            "category": "社区与视频",
-            "items": [
-                {
-                    "name": "Reddit",
-                    "url": "https://www.reddit.com/",
-                    "prefix": "/cord"
-                },
-                {
-                    "name": "Youtube",
-                    "url": "https://www.youtube.com/",
-                    "prefix": "/coyt"
-                },
-                {
-                    "name": "Bangumi",
-                    "url": "https://bgm.tv/",
-                    "prefix": "/cobgm"
                 }
             ]
         },
@@ -106,6 +93,7 @@
                 {
                     "name": "GitHub",
                     "url": "https://github.com/",
+                    "query": "https://github.com/search?q=",
                     "prefix": "/degh"
                 }
             ]

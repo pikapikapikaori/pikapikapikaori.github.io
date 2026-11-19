@@ -1,6 +1,16 @@
 {
-    "apps" : [
-        {"name":"ピカピカピ","url":"../homepage/index.html?lang=zh-Hans","icon":"home-circle-outline","description":"個人主頁","target": "_blank"},
-        {"name":"ピカピカピ","url":"../../#/","icon":"account-circle-outline","description":"個人博客","target": "_blank"}
+    "apps": [
+        {
+            "name": "ピカピカピ",
+            "url": "../homepage/index.html?lang=zh-Hans",
+            "description": "个人主页",
+            "target": "_blank"
+        },
+        {
+            "name": "ピカピカピ",
+            "url": "../../#/",
+            "description": "个人博客",
+            "target": "_blank"
+        }
     ]
 }

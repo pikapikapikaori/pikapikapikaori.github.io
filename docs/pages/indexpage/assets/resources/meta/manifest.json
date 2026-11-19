@@ -1,13 +1,13 @@
 {
     "name": "ピカピカピ · 导航",
     "short_name": "ピカピカピ",
-    "description": "個人用的網站導航頁",
+    "description": "个人网站导航页",
     "id": "pikapikapi:indexpage",
     "start_url": "../../../index.html",
     "scope": "../../../",
     "display": "standalone",
-    "background_color": "#F8F6F1",
-    "theme_color": "#F8F6F1",
+    "background_color": "#f7f3ea",
+    "theme_color": "#f7f3ea",
     "icons": [
         {
             "src": "../logo/logo-512.png",

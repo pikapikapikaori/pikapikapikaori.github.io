@@ -1,16 +1,16 @@
 'use strict'
 
-const SCOPE_URL = new URL(self.registration.scope)
-const SCOPE_PATH = SCOPE_URL.pathname
-const CACHE_PREFIX = 'pikapikapi:indexpage:static:'
-const MANIFEST_PATH = 'assets/resources/meta/file-cache.json'
-const MANIFEST_URL = new URL(MANIFEST_PATH, SCOPE_URL).href
-const RECORD_URL = new URL('__cache-record__', SCOPE_URL).href
-const CRITICAL_EXTS = ['js', 'css', 'html']
-const FONT_EXTS = ['woff2', 'woff', 'ttf', 'otf', 'eot']
-const SAVE_EVERY = 20
-const STAGES = ['critical', 'fonts', 'rest']
-const ROOT_PATHS = [SCOPE_PATH]
+const scopeUrl = new URL(self.registration.scope)
+const scopePath = scopeUrl.pathname
+const cachePrefix = 'pikapikapi:indexpage:static:'
+const manifestPath = 'assets/resources/meta/file-cache.json'
+const manifestUrl = new URL(manifestPath, scopeUrl).href
+const recordUrl = new URL('__cache-record__', scopeUrl).href
+const criticalExts = ['js', 'css', 'html']
+const fontExts = ['woff2', 'woff', 'ttf', 'otf', 'eot']
+const saveEvery = 20
+const stages = ['critical', 'fonts', 'rest']
+const rootPaths = [scopePath]
 
 let pathHash = null
 let serving = []
@@ -28,7 +28,7 @@ function extOf (path) {
 function ownCacheNames () {
     return caches.keys().then(function (names) {
         return names.filter(function (name) {
-            return name.indexOf(CACHE_PREFIX) === 0
+            return name.indexOf(cachePrefix) === 0
         })
     })
 }
@@ -37,7 +37,7 @@ function pathHashOf (manifest) {
     const map = {}
     const files = (manifest && manifest.files) || []
     for (let i = 0; i < files.length; i++) {
-        map[new URL(files[i].path, SCOPE_URL).pathname] = files[i].hash
+        map[new URL(files[i].path, scopeUrl).pathname] = files[i].hash
     }
     return map
 }
@@ -46,8 +46,8 @@ function splitStages (files) {
     const groups = [[], [], []]
     for (let i = 0; i < files.length; i++) {
         const ext = extOf(files[i].path)
-        if (CRITICAL_EXTS.indexOf(ext) !== -1) groups[0].push(files[i])
-        else if (FONT_EXTS.indexOf(ext) !== -1) groups[1].push(files[i])
+        if (criticalExts.indexOf(ext) !== -1) groups[0].push(files[i])
+        else if (fontExts.indexOf(ext) !== -1) groups[1].push(files[i])
         else groups[2].push(files[i])
     }
     return groups
@@ -63,15 +63,15 @@ async function readJson (cache, url) {
 }
 
 function readRecord (cache) {
-    return readJson(cache, RECORD_URL)
+    return readJson(cache, recordUrl)
 }
 
 function readSnapshot (cache) {
-    return readJson(cache, MANIFEST_URL)
+    return readJson(cache, manifestUrl)
 }
 
 function saveRecord (cache, record) {
-    return cache.put(RECORD_URL, new Response(JSON.stringify(record), {
+    return cache.put(recordUrl, new Response(JSON.stringify(record), {
         headers: { 'content-type': 'application/json' }
     }))
 }
@@ -81,7 +81,7 @@ function allowOf (record, hashes) {
     const allow = {}
     if (!record || !record.files) return allow
     for (const path in record.files) {
-        const pathname = new URL(path, SCOPE_URL).pathname
+        const pathname = new URL(path, scopeUrl).pathname
         if (hashes[pathname] === record.files[path]) allow[pathname] = true
     }
     return allow
@@ -134,7 +134,7 @@ async function networkOrFail (request) {
 }
 
 async function serve (pathname, request) {
-    const url = new URL(pathname, SCOPE_URL).href
+    const url = new URL(pathname, scopeUrl).href
     for (let i = 0; i < serving.length; i++) {
         const item = serving[i]
         if (item.allow && !item.allow[pathname]) continue
@@ -149,8 +149,8 @@ async function serve (pathname, request) {
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
-    if (ROOT_PATHS.indexOf(pathname) === -1) return null
-    const key = SCOPE_PATH + 'index.html'
+    if (rootPaths.indexOf(pathname) === -1) return null
+    const key = scopePath + 'index.html'
     return pathHash[key] ? key : null
 }
 
@@ -191,14 +191,14 @@ async function runGroup (ctx, list) {
         if (paused) break
         const entry = list[i]
         if (ctx.record.files[entry.path] === entry.hash) continue
-        const url = new URL(entry.path, SCOPE_URL).href
+        const url = new URL(entry.path, scopeUrl).href
         if (!await acquire(ctx, url, entry)) {
             failed++
             continue
         }
         ctx.record.files[entry.path] = entry.hash
         sinceSave++
-        if (sinceSave >= SAVE_EVERY) {
+        if (sinceSave >= saveEvery) {
             sinceSave = 0
             await saveRecord(ctx.cache, ctx.record)
         }
@@ -210,8 +210,8 @@ async function runGroup (ctx, list) {
 async function runGroups (ctx, groups, index) {
     for (let i = index; i < groups.length; i++) {
         if (!await runGroup(ctx, groups[i])) return false
-        if (i + 1 < STAGES.length) {
-            ctx.record.stage = STAGES[i + 1]
+        if (i + 1 < stages.length) {
+            ctx.record.stage = stages[i + 1]
             await saveRecord(ctx.cache, ctx.record)
         }
     }
@@ -219,7 +219,7 @@ async function runGroups (ctx, groups, index) {
 }
 
 function fetchManifest () {
-    return fetch(MANIFEST_URL, { cache: 'no-store' }).then(function (response) {
+    return fetch(manifestUrl, { cache: 'no-store' }).then(function (response) {
         if (!response.ok) throw new Error('manifest ' + response.status)
         return response.json()
     })
@@ -264,7 +264,7 @@ async function run () {
     const hashes = pathHashOf(manifest)
     stateGeneration++
     pathHash = hashes
-    const targetName = CACHE_PREFIX + manifest.version + ':' + manifest.hash
+    const targetName = cachePrefix + manifest.version + ':' + manifest.hash
     const target = await caches.open(targetName)
     const record = (await readRecord(target)) || { stage: 'critical', files: {} }
     const others = await collectOthers(targetName, hashes)
@@ -278,10 +278,10 @@ async function run () {
 
     const ctx = { cache: target, record: record, source: pickSource(others) }
     const groups = splitStages(manifest.files || [])
-    const index = Math.max(0, STAGES.indexOf(record.stage))
+    const index = Math.max(0, stages.indexOf(record.stage))
     if (!await runGroups(ctx, groups, index)) return
 
-    await target.put(MANIFEST_URL, new Response(JSON.stringify(manifest), {
+    await target.put(manifestUrl, new Response(JSON.stringify(manifest), {
         headers: { 'content-type': 'application/json' }
     }))
     record.stage = 'done'
@@ -316,8 +316,8 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
     if (event.request.method !== 'GET') return
     const url = new URL(event.request.url)
-    if (url.origin !== SCOPE_URL.origin) return
-    if (SCOPE_PATH !== '/' && url.pathname.indexOf(SCOPE_PATH) !== 0) return
+    if (url.origin !== scopeUrl.origin) return
+    if (scopePath !== '/' && url.pathname.indexOf(scopePath) !== 0) return
 
     if (!pathHash) {
         if (event.request.mode !== 'navigate') return

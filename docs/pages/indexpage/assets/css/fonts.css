@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Sorts Mill Goudy";
+    src: url("../resources/fonts/SortsMillGoudy-Regular.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "HYKaiTiS";
+    src: url("../resources/fonts/HYKaiTiS.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}

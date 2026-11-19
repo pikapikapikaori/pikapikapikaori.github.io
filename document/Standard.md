@@ -48,6 +48,12 @@ English | [简体中文](./Standard_zh-cn.md)
 - Each project owns one cache prefix, and the `id` in `manifest.json` equals that prefix and stays stable. Own `localStorage` / `sessionStorage` keys and IndexedDB database names carry the same project prefix.
 - A service worker cache name is `<prefix>:static:<version>:<hash>`. `hash`: join the sorted entries as `path:file hash` with no separator, then take the first 16 hex characters of the SHA-256, each file hash is the first 16 hex characters of the SHA-256 of that file.
 
+## Coding Standards
+
+- Naming style: Prefer lower camel case (lowerCamelCase); all-uppercase with underscores is also allowed.
+- Comment style: Prefer English comments; Chinese is also allowed. Prefer `/** */` multi-line comments; `/* */` and `//` are also allowed.
+- `js` code style: Do not use `var` for any declaration.
+
 ## Branch Naming & Commit Message
 
 - **New article:** article/[title]-[yy|yymm|yymmdd] | atic:

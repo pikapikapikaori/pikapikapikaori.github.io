@@ -1,10 +1,14 @@
 {
     "version": "4.7.5",
-    "hash": "3ec1bd0fa9f8d824",
+    "hash": "5252445292de75b2",
     "files": [
         {
             "path": "assets/css/base.css",
-            "hash": "23e53d7fab0794d0"
+            "hash": "735677012949972f"
+        },
+        {
+            "path": "assets/css/nonstandard/base.css",
+            "hash": "82f3292527a4d541"
         },
         {
             "path": "assets/js/app.js",
@@ -12,15 +16,15 @@
         },
         {
             "path": "assets/js/config.js",
-            "hash": "c20c682ec40cf1fe"
+            "hash": "58b22339c8f386f4"
         },
         {
             "path": "assets/js/controls.js",
-            "hash": "f003d98904116fbf"
+            "hash": "df789386c7cbfe4e"
         },
         {
             "path": "assets/js/feed.js",
-            "hash": "ec85065c03f0b77f"
+            "hash": "5325e912d73f2fdf"
         },
         {
             "path": "assets/js/i18n.js",
@@ -28,15 +32,15 @@
         },
         {
             "path": "assets/js/layout-loader.js",
-            "hash": "5b96ffaf26415f75"
+            "hash": "c7dbba571d8935ee"
         },
         {
             "path": "assets/js/photo-captions.js",
-            "hash": "58f83fdd4615df41"
+            "hash": "339c48f18cc7f8bc"
         },
         {
             "path": "assets/js/photos.js",
-            "hash": "ae9730346d9262ef"
+            "hash": "9cf1ee2c872ba42e"
         },
         {
             "path": "assets/js/site.js",
@@ -52,7 +56,7 @@
         },
         {
             "path": "assets/js/utils.js",
-            "hash": "c99351e5021b63e1"
+            "hash": "decd1e2267c4a4f0"
         },
         {
             "path": "assets/js/worker/startup.js",
@@ -60,7 +64,7 @@
         },
         {
             "path": "assets/layout/brand/css/main.css",
-            "hash": "e374093dce2a34ec"
+            "hash": "686cd663baa1738e"
         },
         {
             "path": "assets/layout/brand/html/index.html",
@@ -68,23 +72,23 @@
         },
         {
             "path": "assets/layout/brand/js/blog-rail.js",
-            "hash": "29eae73129ed5edc"
+            "hash": "cbdf9be6cf0ad51b"
         },
         {
             "path": "assets/layout/brand/js/main.js",
-            "hash": "e7480f4004b33ccd"
+            "hash": "706a338f2364a872"
         },
         {
             "path": "assets/layout/brand/js/photo-animation.js",
-            "hash": "2c8c285b46522467"
+            "hash": "d46970b8f29057de"
         },
         {
             "path": "assets/layout/brand/js/scroll-pin.js",
-            "hash": "1f65619424bf7f6f"
+            "hash": "6a4c78b6c05fd3ed"
         },
         {
             "path": "assets/layout/mondrian/css/main.css",
-            "hash": "a3d0222b0831ac70"
+            "hash": "f7e18f78ac015e8d"
         },
         {
             "path": "assets/layout/mondrian/html/index.html",
@@ -92,11 +96,15 @@
         },
         {
             "path": "assets/layout/mondrian/js/main.js",
-            "hash": "bdd92f35b460c71e"
+            "hash": "f3e6ba2eff270bbd"
         },
         {
             "path": "assets/layout/photography/css/main.css",
-            "hash": "81e6d1d75c77c8c0"
+            "hash": "b57efbaadda89aeb"
+        },
+        {
+            "path": "assets/layout/photography/css/nonstandard/main.css",
+            "hash": "f9e77af9fa6090bc"
         },
         {
             "path": "assets/layout/photography/html/index.html",
@@ -112,7 +120,7 @@
         },
         {
             "path": "assets/layout/starTrail/css/main.css",
-            "hash": "f831b296c6361084"
+            "hash": "bc0f6882229a7a19"
         },
         {
             "path": "assets/layout/starTrail/html/index.html",
@@ -120,7 +128,7 @@
         },
         {
             "path": "assets/layout/starTrail/js/main.js",
-            "hash": "c74006520cc3ed47"
+            "hash": "7d31e069c24e5925"
         },
         {
             "path": "assets/resources/fonts/HYKaiTiS.woff2",

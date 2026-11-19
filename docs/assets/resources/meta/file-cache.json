@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "41414c05f85e9d23",
+    "hash": "87d577d430284061",
     "files": [
         {
             "path": "404/_404.md",
@@ -13636,7 +13636,11 @@
         },
         {
             "path": "pages/homepage/assets/css/base.css",
-            "hash": "23e53d7fab0794d0"
+            "hash": "735677012949972f"
+        },
+        {
+            "path": "pages/homepage/assets/css/nonstandard/base.css",
+            "hash": "82f3292527a4d541"
         },
         {
             "path": "pages/homepage/assets/js/app.js",
@@ -13644,15 +13648,15 @@
         },
         {
             "path": "pages/homepage/assets/js/config.js",
-            "hash": "c20c682ec40cf1fe"
+            "hash": "58b22339c8f386f4"
         },
         {
             "path": "pages/homepage/assets/js/controls.js",
-            "hash": "f003d98904116fbf"
+            "hash": "df789386c7cbfe4e"
         },
         {
             "path": "pages/homepage/assets/js/feed.js",
-            "hash": "ec85065c03f0b77f"
+            "hash": "5325e912d73f2fdf"
         },
         {
             "path": "pages/homepage/assets/js/i18n.js",
@@ -13660,15 +13664,15 @@
         },
         {
             "path": "pages/homepage/assets/js/layout-loader.js",
-            "hash": "5b96ffaf26415f75"
+            "hash": "c7dbba571d8935ee"
         },
         {
             "path": "pages/homepage/assets/js/photo-captions.js",
-            "hash": "58f83fdd4615df41"
+            "hash": "339c48f18cc7f8bc"
         },
         {
             "path": "pages/homepage/assets/js/photos.js",
-            "hash": "ae9730346d9262ef"
+            "hash": "9cf1ee2c872ba42e"
         },
         {
             "path": "pages/homepage/assets/js/site.js",
@@ -13684,7 +13688,7 @@
         },
         {
             "path": "pages/homepage/assets/js/utils.js",
-            "hash": "c99351e5021b63e1"
+            "hash": "decd1e2267c4a4f0"
         },
         {
             "path": "pages/homepage/assets/js/worker/startup.js",
@@ -13692,7 +13696,7 @@
         },
         {
             "path": "pages/homepage/assets/layout/brand/css/main.css",
-            "hash": "e374093dce2a34ec"
+            "hash": "686cd663baa1738e"
         },
         {
             "path": "pages/homepage/assets/layout/brand/html/index.html",
@@ -13700,23 +13704,23 @@
         },
         {
             "path": "pages/homepage/assets/layout/brand/js/blog-rail.js",
-            "hash": "29eae73129ed5edc"
+            "hash": "cbdf9be6cf0ad51b"
         },
         {
             "path": "pages/homepage/assets/layout/brand/js/main.js",
-            "hash": "e7480f4004b33ccd"
+            "hash": "706a338f2364a872"
         },
         {
             "path": "pages/homepage/assets/layout/brand/js/photo-animation.js",
-            "hash": "2c8c285b46522467"
+            "hash": "d46970b8f29057de"
         },
         {
             "path": "pages/homepage/assets/layout/brand/js/scroll-pin.js",
-            "hash": "1f65619424bf7f6f"
+            "hash": "6a4c78b6c05fd3ed"
         },
         {
             "path": "pages/homepage/assets/layout/mondrian/css/main.css",
-            "hash": "a3d0222b0831ac70"
+            "hash": "f7e18f78ac015e8d"
         },
         {
             "path": "pages/homepage/assets/layout/mondrian/html/index.html",
@@ -13724,11 +13728,15 @@
         },
         {
             "path": "pages/homepage/assets/layout/mondrian/js/main.js",
-            "hash": "bdd92f35b460c71e"
+            "hash": "f3e6ba2eff270bbd"
         },
         {
             "path": "pages/homepage/assets/layout/photography/css/main.css",
-            "hash": "81e6d1d75c77c8c0"
+            "hash": "b57efbaadda89aeb"
+        },
+        {
+            "path": "pages/homepage/assets/layout/photography/css/nonstandard/main.css",
+            "hash": "f9e77af9fa6090bc"
         },
         {
             "path": "pages/homepage/assets/layout/photography/html/index.html",
@@ -13744,7 +13752,7 @@
         },
         {
             "path": "pages/homepage/assets/layout/starTrail/css/main.css",
-            "hash": "f831b296c6361084"
+            "hash": "bc0f6882229a7a19"
         },
         {
             "path": "pages/homepage/assets/layout/starTrail/html/index.html",
@@ -13752,7 +13760,7 @@
         },
         {
             "path": "pages/homepage/assets/layout/starTrail/js/main.js",
-            "hash": "c74006520cc3ed47"
+            "hash": "7d31e069c24e5925"
         },
         {
             "path": "pages/homepage/assets/resources/fonts/HYKaiTiS.woff2",
@@ -13795,44 +13803,60 @@
             "hash": "0a4cf1a436facdad"
         },
         {
+            "path": "pages/indexpage/assets/css/fonts.css",
+            "hash": "fbd3999da5ada8c5"
+        },
+        {
+            "path": "pages/indexpage/assets/css/nonstandard/styles.css",
+            "hash": "e4ca6d71747c2025"
+        },
+        {
             "path": "pages/indexpage/assets/css/styles.css",
-            "hash": "34e4aeb887bd16fe"
+            "hash": "19c7eb76333522bb"
         },
         {
-            "path": "pages/indexpage/assets/js/data.js",
-            "hash": "f0623033c40a9c92"
+            "path": "pages/indexpage/assets/css/tokens.css",
+            "hash": "dbf7b092bc5aef99"
         },
         {
-            "path": "pages/indexpage/assets/js/script.js",
-            "hash": "4213c39cebf0f12f"
+            "path": "pages/indexpage/assets/js/app.js",
+            "hash": "f9c2a886aa3ff6b3"
+        },
+        {
+            "path": "pages/indexpage/assets/js/config.js",
+            "hash": "4cffd8e30cb9de10"
+        },
+        {
+            "path": "pages/indexpage/assets/js/dom.js",
+            "hash": "044d5a7438875989"
+        },
+        {
+            "path": "pages/indexpage/assets/js/groups.js",
+            "hash": "02fcf8d4831bf29e"
         },
         {
             "path": "pages/indexpage/assets/js/search.js",
-            "hash": "0e6928cc9ce85692"
+            "hash": "b934a0fa59433461"
         },
         {
-            "path": "pages/indexpage/assets/js/themer.js",
-            "hash": "5eefbb11da552f89"
+            "path": "pages/indexpage/assets/js/status.js",
+            "hash": "4433b4c33719938c"
+        },
+        {
+            "path": "pages/indexpage/assets/js/theme.js",
+            "hash": "e5a8dac18eff8db4"
         },
         {
             "path": "pages/indexpage/assets/js/worker/startup.js",
-            "hash": "ef2d25370c59a599"
+            "hash": "efb8c9c9b96d21a7"
         },
         {
-            "path": "pages/indexpage/assets/resources/fonts/A-OTF-KakuGyoStd-Light.woff2",
-            "hash": "0297ab82fa841d57"
+            "path": "pages/indexpage/assets/resources/fonts/HYKaiTiS.woff2",
+            "hash": "ca1ca2d70db1b5cc"
         },
         {
-            "path": "pages/indexpage/assets/resources/fonts/MoonStarsKaiT-Bold.woff2",
-            "hash": "3ccf0802cdd2aca6"
-        },
-        {
-            "path": "pages/indexpage/assets/resources/fonts/MoonStarsKaiT-Light.woff2",
-            "hash": "4bf7c7f56bb9ffe3"
-        },
-        {
-            "path": "pages/indexpage/assets/resources/fonts/MoonStarsKaiT-Regular.woff2",
-            "hash": "0d4c765a88ea1c8d"
+            "path": "pages/indexpage/assets/resources/fonts/SortsMillGoudy-Regular.woff2",
+            "hash": "421b89dda8b82216"
         },
         {
             "path": "pages/indexpage/assets/resources/logo/favicon.ico",
@@ -13852,31 +13876,23 @@
         },
         {
             "path": "pages/indexpage/assets/resources/meta/manifest.json",
-            "hash": "73439b70a6b7adf4"
-        },
-        {
-            "path": "pages/indexpage/assets/sources/handlebars.min.js",
-            "hash": "81e1784331e908c6"
-        },
-        {
-            "path": "pages/indexpage/assets/sources/iconify.min.js",
-            "hash": "3e9ba009146d114e"
+            "hash": "4ce21c7a20e4f8e5"
         },
         {
             "path": "pages/indexpage/data/apps.json",
-            "hash": "0b225e170e8cddae"
+            "hash": "8effae5b600553fa"
         },
         {
             "path": "pages/indexpage/data/links.json",
-            "hash": "67da69f4c848fa9b"
+            "hash": "7ddc4d56c6df5aa9"
         },
         {
             "path": "pages/indexpage/data/providers.json",
-            "hash": "0097c3f5311f3e8d"
+            "hash": "e939812084944979"
         },
         {
             "path": "pages/indexpage/index.html",
-            "hash": "c6b11a8b8ffd62c3"
+            "hash": "26754996226f7103"
         },
         {
             "path": "pages/light/assets/css/plus.css",

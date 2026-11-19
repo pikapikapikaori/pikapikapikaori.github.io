@@ -1,46 +1,62 @@
 {
     "version": "4.7.5",
-    "hash": "f1c02dbedda5e66b",
+    "hash": "2b3fd195bd61811e",
     "files": [
         {
+            "path": "assets/css/fonts.css",
+            "hash": "fbd3999da5ada8c5"
+        },
+        {
+            "path": "assets/css/nonstandard/styles.css",
+            "hash": "e4ca6d71747c2025"
+        },
+        {
             "path": "assets/css/styles.css",
-            "hash": "34e4aeb887bd16fe"
+            "hash": "19c7eb76333522bb"
         },
         {
-            "path": "assets/js/data.js",
-            "hash": "f0623033c40a9c92"
+            "path": "assets/css/tokens.css",
+            "hash": "dbf7b092bc5aef99"
         },
         {
-            "path": "assets/js/script.js",
-            "hash": "4213c39cebf0f12f"
+            "path": "assets/js/app.js",
+            "hash": "f9c2a886aa3ff6b3"
+        },
+        {
+            "path": "assets/js/config.js",
+            "hash": "4cffd8e30cb9de10"
+        },
+        {
+            "path": "assets/js/dom.js",
+            "hash": "044d5a7438875989"
+        },
+        {
+            "path": "assets/js/groups.js",
+            "hash": "02fcf8d4831bf29e"
         },
         {
             "path": "assets/js/search.js",
-            "hash": "0e6928cc9ce85692"
+            "hash": "b934a0fa59433461"
         },
         {
-            "path": "assets/js/themer.js",
-            "hash": "5eefbb11da552f89"
+            "path": "assets/js/status.js",
+            "hash": "4433b4c33719938c"
+        },
+        {
+            "path": "assets/js/theme.js",
+            "hash": "e5a8dac18eff8db4"
         },
         {
             "path": "assets/js/worker/startup.js",
-            "hash": "ef2d25370c59a599"
+            "hash": "efb8c9c9b96d21a7"
         },
         {
-            "path": "assets/resources/fonts/A-OTF-KakuGyoStd-Light.woff2",
-            "hash": "0297ab82fa841d57"
+            "path": "assets/resources/fonts/HYKaiTiS.woff2",
+            "hash": "ca1ca2d70db1b5cc"
         },
         {
-            "path": "assets/resources/fonts/MoonStarsKaiT-Bold.woff2",
-            "hash": "3ccf0802cdd2aca6"
-        },
-        {
-            "path": "assets/resources/fonts/MoonStarsKaiT-Light.woff2",
-            "hash": "4bf7c7f56bb9ffe3"
-        },
-        {
-            "path": "assets/resources/fonts/MoonStarsKaiT-Regular.woff2",
-            "hash": "0d4c765a88ea1c8d"
+            "path": "assets/resources/fonts/SortsMillGoudy-Regular.woff2",
+            "hash": "421b89dda8b82216"
         },
         {
             "path": "assets/resources/logo/favicon.ico",
@@ -60,31 +76,23 @@
         },
         {
             "path": "assets/resources/meta/manifest.json",
-            "hash": "73439b70a6b7adf4"
-        },
-        {
-            "path": "assets/sources/handlebars.min.js",
-            "hash": "81e1784331e908c6"
-        },
-        {
-            "path": "assets/sources/iconify.min.js",
-            "hash": "3e9ba009146d114e"
+            "hash": "4ce21c7a20e4f8e5"
         },
         {
             "path": "data/apps.json",
-            "hash": "0b225e170e8cddae"
+            "hash": "8effae5b600553fa"
         },
         {
             "path": "data/links.json",
-            "hash": "67da69f4c848fa9b"
+            "hash": "7ddc4d56c6df5aa9"
         },
         {
             "path": "data/providers.json",
-            "hash": "0097c3f5311f3e8d"
+            "hash": "e939812084944979"
         },
         {
             "path": "index.html",
-            "hash": "c6b11a8b8ffd62c3"
+            "hash": "26754996226f7103"
         }
     ]
 }

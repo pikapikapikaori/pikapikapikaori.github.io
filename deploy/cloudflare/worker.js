@@ -1,10 +1,240 @@
+// /_cross_origin 为保留路径，只发起授权与转发 Bangumi 接口，不读 R2。
+
+// ========== 0. Bangumi 接口转发 ==========
+const CROSS_ORIGIN_PATH = '/_cross_origin'
+
+// 前端据这个头区分中转响应；缺失该头的 404 与 5xx 视为代理不可达。
+const CROSS_ORIGIN_HEADER = 'x-cross-origin'
+
+const PROXY_PREFIX = 'https://api.bgm.tv/'
+
+const PROXY_TOKEN_URL = 'https://bgm.tv/oauth/access_token'
+
+const PROXY_AUTHORIZE_URL = 'https://bgm.tv/oauth/authorize'
+
+const PROXY_METHODS = new Set(['GET', 'HEAD', 'POST', 'OPTIONS'])
+
+// 5 次跳转足够 OAuth 端点使用；越过即停止。
+const PROXY_REDIRECT_LIMIT = 5
+
+// 这些头按上游站点写就，转发到本站源会让浏览器误信。
+const PROXY_STRIPPED_HEADERS = [
+    'set-cookie',
+    'clear-site-data',
+    'www-authenticate',
+    'refresh',
+    'content-security-policy-report-only',
+]
+
+const PROXY_CLIENT_ID = 'bgm71356aa8a71822b75'
+
+const PROXY_CLIENT_SECRET = '84b443fcb27f06906a7cce10eca9aa7a'
+
+function proxyError(message, status) {
+    return new Response(message, {
+        status,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            [CROSS_ORIGIN_HEADER]: '1',
+        },
+    })
+}
+
+function isRedirectStatus(status) {
+    return status === 301 || status === 302 || status === 303 || status === 307 || status === 308
+}
+
+function relayResponse(response, { stripLocation = false } = {}) {
+    const headers = new Headers(response.headers)
+    for (const name of PROXY_STRIPPED_HEADERS) headers.delete(name)
+    headers.set('Access-Control-Allow-Origin', '*')
+    headers.set('Access-Control-Allow-Headers', '*')
+    headers.set('Access-Control-Expose-Headers', '*')
+    headers.set(CROSS_ORIGIN_HEADER, '1')
+    // 中转内容只作数据读取，禁嗅探并让文档失去同源身份。
+    headers.set('X-Content-Type-Options', 'nosniff')
+    headers.set('Content-Security-Policy', 'sandbox')
+    if (stripLocation) headers.delete('Location')
+    return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+    })
+}
+
+function isAllowedTarget(target) {
+    if (target.username || target.password) return false
+    if (target.origin + target.pathname === PROXY_TOKEN_URL) return true
+    return target.href.startsWith(PROXY_PREFIX)
+}
+
+function isNavigation(request) {
+    const destination = (request.headers.get('Sec-Fetch-Dest') || '').toLowerCase()
+    if (destination === 'document' || destination === 'iframe') return true
+    const mode = (request.headers.get('Sec-Fetch-Mode') || '').toLowerCase()
+    if (mode === 'navigate') return true
+    const accept = request.headers.get('Accept') || ''
+    return accept.split(',')[0].split(';')[0].trim().toLowerCase() === 'text/html'
+}
+
+// 授权页由本站发起，浏览器随后回到 redirect_uri，故只接受与请求同源的地址。
+function oauthStart(url) {
+    const redirectUri = url.searchParams.get('redirect_uri') || ''
+    const challenge = url.searchParams.get('code_challenge') || ''
+    const state = url.searchParams.get('state') || ''
+    if (!redirectUri || !challenge || !state) {
+        return proxyError('missing oauth parameter', 400)
+    }
+    let redirect
+    try {
+        redirect = new URL(redirectUri)
+    } catch {
+        return proxyError('forbidden', 403)
+    }
+    if (redirect.origin !== url.origin) {
+        return proxyError('forbidden', 403)
+    }
+    redirect.hash = ''
+    redirect.username = ''
+    redirect.password = ''
+    const params = new URLSearchParams({
+        client_id: PROXY_CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: redirect.href,
+        code_challenge: challenge,
+        // 只接受 S256，请求无法把挑战方法降级成 plain。
+        code_challenge_method: 'S256',
+        state,
+    })
+    return new Response(null, {
+        status: 302,
+        headers: {
+            Location: PROXY_AUTHORIZE_URL + '?' + params,
+            'Access-Control-Allow-Origin': '*',
+            [CROSS_ORIGIN_HEADER]: '1',
+        },
+    })
+}
+
+async function crossOrigin(request, url) {
+    if (!PROXY_METHODS.has(request.method)) {
+        return proxyError('method not allowed', 405)
+    }
+    // 授权入口本身就是页面跳转，须在拦截文档导航之前处理。
+    if (url.searchParams.get('oauth') === 'start') {
+        return oauthStart(url)
+    }
+    if (isNavigation(request)) {
+        return proxyError('navigation not allowed', 400)
+    }
+
+    const target = url.searchParams.get('url')
+    if (!target) {
+        return proxyError('missing url', 400)
+    }
+
+    let current
+    try {
+        current = new URL(target)
+    } catch {
+        return proxyError('forbidden', 403)
+    }
+    if (current.protocol !== 'https:' || !isAllowedTarget(current)) {
+        return proxyError('forbidden', 403)
+    }
+
+    if (request.method === 'OPTIONS') {
+        return new Response(null, {
+            status: 204,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': '*',
+                [CROSS_ORIGIN_HEADER]: '1',
+            },
+        })
+    }
+
+    const headers = new Headers()
+    const authorization = request.headers.get('Authorization')
+    if (authorization) headers.set('Authorization', authorization)
+    const accept = request.headers.get('Accept')
+    if (accept) headers.set('Accept', accept)
+    headers.set('User-Agent', 'bangumi-takeout-web/1.0')
+
+    let method = request.method
+    let body
+    const isTokenEndpoint = current.origin + current.pathname === PROXY_TOKEN_URL
+    if (method !== 'GET' && method !== 'HEAD') {
+        const incomingType = request.headers.get('Content-Type') || ''
+        const incomingBody = await request.arrayBuffer()
+        // 令牌交换必须带应用身份，故只在这一端点改写表单，请求体里的同名字段被覆盖。
+        if (isTokenEndpoint) {
+            const params = new URLSearchParams(new TextDecoder().decode(incomingBody))
+            params.set('client_id', PROXY_CLIENT_ID)
+            params.set('client_secret', PROXY_CLIENT_SECRET)
+            body = params.toString()
+            headers.set('Content-Type', 'application/x-www-form-urlencoded')
+        } else {
+            body = incomingBody
+            if (incomingType) headers.set('Content-Type', incomingType)
+        }
+    }
+
+    let redirects = 0
+    for (;;) {
+        const response = await fetch(current.href, {
+            method,
+            headers,
+            body,
+            // 手动跟跳转，才能逐个检查目标主机并控制授权头与请求体的去向。
+            redirect: 'manual',
+        })
+
+        if (!isRedirectStatus(response.status)) {
+            return relayResponse(response)
+        }
+
+        const location = response.headers.get('Location')
+        if (!location) {
+            return relayResponse(response, { stripLocation: true })
+        }
+
+        let next
+        try {
+            next = new URL(location, current)
+        } catch {
+            return relayResponse(response, { stripLocation: true })
+        }
+
+        if (redirects >= PROXY_REDIRECT_LIMIT
+            || next.origin !== current.origin
+            || !isAllowedTarget(next)) {
+            return relayResponse(response, { stripLocation: true })
+        }
+
+        redirects += 1
+        if ((response.status === 303 || response.status === 301 || response.status === 302)
+            && method !== 'GET' && method !== 'HEAD') {
+            method = 'GET'
+            body = undefined
+            headers.delete('Content-Type')
+        }
+        if (response.body) {
+            try {
+                await response.body.cancel()
+            } catch {}
+        }
+        current = next
+    }
+}
+
 // ========== 1. Host 重写 ==========
 
-// host -> R2 前缀（默认域名不在这里，走 DIR_INDEX_PATHS）
 const HOST_PREFIX = {
     'home.pikapikapi.com': 'pages/homepage/',
     'index.pikapikapi.com': 'pages/indexpage/',
-    'bgmtv.pikapikapi.com': 'apps/bangumi-takeout/web/',
+    'bgmtv.pikapikapi.com': 'apps/bangumi-takeout/',
 }
 
 // 需要自动补 index.html 的目录路径（含默认域名和子域名下的相对路径）
@@ -91,6 +321,10 @@ function rewriteContent(filePath, text) {
         case 'pages/homepage/assets/js/i18n.js':
             return text.replaceAll("'../../", "'https://pikapikapi.com/")
 
+        // ---- bangumi-takeout ----
+        case 'apps/bangumi-takeout/assets/resources/meta/default-source.json':
+            return text.replaceAll('"../../../../', '"https://pikapikapi.com/')
+
         default:
             return text
     }
@@ -101,6 +335,7 @@ const REWRITE_PATHS = new Set([
     'pages/indexpage/data/apps.json',
     'pages/homepage/assets/js/config.js',
     'pages/homepage/assets/js/i18n.js',
+    'apps/bangumi-takeout/assets/resources/meta/default-source.json',
 ])
 
 // ========== 4. 生成 etag ==========
@@ -136,6 +371,10 @@ export default {
     async fetch(request, env) {
         const url = new URL(request.url)
         const host = url.hostname
+
+        if (url.pathname === CROSS_ORIGIN_PATH) {
+            return crossOrigin(request, url)
+        }
         const encodedFilePath = url.pathname.substring(1)
         const rawPath = decodeURIComponent(encodedFilePath)
 
@@ -145,13 +384,21 @@ export default {
         // 2. 从 R2 取文件
         const object = await env.R2_BUCKET.get(filePath)
         if (!object) {
-            return new Response('404 - File Not Found', { status: 404 })
+            // no-store 防止中间缓存把一次缺失固化成长期 404，前端以裸 404 判定代理不存在。
+            return new Response('404 - File Not Found', {
+                status: 404,
+                headers: {
+                    'Cache-Control': 'no-store',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            })
         }
 
         // 3. 组装响应头
         const headers = new Headers()
         object.writeHttpMetadata(headers)
         headers.set('etag', object.httpEtag)
+        headers.set('Access-Control-Allow-Origin', '*')
         applyCacheControl(headers, filePath)
 
         // 4. 需要的话做内容替换

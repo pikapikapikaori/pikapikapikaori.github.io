@@ -16,7 +16,6 @@ const lintConfig = {
     excludes: [
         "docs/**/*.min.js",
         "docs/**/sources/**",
-        "docs/**/npm/**",
     ],
 };
 

@@ -30,7 +30,7 @@
                     "agent_push_allowed": false
                 },
                 "snapshots": {
-                    "directory": "lib",
+                    "directory": "build-lib/workflow-snapshots",
                     "capture": "before_and_after",
                     "batch_policy": "per_batch"
                 }

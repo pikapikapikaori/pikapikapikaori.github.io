@@ -1,6 +1,6 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
 import { protectCodeBlocks, isEnabled, codeBlockModes } from '../utils/common.js'
-import { link } from '../utils/icons.js'
+import * as icons from '../utils/icons.js'
 import { getEl } from '../utils/dom.js'
 
 let htmlReplaceOptions = {
@@ -28,6 +28,22 @@ function plugin(hook, vm) {
 
     const blockTagConfigMap = new Map()
     const inlineTagConfigMap = new Map()
+    const warnedIconIdentifiers = new Set()
+
+    function resolveIcon(identifier) {
+        const parts = identifier.split('.')
+        if (parts.length !== 2) return null
+
+        const group = icons[parts[0]]
+        const value = group ? group[parts[1]] : null
+        return typeof value === 'string' ? value : null
+    }
+
+    function warnUnknownIcon(identifier) {
+        if (warnedIconIdentifiers.has(identifier)) return
+        warnedIconIdentifiers.add(identifier)
+        console.warn(`[htmlReplace] Unknown icon: ${identifier}`)
+    }
 
     function resolvePlaceholders(str) {
         return replacer.replace(str)
@@ -39,7 +55,7 @@ function plugin(hook, vm) {
         })
 
         iconLinkKeys.forEach(key => {
-            replacer.registerToken(`icon_${key}`, link[key])
+            replacer.registerToken(`icon_${key}`, icons.link[key])
         })
     }
 
@@ -75,8 +91,20 @@ function plugin(hook, vm) {
 
     const commentReplaceMarkup = new RegExp(`<!-- ${commentReplaceMark} (.*?) -->`)
 
+    const inlineSvgMarkup = /<!--\s*svg:([A-Za-z0-9_.]+)\s*-->/g
+    const inlineSvgMarkerPrefix = '<!-- svg:'
+
     function renderStage1(content) {
         content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.protect)
+
+        content = content.replace(inlineSvgMarkup, (fullMatch, identifier) => {
+            const svg = resolveIcon(identifier)
+            if (!svg) {
+                warnUnknownIcon(identifier)
+                return fullMatch
+            }
+            return `<!-- ${commentReplaceMark} <span class="inline-svg">${svg}</span> -->`
+        })
 
         for (const [tagKey, cfg] of blockTagConfigMap) {
             const startMarker = `<!-- ${tagKey}:start -->`
@@ -139,9 +167,57 @@ function plugin(hook, vm) {
 
     let hasAnyMarker = false
 
+    // 导航、侧栏、封面不经过 beforeEach，只能扫描 DOM 注释补充替换
+    const inlineSvgRoots = '.app-nav, .cover, .sidebar'
+    const inlineSvgCommentMarkup = /^svg:([A-Za-z0-9_.]+)$/
+
+    function replaceInlineSvgComments(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_COMMENT)
+        const commentNodes = []
+        let node = walker.nextNode()
+        while (node) {
+            if (inlineSvgCommentMarkup.test(node.nodeValue.trim())) commentNodes.push(node)
+            node = walker.nextNode()
+        }
+
+        commentNodes.forEach(comment => {
+            const identifier = comment.nodeValue.trim().slice('svg:'.length)
+            const svg = resolveIcon(identifier)
+            if (!svg) {
+                warnUnknownIcon(identifier)
+                return
+            }
+
+            const span = document.createElement('span')
+            span.className = 'inline-svg'
+            span.innerHTML = svg
+            comment.replaceWith(span)
+        })
+    }
+
+    function scanInlineSvg() {
+        document.querySelectorAll(inlineSvgRoots).forEach(replaceInlineSvgComments)
+    }
+
+    let inlineSvgScanPending = false
+
+    function scheduleInlineSvgScan() {
+        if (inlineSvgScanPending) return
+        inlineSvgScanPending = true
+        requestAnimationFrame(() => {
+            inlineSvgScanPending = false
+            scanInlineSvg()
+        })
+    }
+
     hook.mounted(function () {
         initializeReplacer()
         initializeTags()
+
+        new MutationObserver(scheduleInlineSvgScan).observe(document.body, {
+            childList: true,
+            subtree: true
+        })
     })
 
     hook.beforeEach(function (content) {
@@ -163,6 +239,9 @@ function plugin(hook, vm) {
                 }
             }
         }
+        if (!hasAnyMarker && content.includes(inlineSvgMarkerPrefix)) {
+            hasAnyMarker = true
+        }
 
         if (hasAnyMarker) {
             content = renderStage1(content)
@@ -178,6 +257,8 @@ function plugin(hook, vm) {
     })
 
     hook.doneEach(function () {
+        scanInlineSvg()
+
         const firstBriefNote = getEl('.brief-comments-container details:first-of-type')
         if (firstBriefNote) {
             firstBriefNote.open = true

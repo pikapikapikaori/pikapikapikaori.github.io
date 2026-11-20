@@ -10,7 +10,8 @@ export function isNil(value) {
 
 const codeBlockStore = new Map()
 
-const codeMarkup = /(```[\s\S]*?```)/gm
+const codeBlockMarkup = /(```[\s\S]*?```)/gm
+const inlineCodeMarkup = /(`[^`\n]+`)/g
 
 export const codeBlockModes = {
     protect: 'protect',
@@ -21,7 +22,13 @@ export function protectCodeBlocks(content, prefix = 'codeblock', mode = codeBloc
     if (mode === codeBlockModes.protect) {
         const blocks = []
 
-        const protectedContent = content.replace(codeMarkup, block => {
+        let protectedContent = content.replace(codeBlockMarkup, block => {
+            const marker = `<!-- ${prefix}-${blocks.length} -->`
+            blocks.push(block)
+            return marker
+        })
+
+        protectedContent = protectedContent.replace(inlineCodeMarkup, block => {
             const marker = `<!-- ${prefix}-${blocks.length} -->`
             blocks.push(block)
             return marker

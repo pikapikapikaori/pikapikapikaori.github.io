@@ -16,7 +16,7 @@ section.cover img.ignore-view-full-image-img {
 .cover-page-scroll-down-chevron-div {
     margin: 2.5rem 0 0;
     position: absolute;
-    left: calc(50% - 0.625rem);
+    left: calc(50% - 0.5rem);
 }
 
 .cover-page-scroll-down-chevron {

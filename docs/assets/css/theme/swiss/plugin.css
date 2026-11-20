@@ -158,14 +158,6 @@ html .app-nav > ul > li > .app-nav-toggle {
     transition: var(--global-transition-color-fast);
 }
 
-html .app-nav > ul > li > .app-nav-toggle>svg,
-html .app-nav > ul > li > .app-nav-toggle svg {
-    width: 1.1em;
-    height: 1.1em;
-    vertical-align: -0.15em;
-    stroke: currentColor;
-}
-
 html .app-nav > ul > li > .app-nav-toggle>.app-nav-toggle-inner {
     grid-area: 1 / 1;
 }

@@ -810,13 +810,6 @@ html .app-nav li {
     white-space: nowrap;
 }
 
-html .app-nav li>svg {
-    width: 1.1em;
-    height: 1.1em;
-    vertical-align: -0.15em;
-    stroke: currentColor;
-}
-
 html .app-nav li ul {
     padding: 0.25rem 0;
     background: var(--sw-fill-rest);

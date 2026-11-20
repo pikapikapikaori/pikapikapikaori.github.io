@@ -19,8 +19,6 @@ function tooLargeError() {
     return new Error(`文件超过 ${mb} MB 大小上限`)
 }
 
-// File.arrayBuffer() has no cancel point, so the file is read through its stream;
-// cancelling the reader settles the pending read.
 async function readFileBytes(file, { signal = null } = {}) {
     if (signal?.aborted) throw abortError()
     if (typeof file.stream !== 'function') {
@@ -165,7 +163,35 @@ export async function loadFromFile(file, { signal = null } = {}) {
     return parseBinary(await readFileBytes(file, { signal }), { signal })
 }
 
+// The bundled default source names its archive relative to the page, while the import
+// field also accepts full addresses.
+const httpUrlPattern = /^https?:\/\//i
+const relativeUrlPattern = /^(\.{1,2}\/|\/(?!\/))/
+
+// A module loaded outside a page only needs an origin to compare against.
+function pageBase() {
+    return typeof location === 'object' && location?.href ? location.href : 'http://localhost/'
+}
+
+function parseSourceUrl(value) {
+    const text = String(value ?? '')
+    if (!text || text.includes('\\')) return null
+    const base = new URL(pageBase())
+    let parsed
+    try {
+        parsed = new URL(text, base.href)
+    } catch {
+        return null
+    }
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null
+    // Only an explicit http(s) address may name another origin; a path must stay here.
+    if (httpUrlPattern.test(text)) return text
+    if (parsed.origin !== base.origin) return null
+    return relativeUrlPattern.test(text) ? text : null
+}
+
 export async function loadFromUrl(url, { signal = null } = {}) {
-    if (!/^https?:\/\//i.test(url)) throw new Error('请输入 http(s) 开头的地址')
-    return parseBinary(await fetchBinary(url, { signal }), { signal })
+    const target = parseSourceUrl(url)
+    if (!target) throw new Error('请输入 http(s) 地址或站内相对路径')
+    return parseBinary(await fetchBinary(target, { signal }), { signal })
 }

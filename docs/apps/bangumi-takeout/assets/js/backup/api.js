@@ -1,7 +1,7 @@
 import {
-    apiBase, proxyUrl, requestIntervalLimits, requestRetryLimits, requestTimeoutMs,
+    apiBase, authBase, proxyUrl, requestIntervalLimits, requestRetryLimits, requestTimeoutMs,
     retryAfterMaxMs, retryWaitMs, staticChunkMaxBytes, staticChunkMaxOutputBytes,
-    staticDataIdleTimeoutMs,
+    staticDataIdleTimeoutMs, storagePrefix,
 } from '../config.js'
 import { parseShard } from '../worker/chunk.js'
 
@@ -83,13 +83,71 @@ function sleep(ms, signal = null) {
     })
 }
 
+function proxyBase() {
+    if (!proxyUrl) return ''
+    if (proxyUrl.includes('?url=') || proxyUrl.includes('?target=')) return proxyUrl
+    return proxyUrl.replace(/\?$/, '') + (proxyUrl.includes('?') ? '&' : '?') + 'url='
+}
+
 export function proxied(url) {
-    if (!proxyUrl) return url
-    let base = proxyUrl
-    if (!base.includes('?url=') && !base.includes('?target=')) {
-        base = base.replace(/\?$/, '') + (base.includes('?') ? '&' : '?') + 'url='
+    const base = proxyBase()
+    return base ? base + encodeURIComponent(url) : url
+}
+
+const proxyMarkerHeader = 'x-cross-origin'
+
+const proxyMissingKey = storagePrefix + 'proxy-missing'
+let proxyMissing = false
+let proxyChecked = false
+
+function proxyReached(response) {
+    return !!response.headers.get(proxyMarkerHeader)
+}
+
+function proxyAbsent(response) {
+    return response.status === 404 && !proxyReached(response)
+}
+
+function relayMissing() {
+    if (proxyChecked) return proxyMissing
+    proxyChecked = true
+    try {
+        proxyMissing = sessionStorage.getItem(proxyMissingKey) === '1'
+    } catch {
+        // Without storage the page-level flag still covers this load.
     }
-    return base + encodeURIComponent(url)
+    return proxyMissing
+}
+
+function markRelayMissing() {
+    proxyMissing = true
+    try {
+        sessionStorage.setItem(proxyMissingKey, '1')
+    } catch {}
+}
+
+function proxyTargetOf(url) {
+    const base = proxyBase()
+    if (!base || !url.startsWith(base)) return ''
+    try {
+        return decodeURIComponent(url.slice(base.length))
+    } catch {
+        return ''
+    }
+}
+
+// The proxy injects client_secret, so the token endpoint has no direct fallback.
+function isTokenRequest(target) {
+    const endpoint = authBase + '/access_token'
+    return target === endpoint || target.startsWith(endpoint + '?')
+}
+
+function proxyUnavailableError(cause) {
+    const error = new Error('代理不可用，无法完成令牌交换')
+    error.code = 'PROXY_UNAVAILABLE'
+    error.retryable = false
+    if (cause) error.cause = cause
+    return error
 }
 
 function timeoutError(ms, { idle = false } = {}) {
@@ -142,6 +200,29 @@ export async function fetchWithTimeout(url, init = {}, {
         error.retryable = false
         throw error
     }
+    const direct = proxyTargetOf(url)
+    const options = { signal, timeout, idleTimeout }
+    if (!direct) return fetchOnce(url, init, options)
+    const token = isTokenRequest(direct)
+    if (relayMissing()) {
+        if (token) throw proxyUnavailableError()
+        return fetchOnce(direct, init, options)
+    }
+    let result
+    try {
+        result = await fetchOnce(url, init, options)
+    } catch (error) {
+        if (isAbortError(error) || error?.timeout) throw error
+        if (token) throw proxyUnavailableError(error)
+        return fetchOnce(direct, init, options)
+    }
+    if (!proxyAbsent(result.response)) return result
+    markRelayMissing()
+    if (token) throw proxyUnavailableError()
+    return fetchOnce(direct, init, options)
+}
+
+async function fetchOnce(url, init, { signal, timeout, idleTimeout }) {
     if (signal?.aborted) throw abortError()
     const controller = new AbortController()
     let timedOut = false

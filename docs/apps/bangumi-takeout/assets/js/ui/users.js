@@ -24,13 +24,14 @@ export async function renderUsers() {
     const token = ++viewToken
 
     const source = getDefaultSource()
-    defaultUsername = source.username
-    defaultDataUrl = source.dataUrl
+    defaultUsername = source?.username || ''
+    defaultDataUrl = source?.dataUrl || ''
 
     const [records, credentials] = await Promise.all([meta.list(), listCredentials()])
     const credentialNames = new Set(credentials.map(item => item.username))
     const recordNameSet = new Set(records.map(record => record.username).filter(Boolean))
     const names = unique([defaultUsername, ...recordNameSet, ...credentials.map(item => item.username)])
+        .filter(Boolean)
     const counts = await Promise.all(names.map(name => items.countByOwner(name)))
     if (main.dataset.route !== 'users') return
     const current = state.data?.user?.username || ''
@@ -110,8 +111,7 @@ async function choose(name, buttons, hasCredential, main, token, trigger) {
     try {
         let activeName = name
         let hit = await loadUser(name)
-        // The built-in default user may exist only in the bundled export.
-        if ((!hit || !hit.items.length) && name === defaultUsername) {
+        if ((!hit || !hit.items.length) && defaultDataUrl && name === defaultUsername) {
             loading.setLabel('正在加载默认数据…')
             try {
                 const raw = await loadFromUrl(defaultDataUrl)
@@ -126,8 +126,6 @@ async function choose(name, buttons, hasCredential, main, token, trigger) {
             }
         }
         if (!hit) {
-            // An account with a credential but no local data stays selectable: it opens the
-            // empty collection view instead of reporting missing data.
             if (hasCredential) {
                 await ensureEmptyUser(name)
                 const empty = await loadUser(name)

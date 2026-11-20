@@ -184,12 +184,13 @@ export async function renderBackup() {
     if (main.dataset.route !== 'backup') return
     closeMenu()
 
-    defaultUsername = getDefaultSource().username
-    if (!targetValue) targetValue = state.data?.user?.username || defaultUsername
+    defaultUsername = getDefaultSource()?.username || ''
+    const preferredTarget = state.data?.user?.username || defaultUsername
+    if (!targetValue && preferredTarget) targetValue = preferredTarget
 
     const [records, stored] = await Promise.all([meta.list(), listCredentials()])
     credentials = stored
-    usernames = unique([defaultUsername, ...records.map(record => record.username)])
+    usernames = unique([defaultUsername, ...records.map(record => record.username)]).filter(Boolean)
 
     if (preferredAuth && credentials.some(item => item.username === preferredAuth)) {
         selectedAuth = preferredAuth
@@ -416,7 +417,11 @@ function bindAuth(main) {
 
     main.querySelector('#b-login').addEventListener('click', () => {
         if (running) return
-        beginAuthorization()
+        beginAuthorization().catch(error => {
+            if (!error) return
+            setNotice(error.message || String(error), 'auth')
+            paintStatus()
+        })
     })
 
     const form = main.querySelector('#paste-form')
@@ -426,8 +431,6 @@ function bindAuth(main) {
         if (!form.hidden) main.querySelector('#paste-input').focus()
     })
     main.querySelector('#paste-cancel').addEventListener('click', () => {
-        // While verification runs, cancel aborts the request; otherwise it only
-        // closes the form.
         if (verifying) {
             verifyController?.abort()
             return

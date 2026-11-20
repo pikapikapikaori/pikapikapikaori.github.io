@@ -1,29 +1,22 @@
-// The app is one page, so the root comes from this module, not the document path.
 const appRootUrl = new URL('../../', import.meta.url)
 
-const fallbackDefaultSource = {
-    username: 'inuyasha559',
-    dataPath: '../../writings/_media/PersonalRecordsBackup/bgm-20260906.json.zip',
-}
 const defaultSourceFile = new URL('../resources/meta/default-source.json', import.meta.url)
 
-let defaultSource = resolveDefaultSource(fallbackDefaultSource)
+let defaultSource = null
 let defaultSourcePromise = null
 
 function resolveDefaultSource(source) {
     const value = source && typeof source === 'object' ? source : {}
-    return {
-        username: String(value.username || fallbackDefaultSource.username),
-        // dataPath is written relative to the app root.
-        dataUrl: new URL(value.dataPath || fallbackDefaultSource.dataPath, appRootUrl).href,
-    }
+    const username = String(value.username || '')
+    const dataUrl = String(value.dataPath || '')
+    if (!username || !dataUrl) return null
+    return { username, dataUrl }
 }
 
 export function getDefaultSource() {
     return defaultSource
 }
 
-// One fetch per page; a broken or missing file keeps the fallback values.
 export function loadDefaultSource() {
     if (!defaultSourcePromise) {
         defaultSourcePromise = fetch(defaultSourceFile, { cache: 'no-store' })
@@ -35,7 +28,7 @@ export function loadDefaultSource() {
                 defaultSource = resolveDefaultSource(data)
                 return defaultSource
             })
-            .catch(() => defaultSource)
+            .catch(() => null)
     }
     return defaultSourcePromise
 }
@@ -54,7 +47,6 @@ export const href = {
 
 // Identity is username: some accounts have no uid.
 export const dbName = 'bangumi-takeout'
-// A schema that differs is deleted and rebuilt, so this number never changes.
 export const dbVersion = 1
 export const storeItems = 'items'
 export const storeMeta = 'meta'
@@ -77,8 +69,7 @@ export const storagePrefix = 'bangumi-takeout:'
 
 export const apiBase = 'https://api.bgm.tv'
 export const authBase = 'https://bgm.tv/oauth'
-export const proxyUrl = 'https://bangumi-takeout-web.pikapikapi-kaori.workers.dev/?url='
-export const bangumiClientId = 'bgm71356aa8a71822b75'
+export const proxyUrl = '/_cross_origin?url='
 export const retryWaitMs = 5000
 // Every request carries a deadline so a stalled proxy cannot hang a backup.
 export const requestTimeoutMs = 30000

@@ -1,14 +1,18 @@
 // Credentials live in the shared `credentials` store, keyed by the account name the
 // token proves, so the backup page and the viewer see one login.
 import {
-    authBase, bangumiClientId, storagePrefix, storeCredentials,
-    tokenRefreshMarginMs,
+    apiBase, authBase, proxyUrl, storagePrefix, storeCredentials, tokenRefreshMarginMs,
 } from '../config.js'
 import { runTransaction } from '../storage.js'
 import { BangumiApi, fetchWithTimeout, proxied } from './api.js'
 
 const oauthVerifierKey = storagePrefix + 'oauth-verifier'
 const oauthStateKey = storagePrefix + 'oauth-state'
+
+const proxyMarkerHeader = 'x-cross-origin'
+const proxyPath = proxyUrl.split('?')[0]
+
+const proxyProbeTimeoutMs = 8000
 
 // storage.js owns the connection and its schema check, so credentials reuse both.
 function credentialRequest(mode, fn) {
@@ -72,13 +76,23 @@ function clearPending() {
     sessionStorage.removeItem(oauthStateKey)
 }
 
-// `code` and `state` are single-use secrets, so they leave the address bar once handled.
+// Callback parameters are single-use and may carry an error text, so every OAuth name
+// leaves the address bar once handled.
+const oauthParamNames = [
+    'code', 'state', 'error', 'error_description', 'error_uri',
+    'scope', 'access_token', 'token_type', 'expires_in',
+]
+
 function clearOAuthParams() {
     try {
         const url = new URL(location.href)
-        if (!url.searchParams.has('code') && !url.searchParams.has('state')) return
-        url.searchParams.delete('code')
-        url.searchParams.delete('state')
+        let found = false
+        for (const name of oauthParamNames) {
+            if (!url.searchParams.has(name)) continue
+            url.searchParams.delete(name)
+            found = true
+        }
+        if (!found) return
         const search = url.searchParams.toString()
         history.replaceState(history.state, '', url.pathname + (search ? '?' + search : '') + url.hash)
     } catch {}
@@ -100,6 +114,13 @@ function tokenRecord(username, data, previous = null) {
     }
 }
 
+function tokenErrorForStatus(status) {
+    if (status === 400) return '令牌请求被拒绝，请重新登录'
+    if (status === 401 || status === 403) return '令牌无效或已过期，请重新登录'
+    if (status >= 500) return '令牌接口暂时不可用，请稍后重试'
+    return `令牌接口返回 HTTP ${status}`
+}
+
 async function requestToken(params, { signal = null } = {}) {
     const { response, text } = await fetchWithTimeout(proxied(`${authBase}/access_token`), {
         method: 'POST',
@@ -107,13 +128,12 @@ async function requestToken(params, { signal = null } = {}) {
         body: new URLSearchParams(params),
     }, { signal })
     if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${text.slice(0, 200)}`)
+        throw new Error(tokenErrorForStatus(response.status))
     }
     try {
         return JSON.parse(text)
     } catch {
-        const type = response.headers.get('content-type') || '(none)'
-        throw new Error(`令牌接口响应不是 JSON: HTTP ${response.status} · Content-Type: ${type} · ${text.slice(0, 120)}`)
+        throw new Error('令牌接口响应不是有效的 JSON')
     }
 }
 
@@ -133,7 +153,45 @@ async function storeVerified(data, { signal = null } = {}) {
     return { username: me.username, user: me, credential: record }
 }
 
+function proxyMissingError(cause) {
+    const error = new Error('OAuth 授权需要 Worker 代理，请部署 deploy/cloudflare/worker.js 并保留 /_cross_origin')
+    error.code = 'PROXY_UNAVAILABLE'
+    error.retryable = false
+    if (cause) error.cause = cause
+    return error
+}
+
+function proxyTimeoutError(cause) {
+    const error = new Error('OAuth 代理探测超时，请检查网络后重试')
+    error.code = 'PROXY_TIMEOUT'
+    error.retryable = true
+    if (cause) error.cause = cause
+    return error
+}
+
+async function ensureProxy() {
+    // A preflight answer proves the route exists and keeps the console free of a 400.
+    const probe = proxyUrl + encodeURIComponent(apiBase + '/v0/me')
+    const controller = new AbortController()
+    let timedOut = false
+    const timer = setTimeout(() => {
+        timedOut = true
+        controller.abort()
+    }, proxyProbeTimeoutMs)
+    let response = null
+    try {
+        response = await fetch(probe, { method: 'OPTIONS', cache: 'no-store', signal: controller.signal })
+    } catch (error) {
+        if (timedOut) throw proxyTimeoutError(error)
+        throw proxyMissingError(error)
+    } finally {
+        clearTimeout(timer)
+    }
+    if (!response.headers.get(proxyMarkerHeader)) throw proxyMissingError()
+}
+
 export async function beginAuthorization() {
+    await ensureProxy()
     const verifier = randStr(64)
     const challenge = b64url(await sha256(verifier))
     const state = randStr(16)
@@ -141,36 +199,37 @@ export async function beginAuthorization() {
     sessionStorage.setItem(oauthStateKey, state)
 
     const params = new URLSearchParams({
-        client_id: bangumiClientId,
-        response_type: 'code',
+        oauth: 'start',
         redirect_uri: getRedirectUri(),
         code_challenge: challenge,
         code_challenge_method: 'S256',
         state,
     })
-    location.href = `${authBase}/authorize?${params}`
+    location.href = proxyPath + '?' + params
 }
 
 export async function finishAuthorization(search = location.search) {
     const params = new URLSearchParams(search)
     const error = params.get('error')
-    if (error) {
-        clearPending()
-        clearOAuthParams()
-        const description = params.get('error_description') || ''
-        throw new Error(`OAuth 授权失败: ${error} ${description}`.trim())
-    }
     const code = params.get('code')
-    if (!code) return null
+    if (!error && !code) return null
 
     const state = params.get('state')
-    const verifier = sessionStorage.getItem(oauthVerifierKey)
     const savedState = sessionStorage.getItem(oauthStateKey)
     if (!savedState || state !== savedState) {
         clearPending()
         clearOAuthParams()
         throw new Error('OAuth state 校验失败，请重新登录')
     }
+
+    if (error) {
+        clearPending()
+        clearOAuthParams()
+        const description = params.get('error_description') || ''
+        throw new Error(`OAuth 授权失败: ${error} ${description}`.trim())
+    }
+
+    const verifier = sessionStorage.getItem(oauthVerifierKey)
     if (!verifier) {
         clearPending()
         clearOAuthParams()
@@ -180,7 +239,6 @@ export async function finishAuthorization(search = location.search) {
     try {
         const data = await requestToken({
             grant_type: 'authorization_code',
-            client_id: bangumiClientId,
             code,
             redirect_uri: getRedirectUri(),
             code_verifier: verifier,
@@ -207,7 +265,6 @@ export async function refreshAccessToken(username, { signal = null } = {}) {
 
     const data = await requestToken({
         grant_type: 'refresh_token',
-        client_id: bangumiClientId,
         refresh_token: record.refresh_token,
     }, { signal })
     const next = tokenRecord(username, data, record)

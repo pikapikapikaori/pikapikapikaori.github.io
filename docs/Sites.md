@@ -2,10 +2,6 @@
 
 ## 网页
 
-<!-- tabs:start -->
-
-#### **站点**
-
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
@@ -37,21 +33,6 @@
 <!-- toc-card:end -->
 
 <!-- toc-card-wrap:end -->
-
-#### **存档**
-
-<!-- toc-card-wrap:start -->
-
-<!-- toc-card:start -->
-<!-- toc-card-href:./pages/hexo/public/index.html -->
-<!-- toc-card-img:./_media/Sites/pikapikapi-hexo.png -->
-<!-- toc-card-title:博客分站 -->
-<!-- toc-card-description:壹号分站，基于 Hexo -->
-<!-- toc-card:end -->
-
-<!-- toc-card-wrap:end -->
-
-<!-- tabs:end -->
 
 ## 应用
 

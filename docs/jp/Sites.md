@@ -2,10 +2,6 @@
 
 ## ページ
 
-<!-- tabs:start -->
-
-#### **サイト**
-
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
@@ -30,21 +26,6 @@
 <!-- toc-card:end -->
 
 <!-- toc-card-wrap:end -->
-
-#### **アーカイブ**
-
-<!-- toc-card-wrap:start -->
-
-<!-- toc-card:start -->
-<!-- toc-card-href:./pages/hexo/public/index.html -->
-<!-- toc-card-img:./jp/_media/Sites/pikapikapi-hexo.png -->
-<!-- toc-card-title:ブログサブサイト -->
-<!-- toc-card-description:壱号サブサイト、Hexo　ベース -->
-<!-- toc-card:end -->
-
-<!-- toc-card-wrap:end -->
-
-<!-- tabs:end -->
 
 ## アプリ
 

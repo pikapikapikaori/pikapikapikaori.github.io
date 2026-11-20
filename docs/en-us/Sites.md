@@ -2,10 +2,6 @@
 
 ## Pages
 
-<!-- tabs:start -->
-
-#### **Sites**
-
 <!-- toc-card-wrap:start -->
 
 <!-- toc-card:start -->
@@ -30,21 +26,6 @@
 <!-- toc-card:end -->
 
 <!-- toc-card-wrap:end -->
-
-#### **Archive**
-
-<!-- toc-card-wrap:start -->
-
-<!-- toc-card:start -->
-<!-- toc-card-href:./pages/hexo/public/index.html -->
-<!-- toc-card-img:./en-us/_media/Sites/pikapikapi-hexo.png -->
-<!-- toc-card-title:Blog Sub-Site -->
-<!-- toc-card-description:No.1 Sub-Site, Based on Hexo -->
-<!-- toc-card:end -->
-
-<!-- toc-card-wrap:end -->
-
-<!-- tabs:end -->
 
 ## Applications
 

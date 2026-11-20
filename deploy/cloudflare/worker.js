@@ -155,8 +155,10 @@ async function crossOrigin(request, url) {
         })
     }
 
+    const isTokenEndpoint = current.origin + current.pathname === PROXY_TOKEN_URL
+
     const headers = new Headers()
-    const authorization = request.headers.get('Authorization')
+    const authorization = isTokenEndpoint ? null : request.headers.get('Authorization')
     if (authorization) headers.set('Authorization', authorization)
     const accept = request.headers.get('Accept')
     if (accept) headers.set('Accept', accept)
@@ -164,7 +166,6 @@ async function crossOrigin(request, url) {
 
     let method = request.method
     let body
-    const isTokenEndpoint = current.origin + current.pathname === PROXY_TOKEN_URL
     if (method !== 'GET' && method !== 'HEAD') {
         const incomingType = request.headers.get('Content-Type') || ''
         const incomingBody = await request.arrayBuffer()

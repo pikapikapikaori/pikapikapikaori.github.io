@@ -31,11 +31,5 @@ build-lib/
 
 # pages
 
-# hexo page
-docs/pages/hexo/**/Thumbs.db
-docs/pages/hexo/**/db.json
-docs/pages/hexo/**/*.log
-docs/pages/hexo/**/.deploy*/
-
 # bgm-takeout page
 docs/**/bgm-data/*.jsonlines

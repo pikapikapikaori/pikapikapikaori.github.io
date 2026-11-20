@@ -41,7 +41,7 @@ SITEMAP_SCRIPT="$SCRIPTS_DIR/shell/sitemap.sh"
 # ---------- rclone 配置 ----------
 RCLONE_SRC="docs/"
 RCLONE_DST="r2:pikapikapi-blog/"
-RCLONE_OPTS=(--exclude "**/.DS_Store" --exclude ".DS_Store" --exclude "**/node_modules/**" --exclude "**/hexo/package-lock.json" --exclude "**/hexo/db.json" --checksum)
+RCLONE_OPTS=(--exclude "**/.DS_Store" --exclude ".DS_Store" --exclude "**/node_modules/**" --checksum)
 
 # ---------- 核心：展示命令 -> 确认 -> 执行 ----------
 confirm_run() {

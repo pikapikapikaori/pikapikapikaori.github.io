@@ -17,7 +17,6 @@ const lintConfig = {
         "docs/**/*.min.js",
         "docs/**/sources/**",
         "docs/**/npm/**",
-        "docs/pages/**/hexo/**",
     ],
 };
 

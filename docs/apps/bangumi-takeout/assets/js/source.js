@@ -168,25 +168,11 @@ export async function loadFromFile(file, { signal = null } = {}) {
 const httpUrlPattern = /^https?:\/\//i
 const relativeUrlPattern = /^(\.{1,2}\/|\/(?!\/))/
 
-// A module loaded outside a page only needs an origin to compare against.
-function pageBase() {
-    return typeof location === 'object' && location?.href ? location.href : 'http://localhost/'
-}
-
 function parseSourceUrl(value) {
     const text = String(value ?? '')
-    if (!text || text.includes('\\')) return null
-    const base = new URL(pageBase())
-    let parsed
-    try {
-        parsed = new URL(text, base.href)
-    } catch {
-        return null
-    }
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null
-    // Only an explicit http(s) address may name another origin; a path must stay here.
+    if (!text || /[\\\t\n\r]/.test(text)) return null
     if (httpUrlPattern.test(text)) return text
-    if (parsed.origin !== base.origin) return null
+    // Only ./ ../ and / stay on this origin; // would name another host.
     return relativeUrlPattern.test(text) ? text : null
 }
 

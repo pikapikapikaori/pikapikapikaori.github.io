@@ -43,7 +43,6 @@
 
     --header-h: 56px;
     --content-max: 1280px;
-    --content-narrow: 940px;
 }
 
 [data-theme="dark"] {

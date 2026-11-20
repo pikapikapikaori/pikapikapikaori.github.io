@@ -1,6 +1,6 @@
 import { items, meta, replaceUser } from './storage.js'
 import { normalizeExport, toViewItems } from './model.js'
-import { CURRENT_USER_KEY, INFO_SCOPE, VIEW_CLEARED_KEY } from './config.js'
+import { currentUserKey, infoScopes, viewClearedKey } from './config.js'
 
 export const state = {
     data: null,
@@ -18,8 +18,8 @@ export async function loadUser(username) {
 }
 
 export async function tryCache() {
-    if (localStorage.getItem(VIEW_CLEARED_KEY)) return null
-    const saved = localStorage.getItem(CURRENT_USER_KEY)
+    if (localStorage.getItem(viewClearedKey)) return null
+    const saved = localStorage.getItem(currentUserKey)
     if (saved) {
         const hit = await loadUser(saved)
         if (hit) {
@@ -38,13 +38,13 @@ export async function tryCache() {
 }
 
 export function selectUser(username) {
-    localStorage.setItem(CURRENT_USER_KEY, username)
-    localStorage.removeItem(VIEW_CLEARED_KEY)
+    localStorage.setItem(currentUserKey, username)
+    localStorage.removeItem(viewClearedKey)
 }
 
 export function clearCurrentUser() {
-    localStorage.removeItem(CURRENT_USER_KEY)
-    localStorage.setItem(VIEW_CLEARED_KEY, '1')
+    localStorage.removeItem(currentUserKey)
+    localStorage.setItem(viewClearedKey, '1')
     state.data = null
 }
 
@@ -60,7 +60,7 @@ export async function importExport(raw) {
         updated_at: now,
         completeness: { total: records.length, done: records.length },
         task: null,
-    }, records, { infoScope: INFO_SCOPE.PRIVATE })
+    }, records, { infoScope: infoScopes.private })
 
     selectUser(user.username)
     state.data = { user, generatedAt, items: toViewItems(records), report }

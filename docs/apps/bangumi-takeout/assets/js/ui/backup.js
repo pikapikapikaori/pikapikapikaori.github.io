@@ -1,22 +1,23 @@
 import { state, loadUser, selectUser } from '../app.js'
-import { meta } from '../storage.js'
-import { discardTask, getTask, TASK_STATUS } from '../tasks.js'
+import { items, meta } from '../storage.js'
+import { discardTask, getTask, taskStatus } from '../tasks.js'
 import {
     addAccessToken, beginAuthorization, listCredentials,
 } from '../backup/auth.js'
 import { startBackup } from '../backup/runner.js'
 import { isAbortError } from '../backup/api.js'
 import {
-    getDefaultSource, VIEW_CLEARED_KEY,
-    REQUEST_INTERVAL_KEY, REQUEST_INTERVAL_LIMITS, REQUEST_INTERVAL_OPTIONS,
-    REQUEST_RETRY_KEY, REQUEST_RETRY_LIMITS, REQUEST_RETRY_OPTIONS,
+    getDefaultSource, viewClearedKey,
+    requestIntervalKey, requestIntervalLimits, requestIntervalOptions,
+    requestRetryKey, requestRetryLimits, requestRetryOptions,
 } from '../config.js'
 import { escapeHtml, makeMenuButton, paintMenuButton, unique } from '../dom.js'
 import { closeMenu, openMenu } from './menu.js'
+import { beginLoading } from './loading.js'
 import { syncHeader } from '../layout.js'
 
-const STAGE_LABELS = ['收藏列表', '条目', '分集', '进度', '收尾']
-const STAGE_INDEX_BY_NAME = {
+const stageLabels = ['收藏列表', '条目', '分集', '进度', '收尾']
+const stageIndexByName = {
     '拉取收藏列表': 0,
     '拉取条目': 1,
     '拉取分集': 2,
@@ -27,14 +28,14 @@ const STAGE_INDEX_BY_NAME = {
     '读取静态 subject 数据': 1,
     '读取静态 episode 数据': 2,
 }
-const TASK_STAGE_INDEX = {
+const taskStageIndex = {
     collections: 0,
     subjects: 1,
     episodes: 2,
     progress: 3,
     finalize: 4,
 }
-const MODE_LABELS = {
+const modeLabels = {
     full: '全量备份',
     incremental: '增量备份',
     resume: '继续中断',
@@ -46,7 +47,7 @@ let targetValue = ''
 let defaultUsername = ''
 let credentials = []
 let usernames = []
-let taskInfo = { status: TASK_STATUS.MISSING_META, task: null }
+let taskInfo = { status: taskStatus.missingMeta, task: null }
 let running = false
 let starting = false
 let verifying = false
@@ -59,9 +60,11 @@ let logs = []
 let targetTimer = null
 let taskTarget = ''
 let taskSeq = 0
+let cacheCount = 0
+let cacheTarget = ''
 
-let interval = readSetting(REQUEST_INTERVAL_KEY, REQUEST_INTERVAL_LIMITS)
-let maxRetries = readSetting(REQUEST_RETRY_KEY, REQUEST_RETRY_LIMITS)
+let interval = readSetting(requestIntervalKey, requestIntervalLimits)
+let maxRetries = readSetting(requestRetryKey, requestRetryLimits)
 
 function readSetting(key, limits) {
     const stored = Number(localStorage.getItem(key))
@@ -75,13 +78,20 @@ function hasAuth() {
 
 function canStart() {
     return !running && !verifying && !!targetValue.trim() && hasAuth()
-        && taskInfo.status !== TASK_STATUS.UNFINISHED
+        && taskInfo.status !== taskStatus.unfinished
+}
+
+// An incremental run reads what the machine already holds; without a cached
+// collection there is nothing to be incremental about. The count belongs to one
+// target, so it stays unused until the read for the current one finishes.
+function canStartIncremental() {
+    return canStart() && cacheTarget === targetValue.trim() && cacheCount > 0
 }
 
 function canResume() {
     return !running && !verifying && !!targetValue.trim() && hasAuth()
         && taskTarget === targetValue.trim()
-        && taskInfo.status === TASK_STATUS.UNFINISHED
+        && taskInfo.status === taskStatus.unfinished
         && (taskInfo.task?.auth_username || '') === selectedAuth
 }
 
@@ -91,7 +101,7 @@ function canDiscard() {
     return !running && !starting && !verifying
         && !!targetValue.trim()
         && taskTarget === targetValue.trim()
-        && taskInfo.status === TASK_STATUS.UNFINISHED
+        && taskInfo.status === taskStatus.unfinished
 }
 
 export function setPreferredAuth(username) {
@@ -107,36 +117,61 @@ async function refreshTask() {
     const username = targetValue.trim()
     const seq = ++taskSeq
     if (!username) {
-        taskInfo = { status: TASK_STATUS.MISSING_META, task: null }
+        taskInfo = { status: taskStatus.missingMeta, task: null, count: 0 }
         taskTarget = ''
         return
     }
-    const info = await getTask(username, { includeCompleted: true })
+    const [info, record] = await Promise.all([
+        getTask(username, { includeCompleted: true }),
+        meta.get(username),
+    ])
     // Drop stale reads so a later target cannot be painted with an early task.
     if (seq !== taskSeq || username !== targetValue.trim()) return
-    taskInfo = info
+    taskInfo = { ...info, count: record?.completeness?.done || 0 }
     taskTarget = username
+}
+
+async function readCacheCount(username) {
+    if (!username) return 0
+    try {
+        return await items.countByOwner(username)
+    } catch {
+        return 0
+    }
+}
+
+// Finalize clears the running counters before the task is marked complete, so a
+// finished task keeps its count only in the record's completeness.
+function taskCounts(task) {
+    const done = task?.progress?.done || 0
+    const total = task?.progress?.total || 0
+    if (taskInfo.status === taskStatus.completed && !total) {
+        const finished = taskInfo.count || done
+        return { done: finished, total: finished }
+    }
+    return { done, total }
 }
 
 function syncProgressFromTask() {
     if (running) return
     const task = taskInfo.task
-    if (taskInfo.status === TASK_STATUS.UNFINISHED && task) {
-        const index = TASK_STAGE_INDEX[task.stage] ?? -1
+    if (taskInfo.status === taskStatus.unfinished && task) {
+        const index = taskStageIndex[task.stage] ?? -1
         progress = {
             index,
-            label: index >= 0 ? STAGE_LABELS[index] : '就绪',
+            label: index >= 0 ? stageLabels[index] : '就绪',
             done: task.progress?.done || 0,
             total: task.progress?.total || 0,
         }
         return
     }
-    if (taskInfo.status === TASK_STATUS.COMPLETED && task) {
+    if (taskInfo.status === taskStatus.completed && task) {
+        const counts = taskCounts(task)
         progress = {
-            index: STAGE_LABELS.length,
+            index: stageLabels.length,
             label: '完成',
-            done: task.progress?.done || 0,
-            total: task.progress?.total || 0,
+            done: counts.done,
+            total: counts.total,
         }
         return
     }
@@ -168,6 +203,9 @@ export async function renderBackup() {
             || ''
     }
 
+    const initialTarget = targetValue.trim()
+    cacheCount = await readCacheCount(initialTarget)
+    cacheTarget = initialTarget === targetValue.trim() ? initialTarget : ''
     await refreshTask()
     syncProgressFromTask()
     // The route may have changed while the stores were read.
@@ -182,9 +220,9 @@ export async function renderBackup() {
 
 function stageStripHtml() {
     const parts = []
-    for (let i = 0; i < STAGE_LABELS.length; i += 1) {
-        parts.push(`<span class="stage-node" data-stage="${i}" title="${STAGE_LABELS[i]}"></span>`)
-        if (i < STAGE_LABELS.length - 1) parts.push('<span class="stage-bar"></span>')
+    for (let i = 0; i < stageLabels.length; i += 1) {
+        parts.push(`<span class="stage-node" data-stage="${i}" title="${stageLabels[i]}"></span>`)
+        if (i < stageLabels.length - 1) parts.push('<span class="stage-bar"></span>')
     }
     return parts.join('')
 }
@@ -263,10 +301,11 @@ function renderShell(main) {
                     <div class="stage-strip" id="stage-strip">${stageStripHtml()}</div>
                     <div class="row-actions">
                         <button type="button" class="task-btn" id="b-full" ${canStart() ? '' : 'disabled'}>全量备份</button>
-                        <button type="button" class="task-btn" id="b-inc" ${canStart() ? '' : 'disabled'}>增量备份</button>
+                        <button type="button" class="task-btn" id="b-inc" ${canStartIncremental() ? '' : 'disabled'}>增量备份</button>
                         <button type="button" class="task-btn" id="b-resume" ${canResume() ? '' : 'disabled'}>继续</button>
                         <button type="button" class="task-btn" id="b-stop" ${running ? '' : 'disabled'}>停止备份</button>
                     </div>
+                    <p class="hint" id="inc-hint" hidden>本机没有该用户的收藏缓存，需先做一次全量备份。</p>
                     <div class="progress-block">
                         <div class="progress-line">
                             <span id="progress-stage">就绪</span>
@@ -320,7 +359,9 @@ function bindTarget(main) {
                 targetValue = value
                 input.value = value
                 paint()
-                // Disable target-bound actions before the debounced reload.
+                // The old target's count must not keep the incremental button
+                // clickable until the debounced read returns.
+                cacheTarget = ''
                 paintButtons()
                 updateTaskState()
             },
@@ -330,6 +371,8 @@ function bindTarget(main) {
     input.addEventListener('input', () => {
         targetValue = input.value
         paint()
+        cacheTarget = ''
+        paintButtons()
         clearTimeout(targetTimer)
         targetTimer = setTimeout(updateTaskState, 250)
     })
@@ -339,6 +382,9 @@ async function updateTaskState() {
     const target = targetValue.trim()
     await refreshTask()
     if (target !== targetValue.trim()) return
+    cacheCount = await readCacheCount(target)
+    if (target !== targetValue.trim()) return
+    cacheTarget = target
     syncProgressFromTask()
     paintTaskRecord()
     paintButtons()
@@ -445,10 +491,10 @@ function bindSettings(main) {
     const intervalSlot = main.querySelector('#interval-slot')
     const retrySlot = main.querySelector('#retry-slot')
     const intervalButton = makeMenuButton(
-        REQUEST_INTERVAL_OPTIONS.find(item => item.value === interval)?.label || String(interval)
+        requestIntervalOptions.find(item => item.value === interval)?.label || String(interval)
     )
     const retryButton = makeMenuButton(
-        REQUEST_RETRY_OPTIONS.find(item => item.value === maxRetries)?.label || String(maxRetries)
+        requestRetryOptions.find(item => item.value === maxRetries)?.label || String(maxRetries)
     )
     intervalSlot.appendChild(intervalButton)
     retrySlot.appendChild(retryButton)
@@ -456,15 +502,15 @@ function bindSettings(main) {
     intervalButton.addEventListener('click', () => {
         openMenu({
             anchor: intervalButton,
-            items: REQUEST_INTERVAL_OPTIONS.map(item => ({
+            items: requestIntervalOptions.map(item => ({
                 value: String(item.value),
                 label: item.label,
             })),
             current: String(interval),
             onPick: value => {
                 interval = Number(value)
-                localStorage.setItem(REQUEST_INTERVAL_KEY, String(interval))
-                paintMenuButton(intervalButton, REQUEST_INTERVAL_OPTIONS
+                localStorage.setItem(requestIntervalKey, String(interval))
+                paintMenuButton(intervalButton, requestIntervalOptions
                     .find(item => item.value === interval)?.label || value)
             },
         })
@@ -473,15 +519,15 @@ function bindSettings(main) {
     retryButton.addEventListener('click', () => {
         openMenu({
             anchor: retryButton,
-            items: REQUEST_RETRY_OPTIONS.map(item => ({
+            items: requestRetryOptions.map(item => ({
                 value: String(item.value),
                 label: item.label,
             })),
             current: String(maxRetries),
             onPick: value => {
                 maxRetries = Number(value)
-                localStorage.setItem(REQUEST_RETRY_KEY, String(maxRetries))
-                paintMenuButton(retryButton, REQUEST_RETRY_OPTIONS
+                localStorage.setItem(requestRetryKey, String(maxRetries))
+                paintMenuButton(retryButton, requestRetryOptions
                     .find(item => item.value === maxRetries)?.label || value)
             },
         })
@@ -519,7 +565,7 @@ async function discardCheckpoint() {
     paintButtons()
     try {
         const latest = await getTask(target, { includeCompleted: true })
-        if (latest.status !== TASK_STATUS.UNFINISHED || !latest.task) {
+        if (latest.status !== taskStatus.unfinished || !latest.task) {
             setNotice('目标「' + target + '」没有可放弃的断点', 'run')
             return
         }
@@ -546,20 +592,36 @@ async function discardCheckpoint() {
 async function startRun(mode) {
     if (running || starting || verifying) return
     starting = true
+    // The mask belongs to the startup only: once the run reports its first
+    // progress the page holds the stop button and needs the input back.
+    const loading = beginLoading('正在启动备份…', {
+        onCancel: () => runHandle?.stop(),
+        // The trigger is disabled for the whole run, so the stop button takes
+        // the focus once the mask closes.
+        returnFocus: () => document.getElementById('b-full'),
+        fallbackFocus: () => document.getElementById('b-stop'),
+    })
+    let ready = false
+    const markReady = () => {
+        if (ready) return
+        ready = true
+        loading.close()
+    }
     try {
-        await runBackup(mode)
+        await runBackup(mode, markReady)
     } catch (error) {
         setNotice('备份启动失败：' + (error?.message || error), 'run')
         paintStatus()
     } finally {
         starting = false
-        // runBackup's final render still saw starting=true; repaint so the
-        // discard button leaves its disabled startup state immediately.
+        // runBackup's final render still saw starting=true, so repaint before
+        // the mask restores focus.
         paintButtons()
+        loading.close()
     }
 }
 
-async function runBackup(mode) {
+async function runBackup(mode, markReady) {
     const target = targetValue.trim()
     if (!target) {
         setNotice('请填写备份目标', 'run')
@@ -585,7 +647,7 @@ async function runBackup(mode) {
     }
 
     if (mode === 'resume') {
-        if (taskInfo.status !== TASK_STATUS.UNFINISHED) {
+        if (taskInfo.status !== taskStatus.unfinished) {
             setNotice('该目标没有可继续的断点', 'run')
             paintButtons()
             paintStatus()
@@ -598,11 +660,26 @@ async function runBackup(mode) {
             paintStatus()
             return
         }
-    } else if (taskInfo.status === TASK_STATUS.UNFINISHED) {
+    } else if (taskInfo.status === taskStatus.unfinished) {
         setNotice('该目标已有未完成任务，请先继续或放弃断点', 'run')
         paintButtons()
         paintStatus()
         return
+    } else if (mode === 'incremental') {
+        // The button may have been painted from another target's count, so the
+        // start repeats the read before it commits.
+        const count = await readCacheCount(target)
+        if (!count) {
+            // Keep the button in step with the read that rejected it.
+            cacheCount = 0
+            cacheTarget = target
+            setNotice('本机没有该目标的收藏缓存，无法增量备份', 'run')
+            paintButtons()
+            paintStatus()
+            return
+        }
+        cacheCount = count
+        cacheTarget = target
     }
 
     running = true
@@ -618,7 +695,7 @@ async function runBackup(mode) {
     // The viewer may pick or leave a user while the run is in flight; remember
     // the view at this moment so the finish step can tell who chose last.
     const viewAtStart = state.data?.user?.username || ''
-    const clearedAtStart = localStorage.getItem(VIEW_CLEARED_KEY) || ''
+    const clearedAtStart = localStorage.getItem(viewClearedKey) || ''
 
     const handle = startBackup({
         username: target,
@@ -628,24 +705,26 @@ async function runBackup(mode) {
         maxRetries,
         onStage: (name, total) => {
             if (name === '完成') {
-                progress = { index: STAGE_LABELS.length, label: '完成', done: 1, total: 1 }
+                progress = { index: stageLabels.length, label: '完成', done: 1, total: 1 }
             } else {
                 // A new stage name resets the finished count even when two names
                 // share one node. The note is kept only for a mapped name, so an
                 // unknown stage never repeats its own text.
                 const base = name.split('（')[0]
-                const mapped = STAGE_INDEX_BY_NAME[base]
+                const mapped = stageIndexByName[base]
                 const index = mapped ?? progress.index
                 if (name !== progress.name || index !== progress.index) progress.done = 0
                 progress.name = name
                 progress.index = index
                 progress.total = total || 0
-                progress.label = mapped === undefined ? name : STAGE_LABELS[mapped] + name.slice(base.length)
+                progress.label = mapped === undefined ? name : stageLabels[mapped] + name.slice(base.length)
             }
+            markReady()
             paintProgress()
         },
         onProgress: done => {
             progress.done = done
+            markReady()
             paintProgress()
         },
         onLog: (message, type) => {
@@ -673,7 +752,7 @@ async function runBackup(mode) {
         await refreshTask()
         const viewed = state.data?.user?.username || ''
         const viewUnchanged = viewed === viewAtStart
-            && (localStorage.getItem(VIEW_CLEARED_KEY) || '') === clearedAtStart
+            && (localStorage.getItem(viewClearedKey) || '') === clearedAtStart
         // A user chosen after the run started wins over the backup target.
         if (viewed === target || (!viewed && viewUnchanged)) {
             // A first backup with no viewed user must still feed the collection
@@ -710,18 +789,17 @@ function paintTaskRecord() {
     const task = taskInfo.task
     let stateLabel = '无任务'
     if (running) stateLabel = '运行中'
-    else if (taskInfo.status === TASK_STATUS.UNFINISHED) stateLabel = '未完成'
-    else if (taskInfo.status === TASK_STATUS.COMPLETED) stateLabel = '已完成'
+    else if (taskInfo.status === taskStatus.unfinished) stateLabel = '未完成'
+    else if (taskInfo.status === taskStatus.completed) stateLabel = '已完成'
 
     if (!task) {
         el.innerHTML = `<p class="hint">${stateLabel === '运行中' ? '正在执行备份。' : '尚无任务记录。'}</p>`
         return
     }
 
-    const done = task.progress?.done || 0
-    const total = task.progress?.total || 0
+    const { done, total } = taskCounts(task)
     const updated = task.updated_at ? new Date(task.updated_at).toLocaleString() : '—'
-    const unfinished = taskInfo.status === TASK_STATUS.UNFINISHED
+    const unfinished = taskInfo.status === taskStatus.unfinished
     const authMismatch = unfinished
         && (task.auth_username || '') !== selectedAuth
     const resumeReady = unfinished && hasAuth() && !authMismatch
@@ -741,7 +819,7 @@ function paintTaskRecord() {
         : ''
     el.innerHTML = `
         <div class="task-row"><span>状态</span><strong>${stateLabel}</strong></div>
-        <div class="task-row"><span>模式</span><strong>${MODE_LABELS[task.mode] || task.mode}</strong></div>
+        <div class="task-row"><span>模式</span><strong>${modeLabels[task.mode] || task.mode}</strong></div>
         <div class="task-row"><span>授权 → 目标</span><strong>${escapeHtml((task.auth_username || '—') + ' → ' + targetValue)}</strong></div>
         <div class="task-row"><span>进度</span><strong>${done} / ${total}</strong></div>
         <div class="task-row"><span>更新</span><strong>${escapeHtml(updated)}</strong></div>
@@ -756,7 +834,7 @@ function paintButtons() {
         if (el) el.disabled = disabled
     }
     set('b-full', !canStart())
-    set('b-inc', !canStart())
+    set('b-inc', !canStartIncremental())
     set('b-resume', !canResume())
     set('b-discard', !canDiscard())
     set('b-stop', !running)
@@ -770,12 +848,19 @@ function paintButtons() {
 
     const discard = document.getElementById('b-discard')
     if (discard) {
-        const task = taskInfo.status === TASK_STATUS.UNFINISHED ? taskInfo.task : null
+        const task = taskInfo.status === taskStatus.unfinished ? taskInfo.task : null
         discard.dataset.target = task ? taskTarget : ''
         discard.dataset.taskId = task?.task_id || ''
     }
     const input = document.getElementById('target-input')
     if (input) input.disabled = running
+    const incHint = document.getElementById('inc-hint')
+    // Only a target that could otherwise start explains the missing cache, and
+    // only after its own count is read.
+    if (incHint) {
+        const known = cacheTarget === targetValue.trim()
+        incHint.hidden = !canStart() || !known || cacheCount > 0
+    }
 }
 
 function paintProgress() {
@@ -788,9 +873,11 @@ function paintProgress() {
     const bars = document.querySelectorAll('#stage-strip .stage-bar')
     bars.forEach((bar, index) => bar.classList.toggle('is-fill', index < progress.index))
 
+    // A finished run may hold no items at all; it is still complete.
+    const finished = progress.index >= stageLabels.length
     const ratio = progress.total > 0
         ? Math.min(100, Math.round(progress.done / progress.total * 100))
-        : 0
+        : finished ? 100 : 0
     const stageEl = document.getElementById('progress-stage')
     const ratioEl = document.getElementById('progress-ratio')
     const fillEl = document.getElementById('progress-fill')
@@ -798,7 +885,11 @@ function paintProgress() {
     if (stageEl) stageEl.textContent = progress.label || '就绪'
     if (ratioEl) ratioEl.textContent = ratio + '%'
     if (fillEl) fillEl.style.width = ratio + '%'
-    if (countEl) countEl.textContent = `${progress.done} / ${progress.total}`
+    if (countEl) {
+        countEl.textContent = finished && !progress.total
+            ? `${progress.done} 条`
+            : `${progress.done} / ${progress.total}`
+    }
 }
 
 function paintLog() {

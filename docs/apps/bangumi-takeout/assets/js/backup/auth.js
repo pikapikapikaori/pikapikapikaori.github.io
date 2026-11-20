@@ -1,19 +1,19 @@
 // Credentials live in the shared `credentials` store keyed by the verified
 // account name, so the export page and the viewer always see the same login.
 import {
-    AUTH_BASE, BANGUMI_CLIENT_ID, STORAGE_PREFIX, STORE_CREDENTIALS,
-    TOKEN_REFRESH_MARGIN_MS,
+    authBase, bangumiClientId, storagePrefix, storeCredentials,
+    tokenRefreshMarginMs,
 } from '../config.js'
 import { runTransaction } from '../storage.js'
 import { BangumiApi, fetchWithTimeout, proxied } from './api.js'
 
-const OAUTH_VERIFIER_KEY = STORAGE_PREFIX + 'oauth-verifier'
-const OAUTH_STATE_KEY = STORAGE_PREFIX + 'oauth-state'
+const oauthVerifierKey = storagePrefix + 'oauth-verifier'
+const oauthStateKey = storagePrefix + 'oauth-state'
 
 // storage.js owns the connection and recreates the database when a store is
 // missing, so credentials share one schema check and one transaction helper.
 function credentialRequest(mode, fn) {
-    return runTransaction(STORE_CREDENTIALS, mode, t => fn(t.objectStore(STORE_CREDENTIALS)))
+    return runTransaction(storeCredentials, mode, t => fn(t.objectStore(storeCredentials)))
 }
 
 function checkUsername(username) {
@@ -69,8 +69,8 @@ function sha256(text) {
 }
 
 function clearPending() {
-    sessionStorage.removeItem(OAUTH_VERIFIER_KEY)
-    sessionStorage.removeItem(OAUTH_STATE_KEY)
+    sessionStorage.removeItem(oauthVerifierKey)
+    sessionStorage.removeItem(oauthStateKey)
 }
 
 // The callback URL keeps `code` and `state`; both are single-use secrets, so
@@ -103,7 +103,7 @@ function tokenRecord(username, data, previous = null) {
 }
 
 async function requestToken(params, { signal = null } = {}) {
-    const { response, text } = await fetchWithTimeout(proxied(`${AUTH_BASE}/access_token`), {
+    const { response, text } = await fetchWithTimeout(proxied(`${authBase}/access_token`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(params),
@@ -139,18 +139,18 @@ export async function beginAuthorization() {
     const verifier = randStr(64)
     const challenge = b64url(await sha256(verifier))
     const state = randStr(16)
-    sessionStorage.setItem(OAUTH_VERIFIER_KEY, verifier)
-    sessionStorage.setItem(OAUTH_STATE_KEY, state)
+    sessionStorage.setItem(oauthVerifierKey, verifier)
+    sessionStorage.setItem(oauthStateKey, state)
 
     const params = new URLSearchParams({
-        client_id: BANGUMI_CLIENT_ID,
+        client_id: bangumiClientId,
         response_type: 'code',
         redirect_uri: getRedirectUri(),
         code_challenge: challenge,
         code_challenge_method: 'S256',
         state,
     })
-    location.href = `${AUTH_BASE}/authorize?${params}`
+    location.href = `${authBase}/authorize?${params}`
 }
 
 export async function finishAuthorization(search = location.search) {
@@ -166,8 +166,8 @@ export async function finishAuthorization(search = location.search) {
     if (!code) return null
 
     const state = params.get('state')
-    const verifier = sessionStorage.getItem(OAUTH_VERIFIER_KEY)
-    const savedState = sessionStorage.getItem(OAUTH_STATE_KEY)
+    const verifier = sessionStorage.getItem(oauthVerifierKey)
+    const savedState = sessionStorage.getItem(oauthStateKey)
     if (!savedState || state !== savedState) {
         clearPending()
         clearOAuthParams()
@@ -182,7 +182,7 @@ export async function finishAuthorization(search = location.search) {
     try {
         const data = await requestToken({
             grant_type: 'authorization_code',
-            client_id: BANGUMI_CLIENT_ID,
+            client_id: bangumiClientId,
             code,
             redirect_uri: getRedirectUri(),
             code_verifier: verifier,
@@ -199,7 +199,6 @@ export async function finishAuthorization(search = location.search) {
 export async function addAccessToken(token, { signal = null } = {}) {
     const clean = String(token || '').trim()
     if (!clean) throw new Error('访问令牌为空')
-    // No expiry is known for a pasted token: a 401 triggers the re-login flow.
     return storeVerified({ access_token: clean }, { signal })
 }
 
@@ -211,7 +210,7 @@ export async function refreshAccessToken(username, { signal = null } = {}) {
 
     const data = await requestToken({
         grant_type: 'refresh_token',
-        client_id: BANGUMI_CLIENT_ID,
+        client_id: bangumiClientId,
         refresh_token: record.refresh_token,
     }, { signal })
     const next = tokenRecord(username, data, record)
@@ -227,7 +226,7 @@ export async function requireAccessToken(username, { signal = null } = {}) {
     const expiresAt = Number(record.token_expires_at) || 0
     // A pasted token has no known expiry; keep using it until the API answers 401.
     if (!expiresAt) return record.access_token
-    if (Date.now() < expiresAt - TOKEN_REFRESH_MARGIN_MS) return record.access_token
+    if (Date.now() < expiresAt - tokenRefreshMarginMs) return record.access_token
     if (!record.refresh_token) throw new Error('访问令牌已过期，且没有刷新令牌，请重新登录')
     return refreshAccessToken(username, { signal })
 }

@@ -1,12 +1,12 @@
 // Only ZIP store (0) and deflate (8) are supported. Decompression uses the
 // native DecompressionStream('deflate-raw'), so no external dependency is needed.
-import { ZIP_MAX_OUTPUT_BYTES } from './config.js'
+import { zipMaxOutputBytes } from './config.js'
 
-const EOCD_SIG = 0x06054b50
-const CDFH_SIG = 0x02014b50
-const LFH_SIG = 0x04034b50
-const MAX_COMMENT = 0xFFFF
-const ALL_JSON_EXTENSIONS = ['.json', '.jsonl']
+const eocdSig = 0x06054b50
+const cdfhSig = 0x02014b50
+const lfhSig = 0x04034b50
+const maxComment = 0xFFFF
+const allJsonExtensions = ['.json', '.jsonl']
 
 function abortError() {
     const error = new Error('已取消导入')
@@ -29,18 +29,10 @@ function asBytes(arrayBuffer) {
     throw new Error('ZIP 数据格式不正确')
 }
 
-export function looksLikeZip(arrayBuffer) {
-    const bytes = asBytes(arrayBuffer)
-    if (bytes.length < 4 || bytes[0] !== 0x50 || bytes[1] !== 0x4b) return false
-    return (bytes[2] === 0x03 && bytes[3] === 0x04)
-        || (bytes[2] === 0x05 && bytes[3] === 0x06)
-        || (bytes[2] === 0x07 && bytes[3] === 0x08)
-}
-
 // Read the decompressed stream incrementally and stop as soon as the output
 // exceeds the remaining budget, instead of materialising the whole entry.
 async function inflateRaw(bytes, {
-    signal = null, maxBytes = ZIP_MAX_OUTPUT_BYTES, limitBytes = maxBytes,
+    signal = null, maxBytes = zipMaxOutputBytes, limitBytes = maxBytes,
 } = {}) {
     throwIfAborted(signal)
     if (maxBytes < 0) throw tooLargeError(limitBytes)
@@ -89,9 +81,9 @@ function readDirectory(arrayBuffer) {
     const dec = new TextDecoder('utf-8')
 
     let eocd = -1
-    const minPos = Math.max(0, bytes.length - MAX_COMMENT - 22)
+    const minPos = Math.max(0, bytes.length - maxComment - 22)
     for (let i = bytes.length - 22; i >= minPos; i--) {
-        if (view.getUint32(i, true) === EOCD_SIG) { eocd = i; break }
+        if (view.getUint32(i, true) === eocdSig) { eocd = i; break }
     }
     if (eocd < 0) throw new Error('不是有效的 ZIP 文件')
 
@@ -103,7 +95,7 @@ function readDirectory(arrayBuffer) {
     let p = cdOffset
     for (let i = 0; i < entryCount; i++) {
         if (p + 46 > bytes.length) throw new Error('ZIP 中央目录损坏')
-        if (view.getUint32(p, true) !== CDFH_SIG) throw new Error('ZIP 中央目录损坏')
+        if (view.getUint32(p, true) !== cdfhSig) throw new Error('ZIP 中央目录损坏')
         const method = view.getUint16(p + 10, true)
         const compSize = view.getUint32(p + 20, true)
         const size = view.getUint32(p + 24, true)
@@ -123,7 +115,7 @@ function readDirectory(arrayBuffer) {
 async function readEntry(bytes, view, entry, { signal, maxOutputBytes, limitBytes = maxOutputBytes }) {
     throwIfAborted(signal)
     if (entry.localOffset + 30 > bytes.length) throw new Error('ZIP 本地头越界')
-    if (view.getUint32(entry.localOffset, true) !== LFH_SIG) throw new Error('ZIP 本地头损坏')
+    if (view.getUint32(entry.localOffset, true) !== lfhSig) throw new Error('ZIP 本地头损坏')
     const nameLen = view.getUint16(entry.localOffset + 26, true)
     const extraLen = view.getUint16(entry.localOffset + 28, true)
     const dataStart = entry.localOffset + 30 + nameLen + extraLen
@@ -145,8 +137,8 @@ function normalizeExtensions(extensions) {
 }
 
 export async function unzip(arrayBuffer, {
-    signal = null, maxOutputBytes = ZIP_MAX_OUTPUT_BYTES,
-    extensions = ALL_JSON_EXTENSIONS,
+    signal = null, maxOutputBytes = zipMaxOutputBytes,
+    extensions = allJsonExtensions,
 } = {}) {
     throwIfAborted(signal)
     const { bytes, view, entries } = readDirectory(arrayBuffer)
@@ -160,8 +152,6 @@ export async function unzip(arrayBuffer, {
         // this reader does not parse, so leave the exact check to extraction.
         if (entry.size !== 0xFFFFFFFF) declaredTotal += entry.size
     }
-    // Reject an oversized archive from the central directory alone, before a
-    // single byte is inflated.
     if (declaredTotal > maxOutputBytes) throw tooLargeError(maxOutputBytes)
 
     const files = new Map()
@@ -182,8 +172,8 @@ export async function unzip(arrayBuffer, {
 
 // A static shard holds one line-delimited file. Reading only the first match
 // avoids expanding every member of a caller-supplied archive.
-export async function unzipFirst(arrayBuffer, {
-    signal = null, maxOutputBytes = ZIP_MAX_OUTPUT_BYTES,
+async function unzipFirst(arrayBuffer, {
+    signal = null, maxOutputBytes = zipMaxOutputBytes,
     extensions = ['.jsonl', '.json'],
 } = {}) {
     throwIfAborted(signal)
@@ -202,18 +192,12 @@ export async function unzipFirst(arrayBuffer, {
     throw new Error('ZIP 中没有找到 JSON 数据')
 }
 
-// Accepts both the packed shard and a plain JSONL response, because a server
-// or an older deployment may still serve the original file.
+// A static shard is always packed, so the text is decoded after inflating.
 export async function extractShardText(arrayBuffer, {
-    signal = null, maxOutputBytes = ZIP_MAX_OUTPUT_BYTES,
+    signal = null, maxOutputBytes = zipMaxOutputBytes,
 } = {}) {
     throwIfAborted(signal)
-    const bytes = asBytes(arrayBuffer)
-    if (!looksLikeZip(bytes)) {
-        if (bytes.byteLength > maxOutputBytes) throw tooLargeError(maxOutputBytes)
-        return new TextDecoder('utf-8').decode(bytes)
-    }
-    const entry = await unzipFirst(bytes, { signal, maxOutputBytes })
+    const entry = await unzipFirst(asBytes(arrayBuffer), { signal, maxOutputBytes })
     return new TextDecoder('utf-8').decode(entry.bytes)
 }
 

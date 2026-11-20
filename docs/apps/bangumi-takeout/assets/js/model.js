@@ -1,5 +1,5 @@
 import {
-    STATUS_BY_TYPE, CATEGORY_BY_SUBJECT_TYPE,
+    statusByType, categoryBySubjectType,
 } from './config.js'
 
 export function normalizeExport(raw) {
@@ -63,9 +63,8 @@ export function isValidSubjectId(subjectId) {
 function toRecord(entry) {
     const subject = entry?.subject
     if (!isValidSubjectId(subject?.id)) return null
-    const fetched = isProgressObject(entry.progress)
-    const record = { ...entry, subject_id: subject.id, progress_fetched: fetched }
-    if (!fetched) delete record.progress
+    const record = { ...entry, subject_id: subject.id }
+    if (!isProgressObject(entry.progress)) delete record.progress
     return record
 }
 
@@ -82,16 +81,47 @@ function pickMainEpisodes(epData) {
     return []
 }
 
+// Only what the collection view reads: the card, the search, the filters and
+// the sorting. The detail record is not touched here.
 function toViewItem(record) {
     const s = record.subject
     if (!s || !s.id) return null
+
+    return {
+        id: s.id,
+        cat: categoryBySubjectType[s.type] || 'other',
+
+        name: s.name || '',
+        nameCn: s.name_cn || '',
+        shortSummary: s.short_summary || '',
+        date: s.date || '',
+        images: s.images || {},
+        publicScore: typeof s.score === 'number' ? s.score : null,
+        rank: s.rank || 0,
+        eps: s.eps || 0,
+        volumes: s.volumes || 0,
+
+        status: statusByType[record.type] || 'unknown',
+        rate: typeof record.rate === 'number' ? record.rate : 0,
+        volStatus: record.vol_status || 0,
+        epStatus: record.ep_status || 0,
+        comment: record.comment || '',
+        myTags: Array.isArray(record.tags) ? record.tags : [],
+        updatedAt: record.updated_at || '',
+    }
+}
+
+// The detail page renders one merged record; episode objects are built here,
+// once, instead of for every item of a list.
+export function toDetailItem(record) {
+    const view = toViewItem(record)
+    if (!view) return null
 
     const sd = record.subject_data || {}
     const epData = record.ep_data || {}
     const mainEps = pickMainEpisodes(epData)
     const progress = record.progress || {}
-    const progressFetched = record.progress_fetched === true
-        || (record.progress_fetched === undefined && isProgressObject(record.progress))
+    const progressFetched = isProgressObject(record.progress)
     const watched = new Set(
         (Array.isArray(progress.eps) ? progress.eps : [])
             .filter(x => x.status && x.status.id === 2)
@@ -102,39 +132,16 @@ function toViewItem(record) {
         && (watchedCount > 0 || record.ep_status > 0 || record.vol_status > 0)
 
     return {
-        id: s.id,
-        cat: CATEGORY_BY_SUBJECT_TYPE[s.type] || 'other',
-        subjectType: s.type,
-
-        name: s.name || '',
-        nameCn: s.name_cn || '',
-        summary: sd.summary || s.short_summary || '',
-        shortSummary: s.short_summary || '',
-        date: s.date || '',
-        images: s.images || {},
-        publicScore: typeof s.score === 'number' ? s.score : null,
+        ...view,
+        summary: sd.summary || view.shortSummary || '',
         scoreDetails: sd.score_details || null,
         favorite: sd.favorite || null,
-        rank: s.rank || 0,
-        eps: s.eps || 0,
-        volumes: s.volumes || 0,
-        collectionTotal: s.collection_total || 0,
-        subjectTags: Array.isArray(s.tags) ? s.tags : [],
-        metaTags: Array.isArray(sd.meta_tags) ? sd.meta_tags : [],
-        nsfw: !!sd.nsfw,
         infobox: sd.infobox || '',
+        subjectTags: Array.isArray(record.subject?.tags) ? record.subject.tags : [],
 
-        status: STATUS_BY_TYPE[record.type] || 'unknown',
         progressFetched,
         hasWatchRecords,
         watchedCount,
-        rate: typeof record.rate === 'number' ? record.rate : 0,
-        volStatus: record.vol_status || 0,
-        epStatus: record.ep_status || 0,
-        comment: record.comment || '',
-        myTags: Array.isArray(record.tags) ? record.tags : [],
-        updatedAt: record.updated_at || '',
-
         episodes: mainEps
             .slice()
             .sort((a, b) => (a.sort || 0) - (b.sort || 0))

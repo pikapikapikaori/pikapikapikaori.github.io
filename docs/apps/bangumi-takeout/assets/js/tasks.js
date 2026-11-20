@@ -1,4 +1,4 @@
-import { INFO_SCOPE, TASK_MODES, TASK_RESUME, TASK_STAGES } from './config.js'
+import { infoScopes, taskModes, taskResume, taskStages } from './config.js'
 import { meta, updateMeta, assertCounts } from './storage.js'
 
 // Raised when an unfinished task already exists: the caller decides whether to
@@ -12,17 +12,17 @@ class TaskConflictError extends Error {
     }
 }
 
-export const TASK_STATUS = {
-    MISSING_META: 'missing_meta',
-    NO_TASK: 'no_task',
-    UNFINISHED: 'unfinished',
-    COMPLETED: 'completed',
+export const taskStatus = {
+    missingMeta: 'missing_meta',
+    noTask: 'no_task',
+    unfinished: 'unfinished',
+    completed: 'completed',
 }
 
 export function infoScopeFor(targetUsername, authUsername) {
     return authUsername && authUsername === targetUsername
-        ? INFO_SCOPE.PRIVATE
-        : INFO_SCOPE.PUBLIC
+        ? infoScopes.private
+        : infoScopes.public
 }
 
 function newTaskId() {
@@ -31,11 +31,12 @@ function newTaskId() {
 }
 
 function checkStage(stage) {
-    if (!TASK_STAGES.includes(stage)) throw new Error('未知任务阶段')
+    if (!taskStages.includes(stage)) throw new Error('未知任务阶段')
 }
 
-// `position` is only a stage-local counter shown for diagnostics; resume never
-// reads it, because it relies on `stage` plus the `done_ids` subject set.
+// `position` is a stage-local counter shown for diagnostics. Item stages resume
+// from `stage` plus the finished-id chunks stored under the task token; the
+// collection list resumes from the pages stored the same way.
 function checkPosition(position) {
     if (!Number.isInteger(position) || position < 0) throw new Error('任务位置必须为非负整数')
 }
@@ -46,10 +47,16 @@ function checkDoneSubjectId(subjectId) {
     }
 }
 
+function checkCollectionTotal(total) {
+    if (!Number.isInteger(total) || total < 0) {
+        throw new Error('收藏列表总数必须为非负整数')
+    }
+}
+
 // `resume` reads the unfinished task stored under the target username, so each
 // target keeps its own checkpoint.
 export async function beginTask(username, operation, { authUsername = '', stage, restart = false } = {}) {
-    if (operation === TASK_RESUME) {
+    if (operation === taskResume) {
         if (stage !== undefined) checkStage(stage)
         return updateMeta(username, record => {
             if (!record) throw new Error('没有该用户的资料')
@@ -62,8 +69,8 @@ export async function beginTask(username, operation, { authUsername = '', stage,
             return { record, value: task }
         })
     }
-    if (!TASK_MODES.includes(operation)) throw new Error('未知任务类型')
-    const nextStage = stage ?? TASK_STAGES[0]
+    if (!taskModes.includes(operation)) throw new Error('未知任务类型')
+    const nextStage = stage ?? taskStages[0]
     checkStage(nextStage)
 
     return updateMeta(username, record => {
@@ -76,7 +83,7 @@ export async function beginTask(username, operation, { authUsername = '', stage,
             auth_username: authUsername || '',
             stage: nextStage,
             position: 0,
-            done_ids: [],
+            done_count: 0,
             progress: { done: 0, total: 0 },
             incomplete: true,
             updated_at: Date.now(),
@@ -85,19 +92,23 @@ export async function beginTask(username, operation, { authUsername = '', stage,
     })
 }
 
+// A checkpoint writes the stage, its position and count, the one chunk that
+// holds the finished subject, and never the whole set: the finished ids are
+// chunked and the collection list is stored page by page.
 export async function advanceTask(username, taskId, {
-    stage, position, progress, doneSubjectId,
+    stage, position, progress, doneSubjectId, collectionTotal,
 } = {}) {
     if (!taskId) throw new Error('缺少任务令牌')
     if (stage !== undefined) checkStage(stage)
     if (position !== undefined) checkPosition(position)
     if (doneSubjectId !== undefined) checkDoneSubjectId(doneSubjectId)
+    if (collectionTotal !== undefined) checkCollectionTotal(collectionTotal)
     if (progress !== undefined
         && (!progress || typeof progress !== 'object' || Array.isArray(progress))) {
         throw new Error('任务进度格式错误')
     }
 
-    return updateMeta(username, record => {
+    return updateMeta(username, (record, ctx) => {
         const task = record?.task
         if (!task || task.task_id !== taskId || !task.incomplete) {
             return { record: null, value: null }
@@ -106,33 +117,18 @@ export async function advanceTask(username, taskId, {
             task.stage = stage
             task.position = position ?? 0
             // Records are completed per subject_id inside the current stage;
-            // a new stage starts with an empty set so list reordering is safe.
-            task.done_ids = []
+            // a new stage starts with no finished ids so list reordering is safe.
+            ctx.resetDone()
         } else if (position !== undefined) {
             task.position = position
         }
-        if (doneSubjectId !== undefined) {
-            if (!Array.isArray(task.done_ids)) task.done_ids = []
-            if (!task.done_ids.includes(doneSubjectId)) task.done_ids.push(doneSubjectId)
-        }
+        if (doneSubjectId !== undefined) ctx.appendDone(doneSubjectId)
+        if (collectionTotal !== undefined) task.collection_total = collectionTotal
         if (progress) {
             const next = { ...(task.progress || {}), ...progress }
             assertCounts(next, '任务进度')
             task.progress = next
         }
-        task.updated_at = Date.now()
-        return { record, value: task }
-    })
-}
-
-export async function finishTask(username, taskId) {
-    if (!taskId) throw new Error('缺少任务令牌')
-    return updateMeta(username, record => {
-        const task = record?.task
-        if (!task || task.task_id !== taskId || !task.incomplete) {
-            return { record: null, value: null }
-        }
-        task.incomplete = false
         task.updated_at = Date.now()
         return { record, value: task }
     })
@@ -151,11 +147,11 @@ export async function discardTask(username) {
 
 export async function getTask(username, { includeCompleted = false } = {}) {
     const record = await meta.get(username)
-    if (!record) return { status: TASK_STATUS.MISSING_META, task: null }
-    if (!record.task) return { status: TASK_STATUS.NO_TASK, task: null }
-    if (record.task.incomplete) return { status: TASK_STATUS.UNFINISHED, task: record.task }
+    if (!record) return { status: taskStatus.missingMeta, task: null }
+    if (!record.task) return { status: taskStatus.noTask, task: null }
+    if (record.task.incomplete) return { status: taskStatus.unfinished, task: record.task }
     return {
-        status: TASK_STATUS.COMPLETED,
+        status: taskStatus.completed,
         task: includeCompleted ? record.task : null,
     }
 }

@@ -5,6 +5,7 @@ import { listCredentials, removeCredential } from '../backup/auth.js'
 import { makeMenuButton, paintMenuButton } from '../dom.js'
 import { syncHeader } from '../layout.js'
 import { closeMenu, openMenu } from './menu.js'
+import { beginLoading } from './loading.js'
 
 let exportTarget = ''
 let credentialTarget = ''
@@ -27,7 +28,6 @@ export async function renderData() {
     const [records, credentials] = await Promise.all([meta.list(), listCredentials()])
     const recordNames = records.map(record => record.username).filter(Boolean)
     const counts = await Promise.all(recordNames.map(name => items.countByOwner(name)))
-    // The route may have changed while the stores were read.
     if (main.dataset.route !== 'data') return
     const cache = new Map()
     recordNames.forEach((name, index) => {
@@ -125,8 +125,9 @@ export async function renderData() {
     main.querySelector('#export-now').addEventListener('click', async () => {
         if (!exportTarget || busy) return
         busy = true
-        main.querySelector('#export-now').disabled = true
-        setStatus('正在导出…')
+        const trigger = main.querySelector('#export-now')
+        trigger.disabled = true
+        const loading = beginLoading('正在导出备份…', { returnFocus: trigger })
         try {
             const result = await exportUserData(exportTarget)
             downloadBlob(result.blob, result.filename)
@@ -135,8 +136,8 @@ export async function renderData() {
             setStatus(error?.message || String(error), 'error')
         } finally {
             busy = false
-            const button = main.querySelector('#export-now')
-            if (button) button.disabled = false
+            if (trigger.isConnected) trigger.disabled = false
+            loading.close()
         }
     })
 
@@ -144,7 +145,12 @@ export async function renderData() {
         if (busy) return
         if (!window.confirm('确定清除所有本地收藏缓存与断点吗？已保存凭证的账号会保留账号记录与凭证。')) return
         busy = true
-        setStatus('正在清除缓存…')
+        // The render below replaces the button; the status line is where the
+        // focus lands once the cache is gone.
+        const loading = beginLoading('正在清除缓存…', {
+            returnFocus: () => document.getElementById('clear-cache'),
+            fallbackFocus: () => document.getElementById('data-status'),
+        })
         try {
             await clearCachedData()
             clearCurrentUser()
@@ -157,6 +163,8 @@ export async function renderData() {
         } catch (error) {
             busy = false
             setStatus(error?.message || String(error), 'error')
+        } finally {
+            loading.close()
         }
     })
 

@@ -1,17 +1,17 @@
 import { importExport } from '../app.js'
 import { loadFromFile, loadFromUrl } from '../source.js'
 import { href } from '../config.js'
+import { beginLoading } from './loading.js'
 
 // The job outlives the page markup, so its state lives at module level and
 // every render reads it back instead of starting from an empty view.
 // 'idle' | 'loading' | 'writing'
 let phase = 'idle'
 let phaseLabel = ''
-let controller = null
 let viewToken = 0
 let applyState = () => {}
 
-const WRITING_STATUS = '正在写入数据库，此步骤不能取消'
+const writingStatus = '正在写入数据库，此步骤不能取消'
 
 function setStatus(container, message, kind = '') {
     const el = container.querySelector('#import-status')
@@ -42,7 +42,6 @@ export function renderImport() {
                 </div>
                 <div class="import-url-row">
                     <div class="form-status" id="import-status" role="status" aria-live="polite"></div>
-                    <button type="button" class="btn" id="import-cancel" hidden>取消</button>
                 </div>
             </div>
         </div>
@@ -52,17 +51,14 @@ export function renderImport() {
     const fileInput = main.querySelector('#import-file')
     const urlInput = main.querySelector('#import-url')
     const urlButton = main.querySelector('#import-url-btn')
-    const cancelButton = main.querySelector('#import-cancel')
 
     // Buttons follow the job, not the render: a page entered while a job runs
-    // must show the running status and, while it can still be stopped, the
-    // cancel entry.
+    // must show the running status.
     const sync = () => {
         const running = phase !== 'idle'
         urlButton.disabled = running
-        cancelButton.hidden = phase !== 'loading'
         if (phase === 'loading') setStatus(main, phaseLabel)
-        else if (phase === 'writing') setStatus(main, WRITING_STATUS)
+        else if (phase === 'writing') setStatus(main, writingStatus)
     }
     applyState = () => {
         if (token === viewToken) sync()
@@ -113,11 +109,6 @@ export function renderImport() {
         }
         load(signal => loadFromUrl(url, { signal }), '正在下载并解析…')
     })
-    cancelButton.addEventListener('click', () => {
-        if (phase !== 'loading' || !controller) return
-        setStatus(main, '正在取消…')
-        controller.abort()
-    })
     urlInput.addEventListener('keydown', event => {
         if (event.key === 'Enter') {
             event.preventDefault()
@@ -128,19 +119,27 @@ export function renderImport() {
     async function load(getRaw, label) {
         if (phase !== 'idle') return
         const jobController = new AbortController()
-        controller = jobController
         phase = 'loading'
         phaseLabel = label
         fileInput.value = ''
         applyState()
-        setStatus(main, label)
+        // The mask covers the page, so it carries the only reachable cancel.
+        const loading = beginLoading(label, {
+            onCancel: () => {
+                if (phase !== 'loading') return
+                setStatus(main, '正在取消…')
+                jobController.abort()
+            },
+            fallbackFocus: () => main.querySelector('#import-status'),
+        })
         try {
             const raw = await getRaw(jobController.signal)
             // The database write cannot be interrupted, so the cancel entry goes
             // away before it starts and the status says why.
             phase = 'writing'
             applyState()
-            setStatus(main, WRITING_STATUS)
+            setStatus(main, writingStatus)
+            loading.update({ label: writingStatus })
             await importExport(raw)
             phase = 'idle'
             applyState()
@@ -153,7 +152,7 @@ export function renderImport() {
             if (jobController.signal.aborted) setStatus(main, '已取消导入')
             else setStatus(main, error?.message || String(error), 'error')
         } finally {
-            if (controller === jobController) controller = null
+            loading.close()
         }
     }
 }

@@ -10,21 +10,18 @@ import { closeMenu } from './ui/menu.js'
 import { closeSearch } from './search.js'
 import { escapeHtml } from './dom.js'
 
-const BASE_TITLE = document.title
+const baseTitle = document.title
 
-const ROUTES = {
+const routes = {
     '/': { name: 'overview', nav: 'collection', render: renderOverviewPage },
-    '/detail': { name: 'detail', nav: 'collection', template: 'detail', render: renderDetailPage },
-    '/backup': { name: 'backup', nav: 'source', template: 'backup', render: renderBackupPage },
-    '/import': { name: 'import', nav: 'source', template: 'import', render: renderImportPage },
-    '/users': { name: 'users', nav: 'source', template: 'users', render: renderUsersPage },
-    '/data': { name: 'data', nav: 'data', template: 'data', render: renderDataPage },
-    '/about': { name: 'about', nav: 'about', template: 'about', render: renderAboutPage },
+    '/detail': { name: 'detail', nav: 'collection', title: '详情', render: renderDetailPage },
+    '/backup': { name: 'backup', nav: 'source', title: '备份', render: renderBackupPage },
+    '/import': { name: 'import', nav: 'source', title: '导入', render: renderImportPage },
+    '/users': { name: 'users', nav: 'source', title: '选择用户', render: renderUsersPage },
+    '/data': { name: 'data', nav: 'data', title: '数据管理', render: renderDataPage },
+    '/about': { name: 'about', nav: 'about', title: '关于', render: renderAboutPage },
 }
 
-// Templates are fetched once per session; the parsed title and skeleton are
-// kept so a repeat visit needs no request.
-const templateCache = new Map()
 // The collection page is the only route whose scroll position is restored, and
 // only when coming back from detail.
 const scrollMemory = new Map()
@@ -34,6 +31,39 @@ let activeKey = ''
 let activePath = ''
 let previousPath = ''
 let started = false
+
+// Callers that keep a mask up until the target page has painted wait on this
+// list; the render that owns the last sequence number settles it in its own
+// `finally`, and the timeout keeps a lost render from pinning the mask.
+const navigateTimeout = 10000
+let renderWaiters = []
+
+function settleRenderWaiters() {
+    const waiters = renderWaiters
+    renderWaiters = []
+    waiters.forEach(resolve => resolve())
+}
+
+export function navigate(target) {
+    return new Promise(resolve => {
+        if (target === location.hash) {
+            resolve()
+            return
+        }
+        let settled = false
+        const finish = () => {
+            if (settled) return
+            settled = true
+            clearTimeout(timer)
+            const index = renderWaiters.indexOf(finish)
+            if (index !== -1) renderWaiters.splice(index, 1)
+            resolve()
+        }
+        const timer = setTimeout(finish, navigateTimeout)
+        renderWaiters.push(finish)
+        location.href = target
+    })
+}
 
 function parseHash() {
     const raw = location.hash.slice(1)
@@ -50,24 +80,10 @@ function routeKey(path, params) {
     return query ? path + '?' + query : path
 }
 
-function loadTemplate(name) {
-    const cached = templateCache.get(name)
-    if (cached) return cached
-    const promise = fetch('./assets/html/' + name + '.html', { cache: 'no-store' })
-        .then(response => {
-            if (!response.ok) throw new Error('template ' + response.status)
-            return response.text()
-        })
-        .then(html => {
-            const doc = new DOMParser().parseFromString(html, 'text/html')
-            const host = doc.getElementById('main')
-            return { title: doc.title, markup: host ? host.innerHTML : '' }
-        })
-    // A rejected promise must leave the cache, otherwise retry would replay the
-    // same failure without another request.
-    promise.catch(() => templateCache.delete(name))
-    templateCache.set(name, promise)
-    return promise
+// A page passes the item name so the title follows what the page shows; an
+// empty title puts the document title back to the one in index.html.
+function setTitle(title) {
+    document.title = title ? title + ' - ' + baseTitle : baseTitle
 }
 
 function goBack() {
@@ -82,7 +98,7 @@ function goBack() {
 
 function renderError(main, error, route) {
     setActiveNav(route.nav)
-    document.title = BASE_TITLE
+    setTitle(route.title)
     main.dataset.route = 'error'
     main.innerHTML = `
         <div class="empty">
@@ -91,29 +107,30 @@ function renderError(main, error, route) {
         </div>
     `
     main.querySelector('#route-retry')?.addEventListener('click', () => {
-        if (route.template) templateCache.delete(route.template)
         renderRoute(true)
     })
 }
 
 async function renderRoute(force = false) {
-    const seq = ++renderSeq
     const main = document.getElementById('main')
     if (!main) return
 
     let { path, params } = parseHash()
-    let route = ROUTES[path]
+    let route = routes[path]
     if (!route || (path === '/detail' && !params.get('id'))) {
         // Unknown or incomplete routes fall back to the collection page without
         // adding a history entry.
         history.replaceState(history.state, '', '#/')
         path = '/'
         params = new URLSearchParams()
-        route = ROUTES[path]
+        route = routes[path]
     }
 
     const key = routeKey(path, params)
     if (!force && key === activeKey) return
+    // Taken after the shortcut above, so a repeated hash to the route that is
+    // still rendering does not discard that render.
+    const seq = ++renderSeq
     // Popups live outside #main, so replacing the page would leave them
     // floating over the next route.
     closeMenu()
@@ -129,37 +146,52 @@ async function renderRoute(force = false) {
     activePath = path
     activeKey = key
 
-    let template = null
-    if (route.template) {
-        try {
-            template = await loadTemplate(route.template)
-        } catch (error) {
-            if (seq !== renderSeq) return
-            renderError(main, error, route)
-            return
-        }
-        if (seq !== renderSeq) return
-    }
-
     setActiveNav(route.nav)
     syncHeader()
-    document.title = template?.title || BASE_TITLE
+    setTitle(route.title)
     main.dataset.route = route.name
-    main.innerHTML = template?.markup || ''
+    // Replacing a page that held the focus would otherwise drop it on the body.
+    const refocusMain = main.contains(document.activeElement)
+    main.innerHTML = ''
 
+    // A page that reads before it paints asks this before using the result: a
+    // later route, or the same route with another id, has taken over. Two
+    // detail routes share the same `main.dataset.route`, so the token compares
+    // the address too.
+    const isCurrent = () => {
+        if (seq !== renderSeq) return false
+        const now = parseHash()
+        return routeKey(now.path, now.params) === key
+    }
+
+    let failed = false
     try {
-        await route.render({ params, goBack })
+        await route.render({ params, goBack, setTitle, isCurrent })
     } catch (error) {
         // An error from a superseded render must not replace the new page.
         if (seq !== renderSeq) return
+        failed = true
         renderError(main, error, route)
-        return
+    } finally {
+        // A page reached from the data-source menu keeps a mask up until it has
+        // painted; a failure page ends the wait the same way.
+        if (seq === renderSeq) settleRenderWaiters()
     }
+    if (failed) return
     if (seq !== renderSeq) return
+
+    // The old page held the focus; the new page keeps it instead of the body.
+    if (refocusMain && document.activeElement === document.body) {
+        main.tabIndex = -1
+        main.focus({ preventScroll: true })
+    }
 
     const targetY = returning ? (scrollMemory.get('/') || 0) : 0
     // Wait for the new page's first layout; the document height is not final yet.
-    requestAnimationFrame(() => window.scrollTo(0, targetY))
+    requestAnimationFrame(() => {
+        if (seq !== renderSeq) return
+        window.scrollTo(0, targetY)
+    })
     syncHeader()
 }
 

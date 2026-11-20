@@ -1,5 +1,4 @@
 import { tryCache } from './app.js'
-import { cleanupLegacyStorage } from './storage.js'
 import { loadDefaultSource } from './config.js'
 
 // The shell is always shown, even without a selected user: the collection page
@@ -14,6 +13,5 @@ export async function boot({ render }) {
         await tryCache()
     } catch {}
 
-    cleanupLegacyStorage()
     await render()
 }

@@ -1,11 +1,11 @@
 import {
-    CORS_PROXY, IMPORT_TIMEOUT_MS, MAX_FILE_SIZE, ZIP_MAX_OUTPUT_BYTES,
+    corsProxy, importTimeoutMs, maxFileSize, zipMaxOutputBytes,
 } from './config.js'
 import { unzip, pickJson } from './zip.js'
 
 function proxy(url) {
-    if (!CORS_PROXY) return url
-    return CORS_PROXY.replace('{url}', encodeURIComponent(url))
+    if (!corsProxy) return url
+    return corsProxy.replace('{url}', encodeURIComponent(url))
 }
 
 function abortError(message = '已取消导入') {
@@ -15,7 +15,7 @@ function abortError(message = '已取消导入') {
 }
 
 function tooLargeError() {
-    const mb = Math.round(MAX_FILE_SIZE / 1024 / 1024)
+    const mb = Math.round(maxFileSize / 1024 / 1024)
     return new Error(`文件超过 ${mb} MB 大小上限`)
 }
 
@@ -45,7 +45,7 @@ async function readFileBytes(file, { signal = null } = {}) {
                 break
             }
             total += value.byteLength
-            if (total > MAX_FILE_SIZE) throw tooLargeError()
+            if (total > maxFileSize) throw tooLargeError()
             chunks.push(value)
         }
     } catch (error) {
@@ -74,11 +74,11 @@ function looksLikeZip(buf) {
 // counting every received chunk and aborting as soon as the budget is spent.
 async function readLimitedBody(response, { signal }) {
     const header = Number(response.headers.get('content-length'))
-    if (Number.isFinite(header) && header > MAX_FILE_SIZE) throw tooLargeError()
+    if (Number.isFinite(header) && header > maxFileSize) throw tooLargeError()
 
     if (!response.body || typeof response.body.getReader !== 'function') {
         const buf = await response.arrayBuffer()
-        if (buf.byteLength > MAX_FILE_SIZE) throw tooLargeError()
+        if (buf.byteLength > maxFileSize) throw tooLargeError()
         return buf
     }
 
@@ -95,7 +95,7 @@ async function readLimitedBody(response, { signal }) {
                 break
             }
             total += value.byteLength
-            if (total > MAX_FILE_SIZE) throw tooLargeError()
+            if (total > maxFileSize) throw tooLargeError()
             chunks.push(value)
         }
     } catch (error) {
@@ -122,7 +122,7 @@ async function fetchBinary(url, { signal = null } = {}) {
     const timer = setTimeout(() => {
         timedOut = true
         controller.abort()
-    }, IMPORT_TIMEOUT_MS)
+    }, importTimeoutMs)
     try {
         const res = await fetch(proxy(url), {
             credentials: 'omit', redirect: 'follow', signal: controller.signal,
@@ -131,7 +131,7 @@ async function fetchBinary(url, { signal = null } = {}) {
         return await readLimitedBody(res, { signal: controller.signal })
     } catch (error) {
         if (signal?.aborted) throw abortError()
-        if (timedOut) throw new Error(`请求超时（${Math.round(IMPORT_TIMEOUT_MS / 1000)} 秒）`)
+        if (timedOut) throw new Error(`请求超时（${Math.round(importTimeoutMs / 1000)} 秒）`)
         if (error?.name === 'AbortError') throw abortError()
         throw error
     } finally {
@@ -145,7 +145,7 @@ async function parseBinary(buf, { signal = null } = {}) {
     let jsonBytes
     if (looksLikeZip(buf)) {
         const files = await unzip(buf, {
-            signal, maxOutputBytes: ZIP_MAX_OUTPUT_BYTES, extensions: ['.json'],
+            signal, maxOutputBytes: zipMaxOutputBytes, extensions: ['.json'],
         })
         const name = pickJson(files)
         jsonBytes = files.get(name)
@@ -162,7 +162,7 @@ async function parseBinary(buf, { signal = null } = {}) {
 }
 
 export async function loadFromFile(file, { signal = null } = {}) {
-    if (file.size > MAX_FILE_SIZE) throw tooLargeError()
+    if (file.size > maxFileSize) throw tooLargeError()
     return parseBinary(await readFileBytes(file, { signal }), { signal })
 }
 

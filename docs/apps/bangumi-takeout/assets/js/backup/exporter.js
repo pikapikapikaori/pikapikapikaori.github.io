@@ -1,12 +1,17 @@
-// Exports the stored items in the takeout.json format shared with the
-// bangumi-takeout-py project.
+// Writes one user as the takeout.json file shared with the bangumi-takeout-py
+// project. One transaction reads the list records, the detail records and the
+// meta record, so the file is one consistent snapshot, and the two halves of
+// each item are joined back into one entry. `progress` stays in the file
+// because the format carries it; `owner` is local bookkeeping. The `progress_at`
+// stamp that says whether a stored progress is still current belongs to the
+// list half, so the join drops it and it never reaches the file.
 import { readUserExport } from '../storage.js'
 
-const INTERNAL_FIELDS = ['owner', 'expiresAt', 'progress_fetched']
+const internalFields = ['owner']
 
 function toExportEntry(record) {
     const entry = { ...record }
-    for (const field of INTERNAL_FIELDS) delete entry[field]
+    for (const field of internalFields) delete entry[field]
     return entry
 }
 

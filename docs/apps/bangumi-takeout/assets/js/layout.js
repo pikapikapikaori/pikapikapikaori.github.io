@@ -1,8 +1,10 @@
 import { state, clearCurrentUser } from './app.js'
 import { applyTheme, getTheme } from './theme.js'
-import { THEME_LABELS, THEME_MODES, THEME_ICONS, href } from './config.js'
+import { themeLabels, themeModes, themeIcons, href } from './config.js'
 import { initSearch, closeSearch } from './search.js'
 import { buildFooter } from './footer.js'
+import { beginLoading } from './ui/loading.js'
+import { navigate } from './router.js'
 
 const headerEvents = new AbortController()
 let layoutReady = false
@@ -43,7 +45,7 @@ function buildHeader() {
                 <div id="global-search-panel" class="search-panel" hidden></div>
             </div>
             <div class="header-actions">
-                <button type="button" id="theme-btn" class="icon-btn" title="主题">${THEME_ICONS.auto}</button>
+                <button type="button" id="theme-btn" class="icon-btn" title="主题">${themeIcons.auto}</button>
                 <div class="user-menu" id="user-menu" hidden>
                     <button type="button" class="user-trigger" id="user-trigger" aria-haspopup="true" aria-expanded="false">
                         <img id="user-avatar" alt="">
@@ -144,7 +146,15 @@ function bindDataSource() {
     pop.querySelectorAll('.datasrc-item').forEach(item => {
         item.addEventListener('click', () => {
             close()
-            location.href = item.dataset.href
+            const target = item.dataset.href
+            // Repeating the current hash fires no route render, so nothing
+            // would ever remove the mask.
+            if (target === location.hash) return
+            // Adding or switching the data source opens a page that reads the
+            // stores before it paints; the mask covers that read and closes when
+            // that render settles, or at its own timeout.
+            const loading = beginLoading('正在打开…', { returnFocus: button })
+            navigate(target).finally(() => loading.close())
         })
     })
 
@@ -191,7 +201,6 @@ function bindUserMenu() {
         // stay in place.
         clearCurrentUser()
         syncHeader()
-        // Clicking from #/ writes the same hash, which fires no hashchange.
         const atCollection = location.hash === href.index
         location.href = href.index
         if (atCollection) window.dispatchEvent(new Event('app:rerender'))
@@ -203,14 +212,14 @@ function bindThemeButton() {
     if (!button) return
     const update = () => {
         const mode = getTheme()
-        button.title = '主题：' + THEME_LABELS[mode]
-        button.innerHTML = mode === 'dark' ? THEME_ICONS.dark : mode === 'light' ? THEME_ICONS.light : THEME_ICONS.auto
+        button.title = '主题：' + themeLabels[mode]
+        button.innerHTML = mode === 'dark' ? themeIcons.dark : mode === 'light' ? themeIcons.light : themeIcons.auto
     }
     update()
     button.addEventListener('click', () => {
         const current = getTheme()
-        const index = THEME_MODES.indexOf(current)
-        applyTheme(THEME_MODES[(index + 1) % THEME_MODES.length])
+        const index = themeModes.indexOf(current)
+        applyTheme(themeModes[(index + 1) % themeModes.length])
         update()
     })
 }

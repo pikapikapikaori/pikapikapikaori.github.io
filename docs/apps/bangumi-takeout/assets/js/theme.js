@@ -1,4 +1,4 @@
-import { THEME_STORAGE_KEY, THEME_MODES } from './config.js'
+import { themeStorageKey, themeModes } from './config.js'
 
 const mq = window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -9,14 +9,14 @@ function resolve(mode) {
 }
 
 export function applyTheme(mode) {
-    if (!THEME_MODES.includes(mode)) mode = 'auto'
-    localStorage.setItem(THEME_STORAGE_KEY, mode)
+    if (!themeModes.includes(mode)) mode = 'auto'
+    localStorage.setItem(themeStorageKey, mode)
     const real = resolve(mode)
     document.documentElement.dataset.theme = real
     document.documentElement.dataset.themeMode = mode
 }
 
 export function getTheme() {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY)
-    return THEME_MODES.includes(saved) ? saved : 'auto'
+    const saved = localStorage.getItem(themeStorageKey)
+    return themeModes.includes(saved) ? saved : 'auto'
 }

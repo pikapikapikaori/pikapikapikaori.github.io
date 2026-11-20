@@ -27,7 +27,6 @@ export function openMenu({ anchor, items, current, onPick, emptyText = '暂无�
                     data-value="${escapeHtml(item.value)}" aria-selected="${selected}">
                     <span class="menu-label">
                         <span>${escapeHtml(item.label)}</span>
-                        ${item.sub ? `<span class="menu-sub">${escapeHtml(item.sub)}</span>` : ''}
                     </span>
                     ${item.tag ? `<span class="cred-tag">${escapeHtml(item.tag)}</span>` : ''}
                     ${selected ? '<span class="menu-check" aria-hidden="true">✓</span>' : ''}

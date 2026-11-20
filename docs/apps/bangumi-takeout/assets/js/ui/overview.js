@@ -1,11 +1,11 @@
 import { state } from '../app.js'
 import {
-    CATEGORIES, STATUS_ORDER, SORT_OPTIONS, DEFAULT_SORT,
-    SORT_DIRECTION_LABELS, DEFAULT_SORT_DIRECTION, SORT_DIRECTION_ICONS,
-    RATE_FILTER_OPTIONS, DEFAULT_RATE_FILTER, DEFAULT_TAG_FILTER,
-    STATUS_LABELS, COMMON_STATUS_LABELS,
-    PAGE_SIZE_OPTIONS, DEFAULT_PAGE_SIZE,
-    STATE_KEY, href,
+    categories, statusOrder, sortOptions, defaultSort,
+    sortDirectionLabels, defaultSortDirection, sortDirectionIcons,
+    rateFilterOptions, defaultRateFilter, defaultTagFilter,
+    statusLabels, commonStatusLabels,
+    pageSizeOptions, defaultPageSize,
+    stateKey, href,
 } from '../config.js'
 import { sortItems, filterByRate, filterByTag, countByCategory } from '../model.js'
 import { escapeHtml, makeMenuButton } from '../dom.js'
@@ -13,51 +13,37 @@ import { closeMenu, openMenu } from './menu.js'
 
 let currentCat = 'anime'
 let currentStatus = 'doing'
-let currentSort = DEFAULT_SORT
-let currentOrder = DEFAULT_SORT_DIRECTION
-let currentRateFilter = DEFAULT_RATE_FILTER
-let currentTagFilter = DEFAULT_TAG_FILTER
+let currentSort = defaultSort
+let currentOrder = defaultSortDirection
+let currentRateFilter = defaultRateFilter
+let currentTagFilter = defaultTagFilter
 let currentPage = 1
-let pageSize = DEFAULT_PAGE_SIZE
+let pageSize = defaultPageSize
 let initialized = false
 let activeUser = ''
 
 function resetViewState() {
     currentCat = 'anime'
     currentStatus = 'doing'
-    currentSort = DEFAULT_SORT
-    currentOrder = DEFAULT_SORT_DIRECTION
-    currentRateFilter = DEFAULT_RATE_FILTER
-    currentTagFilter = DEFAULT_TAG_FILTER
+    currentSort = defaultSort
+    currentOrder = defaultSortDirection
+    currentRateFilter = defaultRateFilter
+    currentTagFilter = defaultTagFilter
     currentPage = 1
-    pageSize = DEFAULT_PAGE_SIZE
+    pageSize = defaultPageSize
 }
 
 function resetPage() { currentPage = 1 }
 
 function getStateKey() {
     const username = state.data?.user?.username
-    return username ? `${STATE_KEY}:${username}` : STATE_KEY
-}
-
-const LEGACY_SORTS = {
-    rate_desc: ['rate', 'desc'], rate_asc: ['rate', 'asc'],
-    updated_desc: ['updated', 'desc'], updated_asc: ['updated', 'asc'],
+    return username ? `${stateKey}:${username}` : stateKey
 }
 
 function readSort(value, order) {
     const raw = String(value ?? '')
-    if (SORT_OPTIONS.some(o => o.key === raw)) {
-        currentSort = raw
-        currentOrder = order === 'asc' ? 'asc' : DEFAULT_SORT_DIRECTION
-        return
-    }
-    // Old versions stored the sort field and direction as one value. date_* was
-    // removed together with the release-date sort and did not mean the same as
-    // 时间, so it falls back to the default sort along with unknown values.
-    const hit = LEGACY_SORTS[raw]
-    currentSort = hit ? hit[0] : DEFAULT_SORT
-    currentOrder = hit ? hit[1] : DEFAULT_SORT_DIRECTION
+    currentSort = sortOptions.some(o => o.key === raw) ? raw : defaultSort
+    currentOrder = order === 'asc' ? 'asc' : defaultSortDirection
 }
 
 function initState() {
@@ -65,12 +51,12 @@ function initState() {
         const raw = localStorage.getItem(getStateKey())
         if (raw) {
             const s = JSON.parse(raw)
-            if (s.cat && CATEGORIES.some(c => c.key === s.cat)) currentCat = s.cat
-            if (s.status && STATUS_ORDER.includes(s.status)) currentStatus = s.status
+            if (s.cat && categories.some(c => c.key === s.cat)) currentCat = s.cat
+            if (s.status && statusOrder.includes(s.status)) currentStatus = s.status
             if (s.sort) readSort(s.sort, s.order)
-            if (RATE_FILTER_OPTIONS.some(o => o.key === s.rate)) currentRateFilter = s.rate
+            if (rateFilterOptions.some(o => o.key === s.rate)) currentRateFilter = s.rate
             if (typeof s.tag === 'string') currentTagFilter = s.tag
-            if (s.pageSize && PAGE_SIZE_OPTIONS.includes(Number(s.pageSize))) {
+            if (s.pageSize && pageSizeOptions.includes(Number(s.pageSize))) {
                 pageSize = Number(s.pageSize)
             }
             const page = Number(s.page)
@@ -141,14 +127,14 @@ export function renderOverview() {
     const counts = countByCategory(items)
     const catCount = counts[currentCat] || { total: 0, byStatus: {} }
 
-    const catStatuses = STATUS_ORDER.map(k => ({
+    const catStatuses = statusOrder.map(k => ({
         key: k,
-        label: STATUS_LABELS[currentCat]?.[k] || COMMON_STATUS_LABELS[k] || k,
+        label: statusLabels[currentCat]?.[k] || commonStatusLabels[k] || k,
     }))
 
     main.innerHTML = `
         <div class="tabs" id="cat-tabs">
-            ${CATEGORIES.map(c => `
+            ${categories.map(c => `
                 <button type="button" class="tab ${c.key === currentCat ? 'is-active' : ''}" data-cat="${c.key}">
                 ${c.label}<span class="tab-count">${counts[c.key]?.total || 0}</span>
                 </button>
@@ -194,12 +180,12 @@ export function renderOverview() {
         <div id="pagination-container"></div>
     `
 
-    const sortButton = makeMenuButton(SORT_OPTIONS.find(o => o.key === currentSort)?.label || '')
+    const sortButton = makeMenuButton(sortOptions.find(o => o.key === currentSort)?.label || '')
     sortButton.id = 'sort-select-btn'
     main.querySelector('#sort-slot').appendChild(sortButton)
 
     const rateButton = makeMenuButton(
-        RATE_FILTER_OPTIONS.find(o => o.key === currentRateFilter)?.label || ''
+        rateFilterOptions.find(o => o.key === currentRateFilter)?.label || ''
     )
     rateButton.id = 'rate-select-btn'
     main.querySelector('#rate-slot').appendChild(rateButton)
@@ -228,7 +214,7 @@ export function renderOverview() {
     sortButton.addEventListener('click', () => {
         openMenu({
             anchor: sortButton,
-            items: SORT_OPTIONS.map(o => ({ value: o.key, label: o.label })),
+            items: sortOptions.map(o => ({ value: o.key, label: o.label })),
             current: currentSort,
             onPick: value => {
                 currentSort = value
@@ -249,7 +235,7 @@ export function renderOverview() {
     rateButton.addEventListener('click', () => {
         openMenu({
             anchor: rateButton,
-            items: RATE_FILTER_OPTIONS.map(o => ({ value: o.key, label: o.label })),
+            items: rateFilterOptions.map(o => ({ value: o.key, label: o.label })),
             current: currentRateFilter,
             onPick: value => {
                 currentRateFilter = value
@@ -267,7 +253,7 @@ export function renderOverview() {
     pageSizeButton.addEventListener('click', () => {
         openMenu({
             anchor: pageSizeButton,
-            items: PAGE_SIZE_OPTIONS.map(n => ({ value: String(n), label: String(n) })),
+            items: pageSizeOptions.map(n => ({ value: String(n), label: String(n) })),
             current: String(pageSize),
             onPick: value => {
                 pageSize = Number(value)
@@ -283,8 +269,8 @@ export function renderOverview() {
 
 function paintOrderButton(button) {
     const next = currentOrder === 'desc' ? 'asc' : 'desc'
-    const label = `排序方向：${SORT_DIRECTION_LABELS[currentOrder]}（点击切换为${SORT_DIRECTION_LABELS[next]}）`
-    button.innerHTML = SORT_DIRECTION_ICONS[currentOrder]
+    const label = `排序方向：${sortDirectionLabels[currentOrder]}（点击切换为${sortDirectionLabels[next]}）`
+    button.innerHTML = sortDirectionIcons[currentOrder]
     button.setAttribute('aria-label', label)
     button.title = label
 }

@@ -4,6 +4,7 @@ import { listCredentials } from '../backup/auth.js'
 import { loadFromUrl } from '../source.js'
 import { getDefaultSource, href } from '../config.js'
 import { escapeHtml, unique } from '../dom.js'
+import { beginLoading } from './loading.js'
 
 let busy = false
 let viewToken = 0
@@ -72,7 +73,7 @@ export async function renderUsers() {
     const buttons = Array.from(main.querySelectorAll('[data-user]'))
     buttons.forEach(button => {
         button.addEventListener('click', () => choose(
-            button.dataset.user, buttons, button.dataset.credential === '1', main, token
+            button.dataset.user, buttons, button.dataset.credential === '1', main, token, button
         ))
     })
 }
@@ -103,17 +104,17 @@ function redirectIfCurrent(main, token) {
     return true
 }
 
-async function choose(name, buttons, hasCredential, main, token) {
+async function choose(name, buttons, hasCredential, main, token, trigger) {
     if (!name || busy) return
     busy = true
     buttons.forEach(button => { button.disabled = true })
-    setStatus('正在切换查看…')
+    const loading = beginLoading('正在切换到 ' + name + '…', { returnFocus: trigger || null })
     try {
         let activeName = name
         let hit = await loadUser(name)
         // The built-in default user may exist only in the bundled export.
         if ((!hit || !hit.items.length) && name === defaultUsername) {
-            setStatus('正在加载默认数据…')
+            loading.setLabel('正在加载默认数据…')
             try {
                 const raw = await loadFromUrl(defaultDataUrl)
                 await importExport(raw)
@@ -122,8 +123,6 @@ async function choose(name, buttons, hasCredential, main, token) {
                 // label may differ from the account the file actually contains.
                 activeName = hit?.user?.username || name
             } catch (error) {
-                // Missing default data must not block an account that only has
-                // a credential.
                 if (!hasCredential) throw error
                 hit = null
             }
@@ -137,7 +136,6 @@ async function choose(name, buttons, hasCredential, main, token) {
                 const empty = await loadUser(name)
                 state.data = empty || { user: { username: name }, generatedAt: 0, items: [] }
                 selectUser(name)
-                busy = false
                 redirectIfCurrent(main, token)
                 return
             }
@@ -145,11 +143,12 @@ async function choose(name, buttons, hasCredential, main, token) {
         }
         state.data = hit
         selectUser(activeName)
-        busy = false
         redirectIfCurrent(main, token)
     } catch (error) {
         setStatus(error?.message || String(error), 'error')
+    } finally {
         busy = false
         buttons.forEach(button => { button.disabled = false })
+        loading.close()
     }
 }

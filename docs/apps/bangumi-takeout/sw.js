@@ -1,27 +1,28 @@
 'use strict'
 
-const SCOPE_URL = new URL(self.registration.scope)
-const SCOPE_PATH = SCOPE_URL.pathname
-const CACHE_PREFIX = 'bangumi-takeout:static:'
-/* The manifest lists the app's own files. Static data shards are not part of
- *  it: the backup page reads them on demand and caches nothing itself. */
-const MANIFEST_PATH = 'assets/resources/meta/file-cache.json'
-const MANIFEST_URL = new URL(MANIFEST_PATH, SCOPE_URL).href
-const RECORD_URL = new URL('__cache-record__', SCOPE_URL).href
-const CRITICAL_EXTS = ['js', 'css', 'html']
-const FONT_EXTS = ['woff2', 'woff', 'ttf', 'otf', 'eot']
-const SAVE_EVERY = 20
-const STAGES = ['critical', 'fonts', 'rest']
-const ROOT_PATHS = [SCOPE_PATH]
+const scopeUrl = new URL(self.registration.scope)
+const scopePath = scopeUrl.pathname
+const cachePrefix = 'bangumi-takeout:static:'
+/* The manifest also lists every static data shard, so the prefetch stores them
+ *  and checks each against its hash. The backup page then reads a stored shard
+ *  from the cache without a request. */
+const manifestPath = 'assets/resources/meta/file-cache.json'
+const manifestUrl = new URL(manifestPath, scopeUrl).href
+const recordUrl = new URL('__cache-record__', scopeUrl).href
+const criticalExts = ['js', 'css', 'html']
+const fontExts = ['woff2', 'woff', 'ttf', 'otf', 'eot']
+const saveEvery = 20
+const stages = ['critical', 'fonts', 'rest']
+const rootPaths = [scopePath]
 /* Manifest hashes are the first 16 hex digits of sha256. */
-const HASH_HEX = /^[0-9a-f]{16}$/i
+const hashHex = /^[0-9a-f]{16}$/i
 /* The limit measures the time without data, so a slow but healthy transfer is
  *  never cut off. A page waits less than the prefetch behind it. */
-const FOREGROUND_IDLE_TIMEOUT_MS = 15000
-const BACKGROUND_IDLE_TIMEOUT_MS = 30000
-const MANIFEST_TIMEOUT_MS = 10000
-const STUCK_FETCH_MS = 5000
-const FAILURE_LIMIT = 3
+const foregroundIdleTimeoutMs = 15000
+const backgroundIdleTimeoutMs = 30000
+const manifestTimeoutMs = 10000
+const stuckFetchMs = 5000
+const failureLimit = 3
 /* A backup pause has no time limit. A pause recorded under a client id ends
  *  when that client sends the resume, when that client disappears, or when a
  *  newer pause of the same client takes over. A pause recorded under a bare
@@ -33,12 +34,12 @@ const FAILURE_LIMIT = 3
  *  remembered by the watermark of its session, which outlives the entry it came
  *  from; the oldest of many sessions is dropped first. The two tables have
  *  separate limits, so retired plain tokens are not pushed out by sessions. */
-const RETIRED_TOKENS_MAX = 50
-const PAUSE_SESSIONS_MAX = 50
+const retiredTokensMax = 50
+const pauseSessionsMax = 50
 /* A backup token is `${session}:${sequence}`, and the sequence is a plain
  *  positive integer. A sign, exponent, fraction, leading zero or an empty part
  *  does not order two pauses and is refused. */
-const TOKEN_SEQUENCE = /^[1-9][0-9]*$/
+const tokenSequence = /^[1-9][0-9]*$/
 
 let pathHash = null
 let serving = []
@@ -70,7 +71,7 @@ function extOf (path) {
 function ownCacheNames () {
     return caches.keys().then(function (names) {
         return names.filter(function (name) {
-            return name.indexOf(CACHE_PREFIX) === 0
+            return name.indexOf(cachePrefix) === 0
         })
     })
 }
@@ -79,7 +80,7 @@ function pathHashOf (manifest) {
     const map = {}
     const files = (manifest && manifest.files) || []
     for (let i = 0; i < files.length; i++) {
-        map[new URL(files[i].path, SCOPE_URL).pathname] = files[i].hash
+        map[new URL(files[i].path, scopeUrl).pathname] = files[i].hash
     }
     return map
 }
@@ -88,8 +89,8 @@ function splitStages (files) {
     const groups = [[], [], []]
     for (let i = 0; i < files.length; i++) {
         const ext = extOf(files[i].path)
-        if (CRITICAL_EXTS.indexOf(ext) !== -1) groups[0].push(files[i])
-        else if (FONT_EXTS.indexOf(ext) !== -1) groups[1].push(files[i])
+        if (criticalExts.indexOf(ext) !== -1) groups[0].push(files[i])
+        else if (fontExts.indexOf(ext) !== -1) groups[1].push(files[i])
         else groups[2].push(files[i])
     }
     return groups
@@ -105,15 +106,15 @@ async function readJson (cache, url) {
 }
 
 function readRecord (cache) {
-    return readJson(cache, RECORD_URL)
+    return readJson(cache, recordUrl)
 }
 
 function readSnapshot (cache) {
-    return readJson(cache, MANIFEST_URL)
+    return readJson(cache, manifestUrl)
 }
 
 function saveRecord (cache, record) {
-    return cache.put(RECORD_URL, new Response(JSON.stringify(record), {
+    return cache.put(recordUrl, new Response(JSON.stringify(record), {
         headers: { 'content-type': 'application/json' }
     }))
 }
@@ -124,7 +125,7 @@ function allowOf (record, hashes) {
     const allow = {}
     if (!record || !record.files) return allow
     for (const path in record.files) {
-        const pathname = new URL(path, SCOPE_URL).pathname
+        const pathname = new URL(path, scopeUrl).pathname
         if (hashes[pathname] === record.files[path]) allow[pathname] = true
     }
     return allow
@@ -175,7 +176,7 @@ function ensureState () {
 }
 
 function isDigest (hash) {
-    return typeof hash === 'string' && HASH_HEX.test(hash)
+    return typeof hash === 'string' && hashHex.test(hash)
 }
 
 function digestPrefix (buffer) {
@@ -200,7 +201,7 @@ async function contentMatches (buffer, hash) {
  *  length headers would describe the wrong bytes after a cache read. Every
  *  other end-to-end header is kept: cache directives and a content security
  *  policy belong to the stored copy as much as to the live response. */
-const OMITTED_HEADERS = [
+const omittedHeaders = [
     'content-encoding', 'content-length', 'connection', 'keep-alive',
     'transfer-encoding', 'te', 'trailer', 'upgrade',
     'proxy-authenticate', 'proxy-authorization',
@@ -209,7 +210,7 @@ const OMITTED_HEADERS = [
 function responseHeaders (source) {
     const headers = new Headers()
     for (const [name, value] of source) {
-        if (OMITTED_HEADERS.indexOf(name.toLowerCase()) !== -1) continue
+        if (omittedHeaders.indexOf(name.toLowerCase()) !== -1) continue
         headers.append(name, value)
     }
     return headers
@@ -288,7 +289,7 @@ function watchedStream (stream, onEnd) {
     const waitForReader = function () {
         if (ended || reading) return
         if (holdTimer) clearTimeout(holdTimer)
-        holdTimer = setTimeout(end, FOREGROUND_IDLE_TIMEOUT_MS)
+        holdTimer = setTimeout(end, foregroundIdleTimeoutMs)
     }
     waitForReader()
     return new ReadableStream({
@@ -368,7 +369,7 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
         if (entry.idleTimer) clearTimeout(entry.idleTimer)
         entry.idleTimer = setTimeout(function () {
             abortShared(entry)
-        }, entry.foreground > 0 ? FOREGROUND_IDLE_TIMEOUT_MS : BACKGROUND_IDLE_TIMEOUT_MS)
+        }, entry.foreground > 0 ? foregroundIdleTimeoutMs : backgroundIdleTimeoutMs)
     }
     const fail = function (error) {
         entry.failed = true
@@ -450,7 +451,7 @@ function scheduleStuckAbort (entry) {
     if (entry.settled || entry.pausedAbort) return
     if (entry.foreground > 0) return
     if (entry.stuckTimer) clearTimeout(entry.stuckTimer)
-    const wait = Math.max(0, STUCK_FETCH_MS - (Date.now() - entry.lastActivity))
+    const wait = Math.max(0, stuckFetchMs - (Date.now() - entry.lastActivity))
     entry.stuckTimer = setTimeout(function () {
         entry.stuckTimer = null
         /* A page request may have joined the same URL while the grace ran;
@@ -498,7 +499,7 @@ function networkResult (url, hash, signal) {
 }
 
 async function serve (pathname, signal) {
-    const url = new URL(pathname, SCOPE_URL).href
+    const url = new URL(pathname, scopeUrl).href
     for (let i = 0; i < serving.length; i++) {
         const item = serving[i]
         if (item.allow && !item.allow[pathname]) continue
@@ -514,8 +515,8 @@ async function serve (pathname, signal) {
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
-    if (ROOT_PATHS.indexOf(pathname) === -1) return null
-    const key = SCOPE_PATH + 'index.html'
+    if (rootPaths.indexOf(pathname) === -1) return null
+    const key = scopePath + 'index.html'
     return pathHash[key] ? key : null
 }
 
@@ -611,8 +612,8 @@ async function runGroup (ctx, list) {
             continue
         }
         const attempts = ctx.record.misses[entry.path] || 0
-        if (attempts >= FAILURE_LIMIT) continue
-        const url = new URL(entry.path, SCOPE_URL).href
+        if (attempts >= failureLimit) continue
+        const url = new URL(entry.path, scopeUrl).href
         const result = await acquire(ctx, url, entry)
         if (result === 'paused') {
             await saveRecord(ctx.cache, ctx.record)
@@ -622,12 +623,12 @@ async function runGroup (ctx, list) {
             /* Content that does not match the manifest is not retried in this
              *  version: the same URL would deliver the same bytes. A transport
              *  failure is retried on a later load, up to the limit. */
-            const next = result === 'mismatch' ? FAILURE_LIMIT : attempts + 1
+            const next = result === 'mismatch' ? failureLimit : attempts + 1
             ctx.record.misses[entry.path] = next
             ctx.record.reasons[entry.path] = result
-            if (!ctx.repair && next < FAILURE_LIMIT) pending += 1
+            if (!ctx.repair && next < failureLimit) pending += 1
             sinceSave += 1
-            if (sinceSave >= SAVE_EVERY) {
+            if (sinceSave >= saveEvery) {
                 sinceSave = 0
                 await saveRecord(ctx.cache, ctx.record)
             }
@@ -637,7 +638,7 @@ async function runGroup (ctx, list) {
         if (ctx.record.reasons[entry.path]) delete ctx.record.reasons[entry.path]
         ctx.record.files[entry.path] = entry.hash
         sinceSave += 1
-        if (sinceSave >= SAVE_EVERY) {
+        if (sinceSave >= saveEvery) {
             sinceSave = 0
             await saveRecord(ctx.cache, ctx.record)
         }
@@ -649,8 +650,8 @@ async function runGroup (ctx, list) {
 async function runGroups (ctx, groups, index) {
     for (let i = index; i < groups.length; i++) {
         if (!await runGroup(ctx, groups[i])) return false
-        if (i + 1 < STAGES.length && !ctx.repair) {
-            ctx.record.stage = STAGES[i + 1]
+        if (i + 1 < stages.length && !ctx.repair) {
+            ctx.record.stage = stages[i + 1]
             await saveRecord(ctx.cache, ctx.record)
         }
     }
@@ -704,13 +705,13 @@ async function fetchManifest (signal) {
     const controller = new AbortController()
     const timer = setTimeout(function () {
         controller.abort()
-    }, MANIFEST_TIMEOUT_MS)
+    }, manifestTimeoutMs)
     const onAbort = function () {
         controller.abort()
     }
     if (signal) signal.addEventListener('abort', onAbort, { once: true })
     try {
-        const response = await fetch(MANIFEST_URL, { cache: 'no-store', signal: controller.signal })
+        const response = await fetch(manifestUrl, { cache: 'no-store', signal: controller.signal })
         if (!response.ok) throw new Error('manifest ' + response.status)
         return await response.json()
     } finally {
@@ -767,7 +768,7 @@ async function run () {
         const hashes = pathHashOf(manifest)
         stateGeneration++
         pathHash = hashes
-        const targetName = CACHE_PREFIX + manifest.version + ':' + manifest.hash
+        const targetName = cachePrefix + manifest.version + ':' + manifest.hash
         const target = await caches.open(targetName)
         currentCache = target
         const record = (await readRecord(target)) || { stage: 'critical', files: {}, misses: {}, reasons: {} }
@@ -790,10 +791,10 @@ async function run () {
             repair: record.stage === 'done',
         }
         const groups = splitStages(manifest.files || [])
-        const index = ctx.repair ? 0 : Math.max(0, STAGES.indexOf(record.stage))
+        const index = ctx.repair ? 0 : Math.max(0, stages.indexOf(record.stage))
         if (!await runGroups(ctx, groups, index)) return
 
-        await target.put(MANIFEST_URL, new Response(JSON.stringify(manifest), {
+        await target.put(manifestUrl, new Response(JSON.stringify(manifest), {
             headers: { 'content-type': 'application/json' }
         }))
         record.stage = 'done'
@@ -908,13 +909,13 @@ function retireToken (token) {
         const held = pauseWatermarks.get(order.session) || 0
         pauseWatermarks.delete(order.session)
         pauseWatermarks.set(order.session, Math.max(held, order.sequence))
-        while (pauseWatermarks.size > PAUSE_SESSIONS_MAX) {
+        while (pauseWatermarks.size > pauseSessionsMax) {
             pauseWatermarks.delete(pauseWatermarks.keys().next().value)
         }
         return
     }
     retiredTokens.set(token, true)
-    while (retiredTokens.size > RETIRED_TOKENS_MAX) {
+    while (retiredTokens.size > retiredTokensMax) {
         retiredTokens.delete(retiredTokens.keys().next().value)
     }
 }
@@ -935,7 +936,7 @@ function tokenOrderOf (token) {
     const at = text.lastIndexOf(':')
     if (at <= 0) return null
     const digits = text.slice(at + 1)
-    if (!TOKEN_SEQUENCE.test(digits)) return null
+    if (!tokenSequence.test(digits)) return null
     const sequence = Number(digits)
     if (!Number.isSafeInteger(sequence)) return null
     return { session: text.slice(0, at), sequence: sequence }
@@ -1063,8 +1064,8 @@ self.addEventListener('fetch', function (event) {
     if (event.request.method !== 'GET') return
     if (!isCacheableRequest(event.request)) return
     const url = new URL(event.request.url)
-    if (url.origin !== SCOPE_URL.origin) return
-    if (SCOPE_PATH !== '/' && url.pathname.indexOf(SCOPE_PATH) !== 0) return
+    if (url.origin !== scopeUrl.origin) return
+    if (scopePath !== '/' && url.pathname.indexOf(scopePath) !== 0) return
 
     event.waitUntil(pruneClosedPauses().catch(function () {}))
 

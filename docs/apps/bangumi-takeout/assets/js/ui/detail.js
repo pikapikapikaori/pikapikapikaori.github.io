@@ -1,33 +1,73 @@
 import { state } from '../app.js'
+import { items } from '../storage.js'
+import { toDetailItem } from '../model.js'
 import {
-    CATEGORIES, 
-    STATUS_LABELS, 
+    categories,
+    statusLabels,
     href,
 } from '../config.js'
 import { escapeHtml } from '../dom.js'
 
-export function renderDetail(id, { goBack } = {}) {
+export async function renderDetail(id, { goBack, isCurrent } = {}) {
     const main = document.getElementById('main')
     if (!main) return
     if (!state.data) {
         renderEmpty(main, '尚无本地数据，请先备份或导入。', goBack)
-        return
+        return null
     }
     if (!Number.isInteger(id)) {
         renderEmpty(main, '条目编号无效。', goBack)
-        return
+        return null
     }
 
-    const item = state.data.items.find(it => it.id === id)
+    const username = state.data.user.username
+    const listed = state.data.items.find(it => it.id === id)
+    if (!listed) {
+        renderEmpty(main, '未找到该条目。', goBack)
+        return null
+    }
+
+    // The list holds only the display fields, so the detail record of this one
+    // item is read here. The read is asynchronous: the address, the render
+    // token or the viewed user may have moved on, and both detail routes share
+    // `main.dataset.route`, so that value alone cannot identify this page.
+    const stale = () => main.dataset.route !== 'detail'
+        || (isCurrent && !isCurrent())
+        || state.data?.user?.username !== username
+    const { record, hasDetail } = await items.getWithDetail(username, id)
+    if (stale()) return null
+
+    if (!record) {
+        renderEmpty(main, '未找到该条目。', goBack)
+        return null
+    }
+    if (!hasDetail) {
+        // Without its detail half the entry can show no progress, and the
+        // version stamp on the list would keep the next incremental run from
+        // asking for it again.
+        let message = '详情数据未取得，下次备份时补全。'
+        try {
+            await items.clearProgressValidity(username, id)
+        } catch {
+            // The empty state answers this page; a failed cleanup only weakens
+            // the next backup and must not replace it with an error page.
+            message = '详情数据未取得，下次备份时补全；清除进度有效期失败，下次备份可能仍跳过该条目。'
+        }
+        if (stale()) return null
+        renderEmpty(main, message, goBack)
+        return listed.nameCn || listed.name
+    }
+    const item = toDetailItem(record)
     if (!item) {
         renderEmpty(main, '未找到该条目。', goBack)
-        return
+        return null
     }
 
-    const catLabel = CATEGORIES.find(c => c.key === item.cat)?.label || item.cat
+    const displayName = item.nameCn || item.name
+    const catLabel = categories.find(c => c.key === item.cat)?.label || item.cat
     const statusLabel = item.status === 'onhold' ? '搁置'
         : item.status === 'dropped' ? '抛弃'
-            : STATUS_LABELS[item.cat]?.[item.status] || item.status
+            : statusLabels[item.cat]?.[item.status] || item.status
     // Imported JSON is untrusted: numbers go through Number(), strings through
     // escapeHtml(); the cover URL is assigned as a DOM property below.
     const eps = toNumber(item.eps)
@@ -51,7 +91,7 @@ export function renderDetail(id, { goBack } = {}) {
             </aside>
 
             <div class="detail-main">
-                <h1 class="detail-title">${escapeHtml(item.nameCn || item.name)}</h1>
+                <h1 class="detail-title">${escapeHtml(displayName)}</h1>
                 ${item.nameCn && item.name !== item.nameCn
                     ? `<div class="detail-subtitle">${escapeHtml(item.name)}</div>` : ''}
 
@@ -122,6 +162,8 @@ export function renderDetail(id, { goBack } = {}) {
     paintCover(main, coverUrl)
     bindEpisodeToggles(main)
     bindBack(main, goBack)
+    // The page title uses this name, so the display-name rule stays here.
+    return displayName
 }
 
 function renderEmpty(main, message, goBack) {

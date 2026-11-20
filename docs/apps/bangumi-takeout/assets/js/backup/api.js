@@ -1,43 +1,33 @@
-// Bangumi API requests plus the static subject and episode data source.
-// api.bgm.tv sends no CORS headers, so every request goes through the proxy.
 import {
-    API_BASE, PROXY_URL, REQUEST_INTERVAL_LIMITS, REQUEST_RETRY_LIMITS, REQUEST_TIMEOUT_MS,
-    RETRY_AFTER_MAX_MS, RETRY_WAIT_MS, STATIC_CHUNK_MAX_BYTES, STATIC_CHUNK_MAX_OUTPUT_BYTES,
-    STATIC_DATA_IDLE_TIMEOUT_MS,
+    apiBase, proxyUrl, requestIntervalLimits, requestRetryLimits, requestTimeoutMs,
+    retryAfterMaxMs, retryWaitMs, staticChunkMaxBytes, staticChunkMaxOutputBytes,
+    staticDataIdleTimeoutMs,
 } from '../config.js'
 import { parseShard } from '../worker/chunk.js'
 
-// A wedged worker must not hold the backup open forever; a shard parses well
-// under this bound, and the caller falls back to the main thread.
-const CHUNK_WORKER_TIMEOUT_MS = 30000
+const chunkWorkerTimeoutMs = 30000
 
-// A hidden page throttles timers to about once a minute, so one beat per
-// 20 seconds still lets a restarted worker restore the pause.
-const PAUSE_HEARTBEAT_MS = 20000
+const pauseHeartbeatMs = 20000
 
-// A static read releases the pause a moment after it ends; the next read of the
-// same source keeps it, so no download starts between two phases. The backup
-// run itself holds the pause and never waits for this timer.
-const PAUSE_IDLE_MS = 3000
+const pauseIdleMs = 3000
 
 // /v0/episodes accepts these types only; asking for another one fails.
-const EP_TYPE_KEYS = [0, 1, 2, 3, 4, 6]
+const epTypeKeys = [0, 1, 2, 3, 4, 6]
 
-// An episode without a usable type still exists in the static snapshot. Both
-// data paths keep it in this fixed bucket so the two shapes stay comparable.
-const EP_TYPE_UNKNOWN = 'unknown'
+// An episode without a usable type still exists in the static snapshot. 
+const epTypeUnknown = 'unknown'
 
 function emptyEpisodeGroups() {
     const groups = {}
-    for (const key of EP_TYPE_KEYS) groups[String(key)] = []
-    groups[EP_TYPE_UNKNOWN] = []
+    for (const key of epTypeKeys) groups[String(key)] = []
+    groups[epTypeUnknown] = []
     return groups
 }
 
 function groupEpisodesByType(episodes) {
     const grouped = emptyEpisodeGroups()
     for (const episode of episodes) {
-        const key = episode.type == null ? EP_TYPE_UNKNOWN : String(episode.type)
+        const key = episode.type == null ? epTypeUnknown : String(episode.type)
         if (!grouped[key]) grouped[key] = []
         grouped[key].push(episode)
     }
@@ -52,15 +42,15 @@ function clampTo(value, limit) {
 
 export function normalizeRequestSettings({ interval, maxRetries } = {}) {
     return {
-        interval: clampTo(interval, REQUEST_INTERVAL_LIMITS),
-        maxRetries: clampTo(maxRetries, REQUEST_RETRY_LIMITS),
+        interval: clampTo(interval, requestIntervalLimits),
+        maxRetries: clampTo(maxRetries, requestRetryLimits),
     }
 }
 
-const ABORT_MESSAGE = '__ABORTED__'
+const abortMessage = '__ABORTED__'
 
 export function abortError() {
-    const error = new Error(ABORT_MESSAGE)
+    const error = new Error(abortMessage)
     error.name = 'AbortedError'
     return error
 }
@@ -68,7 +58,7 @@ export function abortError() {
 export function isAbortError(error) {
     return !!error && (error.name === 'AbortedError'
         || error.name === 'AbortError'
-        || error.message === ABORT_MESSAGE)
+        || error.message === abortMessage)
 }
 
 function sleep(ms, signal = null) {
@@ -94,8 +84,8 @@ function sleep(ms, signal = null) {
 }
 
 export function proxied(url) {
-    if (!PROXY_URL) return url
-    let base = PROXY_URL
+    if (!proxyUrl) return url
+    let base = proxyUrl
     if (!base.includes('?url=') && !base.includes('?target=')) {
         base = base.replace(/\?$/, '') + (base.includes('?') ? '&' : '?') + 'url='
     }
@@ -110,11 +100,6 @@ function timeoutError(ms, { idle = false } = {}) {
     return error
 }
 
-// The body is read under the same abort signal as the request, so a stalled
-// body stream is bounded by the caller's abort and by the request deadline.
-// With `idleTimeout`, the stream is consumed incrementally and `onActivity`
-// restarts the timer on every chunk; a multi-megabyte static chunk therefore
-// only fails when the transfer truly stops sending data.
 async function readBody(response, signal, { idleTimeout = null, onActivity = null } = {}) {
     try {
         if (idleTimeout == null || !response.body || typeof response.body.getReader !== 'function') {
@@ -137,34 +122,23 @@ async function readBody(response, signal, { idleTimeout = null, onActivity = nul
             parts.push(decoder.decode())
         } finally {
             if (!complete) {
-                // A cancelled, timed-out or broken stream rejects cancel();
-                // handle that rejection so the stop path never logs an
-                // unhandled promise rejection.
                 reader.cancel().catch(() => {})
             }
         }
         return { text: parts.join(''), complete }
     } catch (error) {
         if (signal?.aborted || isAbortError(error)) throw abortError()
-        // The stream failed before `done`; record that the body really is
-        // incomplete instead of leaving the flag permanently true.
         if (error && typeof error === 'object') error.complete = false
         throw error
     }
 }
 
-// Every fetch goes through here: a stalled proxy must not hang a backup, and
-// the caller's abort signal must still win over the local timer. The timer is
-// cleared only after the body was read, never when the response head arrives.
-// `signal` is a third-argument option on purpose: fetch init also accepts a
-// `signal`, and passing both silently drops the caller's abort, so an init
-// signal is rejected loudly instead of being ignored.
+// `signal` is a third-argument option on purpose.
 export async function fetchWithTimeout(url, init = {}, {
-    signal = null, timeout = REQUEST_TIMEOUT_MS, idleTimeout = null,
+    signal = null, timeout = requestTimeoutMs, idleTimeout = null,
 } = {}) {
     if (init && Object.prototype.hasOwnProperty.call(init, 'signal')) {
         const error = new Error('fetchWithTimeout: signal 必须通过第三个参数传入，不能放在 fetch init 中')
-        // A wiring mistake is not a transport failure: retrying cannot fix it.
         error.retryable = false
         throw error
     }
@@ -185,8 +159,6 @@ export async function fetchWithTimeout(url, init = {}, {
     arm()
     try {
         const response = await fetch(url, { ...init, signal: controller.signal })
-        // The response head proves the connection is alive; start a fresh
-        // idle window before waiting for the first body chunk.
         if (idleTimeout != null) arm()
         const { text, complete } = await readBody(response, controller.signal, {
             idleTimeout,
@@ -209,7 +181,7 @@ export async function fetchWithTimeout(url, init = {}, {
 }
 
 function chunkTooLargeError() {
-    const mb = Math.round(STATIC_CHUNK_MAX_BYTES / 1024 / 1024)
+    const mb = Math.round(staticChunkMaxBytes / 1024 / 1024)
     return new Error(`静态分片超过 ${mb} MB 上限`)
 }
 
@@ -252,8 +224,7 @@ async function readBodyBytes(response, signal, { arm = null, maxBytes }) {
     }
 }
 
-// A shard may be a ZIP or a plain JSONL file. The body is counted as it
-// arrives so a missing or false Content-Length cannot bypass the cap.
+// A shard is a ZIP. The body is counted as it arrives.
 async function fetchChunkBytes(url, { signal = null } = {}) {
     if (signal?.aborted) throw abortError()
     const controller = new AbortController()
@@ -264,7 +235,7 @@ async function fetchChunkBytes(url, { signal = null } = {}) {
         timer = setTimeout(() => {
             timedOut = true
             controller.abort()
-        }, STATIC_DATA_IDLE_TIMEOUT_MS)
+        }, staticDataIdleTimeoutMs)
     }
     const onAbort = () => controller.abort()
     signal?.addEventListener('abort', onAbort, { once: true })
@@ -277,15 +248,15 @@ async function fetchChunkBytes(url, { signal = null } = {}) {
             throw error
         }
         const header = Number(response.headers.get('content-length'))
-        if (Number.isFinite(header) && header > STATIC_CHUNK_MAX_BYTES) throw chunkTooLargeError()
+        if (Number.isFinite(header) && header > staticChunkMaxBytes) throw chunkTooLargeError()
         if (response.body && typeof response.body.getReader === 'function') arm()
         return await readBodyBytes(response, controller.signal, {
-            arm, maxBytes: STATIC_CHUNK_MAX_BYTES,
+            arm, maxBytes: staticChunkMaxBytes,
         })
     } catch (error) {
         if (signal?.aborted) throw abortError()
         if (timedOut || error?.name === 'TimeoutError') {
-            throw timeoutError(STATIC_DATA_IDLE_TIMEOUT_MS, { idle: true })
+            throw timeoutError(staticDataIdleTimeoutMs, { idle: true })
         }
         if (isAbortError(error)) throw abortError()
         throw error
@@ -304,8 +275,6 @@ function createChunkWorker() {
     }
 }
 
-// The page and the worker use one parser; a worker that cannot start or dies
-// falls back to the main thread without turning a readable shard into a loss.
 function postServiceWorkerMessage(type, payload = {}) {
     if (typeof navigator === 'undefined' || !navigator.serviceWorker) return
     const message = { type, ...payload }
@@ -325,19 +294,17 @@ function isRetryableStatus(status) {
     return status === 429 || status >= 500
 }
 
-// Returns the parsed delay in milliseconds and whether the value exceeded the
-// cap. Callers clamp and log once per request, with the request path.
 function retryAfterMs(value) {
     if (!value) return { ms: null, truncated: false }
     const seconds = Number(value)
     if (Number.isFinite(seconds) && seconds >= 0) {
         const ms = Math.round(seconds * 1000)
-        return { ms, truncated: ms > RETRY_AFTER_MAX_MS }
+        return { ms, truncated: ms > retryAfterMaxMs }
     }
     const date = Date.parse(value)
     if (!Number.isNaN(date)) {
         const ms = Math.max(0, date - Date.now())
-        return { ms, truncated: ms > RETRY_AFTER_MAX_MS }
+        return { ms, truncated: ms > retryAfterMaxMs }
     }
     return { ms: null, truncated: false }
 }
@@ -368,8 +335,6 @@ function invalidJsonError(path, response, text, cause) {
     const error = new Error(`响应不是有效的 JSON: ${path} · HTTP ${response.status} · Content-Type: ${type} · ${text.slice(0, 120)} · 解析错误: ${parser}`)
     error.status = response.status
     error.code = 'INVALID_JSON'
-    // An empty or parser-confirmed truncated body is a transport failure worth
-    // retrying; a complete non-JSON body is an answer, not a dropped packet.
     error.retryable = text.trim() === '' || isTruncatedJsonMessage(parser)
     return error
 }
@@ -390,7 +355,7 @@ export class BangumiApi {
     }
 
     buildUrl(path, params) {
-        let url = API_BASE + path
+        let url = apiBase + path
         if (params) {
             const query = new URLSearchParams(params).toString()
             url += (url.includes('?') ? '&' : '?') + query
@@ -410,8 +375,6 @@ export class BangumiApi {
             let response
             let text
             try {
-                // The abort signal belongs in the options argument; putting it
-                // in the fetch init made fetchWithTimeout drop it silently.
                 ({ response, text } = await fetchWithTimeout(proxied(this.buildUrl(path, params)), {
                     headers: {
                         'Authorization': 'Bearer ' + this.token,
@@ -420,15 +383,11 @@ export class BangumiApi {
                 }, { signal: this.signal }))
             } catch (error) {
                 if (isAbortError(error) || this.signal?.aborted) throw abortError()
-                // A wiring error is not a transport failure; retrying it would
-                // only repeat the same mistake after a pointless wait.
                 if (error?.retryable === false) throw error
-                // Timeouts and transport failures are retried; a cancelled run
-                // above is never rewritten into a parse or network error.
                 lastError = error
                 if (attempt < this.maxRetries) {
-                    this.onRetry?.(`请求失败: ${error.message}`, attempt, this.maxRetries, RETRY_WAIT_MS)
-                    await sleep(RETRY_WAIT_MS, this.signal)
+                    this.onRetry?.(`请求失败: ${error.message}`, attempt, this.maxRetries, retryWaitMs)
+                    await sleep(retryWaitMs, this.signal)
                 }
                 continue
             }
@@ -442,8 +401,8 @@ export class BangumiApi {
                     lastError = invalid
                     if (!invalid.retryable) throw invalid
                     if (attempt < this.maxRetries) {
-                        this.onRetry?.(`请求失败: ${invalid.message}`, attempt, this.maxRetries, RETRY_WAIT_MS)
-                        await sleep(RETRY_WAIT_MS, this.signal)
+                        this.onRetry?.(`请求失败: ${invalid.message}`, attempt, this.maxRetries, retryWaitMs)
+                        await sleep(retryWaitMs, this.signal)
                     }
                     continue
                 }
@@ -466,14 +425,14 @@ export class BangumiApi {
                 if (status === 429 || status === 503) {
                     const parsed = retryAfterMs(response.headers.get('retry-after'))
                     if (parsed.ms != null) {
-                        retryAfter = Math.min(parsed.ms, RETRY_AFTER_MAX_MS)
+                        retryAfter = Math.min(parsed.ms, retryAfterMaxMs)
                         if (parsed.truncated && !retryAfterLogged) {
                             retryAfterLogged = true
-                            this.onLog?.(`Retry-After 超过上限: ${path} · ${parsed.ms}ms 已截断为 ${RETRY_AFTER_MAX_MS}ms`, 'warn')
+                            this.onLog?.(`Retry-After 超过上限: ${path} · ${parsed.ms}ms 已截断为 ${retryAfterMaxMs}ms`, 'warn')
                         }
                     }
                 }
-                const wait = retryAfter ?? RETRY_WAIT_MS
+                const wait = retryAfter ?? retryWaitMs
                 this.onRetry?.(`请求失败: ${error.message}`, attempt, this.maxRetries, wait)
                 await sleep(wait, this.signal)
             }
@@ -538,7 +497,7 @@ async function fetchEpisodeType(api, subjectId, typeKey) {
 
 export async function fetchEpisodeData(api, subjectId, { onSkip = null } = {}) {
     const result = emptyEpisodeGroups()
-    for (const typeKey of EP_TYPE_KEYS) {
+    for (const typeKey of epTypeKeys) {
         try {
             result[typeKey] = await fetchEpisodeType(api, subjectId, typeKey)
         } catch (error) {
@@ -552,10 +511,10 @@ export async function fetchEpisodeData(api, subjectId, { onSkip = null } = {}) {
     return result
 }
 
-const BGM_DIRS = { subject: 'subjects', episode: 'episodes' }
+const bgmDirs = { subject: 'subjects', episode: 'episodes' }
 
 // Each kind is sorted by one id, and a shard declares the range it covers.
-const SHARD_RANGES = {
+const shardRanges = {
     subject: { minKey: 'min_id', maxKey: 'max_id' },
     episode: { minKey: 'min_subject_id', maxKey: 'max_subject_id' },
 }
@@ -564,7 +523,7 @@ const SHARD_RANGES = {
 // string. A wrong range silently sends the lookup to a shard without the id, so
 // the caller scans every shard instead of trusting a bad order.
 function manifestProblem(kind, data) {
-    const { minKey, maxKey } = SHARD_RANGES[kind]
+    const { minKey, maxKey } = shardRanges[kind]
     const chunks = data.chunks
     if (!chunks.length) return '清单没有分片'
     let previousMax = null
@@ -687,17 +646,16 @@ function staticEpisodesShort(available, expected) {
 
 // Only the first few per-subject notes are written, so shard failures stay
 // visible in the log; the rest are counted in one closing line.
-const EPISODE_NOTE_LIMIT = 5
+const episodeNoteLimit = 5
 
 // The stage note tells the reader which reason started a wider read. The retry
 // note stays neutral because a failed fetch and a shard-level unzip error share
 // the same retry pass.
-const NOTE_UNRELIABLE = '（清单不可靠，扫描全部分片）'
-const NOTE_RETRY = '（分片读取失败，补读其余分片）'
+const noteUnreliable = '（清单不可靠，扫描全部分片）'
+const noteRetry = '（分片读取失败，补读其余分片）'
 
-// The service worker caches the app's own files listed in its manifest. Static
-// data shards are not in that list: the backup page reads them on demand and
-// keeps no copy, so the next run fetches a shard again.
+// The service worker's manifest lists every static data shard, so the prefetch
+// stores and verifies them, and a shard already stored costs no request here.
 export function createBgmSource({
     base, signal = null, onStage = null, onProgress = null, onLog = null,
 } = {}) {
@@ -814,7 +772,7 @@ export function createBgmSource({
                 call.cleanup()
                 call.reject(error)
                 failWorker(error)
-            }, CHUNK_WORKER_TIMEOUT_MS)
+            }, chunkWorkerTimeoutMs)
             try {
                 worker.postMessage({ id, buffer, ...options })
             } catch (error) {
@@ -827,9 +785,6 @@ export function createBgmSource({
             }
         }).catch(error => {
             if (isAbortError(error) || signal?.aborted) throw abortError()
-            // The worker itself ran fine and reported a bad shard. Parsing the
-            // same buffer again cannot change that, so the shard is counted as
-            // failed and the worker stays usable.
             if (error?.shardFailure) throw error
             failWorker(error)
             return parseShard(buffer, options)
@@ -855,7 +810,7 @@ export function createBgmSource({
         pauseSequence += 1
         pauseToken = `${backupSession}:${pauseSequence}`
         heartbeatPause()
-        pauseHeartbeat = setInterval(heartbeatPause, PAUSE_HEARTBEAT_MS)
+        pauseHeartbeat = setInterval(heartbeatPause, pauseHeartbeatMs)
     }
 
     function closePause() {
@@ -882,7 +837,7 @@ export function createBgmSource({
             pauseIdleTimer = null
             if (pauseHolds > 0 || pauseReads > 0) return
             closePause()
-        }, PAUSE_IDLE_MS)
+        }, pauseIdleMs)
     }
 
     async function withPause(work) {
@@ -921,7 +876,7 @@ export function createBgmSource({
     // counted, never fatal, because the API fallback still covers every item.
     async function readManifest(kind, stats) {
         if (manifests.has(kind)) return manifests.get(kind)
-        const url = `${base}/${BGM_DIRS[kind]}/manifest.json`
+        const url = `${base}/${bgmDirs[kind]}/manifest.json`
         try {
             const { response, text } = await fetchWithTimeout(url, { cache: 'no-store' }, { signal })
             if (response.status === 404) {
@@ -963,13 +918,13 @@ export function createBgmSource({
             let parseFailures = 0
             try {
                 const buffer = await fetchChunkBytes(
-                    `${base}/${BGM_DIRS[kind]}/${chunk.file}`,
+                    `${base}/${bgmDirs[kind]}/${chunk.file}`,
                     { signal },
                 )
                 const parsed = await parseChunk(buffer, {
                     ids,
                     idKey,
-                    maxOutputBytes: STATIC_CHUNK_MAX_OUTPUT_BYTES,
+                    maxOutputBytes: staticChunkMaxOutputBytes,
                 })
                 entries = parsed.entries
                 parseFailures = parsed.parseFailures
@@ -1000,7 +955,7 @@ export function createBgmSource({
     // Reads one kind of static data. The range lookup stays in charge unless a
     // located shard fails to load; an id the snapshot does not cover is counted
     // as a miss and left to the API, never answered with a full scan.
-    async function loadStaticData(kind, source, idSet, idKey, stats) {
+    async function loadStaticData(kind, source, idSet, idKey, stats, { countMiss = true } = {}) {
         const ids = Array.from(idSet)
         const attempted = new Set()
         const failuresBefore = stats.chunk_failures + stats.parse_failures
@@ -1008,6 +963,7 @@ export function createBgmSource({
         // shard already hides its ids, so those reads are not counted again as
         // coverage gaps; the shard failure counters own them.
         const noteMiss = (data, reliable) => {
+            if (!countMiss) return data
             if (stats.chunk_failures + stats.parse_failures > failuresBefore) return data
             let missed = 0
             for (const id of ids) if (!data.has(id)) missed += 1
@@ -1026,9 +982,9 @@ export function createBgmSource({
         )
         if (!source.reliable) {
             markUnreliable(kind, stats, source.problem)
-            return noteMiss(await scanAll(NOTE_UNRELIABLE), false)
+            return noteMiss(await scanAll(noteUnreliable), false)
         }
-        const { minKey, maxKey } = SHARD_RANGES[kind]
+        const { minKey, maxKey } = shardRanges[kind]
         const located = locateChunks(source.manifest, ids, minKey, maxKey)
         if (!located.length) return noteMiss(new Map(), true)
         const failures = stats.chunk_failures
@@ -1037,12 +993,12 @@ export function createBgmSource({
         // retry reads only the shards that were never tried.
         const merged = stats.chunk_failures === failures
             ? data
-            : mergeChunkData(data, await scanAll(NOTE_RETRY))
+            : mergeChunkData(data, await scanAll(noteRetry))
         return noteMiss(merged, true)
     }
 
     return {
-        async fillSubjects(items) {
+        async fillSubjects(items, { countMiss = true } = {}) {
             const stats = createStaticStats()
             const ids = new Set()
             for (const item of items) {
@@ -1052,7 +1008,7 @@ export function createBgmSource({
             const data = await withPause(async () => {
                 const source = await readManifest('subject', stats)
                 if (!source || !source.manifest.chunks.length) return null
-                return loadStaticData('subject', source, ids, 'id', stats)
+                return loadStaticData('subject', source, ids, 'id', stats, { countMiss })
             })
             if (!data) return { filled: 0, stats }
             let filled = 0
@@ -1088,7 +1044,7 @@ export function createBgmSource({
                     // An empty or short list is counted as well: the API then
                     // fetches the complete one instead of a partial record.
                     stats.episode_shortfall += 1
-                    if (noted < EPISODE_NOTE_LIMIT) {
+                    if (noted < episodeNoteLimit) {
                         noted += 1
                         onLog?.(`静态分集少于条目话数 subject=${item.subject_id}: 本篇 ${available}/${item.subject_data.eps}，留给接口补取`, 'warn')
                     }
@@ -1098,7 +1054,7 @@ export function createBgmSource({
                 item.ep_data = groupEpisodesByType(episodes)
                 filled++
             }
-            if (stats.episode_shortfall > EPISODE_NOTE_LIMIT) {
+            if (stats.episode_shortfall > episodeNoteLimit) {
                 onLog?.(`静态分集少于条目话数 ${stats.episode_shortfall} 条，已交给接口补取`, 'warn')
             }
             return { filled, stats }

@@ -1,17 +1,17 @@
 (function () {
     'use strict'
 
-    const COLOR_LIGHT = '#f6f7f9'
-    const COLOR_DARK = '#131418'
+    const colorLight = '#f6f7f9'
+    const colorDark = '#131418'
 
     function applyThemeColor() {
         const meta = document.querySelector('meta[name="theme-color"]')
         if (!meta) return
         const dark = document.documentElement.dataset.theme === 'dark'
-        meta.setAttribute('content', dark ? COLOR_DARK : COLOR_LIGHT)
+        meta.setAttribute('content', dark ? colorDark : colorLight)
     }
 
-    const MEDIA_DARK = '(prefers-color-scheme: dark)'
+    const mediaDark = '(prefers-color-scheme: dark)'
 
     let mode = 'auto'
     try {
@@ -19,7 +19,7 @@
     } catch { /* localStorage may be unavailable; keep the default */ }
     if (mode !== 'auto' && mode !== 'light' && mode !== 'dark') mode = 'auto'
 
-    const darkQuery = matchMedia(MEDIA_DARK)
+    const darkQuery = matchMedia(mediaDark)
     const real = mode === 'dark' ? 'dark'
         : mode === 'light' ? 'light'
             : (darkQuery.matches ? 'dark' : 'light')
@@ -42,9 +42,9 @@
     const observer = new MutationObserver(applyThemeColor)
     observer.observe(document.documentElement, { attributeFilter: ['data-theme'] })
 
-    const SCRIPT_SRC = (document.currentScript || document.scripts[document.scripts.length - 1]).src
-    const SW_URL = new URL('../../../sw.js', SCRIPT_SRC).href
-    const SW_SCOPE = new URL('../../../', SCRIPT_SRC).href
+    const scriptSrc = (document.currentScript || document.scripts[document.scripts.length - 1]).src
+    const swUrl = new URL('../../../sw.js', scriptSrc).href
+    const swScope = new URL('../../../', scriptSrc).href
 
     function whenIdle(fn) {
         if (window.requestIdleCallback) window.requestIdleCallback(fn)
@@ -93,7 +93,7 @@
     }
 
     function onReady() {
-        navigator.serviceWorker.register(SW_URL, { scope: SW_SCOPE }).then(function () {
+        navigator.serviceWorker.register(swUrl, { scope: swScope }).then(function () {
             begin()
         }).catch(function (err) {
             console.warn('[bangumi-takeout] Service Worker 注册失败：', err.message)

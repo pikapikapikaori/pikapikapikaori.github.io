@@ -32,7 +32,6 @@ export async function renderUsers() {
     const recordNameSet = new Set(records.map(record => record.username).filter(Boolean))
     const names = unique([defaultUsername, ...recordNameSet, ...credentials.map(item => item.username)])
     const counts = await Promise.all(names.map(name => items.countByOwner(name)))
-    // The route may have changed while the stores were read.
     if (main.dataset.route !== 'users') return
     const current = state.data?.user?.username || ''
 
@@ -78,9 +77,8 @@ export async function renderUsers() {
     })
 }
 
-// Accounts that only have a credential may lack a meta record; add a minimal
-// one so a reload keeps the empty view instead of falling back to another
-// account.
+// An account with only a credential may lack a meta record; a minimal one keeps a
+// reload on the empty view instead of another account.
 async function ensureEmptyUser(name) {
     await updateMeta(name, record => {
         if (record) return { record: null, value: false }
@@ -128,9 +126,8 @@ async function choose(name, buttons, hasCredential, main, token, trigger) {
             }
         }
         if (!hit) {
-            // An account with a credential but no local data stays selectable:
-            // open the empty collection view instead of reporting that no local
-            // data exists.
+            // An account with a credential but no local data stays selectable: it opens the
+            // empty collection view instead of reporting missing data.
             if (hasCredential) {
                 await ensureEmptyUser(name)
                 const empty = await loadUser(name)

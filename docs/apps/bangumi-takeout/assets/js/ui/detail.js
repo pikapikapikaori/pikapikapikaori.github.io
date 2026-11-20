@@ -27,10 +27,8 @@ export async function renderDetail(id, { goBack, isCurrent } = {}) {
         return null
     }
 
-    // The list holds only the display fields, so the detail record of this one
-    // item is read here. The read is asynchronous: the address, the render
-    // token or the viewed user may have moved on, and both detail routes share
-    // `main.dataset.route`, so that value alone cannot identify this page.
+    // The list holds only display fields, so this item's detail record is read here.
+    // The read is asynchronous, so the route token decides whether it still applies.
     const stale = () => main.dataset.route !== 'detail'
         || (isCurrent && !isCurrent())
         || state.data?.user?.username !== username
@@ -42,9 +40,8 @@ export async function renderDetail(id, { goBack, isCurrent } = {}) {
         return null
     }
     if (!hasDetail) {
-        // Without its detail half the entry can show no progress, and the
-        // version stamp on the list would keep the next incremental run from
-        // asking for it again.
+        // Without its detail half the entry shows no progress, and the list stamp would keep
+        // the next incremental run from asking again (see storage.js).
         let message = '详情数据未取得，下次备份时补全。'
         try {
             await items.clearProgressValidity(username, id)

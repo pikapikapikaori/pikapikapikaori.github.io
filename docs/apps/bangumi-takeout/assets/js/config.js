@@ -1,5 +1,4 @@
-// The app is a single page now, so the root is derived from this module rather
-// than from the current document path.
+// The app is one page, so the root comes from this module, not the document path.
 const appRootUrl = new URL('../../', import.meta.url)
 
 const fallbackDefaultSource = {
@@ -43,7 +42,6 @@ export function loadDefaultSource() {
 
 export const corsProxy = ''
 
-// Every page is a hash route; the router renders the matching page module.
 export const href = {
     index: '#/',
     about: '#/about',
@@ -56,8 +54,7 @@ export const href = {
 
 // Identity is username: some accounts have no uid.
 export const dbName = 'bangumi-takeout'
-// The structure is not migrated: a database that does not match the schema is
-// deleted and rebuilt, so this number never changes.
+// A schema that differs is deleted and rebuilt, so this number never changes.
 export const dbVersion = 1
 export const storeItems = 'items'
 export const storeMeta = 'meta'
@@ -72,8 +69,7 @@ export const taskStage = {
     progress: 'progress',
     finalize: 'finalize',
 }
-// runner.js walks these in order; each stage keeps its own done subject_id
-// set, so an unfinished task survives a reordered collection list.
+// runner.js walks these stages in order.
 export const taskStages = Object.values(taskStage)
 export const infoScopes = { private: 'private', public: 'public' }
 
@@ -86,11 +82,9 @@ export const bangumiClientId = 'bgm71356aa8a71822b75'
 export const retryWaitMs = 5000
 // Every request carries a deadline so a stalled proxy cannot hang a backup.
 export const requestTimeoutMs = 30000
-// A Retry-After value beyond this is clamped; a mistaken or hostile header
-// must not park a run for hours.
+// A larger Retry-After is clamped, so a hostile header cannot park a run for hours.
 export const retryAfterMaxMs = 60000
-// Static chunks reach ~11 MB. Time them by idle gap, not by total transfer
-// time, so a slow but still-moving download is not cut off at 30s.
+// Chunks reach ~11 MB; timing by idle gap keeps a slow download alive past 30s.
 export const staticDataIdleTimeoutMs = 60000
 
 // Refreshing shortly before expiry avoids a request failing mid-backup.
@@ -194,8 +188,7 @@ export const pageSizeOptions = [30, 60, 90, 150]
 export const defaultPageSize = 30
 
 export const currentUserKey = storagePrefix + 'current-user'
-// Set when the viewer leaves a user explicitly, so boot does not silently
-// fall back to the most recently updated cached user.
+// Set when the viewer leaves a user, so boot does not silently pick another.
 export const viewClearedKey = storagePrefix + 'view-cleared'
 export const stateKey = storagePrefix + 'overview-state'
 
@@ -212,13 +205,10 @@ export const themeIcons = {
 }
 
 export const maxFileSize = 1024 * 1024 * 1024
-// One import request may not run forever: the fetch is aborted after this
-// deadline and the caller may abort earlier through its own signal.
+// The import fetch is aborted at this deadline; the caller may abort earlier.
 export const importTimeoutMs = 60000
-// A ZIP may expand far beyond its compressed size; cap the sum of all JSON
-// entries so a crafted archive cannot exhaust memory.
+// Cap the sum of JSON entries so a crafted archive cannot exhaust memory.
 export const zipMaxOutputBytes = 1536 * 1024 * 1024
-// Static shards stay below about 11 MB. These caps only stop a damaged or
-// crafted response before it can consume the tab's memory.
+// These caps stop a damaged or crafted response before it fills the tab.
 export const staticChunkMaxBytes = 64 * 1024 * 1024
 export const staticChunkMaxOutputBytes = 128 * 1024 * 1024

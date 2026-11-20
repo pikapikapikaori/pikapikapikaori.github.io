@@ -19,9 +19,8 @@ function tooLargeError() {
     return new Error(`文件超过 ${mb} MB 大小上限`)
 }
 
-// File.arrayBuffer() has no cancel point, so a picked file is read through its
-// stream. Cancelling the reader makes the pending read settle, after which the
-// abort is reported as a normal cancellation.
+// File.arrayBuffer() has no cancel point, so the file is read through its stream;
+// cancelling the reader settles the pending read.
 async function readFileBytes(file, { signal = null } = {}) {
     if (signal?.aborted) throw abortError()
     if (typeof file.stream !== 'function') {

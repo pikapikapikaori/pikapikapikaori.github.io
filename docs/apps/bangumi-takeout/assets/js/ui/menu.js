@@ -9,7 +9,6 @@ export function closeMenu() {
 // The popup is appended to body and positioned with fixed coordinates, so a
 // scrolling page or the footer cannot clip it.
 export function openMenu({ anchor, items, current, onPick, emptyText = '暂无可选项' }) {
-    // Clicking the same trigger again closes its menu instead of rebuilding it.
     if (activeMenu?.anchor === anchor) {
         activeMenu.close()
         return { close: () => {} }

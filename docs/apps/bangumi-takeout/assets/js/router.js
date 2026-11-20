@@ -22,8 +22,7 @@ const routes = {
     '/about': { name: 'about', nav: 'about', title: '关于', render: renderAboutPage },
 }
 
-// The collection page is the only route whose scroll position is restored, and
-// only when coming back from detail.
+// Only the collection page restores its scroll, and only when returning from detail.
 const scrollMemory = new Map()
 
 let renderSeq = 0
@@ -32,9 +31,8 @@ let activePath = ''
 let previousPath = ''
 let started = false
 
-// Callers that keep a mask up until the target page has painted wait on this
-// list; the render that owns the last sequence number settles it in its own
-// `finally`, and the timeout keeps a lost render from pinning the mask.
+// Callers that keep a mask up wait on this list; the render owning the last
+// sequence settles it, and the timeout frees a mask whose render is lost.
 const navigateTimeout = 10000
 let renderWaiters = []
 
@@ -80,8 +78,7 @@ function routeKey(path, params) {
     return query ? path + '?' + query : path
 }
 
-// A page passes the item name so the title follows what the page shows; an
-// empty title puts the document title back to the one in index.html.
+// A page passes the item name so the title follows the page; '' restores the document title.
 function setTitle(title) {
     document.title = title ? title + ' - ' + baseTitle : baseTitle
 }
@@ -128,8 +125,7 @@ async function renderRoute(force = false) {
 
     const key = routeKey(path, params)
     if (!force && key === activeKey) return
-    // Taken after the shortcut above, so a repeated hash to the route that is
-    // still rendering does not discard that render.
+    // Taken after the shortcut above, so a repeated hash does not discard the render.
     const seq = ++renderSeq
     // Popups live outside #main, so replacing the page would leave them
     // floating over the next route.
@@ -140,8 +136,7 @@ async function renderRoute(force = false) {
     const returning = activePath === '/detail' && path === '/'
     if (activePath && activePath !== path) scrollMemory.set(activePath, window.scrollY)
 
-    // Commit the route before any await: a failure page still belongs to this
-    // route, and a stale key would swallow the next visit to the old route.
+    // The route is committed before any await, so a failure page still belongs to it.
     previousPath = activePath
     activePath = path
     activeKey = key
@@ -154,10 +149,8 @@ async function renderRoute(force = false) {
     const refocusMain = main.contains(document.activeElement)
     main.innerHTML = ''
 
-    // A page that reads before it paints asks this before using the result: a
-    // later route, or the same route with another id, has taken over. Two
-    // detail routes share the same `main.dataset.route`, so the token compares
-    // the address too.
+    // A page that reads before it paints asks this first. Two detail routes share one
+    // `dataset.route`, so the address is compared too.
     const isCurrent = () => {
         if (seq !== renderSeq) return false
         const now = parseHash()
@@ -173,14 +166,12 @@ async function renderRoute(force = false) {
         failed = true
         renderError(main, error, route)
     } finally {
-        // A page reached from the data-source menu keeps a mask up until it has
-        // painted; a failure page ends the wait the same way.
+        // A page from the data-source menu keeps its mask until it has painted.
         if (seq === renderSeq) settleRenderWaiters()
     }
     if (failed) return
     if (seq !== renderSeq) return
 
-    // The old page held the focus; the new page keeps it instead of the body.
     if (refocusMain && document.activeElement === document.body) {
         main.tabIndex = -1
         main.focus({ preventScroll: true })
@@ -200,8 +191,7 @@ export function startRouter() {
     started = true
     history.scrollRestoration = 'manual'
     window.addEventListener('hashchange', () => renderRoute())
-    // Re-assigning the current hash fires no hashchange, so callers that clear
-    // the viewed user request an explicit repaint instead.
+    // Re-assigning the current hash fires no hashchange, so an explicit repaint is asked.
     window.addEventListener('app:rerender', () => renderRoute(true))
     // The first paint happens on load; module scripts normally run before it.
     if (document.readyState === 'complete') renderRoute()

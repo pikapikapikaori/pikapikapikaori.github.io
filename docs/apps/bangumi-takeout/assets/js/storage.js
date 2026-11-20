@@ -5,17 +5,15 @@ import {
     isProgressObject, isValidOwner, isValidSubjectId,
 } from './model.js'
 
-// The collection list of an unfinished task lives outside the meta record:
-// a checkpoint then writes only the task fields, not the whole list. Each page
-// is its own record so one page write stays the same size at any list length.
+// The list of an unfinished task lives outside the meta record, one page per record,
+// so a checkpoint writes task fields and one page, not the whole list.
 const storeTaskList = 'task_list'
 const taskTokenIndex = 'task_id'
 
 const listKey = ['task_id', 'offset']
 
-// Finished subject ids are kept the same way: one stage is split into chunks of
-// a fixed size, so a checkpoint rewrites one chunk instead of a set that grows
-// with the stage.
+// Finished ids are chunked too, so a checkpoint rewrites one chunk instead of a set
+// that grows with the stage.
 const storeTaskDone = 'task_done'
 const taskStageIndex = 'task_stage'
 const doneKey = ['task_id', 'stage', 'chunk']
@@ -24,9 +22,8 @@ const taskDoneChunkSize = 200
 
 const itemKey = ['owner', 'subject_id']
 
-// An item is stored as two records under the same key: what the collection
-// view reads and what only the detail page reads. Both are written in one
-// transaction, so a list record never exists without its detail record.
+// An item is two records under one key: the display half the collection view reads
+// and the detail half. Both are written in one transaction.
 const storeItemDetail = 'item_detail'
 
 // Fields only the detail page renders. They are most of a record's bytes, so
@@ -73,11 +70,8 @@ function createSchema(db) {
     }
 }
 
-// A database whose stores, key paths or indexes differ from the current layout
-// is deleted and rebuilt empty: the project is not released, so no stored record
-// is worth keeping across a structural change, and an index cannot be added to
-// an open database. The check runs after every open, so a rebuild happens even
-// when the stored version number never changes.
+// A schema that differs in stores, key paths or indexes is deleted and rebuilt empty:
+// indexes cannot be added in place. The check runs after every open.
 function hasSchema(db) {
     const names = Array.from(db.objectStoreNames)
     if (!names.includes(storeItems)
@@ -186,9 +180,8 @@ function openChecked() {
         }
         req.onerror = () => {
             const error = req.error
-            // A database left at a higher version fails before any upgrade or
-            // check runs, so it never reaches the branch above; rebuild it the
-            // same way instead of failing storage for good. Other errors rise.
+            // A database left at a higher version fails before any check, so it never reaches
+            // the branch above; rebuild it the same way.
             if (!abandoned && error?.name === 'VersionError') {
                 rebuildDatabase().then(resolve, reject)
                 return
@@ -297,12 +290,8 @@ function validateMetaRecord(record) {
     }
 }
 
-// A stored progress belongs to the collection state it was read from, which is
-// the record's own `updated_at`. A boolean "fetched" flag cannot express that:
-// the collection list keeps moving while a progress is stored, so the flag
-// would keep an old progress valid for a newer state. The invariant kept here
-// is therefore: a private record holds `progress` only while it matches the
-// record's `updated_at`, and every merge that changes the version drops it.
+// A stored progress belongs to the collection state it was read from, the record's
+// own `updated_at`; every merge that changes the version drops it.
 function prepareRecord(owner, record, infoScope) {
     if (!record || typeof record !== 'object') throw new Error('条目格式错误')
     const subjectId = record.subject_id ?? record.subject?.id
@@ -351,9 +340,8 @@ function writeRecords(listStore, detailStore, owner, records, infoScope, previou
     }
 }
 
-// The list record carries the display fields and the detail record the rest.
-// The caller's record is left untouched: a backup run reuses the same object in
-// later stages.
+// The list record carries the display fields, the detail record the rest. The caller's
+// record stays untouched: a backup run reuses it in later stages.
 function splitRecord(record) {
     const { subject_data, ep_data, progress, ...list } = record
     const detail = { owner: record.owner, subject_id: record.subject_id }
@@ -367,9 +355,7 @@ function splitRecord(record) {
         list.subject = { ...list.subject }
         delete list.subject.tags
     }
-    // A stored progress belongs to the collection version it was read from.
-    // That version stays on the list record so an incremental run decides about
-    // reusing the progress without reading the detail record.
+    // `progress_at` stays on the list half so an incremental run decides without the detail.
     if (progress !== undefined) list.progress_at = record.updated_at ?? ''
     return { list, detail }
 }
@@ -397,10 +383,8 @@ function putSplit(listStore, detailStore, record) {
     detailStore.put(detail)
 }
 
-// Merge one freshly obtained record into a record read inside the same
-// transaction, so a concurrent import or clear cannot be overwritten by stale
-// data from the start of the run. A record that carries a progress keeps it;
-// an inherited one is dropped as soon as the version no longer matches.
+// Merge into a record read in the same transaction, so a concurrent import or clear
+// cannot be overwritten by data from the start of the run.
 function mergeRecords(previous, record) {
     if (!previous) return record
     const merged = { ...previous, ...record }
@@ -504,13 +488,8 @@ function appendDoneSubject(t, fail, task, subjectId) {
     }
 }
 
-// Pages are keyed by task token and offset, not by the user: a new task starts
-// at offset 0 without waiting for the previous task's pages to be dropped. The
-// token is checked in the same transaction, so a run that was replaced or
-// discarded cannot leave pages behind for a task nothing can resume. The stored
-// pages are read in the same transaction too: a subject_id repeated across
-// pages would be written twice in the item store, so the page is refused before
-// any page or task field changes.
+// Keyed by token and offset, so a new task need not wait for old pages. The token
+// check and the duplicate scan run in the same transaction.
 export const taskList = {
     put(username, taskId, offset, entries) {
         requireOwner(username)
@@ -568,9 +547,7 @@ export const taskList = {
     },
 }
 
-// Reads back the finished ids of one stage chunk by chunk. The set is rebuilt
-// from however many chunks the stage needed, so resuming costs one read per
-// chunk and the caller still sees a single set.
+// The stage's chunks are read back as one set.
 export const taskDone = {
     read(taskId, stage) {
         if (!taskId) throw new Error('缺少任务令牌')
@@ -643,16 +620,14 @@ export const items = {
         })
     },
 
-    // The collection view reads only the display half of every item.
     getByOwner(owner) {
         requireOwner(owner)
         return run([storeItems], 'readonly', t =>
             t.objectStore(storeItems).index('owner').getAll(IDBKeyRange.only(owner)))
     },
 
-    // One item with its detail half, for the detail page. `hasDetail` keeps
-    // "the detail was never stored" apart from "the detail exists and its
-    // progress was never fetched": the page shows a different state for each.
+    // `hasDetail` keeps "never stored" apart from "stored, progress never fetched";
+    // the detail page shows a different state for each.
     getWithDetail(owner, subjectId) {
         requireOwner(owner)
         if (!isValidSubjectId(subjectId)) throw new Error('subject_id 类型无效')
@@ -670,10 +645,8 @@ export const items = {
         })
     },
 
-    // The list record of a stored progress keeps the collection version the
-    // progress belongs to. When the detail half is gone that version is a
-    // claim nothing backs, and an incremental run would read it as reusable,
-    // so the claim is dropped and the progress is fetched again.
+    // A detail half that is gone leaves `progress_at` a claim nothing backs, and an
+    // incremental run would reuse it, so the claim is dropped here.
     clearProgressValidity(owner, subjectId) {
         requireOwner(owner)
         if (!isValidSubjectId(subjectId)) throw new Error('subject_id 类型无效')
@@ -701,9 +674,8 @@ export const items = {
     },
 }
 
-// Clearing the extra records, writing the completed state and dropping the
-// task's stored pages and chunks must be one transaction: a failure between
-// them would leave items deleted from a task that can still resume.
+// Sweeping extra records, writing the completed state and dropping the task data
+// must be one transaction, or items vanish from a task that can resume.
 export function finalizeBackup(username, {
     taskId, keep, user, completeness, now,
 } = {}) {
@@ -745,9 +717,8 @@ export function finalizeBackup(username, {
                         fail(e)
                     }
                 }
-                // The list records decide which item exists. A task can name an
-                // id that the collection no longer holds, so the ids found in
-                // the store are the only ones kept.
+                // The list records decide which item exists; a task can name an id the collection no
+                // longer holds, so only ids found in the store are kept.
                 const kept = new Set()
                 const pending = []
                 const sweepItems = () => {
@@ -773,10 +744,8 @@ export function finalizeBackup(username, {
                         }
                     }
                 }
-                // A detail record without its list record is reachable from no
-                // page, so this pass removes it. The detail ids it finds tell a
-                // kept list record whose detail is gone to drop its version, so
-                // the next incremental run fetches the progress again.
+                // A detail record without its list record is reachable from no page. A kept list
+                // whose detail is gone drops `progress_at`, so the progress is fetched again.
                 const sweepDetails = () => {
                     const detailIds = new Set()
                     const req = detailStore.index('owner').openCursor(IDBKeyRange.only(username))
@@ -818,9 +787,8 @@ export function finalizeBackup(username, {
     })
 }
 
-// Reads the meta record and every item of one user inside a single transaction,
-// so an export sees one consistent snapshot. The two halves of each item are
-// merged here, so the exported entry keeps the structure it always had.
+// The meta record and every item of one user are read in one transaction, so an
+// export sees one snapshot; the halves are joined here.
 export function readUserExport(username) {
     requireOwner(username)
     return run([storeItems, storeItemDetail, storeMeta], 'readonly', (t, fail) => {
@@ -850,7 +818,6 @@ export function readUserExport(username) {
     })
 }
 
-// Replaces items and meta in one transaction.
 export function replaceUser(username, metaRecord, records, options) {
     requireOwner(username)
     const infoScope = requireScope(options)
@@ -927,9 +894,8 @@ export const meta = {
     },
 }
 
-// `mutate` also receives a context that writes or drops the finished-id
-// chunks of the task under the same transaction, so a checkpoint never leaves
-// a count without its ids.
+// `mutate` gets a context that writes or drops this task's chunks inside the
+// caller's transaction.
 function taskContext(t, fail, record) {
     return {
         appendDone(subjectId) {
@@ -937,8 +903,7 @@ function taskContext(t, fail, record) {
             if (!task) throw new Error('没有可记录的任务')
             appendDoneSubject(t, fail, task, subjectId)
         },
-        // A new stage starts empty because the stage is part of every chunk
-        // key; the previous stage's chunks stay unreachable until the task ends.
+        // A new stage starts empty: the stage is part of every chunk key.
         resetDone() {
             const task = record?.task
             if (!task) return
@@ -947,9 +912,8 @@ function taskContext(t, fail, record) {
     }
 }
 
-// Read and write one meta record inside a single transaction. Every stored
-// record of a task the record no longer names is dropped here, so a restart or
-// discard cannot leave an unreachable collection list or a stale id chunk.
+// One meta record is read and written in one transaction; records of a task the
+// record no longer names are dropped here.
 export function updateMeta(username, mutate) {
     requireOwner(username)
     let value
@@ -998,10 +962,8 @@ function minimalMetaRecord(record) {
     }
 }
 
-// Cache clearing removes collection data and task checkpoints. A credential is
-// an account, not cache, so accounts that still have one keep a minimal meta
-// record; this keeps the users page, export targets and credential dropdowns
-// describing the same set of accounts.
+// A credential is an account, not cache: accounts keeping one keep a minimal meta
+// record, so the users page, exports and dropdowns describe one set.
 export async function clearCachedData() {
     await run([storeItems, storeItemDetail, storeMeta, storeTaskList, storeTaskDone, storeCredentials], 'readwrite', t => {
         const itemStore = t.objectStore(storeItems)

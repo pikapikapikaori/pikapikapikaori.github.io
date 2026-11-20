@@ -1,7 +1,6 @@
 import { extractShardText } from '../zip.js'
 
-// Parsing a shard off the main thread keeps an 11 MB response from stalling
-// the page. Only the entries the backup asked for are cloned back.
+// Parsing a shard off the main thread keeps an 11 MB response from stalling the page.
 export async function parseShard(arrayBuffer, {
     ids = [], idKey = 'id', maxOutputBytes,
 } = {}) {
@@ -19,9 +18,8 @@ export async function parseShard(arrayBuffer, {
             parseFailures += 1
             continue
         }
-        // A line that parses to an array or a primitive is a broken record,
-        // not a row without a matching id; counting it keeps the failure
-        // visible instead of silently dropping the line.
+        // A line that parses to an array or a primitive is a broken record, not a row
+        // without a matching id; counting it keeps the failure visible.
         if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) {
             parseFailures += 1
             continue

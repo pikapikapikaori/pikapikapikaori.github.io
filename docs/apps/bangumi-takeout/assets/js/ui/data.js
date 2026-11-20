@@ -21,7 +21,6 @@ function setStatus(message, kind = '') {
 export async function renderData() {
     const main = document.getElementById('main')
     if (!main) return
-    // Async handlers may finish after the route changed.
     if (main.dataset.route !== 'data') return
     closeMenu()
 

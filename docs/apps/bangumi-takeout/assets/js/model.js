@@ -72,9 +72,8 @@ export function toViewItems(records) {
     return records.map(toViewItem).filter(Boolean)
 }
 
-// Main episodes normally sit in the '0' bucket. A snapshot without episode
-// types keeps them in 'unknown', so an empty '0' falls back to that bucket
-// instead of showing a subject as having no episodes at all.
+// Main episodes sit in the '0' bucket; a snapshot without types keeps them in
+// 'unknown', so an empty '0' falls back to that bucket.
 function pickMainEpisodes(epData) {
     if (Array.isArray(epData['0']) && epData['0'].length) return epData['0']
     if (Array.isArray(epData.unknown)) return epData.unknown

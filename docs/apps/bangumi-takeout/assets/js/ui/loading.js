@@ -1,6 +1,5 @@
-// One mask serves every slow action. The page stays in the document and keeps
-// its state, but `inert` takes it out of clicks, focus and the tab order.
-// Overlapping calls share the same mask; the last one to close removes it.
+// One mask serves every slow action: the page stays in the document but `inert`
+// takes it out of clicks, focus and the tab order. Calls share one mask.
 let mask = null
 let labelEl = null
 let cancelEl = null
@@ -35,9 +34,8 @@ function build() {
     ;['click', 'mousedown', 'keydown'].forEach(type => {
         mask.addEventListener(type, event => event.stopPropagation())
     })
-    // A modal dialog keeps the tab order inside itself. Without this the key
-    // leaves the mask for the browser chrome, where the cancel button cannot
-    // be reached.
+    // A modal keeps the tab order inside itself; without this the key leaves the mask
+    // for the browser chrome, where cancel cannot be reached.
     mask.addEventListener('keydown', event => {
         if (event.key !== 'Tab') return
         event.preventDefault()
@@ -145,9 +143,8 @@ function drop(entry) {
     restoreFocus()
 }
 
-// `returnFocus` names the control the action belongs to when the pressed
-// element itself is replaced or hidden by the action. `fallbackFocus` names
-// what takes over when that control is gone or disabled.
+// `returnFocus` names the control the action belongs to; `fallbackFocus` takes over
+// when it is gone or disabled.
 export function beginLoading(label, {
     onCancel = null, cancelLabel = null, returnFocus = null, fallbackFocus = null,
 } = {}) {

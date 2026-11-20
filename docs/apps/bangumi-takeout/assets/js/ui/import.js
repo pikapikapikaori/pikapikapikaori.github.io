@@ -3,9 +3,8 @@ import { loadFromFile, loadFromUrl } from '../source.js'
 import { href } from '../config.js'
 import { beginLoading } from './loading.js'
 
-// The job outlives the page markup, so its state lives at module level and
-// every render reads it back instead of starting from an empty view.
-// 'idle' | 'loading' | 'writing'
+// The job outlives the page markup, so its state lives at module level and each
+// render reads it back.
 let phase = 'idle'
 let phaseLabel = ''
 let viewToken = 0

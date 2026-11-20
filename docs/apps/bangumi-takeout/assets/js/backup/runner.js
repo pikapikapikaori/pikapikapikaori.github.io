@@ -1,6 +1,5 @@
-// Full, incremental and resumed backups over the shared item store.
-// The run freezes the target, the authorized account, the information scope
-// and the task token when it starts; later UI edits cannot change them.
+// Full, incremental and resumed backups. The run freezes its target, authorized
+// account, information scope and task token when it starts.
 import {
     bgmDataUrl, infoScopes, retryWaitMs, taskModes, taskResume, taskStage, taskStages,
 } from '../config.js'
@@ -16,9 +15,7 @@ import { refreshAccessToken, requireAccessToken } from './auth.js'
 
 const runModes = taskModes.concat(taskResume)
 
-// Checkpoints are keyed by subject_id, not by list index: a resumed task keeps
-// its saved collection list, whose order may differ from a fresh fetch. The ids
-// of the current stage are read back chunk by chunk.
+// Checkpoints are keyed by subject_id, so a resumed list may arrive in another order.
 function readDoneIds(task) {
     return taskDone.read(task.task_id, task.stage)
 }
@@ -37,12 +34,8 @@ function staticBroken(stats) {
     return (stats.manifest_failures || 0) + (stats.chunk_failures || 0) + (stats.parse_failures || 0) > 0
 }
 
-// Detail and episodes are confirmed again from the shard snapshot or the API in
-// every task, so a stored detail never decides what is fetched. A stored
-// progress is reused only while the collection state it was read from is still
-// the current one: the list record carries that version as `progress_at`,
-// because the progress itself lives in the item's detail record and is not read
-// here.
+// Detail and episodes are fetched again in every task. A stored progress is reused
+// only while its `progress_at` still matches (see storage.js).
 function planItems(list, stored, mode, infoScope) {
     const storedById = new Map()
     for (const record of stored) storedById.set(record.subject_id, record)
@@ -130,14 +123,12 @@ function createRun(options, signal) {
             if (!taskModes.includes(task.mode)) throw new Error('任务记录的模式无效')
             return task
         }
-        // Never discard an unfinished checkpoint unless the caller explicitly
-        // passes `restart: true` after the user confirmed it.
+        // Never discard an unfinished checkpoint unless the caller passes `restart: true`.
         return beginTask(target, mode, { authUsername, restart })
     }
 
-    // The stored record is read and merged inside one read-write transaction,
-    // together with the task token check, so an import or cache clear during
-    // the run cannot be overwritten with data from an earlier point.
+    // The merge and the task check share one transaction, so a concurrent import is
+    // not overwritten by data from the start of the run.
     async function saveItem(item) {
         const written = await items.merge(target, item, { infoScope, taskId })
         if (!written) throw new Error('任务记录已变更，本次执行中止')
@@ -162,9 +153,7 @@ function createRun(options, signal) {
         requireTask(task)
     }
 
-    // The list is fetched once per task and saved page by page, so only an
-    // unfinished list stage may still page. A later stage always reads the saved
-    // entries: the collection API is not asked again.
+    // The list is fetched once and stored page by page; only the list stage pages again.
     async function fetchCollections(task) {
         let total = task.collection_total
         let list = []
@@ -189,10 +178,8 @@ function createRun(options, signal) {
 
         const limit = 30
 
-        // The page is stored before the checkpoint names it: a crash between the
-        // two writes then only repeats work, never loses a page. An empty page
-        // stores nothing: a page holds entries and the stored total of 0 already
-        // says the list is complete.
+        // The page is stored before the checkpoint names it, so a crash repeats work but
+        // never loses a page. An empty page stores nothing.
         async function savePage(pageTotal, pageItems, nextList) {
             if (pageItems.length) {
                 const written = await taskList.put(target, taskId,
@@ -270,8 +257,6 @@ function createRun(options, signal) {
         return list
     }
 
-    // A static snapshot is a cache, not a requirement: broken manifests and
-    // chunks are counted and reported, and the API fallback continues.
     async function loadStatic(kind, pending, options) {
         const stats = kind === 'subject' ? staticStats.subject : staticStats.episode
         const label = kind === 'subject' ? '条目' : '分集'
@@ -299,13 +284,11 @@ function createRun(options, signal) {
     async function runSubjects(doneIds) {
         const todo = plan.items.filter(item => !doneIds.has(item.subject_id))
         if (!todo.length) return
-        // The snapshot is read first in every mode; the API covers only the
-        // subjects it does not hold.
+        // The snapshot is read first; the API covers only what the snapshot misses.
         await loadStatic('subject', todo)
 
-        // The saved done set and the remaining work together keep the stage
-        // counter continuous across a stop, even when completed items are not
-        // in `todo`.
+        // The saved done set plus the remaining work keeps the stage counter continuous
+        // across a stop, even when done items are not in `todo`.
         const total = doneIds.size + todo.length
         let done = doneIds.size
         stage('拉取条目', total)
@@ -323,11 +306,8 @@ function createRun(options, signal) {
     async function runEpisodes(doneIds) {
         const todo = plan.items.filter(item => !doneIds.has(item.subject_id))
         if (!todo.length) return
-        // The episode check compares the snapshot's episode count with the
-        // subject's `eps`; a resumed task has no detail in memory, so the
-        // subject snapshot is read again for those items. That read answers
-        // only `eps`, so a subject the snapshot lacks is not a coverage gap
-        // here, and the stored detail is never read for it.
+        // The episode check compares the snapshot count with `eps`. A resumed task has no
+        // detail in memory, so the subject snapshot is read again, for `eps` only.
         const noDetail = todo.filter(item => item.subject_data == null)
         if (noDetail.length) await loadStatic('subject', noDetail, { countMiss: false })
         await loadStatic('episode', todo)
@@ -353,8 +333,7 @@ function createRun(options, signal) {
         }
     }
 
-    // A 200 body of `null` means the endpoint explicitly reported no progress;
-    // a 404 cannot prove that, so it is treated as not obtained.
+    // A 200 body of `null` says the endpoint has no progress; a 404 proves nothing.
     async function readProgress(subjectId) {
         let data
         try {
@@ -369,8 +348,7 @@ function createRun(options, signal) {
             error.status = 401
             throw error
         }
-        // Only an explicit "no progress" or an eps array may be written; any
-        // other shape stays unfetched so a later run can ask again.
+        // Only an explicit "no progress" or an eps array is written; other shapes stay unfetched.
         if (data == null) return { ok: true, progress: { eps: [] } }
         if (Array.isArray(data)) return { ok: true, progress: { eps: data } }
         if (data && typeof data === 'object' && Array.isArray(data.eps)) {
@@ -407,15 +385,13 @@ function createRun(options, signal) {
             }
             done += 1
             progress(done)
-            // Only a written record marks the subject done; a failed or
-            // unconfirmed response must be retried by the next resume.
+            // Only a written record marks the subject done; a failed response is retried on resume.
             await checkpoint(done, taskStage.progress, total,
                 outcome.ok ? item.subject_id : undefined)
         }
     }
 
-    // Cancel must propagate; any other failure keeps the record's existing
-    // user object instead of overwriting it with a placeholder.
+    // Cancel must propagate; any other failure keeps the record's existing user object.
     async function resolveUserInfo() {
         try {
             const info = await api.getUserInfo(target)
@@ -430,25 +406,20 @@ function createRun(options, signal) {
 
     async function runFinalize() {
         if (signal.aborted) throw abortError()
-        // The task token must still be current before anything is deleted; an
-        // import or cache clear during the run aborts the run instead.
+        // The task token must still be current before anything is deleted.
         requireTask(await advanceTask(target, taskId, {}))
-        // Deleting records that are no longer in the collection list is only
-        // safe after a complete listing; an incomplete list aborts first. The
-        // target set is the list this task fetched or resumed with, so full,
-        // incremental and resumed runs remove the same way.
+        // Deleting absent records is safe only after a complete listing. The target set is
+        // this task's list, so full, incremental and resumed runs remove alike.
         if (!collectionComplete || plan.items.length !== collectionTotal) {
             throw new Error(`收藏列表不完整，已中止收尾: ${plan.items.length}/${collectionTotal}`)
         }
         stage('收尾合并', 2)
         const userInfo = await resolveUserInfo()
-        // A stop requested while resolving the profile must not delete or
-        // complete anything.
+        // A stop while the profile is fetched must not delete or complete anything.
         if (signal.aborted) throw abortError()
         const kept = new Set(plan.items.map(item => item.subject_id))
-        // Deleting, marking complete and dropping the saved list happen in one
-        // transaction: a failure leaves the task resumable with every record
-        // still present.
+        // Delete, completion and dropping the saved list commit together, so a failure
+        // leaves the task resumable with every record still present.
         const removed = await finalizeBackup(target, {
             taskId,
             keep: kept,
@@ -486,8 +457,6 @@ function createRun(options, signal) {
 
         if (!taskStages.includes(task.stage)) throw new Error('任务阶段无效')
         let currentStage = task.stage
-        // Item stages resume from the finished ids of their own stage, never
-        // from a list index.
         let doneIds = await readDoneIds(task)
 
         const list = await fetchCollections(task)
@@ -535,8 +504,7 @@ function createRun(options, signal) {
             },
             issues: { ...issues },
         }
-        // A broken shard, a missing id and an unreadable manifest stay separate:
-        // they have different causes and different remedies.
+        // A broken shard, a missing id and an unreadable manifest have different remedies.
         if (staticBroken(staticStats.subject)) {
             log(`静态条目数据不完整，已用接口补齐：分片失败 ${staticStats.subject.chunk_failures} · 解析失败 ${staticStats.subject.parse_failures} · 清单读取失败 ${staticStats.subject.manifest_failures}`, 'warn')
         }
@@ -561,9 +529,6 @@ function createRun(options, signal) {
         return result
     }
 
-    // The pause covers the whole backup: the list, every static read and every
-    // API call happen while the prefetch behind them stays stopped, so the two
-    // never compete for the same connection.
     return async function run() {
         if (!target) throw new Error('缺少目标用户名')
         if (!runModes.includes(mode)) throw new Error('未知任务类型')
@@ -576,9 +541,8 @@ function createRun(options, signal) {
     }
 }
 
-// The worker reports the files a finished round could not store. Only the
-// backup page imports this module, so its log is where the count and the
-// reason are shown to the reader; the message would otherwise reach no one.
+// The worker reports files a finished round could not store. Only the backup page
+// imports this module, so its log is where the count and reason appear.
 const missingReasonText = {
     failed: '下载失败',
     mismatch: '内容与清单不符',
@@ -613,8 +577,7 @@ function listenMissing() {
     })
 }
 
-// Pass `restart: true` only after the user confirms replacing the unfinished
-// task reported by a TaskConflictError; without it the conflict is rethrown.
+// Pass `restart: true` only after the user confirms replacing the unfinished task.
 export function startBackup(options = {}) {
     missingLog = options.onLog || null
     listenMissing()

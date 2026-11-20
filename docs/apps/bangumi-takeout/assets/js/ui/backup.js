@@ -81,9 +81,8 @@ function canStart() {
         && taskInfo.status !== taskStatus.unfinished
 }
 
-// An incremental run reads what the machine already holds; without a cached
-// collection there is nothing to be incremental about. The count belongs to one
-// target, so it stays unused until the read for the current one finishes.
+// An incremental run reads what the machine holds; without a cached collection
+// there is nothing to be incremental about. The count belongs to one target.
 function canStartIncremental() {
     return canStart() && cacheTarget === targetValue.trim() && cacheCount > 0
 }
@@ -181,8 +180,7 @@ function syncProgressFromTask() {
 export async function renderBackup() {
     const main = document.getElementById('main')
     if (!main) return
-    // A background run may finish after the route changed; it must not paint
-    // over another page.
+    // A background run must not paint over another page.
     if (main.dataset.route !== 'backup') return
     closeMenu()
 
@@ -208,7 +206,6 @@ export async function renderBackup() {
     cacheTarget = initialTarget === targetValue.trim() ? initialTarget : ''
     await refreshTask()
     syncProgressFromTask()
-    // The route may have changed while the stores were read.
     if (main.dataset.route !== 'backup') return
     renderShell(main)
     bindTarget(main)
@@ -459,8 +456,7 @@ function bindAuth(main) {
         } catch (error) {
             verifying = false
             verifyController = null
-            // A backup may have started during verification; the run then owns
-            // the UI.
+            // A backup may have started during verification; the run then owns the UI.
             if (!running) {
                 if (isAbortError(error)) {
                     form.hidden = true
@@ -476,8 +472,7 @@ function bindAuth(main) {
         }
         verifying = false
         verifyController = null
-        // Drop a late verification result during a run so it cannot overwrite
-        // the active auth and notice.
+        // A late verification result must not overwrite the run's auth and notice.
         if (running) return
         selectedAuth = result.username
         setNotice('已添加 ' + result.username)
@@ -670,7 +665,6 @@ async function runBackup(mode, markReady) {
         // start repeats the read before it commits.
         const count = await readCacheCount(target)
         if (!count) {
-            // Keep the button in step with the read that rejected it.
             cacheCount = 0
             cacheTarget = target
             setNotice('本机没有该目标的收藏缓存，无法增量备份', 'run')
@@ -707,9 +701,8 @@ async function runBackup(mode, markReady) {
             if (name === '完成') {
                 progress = { index: stageLabels.length, label: '完成', done: 1, total: 1 }
             } else {
-                // A new stage name resets the finished count even when two names
-                // share one node. The note is kept only for a mapped name, so an
-                // unknown stage never repeats its own text.
+                // A new stage resets the finished count even when two names share a node; the note
+                // is kept only for a mapped name.
                 const base = name.split('（')[0]
                 const mapped = stageIndexByName[base]
                 const index = mapped ?? progress.index

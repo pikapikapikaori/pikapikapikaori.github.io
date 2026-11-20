@@ -133,7 +133,7 @@ async function readBody(response, signal, { idleTimeout = null, onActivity = nul
     }
 }
 
-// `signal` is a third-argument option on purpose.
+// `signal` is the third argument on purpose: `init` goes to fetch as it is.
 export async function fetchWithTimeout(url, init = {}, {
     signal = null, timeout = requestTimeoutMs, idleTimeout = null,
 } = {}) {
@@ -224,7 +224,6 @@ async function readBodyBytes(response, signal, { arm = null, maxBytes }) {
     }
 }
 
-// A shard is a ZIP. The body is counted as it arrives.
 async function fetchChunkBytes(url, { signal = null } = {}) {
     if (signal?.aborted) throw abortError()
     const controller = new AbortController()
@@ -324,8 +323,7 @@ function unauthorizedError() {
 }
 
 function isTruncatedJsonMessage(message) {
-    // Chrome/V8 says "Unexpected end of JSON input", Safari says
-    // "Unexpected EOF"; both mean the body ended before the JSON did.
+    // Chrome says "Unexpected end of JSON input", Safari "Unexpected EOF"; both mean a cut body.
     return /unexpected end|unexpected eof|unterminated|\beof\b/i.test(String(message || ''))
 }
 
@@ -519,9 +517,8 @@ const shardRanges = {
     episode: { minKey: 'min_subject_id', maxKey: 'max_subject_id' },
 }
 
-// Returns the reason a manifest cannot be trusted for range lookup, or an empty
-// string. A wrong range silently sends the lookup to a shard without the id, so
-// the caller scans every shard instead of trusting a bad order.
+// Returns why a manifest cannot be trusted for range lookup, or ''. A wrong range
+// sends the lookup into a shard without the id, so the caller scans all shards.
 function manifestProblem(kind, data) {
     const { minKey, maxKey } = shardRanges[kind]
     const chunks = data.chunks
@@ -548,9 +545,7 @@ function manifestProblem(kind, data) {
     if (!counted || !Number.isInteger(data.total)) return ''
     const sum = chunks.reduce((total, chunk) => total + chunk.count, 0)
     if (sum !== data.total) return `分片条目合计 ${sum} 与 total ${data.total} 不一致`
-    // Only the subject shards are packed by entry count. The episode shards are
-    // packed by subject count, so their shard number cannot be derived from
-    // `total` and is left unchecked.
+    // Episode shards are packed by subject count, so their count cannot come from `total`.
     if (kind !== 'subject') return ''
     if (!Number.isInteger(data.chunk_size) || data.chunk_size <= 0) return ''
     const expected = Math.ceil(data.total / data.chunk_size)
@@ -582,9 +577,7 @@ function locateChunks(manifest, ids, minKey, maxKey) {
     return Array.from(result)
 }
 
-// A chunk without a usable name cannot be requested at all; a full scan skips
-// it instead of asking the server for an empty address. A repeated name is the
-// same shard, so it is read once.
+// A chunk without a file name cannot be requested; a repeated name is one shard.
 function usableChunks(manifest) {
     const seen = new Set()
     const list = []
@@ -597,8 +590,7 @@ function usableChunks(manifest) {
     return list
 }
 
-// A shard read in the retry pass can hold an entry the located pass already
-// returned, so episode lists are merged by episode id.
+// The retry pass can repeat entries the located pass returned, so lists merge by entry id.
 function mergeChunkData(target, extra) {
     for (const [id, value] of extra) {
         if (!Array.isArray(value)) {
@@ -617,7 +609,7 @@ function mergeChunkData(target, extra) {
     return target
 }
 
-// The one static-data statistics shape shared by the source and the runner.
+// The statistics shape shared with runner.js.
 export function createStaticStats() {
     return {
         chunks: 0, chunk_failures: 0, parse_failures: 0, manifest_failures: 0,
@@ -626,36 +618,29 @@ export function createStaticStats() {
     }
 }
 
-// `eps` counts the main episodes only, so the main type is the comparable one.
-// A snapshot that carries no type at all falls back to its total.
+// `eps` counts main episodes, so only type 0 compares; a snapshot without types uses its total.
 function staticEpisodeCount(episodes) {
     const typed = episodes.some(episode => Number.isInteger(episode.type))
     if (!typed) return episodes.length
     return episodes.filter(episode => episode.type === 0).length
 }
 
-// A snapshot can lag by an episode or two, so a small difference is accepted.
-// One tolerated episode is deliberate: a two-episode subject with one hit stays
-// writable, which is the agreed tolerance, while a three-episode subject with
-// one hit cannot pass as complete.
+// A lag of an episode or two is accepted: one hit of two stays usable, one hit
+// of three does not.
 function staticEpisodesShort(available, expected) {
     if (!Number.isInteger(expected) || expected <= 0) return false
     if (available === 0) return true
     return expected - available > Math.max(1, Math.ceil(expected / 10))
 }
 
-// Only the first few per-subject notes are written, so shard failures stay
-// visible in the log; the rest are counted in one closing line.
+// Only the first notes are logged; the rest are counted in one closing line.
 const episodeNoteLimit = 5
 
-// The stage note tells the reader which reason started a wider read. The retry
-// note stays neutral because a failed fetch and a shard-level unzip error share
-// the same retry pass.
+// The stage note names the reason for a wider read; the retry note stays neutral.
 const noteUnreliable = '（清单不可靠，扫描全部分片）'
 const noteRetry = '（分片读取失败，补读其余分片）'
 
-// The service worker's manifest lists every static data shard, so the prefetch
-// stores and verifies them, and a shard already stored costs no request here.
+// The service worker prefetches every shard in the manifest, so a stored shard costs no request.
 export function createBgmSource({
     base, signal = null, onStage = null, onProgress = null, onLog = null,
 } = {}) {
@@ -675,10 +660,8 @@ export function createBgmSource({
     let pauseIdleTimer = null
     let pauseHeartbeat = null
 
-    // terminate() never settles the Promises posted to the worker. Rejecting
-    // them here keeps a closing source from leaving a caller waiting forever.
-    // The error is not an abort error: a closed worker is not a user
-    // cancellation, and reporting it as one would stop the whole run.
+    // terminate() never settles posted Promises, so rejecting them keeps a closing
+    // source from leaving a caller waiting. It is not an abort; the run continues.
     function closeWorker() {
         for (const call of workerCalls.values()) {
             call.cleanup()
@@ -691,9 +674,8 @@ export function createBgmSource({
         }
     }
 
-    // One worker failure disables the worker for the rest of the run. Parsing
-    // every later shard on the main thread costs less than a full worker
-    // timeout per shard, and the parser is the same in both paths.
+    // One worker failure disables the worker for the run: main-thread parsing of later
+    // shards costs less than a timeout each.
     function failWorker(error) {
         workerDisabled = true
         for (const call of workerCalls.values()) {
@@ -724,10 +706,8 @@ export function createBgmSource({
                     parseFailures: data.parseFailures || 0,
                 })
             } else {
-                // The worker ran fine and reported a bad shard. That is not a
-                // worker failure: the worker stays usable, and replying the same
-                // buffer on the main thread could not change the outcome, so the
-                // shard is counted as failed and skipped.
+                // A bad-shard report is not a worker failure: the worker stays usable and the shard
+                // is counted as failed, since a main-thread retry would fail the same way.
                 const error = new Error(data.message || '静态分片解压失败')
                 error.shardFailure = true
                 call.reject(error)
@@ -778,8 +758,7 @@ export function createBgmSource({
             } catch (error) {
                 workerCalls.delete(id)
                 cleanup()
-                // A worker that cannot take a message is unusable; the later
-                // catch closes it and parses this shard on the main thread.
+                // A worker that cannot take a message is unusable; the catch closes it and parses here.
                 failWorker(error)
                 reject(error)
             }
@@ -791,16 +770,13 @@ export function createBgmSource({
         })
     }
 
-    // The pause lives in the worker's memory and lasts until the backup ends;
-    // resending it only lets a restarted worker pick the pause up again.
+    // The pause lives in the worker's memory; resending lets a restarted worker pick it up.
     function heartbeatPause() {
         if (!pauseToken) return
         postServiceWorkerMessage('PAUSE', { reason: 'backup', token: pauseToken })
     }
 
-    // One pause covers every static read of a run: the list and the manifest
-    // read happen inside it, and two phases never leave a gap where the
-    // prefetch could resume.
+    // One pause covers every static read of a run, so no gap lets the prefetch resume.
     function openPause() {
         if (pauseIdleTimer) {
             clearTimeout(pauseIdleTimer)
@@ -827,9 +803,7 @@ export function createBgmSource({
         pauseToken = ''
     }
 
-    // A source used without a held run releases its pause once no read is left,
-    // so the prefetch behind it is not stopped forever. A run that holds the
-    // pause keeps it across the stages instead.
+    // A source without a held run releases its pause when idle; a held run keeps it across stages.
     function releasePauseWhenIdle() {
         if (pauseHolds > 0 || pauseReads > 0 || !pauseToken) return
         if (pauseIdleTimer) clearTimeout(pauseIdleTimer)
@@ -863,8 +837,7 @@ export function createBgmSource({
         closeWorker()
     }
 
-    // One warning per source and kind: a manifest repaired after a rescan must
-    // not repeat the same note on every fill call, but each read still counts.
+    // One warning per kind: a repaired manifest must not repeat it, but every read still counts.
     function markUnreliable(kind, stats, reason) {
         stats.manifest_unreliable += 1
         if (notified.has(kind)) return
@@ -872,8 +845,7 @@ export function createBgmSource({
         onLog?.(`静态 ${kind} 清单不可靠: ${reason}，改为读取全部分片`, 'warn')
     }
 
-    // A static snapshot is optional: a broken manifest or chunk is reported and
-    // counted, never fatal, because the API fallback still covers every item.
+    // A static snapshot is optional: a broken manifest is counted and logged, never fatal.
     async function readManifest(kind, stats) {
         if (manifests.has(kind)) return manifests.get(kind)
         const url = `${base}/${bgmDirs[kind]}/manifest.json`
@@ -899,9 +871,7 @@ export function createBgmSource({
         }
     }
 
-    // Every shard file is read at most once per fill. A file in `attempted`,
-    // whether it succeeded or failed, is skipped here and only advances the
-    // progress, so a retry pass reads just the shards never tried before.
+    // Each shard file is read once per fill; a file in `attempted` only advances progress.
     async function loadChunks(kind, chunks, idSet, ids, idKey, stats, { note = '', attempted }) {
         const result = new Map()
         onStage?.(`读取静态 ${kind} 数据${note}`, chunks.length)
@@ -952,16 +922,13 @@ export function createBgmSource({
         return result
     }
 
-    // Reads one kind of static data. The range lookup stays in charge unless a
-    // located shard fails to load; an id the snapshot does not cover is counted
-    // as a miss and left to the API, never answered with a full scan.
+    // The range lookup stays in charge unless a located shard fails; a miss goes to the API.
     async function loadStaticData(kind, source, idSet, idKey, stats, { countMiss = true } = {}) {
         const ids = Array.from(idSet)
         const attempted = new Set()
         const failuresBefore = stats.chunk_failures + stats.parse_failures
-        // A miss is an id the snapshot never held. A failed or partly unread
-        // shard already hides its ids, so those reads are not counted again as
-        // coverage gaps; the shard failure counters own them.
+        // A failed or partly unread shard already hides its ids, so those reads are not
+        // counted again as misses.
         const noteMiss = (data, reliable) => {
             if (!countMiss) return data
             if (stats.chunk_failures + stats.parse_failures > failuresBefore) return data
@@ -989,8 +956,7 @@ export function createBgmSource({
         if (!located.length) return noteMiss(new Map(), true)
         const failures = stats.chunk_failures
         const data = await loadChunks(kind, located, idSet, ids, idKey, stats, { attempted })
-        // A listed shard could not be read, so its range proves nothing; the
-        // retry reads only the shards that were never tried.
+        // A listed shard failed, so its range proves nothing; the retry reads only untried shards.
         const merged = stats.chunk_failures === failures
             ? data
             : mergeChunkData(data, await scanAll(noteRetry))
@@ -1041,8 +1007,7 @@ export function createBgmSource({
                 const episodes = data.get(item.subject_id) || []
                 const available = staticEpisodeCount(episodes)
                 if (staticEpisodesShort(available, item.subject_data?.eps)) {
-                    // An empty or short list is counted as well: the API then
-                    // fetches the complete one instead of a partial record.
+                    // An empty or short list is counted too: the API then fetches the complete one.
                     stats.episode_shortfall += 1
                     if (noted < episodeNoteLimit) {
                         noted += 1
@@ -1060,9 +1025,8 @@ export function createBgmSource({
             return { filled, stats }
         },
 
-        // The backup run holds the pause from its first request to its last:
-        // the list, the static reads and the API calls all run while the
-        // prefetch behind them is stopped.
+        // The run holds the pause from its first request to its last, so the prefetch behind
+        // it stays stopped for the list, the static reads and the API calls.
         pause: holdPause,
         close,
     }

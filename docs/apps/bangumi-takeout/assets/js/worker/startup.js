@@ -65,9 +65,8 @@
         sendToWorker({ type: 'START' }).catch(function () { started = false })
     }
 
-    // The first load reaches the service worker from both the registration and
-    // the pageshow event. One START per load is enough; a second one starts the
-    // same manifest scan again.
+    // The first load reaches the worker from both registration and pageshow; one START
+    // per load is enough.
     let started = false
 
     function begin() {

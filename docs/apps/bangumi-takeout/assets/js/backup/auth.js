@@ -1,5 +1,5 @@
-// Credentials live in the shared `credentials` store keyed by the verified
-// account name, so the export page and the viewer always see the same login.
+// Credentials live in the shared `credentials` store, keyed by the account name the
+// token proves, so the backup page and the viewer see one login.
 import {
     authBase, bangumiClientId, storagePrefix, storeCredentials,
     tokenRefreshMarginMs,
@@ -10,8 +10,7 @@ import { BangumiApi, fetchWithTimeout, proxied } from './api.js'
 const oauthVerifierKey = storagePrefix + 'oauth-verifier'
 const oauthStateKey = storagePrefix + 'oauth-state'
 
-// storage.js owns the connection and recreates the database when a store is
-// missing, so credentials share one schema check and one transaction helper.
+// storage.js owns the connection and its schema check, so credentials reuse both.
 function credentialRequest(mode, fn) {
     return runTransaction(storeCredentials, mode, t => fn(t.objectStore(storeCredentials)))
 }
@@ -73,8 +72,7 @@ function clearPending() {
     sessionStorage.removeItem(oauthStateKey)
 }
 
-// The callback URL keeps `code` and `state`; both are single-use secrets, so
-// they are removed from the address bar once the exchange is handled.
+// `code` and `state` are single-use secrets, so they leave the address bar once handled.
 function clearOAuthParams() {
     try {
         const url = new URL(location.href)
@@ -126,8 +124,8 @@ async function verifyToken(accessToken, { signal = null } = {}) {
     return me
 }
 
-// The account name comes from the token itself: writing under the typed name
-// could overwrite another account's credential.
+// The account name comes from the token: writing under the typed name could
+// overwrite another account's credential.
 async function storeVerified(data, { signal = null } = {}) {
     const me = await verifyToken(data.access_token, { signal })
     const record = tokenRecord(me.username, data)
@@ -189,8 +187,7 @@ export async function finishAuthorization(search = location.search) {
         })
         return await storeVerified(data)
     } finally {
-        // The code and verifier are single-use secrets: drop them even when the
-        // token exchange fails, so a retry starts from a clean session.
+        // The code and verifier are single-use; drop them even when the exchange fails.
         clearPending()
         clearOAuthParams()
     }
@@ -224,7 +221,6 @@ export async function requireAccessToken(username, { signal = null } = {}) {
     if (!record) throw new Error(`没有 ${username} 的登录凭证`)
 
     const expiresAt = Number(record.token_expires_at) || 0
-    // A pasted token has no known expiry; keep using it until the API answers 401.
     if (!expiresAt) return record.access_token
     if (Date.now() < expiresAt - tokenRefreshMarginMs) return record.access_token
     if (!record.refresh_token) throw new Error('访问令牌已过期，且没有刷新令牌，请重新登录')

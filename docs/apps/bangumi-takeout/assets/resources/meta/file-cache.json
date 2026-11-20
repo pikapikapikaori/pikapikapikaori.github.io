@@ -1,6 +1,6 @@
 {
     "version": "1.1.0",
-    "hash": "d912285b3ae61919",
+    "hash": "8a9f76621f1d7e1e",
     "files": [
         {
             "path": "assets/css/about.css",
@@ -12,7 +12,7 @@
         },
         {
             "path": "assets/css/components.css",
-            "hash": "8a7fff55cc133ae1"
+            "hash": "2185cede2e631361"
         },
         {
             "path": "assets/css/detail.css",
@@ -44,27 +44,27 @@
         },
         {
             "path": "assets/js/backup/api.js",
-            "hash": "20f3025b4519cadb"
+            "hash": "1ca76a356e628752"
         },
         {
             "path": "assets/js/backup/auth.js",
-            "hash": "39964a620965acd2"
+            "hash": "c3ba37525ac658be"
         },
         {
             "path": "assets/js/backup/exporter.js",
-            "hash": "4221c768b1d49495"
+            "hash": "4bf6703aaa507b18"
         },
         {
             "path": "assets/js/backup/runner.js",
-            "hash": "8642fa5b6f0e4d1e"
+            "hash": "3aa3b357c9e752fe"
         },
         {
             "path": "assets/js/bootstrap.js",
-            "hash": "ff23abf691d31dfc"
+            "hash": "09332318d167a4cd"
         },
         {
             "path": "assets/js/config.js",
-            "hash": "f927e5006ef2f782"
+            "hash": "c47e0eb7db5d07b9"
         },
         {
             "path": "assets/js/dom.js",
@@ -76,15 +76,15 @@
         },
         {
             "path": "assets/js/layout.js",
-            "hash": "46de00f6090ef083"
+            "hash": "1d15d29cda797ea0"
         },
         {
             "path": "assets/js/main.js",
-            "hash": "b0e911ad74b1d251"
+            "hash": "83ae893d5cc451fb"
         },
         {
             "path": "assets/js/model.js",
-            "hash": "fe65f35a03384651"
+            "hash": "8b529f31c83f7162"
         },
         {
             "path": "assets/js/pages/about.js",
@@ -92,7 +92,7 @@
         },
         {
             "path": "assets/js/pages/backup.js",
-            "hash": "a9b837160a6bb0a8"
+            "hash": "d37ff03b11690bcb"
         },
         {
             "path": "assets/js/pages/data.js",
@@ -116,23 +116,23 @@
         },
         {
             "path": "assets/js/router.js",
-            "hash": "b28e3452e95c8bbc"
+            "hash": "14029b8f5d6afedf"
         },
         {
             "path": "assets/js/search.js",
-            "hash": "546dbfd40cc39c1e"
+            "hash": "d2c5b52ccbf6e999"
         },
         {
             "path": "assets/js/source.js",
-            "hash": "8e23186e5a1c5712"
+            "hash": "0df0cdc07c1144d7"
         },
         {
             "path": "assets/js/storage.js",
-            "hash": "b669635fed11a613"
+            "hash": "20e648d5ce11770c"
         },
         {
             "path": "assets/js/tasks.js",
-            "hash": "5e49c3f5510d2d6d"
+            "hash": "ec34935653fb6a44"
         },
         {
             "path": "assets/js/theme.js",
@@ -144,27 +144,27 @@
         },
         {
             "path": "assets/js/ui/backup.js",
-            "hash": "e0acf7cac06f9dc7"
+            "hash": "180901800d471c42"
         },
         {
             "path": "assets/js/ui/data.js",
-            "hash": "83779085130ea43d"
+            "hash": "fe7aef9c12aa34a7"
         },
         {
             "path": "assets/js/ui/detail.js",
-            "hash": "19608e09b5db0ded"
+            "hash": "dc42513898968c87"
         },
         {
             "path": "assets/js/ui/import.js",
-            "hash": "de50ec501edbbcb0"
+            "hash": "6e03cb317fbd0d71"
         },
         {
             "path": "assets/js/ui/loading.js",
-            "hash": "997225652bffb4fd"
+            "hash": "234586964c383259"
         },
         {
             "path": "assets/js/ui/menu.js",
-            "hash": "e7434694d1a94605"
+            "hash": "14ff2f3f7198c72f"
         },
         {
             "path": "assets/js/ui/overview.js",
@@ -172,19 +172,19 @@
         },
         {
             "path": "assets/js/ui/users.js",
-            "hash": "382840ff06ff986a"
+            "hash": "50ce24b5c2095893"
         },
         {
             "path": "assets/js/worker/chunk.js",
-            "hash": "1cb8c054e3279126"
+            "hash": "ab017c965664d26c"
         },
         {
             "path": "assets/js/worker/startup.js",
-            "hash": "74564e86a29d4e60"
+            "hash": "9ec99fb9facaf5c6"
         },
         {
             "path": "assets/js/zip.js",
-            "hash": "8499c7e512e6e140"
+            "hash": "f0385dec0256b351"
         },
         {
             "path": "assets/resources/logo/favicon.ico",

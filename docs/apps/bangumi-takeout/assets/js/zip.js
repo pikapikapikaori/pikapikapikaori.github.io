@@ -1,5 +1,4 @@
-// Only ZIP store (0) and deflate (8) are supported. Decompression uses the
-// native DecompressionStream('deflate-raw'), so no external dependency is needed.
+// Only store (0) and deflate (8) are supported, through the native DecompressionStream.
 import { zipMaxOutputBytes } from './config.js'
 
 const eocdSig = 0x06054b50
@@ -192,7 +191,6 @@ async function unzipFirst(arrayBuffer, {
     throw new Error('ZIP 中没有找到 JSON 数据')
 }
 
-// A static shard is always packed, so the text is decoded after inflating.
 export async function extractShardText(arrayBuffer, {
     signal = null, maxOutputBytes = zipMaxOutputBytes,
 } = {}) {

@@ -4,9 +4,9 @@
 
 把 bgm-data/subject.jsonlines 和 episode.jsonlines 切成多个分片 + 生成 manifest。
 
-用法：
-    python build_chunks.py --data-dir ./bgm-data
-    python build_chunks.py --data-dir ./bgm-data --out-dir /tmp/chunks --episode-chunk 3000
+用法（在仓库根目录运行）：
+    python3 script/python/build_chunks.py
+    python3 script/python/build_chunks.py --data-dir <原始 jsonlines 所在目录> --out-dir /tmp/chunks --episode-chunk 3000
 
 产出结构：
     bgm-data/
@@ -640,7 +640,9 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-dir", default="./docs/writings/_media/BangumiBackup-20260915/web",
+    parser.add_argument("--data-dir",
+                        default=str(Path(__file__).resolve().parents[2]
+                                    / "docs/apps/bangumi-takeout/data/bgm-data"),
                         help="bgm-data 目录（读取 subject.jsonlines 与 episode.jsonlines）")
     parser.add_argument("--out-dir", default=None,
                         help="只把分片与清单写入此目录，不覆盖 --data-dir")

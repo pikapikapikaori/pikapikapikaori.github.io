@@ -1,10 +1,5 @@
-// Writes one user as the takeout.json file shared with the bangumi-takeout-py
-// project. One transaction reads the list records, the detail records and the
-// meta record, so the file is one consistent snapshot, and the two halves of
-// each item are joined back into one entry. `progress` stays in the file
-// because the format carries it; `owner` is local bookkeeping. The `progress_at`
-// stamp that says whether a stored progress is still current belongs to the
-// list half, so the join drops it and it never reaches the file.
+// Writes one user as takeout.json, the file bangumi-takeout-py also reads. One
+// transaction joins both halves; `owner` and `progress_at` stay out of the file.
 import { readUserExport } from '../storage.js'
 
 const internalFields = ['owner']
@@ -35,8 +30,7 @@ export async function exportUserData(username) {
     const name = String(username || '').trim()
     if (!name) throw new Error('缺少导出用户名')
 
-    // One transaction for both stores: the export never mixes a meta record
-    // with items written by a concurrent backup.
+    // One transaction: the export never mixes meta with items of a concurrent run.
     const { meta: record, items: records } = await readUserExport(name)
     if (!records.length) throw new Error(`本地没有 ${name} 的数据`)
 

@@ -10,7 +10,7 @@ if [ "${1:-}" = '--check' ]; then
 fi
 failed=0
 
-allowed_exts=(html js mjs css md json svg png jpg jpeg gif webp avif ico woff woff2 ttf otf eot mp4 cmo3 moc3 can3)
+allowed_exts=(html js mjs css md json svg png jpg jpeg gif webp avif ico woff woff2 ttf otf eot mp4 zip cmo3 moc3 can3)
 
 # 匹配规则对每个项目都生效 整段相等 或以 / 分隔的前缀 后缀 或出现在中间都算命中
 exclude_paths_global=(
@@ -27,7 +27,7 @@ id_root=root
 version_root=4.7.5
 dir_root=''
 include_root=(index.html 404 About.md Beginning.md Photograph.md Sites.md _coverpage.md _footer.md _navbar.md _sidebar.md README.md assets apps pages writings archive jp en-us _media)
-exclude_paths_root=(writings/_media/PersonalRecordsBackup)
+exclude_paths_root=(writings/_media/PersonalRecordsBackup archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-backend-master.zip archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-frontend-main.zip)
 exclude_exts_root=()
 
 id_homepage=homepage
@@ -48,8 +48,8 @@ id_light=light
 version_light=1.1.1
 dir_light=pages/light
 include_light=(index.html assets helpers ../../404 ../../assets ../../writings ../../archive ../../jp ../../en-us ../../_media)
-exclude_paths_light=(writings/_media/PersonalRecordsBackup)
-exclude_exts_light=(jpg jpeg png gif webp avif mp4)
+exclude_paths_light=(writings/_media/PersonalRecordsBackup ../../archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-backend-master.zip ../../archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-frontend-main.zip)
+exclude_exts_light=(jpg jpeg png gif webp avif mp4 zip)
 
 id_grammar=grammar
 version_grammar=1.0.0
@@ -60,8 +60,8 @@ exclude_exts_grammar=()
 
 id_bangumi_takeout=bangumi-takeout
 version_bangumi_takeout=1.1.0
-dir_bangumi_takeout=apps/bangumi-takeout/app
-include_bangumi_takeout=(index.html assets)
+dir_bangumi_takeout=apps/bangumi-takeout
+include_bangumi_takeout=(index.html assets data)
 exclude_paths_bangumi_takeout=()
 exclude_exts_bangumi_takeout=()
 

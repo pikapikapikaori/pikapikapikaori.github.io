@@ -34,9 +34,7 @@ function checkStage(stage) {
     if (!taskStages.includes(stage)) throw new Error('未知任务阶段')
 }
 
-// `position` is a stage-local counter shown for diagnostics. Item stages resume
-// from `stage` plus the finished-id chunks stored under the task token; the
-// collection list resumes from the pages stored the same way.
+// `position` is a diagnostic counter; resume comes from the stored pages and chunks.
 function checkPosition(position) {
     if (!Number.isInteger(position) || position < 0) throw new Error('任务位置必须为非负整数')
 }
@@ -92,9 +90,8 @@ export async function beginTask(username, operation, { authUsername = '', stage,
     })
 }
 
-// A checkpoint writes the stage, its position and count, the one chunk that
-// holds the finished subject, and never the whole set: the finished ids are
-// chunked and the collection list is stored page by page.
+// A checkpoint carries the stage, its position and count; the finished subject
+// goes into its chunk through the context (see storage.js).
 export async function advanceTask(username, taskId, {
     stage, position, progress, doneSubjectId, collectionTotal,
 } = {}) {
@@ -116,8 +113,7 @@ export async function advanceTask(username, taskId, {
         if (stage !== undefined && stage !== task.stage) {
             task.stage = stage
             task.position = position ?? 0
-            // Records are completed per subject_id inside the current stage;
-            // a new stage starts with no finished ids so list reordering is safe.
+            // Finished ids are per subject_id inside one stage, so a reordered list is safe.
             ctx.resetDone()
         } else if (position !== undefined) {
             task.position = position

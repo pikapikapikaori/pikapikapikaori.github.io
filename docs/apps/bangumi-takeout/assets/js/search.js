@@ -13,8 +13,7 @@ export function closeSearch() {
     panel.innerHTML = ''
 }
 
-// The header is built once, but a repeated call must still rebind to the
-// current input instead of stacking duplicate listeners.
+// The header is built once; a repeated call must rebind instead of stacking listeners.
 export function initSearch() {
     const input = document.getElementById('global-search')
     const panel = document.getElementById('global-search-panel')

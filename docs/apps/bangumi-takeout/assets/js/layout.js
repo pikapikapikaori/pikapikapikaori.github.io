@@ -77,8 +77,7 @@ function paintUserMenu() {
     if (!menu) return
     const user = state.data?.user
     menu.hidden = !user
-    // Search covers the loaded collection, so it has nothing to search before
-    // a user is selected.
+    // Search covers the loaded collection, so it is hidden before a user is chosen.
     const search = document.querySelector('.header-search')
     if (search) search.hidden = !user
     if (!user) {
@@ -104,9 +103,8 @@ function bindDataSource() {
 
     let pinned = false
 
-    // On narrow screens the trigger can sit near the right edge, where a fixed
-    // 280px popover overflows the viewport; tighten the width and shift it left
-    // so 320px never scrolls horizontally.
+    // A fixed 280px popover overflows a 320px viewport near the right edge, so the
+    // width is tightened and the panel shifted left.
     const place = () => {
         const margin = 12
         const hostRect = host.getBoundingClientRect()
@@ -130,8 +128,7 @@ function bindDataSource() {
     }
     closeDataSource = close
 
-    // Hover opens and closes at once. The popover is a child of the host, so
-    // moving the pointer into it stays inside the hover area.
+    // The popover is a child of the host, so the pointer stays inside it on hover.
     host.addEventListener('mouseenter', open)
     host.addEventListener('mouseleave', () => {
         if (!pinned) close()
@@ -147,12 +144,9 @@ function bindDataSource() {
         item.addEventListener('click', () => {
             close()
             const target = item.dataset.href
-            // Repeating the current hash fires no route render, so nothing
-            // would ever remove the mask.
+            // Repeating the current hash fires no render, so nothing would close the mask.
             if (target === location.hash) return
-            // Adding or switching the data source opens a page that reads the
-            // stores before it paints; the mask covers that read and closes when
-            // that render settles, or at its own timeout.
+            // The page reads the stores before it paints; the mask covers that read.
             const loading = beginLoading('正在打开…', { returnFocus: button })
             navigate(target).finally(() => loading.close())
         })
@@ -239,14 +233,11 @@ export function setActiveNav(nav) {
     paintNav()
 }
 
-// Both popovers live outside #main, so a route change must close them and drop
-// the open state that aria-expanded mirrors.
 export function closeHeaderPopovers() {
     closeDataSource?.()
     closeUserPanel?.()
 }
 
-// Repaint header state that depends on the loaded user without rebuilding it.
 export function syncHeader() {
     paintNav()
     paintUserMenu()

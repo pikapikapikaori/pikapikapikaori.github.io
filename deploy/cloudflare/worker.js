@@ -12,6 +12,17 @@ const PROXY_TOKEN_URL = 'https://bgm.tv/oauth/access_token'
 
 const PROXY_AUTHORIZE_URL = 'https://bgm.tv/oauth/authorize'
 
+// 回调固定落在主域名的中转路径
+const PROXY_REDIRECT_URI = 'https://pikapikapi.com/_cross_origin?oauth=callback'
+
+// 回调只回到博客自己的页面；state 里的地址按原样或下面几种写法之一命中即可。
+const OAUTH_RETURN_URLS = new Set([
+    'https://pikapikapi.com/apps/bangumi-takeout/index.html',
+    'https://pikapikapi.com/apps/bangumi-takeout/',
+    'https://bgmtv.pikapikapi.com/index.html',
+    'https://bgmtv.pikapikapi.com/',
+])
+
 const PROXY_METHODS = new Set(['GET', 'HEAD', 'POST', 'OPTIONS'])
 
 // 5 次跳转足够 OAuth 端点使用；越过即停止。
@@ -77,52 +88,82 @@ function isNavigation(request) {
     return accept.split(',')[0].split(';')[0].trim().toLowerCase() === 'text/html'
 }
 
-// 授权页由本站发起，浏览器随后回到 redirect_uri，故只接受与请求同源的地址。
-function oauthStart(url) {
-    const redirectUri = url.searchParams.get('redirect_uri') || ''
-    const challenge = url.searchParams.get('code_challenge') || ''
-    const state = url.searchParams.get('state') || ''
-    if (!redirectUri || !challenge || !state) {
-        return proxyError('missing oauth parameter', 400)
-    }
-    let redirect
-    try {
-        redirect = new URL(redirectUri)
-    } catch {
-        return proxyError('forbidden', 403)
-    }
-    if (redirect.origin !== url.origin) {
-        return proxyError('forbidden', 403)
-    }
-    redirect.hash = ''
-    redirect.username = ''
-    redirect.password = ''
-    const params = new URLSearchParams({
-        client_id: PROXY_CLIENT_ID,
-        response_type: 'code',
-        redirect_uri: redirect.href,
-        code_challenge: challenge,
-        // 只接受 S256，请求无法把挑战方法降级成 plain。
-        code_challenge_method: 'S256',
-        state,
-    })
+function redirectResponse(location) {
     return new Response(null, {
         status: 302,
         headers: {
-            Location: PROXY_AUTHORIZE_URL + '?' + params,
+            Location: location,
             'Access-Control-Allow-Origin': '*',
             [CROSS_ORIGIN_HEADER]: '1',
         },
     })
 }
 
+function oauthStart(url) {
+    const challenge = url.searchParams.get('code_challenge') || ''
+    const state = url.searchParams.get('state') || ''
+    if (!challenge || !state) {
+        return proxyError('missing oauth parameter', 400)
+    }
+    const params = new URLSearchParams({
+        client_id: PROXY_CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: PROXY_REDIRECT_URI,
+        code_challenge: challenge,
+        code_challenge_method: 'S256',
+        state,
+    })
+    return redirectResponse(PROXY_AUTHORIZE_URL + '?' + params)
+}
+
+function decodeBase64Url(text) {
+    const base64 = text.replace(/-/g, '+').replace(/_/g, '/')
+    const padded = base64 + '='.repeat((4 - base64.length % 4) % 4)
+    const binary = atob(padded)
+    const bytes = new Uint8Array(binary.length)
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i)
+    return new TextDecoder().decode(bytes)
+}
+
+function oauthCallback(url) {
+    const state = url.searchParams.get('state') || ''
+    if (state.length > 512) return proxyError('invalid state', 400)
+    const separator = state.lastIndexOf('.')
+    if (separator <= 0) {
+        return proxyError('invalid state', 400)
+    }
+    let target
+    try {
+        target = decodeBase64Url(state.slice(separator + 1))
+    } catch {
+        return proxyError('invalid state', 400)
+    }
+    const withSlash = target.replace(/index\.html$/, '').replace(/\/?$/, '/')
+    if (!OAUTH_RETURN_URLS.has(target)) {
+        if (!OAUTH_RETURN_URLS.has(withSlash)) return proxyError('forbidden', 400)
+        // 无结尾斜杠的地址在静态托管上不一定有目录页，改跳到带斜杠的形式。
+        target = withSlash
+    }
+    const params = new URLSearchParams()
+    for (const name of ['code', 'error', 'error_description', 'state']) {
+        const value = url.searchParams.get(name)
+        if (value !== null) params.set(name, value)
+    }
+    const query = params.toString()
+    return redirectResponse(query ? target + '?' + query : target)
+}
+
 async function crossOrigin(request, url) {
     if (!PROXY_METHODS.has(request.method)) {
         return proxyError('method not allowed', 405)
     }
-    // 授权入口本身就是页面跳转，须在拦截文档导航之前处理。
-    if (url.searchParams.get('oauth') === 'start') {
+    // 授权入口与回调都是页面跳转，须在拦截文档导航之前处理。
+    const oauth = url.searchParams.get('oauth')
+    if (oauth === 'start') {
         return oauthStart(url)
+    }
+    if (oauth === 'callback') {
+        return oauthCallback(url)
     }
     if (isNavigation(request)) {
         return proxyError('navigation not allowed', 400)
@@ -172,6 +213,12 @@ async function crossOrigin(request, url) {
         // 令牌交换必须带应用身份，故只在这一端点改写表单，请求体里的同名字段被覆盖。
         if (isTokenEndpoint) {
             const params = new URLSearchParams(new TextDecoder().decode(incomingBody))
+            // 只有授权码交换需要回调地址，其余请求即使带了也去掉。
+            if (params.get('grant_type') === 'authorization_code') {
+                params.set('redirect_uri', PROXY_REDIRECT_URI)
+            } else {
+                params.delete('redirect_uri')
+            }
             params.set('client_id', PROXY_CLIENT_ID)
             params.set('client_secret', PROXY_CLIENT_SECRET)
             body = params.toString()

@@ -47,10 +47,6 @@ export function removeCredential(username) {
     return credentialRequest('readwrite', store => store.delete(username))
 }
 
-function getRedirectUri() {
-    return location.origin + location.pathname
-}
-
 function b64url(buffer) {
     const bytes = new Uint8Array(buffer)
     let text = ''
@@ -194,13 +190,13 @@ export async function beginAuthorization() {
     await ensureProxy()
     const verifier = randStr(64)
     const challenge = b64url(await sha256(verifier))
-    const state = randStr(16)
+    const pageUrl = location.origin + location.pathname
+    const state = randStr(16) + '.' + b64url(new TextEncoder().encode(pageUrl))
     sessionStorage.setItem(oauthVerifierKey, verifier)
     sessionStorage.setItem(oauthStateKey, state)
 
     const params = new URLSearchParams({
         oauth: 'start',
-        redirect_uri: getRedirectUri(),
         code_challenge: challenge,
         code_challenge_method: 'S256',
         state,
@@ -240,7 +236,6 @@ export async function finishAuthorization(search = location.search) {
         const data = await requestToken({
             grant_type: 'authorization_code',
             code,
-            redirect_uri: getRedirectUri(),
             code_verifier: verifier,
         })
         return await storeVerified(data)

@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "8f3c0b31bf92fa6d",
+    "hash": "591f6925bfa6a037",
     "files": [
         {
             "path": "404/_404.md",
@@ -276,7 +276,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/startup.js",
-            "hash": "e8a0ff7b804caf73"
+            "hash": "06ab753faf0fe59a"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/storage.js",
@@ -1392,7 +1392,7 @@
         },
         {
             "path": "apps/grammar/assets/js/startup.js",
-            "hash": "9ec81aab58650187"
+            "hash": "97d39e39542774de"
         },
         {
             "path": "apps/grammar/assets/js/store/db.js",
@@ -9736,7 +9736,7 @@
         },
         {
             "path": "index.html",
-            "hash": "cdf610fa45051b60"
+            "hash": "7603ab201346b50c"
         },
         {
             "path": "jp/404/_404.md",
@@ -10692,7 +10692,7 @@
         },
         {
             "path": "pages/homepage/assets/js/startup.js",
-            "hash": "a178b80b2ac3c1dd"
+            "hash": "27ca1569f80e5adc"
         },
         {
             "path": "pages/homepage/assets/js/storage.js",
@@ -10852,7 +10852,7 @@
         },
         {
             "path": "pages/indexpage/assets/js/startup.js",
-            "hash": "b9f6b8dba8145a74"
+            "hash": "28f4996623828ced"
         },
         {
             "path": "pages/indexpage/assets/js/status.js",

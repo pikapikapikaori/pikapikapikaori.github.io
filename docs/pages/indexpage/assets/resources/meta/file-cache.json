@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "6c75825f310360d0",
+    "hash": "ec4d0df05dc5950b",
     "files": [
         {
             "path": "assets/css/fonts.css",
@@ -40,7 +40,7 @@
         },
         {
             "path": "assets/js/startup.js",
-            "hash": "b9f6b8dba8145a74"
+            "hash": "28f4996623828ced"
         },
         {
             "path": "assets/js/status.js",

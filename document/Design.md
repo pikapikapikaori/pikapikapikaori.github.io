@@ -1,4 +1,4 @@
-# pikapikapi-blog
+# Design Principles
 
 English | [简体中文](./Design_zh-cn.md)
 

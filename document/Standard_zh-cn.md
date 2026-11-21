@@ -1,4 +1,4 @@
-# pikapikapi-blog
+# 开发规范
 
 [English](./Standard.md) | 简体中文
 
@@ -43,10 +43,25 @@
         └── logo/
 ```
 
-## PWA 缓存与存储命名
+## PWA 设置
 
 - 每个项目一个缓存前缀，`manifest.json` 的 `id` 与前缀一致且保持稳定。自有 `localStorage`、`sessionStorage` 键与 IndexedDB 库名带同一项目前缀。
 - Service Worker 缓存名为 `<前缀>:static:<版本>:<hash>`。`hash` ：把排序后的 `路径:文件哈希` 首尾相接，再取 SHA-256 的前 16 位十六进制，文件哈希取该文件 SHA-256 的前 16 位十六进制。
+
+## 保留地址
+
+所有项目保留地址统一使用路径 `/_cross_origin`，其相对 `base_url`，因为完整路径为 `<domain-base-url>/_cross_origin`。
+
+### 跨域请求
+
+跨域访问统一经这个地址转发，由[部署中间件](./Deploy_zh-cn.md#中间件职责)实现。
+
+### 授权
+
+- 页面只提供挑战值与 `state`，授权地址与客户端参数由中间件拼装。
+- 回调地址只登记一条，`state` 里带返回页。
+- 令牌交换同样经中间件完成，客户端标识与密钥不进入仓库。
+- 指向该地址的页面导航一律拒绝。
 
 ## 代码规范
 
@@ -125,3 +140,16 @@ bash script/blog.sh help
 5. 修改对应的 Gitalk Issue Tag 的链接。
 
 **注意**：不用修改文章内对资源文件的引用链接（`_media/path/to/directory/path/to/file`），因其为相对路径。
+
+## 跨项目引用
+
+| 项目 | 文件 | 内容 | 条数 |
+| --- | --- | --- | --- |
+| homepage | `assets/js/config.js` | 订阅源、摄影图、文章封面、博客根链接 | 34 |
+| homepage | `assets/js/i18n.js` | 订阅源链接、各语言的博客根链接 | 4 |
+| indexpage | `data/apps.json` | 博客根链接、homepage 地址 | 1 |
+| light | `index.html` | 根项目的样式、脚本与订阅源 | 10 |
+| light | `assets/js/config/config.js` | `basePath` 与 `fixUrl.prefix` | 2 |
+| bangumi-takeout | `assets/resources/meta/default-source.json` | 根项目里的默认归档 | 1 |
+
+这些地址按页面相对写法保存。独立部署时由中间件替换为主站地址。

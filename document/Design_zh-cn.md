@@ -1,4 +1,4 @@
-# pikapikapi-blog
+# 设计范式
 
 [English](./Design.md) | 简体中文
 

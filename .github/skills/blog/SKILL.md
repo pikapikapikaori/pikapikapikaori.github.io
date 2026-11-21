@@ -40,7 +40,7 @@ description: 适用于博客根项目，以及 docs/pages/ 与 docs/apps/ 下的
 
 ## 项目规范
 
-参考根目录的 `document` 文件夹，目前包括[开发规范](../../../document/Standard.md)与[UI 设计规范](../../../document/Design.md)。
+文档列表见根目录 README。
 
 ## 文档与代码注释写法
 

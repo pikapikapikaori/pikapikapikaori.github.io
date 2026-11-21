@@ -386,6 +386,38 @@ const REWRITE_PATHS = new Set([
     'apps/bangumi-takeout/assets/resources/meta/default-source.json',
 ])
 
+const MANIFEST_SUFFIX = 'assets/resources/meta/manifest.json'
+
+function isManifestPath(filePath) {
+    return filePath === MANIFEST_SUFFIX || filePath.endsWith('/' + MANIFEST_SUFFIX)
+}
+
+function manifestId(host, filePath) {
+    if (HOST_PREFIX[host]) return 'https://' + host + '/'
+    const dir = filePath.slice(0, filePath.length - MANIFEST_SUFFIX.length)
+    return 'https://' + host + '/' + dir + (dir ? 'index.html' : '')
+}
+
+function rewriteManifest(text, host, filePath) {
+    let data
+    try {
+        data = JSON.parse(text)
+    } catch (error) {
+        return text
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) return text
+    data.id = manifestId(host, filePath)
+    return JSON.stringify(data, null, 4) + '\n'
+}
+
+// 根首页的社交预览保持相对地址，交付前展开为绝对地址。
+function rewriteRootIndex(text, host) {
+    const base = 'https://' + host
+    return text
+        .replace('property="og:url" content="./"', 'property="og:url" content="' + base + '/"')
+        .replace('property="og:image" content="./assets/resources/logo/og.jpg"', 'property="og:image" content="' + base + '/assets/resources/logo/og.jpg"')
+}
+
 // ========== 4. 生成 etag ==========
 async function makeEtag(text) {
     const data = new TextEncoder().encode(text)
@@ -397,13 +429,18 @@ async function makeEtag(text) {
 }
 
 // ========== 5. 统一入口：body in / body out，headers in / headers out ==========
-async function prepareResponse(filePath, object, headers) {
-    if (!REWRITE_PATHS.has(filePath)) {
+async function prepareResponse(filePath, object, headers, host) {
+    const isManifest = isManifestPath(filePath)
+    const isRootIndex = filePath === 'index.html'
+    if (!REWRITE_PATHS.has(filePath) && !isManifest && !isRootIndex) {
         return { body: object.body, headers }
     }
 
     const text = await object.text()
-    const body = rewriteContent(filePath, text)
+    let body = text
+    if (REWRITE_PATHS.has(filePath)) body = rewriteContent(filePath, text)
+    else if (isManifest) body = rewriteManifest(text, host, filePath)
+    else body = rewriteRootIndex(text, host)
 
     // 内容变了，这几个头不能再沿用
     const newHeaders = new Headers(headers)
@@ -450,7 +487,7 @@ export default {
         applyCacheControl(headers, filePath)
 
         // 4. 需要的话做内容替换
-        const result = await prepareResponse(filePath, object, headers)
+        const result = await prepareResponse(filePath, object, headers, host)
 
         return new Response(result.body, { headers: result.headers })
     }

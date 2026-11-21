@@ -45,7 +45,7 @@ English | [简体中文](./Standard_zh-cn.md)
 
 ## PWA Settings
 
-- Each project owns one cache prefix, and the `id` in `manifest.json` equals that prefix and stays stable. Own `localStorage` / `sessionStorage` keys and IndexedDB database names carry the same project prefix.
+- Each project owns one cache prefix, and the `id` in `manifest.json` equals that prefix. Own `localStorage` / `sessionStorage` keys and IndexedDB database names carry the same project prefix.
 - A service worker cache name is `<prefix>:static:<version>:<hash>`. `hash`: join the sorted entries as `path:file hash` with no separator, then take the first 16 hex characters of the SHA-256, each file hash is the first 16 hex characters of the SHA-256 of that file.
 
 ## Reserved Path
@@ -60,7 +60,7 @@ Cross-origin access goes through this address and is handled by the [deployment 
 
 - The page provides only the challenge and `state`; the middleware builds the authorize address and the client parameters.
 - Only one callback address is registered, and `state` carries the return page.
-- The token exchange also goes through the middleware, so client identifiers and secrets never enter the repository.
+- The token exchange also goes through the middleware.
 - Page navigations to this address are always rejected.
 
 ## Coding Standards

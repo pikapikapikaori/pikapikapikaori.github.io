@@ -45,7 +45,7 @@
 
 ## PWA 设置
 
-- 每个项目一个缓存前缀，`manifest.json` 的 `id` 与前缀一致且保持稳定。自有 `localStorage`、`sessionStorage` 键与 IndexedDB 库名带同一项目前缀。
+- 每个项目一个缓存前缀，`manifest.json` 的 `id` 与前缀一致。自有 `localStorage`、`sessionStorage` 键与 IndexedDB 库名带同一项目前缀。
 - Service Worker 缓存名为 `<前缀>:static:<版本>:<hash>`。`hash` ：把排序后的 `路径:文件哈希` 首尾相接，再取 SHA-256 的前 16 位十六进制，文件哈希取该文件 SHA-256 的前 16 位十六进制。
 
 ## 保留地址
@@ -60,7 +60,7 @@
 
 - 页面只提供挑战值与 `state`，授权地址与客户端参数由中间件拼装。
 - 回调地址只登记一条，`state` 里带返回页。
-- 令牌交换同样经中间件完成，客户端标识与密钥不进入仓库。
+- 令牌交换同样经中间件完成。
 - 指向该地址的页面导航一律拒绝。
 
 ## 代码规范

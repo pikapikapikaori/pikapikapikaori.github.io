@@ -1,6 +1,6 @@
 {
     "version": "1.1.0",
-    "hash": "8a9f76621f1d7e1e",
+    "hash": "0f4395ed4405a6ed",
     "files": [
         {
             "path": "assets/css/about.css",
@@ -44,11 +44,11 @@
         },
         {
             "path": "assets/js/backup/api.js",
-            "hash": "1ca76a356e628752"
+            "hash": "122120296522efc2"
         },
         {
             "path": "assets/js/backup/auth.js",
-            "hash": "c3ba37525ac658be"
+            "hash": "5a676d3d09a94b41"
         },
         {
             "path": "assets/js/backup/exporter.js",
@@ -64,7 +64,7 @@
         },
         {
             "path": "assets/js/config.js",
-            "hash": "c47e0eb7db5d07b9"
+            "hash": "9a810147baf19b11"
         },
         {
             "path": "assets/js/dom.js",
@@ -124,7 +124,7 @@
         },
         {
             "path": "assets/js/source.js",
-            "hash": "0df0cdc07c1144d7"
+            "hash": "9273e7fc86051636"
         },
         {
             "path": "assets/js/storage.js",
@@ -144,7 +144,7 @@
         },
         {
             "path": "assets/js/ui/backup.js",
-            "hash": "180901800d471c42"
+            "hash": "63609244fc960310"
         },
         {
             "path": "assets/js/ui/data.js",
@@ -172,7 +172,7 @@
         },
         {
             "path": "assets/js/ui/users.js",
-            "hash": "50ce24b5c2095893"
+            "hash": "dcaaa111312bcf55"
         },
         {
             "path": "assets/js/worker/chunk.js",
@@ -204,7 +204,7 @@
         },
         {
             "path": "assets/resources/meta/default-source.json",
-            "hash": "404caf0845dcaf11"
+            "hash": "76c0a5263aa693b5"
         },
         {
             "path": "assets/resources/meta/manifest.json",

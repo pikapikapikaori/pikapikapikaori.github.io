@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "e8dc4c6cffe0fc8d",
+    "hash": "2b6000b2e9aeb7e5",
     "files": [
         {
             "path": "404/_404.md",
@@ -24,7 +24,7 @@
         },
         {
             "path": "Sites.md",
-            "hash": "627abdb7b7d0a4a1"
+            "hash": "742b20306a3d365a"
         },
         {
             "path": "_coverpage.md",
@@ -192,11 +192,11 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/backup/api.js",
-            "hash": "1ca76a356e628752"
+            "hash": "122120296522efc2"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/backup/auth.js",
-            "hash": "c3ba37525ac658be"
+            "hash": "5a676d3d09a94b41"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/backup/exporter.js",
@@ -212,7 +212,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/config.js",
-            "hash": "c47e0eb7db5d07b9"
+            "hash": "9a810147baf19b11"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/dom.js",
@@ -272,7 +272,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/source.js",
-            "hash": "0df0cdc07c1144d7"
+            "hash": "9273e7fc86051636"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/storage.js",
@@ -292,7 +292,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/backup.js",
-            "hash": "180901800d471c42"
+            "hash": "63609244fc960310"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/data.js",
@@ -320,7 +320,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/users.js",
-            "hash": "50ce24b5c2095893"
+            "hash": "dcaaa111312bcf55"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/worker/chunk.js",
@@ -352,7 +352,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/resources/meta/default-source.json",
-            "hash": "404caf0845dcaf11"
+            "hash": "76c0a5263aa693b5"
         },
         {
             "path": "apps/bangumi-takeout/assets/resources/meta/manifest.json",
@@ -11440,7 +11440,7 @@
         },
         {
             "path": "writings/BangumiBackup-20260915.md",
-            "hash": "2cccedfdca4a15b4"
+            "hash": "26ce6d2e1e499ca0"
         },
         {
             "path": "writings/Beginning.md",
@@ -11488,7 +11488,7 @@
         },
         {
             "path": "writings/PersonalRecordsBackup.md",
-            "hash": "e3965f5492eb7196"
+            "hash": "255c2a336a4d251f"
         },
         {
             "path": "writings/PersonalTenBest.md",

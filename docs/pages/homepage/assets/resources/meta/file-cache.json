@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "5252445292de75b2",
+    "hash": "b6c700c04cfc129f",
     "files": [
         {
             "path": "assets/css/base.css",
@@ -47,6 +47,10 @@
             "hash": "487491f451206534"
         },
         {
+            "path": "assets/js/startup.js",
+            "hash": "a178b80b2ac3c1dd"
+        },
+        {
             "path": "assets/js/storage.js",
             "hash": "eb6125805992b2ca"
         },
@@ -57,10 +61,6 @@
         {
             "path": "assets/js/utils.js",
             "hash": "decd1e2267c4a4f0"
-        },
-        {
-            "path": "assets/js/worker/startup.js",
-            "hash": "7fd03f9e94d625b8"
         },
         {
             "path": "assets/layout/brand/css/main.css",
@@ -168,7 +168,7 @@
         },
         {
             "path": "index.html",
-            "hash": "0a4cf1a436facdad"
+            "hash": "7a7d5cac391b2158"
         }
     ]
 }

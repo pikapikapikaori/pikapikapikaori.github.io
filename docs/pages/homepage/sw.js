@@ -1,16 +1,16 @@
 'use strict'
 
-const SCOPE_URL = new URL(self.registration.scope)
-const SCOPE_PATH = SCOPE_URL.pathname
-const CACHE_PREFIX = 'pikapikapi:homepage:static:'
-const MANIFEST_PATH = 'assets/resources/meta/file-cache.json'
-const MANIFEST_URL = new URL(MANIFEST_PATH, SCOPE_URL).href
-const RECORD_URL = new URL('__cache-record__', SCOPE_URL).href
-const CRITICAL_EXTS = ['js', 'css', 'html']
-const FONT_EXTS = ['woff2', 'woff', 'ttf', 'otf', 'eot']
-const SAVE_EVERY = 20
-const STAGES = ['critical', 'fonts', 'rest']
-const ROOT_PATHS = [SCOPE_PATH]
+const scopeUrl = new URL(self.registration.scope)
+const scopePath = scopeUrl.pathname
+const cachePrefix = 'pikapikapi:homepage:static:'
+const manifestPath = 'assets/resources/meta/file-cache.json'
+const manifestUrl = new URL(manifestPath, scopeUrl).href
+const recordUrl = new URL('__cache-record__', scopeUrl).href
+const criticalExts = ['js', 'css', 'html']
+const fontExts = ['woff2', 'woff', 'ttf', 'otf', 'eot']
+const saveEvery = 20
+const stages = ['critical', 'fonts', 'rest']
+const entryDirs = ['']
 
 let pathHash = null
 let serving = []
@@ -18,6 +18,8 @@ let statePromise = null
 let stateGeneration = 0
 let runPromise = null
 let paused = false
+let pendingProject = null
+let pendingFull = false
 
 function extOf (path) {
     const name = path.slice(path.lastIndexOf('/') + 1)
@@ -28,7 +30,7 @@ function extOf (path) {
 function ownCacheNames () {
     return caches.keys().then(function (names) {
         return names.filter(function (name) {
-            return name.indexOf(CACHE_PREFIX) === 0
+            return name.indexOf(cachePrefix) === 0
         })
     })
 }
@@ -37,7 +39,7 @@ function pathHashOf (manifest) {
     const map = {}
     const files = (manifest && manifest.files) || []
     for (let i = 0; i < files.length; i++) {
-        map[new URL(files[i].path, SCOPE_URL).pathname] = files[i].hash
+        map[new URL(files[i].path, scopeUrl).pathname] = files[i].hash
     }
     return map
 }
@@ -46,8 +48,8 @@ function splitStages (files) {
     const groups = [[], [], []]
     for (let i = 0; i < files.length; i++) {
         const ext = extOf(files[i].path)
-        if (CRITICAL_EXTS.indexOf(ext) !== -1) groups[0].push(files[i])
-        else if (FONT_EXTS.indexOf(ext) !== -1) groups[1].push(files[i])
+        if (criticalExts.indexOf(ext) !== -1) groups[0].push(files[i])
+        else if (fontExts.indexOf(ext) !== -1) groups[1].push(files[i])
         else groups[2].push(files[i])
     }
     return groups
@@ -63,44 +65,63 @@ async function readJson (cache, url) {
 }
 
 function readRecord (cache) {
-    return readJson(cache, RECORD_URL)
+    return readJson(cache, recordUrl)
 }
 
 function readSnapshot (cache) {
-    return readJson(cache, MANIFEST_URL)
+    return readJson(cache, manifestUrl)
+}
+
+/* 损坏的记录缺 files 会让下游读取抛错，统一补成空对象。 */
+function withFiles (record) {
+    if (!record) return record
+    if (!record.files || typeof record.files !== 'object' || Array.isArray(record.files)) {
+        record.files = {}
+    }
+    return record
 }
 
 function saveRecord (cache, record) {
-    return cache.put(RECORD_URL, new Response(JSON.stringify(record), {
+    return cache.put(recordUrl, new Response(JSON.stringify(record), {
         headers: { 'content-type': 'application/json' }
     }))
 }
 
-/* 旧缓存只在文件内容与当前清单一致时才服务，避免迁移期间新旧版本混用。 */
+function writeSnapshot (cache, manifest) {
+    return cache.put(manifestUrl, new Response(JSON.stringify(manifest), {
+        headers: { 'content-type': 'application/json' }
+    }))
+}
+
 function allowOf (record, hashes) {
     const allow = {}
     if (!record || !record.files) return allow
     for (const path in record.files) {
-        const pathname = new URL(path, SCOPE_URL).pathname
+        const pathname = new URL(path, scopeUrl).pathname
         if (hashes[pathname] === record.files[path]) allow[pathname] = true
     }
     return allow
 }
 
-/* worker 空闲回收后 activate 不会再来，状态必须能从缓存恢复。 */
 async function loadState () {
     const generation = ++stateGeneration
     const names = await ownCacheNames()
     const list = []
     let manifest = null
+    let manifestDone = true
     for (const name of names) {
         const cache = await caches.open(name)
-        const record = await readRecord(cache)
+        const record = withFiles(await readRecord(cache))
         list.push({ cache: cache, record: record })
-        if (!manifest) manifest = await readSnapshot(cache)
+        const snapshot = await readSnapshot(cache)
+        if (!snapshot) continue
+        const done = record && record.stage === 'done'
+        if (!manifest || (manifestDone && !done)) {
+            manifest = snapshot
+            manifestDone = done
+        }
     }
     const hashes = manifest ? pathHashOf(manifest) : {}
-    /* 未完成的缓存排前面，迁移期间优先取新内容 */
     list.sort(function (a, b) {
         const rankA = a.record && a.record.stage === 'done' ? 1 : 0
         const rankB = b.record && b.record.stage === 'done' ? 1 : 0
@@ -134,7 +155,7 @@ async function networkOrFail (request) {
 }
 
 async function serve (pathname, request) {
-    const url = new URL(pathname, SCOPE_URL).href
+    const url = new URL(pathname, scopeUrl).href
     for (let i = 0; i < serving.length; i++) {
         const item = serving[i]
         if (item.allow && !item.allow[pathname]) continue
@@ -144,13 +165,15 @@ async function serve (pathname, request) {
     return networkOrFail(request)
 }
 
-/** 只有作用域根目录才回退到 index.html。其它路径可能属于兄弟项目，
+/** 只有清单内的目录入口才回退到 index.html。其它路径可能属于兄弟项目，
  *  用本项目首页顶替会把别的页面内容换掉。 */
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
-    if (ROOT_PATHS.indexOf(pathname) === -1) return null
-    const key = SCOPE_PATH + 'index.html'
+    if (pathname.indexOf(scopePath) !== 0) return null
+    const relative = pathname.slice(scopePath.length)
+    if (entryDirs.indexOf(relative) === -1) return null
+    const key = scopePath + relative + 'index.html'
     return pathHash[key] ? key : null
 }
 
@@ -165,40 +188,56 @@ async function download (ctx, url) {
     }
 }
 
-async function moveFromSource (ctx, url, entry) {
+async function copyFromSource (ctx, url, entry) {
     if (!ctx.source || !ctx.source.record) return false
     if (ctx.source.record.files[entry.path] !== entry.hash) return false
     try {
         const hit = await ctx.source.cache.match(url)
         if (!hit) return false
         await ctx.cache.put(url, hit)
-        await ctx.source.cache.delete(url)
         return true
     } catch (error) {
         return false
     }
 }
 
-async function acquire (ctx, url, entry) {
-    if (await moveFromSource(ctx, url, entry)) return true
-    return download(ctx, url)
+async function copyStage (ctx, list) {
+    let sinceSave = 0
+    for (let i = 0; i < list.length; i++) {
+        if (paused) {
+            await saveRecord(ctx.cache, ctx.record)
+            return false
+        }
+        const entry = list[i]
+        if (ctx.record.files[entry.path] === entry.hash) continue
+        const url = new URL(entry.path, scopeUrl).href
+        if (!await copyFromSource(ctx, url, entry)) continue
+        ctx.record.files[entry.path] = entry.hash
+        sinceSave++
+        if (sinceSave >= saveEvery) {
+            sinceSave = 0
+            await saveRecord(ctx.cache, ctx.record)
+        }
+    }
+    await saveRecord(ctx.cache, ctx.record)
+    return true
 }
 
-async function runGroup (ctx, list) {
+async function downloadStage (ctx, list) {
     let sinceSave = 0
     let failed = 0
     for (let i = 0; i < list.length; i++) {
         if (paused) break
         const entry = list[i]
         if (ctx.record.files[entry.path] === entry.hash) continue
-        const url = new URL(entry.path, SCOPE_URL).href
-        if (!await acquire(ctx, url, entry)) {
+        const url = new URL(entry.path, scopeUrl).href
+        if (!await download(ctx, url)) {
             failed++
             continue
         }
         ctx.record.files[entry.path] = entry.hash
         sinceSave++
-        if (sinceSave >= SAVE_EVERY) {
+        if (sinceSave >= saveEvery) {
             sinceSave = 0
             await saveRecord(ctx.cache, ctx.record)
         }
@@ -207,11 +246,11 @@ async function runGroup (ctx, list) {
     return failed === 0 && !paused
 }
 
-async function runGroups (ctx, groups, index) {
+async function runStages (ctx, groups, index) {
     for (let i = index; i < groups.length; i++) {
-        if (!await runGroup(ctx, groups[i])) return false
-        if (i + 1 < STAGES.length) {
-            ctx.record.stage = STAGES[i + 1]
+        if (!await downloadStage(ctx, groups[i])) return false
+        if (i + 1 < stages.length) {
+            ctx.record.stage = stages[i + 1]
             await saveRecord(ctx.cache, ctx.record)
         }
     }
@@ -219,17 +258,25 @@ async function runGroups (ctx, groups, index) {
 }
 
 function fetchManifest () {
-    return fetch(MANIFEST_URL, { cache: 'no-store' }).then(function (response) {
+    return fetch(manifestUrl, { cache: 'no-store' }).then(function (response) {
         if (!response.ok) throw new Error('manifest ' + response.status)
         return response.json()
     })
 }
 
 function pickSource (others) {
+    let best = null
+    let bestCount = -1
     for (let i = 0; i < others.length; i++) {
-        if (others[i].record) return others[i]
+        const item = others[i]
+        if (!item.record) continue
+        const count = Object.keys(item.record.files).length
+        if (count > bestCount) {
+            best = item
+            bestCount = count
+        }
     }
-    return null
+    return best
 }
 
 async function collectOthers (targetName, hashes) {
@@ -238,7 +285,7 @@ async function collectOthers (targetName, hashes) {
     for (const name of names) {
         if (name === targetName) continue
         const cache = await caches.open(name)
-        const record = await readRecord(cache)
+        const record = withFiles(await readRecord(cache))
         others.push({ cache: cache, record: record, allow: allowOf(record, hashes) })
     }
     return others
@@ -251,8 +298,20 @@ async function pruneOthers (keep) {
     }
 }
 
-async function run () {
+async function hasRootCache () {
+    const names = await ownCacheNames()
+    for (let i = 0; i < names.length; i++) {
+        const cache = await caches.open(names[i])
+        const record = withFiles(await readRecord(cache))
+        if (record && record.full) return true
+    }
+    return false
+}
+
+async function run (project, resumeOnly) {
     await ensureState()
+
+    if (resumeOnly && (await ownCacheNames()).length === 0) return
 
     let manifest = null
     try {
@@ -264,9 +323,11 @@ async function run () {
     const hashes = pathHashOf(manifest)
     stateGeneration++
     pathHash = hashes
-    const targetName = CACHE_PREFIX + manifest.version + ':' + manifest.hash
+    const targetName = cachePrefix + manifest.version + ':' + manifest.hash
+    const hadCache = await hasRootCache()
+    if (resumeOnly && !(await caches.has(targetName))) return
     const target = await caches.open(targetName)
-    const record = (await readRecord(target)) || { stage: 'critical', files: {} }
+    const record = withFiles(await readRecord(target)) || { stage: 'critical', files: {} }
     const others = await collectOthers(targetName, hashes)
     serving = [{ cache: target, allow: null }].concat(others)
 
@@ -276,24 +337,100 @@ async function run () {
         return
     }
 
-    const ctx = { cache: target, record: record, source: pickSource(others) }
-    const groups = splitStages(manifest.files || [])
-    const index = Math.max(0, STAGES.indexOf(record.stage))
-    if (!await runGroups(ctx, groups, index)) return
+    if (resumeOnly && !record.full) return
 
-    await target.put(MANIFEST_URL, new Response(JSON.stringify(manifest), {
-        headers: { 'content-type': 'application/json' }
-    }))
+    const ctx = { cache: target, record: record, source: pickSource(others) }
+    const files = manifest.files || []
+
+    if (project) {
+        const own = files.filter(function (entry) {
+            return entry.path.indexOf(project) === 0
+        })
+        if (!await copyStage(ctx, own)) {
+            await writeSnapshot(target, manifest)
+            return
+        }
+        const groups = splitStages(own)
+        let ok = true
+        for (let i = 0; i < groups.length; i++) {
+            ok = await downloadStage(ctx, groups[i])
+            if (!ok) break
+        }
+        await writeSnapshot(target, manifest)
+        if (!ok || !hadCache) return
+    }
+
+    record.full = true
+    await saveRecord(target, record)
+    if (!await copyStage(ctx, files)) return
+    const groups = splitStages(files)
+    const index = Math.max(0, stages.indexOf(record.stage))
+    if (!await runStages(ctx, groups, index)) return
+
+    await writeSnapshot(target, manifest)
     record.stage = 'done'
     await saveRecord(target, record)
     serving = [{ cache: target, allow: null }]
     await pruneOthers(targetName)
 }
 
-function start () {
+function projectOf (value) {
+    if (typeof value !== 'string') return null
+    const path = value.replace(/^\//, '')
+    if (!path || entryDirs.indexOf(path) === -1) return null
+    return path
+}
+
+async function loop (first, firstResumeOnly) {
+    let project = first
+    let resumeOnly = !!firstResumeOnly
+    for (;;) {
+        try {
+            await run(project || null, resumeOnly)
+        } catch (error) {
+            console.error('[sw] run failed', error)
+            pendingFull = false
+            pendingProject = null
+            return
+        }
+        resumeOnly = false
+        if (paused) {
+            pendingFull = false
+            pendingProject = null
+            return
+        }
+        if (pendingFull) {
+            pendingFull = false
+            pendingProject = null
+            project = null
+            continue
+        }
+        if (pendingProject) {
+            project = pendingProject
+            pendingProject = null
+            continue
+        }
+        return
+    }
+}
+
+function start (project) {
+    paused = false
+    if (runPromise) {
+        if (project) pendingProject = project
+        else pendingFull = true
+        return runPromise
+    }
+    runPromise = loop(project || null, false).finally(function () {
+        runPromise = null
+    })
+    return runPromise
+}
+
+function resume () {
     paused = false
     if (runPromise) return runPromise
-    runPromise = run().finally(function () {
+    runPromise = loop(null, true).finally(function () {
         runPromise = null
     })
     return runPromise
@@ -316,8 +453,8 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
     if (event.request.method !== 'GET') return
     const url = new URL(event.request.url)
-    if (url.origin !== SCOPE_URL.origin) return
-    if (SCOPE_PATH !== '/' && url.pathname.indexOf(SCOPE_PATH) !== 0) return
+    if (url.origin !== scopeUrl.origin) return
+    if (scopePath !== '/' && url.pathname.indexOf(scopePath) !== 0) return
 
     if (!pathHash) {
         if (event.request.mode !== 'navigate') return
@@ -332,8 +469,19 @@ self.addEventListener('fetch', function (event) {
 
 self.addEventListener('message', function (event) {
     const data = event.data || {}
-    if (data.type === 'START') event.waitUntil(start())
-    else if (data.type === 'PAUSE') paused = true
+    if (data.type === 'START') {
+        if (data.reason === 'backup') {
+            event.waitUntil(resume())
+            return
+        }
+        if (data.project === undefined) {
+            event.waitUntil(start(null))
+            return
+        }
+        const project = projectOf(data.project)
+        /* 带字段却校验失败时不启动，避免退化成整站下载。 */
+        if (project) event.waitUntil(start(project))
+    } else if (data.type === 'PAUSE') paused = true
 })
 
 ensureState()

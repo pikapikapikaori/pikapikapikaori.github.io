@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "912a329022c5b2bb",
+    "hash": "6c75825f310360d0",
     "files": [
         {
             "path": "assets/css/fonts.css",
@@ -39,16 +39,16 @@
             "hash": "ff071a820ddcd46d"
         },
         {
+            "path": "assets/js/startup.js",
+            "hash": "b9f6b8dba8145a74"
+        },
+        {
             "path": "assets/js/status.js",
             "hash": "4433b4c33719938c"
         },
         {
             "path": "assets/js/theme.js",
             "hash": "e5a8dac18eff8db4"
-        },
-        {
-            "path": "assets/js/worker/startup.js",
-            "hash": "efb8c9c9b96d21a7"
         },
         {
             "path": "assets/resources/fonts/HYKaiTiS.woff2",
@@ -92,7 +92,7 @@
         },
         {
             "path": "index.html",
-            "hash": "26754996226f7103"
+            "hash": "b0951bc016374cda"
         }
     ]
 }

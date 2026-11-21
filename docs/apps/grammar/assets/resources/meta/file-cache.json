@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "hash": "707bdc8749cc4fd7",
+    "hash": "d87d065357a986f9",
     "files": [
         {
             "path": "assets/css/base.css",
@@ -251,6 +251,10 @@
             "hash": "b67e605841d13d8a"
         },
         {
+            "path": "assets/js/startup.js",
+            "hash": "9ec81aab58650187"
+        },
+        {
             "path": "assets/js/store/db.js",
             "hash": "2d252b82c4d19c9c"
         },
@@ -381,10 +385,6 @@
         {
             "path": "assets/js/views/word-list-view.js",
             "hash": "9586e1efba406914"
-        },
-        {
-            "path": "assets/js/worker/startup.js",
-            "hash": "1a2acaeb40fa0797"
         },
         {
             "path": "assets/resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.woff2",
@@ -864,7 +864,7 @@
         },
         {
             "path": "index.html",
-            "hash": "d84c040d483d88b9"
+            "hash": "01c802b73bbc9daa"
         }
     ]
 }

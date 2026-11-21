@@ -21,7 +21,7 @@ exclude_paths_global=(
     assets/resources/meta/file-cache.json
 )
 
-projects=(root homepage indexpage light grammar bangumi_takeout)
+projects=(root homepage indexpage grammar bangumi_takeout)
 
 id_root=root
 version_root=4.7.5
@@ -43,13 +43,6 @@ dir_indexpage=pages/indexpage
 include_indexpage=(index.html assets data)
 exclude_paths_indexpage=()
 exclude_exts_indexpage=()
-
-id_light=light
-version_light=1.1.1
-dir_light=pages/light
-include_light=(index.html assets helpers ../../404 ../../assets ../../writings ../../archive ../../jp ../../en-us ../../_media)
-exclude_paths_light=(writings/_media/PersonalRecordsBackup ../../archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-backend-master.zip ../../archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-frontend-main.zip)
-exclude_exts_light=(jpg jpeg png gif webp avif mp4 zip)
 
 id_grammar=grammar
 version_grammar=1.0.0
@@ -143,26 +136,60 @@ hash16() {
     printf '%s' "${sum:0:16}"
 }
 
-for id in "${projects[@]}"; do
-    id_var="id_$id"
-    version_var="version_$id"
-    dir_var="dir_$id"
-    include_var="include_$id"
-    paths_var="exclude_paths_$id"
-    exts_var="exclude_exts_$id"
+load_project() {
+    case "$1" in
+    root)
+        id_name="$id_root"
+        version="$version_root"
+        dir="$dir_root"
+        include=("${include_root[@]}")
+        exclude_paths=("${exclude_paths_root[@]}")
+        exclude_exts=("${exclude_exts_root[@]}")
+        ;;
+    homepage)
+        id_name="$id_homepage"
+        version="$version_homepage"
+        dir="$dir_homepage"
+        include=("${include_homepage[@]}")
+        exclude_paths=("${exclude_paths_homepage[@]}")
+        exclude_exts=("${exclude_exts_homepage[@]}")
+        ;;
+    indexpage)
+        id_name="$id_indexpage"
+        version="$version_indexpage"
+        dir="$dir_indexpage"
+        include=("${include_indexpage[@]}")
+        exclude_paths=("${exclude_paths_indexpage[@]}")
+        exclude_exts=("${exclude_exts_indexpage[@]}")
+        ;;
+    grammar)
+        id_name="$id_grammar"
+        version="$version_grammar"
+        dir="$dir_grammar"
+        include=("${include_grammar[@]}")
+        exclude_paths=("${exclude_paths_grammar[@]}")
+        exclude_exts=("${exclude_exts_grammar[@]}")
+        ;;
+    bangumi_takeout)
+        id_name="$id_bangumi_takeout"
+        version="$version_bangumi_takeout"
+        dir="$dir_bangumi_takeout"
+        include=("${include_bangumi_takeout[@]}")
+        exclude_paths=("${exclude_paths_bangumi_takeout[@]}")
+        exclude_exts=("${exclude_exts_bangumi_takeout[@]}")
+        ;;
+    *)
+        return 1
+        ;;
+    esac
+}
 
-    id_name="${!id_var}"
-    version="${!version_var}"
-    dir="${!dir_var}"
-    include=()
-    exclude_paths=()
-    exclude_exts=()
-    include_src="${include_var}[@]"
-    paths_src="${paths_var}[@]"
-    exts_src="${exts_var}[@]"
-    for item in "${!include_src}"; do include+=("$item"); done
-    for item in "${!paths_src}"; do exclude_paths+=("$item"); done
-    for item in "${!exts_src}"; do exclude_exts+=("$item"); done
+for id in "${projects[@]}"; do
+    if ! load_project "$id"; then
+        echo "[$id] 未配置的清单项目"
+        failed=1
+        continue
+    fi
 
     if [ -n "$dir" ]; then
         base="$docs_base/$dir"

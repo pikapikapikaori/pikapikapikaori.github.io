@@ -1,6 +1,6 @@
 {
     "version": "1.1.0",
-    "hash": "0f4395ed4405a6ed",
+    "hash": "99a5b0c8b9d9a9e2",
     "files": [
         {
             "path": "assets/css/about.css",
@@ -127,6 +127,10 @@
             "hash": "9273e7fc86051636"
         },
         {
+            "path": "assets/js/startup.js",
+            "hash": "e8a0ff7b804caf73"
+        },
+        {
             "path": "assets/js/storage.js",
             "hash": "20e648d5ce11770c"
         },
@@ -177,10 +181,6 @@
         {
             "path": "assets/js/worker/chunk.js",
             "hash": "ab017c965664d26c"
-        },
-        {
-            "path": "assets/js/worker/startup.js",
-            "hash": "9ec99fb9facaf5c6"
         },
         {
             "path": "assets/js/zip.js",
@@ -952,7 +952,7 @@
         },
         {
             "path": "index.html",
-            "hash": "affb1c0f80e79d16"
+            "hash": "12c2822522c64b19"
         }
     ]
 }

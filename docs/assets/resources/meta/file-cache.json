@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "2b6000b2e9aeb7e5",
+    "hash": "8f3c0b31bf92fa6d",
     "files": [
         {
             "path": "404/_404.md",
@@ -275,6 +275,10 @@
             "hash": "9273e7fc86051636"
         },
         {
+            "path": "apps/bangumi-takeout/assets/js/startup.js",
+            "hash": "e8a0ff7b804caf73"
+        },
+        {
             "path": "apps/bangumi-takeout/assets/js/storage.js",
             "hash": "20e648d5ce11770c"
         },
@@ -325,10 +329,6 @@
         {
             "path": "apps/bangumi-takeout/assets/js/worker/chunk.js",
             "hash": "ab017c965664d26c"
-        },
-        {
-            "path": "apps/bangumi-takeout/assets/js/worker/startup.js",
-            "hash": "9ec99fb9facaf5c6"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/zip.js",
@@ -1100,7 +1100,7 @@
         },
         {
             "path": "apps/bangumi-takeout/index.html",
-            "hash": "affb1c0f80e79d16"
+            "hash": "12c2822522c64b19"
         },
         {
             "path": "apps/ecard/cover.png",
@@ -1391,6 +1391,10 @@
             "hash": "b67e605841d13d8a"
         },
         {
+            "path": "apps/grammar/assets/js/startup.js",
+            "hash": "9ec81aab58650187"
+        },
+        {
             "path": "apps/grammar/assets/js/store/db.js",
             "hash": "2d252b82c4d19c9c"
         },
@@ -1521,10 +1525,6 @@
         {
             "path": "apps/grammar/assets/js/views/word-list-view.js",
             "hash": "9586e1efba406914"
-        },
-        {
-            "path": "apps/grammar/assets/js/worker/startup.js",
-            "hash": "1a2acaeb40fa0797"
         },
         {
             "path": "apps/grammar/assets/resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.woff2",
@@ -2004,7 +2004,7 @@
         },
         {
             "path": "apps/grammar/index.html",
-            "hash": "d84c040d483d88b9"
+            "hash": "01c802b73bbc9daa"
         },
         {
             "path": "apps/terminal/assets/css/terminal.css",
@@ -4679,8 +4679,12 @@
             "hash": "1e0779dde296bf75"
         },
         {
+            "path": "assets/js/worker/client.js",
+            "hash": "c09c5c474d5cd799"
+        },
+        {
             "path": "assets/js/worker/startup.js",
-            "hash": "8751d7327168f854"
+            "hash": "698ec1324598df24"
         },
         {
             "path": "assets/resources/fonts/Adobe/KakuGyoStd/A-OTF-KakuGyoStd-Light.woff2",
@@ -10687,6 +10691,10 @@
             "hash": "487491f451206534"
         },
         {
+            "path": "pages/homepage/assets/js/startup.js",
+            "hash": "a178b80b2ac3c1dd"
+        },
+        {
             "path": "pages/homepage/assets/js/storage.js",
             "hash": "eb6125805992b2ca"
         },
@@ -10697,10 +10705,6 @@
         {
             "path": "pages/homepage/assets/js/utils.js",
             "hash": "decd1e2267c4a4f0"
-        },
-        {
-            "path": "pages/homepage/assets/js/worker/startup.js",
-            "hash": "7fd03f9e94d625b8"
         },
         {
             "path": "pages/homepage/assets/layout/brand/css/main.css",
@@ -10808,7 +10812,7 @@
         },
         {
             "path": "pages/homepage/index.html",
-            "hash": "0a4cf1a436facdad"
+            "hash": "7a7d5cac391b2158"
         },
         {
             "path": "pages/indexpage/assets/css/fonts.css",
@@ -10847,16 +10851,16 @@
             "hash": "ff071a820ddcd46d"
         },
         {
+            "path": "pages/indexpage/assets/js/startup.js",
+            "hash": "b9f6b8dba8145a74"
+        },
+        {
             "path": "pages/indexpage/assets/js/status.js",
             "hash": "4433b4c33719938c"
         },
         {
             "path": "pages/indexpage/assets/js/theme.js",
             "hash": "e5a8dac18eff8db4"
-        },
-        {
-            "path": "pages/indexpage/assets/js/worker/startup.js",
-            "hash": "efb8c9c9b96d21a7"
         },
         {
             "path": "pages/indexpage/assets/resources/fonts/HYKaiTiS.woff2",
@@ -10900,7 +10904,7 @@
         },
         {
             "path": "pages/indexpage/index.html",
-            "hash": "26754996226f7103"
+            "hash": "b0951bc016374cda"
         },
         {
             "path": "pages/light/assets/css/plus.css",
@@ -10909,10 +10913,6 @@
         {
             "path": "pages/light/assets/js/config/config.js",
             "hash": "cf8a5e01b01fe7f8"
-        },
-        {
-            "path": "pages/light/assets/js/worker/startup.js",
-            "hash": "8751d7327168f854"
         },
         {
             "path": "pages/light/assets/resources/logo/favicon.ico",
@@ -11428,7 +11428,7 @@
         },
         {
             "path": "pages/light/index.html",
-            "hash": "09a85dc5f7f17748"
+            "hash": "65e19420777a7364"
         },
         {
             "path": "writings/10TenBest-20200105.md",

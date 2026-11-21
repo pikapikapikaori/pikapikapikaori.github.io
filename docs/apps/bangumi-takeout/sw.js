@@ -564,7 +564,7 @@ async function download (ctx, url, entry) {
  *  complete. The record can name the newer hash for a file the old cache never
  *  stored, so the copied body is checked before it is written; a failed check
  *  leaves the file to the network. */
-async function moveFromSource (ctx, url, entry) {
+async function copyFromSource (ctx, url, entry) {
     if (!ctx.source || !ctx.source.record) return false
     if (ctx.source.record.files[entry.path] !== entry.hash) return false
     if (!isDigest(entry.hash)) return false
@@ -586,8 +586,29 @@ async function moveFromSource (ctx, url, entry) {
     }
 }
 
+async function copyGroup (ctx, list) {
+    let sinceSave = 0
+    for (let i = 0; i < list.length; i++) {
+        if (backgroundPaused()) {
+            await saveRecord(ctx.cache, ctx.record)
+            return false
+        }
+        const entry = list[i]
+        if (ctx.record.files[entry.path] === entry.hash) continue
+        const url = new URL(entry.path, scopeUrl).href
+        if (!await copyFromSource(ctx, url, entry)) continue
+        ctx.record.files[entry.path] = entry.hash
+        sinceSave += 1
+        if (sinceSave >= saveEvery) {
+            sinceSave = 0
+            await saveRecord(ctx.cache, ctx.record)
+        }
+    }
+    await saveRecord(ctx.cache, ctx.record)
+    return true
+}
+
 async function acquire (ctx, url, entry) {
-    if (await moveFromSource(ctx, url, entry)) return 'ok'
     return download(ctx, url, entry)
 }
 
@@ -734,6 +755,7 @@ async function collectOthers (targetName, hashes) {
         if (name === targetName) continue
         const cache = await caches.open(name)
         const record = await readRecord(cache)
+        if (record && (!record.files || typeof record.files !== 'object' || Array.isArray(record.files))) record.files = {}
         others.push({ cache: cache, record: record, allow: allowOf(record, hashes) })
     }
     return others
@@ -790,6 +812,7 @@ async function run () {
             source: pickSource(others),
             repair: record.stage === 'done',
         }
+        if (!await copyGroup(ctx, manifest.files || [])) return
         const groups = splitStages(manifest.files || [])
         const index = ctx.repair ? 0 : Math.max(0, stages.indexOf(record.stage))
         if (!await runGroups(ctx, groups, index)) return

@@ -1,37 +1,28 @@
 // Credentials live in the shared `credentials` store, keyed by the account name the
 // token proves, so the backup page and the viewer see one login.
+import { credentials } from '../../js/storage.js'
 import {
-    apiBase, authBase, proxyUrl, storagePrefix, storeCredentials, tokenRefreshMarginMs,
-} from '../config.js'
-import { runTransaction } from '../storage.js'
-import { BangumiApi, fetchWithTimeout, proxied } from './api.js'
+    BangumiApi, apiBase, authBase, fetchWithTimeout, proxied, proxyMarkerHeader, proxyUrl, storageKey,
+} from './bangumi-api.js'
 
-const oauthVerifierKey = storagePrefix + 'oauth-verifier'
-const oauthStateKey = storagePrefix + 'oauth-state'
+const oauthVerifierKey = () => storageKey('oauth-verifier')
+const oauthStateKey = () => storageKey('oauth-state')
 
-const proxyMarkerHeader = 'x-cross-origin'
-const proxyPath = proxyUrl.split('?')[0]
-
+const tokenRefreshMarginMs = 60000
 const proxyProbeTimeoutMs = 8000
-
-// storage.js owns the connection and its schema check, so credentials reuse both.
-function credentialRequest(mode, fn) {
-    return runTransaction(storeCredentials, mode, t => fn(t.objectStore(storeCredentials)))
-}
 
 function checkUsername(username) {
     if (typeof username !== 'string' || !username) throw new Error('凭证缺少用户名')
     return username
 }
 
+// storage.js owns the connection and its schema check, so credentials reuse both.
 function getCredential(username) {
-    if (!username) return Promise.resolve(null)
-    return credentialRequest('readonly', store => store.get(username))
-        .then(record => record || null)
+    return credentials.get(username)
 }
 
 export function listCredentials() {
-    return credentialRequest('readonly', store => store.getAll()).then(list => list || [])
+    return credentials.list()
 }
 
 function saveCredential(record) {
@@ -39,12 +30,12 @@ function saveCredential(record) {
     if (typeof record.access_token !== 'string' || !record.access_token) {
         throw new Error('凭证缺少访问令牌')
     }
-    return credentialRequest('readwrite', store => store.put(record))
+    return credentials.put(record)
 }
 
 export function removeCredential(username) {
     checkUsername(username)
-    return credentialRequest('readwrite', store => store.delete(username))
+    return credentials.remove(username)
 }
 
 function b64url(buffer) {
@@ -68,8 +59,8 @@ function sha256(text) {
 }
 
 function clearPending() {
-    sessionStorage.removeItem(oauthVerifierKey)
-    sessionStorage.removeItem(oauthStateKey)
+    sessionStorage.removeItem(oauthVerifierKey())
+    sessionStorage.removeItem(oauthStateKey())
 }
 
 // Callback parameters are single-use and may carry an error text, so every OAuth name
@@ -188,12 +179,13 @@ async function ensureProxy() {
 
 export async function beginAuthorization() {
     await ensureProxy()
+    const proxyPath = proxyUrl.split('?')[0]
     const verifier = randStr(64)
     const challenge = b64url(await sha256(verifier))
     const pageUrl = location.origin + location.pathname
     const state = randStr(16) + '.' + b64url(new TextEncoder().encode(pageUrl))
-    sessionStorage.setItem(oauthVerifierKey, verifier)
-    sessionStorage.setItem(oauthStateKey, state)
+    sessionStorage.setItem(oauthVerifierKey(), verifier)
+    sessionStorage.setItem(oauthStateKey(), state)
 
     const params = new URLSearchParams({
         oauth: 'start',
@@ -211,7 +203,7 @@ export async function finishAuthorization(search = location.search) {
     if (!error && !code) return null
 
     const state = params.get('state')
-    const savedState = sessionStorage.getItem(oauthStateKey)
+    const savedState = sessionStorage.getItem(oauthStateKey())
     if (!savedState || state !== savedState) {
         clearPending()
         clearOAuthParams()
@@ -225,7 +217,7 @@ export async function finishAuthorization(search = location.search) {
         throw new Error(`OAuth 授权失败: ${error} ${description}`.trim())
     }
 
-    const verifier = sessionStorage.getItem(oauthVerifierKey)
+    const verifier = sessionStorage.getItem(oauthVerifierKey())
     if (!verifier) {
         clearPending()
         clearOAuthParams()

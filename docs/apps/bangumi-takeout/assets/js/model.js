@@ -1,6 +1,7 @@
 import {
     statusByType, categoryBySubjectType,
 } from './config.js'
+import { getExternal } from './external.js'
 
 export function normalizeExport(raw) {
     if (!raw || typeof raw !== 'object') throw new Error('数据格式错误')
@@ -106,7 +107,7 @@ function toViewItem(record) {
         epStatus: record.ep_status || 0,
         comment: record.comment || '',
         myTags: Array.isArray(record.tags) ? record.tags : [],
-        updatedAt: record.updated_at || '',
+        updatedAt: record[getExternal().collectionVersionField] || '',
     }
 }
 

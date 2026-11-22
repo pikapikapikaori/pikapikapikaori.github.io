@@ -1,6 +1,7 @@
 import {
-    importTimeoutMs, maxFileSize, requestTimeoutMs, zipMaxOutputBytes,
+    importTimeoutMs, maxFileSize, zipMaxOutputBytes,
 } from '../config.js'
+import { getExternal } from '../external.js'
 
 function formatBytes(bytes) {
     const gib = bytes / 1024 / 1024 / 1024
@@ -13,7 +14,7 @@ export function renderAbout() {
     const fileLimit = formatBytes(maxFileSize)
     const zipLimit = formatBytes(zipMaxOutputBytes)
     const importSeconds = Math.round(importTimeoutMs / 1000)
-    const requestSeconds = Math.round(requestTimeoutMs / 1000)
+    const requestSeconds = Math.round(getExternal().requestTimeoutMs / 1000)
     main.innerHTML = `
         <div class="about">
             <h1>关于本站</h1>

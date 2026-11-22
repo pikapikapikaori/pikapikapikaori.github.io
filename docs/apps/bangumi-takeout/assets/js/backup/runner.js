@@ -1,19 +1,30 @@
 // Full, incremental and resumed backups. The run freezes its target, authorized
 // account, information scope and task token when it starts.
 import {
-    bgmDataUrl, infoScopes, retryWaitMs, taskModes, taskResume, taskStage, taskStages,
+    bgmDataUrl, infoScopes, requestIntervalLimits, requestRetryLimits, taskModes, taskResume,
+    taskStage, taskStages,
 } from '../config.js'
 import { finalizeBackup, items, meta, taskDone, taskList } from '../storage.js'
 import {
     advanceTask, beginTask, infoScopeFor,
 } from '../tasks.js'
-import {
-    BangumiApi, abortError, createBgmSource, createStaticStats, fetchEpisodeData, isAbortError,
-    normalizeRequestSettings,
-} from './api.js'
-import { refreshAccessToken, requireAccessToken } from './auth.js'
+import { abortError, isAbortError } from '../abort.js'
+import { getExternal } from '../external.js'
 
 const runModes = taskModes.concat(taskResume)
+
+function clampTo(value, limit) {
+    const number = Number(value)
+    if (!Number.isFinite(number)) return limit.fallback
+    return Math.min(limit.max, Math.max(limit.min, Math.round(number)))
+}
+
+function normalizeRequestSettings({ interval, maxRetries } = {}) {
+    return {
+        interval: clampTo(interval, requestIntervalLimits),
+        maxRetries: clampTo(maxRetries, requestRetryLimits),
+    }
+}
 
 // Checkpoints are keyed by subject_id, so a resumed list may arrive in another order.
 function readDoneIds(task) {
@@ -34,6 +45,17 @@ function staticBroken(stats) {
     return (stats.manifest_failures || 0) + (stats.chunk_failures || 0) + (stats.parse_failures || 0) > 0
 }
 
+// A lag of an episode or two is accepted: one hit of two stays usable, one hit
+// of three does not.
+function staticEpisodesShort(available, expected) {
+    if (!Number.isInteger(expected) || expected <= 0) return false
+    if (available === 0) return true
+    return expected - available > Math.max(1, Math.ceil(expected / 10))
+}
+
+// Only the first shortfalls are logged one by one; the rest are counted in one closing line.
+const staticEpisodeNoteLimit = 5
+
 // Detail and episodes are fetched again in every task. A stored progress is reused
 // only while its `progress_at` still matches (see storage.js).
 function planItems(list, stored, mode, infoScope) {
@@ -43,11 +65,12 @@ function planItems(list, stored, mode, infoScope) {
     const planned = list.map(entry => ({ ...entry }))
     const needsProgress = new Set()
     if (infoScope !== infoScopes.private) return { items: planned, needsProgress }
+    const version = getExternal().collectionVersionField
     for (const item of planned) {
         const prior = storedById.get(item.subject_id)
         const reusable = !!prior
-            && prior.updated_at === item.updated_at
-            && prior.progress_at === item.updated_at
+            && prior[version] === item[version]
+            && prior.progress_at === item[version]
         if (mode === 'full' || !reusable) needsProgress.add(item.subject_id)
     }
     return { items: planned, needsProgress }
@@ -69,6 +92,7 @@ async function ensureUserRecord(username) {
 }
 
 function createRun(options, signal) {
+    const external = getExternal()
     const target = String(options.username || '').trim()
     const authUsername = String(options.authUsername || '').trim()
     const mode = options.mode
@@ -91,7 +115,7 @@ function createRun(options, signal) {
         progressHook?.(done)
     }
 
-    const bgm = createBgmSource({
+    const bgm = external.createBgmSource({
         base: String(options.bgmBase || bgmDataUrl),
         signal,
         onStage: stage,
@@ -106,8 +130,11 @@ function createRun(options, signal) {
     let cachedRecords = []
     let collectionComplete = false
     let collectionTotal = 0
-    const staticStats = { subject: createStaticStats(), episode: createStaticStats() }
+    const staticStats = {
+        subject: external.createStaticStats(), episode: external.createStaticStats(),
+    }
     const issues = { progress_bad_response: 0, progress_not_found: 0, episode_skip_types: 0 }
+    let episodeShortfall = 0
 
     function requireTask(task) {
         if (!task) throw new Error('任务记录已变更，本次执行中止')
@@ -257,21 +284,78 @@ function createRun(options, signal) {
         return list
     }
 
+    // The external source only reads; writing the entries and logging the gaps stay here.
+    function applyStaticSubjects(pending, data) {
+        let filled = 0
+        for (const item of pending) {
+            if (item.subject_data != null) continue
+            if (!data.has(item.subject_id)) continue
+            item.subject_data = data.get(item.subject_id)
+            filled += 1
+        }
+        return filled
+    }
+
+    function applyStaticEpisodes(pending, data) {
+        let filled = 0
+        for (const item of pending) {
+            if (item.ep_data != null) continue
+            const episodes = data.get(item.subject_id) || []
+            const available = external.mainEpisodeCount(episodes)
+            if (staticEpisodesShort(available, item.subject_data?.eps)) {
+                // An empty or short list is counted too: the API then fetches the complete one.
+                episodeShortfall += 1
+                if (episodeShortfall <= staticEpisodeNoteLimit) {
+                    log(`静态分集少于条目话数 subject=${item.subject_id}: 本篇 ${available}/${item.subject_data.eps}，留给接口补取`, 'warn')
+                }
+                continue
+            }
+            if (!Object.keys(episodes).length) continue
+            item.ep_data = episodes
+            filled += 1
+        }
+        if (episodeShortfall > staticEpisodeNoteLimit) {
+            log(`静态分集少于条目话数 ${episodeShortfall} 条，已交给接口补取`, 'warn')
+        }
+        return filled
+    }
+
     async function loadStatic(kind, pending, options) {
         const stats = kind === 'subject' ? staticStats.subject : staticStats.episode
         const label = kind === 'subject' ? '条目' : '分集'
         try {
-            const result = kind === 'subject'
-                ? await bgm.fillSubjects(pending, options)
-                : await bgm.fillEpisodes(pending)
-            mergeStaticStats(stats, result?.stats)
-            if (result?.filled > 0) {
-                log(kind === 'subject'
-                    ? `静态数据命中条目 ${result.filled} 条`
-                    : `静态分集数据命中 ${result.filled} 条`, 'success')
+            let filled = 0
+            let readStats = null
+            let data = null
+            if (kind === 'subject') {
+                const ids = pending
+                    .filter(item => item.subject_data == null)
+                    .map(item => item.subject_id)
+                const result = await bgm.readSubjects(ids, options)
+                readStats = result?.stats
+                data = result?.data
+            } else {
+                const ids = pending
+                    .filter(item => item.ep_data == null)
+                    .map(item => item.subject_id)
+                const result = await bgm.readEpisodes(ids)
+                readStats = result?.stats
+                data = result?.data
             }
-            if (staticBroken(result?.stats)) {
-                const broken = result.stats
+            // A null data means there is no snapshot: nothing to fill and no gap to count.
+            if (data != null) {
+                filled = kind === 'subject'
+                    ? applyStaticSubjects(pending, data)
+                    : applyStaticEpisodes(pending, data)
+            }
+            mergeStaticStats(stats, readStats)
+            if (filled > 0) {
+                log(kind === 'subject'
+                    ? `静态数据命中条目 ${filled} 条`
+                    : `静态分集数据命中 ${filled} 条`, 'success')
+            }
+            if (staticBroken(readStats)) {
+                const broken = readStats
                 log(`静态${label}数据不完整：分片失败 ${broken.chunk_failures} · 解析失败 ${broken.parse_failures} · 清单读取失败 ${broken.manifest_failures}`, 'warn')
             }
         } catch (error) {
@@ -319,7 +403,7 @@ function createRun(options, signal) {
         for (const item of todo) {
             if (signal.aborted) throw abortError()
             if (item.ep_data == null) {
-                item.ep_data = await fetchEpisodeData(api, item.subject_id, {
+                item.ep_data = await external.fetchEpisodeData(api, item.subject_id, {
                     onSkip: type => {
                         issues.episode_skip_types += 1
                         log(`跳过不支持的 episode type=${type}`, 'warn')
@@ -333,28 +417,18 @@ function createRun(options, signal) {
         }
     }
 
-    // A 200 body of `null` says the endpoint has no progress; a 404 proves nothing.
     async function readProgress(subjectId) {
-        let data
         try {
-            data = await api.getUserProgress(target, subjectId)
+            return await external.readProgress(api, target, subjectId)
         } catch (error) {
             if (isAbortError(error)) throw error
-            if (error.status === 404) return { ok: false, status: 404 }
+            if (error.status === 401) {
+                const unauthorized = new Error('访问令牌无效或已过期，请重新登录')
+                unauthorized.status = 401
+                throw unauthorized
+            }
             throw error
         }
-        if (data && data.code === 401 && data.error) {
-            const error = new Error('访问令牌无效或已过期，请重新登录')
-            error.status = 401
-            throw error
-        }
-        // Only an explicit "no progress" or an eps array is written; other shapes stay unfetched.
-        if (data == null) return { ok: true, progress: { eps: [] } }
-        if (Array.isArray(data)) return { ok: true, progress: { eps: data } }
-        if (data && typeof data === 'object' && Array.isArray(data.eps)) {
-            return { ok: true, progress: data }
-        }
-        return { ok: false, data }
     }
 
     async function runProgress(doneIds) {
@@ -434,18 +508,18 @@ function createRun(options, signal) {
     }
 
     async function execute() {
-        const token = await requireAccessToken(authUsername, { signal })
-        api = new BangumiApi({
+        const token = await external.requireAccessToken(authUsername, { signal })
+        api = new external.BangumiApi({
             token,
             interval: settings.interval,
             maxRetries: settings.maxRetries,
             signal,
             onLog: log,
             onRetry: (message, attempt, total, delay) => {
-                const seconds = Math.round((Number(delay) || retryWaitMs) / 1000)
+                const seconds = Math.round((Number(delay) || external.retryWaitMs) / 1000)
                 log(`${message} — ${seconds}s 后重试 (${attempt}/${total})`, 'warn')
             },
-            onUnauthorized: () => refreshAccessToken(authUsername, { signal }),
+            onUnauthorized: () => external.refreshAccessToken(authUsername, { signal }),
         })
 
         await ensureUserRecord(target)
@@ -523,8 +597,8 @@ function createRun(options, signal) {
         if (missedParts.length) {
             log(`静态快照未覆盖：${missedParts.join(' · ')}，已交给接口补取`, 'warn')
         }
-        if (staticStats.episode.episode_shortfall > 0) {
-            log(`静态分集少于条目话数，已用接口补齐：${staticStats.episode.episode_shortfall} 条`, 'warn')
+        if (episodeShortfall > 0) {
+            log(`静态分集少于条目话数，已用接口补齐：${episodeShortfall} 条`, 'warn')
         }
         return result
     }

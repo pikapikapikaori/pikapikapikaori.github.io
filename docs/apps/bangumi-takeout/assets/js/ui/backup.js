@@ -1,11 +1,9 @@
 import { state, loadUser, selectUser } from '../app.js'
 import { items, meta } from '../storage.js'
 import { discardTask, getTask, taskStatus } from '../tasks.js'
-import {
-    addAccessToken, beginAuthorization, listCredentials,
-} from '../backup/auth.js'
+import { getExternal } from '../external.js'
 import { startBackup } from '../backup/runner.js'
-import { isAbortError } from '../backup/api.js'
+import { isAbortError } from '../abort.js'
 import {
     getDefaultSource, viewClearedKey,
     requestIntervalKey, requestIntervalLimits, requestIntervalOptions,
@@ -188,7 +186,8 @@ export async function renderBackup() {
     const preferredTarget = state.data?.user?.username || defaultUsername
     if (!targetValue && preferredTarget) targetValue = preferredTarget
 
-    const [records, stored] = await Promise.all([meta.list(), listCredentials()])
+    const external = getExternal()
+    const [records, stored] = await Promise.all([meta.list(), external.listCredentials()])
     credentials = stored
     usernames = unique([defaultUsername, ...records.map(record => record.username)]).filter(Boolean)
 
@@ -417,7 +416,8 @@ function bindAuth(main) {
 
     main.querySelector('#b-login').addEventListener('click', () => {
         if (running) return
-        beginAuthorization().catch(error => {
+        const external = getExternal()
+        external.beginAuthorization().catch(error => {
             if (!error) return
             setNotice(error.message || String(error), 'auth')
             paintStatus()
@@ -455,7 +455,8 @@ function bindAuth(main) {
         paintStatus()
         let result = null
         try {
-            result = await addAccessToken(token, { signal: controller.signal })
+            const external = getExternal()
+            result = await external.addAccessToken(token, { signal: controller.signal })
         } catch (error) {
             verifying = false
             verifyController = null
@@ -628,7 +629,8 @@ async function runBackup(mode, markReady) {
     }
 
     try {
-        credentials = await listCredentials()
+        const external = getExternal()
+        credentials = await external.listCredentials()
         taskInfo = await getTask(target, { includeCompleted: true })
     } catch (error) {
         setNotice('读取本地凭证或任务失败：' + (error?.message || error), 'run')

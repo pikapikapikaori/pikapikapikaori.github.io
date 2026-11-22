@@ -1,6 +1,6 @@
 import { state, importExport, loadUser, selectUser } from '../app.js'
 import { items, meta, updateMeta } from '../storage.js'
-import { listCredentials } from '../backup/auth.js'
+import { getExternal } from '../external.js'
 import { loadFromUrl } from '../source.js'
 import { getDefaultSource, href } from '../config.js'
 import { escapeHtml, unique } from '../dom.js'
@@ -27,7 +27,8 @@ export async function renderUsers() {
     defaultUsername = source?.username || ''
     defaultDataUrl = source?.dataUrl || ''
 
-    const [records, credentials] = await Promise.all([meta.list(), listCredentials()])
+    const external = getExternal()
+    const [records, credentials] = await Promise.all([meta.list(), external.listCredentials()])
     const credentialNames = new Set(credentials.map(item => item.username))
     const recordNameSet = new Set(records.map(record => record.username).filter(Boolean))
     const names = unique([defaultUsername, ...recordNameSet, ...credentials.map(item => item.username)])

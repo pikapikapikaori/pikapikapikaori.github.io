@@ -67,20 +67,6 @@ export const infoScopes = { private: 'private', public: 'public' }
 
 export const storagePrefix = 'bangumi-takeout:'
 
-export const apiBase = 'https://api.bgm.tv'
-export const authBase = 'https://bgm.tv/oauth'
-export const proxyUrl = '/_cross_origin?url='
-export const retryWaitMs = 5000
-// Every request carries a deadline so a stalled proxy cannot hang a backup.
-export const requestTimeoutMs = 30000
-// A larger Retry-After is clamped, so a hostile header cannot park a run for hours.
-export const retryAfterMaxMs = 60000
-// Chunks reach ~11 MB; timing by idle gap keeps a slow download alive past 30s.
-export const staticDataIdleTimeoutMs = 60000
-
-// Refreshing shortly before expiry avoids a request failing mid-backup.
-export const tokenRefreshMarginMs = 60000
-
 export const requestIntervalLimits = { min: 300, max: 2000, fallback: 700 }
 export const requestRetryLimits = { min: 2, max: 10, fallback: 5 }
 export const requestIntervalKey = storagePrefix + 'request-interval'
@@ -200,6 +186,3 @@ export const maxFileSize = 1024 * 1024 * 1024
 export const importTimeoutMs = 60000
 // Cap the sum of JSON entries so a crafted archive cannot exhaust memory.
 export const zipMaxOutputBytes = 1536 * 1024 * 1024
-// These caps stop a damaged or crafted response before it fills the tab.
-export const staticChunkMaxBytes = 64 * 1024 * 1024
-export const staticChunkMaxOutputBytes = 128 * 1024 * 1024

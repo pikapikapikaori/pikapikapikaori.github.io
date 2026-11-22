@@ -1,4 +1,4 @@
-import { extractShardText } from '../zip.js'
+import { extractShardText } from '../../js/zip.js'
 
 // Parsing a shard off the main thread keeps an 11 MB response from stalling the page.
 export async function parseShard(arrayBuffer, {

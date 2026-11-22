@@ -4,6 +4,7 @@ import {
 import {
     isProgressObject, isValidOwner, isValidSubjectId,
 } from './model.js'
+import { getExternal } from './external.js'
 
 // The list of an unfinished task lives outside the meta record, one page per record,
 // so a checkpoint writes task fields and one page, not the whole list.
@@ -211,12 +212,6 @@ function openDB() {
     return _dbPromise
 }
 
-// Exposed so modules with their own stores (auth.js credentials) reuse this
-// connection, its schema check and its transaction error handling.
-export function runTransaction(storeNames, mode, fn) {
-    return run(storeNames, mode, fn)
-}
-
 function run(storeNames, mode, fn) {
     return openDB().then(db => new Promise((resolve, reject) => {
         const t = db.transaction(storeNames, mode)
@@ -307,7 +302,8 @@ function prepareRecord(owner, record, infoScope) {
 function keepProgress(record, previous) {
     if (!previous) return record
     const out = { ...previous, ...record }
-    if (previous.updated_at === record.updated_at && isProgressObject(previous.progress)) {
+    const version = getExternal().collectionVersionField
+    if (previous[version] === record[version] && isProgressObject(previous.progress)) {
         out.progress = previous.progress
     } else {
         delete out.progress
@@ -356,7 +352,7 @@ function splitRecord(record) {
         delete list.subject.tags
     }
     // `progress_at` stays on the list half so an incremental run decides without the detail.
-    if (progress !== undefined) list.progress_at = record.updated_at ?? ''
+    if (progress !== undefined) list.progress_at = record[getExternal().collectionVersionField] ?? ''
     return { list, detail }
 }
 
@@ -392,7 +388,8 @@ function mergeRecords(previous, record) {
         if (merged[key] == null && previous[key] != null) merged[key] = previous[key]
     }
     if (record.progress == null) {
-        if (previous.updated_at === record.updated_at && isProgressObject(previous.progress)) {
+        const version = getExternal().collectionVersionField
+        if (previous[version] === record[version] && isProgressObject(previous.progress)) {
             merged.progress = previous.progress
         } else {
             delete merged.progress
@@ -891,6 +888,40 @@ export const meta = {
 
     list() {
         return run([storeMeta], 'readonly', t => t.objectStore(storeMeta).getAll())
+    },
+}
+
+// Credentials are accounts, not cache; the caller keeps its own validation.
+export const credentials = {
+    get(username) {
+        if (typeof username !== 'string' || !username) return Promise.resolve(null)
+        return run([storeCredentials], 'readonly', t => t.objectStore(storeCredentials).get(username))
+            .then(record => record || null)
+    },
+
+    list() {
+        return run([storeCredentials], 'readonly', t => t.objectStore(storeCredentials).getAll())
+            .then(list => list || [])
+    },
+
+    put(record) {
+        return run([storeCredentials], 'readwrite', (t, fail) => {
+            try {
+                t.objectStore(storeCredentials).put(record)
+            } catch (e) {
+                fail(e)
+            }
+        })
+    },
+
+    remove(username) {
+        return run([storeCredentials], 'readwrite', (t, fail) => {
+            try {
+                t.objectStore(storeCredentials).delete(username)
+            } catch (e) {
+                fail(e)
+            }
+        })
     },
 }
 

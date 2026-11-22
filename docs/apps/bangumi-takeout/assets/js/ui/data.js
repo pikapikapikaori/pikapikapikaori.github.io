@@ -1,7 +1,7 @@
 import { clearCurrentUser, state } from '../app.js'
 import { clearCachedData, items, meta } from '../storage.js'
 import { exportUserData, downloadBlob } from '../backup/exporter.js'
-import { listCredentials, removeCredential } from '../backup/auth.js'
+import { getExternal } from '../external.js'
 import { makeMenuButton, paintMenuButton } from '../dom.js'
 import { syncHeader } from '../layout.js'
 import { closeMenu, openMenu } from './menu.js'
@@ -24,7 +24,8 @@ export async function renderData() {
     if (main.dataset.route !== 'data') return
     closeMenu()
 
-    const [records, credentials] = await Promise.all([meta.list(), listCredentials()])
+    const external = getExternal()
+    const [records, credentials] = await Promise.all([meta.list(), external.listCredentials()])
     const recordNames = records.map(record => record.username).filter(Boolean)
     const counts = await Promise.all(recordNames.map(name => items.countByOwner(name)))
     if (main.dataset.route !== 'data') return
@@ -195,7 +196,8 @@ export async function renderData() {
         busy = true
         setStatus('正在移除凭证…')
         try {
-            await removeCredential(name)
+            const external = getExternal()
+            await external.removeCredential(name)
             credentialTarget = ''
             busy = false
             await renderData()

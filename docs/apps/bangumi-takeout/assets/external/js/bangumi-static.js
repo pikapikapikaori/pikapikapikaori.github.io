@@ -1,9 +1,9 @@
 import {
-    apiBase, authBase, proxyUrl, requestIntervalLimits, requestRetryLimits, requestTimeoutMs,
-    retryAfterMaxMs, retryWaitMs, staticChunkMaxBytes, staticChunkMaxOutputBytes,
-    staticDataIdleTimeoutMs, storagePrefix,
-} from '../config.js'
-import { parseShard } from '../worker/chunk.js'
+    fetchWithTimeout, groupEpisodesByType, timeoutError,
+} from './bangumi-api.js'
+import { abortError, isAbortError } from '../../js/abort.js'
+import { parseShard } from './chunk-worker.js'
+import { postServiceWorkerMessage } from '../../js/worker/messages.js'
 
 const chunkWorkerTimeoutMs = 30000
 
@@ -11,255 +11,12 @@ const pauseHeartbeatMs = 20000
 
 const pauseIdleMs = 3000
 
-// /v0/episodes accepts these types only; asking for another one fails.
-const epTypeKeys = [0, 1, 2, 3, 4, 6]
+// Chunks reach ~11 MB; timing by idle gap keeps a slow download alive past 30s.
+const staticDataIdleTimeoutMs = 60000
 
-// An episode without a usable type still exists in the static snapshot. 
-const epTypeUnknown = 'unknown'
-
-function emptyEpisodeGroups() {
-    const groups = {}
-    for (const key of epTypeKeys) groups[String(key)] = []
-    groups[epTypeUnknown] = []
-    return groups
-}
-
-function groupEpisodesByType(episodes) {
-    const grouped = emptyEpisodeGroups()
-    for (const episode of episodes) {
-        const key = episode.type == null ? epTypeUnknown : String(episode.type)
-        if (!grouped[key]) grouped[key] = []
-        grouped[key].push(episode)
-    }
-    return grouped
-}
-
-function clampTo(value, limit) {
-    const number = Number(value)
-    if (!Number.isFinite(number)) return limit.fallback
-    return Math.min(limit.max, Math.max(limit.min, Math.round(number)))
-}
-
-export function normalizeRequestSettings({ interval, maxRetries } = {}) {
-    return {
-        interval: clampTo(interval, requestIntervalLimits),
-        maxRetries: clampTo(maxRetries, requestRetryLimits),
-    }
-}
-
-const abortMessage = '__ABORTED__'
-
-export function abortError() {
-    const error = new Error(abortMessage)
-    error.name = 'AbortedError'
-    return error
-}
-
-export function isAbortError(error) {
-    return !!error && (error.name === 'AbortedError'
-        || error.name === 'AbortError'
-        || error.message === abortMessage)
-}
-
-function sleep(ms, signal = null) {
-    return new Promise((resolve, reject) => {
-        const cleanup = () => {
-            if (signal) signal.removeEventListener('abort', onAbort)
-        }
-        const onAbort = () => {
-            clearTimeout(timer)
-            cleanup()
-            reject(abortError())
-        }
-        if (signal?.aborted) {
-            reject(abortError())
-            return
-        }
-        const timer = setTimeout(() => {
-            cleanup()
-            resolve()
-        }, ms)
-        if (signal) signal.addEventListener('abort', onAbort, { once: true })
-    })
-}
-
-function proxyBase() {
-    if (!proxyUrl) return ''
-    if (proxyUrl.includes('?url=') || proxyUrl.includes('?target=')) return proxyUrl
-    return proxyUrl.replace(/\?$/, '') + (proxyUrl.includes('?') ? '&' : '?') + 'url='
-}
-
-export function proxied(url) {
-    const base = proxyBase()
-    return base ? base + encodeURIComponent(url) : url
-}
-
-const proxyMarkerHeader = 'x-cross-origin'
-
-const proxyMissingKey = storagePrefix + 'proxy-missing'
-let proxyMissing = false
-let proxyChecked = false
-
-function proxyReached(response) {
-    return !!response.headers.get(proxyMarkerHeader)
-}
-
-function proxyAbsent(response) {
-    return response.status === 404 && !proxyReached(response)
-}
-
-function relayMissing() {
-    if (proxyChecked) return proxyMissing
-    proxyChecked = true
-    try {
-        proxyMissing = sessionStorage.getItem(proxyMissingKey) === '1'
-    } catch {
-        // Without storage the page-level flag still covers this load.
-    }
-    return proxyMissing
-}
-
-function markRelayMissing() {
-    proxyMissing = true
-    try {
-        sessionStorage.setItem(proxyMissingKey, '1')
-    } catch {}
-}
-
-function proxyTargetOf(url) {
-    const base = proxyBase()
-    if (!base || !url.startsWith(base)) return ''
-    try {
-        return decodeURIComponent(url.slice(base.length))
-    } catch {
-        return ''
-    }
-}
-
-// The proxy injects client_secret, so the token endpoint has no direct fallback.
-function isTokenRequest(target) {
-    const endpoint = authBase + '/access_token'
-    return target === endpoint || target.startsWith(endpoint + '?')
-}
-
-function proxyUnavailableError(cause) {
-    const error = new Error('代理不可用，无法完成令牌交换')
-    error.code = 'PROXY_UNAVAILABLE'
-    error.retryable = false
-    if (cause) error.cause = cause
-    return error
-}
-
-function timeoutError(ms, { idle = false } = {}) {
-    const shown = ms >= 1000 ? `${Math.round(ms / 1000)}s` : `${Math.round(ms)}ms`
-    const error = new Error(idle ? `请求超时 ${shown}（读取空闲超时）` : `请求超时 ${shown}`)
-    error.name = 'TimeoutError'
-    error.timeout = true
-    return error
-}
-
-async function readBody(response, signal, { idleTimeout = null, onActivity = null } = {}) {
-    try {
-        if (idleTimeout == null || !response.body || typeof response.body.getReader !== 'function') {
-            return { text: await response.text(), complete: true }
-        }
-        const reader = response.body.getReader()
-        const decoder = new TextDecoder()
-        const parts = []
-        let complete = false
-        try {
-            for (;;) {
-                const { done, value } = await reader.read()
-                if (done) {
-                    complete = true
-                    break
-                }
-                onActivity?.()
-                parts.push(decoder.decode(value, { stream: true }))
-            }
-            parts.push(decoder.decode())
-        } finally {
-            if (!complete) {
-                reader.cancel().catch(() => {})
-            }
-        }
-        return { text: parts.join(''), complete }
-    } catch (error) {
-        if (signal?.aborted || isAbortError(error)) throw abortError()
-        if (error && typeof error === 'object') error.complete = false
-        throw error
-    }
-}
-
-// `signal` is the third argument on purpose: `init` goes to fetch as it is.
-export async function fetchWithTimeout(url, init = {}, {
-    signal = null, timeout = requestTimeoutMs, idleTimeout = null,
-} = {}) {
-    if (init && Object.prototype.hasOwnProperty.call(init, 'signal')) {
-        const error = new Error('fetchWithTimeout: signal 必须通过第三个参数传入，不能放在 fetch init 中')
-        error.retryable = false
-        throw error
-    }
-    const direct = proxyTargetOf(url)
-    const options = { signal, timeout, idleTimeout }
-    if (!direct) return fetchOnce(url, init, options)
-    const token = isTokenRequest(direct)
-    if (relayMissing()) {
-        if (token) throw proxyUnavailableError()
-        return fetchOnce(direct, init, options)
-    }
-    let result
-    try {
-        result = await fetchOnce(url, init, options)
-    } catch (error) {
-        if (isAbortError(error) || error?.timeout) throw error
-        if (token) throw proxyUnavailableError(error)
-        return fetchOnce(direct, init, options)
-    }
-    if (!proxyAbsent(result.response)) return result
-    markRelayMissing()
-    if (token) throw proxyUnavailableError()
-    return fetchOnce(direct, init, options)
-}
-
-async function fetchOnce(url, init, { signal, timeout, idleTimeout }) {
-    if (signal?.aborted) throw abortError()
-    const controller = new AbortController()
-    let timedOut = false
-    const deadline = idleTimeout ?? timeout
-    let timer = null
-    const arm = () => {
-        if (timer) clearTimeout(timer)
-        timer = setTimeout(() => {
-            timedOut = true
-            controller.abort()
-        }, deadline)
-    }
-    const onAbort = () => controller.abort()
-    signal?.addEventListener('abort', onAbort, { once: true })
-    arm()
-    try {
-        const response = await fetch(url, { ...init, signal: controller.signal })
-        if (idleTimeout != null) arm()
-        const { text, complete } = await readBody(response, controller.signal, {
-            idleTimeout,
-            onActivity: idleTimeout != null ? arm : null,
-        })
-        return { response, text, complete }
-    } catch (error) {
-        if (signal?.aborted) throw abortError()
-        if (timedOut || error?.name === 'TimeoutError') {
-            const timeout = timeoutError(deadline, { idle: idleTimeout != null })
-            timeout.complete = false
-            throw timeout
-        }
-        if (isAbortError(error)) throw abortError()
-        throw error
-    } finally {
-        if (timer) clearTimeout(timer)
-        signal?.removeEventListener('abort', onAbort)
-    }
-}
+// These caps stop a damaged or crafted response before it fills the tab.
+const staticChunkMaxBytes = 64 * 1024 * 1024
+const staticChunkMaxOutputBytes = 128 * 1024 * 1024
 
 function chunkTooLargeError() {
     const mb = Math.round(staticChunkMaxBytes / 1024 / 1024)
@@ -349,245 +106,10 @@ async function fetchChunkBytes(url, { signal = null } = {}) {
 function createChunkWorker() {
     if (typeof Worker !== 'function') return null
     try {
-        return new Worker(new URL('../worker/chunk.js', import.meta.url), { type: 'module' })
+        return new Worker(new URL('./chunk-worker.js', import.meta.url), { type: 'module' })
     } catch {
         return null
     }
-}
-
-function postServiceWorkerMessage(type, payload = {}) {
-    if (typeof navigator === 'undefined' || !navigator.serviceWorker) return
-    const message = { type, ...payload }
-    const send = worker => {
-        try {
-            worker?.postMessage(message)
-        } catch { /* a replaced worker must not break the backup */ }
-    }
-    if (navigator.serviceWorker.controller) {
-        send(navigator.serviceWorker.controller)
-        return
-    }
-    navigator.serviceWorker.ready.then(registration => send(registration.active)).catch(() => {})
-}
-
-function isRetryableStatus(status) {
-    return status === 429 || status >= 500
-}
-
-function retryAfterMs(value) {
-    if (!value) return { ms: null, truncated: false }
-    const seconds = Number(value)
-    if (Number.isFinite(seconds) && seconds >= 0) {
-        const ms = Math.round(seconds * 1000)
-        return { ms, truncated: ms > retryAfterMaxMs }
-    }
-    const date = Date.parse(value)
-    if (!Number.isNaN(date)) {
-        const ms = Math.max(0, date - Date.now())
-        return { ms, truncated: ms > retryAfterMaxMs }
-    }
-    return { ms: null, truncated: false }
-}
-
-function httpError(status, path, text, contentType) {
-    const type = contentType || '(none)'
-    const error = new Error(`HTTP ${status} ${path} · Content-Type: ${type} · ${String(text || '').slice(0, 120)}`)
-    error.status = status
-    return error
-}
-
-function unauthorizedError() {
-    const error = new Error('访问令牌无效或已过期，请重新登录')
-    error.status = 401
-    error.code = 'AUTH_REQUIRED'
-    return error
-}
-
-function isTruncatedJsonMessage(message) {
-    // Chrome says "Unexpected end of JSON input", Safari "Unexpected EOF"; both mean a cut body.
-    return /unexpected end|unexpected eof|unterminated|\beof\b/i.test(String(message || ''))
-}
-
-function invalidJsonError(path, response, text, cause) {
-    const type = response.headers.get('content-type') || '(none)'
-    const parser = String(cause?.message || '(none)')
-    const error = new Error(`响应不是有效的 JSON: ${path} · HTTP ${response.status} · Content-Type: ${type} · ${text.slice(0, 120)} · 解析错误: ${parser}`)
-    error.status = response.status
-    error.code = 'INVALID_JSON'
-    error.retryable = text.trim() === '' || isTruncatedJsonMessage(parser)
-    return error
-}
-
-export class BangumiApi {
-    // `onUnauthorized` refreshes the token once; the caller decides how.
-    constructor({
-        token = '', interval = 0, maxRetries = 1, signal = null, onRetry = null, onLog = null,
-        onUnauthorized = null,
-    } = {}) {
-        this.token = token
-        this.interval = interval
-        this.maxRetries = Math.max(1, Math.round(maxRetries))
-        this.signal = signal
-        this.onRetry = onRetry
-        this.onLog = onLog
-        this.onUnauthorized = onUnauthorized
-    }
-
-    buildUrl(path, params) {
-        let url = apiBase + path
-        if (params) {
-            const query = new URLSearchParams(params).toString()
-            url += (url.includes('?') ? '&' : '?') + query
-        }
-        return url
-    }
-
-    async getJson(path, params) {
-        let lastError = null
-        let refreshed = false
-        let retryAfterLogged = false
-        let attempt = 0
-        while (attempt < this.maxRetries) {
-            if (this.signal?.aborted) throw abortError()
-            attempt += 1
-            await sleep(this.interval, this.signal)
-            let response
-            let text
-            try {
-                ({ response, text } = await fetchWithTimeout(proxied(this.buildUrl(path, params)), {
-                    headers: {
-                        'Authorization': 'Bearer ' + this.token,
-                        'Accept': 'application/json',
-                    },
-                }, { signal: this.signal }))
-            } catch (error) {
-                if (isAbortError(error) || this.signal?.aborted) throw abortError()
-                if (error?.retryable === false) throw error
-                lastError = error
-                if (attempt < this.maxRetries) {
-                    this.onRetry?.(`请求失败: ${error.message}`, attempt, this.maxRetries, retryWaitMs)
-                    await sleep(retryWaitMs, this.signal)
-                }
-                continue
-            }
-            if (response.ok) {
-                if (this.signal?.aborted) throw abortError()
-                try {
-                    return JSON.parse(text)
-                } catch (error) {
-                    if (this.signal?.aborted || isAbortError(error)) throw abortError()
-                    const invalid = invalidJsonError(path, response, text, error)
-                    lastError = invalid
-                    if (!invalid.retryable) throw invalid
-                    if (attempt < this.maxRetries) {
-                        this.onRetry?.(`请求失败: ${invalid.message}`, attempt, this.maxRetries, retryWaitMs)
-                        await sleep(retryWaitMs, this.signal)
-                    }
-                    continue
-                }
-            }
-            const status = response.status
-            if (status === 401) {
-                if (!refreshed && this.onUnauthorized) {
-                    refreshed = true
-                    attempt -= 1
-                    this.token = await this.onUnauthorized()
-                    continue
-                }
-                throw unauthorizedError()
-            }
-            const error = httpError(status, path, text, response.headers.get('content-type'))
-            if (!isRetryableStatus(status)) throw error
-            lastError = error
-            if (attempt < this.maxRetries) {
-                let retryAfter = null
-                if (status === 429 || status === 503) {
-                    const parsed = retryAfterMs(response.headers.get('retry-after'))
-                    if (parsed.ms != null) {
-                        retryAfter = Math.min(parsed.ms, retryAfterMaxMs)
-                        if (parsed.truncated && !retryAfterLogged) {
-                            retryAfterLogged = true
-                            this.onLog?.(`Retry-After 超过上限: ${path} · ${parsed.ms}ms 已截断为 ${retryAfterMaxMs}ms`, 'warn')
-                        }
-                    }
-                }
-                const wait = retryAfter ?? retryWaitMs
-                this.onRetry?.(`请求失败: ${error.message}`, attempt, this.maxRetries, wait)
-                await sleep(wait, this.signal)
-            }
-        }
-        throw lastError || new Error('请求失败')
-    }
-
-    getMe() {
-        return this.getJson('/v0/me')
-    }
-
-    getUserInfo(username) {
-        return this.getJson(`/v0/users/${encodeURIComponent(username)}`)
-    }
-
-    getUserCollectionsPage(username, offset = 0, limit = 30) {
-        return this.getJson(`/v0/users/${encodeURIComponent(username)}/collections`, { limit, offset })
-    }
-
-    getSubject(id) {
-        return this.getJson(`/v0/subjects/${id}`)
-    }
-
-    getEpisodesPage(subjectId, typeKey, offset = 0, limit = 100) {
-        return this.getJson('/v0/episodes', { subject_id: subjectId, type: typeKey, limit, offset })
-    }
-
-    getUserProgress(username, subjectId) {
-        return this.getJson(`/user/${encodeURIComponent(username)}/progress`, { subject_id: subjectId })
-    }
-}
-
-async function fetchEpisodeType(api, subjectId, typeKey) {
-    const first = await api.getEpisodesPage(subjectId, typeKey, 0, 100)
-    if (!first || !Array.isArray(first.data) || !Number.isInteger(first.total)) {
-        throw new Error(`分集列表响应异常 subject=${subjectId} type=${typeKey}`)
-    }
-    const total = first.total
-    let list = first.data.slice()
-    if (list.length > total) {
-        throw new Error(`分集列表条数异常 subject=${subjectId} type=${typeKey}: ${list.length}/${total}`)
-    }
-    while (list.length < total) {
-        const offset = list.length
-        const page = await api.getEpisodesPage(subjectId, typeKey, offset, 100)
-        if (!page || !Array.isArray(page.data)) {
-            throw new Error(`分集列表分页响应异常 subject=${subjectId} type=${typeKey}`)
-        }
-        if (!page.data.length) {
-            throw new Error(`分集列表分页为空 subject=${subjectId} type=${typeKey}: ${list.length}/${total}`)
-        }
-        list = list.concat(page.data)
-        if (list.length <= offset) {
-            throw new Error(`分集列表分页未增长 subject=${subjectId} type=${typeKey}: ${list.length}/${total}`)
-        }
-    }
-    if (list.length !== total) {
-        throw new Error(`分集列表不完整 subject=${subjectId} type=${typeKey}: ${list.length}/${total}`)
-    }
-    return list
-}
-
-export async function fetchEpisodeData(api, subjectId, { onSkip = null } = {}) {
-    const result = emptyEpisodeGroups()
-    for (const typeKey of epTypeKeys) {
-        try {
-            result[typeKey] = await fetchEpisodeType(api, subjectId, typeKey)
-        } catch (error) {
-            if (/not valid episode type/i.test(error.message)) {
-                onSkip?.(typeKey)
-                continue
-            }
-            throw error
-        }
-    }
-    return result
 }
 
 const bgmDirs = { subject: 'subjects', episode: 'episodes' }
@@ -695,27 +217,9 @@ export function createStaticStats() {
     return {
         chunks: 0, chunk_failures: 0, parse_failures: 0, manifest_failures: 0,
         manifest_unreliable: 0, snapshot_miss: 0, snapshot_miss_unreliable: 0,
-        episode_shortfall: 0, entries: 0,
+        entries: 0,
     }
 }
-
-// `eps` counts main episodes, so only type 0 compares; a snapshot without types uses its total.
-function staticEpisodeCount(episodes) {
-    const typed = episodes.some(episode => Number.isInteger(episode.type))
-    if (!typed) return episodes.length
-    return episodes.filter(episode => episode.type === 0).length
-}
-
-// A lag of an episode or two is accepted: one hit of two stays usable, one hit
-// of three does not.
-function staticEpisodesShort(available, expected) {
-    if (!Number.isInteger(expected) || expected <= 0) return false
-    if (available === 0) return true
-    return expected - available > Math.max(1, Math.ceil(expected / 10))
-}
-
-// Only the first notes are logged; the rest are counted in one closing line.
-const episodeNoteLimit = 5
 
 // The stage note names the reason for a wider read; the retry note stays neutral.
 const noteUnreliable = '（清单不可靠，扫描全部分片）'
@@ -725,6 +229,7 @@ const noteRetry = '（分片读取失败，补读其余分片）'
 export function createBgmSource({
     base, signal = null, onStage = null, onProgress = null, onLog = null,
 } = {}) {
+    if (!base) throw new Error('缺少静态数据地址')
     const manifests = new Map()
     const notified = new Set()
     let chunkWorker = null
@@ -1045,65 +550,36 @@ export function createBgmSource({
     }
 
     return {
-        async fillSubjects(items, { countMiss = true } = {}) {
+        // The caller decides what to do with the entries: this source only reads and parses.
+        // Without a snapshot `data` is null, so the caller skips the fill and the gap accounting.
+        async readSubjects(ids, { countMiss = true } = {}) {
             const stats = createStaticStats()
-            const ids = new Set()
-            for (const item of items) {
-                if (item.subject_data == null) ids.add(item.subject_id)
-            }
-            if (!ids.size) return { filled: 0, stats }
+            const idSet = new Set(ids)
+            if (!idSet.size) return { data: new Map(), stats }
             const data = await withPause(async () => {
                 const source = await readManifest('subject', stats)
                 if (!source || !source.manifest.chunks.length) return null
-                return loadStaticData('subject', source, ids, 'id', stats, { countMiss })
+                return loadStaticData('subject', source, idSet, 'id', stats, { countMiss })
             })
-            if (!data) return { filled: 0, stats }
-            let filled = 0
-            for (const item of items) {
-                if (item.subject_data == null && data.has(item.subject_id)) {
-                    item.subject_data = data.get(item.subject_id)
-                    filled++
-                }
-            }
-            return { filled, stats }
+            return { data, stats }
         },
 
-        async fillEpisodes(items) {
+        async readEpisodes(ids) {
             const stats = createStaticStats()
-            const ids = new Set()
-            for (const item of items) {
-                if (item.ep_data == null) ids.add(item.subject_id)
-            }
-            if (!ids.size) return { filled: 0, stats }
+            const idSet = new Set(ids)
+            if (!idSet.size) return { data: new Map(), stats }
             const data = await withPause(async () => {
                 const source = await readManifest('episode', stats)
                 if (!source || !source.manifest.chunks.length) return null
-                return loadStaticData('episode', source, ids, 'subject_id', stats)
+                return loadStaticData('episode', source, idSet, 'subject_id', stats)
             })
-            if (!data) return { filled: 0, stats }
-            let filled = 0
-            let noted = 0
-            for (const item of items) {
-                if (item.ep_data != null) continue
-                const episodes = data.get(item.subject_id) || []
-                const available = staticEpisodeCount(episodes)
-                if (staticEpisodesShort(available, item.subject_data?.eps)) {
-                    // An empty or short list is counted too: the API then fetches the complete one.
-                    stats.episode_shortfall += 1
-                    if (noted < episodeNoteLimit) {
-                        noted += 1
-                        onLog?.(`静态分集少于条目话数 subject=${item.subject_id}: 本篇 ${available}/${item.subject_data.eps}，留给接口补取`, 'warn')
-                    }
-                    continue
-                }
+            if (data == null) return { data: null, stats }
+            const grouped = new Map()
+            for (const [id, episodes] of data) {
                 if (!episodes.length) continue
-                item.ep_data = groupEpisodesByType(episodes)
-                filled++
+                grouped.set(id, groupEpisodesByType(episodes))
             }
-            if (stats.episode_shortfall > episodeNoteLimit) {
-                onLog?.(`静态分集少于条目话数 ${stats.episode_shortfall} 条，已交给接口补取`, 'warn')
-            }
-            return { filled, stats }
+            return { data: grouped, stats }
         },
 
         // The run holds the pause from its first request to its last, so the prefetch behind
@@ -1112,3 +588,4 @@ export function createBgmSource({
         close,
     }
 }
+

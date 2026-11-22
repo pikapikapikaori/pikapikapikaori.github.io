@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "591f6925bfa6a037",
+    "hash": "4f6d5bb50c42c93d",
     "files": [
         {
             "path": "404/_404.md",
@@ -187,16 +187,32 @@
             "hash": "2f27382039890c3b"
         },
         {
+            "path": "apps/bangumi-takeout/assets/external/js/bangumi-api.js",
+            "hash": "daf14cac2fbdfbd4"
+        },
+        {
+            "path": "apps/bangumi-takeout/assets/external/js/bangumi-auth.js",
+            "hash": "2eb67fa243c81770"
+        },
+        {
+            "path": "apps/bangumi-takeout/assets/external/js/bangumi-static.js",
+            "hash": "60f426e4f726526c"
+        },
+        {
+            "path": "apps/bangumi-takeout/assets/external/js/chunk-worker.js",
+            "hash": "c2223a232a87d928"
+        },
+        {
+            "path": "apps/bangumi-takeout/assets/external/js/index.js",
+            "hash": "497d03c126ae3c7d"
+        },
+        {
+            "path": "apps/bangumi-takeout/assets/js/abort.js",
+            "hash": "ebae90754608de75"
+        },
+        {
             "path": "apps/bangumi-takeout/assets/js/app.js",
             "hash": "5e0f63478e7dcb8e"
-        },
-        {
-            "path": "apps/bangumi-takeout/assets/js/backup/api.js",
-            "hash": "122120296522efc2"
-        },
-        {
-            "path": "apps/bangumi-takeout/assets/js/backup/auth.js",
-            "hash": "5a676d3d09a94b41"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/backup/exporter.js",
@@ -204,19 +220,23 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/backup/runner.js",
-            "hash": "3aa3b357c9e752fe"
+            "hash": "c1dffd2822749775"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/bootstrap.js",
-            "hash": "09332318d167a4cd"
+            "hash": "aab7888f3d92c5fb"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/config.js",
-            "hash": "9a810147baf19b11"
+            "hash": "f61ff7f4fd11d173"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/dom.js",
             "hash": "0a1623c9ac8c1616"
+        },
+        {
+            "path": "apps/bangumi-takeout/assets/js/external.js",
+            "hash": "23fc725ac796a617"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/footer.js",
@@ -232,7 +252,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/model.js",
-            "hash": "8b529f31c83f7162"
+            "hash": "79b5958f4e2e0e10"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/pages/about.js",
@@ -240,7 +260,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/pages/backup.js",
-            "hash": "d37ff03b11690bcb"
+            "hash": "c177fabb05171086"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/pages/data.js",
@@ -280,7 +300,7 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/storage.js",
-            "hash": "20e648d5ce11770c"
+            "hash": "84e73df6526bcc15"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/tasks.js",
@@ -292,15 +312,15 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/about.js",
-            "hash": "93207904e4b1dedd"
+            "hash": "c949e87b28243ffa"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/backup.js",
-            "hash": "63609244fc960310"
+            "hash": "970dbd82b7061d23"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/data.js",
-            "hash": "fe7aef9c12aa34a7"
+            "hash": "30c2f8c3ce9b99f8"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/detail.js",
@@ -324,11 +344,11 @@
         },
         {
             "path": "apps/bangumi-takeout/assets/js/ui/users.js",
-            "hash": "dcaaa111312bcf55"
+            "hash": "59c0ed11bf4f785e"
         },
         {
-            "path": "apps/bangumi-takeout/assets/js/worker/chunk.js",
-            "hash": "ab017c965664d26c"
+            "path": "apps/bangumi-takeout/assets/js/worker/messages.js",
+            "hash": "4f0437bb5a7a0cbf"
         },
         {
             "path": "apps/bangumi-takeout/assets/js/zip.js",

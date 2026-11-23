@@ -2,8 +2,6 @@ import { renderBackup, setNotice, setPreferredAuth } from '../ui/backup.js'
 import { storagePrefix } from '../config.js'
 import { loadExternal } from '../external.js'
 
-// The OAuth redirect lands on index.html without a hash, so the callback is
-// consumed at startup, not when the backup route opens.
 const authorization = loadExternal({ storagePrefix })
     .then(external => external.finishAuthorization())
     .then(result => {

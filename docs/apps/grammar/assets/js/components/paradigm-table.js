@@ -3,7 +3,6 @@ import { bdiFragment, bdiNode } from '../utils/bdi.js'
 import { EDGE_SPACE } from '../utils/space-filter.js'
 import { createEditableInput } from './editable-input.js'
 
-/** 通用表格渲染；模板缺列或缺行时返回 null。 */
 export function createParadigmTable(tableTpl, tableData, options = {}) {
     if (!tableTpl || !Array.isArray(tableTpl.columns) || !Array.isArray(tableTpl.rows)) {
         return null
@@ -34,7 +33,6 @@ export function createParadigmTable(tableTpl, tableData, options = {}) {
     const hiddenRows = new Set(hideRows || [])
     const visibleRows = tableTpl.rows.filter((r) => !hiddenRows.has(r.key))
 
-    // 所有行都标了 disabled 的列（如法语的命令式没有 1sg、3sg、3pl）整列不渲染
     const disabledEverywhere = (colKey) => visibleRows.length > 0
         && visibleRows.every((r) => rowDisabled(r, colKey))
     const columns = tableTpl.columns.filter((c) => !hidden.has(c.key) && !disabledEverywhere(c.key))

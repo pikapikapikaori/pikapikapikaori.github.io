@@ -25,16 +25,13 @@
 
     if (!('serviceWorker' in navigator) || !window.isSecureContext) return
 
-    /* 内嵌与独立部署使用不同的 worker，内嵌由主站根 worker 只取本前缀。 */
     if (embedded) {
         import('../../../../assets/js/worker/client.js').then(function (mod) {
             mod.connect({
                 swUrl: '../../sw.js',
-                project: parts.slice(-2).join('/') + '/',
-                tag: 'indexpage'
+                project: parts.slice(-2).join('/') + '/'
             })
         }).catch(function (error) {
-            console.warn('[sw] 共用模块加载失败：', error.message)
         })
         return
     }

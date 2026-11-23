@@ -15,7 +15,6 @@
     let closeCurrent = null
     let outsideCloser = null
 
-    /* 首载失败时 currentId() 为 null，统一转成空串交给 labelOf 回退。 */
     function currentValue(kind) {
         const value = kind === 'lang' ? App.i18n.get() : App.layouts.currentId()
         return value == null ? '' : value
@@ -46,7 +45,6 @@
     }
 
     function closeMenu(def, focusTrigger) {
-        /* 循环键没有菜单，def.menu 为 null，关闭时须先跳过。 */
         if (!def.menu || !def.menu.classList.contains('open')) return
 
         def.menu.classList.remove('open')
@@ -92,7 +90,6 @@
         if (target) target.focus()
     }
 
-    /* 向下开的菜单在视口下缘前收住高度，菜单内容改为滚动，页面不出现溢出。 */
     function fitMenu(def) {
         def.menu.style.maxHeight = ''
         def.menu.style.overflowY = ''
@@ -160,7 +157,6 @@
         }
 
         if (kind === 'theme') {
-            /* 三态图标全部留在 DOM 中，切换只改当前可见的一枚。 */
             App.theme.modes().forEach(function (mode) {
                 icon.appendChild(createThemeIcon(mode))
             })
@@ -245,7 +241,6 @@
 
     const SVG_NS = 'http://www.w3.org/2000/svg'
 
-    /* 日相三式：亮色太阳、暗色月牙、系统地平线。 */
     const THEME_SHAPES = {
         light: [
             { tag: 'circle', cx: '10', cy: '10', r: '3.4' },
@@ -291,7 +286,6 @@
         return svg
     }
 
-    /* 主题可访问名称同时给出当前态与点击后的目标态，避免与可见状态错位。 */
     function nextThemeMode(mode) {
         const modes = App.theme.modes()
         return modes[(modes.indexOf(mode) + 1) % modes.length]
@@ -321,7 +315,6 @@
             rebuildOptions(def)
 
             if (def.kind === 'theme') {
-                /* 图标按三态模式判断，不按当前亮暗实值，否则跟随系统与亮色同图。 */
                 const mode = App.theme.mode()
                 const next = nextThemeMode(mode)
                 const currentName = App.i18n.t('theme.' + mode)

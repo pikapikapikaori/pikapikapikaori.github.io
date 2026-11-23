@@ -145,8 +145,6 @@ export async function renderData() {
         if (busy) return
         if (!window.confirm('确定清除所有本地收藏缓存与断点吗？已保存凭证的账号会保留账号记录与凭证。')) return
         busy = true
-        // The render below replaces the button; the status line is where the
-        // focus lands once the cache is gone.
         const loading = beginLoading('正在清除缓存…', {
             returnFocus: () => document.getElementById('clear-cache'),
             fallbackFocus: () => document.getElementById('data-status'),

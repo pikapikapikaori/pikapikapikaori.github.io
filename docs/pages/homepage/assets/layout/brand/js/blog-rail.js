@@ -138,7 +138,6 @@ export function createBlogRail(options) {
         const ticket = ++loadSeq
 
         return F.loadPosts(lang).then(function (posts) {
-            /* 语言快速切换时旧请求可能后到，丢弃过期结果。 */
             if (disposed || ticket !== loadSeq) return
 
             rail.innerHTML = posts.map(renderPost).join('')

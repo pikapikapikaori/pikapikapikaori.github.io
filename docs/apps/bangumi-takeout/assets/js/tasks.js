@@ -1,8 +1,6 @@
 import { infoScopes, taskModes, taskResume, taskStages } from './config.js'
 import { meta, updateMeta, assertCounts } from './storage.js'
 
-// Raised when an unfinished task already exists: the caller decides whether to
-// resume it or to restart it explicitly.
 class TaskConflictError extends Error {
     constructor(message, task) {
         super(message)
@@ -34,7 +32,6 @@ function checkStage(stage) {
     if (!taskStages.includes(stage)) throw new Error('未知任务阶段')
 }
 
-// `position` is a diagnostic counter; resume comes from the stored pages and chunks.
 function checkPosition(position) {
     if (!Number.isInteger(position) || position < 0) throw new Error('任务位置必须为非负整数')
 }
@@ -51,8 +48,6 @@ function checkCollectionTotal(total) {
     }
 }
 
-// `resume` reads the unfinished task stored under the target username, so each
-// target keeps its own checkpoint.
 export async function beginTask(username, operation, { authUsername = '', stage, restart = false } = {}) {
     if (operation === taskResume) {
         if (stage !== undefined) checkStage(stage)
@@ -90,8 +85,6 @@ export async function beginTask(username, operation, { authUsername = '', stage,
     })
 }
 
-// A checkpoint carries the stage, its position and count; the finished subject
-// goes into its chunk through the context (see storage.js).
 export async function advanceTask(username, taskId, {
     stage, position, progress, doneSubjectId, collectionTotal,
 } = {}) {
@@ -113,7 +106,6 @@ export async function advanceTask(username, taskId, {
         if (stage !== undefined && stage !== task.stage) {
             task.stage = stage
             task.position = position ?? 0
-            // Finished ids are per subject_id inside one stage, so a reordered list is safe.
             ctx.resetDone()
         } else if (position !== undefined) {
             task.position = position
@@ -130,8 +122,6 @@ export async function advanceTask(username, taskId, {
     })
 }
 
-// Drops a checkpoint for one target so a full or incremental backup can start
-// with another credential. Only the task is removed; cached items stay.
 export async function discardTask(username) {
     return updateMeta(username, record => {
         if (!record?.task) return { record: null, value: false }

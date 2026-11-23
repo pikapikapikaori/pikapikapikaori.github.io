@@ -1,4 +1,3 @@
-// Only store (0) and deflate (8) are supported, through the native DecompressionStream.
 import { zipMaxOutputBytes } from './config.js'
 
 const eocdSig = 0x06054b50
@@ -28,8 +27,6 @@ function asBytes(arrayBuffer) {
     throw new Error('ZIP 数据格式不正确')
 }
 
-// Read the decompressed stream incrementally and stop as soon as the output
-// exceeds the remaining budget, instead of materialising the whole entry.
 async function inflateRaw(bytes, {
     signal = null, maxBytes = zipMaxOutputBytes, limitBytes = maxBytes,
 } = {}) {
@@ -147,8 +144,6 @@ export async function unzip(arrayBuffer, {
     for (const entry of entries) {
         if (!wanted.includes(extensionOf(entry.name))) continue
         selected.push(entry)
-        // 0xFFFFFFFF means ZIP64: the real size lives in an extra field that
-        // this reader does not parse, so leave the exact check to extraction.
         if (entry.size !== 0xFFFFFFFF) declaredTotal += entry.size
     }
     if (declaredTotal > maxOutputBytes) throw tooLargeError(maxOutputBytes)
@@ -169,8 +164,6 @@ export async function unzip(arrayBuffer, {
     return files
 }
 
-// A static shard holds one line-delimited file. Reading only the first match
-// avoids expanding every member of a caller-supplied archive.
 async function unzipFirst(arrayBuffer, {
     signal = null, maxOutputBytes = zipMaxOutputBytes,
     extensions = ['.jsonl', '.json'],

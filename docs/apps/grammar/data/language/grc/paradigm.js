@@ -1,9 +1,3 @@
-/**
- * 古希腊语专用的后期处理：按音节指派重音。
- *
- * 通用部分（toUnits / fromUnits / hasAccentMark）在 models/paradigm-generate.js 里，
- * 这里只放希腊语自己的音节、长短音与限制法规则。
- */
 import {
     toUnits,
     fromUnits,
@@ -15,13 +9,10 @@ import {
 
 const VOWEL_LETTERS = new Set(['α', 'ε', 'η', 'ι', 'ο', 'υ', 'ω'])
 const DIPHTHONGS = new Set(['αι', 'ει', 'οι', 'υι', 'αυ', 'ευ', 'ου', 'ηυ', 'ωυ'])
-/** 词末的 αι / οι 按短音计算（希腊语重音法则） */
 const FINAL_SHORT_DIPHTHONGS = new Set(['αι', 'οι'])
 const DOUBLE_CONSONANTS = new Set(['ξ', 'ψ', 'ζ'])
-/** 词末 -εως / -εων（i 词干的阿提卡式属格，如 πόλεως / πόλεων）在限制法里按短末音节算 */
 const FINAL_SHORT_SEQUENCES = ['εως', 'εων']
 const IOTA_SUBSCRIPT = '\u0345'
-/** 分音符（ϊ / ϋ）：标明与前一元音不合为双元音 */
 const DIALYTIKA = '\u0308'
 const MACRON = '\u0304'
 
@@ -33,13 +24,11 @@ function isVowel(unit) {
 
 const GREEK_LETTER = /[\u0370-\u03ff\u1f00-\u1fff]/
 
-/** 音节量只看希腊字母；括号、斜杠等标记不算辅音 */
 function consonantWeight(ch) {
     if (!GREEK_LETTER.test(ch)) return 0
     return DOUBLE_CONSONANTS.has(ch) ? 2 : 1
 }
 
-/** 音节核：元音或双元音（双元音算一个核） */
 function findNuclei(units) {
     const nuclei = []
     let i = 0
@@ -59,13 +48,6 @@ function findNuclei(units) {
 }
 
 
-/*
- * 音节的量分两种，希腊语的重音法则对它们的用法不同：
- *   nature   —— 核本身（长元音 / 双元音 / 标了长音符）为长
- *   position —— 核后有两个以上辅音（或双辅音 ξ ψ ζ）为长
- * 限制法只要求「倒数第三音节的重音必须配短末音节」；而「倒数第二音节转弯曲重音」
- * 只在倒数第二是 nature 长时才发生（位置长不转，如 λυθέντος、ὄρνις）。
- */
 function syllableWeights(units, nuclei) {
     return nuclei.map((nuc) => {
         let nature = 1
@@ -83,12 +65,6 @@ function syllableWeights(units, nuclei) {
     })
 }
 
-/**
- * 末音节是否算短。
- * 词末的 αι / οι 与 -εως / -εων 按短音算；但祈愿式的词尾 -οι / -αι 是长音
- * （λύοι 与 λύσαι 重音在倒数第二且为锐重音，对比不定式 λῦσαι 的弯曲重音），
- * 由 finalDiphthongLong 标出。
- */
 function ultimaIsShort(nuclei, weights, shortFinal, finalDiphthongLong) {
     const last = nuclei.length - 1
     if (last < 0) return true
@@ -106,12 +82,10 @@ function accentKindOf(unit) {
     return ''
 }
 
-/** 字符串里是否写了重音记号 */
 export function hasAccentMark(text) {
     return toUnits(text).some((unit) => accentKindOf(unit))
 }
 
-/** 所有带重音的核，按从左到右排列 */
 function findAccents(units, nuclei) {
     const out = []
     nuclei.forEach((nuc, index) => {
@@ -123,14 +97,6 @@ function findAccents(units, nuclei) {
     return out
 }
 
-/**
- * 按音节指派重音。
- * @param {string} text   已经拼好的词形（可含重音与长音符）
- * @param {string} mode   'recessive' | 'persistent' | 'none'
- * @param {object} [options]
- * @param {boolean} [options.endingAccented] 词尾那一侧自带重音时置 true（优先取靠后的那个）
- * @param {boolean} [options.finalDiphthongLong] 词末的 αι / οι 算长音（祈愿式）
- */
 export function applyAccent(text, mode, { endingAccented = false, finalDiphthongLong = false } = {}) {
     if (!mode || mode === 'none') return text
     const units = toUnits(text)
@@ -147,15 +113,12 @@ export function applyAccent(text, mode, { endingAccented = false, finalDiphthong
     let kind = 'acute'
 
     if (mode === 'penult') {
-        // 固定在倒数第二音节（不定式 -ναι / -σθαι、-μενος 分词等）
         index = Math.max(0, nuclei.length - 2)
         if (index === last - 1 && weights[index].nature >= 2 && shortUltima) kind = 'circumflex'
     } else if (mode === 'recessive') {
-        // 退重音：在限制法允许的范围内尽量往前
         index = (nuclei.length >= 3 && shortUltima) ? nuclei.length - 3 : Math.max(0, nuclei.length - 2)
         if (index === last - 1 && weights[index].nature >= 2 && shortUltima) kind = 'circumflex'
     } else {
-        // 持续重音：保持原有的那一侧，只做限制法校正
         const accents = findAccents(units, nuclei)
         if (!accents.length) return plain()
         const authored = endingAccented ? accents[accents.length - 1] : accents[0]
@@ -165,7 +128,6 @@ export function applyAccent(text, mode, { endingAccented = false, finalDiphthong
         else if (index === last - 1) {
             kind = (weights[index].nature >= 2 && shortUltima) ? 'circumflex' : 'acute'
         }
-        // 个别形式（如 λυθείεν）固定在原音节但用锐重音
         if (mode === 'acute') kind = 'acute'
     }
 
@@ -177,18 +139,14 @@ export function applyAccent(text, mode, { endingAccented = false, finalDiphthong
 }
 
 
-/** 统一入口：引擎按 profile.accent(text, mode, options) 调用 */
 export function accent(text, mode, options = {}) {
     return applyAccent(text, mode, options)
 }
 
-/* ---------------- 保存时的规范化：单元音默认短 ---------------- */
 
 const BREVE = '\u0306'
 
-/** 有长短对立的元音：只有 α ι υ；η ω 天然长，ε ο 天然短 */
 const LENGTH_VOWELS = 'αιυ'
-/** 按「基字 + 组合符」切成簇 */
 function toClusters(text) {
     const out = []
     for (const ch of text) {
@@ -198,14 +156,6 @@ function toClusters(text) {
     return out
 }
 
-/**
- * 古希腊语规范化：**单元音默认短**。
- * α ι υ 单独出现（不在双元音里、没有长音符、没有 iota 下标）→ 补上短音符 ˘；
- * 双元音两个成员都不补；η ω（天然长）与 ε ο（天然短）不补；带分音符的 ϊ ϋ 算单元音，补。
- *
- * @param {string} text
- * @returns {string}
- */
 export function canonicalize(text) {
     const src = String(text ?? '')
     if (!src) return src
@@ -217,10 +167,7 @@ export function canonicalize(text) {
         const b = clusters[i + 1]
         const pair = a.base + b.base
         if (!DIPHTHONGS.has(pair)) continue
-        // 任一边带分音符（ϊ）就说明不是双元音
         if (a.marks.includes(DIALYTIKA) || b.marks.includes(DIALYTIKA)) continue
-        // υι 在希腊语里几乎只有 υἱός 这种「分读」：第二个元音带气符就算两个独立元音
-        // （其它双元音的气符本来就写在第二个元音上，αἱ / οἶ / οὐ，不能一并否掉）
         if (pair === 'υι' && (b.marks.includes('\u0313') || b.marks.includes('\u0314'))) continue
         inDiphthong.add(i)
         inDiphthong.add(i + 1)
@@ -229,10 +176,8 @@ export function canonicalize(text) {
     const out = clusters.map((cluster, index) => {
         const { base, marks } = cluster
         const keep = base + marks.split(BREVE).join('')
-        // 不该有短音符的位置顺手去掉，保证「同一写法」收敛
         if (!LENGTH_VOWELS.includes(base) || inDiphthong.has(index)) return keep
         if (marks.includes(MACRON)) return keep
-        // iota 下标说明这个元音是长的
         if (marks.includes(IOTA_SUBSCRIPT)) return keep
         return base + marks + (marks.includes(BREVE) ? '' : BREVE)
     })

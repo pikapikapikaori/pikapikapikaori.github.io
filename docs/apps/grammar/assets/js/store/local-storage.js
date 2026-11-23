@@ -1,14 +1,11 @@
-/** Typed access to the localStorage keys of this app. Storage failures never reach callers. */
 
 import { LS_KEYS } from '../config/config.js'
 
 export { LS_KEYS }
 
-/** Fixed input helper keys. They take no argument and are always available. */
 export const imeEnabledKey = 'grammar:ime:enabled'
 export const imeFollowKey = 'grammar:ime:follow'
 
-/** Keys that hold a language or an input method code. No argument means no key. */
 export function romanKey(lang) {
     return lang ? `grammar:roman:${lang}` : null
 }
@@ -51,7 +48,6 @@ export function remove(key) {
     }
 }
 
-/** Bool keys store '1' or '0'. Any other value keeps the fallback of the caller. */
 export function getBool(key, fallback = false) {
     switch (getString(key, null)) {
         case '1': return true
@@ -69,7 +65,6 @@ export function getEnum(key, allowed, fallback = null) {
     return Array.isArray(allowed) && allowed.includes(value) ? value : fallback
 }
 
-/** Writes only allowed values and leaves the key untouched otherwise. */
 export function setEnum(key, allowed, value) {
     if (!Array.isArray(allowed) || !allowed.includes(value)) return false
     return setString(key, value)

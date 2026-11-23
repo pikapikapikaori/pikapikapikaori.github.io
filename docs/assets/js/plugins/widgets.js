@@ -447,7 +447,6 @@ class ThemeController {
         this.deferringUi = false
         this.isReverting = false
         this.revertCount = 0
-        this.revertWarned = false
     }
 
     defaultThemeIndex() {
@@ -592,7 +591,6 @@ class ThemeController {
         try {
             applied = await this.applyTheme()
         } catch (e) {
-            console.warn('[widgets] 主题变更失败', e)
         } finally {
             this.deferringUi = false
         }
@@ -613,8 +611,6 @@ class ThemeController {
     async revertThemeTransaction(snapshot) {
         // Reverting is a single attempt; a second failure stops here instead of looping.
         if (this.isReverting || this.revertCount >= themeMaxRevert) {
-            this.warnRevertOnce()
-
             // The CSS of the requested change is already applied, so keep it and store it as it is.
             this.persist()
             this.flushUi()
@@ -642,7 +638,6 @@ class ThemeController {
         }
 
         if (restored) this.revertCount = 0
-        else this.warnRevertOnce()
 
         // The stored record follows what is actually in effect, so a reload does not retry the failed theme.
         this.persist()
@@ -654,13 +649,6 @@ class ThemeController {
     flushUi() {
         if (this.hooks.onMode) this.hooks.onMode(this.modeIndex)
         if (this.hooks.onColor) this.hooks.onColor(this.colorHue)
-    }
-
-    warnRevertOnce() {
-        if (this.revertWarned) return
-
-        this.revertWarned = true
-        console.warn('[widgets] 旧主题脚本同样失败，已停止自动回退，保留当前 CSS 主题')
     }
 
     setColorHue(hue) {
@@ -827,7 +815,6 @@ function plugin(hook, vm) {
                 if (value) return value.trim()
             }
         } catch (e) {
-            console.warn('[widgets] 主题 CSS 变量读取失败：' + name, e)
         }
 
         return ''
@@ -920,8 +907,6 @@ function plugin(hook, vm) {
         })
     }
 
-    let themeCssWarned = false
-
     let applyThemeColor = function () {
         const group = getThemeGroup()
         const isDark = resolveIsDark()
@@ -943,11 +928,6 @@ function plugin(hook, vm) {
 
         return waits.then(function (cssReady) {
             const cssOk = cssReady !== false
-
-            if (!cssOk && !themeCssWarned) {
-                themeCssWarned = true
-                console.warn('[widgets] 主题 CSS 加载失败：' + cssPath)
-            }
 
             const applied = readAppliedThemeColors(colorTheme, isEnabled(cssPath))
             themeController.themeColor = applied.themeColor
@@ -1152,7 +1132,6 @@ function plugin(hook, vm) {
                     })
                 }
             } catch (e) {
-                console.warn('[widgets] 回滚渲染期间的 DOM 改动失败', e)
             }
         }
     }
@@ -1164,7 +1143,6 @@ function plugin(hook, vm) {
             try {
                 cleanup()
             } catch (e) {
-                console.warn('[widgets] 主题脚本的清理任务执行失败', e)
             }
         })
         themeJsCleanups = []
@@ -1189,7 +1167,6 @@ function plugin(hook, vm) {
         try {
             themeModule = await loadThemeModule(jsPath)
         } catch (e) {
-            console.warn('[widgets] 主题脚本加载失败：' + jsPath, e)
 
             return false
         }
@@ -1198,7 +1175,6 @@ function plugin(hook, vm) {
         if (token !== themeRenderToken) return true
 
         if (typeof themeModule.renderTheme !== 'function') {
-            console.warn('[widgets] 主题脚本缺少 renderTheme：' + jsPath)
 
             return false
         }
@@ -1215,7 +1191,6 @@ function plugin(hook, vm) {
                 }
             }))
         } catch (e) {
-            console.warn('[widgets] 主题脚本执行失败：' + jsPath, e)
 
             return false
         } finally {
@@ -1661,7 +1636,6 @@ function plugin(hook, vm) {
 
         Promise.resolve(restorePromise)
             .catch(function (error) {
-                console.warn('[widgets] failed to restore theme state', error)
             })
             .then(function () {
                 // A user-triggered render already ran, so this queued render must not run again.

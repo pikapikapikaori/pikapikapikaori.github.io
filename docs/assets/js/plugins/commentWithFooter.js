@@ -59,7 +59,6 @@ function loadProvider(name) {
         .then(mod => mod.default || mod.gitalkProvider || null)
         .catch(err => {
             providerCache.delete(name)
-            console.warn('[commentWithFooter] failed to load provider:', name, err)
             return null
         })
 

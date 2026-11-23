@@ -59,7 +59,6 @@ export function setupSearch (state, elements, selectGroup) {
         const source = String(text == null ? '' : text)
         const needle = foldText(query)
         if (!needle) return escapeHtml(source)
-        /* 按 code point 切分，代理对不被拆开，标记也按整字判断。 */
         const chars = Array.from(source)
         const foldedChars = chars.map(function (char) { return foldText(char) })
         const needleChars = Array.from(needle)
@@ -130,7 +129,6 @@ export function setupSearch (state, elements, selectGroup) {
         return !panel.hidden
     }
 
-    /* 面板贴到视口下缘：以自身顶部位置换算 100dvh 的可用高度。 */
     function syncPanelMetrics () {
         panel.style.setProperty('--results-top', panel.getBoundingClientRect().top + 'px')
     }
@@ -214,7 +212,6 @@ export function setupSearch (state, elements, selectGroup) {
             '</div>'
     }
 
-    /* 显示与打开共用这一处拼装；显示传原文关键词，打开传编码后的值。 */
     function providerAddress (provider, keyword) {
         return keyword ? provider.query + keyword : provider.url
     }
@@ -233,8 +230,6 @@ export function setupSearch (state, elements, selectGroup) {
             '</div>'
     }
 
-    /* 普通文字与无匹配的斜杠输入共用这一行：搜索词保留原文（含斜杠），
-       显示原文，打开时整段编码。 */
     function googleAddress (keyword) {
         return texts.googleSearchUrl + keyword
     }
@@ -338,7 +333,6 @@ export function setupSearch (state, elements, selectGroup) {
             return
         }
         if (command) {
-            /* 前缀已完整时只给提示：它不是候选项，回车仍按前缀规则打开引擎首页。 */
             const item = providerItems.find(function (candidate) {
                 return candidate.provider === command.provider
             })
@@ -421,8 +415,6 @@ export function setupSearch (state, elements, selectGroup) {
         input.focus()
     }
 
-    /* 前缀前的空白先去掉；分隔符接受任意空白与全角空格；
-       分隔符之后的内容才是关键词，首尾空白同样去掉。 */
     function parseProviderInput (value) {
         const match = config.providerPrefixPattern.exec(String(value == null ? '' : value).trimStart())
         if (!match) return null

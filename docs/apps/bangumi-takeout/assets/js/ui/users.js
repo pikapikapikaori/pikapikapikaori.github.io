@@ -79,8 +79,6 @@ export async function renderUsers() {
     })
 }
 
-// An account with only a credential may lack a meta record; a minimal one keeps a
-// reload on the empty view instead of another account.
 async function ensureEmptyUser(name) {
     await updateMeta(name, record => {
         if (record) return { record: null, value: false }
@@ -118,8 +116,6 @@ async function choose(name, buttons, hasCredential, main, token, trigger) {
                 const raw = await loadFromUrl(defaultDataUrl)
                 await importExport(raw)
                 hit = state.data
-                // The export's meta.user.username is authoritative; the dropdown
-                // label may differ from the account the file actually contains.
                 activeName = hit?.user?.username || name
             } catch (error) {
                 if (!hasCredential) throw error

@@ -1,12 +1,7 @@
-/** 数据格式文档：目录在 /data/schema/manifest.json，每篇一个 JSON；另提供复制与下载。 */
 
 let cache = null
 let pending = null
 
-/**
- * 读取全部篇目（体量很小，一次读完，切换篇目不闪）。
- * @returns {Promise<{ title: string, docs: Array<{ id, title, lead, order, updatedAt, markdown }> }>}
- */
 export function loadSchema() {
     if (cache) return Promise.resolve(cache)
     if (pending) return pending
@@ -40,13 +35,12 @@ export function loadSchema() {
     return pending
 }
 
-/** 写入剪贴板；不支持 Clipboard API 时退回到临时 textarea */
 export async function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
         try {
             await navigator.clipboard.writeText(text)
             return true
-        } catch { /* 落到兼容路径 */ }
+        } catch {   }
     }
 
     const ta = document.createElement('textarea')

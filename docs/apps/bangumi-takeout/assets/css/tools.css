@@ -601,7 +601,6 @@
     color: var(--color-error);
 }
 
-/* The three modes share one style; disabled alone expresses availability. */
 .task-btn {
     display: inline-flex;
     align-items: center;

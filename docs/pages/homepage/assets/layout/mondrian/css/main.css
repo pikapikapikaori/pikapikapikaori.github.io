@@ -91,9 +91,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
     z-index: 1;
 }
 
-/* 展签左右两栏都取内容宽度，分割线与语言键之间只留 10px。 */
 .mondrian-plate {
-    /* 高于页脚，popup 向下展开时才不会被页脚文字盖住。 */
     z-index: 2;
     display: grid;
     grid-template-columns: max-content max-content;
@@ -123,7 +121,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     border-right: 1px solid var(--m-plate-rule);
 }
 
-/* 日文名带注音，行高留给 ruby，不裁切。 */
 .m-plate-name {
     font-size: 19px;
     font-weight: 600;
@@ -148,7 +145,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     min-width: 0;
 }
 
-/* 三键一行，不换行也不截断；宽度按内容自然增长。 */
 .m-plate-controls .app-controls {
     display: flex;
     flex-wrap: nowrap;
@@ -195,14 +191,12 @@ html[data-layout="mondrian"][data-theme="dark"] {
     white-space: nowrap;
 }
 
-/* 主题键与无边框触发器同一外观，只留悬停与焦点反馈。 */
 .m-plate-controls .app-control[data-kind="theme"] .app-control-trigger {
     width: 36px;
     border: 0;
     border-radius: 50%;
 }
 
-/* 展签在画作下方，菜单向下展开；高度过紧凑，始终落在视口内。 */
 .m-plate-controls .app-control-menu {
     top: calc(100% + .4rem);
     right: 0;
@@ -257,7 +251,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     animation: m-frame-in .8s cubic-bezier(.22, .61, .36, 1) both;
 }
 
-/* 6px 外框加 2px 内线。 */
 .mondrian-frame::after {
     content: "";
     position: absolute;
@@ -538,7 +531,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
     backface-visibility: hidden;
 }
 
-/* 面片颜色继承所在格子的组合类，红蓝白黄都可翻转。 */
 .m-flip .m-front,
 .m-flip .m-back {
     background: var(--m-cell-bg);
@@ -616,7 +608,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
         padding-bottom: 3.2rem;
     }
 
-    /* 窄屏保留堆叠间距；三键保持一行，不换行截断。 */
     .mondrian-plate {
         margin-top: clamp(2.5rem, 4.5vh, 3.25rem);
         min-height: 74px;
@@ -698,7 +689,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
 }
 
 @media screen and (max-width: 400px) {
-    /* 极窄屏再增加一点间距。 */
     .mondrian-plate {
         margin-top: clamp(2.5rem, 6vh, 3.4rem);
     }
@@ -735,10 +725,6 @@ html[data-layout="mondrian"][data-theme="dark"] {
 
     .mondrian-plate {
         grid-area: plate;
-        /* 宽屏与画作同轴居中后，把铭牌下缘对到红色块下缘。
-           红块下缘在画框内为 0.8 × --m-size - 4.4px（6px 内边距 + 8 行 10 列 + 4px 间隙），
-           画作与铭牌同在一行且各自居中，故相对中心下移 0.3 × --m-size - 4.4px，
-           再以 -50% 抵掉自身高度的一半，铭牌高度随语言变化也不影响对齐。 */
         align-self: center;
         margin-top: 0;
         transform: translateY(calc(var(--m-size) * .3 - 4.4px)) translateY(-50%);

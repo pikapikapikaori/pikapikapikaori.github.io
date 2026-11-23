@@ -76,7 +76,6 @@ body {
     display: none !important;
 }
 
-/* 布局加载失败时的可见落点：页面不空白，控件仍可用。 */
 .layout-fallback {
     display: flex;
     flex-direction: column;
@@ -100,7 +99,6 @@ html[data-theme="dark"] .layout-fallback {
     justify-content: center;
 }
 
-/* 控件由各布局把 data-slot="controls" 放到自己的位置。 */
 .app-controls {
     position: relative;
     z-index: 30;
@@ -117,7 +115,6 @@ html[data-theme="dark"] .layout-fallback {
     align-items: center;
 }
 
-/* 语言、布局、主题三类键同高，右栏三键才落在同一基线。 */
 .app-control-trigger {
     display: inline-flex;
     align-items: center;
@@ -139,7 +136,6 @@ html[data-theme="dark"] .layout-fallback {
         background-color .25s var(--app-ease);
 }
 
-/* 汉字字面略高于行盒中心，轻移半像素让视觉中心与下拉文字同线。 */
 .app-control-label {
     position: relative;
     top: .5px;
@@ -175,7 +171,6 @@ html[data-theme="dark"] .layout-fallback {
         background-color .15s var(--app-ease);
 }
 
-/* 主题键无可见文字，隐藏空标签后 20px 图标才是真正的几何居中。 */
 .app-control[data-kind="theme"] .app-control-label {
     display: none;
 }
@@ -192,7 +187,6 @@ html[data-theme="dark"] .layout-fallback {
     height: 20px;
 }
 
-/* 三态图标叠放，切换时只交叉淡化透明度。 */
 .theme-icon {
     position: absolute;
     inset: 0;
@@ -290,7 +284,6 @@ html[data-theme="dark"] .layout-fallback {
     color: var(--control-accent);
 }
 
-/* 选中标记绝对定位，不参与文字居中。 */
 .app-control-option[aria-selected="true"]::after {
     content: "";
     position: absolute;

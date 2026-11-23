@@ -96,7 +96,6 @@
     font-weight: 700;
 }
 
-/* 语法页把标题做成 h1：一页一个，字号提到 --fs-2xl */
 h1.page-head__title {
     font-size: var(--fs-2xl);
     letter-spacing: -.02em;
@@ -104,8 +103,6 @@ h1.page-head__title {
     margin: 0;
 }
 
-/* 书目式页头：语言索引这类整页标题用衬线大字。
- * app 屏幕的标题上限是 32px（手机上 24px），所以不用 --fs-3xl。 */
 .page-head--display .page-head__title {
     font-family: var(--ff-display);
     font-size: 2rem;

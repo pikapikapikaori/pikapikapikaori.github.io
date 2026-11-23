@@ -1,4 +1,3 @@
-/** 全局 UI 状态（非持久数据）；持久数据走各自的 store。 */
 
 import { createStore } from './utils/events.js'
 
@@ -8,7 +7,6 @@ export const appStore = createStore({
     language: null,
     route: null,
     prevRoute: null,
-    /** 顶栏按哪个上下文导航：'user' = 语言列表、设置，'welcome' = 首页（从欢迎页进来的文档页） */
     navContext: 'user',
     params: {},
     query: {},

@@ -60,7 +60,6 @@ function followFor(targetP) {
     return U.lerp(GLOBAL_FOLLOW, PHASE_C_FOLLOW, blend)
 }
 
-/* section 需含 .photo-stack；pins 收集该段注册的 pin 以便离开时释放。 */
 export function createPhotoStack(options) {
     const section = options.section
     const pins = options.pins
@@ -72,7 +71,6 @@ export function createPhotoStack(options) {
     let pin = null
     let resizeObserver = null
 
-    /* 每次重新渲染时重建的派生数据 */
     let cards = []
     let N = 0
     let mid = 0
@@ -118,7 +116,6 @@ export function createPhotoStack(options) {
 
         const tC = U.magnetize(tCraw, N, P.magnetFlat)
 
-        /* 阶段 B：整体放大 */
         const stageScale = 1 + (P.stackScaleMax - 1) * U.easeInOutCubic(tB)
         stack.style.transform = 'scale(' + stageScale.toFixed(4) + ')'
 
@@ -166,7 +163,6 @@ export function createPhotoStack(options) {
     }
 
     function doRender() {
-        /* 隐藏，避免重建过程中的位置跳变被看到 */
         stack.classList.remove('ready')
 
         const photos = Photos.list()
@@ -189,7 +185,6 @@ export function createPhotoStack(options) {
             }
         }
 
-        /* 卡片位置已就位，显示 */
         stack.classList.add('ready')
     }
 

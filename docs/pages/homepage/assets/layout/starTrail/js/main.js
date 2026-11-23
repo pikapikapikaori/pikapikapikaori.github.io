@@ -52,8 +52,6 @@ export default {
             }
         }
 
-        /* 轨迹整体先画在离屏画布上，每帧只清除主画布再贴一次旋转后的图。
-           主画布不再叠半透明黑幕，因此不会随帧数累积变暗。 */
         const cache = document.createElement('canvas')
         const cctx = cache.getContext('2d')
         const edgeMask = document.createElement('canvas')
@@ -132,8 +130,6 @@ export default {
             return Math.min(dist(a0, b0), dist(a0, b1), dist(a1, b0), dist(a1, b1))
         }
 
-        /* 文字区留净：星点在该区域内压暗，轨迹绕开该矩形。
-           不铺整屏遮罩，只对文字实际占位做局部处理。 */
         function textSafeRect() {
             const selectors = ['.star-kicker', '.star-slogan', '.star-name', '.star-tagline']
             const rects = selectors.map(function (selector) {
@@ -172,8 +168,6 @@ export default {
             else content.removeAttribute('tabindex')
         }
 
-        /* 窄屏天空层固定在布局顶端，正文滚动时需要同步上移，
-           否则首屏画布会一直压在关于与页脚文字下方。 */
         function applySkyScroll() {
             scrollRaf = 0
             if (disposed) return
@@ -260,7 +254,6 @@ export default {
                         if (clear) start = candidate
                     }
 
-                    /* 放不进可见角度就放弃这条，宁可少一条也不让近半径弧连成整圆。 */
                     if (start === null) continue
 
                     const radiusT = (radius - rMin) / Math.max(1, rMax - rMin)
@@ -382,7 +375,6 @@ export default {
             cctx.translate(cacheRadius, cacheRadius)
 
             trails.forEach(function (trail) {
-                /* 半径超过视口最远角加宽度的弧，任何旋转角度都不会进入画面。 */
                 if (trail.radius - trail.widthHead / 2 > cacheRadius) return
 
                 const steps = Math.max(20, Math.min(90, Math.ceil(trail.sweepDeg / 1.2)))
@@ -394,7 +386,6 @@ export default {
                     const a1 = (trail.startDeg + trail.sweepDeg * t1) * Math.PI / 180
                     const w0 = lerp(trail.widthHead, trail.widthTail, t0) / 2
                     const w1 = lerp(trail.widthHead, trail.widthTail, t1) / 2
-                    /* 亮度沿弧衰减，尾端更淡。 */
                     const alpha = trail.opacity * (1 - .84 * (t0 + t1) / 2)
                     const r = trail.radius
 
@@ -423,7 +414,6 @@ export default {
             })
         }
 
-        /* 四周与底部用 alpha 渐变收口，不叠加色块。 */
         function buildEdgeMask() {
             const top = Math.max(32, Math.round(height * .06))
             const side = Math.max(40, Math.round(width * .05))
@@ -436,7 +426,6 @@ export default {
             mctx.fillStyle = '#000'
             mctx.fillRect(0, 0, width, height)
 
-            /* 只在四边擦除 alpha，中间保持实心，星轨本体不被遮住。 */
             mctx.globalCompositeOperation = 'destination-out'
 
             const bands = [
@@ -454,8 +443,6 @@ export default {
                 mctx.fillRect(band.rect[0], band.rect[1], band.rect[2], band.rect[3])
             })
 
-            /* 文字区留净：以椭圆径向渐变把该区域的星轨压到近零，
-               不再用矩形裁切，避免出现直线切断。 */
             if (textSafe) {
                 const halfW = Math.max(1, (textSafe.right - textSafe.left) / 2)
                 const halfH = Math.max(1, (textSafe.bottom - textSafe.top) / 2)
@@ -493,8 +480,6 @@ export default {
             ctx.drawImage(cache, -cacheRadius, -cacheRadius, cacheSize, cacheSize)
             ctx.restore()
 
-            /* alpha 遮罩只减少边缘像素，星轨本体仍保持可见。
-               文字区留净同样走遮罩的渐变，不做矩形硬裁。 */
             ctx.save()
             ctx.globalCompositeOperation = 'destination-in'
             ctx.drawImage(edgeMask, 0, 0, width, height)
@@ -508,7 +493,6 @@ export default {
 
             lastTime = now
             render(now / 1000)
-            /* 逆时针：屏幕 y 轴向下，角度递减即逆时针；每帧 0.0005 弧度沿用原转速（约 1.7°/s）。 */
             angle -= .0005 * step
 
             if (angle < 0) angle += Math.PI * 2
@@ -528,7 +512,6 @@ export default {
 
             if (disposed) return
 
-            /* 亮色只靠光带的 CSS 位移，画布保持静止，不再请求帧。 */
             if (sceneTheme !== 'dark') {
                 render(performance.now() / 1000)
                 return
@@ -567,7 +550,6 @@ export default {
 
             const metrics = measure()
 
-            /* 视口最远角之外的弧整条都不可见，缓存到该半径即可。 */
             cacheRadius = Math.hypot(
                 Math.max(pivotX, width - pivotX),
                 Math.max(pivotY, height - pivotY)
@@ -626,7 +608,6 @@ export default {
         document.addEventListener('visibilitychange', onVisibility)
         if (content) content.addEventListener('scroll', onContentScroll, { passive: true })
 
-        /* 调试钩子：当前旋转角（弧度），供外部采样方向与转速。 */
         Object.defineProperty(canvas, '__starTrailAngle', {
             configurable: true,
             get: function () { return angle }

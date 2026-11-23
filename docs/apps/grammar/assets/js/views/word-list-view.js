@@ -1,4 +1,3 @@
-/** 生词列表（卡片 + 分页 + 筛选 + 排序） */
 
 import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
@@ -72,8 +71,6 @@ export default {
             langWordsCache = await listByLanguage(userId, lang)
             langWordsMap = new Map()
             for (const w of langWordsCache) {
-                // 同 lemma 多个 pos 时保留第一个（用于派生词跳转）；
-                // 短音符不参与匹配：派生词写 i 也能指到存成 ĭ 的那条
                 const key = foldBreve(w.lemma)
                 if (!langWordsMap.has(key)) langWordsMap.set(key, w)
             }
@@ -117,7 +114,6 @@ export default {
             return getParadigmTemplate(grammarDoc, pos)
         }
 
-        /** 某个词的词干标签（来自它的变位、变格类型） */
         function partLabelsFor(word) {
             const parts = getDeriveParts(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef)
             const out = {}
@@ -127,12 +123,10 @@ export default {
             return out
         }
 
-        /** 主词干那一栏的标题（梵语动词是「词根」、名词是「弱词干」） */
         function stemLabelFor(word) {
             return stemLabelOf(grammarDoc, word && word.inflectionType && word.inflectionType.grammarRef, word && word.pos)
         }
 
-        /** 词性徽章 → 对应语法章节（`{lang}-{pos}` 存在才可点） */
         function resolvePosRef(pos) {
             const id = `${lang}-${pos}`
             return findAnchor(grammarDoc, id) ? id : null
@@ -153,7 +147,6 @@ export default {
                         class: 'btn', type: 'button',
                         onclick: () => location.hash = `#/grammar/${lang}`
                     }, '语法'),
-                    // 形态分析：只有该语言有分析源时才出现（与「语法」用的是同一种按能力隐藏的写法）
                     hasAnalyzer(lang) ? h('button', {
                         class: 'btn', type: 'button',
                         onclick: () => openAnalyzeModal({ langCode: lang, langName: language.name })
@@ -319,11 +312,9 @@ export default {
 
         let currentPageIds = []
 
-        /** 派生词跳转：清掉搜索与筛选后定位到目标词所在页 */
         async function focusDerivative(target) {
             const filtered = !!state.q.trim() || !!state.pos || state.scope !== 'all'
 
-            // 目标已经在当前这一页：不重画列表，直接滚动 + 换弹窗内容（否则会闪两下）
             if (!filtered && currentPageIds.includes(target.id)) {
                 scrollToWord(target.id)
                 openDetailFor(target)
@@ -358,7 +349,6 @@ export default {
                 syncUrl()
             }
 
-            // 先定位到那一行，再换弹窗内容 —— 等价于跳过去再点一下
             scrollToWord(target.id)
             openDetailFor(target)
         }
@@ -409,7 +399,6 @@ export default {
             annotateBreves(listWrap, { selector: '.word-row__lemma' })
         }
 
-        /** 掌握度：五格刻度 */
         function masteryTicks(level) {
             const n = Math.max(0, Math.min(5, Number(level) || 0))
             return h('div', {
@@ -423,7 +412,6 @@ export default {
             )
         }
 
-        /** 打开词卡详情：列表行点击与派生词跳转共用 */
         function openDetailFor(word) {
             openCardOverlay(word, {
                 language: lang,
@@ -446,7 +434,6 @@ export default {
             })
         }
 
-        /** 一行一个词：只给词形、掌握度、时间。含义要打开词卡才看得到。 */
         function renderRow(w) {
             const row = h('div', {
                 class: 'word-row',
@@ -570,7 +557,6 @@ export default {
                 return
             }
             if (typing) return
-            // 左右方向键交给分页按钮，这里不处理
         }
         document.addEventListener('keydown', onKey)
 

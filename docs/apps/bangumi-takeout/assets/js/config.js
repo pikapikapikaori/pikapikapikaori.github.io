@@ -45,7 +45,6 @@ export const href = {
     data: '#/data',
 }
 
-// Identity is username: some accounts have no uid.
 export const dbName = 'bangumi-takeout'
 export const dbVersion = 1
 export const storeItems = 'items'
@@ -61,7 +60,6 @@ export const taskStage = {
     progress: 'progress',
     finalize: 'finalize',
 }
-// runner.js walks these stages in order.
 export const taskStages = Object.values(taskStage)
 export const infoScopes = { private: 'private', public: 'public' }
 
@@ -165,7 +163,6 @@ export const pageSizeOptions = [30, 60, 90, 150]
 export const defaultPageSize = 30
 
 export const currentUserKey = storagePrefix + 'current-user'
-// Set when the viewer leaves a user, so boot does not silently pick another.
 export const viewClearedKey = storagePrefix + 'view-cleared'
 export const stateKey = storagePrefix + 'overview-state'
 
@@ -182,7 +179,5 @@ export const themeIcons = {
 }
 
 export const maxFileSize = 1024 * 1024 * 1024
-// The import fetch is aborted at this deadline; the caller may abort earlier.
 export const importTimeoutMs = 60000
-// Cap the sum of JSON entries so a crafted archive cannot exhaust memory.
 export const zipMaxOutputBytes = 1536 * 1024 * 1024

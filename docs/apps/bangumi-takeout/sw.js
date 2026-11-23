@@ -3,9 +3,6 @@
 const scopeUrl = new URL(self.registration.scope)
 const scopePath = scopeUrl.pathname
 const cachePrefix = 'bangumi-takeout:static:'
-/* The manifest also lists every static data shard, so the prefetch stores them
- *  and checks each against its hash. The backup page then reads a stored shard
- *  from the cache without a request. */
 const manifestPath = 'assets/resources/meta/file-cache.json'
 const manifestUrl = new URL(manifestPath, scopeUrl).href
 const recordUrl = new URL('__cache-record__', scopeUrl).href
@@ -14,31 +11,14 @@ const fontExts = ['woff2', 'woff', 'ttf', 'otf', 'eot']
 const saveEvery = 20
 const stages = ['critical', 'fonts', 'rest']
 const rootPaths = [scopePath]
-/* Manifest hashes are the first 16 hex digits of sha256. */
 const hashHex = /^[0-9a-f]{16}$/i
-/* The limit measures the time without data, so a slow but healthy transfer is
- *  never cut off. A page waits less than the prefetch behind it. */
 const foregroundIdleTimeoutMs = 15000
 const backgroundIdleTimeoutMs = 30000
 const manifestTimeoutMs = 10000
 const stuckFetchMs = 5000
 const failureLimit = 3
-/* A backup pause has no time limit. A pause recorded under a client id ends
- *  when that client sends the resume, when that client disappears, or when a
- *  newer pause of the same client takes over. A pause recorded under a bare
- *  token has no client to watch, so only its own resume ends it. The page
- *  repeats the pause only to restore it after a worker restart. A hidden tab
- *  keeps its own pause the same way: it may stay hidden for hours. */
-/* A token that carries no sequence is only ever compared with itself, so it is
- *  remembered in a capped table and dropped in order. A sequenced token is
- *  remembered by the watermark of its session, which outlives the entry it came
- *  from; the oldest of many sessions is dropped first. The two tables have
- *  separate limits, so retired plain tokens are not pushed out by sessions. */
 const retiredTokensMax = 50
 const pauseSessionsMax = 50
-/* A backup token is `${session}:${sequence}`, and the sequence is a plain
- *  positive integer. A sign, exponent, fraction, leading zero or an empty part
- *  does not order two pauses and is refused. */
 const tokenSequence = /^[1-9][0-9]*$/
 
 let pathHash = null
@@ -119,8 +99,6 @@ function saveRecord (cache, record) {
     }))
 }
 
-/* An old cache serves a file only while its content matches the current
- *  manifest, so versions never mix during migration. */
 function allowOf (record, hashes) {
     const allow = {}
     if (!record || !record.files) return allow
@@ -131,8 +109,6 @@ function allowOf (record, hashes) {
     return allow
 }
 
-/* An idle-terminated worker gets no further activate event, so the state must
- *  be recoverable from the cache. */
 async function loadState () {
     const generation = ++stateGeneration
     const names = await ownCacheNames()
@@ -145,7 +121,6 @@ async function loadState () {
         if (!manifest) manifest = await readSnapshot(cache)
     }
     const hashes = manifest ? pathHashOf(manifest) : {}
-    /* In-progress caches sort first, so migration prefers fresh content. */
     list.sort(function (a, b) {
         const rankA = a.record && a.record.stage === 'done' ? 1 : 0
         const rankB = b.record && b.record.stage === 'done' ? 1 : 0
@@ -186,10 +161,6 @@ function digestPrefix (buffer) {
     return out
 }
 
-/* The manifest hash is the only proof of the content version, so a value that
- *  is not a digest is refused: writing it unverified would keep a wrong copy in
- *  the cache for good. A missing SubtleCrypto counts as a mismatch for the same
- *  reason. */
 async function contentMatches (buffer, hash) {
     if (!isDigest(hash)) return false
     if (!self.crypto || !self.crypto.subtle) return false
@@ -197,10 +168,6 @@ async function contentMatches (buffer, hash) {
     return digestPrefix(digest) === hash.toLowerCase()
 }
 
-/* The body is buffered and already decoded, so the original encoding and
- *  length headers would describe the wrong bytes after a cache read. Every
- *  other end-to-end header is kept: cache directives and a content security
- *  policy belong to the stored copy as much as to the live response. */
 const omittedHeaders = [
     'content-encoding', 'content-length', 'connection', 'keep-alive',
     'transfer-encoding', 'te', 'trailer', 'upgrade',
@@ -262,13 +229,9 @@ function abortShared (entry) {
     if (inflight.get(entry.key) === entry) inflight.delete(entry.key)
     try {
         entry.controller.abort()
-    } catch { /* already aborted */ }
+    } catch {   }
 }
 
-/* The page can stop reading before the body ends, and only the stream handed
- * to it reports that. A page may also drop the response without cancelling it;
- * the stream then stays unread. Both cases must end the page mark, or the read
- * would count as a page request for good and no pause could cancel it. */
 function watchedStream (stream, onEnd) {
     const reader = stream.getReader()
     let ended = false
@@ -281,11 +244,6 @@ function watchedStream (stream, onEnd) {
         holdTimer = null
         onEnd()
     }
-    /* The idle window measures the time a delivered chunk stays unread. A
-     *  pending read is the opposite of idleness: the page asked for data and
-     *  the network is still answering, so the timer is cleared until a chunk
-     *  is enqueued. Otherwise a slow reader would release the page mark and the
-     *  pause's grace timer could abort the page's own read. */
     const waitForReader = function () {
         if (ended || reading) return
         if (holdTimer) clearTimeout(holdTimer)
@@ -332,7 +290,6 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
         existing.holders += 1
         if (foreground) {
             existing.foreground += 1
-            /* A stuck timer left by a pause would abort the page's own read. */
             if (existing.stuckTimer) {
                 clearTimeout(existing.stuckTimer)
                 existing.stuckTimer = null
@@ -361,8 +318,6 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
         entry.resolveBody = resolve
         entry.rejectBody = reject
     })
-    /* Every chunk restarts the wait, so the limit applies to silence rather
-     *  than to the whole transfer. */
     entry.arm = function () {
         if (entry.settled) return
         entry.lastActivity = Date.now()
@@ -407,9 +362,6 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
                     entry.meta,
                 )
             } catch (error) {
-                /* A body that cannot be split no longer serves the shared read;
-                 *  the waiting callers must be told instead of waiting out the
-                 *  idle limit. */
                 fail(error)
                 return
             }
@@ -422,8 +374,6 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
     return { entry: entry, creator: true }
 }
 
-/* The write is verified against the manifest hash. A response from an edge
- *  cache or a disguised 200 must not replace the current version. */
 function writeShared (entry, cache, url, hash) {
     return entry.buffered.then(async function (bytes) {
         if (!cache || !entry.meta) return false
@@ -442,9 +392,6 @@ function writeShared (entry, cache, url, hash) {
     })
 }
 
-/* A paused download that the page still held is left running, because stopping
- *  it would break the page. Once the page lets the body go, the same short
- *  grace applies as in cancelBackground. */
 function scheduleStuckAbort (entry) {
     if (!backgroundFetches.has(entry)) return
     if (!backgroundPaused()) return
@@ -454,10 +401,6 @@ function scheduleStuckAbort (entry) {
     const wait = Math.max(0, stuckFetchMs - (Date.now() - entry.lastActivity))
     entry.stuckTimer = setTimeout(function () {
         entry.stuckTimer = null
-        /* A page request may have joined the same URL while the grace ran;
-         *  aborting it here would break the page, not just the prefetch. The
-         *  pause may also have been released or the read finished, and the
-         *  abort would then hit a healthy transfer. */
         if (entry.settled || entry.pausedAbort) return
         if (entry.foreground > 0) return
         if (!backgroundPaused()) return
@@ -469,9 +412,6 @@ function scheduleStuckAbort (entry) {
 function networkResult (url, hash, signal) {
     let entry = null
     let released = false
-    /* A foreground mark left behind would stop every later pause from
-     *  cancelling the download it shares, so it is dropped once this response
-     *  is buffered, its stream ends or the page stops reading it. */
     const releaseForeground = function () {
         if (released) return
         released = true
@@ -510,8 +450,6 @@ async function serve (pathname, signal) {
     return networkResult(url, hash, signal)
 }
 
-/** Only the scope root falls back to index.html. Other paths may belong to
- *  sibling projects, and serving this app's index would replace their pages. */
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
@@ -520,9 +458,6 @@ function serveKey (pathname) {
     return pathHash[key] ? key : null
 }
 
-/* Only a rejection caused by the pause's own abort is a pause. A cache write
- *  that fails or a digest that throws after the abort still leaves the file
- *  unstored, so it must be counted and reported like any other failure. */
 function pausedRejection (entry, error) {
     if (!entry.pausedAbort) return false
     return !error || error.name === 'AbortError'
@@ -532,10 +467,7 @@ async function download (ctx, url, entry) {
     try {
         const hit = await ctx.cache.match(url)
         if (hit) return 'ok'
-    } catch { /* a cache read failure is not proof of a stored file */ }
-    /* A pause may arrive while the cache read above is waiting. A fetch started
-     *  now would not be registered when the pause aborts the running reads, so
-     *  it would download on and count as a failure. */
+    } catch {   }
     if (backgroundPaused()) return 'paused'
     const shared = sharedFetch(url, entry.hash, 'low')
     const item = shared.entry
@@ -548,9 +480,6 @@ async function download (ctx, url, entry) {
         await ctx.cache.put(url, responseOf(item, bytes))
         return 'ok'
     } catch (error) {
-        /* A download stopped by a backup pause is not a transfer failure: the
-         *  file is healthy and only waits for the resume, so it must not use up
-         *  the failure limit. */
         return pausedRejection(item, error) ? 'paused' : 'failed'
     } finally {
         if (item.stuckTimer) clearTimeout(item.stuckTimer)
@@ -559,11 +488,6 @@ async function download (ctx, url, entry) {
     }
 }
 
-/* The source entry stays in place: it is still part of `serving` while the
- *  new cache fills, and the old cache is dropped only after the new one is
- *  complete. The record can name the newer hash for a file the old cache never
- *  stored, so the copied body is checked before it is written; a failed check
- *  leaves the file to the network. */
 async function copyFromSource (ctx, url, entry) {
     if (!ctx.source || !ctx.source.record) return false
     if (ctx.source.record.files[entry.path] !== entry.hash) return false
@@ -612,12 +536,6 @@ async function acquire (ctx, url, entry) {
     return download(ctx, url, entry)
 }
 
-/* A failed file is skipped and counted. The round may still finish when every
- *  remaining file reached the limit; the missing list and its reason then stay
- *  in the record for the page to show. Without the limit one dead file would
- *  keep the round unfinished forever and freeze the old cache in place. The
- *  limit holds in a repair round too: a file that never matches the manifest
- *  would otherwise be downloaded on every page load. */
 async function runGroup (ctx, list) {
     let sinceSave = 0
     let pending = 0
@@ -641,9 +559,6 @@ async function runGroup (ctx, list) {
             return false
         }
         if (result !== 'ok') {
-            /* Content that does not match the manifest is not retried in this
-             *  version: the same URL would deliver the same bytes. A transport
-             *  failure is retried on a later load, up to the limit. */
             const next = result === 'mismatch' ? failureLimit : attempts + 1
             ctx.record.misses[entry.path] = next
             ctx.record.reasons[entry.path] = result
@@ -697,9 +612,6 @@ function missingOf (record, manifest) {
     return missing
 }
 
-/* The count and the reason are posted to the pages, so the backup page shows a
- *  finished round with missing files in its log instead of leaving them only
- *  inside the cache record. */
 function reportMissing (record) {
     if (!record.missing || !record.missing.length) return Promise.resolve()
     if (!self.clients || typeof self.clients.matchAll !== 'function') return Promise.resolve()
@@ -717,7 +629,7 @@ function reportMissing (record) {
         for (const client of list) {
             try {
                 client.postMessage(message)
-            } catch { /* a closed page must not stop the round */ }
+            } catch {   }
         }
     }).catch(function () {})
 }
@@ -776,8 +688,6 @@ async function run () {
     const controller = new AbortController()
     runAbort = controller
     try {
-        /* A pause may have arrived while the state was loading; the manifest
-         *  read must not start for a round already told to stop. */
         if (controller.signal.aborted || backgroundPaused()) return
         let manifest = null
         try {
@@ -831,9 +741,6 @@ async function run () {
     }
 }
 
-/* A paused round may be stuck in a hanging request. The manifest fetch is
- *  dropped at once; a data fetch is given a short grace so a healthy download
- *  is not thrown away and fetched twice. */
 function cancelBackground () {
     if (runAbort) {
         runAbort.abort()
@@ -852,9 +759,6 @@ function resumeBackground () {
 
 function start () {
     resumeRequested = true
-    /* The grace timers belong to an aborted pause. A plain START from one page
-     *  must not revive the download another page paused for a backup, so they
-     *  are released only when no pause is left. */
     if (backgroundPaused()) return Promise.resolve()
     resumeBackground()
     if (runPromise) return runPromise
@@ -882,11 +786,6 @@ async function networkOrFail (request) {
     }
 }
 
-/* A closed tab may leave a stale client id behind. Pruning on every message
- *  keeps one hidden tab from stopping another, and a late backup message from
- *  clearing a newer pause. The fetch path prunes too: a paused prefetch sends
- *  no message of its own, so without that check a pause would wait forever for
- *  a client that is already gone. */
 async function pruneClients (currentId) {
     if (!self.clients || typeof self.clients.matchAll !== 'function') return 0
     const list = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
@@ -908,10 +807,6 @@ async function pruneClients (currentId) {
     return removed
 }
 
-/* The fetch path cannot know whether a pause went stale, so it prunes on every
- *  request. The prefetch starts again only when the last pause of a closed
- *  client is gone: a pause may have been replaced meanwhile, and a plain start
- *  would end the newer one. */
 async function pruneClosedPauses () {
     const paused = backupPauses.size > 0
     await pruneClients('')
@@ -919,12 +814,6 @@ async function pruneClosedPauses () {
     return start()
 }
 
-/* The resumed sequence of a run is remembered per session. A pause whose
- *  sequence is at or below that mark already ended, and accepting it again
- *  would stop the prefetch long after its run. The mark is not tied to the
- *  pause entry's lifetime: an entry may be replaced while the message that
- *  would revive it is still in flight. A token without a sequence has no
- *  session mark, so its text alone is remembered. */
 function retireToken (token) {
     if (!token) return
     const order = tokenOrderOf(token)
@@ -951,9 +840,6 @@ function isResumedPause (token) {
     return (pauseWatermarks.get(order.session) || 0) >= order.sequence
 }
 
-/* A backup token is `${session}:${sequence}`. The next stage of the same run
- *  carries a higher sequence and must replace the pause of the earlier stage
- *  instead of waiting for its resume, or a later pause never takes effect. */
 function tokenOrderOf (token) {
     const text = String(token)
     const at = text.lastIndexOf(':')
@@ -965,19 +851,9 @@ function tokenOrderOf (token) {
     return { session: text.slice(0, at), sequence: sequence }
 }
 
-/* A pause the worker already resumed and a pause from an older stage are both
- *  refused; either one would stop the prefetch long after its run ended. The
- *  refusal is logged because a page that keeps sending it will stay unpaused.
- *  A different session is a new backup and takes the client over.
- *  A token without a sequence carries no session, so two of them cannot be
- *  ordered against each other and neither replaces the other. It does replace a
- *  pause that carries a sequence, because the two schemes mark different
- *  generations of the page. A colon token with a bad sequence is malformed and
- *  never replaces a pause. */
 function pauseBackup (id, token) {
     const key = id || 'token:' + token
     if (isResumedPause(token)) {
-        console.warn('[bangumi-takeout] 拒绝已恢复的备份暂停', token)
         return false
     }
     const current = backupPauses.get(key)
@@ -994,7 +870,6 @@ function pauseBackup (id, token) {
             backupPauses.set(key, token)
             return true
         }
-        console.warn('[bangumi-takeout] 拒绝旧备份的暂停', token)
         return false
     }
     if (!held || next.session !== held.session || next.sequence > held.sequence) {
@@ -1002,14 +877,9 @@ function pauseBackup (id, token) {
         backupPauses.set(key, token)
         return true
     }
-    console.warn('[bangumi-takeout] 拒绝旧备份的暂停', token)
     return false
 }
 
-/* A resume clears the pause of its own run. The sender's key keeps a pause only
- *  while it holds that very token. Another key is cleared when its token names
- *  the same run: the same text, or a stage older than the incoming one of the
- *  same session. An empty token names no run, so it clears nothing. */
 function clearPausedRun (id, token) {
     if (!token) return
     for (const key of Array.from(backupPauses.keys())) {
@@ -1051,9 +921,6 @@ async function handleMessage (event) {
     }
     if (data.type !== 'START') return
     if (data.reason === 'backup') {
-        /* The token is finished whether or not it released the pause: a resume
-         *  of an older stage arrives after a newer pause took over, and its
-         *  pause must not be accepted again afterwards. */
         clearPausedRun(id, token)
         retireToken(token)
     } else if (id) {
@@ -1068,8 +935,6 @@ function attach (event, result) {
     event.waitUntil(result.then(function (item) { return item.write }).catch(function () {}))
 }
 
-/* Range and partial requests must reach the network unchanged; caching a 206
- *  body under the full URL would replace the whole file with a slice. */
 function isCacheableRequest (request) {
     if (request.headers.get('range')) return false
     if (request.destination === 'video' || request.destination === 'audio') return false

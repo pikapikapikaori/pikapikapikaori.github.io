@@ -1,4 +1,3 @@
-/** 起始页：选择已有用户、新建空用户、导入 JSON、载入默认数据源 */
 
 import { h, replace } from '../utils/dom.js'
 import { listUsers, getUser, deleteUser } from '../store/user-store.js'
@@ -33,7 +32,6 @@ async function enterUser(userId) {
     setUser(u)
     const s = await getSettings(userId)
     setSettings(s)
-    // Only a theme from the settings table may overwrite the stored theme.
     if (THEME_VALUES.includes(s.theme)) applyTheme(s.theme)
     location.hash = '#/languages'
 }
@@ -204,7 +202,6 @@ const welcomeView = {
             })
         }
 
-        /** 重复点击时覆盖同一个用户，不再生成新用户 */
         async function doUseDefaultSource() {
             try {
                 const url = new URL(DEFAULT_DATA_SOURCE.file, DEFAULT_DATA_SOURCE.base)

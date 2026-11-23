@@ -3,7 +3,6 @@ const U = window.App.utils
 const FOLLOW = 0.16
 const ROOT_MARGIN = '400px 0px'
 
-/* followFn 缺省时使用 FOLLOW 阻尼系数。 */
 export function createPin(section, applyFn, sizeFn, followFn) {
     let total = 0
     let target = 0
@@ -62,7 +61,6 @@ export function createPin(section, applyFn, sizeFn, followFn) {
         if (Math.abs(diff) < 0.0002) {
             current = target
         } else {
-            /* 每帧询问当前应使用的阻尼系数 */
             const follow = getFollow(target)
             current += diff * follow
         }
@@ -92,7 +90,6 @@ export function createPin(section, applyFn, sizeFn, followFn) {
     window.addEventListener('orientationchange', onResize)
     window.addEventListener('load', onResize)
     if (document.fonts && document.fonts.ready) {
-        /* 字体就绪后才量得到正确高度，已销毁的实例不再重排。 */
         document.fonts.ready.then(function () {
             if (!disposed) doMeasure()
         })

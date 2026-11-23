@@ -2,7 +2,6 @@ import { h } from '../utils/dom.js'
 import { BREVE_LANGS } from '../config/config.js'
 import { romanKey, breveKey, getBool, setBool } from '../store/local-storage.js'
 
-/** 从挂载点往上找真正在滚的容器；找不到就用 window */
 function findScroller(start) {
     let el = start?.parentElement || null
     while (el && el !== document.body && el !== document.documentElement) {
@@ -13,12 +12,7 @@ function findScroller(start) {
     return window
 }
 
-/**
- * 右下角浮动工具：回到顶部 + 显示转写 + 显示短音符，开关状态按语言存 localStorage。
- * @returns {{ el, isOn, isBreveOn, destroy }}
- */
 export function createPageTools({ lang, toRoman = null, onChange = null, onBreveChange = null, anchorEl = null } = {}) {
-    // Schema pages mount without a language, so there is no per-language key to read.
     const key = romanKey(lang)
     let romanOn = key ? getBool(key, false) : false
 
@@ -45,7 +39,6 @@ export function createPageTools({ lang, toRoman = null, onChange = null, onBreve
         onclick: () => {
             if (scroller !== window) { scroller.scrollTo({ top: 0, behavior: 'smooth' }); return }
             window.scrollTo({ top: 0, behavior: 'smooth' })
-            // 有些浏览器把滚动记在 body 上
             if (document.body) document.body.scrollTop = 0
             if (document.documentElement) document.documentElement.scrollTop = 0
         }
@@ -102,7 +95,6 @@ export function createPageTools({ lang, toRoman = null, onChange = null, onBreve
         topBtn.hidden = !show
     }
     scroller.addEventListener('scroll', onScroll, { passive: true })
-    // 容器判定不准时，任何滚动都重新算一次
     document.addEventListener('scroll', onScroll, { capture: true, passive: true })
     onScroll()
 

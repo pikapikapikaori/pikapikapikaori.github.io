@@ -34,7 +34,6 @@ export async function addOrMerge(userId, payload) {
 
     let existing = await findByKey(userId, language, lemma, pos)
     if (!existing) {
-        // 短音符不参与唯一性：i 与 ĭ 视为同一个词（长音符仍然区分）
         const folded = foldBreve(lemma)
         const siblings = await listByLanguage(userId, language)
         existing = siblings.find((w) => w.pos === pos && foldBreve(w.lemma) === folded) || null

@@ -1,4 +1,3 @@
-/** 自绘下拉菜单，统一接管原生 <select>。 */
 
 import { h } from '../utils/dom.js'
 import { bdiFragment, stripBdi } from '../utils/bdi.js'
@@ -25,7 +24,6 @@ export function closeSelectMenu() {
     if (typeof onClose === 'function') onClose()
 }
 
-/** 选项不折行时允许菜单比触发控件宽，最多 30rem；超出的文字由条目自己省略 */
 const MENU_MAX_WIDTH = 480
 
 function placeMenu(anchor) {
@@ -39,7 +37,6 @@ function placeMenu(anchor) {
         width = Math.min(Math.max(rect.width, menuEl.offsetWidth), MENU_MAX_WIDTH)
         menuEl.style.width = `${width}px`
     }
-    // 高度要在宽度定了之后再量：折行的条目会随宽度变高
     const height = menuEl.offsetHeight
 
     let top = rect.bottom + gap
@@ -54,7 +51,6 @@ function placeMenu(anchor) {
     menuEl.style.width = `${width}px`
 }
 
-/** 高亮第 index 项（循环），并把 aria-activedescendant 同步给触发控件 */
 function highlight(index, { scroll = true } = {}) {
     if (!menuEl || !session) return
     const items = Array.from(menuEl.querySelectorAll('.select-menu__item'))
@@ -181,7 +177,6 @@ function onPointerDown(e) {
         const onOwner = session.owner === target || (session.owner?.contains?.(target) ?? false)
         const onAnchor = session.anchor === target || (session.anchor?.contains?.(target) ?? false)
         if (onOwner || onAnchor) {
-            // 原生 <select> 再点一次要收起自绘列表，同时必须挡掉浏览器自己的弹层
             if (select) {
                 e.preventDefault()
                 closeSelectMenu()
@@ -238,7 +233,6 @@ export function enhanceSelects() {
     document.addEventListener('pointerdown', onPointerDown, true)
     document.addEventListener('keydown', onKeyDown, true)
     window.addEventListener('resize', closeSelectMenu)
-    // 页面滚动时收起菜单，但菜单自己的滚动（选项列表）不能算
     window.addEventListener('scroll', (e) => {
         if (!menuEl) return
         if (e.target instanceof Node && menuEl.contains(e.target)) return

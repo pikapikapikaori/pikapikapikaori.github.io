@@ -1,4 +1,3 @@
-/** 复习队列构建与结果记录。 */
 
 import { listByLanguage } from '../store/word-store.js'
 import { recordReview } from '../store/word-store.js'
@@ -55,7 +54,6 @@ export async function answer(wordId, correct) {
     return recordReview(wordId, { correct })
 }
 
-/** 会话统计 */
 export function createSessionStats(queue) {
     return {
         total: queue.length,

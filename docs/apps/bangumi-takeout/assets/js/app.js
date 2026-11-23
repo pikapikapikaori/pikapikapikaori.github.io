@@ -48,7 +48,6 @@ export function clearCurrentUser() {
     state.data = null
 }
 
-// An import replaces the user's stored data as a whole, including its task state.
 export async function importExport(raw) {
     const { user, generatedAt, records, report } = normalizeExport(raw)
     const now = Date.now()

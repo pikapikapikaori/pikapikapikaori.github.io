@@ -1,4 +1,3 @@
-/** 笔记页：一门语言一份，一行一块。 */
 
 import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
@@ -32,7 +31,6 @@ export default {
 
         const row = await getNote(userId, lang)
 
-        // 编辑器建好时工具条已经存在，它会在首帧里被要求同步一次状态
         let editor = null
 
         const saveEl = h('span', {
@@ -79,10 +77,8 @@ export default {
             )
         )
 
-        // 空笔记（没有行，或只有空行）直接把光标放进第一行
         if (!lines.length || lines.every((line) => !String(line).trim())) editor.focusFirst()
 
-        // 双击页面空白处：在最下方接着写
         const onBlankDoubleClick = (e) => {
             const target = e.target instanceof Element ? e.target : null
             if (!target) return

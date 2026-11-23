@@ -67,8 +67,6 @@ function looksLikeZip(buf) {
     return b[0] === 0x50 && b[1] === 0x4B
 }
 
-// Content-Length is only a hint: a missing or lying header is handled by
-// counting every received chunk and aborting as soon as the budget is spent.
 async function readLimitedBody(response, { signal }) {
     const header = Number(response.headers.get('content-length'))
     if (Number.isFinite(header) && header > maxFileSize) throw tooLargeError()
@@ -163,8 +161,6 @@ export async function loadFromFile(file, { signal = null } = {}) {
     return parseBinary(await readFileBytes(file, { signal }), { signal })
 }
 
-// The bundled default source names its archive relative to the page, while the import
-// field also accepts full addresses.
 const httpUrlPattern = /^https?:\/\//i
 const relativeUrlPattern = /^(\.{1,2}\/|\/(?!\/))/
 
@@ -172,7 +168,6 @@ function parseSourceUrl(value) {
     const text = String(value ?? '')
     if (!text || /[\\\t\n\r]/.test(text)) return null
     if (httpUrlPattern.test(text)) return text
-    // Only ./ ../ and / stay on this origin; // would name another host.
     return relativeUrlPattern.test(text) ? text : null
 }
 

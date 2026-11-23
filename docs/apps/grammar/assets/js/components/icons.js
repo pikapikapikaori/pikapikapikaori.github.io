@@ -59,7 +59,6 @@ export function settingsIcon() {
     )
 }
 
-/** 工具条图标：15px、1.5px 描边，与按钮同一套线条重量 */
 function noteIcon(...children) {
     return svg('svg', {
         viewBox: '0 0 24 24',
@@ -113,7 +112,6 @@ export function imageIcon() {
     )
 }
 
-/** 拖动把手：两列三点 */
 export function gripIcon() {
     const dots = []
     for (const x of [9.5, 14.5]) {
@@ -124,7 +122,6 @@ export function gripIcon() {
     return noteIcon(...dots)
 }
 
-/** 复选框里的对勾 */
 export function checkMarkIcon() {
     return noteIcon(svg('path', { d: 'm5 12.5 4.5 4.5L19 7.5' }))
 }

@@ -105,7 +105,6 @@ button {
     padding-left: 40px;
 }
 
-/* ---------- 页头 ---------- */
 
 .page-head {
     padding-top: 30px;
@@ -286,8 +285,6 @@ body.is-searching .head-under .rail-count {
 }
 
 .rail {
-    /* 横向留 8px 内边距并以等量负外边距抵消：首尾按钮的伪元素热区不被
-       横向滚动容器裁掉，文字位置与轨道视觉宽度不变。 */
     display: flex;
     align-items: center;
     gap: 22px;
@@ -306,7 +303,6 @@ body.is-searching .head-under .rail-count {
     user-select: none;
 }
 
-/* 内边距把遮罩边缘外推 8px，渐变端点相应内移 8px，渐隐位置保持原样。 */
 .rail.can-left {
     mask-image: linear-gradient(to right, transparent 8px, #000 36px);
 }
@@ -341,8 +337,6 @@ body.is-searching .head-under .rail-count {
     scroll-margin-inline: 16px;
 }
 
-/* 卷目按钮宽度常不足 44px：热区左右至少外扩 6px，并补足到 44px 以上
-   （取 45px 留出小数舍入余量）；外扩量取相邻按钮间隙以内，避免热区互相覆盖。 */
 .rail button::after {
     content: "";
     position: absolute;
@@ -352,7 +346,6 @@ body.is-searching .head-under .rail-count {
     left: min(-6px, calc(50% - 22.5px));
 }
 
-/* 横向滚动容器会裁掉外扩轮廓，内缩 2px 才能在四边看见。 */
 .rail button:focus-visible {
     outline-offset: -2px;
     border-radius: 0;
@@ -380,7 +373,6 @@ body.is-searching .head-under .rail-count {
     letter-spacing: 0.04em;
 }
 
-/* ---------- 搜索候选 ---------- */
 
 .search-results {
     position: absolute;
@@ -450,7 +442,6 @@ body.is-searching .head-under .rail-count {
     cursor: pointer;
 }
 
-/* 前缀提示只是说明，不可点选。 */
 .result-hint {
     cursor: default;
 }
@@ -553,15 +544,11 @@ body.is-searching .head-under .rail-count {
     color: var(--unknown);
 }
 
-/* ---------- 内容 ---------- */
 
 .page-main {
     padding-top: 34px;
 }
 
-/* 吸附层以 scroll-margin 避让焦点目标，不用 html 的 scroll-padding：
-   后者会干扰搜索框的光标滚动，滚动后点输入框会跳回页首。
-   加 1px 余量，抵消吸附层小数高度在滚动取整时的误差。 */
 .page-main,
 .app-link,
 .group-title,
@@ -599,7 +586,6 @@ body.is-searching .page-foot {
     margin-top: 0;
 }
 
-/* 列表项按 flex 排版，去掉行内盒带来的 1px 基线余量。 */
 .head-apps .apps-list li {
     display: flex;
 }
@@ -760,7 +746,6 @@ a.site-entry:hover .site-desc {
     line-height: 1.8;
 }
 
-/* ---------- 页脚 ---------- */
 
 .page-foot {
     padding-top: 64px;
@@ -815,7 +800,6 @@ a.site-entry:hover .site-desc {
         padding: 0;
     }
 
-    /* 行间留 12px，抵消上下各 6px 的伪元素热区，避免两卷相互遮挡。 */
     .toc {
         grid-template-columns: minmax(0, 1fr);
         gap: 12px;
@@ -827,8 +811,6 @@ a.site-entry:hover .site-desc {
         line-height: 32px;
     }
 
-    /* 行高与文字位置不变：容器上下各留 6px 内边距并以等量负外边距抵消，
-       让按钮 44px 的伪元素热区不被横向滚动容器裁掉。 */
     .rail {
         gap: 16px;
         min-height: 44px;
@@ -848,7 +830,6 @@ a.site-entry:hover .site-desc {
         bottom: -6px;
     }
 
-    /* 单字按钮宽度不足 44px，故以最小宽度补齐；高度由伪元素补足。 */
     .theme-switch button,
     .head-apps .apps-list .app-link {
         position: relative;

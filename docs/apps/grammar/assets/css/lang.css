@@ -1,8 +1,4 @@
-/* 语言相关的样式都放这个文件：各语言的字体栈、@font-face、以及每门语言的 [lang] 呈现规则。
- * 新增语言时改这里就够了（见「数据格式 · 语言数据手册」的「新增一个语言」）。
- * 只依赖 variables.css 里的 --ff-ui，所以必须在它之后加载。 */
 
-/* 语言字体只覆盖自己的 unicode-range，说明性中英文回落到 --ff-ui。 */
 
 :root {
     --ff-la: "LN LA", var(--ff-ui);
@@ -17,11 +13,9 @@
     --ff-fr: var(--ff-la);
     --ff-de: var(--ff-la);
 
-    /* 中文：LN UI 的 CJK 段（楷体） */
     --ff-zh: var(--ff-ui);
 }
 
-/* 拉丁语：Gentium Plus（拉丁 + 希腊 + 西里尔） */
 @font-face {
     font-family: "LN LA";
     src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.woff2");
@@ -58,7 +52,6 @@
         U+0400-04FF, U+1D00-1DBF, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* 古希腊语：Gentium Plus，只覆盖希腊区（含多调符号） */
 @font-face {
     font-family: "LN GRC";
     src: url("../resources/fonts/GentiumPlus/GentiumPlus-Regular.woff2");
@@ -91,7 +84,6 @@
     unicode-range: U+0370-03FF, U+1F00-1FFF, U+200C-200D;
 }
 
-/* 圣经希伯来语：Tinos */
 @font-face {
     font-family: "LN HE";
     src: url("../resources/fonts/Tinos/Tinos-Regular.woff2");
@@ -124,7 +116,6 @@
     unicode-range: U+0590-05FF, U+FB1D-FB4F, U+200C-200D, U+200E-200F;
 }
 
-/* 梵语：Sahitya（天城文） */
 @font-face {
     font-family: "LN SA";
     src: url("../resources/fonts/Sahitya/Sahitya-Regular.woff2");
@@ -140,7 +131,6 @@
     unicode-range: U+0900-097F, U+1CD0-1CFF, U+A8E0-A8FF, U+200C-200D, U+25CC;
 }
 
-/* 悉昙文列：只覆盖 Siddham 区 */
 @font-face {
     font-family: "LN SIDDHAM";
     src: url("../resources/fonts/Noto_Sans_Siddham/NotoSansSiddham-Regular.woff2");
@@ -148,7 +138,6 @@
     unicode-range: U+11580-115FF, U+200C-200D, U+25CC;
 }
 
-/* 满文：FuYong 楷体（自带连写；只覆盖蒙古文区，避免被别的字体的孤立字形抢走） */
 @font-face {
     font-family: "LN MNC";
     src: url("../resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.woff2");
@@ -156,7 +145,6 @@
     unicode-range: U+1800-18AF, U+11660-1167F, U+200C-200D, U+202F;
 }
 
-/* 古汉语：楷体（汉字） */
 @font-face {
     font-family: "LN ZH-CLS";
     src: url("../resources/fonts/HYKaiTi/HYKaiTiS.woff2");
@@ -165,8 +153,6 @@
         U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-2FA1F;
 }
 
-/* 语言内容样式：字体与展示字体都在这里定，全局生效（含语法页、词卡详情）。
- * 每个 [lang] 同时改写 --ff-display，写 font-family: var(--ff-display) 的元素自动跟着语言走。 */
 [lang="la"] {
     font-family: var(--ff-la);
     --ff-display: var(--ff-la);
@@ -182,15 +168,12 @@
     --ff-display: var(--ff-he);
 }
 
-/* 方向不在这里定：原文一律包进 <bdi dir>（见 utils/bdi.js），
-   全局 direction: rtl 会把同一格里的中文一起带成 RTL 段落，导致中文被排到原文后面。 */
 
 [lang="sa"] {
     font-family: var(--ff-sa);
     --ff-display: var(--ff-sa);
 }
 
-/* 悉昙文列：字体只覆盖 Siddham 区，天城文、拉丁自动回退 */
 [lang="sa-siddham"] {
     font-family: var(--ff-siddham);
     --ff-display: var(--ff-siddham);
@@ -207,8 +190,6 @@
     --ff-display: var(--ff-zh-cls);
 }
 
-/* 中文（注意：只匹配精确的 zh，别匹配 <html lang="zh-CN">，
-   否则整页中文都会被钉死在这里，设置页换字体就不生效了） */
 [lang="zh"] {
     font-family: var(--ff-zh);
     --ff-display: var(--ff-zh);

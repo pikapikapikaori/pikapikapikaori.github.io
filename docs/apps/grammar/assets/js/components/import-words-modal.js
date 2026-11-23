@@ -5,7 +5,6 @@ import { toast } from './toast.js'
 import { createJsonInput } from './json-input.js'
 import { parseWordJson, importWords, previewWords } from '../services/import-words-service.js'
 
-/** @param {object} opts userId、lang（词形包 bdi 用）/ onDone(stats)、title */
 export function openImportWordsModal({
     userId,
     lang = null,
@@ -32,7 +31,6 @@ export function openImportWordsModal({
             const { words, error } = parseWordJson(text)
             return error ? { error } : { message: `已识别 ${words.length} 条` }
         },
-        // 内容变了，之前的预览结果就作废
         onChange: () => {
             previewEl.hidden = true
             previewEl.replaceChildren()
@@ -82,7 +80,6 @@ export function openImportWordsModal({
             { label: '取消' },
             {
                 label: '预览',
-                // 必须同步返回 false，模态框才会保持打开
                 onClick: () => {
                     doPreview()
                     return false
@@ -104,11 +101,11 @@ export function openImportWordsModal({
                     }
 
                     if (typeof onDone === 'function') {
-                        try { onDone(stats) } catch (e) { console.warn(e) }
+                        try { onDone(stats) } catch (e) { }
                     }
 
                     renderResult(stats, close, lang)
-                    return false // 保持打开，显示结果
+                    return false
                 }
             }
         ]

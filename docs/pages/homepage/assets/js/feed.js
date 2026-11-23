@@ -5,12 +5,6 @@
     const F = App.feed = {}
     const CFG = App.config
 
-    /*
-     * 语言检测
-     * 从纯文本采样，统计假名、汉字与拉丁字母三类字符。
-     * 判定看假名占 CJK 的比例而非占全部字符的比例，
-     * 中文里夹少量日语引用不会被误判成日语。
-     */
     const KANA_MIN = 3
     const KANA_RATIO = 0.15
 
@@ -34,7 +28,6 @@
         return null
     }
 
-    /* 各语言的"本文首发"一类标记，抽取正文时整块去掉 */
     const BOILERPLATE_RE = /本文首发|最后编辑于|first published|Last edited|最初に公開|最終編集/i
 
     function extractContent(html, excerptLen) {
@@ -116,21 +109,13 @@
                     return p.lang === lang
                 })
 
-                /* 拉取成功但没有该语言的文章属正常情况 */
                 if (!filtered.length) {
-                    console.log(
-                        '[homepage] Atom 中没有 ' + lang + ' 的文章，使用内嵌数据'
-                    )
                     return getFallback(lang)
                 }
 
                 return filtered.slice(0, CFG.blog.postLimit)
             })
             .catch(function (err) {
-                console.warn(
-                    '[homepage] Atom 拉取失败（' + lang + '），使用内嵌数据：',
-                    err.message
-                )
                 return getFallback(lang)
             })
     }

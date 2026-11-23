@@ -175,7 +175,6 @@ html[data-layout="photography"] .pg-row {
     gap: var(--pg-tile-gap);
 }
 
-/* 槽位宽高按单位换算；N 个单位含 N−1 个间隔，行与列因此自然对齐。 */
 html[data-layout="photography"] .pg-cell {
     flex: 0 0 auto;
     width: calc(var(--pg-unit) * var(--pg-w) + var(--pg-tile-gap) * var(--pg-w) - var(--pg-tile-gap));
@@ -229,7 +228,6 @@ html[data-layout="photography"] .pg-caption::before {
     letter-spacing: .08em;
 }
 
-/* 短说明保持单行；超过三行时分到三栏，整体高度由上方上限裁切。 */
 html[data-layout="photography"] .pg-caption-text {
     display: block;
     min-width: 0;
@@ -268,7 +266,6 @@ html[data-layout="photography"] .pg-shot:hover img {
     transform: scale(1.035);
 }
 
-/* 做旧效果是叠层，不是 CSS filter；沿用 45deg 渐变与 25% 色值。 */
 html[data-layout="photography"] .pg-track.is-aged .pg-shot::after {
     content: '';
     position: absolute;
@@ -301,7 +298,6 @@ html[data-layout="photography"] .pg-foot {
     flex-wrap: nowrap;
     align-items: center;
     gap: .75rem clamp(1rem, 2.4vw, 1.8rem);
-    /* 上边框占 1px，下内边距同步减 1px，图片舞台高度与加边框前一致。 */
     padding: clamp(.7rem, 1.4vw, 1rem) var(--pg-pad) calc(clamp(.8rem, 1.8vw, 1.3rem) - 1px);
     border-top: 1px solid var(--pg-line);
 }
@@ -369,7 +365,6 @@ html[data-layout="photography"] .pg-controls {
     justify-self: end;
 }
 
-/* 摄影布局只保留文字与图标，不画控件边框；内边距补回边框让出的可点面积。 */
 html[data-layout="photography"] .pg-controls .app-control-trigger {
     border: 0;
 }
@@ -498,7 +493,6 @@ html[data-layout="photography"] .pg-lb-source:focus-visible {
 }
 
 @media screen and (max-width: 768px) {
-    /* 窄屏改为页面纵向滚动：一次看一列，列内按行换行，不再横向拖动。 */
     html[data-layout="photography"] .photography-layout {
         height: auto;
         min-height: 100svh;

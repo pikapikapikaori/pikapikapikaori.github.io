@@ -1,4 +1,3 @@
-/** 笔记：一份用户 + 语言对应一条记录，行序即数组顺序。 */
 
 import { STORE_NOTES, get, put, getAllByIndex } from './db.js'
 import { nowIso } from '../utils/date.js'

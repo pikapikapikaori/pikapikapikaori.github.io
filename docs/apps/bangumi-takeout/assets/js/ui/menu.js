@@ -6,8 +6,6 @@ export function closeMenu() {
     if (activeMenu) activeMenu.close()
 }
 
-// The popup is appended to body and positioned with fixed coordinates, so a
-// scrolling page or the footer cannot clip it.
 export function openMenu({ anchor, items, current, onPick, emptyText = '暂无可选项' }) {
     if (activeMenu?.anchor === anchor) {
         activeMenu.close()
@@ -101,8 +99,6 @@ export function openMenu({ anchor, items, current, onPick, emptyText = '暂无�
             const value = option.dataset.value
             close()
             const result = onPick?.(value)
-            // A pick may re-render the page and replace the trigger; wait for
-            // that render before returning focus to the (new) trigger.
             if (result && typeof result.then === 'function') {
                 result.then(restoreFocus, restoreFocus)
             } else {

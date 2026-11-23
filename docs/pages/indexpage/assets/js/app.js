@@ -95,8 +95,6 @@ function fillToday () {
     elements.copyright.textContent = formatText(texts.copyright, { year: now.getFullYear() })
 }
 
-/* 只有吸附层会遮住焦点目标，故以其高度写入 --head-height，供 scroll-margin-top 使用。
-   保留小数：取整会让焦点目标顶部被吸附层下缘盖住不足 1px。 */
 function setupHeadOffset () {
     const head = document.querySelector('[data-head-stick]')
     if (!head) return

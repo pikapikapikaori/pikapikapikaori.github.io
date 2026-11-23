@@ -1,4 +1,3 @@
-/** Hash 路由。 */
 
 import { createEmitter } from './utils/events.js'
 
@@ -60,7 +59,6 @@ export function createRouter(routes) {
         try {
             await hit.route.view(ctx)
         } catch (err) {
-            console.error('[router] 视图加载失败', err)
             bus.emit('error', { error: err, ctx })
         }
         bus.emit('after', ctx)

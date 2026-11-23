@@ -1,4 +1,3 @@
-/** 语法数据加载（只读）。 */
 
 import { GRAMMAR_FILES } from '../config/config.js'
 import { isGrammarDoc, grammarFlags, validateGrammarDoc } from '../models/grammar.js'
@@ -6,11 +5,11 @@ import { verifyGrammarDoc } from '../models/paradigm-generate.js'
 
 const LANG_BASE = new URL('../../../data/language/', import.meta.url)
 
-const cache = new Map()       // lang -> 组合后的整份 doc
-const pending = new Map()     // lang -> Promise
-const metaCache = new Map()   // lang -> meta.json
+const cache = new Map()
+const pending = new Map()
+const metaCache = new Map()
 const metaPending = new Map()
-const chapterCache = new Map()  // `${lang}/${id}` -> sections
+const chapterCache = new Map()
 const chapterPending = new Map()
 
 function langUrl(language, relative) {
@@ -24,7 +23,6 @@ async function fetchJSON(url) {
     return res.json()
 }
 
-/** 元信息（启动时 languages.js 已经拉过一次，这里命中同一份 JSON） */
 export function loadGrammarMeta(language) {
     if (!language) return Promise.resolve(null)
     if (metaCache.has(language)) return Promise.resolve(metaCache.get(language))
@@ -36,7 +34,6 @@ export function loadGrammarMeta(language) {
             return meta
         })
         .catch((err) => {
-            console.warn(`[grammar] ${language}: meta.json 读取失败：${err.message}`)
             return null
         })
         .finally(() => { metaPending.delete(language) })
@@ -58,7 +55,6 @@ export function loadChapter(language, chapterId) {
             return sections
         })
         .catch((err) => {
-            console.warn(`[grammar] ${language}/${chapterId}: 章节读取失败：${err.message}`)
             return []
         })
         .finally(() => { chapterPending.delete(key) })
@@ -84,15 +80,6 @@ function assemble(meta, paradigms, chapterSections) {
     return doc
 }
 
-function logReport(scope, code, { errors, warnings }) {
-    for (const e of errors) console.error(`[${scope}] ${code}: ${e}`)
-    for (const w of warnings) console.warn(`[${scope}] ${code}: ${w}`)
-}
-
-/**
- * 组合整份语法文档（元信息 + 全部章节 + paradigms）。
- * 词表单、词列表需要跨章的锚点，语法页请改用 loadGrammarForChapter()。
- */
 export async function loadGrammar(language) {
     if (!language) return null
     if (cache.has(language)) return cache.get(language)
@@ -114,16 +101,13 @@ export async function loadGrammar(language) {
             paradigms,
             chapters.map((chapter, i) => ({ id: chapter.id, sections: sectionLists[i] || [] })))
 
-        // 有结构错误就不加载（视图会退化成「无语法数据」），错误逐条打出来
         const report = validateGrammarDoc(language, doc)
-        logReport('grammar', language, report)
         if (report.errors.length) return null
         if (!isGrammarDoc(doc)) return null
         cache.set(language, doc)
         return doc
     })()
         .catch((err) => {
-            console.warn(`[grammar] ${language}: ${err.message}`)
             return null
         })
         .finally(() => { pending.delete(language) })
@@ -132,10 +116,6 @@ export async function loadGrammar(language) {
     return p
 }
 
-/**
- * 只要一章的文档（语法页用）：`groups` 仍是完整章节列表，`sections` 只含本章。
- * chapterId 为空时退回整份文档。
- */
 export async function loadGrammarForChapter(language, chapterId) {
     const meta = await loadGrammarMeta(language)
     if (!meta || !grammarFlags(meta).grammar) return null
@@ -149,18 +129,12 @@ export async function loadGrammarForChapter(language, chapterId) {
     const doc = assemble(meta, paradigms, [{ id: chapterId, sections }])
 
     const report = validateGrammarDoc(language, doc)
-    logReport('grammar', language, report)
     return report.errors.length ? null : doc
 }
 
 const profiles = new Map()
-const scriptProfiles = new Map()  // lang -> profile | null
+const scriptProfiles = new Map()
 
-/**
- * 语言档案（meta.files.paradigm，导出 accentModes、accent、sandhi）。
- * 第二个参数是 meta.json，不是 assemble() 组装出来的语法文档——后者不含 `files`。
- * meta 里没写这一项就直接返回 null，其余语言不去 import，否则每次打开生词表单都会报一个 404。
- */
 export async function loadParadigmProfile(language, meta = null) {
     if (!language) return null
     if (!meta || !meta.files || !meta.files.paradigm) return null
@@ -170,17 +144,11 @@ export async function loadParadigmProfile(language, meta = null) {
     try {
         profile = await import(/* @vite-ignore */ langUrl(language, meta.files.paradigm).href)
     } catch {
-        // 声明了档案但文件缺失、加载失败
-        console.warn(`[grammar] ${language}: 档案加载失败`)
     }
     profiles.set(language, profile)
     return profile
 }
 
-/**
- * 「文字档案」（meta.files.script，转写 ⇄ 原文）：加载方式同语言档案，第二个参数同样传 meta.json。
- * 导出 `toScript` 与 `toRoman`（`hasScript` 可选）。
- */
 export async function loadScriptProfile(language, meta = null) {
     if (!language) return null
     if (!meta || !meta.files || !meta.files.script) return null
@@ -190,18 +158,15 @@ export async function loadScriptProfile(language, meta = null) {
     try {
         profile = await import(/* @vite-ignore */ langUrl(language, meta.files.script).href)
     } catch {
-        console.warn(`[grammar] ${language}: 文字档案加载失败`)
     }
     scriptProfiles.set(language, profile)
     return profile
 }
 
-/** 同步取已预加载的文字档案（检索等同步场景用） */
 export function getScriptProfile(language) {
     return scriptProfiles.get(language) || null
 }
 
-/** 应用启动时预加载（检索要在同步流程里用到转换函数） */
 export async function preloadScriptProfiles(languages = []) {
     await Promise.all(languages.map(async (language) => {
         if (scriptProfiles.has(language)) return
@@ -235,11 +200,6 @@ export function clearCache(language) {
     chapterCache.clear()
 }
 
-/**
- * 逐个语言跑结构校验与 derive 自检，供设置页使用。不走缓存、出错也不中止，坏文件同样要报出来。
- * 每个语言之间让出一帧，避免 derive 试算把界面卡住。
- * @returns {Promise<Array<{ code, name, structure, derive }>>}
- */
 export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FILES } = {}) {
     const list = [...codes]
     const out = []
@@ -256,7 +216,6 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
         }
 
         try {
-            // 不走缓存：坏文件也要报出来
             const meta = await fetchJSON(langUrl(code, 'meta.json'))
             if (!meta) throw new Error('HTTP 404')
             item.name = typeof meta?.name === 'string' ? meta.name : ''
@@ -284,7 +243,6 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
             item.structure.errors.push(...structure.errors)
             item.structure.warnings.push(...structure.warnings)
 
-            // 目录里没有登记进 chapters 的章节文件 = 漏登记
             for (const [i, list] of sectionLists.entries()) {
                 if (list === null) continue
                 if (!Array.isArray(list)) item.structure.errors.push(`${chapters[i].file} 不是数组`)
@@ -307,7 +265,6 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
                 if (!script) item.structure.errors.push(`文字档案 ${meta.files.script} 加载失败`)
             }
             try {
-                // 自检按「最终存储的写法」比对 expect，所以要把文字档案一并传进去
                 const r = verifyGrammarDoc(code, doc, profile, script)
                 item.derive = {
                     specs: r.specs,

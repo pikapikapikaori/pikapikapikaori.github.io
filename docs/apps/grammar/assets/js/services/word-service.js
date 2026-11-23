@@ -1,4 +1,3 @@
-/** 生词业务逻辑：列表、筛选、排序、分页、统计 */
 
 import {
     listByLanguage, addOrMerge, updateWord, getWord
@@ -18,21 +17,19 @@ export const SORT_FIELDS = [
 ]
 
 export const FILTER_EMPTY = {
-    pos: '',           // '' 表示全部
+    pos: '',
     masteryMin: null,
     masteryMax: null,
     tags: [],
-    source: ''         // '' 表示全部
+    source: ''
 }
 
-/** 搜索范围：all = 词形 + 含义、例句、固定搭配；forms = 词形；head = 基本形态 + 词干 */
 export const SEARCH_SCOPE = [
     { value: 'all',   label: '全部' },
     { value: 'forms', label: '词形' },
     { value: 'head',  label: '原形' }
 ]
 
-/** 主入口：查询当前语言的词条，带筛选、排序、分页 */
 export async function queryWords(userId, language, options = {}) {
     const {
         q = '',
@@ -48,7 +45,6 @@ export async function queryWords(userId, language, options = {}) {
     all = applySearch(all, q, scope)
     all = applyFilter(all, filter)
     all = applySort(all, sortField, sortOrder)
-    // 有查询且带附加符号时，「写法完全一致」的排前面
     all = applyExactFirst(all, q, scope)
 
     const total = all.length
@@ -67,9 +63,6 @@ export async function queryWords(userId, language, options = {}) {
     }
 }
 
-/**
- * 查询串的规范化变体：天城体语言（梵语）同时按 IAST 与原文检索，所以「kāmaḥ」与「कामः」都能搜到同一条
- */
 function searchVariants(query) {
     const out = new Set()
     const push = (text) => {
@@ -77,7 +70,6 @@ function searchVariants(query) {
         if (nq) out.add(nq)
     }
     push(query)
-    // 有文字档案的语言（梵语）：转写与原文两种写法都能搜到
     for (const lang of SCRIPT_SEARCH_LANGS) {
         const profile = getScriptProfile(lang)
         if (!profile) continue
@@ -87,10 +79,6 @@ function searchVariants(query) {
     return [...out]
 }
 
-/**
- * 判定器：给一组（已规范化的）查询串，返回按范围判断词条是否命中的函数。
- * 折叠检索与「写法完全一致」的检索共用这里的字段覆盖范围。
- */
 function searchMatcher(queries, normalize) {
     const anyHit = (text) => {
         const norm = normalize(text)
@@ -131,22 +119,16 @@ function searchMatcher(queries, normalize) {
 function applySearch(words, q, scope = 'all') {
     const s = String(q || '').trim()
     if (!s) return words
-    // 原文、转写两种写法都能搜到：查询串同时展开成 IAST 与天城体
     const queries = searchVariants(s)
     if (!queries.length) return words
     const matches = searchMatcher(queries, normalizeSearch)
     return words.filter((w) => matches(w, scope))
 }
 
-/**
- * 「写法完全一致」用的规范化：保留附加符号（长音符、重音…），只忽略短音符 ——
- * 短音符是保存时自动补的，不该影响精度判定。另外统一大小写与词尾 ς。
- */
 function normalizeExact(s) {
     return foldBreve(s).normalize('NFC').toLowerCase().replace(/\u03C2/g, '\u03C3')
 }
 
-/** 与 searchVariants 相同，但保留附加符号（用于「写法完全一致」优先） */
 function exactVariants(query) {
     const out = new Set()
     const push = (text) => {
@@ -163,14 +145,10 @@ function exactVariants(query) {
     return [...out]
 }
 
-/**
- * 查询串里带了附加符号时，把「写法完全一致」的词条提到前面（层内保持原有排序）。
- * 折叠后才命中的排在后面 —— 搜 mālum 时 mālum 先于 malum。
- */
 function applyExactFirst(words, q, scope = 'all') {
     const s = String(q || '').trim()
     if (!s) return words
-    if (normalizeExact(s) === normalizeSearch(s)) return words   // 查询串没有附加符号，不用分层
+    if (normalizeExact(s) === normalizeSearch(s)) return words
     const queries = exactVariants(s)
     if (!queries.length) return words
     const matches = searchMatcher(queries, normalizeExact)
@@ -221,10 +199,6 @@ export function applySort(words, field, order) {
     return arr
 }
 
-/**
- * 保存前的规范化：原文类字段交给语言自己的 `canonicalize`（`data/language/<code>/paradigm.js`）。
- * 目前只有拉丁语、古希腊语有（单元音默认补短音符），其它语言原样返回。
- */
 async function canonicalizePayload(language, payload) {
     if (!payload) return payload
     const meta = await loadGrammarMeta(language)
@@ -249,9 +223,7 @@ async function canonicalizePayload(language, payload) {
         ...payload,
         lemma: fix(payload.lemma),
         stems: fixMap(payload.stems || {}),
-        // 变格、变位表：{ 表: { 行: { 列: '词形' } } }
         paradigm: fixMap(payload.paradigm || {}),
-        // 补充形式不带来源
         inflections: fixList(payload.inflections, 'form').map(({ source, ...rest }) => rest),
         collocations: fixList(payload.collocations, 'text'),
         examples: fixList(payload.examples, 'text'),
@@ -280,7 +252,6 @@ export async function fetchWord(id) {
     return getWord(id)
 }
 
-/** 聚合所有语言统计（用于语言列表页） */
 export async function languageStats(userId, language) {
     const all = await listByLanguage(userId, language)
     const total = all.length

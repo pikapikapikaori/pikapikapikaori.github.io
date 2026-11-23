@@ -3,7 +3,6 @@ export function connect (options) {
 
     const swUrl = options.swUrl
     const project = options.project
-    const tag = options.tag
     let registration = null
     let started = false
     let ticket = 0
@@ -57,7 +56,6 @@ export function connect (options) {
             registration = reg
             start()
         }).catch(function (error) {
-            if (tag) console.warn('[' + tag + '] Service Worker 注册失败：', error.message)
         })
     }
 

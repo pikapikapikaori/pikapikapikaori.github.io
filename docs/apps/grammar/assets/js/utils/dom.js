@@ -1,4 +1,3 @@
-/** DOM 构造与操作：统一用 h() 构造元素，避免 innerHTML 拼接 */
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 
@@ -43,7 +42,6 @@ function applyProps(el, props) {
         } else if (k === 'text') {
             el.textContent = String(v)
         } else if (k === 'html') {
-            // 仅在受控数据上使用；调用方需自行确保安全
             el.innerHTML = String(v)
         } else if (k === 'ref' && typeof v === 'function') {
             v(el)
@@ -70,17 +68,12 @@ function append(el, children) {
     }
 }
 
-/**
- * 把语法数据里的说明文字解析成 DOM 片段：只保留白名单标签与普通属性，
- * `on*` 事件与 `javascript:` 链接一律丢弃，不认识的标签拆掉但保留里面的文字。
- */
 const HTML_TAGS = new Set([
     'STRONG', 'B', 'EM', 'I', 'CODE', 'BR', 'SMALL', 'SUP', 'SUB', 'SPAN',
     'UL', 'OL', 'LI', 'P', 'BDI',
     'U', 'S', 'DEL', 'INS', 'MARK', 'DETAILS', 'SUMMARY'
 ])
 
-/** bdi 只接受这几个属性：语言、方向、样式钩子 */
 const BDI_ATTRS = new Set(['lang', 'dir', 'class'])
 
 export function htmlFragment(text) {

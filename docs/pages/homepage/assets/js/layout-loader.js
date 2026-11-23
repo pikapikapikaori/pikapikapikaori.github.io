@@ -15,7 +15,6 @@
     let current = null
     let requestSeq = 0
     const listeners = []
-    /* 动态 import 失败后浏览器会记住失败结果，重试时换一个地址才能重新拉取。 */
     const retryImports = Object.create(null)
 
     function normalize(id) {
@@ -33,7 +32,6 @@
         })
     }
 
-    /* 先以 media="not all" 预载，避免新布局样式在切换完成前生效。 */
     function loadCss(url) {
         return new Promise(function (resolve, reject) {
             const link = document.createElement('link')
@@ -84,7 +82,6 @@
         }
     }
 
-    /* 失败落点：说明文字与控件槽分离，切换语言只替换文字节点，不会销毁控件。 */
     function renderFallback(root) {
         root.innerHTML =
             '<div class="layout-fallback" role="alert">' +
@@ -97,7 +94,6 @@
         App.controls.refresh()
     }
 
-    /* 挂载与度量都要 data-layout 先生效，失败时由调用方回滚该属性。 */
     function mountLayout(instance, root, id, link) {
         link.media = 'all'
         setLayoutAttr(id)
@@ -110,7 +106,6 @@
             throw new Error('Layout mount() returned no handle: ' + id)
         }
 
-        /* 此处 current 尚未更新，控件名称会滞后一个布局；切换提交后在 load 内再刷新一次。 */
         App.controls.attach(root.querySelector('[data-slot="controls"]'))
         App.controls.refresh()
 
@@ -171,7 +166,6 @@
                 throw new Error('Layout module has no mount(): ' + id)
             }
 
-            /* 旧 DOM 与旧 link 在挂载成功前保留，失败时回插并重新挂载旧布局。 */
             const previous = current
             const previousNodes = Array.prototype.slice.call(root.childNodes)
             const previousLayout = document.documentElement.dataset.layout || ''
@@ -217,7 +211,6 @@
             if (previous) removeLink(previous.link)
 
             current = { id: id, link: link, instance: instance, handle: handle }
-            /* 切换提交后刷新，控件名称才与当前布局一致。 */
             App.controls.refresh()
             if (previous) App.utils.scrollToTopInstant()
             notify()
@@ -228,7 +221,6 @@
 
             if (request === requestSeq) {
                 retryImports[id] = (retryImports[id] || 0) + 1
-                console.warn('[layout] 加载失败，保留当前布局：' + id, err.message)
 
                 if (!current) renderFallback(root)
             }

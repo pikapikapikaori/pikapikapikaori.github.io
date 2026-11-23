@@ -2,7 +2,6 @@
 
 html {
     font-family: var(--ff-ui);
-    /* 全站字号的唯一旋钮（rem 都相对它） */
     font-size: var(--fs-base);
     line-height: var(--lh-base);
     color: var(--c-fg);
@@ -55,8 +54,6 @@ pre {
     color: var(--c-fg);
 }
 
-/* 输入框、下拉框的方向按内容判定：中文 placeholder 保持左对齐，输入 RTL 文字时自动切右对齐。
- * contenteditable 自绘输入框同理（原文交给里面的 <bdi>，外框保持界面方向）。 */
 input[lang],
 textarea[lang],
 select[lang],
@@ -66,8 +63,6 @@ select[lang],
     text-align: start;
 }
 
-/* 提示文字统一一个颜色：原生 placeholder 与 ghost 输入框的提示层都取 --c-fg-subtle，
- * 否则浏览器默认灰不跟主题走，深色下和自绘提示层是两种颜色。 */
 ::placeholder {
     color: var(--c-fg-subtle);
     opacity: 1;

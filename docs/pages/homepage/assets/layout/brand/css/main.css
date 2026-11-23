@@ -25,7 +25,6 @@ html[data-layout="brand"][data-theme="dark"] {
     color-scheme: dark;
 }
 
-/* 根级留白与字体跟随本布局，退出布局时随 <link> 一并移除。 */
 html[data-layout="brand"] body {
     background: var(--bg);
     color: var(--ink);
@@ -524,7 +523,6 @@ html[data-layout="brand"] .tools .app-control-option[aria-selected="true"]::afte
     opacity: .9;
 }
 
-/* 博客横向 rail 的包装与卡片。 */
 .rail-wrap {
     position: relative;
     overflow: hidden;
@@ -677,7 +675,6 @@ html[data-layout="brand"] .tools .app-control-option[aria-selected="true"]::afte
     outline-offset: -2px;
 }
 
-/* 摄影三段式 stack。 */
 .shelf-photo .shelf-sticky {
     padding: 0;
     justify-content: flex-start;

@@ -27,8 +27,6 @@ body {
     flex-direction: column;
 }
 
-/* The shell fills the viewport so a short page leaves the footer at the bottom;
-   the footer stays in flow rather than fixed. */
 #app {
     min-height: 100vh;
     min-height: 100dvh;

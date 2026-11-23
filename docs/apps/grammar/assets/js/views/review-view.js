@@ -138,7 +138,6 @@ export default {
             renderFace()
         }
 
-        /** 淡入 + 上移：像翻页，而不是转卡片 */
         function renderFace() {
             const word = queue[idx]
             if (!word) return

@@ -51,7 +51,6 @@ function writeStatusCache () {
     try {
         localStorage.setItem(config.probeCacheKey, JSON.stringify(payload))
     } catch (error) {
-        /* 存储不可用时仅本次会话复用 */
     }
 }
 
@@ -78,7 +77,6 @@ export function invalidateStatusIndex () {
     statusNodeIndex = null
 }
 
-/* 每次渲染后重建一次索引；探测结果按 URL 直取节点，避免逐条全文档扫描。 */
 function rebuildStatusNodeIndex () {
     const index = new Map()
     const nodes = document.querySelectorAll('[data-status-url]')
@@ -102,8 +100,6 @@ function updateStatusNodes (url, status) {
     })
 }
 
-/* no-cors 读不到状态码：404 也算有响应，按耗时着色；
-   仅网络错误、超时与混合内容拦截算失败，标灰。 */
 function probeTarget (siteUrl) {
     const absolute = safeUrl(siteUrl)
     if (!absolute) return ''
@@ -212,7 +208,6 @@ export function startProbes (group) {
             pendingStatuses.delete(site.url)
             updateStatusNodes(site.url, status)
         }).catch(function () {
-            /* 单个站点失败不中止整组 */
         }).then(worker)
     }
 

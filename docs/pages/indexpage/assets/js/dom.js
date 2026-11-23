@@ -36,7 +36,6 @@ export function announce (text) {
     }, 30)
 }
 
-/* 外链只允许 http 与 https；相对地址按当前页面解析。非法地址返回空串。 */
 export function safeUrl (value) {
     const text = String(value == null ? '' : value).trim()
     if (!text) return ''

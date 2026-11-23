@@ -17,7 +17,6 @@
         return limit > 0 && list.length > limit ? list.slice(0, limit) : list
     }
 
-    /* 预加载公共布局用到的图片；已请求过的不再重复创建。 */
     Photos.preload = function () {
         Photos.list().forEach(function (photo) {
             if (!photo.src || warmed[photo.src]) return

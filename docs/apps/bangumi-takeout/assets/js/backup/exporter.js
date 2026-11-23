@@ -1,5 +1,3 @@
-// Writes one user as takeout.json, the file bangumi-takeout-py also reads. One
-// transaction joins both halves; `owner` and `progress_at` stay out of the file.
 import { readUserExport } from '../storage.js'
 
 const internalFields = ['owner']
@@ -30,7 +28,6 @@ export async function exportUserData(username) {
     const name = String(username || '').trim()
     if (!name) throw new Error('缺少导出用户名')
 
-    // One transaction: the export never mixes meta with items of a concurrent run.
     const { meta: record, items: records } = await readUserExport(name)
     if (!records.length) throw new Error(`本地没有 ${name} 的数据`)
 

@@ -3,8 +3,6 @@ import { loadFromFile, loadFromUrl } from '../source.js'
 import { href } from '../config.js'
 import { beginLoading } from './loading.js'
 
-// The job outlives the page markup, so its state lives at module level and each
-// render reads it back.
 let phase = 'idle'
 let phaseLabel = ''
 let viewToken = 0
@@ -51,8 +49,6 @@ export function renderImport() {
     const urlInput = main.querySelector('#import-url')
     const urlButton = main.querySelector('#import-url-btn')
 
-    // Buttons follow the job, not the render: a page entered while a job runs
-    // must show the running status.
     const sync = () => {
         const running = phase !== 'idle'
         urlButton.disabled = running
@@ -122,7 +118,6 @@ export function renderImport() {
         phaseLabel = label
         fileInput.value = ''
         applyState()
-        // The mask covers the page, so it carries the only reachable cancel.
         const loading = beginLoading(label, {
             onCancel: () => {
                 if (phase !== 'loading') return
@@ -133,8 +128,6 @@ export function renderImport() {
         })
         try {
             const raw = await getRaw(jobController.signal)
-            // The database write cannot be interrupted, so the cancel entry goes
-            // away before it starts and the status says why.
             phase = 'writing'
             applyState()
             setStatus(main, writingStatus)
@@ -143,7 +136,6 @@ export function renderImport() {
             phase = 'idle'
             applyState()
             setStatus(main, '导入完成')
-            // A finished import must not yank the user back after they left.
             if (token === viewToken && main.dataset.route === 'import') location.href = href.index
         } catch (error) {
             phase = 'idle'

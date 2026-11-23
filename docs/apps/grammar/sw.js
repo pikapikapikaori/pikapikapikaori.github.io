@@ -72,7 +72,6 @@ function readSnapshot (cache) {
     return readJson(cache, manifestUrl)
 }
 
-/* 损坏的记录缺 files 会让下游读取抛错，统一补成空对象。 */
 function withFiles (record) {
     if (!record) return record
     if (!record.files || typeof record.files !== 'object' || Array.isArray(record.files)) {
@@ -93,7 +92,6 @@ function writeSnapshot (cache, manifest) {
     }))
 }
 
-/* 旧版本缓存只能服务与新清单哈希一致的文件，避免旧内容顶替新版本。 */
 function allowOf (record, hashes) {
     const allow = {}
     if (!record || !record.files) return allow
@@ -104,7 +102,6 @@ function allowOf (record, hashes) {
     return allow
 }
 
-/* worker 空闲回收后 activate 不会再来，状态必须能从缓存恢复。 */
 async function loadState () {
     const generation = ++stateGeneration
     const names = await ownCacheNames()
@@ -117,7 +114,6 @@ async function loadState () {
         list.push({ cache: cache, record: record })
         const snapshot = await readSnapshot(cache)
         if (!snapshot) continue
-        /* 未完成缓存的快照才是当前版本，旧版本完成缓存可能排在前面。 */
         const done = record && record.stage === 'done'
         if (!manifest || (manifestDone && !done)) {
             manifest = snapshot
@@ -125,7 +121,6 @@ async function loadState () {
         }
     }
     const hashes = manifest ? pathHashOf(manifest) : {}
-    /* 未完成的缓存排前面，优先取新内容 */
     list.sort(function (a, b) {
         const rankA = a.record && a.record.stage === 'done' ? 1 : 0
         const rankB = b.record && b.record.stage === 'done' ? 1 : 0
@@ -169,8 +164,6 @@ async function serve (pathname, request) {
     return networkOrFail(request)
 }
 
-/** 只有清单内的目录入口才回退到 index.html。其它路径可能属于兄弟项目，
- *  用本项目首页顶替会把别的页面内容换掉。 */
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
@@ -385,7 +378,6 @@ function projectOf (value) {
     return path
 }
 
-/* 排队任务留在同一条 promise 链里，事件生命周期才能覆盖它们。 */
 async function loop (first, firstResumeOnly) {
     let project = first
     let resumeOnly = !!firstResumeOnly
@@ -393,7 +385,6 @@ async function loop (first, firstResumeOnly) {
         try {
             await run(project || null, resumeOnly)
         } catch (error) {
-            console.error('[sw] run failed', error)
             pendingFull = false
             pendingProject = null
             return
@@ -484,7 +475,6 @@ self.addEventListener('message', function (event) {
             return
         }
         const project = projectOf(data.project)
-        /* 带字段却校验失败时不启动，避免退化成整站下载。 */
         if (project) event.waitUntil(start(project))
     } else if (data.type === 'PAUSE') paused = true
 })

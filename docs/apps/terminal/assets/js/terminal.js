@@ -88,7 +88,6 @@ let judgeInput = function (input) {
 term.onKey((key) => {
     const ev = key.domEvent
     switch (ev.keyCode) {
-        // Enter
         case 13:
             if (currentLine.length > 0) {
                 historyLines.push(currentLine)
@@ -100,7 +99,6 @@ term.onKey((key) => {
                 term.prompt()
             }
             break
-            // Backspace
         case 8:
             if (currentLine.length > 0 && currentArrowIndex > 0) {
                 let previousLine = currentLine
@@ -112,21 +110,18 @@ term.onKey((key) => {
                 currentArrowIndex--
             }
             break
-            // Left
         case 37:
             if (currentArrowIndex > 0 && currentArrowIndex <= currentLine.length) {
                 term.write('\x1b[D')
                 currentArrowIndex--
             }
             break
-            // Right
         case 39:
             if (currentArrowIndex >= 0 && currentArrowIndex < currentLine.length) {
                 term.write('\x1b[C')
                 currentArrowIndex++
             }
             break
-            // Up
         case 38:
             if (currentLineIndex > 0 && currentLineIndex <= historyLines.length) {
                 let previousLine = currentLine
@@ -136,7 +131,6 @@ term.onKey((key) => {
                 currentArrowIndex = currentLine.length
             }
             break
-            // Down
         case 40:
             if (currentLineIndex >= 0 && currentLineIndex < historyLines.length - 1) {
                 let previousLine = currentLine

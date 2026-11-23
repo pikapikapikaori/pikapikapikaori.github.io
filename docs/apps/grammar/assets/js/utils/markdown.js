@@ -1,4 +1,3 @@
-/** 极简 Markdown → DOM，只覆盖文档里用到的子集。 */
 
 import { h } from './dom.js'
 
@@ -9,7 +8,6 @@ const TABLE_SEP = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/
 const LIST_ITEM = /^(\s*)([-*+]|\d{1,3}[.)])\s+(.*)$/
 const QUOTE_LINE = /^\s*>\s?/
 
-/** GitHub 风格的标题 slug：去标点、空格转连字符、保留中日韩文字 */
 export function slugify(text) {
     return String(text)
         .trim()
@@ -18,10 +16,6 @@ export function slugify(text) {
         .replace(/\s+/g, '-')
 }
 
-/**
- * 预扫标题（不建 DOM）：目录与跨篇锚点解析都用它，和渲染时分配的 id 完全一致。
- * @returns {Array<{ level: number, id: string, text: string }>}
- */
 export function scanHeadings(source) {
     const used = new Set()
     const out = []
@@ -44,9 +38,6 @@ export function scanHeadings(source) {
     return out
 }
 
-/**
- * @returns {DocumentFragment}
- */
 export function renderMarkdown(source, { onHeading = null } = {}) {
     const lines = String(source ?? '').replace(/\r\n?/g, '\n').split('\n')
     const ctx = { headings: scanHeadings(source), next: 0, onHeading }
@@ -167,12 +158,10 @@ function parseTable(lines, i, parent) {
     return j
 }
 
-/** 表格一行按竖线切成单元格；笔记的表格渲染也用它 */
 export function splitRow(line) {
     let text = line.trim()
     if (text.startsWith('|')) text = text.slice(1)
     if (text.endsWith('|') && !text.endsWith('\\|')) text = text.slice(0, -1)
-    // 单元格里的 `\|` 是转义的竖线，先占位再切分
     return text
         .replace(/\\\|/g, '\u0000')
         .split('|')
@@ -196,7 +185,6 @@ function parseList(lines, i, parent, ctx) {
 
         const body = [m[3]]
         j += 1
-        // 续行、子列表：缩进比本级更深的都算这个条目里的内容
         while (j < lines.length) {
             const line = lines[j]
             if (!line.trim()) {
@@ -291,7 +279,6 @@ function inline(text) {
     return out
 }
 
-/** `<bdi lang="sa" dir="rtl">…</bdi>`：文档里显式标出的原文片段 */
 function bdiEl(token) {
     const m = /^<bdi([^>]*)>([\s\S]*)<\/bdi>$/u.exec(token)
     if (!m) return document.createTextNode(token)
@@ -307,18 +294,15 @@ function linkEl(token) {
     const label = inline(m[1])
     const href = m[2]
 
-    // 站外链接新窗口打开；页内锚点交给视图处理（可能指向另一篇）
     if (/^https?:/i.test(href) || /^mailto:/i.test(href)) {
         return h('a', { class: 'doc-link', href, target: '_blank', rel: 'noopener noreferrer' }, ...label)
     }
     if (href.startsWith('#')) {
         return h('a', { class: 'doc-link', href, dataset: { anchor: href.slice(1) } }, ...label)
     }
-    // 相对路径的文件链接在应用里没有去处：只留文字
     return h('span', { class: 'doc-link doc-link--plain' }, ...label)
 }
 
-/** 去掉行内标记，用于标题文字与 slug */
 function plainText(text) {
     return String(text)
         .replace(/<kbd>([^<]*)<\/kbd>/g, '$1')

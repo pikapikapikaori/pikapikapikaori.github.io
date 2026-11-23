@@ -7,7 +7,6 @@
         layouts: ['brand', 'mondrian', 'starTrail', 'photography'],
         defaultLayout: 'mondrian',
 
-        /* 地址栏主题色，按布局与亮暗取值。 */
         metaColors: {
             brand: { light: '#f7f3ea', dark: '#141210' },
             mondrian: { light: '#F2EDE4', dark: '#101214' },
@@ -20,7 +19,6 @@
         logoSrc: './assets/resources/logo/logo.jpg',
         startYear: 2023,
 
-        /* 公共布局展示的照片数量；全部照片由 Photos.all 读取，不分片。 */
         photoLimit: 10,
 
         photos: [
@@ -37,13 +35,10 @@
         blog: {
             postLimit: 10,
             excerptLength: 108,
-            /* 语言检测采样字符数：从正文纯文本开头取这么长来判断语言 */
             langSampleLength: 400,
-            /* 每次最多解析多少条 entry，再按语言过滤，再取前 postLimit 条 */
             scanLimit: 60
         },
 
-        /* 拉取失败或没有对应语言文章时的默认数据。 */
         fallbackPosts: {
             'zh-Hans': [
                 {

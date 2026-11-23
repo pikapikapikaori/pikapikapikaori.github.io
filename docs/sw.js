@@ -390,7 +390,6 @@ async function loop (first, firstResumeOnly) {
         try {
             await run(project || null, resumeOnly)
         } catch (error) {
-            console.error('[sw] run failed', error)
             pendingFull = false
             pendingProject = null
             return

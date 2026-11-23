@@ -72,7 +72,6 @@ function readSnapshot (cache) {
     return readJson(cache, manifestUrl)
 }
 
-/* 损坏的记录缺 files 会让下游读取抛错，统一补成空对象。 */
 function withFiles (record) {
     if (!record) return record
     if (!record.files || typeof record.files !== 'object' || Array.isArray(record.files)) {
@@ -165,8 +164,6 @@ async function serve (pathname, request) {
     return networkOrFail(request)
 }
 
-/** 只有清单内的目录入口才回退到 index.html。其它路径可能属于兄弟项目，
- *  用本项目首页顶替会把别的页面内容换掉。 */
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
@@ -388,7 +385,6 @@ async function loop (first, firstResumeOnly) {
         try {
             await run(project || null, resumeOnly)
         } catch (error) {
-            console.error('[sw] run failed', error)
             pendingFull = false
             pendingProject = null
             return
@@ -479,7 +475,6 @@ self.addEventListener('message', function (event) {
             return
         }
         const project = projectOf(data.project)
-        /* 带字段却校验失败时不启动，避免退化成整站下载。 */
         if (project) event.waitUntil(start(project))
     } else if (data.type === 'PAUSE') paused = true
 })

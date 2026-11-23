@@ -219,7 +219,7 @@
             const url = new URL(window.location.href)
             url.searchParams.set('lang', lang)
             window.history.replaceState(null, '', url.toString())
-        } catch (e) { /* 忽略：file:// 下会抛错 */ }
+        } catch (e) {   }
     }
 
     function resolveLang() {
@@ -263,7 +263,6 @@
         })
     }
 
-    /* 图标链接没有文字，href 也走词典；与 data-i18n-attr 分开避免空属性残留。 */
     function fillHref(el, dict) {
         const value = text(dict, el.dataset.i18nAttrHref)
 
@@ -341,7 +340,6 @@
 
         if (value != null) return value
 
-        /* brand 仍按 photo.caption.<id> 读取，数据已移到单独对象。 */
         const table = App.photoCaptions && App.photoCaptions[current]
         if (table && key.indexOf(PHOTO_CAPTION_PREFIX) === 0) {
             return table[key.slice(PHOTO_CAPTION_PREFIX.length)]

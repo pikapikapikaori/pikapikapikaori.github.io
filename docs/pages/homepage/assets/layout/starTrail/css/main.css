@@ -1,6 +1,5 @@
 html[data-layout="starTrail"] {
     --star-sky-end: #151515;
-    /* 封面底部收口高度：与首屏正文下缘错开，只让背景元素淡出。 */
     --star-fade: clamp(72px, 10svh, 160px);
     --page-bg: var(--star-sky-end);
     --control-ink: #ECE5D8;
@@ -108,7 +107,6 @@ html[data-layout="starTrail"][data-theme="light"] .star-layout {
     background-size: 100% 100svh;
 }
 
-/* 画布只覆盖首屏，随页面滚走，正文落在纯色底色上。 */
 .star-canvas {
     position: absolute;
     top: 0;
@@ -117,7 +115,6 @@ html[data-layout="starTrail"][data-theme="light"] .star-layout {
     width: 100%;
     height: 100svh;
     pointer-events: none;
-    /* 四周与底部的淡出在画布内绘制，避免硬切。 */
 }
 
 .star-sky {
@@ -148,7 +145,6 @@ html[data-theme="light"] .star-band {
     will-change: transform;
 }
 
-/* 光带从左上向右下缓慢漂移，位移幅度接近一个光带宽度。 */
 @keyframes star-band-drift {
     from {
         transform: translate3d(-5vmax, -3vmax, 0) rotate(-21deg);
@@ -366,7 +362,6 @@ html[lang="ja"] .star-slogan {
 }
 
 @media screen and (max-width: 768px) {
-    /* 窄屏把整页收进一屏：工具条独占底部一行，正文在容器内滚动。 */
     .star-layout {
         --star-toolbar-h: 46px;
         display: flex;
@@ -447,7 +442,6 @@ html[lang="ja"] .star-slogan {
         border-radius: 0;
     }
 
-    /* 菜单以整条工具条为参照向上开，左右各留 12px；390 宽的视口仍完整可见。 */
     .star-controls .app-control-menu {
         top: auto;
         right: 12px;
@@ -464,7 +458,6 @@ html[lang="ja"] .star-slogan {
         transform: translateY(0);
     }
 
-    /* 首屏高度扣掉工具条与安全区，标题不落到工具条后面。 */
     .star-hero {
         min-height: calc(100svh - var(--star-toolbar-h) - env(safe-area-inset-bottom));
         padding: 7rem 0 10vh;
@@ -494,7 +487,6 @@ html[lang="ja"] .star-slogan {
         font-size: .85rem;
     }
 
-    /* 工具条已占独立一行，页脚只留视觉留白，不再额外避让控件。 */
     .star-footer {
         padding-bottom: 1.4rem;
     }

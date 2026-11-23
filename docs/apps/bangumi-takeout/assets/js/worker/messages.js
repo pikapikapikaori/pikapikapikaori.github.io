@@ -4,7 +4,7 @@ export function postServiceWorkerMessage(type, payload = {}) {
     const send = worker => {
         try {
             worker?.postMessage(message)
-        } catch { /* a replaced worker must not break the backup */ }
+        } catch {   }
     }
     if (navigator.serviceWorker.controller) {
         send(navigator.serviceWorker.controller)

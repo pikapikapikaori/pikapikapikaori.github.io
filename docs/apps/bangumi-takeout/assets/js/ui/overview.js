@@ -116,8 +116,6 @@ export function renderOverview() {
     }
     const username = state.data?.user?.username || ''
     if (!initialized || username !== activeUser) {
-        // Filters belong to one user; a freshly selected account must not
-        // inherit the previous account's view.
         resetViewState()
         activeUser = username
         initState()
@@ -227,8 +225,6 @@ export function renderOverview() {
         currentOrder = currentOrder === 'desc' ? 'asc' : 'desc'
         resetPage()
         saveState()
-        // Swap the icon and label in place so a full rebuild does not drop
-        // focus back to the document.
         paintOrderButton(orderButton)
         renderGrid()
     })
@@ -341,7 +337,7 @@ function renderGrid() {
         jump.addEventListener('keydown', e => {
             if (e.key === 'Enter') {
                 e.preventDefault()
-                jump.blur()          // Enter defers to the blur handler so the page is not jumped twice
+                jump.blur()
             }
         })
         jump.addEventListener('blur', () => {

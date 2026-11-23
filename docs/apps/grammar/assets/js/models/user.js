@@ -1,4 +1,3 @@
-/** User 模型与导出 JSON 顶层结构 */
 
 import { DEFAULT_SETTINGS } from '../config/config.js'
 import { normalizeSettings } from '../store/settings-store.js'
@@ -45,7 +44,6 @@ export function validateExportPayload(payload) {
     if (!Array.isArray(payload.words)) {
         errors.push('words 应为数组')
     }
-    // notes 是后来加的：旧文件没有这一段，照样能导入
     if (payload.notes != null && !Array.isArray(payload.notes)) {
         errors.push('notes 应为数组')
     }

@@ -1,6 +1,5 @@
 import { h, qs } from './dom.js'
 
-/** 面包屑：先 setBreadcrumbs() 记下，等 mountView 的 await 之后再渲染。 */
 
 let pendingItems = null
 

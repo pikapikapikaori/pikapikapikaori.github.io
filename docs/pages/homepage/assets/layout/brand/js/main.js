@@ -80,7 +80,6 @@ export default {
         window.addEventListener('scroll', onScroll, { passive: true })
         onScroll()
 
-        /* 入场遮罩：遮罩元素由 HTML 自带的 boot 类常驻，挂载后延时加根级 booted 类使其淡出。 */
         const htmlEl = document.documentElement
         const MIN_MS = 150
         const elapsed = (window.performance && performance.now) ? performance.now() : 0
@@ -88,7 +87,6 @@ export default {
             htmlEl.classList.add('booted')
         }, Math.max(0, MIN_MS - elapsed))
 
-        /* 先移除旧 booted 类，重新挂载同一布局时才不会一开始就是已淡出状态。 */
         htmlEl.classList.remove('booted')
 
         return {
@@ -100,7 +98,6 @@ export default {
                 if (railInstance) railInstance.destroy()
                 if (photoInstance) photoInstance.destroy()
                 pins.forEach(function (pin) { pin.destroy() })
-                /* 卸载时去掉根级类，避免切到其他布局后遮罩仍然生效。 */
                 htmlEl.classList.remove('booted')
             }
         }

@@ -25,7 +25,6 @@ export function setupTheme (buttons, meta) {
             try {
                 localStorage.setItem(config.themeStorageKey, mode)
             } catch (error) {
-                /* 存储不可用时主题仍在本次会话生效 */
             }
         }
     }

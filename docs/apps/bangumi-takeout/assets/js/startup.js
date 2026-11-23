@@ -16,7 +16,7 @@
     let mode = 'auto'
     try {
         mode = localStorage.getItem('bangumi-takeout:theme') || 'auto'
-    } catch { /* localStorage may be unavailable; keep the default */ }
+    } catch {   }
     if (mode !== 'auto' && mode !== 'light' && mode !== 'dark') mode = 'auto'
 
     const darkQuery = matchMedia(mediaDark)
@@ -48,16 +48,13 @@
 
     if (!('serviceWorker' in navigator) || !window.isSecureContext) return
 
-    /* 内嵌与独立部署使用不同的 worker，内嵌由主站根 worker 只取本前缀。 */
     if (embedded) {
         import('../../../../assets/js/worker/client.js').then(function (mod) {
             mod.connect({
                 swUrl: '../../sw.js',
-                project: parts.slice(-2).join('/') + '/',
-                tag: 'bangumi-takeout'
+                project: parts.slice(-2).join('/') + '/'
             })
         }).catch(function (error) {
-            console.warn('[sw] 共用模块加载失败：', error.message)
         })
         return
     }

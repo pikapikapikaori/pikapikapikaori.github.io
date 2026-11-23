@@ -48,7 +48,6 @@ export function normalizeExport(raw) {
     }
 }
 
-// A null progress means it was never fetched; an empty object is a fetched result.
 export function isProgressObject(progress) {
     return !!progress && typeof progress === 'object'
 }
@@ -73,16 +72,12 @@ export function toViewItems(records) {
     return records.map(toViewItem).filter(Boolean)
 }
 
-// Main episodes sit in the '0' bucket; a snapshot without types keeps them in
-// 'unknown', so an empty '0' falls back to that bucket.
 function pickMainEpisodes(epData) {
     if (Array.isArray(epData['0']) && epData['0'].length) return epData['0']
     if (Array.isArray(epData.unknown)) return epData.unknown
     return []
 }
 
-// Only what the collection view reads: the card, the search, the filters and
-// the sorting. The detail record is not touched here.
 function toViewItem(record) {
     const s = record.subject
     if (!s || !s.id) return null
@@ -111,8 +106,6 @@ function toViewItem(record) {
     }
 }
 
-// The detail page renders one merged record; episode objects are built here,
-// once, instead of for every item of a list.
 export function toDetailItem(record) {
     const view = toViewItem(record)
     if (!view) return null
@@ -163,8 +156,6 @@ function cmpStr(a, b) { return (a || '').localeCompare(b || '') }
 export function sortItems(items, sortKey, direction = 'desc') {
     const arr = items.slice()
     const sign = direction === 'asc' ? 1 : -1
-    // Unrated items and items without a time always sort last, regardless of
-    // direction.
     const last = (missingA, missingB) => {
         if (missingA === missingB) return 0
         return missingA ? 1 : -1

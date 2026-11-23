@@ -132,7 +132,6 @@ export async function importUser(source, options = {}) {
     }
 
     const st = normalizeSettings({ ...settings })
-    // 文件里的 settings.userId 是导出时的用户：记录键必须跟随实际用户
     await dbPut(STORE_SETTINGS, { ...st, userId: finalUser.id })
 
     for (const raw of Array.isArray(payload.notes) ? payload.notes : []) {
@@ -178,7 +177,6 @@ function normalizeImportedWord(raw, userId) {
     }
 }
 
-/** 补充形式属于词条本身，不区分来源；旧文件里的 source 直接丢掉 */
 function normalizeInflections(list) {
     if (!Array.isArray(list)) return []
     return list.map(({ source, ...rest }) => rest)

@@ -27,8 +27,6 @@ export async function renderDetail(id, { goBack, isCurrent } = {}) {
         return null
     }
 
-    // The list holds only display fields, so this item's detail record is read here.
-    // The read is asynchronous, so the route token decides whether it still applies.
     const stale = () => main.dataset.route !== 'detail'
         || (isCurrent && !isCurrent())
         || state.data?.user?.username !== username
@@ -40,14 +38,10 @@ export async function renderDetail(id, { goBack, isCurrent } = {}) {
         return null
     }
     if (!hasDetail) {
-        // Without its detail half the entry shows no progress, and the list stamp would keep
-        // the next incremental run from asking again (see storage.js).
         let message = '详情数据未取得，下次备份时补全。'
         try {
             await items.clearProgressValidity(username, id)
         } catch {
-            // The empty state answers this page; a failed cleanup only weakens
-            // the next backup and must not replace it with an error page.
             message = '详情数据未取得，下次备份时补全；清除进度有效期失败，下次备份可能仍跳过该条目。'
         }
         if (stale()) return null
@@ -65,8 +59,6 @@ export async function renderDetail(id, { goBack, isCurrent } = {}) {
     const statusLabel = item.status === 'onhold' ? '搁置'
         : item.status === 'dropped' ? '抛弃'
             : statusLabels[item.cat]?.[item.status] || item.status
-    // Imported JSON is untrusted: numbers go through Number(), strings through
-    // escapeHtml(); the cover URL is assigned as a DOM property below.
     const eps = toNumber(item.eps)
     const volumes = toNumber(item.volumes)
     const volStatus = toNumber(item.volStatus)
@@ -159,7 +151,6 @@ export async function renderDetail(id, { goBack, isCurrent } = {}) {
     paintCover(main, coverUrl)
     bindEpisodeToggles(main)
     bindBack(main, goBack)
-    // The page title uses this name, so the display-name rule stays here.
     return displayName
 }
 
@@ -174,8 +165,6 @@ function renderEmpty(main, message, goBack) {
 function bindBack(main, goBack) {
     const back = main.querySelector('#detail-back')
     if (!back || !goBack) return
-    // Prefer a real history entry so the collection keeps its scroll position;
-    // the router falls back to the collection route when there is none.
     back.addEventListener('click', event => {
         event.preventDefault()
         goBack()

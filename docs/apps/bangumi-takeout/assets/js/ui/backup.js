@@ -21,8 +21,6 @@ const stageIndexByName = {
     '拉取分集': 2,
     '拉取观看进度': 3,
     '收尾合并': 4,
-    // The static read runs before the matching item stage, so it shares that
-    // stage's node and progress total.
     '读取静态 subject 数据': 1,
     '读取静态 episode 数据': 2,
 }
@@ -79,8 +77,6 @@ function canStart() {
         && taskInfo.status !== taskStatus.unfinished
 }
 
-// An incremental run reads what the machine holds; without a cached collection
-// there is nothing to be incremental about. The count belongs to one target.
 function canStartIncremental() {
     return canStart() && cacheTarget === targetValue.trim() && cacheCount > 0
 }
@@ -93,8 +89,6 @@ function canResume() {
 }
 
 function canDiscard() {
-    // taskInfo may belong to the previous target while the debounce runs;
-    // never enable the button unless it describes the current one.
     return !running && !starting && !verifying
         && !!targetValue.trim()
         && taskTarget === targetValue.trim()
@@ -122,7 +116,6 @@ async function refreshTask() {
         getTask(username, { includeCompleted: true }),
         meta.get(username),
     ])
-    // Drop stale reads so a later target cannot be painted with an early task.
     if (seq !== taskSeq || username !== targetValue.trim()) return
     taskInfo = { ...info, count: record?.completeness?.done || 0 }
     taskTarget = username
@@ -137,8 +130,6 @@ async function readCacheCount(username) {
     }
 }
 
-// Finalize clears the running counters before the task is marked complete, so a
-// finished task keeps its count only in the record's completeness.
 function taskCounts(task) {
     const done = task?.progress?.done || 0
     const total = task?.progress?.total || 0
@@ -178,7 +169,6 @@ function syncProgressFromTask() {
 export async function renderBackup() {
     const main = document.getElementById('main')
     if (!main) return
-    // A background run must not paint over another page.
     if (main.dataset.route !== 'backup') return
     closeMenu()
 
@@ -356,8 +346,6 @@ function bindTarget(main) {
                 targetValue = value
                 input.value = value
                 paint()
-                // The old target's count must not keep the incremental button
-                // clickable until the debounced read returns.
                 cacheTarget = ''
                 paintButtons()
                 updateTaskState()
@@ -460,7 +448,6 @@ function bindAuth(main) {
         } catch (error) {
             verifying = false
             verifyController = null
-            // A backup may have started during verification; the run then owns the UI.
             if (!running) {
                 if (isAbortError(error)) {
                     form.hidden = true
@@ -476,7 +463,6 @@ function bindAuth(main) {
         }
         verifying = false
         verifyController = null
-        // A late verification result must not overwrite the run's auth and notice.
         if (running) return
         selectedAuth = result.username
         setNotice('已添加 ' + result.username)
@@ -538,8 +524,6 @@ function bindActions(main) {
     main.querySelector('#b-inc').addEventListener('click', () => startRun('incremental'))
     main.querySelector('#b-resume').addEventListener('click', () => startRun('resume'))
     main.querySelector('#b-stop').addEventListener('click', () => runHandle?.stop())
-    // The discard button is rendered only with an unusable checkpoint, so it
-    // is delegated rather than bound when the shell is built.
     main.addEventListener('click', event => {
         if (event.target.closest('#b-discard')) discardCheckpoint()
     })
@@ -547,8 +531,6 @@ function bindActions(main) {
 
 async function discardCheckpoint() {
     const button = document.getElementById('b-discard')
-    // The recorded target is the one taskInfo describes, not whatever the
-    // input holds by the time this handler runs.
     const target = button?.dataset.target || ''
     const taskId = button?.dataset.taskId || ''
     if (running || starting || verifying) return
@@ -556,8 +538,6 @@ async function discardCheckpoint() {
     if (!window.confirm(`放弃断点会丢失目标「${target}」当前的续传进度，之后只能重新开始备份。确定放弃吗？`)) {
         return
     }
-    // Re-check after the modal: a backup may have started, the target may have
-    // changed, and either would make this a different checkpoint.
     if (running || starting || verifying) return
     if (target !== targetValue.trim()) return
     starting = true
@@ -568,8 +548,6 @@ async function discardCheckpoint() {
             setNotice('目标「' + target + '」没有可放弃的断点', 'run')
             return
         }
-        // Another tab may have started a new task; discard only the one the
-        // button recorded.
         if (!taskId || latest.task.task_id !== taskId) {
             setNotice('任务已变化，未放弃「' + target + '」的断点', 'run')
             return
@@ -591,12 +569,8 @@ async function discardCheckpoint() {
 async function startRun(mode) {
     if (running || starting || verifying) return
     starting = true
-    // The mask belongs to the startup only: once the run reports its first
-    // progress the page holds the stop button and needs the input back.
     const loading = beginLoading('正在启动备份…', {
         onCancel: () => runHandle?.stop(),
-        // The trigger is disabled for the whole run, so the stop button takes
-        // the focus once the mask closes.
         returnFocus: () => document.getElementById('b-full'),
         fallbackFocus: () => document.getElementById('b-stop'),
     })
@@ -613,8 +587,6 @@ async function startRun(mode) {
         paintStatus()
     } finally {
         starting = false
-        // runBackup's final render still saw starting=true, so repaint before
-        // the mask restores focus.
         paintButtons()
         loading.close()
     }
@@ -666,8 +638,6 @@ async function runBackup(mode, markReady) {
         paintStatus()
         return
     } else if (mode === 'incremental') {
-        // The button may have been painted from another target's count, so the
-        // start repeats the read before it commits.
         const count = await readCacheCount(target)
         if (!count) {
             cacheCount = 0
@@ -691,8 +661,6 @@ async function runBackup(mode, markReady) {
     paintLog()
     paintStatus()
 
-    // The viewer may pick or leave a user while the run is in flight; remember
-    // the view at this moment so the finish step can tell who chose last.
     const viewAtStart = state.data?.user?.username || ''
     const clearedAtStart = localStorage.getItem(viewClearedKey) || ''
 
@@ -706,8 +674,6 @@ async function runBackup(mode, markReady) {
             if (name === '完成') {
                 progress = { index: stageLabels.length, label: '完成', done: 1, total: 1 }
             } else {
-                // A new stage resets the finished count even when two names share a node; the note
-                // is kept only for a mapped name.
                 const base = name.split('（')[0]
                 const mapped = stageIndexByName[base]
                 const index = mapped ?? progress.index
@@ -751,10 +717,7 @@ async function runBackup(mode, markReady) {
         const viewed = state.data?.user?.username || ''
         const viewUnchanged = viewed === viewAtStart
             && (localStorage.getItem(viewClearedKey) || '') === clearedAtStart
-        // A user chosen after the run started wins over the backup target.
         if (viewed === target || (!viewed && viewUnchanged)) {
-            // A first backup with no viewed user must still feed the collection
-            // page; otherwise it keeps showing the welcome card.
             const hit = await loadUser(target)
             if (hit) {
                 state.data = hit
@@ -764,8 +727,6 @@ async function runBackup(mode, markReady) {
         await renderBackup()
         if (completed) {
             syncHeader()
-            // Refresh the collection in place when it is the visible route; a
-            // finished background run must not navigate away.
             if (document.getElementById('main')?.dataset.route === 'overview') {
                 window.dispatchEvent(new Event('app:rerender'))
             }
@@ -808,8 +769,6 @@ function paintTaskRecord() {
             : `<p class="hint">${hasAuth()
                 ? `断点属于授权账号 ${escapeHtml(task.auth_username || '—')}，当前授权不同`
                 : '当前没有有效授权，无法继续该断点'}；可放弃断点后重新开始。放弃会丢失断点进度。</p>`
-    // A usable checkpoint keeps its discard action out of the way; only a
-    // checkpoint the current credential cannot resume shows one.
     const discardHtml = unfinished && !resumeReady
         ? `<div class="task-discard">
                 <button type="button" class="task-btn" id="b-discard" ${canDiscard() ? '' : 'disabled'}>放弃断点</button>
@@ -853,8 +812,6 @@ function paintButtons() {
     const input = document.getElementById('target-input')
     if (input) input.disabled = running
     const incHint = document.getElementById('inc-hint')
-    // Only a target that could otherwise start explains the missing cache, and
-    // only after its own count is read.
     if (incHint) {
         const known = cacheTarget === targetValue.trim()
         incHint.hidden = !canStart() || !known || cacheCount > 0
@@ -871,7 +828,6 @@ function paintProgress() {
     const bars = document.querySelectorAll('#stage-strip .stage-bar')
     bars.forEach((bar, index) => bar.classList.toggle('is-fill', index < progress.index))
 
-    // A finished run may hold no items at all; it is still complete.
     const finished = progress.index >= stageLabels.length
     const ratio = progress.total > 0
         ? Math.min(100, Math.round(progress.done / progress.total * 100))

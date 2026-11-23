@@ -1,8 +1,3 @@
-/*
- * 格子交互：翻转卡与提示语按模板类名对应：
- * 翻转卡点击与 Enter、空格翻转，Escape 收起，点画外收起全部，
- * 移动端双击防误触，语言切换后已展开的提示语立即更新。
- */
 const GRID = {
     columns: 10,
     rows: 10,
@@ -91,7 +86,6 @@ export default {
             onCardKey(card, event)
         }
 
-        /* 双击防误触：300ms 内两次 touchstart，第二次不触发点击。 */
         let lastTap = 0
 
         function onTouchStart(event) {

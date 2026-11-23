@@ -71,13 +71,11 @@ function paintNav() {
     })
 }
 
-// The user menu lives in the single header; route switches only repaint it.
 function paintUserMenu() {
     const menu = document.getElementById('user-menu')
     if (!menu) return
     const user = state.data?.user
     menu.hidden = !user
-    // Search covers the loaded collection, so it is hidden before a user is chosen.
     const search = document.querySelector('.header-search')
     if (search) search.hidden = !user
     if (!user) {
@@ -88,7 +86,6 @@ function paintUserMenu() {
     const nickname = document.getElementById('user-nickname')
     if (!avatar || !nickname) return
     const src = user.avatar?.small || user.avatar?.medium || ''
-    // An empty src paints a broken-image icon; hide the element instead.
     avatar.hidden = !src
     avatar.src = src
     avatar.alt = user.nickname || user.username || ''
@@ -103,8 +100,6 @@ function bindDataSource() {
 
     let pinned = false
 
-    // A fixed 280px popover overflows a 320px viewport near the right edge, so the
-    // width is tightened and the panel shifted left.
     const place = () => {
         const margin = 12
         const hostRect = host.getBoundingClientRect()
@@ -128,7 +123,6 @@ function bindDataSource() {
     }
     closeDataSource = close
 
-    // The popover is a child of the host, so the pointer stays inside it on hover.
     host.addEventListener('mouseenter', open)
     host.addEventListener('mouseleave', () => {
         if (!pinned) close()
@@ -144,9 +138,7 @@ function bindDataSource() {
         item.addEventListener('click', () => {
             close()
             const target = item.dataset.href
-            // Repeating the current hash fires no render, so nothing would close the mask.
             if (target === location.hash) return
-            // The page reads the stores before it paints; the mask covers that read.
             const loading = beginLoading('正在打开…', { returnFocus: button })
             navigate(target).finally(() => loading.close())
         })
@@ -191,8 +183,6 @@ function bindUserMenu() {
     }, { signal: headerEvents.signal })
 
     document.getElementById('user-logout').addEventListener('click', () => {
-        // Leaving a user only clears the view selection: data and credentials
-        // stay in place.
         clearCurrentUser()
         syncHeader()
         const atCollection = location.hash === href.index

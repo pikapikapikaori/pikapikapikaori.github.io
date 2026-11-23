@@ -1,4 +1,3 @@
-/** 应用入口：打开 IndexedDB、注册 Service Worker、初始化主题与字体、挂载路由。 */
 
 import { openDB } from './store/db.js'
 import { getUser } from './store/user-store.js'
@@ -37,12 +36,10 @@ function renderHeader() {
                 const s = await saveSettings(userId, { theme: t })
                 setSettings(s)
             } catch (err) {
-                console.warn('[theme] 保存失败', err)
             }
         }
     })
 
-    // 从欢迎页进来的文档页：顶栏回首页，而不是回语言列表、设置
     const home = () => appStore.get().navContext === 'welcome'
 
     return h('header', { class: 'app-header' },
@@ -65,14 +62,12 @@ function renderHeader() {
     )
 }
 
-/** 顶栏在视图挂载后才确定上下文（数据格式页按来源决定），挂载结束后同步品牌链接 */
 function syncHeader() {
     const brand = qs('.js-header-brand')
     if (!brand) return
     brand.setAttribute('href', appStore.get().navContext === 'welcome' ? '#/welcome' : '#/languages')
 }
 
-/** 注销：清掉当前用户的选择（数据留在库里），回欢迎页重新选 */
 function logout() {
     remove(LS_KEYS.user)
     setUser(null)
@@ -106,7 +101,6 @@ function renderFatal(message) {
     ))
 }
 
-/** 需要输入助手的视图（其余页面没有常驻按钮） */
 const IME_VIEWS = new Set(['words', 'wordNew', 'wordEdit', 'notes'])
 
 const VIEW_MODULES = {
@@ -129,7 +123,6 @@ async function loadView(name) {
     return mod.default || mod
 }
 
-/** 视图模块约定：export default { needsUser, layout: 'full' | 'shell' | 'main', async mount(ctx) } */
 
 const router = createRouter([
     { path: '/welcome',              view: (ctx) => mountView('welcome',    ctx) },
@@ -156,16 +149,15 @@ async function mountView(name, ctx) {
     || NO_LAYOUT_ROUTES.has(ctx.path)
 
     if (typeof currentUnmount === 'function') {
-        try { currentUnmount() } catch (err) { console.warn('[view] unmount error', err) }
+        try { currentUnmount() } catch (err) { }
         currentUnmount = null
     }
     import('./components/input-helper.js')
         .then((mod) => mod.unmountInputHelper())
-        .catch(() => { /* 助手没加载成功时不需要卸载 */ })
+        .catch(() => {   })
     
     clearBreadcrumbs()
     hideVerticalPopover()
-    // 默认按「用户」上下文导航；文档页会在自己的 mount 里改成欢迎页上下文
     setNavContext('user')
 
     const container = isFull
@@ -188,13 +180,11 @@ async function mountView(name, ctx) {
     const unmount = await view.mount(container || getShell(), ctx)
     if (typeof unmount === 'function') currentUnmount = unmount
 
-    // 输入助手：只有「词列表、生词表单」需要，语言决定面板内容。
-    // 动态加载：助手模块出问题（半更新、缓存、语法错）时只是没有助手，不会拖垮整个视图。
     if (IME_VIEWS.has(name) && ctx.params && ctx.params.lang) {
         const lang = ctx.params.lang
         import('./components/input-helper.js')
             .then((mod) => mod.mountInputHelper({ lang }))
-            .catch((err) => console.warn('[ime] 输入助手加载失败，已跳过', err))
+            .catch((err) => {})
     }
     applyBreadcrumbs()
     syncHeader()
@@ -224,7 +214,6 @@ async function bootstrap() {
     const theme = getEnum(LS_KEYS.theme, THEME_VALUES, DEFAULT_THEME)
     applyTheme(theme)
 
-    // 字体与字号存在 localStorage，启动时须应用，否则界面与设置页显示不一致。
     initFont()
     applyFontSize(getStoredFontSize())
 
@@ -232,10 +221,8 @@ async function bootstrap() {
     try {
         await loadLanguages()
     } catch (err) {
-        console.warn('[bootstrap] 语言元信息加载失败', err)
     }
 
-    // 检索同步需要「转写 ⇄ 原文」转换，先加载这些语言的文字档案
     await preloadScriptProfiles(SCRIPT_SEARCH_LANGS)
 
     let cur = null
@@ -262,7 +249,6 @@ async function bootstrap() {
     })
 
     router.onError(({ error }) => {
-        console.error(error)
         const main = document.getElementById('view')
         if (main) {
             replace(main,
@@ -280,7 +266,6 @@ async function bootstrap() {
 }
 
 bootstrap().catch((err) => {
-    console.error(err)
     setBootLoaderText('启动失败')
     renderFatal(String(err && err.message || err))
     hideBootLoader()

@@ -1,4 +1,3 @@
-/** 语言列表：按 classical 分组，组内可拖动排序（顺序存 settings.languageOrder） */
 
 import { h, replace } from '../utils/dom.js'
 import { bdiNode } from '../utils/bdi.js'
@@ -304,7 +303,6 @@ export default {
     }
 }
 
-/** 按 settings.languageOrder 排序，未在 order 中的按 LANGUAGES 原顺序追加 */
 function orderedLanguages(order) {
     const arr = Array.isArray(order) ? order : []
     const posMap = new Map(arr.map((c, i) => [c, i]))
@@ -317,10 +315,6 @@ function orderedLanguages(order) {
     })
 }
 
-/**
- * 补齐所有语言 code，返回完整顺序数组。
- * 保证 reorder 时拿到的是全量列表，不受 settings 里存的子集影响。
- */
 function buildFullOrder(order) {
     const arr = Array.isArray(order) ? [...order] : []
     const seen = new Set(arr)

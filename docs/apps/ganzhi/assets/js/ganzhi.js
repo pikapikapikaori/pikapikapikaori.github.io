@@ -13,10 +13,9 @@ function Lunar(date) {
     this._difDay = 0
     this._leapMonth = false
 
-    this.checkDate()                          // 检查传入的日期是否正确，正确的话修改this中的年月日。不正确的话用当前日期计算
-    this.init()                               // 初始化
+    this.checkDate()
+    this.init()
 }
-// 天干地支算法参数
 Lunar.prototype.D = 0.2422
 
 Lunar.prototype.C = [
@@ -33,30 +32,29 @@ Lunar.prototype.monthDiZhi = ['寅', '卯', '辰', '巳', '午', '未', '申', '
 
 // 1900年-2100年每年的农历月份信息。第一位表示闰月是大月（1）还是小月（0）。第二三四位转换成二进制表示每个月份是大月（1）还是小月（0）。最后一位表示闰月在第几月，为0表示没有闰月。
 Lunar.prototype.dateInfo = [
-    0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2, // 1900-1909
-    0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977, // 1910-1919
-    0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970, // 1920-1929
-    0x06566, 0x0d4a0, 0x0ea50, 0x06e95, 0x05ad0, 0x02b60, 0x186e3, 0x092e0, 0x1c8d7, 0x0c950, // 1930-1939
-    0x0d4a0, 0x1d8a6, 0x0b550, 0x056a0, 0x1a5b4, 0x025d0, 0x092d0, 0x0d2b2, 0x0a950, 0x0b557, // 1940-1949
-    0x06ca0, 0x0b550, 0x15355, 0x04da0, 0x0a5b0, 0x14573, 0x052b0, 0x0a9a8, 0x0e950, 0x06aa0, // 1950-1959
-    0x0aea6, 0x0ab50, 0x04b60, 0x0aae4, 0x0a570, 0x05260, 0x0f263, 0x0d950, 0x05b57, 0x056a0, // 1960-1969
-    0x096d0, 0x04dd5, 0x04ad0, 0x0a4d0, 0x0d4d4, 0x0d250, 0x0d558, 0x0b540, 0x0b6a0, 0x195a6, // 1970-1979
-    0x095b0, 0x049b0, 0x0a974, 0x0a4b0, 0x0b27a, 0x06a50, 0x06d40, 0x0af46, 0x0ab60, 0x09570, // 1980-1989
-    0x04af5, 0x04970, 0x064b0, 0x074a3, 0x0ea50, 0x06b58, 0x055c0, 0x0ab60, 0x096d5, 0x092e0, // 1990-1999
-    0x0c960, 0x0d954, 0x0d4a0, 0x0da50, 0x07552, 0x056a0, 0x0abb7, 0x025d0, 0x092d0, 0x0cab5, // 2000-2009
-    0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930, // 2010-2019
-    0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530, // 2020-2029
-    0x05aa0, 0x076a3, 0x096d0, 0x04bd7, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45, // 2030-2039
-    0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0, // 2040-2049
-    0x14b63, 0x09370, 0x049f8, 0x04970, 0x064b0, 0x168a6, 0x0ea50, 0x06b20, 0x1a6c4, 0x0aae0, // 2050-2059
-    0x0a2e0, 0x0d2e3, 0x0c960, 0x0d557, 0x0d4a0, 0x0da50, 0x05d55, 0x056a0, 0x0a6d0, 0x055d4, // 2060-2069
-    0x052d0, 0x0a9b8, 0x0a950, 0x0b4a0, 0x0b6a6, 0x0ad50, 0x055a0, 0x0aba4, 0x0a5b0, 0x052b0, // 2070-2079
-    0x0b273, 0x06930, 0x07337, 0x06aa0, 0x0ad50, 0x14b55, 0x04b60, 0x0a570, 0x054e4, 0x0d160, // 2080-2089
-    0x0e968, 0x0d520, 0x0daa0, 0x16aa6, 0x056d0, 0x04ae0, 0x0a9d4, 0x0a2d0, 0x0d150, 0x0f252, // 2090-2099
-    0x0d520// //2100
+    0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
+    0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977,
+    0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970,
+    0x06566, 0x0d4a0, 0x0ea50, 0x06e95, 0x05ad0, 0x02b60, 0x186e3, 0x092e0, 0x1c8d7, 0x0c950,
+    0x0d4a0, 0x1d8a6, 0x0b550, 0x056a0, 0x1a5b4, 0x025d0, 0x092d0, 0x0d2b2, 0x0a950, 0x0b557,
+    0x06ca0, 0x0b550, 0x15355, 0x04da0, 0x0a5b0, 0x14573, 0x052b0, 0x0a9a8, 0x0e950, 0x06aa0,
+    0x0aea6, 0x0ab50, 0x04b60, 0x0aae4, 0x0a570, 0x05260, 0x0f263, 0x0d950, 0x05b57, 0x056a0,
+    0x096d0, 0x04dd5, 0x04ad0, 0x0a4d0, 0x0d4d4, 0x0d250, 0x0d558, 0x0b540, 0x0b6a0, 0x195a6,
+    0x095b0, 0x049b0, 0x0a974, 0x0a4b0, 0x0b27a, 0x06a50, 0x06d40, 0x0af46, 0x0ab60, 0x09570,
+    0x04af5, 0x04970, 0x064b0, 0x074a3, 0x0ea50, 0x06b58, 0x055c0, 0x0ab60, 0x096d5, 0x092e0,
+    0x0c960, 0x0d954, 0x0d4a0, 0x0da50, 0x07552, 0x056a0, 0x0abb7, 0x025d0, 0x092d0, 0x0cab5,
+    0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930,
+    0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530,
+    0x05aa0, 0x076a3, 0x096d0, 0x04bd7, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45,
+    0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0,
+    0x14b63, 0x09370, 0x049f8, 0x04970, 0x064b0, 0x168a6, 0x0ea50, 0x06b20, 0x1a6c4, 0x0aae0,
+    0x0a2e0, 0x0d2e3, 0x0c960, 0x0d557, 0x0d4a0, 0x0da50, 0x05d55, 0x056a0, 0x0a6d0, 0x055d4,
+    0x052d0, 0x0a9b8, 0x0a950, 0x0b4a0, 0x0b6a6, 0x0ad50, 0x055a0, 0x0aba4, 0x0a5b0, 0x052b0,
+    0x0b273, 0x06930, 0x07337, 0x06aa0, 0x0ad50, 0x14b55, 0x04b60, 0x0a570, 0x054e4, 0x0d160,
+    0x0e968, 0x0d520, 0x0daa0, 0x16aa6, 0x056d0, 0x04ae0, 0x0a9d4, 0x0a2d0, 0x0d150, 0x0f252,
+    0x0d520
 ]
 
-// 节气数组
 Lunar.prototype.jieqi = [
     '立春', '雨水', '惊蛰', '春分', '清明', '谷雨', '立夏', '小满', '芒种', '夏至', '小暑', '大暑',
     '立秋', '处暑', '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至', '小寒', '大寒'
@@ -64,7 +62,6 @@ Lunar.prototype.jieqi = [
 
 Lunar.prototype.checkDate = function () {
     let date = this._date
-    // 判断是否有传值，没有传值默认以当前日期计算
     if (!date) {
         this._error = '无传值'
     } else if (!(/\d{4}-\d{1,2}-\d{1,2}/.test(date))) {
@@ -85,7 +82,6 @@ Lunar.prototype.checkDate = function () {
     }
 }
 
-// 初始化（将阳历转换为对应的阴历年份月份和日期）
 Lunar.prototype.init = function () {
     let firstDay = '01-31-1900'
     let newDay = this.month + '-' + this.day + '-' + this.year
@@ -109,17 +105,15 @@ Lunar.prototype.init = function () {
     if (this.leapMonth(i) > 0) {
         this._difmonth -= 1
     }
-    this.ylYear = i// 农历哪一年
-    // 计算月份，依次减去1~12月份的天数，直到offset小于下个月的天数
+    this.ylYear = i
     let curMonthDays = this.monthDays(this.ylYear, 1)
-    // 判断是否该年是否存在闰月以及闰月的天数
     this._leap = this.leapMonth(this.ylYear)
     if (this._leap != 0) {
         this._leapDays = this.leapDays(this.ylYear)
     }
     let j = 1
     for (j = 1; j < 13 && curMonthDays < offset; curMonthDays = this.monthDays(this.ylYear, ++j)) {
-        if (this._leap == j) { // 闰月
+        if (this._leap == j) {
             offset -= curMonthDays
             this._difmonth += 1
             this._leapMonth = true
@@ -140,9 +134,8 @@ Lunar.prototype.init = function () {
     this.ylDay = offset
 }
 
-// 获取农历某年的总天数
 Lunar.prototype.getYearDays = function (year) {
-    let sum = 348// 12*29=348,不考虑小月的情况下
+    let sum = 348
     for (let i = 0x8000; i >= 0x10; i >>= 1) {
         sum += (this.dateInfo[year - 1900] & i) ? 1 : 0
     }
@@ -150,7 +143,6 @@ Lunar.prototype.getYearDays = function (year) {
     return result
 }
 
-// 获取农历某年闰月的天数
 Lunar.prototype.leapDays = function (year) {
     if (this.leapMonth(year)) {
         return (this.dateInfo[year - 1900] & 0x10000) ? 30 : 29
@@ -159,18 +151,15 @@ Lunar.prototype.leapDays = function (year) {
     }
 }
 
-// 获取农历某年的闰月为几月
 Lunar.prototype.leapMonth = function (year) {
     year = year ? year : this.ylYear
     return (this.dateInfo[year - 1900] & 0xf)
 }
 
-// 获取农历某年某月的天数
 Lunar.prototype.monthDays = function (year, month) {
     return (this.dateInfo[year - 1900] & (0x10000 >> month)) ? 30 : 29
 }
 
-// 获取阳历对应的阴历文本格式（例：二月初一）
 Lunar.prototype.getLunarTime = function () {
     let dateStr = ''
     if (this._leapMonth) {
@@ -215,32 +204,27 @@ Lunar.prototype.getLunarTime = function () {
     return dateStr
 }
 
-// 获取该年对应的天干地支年
 Lunar.prototype.getYearGanZhi = function (ylYear) {
     ylYear = ylYear ? ylYear : this.ylYear
     return this.getYearTianGan(ylYear) + this.getYearDiZhi(ylYear) + '年'
 }
 
-// 获取该年对应的年天干
 Lunar.prototype.getYearTianGan = function (ylYear) {
     ylYear = ylYear ? ylYear : this.ylYear
     return this.tianGan[(ylYear - 4) % 10]
 }
 
-// 获取该年对应的年地支
 Lunar.prototype.getYearDiZhi = function (ylYear) {
     ylYear = ylYear ? ylYear : this.ylYear
     return this.yearDiZhi[(ylYear - 4) % 12]
 }
 
-// 获取该年对应的天干地支月
 Lunar.prototype.getMonthGanZhi = function (ylYear, ylMonth) {
     ylYear = ylYear ? ylYear : this.ylYear
     ylMonth = ylMonth ? ylMonth : this.ylMonth
     return this.getMonthTianGan(ylYear) + this.getMonthDiZhi(ylMonth)
 }
 
-// 获取该年对应的月天干
 Lunar.prototype.getMonthTianGan = function (ylYear) {
     ylYear = ylYear ? ylYear : this.ylYear
     let jieQi = []
@@ -360,28 +344,22 @@ Lunar.prototype.getMonthDiZhi = function (ylMonth) {
     return this.monthDiZhi[month - 1]
 }
 
-// 获取该年对应的天干地支日
 Lunar.prototype.getDayGanZhi = function () {
     return this.tianGan[this._difDay % 10] + this.yearDiZhi[(this._difDay + 4) % 12] + '日'
 }
 
-// 获取相近的节气
 Lunar.prototype.getJieQi = function (year, month) {
     let min = 0, max = 0
-    // 获取年份的后两位数
     year = year ? year % 100 : this.year % 100
-    // 获取月份
     month = month ? month : this.month
-    // 月份不为1的时候
     if (month > 1) {
         min = 2 * month - 4
         max = 2 * month - 3
-    } else { // 月份为1的时候
+    } else {
         min = 22
         max = 23
     }
     let temp = {}
-    // 匹配意外的日期
     if ((this.year === 1911 && month === 5) || (this.year === 1902 && month === 6) || ((this.year === 1925 || this.year === 2016) && month === 7) || (this.year === 1982 && month === 1) || (this.year === 2002 && month === 8) || (this.year === 1927 && month === 9) || (this.year === 2089 && month === 11) || (this.year === 1954 && month === 12)) {
         temp[this.jieqi[min]] = parseInt(year * this.D + this.C[min]) - Math.floor((year - 1) / 4) + 1
         temp[this.jieqi[max]] = parseInt(year * this.D + this.C[max]) - Math.floor((year - 1) / 4)
@@ -403,13 +381,11 @@ Lunar.prototype.getJieQi = function (year, month) {
         return temp
     }
 
-    // 无意外的时候返回正常的数据
     temp[this.jieqi[min]] = parseInt(year * this.D + this.C[min]) - Math.floor((year - 1) / 4)
     temp[this.jieqi[max]] = parseInt(year * this.D + this.C[max]) - Math.floor((year - 1) / 4)
     return temp
 }
 
-// 获取两个日期相差的天数
 Lunar.prototype.getDaysByDateString = function (dt1, dt2) {
     const dt1array = dt1.replace('/-/g', '/').split('-')
     const dt2array = dt2.replace('/-/g', '/').split('-')
@@ -419,7 +395,6 @@ Lunar.prototype.getDaysByDateString = function (dt1, dt2) {
     return Math.floor(diffDate / (1 * 24 * 60 * 60 * 1000))
 }
 
-// 获取当前日期
 Lunar.prototype.getDateData = function () {
     let date = new Date()
     return {
@@ -433,7 +408,6 @@ Lunar.prototype.getDateData = function () {
     }
 }
 
-// 获取当前周
 Lunar.prototype.getWeek = function (data) {
     let date = data
 

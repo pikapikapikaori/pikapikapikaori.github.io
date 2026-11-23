@@ -1,4 +1,3 @@
-/** 德语：变音与 ß。 */
 const UMLAUT = '\u0308'
 
 export default {

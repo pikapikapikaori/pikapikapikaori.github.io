@@ -14,10 +14,8 @@ import { getScriptProfile } from '../services/grammar-service.js'
 
 let overlayEl = null
 let escHandler = null
-/** 订阅「转写、短音符」全局开关；卡片关闭时退订 */
 let offToggles = null
 
-/** 卡片关掉后，把右下角工具列与订阅一起恢复 */
 function detachOverlay() {
     if (offToggles) {
         offToggles()
@@ -26,10 +24,7 @@ function detachOverlay() {
     document.documentElement.classList.remove('card-overlay-open')
 }
 
-/** 打开放大版卡片；opts 里的 language、paradigmTpl、onGrammarRef、resolveDerivative、onDerivativeClick、onClose 可选 */
 export function openCardOverlay(word, opts = {}) {
-    // 已经有一张卡片在屏幕上 = 这是「跳到派生词」式的原地替换：不重播入场动画，
-    // 否则整个弹窗会再淡入 + 放大一次，看起来像页面闪了一下
     const replacing = !!document.querySelector('.card-overlay')
     closeCardOverlay()
 
@@ -42,11 +37,9 @@ export function openCardOverlay(word, opts = {}) {
     const resolvePosRef = opts.resolvePosRef || null
     const posGrammarRef = typeof resolvePosRef === 'function' ? resolvePosRef(word.pos) : null
     const onDerivativeClick = opts.onDerivativeClick || null
-    // 跳到派生词时先不关：等新卡片直接替换旧卡片，中间不出现空白
     const stayOpenOnDerivative = opts.stayOpenOnDerivative === true
     const onClose = opts.onClose || null
 
-    // 「显示转写」和语法页、词列表共用同一个开关：localStorage 记状态，html 上的 class 控显示
     const scriptProfile = opts.scriptProfile || getScriptProfile(language)
     const toRoman = typeof scriptProfile?.toRoman === 'function'
         ? (text) => scriptProfile.toRoman(text)
@@ -54,18 +47,13 @@ export function openCardOverlay(word, opts = {}) {
     const scriptRange = toRoman && scriptProfile?.scriptRange instanceof RegExp
         ? scriptProfile.scriptRange
         : null
-    // 转写、短音符由右下角工具列统一切换，词卡只订阅它的结果
     const showBreve = BREVE_LANGS.includes(language)
 
     const sources = allSources(word)
-    // 「手动」就是默认来源：有外部来源时就多一个 tab，别让含义没处可切
     if (!sources.includes('manual')) sources.unshift('manual')
-    // 默认落在「有含义」的那个来源上，免得一打开是对着空 tab
     const sourceWithMeanings = sources.find((s) => (word.meanings || []).some((m) => (m.source || 'manual') === s))
     let activeSource = sourceWithMeanings || sources[0] || 'manual'
-    /** 多张形态变形表时当前选中的那张 */
     let activeTable = null
-    /** 「固定搭配」「例句」各自的来源 tab（与「含义」互不影响） */
     let activeCollocationSource = firstSourceWith(word.collocations) || activeSource
     let activeExampleSource = firstSourceWith(word.examples) || activeSource
 
@@ -94,20 +82,17 @@ export function openCardOverlay(word, opts = {}) {
     overlayEl = h('div', { class: 'card-overlay' + (replacing ? ' card-overlay--instant' : '') }, backdrop, panel)
     annotateBdi(overlayEl, language)
     document.body.appendChild(overlayEl)
-    // 卡片盖住了整页：右下角工具列里的「回到顶部」这时没有意义（它滚的是背后的页面）
     document.documentElement.classList.add('card-overlay-open')
     offToggles = onToggles(() => {
         annotateRoman()
         annotateBreveText()
     })
 
-    /** 跳转前先关闭 overlay，避免弹窗留在旧页面上 */
     function wrappedGrammarRef(ref) {
         close()
         if (typeof onGrammarRef === 'function') onGrammarRef(ref)
     }
 
-    /** 跳转前关闭 overlay（stayOpenOnDerivative 时交给调用方用新卡片替换） */
     function wrappedDerivativeClick(target) {
         if (!stayOpenOnDerivative) close()
         if (typeof onDerivativeClick === 'function') onDerivativeClick(target)
@@ -124,7 +109,6 @@ export function openCardOverlay(word, opts = {}) {
         body.replaceChildren()
 
         const langMeta = getLanguage(word.language)
-        // 分区标题跟随该语言的 terms
         const terms = termsOf(langMeta, word.pos)
         const canPosRef = typeof onGrammarRef === 'function' && !!posGrammarRef
             && langMeta?.grammar !== false
@@ -138,7 +122,6 @@ export function openCardOverlay(word, opts = {}) {
                     : null
             }, posLabel(word.pos))
         )
-        // 属性（语法性、自他、助动词…）紧跟词性，排在变位类型与标签之前
         for (const def of fieldDefsOfTemplate(paradigmTpl, word.pos)) {
             for (const value of fieldValues(word, def.key)) {
                 const label = (def.options.find((o) => o.value === value) || {}).label || value
@@ -216,7 +199,6 @@ export function openCardOverlay(word, opts = {}) {
                 const tbl = createParadigmTable(tableTpl, tableData, {
                     lang: language,
                     mode: 'view',
-                    // 只有一张表时保留表自己的标题；多张时用 tab 名
                     showTitle: candidates.length <= 1,
                     hideColumns: hiddenGender.columns,
                     hideRows: hiddenGender.rows
@@ -332,7 +314,6 @@ export function openCardOverlay(word, opts = {}) {
         annotateBreveText()
     }
 
-    /** 把短音符包起来：默认隐藏，按钮切换显示 */
     function annotateBreveText() {
         if (!showBreve) return
         if (!isBreveOn()) return
@@ -343,7 +324,6 @@ export function openCardOverlay(word, opts = {}) {
         })
     }
 
-    /** 在原文旁标出转写：标题、词干、变格表、例句、派生词 */
     function annotateRoman() {
         if (!toRoman || !scriptRange || !isRomanOn()) return
         annotateDualText(head, { range: scriptRange, toRoman, selector: '.card-overlay__lemma' })
@@ -388,7 +368,6 @@ export function closeCardOverlay() {
     detachOverlay()
 }
 
-/** 该区块里第一个「有内容」的来源，用来决定 tab 的初始落点 */
 function firstSourceWith(items) {
     const list = Array.isArray(items) ? items : []
     for (const it of list) {

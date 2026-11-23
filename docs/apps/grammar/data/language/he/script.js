@@ -1,14 +1,3 @@
-/**
- * 圣经希伯来语的「转写 ⇄ 希伯来字母」档案（与 sa / mnc / grc 的 script.js 同一套协议）。
- *
- * 输入方案（元音点默认**短**音，点错了用户自己在「修饰符」里改）：
- *   辅音  b→ב g→ג d→ד h→ה v/w→ו z→ז kh→ח t→ט y→י k→כ l→ל m→מ n→נ s→ס `→ע
- *         p→פ ts→צ q→ק r→ר sh→ש th→ת（t 也写作 ת）
- *   元音  a→ַ e→ֶ i→ִ o→ֹ u→ֻ ə→ְ
- *   词尾形 词末的 k/m/n/p/ts 自动写成 ך ם ן ף ץ
- *
- * 重音（连重音）、dagesh、shin/sin 点**不由转写处理**，交给修饰符或键盘符号键。
- */
 
 const CONSONANTS = [
     ['sh', 'ש'], ['kh', 'ח'], ['ts', 'צ'], ['th', 'ת'],
@@ -59,7 +48,6 @@ function convertWord(word) {
         out += word[i]
         i += 1
     }
-    // 词尾形
     const chars = [...out]
     for (let k = chars.length - 1; k >= 0; k--) {
         const base = chars[k].normalize('NFD')[0]
@@ -70,12 +58,10 @@ function convertWord(word) {
     return chars.join('')
 }
 
-/** 拉丁转写 → 希伯来字母 + 元音点 */
 export function toScript(input) {
     return String(input ?? '').replace(/[A-Za-z`\u0259]+/g, (word) => convertWord(word.toLowerCase()))
 }
 
-/** 希伯来字母 + 元音点 → 拉丁转写 */
 export function toRoman(input) {
     const nfd = [...String(input ?? '').normalize('NFD')]
     let out = ''

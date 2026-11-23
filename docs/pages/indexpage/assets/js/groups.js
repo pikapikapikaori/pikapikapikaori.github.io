@@ -114,15 +114,13 @@ export function createGroups (state, elements) {
                 drag.moved = true
                 rail.classList.add('is-dragging')
                 if (rail.setPointerCapture) {
-                    try { rail.setPointerCapture(event.pointerId) } catch (error) { /* 忽略 */ }
+                    try { rail.setPointerCapture(event.pointerId) } catch (error) {   }
                 }
             }
             if (!drag.moved) return
             rail.scrollLeft = drag.left - delta
         })
 
-        /* 仅当指针确实移动且落点属于发起拖拽的按钮时压制一次点击；
-           pointercancel 与超时都清除，键盘激活（detail 为 0）不受影响。 */
         function endDrag (armSuppression) {
             if (!drag) return
             const moved = drag.moved
@@ -225,7 +223,6 @@ export function createGroups (state, elements) {
             '<h2 class="group-title" id="group-title">' + escapeHtml(group.name) + '</h2>' +
             '</header>' +
             '<ol class="site-list">' + group.sites.map(siteRow).join('') + '</ol>'
-        /* 初始以 aria-label 提供名称，渲染后交给 aria-labelledby 指向的标题。 */
         elements.panel.setAttribute('aria-labelledby', 'group-title')
         elements.panel.removeAttribute('aria-label')
         invalidateStatusIndex()

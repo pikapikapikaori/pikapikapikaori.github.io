@@ -28,7 +28,6 @@ function plugin(hook, vm) {
 
     const blockTagConfigMap = new Map()
     const inlineTagConfigMap = new Map()
-    const warnedIconIdentifiers = new Set()
 
     function resolveIcon(identifier) {
         const parts = identifier.split('.')
@@ -37,12 +36,6 @@ function plugin(hook, vm) {
         const group = icons[parts[0]]
         const value = group ? group[parts[1]] : null
         return typeof value === 'string' ? value : null
-    }
-
-    function warnUnknownIcon(identifier) {
-        if (warnedIconIdentifiers.has(identifier)) return
-        warnedIconIdentifiers.add(identifier)
-        console.warn(`[htmlReplace] Unknown icon: ${identifier}`)
     }
 
     function resolvePlaceholders(str) {
@@ -82,9 +75,6 @@ function plugin(hook, vm) {
                         resolvePlaceholders(item.entireHtml)
                     )
                     break
-
-                default:
-                    console.warn(`[htmlReplace] Unknown type: ${item.type} (tag: ${item.tag})`)
             }
         })
     }
@@ -99,10 +89,7 @@ function plugin(hook, vm) {
 
         content = content.replace(inlineSvgMarkup, (fullMatch, identifier) => {
             const svg = resolveIcon(identifier)
-            if (!svg) {
-                warnUnknownIcon(identifier)
-                return fullMatch
-            }
+            if (!svg) return fullMatch
             return `<!-- ${commentReplaceMark} <span class="inline-svg">${svg}</span> -->`
         })
 
@@ -118,7 +105,6 @@ function plugin(hook, vm) {
                 const searchAfter = startIndex + startMarker.length
                 const endIndex = content.indexOf(endMarker, searchAfter)
                 if (endIndex === -1) {
-                    console.warn(`[comment‑wrapper] cannot find ${tagKey}:end for ${startMarker}`)
                     scanPos = searchAfter
                     continue
                 }
@@ -183,10 +169,7 @@ function plugin(hook, vm) {
         commentNodes.forEach(comment => {
             const identifier = comment.nodeValue.trim().slice('svg:'.length)
             const svg = resolveIcon(identifier)
-            if (!svg) {
-                warnUnknownIcon(identifier)
-                return
-            }
+            if (!svg) return
 
             const span = document.createElement('span')
             span.className = 'inline-svg'

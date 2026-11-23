@@ -1,9 +1,5 @@
-/**
- * 极简发布订阅
- */
 
 export function createEmitter() {
-    /** @type {Map<string, Set<Function>>} */
     const map = new Map()
 
     function on(type, fn) {
@@ -29,10 +25,9 @@ export function createEmitter() {
     function emit(type, ...args) {
         const set = map.get(type)
         if (!set) return
-        // 复制一份，避免回调里 off 导致迭代异常
         for (const fn of Array.from(set)) {
             try { fn(...args) }
-            catch (err) { console.error(`[emitter] listener error on "${type}"`, err) }
+            catch (err) { }
         }
     }
 
@@ -63,7 +58,6 @@ export function createStore(initialState) {
             return state
         },
         subscribe(fn) { return bus.on('change', fn) },
-        /** 不触发变更通知，用于内部缓存 */
         _raw() { return state }
     }
 }

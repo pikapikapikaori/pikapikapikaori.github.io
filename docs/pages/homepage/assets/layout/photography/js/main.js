@@ -19,7 +19,6 @@ function photoMap(App) {
     return map
 }
 
-/* 只接受纯位置值，避免配置写入任意样式。 */
 function safePosition(value) {
     return typeof value === 'string' && /^[-\w.%\s]+$/.test(value) ? value : ''
 }
@@ -103,7 +102,6 @@ function rowHeightUnits(row) {
     }, 0)
 }
 
-/* 每列按行从上往下排；超过最大高度时把余下各行接到新列。 */
 function splitColumns() {
     const result = []
 
@@ -276,7 +274,6 @@ export default {
 
         const scheduleProgress = App.utils.debounceRaf(updateProgress)
 
-        /* 先按整栏宽判断行数：不超过三行保持单栏，超过才分到三栏。 */
         function fitCaptions() {
             if (disposed) return
 
@@ -290,7 +287,6 @@ export default {
             })
         }
 
-        /* 基准单位先按配置取值，再用舞台剩余高度反算，保证列高不超过最大单位数。 */
         function fitUnit() {
             if (disposed) return
 
@@ -331,7 +327,6 @@ export default {
                     parseFloat(trackStyle.paddingTop) -
                     parseFloat(trackStyle.paddingBottom)
 
-                /* 矮视口空间不足，把底部留白让给照片，避免说明被裁掉。 */
                 if (stage.clientHeight < 300) {
                     available = stage.clientHeight -
                         parseFloat(stageStyle.paddingTop) - 2
@@ -533,7 +528,6 @@ export default {
                 return
             }
 
-            /* 窄屏只有纵向滚动，方向键与 Home、End 交还页面。 */
             if (ctx.narrow) return
 
             if (event.key === 'ArrowRight') {
@@ -576,8 +570,6 @@ export default {
             momentumRaf = requestAnimationFrame(step)
         }
 
-        /* 链接与图片默认可被原生拖拽，dragstart 会中断 pointer 序列，
-         * 故在轨道内一并取消。 */
         function onDragStart(event) {
             event.preventDefault()
         }
@@ -595,8 +587,6 @@ export default {
             cancelMomentum()
         }
 
-        /* 指针捕获会改写后续 click 的目标，故越过拖动阈值后才捕获，
-         * 单击图片仍由图片自身接收。 */
         function onPointerMove(event) {
             if (!dragging || event.pointerId !== dragPointer) return
 
@@ -612,7 +602,7 @@ export default {
 
                 try {
                     track.setPointerCapture(event.pointerId)
-                } catch (e) { /* 忽略：合成事件没有可捕获的指针 */ }
+                } catch (e) {   }
             }
         }
 
@@ -659,7 +649,6 @@ export default {
             syncOpenLightbox()
         }
 
-        /* 跨过 768px 时行组与单位上限都要重算，不能只改样式。 */
         function onNarrowChange() {
             if (ctx.narrow === narrow.matches) return
 

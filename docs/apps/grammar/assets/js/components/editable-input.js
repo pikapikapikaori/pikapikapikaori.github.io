@@ -1,4 +1,3 @@
-/** 自绘的单行 contenteditable 输入框，支持 bdi 包裹与占位文字。 */
 
 import { h } from '../utils/dom.js'
 import { bdiNode, hasScript } from '../utils/bdi.js'
@@ -18,7 +17,6 @@ export function createEditableInput({
     onValueChange = null,
     onPlaceholderChange = null
 } = {}) {
-    // 字体语言（lang）与 bdi 判定用的语言可以不同：如「含义」输入框字体是中文，但里面可能贴原文
     const scriptLang = bdiLang || lang
 
     const classes = [...new Set(['input', 'input--editable',
@@ -38,17 +36,14 @@ export function createEditableInput({
         dataset
     })
 
-    /** 内容 → 纯文本（单行：换行折成空格） */
     function readText() {
         return (el.textContent || '').replace(/[\r\n]+/g, ' ')
     }
 
-    /** bdi 上该带哪个语言：只有真含这门语言的文字时才标（纯转写不标） */
     function paintLang(text) {
         return hasScript(text, scriptLang) ? scriptLang : null
     }
 
-    /** 当前 DOM 是否已经是「整段一个 bdi」的形状 */
     function isPainted(text) {
         if (!text) return el.childNodes.length === 0
         const only = Array.from(el.childNodes).filter((node) =>
@@ -58,7 +53,6 @@ export function createEditableInput({
         return node.nodeName === 'BDI' && (node.textContent || '') === text
     }
 
-    /** 整段一个 bdi：字体栈自己会回落，不必逐字符切段 */
     function paint(text) {
         if (!text) {
             el.replaceChildren()
@@ -69,7 +63,6 @@ export function createEditableInput({
 
     let lastText = null
 
-    /** 把内容重新包好 bdi，并尽量把光标留在原处；带空白规则的输入框在这里一并收掉多余空白 */
     function sync() {
         const caret = caretOffsetIn(el)
         const mode = el.dataset ? el.dataset.space : null
@@ -92,7 +85,6 @@ export function createEditableInput({
         else form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))
     }
 
-    /** 在光标处插入纯文本（粘贴用，避免把剪贴板里的 HTML 带进来） */
     function insertText(text) {
         const sel = window.getSelection()
         const range = sel && sel.rangeCount ? sel.getRangeAt(0) : null
@@ -137,7 +129,6 @@ export function createEditableInput({
         emitInput()
         const mode = el.dataset ? el.dataset.space : null
         if (!mode) return
-        // 粘贴的整段文本两端也要收掉；输入时只收开头，词中的空格留着
         const clean = cleanSpace(readText(), mode)
         if (clean === readText()) return
         paint(clean)
@@ -148,7 +139,6 @@ export function createEditableInput({
     el.addEventListener('keydown', (e) => {
         if (e.shiftKey) return
         if (e.key !== 'Enter' && e.key !== 'NumpadEnter') return
-        // 和原生 <input> 一致：回车提交所在表单，而不是换行
         e.preventDefault()
         submitForm()
     })
@@ -195,7 +185,6 @@ export function createEditableInput({
 
     paint(String(value ?? ''))
     lastText = readText()
-    // 初始 placeholder 不通知：此时调用方还没拿到返回的元素
     placeholderText = String(placeholder ?? '')
     el.disabled = disabled
     return el

@@ -1,4 +1,3 @@
-
 export const isMark = (ch) => /\p{M}/u.test(ch)
 
 export function splitTail(text) {

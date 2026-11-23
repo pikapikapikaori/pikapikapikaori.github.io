@@ -1,4 +1,3 @@
-
 export const GRAMMAR_FILES = [
     'la', 'grc', 'he', 'sa', 'mnc', 'ja', 'zh-cls', 'en', 'fr', 'de',
 ]

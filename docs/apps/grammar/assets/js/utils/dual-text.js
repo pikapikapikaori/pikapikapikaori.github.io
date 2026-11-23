@@ -1,4 +1,3 @@
-
 import { notifyToggles } from './view-toggles.js'
 
 export function annotateDualText(root, { range, toRoman, selector = 'td, th' } = {}) {

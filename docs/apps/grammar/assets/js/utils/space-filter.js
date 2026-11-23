@@ -1,4 +1,3 @@
-
 export const NO_SPACE = 'none'
 export const EDGE_SPACE = 'edges'
 

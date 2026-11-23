@@ -1,4 +1,3 @@
-
 import { h } from '../utils/dom.js'
 import {
     indentIcon, outdentIcon, checkboxIcon, ruleIcon,

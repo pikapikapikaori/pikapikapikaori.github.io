@@ -17,7 +17,7 @@
         let theme = localStorage.getItem('grammar:theme') || 'auto'
         if (theme !== 'auto' && theme !== 'light' && theme !== 'dark') theme = 'auto'
         document.documentElement.setAttribute('data-theme', theme)
-    } catch (e) {   }
+    } catch {   }
 
     applyThemeColor()
 
@@ -43,7 +43,7 @@
                 swUrl: '../../sw.js',
                 project: parts.slice(-2).join('/') + '/'
             })
-        }).catch(function (error) {
+        }).catch(function () {
         })
         return
     }

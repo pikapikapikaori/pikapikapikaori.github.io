@@ -1,4 +1,3 @@
-
 const LIGATURES = [
     ['OE', '\u0152'],
     ['oe', '\u0153'],

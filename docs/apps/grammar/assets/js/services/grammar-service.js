@@ -1,4 +1,3 @@
-
 import { GRAMMAR_FILES } from '../config/config.js'
 import { isGrammarDoc, grammarFlags, validateGrammarDoc } from '../models/grammar.js'
 import { verifyGrammarDoc } from '../models/paradigm-generate.js'
@@ -33,7 +32,7 @@ export function loadGrammarMeta(language) {
             if (meta) metaCache.set(language, meta)
             return meta
         })
-        .catch((err) => {
+        .catch(() => {
             return null
         })
         .finally(() => { metaPending.delete(language) })
@@ -54,7 +53,7 @@ export function loadChapter(language, chapterId) {
             chapterCache.set(key, sections)
             return sections
         })
-        .catch((err) => {
+        .catch(() => {
             return []
         })
         .finally(() => { chapterPending.delete(key) })
@@ -107,7 +106,7 @@ export async function loadGrammar(language) {
         cache.set(language, doc)
         return doc
     })()
-        .catch((err) => {
+        .catch(() => {
             return null
         })
         .finally(() => { pending.delete(language) })

@@ -17,6 +17,20 @@
         'zh-Hant': 'zh-Hans'
     }
 
+    const DEFAULT_LANG = 'zh-Hans'
+
+    const DETECT_SCRIPTS = {
+        kana: /[\u3040-\u30FF\uFF65-\uFF9F]/g,
+        han: /[\u4E00-\u9FFF]/g,
+        latin: /[A-Za-z]/g
+    }
+
+    const DETECT_RULES = [
+        { lang: 'ja', script: 'kana', min: 3, ratio: 0.15, ratioWith: 'han' },
+        { lang: 'zh-Hans', script: 'han', min: 1 },
+        { lang: 'en', script: 'latin', min: 1 }
+    ]
+
     const PHOTO_CAPTION_PREFIX = 'photo.caption.'
 
     const SUPPORTED = LANGUAGES.map(function (lang) { return lang.key })
@@ -62,6 +76,7 @@
             'common.quote.text': '式微，式微，胡不归？微君之故，胡为乎中露？<br>式微，式微，胡不归？微君之躬，胡为乎泥中？',
             'common.blog.label': '博客',
             'common.feed.label': '订阅',
+            'feed.boilerplate': ['本文首发', '最后编辑于'],
             'common.email.label': '邮件',
             'common.photo.label': '摄影',
             'common.blog.hint': '文章',
@@ -115,6 +130,7 @@
             'common.quote.text': 'Still wouldst thou sing, and I have ears in vain<br>To thy high requiem become a sod.',
             'common.blog.label': 'Blog',
             'common.feed.label': 'Feed',
+            'feed.boilerplate': ['first published', 'Last edited'],
             'common.email.label': 'Email',
             'common.photo.label': 'Photography',
             'common.blog.hint': 'Posts',
@@ -162,6 +178,7 @@
             'common.quote.text': 'ひるもなほ<br>星みるひとの<br>目にも似る<br>さびしきつかれ<br>早春のたび',
             'common.blog.label': 'ブログ',
             'common.feed.label': 'フィード',
+            'feed.boilerplate': ['最初に公開', '最終編集'],
             'common.email.label': 'メール',
             'common.photo.label': '写真',
             'common.blog.hint': '文章',
@@ -209,7 +226,7 @@
         try {
             const value = new URLSearchParams(window.location.search).get('lang')
             return normalize(value)
-        } catch (e) {}
+        } catch {}
 
         return null
     }
@@ -219,7 +236,7 @@
             const url = new URL(window.location.href)
             url.searchParams.set('lang', lang)
             window.history.replaceState(null, '', url.toString())
-        } catch (e) {   }
+        } catch {   }
     }
 
     function resolveLang() {
@@ -324,7 +341,7 @@
         if (!initial) App.utils.scrollToTopInstant()
 
         listeners.slice().forEach(function (fn) {
-            try { fn(current) } catch (e) {}
+            try { fn(current) } catch {}
         })
     }
 
@@ -350,6 +367,43 @@
     I.list = function (key) {
         const value = DICT[current] ? DICT[current][key] : null
         return Array.isArray(value) ? value : null
+    }
+    I.mergedList = function (key) {
+        const values = []
+
+        SUPPORTED.forEach(function (lang) {
+            const value = DICT[lang] ? DICT[lang][key] : null
+
+            if (Array.isArray(value)) values.push.apply(values, value)
+            else if (value != null) values.push(value)
+        })
+
+        return values
+    }
+    I.defaultLang = DEFAULT_LANG
+    I.detectLang = function (text, sampleLen) {
+        const sample = String(text || '').slice(0, sampleLen)
+        const counts = {}
+
+        Object.keys(DETECT_SCRIPTS).forEach(function (script) {
+            counts[script] = (sample.match(DETECT_SCRIPTS[script]) || []).length
+        })
+
+        for (let i = 0; i < DETECT_RULES.length; i++) {
+            const rule = DETECT_RULES[i]
+            const count = counts[rule.script]
+
+            if (count < rule.min) continue
+
+            if (rule.ratio != null) {
+                const total = count + (counts[rule.ratioWith] || 0)
+                if (count / total < rule.ratio) continue
+            }
+
+            return rule.lang
+        }
+
+        return null
     }
     I.languages = SUPPORTED.slice()
     I.label = function (lang) { return LABELS[lang] || lang }

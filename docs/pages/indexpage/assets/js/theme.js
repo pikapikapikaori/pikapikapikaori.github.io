@@ -7,7 +7,7 @@ export function setupTheme (buttons, meta) {
         try {
             const value = localStorage.getItem(config.themeStorageKey)
             return config.themeModes.indexOf(value) !== -1 ? value : 'auto'
-        } catch (error) {
+        } catch {
             return 'auto'
         }
     }
@@ -24,7 +24,7 @@ export function setupTheme (buttons, meta) {
         if (persist) {
             try {
                 localStorage.setItem(config.themeStorageKey, mode)
-            } catch (error) {
+            } catch {
             }
         }
     }

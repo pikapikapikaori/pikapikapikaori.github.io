@@ -54,7 +54,7 @@
                 swUrl: '../../sw.js',
                 project: parts.slice(-2).join('/') + '/'
             })
-        }).catch(function (error) {
+        }).catch(function () {
         })
         return
     }

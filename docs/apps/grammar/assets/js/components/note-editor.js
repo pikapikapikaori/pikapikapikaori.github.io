@@ -1,4 +1,3 @@
-
 import { h, replace } from '../utils/dom.js'
 import { uid } from '../utils/id.js'
 import { gripIcon } from './icons.js'

@@ -1,4 +1,3 @@
-
 import { createEmitter } from './utils/events.js'
 
 export function createRouter(routes) {

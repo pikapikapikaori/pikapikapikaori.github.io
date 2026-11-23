@@ -17,7 +17,7 @@ export function formatText (template, values) {
 export function hostName (url) {
     try {
         return new URL(url).hostname.replace(/^www\./, '')
-    } catch (error) {
+    } catch {
         return ''
     }
 }
@@ -43,7 +43,7 @@ export function safeUrl (value) {
         const url = new URL(text, window.location.href)
         if (url.protocol !== 'http:' && url.protocol !== 'https:') return ''
         return url.href
-    } catch (error) {
+    } catch {
         return ''
     }
 }

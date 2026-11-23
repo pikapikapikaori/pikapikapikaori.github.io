@@ -1,4 +1,3 @@
-
 import { h, htmlFragment } from './dom.js'
 import { annotateBdi } from './bdi.js'
 import { checkMarkIcon } from '../components/icons.js'

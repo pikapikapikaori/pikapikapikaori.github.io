@@ -4,35 +4,27 @@
     const App = window.App = window.App || {}
     const F = App.feed = {}
     const CFG = App.config
+    const I = App.i18n
 
-    const KANA_MIN = 3
-    const KANA_RATIO = 0.15
+    let boilerplateRe = null
 
-    function detectLang(text, sampleLen) {
-        const sample = String(text || '').slice(0, sampleLen)
+    function boilerplatePattern() {
+        if (boilerplateRe) return boilerplateRe
 
-        const kana = (sample.match(/[\u3040-\u30FF\uFF65-\uFF9F]/g) || []).length
-        const han = (sample.match(/[\u4E00-\u9FFF]/g) || []).length
-        const latin = (sample.match(/[A-Za-z]/g) || []).length
+        const phrases = I.mergedList('feed.boilerplate')
+        if (!phrases.length) return null
 
-        if (kana + han === 0) {
-            return latin > 0 ? 'en' : null
-        }
+        boilerplateRe = new RegExp(phrases.map(function (phrase) {
+            return String(phrase).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        }).join('|'), 'i')
 
-        if (kana >= KANA_MIN && kana / (kana + han) >= KANA_RATIO) {
-            return 'ja'
-        }
-
-        if (han > 0) return 'zh-Hans'
-        if (latin > 0) return 'en'
-        return null
+        return boilerplateRe
     }
-
-    const BOILERPLATE_RE = /本文首发|最后编辑于|first published|Last edited|最初に公開|最終編集/i
 
     function extractContent(html, excerptLen) {
         try {
             const doc = new DOMParser().parseFromString(html, 'text/html')
+            const boilerplate = boilerplatePattern()
 
             const imgEl = doc.querySelector('figure img, img')
             const cover = imgEl ? (imgEl.getAttribute('src') || '') : ''
@@ -41,7 +33,7 @@
                 el.remove()
             })
             doc.querySelectorAll('blockquote').forEach(function (el) {
-                if (BOILERPLATE_RE.test(el.textContent)) el.remove()
+                if (boilerplate && boilerplate.test(el.textContent)) el.remove()
             })
 
             const fullText = (doc.body.textContent || '')
@@ -54,7 +46,7 @@
                 fullText: fullText,
                 excerpt: fullText.slice(0, excerptLen)
             }
-        } catch (e) {
+        } catch {
             return { cover: '', fullText: '', excerpt: '' }
         }
     }
@@ -78,7 +70,7 @@
             const upd = uEl ? uEl.textContent : ''
 
             const info = extractContent(raw, CFG.blog.excerptLength)
-            const lang = detectLang(info.fullText, CFG.blog.langSampleLength)
+            const lang = I.detectLang(info.fullText, CFG.blog.langSampleLength)
 
             return {
                 title: title,
@@ -93,11 +85,11 @@
 
     function getFallback(lang) {
         const map = CFG.fallbackPosts || {}
-        return map[lang] || map['zh-Hans'] || []
+        return map[lang] || map[I.defaultLang] || []
     }
 
     F.loadPosts = function (lang) {
-        lang = lang || 'zh-Hans'
+        lang = lang || I.defaultLang
 
         return fetch(CFG.feedUrl, { mode: 'cors', credentials: 'omit' })
             .then(function (res) {
@@ -115,7 +107,7 @@
 
                 return filtered.slice(0, CFG.blog.postLimit)
             })
-            .catch(function (err) {
+            .catch(function () {
                 return getFallback(lang)
             })
     }

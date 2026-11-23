@@ -1,4 +1,5 @@
 import { zipMaxOutputBytes } from './config.js'
+import { createAbortError } from './abort.js'
 
 const eocdSig = 0x06054b50
 const cdfhSig = 0x02014b50
@@ -7,9 +8,7 @@ const maxComment = 0xFFFF
 const allJsonExtensions = ['.json', '.jsonl']
 
 function abortError() {
-    const error = new Error('已取消导入')
-    error.name = 'AbortError'
-    return error
+    return createAbortError('已取消导入', 'AbortError')
 }
 
 function tooLargeError(maxBytes) {

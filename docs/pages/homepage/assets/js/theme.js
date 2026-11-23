@@ -34,7 +34,7 @@
 
     function notify() {
         listeners.slice().forEach(function (fn) {
-            try { fn(effective()) } catch (e) {}
+            try { fn(effective()) } catch {}
         })
     }
 

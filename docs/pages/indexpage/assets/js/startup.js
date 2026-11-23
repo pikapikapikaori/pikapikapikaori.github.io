@@ -9,7 +9,7 @@
     try {
         const stored = localStorage.getItem(themeStorageKey)
         if (stored === 'auto' || stored === 'light' || stored === 'dark') mode = stored
-    } catch (error) {
+    } catch {
         mode = 'auto'
     }
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -31,7 +31,7 @@
                 swUrl: '../../sw.js',
                 project: parts.slice(-2).join('/') + '/'
             })
-        }).catch(function (error) {
+        }).catch(function () {
         })
         return
     }

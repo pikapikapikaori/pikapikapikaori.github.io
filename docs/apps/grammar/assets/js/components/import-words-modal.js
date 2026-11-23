@@ -101,7 +101,7 @@ export function openImportWordsModal({
                     }
 
                     if (typeof onDone === 'function') {
-                        try { onDone(stats) } catch (e) { }
+                        try { onDone(stats) } catch { }
                     }
 
                     renderResult(stats, close, lang)

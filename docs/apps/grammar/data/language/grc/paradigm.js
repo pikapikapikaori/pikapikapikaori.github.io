@@ -82,10 +82,6 @@ function accentKindOf(unit) {
     return ''
 }
 
-export function hasAccentMark(text) {
-    return toUnits(text).some((unit) => accentKindOf(unit))
-}
-
 function findAccents(units, nuclei) {
     const out = []
     nuclei.forEach((nuc, index) => {

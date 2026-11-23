@@ -590,7 +590,7 @@ class ThemeController {
 
         try {
             applied = await this.applyTheme()
-        } catch (e) {
+        } catch {
         } finally {
             this.deferringUi = false
         }
@@ -814,7 +814,7 @@ function plugin(hook, vm) {
                 const value = rule.style.getPropertyValue(name)
                 if (value) return value.trim()
             }
-        } catch (e) {
+        } catch {
         }
 
         return ''
@@ -1131,7 +1131,7 @@ function plugin(hook, vm) {
                         else if (!next && !prev && !parent.childNodes.length) parent.appendChild(node)
                     })
                 }
-            } catch (e) {
+            } catch {
             }
         }
     }
@@ -1142,7 +1142,7 @@ function plugin(hook, vm) {
         themeJsCleanups.forEach(function (cleanup) {
             try {
                 cleanup()
-            } catch (e) {
+            } catch {
             }
         })
         themeJsCleanups = []
@@ -1166,7 +1166,7 @@ function plugin(hook, vm) {
 
         try {
             themeModule = await loadThemeModule(jsPath)
-        } catch (e) {
+        } catch {
 
             return false
         }
@@ -1190,7 +1190,7 @@ function plugin(hook, vm) {
                     if (typeof cleanup === 'function') themeJsCleanups.push(cleanup)
                 }
             }))
-        } catch (e) {
+        } catch {
 
             return false
         } finally {
@@ -1635,7 +1635,7 @@ function plugin(hook, vm) {
         const generation = themeRenderGeneration
 
         Promise.resolve(restorePromise)
-            .catch(function (error) {
+            .catch(function () {
             })
             .then(function () {
                 // A user-triggered render already ran, so this queued render must not run again.

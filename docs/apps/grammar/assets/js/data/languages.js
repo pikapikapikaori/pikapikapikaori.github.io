@@ -43,7 +43,7 @@ export function loadLanguages() {
                 const errors = checkMeta(code, meta)
                 if (errors.length) return null
                 return metaOf(code, meta)
-            } catch (err) {
+            } catch {
                 return null
             }
         }))

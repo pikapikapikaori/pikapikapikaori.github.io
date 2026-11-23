@@ -1,4 +1,3 @@
-
 import { h } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
 import { SCRIPT_POPUP_LANGS } from '../config/config.js'

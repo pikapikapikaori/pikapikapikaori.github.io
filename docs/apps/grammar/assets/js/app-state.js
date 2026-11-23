@@ -1,4 +1,3 @@
-
 import { createStore } from './utils/events.js'
 
 export const appStore = createStore({

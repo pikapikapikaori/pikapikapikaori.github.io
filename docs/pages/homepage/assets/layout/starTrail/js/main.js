@@ -11,7 +11,6 @@ export default {
 
         const ANGLE_CAP = 90
         const ANGLE_RATIO = 90 / 640
-        const COVERAGE_CAP = 0.055
         const MIN_GAP = 12
         const NEAR_RADIUS = 34
         const MAX_DPR = 2
@@ -282,87 +281,6 @@ export default {
             return list.sort(function (a, b) { return b.radius - a.radius })
         }
 
-        function measure() {
-            let trailArea = 0
-            let minGap = null
-            let nearPairs = 0
-
-            trails.forEach(function (trail) {
-                const averageWidth = (trail.widthHead + trail.widthTail) / 2
-                trailArea += trail.sweepDeg * Math.PI / 180 * trail.radius * averageWidth
-            })
-
-            const starArea = stars.reduce(function (sum, star) {
-                return sum + Math.PI * Math.pow(star.radius + .6, 2)
-            }, 0)
-
-            for (let i = 0; i < trails.length; i++) {
-                for (let j = i + 1; j < trails.length; j++) {
-                    if (Math.abs(trails[i].radius - trails[j].radius) > NEAR_RADIUS) continue
-
-                    nearPairs++
-
-                    const gap = arcGap(
-                        trails[i].startDeg, trails[i].sweepDeg,
-                        trails[j].startDeg, trails[j].sweepDeg
-                    )
-
-                    minGap = minGap === null ? gap : Math.min(minGap, gap)
-                }
-            }
-
-            const maxSweep = trails.reduce(function (max, trail) {
-                return Math.max(max, trail.sweepDeg)
-            }, 0)
-
-            const capViolations = trails.filter(function (trail) {
-                return trail.sweepDeg > trail.maxSweepDeg + .001
-            }).length
-
-            const gapViolations = trails.filter(function (trail, index) {
-                return trails.some(function (other, otherIndex) {
-                    if (otherIndex === index) return false
-                    if (Math.abs(other.radius - trail.radius) > NEAR_RADIUS) return false
-
-                    return arcGap(trail.startDeg, trail.sweepDeg, other.startDeg, other.sweepDeg) < MIN_GAP - .001
-                })
-            }).length
-
-            return {
-                theme: sceneTheme,
-                viewport: { width: width, height: height, dpr: dpr },
-                caps: {
-                    maxSweepDeg: ANGLE_CAP,
-                    ratioDegPerPx: Math.round(ANGLE_RATIO * 10000) / 10000,
-                    maxCoverageRatio: COVERAGE_CAP,
-                    minAngularGapDeg: MIN_GAP
-                },
-                starCount: stars.length,
-                trailCount: trails.length,
-                maxSweepDeg: Math.round(maxSweep * 100) / 100,
-                minAngularGapDeg: minGap === null ? null : Math.round(minGap * 100) / 100,
-                nearRadiusPairs: nearPairs,
-                capViolations: capViolations,
-                gapViolations: gapViolations,
-                coverage: {
-                    geometric: Math.round((trailArea + starArea) / (width * height) * 1000000) / 1000000
-                },
-                trails: trails.map(function (trail, index) {
-                    return {
-                        id: index,
-                        radius: Math.round(trail.radius * 100) / 100,
-                        startDeg: Math.round(trail.startDeg * 100) / 100,
-                        sweepDeg: Math.round(trail.sweepDeg * 100) / 100,
-                        maxSweepDeg: Math.round(trail.maxSweepDeg * 100) / 100,
-                        widthHead: Math.round(trail.widthHead * 100) / 100,
-                        widthTail: Math.round(trail.widthTail * 100) / 100,
-                        opacity: Math.round(trail.opacity * 1000) / 1000,
-                        color: trail.color
-                    }
-                })
-            }
-        }
-
         function drawTrailCache() {
             const cacheDpr = Math.max(.5, Math.min(dpr, 4096 / Math.max(1, cacheSize)))
 
@@ -548,8 +466,6 @@ export default {
             stars = makeStars(cfg)
             trails = makeTrails(cfg)
 
-            const metrics = measure()
-
             cacheRadius = Math.hypot(
                 Math.max(pivotX, width - pivotX),
                 Math.max(pivotY, height - pivotY)
@@ -568,7 +484,6 @@ export default {
 
             syncContentFocus()
             applySkyScroll()
-            canvas.__starTrailMetrics = metrics
             syncMotion()
         }
 
@@ -608,11 +523,6 @@ export default {
         document.addEventListener('visibilitychange', onVisibility)
         if (content) content.addEventListener('scroll', onContentScroll, { passive: true })
 
-        Object.defineProperty(canvas, '__starTrailAngle', {
-            configurable: true,
-            get: function () { return angle }
-        })
-
         pickSlogan()
         rebuild()
 
@@ -646,8 +556,6 @@ export default {
                 canvas.height = 0
                 stars.length = 0
                 trails.length = 0
-                delete canvas.__starTrailMetrics
-                delete canvas.__starTrailAngle
             }
         }
     }

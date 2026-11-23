@@ -1,4 +1,3 @@
-
 import { DEFAULT_SETTINGS } from '../config/config.js'
 import { normalizeSettings } from '../store/settings-store.js'
 

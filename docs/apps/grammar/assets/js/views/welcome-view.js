@@ -1,4 +1,3 @@
-
 import { h, replace } from '../utils/dom.js'
 import { listUsers, getUser, deleteUser } from '../store/user-store.js'
 import { getSettings } from '../store/settings-store.js'

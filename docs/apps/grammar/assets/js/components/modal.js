@@ -53,7 +53,7 @@ export function openModal({
                             const r = a.onClick()
                             if (r === false) return
                         }
-                        catch (err) { return }
+                        catch { return }
                     }
                     close()
                 }

@@ -1,4 +1,3 @@
-
 const CONSONANTS = [
     ['sh', 'ש'], ['kh', 'ח'], ['ts', 'צ'], ['th', 'ת'],
     ['b', 'ב'], ['g', 'ג'], ['d', 'ד'], ['h', 'ה'], ['v', 'ו'], ['w', 'ו'],
@@ -51,7 +50,7 @@ function convertWord(word) {
     const chars = [...out]
     for (let k = chars.length - 1; k >= 0; k--) {
         const base = chars[k].normalize('NFD')[0]
-        if (VOWELS && /[\u05B0-\u05BD]/.test(chars[k])) continue
+        if (/[\u05B0-\u05BD]/.test(chars[k])) continue
         if (FINAL[base]) { chars[k] = FINAL[base]; break }
         break
     }
@@ -79,4 +78,3 @@ export function hasScript(text) {
 }
 
 export const scriptRange = HEBREW
-export const scriptRangeRegExp = HEBREW

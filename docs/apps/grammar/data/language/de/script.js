@@ -1,4 +1,3 @@
-
 const LONG_BEFORE_SS = /(aa|ee|oo|ah|eh|ih|oh|uh|äh|öh|üh|ei|ai|au|äu|eu|ie|oi|ui)ss/gi
 
 export function toScript(input) {

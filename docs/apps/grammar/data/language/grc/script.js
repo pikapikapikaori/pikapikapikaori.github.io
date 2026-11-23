@@ -1,4 +1,3 @@
-
 const VOWELS = 'αεηιουω'
 const ROUGH = '\u0314'
 const SMOOTH = '\u0313'
@@ -85,4 +84,3 @@ export function hasScript(text) {
 }
 
 export const scriptRange = GREEK
-export const scriptRangeRegExp = GREEK

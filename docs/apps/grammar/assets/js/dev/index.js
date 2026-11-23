@@ -1,4 +1,3 @@
-
 import * as grammar from './grammar.js'
 import { appStore } from '../app-state.js'
 import { deleteDB } from '../store/db.js'

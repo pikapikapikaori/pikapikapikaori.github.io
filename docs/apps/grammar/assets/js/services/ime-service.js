@@ -1,4 +1,3 @@
-
 import { loadGrammarMeta, loadScriptProfile } from './grammar-service.js'
 
 const cache = new Map()
@@ -20,7 +19,7 @@ export function loadIme(code) {
         try {
             const mod = await import(/* @vite-ignore */ new URL(`${encodeURIComponent(code)}/${path}`, LANGS_BASE).href)
             config = mod.default || mod
-        } catch (err) {
+        } catch {
             return null
         }
 
@@ -53,7 +52,7 @@ export function loadIme(code) {
         cache.set(code, resolved)
         return resolved
     })()
-        .catch((err) => {
+        .catch(() => {
             return null
         })
         .finally(() => { pending.delete(code) })

@@ -1,9 +1,13 @@
 const abortMessage = '__ABORTED__'
 
-export function abortError() {
-    const error = new Error(abortMessage)
-    error.name = 'AbortedError'
+export function createAbortError(message = abortMessage, name = 'AbortedError') {
+    const error = new Error(message)
+    error.name = name
     return error
+}
+
+export function abortError() {
+    return createAbortError()
 }
 
 export function isAbortError(error) {

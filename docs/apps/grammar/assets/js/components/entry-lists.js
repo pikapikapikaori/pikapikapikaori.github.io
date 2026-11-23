@@ -1,4 +1,3 @@
-
 import { h } from '../utils/dom.js'
 import { bdiFragment, bdiNode } from '../utils/bdi.js'
 import { sourceLabel } from '../models/word.js'

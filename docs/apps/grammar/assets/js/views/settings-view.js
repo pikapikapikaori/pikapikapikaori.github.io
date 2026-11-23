@@ -1,4 +1,3 @@
-
 import { h, replace } from '../utils/dom.js'
 import { appStore, setSettings, setUser } from '../app-state.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
@@ -320,7 +319,7 @@ export default {
                 await deleteUser(userId)
                 remove(LS_KEYS.user)
                 appStore.set({ user: null, userId: null, settings: null })
-                clearHttpCache().catch((err) => {})
+                clearHttpCache().catch(() => {})
                 location.hash = '#/welcome'
             } catch (err) {
                 toast.error(`清空失败：${err.message}`)

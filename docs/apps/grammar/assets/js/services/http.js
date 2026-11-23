@@ -1,4 +1,3 @@
-
 import { readCache, writeCache } from '../store/http-cache.js'
 
 const DEFAULT_TIMEOUT = 15000

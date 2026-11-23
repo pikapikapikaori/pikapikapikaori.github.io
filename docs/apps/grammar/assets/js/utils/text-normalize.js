@@ -1,4 +1,3 @@
-
 export function normalizeSearch(s) {
     return String(s ?? '')
         .normalize('NFD')

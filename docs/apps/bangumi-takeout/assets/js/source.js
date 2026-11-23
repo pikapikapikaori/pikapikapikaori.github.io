@@ -2,6 +2,7 @@ import {
     corsProxy, importTimeoutMs, maxFileSize, zipMaxOutputBytes,
 } from './config.js'
 import { unzip, pickJson } from './zip.js'
+import { createAbortError } from './abort.js'
 
 function proxy(url) {
     if (!corsProxy) return url
@@ -9,9 +10,7 @@ function proxy(url) {
 }
 
 function abortError(message = '已取消导入') {
-    const error = new Error(message)
-    error.name = 'AbortError'
-    return error
+    return createAbortError(message, 'AbortError')
 }
 
 function tooLargeError() {

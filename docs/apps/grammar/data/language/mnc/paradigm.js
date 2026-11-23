@@ -1,4 +1,3 @@
-
 const MACRON = '\u0304'
 const COMBINING = /\p{M}/u
 

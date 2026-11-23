@@ -6,10 +6,8 @@ function Lunar(date) {
     this.ylMonth = 0
     this.ylDay = 0
     this._date = date ? date : null
-    this._error = '无'
     this._leap = 0
     this._leapDays = 0
-    this._difmonth = 0
     this._difDay = 0
     this._leapMonth = false
 
@@ -62,24 +60,17 @@ Lunar.prototype.jieqi = [
 
 Lunar.prototype.checkDate = function () {
     let date = this._date
-    if (!date) {
-        this._error = '无传值'
-    } else if (!(/\d{4}-\d{1,2}-\d{1,2}/.test(date))) {
-        this._error = '格式错误'
-    } else {
-        date = date.split('-')
-        if (parseInt(date[0]) % 4 !== 0 && parseInt(date[0]) % 100 !== 0 && parseInt(date[1]) === 2 && parseInt(date[2]) === 29) {
-            this._error = '非闰年，2月份没有29日'
-        } else if ((parseInt(date[1]) === 1 || parseInt(date[1]) === 3 || parseInt(date[1]) === 5 || parseInt(date[1]) === 7 || parseInt(date[1]) === 8 || parseInt(date[1]) === 10 || parseInt(date[1]) === 12) && parseInt(date[2]) > 31) {
-            this._error = parseInt(date[1]) + '月份只有31日'
-        } else if ((parseInt(date[1]) === 4 || parseInt(date[1]) === 6 || parseInt(date[1]) === 9 || parseInt(date[1]) === 11) && parseInt(date[2]) > 30) {
-            this._error = parseInt(date[1]) + '月份只有30日'
-        } else {
-            this.year = parseInt(date[0])
-            this.month = parseInt(date[1])
-            this.day = parseInt(date[2])
-        }
-    }
+    if (!date) return
+    if (!(/\d{4}-\d{1,2}-\d{1,2}/.test(date))) return
+
+    date = date.split('-')
+    if (parseInt(date[0]) % 4 !== 0 && parseInt(date[0]) % 100 !== 0 && parseInt(date[1]) === 2 && parseInt(date[2]) === 29) return
+    if ((parseInt(date[1]) === 1 || parseInt(date[1]) === 3 || parseInt(date[1]) === 5 || parseInt(date[1]) === 7 || parseInt(date[1]) === 8 || parseInt(date[1]) === 10 || parseInt(date[1]) === 12) && parseInt(date[2]) > 31) return
+    if ((parseInt(date[1]) === 4 || parseInt(date[1]) === 6 || parseInt(date[1]) === 9 || parseInt(date[1]) === 11) && parseInt(date[2]) > 30) return
+
+    this.year = parseInt(date[0])
+    this.month = parseInt(date[1])
+    this.day = parseInt(date[2])
 }
 
 Lunar.prototype.init = function () {
@@ -92,18 +83,10 @@ Lunar.prototype.init = function () {
     for (i = 1900; i <= 2100 && offset > 0; i++) {
         temp = this.getYearDays(i)
         offset -= temp
-        this._difmonth += 12
-        if (this.leapMonth(i) > 0) {
-            this._difmonth += 1
-        }
     }
     if (offset <= 0) {
         offset += temp
         i--
-        this._difmonth -= 12
-    }
-    if (this.leapMonth(i) > 0) {
-        this._difmonth -= 1
     }
     this.ylYear = i
     let curMonthDays = this.monthDays(this.ylYear, 1)
@@ -115,18 +98,15 @@ Lunar.prototype.init = function () {
     for (j = 1; j < 13 && curMonthDays < offset; curMonthDays = this.monthDays(this.ylYear, ++j)) {
         if (this._leap == j) {
             offset -= curMonthDays
-            this._difmonth += 1
             this._leapMonth = true
             if (offset > this._leapDays) {
                 this._leapMonth = false
                 offset -= this._leapDays
-                this._difmonth += 1
             } else {
                 break
             }
         } else {
             offset -= curMonthDays
-            this._difmonth += 1
         }
     }
 
@@ -400,35 +380,7 @@ Lunar.prototype.getDateData = function () {
     return {
         year: date.getFullYear(),
         month: date.getMonth() + 1,
-        day: date.getDate(),
-        hour: date.getHours() >= 10 ? date.getHours() : '0' + date.getHours(),
-        min: date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes(),
-        sec: date.getSeconds() >= 10 ? date.getSeconds() : '0' + date.getSeconds(),
-        wek: this.getWeek(date.getDay())
-    }
-}
-
-Lunar.prototype.getWeek = function (data) {
-    let date = data
-
-    if (data === null || data < 0 || data > 6) {
-        date = new Date().getDay()
-    }
-    switch (date) {
-        case 0:
-            return '日'
-        case 1:
-            return '一'
-        case 2:
-            return '二'
-        case 3:
-            return '三'
-        case 4:
-            return '四'
-        case 5:
-            return '五'
-        case 6:
-            return '六'
+        day: date.getDate()
     }
 }
 
@@ -439,12 +391,6 @@ let calculatorOutputDay = document.getElementById('calculatorOutputDay')
 let calculatorLunarOutput = document.getElementById('calculatorLunarOutput')
 calculatorInput.valueAsDate = new Date()
 
-let currentLunar = new Lunar(calculatorInput.value)
-calculatorOutputYear.innerHTML = currentLunar.getYearGanZhi()
-calculatorOutputMonth.innerHTML = currentLunar.getMonthGanZhi() + '月'
-calculatorOutputDay.innerHTML = currentLunar.getDayGanZhi()
-calculatorLunarOutput.innerHTML = '农历' + currentLunar.getLunarTime()
-
 function calculate() {
     let lunar = new Lunar(calculatorInput.value)
     calculatorOutputYear.innerHTML = lunar.getYearGanZhi()
@@ -452,6 +398,8 @@ function calculate() {
     calculatorOutputDay.innerHTML = lunar.getDayGanZhi()
     calculatorLunarOutput.innerHTML =  '农历' + lunar.getLunarTime()
 }
+
+calculate()
 
 calculatorInput.addEventListener('keydown', function (event) {
     event.preventDefault()

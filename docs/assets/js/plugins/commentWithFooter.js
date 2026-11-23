@@ -57,7 +57,7 @@ function loadProvider(name) {
 
     const promise = import(/* @vite-ignore */ url)
         .then(mod => mod.default || mod.gitalkProvider || null)
-        .catch(err => {
+        .catch(() => {
             providerCache.delete(name)
             return null
         })

@@ -1,4 +1,3 @@
-
 export function caretOffsetIn(el) {
     const sel = window.getSelection()
     if (!sel || !sel.rangeCount) return null

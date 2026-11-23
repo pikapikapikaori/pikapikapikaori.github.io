@@ -1,4 +1,3 @@
-
 import { h } from '../utils/dom.js'
 import { bdiFragment, stripBdi } from '../utils/bdi.js'
 import { closeSelectMenu, isSelectMenuOpenFor, openSelectMenu } from './select-menu.js'

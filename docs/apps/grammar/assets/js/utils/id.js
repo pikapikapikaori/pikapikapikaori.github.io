@@ -1,4 +1,3 @@
-
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
 export function randomChunk(len = 10) {

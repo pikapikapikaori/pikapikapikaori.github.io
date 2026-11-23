@@ -1,4 +1,3 @@
-
 function endingText(value) {
     return String(value ?? '').replace(/^[-\u2010-\u2015\uff0d]+/, '')
 }

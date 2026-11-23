@@ -1,4 +1,3 @@
-
 import { POS_LIST } from '../config/config.js'
 
 export function posOptions(posValues) {

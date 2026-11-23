@@ -23,14 +23,14 @@ export function readStatusCache () {
     let raw = ''
     try {
         raw = localStorage.getItem(config.probeCacheKey) || ''
-    } catch (error) {
+    } catch {
         return
     }
     if (!raw) return
     let parsed = null
     try {
         parsed = JSON.parse(raw)
-    } catch (error) {
+    } catch {
         return
     }
     if (!parsed || typeof parsed !== 'object') return
@@ -50,7 +50,7 @@ function writeStatusCache () {
     })
     try {
         localStorage.setItem(config.probeCacheKey, JSON.stringify(payload))
-    } catch (error) {
+    } catch {
     }
 }
 
@@ -107,7 +107,7 @@ function probeTarget (siteUrl) {
         const parsed = new URL(absolute)
         if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return ''
         return new URL(config.probePath, parsed.origin + '/').href
-    } catch (error) {
+    } catch {
         return ''
     }
 }

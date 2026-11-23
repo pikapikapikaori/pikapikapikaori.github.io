@@ -69,7 +69,7 @@ export default {
                     return null
                 }
                 return { ...src, lookupWordForForm: mod.lookupWordForForm }
-            } catch (err) {
+            } catch {
                 return null
             }
         }))).filter(Boolean)

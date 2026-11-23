@@ -1,4 +1,3 @@
-
 import { h, replace } from '../utils/dom.js'
 import { bdiNode } from '../utils/bdi.js'
 import { appStore } from '../app-state.js'

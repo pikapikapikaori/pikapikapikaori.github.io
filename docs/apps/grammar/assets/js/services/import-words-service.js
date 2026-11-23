@@ -1,4 +1,3 @@
-
 import { LANGUAGES } from '../data/languages.js'
 import { POS_LIST } from '../config/config.js'
 import { normalizeParadigm, normalizeStems } from '../models/word.js'

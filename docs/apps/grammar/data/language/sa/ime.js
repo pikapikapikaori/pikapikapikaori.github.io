@@ -1,4 +1,3 @@
-
 export default {
     name: '梵语',
     placeholderBase: 'क',

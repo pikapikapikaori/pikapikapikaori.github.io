@@ -17,10 +17,6 @@
     }
 }
 
-.calculatorLunarOutput {
-    padding: 0.5rem;
-}
-
 .calculatorOutput {
     display: flex;
     justify-content: center;

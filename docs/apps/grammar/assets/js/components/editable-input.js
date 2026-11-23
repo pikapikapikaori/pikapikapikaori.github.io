@@ -1,4 +1,3 @@
-
 import { h } from '../utils/dom.js'
 import { bdiNode, hasScript } from '../utils/bdi.js'
 import { applyRange, caretOffsetIn, moveCaretTo } from '../utils/caret.js'

@@ -1,4 +1,3 @@
-
 import { STORE_NOTES, get, put, getAllByIndex } from './db.js'
 import { nowIso } from '../utils/date.js'
 

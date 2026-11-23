@@ -1,4 +1,3 @@
-
 const BREVE = '\u0306'
 const MACRON = '\u0304'
 

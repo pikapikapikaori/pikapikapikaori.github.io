@@ -1,4 +1,3 @@
-
 import { h } from './dom.js'
 
 const FENCE = /^\s*(```|~~~)\s*([\w+-]*)\s*$/

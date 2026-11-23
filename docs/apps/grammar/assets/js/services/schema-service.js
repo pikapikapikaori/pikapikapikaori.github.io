@@ -1,4 +1,3 @@
-
 let cache = null
 let pending = null
 

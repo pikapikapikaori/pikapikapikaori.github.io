@@ -1,4 +1,3 @@
-
 import { h } from '../utils/dom.js'
 import { bdiFragment } from '../utils/bdi.js'
 import { createEditableInput } from './editable-input.js'

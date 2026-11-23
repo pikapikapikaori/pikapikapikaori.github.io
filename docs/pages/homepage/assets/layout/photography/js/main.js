@@ -514,7 +514,7 @@ export default {
 
             event.preventDefault()
             cancelMomentum()
-            track.scrollLeft += event.deltaY * (narrow.matches ? 0.7 : 1)
+            track.scrollLeft += event.deltaY
         }
 
         function onTrackKey(event) {
@@ -602,7 +602,7 @@ export default {
 
                 try {
                     track.setPointerCapture(event.pointerId)
-                } catch (e) {   }
+                } catch {   }
             }
         }
 

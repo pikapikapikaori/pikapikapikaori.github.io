@@ -1,4 +1,3 @@
-
 import { LS_KEYS, getEnum, getString, setString, remove } from '../store/local-storage.js'
 
 const LS_FONT_MODE = LS_KEYS.font

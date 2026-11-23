@@ -1,4 +1,3 @@
-
 const VOWELS = 'αεηιουω'
 const LENGTH_VOWELS = 'αιυ'
 const isVowel = (base) => VOWELS.includes(String(base || '').normalize('NFD')[0])

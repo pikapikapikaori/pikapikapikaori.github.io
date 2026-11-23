@@ -1,4 +1,3 @@
-
 import { caretOffsetIn, moveCaretTo } from '../utils/caret.js'
 
 export function adaptField(el) {

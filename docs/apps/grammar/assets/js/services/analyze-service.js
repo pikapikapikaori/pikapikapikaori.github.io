@@ -1,4 +1,3 @@
-
 import { ANALYZE_SOURCES, EXTERNAL_BASE } from '../config/config.js'
 
 function sourcesFor(langCode) {
@@ -17,7 +16,7 @@ export async function loadAnalyzers(langCode) {
                 return null
             }
             return { ...src, analyzeWord: mod.analyzeWord }
-        } catch (err) {
+        } catch {
             return null
         }
     }))

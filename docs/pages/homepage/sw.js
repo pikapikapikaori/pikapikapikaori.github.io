@@ -59,7 +59,7 @@ async function readJson (cache, url) {
     try {
         const hit = await cache.match(url)
         return hit ? await hit.json() : null
-    } catch (error) {
+    } catch {
         return null
     }
 }
@@ -148,7 +148,7 @@ function ensureState () {
 async function networkOrFail (request) {
     try {
         return await fetch(request)
-    } catch (error) {
+    } catch {
         return new Response('', { status: 504, statusText: 'Gateway Timeout' })
     }
 }
@@ -180,7 +180,7 @@ async function download (ctx, url) {
         if (!response.ok) return false
         await ctx.cache.put(url, response)
         return true
-    } catch (error) {
+    } catch {
         return false
     }
 }
@@ -193,7 +193,7 @@ async function copyFromSource (ctx, url, entry) {
         if (!hit) return false
         await ctx.cache.put(url, hit)
         return true
-    } catch (error) {
+    } catch {
         return false
     }
 }
@@ -313,7 +313,7 @@ async function run (project, resumeOnly) {
     let manifest = null
     try {
         manifest = await fetchManifest()
-    } catch (error) {
+    } catch {
         return
     }
 
@@ -384,7 +384,7 @@ async function loop (first, firstResumeOnly) {
     for (;;) {
         try {
             await run(project || null, resumeOnly)
-        } catch (error) {
+        } catch {
             pendingFull = false
             pendingProject = null
             return

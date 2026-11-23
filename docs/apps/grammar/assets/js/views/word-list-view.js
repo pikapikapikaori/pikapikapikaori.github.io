@@ -1,4 +1,3 @@
-
 import { h, replace } from '../utils/dom.js'
 import { appStore } from '../app-state.js'
 import { getLanguage } from '../data/languages.js'

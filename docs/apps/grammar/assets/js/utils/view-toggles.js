@@ -1,4 +1,3 @@
-
 const EVENT = 'ln:toggles'
 
 export function notifyToggles() {

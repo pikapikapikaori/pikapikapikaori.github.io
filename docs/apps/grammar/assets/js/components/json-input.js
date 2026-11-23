@@ -1,4 +1,3 @@
-
 import { h, svg } from '../utils/dom.js'
 import { toast } from './toast.js'
 

@@ -1,4 +1,3 @@
-
 export function createEmitter() {
     const map = new Map()
 
@@ -17,26 +16,16 @@ export function createEmitter() {
         if (set.size === 0) map.delete(type)
     }
 
-    function once(type, fn) {
-        const un = on(type, (...args) => { un(); fn(...args) })
-        return un
-    }
-
     function emit(type, ...args) {
         const set = map.get(type)
         if (!set) return
         for (const fn of Array.from(set)) {
             try { fn(...args) }
-            catch (err) { }
+            catch { }
         }
     }
 
-    function clear(type) {
-        if (type) map.delete(type)
-        else map.clear()
-    }
-
-    return { on, off, once, emit, clear }
+    return { on, off, emit }
 }
 
 export function createStore(initialState) {

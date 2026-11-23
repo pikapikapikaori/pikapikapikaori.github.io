@@ -1,4 +1,3 @@
-
 let pending = null
 
 export function setPendingLookup(value) {

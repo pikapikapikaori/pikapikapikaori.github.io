@@ -1,4 +1,3 @@
-
 import { openDB } from './store/db.js'
 import { getUser } from './store/user-store.js'
 import { getSettings, saveSettings } from './store/settings-store.js'
@@ -35,7 +34,7 @@ function renderHeader() {
             try {
                 const s = await saveSettings(userId, { theme: t })
                 setSettings(s)
-            } catch (err) {
+            } catch {
             }
         }
     })
@@ -149,7 +148,7 @@ async function mountView(name, ctx) {
     || NO_LAYOUT_ROUTES.has(ctx.path)
 
     if (typeof currentUnmount === 'function') {
-        try { currentUnmount() } catch (err) { }
+        try { currentUnmount() } catch { }
         currentUnmount = null
     }
     import('./components/input-helper.js')
@@ -184,7 +183,7 @@ async function mountView(name, ctx) {
         const lang = ctx.params.lang
         import('./components/input-helper.js')
             .then((mod) => mod.mountInputHelper({ lang }))
-            .catch((err) => {})
+            .catch(() => {})
     }
     applyBreadcrumbs()
     syncHeader()
@@ -220,7 +219,7 @@ async function bootstrap() {
     setBootLoaderText('正在加载语言数据…')
     try {
         await loadLanguages()
-    } catch (err) {
+    } catch {
     }
 
     await preloadScriptProfiles(SCRIPT_SEARCH_LANGS)

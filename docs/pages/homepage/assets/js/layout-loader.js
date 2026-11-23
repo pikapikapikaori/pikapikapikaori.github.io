@@ -70,7 +70,7 @@
 
     function notify() {
         listeners.slice().forEach(function (fn) {
-            try { fn(L.currentId()) } catch (e) {}
+            try { fn(L.currentId()) } catch {}
         })
     }
 
@@ -184,7 +184,7 @@
                 retryImports[id] = (retryImports[id] || 0) + 1
 
                 if (handle && typeof handle.unmount === 'function') {
-                    try { handle.unmount() } catch (e) {}
+                    try { handle.unmount() } catch {}
                 }
 
                 releaseNewLink()
@@ -197,7 +197,7 @@
                         previous.handle = mountLayout(
                             previous.instance, root, previous.id, previous.link
                         )
-                    } catch (e) {
+                    } catch {
                         previous.handle = null
                         renderFallback(root)
                     }

@@ -114,7 +114,7 @@ export function createGroups (state, elements) {
                 drag.moved = true
                 rail.classList.add('is-dragging')
                 if (rail.setPointerCapture) {
-                    try { rail.setPointerCapture(event.pointerId) } catch (error) {   }
+                    try { rail.setPointerCapture(event.pointerId) } catch {   }
                 }
             }
             if (!drag.moved) return

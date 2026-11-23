@@ -55,7 +55,7 @@ export function connect (options) {
         navigator.serviceWorker.register(swUrl).then(function (reg) {
             registration = reg
             start()
-        }).catch(function (error) {
+        }).catch(function () {
         })
     }
 

@@ -1,26 +1,26 @@
 {
     "version": "1.0.0",
-    "hash": "7afbcc179145c935",
+    "hash": "9801abcc7d03efd6",
     "files": [
         {
             "path": "assets/css/base.css",
-            "hash": "0a75dd88d90617ba"
+            "hash": "46d5fbaacbc72df4"
         },
         {
             "path": "assets/css/components.css",
-            "hash": "f2562ebb0da7e6bd"
+            "hash": "4294f808d9acdd3f"
         },
         {
             "path": "assets/css/fonts.css",
-            "hash": "4683204f857c33b3"
+            "hash": "0fb451b66ec8ace2"
         },
         {
             "path": "assets/css/lang.css",
-            "hash": "a4770eb1a47b8fd0"
+            "hash": "06864384b7a6a026"
         },
         {
             "path": "assets/css/layout.css",
-            "hash": "47cfbb3c4faebbea"
+            "hash": "2744390b7b683a41"
         },
         {
             "path": "assets/css/nonstandard/base.css",
@@ -44,11 +44,11 @@
         },
         {
             "path": "assets/css/notes.css",
-            "hash": "87ff215b0aad6fe9"
+            "hash": "f081b4ac3f51b750"
         },
         {
             "path": "assets/css/pages.css",
-            "hash": "7a12562ebc0572c9"
+            "hash": "b2b884a0091da42f"
         },
         {
             "path": "assets/css/reset.css",
@@ -56,7 +56,7 @@
         },
         {
             "path": "assets/css/variables.css",
-            "hash": "b6c367314c6a2fc6"
+            "hash": "acbbd5f30ff2bc8f"
         },
         {
             "path": "assets/external/js/perseus.js",
@@ -68,39 +68,39 @@
         },
         {
             "path": "assets/js/adapters/text-field.js",
-            "hash": "084e8775101def43"
+            "hash": "a4fcd8a9991ce404"
         },
         {
             "path": "assets/js/app-state.js",
-            "hash": "c0271c84663ee902"
+            "hash": "ec5127fddecf07cc"
         },
         {
             "path": "assets/js/components/analyze-modal.js",
-            "hash": "b38a1d8e52bf112b"
+            "hash": "915a95a37f1395ff"
         },
         {
             "path": "assets/js/components/card-overlay.js",
-            "hash": "f72cc16278255444"
+            "hash": "b811d1d6196b6c4c"
         },
         {
             "path": "assets/js/components/editable-input.js",
-            "hash": "72a2fceb90d81f2e"
+            "hash": "babbe90a042e87d6"
         },
         {
             "path": "assets/js/components/entry-lists.js",
-            "hash": "39f1f399d86c7792"
+            "hash": "1f9afdf42ec3057f"
         },
         {
             "path": "assets/js/components/form-field.js",
-            "hash": "be5ad116ebbe27aa"
+            "hash": "5a0e29a06c08714e"
         },
         {
             "path": "assets/js/components/ghost-input.js",
-            "hash": "c37bd82f730ee733"
+            "hash": "93eed59ac331abef"
         },
         {
             "path": "assets/js/components/grammar-table.js",
-            "hash": "3c18dc06c33ae92d"
+            "hash": "91c35c9b675bc2aa"
         },
         {
             "path": "assets/js/components/grammar-verify-modal.js",
@@ -108,35 +108,35 @@
         },
         {
             "path": "assets/js/components/icons.js",
-            "hash": "35795623c491c31a"
+            "hash": "119c09737058528d"
         },
         {
             "path": "assets/js/components/import-words-modal.js",
-            "hash": "d44039d3cc6346c5"
+            "hash": "dce695233f0acbbf"
         },
         {
             "path": "assets/js/components/input-helper.js",
-            "hash": "2c421d5ad1c1bf53"
+            "hash": "91c59568dad1d9e8"
         },
         {
             "path": "assets/js/components/json-input.js",
-            "hash": "c1d1b04d9721b24c"
+            "hash": "8951c36530a503dd"
         },
         {
             "path": "assets/js/components/modal.js",
-            "hash": "24042573998baf8f"
+            "hash": "f3743c3decaa6142"
         },
         {
             "path": "assets/js/components/note-editor.js",
-            "hash": "0ac9a75b704143fc"
+            "hash": "ec965bd904266bfc"
         },
         {
             "path": "assets/js/components/note-toolbar.js",
-            "hash": "b74846c55ecfd5f5"
+            "hash": "475c7ed049733752"
         },
         {
             "path": "assets/js/components/page-tools.js",
-            "hash": "0f88ac91c902ffa1"
+            "hash": "dc39083458d6c042"
         },
         {
             "path": "assets/js/components/pagination.js",
@@ -144,23 +144,23 @@
         },
         {
             "path": "assets/js/components/paradigm-table.js",
-            "hash": "224122275c55eb66"
+            "hash": "8e5e9d43cb6adf7a"
         },
         {
             "path": "assets/js/components/select-field.js",
-            "hash": "602eed6381248a9a"
+            "hash": "165e008c3064ca61"
         },
         {
             "path": "assets/js/components/select-menu.js",
-            "hash": "125bb0bddc574631"
+            "hash": "4cba605a345d51c5"
         },
         {
             "path": "assets/js/components/tabs.js",
-            "hash": "e5f91a4ffbeb693f"
+            "hash": "afb0a302b941c2db"
         },
         {
             "path": "assets/js/components/theme-toggle.js",
-            "hash": "b1847639e68f99f9"
+            "hash": "182f5d1f481da22d"
         },
         {
             "path": "assets/js/components/toast.js",
@@ -168,223 +168,223 @@
         },
         {
             "path": "assets/js/components/vertical-popover.js",
-            "hash": "ec1f95809a3df6c6"
+            "hash": "0a3b8224102cc8db"
         },
         {
             "path": "assets/js/config/config.js",
-            "hash": "6221145c030fd372"
+            "hash": "82fd07dea678d139"
         },
         {
             "path": "assets/js/data/languages.js",
-            "hash": "869538b1d9d41f6d"
+            "hash": "baddafb1dc9b40a7"
         },
         {
             "path": "assets/js/dev/grammar.js",
-            "hash": "9cd861e74ea65be4"
+            "hash": "bf23fe19080880f1"
         },
         {
             "path": "assets/js/dev/index.js",
-            "hash": "1253abce3046f7b6"
+            "hash": "bd833e67ac3e1720"
         },
         {
             "path": "assets/js/main.js",
-            "hash": "b5bc7c6c94314bc4"
+            "hash": "739d6819eff18078"
         },
         {
             "path": "assets/js/models/grammar.js",
-            "hash": "b13c0428871f1d4f"
+            "hash": "cf0916ba03013b0b"
         },
         {
             "path": "assets/js/models/paradigm-generate.js",
-            "hash": "7adc0873030e30f4"
+            "hash": "eb3b671d3ad3d8c0"
         },
         {
             "path": "assets/js/models/user.js",
-            "hash": "b6118e21b2fa5e0f"
+            "hash": "941e32c128f7de30"
         },
         {
             "path": "assets/js/models/word.js",
-            "hash": "993929bbc8295125"
+            "hash": "493d0e710ed9d760"
         },
         {
             "path": "assets/js/router.js",
-            "hash": "9d8029ccc358593f"
+            "hash": "c62bc587178d9430"
         },
         {
             "path": "assets/js/services/analyze-service.js",
-            "hash": "037dbcff2e7bd571"
+            "hash": "aa92a261f99c3325"
         },
         {
             "path": "assets/js/services/font-service.js",
-            "hash": "8604d911b8cd056c"
+            "hash": "4e85b56357e858cd"
         },
         {
             "path": "assets/js/services/grammar-service.js",
-            "hash": "95effc2aa3869f6f"
+            "hash": "d83747d4e283d8ce"
         },
         {
             "path": "assets/js/services/http.js",
-            "hash": "f1830aaad6f998a3"
+            "hash": "d26de455c6444495"
         },
         {
             "path": "assets/js/services/ime-service.js",
-            "hash": "10c4a31f36bdb15a"
+            "hash": "8eda662c7d18cfa3"
         },
         {
             "path": "assets/js/services/import-export-service.js",
-            "hash": "8be9b41cc2ad7fbd"
+            "hash": "bdcacfe1e48b77c8"
         },
         {
             "path": "assets/js/services/import-words-service.js",
-            "hash": "6f2421e1b862b9d2"
+            "hash": "8993998d4cee9cd7"
         },
         {
             "path": "assets/js/services/review-service.js",
-            "hash": "9198504f92392691"
+            "hash": "efe140b505b4c85f"
         },
         {
             "path": "assets/js/services/schema-service.js",
-            "hash": "249adfc250cf787d"
+            "hash": "e04c641e76410993"
         },
         {
             "path": "assets/js/services/word-service.js",
-            "hash": "b67e605841d13d8a"
+            "hash": "74845d44753ecf99"
         },
         {
             "path": "assets/js/startup.js",
-            "hash": "97d39e39542774de"
+            "hash": "b2d80ebaf0254c2e"
         },
         {
             "path": "assets/js/store/db.js",
-            "hash": "2d252b82c4d19c9c"
+            "hash": "ea6d6e5bb43c9e4b"
         },
         {
             "path": "assets/js/store/http-cache.js",
-            "hash": "0d03bdfe58e519df"
+            "hash": "a3bc383805c31218"
         },
         {
             "path": "assets/js/store/local-storage.js",
-            "hash": "ac0e3b349b366915"
+            "hash": "d0de574d44e6d4da"
         },
         {
             "path": "assets/js/store/note-store.js",
-            "hash": "dd401f14d78db835"
+            "hash": "773a830778ddf0f5"
         },
         {
             "path": "assets/js/store/pending-lookup.js",
-            "hash": "ddfba74fc0344eb6"
+            "hash": "d358880bc435d92a"
         },
         {
             "path": "assets/js/store/settings-store.js",
-            "hash": "66b709330b981f97"
+            "hash": "10ad69e7e51f6a1f"
         },
         {
             "path": "assets/js/store/user-store.js",
-            "hash": "1f3da45f5b8534d9"
+            "hash": "2b780b424b4171db"
         },
         {
             "path": "assets/js/store/word-store.js",
-            "hash": "709a28399f3b8423"
+            "hash": "fea3de3550c97e19"
         },
         {
             "path": "assets/js/utils/bdi.js",
-            "hash": "893d0302ce6b05af"
+            "hash": "1ac0296c16daa91f"
         },
         {
             "path": "assets/js/utils/breadcrumbs.js",
-            "hash": "dc5e4e14480be4ea"
+            "hash": "ae4540b2a496c5ee"
         },
         {
             "path": "assets/js/utils/breve.js",
-            "hash": "45507603af6d2f42"
+            "hash": "533ee3f4a3bcd95a"
         },
         {
             "path": "assets/js/utils/caret.js",
-            "hash": "23f7152d4766195c"
+            "hash": "1e7e0855a0b8eb81"
         },
         {
             "path": "assets/js/utils/date.js",
-            "hash": "a15ed5665a412ad6"
+            "hash": "b0da3a26969f64e5"
         },
         {
             "path": "assets/js/utils/dom.js",
-            "hash": "b540f13caf13f622"
+            "hash": "cf92271b3e6901f6"
         },
         {
             "path": "assets/js/utils/dual-text.js",
-            "hash": "e51868f9c1535851"
+            "hash": "2bb29dc5fcd81b6e"
         },
         {
             "path": "assets/js/utils/events.js",
-            "hash": "5ae543c571829074"
+            "hash": "107911d4d4b81390"
         },
         {
             "path": "assets/js/utils/id.js",
-            "hash": "1e1e3be49ef5eaff"
+            "hash": "8f68351944f39627"
         },
         {
             "path": "assets/js/utils/ime-compose.js",
-            "hash": "01faed862ebcd608"
+            "hash": "6d36b28d5d43e867"
         },
         {
             "path": "assets/js/utils/markdown.js",
-            "hash": "1215a2617ffebfc1"
+            "hash": "a4285639c0e83838"
         },
         {
             "path": "assets/js/utils/note-markdown.js",
-            "hash": "492fd7fcb03adbe3"
+            "hash": "6f615be9ebb5149c"
         },
         {
             "path": "assets/js/utils/pos.js",
-            "hash": "1defe262fcede24e"
+            "hash": "b4e6754ebbc60c28"
         },
         {
             "path": "assets/js/utils/space-filter.js",
-            "hash": "f4d256acfba352ff"
+            "hash": "a793542d33ae52a4"
         },
         {
             "path": "assets/js/utils/text-normalize.js",
-            "hash": "ee644695ecef7fa2"
+            "hash": "81026ce0202048a7"
         },
         {
             "path": "assets/js/utils/view-toggles.js",
-            "hash": "e4424d5ed920033a"
+            "hash": "c88b2bac9f348f80"
         },
         {
             "path": "assets/js/views/grammar-view.js",
-            "hash": "cdc28f8dd12525ea"
+            "hash": "e2d69bcb469b06f6"
         },
         {
             "path": "assets/js/views/language-select-view.js",
-            "hash": "d01b33c9ac2dca95"
+            "hash": "08a720386caeeeff"
         },
         {
             "path": "assets/js/views/notes-view.js",
-            "hash": "9315bf7221299cda"
+            "hash": "98711b749ddabf09"
         },
         {
             "path": "assets/js/views/review-view.js",
-            "hash": "1e92fbf9177ad21a"
+            "hash": "70b8a1e920e223a0"
         },
         {
             "path": "assets/js/views/schema-view.js",
-            "hash": "ab67e6e5e523fe07"
+            "hash": "faa573c3bd63ba68"
         },
         {
             "path": "assets/js/views/settings-view.js",
-            "hash": "56205717bd12791e"
+            "hash": "30e39b260369b642"
         },
         {
             "path": "assets/js/views/welcome-view.js",
-            "hash": "375ace609ed8a144"
+            "hash": "1141025faf06b0ce"
         },
         {
             "path": "assets/js/views/word-form-view.js",
-            "hash": "eac373b4e5e30157"
+            "hash": "33acd778606ee9ba"
         },
         {
             "path": "assets/js/views/word-list-view.js",
-            "hash": "9586e1efba406914"
+            "hash": "a1d4832c904119ea"
         },
         {
             "path": "assets/resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.woff2",
@@ -492,7 +492,7 @@
         },
         {
             "path": "data/language/de/ime.js",
-            "hash": "9c66250997b98e30"
+            "hash": "a2852fb877aa8c8e"
         },
         {
             "path": "data/language/de/meta.json",
@@ -500,7 +500,7 @@
         },
         {
             "path": "data/language/de/script.js",
-            "hash": "49e8043f91c7ba78"
+            "hash": "1837f8bbcaf32eda"
         },
         {
             "path": "data/language/en/meta.json",
@@ -540,7 +540,7 @@
         },
         {
             "path": "data/language/fr/ime.js",
-            "hash": "95c3cbd3357dc215"
+            "hash": "0bc201b94a06049f"
         },
         {
             "path": "data/language/fr/meta.json",
@@ -548,7 +548,7 @@
         },
         {
             "path": "data/language/fr/script.js",
-            "hash": "75fb83ce6da20b35"
+            "hash": "3177c1ecc9a5f3ca"
         },
         {
             "path": "data/language/grc/grammar/adj.json",
@@ -584,7 +584,7 @@
         },
         {
             "path": "data/language/grc/ime.js",
-            "hash": "b6500bde409404b1"
+            "hash": "686ba40ee7e28cbc"
         },
         {
             "path": "data/language/grc/meta.json",
@@ -592,11 +592,11 @@
         },
         {
             "path": "data/language/grc/paradigm.js",
-            "hash": "64d7d5ea55b013e0"
+            "hash": "e14bb571b3c3b886"
         },
         {
             "path": "data/language/grc/script.js",
-            "hash": "5c9477d39ad5a8fc"
+            "hash": "b494d6c4d55d9e56"
         },
         {
             "path": "data/language/he/grammar/adj.json",
@@ -632,7 +632,7 @@
         },
         {
             "path": "data/language/he/ime.js",
-            "hash": "6dcaa77f2e29421b"
+            "hash": "d14c56f1787b9c51"
         },
         {
             "path": "data/language/he/meta.json",
@@ -640,11 +640,11 @@
         },
         {
             "path": "data/language/he/paradigm.js",
-            "hash": "da637048c44153a6"
+            "hash": "89ccf0698abd8cab"
         },
         {
             "path": "data/language/he/script.js",
-            "hash": "d083b65eb03881c8"
+            "hash": "353aef540b0cfb13"
         },
         {
             "path": "data/language/ja/grammar/adj.json",
@@ -712,7 +712,7 @@
         },
         {
             "path": "data/language/la/ime.js",
-            "hash": "65fecbba0245b9cf"
+            "hash": "dec53625cbf2a03b"
         },
         {
             "path": "data/language/la/meta.json",
@@ -720,7 +720,7 @@
         },
         {
             "path": "data/language/la/paradigm.js",
-            "hash": "b7d1988d4b27347c"
+            "hash": "164774b64e2c717e"
         },
         {
             "path": "data/language/mnc/grammar/adj.json",
@@ -776,11 +776,11 @@
         },
         {
             "path": "data/language/mnc/paradigm.js",
-            "hash": "a4be0cb539cc7503"
+            "hash": "f5400bad647c19e1"
         },
         {
             "path": "data/language/mnc/script.js",
-            "hash": "fe3cc2b7fff9e920"
+            "hash": "66fbc368f01e38b0"
         },
         {
             "path": "data/language/sa/grammar/adj.json",
@@ -816,7 +816,7 @@
         },
         {
             "path": "data/language/sa/ime.js",
-            "hash": "1987dabae5bdef33"
+            "hash": "14fb8cfdbec96bae"
         },
         {
             "path": "data/language/sa/meta.json",
@@ -824,11 +824,11 @@
         },
         {
             "path": "data/language/sa/paradigm.js",
-            "hash": "a2adcf1e8a32d36d"
+            "hash": "dee3055e4c5b2e51"
         },
         {
             "path": "data/language/sa/script.js",
-            "hash": "8e8814ea3c3feed7"
+            "hash": "7783df67797c52e5"
         },
         {
             "path": "data/language/zh-cls/meta.json",

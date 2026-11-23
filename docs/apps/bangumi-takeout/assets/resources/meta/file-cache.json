@@ -1,6 +1,6 @@
 {
     "version": "1.1.0",
-    "hash": "9e8adf50cfe15ab2",
+    "hash": "4c7ef5be13442872",
     "files": [
         {
             "path": "assets/css/about.css",
@@ -8,7 +8,7 @@
         },
         {
             "path": "assets/css/base.css",
-            "hash": "6f3dfcbb150d989c"
+            "hash": "a611d6527ae7236a"
         },
         {
             "path": "assets/css/components.css",
@@ -32,7 +32,7 @@
         },
         {
             "path": "assets/css/tools.css",
-            "hash": "65733eef8ca4da01"
+            "hash": "c371b414e0441060"
         },
         {
             "path": "assets/css/variables.css",
@@ -60,27 +60,27 @@
         },
         {
             "path": "assets/js/abort.js",
-            "hash": "ebae90754608de75"
+            "hash": "7e22f5471209a56b"
         },
         {
             "path": "assets/js/app.js",
-            "hash": "5e0f63478e7dcb8e"
+            "hash": "a0d0a5ff42236ecd"
         },
         {
             "path": "assets/js/backup/exporter.js",
-            "hash": "4bf6703aaa507b18"
+            "hash": "83f5ef7ed9e55297"
         },
         {
             "path": "assets/js/backup/runner.js",
-            "hash": "c1dffd2822749775"
+            "hash": "4816d35b83c22d3e"
         },
         {
             "path": "assets/js/bootstrap.js",
-            "hash": "aab7888f3d92c5fb"
+            "hash": "d2d7702799cb4a97"
         },
         {
             "path": "assets/js/config.js",
-            "hash": "f61ff7f4fd11d173"
+            "hash": "88e4f01d1880c9e9"
         },
         {
             "path": "assets/js/dom.js",
@@ -88,7 +88,7 @@
         },
         {
             "path": "assets/js/external.js",
-            "hash": "23fc725ac796a617"
+            "hash": "813ef78ecda61f4a"
         },
         {
             "path": "assets/js/footer.js",
@@ -96,15 +96,15 @@
         },
         {
             "path": "assets/js/layout.js",
-            "hash": "1d15d29cda797ea0"
+            "hash": "59cceb0f0edff8f6"
         },
         {
             "path": "assets/js/main.js",
-            "hash": "83ae893d5cc451fb"
+            "hash": "50663f77369ad7de"
         },
         {
             "path": "assets/js/model.js",
-            "hash": "79b5958f4e2e0e10"
+            "hash": "cbed6d91b2c89cd8"
         },
         {
             "path": "assets/js/pages/about.js",
@@ -112,7 +112,7 @@
         },
         {
             "path": "assets/js/pages/backup.js",
-            "hash": "c177fabb05171086"
+            "hash": "dda022feb4e269b4"
         },
         {
             "path": "assets/js/pages/data.js",
@@ -136,31 +136,31 @@
         },
         {
             "path": "assets/js/router.js",
-            "hash": "14029b8f5d6afedf"
+            "hash": "23bc5c4f1bf2ec52"
         },
         {
             "path": "assets/js/search.js",
-            "hash": "d2c5b52ccbf6e999"
+            "hash": "dbe6c587c3583bdc"
         },
         {
             "path": "assets/js/source.js",
-            "hash": "9273e7fc86051636"
+            "hash": "d348ec855eda4cfa"
         },
         {
             "path": "assets/js/startup.js",
-            "hash": "06ab753faf0fe59a"
+            "hash": "b2cdb837ba7821db"
         },
         {
             "path": "assets/js/storage.js",
-            "hash": "84e73df6526bcc15"
+            "hash": "9d2dac361b7cd551"
         },
         {
             "path": "assets/js/tasks.js",
-            "hash": "ec34935653fb6a44"
+            "hash": "eee5c9db3def84cb"
         },
         {
             "path": "assets/js/theme.js",
-            "hash": "3a927f433a7f62f8"
+            "hash": "2902f37ad49ee663"
         },
         {
             "path": "assets/js/ui/about.js",
@@ -168,43 +168,43 @@
         },
         {
             "path": "assets/js/ui/backup.js",
-            "hash": "970dbd82b7061d23"
+            "hash": "b3af35f243352efb"
         },
         {
             "path": "assets/js/ui/data.js",
-            "hash": "30c2f8c3ce9b99f8"
+            "hash": "2b0f71f810f008af"
         },
         {
             "path": "assets/js/ui/detail.js",
-            "hash": "dc42513898968c87"
+            "hash": "443f2f15ed12221b"
         },
         {
             "path": "assets/js/ui/import.js",
-            "hash": "6e03cb317fbd0d71"
+            "hash": "d9665386996d0354"
         },
         {
             "path": "assets/js/ui/loading.js",
-            "hash": "234586964c383259"
+            "hash": "8f11d779fb1b6512"
         },
         {
             "path": "assets/js/ui/menu.js",
-            "hash": "14ff2f3f7198c72f"
+            "hash": "053ad316bddf9753"
         },
         {
             "path": "assets/js/ui/overview.js",
-            "hash": "37e906631a79e556"
+            "hash": "a73ce2e3c077c570"
         },
         {
             "path": "assets/js/ui/users.js",
-            "hash": "59c0ed11bf4f785e"
+            "hash": "a4d20dfdd28a1b0d"
         },
         {
             "path": "assets/js/worker/messages.js",
-            "hash": "4f0437bb5a7a0cbf"
+            "hash": "e8adef69c900902f"
         },
         {
             "path": "assets/js/zip.js",
-            "hash": "f0385dec0256b351"
+            "hash": "14dbce9a869c594b"
         },
         {
             "path": "assets/resources/logo/favicon.ico",

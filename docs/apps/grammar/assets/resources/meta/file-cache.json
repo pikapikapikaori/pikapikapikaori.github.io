@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "hash": "9801abcc7d03efd6",
+    "hash": "74b16ad5c3646d9b",
     "files": [
         {
             "path": "assets/css/base.css",
@@ -380,7 +380,7 @@
         },
         {
             "path": "assets/js/views/word-form-view.js",
-            "hash": "33acd778606ee9ba"
+            "hash": "4e683ad053b70dca"
         },
         {
             "path": "assets/js/views/word-list-view.js",

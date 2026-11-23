@@ -1,6 +1,6 @@
 {
     "version": "4.7.5",
-    "hash": "0b9e690277522ae8",
+    "hash": "04985b4c97e3a044",
     "files": [
         {
             "path": "404/_404.md",
@@ -1540,7 +1540,7 @@
         },
         {
             "path": "apps/grammar/assets/js/views/word-form-view.js",
-            "hash": "33acd778606ee9ba"
+            "hash": "4e683ad053b70dca"
         },
         {
             "path": "apps/grammar/assets/js/views/word-list-view.js",
@@ -4644,7 +4644,7 @@
         },
         {
             "path": "assets/js/plugins/viewFullImage.js",
-            "hash": "865c7d92fc093822"
+            "hash": "9005a2f47f3236ee"
         },
         {
             "path": "assets/js/plugins/widgets.js",

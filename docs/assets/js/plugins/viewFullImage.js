@@ -1,5 +1,4 @@
 import { bindShortcuts } from '../utils/shortcut.js'
-import { isEnabled } from '../utils/common.js'
 import { docsifyClasses } from '../utils/constants.js'
 import { arrow } from '../utils/icons.js'
 import {
@@ -54,7 +53,7 @@ function plugin(hook, vm) {
     let closeFullImage = null
     let unbindViewerShortcuts = null
 
-    let wheelSwitchCooldown = false
+    let wheelSwitchTimer = null
     let wheelSwitchAccumulated = 0
     const wheelSwitchCooldownMs = 900
     const wheelSwitchThreshold = 20
@@ -62,7 +61,7 @@ function plugin(hook, vm) {
     function preventWheel(e) {
         e.preventDefault()
 
-        if (!switchImageDirection || wheelSwitchCooldown) return
+        if (!switchImageDirection || wheelSwitchTimer !== null) return
 
         const absX = Math.abs(e.deltaX)
         const absY = Math.abs(e.deltaY)
@@ -74,7 +73,6 @@ function plugin(hook, vm) {
         if (wheelSwitchAccumulated < wheelSwitchThreshold) return
 
         wheelSwitchAccumulated = 0
-        wheelSwitchCooldown = true
 
         let direction
         if (absX > absY) {
@@ -85,8 +83,8 @@ function plugin(hook, vm) {
 
         switchImageDirection(direction)
 
-        setTimeout(() => {
-            wheelSwitchCooldown = false
+        wheelSwitchTimer = setTimeout(() => {
+            wheelSwitchTimer = null
             wheelSwitchAccumulated = 0
         }, wheelSwitchCooldownMs)
     }
@@ -102,6 +100,15 @@ function plugin(hook, vm) {
         }
     }
 
+    function closeOnEscape(e) {
+        if (e.key !== 'Escape' || e.isComposing || e.keyCode === 229 ||
+            e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return
+
+        e.preventDefault()
+        e.stopPropagation()
+        if (!e.repeat) closeFullImage()
+    }
+
     function lockScroll() {
         if (scrollLocked) return
 
@@ -113,32 +120,39 @@ function plugin(hook, vm) {
         onListen(window, 'wheel', preventWheel, { passive: false })
         onListen(window, 'touchmove', preventTouchMove, { passive: false })
         onListen(window, 'keydown', preventKeyScroll)
+        onListen(window, 'keydown', closeOnEscape, true)
 
         unbindViewerShortcuts = bindShortcuts({
             ArrowLeft: { handler: () => switchImageDirection(true), repeat: true, allowInInput: true },
-            ArrowRight: { handler: () => switchImageDirection(false), repeat: true, allowInInput: true },
-            Escape: { handler: () => closeFullImage(), allowInInput: true }
+            ArrowRight: { handler: () => switchImageDirection(false), repeat: true, allowInInput: true }
         }, { when: () => scrollLocked })
 
         addClass(document.body, imageViewerOpenClass)
     }
 
-    function unlockScroll() {
+    function unlockScroll(restoreScroll) {
         if (!scrollLocked) return
         scrollLocked = false
 
         offListen(window, 'wheel', preventWheel)
         offListen(window, 'touchmove', preventTouchMove)
         offListen(window, 'keydown', preventKeyScroll)
+        offListen(window, 'keydown', closeOnEscape, true)
+
+        clearTimeout(wheelSwitchTimer)
+        wheelSwitchTimer = null
+        wheelSwitchAccumulated = 0
 
         if (unbindViewerShortcuts) {
             unbindViewerShortcuts()
             unbindViewerShortcuts = null
         }
 
-        const content = getElByClass(docsifyClasses.content)
-        if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
-        if (content && content.scrollTop !== lockContentY) content.scrollTop = lockContentY
+        if (restoreScroll) {
+            const content = getElByClass(docsifyClasses.content)
+            if (window.scrollY !== lockWindowY) window.scrollTo(0, lockWindowY)
+            if (content && content.scrollTop !== lockContentY) content.scrollTop = lockContentY
+        }
 
         removeClass(document.body, imageViewerOpenClass)
     }
@@ -358,7 +372,11 @@ function plugin(hook, vm) {
             updateCounter(textEl, index, imgArray.length)
         }
 
+        let closeTimer = null
+
         function buttonLeftRightOnClick(direction) {
+            if (closeTimer !== null) return
+
             const imgArray = collectImages()
             if (imgArray.length <= 1) return
 
@@ -371,15 +389,29 @@ function plugin(hook, vm) {
             showImage(imgArray, newImgIndex, direction)
         }
 
-        async function closeViewer() {
-            if (!isEnabled(curImg)) return
-
-            createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, false)
-            await new Promise(r => setTimeout(r, openCloseKeyframeDuration))
+        function resetViewer(restoreScroll) {
+            clearTimeout(closeTimer)
+            closeTimer = null
+            curImg = undefined
             viewFullImageSpan.style.display = 'none'
-
-            unlockScroll()
+            viewFullImageSpanInnerImgDiv.getAnimations().forEach(animation => animation.cancel())
+            viewFullImageSpanInnerImgDiv.style.backgroundImage = ''
+            viewFullImageSpanInnerTextDiv.textContent = ''
+            unlockScroll(restoreScroll)
         }
+
+        function closeViewer() {
+            if (!curImg || closeTimer !== null) return
+
+            const hash = window.location.hash
+            viewFullImageSpanInnerImgDiv.getAnimations().forEach(animation => animation.cancel())
+            createImageOpenCloseKeyframe(curImg, viewFullImageSpanInnerImgDiv, false)
+            closeTimer = setTimeout(() => resetViewer(window.location.hash === hash), openCloseKeyframeDuration)
+        }
+
+        onListen(window, 'hashchange', () => {
+            if (curImg) resetViewer(false)
+        })
 
         switchImageDirection = buttonLeftRightOnClick
         closeFullImage = closeViewer

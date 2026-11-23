@@ -1685,7 +1685,8 @@ export default {
                 class: 'textarea',
                 placeholder: currentTerms().notesPlaceholder,
                 dataset: { space: EDGE_SPACE },
-                value: data.notes
+                value: data.notes,
+                oninput: (e) => { data.notes = e.target.value }
             })
             renderExtras = () => {
                 tagsInput.value = data.tags.join(', ')

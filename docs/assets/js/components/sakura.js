@@ -91,7 +91,6 @@ export function Sakura(selector, options = {}) {
         return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     }
 
-    // The animation names and the petal class name must match docs/assets/css/components/sakuraRain.css.
     this.createPetal = function () {
         _this.petalFrame = null
 
@@ -140,7 +139,6 @@ export function Sakura(selector, options = {}) {
 
         if (!_this.running) return
 
-        // Keep the pending timer so stop and destroy can cancel the next petal.
         _this.petalTimeout = window.setTimeout(function () {
             _this.petalTimeout = null
 
@@ -195,7 +193,6 @@ Sakura.prototype.stop = function () {
         this.cleanupTimeout = null
     }
 
-    // Graceful mode only stops new petals; the existing ones finish their animation.
     if (!graceful) {
         this.cleanupTimeout = window.setTimeout(function () {
             _this2.cleanupTimeout = null

@@ -48,7 +48,6 @@ function cacheElements () {
         themeSwitch: document.getElementById('theme-switch'),
         themeMeta: document.querySelector('meta[name="theme-color"]'),
         themeButtons: Array.prototype.slice.call(document.querySelectorAll('#theme-switch button')),
-        newWindowNote: document.getElementById('new-window-note'),
         loadingNote: document.getElementById('loading-note'),
         live: document.getElementById('live-region')
     }
@@ -72,7 +71,6 @@ function fillTexts () {
     if (elements.primaryRail) elements.primaryRail.setAttribute('aria-label', texts.railLabelPrimary)
     if (elements.secondaryRail) elements.secondaryRail.setAttribute('aria-label', texts.railLabelSecondary)
     if (elements.panel) elements.panel.setAttribute('aria-label', texts.groupPanelLabel)
-    if (elements.newWindowNote) elements.newWindowNote.textContent = texts.newWindowNote
     if (elements.loadingNote) elements.loadingNote.textContent = texts.loading
     if (elements.todaySeparator) elements.todaySeparator.textContent = texts.todaySeparator
 }
@@ -221,10 +219,7 @@ function init () {
 
         const requested = new URLSearchParams(window.location.search).get('group')
         const initial = requested && state.groupById.has(requested) ? requested : state.groups[0].id
-        groups.selectGroup(initial, { scroll: false, sync: false, announce: false })
-        const url = new URL(window.location.href)
-        url.searchParams.set('group', initial)
-        window.history.replaceState(null, '', url.href)
+        groups.selectGroup(initial, { scroll: false, announce: false })
         if (degraded.length) announce(degraded.join('·'))
     }).catch(function () {
         elements.panel.setAttribute('aria-busy', 'false')

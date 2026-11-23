@@ -21,6 +21,33 @@
  *
  * @returns {Object} 例如 { info: '信息', title: '标题' }
  */
+
+function toRoutePath(href) {
+    const hashIndex = href.indexOf('#')
+    if (hashIndex > -1) return href.slice(hashIndex + 1).split('?')[0]
+
+    const schemeIndex = href.indexOf('://')
+    if (schemeIndex > -1) {
+        const pathIndex = href.indexOf('/', schemeIndex + 3)
+        return pathIndex > -1 ? href.slice(pathIndex).split('?')[0] : '/'
+    }
+
+    return href.split('?')[0]
+}
+
+function toPathSegments(path) {
+    return path.split('/').filter(Boolean)
+}
+
+export function matchesLocalePath(href, rule) {
+    const ruleSegments = toPathSegments(rule)
+    const pathSegments = toPathSegments(toRoutePath(href))
+
+    if (!ruleSegments.length) return !pathSegments.length
+
+    return ruleSegments.every((segment, index) => segment === pathSegments[index])
+}
+
 export function calLocalized(localization, href) {
     const currentHref =
         href || (typeof location !== 'undefined' ? location.href : '')
@@ -46,7 +73,7 @@ export function calLocalized(localization, href) {
         const matchedKey = Object.keys(translations).find(rule => {
             if (rule === 'default') return false
 
-            return currentHref.indexOf(rule) > -1
+            return matchesLocalePath(currentHref, rule)
         })
 
         if (matchedKey) {

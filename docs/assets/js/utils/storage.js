@@ -1,4 +1,5 @@
 import { isNil } from './common.js'
+import { storagePrefix } from './constants.js'
 
 export const storageTypes = {
     local: 'local',
@@ -6,7 +7,7 @@ export const storageTypes = {
     none: 'none'
 }
 
-const probeKey = '__pikapikapi-storage-probe__'
+const probeKey = storagePrefix + 'storage-probe'
 
 function normalizeStorageType(value) {
     return Object.values(storageTypes).includes(value) ? value : storageTypes.local

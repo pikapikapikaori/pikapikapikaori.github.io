@@ -367,8 +367,8 @@ Lunar.prototype.getJieQi = function (year, month) {
 }
 
 Lunar.prototype.getDaysByDateString = function (dt1, dt2) {
-    const dt1array = dt1.replace('/-/g', '/').split('-')
-    const dt2array = dt2.replace('/-/g', '/').split('-')
+    const dt1array = dt1.split('-')
+    const dt2array = dt2.split('-')
     let startDate = new Date(dt1array[2], dt1array[0], dt1array[1])
     let endDate = new Date(dt2array[2], dt2array[0], dt2array[1])
     let diffDate = Math.abs(endDate - startDate)

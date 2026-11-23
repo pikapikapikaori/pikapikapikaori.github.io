@@ -32,6 +32,7 @@ export const docsifyClasses = {
 }
 
 export const docsifyIds = {
-    main: 'main',
-    app: 'app'
+    main: 'main'
 }
+
+export const storagePrefix = 'pikapikapi:main:'

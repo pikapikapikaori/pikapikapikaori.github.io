@@ -79,7 +79,6 @@ function plugin(hook, vm) {
             const cover = getEl(`section.${docsifyClasses.cover}.${elementStatus.show}`)
 
             if (cover) {
-                // cover 页：用页面滚动判断
                 const scrollTop = document.scrollingElement.scrollTop
                 const max = document.scrollingElement.scrollHeight - window.innerHeight
                 atTop = scrollTop <= 1

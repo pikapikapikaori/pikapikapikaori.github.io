@@ -80,7 +80,6 @@ export const config = {
             railLabelSecondary: '二级分组',
             tocLabel: '两级分组',
             groupPanelLabel: '当前分组',
-            newWindowNote: '站点链接均在新窗口打开。',
             loading: '正在载入目录',
             statusTitle: '状态：',
             statusText: {

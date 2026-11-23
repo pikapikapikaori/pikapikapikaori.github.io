@@ -49,7 +49,7 @@
         'common.layout.mondrian': 'Mondrian',
         'common.layout.starTrail': 'Star Trail',
         'common.layout.photography': 'Photography',
-        'common.feed.href': '../../assets/resources/meta/feed.atom'
+        'common.feed.href': App.config.feedUrl
     }
 
     const DICT = {
@@ -79,8 +79,6 @@
             'feed.boilerplate': ['本文首发', '最后编辑于'],
             'common.email.label': '邮件',
             'common.photo.label': '摄影',
-            'common.blog.hint': '文章',
-            'common.photo.hint': '足迹',
             'common.lightbox.aria': '照片预览',
             'common.lightbox.close': '关闭',
             'common.lightbox.source': '查看原图',
@@ -133,8 +131,6 @@
             'feed.boilerplate': ['first published', 'Last edited'],
             'common.email.label': 'Email',
             'common.photo.label': 'Photography',
-            'common.blog.hint': 'Posts',
-            'common.photo.hint': 'Traces',
             'common.lightbox.aria': 'Photo viewer',
             'common.lightbox.close': 'Close',
             'common.lightbox.source': 'View photo',
@@ -181,8 +177,6 @@
             'feed.boilerplate': ['最初に公開', '最終編集'],
             'common.email.label': 'メール',
             'common.photo.label': '写真',
-            'common.blog.hint': '文章',
-            'common.photo.hint': '足跡',
             'common.lightbox.aria': '写真の表示',
             'common.lightbox.close': '閉じる',
             'common.lightbox.source': '元の写真を見る',

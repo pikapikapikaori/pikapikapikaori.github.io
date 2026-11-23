@@ -104,6 +104,17 @@
             }
         },
 
+        htmlLang: {
+            enable: true,
+            localization: {
+                lang: {
+                    '/jp/': 'ja',
+                    '/en-us/': 'en',
+                    default: 'zh-Hans'
+                }
+            }
+        },
+
         htmlReplace: {
             enable: true,
             links: {

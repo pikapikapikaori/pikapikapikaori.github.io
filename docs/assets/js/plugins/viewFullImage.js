@@ -68,22 +68,18 @@ function plugin(hook, vm) {
         const absY = Math.abs(e.deltaY)
         if (absX === 0 && absY === 0) return
 
-        // 累加主导轴的幅度，微小抖动不触发
         const dominant = absX > absY ? absX : absY
         wheelSwitchAccumulated += dominant
 
         if (wheelSwitchAccumulated < wheelSwitchThreshold) return
 
-        // 达到阈值，重置累加并进入冷却
         wheelSwitchAccumulated = 0
         wheelSwitchCooldown = true
 
         let direction
         if (absX > absY) {
-            // 横向：向左滑 → 上一张，向右滑 → 下一张
             direction = e.deltaX < 0
         } else {
-            // 纵向：向上滚 → 上一张，向下滚 → 下一张
             direction = e.deltaY < 0
         }
 
@@ -124,7 +120,6 @@ function plugin(hook, vm) {
             Escape: { handler: () => closeFullImage(), allowInInput: true }
         }, { when: () => scrollLocked })
 
-        // 只加状态类，不动任何布局样式
         addClass(document.body, imageViewerOpenClass)
     }
 
@@ -386,7 +381,6 @@ function plugin(hook, vm) {
             unlockScroll()
         }
 
-        // 暴露给 preventWheel 与快捷键
         switchImageDirection = buttonLeftRightOnClick
         closeFullImage = closeViewer
 

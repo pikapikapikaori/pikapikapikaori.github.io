@@ -13,6 +13,7 @@ import { mediaQueries, docsifyClasses, elementStatus } from '../utils/constants.
 import { getEl, getAllEls, getElByClass, onListen, toggleClass, hasClass, setCssVar } from '../utils/dom.js'
 import { arrow } from '../utils/icons.js'
 import { bindShortcuts } from '../utils/shortcut.js'
+import { matchesLocalePath } from '../utils/localization.js'
 import { ignoreViewFullImageClass } from './viewFullImage.js'
 
 let tocPageOptions = {
@@ -66,10 +67,10 @@ function hasRequiredTime(pageData, renderStyle) {
 
 function isPageInLanguage(pageData, context) {
     if (context.languagePrefix === '/') {
-        return !context.languagePrefixes.some(prefix => pageData.href.includes(prefix))
+        return !context.languagePrefixes.some(prefix => matchesLocalePath(pageData.href, prefix))
     }
 
-    return pageData.href.includes(context.languagePrefix)
+    return matchesLocalePath(pageData.href, context.languagePrefix)
 }
 
 function filterByBaseUrl(pageData, context) {
@@ -127,7 +128,9 @@ function formatPostDate(timeStr, routePath, dateFormat) {
 function buildPageContext(page, context) {
     return {
         pageHref: '#' + page.href,
-        pagePictureHref: context.pathname.replace(/\/$/, '') + page.cover,
+        pagePictureHref: isEnabled(page.cover)
+            ? context.pathname.replace(/\/$/, '') + page.cover
+            : context.defaultImg,
         formattedDate: formatPostDate(page.time, context.routePath, context.dateFormat)
     }
 }
@@ -304,7 +307,7 @@ function plugin(hook, vm) {
     function resolveLanguagePrefix() {
         let curi18n = '/'
         languagePrefixes.forEach(path => {
-            if (vm.route.path.includes(path)) curi18n = path
+            if (matchesLocalePath(vm.route.path, path)) curi18n = path
         })
         return curi18n
     }

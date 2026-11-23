@@ -10,13 +10,14 @@ function resolve(mode) {
 
 export function applyTheme(mode) {
     if (!themeModes.includes(mode)) mode = 'auto'
-    localStorage.setItem(themeStorageKey, mode)
+    try { localStorage.setItem(themeStorageKey, mode) } catch { }
     const real = resolve(mode)
     document.documentElement.dataset.theme = real
     document.documentElement.dataset.themeMode = mode
 }
 
 export function getTheme() {
-    const saved = localStorage.getItem(themeStorageKey)
+    let saved
+    try { saved = localStorage.getItem(themeStorageKey) } catch { }
     return themeModes.includes(saved) ? saved : 'auto'
 }

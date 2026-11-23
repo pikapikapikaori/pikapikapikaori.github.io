@@ -87,7 +87,6 @@ export async function renderData() {
                     <button type="button" class="btn" id="remove-credential"
                         ${credentialTarget && !busy ? '' : 'disabled'}>移除本地凭证</button>
                 </div>
-                <div class="data-subline">只删除该账号在本机的登录凭证，收藏缓存保留。</div>
             </section>
 
             <div class="form-status" id="data-status" role="status" aria-live="polite"></div>

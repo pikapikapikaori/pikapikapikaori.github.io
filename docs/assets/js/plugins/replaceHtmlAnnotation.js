@@ -153,7 +153,6 @@ function plugin(hook, vm) {
 
     let hasAnyMarker = false
 
-    // 导航、侧栏、封面不经过 beforeEach，只能扫描 DOM 注释补充替换
     const inlineSvgRoots = '.app-nav, .cover, .sidebar'
     const inlineSvgCommentMarkup = /^svg:([A-Za-z0-9_.]+)$/
 

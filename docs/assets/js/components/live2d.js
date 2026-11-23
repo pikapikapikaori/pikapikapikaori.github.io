@@ -114,7 +114,6 @@ function createController(models) {
         if (model) model.autoUpdate = running
     }
 
-    // Rendering stops while the canvas is hidden or off screen; one frame is kept so the canvas is not blank.
     function syncVisibility() {
         const hidden = !canvas || hasClass(canvas, hiddenClass)
         const running = !hidden && onScreen && !document.hidden
@@ -441,7 +440,6 @@ function createController(models) {
 
         createCanvas()
 
-        // PIXI is provided by the classic Cubism scripts in docs/index.html.
         const live2d = PIXI.live2d
 
         app = new PIXI.Application({
@@ -473,7 +471,6 @@ function createController(models) {
     function start() {
         if (startPromise) return startPromise
 
-        // A partial attempt leaves no canvas behind, so a later start can retry.
         if (canvas && !model) teardown()
 
         if (canvas && model) {
@@ -483,7 +480,6 @@ function createController(models) {
             return Promise.resolve(true)
         }
 
-        // A failed attempt leaves a settled ready promise; recreate it for the retry.
         if (!resolveReady) resetReady()
 
         startPromise = load()

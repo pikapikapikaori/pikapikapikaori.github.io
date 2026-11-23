@@ -68,7 +68,6 @@ function plugin(hook, vm) {
         toggleClass(document.body, elementStatus.sticky, scrollTop >= threshold)
     }
 
-    // 封面滚出视口后暂停下拉箭头动画
     let chevronObserver = null
     let chevronWatched = null
 

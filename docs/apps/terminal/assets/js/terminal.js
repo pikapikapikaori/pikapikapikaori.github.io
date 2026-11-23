@@ -62,7 +62,7 @@ let judgeInput = function (input) {
                     inputContents.push('')
                 }
 
-                if (new RegExp('^[,.<>+-\\[\\]\s]+$').test(inputContents[1])) {
+                if (new RegExp('^[,.<>+\\[\\]\\s-]+$').test(inputContents[1])) {
                     output = brainfuck(inputContents[1], inputContents[2] + String.fromCharCode(255))
                 }
                 else {

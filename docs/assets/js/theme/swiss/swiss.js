@@ -1,14 +1,7 @@
-/**
- *   进度条兼作回顶：插件的 #scroll-to-top-span 由 CSS 隐掉，箭头画进进度条
- *
- *   结构性改动都发生在 renderTheme 内，会被 widgets 的 DOM journal 记录并回滚；
- *   异步加的类名一律挂在 html.sw-active 之下，切主题后自然失效。
- */
-
 import { takeSlots, setupPlugin } from './plugin.js'
 import { tocPageDivClass } from '../../plugins/tocPage.js'
 import { createStorage } from '../../utils/storage.js'
-import { docsifyClasses, elementStatus } from '../../utils/constants.js'
+import { docsifyClasses, elementStatus, storagePrefix } from '../../utils/constants.js'
 import { article } from '../../utils/icons.js'
 import {
     onListen,
@@ -25,11 +18,10 @@ import {
     setData
 } from '../../utils/dom.js'
 
-const colsKey = 'swiss-cols'
+const colsKey = storagePrefix + 'swiss-cols'
 const colsStorage = createStorage('local')
 const dateRe = /\d{4}\s*[.\-/]\s*\d{1,2}\s*(?:[.\-/]\s*\d{1,2})?/
 
-/** 块级媒体：不进栏，独占整幅 */
 const plateSelector = [
     'iframe',
     'video',

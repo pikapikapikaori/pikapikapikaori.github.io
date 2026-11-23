@@ -55,7 +55,6 @@ function plugin(hook, vm) {
             removeClass(tocBtn, activeBtnClass)
         })
 
-        // 修复滚动高亮
         const headingList = []
         getAllEls('h1, h2, h3, h4, h5, h6').forEach(h => {
             const span = getEl('span', h)

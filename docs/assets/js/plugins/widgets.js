@@ -1,7 +1,7 @@
 import { lockNoTransition, unlockNoTransition, hexToHsl, hslToHex, makeButtonLike, isEnabled } from '../utils/common.js'
 import { bindShortcuts } from '../utils/shortcut.js'
 import { createStorage } from '../utils/storage.js'
-import { mediaQueries, elementStatus } from '../utils/constants.js'
+import { mediaQueries, elementStatus, storagePrefix } from '../utils/constants.js'
 import { arrow, nature, article, object, person } from '../utils/icons.js'
 import {
     onListen,
@@ -73,7 +73,7 @@ const popupPanelClass = 'page-right-popups-div'
 const modes = ['auto', 'light', 'dark']
 const fontSizeLevels = [14, 16, 18, 20, 22]
 const hslFixed = { s: 66, l: 78 }
-const storageKey = 'pikapikapi:widgets'
+const storageKey = storagePrefix + 'widgets'
 const popupNames = ['theme', 'color', 'font']
 const themeSheetWaitMs = 3000
 const themeSheetPollMs = 16

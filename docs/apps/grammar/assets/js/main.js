@@ -19,8 +19,7 @@ import { createDevTools } from './dev/index.js'
 const DEFAULT_THEME = THEMES[0].value
 const THEME_VALUES = THEMES.map((t) => t.value)
 
-const NO_HEADER_ROUTES = new Set(['/', '/welcome'])
-const NO_LAYOUT_ROUTES = new Set(['/', '/welcome'])
+const NO_SHELL_ROUTES = new Set(['/', '/welcome'])
 
 function getShell() {
     return qs('#app')
@@ -145,7 +144,7 @@ let currentUnmount = null
 async function mountView(name, ctx) {
     const view = await loadView(name)
     const isFull = view.layout === 'full'
-    || NO_LAYOUT_ROUTES.has(ctx.path)
+    || NO_SHELL_ROUTES.has(ctx.path)
 
     if (typeof currentUnmount === 'function') {
         try { currentUnmount() } catch { }
@@ -162,7 +161,7 @@ async function mountView(name, ctx) {
     const container = isFull
         ? renderShell({ withHeader: false, withMain: false })
         : renderShell({
-            withHeader: view.layout !== 'none' && !NO_HEADER_ROUTES.has(ctx.path),
+            withHeader: view.layout !== 'none' && !NO_SHELL_ROUTES.has(ctx.path),
             withMain: true
         })
 
@@ -238,10 +237,6 @@ async function bootstrap() {
     }
 
     enhanceSelects()
-    router.start()
-
-    // 首帧渲染完成后再撤下遮罩（用 timeout 而不是 rAF：后台标签页里 rAF 不触发）
-    setTimeout(hideBootLoader, 30)
 
     router.onNotFound(() => {
         router.navigate('/welcome', { replace: true })
@@ -258,6 +253,11 @@ async function bootstrap() {
             )
         }
     })
+
+    router.start()
+
+    // 首帧渲染完成后再撤下遮罩（用 timeout 而不是 rAF：后台标签页里 rAF 不触发）
+    setTimeout(hideBootLoader, 30)
 
     window.__ln = { router, appStore, dev: createDevTools() }
 

@@ -120,7 +120,6 @@ function plugin(hook, vm) {
             curImgId = (curImgId + 1) % numberOfImages
         }
 
-        // 只在封面可见且页面在前台时轮播
         let onScreen = false
 
         const startTimer = function () {

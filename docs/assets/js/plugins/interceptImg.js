@@ -55,7 +55,6 @@ function plugin(hook, vm) {
         const template = createEl('template')
         template.innerHTML = html
 
-        const routePath = vm.route.path
         const localizedNames = calLocalized(interceptImgOptions.localization)
 
         getAllEls('img, video, audio, iframe, source', template.content)

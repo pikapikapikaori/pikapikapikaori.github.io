@@ -72,7 +72,6 @@ function readSnapshot (cache) {
     return readJson(cache, manifestUrl)
 }
 
-/* 损坏的记录缺 files 会让下游读取抛错，统一补成空对象。 */
 function withFiles (record) {
     if (!record) return record
     if (!record.files || typeof record.files !== 'object' || Array.isArray(record.files)) {
@@ -93,7 +92,6 @@ function writeSnapshot (cache, manifest) {
     }))
 }
 
-/* 旧版本缓存只能服务与新清单哈希一致的文件，避免旧内容顶替新版本。 */
 function allowOf (record, hashes) {
     const allow = {}
     if (!record || !record.files) return allow
@@ -166,8 +164,6 @@ async function serve (pathname, request) {
     return networkOrFail(request)
 }
 
-/** 只有清单内的目录入口才回退到 index.html。其它路径可能属于兄弟项目，
- *  用本项目首页顶替会把别的页面内容换掉。 */
 function serveKey (pathname) {
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
@@ -382,7 +378,6 @@ function projectOf (value) {
     return path
 }
 
-/* 排队任务留在同一条 promise 链里，事件生命周期才能覆盖它们。 */
 async function loop (first, firstResumeOnly) {
     let project = first
     let resumeOnly = !!firstResumeOnly

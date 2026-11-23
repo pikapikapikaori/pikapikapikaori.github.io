@@ -68,12 +68,10 @@ function decorateCodeElement(codeElement) {
     const nodes = collectTextNodes(codeElement)
     if (nodes.length === 0) return
 
-    // 代码块会被 Prism 拆成多个 token，因此按元素的完整文本匹配，再映射回文本节点
     const text = nodes.map(node => node.nodeValue).join('')
     const colors = findColors(text)
     if (colors.length === 0) return
 
-    // 从后往前插入，避免 splitText 影响后续匹配点的定位
     for (let i = colors.length - 1; i >= 0; i--) {
         const position = locate(nodes, colors[i].index)
         if (position) {

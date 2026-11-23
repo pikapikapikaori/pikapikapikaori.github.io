@@ -614,7 +614,7 @@ export default [
         'title': '如何理解动画中的踩点，轨道，并用这个来分辨原画师？',
         'time': '2018.01.23',
         'editedTime': '2024.08.03',
-        'cover': '/archive/ZhiArchive/_media/AnimeTimingAns-20180123/cover-picture.jpg',
+        'cover': '',
         'href': '/archive/ZhiArchive/AnimeTimingAns-20180123',
         'baseUrl': '/archive/ZhiArchive'
     },

@@ -14,7 +14,6 @@
             photography: { light: '#F3EFE6', dark: '#101113' }
         },
 
-        feedUrl: '../../assets/resources/meta/feed.atom',
         emailHref: 'mailto:Lyy8759@outlook.com',
         logoSrc: './assets/resources/logo/logo.jpg',
         startYear: 2023,

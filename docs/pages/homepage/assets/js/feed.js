@@ -91,7 +91,7 @@
     F.loadPosts = function (lang) {
         lang = lang || I.defaultLang
 
-        return fetch(CFG.feedUrl, { mode: 'cors', credentials: 'omit' })
+        return fetch(I.t('common.feed.href'), { mode: 'cors', credentials: 'omit' })
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status)
                 return res.text()

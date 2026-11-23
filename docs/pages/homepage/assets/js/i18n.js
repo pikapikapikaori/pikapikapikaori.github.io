@@ -49,7 +49,7 @@
         'common.layout.mondrian': 'Mondrian',
         'common.layout.starTrail': 'Star Trail',
         'common.layout.photography': 'Photography',
-        'common.feed.href': App.config.feedUrl
+        'common.feed.href': '../../assets/resources/meta/feed.atom'
     }
 
     const DICT = {

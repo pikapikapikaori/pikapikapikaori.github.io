@@ -112,7 +112,6 @@ class Widget {
             addClass(element, this.className)
             if (this.active) addClass(element, elementStatus.isActive)
 
-            // Bound once at creation so repeated mounts cannot stack activation handlers.
             this.unbindClick = onListen(element, 'click', event => {
                 if (!this.activateHandler) return
 
@@ -412,7 +411,6 @@ class WidgetRegistry {
     }
 
     updateIndexes() {
-        // Every widget gets an index so slot-less widgets (scroll-to-top) sit below the slots instead of overlapping them.
         this.items.forEach((item, index) => item.setIndex(index))
     }
 
@@ -488,7 +486,6 @@ class ThemeController {
         const themeIndex = data ? this.groups.findIndex(group => group && group.name === data.theme) : -1
         this.themeIndex = themeIndex === -1 ? this.defaultThemeIndex() : themeIndex
 
-        // 360 is kept as stored so the slider stays at its right end; older records stop at 359.
         const hue = data && Number.isInteger(data.colorHue) ? data.colorHue : null
         this.colorHue = hue !== null && hue >= 0 && hue <= 360 ? hue : null
 
@@ -499,7 +496,6 @@ class ThemeController {
         return this.applyRestored()
     }
 
-    // Restore applies state without writing it back.
     applyRestored() {
         if (this.hooks.onMode) this.hooks.onMode(this.modeIndex)
         if (this.hooks.onFont) this.hooks.onFont(this.fontSize)
@@ -519,7 +515,6 @@ class ThemeController {
                 return true
             })
             .then(applied => {
-                // A transaction paints mode and color UI only after the render succeeded.
                 if (this.deferringUi) return applied
                 if (this.hooks.onColor) this.hooks.onColor(this.colorHue)
 
@@ -531,7 +526,6 @@ class ThemeController {
         return this.applyColor()
     }
 
-    // Resolves to false when the theme CSS or the theme script failed; every other case counts as applied.
     applyTheme() {
         lockNoTransition()
 
@@ -564,7 +558,6 @@ class ThemeController {
         })
     }
 
-    // Queue user theme changes so overlapping clicks cannot interleave DOM rollbacks.
     applyThemeTransaction(commit) {
         const run = () => this.runThemeTransaction(commit)
         const pending = this.themeQueue.then(run, run)
@@ -581,7 +574,6 @@ class ThemeController {
             colorHue: this.colorHue
         }
 
-        // Commit state only; persisting and painting the final UI wait for a successful render.
         commit()
 
         this.deferringUi = true
@@ -596,7 +588,6 @@ class ThemeController {
         }
 
         if (applied) {
-            // A successful transaction restores the revert budget for a later failure.
             this.revertCount = 0
 
             this.persist()
@@ -609,9 +600,7 @@ class ThemeController {
     }
 
     async revertThemeTransaction(snapshot) {
-        // Reverting is a single attempt; a second failure stops here instead of looping.
         if (this.isReverting || this.revertCount >= themeMaxRevert) {
-            // The CSS of the requested change is already applied, so keep it and store it as it is.
             this.persist()
             this.flushUi()
 
@@ -639,7 +628,6 @@ class ThemeController {
 
         if (restored) this.revertCount = 0
 
-        // The stored record follows what is actually in effect, so a reload does not retry the failed theme.
         this.persist()
         this.flushUi()
 
@@ -652,7 +640,6 @@ class ThemeController {
     }
 
     setColorHue(hue) {
-        // Hue 0 and 360 are both valid ends of the slider, so neither is normalised.
         const next = Number.isInteger(hue) && hue >= 0 && hue <= 360 ? hue : null
         this.colorHue = next
 
@@ -713,7 +700,6 @@ function plugin(hook, vm) {
     let restorePromise = null
     let themeRendered = false
     let themeRenderQueued = false
-    // Bumped on every user-triggered theme render so a queued first render can detect it was superseded.
     let themeRenderGeneration = 0
     let isWidgetsOpen = true
     let ticking = false
@@ -737,7 +723,6 @@ function plugin(hook, vm) {
         return mode === 'dark'
     }
 
-    // Hue 0 is valid, so validity requires a finite number instead of a truthiness check.
     let isFiniteHue = function (hue) {
         return hue !== null && Number.isFinite(hue)
     }
@@ -751,7 +736,6 @@ function plugin(hook, vm) {
         }
 
         let snapped = Math.round(Number(hue) / 5) * 5
-        // Presets stop at 345, so the 360 end of the slider highlights the hue 0 preset.
         if (snapped >= 360) snapped -= 360
 
         let matched = btns.find(btn => Number(getData(btn, 'hue')) === snapped)
@@ -846,8 +830,6 @@ function plugin(hook, vm) {
         unlockNoTransition()
     }
 
-    // Theme scripts read CSS variables, so they must run after the new sheet applies.
-    // Resolves true when the sheet is ready or unused, false on error or timeout.
     function waitForStylesheet(link, cssPath) {
         if (!link || link.disabled || !cssPath) {
             return Promise.resolve(true)
@@ -856,8 +838,6 @@ function plugin(hook, vm) {
         const expected = new URL(cssPath, document.baseURI).href
 
         const isReady = function () {
-            // Cross-origin or failed sheets throw SecurityError on cssRules access.
-            // Treat unreadable sheets as not ready so the caller falls back to timeout.
             try {
                 const sheet = link.sheet
                 if (!sheet || !sheet.cssRules || sheet.cssRules.length === 0) return false
@@ -1014,7 +994,6 @@ function plugin(hook, vm) {
         return themeModuleCache.get(url)
     }
 
-    // Records DOM changes made by renderTheme so they can be undone, independent of the theme.
     function beginDomTracking() {
         const tracking = { records: [], observer: null, styleAfter: new Map(), stopped: false }
 
@@ -1151,7 +1130,6 @@ function plugin(hook, vm) {
         domTracking = null
     }
 
-    // Resolves to false only for a real theme failure; a scriptless or superseded render counts as done.
     async function renderTheme() {
         themeCleanup()
 
@@ -1171,7 +1149,6 @@ function plugin(hook, vm) {
             return false
         }
 
-        // A newer render owns the result now, so this one must not be reported as a failure.
         if (token !== themeRenderToken) return true
 
         if (typeof themeModule.renderTheme !== 'function') {
@@ -1546,7 +1523,6 @@ function plugin(hook, vm) {
                 },
                 onColor: function (hue) {
                     const themeColor = themeController.themeColor
-                    // Hue 0 is valid, so an empty theme color must fall back to null instead of 0.
                     const effective = hue === null ? (isEnabled(themeColor) ? hexToHsl(themeColor)[0] : null) : hue
 
                     syncColorPicker(effective)
@@ -1638,7 +1614,6 @@ function plugin(hook, vm) {
             .catch(function () {
             })
             .then(function () {
-                // A user-triggered render already ran, so this queued render must not run again.
                 if (generation !== themeRenderGeneration) return
 
                 themeRendered = true

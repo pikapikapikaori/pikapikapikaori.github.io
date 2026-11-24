@@ -1,6 +1,6 @@
 {
     "name": "pikapikapi-blog",
-    "version": "4.7.5",
+    "version": "4.8.0",
     "scripts": {
         "start": "hostthis --dir ./docs --dev --port 4000",
         "lint": "eslint .",

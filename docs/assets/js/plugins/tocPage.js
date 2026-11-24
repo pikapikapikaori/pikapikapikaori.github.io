@@ -1,17 +1,58 @@
 import pagesData from '../config/tocdata.json.js'
-import { protectCodeBlocks, lockNoTransition, unlockNoTransition, makeButtonLike } from '../utils/common.js'
+import {
+    protectCodeBlocks,
+    codeBlockModes,
+    lockNoTransition,
+    unlockNoTransition,
+    makeButtonLike,
+    isEnabled,
+    clamp,
+    toDate
+} from '../utils/common.js'
+import { mediaQueries, docsifyClasses, elementStatus } from '../utils/constants.js'
+import { getEl, getAllEls, getElByClass, onListen, toggleClass, hasClass, setCssVar } from '../utils/dom.js'
+import { arrow } from '../utils/icons.js'
 import { bindShortcuts } from '../utils/shortcut.js'
+import { matchesLocalePath } from '../utils/localization.js'
+import { ignoreViewFullImageClass } from './viewFullImage.js'
 
 let tocPageOptions = {
+    enable: false,
     recentAmount: 8,
+    renderStyle: 'card',
+    dateFormat: null,
     columns: 2,
     narrowColumns: 1,
     defaultImg: './assets/resources/img/default/picture-2.gif',
-    coverPath: [
-        '/', 
-        '/en-us/', 
-        '/jp/'
-    ]
+    localPath: [],
+    coverPath: ['/']
+}
+
+export const hasTocClass = 'has-toc'
+export const tocPageDivClass = 'toc-page-div'
+
+const tocRenderStyles = {
+    card: { name: 'card', render: renderCardPage },
+    list: { name: 'list', render: renderListPage }
+}
+
+const tocFilters = {
+    none: { name: 'none', filter: filterByBaseUrl },
+    lang: { name: 'lang', filter: filterByLanguage }
+}
+
+function shouldUseTableKey(table, value) {
+    return typeof value === 'string' && Object.prototype.hasOwnProperty.call(table, value)
+}
+
+function resolveRenderStyle(value) {
+    return shouldUseTableKey(tocRenderStyles, value) ? tocRenderStyles[value] : tocRenderStyles.card
+}
+
+function resolveFilter(value) {
+    if (!isEnabled(value)) return tocFilters.none
+
+    return shouldUseTableKey(tocFilters, value) ? tocFilters[value] : tocFilters.none
 }
 
 function toColumnCount(value, fallback) {
@@ -20,13 +61,147 @@ function toColumnCount(value, fallback) {
     return count >= 1 ? count : fallback
 }
 
+function hasRequiredTime(pageData, renderStyle) {
+    return renderStyle.name !== tocRenderStyles.list.name || Boolean(pageData.time)
+}
+
+function isPageInLanguage(pageData, context) {
+    if (context.languagePrefix === '/') {
+        return !context.languagePrefixes.some(prefix => matchesLocalePath(pageData.href, prefix))
+    }
+
+    return matchesLocalePath(pageData.href, context.languagePrefix)
+}
+
+function filterByBaseUrl(pageData, context) {
+    return hasRequiredTime(pageData, context.renderStyle) && pageData.baseUrl === context.baseUrl
+}
+
+function filterByLanguage(pageData, context) {
+    return hasRequiredTime(pageData, context.renderStyle) && isPageInLanguage(pageData, context)
+}
+
+function filterPages(pages, context) {
+    const activeFilter = resolveFilter(context.filterMode)
+
+    return pages
+        .filter(page => activeFilter.filter(page, context))
+        .sort(comparePages)
+}
+
+function comparePages(a, b) {
+    const timeA = a.time
+    const timeB = b.time
+
+    const isEmptyA = !isEnabled(timeA)
+    const isEmptyB = !isEnabled(timeB)
+
+    if (isEmptyA && isEmptyB) return 0
+    if (isEmptyA) return 1
+    if (isEmptyB) return -1
+
+    return toDate(timeB) - toDate(timeA)
+}
+
+function formatPostDate(timeStr, routePath, dateFormat) {
+    if (!dateFormat) return timeStr
+
+    const parts = timeStr.split('.')
+    if (parts.length < 3) return timeStr
+
+    const month = parseInt(parts[1], 10)
+    const day = parseInt(parts[2], 10)
+    const { default: defaultFormatter, ...routeFormatters } = dateFormat
+
+    let formatter = defaultFormatter
+
+    Object.keys(routeFormatters).some(match => {
+        if (routePath.indexOf(match) === -1) return false
+
+        formatter = routeFormatters[match]
+        return true
+    })
+
+    return typeof formatter === 'function' ? formatter(month, day) : timeStr
+}
+
+function buildPageContext(page, context) {
+    return {
+        pageHref: '#' + page.href,
+        pagePictureHref: isEnabled(page.cover)
+            ? context.pathname.replace(/\/$/, '') + page.cover
+            : context.defaultImg,
+        formattedDate: formatPostDate(page.time, context.routePath, context.dateFormat)
+    }
+}
+
+function renderCardPage(tocPageDiv, pages, context) {
+    let html = ''
+
+    pages.forEach(page => {
+        const { pageHref, pagePictureHref, formattedDate } = buildPageContext(page, context)
+
+        html += `<a class='toc-page-display-a' href='${pageHref}'><div class='toc-page-display-div'><div class='toc-page-display-title-img'><img class='${ignoreViewFullImageClass}' src='${pagePictureHref}' loading='lazy' onerror='this.src="${context.defaultImg}"'></div><div class='toc-page-display-title-div'>${page.title}</div><div class='toc-page-display-date-div'>${formattedDate}</div></div></a>`
+    })
+
+    tocPageDiv.innerHTML = html
+}
+
+function renderListPage(tocPageDiv, pages, context) {
+    const list = tocPageDiv.childNodes[0]
+
+    if (!list) return
+
+    let html = ''
+    let currentYear = ''
+
+    pages.forEach(page => {
+        const { pageHref, formattedDate } = buildPageContext(page, context)
+        const year = page.time.split('.')[0]
+
+        if (year !== currentYear) {
+            html += `<li class="toc-year-group">${year}</li>`
+            currentYear = year
+        }
+
+        html += `<li class="toc-post-item"><span class="toc-post-date">${formattedDate}</span><a href="${pageHref}" class="toc-post-link">${page.title}</a></li>`
+    })
+
+    list.innerHTML = html
+}
+
+function paginate(totalCount, pageSize, pageIndex) {
+    const maxPageIndex = Math.ceil(totalCount / pageSize)
+    const currentPageIndex = clamp(pageIndex, 1, maxPageIndex)
+
+    return {
+        pageIndex: currentPageIndex,
+        maxPageIndex,
+        offset: (currentPageIndex - 1) * pageSize,
+        limit: pageSize
+    }
+}
+
+function getPaginatorInput() {
+    return getEl('input', getElByClass('toc-paginator-input'))
+}
+
 function plugin(hook, vm) {
+    if (!tocPageOptions.enable) return
 
     const pluginIdentifier = 'toc'
 
-    const tocMarkup = '<!-- toc -->'
+    const renderStyle = resolveRenderStyle(tocPageOptions.renderStyle)
+    const dateFormat = tocPageOptions.dateFormat
 
-    const tocDiv = '<div class=\'toc-page-div\'></div><div class=\'toc-paginator-div\'><div class=\'tocPaginatorLeftButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div><div class=\'toc-paginator-input\'></div><div class=\'tocPaginatorRightButtonDiv toc-paginator-button-div\'><span class="toc-paginator-button-span"><?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>'
+    const localPath = tocPageOptions.localPath
+    const languagePrefixes = localPath.map(locale => '/' + locale + '/')
+
+    const tocPaginatorDiv = `<div class='toc-paginator-div'><div class='tocPaginatorLeftButtonDiv toc-paginator-button-div'><span class="toc-paginator-button-span">${arrow.prev}</span></div><div class='toc-paginator-input'></div><div class='tocPaginatorRightButtonDiv toc-paginator-button-div'><span class="toc-paginator-button-span">${arrow.next}</span></div></div>`
+
+    const tocDiv = renderStyle.name === tocRenderStyles.list.name
+        ? `<div class='${tocPageDivClass} toc-page-list'><ul></ul></div>${tocPaginatorDiv}`
+        : `<div class='${tocPageDivClass} toc-page-card'></div>${tocPaginatorDiv}`
 
     const recentAmount = tocPageOptions.recentAmount
 
@@ -35,13 +210,15 @@ function plugin(hook, vm) {
 
     let hasTocs = false
 
+    let filterMode = tocFilters.none.name
+
     let savedCloseState = null
 
     let pendingCloseToggle = undefined
 
-    const narrowMql = window.matchMedia('screen and (max-width: 768px)')
+    const narrowMql = window.matchMedia(mediaQueries.narrow)
 
-    let sortedPages = []
+    let filteredPages = []
 
     let curPageIndex = 1
 
@@ -53,7 +230,7 @@ function plugin(hook, vm) {
         const body = document.body
 
         if (willBeToc && !hasTocs) {
-            savedCloseState = body.classList.contains('close')
+            savedCloseState = hasClass(body, elementStatus.close)
             pendingCloseToggle = !narrowMql.matches
         } else if (!willBeToc && hasTocs) {
             if (savedCloseState !== null) {
@@ -62,24 +239,24 @@ function plugin(hook, vm) {
             }
         }
 
-        body.classList.toggle('has-toc', willBeToc)
+        toggleClass(body, hasTocClass, willBeToc)
 
         hasTocs = willBeToc
     }
 
     function syncSidebarA11y() {
         const body = document.body
-        const closed = body.classList.contains('close')
+        const closed = hasClass(body, elementStatus.close)
 
-        const sidebar = document.querySelector('.sidebar')
+        const sidebar = getElByClass(docsifyClasses.sidebar)
         if (sidebar) {
             const sidebarHidden = narrowMql.matches ? !closed : closed
             if (sidebar.inert !== sidebarHidden) sidebar.inert = sidebarHidden
         }
 
-        const toggle = document.querySelector('.sidebar-toggle')
+        const toggle = getElByClass(docsifyClasses.sidebarToggle)
         if (toggle) {
-            const toggleHidden = body.classList.contains('has-toc')
+            const toggleHidden = hasClass(body, hasTocClass)
             if (toggle.inert !== toggleHidden) toggle.inert = toggleHidden
         }
     }
@@ -88,7 +265,7 @@ function plugin(hook, vm) {
         if (window.__tocPageSidebarA11yBound) return
         window.__tocPageSidebarA11yBound = true
 
-        narrowMql.addEventListener('change', syncSidebarA11y)
+        onListen(narrowMql, 'change', syncSidebarA11y)
         new MutationObserver(syncSidebarA11y).observe(document.body, {
             attributes: true,
             attributeFilter: ['class']
@@ -97,95 +274,102 @@ function plugin(hook, vm) {
         syncSidebarA11y()
     }
 
-    function renderTocStage1(content, vm) {
-        content = protectCodeBlocks(content, pluginIdentifier, 'protect')
+    function renderTocStage1(content) {
+        content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.protect)
 
-        const hasToc = content.includes(tocMarkup)
+        const tocMarkupReg = /<!--\s*toc(?::([\w-]+))?\s*-->/g
+        let matched = false
+        let mode = tocFilters.none.name
 
-        if (hasToc) {
-            content = content.replace(tocMarkup, tocDiv)
-        }
+        content = content.replace(tocMarkupReg, (markup, rawMode) => {
+            if (matched) return markup
 
-        content = protectCodeBlocks(content, pluginIdentifier, 'restore')
+            const nextFilter = isEnabled(rawMode)
+                ? (shouldUseTableKey(tocFilters, rawMode) ? tocFilters[rawMode] : null)
+                : tocFilters.none
+
+            if (!nextFilter) return markup
+
+            matched = true
+            mode = nextFilter.name
+            return tocDiv
+        })
+
+        content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.restore)
 
         return {
             content,
-            hasToc
+            hasToc: matched,
+            filterMode: mode
         }
     }
 
-    function renderTocContents() {
-        let tocPageDiv = document.getElementsByClassName('toc-page-div')[0]
-
-        if (!tocPageDiv) return
-
-        tocPageDiv.innerHTML = ''
-
-        let baseUrl = vm.route.path.split('/').slice(0, -1).join('/')
-
-        if (baseUrl === '') {
-            baseUrl = '/'
-        }
-
-        let pages = pagesData.filter(pageData => pageData.baseUrl === baseUrl).sort((a, b) => {
-            const timeA = a.time
-            const timeB = b.time
-
-            const isEmptyA = !timeA || timeA.trim?.() === ''
-            const isEmptyB = !timeB || timeB.trim?.() === ''
-
-            if (isEmptyA && isEmptyB) return 0
-            if (isEmptyA) return 1
-            if (isEmptyB) return -1
-
-            const dateA = new Date(timeA.replace(/\./g, '-'))
-            const dateB = new Date(timeB.replace(/\./g, '-'))
-
-            return dateB - dateA
+    function resolveLanguagePrefix() {
+        let curi18n = '/'
+        languagePrefixes.forEach(path => {
+            if (matchesLocalePath(vm.route.path, path)) curi18n = path
         })
+        return curi18n
+    }
 
-        sortedPages = pages
+    function resolveBaseUrl() {
+        const baseUrl = vm.route.path.split('/').slice(0, -1).join('/')
+        return isEnabled(baseUrl) ? baseUrl : '/'
+    }
 
-        maxPageIndex = Math.ceil(pages.length / recentAmount)
+    function createFilterContext() {
+        return {
+            filterMode,
+            renderStyle,
+            languagePrefix: resolveLanguagePrefix(),
+            languagePrefixes,
+            baseUrl: resolveBaseUrl()
+        }
+    }
 
+    function createRenderContext() {
+        return {
+            dateFormat,
+            routePath: vm.route.path,
+            pathname: location.pathname,
+            defaultImg: tocPageOptions.defaultImg
+        }
+    }
+
+    function refreshFilteredPages() {
+        filteredPages = filterPages(pagesData, createFilterContext())
+    }
+
+    function renderTocContents() {
+        refreshFilteredPages()
         renderTocPageUnderPaginator()
     }
 
     function renderTocPageUnderPaginator() {
-        let tocPageDiv = document.getElementsByClassName('toc-page-div')[0]
-        tocPageDiv.innerHTML = ''
+        const tocPageDiv = getElByClass(tocPageDivClass)
 
-        if (curPageIndex < 1) {
-            curPageIndex = 1
-        }
+        if (!tocPageDiv) return
 
-        if (curPageIndex > maxPageIndex) {
-            curPageIndex = maxPageIndex
-        }
+        const paging = paginate(filteredPages.length, recentAmount, curPageIndex)
 
-        let pages = sortedPages.slice((curPageIndex - 1) * recentAmount, curPageIndex * recentAmount)
+        curPageIndex = paging.pageIndex
+        maxPageIndex = paging.maxPageIndex
 
-        pages.forEach(page => {
-            let pageHref = '#' + page.href
-            let pagePictureHref = location.pathname.replace(/\/$/, '') + page.cover
+        renderStyle.render(
+            tocPageDiv,
+            filteredPages.slice(paging.offset, paging.offset + paging.limit),
+            createRenderContext()
+        )
 
-            let pageHrefDiv = `<a class='toc-page-display-a' href='${pageHref}'><div class='toc-page-display-div'><div class='toc-page-display-title-img'><img class='ignore-view-full-image-img' src='${pagePictureHref}' loading='lazy' onerror='this.src="${tocPageOptions.defaultImg}"'></div><div class='toc-page-display-title-div'>${page.title}</div><div class='toc-page-display-date-div'>${page.time}</div></div></a>`
-
-            tocPageDiv.innerHTML += pageHrefDiv
-        })
-
-        let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')
-        if (tocPaginatorInputDiv.length > 0) {
-            tocPaginatorInputDiv = tocPaginatorInputDiv[0]
-            if (tocPaginatorInputDiv.hasChildNodes()) {
-                tocPaginatorInputDiv.childNodes[0].value = curPageIndex
-            }
+        const tocPaginatorInput = getPaginatorInput()
+        if (tocPaginatorInput) {
+            tocPaginatorInput.value = curPageIndex
         }
         document.scrollingElement.scrollTop = 0
     }
 
     function gotoPage(index) {
-        const target = Math.min(Math.max(Number(index) || 1, 1), maxPageIndex)
+        const target = paginate(filteredPages.length, recentAmount, index).pageIndex
 
         if (target === Number(curPageIndex)) return
 
@@ -195,9 +379,9 @@ function plugin(hook, vm) {
     }
 
     function renderTocPaginator() {
-        let tocPaginatorInputDiv = document.getElementsByClassName('toc-paginator-input')[0]
-        let tocPaginatorLeftButtonDiv = document.getElementsByClassName('tocPaginatorLeftButtonDiv')[0]
-        let tocPaginatorRightButtonDiv = document.getElementsByClassName('tocPaginatorRightButtonDiv')[0]
+        const tocPaginatorInputDiv = getElByClass('toc-paginator-input')
+        const tocPaginatorLeftButtonDiv = getElByClass('tocPaginatorLeftButtonDiv')
+        const tocPaginatorRightButtonDiv = getElByClass('tocPaginatorRightButtonDiv')
 
         if (!tocPaginatorInputDiv || !tocPaginatorLeftButtonDiv || !tocPaginatorRightButtonDiv) {
             return
@@ -206,16 +390,16 @@ function plugin(hook, vm) {
         makeButtonLike(tocPaginatorLeftButtonDiv.childNodes[0])
         makeButtonLike(tocPaginatorRightButtonDiv.childNodes[0])
 
-        tocPaginatorLeftButtonDiv.onclick = function (e) {
+        tocPaginatorLeftButtonDiv.onclick = function () {
             gotoPage(curPageIndex - 1)
         }
-        tocPaginatorRightButtonDiv.onclick = function (e) {
+        tocPaginatorRightButtonDiv.onclick = function () {
             gotoPage(curPageIndex + 1)
         }
 
         tocPaginatorInputDiv.innerHTML = `<input class='toc-paginator-input-box' type='number' value='${curPageIndex}' min='1' max='${maxPageIndex}'></input><span>/</span><span>${maxPageIndex}</span>`
 
-        let tocPaginatorInput = tocPaginatorInputDiv.childNodes[0]
+        const tocPaginatorInput = getEl('input', tocPaginatorInputDiv)
 
         tocPaginatorInput.onchange = function () {
             gotoPage(this.value)
@@ -231,21 +415,19 @@ function plugin(hook, vm) {
             return matchedPage.title
         }
 
-        const h1 = document.querySelector('.markdown-section h1')
+        const h1 = getEl(`.${docsifyClasses.markdownSection} h1`)
         if (h1?.innerText) return h1.innerText
-        const link = Array.from(
-            document.querySelectorAll('.sidebar-nav a')
-        ).find(a => a.hash.slice(1) === path)   // 用 a.hash 更安全
+        const link = getAllEls(`.${docsifyClasses.sidebarNav} a`)
+            .find(a => a.hash.slice(1) === path)
 
         return link?.textContent
     }
 
     hook.mounted(function () {
-        const rootStyle = document.documentElement.style
-        rootStyle.setProperty('--tocpage-columns', columns)
-        rootStyle.setProperty('--tocpage-narrow-columns', narrowColumns)
+        setCssVar('--tocpage-columns', columns)
+        setCssVar('--tocpage-narrow-columns', narrowColumns)
 
-        narrowMql.addEventListener('change', onScreenWidthChange)
+        onListen(narrowMql, 'change', onScreenWidthChange)
 
         bindSidebarA11y()
 
@@ -253,7 +435,7 @@ function plugin(hook, vm) {
             ArrowLeft: { handler: () => gotoPage(curPageIndex - 1), repeat: true },
             ArrowRight: { handler: () => gotoPage(curPageIndex + 1), repeat: true },
             KeyP: function () {
-                const input = document.querySelector('.toc-paginator-input input')
+                const input = getPaginatorInput()
                 if (!input) return
 
                 input.focus()
@@ -262,7 +444,7 @@ function plugin(hook, vm) {
             Escape: {
                 allowInInput: true,
                 handler: function () {
-                    const input = document.querySelector('.toc-paginator-input input')
+                    const input = getPaginatorInput()
                     if (!input || document.activeElement !== input) return
 
                     input.blur()
@@ -273,14 +455,15 @@ function plugin(hook, vm) {
         function onScreenWidthChange(e) {
             if (!hasTocs) return
             lockNoTransition()
-            document.body.classList.toggle('close', !e.matches)
+            toggleClass(document.body, elementStatus.close, !e.matches)
             unlockNoTransition()
         }
     })
 
     hook.beforeEach(function (content) {
-        const result = renderTocStage1(content, vm)
+        const result = renderTocStage1(content)
 
+        filterMode = result.filterMode
         handleRouteChange(result.hasToc)
 
         return result.content
@@ -298,16 +481,13 @@ function plugin(hook, vm) {
 
             requestAnimationFrame(() => {
                 void document.body.offsetHeight
-                document.body.classList.toggle('close', targetClose)
+                toggleClass(document.body, elementStatus.close, targetClose)
             })
         }
 
-        // fix auto2top
         document.scrollingElement.scrollTop = 0
 
-        // fix autoHeader
         let path = vm.route.path
-        // for default title '- ピカピカピ'
         if (!coverPath.includes(path)) {
             document.title = resolveHeading(path)
         }

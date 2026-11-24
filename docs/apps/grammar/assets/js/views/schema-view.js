@@ -1,8 +1,3 @@
-/**
- * 数据格式：几章 JSON 结构文档。
- * 结构与语法页一致 —— 左侧「章节」+「本页目录」，右侧正文；正文开头一条结论，章尾翻页。
- */
-
 import { h, replace } from '../utils/dom.js'
 import { appStore, setNavContext } from '../app-state.js'
 import { setBreadcrumbs } from '../utils/breadcrumbs.js'
@@ -13,9 +8,8 @@ import { createPageTools } from '../components/page-tools.js'
 import { openSelectMenu } from '../components/select-menu.js'
 import { toast } from '../components/toast.js'
 
-const NARROW = '(max-width: 1024px)'
+const NARROW = 'screen and (max-width: 768px)'
 
-/* 从哪个路由进的数据格式：本页切换文档会再走一次 schema → schema，不能让它冲掉来源 */
 let entryFrom = null
 
 export default {
@@ -23,7 +17,6 @@ export default {
     layout: 'shell',
 
     async mount(main, ctx) {
-        // 入口来源要在任何提前返回之前记下：'#/schema' 会重定向到 '#/schema/<doc>'
         const prevRoute = appStore.get().prevRoute
         if (prevRoute && prevRoute !== 'schema') entryFrom = prevRoute
 
@@ -63,15 +56,12 @@ export default {
 
         const doc = docs[index]
 
-        // 从首页（未登录、欢迎页）进来的回首页，否则回语言列表
         const fromHome = entryFrom === 'welcome' || !appStore.get().userId
-        // 顶栏也跟着回到来源：从首页进来时「生词本」「设置」都回首页
         setNavContext(fromHome ? 'welcome' : 'user')
         setBreadcrumbs([
             fromHome
                 ? { label: '首页', href: '#/welcome' }
                 : { label: '语言列表', href: '#/languages' },
-            // 当前手册不再进面包屑：末项就是「数据格式」本身
             { label: title }
         ])
 
@@ -237,7 +227,6 @@ function render(main, { title, docs, index, doc, anchor }) {
 
     replace(main, head, h('div', { class: 'grammar-layout' }, nav, content))
 
-    // 数据格式页没有转写、短音符，这里只会渲染「↑」一个按钮，行为与语法页一致
     const tools = createPageTools({ anchorEl: main })
     document.body.appendChild(tools.el)
 
@@ -289,7 +278,6 @@ function render(main, { title, docs, index, doc, anchor }) {
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
 
-    // 窄屏常收、宽屏常开；与语法页同一套折叠规则
     function syncTocOpen() { tocDetails.open = !narrowQuery.matches }
     syncTocOpen()
     narrowQuery.addEventListener('change', syncTocOpen)

@@ -3,9 +3,6 @@ import { annotateBdi, bdiFragment } from '../utils/bdi.js'
 
 let activeModal = null
 
-/**
- * @returns {Function} close
- */
 export function openModal({
     title = '',
     body = null,
@@ -42,7 +39,6 @@ export function openModal({
     if (body instanceof Node) bodyEl.appendChild(body)
     else if (body != null) bodyEl.appendChild(document.createTextNode(String(body)))
     modal.appendChild(bodyEl)
-    // 正文里可能带 bdi（toast、modal 的调用方已包好），统一补 lang/dir
     annotateBdi(bodyEl)
 
     if (actions.length) {
@@ -55,9 +51,9 @@ export function openModal({
                     if (typeof a.onClick === 'function') {
                         try {
                             const r = a.onClick()
-                            if (r === false) return // 阻止关闭
+                            if (r === false) return
                         }
-                        catch (err) { console.error(err); return }
+                        catch { return }
                     }
                     close()
                 }
@@ -77,7 +73,6 @@ export function openModal({
 
     if (closeOnBackdrop) backdrop.addEventListener('click', close)
 
-    // 关闭后把焦点还给打开前的元素
     const prevFocus = document.activeElement
 
     setTimeout(() => {
@@ -94,7 +89,7 @@ export function openModal({
         root.setAttribute('aria-hidden', 'true')
         activeModal = null
         if (prevFocus && typeof prevFocus.focus === 'function') {
-            try { prevFocus.focus() } catch { /* ignore */ }
+            try { prevFocus.focus() } catch {   }
         }
         if (typeof onClose === 'function') onClose()
     }
@@ -103,7 +98,6 @@ export function openModal({
     return close
 }
 
-/** @returns {Promise<boolean>} */
 export function confirmModal({
     title = '确认',
     message = '',
@@ -120,7 +114,6 @@ export function confirmModal({
         }
         openModal({
             title,
-            // message 可以是字符串，也可以是 [文本, bdiNode, 文本] 这样的片段数组
             body: h('p', {}, ...(Array.isArray(message) ? message : [bdiFragment(message)])),
             actions: [
                 { label: cancelLabel, onClick: () => done(false) },

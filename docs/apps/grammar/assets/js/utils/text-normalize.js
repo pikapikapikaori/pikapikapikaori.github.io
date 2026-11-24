@@ -1,5 +1,3 @@
-/** 搜索用的规范化：忽略大小写与附加符号；查重时仍严格比较。 */
-
 export function normalizeSearch(s) {
     return String(s ?? '')
         .normalize('NFD')

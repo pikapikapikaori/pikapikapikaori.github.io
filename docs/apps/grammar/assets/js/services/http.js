@@ -1,11 +1,9 @@
-/** 统一的 HTTP 层：超时、重试、按站点节流、响应缓存。 */
-
 import { readCache, writeCache } from '../store/http-cache.js'
 
 const DEFAULT_TIMEOUT = 15000
 const DEFAULT_RETRIES = 2
 
-const queues = new Map()   // origin -> OriginQueue
+const queues = new Map()
 
 class OriginQueue {
     constructor() {
@@ -17,7 +15,6 @@ class OriginQueue {
         this.timer = null
     }
 
-    /** 按调用方声明的更保守值取大（同一个站点被多个源请求时） */
     configure({ concurrency, minInterval }) {
         if (concurrency > 0) this.concurrency = Math.max(this.concurrency, concurrency)
         if (minInterval > 0) this.minInterval = Math.max(this.minInterval, minInterval)
@@ -63,7 +60,6 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-/** `Retry-After` 支持秒数与 HTTP-date */
 function parseRetryAfter(value) {
     if (!value) return 0
     const seconds = Number(value)
@@ -109,7 +105,6 @@ async function fetchOnce(url, { timeout, signal, headers }) {
             })
         }
         if (err && err.status) throw err
-        // 网络错误（断网、连接被重置…）
         throw httpError(err?.message || '网络错误', { retryable: true })
     } finally {
         clearTimeout(timer)
@@ -178,7 +173,7 @@ export async function requestJSON(url, options = {}) {
 
     const cached = await readCached(key, 'json')
     if (cached != null) {
-        try { return JSON.parse(cached) } catch { /* 缓存坏了就重新请求 */ }
+        try { return JSON.parse(cached) } catch {   }
     }
 
     const data = await request(full, {

@@ -1,0 +1,297 @@
+@import url('./nonstandard/base.css');
+
+@font-face {
+    font-family: 'HYKaiTiS';
+    src: url('../resources/fonts/HYKaiTiS.woff2') format('woff2');
+    font-display: swap;
+    size-adjust: 115%;
+}
+
+@font-face {
+    font-family: 'SortsMillGoudy';
+    src: url('../resources/fonts/SortsMillGoudy-Regular.woff2') format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SortsMillGoudy';
+    src: url('../resources/fonts/SortsMillGoudy-Italic.woff2') format('woff2');
+    font-style: italic;
+    font-display: swap;
+}
+
+:root {
+    --app-font-body: 'SortsMillGoudy', 'HYKaiTiS', serif;
+    --app-font-ui: var(--app-font-body);
+    --control-ink: #1a1a1a;
+    --control-paper: rgba(248, 245, 240, .94);
+    --control-line: rgba(26, 26, 26, .26);
+    --control-hover: rgba(26, 26, 26, .08);
+    --control-accent: #c41e3a;
+    --control-radius: 999px;
+    --control-menu-radius: 16px;
+    --app-ease: cubic-bezier(.22, 1, .36, 1);
+    color-scheme: light;
+}
+
+html[data-theme="light"] {
+    --page-bg: #F2EDE4;
+}
+
+html[data-theme="dark"] {
+    --page-bg: #101214;
+    --control-ink: #ece5d8;
+    --control-paper: rgba(18, 20, 22, .94);
+    --control-line: rgba(236, 229, 216, .3);
+    --control-hover: rgba(236, 229, 216, .1);
+    --control-accent: #f08a9a;
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100svh;
+    background: var(--page-bg, #101214);
+    color: var(--control-ink);
+    font-family: var(--app-font-body);
+    overflow-x: hidden;
+}
+
+#app,
+.app-root,
+.app-layout {
+    min-height: 100svh;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.layout-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 100svh;
+    padding: 2rem;
+    background: #f7f3ea;
+    color: #1a1a1a;
+    font-family: var(--app-font-body);
+    text-align: center;
+}
+
+html[data-theme="dark"] .layout-fallback {
+    background: #141210;
+    color: #ece5d8;
+}
+
+.layout-fallback .app-controls {
+    justify-content: center;
+}
+
+.app-controls {
+    position: relative;
+    z-index: 30;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .4rem;
+    font-family: var(--app-font-ui);
+}
+
+.app-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.app-control-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 36px;
+    padding: 0 .7rem;
+    border: 1px solid var(--control-line);
+    border-radius: var(--control-radius);
+    background: transparent;
+    color: var(--control-ink);
+    font: inherit;
+    font-size: .72rem;
+    line-height: 1.4;
+    letter-spacing: .04em;
+    cursor: pointer;
+    transition:
+        color .25s var(--app-ease),
+        border-color .25s var(--app-ease),
+        background-color .25s var(--app-ease);
+}
+
+.app-control-label {
+    position: relative;
+    top: .5px;
+}
+
+.app-control-trigger:hover,
+.app-control-trigger[aria-expanded="true"] {
+    background: var(--control-hover);
+    border-color: var(--control-accent);
+}
+
+.app-control-trigger:focus-visible,
+.app-control-option:focus-visible {
+    outline: 2px solid var(--control-accent);
+    outline-offset: 2px;
+}
+
+.app-control[data-kind="theme"] .app-control-trigger::after {
+    display: none;
+}
+
+.app-control[data-kind="theme"] .app-control-trigger {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+    transition:
+        color .15s var(--app-ease),
+        border-color .15s var(--app-ease),
+        background-color .15s var(--app-ease);
+}
+
+.app-control[data-kind="theme"] .app-control-label {
+    display: none;
+}
+
+.app-control:not([data-kind="theme"]) .app-control-icon {
+    display: none;
+}
+
+.app-control[data-kind="theme"] .app-control-icon {
+    position: relative;
+    display: block;
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.theme-icon {
+    position: absolute;
+    inset: 0;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    transition: opacity .15s var(--app-ease);
+}
+
+.theme-icon.is-on {
+    opacity: 1;
+}
+
+.app-control-trigger::after {
+    content: "";
+    width: .34rem;
+    height: .34rem;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg) translateY(-1px);
+    opacity: .65;
+    transition: transform .25s var(--app-ease);
+}
+
+.app-control-trigger[aria-expanded="true"]::after {
+    transform: rotate(225deg) translate(-1px, -1px);
+}
+
+.app-control-menu {
+    position: absolute;
+    top: calc(100% + .35rem);
+    right: 0;
+    z-index: 40;
+    min-width: 10.5rem;
+    margin: 0;
+    padding: .35rem;
+    list-style: none;
+    border: 1px solid var(--control-line);
+    border-radius: var(--control-menu-radius);
+    background: var(--control-paper);
+    box-shadow: 0 18px 42px -26px rgba(0, 0, 0, .6);
+    backdrop-filter: blur(14px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-5px);
+    transition:
+        opacity .2s var(--app-ease),
+        transform .2s var(--app-ease),
+        visibility 0s .2s;
+}
+
+.app-control-menu.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition:
+        opacity .2s var(--app-ease),
+        transform .2s var(--app-ease),
+        visibility 0s;
+}
+
+.app-control-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: .35rem 1.7rem;
+    border-radius: var(--control-menu-radius);
+    color: var(--control-ink);
+    font-size: .74rem;
+    letter-spacing: .03em;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background-color .18s var(--app-ease),
+        color .18s var(--app-ease);
+}
+
+.app-control-option:hover {
+    background: var(--control-hover);
+}
+
+.app-control-option:focus-visible {
+    background: var(--control-hover);
+    outline: 2px solid var(--control-accent);
+    outline-offset: 1px;
+}
+
+.app-control-option[aria-selected="true"] {
+    color: var(--control-accent);
+}
+
+.app-control-option[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: .65rem;
+    width: .25rem;
+    height: .5rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-62%) rotate(40deg);
+}

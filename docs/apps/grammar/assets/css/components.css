@@ -1,4 +1,5 @@
-/* ---------- 按钮 ---------- */
+@import url('./nonstandard/components.css');
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -17,7 +18,6 @@
     user-select: none;
 }
 
-/* 禁用态不响应 hover、active：按钮可能被 <label> 包着，label 会把交互转发给它 */
 .btn:not(:disabled):hover {
     background: var(--c-bg-hover);
 }
@@ -83,7 +83,6 @@
     padding: 0 var(--sp-5);
 }
 
-/* ---------- 输入 ---------- */
 .field {
     display: flex;
     flex-direction: column;
@@ -99,18 +98,6 @@
 .field__hint {
     font-size: var(--fs-xs);
     color: var(--c-fg-subtle);
-}
-
-.field__row {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-}
-
-.field__row > .input,
-.field__row > .select {
-    flex: 1;
-    min-width: 0;
 }
 
 .chip-group {
@@ -130,7 +117,6 @@
     color: var(--c-fg-muted);
     font-size: var(--fs-md);
     cursor: pointer;
-    /* 只让选中态有过渡；hover 立即生效，免得移开时和另一个按钮同时「补间」 */
     transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
@@ -152,7 +138,6 @@
     color: var(--c-accent-fg);
 }
 
-/* 属性多选（语法性、助动词、自他）：一行可点文字，选中的前面亮一颗朱红圆点 */
 .dot-group {
     display: flex;
     flex-wrap: wrap;
@@ -289,7 +274,6 @@
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
-/* 带推导提示的输入框：灰色剩余部分叠在文字后面（幽灵文字） */
 .ghost-input {
     position: relative;
     display: flex;
@@ -324,7 +308,6 @@
     color: transparent;
 }
 
-/* 键帽：把「按什么键」直接画在输入框里，不另写一句提示 */
 .ghost-input__key {
     display: inline-flex;
     align-items: center;
@@ -360,7 +343,6 @@
     padding-right: 62px;
 }
 
-/* 单行控件统一高度：显式 height 抵消 input 继承的 line-height 与 select 原生行高的差异 */
 .input,
 .select {
     height: 38px;
@@ -369,10 +351,8 @@
     line-height: var(--lh-tight);
 }
 
-/* 去掉原生外观：不然 Safari 会忽略 border-radius、border；箭头自己画 */
 .select {
     appearance: none;
-    -webkit-appearance: none;
     text-align: start;
     padding-right: 32px;
     background-image: var(--img-chevron);
@@ -389,7 +369,6 @@
     box-shadow: 0 0 0 3px var(--c-accent-soft);
 }
 
-/* contenteditable 自绘输入框（editable-input.js）：外观复用 .input，内容是 HTML，可包 <bdi>，单行不折行 */
 .input--editable {
     display: block;
     line-height: 36px;
@@ -400,22 +379,16 @@
     cursor: text;
 }
 
-.input--editable::-webkit-scrollbar {
-    display: none;
-}
-
 .input--editable[contenteditable="false"] {
     background: var(--c-bg-subtle);
     color: var(--c-fg-subtle);
     cursor: not-allowed;
 }
 
-/* 表格单元格里的紧凑版（.input--cell 的 28px 高：28 - 边框 2 - 上下内边距 4） */
 .input--cell.input--editable {
     line-height: 22px;
 }
 
-/* 自绘下拉（components/select-field.js）：外观复用 .select，收起态文字可包 <bdi> */
 .select--custom {
     display: flex;
     align-items: center;
@@ -444,7 +417,6 @@
     line-height: var(--lh-base);
 }
 
-/* ---------- 卡片 ---------- */
 .card {
     background: var(--c-bg-elev);
     border: 1px solid var(--c-border);
@@ -452,7 +424,6 @@
     padding: var(--sp-4);
 }
 
-/* 词卡详情：每段之间一条分割线（同设置页 .settings-row） */
 .word-card__section {
     min-width: 0;
 }
@@ -474,7 +445,6 @@
     font-size: var(--fs-md);
 }
 
-/* 含义、固定搭配、例句共用一套序号列表：数字按「一条数据」读，不用等宽字体也不用花号 */
 .word-card__list {
     list-style: decimal;
     padding-left: 1.5em;
@@ -486,7 +456,6 @@
 
 .word-card__list > li::marker {
     color: var(--c-fg-subtle);
-    /* 三块列表的序号同一号字，条目字号不同也不影响编号的观感 */
     font-size: var(--fs-sm);
     font-variant-numeric: tabular-nums;
 }
@@ -561,7 +530,6 @@
     font-size: var(--fs-md);
 }
 
-/* 译文与它对应的含义同处一行：含义跟排在后，装不下就换行再省略 */
 .word-card__example-meta {
     display: flex;
     flex-wrap: wrap;
@@ -617,9 +585,6 @@ button.word-card__derivative {
     color: var(--c-accent-fg);
 }
 
-/* ---------- 标签栏 ---------- */
-/* 单行横滑：标签多到放不下（古希腊语动词 19 张表）时也不折行。
-   滚动条用全局的细滚动条，WebKit 上是浮动条，不占高度。 */
 .source-tabs {
     display: flex;
     gap: var(--sp-2);
@@ -628,12 +593,10 @@ button.word-card__derivative {
     overflow-y: hidden;
     min-width: 0;
     margin-bottom: var(--sp-2);
-    /* 首尾各留 1px，给焦点环让位，避免被 overflow 裁掉 */
     padding: 1px;
     scroll-behavior: smooth;
 }
 
-/* 描边片：1px 边框、无底色，选中只换边框与字色，不加朱红 */
 .source-tab {
     display: inline-flex;
     align-items: center;
@@ -665,7 +628,6 @@ button.word-card__derivative {
     min-width: 0;
 }
 
-/* ---------- 徽章 ---------- */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -697,7 +659,6 @@ button.word-card__derivative {
     background: transparent;
 }
 
-/* ---------- 空状态 ---------- */
 .empty {
     text-align: center;
     padding: var(--sp-7) var(--sp-4);
@@ -716,7 +677,6 @@ button.word-card__derivative {
     margin-bottom: var(--sp-4);
 }
 
-/* ---------- 模态框 ---------- */
 .modal-root {
     position: fixed;
     inset: 0;
@@ -810,7 +770,6 @@ button.word-card__derivative {
     }
 }
 
-/* ---------- Toast ---------- */
 .toast-root {
     position: fixed;
     left: 50%;
@@ -862,8 +821,6 @@ button.word-card__derivative {
     }
 }
 
-/* ---------- 语法速查表格 ---------- */
-/* 一个条目的多表 tab：第一行选表（多组时），第二行选变化、示例 */
 .grammar-tabs {
     display: flex;
     flex-direction: column;
@@ -880,7 +837,6 @@ button.word-card__derivative {
 .grammar-table-wrap {
     max-width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 .grammar-table {
@@ -890,7 +846,6 @@ button.word-card__derivative {
     font-size: var(--fs-md);
 }
 
-/* 表名是表外的一行说明，不用第二个表头色带 */
 .grammar-table caption {
     caption-side: top;
     text-align: left;
@@ -919,7 +874,6 @@ button.word-card__derivative {
     line-height: 1.45;
 }
 
-/* 行标题列按内容收窄，剩下的宽度平分给词形列 */
 .grammar-table tbody th,
 .grammar-table tbody td:first-child {
     width: 1%;
@@ -941,7 +895,6 @@ button.word-card__derivative {
     text-align: center;
 }
 
-/* 首列是「形式、用法」这类长文本而不是行标题时，允许它折行并占一份宽度 */
 .grammar-table--wrap-first tbody th,
 .grammar-table--wrap-first tbody td:first-child {
     width: auto;
@@ -953,17 +906,14 @@ button.word-card__derivative {
     background: var(--c-accent-soft);
 }
 
-/* 悉昙文列用专用字体（lang 现在写在单元格里的 <bdi> 上） */
 .grammar-table [lang="sa-siddham"] {
     font-family: var(--ff-siddham);
 }
 
-/* ---------- 数字 ---------- */
 .num {
     font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Pagination ---------- */
 .pagination__info {
     margin-left: var(--sp-3);
     font-size: var(--fs-sm);
@@ -975,14 +925,12 @@ button.word-card__derivative {
     padding: 0 4px;
 }
 
-/* ---------- Paradigm 表格 ---------- */
 .paradigm-block {
     margin-bottom: var(--sp-4);
     min-width: 0;
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 
 .paradigm-block__title {
@@ -1062,7 +1010,6 @@ button.word-card__derivative {
     opacity: 0.4;
 }
 
-/* 该形式不存在（行 disabled、名词非对应性别）：灰底 + 禁用 */
 .paradigm-table__cell--disabled {
     background: var(--c-bg-subtle);
     opacity: 0.45;
@@ -1088,7 +1035,6 @@ button.word-card__derivative {
     width: 100%;
 }
 
-/* ---------- 批量导入生词 ---------- */
 .import-words-body {
     display: flex;
     flex-direction: column;
@@ -1118,7 +1064,6 @@ button.word-card__derivative {
     flex-wrap: wrap;
 }
 
-/* ---------- 开发：语法数据校验结果 ---------- */
 .verify-list {
     list-style: disc;
     padding-left: 1.2em;
@@ -1268,7 +1213,6 @@ button.word-card__derivative {
     backdrop-filter: blur(4px);
 }
 
-/* 原地替换（派生词跳转）时不播入场动画：只换内容，不闪 */
 .card-overlay--instant,
 .card-overlay--instant .card-overlay-panel {
     animation: none;
@@ -1350,7 +1294,7 @@ button.word-card__derivative {
     margin-left: var(--sp-2);
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .card-overlay-panel {
         width: 100vw;
         height: 100dvh;
@@ -1359,7 +1303,6 @@ button.word-card__derivative {
     }
 
     .card-overlay-body {
-        /* 右下角常驻的浮动按钮会盖住正文末尾 */
         padding: var(--sp-4) var(--sp-4) 72px;
     }
 
@@ -1374,7 +1317,6 @@ button.word-card__derivative {
     }
 }
 
-/* ---------- 竖排 popover ---------- */
 .vertical-popover {
     position: fixed;
     z-index: var(--z-toast);
@@ -1391,11 +1333,9 @@ button.word-card__derivative {
     max-height: 70vh;
     overflow: auto;
     user-select: text;
-    -webkit-user-select: text;
     cursor: text;
 }
 
-/* 非竖写语言（如希伯来文）：横排、放大显示；方向由元素自己的 dir 属性决定 */
 .vertical-popover--horizontal {
     writing-mode: horizontal-tb;
     min-width: 2.5em;
@@ -1406,7 +1346,6 @@ button.word-card__derivative {
     text-align: center;
 }
 
-/* ---------- 生词表单：外部数据源查询 ---------- */
 .lookup__status {
     min-height: 1.2em;
 }
@@ -1462,7 +1401,6 @@ button.word-card__derivative {
     overflow-wrap: anywhere;
 }
 
-/* ---------- 形态分析浮层（生词列表 → 分析） ---------- */
 
 .analyze-query {
     display: flex;
@@ -1515,7 +1453,6 @@ button.word-card__derivative {
     align-self: flex-start;
 }
 
-/* ---------- 语法数据校验结果（设置 → 校验语法 JSON） ---------- */
 
 .verify-body {
     max-height: min(56vh, 520px);
@@ -1620,7 +1557,6 @@ button.word-card__derivative {
     color: var(--c-fg-subtle);
 }
 
-/* ---------- 自定义下拉菜单（替代原生 select 弹出层） ---------- */
 .select-menu {
     position: fixed;
     z-index: var(--z-menu);
@@ -1671,7 +1607,6 @@ button.word-card__derivative {
     overflow-wrap: anywhere;
 }
 
-/* 选项单行：菜单按内容加宽（最多 30rem），装不下的部分省略，全文在 title 里 */
 .select-menu--nowrap .select-menu__item {
     white-space: nowrap;
 }
@@ -1688,24 +1623,20 @@ button.word-card__derivative {
     color: var(--c-accent);
 }
 
-/* ---------- 语法页浮动工具（回到顶部、显示转写） ---------- */
 .page-tools {
     position: fixed;
     right: var(--sp-4);
     bottom: var(--sp-4);
-    /* 浮动控件永远在最上层：词卡、弹窗打开时也要能点 */
     z-index: var(--z-chrome);
     display: flex;
     flex-direction: column;
     gap: var(--sp-2);
 }
 
-/* 输入助手的按钮占着右下角：工具列整列抬到它上面，三者同一列从上往下排 */
 html.has-ime-fab .page-tools {
     bottom: calc(var(--sp-4) + var(--ime-kb, 0px) + 40px + var(--sp-2));
 }
 
-/* 词卡盖住整页时「回到顶部」没有意义（它滚的是背后的页面） */
 html.card-overlay-open .page-tools__btn--top {
     display: none;
 }
@@ -1742,15 +1673,12 @@ html.card-overlay-open .page-tools__btn--top {
     color: var(--c-accent-fg);
 }
 
-/* 打开态悬停：回到「未打开」的悬停配色，提示再点一下就关 */
 .page-tools__btn--on:not(:disabled):hover {
     background: var(--c-bg-hover);
     border-color: var(--c-border);
     color: var(--c-fg);
 }
 
-/* 双行文本：默认只显示原文，打开开关后在原文片段后补出转写 */
-/* 短音符：默认藏起来，html.show-breve 时才显示（由右下角的 Ă 按钮切换） */
 .breve {
     display: none;
 }
@@ -1764,7 +1692,6 @@ html.show-breve .breve {
     margin-left: .35em;
     font-size: .9em;
     color: var(--c-fg-muted);
-    /* 转写是拉丁字母，不能继承原文的方向与字体 */
     unicode-bidi: isolate;
     font-family: inherit;
 }
@@ -1773,7 +1700,6 @@ html.show-dual-text .dual-text__roman {
     display: inline;
 }
 
-/* ---------- 输入助手（右下角常驻按钮 + 浮动面板） ---------- */
 .ime-fab {
     position: fixed;
     right: var(--sp-4);
@@ -1801,14 +1727,12 @@ html.show-dual-text .dual-text__roman {
     background: var(--c-bg-hover);
 }
 
-/* 开启态与语法页的「转写」切换按钮同款 */
 .ime-fab--on {
     background: var(--c-accent);
     border-color: var(--c-accent);
     color: var(--c-accent-fg);
 }
 
-/* 打开态悬停：回到「未打开」的悬停配色，提示再点一下就关 */
 .ime-fab--on:hover {
     background: var(--c-bg-hover);
     border-color: var(--c-border);
@@ -1825,7 +1749,6 @@ html.show-dual-text .dual-text__roman {
     right: var(--sp-4);
     bottom: calc(72px + var(--ime-kb, 0px));
     z-index: var(--z-chrome);
-    /* 修饰符页按内容收紧；键盘页需要全宽，用 :has 撑开 */
     width: fit-content;
     min-width: min(420px, calc(100vw - 32px));
     max-width: min(var(--ime-w, 720px), calc(100vw - 32px));
@@ -1847,7 +1770,6 @@ html.show-dual-text .dual-text__roman {
     display: none;
 }
 
-/* 头部只有一个模式轨道：关闭靠常驻按钮、Esc 与失焦，不再重复一个 ✕ */
 .ime__head {
     display: flex;
     align-items: center;
@@ -1884,13 +1806,11 @@ html.show-dual-text .dual-text__roman {
     color: var(--c-fg);
 }
 
-/* 选中项抬高一个色阶，不用描边 */
 .ime__tab[aria-pressed="true"] {
     background: var(--c-bg-elev);
     color: var(--c-fg);
 }
 
-/* 脚注：一行快捷键 */
 .ime__foot {
     padding: var(--sp-1) var(--sp-3) var(--sp-3);
     font-size: var(--fs-xs);
@@ -1904,13 +1824,11 @@ html.show-dual-text .dual-text__roman {
     overflow: auto;
 }
 
-/* 修饰符：组标题独占一行，格子从同一条左边缘开始 */
 .ime__marks {
     display: grid;
     gap: var(--sp-5);
 }
 
-/* 「基字 a」读出：靠在头部右端，说明按钮显示的是合并结果 */
 .ime__base {
     margin-left: auto;
     display: inline-flex;
@@ -1934,7 +1852,6 @@ html.show-dual-text .dual-text__roman {
     gap: var(--sp-5) var(--sp-5);
 }
 
-/* 一行可以并排几组：组 = 标题行 + 格子 */
 .ime__group {
     display: flex;
     flex-direction: column;
@@ -1982,7 +1899,6 @@ html.show-dual-text .dual-text__roman {
     background: var(--c-bg);
 }
 
-/* 还原：清掉基字上所有附加符号，独立排在最前 */
 .ime__chip--restore {
     background: var(--c-bg-subtle);
     font-size: var(--fs-sm);
@@ -1995,11 +1911,9 @@ html.show-dual-text .dual-text__roman {
     outline-offset: 1px;
 }
 
-/* 键盘：三行都按 15 个单位对齐 */
 .ime__kb {
     display: grid;
     gap: 4px;
-    /* fit-content 下键盘需要明确的宽度，否则 60 列网格会被压扁 */
     width: min(calc(var(--ime-w, 720px) - 32px), calc(100vw - 64px));
 }
 
@@ -2009,7 +1923,6 @@ html.show-dual-text .dual-text__roman {
     gap: 4px;
 }
 
-/* 键身高 48：上半是字形（34，留出天城文下加元音的余量），下半 14 的键脚放拉丁键名 */
 .ime__key {
     appearance: none;
     position: relative;
@@ -2028,8 +1941,6 @@ html.show-dual-text .dual-text__roman {
     transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
-/* 键脚：独占一条窄带，不再和字形抢同一块位置。
- * 不做 overflow: hidden —— 窄屏上 1u 只有 20px，宽的天城文簇会被裁掉。 */
 .ime__key small {
     position: absolute;
     left: 1px;
@@ -2059,7 +1970,6 @@ html.show-dual-text .dual-text__roman {
     border-color: var(--c-border-strong);
 }
 
-/* 按下时键面压暗一档，键脚跟着换色，否则两者同色糊在一起 */
 .ime__key.is-pressed small {
     background: var(--c-bg-hover);
 }
@@ -2106,12 +2016,11 @@ html.show-dual-text .dual-text__roman {
     pointer-events: none;
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .ime {
         left: 0;
         right: 0;
         bottom: var(--ime-kb, 0px);
-        /* 抽屉铺满整宽：桌面端按内容收紧的 min/max-width 在这里全部放开 */
         width: auto;
         min-width: 0;
         max-width: none;

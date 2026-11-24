@@ -1,5 +1,3 @@
-/** contenteditable 里的光标读写：偏移按元素内的字符数算，bdi 里的文字按逻辑顺序计。 */
-
 export function caretOffsetIn(el) {
     const sel = window.getSelection()
     if (!sel || !sel.rangeCount) return null

@@ -1,0 +1,376 @@
+{
+  "version": 1,
+  "kind": "episode",
+  "chunk_size": 3000,
+  "total": 1693633,
+  "chunks": [
+    {
+      "file": "0000.zip",
+      "min_subject_id": 1,
+      "max_subject_id": 7505,
+      "count": 50555,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0001.zip",
+      "min_subject_id": 7506,
+      "max_subject_id": 14043,
+      "count": 42781,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0002.zip",
+      "min_subject_id": 14050,
+      "max_subject_id": 21335,
+      "count": 37701,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0003.zip",
+      "min_subject_id": 21339,
+      "max_subject_id": 34220,
+      "count": 41799,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0004.zip",
+      "min_subject_id": 34221,
+      "max_subject_id": 43138,
+      "count": 42856,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0005.zip",
+      "min_subject_id": 43139,
+      "max_subject_id": 54356,
+      "count": 39499,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0006.zip",
+      "min_subject_id": 54371,
+      "max_subject_id": 65243,
+      "count": 34691,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0007.zip",
+      "min_subject_id": 65245,
+      "max_subject_id": 75498,
+      "count": 32207,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0008.zip",
+      "min_subject_id": 75499,
+      "max_subject_id": 84051,
+      "count": 38433,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0009.zip",
+      "min_subject_id": 84052,
+      "max_subject_id": 93045,
+      "count": 36880,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0010.zip",
+      "min_subject_id": 93046,
+      "max_subject_id": 102030,
+      "count": 33552,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0011.zip",
+      "min_subject_id": 102031,
+      "max_subject_id": 110704,
+      "count": 29243,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0012.zip",
+      "min_subject_id": 110706,
+      "max_subject_id": 119977,
+      "count": 31461,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0013.zip",
+      "min_subject_id": 119978,
+      "max_subject_id": 129426,
+      "count": 52076,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0014.zip",
+      "min_subject_id": 129428,
+      "max_subject_id": 138794,
+      "count": 31921,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0015.zip",
+      "min_subject_id": 138795,
+      "max_subject_id": 152682,
+      "count": 35423,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0016.zip",
+      "min_subject_id": 152683,
+      "max_subject_id": 174746,
+      "count": 38237,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0017.zip",
+      "min_subject_id": 174747,
+      "max_subject_id": 192202,
+      "count": 39535,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0018.zip",
+      "min_subject_id": 192203,
+      "max_subject_id": 210197,
+      "count": 40931,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0019.zip",
+      "min_subject_id": 210198,
+      "max_subject_id": 222914,
+      "count": 39960,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0020.zip",
+      "min_subject_id": 222932,
+      "max_subject_id": 240633,
+      "count": 41610,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0021.zip",
+      "min_subject_id": 240640,
+      "max_subject_id": 262053,
+      "count": 40219,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0022.zip",
+      "min_subject_id": 262056,
+      "max_subject_id": 279070,
+      "count": 37676,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0023.zip",
+      "min_subject_id": 279071,
+      "max_subject_id": 292759,
+      "count": 34291,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0024.zip",
+      "min_subject_id": 292760,
+      "max_subject_id": 306923,
+      "count": 38848,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0025.zip",
+      "min_subject_id": 306925,
+      "max_subject_id": 319392,
+      "count": 35805,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0026.zip",
+      "min_subject_id": 319393,
+      "max_subject_id": 333842,
+      "count": 37565,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0027.zip",
+      "min_subject_id": 333843,
+      "max_subject_id": 355190,
+      "count": 38845,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0028.zip",
+      "min_subject_id": 355195,
+      "max_subject_id": 381063,
+      "count": 36180,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0029.zip",
+      "min_subject_id": 381067,
+      "max_subject_id": 405564,
+      "count": 35413,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0030.zip",
+      "min_subject_id": 405566,
+      "max_subject_id": 424185,
+      "count": 37221,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0031.zip",
+      "min_subject_id": 424188,
+      "max_subject_id": 439997,
+      "count": 37014,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0032.zip",
+      "min_subject_id": 440033,
+      "max_subject_id": 454896,
+      "count": 29252,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0033.zip",
+      "min_subject_id": 454898,
+      "max_subject_id": 472336,
+      "count": 33443,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0034.zip",
+      "min_subject_id": 472337,
+      "max_subject_id": 487670,
+      "count": 37136,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0035.zip",
+      "min_subject_id": 487671,
+      "max_subject_id": 500100,
+      "count": 31650,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0036.zip",
+      "min_subject_id": 500101,
+      "max_subject_id": 513711,
+      "count": 36162,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0037.zip",
+      "min_subject_id": 513712,
+      "max_subject_id": 527755,
+      "count": 34821,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0038.zip",
+      "min_subject_id": 527761,
+      "max_subject_id": 544886,
+      "count": 36071,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0039.zip",
+      "min_subject_id": 544892,
+      "max_subject_id": 560876,
+      "count": 35298,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0040.zip",
+      "min_subject_id": 560877,
+      "max_subject_id": 577427,
+      "count": 37661,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0041.zip",
+      "min_subject_id": 577431,
+      "max_subject_id": 601575,
+      "count": 30757,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0042.zip",
+      "min_subject_id": 601645,
+      "max_subject_id": 622407,
+      "count": 33398,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0043.zip",
+      "min_subject_id": 622408,
+      "max_subject_id": 641076,
+      "count": 40045,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0044.zip",
+      "min_subject_id": 641078,
+      "max_subject_id": 664940,
+      "count": 34978,
+      "subject_count": 3000,
+      "compressed": true
+    },
+    {
+      "file": "0045.zip",
+      "min_subject_id": 664942,
+      "max_subject_id": 700170,
+      "count": 22533,
+      "subject_count": 1860,
+      "compressed": true
+    }
+  ]
+}

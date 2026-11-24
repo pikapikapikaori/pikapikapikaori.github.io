@@ -1,10 +1,22 @@
-# pikapikapi-blog
+# Design Principles
 
 English | [简体中文](./Design_zh-cn.md)
 
 > The brief-comments page (`writings/BriefComments.md`) is a special page: its design is independent and does not follow the global design described here.
 
 ## Default Theme
+
+### Breakpoints
+
+Narrow screens are always detected with `screen and (max-width: 768px)`: a viewport no wider than 768px enters the narrow layout. Besides this step, two more media queries at 400px and 1000px are provided for finer typographic adjustments:
+
+| Breakpoint | Media query | Purpose |
+| --- | --- | --- |
+| Narrow | `screen and (max-width: 768px)` | the baseline for the narrow layout |
+| Extra narrow | `screen and (max-width: 400px)` | further tightening on very narrow viewports |
+| Wide | `screen and (max-width: 1000px)` | the transition step between narrow and desktop |
+
+All three are written with `max-width` and cascade from small to large in the order "extra narrow → narrow → wide".
 
 ### Variable Naming
 

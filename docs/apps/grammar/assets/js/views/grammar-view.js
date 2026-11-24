@@ -58,7 +58,6 @@ export default {
             return
         }
 
-        // 只加载当前这一章：章节与锚点都在 meta.json 里，不必读正文
         const meta = await loadGrammarMeta(lang)
         if (!meta) { renderNoData(main, lang, language); return }
 
@@ -73,7 +72,6 @@ export default {
                 location.hash = `#/grammar/${lang}/${byAnchor}#${anchor}`
                 return
             }
-            // 地址里没写章节时补全，方便分享
             if (!group) {
                 const target = `#/grammar/${lang}/${current}${anchor ? `#${anchor}` : ''}`
                 if (location.hash !== target) history.replaceState(null, '', target)
@@ -83,7 +81,6 @@ export default {
         const doc = await loadGrammarForChapter(lang, current)
         if (!doc) { renderNoData(main, lang, language); return }
 
-        // 文字档案（满文、天城文）：供「显示转写」把原文转成转写
         const scriptProfile = await loadScriptProfile(lang, meta)
         return renderGrammar(main, lang, language, doc, anchor, group, scriptProfile)
     }
@@ -106,7 +103,6 @@ function renderNoData(main, lang, language) {
     )
 }
 
-/** 锚点属于哪一章（只查 meta 里登记的 anchors，不读正文） */
 function chapterOfAnchor(meta, anchor) {
     for (const chapter of meta.grammarFiles?.chapters || []) {
         if ((chapter.anchors || []).includes(anchor)) return chapter.id
@@ -114,13 +110,11 @@ function chapterOfAnchor(meta, anchor) {
     return ''
 }
 
-/** 该 section 属于哪一章（没有 groups 的文档整篇算一章） */
 function groupOfSection(section, groups) {
     if (!groups) return ''
     return (section && section.group) || groups[0].id
 }
 
-/** anchor（section 或 item 的 id）落在哪一章 */
 function groupOfAnchor(doc, anchor, groups) {
     for (const section of doc.sections || []) {
         if (!section || !section.id) continue
@@ -133,7 +127,6 @@ function groupOfAnchor(doc, anchor, groups) {
 }
 
 function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProfile = null) {
-    // 章节来自文档的 groups（少于两章就不分页）
     const groups = Array.isArray(doc.groups) && doc.groups.length > 1 ? doc.groups : null
 
     let current = ''
@@ -203,7 +196,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     if (tools.isBreveOn()) setBreveVisible(true)
     annotateBreves(content, { selector: 'td, th' })
 
-    // 本页目录：一级标题即 section，窄屏收进「本页目录」浮层
     const tocCurrent = h('span', { class: 'grammar-toc__current' })
     const tocDetails = h('details', { class: 'grammar-toc', open: true },
         h('summary', { class: 'grammar-toc__summary' },
@@ -215,10 +207,9 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         h('div', { class: 'grammar-nav__title' }, '本页目录')
     )
 
-    // 只有一章一节、且节名与章名相同时，目录里不再重复这一条
     const skipSectionLink = sections.length === 1 && currentGroup
         && (sections[0].title || sections[0].id) === currentGroup.title
-    const narrowQuery = window.matchMedia('(max-width: 1024px)')
+    const narrowQuery = window.matchMedia('screen and (max-width: 768px)')
     function afterTocJump() {
         if (narrowQuery.matches) tocDetails.open = false
     }
@@ -266,10 +257,8 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     }
     syncTocOpen()
     narrowQuery.addEventListener('change', syncTocOpen)
-    // 目录里可能直接带原文（如希伯来文条目标题）
     annotateBdi(nav, lang)
 
-    /** 渲染一个条目的表格与说明（懒加载时按需调用） */
     function fillItem(it, item) {
         if (it.dataset.filled === '1') return
         it.dataset.filled = '1'
@@ -283,13 +272,12 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         if (tools.isOn() && toRoman) annotateDualText(it, { range: scriptRange, toRoman })
     }
 
-    // 带锚点时，锚点所在章节及其之前的条目立即渲染，保证滚动位置准确
     const anchorSectionIndex = anchor
         ? sections.findIndex((s) => s && (s.id === anchor
             || (s.items || []).some((item) => item && item.id === anchor)))
         : -1
-    const lazy = new Map()   // element -> item
-    const itemOrder = []     // 全部条目元素，按文档顺序（跳转时要把前面的先渲染出来）
+    const lazy = new Map()
+    const itemOrder = []
 
     sections.forEach((section, index) => {
         if (!section || !section.id) return
@@ -314,7 +302,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         content.appendChild(sec)
     })
 
-    // 剩余条目在接近视口时再渲染（语法页表很大，全量渲染会很慢）
     if (lazy.size && typeof IntersectionObserver === 'function') {
         const io = new IntersectionObserver((entries) => {
             for (const entry of entries) {
@@ -330,7 +317,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
         lazy.clear()
     }
 
-    /** 锚点可能在懒加载区里：先把它和它前面的条目都渲染出来再滚动，避免表格撑开导致位置漂移 */
     function ensureRendered(id) {
         for (const entry of itemOrder) {
             if (lazy.has(entry.el)) {
@@ -380,7 +366,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
             el.classList.toggle('grammar-nav__link--active', on)
             if (on) label = el.textContent
         })
-        // 单节章节的节标题没有单独的目录项：落到本章第一个条目上
         if (!label) {
             const first = toc.querySelector('.grammar-nav__link')
             if (first) {
@@ -404,7 +389,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
     function syncActiveByScroll() {
         spyFrame = 0
         if (!spyTargets.length) return
-        // 判定线与锚点的 scroll-margin-top 保持一致，跳转后当前条目才会立刻算作「在读」
         const margin = parseFloat(getComputedStyle(spyTargets[0]).scrollMarginTop)
         const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--h-header')) || 56
         const offset = (Number.isFinite(margin) ? margin : header + 24) + 1
@@ -413,7 +397,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
             if (el.getBoundingClientRect().top - offset > 0) break
             active = el.id
         }
-        // 滚到底时高亮最后一项（末条很短，永远到不了判定线）
         if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
             active = spyTargets[spyTargets.length - 1].id
         }
@@ -428,12 +411,10 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
-    // 懒加载的表格插进来会改变高度，重新判定一次当前阅读位置
     const heightObserver = typeof ResizeObserver === 'function'
         ? new ResizeObserver(onScroll)
         : null
     if (heightObserver) heightObserver.observe(content)
-    // 带锚点时先保留锚点的高亮，等滚动（scrollToAnchor）到位后由监听器接管
     if (!(anchor && allIds.has(anchor))) syncActiveByScroll()
 
     return () => {
@@ -451,7 +432,6 @@ function renderGrammar(main, lang, language, doc, anchor, groupParam, scriptProf
 function scrollToAnchor(id, lang, updateUrl) {
     const el = document.getElementById(id)
     if (!el) return
-    // 用 scrollIntoView + CSS 的 scroll-margin-top，滚动容器不是 window 时也能用
     try {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     } catch {
@@ -463,7 +443,7 @@ function scrollToAnchor(id, lang, updateUrl) {
         const target = `#/grammar/${lang}#${id}`
         if (location.hash !== target) {
             try { history.replaceState(null, '', target) }
-            catch { /* ignore */ }
+            catch {   }
         }
     }
 }

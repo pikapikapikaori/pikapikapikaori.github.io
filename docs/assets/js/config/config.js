@@ -14,8 +14,8 @@
             minute: 'min',
             toc: 'Contents',
             articles: 'Articles',
-            gitalkInfo: 'Yi-Yang Li',
-            gitalkCopy: 'All Rights Reserved.',
+            commentInfo: 'Yi-Yang Li',
+            commentCopy: 'All Rights Reserved.',
             divider: ' · ',
             htmlLang: 'en',
             nameLink: '#/en-us/'
@@ -32,8 +32,8 @@
             minute: '分',
             toc: '目次',
             articles: '文章一覧',
-            gitalkInfo: '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
-            gitalkCopy: '無断転載を禁じます',
+            commentInfo: '<ruby>李亦楊<rt>リエキヨウ</rt></ruby>',
+            commentCopy: '無断転載を禁じます',
             divider: ' ・ ',
             htmlLang: 'ja',
             nameLink: '#/jp/'
@@ -50,8 +50,8 @@
             minute: '分钟',
             toc: '目录',
             articles: '文章列表',
-            gitalkInfo: '李亦杨',
-            gitalkCopy: '版权所有',
+            commentInfo: '李亦杨',
+            commentCopy: '版权所有',
             divider: ' · ',
             htmlLang: 'zh-Hans',
             nameLink: '#/'
@@ -114,7 +114,7 @@
             '/': '404/_404.md'
         },
 
-        // tab 插件设置
+        // tab
         tabs: {
             persist: false,
             sync: false,
@@ -123,10 +123,10 @@
             tabHeadings: true
         },
 
-        // 脚注插件设置
+        // 脚注
         loadFooter: true,
 
-        // 全局搜索插件设置
+        // 全局搜索
         search: {
             paths: 'auto',
             depth: 4,
@@ -136,7 +136,7 @@
             pathNamespaces: i18nPathNamespaces,
         },
 
-        // 翻页插件设置
+        // 翻页
         pagination: {
             previousText: cali18nText('previous'),
             nextText: cali18nText('next'),
@@ -144,26 +144,28 @@
             crossChapterText: false,
         },
 
-        // 复制代码插件设置
+        // 复制代码
         copyCode: {
             buttonText: cali18nText('copyButton'),
             errorText: cali18nText('copyError'),
             successText: cali18nText('copySuccess')
         },
 
-        // 支持 mermaid 插件设置
+        // 支持 mermaid
         mermaidConfig: {
             querySelector: '.mermaid',
         },
 
 
         // 自用插件
-        // 页面添加 gitalk，并在最底端添加 footer，使得 gitalk 下方有空间
-        gitalkWithFooter: {
-            footerInnerHtml: '<small>&copy; 2023 - {gitalk_footer-yyyy}{gitalk_footer-divider}{gitalk_footer-info}{gitalk_footer-divider}{gitalk_footer-copy}</small>',
+        // 添加评论与页脚
+        commentWithFooter: {
+            enable: true,
+            use: 'gitalk',
+            footerInnerHtml: '<small>&copy; 2023 - {comment_footer-yyyy}{comment_footer-divider}{comment_footer-info}{comment_footer-divider}{comment_footer-copy}</small>',
             localization: {
-                info: cali18nText('gitalkInfo'),
-                copy: cali18nText('gitalkCopy'),
+                info: cali18nText('commentInfo'),
+                copy: cali18nText('commentCopy'),
                 divider: cali18nText('divider')
             },
             gitalkConfig: {
@@ -178,6 +180,7 @@
 
         // 添加字数统计，并能够 i18n 国际化
         countWords: {
+            enable: true,
             countable: true,
             position: 'top',
             float: 'right',
@@ -191,15 +194,21 @@
 
         // 添加目录页
         tocPage: {
+            enable: true,
             recentAmount: 8,
+            renderStyle: 'card',
+            dateFormat: null,
             columns: 2,
+
             narrowColumns: 1,
             defaultImg: './assets/resources/img/default/picture-2.gif',
+            localPath: i18nLocales,
             coverPath: i18nLocalePrefixes
         },
 
         // 添加动态封面
         dynamicCover: {
+            enable: true,
             backgrounds: [
                 './assets/resources/img/cover/cover-1.jpg',
                 './assets/resources/img/cover/cover-2.jpg',
@@ -209,16 +218,19 @@
 
         // 添加 breadcrumb 头
         breadcrumb: {
+            enable: true,
             localization: i18nLocales
         },
 
         // 修改 docsify 与插件原生样式
         markdownHelper: {
+            enable: true,
             highlightNavMenuCurrent: false,
         },
 
         // 更改 html lang 信息
         htmlLang: {
+            enable: true,
             localization: {
                 lang: cali18nText('htmlLang')
             }
@@ -226,10 +238,27 @@
 
         // 添加小组件
         widgets: {
+            enable: true,
             useSwitchMode: true,
             top: 20,
             topOffset: 500,
             defaultTheme: 'swiss',
+            storage: 'local',
+            live2d: [
+                {
+                    width: 300,
+                    height: 300,
+                    right: '50px',
+                    bottom: '0px',
+                    offsetX: -60,
+                    offsetY: 0,
+                    role: './assets/resources/live2d/rice_pro_en/runtime/rice_pro_t03.model3.json',
+                    background: '',
+                    opacity: 1,
+                    draggable: false,
+                    hitArea: { x: 190, y: 30, w: 110, h: 270 }
+                }
+            ],
             themes: [
                 {
                     name: 'default',
@@ -297,6 +326,7 @@
 
         // 目录、文章列表切换
         tocSwitcher: {
+            enable: true,
             localization: {
                 toc: cali18nText('toc'),
                 list: cali18nText('articles'),
@@ -305,6 +335,7 @@
 
         // 添加替换 Markdown 中的 Html 注释
         htmlReplace: {
+            enable: true,
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
@@ -575,6 +606,31 @@
                     endHtml: '" title="Video Player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>'
                 }
             ]
+        },
+
+        // 添加查看大图
+        viewFullImage: {
+            enable: true
+        },
+
+        // 添加最后编辑时间
+        lastUpdatedTime: {
+            enable: true
+        },
+
+        // 添加链接标记样式
+        addSvgToLinks: {
+            enable: true
+        },
+
+        // 上下边缘内容渐隐
+        fadeEdge: {
+            enable: true
+        },
+
+        // 添加代码内颜色色块
+        colorSwatch: {
+            enable: true
         },
     }
 })()

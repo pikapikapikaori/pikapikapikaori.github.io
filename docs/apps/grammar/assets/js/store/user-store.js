@@ -39,7 +39,6 @@ export async function deleteUser(id) {
     await remove(STORE_SETTINGS, id)
     await removeByIndex(STORE_NOTES, 'userId', id)
     const words = await getAllByIndex(STORE_WORDS, 'userId', id)
-    // 逐条删除；数据量在几千级，逐个删除可接受
     for (const w of words) {
         await remove(STORE_WORDS, w.id)
     }

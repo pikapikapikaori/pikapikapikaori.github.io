@@ -1,6 +1,18 @@
 import { calLocalized } from '../utils/localization.js'
+import { docsifyClasses, elementStatus } from '../utils/constants.js'
+import {
+    onListen,
+    offListen,
+    addClass,
+    removeClass,
+    createEl,
+    getEl,
+    getAllEls,
+    getElByClass
+} from '../utils/dom.js'
 
 let tocSwitcherOptions = {
+    enable: false,
     localization: {
         toc: 'Contents',
         list: 'Articles',
@@ -8,49 +20,51 @@ let tocSwitcherOptions = {
 }
 
 function plugin(hook, vm) {
+    if (!tocSwitcherOptions.enable) return
+
     let tocSwitcherOnScroll = null
     let ticking = false
 
     hook.doneEach(function () {
         let tempLocalization = calLocalized(tocSwitcherOptions.localization, undefined)
 
-        const sidebarNav = document.querySelector('.sidebar-nav')
+        const sidebarNav = getElByClass(docsifyClasses.sidebarNav)
+        if (!sidebarNav) return
 
-        let switchWrap = document.querySelector('.switch-toc-wrap-div') ? document.querySelector('.switch-toc-wrap-div') : document.createElement('div')
+        let switchWrap = getElByClass('switch-toc-wrap-div') || createEl('div')
 
-        switchWrap.className = 'switch-toc-wrap-div'
+        addClass(switchWrap, 'switch-toc-wrap-div')
         switchWrap.innerHTML = `<button class="toc-btn active-btn">${tempLocalization.toc}</button><button class="default-btn">${tempLocalization.list}</button>`
 
         sidebarNav.before(switchWrap)
 
-        const tocBtn = switchWrap.querySelector('.toc-btn')
-        const defaultBtn = switchWrap.querySelector('.default-btn')
+        const tocBtn = getEl('.toc-btn', switchWrap)
+        const defaultBtn = getEl('.default-btn', switchWrap)
 
         const activeBtnClass = 'active-btn'
 
-        tocBtn.onclick = (e) => {
+        onListen(tocBtn, 'click', e => {
             e.stopPropagation()
-            tocBtn.classList.add(activeBtnClass)
-            defaultBtn.classList.remove(activeBtnClass)
-        }
+            addClass(tocBtn, activeBtnClass)
+            removeClass(defaultBtn, activeBtnClass)
+        })
 
-        defaultBtn.onclick = (e) => {
+        onListen(defaultBtn, 'click', e => {
             e.stopPropagation()
-            defaultBtn.classList.add(activeBtnClass)
-            tocBtn.classList.remove(activeBtnClass)
-        }
+            addClass(defaultBtn, activeBtnClass)
+            removeClass(tocBtn, activeBtnClass)
+        })
 
-        // 修复滚动高亮
         const headingList = []
-        document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(h => {
-            const span = h.querySelector('span')
+        getAllEls('h1, h2, h3, h4, h5, h6').forEach(h => {
+            const span = getEl('span', h)
             const text = (span ? span.textContent : h.textContent).trim()
             if (text) headingList.push({ heading: h, text })
         })
 
 
         const items = []
-        document.querySelectorAll('.sidebar-nav a').forEach(a => {
+        getAllEls(`.${docsifyClasses.sidebarNav} a`).forEach(a => {
             const title = (a.getAttribute('title') || a.textContent || '').trim()
             if (!title) return
 
@@ -64,7 +78,7 @@ function plugin(hook, vm) {
         })
 
         if (tocSwitcherOnScroll) {
-            window.removeEventListener('scroll', tocSwitcherOnScroll)
+            offListen(window, 'scroll', tocSwitcherOnScroll)
             tocSwitcherOnScroll = null
         }
 
@@ -87,8 +101,8 @@ function plugin(hook, vm) {
                 }
             }
 
-            items.forEach(it => it.li.classList.remove('active'))
-            if (current) current.li.classList.add('active')
+            items.forEach(it => removeClass(it.li, elementStatus.active))
+            if (current) addClass(current.li, elementStatus.active)
         }
 
         tocSwitcherOnScroll = () => {
@@ -100,7 +114,7 @@ function plugin(hook, vm) {
             })
         }
 
-        window.addEventListener('scroll', tocSwitcherOnScroll)
+        onListen(window, 'scroll', tocSwitcherOnScroll)
         updateActive()
     })
 }

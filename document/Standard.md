@@ -1,6 +1,73 @@
-# pikapikapi-blog
+# Develop Standard
 
 English | [简体中文](./Standard_zh-cn.md)
+
+> The "Support", "Project Structure" and "PWA Settings" sections in this document apply equally to the root project and all sub-projects.
+
+## Support
+
+- Supports **Chrome** and **Safari**.
+- Does not support the "reduce motion" (`prefers-reduced-motion`) setting.
+
+## Project Structure
+
+```text
+<project>/
+├── index.html              Main page stays at the project root
+├── sw.js
+├── data/
+└── assets/
+    ├── css/
+    │   ├── nonstandard/    Non-standard property CSS files (webkit-related CSS code); internal file structure matches that under css/, and the corresponding same-named file @imports the files in this directory at its head
+    │   └── ...
+    ├── js/
+    │   └── ...
+    ├── html/               Sub-pages
+    ├── sources/            Third-party libraries
+    ├── external/           Code for external libraries/resources
+    │   ├── css/
+    │   │   └── nonstandard/
+    │   └── js/
+    ├── layout/             Different layout templates
+    │   └── <layout name>/      Layout folder
+    │       ├── css/
+    │       │   └── nonstandard/
+    │       ├── js/
+    │       └── html/
+    └── resources/          Resource files, shared
+        ├── fonts/
+        ├── img/
+        ├── live2d/
+        ├── icon/
+        ├── meta/           Feed, sitemap, manifest.json and file-cache.json
+        └── logo/
+```
+
+## PWA Settings
+
+- Each project owns one cache prefix, and the `id` in `manifest.json` equals that prefix. Own `localStorage` / `sessionStorage` keys and IndexedDB database names carry the same project prefix.
+- A service worker cache name is `<prefix>:static:<version>:<hash>`. `hash`: join the sorted entries as `path:file hash` with no separator, then take the first 16 hex characters of the SHA-256, each file hash is the first 16 hex characters of the SHA-256 of that file.
+
+## Reserved Path
+
+Every project uses the path `/_cross_origin` as its reserved path. It is relative to `base_url`, so the full path is `<domain-base-url>/_cross_origin`.
+
+### Cross-Origin Requests
+
+Cross-origin access goes through this address and is handled by the [deployment middleware](./Deploy.md#middleware-duties).
+
+### Authorization
+
+- The page provides only the challenge and `state`; the middleware builds the authorize address and the client parameters.
+- Only one callback address is registered, and `state` carries the return page.
+- The token exchange also goes through the middleware.
+- Page navigations to this address are always rejected.
+
+## Coding Standards
+
+- Naming style: Prefer lower camel case (lowerCamelCase); all-uppercase with underscores is also allowed.
+- Comment style: Prefer English comments; Chinese is also allowed. Prefer `/** */` multi-line comments; `/* */` and `//` are also allowed.
+- `js` code style: Do not use `var` for any declaration.
 
 ## Branch Naming & Commit Message
 
@@ -73,3 +140,17 @@ Modify the corresponding `editedTime` field in `config/tocdata.json.js`.
 5. Modify the link of the corresponding Gitalk Issue Tag.
 
 **Note**: Modifying the reference links to resource files within the article (`_media/path/to/directory/path/to/file`) is not necessary, as they are relative paths.
+
+
+## Cross-Project References
+
+| Project | File | Content | Count |
+| --- | --- | --- | --- |
+| homepage | `assets/js/config.js` | Feed, photographs, article covers, blog root link | 34 |
+| homepage | `assets/js/i18n.js` | Feed link, blog root link for each language | 4 |
+| indexpage | `data/apps.json` | Blog root link, homepage address | 1 |
+| light | `index.html` | Styles, scripts, and feed from the root project | 10 |
+| light | `assets/js/config/config.js` | `basePath` and `fixUrl.prefix` | 2 |
+| bangumi-takeout | `assets/resources/meta/default-source.json` | Default archive in the root project | 1 |
+
+These addresses are stored as page-relative paths. An independent deployment replaces them with main site addresses in the middleware.

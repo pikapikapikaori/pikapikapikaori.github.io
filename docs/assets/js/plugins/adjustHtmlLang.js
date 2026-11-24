@@ -1,6 +1,8 @@
 import { calLocalized } from '../utils/localization.js'
+import { setAttrs } from '../utils/dom.js'
 
 let htmlLangOptions = {
+    enable: false,
     localization: {
         lang: {
             '/jp/': 'ja',
@@ -11,8 +13,12 @@ let htmlLangOptions = {
 }
 
 function plugin(hook, vm) {
+    if (!htmlLangOptions.enable) return
+
     hook.doneEach(function () {
-        document.documentElement.lang = calLocalized(htmlLangOptions.localization, undefined).lang
+        setAttrs(document.documentElement, {
+            lang: calLocalized(htmlLangOptions.localization, undefined).lang
+        })
     })
 }
 

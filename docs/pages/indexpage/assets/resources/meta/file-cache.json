@@ -1,0 +1,98 @@
+{
+    "version": "4.7.5",
+    "hash": "814e4888b0583741",
+    "files": [
+        {
+            "path": "assets/css/fonts.css",
+            "hash": "fbd3999da5ada8c5"
+        },
+        {
+            "path": "assets/css/nonstandard/styles.css",
+            "hash": "e4ca6d71747c2025"
+        },
+        {
+            "path": "assets/css/styles.css",
+            "hash": "4fac522ff26aeefe"
+        },
+        {
+            "path": "assets/css/tokens.css",
+            "hash": "dbf7b092bc5aef99"
+        },
+        {
+            "path": "assets/js/app.js",
+            "hash": "38b0b43b71b711c9"
+        },
+        {
+            "path": "assets/js/config.js",
+            "hash": "02636a924799b3ff"
+        },
+        {
+            "path": "assets/js/dom.js",
+            "hash": "7ff39112a801087e"
+        },
+        {
+            "path": "assets/js/groups.js",
+            "hash": "bd011a9b8b1f284d"
+        },
+        {
+            "path": "assets/js/search.js",
+            "hash": "664597b6aeed9ffa"
+        },
+        {
+            "path": "assets/js/startup.js",
+            "hash": "d4b546f3b269d75e"
+        },
+        {
+            "path": "assets/js/status.js",
+            "hash": "d18908ed2ac202e1"
+        },
+        {
+            "path": "assets/js/theme.js",
+            "hash": "411bf0de561f7535"
+        },
+        {
+            "path": "assets/resources/fonts/HYKaiTiS.woff2",
+            "hash": "ca1ca2d70db1b5cc"
+        },
+        {
+            "path": "assets/resources/fonts/SortsMillGoudy-Regular.woff2",
+            "hash": "421b89dda8b82216"
+        },
+        {
+            "path": "assets/resources/logo/favicon.ico",
+            "hash": "dc40522b02c04a5a"
+        },
+        {
+            "path": "assets/resources/logo/logo-180.png",
+            "hash": "0fc2d5c87808cd86"
+        },
+        {
+            "path": "assets/resources/logo/logo-192.png",
+            "hash": "9b7435bd19196311"
+        },
+        {
+            "path": "assets/resources/logo/logo-512.png",
+            "hash": "c6efd8ff752d95db"
+        },
+        {
+            "path": "assets/resources/meta/manifest.json",
+            "hash": "4ce21c7a20e4f8e5"
+        },
+        {
+            "path": "data/apps.json",
+            "hash": "8effae5b600553fa"
+        },
+        {
+            "path": "data/links.json",
+            "hash": "7ddc4d56c6df5aa9"
+        },
+        {
+            "path": "data/providers.json",
+            "hash": "e939812084944979"
+        },
+        {
+            "path": "index.html",
+            "hash": "372cd9186146cfb1"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+.calculatorContainer input[type="date"]::-webkit-calendar-picker-indicator {
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+.calculatorContainer input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}

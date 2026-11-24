@@ -1,9 +1,4 @@
-/**
- * 极简发布订阅
- */
-
 export function createEmitter() {
-    /** @type {Map<string, Set<Function>>} */
     const map = new Map()
 
     function on(type, fn) {
@@ -21,27 +16,16 @@ export function createEmitter() {
         if (set.size === 0) map.delete(type)
     }
 
-    function once(type, fn) {
-        const un = on(type, (...args) => { un(); fn(...args) })
-        return un
-    }
-
     function emit(type, ...args) {
         const set = map.get(type)
         if (!set) return
-        // 复制一份，避免回调里 off 导致迭代异常
         for (const fn of Array.from(set)) {
             try { fn(...args) }
-            catch (err) { console.error(`[emitter] listener error on "${type}"`, err) }
+            catch { }
         }
     }
 
-    function clear(type) {
-        if (type) map.delete(type)
-        else map.clear()
-    }
-
-    return { on, off, once, emit, clear }
+    return { on, off, emit }
 }
 
 export function createStore(initialState) {
@@ -63,7 +47,6 @@ export function createStore(initialState) {
             return state
         },
         subscribe(fn) { return bus.on('change', fn) },
-        /** 不触发变更通知，用于内部缓存 */
         _raw() { return state }
     }
 }

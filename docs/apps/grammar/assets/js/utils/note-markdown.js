@@ -1,5 +1,3 @@
-/** 笔记的单行 Markdown 与少量 HTML。块就是行；表格与引用都在一个块内按换行书写。 */
-
 import { h, htmlFragment } from './dom.js'
 import { annotateBdi } from './bdi.js'
 import { checkMarkIcon } from '../components/icons.js'
@@ -17,21 +15,17 @@ const DETAILS_LINE = /^<(details|summary)\b/i
 const PIPE_START = /^\s*\|/
 const TABLE_SEP = /^\s*\|?\s*:?-{2,}:?\s*(?:\|\s*:?-{2,}:?\s*)*\|?\s*$/
 
-/** 一级缩进几个空格 */
 export const INDENT_WIDTH = 2
 
-/** 行首缩进，原样取（可能含制表符） */
 export function leadingIndent(source) {
     const m = /^[ \t]*/.exec(String(source ?? ''))
     return m ? m[0] : ''
 }
 
-/** 第几级缩进：制表符按两个空格算 */
 export function indentLevel(source) {
     return Math.floor(leadingIndent(source).replace(/\t/g, '  ').length / INDENT_WIDTH)
 }
 
-/** 这一行是什么块，以及它在第几级缩进里 */
 export function lineInfo(source) {
     const raw = String(source ?? '')
     const level = indentLevel(raw)
@@ -51,7 +45,6 @@ export function isTableSeparator(source) {
     return text.startsWith('|') && TABLE_SEP.test(text)
 }
 
-/** 表格是一个块：块内按换行写各行，第一行是表头，第二行是分隔行 */
 export function isTableBlock(source) {
     const rows = tableLines(source)
     return rows.length >= 3
@@ -59,7 +52,6 @@ export function isTableBlock(source) {
         && isTableSeparator(rows[1].text)
 }
 
-/** 拆出一个块里的表格行，顺带记下每行在整段原文里的偏移 */
 function tableLines(source) {
     const parts = String(source ?? '').replace(/\r\n?/g, '\n').split('\n')
     const rows = []
@@ -71,13 +63,11 @@ function tableLines(source) {
     return rows
 }
 
-/** 一个块里用 Shift + 回车换行时也是引用，只看块的第一行 */
 export function isQuoteLine(source) {
     const first = String(source ?? '').split('\n', 1)[0].replace(/^[ \t]+/, '')
     return QUOTE.test(first)
 }
 
-/** 只放行能安全显示的地址：网页、内嵌图片、相对路径。其它协议一律当作普通文字 */
 function safeUrl(raw) {
     const url = String(raw ?? '').trim()
     if (!url) return null
@@ -88,7 +78,6 @@ function safeUrl(raw) {
     return url
 }
 
-/** 行内记号。每次调用新建正则：inline() 会递归，共用实例会串 lastIndex */
 const INLINE_SOURCE = [
     '(<bdi[^>]*>[^<]*<\\/bdi>)',
     '(<kbd>[^<]*<\\/kbd>)',
@@ -107,15 +96,6 @@ const INLINE_SOURCE = [
     '((?<![\\p{L}\\p{N}])_[^_\\n]+_(?![\\p{L}\\p{N}]))'
 ].join('|')
 
-/**
- * 渲染一行。
- * @param {string} source 这一行的原文
- * @param {object} [opts]
- * @param {string} [opts.lang] 笔记的语言，用来给 <bdi> 补 lang 与 dir
- * @param {string} [opts.placeholder] 空行时显示的灰字
- * @param {{ label: string } | null} [opts.marker] 列表序号的文字，由视图算好传进来
- * @returns {Element}
- */
 export function renderNoteLine(source, { lang = null, placeholder = '', marker = null } = {}) {
     const raw = String(source ?? '')
     const level = indentLevel(raw)
@@ -214,12 +194,6 @@ function itemNode(kind, level, label, content, { done = false } = {}) {
     return el
 }
 
-/**
- * 一个块的引用正文：块内的换行各占一行。
- * 行尾的 `\` 只在还有下一行时才算续行记号；块的最后一行没有下一行，`\` 原样留下。
- * @param {string} source 一个块的原文
- * @returns {string}
- */
 export function renderNoteQuote(source) {
     const lines = String(source ?? '').replace(/\r\n?/g, '\n').split('\n')
     return lines.map((line, i) => {
@@ -228,10 +202,6 @@ export function renderNoteQuote(source) {
     }).join('\n')
 }
 
-/**
- * 把一块里的竖线行排成一张表。第一行是表头，第二行是对齐行。
- * @param {string} source 一个块的原文
- */
 export function renderNoteTable(source, { lang = null } = {}) {
     const rows = tableLines(source)
     const header = splitRow(rows[0] ? rows[0].text : '')
@@ -307,7 +277,6 @@ function tokenNode(token) {
     return document.createTextNode(token)
 }
 
-/** `<bdi lang="sa" dir="rtl">原文</bdi>`：没写属性的由 annotateBdi 按文字补 */
 function bdiNode(token) {
     const m = /^<bdi([^>]*)>([\s\S]*)<\/bdi>$/u.exec(token)
     if (!m) return document.createTextNode(token)

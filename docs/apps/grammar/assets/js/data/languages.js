@@ -1,15 +1,9 @@
 import { GRAMMAR_FILES } from '../config/config.js'
 import { grammarFlags } from '../models/grammar.js'
 
-/**
- * 语言元数据：真源是 `data/language/<code>/meta.json`，这里只负责把它们全拉一遍并缓存
- * （语言列表页需要所有语言的元信息；语法正文按章在打开时再取）。
- */
 
-/** 加载完成前为空数组；`main.js` 启动时先 await loadLanguages() */
 export let LANGUAGES = []
 
-/** 语言名称 → 元信息（加载后填充） */
 export const LANGUAGE_MAP = {}
 
 let loading = null
@@ -37,7 +31,6 @@ function metaOf(code, doc) {
     }
 }
 
-/** 拉取所有语言的元信息（只执行一次，失败的语言会被跳过） */
 export function loadLanguages() {
     if (loading) return loading
     loading = (async () => {
@@ -48,11 +41,9 @@ export function loadLanguages() {
                 if (!res.ok) throw new Error(String(res.status))
                 const meta = await res.json()
                 const errors = checkMeta(code, meta)
-                for (const e of errors) console.error(`[languages] ${code}: ${e}`)
                 if (errors.length) return null
                 return metaOf(code, meta)
-            } catch (err) {
-                console.warn(`[languages] 读取 ${code}/meta.json 失败：`, err)
+            } catch {
                 return null
             }
         }))
@@ -68,7 +59,6 @@ export function loadLanguages() {
     return loading
 }
 
-/** 启动时只做元信息层面的轻校验；语法正文的完整校验在 loadGrammar() 里做 */
 function checkMeta(code, meta) {
     const errors = []
     if (!meta || typeof meta !== 'object') return ['meta.json 不是对象']

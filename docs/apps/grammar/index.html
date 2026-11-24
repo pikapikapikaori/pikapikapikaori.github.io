@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="多语言古文献阅读生词本">
     <title>语言生词本</title>
+    <meta name="description" content="多语言古文献阅读生词本">
+    <link rel="icon" href="./assets/resources/logo/favicon.ico">
 
-    <link rel="manifest" href="./manifest.webmanifest">
-    <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="./assets/resources/icons/icon-192.png">
-    <link rel="apple-touch-icon" href="./assets/resources/icons/icon-192.png">
+    <link rel="manifest" href="./assets/resources/meta/manifest.json">
+    <meta name="theme-color" content="#fafaf7">
 
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/variables.css">
@@ -23,16 +21,7 @@
     <link rel="stylesheet" href="./assets/css/pages.css">
     <link rel="stylesheet" href="./assets/css/notes.css">
 
-    <script>
-        // 提前应用主题，避免首屏闪烁。设置页会同步写入 localStorage。
-        (function () {
-            try {
-                var t = localStorage.getItem('ln.theme') || 'auto';
-                if (t !== 'auto' && t !== 'light' && t !== 'dark') t = 'auto';
-                document.documentElement.setAttribute('data-theme', t);
-            } catch (e) { /* ignore */ }
-        })();
-    </script>
+    <script src="./assets/js/startup.js"></script>
 </head>
 
 <body>

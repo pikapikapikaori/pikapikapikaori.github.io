@@ -1,0 +1,16 @@
+{
+    "apps": [
+        {
+            "name": "ピカピカピ",
+            "url": "../homepage/index.html?lang=zh-Hans",
+            "description": "个人主页",
+            "target": "_blank"
+        },
+        {
+            "name": "ピカピカピ",
+            "url": "../../#/",
+            "description": "个人博客",
+            "target": "_blank"
+        }
+    ]
+}

@@ -1,5 +1,3 @@
-/** 笔记工具条：点一下加记号，再点一下去掉。按钮按下时不抢输入框的焦点。 */
-
 import { h } from '../utils/dom.js'
 import {
     indentIcon, outdentIcon, checkboxIcon, ruleIcon,
@@ -14,12 +12,6 @@ const HEADINGS = [
     { value: 'h4', label: 'h4', title: '四级标题' }
 ]
 
-/**
- * @param {object} opts
- * @param {(cmd: string) => void} opts.onCommand
- * @param {() => object} opts.getState
- * @param {HTMLElement} opts.stateEl 保存状态写在页面给的这一处
- */
 export function createNoteToolbar({ onCommand, getState, stateEl = null } = {}) {
     const marks = {}
     const blocks = {}

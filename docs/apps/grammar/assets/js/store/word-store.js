@@ -1,6 +1,6 @@
 import {
     STORE_WORDS,
-    put, get, remove, getAllByIndex, getOneByIndex, removeByIndex
+    put, get, remove, getAllByIndex, getOneByIndex
 } from './db.js'
 import { createWord, mergeWordContent, normalizeParadigm } from '../models/word.js'
 import { nowIso, nextReviewFrom, clampMastery } from '../utils/date.js'
@@ -34,7 +34,6 @@ export async function addOrMerge(userId, payload) {
 
     let existing = await findByKey(userId, language, lemma, pos)
     if (!existing) {
-        // 短音符不参与唯一性：i 与 ĭ 视为同一个词（长音符仍然区分）
         const folded = foldBreve(lemma)
         const siblings = await listByLanguage(userId, language)
         existing = siblings.find((w) => w.pos === pos && foldBreve(w.lemma) === folded) || null
@@ -86,10 +85,6 @@ export async function deleteWord(id) {
     await remove(STORE_WORDS, id)
 }
 
-export async function deleteAllInLanguage(userId, language) {
-    await removeByIndex(STORE_WORDS, 'userId_language', [userId, language])
-}
-
 export async function recordReview(id, { correct }) {
     const cur = await getWord(id)
     if (!cur) return null
@@ -107,11 +102,4 @@ export async function recordReview(id, { correct }) {
     }
     await put(STORE_WORDS, next)
     return next
-}
-
-export async function bulkImport(words) {
-    for (const w of words) {
-        await put(STORE_WORDS, w)
-    }
-    return words.length
 }

@@ -1,4 +1,3 @@
-/** 拉丁语：只需要长短音符号。 */
 const LONG = '\u0304'
 const SHORT = '\u0306'
 const VOWELS = 'aeiouy'

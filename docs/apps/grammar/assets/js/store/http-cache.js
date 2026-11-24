@@ -1,8 +1,5 @@
-/** 外部请求的响应缓存（IndexedDB）。 */
-
 import { STORE_HTTP_CACHE, get, put, withStore, clearStore } from './db.js'
 
-/** 多久清一次过期条目（写入时顺带触发，避免每次请求都扫表） */
 const PRUNE_EVERY = 60 * 1000
 let lastPrune = 0
 

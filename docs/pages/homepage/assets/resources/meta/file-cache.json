@@ -1,0 +1,174 @@
+{
+    "version": "4.7.5",
+    "hash": "92432e70ed594ab7",
+    "files": [
+        {
+            "path": "assets/css/base.css",
+            "hash": "3250b9bfc0c99fe0"
+        },
+        {
+            "path": "assets/css/nonstandard/base.css",
+            "hash": "82f3292527a4d541"
+        },
+        {
+            "path": "assets/js/app.js",
+            "hash": "13e8385342e38bab"
+        },
+        {
+            "path": "assets/js/config.js",
+            "hash": "b0b6ef4b7012daf0"
+        },
+        {
+            "path": "assets/js/controls.js",
+            "hash": "fea5396db0f28860"
+        },
+        {
+            "path": "assets/js/feed.js",
+            "hash": "0dc1579b391c61fc"
+        },
+        {
+            "path": "assets/js/i18n.js",
+            "hash": "c60e729c209fca86"
+        },
+        {
+            "path": "assets/js/layout-loader.js",
+            "hash": "8c70ac758e0ec127"
+        },
+        {
+            "path": "assets/js/photo-captions.js",
+            "hash": "339c48f18cc7f8bc"
+        },
+        {
+            "path": "assets/js/photos.js",
+            "hash": "9dd24efe0696f1e7"
+        },
+        {
+            "path": "assets/js/site.js",
+            "hash": "fe4deeaa619a1d70"
+        },
+        {
+            "path": "assets/js/startup.js",
+            "hash": "aaa37a55556f78fb"
+        },
+        {
+            "path": "assets/js/storage.js",
+            "hash": "0d0ec5ec97a80212"
+        },
+        {
+            "path": "assets/js/theme.js",
+            "hash": "a6781cd68f927440"
+        },
+        {
+            "path": "assets/js/utils.js",
+            "hash": "843d03dbc2510336"
+        },
+        {
+            "path": "assets/layout/brand/css/main.css",
+            "hash": "e2da321e20f0c743"
+        },
+        {
+            "path": "assets/layout/brand/html/index.html",
+            "hash": "6b53315baeebe4a8"
+        },
+        {
+            "path": "assets/layout/brand/js/blog-rail.js",
+            "hash": "5b97b532439d70b4"
+        },
+        {
+            "path": "assets/layout/brand/js/main.js",
+            "hash": "5ccbedce7bad962b"
+        },
+        {
+            "path": "assets/layout/brand/js/photo-animation.js",
+            "hash": "ebf77e4ccad3bd96"
+        },
+        {
+            "path": "assets/layout/brand/js/scroll-pin.js",
+            "hash": "9f7ba9ce93b68807"
+        },
+        {
+            "path": "assets/layout/mondrian/css/main.css",
+            "hash": "2e6acefdf56ae924"
+        },
+        {
+            "path": "assets/layout/mondrian/html/index.html",
+            "hash": "0df828efaf868a9c"
+        },
+        {
+            "path": "assets/layout/mondrian/js/main.js",
+            "hash": "dae0a2ac0ca17629"
+        },
+        {
+            "path": "assets/layout/photography/css/main.css",
+            "hash": "9f410861a86be8fb"
+        },
+        {
+            "path": "assets/layout/photography/css/nonstandard/main.css",
+            "hash": "f9e77af9fa6090bc"
+        },
+        {
+            "path": "assets/layout/photography/html/index.html",
+            "hash": "4e65df42686e665a"
+        },
+        {
+            "path": "assets/layout/photography/js/config.js",
+            "hash": "5fecca7773a48521"
+        },
+        {
+            "path": "assets/layout/photography/js/main.js",
+            "hash": "3b218dbec48d82e3"
+        },
+        {
+            "path": "assets/layout/starTrail/css/main.css",
+            "hash": "1ccdc382eac934fa"
+        },
+        {
+            "path": "assets/layout/starTrail/html/index.html",
+            "hash": "63e8966debad06b8"
+        },
+        {
+            "path": "assets/layout/starTrail/js/main.js",
+            "hash": "09bb6fac694c2069"
+        },
+        {
+            "path": "assets/resources/fonts/HYKaiTiS.woff2",
+            "hash": "ca1ca2d70db1b5cc"
+        },
+        {
+            "path": "assets/resources/fonts/SortsMillGoudy-Italic.woff2",
+            "hash": "096bb0bad7b66862"
+        },
+        {
+            "path": "assets/resources/fonts/SortsMillGoudy-Regular.woff2",
+            "hash": "421b89dda8b82216"
+        },
+        {
+            "path": "assets/resources/logo/favicon.ico",
+            "hash": "dc40522b02c04a5a"
+        },
+        {
+            "path": "assets/resources/logo/logo-180.png",
+            "hash": "0fc2d5c87808cd86"
+        },
+        {
+            "path": "assets/resources/logo/logo-192.png",
+            "hash": "9b7435bd19196311"
+        },
+        {
+            "path": "assets/resources/logo/logo-512.png",
+            "hash": "c6efd8ff752d95db"
+        },
+        {
+            "path": "assets/resources/logo/logo.jpg",
+            "hash": "3081b989ccd2131c"
+        },
+        {
+            "path": "assets/resources/meta/manifest.json",
+            "hash": "8da189493593e9b4"
+        },
+        {
+            "path": "index.html",
+            "hash": "7a7d5cac391b2158"
+        }
+    ]
+}

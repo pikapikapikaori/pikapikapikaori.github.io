@@ -1,4 +1,3 @@
-/** 法语：重音、软音符。 */
 const ACUTE = '\u0301'
 const GRAVE = '\u0300'
 const CIRC = '\u0302'
@@ -9,7 +8,6 @@ export default {
     name: '法语',
     placeholderBase: 'a',
     cased: true,
-    // 软音符只接 c、分音按 ï 的写法：样字各自指定，不然会显示成 a̧ / ä
     samples: { [CEDILLA]: 'c', [DIA]: 'i' },
     marks: [
         {

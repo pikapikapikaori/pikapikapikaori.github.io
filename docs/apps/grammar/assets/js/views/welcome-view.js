@@ -1,5 +1,3 @@
-/** 起始页：选择已有用户、新建空用户、导入 JSON、载入默认数据源 */
-
 import { h, replace } from '../utils/dom.js'
 import { listUsers, getUser, deleteUser } from '../store/user-store.js'
 import { getSettings } from '../store/settings-store.js'
@@ -10,31 +8,30 @@ import { toast } from '../components/toast.js'
 import { confirmModal, openModal } from '../components/modal.js'
 import { createJsonInput } from '../components/json-input.js'
 import { formatDate } from '../utils/date.js'
-import { LS_KEYS, DEFAULT_DATA_SOURCE } from '../config/config.js'
+import { applyTheme } from '../components/theme-toggle.js'
+import { LS_KEYS, getString, setString, remove } from '../store/local-storage.js'
+import { DEFAULT_DATA_SOURCE, THEMES } from '../config/config.js'
 
 const LS_USER_KEY = LS_KEYS.user
-const LS_THEME_KEY = LS_KEYS.theme
 const LS_DEFAULT_SOURCE_KEY = LS_KEYS.defaultSourceUser
+const THEME_VALUES = THEMES.map((t) => t.value)
 
 function readDefaultSourceUser() {
-    try { return localStorage.getItem(LS_DEFAULT_SOURCE_KEY) || '' } catch { return '' }
+    return getString(LS_DEFAULT_SOURCE_KEY, '')
 }
 
 function writeDefaultSourceUser(id) {
-    try { localStorage.setItem(LS_DEFAULT_SOURCE_KEY, id) } catch { /* ignore */ }
+    setString(LS_DEFAULT_SOURCE_KEY, id)
 }
 
 async function enterUser(userId) {
     const u = await getUser(userId)
     if (!u) { toast.error('用户不存在'); return }
-    try { localStorage.setItem(LS_USER_KEY, userId) } catch { /* ignore */ }
+    setString(LS_USER_KEY, userId)
     setUser(u)
     const s = await getSettings(userId)
     setSettings(s)
-    if (s.theme) {
-        try { localStorage.setItem(LS_THEME_KEY, s.theme) } catch { /* ignore */ }
-        document.documentElement.setAttribute('data-theme', s.theme)
-    }
+    if (THEME_VALUES.includes(s.theme)) applyTheme(s.theme)
     location.hash = '#/languages'
 }
 
@@ -204,7 +201,6 @@ const welcomeView = {
             })
         }
 
-        /** 重复点击时覆盖同一个用户，不再生成新用户 */
         async function doUseDefaultSource() {
             try {
                 const url = new URL(DEFAULT_DATA_SOURCE.file, DEFAULT_DATA_SOURCE.base)
@@ -242,14 +238,8 @@ const welcomeView = {
             if (!ok) return
             try {
                 await deleteUser(user.id)
-                try {
-                    if (localStorage.getItem(LS_USER_KEY) === user.id) {
-                        localStorage.removeItem(LS_USER_KEY)
-                    }
-                    if (readDefaultSourceUser() === user.id) {
-                        localStorage.removeItem(LS_DEFAULT_SOURCE_KEY)
-                    }
-                } catch { /* ignore */ }
+                if (getString(LS_USER_KEY, null) === user.id) remove(LS_USER_KEY)
+                if (readDefaultSourceUser() === user.id) remove(LS_DEFAULT_SOURCE_KEY)
                 toast.success('已删除')
                 await welcomeView.mount(root)
             } catch (err) {

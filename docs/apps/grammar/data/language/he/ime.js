@@ -1,7 +1,3 @@
-/**
- * 圣经希伯来语：修饰符（元音点 / dagesh / shin-sin）+ 转写（he/script.js）+ 键盘。
- * 键盘 Shift 切词尾形（ך ם ן ף ץ）。
- */
 export default {
     name: '圣经希伯来语',
     placeholderBase: 'א',
@@ -20,7 +16,6 @@ export default {
         { key: 'dagesh', label: 'dagesh', row: 0, items: [{ c: '\u05BC', label: 'ּ' }] },
         { key: 'shin', label: 'shin/sin', row: 0, items: [{ c: '\u05C1', label: 'ׁ' }, { c: '\u05C2', label: 'ׂ' }] }
     ],
-    /* 中点托在 ב 上，ש 的两个点托在 ש 上（其余用默认样字 א） */
     samples: { '\u05BC': 'ב', '\u05C1': 'ש', '\u05C2': 'ש' },
     applies(base, group) {
         const b = String(base || '').normalize('NFD')[0]
@@ -29,7 +24,6 @@ export default {
         return true
     },
     keyboard: {
-        // 以转写为准：字母键即其拉丁转写；元音点按 aeiou 排；Shift 取另一档（长元音、词尾形）
         map: {
             '`': 'ע',
             '1': '1', '2': '2', '3': '3', '4': '4', '5': '5',

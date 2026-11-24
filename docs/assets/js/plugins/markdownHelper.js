@@ -1,19 +1,39 @@
 import { bindShortcuts } from '../utils/shortcut.js'
 import { makeButtonLike } from '../utils/common.js'
+import { mediaQueries, docsifyClasses, elementStatus } from '../utils/constants.js'
+import {
+    onListen,
+    addClass,
+    removeClass,
+    toggleClass,
+    hasClass,
+    createEl,
+    getEl,
+    getAllEls,
+    getElByClass
+} from '../utils/dom.js'
+import { hasTocClass } from './tocPage.js'
 
 let markdownHelperOptions = {
+    enable: false,
     highlightNavMenuCurrent: false
 }
 
+const appNavToggleClass = 'app-nav-toggle'
+const appNavToggleInnerClass = 'app-nav-toggle-inner'
+const appNavToggleGhostClass = 'app-nav-toggle-ghost'
+
 function plugin(hook, vm) {
+    if (!markdownHelperOptions.enable) return
+
     function searchInput() {
-        return document.querySelector('.sidebar .search input[type="search"]')
+        return getEl(`.${docsifyClasses.sidebar} .${docsifyClasses.search} input[type="search"]`)
     }
 
     function openSidebar() {
-        const isNarrow = window.matchMedia('screen and (max-width: 768px)').matches
+        const isNarrow = window.matchMedia(mediaQueries.narrow).matches
 
-        document.body.classList.toggle('close', isNarrow)
+        toggleClass(document.body, elementStatus.close, isNarrow)
     }
 
     function focusSearch() {
@@ -28,9 +48,9 @@ function plugin(hook, vm) {
         const input = searchInput()
         if (!input || document.activeElement !== input) return
 
-        const clearButton = document.querySelector('.sidebar .search .clear-button')
+        const clearButton = getEl(`.${docsifyClasses.sidebar} .${docsifyClasses.search} .${docsifyClasses.clearButton}`)
 
-        if (clearButton && clearButton.classList.contains('show')) {
+        if (clearButton && hasClass(clearButton, elementStatus.show)) {
             clearButton.click()
         }
         else {
@@ -42,21 +62,20 @@ function plugin(hook, vm) {
     }
 
     function updateSticky() {
-        const cover = document.querySelector('section.cover.show')
+        const cover = getEl(`section.${docsifyClasses.cover}.${elementStatus.show}`)
         const threshold = cover ? cover.getBoundingClientRect().height : 0
         const scrollTop = window.scrollY || document.documentElement.scrollTop || 0
-        document.body.classList.toggle('sticky', scrollTop >= threshold)
+        toggleClass(document.body, elementStatus.sticky, scrollTop >= threshold)
     }
 
-    // 封面滚出视口后暂停下拉箭头动画
     let chevronObserver = null
     let chevronWatched = null
 
     function watchChevronVisibility() {
         if (!('IntersectionObserver' in window)) return
 
-        const cover = document.querySelector('section.cover')
-        const wrap = document.querySelector('.cover-page-scroll-down-chevron-div')
+        const cover = getEl(`section.${docsifyClasses.cover}`)
+        const wrap = getEl('.cover-page-scroll-down-chevron-div')
         if (!cover || !wrap || (chevronWatched && chevronWatched.cover === cover && chevronWatched.wrap === wrap)) return
 
         if (chevronObserver) chevronObserver.disconnect()
@@ -64,7 +83,7 @@ function plugin(hook, vm) {
         chevronWatched = { cover: cover, wrap: wrap }
         chevronObserver = new IntersectionObserver(function (entries) {
             const onScreen = entries.some(entry => entry.isIntersecting)
-            wrap.classList.toggle('is-offscreen', !onScreen)
+            toggleClass(wrap, elementStatus.isOffscreen, !onScreen)
         }, { threshold: 0 })
         chevronObserver.observe(cover)
     }
@@ -95,8 +114,8 @@ function plugin(hook, vm) {
     }
 
     function clearHover() {
-        for (const r of groupRows) r.classList.remove('is-group-hover')
-        for (const c of rowCells) c.classList.remove('is-row-hover')
+        for (const r of groupRows) removeClass(r, elementStatus.isGroupHover)
+        for (const c of rowCells) removeClass(c, elementStatus.isRowHover)
         groupRows = []
         rowCells = []
     }
@@ -115,7 +134,7 @@ function plugin(hook, vm) {
         for (const index of rowSpanCoverage(table)[row.rowIndex]) {
             const r = table.rows[index]
             if (!r) continue
-            r.classList.add('is-group-hover')
+            addClass(r, elementStatus.isGroupHover)
             groupRows.push(r)
         }
 
@@ -123,7 +142,7 @@ function plugin(hook, vm) {
 
         for (const c of row.cells) {
             if ((c.rowSpan || 1) > 1) continue
-            c.classList.add('is-row-hover')
+            addClass(c, elementStatus.isRowHover)
             rowCells.push(c)
         }
     }
@@ -132,7 +151,7 @@ function plugin(hook, vm) {
     let navScheduled = false
 
     function observeNav() {
-        const nav = document.querySelector('.app-nav')
+        const nav = getEl(`.${docsifyClasses.appNav}`)
         if (!nav || navObserver) return
 
         navObserver = new MutationObserver(function () {
@@ -149,49 +168,47 @@ function plugin(hook, vm) {
     function setupNavMenus() {
         const current = (location.hash || '#/').split('?')[0].replace(/\/+$/, '')
 
-        for (const list of document.querySelectorAll('.app-nav > ul')) {
+        for (const list of getAllEls(`.${docsifyClasses.appNav} > ul`)) {
             for (const li of list.children) {
                 if (li.tagName !== 'LI') continue
 
-                const menu = li.querySelector(':scope > ul')
+                const menu = getEl(':scope > ul', li)
                 if (!menu) continue
 
-                if (!li.querySelector(':scope > .app-nav-toggle')) {
-                    if (li.firstChild === menu || li.querySelector(':scope > a')) continue
+                if (!getEl(`:scope > .${appNavToggleClass}`, li)) {
+                    if (li.firstChild === menu || getEl(':scope > a', li)) continue
 
-                    const toggle = document.createElement('span')
-                    toggle.className = 'app-nav-toggle'
+                    const toggle = createEl('span', { className: appNavToggleClass })
                     while (li.firstChild && li.firstChild !== menu) toggle.appendChild(li.firstChild)
                     li.insertBefore(toggle, menu)
 
-                    const inner = document.createElement('span')
-                    inner.className = 'app-nav-toggle-inner'
+                    const inner = createEl('span', { className: appNavToggleInnerClass })
                     while (toggle.firstChild) inner.appendChild(toggle.firstChild)
                     const ghost = inner.cloneNode(true)
-                    ghost.className = 'app-nav-toggle-inner app-nav-toggle-ghost'
+                    ghost.className = `${appNavToggleInnerClass} ${appNavToggleGhostClass}`
                     toggle.appendChild(inner)
                     toggle.appendChild(ghost)
 
                     makeButtonLike(toggle)
 
-                    toggle.addEventListener('click', function () {
-                        li.classList.toggle('is-open')
+                    onListen(toggle, 'click', function () {
+                        toggleClass(li, elementStatus.isOpen)
                     })
 
-                    li.addEventListener('focusout', function (e) {
+                    onListen(li, 'focusout', function (e) {
                         if (!e.relatedTarget || li.contains(e.relatedTarget)) return
-                        li.classList.remove('is-open')
+                        removeClass(li, elementStatus.isOpen)
                     })
                 }
 
                 if (markdownHelperOptions.highlightNavMenuCurrent) {
-                    li.classList.toggle('is-current', [...menu.querySelectorAll('a')].some(function (a) {
+                    toggleClass(li, elementStatus.isCurrent, getAllEls('a', menu).some(function (a) {
                         const href = (a.getAttribute('href') || '').split('?')[0].replace(/\/+$/, '')
                         return href === current
                     }))
                 }
                 else {
-                    li.classList.remove('is-current')
+                    removeClass(li, elementStatus.isCurrent)
                 }
             }
         }
@@ -201,23 +218,23 @@ function plugin(hook, vm) {
         bindShortcuts({
             Slash: focusSearch,
             Escape: { allowInInput: true, handler: leaveSearch }
-        }, { when: () => !document.body.classList.contains('has-toc') })
+        }, { when: () => !hasClass(document.body, hasTocClass) })
 
-        window.addEventListener('scroll', updateSticky, { passive: true })
-        window.addEventListener('resize', updateSticky, { passive: true })
+        onListen(window, 'scroll', updateSticky, { passive: true })
+        onListen(window, 'resize', updateSticky, { passive: true })
 
-        const cover = document.querySelector('section.cover')
+        const cover = getEl(`section.${docsifyClasses.cover}`)
         if (cover) new MutationObserver(updateSticky).observe(cover, { attributes: true, attributeFilter: ['class'] })
 
         watchChevronVisibility()
 
-        document.addEventListener('mouseover', function (e) {
-            setHover(e.target.closest('.markdown-section tbody td, .markdown-section tbody th'))
+        onListen(document, 'mouseover', function (e) {
+            setHover(e.target.closest(`.${docsifyClasses.markdownSection} tbody td, .${docsifyClasses.markdownSection} tbody th`))
         })
 
-        document.addEventListener('click', function (e) {
-            for (const li of document.querySelectorAll('.app-nav > ul > li.is-open')) {
-                if (!li.contains(e.target)) li.classList.remove('is-open')
+        onListen(document, 'click', function (e) {
+            for (const li of getAllEls(`.${docsifyClasses.appNav} > ul > li.${elementStatus.isOpen}`)) {
+                if (!li.contains(e.target)) removeClass(li, elementStatus.isOpen)
             }
         })
 
@@ -227,9 +244,9 @@ function plugin(hook, vm) {
     })
 
     hook.doneEach(function () {
-        const sidebar = document.getElementsByClassName('sidebar')[0]
-        const appName = sidebar && sidebar.getElementsByClassName('app-name')[0]
-        const search = sidebar && sidebar.getElementsByClassName('search')[0]
+        const sidebar = getElByClass(docsifyClasses.sidebar)
+        const appName = sidebar && getElByClass(docsifyClasses.appName, sidebar)
+        const search = sidebar && getElByClass(docsifyClasses.search, sidebar)
 
         if (appName && search) search.before(appName)
 

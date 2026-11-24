@@ -1,11 +1,8 @@
-/** Word 模型：词条的识别方式、去重合并、序列化 */
-
 import { POS_LIST, WORD_SOURCE_OPTIONS } from '../config/config.js'
 import { wordId } from '../utils/id.js'
 import { nowIso } from '../utils/date.js'
 import { toStringArray } from '../utils/text-normalize.js'
 
-/** 词条的「属性字段」取值：只保留有值的内容；多选（如语法性、助动词）存数组 */
 export function normalizeAttributes(input) {
     const out = {}
     if (!input || typeof input !== 'object') return out
@@ -74,7 +71,6 @@ function normalizeSourceList(list, kind) {
             continue
         }
         const entry = { ...item }
-        // 补充形式属于词条本身，不区分来源
         if (kind === 'inflections') delete entry.source
         else entry.source = entry.source || 'manual'
         if (typeof entry.text === 'string') entry.text = entry.text.trim()
@@ -97,10 +93,6 @@ function defaultEntry(kind, text) {
     }
 }
 
-/**
- * 规范化 paradigm：{ [tableKey]: { [rowKey]: { [colKey]: string } } }
- * 空字符串、null、undefined 一律剔除
- */
 export function normalizeParadigm(p) {
     if (!p || typeof p !== 'object') return {}
     const out = {}
@@ -122,21 +114,15 @@ export function normalizeParadigm(p) {
     return out
 }
 
-/**
- * 规范化词干。词干是不变的部分，词形变化一律在其后追加词尾（la am → amō、amāre，grc λόγ → λόγος）；
- * 末尾的连字符只是显示约定，不写入数据
- */
 export function normalizeStem(value) {
     return String(value ?? '').trim().replace(/[-\u2010-\u2015\uff0d]+$/, '').trim()
 }
 
-/** 词干的显示形式：统一补上末尾连字符 */
 export function stemDisplay(stem) {
     const s = normalizeStem(stem)
     return s ? s + '-' : ''
 }
 
-/** 规范化词干 { key: 词干 } */
 export function normalizeStems(value) {
     const out = {}
     if (!value || typeof value !== 'object') return out
@@ -148,12 +134,10 @@ export function normalizeStems(value) {
     return out
 }
 
-/** 基准词干（表单里的「词干」） */
 export function primaryStem(word) {
     return normalizeStem(word?.stems?.base ?? '')
 }
 
-/** 除 base 之外的其它词干：[[key, 词干], ...] */
 export function otherStems(word) {
     const stems = word?.stems
     if (!stems || typeof stems !== 'object') return []
@@ -162,7 +146,6 @@ export function otherStems(word) {
         .map(([key, value]) => [key, normalizeStem(value)])
 }
 
-/** 合并词干：已有的值不被覆盖，只在缺失时填充 */
 export function mergeStems(existing, incoming) {
     const merged = normalizeStems(existing)
     for (const [key, value] of Object.entries(normalizeStems(incoming))) {
@@ -171,7 +154,6 @@ export function mergeStems(existing, incoming) {
     return merged
 }
 
-/** 判断 paradigm 是否为空 */
 export function isParadigmEmpty(p) {
     if (!p || typeof p !== 'object') return true
     for (const table of Object.values(p)) {
@@ -180,7 +162,6 @@ export function isParadigmEmpty(p) {
     return true
 }
 
-/** 收集词条中所有 source 标识，按 manual 优先排序 */
 export function allSources(word) {
     const set = new Set()
     for (const k of ['meanings', 'collocations', 'examples']) {
@@ -206,7 +187,6 @@ export function sourceLabel(source) {
     return source
 }
 
-/** 表格按格子合并：新词条写了的格子覆盖旧值，没写的保留。 */
 export function mergeParadigm(existing, incoming) {
     const A = normalizeParadigm(existing)
     const B = normalizeParadigm(incoming)
@@ -230,12 +210,6 @@ export function mergeParadigm(existing, incoming) {
     return out
 }
 
-/**
- * 词条内容合并：表格按格子、词干按已有值优先、列表去重追加、备注只补空位。
- *
- * `preferIncoming`：属性字段冲突时用新值。默认保留已有值。
- * `replaceInflectionType`：新词条写了类型就覆盖已有的。默认只在原来为空时写入。
- */
 export function mergeWordContent(existing, incoming, {
     preferIncoming = false,
     replaceInflectionType = false
@@ -249,7 +223,6 @@ export function mergeWordContent(existing, incoming, {
 
     merged.paradigm = mergeParadigm(existing.paradigm, incoming.paradigm)
 
-    // 词干：已有值优先保留，为空时采用新来源的值
     merged.stems = mergeStems(existing.stems, incoming.stems)
 
     merged.attributes = normalizeAttributes(preferIncoming
@@ -269,7 +242,6 @@ export function mergeWordContent(existing, incoming, {
     return merged
 }
 
-/** 追加条目，按 `entryKey` 去重 */
 export function appendUnique(base = [], extra = []) {
     const out = [...(base || [])]
     for (const item of extra || []) {
@@ -280,7 +252,6 @@ export function appendUnique(base = [], extra = []) {
     return out
 }
 
-/** 条目去重用的身份：这些字段都相同就算同一条 */
 export function entryKey(e) {
     return [
         e.text ?? '', e.form ?? '', e.label ?? '', e.group ?? '',

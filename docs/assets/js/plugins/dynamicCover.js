@@ -1,4 +1,8 @@
+import { docsifyClasses } from '../utils/constants.js'
+import { onListen, offListen, addClass, createEl, getAllEls, getElByClass } from '../utils/dom.js'
+
 let dynamicCoverOptions = {
+    enable: false,
     backgrounds: [
         './assets/resources/img/cover/cover-1.jpg',
         './assets/resources/img/cover/cover-2.jpg',
@@ -7,11 +11,13 @@ let dynamicCoverOptions = {
 }
 
 function plugin(hook, vm) {
+    if (!dynamicCoverOptions.enable) return
+
     const backgrounds = dynamicCoverOptions.backgrounds
 
     const numberOfImages = backgrounds.length
-    const fadeMultiplier = 3   // 淡入淡出 = 3 个基准单位
-    const intervalMultiplier = 8   // 轮播间隔 = 8 个基准单位
+    const fadeMultiplier = 3
+    const intervalMultiplier = 8
 
     function getDurationMs(varName, fallbackMs) {
         const raw = getComputedStyle(document.documentElement)
@@ -38,19 +44,18 @@ function plugin(hook, vm) {
             coverTimer = null
         }
 
-        const cover = document.getElementsByClassName('cover')[0]
+        const cover = getElByClass(docsifyClasses.cover)
         if (!cover) return
 
         const baseMs = getDurationMs('--global-transition-duration-slow', 1000)
         const fadeDurationMs = fadeMultiplier * baseMs
         const intervalMs = intervalMultiplier * baseMs
 
-        cover.classList.add('dynamic-cover')
+        addClass(cover, 'dynamic-cover')
 
-        const mask = cover.getElementsByClassName('mask')[0]
+        const mask = getElByClass('mask', cover)
         if (mask) mask.style.opacity = .6
 
-        // 预加载图片
         const coverBackgrounds = backgrounds.map(src => {
             const img = new Image()
             img.src = src
@@ -64,13 +69,13 @@ function plugin(hook, vm) {
         }
         cover.style.isolation = 'isolate'
 
-        cover.querySelectorAll('.cover-fade-layer').forEach(el => el.remove())
+        getAllEls('.cover-fade-layer', cover).forEach(el => el.remove())
 
-        const layerA = document.createElement('div')
-        const layerB = document.createElement('div')
+        const layerA = createEl('div')
+        const layerB = createEl('div')
 
         for (const layer of [layerA, layerB]) {
-            layer.className = 'cover-fade-layer'
+            addClass(layer, 'cover-fade-layer')
             Object.assign(layer.style, {
                 position: 'absolute',
                 top: '0',
@@ -115,7 +120,6 @@ function plugin(hook, vm) {
             curImgId = (curImgId + 1) % numberOfImages
         }
 
-        // 只在封面可见且页面在前台时轮播
         let onScreen = false
 
         const startTimer = function () {
@@ -138,7 +142,7 @@ function plugin(hook, vm) {
             sync()
         }
 
-        document.addEventListener('visibilitychange', onVisibilityChange)
+        onListen(document, 'visibilitychange', onVisibilityChange)
 
         let observer = null
         if ('IntersectionObserver' in window) {
@@ -157,7 +161,7 @@ function plugin(hook, vm) {
 
         coverCleanup = function () {
             stopTimer()
-            document.removeEventListener('visibilitychange', onVisibilityChange)
+            offListen(document, 'visibilitychange', onVisibilityChange)
             if (observer) observer.disconnect()
         }
     })

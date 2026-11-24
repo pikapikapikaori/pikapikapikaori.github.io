@@ -1,7 +1,9 @@
+import { onListen } from './dom.js'
+
 /**
  *   快捷键注册表。
  *
- *   所有快捷键都必须先按住前缀键 `LEADER` 再按另一个键才生效；前缀键单独按下不拦截
+ *   所有快捷键都必须先按住前缀键 `shortcutLeader` 再按另一个键才生效；前缀键单独按下不拦截
  *   任何事件。同一个按键从“最后注册”的一组开始匹配，晚注册的作用域可以覆盖先注册的。
  *   匹配依据是 KeyboardEvent.code，不受输入法全角标点与键盘布局影响。
  *
@@ -53,7 +55,7 @@ export function bindShortcuts(bindings, options) {
     }
 }
 
-const LEADER = 'KeyB'
+const shortcutLeader = 'KeyB'
 
 const registry = []
 
@@ -64,9 +66,9 @@ function listen() {
     if (listening) return
     listening = true
 
-    document.addEventListener('keydown', onKeyDown, true)
-    document.addEventListener('keyup', onKeyUp, true)
-    window.addEventListener('blur', resetLeader)
+    onListen(document, 'keydown', onKeyDown, true)
+    onListen(document, 'keyup', onKeyUp, true)
+    onListen(window, 'blur', resetLeader)
 }
 
 function resetLeader() {
@@ -88,7 +90,7 @@ function hasModifier(event) {
 function onKeyDown(event) {
     if (event.isComposing || event.keyCode === 229) return
 
-    if (event.code === LEADER) {
+    if (event.code === shortcutLeader) {
         if (!event.repeat && !hasModifier(event)) leaderDown = true
         return
     }
@@ -105,7 +107,7 @@ function onKeyDown(event) {
 }
 
 function onKeyUp(event) {
-    if (event.code === LEADER) resetLeader()
+    if (event.code === shortcutLeader) resetLeader()
 }
 
 function find(event) {

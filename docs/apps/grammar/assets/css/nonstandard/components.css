@@ -1,0 +1,19 @@
+.select {
+    -webkit-appearance: none;
+}
+
+.input--editable::-webkit-scrollbar {
+    display: none;
+}
+
+.grammar-table-wrap {
+    -webkit-overflow-scrolling: touch;
+}
+
+.paradigm-block {
+    -webkit-overflow-scrolling: touch;
+}
+
+.vertical-popover {
+    -webkit-user-select: text;
+}

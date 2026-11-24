@@ -1,36 +1,61 @@
-import { makeEl } from './util.js'
+import {
+    widgetsContainerId,
+    widgetsRowClass,
+    widgetItemClass,
+    widgetPopupClass,
+    widgetHiddenClass,
+    progressWidgetId
+} from '../../plugins/widgets.js'
+import { tocPageDivClass } from '../../plugins/tocPage.js'
+import { breadcrumbClass } from '../../plugins/breadcrumb.js'
+import { countWordsBlockId } from '../../plugins/countWords.js'
+import { docsifyClasses, elementStatus } from '../../utils/constants.js'
+import { arrow } from '../../utils/icons.js'
+import {
+    onListen,
+    addClass,
+    toggleClass,
+    hasClass,
+    createEl,
+    getEl,
+    getAllEls,
+    getElById,
+    getElByClass
+} from '../../utils/dom.js'
 
-const TOP_ARROW = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 11l6-6 6 6M6 19l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+const doubleUpArrow = arrow.doubleUpArrow
 
 function eagerTocPageImages(root) {
-    Array.prototype.forEach.call(root.querySelectorAll('.toc-page-div img'), function (img, index) {
+    getAllEls(`.${tocPageDivClass} img`, root).forEach((img, index) => {
         if (index < 6) img.loading = 'eager'
     })
 }
 
 function setupWidgetsRow() {
-    const container = document.getElementById('page-right-widgets-container')
+    const container = getElById(widgetsContainerId)
     if (!container) return null
 
-    let row = container.querySelector(':scope > .widgets-row')
+    const rowSelector = `:scope > .${widgetsRowClass}`
+    const hiddenSelector = `.${widgetHiddenClass}`
+
+    let row = getEl(rowSelector, container)
     if (!row) {
-        row = makeEl('div', 'widgets-row')
+        row = createEl('div', { className: widgetsRowClass })
         container.insertBefore(row, container.firstChild)
     }
 
-    Array.prototype.forEach.call(
-        container.querySelectorAll(':scope > .page-right-tools-widgets-span, :scope > .page-right-popups'),
-        function (el) { row.appendChild(el) }
-    )
+    for (const el of getAllEls(`:scope > .${widgetItemClass}, :scope > .${widgetPopupClass}`, container)) {
+        row.appendChild(el)
+    }
 
-    let hidden = row.querySelectorAll('.page-right-tools-widgets-span-disappear').length
+    let hidden = getAllEls(hiddenSelector, row).length
 
-    const anchor = new MutationObserver(function () {
-        const now = row.querySelectorAll('.page-right-tools-widgets-span-disappear').length
+    const anchor = new MutationObserver(() => {
+        const now = getAllEls(hiddenSelector, row).length
         const wasHidden = hidden > 0
         hidden = now
         if (!wasHidden || now > 0) return
-        requestAnimationFrame(function () {
+        requestAnimationFrame(() => {
             row.scrollLeft = row.scrollWidth
         })
     })
@@ -42,66 +67,65 @@ function setupWidgetsRow() {
 }
 
 function setupReadProgress() {
-    const el = document.getElementById('progress-span')
+    const el = getElById(progressWidgetId)
     if (!el) return null
 
-    let icon = el.querySelector('.sw-top-arrow')
+    let icon = getEl('.sw-top-arrow', el)
     if (!icon) {
-        const holder = makeEl('span')
-        holder.innerHTML = TOP_ARROW
+        const holder = createEl('span')
+        holder.innerHTML = doubleUpArrow
         icon = holder.firstElementChild
-        icon.classList.add('sw-top-arrow')
+        addClass(icon, 'sw-top-arrow')
         el.appendChild(icon)
     }
 
-    const onClick = function () {
+    const onClick = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
-    el.addEventListener('click', onClick)
+    const stopClick = onListen(el, 'click', onClick)
 
     return function stop() {
-        el.removeEventListener('click', onClick)
+        stopClick()
         if (icon.isConnected) icon.remove()
     }
 }
 
 function setupTocSpy() {
-    const nav = document.querySelector('.sidebar-nav')
+    const nav = getElByClass(docsifyClasses.sidebarNav)
     if (!nav) return null
 
     let items = []
     let ticking = false
     let frame = 0
 
-    const collect = function () {
+    const collect = () => {
         const heads = []
-        Array.prototype.forEach.call(
-            document.querySelectorAll('.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4'),
-            function (h) {
-                const span = h.querySelector('span')
-                const text = (span ? span.textContent : h.textContent).trim()
-                if (text) heads.push({ el: h, text: text })
-            }
-        )
+        const scope = `.${docsifyClasses.markdownSection}`
+
+        for (const h of getAllEls(`${scope} h1, ${scope} h2, ${scope} h3, ${scope} h4`)) {
+            const span = getEl('span', h)
+            const text = (span ? span.textContent : h.textContent).trim()
+            if (text) heads.push({ el: h, text: text })
+        }
 
         const found = []
-        Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
+        for (const a of getAllEls('a', nav)) {
             const title = (a.getAttribute('title') || a.textContent || '').trim()
-            if (!title) return
-            const match = heads.find(function (item) { return item.text === title })
+            if (!title) continue
+            const match = heads.find(item => item.text === title)
             const li = a.closest('li')
-            if (!match || !li) return
+            if (!match || !li) continue
             found.push({ li: li, heading: match.el })
-        })
+        }
 
-        found.sort(function (a, b) {
-            return a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
-        })
+        found.sort((a, b) =>
+            a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
+
         return found
     }
 
-    const apply = function () {
+    const apply = () => {
         if (!items.length) items = collect()
         if (!items.length) return
 
@@ -109,37 +133,38 @@ function setupTocSpy() {
         const threshold = 100
         let current = items[0]
 
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].heading.getBoundingClientRect().top <= threshold) current = items[i]
-            else break
+        for (const item of items) {
+            if (item.heading.getBoundingClientRect().top > threshold) break
+            current = item
         }
 
         if (doc.scrollTop + window.innerHeight >= doc.scrollHeight - 2) {
             current = items[items.length - 1]
         }
 
-        const marked = items.filter(function (it) { return it.li.classList.contains('active') })
+        const marked = items.filter(item => hasClass(item.li, elementStatus.active))
         if (marked.length === 1 && marked[0] === current) return
 
-        items.forEach(function (it) { it.li.classList.toggle('active', it === current) })
+        for (const item of items) toggleClass(item.li, elementStatus.active, item === current)
     }
 
-    const onScroll = function () {
+    const onScroll = () => {
         if (ticking) return
         ticking = true
-        frame = requestAnimationFrame(function () {
+        frame = requestAnimationFrame(() => {
             apply()
             ticking = false
         })
     }
 
-    const fixer = new MutationObserver(function () { apply() })
+    const fixer = new MutationObserver(() => apply())
     fixer.observe(nav, { subtree: true, attributes: true, attributeFilter: ['class'] })
 
-    document.addEventListener('scroll', onScroll, { capture: true, passive: true })
-    window.addEventListener('resize', onScroll)
+    const stopScroll = onListen(document, 'scroll', onScroll, { capture: true, passive: true })
+    const stopResize = onListen(window, 'resize', onScroll)
+
     ticking = true
-    frame = requestAnimationFrame(function () {
+    frame = requestAnimationFrame(() => {
         apply()
         ticking = false
     })
@@ -147,8 +172,8 @@ function setupTocSpy() {
     return function cleanup() {
         window.cancelAnimationFrame(frame)
         fixer.disconnect()
-        document.removeEventListener('scroll', onScroll, { capture: true })
-        window.removeEventListener('resize', onScroll)
+        stopScroll()
+        stopResize()
     }
 }
 
@@ -158,11 +183,11 @@ export function takeSlots(root) {
     return [
         {
             at: 'line',
-            take: function () { return root.querySelector(':scope > ul.breadcrumb') }
+            take: () => getEl(`:scope > ul.${breadcrumbClass}`, root)
         },
         {
             at: 'meta',
-            take: function () { return root.querySelector(':scope > #count-words-block-span-div') }
+            take: () => getEl(`:scope > #${countWordsBlockId}`, root)
         }
     ]
 }

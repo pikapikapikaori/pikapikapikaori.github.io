@@ -1,0 +1,102 @@
+{
+    "providers": [
+        {
+            "category": "搜索引擎",
+            "items": [
+                {
+                    "name": "Google",
+                    "url": "https://www.google.com/",
+                    "query": "https://www.google.com/search?q=",
+                    "prefix": "/sego"
+                },
+                {
+                    "name": "Duck Duck Go",
+                    "url": "https://duckduckgo.com/",
+                    "query": "https://duckduckgo.com/?q=",
+                    "prefix": "/sedd"
+                },
+                {
+                    "name": "Bing",
+                    "url": "https://www.bing.com/",
+                    "query": "https://www.bing.com/search?q=",
+                    "prefix": "/sebi"
+                }
+            ]
+        },
+        {
+            "category": "影视与剧集",
+            "items": [
+                {
+                    "name": "IMDB",
+                    "url": "https://www.imdb.com/",
+                    "query": "https://www.imdb.com/find?q=",
+                    "prefix": "/fmim"
+                },
+                {
+                    "name": "TheMovieDB",
+                    "url": "https://www.themoviedb.org/",
+                    "query": "https://www.themoviedb.org/search?query=",
+                    "prefix": "/fmtmdb"
+                },
+                {
+                    "name": "TheTVDB",
+                    "url": "https://www.thetvdb.com/",
+                    "query": "https://www.thetvdb.com/search?query=",
+                    "prefix": "/fmtvdb"
+                },
+                {
+                    "name": "Trakt",
+                    "url": "https://trakt.tv/",
+                    "query": "https://trakt.tv/search?query=",
+                    "prefix": "/fmtr"
+                },
+                {
+                    "name": "豆瓣",
+                    "url": "https://www.douban.com/",
+                    "query": "https://www.douban.com/search?q=",
+                    "prefix": "/fmdb"
+                },
+                {
+                    "name": "Bangumi",
+                    "url": "https://bgm.tv/",
+                    "query": "https://bgm.tv/subject_search/",
+                    "prefix": "/fmbgm"
+                },
+                {
+                    "name": "YouTube",
+                    "url": "https://www.youtube.com/",
+                    "query": "https://www.youtube.com/results?search_query=",
+                    "prefix": "/fmyt"
+                }
+            ]
+        },
+        {
+            "category": "音乐",
+            "items": [
+                {
+                    "name": "Allmusic",
+                    "url": "https://www.allmusic.com/",
+                    "query": "https://www.allmusic.com/search/all/",
+                    "prefix": "/muam"
+                },
+                {
+                    "name": "Discogs",
+                    "url": "https://www.discogs.com/",
+                    "query": "https://www.discogs.com/search/?q=",
+                    "prefix": "/mudi"
+                }
+            ]
+        },
+        {
+            "category": "开发",
+            "items": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/",
+                    "query": "https://github.com/search?q=",
+                    "prefix": "/degh"
+                }
+            ]
+        }
+    ]
+}

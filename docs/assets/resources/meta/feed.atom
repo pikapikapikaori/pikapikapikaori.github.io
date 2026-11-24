@@ -6,14 +6,14 @@
   <link href="https://pikapikapi.com/assets/resources/meta/feed.atom" rel="self"/>
   <id>https://pikapikapi.com</id>
   <subtitle>Don't worry, be happy.</subtitle>
-  <updated>2026-11-09T08:53:40Z</updated>
+  <updated>2026-11-21T06:33:34Z</updated>
   
   <entry>
     <title><![CDATA[Bangumi Takeout Web 工具]]></title>
     <link href="https://pikapikapi.com/#/writings/BangumiBackup-20260915"/>
     <id>https://pikapikapi.com/#/writings/BangumiBackup-20260915</id>
-    <content type="html"><![CDATA[<h1 id="bangumi-takeout-web-工具">Bangumi Takeout Web 工具</h1><figure><img src="https://pikapikapi.com/writings/_media/BangumiBackup-20260915/cover-picture.jpg"alt="封面图" /><figcaption aria-hidden="true">封面图</figcaption></figure><blockquote><p>本文首发于个人博客<br />发表日期：2026.09.15<br />最后编辑于：{docsify-last-updated}</p></blockquote><p>受 <ahref="https://github.com/jerrylususu/bangumi-takeout-py">Bangumi-Takeout</a>项目启发，开发了一个纯前端的 <a href="https://bgm.tv">Bangumi</a>收藏条目备份工具，具体网址可以点击<ahref="apps/bangumi-takeout/web/index.html"title=":ignore">这里</a>。</p><p>导出后的 <code>json</code> 文件，以及该文件压缩后的 <code>zip</code>文件可以导入<a href="apps/bangumi-takeout/app/index.html"title=":ignore">这里</a>，该网站提供一个图形界面来可视化导出的数据。</p>]]></content>
-    <updated>2026-11-06T14:16:16+08:00</updated>
+    <content type="html"><![CDATA[<h1 id="bangumi-takeout-web-工具">Bangumi Takeout Web 工具</h1><figure><img src="https://pikapikapi.com/writings/_media/BangumiBackup-20260915/cover-picture.jpg"alt="封面图" /><figcaption aria-hidden="true">封面图</figcaption></figure><blockquote><p>本文首发于个人博客<br />发表日期：2026.09.15<br />最后编辑于：{docsify-last-updated}</p></blockquote><p>受 <ahref="https://github.com/jerrylususu/bangumi-takeout-py">Bangumi-Takeout</a>项目启发，开发了一个纯前端的 <a href="https://bgm.tv">Bangumi</a>收藏条目备份与展示工具，点击<a href="apps/bangumi-takeout/index.html"title=":ignore">这里</a>即可使用。</p>]]></content>
+    <updated>2026-11-21T04:00:25+08:00</updated>
   </entry>
   <entry>
     <title><![CDATA[Birthday E-card for GF]]></title>

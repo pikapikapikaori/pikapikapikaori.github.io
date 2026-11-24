@@ -1,3 +1,4 @@
-docs/pages/** linguist-documentation
-docs/apps/** linguist-documentation
-docs/sources/** linguist-vendored
+**/resource/** linguist-vendored
+**/resources/** linguist-vendored
+**/source/** linguist-vendored
+**/sources/** linguist-vendored

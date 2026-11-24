@@ -1,19 +1,11 @@
-/* @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
-
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-} */
-
 body
 {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #fbe9e7
+    background: #fbe9e7;
+    font-family: serif
 }
 .card
 {
@@ -75,7 +67,7 @@ body
 {
     display: flex;
     justify-content: left;
-    align-items: left;
+    align-items: flex-start;
     flex-direction: column;
 }
 .card .details .title h5
@@ -100,13 +92,6 @@ body
     line-height: 1em;
 }
 
-.card .details .content span
-{
-    text-align: right;
-    font-weight: 700;
-    line-height: 1em;
-}
-
 .card .details .end
 {
     position: absolute;
@@ -114,7 +99,7 @@ body
     right: 90px;
     display: flex;
     justify-content: right;
-    align-items: right;
+    align-items: flex-end;
     flex-direction: column;
 }
 .card .details .end h5

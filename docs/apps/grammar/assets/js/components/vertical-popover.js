@@ -1,5 +1,3 @@
-/** 原文预览浮层：悬停或点击含该语言文字的片段时弹出原文。 */
-
 import { h } from '../utils/dom.js'
 import { getLanguage } from '../data/languages.js'
 import { SCRIPT_POPUP_LANGS } from '../config/config.js'
@@ -21,7 +19,6 @@ function isPopupLang(el) {
     return Object.prototype.hasOwnProperty.call(SCRIPT_POPUP_LANGS, lang)
 }
 
-/** 可读文本：输入框取 value；普通元素优先取 <bdi> 内容（只显示原文，不带中文说明），没有才退回 textContent */
 function textOf(el) {
     if (!el) return ''
     const tag = el.tagName
@@ -35,7 +32,7 @@ function hasVerticalScript(el, lang) {
     const text = textOf(el)
     if (!text) return false
     const re = SCRIPT_POPUP_LANGS[lang]
-    if (!re) return true // 未登记脚本范围的语言，默认放行
+    if (!re) return true
     return re.test(text)
 }
 
@@ -95,7 +92,6 @@ function show(sourceEl, x, y) {
     el.classList.toggle('vertical-popover--horizontal', !(meta && meta.vertical))
     currentSourceEl = sourceEl
 
-    // 字体跟随源元素，略放大一点便于看清
     const srcSize = parseFloat(getComputedStyle(sourceEl).fontSize) || 16
     el.style.fontSize = Math.max(16, srcSize * 1.15) + 'px'
 
@@ -154,7 +150,6 @@ function onMouseOver(e) {
 
     cancelHide()
 
-    // 已经显示的就是这个元素：保持，不重新计时
     if (el === currentSourceEl && popoverEl && popoverEl.style.display !== 'none') {
         return
     }
@@ -184,7 +179,6 @@ function onMouseOut(e) {
 
 function onClick(e) {
     if (popoverEl && popoverEl.contains(e.target)) return
-    // 输入框、自绘输入框里点击要留给光标定位，不能拦截
     const tag = e.target && e.target.tagName
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
     if (e.target instanceof Element && e.target.closest('[contenteditable]')) return
@@ -204,7 +198,6 @@ function onKeyDown(e) {
     if (e.key === 'Escape') hide()
 }
 
-/** 输入框内容变了：正在显示的浮层已经过期，先收起 */
 function onInput(e) {
     if (currentSourceEl && currentSourceEl === e.target) hide()
 }

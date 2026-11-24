@@ -1,0 +1,870 @@
+{
+    "version": "1.0.0",
+    "hash": "74b16ad5c3646d9b",
+    "files": [
+        {
+            "path": "assets/css/base.css",
+            "hash": "46d5fbaacbc72df4"
+        },
+        {
+            "path": "assets/css/components.css",
+            "hash": "4294f808d9acdd3f"
+        },
+        {
+            "path": "assets/css/fonts.css",
+            "hash": "0fb451b66ec8ace2"
+        },
+        {
+            "path": "assets/css/lang.css",
+            "hash": "06864384b7a6a026"
+        },
+        {
+            "path": "assets/css/layout.css",
+            "hash": "2744390b7b683a41"
+        },
+        {
+            "path": "assets/css/nonstandard/base.css",
+            "hash": "e5112544ca6044b2"
+        },
+        {
+            "path": "assets/css/nonstandard/components.css",
+            "hash": "3d75701c06d4723f"
+        },
+        {
+            "path": "assets/css/nonstandard/notes.css",
+            "hash": "7656ac24bb0c1155"
+        },
+        {
+            "path": "assets/css/nonstandard/pages.css",
+            "hash": "ebe13756a2f69998"
+        },
+        {
+            "path": "assets/css/nonstandard/reset.css",
+            "hash": "4efc6a15e8475c43"
+        },
+        {
+            "path": "assets/css/notes.css",
+            "hash": "f081b4ac3f51b750"
+        },
+        {
+            "path": "assets/css/pages.css",
+            "hash": "b2b884a0091da42f"
+        },
+        {
+            "path": "assets/css/reset.css",
+            "hash": "ac80ecf1ccd550cc"
+        },
+        {
+            "path": "assets/css/variables.css",
+            "hash": "acbbd5f30ff2bc8f"
+        },
+        {
+            "path": "assets/external/js/perseus.js",
+            "hash": "dac5346a2b203491"
+        },
+        {
+            "path": "assets/external/js/wiktionary.js",
+            "hash": "0cfe9a4031e3a9fe"
+        },
+        {
+            "path": "assets/js/adapters/text-field.js",
+            "hash": "a4fcd8a9991ce404"
+        },
+        {
+            "path": "assets/js/app-state.js",
+            "hash": "ec5127fddecf07cc"
+        },
+        {
+            "path": "assets/js/components/analyze-modal.js",
+            "hash": "915a95a37f1395ff"
+        },
+        {
+            "path": "assets/js/components/card-overlay.js",
+            "hash": "b811d1d6196b6c4c"
+        },
+        {
+            "path": "assets/js/components/editable-input.js",
+            "hash": "babbe90a042e87d6"
+        },
+        {
+            "path": "assets/js/components/entry-lists.js",
+            "hash": "1f9afdf42ec3057f"
+        },
+        {
+            "path": "assets/js/components/form-field.js",
+            "hash": "5a0e29a06c08714e"
+        },
+        {
+            "path": "assets/js/components/ghost-input.js",
+            "hash": "93eed59ac331abef"
+        },
+        {
+            "path": "assets/js/components/grammar-table.js",
+            "hash": "91c35c9b675bc2aa"
+        },
+        {
+            "path": "assets/js/components/grammar-verify-modal.js",
+            "hash": "31d318bd30bbe818"
+        },
+        {
+            "path": "assets/js/components/icons.js",
+            "hash": "119c09737058528d"
+        },
+        {
+            "path": "assets/js/components/import-words-modal.js",
+            "hash": "dce695233f0acbbf"
+        },
+        {
+            "path": "assets/js/components/input-helper.js",
+            "hash": "91c59568dad1d9e8"
+        },
+        {
+            "path": "assets/js/components/json-input.js",
+            "hash": "8951c36530a503dd"
+        },
+        {
+            "path": "assets/js/components/modal.js",
+            "hash": "f3743c3decaa6142"
+        },
+        {
+            "path": "assets/js/components/note-editor.js",
+            "hash": "ec965bd904266bfc"
+        },
+        {
+            "path": "assets/js/components/note-toolbar.js",
+            "hash": "475c7ed049733752"
+        },
+        {
+            "path": "assets/js/components/page-tools.js",
+            "hash": "dc39083458d6c042"
+        },
+        {
+            "path": "assets/js/components/pagination.js",
+            "hash": "baec376181e2af69"
+        },
+        {
+            "path": "assets/js/components/paradigm-table.js",
+            "hash": "8e5e9d43cb6adf7a"
+        },
+        {
+            "path": "assets/js/components/select-field.js",
+            "hash": "165e008c3064ca61"
+        },
+        {
+            "path": "assets/js/components/select-menu.js",
+            "hash": "4cba605a345d51c5"
+        },
+        {
+            "path": "assets/js/components/tabs.js",
+            "hash": "afb0a302b941c2db"
+        },
+        {
+            "path": "assets/js/components/theme-toggle.js",
+            "hash": "182f5d1f481da22d"
+        },
+        {
+            "path": "assets/js/components/toast.js",
+            "hash": "cf6aba785a761fb6"
+        },
+        {
+            "path": "assets/js/components/vertical-popover.js",
+            "hash": "0a3b8224102cc8db"
+        },
+        {
+            "path": "assets/js/config/config.js",
+            "hash": "82fd07dea678d139"
+        },
+        {
+            "path": "assets/js/data/languages.js",
+            "hash": "baddafb1dc9b40a7"
+        },
+        {
+            "path": "assets/js/dev/grammar.js",
+            "hash": "bf23fe19080880f1"
+        },
+        {
+            "path": "assets/js/dev/index.js",
+            "hash": "bd833e67ac3e1720"
+        },
+        {
+            "path": "assets/js/main.js",
+            "hash": "739d6819eff18078"
+        },
+        {
+            "path": "assets/js/models/grammar.js",
+            "hash": "cf0916ba03013b0b"
+        },
+        {
+            "path": "assets/js/models/paradigm-generate.js",
+            "hash": "eb3b671d3ad3d8c0"
+        },
+        {
+            "path": "assets/js/models/user.js",
+            "hash": "941e32c128f7de30"
+        },
+        {
+            "path": "assets/js/models/word.js",
+            "hash": "493d0e710ed9d760"
+        },
+        {
+            "path": "assets/js/router.js",
+            "hash": "c62bc587178d9430"
+        },
+        {
+            "path": "assets/js/services/analyze-service.js",
+            "hash": "aa92a261f99c3325"
+        },
+        {
+            "path": "assets/js/services/font-service.js",
+            "hash": "4e85b56357e858cd"
+        },
+        {
+            "path": "assets/js/services/grammar-service.js",
+            "hash": "d83747d4e283d8ce"
+        },
+        {
+            "path": "assets/js/services/http.js",
+            "hash": "d26de455c6444495"
+        },
+        {
+            "path": "assets/js/services/ime-service.js",
+            "hash": "8eda662c7d18cfa3"
+        },
+        {
+            "path": "assets/js/services/import-export-service.js",
+            "hash": "bdcacfe1e48b77c8"
+        },
+        {
+            "path": "assets/js/services/import-words-service.js",
+            "hash": "8993998d4cee9cd7"
+        },
+        {
+            "path": "assets/js/services/review-service.js",
+            "hash": "efe140b505b4c85f"
+        },
+        {
+            "path": "assets/js/services/schema-service.js",
+            "hash": "e04c641e76410993"
+        },
+        {
+            "path": "assets/js/services/word-service.js",
+            "hash": "74845d44753ecf99"
+        },
+        {
+            "path": "assets/js/startup.js",
+            "hash": "b2d80ebaf0254c2e"
+        },
+        {
+            "path": "assets/js/store/db.js",
+            "hash": "ea6d6e5bb43c9e4b"
+        },
+        {
+            "path": "assets/js/store/http-cache.js",
+            "hash": "a3bc383805c31218"
+        },
+        {
+            "path": "assets/js/store/local-storage.js",
+            "hash": "d0de574d44e6d4da"
+        },
+        {
+            "path": "assets/js/store/note-store.js",
+            "hash": "773a830778ddf0f5"
+        },
+        {
+            "path": "assets/js/store/pending-lookup.js",
+            "hash": "d358880bc435d92a"
+        },
+        {
+            "path": "assets/js/store/settings-store.js",
+            "hash": "10ad69e7e51f6a1f"
+        },
+        {
+            "path": "assets/js/store/user-store.js",
+            "hash": "2b780b424b4171db"
+        },
+        {
+            "path": "assets/js/store/word-store.js",
+            "hash": "fea3de3550c97e19"
+        },
+        {
+            "path": "assets/js/utils/bdi.js",
+            "hash": "1ac0296c16daa91f"
+        },
+        {
+            "path": "assets/js/utils/breadcrumbs.js",
+            "hash": "ae4540b2a496c5ee"
+        },
+        {
+            "path": "assets/js/utils/breve.js",
+            "hash": "533ee3f4a3bcd95a"
+        },
+        {
+            "path": "assets/js/utils/caret.js",
+            "hash": "1e7e0855a0b8eb81"
+        },
+        {
+            "path": "assets/js/utils/date.js",
+            "hash": "b0da3a26969f64e5"
+        },
+        {
+            "path": "assets/js/utils/dom.js",
+            "hash": "cf92271b3e6901f6"
+        },
+        {
+            "path": "assets/js/utils/dual-text.js",
+            "hash": "2bb29dc5fcd81b6e"
+        },
+        {
+            "path": "assets/js/utils/events.js",
+            "hash": "107911d4d4b81390"
+        },
+        {
+            "path": "assets/js/utils/id.js",
+            "hash": "8f68351944f39627"
+        },
+        {
+            "path": "assets/js/utils/ime-compose.js",
+            "hash": "6d36b28d5d43e867"
+        },
+        {
+            "path": "assets/js/utils/markdown.js",
+            "hash": "a4285639c0e83838"
+        },
+        {
+            "path": "assets/js/utils/note-markdown.js",
+            "hash": "6f615be9ebb5149c"
+        },
+        {
+            "path": "assets/js/utils/pos.js",
+            "hash": "b4e6754ebbc60c28"
+        },
+        {
+            "path": "assets/js/utils/space-filter.js",
+            "hash": "a793542d33ae52a4"
+        },
+        {
+            "path": "assets/js/utils/text-normalize.js",
+            "hash": "81026ce0202048a7"
+        },
+        {
+            "path": "assets/js/utils/view-toggles.js",
+            "hash": "c88b2bac9f348f80"
+        },
+        {
+            "path": "assets/js/views/grammar-view.js",
+            "hash": "e2d69bcb469b06f6"
+        },
+        {
+            "path": "assets/js/views/language-select-view.js",
+            "hash": "08a720386caeeeff"
+        },
+        {
+            "path": "assets/js/views/notes-view.js",
+            "hash": "98711b749ddabf09"
+        },
+        {
+            "path": "assets/js/views/review-view.js",
+            "hash": "70b8a1e920e223a0"
+        },
+        {
+            "path": "assets/js/views/schema-view.js",
+            "hash": "faa573c3bd63ba68"
+        },
+        {
+            "path": "assets/js/views/settings-view.js",
+            "hash": "30e39b260369b642"
+        },
+        {
+            "path": "assets/js/views/welcome-view.js",
+            "hash": "1141025faf06b0ce"
+        },
+        {
+            "path": "assets/js/views/word-form-view.js",
+            "hash": "4e683ad053b70dca"
+        },
+        {
+            "path": "assets/js/views/word-list-view.js",
+            "hash": "a1d4832c904119ea"
+        },
+        {
+            "path": "assets/resources/fonts/FuYong/Manchu_FuYong_ShuKai_rounded.woff2",
+            "hash": "9cdf6c71188709a8"
+        },
+        {
+            "path": "assets/resources/fonts/GentiumPlus/GentiumPlus-Bold.woff2",
+            "hash": "1429ac7ca146169f"
+        },
+        {
+            "path": "assets/resources/fonts/GentiumPlus/GentiumPlus-BoldItalic.woff2",
+            "hash": "c3e3ad908f909447"
+        },
+        {
+            "path": "assets/resources/fonts/GentiumPlus/GentiumPlus-Italic.woff2",
+            "hash": "71d723aab574c468"
+        },
+        {
+            "path": "assets/resources/fonts/GentiumPlus/GentiumPlus-Regular.woff2",
+            "hash": "0f524a52962e73e5"
+        },
+        {
+            "path": "assets/resources/fonts/HYKaiTi/HYKaiTiS.woff2",
+            "hash": "ca1ca2d70db1b5cc"
+        },
+        {
+            "path": "assets/resources/fonts/Noto_Sans_Siddham/NotoSansSiddham-Regular.woff2",
+            "hash": "a269e78dd8d3d2b3"
+        },
+        {
+            "path": "assets/resources/fonts/Sahitya/Sahitya-Bold.woff2",
+            "hash": "0ab45d17b87d347d"
+        },
+        {
+            "path": "assets/resources/fonts/Sahitya/Sahitya-Regular.woff2",
+            "hash": "edeba9511a35745b"
+        },
+        {
+            "path": "assets/resources/fonts/Tinos/Tinos-Bold.woff2",
+            "hash": "b0d192cf600bbfaf"
+        },
+        {
+            "path": "assets/resources/fonts/Tinos/Tinos-BoldItalic.woff2",
+            "hash": "48e830c55cd63e27"
+        },
+        {
+            "path": "assets/resources/fonts/Tinos/Tinos-Italic.woff2",
+            "hash": "3b959273bba0da5c"
+        },
+        {
+            "path": "assets/resources/fonts/Tinos/Tinos-Regular.woff2",
+            "hash": "6ec900cbc6ea388d"
+        },
+        {
+            "path": "assets/resources/logo/favicon.ico",
+            "hash": "dc40522b02c04a5a"
+        },
+        {
+            "path": "assets/resources/logo/logo-180.png",
+            "hash": "0fc2d5c87808cd86"
+        },
+        {
+            "path": "assets/resources/logo/logo-192.png",
+            "hash": "9b7435bd19196311"
+        },
+        {
+            "path": "assets/resources/logo/logo-512.png",
+            "hash": "c6efd8ff752d95db"
+        },
+        {
+            "path": "assets/resources/meta/manifest.json",
+            "hash": "415b0625aa16b6aa"
+        },
+        {
+            "path": "data/language/de/grammar/adj.json",
+            "hash": "b9c781290ca541ef"
+        },
+        {
+            "path": "data/language/de/grammar/adv.json",
+            "hash": "4c959caa81fd38c1"
+        },
+        {
+            "path": "data/language/de/grammar/misc.json",
+            "hash": "2e51376cbc21a95a"
+        },
+        {
+            "path": "data/language/de/grammar/noun.json",
+            "hash": "613bec98e75dfc94"
+        },
+        {
+            "path": "data/language/de/grammar/num.json",
+            "hash": "ab1d35751ca5c89a"
+        },
+        {
+            "path": "data/language/de/grammar/paradigms.json",
+            "hash": "06ff32dc80393825"
+        },
+        {
+            "path": "data/language/de/grammar/pron.json",
+            "hash": "bfc523343e2a9d8c"
+        },
+        {
+            "path": "data/language/de/grammar/verb.json",
+            "hash": "ab4d94b8af371533"
+        },
+        {
+            "path": "data/language/de/ime.js",
+            "hash": "a2852fb877aa8c8e"
+        },
+        {
+            "path": "data/language/de/meta.json",
+            "hash": "d68c38413cd045d8"
+        },
+        {
+            "path": "data/language/de/script.js",
+            "hash": "1837f8bbcaf32eda"
+        },
+        {
+            "path": "data/language/en/meta.json",
+            "hash": "5bc5da17c2bf803a"
+        },
+        {
+            "path": "data/language/fr/grammar/adj.json",
+            "hash": "fff99bfe1600e95e"
+        },
+        {
+            "path": "data/language/fr/grammar/adv.json",
+            "hash": "9e76a41c0dbad62f"
+        },
+        {
+            "path": "data/language/fr/grammar/misc.json",
+            "hash": "66c64e078ac97782"
+        },
+        {
+            "path": "data/language/fr/grammar/noun.json",
+            "hash": "e7b87446bde2dd8a"
+        },
+        {
+            "path": "data/language/fr/grammar/num.json",
+            "hash": "1df440a4d8f6989b"
+        },
+        {
+            "path": "data/language/fr/grammar/paradigms.json",
+            "hash": "9914fee5f2008e14"
+        },
+        {
+            "path": "data/language/fr/grammar/pron.json",
+            "hash": "37966116929da91c"
+        },
+        {
+            "path": "data/language/fr/grammar/verb.json",
+            "hash": "a5ace388d0032043"
+        },
+        {
+            "path": "data/language/fr/ime.js",
+            "hash": "0bc201b94a06049f"
+        },
+        {
+            "path": "data/language/fr/meta.json",
+            "hash": "8251b83bc896b81e"
+        },
+        {
+            "path": "data/language/fr/script.js",
+            "hash": "3177c1ecc9a5f3ca"
+        },
+        {
+            "path": "data/language/grc/grammar/adj.json",
+            "hash": "b314675e0ebb9225"
+        },
+        {
+            "path": "data/language/grc/grammar/adv.json",
+            "hash": "a9bfc2fcb4b12be0"
+        },
+        {
+            "path": "data/language/grc/grammar/misc.json",
+            "hash": "14fc49ce260acd84"
+        },
+        {
+            "path": "data/language/grc/grammar/noun.json",
+            "hash": "1754c403e91ede42"
+        },
+        {
+            "path": "data/language/grc/grammar/num.json",
+            "hash": "3e54c54312b58d29"
+        },
+        {
+            "path": "data/language/grc/grammar/paradigms.json",
+            "hash": "c2d16d6b2dee39e6"
+        },
+        {
+            "path": "data/language/grc/grammar/pron.json",
+            "hash": "cefb9c64e4132a64"
+        },
+        {
+            "path": "data/language/grc/grammar/verb.json",
+            "hash": "40d604ef1938aac3"
+        },
+        {
+            "path": "data/language/grc/ime.js",
+            "hash": "686ba40ee7e28cbc"
+        },
+        {
+            "path": "data/language/grc/meta.json",
+            "hash": "73c8cdab3d95e547"
+        },
+        {
+            "path": "data/language/grc/paradigm.js",
+            "hash": "e14bb571b3c3b886"
+        },
+        {
+            "path": "data/language/grc/script.js",
+            "hash": "b494d6c4d55d9e56"
+        },
+        {
+            "path": "data/language/he/grammar/adj.json",
+            "hash": "8a1b03b4e9f229c1"
+        },
+        {
+            "path": "data/language/he/grammar/adv.json",
+            "hash": "9e3b04ffaf6ae17c"
+        },
+        {
+            "path": "data/language/he/grammar/noun.json",
+            "hash": "a8d12aa12d7b88ab"
+        },
+        {
+            "path": "data/language/he/grammar/num.json",
+            "hash": "87ab9bfaf9d2dead"
+        },
+        {
+            "path": "data/language/he/grammar/paradigms.json",
+            "hash": "9065a3cee4d2c2a4"
+        },
+        {
+            "path": "data/language/he/grammar/pron.json",
+            "hash": "493d890ec2cec2bf"
+        },
+        {
+            "path": "data/language/he/grammar/script.json",
+            "hash": "dd27a8a739ab3a42"
+        },
+        {
+            "path": "data/language/he/grammar/verb.json",
+            "hash": "c12c987514ca4f7a"
+        },
+        {
+            "path": "data/language/he/ime.js",
+            "hash": "d14c56f1787b9c51"
+        },
+        {
+            "path": "data/language/he/meta.json",
+            "hash": "439bb4a98600577d"
+        },
+        {
+            "path": "data/language/he/paradigm.js",
+            "hash": "89ccf0698abd8cab"
+        },
+        {
+            "path": "data/language/he/script.js",
+            "hash": "353aef540b0cfb13"
+        },
+        {
+            "path": "data/language/ja/grammar/adj.json",
+            "hash": "1969abf7799019df"
+        },
+        {
+            "path": "data/language/ja/grammar/honorific.json",
+            "hash": "5d97db5bd8761e8a"
+        },
+        {
+            "path": "data/language/ja/grammar/num.json",
+            "hash": "dc8df21a6608219e"
+        },
+        {
+            "path": "data/language/ja/grammar/paradigms.json",
+            "hash": "7bab4e6af7fbb5b5"
+        },
+        {
+            "path": "data/language/ja/grammar/particle.json",
+            "hash": "e9dd6493ed73767c"
+        },
+        {
+            "path": "data/language/ja/grammar/syntax.json",
+            "hash": "6b7360f101206d92"
+        },
+        {
+            "path": "data/language/ja/grammar/taigen.json",
+            "hash": "3c5ffd2cb4cdcbb3"
+        },
+        {
+            "path": "data/language/ja/grammar/verb.json",
+            "hash": "a67665b2f394fd60"
+        },
+        {
+            "path": "data/language/ja/meta.json",
+            "hash": "b071d1adba15b7d1"
+        },
+        {
+            "path": "data/language/la/grammar/adj.json",
+            "hash": "543f25265abe4878"
+        },
+        {
+            "path": "data/language/la/grammar/adv.json",
+            "hash": "2a483d4b9b6b111f"
+        },
+        {
+            "path": "data/language/la/grammar/noun.json",
+            "hash": "4f5b71992d2b2370"
+        },
+        {
+            "path": "data/language/la/grammar/num.json",
+            "hash": "dd45313236033dcf"
+        },
+        {
+            "path": "data/language/la/grammar/paradigms.json",
+            "hash": "c3662292cb733d6b"
+        },
+        {
+            "path": "data/language/la/grammar/pron.json",
+            "hash": "417eb699dbb6afca"
+        },
+        {
+            "path": "data/language/la/grammar/verb.json",
+            "hash": "30fb153dd63570fe"
+        },
+        {
+            "path": "data/language/la/ime.js",
+            "hash": "dec53625cbf2a03b"
+        },
+        {
+            "path": "data/language/la/meta.json",
+            "hash": "50c16f6cfd34d062"
+        },
+        {
+            "path": "data/language/la/paradigm.js",
+            "hash": "164774b64e2c717e"
+        },
+        {
+            "path": "data/language/mnc/grammar/adj.json",
+            "hash": "f5ce8205be538dc0"
+        },
+        {
+            "path": "data/language/mnc/grammar/adv.json",
+            "hash": "b94375ad3d041591"
+        },
+        {
+            "path": "data/language/mnc/grammar/noun.json",
+            "hash": "d009806f36642892"
+        },
+        {
+            "path": "data/language/mnc/grammar/num.json",
+            "hash": "8e53e369adf39376"
+        },
+        {
+            "path": "data/language/mnc/grammar/paradigms.json",
+            "hash": "417ddc5ea4f798a0"
+        },
+        {
+            "path": "data/language/mnc/grammar/postp.json",
+            "hash": "fd7fa576d9cd4f8d"
+        },
+        {
+            "path": "data/language/mnc/grammar/pron.json",
+            "hash": "eafc6899bc77acf7"
+        },
+        {
+            "path": "data/language/mnc/grammar/script.json",
+            "hash": "075942b698e1ed24"
+        },
+        {
+            "path": "data/language/mnc/grammar/sound.json",
+            "hash": "b34dc1bdd6cb1530"
+        },
+        {
+            "path": "data/language/mnc/grammar/syntax.json",
+            "hash": "91f9415083b212fe"
+        },
+        {
+            "path": "data/language/mnc/grammar/verb.json",
+            "hash": "241670da6c386ad5"
+        },
+        {
+            "path": "data/language/mnc/ime.js",
+            "hash": "568b9f7cf1c4bb28"
+        },
+        {
+            "path": "data/language/mnc/meta.json",
+            "hash": "1bd32698a3ccb9d4"
+        },
+        {
+            "path": "data/language/mnc/paradigm.js",
+            "hash": "f5400bad647c19e1"
+        },
+        {
+            "path": "data/language/mnc/script.js",
+            "hash": "66fbc368f01e38b0"
+        },
+        {
+            "path": "data/language/sa/grammar/adj.json",
+            "hash": "59aeb607eb5b6a1d"
+        },
+        {
+            "path": "data/language/sa/grammar/adv.json",
+            "hash": "fc6c1867b21c65cc"
+        },
+        {
+            "path": "data/language/sa/grammar/noun.json",
+            "hash": "4cdba60831515242"
+        },
+        {
+            "path": "data/language/sa/grammar/num.json",
+            "hash": "04ed17eb2c32be67"
+        },
+        {
+            "path": "data/language/sa/grammar/paradigms.json",
+            "hash": "8f9287aa98370329"
+        },
+        {
+            "path": "data/language/sa/grammar/pron.json",
+            "hash": "db6554ffdee9a960"
+        },
+        {
+            "path": "data/language/sa/grammar/sound.json",
+            "hash": "869c5596cc74d57a"
+        },
+        {
+            "path": "data/language/sa/grammar/verb.json",
+            "hash": "0ea8803f804d2b52"
+        },
+        {
+            "path": "data/language/sa/ime.js",
+            "hash": "14fb8cfdbec96bae"
+        },
+        {
+            "path": "data/language/sa/meta.json",
+            "hash": "03f09fdc9e888a10"
+        },
+        {
+            "path": "data/language/sa/paradigm.js",
+            "hash": "dee3055e4c5b2e51"
+        },
+        {
+            "path": "data/language/sa/script.js",
+            "hash": "7783df67797c52e5"
+        },
+        {
+            "path": "data/language/zh-cls/meta.json",
+            "hash": "053b11ba4121bbda"
+        },
+        {
+            "path": "data/schema/language.json",
+            "hash": "ac94d0845bda89ac"
+        },
+        {
+            "path": "data/schema/manifest.json",
+            "hash": "b4554beb5fab1b01"
+        },
+        {
+            "path": "data/schema/per-languages.json",
+            "hash": "d166c1ea27435930"
+        },
+        {
+            "path": "data/schema/source.json",
+            "hash": "704f57123dee45eb"
+        },
+        {
+            "path": "data/schema/user.json",
+            "hash": "8b744c5b341a1645"
+        },
+        {
+            "path": "data/schema/word.json",
+            "hash": "9e11405c675bb196"
+        },
+        {
+            "path": "data/user/pikapikapi-20261111-1101.json",
+            "hash": "21e56b97e5309d87"
+        },
+        {
+            "path": "index.html",
+            "hash": "01c802b73bbc9daa"
+        }
+    ]
+}

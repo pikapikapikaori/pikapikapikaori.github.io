@@ -1,0 +1,34 @@
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+mark {
+    -webkit-box-decoration-break: clone;
+}
+
+.search-input {
+    -webkit-appearance: none;
+}
+
+.rail::-webkit-scrollbar {
+    display: none;
+}
+
+.rail.can-left {
+    -webkit-mask-image: linear-gradient(to right, transparent 8px, #000 36px);
+}
+
+.rail.can-right {
+    -webkit-mask-image: linear-gradient(to left, transparent 8px, #000 36px);
+}
+
+.rail.can-left.can-right {
+    -webkit-mask-image: linear-gradient(to right, transparent 8px, #000 36px, #000 calc(100% - 36px), transparent calc(100% - 8px));
+}
+
+.rail:focus-within,
+.rail.can-left:focus-within,
+.rail.can-right:focus-within,
+.rail.can-left.can-right:focus-within {
+    -webkit-mask-image: none;
+}

@@ -1,5 +1,3 @@
-/** 调试用：语法数据的结构校验与 derive 自检。 */
-
 import { GRAMMAR_FILES } from '../config/config.js'
 import {
     loadGrammar, verifyGrammarFiles,
@@ -7,7 +5,6 @@ import {
 } from '../services/grammar-service.js'
 import { indexGrammar, collectIds } from '../models/grammar.js'
 
-/** 单个语言：结构校验 + derive 自检 */
 export async function checkGrammar(code) {
     if (!code) throw new Error('用法：await __ln.dev.checkGrammar(\'la\')')
     const items = await verifyGrammarFiles({ codes: [code] })
@@ -15,47 +12,39 @@ export async function checkGrammar(code) {
     return items[0]
 }
 
-/** 全部语言（约 1 秒，逐语言让出主线程） */
 export async function checkAllGrammar() {
     const items = await verifyGrammarFiles()
     printReport(items)
     return items
 }
 
-/** 只看 derive 自检的结果 */
 export async function verifyDerive(code) {
     const item = await checkGrammar(code)
     return item ? item.derive : null
 }
 
-/** 拿解析好的语法文档对象（走缓存；有 error 的文件返回 null） */
 export function dumpGrammar(code) {
     return loadGrammar(code)
 }
 
-/** 当前会加载哪些语言 */
 export function listGrammarLangs() {
     return [...GRAMMAR_FILES]
 }
 
-/** 该语言有没有语法数据文件 */
 export async function hasGrammar(code) {
     return !!(await loadGrammar(code))
 }
 
-/** 引用索引（锚点 → 位置） */
 export async function getIndex(code) {
     const doc = await loadGrammar(code)
     return indexGrammar(doc)
 }
 
-/** 该语言全部锚点 id */
 export async function getIds(code) {
     const doc = await loadGrammar(code)
     return collectIds(doc)
 }
 
-/** 校验并规范化 grammarRef：`{ ok, ref, reason }` */
 export async function resolveRef(code, ref) {
     if (!ref) return { ok: false, ref: null, reason: 'empty' }
     const doc = await loadGrammar(code)
@@ -65,12 +54,10 @@ export async function resolveRef(code, ref) {
     return { ok: true, ref, reason: 'ok' }
 }
 
-/** 预加载若干语言的语法数据 */
 export async function preload(langs = GRAMMAR_FILES) {
     await Promise.all(langs.map((code) => loadGrammar(code)))
 }
 
-/** 清掉语法数据、语言档案、文字档案的模块级缓存（改完 JSON 不必刷新页面） */
 export function clearGrammarCache(code) {
     clearCache(code)
     clearProfileCache(code)

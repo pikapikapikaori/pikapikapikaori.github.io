@@ -1,7 +1,3 @@
-/**
- * 时间与复习间隔
- */
-
 export const REVIEW_INTERVALS_DAYS = [0, 1, 3, 7, 14, 30]
 export const MASTERY_MIN = 0
 export const MASTERY_MAX = 5

@@ -1,11 +1,6 @@
-/** JSON 输入区：拖拽、选文件或粘贴，右侧可放动作按钮。 */
-
 import { h, svg } from '../utils/dom.js'
 import { toast } from './toast.js'
 
-/**
- * @returns {{ el: HTMLElement, textarea: HTMLTextAreaElement, getValue: () => string }}
- */
 export function createJsonInput({
     label = '上传或粘贴 JSON',
     placeholder = '把 JSON 粘贴到这里…',

@@ -1,7 +1,10 @@
 import { TokenReplacer } from '../utils/tokenReplacer.js'
-import { protectCodeBlocks } from '../utils/common.js'
+import { protectCodeBlocks, isEnabled, codeBlockModes } from '../utils/common.js'
+import * as icons from '../utils/icons.js'
+import { getEl } from '../utils/dom.js'
 
 let htmlReplaceOptions = {
+    enable: false,
     links: {
         github: 'https://github.com/pikapikapikaori/',
         email: 'mailto:Lyy8759@outlook.com',
@@ -10,16 +13,14 @@ let htmlReplaceOptions = {
     tags: []
 }
 
+const iconLinkKeys = ['github', 'email', 'feed']
+
 function plugin(hook, vm) {
+    if (!htmlReplaceOptions.enable) return
+
     const pluginIdentifier = 'html_replace'
 
     const commentReplaceMark = 'annotation:replace'
-
-    const icons = {
-        github: '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M16 22.027v-2.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7a5.44 5.44 0 00-1.5-3.75 5.07 5.07 0 00-.09-3.77s-1.18-.35-3.91 1.48a13.38 13.38 0 00-7 0c-2.73-1.83-3.91-1.48-3.91-1.48A5.07 5.07 0 005 5.797a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 00-.94 2.58v2.87M9 20.027c-3 .973-5.5 0-7-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        email: '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M7 9l5 3.5L17 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 17V7a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.5"></path></svg>',
-        feed: '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 19c0-4.2-2.8-7-7-7M19 19c0-8.4-5.6-14-14-14M5 19.01l.01-.011" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-    }
 
     const replacer = new TokenReplacer({
         prefix: pluginIdentifier,
@@ -27,6 +28,15 @@ function plugin(hook, vm) {
 
     const blockTagConfigMap = new Map()
     const inlineTagConfigMap = new Map()
+
+    function resolveIcon(identifier) {
+        const parts = identifier.split('.')
+        if (parts.length !== 2) return null
+
+        const group = icons[parts[0]]
+        const value = group ? group[parts[1]] : null
+        return typeof value === 'string' ? value : null
+    }
 
     function resolvePlaceholders(str) {
         return replacer.replace(str)
@@ -37,8 +47,8 @@ function plugin(hook, vm) {
             replacer.registerToken(`link_${key}`, htmlReplaceOptions.links[key])
         })
 
-        Object.keys(icons).forEach(key => {
-            replacer.registerToken(`icon_${key}`, icons[key])
+        iconLinkKeys.forEach(key => {
+            replacer.registerToken(`icon_${key}`, icons.link[key])
         })
     }
 
@@ -65,17 +75,23 @@ function plugin(hook, vm) {
                         resolvePlaceholders(item.entireHtml)
                     )
                     break
-
-                default:
-                    console.warn(`[htmlReplace] Unknown type: ${item.type} (tag: ${item.tag})`)
             }
         })
     }
 
     const commentReplaceMarkup = new RegExp(`<!-- ${commentReplaceMark} (.*?) -->`)
 
+    const inlineSvgMarkup = /<!--\s*svg:([A-Za-z0-9_.]+)\s*-->/g
+    const inlineSvgMarkerPrefix = '<!-- svg:'
+
     function renderStage1(content) {
-        content = protectCodeBlocks(content, pluginIdentifier, 'protect')
+        content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.protect)
+
+        content = content.replace(inlineSvgMarkup, (fullMatch, identifier) => {
+            const svg = resolveIcon(identifier)
+            if (!svg) return fullMatch
+            return `<!-- ${commentReplaceMark} <span class="inline-svg">${svg}</span> -->`
+        })
 
         for (const [tagKey, cfg] of blockTagConfigMap) {
             const startMarker = `<!-- ${tagKey}:start -->`
@@ -89,7 +105,6 @@ function plugin(hook, vm) {
                 const searchAfter = startIndex + startMarker.length
                 const endIndex = content.indexOf(endMarker, searchAfter)
                 if (endIndex === -1) {
-                    console.warn(`[comment‑wrapper] cannot find ${tagKey}:end for ${startMarker}`)
                     scanPos = searchAfter
                     continue
                 }
@@ -118,7 +133,7 @@ function plugin(hook, vm) {
             })
         }
 
-        content = protectCodeBlocks(content, pluginIdentifier, 'restore')
+        content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.restore)
 
         return content
     }
@@ -127,7 +142,7 @@ function plugin(hook, vm) {
         let match
         while (true) {
             match = commentReplaceMarkup.exec(html)
-            if (match === null) break
+            if (!isEnabled(match)) break
 
             const fullComment = match[0]
             const realHtml = match[1] || ''
@@ -138,9 +153,53 @@ function plugin(hook, vm) {
 
     let hasAnyMarker = false
 
+    const inlineSvgRoots = '.app-nav, .cover, .sidebar'
+    const inlineSvgCommentMarkup = /^svg:([A-Za-z0-9_.]+)$/
+
+    function replaceInlineSvgComments(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_COMMENT)
+        const commentNodes = []
+        let node = walker.nextNode()
+        while (node) {
+            if (inlineSvgCommentMarkup.test(node.nodeValue.trim())) commentNodes.push(node)
+            node = walker.nextNode()
+        }
+
+        commentNodes.forEach(comment => {
+            const identifier = comment.nodeValue.trim().slice('svg:'.length)
+            const svg = resolveIcon(identifier)
+            if (!svg) return
+
+            const span = document.createElement('span')
+            span.className = 'inline-svg'
+            span.innerHTML = svg
+            comment.replaceWith(span)
+        })
+    }
+
+    function scanInlineSvg() {
+        document.querySelectorAll(inlineSvgRoots).forEach(replaceInlineSvgComments)
+    }
+
+    let inlineSvgScanPending = false
+
+    function scheduleInlineSvgScan() {
+        if (inlineSvgScanPending) return
+        inlineSvgScanPending = true
+        requestAnimationFrame(() => {
+            inlineSvgScanPending = false
+            scanInlineSvg()
+        })
+    }
+
     hook.mounted(function () {
         initializeReplacer()
         initializeTags()
+
+        new MutationObserver(scheduleInlineSvgScan).observe(document.body, {
+            childList: true,
+            subtree: true
+        })
     })
 
     hook.beforeEach(function (content) {
@@ -162,6 +221,9 @@ function plugin(hook, vm) {
                 }
             }
         }
+        if (!hasAnyMarker && content.includes(inlineSvgMarkerPrefix)) {
+            hasAnyMarker = true
+        }
 
         if (hasAnyMarker) {
             content = renderStage1(content)
@@ -177,8 +239,9 @@ function plugin(hook, vm) {
     })
 
     hook.doneEach(function () {
-        // Set first brief comment year to open.
-        let firstBriefNote = document.querySelector('.brief-comments-container details:first-of-type')
+        scanInlineSvg()
+
+        const firstBriefNote = getEl('.brief-comments-container details:first-of-type')
         if (firstBriefNote) {
             firstBriefNote.open = true
         }

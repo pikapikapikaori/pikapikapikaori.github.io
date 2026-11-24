@@ -1,5 +1,3 @@
-/** 设置 */
-
 import { h, replace } from '../utils/dom.js'
 import { appStore, setSettings, setUser } from '../app-state.js'
 import { getSettings, saveSettings } from '../store/settings-store.js'
@@ -15,7 +13,8 @@ import {
     getStoredFontMode, getStoredFontSize
 } from '../services/font-service.js'
 import { REVIEW_ORDERS } from '../services/review-service.js'
-import { LS_KEYS, PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
+import { PAGE_SIZE_OPTIONS, THEMES } from '../config/config.js'
+import { LS_KEYS, remove } from '../store/local-storage.js'
 import { verifyGrammarFiles } from '../services/grammar-service.js'
 import { openGrammarVerifyModal } from '../components/grammar-verify-modal.js'
 import { applyTheme, currentTheme } from '../components/theme-toggle.js'
@@ -65,12 +64,10 @@ export default {
             onblur: () => { commitUserName() }
         })
 
-        /** 用户名不允许空格：去掉全部空白字符，空值退回默认名 */
         async function commitUserName() {
             const name = String(nameInput.value || '').replace(/\s+/g, '') || '未命名用户'
             nameInput.value = name
             if (name === user.name) return
-            // 先同步更新全局状态：切页保存时下一个视图的页头才不会读到旧名字
             const prev = user
             user = { ...user, name }
             setUser(user)
@@ -195,17 +192,14 @@ export default {
         }
 
         function fontControl() {
-            /** 下拉退回实际生效的选项：取消选择或字体加载失败时用 */
             function restoreMode() {
                 modeSelect.value = getStoredFontMode()
             }
 
-            /** 打开文件框；没选文件（cancel 或老浏览器）就把下拉退回去 */
             function pickFile() {
                 const onCancel = () => restoreMode()
                 fileInput.addEventListener('cancel', onCancel, { once: true })
                 const onFocus = () => {
-                    // 回到窗口时 onchange 可能还没跑，等一拍再判断
                     setTimeout(() => {
                         window.removeEventListener('focus', onFocus)
                         fileInput.removeEventListener('cancel', onCancel)
@@ -222,7 +216,6 @@ export default {
                 async (v) => {
                     if (v === 'local') {
                         pickFile()
-                        // 文件选好前不落库：避免留下一个没有字体的本地模式
                         return
                     }
                     applyFont({ mode: v })
@@ -291,12 +284,10 @@ export default {
                     5000
                 )
             } catch (err) {
-                console.error(err)
                 toast.error(`导入失败：${err.message}`, 6000)
             }
         }
 
-        /** 校验全部语言的语法 JSON：结构 + derive，结果放浮层里 */
         async function doVerifyGrammar(btn) {
             const label = btn.textContent
             btn.disabled = true
@@ -309,7 +300,6 @@ export default {
                 })
                 openGrammarVerifyModal({ results, elapsed: performance.now() - started })
             } catch (err) {
-                console.error(err)
                 toast.error(`校验失败：${err.message}`, 6000)
             } finally {
                 btn.disabled = false
@@ -327,17 +317,15 @@ export default {
             if (!ok) return
             try {
                 await deleteUser(userId)
-                try { localStorage.removeItem(LS_KEYS.user) } catch { /* ignore */ }
+                remove(LS_KEYS.user)
                 appStore.set({ user: null, userId: null, settings: null })
-                // 外部源的 HTTP 响应缓存也是这份数据的一部分
-                clearHttpCache().catch((err) => console.warn('[http-cache] 清理失败', err))
+                clearHttpCache().catch(() => {})
                 location.hash = '#/welcome'
             } catch (err) {
                 toast.error(`清空失败：${err.message}`)
             }
         }
 
-        // 切走页面时把没失焦的用户名改动落库
         return () => { commitUserName() }
     }
 }

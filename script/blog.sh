@@ -41,7 +41,7 @@ SITEMAP_SCRIPT="$SCRIPTS_DIR/shell/sitemap.sh"
 # ---------- rclone 配置 ----------
 RCLONE_SRC="docs/"
 RCLONE_DST="r2:pikapikapi-blog/"
-RCLONE_OPTS=(--exclude "**/.DS_Store" --exclude ".DS_Store" --exclude "**/node_modules/**" --exclude "**/hexo/package-lock.json" --exclude "**/hexo/db.json" --checksum)
+RCLONE_OPTS=(--exclude "**/.DS_Store" --exclude ".DS_Store" --exclude "**/node_modules/**" --checksum)
 
 # ---------- 核心：展示命令 -> 确认 -> 执行 ----------
 confirm_run() {
@@ -213,6 +213,27 @@ cmd_sitemap() {
     confirm_run "生成 Sitemap sitemap" bash -c "$inner"
 }
 
+# ---------- PWA 预缓存 ----------
+FILE_CACHE_SCRIPT="$SCRIPTS_DIR/shell/file-cache.sh"
+
+cmd_file_cache() {
+    require_file "$FILE_CACHE_SCRIPT"
+    confirm_run "生成 PWA 预缓存清单" bash "$FILE_CACHE_SCRIPT" "$@"
+}
+
+cmd_file_cache_check() {
+    require_file "$FILE_CACHE_SCRIPT"
+    confirm_run "校验 PWA 预缓存清单是否需要更新" bash "$FILE_CACHE_SCRIPT" --check
+}
+
+cmd_prebuild() {
+    require_file "$FEED_SCRIPT"
+    require_file "$SITEMAP_SCRIPT"
+    require_file "$FILE_CACHE_SCRIPT"
+    confirm_run "依次生成 Feed Sitemap PWA 预缓存清单" bash -c \
+        "exec bash ./script/shell/feed.sh && bash ./script/shell/sitemap.sh && bash ./script/shell/file-cache.sh"
+}
+
 # ---------- Python 依赖管理 ----------
 
 cmd_py_freeze() {
@@ -358,9 +379,15 @@ cmd_help() {
 
 ====================  网站内容相关  ====================
 
-    feed                         生成 Feed（运行 script/shell/feed.sh）
+    feed                        生成 Feed
 
-    sitemap                      生成 Sitemap（运行 script/shell/sitemap.sh）
+    sitemap                     生成 Sitemap
+
+    file-cache[:check]          生成 PWA 预缓存文件清单 file-cache.json
+                                可以使用 :check 校验预缓存清单是否需要更新
+
+    prebuild                    依次生成 Feed Sitemap 预缓存清单
+                                等价 feed + sitemap + file-cache
 
 ====================  Python 脚本辅助  ====================
 
@@ -411,6 +438,9 @@ case "${1:-help}" in
     fonts-woff2)        shift; cmd_fonts_woff2 "$@" ;;
     feed)                cmd_feed ;;
     sitemap)             cmd_sitemap ;;
+    file-cache)          shift; cmd_file_cache "$@" ;;
+    file-cache:check)    shift; cmd_file_cache_check "$@" ;;
+    prebuild)            cmd_prebuild ;;
     py-freeze)          cmd_py_freeze ;;
     py-install)         cmd_py_install ;;
     release)            shift; cmd_release "$@" ;;

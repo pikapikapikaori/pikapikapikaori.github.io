@@ -10,6 +10,21 @@
     --replaceAnnot-cjkext-font: 'Jigmo', 'Jigmo-2', 'Jigmo-3', serif;
 }
 
+/* svg */
+.inline-svg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+}
+
+.inline-svg>svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
 /* Brief Comments */
 .brief-comments-in-blog-title-year {
     font-family: var(--global-fancy-font);
@@ -89,6 +104,17 @@
 
 .brief-comments-in-blog:first-of-type {
     border-top: 0;
+}
+
+.brief-comments-in-blog-imas-svg>.inline-svg {
+    width: 5em;
+    height: 5em;
+    vertical-align: baseline;
+    margin: 0 .15em;
+}
+
+.brief-comments-in-blog-imas-svg>.inline-svg>svg {
+    margin: 0;
 }
 
 .brief-comments-in-blog-image-container {
@@ -332,6 +358,8 @@
 }
 
 .main-page-about-me-links>a>svg {
+    width: 100%;
+    height: 100%;
     transition: var(--global-transition-transform);
 }
 

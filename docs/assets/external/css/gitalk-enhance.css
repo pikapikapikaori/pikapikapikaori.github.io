@@ -1,0 +1,339 @@
+@import url("./nonstandard/gitalk-enhance.css");
+
+:root {
+    --gitalk-ring-top: 0;
+    --gitalk-ring-left: 0;
+    --gitalk-ring-width: 0;
+    --gitalk-ring-height: 0;
+}
+
+#comment-container .gt-container {
+    font-size: 1rem;
+}
+
+#comment-container .gt-header-controls {
+    margin-top: 1.5rem;
+}
+
+#comment-container .gt-container .gt-header-controls-tip .gt-ico-text {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+    transition: var(--global-transition-color);
+}
+
+#comment-container .gt-container .gt-header-controls-tip:hover .gt-ico-text {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+#comment-container .gt-header {
+    margin-top: 3rem;
+}
+
+#comment-container .gt-link {
+    color: var(--global-theme-color-normal);
+    border-bottom: 0;
+}
+
+#comment-container .gt-btn-login,
+#comment-container .gt-btn-public {
+    color: var(--global-surface-solid-text);
+    background-color: var(--global-surface-solid-rest);
+    border: var(--global-border-normal) var(--global-surface-solid-rest);
+}
+
+#comment-container .gt-btn-preview {
+    color: var(--global-surface-hollow-text-rest);
+    border: var(--global-border-normal) var(--global-surface-hollow-border-rest);
+}
+
+#comment-container .gt-container .gt-btn-preview:hover {
+    background-color: var(--global-surface-hollow-hover);
+    border-color: var(--global-surface-hollow-border-hover);
+    color: var(--global-surface-hollow-text-hover);
+}
+
+#comment-container .gt-container .gt-btn-preview:active {
+    background-color: var(--global-surface-hollow-press);
+    border-color: var(--global-surface-hollow-border-press);
+    color: var(--global-surface-hollow-text-press);
+}
+
+#comment-container .gt-container .gt-btn-login:hover,
+#comment-container .gt-container .gt-btn-public:hover {
+    background-color: var(--global-surface-solid-hover);
+    border-color: var(--global-surface-solid-hover);
+    box-shadow: var(--global-surface-solid-inset-ring-hover);
+}
+
+#comment-container .gt-container .gt-btn-login:active,
+#comment-container .gt-container .gt-btn-public:active {
+    background-color: var(--global-surface-solid-press);
+    border-color: var(--global-surface-solid-press);
+    box-shadow: var(--global-surface-solid-inset-ring-press);
+}
+
+#comment-container .gt-container .gt-comment-username {
+    color: var(--global-heading-color);
+    font-weight: var(--global-font-weight-very-bold);
+}
+
+#comment-container .gt-container .gt-ico-github .gt-svg svg {
+    fill: var(--global-theme-color-normal);
+}
+
+#comment-container .gt-container .gt-svg svg {
+    fill: var(--global-theme-color-normal);
+}
+
+#comment-container .gt-popup .gt-action.is--active:before {
+    content: none;
+}
+
+#comment-container .gt-avatar,
+#comment-container .gt-avatar>img {
+    border-radius: var(--global-avatar-border-radius);
+}
+
+#comment-container .gt-container a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+    transition: var(--global-transition-color);
+}
+
+#comment-container .gt-user-name {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+    transition: var(--global-transition-color);
+}
+
+#comment-container .gt-meta {
+    position: relative;
+}
+
+#comment-container .gt-user-name,
+#comment-container .gt-user-name:focus,
+#comment-container .gt-user-name:focus-visible {
+    outline: 0;
+}
+
+#comment-container .gt-focus-ring {
+    position: absolute;
+    top: var(--gitalk-ring-top);
+    left: var(--gitalk-ring-left);
+    width: var(--gitalk-ring-width);
+    height: var(--gitalk-ring-height);
+    pointer-events: none;
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: var(--global-focus-outline-offset);
+    transition: var(--global-transition-color);
+}
+
+#comment-container .gt-focus-ring.is-keyboard {
+    outline-color: var(--global-focus-outline-color);
+}
+
+#comment-container .gt-meta.is-hover .gt-user-name {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+#comment-container .gt-meta.is-popup-open .gt-user-name,
+#comment-container .gt-popup .gt-action.is--active,
+#comment-container .gt-popup .gt-action.is--active:hover {
+    text-decoration-color: var(--global-link-decoration-active);
+}
+
+#comment-container .gt-user-inner.is-popup-open .gt-user-name,
+#comment-container .gt-popup .gt-action.is--active,
+#comment-container .gt-popup .gt-action.is--active:hover {
+    color: var(--global-heading-color);
+}
+
+#comment-container .gt-popup .gt-action {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--global-link-decoration-width);
+}
+
+#comment-container .gt-container a:hover,
+#comment-container .gt-user-name:hover,
+#comment-container .gt-popup .gt-action:hover {
+    text-decoration-color: var(--global-link-decoration-hover);
+}
+
+#comment-container .gt-container a.gt-comment-like,
+#comment-container .gt-container a.gt-comment-reply,
+#comment-container .gt-container a.gt-comment-edit {
+    text-decoration: none;
+}
+
+#comment-container .gt-comment-like svg,
+#comment-container .gt-comment-reply svg,
+#comment-container .gt-comment-edit svg {
+    transition: var(--global-transition-transform);
+}
+
+#comment-container .gt-comment-like:hover svg,
+#comment-container .gt-comment-reply:hover svg,
+#comment-container .gt-comment-edit:hover svg {
+    transform: scale(var(--global-scale-hover));
+}
+
+#comment-container .gt-comment-like:active svg,
+#comment-container .gt-comment-reply:active svg,
+#comment-container .gt-comment-edit:active svg {
+    transform: scale(var(--global-scale-press));
+}
+
+#comment-container .gt-comment-like .gt-ico-text,
+#comment-container .gt-container .gt-comment-text,
+#comment-container .gt-container .gt-comment-date {
+    color: var(--global-muted-color);
+}
+
+#comment-container .gt-container .gt-comment-content {
+    border-radius: var(--global-el-border-radius);
+    background: var(--global-zebra-bg);
+    border: var(--global-border-normal) var(--global-border-color-strong);
+}
+
+#comment-container .gt-container .gt-comment.gt-comment-admin .gt-comment-content {
+    background: var(--global-theme-color-blur-ultra-weak);
+}
+
+#comment-container .gt-container .gt-comment-content:hover {
+    box-shadow: none;
+}
+
+#comment-container .gt-container .gt-header-preview {
+    border-radius: var(--global-el-border-radius);
+    color: inherit;
+    height: 4.5rem;
+}
+
+#comment-container .gt-container .gt-header-textarea {
+    border-radius: var(--global-el-border-radius);
+    color: inherit;
+}
+
+#comment-container .gt-popup {
+    border-radius: var(--global-icon-border-radius);
+}
+
+@keyframes gt-popup-in {
+    from {
+        clip-path: var(--global-clip-path-vertical-full);
+    }
+
+    to {
+        clip-path: var(--global-clip-path-vertical-none);
+    }
+}
+
+@keyframes gt-popup-out {
+    from {
+        clip-path: var(--global-clip-path-vertical-none);
+    }
+
+    to {
+        clip-path: var(--global-clip-path-vertical-full);
+    }
+}
+
+#comment-container .gt-container .gt-popup {
+    animation: gt-popup-in var(--global-transition-duration-normal) var(--global-transition-ease);
+}
+
+#comment-container .gt-container .gt-popup.is-leaving {
+    animation: gt-popup-out var(--global-transition-duration-normal) var(--global-transition-ease);
+    pointer-events: none;
+}
+
+#comment-container .gt-container .gt-comment-content .gt-comment-body {
+    color: inherit !important;
+}
+
+#comment-container .gt-container .gt-popup {
+    background-color: var(--global-zebra-bg);
+    border-color: var(--global-border-color-strong);
+}
+
+#comment-container .gt-container .gt-popup .gt-copyright {
+    border-color: var(--global-border-color);
+}
+
+#comment-container .gt-container .gt-popup .gt-copyright .gt-version {
+    color: var(--global-em-color);
+}
+
+#comment-container .gt-container .gt-btn-preview {
+    background-color: var(--global-bg-color);
+}
+
+#comment-container .gt-container .gt-btn {
+    border-radius: var(--global-control-border-radius);
+    outline: var(--global-focus-outline) transparent;
+    outline-offset: var(--global-focus-outline-offset);
+    transition: var(--global-transition-color)
+}
+
+#comment-container .gt-container .gt-btn:focus-visible {
+    outline-color: var(--global-focus-outline-color);
+}
+
+#comment-container .gt-container {
+
+    .gt-header-textarea,
+    .gt-header-preview {
+        background-color: var(--global-zebra-bg);
+        border: var(--global-border-normal) var(--global-border-color-strong);
+    }
+}
+
+#comment-container .gt-container .gt-meta {
+    border-bottom: var(--global-border-normal) var(--global-border-color);
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#comment-container .gt-comments .markdown-body,
+#comment-container .gt-header .markdown-body {
+    font-family: var(--global-font);
+}
+
+#comment-container .gt-comments-null {
+    display: none;
+}
+
+#comment-container .gt-container .gt-header-textarea {
+    transition: var(--global-transition-color);
+}
+
+#comment-container .gt-container .gt-header-textarea {
+    border-color: var(--global-control-border-rest);
+}
+
+#comment-container .gt-container .gt-header-textarea:hover {
+    border-color: var(--global-control-border-hover);
+}
+
+#comment-container .gt-container .gt-header-textarea:focus {
+    border-color: var(--global-control-border-active);
+}
+
+#comment-container .gt-container .gt-comment-avatar>img {
+    cursor: default;
+}
+
+#comment-container .gt-container .gt-header-avatar>img {
+    cursor: default;
+}
+
+#comment-container .gt-container .gt-avatar img:hover, 
+#comment-container .gt-container .gt-comment-avatar img:hover {
+    filter: none;
+}

@@ -1,7 +1,5 @@
 @import url("./fontMinorityLang.css");
 
-/* --- Serif --- */
-
 /* Chinese */
 @font-face {
     font-family: 'HYQuanTangShiJF-Kana';
@@ -130,20 +128,6 @@
     font-display: swap;
 }
 
-/* Old Chinese Symbols */
-@font-face {
-    font-family: 'PengliWenKai';
-    src: url('../../resources/fonts/KleeOne/PengliWenKai/PengliWenKai-Regular.woff2') format('woff2');
-    font-display: swap;
-}
-
-/* Japanese */
-@font-face {
-    font-family: 'Ninjal-Hentaigana';
-    src: url('../../resources/fonts/ninjal_hentaigana/ninjal_hentaigana.woff2') format('woff2');
-    font-display: swap;
-}
-
 /* Lati & Greek */
 @font-face {
     font-family: 'SortsMillGoudy';
@@ -209,8 +193,6 @@
     size-adjust: 110%;
 }
 
-/* --- Sans --- */
-
 /* Latin */
 @font-face {
     font-family: 'Menlo';
@@ -224,8 +206,6 @@
     src: url('../../resources/fonts/Twitter/TwitterColorEmoji/TwitterColorEmoji-SVGinOT.woff2') format('woff2');
     font-display: swap;
 }
-
-/* --- Handwriting --- */
 
 /* Chinese */
 @font-face {

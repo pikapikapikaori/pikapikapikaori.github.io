@@ -1,8 +1,5 @@
-/** 输入框适配器：把 input、textarea、contenteditable 统一成读值、写值、取光标、设光标。 */
-
 import { caretOffsetIn, moveCaretTo } from '../utils/caret.js'
 
-/** 能接管就返回适配器，否则 null */
 export function adaptField(el) {
     if (!el || el.nodeType !== 1) return null
     if (el.disabled || el.readOnly) return null
@@ -34,7 +31,7 @@ export function adaptField(el) {
                 moveCaretTo(el, pos)
                 return
             }
-            try { el.setSelectionRange(pos, pos) } catch { /* 个别 input 类型不支持选区 */ }
+            try { el.setSelectionRange(pos, pos) } catch {   }
         },
         focus: () => el.focus()
     }

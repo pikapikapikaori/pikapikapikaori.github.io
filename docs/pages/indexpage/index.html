@@ -1,136 +1,97 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-Hans" data-theme="light" data-theme-mode="auto">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="./source/favicon.ico">
-    <meta name="referrer" content="never">
-    <title>ピカピカピ</title>
-    <meta name="description" content="李亦楊的個人網站">
-    <meta name="keywords" content="李亦楊,個人網站,博客">
     <meta charset="utf-8">
-    <meta http-equiv="Default-Style" content="">
-    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        name="viewport" />
-    <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" media="screen,projection" />
-    <script src="./assets/external/handlebars.min.js"></script>
-    <script src="./assets/external/iconify.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>导航页 · ピカピカピ</title>
+    <meta name="description" content="个人网站导航页">
+    <meta name="referrer" content="no-referrer">
+    <link rel="icon" type="image/x-icon" href="./assets/resources/logo/favicon.ico">
+    <link rel="manifest" href="./assets/resources/meta/manifest.json">
+    <meta name="theme-color" content="#f7f3ea">
+    <script src="./assets/js/startup.js"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script type="module" src="./assets/js/app.js"></script>
 </head>
 
 <body>
-
-    <section id="modal">
-        <div>
-            <header id="modal-header">
-                <h1>主題</h1>
-                <a href="#" title="Close" class="modal-close">
-                    <span class="iconify" data-icon="mdi-close"></span>
-                </a>
-            </header>
-
-            <div id="modal-theme">
-                <button data-theme="blackboard" class="theme-button theme-blackboard">Blackboard</button>
-                <button data-theme="gazette" class="theme-button theme-gazette">Gazette</button>
-                <button data-theme="espresso" class="theme-button theme-espresso">Espresso</button>
-                <button data-theme="cab" class="theme-button theme-cab">Cab</button>
-                <button data-theme="cloud" class="theme-button theme-cloud">Cloud</button>
-                <button data-theme="lime" class="theme-button theme-lime">Lime</button>
-                <button data-theme="passion" class="theme-button theme-passion">Passion</button>
-                <button data-theme="blues" class="theme-button theme-blues">Blues</button>
-                <button data-theme="chalk" class="theme-button theme-chalk">Chalk</button>
-                <button data-theme="tron" class="theme-button theme-tron">Tron</button>
-                <button data-theme="paper" class="theme-button theme-paper">Paper</button>
+    <header class="page-head">
+        <div class="wrap">
+            <div class="masthead">
+                <div class="identity">
+                    <h1 class="site-title" id="site-title"></h1>
+                </div>
+                <div class="head-side">
+                    <p class="today">
+                        <span id="greeting"></span>
+                        <span class="today-sep" aria-hidden="true"></span>
+                        <time id="today-date"></time>
+                    </p>
+                    <div class="theme-switch" id="theme-switch" role="group" aria-label="">
+                        <button type="button" data-theme-mode="auto" aria-pressed="true"></button>
+                        <button type="button" data-theme-mode="light" aria-pressed="false"></button>
+                        <button type="button" data-theme-mode="dark" aria-pressed="false"></button>
+                    </div>
+                </div>
             </div>
 
-            <h2>搜索命令</h2>
-
-            <section id="providers">
-                <script type="text/handlebars-template" id="providers-template">
-                    {{#each providers}}
-                    <h3>{{category}}</h3>
-                    <table>
-                        <tr>
-                            <th>网站</th>
-                            <th>命令</th>
-                        </tr>
-                        {{#each items}}
-                        <tr>
-                            <td><a href="{{url}}">{{name}}</a></td>
-                            <td>{{prefix}}</td>
-                        </tr>
-                        {{/each}}
-                    </table>
-                    {{/each}}
-                </script>
-            </section>
         </div>
-    </section>
+    </header>
 
-    <main id="container" class="fade">
+    <div class="head-stick" data-head-stick>
+        <div class="wrap">
+            <label class="search-label" for="search-input"></label>
+            <div class="search-root" data-search>
+                <input class="search-input" id="search-input" type="text" inputmode="search" autocomplete="off"
+                    autocapitalize="off" spellcheck="false" role="combobox" aria-autocomplete="list"
+                    aria-expanded="false" aria-controls="search-list" aria-haspopup="listbox" placeholder="">
+                <div class="search-results" id="search-results" hidden>
+                    <div class="search-list" id="search-list" role="listbox" aria-label=""></div>
+                    <div id="search-note"></div>
+                </div>
+            </div>
 
-        <section id="search">
-            <input name="keywords" type="text" id="keywords" size="50" spellcheck="false" autofocus="true"
-                onkeydown="handleKeyPress(event)">
-        </section>
+            <div class="head-under" data-head-under>
+                <section class="apps head-apps" aria-labelledby="apps-title">
+                    <h2 class="sr-only" id="apps-title"></h2>
+                    <ul class="apps-list" id="apps-list"></ul>
+                </section>
 
-        <section id="header">
-            <h2 id="header_date"></h2>
-            <h1 id="header_greet"></h1>
-            <h2>李亦楊</h2>
-            <h1>導航頁</h1>
-        </section>
-
-        <section id="apps">
-            <script type="text/handlebars-template" id="apps-template">
-            <h3>個人頁</h3>
-            <div id="apps_loop">
-                {{#apps}}
-                    <div class="apps_item">
-                        <div class="apps_icon">
-                            <span class="iconify icon" data-icon="mdi-{{icon}}"></span>
-                        </div>
-                        <div class="apps_text">
-                            <a href="{{url}}" {{#if target}}target="{{target}}"{{/if}} >{{name}}</a>
-                            <span id="app-address">{{description}}</span>
+                <nav class="toc" aria-label="">
+                    <div class="rail-row">
+                        <span class="rail-role" id="rail-role-primary" aria-hidden="true"></span>
+                        <div class="rail-wrap">
+                            <div class="rail" id="primary-rail" role="group" aria-label=""></div>
                         </div>
                     </div>
-                {{/apps}}
-            </div>
-            </script>
-        </section>
-
-        <section id="links">
-            <script type="text/handlebars-template" id="links-template">
-            <h3>網站一覽</h3>
-            <div id="links_loop">
-                {{#bookmarks}}
-                    <div id="links_item">
-                        <h4>{{category}}</h4>
-                        {{#links}}
-                            <a href="{{url}}" target="{{target}}" class="theme_color-border theme_text-select">{{name}}</a>
-                        {{/links}}
+                    <div class="rail-row">
+                        <span class="rail-role" id="rail-role-secondary" aria-hidden="true"></span>
+                        <div class="rail-wrap">
+                            <div class="rail rail-sub" id="secondary-rail" role="group" aria-label=""></div>
+                        </div>
                     </div>
-                {{/bookmarks}}
+                </nav>
             </div>
-            </script>
-        </section>
-    </main>
-
-    <div id="modal_init">
-        <a class="btn" href="#modal">
-            <span class="iconify icon" data-icon="mdi-xbox-controller-menu"></span>
-        </a>
+        </div>
+        <span class="head-fade" aria-hidden="true"></span>
     </div>
 
-    <footer class="copyright" id="copyright-script-generated"
-        style="text-align: center; margin: 0 0 30px; font-size: 16px;"></footer>
+    <main class="page-main" id="main" tabindex="-1">
+        <div class="wrap">
+            <section class="group" id="group-panel" aria-label="" aria-busy="true">
+                <p class="loading" id="loading-note"></p>
+            </section>
+        </div>
+    </main>
 
-    <script src="./assets/js/data.js" type="text/javascript"></script>
-    <script src="./assets/js/script.js" type="text/javascript"></script>
-    <script src="./assets/js/themer.js" type="text/javascript"></script>
-    <script src="./assets/js/search.js" type="text/javascript"></script>
+    <footer class="page-foot">
+        <div class="wrap foot-line">
+            <p id="copyright"></p>
+        </div>
+    </footer>
 
+    <div class="sr-only" id="live-region" role="status" aria-live="polite"></div>
 </body>
 
 </html>

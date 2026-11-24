@@ -1,5 +1,3 @@
-/** 笔记编辑：一行一块。回车成块，离开即排版，行可拖动换位。 */
-
 import { h, replace } from '../utils/dom.js'
 import { uid } from '../utils/id.js'
 import { gripIcon } from './icons.js'
@@ -22,7 +20,6 @@ const WRAPS = {
     underline: ['<u>', '</u>']
 }
 
-/** 列表、引用、标题的行首记号 */
 const PREFIX = {
     heading: /^\s*(#{1,6})\s+/,
     check: /^\s*[-*+]\s+\[[ xX]\]\s+/,
@@ -37,13 +34,6 @@ const DETAILS_TPL = '<details><summary>标题</summary>内容</details>'
 
 const BULLETS = ['•', '◦', '▪']
 
-/**
- * @param {object} opts
- * @param {string[]} opts.lines 已保存的行
- * @param {string} opts.lang 语言代码，交给字体栈与 <bdi>
- * @param {(lines: string[]) => void} [opts.onSave]
- * @param {(state: object) => void} [opts.onStateChange]
- */
 export function createNoteEditor({ lines, lang, onSave = null, onStateChange = null } = {}) {
     let items = toBlocks(lines)
     let editingId = null
@@ -59,7 +49,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return items.find((block) => block.id === id) || null
     }
 
-    /* ---------------- 渲染 ---------------- */
 
     function render({ caret = null, end = null } = {}) {
         const markers = listMarkers()
@@ -92,7 +81,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         guardRows()
     }
 
-    /** 兜底：万一某一行没跟着内容长高，后面的行就会与它重叠，这里补上差的那一段 */
     function guardRows() {
         const rows = [...el.querySelectorAll('.note-row')]
         for (const row of rows) row.style.minHeight = ''
@@ -105,7 +93,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         }
     }
 
-    /** 每一块各自成行：表格、引用、普通行只看这一块自己 */
     function layoutGroups() {
         return items.map((block) => {
             if (isTableBlock(block.source)) return { kind: 'table', blocks: [block] }
@@ -114,7 +101,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         })
     }
 
-    /** 有序列表的序号按层级算：一级 1. 二级 1) 三级 i */
     function listMarkers() {
         const map = new Map()
         const counters = []
@@ -129,7 +115,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             if (info.kind === 'ul') {
                 map.set(block.id, { label: BULLETS[Math.min(level, BULLETS.length - 1)] })
             } else if (info.kind === 'ol') {
-                // 只有有序项推进编号：同一段里的无序项不该把 1. 顶成 2.
                 counters[level] = (counters[level] || 0) + 1
                 map.set(block.id, { label: orderedLabel(level, counters[level]) })
             }
@@ -162,10 +147,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return row
     }
 
-    /**
-     * 一段引用：左边一条竖线贯穿这一块。
-     * 块内的换行仍是一条线；回车分开的块各画各的线。
-     */
     function quoteGroup(group) {
         const ids = group.blocks.map((block) => block.id)
         const block = group.blocks[0]
@@ -192,7 +173,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return viewBox(node, block.id, block.source)
     }
 
-    /** 排版后的行也能用键盘到达：回车进入编辑 */
     function viewBox(node, id, source) {
         const view = h('div', { class: 'note-row__view', tabindex: '0' }, node)
         view.addEventListener('keydown', (e) => {
@@ -206,11 +186,9 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     }
 
     function inputFor(block, { table = false } = {}) {
-        // 制表符与空格在文本框里只有半个字宽，补上差的那一段，编辑态才和渲染态对齐
         const level = table ? 0 : indentLevel(block.source)
         return h('textarea', {
             class: 'note-row__input' + (table ? ' note-row__input--table' : ''),
-            // 不给 rows 时浏览器按两行留高度，一行字下面会多出空行
             rows: table ? String(Math.max(3, block.source.split('\n').length)) : '1',
             style: level ? { paddingLeft: `calc(var(--sp-2) + ${level} * 1.1em)` } : null,
             spellcheck: 'false',
@@ -236,7 +214,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return handle
     }
 
-    /* ---------------- 编辑与会话状态 ---------------- */
 
     function findInput(id) {
         return Array.from(el.querySelectorAll('.note-row__input'))
@@ -265,13 +242,11 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             return
         }
 
-        // 换到这一行时，末尾别的空块顺手去掉；刚点中的这块自己不受影响
         editingId = id
         trimTrailingEmpty()
         render(offset == null ? {} : { caret: offset, end: offset })
     }
 
-    /** 没有输入框聚焦时（刚离开某行），恢复到上次的位置再执行命令 */
     function ensureInput() {
         const active = activeInput()
         if (active) return active
@@ -304,7 +279,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         if (typeof onStateChange === 'function') onStateChange(readState())
     }
 
-    /* ---------------- 存盘 ---------------- */
 
     function scheduleSave() {
         clearTimeout(saveTimer)
@@ -317,7 +291,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         if (typeof onSave === 'function') onSave(savedSources())
     }
 
-    /** 双击空白处临时加的空行没写东西就不存；末尾只含空白的行整段丢弃 */
     function savedSources() {
         const lines = items
             .filter((block) => !(block.draft && !block.source))
@@ -328,7 +301,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return lines
     }
 
-    /** 末尾只含空白与换行的块整段去掉，正在编辑的那块例外 */
     function trimTrailingEmpty() {
         if (!items.length) {
             items = toBlocks([])
@@ -338,11 +310,9 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         while (cut > 0 && !items[cut - 1].source.trim() && items[cut - 1].id !== editingId) cut -= 1
         if (cut === items.length) return
         items.splice(cut)
-        // 删空之后仍要留一处可写
         if (!items.length) items = toBlocks([])
     }
 
-    /* ---------------- 键盘 ---------------- */
 
     function splitBlock(ta) {
         const block = getBlock(ta.dataset.id)
@@ -351,7 +321,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const start = ta.selectionStart
         const stop = ta.selectionEnd
 
-        // 只写了记号的行：回车后退出这一层
         if (start === value.length && ONLY_PREFIX.test(value)) {
             const indent = leadingIndent(value)
             const bare = indent + value.slice(indent.length)
@@ -362,7 +331,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 
         const left = value.slice(0, start)
         const right = value.slice(stop)
-        // 末尾已经有一个空块时，回车不再多出一块
         if (!value.trim() && items.indexOf(block) === items.length - 1) return
         block.source = left
         const next = { id: uid('n'), source: prefixFor(left) + right }
@@ -393,7 +361,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const prev = items[index - 1]
         const caret = prev.source.length
 
-        // 同类合并不留两个记号；引用并到普通行时去掉 `>`
         const info = lineInfo(block.source)
         const prevInfo = lineInfo(prev.source)
         let body = block.source
@@ -411,7 +378,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         render({ caret })
     }
 
-    /** 方向键到行首行尾还没动：跨到上一行或下一行 */
     function arrowBeyondRow(ta, key) {
         const before = ta.selectionStart
         const dir = key === 'ArrowUp' ? -1 : 1
@@ -427,7 +393,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         })
     }
 
-    /** 上下移动一块 */
     function moveBlock(ids, dir) {
         const list = Array.isArray(ids) ? ids : [ids]
         const active = activeInput()
@@ -450,7 +415,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         render({ caret })
     }
 
-    /* ---------------- 工具条命令 ---------------- */
 
     function applyCommand(cmd) {
         const ta = ensureInput()
@@ -470,7 +434,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return setLineKind(ta, cmd)
     }
 
-    /** 整行进退一级缩进，光标跟着移动 */
     function indentLine(ta, dir) {
         const value = ta.value
         const indent = leadingIndent(value)
@@ -587,7 +550,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         }
     }
 
-    /** 在光标所在行之后新起一行，并把光标放进去；返回新块 */
     function insertLineAfter(ta, source, caret, end = caret) {
         const block = getBlock(ta.dataset.id)
         if (!block) return null
@@ -599,7 +561,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         return next
     }
 
-    /** 分隔线独占一行：空行就地变成线，有内容就在下面新起一块 */
     function insertRule(ta) {
         if (RULE_LINE.test(ta.value)) {
             commit(ta, '', 0, 0)
@@ -613,7 +574,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         leaveAfter(insertLineAfter(ta, '---', 3))
     }
 
-    /** 分隔线下面留一行空行，接着往下写不会把 `---` 变成正文 */
     function leaveAfter(block) {
         if (!block) return
         const next = { id: uid('n'), source: '' }
@@ -629,7 +589,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             commit(ta, DETAILS_TPL, at, at + 2)
             return
         }
-        // 光标选中「标题」两个字，直接输入就是替换
         insertLineAfter(ta, DETAILS_TPL, at, at + 2)
     }
 
@@ -650,7 +609,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         }
     }
 
-    /* ---------------- 拖动 ---------------- */
 
     function startDrag(e, ids) {
         if (e.button !== 0 && e.pointerType !== 'touch') return
@@ -763,7 +721,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         render()
     }
 
-    /* ---------------- 事件 ---------------- */
 
     el.addEventListener('click', (e) => {
         const check = e.target.closest('.note-check')
@@ -772,7 +729,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         toggleTodo(check)
     })
 
-    /** 单击只管眼前这个控件：复选框、折叠三角、链接。改一行要双击 */
     el.addEventListener('pointerdown', (e) => {
         if (e.button !== 0 || e.shiftKey) return
         const target = e.target instanceof Element ? e.target : e.target.parentElement
@@ -822,7 +778,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const ta = e.target
         if (!ta.classList || !ta.classList.contains('note-row__input')) return
         rememberCaret(ta)
-        // 按键落定后再量一次：这一下与 input 不是同一个时机，Safari 里能补上第一次读到旧排版的情形
         if (!e.isComposing) fitInput(ta)
     })
 
@@ -840,10 +795,8 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         const inTable = ta.dataset.table === 'true'
 
         if (e.key === 'Tab') {
-            // 表格没有层级：Tab 交给浏览器，焦点照常走出输入框
             if (inTable) return
             const level = indentLevel(ta.value)
-            // 第一级上再按 Shift+Tab：让焦点照常走出输入框
             if (!e.shiftKey || level > 0) {
                 e.preventDefault()
                 indentLine(ta, e.shiftKey ? -1 : 1)
@@ -880,7 +833,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
             if (key === 'i') { e.preventDefault(); applyCommand('italic'); return }
             if (key === 'k') { e.preventDefault(); applyCommand('link'); return }
             if (e.shiftKey && key === 'x') { e.preventDefault(); applyCommand('strike'); return }
-            // 与常见编辑器一致：⌘ + ⇧ + 8 / 7 / 9 / .
             if (e.shiftKey) {
                 const byCode = { Digit8: 'ul', Digit7: 'ol', Digit9: 'todo', Period: 'quote' }[e.code]
                 if (byCode) { e.preventDefault(); applyCommand(byCode); return }
@@ -895,11 +847,9 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         rememberCaret(ta)
         setTimeout(() => {
             if (destroyed) return
-            // 焦点还在另一个输入框里：那是换行编辑，不算离开
             if (activeInput()) return
             const active = document.activeElement
             if (active && active.closest && active.closest('.note-toolbar')) return
-            // 焦点已经落到另一行：那算换行继续写，别把新行也关掉
             const movedWithin = !!editingId && editingId !== leftId
             const leaving = getBlock(leftId)
             if (leaving && leaving.draft && !leaving.source) {
@@ -956,7 +906,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         render()
     }
 
-    /** 鼠标拖动选中的排版块；焦点在输入框里或选区不在笔记里时返回空 */
     function selectedRows() {
         const sel = document.getSelection()
         if (!sel || sel.isCollapsed || !sel.rangeCount) return []
@@ -1026,7 +975,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
     if (widthWatcher) widthWatcher.observe(el)
     else window.addEventListener('resize', refit)
 
-    // 字体晚一步换上来时字宽和行高都会变，先前算好的高度就短了
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll).catch(() => null)
 
     render()
@@ -1035,11 +983,9 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
         el,
         flushSave,
         applyCommand,
-        /** 空笔记进来就直接写：元素插进页面之后才能聚焦 */
         focusFirst() {
             startEditing(items[0].id, { start: 0, end: 0 })
         },
-        /** 页面空白处双击：在最下方接着写。新建的空行先不存，等真的输入 */
         focusLast() {
             const last = items[items.length - 1]
             if (!last) return
@@ -1073,7 +1019,6 @@ export function createNoteEditor({ lines, lang, onSave = null, onStateChange = n
 function toBlocks(lines) {
     const list = Array.isArray(lines) ? lines : []
     const blocks = list.map((source) => ({ id: uid('n'), source: String(source ?? '') }))
-    // 末尾只含空白的行不带进界面；整份为空时留一处可写
     while (blocks.length && !blocks[blocks.length - 1].source.trim()) blocks.pop()
     if (!blocks.length) blocks.push({ id: uid('n'), source: '' })
     return blocks
@@ -1112,7 +1057,6 @@ function lineKindOf(source) {
     return 'paragraph'
 }
 
-/** 去掉行首记号，保留缩进 */
 function stripPrefix(source) {
     const indent = leadingIndent(source)
     const body = String(source ?? '').slice(indent.length)
@@ -1128,14 +1072,12 @@ function stripIndent(source) {
     return String(source ?? '').slice(leadingIndent(source).length)
 }
 
-/** 引用行的正文：去掉 `>`，行尾的续行记号也去掉 */
 function quoteBody(source) {
     return String(source ?? '')
         .replace(/^[ \t]*>\s?/, '')
         .replace(/\\\s*$/, '')
 }
 
-/** 回车后新的一行沿用上一行的记号，序号加一 */
 function prefixFor(left) {
     let m = /^(\s*)([-*+])\s+\[[ xX]\]\s+/.exec(left)
     if (m) return `${m[1]}${m[2]} [ ] `
@@ -1148,7 +1090,6 @@ function prefixFor(left) {
     return ''
 }
 
-/** 记号把光标包在里面时，取这一层的范围 */
 function spanAround(source, pos, open, close) {
     if (!source) return null
     const from = Math.max(0, source.lastIndexOf(open, pos))
@@ -1174,7 +1115,6 @@ function hasWrap(source, start, stop, open, close) {
     return !!spanAround(source, start, open, close)
 }
 
-/** 单个星号：粗体的两个星号不算斜体 */
 function hasItalic(source, start, stop) {
     const selected = source.slice(start, stop)
     if (selected.length > 2 && selected.startsWith('*') && selected.endsWith('*')

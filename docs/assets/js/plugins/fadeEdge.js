@@ -1,49 +1,62 @@
+import { docsifyClasses, elementStatus } from '../utils/constants.js'
+import { onListen, toggleClass, hasClass, createEl, getEl, getElByClass } from '../utils/dom.js'
+
+let fadeEdgeOptions = {
+    enable: false
+}
+
 function plugin(hook, vm) {
+    if (!fadeEdgeOptions.enable) return
+
     function isSelfScrollable(el) {
         const oy = getComputedStyle(el).overflowY
         if (oy !== 'auto' && oy !== 'scroll' && oy !== 'overlay') return false
         return el.scrollHeight > el.clientHeight + 1
     }
 
+    function containerEdgeState(container) {
+        if (isSelfScrollable(container)) {
+            const max = container.scrollHeight - container.clientHeight
+            return {
+                atTop: container.scrollTop <= 1,
+                atBottom: container.scrollTop >= max - 1
+            }
+        }
+
+        const cRect = container.getBoundingClientRect()
+        let contentBottom = cRect.bottom
+
+        for (const child of container.children) {
+            if (hasClass(child, 'fade-edge')) continue
+            const r = child.getBoundingClientRect()
+            if (r.bottom > contentBottom) contentBottom = r.bottom
+        }
+
+        return {
+            atTop: cRect.top >= -1,
+            atBottom: contentBottom <= window.innerHeight + 1
+        }
+    }
+
     function attachSidebarFadeEdge(container) {
         if (!container) return
-        if (container.querySelector('.fade-edge')) return
+        if (getEl('.fade-edge', container)) return
 
-        const top = document.createElement('div')
-        top.className = 'fade-edge top'
-        const bottom = document.createElement('div')
-        bottom.className = 'fade-edge bottom'
+        const top = createEl('div', { className: 'fade-edge top' })
+        const bottom = createEl('div', { className: 'fade-edge bottom' })
         container.prepend(top)
         container.append(bottom)
 
         const update = () => {
-            let atTop, atBottom
+            const { atTop, atBottom } = containerEdgeState(container)
 
-            if (isSelfScrollable(container)) {
-                const max = container.scrollHeight - container.clientHeight
-                atTop = container.scrollTop <= 1
-                atBottom = container.scrollTop >= max - 1
-            } else {
-                const cRect = container.getBoundingClientRect()
-                let contentBottom = cRect.bottom
-
-                for (const child of container.children) {
-                    if (child.classList.contains('fade-edge')) continue
-                    const r = child.getBoundingClientRect()
-                    if (r.bottom > contentBottom) contentBottom = r.bottom
-                }
-
-                atTop = cRect.top >= -1
-                atBottom = contentBottom <= window.innerHeight + 1
-            }
-
-            top.classList.toggle('show', !atTop)
-            bottom.classList.toggle('show', !atBottom)
+            toggleClass(top, elementStatus.show, !atTop)
+            toggleClass(bottom, elementStatus.show, !atBottom)
         }
 
-        container.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('resize', update, { passive: true })
+        onListen(container, 'scroll', update, { passive: true })
+        onListen(window, 'scroll', update, { passive: true })
+        onListen(window, 'resize', update, { passive: true })
         new ResizeObserver(update).observe(container)
         update()
     }
@@ -51,13 +64,11 @@ function plugin(hook, vm) {
     function attachContentFadeEdge(container) {
         if (!container) return
 
-        if (document.body.querySelector('.content-fade-edge')) return
+        if (getEl('.content-fade-edge', document.body)) return
 
-        const top = document.createElement('div')
-        top.className = 'fade-edge content-fade-edge top'
+        const top = createEl('div', { className: 'fade-edge content-fade-edge top' })
 
-        const bottom = document.createElement('div')
-        bottom.className = 'fade-edge content-fade-edge bottom'
+        const bottom = createEl('div', { className: 'fade-edge content-fade-edge bottom' })
 
         document.body.prepend(top)
         document.body.append(bottom)
@@ -65,46 +76,33 @@ function plugin(hook, vm) {
         const update = () => {
             let atTop, atBottom
 
-            const cover = document.querySelector('section.cover.show')
+            const cover = getEl(`section.${docsifyClasses.cover}.${elementStatus.show}`)
 
             if (cover) {
-                // cover 页：用页面滚动判断
                 const scrollTop = document.scrollingElement.scrollTop
                 const max = document.scrollingElement.scrollHeight - window.innerHeight
                 atTop = scrollTop <= 1
                 atBottom = scrollTop >= max - 1
-            } else if (isSelfScrollable(container)) {
-                const max = container.scrollHeight - container.clientHeight
-                atTop = container.scrollTop <= 1
-                atBottom = container.scrollTop >= max - 1
             } else {
-                const cRect = container.getBoundingClientRect()
-                let contentBottom = cRect.bottom
-
-                for (const child of container.children) {
-                    if (child.classList.contains('fade-edge')) continue
-                    const r = child.getBoundingClientRect()
-                    if (r.bottom > contentBottom) contentBottom = r.bottom
-                }
-
-                atTop = cRect.top >= -1
-                atBottom = contentBottom <= window.innerHeight + 1
+                const state = containerEdgeState(container)
+                atTop = state.atTop
+                atBottom = state.atBottom
             }
 
-            top.classList.toggle('show', !atTop)
-            bottom.classList.toggle('show', !atBottom)
+            toggleClass(top, elementStatus.show, !atTop)
+            toggleClass(bottom, elementStatus.show, !atBottom)
         }
 
-        container.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('scroll', update, { passive: true })
-        window.addEventListener('resize', update, { passive: true })
+        onListen(container, 'scroll', update, { passive: true })
+        onListen(window, 'scroll', update, { passive: true })
+        onListen(window, 'resize', update, { passive: true })
         new ResizeObserver(update).observe(container)
         update()
     }
 
     function initFadeEdges() {
-        attachContentFadeEdge(document.querySelector('.content'))
-        attachSidebarFadeEdge(document.querySelector('.sidebar'))
+        attachContentFadeEdge(getElByClass(docsifyClasses.content))
+        attachSidebarFadeEdge(getElByClass(docsifyClasses.sidebar))
     }
 
     hook.doneEach(function () {
@@ -112,4 +110,8 @@ function plugin(hook, vm) {
     })
 }
 
+window.$docsify['fadeEdge'] = Object.assign(
+    fadeEdgeOptions,
+    window.$docsify['fadeEdge']
+)
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins || [])

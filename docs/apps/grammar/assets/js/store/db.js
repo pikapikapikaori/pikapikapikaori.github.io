@@ -1,6 +1,4 @@
-/** IndexedDB 封装：库名 langnotebook，当前版本 1。 */
-
-export const DB_NAME = 'langnotebook'
+export const DB_NAME = 'grammar:data'
 export const DB_VERSION = 1
 
 export const STORE_USERS = 'users'
@@ -28,9 +26,6 @@ export function openDB() {
         }
         req.onsuccess = () => resolve(req.result)
         req.onerror = () => reject(req.error || new Error('IndexedDB 打开失败'))
-        req.onblocked = () => {
-            console.warn('[db] 有其它标签页正在使用旧版本，请关闭后重试')
-        }
     })
 
     return _dbPromise
@@ -63,7 +58,6 @@ function upgrade(db, oldVersion) {
             s.createIndex('userId', 'userId', { unique: false })
         }
     }
-    // 新增版本时在此追加 if (oldVersion < 2) {...}
 }
 
 function reqToPromise(req) {
@@ -90,7 +84,7 @@ export async function withStore(storeName, mode, fn) {
         try {
             out = fn(tx.objectStore(storeName), tx)
         } catch (err) {
-            try { tx.abort() } catch { /* ignore */ }
+            try { tx.abort() } catch {   }
             reject(err)
         }
     })

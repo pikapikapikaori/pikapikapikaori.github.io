@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px) {
+    .grammar-chapters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .grammar-toc__summary::-webkit-details-marker {
+        display: none;
+    }
+}

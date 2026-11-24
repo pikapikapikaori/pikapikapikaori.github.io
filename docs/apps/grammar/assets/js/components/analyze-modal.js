@@ -6,7 +6,6 @@ import { createGhostInput } from './ghost-input.js'
 import { loadAnalyzers, analyze } from '../services/analyze-service.js'
 import { setPendingLookup } from '../store/pending-lookup.js'
 
-/** @param {{ langCode: string, langName?: string }} opts langName 只用于标题 */
 export async function openAnalyzeModal({ langCode, langName = '' } = {}) {
     const sources = await loadAnalyzers(langCode)
     if (!sources.length) {

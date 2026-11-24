@@ -1,29 +1,31 @@
 'use strict'
 
+const failureLimit = 3
+const cacheLimitMB = 500
+
 const scopeUrl = new URL(self.registration.scope)
-const scopePath = scopeUrl.pathname
+const scopePath = pathKey(scopeUrl.pathname)
 const cachePrefix = 'bangumi-takeout:static:'
 const manifestPath = 'assets/resources/meta/file-cache.json'
 const manifestUrl = new URL(manifestPath, scopeUrl).href
 const recordUrl = new URL('__cache-record__', scopeUrl).href
-const criticalExts = ['js', 'css', 'html']
-const fontExts = ['woff2', 'woff', 'ttf', 'otf', 'eot']
-const saveEvery = 20
-const stages = ['critical', 'fonts', 'rest']
 const rootPaths = [scopePath]
 const hashHex = /^[0-9a-f]{16}$/i
 const foregroundIdleTimeoutMs = 15000
 const backgroundIdleTimeoutMs = 30000
 const manifestTimeoutMs = 10000
 const stuckFetchMs = 5000
-const failureLimit = 3
 const retiredTokensMax = 50
 const pauseSessionsMax = 50
 const tokenSequence = /^[1-9][0-9]*$/
 
 let pathHash = null
-let serving = []
-let currentCache = null
+let currentContext = null
+let pendingVisit = null
+let activeContext = null
+const joiningVisits = new Set()
+let mutation = Promise.resolve()
+const transfers = new Map()
 let statePromise = null
 let stateGeneration = 0
 let runPromise = null
@@ -37,15 +39,19 @@ const pauseWatermarks = new Map()
 const inflight = new Map()
 const backgroundFetches = new Set()
 
+function pathKey (pathname) {
+    return pathname.split('/').map(function (part) {
+        try { return encodeURIComponent(decodeURIComponent(part)) } catch { return encodeURIComponent(part) }
+    }).join('/')
+}
+
+function urlFor (path) {
+    return new URL(path.split('/').map(encodeURIComponent).join('/'), scopeUrl).href
+}
+
 function backgroundPaused () {
     if (backupPauses.size > 0) return true
     return visibleClients.size === 0 && hiddenClients.size > 0
-}
-
-function extOf (path) {
-    const name = path.slice(path.lastIndexOf('/') + 1)
-    const i = name.lastIndexOf('.')
-    return i < 1 ? '' : name.slice(i + 1).toLowerCase()
 }
 
 function ownCacheNames () {
@@ -56,24 +62,61 @@ function ownCacheNames () {
     })
 }
 
+function validManifest (manifest) {
+    if (!manifest || manifest.schemaVersion !== 2 || typeof manifest.version !== 'string' || typeof manifest.hash !== 'string') return false
+    if (!Array.isArray(manifest.batches) || manifest.batches.length !== 3) return false
+    const modes = { 1: 'precache', 2: 'on-demand', 3: 'network-only' }
+    const priorities = new Set()
+    const paths = new Set()
+    for (const batch of manifest.batches) {
+        if (!modes[batch.priority] || priorities.has(batch.priority) || batch.mode !== modes[batch.priority] || !Array.isArray(batch.files)) return false
+        priorities.add(batch.priority)
+        for (const file of batch.files) {
+            if (!file || typeof file.path !== 'string' || !file.path || file.path.startsWith('/') || file.path.includes('\\') || file.path.split('/').includes('..')) return false
+            if (paths.has(file.path) || !isDigest(file.hash) || !Number.isSafeInteger(file.size) || file.size < 0) return false
+            const url = new URL(urlFor(file.path))
+            if (url.origin !== scopeUrl.origin || !pathKey(url.pathname).startsWith(scopePath) || url.search || url.hash) return false
+            paths.add(file.path)
+        }
+    }
+    return true
+}
+
+function manifestFiles (manifest) {
+    if (!manifest || manifest.schemaVersion !== 2 || !Array.isArray(manifest.batches)) return []
+    const files = []
+    for (const batch of manifest.batches) {
+        if (![1, 2, 3].includes(batch.priority)) continue
+        for (const file of batch.files || []) files.push({ ...file, priority: batch.priority })
+    }
+    return files
+}
+
 function pathHashOf (manifest) {
     const map = {}
-    const files = (manifest && manifest.files) || []
-    for (let i = 0; i < files.length; i++) {
-        map[new URL(files[i].path, scopeUrl).pathname] = files[i].hash
-    }
+    for (const file of manifestFiles(manifest)) map[pathKey(new URL(urlFor(file.path)).pathname)] = file.hash
     return map
 }
 
-function splitStages (files) {
-    const groups = [[], [], []]
-    for (let i = 0; i < files.length; i++) {
-        const ext = extOf(files[i].path)
-        if (criticalExts.indexOf(ext) !== -1) groups[0].push(files[i])
-        else if (fontExts.indexOf(ext) !== -1) groups[1].push(files[i])
-        else groups[2].push(files[i])
+function serial (fn) {
+    const result = mutation.then(fn)
+    mutation = result.catch(function () {})
+    return result
+}
+
+function contextOf (cache, manifest, record) {
+    const files = manifestFiles(manifest)
+    record = record || {}
+    for (const field of ['files', 'metadata', 'misses', 'reasons', 'visits', 'clients']) {
+        if (!record[field] || typeof record[field] !== 'object') record[field] = {}
     }
-    return groups
+    record.roundId = record.roundId || 'initial'
+    return {
+        cache: cache, manifest: manifest, record: record,
+        files: files, byPath: new Map(files.map(file => [pathKey(new URL(urlFor(file.path)).pathname), file])),
+        p1Size: files.filter(file => file.priority === 1).reduce((sum, file) => sum + file.size, 0),
+        reservations: new Map(),
+    }
 }
 
 async function readJson (cache, url) {
@@ -93,50 +136,31 @@ function readSnapshot (cache) {
     return readJson(cache, manifestUrl)
 }
 
-function saveRecord (cache, record) {
-    return cache.put(recordUrl, new Response(JSON.stringify(record), {
-        headers: { 'content-type': 'application/json' }
-    }))
-}
-
-function allowOf (record, hashes) {
-    const allow = {}
-    if (!record || !record.files) return allow
-    for (const path in record.files) {
-        const pathname = new URL(path, scopeUrl).pathname
-        if (hashes[pathname] === record.files[path]) allow[pathname] = true
+async function saveRecord (cache, record) {
+    try {
+        await cache.put(recordUrl, new Response(JSON.stringify(record), {
+            headers: { 'content-type': 'application/json' }
+        }))
+        return true
+    } catch {
+        return false
     }
-    return allow
 }
 
 async function loadState () {
     const generation = ++stateGeneration
     const names = await ownCacheNames()
     const list = []
-    let manifest = null
     for (const name of names) {
         const cache = await caches.open(name)
-        const record = await readRecord(cache)
-        list.push({ cache: cache, record: record })
-        if (!manifest) manifest = await readSnapshot(cache)
+        const manifest = await readSnapshot(cache)
+        if (!validManifest(manifest)) continue
+        list.push({ cache: cache, record: await readRecord(cache), manifest: manifest })
     }
-    const hashes = manifest ? pathHashOf(manifest) : {}
-    list.sort(function (a, b) {
-        const rankA = a.record && a.record.stage === 'done' ? 1 : 0
-        const rankB = b.record && b.record.stage === 'done' ? 1 : 0
-        return rankA - rankB
-    })
-    if (generation !== stateGeneration) return
-    let preferred = null
-    for (const item of list) {
-        if (item.record && item.record.stage === 'done') preferred = item.cache
-    }
-    pathHash = hashes
-    currentCache = preferred || (list[0] && list[0].cache) || null
-    serving = list.map(function (item) {
-        const done = item.record && item.record.stage === 'done'
-        return { cache: item.cache, allow: done ? null : allowOf(item.record, hashes) }
-    })
+    if (generation !== stateGeneration || !list.length) return
+    const preferred = list[list.length - 1]
+    pathHash = pathHashOf(preferred.manifest)
+    currentContext = contextOf(preferred.cache, preferred.manifest, preferred.record)
 }
 
 function ensureState () {
@@ -144,7 +168,6 @@ function ensureState () {
         statePromise = loadState().catch(function () {
             statePromise = null
             pathHash = null
-            serving = []
         })
     }
     return statePromise
@@ -296,7 +319,7 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
             }
             existing.arm()
         }
-        return { entry: existing, creator: false }
+        return { entry: existing }
     }
     const controller = new AbortController()
     const entry = {
@@ -308,8 +331,6 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
         idleTimer: null,
         meta: null,
         response: null,
-        failed: false,
-        error: null,
         pausedAbort: false,
         settled: false,
         stuckTimer: null,
@@ -327,8 +348,6 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
         }, entry.foreground > 0 ? foregroundIdleTimeoutMs : backgroundIdleTimeoutMs)
     }
     const fail = function (error) {
-        entry.failed = true
-        entry.error = error
         entry.rejectBody(error)
     }
     const finish = function () {
@@ -371,25 +390,171 @@ function sharedFetch (url, hash, priority, { foreground = false, onForegroundEnd
             }, fail)
         }, fail)
     inflight.set(key, entry)
-    return { entry: entry, creator: true }
+    return { entry: entry }
 }
 
-function writeShared (entry, cache, url, hash) {
-    return entry.buffered.then(async function (bytes) {
-        if (!cache || !entry.meta) return false
-        if (entry.meta.status < 200 || entry.meta.status >= 300) return false
-        if (!await contentMatches(bytes, hash)) return false
-        try {
-            await cache.put(url, responseOf(entry, bytes))
-            return true
-        } catch {
-            return false
+async function reserve (ctx, file, evict = true) {
+    return serial(async function () {
+        if (ctx.reservations.has(file.path)) return true
+        const limit = cacheLimitMB * 1024 * 1024
+        if (file.priority === 2 && ctx.p1Size + file.size > limit) return false
+        let used = ctx.p1Size
+        for (const meta of Object.values(ctx.record.metadata)) {
+            if (meta.priority === 2) used += meta.size
         }
-    }).catch(function () {
-        return false
-    }).finally(function () {
-        releaseShared(entry)
+        for (const [path, size] of ctx.reservations) {
+            if (path !== file.path) used += size
+        }
+        if (file.priority === 2) {
+            const victims = (evict ? Object.entries(ctx.record.metadata) : [])
+                .filter(([path, meta]) => meta.priority === 2 && !ctx.reservations.has(path))
+                .sort((a, b) => a[1].lastAccess - b[1].lastAccess)
+            for (const [path, meta] of victims) {
+                if (used + file.size <= limit) break
+                try {
+                    await ctx.cache.delete(urlFor(path))
+                } catch {
+                    return false
+                }
+                delete ctx.record.metadata[path]
+                delete ctx.record.files[path]
+                used -= meta.size
+            }
+            if (used + file.size > limit) return false
+            ctx.reservations.set(file.path, file.size)
+        } else {
+            // P1 space is reserved for the whole manifest before any P2 admission.
+            ctx.reservations.set(file.path, 0)
+        }
+        await saveRecord(ctx.cache, ctx.record)
+        return true
     })
+}
+
+async function remember (ctx, file, lastAccess = Date.now()) {
+    return serial(async function () {
+        ctx.record.files[file.path] = file.hash
+        ctx.record.metadata[file.path] = { size: file.size, priority: file.priority, lastAccess: lastAccess }
+        delete ctx.record.misses[file.path]
+        delete ctx.record.reasons[file.path]
+        await saveRecord(ctx.cache, ctx.record)
+    })
+}
+
+async function transfer (ctx, file, foreground, signal, request = null) {
+    const url = urlFor(file.path)
+    const key = ctx.manifest.version + ':' + ctx.manifest.hash + '\n' + file.path
+    let task = transfers.get(key)
+    let creator = false
+    if (!task) {
+        creator = true
+        task = (async function () {
+            const admitted = await reserve(ctx, file)
+            if (!admitted && !foreground) return { result: 'capacity' }
+            if (!foreground && backgroundPaused()) return { result: 'paused' }
+            const roundId = ctx.record.roundId
+            const attempts = ctx.record.misses[file.path] || 0
+            if (attempts >= failureLimit) return { result: 'limited' }
+            const durable = await serial(async function () {
+                ctx.record.misses[file.path] = attempts + 1
+                ctx.record.reasons[file.path] = 'interrupted'
+                return saveRecord(ctx.cache, ctx.record)
+            })
+            if (!durable) {
+                ctx.record.reasons[file.path] = 'record'
+                return { result: 'record' }
+            }
+            let item
+            let ownerReleased = false
+            const releaseOwnerForeground = function () {
+                if (ownerReleased || !foreground) return
+                ownerReleased = true
+                if (item && item.foreground > 0) item.foreground -= 1
+                if (item) scheduleStuckAbort(item)
+            }
+            const shared = sharedFetch(url, file.hash, foreground ? 'high' : 'low', {
+                foreground: foreground,
+                onForegroundEnd: foreground ? releaseOwnerForeground : null,
+            })
+            item = shared.entry
+            if (!foreground) backgroundFetches.add(item)
+            const write = item.buffered.then(async function (bytes) {
+                if (!item.meta || item.meta.status !== 200) return 'failed'
+                if (!await contentMatches(bytes, file.hash)) return 'mismatch'
+                if (!admitted) {
+                    await serial(async function () {
+                        delete ctx.record.misses[file.path]
+                        delete ctx.record.reasons[file.path]
+                        await saveRecord(ctx.cache, ctx.record)
+                    })
+                    return 'capacity'
+                }
+                try {
+                    await ctx.cache.put(url, responseOf(item, bytes))
+                    await remember(ctx, file)
+                    return 'ok'
+                } catch {
+                    return 'write'
+                }
+            }).catch(function (error) {
+                return pausedRejection(item, error) ? 'paused' : 'failed'
+            }).then(async function (result) {
+                await serial(async function () {
+                    ctx.reservations.delete(file.path)
+                    if (result !== 'ok' && result !== 'capacity' && ctx.record.roundId === roundId) {
+                        ctx.record.reasons[file.path] = result
+                    }
+                    await saveRecord(ctx.cache, ctx.record)
+                })
+                return result
+            }).finally(function () {
+                if (item.stuckTimer) clearTimeout(item.stuckTimer)
+                backgroundFetches.delete(item)
+                releaseShared(item)
+                transfers.delete(key)
+            })
+            return { entry: item, write: write, releaseOwnerForeground: releaseOwnerForeground }
+        })()
+        transfers.set(key, task)
+        task.then(function (value) {
+            if (!value.entry) {
+                ctx.reservations.delete(file.path)
+                transfers.delete(key)
+            }
+        }, function () { ctx.reservations.delete(file.path); transfers.delete(key) })
+    }
+    const operation = await task
+    if (!operation.entry) {
+        const storageFailure = ['write', 'record', 'capacity'].includes(ctx.record.reasons[file.path])
+        return {
+            response: foreground
+                ? operation.result === 'limited' && !storageFailure
+                    ? Promise.resolve(gatewayTimeout())
+                    : networkOrFail(request || new Request(url))
+                : null,
+            write: Promise.resolve(operation.result),
+        }
+    }
+    const item = operation.entry
+    if (!foreground) return { response: null, write: operation.write }
+    let released = false
+    const releaseForeground = function () {
+        if (released) return
+        released = true
+        if (creator) operation.releaseOwnerForeground()
+        else {
+            if (item.foreground > 0) item.foreground -= 1
+            releaseShared(item)
+        }
+        if (item.foreground === 0) scheduleStuckAbort(item)
+    }
+    if (!creator) sharedFetch(url, file.hash, 'high', { foreground: true })
+    item.buffered.then(releaseForeground, releaseForeground)
+    if (signal) signal.addEventListener('abort', releaseForeground, { once: true })
+    const response = creator
+        ? item.head.then(function () { return item.response || gatewayTimeout() })
+        : item.buffered.then(function (bytes) { return responseOf(item, bytes) }).catch(gatewayTimeout)
+    return { response: response, write: operation.write }
 }
 
 function scheduleStuckAbort (entry) {
@@ -409,48 +574,50 @@ function scheduleStuckAbort (entry) {
     }, wait)
 }
 
-function networkResult (url, hash, signal) {
-    let entry = null
-    let released = false
-    const releaseForeground = function () {
-        if (released) return
-        released = true
-        if (!entry) return
-        if (entry.foreground > 0) entry.foreground -= 1
-        if (entry.foreground === 0) scheduleStuckAbort(entry)
+async function serve (pathname, request) {
+    pathname = pathKey(pathname)
+    const ctx = currentContext
+    const file = ctx && ctx.byPath.get(pathname)
+    if (!file || file.priority === 3) return { response: networkOrFail(request), write: null }
+    const url = urlFor(file.path)
+    try {
+        const hit = await ctx.cache.match(url)
+        if (hit && ctx.record.files[file.path] === file.hash) {
+            const meta = ctx.record.metadata[file.path]
+            await remember(ctx, file, Math.max(Date.now(), (meta && meta.lastAccess || 0) + 1))
+            return { response: Promise.resolve(await rangeResponse(hit, request)), write: null }
+        }
+    } catch {   }
+    if (file.priority === 2 && ctx.p1Size + file.size > cacheLimitMB * 1024 * 1024) return { response: networkOrFail(request), write: null }
+    const result = await transfer(ctx, file, true, request.signal, request)
+    if (!request.headers.get('range')) return result
+    return {
+        response: result.response.then(function (response) {
+            return response.status === 200 ? rangeResponse(response, request) : response
+        }),
+        write: result.write,
     }
-    const shared = sharedFetch(url, hash, 'high', {
-        foreground: true,
-        onForegroundEnd: releaseForeground,
-    })
-    entry = shared.entry
-    entry.buffered.then(releaseForeground, releaseForeground)
-    if (signal) signal.addEventListener('abort', releaseForeground, { once: true })
-    const response = shared.creator
-        ? entry.head.then(function () {
-            return entry.response || gatewayTimeout()
-        })
-        : entry.buffered.then(function (bytes) {
-            return responseOf(entry, bytes)
-        }).catch(function () {
-            return gatewayTimeout()
-        })
-    return { response: response, write: writeShared(entry, currentCache, url, hash) }
 }
 
-async function serve (pathname, signal) {
-    const url = new URL(pathname, scopeUrl).href
-    for (let i = 0; i < serving.length; i++) {
-        const item = serving[i]
-        if (item.allow && !item.allow[pathname]) continue
-        const hit = await item.cache.match(url)
-        if (hit) return { response: Promise.resolve(hit), write: null }
-    }
-    const hash = pathHash ? pathHash[pathname] : ''
-    return networkResult(url, hash, signal)
+async function rangeResponse (response, request) {
+    const range = request.headers.get('range')
+    if (!range) return response
+    const match = /^bytes=(\d*)-(\d*)$/.exec(range)
+    if (!match || (!match[1] && !match[2])) return networkOrFail(request)
+    const bytes = new Uint8Array(await response.arrayBuffer())
+    let start = match[1] ? Number(match[1]) : Math.max(0, bytes.length - Number(match[2]))
+    let end = match[1] && match[2] ? Number(match[2]) : bytes.length - 1
+    if (start > end || start >= bytes.length) return new Response(null, { status: 416, headers: { 'content-range': 'bytes */' + bytes.length } })
+    end = Math.min(end, bytes.length - 1)
+    const headers = new Headers(response.headers)
+    headers.set('content-range', 'bytes ' + start + '-' + end + '/' + bytes.length)
+    headers.set('content-length', String(end - start + 1))
+    headers.set('accept-ranges', 'bytes')
+    return new Response(bytes.slice(start, end + 1), { status: 206, headers: headers })
 }
 
 function serveKey (pathname) {
+    pathname = pathKey(pathname)
     if (!pathHash) return null
     if (pathHash[pathname]) return pathname
     if (rootPaths.indexOf(pathname) === -1) return null
@@ -463,164 +630,73 @@ function pausedRejection (entry, error) {
     return !error || error.name === 'AbortError'
 }
 
-async function download (ctx, url, entry) {
-    try {
-        const hit = await ctx.cache.match(url)
-        if (hit) return 'ok'
-    } catch {   }
-    if (backgroundPaused()) return 'paused'
-    const shared = sharedFetch(url, entry.hash, 'low')
-    const item = shared.entry
-    backgroundFetches.add(item)
-    try {
-        const bytes = await item.buffered
-        if (item.failed || !item.meta) return pausedRejection(item, item.error) ? 'paused' : 'failed'
-        if (item.meta.status < 200 || item.meta.status >= 300) return 'failed'
-        if (!await contentMatches(bytes, entry.hash)) return 'mismatch'
-        await ctx.cache.put(url, responseOf(item, bytes))
-        return 'ok'
-    } catch (error) {
-        return pausedRejection(item, error) ? 'paused' : 'failed'
-    } finally {
-        if (item.stuckTimer) clearTimeout(item.stuckTimer)
-        backgroundFetches.delete(item)
-        releaseShared(item)
-    }
-}
-
-async function copyFromSource (ctx, url, entry) {
-    if (!ctx.source || !ctx.source.record) return false
-    if (ctx.source.record.files[entry.path] !== entry.hash) return false
-    if (!isDigest(entry.hash)) return false
-    try {
-        const hit = await ctx.source.cache.match(url)
-        if (!hit) return false
-        const bytes = new Uint8Array(await hit.arrayBuffer())
-        if (!await contentMatches(bytes, entry.hash)) return false
-        const status = hit.status
-        const body = status === 204 || status === 205 || status === 304 ? null : bytes
-        await ctx.cache.put(url, new Response(body, {
-            status: status,
-            statusText: hit.statusText,
-            headers: responseHeaders(hit.headers),
-        }))
-        return true
-    } catch {
-        return false
-    }
-}
-
-async function copyGroup (ctx, list) {
-    let sinceSave = 0
-    for (let i = 0; i < list.length; i++) {
-        if (backgroundPaused()) {
-            await saveRecord(ctx.cache, ctx.record)
-            return false
-        }
-        const entry = list[i]
-        if (ctx.record.files[entry.path] === entry.hash) continue
-        const url = new URL(entry.path, scopeUrl).href
-        if (!await copyFromSource(ctx, url, entry)) continue
-        ctx.record.files[entry.path] = entry.hash
-        sinceSave += 1
-        if (sinceSave >= saveEvery) {
-            sinceSave = 0
-            await saveRecord(ctx.cache, ctx.record)
-        }
-    }
-    await saveRecord(ctx.cache, ctx.record)
-    return true
-}
-
-async function acquire (ctx, url, entry) {
-    return download(ctx, url, entry)
-}
-
-async function runGroup (ctx, list) {
-    let sinceSave = 0
-    let pending = 0
-    for (let i = 0; i < list.length; i++) {
-        if (backgroundPaused()) {
-            await saveRecord(ctx.cache, ctx.record)
-            return false
-        }
-        const entry = list[i]
-        if (ctx.record.files[entry.path] === entry.hash) {
-            if (ctx.record.misses[entry.path]) delete ctx.record.misses[entry.path]
-            if (ctx.record.reasons[entry.path]) delete ctx.record.reasons[entry.path]
-            continue
-        }
-        const attempts = ctx.record.misses[entry.path] || 0
-        if (attempts >= failureLimit) continue
-        const url = new URL(entry.path, scopeUrl).href
-        const result = await acquire(ctx, url, entry)
-        if (result === 'paused') {
-            await saveRecord(ctx.cache, ctx.record)
-            return false
-        }
-        if (result !== 'ok') {
-            const next = result === 'mismatch' ? failureLimit : attempts + 1
-            ctx.record.misses[entry.path] = next
-            ctx.record.reasons[entry.path] = result
-            if (!ctx.repair && next < failureLimit) pending += 1
-            sinceSave += 1
-            if (sinceSave >= saveEvery) {
-                sinceSave = 0
-                await saveRecord(ctx.cache, ctx.record)
+async function copyFromSource (ctx, file, sources) {
+    const url = urlFor(file.path)
+    for (const source of sources) {
+        if (!source.record || source.record.files[file.path] !== file.hash) continue
+        try {
+            const hit = await source.cache.match(url)
+            if (!hit || hit.status !== 200) continue
+            const bytes = new Uint8Array(await hit.arrayBuffer())
+            if (!await contentMatches(bytes, file.hash)) continue
+            if (!await reserve(ctx, file, false)) return false
+            try {
+                await ctx.cache.put(url, new Response(bytes, { status: 200, headers: responseHeaders(hit.headers) }))
+                const meta = source.record.metadata && source.record.metadata[file.path]
+                await remember(ctx, file, meta && meta.lastAccess || Date.now())
+                return true
+            } finally {
+                ctx.reservations.delete(file.path)
             }
-            continue
-        }
-        if (ctx.record.misses[entry.path]) delete ctx.record.misses[entry.path]
-        if (ctx.record.reasons[entry.path]) delete ctx.record.reasons[entry.path]
-        ctx.record.files[entry.path] = entry.hash
-        sinceSave += 1
-        if (sinceSave >= saveEvery) {
-            sinceSave = 0
-            await saveRecord(ctx.cache, ctx.record)
-        }
+        } catch {   }
     }
-    await saveRecord(ctx.cache, ctx.record)
-    return pending === 0
+    return false
 }
 
-async function runGroups (ctx, groups, index) {
-    for (let i = index; i < groups.length; i++) {
-        if (!await runGroup(ctx, groups[i])) return false
-        if (i + 1 < stages.length && !ctx.repair) {
-            ctx.record.stage = stages[i + 1]
-            await saveRecord(ctx.cache, ctx.record)
-        }
+async function runFiles (ctx, sources) {
+    const latest = function (file) {
+        return Math.max(0, ...sources.map(source => source.record.metadata && source.record.metadata[file.path] && source.record.metadata[file.path].lastAccess || 0))
     }
-    return true
-}
-
-function manifestCovers (record, manifest) {
-    if (!record || record.stage !== 'done') return false
-    const files = (manifest && manifest.files) || []
-    for (let i = 0; i < files.length; i++) {
-        if (record.files[files[i].path] !== files[i].hash) return false
+    const files = ctx.files.slice().sort((a, b) => a.priority - b.priority || (a.priority === 2 ? latest(b) - latest(a) : 0))
+    for (const file of files) {
+        if (file.priority === 3) continue
+        if (backgroundPaused()) return false
+        const url = urlFor(file.path)
+        let hit = null
+        try { hit = await ctx.cache.match(url) } catch {   }
+        if (hit && ctx.record.files[file.path] === file.hash) continue
+        await serial(async function () {
+            delete ctx.record.files[file.path]
+            delete ctx.record.metadata[file.path]
+        })
+        if (await copyFromSource(ctx, file, sources)) continue
+        if (file.priority !== 1) continue
+        while ((ctx.record.misses[file.path] || 0) < failureLimit) {
+            if (backgroundPaused()) return false
+            const result = await transfer(ctx, file, false)
+            const status = await result.write
+            if (status === 'paused' || backgroundPaused()) return false
+            if (status === 'ok') break
+            if (status === 'record' || status === 'capacity') return false
+        }
     }
     return true
 }
 
 function missingOf (record, manifest) {
-    const missing = []
-    const files = (manifest && manifest.files) || []
-    for (let i = 0; i < files.length; i++) {
-        if (record.files[files[i].path] !== files[i].hash) missing.push(files[i].path)
-    }
-    return missing
+    return manifestFiles(manifest).filter(file => file.priority === 1 && record.files[file.path] !== file.hash).map(file => file.path)
 }
 
 function reportMissing (record) {
-    if (!record.missing || !record.missing.length) return Promise.resolve()
     if (!self.clients || typeof self.clients.matchAll !== 'function') return Promise.resolve()
     const reasons = {}
     for (const pathname of record.missing) {
         if (record.reasons && record.reasons[pathname]) reasons[pathname] = record.reasons[pathname]
     }
     const message = {
-        type: 'CACHE_MISSING',
+        type: record.missing.length ? 'CACHE_MISSING' : 'CACHE_DONE',
+        offlineComplete: record.missing.length === 0,
+        missing: record.missing,
         count: record.missing.length,
         paths: record.missing,
         reasons: reasons,
@@ -646,29 +722,24 @@ async function fetchManifest (signal) {
     try {
         const response = await fetch(manifestUrl, { cache: 'no-store', signal: controller.signal })
         if (!response.ok) throw new Error('manifest ' + response.status)
-        return await response.json()
+        const manifest = await response.json()
+        if (!validManifest(manifest)) throw new Error('invalid manifest')
+        return manifest
     } finally {
         clearTimeout(timer)
         if (signal) signal.removeEventListener('abort', onAbort)
     }
 }
 
-function pickSource (others) {
-    for (let i = 0; i < others.length; i++) {
-        if (others[i].record) return others[i]
-    }
-    return null
-}
-
-async function collectOthers (targetName, hashes) {
-    const names = await ownCacheNames()
+async function collectOthers (targetName) {
     const others = []
-    for (const name of names) {
+    for (const name of await ownCacheNames()) {
         if (name === targetName) continue
         const cache = await caches.open(name)
+        const snapshot = await readSnapshot(cache)
+        if (!validManifest(snapshot)) continue
         const record = await readRecord(cache)
-        if (record && (!record.files || typeof record.files !== 'object' || Array.isArray(record.files))) record.files = {}
-        others.push({ cache: cache, record: record, allow: allowOf(record, hashes) })
+        if (record && record.files) others.push({ cache: cache, record: record })
     }
     return others
 }
@@ -684,57 +755,55 @@ async function run () {
     if (backgroundPaused()) return
     await ensureState()
     if (backgroundPaused()) return
-
     const controller = new AbortController()
     runAbort = controller
     try {
-        if (controller.signal.aborted || backgroundPaused()) return
-        let manifest = null
-        try {
-            manifest = await fetchManifest(controller.signal)
-        } catch {
-            return
-        }
-        if (backgroundPaused()) return
-
-        const hashes = pathHashOf(manifest)
-        stateGeneration++
-        pathHash = hashes
+        let manifest
+        try { manifest = await fetchManifest(controller.signal) } catch { return }
+        if (manifest.schemaVersion !== 2 || backgroundPaused()) return
         const targetName = cachePrefix + manifest.version + ':' + manifest.hash
         const target = await caches.open(targetName)
-        currentCache = target
-        const record = (await readRecord(target)) || { stage: 'critical', files: {}, misses: {}, reasons: {} }
-        if (!record.files) record.files = {}
-        if (!record.misses) record.misses = {}
-        if (!record.reasons) record.reasons = {}
-        const others = await collectOthers(targetName, hashes)
-        serving = [{ cache: target, allow: null }].concat(others)
-
-        if (manifestCovers(record, manifest)) {
-            serving = [{ cache: target, allow: null }]
-            await pruneOthers(targetName)
-            return
+        const sources = await collectOthers(targetName)
+        let ctx = currentContext
+        if (!ctx || ctx.manifest.hash !== manifest.hash || ctx.manifest.version !== manifest.version) {
+            const record = await readRecord(target)
+            ctx = contextOf(target, manifest, record)
+            if (!record && sources.length) {
+                const source = sources[sources.length - 1].record
+                ctx.record.visits = { ...source.visits }
+                ctx.record.clients = { ...source.clients }
+                ctx.record.roundId = source.roundId || 'initial'
+                ctx.record.misses = { ...source.misses }
+                ctx.record.reasons = { ...source.reasons }
+            }
         }
-
-        const ctx = {
-            cache: target,
-            record: record,
-            source: pickSource(others),
-            repair: record.stage === 'done',
-        }
-        if (!await copyGroup(ctx, manifest.files || [])) return
-        const groups = splitStages(manifest.files || [])
-        const index = ctx.repair ? 0 : Math.max(0, stages.indexOf(record.stage))
-        if (!await runGroups(ctx, groups, index)) return
-
-        await target.put(manifestUrl, new Response(JSON.stringify(manifest), {
-            headers: { 'content-type': 'application/json' }
-        }))
-        record.stage = 'done'
-        record.missing = missingOf(record, manifest)
-        await saveRecord(target, record)
-        await reportMissing(record)
-        serving = [{ cache: target, allow: null }]
+        const visit = pendingVisit
+        pendingVisit = null
+        activeContext = ctx
+        await serial(async function () {
+            if (visit && !ctx.record.visits[visit]) {
+                if (transfers.size === 0) {
+                    ctx.record.roundId = visit
+                    ctx.record.misses = {}
+                }
+                ctx.record.visits[visit] = ctx.record.roundId
+            }
+            for (const joined of joiningVisits) ctx.record.visits[joined] = ctx.record.roundId
+            joiningVisits.clear()
+            ctx.record.stage = 'precache'
+            await saveRecord(target, ctx.record)
+            try {
+                await target.put(manifestUrl, new Response(JSON.stringify(manifest), { headers: { 'content-type': 'application/json' } }))
+            } catch {   }
+        })
+        stateGeneration++
+        pathHash = pathHashOf(manifest)
+        currentContext = ctx
+        if (!await runFiles(ctx, sources) || backgroundPaused()) return
+        ctx.record.stage = 'done'
+        ctx.record.missing = missingOf(ctx.record, manifest)
+        if (!await saveRecord(target, ctx.record)) return
+        await reportMissing(ctx.record)
         await pruneOthers(targetName)
     } finally {
         if (runAbort === controller) runAbort = null
@@ -765,17 +834,34 @@ function start () {
     resumeRequested = false
     runPromise = run().finally(function () {
         runPromise = null
+        activeContext = null
         if (resumeRequested && !backgroundPaused()) start()
     })
     return runPromise
 }
 
-async function handleNavigation (request) {
-    const pathname = new URL(request.url).pathname
+async function registerNavigation (clientId) {
     await ensureState()
+    const ctx = currentContext
+    if (!ctx || !clientId) return
+    await serial(async function () {
+        if (ctx.record.clients[clientId]) return
+        if (!activeContext) {
+            ctx.record.roundId = 'navigation:' + clientId
+            ctx.record.misses = {}
+        }
+        ctx.record.clients[clientId] = ctx.record.roundId
+        ctx.record.visits['navigation:' + clientId] = ctx.record.roundId
+        await saveRecord(ctx.cache, ctx.record)
+    })
+}
+
+async function handleNavigation (request, clientId) {
+    await registerNavigation(clientId)
+    const pathname = new URL(request.url).pathname
     const key = serveKey(pathname)
     if (!key) return { response: networkOrFail(request), write: null }
-    return serve(key, request.signal)
+    return serve(key, request)
 }
 
 async function networkOrFail (request) {
@@ -927,6 +1013,28 @@ async function handleMessage (event) {
         hiddenClients.delete(id)
         visibleClients.add(id)
     }
+    if (data.reason !== 'backup' && data.visitId) {
+        const visit = String(data.visitId)
+        const navigationContext = currentContext
+        if (navigationContext && navigationContext.record.clients[id] && !navigationContext.record.visits[visit]) {
+            await serial(async function () {
+                navigationContext.record.visits[visit] = navigationContext.record.clients[id]
+                await saveRecord(navigationContext.cache, navigationContext.record)
+            })
+            return start()
+        }
+        joiningVisits.add(visit)
+        if (runPromise) {
+            const ctx = activeContext
+            if (ctx) await serial(async function () {
+                ctx.record.visits[visit] = ctx.record.roundId
+                joiningVisits.delete(visit)
+                await saveRecord(ctx.cache, ctx.record)
+            })
+            return runPromise
+        }
+        pendingVisit = visit
+    }
     return start()
 }
 
@@ -936,8 +1044,6 @@ function attach (event, result) {
 }
 
 function isCacheableRequest (request) {
-    if (request.headers.get('range')) return false
-    if (request.destination === 'video' || request.destination === 'audio') return false
     const mode = request.mode
     return mode === 'navigate' || mode === 'same-origin' || mode === 'cors' || mode === 'no-cors'
 }
@@ -953,19 +1059,19 @@ self.addEventListener('fetch', function (event) {
     if (!isCacheableRequest(event.request)) return
     const url = new URL(event.request.url)
     if (url.origin !== scopeUrl.origin) return
-    if (scopePath !== '/' && url.pathname.indexOf(scopePath) !== 0) return
+    if (scopePath !== '/' && pathKey(url.pathname).indexOf(scopePath) !== 0) return
 
     event.waitUntil(pruneClosedPauses().catch(function () {}))
 
-    if (!pathHash) {
-        if (event.request.mode !== 'navigate') return
-        attach(event, handleNavigation(event.request))
+    if (event.request.mode === 'navigate') {
+        attach(event, handleNavigation(event.request, event.resultingClientId || event.clientId))
         return
     }
-
-    const key = serveKey(url.pathname)
-    if (!key) return
-    attach(event, serve(key, event.request.signal))
+    attach(event, ensureState().then(function () {
+        const key = serveKey(url.pathname)
+        if (!key) return { response: fetch(event.request), write: null }
+        return serve(key, event.request)
+    }))
 })
 
 self.addEventListener('message', function (event) {

@@ -141,7 +141,7 @@ export async function loadParadigmProfile(language, meta = null) {
 
     let profile = null
     try {
-        profile = await import(/* @vite-ignore */ langUrl(language, meta.files.paradigm).href)
+        profile = await import(langUrl(language, meta.files.paradigm).href)
     } catch {
     }
     profiles.set(language, profile)
@@ -155,7 +155,7 @@ export async function loadScriptProfile(language, meta = null) {
 
     let profile = null
     try {
-        profile = await import(/* @vite-ignore */ langUrl(language, meta.files.script).href)
+        profile = await import(langUrl(language, meta.files.script).href)
     } catch {
     }
     scriptProfiles.set(language, profile)
@@ -255,12 +255,12 @@ export async function verifyGrammarFiles({ onProgress = null, codes = GRAMMAR_FI
 
             let profile = null
             if (meta.files?.paradigm) {
-                profile = await import(/* @vite-ignore */ langUrl(code, meta.files.paradigm).href).catch(() => null)
+                profile = await import(langUrl(code, meta.files.paradigm).href).catch(() => null)
                 if (!profile) item.structure.errors.push(`语言档案 ${meta.files.paradigm} 加载失败`)
             }
             let script = null
             if (meta.files?.script) {
-                script = await import(/* @vite-ignore */ langUrl(code, meta.files.script).href).catch(() => null)
+                script = await import(langUrl(code, meta.files.script).href).catch(() => null)
                 if (!script) item.structure.errors.push(`文字档案 ${meta.files.script} 加载失败`)
             }
             try {

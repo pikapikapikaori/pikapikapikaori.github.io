@@ -1,335 +1,222 @@
 #!/bin/bash
 
-# 生成并校验各项目 assets/resources/meta/file-cache.json。
-# 用法：bash script/shell/file-cache.sh [--check]
-
 docs_base=docs
+version_global=4.8.0
+projects=(root homepage indexpage grammar bangumi_takeout)
+dir_root=''
+dir_homepage=pages/homepage
+dir_indexpage=pages/indexpage
+dir_grammar=apps/grammar
+dir_bangumi_takeout=apps/bangumi-takeout
+version_grammar=1.0.0
+version_bangumi_takeout=1.1.0
+
+exclude_paths_builtin=(node_modules Thumbs.db desktop.ini sw.js assets/resources/meta/file-cache.json)
+
+p1_exts=(html js mjs css md json woff woff2 ttf otf eot cmo3 moc3 can3)
+p2_exts=(svg png jpg jpeg gif webp avif ico bmp apng tif tiff heic heif jxl mp4 webm ogv ogg mov m4v avi mkv mpg mpeg m2ts 3gp zip csv)
+
+# 可选 exclude_paths_global、exclude_exts_global 及对应项目后缀数组缺省为空。
+# 路径排除按完整路径片段匹配；项目规则相对该项目根目录。
+# batch_paths_1、batch_paths_2、batch_paths_3 为相对 docs 的精确文件路径。
+
 check_mode=0
-if [ "${1:-}" = '--check' ]; then
-    check_mode=1
+case "${1:-}" in
+    '') ;;
+    --check) check_mode=1 ;;
+    *) echo '用法：bash script/shell/file-cache.sh [--check]' >&2; exit 1 ;;
+esac
+if [ "$#" -gt 1 ]; then exit 1; fi
+
+export LC_ALL=C
+created_build_lib=0
+if [ ! -d build-lib ]; then
+    mkdir -p build-lib || exit 1
+    created_build_lib=1
 fi
+cleanup() {
+    if [ -n "${work_dir:-}" ]; then rm -rf "$work_dir"; fi
+    if [ "$created_build_lib" -eq 1 ]; then rmdir build-lib 2>/dev/null || :; fi
+}
+trap cleanup EXIT
+work_dir=$(mktemp -d build-lib/file-cache.XXXXXX) || exit 1
+trap 'exit 1' HUP INT TERM
 failed=0
 
-allowed_exts=(html js mjs css md json svg png jpg jpeg gif webp avif ico woff woff2 ttf otf eot mp4 zip cmo3 moc3 can3)
-
-# 匹配规则对每个项目都生效 整段相等 或以 / 分隔的前缀 后缀 或出现在中间都算命中
-exclude_paths_global=(
-    node_modules
-    package-lock.json
-    db.json
-    sw.js
-    assets/resources/meta/file-cache.json
-)
-
-projects=(root homepage indexpage grammar bangumi_takeout)
-
-id_root=root
-version_root=4.7.5
-dir_root=''
-include_root=(index.html 404 About.md Beginning.md Photograph.md Sites.md _coverpage.md _footer.md _navbar.md _sidebar.md README.md assets apps pages writings archive jp en-us _media)
-exclude_paths_root=(writings/_media/PersonalRecordsBackup archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-backend-master.zip archive/ITtech/_media/SoftwareInsights-20230428/virtualPetHospital-frontend-main.zip)
-exclude_exts_root=()
-
-id_homepage=homepage
-version_homepage=4.7.5
-dir_homepage=pages/homepage
-include_homepage=(index.html assets)
-exclude_paths_homepage=()
-exclude_exts_homepage=()
-
-id_indexpage=indexpage
-version_indexpage=4.7.5
-dir_indexpage=pages/indexpage
-include_indexpage=(index.html assets data)
-exclude_paths_indexpage=()
-exclude_exts_indexpage=()
-
-id_grammar=grammar
-version_grammar=1.0.0
-dir_grammar=apps/grammar
-include_grammar=(index.html assets data)
-exclude_paths_grammar=()
-exclude_exts_grammar=()
-
-id_bangumi_takeout=bangumi-takeout
-version_bangumi_takeout=1.1.0
-dir_bangumi_takeout=apps/bangumi-takeout
-include_bangumi_takeout=(index.html assets data)
-exclude_paths_bangumi_takeout=()
-exclude_exts_bangumi_takeout=()
-
-tmp_all="$(mktemp)"
-tmp_list="$(mktemp)"
-tmp_body="$(mktemp)"
-tmp_manifest="$(mktemp)"
-tmp_combined="$(mktemp)"
-trap 'rm -f "$tmp_all" "$tmp_list" "$tmp_body" "$tmp_manifest" "$tmp_combined"' EXIT
-
-normalize() {
-    local p="$1"
-    while [ "${p%/}" != "$p" ]; do p="${p%/}"; done
-    while [ "${p#./}" != "$p" ]; do p="${p#./}"; done
-    printf '%s' "$p"
-}
-
 json_escape() {
-    local s="$1"
-    s="${s//\\/\\\\}"
-    s="${s//\"/\\\"}"
-    printf '%s' "$s"
+    local s="$1" ch code i
+    for ((i=0; i<${#s}; i++)); do
+        ch="${s:i:1}"
+        case "$ch" in
+            '\') printf '\\\\' ;;
+            '"') printf '\\"' ;;
+            *)
+                printf -v code '%d' "'$ch"
+                if [ "$code" -ge 0 ] && [ "$code" -lt 32 ]; then
+                    printf '\\u%04x' "$code"
+                else
+                    printf '%s' "$ch"
+                fi
+                ;;
+        esac
+    done
 }
 
 is_fragment() {
-    local rel="$1"
-    local frag="$2"
-    if [ "$rel" = "$frag" ]; then
-        return 0
-    fi
-    case "$rel" in
-        "$frag"/*|*/"$frag"|*/"$frag"/*) return 0 ;;
+    case "$1" in
+        "$2"|"$2"/*|*/"$2"|*/"$2"/*) return 0 ;;
     esac
     return 1
 }
 
 is_ext_match() {
-    local name="$1"
+    local name="$1" ext item
     shift
-    if [ "$#" -eq 0 ]; then
-        return 1
-    fi
-    case "$name" in
-        *.*) ;;
-        *) return 1 ;;
-    esac
-    local ext="${name##*.}"
-    local item
+    case "$name" in *.*) ext="${name##*.}" ;; *) return 1 ;; esac
     shopt -s nocasematch
     for item in "$@"; do
-        if [[ "$ext" == "$item" ]]; then
-            shopt -u nocasematch
-            return 0
-        fi
+        if [[ "$ext" == "$item" ]]; then shopt -u nocasematch; return 0; fi
     done
     shopt -u nocasematch
     return 1
 }
 
-is_allowed_name() {
-    local name="$1"
-    case "$name" in
-        .*) return 1 ;;
-        *.*) ;;
-        *) return 0 ;;
-    esac
-    is_ext_match "$name" "${allowed_exts[@]}"
-}
-
 hash16() {
     local sum
-    if ! sum="$(shasum -a 256 "$1")"; then
-        return 1
-    fi
-    sum="${sum%% *}"
-    if [ -z "$sum" ]; then
-        return 1
+    # 从 stdin 读取，避免特殊文件名改变 shasum 的输出格式。
+    if command -v shasum >/dev/null 2>&1; then
+        sum=$(shasum -a 256 < "$1") || return 1
+    else
+        sum=$(sha256sum < "$1") || return 1
     fi
     printf '%s' "${sum:0:16}"
 }
 
 load_project() {
-    case "$1" in
-    root)
-        id_name="$id_root"
-        version="$version_root"
-        dir="$dir_root"
-        include=("${include_root[@]}")
-        exclude_paths=("${exclude_paths_root[@]}")
-        exclude_exts=("${exclude_exts_root[@]}")
-        ;;
-    homepage)
-        id_name="$id_homepage"
-        version="$version_homepage"
-        dir="$dir_homepage"
-        include=("${include_homepage[@]}")
-        exclude_paths=("${exclude_paths_homepage[@]}")
-        exclude_exts=("${exclude_exts_homepage[@]}")
-        ;;
-    indexpage)
-        id_name="$id_indexpage"
-        version="$version_indexpage"
-        dir="$dir_indexpage"
-        include=("${include_indexpage[@]}")
-        exclude_paths=("${exclude_paths_indexpage[@]}")
-        exclude_exts=("${exclude_exts_indexpage[@]}")
-        ;;
-    grammar)
-        id_name="$id_grammar"
-        version="$version_grammar"
-        dir="$dir_grammar"
-        include=("${include_grammar[@]}")
-        exclude_paths=("${exclude_paths_grammar[@]}")
-        exclude_exts=("${exclude_exts_grammar[@]}")
-        ;;
-    bangumi_takeout)
-        id_name="$id_bangumi_takeout"
-        version="$version_bangumi_takeout"
-        dir="$dir_bangumi_takeout"
-        include=("${include_bangumi_takeout[@]}")
-        exclude_paths=("${exclude_paths_bangumi_takeout[@]}")
-        exclude_exts=("${exclude_exts_bangumi_takeout[@]}")
-        ;;
-    *)
-        return 1
-        ;;
-    esac
+    local project="$1"
+    dir=''
+    version="$version_global"
+    exclude_paths=()
+    exclude_exts=()
+    eval 'dir=${dir_'"$project"'-}'
+    eval 'version=${version_'"$project"'-"$version_global"}'
+    eval 'exclude_paths=("${exclude_paths_'"$project"'[@]}")'
+    eval 'exclude_exts=("${exclude_exts_'"$project"'[@]}")'
+    base="$docs_base${dir:+/$dir}"
 }
 
-for id in "${projects[@]}"; do
-    if ! load_project "$id"; then
-        echo "[$id] 未配置的清单项目"
-        failed=1
-        continue
-    fi
-
-    if [ -n "$dir" ]; then
-        base="$docs_base/$dir"
-    else
-        base="$docs_base"
-    fi
-    manifest_path="$base/assets/resources/meta/file-cache.json"
-
-    : > "$tmp_all"
-    missing=0
-    for inc in "${include[@]}"; do
-        p="$(normalize "$inc")"
-        abs="$base/$p"
-        if [ ! -e "$abs" ]; then
-            echo "[$id_name] 缺少 $p"
-            missing=1
-            break
-        fi
-        if [ -d "$abs" ]; then
-            if ! find "$abs" -type f -print0 >> "$tmp_all"; then
-                echo "[$id_name] 遍历失败 $abs"
-                missing=1
-                break
-            fi
-        else
-            printf '%s\0' "$abs" >> "$tmp_all"
-        fi
+is_excluded() {
+    local rel="$1" frag
+    case "/$rel" in */.*) return 0 ;; esac
+    for frag in "${exclude_paths_builtin[@]}" "${exclude_paths_global[@]}" "${exclude_paths[@]}"; do
+        if [ -n "$frag" ] && is_fragment "$rel" "$frag"; then return 0; fi
     done
-    if [ "$missing" -ne 0 ]; then
-        failed=1
-        continue
-    fi
+    is_ext_match "${rel##*/}" "${exclude_exts_global[@]}" "${exclude_exts[@]}"
+}
 
-    : > "$tmp_list"
-    while IFS= read -r -d '' abs; do
-        rel="${abs#"$base"/}"
-        name="${rel##*/}"
-        if ! is_allowed_name "$name"; then
-            continue
-        fi
-        skip=0
-        for frag in "${exclude_paths_global[@]}"; do
-            if is_fragment "$rel" "$frag"; then
-                skip=1
-                break
-            fi
+for priority in 1 2 3; do
+    eval 'rules=("${batch_paths_'"$priority"'[@]}")'
+    for rule in "${rules[@]}"; do
+        case "$rule" in
+            ''|/*|./*|../*|*/../*|*/..|*/./*|*/.|*//*|*/) echo "无效批次路径 $rule" >&2; exit 1 ;;
+        esac
+        if [ ! -f "$docs_base/$rule" ]; then echo "批次路径不存在或非文件 $rule" >&2; exit 1; fi
+        for other in 1 2 3; do
+            if [ "$other" = "$priority" ]; then continue; fi
+            eval 'others=("${batch_paths_'"$other"'[@]}")'
+            for candidate in "${others[@]}"; do
+                if [ "$candidate" = "$rule" ]; then echo "批次规则冲突 $rule" >&2; exit 1; fi
+            done
         done
-        if [ "$skip" -ne 0 ]; then
-            continue
-        fi
-        for frag in "${exclude_paths[@]}"; do
-            if is_fragment "$rel" "$frag"; then
-                skip=1
-                break
+        for project in "${projects[@]}"; do
+            load_project "$project"
+            if [ -n "$dir" ]; then
+                case "$rule" in "$dir"/*) rel="${rule#"$dir"/}" ;; *) continue ;; esac
+            else
+                rel="$rule"
             fi
+            if is_excluded "$rel"; then echo "批次路径已排除 [$project] $rule" >&2; exit 1; fi
         done
-        if [ "$skip" -ne 0 ]; then
-            continue
-        fi
-        if is_ext_match "$name" "${exclude_exts[@]}"; then
-            continue
-        fi
-        printf '%s\0' "$rel" >> "$tmp_list"
-    done < "$tmp_all"
-
-    LC_ALL=C sort -z -u "$tmp_list" -o "$tmp_list"
-
-    : > "$tmp_body"
-    : > "$tmp_combined"
-    count=0
-    first=1
-    hash_failed=0
-    while IFS= read -r -d '' rel; do
-        abs="$base/$rel"
-        if ! h="$(hash16 "$abs")"; then
-            echo "[$id_name] 读取失败 $abs"
-            hash_failed=1
-            break
-        fi
-        if [ "$first" -eq 1 ]; then
-            first=0
-        else
-            printf ',\n' >> "$tmp_body"
-        fi
-        esc="$(json_escape "$rel")"
-        printf '        {\n' >> "$tmp_body"
-        printf '            "path": "%s",\n' "$esc" >> "$tmp_body"
-        printf '            "hash": "%s"\n' "$h" >> "$tmp_body"
-        printf '        }' >> "$tmp_body"
-        printf '%s:%s' "$rel" "$h" >> "$tmp_combined"
-        count=$((count + 1))
-    done < "$tmp_list"
-
-    if [ "$hash_failed" -ne 0 ]; then
-        failed=1
-        continue
-    fi
-
-    if ! total="$(shasum -a 256 "$tmp_combined" | cut -c1-16)" || [ -z "$total" ]; then
-        echo "[$id_name] 计算总 hash 失败"
-        failed=1
-        continue
-    fi
-
-    {
-        printf '{\n'
-        printf '    "version": "%s",\n' "$version"
-        printf '    "hash": "%s",\n' "$total"
-        printf '    "files": [\n'
-        cat "$tmp_body"
-        if [ "$count" -gt 0 ]; then
-            printf '\n'
-        fi
-        printf '    ]\n}\n'
-    } > "$tmp_manifest"
-
-    if [ "$count" -eq 0 ]; then
-        echo "[$id_name] 清单为空 已跳过"
-        failed=1
-        continue
-    fi
-
-    if [ "$check_mode" -eq 1 ]; then
-        if [ -f "$manifest_path" ] && cmp -s "$tmp_manifest" "$manifest_path"; then
-            echo "[$id_name] 已是最新"
-        else
-            echo "[$id_name] 需要更新"
-            failed=1
-        fi
-    else
-        if ! cp "$tmp_manifest" "$manifest_path"; then
-            echo "[$id_name] 写入失败 $manifest_path"
-            failed=1
-            continue
-        fi
-        echo "[$id_name] $count 个文件 hash $total"
-    fi
+    done
 done
 
-if [ "$failed" -ne 0 ]; then
-    exit 1
-fi
-exit 0
+for project in "${projects[@]}"; do
+    load_project "$project"
+    if ! find "$base" -type f -print0 > "$work_dir/all"; then failed=1; break; fi
+    : > "$work_dir/list"
+    while IFS= read -r -d '' abs; do
+        rel="${abs#"$base"/}"
+        if ! is_excluded "$rel"; then printf '%s\0' "$rel" >> "$work_dir/list"; fi
+    done < "$work_dir/all"
+    if ! sort -z -u "$work_dir/list" -o "$work_dir/list"; then failed=1; break; fi
+    for priority in 1 2 3; do : > "$work_dir/batch-$priority"; done
+    count=0
+    while IFS= read -r -d '' rel; do
+        name="${rel##*/}"
+        case "$name" in
+            *.*)
+                if is_ext_match "$name" "${p1_exts[@]}"; then priority=1
+                elif is_ext_match "$name" "${p2_exts[@]}"; then priority=2
+                else priority=3
+                fi ;;
+            *) priority=1 ;;
+        esac
+        docs_rel="${dir:+$dir/}$rel"
+        for override in 1 2 3; do
+            eval 'rules=("${batch_paths_'"$override"'[@]}")'
+            for rule in "${rules[@]}"; do
+                if [ "$rule" = "$docs_rel" ]; then priority="$override"; fi
+            done
+        done
+        abs="$base/$rel"
+        if ! h=$(hash16 "$abs") || ! size=$(wc -c < "$abs"); then failed=1; break; fi
+        size="${size//[[:space:]]/}"
+        if [ -s "$work_dir/batch-$priority" ]; then printf ',\n' >> "$work_dir/batch-$priority"; fi
+        {
+            printf '                {"path": "'
+            json_escape "$rel"
+            printf '", "hash": "%s", "size": %s}' "$h" "$size"
+        } >> "$work_dir/batch-$priority"
+        count=$((count + 1))
+    done < "$work_dir/list"
+    if [ "$failed" -ne 0 ]; then break; fi
+    # 总 hash 取此确定 JSON 的字节，包含 schemaVersion、策略及排序后的文件项。
+    {
+        printf '{\n    "schemaVersion": 2,\n    "batches": [\n'
+        for priority in 1 2 3; do
+            case "$priority" in 1) mode=precache ;; 2) mode=on-demand ;; 3) mode=network-only ;; esac
+            printf '        {\n            "priority": %s,\n            "mode": "%s",\n            "files": [\n' "$priority" "$mode"
+            cat "$work_dir/batch-$priority"
+            if [ -s "$work_dir/batch-$priority" ]; then printf '\n'; fi
+            printf '            ]\n        }'
+            if [ "$priority" -lt 3 ]; then printf ','; fi
+            printf '\n'
+        done
+        printf '    ]\n}\n'
+    } > "$work_dir/policy"
+    if ! total=$(hash16 "$work_dir/policy"); then failed=1; break; fi
+    {
+        printf '{\n    "version": "'
+        json_escape "$version"
+        printf '",\n    "hash": "%s",\n' "$total"
+        tail -n +2 "$work_dir/policy"
+    } > "$work_dir/$project.json"
+    echo "[$project] $count 个文件 hash $total"
+done
+
+if [ "$failed" -ne 0 ]; then echo '清单生成失败' >&2; exit 1; fi
+for project in "${projects[@]}"; do
+    load_project "$project"
+    manifest_path="$base/assets/resources/meta/file-cache.json"
+    if [ "$check_mode" -eq 1 ]; then
+        if cmp -s "$work_dir/$project.json" "$manifest_path"; then
+            echo "[$project] 已是最新"
+        else
+            echo "[$project] 需要更新"
+            failed=1
+        fi
+    elif ! cp "$work_dir/$project.json" "$manifest_path"; then
+        failed=1
+    fi
+done
+exit "$failed"

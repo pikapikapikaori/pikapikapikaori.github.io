@@ -3,6 +3,9 @@ export function connect (options) {
 
     const swUrl = options.swUrl
     const project = options.project
+    const visitId = window.crypto && typeof window.crypto.randomUUID === 'function'
+        ? window.crypto.randomUUID()
+        : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)
     let registration = null
     let started = false
     let ticket = 0
@@ -46,7 +49,7 @@ export function connect (options) {
             }
             whenActivated(worker, function (ready) {
                 if (current !== ticket) return
-                ready.postMessage(project ? { type: 'START', project: project } : { type: 'START' })
+                ready.postMessage(project ? { type: 'START', project: project, visitId: visitId } : { type: 'START', visitId: visitId })
             })
         })
     }
@@ -76,7 +79,7 @@ export function connect (options) {
     window.addEventListener('pagehide', function () {
         ticket++
         started = false
-        const worker = navigator.serviceWorker.controller
-        if (worker) worker.postMessage({ type: 'PAUSE', reason: 'hidden' })
+        const worker = target()
+        if (worker) worker.postMessage({ type: 'PAUSE', reason: 'hidden', visitId: visitId })
     })
 }

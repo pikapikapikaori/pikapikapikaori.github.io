@@ -17,7 +17,7 @@ export function loadIme(code) {
 
         let config = null
         try {
-            const mod = await import(/* @vite-ignore */ new URL(`${encodeURIComponent(code)}/${path}`, LANGS_BASE).href)
+            const mod = await import(new URL(`${encodeURIComponent(code)}/${path}`, LANGS_BASE).href)
             config = mod.default || mod
         } catch {
             return null

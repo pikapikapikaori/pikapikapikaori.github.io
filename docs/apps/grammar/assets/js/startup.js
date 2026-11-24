@@ -49,6 +49,9 @@
     }
 
     const swUrl = './sw.js'
+    const visitId = window.crypto && typeof window.crypto.randomUUID === 'function'
+        ? window.crypto.randomUUID()
+        : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)
     let registration = null
     let started = false
     let ticket = 0
@@ -91,7 +94,7 @@
             }
             whenActivated(worker, function (ready) {
                 if (current !== ticket) return
-                ready.postMessage({ type: 'START' })
+                ready.postMessage({ type: 'START', visitId: visitId })
             })
         })
     }
@@ -120,7 +123,7 @@
     window.addEventListener('pagehide', function () {
         ticket++
         started = false
-        const worker = navigator.serviceWorker.controller
-        if (worker) worker.postMessage({ type: 'PAUSE', reason: 'hidden' })
+        const worker = target()
+        if (worker) worker.postMessage({ type: 'PAUSE', reason: 'hidden', visitId: visitId })
     })
 })()

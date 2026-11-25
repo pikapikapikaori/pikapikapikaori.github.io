@@ -272,6 +272,10 @@
     --global-surface-hollow-text-hover: var(--global-surface-hollow-border-hover);
     --global-surface-hollow-text-active: var(--global-surface-hollow-border-active);
     --global-surface-hollow-text-press: var(--global-surface-hollow-border-press);
+    --global-surface-hollow-opacity-disabled: var(--global-opacity-weak);
+    --global-surface-hollow-disabled: transparent;
+    --global-surface-hollow-border-disabled: var(--global-theme-color-normal);
+    --global-surface-hollow-text-disabled: var(--global-theme-color-normal);
 
     --global-surface-solid-rest: var(--global-accent-level-2);
     --global-surface-solid-hover: var(--global-theme-color-light-extra-strong);

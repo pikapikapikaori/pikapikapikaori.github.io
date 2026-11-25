@@ -12,8 +12,18 @@ import {
     getElById,
     getElByClass,
     getData,
-    setData
+    setData,
+    setAttrs,
+    setStyleProperty
 } from '../utils/dom.js'
+
+const imageIds = {
+    viewer: 'view-full-image-span',
+    left: 'view-full-image-span-inner-left-div',
+    right: 'view-full-image-span-inner-right-div',
+    image: 'view-full-image-span-inner-img-div',
+    counter: 'view-full-image-span-inner-text-div',
+}
 
 let viewFullImageOptions = {
     enable: false
@@ -29,10 +39,11 @@ function isIgnoredImage(img) {
         img.src.includes('avatars.githubusercontent')
 }
 
-function plugin(hook, vm) {
+function plugin(hook) {
     if (!viewFullImageOptions.enable) return
 
     let curImg = undefined
+    let updateNavigation = null
 
     const tarImageTop = '10%'
     const tarImageLeft = '10%'
@@ -315,23 +326,23 @@ function plugin(hook, vm) {
     hook.mounted(function () {
         const viewFullImageSpan = createEl('span')
 
-        viewFullImageSpan.id = 'view-full-image-span'
+        setAttrs(viewFullImageSpan, {id: imageIds.viewer})
 
-        const viewFullImageSpanInnerLeftDiv = createEl('div')
-        const viewFullImageSpanInnerRightDiv = createEl('div')
+        const viewFullImageSpanInnerLeftDiv = createEl('button', { attrs: { type: 'button' } })
+        const viewFullImageSpanInnerRightDiv = createEl('button', { attrs: { type: 'button' } })
 
-        viewFullImageSpanInnerLeftDiv.id = 'view-full-image-span-inner-left-div'
-        viewFullImageSpanInnerRightDiv.id = 'view-full-image-span-inner-right-div'
+        setAttrs(viewFullImageSpanInnerLeftDiv, {id: imageIds.left})
+        setAttrs(viewFullImageSpanInnerRightDiv, {id: imageIds.right})
         viewFullImageSpanInnerLeftDiv.innerHTML = arrow.prev
         viewFullImageSpanInnerRightDiv.innerHTML = arrow.next
 
         const viewFullImageSpanInnerImgDiv = createEl('div')
 
-        viewFullImageSpanInnerImgDiv.id = 'view-full-image-span-inner-img-div'
+        setAttrs(viewFullImageSpanInnerImgDiv, {id: imageIds.image})
 
         const viewFullImageSpanInnerTextDiv = createEl('div')
 
-        viewFullImageSpanInnerTextDiv.id = 'view-full-image-span-inner-text-div'
+        setAttrs(viewFullImageSpanInnerTextDiv, {id: imageIds.counter})
 
         viewFullImageSpan.appendChild(viewFullImageSpanInnerLeftDiv)
         viewFullImageSpan.appendChild(viewFullImageSpanInnerRightDiv)
@@ -345,31 +356,32 @@ function plugin(hook, vm) {
         }
 
         function currentImageIndex(imgArray) {
-            const imgEl = getElById('view-full-image-span-inner-img-div')
-
-            for (let i = 0; i < imgArray.length; i++) {
-                if (imgEl.style.backgroundImage.indexOf(imgArray[i].src) > -1) return i
-            }
-
-            return -1
+            return imgArray.indexOf(curImg)
         }
+
+        updateNavigation = function (imgArray, index) {
+            viewFullImageSpanInnerLeftDiv.disabled = index <= 0
+            viewFullImageSpanInnerRightDiv.disabled = index < 0 || index >= imgArray.length - 1
+        }
+        updateNavigation([], -1)
 
         function updateCounter(textEl, index, count) {
             textEl.innerHTML = (index + 1).toString() + ' / ' + count.toString()
         }
 
         function showImage(imgArray, index, direction) {
-            const imgEl = getElById('view-full-image-span-inner-img-div')
-            const textEl = getElById('view-full-image-span-inner-text-div')
+            const imgEl = getElById(imageIds.image)
+            const textEl = getElById(imageIds.counter)
 
             const oldBackground = imgEl.style.backgroundImage
             const newBackground = 'url(' + imgArray[index].src + ')'
 
-            imgEl.style.backgroundImage = newBackground
+            setStyleProperty(imgEl, 'background-image', newBackground)
             curImg = imgArray[index]
 
             createImageSwitchKeyframe(imgEl, direction, oldBackground, newBackground)
             updateCounter(textEl, index, imgArray.length)
+            updateNavigation(imgArray, index)
         }
 
         let closeTimer = null
@@ -393,9 +405,10 @@ function plugin(hook, vm) {
             clearTimeout(closeTimer)
             closeTimer = null
             curImg = undefined
-            viewFullImageSpan.style.display = 'none'
+            updateNavigation([], -1)
+            setStyleProperty(viewFullImageSpan, 'display', 'none')
             viewFullImageSpanInnerImgDiv.getAnimations().forEach(animation => animation.cancel())
-            viewFullImageSpanInnerImgDiv.style.backgroundImage = ''
+            setStyleProperty(viewFullImageSpanInnerImgDiv, 'background-image', '')
             viewFullImageSpanInnerTextDiv.textContent = ''
             unlockScroll(restoreScroll)
         }
@@ -449,20 +462,23 @@ function plugin(hook, vm) {
     })
 
     hook.doneEach(function () {
-        getAllEls('img').filter(img => !isIgnoredImage(img)).forEach((img, index, arr) => {
+        getAllEls('img').filter(img => !isIgnoredImage(img)).forEach(img => {
             if (getData(img, 'viewFullImageBound') === '1') return
             setData(img, 'viewFullImageBound', '1')
 
-            const viewFullImageSpan = getElById('view-full-image-span')
-            const viewFullImageSpanInnerImgDiv = getElById('view-full-image-span-inner-img-div')
-            const viewFullImageSpanInnerTextDiv = getElById('view-full-image-span-inner-text-div')
+            const viewFullImageSpan = getElById(imageIds.viewer)
+            const viewFullImageSpanInnerImgDiv = getElById(imageIds.image)
+            const viewFullImageSpanInnerTextDiv = getElById(imageIds.counter)
 
             onListen(img, 'click', function () {
                 curImg = img
+                const images = getAllEls('img').filter(item => !isIgnoredImage(item))
+                const index = images.indexOf(img)
 
-                viewFullImageSpanInnerImgDiv.style.backgroundImage = 'url(' + img.src + ')'
-                viewFullImageSpan.style.display = 'block'
-                viewFullImageSpanInnerTextDiv.innerHTML = (index + 1).toString() + ' / ' + arr.length.toString()
+                setStyleProperty(viewFullImageSpanInnerImgDiv, 'background-image', 'url(' + img.src + ')')
+                setStyleProperty(viewFullImageSpan, 'display', 'block')
+                viewFullImageSpanInnerTextDiv.textContent = (index + 1).toString() + ' / ' + images.length.toString()
+                updateNavigation(images, index)
 
                 lockScroll()
 

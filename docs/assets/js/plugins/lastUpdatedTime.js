@@ -1,5 +1,6 @@
 import pathNameData from '../config/tocdata.json.js'
-import { protectCodeBlocks, codeBlockModes } from '../utils/common.js'
+import { protectCodeBlocks, codeBlockModes, formatDate } from '../utils/common.js'
+import { calLocalized } from '../utils/localization.js'
 
 let lastUpdatedTimeOptions = {
     enable: false
@@ -12,7 +13,8 @@ function plugin(hook, vm) {
         const pluginIdentifier = 'last_updated_code'
 
         const matched = pathNameData.find(item => item.href === vm.route.path)
-        const updated = (matched && matched.editedTime) ? matched.editedTime : '---'
+        const dateFormat = calLocalized({dateFormat: lastUpdatedTimeOptions.dateFormat}, vm.route.path).dateFormat
+        const updated = matched?.editedTime ? formatDate(matched.editedTime, dateFormat) : '---'
 
         content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.protect)
 

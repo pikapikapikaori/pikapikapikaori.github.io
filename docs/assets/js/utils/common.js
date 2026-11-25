@@ -193,6 +193,20 @@ export function clamp(value, min, max) {
     return Math.min(Math.max(Number(value) || min, min), max)
 }
 
-export function toDate(timeStr) {
-    return new Date(timeStr.replace(/\./g, '-'))
+export function toDate(value) {
+    if (value instanceof Date) return value
+    const [, year, month, day, hour = '0', minute = '0', second = '0', fraction = ''] = value.match(/^(\d{4})[-.](\d{1,2})[-.](\d{1,2})(?:[T ](\d{1,2}):(\d{2})(?::(\d{2})(?:\.(\d+))?)?)?/)
+    // Stored fields are UTC+8 wall time even when a zone suffix is present.
+    return new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour) - 8, Number(minute), Number(second), Number(fraction.padEnd(3, '0').slice(0, 3))))
+}
+
+export function formatDate(value, format = 'YYYY.MM.DD') {
+    if (!value) return ''
+    const date = toDate(value)
+    if (format === 'YYYY-MM-DD' || format === 'YYYY.MM.DD') {
+        const separator = format[4]
+        return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join(separator)
+    }
+
+    return format(date.getMonth() + 1, date.getDate())
 }

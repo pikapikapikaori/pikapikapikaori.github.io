@@ -125,7 +125,7 @@ bash script/blog.sh help
     2. `href` 字段用于 `a` 元素访问该文章。
     3. `baseUrl` 字段用于匹配文章所属的选集。
 3. 【可选】在同目录内的 `_media/` 文件夹内创建对应文件夹，存放资源文件。引用该文件的路径为相对路径（`_media/path/to/directory/path/to/file`）。
-4. 【可选】部署后访问对应界面创建评论区。
+4. 【可选】创建评论区。
 
 ### 编辑文章
 
@@ -137,7 +137,7 @@ bash script/blog.sh help
 2. 修改 `config/tocdata.json.js` 内对应的 `cover`、`href` 与 `baseUrl` 字段。
 3. 修改对应 `_sidebar.md` 内的链接。
 4. 修改其他引用该文章的全部文章中的对应链接。
-5. 修改对应的 Gitalk Issue Tag 的链接。
+5. 将对应评论 JSON 移到新文章路径；若选用 Gitalk，则修改对应 Issue Tag 的链接。
 
 **注意**：不用修改文章内对资源文件的引用链接（`_media/path/to/directory/path/to/file`），因其为相对路径。
 

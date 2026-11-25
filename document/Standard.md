@@ -125,7 +125,7 @@ bash script/blog.sh help
     2. The `href` field is used for the a element to access the article.
     3. The `baseUrl` field is used to match the collection to which the article belongs.
 3. [Optional] In the `_media/` folder in the same directory, create a corresponding folder to store resource files. The path used to reference the file is a relative path (`_media/path/to/directory/path/to/file`).
-4. [Optional] After deployment, visit the corresponding interface to create a comment section.
+4. [Optional] Create a comment section.
 
 ### Editing an Article
 
@@ -137,7 +137,7 @@ Modify the corresponding `editedTime` field in `config/tocdata.json.js`.
 2. Modify the corresponding `cover`, `href`, and `baseUrl` fields in `config/tocdata.json.js`.
 3. Modify the link in the corresponding `_sidebar.md`.
 4. Modify the corresponding links in all other articles that reference this article.
-5. Modify the link of the corresponding Gitalk Issue Tag.
+5. Move the corresponding comment JSON to the new article path. If Gitalk is selected instead, update its Issue Tag link.
 
 **Note**: Modifying the reference links to resource files within the article (`_media/path/to/directory/path/to/file`) is not necessary, as they are relative paths.
 

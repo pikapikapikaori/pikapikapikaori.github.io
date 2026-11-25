@@ -136,7 +136,7 @@
 }
 
 .toc-paginator-div {
-    margin-top: 2rem;
+    margin-top: 1rem;
     text-align: center;
     justify-content: center;
     display: flex;
@@ -184,12 +184,15 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
 }
 
 .toc-paginator-button-span {
     width: var(--tocpage-button-size);
     height: var(--tocpage-button-size);
-    padding: 0.0625rem;
+    padding: 0.3125rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,14 +208,13 @@
     height: 100%;
 }
 
-.toc-paginator-button-span:hover {
+.toc-paginator-button-div:not(:disabled):hover .toc-paginator-button-span {
     background-color: var(--global-surface-hollow-hover);
     border-color: var(--global-surface-hollow-border-hover);
     color: var(--global-surface-hollow-text-hover);
 }
 
-.toc-paginator-button-div:active .toc-paginator-button-span,
-.toc-paginator-button-span:active {
+.toc-paginator-button-div:not(:disabled):active .toc-paginator-button-span {
     background-color: var(--global-surface-hollow-press);
     border-color: var(--global-surface-hollow-border-press);
     color: var(--global-surface-hollow-text-press);
@@ -224,4 +226,15 @@ body.has-toc .sidebar-toggle {
 
 .sidebar-toggle {
     transition: var(--global-transition-filter), var(--global-transition-transform);
+}
+
+.toc-paginator-button-div:disabled {
+    opacity: var(--global-surface-hollow-opacity-disabled);
+    cursor: not-allowed;
+}
+
+.toc-paginator-button-div:disabled .toc-paginator-button-span {
+    background: var(--global-surface-hollow-disabled);
+    border-color: var(--global-surface-hollow-border-disabled);
+    color: var(--global-surface-hollow-text-disabled);
 }

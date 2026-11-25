@@ -3,6 +3,17 @@
 
     const i18nTexts = {
         'en-us': {
+            commentTitle: 'Comments',
+            commentCount: 'comments',
+            commentNewest: 'Newest first ↓',
+            commentOldest: 'Oldest first ↑',
+            commentEmpty: 'No comments yet',
+            commentExpandText: 'Read more',
+            commentCollapseText: 'Show less',
+            commentError: 'Comments unavailable',
+            commentContentLimited: 'Content exceeds the maximum length and has been shortened',
+            commentReply: 'Reply',
+            commentQuoteMissing: 'Quoted comment is unavailable',
             searchPlaceholder: 'Type to search',
             searchNoData: 'No Results',
             previous: 'PREVIOUS',
@@ -21,6 +32,17 @@
             nameLink: '#/en-us/'
         },
         'jp': {
+            commentTitle: 'コメント',
+            commentCount: '件',
+            commentNewest: '新しい順 ↓',
+            commentOldest: '古い順 ↑',
+            commentEmpty: 'コメントはありません',
+            commentExpandText: '全文を表示',
+            commentCollapseText: '全文を折りたたむ',
+            commentError: 'コメントを取得できません',
+            commentContentLimited: '本文は最大文字数を超えるため省略されています',
+            commentReply: '返信',
+            commentQuoteMissing: '引用されたコメントは利用できません',
             searchPlaceholder: '検索',
             searchNoData: '結果がありません',
             previous: '前',
@@ -39,6 +61,17 @@
             nameLink: '#/jp/'
         },
         'zh-cn': {
+            commentTitle: '评论',
+            commentCount: '条',
+            commentNewest: '时间倒序 ↓',
+            commentOldest: '时间正序 ↑',
+            commentEmpty: '暂无评论',
+            commentExpandText: '展开全文',
+            commentCollapseText: '收起全文',
+            commentError: '评论暂不可用',
+            commentContentLimited: '内容超过最大字符数，已截取显示',
+            commentReply: '回复',
+            commentQuoteMissing: '引用的评论已不可用',
             searchPlaceholder: '搜索',
             searchNoData: '找不到结果',
             previous: '上一篇',
@@ -161,12 +194,33 @@
         // 添加评论与页脚
         commentWithFooter: {
             enable: true,
-            use: 'gitalk',
+            use: 'builtin',
             footerInnerHtml: '<small>&copy; 2023 - {comment_footer-yyyy}{comment_footer-divider}{comment_footer-info}{comment_footer-divider}{comment_footer-copy}</small>',
             localization: {
                 info: cali18nText('commentInfo'),
                 copy: cali18nText('commentCopy'),
                 divider: cali18nText('divider')
+            },
+            commentConfig: {
+                ownerId: 'pikapikapikaori',
+                pageSize: 5,
+                quotePreviewLength: 80,
+                maxCommentLength: 240,
+                contentPreviewLines: 6,
+                dateFormat: 'YYYY.MM.DD',
+                localization: {
+                    title: cali18nText('commentTitle'),
+                    count: cali18nText('commentCount'),
+                    newest: cali18nText('commentNewest'),
+                    oldest: cali18nText('commentOldest'),
+                    empty: cali18nText('commentEmpty'),
+                    expandText: cali18nText('commentExpandText'),
+                    collapseText: cali18nText('commentCollapseText'),
+                    error: cali18nText('commentError'),
+                    contentLimited: cali18nText('commentContentLimited'),
+                    reply: cali18nText('commentReply'),
+                    quoteMissing: cali18nText('commentQuoteMissing'),
+                },
             },
             gitalkConfig: {
                 clientID: '6a54e5946401951488d1',
@@ -197,7 +251,7 @@
             enable: true,
             recentAmount: 8,
             renderStyle: 'card',
-            dateFormat: null,
+            dateFormat: 'YYYY.MM.DD',
             columns: 2,
 
             narrowColumns: 1,
@@ -615,7 +669,8 @@
 
         // 添加最后编辑时间
         lastUpdatedTime: {
-            enable: true
+            enable: true,
+            dateFormat: 'YYYY.MM.DD'
         },
 
         // 添加链接标记样式

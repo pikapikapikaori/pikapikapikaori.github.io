@@ -485,7 +485,7 @@ html[data-layout="mondrian"][data-theme="dark"] {
 
 .m-flip {
     padding: 0;
-    background: transparent !important;
+    background: transparent;
     perspective: 900px;
     cursor: pointer;
     overflow: visible;

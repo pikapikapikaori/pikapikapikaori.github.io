@@ -14,6 +14,10 @@
     --global-muted-color: var(--blockquote-color);
     --global-poem-font: var(--font-family);
     --global-sidenote-width: 25rem;
+    --global-surface-hollow-disabled: transparent;
+    --global-surface-hollow-border-disabled: var(--border-color);
+    --global-surface-hollow-text-disabled: var(--color-text);
+    --global-surface-hollow-opacity-disabled: 0.5;
     --global-surface-hollow-border-hover: var(--theme-color-3);
     --global-surface-hollow-border-press: var(--theme-color-4);
     --global-surface-hollow-border-rest: var(--border-color);
@@ -31,3 +35,30 @@
     --global-zebra-bg: var(--table-row-alt-bg);
 }
 
+button.toc-paginator-button-div {
+    display: flex;
+    margin: 0 0.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font: inherit;
+    text-decoration: none;
+}
+
+button.toc-paginator-button-div:is(:hover, :active) {
+    outline: none;
+}
+
+button.toc-paginator-button-div:focus-visible {
+    outline: 0.125rem solid var(--global-control-border-active);
+    outline-offset: 0.125rem;
+}
+
+button.toc-paginator-button-div:disabled {
+    opacity: var(--global-surface-hollow-opacity-disabled);
+    filter: none;
+    pointer-events: auto;
+    cursor: not-allowed;
+}

@@ -231,7 +231,7 @@ cmd_prebuild() {
     require_file "$SITEMAP_SCRIPT"
     require_file "$FILE_CACHE_SCRIPT"
     confirm_run "依次生成 Feed Sitemap PWA 预缓存清单" bash -c \
-        "exec bash ./script/shell/feed.sh && bash ./script/shell/sitemap.sh && bash ./script/shell/file-cache.sh"
+        "bash ./script/shell/feed.sh && bash ./script/shell/sitemap.sh && bash ./script/shell/file-cache.sh"
 }
 
 # ---------- Python 依赖管理 ----------

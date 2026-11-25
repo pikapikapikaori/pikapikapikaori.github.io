@@ -1,6 +1,6 @@
 {
     "version": "4.8.0",
-    "hash": "724a595470f340e0",
+    "hash": "eccccb41bb6bf148",
     "schemaVersion": 2,
     "batches": [
         {
@@ -28,7 +28,7 @@
                 {"path": "assets/layout/brand/js/main.js", "hash": "5ccbedce7bad962b", "size": 3361},
                 {"path": "assets/layout/brand/js/photo-animation.js", "hash": "ebf77e4ccad3bd96", "size": 6045},
                 {"path": "assets/layout/brand/js/scroll-pin.js", "hash": "9f7ba9ce93b68807", "size": 2858},
-                {"path": "assets/layout/mondrian/css/main.css", "hash": "2e6acefdf56ae924", "size": 16096},
+                {"path": "assets/layout/mondrian/css/main.css", "hash": "a8a4729f7e0b9f87", "size": 16085},
                 {"path": "assets/layout/mondrian/html/index.html", "hash": "0df828efaf868a9c", "size": 3381},
                 {"path": "assets/layout/mondrian/js/main.js", "hash": "dae0a2ac0ca17629", "size": 4454},
                 {"path": "assets/layout/photography/css/main.css", "hash": "9f410861a86be8fb", "size": 15394},

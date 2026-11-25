@@ -1,8 +1,6 @@
 # Birthday E-card for GF
 
-> This page is first published on my [GitHub](https://github.com/pikapikapikaori), the repository of which has now been migrated to that of [this blog](/en-us/)\
-> Publish date: 2022.05.17\
-> Last edited on: {docsify-last-updated}
+<!-- article-info:my <a href="https://github.com/pikapikapikaori" target="_blank" rel="noopener">GitHub</a>, the repository of which has now been migrated to that of <a href="#/en-us/">this blog</a> -->
 
 You can visit [here](apps/ecard/index.html ':ignore') to view the whole page.
 

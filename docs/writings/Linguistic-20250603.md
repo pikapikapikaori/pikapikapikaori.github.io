@@ -2,9 +2,7 @@
 
 ![封面图](_media/Linguistic-20250603/cover-picture.jpg)
 
-> 本文首发于个人博客\
-> 发表日期：2025.06.03\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:个人博客 -->
 
 ## 肺部气流音
 

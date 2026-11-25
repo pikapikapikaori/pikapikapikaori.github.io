@@ -17,16 +17,16 @@ import {
     setStyleProperty
 } from '../utils/dom.js'
 
+let viewFullImageOptions = {
+    enable: false
+}
+
 const imageIds = {
     viewer: 'view-full-image-span',
     left: 'view-full-image-span-inner-left-div',
     right: 'view-full-image-span-inner-right-div',
     image: 'view-full-image-span-inner-img-div',
     counter: 'view-full-image-span-inner-text-div',
-}
-
-let viewFullImageOptions = {
-    enable: false
 }
 
 export const ignoreViewFullImageClass = 'ignore-view-full-image-img'

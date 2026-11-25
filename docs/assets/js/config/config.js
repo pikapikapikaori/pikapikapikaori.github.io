@@ -1,8 +1,30 @@
 (function () {
     const i18nDefault = 'zh-cn'
 
+    const enMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    const ordinalSuffix = day => {
+        if (day > 3 && day < 21) return 'th'
+
+        switch (day % 10) {
+            case 1: return 'st'
+            case 2: return 'nd'
+            case 3: return 'rd'
+            default: return 'th'
+        }
+    }
+
+    const dateFormats = {
+        default: (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
+        '/jp/': (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
+        '/en-us/': (m, d, y) => `${enMonths[m - 1]} ${d}${ordinalSuffix(d)}, ${y}`
+    }
+
     const i18nTexts = {
         'en-us': {
+            firstPublished: 'This page is first published on ',
+            created: 'Publish date: ',
+            lastUpdated: 'Last edited on: ',
             commentTitle: 'Comments',
             commentCount: 'comments',
             commentNewest: 'Newest first ↓',
@@ -32,6 +54,9 @@
             nameLink: '#/en-us/'
         },
         'jp': {
+            firstPublished: '初出：',
+            created: '公開日：',
+            lastUpdated: '最終編集日：',
             commentTitle: 'コメント',
             commentCount: '件',
             commentNewest: '新しい順 ↓',
@@ -61,6 +86,9 @@
             nameLink: '#/jp/'
         },
         'zh-cn': {
+            firstPublished: '本文首发于',
+            created: '发表日期：',
+            lastUpdated: '最后编辑于：',
             commentTitle: '评论',
             commentCount: '条',
             commentNewest: '时间倒序 ↓',
@@ -251,7 +279,7 @@
             enable: true,
             recentAmount: 8,
             renderStyle: 'card',
-            dateFormat: 'YYYY.MM.DD',
+            dateFormat: dateFormats,
             columns: 2,
 
             narrowColumns: 1,
@@ -390,12 +418,25 @@
         // 添加替换 Markdown 中的 Html 注释
         htmlReplace: {
             enable: true,
+            localization: {
+                firstPublished: cali18nText('firstPublished'),
+                created: cali18nText('created'),
+                lastUpdated: cali18nText('lastUpdated')
+            },
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
                 feed: './assets/resources/meta/feed.atom'
             },
             tags: [
+                /* Article Info */
+                {
+                    type: 'inline',
+                    tag: 'article-info',
+                    startHtml: '<blockquote><p>{html_replace-i18n_firstPublished}',
+                    endHtml: '<br>{html_replace-i18n_created}{ad-created}<br>{html_replace-i18n_lastUpdated}{ad-last-updated}</p></blockquote>',
+                    emptyHtml: '<blockquote><p>{html_replace-i18n_created}{ad-created}<br>{html_replace-i18n_lastUpdated}{ad-last-updated}</p></blockquote>'
+                },
                 /* Brief Comments */
                 {
                     type: 'block',
@@ -667,10 +708,10 @@
             enable: true
         },
 
-        // 添加最后编辑时间
-        lastUpdatedTime: {
+        // 添加文章日期
+        articleDate: {
             enable: true,
-            dateFormat: 'YYYY.MM.DD'
+            dateFormat: dateFormats
         },
 
         // 添加链接标记样式

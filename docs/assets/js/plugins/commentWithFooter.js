@@ -6,6 +6,29 @@ import { docsifyIds } from '../utils/constants.js'
 import { createEl, getElById, getAllEls, addClass, setAttrs, setData, getData, setCssVar, onListen } from '../utils/dom.js'
 import { ignoreViewFullImageClass } from './viewFullImage.js'
 
+let commentWithFooterOptions = {
+    enable: false,
+    use: 'builtin',
+    footerInnerHtml: '',
+    localization: {},
+    commentConfig: {
+        ownerId: '',
+        pageSize: 5,
+        quotePreviewLength: 80,
+        maxCommentLength: 240,
+        contentPreviewLines: 6,
+        localization: {},
+    },
+    gitalkConfig: {
+        clientID: '',
+        clientSecret: '',
+        repo: 'pikapikapi-blog',
+        owner: 'pikapikapikaori',
+        admin: ['pikapikapikaori',],
+        distractionFreeMode: false,
+    },
+}
+
 const commentClasses = {
     comments: 'cwf-comments',
     heading: 'cwf-heading',
@@ -29,7 +52,6 @@ const commentClasses = {
     content: 'cwf-content',
     meta: 'cwf-meta',
     date: 'cwf-date',
-    id: 'cwf-id',
     detail: 'cwf-detail',
     body: 'cwf-body',
     isClamped: 'is-clamped',
@@ -47,29 +69,6 @@ const commentClasses = {
 }
 
 const commentTextBlocks = new Set(['p', 'br', 'blockquote', 'li', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'tr'])
-
-let commentWithFooterOptions = {
-    enable: false,
-    use: 'builtin',
-    footerInnerHtml: '',
-    localization: {},
-    commentConfig: {
-        ownerId: '',
-        pageSize: 5,
-        quotePreviewLength: 80,
-        maxCommentLength: 240,
-        contentPreviewLines: 6,
-        localization: {},
-    },
-    gitalkConfig: {
-        clientID: '',
-        clientSecret: '',
-        repo: 'pikapikapi-blog',
-        owner: 'pikapikapikaori',
-        admin: ['pikapikapikaori',],
-        distractionFreeMode: false,
-    },
-}
 
 const commentContainerId = 'comment-container'
 const footerId = 'footer-under-comment'
@@ -192,7 +191,7 @@ function mountBuiltinComments(host, comments, config, routePath, isStale, marked
     const markdownCache = new Map()
     function renderMarkdown(source) {
         // Fresh standard options keep Docsify's TOC renderer out of comments.
-        return createEl('template', {html: marked.parse(source, {...marked.getDefaults(), headerIds: false})}).content
+        return createEl('template', {html: marked.parse(source, {...marked.getDefaults(), headerIds: false, breaks: true})}).content
     }
 
     function visibleText(node) {
@@ -349,9 +348,6 @@ function mountBuiltinComments(host, comments, config, routePath, isStale, marked
         setAttrs(time, {datetime: toDate(data.date).toISOString()})
         time.textContent = formatDate(data.date, dateFormat)
         meta.append(time)
-        const number = createEl('span', {className: commentClasses.id, text: data.id})
-        setAttrs(number, {title: data.id})
-        meta.append(number)
         content.append(meta)
         const detail = createEl('div', {className: commentClasses.detail})
         setAttrs(detail, {id: domId(data.id, 'content')})

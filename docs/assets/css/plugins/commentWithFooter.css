@@ -110,12 +110,10 @@
 }
 
 #comment-container .cwf-meta {
-    position: relative;
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
     gap: 0.25rem 0.75rem;
-    padding-right: 3rem;
     margin-bottom: 0.5rem;
     line-height: 1.6;
 }
@@ -129,20 +127,6 @@
 #comment-container .cwf-date {
     color: var(--global-muted-color);
     font-size: 0.75rem;
-}
-
-#comment-container .cwf-id {
-    max-width: 2.75rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: var(--global-muted-color);
-    font-size: 0.6875rem;
-    line-height: 1.8;
-    letter-spacing: .02em;
 }
 
 #comment-container .cwf-body {
@@ -272,7 +256,6 @@
 
     #comment-container .cwf-meta {
         gap: 0.25rem 0.625rem;
-        padding-right: 2.75rem;
     }
 
     #comment-container .cwf-quote {

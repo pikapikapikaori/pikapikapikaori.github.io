@@ -16,6 +16,18 @@ import { bindShortcuts } from '../utils/shortcut.js'
 import { matchesLocalePath, calLocalized } from '../utils/localization.js'
 import { ignoreViewFullImageClass } from './viewFullImage.js'
 
+let tocPageOptions = {
+    enable: false,
+    recentAmount: 8,
+    renderStyle: 'card',
+    dateFormat: 'YYYY.MM.DD',
+    columns: 2,
+    narrowColumns: 1,
+    defaultImg: './assets/resources/img/default/picture-2.gif',
+    localPath: [],
+    coverPath: ['/']
+}
+
 const tocClasses = {
     pageDisplayA: 'toc-page-display-a',
     pageDisplayDiv: 'toc-page-display-div',
@@ -37,18 +49,6 @@ const tocClasses = {
     paginatorInputBox: 'toc-paginator-input-box',
 }
 
-let tocPageOptions = {
-    enable: false,
-    recentAmount: 8,
-    renderStyle: 'card',
-    dateFormat: 'YYYY.MM.DD',
-    columns: 2,
-    narrowColumns: 1,
-    defaultImg: './assets/resources/img/default/picture-2.gif',
-    localPath: [],
-    coverPath: ['/']
-}
-
 export const hasTocClass = 'has-toc'
 export const tocPageDivClass = 'toc-page-div'
 
@@ -58,7 +58,9 @@ const tocRenderStyles = {
 }
 
 const tocFilters = {
-    none: { name: 'none', filter: filterByBaseUrl },
+    none: { name: 'none', filter: () => true },
+    baseUrl: { name: 'baseUrl', filter: filterByBaseUrl },
+    type: { name: 'type', filter: page => page.type !== 'intro' },
     lang: { name: 'lang', filter: filterByLanguage }
 }
 
@@ -70,20 +72,10 @@ function resolveRenderStyle(value) {
     return shouldUseTableKey(tocRenderStyles, value) ? tocRenderStyles[value] : tocRenderStyles.card
 }
 
-function resolveFilter(value) {
-    if (!isEnabled(value)) return tocFilters.none
-
-    return shouldUseTableKey(tocFilters, value) ? tocFilters[value] : tocFilters.none
-}
-
 function toColumnCount(value, fallback) {
     const count = Math.floor(Number(value))
 
     return count >= 1 ? count : fallback
-}
-
-function hasRequiredTime(pageData, renderStyle) {
-    return renderStyle.name !== tocRenderStyles.list.name || Boolean(pageData.time)
 }
 
 function isPageInLanguage(pageData, context) {
@@ -95,33 +87,23 @@ function isPageInLanguage(pageData, context) {
 }
 
 function filterByBaseUrl(pageData, context) {
-    return hasRequiredTime(pageData, context.renderStyle) && pageData.baseUrl === context.baseUrl
+    return pageData.baseUrl === context.baseUrl
 }
 
 function filterByLanguage(pageData, context) {
-    return hasRequiredTime(pageData, context.renderStyle) && isPageInLanguage(pageData, context)
+    return isPageInLanguage(pageData, context)
 }
 
 function filterPages(pages, context) {
-    const activeFilter = resolveFilter(context.filterMode)
+    const activeFilters = context.filterMode.split(/\s+/).filter(Boolean).map(name => tocFilters[name])
 
     return pages
-        .filter(page => activeFilter.filter(page, context))
+        .filter(page => activeFilters.every(filter => filter.filter(page, context)))
         .sort(comparePages)
 }
 
 function comparePages(a, b) {
-    const timeA = a.time
-    const timeB = b.time
-
-    const isEmptyA = !isEnabled(timeA)
-    const isEmptyB = !isEnabled(timeB)
-
-    if (isEmptyA && isEmptyB) return 0
-    if (isEmptyA) return 1
-    if (isEmptyB) return -1
-
-    return toDate(timeB) - toDate(timeA)
+    return toDate(b.createdTime) - toDate(a.createdTime)
 }
 
 function buildPageContext(page, context) {
@@ -130,7 +112,7 @@ function buildPageContext(page, context) {
         pagePictureHref: isEnabled(page.cover)
             ? context.pathname.replace(/\/$/, '') + page.cover
             : context.defaultImg,
-        formattedDate: formatDate(page.time, context.dateFormat)
+        formattedDate: formatDate(page.createdTime, context.dateFormat)
     }
 }
 
@@ -156,7 +138,7 @@ function renderListPage(tocPageDiv, pages, context) {
 
     pages.forEach(page => {
         const { pageHref, formattedDate } = buildPageContext(page, context)
-        const year = toDate(page.time).getFullYear()
+        const year = toDate(page.createdTime).getFullYear()
 
         if (year !== currentYear) {
             html += `<li class="${tocClasses.yearGroup}">${year}</li>`
@@ -280,21 +262,18 @@ function plugin(hook, vm) {
     function renderTocStage1(content) {
         content = protectCodeBlocks(content, pluginIdentifier, codeBlockModes.protect)
 
-        const tocMarkupReg = /<!--\s*toc(?::([\w-]+))?\s*-->/g
+        const tocMarkupReg = /<!--\s*toc(?::([\w\s-]*))?\s*-->/g
         let matched = false
         let mode = tocFilters.none.name
 
         content = content.replace(tocMarkupReg, (markup, rawMode) => {
             if (matched) return markup
 
-            const nextFilter = isEnabled(rawMode)
-                ? (shouldUseTableKey(tocFilters, rawMode) ? tocFilters[rawMode] : null)
-                : tocFilters.none
-
-            if (!nextFilter) return markup
+            const names = (rawMode || '').trim().split(/\s+/).filter(Boolean)
+            if (!names.every(name => shouldUseTableKey(tocFilters, name))) return markup
 
             matched = true
-            mode = nextFilter.name
+            mode = names.join(' ')
             return tocDiv
         })
 

@@ -2,9 +2,7 @@
 
 ![封面图](_media/DitfAspectRatio-20180212/cover-picture.jpg)
 
-> 本文首发于[知乎](https://www.zhihu.com/question/266952828/answer/317969940)\
-> 发表日期：2018.02.12\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://www.zhihu.com/question/266952828/answer/317969940" target="_blank" rel="noopener">知乎</a> -->
 
 ## 题目描述
 

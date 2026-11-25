@@ -2,9 +2,7 @@
 
 ![封面图](_media/MaquiaCriticize-20180623/cover-picture.jpg)
 
-> 本文首发于[知乎](https://www.zhihu.com/question/263402149/answer/424616979)\
-> 发表日期：2018.06.23\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://www.zhihu.com/question/263402149/answer/424616979" target="_blank" rel="noopener">知乎</a> -->
 
 ## 题目描述
 

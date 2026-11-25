@@ -1,8 +1,6 @@
 # 生成 n 位全部二进制数，数组形式：蚂蚁爬杆问题
 
-> 本文首发于[CSDN](https://blog.csdn.net/weixin_42553007/article/details/120447886?spm=1001.2014.3001.5502) \
-> 发表日期：2021.09.24\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://blog.csdn.net/weixin_42553007/article/details/120447886?spm=1001.2014.3001.5502" target="_blank" rel="noopener">CSDN</a> -->
 
 OOAD 第一次项目，以 OOAD 思想实现蚂蚁爬杆问题解法。
 

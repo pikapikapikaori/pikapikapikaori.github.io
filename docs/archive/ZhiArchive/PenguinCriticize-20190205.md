@@ -2,9 +2,7 @@
 
 ![封面图](_media/PenguinCriticize-20190205/cover-picture.jpg)
 
-> 本文首发于[知乎](https://www.zhihu.com/question/310761051/answer/589980971)\
-> 发表日期：2019.02.05\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://www.zhihu.com/question/310761051/answer/589980971" target="_blank" rel="noopener">知乎</a> -->
 
 简单的说两句吧。
 

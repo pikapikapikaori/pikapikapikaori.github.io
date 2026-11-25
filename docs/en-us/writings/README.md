@@ -2,4 +2,4 @@
 
 Here are some writings of mine.
 
-<!-- toc -->
+<!-- toc:baseUrl -->

@@ -2,9 +2,7 @@
 
 ![封面图](_media/DitfEpisodeComment-20180415/cover-picture.jpg)
 
-> 本文首发于个人博客\
-> 发表日期：2024.04.21\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:个人博客 -->
 
 ## 如何评价动画《DARLING in the FRANXX》第十四集？
 

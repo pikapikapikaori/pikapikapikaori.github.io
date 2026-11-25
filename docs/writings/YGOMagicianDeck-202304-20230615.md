@@ -2,9 +2,7 @@
 
 ![封面图](_media/YGOMagicianDeck-202304-20230615/cover-picture.jpg)
 
-> 本文首发于个人博客\
-> 发表日期：2023.06.15\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:个人博客 -->
 
 ## 卡组介绍
 

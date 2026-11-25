@@ -59,9 +59,18 @@ const tocRenderStyles = {
 
 const tocFilters = {
     none: { name: 'none', filter: () => true },
-    baseUrl: { name: 'baseUrl', filter: filterByBaseUrl },
+    baseUrl: { name: 'baseUrl', filter: (pageData, context) => pageData.baseUrl === context.baseUrl },
     type: { name: 'type', filter: page => page.type !== 'intro' },
-    lang: { name: 'lang', filter: filterByLanguage }
+    lang: {
+        name: 'lang',
+        filter: (pageData, context) => {
+            if (context.languagePrefix === '/') {
+                return !context.languagePrefixes.some(prefix => matchesLocalePath(pageData.href, prefix))
+            }
+
+            return matchesLocalePath(pageData.href, context.languagePrefix)
+        }
+    }
 }
 
 function shouldUseTableKey(table, value) {
@@ -76,22 +85,6 @@ function toColumnCount(value, fallback) {
     const count = Math.floor(Number(value))
 
     return count >= 1 ? count : fallback
-}
-
-function isPageInLanguage(pageData, context) {
-    if (context.languagePrefix === '/') {
-        return !context.languagePrefixes.some(prefix => matchesLocalePath(pageData.href, prefix))
-    }
-
-    return matchesLocalePath(pageData.href, context.languagePrefix)
-}
-
-function filterByBaseUrl(pageData, context) {
-    return pageData.baseUrl === context.baseUrl
-}
-
-function filterByLanguage(pageData, context) {
-    return isPageInLanguage(pageData, context)
 }
 
 function filterPages(pages, context) {

@@ -1,6 +1,4 @@
 (function () {
-    const i18nDefault = 'zh-cn'
-
     const enMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     const ordinalSuffix = day => {
@@ -14,14 +12,11 @@
         }
     }
 
-    const dateFormats = {
-        default: (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
-        '/jp/': (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
-        '/en-us/': (m, d, y) => `${enMonths[m - 1]} ${d}${ordinalSuffix(d)}, ${y}`
-    }
+    const i18nDefault = 'zh-cn'
 
     const i18nTexts = {
         'en-us': {
+            dateFormats: (m, d, y) => `${enMonths[m - 1]} ${d}${ordinalSuffix(d)}, ${y}`,
             firstPublished: 'This page is first published on ',
             created: 'Publish date: ',
             lastUpdated: 'Last edited on: ',
@@ -54,6 +49,7 @@
             nameLink: '#/en-us/'
         },
         'jp': {
+            dateFormats: (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
             firstPublished: '初出：',
             created: '公開日：',
             lastUpdated: '最終編集日：',
@@ -86,6 +82,7 @@
             nameLink: '#/jp/'
         },
         'zh-cn': {
+            dateFormats: (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
             firstPublished: '本文首发于',
             created: '发表日期：',
             lastUpdated: '最后编辑于：',
@@ -279,7 +276,7 @@
             enable: true,
             recentAmount: 8,
             renderStyle: 'card',
-            dateFormat: dateFormats,
+            dateFormat: cali18nText('dateFormats'),
             columns: 2,
 
             narrowColumns: 1,
@@ -711,7 +708,7 @@
         // 添加文章日期
         articleDate: {
             enable: true,
-            dateFormat: dateFormats
+            dateFormat: cali18nText('dateFormats')
         },
 
         // 添加链接标记样式

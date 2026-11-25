@@ -102,6 +102,10 @@ npm run blog -- help
 bash script/blog.sh help
 ```
 
+## Dates
+
+Dates in project data files are stored as UTC+8.
+
 ## Article-Related
 
 ### Writing a New Article
@@ -112,7 +116,8 @@ bash script/blog.sh help
     ```javascript
     {
         "title": "",
-        "time": "",
+        "createdTime": "",
+        "type": "",
         "editedTime": "",
         "cover": "",
         "href": "",
@@ -120,16 +125,13 @@ bash script/blog.sh help
     }
     ```
 
-    Among these, `editedTime`, `href`, and `baseUrl` are required fields. The paths of the latter two are based on the path of `index.html` (`docs`). These fields are used for the article list display on the cover page:
-    1. The `time` field is used for sorting (reverse chronological order).
-    2. The `href` field is used for the a element to access the article.
-    3. The `baseUrl` field is used to match the collection to which the article belongs.
+    `cover` is optional. `href` links to the article and `baseUrl` identifies its parent directory; both paths are relative to `index.html`. Set `type` to `content` for an article or `intro` for an introduction page.
 3. [Optional] In the `_media/` folder in the same directory, create a corresponding folder to store resource files. The path used to reference the file is a relative path (`_media/path/to/directory/path/to/file`).
 4. [Optional] Create a comment section.
 
 ### Editing an Article
 
-Modify the corresponding `editedTime` field in `config/tocdata.json.js`.
+1. Modify the corresponding `editedTime` field in `config/tocdata.json.js`.
 
 ### Archiving an Article / Modifying an Article Path / Renaming an Article
 
@@ -140,7 +142,6 @@ Modify the corresponding `editedTime` field in `config/tocdata.json.js`.
 5. Move the corresponding comment JSON to the new article path. If Gitalk is selected instead, update its Issue Tag link.
 
 **Note**: Modifying the reference links to resource files within the article (`_media/path/to/directory/path/to/file`) is not necessary, as they are relative paths.
-
 
 ## Cross-Project References
 

@@ -2,9 +2,7 @@
 
 ![封面图](_media/DevilmanInterview-20180123/cover-picture.jpg)
 
-> 本文首发于[知乎](https://zhuanlan.zhihu.com/p/32706628)\
-> 发表日期：2018.01.23\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://zhuanlan.zhihu.com/p/32706628" target="_blank" rel="noopener">知乎</a> -->
 
 被誉为动漫史上不朽名作的《恶魔人》，已经在今年 1 月播出了新作动画《恶魔人 crybaby》。而这部作品是由汤浅政明担任导演，因此引发了很多的话题。近日，有日本媒体专访了原作者永井豪，以及汤浅政明导演，来听这两位大佬是怎么说吧！（有节选。）
 

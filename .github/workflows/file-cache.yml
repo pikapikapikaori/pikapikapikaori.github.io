@@ -8,7 +8,6 @@ on:
       - "docs/**"
       - "script/shell/file-cache.sh"
       - "!docs/**/file-cache.json"
-      - "!docs/writings/_media/PersonalRecordsBackup/**"
 
 permissions:
   contents: write

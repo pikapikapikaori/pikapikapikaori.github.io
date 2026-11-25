@@ -16,4 +16,4 @@ Welcome to my blog, you can find the language selection to the right of the navi
 
 <!-- tabs:end -->
 
-<!-- toc -->
+<!-- toc:baseUrl -->

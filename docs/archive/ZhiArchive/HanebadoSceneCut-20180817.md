@@ -2,9 +2,7 @@
 
 ![封面图](_media/HanebadoSceneCut-20180817/cover-picture.jpg)
 
-> 本文首发于[知乎](https://zhuanlan.zhihu.com/p/42275604)\
-> 发表日期：2018.08.17\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://zhuanlan.zhihu.com/p/42275604" target="_blank" rel="noopener">知乎</a> -->
 
 ## 引言
 

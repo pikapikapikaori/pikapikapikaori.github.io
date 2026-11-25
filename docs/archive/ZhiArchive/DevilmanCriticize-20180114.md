@@ -2,9 +2,7 @@
 
 ![封面图](_media/DevilmanCriticize-20180114/cover-picture.jpg)
 
-> 本文首发于[知乎](https://www.zhihu.com/question/265155353/answer/290683008)\
-> 发表日期：2018.01.14\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://www.zhihu.com/question/265155353/answer/290683008" target="_blank" rel="noopener">知乎</a> -->
 
 *简单的总结一下就是：**精彩，酣畅淋漓**。*
 

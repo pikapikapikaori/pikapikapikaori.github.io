@@ -2,6 +2,7 @@ import { TokenReplacer } from '../utils/tokenReplacer.js'
 import { protectCodeBlocks, isEnabled, codeBlockModes } from '../utils/common.js'
 import * as icons from '../utils/icons.js'
 import { getEl } from '../utils/dom.js'
+import { calLocalized } from '../utils/localization.js'
 
 let htmlReplaceOptions = {
     enable: false,
@@ -10,7 +11,8 @@ let htmlReplaceOptions = {
         email: 'mailto:Lyy8759@outlook.com',
         feed: './assets/resources/meta/feed.atom'
     },
-    tags: []
+    tags: [],
+    localization: {}
 }
 
 const iconLinkKeys = ['github', 'email', 'feed']
@@ -39,7 +41,8 @@ function plugin(hook, vm) {
     }
 
     function resolvePlaceholders(str) {
-        return replacer.replace(str)
+        if (typeof str !== 'string') return str
+        return str.replace(/\{html_replace-[a-zA-Z0-9_-]+\}/g, token => replacer.replace(token))
     }
 
     function initializeReplacer() {
@@ -53,6 +56,11 @@ function plugin(hook, vm) {
     }
 
     function initializeTags() {
+        const localized = calLocalized(htmlReplaceOptions.localization, vm.route.path)
+        Object.entries(localized).forEach(([key, value]) => {
+            replacer.registerToken(`i18n_${key}`, value)
+        })
+
         htmlReplaceOptions.tags.forEach(item => {
             if (!item || !item.tag) return
 
@@ -66,7 +74,9 @@ function plugin(hook, vm) {
 
                 case 'inline':
                     inlineTagConfigMap.set(item.tag, payload =>
-                        resolvePlaceholders(item.startHtml + payload + item.endHtml)
+                        resolvePlaceholders(!payload && item.emptyHtml !== undefined
+                            ? item.emptyHtml
+                            : item.startHtml + payload + item.endHtml)
                     )
                     break
 
@@ -125,9 +135,9 @@ function plugin(hook, vm) {
         }
 
         for (const [tagKey, renderFn] of inlineTagConfigMap) {
-            const inlineReg = new RegExp(`<!--\\s*${tagKey}:([\\s\\S]*?)\\s*-->`, 'g')
+            const inlineReg = new RegExp(`<!--\\s*${tagKey}(?::([\\s\\S]*?))?\\s*-->`, 'g')
             content = content.replace(inlineReg, (fullMatch, payload) => {
-                const trimmedPayload = payload.trim()
+                const trimmedPayload = (payload || '').trim()
                 const outputHtml = renderFn(trimmedPayload)
                 return `<!-- ${commentReplaceMark} ${outputHtml} -->`
             })
@@ -194,7 +204,6 @@ function plugin(hook, vm) {
 
     hook.mounted(function () {
         initializeReplacer()
-        initializeTags()
 
         new MutationObserver(scheduleInlineSvgScan).observe(document.body, {
             childList: true,
@@ -203,6 +212,7 @@ function plugin(hook, vm) {
     })
 
     hook.beforeEach(function (content) {
+        initializeTags()
         const blockTagKeys = Array.from(blockTagConfigMap.keys())
         const inlineTagKeys = Array.from(inlineTagConfigMap.keys())
 
@@ -215,7 +225,7 @@ function plugin(hook, vm) {
         }
         if (!hasAnyMarker) {
             for (const key of inlineTagKeys) {
-                if (content.includes(`<!-- ${key}:`)) {
+                if (new RegExp(`<!--\\s*${key}(?::|\\s*-->)`).test(content)) {
                     hasAnyMarker = true
                     break
                 }

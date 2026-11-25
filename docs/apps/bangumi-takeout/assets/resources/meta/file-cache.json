@@ -1,978 +1,268 @@
 {
     "version": "1.1.0",
-    "hash": "4c7ef5be13442872",
-    "files": [
-        {
-            "path": "assets/css/about.css",
-            "hash": "3a96f4d42a5eb44c"
-        },
-        {
-            "path": "assets/css/base.css",
-            "hash": "a611d6527ae7236a"
-        },
-        {
-            "path": "assets/css/components.css",
-            "hash": "2185cede2e631361"
-        },
-        {
-            "path": "assets/css/detail.css",
-            "hash": "bc5ab7bfa6231f6b"
-        },
-        {
-            "path": "assets/css/nonstandard/base.css",
-            "hash": "43dd3738e4778e09"
-        },
-        {
-            "path": "assets/css/nonstandard/components.css",
-            "hash": "3bec38a3af881546"
-        },
-        {
-            "path": "assets/css/overview.css",
-            "hash": "3cd173f6f3a2697b"
-        },
-        {
-            "path": "assets/css/tools.css",
-            "hash": "c371b414e0441060"
-        },
-        {
-            "path": "assets/css/variables.css",
-            "hash": "2f27382039890c3b"
-        },
-        {
-            "path": "assets/external/js/bangumi-api.js",
-            "hash": "daf14cac2fbdfbd4"
-        },
-        {
-            "path": "assets/external/js/bangumi-auth.js",
-            "hash": "2eb67fa243c81770"
-        },
-        {
-            "path": "assets/external/js/bangumi-static.js",
-            "hash": "60f426e4f726526c"
-        },
-        {
-            "path": "assets/external/js/chunk-worker.js",
-            "hash": "c2223a232a87d928"
-        },
-        {
-            "path": "assets/external/js/index.js",
-            "hash": "497d03c126ae3c7d"
-        },
-        {
-            "path": "assets/js/abort.js",
-            "hash": "7e22f5471209a56b"
-        },
-        {
-            "path": "assets/js/app.js",
-            "hash": "a0d0a5ff42236ecd"
-        },
-        {
-            "path": "assets/js/backup/exporter.js",
-            "hash": "83f5ef7ed9e55297"
-        },
-        {
-            "path": "assets/js/backup/runner.js",
-            "hash": "4816d35b83c22d3e"
-        },
-        {
-            "path": "assets/js/bootstrap.js",
-            "hash": "d2d7702799cb4a97"
-        },
-        {
-            "path": "assets/js/config.js",
-            "hash": "88e4f01d1880c9e9"
-        },
-        {
-            "path": "assets/js/dom.js",
-            "hash": "0a1623c9ac8c1616"
-        },
-        {
-            "path": "assets/js/external.js",
-            "hash": "813ef78ecda61f4a"
-        },
-        {
-            "path": "assets/js/footer.js",
-            "hash": "6d22f39fe49f1533"
-        },
-        {
-            "path": "assets/js/layout.js",
-            "hash": "59cceb0f0edff8f6"
-        },
-        {
-            "path": "assets/js/main.js",
-            "hash": "50663f77369ad7de"
-        },
-        {
-            "path": "assets/js/model.js",
-            "hash": "cbed6d91b2c89cd8"
-        },
-        {
-            "path": "assets/js/pages/about.js",
-            "hash": "e7826aa92df97852"
-        },
-        {
-            "path": "assets/js/pages/backup.js",
-            "hash": "dda022feb4e269b4"
-        },
-        {
-            "path": "assets/js/pages/data.js",
-            "hash": "71ae73e285b251ca"
-        },
-        {
-            "path": "assets/js/pages/detail.js",
-            "hash": "96a02b3b38324960"
-        },
-        {
-            "path": "assets/js/pages/import.js",
-            "hash": "736c9e4b718b06ba"
-        },
-        {
-            "path": "assets/js/pages/overview.js",
-            "hash": "e65f0ab82ccbd19a"
-        },
-        {
-            "path": "assets/js/pages/users.js",
-            "hash": "67051a66709069f5"
-        },
-        {
-            "path": "assets/js/router.js",
-            "hash": "23bc5c4f1bf2ec52"
-        },
-        {
-            "path": "assets/js/search.js",
-            "hash": "dbe6c587c3583bdc"
-        },
-        {
-            "path": "assets/js/source.js",
-            "hash": "d348ec855eda4cfa"
-        },
-        {
-            "path": "assets/js/startup.js",
-            "hash": "b2cdb837ba7821db"
-        },
-        {
-            "path": "assets/js/storage.js",
-            "hash": "9d2dac361b7cd551"
-        },
-        {
-            "path": "assets/js/tasks.js",
-            "hash": "eee5c9db3def84cb"
-        },
-        {
-            "path": "assets/js/theme.js",
-            "hash": "2902f37ad49ee663"
-        },
-        {
-            "path": "assets/js/ui/about.js",
-            "hash": "c949e87b28243ffa"
-        },
-        {
-            "path": "assets/js/ui/backup.js",
-            "hash": "b3af35f243352efb"
-        },
-        {
-            "path": "assets/js/ui/data.js",
-            "hash": "2b0f71f810f008af"
-        },
-        {
-            "path": "assets/js/ui/detail.js",
-            "hash": "443f2f15ed12221b"
-        },
-        {
-            "path": "assets/js/ui/import.js",
-            "hash": "d9665386996d0354"
-        },
-        {
-            "path": "assets/js/ui/loading.js",
-            "hash": "8f11d779fb1b6512"
-        },
-        {
-            "path": "assets/js/ui/menu.js",
-            "hash": "053ad316bddf9753"
-        },
-        {
-            "path": "assets/js/ui/overview.js",
-            "hash": "a73ce2e3c077c570"
-        },
-        {
-            "path": "assets/js/ui/users.js",
-            "hash": "a4d20dfdd28a1b0d"
-        },
-        {
-            "path": "assets/js/worker/messages.js",
-            "hash": "e8adef69c900902f"
-        },
-        {
-            "path": "assets/js/zip.js",
-            "hash": "14dbce9a869c594b"
-        },
-        {
-            "path": "assets/resources/logo/favicon.ico",
-            "hash": "dc40522b02c04a5a"
-        },
-        {
-            "path": "assets/resources/logo/logo-180.png",
-            "hash": "0fc2d5c87808cd86"
-        },
-        {
-            "path": "assets/resources/logo/logo-192.png",
-            "hash": "9b7435bd19196311"
-        },
-        {
-            "path": "assets/resources/logo/logo-512.png",
-            "hash": "c6efd8ff752d95db"
-        },
-        {
-            "path": "assets/resources/meta/default-source.json",
-            "hash": "76c0a5263aa693b5"
-        },
-        {
-            "path": "assets/resources/meta/manifest.json",
-            "hash": "bbfeb152cde41332"
-        },
-        {
-            "path": "data/bgm-data/episodes/0000.zip",
-            "hash": "2c0b36f8466047d1"
-        },
-        {
-            "path": "data/bgm-data/episodes/0001.zip",
-            "hash": "51edf17a65d0701b"
-        },
-        {
-            "path": "data/bgm-data/episodes/0002.zip",
-            "hash": "44da59e1e321887d"
-        },
-        {
-            "path": "data/bgm-data/episodes/0003.zip",
-            "hash": "2753200b94b8ea95"
-        },
-        {
-            "path": "data/bgm-data/episodes/0004.zip",
-            "hash": "60e258020f31bdf5"
-        },
-        {
-            "path": "data/bgm-data/episodes/0005.zip",
-            "hash": "312396283a7e0fd8"
-        },
-        {
-            "path": "data/bgm-data/episodes/0006.zip",
-            "hash": "791bf83b1b04a869"
-        },
-        {
-            "path": "data/bgm-data/episodes/0007.zip",
-            "hash": "24d1f9b20cda7cbb"
-        },
-        {
-            "path": "data/bgm-data/episodes/0008.zip",
-            "hash": "354f03774cfaf521"
-        },
-        {
-            "path": "data/bgm-data/episodes/0009.zip",
-            "hash": "e9ba4841a84e6dac"
-        },
-        {
-            "path": "data/bgm-data/episodes/0010.zip",
-            "hash": "7c5754a32ec1de79"
-        },
-        {
-            "path": "data/bgm-data/episodes/0011.zip",
-            "hash": "cbd269dabbab0021"
-        },
-        {
-            "path": "data/bgm-data/episodes/0012.zip",
-            "hash": "53af8f1cec051a52"
-        },
-        {
-            "path": "data/bgm-data/episodes/0013.zip",
-            "hash": "f1ef238da33369ea"
-        },
-        {
-            "path": "data/bgm-data/episodes/0014.zip",
-            "hash": "db5d9992c9ce56b3"
-        },
-        {
-            "path": "data/bgm-data/episodes/0015.zip",
-            "hash": "ef9e20f3e2994609"
-        },
-        {
-            "path": "data/bgm-data/episodes/0016.zip",
-            "hash": "9e5d53db7cbeb5dd"
-        },
-        {
-            "path": "data/bgm-data/episodes/0017.zip",
-            "hash": "6d756f91038bc87e"
-        },
-        {
-            "path": "data/bgm-data/episodes/0018.zip",
-            "hash": "a737eab197d45e11"
-        },
-        {
-            "path": "data/bgm-data/episodes/0019.zip",
-            "hash": "b9a341a6acc0be5e"
-        },
-        {
-            "path": "data/bgm-data/episodes/0020.zip",
-            "hash": "fb3c05b958a3aa88"
-        },
-        {
-            "path": "data/bgm-data/episodes/0021.zip",
-            "hash": "4ead7c2751c3f92b"
-        },
-        {
-            "path": "data/bgm-data/episodes/0022.zip",
-            "hash": "c4334e3c0903d8e2"
-        },
-        {
-            "path": "data/bgm-data/episodes/0023.zip",
-            "hash": "f7b1f4f0ac834d10"
-        },
-        {
-            "path": "data/bgm-data/episodes/0024.zip",
-            "hash": "34f2e3ec483f02a3"
-        },
-        {
-            "path": "data/bgm-data/episodes/0025.zip",
-            "hash": "f32a8737e77c85d3"
-        },
-        {
-            "path": "data/bgm-data/episodes/0026.zip",
-            "hash": "f626eab94f7d08b4"
-        },
-        {
-            "path": "data/bgm-data/episodes/0027.zip",
-            "hash": "a46e207658058e76"
-        },
-        {
-            "path": "data/bgm-data/episodes/0028.zip",
-            "hash": "40887fa88e0dee38"
-        },
-        {
-            "path": "data/bgm-data/episodes/0029.zip",
-            "hash": "28ab3aa102315301"
-        },
-        {
-            "path": "data/bgm-data/episodes/0030.zip",
-            "hash": "5b519b5ce21c1d16"
-        },
-        {
-            "path": "data/bgm-data/episodes/0031.zip",
-            "hash": "677723974a14539a"
-        },
-        {
-            "path": "data/bgm-data/episodes/0032.zip",
-            "hash": "88c8d11f037f5435"
-        },
-        {
-            "path": "data/bgm-data/episodes/0033.zip",
-            "hash": "11693832cce47ce2"
-        },
-        {
-            "path": "data/bgm-data/episodes/0034.zip",
-            "hash": "11fabc497825f9b3"
-        },
-        {
-            "path": "data/bgm-data/episodes/0035.zip",
-            "hash": "6bc018eb23b17fdc"
-        },
-        {
-            "path": "data/bgm-data/episodes/0036.zip",
-            "hash": "ea581fa7ef74f422"
-        },
-        {
-            "path": "data/bgm-data/episodes/0037.zip",
-            "hash": "64e8c681fb001398"
-        },
-        {
-            "path": "data/bgm-data/episodes/0038.zip",
-            "hash": "bcf1888e115e7b92"
-        },
-        {
-            "path": "data/bgm-data/episodes/0039.zip",
-            "hash": "f7d4ad2a5c6c4202"
-        },
-        {
-            "path": "data/bgm-data/episodes/0040.zip",
-            "hash": "680497097cae9dbb"
-        },
-        {
-            "path": "data/bgm-data/episodes/0041.zip",
-            "hash": "a078caadd8313efc"
-        },
-        {
-            "path": "data/bgm-data/episodes/0042.zip",
-            "hash": "842e40ed94fa74ae"
-        },
-        {
-            "path": "data/bgm-data/episodes/0043.zip",
-            "hash": "956dc95c57766bdd"
-        },
-        {
-            "path": "data/bgm-data/episodes/0044.zip",
-            "hash": "3c5316675a9b2315"
-        },
-        {
-            "path": "data/bgm-data/episodes/0045.zip",
-            "hash": "e85226ec0c854e6f"
-        },
-        {
-            "path": "data/bgm-data/episodes/manifest.json",
-            "hash": "c06bd10dd1c4f6f0"
-        },
-        {
-            "path": "data/bgm-data/subjects/0000.zip",
-            "hash": "67d39bc1ffe3e2c9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0001.zip",
-            "hash": "1bed1e9ae72391e9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0002.zip",
-            "hash": "99ed7a660fef7b84"
-        },
-        {
-            "path": "data/bgm-data/subjects/0003.zip",
-            "hash": "0dfb8122a7f87cc8"
-        },
-        {
-            "path": "data/bgm-data/subjects/0004.zip",
-            "hash": "4564ee2092daf583"
-        },
-        {
-            "path": "data/bgm-data/subjects/0005.zip",
-            "hash": "e9b96baea4b1b89f"
-        },
-        {
-            "path": "data/bgm-data/subjects/0006.zip",
-            "hash": "2fd3fe3b06a61028"
-        },
-        {
-            "path": "data/bgm-data/subjects/0007.zip",
-            "hash": "95c56d4723d3bb65"
-        },
-        {
-            "path": "data/bgm-data/subjects/0008.zip",
-            "hash": "258bfd71c60daeb5"
-        },
-        {
-            "path": "data/bgm-data/subjects/0009.zip",
-            "hash": "d9621c664b913ab9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0010.zip",
-            "hash": "778d6f7072c1f35f"
-        },
-        {
-            "path": "data/bgm-data/subjects/0011.zip",
-            "hash": "bc80a114fa938d9b"
-        },
-        {
-            "path": "data/bgm-data/subjects/0012.zip",
-            "hash": "d04f556ac6fcf5ab"
-        },
-        {
-            "path": "data/bgm-data/subjects/0013.zip",
-            "hash": "d102c770469a1529"
-        },
-        {
-            "path": "data/bgm-data/subjects/0014.zip",
-            "hash": "8da952949e804fa0"
-        },
-        {
-            "path": "data/bgm-data/subjects/0015.zip",
-            "hash": "0abb5c939495dfeb"
-        },
-        {
-            "path": "data/bgm-data/subjects/0016.zip",
-            "hash": "aa45a96932ffd4cf"
-        },
-        {
-            "path": "data/bgm-data/subjects/0017.zip",
-            "hash": "e39b58ce76359e94"
-        },
-        {
-            "path": "data/bgm-data/subjects/0018.zip",
-            "hash": "878952c33a591786"
-        },
-        {
-            "path": "data/bgm-data/subjects/0019.zip",
-            "hash": "f32704065e613356"
-        },
-        {
-            "path": "data/bgm-data/subjects/0020.zip",
-            "hash": "8d5a409b4269436c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0021.zip",
-            "hash": "f2255db359bb1185"
-        },
-        {
-            "path": "data/bgm-data/subjects/0022.zip",
-            "hash": "ef566853b8d72e48"
-        },
-        {
-            "path": "data/bgm-data/subjects/0023.zip",
-            "hash": "0bc65b8d691f3afb"
-        },
-        {
-            "path": "data/bgm-data/subjects/0024.zip",
-            "hash": "76b51740bb613720"
-        },
-        {
-            "path": "data/bgm-data/subjects/0025.zip",
-            "hash": "82ecb81d09c62670"
-        },
-        {
-            "path": "data/bgm-data/subjects/0026.zip",
-            "hash": "983584844b1bb141"
-        },
-        {
-            "path": "data/bgm-data/subjects/0027.zip",
-            "hash": "c0a315614a6ecf0d"
-        },
-        {
-            "path": "data/bgm-data/subjects/0028.zip",
-            "hash": "7477939dd24c67f3"
-        },
-        {
-            "path": "data/bgm-data/subjects/0029.zip",
-            "hash": "e8c74877bdbf3f21"
-        },
-        {
-            "path": "data/bgm-data/subjects/0030.zip",
-            "hash": "94c08093672f4f39"
-        },
-        {
-            "path": "data/bgm-data/subjects/0031.zip",
-            "hash": "2ac6b3a6b9a075a9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0032.zip",
-            "hash": "b2ed122e39458091"
-        },
-        {
-            "path": "data/bgm-data/subjects/0033.zip",
-            "hash": "485c13f13a32d78c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0034.zip",
-            "hash": "fd30da1c26790c6d"
-        },
-        {
-            "path": "data/bgm-data/subjects/0035.zip",
-            "hash": "51dfbbe22d31366a"
-        },
-        {
-            "path": "data/bgm-data/subjects/0036.zip",
-            "hash": "cdcb641ad21cd449"
-        },
-        {
-            "path": "data/bgm-data/subjects/0037.zip",
-            "hash": "20c84a4600a8c806"
-        },
-        {
-            "path": "data/bgm-data/subjects/0038.zip",
-            "hash": "9e3f98c14e4a3865"
-        },
-        {
-            "path": "data/bgm-data/subjects/0039.zip",
-            "hash": "eb62e138703b51d1"
-        },
-        {
-            "path": "data/bgm-data/subjects/0040.zip",
-            "hash": "7d613fcf40bb7fda"
-        },
-        {
-            "path": "data/bgm-data/subjects/0041.zip",
-            "hash": "688999e6c9c6c488"
-        },
-        {
-            "path": "data/bgm-data/subjects/0042.zip",
-            "hash": "becc2b87155de000"
-        },
-        {
-            "path": "data/bgm-data/subjects/0043.zip",
-            "hash": "09506355960688e5"
-        },
-        {
-            "path": "data/bgm-data/subjects/0044.zip",
-            "hash": "cde1e480eca8ecfe"
-        },
-        {
-            "path": "data/bgm-data/subjects/0045.zip",
-            "hash": "13fc401bffca03d4"
-        },
-        {
-            "path": "data/bgm-data/subjects/0046.zip",
-            "hash": "5da930db04064001"
-        },
-        {
-            "path": "data/bgm-data/subjects/0047.zip",
-            "hash": "72c18bf8dcea8d07"
-        },
-        {
-            "path": "data/bgm-data/subjects/0048.zip",
-            "hash": "20f0df82d031244c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0049.zip",
-            "hash": "4c690089d5fe5427"
-        },
-        {
-            "path": "data/bgm-data/subjects/0050.zip",
-            "hash": "12a32a54513f9ab0"
-        },
-        {
-            "path": "data/bgm-data/subjects/0051.zip",
-            "hash": "b18167cab71d0a8c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0052.zip",
-            "hash": "3a527250e427b966"
-        },
-        {
-            "path": "data/bgm-data/subjects/0053.zip",
-            "hash": "fdaad1c66d4fbfa5"
-        },
-        {
-            "path": "data/bgm-data/subjects/0054.zip",
-            "hash": "74dffa9e2dd86fd5"
-        },
-        {
-            "path": "data/bgm-data/subjects/0055.zip",
-            "hash": "700efcfda640aba4"
-        },
-        {
-            "path": "data/bgm-data/subjects/0056.zip",
-            "hash": "bd3ea67f6e09587e"
-        },
-        {
-            "path": "data/bgm-data/subjects/0057.zip",
-            "hash": "eef3f85da04cfa93"
-        },
-        {
-            "path": "data/bgm-data/subjects/0058.zip",
-            "hash": "e4b300e2e0417481"
-        },
-        {
-            "path": "data/bgm-data/subjects/0059.zip",
-            "hash": "797a927fa16e5460"
-        },
-        {
-            "path": "data/bgm-data/subjects/0060.zip",
-            "hash": "29292d59618ebc05"
-        },
-        {
-            "path": "data/bgm-data/subjects/0061.zip",
-            "hash": "cfe7416ffc62f9a9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0062.zip",
-            "hash": "e06757d7e0fb1829"
-        },
-        {
-            "path": "data/bgm-data/subjects/0063.zip",
-            "hash": "7a4c76fd12db2f27"
-        },
-        {
-            "path": "data/bgm-data/subjects/0064.zip",
-            "hash": "82a88cc39d979d08"
-        },
-        {
-            "path": "data/bgm-data/subjects/0065.zip",
-            "hash": "3248f6d07af2369c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0066.zip",
-            "hash": "91ddceff657d5373"
-        },
-        {
-            "path": "data/bgm-data/subjects/0067.zip",
-            "hash": "ffbc6eccc2260005"
-        },
-        {
-            "path": "data/bgm-data/subjects/0068.zip",
-            "hash": "f668591b7024d456"
-        },
-        {
-            "path": "data/bgm-data/subjects/0069.zip",
-            "hash": "533a6770b0ddc581"
-        },
-        {
-            "path": "data/bgm-data/subjects/0070.zip",
-            "hash": "3c6cb1d07b390b1f"
-        },
-        {
-            "path": "data/bgm-data/subjects/0071.zip",
-            "hash": "bb74b72fe4b5a5a3"
-        },
-        {
-            "path": "data/bgm-data/subjects/0072.zip",
-            "hash": "6976bc763e46b21d"
-        },
-        {
-            "path": "data/bgm-data/subjects/0073.zip",
-            "hash": "54b2339e7714c660"
-        },
-        {
-            "path": "data/bgm-data/subjects/0074.zip",
-            "hash": "a4791bf02603eb48"
-        },
-        {
-            "path": "data/bgm-data/subjects/0075.zip",
-            "hash": "9a69a6e40d0018f6"
-        },
-        {
-            "path": "data/bgm-data/subjects/0076.zip",
-            "hash": "36f94c9538a96656"
-        },
-        {
-            "path": "data/bgm-data/subjects/0077.zip",
-            "hash": "64b7dfd8f14d85c6"
-        },
-        {
-            "path": "data/bgm-data/subjects/0078.zip",
-            "hash": "cc5d6852f1e0882b"
-        },
-        {
-            "path": "data/bgm-data/subjects/0079.zip",
-            "hash": "a0d4252eb7024204"
-        },
-        {
-            "path": "data/bgm-data/subjects/0080.zip",
-            "hash": "3a630bd29a85bc02"
-        },
-        {
-            "path": "data/bgm-data/subjects/0081.zip",
-            "hash": "b50e3c9e9d4a74ba"
-        },
-        {
-            "path": "data/bgm-data/subjects/0082.zip",
-            "hash": "fa0178272a25f585"
-        },
-        {
-            "path": "data/bgm-data/subjects/0083.zip",
-            "hash": "046cd5c58a638134"
-        },
-        {
-            "path": "data/bgm-data/subjects/0084.zip",
-            "hash": "e0b6359f3e9a8f8b"
-        },
-        {
-            "path": "data/bgm-data/subjects/0085.zip",
-            "hash": "072e455f9ee6ea51"
-        },
-        {
-            "path": "data/bgm-data/subjects/0086.zip",
-            "hash": "54e35c3972aa27f5"
-        },
-        {
-            "path": "data/bgm-data/subjects/0087.zip",
-            "hash": "b888b5c8b7f91fa9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0088.zip",
-            "hash": "d573bd0d80a12d43"
-        },
-        {
-            "path": "data/bgm-data/subjects/0089.zip",
-            "hash": "0802945c3f5a6c9d"
-        },
-        {
-            "path": "data/bgm-data/subjects/0090.zip",
-            "hash": "665f09473f3c770d"
-        },
-        {
-            "path": "data/bgm-data/subjects/0091.zip",
-            "hash": "eb45ecc0e49ff07c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0092.zip",
-            "hash": "27dc8be0654b1717"
-        },
-        {
-            "path": "data/bgm-data/subjects/0093.zip",
-            "hash": "902a90c156360b0a"
-        },
-        {
-            "path": "data/bgm-data/subjects/0094.zip",
-            "hash": "14de43b79e069dfd"
-        },
-        {
-            "path": "data/bgm-data/subjects/0095.zip",
-            "hash": "bd94ec838efdb959"
-        },
-        {
-            "path": "data/bgm-data/subjects/0096.zip",
-            "hash": "045ca5fa8fb1e255"
-        },
-        {
-            "path": "data/bgm-data/subjects/0097.zip",
-            "hash": "d351d0e87ed55e0f"
-        },
-        {
-            "path": "data/bgm-data/subjects/0098.zip",
-            "hash": "ea53fd2d441827cd"
-        },
-        {
-            "path": "data/bgm-data/subjects/0099.zip",
-            "hash": "8ae70d9f50bb0a3a"
-        },
-        {
-            "path": "data/bgm-data/subjects/0100.zip",
-            "hash": "a963f8518b402af0"
-        },
-        {
-            "path": "data/bgm-data/subjects/0101.zip",
-            "hash": "fb80fae8c34641ea"
-        },
-        {
-            "path": "data/bgm-data/subjects/0102.zip",
-            "hash": "d360f7f5a07d4380"
-        },
-        {
-            "path": "data/bgm-data/subjects/0103.zip",
-            "hash": "e8d3b6b88fca7dc9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0104.zip",
-            "hash": "6a0940c6ebae9915"
-        },
-        {
-            "path": "data/bgm-data/subjects/0105.zip",
-            "hash": "5877df9bbe185bdb"
-        },
-        {
-            "path": "data/bgm-data/subjects/0106.zip",
-            "hash": "de41685c4a591913"
-        },
-        {
-            "path": "data/bgm-data/subjects/0107.zip",
-            "hash": "0b171195edc7aeb7"
-        },
-        {
-            "path": "data/bgm-data/subjects/0108.zip",
-            "hash": "8e832c028b71c04d"
-        },
-        {
-            "path": "data/bgm-data/subjects/0109.zip",
-            "hash": "34f107ab37028016"
-        },
-        {
-            "path": "data/bgm-data/subjects/0110.zip",
-            "hash": "34b6453f059b884c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0111.zip",
-            "hash": "0c5ce37682b47223"
-        },
-        {
-            "path": "data/bgm-data/subjects/0112.zip",
-            "hash": "38f4f8031b598a5c"
-        },
-        {
-            "path": "data/bgm-data/subjects/0113.zip",
-            "hash": "2a9bc897dcf4c554"
-        },
-        {
-            "path": "data/bgm-data/subjects/0114.zip",
-            "hash": "83038de286dded4b"
-        },
-        {
-            "path": "data/bgm-data/subjects/0115.zip",
-            "hash": "c02e50f139658464"
-        },
-        {
-            "path": "data/bgm-data/subjects/0116.zip",
-            "hash": "0d7aa37729c46d62"
-        },
-        {
-            "path": "data/bgm-data/subjects/0117.zip",
-            "hash": "90a6340ad3793e08"
-        },
-        {
-            "path": "data/bgm-data/subjects/0118.zip",
-            "hash": "f55dee7bb391a98a"
-        },
-        {
-            "path": "data/bgm-data/subjects/0119.zip",
-            "hash": "88c57ba5c5772ede"
-        },
-        {
-            "path": "data/bgm-data/subjects/0120.zip",
-            "hash": "67c88cc4d0284632"
-        },
-        {
-            "path": "data/bgm-data/subjects/0121.zip",
-            "hash": "4574f89e869c7657"
-        },
-        {
-            "path": "data/bgm-data/subjects/0122.zip",
-            "hash": "15ce204835f1be44"
-        },
-        {
-            "path": "data/bgm-data/subjects/0123.zip",
-            "hash": "2dc8444b5f47d679"
-        },
-        {
-            "path": "data/bgm-data/subjects/0124.zip",
-            "hash": "507c777835307828"
-        },
-        {
-            "path": "data/bgm-data/subjects/0125.zip",
-            "hash": "3fa8328fad4936d9"
-        },
-        {
-            "path": "data/bgm-data/subjects/0126.zip",
-            "hash": "25f29652cd157d55"
-        },
-        {
-            "path": "data/bgm-data/subjects/0127.zip",
-            "hash": "cdcb3be3944bb667"
-        },
-        {
-            "path": "data/bgm-data/subjects/0128.zip",
-            "hash": "2881bb3d7fcb10e6"
-        },
-        {
-            "path": "data/bgm-data/subjects/0129.zip",
-            "hash": "ab8dc4b70a8219f6"
-        },
-        {
-            "path": "data/bgm-data/subjects/0130.zip",
-            "hash": "f4551166e35fddcd"
-        },
-        {
-            "path": "data/bgm-data/subjects/0131.zip",
-            "hash": "c9bef0368327dfe8"
-        },
-        {
-            "path": "data/bgm-data/subjects/0132.zip",
-            "hash": "4b20886e1e5c2649"
-        },
-        {
-            "path": "data/bgm-data/subjects/0133.zip",
-            "hash": "c9712a880cfe38ac"
-        },
-        {
-            "path": "data/bgm-data/subjects/0134.zip",
-            "hash": "9c59ac54ff1b29e7"
-        },
-        {
-            "path": "data/bgm-data/subjects/0135.zip",
-            "hash": "f443184c5f6fe1b2"
-        },
-        {
-            "path": "data/bgm-data/subjects/0136.zip",
-            "hash": "4cd61d87cc938d73"
-        },
-        {
-            "path": "data/bgm-data/subjects/manifest.json",
-            "hash": "3774daba9fcf7c50"
-        },
-        {
-            "path": "index.html",
-            "hash": "12c2822522c64b19"
+    "hash": "6c2f4e427f235c51",
+    "schemaVersion": 2,
+    "batches": [
+        {
+            "priority": 1,
+            "mode": "precache",
+            "files": [
+                {"path": "assets/css/about.css", "hash": "3a96f4d42a5eb44c", "size": 573},
+                {"path": "assets/css/base.css", "hash": "a611d6527ae7236a", "size": 8133},
+                {"path": "assets/css/components.css", "hash": "2185cede2e631361", "size": 4812},
+                {"path": "assets/css/detail.css", "hash": "bc5ab7bfa6231f6b", "size": 4599},
+                {"path": "assets/css/nonstandard/base.css", "hash": "43dd3738e4778e09", "size": 187},
+                {"path": "assets/css/nonstandard/components.css", "hash": "3bec38a3af881546", "size": 102},
+                {"path": "assets/css/overview.css", "hash": "3cd173f6f3a2697b", "size": 3527},
+                {"path": "assets/css/tools.css", "hash": "c371b414e0441060", "size": 14500},
+                {"path": "assets/css/variables.css", "hash": "2f27382039890c3b", "size": 1729},
+                {"path": "assets/external/js/bangumi-api.js", "hash": "daf14cac2fbdfbd4", "size": 18014},
+                {"path": "assets/external/js/bangumi-auth.js", "hash": "2eb67fa243c81770", "size": 9688},
+                {"path": "assets/external/js/bangumi-static.js", "hash": "60f426e4f726526c", "size": 22561},
+                {"path": "assets/external/js/chunk-worker.js", "hash": "c2223a232a87d928", "size": 1651},
+                {"path": "assets/external/js/index.js", "hash": "497d03c126ae3c7d", "size": 669},
+                {"path": "assets/js/abort.js", "hash": "7e22f5471209a56b", "size": 436},
+                {"path": "assets/js/app.js", "hash": "a0d0a5ff42236ecd", "size": 1954},
+                {"path": "assets/js/backup/exporter.js", "hash": "83f5ef7ed9e55297", "size": 1714},
+                {"path": "assets/js/backup/runner.js", "hash": "4816d35b83c22d3e", "size": 25008},
+                {"path": "assets/js/bootstrap.js", "hash": "d2d7702799cb4a97", "size": 416},
+                {"path": "assets/js/config.js", "hash": "88e4f01d1880c9e9", "size": 7953},
+                {"path": "assets/js/dom.js", "hash": "0a1623c9ac8c1616", "size": 790},
+                {"path": "assets/js/external.js", "hash": "813ef78ecda61f4a", "size": 708},
+                {"path": "assets/js/footer.js", "hash": "6d22f39fe49f1533", "size": 530},
+                {"path": "assets/js/layout.js", "hash": "59cceb0f0edff8f6", "size": 8615},
+                {"path": "assets/js/main.js", "hash": "50663f77369ad7de", "size": 212},
+                {"path": "assets/js/model.js", "hash": "cbed6d91b2c89cd8", "size": 6633},
+                {"path": "assets/js/pages/about.js", "hash": "e7826aa92df97852", "size": 102},
+                {"path": "assets/js/pages/backup.js", "hash": "dda022feb4e269b4", "size": 584},
+                {"path": "assets/js/pages/data.js", "hash": "71ae73e285b251ca", "size": 110},
+                {"path": "assets/js/pages/detail.js", "hash": "96a02b3b38324960", "size": 254},
+                {"path": "assets/js/pages/import.js", "hash": "736c9e4b718b06ba", "size": 106},
+                {"path": "assets/js/pages/overview.js", "hash": "e65f0ab82ccbd19a", "size": 114},
+                {"path": "assets/js/pages/users.js", "hash": "67051a66709069f5", "size": 114},
+                {"path": "assets/js/router.js", "hash": "23bc5c4f1bf2ec52", "size": 5505},
+                {"path": "assets/js/search.js", "hash": "dbe6c587c3583bdc", "size": 2085},
+                {"path": "assets/js/source.js", "hash": "d348ec855eda4cfa", "size": 5715},
+                {"path": "assets/js/startup.js", "hash": "a825d047aabfb402", "size": 4481},
+                {"path": "assets/js/storage.js", "hash": "9d2dac361b7cd551", "size": 35098},
+                {"path": "assets/js/tasks.js", "hash": "eee5c9db3def84cb", "size": 5243},
+                {"path": "assets/js/theme.js", "hash": "2902f37ad49ee663", "size": 727},
+                {"path": "assets/js/ui/about.js", "hash": "c949e87b28243ffa", "size": 2107},
+                {"path": "assets/js/ui/backup.js", "hash": "b3af35f243352efb", "size": 31756},
+                {"path": "assets/js/ui/data.js", "hash": "2b0f71f810f008af", "size": 8314},
+                {"path": "assets/js/ui/detail.js", "hash": "443f2f15ed12221b", "size": 12029},
+                {"path": "assets/js/ui/import.js", "hash": "d9665386996d0354", "size": 5180},
+                {"path": "assets/js/ui/loading.js", "hash": "8f11d779fb1b6512", "size": 5163},
+                {"path": "assets/js/ui/menu.js", "hash": "053ad316bddf9753", "size": 4247},
+                {"path": "assets/js/ui/overview.js", "hash": "a73ce2e3c077c570", "size": 14132},
+                {"path": "assets/js/ui/users.js", "hash": "a4d20dfdd28a1b0d", "size": 5930},
+                {"path": "assets/js/worker/messages.js", "hash": "e8adef69c900902f", "size": 509},
+                {"path": "assets/js/zip.js", "hash": "14dbce9a869c594b", "size": 7462},
+                {"path": "assets/resources/meta/default-source.json", "hash": "76c0a5263aa693b5", "size": 125},
+                {"path": "assets/resources/meta/manifest.json", "hash": "bbfeb152cde41332", "size": 740},
+                {"path": "data/bgm-data/episodes/manifest.json", "hash": "c06bd10dd1c4f6f0", "size": 8307},
+                {"path": "data/bgm-data/subjects/manifest.json", "hash": "3774daba9fcf7c50", "size": 18275},
+                {"path": "index.html", "hash": "12c2822522c64b19", "size": 1256}
+            ]
+        },
+        {
+            "priority": 2,
+            "mode": "on-demand",
+            "files": [
+                {"path": "assets/resources/logo/favicon.ico", "hash": "dc40522b02c04a5a", "size": 270398},
+                {"path": "assets/resources/logo/logo-180.png", "hash": "0fc2d5c87808cd86", "size": 60444},
+                {"path": "assets/resources/logo/logo-192.png", "hash": "9b7435bd19196311", "size": 68043},
+                {"path": "assets/resources/logo/logo-512.png", "hash": "c6efd8ff752d95db", "size": 392083},
+                {"path": "data/bgm-data/episodes/0000.zip", "hash": "2c0b36f8466047d1", "size": 3692646},
+                {"path": "data/bgm-data/episodes/0001.zip", "hash": "51edf17a65d0701b", "size": 1892879},
+                {"path": "data/bgm-data/episodes/0002.zip", "hash": "44da59e1e321887d", "size": 1437277},
+                {"path": "data/bgm-data/episodes/0003.zip", "hash": "2753200b94b8ea95", "size": 1632886},
+                {"path": "data/bgm-data/episodes/0004.zip", "hash": "60e258020f31bdf5", "size": 1605809},
+                {"path": "data/bgm-data/episodes/0005.zip", "hash": "312396283a7e0fd8", "size": 1223561},
+                {"path": "data/bgm-data/episodes/0006.zip", "hash": "791bf83b1b04a869", "size": 1061321},
+                {"path": "data/bgm-data/episodes/0007.zip", "hash": "24d1f9b20cda7cbb", "size": 1102663},
+                {"path": "data/bgm-data/episodes/0008.zip", "hash": "354f03774cfaf521", "size": 1307559},
+                {"path": "data/bgm-data/episodes/0009.zip", "hash": "e9ba4841a84e6dac", "size": 1139137},
+                {"path": "data/bgm-data/episodes/0010.zip", "hash": "7c5754a32ec1de79", "size": 1077943},
+                {"path": "data/bgm-data/episodes/0011.zip", "hash": "cbd269dabbab0021", "size": 995069},
+                {"path": "data/bgm-data/episodes/0012.zip", "hash": "53af8f1cec051a52", "size": 983578},
+                {"path": "data/bgm-data/episodes/0013.zip", "hash": "f1ef238da33369ea", "size": 1373377},
+                {"path": "data/bgm-data/episodes/0014.zip", "hash": "db5d9992c9ce56b3", "size": 1037688},
+                {"path": "data/bgm-data/episodes/0015.zip", "hash": "ef9e20f3e2994609", "size": 1386073},
+                {"path": "data/bgm-data/episodes/0016.zip", "hash": "9e5d53db7cbeb5dd", "size": 1493649},
+                {"path": "data/bgm-data/episodes/0017.zip", "hash": "6d756f91038bc87e", "size": 1729952},
+                {"path": "data/bgm-data/episodes/0018.zip", "hash": "a737eab197d45e11", "size": 1792297},
+                {"path": "data/bgm-data/episodes/0019.zip", "hash": "b9a341a6acc0be5e", "size": 1640239},
+                {"path": "data/bgm-data/episodes/0020.zip", "hash": "fb3c05b958a3aa88", "size": 2175670},
+                {"path": "data/bgm-data/episodes/0021.zip", "hash": "4ead7c2751c3f92b", "size": 1660485},
+                {"path": "data/bgm-data/episodes/0022.zip", "hash": "c4334e3c0903d8e2", "size": 1792753},
+                {"path": "data/bgm-data/episodes/0023.zip", "hash": "f7b1f4f0ac834d10", "size": 1605187},
+                {"path": "data/bgm-data/episodes/0024.zip", "hash": "34f2e3ec483f02a3", "size": 1890200},
+                {"path": "data/bgm-data/episodes/0025.zip", "hash": "f32a8737e77c85d3", "size": 1387918},
+                {"path": "data/bgm-data/episodes/0026.zip", "hash": "f626eab94f7d08b4", "size": 1673773},
+                {"path": "data/bgm-data/episodes/0027.zip", "hash": "a46e207658058e76", "size": 1733172},
+                {"path": "data/bgm-data/episodes/0028.zip", "hash": "40887fa88e0dee38", "size": 1719026},
+                {"path": "data/bgm-data/episodes/0029.zip", "hash": "28ab3aa102315301", "size": 1470958},
+                {"path": "data/bgm-data/episodes/0030.zip", "hash": "5b519b5ce21c1d16", "size": 1538713},
+                {"path": "data/bgm-data/episodes/0031.zip", "hash": "677723974a14539a", "size": 1120437},
+                {"path": "data/bgm-data/episodes/0032.zip", "hash": "88c8d11f037f5435", "size": 908816},
+                {"path": "data/bgm-data/episodes/0033.zip", "hash": "11693832cce47ce2", "size": 1078803},
+                {"path": "data/bgm-data/episodes/0034.zip", "hash": "11fabc497825f9b3", "size": 946735},
+                {"path": "data/bgm-data/episodes/0035.zip", "hash": "6bc018eb23b17fdc", "size": 878013},
+                {"path": "data/bgm-data/episodes/0036.zip", "hash": "ea581fa7ef74f422", "size": 1139143},
+                {"path": "data/bgm-data/episodes/0037.zip", "hash": "64e8c681fb001398", "size": 1047285},
+                {"path": "data/bgm-data/episodes/0038.zip", "hash": "bcf1888e115e7b92", "size": 1399018},
+                {"path": "data/bgm-data/episodes/0039.zip", "hash": "f7d4ad2a5c6c4202", "size": 949952},
+                {"path": "data/bgm-data/episodes/0040.zip", "hash": "680497097cae9dbb", "size": 989024},
+                {"path": "data/bgm-data/episodes/0041.zip", "hash": "a078caadd8313efc", "size": 866666},
+                {"path": "data/bgm-data/episodes/0042.zip", "hash": "842e40ed94fa74ae", "size": 975951},
+                {"path": "data/bgm-data/episodes/0043.zip", "hash": "956dc95c57766bdd", "size": 967779},
+                {"path": "data/bgm-data/episodes/0044.zip", "hash": "3c5316675a9b2315", "size": 811593},
+                {"path": "data/bgm-data/episodes/0045.zip", "hash": "e85226ec0c854e6f", "size": 407012},
+                {"path": "data/bgm-data/subjects/0000.zip", "hash": "67d39bc1ffe3e2c9", "size": 3828337},
+                {"path": "data/bgm-data/subjects/0001.zip", "hash": "1bed1e9ae72391e9", "size": 2751819},
+                {"path": "data/bgm-data/subjects/0002.zip", "hash": "99ed7a660fef7b84", "size": 2407493},
+                {"path": "data/bgm-data/subjects/0003.zip", "hash": "0dfb8122a7f87cc8", "size": 2263255},
+                {"path": "data/bgm-data/subjects/0004.zip", "hash": "4564ee2092daf583", "size": 2116343},
+                {"path": "data/bgm-data/subjects/0005.zip", "hash": "e9b96baea4b1b89f", "size": 1787127},
+                {"path": "data/bgm-data/subjects/0006.zip", "hash": "2fd3fe3b06a61028", "size": 1763088},
+                {"path": "data/bgm-data/subjects/0007.zip", "hash": "95c56d4723d3bb65", "size": 2083541},
+                {"path": "data/bgm-data/subjects/0008.zip", "hash": "258bfd71c60daeb5", "size": 1730275},
+                {"path": "data/bgm-data/subjects/0009.zip", "hash": "d9621c664b913ab9", "size": 1558730},
+                {"path": "data/bgm-data/subjects/0010.zip", "hash": "778d6f7072c1f35f", "size": 1511783},
+                {"path": "data/bgm-data/subjects/0011.zip", "hash": "bc80a114fa938d9b", "size": 1667536},
+                {"path": "data/bgm-data/subjects/0012.zip", "hash": "d04f556ac6fcf5ab", "size": 1561822},
+                {"path": "data/bgm-data/subjects/0013.zip", "hash": "d102c770469a1529", "size": 1461404},
+                {"path": "data/bgm-data/subjects/0014.zip", "hash": "8da952949e804fa0", "size": 1815959},
+                {"path": "data/bgm-data/subjects/0015.zip", "hash": "0abb5c939495dfeb", "size": 1887464},
+                {"path": "data/bgm-data/subjects/0016.zip", "hash": "aa45a96932ffd4cf", "size": 1721515},
+                {"path": "data/bgm-data/subjects/0017.zip", "hash": "e39b58ce76359e94", "size": 1535929},
+                {"path": "data/bgm-data/subjects/0018.zip", "hash": "878952c33a591786", "size": 1665911},
+                {"path": "data/bgm-data/subjects/0019.zip", "hash": "f32704065e613356", "size": 1852022},
+                {"path": "data/bgm-data/subjects/0020.zip", "hash": "8d5a409b4269436c", "size": 1770329},
+                {"path": "data/bgm-data/subjects/0021.zip", "hash": "f2255db359bb1185", "size": 1827841},
+                {"path": "data/bgm-data/subjects/0022.zip", "hash": "ef566853b8d72e48", "size": 1826654},
+                {"path": "data/bgm-data/subjects/0023.zip", "hash": "0bc65b8d691f3afb", "size": 1963898},
+                {"path": "data/bgm-data/subjects/0024.zip", "hash": "76b51740bb613720", "size": 2040051},
+                {"path": "data/bgm-data/subjects/0025.zip", "hash": "82ecb81d09c62670", "size": 1616036},
+                {"path": "data/bgm-data/subjects/0026.zip", "hash": "983584844b1bb141", "size": 1644433},
+                {"path": "data/bgm-data/subjects/0027.zip", "hash": "c0a315614a6ecf0d", "size": 1594591},
+                {"path": "data/bgm-data/subjects/0028.zip", "hash": "7477939dd24c67f3", "size": 1430685},
+                {"path": "data/bgm-data/subjects/0029.zip", "hash": "e8c74877bdbf3f21", "size": 952847},
+                {"path": "data/bgm-data/subjects/0030.zip", "hash": "94c08093672f4f39", "size": 1171928},
+                {"path": "data/bgm-data/subjects/0031.zip", "hash": "2ac6b3a6b9a075a9", "size": 1313381},
+                {"path": "data/bgm-data/subjects/0032.zip", "hash": "b2ed122e39458091", "size": 1425628},
+                {"path": "data/bgm-data/subjects/0033.zip", "hash": "485c13f13a32d78c", "size": 1214206},
+                {"path": "data/bgm-data/subjects/0034.zip", "hash": "fd30da1c26790c6d", "size": 1288774},
+                {"path": "data/bgm-data/subjects/0035.zip", "hash": "51dfbbe22d31366a", "size": 1778275},
+                {"path": "data/bgm-data/subjects/0036.zip", "hash": "cdcb641ad21cd449", "size": 1654822},
+                {"path": "data/bgm-data/subjects/0037.zip", "hash": "20c84a4600a8c806", "size": 1871138},
+                {"path": "data/bgm-data/subjects/0038.zip", "hash": "9e3f98c14e4a3865", "size": 1511149},
+                {"path": "data/bgm-data/subjects/0039.zip", "hash": "eb62e138703b51d1", "size": 1730304},
+                {"path": "data/bgm-data/subjects/0040.zip", "hash": "7d613fcf40bb7fda", "size": 1999657},
+                {"path": "data/bgm-data/subjects/0041.zip", "hash": "688999e6c9c6c488", "size": 2116215},
+                {"path": "data/bgm-data/subjects/0042.zip", "hash": "becc2b87155de000", "size": 2253218},
+                {"path": "data/bgm-data/subjects/0043.zip", "hash": "09506355960688e5", "size": 2332483},
+                {"path": "data/bgm-data/subjects/0044.zip", "hash": "cde1e480eca8ecfe", "size": 2152902},
+                {"path": "data/bgm-data/subjects/0045.zip", "hash": "13fc401bffca03d4", "size": 2036963},
+                {"path": "data/bgm-data/subjects/0046.zip", "hash": "5da930db04064001", "size": 2128827},
+                {"path": "data/bgm-data/subjects/0047.zip", "hash": "72c18bf8dcea8d07", "size": 1934349},
+                {"path": "data/bgm-data/subjects/0048.zip", "hash": "20f0df82d031244c", "size": 1908749},
+                {"path": "data/bgm-data/subjects/0049.zip", "hash": "4c690089d5fe5427", "size": 1959102},
+                {"path": "data/bgm-data/subjects/0050.zip", "hash": "12a32a54513f9ab0", "size": 2093106},
+                {"path": "data/bgm-data/subjects/0051.zip", "hash": "b18167cab71d0a8c", "size": 2097008},
+                {"path": "data/bgm-data/subjects/0052.zip", "hash": "3a527250e427b966", "size": 2099399},
+                {"path": "data/bgm-data/subjects/0053.zip", "hash": "fdaad1c66d4fbfa5", "size": 1915697},
+                {"path": "data/bgm-data/subjects/0054.zip", "hash": "74dffa9e2dd86fd5", "size": 2058008},
+                {"path": "data/bgm-data/subjects/0055.zip", "hash": "700efcfda640aba4", "size": 2132986},
+                {"path": "data/bgm-data/subjects/0056.zip", "hash": "bd3ea67f6e09587e", "size": 2227395},
+                {"path": "data/bgm-data/subjects/0057.zip", "hash": "eef3f85da04cfa93", "size": 2192423},
+                {"path": "data/bgm-data/subjects/0058.zip", "hash": "e4b300e2e0417481", "size": 2259324},
+                {"path": "data/bgm-data/subjects/0059.zip", "hash": "797a927fa16e5460", "size": 2173420},
+                {"path": "data/bgm-data/subjects/0060.zip", "hash": "29292d59618ebc05", "size": 2189284},
+                {"path": "data/bgm-data/subjects/0061.zip", "hash": "cfe7416ffc62f9a9", "size": 2279027},
+                {"path": "data/bgm-data/subjects/0062.zip", "hash": "e06757d7e0fb1829", "size": 2255690},
+                {"path": "data/bgm-data/subjects/0063.zip", "hash": "7a4c76fd12db2f27", "size": 2207005},
+                {"path": "data/bgm-data/subjects/0064.zip", "hash": "82a88cc39d979d08", "size": 2250096},
+                {"path": "data/bgm-data/subjects/0065.zip", "hash": "3248f6d07af2369c", "size": 2211660},
+                {"path": "data/bgm-data/subjects/0066.zip", "hash": "91ddceff657d5373", "size": 2029130},
+                {"path": "data/bgm-data/subjects/0067.zip", "hash": "ffbc6eccc2260005", "size": 2022131},
+                {"path": "data/bgm-data/subjects/0068.zip", "hash": "f668591b7024d456", "size": 1890972},
+                {"path": "data/bgm-data/subjects/0069.zip", "hash": "533a6770b0ddc581", "size": 2022167},
+                {"path": "data/bgm-data/subjects/0070.zip", "hash": "3c6cb1d07b390b1f", "size": 2164696},
+                {"path": "data/bgm-data/subjects/0071.zip", "hash": "bb74b72fe4b5a5a3", "size": 1716628},
+                {"path": "data/bgm-data/subjects/0072.zip", "hash": "6976bc763e46b21d", "size": 1965571},
+                {"path": "data/bgm-data/subjects/0073.zip", "hash": "54b2339e7714c660", "size": 2180077},
+                {"path": "data/bgm-data/subjects/0074.zip", "hash": "a4791bf02603eb48", "size": 2021655},
+                {"path": "data/bgm-data/subjects/0075.zip", "hash": "9a69a6e40d0018f6", "size": 2010248},
+                {"path": "data/bgm-data/subjects/0076.zip", "hash": "36f94c9538a96656", "size": 2038453},
+                {"path": "data/bgm-data/subjects/0077.zip", "hash": "64b7dfd8f14d85c6", "size": 1936487},
+                {"path": "data/bgm-data/subjects/0078.zip", "hash": "cc5d6852f1e0882b", "size": 2314124},
+                {"path": "data/bgm-data/subjects/0079.zip", "hash": "a0d4252eb7024204", "size": 2188856},
+                {"path": "data/bgm-data/subjects/0080.zip", "hash": "3a630bd29a85bc02", "size": 1909649},
+                {"path": "data/bgm-data/subjects/0081.zip", "hash": "b50e3c9e9d4a74ba", "size": 2149250},
+                {"path": "data/bgm-data/subjects/0082.zip", "hash": "fa0178272a25f585", "size": 2194099},
+                {"path": "data/bgm-data/subjects/0083.zip", "hash": "046cd5c58a638134", "size": 2068356},
+                {"path": "data/bgm-data/subjects/0084.zip", "hash": "e0b6359f3e9a8f8b", "size": 1947950},
+                {"path": "data/bgm-data/subjects/0085.zip", "hash": "072e455f9ee6ea51", "size": 2030508},
+                {"path": "data/bgm-data/subjects/0086.zip", "hash": "54e35c3972aa27f5", "size": 2148125},
+                {"path": "data/bgm-data/subjects/0087.zip", "hash": "b888b5c8b7f91fa9", "size": 2211971},
+                {"path": "data/bgm-data/subjects/0088.zip", "hash": "d573bd0d80a12d43", "size": 2259433},
+                {"path": "data/bgm-data/subjects/0089.zip", "hash": "0802945c3f5a6c9d", "size": 2258751},
+                {"path": "data/bgm-data/subjects/0090.zip", "hash": "665f09473f3c770d", "size": 2245598},
+                {"path": "data/bgm-data/subjects/0091.zip", "hash": "eb45ecc0e49ff07c", "size": 2231948},
+                {"path": "data/bgm-data/subjects/0092.zip", "hash": "27dc8be0654b1717", "size": 2114344},
+                {"path": "data/bgm-data/subjects/0093.zip", "hash": "902a90c156360b0a", "size": 2195939},
+                {"path": "data/bgm-data/subjects/0094.zip", "hash": "14de43b79e069dfd", "size": 2263185},
+                {"path": "data/bgm-data/subjects/0095.zip", "hash": "bd94ec838efdb959", "size": 2276175},
+                {"path": "data/bgm-data/subjects/0096.zip", "hash": "045ca5fa8fb1e255", "size": 2262400},
+                {"path": "data/bgm-data/subjects/0097.zip", "hash": "d351d0e87ed55e0f", "size": 2184516},
+                {"path": "data/bgm-data/subjects/0098.zip", "hash": "ea53fd2d441827cd", "size": 2261143},
+                {"path": "data/bgm-data/subjects/0099.zip", "hash": "8ae70d9f50bb0a3a", "size": 1950029},
+                {"path": "data/bgm-data/subjects/0100.zip", "hash": "a963f8518b402af0", "size": 2071160},
+                {"path": "data/bgm-data/subjects/0101.zip", "hash": "fb80fae8c34641ea", "size": 2178871},
+                {"path": "data/bgm-data/subjects/0102.zip", "hash": "d360f7f5a07d4380", "size": 2251831},
+                {"path": "data/bgm-data/subjects/0103.zip", "hash": "e8d3b6b88fca7dc9", "size": 2274688},
+                {"path": "data/bgm-data/subjects/0104.zip", "hash": "6a0940c6ebae9915", "size": 2006829},
+                {"path": "data/bgm-data/subjects/0105.zip", "hash": "5877df9bbe185bdb", "size": 1982851},
+                {"path": "data/bgm-data/subjects/0106.zip", "hash": "de41685c4a591913", "size": 1892264},
+                {"path": "data/bgm-data/subjects/0107.zip", "hash": "0b171195edc7aeb7", "size": 1922065},
+                {"path": "data/bgm-data/subjects/0108.zip", "hash": "8e832c028b71c04d", "size": 1993371},
+                {"path": "data/bgm-data/subjects/0109.zip", "hash": "34f107ab37028016", "size": 2068415},
+                {"path": "data/bgm-data/subjects/0110.zip", "hash": "34b6453f059b884c", "size": 2002698},
+                {"path": "data/bgm-data/subjects/0111.zip", "hash": "0c5ce37682b47223", "size": 1938639},
+                {"path": "data/bgm-data/subjects/0112.zip", "hash": "38f4f8031b598a5c", "size": 1836597},
+                {"path": "data/bgm-data/subjects/0113.zip", "hash": "2a9bc897dcf4c554", "size": 1630949},
+                {"path": "data/bgm-data/subjects/0114.zip", "hash": "83038de286dded4b", "size": 1718800},
+                {"path": "data/bgm-data/subjects/0115.zip", "hash": "c02e50f139658464", "size": 1845072},
+                {"path": "data/bgm-data/subjects/0116.zip", "hash": "0d7aa37729c46d62", "size": 1780593},
+                {"path": "data/bgm-data/subjects/0117.zip", "hash": "90a6340ad3793e08", "size": 1610782},
+                {"path": "data/bgm-data/subjects/0118.zip", "hash": "f55dee7bb391a98a", "size": 1597205},
+                {"path": "data/bgm-data/subjects/0119.zip", "hash": "88c57ba5c5772ede", "size": 1687841},
+                {"path": "data/bgm-data/subjects/0120.zip", "hash": "67c88cc4d0284632", "size": 2049861},
+                {"path": "data/bgm-data/subjects/0121.zip", "hash": "4574f89e869c7657", "size": 2065044},
+                {"path": "data/bgm-data/subjects/0122.zip", "hash": "15ce204835f1be44", "size": 1730171},
+                {"path": "data/bgm-data/subjects/0123.zip", "hash": "2dc8444b5f47d679", "size": 2041907},
+                {"path": "data/bgm-data/subjects/0124.zip", "hash": "507c777835307828", "size": 2051806},
+                {"path": "data/bgm-data/subjects/0125.zip", "hash": "3fa8328fad4936d9", "size": 1849236},
+                {"path": "data/bgm-data/subjects/0126.zip", "hash": "25f29652cd157d55", "size": 2642499},
+                {"path": "data/bgm-data/subjects/0127.zip", "hash": "cdcb3be3944bb667", "size": 2110363},
+                {"path": "data/bgm-data/subjects/0128.zip", "hash": "2881bb3d7fcb10e6", "size": 1800518},
+                {"path": "data/bgm-data/subjects/0129.zip", "hash": "ab8dc4b70a8219f6", "size": 1956644},
+                {"path": "data/bgm-data/subjects/0130.zip", "hash": "f4551166e35fddcd", "size": 2505661},
+                {"path": "data/bgm-data/subjects/0131.zip", "hash": "c9bef0368327dfe8", "size": 3002892},
+                {"path": "data/bgm-data/subjects/0132.zip", "hash": "4b20886e1e5c2649", "size": 2855794},
+                {"path": "data/bgm-data/subjects/0133.zip", "hash": "c9712a880cfe38ac", "size": 2770366},
+                {"path": "data/bgm-data/subjects/0134.zip", "hash": "9c59ac54ff1b29e7", "size": 2510193},
+                {"path": "data/bgm-data/subjects/0135.zip", "hash": "f443184c5f6fe1b2", "size": 2397559},
+                {"path": "data/bgm-data/subjects/0136.zip", "hash": "4cd61d87cc938d73", "size": 1617900}
+            ]
+        },
+        {
+            "priority": 3,
+            "mode": "network-only",
+            "files": [
+            ]
         }
     ]
 }

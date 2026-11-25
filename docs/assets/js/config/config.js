@@ -1,8 +1,36 @@
 (function () {
+    const enMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    const ordinalSuffix = day => {
+        if (day > 3 && day < 21) return 'th'
+
+        switch (day % 10) {
+            case 1: return 'st'
+            case 2: return 'nd'
+            case 3: return 'rd'
+            default: return 'th'
+        }
+    }
+
     const i18nDefault = 'zh-cn'
 
     const i18nTexts = {
         'en-us': {
+            dateFormats: (m, d, y) => `${enMonths[m - 1]} ${d}${ordinalSuffix(d)}, ${y}`,
+            firstPublished: 'This page is first published on ',
+            created: 'Publish date: ',
+            lastUpdated: 'Last edited on: ',
+            commentTitle: 'Comments',
+            commentCount: 'comments',
+            commentNewest: 'Newest first ↓',
+            commentOldest: 'Oldest first ↑',
+            commentEmpty: 'No comments yet',
+            commentExpandText: 'Read more',
+            commentCollapseText: 'Show less',
+            commentError: 'Comments unavailable',
+            commentContentLimited: 'Content exceeds the maximum length and has been shortened',
+            commentReply: 'Reply',
+            commentQuoteMissing: 'Quoted comment is unavailable',
             searchPlaceholder: 'Type to search',
             searchNoData: 'No Results',
             previous: 'PREVIOUS',
@@ -21,6 +49,21 @@
             nameLink: '#/en-us/'
         },
         'jp': {
+            dateFormats: (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
+            firstPublished: '初出：',
+            created: '公開日：',
+            lastUpdated: '最終編集日：',
+            commentTitle: 'コメント',
+            commentCount: '件',
+            commentNewest: '新しい順 ↓',
+            commentOldest: '古い順 ↑',
+            commentEmpty: 'コメントはありません',
+            commentExpandText: '全文を表示',
+            commentCollapseText: '全文を折りたたむ',
+            commentError: 'コメントを取得できません',
+            commentContentLimited: '本文は最大文字数を超えるため省略されています',
+            commentReply: '返信',
+            commentQuoteMissing: '引用されたコメントは利用できません',
             searchPlaceholder: '検索',
             searchNoData: '結果がありません',
             previous: '前',
@@ -39,6 +82,21 @@
             nameLink: '#/jp/'
         },
         'zh-cn': {
+            dateFormats: (m, d, y) => `${y} 年 ${m} 月 ${d} 日`,
+            firstPublished: '本文首发于',
+            created: '发表日期：',
+            lastUpdated: '最后编辑于：',
+            commentTitle: '评论',
+            commentCount: '条',
+            commentNewest: '时间倒序 ↓',
+            commentOldest: '时间正序 ↑',
+            commentEmpty: '暂无评论',
+            commentExpandText: '展开全文',
+            commentCollapseText: '收起全文',
+            commentError: '评论暂不可用',
+            commentContentLimited: '内容超过最大字符数，已截取显示',
+            commentReply: '回复',
+            commentQuoteMissing: '引用的评论已不可用',
             searchPlaceholder: '搜索',
             searchNoData: '找不到结果',
             previous: '上一篇',
@@ -161,12 +219,33 @@
         // 添加评论与页脚
         commentWithFooter: {
             enable: true,
-            use: 'gitalk',
+            use: 'builtin',
             footerInnerHtml: '<small>&copy; 2023 - {comment_footer-yyyy}{comment_footer-divider}{comment_footer-info}{comment_footer-divider}{comment_footer-copy}</small>',
             localization: {
                 info: cali18nText('commentInfo'),
                 copy: cali18nText('commentCopy'),
                 divider: cali18nText('divider')
+            },
+            commentConfig: {
+                ownerId: 'pikapikapikaori',
+                pageSize: 5,
+                quotePreviewLength: 80,
+                maxCommentLength: 240,
+                contentPreviewLines: 6,
+                dateFormat: 'YYYY.MM.DD',
+                localization: {
+                    title: cali18nText('commentTitle'),
+                    count: cali18nText('commentCount'),
+                    newest: cali18nText('commentNewest'),
+                    oldest: cali18nText('commentOldest'),
+                    empty: cali18nText('commentEmpty'),
+                    expandText: cali18nText('commentExpandText'),
+                    collapseText: cali18nText('commentCollapseText'),
+                    error: cali18nText('commentError'),
+                    contentLimited: cali18nText('commentContentLimited'),
+                    reply: cali18nText('commentReply'),
+                    quoteMissing: cali18nText('commentQuoteMissing'),
+                },
             },
             gitalkConfig: {
                 clientID: '6a54e5946401951488d1',
@@ -197,7 +276,7 @@
             enable: true,
             recentAmount: 8,
             renderStyle: 'card',
-            dateFormat: null,
+            dateFormat: cali18nText('dateFormats'),
             columns: 2,
 
             narrowColumns: 1,
@@ -336,12 +415,25 @@
         // 添加替换 Markdown 中的 Html 注释
         htmlReplace: {
             enable: true,
+            localization: {
+                firstPublished: cali18nText('firstPublished'),
+                created: cali18nText('created'),
+                lastUpdated: cali18nText('lastUpdated')
+            },
             links: {
                 github: 'https://github.com/pikapikapikaori/',
                 email: 'mailto:Lyy8759@outlook.com',
                 feed: './assets/resources/meta/feed.atom'
             },
             tags: [
+                /* Article Info */
+                {
+                    type: 'inline',
+                    tag: 'article-info',
+                    startHtml: '<blockquote><p>{html_replace-i18n_firstPublished}',
+                    endHtml: '<br>{html_replace-i18n_created}{ad-created}<br>{html_replace-i18n_lastUpdated}{ad-last-updated}</p></blockquote>',
+                    emptyHtml: '<blockquote><p>{html_replace-i18n_created}{ad-created}<br>{html_replace-i18n_lastUpdated}{ad-last-updated}</p></blockquote>'
+                },
                 /* Brief Comments */
                 {
                     type: 'block',
@@ -613,9 +705,10 @@
             enable: true
         },
 
-        // 添加最后编辑时间
-        lastUpdatedTime: {
-            enable: true
+        // 添加文章日期
+        articleDate: {
+            enable: true,
+            dateFormat: cali18nText('dateFormats')
         },
 
         // 添加链接标记样式

@@ -64,10 +64,11 @@ Transitions come in four general templates by purpose:
 
 #### Emphasis Ladder
 
-Every interactive element walks up one four-step ladder. Each column is that column's own ramp, measured from its resting state, and an element only walks up its own column without skipping a step; **a selected control that is hovered stays on level 2** and does not fall back to level 1. The link columns start at level 2 (level 2 at rest, level 3 on hover), so their selected state goes one step deeper still, to `accent-level-4`.
+Enabled interactive elements use levels 0–3; disabled controls occupy level -1. Each column is that column's own ramp, measured from its resting state, and an element only walks up its own column without skipping a step; **a selected control that is hovered stays on level 2** and does not fall back to level 1. The link columns start at level 2 (level 2 at rest, level 3 on hover), so their selected state goes one step deeper still, to `accent-level-4`.
 
 | Level | Meaning | Suffix | Colour variable | Notes |
 | --- | --- | --- | --- | --- |
+| -1 | disabled (`:disabled`) | `disabled` | — | native `disabled` blocks pointer and keyboard activation; rest, hover and press have the same appearance |
 | 0 | rest | `rest` | — | rest shows no emphasis at all |
 | 1 | hover (`:hover`) | `hover` | `accent-level-1` | says "this can be clicked", the text stays put |
 | 2 | selected (`.active`) / focus (`:focus`) | `active` | `accent-level-2` | one step deeper than level 1; a hovered selected control stays here |

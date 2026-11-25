@@ -59,6 +59,9 @@
         return
     }
 
+    const visitId = self.crypto && typeof self.crypto.randomUUID === 'function'
+        ? self.crypto.randomUUID()
+        : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)
     const swUrl = './sw.js'
     let registration = null
     let started = false
@@ -102,7 +105,7 @@
             }
             whenActivated(worker, function (ready) {
                 if (current !== ticket) return
-                ready.postMessage({ type: 'START' })
+                ready.postMessage({ type: 'START', visitId: visitId })
             })
         })
     }
@@ -132,6 +135,6 @@
         ticket++
         started = false
         const worker = navigator.serviceWorker.controller
-        if (worker) worker.postMessage({ type: 'PAUSE', reason: 'hidden' })
+        if (worker) worker.postMessage({ type: 'PAUSE', reason: 'hidden', visitId: visitId })
     })
 })()

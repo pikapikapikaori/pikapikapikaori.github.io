@@ -1,8 +1,6 @@
 # 如何理解动画中的踩点，轨道，并用这个来分辨原画师？
 
-> 本文首发于[知乎](https://www.zhihu.com/question/35917115/answer/302277374)\
-> 发表日期：2018.01.14\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:<a href="https://www.zhihu.com/question/35917115/answer/302277374" target="_blank" rel="noopener">知乎</a> -->
 
 ## 什么是踩点和轨道？
 

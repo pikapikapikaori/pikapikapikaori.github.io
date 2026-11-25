@@ -2,7 +2,7 @@
 
 [English](./Standard.md) | 简体中文
 
-> 本文档中的「支持性说明」「项目结构」与「PWA 缓存与存储命名」对根项目及所有子项目同样适用。
+> 本文档中的「支持性」「项目结构」与「PWA 设置」对根项目及所有子项目同样适用。
 
 ## 支持性
 
@@ -102,6 +102,10 @@ npm run blog -- help
 bash script/blog.sh help
 ```
 
+## 日期相关
+
+项目内数据文件中的日期按 UTC+8 存储。
+
 ## 文章相关
 
 ### 写新的文章
@@ -112,7 +116,8 @@ bash script/blog.sh help
     ```javascript
     {
         "title": "",
-        "time": "",
+        "createdTime": "",
+        "type": "",
         "editedTime": "",
         "cover": "",
         "href": "",
@@ -120,12 +125,9 @@ bash script/blog.sh help
     }
     ```
 
-    其中 `editedTime`、`href` 与 `baseUrl` 为必填字段，后两者的路径基于 `index.html` 的路径（`docs`）。这些字段用于封面页的文章列表展示：
-    1. `time` 字段用于排序（时间倒序）。
-    2. `href` 字段用于 `a` 元素访问该文章。
-    3. `baseUrl` 字段用于匹配文章所属的选集。
+    `cover` 为选填字段。`href` 指向文章，`baseUrl` 标识其所属父目录，两个路径均相对于 `index.html`。文章的 `type` 为 `content`，介绍页为 `intro`。
 3. 【可选】在同目录内的 `_media/` 文件夹内创建对应文件夹，存放资源文件。引用该文件的路径为相对路径（`_media/path/to/directory/path/to/file`）。
-4. 【可选】部署后访问对应界面创建评论区。
+4. 【可选】创建评论区。
 
 ### 编辑文章
 
@@ -137,7 +139,7 @@ bash script/blog.sh help
 2. 修改 `config/tocdata.json.js` 内对应的 `cover`、`href` 与 `baseUrl` 字段。
 3. 修改对应 `_sidebar.md` 内的链接。
 4. 修改其他引用该文章的全部文章中的对应链接。
-5. 修改对应的 Gitalk Issue Tag 的链接。
+5. 将对应评论 JSON 移到新文章路径；若选用 Gitalk，则修改对应 Issue Tag 的链接。
 
 **注意**：不用修改文章内对资源文件的引用链接（`_media/path/to/directory/path/to/file`），因其为相对路径。
 

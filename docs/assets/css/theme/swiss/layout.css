@@ -25,6 +25,9 @@
     --global-focus-outline: var(--sw-rule-mid) solid;
     --global-focus-outline-width: var(--sw-rule-mid);
     --global-focus-outline-color: var(--sw-ink-strong);
+    --global-surface-hollow-disabled: var(--sw-fill-rest);
+    --global-surface-hollow-border-disabled: var(--sw-line-rest);
+    --global-surface-hollow-text-disabled: var(--sw-ink-strong);
 
     --sw-paper: var(--global-bg-color);
     --sw-ink: var(--global-text-color);

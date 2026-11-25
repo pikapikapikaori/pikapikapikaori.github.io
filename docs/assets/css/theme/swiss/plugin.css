@@ -220,6 +220,48 @@ html #comment-container .gt-container .gt-ico-github .gt-svg svg {
     fill: var(--sw-on-rest);
 }
 
+html #comment-container .cwf-avatar {
+    border-radius: 0;
+}
+
+html #comment-container .cwf-content {
+    border: var(--sw-border-soft);
+    border-radius: 0;
+    background: var(--sw-paper);
+    box-shadow: none;
+}
+
+html #comment-container .cwf-comment.is-owner .cwf-content {
+    background: var(--sw-tone);
+}
+
+html #comment-container .cwf-author {
+    color: var(--sw-ink-strong);
+    font-weight: var(--global-font-weight-extra-bold);
+}
+
+html #comment-container .cwf-quote {
+    border-left: var(--sw-border);
+    color: var(--sw-on-rest);
+}
+
+html #comment-container .cwf-quote-excerpt {
+    text-decoration-color: var(--sw-ink);
+}
+
+html #comment-container .cwf-quote-link:hover .cwf-quote-excerpt,
+html #comment-container .cwf-text-control:not(:disabled):is(:hover,:active) {
+    text-decoration-color: var(--sw-link-hover);
+}
+
+html #comment-container .cwf-body a {
+    text-decoration-color: var(--sw-ink);
+}
+
+html #comment-container .cwf-body a:hover {
+    text-decoration-color: var(--sw-link-hover);
+}
+
 html #comment-container .gt-header {
     margin-top: 2rem;
     padding-top: 0.75rem;
@@ -816,7 +858,7 @@ html .markdown-section .toc-page-display-a:hover img {
 }
 
 html .toc-paginator-div {
-    margin: 1.5rem 0 0;
+    margin: 1rem 0 0;
     justify-content: flex-start;
     align-items: center;
     font-size: var(--sw-fs-small);
@@ -855,14 +897,14 @@ html .toc-paginator-button-span path {
     stroke: var(--sw-ink-strong);
 }
 
-html .toc-paginator-button-span:hover,
-html .toc-paginator-button-span:active {
+html .toc-paginator-button-div:not(:disabled):hover .toc-paginator-button-span,
+html .toc-paginator-button-div:not(:disabled):active .toc-paginator-button-span {
     background: var(--sw-fill-hover);
     border-color: var(--sw-line-hover);
 }
 
-html .toc-paginator-button-span:hover path,
-html .toc-paginator-button-span:active path {
+html .toc-paginator-button-div:not(:disabled):hover .toc-paginator-button-span path,
+html .toc-paginator-button-div:not(:disabled):active .toc-paginator-button-span path {
     stroke: var(--sw-on-fill);
 }
 
@@ -1006,6 +1048,7 @@ html #view-full-image-span-inner-right-div {
     border-color: var(--sw-line-rest);
     background: var(--sw-fill-rest);
     transition: var(--global-transition-color-fast);
+    padding: 0;
 }
 
 html #view-full-image-span-inner-left-div path,
@@ -1013,18 +1056,18 @@ html #view-full-image-span-inner-right-div path {
     stroke: var(--sw-ink-strong);
 }
 
-html #view-full-image-span-inner-left-div:hover,
-html #view-full-image-span-inner-right-div:hover,
-html #view-full-image-span-inner-left-div:active,
-html #view-full-image-span-inner-right-div:active {
+html #view-full-image-span-inner-left-div:not(:disabled):hover,
+html #view-full-image-span-inner-right-div:not(:disabled):hover,
+html #view-full-image-span-inner-left-div:not(:disabled):active,
+html #view-full-image-span-inner-right-div:not(:disabled):active {
     background: var(--sw-fill-hover);
     border-color: var(--sw-line-hover);
 }
 
-html #view-full-image-span-inner-left-div:hover path,
-html #view-full-image-span-inner-right-div:hover path,
-html #view-full-image-span-inner-left-div:active path,
-html #view-full-image-span-inner-right-div:active path {
+html #view-full-image-span-inner-left-div:not(:disabled):hover path,
+html #view-full-image-span-inner-right-div:not(:disabled):hover path,
+html #view-full-image-span-inner-left-div:not(:disabled):active path,
+html #view-full-image-span-inner-right-div:not(:disabled):active path {
     stroke: var(--sw-on-fill);
 }
 

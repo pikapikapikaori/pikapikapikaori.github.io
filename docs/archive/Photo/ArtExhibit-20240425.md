@@ -2,9 +2,7 @@
 
 ![封面图](_media/ArtExhibit-20240425/cover-picture.jpg)
 
-> 本文首发于个人博客\
-> 发表日期：2024.04.25\
-> 最后编辑于：{docsify-last-updated}
+<!-- article-info:个人博客 -->
 
 ## 勃鲁盖尔
 

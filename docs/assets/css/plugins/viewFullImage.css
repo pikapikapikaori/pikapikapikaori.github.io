@@ -31,6 +31,23 @@
     transition: var(--global-transition-color);
     width: var(--viewImg-button-size);
     height: var(--viewImg-button-size);
+    padding: 0.3125rem;
+    background: var(--global-surface-hollow-rest);
+}
+
+#view-full-image-span-inner-left-div svg,
+#view-full-image-span-inner-right-div svg {
+    width: 100%;
+    height: 100%;
+}
+
+#view-full-image-span-inner-left-div:disabled,
+#view-full-image-span-inner-right-div:disabled {
+    opacity: var(--global-surface-hollow-opacity-disabled);
+    cursor: not-allowed;
+    background: var(--global-surface-hollow-disabled);
+    border-color: var(--global-surface-hollow-border-disabled);
+    color: var(--global-surface-hollow-text-disabled);
 }
 
 #view-full-image-span-inner-left-div {
@@ -41,15 +58,15 @@
     right: 3%;
 }
 
-#view-full-image-span-inner-left-div:hover,
-#view-full-image-span-inner-right-div:hover {
+#view-full-image-span-inner-left-div:not(:disabled):hover,
+#view-full-image-span-inner-right-div:not(:disabled):hover {
     background-color: var(--global-surface-hollow-hover);
     border-color: var(--global-surface-hollow-border-hover);
     color: var(--global-surface-hollow-text-hover);
 }
 
-#view-full-image-span-inner-left-div:active,
-#view-full-image-span-inner-right-div:active {
+#view-full-image-span-inner-left-div:not(:disabled):active,
+#view-full-image-span-inner-right-div:not(:disabled):active {
     background-color: var(--global-surface-hollow-press);
     border-color: var(--global-surface-hollow-border-press);
     color: var(--global-surface-hollow-text-press);
@@ -67,6 +84,7 @@
 }
 
 #view-full-image-span-inner-text-div {
+    pointer-events: none;
     bottom: 5%;
     left: 40%;
     width: 20%;
